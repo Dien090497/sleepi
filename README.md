@@ -2,6 +2,24 @@
 
 - [About SleeFi](#about-sleefi)
 - [App Guide](#app-guide)
+  - [Multi Language](#multi-language)
+     - [Add Translation](#add-transaltion)
+     - [Use SFText](#use-sftext)
+  - [Model And Entity](#model-and-entity)
+     - [Explanation](#explanation)
+     - [Model](#model)
+     - [Entity](#entity)
+- [App Structure](#app-structure)
+  - [Presentation](#presentation)
+     - [Screens](#screens)
+     - [Blocs](#blocs)
+  - [Repository](#repository)
+     - [Abstract class](#abstract-class)
+     - [Implementation](#implementation)
+  - [Data Sources](#data-sources)
+     - [Local](#local)
+     - [Remote](#remote)
+- [Command](#command)
 
 # About SleeFi
 
@@ -9,6 +27,7 @@
 - Support 2 language: **Japanese** and **English**
 - Base on **StepN**
 - Figma [Wireframe](https://www.figma.com/file/EtlTv6nD9XYAbzvHavYl6C/Wireframing-IOS-UI-(Community)?node-id=0%3A1)
+- [Jira Tasks](https://jira.sotatek.com/secure/RapidBoard.jspa?rapidView=342&projectKey=SLEEP)
 
 # App Guide
 
@@ -16,13 +35,13 @@
 
 Package using:
 
-- [flutter translate](https://pub.dev/packages/flutter_translate)
-- [flutter translate gen](https://pub.dev/packages/flutter_translate_gen)
+- [flutter_translate](https://pub.dev/packages/flutter_translate)
+- [flutter_translate_gen](https://pub.dev/packages/flutter_translate_gen)
 - [flutter_translate_annotation](https://pub.dev/packages/flutter_translate_annotations)
 
 Full Guide For Package install can be found here: [Wiki](https://github.com/Jesway/Flutter-Translate/wiki)
 
-### Add translation texts
+### Add translation
 
 - For English: `assets/i18n/en_US.json`
 - For Japanese: `assets/i18n/ja_JP.json`
@@ -105,6 +124,40 @@ class User with _$User {
 
 ```
 
+# App Structure
+
+## Presentation
+
+### Screens
+
+Contain UI
+
+### Blocs
+
+State Management using [flutter_bloc](https://pub.dev/packages/flutter
+
+## Repository
+
+### Abstract class
+
+Define method
+
+### Implementation
+
+Implement of repository abstract
+
+Communicate with datasource layer from here
+
+## Data Sources
+
+### Local
+
+Local data such as Shared Preferences, Database,...
+
+### Remote
+
+Remote data such as api call, firebase,...
+
 # Command
 
 ```dart
@@ -116,6 +169,3 @@ Watching changes
 ```dart
 flutter pub run build_runner watch --delete-conflicting-outputs
 ```
-
-
-[Jira Tasks](https://jira.sotatek.com/secure/RapidBoard.jspa?rapidView=342&projectKey=SLEEP)
