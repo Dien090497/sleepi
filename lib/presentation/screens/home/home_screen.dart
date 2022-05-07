@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:slee_fi/common/widgets/loading_screen.dart';
-import 'package:slee_fi/common/widgets/sleefi_text.dart';
+import 'package:slee_fi/common/widgets/sf_text.dart';
 import 'package:slee_fi/di/translations/keys.dart';
 import 'package:slee_fi/presentation/blocs/home/home_bloc.dart';
 import 'package:slee_fi/presentation/blocs/home/home_state.dart';
@@ -22,7 +22,7 @@ class HomeScreen extends StatelessWidget {
                 loading: () => const LoadingIcon(),
                 loaded: () {
                   return Center(
-                    child: SleeFiText(keyText: Keys.Test_Hello),
+                    child: SFText(keyText: Keys.Test_Hello),
                   );
                 },
               );
