@@ -1,0 +1,25 @@
+# yaml-language-server: $schema=./build.yaml
+targets:
+  $default:
+    builders:
+      injectable_generator:injectable_builder:
+        options:
+          auto_register: true
+          # auto registers any class with a name matches the given pattern
+          class_name_pattern:
+            "Service$|Repository$|UseCase$|Implementation$|DataSource$"
+          # auto registers any class inside a file with a
+          # name matches the given pattern
+          file_name_pattern: "_service$|_repository$|_implementation$|_datasource$"
+      json_serializable|json_serializable:
+        options:
+          explicit_to_json: true
+        #          include_if_null: true
+        enabled: true
+      freezed|freezed:
+        enabled: true
+    sources:
+      include:
+        - assets/i18n/**
+        - lib/**
+#
