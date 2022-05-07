@@ -23,7 +23,6 @@ mixin _$HomeState {
     required TResult Function() loaded,
   }) =>
       throw _privateConstructorUsedError;
-
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initial,
@@ -31,7 +30,6 @@ mixin _$HomeState {
     TResult Function()? loaded,
   }) =>
       throw _privateConstructorUsedError;
-
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
@@ -40,7 +38,6 @@ mixin _$HomeState {
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
-
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(HomeInitial value) initial,
@@ -48,7 +45,6 @@ mixin _$HomeState {
     required TResult Function(HomeLoaded value) loaded,
   }) =>
       throw _privateConstructorUsedError;
-
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult Function(HomeInitial value)? initial,
@@ -56,7 +52,6 @@ mixin _$HomeState {
     TResult Function(HomeLoaded value)? loaded,
   }) =>
       throw _privateConstructorUsedError;
-
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(HomeInitial value)? initial,
@@ -78,7 +73,6 @@ class _$HomeStateCopyWithImpl<$Res> implements $HomeStateCopyWith<$Res> {
   _$HomeStateCopyWithImpl(this._value, this._then);
 
   final HomeState _value;
-
   // ignore: unused_field
   final $Res Function(HomeState) _then;
 }
