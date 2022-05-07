@@ -1,12 +1,17 @@
-# slee_fi
+# SleeFi Project
 
-A new Flutter project.
+- [About SleeFi](#about-sleefi)
+- [App Structure](#app-structure)
 
-## Getting Started
+# About SleeFi
 
-This project is a starting point for a Flutter application.
+- A **sleep to earn** app
+- Support 2 language: **Japanese** and **English**
+- Base on **StepN**
+- Figma [Wireframe](https://www.figma.com/file/EtlTv6nD9XYAbzvHavYl6C/Wireframing-IOS-UI-(Community)?node-id=0%3A1)
 
-A few resources to get you started if this is your first Flutter project:
+# App Structure
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
+
+
+[Jira Tasks](https://jira.sotatek.com/secure/RapidBoard.jspa?rapidView=342&projectKey=SLEEP)
