@@ -134,7 +134,7 @@ Contain UI
 
 ### Blocs
 
-State Management using [flutter_bloc](https://pub.dev/packages/flutter
+State Management using [flutter_bloc](https://pub.dev/packages/flutter)
 
 ## Repository
 
