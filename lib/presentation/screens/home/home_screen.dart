@@ -12,7 +12,7 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (_) => HomeBloc(),
+      create: (_) => HomeBloc()..add(const FetchData()),
       child: Scaffold(
         body: SafeArea(
           child: BlocBuilder<HomeBloc, HomeState>(
