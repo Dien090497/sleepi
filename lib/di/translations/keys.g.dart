@@ -7,5 +7,5 @@ part of 'keys.dart';
 // **************************************************************************
 
 class Keys {
-  static const String testHello = 'test.hello';
+  static const String Test_Hello = 'test.hello';
 }

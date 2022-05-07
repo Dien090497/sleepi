@@ -15,6 +15,7 @@ void main() async {
   final delegate = await LocalizationDelegate.create(
     fallbackLocale: 'en_US',
     supportedLocales: ['en_US', 'ja_JP'],
+    preferences: getIt<ITranslatePreferences>(),
   );
 
   /// Lock in portrait mode only
