@@ -41,4 +41,10 @@ jobs:
       - name: Analyze project source
         run: flutter analyze
 
-      - run: flutter build apk --debug --split-per-abi
+      - run: flutter build apk
+      - name: This action uploads an application file to DeployGate
+      - uses: jmatsu/dg-upload-app-action@v0.2.0
+        with:
+          app_owner_name: kevinthai
+          api_token: ${{ secrets.DEPLOYGATE_API_TOKEN }}
+          app_file_path: build/app/outputs/flutter-apk/*.apk.
