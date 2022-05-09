@@ -6,8 +6,7 @@
 name: Build Debug APK
 
 on:
-  #  push:
-  #    branches: [ build ]
+  push:
   pull_request:
     branches: [ develop, main ]
 
@@ -42,7 +41,7 @@ jobs:
         run: flutter analyze
 
       - run: flutter build apk
-      - name: This action uploads an application file to DeployGate
+      - name: Upload APK file to DeployGate
       - uses: jmatsu/dg-upload-app-action@v0.2.0
         with:
           app_owner_name: kevinthai
