@@ -2,4 +2,10 @@
   "test": {
     "hello": "Hello"
   },
+  "introduce": {
+    "how_to_play": "How to Play ?",
+    "white_paper": "WhitePaper",
+    "lite_paper": "LitePaper",
+    "link_tree": "LinkTree"
+  }
 }
