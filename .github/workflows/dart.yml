@@ -3,13 +3,13 @@
 # separate terms of service, privacy policy, and support
 # documentation.
 
-name: Build for testing
+name: Build Debug APK
 
 on:
-  push:
-    branches: [ build ]
+  #  push:
+  #    branches: [ build ]
   pull_request:
-    branches: [ develop ]
+    branches: [ develop, main ]
 
 jobs:
   build:
