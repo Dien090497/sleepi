@@ -3,7 +3,7 @@
 # separate terms of service, privacy policy, and support
 # documentation.
 
-name: Build Debug APK
+name: Build APK and upload to DeployGate
 
 on:
 #  push:
@@ -12,7 +12,7 @@ on:
 
 jobs:
   build:
-    name: Build APK
+    name: Build APK and upload to DeployGate
     runs-on: ubuntu-latest
 
     steps:
