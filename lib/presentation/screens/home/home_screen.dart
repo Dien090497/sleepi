@@ -31,7 +31,7 @@ class HomeScreen extends StatelessWidget {
                           showDialog(
                             context: context,
                             builder: (context) {
-                              return SFDialog(
+                              return const SFDialog(
                                 children: [
                                   Text('asd'),
                                 ],

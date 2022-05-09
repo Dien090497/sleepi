@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
-import 'package:slee_fi/common/widgets/sleefi_text.dart';
+import 'package:slee_fi/common/widgets/sf_text.dart';
 
 class TopBarCommon extends StatelessWidget {
   const TopBarCommon({Key? key}) : super(key: key);
@@ -13,7 +13,10 @@ class TopBarCommon extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          const Icon(Icons.settings, size: 50,),
+          const Icon(
+            Icons.settings,
+            size: 50,
+          ),
           Container(
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(30),
@@ -25,19 +28,36 @@ class TopBarCommon extends StatelessWidget {
                   padding: const EdgeInsets.all(10),
                   child: Row(
                     children: [
-                      const Icon(Icons.monetization_on, size: 20,),
-                      SleeFiText(keyText: '68.8', style: TextStyles.textBasic15,),
+                      const Icon(
+                        Icons.monetization_on,
+                        size: 20,
+                      ),
+                      SFText(
+                        keyText: '68.8',
+                        style: TextStyles.textBasic15,
+                      ),
                       const SizedBox(width: 5),
-                      const Icon(Icons.money, size: 20,),
-                      SleeFiText(keyText: '68.88', style: TextStyles.textBasic15,),
+                      const Icon(
+                        Icons.money,
+                        size: 20,
+                      ),
+                      SFText(
+                        keyText: '68.88',
+                        style: TextStyles.textBasic15,
+                      ),
                       const SizedBox(width: 5),
-                      const Icon(Icons.attach_money, size: 20,),
-                      SleeFiText(keyText: '88.99', style: TextStyles.textBasic15,),
+                      const Icon(
+                        Icons.attach_money,
+                        size: 20,
+                      ),
+                      SFText(
+                        keyText: '88.99',
+                        style: TextStyles.textBasic15,
+                      ),
                       const SizedBox(width: 5),
                     ],
                   ),
                 ),
-
                 Container(
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(30),

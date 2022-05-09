@@ -27,7 +27,7 @@ class BottomNavigationScreen extends StatelessWidget {
               decoration: BoxDecoration(
                   border: Border.all(color: AppColors.primary, width: 2)),
               child: BottomNavigationBar(
-                backgroundColor: AppColors.grey_bottom_nav,
+                backgroundColor: AppColors.greyBottomNavBar,
                 showSelectedLabels: true,
                 showUnselectedLabels: true,
                 unselectedFontSize: 0.0,
