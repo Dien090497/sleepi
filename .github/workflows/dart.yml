@@ -6,7 +6,7 @@
 name: Build Debug APK
 
 on:
-  push:
+#  push:
   pull_request:
     branches: [ develop, main ]
 
