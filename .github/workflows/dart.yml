@@ -42,9 +42,15 @@ jobs:
 
       - run: flutter build apk
 
-      - name: Upload APK file to DeployGate
-        uses: jmatsu/dg-upload-app-action@v0.2.0
+      #      - name: Upload APK file to DeployGate
+      #        uses: jmatsu/dg-upload-app-action@v0.2.0
+      #        with:
+      #          app_owner_name: kevinthai
+      #          api_token: ${{ secrets.DEPLOYGATE_API_TOKEN }}
+      #          app_file_path: build/app/outputs/flutter-apk/*.apk
+
+      - name: Create a Release APK
+        uses: ncipollo/release-action@v1
         with:
-          app_owner_name: kevinthai
-          api_token: ${{ secrets.DEPLOYGATE_API_TOKEN }}
-          app_file_path: build/app/outputs/flutter-apk/*.apk.
+          artifacts: "build/app/outputs/flutter-apk/*.apk"
+          token: ${{ secrets.TOKEN }}
