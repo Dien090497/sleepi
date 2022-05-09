@@ -4,12 +4,12 @@ import 'package:slee_fi/presentation/screens/home/home_screen.dart';
 class R {
   static const String _ = '/';
   static const String home = '${_}home';
-  static const String bottom_navigation = '${_}bottom_navigation';
+  static const String bottomNavigation = '${_}bottom_navigation';
 }
 
 class AppRoutes {
   static final routes = {
     R.home: (_) => const HomeScreen(),
-    R.bottom_navigation: (_) => const BottomNavigationScreen(),
+    R.bottomNavigation: (_) => const BottomNavigationScreen(),
   };
 }

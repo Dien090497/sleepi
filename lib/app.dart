@@ -29,7 +29,7 @@ class MyApp extends StatelessWidget {
           locale: localizationDelegate.currentLocale,
           theme: ThemeData(primarySwatch: Colors.blue),
           routes: AppRoutes.routes,
-          initialRoute: R.bottom_navigation,
+          initialRoute: R.bottomNavigation,
         ),
       ),
     );

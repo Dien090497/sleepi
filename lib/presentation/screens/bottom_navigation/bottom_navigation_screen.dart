@@ -4,7 +4,11 @@ import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/presentation/blocs/bottom_navigation/bottom_navigation_bloc.dart';
 import 'package:slee_fi/presentation/blocs/bottom_navigation/bottom_navigation_event.dart';
 import 'package:slee_fi/presentation/blocs/bottom_navigation/bottom_navigation_state.dart';
+import 'package:slee_fi/presentation/screens/gacha/gacha_screen.dart';
 import 'package:slee_fi/presentation/screens/home/home_screen.dart';
+import 'package:slee_fi/presentation/screens/market_place/market_place_screen.dart';
+import 'package:slee_fi/presentation/screens/product_detail/product_detail_screen.dart';
+import 'package:slee_fi/presentation/screens/statistics/statistics_screen.dart';
 
 class BottomNavigationScreen extends StatelessWidget {
   const BottomNavigationScreen({Key? key}) : super(key: key);
@@ -16,52 +20,102 @@ class BottomNavigationScreen extends StatelessWidget {
         final navBloc = context.read<BottomNavigationBloc>();
 
         return Scaffold(
-          bottomNavigationBar: BottomNavigationBar(
-                showSelectedLabels: false,
-                showUnselectedLabels: false,
+          extendBody: true,
+          bottomNavigationBar: ClipRRect(
+            borderRadius: BorderRadius.circular(20),
+            child: Container(
+              decoration: BoxDecoration(
+                  border: Border.all(color: AppColors.primary, width: 2)),
+              child: BottomNavigationBar(
+                backgroundColor: AppColors.grey_bottom_nav,
+                showSelectedLabels: true,
+                showUnselectedLabels: true,
                 unselectedFontSize: 0.0,
                 selectedFontSize: 0.0,
-                items: const <BottomNavigationBarItem>[
+                type: BottomNavigationBarType.fixed,
+                items: <BottomNavigationBarItem>[
                   BottomNavigationBarItem(
-                    icon:  Icon(Icons.storage, color: Colors.green,),
-                    activeIcon: Icon(Icons.storage, color: AppColors.primary,),
+                    icon: Image.asset(
+                      'assets/images/home_page.png',
+                      width: 35,
+                      height: 35,
+                    ),
+                    activeIcon: Image.asset(
+                      'assets/images/home_page.png',
+                      width: 35,
+                      height: 35,
+                    ),
                     label: '',
                   ),
                   BottomNavigationBarItem(
-                    icon:  Icon(Icons.star, color: Colors.green,),
-                    activeIcon: Icon(Icons.star, color: AppColors.primary,),
+                    icon: Image.asset(
+                      'assets/images/gacha.png',
+                      width: 35,
+                      height: 35,
+                    ),
+                    activeIcon: Image.asset(
+                      'assets/images/gacha.png',
+                      width: 35,
+                      height: 35,
+                    ),
                     label: '',
                   ),
                   BottomNavigationBarItem(
-                    icon:  Icon(Icons.subject, color: Colors.green,),
-                    activeIcon: Icon(Icons.subject, color: AppColors.primary,),
+                    icon: Image.asset(
+                      'assets/images/product_detail.png',
+                      width: 35,
+                      height: 35,
+                    ),
+                    activeIcon: Image.asset(
+                      'assets/images/product_detail.png',
+                      width: 35,
+                      height: 35,
+                    ),
                     label: '',
                   ),
                   BottomNavigationBarItem(
-                    icon:  Icon(Icons.error, color: Colors.green,),
-                    activeIcon: Icon(Icons.error, color: AppColors.primary,),
+                    icon: Image.asset(
+                      'assets/images/statistics.png',
+                      width: 35,
+                      height: 35,
+                    ),
+                    activeIcon: Image.asset(
+                      'assets/images/statistics.png',
+                      width: 35,
+                      height: 35,
+                    ),
                     label: '',
                   ),
                   BottomNavigationBarItem(
-                    icon:  Icon(Icons.notifications, color: Colors.green,),
-                    activeIcon: Icon(Icons.notifications, color: AppColors.primary,),
+                    icon: Image.asset(
+                      'assets/images/market.png',
+                      width: 35,
+                      height: 35,
+                    ),
+                    activeIcon: Image.asset(
+                      'assets/images/market.png',
+                      width: 35,
+                      height: 35,
+                    ),
                     label: '',
                   ),
                 ],
                 currentIndex: navState.tabIndex,
-                selectedItemColor: Colors.amber[800],
+                selectedItemColor: AppColors.primary,
                 onTap: (i) {
-                    navBloc.add(SelectTab(i));
+                  navBloc.add(SelectTab(i));
                 },
+              ),
+            ),
           ),
           body: IndexedStack(
             index: navState.tabIndex,
             children: const [
               HomeScreen(),
-              HomeScreen(),
-              HomeScreen(),
-              HomeScreen(),
-              HomeScreen(),
+              GachaScreen(),
+              ProductDetaiScreen(),
+              StatisticsScreen(),
+              MarketPlaceScreen(),
             ],
           ),
         );
