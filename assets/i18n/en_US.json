@@ -11,5 +11,11 @@
     "type": "Type",
     "upgrade": "Upgrade",
     "level": "Level {num}"
+  },
+  "introduce": {
+    "how_to_play": "How to Play ?",
+    "white_paper": "WhitePaper",
+    "lite_paper": "LitePaper",
+    "link_tree": "LinkTree"
   }
 }
