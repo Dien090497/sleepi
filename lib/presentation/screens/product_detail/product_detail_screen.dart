@@ -3,6 +3,7 @@ import 'package:slee_fi/common/widgets/sf_tab_bar.dart';
 import 'package:slee_fi/common/widgets/topbar_common.dart';
 import 'package:slee_fi/di/translations/keys.dart';
 import 'package:slee_fi/presentation/screens/product_detail/widgets/tab_beds_detail.dart';
+import 'package:slee_fi/presentation/screens/product_detail/widgets/tab_item_detail.dart';
 import 'package:slee_fi/presentation/screens/product_detail/widgets/tab_jewels_detail.dart';
 
 class ProductDetaiScreen extends StatelessWidget {
@@ -18,12 +19,7 @@ class ProductDetaiScreen extends StatelessWidget {
             children: [
               const TopBarCommon(),
               SFTabBar(
-                texts: const [
-                  Keys.productDetailBeds,
-                  Keys.productDetailJewels,
-                  Keys.productDetailItem,
-                  Keys.productDetailTrophy,
-                ],
+                texts: const [Keys.beds, Keys.jewels, Keys.item, Keys.trophy],
               ),
               const SizedBox(height: 35),
               const Expanded(
@@ -31,7 +27,7 @@ class ProductDetaiScreen extends StatelessWidget {
                   children: [
                     TabBedsDetail(),
                     TabJewelsDetail(),
-                    SizedBox.shrink(),
+                    TabItemDetail(),
                     SizedBox.shrink(),
                   ],
                 ),

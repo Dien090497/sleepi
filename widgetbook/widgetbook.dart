@@ -30,7 +30,7 @@ class HotReloadWidgetBook extends StatelessWidget {
           WidgetbookComponent(name: 'Common', useCases: [
             WidgetbookUseCase(
               name: 'SFText',
-              builder: (_) => SFText(keyText: Keys.testHello),
+              builder: (_) => SFText(keyText: Keys.login),
             ),
             WidgetbookUseCase(
               name: 'SFTextField',

@@ -30,7 +30,7 @@ class MyApp extends StatelessWidget {
           locale: localizationDelegate.currentLocale,
           theme: lightTheme,
           routes: AppRoutes.routes,
-          initialRoute: R.bottomNavigation,
+          initialRoute: R.loginSignUp,
         ),
       ),
     );

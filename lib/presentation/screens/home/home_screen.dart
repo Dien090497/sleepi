@@ -41,7 +41,7 @@ class HomeScreen extends StatelessWidget {
                         },
                       ),
                       Center(
-                        child: SFText(keyText: Keys.testHello),
+                        child: SFText(keyText: Keys.login),
                       ),
                     ],
                   );

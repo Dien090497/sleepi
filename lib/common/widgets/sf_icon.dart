@@ -8,7 +8,8 @@ class SFIcon extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    if (icon.split('.').last.contains('svg')) {
+    final tail = icon.split('.').last;
+    if (tail.contains('svg')) {
       return SvgPicture.asset(icon);
     }
     return Image.asset(icon);
