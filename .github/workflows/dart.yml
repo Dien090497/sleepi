@@ -15,6 +15,8 @@ jobs:
   build:
     name: Build APK and upload to DeployGate
     runs-on: ubuntu-latest
+    outputs:
+      diawi: ${{ steps.diawi.outputs }}
 
     steps:
       - uses: actions/checkout@v3
@@ -41,13 +43,88 @@ jobs:
       - name: Analyze project source
         run: flutter analyze
 
-      - run: flutter build apk
+      - name: Build Release APK
+        id: apk
+        run: flutter build apk
 
       - name: Upload Diawi
         uses: rnkdsh/action-upload-diawi@v1.2.5
+        id: diawi
         with:
           token: ${{ secrets.DIAWI_TOKEN }}
           file: build/app/outputs/flutter-apk/app-release.apk
+
+  notification:
+    name: Google Chat Notification
+    runs-on: ubuntu-latest
+    needs: build
+
+    steps:
+      - run: echo ${{ needs.build.outputs.diawi }}
+      - name: Google Chat Notification
+        run: |
+          curl --location --request POST '${{ secrets.SLEEFIWEBHOOK }}' \
+          --header 'Content-Type: application/json' \
+          --data-raw '{
+              "cards": [
+                  {
+                      "header": {
+                          "title": "Issue Tracker",
+                          "subtitle": "Issue No: #${{ github.event.issue.number }}"
+                      },
+                      "sections": [
+                          {
+                              "widgets": [
+                                  {
+                                     "keyValue": {
+                                          "topLabel": "Creator",
+                                          "content": "${{ github.event.issue.user.login }}"
+                                      },
+                                   },
+                                   {
+                                     "keyValue": {
+                                          "topLabel": "Title",
+                                          "content": "${{ github.event.issue.title }}"
+                                      }
+                                   },
+                                   {
+                                     "keyValue": {
+                                          "topLabel": "Assigned Lables",
+                                          "content": "- ${{ join(github.event.issue.labels.*.name) }}"
+                                      }
+                                   },
+                                   {
+                                     "keyValue": {
+                                          "topLabel": "Assignees",
+                                          "content": "- ${{ join(github.event.issue.assignees.*.login) }}"
+                                      }
+                                   },
+                                   {
+                                      "buttons": [
+                                          {
+                                              "textButton": {
+                                                  "text": "OPEN ISSUE",
+                                                  "onClick": {
+                                                      "openLink": {
+                                                          "url": "${{ github.event.issue.html_url }}"
+                                                      }
+                                                  }
+                                              }
+                                          }
+                                      ]
+                                  }
+                              ]
+                          }
+                      ]
+                  }
+              ]
+          }'
+
+#      - name: Upload APK
+#        uses: actions/upload-artifact@v1
+#        with:
+#          name: apk
+#          path: build/app/outputs/flutter-apk/app-release.apk
 
 #      - name: Upload APK file to DeployGate
 #        uses: jmatsu/dg-upload-app-action@v0.2.0
