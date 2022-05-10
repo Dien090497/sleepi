@@ -5,7 +5,5 @@ final ThemeData darkTheme = ThemeData.dark();
 final ThemeData lightTheme = ThemeData(
   textTheme: const TextTheme()
       .apply(bodyColor: AppColors.textColor, displayColor: AppColors.textColor),
-  tabBarTheme: TabBarTheme(
-    labelColor: AppColors.textColor,
-  ),
+  tabBarTheme: const TabBarTheme(labelColor: AppColors.textColor),
 );
