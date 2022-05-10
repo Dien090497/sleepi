@@ -7,7 +7,7 @@ name: Build APK and upload to DeployGate
 
 on:
   push:
-    branches: [ develop, main ]
+    branches: [ develop, main, build ]
   pull_request:
     branches: [ develop, main ]
 
