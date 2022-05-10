@@ -16,5 +16,5 @@ jobs:
     secrets:
       webhook: ${{ secrets.GGCHATWEBHOOK }}
     with:
-      imageUrl: needs.build-apk.outputs.diawi_qrcode
-      url: needs.build-apk.outputs.diawi_url
+      imageUrl: ${{ needs.build-apk.outputs.diawi_qrcode }}
+      url: ${{ needs.build-apk.outputs.diawi_url }}
