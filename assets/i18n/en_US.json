@@ -2,4 +2,14 @@
   "test": {
     "hello": "Hello"
   },
+  "product_detail": {
+    "beds": "Beds",
+    "jewels": "Jewels",
+    "item": "Item",
+    "trophy": "Trophy",
+    "bed_box": "BedBox",
+    "type": "Type",
+    "upgrade": "Upgrade",
+    "level": "Level {num}"
+  }
 }

@@ -78,21 +78,21 @@ class _$HomeStateCopyWithImpl<$Res> implements $HomeStateCopyWith<$Res> {
 }
 
 /// @nodoc
-abstract class $HomeInitialCopyWith<$Res> {
-  factory $HomeInitialCopyWith(
-          HomeInitial value, $Res Function(HomeInitial) then) =
-      _$HomeInitialCopyWithImpl<$Res>;
+abstract class _$$HomeInitialCopyWith<$Res> {
+  factory _$$HomeInitialCopyWith(
+          _$HomeInitial value, $Res Function(_$HomeInitial) then) =
+      __$$HomeInitialCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class _$HomeInitialCopyWithImpl<$Res> extends _$HomeStateCopyWithImpl<$Res>
-    implements $HomeInitialCopyWith<$Res> {
-  _$HomeInitialCopyWithImpl(
-      HomeInitial _value, $Res Function(HomeInitial) _then)
-      : super(_value, (v) => _then(v as HomeInitial));
+class __$$HomeInitialCopyWithImpl<$Res> extends _$HomeStateCopyWithImpl<$Res>
+    implements _$$HomeInitialCopyWith<$Res> {
+  __$$HomeInitialCopyWithImpl(
+      _$HomeInitial _value, $Res Function(_$HomeInitial) _then)
+      : super(_value, (v) => _then(v as _$HomeInitial));
 
   @override
-  HomeInitial get _value => super._value as HomeInitial;
+  _$HomeInitial get _value => super._value as _$HomeInitial;
 }
 
 /// @nodoc
@@ -114,7 +114,7 @@ class _$HomeInitial with DiagnosticableTreeMixin implements HomeInitial {
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is HomeInitial);
+        (other.runtimeType == runtimeType && other is _$HomeInitial);
   }
 
   @override
@@ -194,21 +194,21 @@ abstract class HomeInitial implements HomeState {
 }
 
 /// @nodoc
-abstract class $HomeLoadingCopyWith<$Res> {
-  factory $HomeLoadingCopyWith(
-          HomeLoading value, $Res Function(HomeLoading) then) =
-      _$HomeLoadingCopyWithImpl<$Res>;
+abstract class _$$HomeLoadingCopyWith<$Res> {
+  factory _$$HomeLoadingCopyWith(
+          _$HomeLoading value, $Res Function(_$HomeLoading) then) =
+      __$$HomeLoadingCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class _$HomeLoadingCopyWithImpl<$Res> extends _$HomeStateCopyWithImpl<$Res>
-    implements $HomeLoadingCopyWith<$Res> {
-  _$HomeLoadingCopyWithImpl(
-      HomeLoading _value, $Res Function(HomeLoading) _then)
-      : super(_value, (v) => _then(v as HomeLoading));
+class __$$HomeLoadingCopyWithImpl<$Res> extends _$HomeStateCopyWithImpl<$Res>
+    implements _$$HomeLoadingCopyWith<$Res> {
+  __$$HomeLoadingCopyWithImpl(
+      _$HomeLoading _value, $Res Function(_$HomeLoading) _then)
+      : super(_value, (v) => _then(v as _$HomeLoading));
 
   @override
-  HomeLoading get _value => super._value as HomeLoading;
+  _$HomeLoading get _value => super._value as _$HomeLoading;
 }
 
 /// @nodoc
@@ -230,7 +230,7 @@ class _$HomeLoading with DiagnosticableTreeMixin implements HomeLoading {
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is HomeLoading);
+        (other.runtimeType == runtimeType && other is _$HomeLoading);
   }
 
   @override
@@ -310,20 +310,21 @@ abstract class HomeLoading implements HomeState {
 }
 
 /// @nodoc
-abstract class $HomeLoadedCopyWith<$Res> {
-  factory $HomeLoadedCopyWith(
-          HomeLoaded value, $Res Function(HomeLoaded) then) =
-      _$HomeLoadedCopyWithImpl<$Res>;
+abstract class _$$HomeLoadedCopyWith<$Res> {
+  factory _$$HomeLoadedCopyWith(
+          _$HomeLoaded value, $Res Function(_$HomeLoaded) then) =
+      __$$HomeLoadedCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class _$HomeLoadedCopyWithImpl<$Res> extends _$HomeStateCopyWithImpl<$Res>
-    implements $HomeLoadedCopyWith<$Res> {
-  _$HomeLoadedCopyWithImpl(HomeLoaded _value, $Res Function(HomeLoaded) _then)
-      : super(_value, (v) => _then(v as HomeLoaded));
+class __$$HomeLoadedCopyWithImpl<$Res> extends _$HomeStateCopyWithImpl<$Res>
+    implements _$$HomeLoadedCopyWith<$Res> {
+  __$$HomeLoadedCopyWithImpl(
+      _$HomeLoaded _value, $Res Function(_$HomeLoaded) _then)
+      : super(_value, (v) => _then(v as _$HomeLoaded));
 
   @override
-  HomeLoaded get _value => super._value as HomeLoaded;
+  _$HomeLoaded get _value => super._value as _$HomeLoaded;
 }
 
 /// @nodoc
@@ -345,7 +346,7 @@ class _$HomeLoaded with DiagnosticableTreeMixin implements HomeLoaded {
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is HomeLoaded);
+        (other.runtimeType == runtimeType && other is _$HomeLoaded);
   }
 
   @override
