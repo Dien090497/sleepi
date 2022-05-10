@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_translate/flutter_translate.dart';
 import 'package:slee_fi/common/routes/app_routes.dart';
+import 'package:slee_fi/common/style/theme.dart';
 import 'package:slee_fi/presentation/blocs/bottom_navigation/bottom_navigation_bloc.dart';
 
 class MyApp extends StatelessWidget {
@@ -27,7 +28,7 @@ class MyApp extends StatelessWidget {
           ],
           supportedLocales: localizationDelegate.supportedLocales,
           locale: localizationDelegate.currentLocale,
-          theme: ThemeData(primarySwatch: Colors.blue),
+          theme: lightTheme,
           routes: AppRoutes.routes,
           initialRoute: R.bottomNavigation,
         ),

@@ -10,7 +10,7 @@ class SFText extends Text {
     Key? key,
   }) : super(
           translate(keyText, args: args),
-          style: style ?? TextStyles.h1,
+          style: style ?? TextStyles.textBasic15,
           key: key,
         );
 }
