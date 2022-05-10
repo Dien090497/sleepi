@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:slee_fi/common/widgets/loading_screen.dart';
 import 'package:slee_fi/common/widgets/sf_buttons.dart';
-import 'package:slee_fi/common/widgets/sf_dialog.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
 import 'package:slee_fi/di/translations/keys.dart';
 import 'package:slee_fi/presentation/blocs/home/home_bloc.dart';
 import 'package:slee_fi/presentation/blocs/home/home_state.dart';
+import 'package:slee_fi/presentation/screens/home/widgets/pop_up_transfer.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -31,11 +31,7 @@ class HomeScreen extends StatelessWidget {
                           showDialog(
                             context: context,
                             builder: (context) {
-                              return const SFDialog(
-                                children: [
-                                  Text('asd'),
-                                ],
-                              );
+                              return const PopUpTransfer();
                             },
                           );
                         },
