@@ -59,7 +59,6 @@ abstract class _$$_BottomNavigationStateCopyWith<$Res>
   factory _$$_BottomNavigationStateCopyWith(_$_BottomNavigationState value,
           $Res Function(_$_BottomNavigationState) then) =
       __$$_BottomNavigationStateCopyWithImpl<$Res>;
-
   @override
   $Res call({int tabIndex});
 }
@@ -128,7 +127,6 @@ abstract class _BottomNavigationState implements BottomNavigationState {
 
   @override
   int get tabIndex => throw _privateConstructorUsedError;
-
   @override
   @JsonKey(ignore: true)
   _$$_BottomNavigationStateCopyWith<_$_BottomNavigationState> get copyWith =>

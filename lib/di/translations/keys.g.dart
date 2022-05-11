@@ -50,4 +50,18 @@ class Keys {
   static const String start = 'start';
 
   static const String getActivationCode = 'get_activation_code';
+
+  static const String normalGacha = 'normal_gacha';
+
+  static const String probability = 'probability';
+
+  static const String singleGacha = 'single_gacha';
+
+  static const String timesGacha = 'times_gacha';
+
+  static const String uncommonBedsChance = 'uncommon_beds_chance';
+
+  static const String rareBedsChance = 'rare_beds_chance';
+
+  static const String get = 'get';
 }

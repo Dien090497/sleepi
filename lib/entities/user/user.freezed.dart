@@ -60,7 +60,6 @@ class _$UserCopyWithImpl<$Res> implements $UserCopyWith<$Res> {
 abstract class _$$_UserCopyWith<$Res> implements $UserCopyWith<$Res> {
   factory _$$_UserCopyWith(_$_User value, $Res Function(_$_User) then) =
       __$$_UserCopyWithImpl<$Res>;
-
   @override
   $Res call({String name, int age});
 }
@@ -143,10 +142,8 @@ abstract class _User implements User {
 
   @override
   String get name => throw _privateConstructorUsedError;
-
   @override
   int get age => throw _privateConstructorUsedError;
-
   @override
   @JsonKey(ignore: true)
   _$$_UserCopyWith<_$_User> get copyWith => throw _privateConstructorUsedError;
