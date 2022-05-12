@@ -1,4 +1,4 @@
-name: Build APK
+name: Analyze
 
 on:
   pull_request:

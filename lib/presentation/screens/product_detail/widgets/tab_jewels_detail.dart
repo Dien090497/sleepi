@@ -14,10 +14,7 @@ class TabJewelsDetail extends StatelessWidget {
       child: Column(
         children: [
           SFSubTabBar(
-            texts: const [
-              Keys.productDetailJewels,
-              Keys.productDetailUpgrade,
-            ],
+            texts: const [Keys.jewels, Keys.upgrade],
           ),
           const SizedBox(height: 12),
           Expanded(

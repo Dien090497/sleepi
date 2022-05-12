@@ -1,15 +1,33 @@
 {
-  "test": {
-    "hello": "こんにちは"
+  "beds": "Beds",
+  "jewels": "Jewels",
+  "item": "Item",
+  "trophy": "Trophy",
+  "bed_box": "BedBox",
+  "type": "Type",
+  "upgrade": "Upgrade",
+  "level": "Level {num}",
+  "login_signup": "LOGIN/SIGNUP",
+  "account_login": "Account Login",
+  "email_address": "Email Address",
+  "email_verification": "Email verification code",
+  "send_code": "send code",
+  "login": "LOGIN",
+  "introduce": {
+    "how_to_play": "How to Play ?",
+    "white_paper": "WhitePaper",
+    "lite_paper": "LitePaper",
+    "link_tree": "LinkTree"
   },
-  "product_detail": {
-    "beds": "Beds",
-    "jewels": "Jewels",
-    "item": "Item",
-    "trophy": "Trophy",
-    "bed_box": "BedBox",
-    "type": "Type",
-    "upgrade": "Upgrade",
-    "level": "Level {num}"
-  }
+  "please_enter": "Please enter your activation code.\n",
+  "activation_code_language": "ACTIVATION CODE/\u2028LANGUAGE",
+  "start": "START",
+  "get_activation_code": "Get activation code\n",
+  "normal_gacha": "Normal Gacha",
+  "probability": "Probability",
+  "single_gacha": "Single Gacha",
+  "times_gacha": "{num} Times Gacha",
+  "uncommon_beds_chance": "Uncommon Beds Chance",
+  "rare_beds_chance": "Rare Beds Chance",
+  "get": "Get"
 }

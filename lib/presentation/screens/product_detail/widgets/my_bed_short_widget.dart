@@ -27,7 +27,7 @@ class MyBedShortWidget extends StatelessWidget {
             ),
             padding: const EdgeInsets.symmetric(vertical: 2, horizontal: 20),
             child: SFText(
-              keyText: Keys.productDetailType,
+              keyText: Keys.type,
               style: TextStyles.black15Bold,
             ),
           ),

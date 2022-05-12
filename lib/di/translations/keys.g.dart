@@ -7,21 +7,61 @@ part of 'keys.dart';
 // **************************************************************************
 
 class Keys {
-  static const String testHello = 'test.hello';
+  static const String beds = 'beds';
 
-  static const String productDetailBeds = 'product_detail.beds';
+  static const String jewels = 'jewels';
 
-  static const String productDetailJewels = 'product_detail.jewels';
+  static const String item = 'item';
 
-  static const String productDetailItem = 'product_detail.item';
+  static const String trophy = 'trophy';
 
-  static const String productDetailTrophy = 'product_detail.trophy';
+  static const String bedBox = 'bed_box';
 
-  static const String productDetailBedBox = 'product_detail.bed_box';
+  static const String type = 'type';
 
-  static const String productDetailType = 'product_detail.type';
+  static const String upgrade = 'upgrade';
 
-  static const String productDetailUpgrade = 'product_detail.upgrade';
+  static const String level = 'level';
 
-  static const String productDetailLevel = 'product_detail.level';
+  static const String loginSignup = 'login_signup';
+
+  static const String accountLogin = 'account_login';
+
+  static const String emailAddress = 'email_address';
+
+  static const String emailVerification = 'email_verification';
+
+  static const String sendCode = 'send_code';
+
+  static const String login = 'login';
+
+  static const String introduceHowToPlay = 'introduce.how_to_play';
+
+  static const String introduceWhitePaper = 'introduce.white_paper';
+
+  static const String introduceLitePaper = 'introduce.lite_paper';
+
+  static const String introduceLinkTree = 'introduce.link_tree';
+
+  static const String pleaseEnter = 'please_enter';
+
+  static const String activationCodeLanguage = 'activation_code_language';
+
+  static const String start = 'start';
+
+  static const String getActivationCode = 'get_activation_code';
+
+  static const String normalGacha = 'normal_gacha';
+
+  static const String probability = 'probability';
+
+  static const String singleGacha = 'single_gacha';
+
+  static const String timesGacha = 'times_gacha';
+
+  static const String uncommonBedsChance = 'uncommon_beds_chance';
+
+  static const String rareBedsChance = 'rare_beds_chance';
+
+  static const String get = 'get';
 }

@@ -3,8 +3,8 @@ import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
 import 'package:slee_fi/di/translations/keys.dart';
 
-class MyJewelsShortWidget extends StatelessWidget {
-  const MyJewelsShortWidget({required this.index, Key? key}) : super(key: key);
+class MyItemShortWidget extends StatelessWidget {
+  const MyItemShortWidget({required this.index, Key? key}) : super(key: key);
 
   final int index;
 
@@ -29,12 +29,13 @@ class MyJewelsShortWidget extends StatelessWidget {
           ),
           const Spacer(),
           Container(
-            margin: const EdgeInsets.symmetric(horizontal: 28),
+            margin: const EdgeInsets.symmetric(horizontal: 16),
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(10),
               border: Border.all(color: AppColors.black),
             ),
-            padding: const EdgeInsets.symmetric(vertical: 6),
+            padding: const EdgeInsets.symmetric(horizontal: 16),
+            child: SFText(keyText: 'IDIDID'),
           ),
           const SizedBox(height: 24),
         ],
