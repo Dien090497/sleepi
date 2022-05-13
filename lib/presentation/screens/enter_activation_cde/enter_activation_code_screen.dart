@@ -45,6 +45,7 @@ class EnterActivationCodeScreen extends StatelessWidget {
                       Navigator.pushNamedAndRemoveUntil(
                           context, R.bottomNavigation, (_) => false);
                     },
+                    width: MediaQuery.of(context).size.width,
                   ),
                   const SizedBox(height: 16),
                   const SFTextButton(text: Keys.getActivationCode),

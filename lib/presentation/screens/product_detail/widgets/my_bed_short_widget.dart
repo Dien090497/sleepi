@@ -28,7 +28,7 @@ class MyBedShortWidget extends StatelessWidget {
             padding: const EdgeInsets.symmetric(vertical: 2, horizontal: 20),
             child: SFText(
               keyText: Keys.type,
-              style: TextStyles.black15Bold,
+              style: TextStyles.black10Bold,
             ),
           ),
           const Spacer(),
@@ -40,7 +40,7 @@ class MyBedShortWidget extends StatelessWidget {
             padding: const EdgeInsets.symmetric(vertical: 2, horizontal: 20),
             child: SFText(
               keyText: 'IDIDIDID',
-              style: TextStyles.black15Bold,
+              style: TextStyles.black10Bold,
             ),
           ),
           Padding(
