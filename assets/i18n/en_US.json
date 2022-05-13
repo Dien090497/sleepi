@@ -13,6 +13,7 @@
   "email_verification": "Email verification code",
   "send_code": "send code",
   "login": "LOGIN",
+
   "introduce": {
     "how_to_play": "How to Play ?",
     "white_paper": "WhitePaper",
@@ -29,5 +30,27 @@
   "times_gacha": "{num} Times Gacha",
   "uncommon_beds_chance": "Uncommon Beds Chance",
   "rare_beds_chance": "Rare Beds Chance",
-  "get": "Get"
+  "get": "Get",
+
+  "pop_up_repair": {
+    "title": "REPAIR",
+    "button_confirm": "Confirm",
+    "button_cancel": "Cancel"
+  },
+  "pop_up_level_up": {
+    "title": "LEVEL UP",
+    "button_confirm": "Confirm",
+    "button_cancel": "Cancel"
+  },
+  "pop_up_transfer": {
+    "title": "CONFIRM TRANSFER",
+    "from" : "From",
+    "to" : "To",
+    "inventory" : "Inventory",
+    "wallet" : "Wallet",
+    "fee" : "Fee",
+    "title_transfer" : "you win transfer",
+    "button_confirm": "Confirm",
+    "button_cancel": "Cancel"
+  }
 }

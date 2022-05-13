@@ -7,6 +7,9 @@ class TextStyles {
       fontSize: 32, color: AppColors.textColor, fontWeight: FontWeight.bold);
   static const textBasic15 = TextStyle(fontSize: 15, color: AppColors.primary);
   static const black10 = TextStyle(fontSize: 10, color: AppColors.black);
-  static const black15Bold = TextStyle(
+  static const black12 = TextStyle(fontSize: 12, color: AppColors.black);
+  static const bold20black = TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: AppColors.black);
+  static const bold15black = TextStyle(fontSize: 15, fontWeight: FontWeight.bold, color: AppColors.black);
+  static const black10Bold = TextStyle(
       fontSize: 10, color: AppColors.black, fontWeight: FontWeight.bold);
 }

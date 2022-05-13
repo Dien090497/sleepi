@@ -28,7 +28,7 @@ class SFButton extends StatelessWidget {
       child: ElevatedButton(
         onPressed: onPressed,
         style: ElevatedButton.styleFrom(
-          padding: const EdgeInsets.symmetric(horizontal: 74),
+          padding: const EdgeInsets.symmetric(horizontal: 10),
           primary: color ?? AppColors.greyBottomNavBar,
           onPrimary: color ?? AppColors.greyBottomNavBar,
           onSurface: color ?? AppColors.greyBottomNavBar,

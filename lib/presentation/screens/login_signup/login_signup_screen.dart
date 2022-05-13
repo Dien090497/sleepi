@@ -61,6 +61,7 @@ class LoginSignUpScreen extends StatelessWidget {
                       Navigator.pushNamedAndRemoveUntil(
                           context, R.enterActivationCode, (_) => false);
                     },
+                    width: MediaQuery.of(context).size.width,
                   ),
                   const SizedBox(height: 10),
                   SFText(

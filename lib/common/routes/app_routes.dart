@@ -1,5 +1,7 @@
 import 'package:slee_fi/presentation/screens/bottom_navigation/bottom_navigation_screen.dart';
 import 'package:slee_fi/presentation/screens/enter_activation_cde/enter_activation_code_screen.dart';
+import 'package:slee_fi/presentation/screens/home/layout/feed_back_screen.dart';
+import 'package:slee_fi/presentation/screens/home/layout/recycle_screen.dart';
 import 'package:slee_fi/presentation/screens/login_signup/login_signup_screen.dart';
 
 class R {
@@ -7,6 +9,10 @@ class R {
   static const String loginSignUp = '${_}login_signup';
   static const String enterActivationCode = '${_}enter_activation_code';
   static const String bottomNavigation = '${_}bottom_navigation';
+  static const String recycle = '${_}recycle';
+  static const String feedback = '${_}feedback';
+
+
 }
 
 class AppRoutes {
@@ -14,5 +20,7 @@ class AppRoutes {
     R.loginSignUp: (_) => const LoginSignUpScreen(),
     R.enterActivationCode: (_) => const EnterActivationCodeScreen(),
     R.bottomNavigation: (_) => const BottomNavigationScreen(),
+    R.recycle: (_) => const RecycleScreen(),
+    R.feedback: (_) => const FeedBackScreen(),
   };
 }
