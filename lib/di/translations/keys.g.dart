@@ -153,4 +153,8 @@ class Keys {
   static const String timeInBed = 'time_in_bed';
 
   static const String nocturnalAwakening = 'nocturnal_awakening';
+
+  static const String tokenEarned = 'token_earned';
+
+  static const String sleepScore = 'sleep_score';
 }

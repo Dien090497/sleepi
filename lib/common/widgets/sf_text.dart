@@ -9,12 +9,14 @@ class SFText extends Text {
     Map<String, dynamic>? args,
     TextStyle? style,
     bool toUpperCase = false,
+    TextAlign? textAlign,
     Key? key,
   }) : super(
-          toUpperCase
+    toUpperCase
               ? translate(keyText, args: args).toUpperCase() + extraText
               : translate(keyText, args: args) + extraText,
           style: style ?? TextStyles.textBasic15,
+          textAlign: textAlign,
           key: key,
         );
 }

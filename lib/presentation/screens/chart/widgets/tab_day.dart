@@ -1,6 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_date_pickers/flutter_date_pickers.dart' as dp;
 import 'package:slee_fi/common/style/app_colors.dart';
+import 'package:slee_fi/common/widgets/sf_text.dart';
+import 'package:slee_fi/di/translations/keys.dart';
+import 'package:slee_fi/presentation/screens/chart/widgets/chart_title.dart';
+import 'package:slee_fi/presentation/screens/chart/widgets/sleep_cycle_chart.dart';
+import 'package:slee_fi/presentation/screens/chart/widgets/sleep_score_widget.dart';
 
 class TabDay extends StatelessWidget {
   const TabDay({Key? key}) : super(key: key);
@@ -36,6 +41,40 @@ class TabDay extends StatelessWidget {
             ],
           ),
         ),
+        const SizedBox(height: 16),
+        ChartTitle(
+          text: Keys.tokenEarned,
+          child: Container(
+            decoration: BoxDecoration(
+              color: AppColors.greyBottomNavBar,
+              borderRadius: BorderRadius.circular(8),
+              border: Border.all(color: AppColors.black),
+            ),
+            width: 200,
+            alignment: Alignment.centerRight,
+            padding: const EdgeInsets.all(8),
+            child: SFText(keyText: 'SLFT'),
+          ),
+        ),
+        const SizedBox(height: 16),
+        ChartTitle(
+          text: Keys.sleepScore,
+          child: Container(
+            decoration: BoxDecoration(
+              color: AppColors.greyBottomNavBar,
+              borderRadius: BorderRadius.circular(8),
+              border: Border.all(color: AppColors.black),
+            ),
+            width: 200,
+            padding: const EdgeInsets.all(8),
+            alignment: Alignment.centerRight,
+            child: SFText(keyText: '/100'),
+          ),
+        ),
+        const SizedBox(height: 16),
+        const SleepCycleChart(),
+        const SizedBox(height: 16),
+        const SleepScore(),
       ],
     );
   }

@@ -13,8 +13,8 @@ class ChartTitle extends StatelessWidget {
     return Row(
       children: [
         SFText(keyText: text),
-        const SizedBox(width: 8),
-        if (child != null) Expanded(child: child!),
+        const Expanded(child: SizedBox(width: 8)),
+        if (child != null) child!,
       ],
     );
   }
