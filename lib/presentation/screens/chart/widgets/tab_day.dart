@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_date_pickers/flutter_date_pickers.dart';
+import 'package:flutter_date_pickers/flutter_date_pickers.dart' as dp;
 import 'package:slee_fi/common/style/app_colors.dart';
 
 class TabDay extends StatelessWidget {
@@ -57,7 +57,7 @@ class ChartDayPicker extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final DatePickerRangeStyles styles = DatePickerRangeStyles(
+    final dp.DatePickerRangeStyles styles = dp.DatePickerRangeStyles(
       selectedPeriodLastDecoration: const BoxDecoration(
           color: AppColors.black,
           borderRadius: BorderRadiusDirectional.only(
@@ -80,7 +80,7 @@ class ChartDayPicker extends StatelessWidget {
       children: [
         Container(
           color: Colors.white,
-          child: DayPicker.single(
+          child: dp.DayPicker.single(
             selectedDate: selectedDate,
             onChanged: (date) {
               onNewSelected(date);

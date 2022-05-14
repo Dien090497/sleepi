@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_date_pickers/flutter_date_pickers.dart';
+import 'package:flutter_date_pickers/flutter_date_pickers.dart' as dp;
 import 'package:slee_fi/common/style/app_colors.dart';
 
 class TabMonth extends StatelessWidget {
@@ -74,7 +74,7 @@ class ChartMonthPicker extends StatelessWidget {
     //   ),
     // );
 
-    final DatePickerRangeStyles styles = DatePickerRangeStyles(
+    final dp.DatePickerRangeStyles styles = dp.DatePickerRangeStyles(
         selectedDateStyle: Theme.of(context)
             .textTheme
             .bodyText1
@@ -94,7 +94,7 @@ class ChartMonthPicker extends StatelessWidget {
           children: [
             Container(
               color: Colors.white,
-              child: MonthPicker.single(
+              child: dp.MonthPicker.single(
                 selectedDate: selectedDate,
                 onChanged: (month) {
                   onNewSelected(month);
