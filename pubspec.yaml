@@ -17,7 +17,7 @@ dependencies:
   cupertino_icons: ^1.0.4
   flutter_translate_annotations: ^2.1.0
   flutter_translate: ^4.0.2
-  shared_preferences: ^2.0.14
+  shared_preferences: ^2.0.15
   flutter_bloc: ^8.0.1
   equatable: ^2.0.3
   flutter_svg: ^1.0.3
@@ -29,7 +29,7 @@ dependencies:
   logger: ^1.1.0
   retrofit: ^3.0.1+1
   dio: ^4.0.6
-  widgetbook_annotation: ^2.0.1
+  widgetbook_annotation: ^2.0.2
   cached_network_image: ^3.2.0
 
 dependency_overrides:
@@ -41,12 +41,12 @@ dev_dependencies:
   flutter_lints: ^1.0.4
   flutter_translate_gen: ^2.2.0
   build_runner: ^2.1.10
-  freezed: ^2.0.3
+  freezed: ^2.0.3+1
   injectable_generator: ^1.5.3
   json_serializable: ^6.2.0
   retrofit_generator: ^4.0.1
-  widgetbook: ^2.2.0
-  widgetbook_generator: ^2.1.0
+  widgetbook: ^2.2.1
+  widgetbook_generator: ^2.1.1
 
 flutter:
 

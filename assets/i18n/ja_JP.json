@@ -13,6 +13,7 @@
   "email_verification": "Email verification code",
   "send_code": "send code",
   "login": "LOGIN",
+  "product_line_up": "Product Line-Up",
   "introduce": {
     "how_to_play": "How to Play ?",
     "white_paper": "WhitePaper",
@@ -29,5 +30,12 @@
   "times_gacha": "{num} Times Gacha",
   "uncommon_beds_chance": "Uncommon Beds Chance",
   "rare_beds_chance": "Rare Beds Chance",
-  "get": "Get"
+  "get": "Get",
+  "bed": "Bed",
+  "common_bed": "Common Bed",
+  "uncommon_bed": "Uncommon Bed",
+  "rare_bed": "Rare Bed",
+  "epic_bed": "Epic Bed",
+  "legendary_bed": "Legendary Bed",
+  "attributes": "Attributes"
 }
