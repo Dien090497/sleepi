@@ -143,53 +143,6 @@ class ProbabilityWidget extends StatelessWidget {
   }
 }
 
-class _TitleCol extends StatelessWidget {
-  const _TitleCol({Key? key, required this.titles}) : super(key: key);
-
-  final List<String> titles;
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      mainAxisSize: MainAxisSize.max,
-      children: List.generate(
-        titles.length,
-        (i) {
-          return SFText(keyText: titles[i]);
-        },
-      ),
-    );
-  }
-}
-
-class _ChancesCol extends StatelessWidget {
-  const _ChancesCol({Key? key, required this.texts, required this.extraTexts})
-      : super(key: key);
-
-  final List<String> texts;
-  final List<String> extraTexts;
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: List.generate(
-        texts.length,
-        (i) {
-          return Padding(
-            padding: const EdgeInsets.only(top: 8.0),
-            child: SFText(
-              keyText: texts[i],
-              extraText: extraTexts[i],
-            ),
-          );
-        },
-      ),
-    );
-  }
-}
-
 class _Chances extends StatelessWidget {
   const _Chances(
       {Key? key,

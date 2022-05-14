@@ -4,11 +4,11 @@ import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/presentation/blocs/bottom_navigation/bottom_navigation_bloc.dart';
 import 'package:slee_fi/presentation/blocs/bottom_navigation/bottom_navigation_event.dart';
 import 'package:slee_fi/presentation/blocs/bottom_navigation/bottom_navigation_state.dart';
+import 'package:slee_fi/presentation/screens/chart/chart_screen.dart';
 import 'package:slee_fi/presentation/screens/gacha/gacha_screen.dart';
 import 'package:slee_fi/presentation/screens/home/home_screen.dart';
 import 'package:slee_fi/presentation/screens/market_place/market_place_screen.dart';
 import 'package:slee_fi/presentation/screens/product_detail/product_detail_screen.dart';
-import 'package:slee_fi/presentation/screens/statistics/statistics_screen.dart';
 
 class BottomNavigationScreen extends StatelessWidget {
   const BottomNavigationScreen({Key? key}) : super(key: key);
@@ -114,7 +114,7 @@ class BottomNavigationScreen extends StatelessWidget {
               HomeScreen(),
               GachaScreen(),
               ProductDetaiScreen(),
-              StatisticsScreen(),
+              ChartScreen(),
               MarketPlaceScreen(),
             ],
           ),
