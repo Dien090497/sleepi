@@ -16,11 +16,29 @@ class ProbabilityWidget extends StatelessWidget {
         children: [
           Align(
             alignment: Alignment.centerRight,
-            child: Container(
-              decoration: BoxDecoration(
-                border: Border.all(color: AppColors.black),
+            child: GestureDetector(
+              onTap: () {
+                showDialog(
+                  context: context,
+                  builder: (context) {
+                    return Dialog(
+                      child: Column(
+                        children: [
+                          Container(),
+                        ],
+                      ),
+                    );
+                  },
+                );
+              },
+              child: Container(
+                decoration: BoxDecoration(
+                  border: Border.all(color: AppColors.black),
+                ),
+                padding:
+                    const EdgeInsets.symmetric(vertical: 4, horizontal: 16),
+                child: SFText(keyText: Keys.probability),
               ),
-              child: SFText(keyText: Keys.probability),
             ),
           ),
           const SizedBox(height: 14),
