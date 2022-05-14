@@ -157,4 +157,17 @@ class Keys {
   static const String tokenEarned = 'token_earned';
 
   static const String sleepScore = 'sleep_score';
+
+  static const String result = 'result';
+
+  static const String next = 'next';
+
+  static const String back = 'back';
+
+  static const String showAllResult = 'show_all_result';
+
+  static const String specialGacha = 'special_gacha';
+
+  static const String displaysTheNftDischargedFromTheGacha =
+      'displays_the_nft_discharged_from_the_gacha';
 }

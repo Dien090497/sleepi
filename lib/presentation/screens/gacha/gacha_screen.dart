@@ -37,6 +37,12 @@ class GachaScreen extends StatelessWidget {
                   const SizedBox(height: 2),
                   const ChanceWidget(),
                   const SizedBox(height: 28),
+                  DecoratedWidget(
+                    padding: const EdgeInsets.fromLTRB(56, 16, 56, 8),
+                    width: 262,
+                    child: SFText(keyText: Keys.specialGacha),
+                  ),
+                  const SizedBox(height: 17),
                   const ProbabilityWidget(),
                   const SizedBox(height: 6),
                   const GachaRollSelections(),

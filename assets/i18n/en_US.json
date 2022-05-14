@@ -79,5 +79,11 @@
   "time_in_bed": "Time In Bed",
   "nocturnal_awakening": "Nocturnal Awakening",
   "token_earned": "Token Earned",
-  "sleep_score": "Sleep Score"
+  "sleep_score": "Sleep Score",
+  "result": "Result",
+  "next": "Next",
+  "back": "Back",
+  "show_all_result": "Show all result",
+  "special_gacha": "Special Gacha",
+  "displays_the_nft_discharged_from_the_gacha": "Displays the NFTs discharged from the gacha."
 }

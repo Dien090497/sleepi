@@ -10,6 +10,7 @@ class SFButton extends StatelessWidget {
       this.width,
       this.height,
       this.color,
+      this.toUpperCase = false,
       Key? key})
       : super(key: key);
 
@@ -19,6 +20,7 @@ class SFButton extends StatelessWidget {
   final double? width;
   final double? height;
   final Color? color;
+  final bool toUpperCase;
 
   @override
   Widget build(BuildContext context) {
@@ -50,7 +52,11 @@ class SFButton extends StatelessWidget {
         //     // side: const BorderSide(color: AppColors.black),
         //   ),
         // ),
-        child: SFText(keyText: text, style: textStyle),
+        child: SFText(
+          keyText: text,
+          style: textStyle,
+          toUpperCase: toUpperCase,
+        ),
       ),
     );
   }

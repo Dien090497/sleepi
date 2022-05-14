@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:slee_fi/common/routes/app_routes.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
 import 'package:slee_fi/di/translations/keys.dart';
@@ -17,13 +18,18 @@ class GachaRollSelections extends StatelessWidget {
                 keyText: '12SLFT',
               ),
               const SizedBox(height: 4),
-              Container(
-                decoration: const BoxDecoration(
-                  color: AppColors.greyBottomNavBar,
+              GestureDetector(
+                onTap: () {
+                  Navigator.pushNamed(context, R.gachaResultBed);
+                },
+                child: Container(
+                  decoration: const BoxDecoration(
+                    color: AppColors.greyBottomNavBar,
+                  ),
+                  alignment: Alignment.center,
+                  padding: const EdgeInsets.symmetric(vertical: 12),
+                  child: SFText(keyText: Keys.singleGacha),
                 ),
-                alignment: Alignment.center,
-                padding: const EdgeInsets.symmetric(vertical: 12),
-                child: SFText(keyText: Keys.singleGacha),
               ),
             ],
           ),
