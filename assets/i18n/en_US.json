@@ -66,5 +66,16 @@
   "Resilience": "Resilience",
   "select_bed_type": "Select Bed Type",
   "confirm": "Confirm",
-  "Statistics": "Statistics"
+  "Statistics": "Statistics",
+  "day": "Day",
+  "week": "Week",
+  "month": "Month",
+  "total_token_earned": "Total token Earned",
+  "average_sleep_score": "Average Sleep Score",
+  "bed_time": "Bed Time",
+  "sleep_onset_time": "Sleep Onset Time",
+  "woke_up": "Woke Up",
+  "sleep_duration": "Sleep Duration",
+  "time_in_bed": "Time In Bed",
+  "nocturnal_awakening": "Nocturnal Awakening"
 }

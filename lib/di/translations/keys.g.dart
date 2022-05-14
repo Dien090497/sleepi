@@ -129,4 +129,28 @@ class Keys {
   static const String selectBedType = 'select_bed_type';
 
   static const String confirm = 'confirm';
+
+  static const String statistics = 'Statistics';
+
+  static const String day = 'day';
+
+  static const String week = 'week';
+
+  static const String month = 'month';
+
+  static const String totalTokenEarned = 'total_token_earned';
+
+  static const String averageSleepScore = 'average_sleep_score';
+
+  static const String bedTime = 'bed_time';
+
+  static const String sleepOnsetTime = 'sleep_onset_time';
+
+  static const String wokeUp = 'woke_up';
+
+  static const String sleepDuration = 'sleep_duration';
+
+  static const String timeInBed = 'time_in_bed';
+
+  static const String nocturnalAwakening = 'nocturnal_awakening';
 }

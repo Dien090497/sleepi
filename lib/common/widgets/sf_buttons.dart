@@ -30,6 +30,12 @@ class SFButton extends StatelessWidget {
         style: ButtonStyle(
           backgroundColor:
               MaterialStateProperty.all<Color>(AppColors.greyBottomNavBar),
+          shape: MaterialStateProperty.all(
+            RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(10),
+              side: const BorderSide(color: AppColors.black),
+            ),
+          ),
         ),
         // style: ElevatedButton.styleFrom(
         //   padding: const EdgeInsets.symmetric(horizontal: 10),

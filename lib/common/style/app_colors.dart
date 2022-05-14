@@ -14,4 +14,6 @@ class AppColors {
   static const greyBottomNavBar = Color(0xFFC4C4C4);
 
   static const transparent = Colors.transparent;
+
+  static const green = Colors.green;
 }
