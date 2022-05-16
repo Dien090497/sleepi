@@ -5,6 +5,7 @@ import 'package:slee_fi/presentation/screens/gacha/gacha_result_bed_screen.dart'
 import 'package:slee_fi/presentation/screens/gacha/gacha_result_overview.dart';
 import 'package:slee_fi/presentation/screens/home/layout/feed_back_screen.dart';
 import 'package:slee_fi/presentation/screens/home/layout/recycle_screen.dart';
+import 'package:slee_fi/presentation/screens/info_nft/info_nft_screen.dart';
 import 'package:slee_fi/presentation/screens/login_signup/login_signup_screen.dart';
 
 class R {
@@ -17,6 +18,8 @@ class R {
   static const String gacha500TimesChance = '${_}gacha_500_times_chance';
   static const String gachaResultBed = '${_}gacha_result_bed';
   static const String gachaResultOverview = '${_}gacha_result_overview';
+  static const String nftInfo = '${_}nft_info';
+
 }
 
 class AppRoutes {
@@ -29,5 +32,6 @@ class AppRoutes {
     R.gacha500TimesChance: (_) => const GachaChance500Screen(),
     R.gachaResultBed: (_) => const GachaResultBedScreen(),
     R.gachaResultOverview: (_) => const GachaResultOverview(),
+    R.nftInfo: (_) => const InfoNftScreen(),
   };
 }
