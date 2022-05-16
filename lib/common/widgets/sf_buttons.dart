@@ -10,6 +10,7 @@ class SFButton extends StatelessWidget {
       this.width,
       this.height,
       this.color,
+      this.toUpperCase = false,
       Key? key})
       : super(key: key);
 
@@ -19,6 +20,7 @@ class SFButton extends StatelessWidget {
   final double? width;
   final double? height;
   final Color? color;
+  final bool toUpperCase;
 
   @override
   Widget build(BuildContext context) {
@@ -27,18 +29,34 @@ class SFButton extends StatelessWidget {
       height: height,
       child: ElevatedButton(
         onPressed: onPressed,
-        style: ElevatedButton.styleFrom(
-          padding: const EdgeInsets.symmetric(horizontal: 10),
-          primary: color ?? AppColors.greyBottomNavBar,
-          onPrimary: color ?? AppColors.greyBottomNavBar,
-          onSurface: color ?? AppColors.greyBottomNavBar,
-          tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(10),
-            side: const BorderSide(color: AppColors.black),
+        style: ButtonStyle(
+          backgroundColor:
+              MaterialStateProperty.all<Color>(AppColors.greyBottomNavBar),
+          shape: MaterialStateProperty.all(
+            RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(10),
+              side: const BorderSide(color: AppColors.black),
+            ),
           ),
         ),
-        child: SFText(keyText: text, style: textStyle),
+        // style: ElevatedButton.styleFrom(
+        //   padding: const EdgeInsets.symmetric(horizontal: 10),
+        //   primary: color ?? AppColors.greyBottomNavBar,
+        //   onPrimary: color ?? AppColors.greyBottomNavBar,
+        //   onSurface: color ?? AppColors.greyBottomNavBar,
+        //   surfaceTintColor: color ?? AppColors.greyBottomNavBar,
+        //   shadowColor: color ?? AppColors.greyBottomNavBar,
+        //   tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+        //   shape: RoundedRectangleBorder(
+        //     borderRadius: BorderRadius.circular(10),
+        //     // side: const BorderSide(color: AppColors.black),
+        //   ),
+        // ),
+        child: SFText(
+          keyText: text,
+          style: textStyle,
+          toUpperCase: toUpperCase,
+        ),
       ),
     );
   }

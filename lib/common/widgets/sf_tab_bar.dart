@@ -5,9 +5,10 @@ import 'package:slee_fi/common/style/app_colors.dart';
 class SFTabBar extends TabBar {
   SFTabBar({
     required List<String> texts,
+    EdgeInsets? padding,
     Key? key,
   }) : super(
-          tabs: List.generate(
+    tabs: List.generate(
               texts.length,
               (i) => Tab(
                     text: translate(texts[i]),
@@ -17,7 +18,7 @@ class SFTabBar extends TabBar {
             color: AppColors.greyBottomNavBar,
           ),
           indicatorColor: AppColors.transparent,
-          padding: const EdgeInsets.symmetric(horizontal: 12),
+          padding: padding ?? const EdgeInsets.symmetric(horizontal: 12),
           key: key,
         );
 }
