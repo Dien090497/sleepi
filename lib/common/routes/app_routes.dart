@@ -11,8 +11,6 @@ class R {
   static const String bottomNavigation = '${_}bottom_navigation';
   static const String recycle = '${_}recycle';
   static const String feedback = '${_}feedback';
-
-
 }
 
 class AppRoutes {
