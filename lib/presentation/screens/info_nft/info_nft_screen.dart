@@ -7,6 +7,7 @@ import 'package:slee_fi/common/widgets/sf_buttons.dart';
 import 'package:slee_fi/common/widgets/sf_gridview.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
 import 'package:slee_fi/common/widgets/topbar_common.dart';
+import 'package:slee_fi/presentation/screens/info_nft/widget/bottom_bar.dart';
 import 'package:slee_fi/presentation/screens/info_nft/widget/box_index_info.dart';
 import 'package:slee_fi/presentation/screens/info_nft/widget/box_info_nft.dart';
 import 'package:slee_fi/presentation/screens/info_nft/widget/mint_from_widget.dart';
@@ -76,7 +77,7 @@ class InfoNftScreen extends StatelessWidget {
               ),
             ),
           ),
-          const TopBarCommon(),
+          const BottomBarWidget(),
         ],
       ),
     );
