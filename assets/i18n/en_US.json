@@ -14,12 +14,10 @@
   "send_code": "send code",
   "login": "LOGIN",
   "product_line_up": "Product Line-Up",
-  "introduce": {
-    "how_to_play": "How to Play ?",
-    "white_paper": "WhitePaper",
-    "lite_paper": "LitePaper",
-    "link_tree": "LinkTree"
-  },
+  "how_to_play": "How to Play ?",
+  "white_paper": "WhitePaper",
+  "lite_paper": "LitePaper",
+  "link_tree": "LinkTree",
   "please_enter": "Please enter your activation code.\n",
   "activation_code_language": "ACTIVATION CODE/\u2028LANGUAGE",
   "start": "START",
@@ -31,27 +29,17 @@
   "uncommon_beds_chance": "Uncommon Beds Chance",
   "rare_beds_chance": "Rare Beds Chance",
   "get": "Get",
-  "pop_up_repair": {
-    "title": "REPAIR",
-    "button_confirm": "Confirm",
-    "button_cancel": "Cancel"
-  },
-  "pop_up_level_up": {
-    "title": "LEVEL UP",
-    "button_confirm": "Confirm",
-    "button_cancel": "Cancel"
-  },
-  "pop_up_transfer": {
-    "title": "CONFIRM TRANSFER",
-    "from": "From",
-    "to": "To",
-    "inventory": "Inventory",
-    "wallet": "Wallet",
-    "fee": "Fee",
-    "title_transfer": "you win transfer",
-    "button_confirm": "Confirm",
-    "button_cancel": "Cancel"
-  },
+  "title_repair": "REPAIR",
+  "button_confirm": "Confirm",
+  "button_cancel": "Cancel",
+  "title_level_up": "LEVEL UP",
+  "title_confirm_transfer": "CONFIRM TRANSFER",
+  "from": "From",
+  "to": "To",
+  "inventory": "Inventory",
+  "wallet": "Wallet",
+  "fee": "Fee",
+  "title_transfer": "you win transfer",
   "bed": "Bed",
   "common_bed": "Common Bed",
   "uncommon_bed": "Uncommon Bed",
@@ -85,5 +73,6 @@
   "back": "Back",
   "show_all_result": "Show all result",
   "special_gacha": "Special Gacha",
-  "displays_the_nft_discharged_from_the_gacha": "Displays the NFTs discharged from the gacha."
+  "displays_the_nft_discharged_from_the_gacha": "Displays the NFTs discharged from the gacha.",
+  "mint": "Mint"
 }

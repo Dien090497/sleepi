@@ -17,7 +17,7 @@ class PopUpLevelUp extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             const SizedBox(),
-            SFText(keyText: 'pop_up_level_up.title'),
+            SFText(keyText: 'title_level_up'),
             Container(
               padding: const EdgeInsets.all(5),
               decoration: const BoxDecoration(
@@ -51,8 +51,8 @@ class PopUpLevelUp extends StatelessWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              SFButton(text: 'pop_up_level_up.title', width: size.width / 3,),
-              SFButton(text: 'pop_up_level_up.title', width: size.width / 3,)
+              SFButton(text: 'title_level_up', width: size.width / 3,),
+              SFButton(text: 'title_level_up', width: size.width / 3,)
             ],
           ),
         ),

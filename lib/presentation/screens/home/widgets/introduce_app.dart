@@ -42,10 +42,10 @@ class IntroduceApp extends StatelessWidget {
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: [
-                        SFButton(text: 'introduce.how_to_play', onPressed: () {} , width: double.infinity, height: 50,),
-                        const SFButton(text: 'introduce.white_paper', width: double.infinity, height: 50,),
-                        const SFButton(text: 'introduce.lite_paper', width: double.infinity, height: 50,),
-                        const SFButton(text: 'introduce.link_tree', width: double.infinity, height: 50,),
+                        SFButton(text: 'how_to_play', onPressed: () {} , width: double.infinity, height: 50,),
+                        const SFButton(text: 'white_paper', width: double.infinity, height: 50,),
+                        const SFButton(text: 'lite_paper', width: double.infinity, height: 50,),
+                        const SFButton(text: 'link_tree', width: double.infinity, height: 50,),
                       ],
                     ),
                   ),

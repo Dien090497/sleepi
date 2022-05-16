@@ -75,7 +75,7 @@ class MintScreen extends StatelessWidget {
                     ),
                     const SizedBox(height: 20,),
                     SFButton(
-                      text: 'Mint',
+                      text: 'mint',
                       onPressed: () {},
                       color: AppColors.grey.withOpacity(0.5),
                       width: size.width,
