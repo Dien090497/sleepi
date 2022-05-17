@@ -5,7 +5,7 @@ on:
     branches: [ develop, main ]
 
 jobs:
-  build:
+  flutter-analyze:
     runs-on: ubuntu-latest
     outputs:
       diawi_url: ${{ steps.diawi_url.outputs.result }}
