@@ -5,15 +5,19 @@ import 'package:slee_fi/common/widgets/sf_text.dart';
 import 'package:slee_fi/di/translations/keys.dart';
 
 class MyBedShortWidget extends StatelessWidget {
-  const MyBedShortWidget({required this.index, Key? key}) : super(key: key);
+  const MyBedShortWidget({required this.index, Key? key, this.checkOwner = false, this.width, this.height}) : super(key: key);
 
   final int index;
+  final bool checkOwner;
+  final double? width;
+  final double? height;
 
   @override
   Widget build(BuildContext context) {
+    final Size size = MediaQuery.of(context).size;
     return Container(
-      width: 180,
-      height: 180,
+      width: width ?? 180,
+      height: height ?? 180,
       decoration: const BoxDecoration(
         color: AppColors.greyBottomNavBar,
       ),
@@ -31,6 +35,17 @@ class MyBedShortWidget extends StatelessWidget {
               style: TextStyles.black10Bold,
             ),
           ),
+          checkOwner ? Container(
+            width: size.width,
+            height: 50,
+            margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+            alignment: Alignment.center,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(10),
+              border: Border.all(color: AppColors.black),
+            ),
+            padding: const EdgeInsets.symmetric(vertical: 3),
+          ) : const SizedBox(),
           const Spacer(),
           Container(
             decoration: BoxDecoration(
@@ -43,7 +58,7 @@ class MyBedShortWidget extends StatelessWidget {
               style: TextStyles.black10Bold,
             ),
           ),
-          Padding(
+          checkOwner ? const SizedBox() : Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 4),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -53,7 +68,7 @@ class MyBedShortWidget extends StatelessWidget {
               ],
             ),
           ),
-          Container(
+          checkOwner ? const SizedBox() : Container(
             margin: const EdgeInsets.symmetric(horizontal: 32),
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(10),

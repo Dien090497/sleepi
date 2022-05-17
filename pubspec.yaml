@@ -35,6 +35,7 @@ dependencies:
   flutter_date_pickers: ^0.3.0
   flutter_screenutil: ^5.5.2
   pin_code_fields: ^7.4.0
+  loop_page_view: ^1.1.1
 
 dependency_overrides:
   analyzer: ^4.1.0
