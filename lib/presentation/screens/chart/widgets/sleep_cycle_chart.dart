@@ -128,6 +128,6 @@ class SleepCycleChart extends StatelessWidget {
         break;
     }
 
-    return Padding(child: text, padding: const EdgeInsets.only(top: 8.0));
+    return Padding(padding: const EdgeInsets.only(top: 8.0), child: text);
   }
 }

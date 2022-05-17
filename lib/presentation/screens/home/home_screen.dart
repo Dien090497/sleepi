@@ -41,7 +41,8 @@ class _HomeScreenState extends State<HomeScreen> {
                         children: [
                           const TopBarCommon(),
                           Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 100),
+                            padding:
+                                const EdgeInsets.symmetric(horizontal: 100),
                             child: SFButton(
                               text: 'Main Bed',
                               onPressed: () {},
@@ -77,7 +78,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                           horizontal: 10),
                                       child: Row(
                                         mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
+                                            MainAxisAlignment.spaceBetween,
                                         children: [
                                           const Icon(Icons.arrow_back_ios),
                                           Container(
@@ -97,14 +98,14 @@ class _HomeScreenState extends State<HomeScreen> {
                                           horizontal: 10),
                                       child: Row(
                                         mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
+                                            MainAxisAlignment.spaceBetween,
                                         children: [
                                           Container(
                                             padding: const EdgeInsets.symmetric(
                                                 horizontal: 12, vertical: 2),
                                             decoration: BoxDecoration(
                                                 borderRadius:
-                                                BorderRadius.circular(20),
+                                                    BorderRadius.circular(20),
                                                 border: Border.all(
                                                     color: AppColors.black)),
                                             child: SFText(
@@ -117,7 +118,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                                 horizontal: 12, vertical: 2),
                                             decoration: BoxDecoration(
                                                 borderRadius:
-                                                BorderRadius.circular(20),
+                                                    BorderRadius.circular(20),
                                                 border: Border.all(
                                                     color: AppColors.black)),
                                             child: SFText(
@@ -130,7 +131,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                                 horizontal: 12, vertical: 2),
                                             decoration: BoxDecoration(
                                                 borderRadius:
-                                                BorderRadius.circular(20),
+                                                    BorderRadius.circular(20),
                                                 border: Border.all(
                                                     color: AppColors.black)),
                                             child: SFText(
@@ -265,7 +266,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                     color: Colors.cyanAccent,
                                     shape: BoxShape.circle),
                                 child:
-                                const Icon(Icons.question_answer, size: 15),
+                                    const Icon(Icons.question_answer, size: 15),
                               ),
                             ],
                           ),
@@ -275,79 +276,90 @@ class _HomeScreenState extends State<HomeScreen> {
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
                                 Container(
-                                  padding: const EdgeInsets.symmetric(horizontal: 10),
-                                  child: SFText(keyText: '000 gst',),
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 10),
                                   decoration: BoxDecoration(
-                                      border: Border.all(color: AppColors.black),
-                                      borderRadius: BorderRadius.circular(20)
-                                  ),
-                                  width: size.width/2,
+                                      border:
+                                          Border.all(color: AppColors.black),
+                                      borderRadius: BorderRadius.circular(20)),
+                                  width: size.width / 2,
+                                  child: SFText(keyText: '000 gst'),
                                 ),
-                                const SizedBox(width: 50,),
+                                const SizedBox(
+                                  width: 50,
+                                ),
                                 GestureDetector(
                                   child: const Icon(Icons.feedback),
                                   onTap: () {
-                                    Navigator.pushNamed(
-                                        context, R.feedback);
+                                    Navigator.pushNamed(context, R.feedback);
                                   },
                                 )
                               ],
                             ),
                           ),
                           Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: 20, vertical: 10),
                             child: Container(
-                              padding: const EdgeInsets.symmetric(horizontal: 10),
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 10),
                               width: size.width,
                               height: 80,
                               decoration: BoxDecoration(
                                   color: AppColors.greyBottomNavBar,
-                                  border: Border.all(color: AppColors.black)
-                              ),
+                                  border: Border.all(color: AppColors.black)),
                               child: Row(
                                 children: [
                                   Padding(
-                                    padding: const EdgeInsets.symmetric(horizontal: 10),
+                                    padding: const EdgeInsets.symmetric(
+                                        horizontal: 10),
                                     child: Container(
                                       width: 50,
                                       height: 50,
                                       decoration: BoxDecoration(
-                                          border: Border.all(color: AppColors.black),
-                                          borderRadius: BorderRadius.circular(15)
-                                      ),
+                                          border: Border.all(
+                                              color: AppColors.black),
+                                          borderRadius:
+                                              BorderRadius.circular(15)),
                                     ),
                                   ),
                                   Padding(
-                                    padding: const EdgeInsets.symmetric(horizontal: 10),
+                                    padding: const EdgeInsets.symmetric(
+                                        horizontal: 10),
                                     child: Container(
                                       width: 50,
                                       height: 50,
                                       decoration: BoxDecoration(
-                                          border: Border.all(color: AppColors.black),
-                                          borderRadius: BorderRadius.circular(15)
-                                      ),
+                                          border: Border.all(
+                                              color: AppColors.black),
+                                          borderRadius:
+                                              BorderRadius.circular(15)),
                                     ),
                                   ),
                                   Padding(
-                                    padding: const EdgeInsets.symmetric(horizontal: 10),
+                                    padding: const EdgeInsets.symmetric(
+                                        horizontal: 10),
                                     child: Container(
                                       width: 50,
                                       height: 50,
                                       decoration: BoxDecoration(
-                                          border: Border.all(color: AppColors.black),
-                                          borderRadius: BorderRadius.circular(15)
-                                      ),
+                                          border: Border.all(
+                                              color: AppColors.black),
+                                          borderRadius:
+                                              BorderRadius.circular(15)),
                                     ),
                                   ),
                                   Padding(
-                                    padding: const EdgeInsets.symmetric(horizontal: 10),
+                                    padding: const EdgeInsets.symmetric(
+                                        horizontal: 10),
                                     child: Container(
                                       width: 50,
                                       height: 50,
                                       decoration: BoxDecoration(
-                                          border: Border.all(color: AppColors.black),
-                                          borderRadius: BorderRadius.circular(15)
-                                      ),
+                                          border: Border.all(
+                                              color: AppColors.black),
+                                          borderRadius:
+                                              BorderRadius.circular(15)),
                                     ),
                                   ),
                                 ],

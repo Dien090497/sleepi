@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_translate/flutter_translate.dart';
 import 'package:slee_fi/common/routes/app_routes.dart';
 import 'package:slee_fi/common/style/theme.dart';
@@ -19,19 +20,22 @@ class MyApp extends StatelessWidget {
       ],
       child: LocalizationProvider(
         state: LocalizationProvider.of(context).state,
-        child: MaterialApp(
-          title: 'SleeFi',
-          localizationsDelegates: [
-            GlobalMaterialLocalizations.delegate,
-            GlobalWidgetsLocalizations.delegate,
-            localizationDelegate,
-          ],
-          supportedLocales: localizationDelegate.supportedLocales,
-          locale: localizationDelegate.currentLocale,
-          theme: lightTheme,
-          routes: AppRoutes.routes,
-          initialRoute: R.loginSignUp,
-        ),
+        child: ScreenUtilInit(builder: (child) {
+          return MaterialApp(
+            title: 'SleeFi',
+            localizationsDelegates: [
+              GlobalMaterialLocalizations.delegate,
+              GlobalWidgetsLocalizations.delegate,
+              localizationDelegate,
+            ],
+            home: child,
+            supportedLocales: localizationDelegate.supportedLocales,
+            locale: localizationDelegate.currentLocale,
+            theme: lightTheme,
+            routes: AppRoutes.routes,
+            initialRoute: R.loginSignUp,
+          );
+        }),
       ),
     );
   }

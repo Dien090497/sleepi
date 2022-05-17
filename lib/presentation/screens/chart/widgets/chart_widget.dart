@@ -84,7 +84,7 @@ class _ChartWidgetState extends State<ChartWidget> {
         break;
     }
 
-    return Padding(child: text, padding: const EdgeInsets.only(top: 8.0));
+    return Padding(padding: const EdgeInsets.only(top: 8.0), child: text);
   }
 
   Widget leftTitleWidgets(double value, TitleMeta meta) {

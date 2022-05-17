@@ -81,40 +81,25 @@ class Keys {
 
   static const String attributes = 'attributes';
 
-  static const String popUpRepairTitle = 'pop_up_repair.title';
+  static const String repair = 'repair';
 
-  static const String popUpRepairButtonConfirm = 'pop_up_repair.button_confirm';
+  static const String levelUp = 'level_up';
 
-  static const String popUpRepairButtonCancel = 'pop_up_repair.button_cancel';
+  static const String confirmTransfer = 'confirm_transfer';
 
-  static const String popUpLevelUpTitle = 'pop_up_level_up.title';
+  static const String from = 'from';
 
-  static const String popUpLevelUpButtonConfirm =
-      'pop_up_level_up.button_confirm';
+  static const String to = 'to';
 
-  static const String popUpLevelUpButtonCancel =
-      'pop_up_level_up.button_cancel';
+  static const String inventory = 'inventory';
 
-  static const String popUpTransferTitle = 'pop_up_transfer.title';
+  static const String wallet = 'wallet';
 
-  static const String popUpTransferFrom = 'pop_up_transfer.from';
+  static const String fee = 'fee';
 
-  static const String popUpTransferTo = 'pop_up_transfer.to';
+  static const String youWinTransfer = 'you_win_transfer';
 
-  static const String popUpTransferInventory = 'pop_up_transfer.inventory';
-
-  static const String popUpTransferWallet = 'pop_up_transfer.wallet';
-
-  static const String popUpTransferFee = 'pop_up_transfer.fee';
-
-  static const String popUpTransferTitleTransfer =
-      'pop_up_transfer.title_transfer';
-
-  static const String popUpTransferButtonConfirm =
-      'pop_up_transfer.button_confirm';
-
-  static const String popUpTransferButtonCancel =
-      'pop_up_transfer.button_cancel';
+  static const String cancel = 'cancel';
 
   static const String efficiency = 'Efficiency';
 
@@ -170,4 +155,10 @@ class Keys {
 
   static const String displaysTheNftDischargedFromTheGacha =
       'displays_the_nft_discharged_from_the_gacha';
+
+  static const String mint = 'mint';
+
+  static const String enterYourPasscode = 'enter_your_passcode';
+
+  static const String forgotPasscode = 'forgot_passcode';
 }

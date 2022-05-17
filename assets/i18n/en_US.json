@@ -31,27 +31,16 @@
   "uncommon_beds_chance": "Uncommon Beds Chance",
   "rare_beds_chance": "Rare Beds Chance",
   "get": "Get",
-  "pop_up_repair": {
-    "title": "REPAIR",
-    "button_confirm": "Confirm",
-    "button_cancel": "Cancel"
-  },
-  "pop_up_level_up": {
-    "title": "LEVEL UP",
-    "button_confirm": "Confirm",
-    "button_cancel": "Cancel"
-  },
-  "pop_up_transfer": {
-    "title": "CONFIRM TRANSFER",
-    "from": "From",
-    "to": "To",
-    "inventory": "Inventory",
-    "wallet": "Wallet",
-    "fee": "Fee",
-    "title_transfer": "you win transfer",
-    "button_confirm": "Confirm",
-    "button_cancel": "Cancel"
-  },
+  "repair": "Repair",
+  "level_up": "Level Up",
+  "confirm_transfer": "CONFIRM TRANSFER",
+  "from": "From",
+  "to": "To",
+  "inventory": "Inventory",
+  "wallet": "Wallet",
+  "fee": "Fee",
+  "you_win_transfer": "you win transfer",
+  "cancel": "Cancel",
   "bed": "Bed",
   "common_bed": "Common Bed",
   "uncommon_bed": "Uncommon Bed",
@@ -85,5 +74,8 @@
   "back": "Back",
   "show_all_result": "Show all result",
   "special_gacha": "Special Gacha",
-  "displays_the_nft_discharged_from_the_gacha": "Displays the NFTs discharged from the gacha."
+  "displays_the_nft_discharged_from_the_gacha": "Displays the NFTs discharged from the gacha.",
+  "mint": "Mint",
+  "enter_your_passcode": "Enter your passcode",
+  "forgot_passcode": "Forgot passcode"
 }
