@@ -59,7 +59,7 @@ class MintScreen extends StatelessWidget {
                       height: size.height * 0.22,
                       width: size.width,
                       alignment: Alignment.center,
-                      decoration: BoxDecoration(
+                      decoration: const BoxDecoration(
                         color: AppColors.white,
                       ),
                     ),
