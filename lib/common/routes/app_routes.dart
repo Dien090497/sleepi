@@ -8,6 +8,9 @@ import 'package:slee_fi/presentation/screens/info_nft/layout/mint_screen.dart';
 import 'package:slee_fi/presentation/screens/info_nft/layout/recycle_screen.dart';
 import 'package:slee_fi/presentation/screens/info_nft/info_nft_screen.dart';
 import 'package:slee_fi/presentation/screens/login_signup/login_signup_screen.dart';
+import 'package:slee_fi/presentation/screens/wire_staking/widgets/wire_taking.dart';
+import 'package:slee_fi/presentation/screens/wire_staking/wire_staking_screen.dart';
+import 'package:slee_fi/presentation/screens/wire_wallet/wire_wallet_screen.dart';
 
 class R {
   static const String _ = '/';
@@ -21,7 +24,9 @@ class R {
   static const String gachaResultOverview = '${_}gacha_result_overview';
   static const String nftInfo = '${_}nft_info';
   static const String mint = '${_}mint';
-
+  static const String wireTaking = '${_}wire_taking';
+  static const String wireStaking = '${_}wire_Staking';
+  static const String wireWallet = '${_}wire_Wallet';
 }
 
 class AppRoutes {
@@ -36,5 +41,8 @@ class AppRoutes {
     R.gachaResultOverview: (_) => const GachaResultOverview(),
     R.nftInfo: (_) => const InfoNftScreen(),
     R.mint: (_) => const MintScreen(),
+    R.wireWallet: (_) => const WireWalletScreen(),
+    R.wireStaking: (_) => const WireStakingScreen(),
+    R.wireTaking: (_) => const WireTakingScreen(),
   };
 }

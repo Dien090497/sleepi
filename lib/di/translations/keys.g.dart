@@ -37,13 +37,13 @@ class Keys {
 
   static const String productLineUp = 'product_line_up';
 
-  static const String introduceHowToPlay = 'how_to_play';
+  static const String howToPlay = 'how_to_play';
 
-  static const String introduceWhitePaper = 'white_paper';
+  static const String whitePaper = 'white_paper';
 
-  static const String introduceLitePaper = 'lite_paper';
+  static const String litePaper = 'lite_paper';
 
-  static const String introduceLinkTree = 'link_tree';
+  static const String linkTree = 'link_tree';
 
   static const String pleaseEnter = 'please_enter';
 
@@ -67,6 +67,30 @@ class Keys {
 
   static const String get = 'get';
 
+  static const String titleRepair = 'title_repair';
+
+  static const String buttonConfirm = 'button_confirm';
+
+  static const String buttonCancel = 'button_cancel';
+
+  static const String titleLevelUp = 'title_level_up';
+
+  static const String titleConfirmTransfer = 'title_confirm_transfer';
+
+  static const String from = 'from';
+
+  static const String to = 'to';
+
+  static const String inventory = 'inventory';
+
+  static const String wallet = 'wallet';
+
+  static const String spending = 'spending';
+
+  static const String fee = 'fee';
+
+  static const String titleTransfer = 'title_transfer';
+
   static const String bed = 'bed';
 
   static const String commonBed = 'common_bed';
@@ -80,41 +104,6 @@ class Keys {
   static const String legendaryBed = 'legendary_bed';
 
   static const String attributes = 'attributes';
-
-  static const String popUpRepairTitle = 'title';
-
-  static const String popUpRepairButtonConfirm = 'button_confirm';
-
-  static const String popUpRepairButtonCancel = 'button_cancel';
-
-  static const String popUpLevelUpTitle = 'title_level_up';
-
-  static const String popUpLevelUpButtonConfirm =
-      'button_confirm';
-
-  static const String popUpLevelUpButtonCancel =
-      'button_cancel';
-
-  static const String popUpTransferTitle = 'title';
-
-  static const String popUpTransferFrom = 'from';
-
-  static const String popUpTransferTo = 'to';
-
-  static const String popUpTransferInventory = 'inventory';
-
-  static const String popUpTransferWallet = 'wallet';
-
-  static const String popUpTransferFee = 'fee';
-
-  static const String popUpTransferTitleTransfer =
-      'title_transfer';
-
-  static const String popUpTransferButtonConfirm =
-      'button_confirm';
-
-  static const String popUpTransferButtonCancel =
-      'button_cancel';
 
   static const String efficiency = 'Efficiency';
 
@@ -170,4 +159,14 @@ class Keys {
 
   static const String displaysTheNftDischargedFromTheGacha =
       'displays_the_nft_discharged_from_the_gacha';
+
+  static const String mint = 'mint';
+
+  static const String introduceHowToPlay = 'introduce.how_to_play';
+
+  static const String introduceWhitePaper = 'introduce.white_paper';
+
+  static const String introduceLitePaper = 'introduce.lite_paper';
+
+  static const String introduceLinkTree = 'introduce.link_tree';
 }
