@@ -17,7 +17,7 @@ class PopUpTransfer extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             const SizedBox(),
-            SFText(keyText: 'pop_up_transfer.title'),
+            SFText(keyText: 'title_confirm_transfer'),
             Container(
               padding: const EdgeInsets.all(5),
               decoration: const BoxDecoration(
@@ -40,17 +40,17 @@ class PopUpTransfer extends StatelessWidget {
             children: [
               Row(
                 children: [
-                  SFText(keyText: 'pop_up_transfer.from'),
+                  SFText(keyText: 'from'),
                   const Spacer(),
-                  SFText(keyText: 'pop_up_transfer.to'),
+                  SFText(keyText: 'to'),
                 ],
               ),
               const SizedBox(height: 20,),
               Row(
                 children: [
-                  SFText(keyText: 'pop_up_transfer.inventory'),
+                  SFText(keyText: 'inventory'),
                   const Spacer(),
-                  SFText(keyText: 'pop_up_transfer.wallet'),
+                  SFText(keyText: 'wallet'),
                 ],
               ),
             ],
@@ -59,7 +59,7 @@ class PopUpTransfer extends StatelessWidget {
         const SizedBox(height: 10,),
         Row(
           children: [
-            SFText(keyText: 'pop_up_transfer.fee'),
+            SFText(keyText: 'fee'),
             const Spacer(),
             SFText(keyText: '3 GST'),
           ],
@@ -67,7 +67,7 @@ class PopUpTransfer extends StatelessWidget {
         const SizedBox(height: 15,),
         Row(
           children: [
-            SFText(keyText: 'pop_up_transfer.title_transfer'),
+            SFText(keyText: 'title_transfer'),
             const Spacer(),
             SFText(keyText: '1 NFT'),
           ],
@@ -77,8 +77,8 @@ class PopUpTransfer extends StatelessWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              SFButton(text: 'pop_up_transfer.button_cancel', width: size.width / 3,),
-              SFButton(text: 'pop_up_transfer.button_confirm', width: size.width / 3,)
+              SFButton(text: 'button_cancel', width: size.width / 3,),
+              SFButton(text: 'button_confirm', width: size.width / 3,)
             ],
           ),
         ),

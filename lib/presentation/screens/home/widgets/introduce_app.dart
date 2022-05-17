@@ -5,8 +5,9 @@ import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/widgets/sf_buttons.dart';
 
 class IntroduceApp extends StatelessWidget {
-  const IntroduceApp({Key? key}) : super(key: key);
+  const IntroduceApp({Key? key, required this.backOnPress}) : super(key: key);
 
+  final Function(bool) backOnPress;
   @override
   Widget build(BuildContext context) {
     return BackdropFilter(
@@ -21,14 +22,17 @@ class IntroduceApp extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Container(
-                padding: const EdgeInsets.all(10),
-                decoration: const BoxDecoration(
-                    color: Colors.cyanAccent,
-                    shape: BoxShape.circle
-                ),
-                child: const Icon(
-                  Icons.arrow_back_ios,
+              GestureDetector(
+                onTap: () => backOnPress(false),
+                child: Container(
+                  padding: const EdgeInsets.all(10),
+                  decoration: const BoxDecoration(
+                      color: Colors.cyanAccent,
+                      shape: BoxShape.circle
+                  ),
+                  child: const Icon(
+                    Icons.arrow_back_ios,
+                  ),
                 ),
               ),
               Expanded(
@@ -38,10 +42,10 @@ class IntroduceApp extends StatelessWidget {
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: [
-                        SFButton(text: 'introduce.how_to_play', onPressed: () {} , width: double.infinity, height: 50,),
-                        const SFButton(text: 'introduce.white_paper', width: double.infinity, height: 50,),
-                        const SFButton(text: 'introduce.lite_paper', width: double.infinity, height: 50,),
-                        const SFButton(text: 'introduce.link_tree', width: double.infinity, height: 50,),
+                        SFButton(text: 'how_to_play', onPressed: () {} , width: double.infinity, height: 50,),
+                        const SFButton(text: 'white_paper', width: double.infinity, height: 50,),
+                        const SFButton(text: 'lite_paper', width: double.infinity, height: 50,),
+                        const SFButton(text: 'link_tree', width: double.infinity, height: 50,),
                       ],
                     ),
                   ),

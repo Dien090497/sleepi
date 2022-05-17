@@ -17,7 +17,7 @@ class PopUpRepair extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             const SizedBox(),
-            SFText(keyText: 'pop_up_repair.title'),
+            SFText(keyText: 'title_repair'),
             Container(
               padding: const EdgeInsets.all(5),
               decoration: const BoxDecoration(
@@ -49,8 +49,8 @@ class PopUpRepair extends StatelessWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              SFButton(text: 'pop_up_repair.button_cancel', width: size.width / 3,),
-              SFButton(text: 'pop_up_repair.button_confirm', width: size.width / 3,)
+              SFButton(text: 'button_cancel', width: size.width / 3,),
+              SFButton(text: 'button_confirm', width: size.width / 3,)
             ],
           ),
         ),

@@ -21,12 +21,17 @@ class RecycleScreen extends StatelessWidget {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Container(
-                      padding: const EdgeInsets.all(10),
-                      decoration: const BoxDecoration(
-                          color: Colors.cyanAccent, shape: BoxShape.circle),
-                      child: const Icon(
-                        Icons.arrow_back_ios,
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.pop(context);
+                      },
+                      child: Container(
+                        padding: const EdgeInsets.all(10),
+                        decoration: const BoxDecoration(
+                            color: Colors.cyanAccent, shape: BoxShape.circle),
+                        child: const Icon(
+                          Icons.arrow_back_ios,
+                        ),
                       ),
                     ),
                     SFButton( text: 'BED RECYCLE', onPressed: () {},),
