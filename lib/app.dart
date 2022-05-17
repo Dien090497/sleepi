@@ -20,7 +20,7 @@ class MyApp extends StatelessWidget {
       ],
       child: LocalizationProvider(
         state: LocalizationProvider.of(context).state,
-        child: ScreenUtilInit(builder: (child) {
+        child: ScreenUtilInit(builder: (context, child) {
           return MaterialApp(
             title: 'SleeFi',
             localizationsDelegates: [
