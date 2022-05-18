@@ -36,8 +36,8 @@ class PasscodeNumPad extends StatelessWidget {
                       passcodeController.text = passcodeController.text
                           .substring(0, passcodeController.text.length - 1);
                     } else {
-                      if (passcodeController.text.length >
-                          Const.passcodeLength - 1) {
+                      if (passcodeController.text.length >=
+                          Const.passcodeLength) {
                         return;
                       }
                       final passcode = passcodeController.text + num;

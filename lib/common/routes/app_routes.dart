@@ -1,12 +1,14 @@
 import 'package:slee_fi/presentation/screens/bottom_navigation/bottom_navigation_screen.dart';
+import 'package:slee_fi/presentation/screens/create_wallet/create_wallet_screen.dart';
 import 'package:slee_fi/presentation/screens/enter_activation_cde/enter_activation_code_screen.dart';
 import 'package:slee_fi/presentation/screens/gacha/gacha_chane_500_screen.dart';
 import 'package:slee_fi/presentation/screens/gacha/gacha_result_bed_screen.dart';
 import 'package:slee_fi/presentation/screens/gacha/gacha_result_overview.dart';
 import 'package:slee_fi/presentation/screens/home/layout/feed_back_screen.dart';
+import 'package:slee_fi/presentation/screens/import_wallet/import_wallet_screen.dart';
+import 'package:slee_fi/presentation/screens/info_nft/info_nft_screen.dart';
 import 'package:slee_fi/presentation/screens/info_nft/layout/mint_screen.dart';
 import 'package:slee_fi/presentation/screens/info_nft/layout/recycle_screen.dart';
-import 'package:slee_fi/presentation/screens/info_nft/info_nft_screen.dart';
 import 'package:slee_fi/presentation/screens/login_signup/login_signup_screen.dart';
 import 'package:slee_fi/presentation/screens/passcode/passcode_screen.dart';
 
@@ -23,7 +25,8 @@ class R {
   static const String passcode = '${_}passcode';
   static const String nftInfo = '${_}nft_info';
   static const String mint = '${_}mint';
-
+  static const String createWallet = '${_}create_wallet';
+  static const String importWallet = '${_}import_wallet';
 }
 
 class AppRoutes {
@@ -39,5 +42,7 @@ class AppRoutes {
     R.nftInfo: (_) => const InfoNftScreen(),
     R.mint: (_) => const MintScreen(),
     R.passcode: (_) => const PasscodeScreen(),
+    R.createWallet: (_) => const CreateWalletScreen(),
+    R.importWallet: (_) => const ImportWalletScreen(),
   };
 }

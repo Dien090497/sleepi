@@ -181,4 +181,22 @@ class Keys {
   static const String enterYourPasscode = 'enter_your_passcode';
 
   static const String forgotPasscode = 'forgot_passcode';
+
+  static const String createANewWallet = 'create_a_new_wallet';
+
+  static const String createWallet = 'create_wallet';
+
+  static const String importWallet = 'import_wallet';
+
+  static const String seedPhrase = 'seed_phrase';
+
+  static const String enterTheSeedPhrase = 'enter_the_seed_phrase';
+
+  static const String importAWalletUsingSeedPhrase =
+      'import_a_wallet_using_seed_phrase';
+
+  static const String emailVerificationCode = 'email_verification_code';
+
+  static const String youHaveAlreadyCreatedAWalletAddress =
+      'you_have_already_created_a_wallet_address';
 }
