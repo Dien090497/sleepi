@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
 
 import '../../../../common/widgets/sf_text.dart';
+import '../../../../di/translations/keys.dart';
 
 class TabWalletDetail extends StatelessWidget {
   const TabWalletDetail({Key? key}) : super(key: key);
@@ -17,7 +18,7 @@ class TabWalletDetail extends StatelessWidget {
           padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 4.0),
           decoration: const BoxDecoration(
               color: AppColors.greyBottomNavBar),
-          child: SFText(keyText: "AVAX C-Chain", style: const TextStyle(fontSize: 32, color: AppColors.black, fontWeight: FontWeight.bold)),
+          child: SFText(keyText: Keys.avaxCChain, style: const TextStyle(fontSize: 32, color: AppColors.black, fontWeight: FontWeight.bold)),
         ),
         Container(
           padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 4.0),
@@ -51,7 +52,7 @@ class TabWalletDetail extends StatelessWidget {
                   ),
                 ),
                 const SizedBox(height: 8.0,),
-                SFText(keyText: "Receive", style: const TextStyle(color: AppColors.black, fontSize: 13.0),)
+                SFText(keyText: Keys.receive, style: const TextStyle(color: AppColors.black, fontSize: 13.0),)
               ],
             ),
             Column(
@@ -79,9 +80,9 @@ class TabWalletDetail extends StatelessWidget {
                 const SizedBox(height: 8.0,),
                 Row(
                   children: [
-                    SFText(keyText: "To Spending", style: const TextStyle(color: AppColors.black, fontSize: 13.0),),
+                    SFText(keyText: Keys.toSpending, style: const TextStyle(color: AppColors.black, fontSize: 13.0),),
                     const SizedBox(width: 12.0,),
-                    SFText(keyText: "To External", style: const TextStyle(color: AppColors.black, fontSize: 13.0),),
+                    SFText(keyText: Keys.toExternal, style: const TextStyle(color: AppColors.black, fontSize: 13.0),),
                   ],
                 )
               ],
@@ -99,7 +100,7 @@ class TabWalletDetail extends StatelessWidget {
                   ),
                 ),
                 const SizedBox(height: 8.0,),
-                SFText(keyText: "Trade", style: const TextStyle(color: AppColors.black, fontSize: 13.0),)
+                SFText(keyText: Keys.trade, style: const TextStyle(color: AppColors.black, fontSize: 13.0),)
               ],
             ),
           ],
@@ -112,7 +113,7 @@ class TabWalletDetail extends StatelessWidget {
               children: [
                 Padding(
                   padding: const EdgeInsets.only(left: 8.0),
-                  child: SFText(keyText: "Wallet Account", style: const TextStyle(fontSize: 18,fontWeight: FontWeight.bold),),
+                  child: SFText(keyText: Keys.walletAccount, style: const TextStyle(fontSize: 18,fontWeight: FontWeight.bold),),
                 ),
                 ElevatedButton(
                   onPressed: () {},
@@ -131,7 +132,7 @@ class TabWalletDetail extends StatelessWidget {
                 color: Colors.greenAccent,
                 size: 30.0,
               ),
-              label: SFText(keyText: "Buy"),
+              label: SFText(keyText: Keys.buy),
               onPressed: () { },
               style: ElevatedButton.styleFrom(
                 primary: AppColors.white,

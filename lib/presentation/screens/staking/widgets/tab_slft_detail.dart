@@ -3,6 +3,7 @@ import 'package:slee_fi/common/widgets/sf_text.dart';
 
 import '../../../../common/routes/app_routes.dart';
 import '../../../../common/style/app_colors.dart';
+import '../../../../di/translations/keys.dart';
 
 class TabSLFTDetail extends StatelessWidget {
   const TabSLFTDetail({Key? key}) : super(key: key);
@@ -18,7 +19,7 @@ class TabSLFTDetail extends StatelessWidget {
             child: Column(
               children: [
                 const SizedBox(height: 18),
-                SFText(keyText: "TVL in SleeFi", style: const TextStyle(fontSize: 20, fontWeight: FontWeight.w700, color: AppColors.black),),
+                SFText(keyText: Keys.tvlInSleefi, style: const TextStyle(fontSize: 20, fontWeight: FontWeight.w700, color: AppColors.black),),
                 const SizedBox(height: 12.0,),
                 SFText(keyText: "XXXXXXX  SLFT", style: const TextStyle(fontSize: 20, fontWeight: FontWeight.w700, color: AppColors.black),),
                 const SizedBox(height: 12.0,),
@@ -37,19 +38,37 @@ class TabSLFTDetail extends StatelessWidget {
                   alignment: Alignment.topRight,
                   child: GestureDetector(
                     child: const Icon(Icons.settings, size: 32,),
-                    onTap: () => ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-                      content: Text("Staking not only allows you to increase your tokens, but also to gain in-game benefits.Staking rewards are given based on the amount of your deposit. Also, rewards are only granted during staking."),
+                    onTap: () => ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                      content: SFText(keyText: Keys.displaysMessageFromStakingSlftDetail,style: const TextStyle(color: AppColors.white),),
                     )),),
                 ),
-                SFText(keyText: "Earning  Token　＋X％", style: const TextStyle(fontSize: 20, fontWeight: FontWeight.w700, color: AppColors.black),),
-                SFText(keyText: "Minting Discount   ＋X％", style: const TextStyle(fontSize: 20, fontWeight: FontWeight.w700, color: AppColors.black),),
-                SFText(keyText: "Level up Discount　＋X％", style: const TextStyle(fontSize: 20, fontWeight: FontWeight.w700, color: AppColors.black),),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    SFText(keyText: Keys.earningToken, style: const TextStyle(fontSize: 20, fontWeight: FontWeight.w700, color: AppColors.black),),
+                    SFText(keyText: "＋X％", style: const TextStyle(fontSize: 20, fontWeight: FontWeight.w700, color: AppColors.black),),
+                  ],
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    SFText(keyText: Keys.mintingDiscount, style: const TextStyle(fontSize: 20, fontWeight: FontWeight.w700, color: AppColors.black),),
+                    SFText(keyText: "＋X％", style: const TextStyle(fontSize: 20, fontWeight: FontWeight.w700, color: AppColors.black),),
+                  ],
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    SFText(keyText: Keys.levelUpDiscount, style: const TextStyle(fontSize: 20, fontWeight: FontWeight.w700, color: AppColors.black),),
+                    SFText(keyText: "＋X％", style: const TextStyle(fontSize: 20, fontWeight: FontWeight.w700, color: AppColors.black),),
+                  ],
+                ),
               ],
             )
         ),
         const SizedBox(height: 30,),
         GestureDetector(
-          onTap: () => Navigator.pushNamed(context, R.wireTaking),
+          onTap: () => Navigator.pushNamed(context, R.taking),
           child: Container(
               height: 265,
               padding: const EdgeInsets.only(left: 15.0),
@@ -61,12 +80,12 @@ class TabSLFTDetail extends StatelessWidget {
                     alignment: Alignment.topRight,
                     child: GestureDetector(child: const Icon(Icons.settings, size: 32,), onTap: () {},),
                   ),
-                  SFText(keyText: "Stake Tokens（Flexible)", style: const TextStyle(fontSize: 20, fontWeight: FontWeight.w700, color: AppColors.black),),
+                  SFText(keyText: Keys.stakeTokens, style: const TextStyle(fontSize: 20, fontWeight: FontWeight.w700, color: AppColors.black),),
                   const SizedBox(height: 12.0,),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      SFText(keyText: "Your SLFT Earned", style: const TextStyle(fontSize: 20, fontWeight: FontWeight.w700, color: AppColors.black),),
+                      SFText(keyText: Keys.yourSlftEarned, style: const TextStyle(fontSize: 20, fontWeight: FontWeight.w700, color: AppColors.black),),
                       SFText(keyText: "XXXXX    SLFT", style: const TextStyle(fontSize: 20, fontWeight: FontWeight.w700, color: AppColors.black),),
                     ],
                   ),
@@ -74,7 +93,7 @@ class TabSLFTDetail extends StatelessWidget {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      SFText(keyText: "Your Staked Amount", style: const TextStyle(fontSize: 20, fontWeight: FontWeight.w700, color: AppColors.black),),
+                      SFText(keyText: Keys.yourStakedAmount, style: const TextStyle(fontSize: 20, fontWeight: FontWeight.w700, color: AppColors.black),),
                       SFText(keyText: "XXXXX    SLFT", style: const TextStyle(fontSize: 20, fontWeight: FontWeight.w700, color: AppColors.black),),
                     ],
                   ),
@@ -82,7 +101,7 @@ class TabSLFTDetail extends StatelessWidget {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
-                      SFText(keyText: "APR", style: const TextStyle(fontSize: 20, fontWeight: FontWeight.w700, color: AppColors.black),),
+                      SFText(keyText: Keys.apr, style: const TextStyle(fontSize: 20, fontWeight: FontWeight.w700, color: AppColors.black),),
                       SFText(keyText: "XXX%", style: const TextStyle(fontSize: 20, fontWeight: FontWeight.w700, color: AppColors.black),),
                     ],
                   ),
@@ -90,11 +109,11 @@ class TabSLFTDetail extends StatelessWidget {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
-                      SFText(keyText: "Deposit", style: const TextStyle(fontSize: 20, fontWeight: FontWeight.w700, color: AppColors.black),),
-                      SFText(keyText: "Withdraw", style: const TextStyle(fontSize: 20, fontWeight: FontWeight.w700, color: AppColors.black),),
+                      SFText(keyText: Keys.deposit, style: const TextStyle(fontSize: 20, fontWeight: FontWeight.w700, color: AppColors.black),),
+                      SFText(keyText: Keys.withdraw, style: const TextStyle(fontSize: 20, fontWeight: FontWeight.w700, color: AppColors.black),),
                     ],
                   ),
-                  SFText(keyText: "Compound", style: const TextStyle(fontSize: 20, fontWeight: FontWeight.w700, color: AppColors.black),),
+                  SFText(keyText: Keys.compound, style: const TextStyle(fontSize: 20, fontWeight: FontWeight.w700, color: AppColors.black),),
                   ],
               )
           ),
@@ -107,9 +126,9 @@ class TabSLFTDetail extends StatelessWidget {
             child: Column(
               children: [
                 const SizedBox(height: 18),
-                SFText(keyText: "Buy SLFT", style: const TextStyle(fontSize: 20, fontWeight: FontWeight.w700, color: AppColors.black),),
+                SFText(keyText: Keys.buySlft, style: const TextStyle(fontSize: 20, fontWeight: FontWeight.w700, color: AppColors.black),),
                 const SizedBox(height: 12.0,),
-                SFText(keyText: "Show contract", style: const TextStyle(fontSize: 20, fontWeight: FontWeight.w700, color: AppColors.black),),
+                SFText(keyText: Keys.showContract, style: const TextStyle(fontSize: 20, fontWeight: FontWeight.w700, color: AppColors.black),),
               ],
             )
         ),

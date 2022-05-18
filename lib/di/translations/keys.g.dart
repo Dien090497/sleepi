@@ -85,8 +85,6 @@ class Keys {
 
   static const String wallet = 'wallet';
 
-  static const String spending = 'spending';
-
   static const String fee = 'fee';
 
   static const String titleTransfer = 'title_transfer';
@@ -161,6 +159,89 @@ class Keys {
       'displays_the_nft_discharged_from_the_gacha';
 
   static const String mint = 'mint';
+
+  static const String spending = 'spending';
+
+  static const String spendingAccount = 'spending_account';
+
+  static const String displaysMessageFromSpendingDetail =
+      'displays_message_from_spending_detail';
+
+  static const String slft = 'slft';
+
+  static const String slgt = 'slgt';
+
+  static const String avax = 'avax';
+
+  static const String baceOnSolana = 'bace_on_solana';
+
+  static const String stakeToGetBenefits = 'stake_to_get_benefits';
+
+  static const String transfer = 'transfer';
+
+  static const String avaxCChain = 'avax_c-chain';
+
+  static const String receive = 'receive';
+
+  static const String toSpending = 'to_spending';
+
+  static const String toExternal = 'to_external';
+
+  static const String trade = 'trade';
+
+  static const String walletAccount = 'wallet_account';
+
+  static const String buy = 'buy';
+
+  static const String staking = 'staking';
+
+  static const String displaysMessageFromPopUpStaking =
+      'displays_message_from_pop_up_staking';
+
+  static const String yes = 'yes';
+
+  static const String no = 'no';
+
+  static const String yourSlftInSpending = 'your_slft_in_spending';
+
+  static const String stakeWithdraw = 'stake_withdraw';
+
+  static const String max = 'max';
+
+  static const String cancel = 'cancel';
+
+  static const String stakeSlft = 'stake_slft';
+
+  static const String tvlInSleefi = 'tvl_in_sleefi';
+
+  static const String displaysMessageFromStakingSlftDetail =
+      'displays_message_from_staking_slft_detail';
+
+  static const String earningToken = 'earning_token';
+
+  static const String mintingDiscount = 'minting_discount';
+
+  static const String levelUpDiscount = 'level_up_discount';
+
+  static const String stakeTokens = 'stake_tokens';
+
+  static const String yourSlftEarned = 'your_slft_earned';
+
+  static const String yourStakedAmount = 'your_staked_amount';
+
+  static const String apr = 'apr';
+
+  static const String deposit = 'deposit';
+
+  static const String withdraw = 'withdraw';
+
+  static const String compound = 'compound';
+
+  static const String buySlft = 'buy_slft';
+
+  static const String showContract = 'show_contract';
+
+  static const String setting = 'setting';
 
   static const String introduceHowToPlay = 'introduce.how_to_play';
 

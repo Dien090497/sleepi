@@ -1,12 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:slee_fi/presentation/screens/wire_wallet/widgets/tab_bar_icon.dart';
-import 'package:slee_fi/presentation/screens/wire_wallet/widgets/tab_spending_detail.dart';
-import 'package:slee_fi/presentation/screens/wire_wallet/widgets/tab_wallet_detail.dart';
+import 'package:slee_fi/presentation/screens/wallet/widgets/tab_bar_icon.dart';
+import 'package:slee_fi/presentation/screens/wallet/widgets/tab_spending_detail.dart';
+import 'package:slee_fi/presentation/screens/wallet/widgets/tab_wallet_detail.dart';
 import '../../../di/translations/keys.dart';
 
-class WireWalletScreen extends StatelessWidget {
-  const WireWalletScreen({Key? key}) : super(key: key);
+class WalletScreen extends StatelessWidget {
+  const WalletScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

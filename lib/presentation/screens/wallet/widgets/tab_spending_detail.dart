@@ -3,6 +3,7 @@ import 'package:slee_fi/common/routes/app_routes.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
 
 import '../../../../common/widgets/sf_text.dart';
+import '../../../../di/translations/keys.dart';
 
 class TabSpendingDetail extends StatelessWidget {
   const TabSpendingDetail({Key? key}) : super(key: key);
@@ -17,11 +18,11 @@ class TabSpendingDetail extends StatelessWidget {
           children: [
             Padding(
               padding: const EdgeInsets.only(left: 8.0),
-              child: SFText(keyText: "Spending Account", style: const TextStyle(fontSize: 18,fontWeight: FontWeight.bold),),
+              child: SFText(keyText: Keys.spendingAccount, style: const TextStyle(fontSize: 18,fontWeight: FontWeight.bold),),
             ),
             ElevatedButton(
-              onPressed: () => ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-                content: Text("Users will need to have AVAX  in”Spending”to purchase NFTs in the Marketplace.Earned SLFT and SLGT are also stored in Spending."),
+              onPressed: () => ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                content: SFText(keyText: Keys.displaysMessageFromSpendingDetail, style: const TextStyle(color: AppColors.white),),
               )),
               child: const Icon(Icons.question_mark, color: Colors.black, size: 20,),
               style: ElevatedButton.styleFrom(
@@ -59,7 +60,7 @@ class TabSpendingDetail extends StatelessWidget {
                       height: 48,
                       decoration: const BoxDecoration(
                         color: AppColors.greyBottomNavBar),
-                      child: Center(child: SFText(keyText: "SLFT", style: const TextStyle(fontSize: 32, color: AppColors.black, fontWeight: FontWeight.bold))),
+                      child: Center(child: SFText(keyText: Keys.slft, style: const TextStyle(fontSize: 32, color: AppColors.black, fontWeight: FontWeight.bold))),
                     ),
                     SFText(keyText: "0", style: const TextStyle(fontSize: 20, color: AppColors.black),),
                   ],
@@ -76,7 +77,7 @@ class TabSpendingDetail extends StatelessWidget {
                       height: 48,
                       decoration: const BoxDecoration(
                           color: AppColors.greyBottomNavBar),
-                      child: Center(child: SFText(keyText: "SLGT", style: const TextStyle(fontSize: 32, color: AppColors.black, fontWeight: FontWeight.bold))),
+                      child: Center(child: SFText(keyText: Keys.slgt, style: const TextStyle(fontSize: 32, color: AppColors.black, fontWeight: FontWeight.bold))),
                     ),
                     SFText(keyText: "0", style: const TextStyle(fontSize: 20, color: AppColors.black),),
                   ],
@@ -93,7 +94,7 @@ class TabSpendingDetail extends StatelessWidget {
                       height: 48,
                       decoration: const BoxDecoration(
                           color: AppColors.greyBottomNavBar),
-                      child: Center(child: SFText(keyText: "AVAX", style: const TextStyle(fontSize: 32, color: AppColors.black, fontWeight: FontWeight.bold))),
+                      child: Center(child: SFText(keyText: Keys.avax, style: const TextStyle(fontSize: 32, color: AppColors.black, fontWeight: FontWeight.bold))),
                     ),
                     SFText(keyText: "0", style: const TextStyle(fontSize: 20, color: AppColors.black),),
                   ],
@@ -103,7 +104,7 @@ class TabSpendingDetail extends StatelessWidget {
           ),
         ),
         const SizedBox(height: 12.0,),
-        SFText(keyText: "Base on Solana", style: const TextStyle(fontSize: 16, color: AppColors.black, fontWeight: FontWeight.w600),),
+        SFText(keyText: Keys.baceOnSolana, style: const TextStyle(fontSize: 16, color: AppColors.black, fontWeight: FontWeight.w600),),
         const SizedBox(height: 12.0,),
         Expanded(
           child: Container(
@@ -113,10 +114,12 @@ class TabSpendingDetail extends StatelessWidget {
               children: [
                 const SizedBox(height: 30),
                 GestureDetector(
-                    onTap: () => Navigator.pushNamed(context, R.wireStaking),
-                    child: const SizedBox(width: 268,child: Text("Stake to get Benefits", style: TextStyle(fontSize: 32, color: AppColors.black, fontWeight: FontWeight.w600), textAlign: TextAlign.center,))),
+                    onTap: () => Navigator.pushNamed(context, R.staking),
+                    child: SizedBox(
+                        width: 268,
+                        child: SFText(keyText: Keys.stakeToGetBenefits,style: const TextStyle(fontSize: 32, color: AppColors.black, fontWeight: FontWeight.w600), textAlign: TextAlign.center,),)),
                 const SizedBox(height: 30,),
-                Center(child: SFText(keyText: "Transfer", style: const TextStyle(fontSize: 32, color: AppColors.black, fontWeight: FontWeight.w600),)),
+                Center(child: SFText(keyText: Keys.transfer, style: const TextStyle(fontSize: 32, color: AppColors.black, fontWeight: FontWeight.w600),)),
               ],
             )
           ),

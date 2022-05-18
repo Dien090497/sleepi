@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:slee_fi/presentation/screens/wire_staking/widgets/wire_popup_staking.dart';
+import 'package:slee_fi/presentation/screens/staking/widgets/popup_staking.dart';
 
 import '../../../../common/style/app_colors.dart';
 import '../../../../common/widgets/sf_text.dart';
+import '../../../../di/translations/keys.dart';
 
-class WireTakingScreen extends StatelessWidget {
-  const WireTakingScreen({Key? key}) : super(key: key);
+class TakingScreen extends StatelessWidget {
+  const TakingScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -24,25 +25,25 @@ class WireTakingScreen extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     const SizedBox(height: 18),
-                    Padding(padding: const EdgeInsets.only(left: 12.0),child: SFText(keyText: "Stake SLFT", style: const TextStyle(fontSize: 32, fontWeight: FontWeight.w700, color: AppColors.black),)),
+                    Padding(padding: const EdgeInsets.only(left: 12.0),child: SFText(keyText: Keys.stakeSlft, style: const TextStyle(fontSize: 32, fontWeight: FontWeight.w700, color: AppColors.black),)),
                     const SizedBox(height: 16.0,),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        SFText(keyText: "Your SLFT in spending ", style: const TextStyle(fontSize: 20, fontWeight: FontWeight.w700, color: AppColors.black),),
+                        SFText(keyText: Keys.yourSlftInSpending, style: const TextStyle(fontSize: 20, fontWeight: FontWeight.w700, color: AppColors.black),),
                         SFText(keyText: "XXXXXXX  SLFT", style: const TextStyle(fontSize: 20, fontWeight: FontWeight.w700, color: AppColors.black),),
                       ],
                     ),
                     const SizedBox(height: 24.0,),
                    Row(
                      children: [
-                      Expanded(flex: 3, child:  SFText(keyText: "Stake/Withdraw", style: const TextStyle(fontSize: 30, fontWeight: FontWeight.w700, color: AppColors.black),),),
+                      Expanded(flex: 3, child:  SFText(keyText: Keys.stakeWithdraw, style: const TextStyle(fontSize: 30, fontWeight: FontWeight.w700, color: AppColors.black),),),
                        Expanded(
                          flex: 1,
                          child:
                          GestureDetector(
                            onTap: () {},
-                           child: SFText(keyText: "MAX", style: const TextStyle(fontSize: 20, fontWeight: FontWeight.w700, color: AppColors.black),)),),
+                           child: SFText(keyText: Keys.max, style: const TextStyle(fontSize: 20, fontWeight: FontWeight.w700, color: AppColors.black),)),),
                        Expanded(flex: 4, child:  SFText(keyText: "XXX    SLFT", style: const TextStyle(fontSize: 30, fontWeight: FontWeight.w700, color: AppColors.black),),)
                     ],
                    ),
@@ -54,13 +55,13 @@ class WireTakingScreen extends StatelessWidget {
                             onTap: () {
                               showDialog(
                                   context: context,
-                                  builder: (_) => const WirePopUpStaking()
+                                  builder: (_) => const PopUpStaking()
                               );
                             },
-                            child: SFText(keyText: "Confirm", style: const TextStyle(fontSize: 32, fontWeight: FontWeight.w700, color: AppColors.black),)),
+                            child: SFText(keyText: Keys.confirm, style: const TextStyle(fontSize: 32, fontWeight: FontWeight.w700, color: AppColors.black),)),
                         GestureDetector(
                             onTap: () => Navigator.pop(context),
-                            child: SFText(keyText: "Cancel", style: const TextStyle(fontSize: 32, fontWeight: FontWeight.w700, color: AppColors.black),))
+                            child: SFText(keyText: Keys.cancel, style: const TextStyle(fontSize: 32, fontWeight: FontWeight.w700, color: AppColors.black),))
                       ],
                     )
                   ],
