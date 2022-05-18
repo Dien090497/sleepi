@@ -9,6 +9,7 @@ import 'package:slee_fi/presentation/screens/gacha/gacha_screen.dart';
 import 'package:slee_fi/presentation/screens/home/home_screen.dart';
 import 'package:slee_fi/presentation/screens/market_place/market_place_screen.dart';
 import 'package:slee_fi/presentation/screens/product_detail/product_detail_screen.dart';
+import 'package:slee_fi/presentation/screens/setting/setting_screen.dart';
 
 class BottomNavigationScreen extends StatelessWidget {
   const BottomNavigationScreen({Key? key}) : super(key: key);
@@ -115,7 +116,8 @@ class BottomNavigationScreen extends StatelessWidget {
               GachaScreen(),
               ProductDetaiScreen(),
               ChartScreen(),
-              MarketPlaceScreen(),
+              // MarketPlaceScreen(),
+              SettingScreen()
             ],
           ),
         );

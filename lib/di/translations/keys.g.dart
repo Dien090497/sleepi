@@ -243,6 +243,57 @@ class Keys {
 
   static const String setting = 'setting';
 
+  static const String alarm = 'alarm';
+
+  static const String music = 'music';
+
+  static const String vibration = 'vibration';
+
+  static const String snooze = 'snooze';
+
+  static const String volume = 'volume';
+
+  static const String soundEffect = 'sound_effect';
+
+  static const String profile = 'profile';
+
+  static const String birthYear = 'birth_year';
+
+  static const String sex = 'sex';
+
+  static const String email = 'email';
+
+  static const String password = 'password';
+
+  static const String logout = 'logout';
+
+  static const String averageOfBedTime = 'average_of_bed_time';
+
+  static const String averageOfWokeUp = 'average_of_woke_up';
+
+  static const String averageOfSleepDuration = 'average_of_sleep_duration';
+
+  static const String averageOfSleepQuolity = 'average_of_sleep_quolity';
+
+  static const String general = 'general';
+
+  static const String permissions = 'permissions';
+
+  static const String multiChainSwitch = 'multi-chain_switch';
+
+  static const String version = 'version';
+
+  static const String done = 'done';
+
+  static const String female = 'female';
+
+  static const String male = 'male';
+
+  static const String other = 'other';
+
+  static const String activationCodeLanguageLowercase =
+      'activation_code_language_lowercase';
+
   static const String introduceHowToPlay = 'introduce.how_to_play';
 
   static const String introduceWhitePaper = 'introduce.white_paper';

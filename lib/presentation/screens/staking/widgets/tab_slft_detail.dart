@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:slee_fi/common/style/text_styles.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
 
 import '../../../../common/routes/app_routes.dart';
@@ -19,11 +20,11 @@ class TabSLFTDetail extends StatelessWidget {
             child: Column(
               children: [
                 const SizedBox(height: 18),
-                SFText(keyText: Keys.tvlInSleefi, style: const TextStyle(fontSize: 20, fontWeight: FontWeight.w700, color: AppColors.black),),
+                SFText(keyText: Keys.tvlInSleefi, style: TextStyles.bold20black),
                 const SizedBox(height: 12.0,),
-                SFText(keyText: "XXXXXXX  SLFT", style: const TextStyle(fontSize: 20, fontWeight: FontWeight.w700, color: AppColors.black),),
+                SFText(keyText: "XXXXXXX  SLFT", style: TextStyles.bold20black),
                 const SizedBox(height: 12.0,),
-                SFText(keyText: "XXXXXXX  USD", style: const TextStyle(fontSize: 20, fontWeight: FontWeight.w700, color: AppColors.black),),
+                SFText(keyText: "XXXXXXX  USD", style: TextStyles.bold20black),
               ],
             )
         ),
@@ -45,22 +46,22 @@ class TabSLFTDetail extends StatelessWidget {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
-                    SFText(keyText: Keys.earningToken, style: const TextStyle(fontSize: 20, fontWeight: FontWeight.w700, color: AppColors.black),),
-                    SFText(keyText: "＋X％", style: const TextStyle(fontSize: 20, fontWeight: FontWeight.w700, color: AppColors.black),),
+                    SFText(keyText: Keys.earningToken, style:TextStyles.bold20black),
+                    SFText(keyText: "＋X％", style: TextStyles.bold20black),
                   ],
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
-                    SFText(keyText: Keys.mintingDiscount, style: const TextStyle(fontSize: 20, fontWeight: FontWeight.w700, color: AppColors.black),),
-                    SFText(keyText: "＋X％", style: const TextStyle(fontSize: 20, fontWeight: FontWeight.w700, color: AppColors.black),),
+                    SFText(keyText: Keys.mintingDiscount, style: TextStyles.bold20black),
+                    SFText(keyText: "＋X％", style: TextStyles.bold20black),
                   ],
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
-                    SFText(keyText: Keys.levelUpDiscount, style: const TextStyle(fontSize: 20, fontWeight: FontWeight.w700, color: AppColors.black),),
-                    SFText(keyText: "＋X％", style: const TextStyle(fontSize: 20, fontWeight: FontWeight.w700, color: AppColors.black),),
+                    SFText(keyText: Keys.levelUpDiscount, style: TextStyles.bold20black),
+                    SFText(keyText: "＋X％", style: TextStyles.bold20black),
                   ],
                 ),
               ],

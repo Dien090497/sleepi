@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:slee_fi/common/routes/app_routes.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
 
+import '../../../../common/style/text_styles.dart';
 import '../../../../common/widgets/sf_text.dart';
 import '../../../../di/translations/keys.dart';
 
@@ -18,7 +19,7 @@ class TabSpendingDetail extends StatelessWidget {
           children: [
             Padding(
               padding: const EdgeInsets.only(left: 8.0),
-              child: SFText(keyText: Keys.spendingAccount, style: const TextStyle(fontSize: 18,fontWeight: FontWeight.bold),),
+              child: SFText(keyText: Keys.spendingAccount, style: TextStyles.bold20black),
             ),
             ElevatedButton(
               onPressed: () => ScaffoldMessenger.of(context).showSnackBar(SnackBar(
@@ -60,9 +61,9 @@ class TabSpendingDetail extends StatelessWidget {
                       height: 48,
                       decoration: const BoxDecoration(
                         color: AppColors.greyBottomNavBar),
-                      child: Center(child: SFText(keyText: Keys.slft, style: const TextStyle(fontSize: 32, color: AppColors.black, fontWeight: FontWeight.bold))),
+                      child: Center(child: SFText(keyText: Keys.slft, style: TextStyles.bold32black)),
                     ),
-                    SFText(keyText: "0", style: const TextStyle(fontSize: 20, color: AppColors.black),),
+                    SFText(keyText: "0", style: TextStyles.black20),
                   ],
                 ),
               ),
@@ -77,9 +78,9 @@ class TabSpendingDetail extends StatelessWidget {
                       height: 48,
                       decoration: const BoxDecoration(
                           color: AppColors.greyBottomNavBar),
-                      child: Center(child: SFText(keyText: Keys.slgt, style: const TextStyle(fontSize: 32, color: AppColors.black, fontWeight: FontWeight.bold))),
+                      child: Center(child: SFText(keyText: Keys.slgt, style: TextStyles.bold32black)),
                     ),
-                    SFText(keyText: "0", style: const TextStyle(fontSize: 20, color: AppColors.black),),
+                    SFText(keyText: "0", style: TextStyles.black20),
                   ],
                 ),
               ),
@@ -94,9 +95,9 @@ class TabSpendingDetail extends StatelessWidget {
                       height: 48,
                       decoration: const BoxDecoration(
                           color: AppColors.greyBottomNavBar),
-                      child: Center(child: SFText(keyText: Keys.avax, style: const TextStyle(fontSize: 32, color: AppColors.black, fontWeight: FontWeight.bold))),
+                      child: Center(child: SFText(keyText: Keys.avax, style: TextStyles.bold32black)),
                     ),
-                    SFText(keyText: "0", style: const TextStyle(fontSize: 20, color: AppColors.black),),
+                    SFText(keyText: "0", style: TextStyles.black20),
                   ],
                 ),
               ),
@@ -104,7 +105,7 @@ class TabSpendingDetail extends StatelessWidget {
           ),
         ),
         const SizedBox(height: 12.0,),
-        SFText(keyText: Keys.baceOnSolana, style: const TextStyle(fontSize: 16, color: AppColors.black, fontWeight: FontWeight.w600),),
+        SFText(keyText: Keys.baceOnSolana, style: TextStyles.bold15black),
         const SizedBox(height: 12.0,),
         Expanded(
           child: Container(
@@ -117,9 +118,9 @@ class TabSpendingDetail extends StatelessWidget {
                     onTap: () => Navigator.pushNamed(context, R.staking),
                     child: SizedBox(
                         width: 268,
-                        child: SFText(keyText: Keys.stakeToGetBenefits,style: const TextStyle(fontSize: 32, color: AppColors.black, fontWeight: FontWeight.w600), textAlign: TextAlign.center,),)),
+                        child: SFText(keyText: Keys.stakeToGetBenefits,style: TextStyles.bold32black, textAlign: TextAlign.center,),)),
                 const SizedBox(height: 30,),
-                Center(child: SFText(keyText: Keys.transfer, style: const TextStyle(fontSize: 32, color: AppColors.black, fontWeight: FontWeight.w600),)),
+                Center(child: SFText(keyText: Keys.transfer, style: TextStyles.bold32black)),
               ],
             )
           ),

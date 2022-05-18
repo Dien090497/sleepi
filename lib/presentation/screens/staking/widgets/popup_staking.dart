@@ -3,6 +3,7 @@ import 'package:slee_fi/common/widgets/sf_buttons.dart';
 import 'package:slee_fi/common/widgets/sf_dialog.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
 
+import '../../../../common/style/text_styles.dart';
 import '../../../../di/translations/keys.dart';
 
 class PopUpStaking extends StatelessWidget {
@@ -13,7 +14,7 @@ class PopUpStaking extends StatelessWidget {
     final Size size = MediaQuery.of(context).size;
     return SFDialog(
       children: [
-        SFText(keyText: Keys.displaysMessageFromPopUpStaking,style: TextStyle(fontWeight: FontWeight.w700, fontSize: 20),
+        SFText(keyText: Keys.displaysMessageFromPopUpStaking,style: TextStyles.bold20black,
           textAlign: TextAlign.center,),
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 12),

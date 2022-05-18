@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
 
+import '../../../../common/style/text_styles.dart';
 import '../../../../common/widgets/sf_text.dart';
 import '../../../../di/translations/keys.dart';
 
@@ -18,13 +19,13 @@ class TabWalletDetail extends StatelessWidget {
           padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 4.0),
           decoration: const BoxDecoration(
               color: AppColors.greyBottomNavBar),
-          child: SFText(keyText: Keys.avaxCChain, style: const TextStyle(fontSize: 32, color: AppColors.black, fontWeight: FontWeight.bold)),
+          child: SFText(keyText: Keys.avaxCChain, style: TextStyles.bold32black),
         ),
         Container(
           padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 4.0),
           decoration: const BoxDecoration(
               color: AppColors.greyBottomNavBar),
-          child: SFText(keyText: "0 AVAX", style: const TextStyle(fontSize: 32, color: AppColors.black, fontWeight: FontWeight.bold)),
+          child: SFText(keyText: "0 AVAX", style: TextStyles.bold32black),
         ),
         const SizedBox(height: 8.0,),
         Container(
@@ -33,7 +34,7 @@ class TabWalletDetail extends StatelessWidget {
             borderRadius: BorderRadius.circular(20.0),
             border: Border.all(color: AppColors.black),
           ),
-          child: SFText(keyText: "Eq7fbho....9aj92as", style: const TextStyle(fontSize: 12, color: Colors.grey)),
+          child: SFText(keyText: "Eq7fbho....9aj92as", style: TextStyles.grey12),
         ),
         const SizedBox(height: 16.0,),
         Row(
@@ -52,7 +53,7 @@ class TabWalletDetail extends StatelessWidget {
                   ),
                 ),
                 const SizedBox(height: 8.0,),
-                SFText(keyText: Keys.receive, style: const TextStyle(color: AppColors.black, fontSize: 13.0),)
+                SFText(keyText: Keys.receive, style: TextStyles.black13)
               ],
             ),
             Column(
@@ -80,9 +81,9 @@ class TabWalletDetail extends StatelessWidget {
                 const SizedBox(height: 8.0,),
                 Row(
                   children: [
-                    SFText(keyText: Keys.toSpending, style: const TextStyle(color: AppColors.black, fontSize: 13.0),),
+                    SFText(keyText: Keys.toSpending, style: TextStyles.black13),
                     const SizedBox(width: 12.0,),
-                    SFText(keyText: Keys.toExternal, style: const TextStyle(color: AppColors.black, fontSize: 13.0),),
+                    SFText(keyText: Keys.toExternal, style: TextStyles.black13),
                   ],
                 )
               ],
@@ -100,7 +101,7 @@ class TabWalletDetail extends StatelessWidget {
                   ),
                 ),
                 const SizedBox(height: 8.0,),
-                SFText(keyText: Keys.trade, style: const TextStyle(color: AppColors.black, fontSize: 13.0),)
+                SFText(keyText: Keys.trade, style: TextStyles.black13)
               ],
             ),
           ],
@@ -113,7 +114,7 @@ class TabWalletDetail extends StatelessWidget {
               children: [
                 Padding(
                   padding: const EdgeInsets.only(left: 8.0),
-                  child: SFText(keyText: Keys.walletAccount, style: const TextStyle(fontSize: 18,fontWeight: FontWeight.bold),),
+                  child: SFText(keyText: Keys.walletAccount, style: TextStyles.bold20black),
                 ),
                 ElevatedButton(
                   onPressed: () {},
@@ -155,8 +156,8 @@ class TabWalletDetail extends StatelessWidget {
                   return Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      SFText(keyText: "SLFT", style: const TextStyle(fontSize: 28, fontWeight: FontWeight.bold),),
-                      SFText(keyText: "XXXXXXXX", style: const TextStyle(fontSize: 28, fontWeight: FontWeight.bold),),
+                      SFText(keyText: Keys.slft, style: TextStyles.bold28black),
+                      SFText(keyText: "XXXXXXXX", style: TextStyles.bold28black),
                     ],
                   );
                 }

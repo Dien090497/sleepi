@@ -1,3 +1,4 @@
+import 'package:slee_fi/presentation/screens/alarm/alarm_screen.dart';
 import 'package:slee_fi/presentation/screens/bottom_navigation/bottom_navigation_screen.dart';
 import 'package:slee_fi/presentation/screens/enter_activation_cde/enter_activation_code_screen.dart';
 import 'package:slee_fi/presentation/screens/gacha/gacha_chane_500_screen.dart';
@@ -10,6 +11,7 @@ import 'package:slee_fi/presentation/screens/info_nft/info_nft_screen.dart';
 import 'package:slee_fi/presentation/screens/login_signup/login_signup_screen.dart';
 import 'package:slee_fi/presentation/screens/setting/setting_screen.dart';
 
+import '../../presentation/screens/alarm/widgets/sound_effect_screen.dart';
 import '../../presentation/screens/staking/staking_screen.dart';
 import '../../presentation/screens/staking/widgets/taking_screen.dart';
 import '../../presentation/screens/wallet/wallet_screen.dart';
@@ -29,6 +31,9 @@ class R {
   static const String taking = '${_}taking';
   static const String staking = '${_}staking';
   static const String wallet = '${_}wallet';
+  static const String setting = '${_}setting';
+  static const String alarm = '${_}alarm';
+  static const String alarmSoundEffect = '${_}alarm_sound_effect';
 }
 
 class AppRoutes {
@@ -46,5 +51,8 @@ class AppRoutes {
     R.wallet: (_) => const WalletScreen(),
     R.staking: (_) => const StakingScreen(),
     R.taking: (_) => const TakingScreen(),
+    R.setting: (_) => const SettingScreen(),
+    R.alarm: (_) => const AlarmScreen(),
+    R.alarmSoundEffect: (_) => const AlarmSoundEffectScreen(),
   };
 }
