@@ -90,7 +90,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                                     Icons.arrow_back_ios),
                                                 GestureDetector(
                                                   onTap: () {
-                                                    Navigator.pushNamed(context, R.nftInfo);
+                                                    Navigator.pushNamed(context, R.nftInfo, arguments: false);
                                                   },
                                                   child: Container(
                                                     height: 65,
