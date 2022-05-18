@@ -8,6 +8,7 @@ import 'package:slee_fi/presentation/screens/info_nft/layout/mint_screen.dart';
 import 'package:slee_fi/presentation/screens/info_nft/layout/recycle_screen.dart';
 import 'package:slee_fi/presentation/screens/info_nft/info_nft_screen.dart';
 import 'package:slee_fi/presentation/screens/login_signup/login_signup_screen.dart';
+import 'package:slee_fi/presentation/screens/passcode/passcode_screen.dart';
 
 class R {
   static const String _ = '/';
@@ -19,6 +20,7 @@ class R {
   static const String gacha500TimesChance = '${_}gacha_500_times_chance';
   static const String gachaResultBed = '${_}gacha_result_bed';
   static const String gachaResultOverview = '${_}gacha_result_overview';
+  static const String passcode = '${_}passcode';
   static const String nftInfo = '${_}nft_info';
   static const String mint = '${_}mint';
 
@@ -36,5 +38,6 @@ class AppRoutes {
     R.gachaResultOverview: (_) => const GachaResultOverview(),
     R.nftInfo: (_) => const InfoNftScreen(),
     R.mint: (_) => const MintScreen(),
+    R.passcode: (_) => const PasscodeScreen(),
   };
 }

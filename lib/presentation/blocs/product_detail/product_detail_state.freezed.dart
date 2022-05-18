@@ -24,6 +24,7 @@ mixin _$ProductDetailState {
     required TResult Function() error,
   }) =>
       throw _privateConstructorUsedError;
+
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initial,
@@ -32,6 +33,7 @@ mixin _$ProductDetailState {
     TResult Function()? error,
   }) =>
       throw _privateConstructorUsedError;
+
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
@@ -41,6 +43,7 @@ mixin _$ProductDetailState {
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
+
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(ProductDetailInitial value) initial,
@@ -49,6 +52,7 @@ mixin _$ProductDetailState {
     required TResult Function(ProductDetailError value) error,
   }) =>
       throw _privateConstructorUsedError;
+
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult Function(ProductDetailInitial value)? initial,
@@ -57,6 +61,7 @@ mixin _$ProductDetailState {
     TResult Function(ProductDetailError value)? error,
   }) =>
       throw _privateConstructorUsedError;
+
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(ProductDetailInitial value)? initial,
@@ -81,6 +86,7 @@ class _$ProductDetailStateCopyWithImpl<$Res>
   _$ProductDetailStateCopyWithImpl(this._value, this._then);
 
   final ProductDetailState _value;
+
   // ignore: unused_field
   final $Res Function(ProductDetailState) _then;
 }

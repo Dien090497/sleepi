@@ -30,20 +30,21 @@ dependencies:
   retrofit: ^3.0.1+1
   dio: ^4.0.6
   widgetbook_annotation: ^2.0.2
-  cached_network_image: ^3.2.0
-  fl_chart: ^0.50.5
+  cached_network_image: 3.2.0
+  fl_chart: ^0.50.6
   flutter_date_pickers: ^0.3.0
+  flutter_screenutil: ^5.5.3
+  pin_code_fields: ^7.4.0
   loop_page_view: ^1.1.1
 
 dependency_overrides:
-  analyzer: ^4.0.0
-  freezed_annotation: ^2.0.3
+  analyzer: ^4.1.0
 
 dev_dependencies:
 
-  flutter_lints: ^1.0.4
+  flutter_lints: 1.0.4
   flutter_translate_gen: ^2.2.0
-  build_runner: ^2.1.10
+  build_runner: ^2.1.11
   freezed: ^2.0.3+1
   injectable_generator: ^1.5.3
   json_serializable: ^6.2.0

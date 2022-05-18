@@ -34,12 +34,17 @@
   "button_cancel": "Cancel",
   "title_level_up": "LEVEL UP",
   "title_confirm_transfer": "CONFIRM TRANSFER",
+  "title_transfer": "you win transfer",
+  "repair": "Repair",
+  "level_up": "Level Up",
+  "confirm_transfer": "CONFIRM TRANSFER",
   "from": "From",
   "to": "To",
   "inventory": "Inventory",
   "wallet": "Wallet",
   "fee": "Fee",
-  "title_transfer": "you win transfer",
+  "you_win_transfer": "you win transfer",
+  "cancel": "Cancel",
   "bed": "Bed",
   "common_bed": "Common Bed",
   "uncommon_bed": "Uncommon Bed",
@@ -74,5 +79,7 @@
   "show_all_result": "Show all result",
   "special_gacha": "Special Gacha",
   "displays_the_nft_discharged_from_the_gacha": "Displays the NFTs discharged from the gacha.",
-  "mint": "Mint"
+  "mint": "Mint",
+  "enter_your_passcode": "Enter your passcode",
+  "forgot_passcode": "Forgot passcode"
 }

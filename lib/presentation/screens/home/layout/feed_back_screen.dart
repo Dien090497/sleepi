@@ -40,8 +40,8 @@ class FeedBackScreen extends StatelessWidget {
               child: Row(
                 children: [
                   SizedBox(
-                    child: const SFTextField(),
                     width: size.width / 3,
+                    child: const SFTextField(),
                   ),
                   const SizedBox(width: 10),
                   const Expanded(child: SFTextField()),

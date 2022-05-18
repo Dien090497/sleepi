@@ -28,6 +28,7 @@ abstract class $BottomNavigationStateCopyWith<$Res> {
   factory $BottomNavigationStateCopyWith(BottomNavigationState value,
           $Res Function(BottomNavigationState) then) =
       _$BottomNavigationStateCopyWithImpl<$Res>;
+
   $Res call({int tabIndex});
 }
 
@@ -37,6 +38,7 @@ class _$BottomNavigationStateCopyWithImpl<$Res>
   _$BottomNavigationStateCopyWithImpl(this._value, this._then);
 
   final BottomNavigationState _value;
+
   // ignore: unused_field
   final $Res Function(BottomNavigationState) _then;
 
@@ -59,6 +61,7 @@ abstract class _$$_BottomNavigationStateCopyWith<$Res>
   factory _$$_BottomNavigationStateCopyWith(_$_BottomNavigationState value,
           $Res Function(_$_BottomNavigationState) then) =
       __$$_BottomNavigationStateCopyWithImpl<$Res>;
+
   @override
   $Res call({int tabIndex});
 }
@@ -127,6 +130,7 @@ abstract class _BottomNavigationState implements BottomNavigationState {
 
   @override
   int get tabIndex => throw _privateConstructorUsedError;
+
   @override
   @JsonKey(ignore: true)
   _$$_BottomNavigationStateCopyWith<_$_BottomNavigationState> get copyWith =>
