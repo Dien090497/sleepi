@@ -1,14 +1,16 @@
 import 'package:slee_fi/presentation/screens/alarm/alarm_screen.dart';
 import 'package:slee_fi/presentation/screens/alarm/widgets/sound_effect_screen.dart';
 import 'package:slee_fi/presentation/screens/bottom_navigation/bottom_navigation_screen.dart';
+import 'package:slee_fi/presentation/screens/create_wallet/create_wallet_screen.dart';
 import 'package:slee_fi/presentation/screens/enter_activation_cde/enter_activation_code_screen.dart';
 import 'package:slee_fi/presentation/screens/gacha/gacha_chane_500_screen.dart';
 import 'package:slee_fi/presentation/screens/gacha/gacha_result_bed_screen.dart';
 import 'package:slee_fi/presentation/screens/gacha/gacha_result_overview.dart';
 import 'package:slee_fi/presentation/screens/home/layout/feed_back_screen.dart';
+import 'package:slee_fi/presentation/screens/import_wallet/import_wallet_screen.dart';
+import 'package:slee_fi/presentation/screens/info_nft/info_nft_screen.dart';
 import 'package:slee_fi/presentation/screens/info_nft/layout/mint_screen.dart';
 import 'package:slee_fi/presentation/screens/info_nft/layout/recycle_screen.dart';
-import 'package:slee_fi/presentation/screens/info_nft/info_nft_screen.dart';
 import 'package:slee_fi/presentation/screens/login_signup/login_signup_screen.dart';
 import 'package:slee_fi/presentation/screens/setting/setting_screen.dart';
 import 'package:slee_fi/presentation/screens/setting_activation_code/activation_code_screen.dart';
@@ -19,6 +21,7 @@ import 'package:slee_fi/presentation/screens/setting_permission/widgets/notifica
 import 'package:slee_fi/presentation/screens/staking/staking_screen.dart';
 import 'package:slee_fi/presentation/screens/staking/widgets/taking_screen.dart';
 import 'package:slee_fi/presentation/screens/wallet/wallet_screen.dart';
+import 'package:slee_fi/presentation/screens/passcode/passcode_screen.dart';
 
 class R {
   static const String _ = '/';
@@ -30,6 +33,7 @@ class R {
   static const String gacha500TimesChance = '${_}gacha_500_times_chance';
   static const String gachaResultBed = '${_}gacha_result_bed';
   static const String gachaResultOverview = '${_}gacha_result_overview';
+  static const String passcode = '${_}passcode';
   static const String nftInfo = '${_}nft_info';
   static const String mint = '${_}mint';
   static const String taking = '${_}taking';
@@ -43,6 +47,8 @@ class R {
   static const String healthcarePermission = '${_}healthcare_permission';
   static const String motionDataPermission = '${_}motion_data_permission';
   static const String notificationPermission = '${_}notification_permission';
+  static const String createWallet = '${_}create_wallet';
+  static const String importWallet = '${_}import_wallet';
 }
 
 class AppRoutes {
@@ -68,5 +74,8 @@ class AppRoutes {
     R.motionDataPermission: (_) => const MotionDataPermissionScreen(),
     R.notificationPermission: (_) => const NotificationPermissionScreen(),
     R.healthcarePermission: (_) => const HealthcarePermissionScreen(),
+    R.passcode: (_) => const PasscodeScreen(),
+    R.createWallet: (_) => const CreateWalletScreen(),
+    R.importWallet: (_) => const ImportWalletScreen(),
   };
 }

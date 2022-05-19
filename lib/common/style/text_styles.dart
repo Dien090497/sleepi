@@ -26,4 +26,13 @@ class TextStyles {
   static const bold16blackItalic = TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: AppColors.black, fontStyle: FontStyle.italic);
   static const black10Bold = TextStyle(fontSize: 10, color: AppColors.black, fontWeight: FontWeight.bold);
   static const black15Italic = TextStyle(fontSize: 15, color: AppColors.black, fontStyle: FontStyle.italic);
+  static const bold20black = TextStyle(
+      fontSize: 20, fontWeight: FontWeight.bold, color: AppColors.black);
+  static const bold15black = TextStyle(
+      fontSize: 15, fontWeight: FontWeight.bold, color: AppColors.black);
+  static const black10Bold = TextStyle(
+      fontSize: 10, color: AppColors.black, fontWeight: FontWeight.bold);
+  static const white12 = TextStyle(fontSize: 12, color: AppColors.white);
+  static const white22Italic = TextStyle(
+      fontSize: 22, color: AppColors.white, fontStyle: FontStyle.italic);
 }

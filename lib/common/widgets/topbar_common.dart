@@ -60,19 +60,64 @@ class TopBarCommon extends StatelessWidget {
                       ),
                       const SizedBox(width: 5),
                     ],
+          const Icon(Icons.settings, size: 50),
+          GestureDetector(
+            onTap: () {
+              Navigator.pushNamed(context, R.passcode);
+            },
+            child: Container(
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(30),
+                border: Border.all(color: AppColors.primary),
+              ),
+              child: Row(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.all(10),
+                    child: Row(
+                      children: [
+                        const Icon(
+                          Icons.monetization_on,
+                          size: 20,
+                        ),
+                        SFText(
+                          keyText: '68.8',
+                          style: TextStyles.textBasic15,
+                        ),
+                        const SizedBox(width: 5),
+                        const Icon(
+                          Icons.money,
+                          size: 20,
+                        ),
+                        SFText(
+                          keyText: '68.88',
+                          style: TextStyles.textBasic15,
+                        ),
+                        const SizedBox(width: 5),
+                        const Icon(
+                          Icons.attach_money,
+                          size: 20,
+                        ),
+                        SFText(
+                          keyText: '88.99',
+                          style: TextStyles.textBasic15,
+                        ),
+                        const SizedBox(width: 5),
+                      ],
+                    ),
                   ),
-                ),
-                Container(
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(30),
-                    border: Border.all(color: Colors.black),
+                  Container(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(30),
+                      border: Border.all(color: Colors.black),
+                    ),
+                    child: const Icon(
+                      Icons.cached_sharp,
+                      size: 35,
+                    ),
                   ),
-                  child: const Icon(
-                    Icons.cached_sharp,
-                    size: 35,
-                  ),
-                ),
-              ],
+                ],
+              ),
             ),
           )
         ],

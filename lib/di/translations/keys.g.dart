@@ -45,6 +45,14 @@ class Keys {
 
   static const String linkTree = 'link_tree';
 
+  static const String introduceHowToPlay = 'introduce.how_to_play';
+
+  static const String introduceWhitePaper = 'introduce.white_paper';
+
+  static const String introduceLitePaper = 'introduce.lite_paper';
+
+  static const String introduceLinkTree = 'introduce.link_tree';
+
   static const String pleaseEnter = 'please_enter';
 
   static const String activationCodeLanguage = 'activation_code_language';
@@ -102,6 +110,46 @@ class Keys {
   static const String legendaryBed = 'legendary_bed';
 
   static const String attributes = 'attributes';
+
+  static const String howToPlay = 'how_to_play';
+
+  static const String whitePaper = 'white_paper';
+
+  static const String litePaper = 'lite_paper';
+
+  static const String linkTree = 'link_tree';
+
+  static const String titleRepair = 'title_repair';
+
+  static const String buttonConfirm = 'button_confirm';
+
+  static const String buttonCancel = 'button_cancel';
+
+  static const String titleLevelUp = 'title_level_up';
+
+  static const String titleConfirmTransfer = 'title_confirm_transfer';
+
+  static const String titleTransfer = 'title_transfer';
+
+  static const String repair = 'repair';
+
+  static const String levelUp = 'level_up';
+
+  static const String confirmTransfer = 'confirm_transfer';
+
+  static const String from = 'from';
+
+  static const String to = 'to';
+
+  static const String inventory = 'inventory';
+
+  static const String wallet = 'wallet';
+
+  static const String fee = 'fee';
+
+  static const String youWinTransfer = 'you_win_transfer';
+
+  static const String cancel = 'cancel';
 
   static const String efficiency = 'Efficiency';
 
@@ -327,4 +375,27 @@ class Keys {
   static const String introduceLitePaper = 'introduce.lite_paper';
 
   static const String introduceLinkTree = 'introduce.link_tree';
+
+  static const String enterYourPasscode = 'enter_your_passcode';
+
+  static const String forgotPasscode = 'forgot_passcode';
+
+  static const String createANewWallet = 'create_a_new_wallet';
+
+  static const String createWallet = 'create_wallet';
+
+  static const String importWallet = 'import_wallet';
+
+  static const String seedPhrase = 'seed_phrase';
+
+  static const String enterTheSeedPhrase = 'enter_the_seed_phrase';
+
+  static const String importAWalletUsingSeedPhrase =
+      'import_a_wallet_using_seed_phrase';
+
+  static const String emailVerificationCode = 'email_verification_code';
+
+  static const String youHaveAlreadyCreatedAWalletAddress =
+      'you_have_already_created_a_wallet_address';
+
 }
