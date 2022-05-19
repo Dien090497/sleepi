@@ -1,10 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
-
-import '../../../../common/style/text_styles.dart';
-import '../../../../common/widgets/sf_text.dart';
-import '../../../../di/translations/keys.dart';
+import 'package:slee_fi/common/style/text_styles.dart';
+import 'package:slee_fi/common/widgets/sf_text.dart';
+import 'package:slee_fi/di/translations/keys.dart';
 
 class TabWalletDetail extends StatelessWidget {
   const TabWalletDetail({Key? key}) : super(key: key);
@@ -44,7 +43,7 @@ class TabWalletDetail extends StatelessWidget {
               children: [
                 ElevatedButton(
                   onPressed: () {},
-                  child: const Icon(Icons.download, color: Colors.greenAccent, size: 40,),
+                  child: const Icon(Icons.download, color: AppColors.greenAccent, size: 40,),
                   style: ElevatedButton.styleFrom(
                       shape: const CircleBorder(),
                       padding: const EdgeInsets.all(8.0),
@@ -68,12 +67,12 @@ class TabWalletDetail extends StatelessWidget {
                     children: [
                       InkWell(
                         onTap: () {},
-                        child: const Icon(CupertinoIcons.repeat, color: Colors.greenAccent, size: 40,),
+                        child: const Icon(CupertinoIcons.repeat, color: AppColors.greenAccent, size: 40,),
                       ),
                       const SizedBox(width: 20.0,),
                       InkWell(
                         onTap: () {},
-                        child: const Icon(Icons.arrow_upward, color: Colors.greenAccent, size: 40,),
+                        child: const Icon(Icons.arrow_upward, color: AppColors.greenAccent, size: 40,),
                       )
                     ],
                   ),
@@ -92,7 +91,7 @@ class TabWalletDetail extends StatelessWidget {
               children: [
                 ElevatedButton(
                   onPressed: () {},
-                  child: const Icon(Icons.repeat, color: Colors.greenAccent, size: 40,),
+                  child: const Icon(Icons.repeat, color: AppColors.greenAccent, size: 40,),
                   style: ElevatedButton.styleFrom(
                       shape: const CircleBorder(),
                       padding: const EdgeInsets.all(8.0),
@@ -118,11 +117,11 @@ class TabWalletDetail extends StatelessWidget {
                 ),
                 ElevatedButton(
                   onPressed: () {},
-                  child: const Icon(Icons.question_mark, color: Colors.black, size: 20,),
+                  child: const Icon(Icons.question_mark, color: AppColors.black, size: 20,),
                   style: ElevatedButton.styleFrom(
                     shape: const CircleBorder(),
                     side: const BorderSide(color: AppColors.black,width: 1),
-                    primary: Colors.greenAccent, // <-- Button color
+                    primary: AppColors.greenAccent, // <-- Button color
                   ),
                 ),
               ],
@@ -130,7 +129,7 @@ class TabWalletDetail extends StatelessWidget {
             ElevatedButton.icon(
               icon: const Icon(
                 Icons.crop_square,
-                color: Colors.greenAccent,
+                color: AppColors.greenAccent,
                 size: 30.0,
               ),
               label: SFText(keyText: Keys.buy),

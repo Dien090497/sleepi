@@ -1,9 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:slee_fi/common/style/app_colors.dart';
+import 'package:slee_fi/di/translations/keys.dart';
 import 'package:slee_fi/presentation/screens/wallet/widgets/tab_bar_icon.dart';
 import 'package:slee_fi/presentation/screens/wallet/widgets/tab_spending_detail.dart';
 import 'package:slee_fi/presentation/screens/wallet/widgets/tab_wallet_detail.dart';
-import '../../../di/translations/keys.dart';
 
 class WalletScreen extends StatelessWidget {
   const WalletScreen({Key? key}) : super(key: key);
@@ -17,20 +18,20 @@ class WalletScreen extends StatelessWidget {
           leadingWidth: 50,
           leading: ElevatedButton(
             onPressed: () {},
-            child: const Icon(CupertinoIcons.back, color: Colors.black),
+            child: const Icon(CupertinoIcons.back, color: AppColors.black),
             style: ElevatedButton.styleFrom(
               shape: const CircleBorder(),
-              primary: Colors.green, // <-- Button color
+              primary: AppColors.green, // <-- Button color
             ),
           ),
           actions: const [
             Icon(
               Icons.settings,
-              color: Colors.black,
+              color: AppColors.black,
             ),
           ],
           automaticallyImplyLeading: false,
-          backgroundColor: Colors.transparent,
+          backgroundColor: AppColors.transparent,
           elevation: 0,
           title: Padding(
             padding: const EdgeInsets.only(left: 4, right: 4),

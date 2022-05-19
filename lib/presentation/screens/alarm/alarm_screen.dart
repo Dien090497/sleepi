@@ -1,22 +1,14 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:slee_fi/common/routes/app_routes.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
-import '../../../common/routes/app_routes.dart';
-import '../../../common/style/text_styles.dart';
-import '../../../common/widgets/sf_text.dart';
-import '../../../di/translations/keys.dart';
+import 'package:slee_fi/common/style/text_styles.dart';
+import 'package:slee_fi/common/widgets/sf_text.dart';
+import 'package:slee_fi/di/translations/keys.dart';
+import 'package:slee_fi/presentation/screens/alarm/widgets/alarm_status_change_widget.dart';
+import 'package:slee_fi/presentation/screens/alarm/widgets/alarm_volume_change_widget.dart';
 
-class AlarmScreen extends StatefulWidget {
+class AlarmScreen extends StatelessWidget {
   const AlarmScreen({Key? key}) : super(key: key);
-
-  @override
-  State<AlarmScreen> createState() => _AlarmScreenState();
-}
-
-class _AlarmScreenState extends State<AlarmScreen> {
-
-  bool swAlarm = true;
-  double volume = 1;
 
   @override
   Widget build(BuildContext context) {
@@ -46,7 +38,7 @@ class _AlarmScreenState extends State<AlarmScreen> {
                 borderRadius: BorderRadius.circular(16.0),
                 boxShadow:  [
                   BoxShadow(
-                    color: Colors.black.withOpacity(0.6),
+                    color: AppColors.black.withOpacity(0.6),
                     blurRadius: 4,
                     offset: const Offset(2, 4), // Shadow position
                   ),
@@ -54,20 +46,7 @@ class _AlarmScreenState extends State<AlarmScreen> {
               ),
               child: Column(
                 children: [
-                  ListTile(
-                    dense: true,
-                    title: SFText(keyText: Keys.alarm,
-                      style: TextStyles.bold20black,
-                    ),
-                    trailing:  CupertinoSwitch(
-                      value: swAlarm,
-                      onChanged: (value) {
-                        setState(() {
-                          swAlarm = value;
-                        });
-                      },
-                    ),
-                  ),
+                  const AlarmStatusChangeWidget(),
                   const Divider(color: AppColors.black, thickness: 1),
                   ListTile(
                     onTap: () => Navigator.pushNamed(context, R.alarmSoundEffect),
@@ -106,23 +85,7 @@ class _AlarmScreenState extends State<AlarmScreen> {
                     ),
                   ),
                   const Divider(color: AppColors.black, thickness: 1),
-                  ListTile(
-                    dense: true,
-                    title: SFText(keyText: Keys.volume,
-                      style: TextStyles.bold20black,
-                    ),
-                    trailing: SizedBox(
-                      width: 134,
-                      child: CupertinoSlider(
-                        value: volume,
-                        onChanged: (value) {
-                          setState(() {
-                            volume = value;
-                          });
-                        },
-                      ),
-                    ),
-                  ),
+                  const AlarmVolumnChangeWidget(),
                 ],
               ),
             ),
@@ -132,3 +95,4 @@ class _AlarmScreenState extends State<AlarmScreen> {
     );
   }
 }
+

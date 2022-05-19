@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
+import 'package:slee_fi/common/style/text_styles.dart';
+import 'package:slee_fi/common/widgets/sf_text.dart';
+import 'package:slee_fi/di/translations/keys.dart';
 import 'package:slee_fi/presentation/screens/setting/widgets/average_info_widget.dart';
 import 'package:slee_fi/presentation/screens/setting/widgets/general_widget.dart';
 import 'package:slee_fi/presentation/screens/setting/widgets/profile_widget.dart';
-
-import '../../../common/style/text_styles.dart';
-import '../../../common/widgets/sf_text.dart';
-import '../../../di/translations/keys.dart';
 
 class SettingScreen extends StatelessWidget {
   const SettingScreen({Key? key}) : super(key: key);

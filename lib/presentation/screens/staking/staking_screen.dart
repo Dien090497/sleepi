@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:slee_fi/common/style/text_styles.dart';
+import 'package:slee_fi/common/widgets/sf_back_button.dart';
+import 'package:slee_fi/common/widgets/sf_sub_tab_bar.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
 import 'package:slee_fi/di/translations/keys.dart';
 import 'package:slee_fi/presentation/screens/staking/widgets/tab_slft_detail.dart';
 import 'package:slee_fi/presentation/screens/staking/widgets/tab_slgt_detail.dart';
-import '../../../common/style/app_colors.dart';
-import '../../../common/widgets/sf_back_button.dart';
-import '../../../common/widgets/sf_sub_tab_bar.dart';
 
 class StakingScreen extends StatelessWidget {
   const StakingScreen({Key? key}) : super(key: key);
@@ -24,7 +24,7 @@ class StakingScreen extends StatelessWidget {
                 alignment: Alignment.centerLeft,
                 child: const SFBackButton(),
               ),
-              SFText(keyText: Keys.staking, style: const TextStyle(fontSize: 40, fontWeight: FontWeight.bold, color: AppColors.black),),
+              SFText(keyText: Keys.staking, style: TextStyles.bold40black),
               SFSubTabBar(
                 texts: const [Keys.slft, Keys.slgt],
               ),

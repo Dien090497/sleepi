@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:slee_fi/common/routes/app_routes.dart';
+import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
-
-import '../../../../common/routes/app_routes.dart';
-import '../../../../common/style/app_colors.dart';
-import '../../../../di/translations/keys.dart';
+import 'package:slee_fi/di/translations/keys.dart';
 
 class TabSLFTDetail extends StatelessWidget {
   const TabSLFTDetail({Key? key}) : super(key: key);
@@ -81,40 +80,40 @@ class TabSLFTDetail extends StatelessWidget {
                     alignment: Alignment.topRight,
                     child: GestureDetector(child: const Icon(Icons.settings, size: 32,), onTap: () {},),
                   ),
-                  SFText(keyText: Keys.stakeTokens, style: const TextStyle(fontSize: 20, fontWeight: FontWeight.w700, color: AppColors.black),),
+                  SFText(keyText: Keys.stakeTokens, style: TextStyles.bold20black),
                   const SizedBox(height: 12.0,),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      SFText(keyText: Keys.yourSlftEarned, style: const TextStyle(fontSize: 20, fontWeight: FontWeight.w700, color: AppColors.black),),
-                      SFText(keyText: "XXXXX    SLFT", style: const TextStyle(fontSize: 20, fontWeight: FontWeight.w700, color: AppColors.black),),
+                      SFText(keyText: Keys.yourSlftEarned, style: TextStyles.bold20black),
+                      SFText(keyText: "XXXXX    SLFT", style: TextStyles.bold20black),
                     ],
                   ),
                   const SizedBox(height: 12.0,),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      SFText(keyText: Keys.yourStakedAmount, style: const TextStyle(fontSize: 20, fontWeight: FontWeight.w700, color: AppColors.black),),
-                      SFText(keyText: "XXXXX    SLFT", style: const TextStyle(fontSize: 20, fontWeight: FontWeight.w700, color: AppColors.black),),
+                      SFText(keyText: Keys.yourStakedAmount, style: TextStyles.bold20black),
+                      SFText(keyText: "XXXXX    SLFT", style: TextStyles.bold20black),
                     ],
                   ),
                   const SizedBox(height: 12.0,),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
-                      SFText(keyText: Keys.apr, style: const TextStyle(fontSize: 20, fontWeight: FontWeight.w700, color: AppColors.black),),
-                      SFText(keyText: "XXX%", style: const TextStyle(fontSize: 20, fontWeight: FontWeight.w700, color: AppColors.black),),
+                      SFText(keyText: Keys.apr, style: TextStyles.bold20black),
+                      SFText(keyText: "XXX%", style: TextStyles.bold20black),
                     ],
                   ),
                   const SizedBox(height: 12.0,),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
-                      SFText(keyText: Keys.deposit, style: const TextStyle(fontSize: 20, fontWeight: FontWeight.w700, color: AppColors.black),),
-                      SFText(keyText: Keys.withdraw, style: const TextStyle(fontSize: 20, fontWeight: FontWeight.w700, color: AppColors.black),),
+                      SFText(keyText: Keys.deposit, style: TextStyles.bold20black),
+                      SFText(keyText: Keys.withdraw, style: TextStyles.bold20black),
                     ],
                   ),
-                  SFText(keyText: Keys.compound, style: const TextStyle(fontSize: 20, fontWeight: FontWeight.w700, color: AppColors.black),),
+                  SFText(keyText: Keys.compound, style: TextStyles.bold20black),
                   ],
               )
           ),
@@ -127,9 +126,9 @@ class TabSLFTDetail extends StatelessWidget {
             child: Column(
               children: [
                 const SizedBox(height: 18),
-                SFText(keyText: Keys.buySlft, style: const TextStyle(fontSize: 20, fontWeight: FontWeight.w700, color: AppColors.black),),
+                SFText(keyText: Keys.buySlft, style: TextStyles.bold20black),
                 const SizedBox(height: 12.0,),
-                SFText(keyText: Keys.showContract, style: const TextStyle(fontSize: 20, fontWeight: FontWeight.w700, color: AppColors.black),),
+                SFText(keyText: Keys.showContract, style: TextStyles.bold20black),
               ],
             )
         ),

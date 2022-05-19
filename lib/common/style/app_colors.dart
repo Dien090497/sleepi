@@ -16,4 +16,6 @@ class AppColors {
   static const transparent = Colors.transparent;
 
   static const green = Colors.green;
+
+  static const greenAccent = Colors.greenAccent;
 }

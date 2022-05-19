@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:slee_fi/common/style/text_styles.dart';
 import 'package:slee_fi/common/widgets/sf_buttons.dart';
 import 'package:slee_fi/common/widgets/sf_dialog.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
-
-import '../../../../common/style/text_styles.dart';
-import '../../../../di/translations/keys.dart';
+import 'package:slee_fi/di/translations/keys.dart';
 
 class PopUpStaking extends StatelessWidget {
   const PopUpStaking({Key? key}) : super(key: key);

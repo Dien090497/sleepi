@@ -1,10 +1,9 @@
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/widgets/sf_buttons.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
+import 'package:slee_fi/di/translations/keys.dart';
 
-import '../../../../di/translations/keys.dart';
 
 class ModalPopUpBirthYear extends StatelessWidget {
   const ModalPopUpBirthYear({Key? key}) : super(key: key);
@@ -16,7 +15,7 @@ class ModalPopUpBirthYear extends StatelessWidget {
 
     return Container(
         height: MediaQuery.of(context).copyWith().size.height*0.3,
-        color: Colors.white,
+        color: AppColors.white,
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [

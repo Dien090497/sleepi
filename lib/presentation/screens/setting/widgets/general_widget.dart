@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:slee_fi/common/routes/app_routes.dart';
+import 'package:slee_fi/common/style/app_colors.dart';
+import 'package:slee_fi/common/style/text_styles.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
-
-import '../../../../common/routes/app_routes.dart';
-import '../../../../common/style/app_colors.dart';
-import '../../../../common/style/text_styles.dart';
-import '../../../../di/translations/keys.dart';
+import 'package:slee_fi/di/translations/keys.dart';
 
 class GeneralWidget extends StatelessWidget {
   const GeneralWidget({Key? key}) : super(key: key);
@@ -96,7 +95,7 @@ class GeneralWidget extends StatelessWidget {
               title: SFText(keyText: Keys.version,
                 style: TextStyles.bold15black,
               ),
-              trailing: SFText(keyText: "0.01", style: const TextStyle(fontSize: 15, fontStyle: FontStyle.italic),),
+              trailing: SFText(keyText: "0.01", style: TextStyles.black15Italic),
             ),
           ),
         ],

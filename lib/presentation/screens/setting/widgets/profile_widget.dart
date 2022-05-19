@@ -1,12 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:slee_fi/common/style/app_colors.dart';
+import 'package:slee_fi/common/style/text_styles.dart';
+import 'package:slee_fi/common/widgets/sf_buttons.dart';
+import 'package:slee_fi/common/widgets/sf_text.dart';
+import 'package:slee_fi/di/translations/keys.dart';
 import 'package:slee_fi/presentation/screens/setting/widgets/modal_pop_up_sex.dart';
-
-import '../../../../common/style/app_colors.dart';
-import '../../../../common/style/text_styles.dart';
-import '../../../../common/widgets/sf_buttons.dart';
-import '../../../../common/widgets/sf_text.dart';
-import '../../../../di/translations/keys.dart';
 import 'modal_pop_up_birth_year.dart';
 
 class ProfileWidget extends StatelessWidget {
