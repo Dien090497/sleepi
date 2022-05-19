@@ -97,14 +97,19 @@ class TabWalletDetail extends StatelessWidget {
             Column(
               children: [
                 ElevatedButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.pushNamed(context, R.trade);
+                  },
                   style: ElevatedButton.styleFrom(
                       shape: const CircleBorder(),
                       padding: const EdgeInsets.all(8.0),
                       primary: AppColors.white,
-                      side: const BorderSide(color: AppColors.black, width: 1)
+                      side: const BorderSide(color: AppColors.black, width: 1)),
+                  child: const Icon(
+                    Icons.repeat,
+                    color: AppColors.greenAccent,
+                    size: 40,
                   ),
-                  child: const Icon(Icons.repeat, color: AppColors.greenAccent, size: 40,),
                 ),
                 const SizedBox(height: 8.0,),
                 SFText(keyText: Keys.trade, style: TextStyles.black13)

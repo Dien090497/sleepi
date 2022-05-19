@@ -22,6 +22,7 @@ import 'package:slee_fi/presentation/screens/setting_permission/widgets/motion_d
 import 'package:slee_fi/presentation/screens/setting_permission/widgets/notification_screen.dart';
 import 'package:slee_fi/presentation/screens/staking/staking_screen.dart';
 import 'package:slee_fi/presentation/screens/staking/widgets/taking_screen.dart';
+import 'package:slee_fi/presentation/screens/trade/trade_screen.dart';
 import 'package:slee_fi/presentation/screens/wallet/wallet_screen.dart';
 
 class R {
@@ -51,6 +52,7 @@ class R {
   static const String createWallet = '${_}create_wallet';
   static const String importWallet = '${_}import_wallet';
   static const String sendToExternal = '${_}send_to_external';
+  static const String trade = '${_}trade';
 }
 
 class AppRoutes {
@@ -80,5 +82,6 @@ class AppRoutes {
     R.createWallet: (_) => const CreateWalletScreen(),
     R.importWallet: (_) => const ImportWalletScreen(),
     R.sendToExternal: (_) => const SendToExternalScreen(),
+    R.trade: (_) => const TradeScreen(),
   };
 }
