@@ -13,7 +13,8 @@ class NotificationPermissionScreen extends StatelessWidget {
         child: ListView(
           padding: const EdgeInsets.all(24.0),
           children: [
-            Image.asset("assets/images/notification_permission.png"),
+            Image.asset("assets/images/notification_permission.png", fit: BoxFit.fill,),
+            const SizedBox(height: 24.0,),
             const BoxMessage(message: Keys.displaysMessageNotificationPermission),
             SizedBox(height: MediaQuery.of(context).size.height * 0.2,),
             SFButton(height: 48,text: Keys.allow,onPressed: () {}, )

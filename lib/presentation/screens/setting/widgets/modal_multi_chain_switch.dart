@@ -20,7 +20,7 @@ class ModalMultiChainSwitch extends StatelessWidget {
           body: SafeArea(
             child: Column(
               children: [
-                SFText(keyText: Keys.multiChainSwitch, style: TextStyles.bold24blackItalic,),
+                SFText(keyText: Keys.multiChainSwitchUppercase, style: TextStyles.bold24blackItalic,),
                const SizedBox(height: 12.0,),
                 Expanded(
                     child: ListView(

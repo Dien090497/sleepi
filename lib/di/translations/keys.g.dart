@@ -45,14 +45,6 @@ class Keys {
 
   static const String linkTree = 'link_tree';
 
-  static const String introduceHowToPlay = 'introduce.how_to_play';
-
-  static const String introduceWhitePaper = 'introduce.white_paper';
-
-  static const String introduceLitePaper = 'introduce.lite_paper';
-
-  static const String introduceLinkTree = 'introduce.link_tree';
-
   static const String pleaseEnter = 'please_enter';
 
   static const String activationCodeLanguage = 'activation_code_language';
@@ -85,50 +77,6 @@ class Keys {
 
   static const String titleConfirmTransfer = 'title_confirm_transfer';
 
-  static const String from = 'from';
-
-  static const String to = 'to';
-
-  static const String inventory = 'inventory';
-
-  static const String wallet = 'wallet';
-
-  static const String fee = 'fee';
-
-  static const String titleTransfer = 'title_transfer';
-
-  static const String bed = 'bed';
-
-  static const String commonBed = 'common_bed';
-
-  static const String uncommonBed = 'uncommon_bed';
-
-  static const String rareBed = 'rare_bed';
-
-  static const String epicBed = 'epic_bed';
-
-  static const String legendaryBed = 'legendary_bed';
-
-  static const String attributes = 'attributes';
-
-  static const String howToPlay = 'how_to_play';
-
-  static const String whitePaper = 'white_paper';
-
-  static const String litePaper = 'lite_paper';
-
-  static const String linkTree = 'link_tree';
-
-  static const String titleRepair = 'title_repair';
-
-  static const String buttonConfirm = 'button_confirm';
-
-  static const String buttonCancel = 'button_cancel';
-
-  static const String titleLevelUp = 'title_level_up';
-
-  static const String titleConfirmTransfer = 'title_confirm_transfer';
-
   static const String titleTransfer = 'title_transfer';
 
   static const String repair = 'repair';
@@ -150,6 +98,20 @@ class Keys {
   static const String youWinTransfer = 'you_win_transfer';
 
   static const String cancel = 'cancel';
+
+  static const String bed = 'bed';
+
+  static const String commonBed = 'common_bed';
+
+  static const String uncommonBed = 'uncommon_bed';
+
+  static const String rareBed = 'rare_bed';
+
+  static const String epicBed = 'epic_bed';
+
+  static const String legendaryBed = 'legendary_bed';
+
+  static const String attributes = 'attributes';
 
   static const String efficiency = 'Efficiency';
 
@@ -256,8 +218,6 @@ class Keys {
 
   static const String max = 'max';
 
-  static const String cancel = 'cancel';
-
   static const String stakeSlft = 'stake_slft';
 
   static const String tvlInSleefi = 'tvl_in_sleefi';
@@ -352,6 +312,9 @@ class Keys {
 
   static const String chinese = 'chinese';
 
+  static const String multiChainSwitchUppercase =
+      'multi-chain_switch_uppercase';
+
   static const String allow = 'allow';
 
   static const String setupMicrophoneAccess = 'setup_microphone_access';
@@ -367,14 +330,6 @@ class Keys {
 
   static const String displaysMessageNotificationPermission =
       'displays_message_notification_permission';
-
-  static const String introduceHowToPlay = 'introduce.how_to_play';
-
-  static const String introduceWhitePaper = 'introduce.white_paper';
-
-  static const String introduceLitePaper = 'introduce.lite_paper';
-
-  static const String introduceLinkTree = 'introduce.link_tree';
 
   static const String enterYourPasscode = 'enter_your_passcode';
 
@@ -398,4 +353,11 @@ class Keys {
   static const String youHaveAlreadyCreatedAWalletAddress =
       'you_have_already_created_a_wallet_address';
 
+  static const String introduceHowToPlay = 'introduce.how_to_play';
+
+  static const String introduceWhitePaper = 'introduce.white_paper';
+
+  static const String introduceLitePaper = 'introduce.lite_paper';
+
+  static const String introduceLinkTree = 'introduce.link_tree';
 }
