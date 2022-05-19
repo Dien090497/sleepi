@@ -16,7 +16,6 @@ class BoxInfoNft extends StatelessWidget {
       child: Column(
         children: [
           Container(
-            child: SFText(keyText: 'BedNet',),
             decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(15),
                 border: Border.all(color: AppColors.black)
@@ -24,6 +23,7 @@ class BoxInfoNft extends StatelessWidget {
             width: size.width,
             height: size.height * 0.15,
             alignment: Alignment.center,
+            child: SFText(keyText: 'BedNet',),
           ),
           const SizedBox(height: 15,),
           Row(

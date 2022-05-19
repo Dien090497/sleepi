@@ -43,13 +43,13 @@ class TabWalletDetail extends StatelessWidget {
               children: [
                 ElevatedButton(
                   onPressed: () {},
-                  child: const Icon(Icons.download, color: AppColors.greenAccent, size: 40,),
                   style: ElevatedButton.styleFrom(
                       shape: const CircleBorder(),
                       padding: const EdgeInsets.all(8.0),
                       primary: AppColors.white,
                       side: const BorderSide(color: AppColors.black, width: 1)
                   ),
+                  child: const Icon(Icons.download, color: AppColors.greenAccent, size: 40,),
                 ),
                 const SizedBox(height: 8.0,),
                 SFText(keyText: Keys.receive, style: TextStyles.black13)
@@ -91,13 +91,13 @@ class TabWalletDetail extends StatelessWidget {
               children: [
                 ElevatedButton(
                   onPressed: () {},
-                  child: const Icon(Icons.repeat, color: AppColors.greenAccent, size: 40,),
                   style: ElevatedButton.styleFrom(
                       shape: const CircleBorder(),
                       padding: const EdgeInsets.all(8.0),
                       primary: AppColors.white,
                       side: const BorderSide(color: AppColors.black, width: 1)
                   ),
+                  child: const Icon(Icons.repeat, color: AppColors.greenAccent, size: 40,),
                 ),
                 const SizedBox(height: 8.0,),
                 SFText(keyText: Keys.trade, style: TextStyles.black13)
@@ -117,12 +117,12 @@ class TabWalletDetail extends StatelessWidget {
                 ),
                 ElevatedButton(
                   onPressed: () {},
-                  child: const Icon(Icons.question_mark, color: AppColors.black, size: 20,),
                   style: ElevatedButton.styleFrom(
                     shape: const CircleBorder(),
                     side: const BorderSide(color: AppColors.black,width: 1),
                     primary: AppColors.greenAccent, // <-- Button color
                   ),
+                  child: const Icon(Icons.question_mark, color: AppColors.black, size: 20,),
                 ),
               ],
             ),

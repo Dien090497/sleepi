@@ -23,13 +23,13 @@ class ModalPopUpLanguage extends StatelessWidget {
           children: [
             Expanded(
               child: CupertinoPicker(
-                children: language,
                 onSelectedItemChanged: (value){
                 },
                 itemExtent: 25,
                 diameterRatio:1,
                 useMagnifier: true,
                 magnification: 1.3,
+                children: language,
               ),
             ),
             SFButton(text: Keys.done, color: AppColors.white, onPressed: () => Navigator.pop(context))

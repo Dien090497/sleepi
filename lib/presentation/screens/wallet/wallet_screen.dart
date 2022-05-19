@@ -18,11 +18,11 @@ class WalletScreen extends StatelessWidget {
           leadingWidth: 50,
           leading: ElevatedButton(
             onPressed: () {},
-            child: const Icon(CupertinoIcons.back, color: AppColors.black),
             style: ElevatedButton.styleFrom(
               shape: const CircleBorder(),
               primary: AppColors.green, // <-- Button color
             ),
+            child: const Icon(CupertinoIcons.back, color: AppColors.black),
           ),
           actions: const [
             Icon(

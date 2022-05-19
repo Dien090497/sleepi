@@ -321,15 +321,15 @@ class _HomeScreenState extends State<HomeScreen> {
                                       Container(
                                         padding: const EdgeInsets.symmetric(
                                             horizontal: 10),
-                                        child: SFText(
-                                          keyText: '000 gst',
-                                        ),
                                         decoration: BoxDecoration(
                                             border: Border.all(
                                                 color: AppColors.black),
                                             borderRadius:
                                                 BorderRadius.circular(20)),
                                         width: size.width / 2,
+                                        child: SFText(
+                                          keyText: '000 gst',
+                                        ),
                                       ),
                                       const SizedBox(
                                         width: 50,

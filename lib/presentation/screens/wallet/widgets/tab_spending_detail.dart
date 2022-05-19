@@ -24,12 +24,12 @@ class TabSpendingDetail extends StatelessWidget {
               onPressed: () => ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                 content: SFText(keyText: Keys.displaysMessageFromSpendingDetail, style: const TextStyle(color: AppColors.white),),
               )),
-              child: const Icon(Icons.question_mark, color: AppColors.black, size: 20,),
               style: ElevatedButton.styleFrom(
                 shape: const CircleBorder(),
                 side: const BorderSide(color: AppColors.black,width: 1),
                 primary: Colors.greenAccent, // <-- Button color
               ),
+              child: const Icon(Icons.question_mark, color: AppColors.black, size: 20,),
             ),
           ],
         ),
