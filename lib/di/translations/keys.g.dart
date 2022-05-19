@@ -377,6 +377,12 @@ class Keys {
 
   static const String network = 'network';
 
+  static const String send = 'send';
+
+  static const String youllSend = 'youll_send';
+
+  static const String sendAddress = 'send_address';
+
   static const String youWillLoseYourAssets = 'you_will_lose_your_assets';
 
   static const String ifTheChosenPlatformDoesNotSupport =
