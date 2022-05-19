@@ -9,7 +9,9 @@ class SFTextField extends StatelessWidget {
     this.suffix,
     this.suffixIcon,
     this.noBorder = false,
-    Key? key, this.maxLine, this.maxLenght,
+    Key? key,
+    this.maxLine,
+    this.maxLength,
   }) : super(key: key);
 
   final String? hintText;
@@ -18,7 +20,7 @@ class SFTextField extends StatelessWidget {
   final Widget? suffixIcon;
   final bool noBorder;
   final int? maxLine;
-  final int? maxLenght;
+  final int? maxLength;
 
   @override
   Widget build(BuildContext context) {
@@ -41,7 +43,7 @@ class SFTextField extends StatelessWidget {
         focusedErrorBorder: border,
       ),
       maxLines: maxLine ?? 1,
-      maxLength: maxLenght,
+      maxLength: maxLength,
     );
   }
 }

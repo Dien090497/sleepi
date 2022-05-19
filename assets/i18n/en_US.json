@@ -165,5 +165,14 @@
   "enter_the_seed_phrase": "Enter the Seed Phrase word and separate with space",
   "import_a_wallet_using_seed_phrase": "Import a wallet using Seed Phrase",
   "email_verification_code": "Email Verification Code",
-  "you_have_already_created_a_wallet_address": "You have already created a wallet address. If you want to create a new wallet, please verify and continue"
+  "you_have_already_created_a_wallet_address": "You have already created a wallet address. If you want to create a new wallet, please verify and continue",
+  "send_to": "Send to",
+  "to_address": "To Address",
+  "amount": "Amount",
+  "balance": "Balance",
+  "the_network_you_have_selected_is": "The network you have selected is",
+  "please_ensure_that_the_withdrawal_address": "Please ensure that the withdrawal address supports the",
+  "network": "network",
+  "you_will_lose_your_assets": "You will lose your assets",
+  "if_the_chosen_platform_does_not_support": "if the chosen platform does not support retrievals"
 }

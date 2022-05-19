@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:slee_fi/common/routes/app_routes.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
@@ -71,8 +72,14 @@ class TabWalletDetail extends StatelessWidget {
                       ),
                       const SizedBox(width: 20.0,),
                       InkWell(
-                        onTap: () {},
-                        child: const Icon(Icons.arrow_upward, color: AppColors.greenAccent, size: 40,),
+                        onTap: () {
+                          Navigator.pushNamed(context, R.sendToExternal);
+                        },
+                        child: const Icon(
+                          Icons.arrow_upward,
+                          color: AppColors.greenAccent,
+                          size: 40,
+                        ),
                       )
                     ],
                   ),

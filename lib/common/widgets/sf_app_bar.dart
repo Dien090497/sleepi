@@ -7,19 +7,31 @@ class SFAppBar extends AppBar {
     String? title,
     TextStyle? textStyle,
     VoidCallback? onPressedBack,
+    bool toUpperCase = false,
+    Color? backgroundColor,
+    required BuildContext context,
     Key? key,
   }) : super(
-    backgroundColor: AppColors.greyBottomNavBar,
-    shape: RoundedRectangleBorder(
-      borderRadius: BorderRadius.circular(12.0),
-      side: const BorderSide(color: AppColors.black, width: 1),
-    ),
-    leading: IconButton(
-      icon: const Icon(Icons.arrow_circle_left_outlined, color: AppColors.black,size: 40,),
-      onPressed: onPressedBack,
-    ),
-    centerTitle: true,
-    title: SFText(keyText: title ?? "", style: textStyle,),
-    key: key,
-  );
+          backgroundColor: backgroundColor ?? AppColors.greyBottomNavBar,
+          shadowColor: backgroundColor,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(12.0),
+            side: const BorderSide(color: AppColors.black, width: 1),
+          ),
+          leading: IconButton(
+            icon: const Icon(
+              Icons.arrow_circle_left_outlined,
+              color: AppColors.black,
+              size: 40,
+            ),
+            onPressed: onPressedBack ?? () => Navigator.maybePop(context),
+          ),
+          centerTitle: true,
+          title: SFText(
+            keyText: title ?? "",
+            style: textStyle,
+            toUpperCase: toUpperCase,
+          ),
+          key: key,
+        );
 }
