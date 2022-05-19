@@ -16,6 +16,7 @@ class SettingScreen extends StatelessWidget {
         title: Keys.setting,
         textStyle: TextStyles.bold32black,
         onPressedBack: () => Navigator.pop(context),
+        context: context,
       ),
       body: SafeArea(
         child: ListView(

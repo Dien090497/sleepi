@@ -50,7 +50,7 @@ class FeedBackScreen extends StatelessWidget {
             ),
             const SFTextField(
               maxLine: 8,
-              maxLenght: 100,
+              maxLength: 100,
             ),
             const Spacer(),
             SFButton(

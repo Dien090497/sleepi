@@ -12,6 +12,8 @@ import 'package:slee_fi/presentation/screens/info_nft/info_nft_screen.dart';
 import 'package:slee_fi/presentation/screens/info_nft/layout/mint_screen.dart';
 import 'package:slee_fi/presentation/screens/info_nft/layout/recycle_screen.dart';
 import 'package:slee_fi/presentation/screens/login_signup/login_signup_screen.dart';
+import 'package:slee_fi/presentation/screens/passcode/passcode_screen.dart';
+import 'package:slee_fi/presentation/screens/send_to_external/send_to_external_screen.dart';
 import 'package:slee_fi/presentation/screens/setting/setting_screen.dart';
 import 'package:slee_fi/presentation/screens/setting_activation_code/activation_code_screen.dart';
 import 'package:slee_fi/presentation/screens/setting_permission/setting_permission_screen.dart';
@@ -20,8 +22,8 @@ import 'package:slee_fi/presentation/screens/setting_permission/widgets/motion_d
 import 'package:slee_fi/presentation/screens/setting_permission/widgets/notification_screen.dart';
 import 'package:slee_fi/presentation/screens/staking/staking_screen.dart';
 import 'package:slee_fi/presentation/screens/staking/widgets/taking_screen.dart';
+import 'package:slee_fi/presentation/screens/trade/trade_screen.dart';
 import 'package:slee_fi/presentation/screens/wallet/wallet_screen.dart';
-import 'package:slee_fi/presentation/screens/passcode/passcode_screen.dart';
 
 class R {
   static const String _ = '/';
@@ -49,6 +51,8 @@ class R {
   static const String notificationPermission = '${_}notification_permission';
   static const String createWallet = '${_}create_wallet';
   static const String importWallet = '${_}import_wallet';
+  static const String sendToExternal = '${_}send_to_external';
+  static const String trade = '${_}trade';
 }
 
 class AppRoutes {
@@ -77,5 +81,7 @@ class AppRoutes {
     R.passcode: (_) => const PasscodeScreen(),
     R.createWallet: (_) => const CreateWalletScreen(),
     R.importWallet: (_) => const ImportWalletScreen(),
+    R.sendToExternal: (_) => const SendToExternalScreen(),
+    R.trade: (_) => const TradeScreen(),
   };
 }
