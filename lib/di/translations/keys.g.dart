@@ -37,13 +37,13 @@ class Keys {
 
   static const String productLineUp = 'product_line_up';
 
-  static const String introduceHowToPlay = 'introduce.how_to_play';
+  static const String howToPlay = 'how_to_play';
 
-  static const String introduceWhitePaper = 'introduce.white_paper';
+  static const String whitePaper = 'white_paper';
 
-  static const String introduceLitePaper = 'introduce.lite_paper';
+  static const String litePaper = 'lite_paper';
 
-  static const String introduceLinkTree = 'introduce.link_tree';
+  static const String linkTree = 'link_tree';
 
   static const String pleaseEnter = 'please_enter';
 
@@ -66,28 +66,6 @@ class Keys {
   static const String rareBedsChance = 'rare_beds_chance';
 
   static const String get = 'get';
-
-  static const String bed = 'bed';
-
-  static const String commonBed = 'common_bed';
-
-  static const String uncommonBed = 'uncommon_bed';
-
-  static const String rareBed = 'rare_bed';
-
-  static const String epicBed = 'epic_bed';
-
-  static const String legendaryBed = 'legendary_bed';
-
-  static const String attributes = 'attributes';
-
-  static const String howToPlay = 'how_to_play';
-
-  static const String whitePaper = 'white_paper';
-
-  static const String litePaper = 'lite_paper';
-
-  static const String linkTree = 'link_tree';
 
   static const String titleRepair = 'title_repair';
 
@@ -120,6 +98,20 @@ class Keys {
   static const String youWinTransfer = 'you_win_transfer';
 
   static const String cancel = 'cancel';
+
+  static const String bed = 'bed';
+
+  static const String commonBed = 'common_bed';
+
+  static const String uncommonBed = 'uncommon_bed';
+
+  static const String rareBed = 'rare_bed';
+
+  static const String epicBed = 'epic_bed';
+
+  static const String legendaryBed = 'legendary_bed';
+
+  static const String attributes = 'attributes';
 
   static const String efficiency = 'Efficiency';
 
@@ -178,6 +170,167 @@ class Keys {
 
   static const String mint = 'mint';
 
+  static const String spending = 'spending';
+
+  static const String spendingAccount = 'spending_account';
+
+  static const String displaysMessageFromSpendingDetail =
+      'displays_message_from_spending_detail';
+
+  static const String slft = 'slft';
+
+  static const String slgt = 'slgt';
+
+  static const String avax = 'avax';
+
+  static const String baceOnSolana = 'bace_on_solana';
+
+  static const String stakeToGetBenefits = 'stake_to_get_benefits';
+
+  static const String transfer = 'transfer';
+
+  static const String avaxCChain = 'avax_c-chain';
+
+  static const String receive = 'receive';
+
+  static const String toSpending = 'to_spending';
+
+  static const String toExternal = 'to_external';
+
+  static const String trade = 'trade';
+
+  static const String walletAccount = 'wallet_account';
+
+  static const String buy = 'buy';
+
+  static const String staking = 'staking';
+
+  static const String displaysMessageFromPopUpStaking =
+      'displays_message_from_pop_up_staking';
+
+  static const String yes = 'yes';
+
+  static const String no = 'no';
+
+  static const String yourSlftInSpending = 'your_slft_in_spending';
+
+  static const String stakeWithdraw = 'stake_withdraw';
+
+  static const String max = 'max';
+
+  static const String stakeSlft = 'stake_slft';
+
+  static const String tvlInSleefi = 'tvl_in_sleefi';
+
+  static const String displaysMessageFromStakingSlftDetail =
+      'displays_message_from_staking_slft_detail';
+
+  static const String earningToken = 'earning_token';
+
+  static const String mintingDiscount = 'minting_discount';
+
+  static const String levelUpDiscount = 'level_up_discount';
+
+  static const String stakeTokens = 'stake_tokens';
+
+  static const String yourSlftEarned = 'your_slft_earned';
+
+  static const String yourStakedAmount = 'your_staked_amount';
+
+  static const String apr = 'apr';
+
+  static const String deposit = 'deposit';
+
+  static const String withdraw = 'withdraw';
+
+  static const String compound = 'compound';
+
+  static const String buySlft = 'buy_slft';
+
+  static const String showContract = 'show_contract';
+
+  static const String setting = 'setting';
+
+  static const String alarm = 'alarm';
+
+  static const String music = 'music';
+
+  static const String vibration = 'vibration';
+
+  static const String snooze = 'snooze';
+
+  static const String volume = 'volume';
+
+  static const String soundEffect = 'sound_effect';
+
+  static const String profile = 'profile';
+
+  static const String birthYear = 'birth_year';
+
+  static const String sex = 'sex';
+
+  static const String email = 'email';
+
+  static const String password = 'password';
+
+  static const String logout = 'logout';
+
+  static const String averageOfBedTime = 'average_of_bed_time';
+
+  static const String averageOfWokeUp = 'average_of_woke_up';
+
+  static const String averageOfSleepDuration = 'average_of_sleep_duration';
+
+  static const String averageOfSleepQuolity = 'average_of_sleep_quolity';
+
+  static const String general = 'general';
+
+  static const String permissions = 'permissions';
+
+  static const String multiChainSwitch = 'multi-chain_switch';
+
+  static const String version = 'version';
+
+  static const String done = 'done';
+
+  static const String female = 'female';
+
+  static const String male = 'male';
+
+  static const String other = 'other';
+
+  static const String activationCodeLanguageLowercase =
+      'activation_code_language_lowercase';
+
+  static const String activationCode = 'activation_code';
+
+  static const String availableTotal = 'available_total';
+
+  static const String english = 'english';
+
+  static const String japanese = 'japanese';
+
+  static const String chinese = 'chinese';
+
+  static const String multiChainSwitchUppercase =
+      'multi-chain_switch_uppercase';
+
+  static const String allow = 'allow';
+
+  static const String setupMicrophoneAccess = 'setup_microphone_access';
+
+  static const String displaysMessageMicPermission =
+      'displays_message_mic_permission';
+
+  static const String displaysMessageHealthcarePermission =
+      'displays_message_healthcare_permission';
+
+  static const String displaysMessageMotionDataPermission =
+      'displays_message_motion_data_permission';
+
+  static const String displaysMessageNotificationPermission =
+      'displays_message_notification_permission';
+
   static const String enterYourPasscode = 'enter_your_passcode';
 
   static const String forgotPasscode = 'forgot_passcode';
@@ -199,4 +352,12 @@ class Keys {
 
   static const String youHaveAlreadyCreatedAWalletAddress =
       'you_have_already_created_a_wallet_address';
+
+  static const String introduceHowToPlay = 'introduce.how_to_play';
+
+  static const String introduceWhitePaper = 'introduce.white_paper';
+
+  static const String introduceLitePaper = 'introduce.lite_paper';
+
+  static const String introduceLinkTree = 'introduce.link_tree';
 }

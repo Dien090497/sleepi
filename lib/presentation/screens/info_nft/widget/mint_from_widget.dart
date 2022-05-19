@@ -15,11 +15,11 @@ class MintFromWidget extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20),
           child: Align(
+            alignment: Alignment.centerLeft,
             child: SFText(
               keyText: text,
               style: TextStyles.bold15black,
             ),
-            alignment: Alignment.centerLeft,
           ),
         ),
         const SizedBox(height: 10),

@@ -26,7 +26,7 @@ class BoxIndexInfo extends StatelessWidget {
               children: [
                 Row(
                   children: [
-                    SizedBox(child: SFText(keyText: 'Efficiency', style: TextStyles.bold15black), width: 80,),
+                    SizedBox(width: 80,child: SFText(keyText: 'Efficiency', style: TextStyles.bold15black), ),
                     const SizedBox(width: 10),
                     Expanded(
                       child: Container(
@@ -44,7 +44,7 @@ class BoxIndexInfo extends StatelessWidget {
                 const SizedBox(height: 10,),
                 Row(
                   children: [
-                    SizedBox(child: SFText(keyText: 'Luck', style: TextStyles.bold15black), width: 80,),
+                    SizedBox( width: 80, child: SFText(keyText: 'Luck', style: TextStyles.bold15black),),
                     const SizedBox(width: 10),
                     Expanded(
                       child: Container(
@@ -62,7 +62,7 @@ class BoxIndexInfo extends StatelessWidget {
                 const SizedBox(height: 10,),
                 Row(
                   children: [
-                    SizedBox(child: SFText(keyText: 'Bonus', style: TextStyles.bold15black), width: 80,),
+                    SizedBox(width: 80, child: SFText(keyText: 'Bonus', style: TextStyles.bold15black),),
                     const SizedBox(width: 10),
                     Expanded(
                       child: Container(
@@ -80,7 +80,7 @@ class BoxIndexInfo extends StatelessWidget {
                 const SizedBox(height: 10,),
                 Row(
                   children: [
-                    SizedBox(child: SFText(keyText: 'Special', style: TextStyles.bold15black), width: 80,),
+                    SizedBox(width: 80, child: SFText(keyText: 'Special', style: TextStyles.bold15black),),
                     const SizedBox(width: 10),
                     Expanded(
                       child: Container(
@@ -98,7 +98,7 @@ class BoxIndexInfo extends StatelessWidget {
                 const SizedBox(height: 10,),
                 Row(
                   children: [
-                    SizedBox(child: SFText(keyText: 'Resilience', style: TextStyles.bold15black), width: 80,),
+                    SizedBox(width: 80, child: SFText(keyText: 'Resilience', style: TextStyles.bold15black),),
                     const SizedBox(width: 10),
                     Expanded(
                       child: Container(

@@ -14,7 +14,9 @@ class TopBarCommon extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          const Icon(Icons.settings, size: 50),
+          GestureDetector(
+            onTap: () => Navigator.pushNamed(context, R.setting),
+              child: const Icon(Icons.settings, size: 50)),
           GestureDetector(
             onTap: () {
               Navigator.pushNamed(context, R.passcode);
