@@ -11,6 +11,11 @@ import 'package:slee_fi/presentation/screens/info_nft/layout/recycle_screen.dart
 import 'package:slee_fi/presentation/screens/info_nft/info_nft_screen.dart';
 import 'package:slee_fi/presentation/screens/login_signup/login_signup_screen.dart';
 import 'package:slee_fi/presentation/screens/setting/setting_screen.dart';
+import 'package:slee_fi/presentation/screens/setting_activation_code/activation_code_screen.dart';
+import 'package:slee_fi/presentation/screens/setting_permission/setting_permission_screen.dart';
+import 'package:slee_fi/presentation/screens/setting_permission/widgets/healthcare_screen.dart';
+import 'package:slee_fi/presentation/screens/setting_permission/widgets/motion_data_screen.dart';
+import 'package:slee_fi/presentation/screens/setting_permission/widgets/notification_screen.dart';
 import 'package:slee_fi/presentation/screens/staking/staking_screen.dart';
 import 'package:slee_fi/presentation/screens/staking/widgets/taking_screen.dart';
 import 'package:slee_fi/presentation/screens/wallet/wallet_screen.dart';
@@ -33,6 +38,11 @@ class R {
   static const String setting = '${_}setting';
   static const String alarm = '${_}alarm';
   static const String alarmSoundEffect = '${_}alarm_sound_effect';
+  static const String activationCode = '${_}activation_code';
+  static const String permission = '${_}permission';
+  static const String healthcarePermission = '${_}healthcare_permission';
+  static const String motionDataPermission = '${_}motion_data_permission';
+  static const String notificationPermission = '${_}notification_permission';
 }
 
 class AppRoutes {
@@ -53,5 +63,10 @@ class AppRoutes {
     R.setting: (_) => const SettingScreen(),
     R.alarm: (_) => const AlarmScreen(),
     R.alarmSoundEffect: (_) => const AlarmSoundEffectScreen(),
+    R.activationCode: (_) => const ActivationCodeScreen(),
+    R.permission: (_) => const SettingPermissionScreen(),
+    R.motionDataPermission: (_) => const MotionDataPermissionScreen(),
+    R.notificationPermission: (_) => const NotificationPermissionScreen(),
+    R.healthcarePermission: (_) => const HealthcarePermissionScreen(),
   };
 }

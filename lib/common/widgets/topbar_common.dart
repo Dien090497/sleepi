@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:slee_fi/common/routes/app_routes.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
@@ -13,9 +14,12 @@ class TopBarCommon extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          const Icon(
-            Icons.settings,
-            size: 50,
+          GestureDetector(
+            onTap: () => Navigator.pushNamed(context, R.setting),
+            child: const Icon(
+              Icons.settings,
+              size: 50,
+            ),
           ),
           Container(
             decoration: BoxDecoration(

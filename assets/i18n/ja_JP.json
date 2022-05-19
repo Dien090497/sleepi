@@ -102,5 +102,17 @@
   "female": "Female",
   "male": "Male",
   "other": "Other",
-  "activation_code_language_lowercase": "Activation Code / Language"
+  "activation_code_language_lowercase": "Activation Code / Language",
+  "activation_code": "ACTIVATION CODE",
+  "available_total": "Available/Total",
+  "english": "English",
+  "japanese": "日本語",
+  "chinese": "簡体中文",
+  "multi-chain_switch": "MULTI-CHAIN SWITCH",
+  "allow": "Allow",
+  "setup_microphone_access": "Setup Microphone Access",
+  "displays_message_mic_permission": "Allow “SLeeFi” to Record Sleep Sounds",
+  "displays_message_healthcare_permission": "Allow “SLeeFi” to Access Healthcare Data",
+  "displays_message_motion_data_permission": "Allow “SLeeFi” to Access Motion Data",
+  "displays_message_notification_permission": "“SLeeFi” Would Like to Send You Notifications"
 }

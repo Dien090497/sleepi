@@ -1,0 +1,23 @@
+import 'package:flutter/material.dart';
+import 'package:slee_fi/common/routes/app_routes.dart';
+import 'package:slee_fi/common/widgets/sf_buttons.dart';
+import 'package:slee_fi/di/translations/keys.dart';
+import 'package:slee_fi/presentation/screens/setting_permission/widgets/box_message_widget.dart';
+
+class MicPermissionScreen extends StatelessWidget {
+  const MicPermissionScreen({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return ListView(
+      padding: const EdgeInsets.all(24.0),
+      children: [
+        Image.asset("assets/images/mic.png",fit: BoxFit.fill),
+        const SizedBox(height: 24.0,),
+        const BoxMessage(message: Keys.displaysMessageMicPermission),
+        SizedBox(height: MediaQuery.of(context).size.height * 0.2,),
+        SFButton(height: 48,text: Keys.setupMicrophoneAccess,onPressed: () => Navigator.pushNamed(context, R.healthcarePermission), )
+      ],
+    );
+  }
+}

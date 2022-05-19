@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
-import 'package:slee_fi/common/widgets/sf_text.dart';
+import 'package:slee_fi/common/widgets/sf_app_bar.dart';
 import 'package:slee_fi/di/translations/keys.dart';
 import 'package:slee_fi/presentation/screens/setting/widgets/average_info_widget.dart';
 import 'package:slee_fi/presentation/screens/setting/widgets/general_widget.dart';
@@ -13,18 +12,10 @@ class SettingScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: AppColors.greyBottomNavBar,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(12.0),
-          side: const BorderSide(color: AppColors.black, width: 1),
-        ),
-        leading: IconButton(
-          icon: const Icon(Icons.arrow_circle_left_outlined, color: AppColors.black,size: 40,),
-          onPressed: () {},
-        ),
-        centerTitle: true,
-        title: SFText(keyText: Keys.setting, style: TextStyles.bold32black,),
+      appBar: SFAppBar(
+        title: Keys.setting,
+        textStyle: TextStyles.bold32black,
+        onPressedBack: () => Navigator.pop(context),
       ),
       body: SafeArea(
         child: ListView(

@@ -18,4 +18,6 @@ class AppColors {
   static const green = Colors.green;
 
   static const greenAccent = Colors.greenAccent;
+
+  static const yellow = Colors.yellow;
 }

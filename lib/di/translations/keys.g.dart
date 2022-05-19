@@ -294,6 +294,32 @@ class Keys {
   static const String activationCodeLanguageLowercase =
       'activation_code_language_lowercase';
 
+  static const String activationCode = 'activation_code';
+
+  static const String availableTotal = 'available_total';
+
+  static const String english = 'english';
+
+  static const String japanese = 'japanese';
+
+  static const String chinese = 'chinese';
+
+  static const String allow = 'allow';
+
+  static const String setupMicrophoneAccess = 'setup_microphone_access';
+
+  static const String displaysMessageMicPermission =
+      'displays_message_mic_permission';
+
+  static const String displaysMessageHealthcarePermission =
+      'displays_message_healthcare_permission';
+
+  static const String displaysMessageMotionDataPermission =
+      'displays_message_motion_data_permission';
+
+  static const String displaysMessageNotificationPermission =
+      'displays_message_notification_permission';
+
   static const String introduceHowToPlay = 'introduce.how_to_play';
 
   static const String introduceWhitePaper = 'introduce.white_paper';
