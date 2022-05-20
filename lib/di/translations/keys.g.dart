@@ -415,6 +415,18 @@ class Keys {
 
   static const String asset = 'asset';
 
+  static const String confirmTrade = 'confirm_trade';
+
+  static const String received = 'received';
+
+  static const String howToSetUp = 'how_to_set_up';
+
+  static const String elevateYourPhone = 'elevate_your_phone';
+
+  static const String trackingRange = 'tracking_range';
+
+  static const String tokenAndSleep = 'token_and_sleep';
+
   static const String introduceHowToPlay = 'introduce.how_to_play';
 
   static const String introduceWhitePaper = 'introduce.white_paper';

@@ -27,6 +27,7 @@ import 'package:slee_fi/presentation/screens/staking/staking_screen.dart';
 import 'package:slee_fi/presentation/screens/staking/widgets/taking_screen.dart';
 import 'package:slee_fi/presentation/screens/trade/trade_screen.dart';
 import 'package:slee_fi/presentation/screens/transfer/transfer_screen.dart';
+import 'package:slee_fi/presentation/screens/tutorial/tutorial_screen.dart';
 import 'package:slee_fi/presentation/screens/wallet/wallet_screen.dart';
 
 class R {
@@ -61,6 +62,7 @@ class R {
   static const String email = '${_}email';
   static const String changePassword = '${_}change_password';
   static const String transfer = '${_}transfer';
+  static const String tutorial = '${_}tutorial';
 }
 
 class AppRoutes {
@@ -95,5 +97,6 @@ class AppRoutes {
     R.email: (_) => const EmailScreen(),
     R.changePassword: (_) => const ChangePasswordScreen(),
     R.transfer: (_) => const TransferScreen(),
+    R.tutorial: (_) => const TutorialScreen(),
   };
 }

@@ -4,18 +4,49 @@ class Imgs {
   Imgs._();
 
   static const String gacha = 'assets/images/gacha.png';
+  static const String healthcare = 'assets/images/healthcare.png';
   static const String homePage = 'assets/images/home_page.png';
+  static const String lvUp = 'assets/images/lv_up.png';
   static const String market = 'assets/images/market.png';
+  static const String mic = 'assets/images/mic.png';
+  static const String mint = 'assets/images/mint.png';
+  static const String mintShoe = 'assets/images/mint_shoe.png';
+  static const String motionData = 'assets/images/motion_data.png';
+  static const String notificationPermission =
+      'assets/images/notification_permission.png';
   static const String productDetail = 'assets/images/product_detail.png';
+  static const String recyle = 'assets/images/recyle.png';
+  static const String repair = 'assets/images/repair.png';
+  static const String sell = 'assets/images/sell.png';
   static const String statistics = 'assets/images/statistics.png';
   static const String test = 'assets/images/test.png';
+  static const String transfer = 'assets/images/transfer.png';
+  static const String tutorial1 = 'assets/images/tutorial_1.png';
+  static const String tutorial2 = 'assets/images/tutorial_2.png';
+  static const String tutorial3 = 'assets/images/tutorial_3.png';
+  static const String tutorial4 = 'assets/images/tutorial_4.png';
 
   static const List<String> values = [
     gacha,
+    healthcare,
     homePage,
+    lvUp,
     market,
+    mic,
+    mint,
+    mintShoe,
+    motionData,
+    notificationPermission,
     productDetail,
+    recyle,
+    repair,
+    sell,
     statistics,
-    test
+    test,
+    transfer,
+    tutorial1,
+    tutorial2,
+    tutorial3,
+    tutorial4
   ];
 }
