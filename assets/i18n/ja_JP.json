@@ -119,5 +119,6 @@
   "solana": "Solana",
   "can_enter_amount": "Can enter amount",
   "all": "All",
-  "asset": "Asset"
+  "asset": "Asset",
+  "language": "Language"
 }

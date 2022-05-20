@@ -15,15 +15,12 @@ class ActivationCodeScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: AppColors.greenAccent.withOpacity(0.75),
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(28.0),
-        ),
         leading: IconButton(
           icon: const Icon(CupertinoIcons.chevron_left_circle_fill, color: AppColors.green,size: 40,),
           onPressed: () => Navigator.pop(context),
         ),
         centerTitle: true,
-        title: SFText(keyText: Keys.activationCode, style: TextStyles.bold20black,),
+        title: SFText(keyText: Keys.activationCode, style: TextStyles.bold20black, toUpperCase: true,),
 
        bottom: PreferredSize(
         preferredSize:  Size(MediaQuery.of(context).size.width,MediaQuery.of(context).size.height * 0.2),

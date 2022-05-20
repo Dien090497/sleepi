@@ -6,6 +6,7 @@ import 'package:slee_fi/common/style/text_styles.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
 import 'package:slee_fi/di/translations/keys.dart';
 import 'package:slee_fi/presentation/screens/setting/widgets/modal_multi_chain_switch.dart';
+import 'package:slee_fi/presentation/screens/setting/widgets/modal_pop_up_language.dart';
 
 class GeneralWidget extends StatelessWidget {
   const GeneralWidget({Key? key}) : super(key: key);
@@ -63,11 +64,33 @@ class GeneralWidget extends StatelessWidget {
             ),
             child: ListTile(
               dense: true,
-              title: SFText(keyText: Keys.activationCodeLanguageLowercase,
+              title: SFText(keyText: Keys.activationCode,
                 style: TextStyles.bold15black,
               ),
               trailing: const Icon(Icons.chevron_right, size: 32,),
               onTap: () => Navigator.pushNamed(context, R.activationCode),
+            ),
+          ),
+          Container(
+            height: 45,
+            width: double.infinity,
+            decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(12.0),
+                border: Border.all(color: AppColors.black, width: 1),
+                color: AppColors.greyBottomNavBar
+            ),
+            child: ListTile(
+              dense: true,
+              title: SFText(keyText: Keys.language,
+                style: TextStyles.bold15black,
+              ),
+              trailing: const Icon(Icons.chevron_right, size: 32,),
+              onTap: () {
+                showCupertinoModalPopup(
+                    context: context,
+                    builder: (_) => const ModalPopUpLanguage()
+                );
+              },
             ),
           ),
           Container(

@@ -16,7 +16,7 @@ class ModalPopUpLanguage extends StatelessWidget {
     ];
 
     return Container(
-        height: MediaQuery.of(context).copyWith().size.height*0.25,
+        height: MediaQuery.of(context).copyWith().size.height*0.3,
         color: AppColors.white,
         child: Column(
           mainAxisSize: MainAxisSize.min,
