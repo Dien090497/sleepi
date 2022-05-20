@@ -123,22 +123,27 @@ class ProfileWidget extends StatelessWidget {
               ),
             ),
           ),
-          Container(
-            height: 45,
-            width: double.infinity,
-            decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(12.0),
-                border: Border.all(color: AppColors.black, width: 1),
-                color: AppColors.greyBottomNavBar),
-            child: ListTile(
-              dense: true,
-              title: SFText(
-                keyText: Keys.password,
-                style: TextStyles.bold15black,
-              ),
-              trailing: const Icon(
-                Icons.chevron_right,
-                size: 32,
+          GestureDetector(
+            onTap: () {
+              Navigator.pushNamed(context, R.changePassword);
+            },
+            child: Container(
+              height: 45,
+              width: double.infinity,
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(12.0),
+                  border: Border.all(color: AppColors.black, width: 1),
+                  color: AppColors.greyBottomNavBar),
+              child: ListTile(
+                dense: true,
+                title: SFText(
+                  keyText: Keys.password,
+                  style: TextStyles.bold15black,
+                ),
+                trailing: const Icon(
+                  Icons.chevron_right,
+                  size: 32,
+                ),
               ),
             ),
           ),
