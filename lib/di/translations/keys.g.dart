@@ -304,6 +304,8 @@ class Keys {
 
   static const String activationCode = 'activation_code';
 
+  static const String language = 'language';
+
   static const String availableTotal = 'available_total';
 
   static const String english = 'english';

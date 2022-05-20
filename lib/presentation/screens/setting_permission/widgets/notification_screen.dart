@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:slee_fi/common/routes/app_routes.dart';
 import 'package:slee_fi/common/widgets/sf_buttons.dart';
 import 'package:slee_fi/di/translations/keys.dart';
 import 'package:slee_fi/presentation/screens/setting_permission/widgets/box_message_widget.dart';
@@ -17,7 +18,7 @@ class NotificationPermissionScreen extends StatelessWidget {
             const SizedBox(height: 24.0,),
             const BoxMessage(message: Keys.displaysMessageNotificationPermission),
             SizedBox(height: MediaQuery.of(context).size.height * 0.2,),
-            SFButton(height: 48,text: Keys.allow,onPressed: () {}, )
+            SFButton(height: 48,text: Keys.allow,onPressed: () => Navigator.popUntil(context,  ModalRoute.withName(R.setting),), )
           ],
         ),
       ),
