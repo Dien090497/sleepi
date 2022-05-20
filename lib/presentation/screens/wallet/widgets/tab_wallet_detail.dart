@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:slee_fi/common/routes/app_routes.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
@@ -71,8 +72,14 @@ class TabWalletDetail extends StatelessWidget {
                       ),
                       const SizedBox(width: 20.0,),
                       InkWell(
-                        onTap: () {},
-                        child: const Icon(Icons.arrow_upward, color: AppColors.greenAccent, size: 40,),
+                        onTap: () {
+                          Navigator.pushNamed(context, R.sendToExternal);
+                        },
+                        child: const Icon(
+                          Icons.arrow_upward,
+                          color: AppColors.greenAccent,
+                          size: 40,
+                        ),
                       )
                     ],
                   ),
@@ -90,14 +97,19 @@ class TabWalletDetail extends StatelessWidget {
             Column(
               children: [
                 ElevatedButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.pushNamed(context, R.trade);
+                  },
                   style: ElevatedButton.styleFrom(
                       shape: const CircleBorder(),
                       padding: const EdgeInsets.all(8.0),
                       primary: AppColors.white,
-                      side: const BorderSide(color: AppColors.black, width: 1)
+                      side: const BorderSide(color: AppColors.black, width: 1)),
+                  child: const Icon(
+                    Icons.repeat,
+                    color: AppColors.greenAccent,
+                    size: 40,
                   ),
-                  child: const Icon(Icons.repeat, color: AppColors.greenAccent, size: 40,),
                 ),
                 const SizedBox(height: 8.0,),
                 SFText(keyText: Keys.trade, style: TextStyles.black13)

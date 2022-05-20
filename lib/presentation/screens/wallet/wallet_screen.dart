@@ -20,7 +20,7 @@ class WalletScreen extends StatelessWidget {
             onPressed: () {},
             style: ElevatedButton.styleFrom(
               shape: const CircleBorder(),
-              primary: AppColors.green, // <-- Button color
+              primary: AppColors.green,
             ),
             child: const Icon(CupertinoIcons.back, color: AppColors.black),
           ),
@@ -41,7 +41,7 @@ class WalletScreen extends StatelessWidget {
             ),
           ),
         ),
-        body:  const TabBarView(
+        body: const TabBarView(
           children: [
             TabSpendingDetail(),
             TabWalletDetail(),
