@@ -2,6 +2,7 @@ import 'package:slee_fi/presentation/screens/alarm/alarm_screen.dart';
 import 'package:slee_fi/presentation/screens/alarm/widgets/sound_effect_screen.dart';
 import 'package:slee_fi/presentation/screens/bottom_navigation/bottom_navigation_screen.dart';
 import 'package:slee_fi/presentation/screens/create_wallet/create_wallet_screen.dart';
+import 'package:slee_fi/presentation/screens/email/email_screen.dart';
 import 'package:slee_fi/presentation/screens/enter_activation_cde/enter_activation_code_screen.dart';
 import 'package:slee_fi/presentation/screens/gacha/gacha_chane_500_screen.dart';
 import 'package:slee_fi/presentation/screens/gacha/gacha_result_bed_screen.dart';
@@ -14,6 +15,7 @@ import 'package:slee_fi/presentation/screens/info_nft/layout/recycle_screen.dart
 import 'package:slee_fi/presentation/screens/login_signup/login_signup_screen.dart';
 import 'package:slee_fi/presentation/screens/passcode/passcode_screen.dart';
 import 'package:slee_fi/presentation/screens/send_to_external/send_to_external_screen.dart';
+import 'package:slee_fi/presentation/screens/send_to_spending/send_to_spending_screen.dart';
 import 'package:slee_fi/presentation/screens/setting/setting_screen.dart';
 import 'package:slee_fi/presentation/screens/setting_activation_code/activation_code_screen.dart';
 import 'package:slee_fi/presentation/screens/setting_permission/setting_permission_screen.dart';
@@ -52,7 +54,9 @@ class R {
   static const String createWallet = '${_}create_wallet';
   static const String importWallet = '${_}import_wallet';
   static const String sendToExternal = '${_}send_to_external';
+  static const String sendToSpending = '${_}send_to_spending';
   static const String trade = '${_}trade';
+  static const String email = '${_}email';
 }
 
 class AppRoutes {
@@ -82,6 +86,8 @@ class AppRoutes {
     R.createWallet: (_) => const CreateWalletScreen(),
     R.importWallet: (_) => const ImportWalletScreen(),
     R.sendToExternal: (_) => const SendToExternalScreen(),
+    R.sendToSpending: (_) => const SendToSpendingScreen(),
     R.trade: (_) => const TradeScreen(),
+    R.email: (_) => const EmailScreen(),
   };
 }

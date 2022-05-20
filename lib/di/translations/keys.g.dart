@@ -389,4 +389,10 @@ class Keys {
 
   static const String ifTheChosenPlatformDoesNotSupport =
       'if_the_chosen_platform_does_not_support';
+
+  static const String newEmail = 'new_email';
+
+  static const String verificationCode = 'verification_code';
+
+  static const String pleaseSetPasswordFirst = 'please_set_password_first';
 }
