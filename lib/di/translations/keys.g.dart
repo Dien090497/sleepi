@@ -409,4 +409,8 @@ class Keys {
   static const String yourPassword = 'your_password';
 
   static const String save = 'save';
+
+  static const String confirmTrade = 'confirm_trade';
+
+  static const String received = 'received';
 }
