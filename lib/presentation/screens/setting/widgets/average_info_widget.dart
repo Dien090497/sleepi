@@ -15,7 +15,7 @@ class AverageInfoWidget extends StatelessWidget {
       width: double.infinity,
       padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 12),
       decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(16.0),
+          borderRadius: BorderRadius.circular(10.0),
           border: Border.all(color: AppColors.black, width: 1),
           color: AppColors.greyBottomNavBar
       ),

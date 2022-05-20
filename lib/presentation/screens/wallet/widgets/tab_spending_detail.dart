@@ -10,7 +10,7 @@ class TabSpendingDetail extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
+    return ListView(
       children: [
         const SizedBox(height: 20.0,),
         Row(
@@ -104,25 +104,23 @@ class TabSpendingDetail extends StatelessWidget {
           ),
         ),
         const SizedBox(height: 12.0,),
-        SFText(keyText: Keys.baceOnSolana, style: TextStyles.bold15black),
+        SFText(keyText: Keys.baceOnSolana, style: TextStyles.bold15black, textAlign: TextAlign.center,),
         const SizedBox(height: 12.0,),
-        Expanded(
-          child: Container(
-            width: double.infinity,
-            color: AppColors.greyBottomNavBar,
-            child: Column(
-              children: [
-                const SizedBox(height: 30),
-                GestureDetector(
-                    onTap: () => Navigator.pushNamed(context, R.staking),
-                    child: SizedBox(
-                        width: 268,
-                        child: SFText(keyText: Keys.stakeToGetBenefits,style: TextStyles.bold32black, textAlign: TextAlign.center,),)),
-                const SizedBox(height: 30,),
-                Center(child: SFText(keyText: Keys.transfer, style: TextStyles.bold32black)),
-              ],
-            )
-          ),
+        Container(
+          width: double.infinity,
+          color: AppColors.greyBottomNavBar,
+          child: Column(
+            children: [
+              const SizedBox(height: 30),
+              GestureDetector(
+                  onTap: () => Navigator.pushNamed(context, R.staking),
+                  child: SizedBox(
+                      width: 268,
+                      child: SFText(keyText: Keys.stakeToGetBenefits,style: TextStyles.bold32black, textAlign: TextAlign.center,),)),
+              const SizedBox(height: 30,),
+              Center(child: SFText(keyText: Keys.transfer, style: TextStyles.bold32black)),
+            ],
+          )
         )
       ],
     );

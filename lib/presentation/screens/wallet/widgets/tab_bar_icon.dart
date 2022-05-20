@@ -16,7 +16,7 @@ class TabBarIcon extends TabBar {
                 children: [
                   Icon(icons.isNotEmpty ? icons[i] : null),
                   const SizedBox(width: 8),
-                  Text(translate(texts[i])),
+                  Expanded(child: Text(translate(texts[i]))),
                 ],
               ),
         )),
@@ -25,7 +25,7 @@ class TabBarIcon extends TabBar {
       color: AppColors.greyBottomNavBar,
     ),
     indicatorColor: AppColors.transparent,
-    padding: const EdgeInsets.symmetric(horizontal: 12),
+    // padding: const EdgeInsets.symmetric(horizontal: 12),
     key: key,
   );
 }

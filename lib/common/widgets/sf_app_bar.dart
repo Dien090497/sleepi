@@ -2,24 +2,34 @@ import 'package:flutter/material.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
 
-class SFAppBar extends AppBar {
-  SFAppBar({
-    String? title,
-    TextStyle? textStyle,
-    VoidCallback? onPressedBack,
-    Key? key,
-  }) : super(
-    backgroundColor: AppColors.greyBottomNavBar,
-    shape: RoundedRectangleBorder(
-      borderRadius: BorderRadius.circular(12.0),
-      side: const BorderSide(color: AppColors.black, width: 1),
-    ),
-    leading: IconButton(
-      icon: const Icon(Icons.arrow_circle_left_outlined, color: AppColors.black,size: 40,),
-      onPressed: onPressedBack,
-    ),
-    centerTitle: true,
-    title: SFText(keyText: title ?? "", style: textStyle,),
-    key: key,
-  );
+class SFAppBar extends StatelessWidget {
+  const SFAppBar({this.title, this.textStyle, this.trailing, this.onPressedBack, Key? key}) : super(key: key);
+
+  final String? title;
+  final TextStyle? textStyle;
+  final VoidCallback? onPressedBack;
+  final Widget? trailing;
+
+  @override
+  Widget build(BuildContext context) {
+    return  Container(
+      height: 73,
+      width: double.infinity,
+      alignment: Alignment.center,
+      decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(10.0),
+          border: Border.all(color: AppColors.black, width: 1),
+          color: AppColors.greyBottomNavBar
+      ),
+      child: ListTile(
+        contentPadding: const EdgeInsets.all(0),
+        leading:  IconButton(
+          icon: const Icon(Icons.arrow_circle_left_outlined, color: AppColors.black,size: 44,),
+          onPressed: onPressedBack,
+        ),
+        title: SFText(keyText: title ?? "", style: textStyle, textAlign: TextAlign.center,),
+        trailing: trailing ?? const SizedBox(),
+        ),
+    );
+  }
 }

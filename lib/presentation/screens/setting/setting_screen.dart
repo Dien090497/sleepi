@@ -12,17 +12,17 @@ class SettingScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: SFAppBar(
-        title: Keys.setting,
-        textStyle: TextStyles.bold32black,
-        onPressedBack: () => Navigator.pop(context),
-      ),
       body: SafeArea(
         child: ListView(
-          children: const [
-            AverageInfoWidget(),
-            GeneralWidget(),
-            ProfileWidget(),
+          children:  [
+            SFAppBar(
+              title: Keys.setting,
+              textStyle: TextStyles.bold32black,
+              onPressedBack: () => Navigator.pop(context),
+            ),
+            const AverageInfoWidget(),
+            const GeneralWidget(),
+            const ProfileWidget(),
           ],
         ),
       ),
