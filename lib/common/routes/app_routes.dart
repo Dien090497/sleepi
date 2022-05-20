@@ -1,6 +1,7 @@
 import 'package:slee_fi/presentation/screens/alarm/alarm_screen.dart';
 import 'package:slee_fi/presentation/screens/alarm/widgets/sound_effect_screen.dart';
 import 'package:slee_fi/presentation/screens/bottom_navigation/bottom_navigation_screen.dart';
+import 'package:slee_fi/presentation/screens/change_password/change_password_screen.dart';
 import 'package:slee_fi/presentation/screens/create_wallet/create_wallet_screen.dart';
 import 'package:slee_fi/presentation/screens/email/email_screen.dart';
 import 'package:slee_fi/presentation/screens/enter_activation_cde/enter_activation_code_screen.dart';
@@ -57,6 +58,7 @@ class R {
   static const String sendToSpending = '${_}send_to_spending';
   static const String trade = '${_}trade';
   static const String email = '${_}email';
+  static const String changePassword = '${_}change_password';
 }
 
 class AppRoutes {
@@ -89,5 +91,6 @@ class AppRoutes {
     R.sendToSpending: (_) => const SendToSpendingScreen(),
     R.trade: (_) => const TradeScreen(),
     R.email: (_) => const EmailScreen(),
+    R.changePassword: (_) => const ChangePasswordScreen(),
   };
 }

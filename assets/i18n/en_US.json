@@ -184,5 +184,8 @@
   "if_the_chosen_platform_does_not_support": "if the chosen platform does not support retrievals",
   "new_email": "New Email",
   "verification_code": "Verification code",
-  "please_set_password_first": "Please set password first"
+  "please_set_password_first": "Please set password first",
+  "change_password": "Change password",
+  "new_password": "New password",
+  "your_password": "Your password"
 }

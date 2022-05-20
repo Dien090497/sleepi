@@ -387,6 +387,12 @@ class Keys {
 
   static const String youWillLoseYourAssets = 'you_will_lose_your_assets';
 
+  static const String clearFilter = 'clear_filter';
+
+  static const String comfort = 'comfort';
+
+  static const String quality = 'quality';
+
   static const String ifTheChosenPlatformDoesNotSupport =
       'if_the_chosen_platform_does_not_support';
 
@@ -395,4 +401,10 @@ class Keys {
   static const String verificationCode = 'verification_code';
 
   static const String pleaseSetPasswordFirst = 'please_set_password_first';
+
+  static const String changePassword = 'change_password';
+
+  static const String newPassword = 'new_password';
+
+  static const String yourPassword = 'your_password';
 }
