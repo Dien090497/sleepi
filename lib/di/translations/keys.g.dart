@@ -407,4 +407,6 @@ class Keys {
   static const String newPassword = 'new_password';
 
   static const String yourPassword = 'your_password';
+
+  static const String save = 'save';
 }

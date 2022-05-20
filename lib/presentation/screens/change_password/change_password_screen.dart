@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:slee_fi/common/widgets/sf_back_button.dart';
+import 'package:slee_fi/common/widgets/sf_buttons.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
 import 'package:slee_fi/common/widgets/sf_textfield.dart';
 import 'package:slee_fi/di/translations/keys.dart';
@@ -36,13 +37,18 @@ class ChangePasswordScreen extends StatelessWidget {
                   const SizedBox(height: 8),
                   const SFTextField(),
                   const SizedBox(height: 24),
-                  // SFText(keyText: Keys.b),
+                  SFText(keyText: Keys.yourPassword),
+                  const SizedBox(height: 8),
+                  const SFTextField(),
+                  const SizedBox(height: 24),
+                  SFText(keyText: Keys.newPassword),
                   const SizedBox(height: 8),
                   const SFTextField(),
                   const SizedBox(height: 24),
                 ],
               ),
             ),
+            const SFButton(width: double.infinity, text: Keys.save),
           ],
         ),
       ),

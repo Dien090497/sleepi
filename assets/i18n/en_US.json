@@ -187,5 +187,6 @@
   "please_set_password_first": "Please set password first",
   "change_password": "Change password",
   "new_password": "New password",
-  "your_password": "Your password"
+  "your_password": "Your password",
+  "save": "Save"
 }
