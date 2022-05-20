@@ -22,4 +22,6 @@ class AppColors {
   static const yellow = Colors.yellow;
 
   static const red = Colors.red;
+
+  static const tutorialBgr = Color(0xff092128);
 }

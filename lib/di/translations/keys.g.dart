@@ -409,4 +409,16 @@ class Keys {
   static const String yourPassword = 'your_password';
 
   static const String save = 'save';
+
+  static const String confirmTrade = 'confirm_trade';
+
+  static const String received = 'received';
+
+  static const String howToSetUp = 'how_to_set_up';
+
+  static const String elevateYourPhone = 'elevate_your_phone';
+
+  static const String trackingRange = 'tracking_range';
+
+  static const String tokenAndSleep = 'token_and_sleep';
 }
