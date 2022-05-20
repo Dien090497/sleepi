@@ -3,6 +3,7 @@ import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
 import 'package:slee_fi/common/widgets/topbar_common.dart';
 import 'package:slee_fi/presentation/screens/info_nft/widget/bottom_bar.dart';
+import 'package:slee_fi/presentation/screens/info_nft/widget/bottom_bar_market_place.dart';
 import 'package:slee_fi/presentation/screens/info_nft/widget/box_index_info.dart';
 import 'package:slee_fi/presentation/screens/info_nft/widget/box_info_nft.dart';
 import 'package:slee_fi/presentation/screens/info_nft/widget/mint_from_widget.dart';
@@ -13,6 +14,7 @@ class InfoNftScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final args = ModalRoute.of(context)?.settings.arguments as bool;
     final Size size = MediaQuery.of(context).size;
     return Scaffold(
       body: Column(
@@ -23,7 +25,7 @@ class InfoNftScreen extends StatelessWidget {
               physics: const BouncingScrollPhysics(),
               child: Column(
                 children: [
-                  const BoxInfoNft(),
+                  BoxInfoNft(isMarketPlace: args,),
                   const Padding(
                     padding: EdgeInsets.symmetric(vertical: 10),
                     child: TextInfo(text: 'IDIDIDID', color: AppColors.greyBottomNavBar,),
@@ -71,7 +73,7 @@ class InfoNftScreen extends StatelessWidget {
               ),
             ),
           ),
-          const BottomBarWidget(),
+          args ? const BottomBarMarketPlaceWidget() : const BottomBarWidget(),
         ],
       ),
     );

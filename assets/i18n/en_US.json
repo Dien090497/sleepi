@@ -178,5 +178,8 @@
   "estimate": "Estimate",
   "send_address": "Send address ",
   "you_will_lose_your_assets": "You will lose your assets",
-  "if_the_chosen_platform_does_not_support": "if the chosen platform does not support retrievals"
+  "if_the_chosen_platform_does_not_support": "if the chosen platform does not support retrievals",
+  "clear_filter": "Clear Filter",
+  "comfort" : "Comfort",
+  "quality": "Quality"
 }

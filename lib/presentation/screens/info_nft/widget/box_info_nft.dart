@@ -3,7 +3,9 @@ import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
 
 class BoxInfoNft extends StatelessWidget {
-  const BoxInfoNft({Key? key}) : super(key: key);
+  const BoxInfoNft({Key? key, required this.isMarketPlace}) : super(key: key);
+
+  final bool isMarketPlace;
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +28,7 @@ class BoxInfoNft extends StatelessWidget {
             child: SFText(keyText: 'BedNet',),
           ),
           const SizedBox(height: 15,),
-          Row(
+          isMarketPlace ? const SizedBox() : Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Padding(
