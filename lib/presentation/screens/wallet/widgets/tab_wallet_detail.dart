@@ -5,6 +5,7 @@ import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
 import 'package:slee_fi/di/translations/keys.dart';
+import 'package:slee_fi/presentation/screens/wallet/widgets/modal_receive_wallet.dart';
 
 class TabWalletDetail extends StatelessWidget {
   const TabWalletDetail({Key? key}) : super(key: key);
@@ -43,7 +44,11 @@ class TabWalletDetail extends StatelessWidget {
             Column(
               children: [
                 ElevatedButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    showCupertinoModalPopup(
+                        context: context,
+                        builder: (_) => const ModalReceiveWallet());
+                  },
                   style: ElevatedButton.styleFrom(
                       shape: const CircleBorder(),
                       padding: const EdgeInsets.all(8.0),

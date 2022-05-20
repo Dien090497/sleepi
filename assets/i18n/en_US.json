@@ -188,5 +188,11 @@
   "change_password": "Change password",
   "new_password": "New password",
   "your_password": "Your password",
-  "save": "Save"
+  "save": "Save",
+  "copy_address": "Copy address",
+  "scan_address_to_receive_payment": "Scan address to receive payment",
+  "solana": "Solana",
+  "can_enter_amount": "Can enter amount",
+  "all": "All",
+  "asset": "Asset"
 }

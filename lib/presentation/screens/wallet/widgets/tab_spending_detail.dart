@@ -118,7 +118,10 @@ class TabSpendingDetail extends StatelessWidget {
                       width: 268,
                       child: SFText(keyText: Keys.stakeToGetBenefits,style: TextStyles.bold32black, textAlign: TextAlign.center,),)),
               const SizedBox(height: 30,),
-              Center(child: SFText(keyText: Keys.transfer, style: TextStyles.bold32black)),
+              GestureDetector(
+                  onTap: () => Navigator.pushNamed(context, R.transfer),
+                  child: Center(child: SFText(keyText: Keys.transfer, style: TextStyles.bold32black))),
+              const SizedBox(height: 20,),
             ],
           )
         )
