@@ -17,7 +17,7 @@ class WalletScreen extends StatelessWidget {
         appBar: AppBar(
           leadingWidth: 50,
           leading: ElevatedButton(
-            onPressed: () {},
+            onPressed: () => Navigator.maybePop(context),
             style: ElevatedButton.styleFrom(
               shape: const CircleBorder(),
               primary: AppColors.green,
@@ -33,12 +33,9 @@ class WalletScreen extends StatelessWidget {
           automaticallyImplyLeading: false,
           backgroundColor: AppColors.transparent,
           elevation: 0,
-          title: Padding(
-            padding: const EdgeInsets.only(left: 4, right: 4),
-            child: TabBarIcon(
-              texts: const [Keys.spending, Keys.wallet],
-              icons: const [Icons.snowshoeing, Icons.wallet],
-            ),
+          title: TabBarIcon(
+            texts: const [Keys.spending, Keys.wallet],
+            icons: const [Icons.snowshoeing, Icons.wallet],
           ),
         ),
         body: const TabBarView(

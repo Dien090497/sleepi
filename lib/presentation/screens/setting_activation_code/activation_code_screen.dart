@@ -23,7 +23,7 @@ class ActivationCodeScreen extends StatelessWidget {
           onPressed: () => Navigator.pop(context),
         ),
         centerTitle: true,
-        title: SFText(keyText: Keys.activationCode, style: TextStyles.bold32black,),
+        title: SFText(keyText: Keys.activationCode, style: TextStyles.bold20black,),
 
        bottom: PreferredSize(
         preferredSize:  Size(MediaQuery.of(context).size.width,MediaQuery.of(context).size.height * 0.2),

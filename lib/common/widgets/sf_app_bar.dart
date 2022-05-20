@@ -12,26 +12,27 @@ class SFAppBar extends AppBar {
     required BuildContext context,
     Key? key,
   }) : super(
-          backgroundColor: backgroundColor ?? AppColors.greyBottomNavBar,
-          shadowColor: backgroundColor,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(12.0),
-            side: const BorderSide(color: AppColors.black, width: 1),
-          ),
-          leading: IconButton(
-            icon: const Icon(
-              Icons.arrow_circle_left_outlined,
-              color: AppColors.black,
-              size: 40,
-            ),
-            onPressed: onPressedBack ?? () => Navigator.maybePop(context),
-          ),
-          centerTitle: true,
-          title: SFText(
-            keyText: title ?? "",
-            style: textStyle,
-            toUpperCase: toUpperCase,
-          ),
-          key: key,
-        );
+    backgroundColor: backgroundColor ?? AppColors.greyBottomNavBar,
+    shadowColor: backgroundColor,
+    shape: RoundedRectangleBorder(
+      borderRadius: BorderRadius.circular(12.0),
+      side: const BorderSide(color: AppColors.black, width: 1),
+    ),
+    leading: IconButton(
+      icon: const Icon(
+        Icons.arrow_circle_left_outlined,
+        color: AppColors.black,
+        size: 40,
+      ),
+      onPressed: onPressedBack ?? () => Navigator.maybePop(context),
+    ),
+    centerTitle: true,
+    title: SFText(
+      keyText: title ?? "",
+      style: textStyle,
+      toUpperCase: toUpperCase,
+    ),
+    key: key,
+  );
 }
+

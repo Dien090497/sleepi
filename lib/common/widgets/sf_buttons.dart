@@ -31,7 +31,7 @@ class SFButton extends StatelessWidget {
         onPressed: onPressed,
         style: ButtonStyle(
           backgroundColor:
-              MaterialStateProperty.all<Color>(AppColors.greyBottomNavBar),
+              MaterialStateProperty.all<Color>(color ?? AppColors.greyBottomNavBar),
           shape: MaterialStateProperty.all(
             RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(10),

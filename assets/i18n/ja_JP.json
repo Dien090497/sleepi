@@ -114,5 +114,10 @@
   "displays_message_mic_permission": "Allow “SLeeFi” to Record Sleep Sounds",
   "displays_message_healthcare_permission": "Allow “SLeeFi” to Access Healthcare Data",
   "displays_message_motion_data_permission": "Allow “SLeeFi” to Access Motion Data",
-  "displays_message_notification_permission": "“SLeeFi” Would Like to Send You Notifications"
+  "displays_message_notification_permission": "“SLeeFi” Would Like to Send You Notifications", "copy_address": "Copy address",
+  "scan_address_to_receive_payment": "Scan address to receive payment",
+  "solana": "Solana",
+  "can_enter_amount": "Can enter amount",
+  "all": "All",
+  "asset": "Asset"
 }
