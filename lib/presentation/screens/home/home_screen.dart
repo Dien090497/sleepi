@@ -90,7 +90,9 @@ class _HomeScreenState extends State<HomeScreen> {
                                                     Icons.arrow_back_ios),
                                                 GestureDetector(
                                                   onTap: () {
-                                                    Navigator.pushNamed(context, R.nftInfo, arguments: false);
+                                                    Navigator.pushNamed(
+                                                        context, R.nftInfo,
+                                                        arguments: false);
                                                   },
                                                   child: Container(
                                                     height: 65,
@@ -199,12 +201,16 @@ class _HomeScreenState extends State<HomeScreen> {
                                       SFText(
                                           keyText: 'Item',
                                           style: TextStyles.bold15black),
-                                      const SizedBox(
-                                        width: 10,
-                                      ),
-                                      const Icon(
-                                        Icons.add_circle_outline,
-                                        size: 30,
+                                      const SizedBox(width: 10),
+                                      GestureDetector(
+                                        onTap: () {
+                                          Navigator.pushNamed(
+                                              context, R.itemSelection);
+                                        },
+                                        child: const Icon(
+                                          Icons.add_circle_outline,
+                                          size: 30,
+                                        ),
                                       ),
                                     ],
                                   ),
