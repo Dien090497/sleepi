@@ -256,6 +256,12 @@ class Keys {
 
   static const String language = 'language';
 
+  static const String itemList = 'item_list';
+
+  static const String filter = 'filter';
+
+  static const String use = 'use';
+
   static const String howToPlay = 'how_to_play';
 
   static const String whitePaper = 'white_paper';

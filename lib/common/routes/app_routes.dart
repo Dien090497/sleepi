@@ -13,6 +13,7 @@ import 'package:slee_fi/presentation/screens/import_wallet/import_wallet_screen.
 import 'package:slee_fi/presentation/screens/info_nft/info_nft_screen.dart';
 import 'package:slee_fi/presentation/screens/info_nft/layout/mint_screen.dart';
 import 'package:slee_fi/presentation/screens/info_nft/layout/recycle_screen.dart';
+import 'package:slee_fi/presentation/screens/item_selection/item_selection_screen.dart';
 import 'package:slee_fi/presentation/screens/login_signup/login_signup_screen.dart';
 import 'package:slee_fi/presentation/screens/passcode/create_passcode_screen.dart';
 import 'package:slee_fi/presentation/screens/passcode/passcode_screen.dart';
@@ -67,6 +68,7 @@ class R {
   static const String tutorial = '${_}tutorial';
   static const String walletCreationWarning = '${_}wallet_creation_warning';
   static const String createPasscode = '${_}create_passcode';
+  static const String itemSelection = '${_}item_selection';
 }
 
 class AppRoutes {
@@ -104,5 +106,6 @@ class AppRoutes {
     R.tutorial: (_) => const TutorialScreen(),
     R.walletCreationWarning: (_) => const WalletCreationWarningScreen(),
     R.createPasscode: (_) => const CreatePasscodeScreen(),
+    R.itemSelection: (_) => const ItemSelectionScreen(),
   };
 }
