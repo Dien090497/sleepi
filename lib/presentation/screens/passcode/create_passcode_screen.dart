@@ -4,26 +4,16 @@ import 'package:slee_fi/common/routes/app_routes.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
 import 'package:slee_fi/common/widgets/sf_back_button.dart';
-import 'package:slee_fi/common/widgets/sf_logo.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
 import 'package:slee_fi/di/translations/keys.dart';
 import 'package:slee_fi/presentation/screens/passcode/widgets/passcode_numpad.dart';
 import 'package:slee_fi/presentation/screens/passcode/widgets/pin_code_widget.dart';
 
-class PasscodeArguments {
-  final String route;
-
-  PasscodeArguments(this.route);
-}
-
-class PasscodeScreen extends StatelessWidget {
-  const PasscodeScreen({Key? key}) : super(key: key);
+class CreatePasscodeScreen extends StatelessWidget {
+  const CreatePasscodeScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final args =
-        ModalRoute.of(context)?.settings.arguments as PasscodeArguments?;
-
     final TextEditingController passcodeController = TextEditingController();
 
     return Scaffold(
@@ -32,12 +22,17 @@ class PasscodeScreen extends StatelessWidget {
         child: Column(
           children: [
             Stack(
-              children: const [
-                Positioned(left: 10, top: 0, child: SFBackButton()),
-                Align(alignment: Alignment.center, child: SFLogo()),
+              children: [
+                const Positioned(left: 10, top: 0, child: SFBackButton()),
+                Align(
+                    alignment: Alignment.center,
+                    child: SFText(
+                      keyText: Keys.secureWallet,
+                      style: TextStyles.white32Italic,
+                    )),
               ],
             ),
-            const SizedBox(height: 8),
+            const SizedBox(height: 100),
             SFText(keyText: Keys.enterYourPasscode, style: TextStyles.white12),
             const SizedBox(height: 12),
             PinCodeWidget(controller: passcodeController),
@@ -45,12 +40,7 @@ class PasscodeScreen extends StatelessWidget {
             PasscodeNumPad(
               passcodeController: passcodeController,
               onCompleted: (String passcode) {
-                if (args != null) {
-                  Navigator.pushReplacementNamed(context, args.route);
-                } else {
-                  // _createWalletDialog(context);
-                  Navigator.pushReplacementNamed(context, R.wallet);
-                }
+                Navigator.popUntil(context, (r) => r.settings.name == R.wallet);
               },
             ),
             SizedBox(height: 8.h),
