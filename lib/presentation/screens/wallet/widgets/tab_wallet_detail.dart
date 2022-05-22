@@ -222,7 +222,7 @@ class TabWalletDetail extends StatelessWidget {
                   const SizedBox(height: 24),
                   GestureDetector(
                     onTap: () {
-                      Navigator.pushNamed(context, R.createWallet);
+                      Navigator.pushNamed(context, R.walletCreationWarning);
                     },
                     child: Container(
                       decoration: BoxDecoration(
