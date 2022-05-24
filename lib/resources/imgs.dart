@@ -3,10 +3,15 @@ part of 'resources.dart';
 class Imgs {
   Imgs._();
 
+  static const String avax = 'assets/images/avax.png';
   static const String background = 'assets/images/background.png';
+  static const String beds = 'assets/images/beds.png';
+  static const String binance = 'assets/images/binance.png';
   static const String gacha = 'assets/images/gacha.png';
   static const String healthcare = 'assets/images/healthcare.png';
   static const String homePage = 'assets/images/home_page.png';
+  static const String jewels = 'assets/images/jewels.png';
+  static const String logo = 'assets/images/logo.png';
   static const String lvUp = 'assets/images/lv_up.png';
   static const String market = 'assets/images/market.png';
   static const String mic = 'assets/images/mic.png';
@@ -20,6 +25,8 @@ class Imgs {
   static const String recyle = 'assets/images/recyle.png';
   static const String repair = 'assets/images/repair.png';
   static const String sell = 'assets/images/sell.png';
+  static const String slft = 'assets/images/slft.png';
+  static const String slgt = 'assets/images/slgt.png';
   static const String statistics = 'assets/images/statistics.png';
   static const String test = 'assets/images/test.png';
   static const String transfer = 'assets/images/transfer.png';
@@ -29,10 +36,15 @@ class Imgs {
   static const String tutorial4 = 'assets/images/tutorial_4.png';
 
   static const List<String> values = [
+    avax,
     background,
+    beds,
+    binance,
     gacha,
     healthcare,
     homePage,
+    jewels,
+    logo,
     lvUp,
     market,
     mic,
@@ -45,6 +57,8 @@ class Imgs {
     recyle,
     repair,
     sell,
+    slft,
+    slgt,
     statistics,
     test,
     transfer,
