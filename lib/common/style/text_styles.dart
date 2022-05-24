@@ -58,6 +58,7 @@ class TextStyles {
       fontSize: 15, color: AppColors.black, fontStyle: FontStyle.italic);
   static const white12 = TextStyle(fontSize: 12, color: AppColors.white);
   static const lightWhite14 = TextStyle(fontSize: 14, color: AppColors.lightWhite);
+  static const white14 = TextStyle(fontSize: 14, color: AppColors.white);
   static const white22Italic = TextStyle(
       fontSize: 22, color: AppColors.white, fontStyle: FontStyle.italic);
   static const bold24LightWhite = TextStyle(fontSize: 24, color: AppColors.lightWhite, fontWeight: FontWeight.w700);
@@ -80,4 +81,6 @@ class TextStyles {
       fontSize: 16, color: AppColors.red, fontStyle: FontStyle.italic);
   static const yellow16Italic = TextStyle(
       fontSize: 16, color: AppColors.yellow, fontStyle: FontStyle.italic);
+  static const labelStyle = TextStyle(
+      fontSize: 16, color: AppColors.labelColor, fontStyle: FontStyle.normal);
 }
