@@ -13,8 +13,12 @@ class SFGridView extends StatelessWidget {
       itemCount: count,
       padding: const EdgeInsets.all(12),
       keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
-      gridDelegate:
-          const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
+      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+        crossAxisCount: 2,
+        childAspectRatio: 9 / 10,
+        crossAxisSpacing: 12,
+        mainAxisSpacing: 12,
+      ),
       itemBuilder: itemBuilder,
     );
   }

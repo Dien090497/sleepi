@@ -13,7 +13,13 @@ class AppColors {
 
   static const lightWhite = Color(0xFFCBD5E1);
 
+  static const light1 = Color(0xFFF1F5F9);
+
+  static const light4 = Color(0xFF1E293B);
+
   static const white = Color(0xFFFFFFFF);
+
+  static final whiteOpacity5 = const Color(0xFFFFFFFF).withOpacity(0.05);
 
   static const lightGrey = Color(0xFF64748B);
 
@@ -23,9 +29,9 @@ class AppColors {
 
   static const transparent = Colors.transparent;
 
-  static const green = Color(0xFF2ADF9E);
+  static const darkColor1 = Color(0xFF1E212C);
 
-  static const lightGreen = Color(0xFF2ADF9E);
+  static const green = Color(0xFF2ADF9E);
 
   static const greenAccent = Colors.greenAccent;
 
@@ -39,9 +45,12 @@ class AppColors {
 
   static const red = Color(0xFFFF511A);
 
-  static const gradientBluePurple = LinearGradient(colors: [blue, purple], begin: Alignment.topLeft, end: Alignment.bottomRight);
+  static const gradientBluePurple = LinearGradient(
+      colors: [blue, purple],
+      begin: Alignment.topLeft,
+      end: Alignment.bottomRight);
 
   static const tutorialBgr = Color(0xff092128);
 
-  static const labelColor = Color(0xff64748B);
+  const AppColors._();
 }

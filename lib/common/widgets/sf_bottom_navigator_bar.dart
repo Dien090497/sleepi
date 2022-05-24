@@ -28,7 +28,7 @@ class SFBottomNavigatorBar extends StatelessWidget {
             height: 24,
             color: index == items.indexOf(element)
                 ? Colors.blueAccent
-                : AppColors.labelColor,
+                : AppColors.lightGrey,
           ),
         ),
         label: element.label,

@@ -5,6 +5,7 @@ class Ics {
 
   static const String arrowLeft = 'assets/icons/arrow_left.svg';
   static const String chart = 'assets/icons/chart.svg';
+  static const String flexibleBed = 'assets/icons/flexible_bed.svg';
   static const String gacha = 'assets/icons/gacha.svg';
   static const String home = 'assets/icons/home.svg';
   static const String icArrowUpRight = 'assets/icons/ic_arrow_up_right.svg';
@@ -19,6 +20,9 @@ class Ics {
   static const String icTransfer = 'assets/icons/ic_transfer.svg';
   static const String icTwoEyes = 'assets/icons/ic_two_eyes.svg';
   static const String icWallet = 'assets/icons/ic_wallet.svg';
+  static const String longBed = 'assets/icons/long_bed.svg';
+  static const String middleBed = 'assets/icons/middle_bed.svg';
+  static const String shortBed = 'assets/icons/short_bed.svg';
   static const String signOut = 'assets/icons/sign_out.svg';
   static const String sleep = 'assets/icons/sleep.svg';
   static const String test = 'assets/icons/test.svg';
@@ -26,6 +30,7 @@ class Ics {
   static const List<String> values = [
     arrowLeft,
     chart,
+    flexibleBed,
     gacha,
     home,
     icArrowUpRight,
@@ -40,6 +45,9 @@ class Ics {
     icTransfer,
     icTwoEyes,
     icWallet,
+    longBed,
+    middleBed,
+    shortBed,
     signOut,
     sleep,
     test
