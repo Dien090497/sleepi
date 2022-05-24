@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
+import 'package:slee_fi/common/widgets/sf_back_button.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
 
 class SFAppBar extends AppBar {
@@ -12,21 +13,16 @@ class SFAppBar extends AppBar {
     required BuildContext context,
     Key? key,
   }) : super(
-    backgroundColor: backgroundColor ?? AppColors.greyBottomNavBar,
+    backgroundColor: backgroundColor ?? AppColors.transparent,
     shadowColor: backgroundColor,
-    shape: RoundedRectangleBorder(
-      borderRadius: BorderRadius.circular(12.0),
-      side: const BorderSide(color: AppColors.black, width: 1),
+    automaticallyImplyLeading: false,
+    leadingWidth: 32,
+    elevation: 0,
+    leading: GestureDetector(
+      onTap: onPressedBack ?? () => Navigator.maybePop(context),
+      child: const SFBackButton(),
     ),
-    leading: IconButton(
-      icon: const Icon(
-        Icons.arrow_circle_left_outlined,
-        color: AppColors.black,
-        size: 40,
-      ),
-      onPressed: onPressedBack ?? () => Navigator.maybePop(context),
-    ),
-    centerTitle: true,
+    // centerTitle: true,
     title: SFText(
       keyText: title ?? "",
       style: textStyle,

@@ -281,7 +281,7 @@ class Keys {
 
   static const String averageOfSleepDuration = 'average_of_sleep_duration';
 
-  static const String averageOfSleepQuolity = 'average_of_sleep_quolity';
+  static const String averageOfSleepQuality = 'average_of_sleep_quality';
 
   static const String general = 'general';
 
@@ -321,14 +321,25 @@ class Keys {
 
   static const String setupMicrophoneAccess = 'setup_microphone_access';
 
+  static const String micPermission = 'mic_permission';
+
   static const String displaysMessageMicPermission =
       'displays_message_mic_permission';
+
+  static const String displaysMessageMicPermission1 =
+      'displays_message_mic_permission_1';
+
+  static const String healthcarePermission = 'healthcare_permission';
 
   static const String displaysMessageHealthcarePermission =
       'displays_message_healthcare_permission';
 
+  static const String motionDataPermission = 'motion_data_permission';
+
   static const String displaysMessageMotionDataPermission =
       'displays_message_motion_data_permission';
+
+  static const String notificationPermission = 'notification_permission';
 
   static const String displaysMessageNotificationPermission =
       'displays_message_notification_permission';
@@ -436,4 +447,6 @@ class Keys {
   static const String introduceLitePaper = 'introduce.lite_paper';
 
   static const String introduceLinkTree = 'introduce.link_tree';
+
+  static const String averageOfSleepQuolity = 'average_of_sleep_quolity';
 }

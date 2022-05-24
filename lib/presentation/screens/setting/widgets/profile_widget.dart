@@ -4,6 +4,7 @@ import 'package:slee_fi/common/routes/app_routes.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
 import 'package:slee_fi/common/widgets/sf_buttons.dart';
+import 'package:slee_fi/common/widgets/sf_list_tile.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
 import 'package:slee_fi/di/translations/keys.dart';
 import 'package:slee_fi/presentation/screens/setting/widgets/modal_pop_up_sex.dart';
@@ -15,145 +16,94 @@ class ProfileWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    const icon = Icon(Icons.chevron_right, color: AppColors.lightGrey,);
+    Divider divider = Divider(color: AppColors.lightWhite.withOpacity(0.05), height: 1,);
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 12.0, vertical: 8.0),
+      padding: const EdgeInsets.symmetric(horizontal: 12.0, vertical: 24.0),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          SFText(
-            keyText: Keys.profile,
-            style: TextStyles.bold24black,
-          ),
-          Container(
-            height: 45,
-            width: double.infinity,
-            decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(12.0),
-                border: Border.all(color: AppColors.black, width: 1),
-                color: AppColors.greyBottomNavBar),
-            child: ListTile(
-              onTap: () {
-                showCupertinoModalPopup(
-                    context: context,
-                    builder: (_) => const ModalPopUpBirthYear());
-              },
-              dense: true,
-              title: SFText(
-                keyText: Keys.birthYear,
-                style: TextStyles.bold15black,
-              ),
-              trailing: Row(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  SFText(
-                    keyText: "1998",
-                    style: TextStyles.bold15black,
-                  ),
-                  const Icon(
-                    Icons.chevron_right,
-                    size: 32,
-                  ),
-                ],
-              ),
-            ),
-          ),
-          Container(
-            height: 45,
-            width: double.infinity,
-            decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(12.0),
-                border: Border.all(color: AppColors.black, width: 1),
-                color: AppColors.greyBottomNavBar),
-            child: ListTile(
-              onTap: () {
-                showCupertinoModalPopup(
-                    context: context, builder: (_) => const ModalPopUpSex());
-              },
-              dense: true,
-              title: SFText(
-                keyText: Keys.sex,
-                style: TextStyles.bold15black,
-              ),
-              trailing: Row(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  SFText(
-                    keyText: "Male",
-                    style: TextStyles.bold15black,
-                  ),
-                  const Icon(
-                    Icons.chevron_right,
-                    size: 32,
-                  ),
-                ],
-              ),
-            ),
-          ),
-          GestureDetector(
-            onTap: () {
-              Navigator.pushNamed(context, R.email);
-            },
-            child: Container(
-              height: 45,
-              width: double.infinity,
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(12.0),
-                  border: Border.all(color: AppColors.black, width: 1),
-                  color: AppColors.greyBottomNavBar),
-              child: ListTile(
-                dense: true,
-                title: SFText(
-                  keyText: Keys.email,
-                  style: TextStyles.bold15black,
+        SFText(keyText: Keys.profile,style: TextStyles.lightGrey14,),
+      const SizedBox(height: 12.0,),
+      Container(
+        width: double.infinity,
+        padding: const EdgeInsets.symmetric(horizontal: 16.0),
+        decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(16.0),
+            color: AppColors.white.withOpacity(0.05)
+        ),
+          child: Column(
+            children: [
+              SFListTile(
+                text: Keys.birthYear,
+                trailing:  Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    SFText(
+                      keyText: "1998",
+                      style: TextStyles.lightWhite14,
+                    ),
+                    icon,
+                  ],
                 ),
+                onPressed: () {
+                  showCupertinoModalPopup(
+                      context: context,
+                      builder: (_) => const ModalPopUpBirthYear());
+                }
+              ),
+              divider,
+              SFListTile(
+                text: Keys.sex,
+                trailing:  Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    SFText(
+                      keyText: "Male",
+                      style: TextStyles.lightWhite14,
+                    ),
+                    icon,
+                  ],
+                ),
+                onPressed: () {
+                  showCupertinoModalPopup(
+                      context: context,
+                      builder: (_) => const ModalPopUpSex());
+                },
+              ),
+              divider,
+              SFListTile(
+                text: Keys.email,
                 trailing: Row(
                   mainAxisSize: MainAxisSize.min,
                   children: [
                     SFText(
                       keyText: "sample@aaa.com",
-                      style: TextStyles.bold15black,
+                      style: TextStyles.lightWhite14,
                     ),
-                    const Icon(
-                      Icons.chevron_right,
-                      size: 32,
-                    ),
+                   icon,
                   ],
                 ),
+                onPressed:  () => Navigator.pushNamed(context, R.email),
               ),
-            ),
-          ),
-          GestureDetector(
-            onTap: () {
-              Navigator.pushNamed(context, R.changePassword);
-            },
-            child: Container(
-              height: 45,
-              width: double.infinity,
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(12.0),
-                  border: Border.all(color: AppColors.black, width: 1),
-                  color: AppColors.greyBottomNavBar),
-              child: ListTile(
-                dense: true,
-                title: SFText(
-                  keyText: Keys.password,
-                  style: TextStyles.bold15black,
-                ),
-                trailing: const Icon(
-                  Icons.chevron_right,
-                  size: 32,
-                ),
+              divider,
+              SFListTile(
+                text: Keys.version,
+                trailing: icon,
+                onPressed: () => Navigator.pushNamed(context, R.changePassword),
               ),
-            ),
-          ),
+            ],
+          )
+      ),
+
           const SizedBox(
             height: 20.0,
           ),
           const Center(
               child: SFButton(
             text: Keys.logout,
-            textStyle: TextStyles.bold20black,
+            textStyle: TextStyles.bold24Blue,
             color: AppColors.greyBottomNavBar,
             width: 200,
             height: 45,

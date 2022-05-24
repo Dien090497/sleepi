@@ -1,25 +1,40 @@
 import 'package:flutter/material.dart';
 import 'package:slee_fi/common/routes/app_routes.dart';
+import 'package:slee_fi/common/style/app_colors.dart';
+import 'package:slee_fi/common/style/text_styles.dart';
+import 'package:slee_fi/common/widgets/background_widget.dart';
 import 'package:slee_fi/common/widgets/sf_buttons.dart';
+import 'package:slee_fi/common/widgets/sf_text.dart';
 import 'package:slee_fi/di/translations/keys.dart';
-import 'package:slee_fi/presentation/screens/setting_permission/widgets/box_message_widget.dart';
 
 class NotificationPermissionScreen extends StatelessWidget {
   const NotificationPermissionScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: SafeArea(
-        child: ListView(
-          padding: const EdgeInsets.all(24.0),
-          children: [
-            Image.asset("assets/images/notification_permission.png", fit: BoxFit.fill,),
-            const SizedBox(height: 24.0,),
-            const BoxMessage(message: Keys.displaysMessageNotificationPermission),
-            SizedBox(height: MediaQuery.of(context).size.height * 0.2,),
-            SFButton(height: 48,text: Keys.allow,onPressed: () => Navigator.popUntil(context,  ModalRoute.withName(R.setting),), )
-          ],
+    return BackgroundWidget(
+      child: Scaffold(
+        backgroundColor: AppColors.transparent,
+        body: Stack(
+            children: [
+              ListView(
+                padding: const EdgeInsets.all(24.0),
+                children: [
+                  Padding(padding: const EdgeInsets.symmetric(horizontal: 65), child: Image.asset("assets/images/mic.png",fit: BoxFit.fill)),
+                  const SizedBox(height: 24.0,),
+                  SFText(keyText: Keys.notificationPermission, style: TextStyles.bold24LightWhite, textAlign: TextAlign.center,),
+                  const SizedBox(height: 32.0,),
+                  SFText(keyText: Keys.displaysMessageNotificationPermission, style: TextStyles.lightGrey16,),
+                ],
+              ),
+              Align(
+                alignment: Alignment.bottomCenter,
+                child:  Padding(
+                  padding: const EdgeInsets.all(16.0),
+                  child: SFButton(height: 48, width: double.infinity, text: Keys.allow,onPressed: () => Navigator.popUntil(context,  ModalRoute.withName(R.setting))),
+                ),
+              )
+            ]
         ),
       ),
     );

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
+import 'package:slee_fi/common/widgets/sf_gridview.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
 import 'package:slee_fi/di/translations/keys.dart';
 
@@ -10,67 +11,37 @@ class AverageInfoWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return  Container(
-      // height: 164,
-      width: double.infinity,
-      padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 12),
-      decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(10.0),
-          border: Border.all(color: AppColors.black, width: 1),
-          color: AppColors.greyBottomNavBar
-      ),
-      child: Column(
-        children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
+    List<String> texts = [Keys.averageOfBedTime, Keys.averageOfWokeUp, Keys.averageOfSleepDuration, Keys.averageOfSleepQuolity];
+    List<Color> colors = [AppColors.blue.withOpacity(0.15), AppColors.yellow.withOpacity(0.15), AppColors.red.withOpacity(0.15), AppColors.green.withOpacity(0.15)];
+    List<TextStyle> textStyleTitle = [TextStyles.blue14, TextStyles.yellow14, TextStyles.red14, TextStyles.green14];
+    List<TextStyle> textStyleNum = [TextStyles.bold24Blue, TextStyles.bold24Yellow, TextStyles.bold24Red, TextStyles.bold24Green];
+    return GridView.count(
+      physics: const NeverScrollableScrollPhysics(),
+      crossAxisCount: 2,
+      childAspectRatio: (1 / .75),
+      crossAxisSpacing: 15.0,
+      mainAxisSpacing: 16.0,
+      shrinkWrap: true,
+      padding: const EdgeInsets.symmetric(horizontal: 12.0),
+      children: List.generate(texts.length, (i) {
+        return Container(
+          padding: const EdgeInsets.all(24.0),
+          decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(16.0),
+              color: colors[i]
+          ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Expanded(
-                child: Column(
-                  children: [
-                    SFText(keyText: Keys.averageOfBedTime, style: TextStyles.bold15black,),
-                    const SizedBox(height: 9.0,),
-                    SFText(keyText: "10:55",style: TextStyles.bold20black, textAlign: TextAlign.center,)
-                  ],
-                ),
-              ),
-              Expanded(
-                child: Column(
-                  children: [
-                    SFText(keyText: Keys.averageOfWokeUp, style: TextStyles.bold15black,),
-                    const SizedBox(height: 9.0,),
-                    SFText(keyText: "9:30",style: TextStyles.bold20black, textAlign: TextAlign.center,)
-                  ],
-                ),
-              )
+              SFText(keyText: texts[i], style: textStyleTitle[i],),
+              const SizedBox(height: 11.0,),
+              SFText(keyText: "10:55",style: textStyleNum[i])
             ],
           ),
-          const SizedBox(height: 9.0,),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: [
-              Expanded(
-                child: Column(
-                  children: [
-                    SFText(keyText: Keys.averageOfSleepDuration, style: TextStyles.bold15black,),
-                    const SizedBox(height: 9.0,),
-                    SFText(keyText: "07:32",style: TextStyles.bold20black, textAlign: TextAlign.center,)
-                  ],
-                ),
-              ),
-              Expanded(
-                child: Column(
-                  children: [
-                    SFText(keyText: Keys.averageOfSleepQuolity, style: TextStyles.bold15black,),
-                    const SizedBox(height: 9.0,),
-                    SFText(keyText: "87/100",style: TextStyles.bold20black, textAlign: TextAlign.center,)
-                  ],
-                ),
-              )
-            ],
-          )
-        ],
-      ),
-    )
-    ;
+        );
+      }),
+    );
   }
 }
+
+

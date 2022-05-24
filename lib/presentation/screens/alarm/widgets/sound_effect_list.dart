@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:slee_fi/common/widgets/sf_list_tile.dart';
 
 import '../../../../common/style/app_colors.dart';
 import '../../../../common/style/text_styles.dart';
@@ -18,29 +19,37 @@ class _AlarmSoundEffectListState extends State<AlarmSoundEffectList> {
 
   @override
   Widget build(BuildContext context) {
-    return  ListView.builder(
-        itemCount: 5,
-        shrinkWrap: true,
-        padding: const EdgeInsets.all(16.0),
-        itemBuilder: (BuildContext context,int index){
-          return Container(
-            margin: const EdgeInsets.symmetric(horizontal: 8.0),
-            decoration: BoxDecoration(
-                border: Border.all(color: AppColors.black, width: 1),
-                color: AppColors.greyBottomNavBar
-            ),
-            child: CheckboxListTile(
-              title: SFText(keyText: "soundsound", style: TextStyles.bold20black,),
-              onChanged: (bool? value) {
-                setState(() {
-                  _value = value!;
-                });
-              },
-              value: _value,
-              selected: _value,
-            ),
-          );
-        }
+    return  Container(
+      width: double.infinity,
+      margin : const EdgeInsets.symmetric(horizontal: 12.0),
+      padding: const EdgeInsets.symmetric(horizontal: 16.0),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(16.0),
+        color: AppColors.white.withOpacity(0.05),
+        boxShadow:  [
+          BoxShadow(
+            color: AppColors.white.withOpacity(0.05),
+            blurRadius: 4,
+            offset: const Offset(2, 4), // Shadow position
+          ),
+        ],
+      ),
+      child: ListView.builder(
+          itemCount: 5,
+          shrinkWrap: true,
+          itemBuilder: (BuildContext context,int index){
+            return   Column(
+              children: [
+                SFListTile(
+                  text: "Sound $index",
+                  trailing: index == 0 ? const Icon(Icons.check, color: AppColors.green,) : const SizedBox(),
+                  // onPressed: () => Navigator.pushNamed(context, R.alarmSoundEffect),
+                ),
+              Divider(color: AppColors.lightWhite.withOpacity(0.05), height: 1,),
+             ],
+            );
+          }
+      ),
     );
   }
 }
