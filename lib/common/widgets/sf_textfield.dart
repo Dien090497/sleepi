@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_translate/flutter_translate.dart';
+import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
 
 class SFTextField extends StatelessWidget {
@@ -26,7 +27,7 @@ class SFTextField extends StatelessWidget {
   Widget build(BuildContext context) {
     final border = noBorder
         ? InputBorder.none
-        : OutlineInputBorder(borderRadius: BorderRadius.circular(10));
+        : OutlineInputBorder(borderRadius: BorderRadius.circular(10), borderSide: const BorderSide(color: AppColors.lightGrey));
 
     return TextField(
       decoration: InputDecoration(

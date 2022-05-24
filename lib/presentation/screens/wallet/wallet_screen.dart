@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
+import 'package:slee_fi/common/widgets/background_widget.dart';
 import 'package:slee_fi/di/translations/keys.dart';
 import 'package:slee_fi/presentation/screens/wallet/widgets/tab_bar_icon.dart';
 import 'package:slee_fi/presentation/screens/wallet/widgets/tab_spending_detail.dart';
@@ -13,36 +15,33 @@ class WalletScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return DefaultTabController(
       length: 2,
-      child: Scaffold(
-        appBar: AppBar(
-          leadingWidth: 50,
-          leading: ElevatedButton(
-            onPressed: () => Navigator.maybePop(context),
-            style: ElevatedButton.styleFrom(
-              shape: const CircleBorder(),
-              primary: AppColors.green,
-            ),
-            child: const Icon(CupertinoIcons.back, color: AppColors.black),
-          ),
-          actions: const [
-            Icon(
-              Icons.settings,
-              color: AppColors.black,
-            ),
-          ],
-          automaticallyImplyLeading: false,
+      child: BackgroundWidget(
+        child: Scaffold(
           backgroundColor: AppColors.transparent,
-          elevation: 0,
-          title: TabBarIcon(
-            texts: const [Keys.spending, Keys.wallet],
-            icons: const [Icons.snowshoeing, Icons.wallet],
+          appBar: AppBar(
+            actions:  [
+              GestureDetector(
+                onTap: () {},
+                child: SvgPicture.asset("assets/icons/ic_setting.svg"),
+              )
+            ],
+            automaticallyImplyLeading: false,
+            backgroundColor: AppColors.transparent,
+            elevation: 0,
+            centerTitle: true,
+            title: Center(
+              child: TabBarIcon(
+                texts: const [Keys.spending, Keys.wallet],
+                images: const ["assets/icons/ic_two_eyes.svg", "assets/icons/ic_wallet.svg"],
+              ),
+            ),
           ),
-        ),
-        body: const TabBarView(
-          children: [
-            TabSpendingDetail(),
-            TabWalletDetail(),
-          ],
+          body: const TabBarView(
+            children: [
+              TabSpendingDetail(),
+              TabWalletDetail(),
+            ],
+          ),
         ),
       ),
     );

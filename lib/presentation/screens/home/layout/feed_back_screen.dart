@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:slee_fi/common/style/app_colors.dart';
+import 'package:slee_fi/common/style/text_styles.dart';
+import 'package:slee_fi/common/widgets/background_widget.dart';
+import 'package:slee_fi/common/widgets/sf_app_bar.dart';
 import 'package:slee_fi/common/widgets/sf_buttons.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
 import 'package:slee_fi/common/widgets/sf_textfield.dart';
@@ -9,57 +13,43 @@ class FeedBackScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
-    return Scaffold(
-        body: SafeArea(
-      child: Padding(
-        padding: const EdgeInsets.all(20),
-        child: Column(
-          children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                GestureDetector(
-                  onTap: () {
-                    Navigator.pop(context); 
-                  },
-                  child: Container(
-                    padding: const EdgeInsets.all(10),
-                    decoration: const BoxDecoration(
-                        color: Colors.cyanAccent, shape: BoxShape.circle),
-                    child: const Icon(
-                      Icons.arrow_back_ios,
+    return BackgroundWidget(
+      child: Scaffold(
+        backgroundColor: AppColors.transparent,
+          appBar: SFAppBar(context: context, title: "Feedback" ,textStyle: TextStyles.bold18LightWhite),
+          body: SafeArea(
+        child: Padding(
+          padding: const EdgeInsets.all(20),
+          child: Column(
+            children: [
+              Padding(
+                padding: const EdgeInsets.symmetric(vertical: 30),
+                child: Row(
+                  children: [
+                    SizedBox(
+                      width: size.width / 3,
+                      child: const SFTextField(),
                     ),
-                  ),
+                    const SizedBox(width: 10),
+                    const Expanded(child: SFTextField()),
+                  ],
                 ),
-                SFText(keyText: 'FeedBack'),
-                const SizedBox(),
-              ],
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(vertical: 30),
-              child: Row(
-                children: [
-                  SizedBox(
-                    width: size.width / 3,
-                    child: const SFTextField(),
-                  ),
-                  const SizedBox(width: 10),
-                  const Expanded(child: SFTextField()),
-                ],
               ),
-            ),
-            const SFTextField(
-              maxLine: 8,
-              maxLength: 100,
-            ),
-            const Spacer(),
-            SFButton(
-              text: 'Submit',
-              width: size.width,
-            )
-          ],
+              const SFTextField(
+                maxLine: 8,
+                maxLength: 100,
+                hintText: "Notifications may include alerts, sounds, and icon badges. These can be configured in Settings.",
+                hintStyle: TextStyles.lightGrey16,
+              ),
+              const Spacer(),
+              SFButton(
+                text: 'Submit',
+                width: size.width,
+              )
+            ],
+          ),
         ),
-      ),
-    ));
+      )),
+    );
   }
 }

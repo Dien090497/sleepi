@@ -11,6 +11,9 @@ class TextStyles {
   static const black13 = TextStyle(fontSize: 13, color: AppColors.black);
   static const black16 = TextStyle(fontSize: 16, color: AppColors.black);
   static const black20 = TextStyle(fontSize: 20, color: AppColors.black);
+  static const lightGrey12 = TextStyle(fontSize: 12, color: AppColors.lightGrey);
+  static const lightGrey14 = TextStyle(fontSize: 14, color: AppColors.lightGrey);
+  static const lightGrey16 = TextStyle(fontSize: 14, color: AppColors.lightGrey, fontWeight: FontWeight.w400);
   static const grey12 = TextStyle(fontSize: 12, color: AppColors.black);
   static const grey14Italic = TextStyle(
       fontSize: 14, color: AppColors.grey, fontStyle: FontStyle.italic);
@@ -55,12 +58,39 @@ class TextStyles {
   static const black15Italic = TextStyle(
       fontSize: 15, color: AppColors.black, fontStyle: FontStyle.italic);
   static const white12 = TextStyle(fontSize: 12, color: AppColors.white);
+  static const white12Underline = TextStyle(fontSize: 12, color: AppColors.white,   decoration: TextDecoration.underline,);
+  static const lightWhite14 = TextStyle(fontSize: 14, color: AppColors.lightWhite);
+  static const lightWhite16 = TextStyle(fontSize: 16, color: AppColors.lightWhite);
+  static const white14 = TextStyle(fontSize: 14, color: AppColors.white);
+  static const white16 = TextStyle(fontSize: 16, color: AppColors.white);
   static const white22Italic = TextStyle(
       fontSize: 22, color: AppColors.white, fontStyle: FontStyle.italic);
+  static const bold30White = TextStyle(fontSize: 30, color: AppColors.white, fontWeight: FontWeight.w700);
+  static const bold18White = TextStyle(fontSize: 18, color: AppColors.white, fontWeight: FontWeight.w700);
+  static const bold24LightWhite = TextStyle(fontSize: 24, color: AppColors.lightWhite, fontWeight: FontWeight.w700);
+  static const bold18LightWhite = TextStyle(fontSize: 18, color: AppColors.lightWhite, fontWeight: FontWeight.w700);
+  static const bold16LightWhite = TextStyle(fontSize: 16, color: AppColors.lightWhite, fontWeight: FontWeight.w700);
+
+  static const bold12Blue = TextStyle(fontSize: 12, color: AppColors.blue, fontWeight: FontWeight.w700);
+  static const bold24Blue = TextStyle(fontSize: 24, color: AppColors.blue, fontWeight: FontWeight.w700);
+  static const bold24Green = TextStyle(fontSize: 24, color: AppColors.green, fontWeight: FontWeight.w700);
+  static const bold24Red = TextStyle(fontSize: 24, color: AppColors.red, fontWeight: FontWeight.w700);
+  static const bold24Yellow = TextStyle(fontSize: 24, color: AppColors.yellow, fontWeight: FontWeight.w700);
+  static const purple16 = TextStyle(fontSize: 16, color: AppColors.purple);
+  static const blue12 = TextStyle(fontSize: 14, color: AppColors.blue);
+  static const blue14 = TextStyle(fontSize: 14, color: AppColors.blue);
+  static const blue16 = TextStyle(fontSize: 16, color: AppColors.blue);
+  static const green14 = TextStyle(fontSize: 14, color: AppColors.green);
+  static const red14 = TextStyle(fontSize: 14, color: AppColors.red);
+  static const yellow14 = TextStyle(fontSize: 14, color: AppColors.yellow);
+  static const bold14Yellow = TextStyle(fontSize: 14, color: AppColors.yellow, fontWeight: FontWeight.w700);
+
   static const white32Italic = TextStyle(
       fontSize: 32, color: AppColors.white, fontStyle: FontStyle.italic);
   static const red16Italic = TextStyle(
       fontSize: 16, color: AppColors.red, fontStyle: FontStyle.italic);
   static const yellow16Italic = TextStyle(
       fontSize: 16, color: AppColors.yellow, fontStyle: FontStyle.italic);
+  static const labelStyle = TextStyle(
+      fontSize: 16, color: AppColors.labelColor, fontStyle: FontStyle.normal);
 }

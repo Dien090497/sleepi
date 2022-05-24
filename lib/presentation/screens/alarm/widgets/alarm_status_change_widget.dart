@@ -1,7 +1,6 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:slee_fi/common/style/text_styles.dart';
-import 'package:slee_fi/common/widgets/sf_text.dart';
+import 'package:slee_fi/common/widgets/sf_list_tile.dart';
+import 'package:slee_fi/common/widgets/sf_switch.dart';
 import 'package:slee_fi/di/translations/keys.dart';
 
 class AlarmStatusChangeWidget extends StatefulWidget {
@@ -17,19 +16,16 @@ class _AlarmStatusChangeState extends State<AlarmStatusChangeWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return  ListTile(
-      dense: true,
-      title: SFText(keyText: Keys.alarm,
-        style: TextStyles.bold20black,
-      ),
-      trailing:  CupertinoSwitch(
-        value: swAlarm,
-        onChanged: (value) {
-          setState(() {
-            swAlarm = value;
-          });
-        },
-      ),
+    return  SFListTile(
+        text: Keys.alarm,
+        trailing:  SFSwitch(
+          value: swAlarm,
+          onChanged: (value) {
+            setState(() {
+              swAlarm = value;
+            });
+          },
+        ),
     );
   }
 }

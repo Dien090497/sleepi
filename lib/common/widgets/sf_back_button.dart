@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
 
 class SFBackButton extends StatelessWidget {
@@ -8,15 +9,7 @@ class SFBackButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () => Navigator.pop(context),
-      child: Container(
-        decoration: BoxDecoration(
-          shape: BoxShape.circle,
-          color: AppColors.greyBottomNavBar,
-          border: Border.all(color: AppColors.black),
-        ),
-        padding: const EdgeInsets.all(2),
-        child: const Icon(Icons.arrow_back),
-      ),
+      child: SvgPicture.asset("assets/icons/arrow_left.svg", width: 32, height: 32,),
     );
   }
 }

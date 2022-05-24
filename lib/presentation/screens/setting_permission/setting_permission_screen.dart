@@ -6,10 +6,8 @@ class SettingPermissionScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      body: SafeArea(
-        child: MicPermissionScreen(),
-      ),
+    return const SafeArea(
+      child: MicPermissionScreen(),
     );
   }
 }

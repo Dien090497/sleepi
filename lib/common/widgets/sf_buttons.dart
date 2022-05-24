@@ -63,17 +63,19 @@ class SFButton extends StatelessWidget {
 }
 
 class SFTextButton extends StatelessWidget {
-  const SFTextButton({required this.text, this.onPressed, Key? key})
+  const SFTextButton({required this.text, this.textStyle, this.toUpperCase = false, this.onPressed, Key? key})
       : super(key: key);
 
   final String text;
+  final TextStyle? textStyle;
+  final bool toUpperCase;
   final VoidCallback? onPressed;
 
   @override
   Widget build(BuildContext context) {
     return TextButton(
       onPressed: onPressed,
-      child: SFText(keyText: text),
+      child: SFText(keyText: text, style: textStyle, toUpperCase: toUpperCase,),
     );
   }
 }

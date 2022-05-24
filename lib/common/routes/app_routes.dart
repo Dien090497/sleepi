@@ -4,7 +4,7 @@ import 'package:slee_fi/presentation/screens/bottom_navigation/bottom_navigation
 import 'package:slee_fi/presentation/screens/change_password/change_password_screen.dart';
 import 'package:slee_fi/presentation/screens/create_wallet/create_wallet_screen.dart';
 import 'package:slee_fi/presentation/screens/email/email_screen.dart';
-import 'package:slee_fi/presentation/screens/enter_activation_cde/enter_activation_code_screen.dart';
+import 'package:slee_fi/presentation/screens/enter_activation_code/enter_activation_code_screen.dart';
 import 'package:slee_fi/presentation/screens/gacha/gacha_chane_500_screen.dart';
 import 'package:slee_fi/presentation/screens/gacha/gacha_result_bed_screen.dart';
 import 'package:slee_fi/presentation/screens/gacha/gacha_result_overview.dart';
@@ -69,6 +69,7 @@ class R {
   static const String walletCreationWarning = '${_}wallet_creation_warning';
   static const String createPasscode = '${_}create_passcode';
   static const String itemSelection = '${_}item_selection';
+  static const String question = '${_}question';
 }
 
 class AppRoutes {
