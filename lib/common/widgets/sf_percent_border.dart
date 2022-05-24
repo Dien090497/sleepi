@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:slee_fi/common/style/text_styles.dart';
 
 class SFPercentBorder extends StatelessWidget {
   const SFPercentBorder(
@@ -27,13 +28,15 @@ class SFPercentBorder extends StatelessWidget {
         Positioned(
             left: 0,
             child: Container(
+              padding: const EdgeInsets.symmetric(horizontal: 16),
               width: double.infinity * (valueActive / totalValue),
               decoration: BoxDecoration(
                 color: colorActive,
                 borderRadius: BorderRadius.circular(20),
               ),
-              child: titleActive != null ? Text(titleActive!) : Container(),
-            ))
+              child: titleActive != null ? Text(titleActive!, style: TextStyles.label10,) : Container(),
+            ),
+        ),
       ],
     );
   }

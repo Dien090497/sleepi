@@ -24,9 +24,13 @@ class SFStatisticResource extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
+          const SizedBox(width: 4,),
           ItemResource(value: valueSliver, url: Ics.icSilver,),
+          const SizedBox(width: 16,),
           ItemResource(value: valueGold, url: Ics.icGold,),
+          const SizedBox(width: 16,),
           ItemResource(value: valueSolana, url: Ics.icSolana,),
+          const SizedBox(width: 12,),
           SvgPicture.asset(Ics.icSolanaCircle),
         ],
       ),

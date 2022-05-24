@@ -7,11 +7,37 @@ part of 'keys.dart';
 // **************************************************************************
 
 class Keys {
+  static const String home = 'home';
+
+  static const String gacha = 'gacha';
+
+  static const String chart = 'chart';
+
+  static const String market = 'market';
+
+  static const String mainBed = 'main_bed';
+
+  static const String middleBed = 'middle_bed';
+
+  static const String time = 'time';
+
+  static const String useItem = 'use_item';
+
+  static const String insurance = 'insurance';
+
+  static const String whatInsurance = 'what_insurance';
+
+  static const String range = 'range';
+
+  static const String alarmBell = 'alarm_bell';
+
   static const String beds = 'beds';
 
   static const String jewels = 'jewels';
 
   static const String item = 'item';
+
+  static const String itemList = 'item_list';
 
   static const String trophy = 'trophy';
 
@@ -200,8 +226,6 @@ class Keys {
 
   static const String permissions = 'permissions';
 
-  static const String multiChainSwitch = 'multi-chain_switch';
-
   static const String version = 'version';
 
   static const String done = 'done';
@@ -224,6 +248,8 @@ class Keys {
   static const String japanese = 'japanese';
 
   static const String chinese = 'chinese';
+
+  static const String multiChainSwitch = 'multi-chain_switch';
 
   static const String allow = 'allow';
 
@@ -255,8 +281,6 @@ class Keys {
   static const String asset = 'asset';
 
   static const String language = 'language';
-
-  static const String itemList = 'item_list';
 
   static const String filter = 'filter';
 
