@@ -17,9 +17,6 @@ class DecoratedWidget extends StatelessWidget {
       alignment: alignment ?? Alignment.centerLeft,
       child: Container(
         width: width,
-        decoration: const BoxDecoration(
-          color: AppColors.greyBottomNavBar,
-        ),
         padding: padding,
         child: child,
       ),

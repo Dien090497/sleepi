@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:slee_fi/common/routes/app_routes.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
+import 'package:slee_fi/common/style/text_styles.dart';
+import 'package:slee_fi/common/widgets/sf_percent_border.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
 import 'package:slee_fi/di/translations/keys.dart';
 
@@ -9,39 +11,36 @@ class ChanceWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: const BoxDecoration(
-        color: AppColors.greyBottomNavBar,
-      ),
-      padding: const EdgeInsets.all(8),
-      child: Row(
-        children: [
-          Expanded(
-            child: Container(
-              decoration:
-                  BoxDecoration(border: Border.all(color: AppColors.black)),
-              alignment: Alignment.center,
-              padding: const EdgeInsets.symmetric(vertical: 4),
-              child: const Text('30/500'),
+    return Row(
+      children: [
+        const Expanded(
+          child: SizedBox(
+            height: 10,
+            child: SFPercentBorder(
+              valueActive: 2,
+              totalValue: 5,
             ),
+
           ),
-          const SizedBox(width: 5),
-          GestureDetector(
-            onTap: () {
-              Navigator.pushNamed(context, R.gacha500TimesChance);
-            },
+        ),
+
+        GestureDetector(
+          child: Padding(
+            padding: const EdgeInsets.only(left: 20),
             child: Container(
-              decoration:
-                  BoxDecoration(border: Border.all(color: AppColors.black)),
-              padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-              child: SFText(
-                keyText: Keys.get,
-                toUpperCase: true,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(16),
+                border: Border.all(color: AppColors.blue)
               ),
+              padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 18),
+              child: SFText(keyText: 'Get', style: TextStyles.blue14,),
             ),
           ),
-        ],
-      ),
+          onTap: () {
+            Navigator.pushNamed(context, R.gacha500TimesChance);
+          },
+        )
+      ],
     );
   }
 }
