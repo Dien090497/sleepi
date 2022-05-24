@@ -74,6 +74,8 @@ class TextStyles {
   static const red14 = TextStyle(fontSize: 14, color: AppColors.red);
   static const yellow14 = TextStyle(fontSize: 14, color: AppColors.yellow);
 
+  static const white32Italic = TextStyle(
+      fontSize: 32, color: AppColors.white, fontStyle: FontStyle.italic);
   static const red16Italic = TextStyle(
       fontSize: 16, color: AppColors.red, fontStyle: FontStyle.italic);
   static const yellow16Italic = TextStyle(
