@@ -32,10 +32,10 @@ class PinCodeWidget extends StatelessWidget {
       pinTheme: PinTheme(
         inactiveColor: AppColors.white,
         disabledColor: AppColors.white,
-        borderWidth: 2,
+        borderWidth: 1,
         fieldWidth: 16.w,
         shape: PinCodeFieldShape.circle,
-        fieldOuterPadding: EdgeInsets.symmetric(horizontal: 16.w),
+        fieldOuterPadding: EdgeInsets.symmetric(horizontal: 8.w),
       ),
     );
   }

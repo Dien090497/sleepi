@@ -1,9 +1,9 @@
 import 'package:flutter/cupertino.dart';
 
-class SFSwitch extends CupertinoSwitch {
-  const SFSwitch({
-    required bool value,
-    required ValueChanged<bool>?  onChanged,
+class SFSlider extends CupertinoSlider {
+  const SFSlider({
+    required double value,
+    required ValueChanged<double>?  onChanged,
     Key? key,
   }) : super(
     value: value,

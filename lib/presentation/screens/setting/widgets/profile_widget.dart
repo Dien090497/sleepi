@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:slee_fi/common/routes/app_routes.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
+import 'package:slee_fi/common/widgets/sf_bottom_sheet.dart';
 import 'package:slee_fi/common/widgets/sf_buttons.dart';
 import 'package:slee_fi/common/widgets/sf_list_tile.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
@@ -47,11 +48,7 @@ class ProfileWidget extends StatelessWidget {
                     icon,
                   ],
                 ),
-                onPressed: () {
-                  showCupertinoModalPopup(
-                      context: context,
-                      builder: (_) => const ModalPopUpBirthYear());
-                }
+                onPressed: () => SFModalBottomSheet.show(context, 0.36, const ModalPopUpBirthYear()),
               ),
               divider,
               SFListTile(
@@ -66,11 +63,7 @@ class ProfileWidget extends StatelessWidget {
                     icon,
                   ],
                 ),
-                onPressed: () {
-                  showCupertinoModalPopup(
-                      context: context,
-                      builder: (_) => const ModalPopUpSex());
-                },
+                onPressed: () => SFModalBottomSheet.show(context, 0.36, const ModalPopUpSex())
               ),
               divider,
               SFListTile(
@@ -89,7 +82,7 @@ class ProfileWidget extends StatelessWidget {
               ),
               divider,
               SFListTile(
-                text: Keys.version,
+                text: Keys.changePassword,
                 trailing: icon,
                 onPressed: () => Navigator.pushNamed(context, R.changePassword),
               ),

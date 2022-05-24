@@ -12,15 +12,15 @@ class AvailableWidget extends StatelessWidget {
     return ContainerBoxWidget(
       alignment: Alignment.center,
       width: MediaQuery.of(context).size.width * 0.9,
-      height: MediaQuery.of(context).size.height * 0.18,
+      height: MediaQuery.of(context).size.height * 0.16,
       margin: const EdgeInsets.symmetric(vertical: 12.0),
       child: Center(
         child: ListView(
           shrinkWrap: true,
           children: [
-            Center(child: SFText(keyText: Keys.availableTotal, style: TextStyles.grey16Italic,)),
-            const SizedBox(height: 12.0),
-            Center(child: SFText(keyText: "0/3", style: TextStyles.bold32blackItalic,))
+            Center(child: SFText(keyText: Keys.availableTotal, style: TextStyles.lightGrey16,)),
+            const SizedBox(height: 8.0),
+            Center(child: SFText(keyText: "0/3", style: TextStyles.bold30White,))
           ],
         ),
       ),

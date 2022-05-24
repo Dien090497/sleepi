@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_translate/flutter_translate.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
+import 'package:slee_fi/common/style/text_styles.dart';
+import 'package:slee_fi/common/widgets/sf_text.dart';
 
 class TabBarIcon extends TabBar {
   TabBarIcon({
     required List<String> texts,
-    required List<IconData> icons,
+    required List<String> images,
     Key? key,
   }) : super(
     tabs: List.generate(
@@ -14,17 +16,23 @@ class TabBarIcon extends TabBar {
               child: Row(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  Icon(icons.isNotEmpty ? icons[i] : null),
+                  SvgPicture.asset(images.isNotEmpty ? images[i] : "", color: AppColors.white,),
                   const SizedBox(width: 8),
-                  Expanded(child: Text(translate(texts[i]))),
+                  Expanded(child: SFText(keyText: texts[i], style: TextStyles.white16, )),
                 ],
               ),
         )),
+
     indicator: BoxDecoration(
-      borderRadius: BorderRadius.circular(16),
-      color: AppColors.greyBottomNavBar,
+      borderRadius: BorderRadius.circular(100),
+      gradient: AppColors.gradientBluePurple,
     ),
-    indicatorColor: AppColors.transparent,
+    indicatorColor: AppColors.purple,
+    labelColor: AppColors.white,
+    labelStyle: TextStyles.white16,
+    unselectedLabelColor: AppColors.purple,
+    unselectedLabelStyle: TextStyles.purple16,
+
     // padding: const EdgeInsets.symmetric(horizontal: 12),
     key: key,
   );

@@ -1,6 +1,6 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:slee_fi/common/widgets/sf_list_tile.dart';
+import 'package:slee_fi/common/widgets/sf_switch.dart';
 import 'package:slee_fi/di/translations/keys.dart';
 
 class AlarmStatusChangeWidget extends StatefulWidget {
@@ -18,7 +18,7 @@ class _AlarmStatusChangeState extends State<AlarmStatusChangeWidget> {
   Widget build(BuildContext context) {
     return  SFListTile(
         text: Keys.alarm,
-        trailing:  CupertinoSwitch(
+        trailing:  SFSwitch(
           value: swAlarm,
           onChanged: (value) {
             setState(() {

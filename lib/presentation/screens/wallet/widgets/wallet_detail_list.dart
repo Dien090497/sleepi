@@ -2,10 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
-import 'package:slee_fi/presentation/screens/setting_activation_code/widgets/container_box_widget.dart';
 
-class ActivationCodeList extends StatelessWidget {
-  const ActivationCodeList({Key? key}) : super(key: key);
+class WalletDetailList extends StatelessWidget {
+  const WalletDetailList({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -30,10 +29,9 @@ class ActivationCodeList extends StatelessWidget {
                 color: AppColors.white.withOpacity(0.05),
               ),
               child: ListTile(
-                leading: SFText(keyText: "${index + 1}", style: TextStyles.lightWhite16, textAlign: TextAlign.center,),
-                title: SFText(keyText: "41251029", style: TextStyles.bold16LightWhite, textAlign: TextAlign.center,),
-                subtitle: SFText(keyText: "22/04 15:25", style: TextStyles.lightGrey12, textAlign: TextAlign.center),
-                trailing: SFText(keyText: "Used", style: TextStyles.blue16,),
+                leading: Image.asset("assets/images/slft.png"),
+                title: SFText(keyText: "SLFT", style: TextStyles.lightWhite16),
+                trailing: SFText(keyText: "xxxxxxxxx", style: TextStyles.lightWhite16,),
               ),
             );
           }

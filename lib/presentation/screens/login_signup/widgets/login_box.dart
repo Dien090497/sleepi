@@ -19,7 +19,7 @@ class LoginBox extends StatelessWidget {
         //   stops: [0.0566]
         //
         // ),
-        color: AppColors.transparent,
+        color: AppColors.lightWhite.withOpacity(0.05),
         borderRadius: BorderRadius.circular(24),
         border: Border.all(color: AppColors.white.withOpacity(0.07),),
       ),

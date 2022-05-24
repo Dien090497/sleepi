@@ -4,10 +4,8 @@ import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
 import 'package:slee_fi/common/widgets/background_widget.dart';
 import 'package:slee_fi/common/widgets/sf_app_bar.dart';
-import 'package:slee_fi/common/widgets/sf_back_button.dart';
 import 'package:slee_fi/common/widgets/sf_buttons.dart';
 import 'package:slee_fi/common/widgets/sf_logo.dart';
-import 'package:slee_fi/common/widgets/sf_sub_app_bar.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
 import 'package:slee_fi/common/widgets/sf_textfield.dart';
 import 'package:slee_fi/di/translations/keys.dart';
@@ -47,7 +45,7 @@ class EnterActivationCodeScreen extends StatelessWidget {
                       width: MediaQuery.of(context).size.width,
                     ),
                     const SizedBox(height: 16),
-                    const SFTextButton(text: Keys.getActivationCode),
+                    const SFTextButton(text: Keys.getActivationCode, textStyle: TextStyles.blue14,),
                   ],
                 ),
               ),
