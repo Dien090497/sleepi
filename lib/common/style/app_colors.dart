@@ -24,4 +24,6 @@ class AppColors {
   static const red = Colors.red;
 
   static const tutorialBgr = Color(0xff092128);
+
+  static const labelColor = Color(0xff64748B);
 }
