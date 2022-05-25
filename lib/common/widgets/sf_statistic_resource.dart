@@ -4,10 +4,12 @@ import 'package:slee_fi/common/widgets/sf_icon.dart';
 import 'package:slee_fi/resources/resources.dart';
 
 class SFStatisticResource extends StatelessWidget {
-
-  const SFStatisticResource(
-      {Key? key, required this.valueSliver, required this.valueGold, required this.valueSolana,})
-      : super(key: key);
+  const SFStatisticResource({
+    Key? key,
+    required this.valueSliver,
+    required this.valueGold,
+    required this.valueSolana,
+  }) : super(key: key);
 
   final double valueSliver;
   final double valueGold;
@@ -24,13 +26,30 @@ class SFStatisticResource extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
-          const SizedBox(width: 4,),
-          ItemResource(value: valueSliver, url: Ics.icSilver,),
-          const SizedBox(width: 16,),
-          ItemResource(value: valueGold, url: Ics.icGold,),
-          const SizedBox(width: 16,),
-          ItemResource(value: valueSolana, url: Ics.icSolana,),
-          const SizedBox(width: 12,),
+          const SizedBox(
+            width: 4,
+          ),
+          ItemResource(
+            value: valueSliver,
+            url: Ics.icSilver,
+          ),
+          const SizedBox(
+            width: 16,
+          ),
+          ItemResource(
+            value: valueGold,
+            url: Ics.icGold,
+          ),
+          const SizedBox(
+            width: 16,
+          ),
+          ItemResource(
+            value: valueSolana,
+            url: Ics.icSolana,
+          ),
+          const SizedBox(
+            width: 12,
+          ),
           SFIcon(Ics.icSolanaCircle),
         ],
       ),
@@ -50,10 +69,14 @@ class ItemResource extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         SFIcon(url),
-        const SizedBox(width: 4,),
-        Text(value.toStringAsFixed(2), style: TextStyles.white14,),
+        const SizedBox(
+          width: 4,
+        ),
+        Text(
+          value.toStringAsFixed(2),
+          style: TextStyles.white14,
+        ),
       ],
     );
   }
 }
-

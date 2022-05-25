@@ -11,11 +11,14 @@ class AlarmSoundEffectScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     return BackgroundWidget(
       child: Scaffold(
         backgroundColor: AppColors.transparent,
-        appBar: SFAppBar(context: context, title: Keys.soundEffect, textStyle: TextStyles.bold18LightWhite,),
+        appBar: SFAppBar(
+          context: context,
+          title: Keys.soundEffect,
+          textStyle: TextStyles.bold18LightWhite,
+        ),
         body: const SafeArea(
           child: AlarmSoundEffectList(),
         ),

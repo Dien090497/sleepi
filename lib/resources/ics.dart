@@ -5,6 +5,7 @@ class Ics {
 
   static const String arrowLeft = 'assets/icons/arrow_left.svg';
   static const String chart = 'assets/icons/chart.svg';
+  static const String filter = 'assets/icons/filter.svg';
   static const String flexibleBed = 'assets/icons/flexible_bed.svg';
   static const String gacha = 'assets/icons/gacha.svg';
   static const String gift = 'assets/icons/gift.svg';
@@ -35,6 +36,7 @@ class Ics {
   static const List<String> values = [
     arrowLeft,
     chart,
+    filter,
     flexibleBed,
     gacha,
     gift,

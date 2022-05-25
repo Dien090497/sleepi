@@ -14,68 +14,77 @@ class GeneralWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    const icon = Icon(Icons.chevron_right, color: AppColors.lightGrey,);
-    Divider divider = Divider(color: AppColors.lightWhite.withOpacity(0.05), height: 1,);
+    const icon = Icon(
+      Icons.chevron_right,
+      color: AppColors.lightGrey,
+    );
+    Divider divider = Divider(
+      color: AppColors.lightWhite.withOpacity(0.05),
+      height: 1,
+    );
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 12.0, vertical: 24.0),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          SFText(keyText: Keys.general,style: TextStyles.lightGrey14,),
-          const SizedBox(height: 12.0,),
-          Container(
-            width: double.infinity,
-            padding: const EdgeInsets.symmetric(horizontal: 16.0),
-            decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(16.0),
-                color: AppColors.white.withOpacity(0.05)
-            ),
-            child: Column(
-              children: [
-                SFListTile(
-                  text: Keys.permissions,
-                  trailing: icon,
-                  onPressed: () => Navigator.pushNamed(context, R.permission),
-                ),
-                 divider,
-                SFListTile(
-                  text: Keys.alarm,
-                  trailing: icon,
-                  onPressed: () => Navigator.pushNamed(context, R.alarm),
-                ),
-                divider,
-                SFListTile(
-                  text: Keys.activationCodeLanguageLowercase,
-                  trailing: icon,
-                  onPressed: () => Navigator.pushNamed(context, R.activationCode),
-                ),
-                divider,
-                SFListTile(
-                  text: Keys.language,
-                  trailing: icon,
-                  onPressed:  () => SFModalBottomSheet.show(context, 0.36, const ModalPopUpLanguage()),
-
-                ),
-                divider,
-                SFListTile(
-                  text: Keys.multiChainSwitch,
-                  trailing: icon,
-                  onPressed: () => SFModalBottomSheet.show(context, 0.4, const ModalMultiChainSwitch()),
-                ),
-                divider,
-                SFListTile(
-                  text: Keys.version,
-                  trailing:  SFText(keyText: "0.01", style: TextStyles.lightGrey14),
-                ),
-              ],
-            )
+          SFText(
+            keyText: Keys.general,
+            style: TextStyles.lightGrey14,
           ),
-
+          const SizedBox(
+            height: 12.0,
+          ),
+          Container(
+              width: double.infinity,
+              padding: const EdgeInsets.symmetric(horizontal: 16.0),
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(16.0),
+                  color: AppColors.white.withOpacity(0.05)),
+              child: Column(
+                children: [
+                  SFListTile(
+                    text: Keys.permissions,
+                    trailing: icon,
+                    onPressed: () => Navigator.pushNamed(context, R.permission),
+                  ),
+                  divider,
+                  SFListTile(
+                    text: Keys.alarm,
+                    trailing: icon,
+                    onPressed: () => Navigator.pushNamed(context, R.alarm),
+                  ),
+                  divider,
+                  SFListTile(
+                    text: Keys.activationCodeLanguageLowercase,
+                    trailing: icon,
+                    onPressed: () =>
+                        Navigator.pushNamed(context, R.activationCode),
+                  ),
+                  divider,
+                  SFListTile(
+                    text: Keys.language,
+                    trailing: icon,
+                    onPressed: () => SFModalBottomSheet.show(
+                        context, 0.36, const ModalPopUpLanguage()),
+                  ),
+                  divider,
+                  SFListTile(
+                    text: Keys.multiChainSwitch,
+                    trailing: icon,
+                    onPressed: () => SFModalBottomSheet.show(
+                        context, 0.4, const ModalMultiChainSwitch()),
+                  ),
+                  divider,
+                  SFListTile(
+                    text: Keys.version,
+                    trailing:
+                        SFText(keyText: "0.01", style: TextStyles.lightGrey14),
+                  ),
+                ],
+              )),
         ],
       ),
     );
   }
 }
-
-

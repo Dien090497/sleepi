@@ -39,7 +39,7 @@ class BottomNavigationScreen extends StatelessWidget {
               children: const [
                 HomeScreen(),
                 GachaScreen(),
-                ProductDetaiScreen(),
+                ProductDetailScreen(),
                 ChartScreen(),
                 MarketPlaceScreen(),
               ],

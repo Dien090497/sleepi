@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:slee_fi/common/enum/enum.dart';
 import 'package:slee_fi/common/widgets/sf_dialog.dart';
-import 'package:slee_fi/common/widgets/sf_gridview.dart';
 import 'package:slee_fi/common/widgets/sf_sub_tab_bar.dart';
 import 'package:slee_fi/di/translations/keys.dart';
+import 'package:slee_fi/presentation/screens/product_detail/widgets/gridview_bed_item.dart';
 import 'package:slee_fi/presentation/screens/product_detail/widgets/jewel_dialog_body.dart';
-import 'package:slee_fi/presentation/screens/product_detail/widgets/my_bed_short_widget.dart';
 
 class TabBedsDetail extends StatelessWidget {
   const TabBedsDetail({Key? key}) : super(key: key);
@@ -44,25 +43,16 @@ class TabBedsDetail extends StatelessWidget {
           Expanded(
             child: TabBarView(
               children: [
-                SFGridView(
-                  count: beds.length,
-                  itemBuilder: (context, i) {
-                    return GestureDetector(
-                      onTap: () {
-                        _showBedDialog(context);
-                      },
-                      child: MyBedShortWidget(
-                          bedType: beds[i % BedType.values.length]),
-                    );
-                  },
-                ),
-                SFGridView(
-                  count: beds.length,
-                  itemBuilder: (context, i) {
-                    return MyBedShortWidget(
-                        bedType: beds[i % BedType.values.length]);
-                  },
-                ),
+                GridViewBedItem(
+                    beds: beds,
+                    onBedTap: (bed) {
+                      _showBedDialog(context);
+                    }),
+                GridViewBedItem(
+                    beds: beds,
+                    onBedTap: (bed) {
+                      _showBedDialog(context);
+                    }),
               ],
             ),
           ),

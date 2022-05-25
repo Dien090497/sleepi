@@ -9,7 +9,9 @@ class TabSLGTDetail extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-        child: Center(child: SFText(keyText: "Coming soon",style: TextStyles.bold32black)),
+        child: Center(
+            child:
+                SFText(keyText: "Coming soon", style: TextStyles.bold32black)),
       ),
     );
   }

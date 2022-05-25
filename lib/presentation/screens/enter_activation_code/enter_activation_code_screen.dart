@@ -19,12 +19,18 @@ class EnterActivationCodeScreen extends StatelessWidget {
     return BackgroundWidget(
       child: Scaffold(
         backgroundColor: AppColors.transparent,
-        appBar: SFAppBar(context: context, title: Keys.activationCodeLanguageLowercase, textStyle: TextStyles.bold18LightWhite,),
+        appBar: SFAppBar(
+          context: context,
+          title: Keys.activationCodeLanguageLowercase,
+          textStyle: TextStyles.bold18LightWhite,
+        ),
         body: SafeArea(
           child: ListView(
             padding: const EdgeInsets.symmetric(horizontal: 16),
             children: [
-              const SizedBox(height: 90.0,),
+              const SizedBox(
+                height: 90.0,
+              ),
               LoginBox(
                 padding: const EdgeInsets.fromLTRB(28, 24, 28, 0),
                 child: Column(
@@ -45,7 +51,10 @@ class EnterActivationCodeScreen extends StatelessWidget {
                       width: MediaQuery.of(context).size.width,
                     ),
                     const SizedBox(height: 16),
-                    const SFTextButton(text: Keys.getActivationCode, textStyle: TextStyles.blue14,),
+                    const SFTextButton(
+                      text: Keys.getActivationCode,
+                      textStyle: TextStyles.blue14,
+                    ),
                   ],
                 ),
               ),

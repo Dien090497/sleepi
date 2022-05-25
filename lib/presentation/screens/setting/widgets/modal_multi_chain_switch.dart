@@ -10,32 +10,44 @@ class ModalMultiChainSwitch extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     return Column(
       children: [
-        const SizedBox(height: 32.0,),
+        const SizedBox(
+          height: 32.0,
+        ),
         SFText(keyText: Keys.multiChainSwitch, style: TextStyles.bold18White),
-        const SizedBox(height: 32.0,),
+        const SizedBox(
+          height: 32.0,
+        ),
         Expanded(
             child: ListView(
-              padding: const EdgeInsets.symmetric(horizontal: 12.0, vertical: 6.0),
-              children:  [
-                SFCard(
-                  child: ListTile(
-                    leading: Image.asset("assets/images/avax.png"),
-                    title: SFText(keyText: "Solana", style: TextStyles.lightWhite16, ),
-                    trailing: const Icon(Icons.check_circle, color: AppColors.green, size: 32,),
-                  ),
+          padding: const EdgeInsets.symmetric(horizontal: 12.0, vertical: 6.0),
+          children: [
+            SFCard(
+              child: ListTile(
+                leading: Image.asset("assets/images/avax.png"),
+                title: SFText(
+                  keyText: "Solana",
+                  style: TextStyles.lightWhite16,
                 ),
-                SFCard(
-                  child: ListTile(
-                    leading:Image.asset("assets/images/binance.png"),
-                    title: SFText(keyText: "BNB Smart Chain(BEP20)", style: TextStyles.lightWhite16, ),
-                  ),
+                trailing: const Icon(
+                  Icons.check_circle,
+                  color: AppColors.green,
+                  size: 32,
                 ),
-              ],
-            )
-        )
+              ),
+            ),
+            SFCard(
+              child: ListTile(
+                leading: Image.asset("assets/images/binance.png"),
+                title: SFText(
+                  keyText: "BNB Smart Chain(BEP20)",
+                  style: TextStyles.lightWhite16,
+                ),
+              ),
+            ),
+          ],
+        ))
       ],
     );
   }

@@ -18,7 +18,9 @@ class StakingScreen extends StatelessWidget {
           length: 2,
           child: Column(
             children: [
-              const SizedBox(height: 20,),
+              const SizedBox(
+                height: 20,
+              ),
               Container(
                 margin: const EdgeInsets.only(left: 8.0),
                 alignment: Alignment.centerLeft,

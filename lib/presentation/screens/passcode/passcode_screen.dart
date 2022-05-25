@@ -33,7 +33,9 @@ class PasscodeScreen extends StatelessWidget {
         body: SafeArea(
           child: Column(
             children: [
-              const SizedBox(height: 12.0,),
+              const SizedBox(
+                height: 12.0,
+              ),
               Stack(
                 children: const [
                   Positioned(left: 10, top: 0, child: SFBackButton()),
@@ -41,7 +43,8 @@ class PasscodeScreen extends StatelessWidget {
                 ],
               ),
               const SizedBox(height: 60),
-              SFText(keyText: Keys.enterYourPasscode, style: TextStyles.white12),
+              SFText(
+                  keyText: Keys.enterYourPasscode, style: TextStyles.white12),
               const SizedBox(height: 24),
               PinCodeWidget(controller: passcodeController),
               SizedBox(height: 4.h),
@@ -57,7 +60,9 @@ class PasscodeScreen extends StatelessWidget {
                 },
               ),
               SizedBox(height: 32.h),
-              SFText(keyText: Keys.forgotPasscode, style: TextStyles.white12Underline),
+              SFText(
+                  keyText: Keys.forgotPasscode,
+                  style: TextStyles.white12Underline),
             ],
           ),
         ),

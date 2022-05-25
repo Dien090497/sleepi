@@ -29,13 +29,19 @@ class PopUpLevelUp extends StatelessWidget {
             ),
           ],
         ),
-        Image.asset('assets/images/product_detail.png', width: 100, height: 80,),
+        Image.asset(
+          'assets/images/product_detail.png',
+          width: 100,
+          height: 80,
+        ),
         SFText(keyText: 'Lv 30'),
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
           child: Align(
             alignment: Alignment.centerLeft,
-            child: SFText(keyText: 'lv up to 31',),
+            child: SFText(
+              keyText: 'lv up to 31',
+            ),
           ),
         ),
         const Padding(
@@ -51,8 +57,14 @@ class PopUpLevelUp extends StatelessWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              SFButton(text: 'title_level_up', width: size.width / 3,),
-              SFButton(text: 'title_level_up', width: size.width / 3,)
+              SFButton(
+                text: 'title_level_up',
+                width: size.width / 3,
+              ),
+              SFButton(
+                text: 'title_level_up',
+                width: size.width / 3,
+              )
             ],
           ),
         ),

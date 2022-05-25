@@ -15,11 +15,14 @@ class BoxMessage extends StatelessWidget {
       width: MediaQuery.of(context).size.width * 0.9,
       height: 155,
       decoration: BoxDecoration(
-        border: Border.all(width: 1, color: AppColors.black),
-        borderRadius: BorderRadius.circular(10.0),
-        color: AppColors.greyBottomNavBar
+          border: Border.all(width: 1, color: AppColors.black),
+          borderRadius: BorderRadius.circular(10.0),
+          color: AppColors.greyBottomNavBar),
+      child: SFText(
+        keyText: message,
+        style: TextStyles.bold20black,
+        textAlign: TextAlign.center,
       ),
-      child: SFText(keyText: message, style: TextStyles.bold20black,textAlign: TextAlign.center,),
     );
   }
 }

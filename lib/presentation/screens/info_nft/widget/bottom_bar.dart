@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:slee_fi/common/routes/app_routes.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
@@ -14,9 +13,7 @@ class BottomBarWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration: const BoxDecoration(
-        color: AppColors.greyBottomNavBar
-      ),
+      decoration: const BoxDecoration(color: AppColors.greyBottomNavBar),
       child: Padding(
         padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 5),
         child: Row(
@@ -38,8 +35,13 @@ class BottomBarWidget extends StatelessWidget {
                     width: 40,
                     height: 40,
                   ),
-                  const SizedBox(height: 5,),
-                  SFText(keyText: 'Level Up', style: TextStyles.black10Bold,)
+                  const SizedBox(
+                    height: 5,
+                  ),
+                  SFText(
+                    keyText: 'Level Up',
+                    style: TextStyles.black10Bold,
+                  )
                 ],
               ),
             ),
@@ -59,8 +61,13 @@ class BottomBarWidget extends StatelessWidget {
                     width: 40,
                     height: 40,
                   ),
-                  const SizedBox(height: 5,),
-                  SFText(keyText: 'Repair', style: TextStyles.black10Bold,)
+                  const SizedBox(
+                    height: 5,
+                  ),
+                  SFText(
+                    keyText: 'Repair',
+                    style: TextStyles.black10Bold,
+                  )
                 ],
               ),
             ),
@@ -75,8 +82,13 @@ class BottomBarWidget extends StatelessWidget {
                     width: 40,
                     height: 40,
                   ),
-                  const SizedBox(height: 5,),
-                  SFText(keyText: 'Mint', style: TextStyles.black10Bold,)
+                  const SizedBox(
+                    height: 5,
+                  ),
+                  SFText(
+                    keyText: 'Mint',
+                    style: TextStyles.black10Bold,
+                  )
                 ],
               ),
             ),
@@ -87,8 +99,13 @@ class BottomBarWidget extends StatelessWidget {
                   width: 40,
                   height: 40,
                 ),
-                const SizedBox(height: 5,),
-                SFText(keyText: 'Sell', style: TextStyles.black10Bold,)
+                const SizedBox(
+                  height: 5,
+                ),
+                SFText(
+                  keyText: 'Sell',
+                  style: TextStyles.black10Bold,
+                )
               ],
             ),
             GestureDetector(
@@ -102,8 +119,13 @@ class BottomBarWidget extends StatelessWidget {
                     width: 40,
                     height: 40,
                   ),
-                  const SizedBox(height: 5,),
-                  SFText(keyText: 'Recycle', style: TextStyles.black10Bold,)
+                  const SizedBox(
+                    height: 5,
+                  ),
+                  SFText(
+                    keyText: 'Recycle',
+                    style: TextStyles.black10Bold,
+                  )
                 ],
               ),
             ),
@@ -123,8 +145,13 @@ class BottomBarWidget extends StatelessWidget {
                     width: 40,
                     height: 40,
                   ),
-                  const SizedBox(height: 5,),
-                  SFText(keyText: 'Transfer', style: TextStyles.black10Bold,)
+                  const SizedBox(
+                    height: 5,
+                  ),
+                  SFText(
+                    keyText: 'Transfer',
+                    style: TextStyles.black10Bold,
+                  )
                 ],
               ),
             ),
@@ -134,5 +161,3 @@ class BottomBarWidget extends StatelessWidget {
     );
   }
 }
-
-

@@ -30,7 +30,11 @@ class LoginSignUpScreen extends StatelessWidget {
               LoginBox(
                 child: Column(
                   children: [
-                    SFText(keyText: Keys.login, style: TextStyles.bold18LightWhite, toUpperCase: true,),
+                    SFText(
+                      keyText: Keys.login,
+                      style: TextStyles.bold18LightWhite,
+                      toUpperCase: true,
+                    ),
                     const SizedBox(height: 63),
                     const SFTextField(
                       hintText: Keys.emailAddress,
@@ -66,8 +70,7 @@ class LoginSignUpScreen extends StatelessWidget {
                       width: MediaQuery.of(context).size.width,
                     ),
                     const SizedBox(height: 10),
-                    SFText(
-                        keyText: Keys.accountLogin, style: TextStyles.blue14)
+                    SFText(keyText: Keys.accountLogin, style: TextStyles.blue14)
                   ],
                 ),
               ),

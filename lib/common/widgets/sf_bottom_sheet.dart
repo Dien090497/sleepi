@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
 
 class SFModalBottomSheet {
-  static void show(context , double height , Widget? child) {
+  static void show(context, double height, Widget? child) {
     Size size = MediaQuery.of(context).size;
     showModalBottomSheet(
         isScrollControlled: true,

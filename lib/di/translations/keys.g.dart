@@ -282,6 +282,8 @@ class Keys {
 
   static const String language = 'language';
 
+  static const String rent = 'rent';
+
   static const String filter = 'filter';
 
   static const String use = 'use';

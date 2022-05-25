@@ -15,24 +15,36 @@ class AlarmScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    const icon = Icon(Icons.chevron_right, color: AppColors.lightGrey,);
-    Divider divider = Divider(color: AppColors.lightWhite.withOpacity(0.05), height: 1,);
+    const icon = Icon(
+      Icons.chevron_right,
+      color: AppColors.lightGrey,
+    );
+    Divider divider = Divider(
+      color: AppColors.lightWhite.withOpacity(0.05),
+      height: 1,
+    );
     return BackgroundWidget(
       child: Scaffold(
         backgroundColor: AppColors.transparent,
-        appBar: SFAppBar(context: context, title: Keys.alarm, textStyle: TextStyles.bold18LightWhite,),
+        appBar: SFAppBar(
+          context: context,
+          title: Keys.alarm,
+          textStyle: TextStyles.bold18LightWhite,
+        ),
         body: SafeArea(
           child: ListView(
             padding: const EdgeInsets.symmetric(horizontal: 12.0),
-            children:  [
-              const SizedBox(height: 36.0,),
+            children: [
+              const SizedBox(
+                height: 36.0,
+              ),
               Container(
                 width: double.infinity,
                 padding: const EdgeInsets.symmetric(horizontal: 16.0),
                 decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(16.0),
-                    color: AppColors.white.withOpacity(0.05),
-                  boxShadow:  [
+                  borderRadius: BorderRadius.circular(16.0),
+                  color: AppColors.white.withOpacity(0.05),
+                  boxShadow: [
                     BoxShadow(
                       color: AppColors.white.withOpacity(0.05),
                       blurRadius: 4,
@@ -47,7 +59,8 @@ class AlarmScreen extends StatelessWidget {
                     SFListTile(
                       text: Keys.music,
                       trailing: icon,
-                      onPressed: () => Navigator.pushNamed(context, R.alarmSoundEffect),
+                      onPressed: () =>
+                          Navigator.pushNamed(context, R.alarmSoundEffect),
                     ),
                     divider,
                     SFListTile(
@@ -78,7 +91,7 @@ class AlarmScreen extends StatelessWidget {
                       ),
                     ),
                     divider,
-                   const AlarmVolumnChangeWidget(),
+                    const AlarmVolumnChangeWidget(),
                   ],
                 ),
               ),
@@ -89,4 +102,3 @@ class AlarmScreen extends StatelessWidget {
     );
   }
 }
-
