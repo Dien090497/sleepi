@@ -18,6 +18,7 @@ class ProductDetaiScreen extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: const [
             TopBarCommon(),
+            SizedBox(height: 20),
             Expanded(
               child: SFTabBar(
                 isScrollable: true,

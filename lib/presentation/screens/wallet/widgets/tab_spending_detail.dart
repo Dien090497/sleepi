@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
 import 'package:slee_fi/common/widgets/sf_buttons.dart';
 import 'package:slee_fi/common/widgets/sf_card.dart';
+import 'package:slee_fi/common/widgets/sf_icon.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
 import 'package:slee_fi/di/translations/keys.dart';
 import 'package:slee_fi/presentation/screens/wallet/widgets/spending_detail_list.dart';
@@ -26,7 +26,7 @@ class TabSpendingDetail extends StatelessWidget {
               onTap: () => ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                 content: SFText(keyText: Keys.displaysMessageFromSpendingDetail, style: const TextStyle(color: AppColors.white),),
               )),
-              child: SvgPicture.asset("assets/icons/ic_question.svg"),
+              child: SFIcon("assets/icons/ic_question.svg"),
             ),
           ],
         ),

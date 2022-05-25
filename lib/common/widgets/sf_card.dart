@@ -7,6 +7,7 @@ class SFCard extends StatelessWidget {
   final Widget? child;
   final EdgeInsets? margin;
   final EdgeInsets? padding;
+
   @override
   Widget build(BuildContext context) {
     return Container(

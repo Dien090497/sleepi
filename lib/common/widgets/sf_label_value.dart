@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
+import 'package:slee_fi/common/widgets/sf_icon.dart';
 
 class SFLabelValue extends StatelessWidget {
   const SFLabelValue({
@@ -44,7 +44,7 @@ class SFLabelValue extends StatelessWidget {
               alignment: Alignment.centerRight,
               child: Row(
                 children: [
-                  if (icon != null) SvgPicture.asset(icon!),
+                  if (icon != null) SFIcon(icon!),
                   const SizedBox(
                     width: 8,
                   ),

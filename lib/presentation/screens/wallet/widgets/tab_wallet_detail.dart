@@ -1,10 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:slee_fi/common/routes/app_routes.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
 import 'package:slee_fi/common/widgets/sf_dialog.dart';
+import 'package:slee_fi/common/widgets/sf_icon.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
 import 'package:slee_fi/di/translations/keys.dart';
 import 'package:slee_fi/presentation/screens/wallet/widgets/box_button_widget.dart';
@@ -75,7 +75,7 @@ class TabWalletDetail extends StatelessWidget {
                   ),
                   GestureDetector(
                     onTap: () {},
-                    child: SvgPicture.asset("assets/icons/ic_question.svg"),
+                    child: SFIcon("assets/icons/ic_question.svg"),
                   ),
                 ],
               ),

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
+import 'package:slee_fi/common/widgets/sf_icon.dart';
 import 'package:slee_fi/resources/resources.dart';
 
 class SFStatisticResource extends StatelessWidget {
@@ -31,7 +31,7 @@ class SFStatisticResource extends StatelessWidget {
           const SizedBox(width: 16,),
           ItemResource(value: valueSolana, url: Ics.icSolana,),
           const SizedBox(width: 12,),
-          SvgPicture.asset(Ics.icSolanaCircle),
+          SFIcon(Ics.icSolanaCircle),
         ],
       ),
     );
@@ -49,7 +49,7 @@ class ItemResource extends StatelessWidget {
     return Row(
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        SvgPicture.asset(url),
+        SFIcon(url),
         const SizedBox(width: 4,),
         Text(value.toStringAsFixed(2), style: TextStyles.white14,),
       ],
