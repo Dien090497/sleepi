@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/widgets/sf_list_tile.dart';
 
-import '../../../../common/style/app_colors.dart';
-import '../../../../common/style/text_styles.dart';
-import '../../../../common/widgets/sf_text.dart';
 
 class AlarmSoundEffectList extends StatefulWidget {
   const AlarmSoundEffectList({Key? key}) : super(key: key);
@@ -13,9 +11,6 @@ class AlarmSoundEffectList extends StatefulWidget {
 }
 
 class _AlarmSoundEffectListState extends State<AlarmSoundEffectList> {
-
-  // value set to false
-  bool _value = false;
 
   @override
   Widget build(BuildContext context) {

@@ -9,6 +9,10 @@ class AppColors {
 
   static const dark = Color(0xFF060616);
 
+  static const darkColor = Color(0xFF181722);
+
+  static const borderDarkColor = Color(0xFF272E39);
+
   static const lightDark = Color(0xFF191B2E);
 
   static const lightWhite = Color(0xFFCBD5E1);
@@ -49,6 +53,19 @@ class AppColors {
       colors: [blue, purple],
       begin: Alignment.topLeft,
       end: Alignment.bottomRight);
+  static const gradientBlueButton = LinearGradient(
+      colors: [blue, Color(0xFF426BFF)],
+      begin: Alignment.topCenter,
+      end: Alignment.bottomCenter);
+  static LinearGradient gradientWhiteBorderLeftToRight= LinearGradient(
+      colors: [Colors.white.withOpacity(0), Colors.white.withOpacity(0.2)],
+      begin: Alignment.centerLeft,
+      end: Alignment.centerRight);
+
+  static LinearGradient gradientWhiteBorderRightToLeft= LinearGradient(
+      colors: [Colors.white.withOpacity(0.2), Colors.white.withOpacity(0)],
+      begin: Alignment.centerLeft,
+      end: Alignment.centerRight);
 
   static const tutorialBgr = Color(0xff092128);
 

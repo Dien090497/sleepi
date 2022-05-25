@@ -6,12 +6,18 @@ import 'package:slee_fi/resources/resources.dart';
 class SFBottomNavigatorHome extends SFBottomNavigatorBar {
   SFBottomNavigatorHome(
     int index, {
+    required Function(int)? onTap,
     Key? key,
   }) : super(
           index,
-          onTap: (index) {},
-          items: [ItemBottomNav(icon: Ics.home, label: Keys.home)],
+          onTap: onTap,
+          items: [
+            ItemBottomNav(icon: Ics.home, label: Keys.home),
+            ItemBottomNav(icon: Ics.signOut, label: Keys.gacha),
+            ItemBottomNav(icon: Ics.group, label: Keys.bed),
+            ItemBottomNav(icon: Ics.chart, label: Keys.chart),
+            ItemBottomNav(icon: Ics.shopping, label: Keys.market),
+          ],
           key: key,
         );
 }
-
