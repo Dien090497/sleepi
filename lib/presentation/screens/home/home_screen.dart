@@ -6,6 +6,7 @@ import 'package:slee_fi/common/routes/app_routes.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
 import 'package:slee_fi/common/widgets/loading_screen.dart';
+import 'package:slee_fi/common/widgets/sf_button_outlined.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
 import 'package:slee_fi/common/widgets/sf_text_border.dart';
 import 'package:slee_fi/common/widgets/topbar_common.dart';
@@ -63,8 +64,8 @@ class _HomeScreenState extends State<HomeScreen> {
                               physics: const BouncingScrollPhysics(),
                               child: Column(
                                 children: [
-                                  const Text(
-                                    Keys.mainBed,
+                                  SFText(
+                                    keyText: Keys.mainBed,
                                     style: TextStyles.white18,
                                   ),
                                   const SizedBox(
@@ -83,8 +84,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                     ),
                                     child: Column(
                                       children: [
-                                        const Text(
-                                          Keys.middleBed,
+                                        SFText(
+                                          keyText: Keys.middleBed,
                                           style: TextStyles.blue14,
                                         ),
                                         const SizedBox(height: 24),
@@ -120,23 +121,29 @@ class _HomeScreenState extends State<HomeScreen> {
                                           mainAxisAlignment:
                                               MainAxisAlignment.center,
                                           children: const [
+                                            Spacer(),
                                             SFTextBorder(
                                               text: 'IDIDID',
                                               textColor: AppColors.blue,
                                               radius: 50,
                                             ),
-                                            SizedBox(width: 8,),
+                                            SizedBox(
+                                              width: 8,
+                                            ),
                                             SFTextBorder(
                                               text: '100/100',
                                               textColor: AppColors.green,
                                               radius: 50,
                                             ),
-                                            SizedBox(width: 8,),
+                                            SizedBox(
+                                              width: 8,
+                                            ),
                                             SFTextBorder(
                                               text: 'Lv9999',
                                               textColor: AppColors.yellow,
                                               radius: 50,
                                             ),
+                                            Spacer(),
                                           ],
                                         ),
                                         const SizedBox(height: 16),
@@ -147,17 +154,33 @@ class _HomeScreenState extends State<HomeScreen> {
                                       ],
                                     ),
                                   ),
-                                  Padding(
-                                    padding: const EdgeInsets.symmetric(
-                                        horizontal: 40),
-                                    child: Row(
-                                      children: [
-                                        SFText(
-                                          keyText: 'Insurance: 5%',
-                                          style: TextStyles.bold15black,
-                                        ),
-                                        const SizedBox(width: 5),
-                                        CupertinoSwitch(
+                                  const SizedBox(
+                                    height: 16,
+                                  ),
+                                  SFButtonOutLined(
+                                    title: Keys.useItem,
+                                    onPressed: () {},
+                                    fixedSize: Size(size.width, 40),
+                                    textStyle: TextStyles.lightGrey16500,
+                                    icon: Icons.add_circle_outline,
+                                    borderColor: Colors.white.withOpacity(0.1),
+                                    withBorder: 1,
+                                  ),
+                                  const SizedBox(
+                                    height: 24,
+                                  ),
+                                  Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      SFText(
+                                        keyText: '${Keys.insurance}: 5%',
+                                        style: TextStyles.bold16LightWhite,
+                                      ),
+                                      SizedBox(
+                                        height: 24,
+                                        child: CupertinoSwitch(
+                                          activeColor: AppColors.green,
                                           value: swCheck,
                                           onChanged: (value) {
                                             setState(() {
@@ -165,78 +188,20 @@ class _HomeScreenState extends State<HomeScreen> {
                                             });
                                           },
                                         ),
-                                        const Spacer(),
-                                        SFText(
-                                            keyText: 'Item',
-                                            style: TextStyles.bold15black),
-                                        const SizedBox(width: 10),
-                                        GestureDetector(
-                                          onTap: () {
-                                            Navigator.pushNamed(
-                                                context, R.itemSelection);
-                                          },
-                                          child: const Icon(
-                                            Icons.add_circle_outline,
-                                            size: 30,
-                                          ),
-                                        ),
-                                      ],
-                                    ),
+                                      ),
+                                    ],
                                   ),
-                                  Padding(
-                                    padding: const EdgeInsets.symmetric(
-                                        horizontal: 45),
-                                    child: Align(
-                                      alignment: Alignment.centerLeft,
-                                      child: SFText(
+                                  const SizedBox(height: 2,),
+                                  Row(
+                                    crossAxisAlignment: CrossAxisAlignment.center,
+                                    children: [
+                                      SFText(
                                         keyText: 'What’s Insurance?',
-                                        style: TextStyles.black10Bold,
+                                        style: TextStyles.lightGrey12,
                                       ),
-                                    ),
-                                  ),
-                                  Padding(
-                                    padding:
-                                        const EdgeInsets.symmetric(vertical: 5),
-                                    child: SFText(
-                                      keyText: '6:29',
-                                      style: TextStyles.header,
-                                    ),
-                                  ),
-                                  Padding(
-                                    padding:
-                                        const EdgeInsets.symmetric(vertical: 5),
-                                    child: Container(
-                                      padding: const EdgeInsets.symmetric(
-                                          horizontal: 20, vertical: 5),
-                                      decoration: const BoxDecoration(
-                                          color: AppColors.greyBottomNavBar),
-                                      child: SFText(
-                                        keyText: '7:30',
-                                        style: TextStyles.header,
-                                      ),
-                                    ),
-                                  ),
-                                  Padding(
-                                    padding:
-                                        const EdgeInsets.symmetric(vertical: 5),
-                                    child: SFText(
-                                      keyText: '8:31',
-                                      style: TextStyles.header,
-                                    ),
-                                  ),
-                                  Padding(
-                                    padding:
-                                        const EdgeInsets.symmetric(vertical: 5),
-                                    child: Container(
-                                      padding: const EdgeInsets.symmetric(
-                                          horizontal: 20, vertical: 10),
-                                      decoration: const BoxDecoration(
-                                          color: AppColors.greyBottomNavBar),
-                                      child: SFText(
-                                        keyText: 'START',
-                                        style: TextStyles.header,
-                                      ),
-                                    ),
+                                      const SizedBox(width: 8,),
+                                      SvgPicture.asset(Ics.icCircleQuestion),
+                                    ],
                                   ),
                                   Padding(
                                     padding:

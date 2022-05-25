@@ -1,38 +1,62 @@
 import 'package:flutter/material.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
 
-class ButtonOutLined extends StatelessWidget {
-  const ButtonOutLined({
+class SFButtonOutLined extends StatelessWidget {
+  const SFButtonOutLined({
     Key? key,
     required this.title,
     required this.onPressed,
     this.fixedSize,
     this.textStyle,
-    this.bgColor,
-    this.withBorder=2,
+    this.borderColor = AppColors.lightGrey,
+    this.iconColor = AppColors.lightGrey,
+    this.withBorder = 2,
+    this.icon,
   }) : super(key: key);
   final String title;
   final VoidCallback onPressed;
   final Size? fixedSize;
   final TextStyle? textStyle;
-  final Color? bgColor;
+  final Color borderColor;
+  final Color iconColor;
+  final IconData? icon;
   final double withBorder;
 
   @override
   Widget build(BuildContext context) {
     return OutlinedButton(
       style: OutlinedButton.styleFrom(
-        backgroundColor: bgColor ?? Colors.transparent,
+        backgroundColor: Colors.transparent,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(100),
         ),
-        side: BorderSide(width: withBorder, color: AppColors.primary),
+        side: BorderSide(width: withBorder, color: borderColor),
         fixedSize: fixedSize,
       ),
       onPressed: onPressed,
-      child: Text(
-        title,
-        style: textStyle ?? Theme.of(context).textTheme.button?.copyWith(color: AppColors.primary),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          if (icon != null)
+            Icon(
+              icon,
+              size: 20,
+              color: iconColor,
+            ),
+          if (icon != null)
+            const SizedBox(
+              width: 9,
+            ),
+          Text(
+            title,
+            style: textStyle ??
+                Theme.of(context)
+                    .textTheme
+                    .button
+                    ?.copyWith(color: AppColors.primary),
+          ),
+        ],
       ),
     );
   }

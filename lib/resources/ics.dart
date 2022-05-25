@@ -7,8 +7,10 @@ class Ics {
   static const String chart = 'assets/icons/chart.svg';
   static const String flexibleBed = 'assets/icons/flexible_bed.svg';
   static const String gacha = 'assets/icons/gacha.svg';
+  static const String group = 'assets/icons/group.svg';
   static const String home = 'assets/icons/home.svg';
   static const String icArrowUpRight = 'assets/icons/ic_arrow_up_right.svg';
+  static const String icCircleQuestion = 'assets/icons/ic_circle_question.svg';
   static const String icDownload = 'assets/icons/ic_download.svg';
   static const String icGold = 'assets/icons/ic_gold.svg';
   static const String icQuestion = 'assets/icons/ic_question.svg';
@@ -22,6 +24,7 @@ class Ics {
   static const String icWallet = 'assets/icons/ic_wallet.svg';
   static const String longBed = 'assets/icons/long_bed.svg';
   static const String middleBed = 'assets/icons/middle_bed.svg';
+  static const String shopping = 'assets/icons/shopping.svg';
   static const String shortBed = 'assets/icons/short_bed.svg';
   static const String signOut = 'assets/icons/sign_out.svg';
   static const String sleep = 'assets/icons/sleep.svg';
@@ -32,8 +35,10 @@ class Ics {
     chart,
     flexibleBed,
     gacha,
+    group,
     home,
     icArrowUpRight,
+    icCircleQuestion,
     icDownload,
     icGold,
     icQuestion,
@@ -47,6 +52,7 @@ class Ics {
     icWallet,
     longBed,
     middleBed,
+    shopping,
     shortBed,
     signOut,
     sleep,

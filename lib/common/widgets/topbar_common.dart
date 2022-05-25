@@ -13,16 +13,14 @@ class TopBarCommon extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          GestureDetector(
-            onTap: () {
+          SFIconBorder(
+            icon: Icons.settings_outlined,
+            onTap: (){
               Navigator.pushNamed(context, R.setting);
-            } ,
-            child: const SFIconBorder(
-              icon: Icons.settings_outlined,
-              radius: 100,
-              sizeIcon: 22,
-              size: Size(40, 40),
-            ),
+            },
+            radius: 100,
+            sizeIcon: 22,
+            size: const Size(40, 40),
           ),
           GestureDetector(
             onTap: () {
