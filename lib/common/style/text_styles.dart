@@ -162,4 +162,6 @@ class TextStyles {
       fontSize: 16, color: AppColors.yellow, fontStyle: FontStyle.italic);
   static const labelStyle = TextStyle(
       fontSize: 16, color: AppColors.lightGrey, fontStyle: FontStyle.normal);
+  static const boldWhite14 =
+  TextStyle(fontSize: 14, color: AppColors.white, fontWeight: FontWeight.bold);
 }

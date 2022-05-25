@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:slee_fi/common/style/app_colors.dart';
 
 class DecoratedWidget extends StatelessWidget {
   const DecoratedWidget(

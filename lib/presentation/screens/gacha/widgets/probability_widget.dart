@@ -10,7 +10,12 @@ class ProbabilityWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return ClipRRect(
       borderRadius: BorderRadius.circular(15),
-      child: Image.asset('assets/images/bedroom_gacha.png'),
+      child: GestureDetector(
+        onTap: () {
+          _probabilityDialog(context);
+        },
+        child: Image.asset('assets/images/bedroom_gacha.png'),
+      ),
     );
     /*return Container(
       width: double.infinity,

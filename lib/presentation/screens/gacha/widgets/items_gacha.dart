@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
-import 'package:slee_fi/common/widgets/sf_percent_border.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
 import 'package:slee_fi/di/translations/keys.dart';
 import 'package:slee_fi/presentation/screens/gacha/widgets/chance_widget.dart';
