@@ -6,7 +6,7 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 version: 1.0.0+1
 
 environment:
-  sdk: ">=2.16.2 <3.0.0"
+  sdk: ">=2.17.0 <3.0.0"
 
 dependencies:
   flutter:
@@ -17,10 +17,10 @@ dependencies:
   cupertino_icons: ^1.0.4
   flutter_translate_annotations: ^2.1.0
   flutter_translate: ^4.0.2
-  shared_preferences: ^2.0.13
+  shared_preferences: ^2.0.15
   flutter_bloc: ^8.0.1
   equatable: ^2.0.3
-  flutter_svg: ^1.0.3
+  flutter_svg: ^1.1.0
   freezed_annotation: ^2.0.3
   json_annotation: ^4.5.0
   get_it: ^7.2.0
@@ -29,24 +29,31 @@ dependencies:
   logger: ^1.1.0
   retrofit: ^3.0.1+1
   dio: ^4.0.6
-  widgetbook_annotation: ^2.0.1
-  cached_network_image: ^3.2.0
+  widgetbook_annotation: ^2.0.2
+  cached_network_image: ^3.2.1
+  fl_chart: ^0.50.6
+  flutter_date_pickers: ^0.3.1
+  flutter_screenutil: ^5.5.3+2
+  pin_code_fields: ^7.4.0
+  loop_page_view: ^1.1.1
+  smooth_page_indicator: ^1.0.0+2
+  tab_indicator_styler: ^2.0.0
+  percent_indicator: ^4.2.2
 
 dependency_overrides:
-  analyzer: ^4.0.0
-  freezed_annotation: ^2.0.3
+  analyzer: ^4.1.0
 
 dev_dependencies:
 
-  flutter_lints: ^1.0.4
+  flutter_lints: ^2.0.1
   flutter_translate_gen: ^2.2.0
-  build_runner: ^2.1.10
-  freezed: ^2.0.3
+  build_runner: ^2.1.11
+  freezed: ^2.0.3+1
   injectable_generator: ^1.5.3
   json_serializable: ^6.2.0
   retrofit_generator: ^4.0.1
-  widgetbook: ^2.1.1
-  widgetbook_generator: ^2.0.1
+  widgetbook: ^2.2.1
+  widgetbook_generator: ^2.1.1
 
 flutter:
 

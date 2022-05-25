@@ -161,7 +161,7 @@ Remote data such as api call, firebase,...
 # Command
 
 ```dart
-flutter pub run build_runner buid --delete-conflicting-outputs
+flutter pub run build_runner build --delete-conflicting-outputs
 ```
 
 Watching changes
@@ -170,4 +170,6 @@ Watching changes
 flutter pub run build_runner watch --delete-conflicting-outputs
 ```
 
-t
+```dart
+spider build
+```

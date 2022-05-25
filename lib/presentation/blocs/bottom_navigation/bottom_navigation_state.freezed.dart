@@ -54,31 +54,32 @@ class _$BottomNavigationStateCopyWithImpl<$Res>
 }
 
 /// @nodoc
-abstract class _$BottomNavigationStateCopyWith<$Res>
+abstract class _$$_BottomNavigationStateCopyWith<$Res>
     implements $BottomNavigationStateCopyWith<$Res> {
-  factory _$BottomNavigationStateCopyWith(_BottomNavigationState value,
-          $Res Function(_BottomNavigationState) then) =
-      __$BottomNavigationStateCopyWithImpl<$Res>;
+  factory _$$_BottomNavigationStateCopyWith(_$_BottomNavigationState value,
+          $Res Function(_$_BottomNavigationState) then) =
+      __$$_BottomNavigationStateCopyWithImpl<$Res>;
   @override
   $Res call({int tabIndex});
 }
 
 /// @nodoc
-class __$BottomNavigationStateCopyWithImpl<$Res>
+class __$$_BottomNavigationStateCopyWithImpl<$Res>
     extends _$BottomNavigationStateCopyWithImpl<$Res>
-    implements _$BottomNavigationStateCopyWith<$Res> {
-  __$BottomNavigationStateCopyWithImpl(_BottomNavigationState _value,
-      $Res Function(_BottomNavigationState) _then)
-      : super(_value, (v) => _then(v as _BottomNavigationState));
+    implements _$$_BottomNavigationStateCopyWith<$Res> {
+  __$$_BottomNavigationStateCopyWithImpl(_$_BottomNavigationState _value,
+      $Res Function(_$_BottomNavigationState) _then)
+      : super(_value, (v) => _then(v as _$_BottomNavigationState));
 
   @override
-  _BottomNavigationState get _value => super._value as _BottomNavigationState;
+  _$_BottomNavigationState get _value =>
+      super._value as _$_BottomNavigationState;
 
   @override
   $Res call({
     Object? tabIndex = freezed,
   }) {
-    return _then(_BottomNavigationState(
+    return _then(_$_BottomNavigationState(
       tabIndex: tabIndex == freezed
           ? _value.tabIndex
           : tabIndex // ignore: cast_nullable_to_non_nullable
@@ -105,7 +106,7 @@ class _$_BottomNavigationState implements _BottomNavigationState {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _BottomNavigationState &&
+            other is _$_BottomNavigationState &&
             const DeepCollectionEquality().equals(other.tabIndex, tabIndex));
   }
 
@@ -115,8 +116,8 @@ class _$_BottomNavigationState implements _BottomNavigationState {
 
   @JsonKey(ignore: true)
   @override
-  _$BottomNavigationStateCopyWith<_BottomNavigationState> get copyWith =>
-      __$BottomNavigationStateCopyWithImpl<_BottomNavigationState>(
+  _$$_BottomNavigationStateCopyWith<_$_BottomNavigationState> get copyWith =>
+      __$$_BottomNavigationStateCopyWithImpl<_$_BottomNavigationState>(
           this, _$identity);
 }
 
@@ -128,6 +129,6 @@ abstract class _BottomNavigationState implements BottomNavigationState {
   int get tabIndex => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
-  _$BottomNavigationStateCopyWith<_BottomNavigationState> get copyWith =>
+  _$$_BottomNavigationStateCopyWith<_$_BottomNavigationState> get copyWith =>
       throw _privateConstructorUsedError;
 }

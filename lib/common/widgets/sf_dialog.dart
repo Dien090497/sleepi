@@ -2,9 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
 
 class SFDialog extends StatelessWidget {
-  const SFDialog({required this.children, Key? key}) : super(key: key);
+  const SFDialog(
+      {required this.children, Key? key, this.backgroundColor, this.padding})
+      : super(key: key);
 
   final List<Widget> children;
+  final Color? backgroundColor;
+  final EdgeInsets? padding;
 
   @override
   Widget build(BuildContext context) {
@@ -14,9 +18,9 @@ class SFDialog extends StatelessWidget {
       child: Container(
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(8),
-          color: AppColors.grey,
+          color: backgroundColor ?? AppColors.greyBottomNavBar,
         ),
-        padding: const EdgeInsets.all(8),
+        padding: padding ?? const EdgeInsets.all(8),
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: children,
