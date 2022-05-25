@@ -27,7 +27,12 @@ class SFTextField extends StatelessWidget {
   Widget build(BuildContext context) {
     final border = noBorder
         ? InputBorder.none
-        : OutlineInputBorder(borderRadius: BorderRadius.circular(10), borderSide: const BorderSide(color: AppColors.lightGrey));
+        : OutlineInputBorder(
+            borderRadius: BorderRadius.circular(8),
+            borderSide: BorderSide(
+              color: AppColors.white.withOpacity(0.1),
+            ),
+          );
 
     return TextField(
       decoration: InputDecoration(

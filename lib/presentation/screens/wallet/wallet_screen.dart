@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
@@ -7,6 +6,7 @@ import 'package:slee_fi/di/translations/keys.dart';
 import 'package:slee_fi/presentation/screens/wallet/widgets/tab_bar_icon.dart';
 import 'package:slee_fi/presentation/screens/wallet/widgets/tab_spending_detail.dart';
 import 'package:slee_fi/presentation/screens/wallet/widgets/tab_wallet_detail.dart';
+import 'package:slee_fi/resources/resources.dart';
 
 class WalletScreen extends StatelessWidget {
   const WalletScreen({Key? key}) : super(key: key);
@@ -22,7 +22,7 @@ class WalletScreen extends StatelessWidget {
             actions:  [
               GestureDetector(
                 onTap: () {},
-                child: SvgPicture.asset("assets/icons/ic_setting.svg"),
+                child: SvgPicture.asset(Ics.icSetting),
               )
             ],
             automaticallyImplyLeading: false,
@@ -32,7 +32,7 @@ class WalletScreen extends StatelessWidget {
             title: Center(
               child: TabBarIcon(
                 texts: const [Keys.spending, Keys.wallet],
-                images: const ["assets/icons/ic_two_eyes.svg", "assets/icons/ic_wallet.svg"],
+                images: const [Ics.icTwoEyes, Ics.icWallet],
               ),
             ),
           ),
