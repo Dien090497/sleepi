@@ -1,11 +1,13 @@
 enum UserRole { guest, admin }
 
-enum Water {
-  frozen(0);
+enum BedType {
+  short('Short'),
+  middle('Middle'),
+  long('Long'),
+  flexible('Flexible');
 
-  final int tempCelsius;
+  final String name;
 
-  const Water(this.tempCelsius);
-
-  external int get externalValue;
+  const BedType(this.name);
 }
+

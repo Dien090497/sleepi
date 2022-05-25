@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:slee_fi/common/routes/app_routes.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
-import 'package:slee_fi/common/widgets/sf_background.dart';
+import 'package:slee_fi/common/widgets/background_widget.dart';
 import 'package:slee_fi/presentation/blocs/bottom_navigation/bottom_navigation_bloc.dart';
 import 'package:slee_fi/presentation/blocs/bottom_navigation/bottom_navigation_event.dart';
 import 'package:slee_fi/presentation/blocs/bottom_navigation/bottom_navigation_state.dart';
@@ -17,13 +16,13 @@ class BottomNavigationScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
-      Future.delayed(const Duration(milliseconds: 600), () {
-        Navigator.pushNamed(context, R.tutorial);
-      });
-    });
+    // WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+    //   Future.delayed(const Duration(milliseconds: 600), () {
+    //     Navigator.pushNamed(context, R.tutorial);
+    //   });
+    // });
 
-    return SFBackground(
+    return BackgroundWidget(
       child: BlocBuilder<BottomNavigationBloc, BottomNavigationState>(
         builder: (context, navState) {
           final navBloc = context.read<BottomNavigationBloc>();

@@ -1,43 +1,35 @@
 import 'package:flutter/material.dart';
-import 'package:slee_fi/common/style/text_styles.dart';
+import 'package:percent_indicator/percent_indicator.dart';
+import 'package:slee_fi/common/style/app_colors.dart';
 
 class SFPercentBorder extends StatelessWidget {
-  const SFPercentBorder(
-      {Key? key,
-      required this.valueActive,
-      this.colorActive = Colors.blueAccent,
-      this.titleActive,
-      required this.totalValue})
-      : super(key: key);
+  const SFPercentBorder({
+    Key? key,
+    required this.valueActive,
+    required this.totalValue,
+    this.backgroundColor,
+    this.titleActive,
+    this.linearGradient,
+    this.progressColor,
+  }) : super(key: key);
 
   final double valueActive;
-  final Color? colorActive;
+  final Color? backgroundColor;
+  final Color? progressColor;
   final String? titleActive;
   final double totalValue;
+  final LinearGradient? linearGradient;
 
   @override
   Widget build(BuildContext context) {
-    return Stack(
-      children: [
-        Container(
-          decoration: BoxDecoration(
-            color: Colors.white.withOpacity(0.05),
-            borderRadius: BorderRadius.circular(20),
-          ),
-        ),
-        Positioned(
-            left: 0,
-            child: Container(
-              padding: const EdgeInsets.symmetric(horizontal: 16),
-              width: double.infinity * (valueActive / totalValue),
-              decoration: BoxDecoration(
-                color: colorActive,
-                borderRadius: BorderRadius.circular(20),
-              ),
-              child: titleActive != null ? Text(titleActive!, style: TextStyles.lightGrey12,) : Container(),
-            ),
-        ),
-      ],
+    return LinearPercentIndicator(
+      padding: EdgeInsets.zero,
+      percent: valueActive / totalValue,
+      lineHeight: 6.0,
+      linearGradient: linearGradient ?? AppColors.gradientBluePurple,
+      barRadius: const Radius.circular(3),
+      backgroundColor: backgroundColor ?? AppColors.darkColor1,
+      progressColor: linearGradient != null ? null : progressColor,
     );
   }
 }

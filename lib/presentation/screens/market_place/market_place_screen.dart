@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:slee_fi/common/widgets/sf_tab_bar.dart';
 import 'package:slee_fi/common/widgets/topbar_common.dart';
-import 'package:slee_fi/di/translations/keys.dart';
 import 'package:slee_fi/presentation/screens/market_place/widget/drawer_widget.dart';
 import 'package:slee_fi/presentation/screens/market_place/widget/tab_beds_buy.dart';
 import 'package:slee_fi/presentation/screens/market_place/widget/tab_items_buy.dart';
@@ -31,9 +29,9 @@ class _MarketPlaceScreenState extends State<MarketPlaceScreen> {
           child: Column(
             children: [
               const TopBarCommon(),
-              SFTabBar(
-                texts: const [Keys.beds, Keys.jewels, Keys.item, Keys.trophy],
-              ),
+              // SFTabBar(
+              //   texts: const [Keys.beds, Keys.jewels, Keys.item, Keys.trophy],
+              // ),
               const SizedBox(height: 10),
               Expanded(
                 child: TabBarView(
@@ -43,9 +41,10 @@ class _MarketPlaceScreenState extends State<MarketPlaceScreen> {
                         _scaffoldKey.currentState?.openEndDrawer();
                       },
                     ),
-                    TabJewelsBuy(onPress: () {
-                      _scaffoldKey.currentState?.openEndDrawer();
-                    },
+                    TabJewelsBuy(
+                      onPress: () {
+                        _scaffoldKey.currentState?.openEndDrawer();
+                      },
                     ),
                     TabItemsBuy(
                       onPress: () {
