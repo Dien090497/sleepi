@@ -12,7 +12,6 @@ import 'package:slee_fi/presentation/screens/product_detail/widgets/top_left_ban
 class MyBedShortWidget extends StatelessWidget {
   const MyBedShortWidget({Key? key, required this.bedType}) : super(key: key);
 
-  // final int index;
   final BedType bedType;
 
   @override
@@ -22,7 +21,6 @@ class MyBedShortWidget extends StatelessWidget {
         color: AppColors.lightDark,
         borderRadius: BorderRadius.circular(16),
       ),
-      // margin: const EdgeInsets.only(right: 24, bottom: 24),
       child: Stack(
         clipBehavior: Clip.hardEdge,
         children: [

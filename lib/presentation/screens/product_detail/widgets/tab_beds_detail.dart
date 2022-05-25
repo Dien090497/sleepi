@@ -10,8 +10,8 @@ class TabBedsDetail extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final beds =
-        List.generate(BedType.values.length * 5, (i) => BedType.values[i % 4]);
+    final beds = List.generate(BedType.values.length * 5,
+        (i) => BedType.values[i % BedType.values.length]);
 
     return DefaultTabController(
       length: 2,
@@ -26,13 +26,15 @@ class TabBedsDetail extends StatelessWidget {
                 SFGridView(
                   count: beds.length,
                   itemBuilder: (context, i) {
-                    return MyBedShortWidget(bedType: beds[i % 4]);
+                    return MyBedShortWidget(
+                        bedType: beds[i % BedType.values.length]);
                   },
                 ),
                 SFGridView(
                   count: beds.length,
                   itemBuilder: (context, i) {
-                    return MyBedShortWidget(bedType: beds[i % 4]);
+                    return MyBedShortWidget(
+                        bedType: beds[i % BedType.values.length]);
                   },
                 ),
               ],

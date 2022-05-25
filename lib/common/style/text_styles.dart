@@ -7,6 +7,8 @@ class TextStyles {
       fontSize: 16, color: AppColors.light1, fontWeight: FontWeight.w700);
   static const white1w700size12 = TextStyle(
       fontSize: 12, color: AppColors.light1, fontWeight: FontWeight.w700);
+  static const greenW700size12 = TextStyle(
+      fontSize: 12, color: AppColors.green, fontWeight: FontWeight.w700);
   static const header = TextStyle(
       fontSize: 32, color: AppColors.textColor, fontWeight: FontWeight.bold);
   static const textBasic15 = TextStyle(fontSize: 15, color: AppColors.primary);
