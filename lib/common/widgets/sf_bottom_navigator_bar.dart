@@ -28,7 +28,7 @@ class SFBottomNavigatorBar extends StatelessWidget {
                 ),
               ),
             ),
-            padding: const EdgeInsets.only(top: 22, bottom: 0),
+            padding: const EdgeInsets.only(top: 22, bottom: 12),
             width: MediaQuery.of(context).size.width / 5,
             child: Column(
               children: [
@@ -61,10 +61,10 @@ class SFBottomNavigatorBar extends StatelessWidget {
       elevation: 5,
       currentIndex: index,
       selectedItemColor: Colors.blue,
-      selectedFontSize: 8,
+      selectedFontSize: 0,
       backgroundColor: AppColors.dark,
       unselectedItemColor: AppColors.lightGrey,
-      unselectedFontSize: 8,
+      unselectedFontSize: 0,
       onTap: onTap,
       type: BottomNavigationBarType.fixed,
       items: itemBottoms,

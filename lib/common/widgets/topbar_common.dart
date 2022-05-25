@@ -9,13 +9,17 @@ class TopBarCommon extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 20,),
+      padding: const EdgeInsets.only(
+        top: 20,
+        left: 16,
+        right: 16,
+      ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           SFIconBorder(
             icon: Icons.settings_outlined,
-            onTap: (){
+            onTap: () {
               Navigator.pushNamed(context, R.setting);
             },
             radius: 100,

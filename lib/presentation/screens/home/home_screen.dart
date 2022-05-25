@@ -2,11 +2,13 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:flutter_translate/flutter_translate.dart';
 import 'package:slee_fi/common/routes/app_routes.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
 import 'package:slee_fi/common/widgets/loading_screen.dart';
 import 'package:slee_fi/common/widgets/sf_button_outlined.dart';
+import 'package:slee_fi/common/widgets/sf_buttons.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
 import 'package:slee_fi/common/widgets/sf_text_border.dart';
 import 'package:slee_fi/common/widgets/topbar_common.dart';
@@ -26,6 +28,25 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   bool swCheck = true;
   bool checkIntroduce = false;
+  late int _selectedHour = DateTime.now().hour;
+  late int _selectedMinute = DateTime.now().minute;
+
+  Widget viewGif() {
+    return Container(
+      width: 70,
+      height: 70,
+      padding: const EdgeInsets.symmetric(vertical: 19, horizontal: 19),
+      decoration: BoxDecoration(
+        color: AppColors.darkColor,
+        borderRadius: BorderRadius.circular(16),
+        border: Border.all(color: AppColors.borderDarkColor, width: 1),
+      ),
+      child: SvgPicture.asset(
+        Ics.gift,
+        color: AppColors.borderDarkColor,
+      ),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -48,325 +69,462 @@ class _HomeScreenState extends State<HomeScreen> {
                   initial: () => const SizedBox.shrink(),
                   loading: () => const LoadingIcon(),
                   loaded: () {
-                    return Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                      child: Column(
-                        children: [
-                          SizedBox(
-                            height: MediaQuery.of(context).padding.top,
-                          ),
-                          const TopBarCommon(),
-                          const SizedBox(
-                            height: 7,
-                          ),
-                          Expanded(
-                            child: SingleChildScrollView(
-                              physics: const BouncingScrollPhysics(),
-                              child: Column(
-                                children: [
-                                  SFText(
-                                    keyText: Keys.mainBed,
-                                    style: TextStyles.white18,
-                                  ),
-                                  const SizedBox(
-                                    height: 16,
-                                  ),
-                                  Container(
-                                    width: size.width,
-                                    padding: const EdgeInsets.symmetric(
-                                      vertical: 24,
-                                      horizontal: 16,
-                                    ),
-                                    alignment: Alignment.center,
-                                    decoration: BoxDecoration(
-                                      color: Colors.white.withOpacity(0.05),
-                                      borderRadius: BorderRadius.circular(16),
-                                    ),
-                                    child: Column(
-                                      children: [
-                                        SFText(
-                                          keyText: Keys.middleBed,
-                                          style: TextStyles.blue14,
+                    return Column(
+                      children: [
+                        SizedBox(
+                          height: MediaQuery.of(context).padding.top,
+                        ),
+                        const TopBarCommon(),
+                        const SizedBox(
+                          height: 7,
+                        ),
+                        Expanded(
+                          child: SingleChildScrollView(
+                            physics: const ScrollPhysics(),
+                            child: Column(
+                              children: [
+                                Padding(
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 16.0),
+                                  child: Column(
+                                    children: [
+                                      const SizedBox(
+                                        height: 20,
+                                      ),
+                                      SFText(
+                                        keyText: Keys.mainBed,
+                                        style: TextStyles.white18,
+                                      ),
+                                      const SizedBox(
+                                        height: 16,
+                                      ),
+                                      Container(
+                                        width: size.width,
+                                        padding: const EdgeInsets.symmetric(
+                                          vertical: 24,
+                                          horizontal: 16,
                                         ),
-                                        const SizedBox(height: 24),
-                                        Padding(
-                                          padding: const EdgeInsets.symmetric(
-                                              horizontal: 7),
-                                          child: Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.spaceBetween,
-                                            children: [
-                                              const Icon(
-                                                Icons.arrow_back_ios,
-                                                color: AppColors.lightGrey,
-                                              ),
-                                              GestureDetector(
-                                                onTap: () {
-                                                  Navigator.pushNamed(
-                                                      context, R.nftInfo,
-                                                      arguments: false);
-                                                },
-                                                child:
-                                                    SvgPicture.asset(Ics.sleep),
-                                              ),
-                                              const Icon(
-                                                Icons.arrow_forward_ios_sharp,
-                                                color: AppColors.lightGrey,
-                                              ),
-                                            ],
-                                          ),
+                                        alignment: Alignment.center,
+                                        decoration: BoxDecoration(
+                                          color: Colors.white.withOpacity(0.05),
+                                          borderRadius:
+                                              BorderRadius.circular(16),
                                         ),
-                                        const SizedBox(height: 32),
-                                        Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.center,
-                                          children: const [
-                                            Spacer(),
-                                            SFTextBorder(
-                                              text: 'IDIDID',
-                                              textColor: AppColors.blue,
-                                              radius: 50,
+                                        child: Column(
+                                          children: [
+                                            SFText(
+                                              keyText: Keys.middleBed,
+                                              style: TextStyles.blue14,
                                             ),
-                                            SizedBox(
-                                              width: 8,
+                                            const SizedBox(height: 24),
+                                            Padding(
+                                              padding:
+                                                  const EdgeInsets.symmetric(
+                                                      horizontal: 7),
+                                              child: Row(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment
+                                                        .spaceBetween,
+                                                children: [
+                                                  const Icon(
+                                                    Icons.arrow_back_ios,
+                                                    color: AppColors.lightGrey,
+                                                  ),
+                                                  GestureDetector(
+                                                    onTap: () {
+                                                      Navigator.pushNamed(
+                                                          context, R.nftInfo,
+                                                          arguments: false);
+                                                    },
+                                                    child: SvgPicture.asset(
+                                                        Ics.sleep),
+                                                  ),
+                                                  const Icon(
+                                                    Icons
+                                                        .arrow_forward_ios_sharp,
+                                                    color: AppColors.lightGrey,
+                                                  ),
+                                                ],
+                                              ),
                                             ),
-                                            SFTextBorder(
-                                              text: '100/100',
-                                              textColor: AppColors.green,
-                                              radius: 50,
+                                            const SizedBox(height: 32),
+                                            Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.center,
+                                              children: const [
+                                                Spacer(),
+                                                SFTextBorder(
+                                                  text: 'IDIDID',
+                                                  textColor: AppColors.blue,
+                                                  radius: 50,
+                                                ),
+                                                SizedBox(
+                                                  width: 8,
+                                                ),
+                                                SFTextBorder(
+                                                  text: '100/100',
+                                                  textColor: AppColors.green,
+                                                  radius: 50,
+                                                ),
+                                                SizedBox(
+                                                  width: 8,
+                                                ),
+                                                SFTextBorder(
+                                                  text: 'Lv9999',
+                                                  textColor: AppColors.yellow,
+                                                  radius: 50,
+                                                ),
+                                                Spacer(),
+                                              ],
                                             ),
-                                            SizedBox(
-                                              width: 8,
+                                            const SizedBox(height: 16),
+                                            SFText(
+                                              keyText: 'Time: 4h - 7h',
+                                              style: TextStyles.labelStyle,
                                             ),
-                                            SFTextBorder(
-                                              text: 'Lv9999',
-                                              textColor: AppColors.yellow,
-                                              radius: 50,
-                                            ),
-                                            Spacer(),
                                           ],
                                         ),
-                                        const SizedBox(height: 16),
-                                        SFText(
-                                          keyText: 'Time: 4h - 7h',
-                                          style: TextStyles.labelStyle,
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                  const SizedBox(
-                                    height: 16,
-                                  ),
-                                  SFButtonOutLined(
-                                    title: Keys.useItem,
-                                    onPressed: () {},
-                                    fixedSize: Size(size.width, 40),
-                                    textStyle: TextStyles.lightGrey16500,
-                                    icon: Icons.add_circle_outline,
-                                    borderColor: Colors.white.withOpacity(0.1),
-                                    withBorder: 1,
-                                  ),
-                                  const SizedBox(
-                                    height: 24,
-                                  ),
-                                  Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      SFText(
-                                        keyText: '${Keys.insurance}: 5%',
-                                        style: TextStyles.bold16LightWhite,
                                       ),
-                                      SizedBox(
-                                        height: 24,
-                                        child: CupertinoSwitch(
-                                          activeColor: AppColors.green,
-                                          value: swCheck,
-                                          onChanged: (value) {
-                                            setState(() {
-                                              swCheck = value;
-                                            });
-                                          },
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                  const SizedBox(height: 2,),
-                                  Row(
-                                    crossAxisAlignment: CrossAxisAlignment.center,
-                                    children: [
-                                      SFText(
-                                        keyText: 'What’s Insurance?',
-                                        style: TextStyles.lightGrey12,
-                                      ),
-                                      const SizedBox(width: 8,),
-                                      SvgPicture.asset(Ics.icCircleQuestion),
-                                    ],
-                                  ),
-                                  Padding(
-                                    padding:
-                                        const EdgeInsets.symmetric(vertical: 5),
-                                    child: SFText(
-                                      keyText: 'Arrange:06:00-09:00',
-                                      style: TextStyles.bold20black,
-                                    ),
-                                  ),
-                                  Row(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      const Icon(Icons.add_circle_outline,
-                                          size: 30),
-                                      const SizedBox(width: 10),
-                                      SFText(
-                                          keyText: 'Alarm: Bell',
-                                          style: TextStyles.header),
                                       const SizedBox(
-                                        width: 10,
+                                        height: 16,
                                       ),
-                                      CupertinoSwitch(
-                                        value: swCheck,
-                                        onChanged: (value) {
-                                          setState(() {
-                                            swCheck = value;
-                                          });
-                                        },
+                                      SFButtonOutLined(
+                                        title: Keys.useItem,
+                                        onPressed: () {},
+                                        fixedSize: Size(size.width, 40),
+                                        textStyle: TextStyles.lightGrey16500,
+                                        icon: Icons.add_circle_outline,
+                                        borderColor:
+                                            Colors.white.withOpacity(0.1),
+                                        withBorder: 1,
                                       ),
-                                      const SizedBox(width: 10),
-                                      Container(
-                                        padding: const EdgeInsets.all(5),
-                                        decoration: const BoxDecoration(
-                                            color: Colors.cyanAccent,
-                                            shape: BoxShape.circle),
-                                        child: GestureDetector(
-                                          child: const Icon(
-                                            Icons.question_answer,
-                                            size: 15,
-                                          ),
-                                          onTap: () {
-                                            setState(() {
-                                              checkIntroduce = true;
-                                            });
-                                          },
-                                        ),
+                                      const SizedBox(
+                                        height: 24,
                                       ),
-                                    ],
-                                  ),
-                                  Padding(
-                                    padding: const EdgeInsets.symmetric(
-                                        horizontal: 30),
-                                    child: Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      children: [
-                                        Container(
-                                          padding: const EdgeInsets.symmetric(
-                                              horizontal: 10),
-                                          decoration: BoxDecoration(
-                                              border: Border.all(
-                                                  color: AppColors.black),
-                                              borderRadius:
-                                                  BorderRadius.circular(20)),
-                                          width: size.width / 2,
-                                          child: SFText(
-                                            keyText: '000 gst',
-                                          ),
-                                        ),
-                                        const SizedBox(
-                                          width: 50,
-                                        ),
-                                        GestureDetector(
-                                          child: const Icon(Icons.feedback),
-                                          onTap: () {
-                                            Navigator.pushNamed(
-                                                context, R.feedback);
-                                          },
-                                        )
-                                      ],
-                                    ),
-                                  ),
-                                  Padding(
-                                    padding: const EdgeInsets.only(
-                                        right: 20,
-                                        left: 10,
-                                        bottom: 70,
-                                        top: 10),
-                                    child: Container(
-                                      padding: const EdgeInsets.symmetric(
-                                          horizontal: 10),
-                                      width: size.width,
-                                      height: 80,
-                                      decoration: BoxDecoration(
-                                          color: AppColors.greyBottomNavBar,
-                                          border: Border.all(
-                                              color: AppColors.black)),
-                                      child: Row(
+                                      Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
                                         children: [
-                                          Padding(
-                                            padding: const EdgeInsets.symmetric(
-                                                horizontal: 10),
-                                            child: Container(
-                                              width: 50,
-                                              height: 50,
-                                              decoration: BoxDecoration(
-                                                  border: Border.all(
-                                                      color: AppColors.black),
-                                                  borderRadius:
-                                                      BorderRadius.circular(
-                                                          15)),
-                                            ),
+                                          Text(
+                                            '${translate(Keys.insurance)}: 5%',
+                                            style: TextStyles.bold16LightWhite,
                                           ),
-                                          Padding(
-                                            padding: const EdgeInsets.symmetric(
-                                                horizontal: 10),
-                                            child: Container(
-                                              width: 50,
-                                              height: 50,
-                                              decoration: BoxDecoration(
-                                                  border: Border.all(
-                                                      color: AppColors.black),
-                                                  borderRadius:
-                                                      BorderRadius.circular(
-                                                          15)),
-                                            ),
-                                          ),
-                                          Padding(
-                                            padding: const EdgeInsets.symmetric(
-                                                horizontal: 10),
-                                            child: Container(
-                                              width: 50,
-                                              height: 50,
-                                              decoration: BoxDecoration(
-                                                  border: Border.all(
-                                                      color: AppColors.black),
-                                                  borderRadius:
-                                                      BorderRadius.circular(
-                                                          15)),
-                                            ),
-                                          ),
-                                          Padding(
-                                            padding: const EdgeInsets.symmetric(
-                                                horizontal: 10),
-                                            child: Container(
-                                              width: 50,
-                                              height: 50,
-                                              decoration: BoxDecoration(
-                                                  border: Border.all(
-                                                      color: AppColors.black),
-                                                  borderRadius:
-                                                      BorderRadius.circular(
-                                                          15)),
+                                          SizedBox(
+                                            height: 24,
+                                            child: CupertinoSwitch(
+                                              activeColor: AppColors.green,
+                                              value: swCheck,
+                                              onChanged: (value) {
+                                                setState(() {
+                                                  swCheck = value;
+                                                });
+                                              },
                                             ),
                                           ),
                                         ],
                                       ),
+                                      const SizedBox(
+                                        height: 2,
+                                      ),
+                                      Row(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.center,
+                                        children: [
+                                          SFText(
+                                            keyText: Keys.whatInsurance,
+                                            style: TextStyles.lightGrey12,
+                                          ),
+                                          const SizedBox(
+                                            width: 8,
+                                          ),
+                                          SvgPicture.asset(
+                                              Ics.icCircleQuestion),
+                                        ],
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                const SizedBox(
+                                  height: 16,
+                                ),
+                                Container(
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 16),
+                                  decoration: const BoxDecoration(
+                                    color: AppColors.dark,
+                                    borderRadius: BorderRadius.only(
+                                      topRight: Radius.circular(40),
+                                      topLeft: Radius.circular(40),
                                     ),
                                   ),
-                                ],
-                              ),
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.center,
+                                    children: [
+                                      SizedBox(
+                                        height: 320.0,
+                                        child: Row(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.center,
+                                          children: <Widget>[
+                                            Expanded(
+                                              child: CupertinoPicker(
+                                                  looping: true,
+                                                  selectionOverlay: Container(),
+                                                  offAxisFraction: -0.5,
+                                                  squeeze: 1,
+                                                  scrollController:
+                                                      FixedExtentScrollController(
+                                                    initialItem: _selectedHour,
+                                                  ),
+                                                  itemExtent: 48.0,
+                                                  backgroundColor:
+                                                      AppColors.dark,
+                                                  onSelectedItemChanged:
+                                                      (int index) {
+                                                    setState(() {
+                                                      _selectedHour = index;
+                                                    });
+                                                  },
+                                                  children:
+                                                      List<Widget>.generate(24,
+                                                          (int index) {
+                                                    return Column(
+                                                      children: [
+                                                        if (_selectedHour ==
+                                                            index)
+                                                          Container(
+                                                            height: 1,
+                                                            decoration:
+                                                                BoxDecoration(
+                                                              gradient: AppColors
+                                                                  .gradientWhiteBorderLeftToRight,
+                                                            ),
+                                                          ),
+                                                        Container(
+                                                          width: size.width,
+                                                          height: 46,
+                                                          padding:
+                                                              const EdgeInsets
+                                                                      .symmetric(
+                                                                  horizontal:
+                                                                      15),
+                                                          alignment: Alignment
+                                                              .centerRight,
+                                                          child: Text(
+                                                            '${index + 1}',
+                                                            textAlign:
+                                                                TextAlign.right,
+                                                            style: TextStyles
+                                                                .white1w700size16,
+                                                          ),
+                                                        ),
+                                                        if (_selectedHour ==
+                                                            index)
+                                                          Container(
+                                                            height: 1,
+                                                            decoration:
+                                                                BoxDecoration(
+                                                              gradient: AppColors
+                                                                  .gradientWhiteBorderLeftToRight,
+                                                            ),
+                                                          ),
+                                                      ],
+                                                    );
+                                                  })),
+                                            ),
+                                            Expanded(
+                                              child: CupertinoPicker(
+                                                  selectionOverlay: Container(),
+                                                  looping: true,
+                                                  squeeze: 1,
+                                                  offAxisFraction: 0.5,
+                                                  useMagnifier: true,
+                                                  scrollController:
+                                                      FixedExtentScrollController(
+                                                    initialItem:
+                                                        _selectedMinute,
+                                                  ),
+                                                  itemExtent: 48.0,
+                                                  backgroundColor:
+                                                      AppColors.dark,
+                                                  onSelectedItemChanged:
+                                                      (int index) {
+                                                    setState(() {
+                                                      _selectedMinute = index;
+                                                    });
+                                                  },
+                                                  children:
+                                                      List<Widget>.generate(60,
+                                                          (int index) {
+                                                    return Column(
+                                                      children: [
+                                                        if (_selectedMinute ==
+                                                            index)
+                                                          Container(
+                                                            height: 1,
+                                                            decoration:
+                                                                BoxDecoration(
+                                                              gradient: AppColors
+                                                                  .gradientWhiteBorderRightToLeft,
+                                                            ),
+                                                          ),
+                                                        Container(
+                                                          width: size.width,
+                                                          height: 46,
+                                                          padding:
+                                                              const EdgeInsets
+                                                                      .symmetric(
+                                                                  horizontal:
+                                                                      15),
+                                                          alignment: Alignment
+                                                              .centerLeft,
+                                                          child: Text(
+                                                            '${index + 1}',
+                                                            textAlign:
+                                                                TextAlign.right,
+                                                            style: TextStyles
+                                                                .white1w700size16,
+                                                          ),
+                                                        ),
+                                                        if (_selectedMinute ==
+                                                            index)
+                                                          Container(
+                                                            height: 1,
+                                                            decoration:
+                                                                BoxDecoration(
+                                                              gradient: AppColors
+                                                                  .gradientWhiteBorderRightToLeft,
+                                                            ),
+                                                          ),
+                                                      ],
+                                                    );
+                                                  })),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                      const SizedBox(
+                                        height: 16,
+                                      ),
+                                      Text(
+                                        '${translate(Keys.range)}: 06:00-09:00',
+                                        style: TextStyles.white16500,
+                                      ),
+                                      const SizedBox(
+                                        height: 24,
+                                      ),
+                                      Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          SFButtonOutLined(
+                                            title: Keys.alarmBell,
+                                            onPressed: () {},
+                                            fixedSize: const Size(274, 40),
+                                            textStyle: TextStyles.blue16,
+                                            icon: Icons.add_circle_outline,
+                                            borderColor: AppColors.blue,
+                                            iconColor: AppColors.blue,
+                                            withBorder: 1,
+                                          ),
+                                          CupertinoSwitch(
+                                            activeColor: AppColors.green,
+                                            value: swCheck,
+                                            onChanged: (value) {
+                                              setState(() {
+                                                swCheck = value;
+                                              });
+                                            },
+                                          ),
+                                        ],
+                                      ),
+                                      const SizedBox(
+                                        height: 16,
+                                      ),
+                                      SFButton(
+                                        text: Keys.start,
+                                        textStyle: TextStyles.white16,
+                                        radius: 100,
+                                        gradient: AppColors.gradientBlueButton,
+                                        height: 40,
+                                        width: size.width,
+                                      ),
+                                      const SizedBox(
+                                        height: 32,
+                                      ),
+                                      Row(
+                                        children: [
+                                          Expanded(
+                                            child: Container(
+                                              padding:
+                                                  const EdgeInsets.symmetric(
+                                                      horizontal: 16,
+                                                      vertical: 4),
+                                              decoration: BoxDecoration(
+                                                  color: AppColors.darkColor,
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          20)),
+                                              child: SFText(
+                                                keyText: '000/160 SLTF',
+                                                style: TextStyles.lightGrey10,
+                                              ),
+                                            ),
+                                          ),
+                                          const SizedBox(
+                                            width: 12,
+                                          ),
+                                          SvgPicture.asset(
+                                            Ics.icCircleQuestion,
+                                            width: 20,
+                                            height: 20,
+                                            color: AppColors.lightGrey,
+                                          ),
+                                          const SizedBox(
+                                            width: 12,
+                                          ),
+                                          SvgPicture.asset(
+                                            Ics.star,
+                                            width: 20,
+                                            height: 20,
+                                            color: AppColors.yellow,
+                                          ),
+                                        ],
+                                      ),
+                                      const SizedBox(
+                                        height: 29,
+                                      ),
+                                      Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceAround,
+                                        children: [
+                                          viewGif(),
+                                          const SizedBox(
+                                            height: 20,
+                                          ),
+                                          viewGif(),
+                                          const SizedBox(
+                                            height: 20,
+                                          ),
+                                          viewGif(),
+                                          const SizedBox(
+                                            height: 20,
+                                          ),
+                                          viewGif(),
+                                        ],
+                                      ),
+                                      const SizedBox(
+                                        height: 100,
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ],
                             ),
                           ),
-                        ],
-                      ),
+                        ),
+                      ],
                     );
                   },
                 );
