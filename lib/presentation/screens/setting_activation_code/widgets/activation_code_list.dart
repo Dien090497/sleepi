@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
-import 'package:slee_fi/presentation/screens/setting_activation_code/widgets/container_box_widget.dart';
 
 class ActivationCodeList extends StatelessWidget {
   const ActivationCodeList({Key? key}) : super(key: key);

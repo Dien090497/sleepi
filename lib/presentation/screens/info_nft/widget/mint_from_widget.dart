@@ -8,7 +8,7 @@ class MintFromWidget extends StatelessWidget {
   final String text;
   @override
   Widget build(BuildContext context) {
-    final Size size = MediaQuery.of(context).size;
+    // final Size size = MediaQuery.of(context).size;
     return Column(
       children: [
         Padding(
@@ -26,7 +26,7 @@ class MintFromWidget extends StatelessWidget {
           padding: const EdgeInsets.symmetric(horizontal: 30),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
+            children: const [
               // MyBedShortWidget(
               //   index: 1,
               //   checkOwner: true,

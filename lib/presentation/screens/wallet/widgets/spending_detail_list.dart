@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
-import 'package:slee_fi/common/style/text_styles.dart';
 import 'package:slee_fi/common/widgets/sf_sub_tab_bar.dart';
-import 'package:slee_fi/common/widgets/sf_text.dart';
-import 'package:slee_fi/di/translations/keys.dart';
 
 class SpendingDetailList extends StatelessWidget {
   const SpendingDetailList({Key? key}) : super(key: key);
