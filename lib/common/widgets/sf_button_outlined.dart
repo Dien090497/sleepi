@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
+import 'package:slee_fi/common/widgets/sf_text.dart';
 
 class SFButtonOutLined extends StatelessWidget {
   const SFButtonOutLined({
@@ -48,8 +49,8 @@ class SFButtonOutLined extends StatelessWidget {
             const SizedBox(
               width: 9,
             ),
-          Text(
-            title,
+          SFText(
+            keyText: title,
             style: textStyle ??
                 Theme.of(context)
                     .textTheme

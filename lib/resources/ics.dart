@@ -7,6 +7,7 @@ class Ics {
   static const String chart = 'assets/icons/chart.svg';
   static const String flexibleBed = 'assets/icons/flexible_bed.svg';
   static const String gacha = 'assets/icons/gacha.svg';
+  static const String gift = 'assets/icons/gift.svg';
   static const String group = 'assets/icons/group.svg';
   static const String home = 'assets/icons/home.svg';
   static const String icArrowUpRight = 'assets/icons/ic_arrow_up_right.svg';
@@ -28,6 +29,7 @@ class Ics {
   static const String shortBed = 'assets/icons/short_bed.svg';
   static const String signOut = 'assets/icons/sign_out.svg';
   static const String sleep = 'assets/icons/sleep.svg';
+  static const String star = 'assets/icons/star.svg';
   static const String test = 'assets/icons/test.svg';
 
   static const List<String> values = [
@@ -35,6 +37,7 @@ class Ics {
     chart,
     flexibleBed,
     gacha,
+    gift,
     group,
     home,
     icArrowUpRight,
@@ -56,6 +59,7 @@ class Ics {
     shortBed,
     signOut,
     sleep,
+    star,
     test
   ];
 }
