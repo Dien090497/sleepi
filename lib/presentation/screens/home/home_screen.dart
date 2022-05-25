@@ -97,7 +97,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                             children: [
                                               const Icon(
                                                 Icons.arrow_back_ios,
-                                                color: AppColors.labelColor,
+                                                color: AppColors.lightGrey,
                                               ),
                                               GestureDetector(
                                                 onTap: () {
@@ -110,7 +110,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                               ),
                                               const Icon(
                                                 Icons.arrow_forward_ios_sharp,
-                                                color: AppColors.labelColor,
+                                                color: AppColors.lightGrey,
                                               ),
                                             ],
                                           ),

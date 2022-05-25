@@ -28,7 +28,6 @@ class Imgs {
   static const String slft = 'assets/images/slft.png';
   static const String slgt = 'assets/images/slgt.png';
   static const String statistics = 'assets/images/statistics.png';
-  static const String test = 'assets/images/test.png';
   static const String transfer = 'assets/images/transfer.png';
   static const String tutorial1 = 'assets/images/tutorial_1.png';
   static const String tutorial2 = 'assets/images/tutorial_2.png';
@@ -60,7 +59,6 @@ class Imgs {
     slft,
     slgt,
     statistics,
-    test,
     transfer,
     tutorial1,
     tutorial2,

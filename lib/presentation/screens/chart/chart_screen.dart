@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
-import 'package:slee_fi/common/widgets/sf_tab_bar.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
 import 'package:slee_fi/di/translations/keys.dart';
 import 'package:slee_fi/presentation/screens/chart/widgets/tab_day.dart';
@@ -27,10 +26,10 @@ class ChartScreen extends StatelessWidget {
                   style: TextStyles.header,
                 ),
                 const SizedBox(height: 16),
-                SFTabBar(
-                  texts: const [Keys.day, Keys.week, Keys.month],
-                  padding: const EdgeInsets.symmetric(horizontal: 40),
-                ),
+                // SFTabBar(
+                //   texts: const [Keys.day, Keys.week, Keys.month],
+                //   padding: const EdgeInsets.symmetric(horizontal: 40),
+                // ),
                 const Expanded(
                   child: TabBarView(
                     children: [
