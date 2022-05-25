@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:slee_fi/common/widgets/sf_icon.dart';
+import 'package:slee_fi/resources/resources.dart';
 
 class SFBackButton extends StatelessWidget {
   const SFBackButton({Key? key}) : super(key: key);
@@ -9,7 +10,7 @@ class SFBackButton extends StatelessWidget {
     return GestureDetector(
       onTap: () => Navigator.pop(context),
       child: const SFIcon(
-        "assets/icons/arrow_left.svg",
+        Ics.arrowLeft,
         width: 32,
         height: 32,
       ),

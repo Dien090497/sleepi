@@ -50,7 +50,7 @@ class SFStatisticResource extends StatelessWidget {
           const SizedBox(
             width: 12,
           ),
-          SFIcon(Ics.icSolanaCircle),
+          const SFIcon(Ics.icSolanaCircle),
         ],
       ),
     );

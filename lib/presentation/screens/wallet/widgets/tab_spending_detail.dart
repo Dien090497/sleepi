@@ -7,6 +7,7 @@ import 'package:slee_fi/common/widgets/sf_icon.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
 import 'package:slee_fi/di/translations/keys.dart';
 import 'package:slee_fi/presentation/screens/wallet/widgets/spending_detail_list.dart';
+import 'package:slee_fi/resources/resources.dart';
 
 class TabSpendingDetail extends StatelessWidget {
   const TabSpendingDetail({Key? key}) : super(key: key);
@@ -32,7 +33,7 @@ class TabSpendingDetail extends StatelessWidget {
                   style: const TextStyle(color: AppColors.white),
                 ),
               )),
-              child: SFIcon("assets/icons/ic_question.svg"),
+              child: const SFIcon(Ics.icQuestion),
             ),
           ],
         ),

@@ -10,6 +10,7 @@ import 'package:slee_fi/di/translations/keys.dart';
 import 'package:slee_fi/presentation/screens/wallet/widgets/box_button_widget.dart';
 import 'package:slee_fi/presentation/screens/wallet/widgets/modal_receive_wallet.dart';
 import 'package:slee_fi/presentation/screens/wallet/widgets/wallet_detail_list.dart';
+import 'package:slee_fi/resources/resources.dart';
 
 class TabWalletDetail extends StatelessWidget {
   const TabWalletDetail({Key? key}) : super(key: key);
@@ -52,22 +53,22 @@ class TabWalletDetail extends StatelessWidget {
                     builder: (_) => const ModalReceiveWallet());
               },
               text: Keys.trade,
-              assetImage: "assets/icons/ic_download.svg",
+              assetImage: Ics.icDownload,
             ),
             BoxButtonWidget(
               onTap: () => Navigator.pushNamed(context, R.sendToExternal),
               text: Keys.toSpending,
-              assetImage: "assets/icons/ic_refresh.svg",
+              assetImage: Ics.icRefresh,
             ),
             BoxButtonWidget(
               onTap: () => Navigator.pushNamed(context, R.sendToExternal),
               text: Keys.toExternal,
-              assetImage: "assets/icons/ic_arrow_up_right.svg",
+              assetImage: Ics.icArrowUpRight,
             ),
             BoxButtonWidget(
               onTap: () => Navigator.pushNamed(context, R.trade),
               text: Keys.trade,
-              assetImage: "assets/icons/ic_transfer.svg",
+              assetImage: Ics.icTransfer,
             ),
           ],
         ),
@@ -88,7 +89,7 @@ class TabWalletDetail extends StatelessWidget {
                   ),
                   GestureDetector(
                     onTap: () {},
-                    child: SFIcon("assets/icons/ic_question.svg"),
+                    child: const SFIcon(Ics.icQuestion),
                   ),
                 ],
               ),

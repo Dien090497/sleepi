@@ -22,7 +22,7 @@ class WalletScreen extends StatelessWidget {
             actions: [
               GestureDetector(
                 onTap: () {},
-                child: SFIcon(Ics.icSetting),
+                child: const SFIcon(Ics.icSetting),
               )
             ],
             automaticallyImplyLeading: false,

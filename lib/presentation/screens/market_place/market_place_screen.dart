@@ -13,9 +13,9 @@ class MarketPlaceScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+    final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
     return Scaffold(
-      key: _scaffoldKey,
+      key: scaffoldKey,
       backgroundColor: AppColors.transparent,
       body: BackgroundWidget(
         child: SafeArea(
@@ -31,17 +31,17 @@ class MarketPlaceScreen extends StatelessWidget {
                   children: [
                     TabBedsBuy(
                       onPress: () {
-                        _scaffoldKey.currentState?.openEndDrawer();
+                        scaffoldKey.currentState?.openEndDrawer();
                       },
                     ),
                     TabItemsBuy(
                       onPress: () {
-                        _scaffoldKey.currentState?.openEndDrawer();
+                        scaffoldKey.currentState?.openEndDrawer();
                       },
                     ),
                     TabItemsBuy(
                       onPress: () {
-                        _scaffoldKey.currentState?.openEndDrawer();
+                        scaffoldKey.currentState?.openEndDrawer();
                       },
                     ),
                     const TabTrophysBuy(),
