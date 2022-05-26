@@ -251,7 +251,6 @@
   "sleep_quality": "Sleep Quality",
   "share": "Share",
   "you_will_transfer": "you will transfer",
-  "seed_phrase": "Seed Phrase",
   "press_and_hold_to_reveal": "Press and Hold To Reveal",
   "displays_message_show_seed_phrase": "Do not create a digital copy such as a screenshot, text file, or email.",
   "feedback" : "Feedback",
@@ -262,7 +261,7 @@
   "flexible": "Flexible",
   "sleeFi_stacked": "SleeFi Stacked",
   "add_duration": "Add Duration",
-  "roi_current_rates": "ROI current rates"
+  "roi_current_rates": "ROI current rates",
   "download": "Download",
   "twitter": "Twitter",
   "facebook": "Facebook",
