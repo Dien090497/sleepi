@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:slee_fi/common/enum/enum.dart';
+import 'package:slee_fi/common/widgets/pop_up_level_up.dart';
 import 'package:slee_fi/common/widgets/sf_dialog.dart';
 import 'package:slee_fi/common/widgets/sf_sub_tab_bar.dart';
 import 'package:slee_fi/di/translations/keys.dart';
 import 'package:slee_fi/presentation/screens/product_detail/widgets/gridview_bed_item.dart';
-import 'package:slee_fi/presentation/screens/product_detail/widgets/jewel_dialog_body.dart';
+import 'package:slee_fi/resources/resources.dart';
 
 class TabBedsDetail extends StatelessWidget {
   const TabBedsDetail({Key? key}) : super(key: key);
@@ -14,15 +15,12 @@ class TabBedsDetail extends StatelessWidget {
       context,
       padding: const EdgeInsets.all(24),
       children: [
-        JewelDialogBody(
-          icon: 'icon',
-          name: 'name',
-          level: 'level',
-          id: 'id',
-          attribute: 'attribute',
-          effect: 'effect',
-          onSellTap: () {},
-          onTransferTap: () {},
+        PopUpLevelUp(
+          icon: Ics.shortBed,
+          level: 1,
+          cost: 2,
+          time: 1200,
+          onConfirm: () {},
         ),
       ],
     );

@@ -3,6 +3,7 @@ import 'package:slee_fi/common/routes/app_routes.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
 import 'package:slee_fi/common/widgets/sf_buttons.dart';
+import 'package:slee_fi/common/widgets/sf_dialog.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
 import 'package:slee_fi/presentation/screens/market_place/widget/pop_up_buy_market_place.dart';
 
@@ -142,11 +143,9 @@ class ItemBedBuyWidget extends StatelessWidget {
                       text: 'Buy',
                       height: 20,
                       onPressed: () {
-                        showDialog(
-                          context: context,
-                          builder: (context) {
-                            return const PopUpBuyMarketPlace();
-                          },
+                        showCustomDialog(
+                          context,
+                          children: [const PopUpBuyMarketPlace()],
                         );
                       },
                     ),

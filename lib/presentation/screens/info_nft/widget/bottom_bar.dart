@@ -2,10 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:slee_fi/common/routes/app_routes.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
+import 'package:slee_fi/common/widgets/pop_up_level_up.dart';
+import 'package:slee_fi/common/widgets/sf_dialog.dart';
+import 'package:slee_fi/common/widgets/sf_icon.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
-import 'package:slee_fi/presentation/screens/home/widgets/pop_up_level_up.dart';
+import 'package:slee_fi/di/translations/keys.dart';
 import 'package:slee_fi/presentation/screens/home/widgets/pop_up_repair.dart';
 import 'package:slee_fi/presentation/screens/home/widgets/pop_up_transfer.dart';
+import 'package:slee_fi/resources/resources.dart';
 
 class BottomBarWidget extends StatelessWidget {
   const BottomBarWidget({Key? key}) : super(key: key);
@@ -21,17 +25,22 @@ class BottomBarWidget extends StatelessWidget {
           children: [
             GestureDetector(
               onTap: () {
-                showDialog(
-                  context: context,
-                  builder: (context) {
-                    return const PopUpLevelUp();
-                  },
+                showCustomDialog(
+                  context,
+                  children: [
+                    PopUpLevelUp(
+                        icon: Ics.longBed,
+                        level: 3,
+                        cost: 1,
+                        time: 2300,
+                        onConfirm: () {})
+                  ],
                 );
               },
               child: Column(
                 children: [
-                  Image.asset(
-                    'assets/images/lv_up.png',
+                  const SFIcon(
+                    Imgs.lvUp,
                     width: 40,
                     height: 40,
                   ),
@@ -39,7 +48,7 @@ class BottomBarWidget extends StatelessWidget {
                     height: 5,
                   ),
                   SFText(
-                    keyText: 'Level Up',
+                    keyText: Keys.levelUp,
                     style: TextStyles.black10Bold,
                   )
                 ],
@@ -47,25 +56,29 @@ class BottomBarWidget extends StatelessWidget {
             ),
             GestureDetector(
               onTap: () {
-                showDialog(
-                  context: context,
-                  builder: (context) {
-                    return const PopUpRepair();
-                  },
+                showCustomDialog(
+                  context,
+                  children: [
+                    PopUpRepair(
+                      icon: Ics.shortBed,
+                      cost: 120,
+                      level: 3,
+                      time: 122,
+                      onConfirm: () {},
+                    ),
+                  ],
                 );
               },
               child: Column(
                 children: [
-                  Image.asset(
-                    'assets/images/repair.png',
+                  const SFIcon(
+                    Imgs.repair,
                     width: 40,
                     height: 40,
                   ),
-                  const SizedBox(
-                    height: 5,
-                  ),
+                  const SizedBox(height: 5),
                   SFText(
-                    keyText: 'Repair',
+                    keyText: Keys.repair,
                     style: TextStyles.black10Bold,
                   )
                 ],
@@ -77,8 +90,8 @@ class BottomBarWidget extends StatelessWidget {
               },
               child: Column(
                 children: [
-                  Image.asset(
-                    'assets/images/mint.png',
+                  const SFIcon(
+                    Imgs.mint,
                     width: 40,
                     height: 40,
                   ),
@@ -94,8 +107,8 @@ class BottomBarWidget extends StatelessWidget {
             ),
             Column(
               children: [
-                Image.asset(
-                  'assets/images/sell.png',
+                const SFIcon(
+                  Imgs.sell,
                   width: 40,
                   height: 40,
                 ),
@@ -114,8 +127,8 @@ class BottomBarWidget extends StatelessWidget {
               },
               child: Column(
                 children: [
-                  Image.asset(
-                    'assets/images/recyle.png',
+                  const SFIcon(
+                    Imgs.recyle,
                     width: 40,
                     height: 40,
                   ),
@@ -131,17 +144,21 @@ class BottomBarWidget extends StatelessWidget {
             ),
             GestureDetector(
               onTap: () {
-                showDialog(
-                  context: context,
-                  builder: (context) {
-                    return const PopUpTransfer();
-                  },
+                showCustomDialog(
+                  context,
+                  children: [
+                    PopUpTransfer(
+                      onConfirm: () {},
+                      valueTransfer: 1,
+                      fee: 1,
+                    )
+                  ],
                 );
               },
               child: Column(
                 children: [
-                  Image.asset(
-                    'assets/images/transfer.png',
+                  const SFIcon(
+                    Imgs.transfer,
                     width: 40,
                     height: 40,
                   ),

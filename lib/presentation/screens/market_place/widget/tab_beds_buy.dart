@@ -5,6 +5,7 @@ import 'package:slee_fi/di/translations/keys.dart';
 import 'package:slee_fi/presentation/screens/market_place/widget/tab_bar_filter.dart';
 import 'package:slee_fi/presentation/screens/product_detail/widgets/gridview_bed_item.dart';
 import 'package:slee_fi/presentation/screens/product_detail/widgets/jewel_dialog_body.dart';
+import 'package:slee_fi/resources/resources.dart';
 
 class TabBedsBuy extends StatelessWidget {
   const TabBedsBuy({Key? key, required this.onPress}) : super(key: key);
@@ -17,7 +18,7 @@ class TabBedsBuy extends StatelessWidget {
       padding: const EdgeInsets.all(24),
       children: [
         JewelDialogBody(
-          icon: 'icon',
+          icon: Imgs.jewelGreen,
           name: 'name',
           level: 'level',
           id: 'id',

@@ -37,6 +37,7 @@ class Ics {
   static const String sleep = 'assets/icons/sleep.svg';
   static const String star = 'assets/icons/star.svg';
   static const String starOutlined = 'assets/icons/star_outlined.svg';
+  static const String successful = 'assets/icons/successful.svg';
   static const String telegram = 'assets/icons/telegram.svg';
   static const String test = 'assets/icons/test.svg';
   static const String twitter = 'assets/icons/twitter.svg';
@@ -76,6 +77,7 @@ class Ics {
     sleep,
     star,
     starOutlined,
+    successful,
     telegram,
     test,
     twitter
