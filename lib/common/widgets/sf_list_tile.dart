@@ -6,6 +6,7 @@ class SFListTile extends ListTile {
    SFListTile({
      String? text,
      TextStyle? textStyle,
+     Widget? leading,
      VoidCallback? onPressed,
      Widget? trailing,
      bool toUpperCase = false,
@@ -17,6 +18,7 @@ class SFListTile extends ListTile {
             style: textStyle ?? TextStyles.lightWhite14,
             toUpperCase: toUpperCase,
           ),
+          leading: leading,
           trailing: trailing,
           onTap: onPressed,
           key: key);

@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 class AppColors {
   static const primary = Color(0xFF000000);
 
-  static const textColor = Color(0xFF000000);
+  static const textColor = Color(0xFFCBD5E1);
 
   static const black = Color(0xFF000000);
 
@@ -49,6 +49,17 @@ class AppColors {
 
   static const red = Color(0xFFFF511A);
 
+  static const gradientBlue = LinearGradient(
+      colors: [Color(0xFFC4C4C4), Color(0xFF18A0FB), Color(0xFF426BFF)],
+      begin: Alignment.topCenter,
+      end: Alignment.bottomCenter);
+
+  static const gradientBlueAccent = LinearGradient(
+      colors: [Color(0xFF62519F), Color(0xFF396CBB), Color(0xFF549CBF)],
+      begin: Alignment.bottomLeft,
+      end: Alignment.topRight);
+
+
   static const gradientBluePurple = LinearGradient(
       colors: [blue, purple],
       begin: Alignment.topLeft,
@@ -57,6 +68,7 @@ class AppColors {
       colors: [blue, Color(0xFF426BFF)],
       begin: Alignment.topCenter,
       end: Alignment.bottomCenter);
+
   static LinearGradient gradientWhiteBorderLeftToRight= LinearGradient(
       colors: [Colors.white.withOpacity(0), Colors.white.withOpacity(0.2)],
       begin: Alignment.centerLeft,

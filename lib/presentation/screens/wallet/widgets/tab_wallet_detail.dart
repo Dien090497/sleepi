@@ -1,15 +1,16 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:slee_fi/common/routes/app_routes.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
+import 'package:slee_fi/common/widgets/sf_bottom_sheet.dart';
 import 'package:slee_fi/common/widgets/sf_dialog.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
 import 'package:slee_fi/di/translations/keys.dart';
 import 'package:slee_fi/presentation/screens/wallet/widgets/box_button_widget.dart';
 import 'package:slee_fi/presentation/screens/wallet/widgets/modal_receive_wallet.dart';
 import 'package:slee_fi/presentation/screens/wallet/widgets/wallet_detail_list.dart';
+import 'package:slee_fi/resources/resources.dart';
 
 class TabWalletDetail extends StatelessWidget {
   const TabWalletDetail({Key? key}) : super(key: key);
@@ -36,28 +37,24 @@ class TabWalletDetail extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
             BoxButtonWidget(
-              onTap: () {
-                showCupertinoModalPopup(
-                    context: context,
-                    builder: (_) => const ModalReceiveWallet());
-              },
-              text: Keys.trade,
-              assetImage: "assets/icons/ic_download.svg",
+              onTap: () => SFModalBottomSheet.show(context, 0.7, const ModalReceiveWallet()),
+              text: Keys.receive,
+              assetImage: Ics.icDownload,
             ),
             BoxButtonWidget(
               onTap: () => Navigator.pushNamed(context, R.sendToExternal),
               text: Keys.toSpending,
-              assetImage: "assets/icons/ic_refresh.svg",
+              assetImage: Ics.icRefresh,
             ),
             BoxButtonWidget(
               onTap: () => Navigator.pushNamed(context, R.sendToExternal),
               text: Keys.toExternal,
-              assetImage: "assets/icons/ic_arrow_up_right.svg",
+              assetImage: Ics.icArrowUpRight,
             ),
             BoxButtonWidget(
-              onTap: () => Navigator.pushNamed(context, R.trade),
+              onTap: () => Navigator.pushNamed(context, R.transfer),
               text: Keys.trade,
-              assetImage: "assets/icons/ic_transfer.svg",
+              assetImage: Ics.icTransfer,
             ),
           ],
         ),
@@ -75,7 +72,7 @@ class TabWalletDetail extends StatelessWidget {
                   ),
                   GestureDetector(
                     onTap: () {},
-                    child: SvgPicture.asset("assets/icons/ic_question.svg"),
+                    child: SvgPicture.asset(Ics.icQuestion),
                   ),
                 ],
               ),
@@ -90,7 +87,7 @@ class TabWalletDetail extends StatelessWidget {
                   ),
                   child: Row(
                     children: [
-                      Image.asset("assets/images/binance.png"),
+                      Image.asset(Imgs.binance),
                       const SizedBox(width: 8.0,),
                       SFText(keyText: Keys.buy, style: TextStyles.bold14Yellow,)
                     ],

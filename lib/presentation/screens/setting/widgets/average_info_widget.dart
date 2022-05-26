@@ -10,7 +10,7 @@ class AverageInfoWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    List<String> texts = [Keys.averageOfBedTime, Keys.averageOfWokeUp, Keys.averageOfSleepDuration, Keys.averageOfSleepQuolity];
+    List<String> texts = [Keys.averageOfBedTime, Keys.averageOfWokeUp, Keys.averageOfSleepDuration, Keys.averageOfSleepQuality];
     List<Color> colors = [AppColors.blue.withOpacity(0.15), AppColors.yellow.withOpacity(0.15), AppColors.red.withOpacity(0.15), AppColors.green.withOpacity(0.15)];
     List<TextStyle> textStyleTitle = [TextStyles.blue14, TextStyles.yellow14, TextStyles.red14, TextStyles.green14];
     List<TextStyle> textStyleNum = [TextStyles.bold24Blue, TextStyles.bold24Yellow, TextStyles.bold24Red, TextStyles.bold24Green];

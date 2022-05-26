@@ -4,6 +4,7 @@ import 'package:slee_fi/common/style/text_styles.dart';
 import 'package:slee_fi/common/widgets/sf_card.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
 import 'package:slee_fi/di/translations/keys.dart';
+import 'package:slee_fi/resources/resources.dart';
 
 class ModalMultiChainSwitch extends StatelessWidget {
   const ModalMultiChainSwitch({Key? key}) : super(key: key);
@@ -22,7 +23,7 @@ class ModalMultiChainSwitch extends StatelessWidget {
               children:  [
                 SFCard(
                   child: ListTile(
-                    leading: Image.asset("assets/images/avax.png"),
+                    leading: Image.asset(Imgs.avax),
                     title: SFText(keyText: "Solana", style: TextStyles.lightWhite16, ),
                     trailing: const Icon(Icons.check_circle, color: AppColors.green, size: 32,),
                   ),

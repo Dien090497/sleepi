@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/widgets/sf_sub_tab_bar.dart';
+import 'package:slee_fi/di/translations/keys.dart';
+import 'package:slee_fi/presentation/screens/wallet/widgets/tab_history_detail.dart';
+import 'package:slee_fi/presentation/screens/wallet/widgets/tab_pending_detail.dart';
 
 class SpendingDetailList extends StatelessWidget {
   const SpendingDetailList({Key? key}) : super(key: key);
@@ -18,16 +21,16 @@ class SpendingDetailList extends StatelessWidget {
       child:   DefaultTabController(
         length: 2,
         child: Column(
+           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             SFSubTabBar(
-              texts: const ["Pending", "History"],
+              texts: const [Keys.pending, Keys.history],
             ),
-            const SizedBox(height: 12),
-            Expanded(
+            const Expanded(
               child: TabBarView(
                 children: [
-                Container(),
-                  Container()
+                  TabPendingDetail(),
+                  TabHistoryDetail()
                 ],
               ),
             ),
