@@ -68,6 +68,12 @@ class AppColors {
       colors: [blue, purple],
       begin: Alignment.topLeft,
       end: Alignment.bottomRight);
+
+  static const blueGradient = LinearGradient(
+      colors: [blue, blue],
+      begin: Alignment.topLeft,
+      end: Alignment.bottomRight);
+
   static const gradientBlueButton = LinearGradient(
       colors: [blue, bluesDark],
       begin: Alignment.topCenter,

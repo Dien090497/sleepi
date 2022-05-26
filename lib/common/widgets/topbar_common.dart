@@ -4,20 +4,27 @@ import 'package:slee_fi/common/widgets/sf_icon_border.dart';
 import 'package:slee_fi/common/widgets/sf_statistic_resource.dart';
 
 class TopBarCommon extends StatelessWidget {
-  const TopBarCommon({Key? key}) : super(key: key);
+  const TopBarCommon({Key? key, this.iconBack = false}) : super(key: key);
 
+  final bool iconBack;
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.only(
         top: 20,
-        left: 16,
-        right: 16,
+        left: 10,
+        right: 10,
       ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          SFIconBorder(
+          iconBack ? SFIconBorder(
+                  icon: Icons.arrow_back,
+                  onTap: () {
+                    Navigator.pop(context);
+                  },
+                )
+              : SFIconBorder(
             icon: Icons.settings_outlined,
             onTap: () {
               Navigator.pushNamed(context, R.setting);

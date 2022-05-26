@@ -8,7 +8,16 @@ class ProbabilityWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return ClipRRect(
+      borderRadius: BorderRadius.circular(15),
+      child: GestureDetector(
+        onTap: () {
+          _probabilityDialog(context);
+        },
+        child: Image.asset('assets/images/bedroom_gacha.png'),
+      ),
+    );
+    /*return Container(
       width: double.infinity,
       color: AppColors.greyBottomNavBar,
       padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 24),
@@ -40,7 +49,7 @@ class ProbabilityWidget extends StatelessWidget {
           ),
         ],
       ),
-    );
+    );*/
   }
 
   void _probabilityDialog(BuildContext ctx) {

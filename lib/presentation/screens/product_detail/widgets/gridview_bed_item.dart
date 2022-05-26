@@ -89,7 +89,7 @@ class GridViewBedItem extends StatelessWidget {
                           ],
                         ),
                         SizedBox(height: 4.h),
-                        const SFPercentBorder(valueActive: 70, totalValue: 100),
+                        const SFPercentBorderGradient(valueActive: 70, totalValue: 100),
                         const SizedBox(height: 12),
                         if (price != null)
                           Row(
