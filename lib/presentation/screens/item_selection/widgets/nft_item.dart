@@ -41,7 +41,7 @@ class NFTItem extends StatelessWidget {
               border: Border.all(color: AppColors.black),
               borderRadius: BorderRadius.circular(16),
             ),
-            padding: const EdgeInsets.symmetric(vertical: 2,horizontal: 12),
+            padding: const EdgeInsets.symmetric(vertical: 2, horizontal: 12),
             child: SFText(keyText: Keys.use),
           ),
         ],

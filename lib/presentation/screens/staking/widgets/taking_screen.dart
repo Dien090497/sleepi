@@ -14,7 +14,9 @@ class TakingScreen extends StatelessWidget {
       body: SafeArea(
         child: ListView(
           children: [
-            const SizedBox(height: 140,),
+            const SizedBox(
+              height: 140,
+            ),
             Container(
                 height: 316,
                 width: double.infinity,
@@ -25,29 +27,55 @@ class TakingScreen extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     const SizedBox(height: 18),
-                    Padding(padding: const EdgeInsets.only(left: 12.0),child: SFText(keyText: Keys.stakeSlft, style:TextStyles.bold32black)),
-                    const SizedBox(height: 16.0,),
+                    Padding(
+                        padding: const EdgeInsets.only(left: 12.0),
+                        child: SFText(
+                            keyText: Keys.stakeSlft,
+                            style: TextStyles.bold32black)),
+                    const SizedBox(
+                      height: 16.0,
+                    ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        SFText(keyText: Keys.yourSlftInSpending, style: TextStyles.bold20black),
-                        SFText(keyText: "XXXXXXX  SLFT", style: TextStyles.bold20black),
+                        SFText(
+                            keyText: Keys.yourSlftInSpending,
+                            style: TextStyles.bold20black),
+                        SFText(
+                            keyText: "XXXXXXX  SLFT",
+                            style: TextStyles.bold20black),
                       ],
                     ),
-                    const SizedBox(height: 24.0,),
-                   Row(
-                     children: [
-                      Expanded(flex: 3, child:  SFText(keyText: Keys.stakeWithdraw, style: TextStyles.bold32black),),
-                       Expanded(
-                         flex: 1,
-                         child:
-                         GestureDetector(
-                           onTap: () {},
-                           child: SFText(keyText: Keys.max, style: TextStyles.bold20black)),),
-                       Expanded(flex: 4, child:  SFText(keyText: "XXX    SLFT", style: TextStyles.bold32black),)
-                    ],
-                   ),
-                    const SizedBox(height: 40,),
+                    const SizedBox(
+                      height: 24.0,
+                    ),
+                    Row(
+                      children: [
+                        Expanded(
+                          flex: 3,
+                          child: SFText(
+                              keyText: Keys.stakeWithdraw,
+                              style: TextStyles.bold32black),
+                        ),
+                        Expanded(
+                          flex: 1,
+                          child: GestureDetector(
+                              onTap: () {},
+                              child: SFText(
+                                  keyText: Keys.max,
+                                  style: TextStyles.bold20black)),
+                        ),
+                        Expanded(
+                          flex: 4,
+                          child: SFText(
+                              keyText: "XXX    SLFT",
+                              style: TextStyles.bold32black),
+                        )
+                      ],
+                    ),
+                    const SizedBox(
+                      height: 40,
+                    ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: [
@@ -55,19 +83,20 @@ class TakingScreen extends StatelessWidget {
                             onTap: () {
                               showDialog(
                                   context: context,
-                                  builder: (_) => const PopUpStaking()
-                              );
+                                  builder: (_) => const PopUpStaking());
                             },
-                            child: SFText(keyText: Keys.confirm, style: TextStyles.bold32black)),
+                            child: SFText(
+                                keyText: Keys.confirm,
+                                style: TextStyles.bold32black)),
                         GestureDetector(
                             onTap: () => Navigator.pop(context),
-                            child: SFText(keyText: Keys.cancel, style: TextStyles.bold32black))
+                            child: SFText(
+                                keyText: Keys.cancel,
+                                style: TextStyles.bold32black))
                       ],
                     )
                   ],
-                )
-            ),
-
+                )),
           ],
         ),
       ),

@@ -1,6 +1,6 @@
-import 'package:flutter/material.dart';
 import 'dart:ui' as ui;
 
+import 'package:flutter/material.dart';
 
 class SFIconBorder extends StatelessWidget {
   const SFIconBorder({
@@ -31,7 +31,11 @@ class SFIconBorder extends StatelessWidget {
           color: Colors.white.withOpacity(0.05),
           borderRadius: BorderRadius.circular(radius),
         ),
-        child: Icon(icon, size: sizeIcon, color: Colors.white,),
+        child: Icon(
+          icon,
+          size: sizeIcon,
+          color: Colors.white,
+        ),
       ),
     );
   }

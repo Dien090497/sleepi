@@ -1,15 +1,16 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:slee_fi/common/routes/app_routes.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
 import 'package:slee_fi/common/widgets/sf_dialog.dart';
+import 'package:slee_fi/common/widgets/sf_icon.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
 import 'package:slee_fi/di/translations/keys.dart';
 import 'package:slee_fi/presentation/screens/wallet/widgets/box_button_widget.dart';
 import 'package:slee_fi/presentation/screens/wallet/widgets/modal_receive_wallet.dart';
 import 'package:slee_fi/presentation/screens/wallet/widgets/wallet_detail_list.dart';
+import 'package:slee_fi/resources/resources.dart';
 
 class TabWalletDetail extends StatelessWidget {
   const TabWalletDetail({Key? key}) : super(key: key);
@@ -18,20 +19,30 @@ class TabWalletDetail extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        const SizedBox(height: 32,),
+        const SizedBox(
+          height: 32,
+        ),
         SFText(keyText: Keys.avaxCChain, style: TextStyles.bold12Blue),
-        const SizedBox(height: 4.0,),
+        const SizedBox(
+          height: 4.0,
+        ),
         SFText(keyText: "0 AVAX", style: TextStyles.bold30White),
-        const SizedBox(height: 20.0,),
+        const SizedBox(
+          height: 20.0,
+        ),
         Container(
           padding: const EdgeInsets.symmetric(vertical: 6.0, horizontal: 16.0),
-          decoration:  BoxDecoration(
+          decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(20.0),
             color: AppColors.lightWhite.withOpacity(0.05),
           ),
-          child: SFText(keyText: "Eq7fbho...asdasd.9aj92as", style: TextStyles.lightWhite14),
+          child: SFText(
+              keyText: "Eq7fbho...asdasd.9aj92as",
+              style: TextStyles.lightWhite14),
         ),
-        const SizedBox(height: 16.0,),
+        const SizedBox(
+          height: 16.0,
+        ),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
@@ -42,26 +53,28 @@ class TabWalletDetail extends StatelessWidget {
                     builder: (_) => const ModalReceiveWallet());
               },
               text: Keys.trade,
-              assetImage: "assets/icons/ic_download.svg",
+              assetImage: Ics.icDownload,
             ),
             BoxButtonWidget(
               onTap: () => Navigator.pushNamed(context, R.sendToExternal),
               text: Keys.toSpending,
-              assetImage: "assets/icons/ic_refresh.svg",
+              assetImage: Ics.icRefresh,
             ),
             BoxButtonWidget(
               onTap: () => Navigator.pushNamed(context, R.sendToExternal),
               text: Keys.toExternal,
-              assetImage: "assets/icons/ic_arrow_up_right.svg",
+              assetImage: Ics.icArrowUpRight,
             ),
             BoxButtonWidget(
               onTap: () => Navigator.pushNamed(context, R.trade),
               text: Keys.trade,
-              assetImage: "assets/icons/ic_transfer.svg",
+              assetImage: Ics.icTransfer,
             ),
           ],
         ),
-        const SizedBox(height: 20.0,),
+        const SizedBox(
+          height: 20.0,
+        ),
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 12.0),
           child: Row(
@@ -71,18 +84,20 @@ class TabWalletDetail extends StatelessWidget {
                 children: [
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                    child: SFText(keyText: Keys.walletAccount, style: TextStyles.blue12),
+                    child: SFText(
+                        keyText: Keys.walletAccount, style: TextStyles.blue12),
                   ),
                   GestureDetector(
                     onTap: () {},
-                    child: SvgPicture.asset("assets/icons/ic_question.svg"),
+                    child: const SFIcon(Ics.icQuestion),
                   ),
                 ],
               ),
               ElevatedButton(
                   onPressed: () {},
                   style: ElevatedButton.styleFrom(
-                    padding: const EdgeInsets.symmetric(horizontal: 12.0, vertical: 8.0),
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 12.0, vertical: 8.0),
                     primary: AppColors.yellow.withOpacity(0.15),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(100.0),
@@ -91,15 +106,21 @@ class TabWalletDetail extends StatelessWidget {
                   child: Row(
                     children: [
                       Image.asset("assets/images/binance.png"),
-                      const SizedBox(width: 8.0,),
-                      SFText(keyText: Keys.buy, style: TextStyles.bold14Yellow,)
+                      const SizedBox(
+                        width: 8.0,
+                      ),
+                      SFText(
+                        keyText: Keys.buy,
+                        style: TextStyles.bold14Yellow,
+                      )
                     ],
-                  )
-              ),
+                  )),
             ],
           ),
         ),
-        const SizedBox(height: 12.0,),
+        const SizedBox(
+          height: 12.0,
+        ),
         const Expanded(child: WalletDetailList())
       ],
     );

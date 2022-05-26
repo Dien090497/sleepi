@@ -70,7 +70,7 @@ class _SFTabBarState extends State<SFTabBar>
           labelColor: AppColors.light1,
           indicatorSize: TabBarIndicatorSize.label,
         ),
-        const SizedBox(height: 35),
+        const SizedBox(height: 8),
         Expanded(
           child: TabBarView(
             controller: _tabController,

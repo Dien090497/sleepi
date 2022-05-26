@@ -15,17 +15,21 @@ class ActivationCodeScreen extends StatelessWidget {
     return BackgroundWidget(
       child: Scaffold(
         backgroundColor: AppColors.transparent,
-        appBar: SFAppBar(context: context, title: Keys.activationCode, textStyle: TextStyles.bold18LightWhite, toUpperCase: true,),
-        body:  SafeArea(
-          child: Column(
-              children: const [
-                AvailableWidget(),
-                SizedBox(height: 32,),
-                Expanded(child: ActivationCodeList()),
-            // ActivationCodeList(),
-          ]
-          )
+        appBar: SFAppBar(
+          context: context,
+          title: Keys.activationCode,
+          textStyle: TextStyles.bold18LightWhite,
+          toUpperCase: true,
         ),
+        body: SafeArea(
+            child: Column(children: const [
+          AvailableWidget(),
+          SizedBox(
+            height: 32,
+          ),
+          Expanded(child: ActivationCodeList()),
+          // ActivationCodeList(),
+        ])),
       ),
     );
   }

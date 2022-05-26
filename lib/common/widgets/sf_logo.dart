@@ -12,7 +12,11 @@ class SFLogo extends StatelessWidget {
       //   color: AppColors.greyBottomNavBar,
       // ),
       // alignment: Alignment.center,
-      child: Image.asset("assets/images/logo.png", width: 112.14, height: 50,),
+      child: Image.asset(
+        "assets/images/logo.png",
+        width: 112.14,
+        height: 50,
+      ),
     );
   }
 }

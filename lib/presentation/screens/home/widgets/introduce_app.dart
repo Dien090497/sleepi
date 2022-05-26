@@ -15,8 +15,7 @@ class IntroduceApp extends StatelessWidget {
       child: Container(
         width: double.infinity,
         height: double.infinity,
-        decoration:
-        BoxDecoration(color: AppColors.white.withOpacity(0.2)),
+        decoration: BoxDecoration(color: AppColors.white.withOpacity(0.2)),
         child: Padding(
           padding: const EdgeInsets.symmetric(vertical: 80, horizontal: 50),
           child: Column(
@@ -27,9 +26,7 @@ class IntroduceApp extends StatelessWidget {
                 child: Container(
                   padding: const EdgeInsets.all(10),
                   decoration: const BoxDecoration(
-                      color: Colors.cyanAccent,
-                      shape: BoxShape.circle
-                  ),
+                      color: Colors.cyanAccent, shape: BoxShape.circle),
                   child: const Icon(
                     Icons.arrow_back_ios,
                   ),
@@ -42,10 +39,27 @@ class IntroduceApp extends StatelessWidget {
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: [
-                        SFButton(text: 'how_to_play', onPressed: () {} , width: double.infinity, height: 50,),
-                        const SFButton(text: 'white_paper', width: double.infinity, height: 50,),
-                        const SFButton(text: 'lite_paper', width: double.infinity, height: 50,),
-                        const SFButton(text: 'link_tree', width: double.infinity, height: 50,),
+                        SFButton(
+                          text: 'how_to_play',
+                          onPressed: () {},
+                          width: double.infinity,
+                          height: 50,
+                        ),
+                        const SFButton(
+                          text: 'white_paper',
+                          width: double.infinity,
+                          height: 50,
+                        ),
+                        const SFButton(
+                          text: 'lite_paper',
+                          width: double.infinity,
+                          height: 50,
+                        ),
+                        const SFButton(
+                          text: 'link_tree',
+                          width: double.infinity,
+                          height: 50,
+                        ),
                       ],
                     ),
                   ),

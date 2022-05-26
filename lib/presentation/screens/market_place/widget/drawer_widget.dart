@@ -13,7 +13,7 @@ class DrawerWidget extends StatelessWidget {
         child: Column(
           children: [
             Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween ,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 SFText(keyText: 'Filter(0)'),
                 SFText(keyText: 'Clear Filter'),
@@ -29,15 +29,27 @@ class DrawerWidget extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: const [
-                SizedBox(width: 110,child: SFButton(text: 'Efficiency'),),
-                SizedBox(width: 110,child: SFButton(text: 'Luck'),),
+                SizedBox(
+                  width: 110,
+                  child: SFButton(text: 'Efficiency'),
+                ),
+                SizedBox(
+                  width: 110,
+                  child: SFButton(text: 'Luck'),
+                ),
               ],
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: const [
-                SizedBox(width: 110,child: SFButton(text: 'comfort'),),
-                SizedBox(width: 110,child: SFButton(text: 'Resilience'),),
+                SizedBox(
+                  width: 110,
+                  child: SFButton(text: 'comfort'),
+                ),
+                SizedBox(
+                  width: 110,
+                  child: SFButton(text: 'Resilience'),
+                ),
               ],
             ),
             Align(

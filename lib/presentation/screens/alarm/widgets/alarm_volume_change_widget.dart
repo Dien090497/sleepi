@@ -7,16 +7,16 @@ class AlarmVolumnChangeWidget extends StatefulWidget {
   const AlarmVolumnChangeWidget({Key? key}) : super(key: key);
 
   @override
-  State<AlarmVolumnChangeWidget> createState() => _AlarmVolumnChangeWidgetState();
+  State<AlarmVolumnChangeWidget> createState() =>
+      _AlarmVolumnChangeWidgetState();
 }
 
 class _AlarmVolumnChangeWidgetState extends State<AlarmVolumnChangeWidget> {
-
   double volume = 1;
 
   @override
   Widget build(BuildContext context) {
-    return  SFListTile(
+    return SFListTile(
       text: Keys.alarm,
       trailing: SFSlider(
         value: volume,

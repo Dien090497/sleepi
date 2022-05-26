@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/widgets/background_widget.dart';
+import 'package:slee_fi/common/widgets/sf_icon.dart';
 import 'package:slee_fi/di/translations/keys.dart';
 import 'package:slee_fi/presentation/screens/wallet/widgets/tab_bar_icon.dart';
 import 'package:slee_fi/presentation/screens/wallet/widgets/tab_spending_detail.dart';
@@ -19,10 +19,10 @@ class WalletScreen extends StatelessWidget {
         child: Scaffold(
           backgroundColor: AppColors.transparent,
           appBar: AppBar(
-            actions:  [
+            actions: [
               GestureDetector(
                 onTap: () {},
-                child: SvgPicture.asset(Ics.icSetting),
+                child: const SFIcon(Ics.icSetting),
               )
             ],
             automaticallyImplyLeading: false,

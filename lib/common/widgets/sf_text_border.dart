@@ -21,7 +21,10 @@ class SFTextBorder extends StatelessWidget {
     return GestureDetector(
       onTap: onTap,
       child: Container(
-        padding: const EdgeInsets.symmetric(vertical: 9.5, horizontal: 16,),
+        padding: const EdgeInsets.symmetric(
+          vertical: 9.5,
+          horizontal: 16,
+        ),
         decoration: BoxDecoration(
           color: textColor.withOpacity(0.05),
           borderRadius: BorderRadius.circular(radius),

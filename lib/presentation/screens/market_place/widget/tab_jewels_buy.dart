@@ -6,7 +6,10 @@ import 'package:slee_fi/common/widgets/sf_text.dart';
 import 'package:slee_fi/presentation/screens/market_place/widget/item_bed_buy_widget.dart';
 
 class TabJewelsBuy extends StatelessWidget {
-  const TabJewelsBuy({Key? key, required this.onPress,}) : super(key: key);
+  const TabJewelsBuy({
+    Key? key,
+    required this.onPress,
+  }) : super(key: key);
 
   final Function() onPress;
   @override
@@ -17,13 +20,14 @@ class TabJewelsBuy extends StatelessWidget {
           padding: const EdgeInsets.symmetric(horizontal: 12),
           child: Container(
             height: 50,
-            decoration: const BoxDecoration(
-                color: AppColors.greyBottomNavBar
-            ),
+            decoration: const BoxDecoration(color: AppColors.greyBottomNavBar),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
-                SFText(keyText: 'Low Price ', style: TextStyles.bold15black,),
+                SFText(
+                  keyText: 'Low Price ',
+                  style: TextStyles.bold15black,
+                ),
                 GestureDetector(
                   child: SFText(
                     keyText: 'Filter',
@@ -39,7 +43,10 @@ class TabJewelsBuy extends StatelessWidget {
           child: SFGridView(
             count: 20,
             itemBuilder: (context, i) {
-              return ItemBedBuyWidget(index: i, checkJewelsOrItems: true,);
+              return ItemBedBuyWidget(
+                index: i,
+                checkJewelsOrItems: true,
+              );
             },
           ),
         ),

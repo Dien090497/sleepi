@@ -65,7 +65,7 @@ class AppColors {
       begin: Alignment.centerLeft,
       end: Alignment.centerRight);
 
-  static LinearGradient gradientWhiteBorderRightToLeft= LinearGradient(
+  static LinearGradient gradientWhiteBorderRightToLeft = LinearGradient(
       colors: [Colors.white.withOpacity(0.2), Colors.white.withOpacity(0)],
       begin: Alignment.centerLeft,
       end: Alignment.centerRight);

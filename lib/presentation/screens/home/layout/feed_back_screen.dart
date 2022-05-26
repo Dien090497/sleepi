@@ -14,41 +14,45 @@ class FeedBackScreen extends StatelessWidget {
     final size = MediaQuery.of(context).size;
     return BackgroundWidget(
       child: Scaffold(
-        backgroundColor: AppColors.transparent,
-          appBar: SFAppBar(context: context, title: "Feedback" ,textStyle: TextStyles.bold18LightWhite),
+          backgroundColor: AppColors.transparent,
+          appBar: SFAppBar(
+              context: context,
+              title: "Feedback",
+              textStyle: TextStyles.bold18LightWhite),
           body: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.all(20),
-          child: Column(
-            children: [
-              Padding(
-                padding: const EdgeInsets.symmetric(vertical: 30),
-                child: Row(
-                  children: [
-                    SizedBox(
-                      width: size.width / 3,
-                      child: const SFTextField(),
+            child: Padding(
+              padding: const EdgeInsets.all(20),
+              child: Column(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 30),
+                    child: Row(
+                      children: [
+                        SizedBox(
+                          width: size.width / 3,
+                          child: const SFTextField(),
+                        ),
+                        const SizedBox(width: 10),
+                        const Expanded(child: SFTextField()),
+                      ],
                     ),
-                    const SizedBox(width: 10),
-                    const Expanded(child: SFTextField()),
-                  ],
-                ),
+                  ),
+                  const SFTextField(
+                    maxLine: 8,
+                    maxLength: 100,
+                    hintText:
+                        "Notifications may include alerts, sounds, and icon badges. These can be configured in Settings.",
+                    hintStyle: TextStyles.lightGrey16,
+                  ),
+                  const Spacer(),
+                  SFButton(
+                    text: 'Submit',
+                    width: size.width,
+                  )
+                ],
               ),
-              const SFTextField(
-                maxLine: 8,
-                maxLength: 100,
-                hintText: "Notifications may include alerts, sounds, and icon badges. These can be configured in Settings.",
-                hintStyle: TextStyles.lightGrey16,
-              ),
-              const Spacer(),
-              SFButton(
-                text: 'Submit',
-                width: size.width,
-              )
-            ],
-          ),
-        ),
-      )),
+            ),
+          )),
     );
   }
 }
