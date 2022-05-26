@@ -15,16 +15,20 @@ class Ics {
   static const String icArrowUpRight = 'assets/icons/ic_arrow_up_right.svg';
   static const String icCircleQuestion = 'assets/icons/ic_circle_question.svg';
   static const String icDownload = 'assets/icons/ic_download.svg';
+  static const String icEdit = 'assets/icons/ic_edit.svg';
   static const String icGold = 'assets/icons/ic_gold.svg';
+  static const String icLock = 'assets/icons/ic_lock.svg';
   static const String icQuestion = 'assets/icons/ic_question.svg';
   static const String icRefresh = 'assets/icons/ic_refresh.svg';
   static const String icSetting = 'assets/icons/ic_setting.svg';
+  static const String icShieldLock = 'assets/icons/ic_shield_lock.svg';
   static const String icSilver = 'assets/icons/ic_silver.svg';
   static const String icSolana = 'assets/icons/ic_solana.svg';
   static const String icSolanaCircle = 'assets/icons/ic_solana_circle.svg';
   static const String icTransfer = 'assets/icons/ic_transfer.svg';
   static const String icTwoEyes = 'assets/icons/ic_two_eyes.svg';
   static const String icWallet = 'assets/icons/ic_wallet.svg';
+  static const String lock = 'assets/icons/lock.svg';
   static const String longBed = 'assets/icons/long_bed.svg';
   static const String middleBed = 'assets/icons/middle_bed.svg';
   static const String shopping = 'assets/icons/shopping.svg';
@@ -50,16 +54,20 @@ class Ics {
     icArrowUpRight,
     icCircleQuestion,
     icDownload,
+    icEdit,
     icGold,
+    icLock,
     icQuestion,
     icRefresh,
     icSetting,
+    icShieldLock,
     icSilver,
     icSolana,
     icSolanaCircle,
     icTransfer,
     icTwoEyes,
     icWallet,
+    lock,
     longBed,
     middleBed,
     shopping,

@@ -8,6 +8,7 @@ import 'package:slee_fi/common/widgets/sf_buttons.dart';
 import 'package:slee_fi/common/widgets/sf_logo.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
 import 'package:slee_fi/common/widgets/sf_textfield.dart';
+import 'package:slee_fi/common/widgets/sf_textfield_text_button.dart';
 import 'package:slee_fi/di/translations/keys.dart';
 import 'package:slee_fi/presentation/screens/login_signup/widgets/login_box.dart';
 
@@ -23,47 +24,27 @@ class LoginSignUpScreen extends StatelessWidget {
           child: ListView(
             padding: const EdgeInsets.symmetric(horizontal: 24),
             children: [
-              const SizedBox(height: 140),
+               SizedBox(height: MediaQuery.of(context).size.height * 0.15),
               const SFLogo(),
-              // Center(child: Image.asset("assets/images/logo.png", width: 112.14, height: 50,)),
               const SizedBox(height: 50),
               LoginBox(
                 child: Column(
                   children: [
-                    SFText(
-                      keyText: Keys.login,
-                      style: TextStyles.bold18LightWhite,
-                      toUpperCase: true,
-                    ),
-                    const SizedBox(height: 63),
+                    SFText(keyText: Keys.login, style: TextStyles.bold18LightWhite, toUpperCase: true,),
+                    const SizedBox(height: 25),
                     const SFTextField(
-                      hintText: Keys.emailAddress,
+                      labelText: Keys.emailAddress,
+                      // hintText: Keys.emailAddress,
                     ),
-                    const SizedBox(height: 51),
-                    Container(
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(10),
-                        border: Border.all(color: AppColors.black),
-                      ),
-                      padding: const EdgeInsets.only(left: 12, right: 4),
-                      child: Row(
-                        children: const [
-                          Expanded(
-                            child: SFTextField(
-                              hintText: Keys.emailVerification,
-                              noBorder: true,
-                            ),
-                          ),
-                          SFTextButton(
-                            text: Keys.sendCode,
-                            // color: Colors.transparent,
-                          ),
-                        ],
-                      ),
+                    const SizedBox(height: 12),
+                    const SFTextFieldTextButton(
+                      labelText: Keys.emailVerificationCode,
                     ),
                     const SizedBox(height: 37),
                     SFButton(
                       text: Keys.login,
+                      color: AppColors.blue,
+                      textStyle: TextStyles.w600WhiteSize16,
                       onPressed: () {
                         Navigator.pushNamed(context, R.enterActivationCode);
                       },

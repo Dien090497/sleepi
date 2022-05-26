@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:slee_fi/resources/resources.dart';
 
 class BackgroundWidget extends StatelessWidget {
   const BackgroundWidget({this.child, Key? key}) : super(key: key);
@@ -9,7 +10,7 @@ class BackgroundWidget extends StatelessWidget {
     return Container(
       decoration: const BoxDecoration(
         image: DecorationImage(
-          image: AssetImage("assets/images/background.png"),
+          image: AssetImage(Imgs.background),
           fit: BoxFit.fill,
         ),
       ),

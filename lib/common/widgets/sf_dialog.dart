@@ -30,11 +30,12 @@ class SFDialog extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Dialog(
-      backgroundColor: Colors.transparent,
+      backgroundColor: AppColors.transparent,
       elevation: 0,
       child: Container(
+        width: 1000,
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(8),
+		 borderRadius: BorderRadius.circular(16),
           color: backgroundColor ?? AppColors.lightDark,
         ),
         padding: padding ?? const EdgeInsets.all(8),

@@ -3,6 +3,12 @@ import 'package:slee_fi/common/style/app_colors.dart';
 
 class TextStyles {
   static const h1 = TextStyle(fontSize: 24, color: AppColors.primary);
+  static const w600WhiteSize16 = TextStyle(
+      fontSize: 16, color: AppColors.white, fontWeight: FontWeight.w600);
+  static const w700WhiteSize14 = TextStyle(
+      fontSize: 14, color: AppColors.white, fontWeight: FontWeight.w600);
+  static const w600LightGreySize16 = TextStyle(
+      fontSize: 16, color: AppColors.lightGrey, fontWeight: FontWeight.w600);
   static const white1w700size16 = TextStyle(
       fontSize: 16, color: AppColors.light1, fontWeight: FontWeight.w700);
   static const white1w700size12 = TextStyle(
@@ -80,6 +86,8 @@ class TextStyles {
     color: AppColors.white,
     decoration: TextDecoration.underline,
   );
+  static const w700LightGreySize14 =
+  TextStyle(fontSize: 14, color: AppColors.lightGrey, fontWeight: FontWeight.w700);
   static const lightWhite14 =
       TextStyle(fontSize: 14, color: AppColors.lightWhite);
   static const lightWhite16 =
@@ -107,9 +115,15 @@ class TextStyles {
       fontSize: 18, color: AppColors.lightWhite, fontWeight: FontWeight.w700);
   static const bold16LightWhite = TextStyle(
       fontSize: 16, color: AppColors.lightWhite, fontWeight: FontWeight.w700);
+  static const bold14LightWhite = TextStyle(
+      fontSize: 14, color: AppColors.lightWhite, fontWeight: FontWeight.w700);
 
   static const bold12Blue = TextStyle(
       fontSize: 12, color: AppColors.blue, fontWeight: FontWeight.w700);
+  static const bold14Blue = TextStyle(
+      fontSize: 14, color: AppColors.blue, fontWeight: FontWeight.w700);
+  static const bold16Blue = TextStyle(
+      fontSize: 16, color: AppColors.blue, fontWeight: FontWeight.w700);
   static const bold24Blue = TextStyle(
       fontSize: 24, color: AppColors.blue, fontWeight: FontWeight.w700);
   static const bold24Green = TextStyle(
@@ -128,6 +142,9 @@ class TextStyles {
   static const blue16W700 = TextStyle(
       fontSize: 16, color: AppColors.blue, fontWeight: FontWeight.w700);
   static const green14 = TextStyle(fontSize: 14, color: AppColors.green);
+
+  static const green16 = TextStyle(fontSize: 16, color: AppColors.green);
+
   static const red14 = TextStyle(fontSize: 14, color: AppColors.red);
   static const red12W700 = TextStyle(
       fontSize: 12, color: AppColors.red, fontWeight: FontWeight.w700);
@@ -143,4 +160,5 @@ class TextStyles {
       fontSize: 16, color: AppColors.yellow, fontStyle: FontStyle.italic);
   static const labelStyle = TextStyle(
       fontSize: 16, color: AppColors.lightGrey, fontStyle: FontStyle.normal);
+
 }

@@ -1,8 +1,8 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:slee_fi/common/routes/app_routes.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
+import 'package:slee_fi/common/widgets/sf_bottom_sheet.dart';
 import 'package:slee_fi/common/widgets/sf_dialog.dart';
 import 'package:slee_fi/common/widgets/sf_icon.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
@@ -47,12 +47,8 @@ class TabWalletDetail extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
             BoxButtonWidget(
-              onTap: () {
-                showCupertinoModalPopup(
-                    context: context,
-                    builder: (_) => const ModalReceiveWallet());
-              },
-              text: Keys.trade,
+              onTap: () => SFModalBottomSheet.show(context, 0.7, const ModalReceiveWallet()),
+              text: Keys.receive,
               assetImage: Ics.icDownload,
             ),
             BoxButtonWidget(
@@ -94,7 +90,9 @@ class TabWalletDetail extends StatelessWidget {
                 ],
               ),
               ElevatedButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    // Navigator.pushNamed(context, R.);
+                  },
                   style: ElevatedButton.styleFrom(
                     padding: const EdgeInsets.symmetric(
                         horizontal: 12.0, vertical: 8.0),
@@ -105,14 +103,9 @@ class TabWalletDetail extends StatelessWidget {
                   ),
                   child: Row(
                     children: [
-                      Image.asset("assets/images/binance.png"),
-                      const SizedBox(
-                        width: 8.0,
-                      ),
-                      SFText(
-                        keyText: Keys.buy,
-                        style: TextStyles.bold14Yellow,
-                      )
+                      Image.asset(Imgs.binance),
+                      const SizedBox(width: 8.0,),
+                      SFText(keyText: Keys.buy, style: TextStyles.bold14Yellow,)
                     ],
                   )),
             ],

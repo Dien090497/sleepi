@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
+import 'package:slee_fi/common/widgets/sf_card.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
+import 'package:slee_fi/di/translations/keys.dart';
+import 'package:slee_fi/resources/resources.dart';
 
 class WalletDetailList extends StatelessWidget {
   const WalletDetailList({Key? key}) : super(key: key);
@@ -22,20 +25,11 @@ class WalletDetailList extends StatelessWidget {
           shrinkWrap: true,
           padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 12.0),
           itemBuilder: (BuildContext context, int index) {
-            return Container(
-              padding: const EdgeInsets.symmetric(horizontal: 12.0),
-              margin: const EdgeInsets.only(top: 12.0),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(8.0),
-                color: AppColors.white.withOpacity(0.05),
-              ),
+            return SFCard(
               child: ListTile(
-                leading: Image.asset("assets/images/slft.png"),
-                title: SFText(keyText: "SLFT", style: TextStyles.lightWhite16),
-                trailing: SFText(
-                  keyText: "xxxxxxxxx",
-                  style: TextStyles.lightWhite16,
-                ),
+                leading: Image.asset(Imgs.slft),
+                title: SFText(keyText: Keys.slft, toUpperCase: true, style: TextStyles.lightWhite16),
+                trailing: SFText(keyText: "xxxxxxxxx", style: TextStyles.lightWhite16,),
               ),
             );
           }),
