@@ -74,7 +74,8 @@ class ItemBedBuyWidget extends StatelessWidget {
                   ),
             GestureDetector(
               onTap: () {
-                Navigator.pushNamed(context, R.nftInfo, arguments: isMarketPlace);
+                Navigator.pushNamed(context, R.nftInfo,
+                    arguments: isMarketPlace);
               },
               child: Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 10),
@@ -103,19 +104,21 @@ class ItemBedBuyWidget extends StatelessWidget {
                 ),
               ),
             ),
-            checkJewelsOrItems ? const SizedBox() : Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                SFText(
-                  keyText: 'Mint: 0',
-                  style: TextStyles.black10Bold,
-                ),
-                SFText(
-                  keyText: 'LV 0',
-                  style: TextStyles.black10Bold,
-                ),
-              ],
-            ),
+            checkJewelsOrItems
+                ? const SizedBox()
+                : Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      SFText(
+                        keyText: 'Mint: 0',
+                        style: TextStyles.black10Bold,
+                      ),
+                      SFText(
+                        keyText: 'LV 0',
+                        style: TextStyles.black10Bold,
+                      ),
+                    ],
+                  ),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 0),
               child: Container(

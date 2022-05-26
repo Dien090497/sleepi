@@ -13,22 +13,21 @@ class SFAppBar extends AppBar {
     required BuildContext context,
     Key? key,
   }) : super(
-    backgroundColor: backgroundColor ?? AppColors.transparent,
-    shadowColor: backgroundColor,
-    automaticallyImplyLeading: false,
-    leadingWidth: 32,
-    elevation: 0,
-    leading: GestureDetector(
-      onTap: onPressedBack ?? () => Navigator.maybePop(context),
-      child: const SFBackButton(),
-    ),
-    // centerTitle: true,
-    title: SFText(
-      keyText: title ?? "",
-      style: textStyle,
-      toUpperCase: toUpperCase,
-    ),
-    key: key,
-  );
+          backgroundColor: backgroundColor ?? AppColors.transparent,
+          shadowColor: backgroundColor,
+          automaticallyImplyLeading: false,
+          leadingWidth: 32,
+          elevation: 0,
+          leading: GestureDetector(
+            onTap: onPressedBack ?? () => Navigator.maybePop(context),
+            child: const SFBackButton(),
+          ),
+          // centerTitle: true,
+          title: SFText(
+            keyText: title ?? "",
+            style: textStyle,
+            toUpperCase: toUpperCase,
+          ),
+          key: key,
+        );
 }
-

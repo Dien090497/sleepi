@@ -71,10 +71,12 @@ class TradeScreen extends StatelessWidget {
                 children: [
                   SFText(keyText: Keys.received),
                   Expanded(
-                    child: SFText(keyText: '0.59182239 SOL', textAlign: TextAlign.right),
+                    child: SFText(
+                        keyText: '0.59182239 SOL', textAlign: TextAlign.right),
                   ),
                 ],
-              ),const SizedBox(height: 36),
+              ),
+              const SizedBox(height: 36),
               Row(
                 children: const [
                   Expanded(child: SFButton(text: Keys.cancel)),

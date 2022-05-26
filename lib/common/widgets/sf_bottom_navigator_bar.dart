@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
+import 'package:slee_fi/common/widgets/sf_icon.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
 
 class SFBottomNavigatorBar extends StatelessWidget {
@@ -32,7 +32,7 @@ class SFBottomNavigatorBar extends StatelessWidget {
             width: MediaQuery.of(context).size.width / 5,
             child: Column(
               children: [
-                SvgPicture.asset(
+                SFIcon(
                   element.icon,
                   width: 24,
                   height: 24,

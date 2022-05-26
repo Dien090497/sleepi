@@ -25,10 +25,15 @@ class InfoNftScreen extends StatelessWidget {
               physics: const BouncingScrollPhysics(),
               child: Column(
                 children: [
-                  BoxInfoNft(isMarketPlace: args,),
+                  BoxInfoNft(
+                    isMarketPlace: args,
+                  ),
                   const Padding(
                     padding: EdgeInsets.symmetric(vertical: 10),
-                    child: TextInfo(text: 'IDIDIDID', color: AppColors.greyBottomNavBar,),
+                    child: TextInfo(
+                      text: 'IDIDIDID',
+                      color: AppColors.greyBottomNavBar,
+                    ),
                   ),
                   SFText(keyText: 'Time: 6-8h'),
                   Padding(
@@ -40,35 +45,62 @@ class InfoNftScreen extends StatelessWidget {
                           children: const [
                             Padding(
                               padding: EdgeInsets.symmetric(vertical: 10),
-                              child: TextInfo(text: 'IDIDIDID', color: AppColors.greyBottomNavBar,),
+                              child: TextInfo(
+                                text: 'IDIDIDID',
+                                color: AppColors.greyBottomNavBar,
+                              ),
                             ),
                             Padding(
                               padding: EdgeInsets.symmetric(vertical: 10),
-                              child: TextInfo(text: 'IDIDIDID', color: AppColors.greyBottomNavBar,),
+                              child: TextInfo(
+                                text: 'IDIDIDID',
+                                color: AppColors.greyBottomNavBar,
+                              ),
                             ),
                             Padding(
                               padding: EdgeInsets.symmetric(vertical: 10),
-                              child: TextInfo(text: 'IDIDIDID', color: AppColors.greyBottomNavBar,),
+                              child: TextInfo(
+                                text: 'IDIDIDID',
+                                color: AppColors.greyBottomNavBar,
+                              ),
                             ),
                           ],
                         ),
-                        const SizedBox(height: 15,),
-                        Padding(
-                          padding: const EdgeInsets.symmetric(vertical: 10),
-                          child: TextInfo(text: 'IDIDIDID', color: AppColors.greyBottomNavBar, width: size.width,),
+                        const SizedBox(
+                          height: 15,
                         ),
-                        const SizedBox(height: 15,),
                         Padding(
                           padding: const EdgeInsets.symmetric(vertical: 10),
-                          child: TextInfo(text: 'IDIDIDID', color: AppColors.greyBottomNavBar, width: size.width,),
+                          child: TextInfo(
+                            text: 'IDIDIDID',
+                            color: AppColors.greyBottomNavBar,
+                            width: size.width,
+                          ),
+                        ),
+                        const SizedBox(
+                          height: 15,
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(vertical: 10),
+                          child: TextInfo(
+                            text: 'IDIDIDID',
+                            color: AppColors.greyBottomNavBar,
+                            width: size.width,
+                          ),
                         ),
                         const BoxIndexInfo()
                       ],
                     ),
                   ),
-                  const SizedBox(height: 10,),
-                  const MintFromWidget(text: 'Minted From',),
-                  const MintFromWidget(text: 'Mints',),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  const MintFromWidget(
+                    text: 'Minted From',
+                  ),
+                  const MintFromWidget(
+                    text: 'Mints',
+                  ),
                 ],
               ),
             ),

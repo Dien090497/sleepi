@@ -4,7 +4,13 @@ import 'package:slee_fi/common/style/text_styles.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
 
 class TextInfo extends StatelessWidget {
-  const TextInfo({Key? key, required this.text, this.color, this.width, this.center = false}) : super(key: key);
+  const TextInfo(
+      {Key? key,
+      required this.text,
+      this.color,
+      this.width,
+      this.center = false})
+      : super(key: key);
 
   final String text;
   final Color? color;

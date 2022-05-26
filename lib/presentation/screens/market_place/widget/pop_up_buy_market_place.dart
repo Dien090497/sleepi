@@ -28,7 +28,11 @@ class PopUpBuyMarketPlace extends StatelessWidget {
             ),
           ],
         ),
-        Image.asset('assets/images/product_detail.png', width: 100, height: 80,),
+        Image.asset(
+          'assets/images/product_detail.png',
+          width: 100,
+          height: 80,
+        ),
         SFText(keyText: '#id'),
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
@@ -57,8 +61,14 @@ class PopUpBuyMarketPlace extends StatelessWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              SFButton(text: 'button_cancel', width: size.width / 3,),
-              SFButton(text: 'button_confirm', width: size.width / 3,)
+              SFButton(
+                text: 'button_cancel',
+                width: size.width / 3,
+              ),
+              SFButton(
+                text: 'button_confirm',
+                width: size.width / 3,
+              )
             ],
           ),
         ),

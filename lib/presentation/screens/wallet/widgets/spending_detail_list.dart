@@ -14,11 +14,12 @@ class SpendingDetailList extends StatelessWidget {
       alignment: Alignment.center,
       decoration: const BoxDecoration(
         color: AppColors.dark,
-        borderRadius: BorderRadius.only(topLeft: Radius.circular(40), topRight: Radius.circular(40)),
+        borderRadius: BorderRadius.only(
+            topLeft: Radius.circular(40), topRight: Radius.circular(40)),
       ),
       width: double.infinity,
-      padding : const EdgeInsets.only(top: 20),
-      child:   DefaultTabController(
+      padding: const EdgeInsets.only(top: 20),
+      child: DefaultTabController(
         length: 2,
         child: Column(
            crossAxisAlignment: CrossAxisAlignment.start,

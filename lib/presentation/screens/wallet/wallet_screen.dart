@@ -4,6 +4,9 @@ import 'package:slee_fi/common/routes/app_routes.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/widgets/background_widget.dart';
 import 'package:slee_fi/common/widgets/sf_icon_border.dart';
+import 'package:slee_fi/common/style/app_colors.dart';
+import 'package:slee_fi/common/widgets/background_widget.dart';
+import 'package:slee_fi/common/widgets/sf_icon.dart';
 import 'package:slee_fi/di/translations/keys.dart';
 import 'package:slee_fi/presentation/screens/wallet/widgets/tab_bar_icon.dart';
 import 'package:slee_fi/presentation/screens/wallet/widgets/tab_spending_detail.dart';
@@ -21,8 +24,7 @@ class WalletScreen extends StatelessWidget {
         child: Scaffold(
           backgroundColor: AppColors.transparent,
           appBar: AppBar(
-
-            actions:  [
+		   actions:  [
               GestureDetector(
                 onTap: () => Navigator.pushNamed(context, R.settingWallet),
                 child: SvgPicture.asset(Ics.icSetting),

@@ -14,6 +14,7 @@ class SFButtonOutLined extends StatelessWidget {
     this.withBorder = 2,
     this.icon,
   }) : super(key: key);
+
   final String title;
   final VoidCallback onPressed;
   final Size? fixedSize;

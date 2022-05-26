@@ -17,9 +17,8 @@ class HealthcarePermissionScreen extends StatelessWidget {
       child: BackgroundWidget(
         child: Scaffold(
           backgroundColor: AppColors.transparent,
-          body: Stack(
-              children: [
-                ListView(
+          body: Stack(children: [
+           ListView(
                   padding: const EdgeInsets.all(24.0),
                   children: [
                     Padding(padding: const EdgeInsets.symmetric(horizontal: 65), child: Image.asset(Imgs.healthcare,fit: BoxFit.fill)),
@@ -38,6 +37,7 @@ class HealthcarePermissionScreen extends StatelessWidget {
                 )
               ]
           ),
+          ]),
         ),
       ),
     );

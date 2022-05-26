@@ -59,13 +59,14 @@ class AppColors {
       begin: Alignment.bottomLeft,
       end: Alignment.topRight);
 
+  static const bluesDark = Color(0xFF426BFF);
 
   static const gradientBluePurple = LinearGradient(
       colors: [blue, purple],
       begin: Alignment.topLeft,
       end: Alignment.bottomRight);
   static const gradientBlueButton = LinearGradient(
-      colors: [blue, Color(0xFF426BFF)],
+      colors: [blue, bluesDark],
       begin: Alignment.topCenter,
       end: Alignment.bottomCenter);
 
@@ -74,7 +75,7 @@ class AppColors {
       begin: Alignment.centerLeft,
       end: Alignment.centerRight);
 
-  static LinearGradient gradientWhiteBorderRightToLeft= LinearGradient(
+  static LinearGradient gradientWhiteBorderRightToLeft = LinearGradient(
       colors: [Colors.white.withOpacity(0.2), Colors.white.withOpacity(0)],
       begin: Alignment.centerLeft,
       end: Alignment.centerRight);

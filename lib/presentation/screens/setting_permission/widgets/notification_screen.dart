@@ -17,7 +17,9 @@ class NotificationPermissionScreen extends StatelessWidget {
       child: BackgroundWidget(
         child: Scaffold(
           backgroundColor: AppColors.transparent,
-          body: Stack(
+          body: Stack(children: [
+            ListView(
+              padding: const EdgeInsets.all(24.0),
               children: [
                 ListView(
                   padding: const EdgeInsets.all(24.0),
@@ -38,6 +40,40 @@ class NotificationPermissionScreen extends StatelessWidget {
                 )
               ]
           ),
+                Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 65),
+                    child:
+                        Image.asset("assets/images/mic.png", fit: BoxFit.fill)),
+                const SizedBox(
+                  height: 24.0,
+                ),
+                SFText(
+                  keyText: Keys.notificationPermission,
+                  style: TextStyles.bold24LightWhite,
+                  textAlign: TextAlign.center,
+                ),
+                const SizedBox(
+                  height: 32.0,
+                ),
+                SFText(
+                  keyText: Keys.displaysMessageNotificationPermission,
+                  style: TextStyles.lightGrey16,
+                ),
+              ],
+            ),
+            Align(
+              alignment: Alignment.bottomCenter,
+              child: Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: SFButton(
+                    height: 48,
+                    width: double.infinity,
+                    text: Keys.allow,
+                    onPressed: () => Navigator.popUntil(
+                        context, ModalRoute.withName(R.setting))),
+              ),
+            )
+          ]),
         ),
       ),
     );

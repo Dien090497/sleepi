@@ -5,6 +5,7 @@ class Ics {
 
   static const String arrowLeft = 'assets/icons/arrow_left.svg';
   static const String chart = 'assets/icons/chart.svg';
+  static const String filter = 'assets/icons/filter.svg';
   static const String flexibleBed = 'assets/icons/flexible_bed.svg';
   static const String gacha = 'assets/icons/gacha.svg';
   static const String gift = 'assets/icons/gift.svg';
@@ -33,11 +34,14 @@ class Ics {
   static const String signOut = 'assets/icons/sign_out.svg';
   static const String sleep = 'assets/icons/sleep.svg';
   static const String star = 'assets/icons/star.svg';
+  static const String starOutlined = 'assets/icons/star_outlined.svg';
   static const String test = 'assets/icons/test.svg';
+  static const String twoEyelashes = 'assets/icons/two-eyelashes.svg';
 
   static const List<String> values = [
     arrowLeft,
     chart,
+    filter,
     flexibleBed,
     gacha,
     gift,
@@ -66,6 +70,8 @@ class Ics {
     signOut,
     sleep,
     star,
-    test
+    starOutlined,
+    test,
+    twoEyelashes
   ];
 }

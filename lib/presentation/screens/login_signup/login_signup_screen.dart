@@ -51,8 +51,7 @@ class LoginSignUpScreen extends StatelessWidget {
                       width: MediaQuery.of(context).size.width,
                     ),
                     const SizedBox(height: 10),
-                    SFText(
-                        keyText: Keys.accountLogin, style: TextStyles.blue14)
+                    SFText(keyText: Keys.accountLogin, style: TextStyles.blue14)
                   ],
                 ),
               ),

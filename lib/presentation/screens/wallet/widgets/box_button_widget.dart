@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
+import 'package:slee_fi/common/widgets/sf_icon.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
 
 class BoxButtonWidget extends StatelessWidget {
-  const BoxButtonWidget({this.text, this.textStyle, this.assetImage, this.onTap, Key? key}) : super(key: key);
+  const BoxButtonWidget(
+      {this.text, this.textStyle, this.assetImage, this.onTap, Key? key})
+      : super(key: key);
 
   final VoidCallback? onTap;
   final String? text;
@@ -14,7 +16,7 @@ class BoxButtonWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return  GestureDetector(
+    return GestureDetector(
       onTap: onTap,
       child: Container(
         width: 76,
@@ -28,10 +30,16 @@ class BoxButtonWidget extends StatelessWidget {
           children: [
             CircleAvatar(
               backgroundColor: AppColors.blue,
-              child: SvgPicture.asset(assetImage!),
+              child: SFIcon(assetImage!),
             ),
-            const SizedBox(height: 8.0,),
-            SFText(keyText: text ?? "", style: textStyle ?? TextStyles.lightGrey12, textAlign: TextAlign.center,)
+            const SizedBox(
+              height: 8.0,
+            ),
+            SFText(
+              keyText: text ?? "",
+              style: textStyle ?? TextStyles.lightGrey12,
+              textAlign: TextAlign.center,
+            )
           ],
         ),
       ),

@@ -16,13 +16,17 @@ class SettingScreen extends StatelessWidget {
     return BackgroundWidget(
       child: Scaffold(
         backgroundColor: AppColors.transparent,
-        appBar: SFAppBar(context: context, title: Keys.setting, textStyle: TextStyles.bold18LightWhite,),
+        appBar: SFAppBar(
+          context: context,
+          title: Keys.setting,
+          textStyle: TextStyles.bold18LightWhite,
+        ),
         body: SafeArea(
           child: ListView(
-            children:  const [
-               AverageInfoWidget(),
-               GeneralWidget(),
-               ProfileWidget(),
+            children: const [
+              AverageInfoWidget(),
+              GeneralWidget(),
+              ProfileWidget(),
             ],
           ),
         ),

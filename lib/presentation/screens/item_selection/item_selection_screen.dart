@@ -67,7 +67,7 @@ class _ItemSelectionScreenState extends State<ItemSelectionScreen> {
                 itemBuilder: (_, index) {
                   return GridView.builder(
                     gridDelegate:
-                    const SliverGridDelegateWithFixedCrossAxisCount(
+                        const SliverGridDelegateWithFixedCrossAxisCount(
                       crossAxisCount: 3,
                       mainAxisExtent: 160,
                       crossAxisSpacing: 1,

@@ -9,6 +9,8 @@ class TextStyles {
       fontSize: 16, color: AppColors.light1, fontWeight: FontWeight.w700);
   static const white1w700size12 = TextStyle(
       fontSize: 12, color: AppColors.light1, fontWeight: FontWeight.w700);
+  static const greenW700size12 = TextStyle(
+      fontSize: 12, color: AppColors.green, fontWeight: FontWeight.w700);
   static const header = TextStyle(
       fontSize: 32, color: AppColors.textColor, fontWeight: FontWeight.bold);
   static const textBasic15 = TextStyle(fontSize: 15, color: AppColors.primary);
@@ -17,8 +19,10 @@ class TextStyles {
   static const black13 = TextStyle(fontSize: 13, color: AppColors.black);
   static const black16 = TextStyle(fontSize: 16, color: AppColors.black);
   static const black20 = TextStyle(fontSize: 20, color: AppColors.black);
-  static const lightGrey10 =
-      TextStyle(fontSize: 10, color: AppColors.lightGrey, );
+  static const lightGrey10 = TextStyle(
+    fontSize: 10,
+    color: AppColors.lightGrey,
+  );
   static const lightGrey12 =
       TextStyle(fontSize: 12, color: AppColors.lightGrey);
   static const lightGrey11W500 = TextStyle(
@@ -83,6 +87,8 @@ class TextStyles {
   static const lightWhite16 =
       TextStyle(fontSize: 16, color: AppColors.lightWhite);
   static const white14 = TextStyle(fontSize: 14, color: AppColors.white);
+  static const white14W700 = TextStyle(
+      fontSize: 14, color: AppColors.white, fontWeight: FontWeight.w700);
   static const white16 = TextStyle(fontSize: 16, color: AppColors.white);
   static const white16500 = TextStyle(
     fontSize: 16,
@@ -123,12 +129,12 @@ class TextStyles {
   static const purple16 = TextStyle(fontSize: 16, color: AppColors.purple);
   static const blue12 = TextStyle(fontSize: 14, color: AppColors.blue);
   static const blue14 = TextStyle(fontSize: 14, color: AppColors.blue);
+  static const blue14W700 = TextStyle(
+      fontSize: 14, color: AppColors.blue, fontWeight: FontWeight.w700);
   static const blue16 = TextStyle(
-    fontSize: 16,
-    color: AppColors.blue,
-    fontWeight: FontWeight.w500,
-    height: 24 / 16,
-  );
+      fontSize: 16, color: AppColors.blue, fontWeight: FontWeight.w500);
+  static const blue16W700 = TextStyle(
+      fontSize: 16, color: AppColors.blue, fontWeight: FontWeight.w700);
   static const green14 = TextStyle(fontSize: 14, color: AppColors.green);
 
   static const green16 = TextStyle(fontSize: 16, color: AppColors.green);

@@ -1,7 +1,7 @@
-import 'package:flutter/material.dart';
 import 'dart:ui' as ui;
 
-import 'package:flutter_svg/flutter_svg.dart';
+import 'package:flutter/material.dart';
+import 'package:slee_fi/common/widgets/sf_icon.dart';
 
 class SFImageBorder extends StatelessWidget {
   const SFImageBorder({
@@ -22,11 +22,12 @@ class SFImageBorder extends StatelessWidget {
     return Container(
       width: size.width,
       height: size.height,
+      padding: const EdgeInsets.all(9),
       decoration: BoxDecoration(
         color: Colors.white.withOpacity(0.05),
         borderRadius: BorderRadius.circular(radius),
       ),
-      child: SvgPicture.asset(icon),
+      child: SFIcon(icon),
     );
   }
 }

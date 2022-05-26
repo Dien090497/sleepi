@@ -3,7 +3,7 @@ import 'package:slee_fi/common/style/text_styles.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
 
 class SFListTile extends ListTile {
-   SFListTile({
+SFListTile({
      String? text,
      TextStyle? textStyle,
      Widget? leading,

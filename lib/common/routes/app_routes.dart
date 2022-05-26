@@ -18,6 +18,8 @@ import 'package:slee_fi/presentation/screens/login_signup/login_signup_screen.da
 import 'package:slee_fi/presentation/screens/passcode/create_passcode_screen.dart';
 import 'package:slee_fi/presentation/screens/passcode/passcode_screen.dart';
 import 'package:slee_fi/presentation/screens/restore_wallet/restore_wallet_screen.dart';
+import 'package:slee_fi/presentation/screens/result/layout/share_screen.dart';
+import 'package:slee_fi/presentation/screens/result/result_screen.dart';
 import 'package:slee_fi/presentation/screens/send_to_external/send_to_external_screen.dart';
 import 'package:slee_fi/presentation/screens/send_to_spending/send_to_spending_screen.dart';
 import 'package:slee_fi/presentation/screens/setting/setting_screen.dart';
@@ -80,6 +82,8 @@ class R {
   static const String walletCreate = '${_}wallet_create';
   static const String depositSLFT = '${_}deposit_slft';
   static const String withdrawSLFT = '${_}withdraw_slft';
+  static const String result = '${_}result';
+  static const String share = '${_}share';
 }
 
 class AppRoutes {
@@ -123,5 +127,7 @@ class AppRoutes {
     R.walletCreate: (_) => const WalletCreateScreen(),
     R.depositSLFT: (_) => const DepositSlftScreen(),
     R.withdrawSLFT: (_) => const WithdrawSlftScreen(),
+    R.result: (_) => const ResultScreen(),
+    R.share: (_) => const ShareScreen(),
   };
 }

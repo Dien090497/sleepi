@@ -17,6 +17,28 @@ class StakingScreen extends StatelessWidget {
             children: const [
               TopBarStaking(valueGold: 47.52, valueSilver: 52.88,),
               Expanded(child: StakingList()),
+            children: [
+              const SizedBox(
+                height: 20,
+              ),
+              Container(
+                margin: const EdgeInsets.only(left: 8.0),
+                alignment: Alignment.centerLeft,
+                child: const SFBackButton(),
+              ),
+              SFText(keyText: Keys.staking, style: TextStyles.bold40black),
+              SFSubTabBar(
+                texts: const [Keys.slft, Keys.slgt],
+              ),
+              const SizedBox(height: 35),
+              const Expanded(
+                child: TabBarView(
+                  children: [
+                    TabSLFTDetail(),
+                    TabSLGTDetail(),
+                  ],
+                ),
+              ),
             ],
           )
         ),

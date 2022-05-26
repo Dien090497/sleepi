@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
 
 class SFCard extends StatelessWidget {
-  const SFCard({this.padding, this.margin, this.height, this.child, this.onTap, Key? key}) : super(key: key);
+
+ const SFCard({this.padding, this.margin, this.child, Key? key})
+      : super(key: key);
 
   final Widget? child;
   final EdgeInsets? margin;

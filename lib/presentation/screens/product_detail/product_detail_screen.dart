@@ -7,8 +7,8 @@ import 'package:slee_fi/presentation/screens/product_detail/widgets/tab_beds_det
 import 'package:slee_fi/presentation/screens/product_detail/widgets/tab_item_detail.dart';
 import 'package:slee_fi/presentation/screens/product_detail/widgets/tab_jewels_detail.dart';
 
-class ProductDetaiScreen extends StatelessWidget {
-  const ProductDetaiScreen({Key? key}) : super(key: key);
+class ProductDetailScreen extends StatelessWidget {
+  const ProductDetailScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -18,6 +18,7 @@ class ProductDetaiScreen extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: const [
             TopBarCommon(),
+            SizedBox(height: 20),
             Expanded(
               child: SFTabBar(
                 isScrollable: true,

@@ -15,7 +15,6 @@ class TransferWidget extends StatefulWidget {
 }
 
 class _TransferWidgetState extends State<TransferWidget> {
-
   bool swapText = false;
 
   @override
@@ -65,25 +64,66 @@ class _TransferWidgetState extends State<TransferWidget> {
                 ),
               ),
             ],
-          ),
-          Row(
-            children: [
-              Expanded(
-                flex: 2,
-                child:  Row(
+                child: Row(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                   SvgPicture.asset(Ics.icWallet, color: AppColors.blue,),
+                    const Icon(
+                      Icons.account_tree,
+                      color: AppColors.greenAccent,
+                    ),
                     Padding(
                       padding: const EdgeInsets.only(left: 8.0),
-                      child: SFText(keyText: Keys.to, style: TextStyles.grey14Italic,),
+                      child: SFText(
+                        keyText: Keys.from,
+                        style: TextStyles.grey14Italic,
+                      ),
                     ),
                   ],
                 ),
               ),
               Expanded(
                 flex: 5,
-                child: SFText(keyText: swapText ? Keys.wallet : Keys.spending, style: TextStyles.bold18White,),
+                child: SFText(
+                    keyText: swapText ? Keys.spending : Keys.wallet,
+                    style: TextStyles.bold16blackItalic),
+              )
+            ],
+          ),
+          Align(
+            alignment: Alignment.centerRight,
+            child: GestureDetector(
+              onTap: () {
+                setState(() {
+                  swapText = !swapText;
+                });
+              },
+              child: const Icon(
+                Icons.swap_vert,
+                size: 32,
+              ),
+            ),
+          ),
+          Row(
+            children: [
+              Expanded(
+                flex: 2,
+                child: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+				   SvgPicture.asset(Ics.icWallet, color: AppColors.blue,),
+                    Padding(
+                      padding: const EdgeInsets.only(left: 8.0),
+                      child: SFText(
+                        keyText: Keys.to,
+                        style: TextStyles.grey14Italic,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              Expanded(
+                flex: 5,
+				   child: SFText(keyText: swapText ? Keys.wallet : Keys.spending, style: TextStyles.bold18White,),
               )
             ],
           ),
