@@ -76,6 +76,7 @@ class _ResultScreenState extends State<ResultScreen> {
                 ),
                 SFButton(
                   text: Keys.shareYourSleep,
+                  textStyle: TextStyles.white16,
                   gradient: AppColors.gradientBlueButton,
                   width: double.infinity,
                   height: 48,
