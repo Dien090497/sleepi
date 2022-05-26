@@ -4,7 +4,7 @@ import 'package:slee_fi/common/style/text_styles.dart';
 import 'package:slee_fi/common/widgets/sf_bottom_sheet.dart';
 import 'package:slee_fi/common/widgets/sf_card.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
-import 'package:slee_fi/common/widgets/sf_textfield_send_code.dart';
+import 'package:slee_fi/common/widgets/sf_textfield_text_button.dart';
 import 'package:slee_fi/di/translations/keys.dart';
 import 'package:slee_fi/resources/resources.dart';
 
@@ -51,7 +51,7 @@ class TransferList extends StatelessWidget {
           const SizedBox(
             height: 24.0,
           ),
-         const SFTextFieldSendCode(
+         const SFTextFieldTextButton(
             labelText: Keys.amount,
             textButton: Keys.all,
           ),

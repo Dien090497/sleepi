@@ -6,8 +6,8 @@ import 'package:slee_fi/common/widgets/sf_text.dart';
 import 'package:slee_fi/common/widgets/sf_textfield.dart';
 import 'package:slee_fi/di/translations/keys.dart';
 
-class SFTextFieldSendCode extends StatelessWidget {
-  const SFTextFieldSendCode({
+class SFTextFieldTextButton extends StatelessWidget {
+  const SFTextFieldTextButton({
     this.labelText,
     this.hintText,
     this.textButton,

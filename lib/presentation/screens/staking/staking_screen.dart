@@ -18,7 +18,7 @@ class StakingScreen extends StatelessWidget {
               TopBarStaking(valueGold: 47.52, valueSilver: 52.88,),
               Expanded(child: StakingList()),
             ],
-          ),
+          )
         ),
       ),
     );

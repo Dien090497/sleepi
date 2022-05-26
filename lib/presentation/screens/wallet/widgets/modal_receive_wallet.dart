@@ -44,17 +44,17 @@ class ModalReceiveWallet extends StatelessWidget {
             ),
             child: SFText(keyText: "Eq7fbhoajsdRA29asjBWRmxwwo9aj92as", style: TextStyles.lightGrey16, textAlign: TextAlign.center,),
           ),
-        ),
-        const SizedBox(height: 20,),
+        ) ,
+        const SizedBox(height: 32,),
         SFButton(
           text: Keys.copyAddress,
-          textStyle: TextStyles.bold16Blue,
+          textStyle: TextStyles.bold16LightWhite,
           height: 50,
           color: AppColors.blue,
           toUpperCase: true,
           onPressed: () {},
         ),
-        const SizedBox(height: 12.0,),
+        const SizedBox(height: 12,),
       ],
     );
   }

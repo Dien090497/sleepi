@@ -476,8 +476,6 @@ class Keys {
   static const String cautionPleaseCheckYourSeedPhrase =
       'caution_please_check_your_seed_phrase';
 
-  static const String secureWallet = 'secure_wallet';
-
   static const String createYourPasscode = 'create_your_passcode';
 
   static const String confirmYourPasscode = 'confirm_your_passcode';
@@ -514,6 +512,12 @@ class Keys {
 
   static const String displaysWalletWarningInfo =
       'displays_wallet_warning_info';
+
+  static const String secureWallet = 'secure_wallet';
+
+  static const String displayBackupInfo = 'display_backup_info';
+
+  static const String tvlInDapps = 'tvl_in_dapps';
 
   static const String introduceHowToPlay = 'introduce.how_to_play';
 

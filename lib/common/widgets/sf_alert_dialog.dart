@@ -16,8 +16,7 @@ class SFAlertDialog extends StatelessWidget {
   Widget build(BuildContext context) {
     return AlertDialog(
       shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.all(Radius.circular(16.0),
-        ),
+        borderRadius: BorderRadius.all(Radius.circular(16.0)),
       ),
       backgroundColor: backgroundColor ?? AppColors.lightDark,
       insetPadding: EdgeInsets.zero,

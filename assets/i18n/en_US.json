@@ -224,7 +224,6 @@
   "token_and_sleep": "Token andSleep",
   "your_wallet_is_being_made_right_now": "Your wallet is being made right now.",
   "caution_please_check_your_seed_phrase": "Caution: please check your seed phrase from the backup of your Settings. If you do not back up, you will not be able to restore your wallet when you delete the application or when an error occurs.",
-  "secure_wallet": "Secure wallet",
   "create_your_passcode": "Create your passcode",
   "confirm_your_passcode": "Confirm your passcode",
   "deposit_slft": "Deposit SLFT",
@@ -240,8 +239,9 @@
   "pending": "Pending",
   "history": "History",
   "avalanche_wallet": "Avalanche Wallet",
-  "create_a_new_wallet": "Create a new wallet",
-  "import_a_wallet_using_seed_phrase": "Import a wallet using Seed Phrase",
   "your_wallet_is_being_created": "Your wallet is being created",
-  "displays_wallet_warning_info": "Please check your seed phrase in the backup of your settings, write it down on a piece of paper, and store it in a safe place. You are required to enter the seed phrase when you want to restore your wallet."
+  "displays_wallet_warning_info": "Please check your seed phrase in the backup of your settings, write it down on a piece of paper, and store it in a safe place. You are required to enter the seed phrase when you want to restore your wallet.",
+  "secure_wallet": "Secure Wallet",
+  "display_backup_info" : "Your 12-word Seed Phrase is the ONLY way to recover your funds if you lose access to your wallet",
+  "tvl_in_dapps": "Tvl in DApps"
 }

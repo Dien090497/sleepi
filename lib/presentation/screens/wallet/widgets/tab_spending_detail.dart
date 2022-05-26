@@ -28,7 +28,7 @@ class TabSpendingDetail extends StatelessWidget {
                 ),
                 GestureDetector(
                   onTap: () => ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                    content: SFText(keyText: Keys.displaysMessageFromSpendingDetail, style: const TextStyle(color: AppColors.white),),
+    content: SFText(keyText: Keys.displaysMessageFromSpendingDetail, style: TextStyles.white14),
                   )),
                   child: SvgPicture.asset(Ics.icQuestion),
                 ),
@@ -40,7 +40,7 @@ class TabSpendingDetail extends StatelessWidget {
               child: Column(
                 children: [
                   SFCard(
-                    onTap: () => Navigator.pushNamed(context, R.staking),
+                  onTap: () => Navigator.pushNamed(context, R.staking),
                     child: ListTile(
                       leading: Image.asset(Imgs.slft),
                       title: SFText(keyText: Keys.slft, style: TextStyles.lightWhite16, toUpperCase: true),

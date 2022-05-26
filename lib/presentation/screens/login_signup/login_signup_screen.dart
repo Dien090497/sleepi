@@ -8,7 +8,7 @@ import 'package:slee_fi/common/widgets/sf_buttons.dart';
 import 'package:slee_fi/common/widgets/sf_logo.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
 import 'package:slee_fi/common/widgets/sf_textfield.dart';
-import 'package:slee_fi/common/widgets/sf_textfield_send_code.dart';
+import 'package:slee_fi/common/widgets/sf_textfield_text_button.dart';
 import 'package:slee_fi/di/translations/keys.dart';
 import 'package:slee_fi/presentation/screens/login_signup/widgets/login_box.dart';
 
@@ -37,7 +37,7 @@ class LoginSignUpScreen extends StatelessWidget {
                       // hintText: Keys.emailAddress,
                     ),
                     const SizedBox(height: 12),
-                    const SFTextFieldSendCode(
+                    const SFTextFieldTextButton(
                       labelText: Keys.emailVerificationCode,
                     ),
                     const SizedBox(height: 37),

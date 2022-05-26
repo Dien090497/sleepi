@@ -17,30 +17,38 @@ class RestoreWalletScreen extends StatelessWidget {
     return BackgroundWidget(
       child: Scaffold(
         backgroundColor: AppColors.transparent,
-        appBar: SFAppBar(context: context, title: Keys.restoreWallet, textStyle: TextStyles.bold18LightWhite,),
+        appBar: SFAppBar(context: context,
+          title: Keys.restoreWallet,
+          textStyle: TextStyles.bold18LightWhite,),
         body: SafeArea(
           child: Stack(
             children: [
-              Align(alignment: Alignment.bottomCenter,child: Padding(
+              Align(alignment: Alignment.bottomCenter, child: Padding(
                 padding: const EdgeInsets.all(8.0),
-                child: SFButton(text: Keys.importWallet, textStyle: TextStyles.w600WhiteSize16, color: AppColors.blue, onPressed: () {},),
+                child: SFButton(text: Keys.importWallet,
+                  textStyle: TextStyles.w600WhiteSize16,
+                  color: AppColors.blue,
+                  onPressed: () {},),
               ),),
               ListView(
                 padding: const EdgeInsets.symmetric(horizontal: 24.0),
-                children:  [
+                children: [
                   SFCard(
                     margin: const EdgeInsets.only(top: 16.0),
-                    padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 12.0),
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 16.0, vertical: 12.0),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         const SizedBox(height: 24),
-                        SFText(keyText: Keys.emailVerificationCode, style: TextStyles.lightGrey14,),
+                        SFText(keyText: Keys.emailVerificationCode,
+                          style: TextStyles.lightGrey14,),
                         const SizedBox(height: 4,),
                         Container(
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(8),
-                            border: Border.all(color: AppColors.white.withOpacity(0.1)),
+                            border: Border.all(
+                                color: AppColors.white.withOpacity(0.1)),
                           ),
                           padding: const EdgeInsets.only(left: 12, right: 4),
                           child: Row(

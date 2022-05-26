@@ -27,8 +27,8 @@ import 'package:slee_fi/presentation/screens/setting_permission/widgets/healthca
 import 'package:slee_fi/presentation/screens/setting_permission/widgets/motion_data_screen.dart';
 import 'package:slee_fi/presentation/screens/setting_permission/widgets/notification_screen.dart';
 import 'package:slee_fi/presentation/screens/setting_wallet/setting_wallet_screen.dart';
-import 'package:slee_fi/presentation/screens/staking/layouts/deposit_slft_screen.dart';
-import 'package:slee_fi/presentation/screens/staking/layouts/withdraw_slft_screen.dart';
+import 'package:slee_fi/presentation/screens/staking/layout/deposit_slft_screen.dart';
+import 'package:slee_fi/presentation/screens/staking/layout/withdraw_slft_screen.dart';
 import 'package:slee_fi/presentation/screens/staking/staking_screen.dart';
 import 'package:slee_fi/presentation/screens/staking/widgets/taking_screen.dart';
 import 'package:slee_fi/presentation/screens/trade/trade_screen.dart';

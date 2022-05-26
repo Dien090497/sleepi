@@ -17,13 +17,17 @@ class WalletCreateScreen extends StatelessWidget {
     return BackgroundWidget(
       child: Scaffold(
         backgroundColor: AppColors.transparent,
-        appBar: SFAppBar(context: context, title: Keys.createWallet, textStyle: TextStyles.bold18LightWhite,),
+        appBar: SFAppBar(context: context,
+          title: Keys.createWallet,
+          textStyle: TextStyles.bold18LightWhite,),
         body: SafeArea(
           child: Stack(
             children: [
-              Align(alignment: Alignment.bottomCenter,child: Padding(
+              Align(alignment: Alignment.bottomCenter, child: Padding(
                 padding: const EdgeInsets.all(8.0),
-                child: SFButton(text: Keys.createWallet, textStyle: TextStyles.w600WhiteSize16, color: AppColors.blue,
+                child: SFButton(text: Keys.createWallet,
+                  textStyle: TextStyles.w600WhiteSize16,
+                  color: AppColors.blue,
                   onPressed: () {
 
                   },
@@ -31,39 +35,42 @@ class WalletCreateScreen extends StatelessWidget {
               ),),
               ListView(
                 padding: const EdgeInsets.symmetric(horizontal: 24.0),
-                children:  [
+                children: [
                   SFCard(
                     margin: const EdgeInsets.only(top: 16.0),
-                    padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 24.0),
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 16.0, vertical: 24.0),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        SFText(keyText: Keys.emailVerificationCode, style: TextStyles.lightGrey14,),
+                        SFText(keyText: Keys.emailVerificationCode,
+                          style: TextStyles.lightGrey14,),
                         const SizedBox(height: 4,),
                         Container(
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(8),
-                            border: Border.all(color: AppColors.white.withOpacity(0.1)),
+                            border: Border.all(
+                                color: AppColors.white.withOpacity(0.1)),
                           ),
                           padding: const EdgeInsets.only(left: 12, right: 4),
                           child: Row(
                             children: const [
                               Expanded(
                                 child: SFTextField(
-// hintText: Keys.emailVerification,
                                   noBorder: true,
                                 ),
                               ),
                               SFTextButton(
                                 text: Keys.sendCode,
                                 textStyle: TextStyles.blue12,
-// color: Colors.transparent,
                               ),
                             ],
                           ),
                         ),
                         const SizedBox(height: 16),
-                        SFText(keyText: "You have already created a wallet  address. If you want to create a new wallet, please verify and continue.", style: TextStyles.lightGrey16,)
+                        SFText(
+                          keyText: "You have already created a wallet  address. If you want to create a new wallet, please verify and continue.",
+                          style: TextStyles.lightGrey16,)
                       ],
                     ),
                   ),
