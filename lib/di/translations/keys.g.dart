@@ -564,6 +564,16 @@ class Keys {
 
   static const String telegram = 'telegram';
 
+  static const String sell = 'sell';
+
+  static const String recycle = 'recycle';
+
+  static const String flexibleBed = 'flexible_bed';
+
+  static const String bedMint = 'bed_mint';
+
+  static const String mintFrom = 'mint_from';
+
   static const String introduceHowToPlay = 'introduce.how_to_play';
 
   static const String introduceWhitePaper = 'introduce.white_paper';

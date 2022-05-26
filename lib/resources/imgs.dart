@@ -5,7 +5,9 @@ class Imgs {
 
   static const String avax = 'assets/images/avax.png';
   static const String background = 'assets/images/background.png';
+  static const String bedroomGacha = 'assets/images/bedroom_gacha.png';
   static const String binance = 'assets/images/binance.png';
+  static const String borderBed = 'assets/images/borderBed.png';
   static const String gacha = 'assets/images/gacha.png';
   static const String healthcare = 'assets/images/healthcare.png';
   static const String homePage = 'assets/images/home_page.png';
@@ -39,7 +41,9 @@ class Imgs {
   static const List<String> values = [
     avax,
     background,
+    bedroomGacha,
     binance,
+    borderBed,
     gacha,
     healthcare,
     homePage,

@@ -10,9 +10,9 @@ import 'package:slee_fi/presentation/screens/gacha/gacha_result_bed_screen.dart'
 import 'package:slee_fi/presentation/screens/gacha/gacha_result_overview.dart';
 import 'package:slee_fi/presentation/screens/home/layout/feed_back_screen.dart';
 import 'package:slee_fi/presentation/screens/import_wallet/import_wallet_screen.dart';
-import 'package:slee_fi/presentation/screens/info_nft/info_nft_screen.dart';
-import 'package:slee_fi/presentation/screens/info_nft/layout/mint_screen.dart';
-import 'package:slee_fi/presentation/screens/info_nft/layout/recycle_screen.dart';
+import 'package:slee_fi/presentation/screens/info_individual/info_individual_screen.dart';
+import 'package:slee_fi/presentation/screens/info_individual/layout/mint_screen.dart';
+import 'package:slee_fi/presentation/screens/info_individual/layout/recycle_screen.dart';
 import 'package:slee_fi/presentation/screens/item_selection/item_selection_screen.dart';
 import 'package:slee_fi/presentation/screens/login_signup/login_signup_screen.dart';
 import 'package:slee_fi/presentation/screens/passcode/create_passcode_screen.dart';
@@ -100,7 +100,7 @@ class AppRoutes {
     R.gacha500TimesChance: (_) => const GachaChance500Screen(),
     R.gachaResultBed: (_) => const GachaResultBedScreen(),
     R.gachaResultOverview: (_) => const GachaResultOverview(),
-    R.nftInfo: (_) => const InfoNftScreen(),
+    R.nftInfo: (_) => const InfoIndividualScreen(),
     R.mint: (_) => const MintScreen(),
     R.wallet: (_) => const WalletScreen(),
     R.staking: (_) => const StakingScreen(),

@@ -3,8 +3,8 @@ import 'package:flutter_svg/svg.dart';
 import 'package:slee_fi/common/routes/app_routes.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
+import 'package:slee_fi/common/widgets/sf_buttons.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
-import 'package:slee_fi/common/widgets/sf_text_border.dart';
 import 'package:slee_fi/di/translations/keys.dart';
 import 'package:slee_fi/resources/resources.dart';
 
@@ -70,30 +70,33 @@ class MiddleBed extends StatelessWidget {
               const SizedBox(height: 32),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
-                children: const [
-                  Spacer(),
-                  SFTextBorder(
+                children: [
+                  const Spacer(),
+                  SFButton(
                     text: 'IDIDID',
-                    textColor: AppColors.blue,
+                    textStyle: TextStyles.blue14,
+                    color: Colors.white.withOpacity(0.05),
                     radius: 50,
                   ),
-                  SizedBox(
+                  const SizedBox(
                     width: 8,
                   ),
-                  SFTextBorder(
+                  SFButton(
                     text: '100/100',
-                    textColor: AppColors.green,
+                    textStyle: TextStyles.green14,
+                    color: Colors.white.withOpacity(0.05),
                     radius: 50,
                   ),
-                  SizedBox(
+                  const SizedBox(
                     width: 8,
                   ),
-                  SFTextBorder(
+                  SFButton(
                     text: 'Lv9999',
-                    textColor: AppColors.yellow,
+                    textStyle: TextStyles.yellow14,
+                    color: Colors.white.withOpacity(0.05),
                     radius: 50,
                   ),
-                  Spacer(),
+                  const Spacer(),
                 ],
               ),
               const SizedBox(height: 16),

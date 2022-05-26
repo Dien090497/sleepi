@@ -265,5 +265,10 @@
   "download": "Download",
   "twitter": "Twitter",
   "facebook": "Facebook",
-  "telegram": "Telegram"
+  "telegram": "Telegram",
+  "sell": "Sell",
+  "recycle": "Recycle",
+  "flexible_bed": "Flexible Bed",
+  "bed_mint": "Bed Mint",
+  "mint_from": "Minted From"
 }
