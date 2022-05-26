@@ -17,16 +17,19 @@ class RestoreWalletScreen extends StatelessWidget {
     return BackgroundWidget(
       child: Scaffold(
         backgroundColor: AppColors.transparent,
-        appBar: SFAppBar(context: context,
+        appBar: SFAppBar(
+          context: context,
           title: Keys.restoreWallet,
-          textStyle: TextStyles.bold18LightWhite,),
+          textStyle: TextStyles.bold18LightWhite,
+        ),
         body: SafeArea(
           child: Stack(
             children: [
               Align(
                   alignment: Alignment.bottomCenter,
                   child: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 8.0),
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 24.0, vertical: 8.0),
                     child: SFButton(
                       text: Keys.importWallet,
                       textStyle: TextStyles.w600WhiteSize16,
@@ -35,8 +38,7 @@ class RestoreWalletScreen extends StatelessWidget {
                       color: AppColors.blue,
                       onPressed: () {},
                     ),
-                  )
-              ),
+                  )),
               ListView(
                 padding: const EdgeInsets.symmetric(horizontal: 24.0),
                 children: [
@@ -48,9 +50,13 @@ class RestoreWalletScreen extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         const SizedBox(height: 24),
-                        SFText(keyText: Keys.emailVerificationCode,
-                          style: TextStyles.lightGrey14,),
-                        const SizedBox(height: 4,),
+                        SFText(
+                          keyText: Keys.emailVerificationCode,
+                          style: TextStyles.lightGrey14,
+                        ),
+                        const SizedBox(
+                          height: 4,
+                        ),
                         Container(
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(8),

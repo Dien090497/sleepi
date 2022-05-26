@@ -51,10 +51,11 @@ class AppColors {
 
   static const red = Color(0xFFFF511A);
 
-  static LinearGradient gradientBlue = LinearGradient(
-      colors: [const Color(0xFFC4C4C4).withOpacity(0), const Color(0xFF18A0FB).withOpacity(0.01), const Color(0xFF426BFF)],
-      begin: Alignment.topCenter,
-      end: Alignment.bottomCenter);
+  static LinearGradient gradientBlue = LinearGradient(colors: [
+    const Color(0xFFC4C4C4).withOpacity(0),
+    const Color(0xFF18A0FB).withOpacity(0.01),
+    const Color(0xFF426BFF)
+  ], begin: Alignment.topCenter, end: Alignment.bottomCenter);
 
   static const gradientBlueAccent = LinearGradient(
       colors: [Color(0xFF62519F), Color(0xFF396CBB), Color(0xFF549CBF)],
@@ -72,7 +73,7 @@ class AppColors {
       begin: Alignment.topCenter,
       end: Alignment.bottomCenter);
 
-  static LinearGradient gradientWhiteBorderLeftToRight= LinearGradient(
+  static LinearGradient gradientWhiteBorderLeftToRight = LinearGradient(
       colors: [Colors.white.withOpacity(0), Colors.white.withOpacity(0.2)],
       begin: Alignment.centerLeft,
       end: Alignment.centerRight);
@@ -81,7 +82,6 @@ class AppColors {
       colors: [Colors.white.withOpacity(0.2), Colors.white.withOpacity(0)],
       begin: Alignment.centerLeft,
       end: Alignment.centerRight);
-
 
   static const gradientROI = LinearGradient(
       colors: [Color(0xFF1a1f37), Color(0xFF211a37)],

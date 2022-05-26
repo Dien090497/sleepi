@@ -35,7 +35,7 @@ class SFDialog extends StatelessWidget {
       child: Container(
         width: 1000,
         decoration: BoxDecoration(
-		 borderRadius: BorderRadius.circular(16),
+          borderRadius: BorderRadius.circular(16),
           color: backgroundColor ?? AppColors.lightDark,
         ),
         padding: padding ?? const EdgeInsets.all(8),

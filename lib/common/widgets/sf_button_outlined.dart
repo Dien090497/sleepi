@@ -29,7 +29,6 @@ class SFButtonOutLined extends StatelessWidget {
     return OutlinedButton(
       style: OutlinedButton.styleFrom(
         backgroundColor: Colors.transparent,
-
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(100),
         ),

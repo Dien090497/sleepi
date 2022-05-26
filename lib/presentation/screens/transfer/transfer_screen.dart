@@ -31,13 +31,15 @@ class TransferScreen extends StatelessWidget {
                     height: 32.0,
                   ),
                   TransferWidget(),
-                  SizedBox(height: 40,),
+                  SizedBox(
+                    height: 40,
+                  ),
                   Expanded(child: TransferList()),
                 ],
               ),
               Align(
                 alignment: Alignment.bottomCenter,
-                child:  Padding(
+                child: Padding(
                   padding: const EdgeInsets.all(12.0),
                   child: SFButton(
                     text: Keys.confirmTransfer,
@@ -45,9 +47,11 @@ class TransferScreen extends StatelessWidget {
                     width: double.infinity,
                     color: AppColors.blue,
                     onPressed: () {
-                      showDialog(context: context, builder: (_) {
-                        return const PopUpConfirmTransfer();
-                      });
+                      showDialog(
+                          context: context,
+                          builder: (_) {
+                            return const PopUpConfirmTransfer();
+                          });
                     },
                   ),
                 ),

@@ -13,9 +13,7 @@ class MiddleBed extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final Size size = MediaQuery
-        .of(context)
-        .size;
+    final Size size = MediaQuery.of(context).size;
     return Column(
       children: [
         const SizedBox(
@@ -37,8 +35,7 @@ class MiddleBed extends StatelessWidget {
           alignment: Alignment.center,
           decoration: BoxDecoration(
             color: Colors.white.withOpacity(0.05),
-            borderRadius:
-            BorderRadius.circular(16),
+            borderRadius: BorderRadius.circular(16),
           ),
           child: Column(
             children: [
@@ -48,13 +45,9 @@ class MiddleBed extends StatelessWidget {
               ),
               const SizedBox(height: 24),
               Padding(
-                padding:
-                const EdgeInsets.symmetric(
-                    horizontal: 7),
+                padding: const EdgeInsets.symmetric(horizontal: 7),
                 child: Row(
-                  mainAxisAlignment:
-                  MainAxisAlignment
-                      .spaceBetween,
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     const Icon(
                       Icons.arrow_back_ios,
@@ -62,16 +55,13 @@ class MiddleBed extends StatelessWidget {
                     ),
                     GestureDetector(
                       onTap: () {
-                        Navigator.pushNamed(
-                            context, R.nftInfo,
+                        Navigator.pushNamed(context, R.nftInfo,
                             arguments: false);
                       },
-                      child: SvgPicture.asset(
-                          Ics.sleep),
+                      child: SvgPicture.asset(Ics.sleep),
                     ),
                     const Icon(
-                      Icons
-                          .arrow_forward_ios_sharp,
+                      Icons.arrow_forward_ios_sharp,
                       color: AppColors.lightGrey,
                     ),
                   ],
@@ -79,8 +69,7 @@ class MiddleBed extends StatelessWidget {
               ),
               const SizedBox(height: 32),
               Row(
-                mainAxisAlignment:
-                MainAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: const [
                   Spacer(),
                   SFTextBorder(

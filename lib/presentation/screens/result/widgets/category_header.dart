@@ -94,19 +94,29 @@ class CategoryHeader extends StatelessWidget {
                   const Spacer(),
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                    child: Text('$earning SLFT', style: TextStyles.bold24Blue,),
+                    child: Text(
+                      '$earning SLFT',
+                      style: TextStyles.bold24Blue,
+                    ),
                   ),
                   const Padding(
                     padding: EdgeInsets.symmetric(horizontal: 16.0),
-                    child: Text('~ 100 USD', style: TextStyles.lightGrey12,),
+                    child: Text(
+                      '~ 100 USD',
+                      style: TextStyles.lightGrey12,
+                    ),
                   ),
-                  const SizedBox(height: 29,),
+                  const SizedBox(
+                    height: 29,
+                  ),
                 ],
               ),
             ),
           ],
         ),
-        const SizedBox(height: 16,),
+        const SizedBox(
+          height: 16,
+        ),
         Row(
           children: [
             Container(
@@ -143,10 +153,15 @@ class CategoryHeader extends StatelessWidget {
                       )
                     ],
                   ),
-                  const SizedBox(height: 20,),
+                  const SizedBox(
+                    height: 20,
+                  ),
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                    child: Text(sleepDuration, style: TextStyles.bold24Green,),
+                    child: Text(
+                      sleepDuration,
+                      style: TextStyles.bold24Green,
+                    ),
                   ),
                 ],
               ),
@@ -187,10 +202,15 @@ class CategoryHeader extends StatelessWidget {
                       )
                     ],
                   ),
-                  const SizedBox(height: 20,),
+                  const SizedBox(
+                    height: 20,
+                  ),
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                    child: SFText(keyText:'$score/100', style: TextStyles.bold24Yellow,),
+                    child: SFText(
+                      keyText: '$score/100',
+                      style: TextStyles.bold24Yellow,
+                    ),
                   ),
                 ],
               ),

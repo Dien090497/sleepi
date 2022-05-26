@@ -9,7 +9,8 @@ class SFImageBorder extends StatelessWidget {
     required this.icon,
     required this.onTap,
     this.radius = 100,
-    this.size = const ui.Size(40, 40), this.iconColor,
+    this.size = const ui.Size(40, 40),
+    this.iconColor,
   }) : super(key: key);
 
   final String icon;
@@ -28,7 +29,10 @@ class SFImageBorder extends StatelessWidget {
         color: Colors.white.withOpacity(0.05),
         borderRadius: BorderRadius.circular(radius),
       ),
-      child: SFIcon(icon, color: iconColor,),
+      child: SFIcon(
+        icon,
+        color: iconColor,
+      ),
     );
   }
 }

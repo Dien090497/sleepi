@@ -86,8 +86,8 @@ class TextStyles {
     color: AppColors.white,
     decoration: TextDecoration.underline,
   );
-  static const w700LightGreySize14 =
-  TextStyle(fontSize: 14, color: AppColors.lightGrey, fontWeight: FontWeight.w700);
+  static const w700LightGreySize14 = TextStyle(
+      fontSize: 14, color: AppColors.lightGrey, fontWeight: FontWeight.w700);
   static const lightWhite14 =
       TextStyle(fontSize: 14, color: AppColors.lightWhite);
   static const lightWhite16 =
@@ -160,5 +160,4 @@ class TextStyles {
       fontSize: 16, color: AppColors.yellow, fontStyle: FontStyle.italic);
   static const labelStyle = TextStyle(
       fontSize: 16, color: AppColors.lightGrey, fontStyle: FontStyle.normal);
-
 }

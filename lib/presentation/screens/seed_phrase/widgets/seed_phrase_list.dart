@@ -13,24 +13,28 @@ class SeedPhraseList extends StatelessWidget {
   Widget build(BuildContext context) {
     return SFCard(
       margin: const EdgeInsets.all(16.0),
-      child : ListView.builder(
+      child: ListView.builder(
           itemCount: 15,
-          itemBuilder: (BuildContext context,int index){
+          itemBuilder: (BuildContext context, int index) {
             return Column(
               children: [
                 GestureDetector(
                   onTap: () => Navigator.pushNamed(context, R.showSeedPhrase),
                   child: SFListTile(
-                    text: "${index +1}",
-                    trailing: SFText(keyText: "-----", style: TextStyles.lightGrey14,),
+                    text: "${index + 1}",
+                    trailing: SFText(
+                      keyText: "-----",
+                      style: TextStyles.lightGrey14,
+                    ),
                   ),
                 ),
-                Divider( color: AppColors.lightWhite.withOpacity(0.05), height: 1, ),
-
+                Divider(
+                  color: AppColors.lightWhite.withOpacity(0.05),
+                  height: 1,
+                ),
               ],
             );
-          }
-      ),
+          }),
     );
   }
 }

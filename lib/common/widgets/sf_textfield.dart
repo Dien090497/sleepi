@@ -44,10 +44,13 @@ class SFTextField extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         showLabel
-            ?  Padding(
-              padding: const EdgeInsets.only(bottom: 4),
-              child: SFText(keyText: labelText ?? "", style: TextStyles.lightGrey14,),
-            )
+            ? Padding(
+                padding: const EdgeInsets.only(bottom: 4),
+                child: SFText(
+                  keyText: labelText ?? "",
+                  style: TextStyles.lightGrey14,
+                ),
+              )
             : const SizedBox(),
         TextField(
           decoration: InputDecoration(

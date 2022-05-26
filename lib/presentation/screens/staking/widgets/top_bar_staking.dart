@@ -7,7 +7,8 @@ import 'package:slee_fi/di/translations/keys.dart';
 import 'package:slee_fi/resources/resources.dart';
 
 class TopBarStaking extends StatelessWidget {
-  const TopBarStaking({this.valueGold, this.valueSilver, Key? key}) : super(key: key);
+  const TopBarStaking({this.valueGold, this.valueSilver, Key? key})
+      : super(key: key);
 
   final double? valueGold;
   final double? valueSilver;
@@ -15,7 +16,9 @@ class TopBarStaking extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 20,),
+      padding: const EdgeInsets.symmetric(
+        vertical: 20,
+      ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
@@ -29,22 +32,31 @@ class TopBarStaking extends StatelessWidget {
               onTap: () {
                 Navigator.pushNamed(context, R.passcode);
               },
-              child:Container(
-                padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 10),
+              child: Container(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 8, vertical: 10),
                 decoration: BoxDecoration(
-                  border: Border.all(width: 1, color: Colors.white.withOpacity(0.15)),
+                  border: Border.all(
+                      width: 1, color: Colors.white.withOpacity(0.15)),
                   borderRadius: BorderRadius.circular(100),
                 ),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
-                    ItemResource(value: valueSilver ?? 0, url: Ics.icSilver,),
-                    const SizedBox(width: 16,),
-                    ItemResource(value: valueGold ?? 0, url: Ics.icGold,),
+                    ItemResource(
+                      value: valueSilver ?? 0,
+                      url: Ics.icSilver,
+                    ),
+                    const SizedBox(
+                      width: 16,
+                    ),
+                    ItemResource(
+                      value: valueGold ?? 0,
+                      url: Ics.icGold,
+                    ),
                   ],
                 ),
-              )
-          )
+              ))
         ],
       ),
     );

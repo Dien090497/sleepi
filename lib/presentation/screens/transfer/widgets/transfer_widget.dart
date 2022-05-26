@@ -26,41 +26,58 @@ class _TransferWidgetState extends State<TransferWidget> {
         margin: const EdgeInsets.symmetric(vertical: 12.0),
         child: ListView(
             shrinkWrap: true,
-            padding: const EdgeInsets.symmetric(vertical: 16.0, horizontal: 12.0),
+            padding:
+                const EdgeInsets.symmetric(vertical: 16.0, horizontal: 12.0),
             children: [
               Row(
                 children: [
                   Expanded(
                     flex: 2,
-                    child:  Row(
+                    child: Row(
                       mainAxisSize: MainAxisSize.min,
                       children: [
-                        SvgPicture.asset(Ics.icArrowUpRight, color: AppColors.blue,),
+                        SvgPicture.asset(
+                          Ics.icArrowUpRight,
+                          color: AppColors.blue,
+                        ),
                         Padding(
                           padding: const EdgeInsets.only(left: 8.0),
-                          child: SFText(keyText: Keys.from, style: TextStyles.lightGrey12,),
+                          child: SFText(
+                            keyText: Keys.from,
+                            style: TextStyles.lightGrey12,
+                          ),
                         ),
                       ],
                     ),
                   ),
                   Expanded(
                     flex: 5,
-                    child: SFText(keyText: swapText ? Keys.spending : Keys.wallet, style: TextStyles.bold18White),
+                    child: SFText(
+                        keyText: swapText ? Keys.spending : Keys.wallet,
+                        style: TextStyles.bold18White),
                   )
                 ],
               ),
               Row(
-                children:  [
-                  Expanded(child: Divider(height: 1, color: AppColors.white.withOpacity(0.05),)),
+                children: [
+                  Expanded(
+                      child: Divider(
+                    height: 1,
+                    color: AppColors.white.withOpacity(0.05),
+                  )),
                   GestureDetector(
                     onTap: () {
                       setState(() {
                         swapText = !swapText;
                       });
                     },
-                    child:  const CircleAvatar(
+                    child: const CircleAvatar(
                       backgroundColor: AppColors.blue,
-                      child: Icon(Icons.swap_vert, size: 30, color: AppColors.white,),
+                      child: Icon(
+                        Icons.swap_vert,
+                        size: 30,
+                        color: AppColors.white,
+                      ),
                     ),
                   ),
                 ],
@@ -72,7 +89,10 @@ class _TransferWidgetState extends State<TransferWidget> {
                     child: Row(
                       mainAxisSize: MainAxisSize.min,
                       children: [
-                        SvgPicture.asset(Ics.icWallet, color: AppColors.blue,),
+                        SvgPicture.asset(
+                          Ics.icWallet,
+                          color: AppColors.blue,
+                        ),
                         Padding(
                           padding: const EdgeInsets.only(left: 8.0),
                           child: SFText(
@@ -85,12 +105,13 @@ class _TransferWidgetState extends State<TransferWidget> {
                   ),
                   Expanded(
                     flex: 5,
-                    child: SFText(keyText: swapText ? Keys.wallet : Keys.spending, style: TextStyles.bold18White,),
+                    child: SFText(
+                      keyText: swapText ? Keys.wallet : Keys.spending,
+                      style: TextStyles.bold18White,
+                    ),
                   )
                 ],
               ),
-            ]
-        )
-    );
+            ]));
   }
 }

@@ -47,7 +47,8 @@ class TabWalletDetail extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
             BoxButtonWidget(
-              onTap: () => SFModalBottomSheet.show(context, 0.7, const ModalReceiveWallet()),
+              onTap: () => SFModalBottomSheet.show(
+                  context, 0.7, const ModalReceiveWallet()),
               text: Keys.receive,
               assetImage: Ics.icDownload,
             ),
@@ -104,8 +105,13 @@ class TabWalletDetail extends StatelessWidget {
                   child: Row(
                     children: [
                       Image.asset(Imgs.binance),
-                      const SizedBox(width: 8.0,),
-                      SFText(keyText: Keys.buy, style: TextStyles.bold14Yellow,)
+                      const SizedBox(
+                        width: 8.0,
+                      ),
+                      SFText(
+                        keyText: Keys.buy,
+                        style: TextStyles.bold14Yellow,
+                      )
                     ],
                   )),
             ],

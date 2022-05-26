@@ -13,12 +13,22 @@ class PopUpWalletWarning extends StatelessWidget {
     return SFAlertDialog(
       padding: const EdgeInsets.all(20.0),
       children: [
-        const Icon(Icons.warning_amber_outlined, color: AppColors.yellow, size: 32,),
-        Padding(
-            padding: const EdgeInsets.symmetric(vertical: 24.0),
-          child: SFText(keyText: Keys.yourWalletIsBeingCreated, style: TextStyles.bold18LightWhite,),
+        const Icon(
+          Icons.warning_amber_outlined,
+          color: AppColors.yellow,
+          size: 32,
         ),
-        SFText(keyText: Keys.yourWalletIsBeingCreated, style: TextStyles.lightGrey16,)
+        Padding(
+          padding: const EdgeInsets.symmetric(vertical: 24.0),
+          child: SFText(
+            keyText: Keys.yourWalletIsBeingCreated,
+            style: TextStyles.bold18LightWhite,
+          ),
+        ),
+        SFText(
+          keyText: Keys.yourWalletIsBeingCreated,
+          style: TextStyles.lightGrey16,
+        )
       ],
     );
   }

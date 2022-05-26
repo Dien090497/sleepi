@@ -17,30 +17,47 @@ class TabPendingDetail extends StatelessWidget {
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-             const Padding(
-               padding: EdgeInsets.only(right: 8.0),
-               child: Icon(CupertinoIcons.cloud_download, color: AppColors.blue,),
-             ),
-              Expanded(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      SFText(keyText: Keys.confirm, style: TextStyles.bold16Blue,),
-                      const SizedBox(height: 4.0,),
-                      SFText(keyText: "27/04/2022  14:08", style: TextStyles.lightGrey14,),
-                    ],
-                  )
+              const Padding(
+                padding: EdgeInsets.only(right: 8.0),
+                child: Icon(
+                  CupertinoIcons.cloud_download,
+                  color: AppColors.blue,
+                ),
               ),
               Expanded(
                   child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.end,
-                    children: [
-                      SFText(keyText: "+1 NFT", style: TextStyles.bold16Blue,),
-                      const SizedBox(height: 4.0,),
-                      SFText(keyText: "53LqDpU...wihRe3", style: TextStyles.lightGrey14,),
-                    ],
-                  )
-              ),
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  SFText(
+                    keyText: Keys.confirm,
+                    style: TextStyles.bold16Blue,
+                  ),
+                  const SizedBox(
+                    height: 4.0,
+                  ),
+                  SFText(
+                    keyText: "27/04/2022  14:08",
+                    style: TextStyles.lightGrey14,
+                  ),
+                ],
+              )),
+              Expanded(
+                  child: Column(
+                crossAxisAlignment: CrossAxisAlignment.end,
+                children: [
+                  SFText(
+                    keyText: "+1 NFT",
+                    style: TextStyles.bold16Blue,
+                  ),
+                  const SizedBox(
+                    height: 4.0,
+                  ),
+                  SFText(
+                    keyText: "53LqDpU...wihRe3",
+                    style: TextStyles.lightGrey14,
+                  ),
+                ],
+              )),
             ],
           ),
         )

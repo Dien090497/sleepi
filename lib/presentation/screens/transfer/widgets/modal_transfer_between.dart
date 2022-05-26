@@ -35,7 +35,8 @@ class ModalTransferBetween extends StatelessWidget {
           return SFCard(
             child: ListTile(
               leading: SFIcon(urlImages[index]),
-              title: SFText(keyText: keyList[index], style: TextStyles.lightWhite16),
+              title: SFText(
+                  keyText: keyList[index], style: TextStyles.lightWhite16),
               // trailing: SFText(keyText: "xxxxxxxxx", style: TextStyles.lightWhite16,),
             ),
           );

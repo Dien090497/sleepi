@@ -14,10 +14,16 @@ class PopUpAvalancheWallet extends StatelessWidget {
     return SFAlertDialog(
       padding: const EdgeInsets.all(12.0),
       children: [
-        SFText(keyText: Keys.avalancheWallet, style: TextStyles.bold18LightWhite,),
+        SFText(
+          keyText: Keys.avalancheWallet,
+          style: TextStyles.bold18LightWhite,
+        ),
         SFButtonOutLined(title: Keys.createANewWallet, onPressed: () {}),
         const SizedBox(height: 6.0),
-        SFButton(text: Keys.importAWalletUsingSeedPhrase, onPressed: () {},)
+        SFButton(
+          text: Keys.importAWalletUsingSeedPhrase,
+          onPressed: () {},
+        )
       ],
     );
   }

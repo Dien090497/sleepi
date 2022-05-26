@@ -19,10 +19,11 @@ class TransferList extends StatelessWidget {
       alignment: Alignment.center,
       decoration: const BoxDecoration(
         color: AppColors.dark,
-        borderRadius: BorderRadius.only(topLeft: Radius.circular(40), topRight: Radius.circular(40)),
+        borderRadius: BorderRadius.only(
+            topLeft: Radius.circular(40), topRight: Radius.circular(40)),
       ),
       width: double.infinity,
-      padding : const EdgeInsets.all(12.0),
+      padding: const EdgeInsets.all(12.0),
       child: ListView(
         children: [
           SFText(
@@ -33,9 +34,10 @@ class TransferList extends StatelessWidget {
             height: 4.0,
           ),
           SFCard(
-            onTap: () => SFModalBottomSheet.show(context, 0.55, const ModalTransferBetween()),
+            onTap: () => SFModalBottomSheet.show(
+                context, 0.55, const ModalTransferBetween()),
             child: ListTile(
-              leading:  Image.asset(Imgs.avax),
+              leading: Image.asset(Imgs.avax),
               title: SFText(
                 keyText: Keys.avax,
                 toUpperCase: true,
@@ -51,7 +53,7 @@ class TransferList extends StatelessWidget {
           const SizedBox(
             height: 24.0,
           ),
-         const SFTextFieldTextButton(
+          const SFTextFieldTextButton(
             labelText: Keys.amount,
             textButton: Keys.all,
           ),

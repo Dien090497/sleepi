@@ -16,9 +16,11 @@ class SettingWalletScreen extends StatelessWidget {
     return BackgroundWidget(
       child: Scaffold(
         backgroundColor: AppColors.transparent,
-        appBar: SFAppBar(context: context,
+        appBar: SFAppBar(
+          context: context,
           title: Keys.setting,
-          textStyle: TextStyles.bold18LightWhite,),
+          textStyle: TextStyles.bold18LightWhite,
+        ),
         body: SafeArea(
           child: ListView(
             padding: const EdgeInsets.symmetric(horizontal: 24.0),
