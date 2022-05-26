@@ -2,10 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:slee_fi/common/routes/app_routes.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
+import 'package:slee_fi/common/widgets/pop_up_level_up.dart';
+import 'package:slee_fi/common/widgets/sf_dialog.dart';
 import 'package:slee_fi/common/widgets/sf_icon.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
 import 'package:slee_fi/di/translations/keys.dart';
-import 'package:slee_fi/presentation/screens/home/widgets/pop_up_level_up.dart';
 import 'package:slee_fi/presentation/screens/home/widgets/pop_up_repair.dart';
 import 'package:slee_fi/presentation/screens/home/widgets/pop_up_transfer.dart';
 import 'package:slee_fi/resources/resources.dart';
@@ -56,19 +57,30 @@ class BottomBarWidget extends StatelessWidget {
       child: Row(
         children: [
           itemBottomBar(context, Ics.levelUp, Keys.levelUp, () {
-            showDialog(
-              context: context,
-              builder: (context) {
-                return const PopUpLevelUp();
-              },
+            showCustomDialog(
+              context,
+              children: [
+                PopUpLevelUp(
+                    icon: Ics.longBed,
+                    level: 3,
+                    cost: 1,
+                    time: 2300,
+                    onConfirm: () {})
+              ],
             );
           }),
           itemBottomBar(context, Ics.repair, Keys.repair, () {
-            showDialog(
-              context: context,
-              builder: (context) {
-                return const PopUpRepair();
-              },
+            showCustomDialog(
+              context,
+              children: [
+                PopUpRepair(
+                  icon: Ics.shortBed,
+                  cost: 120,
+                  level: 3,
+                  time: 122,
+                  onConfirm: () {},
+                ),
+              ],
             );
           }),
           itemBottomBar(context, Ics.heart, Keys.mint, () {
@@ -79,11 +91,15 @@ class BottomBarWidget extends StatelessWidget {
             Navigator.pushNamed(context, R.recycle);
           }),
           itemBottomBar(context, Ics.transfer, Keys.transfer, () {
-            showDialog(
-              context: context,
-              builder: (context) {
-                return const PopUpTransfer();
-              },
+            showCustomDialog(
+              context,
+              children: [
+                PopUpTransfer(
+                  onConfirm: () {},
+                  valueTransfer: 1,
+                  fee: 1,
+                )
+              ],
             );
           }),
         ],
