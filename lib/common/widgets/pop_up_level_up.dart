@@ -8,12 +8,12 @@ import 'package:slee_fi/common/widgets/sf_icon.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
 import 'package:slee_fi/di/translations/keys.dart';
 
-class PopUpRepair extends StatelessWidget {
-  const PopUpRepair(
+class PopUpLevelUp extends StatelessWidget {
+  const PopUpLevelUp(
       {Key? key,
       required this.icon,
-      required this.cost,
       required this.level,
+      required this.cost,
       required this.time,
       required this.onConfirm,
       this.onCancel})
@@ -45,40 +45,67 @@ class PopUpRepair extends StatelessWidget {
         Column(
           children: [
             SFText(
-              keyText: Keys.repair,
+              keyText: Keys.levelUp,
               style: TextStyles.white1w700size16,
             ),
             const SizedBox(height: 20),
             SFIcon(icon),
             const SizedBox(height: 24),
-            SFText(
-              keyText: Keys.durability,
-              suffix: ' : 78/100',
-              style: TextStyles.white16,
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(vertical: 12),
-              child: Slider(
-                value: 78,
-                min: 0,
-                max: 100,
-                onChanged: (v) {},
+            Container(
+              decoration: BoxDecoration(
+                color: AppColors.blue.withOpacity(0.1),
+                borderRadius: BorderRadius.circular(100),
               ),
+              padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+              child: SFText(keyText: 'Lv $level', style: TextStyles.blue14),
             ),
             const SizedBox(height: 32),
+            Align(
+              alignment: Alignment.centerLeft,
+              child: RichText(
+                text: TextSpan(
+                    text: 'Level up to ',
+                    style: TextStyles.lightGrey14,
+                    children: [
+                      TextSpan(text: 'Lv $level', style: TextStyles.bold14Blue),
+                    ]),
+              ),
+            ),
+            const SizedBox(height: 8),
             SFCard(
               margin: EdgeInsets.zero,
               padding: const EdgeInsets.symmetric(vertical: 24, horizontal: 18),
               child: Row(
                 children: [
                   SFText(
-                    keyText: 'Cost',
+                    keyText: Keys.attributes,
                     style: TextStyles.lightGrey16,
                   ),
                   const SizedBox(width: 4),
                   Expanded(
                     child: SFText(
-                      keyText: '$cost SLFT',
+                      keyText: '+2 Luck',
+                      style: TextStyles.blue16,
+                      textAlign: TextAlign.right,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            const SizedBox(height: 8),
+            SFCard(
+              margin: EdgeInsets.zero,
+              padding: const EdgeInsets.symmetric(vertical: 24, horizontal: 18),
+              child: Row(
+                children: [
+                  SFText(
+                    keyText: Keys.attributes,
+                    style: TextStyles.lightGrey16,
+                  ),
+                  const SizedBox(width: 4),
+                  Expanded(
+                    child: SFText(
+                      keyText: '+2 Luck',
                       style: TextStyles.blue16,
                       textAlign: TextAlign.right,
                     ),

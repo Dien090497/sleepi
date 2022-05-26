@@ -13,77 +13,70 @@ class SendToExternalScreen extends StatelessWidget {
   const SendToExternalScreen({Key? key}) : super(key: key);
 
   void sendDialog(BuildContext context) {
-    showDialog(
-      context: context,
-      builder: (_) {
-        return SFDialog(
-          children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                const SizedBox(width: 44),
-                SFText(
-                  keyText: Keys.send,
-                ),
-                ElevatedButton(
-                  onPressed: () {
-                    Navigator.pop(context);
-                  },
-                  style: ElevatedButton.styleFrom(
-                    shape: const CircleBorder(),
-                  ),
-                  child: const Icon(Icons.close),
-                ),
-              ],
+    showCustomDialog(context, children: [
+      Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          const SizedBox(width: 44),
+          SFText(
+            keyText: Keys.send,
+          ),
+          ElevatedButton(
+            onPressed: () {
+              Navigator.pop(context);
+            },
+            style: ElevatedButton.styleFrom(
+              shape: const CircleBorder(),
             ),
-            const SizedBox(height: 12),
-            Row(
-              children: [
-                SFText(keyText: Keys.fee),
-                const SizedBox(height: 8),
-                Expanded(
-                    child: SFText(
-                        textAlign: TextAlign.right, keyText: '0.0000005 SOL')),
-              ],
-            ),
-            const SizedBox(height: 12),
-            Row(
-              children: [
-                SFText(keyText: Keys.youllSend),
-                const SizedBox(height: 8),
-                Expanded(
-                    child: SFText(
-                        textAlign: TextAlign.right, keyText: '0.60231512 SOL')),
-              ],
-            ),
-            const SizedBox(height: 12),
-            Row(
-              children: [
-                SFText(textAlign: TextAlign.right, keyText: Keys.sendAddress),
-                const SizedBox(width: 8),
-                Expanded(
-                    child: SFText(
-                        textAlign: TextAlign.right,
-                        keyText:
-                            'AmYiQBz5OwerJpA9wIsuvMZnaQI19Lawu8uqQweudjAKsqblxjo821JsqiucSJDNsSqitOs')),
-              ],
-            ),
-            const SizedBox(height: 24),
-            Row(
-              children: const [
-                Expanded(
-                  child: SFButton(text: Keys.cancel),
-                ),
-                SizedBox(width: 12),
-                Expanded(
-                  child: SFButton(text: Keys.confirm),
-                ),
-              ],
-            ),
-          ],
-        );
-      },
-    );
+            child: const Icon(Icons.close),
+          ),
+        ],
+      ),
+      const SizedBox(height: 12),
+      Row(
+        children: [
+          SFText(keyText: Keys.fee),
+          const SizedBox(height: 8),
+          Expanded(
+              child:
+                  SFText(textAlign: TextAlign.right, keyText: '0.0000005 SOL')),
+        ],
+      ),
+      const SizedBox(height: 12),
+      Row(
+        children: [
+          SFText(keyText: Keys.youllSend),
+          const SizedBox(height: 8),
+          Expanded(
+              child: SFText(
+                  textAlign: TextAlign.right, keyText: '0.60231512 SOL')),
+        ],
+      ),
+      const SizedBox(height: 12),
+      Row(
+        children: [
+          SFText(textAlign: TextAlign.right, keyText: Keys.sendAddress),
+          const SizedBox(width: 8),
+          Expanded(
+              child: SFText(
+                  textAlign: TextAlign.right,
+                  keyText:
+                      'AmYiQBz5OwerJpA9wIsuvMZnaQI19Lawu8uqQweudjAKsqblxjo821JsqiucSJDNsSqitOs')),
+        ],
+      ),
+      const SizedBox(height: 24),
+      Row(
+        children: const [
+          Expanded(
+            child: SFButton(text: Keys.cancel),
+          ),
+          SizedBox(width: 12),
+          Expanded(
+            child: SFButton(text: Keys.confirm),
+          ),
+        ],
+      ),
+    ]);
   }
 
   @override
@@ -122,7 +115,7 @@ class SendToExternalScreen extends StatelessWidget {
                     const SizedBox(height: 12),
                     const SFTextField(),
                     const SizedBox(height: 8),
-                    SFText(keyText: Keys.balance, extraText: ': 0 SOL'),
+                    SFText(keyText: Keys.balance, suffix: ': 0 SOL'),
                     const SizedBox(height: 24),
                     Container(
                       decoration: BoxDecoration(

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_date_pickers/flutter_date_pickers.dart' as dp;
 import 'package:slee_fi/common/style/app_colors.dart';
+import 'package:slee_fi/common/widgets/sf_dialog.dart';
 
 class TabMonth extends StatelessWidget {
   const TabMonth({Key? key}) : super(key: key);
@@ -12,17 +13,17 @@ class TabMonth extends StatelessWidget {
       children: [
         GestureDetector(
           onTap: () {
-            showDialog(
-              context: context,
-              builder: (context) {
-                return ChartMonthPicker(
+            showCustomDialog(
+              context,
+              children: [
+                ChartMonthPicker(
                   selectedDate: DateTime.now(),
                   firstAllowedDate:
                       DateTime.now().subtract(const Duration(days: 45)),
                   lastAllowedDate: DateTime.now().add(const Duration(days: 45)),
                   onNewSelected: (month) {},
-                );
-              },
+                )
+              ],
             );
           },
           child: Row(

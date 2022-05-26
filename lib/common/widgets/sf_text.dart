@@ -5,7 +5,7 @@ import 'package:slee_fi/common/style/text_styles.dart';
 class SFText extends Text {
   SFText({
     required String keyText,
-    String extraText = '',
+    String suffix = '',
     String prefix = '',
     Map<String, dynamic>? args,
     TextStyle? style,
@@ -16,8 +16,8 @@ class SFText extends Text {
           toUpperCase
               ? prefix +
                   translate(keyText, args: args).toUpperCase() +
-                  extraText
-              : prefix + translate(keyText, args: args) + extraText,
+                  suffix
+              : prefix + translate(keyText, args: args) + suffix,
           style: style ?? TextStyles.textBasic15,
           textAlign: textAlign,
           key: key,
