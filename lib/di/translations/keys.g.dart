@@ -284,6 +284,8 @@ class Keys {
 
   static const String rent = 'rent';
 
+  static const String earning = 'earning';
+
   static const String filter = 'filter';
 
   static const String use = 'use';
@@ -359,6 +361,8 @@ class Keys {
   static const String wokeUp = 'woke_up';
 
   static const String sleepDuration = 'sleep_duration';
+
+  static const String sleepDurationEnter = 'sleep_duration_enter';
 
   static const String timeInBed = 'time_in_bed';
 
@@ -493,4 +497,10 @@ class Keys {
   static const String createYourPasscode = 'create_your_passcode';
 
   static const String confirmYourPasscode = 'confirm_your_passcode';
+
+  static const String shareYourSleep = 'share_your_sleep';
+
+  static const String sleepQuality = 'sleep_quality';
+
+  static const String share = 'share';
 }
