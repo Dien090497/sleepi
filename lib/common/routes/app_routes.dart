@@ -17,6 +17,11 @@ import 'package:slee_fi/presentation/screens/item_selection/item_selection_scree
 import 'package:slee_fi/presentation/screens/login_signup/login_signup_screen.dart';
 import 'package:slee_fi/presentation/screens/passcode/create_passcode_screen.dart';
 import 'package:slee_fi/presentation/screens/passcode/passcode_screen.dart';
+import 'package:slee_fi/presentation/screens/restore_wallet/restore_wallet_screen.dart';
+import 'package:slee_fi/presentation/screens/result/layout/share_screen.dart';
+import 'package:slee_fi/presentation/screens/result/result_screen.dart';
+import 'package:slee_fi/presentation/screens/seed_phrase/layouts/show_seed_phrase_screen.dart';
+import 'package:slee_fi/presentation/screens/seed_phrase/seed_phrase_screen.dart';
 import 'package:slee_fi/presentation/screens/send_to_external/send_to_external_screen.dart';
 import 'package:slee_fi/presentation/screens/send_to_spending/send_to_spending_screen.dart';
 import 'package:slee_fi/presentation/screens/setting/setting_screen.dart';
@@ -25,12 +30,16 @@ import 'package:slee_fi/presentation/screens/setting_permission/setting_permissi
 import 'package:slee_fi/presentation/screens/setting_permission/widgets/healthcare_screen.dart';
 import 'package:slee_fi/presentation/screens/setting_permission/widgets/motion_data_screen.dart';
 import 'package:slee_fi/presentation/screens/setting_permission/widgets/notification_screen.dart';
+import 'package:slee_fi/presentation/screens/setting_wallet/setting_wallet_screen.dart';
+import 'package:slee_fi/presentation/screens/staking/layout/deposit_slft_screen.dart';
+import 'package:slee_fi/presentation/screens/staking/layout/withdraw_slft_screen.dart';
 import 'package:slee_fi/presentation/screens/staking/staking_screen.dart';
 import 'package:slee_fi/presentation/screens/staking/widgets/taking_screen.dart';
 import 'package:slee_fi/presentation/screens/trade/trade_screen.dart';
 import 'package:slee_fi/presentation/screens/transfer/transfer_screen.dart';
 import 'package:slee_fi/presentation/screens/tutorial/tutorial_screen.dart';
 import 'package:slee_fi/presentation/screens/wallet/wallet_screen.dart';
+import 'package:slee_fi/presentation/screens/wallet_creation_warning/wallet_create_screen.dart';
 import 'package:slee_fi/presentation/screens/wallet_creation_warning/wallet_creation_warning_screen.dart';
 
 class R {
@@ -70,6 +79,15 @@ class R {
   static const String createPasscode = '${_}create_passcode';
   static const String itemSelection = '${_}item_selection';
   static const String question = '${_}question';
+  static const String settingWallet = '${_}setting_wallet';
+  static const String restoreWallet = '${_}restore_wallet';
+  static const String walletCreate = '${_}wallet_create';
+  static const String depositSLFT = '${_}deposit_slft';
+  static const String withdrawSLFT = '${_}withdraw_slft';
+  static const String result = '${_}result';
+  static const String share = '${_}share';
+  static const String seedPhrase = '${_}seed_phrase';
+  static const String showSeedPhrase = '${_}show_seed_phrase';
 }
 
 class AppRoutes {
@@ -108,5 +126,14 @@ class AppRoutes {
     R.walletCreationWarning: (_) => const WalletCreationWarningScreen(),
     R.createPasscode: (_) => const CreatePasscodeScreen(),
     R.itemSelection: (_) => const ItemSelectionScreen(),
+    R.settingWallet: (_) => const SettingWalletScreen(),
+    R.restoreWallet: (_) => const RestoreWalletScreen(),
+    R.walletCreate: (_) => const WalletCreateScreen(),
+    R.depositSLFT: (_) => const DepositSlftScreen(),
+    R.withdrawSLFT: (_) => const WithdrawSlftScreen(),
+    R.result: (_) => const ResultScreen(),
+    R.share: (_) => const ShareScreen(),
+    R.seedPhrase: (_) => const SeedPhraseScreen(),
+    R.showSeedPhrase: (_) => const ShowSeedPhraseScreen(),
   };
 }

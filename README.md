@@ -173,3 +173,7 @@ flutter pub run build_runner watch --delete-conflicting-outputs
 ```dart
 spider build
 ```
+
+```terminal
+xcrun simctl erase all
+```

@@ -10,6 +10,10 @@ class Imgs {
   static const String gacha = 'assets/images/gacha.png';
   static const String healthcare = 'assets/images/healthcare.png';
   static const String homePage = 'assets/images/home_page.png';
+  static const String jewelBlue = 'assets/images/jewel_blue.png';
+  static const String jewelGreen = 'assets/images/jewel_green.png';
+  static const String jewelPurple = 'assets/images/jewel_purple.png';
+  static const String jewelRed = 'assets/images/jewel_red.png';
   static const String jewels = 'assets/images/jewels.png';
   static const String logo = 'assets/images/logo.png';
   static const String lvUp = 'assets/images/lv_up.png';
@@ -18,8 +22,7 @@ class Imgs {
   static const String mint = 'assets/images/mint.png';
   static const String mintShoe = 'assets/images/mint_shoe.png';
   static const String motionData = 'assets/images/motion_data.png';
-  static const String notificationPermission =
-      'assets/images/notification_permission.png';
+  static const String notification = 'assets/images/notification.png';
   static const String productDetail = 'assets/images/product_detail.png';
   static const String qrCodeTest = 'assets/images/qr_code_test.png';
   static const String recyle = 'assets/images/recyle.png';
@@ -42,6 +45,10 @@ class Imgs {
     gacha,
     healthcare,
     homePage,
+    jewelBlue,
+    jewelGreen,
+    jewelPurple,
+    jewelRed,
     jewels,
     logo,
     lvUp,
@@ -50,7 +57,7 @@ class Imgs {
     mint,
     mintShoe,
     motionData,
-    notificationPermission,
+    notification,
     productDetail,
     qrCodeTest,
     recyle,

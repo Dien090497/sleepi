@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:slee_fi/common/routes/app_routes.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/widgets/background_widget.dart';
 import 'package:slee_fi/di/translations/keys.dart';
@@ -19,9 +20,9 @@ class WalletScreen extends StatelessWidget {
         child: Scaffold(
           backgroundColor: AppColors.transparent,
           appBar: AppBar(
-            actions:  [
+            actions: [
               GestureDetector(
-                onTap: () {},
+                onTap: () => Navigator.pushNamed(context, R.settingWallet),
                 child: SvgPicture.asset(Ics.icSetting),
               )
             ],

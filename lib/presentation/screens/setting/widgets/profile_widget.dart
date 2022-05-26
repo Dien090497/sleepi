@@ -16,79 +16,89 @@ class ProfileWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    const icon = Icon(Icons.chevron_right, color: AppColors.lightGrey,);
-    Divider divider = Divider(color: AppColors.lightWhite.withOpacity(0.05), height: 1,);
+    const icon = Icon(
+      Icons.chevron_right,
+      color: AppColors.lightGrey,
+    );
+    Divider divider = Divider(
+      color: AppColors.lightWhite.withOpacity(0.05),
+      height: 1,
+    );
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 12.0, vertical: 24.0),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-        SFText(keyText: Keys.profile,style: TextStyles.lightGrey14,),
-      const SizedBox(height: 12.0,),
-      Container(
-        width: double.infinity,
-        padding: const EdgeInsets.symmetric(horizontal: 16.0),
-        decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(16.0),
-            color: AppColors.white.withOpacity(0.05)
-        ),
-          child: Column(
-            children: [
-              SFListTile(
-                text: Keys.birthYear,
-                trailing:  Row(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    SFText(
-                      keyText: "1998",
-                      style: TextStyles.lightWhite14,
+          SFText(
+            keyText: Keys.profile,
+            style: TextStyles.lightGrey14,
+          ),
+          const SizedBox(
+            height: 12.0,
+          ),
+          Container(
+              width: double.infinity,
+              padding: const EdgeInsets.symmetric(horizontal: 16.0),
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(16.0),
+                  color: AppColors.white.withOpacity(0.05)),
+              child: Column(
+                children: [
+                  SFListTile(
+                    text: Keys.birthYear,
+                    trailing: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        SFText(
+                          keyText: "1998",
+                          style: TextStyles.lightWhite14,
+                        ),
+                        icon,
+                      ],
                     ),
-                    icon,
-                  ],
-                ),
-                onPressed: () => SFModalBottomSheet.show(context, 0.36, const ModalPopUpBirthYear()),
-              ),
-              divider,
-              SFListTile(
-                text: Keys.sex,
-                trailing:  Row(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    SFText(
-                      keyText: "Male",
-                      style: TextStyles.lightWhite14,
+                    onPressed: () => SFModalBottomSheet.show(
+                        context, 0.36, const ModalPopUpBirthYear()),
+                  ),
+                  divider,
+                  SFListTile(
+                      text: Keys.sex,
+                      trailing: Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          SFText(
+                            keyText: "Male",
+                            style: TextStyles.lightWhite14,
+                          ),
+                          icon,
+                        ],
+                      ),
+                      onPressed: () => SFModalBottomSheet.show(
+                          context, 0.36, const ModalPopUpSex())),
+                  divider,
+                  SFListTile(
+                    text: Keys.email,
+                    trailing: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        SFText(
+                          keyText: "sample@aaa.com",
+                          style: TextStyles.lightWhite14,
+                        ),
+                        icon,
+                      ],
                     ),
-                    icon,
-                  ],
-                ),
-                onPressed: () => SFModalBottomSheet.show(context, 0.36, const ModalPopUpSex())
-              ),
-              divider,
-              SFListTile(
-                text: Keys.email,
-                trailing: Row(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    SFText(
-                      keyText: "sample@aaa.com",
-                      style: TextStyles.lightWhite14,
-                    ),
-                   icon,
-                  ],
-                ),
-                onPressed:  () => Navigator.pushNamed(context, R.email),
-              ),
-              divider,
-              SFListTile(
-                text: Keys.changePassword,
-                trailing: icon,
-                onPressed: () => Navigator.pushNamed(context, R.changePassword),
-              ),
-            ],
-          )
-      ),
-
+                    onPressed: () => Navigator.pushNamed(context, R.email),
+                  ),
+                  divider,
+                  SFListTile(
+                    text: Keys.changePassword,
+                    trailing: icon,
+                    onPressed: () =>
+                        Navigator.pushNamed(context, R.changePassword),
+                  ),
+                ],
+              )),
           const SizedBox(
             height: 20.0,
           ),

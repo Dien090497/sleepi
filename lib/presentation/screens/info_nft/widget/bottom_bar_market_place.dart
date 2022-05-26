@@ -14,9 +14,8 @@ class BottomBarMarketPlaceWidget extends StatelessWidget {
       child: Container(
         decoration: BoxDecoration(
             color: AppColors.greyBottomNavBar,
-          borderRadius: BorderRadius.circular(25),
-          border: Border.all(color: AppColors.primary)
-        ),
+            borderRadius: BorderRadius.circular(25),
+            border: Border.all(color: AppColors.primary)),
         child: Padding(
           padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 15),
           child: Row(

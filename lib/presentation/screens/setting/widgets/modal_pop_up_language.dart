@@ -10,8 +10,11 @@ class ModalPopUpLanguage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    List <Widget> language = [
-      SFText(keyText: Keys.japanese, style: TextStyles.bold16LightWhite,),
+    List<Widget> language = [
+      SFText(
+        keyText: Keys.japanese,
+        style: TextStyles.bold16LightWhite,
+      ),
       SFText(keyText: Keys.english, style: TextStyles.bold16LightWhite),
       SFText(keyText: Keys.chinese, style: TextStyles.bold16LightWhite),
     ];
@@ -21,16 +24,18 @@ class ModalPopUpLanguage extends StatelessWidget {
       children: [
         Expanded(
           child: CupertinoPicker(
-            onSelectedItemChanged: (value){
-            },
+            onSelectedItemChanged: (value) {},
             itemExtent: 25,
-            diameterRatio:1,
+            diameterRatio: 1,
             useMagnifier: true,
             magnification: 1.3,
             children: language,
           ),
         ),
-        SFButton(text: Keys.done, color: AppColors.white, onPressed: () => Navigator.pop(context))
+        SFButton(
+            text: Keys.done,
+            color: AppColors.white,
+            onPressed: () => Navigator.pop(context))
       ],
     );
   }

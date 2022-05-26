@@ -8,11 +8,13 @@ import 'package:tab_indicator_styler/tab_indicator_styler.dart';
 class SFSubTabBar extends TabBar {
   SFSubTabBar({
     required List<String> texts,
+    EdgeInsets? padding,
+    bool isScrollable = true,
     Key? key,
   }) : super(
           tabs: List.generate(
               texts.length, (i) => Tab(text: translate(texts[i]))),
-          isScrollable: true,
+          isScrollable: isScrollable,
           labelColor: AppColors.white,
           unselectedLabelColor: AppColors.lightGrey,
           labelStyle: TextStyles.white1w700size16,
@@ -27,7 +29,7 @@ class SFSubTabBar extends TabBar {
           ),
           // indicatorWeight: 5,
           // indicatorColor: AppColors.blue,
-          padding: const EdgeInsets.symmetric(horizontal: 12),
+          padding: padding ?? const EdgeInsets.symmetric(horizontal: 8),
           key: key,
         );
 }

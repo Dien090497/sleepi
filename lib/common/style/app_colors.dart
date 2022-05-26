@@ -3,11 +3,13 @@ import 'package:flutter/material.dart';
 class AppColors {
   static const primary = Color(0xFF000000);
 
-  static const textColor = Color(0xFF000000);
+  static const textColor = Color(0xFFCBD5E1);
 
   static const black = Color(0xFF000000);
 
   static const dark = Color(0xFF060616);
+
+  static const darkPurple = Color(0xFF23193D);
 
   static const darkColor = Color(0xFF181722);
 
@@ -49,23 +51,42 @@ class AppColors {
 
   static const red = Color(0xFFFF511A);
 
+  static LinearGradient gradientBlue = LinearGradient(colors: [
+    const Color(0xFFC4C4C4).withOpacity(0),
+    const Color(0xFF18A0FB).withOpacity(0.01),
+    const Color(0xFF426BFF)
+  ], begin: Alignment.topCenter, end: Alignment.bottomCenter);
+
+  static const gradientBlueAccent = LinearGradient(
+      colors: [Color(0xFF62519F), Color(0xFF396CBB), Color(0xFF549CBF)],
+      begin: Alignment.bottomLeft,
+      end: Alignment.topRight);
+
+  static const bluesDark = Color(0xFF426BFF);
+
   static const gradientBluePurple = LinearGradient(
       colors: [blue, purple],
       begin: Alignment.topLeft,
       end: Alignment.bottomRight);
   static const gradientBlueButton = LinearGradient(
-      colors: [blue, Color(0xFF426BFF)],
+      colors: [blue, bluesDark],
       begin: Alignment.topCenter,
       end: Alignment.bottomCenter);
-  static LinearGradient gradientWhiteBorderLeftToRight= LinearGradient(
+
+  static LinearGradient gradientWhiteBorderLeftToRight = LinearGradient(
       colors: [Colors.white.withOpacity(0), Colors.white.withOpacity(0.2)],
       begin: Alignment.centerLeft,
       end: Alignment.centerRight);
 
-  static LinearGradient gradientWhiteBorderRightToLeft= LinearGradient(
+  static LinearGradient gradientWhiteBorderRightToLeft = LinearGradient(
       colors: [Colors.white.withOpacity(0.2), Colors.white.withOpacity(0)],
       begin: Alignment.centerLeft,
       end: Alignment.centerRight);
+
+  static const gradientROI = LinearGradient(
+      colors: [Color(0xFF1a1f37), Color(0xFF211a37)],
+      begin: Alignment.topLeft,
+      end: Alignment.bottomRight);
 
   static const tutorialBgr = Color(0xff092128);
 

@@ -11,21 +11,20 @@ class AlarmStatusChangeWidget extends StatefulWidget {
 }
 
 class _AlarmStatusChangeState extends State<AlarmStatusChangeWidget> {
-
   bool swAlarm = true;
 
   @override
   Widget build(BuildContext context) {
-    return  SFListTile(
-        text: Keys.alarm,
-        trailing:  SFSwitch(
-          value: swAlarm,
-          onChanged: (value) {
-            setState(() {
-              swAlarm = value;
-            });
-          },
-        ),
+    return SFListTile(
+      text: Keys.alarm,
+      trailing: SFSwitch(
+        value: swAlarm,
+        onChanged: (value) {
+          setState(() {
+            swAlarm = value;
+          });
+        },
+      ),
     );
   }
 }

@@ -17,18 +17,19 @@ class TabItemsBuy extends StatelessWidget {
           padding: const EdgeInsets.symmetric(horizontal: 12),
           child: Container(
             height: 50,
-            decoration: const BoxDecoration(
-                color: AppColors.greyBottomNavBar
-            ),
+            decoration: const BoxDecoration(color: AppColors.greyBottomNavBar),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
-                SFText(keyText: 'Low Price ', style: TextStyles.bold15black,),
+                SFText(
+                  keyText: 'Low Price ',
+                  style: TextStyles.bold15black,
+                ),
                 GestureDetector(
-                  child: SFText(
-                    keyText: 'Filter',
-                    style: TextStyles.bold15black,
-                  ),
+                    child: SFText(
+                      keyText: 'Filter',
+                      style: TextStyles.bold15black,
+                    ),
                     onTap: () {
                       onPress();
                     }),
@@ -40,7 +41,10 @@ class TabItemsBuy extends StatelessWidget {
           child: SFGridView(
             count: 20,
             itemBuilder: (context, i) {
-              return ItemBedBuyWidget(index: i, checkJewelsOrItems: true,);
+              return ItemBedBuyWidget(
+                index: i,
+                checkJewelsOrItems: true,
+              );
             },
           ),
         ),

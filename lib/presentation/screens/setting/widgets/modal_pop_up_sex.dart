@@ -10,8 +10,11 @@ class ModalPopUpSex extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    List <Widget> gender = [
-      SFText(keyText: Keys.female, style: TextStyles.bold16LightWhite,),
+    List<Widget> gender = [
+      SFText(
+        keyText: Keys.female,
+        style: TextStyles.bold16LightWhite,
+      ),
       SFText(keyText: Keys.male, style: TextStyles.bold16LightWhite),
       SFText(keyText: Keys.other, style: TextStyles.bold16LightWhite),
     ];
@@ -21,16 +24,18 @@ class ModalPopUpSex extends StatelessWidget {
       children: [
         Expanded(
           child: CupertinoPicker(
-            onSelectedItemChanged: (value){
-            },
+            onSelectedItemChanged: (value) {},
             itemExtent: 25,
-            diameterRatio:1,
+            diameterRatio: 1,
             useMagnifier: true,
             magnification: 1.3,
             children: gender,
           ),
         ),
-        SFButton(text: Keys.done, color: AppColors.white, onPressed: () => Navigator.pop(context))
+        SFButton(
+            text: Keys.done,
+            color: AppColors.white,
+            onPressed: () => Navigator.pop(context))
       ],
     );
   }

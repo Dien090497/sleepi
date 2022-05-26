@@ -3,12 +3,20 @@ import 'package:slee_fi/common/widgets/sf_gridview.dart';
 import 'package:slee_fi/common/widgets/sf_sub_tab_bar.dart';
 import 'package:slee_fi/di/translations/keys.dart';
 import 'package:slee_fi/presentation/screens/product_detail/widgets/my_jewel_short_widget.dart';
+import 'package:slee_fi/resources/resources.dart';
 
 class TabJewelsDetail extends StatelessWidget {
   const TabJewelsDetail({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    final jewels = [
+      Imgs.jewelGreen,
+      Imgs.jewelPurple,
+      Imgs.jewelBlue,
+      Imgs.jewelRed
+    ];
+
     return DefaultTabController(
       length: 2,
       child: Column(
@@ -21,13 +29,16 @@ class TabJewelsDetail extends StatelessWidget {
             child: TabBarView(
               children: [
                 SFGridView(
-                  count: 20,
+                  count: jewels.length * 3,
+                  childAspectRatio: 1,
                   itemBuilder: (context, i) {
-                    return MyJewelsShortWidget(index: i);
+                    return MyJewelsShortWidget(
+                      icon: jewels[i % jewels.length],
+                    );
                   },
                 ),
                 SFGridView(
-                  count: 20,
+                  count: jewels.length,
                   itemBuilder: (context, i) {
                     return Container();
                   },

@@ -10,7 +10,7 @@ class ChartWidget extends StatefulWidget {
 
 class _ChartWidgetState extends State<ChartWidget> {
   List<Color> gradientColors = [
-    const Color(0xff23b6e6),
+    const Color(0xffC4C4C4),
     const Color(0xff02d39a),
   ];
 
@@ -37,24 +37,6 @@ class _ChartWidgetState extends State<ChartWidget> {
             ),
           ),
         ),
-        // SizedBox(
-        //   width: 60,
-        //   height: 34,
-        //   child: TextButton(
-        //     onPressed: () {
-        //       setState(() {
-        //         showAvg = !showAvg;
-        //       });
-        //     },
-        //     child: Text(
-        //       'avg',
-        //       style: TextStyle(
-        //           fontSize: 12,
-        //           color:
-        //           showAvg ? Colors.white.withOpacity(0.5) : Colors.white),
-        //     ),
-        //   ),
-        // ),
       ],
     );
   }

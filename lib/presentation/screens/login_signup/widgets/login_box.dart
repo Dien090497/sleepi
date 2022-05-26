@@ -21,7 +21,9 @@ class LoginBox extends StatelessWidget {
         // ),
         color: AppColors.lightWhite.withOpacity(0.05),
         borderRadius: BorderRadius.circular(24),
-        border: Border.all(color: AppColors.white.withOpacity(0.07),),
+        border: Border.all(
+          color: AppColors.white.withOpacity(0.07),
+        ),
       ),
       padding:
           padding ?? const EdgeInsets.symmetric(vertical: 24, horizontal: 28),

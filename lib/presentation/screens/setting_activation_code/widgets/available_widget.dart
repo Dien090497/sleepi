@@ -18,9 +18,17 @@ class AvailableWidget extends StatelessWidget {
         child: ListView(
           shrinkWrap: true,
           children: [
-            Center(child: SFText(keyText: Keys.availableTotal, style: TextStyles.lightGrey16,)),
+            Center(
+                child: SFText(
+              keyText: Keys.availableTotal,
+              style: TextStyles.lightGrey16,
+            )),
             const SizedBox(height: 8.0),
-            Center(child: SFText(keyText: "0/3", style: TextStyles.bold30White,))
+            Center(
+                child: SFText(
+              keyText: "0/3",
+              style: TextStyles.bold30White,
+            ))
           ],
         ),
       ),

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:slee_fi/common/routes/app_routes.dart';
 import 'package:slee_fi/common/widgets/background_widget.dart';
 import 'package:slee_fi/common/widgets/sf_bottom_navigator_home.dart';
 import 'package:slee_fi/presentation/blocs/bottom_navigation/bottom_navigation_bloc.dart';
@@ -17,11 +16,11 @@ class BottomNavigationScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
-      Future.delayed(const Duration(milliseconds: 600), () {
-        Navigator.pushNamed(context, R.tutorial);
-      });
-    });
+    // WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+    //   Future.delayed(const Duration(milliseconds: 600), () {
+    //     Navigator.pushNamed(context, R.tutorial);
+    //   });
+    // });
 
     return BackgroundWidget(
       child: BlocBuilder<BottomNavigationBloc, BottomNavigationState>(
@@ -40,7 +39,7 @@ class BottomNavigationScreen extends StatelessWidget {
               children: const [
                 HomeScreen(),
                 GachaScreen(),
-                ProductDetaiScreen(),
+                ProductDetailScreen(),
                 ChartScreen(),
                 MarketPlaceScreen(),
               ],

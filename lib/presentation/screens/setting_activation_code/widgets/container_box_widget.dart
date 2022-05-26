@@ -3,7 +3,13 @@ import 'package:slee_fi/common/style/app_colors.dart';
 
 class ContainerBoxWidget extends StatelessWidget {
   const ContainerBoxWidget(
-      {Key? key, required this.child, this.margin, this.padding, this.width, this.height, this.alignment})
+      {Key? key,
+      required this.child,
+      this.margin,
+      this.padding,
+      this.width,
+      this.height,
+      this.alignment})
       : super(key: key);
 
   final Widget child;
@@ -24,13 +30,6 @@ class ContainerBoxWidget extends StatelessWidget {
         decoration: BoxDecoration(
           color: AppColors.white.withOpacity(0.05),
           borderRadius: BorderRadius.circular(16.0),
-          boxShadow:  [
-            BoxShadow(
-              color: AppColors.white.withOpacity(0.05),
-              blurRadius: 4,
-              offset: const Offset(2, 4), // Shadow position
-            ),
-          ],
         ),
         padding: padding,
         child: child,

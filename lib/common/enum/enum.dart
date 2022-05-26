@@ -10,4 +10,3 @@ enum BedType {
 
   const BedType(this.name);
 }
-

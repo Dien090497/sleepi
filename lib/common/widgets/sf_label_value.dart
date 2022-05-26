@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
+import 'package:slee_fi/common/widgets/sf_icon.dart';
+import 'package:slee_fi/common/widgets/sf_text.dart';
 
 class SFLabelValue extends StatelessWidget {
   const SFLabelValue({
@@ -30,30 +31,28 @@ class SFLabelValue extends StatelessWidget {
         borderRadius: BorderRadius.circular(8),
       ),
       child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Flexible(
             flex: 1,
-            child: Text(
-              label,
-              style: styleLabel,
-              maxLines: 1,
+            child: SFText(
+              keyText: label,
+              style: TextStyles.lightGrey16,
             ),
           ),
-          Expanded(
-            child: Container(
-              alignment: Alignment.centerRight,
-              child: Row(
-                children: [
-                  if (icon != null) SvgPicture.asset(icon!),
-                  const SizedBox(
-                    width: 8,
-                  ),
-                  Text(
-                    value,
-                    style: styleValue,
-                  ),
-                ],
-              ),
+          Container(
+            alignment: Alignment.centerRight,
+            child: Row(
+              children: [
+                if (icon != null) SFIcon(icon!),
+                const SizedBox(
+                  width: 8,
+                ),
+                Text(
+                  value,
+                  style: styleValue,
+                ),
+              ],
             ),
           ),
         ],
