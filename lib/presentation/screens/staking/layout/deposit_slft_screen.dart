@@ -20,41 +20,73 @@ class DepositSlftScreen extends StatelessWidget {
         backgroundColor: AppColors.transparent,
         appBar: SFAppBar(context: context, title: Keys.depositSlft, textStyle: TextStyles.bold18LightWhite,),
         body: SafeArea(
-          child: ListView(
-            padding: const EdgeInsets.symmetric(horizontal: 24.0),
-            children:  [
-              SFCard(
-                margin: const EdgeInsets.only(top: 16.0),
-                padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 24.0),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          child: Stack(
+            children: [
+              ListView(
+                padding: const EdgeInsets.symmetric(horizontal: 24.0),
+                children:  [
+                  SFCard(
+                    margin: const EdgeInsets.only(top: 16.0),
+                    padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 24.0),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Expanded(child: SFText(keyText: Keys.yourSlftInSpending, style: TextStyles.lightGrey12,)),
-                        SFText(keyText: "xxxx SLFT", style: TextStyles.lightGrey12,)
-                      ],
-                    ),
-                    const SizedBox(height: 12.0,),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        SFText(keyText: Keys.deposit, style: TextStyles.bold18LightWhite,),
-                        SFButtonOutLined(title: Keys.max, textStyle: TextStyles.bold14Blue, onPressed: () {}),
                         Row(
-                          crossAxisAlignment: CrossAxisAlignment.center,
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            SvgPicture.asset(Ics.icGold),
-                            const SizedBox(width: 6,),
-                            SFText(keyText: "XXX", style: TextStyles.lightWhite16,)
+                            Expanded(child: SFText(keyText: Keys.yourSlftInSpending, style: TextStyles.lightGrey12,)),
+                            SFText(keyText: "xxxx SLFT", style: TextStyles.lightGrey12,)
+                          ],
+                        ),
+                        const SizedBox(height: 12.0,),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            SFText(keyText: Keys.deposit, style: TextStyles.bold18LightWhite,),
+                            SFButtonOutLined(title: Keys.max, textStyle: TextStyles.bold14Blue, onPressed: () {}),
+                            Row(
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                SvgPicture.asset(Ics.icGold),
+                                const SizedBox(width: 6,),
+                                SFText(keyText: "XXX", style: TextStyles.lightWhite16,)
+                              ],
+                            ),
                           ],
                         ),
                       ],
                     ),
-                  ],
-                ),
+                  ),
+                ],
               ),
+              // Align(
+              //     alignment: Alignment.bottomCenter,
+              //     child: Padding(
+              //       padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 8.0),
+              //       child: Column(
+              //         children: [
+              //           SFButton(
+              //             text: Keys.importWallet,
+              //             textStyle: TextStyles.w600WhiteSize16,
+              //             height: 48,
+              //             width: double.infinity,
+              //             color: AppColors.blue,
+              //             onPressed: () {},
+              //           ),
+              //           SizedBox(
+              //               height: 48,
+              //               child: SFButtonOutLined(
+              //                 title: Keys.showContract,
+              //                 textStyle: TextStyles.bold16Blue,
+              //                 borderColor: AppColors.blue,
+              //                 onPressed: () {},
+              //               )
+              //           ),
+              //         ],
+              //       ),
+              //     )
+              // ),
+
             ],
           )
         ),

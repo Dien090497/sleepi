@@ -47,7 +47,7 @@ class TabWalletDetail extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
             BoxButtonWidget(
-			onTap: () => SFModalBottomSheet.show(context, 0.7, const ModalReceiveWallet()),
+              onTap: () => SFModalBottomSheet.show(context, 0.7, const ModalReceiveWallet()),
               text: Keys.receive,
               assetImage: Ics.icDownload,
             ),
@@ -62,7 +62,7 @@ class TabWalletDetail extends StatelessWidget {
               assetImage: Ics.icArrowUpRight,
             ),
             BoxButtonWidget(
-              onTap: () => Navigator.pushNamed(context, R.transfer),
+              onTap: () => Navigator.pushNamed(context, R.trade),
               text: Keys.trade,
               assetImage: Ics.icTransfer,
             ),
@@ -90,7 +90,9 @@ class TabWalletDetail extends StatelessWidget {
                 ],
               ),
               ElevatedButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    // Navigator.pushNamed(context, R.);
+                  },
                   style: ElevatedButton.styleFrom(
                     padding: const EdgeInsets.symmetric(
                         horizontal: 12.0, vertical: 8.0),
@@ -101,7 +103,7 @@ class TabWalletDetail extends StatelessWidget {
                   ),
                   child: Row(
                     children: [
-					  Image.asset(Imgs.binance),
+                      Image.asset(Imgs.binance),
                       const SizedBox(width: 8.0,),
                       SFText(keyText: Keys.buy, style: TextStyles.bold14Yellow,)
                     ],

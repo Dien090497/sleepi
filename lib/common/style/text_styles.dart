@@ -5,6 +5,10 @@ class TextStyles {
   static const h1 = TextStyle(fontSize: 24, color: AppColors.primary);
   static const w600WhiteSize16 = TextStyle(
       fontSize: 16, color: AppColors.white, fontWeight: FontWeight.w600);
+  static const w700WhiteSize14 = TextStyle(
+      fontSize: 14, color: AppColors.white, fontWeight: FontWeight.w600);
+  static const w600LightGreySize16 = TextStyle(
+      fontSize: 16, color: AppColors.lightGrey, fontWeight: FontWeight.w600);
   static const white1w700size16 = TextStyle(
       fontSize: 16, color: AppColors.light1, fontWeight: FontWeight.w700);
   static const white1w700size12 = TextStyle(
@@ -82,6 +86,8 @@ class TextStyles {
     color: AppColors.white,
     decoration: TextDecoration.underline,
   );
+  static const w700LightGreySize14 =
+  TextStyle(fontSize: 14, color: AppColors.lightGrey, fontWeight: FontWeight.w700);
   static const lightWhite14 =
       TextStyle(fontSize: 14, color: AppColors.lightWhite);
   static const lightWhite16 =

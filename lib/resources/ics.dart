@@ -14,6 +14,7 @@ class Ics {
   static const String icArrowUpRight = 'assets/icons/ic_arrow_up_right.svg';
   static const String icCircleQuestion = 'assets/icons/ic_circle_question.svg';
   static const String icDownload = 'assets/icons/ic_download.svg';
+  static const String icEdit = 'assets/icons/ic_edit.svg';
   static const String icGold = 'assets/icons/ic_gold.svg';
   static const String icLock = 'assets/icons/ic_lock.svg';
   static const String icQuestion = 'assets/icons/ic_question.svg';
@@ -50,6 +51,7 @@ class Ics {
     icArrowUpRight,
     icCircleQuestion,
     icDownload,
+    icEdit,
     icGold,
     icLock,
     icQuestion,

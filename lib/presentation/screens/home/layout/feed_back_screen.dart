@@ -5,6 +5,7 @@ import 'package:slee_fi/common/widgets/background_widget.dart';
 import 'package:slee_fi/common/widgets/sf_app_bar.dart';
 import 'package:slee_fi/common/widgets/sf_buttons.dart';
 import 'package:slee_fi/common/widgets/sf_textfield.dart';
+import 'package:slee_fi/di/translations/keys.dart';
 
 class FeedBackScreen extends StatelessWidget {
   const FeedBackScreen({Key? key}) : super(key: key);
@@ -17,7 +18,7 @@ class FeedBackScreen extends StatelessWidget {
           backgroundColor: AppColors.transparent,
           appBar: SFAppBar(
               context: context,
-              title: "Feedback",
+              title: Keys.feedback,
               textStyle: TextStyles.bold18LightWhite),
           body: SafeArea(
             child: Padding(
@@ -41,13 +42,17 @@ class FeedBackScreen extends StatelessWidget {
                     maxLine: 8,
                     maxLength: 100,
                     hintText:
-                        "Notifications may include alerts, sounds, and icon badges. These can be configured in Settings.",
+                        Keys.hintFeedback,
                     hintStyle: TextStyles.lightGrey16,
                   ),
                   const Spacer(),
+                  const Expanded(child: SFTextField()),
+
                   SFButton(
-                    text: 'Submit',
+                    text: Keys.submit,
                     width: size.width,
+                    color: AppColors.blue,
+                    textStyle: TextStyles.w600WhiteSize16,
                   )
                 ],
               ),

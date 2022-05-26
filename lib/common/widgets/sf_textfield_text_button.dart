@@ -11,6 +11,7 @@ class SFTextFieldTextButton extends StatelessWidget {
     this.labelText,
     this.hintText,
     this.textButton,
+    this.textButtonStyle,
     this.hintStyle,
     this.suffix,
     this.suffixIcon,
@@ -23,6 +24,7 @@ class SFTextFieldTextButton extends StatelessWidget {
   final String? labelText;
   final String? hintText;
   final String? textButton;
+  final TextStyle? textButtonStyle;
   final TextStyle? hintStyle;
   final Widget? suffix;
   final Widget? suffixIcon;
@@ -63,7 +65,7 @@ class SFTextFieldTextButton extends StatelessWidget {
               ),
                SFTextButton(
                 text: textButton ?? Keys.sendCode,
-                textStyle: TextStyles.blue12,
+                textStyle: textButtonStyle ?? TextStyles.blue12,
                 // color: Colors.transparent,
               ),
             ],

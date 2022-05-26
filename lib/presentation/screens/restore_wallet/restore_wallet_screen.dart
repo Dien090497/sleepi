@@ -23,13 +23,20 @@ class RestoreWalletScreen extends StatelessWidget {
         body: SafeArea(
           child: Stack(
             children: [
-              Align(alignment: Alignment.bottomCenter, child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: SFButton(text: Keys.importWallet,
-                  textStyle: TextStyles.w600WhiteSize16,
-                  color: AppColors.blue,
-                  onPressed: () {},),
-              ),),
+              Align(
+                  alignment: Alignment.bottomCenter,
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 8.0),
+                    child: SFButton(
+                      text: Keys.importWallet,
+                      textStyle: TextStyles.w600WhiteSize16,
+                      height: 48,
+                      width: double.infinity,
+                      color: AppColors.blue,
+                      onPressed: () {},
+                    ),
+                  )
+              ),
               ListView(
                 padding: const EdgeInsets.symmetric(horizontal: 24.0),
                 children: [
@@ -71,7 +78,7 @@ class RestoreWalletScreen extends StatelessWidget {
                         const SFTextField(
                           maxLine: 10,
                           maxLength: 100,
-                          hintText: "Enter the Seed Phrase word and separate with space",
+                          hintText: Keys.hintRestoreWallet,
                           hintStyle: TextStyles.lightGrey16,
                         ),
                       ],

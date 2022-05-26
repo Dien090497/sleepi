@@ -8,6 +8,7 @@ import 'package:slee_fi/common/widgets/sf_buttons.dart';
 import 'package:slee_fi/common/widgets/sf_card.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
 import 'package:slee_fi/di/translations/keys.dart';
+import 'package:slee_fi/presentation/screens/staking/widgets/pop_up_calculator.dart';
 import 'package:slee_fi/resources/resources.dart';
 
 class StakingList extends StatelessWidget {
@@ -30,7 +31,7 @@ class StakingList extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               SFText(
-                keyText: "TVL IN DAPPS", style: TextStyles.bold24LightWhite,),
+                keyText: Keys.tvlInDapps, style: TextStyles.bold24LightWhite, toUpperCase: true,),
               const SizedBox(height: 24.0,),
               Center(child: SFText(
                 keyText: "2.905B ASTR", style: TextStyles.bold24LightWhite,)),
@@ -86,19 +87,22 @@ class StakingList extends StatelessWidget {
             ],
           ),
         ),
-        const SizedBox(height: 12.0,),
+        const SizedBox(height: 25.0,),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            SFText(keyText: Keys.tvlInSleefi, style: TextStyles.lightGrey14,),
+            SFText(keyText: Keys.stakeTokens, style: TextStyles.lightGrey14,),
             GestureDetector(
-              onTap: () {},
+              onTap: () {
+                showDialog(context: context, builder: (_){
+                  return const PopUpCalculator();
+                });
+              },
               child: SvgPicture.asset(
                   Ics.icQuestion, color: AppColors.lightGrey, width: 22),
             )
           ],
         ),
-        const SizedBox(height: 12.0,),
         SFCard(
           padding: const EdgeInsets.all(24.0),
           child: Column(
@@ -157,6 +161,7 @@ class StakingList extends StatelessWidget {
                         Navigator.pushNamed(context, R.depositSLFT),
                   ),
                   SFButtonOutLined(
+                    borderColor: AppColors.blue,
                     title: Keys.withdraw, textStyle: TextStyles.bold14Blue,
                     onPressed: () =>
                         Navigator.pushNamed(context, R.withdrawSLFT),
@@ -173,14 +178,27 @@ class StakingList extends StatelessWidget {
         ),
         const SizedBox(height: 32.0,),
         Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
-            const SFButton(text: Keys.buySlft,
-                textStyle: TextStyles.bold14LightWhite,
-                color: AppColors.blue),
-            SFButtonOutLined(title: Keys.showContract,
-                textStyle: TextStyles.bold14Blue,
-                onPressed: () {}),
+             Expanded(
+               child: SFButton(
+                  text: Keys.buySlft,
+                  textStyle: TextStyles.bold14LightWhite,
+                  color: AppColors.blue,
+                 onPressed: () {},
+               ),
+             ),
+            const SizedBox(width: 16.0,),
+            Expanded(
+              child: SizedBox(
+                height: 48,
+                child: SFButtonOutLined(
+                    title: Keys.showContract,
+                    textStyle: TextStyles.bold16Blue,
+                    borderColor: AppColors.blue,
+                    onPressed: () {}),
+              ),
+            ),
           ],
         )
       ],

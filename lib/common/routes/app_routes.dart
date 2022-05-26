@@ -20,6 +20,8 @@ import 'package:slee_fi/presentation/screens/passcode/passcode_screen.dart';
 import 'package:slee_fi/presentation/screens/restore_wallet/restore_wallet_screen.dart';
 import 'package:slee_fi/presentation/screens/result/layout/share_screen.dart';
 import 'package:slee_fi/presentation/screens/result/result_screen.dart';
+import 'package:slee_fi/presentation/screens/seed_phrase/layouts/show_seed_phrase_screen.dart';
+import 'package:slee_fi/presentation/screens/seed_phrase/seed_phrase_screen.dart';
 import 'package:slee_fi/presentation/screens/send_to_external/send_to_external_screen.dart';
 import 'package:slee_fi/presentation/screens/send_to_spending/send_to_spending_screen.dart';
 import 'package:slee_fi/presentation/screens/setting/setting_screen.dart';
@@ -84,6 +86,8 @@ class R {
   static const String withdrawSLFT = '${_}withdraw_slft';
   static const String result = '${_}result';
   static const String share = '${_}share';
+  static const String seedPhrase = '${_}seed_phrase';
+  static const String showSeedPhrase = '${_}show_seed_phrase';
 }
 
 class AppRoutes {
@@ -129,5 +133,7 @@ class AppRoutes {
     R.withdrawSLFT: (_) => const WithdrawSlftScreen(),
     R.result: (_) => const ResultScreen(),
     R.share: (_) => const ShareScreen(),
+    R.seedPhrase: (_) => const SeedPhraseScreen(),
+    R.showSeedPhrase: (_) => const ShowSeedPhraseScreen(),
   };
 }

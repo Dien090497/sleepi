@@ -30,7 +30,7 @@ class SFButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: width,
-      height: height,
+      height: height ?? 48,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(radius),
         gradient: gradient,

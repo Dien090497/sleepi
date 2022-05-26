@@ -3,7 +3,13 @@ import 'package:slee_fi/common/style/app_colors.dart';
 
 class SFAlertDialog extends StatelessWidget {
   const SFAlertDialog(
-      {required this.children, Key? key, this.backgroundColor, this.padding, this.height, this.width})
+      {required this.children,
+        Key? key,
+        this.backgroundColor,
+        this.crossAxisAlignment,
+        this.padding,
+        this.height,
+        this.width})
       : super(key: key);
 
   final List<Widget> children;
@@ -11,10 +17,12 @@ class SFAlertDialog extends StatelessWidget {
   final EdgeInsets? padding;
   final double? height;
   final double? width;
+  final CrossAxisAlignment? crossAxisAlignment;
 
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
+
       shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.all(Radius.circular(16.0)),
       ),
@@ -44,8 +52,11 @@ class SFAlertDialog extends StatelessWidget {
                           )
                       )
                   ),
-                  Column(
-                    children: children,
+                  SingleChildScrollView(
+                    child: Column(
+                      crossAxisAlignment: crossAxisAlignment ?? CrossAxisAlignment.center,
+                      children: children,
+                    ),
                   ),
                 ],
               )

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:slee_fi/common/routes/app_routes.dart';
+import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
 import 'package:slee_fi/common/widgets/sf_buttons.dart';
 import 'package:slee_fi/common/widgets/sf_card.dart';
@@ -69,7 +70,20 @@ class TabSpendingDetail extends StatelessWidget {
             const Expanded(child: SpendingDetailList()),
           ],
         ),
-        Align(alignment: Alignment.bottomCenter, child: SFButton(text: Keys.transfer, onPressed: () {},))
+        Align(
+            alignment: Alignment.bottomCenter,
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 8.0),
+              child: SFButton(
+                text: Keys.transfer,
+                textStyle: TextStyles.w600WhiteSize16,
+                height: 48,
+                width: double.infinity,
+                color: AppColors.blue,
+                onPressed: () => Navigator.pushNamed(context, R.transfer),
+              ),
+            )
+        )
       ],
     );
   }

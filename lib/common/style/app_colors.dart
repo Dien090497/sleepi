@@ -49,8 +49,8 @@ class AppColors {
 
   static const red = Color(0xFFFF511A);
 
-  static const gradientBlue = LinearGradient(
-      colors: [Color(0xFFC4C4C4), Color(0xFF18A0FB), Color(0xFF426BFF)],
+  static LinearGradient gradientBlue = LinearGradient(
+      colors: [const Color(0xFFC4C4C4).withOpacity(0), const Color(0xFF18A0FB).withOpacity(0.01), const Color(0xFF426BFF)],
       begin: Alignment.topCenter,
       end: Alignment.bottomCenter);
 
@@ -79,6 +79,12 @@ class AppColors {
       colors: [Colors.white.withOpacity(0.2), Colors.white.withOpacity(0)],
       begin: Alignment.centerLeft,
       end: Alignment.centerRight);
+
+
+  static const gradientROI = LinearGradient(
+      colors: [Color(0xFF1a1f37), Color(0xFF211a37)],
+      begin: Alignment.topLeft,
+      end: Alignment.bottomRight);
 
   static const tutorialBgr = Color(0xff092128);
 
