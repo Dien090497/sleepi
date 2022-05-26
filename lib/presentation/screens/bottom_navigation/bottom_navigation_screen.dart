@@ -18,9 +18,9 @@ class BottomNavigationScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
-      Future.delayed(const Duration(milliseconds: 600), () {
-        Navigator.pushNamed(context, R.tutorial);
-      });
+      // Future.delayed(const Duration(milliseconds: 600), () {
+      //   Navigator.pushNamed(context, R.tutorial);
+      // });
     });
 
     return BackgroundWidget(

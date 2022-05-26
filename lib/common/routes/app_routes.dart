@@ -17,6 +17,8 @@ import 'package:slee_fi/presentation/screens/item_selection/item_selection_scree
 import 'package:slee_fi/presentation/screens/login_signup/login_signup_screen.dart';
 import 'package:slee_fi/presentation/screens/passcode/create_passcode_screen.dart';
 import 'package:slee_fi/presentation/screens/passcode/passcode_screen.dart';
+import 'package:slee_fi/presentation/screens/result/layout/share_screen.dart';
+import 'package:slee_fi/presentation/screens/result/result_screen.dart';
 import 'package:slee_fi/presentation/screens/send_to_external/send_to_external_screen.dart';
 import 'package:slee_fi/presentation/screens/send_to_spending/send_to_spending_screen.dart';
 import 'package:slee_fi/presentation/screens/setting/setting_screen.dart';
@@ -70,6 +72,8 @@ class R {
   static const String createPasscode = '${_}create_passcode';
   static const String itemSelection = '${_}item_selection';
   static const String question = '${_}question';
+  static const String result = '${_}result';
+  static const String share = '${_}share';
 }
 
 class AppRoutes {
@@ -108,5 +112,7 @@ class AppRoutes {
     R.walletCreationWarning: (_) => const WalletCreationWarningScreen(),
     R.createPasscode: (_) => const CreatePasscodeScreen(),
     R.itemSelection: (_) => const ItemSelectionScreen(),
+    R.result: (_) => const ResultScreen(),
+    R.share: (_) => const ShareScreen(),
   };
 }
