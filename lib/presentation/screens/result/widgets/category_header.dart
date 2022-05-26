@@ -37,7 +37,7 @@ class CategoryHeader extends StatelessWidget {
                     width: 164,
                     height: 164,
                     decoration: BoxDecoration(
-                      color: AppColors.dark,
+                      color: AppColors.darkPurple,
                       borderRadius: BorderRadius.circular(16),
                     ),
                   ),
@@ -134,10 +134,11 @@ class CategoryHeader extends StatelessWidget {
                       Padding(
                         padding: const EdgeInsets.all(10.0),
                         child: SFImageBorder(
-                          icon: Ics.twoEyelashes,
+                          icon: Ics.icTwoEyes,
                           onTap: () {},
                           radius: 8,
                           size: const Size(40, 40),
+                          iconColor: AppColors.green,
                         ),
                       )
                     ],
@@ -166,15 +167,15 @@ class CategoryHeader extends StatelessWidget {
                 children: [
                   Row(
                     crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                        padding: const EdgeInsets.only(left: 16.0),
                         child: SFText(
-                          keyText: Keys.earning,
+                          keyText: Keys.sleepScore,
                           style: TextStyles.blue14,
                         ),
                       ),
-                      const Spacer(),
                       Padding(
                         padding: const EdgeInsets.all(10.0),
                         child: SFImageBorder(

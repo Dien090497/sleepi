@@ -40,21 +40,19 @@ class SFLabelValue extends StatelessWidget {
               style: TextStyles.lightGrey16,
             ),
           ),
-          Expanded(
-            child: Container(
-              alignment: Alignment.centerRight,
-              child: Row(
-                children: [
-                  if (icon != null) SFIcon(icon!),
-                  const SizedBox(
-                    width: 8,
-                  ),
-                  Text(
-                    value,
-                    style: styleValue,
-                  ),
-                ],
-              ),
+          Container(
+            alignment: Alignment.centerRight,
+            child: Row(
+              children: [
+                if (icon != null) SFIcon(icon!),
+                const SizedBox(
+                  width: 8,
+                ),
+                Text(
+                  value,
+                  style: styleValue,
+                ),
+              ],
             ),
           ),
         ],

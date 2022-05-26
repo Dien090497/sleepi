@@ -282,9 +282,9 @@ class Keys {
 
   static const String language = 'language';
 
-  static const String rent = 'rent';
-
   static const String earning = 'earning';
+
+  static const String rent = 'rent';
 
   static const String filter = 'filter';
 
@@ -503,4 +503,12 @@ class Keys {
   static const String sleepQuality = 'sleep_quality';
 
   static const String share = 'share';
+
+  static const String download = 'download';
+
+  static const String twitter = 'twitter';
+
+  static const String facebook = 'facebook';
+
+  static const String telegram = 'telegram';
 }
