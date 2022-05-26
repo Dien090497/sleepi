@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:slee_fi/common/enum/enum.dart';
+import 'package:slee_fi/common/widgets/sf_bottom_sheets.dart';
 import 'package:slee_fi/common/widgets/sf_dialog.dart';
 import 'package:slee_fi/di/translations/keys.dart';
 import 'package:slee_fi/presentation/screens/market_place/widget/tab_bar_filter.dart';
 import 'package:slee_fi/presentation/screens/product_detail/widgets/gridview_bed_item.dart';
 import 'package:slee_fi/presentation/screens/product_detail/widgets/jewel_dialog_body.dart';
+import 'package:slee_fi/resources/resources.dart';
 
 class TabBedsBuy extends StatelessWidget {
   const TabBedsBuy({Key? key, required this.onPress}) : super(key: key);
@@ -17,7 +19,7 @@ class TabBedsBuy extends StatelessWidget {
       padding: const EdgeInsets.all(24),
       children: [
         JewelDialogBody(
-          icon: 'icon',
+          icon: Imgs.jewelGreen,
           name: 'name',
           level: 'level',
           id: 'id',
@@ -83,7 +85,12 @@ class TabBedsBuy extends StatelessWidget {
             //     ],
             //   ),
             // ),
-            const TabBarFilter(tabTexts: [Keys.buy, Keys.rent]),
+            TabBarFilter(
+              tabTexts: const [Keys.buy, Keys.rent],
+              onFilterTap: () {
+                showFilterModalBottomSheet(context);
+              },
+            ),
             const SizedBox(height: 12),
             Expanded(
               child: TabBarView(

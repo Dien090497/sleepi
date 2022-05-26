@@ -11,12 +11,14 @@ class SFImageBorder extends StatelessWidget {
     this.radius = 100,
     this.size = const ui.Size(40, 40),
     this.iconColor,
+    this.padding = 9,
   }) : super(key: key);
 
   final String icon;
   final Color? iconColor;
   final VoidCallback onTap;
   final double radius;
+  final double padding;
   final ui.Size size;
 
   @override
@@ -24,7 +26,7 @@ class SFImageBorder extends StatelessWidget {
     return Container(
       width: size.width,
       height: size.height,
-      padding: const EdgeInsets.all(9),
+      padding: EdgeInsets.all(padding),
       decoration: BoxDecoration(
         color: Colors.white.withOpacity(0.05),
         borderRadius: BorderRadius.circular(radius),

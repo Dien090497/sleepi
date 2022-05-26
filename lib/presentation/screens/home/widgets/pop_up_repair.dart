@@ -1,71 +1,113 @@
 import 'package:flutter/material.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
+import 'package:slee_fi/common/style/text_styles.dart';
 import 'package:slee_fi/common/widgets/sf_buttons.dart';
+import 'package:slee_fi/common/widgets/sf_card.dart';
 import 'package:slee_fi/common/widgets/sf_dialog.dart';
+import 'package:slee_fi/common/widgets/sf_icon.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
-import 'package:slee_fi/common/widgets/sf_textfield.dart';
+import 'package:slee_fi/di/translations/keys.dart';
 
 class PopUpRepair extends StatelessWidget {
-  const PopUpRepair({Key? key}) : super(key: key);
+  const PopUpRepair(
+      {Key? key,
+      required this.icon,
+      required this.cost,
+      required this.level,
+      required this.time,
+      required this.onConfirm,
+      this.onCancel})
+      : super(key: key);
+
+  final String icon;
+  final int cost;
+  final int level;
+  final int time;
+  final VoidCallback onConfirm;
+  final VoidCallback? onCancel;
 
   @override
   Widget build(BuildContext context) {
-    final Size size = MediaQuery.of(context).size;
-    return SFDialog(
+    return Stack(
       children: [
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        Positioned(
+          right: 0,
+          child: GestureDetector(
+            onTap: () {
+              Navigator.pop(context);
+            },
+            child: const Icon(
+              Icons.close,
+              color: AppColors.lightGrey,
+            ),
+          ),
+        ),
+        Column(
           children: [
-            const SizedBox(),
-            SFText(keyText: 'title_repair'),
-            Container(
-              padding: const EdgeInsets.all(5),
-              decoration: const BoxDecoration(
-                  color: Colors.cyanAccent, shape: BoxShape.circle),
-              child: const Icon(
-                Icons.cancel,
-                color: AppColors.white,
+            SFText(
+              keyText: Keys.repair,
+              style: TextStyles.white1w700size16,
+            ),
+            const SizedBox(height: 20),
+            SFIcon(icon),
+            const SizedBox(height: 24),
+            SFText(
+              keyText: Keys.durability,
+              suffix: ' : 78/100',
+              style: TextStyles.white16,
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 12),
+              child: Slider(
+                value: 78,
+                min: 0,
+                max: 100,
+                onChanged: (v) {},
               ),
             ),
-          ],
-        ),
-        Image.asset(
-          'assets/images/product_detail.png',
-          width: 100,
-          height: 80,
-        ),
-        SFText(keyText: 'Durability: 90/100'),
-        const SizedBox(
-          height: 10,
-        ),
-        Container(
-          decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(30),
-              color: AppColors.primary),
-          height: 15,
-        ),
-        const SizedBox(
-          height: 10,
-        ),
-        const Padding(
-          padding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-          child: SFTextField(),
-        ),
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              SFButton(
-                text: 'button_cancel',
-                width: size.width / 3,
+            const SizedBox(height: 32),
+            SFCard(
+              margin: EdgeInsets.zero,
+              padding: const EdgeInsets.symmetric(vertical: 24, horizontal: 18),
+              child: Row(
+                children: [
+                  SFText(
+                    keyText: 'Cost',
+                    style: TextStyles.lightGrey16,
+                  ),
+                  const SizedBox(width: 4),
+                  Expanded(
+                    child: SFText(
+                      keyText: '$cost SLFT',
+                      style: TextStyles.blue16,
+                      textAlign: TextAlign.right,
+                    ),
+                  ),
+                ],
               ),
-              SFButton(
-                text: 'button_confirm',
-                width: size.width / 3,
-              )
-            ],
-          ),
+            ),
+            const SizedBox(height: 24),
+            Row(
+              children: [
+                Expanded(
+                    child: SFButton(
+                  text: Keys.cancel,
+                  onPressed: onCancel,
+                )),
+                const SizedBox(width: 12),
+                Expanded(
+                  child: SFButton(
+                    text: Keys.confirm,
+                    onPressed: () {
+                      onConfirm();
+                      Navigator.pop(context);
+                      showSuccessfulDialog(context);
+                    },
+                  ),
+                ),
+              ],
+            ),
+          ],
         ),
       ],
     );

@@ -117,10 +117,18 @@ class JewelDialogBody extends StatelessWidget {
             ),
             const SizedBox(height: 24),
             Row(
-              children: const [
-                Expanded(child: SFButton(text: 'Sell')),
-                SizedBox(width: 12),
-                Expanded(child: SFButton(text: 'Transfer')),
+              children: [
+                Expanded(
+                    child: SFButton(
+                  text: 'Sell',
+                  onPressed: onSellTap,
+                )),
+                const SizedBox(width: 12),
+                Expanded(
+                    child: SFButton(
+                  text: 'Transfer',
+                  onPressed: onTransferTap,
+                )),
               ],
             ),
           ],

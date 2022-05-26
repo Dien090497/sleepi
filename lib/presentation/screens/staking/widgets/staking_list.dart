@@ -6,6 +6,7 @@ import 'package:slee_fi/common/style/text_styles.dart';
 import 'package:slee_fi/common/widgets/sf_button_outlined.dart';
 import 'package:slee_fi/common/widgets/sf_buttons.dart';
 import 'package:slee_fi/common/widgets/sf_card.dart';
+import 'package:slee_fi/common/widgets/sf_dialog.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
 import 'package:slee_fi/di/translations/keys.dart';
 import 'package:slee_fi/presentation/screens/staking/widgets/pop_up_calculator.dart';
@@ -134,11 +135,10 @@ class StakingList extends StatelessWidget {
             ),
             GestureDetector(
               onTap: () {
-                showDialog(
-                    context: context,
-                    builder: (_) {
-                      return const PopUpCalculator();
-                    });
+                showCustomDialog(
+                  context,
+                  children: [const PopUpCalculator()],
+                );
               },
               child: SvgPicture.asset(Ics.icQuestion,
                   color: AppColors.lightGrey, width: 22),

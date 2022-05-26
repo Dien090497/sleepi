@@ -6,6 +6,7 @@ import 'package:slee_fi/common/widgets/background_widget.dart';
 import 'package:slee_fi/common/widgets/sf_button_outlined.dart';
 import 'package:slee_fi/common/widgets/sf_buttons.dart';
 import 'package:slee_fi/common/widgets/sf_card.dart';
+import 'package:slee_fi/common/widgets/sf_dialog.dart';
 import 'package:slee_fi/common/widgets/sf_icon.dart';
 import 'package:slee_fi/common/widgets/sf_icon_border.dart';
 import 'package:slee_fi/common/widgets/sf_sub_app_bar.dart';
@@ -174,11 +175,8 @@ class TradeScreen extends StatelessWidget {
                   textStyle: TextStyles.w600WhiteSize16,
                   color: AppColors.blue,
                   onPressed: () {
-                    showDialog(
-                        context: context,
-                        builder: (_) {
-                          return const PopUpConfirmTrade();
-                        });
+                    showCustomDialog(context,
+                        children: [const PopUpConfirmTrade()]);
                   },
                 ),
                 const SizedBox(
