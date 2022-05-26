@@ -81,6 +81,7 @@ class TextStyles {
   static const black15Italic = TextStyle(
       fontSize: 15, color: AppColors.black, fontStyle: FontStyle.italic);
   static const white12 = TextStyle(fontSize: 12, color: AppColors.white);
+  static const white10 = TextStyle(fontSize: 10, color: AppColors.white);
   static const white12Underline = TextStyle(
     fontSize: 12,
     color: AppColors.white,

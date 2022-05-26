@@ -5,12 +5,15 @@ class Ics {
 
   static const String arrowLeft = 'assets/icons/arrow_left.svg';
   static const String chart = 'assets/icons/chart.svg';
+  static const String efficiency = 'assets/icons/efficiency.svg';
+  static const String ellipse = 'assets/icons/ellipse.svg';
   static const String facebook = 'assets/icons/facebook.svg';
   static const String filter = 'assets/icons/filter.svg';
   static const String flexibleBed = 'assets/icons/flexible_bed.svg';
   static const String gacha = 'assets/icons/gacha.svg';
   static const String gift = 'assets/icons/gift.svg';
   static const String group = 'assets/icons/group.svg';
+  static const String heart = 'assets/icons/heart.svg';
   static const String home = 'assets/icons/home.svg';
   static const String icArrowUpRight = 'assets/icons/ic_arrow_up_right.svg';
   static const String icCircleQuestion = 'assets/icons/ic_circle_question.svg';
@@ -28,9 +31,12 @@ class Ics {
   static const String icTransfer = 'assets/icons/ic_transfer.svg';
   static const String icTwoEyes = 'assets/icons/ic_two_eyes.svg';
   static const String icWallet = 'assets/icons/ic_wallet.svg';
+  static const String levelUp = 'assets/icons/level_up.svg';
   static const String lock = 'assets/icons/lock.svg';
   static const String longBed = 'assets/icons/long_bed.svg';
   static const String middleBed = 'assets/icons/middle_bed.svg';
+  static const String recycling = 'assets/icons/recycling.svg';
+  static const String repair = 'assets/icons/repair.svg';
   static const String shopping = 'assets/icons/shopping.svg';
   static const String shortBed = 'assets/icons/short_bed.svg';
   static const String signOut = 'assets/icons/sign_out.svg';
@@ -39,17 +45,21 @@ class Ics {
   static const String starOutlined = 'assets/icons/star_outlined.svg';
   static const String telegram = 'assets/icons/telegram.svg';
   static const String test = 'assets/icons/test.svg';
+  static const String transfer = 'assets/icons/transfer.svg';
   static const String twitter = 'assets/icons/twitter.svg';
 
   static const List<String> values = [
     arrowLeft,
     chart,
+    efficiency,
+    ellipse,
     facebook,
     filter,
     flexibleBed,
     gacha,
     gift,
     group,
+    heart,
     home,
     icArrowUpRight,
     icCircleQuestion,
@@ -67,9 +77,12 @@ class Ics {
     icTransfer,
     icTwoEyes,
     icWallet,
+    levelUp,
     lock,
     longBed,
     middleBed,
+    recycling,
+    repair,
     shopping,
     shortBed,
     signOut,
@@ -78,6 +91,7 @@ class Ics {
     starOutlined,
     telegram,
     test,
+    transfer,
     twitter
   ];
 }
