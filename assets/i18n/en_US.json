@@ -84,6 +84,7 @@
   "sleep_onset_time": "Sleep Onset Time",
   "woke_up": "Woke Up",
   "sleep_duration": "Sleep Duration",
+  "sleep_duration_enter": "Sleep\nDuration",
   "time_in_bed": "Time In Bed",
   "nocturnal_awakening": "Nocturnal Awakening",
   "token_earned": "Token Earned",
@@ -226,5 +227,9 @@
   "caution_please_check_your_seed_phrase": "Caution: please check your seed phrase from the backup of your Settings. If you do not back up, you will not be able to restore your wallet when you delete the application or when an error occurs.",
   "secure_wallet": "Secure wallet",
   "create_your_passcode": "Create your passcode",
-  "confirm_your_passcode": "Confirm your passcode"
+  "confirm_your_passcode": "Confirm your passcode",
+  "earning": "Earning",
+  "share_your_sleep": "Share Your Sleep",
+  "sleep_quality": "Sleep Quality",
+  "share": "Share"
 }
