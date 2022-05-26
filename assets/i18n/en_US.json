@@ -272,5 +272,7 @@
   "recycle": "Recycle",
   "flexible_bed": "Flexible Bed",
   "bed_mint": "Bed Mint",
-  "mint_from": "Minted From"
+  "mint_from": "Minted From",
+  "cost": "Cost",
+  "success_rate" : "Success rate"
 }
