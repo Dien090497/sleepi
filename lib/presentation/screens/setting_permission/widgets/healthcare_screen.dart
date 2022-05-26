@@ -37,9 +37,8 @@ class HealthcarePermissionScreen extends StatelessWidget {
                 )
               ]
           ),
-          ]),
+          ),
         ),
-      ),
     );
   }
 }

@@ -22,7 +22,7 @@ class ModalMultiChainSwitch extends StatelessWidget {
         ),
         Expanded(
             child: ListView(
-			padding: const EdgeInsets.symmetric(horizontal: 12.0, vertical: 6.0),
+              padding: const EdgeInsets.symmetric(horizontal: 12.0, vertical: 6.0),
               children:  [
                 SFCard(
                   child: ListTile(
@@ -31,24 +31,17 @@ class ModalMultiChainSwitch extends StatelessWidget {
                     trailing: const Icon(Icons.check_circle, color: AppColors.green, size: 32,),
                   ),
                 ),
-                trailing: const Icon(
-                  Icons.check_circle,
-                  color: AppColors.green,
-                  size: 32,
+                SFCard(
+                  child: ListTile(
+                    leading: Image.asset("assets/images/binance.png"),
+                    title: SFText(
+                      keyText: "BNB Smart Chain(BEP20)",
+                      style: TextStyles.lightWhite16,
+                    ),
+                  ),
                 ),
-              ),
-            ),
-            SFCard(
-              child: ListTile(
-                leading: Image.asset("assets/images/binance.png"),
-                title: SFText(
-                  keyText: "BNB Smart Chain(BEP20)",
-                  style: TextStyles.lightWhite16,
-                ),
-              ),
-            ),
-          ],
-        ))
+              ],
+            ))
       ],
     );
   }
