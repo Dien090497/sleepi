@@ -11,8 +11,8 @@ class ChartStatistic extends StatelessWidget {
     AppColors.blue,
   ];
   final List<Color> gradientColorsArea = [
-    AppColors.blue.withOpacity(0.05),
-    AppColors.blue.withOpacity(0.05),
+    AppColors.bluesDark.withOpacity(0.05),
+    AppColors.bluesDark.withOpacity(0.05),
   ];
 
   Widget topTitleWidgets(double value, TitleMeta meta) {
