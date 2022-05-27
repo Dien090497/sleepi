@@ -73,19 +73,19 @@ class _Option extends StatelessWidget {
       color = AppColors.transparent;
       child = const SizedBox();
     } else if (num == '12') {
-      color = AppColors.greyBottomNavBar;
+      color = AppColors.white.withOpacity(0.1);
       child = const Text('X', style: TextStyles.white22Italic);
     } else {
-      color = AppColors.greyBottomNavBar;
-      child = Text(num, style: TextStyles.white22Italic);
+      color = AppColors.white.withOpacity(0.1);
+      child = Text(num, style: TextStyles.lightWhite24);
     }
 
     return GestureDetector(
       onTap: onTap,
       child: Container(
-        width: 60.w,
-        height: 60.h,
-        margin: EdgeInsets.only(bottom: 8.h),
+        width: 70.w,
+        height: 70.h,
+        margin: EdgeInsets.only(bottom: 16.h),
         decoration: BoxDecoration(
           shape: BoxShape.circle,
           color: color,

@@ -66,7 +66,7 @@ class StakingList extends StatelessWidget {
           children: [
             const SizedBox(),
             GestureDetector(
-              onTap: () {},
+              onTap: () { },
               child: SvgPicture.asset(Ics.icQuestion,
                   color: AppColors.lightGrey, width: 22),
             )
@@ -137,7 +137,8 @@ class StakingList extends StatelessWidget {
               onTap: () {
                 showCustomAlertDialog(
                   context,
-                  children: [const PopUpCalculator()],
+                  padding: const EdgeInsets.all(24),
+                  children: const PopUpCalculator(),
                 );
               },
               child: SvgPicture.asset(Ics.icCalculator,
@@ -258,29 +259,25 @@ class StakingList extends StatelessWidget {
         const SizedBox(
           height: 32.0,
         ),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
+        Column(
           children: [
-            Expanded(
-              child: SFButton(
-                text: Keys.buySlft,
-                textStyle: TextStyles.bold14LightWhite,
-                color: AppColors.blue,
-                onPressed: () {},
-              ),
+            SFButton(
+              text: Keys.buySlft,
+              textStyle: TextStyles.bold14LightWhite,
+              color: AppColors.blue,
+              width: double.infinity,
+              onPressed: () {},
             ),
             const SizedBox(
-              width: 16.0,
+              height: 16.0,
             ),
-            Expanded(
-              child: SizedBox(
-                height: 48,
-                child: SFButtonOutLined(
-                    title: Keys.showContract,
-                    textStyle: TextStyles.bold16Blue,
-                    borderColor: AppColors.blue,
-                    onPressed: () {}),
-              ),
+            SizedBox(
+              height: 48,
+              child: SFButtonOutLined(
+                  title: Keys.showContractOnAvascan,
+                  textStyle: TextStyles.bold16Blue,
+                  borderColor: AppColors.blue,
+                  onPressed: () {}),
             ),
           ],
         )

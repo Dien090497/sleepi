@@ -7,6 +7,7 @@ import 'package:slee_fi/common/routes/app_routes.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
 import 'package:slee_fi/common/widgets/loading_screen.dart';
+import 'package:slee_fi/common/widgets/sf_bottom_sheet.dart';
 import 'package:slee_fi/common/widgets/sf_button_outlined.dart';
 import 'package:slee_fi/common/widgets/sf_buttons.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
@@ -16,6 +17,7 @@ import 'package:slee_fi/presentation/blocs/home/home_bloc.dart';
 import 'package:slee_fi/presentation/blocs/home/home_state.dart';
 import 'package:slee_fi/presentation/screens/home/widgets/introduce_app.dart';
 import 'package:slee_fi/presentation/screens/home/widgets/middle_bed.dart';
+import 'package:slee_fi/presentation/screens/home/widgets/modal_item_list.dart';
 import 'package:slee_fi/resources/resources.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -249,20 +251,26 @@ class _HomeScreenState extends State<HomeScreen> {
               const SizedBox(
                 width: 12,
               ),
-              SvgPicture.asset(
-                Ics.icCircleQuestion,
-                width: 20,
-                height: 20,
-                color: AppColors.lightGrey,
+              GestureDetector(
+                onTap: () => Navigator.pushNamed(context, R.question),
+                child: SvgPicture.asset(
+                  Ics.icCircleQuestion,
+                  width: 20,
+                  height: 20,
+                  color: AppColors.lightGrey,
+                ),
               ),
               const SizedBox(
                 width: 12,
               ),
-              SvgPicture.asset(
-                Ics.starOutlined,
-                width: 20,
-                height: 20,
-                color: AppColors.yellow,
+              GestureDetector(
+                onTap: () => Navigator.pushNamed(context, R.feedback),
+                child: SvgPicture.asset(
+                  Ics.starOutlined,
+                  width: 20,
+                  height: 20,
+                  color: AppColors.yellow,
+                ),
               ),
             ],
           ),
@@ -345,7 +353,10 @@ class _HomeScreenState extends State<HomeScreen> {
                                     children: [
                                       SFButtonOutLined(
                                         title: Keys.useItem,
-                                        onPressed: () {},
+                                        onPressed: () {
+                                          SFModalBottomSheet.show(
+                                              context, 0.8, const ModalItemList());
+                                        },
                                         fixedSize: Size(size.width, 40),
                                         textStyle: TextStyles.lightGrey16500,
                                         icon: Icons.add_circle_outline,

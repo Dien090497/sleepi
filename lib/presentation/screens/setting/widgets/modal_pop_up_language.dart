@@ -19,27 +19,29 @@ class ModalPopUpLanguage extends StatelessWidget {
       SFText(keyText: Keys.chinese, style: TextStyles.bold16LightWhite),
     ];
 
-    return Column(
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        Expanded(
-          child: CupertinoPicker(
-            onSelectedItemChanged: (value) {},
-            itemExtent: 25,
-            diameterRatio: 1,
-            useMagnifier: true,
-            magnification: 1.3,
-            children: language,
+    return SafeArea(
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Expanded(
+            child: CupertinoPicker(
+              onSelectedItemChanged: (value) {},
+              itemExtent: 25,
+              diameterRatio: 1,
+              useMagnifier: true,
+              magnification: 1.3,
+              children: language,
+            ),
           ),
-        ),
-        SFButton(
-            text: Keys.done,
-            width: MediaQuery.of(context).size.width * 0.9,
-            color: AppColors.blue,
-            textStyle: TextStyles.w600WhiteSize16,
-            height: 48,
-            onPressed: () => Navigator.pop(context))
-      ],
+          SFButton(
+              text: Keys.done,
+              width: MediaQuery.of(context).size.width * 0.9,
+              color: AppColors.blue,
+              textStyle: TextStyles.w600WhiteSize16,
+              height: 48,
+              onPressed: () => Navigator.pop(context))
+        ],
+      ),
     );
   }
 }

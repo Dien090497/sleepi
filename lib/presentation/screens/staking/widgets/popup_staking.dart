@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
 import 'package:slee_fi/common/widgets/sf_buttons.dart';
 import 'package:slee_fi/common/widgets/sf_dialog.dart';
@@ -11,31 +12,39 @@ class PopUpStaking extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final Size size = MediaQuery.of(context).size;
-    return SFDialog(
+    return Column(
       children: [
-        SFText(
-          keyText: Keys.displaysMessageFromPopUpStaking,
-          style: TextStyles.bold20black,
-          textAlign: TextAlign.center,
-        ),
         Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 12),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              SFButton(
+          padding: const EdgeInsets.symmetric(horizontal: 30),
+          child: SFText(keyText: "Do you really want to deposit XXXX SLFT?", style: TextStyles.w600LightWhiteSize16, textAlign: TextAlign.center,),
+        ),
+        const SizedBox(
+          height: 32.0,
+        ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: [
+            Expanded(
+              child: SFButton(
                 text: Keys.yes,
-                width: size.width / 3,
+                textStyle: TextStyles.bold14LightWhite,
+                color: AppColors.blue,
                 onPressed: () {},
               ),
-              SFButton(
+            ),
+            const SizedBox(
+              width: 16.0,
+            ),
+            Expanded(
+              child: SFButton(
                 text: Keys.no,
-                width: size.width / 3,
-                onPressed: () => Navigator.pop(context),
-              )
-            ],
-          ),
-        ),
+                textStyle: TextStyles.w600LightGreySize16,
+                color: AppColors.light4,
+                onPressed: () => Navigator.maybePop(context),
+              ),
+            ),
+          ],
+        )
       ],
     );
   }

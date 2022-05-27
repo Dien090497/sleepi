@@ -14,7 +14,7 @@ class TabBarIcon extends TabBar {
               texts.length,
               (i) => Tab(
                     child: Row(
-                      mainAxisSize: MainAxisSize.min,
+                      mainAxisSize: MainAxisSize.max,
                       children: [
                         SFIcon(
                           images.isNotEmpty ? images[i] : "",

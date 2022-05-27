@@ -5,6 +5,7 @@ import 'package:slee_fi/common/style/text_styles.dart';
 import 'package:slee_fi/common/widgets/background_widget.dart';
 import 'package:slee_fi/common/widgets/sf_app_bar.dart';
 import 'package:slee_fi/common/widgets/sf_button_outlined.dart';
+import 'package:slee_fi/common/widgets/sf_buttons.dart';
 import 'package:slee_fi/common/widgets/sf_card.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
 import 'package:slee_fi/di/translations/keys.dart';
@@ -24,64 +25,95 @@ class WithdrawSlftScreen extends StatelessWidget {
           textStyle: TextStyles.bold18LightWhite,
         ),
         body: SafeArea(
-            child: ListView(
-          padding: const EdgeInsets.symmetric(horizontal: 24.0),
-          children: [
-            SFCard(
-              margin: const EdgeInsets.only(top: 16.0),
-              padding:
-                  const EdgeInsets.symmetric(horizontal: 16.0, vertical: 24.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            child: Column(
+              children: [
+                Expanded(
+                  child: ListView(
+                    padding: const EdgeInsets.symmetric(horizontal: 24.0),
                     children: [
-                      Expanded(
-                          child: SFText(
-                        keyText: Keys.yourStakedAmount,
-                        style: TextStyles.lightGrey12,
-                      )),
-                      SFText(
-                        keyText: "xxxx SLFT",
-                        style: TextStyles.lightGrey12,
-                      )
+                      SFCard(
+                        margin: const EdgeInsets.only(top: 16.0),
+                        padding:
+                        const EdgeInsets.symmetric(horizontal: 16.0, vertical: 24.0),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Expanded(
+                                    child: SFText(
+                                      keyText: Keys.yourStakedAmount,
+                                      style: TextStyles.lightGrey12,
+                                    )),
+                                SFText(
+                                  keyText: "xxxx SLFT",
+                                  style: TextStyles.lightGrey12,
+                                )
+                              ],
+                            ),
+                            const SizedBox(
+                              height: 12.0,
+                            ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                SFText(
+                                  keyText: Keys.withdraw,
+                                  style: TextStyles.bold18LightWhite,
+                                ),
+                                SFButtonOutLined(
+                                    title: Keys.max,
+                                    textStyle: TextStyles.bold14Blue,
+                                    onPressed: () {}),
+                                Row(
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  children: [
+                                    SvgPicture.asset(Ics.icGold),
+                                    const SizedBox(
+                                      width: 6,
+                                    ),
+                                    SFText(
+                                      keyText: "XXX",
+                                      style: TextStyles.lightWhite16,
+                                    )
+                                  ],
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
+                      ),
                     ],
                   ),
-                  const SizedBox(
-                    height: 12.0,
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                ),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 8.0),
+                  child: Column(
                     children: [
-                      SFText(
-                        keyText: Keys.withdraw,
-                        style: TextStyles.bold18LightWhite,
+                      SFButton(
+                        text: Keys.confirm,
+                        textStyle: TextStyles.w600WhiteSize16,
+                        height: 48,
+                        width: double.infinity,
+                        color: AppColors.blue,
+                        onPressed: () {},
                       ),
-                      SFButtonOutLined(
-                          title: Keys.max,
-                          textStyle: TextStyles.bold14Blue,
-                          onPressed: () {}),
-                      Row(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          SvgPicture.asset(Ics.icGold),
-                          const SizedBox(
-                            width: 6,
-                          ),
-                          SFText(
-                            keyText: "XXX",
-                            style: TextStyles.lightWhite16,
+                      const SizedBox(height: 17,),
+                      SizedBox(
+                          height: 48,
+                          child: SFButtonOutLined(
+                            title: Keys.cancel,
+                            textStyle: TextStyles.bold16Blue,
+                            borderColor: AppColors.blue,
+                            onPressed: () {},
                           )
-                        ],
                       ),
                     ],
                   ),
-                ],
-              ),
-            ),
-          ],
-        )),
+                )
+              ],
+            )),
       ),
     );
   }

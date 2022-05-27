@@ -12,17 +12,8 @@ class PopUpAvalancheWallet extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SFAlertDialog(
-      padding: const EdgeInsets.all(12.0),
+    return Column(
       children: [
-        Align(
-            alignment: Alignment.topRight,
-            child: GestureDetector(
-                onTap: () => Navigator.maybePop(context),
-                child: const Icon(
-                  Icons.close,
-                  color: AppColors.lightGrey,
-                ))),
         SFText(
           keyText: Keys.avalancheWallet,
           style: TextStyles.bold18LightWhite,

@@ -176,7 +176,7 @@ class TradeScreen extends StatelessWidget {
                   color: AppColors.blue,
                   onPressed: () {
                     showCustomAlertDialog(context,
-                        children: [const PopUpConfirmTrade()]);
+                        children: const PopUpConfirmTrade());
                   },
                 ),
                 const SizedBox(
