@@ -21,25 +21,20 @@ class NotificationPermissionScreen extends StatelessWidget {
             ListView(
               padding: const EdgeInsets.all(24.0),
               children: [
-                ListView(
-                  padding: const EdgeInsets.all(24.0),
-                  children: [
-                    Padding(padding: const EdgeInsets.symmetric(horizontal: 65), child: Image.asset(Imgs.notification,fit: BoxFit.fill)),
-                    const SizedBox(height: 24.0,),
-                    SFText(keyText: Keys.notificationPermission, style: TextStyles.bold24LightWhite, textAlign: TextAlign.center,),
-                    const SizedBox(height: 32.0,),
-                    SFText(keyText: Keys.displaysMessageNotificationPermission, style: TextStyles.lightGrey16,),
-                  ],
-                ),
-                Align(
-                  alignment: Alignment.bottomCenter,
-                  child:  Padding(
-                    padding: const EdgeInsets.all(16.0),
-                    child: SFButton(height: 48, width: double.infinity, color: AppColors.blue, text: Keys.allow, textStyle: TextStyles.w600WhiteSize16, onPressed: () => Navigator.popUntil(context,  ModalRoute.withName(R.setting))),
-                  ),
-                )
-              ]
-          ),
+                Padding(padding: const EdgeInsets.symmetric(horizontal: 65), child: Image.asset(Imgs.notification,fit: BoxFit.fill)),
+                const SizedBox(height: 24.0,),
+                SFText(keyText: Keys.notificationPermission, style: TextStyles.bold24LightWhite, textAlign: TextAlign.center,),
+                const SizedBox(height: 32.0,),
+                SFText(keyText: Keys.displaysMessageNotificationPermission, style: TextStyles.lightGrey16,),
+              ],
+            ),
+            Align(
+              alignment: Alignment.bottomCenter,
+              child:  Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: SFButton(height: 48, width: double.infinity, color: AppColors.blue, text: Keys.allow, textStyle: TextStyles.w600WhiteSize16, onPressed: () => Navigator.popUntil(context,  ModalRoute.withName(R.setting))),
+              ),
+            ),
               ],
             ),
           ),

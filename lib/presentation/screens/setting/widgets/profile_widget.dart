@@ -3,6 +3,7 @@ import 'package:slee_fi/common/routes/app_routes.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
 import 'package:slee_fi/common/widgets/sf_bottom_sheet.dart';
+import 'package:slee_fi/common/widgets/sf_button_outlined.dart';
 import 'package:slee_fi/common/widgets/sf_buttons.dart';
 import 'package:slee_fi/common/widgets/sf_list_tile.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
@@ -102,14 +103,15 @@ class ProfileWidget extends StatelessWidget {
           const SizedBox(
             height: 20.0,
           ),
-          const Center(
-              child: SFButton(
-            text: Keys.logout,
-            textStyle: TextStyles.bold24Blue,
-            color: AppColors.greyBottomNavBar,
-            width: 200,
-            height: 45,
-          )),
+          SizedBox(
+            height: 48,
+            child: SFButtonOutLined(
+              title: Keys.logout,
+              textStyle: TextStyles.bold16Blue,
+              borderColor: AppColors.blue,
+              onPressed: (){},
+            ),
+          ),
           const SizedBox(
             height: 20.0,
           ),
