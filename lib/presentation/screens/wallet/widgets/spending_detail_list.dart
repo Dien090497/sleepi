@@ -22,17 +22,14 @@ class SpendingDetailList extends StatelessWidget {
       child: DefaultTabController(
         length: 2,
         child: Column(
-           crossAxisAlignment: CrossAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             SFSubTabBar(
               texts: const [Keys.pending, Keys.history],
             ),
             const Expanded(
               child: TabBarView(
-                children: [
-                  TabPendingDetail(),
-                  TabHistoryDetail()
-                ],
+                children: [TabPendingDetail(), TabHistoryDetail()],
               ),
             ),
           ],

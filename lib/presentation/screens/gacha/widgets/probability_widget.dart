@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
+import 'package:slee_fi/common/widgets/sf_dialog.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
 import 'package:slee_fi/di/translations/keys.dart';
 
@@ -8,7 +9,16 @@ class ProbabilityWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return ClipRRect(
+      borderRadius: BorderRadius.circular(15),
+      child: GestureDetector(
+        onTap: () {
+          _probabilityDialog(context);
+        },
+        child: Image.asset('assets/images/bedroom_gacha.png'),
+      ),
+    );
+    /*return Container(
       width: double.infinity,
       color: AppColors.greyBottomNavBar,
       padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 24),
@@ -40,7 +50,7 @@ class ProbabilityWidget extends StatelessWidget {
           ),
         ],
       ),
-    );
+    );*/
   }
 
   void _probabilityDialog(BuildContext ctx) {
@@ -57,89 +67,79 @@ class ProbabilityWidget extends StatelessWidget {
       Keys.epicBed,
       Keys.legendaryBed,
     ];
-
-    showDialog(
-      context: ctx,
-      builder: (context) {
-        return Column(
-          mainAxisSize: MainAxisSize.min,
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Dialog(
-              backgroundColor: AppColors.greyBottomNavBar,
-              child: Container(
+    showCustomDialog(ctx, children: [
+      Dialog(
+        backgroundColor: AppColors.greyBottomNavBar,
+        child: Container(
+          decoration: BoxDecoration(
+            border: Border.all(color: AppColors.black),
+          ),
+          padding: const EdgeInsets.all(24),
+          child: Column(
+            children: [
+              Row(
+                children: [
+                  Expanded(child: SFText(keyText: Keys.probability)),
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.pop(ctx);
+                    },
+                    child: Container(
+                      decoration: BoxDecoration(
+                        border: Border.all(color: AppColors.black),
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      padding: const EdgeInsets.all(12),
+                      child: const Icon(Icons.close),
+                    ),
+                  ),
+                ],
+              ),
+              const SizedBox(height: 16),
+              Container(
+                width: double.infinity,
                 decoration: BoxDecoration(
+                  borderRadius:
+                      const BorderRadius.vertical(top: Radius.circular(6)),
                   border: Border.all(color: AppColors.black),
                 ),
-                padding: const EdgeInsets.all(24),
+                padding: const EdgeInsets.symmetric(vertical: 4),
+                alignment: Alignment.center,
+                child: SFText(
+                  keyText: Keys.productLineUp,
+                ),
+              ),
+              Container(
+                decoration: BoxDecoration(
+                  border: Border.all(color: AppColors.black),
+                  borderRadius:
+                      const BorderRadius.vertical(bottom: Radius.circular(6)),
+                ),
                 child: Column(
                   children: [
-                    Row(
-                      children: [
-                        Expanded(child: SFText(keyText: Keys.probability)),
-                        GestureDetector(
-                          onTap: () {
-                            Navigator.pop(context);
-                          },
-                          child: Container(
-                            decoration: BoxDecoration(
-                              border: Border.all(color: AppColors.black),
-                              borderRadius: BorderRadius.circular(10),
-                            ),
-                            padding: const EdgeInsets.all(12),
-                            child: const Icon(Icons.close),
-                          ),
-                        ),
-                      ],
-                    ),
-                    const SizedBox(height: 16),
-                    Container(
-                      width: double.infinity,
-                      decoration: BoxDecoration(
-                        borderRadius: const BorderRadius.vertical(
-                            top: Radius.circular(6)),
-                        border: Border.all(color: AppColors.black),
-                      ),
-                      padding: const EdgeInsets.symmetric(vertical: 4),
-                      alignment: Alignment.center,
-                      child: SFText(
-                        keyText: Keys.productLineUp,
-                      ),
-                    ),
-                    Container(
-                      decoration: BoxDecoration(
-                        border: Border.all(color: AppColors.black),
-                        borderRadius: const BorderRadius.vertical(
-                            bottom: Radius.circular(6)),
-                      ),
-                      child: Column(
-                        children: [
-                          _Chances(
-                              extraTexts: List.generate(
-                                  bedChances.length, (i) => ' 9999%'),
-                              title: titles[0],
-                              texts: bedChances),
-                          _Chances(
-                              extraTexts: List.generate(
-                                  bedChances.length, (i) => ' 9999%'),
-                              title: titles[0],
-                              texts: bedChances),
-                          _Chances(
-                              extraTexts: List.generate(
-                                  bedChances.length, (i) => ' 9999%'),
-                              title: titles[0],
-                              texts: bedChances),
-                        ],
-                      ),
-                    ),
+                    _Chances(
+                        extraTexts:
+                            List.generate(bedChances.length, (i) => ' 9999%'),
+                        title: titles[0],
+                        texts: bedChances),
+                    _Chances(
+                        extraTexts:
+                            List.generate(bedChances.length, (i) => ' 9999%'),
+                        title: titles[0],
+                        texts: bedChances),
+                    _Chances(
+                        extraTexts:
+                            List.generate(bedChances.length, (i) => ' 9999%'),
+                        title: titles[0],
+                        texts: bedChances),
                   ],
                 ),
               ),
-            ),
-          ],
-        );
-      },
-    );
+            ],
+          ),
+        ),
+      ),
+    ]);
   }
 }
 
@@ -177,7 +177,7 @@ class _Chances extends StatelessWidget {
               children: List.generate(texts.length, (i) {
                 return SFText(
                   keyText: texts[i],
-                  extraText: extraTexts[i],
+                  suffix: extraTexts[i],
                 );
               }),
             ),

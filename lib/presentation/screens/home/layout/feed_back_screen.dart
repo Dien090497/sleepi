@@ -41,13 +41,11 @@ class FeedBackScreen extends StatelessWidget {
                   const SFTextField(
                     maxLine: 8,
                     maxLength: 100,
-                    hintText:
-                        Keys.hintFeedback,
+                    hintText: Keys.hintFeedback,
                     hintStyle: TextStyles.lightGrey16,
                   ),
                   const Spacer(),
                   const Expanded(child: SFTextField()),
-
                   SFButton(
                     text: Keys.submit,
                     width: size.width,

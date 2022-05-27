@@ -8,11 +8,16 @@ import 'package:slee_fi/common/widgets/sf_text.dart';
 
 class BoxInfoWidget extends StatelessWidget {
   const BoxInfoWidget(
-      {this.title, this.textStyle, this.info, this.urlIcon, this.onTap, Key? key})
+      {this.title,
+      this.textStyle,
+      this.info,
+      this.urlIcon,
+      this.onTap,
+      Key? key})
       : super(key: key);
 
   final String? title;
-  final TextStyle ? textStyle;
+  final TextStyle? textStyle;
   final String? urlIcon;
   final String? info;
   final VoidCallback? onTap;
@@ -32,11 +37,21 @@ class BoxInfoWidget extends StatelessWidget {
               text: title,
               textStyle: textStyle ?? TextStyles.bold16Blue,
               trailing: const Icon(
-                Icons.chevron_right, color: AppColors.lightGrey,),
+                Icons.chevron_right,
+                color: AppColors.lightGrey,
+              ),
             ),
-            Divider(color: AppColors.lightWhite.withOpacity(0.05), height: 1,),
-            const SizedBox(height: 12.0,),
-            SFText(keyText: info ?? "", style: TextStyles.lightGrey14,),
+            Divider(
+              color: AppColors.lightWhite.withOpacity(0.05),
+              height: 1,
+            ),
+            const SizedBox(
+              height: 12.0,
+            ),
+            SFText(
+              keyText: info ?? "",
+              style: TextStyles.lightGrey14,
+            ),
           ],
         ),
       ),

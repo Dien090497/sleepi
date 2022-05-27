@@ -4,6 +4,7 @@ import 'package:slee_fi/common/style/text_styles.dart';
 import 'package:slee_fi/common/widgets/background_widget.dart';
 import 'package:slee_fi/common/widgets/sf_app_bar.dart';
 import 'package:slee_fi/common/widgets/sf_buttons.dart';
+import 'package:slee_fi/common/widgets/sf_dialog.dart';
 import 'package:slee_fi/di/translations/keys.dart';
 import 'package:slee_fi/presentation/screens/transfer/widgets/pop_up_confirm_transfer.dart';
 import 'package:slee_fi/presentation/screens/transfer/widgets/transfer_list.dart';
@@ -31,13 +32,15 @@ class TransferScreen extends StatelessWidget {
                     height: 32.0,
                   ),
                   TransferWidget(),
-                  SizedBox(height: 40,),
+                  SizedBox(
+                    height: 40,
+                  ),
                   Expanded(child: TransferList()),
                 ],
               ),
               Align(
                 alignment: Alignment.bottomCenter,
-                child:  Padding(
+                child: Padding(
                   padding: const EdgeInsets.all(12.0),
                   child: SFButton(
                     text: Keys.confirmTransfer,
@@ -45,9 +48,8 @@ class TransferScreen extends StatelessWidget {
                     width: double.infinity,
                     color: AppColors.blue,
                     onPressed: () {
-                      showDialog(context: context, builder: (_) {
-                        return const PopUpConfirmTransfer();
-                      });
+                      showCustomDialog(context,
+                          children: [const PopUpConfirmTransfer()]);
                     },
                   ),
                 ),

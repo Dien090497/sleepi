@@ -20,23 +20,26 @@ class MyApp extends StatelessWidget {
       ],
       child: LocalizationProvider(
         state: LocalizationProvider.of(context).state,
-        child: ScreenUtilInit(builder: (context, child) {
-          return MaterialApp(
-            title: 'SleeFi',
-            localizationsDelegates: [
-              GlobalMaterialLocalizations.delegate,
-              GlobalWidgetsLocalizations.delegate,
-              localizationDelegate,
-            ],
-            home: child,
-            supportedLocales: localizationDelegate.supportedLocales,
-            locale: localizationDelegate.currentLocale,
-            theme: lightTheme,
-            debugShowCheckedModeBanner: false,
-            routes: AppRoutes.routes,
-            initialRoute: R.loginSignUp,
-          );
-        }),
+        child: ScreenUtilInit(
+          designSize: const Size(375, 812),
+          builder: (context, child) {
+            return MaterialApp(
+              title: 'SleeFi',
+              localizationsDelegates: [
+                GlobalMaterialLocalizations.delegate,
+                GlobalWidgetsLocalizations.delegate,
+                localizationDelegate,
+              ],
+              home: child,
+              supportedLocales: localizationDelegate.supportedLocales,
+              locale: localizationDelegate.currentLocale,
+              theme: lightTheme,
+              debugShowCheckedModeBanner: false,
+              routes: AppRoutes.routes,
+              initialRoute: R.loginSignUp,
+            );
+          },
+        ),
       ),
     );
   }

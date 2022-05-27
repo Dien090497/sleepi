@@ -18,46 +18,70 @@ class WithdrawSlftScreen extends StatelessWidget {
     return BackgroundWidget(
       child: Scaffold(
         backgroundColor: AppColors.transparent,
-        appBar: SFAppBar(context: context, title: Keys.withdrawSlft, textStyle: TextStyles.bold18LightWhite,),
+        appBar: SFAppBar(
+          context: context,
+          title: Keys.withdrawSlft,
+          textStyle: TextStyles.bold18LightWhite,
+        ),
         body: SafeArea(
             child: ListView(
-              padding: const EdgeInsets.symmetric(horizontal: 24.0),
-              children:  [
-                SFCard(
-                  margin: const EdgeInsets.only(top: 16.0),
-                  padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 24.0),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
+          padding: const EdgeInsets.symmetric(horizontal: 24.0),
+          children: [
+            SFCard(
+              margin: const EdgeInsets.only(top: 16.0),
+              padding:
+                  const EdgeInsets.symmetric(horizontal: 16.0, vertical: 24.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Expanded(child: SFText(keyText: Keys.yourStakedAmount, style: TextStyles.lightGrey12,)),
-                          SFText(keyText: "xxxx SLFT", style: TextStyles.lightGrey12,)
-                        ],
+                      Expanded(
+                          child: SFText(
+                        keyText: Keys.yourStakedAmount,
+                        style: TextStyles.lightGrey12,
+                      )),
+                      SFText(
+                        keyText: "xxxx SLFT",
+                        style: TextStyles.lightGrey12,
+                      )
+                    ],
+                  ),
+                  const SizedBox(
+                    height: 12.0,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      SFText(
+                        keyText: Keys.withdraw,
+                        style: TextStyles.bold18LightWhite,
                       ),
-                      const SizedBox(height: 12.0,),
+                      SFButtonOutLined(
+                          title: Keys.max,
+                          textStyle: TextStyles.bold14Blue,
+                          onPressed: () {}),
                       Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
-                          SFText(keyText: Keys.withdraw, style: TextStyles.bold18LightWhite,),
-                          SFButtonOutLined(title: Keys.max, textStyle: TextStyles.bold14Blue, onPressed: () {}),
-                          Row(
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              SvgPicture.asset(Ics.icGold),
-                              const SizedBox(width: 6,),
-                              SFText(keyText: "XXX", style: TextStyles.lightWhite16,)
-                            ],
+                          SvgPicture.asset(Ics.icGold),
+                          const SizedBox(
+                            width: 6,
                           ),
+                          SFText(
+                            keyText: "XXX",
+                            style: TextStyles.lightWhite16,
+                          )
                         ],
                       ),
                     ],
                   ),
-                ),
-              ],
-            )
-        ),
+                ],
+              ),
+            ),
+          ],
+        )),
       ),
     );
   }

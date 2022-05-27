@@ -231,6 +231,10 @@ class Keys {
 
   static const String toExternal = 'to_external';
 
+  static const String successful = 'successful';
+
+  static const String durability = 'durability';
+
   static const String trade = 'trade';
 
   static const String walletAccount = 'wallet_account';
@@ -563,6 +567,20 @@ class Keys {
   static const String facebook = 'facebook';
 
   static const String telegram = 'telegram';
+
+  static const String sell = 'sell';
+
+  static const String recycle = 'recycle';
+
+  static const String flexibleBed = 'flexible_bed';
+
+  static const String bedMint = 'bed_mint';
+
+  static const String mintFrom = 'mint_from';
+
+  static const String cost = 'cost';
+
+  static const String successRate = 'success_rate';
 
   static const String introduceHowToPlay = 'introduce.how_to_play';
 

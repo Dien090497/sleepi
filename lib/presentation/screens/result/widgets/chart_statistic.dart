@@ -149,8 +149,8 @@ class ChartStatistic extends StatelessWidget {
         ),
         child: ClipRRect(
           borderRadius: const BorderRadius.only(
-              bottomLeft: Radius.circular(15),
-              bottomRight: Radius.circular(15),
+            bottomLeft: Radius.circular(15),
+            bottomRight: Radius.circular(15),
           ),
           child: LineChart(
             mainData(),

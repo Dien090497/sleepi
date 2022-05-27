@@ -19,7 +19,8 @@ class SFTextFieldTextButton extends StatelessWidget {
     this.showLabel = true,
     Key? key,
     this.maxLine,
-    this.maxLength,}) : super(key: key);
+    this.maxLength,
+  }) : super(key: key);
 
   final String? labelText;
   final String? hintText;
@@ -39,12 +40,17 @@ class SFTextFieldTextButton extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         showLabel
-            ?  Padding(
+            ? Padding(
                 padding: const EdgeInsets.only(bottom: 4),
-                child: SFText(keyText: labelText ?? "", style: TextStyles.lightGrey14,),
-        )
+                child: SFText(
+                  keyText: labelText ?? "",
+                  style: TextStyles.lightGrey14,
+                ),
+              )
             : const SizedBox(),
-        const SizedBox(height: 4,),
+        const SizedBox(
+          height: 4,
+        ),
         Container(
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(8),
@@ -52,18 +58,18 @@ class SFTextFieldTextButton extends StatelessWidget {
           ),
           padding: const EdgeInsets.only(left: 12, right: 4),
           child: Row(
-            children:  [
+            children: [
               Expanded(
                 child: SFTextField(
                   hintText: hintText,
                   hintStyle: hintStyle ?? TextStyles.lightGrey14,
                   suffix: suffix,
                   suffixIcon: suffixIcon,
-                  showLabel: false ,
+                  showLabel: false,
                   noBorder: true,
                 ),
               ),
-               SFTextButton(
+              SFTextButton(
                 text: textButton ?? Keys.sendCode,
                 textStyle: textButtonStyle ?? TextStyles.blue12,
                 // color: Colors.transparent,

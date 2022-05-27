@@ -1,10 +1,8 @@
 name: Build APK, Upload Diawi, Send GG Chat Noti
 
 on:
-  pull_request:
-    branches: [ build ]
   push:
-    branches: [ build ]
+    branches: [ main, build ]
 
 jobs:
   build-apk:

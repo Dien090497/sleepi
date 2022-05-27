@@ -14,37 +14,69 @@ class ModalReceiveWallet extends StatelessWidget {
     return ListView(
       shrinkWrap: true,
       children: [
-        const SizedBox(height: 32,),
-        SFText(keyText: Keys.receive, style: TextStyles.bold18White, toUpperCase: true, textAlign: TextAlign.center,),
-        const SizedBox(height: 16,),
-
+        const SizedBox(
+          height: 32,
+        ),
+        SFText(
+          keyText: Keys.receive,
+          style: TextStyles.bold18White,
+          toUpperCase: true,
+          textAlign: TextAlign.center,
+        ),
+        const SizedBox(
+          height: 16,
+        ),
         Padding(
-            padding:  EdgeInsets.symmetric(horizontal: MediaQuery.of(context).size.width*0.35, vertical: 8.0),
+            padding: EdgeInsets.symmetric(
+                horizontal: MediaQuery.of(context).size.width * 0.35,
+                vertical: 8.0),
             child: Container(
               padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
               decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(100.0),
-                  color: AppColors.blue.withOpacity(0.15)
+                  color: AppColors.blue.withOpacity(0.15)),
+              child: SFText(
+                keyText: Keys.avalanche,
+                style: TextStyles.blue14,
+                textAlign: TextAlign.center,
               ),
-              child: SFText(keyText: Keys.avalanche, style: TextStyles.blue14, textAlign: TextAlign.center,),
-            )
+            )),
+        Image.asset(
+          Imgs.qrCodeTest,
+          height: 180,
+          color: AppColors.lightGrey,
         ),
-        Image.asset(Imgs.qrCodeTest, height: 180, color: AppColors.lightGrey,),
-        const SizedBox(height: 32.0,),
-        SFText(keyText: Keys.scanAddressToReceivePayment, style: TextStyles.lightGrey12, textAlign: TextAlign.center,),
-        const SizedBox(height: 4.0,),
+        const SizedBox(
+          height: 32.0,
+        ),
+        SFText(
+          keyText: Keys.scanAddressToReceivePayment,
+          style: TextStyles.lightGrey12,
+          textAlign: TextAlign.center,
+        ),
+        const SizedBox(
+          height: 4.0,
+        ),
         Padding(
-          padding: EdgeInsets.symmetric(horizontal: MediaQuery.of(context).size.width * 0.05, vertical: 8.0),
+          padding: EdgeInsets.symmetric(
+              horizontal: MediaQuery.of(context).size.width * 0.05,
+              vertical: 8.0),
           child: Container(
-            padding: const EdgeInsets.symmetric(vertical: 6.0, horizontal: 16.0),
-            decoration:  BoxDecoration(
+            padding:
+                const EdgeInsets.symmetric(vertical: 6.0, horizontal: 16.0),
+            decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(100.0),
-                color: AppColors.white.withOpacity(0.05)
+                color: AppColors.white.withOpacity(0.05)),
+            child: SFText(
+              keyText: "Eq7fbhoajsdRA29asjBWRmxwwo9aj92as",
+              style: TextStyles.lightGrey16,
+              textAlign: TextAlign.center,
             ),
-            child: SFText(keyText: "Eq7fbhoajsdRA29asjBWRmxwwo9aj92as", style: TextStyles.lightGrey16, textAlign: TextAlign.center,),
           ),
-        ) ,
-        const SizedBox(height: 32,),
+        ),
+        const SizedBox(
+          height: 32,
+        ),
         SFButton(
           text: Keys.copyAddress,
           textStyle: TextStyles.bold16LightWhite,
@@ -53,7 +85,9 @@ class ModalReceiveWallet extends StatelessWidget {
           toUpperCase: true,
           onPressed: () {},
         ),
-        const SizedBox(height: 12,),
+        const SizedBox(
+          height: 12,
+        ),
       ],
     );
   }

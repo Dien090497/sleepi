@@ -19,12 +19,11 @@ class SeedPhraseScreen extends StatelessWidget {
           textStyle: TextStyles.bold18LightWhite,
         ),
         body: SafeArea(
-            child: Column(
-                children: const [
-                  // AvailableWidget(),
-                  Expanded(child: SeedPhraseList()),
-                  // ActivationCodeList(),
-                ])),
+            child: Column(children: const [
+          // AvailableWidget(),
+          Expanded(child: SeedPhraseList()),
+          // ActivationCodeList(),
+        ])),
       ),
     );
   }

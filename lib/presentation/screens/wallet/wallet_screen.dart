@@ -20,7 +20,7 @@ class WalletScreen extends StatelessWidget {
         child: Scaffold(
           backgroundColor: AppColors.transparent,
           appBar: AppBar(
-		   actions:  [
+            actions: [
               GestureDetector(
                 onTap: () => Navigator.pushNamed(context, R.settingWallet),
                 child: SvgPicture.asset(Ics.icSetting),

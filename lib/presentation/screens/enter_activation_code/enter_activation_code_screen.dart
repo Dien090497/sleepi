@@ -43,7 +43,9 @@ class EnterActivationCodeScreen extends StatelessWidget {
                     const SFTextField(
                       labelText: Keys.pleaseSelectYourLanguage,
                     ),
-                    const SizedBox(height: 20,),
+                    const SizedBox(
+                      height: 20,
+                    ),
                     SFButton(
                       text: Keys.start,
                       color: AppColors.blue,

@@ -13,23 +13,26 @@ import 'package:slee_fi/di/translations/keys.dart';
 import 'package:slee_fi/presentation/screens/product_detail/widgets/top_left_banner.dart';
 
 class GridViewBedItem extends StatelessWidget {
-  const GridViewBedItem({
-    Key? key,
-    required this.beds,
-    this.onBedTap,
-    this.price,
-    this.onBuyTap,
-  }) : super(key: key);
+  const GridViewBedItem(
+      {Key? key,
+      required this.beds,
+      this.onBedTap,
+      this.price,
+      this.onBuyTap,
+      this.isScroll = true})
+      : super(key: key);
 
   final List<BedType> beds;
   final ValueChanged<BedType>? onBedTap;
   final ValueChanged<BedType>? onBuyTap;
   final int? price;
+  final bool isScroll;
 
   @override
   Widget build(BuildContext context) {
     return SFGridView(
       count: beds.length,
+      isScroll: isScroll,
       itemBuilder: (context, i) {
         final bed = beds[i % BedType.values.length];
 
@@ -89,7 +92,7 @@ class GridViewBedItem extends StatelessWidget {
                           ],
                         ),
                         SizedBox(height: 4.h),
-                        const SFPercentBorder(valueActive: 70, totalValue: 100),
+                        const SFPercentBorderGradient(valueActive: 70, totalValue: 100),
                         const SizedBox(height: 12),
                         if (price != null)
                           Row(

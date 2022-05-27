@@ -23,9 +23,7 @@ class ModalTransferBetween extends StatelessWidget {
       Imgs.avax,
       Imgs.slft,
       Imgs.slgt,
-      Imgs.beds,
       Imgs.jewels,
-      Imgs.beds
     ];
     return ListView.builder(
         itemCount: keyList.length,
@@ -35,8 +33,8 @@ class ModalTransferBetween extends StatelessWidget {
           return SFCard(
             child: ListTile(
               leading: SFIcon(urlImages[index]),
-              title: SFText(keyText: keyList[index], style: TextStyles.lightWhite16),
-              // trailing: SFText(keyText: "xxxxxxxxx", style: TextStyles.lightWhite16,),
+              title: SFText(
+                  keyText: keyList[index], style: TextStyles.lightWhite16),
             ),
           );
         });

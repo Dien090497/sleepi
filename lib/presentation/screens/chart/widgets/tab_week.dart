@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_date_pickers/flutter_date_pickers.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
+import 'package:slee_fi/common/widgets/sf_dialog.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
 import 'package:slee_fi/di/translations/keys.dart';
 import 'package:slee_fi/presentation/screens/chart/widgets/chart_title.dart';
@@ -16,17 +17,17 @@ class TabWeek extends StatelessWidget {
       children: [
         GestureDetector(
           onTap: () {
-            showDialog(
-              context: context,
-              builder: (context) {
-                return ChartWeekPicker(
+            showCustomDialog(
+              context,
+              children: [
+                ChartWeekPicker(
                   selectedDate: DateTime.now(),
                   firstAllowedDate:
                       DateTime.now().subtract(const Duration(days: 45)),
                   lastAllowedDate: DateTime.now().add(const Duration(days: 45)),
                   onNewSelected: (period) {},
-                );
-              },
+                )
+              ],
             );
           },
           child: Row(

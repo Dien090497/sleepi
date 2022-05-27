@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
+import 'package:slee_fi/common/widgets/sf_dialog.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
 import 'package:slee_fi/di/translations/keys.dart';
 import 'package:slee_fi/presentation/screens/staking/widgets/popup_staking.dart';
@@ -81,9 +82,8 @@ class TakingScreen extends StatelessWidget {
                       children: [
                         GestureDetector(
                             onTap: () {
-                              showDialog(
-                                  context: context,
-                                  builder: (_) => const PopUpStaking());
+                              showCustomDialog(context,
+                                  children: [const PopUpStaking()]);
                             },
                             child: SFText(
                                 keyText: Keys.confirm,

@@ -47,7 +47,8 @@ class TabWalletDetail extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
             BoxButtonWidget(
-              onTap: () => SFModalBottomSheet.show(context, 0.7, const ModalReceiveWallet()),
+              onTap: () => SFModalBottomSheet.show(
+                  context, 0.7, const ModalReceiveWallet()),
               text: Keys.receive,
               assetImage: Ics.icDownload,
             ),
@@ -104,8 +105,13 @@ class TabWalletDetail extends StatelessWidget {
                   child: Row(
                     children: [
                       Image.asset(Imgs.binance),
-                      const SizedBox(width: 8.0,),
-                      SFText(keyText: Keys.buy, style: TextStyles.bold14Yellow,)
+                      const SizedBox(
+                        width: 8.0,
+                      ),
+                      SFText(
+                        keyText: Keys.buy,
+                        style: TextStyles.bold14Yellow,
+                      )
                     ],
                   )),
             ],
@@ -120,73 +126,64 @@ class TabWalletDetail extends StatelessWidget {
   }
 
   void createWalletDialog(BuildContext context) {
-    showDialog(
-      context: context,
-      builder: (context) {
-        return SFDialog(
-          backgroundColor: AppColors.white,
-          padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 24),
-          children: [
-            Row(
-              children: [
-                const SizedBox(width: 24),
-                const Spacer(),
-                SFText(
-                  keyText: Keys.wallet,
-                  prefix: 'SOLANA ',
-                  toUpperCase: true,
-                ),
-                const Spacer(),
-                Container(
-                  decoration: const BoxDecoration(
-                    shape: BoxShape.circle,
-                    color: AppColors.green,
-                  ),
-                  padding: const EdgeInsets.all(6),
-                  child: const Icon(Icons.close, size: 16),
-                ),
-              ],
+    showCustomDialog(context, children: [
+      Row(
+        children: [
+          const SizedBox(width: 24),
+          const Spacer(),
+          SFText(
+            keyText: Keys.wallet,
+            prefix: 'SOLANA ',
+            toUpperCase: true,
+          ),
+          const Spacer(),
+          Container(
+            decoration: const BoxDecoration(
+              shape: BoxShape.circle,
+              color: AppColors.green,
             ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 8.0),
-              child: Column(
-                children: [
-                  const SizedBox(height: 24),
-                  GestureDetector(
-                    onTap: () {
-                      Navigator.pushNamed(context, R.walletCreationWarning);
-                    },
-                    child: Container(
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(24),
-                        border: Border.all(color: AppColors.black),
-                      ),
-                      alignment: Alignment.center,
-                      padding: const EdgeInsets.symmetric(vertical: 12),
-                      child: SFText(keyText: Keys.createANewWallet),
-                    ),
-                  ),
-                  const SizedBox(height: 24),
-                  GestureDetector(
-                    onTap: () {
-                      Navigator.pushNamed(context, R.importWallet);
-                    },
-                    child: Container(
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(24),
-                        border: Border.all(color: AppColors.black),
-                      ),
-                      alignment: Alignment.center,
-                      padding: const EdgeInsets.symmetric(vertical: 12),
-                      child: SFText(keyText: Keys.importAWalletUsingSeedPhrase),
-                    ),
-                  ),
-                ],
+            padding: const EdgeInsets.all(6),
+            child: const Icon(Icons.close, size: 16),
+          ),
+        ],
+      ),
+      Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 8.0),
+        child: Column(
+          children: [
+            const SizedBox(height: 24),
+            GestureDetector(
+              onTap: () {
+                Navigator.pushNamed(context, R.walletCreationWarning);
+              },
+              child: Container(
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(24),
+                  border: Border.all(color: AppColors.black),
+                ),
+                alignment: Alignment.center,
+                padding: const EdgeInsets.symmetric(vertical: 12),
+                child: SFText(keyText: Keys.createANewWallet),
               ),
-            )
+            ),
+            const SizedBox(height: 24),
+            GestureDetector(
+              onTap: () {
+                Navigator.pushNamed(context, R.importWallet);
+              },
+              child: Container(
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(24),
+                  border: Border.all(color: AppColors.black),
+                ),
+                alignment: Alignment.center,
+                padding: const EdgeInsets.symmetric(vertical: 12),
+                child: SFText(keyText: Keys.importAWalletUsingSeedPhrase),
+              ),
+            ),
           ],
-        );
-      },
-    );
+        ),
+      )
+    ]);
   }
 }

@@ -1,5 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
+import 'package:slee_fi/common/style/text_styles.dart';
+import 'package:slee_fi/common/widgets/sf_icon.dart';
+import 'package:slee_fi/common/widgets/sf_text.dart';
+import 'package:slee_fi/di/translations/keys.dart';
+import 'package:slee_fi/resources/resources.dart';
 
 Future<T?> showCustomDialog<T>(
   BuildContext context, {
@@ -14,6 +19,33 @@ Future<T?> showCustomDialog<T>(
           backgroundColor: backgroundColor,
           padding: padding,
           children: children,
+        );
+      });
+}
+
+Future<T?> showSuccessfulDialog<T>(BuildContext context) async {
+  return showDialog(
+      context: context,
+      builder: (_) {
+        return SFDialog(
+          children: [
+            Align(
+              alignment: Alignment.centerRight,
+              child: IconButton(
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+                icon: const Icon(
+                  Icons.close,
+                  color: AppColors.white,
+                ),
+              ),
+            ),
+            const SFIcon(Ics.successful),
+            const SizedBox(height: 36),
+            SFText(keyText: Keys.successful, style: TextStyles.bold18White),
+            const SizedBox(height: 40),
+          ],
         );
       });
 }
@@ -35,10 +67,10 @@ class SFDialog extends StatelessWidget {
       child: Container(
         width: 1000,
         decoration: BoxDecoration(
-		 borderRadius: BorderRadius.circular(16),
+          borderRadius: BorderRadius.circular(16),
           color: backgroundColor ?? AppColors.lightDark,
         ),
-        padding: padding ?? const EdgeInsets.all(8),
+        padding: padding ?? const EdgeInsets.all(24),
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: children,

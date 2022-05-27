@@ -23,37 +23,51 @@ class ShowSeedPhraseScreen extends StatelessWidget {
         ),
         body: SafeArea(
             child: Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: Column(
-                  children:  [
-                    // AvailableWidget(),
-                    Expanded(
-                        child:  SFCard(
-                          child : ListView.builder(
-                              itemCount: 15,
-                              itemBuilder: (BuildContext context,int index){
-                                return Column(
-                                  children: [
-                                    SFListTile(
-                                      text: "${index +1}",
-                                      trailing: SFText(keyText: "-----", style: TextStyles.lightGrey14,),
-                                    ),
-                                    Divider( color: AppColors.lightWhite.withOpacity(0.05), height: 1, ),
-
-                                  ],
-                                );
-                              }
+          padding: const EdgeInsets.all(16.0),
+          child: Column(children: [
+            // AvailableWidget(),
+            Expanded(
+                child: SFCard(
+              child: ListView.builder(
+                  itemCount: 15,
+                  itemBuilder: (BuildContext context, int index) {
+                    return Column(
+                      children: [
+                        SFListTile(
+                          text: "${index + 1}",
+                          trailing: SFText(
+                            keyText: "-----",
+                            style: TextStyles.lightGrey14,
                           ),
-                        )
-                    ),
-                    const SizedBox(height: 12.0,),
-                    SFText(keyText: Keys.displaysMessageShowSeedPhrase, style: TextStyles.lightGrey12,),
-                    const SizedBox(height: 16.0,),
-                    SFText(keyText: Keys.pressAndHoldToReveal, style: TextStyles.bold18White,),
-                    const SizedBox(height: 16.0,),
-                    // ActivationCodeList(),
-                  ]),
+                        ),
+                        Divider(
+                          color: AppColors.lightWhite.withOpacity(0.05),
+                          height: 1,
+                        ),
+                      ],
+                    );
+                  }),
             )),
+            const SizedBox(
+              height: 12.0,
+            ),
+            SFText(
+              keyText: Keys.displaysMessageShowSeedPhrase,
+              style: TextStyles.lightGrey12,
+            ),
+            const SizedBox(
+              height: 16.0,
+            ),
+            SFText(
+              keyText: Keys.pressAndHoldToReveal,
+              style: TextStyles.bold18White,
+            ),
+            const SizedBox(
+              height: 16.0,
+            ),
+            // ActivationCodeList(),
+          ]),
+        )),
       ),
     );
   }

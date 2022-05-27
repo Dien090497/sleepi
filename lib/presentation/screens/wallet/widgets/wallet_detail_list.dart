@@ -28,8 +28,14 @@ class WalletDetailList extends StatelessWidget {
             return SFCard(
               child: ListTile(
                 leading: Image.asset(Imgs.slft),
-                title: SFText(keyText: Keys.slft, toUpperCase: true, style: TextStyles.lightWhite16),
-                trailing: SFText(keyText: "xxxxxxxxx", style: TextStyles.lightWhite16,),
+                title: SFText(
+                    keyText: Keys.slft,
+                    toUpperCase: true,
+                    style: TextStyles.lightWhite16),
+                trailing: SFText(
+                  keyText: "xxxxxxxxx",
+                  style: TextStyles.lightWhite16,
+                ),
               ),
             );
           }),

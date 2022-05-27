@@ -81,13 +81,14 @@ class TextStyles {
   static const black15Italic = TextStyle(
       fontSize: 15, color: AppColors.black, fontStyle: FontStyle.italic);
   static const white12 = TextStyle(fontSize: 12, color: AppColors.white);
+  static const white10 = TextStyle(fontSize: 10, color: AppColors.white);
   static const white12Underline = TextStyle(
     fontSize: 12,
     color: AppColors.white,
     decoration: TextDecoration.underline,
   );
-  static const w700LightGreySize14 =
-  TextStyle(fontSize: 14, color: AppColors.lightGrey, fontWeight: FontWeight.w700);
+  static const w700LightGreySize14 = TextStyle(
+      fontSize: 14, color: AppColors.lightGrey, fontWeight: FontWeight.w700);
   static const lightWhite14 =
       TextStyle(fontSize: 14, color: AppColors.lightWhite);
   static const lightWhite16 =
@@ -95,6 +96,8 @@ class TextStyles {
   static const white14 = TextStyle(fontSize: 14, color: AppColors.white);
   static const white14W700 = TextStyle(
       fontSize: 14, color: AppColors.white, fontWeight: FontWeight.w700);
+  static TextStyle white14WithOpacity =
+      TextStyle(fontSize: 14, color: AppColors.white.withOpacity(0.2));
   static const white16 = TextStyle(fontSize: 16, color: AppColors.white);
   static const white16500 = TextStyle(
     fontSize: 16,
@@ -103,6 +106,10 @@ class TextStyles {
     height: 24 / 16,
   );
   static const white18 = TextStyle(fontSize: 18, color: AppColors.white);
+  static const white18W700 = TextStyle(
+      fontSize: 18, color: AppColors.white, fontWeight: FontWeight.w700);
+  static const boldWhite18 = TextStyle(
+      fontSize: 18, color: AppColors.white, fontWeight: FontWeight.w700);
   static const white22Italic = TextStyle(
       fontSize: 22, color: AppColors.white, fontStyle: FontStyle.italic);
   static const bold30White = TextStyle(
@@ -160,5 +167,6 @@ class TextStyles {
       fontSize: 16, color: AppColors.yellow, fontStyle: FontStyle.italic);
   static const labelStyle = TextStyle(
       fontSize: 16, color: AppColors.lightGrey, fontStyle: FontStyle.normal);
-
+  static const boldWhite14 = TextStyle(
+      fontSize: 14, color: AppColors.white, fontWeight: FontWeight.bold);
 }

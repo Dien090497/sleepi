@@ -24,13 +24,17 @@ class LoginSignUpScreen extends StatelessWidget {
           child: ListView(
             padding: const EdgeInsets.symmetric(horizontal: 24),
             children: [
-               SizedBox(height: MediaQuery.of(context).size.height * 0.15),
+              SizedBox(height: MediaQuery.of(context).size.height * 0.15),
               const SFLogo(),
               const SizedBox(height: 50),
               LoginBox(
                 child: Column(
                   children: [
-                    SFText(keyText: Keys.login, style: TextStyles.bold18LightWhite, toUpperCase: true,),
+                    SFText(
+                      keyText: Keys.login,
+                      style: TextStyles.bold18LightWhite,
+                      toUpperCase: true,
+                    ),
                     const SizedBox(height: 25),
                     const SFTextField(
                       labelText: Keys.emailAddress,

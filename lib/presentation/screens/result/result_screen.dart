@@ -80,7 +80,7 @@ class _ResultScreenState extends State<ResultScreen> {
                   gradient: AppColors.gradientBlueButton,
                   width: double.infinity,
                   height: 48,
-                  onPressed: (){
+                  onPressed: () {
                     Navigator.pushNamed(context, R.share);
                   },
                 ),
