@@ -19,6 +19,14 @@ class PopUpCalculator extends StatelessWidget {
       padding: const EdgeInsets.all(20.0),
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
+        Align(
+            alignment: Alignment.topRight,
+            child: GestureDetector(
+                onTap: () => Navigator.maybePop(context),
+                child: const Icon(
+                  Icons.close,
+                  color: AppColors.lightGrey,
+                ))),
         Center(
             child: SFText(
           keyText: Keys.roiCalculator,

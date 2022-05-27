@@ -34,7 +34,10 @@ class ModalPopUpLanguage extends StatelessWidget {
         ),
         SFButton(
             text: Keys.done,
-            color: AppColors.white,
+            width: MediaQuery.of(context).size.width * 0.9,
+            color: AppColors.blue,
+            textStyle: TextStyles.w600WhiteSize16,
+            height: 48,
             onPressed: () => Navigator.pop(context))
       ],
     );

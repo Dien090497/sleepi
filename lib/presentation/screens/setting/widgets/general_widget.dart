@@ -56,7 +56,7 @@ class GeneralWidget extends StatelessWidget {
                   ),
                   divider,
                   SFListTile(
-                    text: Keys.activationCodeLanguageLowercase,
+                    text: Keys.activationCode,
                     trailing: icon,
                     onPressed: () =>
                         Navigator.pushNamed(context, R.activationCode),
@@ -73,7 +73,7 @@ class GeneralWidget extends StatelessWidget {
                     text: Keys.multiChainSwitch,
                     trailing: icon,
                     onPressed: () => SFModalBottomSheet.show(
-                        context, 0.4, const ModalMultiChainSwitch()),
+                        context, 0.5, const ModalMultiChainSwitch()),
                   ),
                   divider,
                   SFListTile(

@@ -37,6 +37,7 @@ class Imgs {
   static const String tutorial2 = 'assets/images/tutorial_2.png';
   static const String tutorial3 = 'assets/images/tutorial_3.png';
   static const String tutorial4 = 'assets/images/tutorial_4.png';
+  static const String upgrade = 'assets/images/upgrade.png';
 
   static const List<String> values = [
     avax,
@@ -72,6 +73,7 @@ class Imgs {
     tutorial1,
     tutorial2,
     tutorial3,
-    tutorial4
+    tutorial4,
+    upgrade
   ];
 }
