@@ -3,10 +3,10 @@ import 'package:flutter_translate/flutter_translate.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
 import 'package:slee_fi/common/widgets/background_widget.dart';
+import 'package:slee_fi/common/widgets/sf_alert_dialog.dart';
 import 'package:slee_fi/common/widgets/sf_button_outlined.dart';
 import 'package:slee_fi/common/widgets/sf_buttons.dart';
 import 'package:slee_fi/common/widgets/sf_card.dart';
-import 'package:slee_fi/common/widgets/sf_dialog.dart';
 import 'package:slee_fi/common/widgets/sf_icon.dart';
 import 'package:slee_fi/common/widgets/sf_icon_border.dart';
 import 'package:slee_fi/common/widgets/sf_sub_app_bar.dart';
@@ -175,7 +175,7 @@ class TradeScreen extends StatelessWidget {
                   textStyle: TextStyles.w600WhiteSize16,
                   color: AppColors.blue,
                   onPressed: () {
-                    showCustomDialog(context,
+                    showCustomAlertDialog(context,
                         children: [const PopUpConfirmTrade()]);
                   },
                 ),

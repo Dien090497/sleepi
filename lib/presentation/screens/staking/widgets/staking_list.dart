@@ -3,10 +3,10 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:slee_fi/common/routes/app_routes.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
+import 'package:slee_fi/common/widgets/sf_alert_dialog.dart';
 import 'package:slee_fi/common/widgets/sf_button_outlined.dart';
 import 'package:slee_fi/common/widgets/sf_buttons.dart';
 import 'package:slee_fi/common/widgets/sf_card.dart';
-import 'package:slee_fi/common/widgets/sf_dialog.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
 import 'package:slee_fi/di/translations/keys.dart';
 import 'package:slee_fi/presentation/screens/staking/widgets/pop_up_calculator.dart';
@@ -135,12 +135,12 @@ class StakingList extends StatelessWidget {
             ),
             GestureDetector(
               onTap: () {
-                showCustomDialog(
+                showCustomAlertDialog(
                   context,
                   children: [const PopUpCalculator()],
                 );
               },
-              child: SvgPicture.asset(Ics.icQuestion,
+              child: SvgPicture.asset(Ics.icCalculator,
                   color: AppColors.lightGrey, width: 22),
             )
           ],

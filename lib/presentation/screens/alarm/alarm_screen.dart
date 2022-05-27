@@ -5,7 +5,6 @@ import 'package:slee_fi/common/style/text_styles.dart';
 import 'package:slee_fi/common/widgets/background_widget.dart';
 import 'package:slee_fi/common/widgets/sf_app_bar.dart';
 import 'package:slee_fi/common/widgets/sf_list_tile.dart';
-import 'package:slee_fi/common/widgets/sf_text.dart';
 import 'package:slee_fi/di/translations/keys.dart';
 import 'package:slee_fi/presentation/screens/alarm/widgets/alarm_status_change_widget.dart';
 import 'package:slee_fi/presentation/screens/alarm/widgets/alarm_volume_change_widget.dart';
