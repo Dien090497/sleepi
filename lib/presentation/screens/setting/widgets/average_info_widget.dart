@@ -13,7 +13,7 @@ class AverageInfoWidget extends StatelessWidget {
       Keys.averageOfBedTime,
       Keys.averageOfWokeUp,
       Keys.averageOfSleepDuration,
-      Keys.averageOfSleepQuolity
+      Keys.averageOfSleepQuality
     ];
     List<Color> colors = [
       AppColors.blue.withOpacity(0.15),

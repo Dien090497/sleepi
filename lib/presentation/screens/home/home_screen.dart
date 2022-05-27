@@ -107,7 +107,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                     const EdgeInsets.symmetric(horizontal: 15),
                                 alignment: Alignment.centerRight,
                                 child: Text(
-                                  '${index + 1}',
+                                  index < 10 ? '0$index' : '$index',
                                   textAlign: TextAlign.right,
                                   style: TextStyles.white1w700size16,
                                 ),
@@ -159,7 +159,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                     const EdgeInsets.symmetric(horizontal: 15),
                                 alignment: Alignment.centerLeft,
                                 child: Text(
-                                  '${index + 1}',
+                                  index < 10 ? '0$index' : '$index',
                                   textAlign: TextAlign.right,
                                   style: TextStyles.white1w700size16,
                                 ),
@@ -193,15 +193,17 @@ class _HomeScreenState extends State<HomeScreen> {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              SFButtonOutLined(
-                title: Keys.alarmBell,
-                onPressed: () {},
-                fixedSize: const Size(274, 40),
-                textStyle: TextStyles.blue16,
-                icon: Icons.add_circle_outline,
-                borderColor: AppColors.blue,
-                iconColor: AppColors.blue,
-                withBorder: 1,
+              Expanded(
+                child: SFButtonOutLined(
+                  title: Keys.alarmBell,
+                  onPressed: () {},
+                  fixedSize: const Size(274, 40),
+                  textStyle: TextStyles.blue16,
+                  icon: Icons.add_circle_outline,
+                  borderColor: AppColors.blue,
+                  iconColor: AppColors.blue,
+                  withBorder: 1,
+                ),
               ),
               CupertinoSwitch(
                 activeColor: AppColors.green,
@@ -288,7 +290,7 @@ class _HomeScreenState extends State<HomeScreen> {
             ],
           ),
           const SizedBox(
-            height: 100,
+            height: 20,
           ),
         ],
       ),

@@ -6,7 +6,7 @@ import 'package:slee_fi/common/widgets/sf_image_border.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
 import 'package:slee_fi/common/widgets/topbar_common.dart';
 import 'package:slee_fi/di/translations/keys.dart';
-import 'package:slee_fi/presentation/screens/gacha/widgets/attributes_widget.dart';
+import 'package:slee_fi/presentation/screens/info_individual/widget/attributes_widget.dart';
 import 'package:slee_fi/presentation/screens/info_individual/widget/bottom_bar.dart';
 import 'package:slee_fi/presentation/screens/info_individual/widget/bottom_bar_market_place.dart';
 import 'package:slee_fi/presentation/screens/info_individual/widget/box_info_widget.dart';
@@ -41,7 +41,7 @@ class InfoIndividualScreen extends StatelessWidget {
                       child: Stack(
                         alignment: Alignment.center,
                         children: const [
-                          SFIcon(Ics.ellipse),
+                          SFIcon(Imgs.borderBed),
                           SFIcon(Ics.sleep),
                         ],
                       ),
@@ -87,10 +87,7 @@ class InfoIndividualScreen extends StatelessWidget {
                     const SizedBox(height: 24,),
                     SFText(keyText: Keys.attributes, style: TextStyles.bold18LightWhite,),
                     const SizedBox(height: 15,),
-                    const Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 16.0),
-                      child: AttributesWidget(),
-                    ),
+                    const AttributesWidget(),
                     const SizedBox(height: 33,),
                     const MintFromWidget(),
                   ],

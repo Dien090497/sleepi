@@ -25,7 +25,7 @@ class SFPercentBlue extends StatelessWidget {
     return LinearPercentIndicator(
       padding: EdgeInsets.zero,
       percent: valueActive / totalValue,
-      lineHeight: 12,
+      lineHeight: 10,
       linearGradient: AppColors.gradientBlueButton,
       barRadius: const Radius.circular(5),
       backgroundColor: backgroundColor ?? AppColors.darkColor1,

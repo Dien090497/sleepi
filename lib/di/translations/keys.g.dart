@@ -587,4 +587,8 @@ class Keys {
   static const String bedMint = 'bed_mint';
 
   static const String mintFrom = 'mint_from';
+
+  static const String cost = 'cost';
+
+  static const String successRate = 'success_rate';
 }

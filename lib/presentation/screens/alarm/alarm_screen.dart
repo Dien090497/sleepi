@@ -5,10 +5,11 @@ import 'package:slee_fi/common/style/text_styles.dart';
 import 'package:slee_fi/common/widgets/background_widget.dart';
 import 'package:slee_fi/common/widgets/sf_app_bar.dart';
 import 'package:slee_fi/common/widgets/sf_list_tile.dart';
-import 'package:slee_fi/common/widgets/sf_text.dart';
 import 'package:slee_fi/di/translations/keys.dart';
 import 'package:slee_fi/presentation/screens/alarm/widgets/alarm_status_change_widget.dart';
 import 'package:slee_fi/presentation/screens/alarm/widgets/alarm_volume_change_widget.dart';
+import 'package:slee_fi/presentation/screens/alarm/widgets/snooze_status_change.dart';
+import 'package:slee_fi/presentation/screens/alarm/widgets/vibration_status_change.dart';
 
 class AlarmScreen extends StatelessWidget {
   const AlarmScreen({Key? key}) : super(key: key);
@@ -20,7 +21,7 @@ class AlarmScreen extends StatelessWidget {
       color: AppColors.lightGrey,
     );
     Divider divider = Divider(
-      color: AppColors.lightWhite.withOpacity(0.05),
+      color: AppColors.white.withOpacity(0.05),
       height: 1,
     );
     return BackgroundWidget(
@@ -63,33 +64,9 @@ class AlarmScreen extends StatelessWidget {
                           Navigator.pushNamed(context, R.alarmSoundEffect),
                     ),
                     divider,
-                    SFListTile(
-                      text: Keys.vibration,
-                      trailing: Row(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          SFText(
-                            keyText: "ON",
-                            style: TextStyles.lightGrey14,
-                          ),
-                          icon,
-                        ],
-                      ),
-                    ),
+                    const VibrationStatusChangeWidget(),
                     divider,
-                    SFListTile(
-                      text: Keys.snooze,
-                      trailing: Row(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          SFText(
-                            keyText: "ON",
-                            style: TextStyles.lightGrey14,
-                          ),
-                          icon,
-                        ],
-                      ),
-                    ),
+                    const SnoozeStatusChangeWidget(),
                     divider,
                     const AlarmVolumnChangeWidget(),
                   ],
