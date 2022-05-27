@@ -117,10 +117,13 @@ class PopUpLevelUp extends StatelessWidget {
             Row(
               children: [
                 Expanded(
-                    child: SFButton(
-                  text: Keys.cancel,
-                  onPressed: onCancel,
-                )),
+                  child: SFButton(
+                    text: Keys.cancel,
+                    onPressed: onCancel,
+                    textStyle: TextStyles.lightGrey16,
+                    color: AppColors.light4,
+                  ),
+                ),
                 const SizedBox(width: 12),
                 Expanded(
                   child: SFButton(
@@ -130,6 +133,8 @@ class PopUpLevelUp extends StatelessWidget {
                       Navigator.pop(context);
                       showSuccessfulDialog(context);
                     },
+                    textStyle: TextStyles.white16,
+                    gradient: AppColors.gradientBlueButton,
                   ),
                 ),
               ],
