@@ -5,6 +5,7 @@ import 'package:slee_fi/common/widgets/sf_sub_tab_bar.dart';
 import 'package:slee_fi/di/translations/keys.dart';
 import 'package:slee_fi/presentation/screens/product_detail/widgets/jewel_dialog_body.dart';
 import 'package:slee_fi/presentation/screens/product_detail/widgets/my_jewel_short_widget.dart';
+import 'package:slee_fi/presentation/screens/product_detail/widgets/upgrade_tab.dart';
 import 'package:slee_fi/resources/resources.dart';
 
 class TabJewelsDetail extends StatelessWidget {
@@ -61,12 +62,7 @@ class TabJewelsDetail extends StatelessWidget {
                     );
                   },
                 ),
-                SFGridView(
-                  count: jewels.length,
-                  itemBuilder: (context, i) {
-                    return Container();
-                  },
-                ),
+                const UpGradeTab(),
               ],
             ),
           ),
