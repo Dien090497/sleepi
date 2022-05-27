@@ -12,7 +12,7 @@ class FilterSheet extends StatefulWidget {
 }
 
 class _FilterSheetState extends State<FilterSheet> {
-  double quality = 5;
+  int quality = 5;
   final List<String> filters = [
     Keys.efficiency,
     Keys.luck,
@@ -82,11 +82,21 @@ class _FilterSheetState extends State<FilterSheet> {
             ),
           ),
           const SizedBox(height: 16),
-          RangeSlider(
+          Slider(
+            value: quality.toDouble(),
             min: 0,
             max: 10,
-            onChanged: (v) {},
-            values: const RangeValues(0, 10),
+            // label: '$quality',
+
+            // onChangeEnd: (v) {
+            //   quality = v.round();
+            //   setState(() {});
+            // },
+            onChanged: (v) {
+              quality = v.round();
+              setState(() {});
+            },
+            // values: const RangeValues(0, 10),
           ),
         ],
       ),
