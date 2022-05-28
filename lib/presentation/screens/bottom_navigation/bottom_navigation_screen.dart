@@ -27,7 +27,7 @@ class BottomNavigationScreen extends StatelessWidget {
         builder: (context, navState) {
           final navBloc = context.read<BottomNavigationBloc>();
           return Scaffold(
-            extendBody: true,
+            extendBody: false,
             bottomNavigationBar: SFBottomNavigatorHome(
               navState.tabIndex,
               onTap: (i) {

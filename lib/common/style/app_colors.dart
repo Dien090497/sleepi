@@ -50,6 +50,11 @@ class AppColors {
   static const purple = Color(0xFFB800E7);
 
   static const red = Color(0xFFFF511A);
+  static const rank1 = Color(0xFF94D4FF);
+  static const rank2 = Color(0xFF5FBFFF);
+  static const rank3 = Color(0xFF1DA4FF);
+  static const rank4 = Color(0xFF0092F3);
+  static const rank5 = Color(0xFF426BFF);
 
   static LinearGradient gradientBlue = LinearGradient(colors: [
     const Color(0xFFC4C4C4).withOpacity(0),
