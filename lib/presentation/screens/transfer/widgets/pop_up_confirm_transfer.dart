@@ -15,6 +15,14 @@ class PopUpConfirmTransfer extends StatelessWidget {
     return SFAlertDialog(
       padding: const EdgeInsets.all(20.0),
       children: [
+        Align(
+            alignment: Alignment.topRight,
+            child: GestureDetector(
+                onTap: () => Navigator.maybePop(context),
+                child: const Icon(
+                  Icons.close,
+                  color: AppColors.lightGrey,
+                ))),
         SFText(
           keyText: Keys.confirmTransfer,
           style: TextStyles.bold18LightWhite,
