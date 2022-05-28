@@ -5,9 +5,10 @@ import 'package:slee_fi/presentation/screens/change_password/change_password_scr
 import 'package:slee_fi/presentation/screens/create_wallet/create_wallet_screen.dart';
 import 'package:slee_fi/presentation/screens/email/email_screen.dart';
 import 'package:slee_fi/presentation/screens/enter_activation_code/enter_activation_code_screen.dart';
-import 'package:slee_fi/presentation/screens/gacha/gacha_chane_500_screen.dart';
-import 'package:slee_fi/presentation/screens/gacha/gacha_result_bed_screen.dart';
-import 'package:slee_fi/presentation/screens/gacha/gacha_result_overview.dart';
+import 'package:slee_fi/presentation/screens/gacha/layout/gacha_chane_500_screen.dart';
+import 'package:slee_fi/presentation/screens/gacha/layout/gacha_result_bed_screen.dart';
+import 'package:slee_fi/presentation/screens/gacha/layout/gacha_result_overview.dart';
+import 'package:slee_fi/presentation/screens/gacha/layout/probability_layout.dart';
 import 'package:slee_fi/presentation/screens/home/layout/feed_back_screen.dart';
 import 'package:slee_fi/presentation/screens/home/layout/question_screen.dart';
 import 'package:slee_fi/presentation/screens/import_wallet/import_wallet_screen.dart';
@@ -89,8 +90,7 @@ class R {
   static const String result = '${_}result';
   static const String share = '${_}share';
   static const String seedPhrase = '${_}seed_phrase';
-  static const String showSeedPhrase = '${_}show_seed_phrase';
-  static const String exportSeedPhrase = '${_}export_seed_phrase';
+  static const String probability = '${_}probability';
 }
 
 class AppRoutes {
@@ -140,5 +140,6 @@ class AppRoutes {
     R.showSeedPhrase: (_) => const ShowSeedPhraseScreen(),
     R.exportSeedPhrase: (_) => const ExportSeedPhraseScreen(),
     R.question: (_) => const QuestionScreen(),
+    R.probability: (_) => const ProbabilityScreen(),
   };
 }
