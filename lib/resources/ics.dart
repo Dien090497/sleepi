@@ -4,6 +4,8 @@ class Ics {
   Ics._();
 
   static const String arrowLeft = 'assets/icons/arrow_left.svg';
+  static const String bedBunk = 'assets/icons/bed_bunk.svg';
+  static const String bedsCouple = 'assets/icons/beds_couple.svg';
   static const String chart = 'assets/icons/chart.svg';
   static const String efficiency = 'assets/icons/efficiency.svg';
   static const String ellipse = 'assets/icons/ellipse.svg';
@@ -55,6 +57,8 @@ class Ics {
 
   static const List<String> values = [
     arrowLeft,
+    bedBunk,
+    bedsCouple,
     chart,
     efficiency,
     ellipse,

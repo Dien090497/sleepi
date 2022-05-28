@@ -288,5 +288,6 @@
   "stake": "Stake",
   "show_contract_on_avascan": "Show Contract on avascan",
   "effect": "Effect",
-  "displays_message_effect_item": "Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. "
+  "displays_message_effect_item": "Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. ",
+  "matching_bed" : "Matching Bed"
 }
