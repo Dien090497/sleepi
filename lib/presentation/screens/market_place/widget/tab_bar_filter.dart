@@ -18,37 +18,36 @@ class TabBarFilter extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      scrollDirection: Axis.horizontal,
-      physics: const ClampingScrollPhysics(),
-      child: Row(
-        children: [
-          Container(
-            constraints: BoxConstraints(maxWidth: 140.w),
-            child: SFDropDown(
-              value: 'Low Price',
-              dropdownItems: [
-                DropdownMenuItem(
-                  value: 'Low Price',
-                  child: SFText(
-                    keyText: 'Low Price',
-                    style: TextStyles.white16,
-                  ),
+    return Row(
+      children: [
+        Container(
+          constraints: BoxConstraints(maxWidth: 140.w),
+          child: SFDropDown(
+            value: 'Low Price',
+            dropdownItems: [
+              DropdownMenuItem(
+                value: 'Low Price',
+                child: SFText(
+                  keyText: 'Low Price',
+                  style: TextStyles.white16,
                 ),
-                DropdownMenuItem(
-                  value: 'High Price',
-                  child: SFText(
-                    keyText: 'High Price',
-                    style: TextStyles.white16,
-                  ),
+              ),
+              DropdownMenuItem(
+                value: 'High Price',
+                child: SFText(
+                  keyText: 'High Price',
+                  style: TextStyles.white16,
                 ),
-              ],
-            ),
+              ),
+            ],
           ),
-          SFSubTabBar(texts: tabTexts),
-          GestureDetector(
+        ),
+        SFSubTabBar(texts: tabTexts),
+        Expanded(
+          child: GestureDetector(
             onTap: onFilterTap,
             child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 const SFIcon(Ics.filter, color: AppColors.blue),
                 const SizedBox(width: 4),
@@ -56,8 +55,8 @@ class TabBarFilter extends StatelessWidget {
               ],
             ),
           ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 }

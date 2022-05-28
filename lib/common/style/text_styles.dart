@@ -33,8 +33,8 @@ class TextStyles {
       fontSize: 11, color: AppColors.lightGrey, fontWeight: FontWeight.w500);
   static const lightGrey14 =
       TextStyle(fontSize: 14, color: AppColors.lightGrey);
-  static const lightGrey16 = TextStyle(
-      fontSize: 14, color: AppColors.lightGrey, fontWeight: FontWeight.w400);
+  static const lightGrey16 =
+      TextStyle(fontSize: 14, color: AppColors.lightGrey);
   static const lightGrey16500 = TextStyle(
       fontSize: 16, color: AppColors.lightGrey, fontWeight: FontWeight.w500);
   static const grey12 = TextStyle(fontSize: 12, color: AppColors.black);
@@ -144,8 +144,7 @@ class TextStyles {
   static const blue14 = TextStyle(fontSize: 14, color: AppColors.blue);
   static const blue14W700 = TextStyle(
       fontSize: 14, color: AppColors.blue, fontWeight: FontWeight.w700);
-  static const blue16 = TextStyle(
-      fontSize: 16, color: AppColors.blue, fontWeight: FontWeight.w500);
+  static const blue16 = TextStyle(fontSize: 16, color: AppColors.blue);
   static const blue16W700 = TextStyle(
       fontSize: 16, color: AppColors.blue, fontWeight: FontWeight.w700);
   static const green14 = TextStyle(fontSize: 14, color: AppColors.green);
