@@ -14,7 +14,7 @@ Future<T?> showCustomDialog<T>(
 }) async {
   return showDialog(
       context: context,
-      builder: (_) {
+      builder: (context) {
         return SFDialog(
           backgroundColor: backgroundColor,
           padding: padding,
@@ -26,7 +26,7 @@ Future<T?> showCustomDialog<T>(
 Future<T?> showSuccessfulDialog<T>(BuildContext context) async {
   return showDialog(
       context: context,
-      builder: (_) {
+      builder: (context) {
         return SFDialog(
           children: [
             Align(
@@ -35,10 +35,7 @@ Future<T?> showSuccessfulDialog<T>(BuildContext context) async {
                 onPressed: () {
                   Navigator.pop(context);
                 },
-                icon: const Icon(
-                  Icons.close,
-                  color: AppColors.white,
-                ),
+                icon: const Icon(Icons.close, color: AppColors.white),
               ),
             ),
             const SFIcon(Ics.successful),

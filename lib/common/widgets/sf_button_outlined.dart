@@ -46,10 +46,7 @@ class SFButtonOutLined extends StatelessWidget {
               size: 20,
               color: iconColor,
             ),
-          if (icon != null)
-            const SizedBox(
-              width: 9,
-            ),
+          if (icon != null) const SizedBox(width: 9),
           SFText(
             keyText: title,
             style: textStyle ??

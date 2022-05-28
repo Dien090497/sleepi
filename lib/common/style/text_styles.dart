@@ -95,6 +95,8 @@ class TextStyles {
       TextStyle(fontSize: 14, color: AppColors.lightWhite);
   static const lightWhite16 =
       TextStyle(fontSize: 16, color: AppColors.lightWhite);
+  static const lightWhite16W700 = TextStyle(
+      fontSize: 16, color: AppColors.lightWhite, fontWeight: FontWeight.w700);
   static const white14 = TextStyle(fontSize: 14, color: AppColors.white);
   static const white14W700 = TextStyle(
       fontSize: 14, color: AppColors.white, fontWeight: FontWeight.w700);
