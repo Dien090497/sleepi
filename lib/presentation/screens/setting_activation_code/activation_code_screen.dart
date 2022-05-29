@@ -22,14 +22,17 @@ class ActivationCodeScreen extends StatelessWidget {
           toUpperCase: true,
         ),
         body: SafeArea(
-            child: Column(children: const [
-          AvailableWidget(),
-          SizedBox(
-            height: 32,
+          child: Column(
+            children: const [
+              AvailableWidget(),
+              SizedBox(
+                height: 32,
+              ),
+              Expanded(child: ActivationCodeList()),
+              // ActivationCodeList(),
+            ],
           ),
-          Expanded(child: ActivationCodeList()),
-          // ActivationCodeList(),
-        ])),
+        ),
       ),
     );
   }

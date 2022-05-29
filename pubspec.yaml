@@ -42,6 +42,7 @@ dependencies:
   dropdown_button2: ^1.5.2
   qr_flutter: ^4.0.0
   cool_dropdown: ^1.4.1
+  syncfusion_flutter_sliders: ^20.1.57
 
 dependency_overrides:
   analyzer: ^4.1.0
