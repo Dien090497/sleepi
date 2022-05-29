@@ -34,7 +34,7 @@ class SleepFiQrCode extends StatelessWidget {
                 ),
                 child: CustomPaint(
                   foregroundPainter: DashedLinePainter(),
-                  child: Container(
+                  child: SizedBox(
                     width: MediaQuery.of(context).size.width -56,
                     height: 1,
                   ),
