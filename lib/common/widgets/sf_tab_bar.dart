@@ -57,7 +57,7 @@ class _SFTabBarState extends State<SFTabBar>
                       ? AppColors.transparent
                       : AppColors.whiteOpacity5,
                 ),
-                padding: const EdgeInsets.symmetric(horizontal: 20),
+                padding: widget.padding ?? const EdgeInsets.symmetric(horizontal: 20),
                 child: Tab(text: translate(widget.texts[i]))),
           ),
           indicator: BoxDecoration(

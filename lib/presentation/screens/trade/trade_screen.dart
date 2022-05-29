@@ -7,13 +7,12 @@ import 'package:slee_fi/common/widgets/sf_alert_dialog.dart';
 import 'package:slee_fi/common/widgets/sf_button_outlined.dart';
 import 'package:slee_fi/common/widgets/sf_buttons.dart';
 import 'package:slee_fi/common/widgets/sf_card.dart';
-import 'package:slee_fi/common/widgets/sf_icon.dart';
 import 'package:slee_fi/common/widgets/sf_icon_border.dart';
 import 'package:slee_fi/common/widgets/sf_sub_app_bar.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
 import 'package:slee_fi/di/translations/keys.dart';
+import 'package:slee_fi/presentation/screens/send_to_external/widgets/dropdown_select_token.dart';
 import 'package:slee_fi/presentation/screens/trade/widgets/pop_up_confirm_trade.dart';
-import 'package:slee_fi/resources/resources.dart';
 
 class TradeScreen extends StatelessWidget {
   const TradeScreen({Key? key}) : super(key: key);
@@ -88,19 +87,12 @@ class TradeScreen extends StatelessWidget {
                                           borderColor: AppColors.blue,
                                           onPressed: () {}),
                                       const SizedBox(width: 8),
-                                      const Icon(
-                                        Icons.monetization_on_outlined,
-                                        color: AppColors.blue,
+                                      const DropdownSelectToken(
+                                        width: 115,
+                                        height: 36,
+                                        backgroundColor: AppColors.transparent,
+                                        isResultLabel: true,
                                       ),
-                                      const SizedBox(width: 4),
-                                      SFText(
-                                        keyText: 'USDC',
-                                        style: TextStyles.lightGrey12,
-                                      ),
-                                      const Icon(
-                                        Icons.keyboard_arrow_down_rounded,
-                                        color: AppColors.lightGrey,
-                                      )
                                     ],
                                   ),
                                 ),
@@ -132,37 +124,18 @@ class TradeScreen extends StatelessWidget {
                                     style: TextStyles.lightGrey14),
                               ],
                             ),
-                            const SizedBox(height: 24),
-                            Padding(
-                              padding:
-                                  const EdgeInsets.symmetric(horizontal: 12.0),
-                              child: Row(
-                                children: [
-                                  const Spacer(),
-                                  GestureDetector(
-                                    onTap: () {},
-                                    child: Row(
-                                      children: [
-                                        const SFIcon(
-                                          Ics.icSilver,
-                                          width: 24,
-                                        ),
-                                        const SizedBox(width: 4),
-                                        SFText(
-                                          keyText: 'USDC',
-                                          style: TextStyles.lightGrey12,
-                                        ),
-                                        const Icon(
-                                          Icons.keyboard_arrow_down_rounded,
-                                          color: AppColors.lightGrey,
-                                        )
-                                      ],
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
                             const SizedBox(height: 12),
+                            Row(
+                              children: const [
+                                Spacer(),
+                                DropdownSelectToken(
+                                  width: 115,
+                                  height: 36,
+                                  backgroundColor: AppColors.transparent,
+                                  isResultLabel: true,
+                                ),
+                              ],
+                            ),
                           ],
                         ),
                       ),

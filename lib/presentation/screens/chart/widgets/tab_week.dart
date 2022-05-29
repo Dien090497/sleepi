@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_date_pickers/flutter_date_pickers.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
+import 'package:slee_fi/common/style/text_styles.dart';
 import 'package:slee_fi/common/widgets/sf_dialog.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
 import 'package:slee_fi/di/translations/keys.dart';
@@ -13,7 +14,7 @@ class TabWeek extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListView(
-      padding: const EdgeInsets.symmetric(vertical: 16),
+      padding: const EdgeInsets.all(16),
       children: [
         GestureDetector(
           onTap: () {
@@ -23,7 +24,7 @@ class TabWeek extends StatelessWidget {
                 ChartWeekPicker(
                   selectedDate: DateTime.now(),
                   firstAllowedDate:
-                      DateTime.now().subtract(const Duration(days: 45)),
+                  DateTime.now().subtract(const Duration(days: 45)),
                   lastAllowedDate: DateTime.now().add(const Duration(days: 45)),
                   onNewSelected: (period) {},
                 )
@@ -33,98 +34,80 @@ class TabWeek extends StatelessWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: const [
-              Icon(Icons.arrow_back_ios, size: 16),
+              Icon(Icons.arrow_back_ios, size: 16, color: AppColors.lightGrey,),
               SizedBox(width: 12),
               Text('April 20th ~ 26th, 2022'),
               SizedBox(width: 12),
-              Icon(Icons.arrow_forward_ios, size: 16),
+              Icon(Icons.arrow_forward_ios, size: 16, color: AppColors.lightGrey),
             ],
           ),
         ),
-        const SizedBox(height: 16),
-        ChartTitle(
-          text: Keys.totalTokenEarned,
-          child: Container(
-            decoration: BoxDecoration(
-              border: Border.all(color: AppColors.black),
-              borderRadius: BorderRadius.circular(8),
-              color: AppColors.greyBottomNavBar,
-            ),
-            padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 8),
-            alignment: Alignment.centerRight,
-            child: SFText(
-              keyText: 'SFLT',
-            ),
-          ),
+        const SizedBox(height: 33),
+        const ChartTitle(
+          title: Keys.slft,
+          textStyleTitle: TextStyles.bold16LightWhite,
+          toUpperCase: true,
+          padding: EdgeInsets.zero,
         ),
-        const SizedBox(height: 16),
-        const SizedBox(
-          height: 200,
-          child: ChartWidget(),
+        const SizedBox(height: 12),
+        const ChartWidget(),
+        const SizedBox(height: 40),
+        const ChartTitle(
+            title: Keys.averageSleepScore,
+            textStyleTitle: TextStyles.bold16LightWhite,
+            result: "80/100",
+            textStyleResult: TextStyles.bold16Blue,
+            padding: EdgeInsets.zero
         ),
-        const SizedBox(height: 16),
-        ChartTitle(
-          text: Keys.averageSleepScore,
-          child: Container(
-            decoration: BoxDecoration(
-              border: Border.all(color: AppColors.black),
-              borderRadius: BorderRadius.circular(8),
-              color: AppColors.greyBottomNavBar,
-            ),
-            padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 8),
-            alignment: Alignment.centerRight,
-            child: SFText(
-              keyText: '/100',
-            ),
-          ),
+        const SizedBox(height: 12),
+        const ChartWidget(),
+        const SizedBox(height: 40),
+        const ChartTitle(
+          title: Keys.bedTime,
+          textStyleTitle: TextStyles.bold16LightWhite,
         ),
-        const SizedBox(height: 16),
-        const SizedBox(
-          height: 200,
-          child: ChartWidget(),
+        const SizedBox(height: 12),
+        const ChartWidget(),
+        const SizedBox(height: 40),
+        const ChartTitle(
+            title: Keys.sleepOnsetTime,
+            textStyleTitle: TextStyles.bold16LightWhite,
+            padding: EdgeInsets.zero
         ),
-        const SizedBox(height: 16),
-        const ChartTitle(text: Keys.bedTime),
+        const SizedBox(height: 12),
+        const ChartWidget(),
+        const SizedBox(height: 40),
+        const ChartTitle(
+            title: Keys.wokeUp,
+            textStyleTitle: TextStyles.bold16LightWhite,
+            padding: EdgeInsets.zero
+        ),
+        const SizedBox(height: 12),
+        const ChartWidget(),
+        const SizedBox(height: 40),
+        const ChartTitle(
+            title: Keys.sleepDuration,
+            textStyleTitle: TextStyles.bold16LightWhite,
+            padding: EdgeInsets.zero
+        ),
         const SizedBox(height: 4),
-        const SizedBox(
-          height: 200,
-          child: ChartWidget(),
-        ),
+        const ChartWidget(),
         const SizedBox(height: 16),
-        const ChartTitle(text: Keys.sleepOnsetTime),
-        const SizedBox(height: 4),
-        const SizedBox(
-          height: 200,
-          child: ChartWidget(),
+        const ChartTitle(
+            title: Keys.timeInBed,
+            textStyleTitle: TextStyles.bold16LightWhite,
+            padding: EdgeInsets.zero
         ),
-        const SizedBox(height: 16),
-        const ChartTitle(text: Keys.wokeUp),
-        const SizedBox(height: 4),
-        const SizedBox(
-          height: 200,
-          child: ChartWidget(),
+        const SizedBox(height: 12),
+        const ChartWidget(),
+        const SizedBox(height: 40),
+        const ChartTitle(
+            title: Keys.nocturnalAwakening,
+            textStyleTitle: TextStyles.bold16LightWhite,
+            padding: EdgeInsets.zero
         ),
-        const SizedBox(height: 16),
-        const ChartTitle(text: Keys.sleepDuration),
-        const SizedBox(height: 4),
-        const SizedBox(
-          height: 200,
-          child: ChartWidget(),
-        ),
-        const SizedBox(height: 16),
-        const ChartTitle(text: Keys.timeInBed),
-        const SizedBox(height: 4),
-        const SizedBox(
-          height: 200,
-          child: ChartWidget(),
-        ),
-        const SizedBox(height: 16),
-        const ChartTitle(text: Keys.nocturnalAwakening),
-        const SizedBox(height: 4),
-        const SizedBox(
-          height: 200,
-          child: ChartWidget(),
-        ),
+        const SizedBox(height: 12),
+        const ChartWidget(),
       ],
     );
   }
@@ -133,10 +116,10 @@ class TabWeek extends StatelessWidget {
 class ChartWeekPicker extends StatelessWidget {
   const ChartWeekPicker(
       {Key? key,
-      required this.selectedDate,
-      required this.firstAllowedDate,
-      required this.lastAllowedDate,
-      required this.onNewSelected})
+        required this.selectedDate,
+        required this.firstAllowedDate,
+        required this.lastAllowedDate,
+        required this.onNewSelected})
       : super(key: key);
 
   final DateTime selectedDate;

@@ -25,7 +25,6 @@ import 'package:slee_fi/presentation/screens/seed_phrase/layouts/export_seed_phr
 import 'package:slee_fi/presentation/screens/seed_phrase/layouts/show_seed_phrase_screen.dart';
 import 'package:slee_fi/presentation/screens/seed_phrase/seed_phrase_screen.dart';
 import 'package:slee_fi/presentation/screens/send_to_external/send_to_external_screen.dart';
-import 'package:slee_fi/presentation/screens/send_to_spending/send_to_spending_screen.dart';
 import 'package:slee_fi/presentation/screens/setting/setting_screen.dart';
 import 'package:slee_fi/presentation/screens/setting_activation_code/activation_code_screen.dart';
 import 'package:slee_fi/presentation/screens/setting_permission/setting_permission_screen.dart';
@@ -120,7 +119,6 @@ class AppRoutes {
     R.createWallet: (_) => const CreateWalletScreen(),
     R.importWallet: (_) => const ImportWalletScreen(),
     R.sendToExternal: (_) => const SendToExternalScreen(),
-    R.sendToSpending: (_) => const SendToSpendingScreen(),
     R.trade: (_) => const TradeScreen(),
     R.email: (_) => const EmailScreen(),
     R.changePassword: (_) => const ChangePasswordScreen(),
