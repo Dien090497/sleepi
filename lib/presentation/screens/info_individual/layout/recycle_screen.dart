@@ -1,8 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
+import 'package:slee_fi/common/style/text_styles.dart';
+import 'package:slee_fi/common/widgets/background_widget.dart';
 import 'package:slee_fi/common/widgets/sf_buttons.dart';
+import 'package:slee_fi/common/widgets/sf_card.dart';
+import 'package:slee_fi/common/widgets/sf_icon.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
-import 'package:slee_fi/common/widgets/sf_textfield.dart';
+import 'package:slee_fi/di/translations/keys.dart';
+import 'package:slee_fi/resources/resources.dart';
 
 class RecycleScreen extends StatelessWidget {
   const RecycleScreen({Key? key}) : super(key: key);
@@ -11,104 +17,176 @@ class RecycleScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final Size size = MediaQuery.of(context).size;
     return Scaffold(
-      body: SafeArea(
-        child: SingleChildScrollView(
-          physics: const BouncingScrollPhysics(),
-          child: Column(
-            children: [
-              Padding(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      body: BackgroundWidget(
+        child: SafeArea(
+          child: SingleChildScrollView(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.only(
+                    top: 20,
+                    left: 16,
+                    right: 16,
+                  ),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      InkWell(
+                        onTap: () {
+                          Navigator.pop(context);
+                        },
+                        child: const SFIcon(
+                          Ics.arrowLeft,
+                          width: 32,
+                          height: 32,
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 20),
+                        child: SFText(
+                          keyText: Keys.probability,
+                          style: TextStyles.boldWhite18,
+                        ),
+                      ),
+                      const Expanded(child: SizedBox()),
+                    ],
+                  ),
+                ),
+                Column(
                   children: [
-                    GestureDetector(
-                      onTap: () {
-                        Navigator.pop(context);
-                      },
-                      child: Container(
-                        padding: const EdgeInsets.all(10),
-                        decoration: const BoxDecoration(
-                            color: Colors.cyanAccent, shape: BoxShape.circle),
-                        child: const Icon(
-                          Icons.arrow_back_ios,
+                    const SizedBox(
+                      height: 60,
+                    ),
+                    Container(
+                      decoration: BoxDecoration(
+                          image: const DecorationImage(
+                            image: AssetImage(
+                              "assets/images/borderBed.png",
+                            ),
+                            fit: BoxFit.cover,
+                          ),
+                          boxShadow: [
+                            BoxShadow(
+                              color: AppColors.purple.withOpacity(0.02),
+                              spreadRadius: 3,
+                              blurRadius: 7,
+                              offset: const Offset(
+                                  0, 3), // changes position of shadow
+                            ),
+                          ],
+                          borderRadius: BorderRadius.circular(20)),
+                      width: 160,
+                      height: 160,
+                      child: SizedBox(
+                        child: SvgPicture.asset(Ics.sleep),
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 30,
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 20),
+                      child: SFCard(
+                        margin: EdgeInsets.zero,
+                        padding: const EdgeInsets.symmetric(
+                            vertical: 24, horizontal: 18),
+                        child: Row(
+                          children: [
+                            SFText(
+                              keyText: Keys.token,
+                              style: TextStyles.lightGrey16,
+                            ),
+                            const SizedBox(width: 4),
+                            Expanded(
+                              child: SFText(
+                                keyText: '0 SLFT + 0 SLGT',
+                                style: TextStyles.white16,
+                                textAlign: TextAlign.right,
+                              ),
+                            ),
+                          ],
                         ),
                       ),
                     ),
-                    SFButton(
-                      text: 'BED RECYCLE',
-                      onPressed: () {},
-                    ),
-                    const SizedBox(),
-                  ],
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 40),
-                child: Column(
-                  children: [
-                    Container(
-                      height: size.height * 0.23,
-                      width: size.width,
-                      alignment: Alignment.center,
-                      decoration: BoxDecoration(
-                          color: AppColors.grey,
-                          borderRadius: BorderRadius.circular(10),
-                          border: Border.all(color: AppColors.black)),
-                      child: SFText(
-                        keyText: 'Recycle Image',
-                      ),
-                    ),
                     const SizedBox(
                       height: 20,
-                    ),
-                    const Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 20),
-                      child: SFTextField(
-                        hintText: 'Token',
-                      ),
-                    ),
-                    const SizedBox(
-                      height: 20,
-                    ),
-                    Container(
-                      height: size.height * 0.22,
-                      width: size.width,
-                      alignment: Alignment.center,
-                      decoration: BoxDecoration(
-                        color: AppColors.grey.withOpacity(0.8),
-                      ),
-                      child: SFText(
-                        keyText: 'Text',
-                      ),
-                    ),
-                    const SizedBox(
-                      height: 20,
-                    ),
-                    Container(
-                      height: size.height * 0.18,
-                      width: size.width,
-                      alignment: Alignment.center,
-                      decoration: BoxDecoration(
-                        color: AppColors.grey.withOpacity(0.8),
-                      ),
-                      child: SFText(
-                        keyText: 'Text',
-                      ),
-                    ),
-                    const SizedBox(
-                      height: 20,
-                    ),
-                    SFButton(
-                      text: 'Recycle',
-                      onPressed: () {},
-                      color: AppColors.grey.withOpacity(0.5),
-                      width: size.width,
                     ),
                   ],
                 ),
-              ),
-            ],
+                Container(
+                  height: size.height / 2,
+                  decoration: const BoxDecoration(
+                    color: AppColors.black,
+                    borderRadius: BorderRadius.only(
+                      topRight: Radius.circular(20),
+                      topLeft: Radius.circular(20),
+                    ),
+                  ),
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        const SizedBox(height: 20,),
+                        SFText(keyText: Keys.successRate, style: TextStyles.lightWhite14,),
+                        const SizedBox(height: 20,),
+                        Container(
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(15),
+                            color: AppColors.white.withOpacity(0.05),
+                          ),
+                          child: Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+                            child: Column(
+                              children: [
+                                 Row(
+                                    children: [
+                                      SFText(keyText: Keys.commonBedBox, style: TextStyles.white14,),
+                                      const Spacer(),
+                                      SFText(keyText: '35%', style: TextStyles.lightWhite14,),
+                                    ],
+                                  ),
+                                const SizedBox(height: 15,),
+                                const Divider(thickness: 0.3, color: AppColors.lightWhite, height: 1,),
+                                const SizedBox(height: 15,),
+                                Row(
+                                  children: [
+                                    SFText(keyText: Keys.failure, style: TextStyles.white14,),
+                                    const Spacer(),
+                                    SFText(keyText: '65%', style: TextStyles.lightWhite14,),
+                                  ],
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                        const SizedBox(height: 40,),
+                        SFText(keyText: Keys.whatRecycle, style: TextStyles.lightWhite14,),
+                        const SizedBox(height: 10,),
+                        SFText(keyText: Keys.bodyRecycle, style: TextStyles.white14,),
+                        const SizedBox(height: 40,),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 10),
+                          child: Center(
+                            child: SFButton(
+                              text: Keys.recycle,
+                              textStyle: TextStyles.white16,
+                              radius: 100,
+                              gradient: AppColors.gradientBlueButton,
+                              height: 45,
+                              width: size.width,
+                              toUpperCase: true,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ],
+            ),
           ),
         ),
       ),
