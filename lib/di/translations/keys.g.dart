@@ -622,4 +622,12 @@ class Keys {
       'displays_message_effect_item';
 
   static const String matchingBed = 'matching_bed';
+
+  static const String token = 'token';
+
+  static const String withoutCase = 'without_case';
+
+  static const String withCase = 'with_case';
+
+  static const String failure = 'failure';
 }
