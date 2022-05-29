@@ -9,8 +9,6 @@ import 'package:slee_fi/common/widgets/sf_buttons.dart';
 import 'package:slee_fi/common/widgets/sf_icon.dart';
 import 'package:slee_fi/common/widgets/sf_label_value.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
-import 'package:slee_fi/common/widgets/sf_textfield.dart';
-import 'package:slee_fi/common/widgets/topbar_common.dart';
 import 'package:slee_fi/di/translations/keys.dart';
 import 'package:slee_fi/resources/resources.dart';
 
