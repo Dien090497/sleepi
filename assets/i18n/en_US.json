@@ -293,5 +293,9 @@
   "token": "Token",
   "without_case": "Success Rate: Without Insurance Case",
   "with_case": "Success Rate: With Insurance Case",
-  "failure": "Failure"
+  "failure": "Failure",
+  "bed_recycle" : "Bed Recycle",
+  "what_recycle" : "What Recycling?",
+  "body_recycle" : "Amet minim mollit non deserunt ullamco est\n sit aliqua dolor do amet sint. Velit officia\n consequat duis enim velit mollit.",
+  "common_bed_box" : "Common Bed Box"
 }

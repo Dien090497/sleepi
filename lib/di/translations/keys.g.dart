@@ -630,4 +630,12 @@ class Keys {
   static const String withCase = 'with_case';
 
   static const String failure = 'failure';
+
+  static const String bedRecycle = 'bed_recycle';
+
+  static const String whatRecycle = 'what_recycle';
+
+  static const String bodyRecycle = 'body_recycle';
+
+  static const String commonBedBox = 'common_bed_box';
 }

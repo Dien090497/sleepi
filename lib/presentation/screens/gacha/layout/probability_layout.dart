@@ -21,33 +21,36 @@ class ProbabilityScreen extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-          Padding(
-          padding: const EdgeInsets.only(
-            top: 20,
-            left: 16,
-            right: 16,
-          ),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              InkWell(
-                onTap: () {
-                  Navigator.pop(context);
-                },
-                child: const SFIcon(
-                  Ics.arrowLeft,
-                  width: 32,
-                  height: 32,
+              Padding(
+                padding: const EdgeInsets.only(
+                  top: 20,
+                  left: 16,
+                  right: 16,
+                ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    InkWell(
+                      onTap: () {
+                        Navigator.pop(context);
+                      },
+                      child: const SFIcon(
+                        Ics.arrowLeft,
+                        width: 32,
+                        height: 32,
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 20),
+                      child: SFText(
+                        keyText: Keys.probability,
+                        style: TextStyles.boldWhite18,
+                      ),
+                    ),
+                    const Expanded(child: SizedBox()),
+                  ],
                 ),
               ),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 20),
-                child: SFText(keyText: Keys.probability, style: TextStyles.boldWhite18,),
-              ),
-              const Expanded(child: SizedBox()),
-            ],
-          ),
-        ),
               const SizedBox(height: 20),
               const Expanded(
                 child: SFTabBar(
