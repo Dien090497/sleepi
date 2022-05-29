@@ -34,6 +34,10 @@ class TextStyles {
     fontSize: 10,
     color: AppColors.lightGrey,
   );
+  static const lightGrey11 = TextStyle(
+    fontSize: 11,
+    color: AppColors.lightGrey,
+  );
   static const lightGrey12 =
       TextStyle(fontSize: 12, color: AppColors.lightGrey);
   static const w400lightGrey12 =

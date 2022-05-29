@@ -22,76 +22,86 @@ class _ResultScreenState extends State<ResultScreen> {
   @override
   Widget build(BuildContext context) {
     return BackgroundWidget(
-      child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 16.0),
-        child: Scaffold(
-          backgroundColor: AppColors.transparent,
-          appBar: SFAppBar(
-            context: context,
-            title: Keys.result,
-            textStyle: TextStyles.bold18LightWhite,
-          ),
-          body: SingleChildScrollView(
-            physics: const ScrollPhysics(),
-            child: Column(
-              children: [
-                const SizedBox(
-                  height: 20,
-                ),
-                const CategoryHeader(
-                  earning: 1000,
-                  score: 99,
-                  sleepDuration: '7h35min',
-                ),
-                const SizedBox(
-                  height: 32,
-                ),
-                ChartStatistic(),
-                const SizedBox(
-                  height: 24,
-                ),
-                const SFLabelValue(label: Keys.bedTime, value: '23:30'),
-                const SizedBox(
-                  height: 8,
-                ),
-                const SFLabelValue(label: Keys.sleepOnsetTime, value: '00:30'),
-                const SizedBox(
-                  height: 8,
-                ),
-                const SFLabelValue(label: Keys.wokeUp, value: '08:30'),
-                const SizedBox(
-                  height: 8,
-                ),
-                const SFLabelValue(label: Keys.nocturnalAwakening, value: '1'),
-                const SizedBox(
-                  height: 8,
-                ),
-                const SFLabelValue(label: Keys.sleepDuration, value: '8h45min'),
-                const SizedBox(
-                  height: 8,
-                ),
-                const SFLabelValue(label: Keys.sleepQuality, value: '99/100'),
-                const SizedBox(
-                  height: 24,
-                ),
-                SFButton(
-                  text: Keys.shareYourSleep,
-                  textStyle: TextStyles.white16,
-                  gradient: AppColors.gradientBlueButton,
-                  width: double.infinity,
-                  height: 48,
-                  onPressed: () {
-                    Navigator.pushNamed(context, R.share);
-                  },
-                ),
-                const SizedBox(
-                  height: 20,
-                ),
-              ],
+        child: Stack(
+      children: [
+        Container(
+          width: double.infinity,
+          height: double.infinity,
+          padding: const EdgeInsets.symmetric(horizontal: 16.0),
+          child: Scaffold(
+            backgroundColor: AppColors.transparent,
+            appBar: SFAppBar(
+              context: context,
+              title: Keys.result,
+              textStyle: TextStyles.bold18LightWhite,
+            ),
+            body: SingleChildScrollView(
+              physics: const ScrollPhysics(),
+              child: Column(
+                children: [
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  const CategoryHeader(
+                    earning: 1000,
+                    score: 99,
+                    sleepDuration: '7h35min',
+                  ),
+                  const SizedBox(
+                    height: 32,
+                  ),
+                  ChartStatistic(),
+                  const SizedBox(
+                    height: 24,
+                  ),
+                  const SFLabelValue(label: Keys.bedTime, value: '23:30'),
+                  const SizedBox(
+                    height: 8,
+                  ),
+                  const SFLabelValue(
+                      label: Keys.sleepOnsetTime, value: '00:30'),
+                  const SizedBox(
+                    height: 8,
+                  ),
+                  const SFLabelValue(label: Keys.wokeUp, value: '08:30'),
+                  const SizedBox(
+                    height: 8,
+                  ),
+                  const SFLabelValue(
+                      label: Keys.nocturnalAwakening, value: '1'),
+                  const SizedBox(
+                    height: 8,
+                  ),
+                  const SFLabelValue(
+                      label: Keys.sleepDuration, value: '8h45min'),
+                  const SizedBox(
+                    height: 8,
+                  ),
+                  const SFLabelValue(label: Keys.sleepQuality, value: '99/100'),
+                  const SizedBox(
+                    height: 92,
+                  ),
+                ],
+              ),
             ),
           ),
         ),
-      ),
-    );
+        Positioned(
+          bottom: 20,
+          left: 16,
+          right: 16,
+          child: SFButton(
+            text: Keys.shareYourSleep,
+            textStyle: TextStyles.white16,
+            gradient: AppColors.gradientBlueButton,
+            width: double.infinity,
+            height: 48,
+            onPressed: () {
+              Navigator.pushNamed(context, R.share);
+            },
+          ),
+        ),
+      ],
+    ));
   }
 }
