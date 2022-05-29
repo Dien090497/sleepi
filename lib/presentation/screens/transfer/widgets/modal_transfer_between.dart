@@ -20,10 +20,12 @@ class ModalTransferBetween extends StatelessWidget {
       Keys.bedBox
     ];
     List urlImages = [
-      Imgs.avax,
-      Imgs.slft,
-      Imgs.slgt,
+      Ics.icSolanaCircle,
+      Ics.icGold,
+      Ics.icSilver,
+      Ics.icBeds,
       Imgs.jewels,
+      Ics.icBedBoxes
     ];
     return ListView.builder(
         itemCount: keyList.length,

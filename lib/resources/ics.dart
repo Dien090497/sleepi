@@ -16,8 +16,11 @@ class Ics {
   static const String heart = 'assets/icons/heart.svg';
   static const String home = 'assets/icons/home.svg';
   static const String icArrowUpRight = 'assets/icons/ic_arrow_up_right.svg';
+  static const String icBedBoxes = 'assets/icons/ic_bed_boxes.svg';
+  static const String icBeds = 'assets/icons/ic_beds.svg';
   static const String icCalculator = 'assets/icons/ic_calculator.svg';
   static const String icCircleQuestion = 'assets/icons/ic_circle_question.svg';
+  static const String icDeleteTwo = 'assets/icons/ic_delete_two.svg';
   static const String icDownload = 'assets/icons/ic_download.svg';
   static const String icEdit = 'assets/icons/ic_edit.svg';
   static const String icEye = 'assets/icons/ic_eye.svg';
@@ -67,8 +70,11 @@ class Ics {
     heart,
     home,
     icArrowUpRight,
+    icBedBoxes,
+    icBeds,
     icCalculator,
     icCircleQuestion,
+    icDeleteTwo,
     icDownload,
     icEdit,
     icEye,

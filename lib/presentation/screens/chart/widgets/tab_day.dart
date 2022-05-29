@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_date_pickers/flutter_date_pickers.dart' as dp;
 import 'package:slee_fi/common/style/app_colors.dart';
+import 'package:slee_fi/common/style/text_styles.dart';
+import 'package:slee_fi/common/widgets/sf_card.dart';
 import 'package:slee_fi/common/widgets/sf_dialog.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
 import 'package:slee_fi/di/translations/keys.dart';
-import 'package:slee_fi/presentation/screens/chart/widgets/chart_title.dart';
-import 'package:slee_fi/presentation/screens/chart/widgets/sleep_cycle_chart.dart';
 import 'package:slee_fi/presentation/screens/chart/widgets/sleep_score_widget.dart';
+import 'package:slee_fi/presentation/screens/result/widgets/chart_statistic.dart';
 
 class TabDay extends StatelessWidget {
   const TabDay({Key? key}) : super(key: key);
@@ -14,7 +15,7 @@ class TabDay extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListView(
-      padding: const EdgeInsets.symmetric(vertical: 16),
+      padding: const EdgeInsets.all(16),
       children: [
         GestureDetector(
           onTap: () {
@@ -34,47 +35,53 @@ class TabDay extends StatelessWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: const [
-              Icon(Icons.arrow_back_ios, size: 16),
+              Icon(Icons.arrow_back_ios, size: 16, color: AppColors.lightGrey),
               SizedBox(width: 12),
               Text('April 26th, 2022'),
               SizedBox(width: 12),
-              Icon(Icons.arrow_forward_ios, size: 16),
+              Icon(Icons.arrow_forward_ios, size: 16, color: AppColors.lightGrey),
             ],
           ),
         ),
         const SizedBox(height: 16),
-        ChartTitle(
-          text: Keys.tokenEarned,
-          child: Container(
-            decoration: BoxDecoration(
-              color: AppColors.greyBottomNavBar,
-              borderRadius: BorderRadius.circular(8),
-              border: Border.all(color: AppColors.black),
-            ),
-            width: 200,
-            alignment: Alignment.centerRight,
-            padding: const EdgeInsets.all(8),
-            child: SFText(keyText: 'SLFT'),
+        SFCard(
+          padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 18),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              SFText(
+                keyText: Keys.tokenEarned,
+                style: TextStyles.lightWhite16,
+              ),
+              Expanded(
+                  child: SFText(
+                      keyText: "100 SLGT",
+                      style: TextStyles.lightWhite16,
+                      textAlign: TextAlign.end)),
+            ],
           ),
         ),
-        const SizedBox(height: 16),
-        ChartTitle(
-          text: Keys.sleepScore,
-          child: Container(
-            decoration: BoxDecoration(
-              color: AppColors.greyBottomNavBar,
-              borderRadius: BorderRadius.circular(8),
-              border: Border.all(color: AppColors.black),
-            ),
-            width: 200,
-            padding: const EdgeInsets.all(8),
-            alignment: Alignment.centerRight,
-            child: SFText(keyText: '/100'),
+        const SizedBox(height: 12,),
+        SFCard(
+          padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 18),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              SFText(
+                keyText: Keys.tokenEarned,
+                style: TextStyles.lightWhite16,
+              ),
+              Expanded(
+                  child: SFText(
+                      keyText: "100 SLGT",
+                      style: TextStyles.lightWhite16,
+                      textAlign: TextAlign.end)),
+            ],
           ),
         ),
-        const SizedBox(height: 16),
-        const SleepCycleChart(),
-        const SizedBox(height: 16),
+        const SizedBox(height: 32),
+         ChartStatistic(),
+        const SizedBox(height: 24),
         const SleepScore(),
       ],
     );

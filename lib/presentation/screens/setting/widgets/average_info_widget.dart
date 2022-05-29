@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
-import 'package:slee_fi/common/widgets/sf_text.dart';
+import 'package:slee_fi/common/widgets/average_widget.dart';
 import 'package:slee_fi/di/translations/keys.dart';
 
 class AverageInfoWidget extends StatelessWidget {
@@ -42,23 +42,11 @@ class AverageInfoWidget extends StatelessWidget {
       shrinkWrap: true,
       padding: const EdgeInsets.symmetric(horizontal: 12.0),
       children: List.generate(texts.length, (i) {
-        return Container(
-          padding: const EdgeInsets.all(24.0),
-          decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(16.0), color: colors[i]),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              SFText(
-                keyText: texts[i],
-                style: textStyleTitle[i],
-              ),
-              const SizedBox(
-                height: 11.0,
-              ),
-              SFText(keyText: "10:55", style: textStyleNum[i])
-            ],
-          ),
+        return AverageWidget(
+          title: texts[i],
+          textStyle: textStyleTitle[i],
+          textStyleNumber: textStyleNum[i],
+          color: colors[i],
         );
       }),
     );

@@ -14,6 +14,7 @@ class DropdownSelectToken extends StatefulWidget {
     this.padding,
     this.margin,
     this.backgroundColor,
+    this.isResultLabel = false,
     Key? key, this.dropdownItems}) : super(key: key);
 
   final String? value;
@@ -23,6 +24,7 @@ class DropdownSelectToken extends StatefulWidget {
   final EdgeInsets? padding;
   final Color? backgroundColor;
   final List<DropdownMenuItem>? dropdownItems;
+  final bool isResultLabel;
 
   @override
   State<DropdownSelectToken> createState() => _DropdownSelectTokenState();
@@ -79,11 +81,11 @@ class _DropdownSelectTokenState extends State<DropdownSelectToken> {
   @override
   Widget build(BuildContext context) {
     return  CoolDropdown(
-      resultWidth: 70,
-      resultHeight: 32,
+      resultWidth: widget.width ?? 70,
+      resultHeight: widget.height ?? 32,
       defaultValue: dropdownItemList[0],
       dropdownList: dropdownItemList,
-      isResultLabel: false,
+      isResultLabel: widget.isResultLabel,
       dropdownItemReverse: true,
       dropdownItemMainAxis: MainAxisAlignment.start,
       resultMainAxis: MainAxisAlignment.start,
@@ -95,12 +97,14 @@ class _DropdownSelectTokenState extends State<DropdownSelectToken> {
         borderRadius: BorderRadius.circular(4.0),
       ),
       resultBD: BoxDecoration(
-        color: AppColors.white.withOpacity(0.1),
+        color: widget.backgroundColor ??  AppColors.white.withOpacity(0.1),
         borderRadius: BorderRadius.circular(4.0),
       ),
       selectedItemBD : const BoxDecoration(
         color: AppColors.transparent,
       ),
+      resultTS: TextStyles.lightWhite16,
+      resultPadding: const EdgeInsets.only(left: 5, right: 10),
       selectedItemTS: TextStyles.w400White16,
       unselectedItemTS: TextStyles.w400lightGrey16,
       onChange: (selectedItem) {

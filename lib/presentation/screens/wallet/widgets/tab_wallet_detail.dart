@@ -54,7 +54,7 @@ class TabWalletDetail extends StatelessWidget {
                 assetImage: Ics.icDownload,
               ),
               BoxButtonWidget(
-                onTap: () => Navigator.pushNamed(context, R.sendToSpending),
+                onTap: () => Navigator.pushNamed(context, R.transfer),
                 text: Keys.toSpending,
                 assetImage: Ics.icRefresh,
               ),
@@ -92,9 +92,7 @@ class TabWalletDetail extends StatelessWidget {
                   ],
                 ),
                 ElevatedButton(
-                    onPressed: () {
-                      // Navigator.pushNamed(context, R.);
-                    },
+                    onPressed: (){},
                     style: ElevatedButton.styleFrom(
                       padding: const EdgeInsets.symmetric(
                           horizontal: 12.0, vertical: 8.0),
@@ -105,7 +103,7 @@ class TabWalletDetail extends StatelessWidget {
                     ),
                     child: Row(
                       children: [
-                        Image.asset(Imgs.binance),
+                       const SFIcon(Imgs.binance),
                         const SizedBox(
                           width: 8.0,
                         ),
@@ -189,3 +187,8 @@ class TabWalletDetail extends StatelessWidget {
     ]);
   }
 }
+//
+// final Uri _url = Uri.parse('https://www.binance.com/');
+// void _launchUrl() async {
+//   if (!await launchUrl(_url)) throw 'Could not launch $_url';
+// }
