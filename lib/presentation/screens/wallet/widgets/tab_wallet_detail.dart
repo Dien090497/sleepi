@@ -54,7 +54,7 @@ class TabWalletDetail extends StatelessWidget {
                 assetImage: Ics.icDownload,
               ),
               BoxButtonWidget(
-                onTap: () => Navigator.pushNamed(context, R.sendToExternal),
+                onTap: () => Navigator.pushNamed(context, R.sendToSpending),
                 text: Keys.toSpending,
                 assetImage: Ics.icRefresh,
               ),

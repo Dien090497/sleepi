@@ -3,6 +3,9 @@ import 'package:slee_fi/common/style/app_colors.dart';
 
 class TextStyles {
   static const h1 = TextStyle(fontSize: 24, color: AppColors.primary);
+  static const w400White16 =
+  TextStyle(fontSize: 16, color: AppColors.white, fontWeight: FontWeight.w400);
+
   static const w600WhiteSize16 = TextStyle(
       fontSize: 16, color: AppColors.white, fontWeight: FontWeight.w600);
   static const w600LightWhiteSize16 = TextStyle(
@@ -33,6 +36,10 @@ class TextStyles {
   );
   static const lightGrey12 =
       TextStyle(fontSize: 12, color: AppColors.lightGrey);
+  static const w400lightGrey12 =
+  TextStyle(fontSize: 12, color: AppColors.lightGrey, fontWeight: FontWeight.w400);
+  static const w400lightGrey16 =
+  TextStyle(fontSize: 16, color: AppColors.lightGrey, fontWeight: FontWeight.w400);
   static const lightGrey11W500 = TextStyle(
       fontSize: 11, color: AppColors.lightGrey, fontWeight: FontWeight.w500);
   static const lightGrey14 =
@@ -102,7 +109,6 @@ class TextStyles {
 
   static const lightWhite24 =
       TextStyle(fontSize: 24, color: AppColors.lightWhite);
-
   static const lightWhite16W700 = TextStyle(
       fontSize: 16, color: AppColors.lightWhite, fontWeight: FontWeight.w700);
   

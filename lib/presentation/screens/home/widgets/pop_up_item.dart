@@ -38,10 +38,11 @@ class PopUpItem extends StatelessWidget {
           margin: EdgeInsets.zero,
           padding: const EdgeInsets.symmetric(vertical: 24, horizontal: 18),
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               SFText(
                 keyText: Keys.effect,
-                style: TextStyles.lightGrey16,
+                style: TextStyles.lightWhite16,
               ),
               const SizedBox(height: 4),
               SFText(
