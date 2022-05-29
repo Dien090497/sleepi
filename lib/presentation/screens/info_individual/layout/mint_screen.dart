@@ -1,105 +1,179 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_translate/flutter_translate.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
+import 'package:slee_fi/common/style/text_styles.dart';
+import 'package:slee_fi/common/widgets/background_widget.dart';
+import 'package:slee_fi/common/widgets/sf_app_bar.dart';
 import 'package:slee_fi/common/widgets/sf_buttons.dart';
+import 'package:slee_fi/common/widgets/sf_icon.dart';
+import 'package:slee_fi/common/widgets/sf_label_value.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
-import 'package:slee_fi/common/widgets/sf_textfield.dart';
+import 'package:slee_fi/di/translations/keys.dart';
+import 'package:slee_fi/resources/resources.dart';
 
-class MintScreen extends StatelessWidget {
+class MintScreen extends StatefulWidget {
   const MintScreen({Key? key}) : super(key: key);
+
+  @override
+  State<MintScreen> createState() => _MintScreenState();
+}
+
+class _MintScreenState extends State<MintScreen> {
+  bool swCheck = true;
 
   @override
   Widget build(BuildContext context) {
     final Size size = MediaQuery.of(context).size;
-    return Scaffold(
-      body: SafeArea(
-        child: SingleChildScrollView(
-          physics: const BouncingScrollPhysics(),
-          child: Column(
-            children: [
-              Padding(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    GestureDetector(
-                      onTap: () {
-                        Navigator.pop(context);
-                      },
-                      child: Container(
-                        padding: const EdgeInsets.all(10),
-                        decoration: const BoxDecoration(
-                            color: Colors.cyanAccent, shape: BoxShape.circle),
-                        child: const Icon(
-                          Icons.arrow_back_ios,
+    return BackgroundWidget(
+      child: Scaffold(
+        backgroundColor: Colors.transparent,
+        appBar: SFAppBar(
+          context: context,
+          title: Keys.bedMint,
+          textStyle: TextStyles.bold18LightWhite,
+        ),
+        body: Column(
+          children: [
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16.0),
+              child: Column(
+                children: [
+                  SizedBox(
+                    height: 230,
+                    child: Stack(
+                      alignment: Alignment.center,
+                      children: const [
+                        SFIcon(Imgs.borderBed),
+                        SFIcon(Ics.sleep),
+                      ],
+                    ),
+                  ),
+                  const SFLabelValue(
+                      label: Keys.token, value: '0 SLFT + 0 SLGT'),
+                  const SizedBox(
+                    height: 24,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        '${translate(Keys.insurance)}: 5%',
+                        style: TextStyles.bold16LightWhite,
+                      ),
+                      SizedBox(
+                        height: 24,
+                        child: CupertinoSwitch(
+                          activeColor: AppColors.green,
+                          value: swCheck,
+                          onChanged: (value) {
+                            setState(() {
+                              swCheck = value;
+                            });
+                          },
                         ),
                       ),
+                    ],
+                  ),
+                  const SizedBox(
+                    height: 2,
+                  ),
+                  Row(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      SFText(
+                        keyText: Keys.whatInsurance,
+                        style: TextStyles.lightGrey12,
+                      ),
+                      const SizedBox(
+                        width: 8,
+                      ),
+                      const SFIcon(Ics.icCircleQuestion),
+                    ],
+                  ),
+                  const SizedBox(
+                    height: 24,
+                  ),
+                ],
+              ),
+            ),
+            Expanded(
+              child: Container(
+                width: size.width,
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 24,
+                  vertical: 20,
+                ),
+                decoration: const BoxDecoration(
+                  color: AppColors.dark,
+                  borderRadius: BorderRadius.only(
+                    topRight: Radius.circular(40),
+                    topLeft: Radius.circular(40),
+                  ),
+                ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    SFText(
+                      keyText: Keys.withoutCase,
+                      style: TextStyles.lightGrey14,
+                    ),
+                    const SizedBox(
+                      height: 12,
+                    ),
+                    Container(
+                      decoration: BoxDecoration(
+                        color: AppColors.white.withOpacity(0.05),
+                        borderRadius: BorderRadius.circular(16),
+                      ),
+                      child: Column(
+                        children: [
+                          const SFLabelValue(
+                            label: Keys.commonBed,
+                            value: '98%',
+                            colorBorder: Colors.transparent,
+                          ),
+                          Padding(
+                            padding:
+                                const EdgeInsets.symmetric(horizontal: 16.0),
+                            child: Divider(
+                              height: 1,
+                              color: Colors.white.withOpacity(0.05),
+                            ),
+                          ),
+                          const SFLabelValue(
+                            label: Keys.failure,
+                            value: '98%',
+                            colorBorder: Colors.transparent,
+                          ),
+                        ],
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 24,
                     ),
                     SFText(
-                      keyText: 'Mint Bed',
-                    ),
-                    const SizedBox(),
-                  ],
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 40),
-                child: Column(
-                  children: [
-                    Container(
-                      height: size.height * 0.23,
-                      width: size.width,
-                      alignment: Alignment.center,
-                      child: Image.asset('assets/images/mint_shoe.png'),
+                      keyText: Keys.withoutCase,
+                      style: TextStyles.lightGrey14,
                     ),
                     const SizedBox(
-                      height: 20,
+                      height: 12,
                     ),
-                    const Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 20),
-                      child: SFTextField(
-                        hintText: 'Token',
-                      ),
-                    ),
+                    const SFLabelValue(label: Keys.commonBed, value: '100%'),
                     const SizedBox(
-                      height: 20,
-                    ),
-                    Container(
-                      height: size.height * 0.22,
-                      width: size.width,
-                      alignment: Alignment.center,
-                      decoration: const BoxDecoration(
-                        color: AppColors.white,
-                      ),
-                    ),
-                    const SizedBox(
-                      height: 20,
-                    ),
-                    Container(
-                      height: size.height * 0.18,
-                      width: size.width,
-                      alignment: Alignment.center,
-                      decoration: BoxDecoration(
-                        color: AppColors.grey.withOpacity(0.8),
-                      ),
-                      child: SFText(
-                        keyText: 'Text',
-                      ),
-                    ),
-                    const SizedBox(
-                      height: 20,
+                      height: 24,
                     ),
                     SFButton(
-                      text: 'mint',
-                      onPressed: () {},
-                      color: AppColors.grey.withOpacity(0.5),
+                      text: Keys.mint,
                       width: size.width,
+                      gradient: AppColors.gradientBlueButton,
+                      textStyle: TextStyles.white16,
                     ),
                   ],
                 ),
               ),
-            ],
-          ),
+            )
+          ],
         ),
       ),
     );

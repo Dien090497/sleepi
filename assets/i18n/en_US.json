@@ -229,7 +229,7 @@
   "can_enter_amount": "Can enter amount",
   "all": "All",
   "asset": "Asset",
-  "confirm_trade": "Confirm Trade",
+  "confirm_trade": "Confirm trade",
   "received": "Received",
   "how_to_set_up": "How to Set Up",
   "elevate_your_phone": "Elevate Your Phone",
@@ -289,5 +289,9 @@
   "show_contract_on_avascan": "Show Contract on avascan",
   "effect": "Effect",
   "displays_message_effect_item": "Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. ",
-  "matching_bed" : "Matching Bed"
+  "matching_bed" : "Matching Bed",
+  "token": "Token",
+  "without_case": "Success Rate: Without Insurance Case",
+  "with_case": "Success Rate: With Insurance Case",
+  "failure": "Failure"
 }
