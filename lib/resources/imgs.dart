@@ -29,6 +29,7 @@ class Imgs {
   static const String recyle = 'assets/images/recyle.png';
   static const String repair = 'assets/images/repair.png';
   static const String sell = 'assets/images/sell.png';
+  static const String sendToExternal = 'assets/images/send_to_external.png';
   static const String slft = 'assets/images/slft.png';
   static const String slgt = 'assets/images/slgt.png';
   static const String statistics = 'assets/images/statistics.png';
@@ -66,6 +67,7 @@ class Imgs {
     recyle,
     repair,
     sell,
+    sendToExternal,
     slft,
     slgt,
     statistics,

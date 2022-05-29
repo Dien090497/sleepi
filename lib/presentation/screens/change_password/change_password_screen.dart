@@ -41,7 +41,7 @@ class ChangePasswordScreen extends StatelessWidget {
                             SizedBox(height: 20,),
                             SFTextFieldTextButton(labelText: Keys.verificationCode,),
                             SizedBox(height: 20,),
-                            SFTextField(labelText: Keys.yourPassword, suffixIcon : Padding(padding: EdgeInsets.all(10), child: SFIcon(Ics.icEye, width: 24, height: 24,))), SizedBox(height: 20,),
+                            SFTextField(labelText: Keys.yourPassword, suffixIcon : Padding(padding: EdgeInsets.all(10), child: SFIcon(Ics.icEye, width: 24, height: 24,))),
                             SizedBox(height: 20,),
                             SFTextField(labelText: Keys.newPassword, suffixIcon : Padding(padding: EdgeInsets.all(10), child: SFIcon(Ics.icEye, width: 24, height: 24,))),
                           ],

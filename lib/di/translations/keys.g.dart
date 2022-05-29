@@ -217,6 +217,8 @@ class Keys {
 
   static const String avax = 'avax';
 
+  static const String usdc = 'usdc';
+
   static const String baceOnSolana = 'bace_on_solana';
 
   static const String stakeToGetBenefits = 'stake_to_get_benefits';

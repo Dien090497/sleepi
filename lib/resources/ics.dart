@@ -25,6 +25,7 @@ class Ics {
   static const String icLock = 'assets/icons/ic_lock.svg';
   static const String icQuestion = 'assets/icons/ic_question.svg';
   static const String icRefresh = 'assets/icons/ic_refresh.svg';
+  static const String icScanOutlined = 'assets/icons/ic_scan_outlined.svg';
   static const String icSetting = 'assets/icons/ic_setting.svg';
   static const String icShieldLock = 'assets/icons/ic_shield_lock.svg';
   static const String icSilver = 'assets/icons/ic_silver.svg';
@@ -32,6 +33,7 @@ class Ics {
   static const String icSolanaCircle = 'assets/icons/ic_solana_circle.svg';
   static const String icTransfer = 'assets/icons/ic_transfer.svg';
   static const String icTwoEyes = 'assets/icons/ic_two_eyes.svg';
+  static const String icUsdc = 'assets/icons/ic_usdc.svg';
   static const String icWallet = 'assets/icons/ic_wallet.svg';
   static const String levelUp = 'assets/icons/level_up.svg';
   static const String lock = 'assets/icons/lock.svg';
@@ -74,6 +76,7 @@ class Ics {
     icLock,
     icQuestion,
     icRefresh,
+    icScanOutlined,
     icSetting,
     icShieldLock,
     icSilver,
@@ -81,6 +84,7 @@ class Ics {
     icSolanaCircle,
     icTransfer,
     icTwoEyes,
+    icUsdc,
     icWallet,
     levelUp,
     lock,
