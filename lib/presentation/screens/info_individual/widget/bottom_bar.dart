@@ -9,6 +9,7 @@ import 'package:slee_fi/common/widgets/sf_text.dart';
 import 'package:slee_fi/di/translations/keys.dart';
 import 'package:slee_fi/presentation/screens/home/widgets/pop_up_repair.dart';
 import 'package:slee_fi/presentation/screens/home/widgets/pop_up_transfer.dart';
+import 'package:slee_fi/presentation/screens/info_individual/widget/pop_up_sell.dart';
 import 'package:slee_fi/resources/resources.dart';
 
 class BottomBarWidget extends StatelessWidget {
@@ -86,7 +87,17 @@ class BottomBarWidget extends StatelessWidget {
           itemBottomBar(context, Ics.heart, Keys.mint, () {
             Navigator.pushNamed(context, R.mint);
           }),
-          itemBottomBar(context, Ics.shopping, Keys.sell, () {}),
+          itemBottomBar(context, Ics.shopping, Keys.sell, () {
+            showCustomDialog(context, children: [
+              PopUpSell(
+                onConfirm: () {},
+                time: 1,
+                cost: 1,
+                icon: Ics.flexibleBed,
+                level: 2,
+              ),
+            ]);
+          }),
           itemBottomBar(context, Ics.recycling, Keys.recycle, () {
             Navigator.pushNamed(context, R.recycle);
           }),
