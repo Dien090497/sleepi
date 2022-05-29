@@ -290,6 +290,20 @@ class Keys {
 
   static const String use = 'use';
 
+  static const String sleep = 'sleep';
+
+  static const String sellingPrice = 'selling_price';
+
+  static const String confirmToSell = 'confirm_to_sell';
+
+  static const String listPrice = 'list_price';
+
+  static const String transactionFee = 'transaction_fee';
+
+  static const String artistRoyalties = 'artist_royalties';
+
+  static const String listingCancel = 'listing_cancel';
+
   static const String howToPlay = 'how_to_play';
 
   static const String whitePaper = 'white_paper';
@@ -317,6 +331,8 @@ class Keys {
   static const String confirmTransfer = 'confirm_transfer';
 
   static const String from = 'from';
+
+  static const String free = 'free';
 
   static const String to = 'to';
 
@@ -544,6 +560,8 @@ class Keys {
   static const String sleepQuality = 'sleep_quality';
 
   static const String share = 'share';
+
+  static const String classSf = 'class_sf';
 
   static const String youWillTransfer = 'you_will_transfer';
 
