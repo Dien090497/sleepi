@@ -90,6 +90,8 @@ class R {
   static const String result = '${_}result';
   static const String share = '${_}share';
   static const String seedPhrase = '${_}seed_phrase';
+  static const String showSeedPhrase = '${_}show_seed_phrase';
+  static const String exportSeedPhrase = '${_}export_seed_phrase';
   static const String probability = '${_}probability';
 }
 
