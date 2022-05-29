@@ -14,32 +14,34 @@ class ModalPopUpBirthYear extends StatelessWidget {
         List.generate(to - from + 1, (i) => i + from);
     List years = _range(1900, DateTime.now().year);
 
-    return Column(
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        Expanded(
-          child: CupertinoPicker(
-            onSelectedItemChanged: (value) {},
-            itemExtent: 25,
-            diameterRatio: 1,
-            useMagnifier: true,
-            magnification: 1.3,
-            children: List.generate(
-                years.length,
-                (i) => SFText(
-                      keyText: years[i].toString(),
-                      style: TextStyles.bold16LightWhite,
-                    )).toList(),
+    return SafeArea(
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Expanded(
+            child: CupertinoPicker(
+              onSelectedItemChanged: (value) {},
+              itemExtent: 25,
+              diameterRatio: 1,
+              useMagnifier: true,
+              magnification: 1.3,
+              children: List.generate(
+                  years.length,
+                  (i) => SFText(
+                        keyText: years[i].toString(),
+                        style: TextStyles.bold16LightWhite,
+                      )).toList(),
+            ),
           ),
-        ),
-        SFButton(
-            text: Keys.done,
-            width: MediaQuery.of(context).size.width * 0.9,
-            color: AppColors.blue,
-            textStyle: TextStyles.w600WhiteSize16,
-            height: 48,
-            onPressed: () => Navigator.pop(context))
-      ],
+          SFButton(
+              text: Keys.done,
+              width: MediaQuery.of(context).size.width * 0.9,
+              color: AppColors.blue,
+              textStyle: TextStyles.w600WhiteSize16,
+              height: 48,
+              onPressed: () => Navigator.pop(context))
+        ],
+      ),
     );
   }
 }

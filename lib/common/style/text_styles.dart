@@ -5,6 +5,8 @@ class TextStyles {
   static const h1 = TextStyle(fontSize: 24, color: AppColors.primary);
   static const w600WhiteSize16 = TextStyle(
       fontSize: 16, color: AppColors.white, fontWeight: FontWeight.w600);
+  static const w600LightWhiteSize16 = TextStyle(
+      fontSize: 16, color: AppColors.lightWhite, fontWeight: FontWeight.w600);
   static const w700WhiteSize14 = TextStyle(
       fontSize: 14, color: AppColors.white, fontWeight: FontWeight.w600);
   static const w700TextColorSize14 = TextStyle(
@@ -91,12 +93,19 @@ class TextStyles {
   );
   static const w700LightGreySize14 = TextStyle(
       fontSize: 14, color: AppColors.lightGrey, fontWeight: FontWeight.w700);
+  static const w700Light4Size14 = TextStyle(
+      fontSize: 14, color: AppColors.light4, fontWeight: FontWeight.w700);
   static const lightWhite14 =
       TextStyle(fontSize: 14, color: AppColors.lightWhite);
   static const lightWhite16 =
       TextStyle(fontSize: 16, color: AppColors.lightWhite);
+
+  static const lightWhite24 =
+      TextStyle(fontSize: 24, color: AppColors.lightWhite);
+
   static const lightWhite16W700 = TextStyle(
       fontSize: 16, color: AppColors.lightWhite, fontWeight: FontWeight.w700);
+  
   static const white14 = TextStyle(fontSize: 14, color: AppColors.white);
   static const white14W700 = TextStyle(
       fontSize: 14, color: AppColors.white, fontWeight: FontWeight.w700);
@@ -156,6 +165,8 @@ class TextStyles {
   static const green16 = TextStyle(fontSize: 16, color: AppColors.green);
 
   static const red14 = TextStyle(fontSize: 14, color: AppColors.red);
+  static const w400Red12 = TextStyle(
+      fontSize: 12, color: AppColors.red, fontWeight: FontWeight.w400);
   static const red12W700 = TextStyle(
       fontSize: 12, color: AppColors.red, fontWeight: FontWeight.w700);
   static const yellow14 = TextStyle(fontSize: 14, color: AppColors.yellow);

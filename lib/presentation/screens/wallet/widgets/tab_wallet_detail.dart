@@ -17,111 +17,113 @@ class TabWalletDetail extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        const SizedBox(
-          height: 32,
-        ),
-        SFText(keyText: Keys.avaxCChain, style: TextStyles.bold12Blue),
-        const SizedBox(
-          height: 4.0,
-        ),
-        SFText(keyText: "0 AVAX", style: TextStyles.bold30White),
-        const SizedBox(
-          height: 20.0,
-        ),
-        Container(
-          padding: const EdgeInsets.symmetric(vertical: 6.0, horizontal: 16.0),
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(20.0),
-            color: AppColors.lightWhite.withOpacity(0.05),
+    return SafeArea(
+      child: Column(
+        children: [
+          const SizedBox(
+            height: 32,
           ),
-          child: SFText(
-              keyText: "Eq7fbho...asdasd.9aj92as",
-              style: TextStyles.lightWhite14),
-        ),
-        const SizedBox(
-          height: 16.0,
-        ),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: [
-            BoxButtonWidget(
-              onTap: () => SFModalBottomSheet.show(
-                  context, 0.7, const ModalReceiveWallet()),
-              text: Keys.receive,
-              assetImage: Ics.icDownload,
+          SFText(keyText: Keys.avaxCChain, style: TextStyles.bold12Blue),
+          const SizedBox(
+            height: 4.0,
+          ),
+          SFText(keyText: "0 AVAX", style: TextStyles.bold30White),
+          const SizedBox(
+            height: 20.0,
+          ),
+          Container(
+            padding: const EdgeInsets.symmetric(vertical: 6.0, horizontal: 16.0),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(20.0),
+              color: AppColors.lightWhite.withOpacity(0.05),
             ),
-            BoxButtonWidget(
-              onTap: () => Navigator.pushNamed(context, R.sendToExternal),
-              text: Keys.toSpending,
-              assetImage: Ics.icRefresh,
-            ),
-            BoxButtonWidget(
-              onTap: () => Navigator.pushNamed(context, R.sendToExternal),
-              text: Keys.toExternal,
-              assetImage: Ics.icArrowUpRight,
-            ),
-            BoxButtonWidget(
-              onTap: () => Navigator.pushNamed(context, R.trade),
-              text: Keys.trade,
-              assetImage: Ics.icTransfer,
-            ),
-          ],
-        ),
-        const SizedBox(
-          height: 20.0,
-        ),
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 12.0),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            child: SFText(
+                keyText: "Eq7fbho...asdasd.9aj92as",
+                style: TextStyles.lightWhite14),
+          ),
+          const SizedBox(
+            height: 16.0,
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              Row(
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                    child: SFText(
-                        keyText: Keys.walletAccount, style: TextStyles.blue12),
-                  ),
-                  GestureDetector(
-                    onTap: () {},
-                    child: const SFIcon(Ics.icQuestion),
-                  ),
-                ],
+              BoxButtonWidget(
+                onTap: () => SFModalBottomSheet.show(
+                    context, 0.7, const ModalReceiveWallet()),
+                text: Keys.receive,
+                assetImage: Ics.icDownload,
               ),
-              ElevatedButton(
-                  onPressed: () {
-                    // Navigator.pushNamed(context, R.);
-                  },
-                  style: ElevatedButton.styleFrom(
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: 12.0, vertical: 8.0),
-                    primary: AppColors.yellow.withOpacity(0.15),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(100.0),
-                    ),
-                  ),
-                  child: Row(
-                    children: [
-                      Image.asset(Imgs.binance),
-                      const SizedBox(
-                        width: 8.0,
-                      ),
-                      SFText(
-                        keyText: Keys.buy,
-                        style: TextStyles.bold14Yellow,
-                      )
-                    ],
-                  )),
+              BoxButtonWidget(
+                onTap: () => Navigator.pushNamed(context, R.sendToExternal),
+                text: Keys.toSpending,
+                assetImage: Ics.icRefresh,
+              ),
+              BoxButtonWidget(
+                onTap: () => Navigator.pushNamed(context, R.sendToExternal),
+                text: Keys.toExternal,
+                assetImage: Ics.icArrowUpRight,
+              ),
+              BoxButtonWidget(
+                onTap: () => Navigator.pushNamed(context, R.trade),
+                text: Keys.trade,
+                assetImage: Ics.icTransfer,
+              ),
             ],
           ),
-        ),
-        const SizedBox(
-          height: 12.0,
-        ),
-        const Expanded(child: WalletDetailList())
-      ],
+          const SizedBox(
+            height: 20.0,
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 12.0),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Row(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                      child: SFText(
+                          keyText: Keys.walletAccount, style: TextStyles.blue12),
+                    ),
+                    GestureDetector(
+                      onTap: () {},
+                      child: const SFIcon(Ics.icQuestion),
+                    ),
+                  ],
+                ),
+                ElevatedButton(
+                    onPressed: () {
+                      // Navigator.pushNamed(context, R.);
+                    },
+                    style: ElevatedButton.styleFrom(
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 12.0, vertical: 8.0),
+                      primary: AppColors.yellow.withOpacity(0.15),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(100.0),
+                      ),
+                    ),
+                    child: Row(
+                      children: [
+                        Image.asset(Imgs.binance),
+                        const SizedBox(
+                          width: 8.0,
+                        ),
+                        SFText(
+                          keyText: Keys.buy,
+                          style: TextStyles.bold14Yellow,
+                        )
+                      ],
+                    )),
+              ],
+            ),
+          ),
+          const SizedBox(
+            height: 12.0,
+          ),
+          const Expanded(child: WalletDetailList())
+        ],
+      ),
     );
   }
 

@@ -18,16 +18,13 @@ class SFChip extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Chip(
-      labelPadding: const EdgeInsets.all(2.0),
-      label: SFText(
-        keyText: text,
-        style: textStyle,
-        toUpperCase: toUpperCase,
-      ),
-      backgroundColor: color ?? AppColors.white.withOpacity(0.05),
-      // shadowColor: Colors.grey[60],
+    return Container(
       padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(100),
+        color: color ?? AppColors.white.withOpacity(0.05),
+      ),
+      child: SFText(keyText: text, style: textStyle, toUpperCase: toUpperCase,),
     );
   }
 }

@@ -609,4 +609,23 @@ class Keys {
   static const String cost = 'cost';
 
   static const String successRate = 'success_rate';
+
+  static const String stake = 'stake';
+
+  static const String showContractOnAvascan = 'show_contract_on_avascan';
+
+  static const String effect = 'effect';
+
+  static const String displaysMessageEffectItem =
+      'displays_message_effect_item';
+
+  static const String introduceHowToPlay = 'introduce.how_to_play';
+
+  static const String introduceWhitePaper = 'introduce.white_paper';
+
+  static const String introduceLitePaper = 'introduce.lite_paper';
+
+  static const String introduceLinkTree = 'introduce.link_tree';
+
+  static const String averageOfSleepQuolity = 'average_of_sleep_quolity';
 }

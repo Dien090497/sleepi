@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
-import 'package:slee_fi/common/widgets/sf_alert_dialog.dart';
 import 'package:slee_fi/common/widgets/sf_card.dart';
 import 'package:slee_fi/common/widgets/sf_chip.dart';
 import 'package:slee_fi/common/widgets/sf_icon.dart';
@@ -15,23 +14,14 @@ class PopUpCalculator extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SFAlertDialog(
-      padding: const EdgeInsets.all(20.0),
+    return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Align(
-            alignment: Alignment.topRight,
-            child: GestureDetector(
-                onTap: () => Navigator.maybePop(context),
-                child: const Icon(
-                  Icons.close,
-                  color: AppColors.lightGrey,
-                ))),
         Center(
             child: SFText(
-          keyText: Keys.roiCalculator,
-          style: TextStyles.bold18LightWhite,
-        )),
+              keyText: Keys.roiCalculator,
+              style: TextStyles.bold18LightWhite,
+            )),
         const SizedBox(
           height: 24,
         ),
@@ -80,41 +70,30 @@ class PopUpCalculator extends StatelessWidget {
             ],
           ),
         ),
-        const SizedBox(
-          height: 8.0,
-        ),
-        Row(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Expanded(
-              child: Wrap(
-                spacing: 6.0,
-                runSpacing: 6.0,
-                children: const [
-                  SFChip(
-                    text: "100",
-                    textStyle: TextStyles.w700LightGreySize14,
-                  ),
-                  SFChip(
-                    text: "10000",
-                    textStyle: TextStyles.w700LightGreySize14,
-                  ),
-                  SFChip(
-                    text: "My Balance",
-                    textStyle: TextStyles.w700LightGreySize14,
-                  ),
-                ],
-              ),
+        const SizedBox(height: 12.0,),
+        Wrap(
+          spacing: 6.0,
+          runSpacing: 6.0,
+          children:  [
+            SFChip(
+              text: "100",
+              textStyle: TextStyles.w700LightGreySize14,
+              color: AppColors.white.withOpacity(0.05),
             ),
-            const Padding(
-              padding: EdgeInsets.only(top: 12),
-              child:
-                  SFIcon(Ics.icQuestion, color: AppColors.lightGrey, width: 24),
+            SFChip(
+              text: "10000",
+              textStyle: TextStyles.w700LightGreySize14,
+              color: AppColors.white.withOpacity(0.05),
+            ),
+            SFChip(
+              text: "My Balance",
+              textStyle: TextStyles.w700LightGreySize14,
+              color: AppColors.white.withOpacity(0.05),
             ),
           ],
         ),
         const SizedBox(
-          height: 12.0,
+          height: 32.0,
         ),
         SFText(
           keyText: Keys.addDuration,
@@ -174,28 +153,28 @@ class PopUpCalculator extends StatelessWidget {
             children: [
               Expanded(
                   child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  SFText(
-                    keyText: Keys.roiCurrentRates,
-                    style: TextStyles.blue14,
-                  ),
-                  const SizedBox(
-                    height: 4,
-                  ),
-                  SFText(
-                    keyText: "0.00",
-                    style: TextStyles.bold24LightWhite,
-                  ),
-                  const SizedBox(
-                    height: 4,
-                  ),
-                  SFText(
-                    keyText: "~ 0 SLFT (0.00%)",
-                    style: TextStyles.lightGrey14,
-                  ),
-                ],
-              )),
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      SFText(
+                        keyText: Keys.roiCurrentRates,
+                        style: TextStyles.blue14,
+                      ),
+                      const SizedBox(
+                        height: 4,
+                      ),
+                      SFText(
+                        keyText: "0.00",
+                        style: TextStyles.bold24LightWhite,
+                      ),
+                      const SizedBox(
+                        height: 4,
+                      ),
+                      SFText(
+                        keyText: "~ 0 SLFT (0.00%)",
+                        style: TextStyles.lightGrey14,
+                      ),
+                    ],
+                  )),
               const SFIcon(
                 Ics.icEdit,
                 width: 28,
