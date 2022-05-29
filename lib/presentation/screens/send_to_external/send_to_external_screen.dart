@@ -37,8 +37,9 @@ class SendToExternalScreen extends StatelessWidget {
                   child: ListView(
                     children: [
                       Image.asset(Imgs.sendToExternal),
-                      const SizedBox(height: 32,),
+                      // const SizedBox(height: 32,),
                       SFCard(
+                        margin: EdgeInsets.zero,
                         padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
@@ -60,7 +61,6 @@ class SendToExternalScreen extends StatelessWidget {
                             ),
                             const SizedBox(height: 8),
                             SFText(keyText: Keys.balance, style: TextStyles.w400lightGrey12, suffix: ': 0 AVAX' ),
-
                           ],
                         ),
                       ),
