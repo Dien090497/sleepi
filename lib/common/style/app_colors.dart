@@ -56,6 +56,16 @@ class AppColors {
   static const rank4 = Color(0xFF0092F3);
   static const rank5 = Color(0xFF426BFF);
 
+  static const commonBed = Color(0xFFEEB049);
+
+  static const uncommonBed = Color(0xFFEA7636);
+
+  static const rareBed = Color(0xFF337CBF);
+
+  static const epicBed = Color(0xFF79BFFF);
+
+  static const legendaryBed = Color(0xFF4A9E45);
+
   static LinearGradient gradientBlue = LinearGradient(colors: [
     const Color(0xFFC4C4C4).withOpacity(0),
     const Color(0xFF18A0FB).withOpacity(0.01),
