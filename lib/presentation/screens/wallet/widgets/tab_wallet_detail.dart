@@ -11,7 +11,6 @@ import 'package:slee_fi/presentation/screens/wallet/widgets/box_button_widget.da
 import 'package:slee_fi/presentation/screens/wallet/widgets/modal_receive_wallet.dart';
 import 'package:slee_fi/presentation/screens/wallet/widgets/wallet_detail_list.dart';
 import 'package:slee_fi/resources/resources.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 class TabWalletDetail extends StatelessWidget {
   const TabWalletDetail({Key? key}) : super(key: key);
