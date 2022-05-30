@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
-import 'package:slee_fi/presentation/screens/gacha/widgets/atribute_process.dart';
+import 'package:slee_fi/presentation/screens/info_individual/widget/item_attribute.dart';
+import 'package:slee_fi/resources/resources.dart';
 
 class AttributesWidget extends StatelessWidget {
   const AttributesWidget({Key? key}) : super(key: key);
@@ -18,11 +19,11 @@ class AttributesWidget extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: const [
-          AtributeProcessWidget(linkImage: 'assets/icons/efficiency.png', title: 'Efficiency', totalValue: 10, valueActive: 10),
-          AtributeProcessWidget(linkImage: 'assets/icons/efficiency.png', title: 'Luck', totalValue: 10, valueActive: 2.5),
-          AtributeProcessWidget(linkImage: 'assets/icons/efficiency.png', title: 'Bonus', totalValue: 10, valueActive: 8.2),
-          AtributeProcessWidget(linkImage: 'assets/icons/efficiency.png', title: 'Special', totalValue: 10, valueActive: 5.3),
-          AtributeProcessWidget(linkImage: 'assets/icons/efficiency.png', title: 'Resilience', totalValue: 10, valueActive: 6.2),
+          ItemAttribute(linkImage: Imgs.efficiency, title: 'Efficiency', valueActive: 10),
+          ItemAttribute(linkImage: Imgs.luck, title: 'Luck', valueActive: 2.5),
+          ItemAttribute(linkImage: Imgs.bonus, title: 'Bonus',valueActive: 8.2),
+          ItemAttribute(linkImage: Imgs.special, title: 'Special', valueActive: 5.3),
+          ItemAttribute(linkImage: Imgs.resilience, title: 'Resilience',valueActive: 6.2),
         ],
       ),
     );
