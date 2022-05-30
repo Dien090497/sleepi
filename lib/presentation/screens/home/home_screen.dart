@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -32,6 +34,39 @@ class _HomeScreenState extends State<HomeScreen> {
   bool checkIntroduce = false;
   late int _selectedHour = DateTime.now().hour;
   late int _selectedMinute = DateTime.now().minute;
+  late Timer _timer;
+  late int startTime = 0;
+
+  @override
+  void initState() {
+    startTime = 2 * 60 * 60;
+    startTimer();
+    super.initState();
+  }
+
+  void startTimer() {
+    const oneSec = Duration(seconds: 1);
+    _timer = Timer.periodic(
+      oneSec,
+      (Timer timer) {
+        if (startTime == 0) {
+          setState(() {
+            timer.cancel();
+          });
+        } else {
+          setState(() {
+            startTime--;
+          });
+        }
+      },
+    );
+  }
+
+  @override
+  void dispose() {
+    _timer.cancel();
+    super.dispose();
+  }
 
   Widget viewGif() {
     return Container(
@@ -48,6 +83,16 @@ class _HomeScreenState extends State<HomeScreen> {
         color: AppColors.borderDarkColor,
       ),
     );
+  }
+
+  convertTimer() {
+    if (startTime <= 0) {
+      return '00:00:00';
+    } else {
+      return '${startTime ~/ (60 * 60) < 10 ? '0${startTime ~/ (60 * 60)}' : startTime ~/ (60 * 60)}'
+          ':${(startTime % (60 * 60)) ~/ 60 < 10 ? '0${(startTime % (60 * 60)) ~/ 60}' : (startTime % (60 * 60)) ~/ 60}'
+          ':${(startTime % (60 * 60)) % 60 < 10 ? '0${(startTime % (60 * 60)) % 60}' : (startTime % (60 * 60)) % 60}';
+    }
   }
 
   Widget alarmBell(size) {
@@ -224,14 +269,15 @@ class _HomeScreenState extends State<HomeScreen> {
             height: 16,
           ),
           SFButton(
-            text: Keys.start,
+            text: startTime == 0 ? Keys.start : '${convertTimer()}',
             textStyle: TextStyles.white16,
             radius: 100,
-            gradient: AppColors.gradientBlueButton,
+            gradient: startTime == 0 ? AppColors.gradientBlueButton : null,
+            color: AppColors.lightGrey,
             height: 40,
             width: size.width,
             onPressed: () {
-              Navigator.pushNamed(context, R.result);
+              if (startTime == 0) Navigator.pushNamed(context, R.result);
             },
           ),
           const SizedBox(
@@ -358,8 +404,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                       SFButtonOutLined(
                                         title: Keys.useItem,
                                         onPressed: () {
-                                          SFModalBottomSheet.show(
-                                              context, 0.8, const ModalItemList());
+                                          SFModalBottomSheet.show(context, 0.8,
+                                              const ModalItemList());
                                         },
                                         fixedSize: Size(size.width, 40),
                                         textStyle: TextStyles.lightGrey16500,

@@ -19,6 +19,7 @@ class RecycleScreen extends StatelessWidget {
     return Scaffold(
       body: BackgroundWidget(
         child: SafeArea(
+          bottom: false,
           child: SingleChildScrollView(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -45,7 +46,7 @@ class RecycleScreen extends StatelessWidget {
                       Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 20),
                         child: SFText(
-                          keyText: Keys.probability,
+                          keyText: Keys.bedRecycle,
                           style: TextStyles.boldWhite18,
                         ),
                       ),
