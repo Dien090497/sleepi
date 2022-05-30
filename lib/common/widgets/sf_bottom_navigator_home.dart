@@ -14,7 +14,7 @@ class SFBottomNavigatorHome extends SFBottomNavigatorBar {
           items: [
             ItemBottomNav(icon: Ics.home, label: Keys.home),
             ItemBottomNav(icon: Ics.signOut, label: Keys.gacha),
-            ItemBottomNav(icon: Ics.group, label: Keys.bed),
+            ItemBottomNav(icon: Ics.group, label: Keys.list),
             ItemBottomNav(icon: Ics.chart, label: Keys.chart),
             ItemBottomNav(icon: Ics.shopping, label: Keys.market),
           ],

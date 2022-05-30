@@ -284,6 +284,8 @@ class Keys {
 
   static const String earning = 'earning';
 
+  static const String list = 'list';
+
   static const String rent = 'rent';
 
   static const String filter = 'filter';
