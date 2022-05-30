@@ -44,47 +44,6 @@ class TabBedsBuy extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // SingleChildScrollView(
-            //   scrollDirection: Axis.horizontal,
-            //   physics: const ClampingScrollPhysics(),
-            //   child: Row(
-            //     children: [
-            //       Container(
-            //         constraints: BoxConstraints(maxWidth: 140.w),
-            //         child: SFDropDown(
-            //           value: 'Low Price',
-            //           dropdownItems: [
-            //             DropdownMenuItem(
-            //               value: 'Low Price',
-            //               child: SFText(
-            //                 keyText: 'Low Price',
-            //                 style: TextStyles.white16,
-            //               ),
-            //             ),
-            //             DropdownMenuItem(
-            //               value: 'High Price',
-            //               child: SFText(
-            //                 keyText: 'High Price',
-            //                 style: TextStyles.white16,
-            //               ),
-            //             ),
-            //           ],
-            //         ),
-            //       ),
-            //       SFSubTabBar(texts: const [Keys.buy, Keys.rent]),
-            //       GestureDetector(
-            //         onTap: () {},
-            //         child: Row(
-            //           children: [
-            //             const SFIcon(Ics.filter, color: AppColors.blue),
-            //             const SizedBox(width: 4),
-            //             SFText(keyText: Keys.filter, style: TextStyles.blue16),
-            //           ],
-            //         ),
-            //       ),
-            //     ],
-            //   ),
-            // ),
             TabBarFilter(
               tabTexts: const [Keys.buy, Keys.rent],
               onFilterTap: () {

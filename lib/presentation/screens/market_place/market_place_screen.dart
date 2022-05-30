@@ -6,6 +6,7 @@ import 'package:slee_fi/common/widgets/topbar_common.dart';
 import 'package:slee_fi/di/translations/keys.dart';
 import 'package:slee_fi/presentation/screens/market_place/widget/tab_beds_buy.dart';
 import 'package:slee_fi/presentation/screens/market_place/widget/tab_items_buy.dart';
+import 'package:slee_fi/presentation/screens/market_place/widget/tab_jewels_buy.dart';
 import 'package:slee_fi/presentation/screens/market_place/widget/tab_trophys_buy.dart';
 
 class MarketPlaceScreen extends StatelessWidget {
@@ -34,7 +35,7 @@ class MarketPlaceScreen extends StatelessWidget {
                         scaffoldKey.currentState?.openEndDrawer();
                       },
                     ),
-                    TabItemsBuy(
+                    TabJewelsBuy(
                       onPress: () {
                         scaffoldKey.currentState?.openEndDrawer();
                       },
