@@ -80,7 +80,7 @@ class ChartStatistic extends StatelessWidget {
         ),
         topTitles: AxisTitles(
           sideTitles: SideTitles(
-            showTitles: true,
+            showTitles: false,
             // reservedSize: 30,
             interval: 1,
             getTitlesWidget: topTitleWidgets,
