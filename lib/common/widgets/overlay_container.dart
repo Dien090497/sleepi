@@ -109,6 +109,7 @@ class _OverlayContainerState extends State<OverlayContainer>
         _overlayEntry.remove();
       }
       _overlayEntry = _buildOverlayEntry();
+      if (!mounted) return;
       Overlay.of(context)?.insert(_overlayEntry);
       _opened = true;
     });
