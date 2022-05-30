@@ -37,6 +37,7 @@ import 'package:slee_fi/presentation/screens/staking/layout/deposit_slft_screen.
 import 'package:slee_fi/presentation/screens/staking/layout/withdraw_slft_screen.dart';
 import 'package:slee_fi/presentation/screens/staking/staking_screen.dart';
 import 'package:slee_fi/presentation/screens/staking/widgets/taking_screen.dart';
+import 'package:slee_fi/presentation/screens/tracking/tracking_screen.dart';
 import 'package:slee_fi/presentation/screens/trade/trade_screen.dart';
 import 'package:slee_fi/presentation/screens/transfer/transfer_screen.dart';
 import 'package:slee_fi/presentation/screens/tutorial/tutorial_screen.dart';
@@ -92,6 +93,7 @@ class R {
   static const String showSeedPhrase = '${_}show_seed_phrase';
   static const String exportSeedPhrase = '${_}export_seed_phrase';
   static const String probability = '${_}probability';
+  static const String tracking = '${_}tracking';
 }
 
 class AppRoutes {
@@ -141,5 +143,6 @@ class AppRoutes {
     R.exportSeedPhrase: (_) => const ExportSeedPhraseScreen(),
     R.question: (_) => const QuestionScreen(),
     R.probability: (_) => const ProbabilityScreen(),
+    R.tracking: (_) => const TrackingScreen(),
   };
 }
