@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
 import 'package:slee_fi/common/widgets/background_widget.dart';
@@ -7,7 +6,9 @@ import 'package:slee_fi/common/widgets/sf_app_bar.dart';
 import 'package:slee_fi/common/widgets/sf_button_outlined.dart';
 import 'package:slee_fi/common/widgets/sf_buttons.dart';
 import 'package:slee_fi/common/widgets/sf_card.dart';
+import 'package:slee_fi/common/widgets/sf_icon.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
+import 'package:slee_fi/common/widgets/sf_textfield.dart';
 import 'package:slee_fi/di/translations/keys.dart';
 import 'package:slee_fi/resources/resources.dart';
 
@@ -62,14 +63,10 @@ class DepositSlftScreen extends StatelessWidget {
                                   keyText: Keys.deposit,
                                   style: TextStyles.bold18LightWhite,
                                 ),
-                                SFButtonOutLined(
-                                    title: Keys.max,
-                                    textStyle: TextStyles.bold14Blue,
-                                    onPressed: () {}),
                                 Row(
                                   crossAxisAlignment: CrossAxisAlignment.center,
                                   children: [
-                                    SvgPicture.asset(Ics.icGold),
+                                    const SFIcon(Ics.icGold),
                                     const SizedBox(
                                       width: 6,
                                     ),
@@ -81,6 +78,23 @@ class DepositSlftScreen extends StatelessWidget {
                                 ),
                               ],
                             ),
+                            const SizedBox(height: 21,),
+                            Row(
+                              children: [
+                                const Expanded(
+                                    child: SFTextField(
+                                      showLabel: false,
+                                      hintText: Keys.amount,
+                                    )
+                                ),
+                                const SizedBox(width: 12,),
+                                SFButtonOutLined(
+                                    title: Keys.max,
+                                    textStyle: TextStyles.bold14Blue,
+                                    borderColor: AppColors.blue,
+                                    onPressed: () {}),
+                              ],
+                            )
                           ],
                         ),
                       ),

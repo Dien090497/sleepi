@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:slee_fi/common/routes/app_routes.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
@@ -8,6 +7,7 @@ import 'package:slee_fi/common/widgets/sf_buttons.dart';
 import 'package:slee_fi/common/widgets/sf_card.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
 import 'package:slee_fi/di/translations/keys.dart';
+import 'package:slee_fi/presentation/screens/wallet/widgets/pop_up_info_spending.dart';
 import 'package:slee_fi/presentation/screens/wallet/widgets/spending_detail_list.dart';
 import 'package:slee_fi/resources/resources.dart';
 
@@ -31,15 +31,7 @@ class TabSpendingDetail extends StatelessWidget {
                     child: SFText(
                         keyText: Keys.spendingAccount, style: TextStyles.blue12),
                   ),
-                  GestureDetector(
-                    onTap: () =>
-                        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                          content: SFText(
-                              keyText: Keys.displaysMessageFromSpendingDetail,
-                              style: TextStyles.white14),
-                        )),
-                    child: SvgPicture.asset(Ics.icQuestion),
-                  ),
+                  const PopupInfoSpending(),
                 ],
               ),
               const SizedBox(

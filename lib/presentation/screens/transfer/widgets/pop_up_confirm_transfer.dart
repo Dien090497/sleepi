@@ -3,6 +3,7 @@ import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
 import 'package:slee_fi/common/widgets/sf_buttons.dart';
 import 'package:slee_fi/common/widgets/sf_card.dart';
+import 'package:slee_fi/common/widgets/sf_dialog.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
 import 'package:slee_fi/di/translations/keys.dart';
 
@@ -120,7 +121,10 @@ class PopUpConfirmTransfer extends StatelessWidget {
                 text: Keys.confirm,
                 textStyle: TextStyles.bold14LightWhite,
                 color: AppColors.blue,
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.pop(context);
+                  showSuccessfulDialog(context);
+                },
               ),
             ),
           ],

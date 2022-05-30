@@ -8,10 +8,15 @@ class TextStyles {
 
   static const w600WhiteSize16 = TextStyle(
       fontSize: 16, color: AppColors.white, fontWeight: FontWeight.w600);
+
+  static const w400LightWhite12 = TextStyle(
+      fontSize: 12, color: AppColors.lightWhite, fontWeight: FontWeight.w400);
   static const w600LightWhiteSize16 = TextStyle(
       fontSize: 16, color: AppColors.lightWhite, fontWeight: FontWeight.w600);
   static const w700WhiteSize14 = TextStyle(
-      fontSize: 14, color: AppColors.white, fontWeight: FontWeight.w600);
+      fontSize: 14, color: AppColors.white, fontWeight: FontWeight.w700);
+  static const w700WhiteSize24 = TextStyle(
+      fontSize: 24, color: AppColors.white, fontWeight: FontWeight.w700);
   static const w700TextColorSize14 = TextStyle(
       fontSize: 14, color: AppColors.textColor, fontWeight: FontWeight.w700);
   static const w600LightGreySize16 = TextStyle(
@@ -118,8 +123,10 @@ class TextStyles {
       TextStyle(fontSize: 24, color: AppColors.lightWhite);
   static const lightWhite16W700 = TextStyle(
       fontSize: 16, color: AppColors.lightWhite, fontWeight: FontWeight.w700);
-  
+
   static const white14 = TextStyle(fontSize: 14, color: AppColors.white);
+  static const w400White14 = TextStyle(
+      fontSize: 14, color: AppColors.white, fontWeight: FontWeight.w400);
   static const white14W700 = TextStyle(
       fontSize: 14, color: AppColors.white, fontWeight: FontWeight.w700);
   static TextStyle white14WithOpacity =

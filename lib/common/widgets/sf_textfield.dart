@@ -53,6 +53,7 @@ class SFTextField extends StatelessWidget {
               )
             : const SizedBox(),
         TextField(
+          style: TextStyles.w400White16,
           decoration: InputDecoration(
             isDense: true,
             hintText: hintText != null ? translate(hintText!) : null,

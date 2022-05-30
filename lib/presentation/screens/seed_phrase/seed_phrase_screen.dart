@@ -20,10 +20,10 @@ class SeedPhraseScreen extends StatelessWidget {
         ),
         body: SafeArea(
             child: Column(children: const [
-          // AvailableWidget(),
-          Expanded(child: SeedPhraseList()),
-          // ActivationCodeList(),
-        ])),
+              // AvailableWidget(),
+              Expanded(child: SeedPhraseList()),
+              // ActivationCodeList(),
+            ])),
       ),
     );
   }

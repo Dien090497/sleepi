@@ -9,8 +9,10 @@ import 'package:slee_fi/common/widgets/sf_text.dart';
 import 'package:slee_fi/di/translations/keys.dart';
 import 'package:slee_fi/presentation/screens/wallet/widgets/box_button_widget.dart';
 import 'package:slee_fi/presentation/screens/wallet/widgets/modal_receive_wallet.dart';
+import 'package:slee_fi/presentation/screens/wallet/widgets/pop_up_info_wallet.dart';
 import 'package:slee_fi/presentation/screens/wallet/widgets/wallet_detail_list.dart';
 import 'package:slee_fi/resources/resources.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class TabWalletDetail extends StatelessWidget {
   const TabWalletDetail({Key? key}) : super(key: key);
@@ -85,14 +87,11 @@ class TabWalletDetail extends StatelessWidget {
                       child: SFText(
                           keyText: Keys.walletAccount, style: TextStyles.blue12),
                     ),
-                    GestureDetector(
-                      onTap: () {},
-                      child: const SFIcon(Ics.icQuestion),
-                    ),
+                    const PopupInfoWallet(),
                   ],
                 ),
                 ElevatedButton(
-                    onPressed: (){},
+                    onPressed: _launchUrl,
                     style: ElevatedButton.styleFrom(
                       padding: const EdgeInsets.symmetric(
                           horizontal: 12.0, vertical: 8.0),
@@ -187,8 +186,8 @@ class TabWalletDetail extends StatelessWidget {
     ]);
   }
 }
-//
-// final Uri _url = Uri.parse('https://www.binance.com/');
-// void _launchUrl() async {
-//   if (!await launchUrl(_url)) throw 'Could not launch $_url';
-// }
+
+final Uri _url = Uri.parse('https://www.binance.com/');
+void _launchUrl() async {
+  if (!await launchUrl(_url)) throw 'Could not launch $_url';
+}

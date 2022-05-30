@@ -5,6 +5,7 @@ import 'package:slee_fi/common/style/text_styles.dart';
 import 'package:slee_fi/common/widgets/background_widget.dart';
 import 'package:slee_fi/common/widgets/sf_app_bar.dart';
 import 'package:slee_fi/di/translations/keys.dart';
+import 'package:slee_fi/presentation/screens/passcode/passcode_screen.dart';
 import 'package:slee_fi/presentation/screens/setting_wallet/widgets/box_info_widget.dart';
 import 'package:slee_fi/resources/resources.dart';
 
@@ -29,13 +30,13 @@ class SettingWalletScreen extends StatelessWidget {
                 urlIcon: Ics.icShieldLock,
                 title: Keys.backup,
                 info: Keys.displaysBackupInfo,
-                onTap: () {},
+                onTap: () {Navigator.pushNamed(context, R.passcode, arguments: PasscodeArguments(R.seedPhrase));},
               ),
               BoxInfoWidget(
                 urlIcon: Ics.lock,
                 title: Keys.resetWithPasscode,
                 info: Keys.displaysResetWithPasscodeInfo,
-                onTap: () {},
+                onTap: () {Navigator.pushNamed(context, R.passcode, arguments: PasscodeArguments(R.createPasscode));},
               ),
               BoxInfoWidget(
                 urlIcon: Ics.icRefresh,
