@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:slee_fi/common/routes/app_routes.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
 import 'package:slee_fi/common/widgets/background_widget.dart';
@@ -114,7 +115,9 @@ class ExportSeedPhraseScreen extends StatelessWidget {
                     height: 48,
                     width: double.infinity,
                     color: AppColors.blue,
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.popUntil(context, (r) => r.settings.name == R.wallet);
+                    },
                   ),
                 )
               ],

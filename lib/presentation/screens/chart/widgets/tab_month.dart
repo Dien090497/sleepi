@@ -1,7 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_date_pickers/flutter_date_pickers.dart' as dp;
 import 'package:slee_fi/common/style/app_colors.dart';
+import 'package:slee_fi/common/style/text_styles.dart';
 import 'package:slee_fi/common/widgets/sf_dialog.dart';
+import 'package:slee_fi/di/translations/keys.dart';
+import 'package:slee_fi/presentation/screens/result/widgets/chart_statistic.dart';
+
+import 'chart_title.dart';
 
 class TabMonth extends StatelessWidget {
   const TabMonth({Key? key}) : super(key: key);
@@ -9,7 +14,7 @@ class TabMonth extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListView(
-      padding: const EdgeInsets.symmetric(vertical: 16),
+      padding: const EdgeInsets.all(16),
       children: [
         GestureDetector(
           onTap: () {
@@ -19,9 +24,9 @@ class TabMonth extends StatelessWidget {
                 ChartMonthPicker(
                   selectedDate: DateTime.now(),
                   firstAllowedDate:
-                      DateTime.now().subtract(const Duration(days: 45)),
+                  DateTime.now().subtract(const Duration(days: 45)),
                   lastAllowedDate: DateTime.now().add(const Duration(days: 45)),
-                  onNewSelected: (month) {},
+                  onNewSelected: (period) {},
                 )
               ],
             );
@@ -29,14 +34,80 @@ class TabMonth extends StatelessWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: const [
-              Icon(Icons.arrow_back_ios, size: 16),
+              Icon(Icons.arrow_back_ios, size: 16, color: AppColors.lightGrey,),
               SizedBox(width: 12),
               Text('April 20th ~ May 19th, 2022'),
               SizedBox(width: 12),
-              Icon(Icons.arrow_forward_ios, size: 16),
+              Icon(Icons.arrow_forward_ios, size: 16, color: AppColors.lightGrey),
             ],
           ),
         ),
+        const SizedBox(height: 33),
+        const ChartTitle(
+          title: Keys.slft,
+          textStyleTitle: TextStyles.bold16LightWhite,
+          toUpperCase: true,
+          padding: EdgeInsets.zero,
+        ),
+        const SizedBox(height: 12),
+        ChartStatistic(),
+        const SizedBox(height: 40),
+        const ChartTitle(
+            title: Keys.averageSleepScore,
+            textStyleTitle: TextStyles.bold16LightWhite,
+            result: "80/100",
+            textStyleResult: TextStyles.bold16Blue,
+            padding: EdgeInsets.zero
+        ),
+        const SizedBox(height: 12),
+        ChartStatistic(),
+        const SizedBox(height: 40),
+        const ChartTitle(
+          title: Keys.bedTime,
+          textStyleTitle: TextStyles.bold16LightWhite,
+        ),
+        const SizedBox(height: 12),
+        ChartStatistic(),
+        const SizedBox(height: 40),
+        const ChartTitle(
+            title: Keys.sleepOnsetTime,
+            textStyleTitle: TextStyles.bold16LightWhite,
+            padding: EdgeInsets.zero
+        ),
+        const SizedBox(height: 12),
+        ChartStatistic(),
+        const SizedBox(height: 40),
+        const ChartTitle(
+            title: Keys.wokeUp,
+            textStyleTitle: TextStyles.bold16LightWhite,
+            padding: EdgeInsets.zero
+        ),
+        const SizedBox(height: 12),
+        ChartStatistic(),
+        const SizedBox(height: 40),
+        const ChartTitle(
+            title: Keys.sleepDuration,
+            textStyleTitle: TextStyles.bold16LightWhite,
+            padding: EdgeInsets.zero
+        ),
+        const SizedBox(height: 4),
+        ChartStatistic(),
+        const SizedBox(height: 16),
+        const ChartTitle(
+            title: Keys.timeInBed,
+            textStyleTitle: TextStyles.bold16LightWhite,
+            padding: EdgeInsets.zero
+        ),
+        const SizedBox(height: 12),
+        ChartStatistic(),
+        const SizedBox(height: 40),
+        const ChartTitle(
+            title: Keys.nocturnalAwakening,
+            textStyleTitle: TextStyles.bold16LightWhite,
+            padding: EdgeInsets.zero
+        ),
+        const SizedBox(height: 12),
+        ChartStatistic(),
       ],
     );
   }

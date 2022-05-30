@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:slee_fi/common/routes/app_routes.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
 import 'package:slee_fi/common/widgets/background_widget.dart';
@@ -23,51 +24,59 @@ class ShowSeedPhraseScreen extends StatelessWidget {
         ),
         body: SafeArea(
             child: Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: Column(children: [
-            // AvailableWidget(),
-            Expanded(
-                child: SFCard(
-              child: ListView.builder(
-                  itemCount: 15,
-                  itemBuilder: (BuildContext context, int index) {
-                    return Column(
-                      children: [
-                        SFListTile(
-                          text: "${index + 1}",
-                          trailing: SFText(
-                            keyText: "-----",
-                            style: TextStyles.lightGrey14,
-                          ),
-                        ),
-                        Divider(
-                          color: AppColors.lightWhite.withOpacity(0.05),
-                          height: 1,
-                        ),
-                      ],
-                    );
-                  }),
+              padding: const EdgeInsets.all(16.0),
+              child: Column(children: [
+                // AvailableWidget(),
+                Expanded(
+                    child: SFCard(
+                      onTap: () {
+                        Navigator.pushNamed(context, R.exportSeedPhrase);
+                      },
+                      child: ListView.builder(
+                          itemCount: 15,
+                          itemBuilder: (BuildContext context, int index) {
+                            return Column(
+                              children: [
+                                SFListTile(
+                                  text: "${index + 1}",
+                                  trailing: SFText(
+                                    keyText: "-----",
+                                    style: TextStyles.lightGrey14,
+                                  ),
+                                ),
+                                Divider(
+                                  color: AppColors.lightWhite.withOpacity(0.05),
+                                  height: 1,
+                                ),
+                              ],
+                            );
+                          }),
+                    )),
+                const SizedBox(
+                  height: 12.0,
+                ),
+                SFText(
+                  keyText: Keys.displaysMessageShowSeedPhrase,
+                  style: TextStyles.lightGrey12,
+                ),
+                const SizedBox(
+                  height: 16.0,
+                ),
+                InkWell(
+                  onTap: () {
+                    Navigator.pushNamed(context, R.exportSeedPhrase);
+                  },
+                  child: SFText(
+                    keyText: Keys.pressAndHoldToReveal,
+                    style: TextStyles.bold18White,
+                  ),
+                ),
+                const SizedBox(
+                  height: 16.0,
+                ),
+                // ActivationCodeList(),
+              ]),
             )),
-            const SizedBox(
-              height: 12.0,
-            ),
-            SFText(
-              keyText: Keys.displaysMessageShowSeedPhrase,
-              style: TextStyles.lightGrey12,
-            ),
-            const SizedBox(
-              height: 16.0,
-            ),
-            SFText(
-              keyText: Keys.pressAndHoldToReveal,
-              style: TextStyles.bold18White,
-            ),
-            const SizedBox(
-              height: 16.0,
-            ),
-            // ActivationCodeList(),
-          ]),
-        )),
       ),
     );
   }

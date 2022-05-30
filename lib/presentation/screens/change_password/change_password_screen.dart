@@ -5,11 +5,10 @@ import 'package:slee_fi/common/widgets/background_widget.dart';
 import 'package:slee_fi/common/widgets/sf_app_bar.dart';
 import 'package:slee_fi/common/widgets/sf_buttons.dart';
 import 'package:slee_fi/common/widgets/sf_card.dart';
-import 'package:slee_fi/common/widgets/sf_icon.dart';
 import 'package:slee_fi/common/widgets/sf_textfield.dart';
+import 'package:slee_fi/common/widgets/sf_textfield_password.dart';
 import 'package:slee_fi/common/widgets/sf_textfield_text_button.dart';
 import 'package:slee_fi/di/translations/keys.dart';
-import 'package:slee_fi/resources/resources.dart';
 
 class ChangePasswordScreen extends StatelessWidget {
   const ChangePasswordScreen({Key? key}) : super(key: key);
@@ -41,9 +40,9 @@ class ChangePasswordScreen extends StatelessWidget {
                             SizedBox(height: 20,),
                             SFTextFieldTextButton(labelText: Keys.verificationCode,),
                             SizedBox(height: 20,),
-                            SFTextField(labelText: Keys.yourPassword, suffixIcon : Padding(padding: EdgeInsets.all(10), child: SFIcon(Ics.icEye, width: 24, height: 24,))),
+                            SFTextFieldPassword(labelText: Keys.yourPassword),
                             SizedBox(height: 20,),
-                            SFTextField(labelText: Keys.newPassword, suffixIcon : Padding(padding: EdgeInsets.all(10), child: SFIcon(Ics.icEye, width: 24, height: 24,))),
+                            SFTextFieldPassword(labelText: Keys.newPassword),
                           ],
                         ),
                       ),

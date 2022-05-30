@@ -10,6 +10,8 @@ class AlarmSoundEffectList extends StatefulWidget {
 }
 
 class _AlarmSoundEffectListState extends State<AlarmSoundEffectList> {
+  int temp = 0;
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -35,13 +37,17 @@ class _AlarmSoundEffectListState extends State<AlarmSoundEffectList> {
               children: [
                 SFListTile(
                   text: "Sound $index",
-                  trailing: index == 0
+                  trailing: index == temp
                       ? const Icon(
                           Icons.check,
                           color: AppColors.green,
                         )
                       : const SizedBox(),
-                  // onPressed: () => Navigator.pushNamed(context, R.alarmSoundEffect),
+                  onPressed: () {
+                    setState(() {
+                      temp = index;
+                    });
+                  },
                 ),
                 Divider(
                   color: AppColors.lightWhite.withOpacity(0.05),
