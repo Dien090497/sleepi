@@ -10,6 +10,7 @@ import 'package:slee_fi/common/widgets/sf_card.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
 import 'package:slee_fi/di/translations/keys.dart';
 import 'package:slee_fi/presentation/screens/staking/widgets/pop_up_calculator.dart';
+import 'package:slee_fi/presentation/screens/staking/widgets/pop_up_info_staking.dart';
 import 'package:slee_fi/resources/resources.dart';
 
 class StakingList extends StatelessWidget {
@@ -26,35 +27,39 @@ class StakingList extends StatelessWidget {
         ),
         const SizedBox(height: 16),
         Container(
-          padding: const EdgeInsets.symmetric(horizontal: 12.0, vertical: 24.0),
+          padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 24.0),
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(16),
-            gradient: AppColors.gradientBlueAccent,
+            gradient: AppColors.gradientBluePurpleStaking,
           ),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               SFText(
-                keyText: Keys.tvlInDapps,
-                style: TextStyles.bold24LightWhite,
-                toUpperCase: true,
-              ),
+                keyText: Keys.tvlInSleefi,
+                style: TextStyles.bold16LightWhite,
+                ),
               const SizedBox(
-                height: 24.0,
+                height: 19.0,
               ),
-              Center(
-                  child: SFText(
-                keyText: "2.905B ASTR",
-                style: TextStyles.bold24LightWhite,
-              )),
-              Center(
-                  child: SFText(
-                keyText: "163.2M USD",
-                style: TextStyles.bold24LightWhite,
-              )),
-              const SizedBox(
-                height: 12.0,
-              )
+              Row(
+                children: [
+                  Expanded(
+                      child: SFText(
+                        keyText: "xxxxxx SLFT",
+                        style: TextStyles.w700WhiteSize24,
+                      )
+                  ),
+                  Expanded(
+                      child: SFText(
+                        keyText: "(=xxxxxx USD)",
+                        style: TextStyles.w400White14,
+                        textAlign: TextAlign.end,
+                      )
+                  )
+                ],
+              ),
+
             ],
           ),
         ),
@@ -63,13 +68,9 @@ class StakingList extends StatelessWidget {
         ),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            const SizedBox(),
-            GestureDetector(
-              onTap: () { },
-              child: SvgPicture.asset(Ics.icQuestion,
-                  color: AppColors.lightGrey, width: 22),
-            )
+          children: const [
+            SizedBox(),
+           PopupInfoStaking(),
           ],
         ),
         const SizedBox(

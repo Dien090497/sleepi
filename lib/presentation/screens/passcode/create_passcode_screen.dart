@@ -3,49 +3,65 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:slee_fi/common/routes/app_routes.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
-import 'package:slee_fi/common/widgets/sf_back_button.dart';
+import 'package:slee_fi/common/widgets/background_widget.dart';
+import 'package:slee_fi/common/widgets/sf_app_bar.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
 import 'package:slee_fi/di/translations/keys.dart';
 import 'package:slee_fi/presentation/screens/passcode/widgets/passcode_numpad.dart';
 import 'package:slee_fi/presentation/screens/passcode/widgets/pin_code_widget.dart';
+
+class CreatePasscodeArguments {
+  final String route;
+
+  CreatePasscodeArguments(this.route);
+}
 
 class CreatePasscodeScreen extends StatelessWidget {
   const CreatePasscodeScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    final args =
+    ModalRoute.of(context)?.settings.arguments as CreatePasscodeArguments?;
+
     final TextEditingController passcodeController = TextEditingController();
 
-    return Scaffold(
-      backgroundColor: AppColors.black,
-      body: SafeArea(
-        child: Column(
-          children: [
-            Stack(
-              children: [
-                const Positioned(left: 10, top: 0, child: SFBackButton()),
-                Align(
-                    alignment: Alignment.center,
-                    child: SFText(
-                      keyText: Keys.secureWallet,
-                      style: TextStyles.white32Italic,
-                    )),
-              ],
-            ),
-            const SizedBox(height: 100),
-            SFText(keyText: Keys.enterYourPasscode, style: TextStyles.white12),
-            const SizedBox(height: 12),
-            PinCodeWidget(controller: passcodeController),
-            SizedBox(height: 4.h),
-            PasscodeNumPad(
-              passcodeController: passcodeController,
-              onCompleted: (String passcode) {
-                Navigator.popUntil(context, (r) => r.settings.name == R.wallet);
-              },
-            ),
-            SizedBox(height: 8.h),
-            SFText(keyText: Keys.forgotPasscode, style: TextStyles.white12),
-          ],
+    return BackgroundWidget(
+      child: Scaffold(
+        backgroundColor: AppColors.transparent,
+        appBar: SFAppBar(
+          context: context,
+          title: Keys.secureWallet,
+          textStyle: TextStyles.bold18LightWhite,
+        ),
+        body: SafeArea(
+          child: ListView(
+            children: [
+              const SizedBox(height: 65,),
+              Center(child: SFText(keyText: Keys.createYourPasscode, style: TextStyles.white12)),
+              const SizedBox(height: 12),
+              PinCodeWidget(controller: passcodeController),
+              SizedBox(height: 4.h),
+              PasscodeNumPad(
+                passcodeController: passcodeController,
+                onCompleted: (String passcode) {
+                  if (args != null) {
+                    Navigator.pushReplacementNamed(context, args.route);
+                  } else {
+                    Navigator.pushReplacementNamed(context, R.confirmPasscode);
+                    // Navigator.popUntil(context, (r) => r.settings.name == R.confirmPasscode);
+                  }
+
+                },
+              ),
+              SizedBox(height: 32.h),
+              // SFTextButton(
+              //   text: Keys.forgotPasscode,
+              //   textStyle: TextStyles.white12Underline,
+              //   onPressed: () {Navigator.pushNamed(context, R.restoreWallet);},
+              // )
+            ],
+          ),
         ),
       ),
     );

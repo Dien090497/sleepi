@@ -17,6 +17,7 @@ class SFTextFieldTextButton extends StatelessWidget {
     this.suffixIcon,
     this.noBorder = false,
     this.showLabel = true,
+    this.onPressed,
     Key? key,
     this.maxLine,
     this.maxLength,
@@ -33,6 +34,7 @@ class SFTextFieldTextButton extends StatelessWidget {
   final int? maxLine;
   final int? maxLength;
   final bool showLabel;
+  final VoidCallback? onPressed;
 
   @override
   Widget build(BuildContext context) {
@@ -72,6 +74,7 @@ class SFTextFieldTextButton extends StatelessWidget {
               SFTextButton(
                 text: textButton ?? Keys.sendCode,
                 textStyle: textButtonStyle ?? TextStyles.blue12,
+                onPressed: onPressed,
                 // color: Colors.transparent,
               ),
             ],

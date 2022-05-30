@@ -243,7 +243,9 @@ class _HomeScreenState extends State<HomeScreen> {
               Expanded(
                 child: SFButtonOutLined(
                   title: Keys.alarmBell,
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.pushNamed(context, R.alarmSoundEffect);
+                  },
                   fixedSize: const Size(274, 40),
                   textStyle: TextStyles.blue16,
                   icon: Icons.add_circle_outline,

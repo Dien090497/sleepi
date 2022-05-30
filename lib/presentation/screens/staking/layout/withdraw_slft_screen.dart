@@ -8,6 +8,7 @@ import 'package:slee_fi/common/widgets/sf_button_outlined.dart';
 import 'package:slee_fi/common/widgets/sf_buttons.dart';
 import 'package:slee_fi/common/widgets/sf_card.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
+import 'package:slee_fi/common/widgets/sf_textfield.dart';
 import 'package:slee_fi/di/translations/keys.dart';
 import 'package:slee_fi/resources/resources.dart';
 
@@ -62,10 +63,6 @@ class WithdrawSlftScreen extends StatelessWidget {
                                   keyText: Keys.withdraw,
                                   style: TextStyles.bold18LightWhite,
                                 ),
-                                SFButtonOutLined(
-                                    title: Keys.max,
-                                    textStyle: TextStyles.bold14Blue,
-                                    onPressed: () {}),
                                 Row(
                                   crossAxisAlignment: CrossAxisAlignment.center,
                                   children: [
@@ -81,6 +78,23 @@ class WithdrawSlftScreen extends StatelessWidget {
                                 ),
                               ],
                             ),
+                            const SizedBox(height: 21,),
+                            Row(
+                              children: [
+                                const Expanded(
+                                    child: SFTextField(
+                                      showLabel: false,
+                                      hintText: Keys.amount,
+                                    )
+                                ),
+                                const SizedBox(width: 12,),
+                                SFButtonOutLined(
+                                    title: Keys.max,
+                                    textStyle: TextStyles.bold14Blue,
+                                    borderColor: AppColors.blue,
+                                    onPressed: () {}),
+                              ],
+                            )
                           ],
                         ),
                       ),
