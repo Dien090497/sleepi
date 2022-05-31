@@ -320,6 +320,8 @@ class Keys {
 
   static const String music = 'music';
 
+  static const String sound = 'sound';
+
   static const String vibration = 'vibration';
 
   static const String snooze = 'snooze';
@@ -363,6 +365,8 @@ class Keys {
   static const String male = 'male';
 
   static const String other = 'other';
+
+  static const String secret = 'secret';
 
   static const String activationCodeLanguageLowercase =
       'activation_code_language_lowercase';
@@ -583,7 +587,9 @@ class Keys {
 
   static const String flexible = 'flexible';
 
-  static const String sleefiStacked = 'sleeFi_stacked';
+  static const String sleefiStaked = 'sleeFi_staked';
+
+  static const String slftStaked = 'slft_staked';
 
   static const String addDuration = 'add_duration';
 

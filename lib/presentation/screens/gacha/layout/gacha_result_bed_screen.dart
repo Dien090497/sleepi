@@ -73,7 +73,7 @@ class GachaResultBedScreen extends StatelessWidget {
                                           borderRadius: BorderRadius.circular(16),
                                         ),
                                         padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 15),
-                                        child: SFText(keyText: 'Quality', style: TextStyles.blue14,),
+                                        child: SFText(keyText: Keys.quality, style: TextStyles.blue14,),
                                       ),
                                       const SizedBox(width: 25,),
                                       Container(
@@ -91,7 +91,7 @@ class GachaResultBedScreen extends StatelessWidget {
                             ),
                           ),
                         ),
-                        SFText(keyText: 'Attributes', style: TextStyles.boldWhite18,),
+                        SFText(keyText: Keys.attributes, style: TextStyles.boldWhite18,),
                         Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 15),
                           child: Column(
@@ -106,13 +106,12 @@ class GachaResultBedScreen extends StatelessWidget {
                                   gradient: AppColors.gradientBlueButton,
                                   height: 45,
                                   width: size.width,
-                                  toUpperCase: true,
                                 ),
                               ),
                               const SizedBox(height: 16),
                               Center(
                                 child: SFButtonOutLined(
-                                  title: 'Show All Results',
+                                  title: Keys.showAllResult,
                                   onPressed: () {},
                                   fixedSize: Size(size.width, 45),
                                   textStyle: TextStyles.blue16,

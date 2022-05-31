@@ -49,6 +49,7 @@ class TransferScreen extends StatelessWidget {
                     color: AppColors.blue,
                     onPressed: () {
                       showCustomAlertDialog(context,
+                          showClosed: false,
                           children: const PopUpConfirmTransfer());
                     },
                   ),

@@ -34,7 +34,7 @@ class PopUpCalculator extends StatelessWidget {
           height: 12.0,
         ),
         SFText(
-          keyText: Keys.sleefiStacked,
+          keyText: Keys.slftStaked,
           style: TextStyles.lightGrey14,
         ),
         SFCard(

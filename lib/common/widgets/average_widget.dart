@@ -6,18 +6,20 @@ class AverageWidget extends StatelessWidget {
     this.color,
     this.textStyle,
     this.title,
+    this.average,
     this.textStyleNumber,
     Key? key}) : super(key: key);
 
   final Color? color;
   final String? title;
+  final String? average;
   final TextStyle? textStyle;
   final TextStyle? textStyleNumber;
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.all(24.0),
+      padding: const EdgeInsets.fromLTRB(24, 24, 33, 0),
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(16.0),
           color: color,
@@ -32,7 +34,7 @@ class AverageWidget extends StatelessWidget {
           const SizedBox(
             height: 11.0,
           ),
-          SFText(keyText: "10:55", style: textStyleNumber)
+          SFText(keyText: average ?? "", style: textStyleNumber)
         ],
       ),
     );

@@ -17,6 +17,7 @@ class ModalPopUpSex extends StatelessWidget {
       ),
       SFText(keyText: Keys.male, style: TextStyles.bold16LightWhite),
       SFText(keyText: Keys.other, style: TextStyles.bold16LightWhite),
+      SFText(keyText: Keys.secret, style: TextStyles.bold16LightWhite),
     ];
 
     return SafeArea(

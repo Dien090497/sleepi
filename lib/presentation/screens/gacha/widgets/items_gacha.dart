@@ -28,7 +28,7 @@ class ItemsGacha extends StatelessWidget {
                 borderRadius: BorderRadius.circular(16),
               ),
               padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 15),
-              child: SFText(keyText: 'Move', style: TextStyles.white14,),
+              child: SFText(keyText: Keys.probability, style: TextStyles.white14,),
             )
           ],
         ),

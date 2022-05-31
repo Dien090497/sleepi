@@ -254,6 +254,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   withBorder: 1,
                 ),
               ),
+              const SizedBox(width: 22,),
               CupertinoSwitch(
                 activeColor: AppColors.green,
                 value: swCheck,

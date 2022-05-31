@@ -7,9 +7,11 @@ import 'package:slee_fi/common/widgets/sf_alert_dialog.dart';
 import 'package:slee_fi/common/widgets/sf_button_outlined.dart';
 import 'package:slee_fi/common/widgets/sf_buttons.dart';
 import 'package:slee_fi/common/widgets/sf_card.dart';
+import 'package:slee_fi/common/widgets/sf_dialog.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
 import 'package:slee_fi/di/translations/keys.dart';
 import 'package:slee_fi/presentation/screens/staking/widgets/pop_up_calculator.dart';
+import 'package:slee_fi/presentation/screens/staking/widgets/pop_up_compound.dart';
 import 'package:slee_fi/presentation/screens/staking/widgets/pop_up_info_staking.dart';
 import 'package:slee_fi/resources/resources.dart';
 
@@ -246,7 +248,10 @@ class StakingList extends StatelessWidget {
                         Navigator.pushNamed(context, R.withdrawSLFT),
                   ),
                   GestureDetector(
-                    onTap: () {},
+                    onTap: () {
+                      showCustomDialog(context,
+                          children: [const PopUpCompound()]);
+                    },
                     child: SFText(
                       keyText: Keys.compound,
                       style: TextStyles.bold14Blue,

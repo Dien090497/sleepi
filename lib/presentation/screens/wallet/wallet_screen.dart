@@ -22,7 +22,10 @@ class WalletScreen extends StatelessWidget {
         child: Scaffold(
           backgroundColor: AppColors.transparent,
           appBar: AppBar(
-            leading: const SFBackButton(),
+            leading: const Padding(
+              padding: EdgeInsets.only(left: 16),
+              child: SFBackButton(),
+            ),
             actions: [
               GestureDetector(
                 onTap: () => Navigator.pushNamed(context, R.passcode, arguments: PasscodeArguments(R.settingWallet)),
@@ -31,7 +34,7 @@ class WalletScreen extends StatelessWidget {
             ],
             automaticallyImplyLeading: false,
             backgroundColor: AppColors.transparent,
-            leadingWidth: 32,
+            leadingWidth: 48,
             elevation: 0,
             centerTitle: true,
             titleSpacing: 3,

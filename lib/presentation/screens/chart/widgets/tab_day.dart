@@ -68,12 +68,12 @@ class TabDay extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               SFText(
-                keyText: Keys.tokenEarned,
+                keyText: Keys.sleepScore,
                 style: TextStyles.lightWhite16,
               ),
               Expanded(
                   child: SFText(
-                      keyText: "100 SLGT",
+                      keyText: "85/100",
                       style: TextStyles.lightWhite16,
                       textAlign: TextAlign.end)),
             ],

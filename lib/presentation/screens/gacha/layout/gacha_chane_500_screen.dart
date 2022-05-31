@@ -79,7 +79,7 @@ class _GachaChance500ScreenState extends State<GachaChance500Screen> {
                                         borderRadius: BorderRadius.circular(16),
                                       ),
                                       padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 15),
-                                      child: SFText(keyText: 'Quality', style: TextStyles.blue14,),
+                                      child: SFText(keyText: Keys.quality, style: TextStyles.blue14,),
                                     ),
                                     const SizedBox(width: 25,),
                                     Container(
@@ -97,7 +97,7 @@ class _GachaChance500ScreenState extends State<GachaChance500Screen> {
                             ),
                           ),
                         ),
-                        SFText(keyText: 'Attributes', style: TextStyles.boldWhite18,),
+                        SFText(keyText: Keys.attributes, style: TextStyles.boldWhite18,),
                         Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 15),
                           child: Column(
@@ -203,7 +203,6 @@ class _GachaChance500ScreenState extends State<GachaChance500Screen> {
                                     gradient: AppColors.gradientBlueButton,
                                     height: 45,
                                     width: size.width,
-                                    toUpperCase: true,
                                   ),
                                 ),
                               ),

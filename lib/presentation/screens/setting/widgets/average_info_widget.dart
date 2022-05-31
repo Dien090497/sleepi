@@ -15,6 +15,9 @@ class AverageInfoWidget extends StatelessWidget {
       Keys.averageOfSleepDuration,
       Keys.averageOfSleepQuality
     ];
+    List<String> averages = [
+      "10:55","09:55","07:55","87/100",
+    ];
     List<Color> colors = [
       AppColors.blue.withOpacity(0.15),
       AppColors.yellow.withOpacity(0.15),
@@ -40,10 +43,10 @@ class AverageInfoWidget extends StatelessWidget {
       crossAxisSpacing: 15.0,
       mainAxisSpacing: 16.0,
       shrinkWrap: true,
-      padding: const EdgeInsets.symmetric(horizontal: 12.0),
       children: List.generate(texts.length, (i) {
         return AverageWidget(
           title: texts[i],
+          average: averages[i],
           textStyle: textStyleTitle[i],
           textStyleNumber: textStyleNum[i],
           color: colors[i],

@@ -46,7 +46,7 @@ class NotificationPermissionScreen extends StatelessWidget {
               Align(
                 alignment: Alignment.bottomCenter,
                 child: Padding(
-                  padding: const EdgeInsets.all(16.0),
+                  padding: const EdgeInsets.fromLTRB(16, 0, 16, 50),
                   child: SFButton(
                       height: 48,
                       width: double.infinity,

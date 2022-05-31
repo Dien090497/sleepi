@@ -21,6 +21,7 @@ class TabBedsDetail extends StatelessWidget {
           cost: 2,
           time: 1200,
           onConfirm: () {},
+          onCancel: () {Navigator.pop(context);},
         ),
       ],
     );

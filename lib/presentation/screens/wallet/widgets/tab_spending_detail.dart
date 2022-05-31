@@ -85,7 +85,6 @@ class TabSpendingDetail extends StatelessWidget {
                     height: 48,
                     child: SFButtonOutLined(
                       title: Keys.stake,
-                      withBorder: 0.5,
                       textStyle: TextStyles.bold16Blue,
                       borderColor: AppColors.blue,
                       onPressed: () {Navigator.pushNamed(context, R.staking);},

@@ -68,24 +68,28 @@ class SendToExternalScreen extends StatelessWidget {
                       Text.rich(
                         TextSpan(
                           text: translate(Keys.theNetworkYouHaveSelectedIs),
-                          style: TextStyles.lightGrey12,
+                          style: TextStyles.w400lightGrey12,
                           children: [
+                            const TextSpan(text: ' '),
                             const TextSpan(
-                                text: ' Solana ',
-                                style: TextStyles.red16Italic),
+                                text: Keys.avalanche,
+                                style: TextStyles.w400Red12),
+                            const TextSpan(text: ' '),
                             TextSpan(text: translate(Keys.network)),
                             const TextSpan(text: '. '),
                             TextSpan(
                                 text: translate(
                                     Keys.pleaseEnsureThatTheWithdrawalAddress)),
+                            const TextSpan(text: ' '),
                             const TextSpan(
-                                text: ' Solana ',
-                                style: TextStyles.red16Italic),
+                                text: Keys.avalanche,
+                                style: TextStyles.w400Red12),
+                            const TextSpan(text: ' '),
                             TextSpan(text: translate(Keys.network)),
                             const TextSpan(text: '. '),
                             TextSpan(
                                 text: translate(Keys.youWillLoseYourAssets),
-                                style: TextStyles.red16Italic),
+                                style: TextStyles.w400Red12),
                             const TextSpan(text: ' '),
                             TextSpan(
                                 text: translate(
