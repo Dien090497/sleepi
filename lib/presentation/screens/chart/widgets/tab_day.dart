@@ -7,7 +7,7 @@ import 'package:slee_fi/common/widgets/sf_dialog.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
 import 'package:slee_fi/di/translations/keys.dart';
 import 'package:slee_fi/presentation/screens/chart/widgets/sleep_score_widget.dart';
-import 'package:slee_fi/presentation/screens/result/widgets/chart_statistic.dart';
+import 'package:slee_fi/presentation/screens/result/widgets/chart_statistic_share.dart';
 
 class TabDay extends StatelessWidget {
   const TabDay({Key? key}) : super(key: key);
@@ -80,7 +80,7 @@ class TabDay extends StatelessWidget {
           ),
         ),
         const SizedBox(height: 32),
-         ChartStatistic(),
+        ChartStatisticShare(),
         const SizedBox(height: 24),
         const SleepScore(),
       ],
