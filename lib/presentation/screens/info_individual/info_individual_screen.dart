@@ -5,7 +5,7 @@ import 'package:slee_fi/common/widgets/sf_icon.dart';
 import 'package:slee_fi/common/widgets/sf_image_border.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
 import 'package:slee_fi/common/widgets/topbar_common.dart';
-import 'package:slee_fi/di/translations/keys.dart';
+import 'package:slee_fi/l10n/locale_keys.g.dart';
 import 'package:slee_fi/presentation/screens/info_individual/widget/attributes_widget.dart';
 import 'package:slee_fi/presentation/screens/info_individual/widget/bottom_bar.dart';
 import 'package:slee_fi/presentation/screens/info_individual/widget/bottom_bar_market_place.dart';
@@ -30,7 +30,9 @@ class InfoIndividualScreen extends StatelessWidget {
             const TopBarCommon(
               iconBack: true,
             ),
-            const SizedBox(height: 10,),
+            const SizedBox(
+              height: 10,
+            ),
             Expanded(
               child: SingleChildScrollView(
                 physics: const ScrollPhysics(),
@@ -56,7 +58,9 @@ class InfoIndividualScreen extends StatelessWidget {
                           size: const Size(75, 75),
                           padding: 20,
                         ),
-                        const SizedBox(width: 10,),
+                        const SizedBox(
+                          width: 10,
+                        ),
                         SFImageBorder(
                           icon: Imgs.jewelGreen,
                           onTap: () {},
@@ -64,7 +68,9 @@ class InfoIndividualScreen extends StatelessWidget {
                           size: const Size(75, 75),
                           padding: 20,
                         ),
-                        const SizedBox(width: 10,),
+                        const SizedBox(
+                          width: 10,
+                        ),
                         SFImageBorder(
                           icon: Imgs.jewelBlue,
                           onTap: () {},
@@ -72,7 +78,9 @@ class InfoIndividualScreen extends StatelessWidget {
                           size: const Size(75, 75),
                           padding: 20,
                         ),
-                        const SizedBox(width: 10,),
+                        const SizedBox(
+                          width: 10,
+                        ),
                         SFImageBorder(
                           icon: Imgs.jewelRed,
                           onTap: () {},
@@ -82,13 +90,24 @@ class InfoIndividualScreen extends StatelessWidget {
                         ),
                       ],
                     ),
-                    const SizedBox(height: 16,),
+                    const SizedBox(
+                      height: 16,
+                    ),
                     const BoxInfoWidget(),
-                    const SizedBox(height: 24,),
-                    SFText(keyText: Keys.attributes, style: TextStyles.bold18LightWhite,),
-                    const SizedBox(height: 15,),
+                    const SizedBox(
+                      height: 24,
+                    ),
+                    SFText(
+                      keyText: LocaleKeys.attributes,
+                      style: TextStyles.bold18LightWhite,
+                    ),
+                    const SizedBox(
+                      height: 15,
+                    ),
                     const AttributesWidget(),
-                    const SizedBox(height: 33,),
+                    const SizedBox(
+                      height: 33,
+                    ),
                     const MintFromWidget(),
                   ],
                 ),

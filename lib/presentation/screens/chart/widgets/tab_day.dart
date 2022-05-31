@@ -5,7 +5,7 @@ import 'package:slee_fi/common/style/text_styles.dart';
 import 'package:slee_fi/common/widgets/sf_card.dart';
 import 'package:slee_fi/common/widgets/sf_dialog.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
-import 'package:slee_fi/di/translations/keys.dart';
+import 'package:slee_fi/l10n/locale_keys.g.dart';
 import 'package:slee_fi/presentation/screens/chart/widgets/sleep_score_widget.dart';
 import 'package:slee_fi/presentation/screens/result/widgets/chart_statistic_share.dart';
 
@@ -39,7 +39,8 @@ class TabDay extends StatelessWidget {
               SizedBox(width: 12),
               Text('April 26th, 2022'),
               SizedBox(width: 12),
-              Icon(Icons.arrow_forward_ios, size: 16, color: AppColors.lightGrey),
+              Icon(Icons.arrow_forward_ios,
+                  size: 16, color: AppColors.lightGrey),
             ],
           ),
         ),
@@ -50,7 +51,7 @@ class TabDay extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               SFText(
-                keyText: Keys.tokenEarned,
+                keyText: LocaleKeys.tokenEarned,
                 style: TextStyles.lightWhite16,
               ),
               Expanded(
@@ -61,14 +62,16 @@ class TabDay extends StatelessWidget {
             ],
           ),
         ),
-        const SizedBox(height: 12,),
+        const SizedBox(
+          height: 12,
+        ),
         SFCard(
           padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 18),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               SFText(
-                keyText: Keys.tokenEarned,
+                keyText: LocaleKeys.tokenEarned,
                 style: TextStyles.lightWhite16,
               ),
               Expanded(

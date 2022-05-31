@@ -6,7 +6,7 @@ import 'package:slee_fi/common/widgets/sf_bottom_sheet.dart';
 import 'package:slee_fi/common/widgets/sf_card.dart';
 import 'package:slee_fi/common/widgets/sf_list_tile.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
-import 'package:slee_fi/di/translations/keys.dart';
+import 'package:slee_fi/l10n/locale_keys.g.dart';
 import 'package:slee_fi/presentation/screens/setting/widgets/modal_multi_chain_switch.dart';
 import 'package:slee_fi/presentation/screens/setting/widgets/modal_pop_up_language.dart';
 
@@ -30,7 +30,7 @@ class GeneralWidget extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           SFText(
-            keyText: Keys.general,
+            keyText: LocaleKeys.general,
             style: TextStyles.lightGrey14,
           ),
           SFCard(
@@ -38,40 +38,40 @@ class GeneralWidget extends StatelessWidget {
             child: Column(
               children: [
                 SFListTile(
-                  text: Keys.permissions,
+                  text: LocaleKeys.permissions,
                   trailing: icon,
                   onPressed: () => Navigator.pushNamed(context, R.permission),
                 ),
                 divider,
                 SFListTile(
-                  text: Keys.alarm,
+                  text: LocaleKeys.alarm,
                   trailing: icon,
                   onPressed: () => Navigator.pushNamed(context, R.alarm),
                 ),
                 divider,
                 SFListTile(
-                  text: Keys.activationCode,
+                  text: LocaleKeys.activationCode,
                   trailing: icon,
                   onPressed: () =>
                       Navigator.pushNamed(context, R.activationCode),
                 ),
                 divider,
                 SFListTile(
-                  text: Keys.language,
+                  text: LocaleKeys.language,
                   trailing: icon,
                   onPressed: () => SFModalBottomSheet.show(
                       context, 0.36, const ModalPopUpLanguage()),
                 ),
                 divider,
                 SFListTile(
-                  text: Keys.multiChainSwitch,
+                  text: LocaleKeys.multiChainSwitch,
                   trailing: icon,
                   onPressed: () => SFModalBottomSheet.show(
                       context, 0.5, const ModalMultiChainSwitch()),
                 ),
                 divider,
                 SFListTile(
-                  text: Keys.version,
+                  text: LocaleKeys.version,
                   trailing:
                       SFText(keyText: "0.01", style: TextStyles.lightGrey14),
                 ),

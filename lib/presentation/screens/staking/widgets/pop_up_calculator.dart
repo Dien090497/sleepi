@@ -6,7 +6,7 @@ import 'package:slee_fi/common/widgets/sf_chip.dart';
 import 'package:slee_fi/common/widgets/sf_icon.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
 import 'package:slee_fi/common/widgets/sf_textfield_text_button.dart';
-import 'package:slee_fi/di/translations/keys.dart';
+import 'package:slee_fi/l10n/locale_keys.g.dart';
 import 'package:slee_fi/resources/resources.dart';
 
 class PopUpCalculator extends StatelessWidget {
@@ -19,14 +19,14 @@ class PopUpCalculator extends StatelessWidget {
       children: [
         Center(
             child: SFText(
-              keyText: Keys.roiCalculator,
-              style: TextStyles.bold18LightWhite,
-            )),
+          keyText: LocaleKeys.roiCalculator,
+          style: TextStyles.bold18LightWhite,
+        )),
         const SizedBox(
           height: 24,
         ),
         SFText(
-          keyText: Keys.flexible,
+          keyText: LocaleKeys.flexible,
           style: TextStyles.bold16Blue,
           textAlign: TextAlign.start,
         ),
@@ -34,7 +34,7 @@ class PopUpCalculator extends StatelessWidget {
           height: 12.0,
         ),
         SFText(
-          keyText: Keys.sleefiStacked,
+          keyText: LocaleKeys.sleefiStacked,
           style: TextStyles.lightGrey14,
         ),
         SFCard(
@@ -70,11 +70,13 @@ class PopUpCalculator extends StatelessWidget {
             ],
           ),
         ),
-        const SizedBox(height: 12.0,),
+        const SizedBox(
+          height: 12.0,
+        ),
         Wrap(
           spacing: 6.0,
           runSpacing: 6.0,
-          children:  [
+          children: [
             SFChip(
               text: "100",
               textStyle: TextStyles.w700LightGreySize14,
@@ -96,7 +98,7 @@ class PopUpCalculator extends StatelessWidget {
           height: 32.0,
         ),
         SFText(
-          keyText: Keys.addDuration,
+          keyText: LocaleKeys.addDuration,
           style: TextStyles.lightGrey14,
         ),
         const SizedBox(
@@ -134,7 +136,7 @@ class PopUpCalculator extends StatelessWidget {
         ),
         const SFTextFieldTextButton(
           showLabel: false,
-          textButton: Keys.day,
+          textButton: LocaleKeys.day,
           textButtonStyle: TextStyles.lightGrey14,
         ),
         const SizedBox(
@@ -153,28 +155,28 @@ class PopUpCalculator extends StatelessWidget {
             children: [
               Expanded(
                   child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      SFText(
-                        keyText: Keys.roiCurrentRates,
-                        style: TextStyles.blue14,
-                      ),
-                      const SizedBox(
-                        height: 4,
-                      ),
-                      SFText(
-                        keyText: "0.00",
-                        style: TextStyles.bold24LightWhite,
-                      ),
-                      const SizedBox(
-                        height: 4,
-                      ),
-                      SFText(
-                        keyText: "~ 0 SLFT (0.00%)",
-                        style: TextStyles.lightGrey14,
-                      ),
-                    ],
-                  )),
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  SFText(
+                    keyText: LocaleKeys.roiCurrentRates,
+                    style: TextStyles.blue14,
+                  ),
+                  const SizedBox(
+                    height: 4,
+                  ),
+                  SFText(
+                    keyText: "0.00",
+                    style: TextStyles.bold24LightWhite,
+                  ),
+                  const SizedBox(
+                    height: 4,
+                  ),
+                  SFText(
+                    keyText: "~ 0 SLFT (0.00%)",
+                    style: TextStyles.lightGrey14,
+                  ),
+                ],
+              )),
               const SFIcon(
                 Ics.icEdit,
                 width: 28,

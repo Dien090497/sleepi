@@ -1,28 +1,36 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_translate/flutter_translate.dart';
+// import 'package:flutter_translate/flutter_translate.dart';
 import 'package:logger/logger.dart';
 import 'package:slee_fi/app.dart';
 import 'package:slee_fi/di/injector.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await EasyLocalization.ensureInitialized();
   await Future.wait([
     configureDependencies(),
   ]);
 
-  final delegate = await LocalizationDelegate.create(
-    fallbackLocale: 'en_US',
-    supportedLocales: ['en_US', 'ja_JP'],
-    preferences: getIt<ITranslatePreferences>(),
-  );
+  // final delegate = await LocalizationDelegate.create(
+  //   fallbackLocale: 'en_US',
+  //   supportedLocales: ['en_US', 'ja_JP'],
+  //   preferences: getIt<ITranslatePreferences>(),
+  // );
 
   /// Lock in portrait mode only
   SystemChrome.setPreferredOrientations(
       [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]).then((_) {
     BlocOverrides.runZoned(
-      () => runApp(LocalizedApp(delegate, const MyApp())),
+      // () => runApp(LocalizedApp(delegate, const MyApp())),
+      () => runApp(EasyLocalization(
+        supportedLocales: const [Locale('en', 'US'), Locale('ja', 'JP')],
+        path: 'assets/translations',
+        fallbackLocale: const Locale('en', 'US'),
+        child: const MyApp(),
+      )),
       blocObserver: AppBlocObserver(),
     );
   });

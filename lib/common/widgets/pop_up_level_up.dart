@@ -6,7 +6,7 @@ import 'package:slee_fi/common/widgets/sf_card.dart';
 import 'package:slee_fi/common/widgets/sf_dialog.dart';
 import 'package:slee_fi/common/widgets/sf_icon.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
-import 'package:slee_fi/di/translations/keys.dart';
+import 'package:slee_fi/l10n/locale_keys.g.dart';
 
 class PopUpLevelUp extends StatelessWidget {
   const PopUpLevelUp(
@@ -45,7 +45,7 @@ class PopUpLevelUp extends StatelessWidget {
         Column(
           children: [
             SFText(
-              keyText: Keys.levelUp,
+              keyText: LocaleKeys.levelUp,
               style: TextStyles.white1w700size16,
             ),
             const SizedBox(height: 20),
@@ -78,7 +78,7 @@ class PopUpLevelUp extends StatelessWidget {
               child: Row(
                 children: [
                   SFText(
-                    keyText: Keys.attributes,
+                    keyText: LocaleKeys.attributes,
                     style: TextStyles.lightGrey16,
                   ),
                   const SizedBox(width: 4),
@@ -99,7 +99,7 @@ class PopUpLevelUp extends StatelessWidget {
               child: Row(
                 children: [
                   SFText(
-                    keyText: Keys.attributes,
+                    keyText: LocaleKeys.attributes,
                     style: TextStyles.lightGrey16,
                   ),
                   const SizedBox(width: 4),
@@ -118,7 +118,7 @@ class PopUpLevelUp extends StatelessWidget {
               children: [
                 Expanded(
                   child: SFButton(
-                    text: Keys.cancel,
+                    text: LocaleKeys.cancel,
                     onPressed: onCancel,
                     textStyle: TextStyles.lightGrey16,
                     color: AppColors.light4,
@@ -127,7 +127,7 @@ class PopUpLevelUp extends StatelessWidget {
                 const SizedBox(width: 12),
                 Expanded(
                   child: SFButton(
-                    text: Keys.confirm,
+                    text: LocaleKeys.confirm,
                     onPressed: () {
                       onConfirm();
                       Navigator.pop(context);

@@ -26,7 +26,8 @@ class BottomBarMarketPlaceWidget extends StatelessWidget {
               SFButton(
                 text: 'Buy Now',
                 onPressed: () {
-                  showCustomDialog(context, children: [const PopUpBuyMarketPlace()]);
+                  showCustomDialog(context,
+                      children: [const PopUpBuyMarketPlace()]);
                 },
               ),
             ],

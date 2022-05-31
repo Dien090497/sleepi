@@ -3,7 +3,7 @@ import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
 import 'package:slee_fi/common/widgets/sf_buttons.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
-import 'package:slee_fi/di/translations/keys.dart';
+import 'package:slee_fi/l10n/locale_keys.g.dart';
 
 class PopUpConfirmSend extends StatelessWidget {
   const PopUpConfirmSend({Key? key}) : super(key: key);
@@ -15,7 +15,7 @@ class PopUpConfirmSend extends StatelessWidget {
       child: Column(
         children: [
           SFText(
-            keyText: Keys.send,
+            keyText: LocaleKeys.send,
             style: TextStyles.bold18LightWhite,
           ),
           const SizedBox(
@@ -25,7 +25,7 @@ class PopUpConfirmSend extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               SFText(
-                keyText: Keys.fee,
+                keyText: LocaleKeys.fee,
                 style: TextStyles.lightGrey14,
               ),
               Expanded(
@@ -42,15 +42,15 @@ class PopUpConfirmSend extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               SFText(
-                keyText: Keys.youllSend,
+                keyText: LocaleKeys.youllSend,
                 style: TextStyles.lightGrey14,
               ),
               Expanded(
                   child: SFText(
-                    keyText: "0.007930727 AVAX",
-                    style: TextStyles.lightWhite16,
-                    textAlign: TextAlign.end,
-                  )),
+                keyText: "0.007930727 AVAX",
+                style: TextStyles.lightWhite16,
+                textAlign: TextAlign.end,
+              )),
             ],
           ),
           const SizedBox(
@@ -61,16 +61,16 @@ class PopUpConfirmSend extends StatelessWidget {
             children: [
               Expanded(
                 child: SFText(
-                  keyText: Keys.sendAddress,
+                  keyText: LocaleKeys.sendAddress,
                   style: TextStyles.lightGrey14,
                 ),
               ),
               Expanded(
                   child: SFText(
-                    keyText: "shgshiusa94Djkus0njhsNsu342Bdh",
-                    style: TextStyles.lightWhite16,
-                    textAlign: TextAlign.end,
-                  )),
+                keyText: "shgshiusa94Djkus0njhsNsu342Bdh",
+                style: TextStyles.lightWhite16,
+                textAlign: TextAlign.end,
+              )),
             ],
           ),
           const SizedBox(
@@ -81,7 +81,7 @@ class PopUpConfirmSend extends StatelessWidget {
             children: [
               Expanded(
                 child: SFButton(
-                  text: Keys.cancel,
+                  text: LocaleKeys.cancel,
                   textStyle: TextStyles.w600LightGreySize16,
                   color: AppColors.light4,
                   onPressed: () => Navigator.maybePop(context),
@@ -92,7 +92,7 @@ class PopUpConfirmSend extends StatelessWidget {
               ),
               Expanded(
                 child: SFButton(
-                  text: Keys.confirm,
+                  text: LocaleKeys.confirm,
                   textStyle: TextStyles.bold14LightWhite,
                   color: AppColors.blue,
                   onPressed: () {},

@@ -6,7 +6,7 @@ import 'package:slee_fi/common/widgets/sf_button_outlined.dart';
 import 'package:slee_fi/common/widgets/sf_buttons.dart';
 import 'package:slee_fi/common/widgets/sf_card.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
-import 'package:slee_fi/di/translations/keys.dart';
+import 'package:slee_fi/l10n/locale_keys.g.dart';
 import 'package:slee_fi/presentation/screens/wallet/widgets/pop_up_info_spending.dart';
 import 'package:slee_fi/presentation/screens/wallet/widgets/spending_detail_list.dart';
 import 'package:slee_fi/resources/resources.dart';
@@ -29,7 +29,8 @@ class TabSpendingDetail extends StatelessWidget {
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 12.0),
                     child: SFText(
-                        keyText: Keys.spendingAccount, style: TextStyles.blue12),
+                        keyText: LocaleKeys.spendingAccount,
+                        style: TextStyles.blue12),
                   ),
                   const PopupInfoSpending(),
                 ],
@@ -46,7 +47,7 @@ class TabSpendingDetail extends StatelessWidget {
                       child: ListTile(
                         leading: Image.asset(Imgs.slft),
                         title: SFText(
-                            keyText: Keys.slft,
+                            keyText: LocaleKeys.slft,
                             style: TextStyles.lightWhite16,
                             toUpperCase: true),
                         trailing: SFText(
@@ -59,7 +60,7 @@ class TabSpendingDetail extends StatelessWidget {
                       child: ListTile(
                         leading: Image.asset(Imgs.slgt),
                         title: SFText(
-                            keyText: Keys.slgt,
+                            keyText: LocaleKeys.slgt,
                             style: TextStyles.lightWhite16,
                             toUpperCase: true),
                         trailing: SFText(
@@ -72,7 +73,7 @@ class TabSpendingDetail extends StatelessWidget {
                       child: ListTile(
                         leading: Image.asset(Imgs.avax),
                         title: SFText(
-                          keyText: Keys.avax,
+                          keyText: LocaleKeys.avax,
                           style: TextStyles.lightWhite16,
                           toUpperCase: true,
                         ),
@@ -93,12 +94,13 @@ class TabSpendingDetail extends StatelessWidget {
                 child: SizedBox(
                     height: 48,
                     child: SFButtonOutLined(
-                      title: Keys.stake,
+                      title: LocaleKeys.stake,
                       textStyle: TextStyles.bold16Blue,
                       borderColor: AppColors.blue,
-                      onPressed: () {Navigator.pushNamed(context, R.staking);},
-                    )
-                ),
+                      onPressed: () {
+                        Navigator.pushNamed(context, R.staking);
+                      },
+                    )),
               ),
               const SizedBox(
                 height: 16.0,
@@ -110,9 +112,9 @@ class TabSpendingDetail extends StatelessWidget {
               alignment: Alignment.bottomCenter,
               child: Padding(
                 padding:
-                const EdgeInsets.symmetric(horizontal: 24.0, vertical: 8.0),
+                    const EdgeInsets.symmetric(horizontal: 24.0, vertical: 8.0),
                 child: SFButton(
-                  text: Keys.transfer,
+                  text: LocaleKeys.transfer,
                   textStyle: TextStyles.w600WhiteSize16,
                   height: 48,
                   width: double.infinity,

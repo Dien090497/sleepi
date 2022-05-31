@@ -5,7 +5,7 @@ import 'package:slee_fi/common/style/text_styles.dart';
 import 'package:slee_fi/common/widgets/background_widget.dart';
 import 'package:slee_fi/common/widgets/sf_buttons.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
-import 'package:slee_fi/di/translations/keys.dart';
+import 'package:slee_fi/l10n/locale_keys.g.dart';
 import 'package:slee_fi/resources/resources.dart';
 
 class MicPermissionScreen extends StatelessWidget {
@@ -28,7 +28,7 @@ class MicPermissionScreen extends StatelessWidget {
                     height: 24.0,
                   ),
                   SFText(
-                    keyText: Keys.micPermission,
+                    keyText: LocaleKeys.micPermission,
                     style: TextStyles.bold24LightWhite,
                     textAlign: TextAlign.center,
                   ),
@@ -36,18 +36,18 @@ class MicPermissionScreen extends StatelessWidget {
                     height: 32.0,
                   ),
                   SFText(
-                    keyText: Keys.displaysMessageMicPermission,
+                    keyText: LocaleKeys.displaysMessageMicPermission,
                     style: TextStyles.lightGrey16,
                   ),
                   const SizedBox(
                     height: 16.0,
                   ),
                   SFText(
-                    keyText: Keys.displaysMessageMicPermission1,
+                    keyText: LocaleKeys.displaysMessageMicPermission1,
                     style: TextStyles.lightGrey16,
                   ),
                   // SizedBox(height: MediaQuery.of(context).size.height * 0.2,),
-                  // SFButton(height: 48,text: Keys.setupMicrophoneAccess,onPressed: () => Navigator.pushNamed(context, R.healthcarePermission),)
+                  // SFButton(height: 48,text: LocaleKeys.setupMicrophoneAccess,onPressed: () => Navigator.pushNamed(context, R.healthcarePermission),)
                 ],
               ),
               Align(
@@ -58,7 +58,7 @@ class MicPermissionScreen extends StatelessWidget {
                     height: 48,
                     width: double.infinity,
                     color: AppColors.blue,
-                    text: Keys.setupMicrophoneAccess,
+                    text: LocaleKeys.setupMicrophoneAccess,
                     textStyle: TextStyles.w600WhiteSize16,
                     onPressed: () =>
                         Navigator.pushNamed(context, R.healthcarePermission),

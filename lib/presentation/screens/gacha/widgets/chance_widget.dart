@@ -19,20 +19,20 @@ class ChanceWidget extends StatelessWidget {
               valueActive: 30,
               totalValue: 50,
             ),
-
           ),
         ),
-
         GestureDetector(
           child: Padding(
             padding: const EdgeInsets.only(left: 20),
             child: Container(
               decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(16),
-                border: Border.all(color: AppColors.blue)
-              ),
+                  borderRadius: BorderRadius.circular(16),
+                  border: Border.all(color: AppColors.blue)),
               padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 18),
-              child: SFText(keyText: 'Get', style: TextStyles.blue14,),
+              child: SFText(
+                keyText: 'Get',
+                style: TextStyles.blue14,
+              ),
             ),
           ),
           onTap: () {

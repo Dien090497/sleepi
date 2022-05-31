@@ -5,7 +5,7 @@ import 'package:slee_fi/common/widgets/sf_buttons.dart';
 import 'package:slee_fi/common/widgets/sf_card.dart';
 import 'package:slee_fi/common/widgets/sf_dialog.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
-import 'package:slee_fi/di/translations/keys.dart';
+import 'package:slee_fi/l10n/locale_keys.g.dart';
 
 class PopUpConfirmTransfer extends StatelessWidget {
   const PopUpConfirmTransfer({Key? key}) : super(key: key);
@@ -15,7 +15,7 @@ class PopUpConfirmTransfer extends StatelessWidget {
     return Column(
       children: [
         SFText(
-          keyText: Keys.confirmTransfer,
+          keyText: LocaleKeys.confirmTransfer,
           style: TextStyles.bold18LightWhite,
         ),
         const SizedBox(
@@ -30,14 +30,14 @@ class PopUpConfirmTransfer extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     SFText(
-                      keyText: Keys.from,
+                      keyText: LocaleKeys.from,
                       style: TextStyles.lightGrey12,
                     ),
                     const SizedBox(
                       height: 12.0,
                     ),
                     SFText(
-                      keyText: Keys.wallet,
+                      keyText: LocaleKeys.wallet,
                       style: TextStyles.bold18White,
                     ),
                   ],
@@ -48,14 +48,14 @@ class PopUpConfirmTransfer extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.end,
                   children: [
                     SFText(
-                      keyText: Keys.to,
+                      keyText: LocaleKeys.to,
                       style: TextStyles.lightGrey12,
                     ),
                     const SizedBox(
                       height: 12.0,
                     ),
                     SFText(
-                      keyText: Keys.spending,
+                      keyText: LocaleKeys.spending,
                       style: TextStyles.bold18White,
                     ),
                   ],
@@ -71,7 +71,7 @@ class PopUpConfirmTransfer extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             SFText(
-              keyText: Keys.fee,
+              keyText: LocaleKeys.fee,
               style: TextStyles.lightGrey14,
             ),
             Expanded(
@@ -88,7 +88,7 @@ class PopUpConfirmTransfer extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             SFText(
-              keyText: Keys.youWillTransfer,
+              keyText: LocaleKeys.youWillTransfer,
               style: TextStyles.lightGrey14,
             ),
             Expanded(
@@ -107,7 +107,7 @@ class PopUpConfirmTransfer extends StatelessWidget {
           children: [
             Expanded(
               child: SFButton(
-                text: Keys.cancel,
+                text: LocaleKeys.cancel,
                 textStyle: TextStyles.w600LightGreySize16,
                 color: AppColors.light4,
                 onPressed: () => Navigator.maybePop(context),
@@ -118,7 +118,7 @@ class PopUpConfirmTransfer extends StatelessWidget {
             ),
             Expanded(
               child: SFButton(
-                text: Keys.confirm,
+                text: LocaleKeys.confirm,
                 textStyle: TextStyles.bold14LightWhite,
                 color: AppColors.blue,
                 onPressed: () {

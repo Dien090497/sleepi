@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:slee_fi/common/widgets/overlay_container.dart';
 import 'package:slee_fi/common/widgets/sf_icon.dart';
-import 'package:slee_fi/di/translations/keys.dart';
+import 'package:slee_fi/l10n/locale_keys.g.dart';
 import 'package:slee_fi/resources/resources.dart';
 
 class PopupInfoSpending extends StatefulWidget {
@@ -12,7 +12,6 @@ class PopupInfoSpending extends StatefulWidget {
 }
 
 class _PopupInfoSpendingState extends State<PopupInfoSpending> {
-
   bool _dropdownShown = false;
 
   void _toggleDropdown() {
@@ -23,7 +22,7 @@ class _PopupInfoSpendingState extends State<PopupInfoSpending> {
 
   @override
   Widget build(BuildContext context) {
-    return  Padding(
+    return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 12.0),
       child: Column(
         children: [
@@ -34,7 +33,7 @@ class _PopupInfoSpendingState extends State<PopupInfoSpending> {
           OverlayContainer(
             show: _dropdownShown,
             position: const OverlayContainerPosition(-80, 0),
-            message: Keys.displaysMessageFromSpendingDetail,
+            message: LocaleKeys.displaysMessageFromSpendingDetail,
           ),
         ],
       ),

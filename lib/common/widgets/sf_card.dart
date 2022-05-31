@@ -4,12 +4,12 @@ import 'package:slee_fi/common/style/app_colors.dart';
 class SFCard extends StatelessWidget {
   const SFCard(
       {this.padding,
-        this.margin,
-        this.height,
-        this.width,
-        this.child,
-        this.onTap,
-        Key? key})
+      this.margin,
+      this.height,
+      this.width,
+      this.child,
+      this.onTap,
+      Key? key})
       : super(key: key);
 
   final Widget? child;

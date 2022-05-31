@@ -6,7 +6,7 @@ import 'package:slee_fi/common/style/text_styles.dart';
 import 'package:slee_fi/common/widgets/background_widget.dart';
 import 'package:slee_fi/common/widgets/sf_app_bar.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
-import 'package:slee_fi/di/translations/keys.dart';
+import 'package:slee_fi/l10n/locale_keys.g.dart';
 import 'package:slee_fi/presentation/screens/passcode/widgets/passcode_numpad.dart';
 import 'package:slee_fi/presentation/screens/passcode/widgets/pin_code_widget.dart';
 
@@ -22,7 +22,7 @@ class CreatePasscodeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final args =
-    ModalRoute.of(context)?.settings.arguments as CreatePasscodeArguments?;
+        ModalRoute.of(context)?.settings.arguments as CreatePasscodeArguments?;
 
     final TextEditingController passcodeController = TextEditingController();
 
@@ -31,14 +31,19 @@ class CreatePasscodeScreen extends StatelessWidget {
         backgroundColor: AppColors.transparent,
         appBar: SFAppBar(
           context: context,
-          title: Keys.secureWallet,
+          title: LocaleKeys.secureWallet,
           textStyle: TextStyles.bold18LightWhite,
         ),
         body: SafeArea(
           child: ListView(
             children: [
-              const SizedBox(height: 65,),
-              Center(child: SFText(keyText: Keys.createYourPasscode, style: TextStyles.white12)),
+              const SizedBox(
+                height: 65,
+              ),
+              Center(
+                  child: SFText(
+                      keyText: LocaleKeys.createYourPasscode,
+                      style: TextStyles.white12)),
               const SizedBox(height: 12),
               PinCodeWidget(controller: passcodeController),
               SizedBox(height: 4.h),
@@ -51,12 +56,11 @@ class CreatePasscodeScreen extends StatelessWidget {
                     Navigator.pushReplacementNamed(context, R.confirmPasscode);
                     // Navigator.popUntil(context, (r) => r.settings.name == R.confirmPasscode);
                   }
-
                 },
               ),
               SizedBox(height: 32.h),
               // SFTextButton(
-              //   text: Keys.forgotPasscode,
+              //   text: LocaleKeys.forgotPasscode,
               //   textStyle: TextStyles.white12Underline,
               //   onPressed: () {Navigator.pushNamed(context, R.restoreWallet);},
               // )

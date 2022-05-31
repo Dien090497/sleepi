@@ -4,7 +4,7 @@ import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
 import 'package:slee_fi/common/widgets/sf_dialog.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
-import 'package:slee_fi/di/translations/keys.dart';
+import 'package:slee_fi/l10n/locale_keys.g.dart';
 import 'package:slee_fi/presentation/screens/product_detail/widgets/gridview_bed_item.dart';
 import 'package:slee_fi/presentation/screens/product_detail/widgets/jewel_dialog_body.dart';
 
@@ -50,7 +50,7 @@ class MintFromWidget extends StatelessWidget {
             child: Align(
               alignment: Alignment.centerLeft,
               child: SFText(
-                keyText: Keys.mintFrom,
+                keyText: LocaleKeys.mintFrom,
                 style: TextStyles.bold18LightWhite,
               ),
             ),
@@ -64,7 +64,9 @@ class MintFromWidget extends StatelessWidget {
                   _showBedDialog(context);
                 }),
           ),
-          const SizedBox(height: 20,),
+          const SizedBox(
+            height: 20,
+          ),
         ],
       ),
     );

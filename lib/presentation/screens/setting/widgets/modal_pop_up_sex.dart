@@ -3,7 +3,7 @@ import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
 import 'package:slee_fi/common/widgets/sf_buttons.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
-import 'package:slee_fi/di/translations/keys.dart';
+import 'package:slee_fi/l10n/locale_keys.g.dart';
 
 class ModalPopUpSex extends StatelessWidget {
   const ModalPopUpSex({Key? key}) : super(key: key);
@@ -12,11 +12,11 @@ class ModalPopUpSex extends StatelessWidget {
   Widget build(BuildContext context) {
     List<Widget> gender = [
       SFText(
-        keyText: Keys.female,
+        keyText: LocaleKeys.female,
         style: TextStyles.bold16LightWhite,
       ),
-      SFText(keyText: Keys.male, style: TextStyles.bold16LightWhite),
-      SFText(keyText: Keys.other, style: TextStyles.bold16LightWhite),
+      SFText(keyText: LocaleKeys.male, style: TextStyles.bold16LightWhite),
+      SFText(keyText: LocaleKeys.other, style: TextStyles.bold16LightWhite),
     ];
 
     return SafeArea(
@@ -34,7 +34,7 @@ class ModalPopUpSex extends StatelessWidget {
             ),
           ),
           SFButton(
-              text: Keys.done,
+              text: LocaleKeys.done,
               width: MediaQuery.of(context).size.width * 0.9,
               color: AppColors.blue,
               textStyle: TextStyles.w600WhiteSize16,

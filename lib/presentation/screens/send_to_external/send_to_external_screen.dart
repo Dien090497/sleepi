@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_translate/flutter_translate.dart';
+// import 'package:flutter_translate/flutter_translate.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
 import 'package:slee_fi/common/widgets/background_widget.dart';
@@ -10,7 +10,7 @@ import 'package:slee_fi/common/widgets/sf_card.dart';
 import 'package:slee_fi/common/widgets/sf_icon.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
 import 'package:slee_fi/common/widgets/sf_textfield.dart';
-import 'package:slee_fi/di/translations/keys.dart';
+import 'package:slee_fi/l10n/locale_keys.g.dart';
 import 'package:slee_fi/presentation/screens/send_to_external/widgets/dropdown_select_token.dart';
 import 'package:slee_fi/presentation/screens/send_to_external/widgets/pop_up_confirm_send.dart';
 import 'package:slee_fi/resources/resources.dart';
@@ -24,7 +24,7 @@ class SendToExternalScreen extends StatelessWidget {
       child: Scaffold(
         backgroundColor: AppColors.transparent,
         appBar: SFAppBar(
-          title: Keys.sendTo,
+          title: LocaleKeys.sendTo,
           textStyle: TextStyles.bold18White,
           context: context,
         ),
@@ -40,56 +40,64 @@ class SendToExternalScreen extends StatelessWidget {
                       // const SizedBox(height: 32,),
                       SFCard(
                         margin: EdgeInsets.zero,
-                        padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 24, vertical: 16),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
-                          children:  [
-                           const  SFTextField(
-                                labelText: Keys.toAddress,
-                                suffixIcon : Padding(
+                          children: [
+                            const SFTextField(
+                                labelText: LocaleKeys.toAddress,
+                                suffixIcon: Padding(
                                     padding: EdgeInsets.all(10),
-                                    child: SFIcon(Ics.icScanOutlined,)
-                                )
-                            ),
+                                    child: SFIcon(
+                                      Ics.icScanOutlined,
+                                    ))),
                             const SizedBox(height: 24),
-                             const SFTextField(
-                                labelText: Keys.amount,
-                                suffixIcon : Padding(
-                                  padding: EdgeInsets.all(8.0),
-                                  child: DropdownSelectToken(),
-                                ),
+                            const SFTextField(
+                              labelText: LocaleKeys.amount,
+                              suffixIcon: Padding(
+                                padding: EdgeInsets.all(8.0),
+                                child: DropdownSelectToken(),
+                              ),
                             ),
                             const SizedBox(height: 8),
-                            SFText(keyText: Keys.balance, style: TextStyles.w400lightGrey12, suffix: ': 0 AVAX' ),
+                            SFText(
+                                keyText: LocaleKeys.balance,
+                                style: TextStyles.w400lightGrey12,
+                                suffix: ': 0 AVAX'),
                           ],
                         ),
                       ),
-                      const SizedBox(height: 30,),
+                      const SizedBox(
+                        height: 30,
+                      ),
                       Text.rich(
                         TextSpan(
-                          text: translate(Keys.theNetworkYouHaveSelectedIs),
+                          text:
+                              translate(LocaleKeys.theNetworkYouHaveSelectedIs),
                           style: TextStyles.lightGrey12,
                           children: [
                             const TextSpan(
                                 text: ' Solana ',
                                 style: TextStyles.red16Italic),
-                            TextSpan(text: translate(Keys.network)),
+                            TextSpan(text: translate(LocaleKeys.network)),
                             const TextSpan(text: '. '),
                             TextSpan(
-                                text: translate(
-                                    Keys.pleaseEnsureThatTheWithdrawalAddress)),
+                                text: translate(LocaleKeys
+                                    .pleaseEnsureThatTheWithdrawalAddress)),
                             const TextSpan(
                                 text: ' Solana ',
                                 style: TextStyles.red16Italic),
-                            TextSpan(text: translate(Keys.network)),
+                            TextSpan(text: translate(LocaleKeys.network)),
                             const TextSpan(text: '. '),
                             TextSpan(
-                                text: translate(Keys.youWillLoseYourAssets),
+                                text:
+                                    translate(LocaleKeys.youWillLoseYourAssets),
                                 style: TextStyles.red16Italic),
                             const TextSpan(text: ' '),
                             TextSpan(
-                                text: translate(
-                                    Keys.ifTheChosenPlatformDoesNotSupport)),
+                                text: translate(LocaleKeys
+                                    .ifTheChosenPlatformDoesNotSupport)),
                             const TextSpan(text: '.'),
                           ],
                         ),
@@ -98,7 +106,7 @@ class SendToExternalScreen extends StatelessWidget {
                   ),
                 ),
                 SFButton(
-                  text: Keys.confirm,
+                  text: LocaleKeys.confirm,
                   textStyle: TextStyles.w600WhiteSize16,
                   width: double.infinity,
                   gradient: AppColors.gradientBlueButton,

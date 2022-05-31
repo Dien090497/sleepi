@@ -77,7 +77,10 @@ class _Option extends StatelessWidget {
       child = const SizedBox();
     } else if (num == '12') {
       color = AppColors.transparent;
-      child = const SFIcon(Ics.icDeleteTwo, width: 36,);
+      child = const SFIcon(
+        Ics.icDeleteTwo,
+        width: 36,
+      );
     } else {
       color = AppColors.white.withOpacity(0.1);
       child = Text(num, style: TextStyles.lightWhite24);
@@ -88,7 +91,8 @@ class _Option extends StatelessWidget {
       child: Container(
         width: 70.w,
         height: 70.h,
-        margin: EdgeInsets.only(bottom: 16.h, right: int.parse(num) % 3 == 0 ? 0 : 22.h),
+        margin: EdgeInsets.only(
+            bottom: 16.h, right: int.parse(num) % 3 == 0 ? 0 : 22.h),
         decoration: BoxDecoration(
           shape: BoxShape.circle,
           color: color,

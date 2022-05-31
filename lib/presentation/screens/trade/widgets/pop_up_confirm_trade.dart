@@ -5,7 +5,7 @@ import 'package:slee_fi/common/widgets/sf_buttons.dart';
 import 'package:slee_fi/common/widgets/sf_card.dart';
 import 'package:slee_fi/common/widgets/sf_dialog.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
-import 'package:slee_fi/di/translations/keys.dart';
+import 'package:slee_fi/l10n/locale_keys.g.dart';
 
 class PopUpConfirmTrade extends StatelessWidget {
   const PopUpConfirmTrade({Key? key}) : super(key: key);
@@ -15,7 +15,7 @@ class PopUpConfirmTrade extends StatelessWidget {
     return Column(
       children: [
         SFText(
-          keyText: Keys.confirmTrade,
+          keyText: LocaleKeys.confirmTrade,
           style: TextStyles.bold18LightWhite,
         ),
         const SizedBox(
@@ -30,7 +30,7 @@ class PopUpConfirmTrade extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     SFText(
-                      keyText: Keys.from,
+                      keyText: LocaleKeys.from,
                       style: TextStyles.lightGrey12,
                     ),
                     const SizedBox(
@@ -48,14 +48,14 @@ class PopUpConfirmTrade extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.end,
                   children: [
                     SFText(
-                      keyText: Keys.to,
+                      keyText: LocaleKeys.to,
                       style: TextStyles.lightGrey12,
                     ),
                     const SizedBox(
                       height: 12.0,
                     ),
                     SFText(
-                      keyText: Keys.avax,
+                      keyText: LocaleKeys.avax,
                       toUpperCase: true,
                       style: TextStyles.bold18White,
                     ),
@@ -72,7 +72,7 @@ class PopUpConfirmTrade extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             SFText(
-              keyText: Keys.received,
+              keyText: LocaleKeys.received,
               style: TextStyles.lightGrey14,
             ),
             Expanded(
@@ -90,7 +90,7 @@ class PopUpConfirmTrade extends StatelessWidget {
           children: [
             Expanded(
               child: SFButton(
-                text: Keys.cancel,
+                text: LocaleKeys.cancel,
                 textStyle: TextStyles.w600LightGreySize16,
                 color: AppColors.light4,
                 onPressed: () => Navigator.maybePop(context),
@@ -101,7 +101,7 @@ class PopUpConfirmTrade extends StatelessWidget {
             ),
             Expanded(
               child: SFButton(
-                text: Keys.confirm,
+                text: LocaleKeys.confirm,
                 textStyle: TextStyles.bold14LightWhite,
                 color: AppColors.blue,
                 onPressed: () {

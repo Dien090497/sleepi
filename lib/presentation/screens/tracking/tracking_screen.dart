@@ -5,7 +5,7 @@ import 'package:slee_fi/common/style/text_styles.dart';
 import 'package:slee_fi/common/widgets/background_widget.dart';
 import 'package:slee_fi/common/widgets/sf_app_bar.dart';
 import 'package:slee_fi/common/widgets/sf_buttons.dart';
-import 'package:slee_fi/di/translations/keys.dart';
+import 'package:slee_fi/l10n/locale_keys.g.dart';
 
 class TrackingScreen extends StatelessWidget {
   const TrackingScreen({Key? key}) : super(key: key);
@@ -17,7 +17,7 @@ class TrackingScreen extends StatelessWidget {
         backgroundColor: AppColors.transparent,
         appBar: SFAppBar(
             context: context,
-            title: Keys.tracking,
+            title: LocaleKeys.tracking,
             textStyle: TextStyles.bold18LightWhite),
         body: SafeArea(
           child: Padding(
@@ -26,11 +26,11 @@ class TrackingScreen extends StatelessWidget {
               children: [
                 const Spacer(),
                 SFButton(
-                  text: Keys.wakeUp,
+                  text: LocaleKeys.wakeUp,
                   width: double.infinity,
                   color: AppColors.blue,
                   textStyle: TextStyles.w600WhiteSize16,
-                  onPressed: (){
+                  onPressed: () {
                     Navigator.pushNamed(context, R.result);
                   },
                 ),

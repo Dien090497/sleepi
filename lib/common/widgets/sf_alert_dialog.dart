@@ -1,17 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
 
-
-
 Future<T?> showCustomAlertDialog<T>(
-    BuildContext context, {
-      required Widget? children,
-      Color? backgroundColor,
-      CrossAxisAlignment? crossAxisAlignment,
-      EdgeInsets? padding,
-      double? width,
-      double? height,
-    }) async {
+  BuildContext context, {
+  required Widget? children,
+  Color? backgroundColor,
+  CrossAxisAlignment? crossAxisAlignment,
+  EdgeInsets? padding,
+  double? width,
+  double? height,
+}) async {
   return showDialog(
       context: context,
       builder: (_) {

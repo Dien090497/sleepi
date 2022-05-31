@@ -3,7 +3,12 @@ import 'package:slee_fi/common/style/text_styles.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
 
 class InfoChartColor extends StatelessWidget {
-  const InfoChartColor({Key? key, required this.color, required this.typeBed, required this.valueInChart}) : super(key: key);
+  const InfoChartColor(
+      {Key? key,
+      required this.color,
+      required this.typeBed,
+      required this.valueInChart})
+      : super(key: key);
 
   final Color color;
   final String typeBed;
@@ -23,10 +28,18 @@ class InfoChartColor extends StatelessWidget {
               shape: BoxShape.circle,
             ),
           ),
-          const SizedBox(width: 20,),
-          SFText(keyText: typeBed, style: TextStyles.lightWhite14,),
+          const SizedBox(
+            width: 20,
+          ),
+          SFText(
+            keyText: typeBed,
+            style: TextStyles.lightWhite14,
+          ),
           const Expanded(child: SizedBox()),
-          SFText(keyText: valueInChart, style: TextStyles.lightWhite14,)
+          SFText(
+            keyText: valueInChart,
+            style: TextStyles.lightWhite14,
+          )
           //SFText(keyText: ,),
         ],
       ),

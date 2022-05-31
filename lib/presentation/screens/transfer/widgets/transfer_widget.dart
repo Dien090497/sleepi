@@ -3,7 +3,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
-import 'package:slee_fi/di/translations/keys.dart';
+import 'package:slee_fi/l10n/locale_keys.g.dart';
 import 'package:slee_fi/presentation/screens/setting_activation_code/widgets/container_box_widget.dart';
 import 'package:slee_fi/resources/resources.dart';
 
@@ -43,7 +43,7 @@ class _TransferWidgetState extends State<TransferWidget> {
                         Padding(
                           padding: const EdgeInsets.only(left: 8.0),
                           child: SFText(
-                            keyText: Keys.from,
+                            keyText: LocaleKeys.from,
                             style: TextStyles.lightGrey12,
                           ),
                         ),
@@ -53,7 +53,8 @@ class _TransferWidgetState extends State<TransferWidget> {
                   Expanded(
                     flex: 5,
                     child: SFText(
-                        keyText: swapText ? Keys.spending : Keys.wallet,
+                        keyText:
+                            swapText ? LocaleKeys.spending : LocaleKeys.wallet,
                         style: TextStyles.bold18White),
                   )
                 ],
@@ -96,7 +97,7 @@ class _TransferWidgetState extends State<TransferWidget> {
                         Padding(
                           padding: const EdgeInsets.only(left: 8.0),
                           child: SFText(
-                            keyText: Keys.to,
+                            keyText: LocaleKeys.to,
                             style: TextStyles.grey14Italic,
                           ),
                         ),
@@ -106,7 +107,8 @@ class _TransferWidgetState extends State<TransferWidget> {
                   Expanded(
                     flex: 5,
                     child: SFText(
-                      keyText: swapText ? Keys.wallet : Keys.spending,
+                      keyText:
+                          swapText ? LocaleKeys.wallet : LocaleKeys.spending,
                       style: TextStyles.bold18White,
                     ),
                   )

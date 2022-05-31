@@ -4,7 +4,7 @@ import 'package:slee_fi/common/widgets/background_widget.dart';
 import 'package:slee_fi/common/widgets/sf_icon.dart';
 import 'package:slee_fi/common/widgets/sf_tab_bar.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
-import 'package:slee_fi/di/translations/keys.dart';
+import 'package:slee_fi/l10n/locale_keys.g.dart';
 import 'package:slee_fi/presentation/screens/gacha/widgets/beds_probability.dart';
 import 'package:slee_fi/presentation/screens/gacha/widgets/item_probability.dart';
 import 'package:slee_fi/presentation/screens/gacha/widgets/jewels_probability.dart';
@@ -43,7 +43,7 @@ class ProbabilityScreen extends StatelessWidget {
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 20),
                       child: SFText(
-                        keyText: Keys.probability,
+                        keyText: LocaleKeys.probability,
                         style: TextStyles.boldWhite18,
                       ),
                     ),
@@ -55,7 +55,12 @@ class ProbabilityScreen extends StatelessWidget {
               const Expanded(
                 child: SFTabBar(
                   isScrollable: true,
-                  texts: [Keys.beds, Keys.jewels, Keys.item, Keys.trophy],
+                  texts: [
+                    LocaleKeys.beds,
+                    LocaleKeys.jewels,
+                    LocaleKeys.item,
+                    LocaleKeys.trophy
+                  ],
                   children: [
                     BedsProbability(),
                     JewelsProbability(),

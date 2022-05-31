@@ -46,10 +46,10 @@ Full Guide For Package install can be found here: [Wiki](https://github.com/Jesw
 - For English: `assets/i18n/en_US.json`
 - For Japanese: `assets/i18n/ja_JP.json`
 
-After adding run `build_runner` [command](#command). A file called `keys.g.dart` will be generated as part of `keys.dart`
+After adding run `build_runner` [command](#command). A file called `LocaleKeys.g.dart` will be generated as part of `LocaleKeys.dart`
 
 ```dart
-import 'package:slee_fi/di/translations/keys.dart';
+import 'package:slee_fi/l10n/locale_keys.g.dart';
 ```
 
 Next step [Use SFText](#use-sftext)
@@ -61,7 +61,7 @@ import 'package:slee_fi/common/widgets/sf_text.dart';
 ```
 
 ```dart
-SFText(keyText: Keys.Test_Hello)
+SFText(keyText: LocaleKeys.Test_Hello)
 ```
 
 # Model and Entity
@@ -171,7 +171,13 @@ flutter pub run build_runner watch --delete-conflicting-outputs
 ```
 
 ```dart
-spider build
+flutter pub run build_runner watch --delete-conflicting-outputs
+```
+
+Easy Localization command
+
+```dart
+flutter pub run easy_localization:generate -S assets/translations -f keys -O lib/l10n -o locale_keys.g.dart
 ```
 
 ```terminal

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_translate/flutter_translate.dart';
+// import 'package:flutter_translate/flutter_translate.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
 import 'package:slee_fi/common/widgets/sf_icon.dart';
@@ -7,7 +7,7 @@ import 'package:slee_fi/common/widgets/sf_text.dart';
 import 'package:slee_fi/resources/resources.dart';
 
 class SFTextFieldPassword extends StatefulWidget {
- const SFTextFieldPassword({
+  const SFTextFieldPassword({
     this.labelText,
     this.hintText,
     this.hintStyle,
@@ -33,7 +33,6 @@ class SFTextFieldPassword extends StatefulWidget {
 }
 
 class _SFTextFieldPasswordState extends State<SFTextFieldPassword> {
-
   bool obscureText = true;
 
   @override
@@ -41,11 +40,11 @@ class _SFTextFieldPasswordState extends State<SFTextFieldPassword> {
     final border = widget.noBorder
         ? InputBorder.none
         : OutlineInputBorder(
-      borderRadius: BorderRadius.circular(8),
-      borderSide: BorderSide(
-        color: AppColors.white.withOpacity(0.1),
-      ),
-    );
+            borderRadius: BorderRadius.circular(8),
+            borderSide: BorderSide(
+              color: AppColors.white.withOpacity(0.1),
+            ),
+          );
 
     return Column(
       mainAxisAlignment: MainAxisAlignment.start,
@@ -53,29 +52,34 @@ class _SFTextFieldPasswordState extends State<SFTextFieldPassword> {
       children: [
         widget.showLabel
             ? Padding(
-             padding: const EdgeInsets.only(bottom: 4),
-              child: SFText(
-                keyText: widget.labelText ?? "",
-               style: TextStyles.lightGrey14,
-          ),
-        )
+                padding: const EdgeInsets.only(bottom: 4),
+                child: SFText(
+                  keyText: widget.labelText ?? "",
+                  style: TextStyles.lightGrey14,
+                ),
+              )
             : const SizedBox(),
         TextField(
           style: TextStyles.w400White16,
           obscureText: obscureText,
           decoration: InputDecoration(
             isDense: true,
-            hintText: widget.hintText != null ? translate(widget.hintText!) : null,
+            // hintText: widget.hintText != null ? translate(widget.hintText!) : null,
+            hintText: widget.hintText != null ? widget.hintText! : null,
             hintStyle: widget.hintStyle ?? TextStyles.lightGrey14,
-            suffixIcon:  InkWell(
-              onTap: (){
-                setState((){
+            suffixIcon: InkWell(
+              onTap: () {
+                setState(() {
                   obscureText = !obscureText;
                 });
               },
               child: const Padding(
-                padding:  EdgeInsets.all(10),
-                child: SFIcon(Ics.icEye, width: 24, height: 24,),
+                padding: EdgeInsets.all(10),
+                child: SFIcon(
+                  Ics.icEye,
+                  width: 24,
+                  height: 24,
+                ),
               ),
             ),
             border: border,

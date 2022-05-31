@@ -3,15 +3,15 @@ import 'package:slee_fi/common/style/text_styles.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
 
 class ChartTitle extends StatelessWidget {
-  const ChartTitle({  this.title,
+  const ChartTitle({
+    this.title,
     this.result,
     this.textStyleTitle,
     this.textStyleResult,
     this.padding,
     this.toUpperCase = false,
     Key? key,
-  })
-      : super(key: key);
+  }) : super(key: key);
 
   final String? title;
   final String? result;

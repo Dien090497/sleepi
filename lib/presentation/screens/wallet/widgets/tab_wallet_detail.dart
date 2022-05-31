@@ -6,7 +6,7 @@ import 'package:slee_fi/common/widgets/sf_bottom_sheet.dart';
 import 'package:slee_fi/common/widgets/sf_dialog.dart';
 import 'package:slee_fi/common/widgets/sf_icon.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
-import 'package:slee_fi/di/translations/keys.dart';
+import 'package:slee_fi/l10n/locale_keys.g.dart';
 import 'package:slee_fi/presentation/screens/wallet/widgets/box_button_widget.dart';
 import 'package:slee_fi/presentation/screens/wallet/widgets/modal_receive_wallet.dart';
 import 'package:slee_fi/presentation/screens/wallet/widgets/pop_up_info_wallet.dart';
@@ -25,7 +25,7 @@ class TabWalletDetail extends StatelessWidget {
           const SizedBox(
             height: 32,
           ),
-          SFText(keyText: Keys.avaxCChain, style: TextStyles.bold12Blue),
+          SFText(keyText: LocaleKeys.avaxCChain, style: TextStyles.bold12Blue),
           const SizedBox(
             height: 4.0,
           ),
@@ -34,7 +34,8 @@ class TabWalletDetail extends StatelessWidget {
             height: 20.0,
           ),
           Container(
-            padding: const EdgeInsets.symmetric(vertical: 6.0, horizontal: 16.0),
+            padding:
+                const EdgeInsets.symmetric(vertical: 6.0, horizontal: 16.0),
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(20.0),
               color: AppColors.lightWhite.withOpacity(0.05),
@@ -52,22 +53,22 @@ class TabWalletDetail extends StatelessWidget {
               BoxButtonWidget(
                 onTap: () => SFModalBottomSheet.show(
                     context, 0.7, const ModalReceiveWallet()),
-                text: Keys.receive,
+                text: LocaleKeys.receive,
                 assetImage: Ics.icDownload,
               ),
               BoxButtonWidget(
                 onTap: () => Navigator.pushNamed(context, R.transfer),
-                text: Keys.toSpending,
+                text: LocaleKeys.toSpending,
                 assetImage: Ics.icRefresh,
               ),
               BoxButtonWidget(
                 onTap: () => Navigator.pushNamed(context, R.sendToExternal),
-                text: Keys.toExternal,
+                text: LocaleKeys.toExternal,
                 assetImage: Ics.icArrowUpRight,
               ),
               BoxButtonWidget(
                 onTap: () => Navigator.pushNamed(context, R.trade),
-                text: Keys.trade,
+                text: LocaleKeys.trade,
                 assetImage: Ics.icTransfer,
               ),
             ],
@@ -85,7 +86,8 @@ class TabWalletDetail extends StatelessWidget {
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 8.0),
                       child: SFText(
-                          keyText: Keys.walletAccount, style: TextStyles.blue12),
+                          keyText: LocaleKeys.walletAccount,
+                          style: TextStyles.blue12),
                     ),
                     const PopupInfoWallet(),
                   ],
@@ -102,12 +104,12 @@ class TabWalletDetail extends StatelessWidget {
                     ),
                     child: Row(
                       children: [
-                       const SFIcon(Imgs.binance),
+                        const SFIcon(Imgs.binance),
                         const SizedBox(
                           width: 8.0,
                         ),
                         SFText(
-                          keyText: Keys.buy,
+                          keyText: LocaleKeys.buy,
                           style: TextStyles.bold14Yellow,
                         )
                       ],
@@ -131,7 +133,7 @@ class TabWalletDetail extends StatelessWidget {
           const SizedBox(width: 24),
           const Spacer(),
           SFText(
-            keyText: Keys.wallet,
+            keyText: LocaleKeys.wallet,
             prefix: 'SOLANA ',
             toUpperCase: true,
           ),
@@ -162,7 +164,7 @@ class TabWalletDetail extends StatelessWidget {
                 ),
                 alignment: Alignment.center,
                 padding: const EdgeInsets.symmetric(vertical: 12),
-                child: SFText(keyText: Keys.createANewWallet),
+                child: SFText(keyText: LocaleKeys.createANewWallet),
               ),
             ),
             const SizedBox(height: 24),
@@ -177,7 +179,7 @@ class TabWalletDetail extends StatelessWidget {
                 ),
                 alignment: Alignment.center,
                 padding: const EdgeInsets.symmetric(vertical: 12),
-                child: SFText(keyText: Keys.importAWalletUsingSeedPhrase),
+                child: SFText(keyText: LocaleKeys.importAWalletUsingSeedPhrase),
               ),
             ),
           ],

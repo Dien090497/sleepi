@@ -6,18 +6,18 @@ import 'package:slee_fi/common/widgets/sf_card.dart';
 import 'package:slee_fi/common/widgets/sf_dialog.dart';
 import 'package:slee_fi/common/widgets/sf_icon.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
-import 'package:slee_fi/di/translations/keys.dart';
+import 'package:slee_fi/l10n/locale_keys.g.dart';
 import 'package:slee_fi/resources/resources.dart';
 
 class PopUpBedsDetail extends StatelessWidget {
   const PopUpBedsDetail(
       {Key? key,
-        required this.icon,
-        required this.level,
-        required this.cost,
-        required this.time,
-        required this.onConfirm,
-        this.onCancel})
+      required this.icon,
+      required this.level,
+      required this.cost,
+      required this.time,
+      required this.onConfirm,
+      this.onCancel})
       : super(key: key);
 
   final String icon;
@@ -46,7 +46,7 @@ class PopUpBedsDetail extends StatelessWidget {
         Column(
           children: [
             SFText(
-              keyText: Keys.matchingBed,
+              keyText: LocaleKeys.matchingBed,
               style: TextStyles.white1w700size16,
             ),
             const SizedBox(height: 20),
@@ -56,7 +56,8 @@ class PopUpBedsDetail extends StatelessWidget {
               children: [
                 Expanded(
                   child: Container(
-                    padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 15),
+                    padding: const EdgeInsets.symmetric(
+                        vertical: 10, horizontal: 15),
                     decoration: BoxDecoration(
                       color: AppColors.whiteOpacity5,
                       borderRadius: BorderRadius.circular(10),
@@ -64,36 +65,43 @@ class PopUpBedsDetail extends StatelessWidget {
                     child: const SFIcon(Ics.shortBed),
                   ),
                 ),
-                const SizedBox(width: 10,),
+                const SizedBox(
+                  width: 10,
+                ),
                 Expanded(
                   child: Container(
-                    padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 15),
+                    padding: const EdgeInsets.symmetric(
+                        vertical: 10, horizontal: 15),
                     decoration: BoxDecoration(
-                        color: AppColors.whiteOpacity5,
+                      color: AppColors.whiteOpacity5,
                       borderRadius: BorderRadius.circular(10),
                     ),
                     child: SFIcon(icon),
                   ),
                 ),
-
-                const SizedBox(width: 10,),
+                const SizedBox(
+                  width: 10,
+                ),
                 Expanded(
                   child: Container(
-                    padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 15),
+                    padding: const EdgeInsets.symmetric(
+                        vertical: 10, horizontal: 15),
                     decoration: BoxDecoration(
-                        color: AppColors.whiteOpacity5,
+                      color: AppColors.whiteOpacity5,
                       borderRadius: BorderRadius.circular(10),
                     ),
                     child: const SFIcon(Ics.bedsCouple),
                   ),
                 ),
-
-                const SizedBox(width: 10,),
+                const SizedBox(
+                  width: 10,
+                ),
                 Expanded(
                   child: Container(
-                    padding: const EdgeInsets.symmetric(vertical: 7, horizontal: 15),
+                    padding:
+                        const EdgeInsets.symmetric(vertical: 7, horizontal: 15),
                     decoration: BoxDecoration(
-                        color: AppColors.whiteOpacity5,
+                      color: AppColors.whiteOpacity5,
                       borderRadius: BorderRadius.circular(10),
                     ),
                     child: const SFIcon(Ics.bedBunk),
@@ -101,14 +109,16 @@ class PopUpBedsDetail extends StatelessWidget {
                 )
               ],
             ),
-            const SizedBox(height: 26,),
+            const SizedBox(
+              height: 26,
+            ),
             SFCard(
               margin: EdgeInsets.zero,
               padding: const EdgeInsets.symmetric(vertical: 24, horizontal: 18),
               child: Row(
                 children: [
                   SFText(
-                    keyText: Keys.cost,
+                    keyText: LocaleKeys.cost,
                     style: TextStyles.lightGrey16,
                   ),
                   const SizedBox(width: 4),
@@ -129,7 +139,7 @@ class PopUpBedsDetail extends StatelessWidget {
               child: Row(
                 children: [
                   SFText(
-                    keyText: Keys.cost,
+                    keyText: LocaleKeys.cost,
                     style: TextStyles.lightGrey16,
                   ),
                   const SizedBox(width: 4),
@@ -148,15 +158,15 @@ class PopUpBedsDetail extends StatelessWidget {
               children: [
                 Expanded(
                     child: SFButton(
-                      text: Keys.cancel,
-                      onPressed: onCancel,
-                      textStyle: TextStyles.lightGrey16,
-                      color: AppColors.whiteOpacity5,
-                    )),
+                  text: LocaleKeys.cancel,
+                  onPressed: onCancel,
+                  textStyle: TextStyles.lightGrey16,
+                  color: AppColors.whiteOpacity5,
+                )),
                 const SizedBox(width: 12),
                 Expanded(
                   child: SFButton(
-                    text: Keys.confirm,
+                    text: LocaleKeys.confirm,
                     textStyle: TextStyles.white16,
                     gradient: AppColors.blueGradient,
                     onPressed: () {

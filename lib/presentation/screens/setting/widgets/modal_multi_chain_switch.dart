@@ -4,7 +4,7 @@ import 'package:slee_fi/common/style/text_styles.dart';
 import 'package:slee_fi/common/widgets/sf_card.dart';
 import 'package:slee_fi/common/widgets/sf_icon.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
-import 'package:slee_fi/di/translations/keys.dart';
+import 'package:slee_fi/l10n/locale_keys.g.dart';
 import 'package:slee_fi/resources/resources.dart';
 
 class ModalMultiChainSwitch extends StatefulWidget {
@@ -16,7 +16,7 @@ class ModalMultiChainSwitch extends StatefulWidget {
 
 class _ModalMultiChainSwitchState extends State<ModalMultiChainSwitch> {
   int selectItem = 0;
-  List<String> keyText = [Keys.avax, "BNB Smart Chain(BEP20)"];
+  List<String> keyText = [LocaleKeys.avax, "BNB Smart Chain(BEP20)"];
   List icons = [Ics.icSolanaCircle, Imgs.binance];
 
   @override
@@ -26,7 +26,9 @@ class _ModalMultiChainSwitchState extends State<ModalMultiChainSwitch> {
         const SizedBox(
           height: 32.0,
         ),
-        SFText(keyText: Keys.multiChainSwitch, style: TextStyles.bold18White),
+        SFText(
+            keyText: LocaleKeys.multiChainSwitch,
+            style: TextStyles.bold18White),
         const SizedBox(
           height: 32.0,
         ),
@@ -34,7 +36,8 @@ class _ModalMultiChainSwitchState extends State<ModalMultiChainSwitch> {
           child: ListView.builder(
               itemCount: keyText.length,
               shrinkWrap: true,
-              padding: const EdgeInsets.symmetric(horizontal: 12.0, vertical: 6.0),
+              padding:
+                  const EdgeInsets.symmetric(horizontal: 12.0, vertical: 6.0),
               itemBuilder: (BuildContext context, int index) {
                 return SFCard(
                   child: ListTile(
@@ -43,11 +46,13 @@ class _ModalMultiChainSwitchState extends State<ModalMultiChainSwitch> {
                       keyText: keyText[index],
                       style: TextStyles.lightWhite16,
                     ),
-                    trailing: selectItem == index ? const Icon(
-                      Icons.check,
-                      color: AppColors.green,
-                      size: 32,
-                    ) : const SizedBox(),
+                    trailing: selectItem == index
+                        ? const Icon(
+                            Icons.check,
+                            color: AppColors.green,
+                            size: 32,
+                          )
+                        : const SizedBox(),
                   ),
                   onTap: () {
                     setState(() {

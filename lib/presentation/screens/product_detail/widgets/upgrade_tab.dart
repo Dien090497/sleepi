@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
-import 'package:slee_fi/di/translations/keys.dart';
+import 'package:slee_fi/l10n/locale_keys.g.dart';
 import 'package:slee_fi/presentation/screens/gacha/widgets/atribute_process.dart';
 
 class UpGradeTab extends StatelessWidget {
@@ -44,33 +44,54 @@ class UpGradeTab extends StatelessWidget {
                 padding: const EdgeInsets.symmetric(horizontal: 20),
                 child: Row(
                   children: [
-                    SFText(keyText: Keys.cost, style: TextStyles.lightWhite16,),
+                    SFText(
+                      keyText: LocaleKeys.cost,
+                      style: TextStyles.lightWhite16,
+                    ),
                     const Spacer(),
-                    SFText(keyText: '21 SLFT', style: TextStyles.white14,),
+                    SFText(
+                      keyText: '21 SLFT',
+                      style: TextStyles.white14,
+                    ),
                   ],
                 ),
               ),
             ),
             Padding(
               padding: const EdgeInsets.symmetric(vertical: 10),
-              child: SFText(keyText: Keys.successRate, style: TextStyles.white14,),
+              child: SFText(
+                keyText: LocaleKeys.successRate,
+                style: TextStyles.white14,
+              ),
             ),
-        Container(
-          decoration: BoxDecoration(
-            color: AppColors.whiteOpacity5,
-            borderRadius: BorderRadius.circular(15),
-          ),
-          width: double.infinity,
-          margin: const EdgeInsets.symmetric(horizontal: 8),
-          padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 8),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: const [
-              AtributeProcessWidget(linkImage: 'assets/icons/efficiency.png', title: 'Level 2 Jewel', totalValue: 10, valueActive: 3.3, isUpGrade: true,),
-              AtributeProcessWidget(linkImage: 'assets/icons/efficiency.png', title: 'Failure', totalValue: 10, valueActive: 6.8, isUpGrade: true,),
-            ],
-          ),
-        ),
+            Container(
+              decoration: BoxDecoration(
+                color: AppColors.whiteOpacity5,
+                borderRadius: BorderRadius.circular(15),
+              ),
+              width: double.infinity,
+              margin: const EdgeInsets.symmetric(horizontal: 8),
+              padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 8),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: const [
+                  AtributeProcessWidget(
+                    linkImage: 'assets/icons/efficiency.png',
+                    title: 'Level 2 Jewel',
+                    totalValue: 10,
+                    valueActive: 3.3,
+                    isUpGrade: true,
+                  ),
+                  AtributeProcessWidget(
+                    linkImage: 'assets/icons/efficiency.png',
+                    title: 'Failure',
+                    totalValue: 10,
+                    valueActive: 6.8,
+                    isUpGrade: true,
+                  ),
+                ],
+              ),
+            ),
           ],
         ),
       ),

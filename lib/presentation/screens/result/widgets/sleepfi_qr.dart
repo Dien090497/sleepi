@@ -35,7 +35,7 @@ class SleepFiQrCode extends StatelessWidget {
                 child: CustomPaint(
                   foregroundPainter: DashedLinePainter(),
                   child: SizedBox(
-                    width: MediaQuery.of(context).size.width -56,
+                    width: MediaQuery.of(context).size.width - 56,
                     height: 1,
                   ),
                 ),
@@ -88,6 +88,7 @@ class SleepFiQrCode extends StatelessWidget {
     );
   }
 }
+
 class _DefectClipper extends CustomClipper<Path> {
   final double space;
 
@@ -97,19 +98,12 @@ class _DefectClipper extends CustomClipper<Path> {
   Path getClip(Size size) {
     final path = Path();
     final halfSpace = space / 2;
-    final curve = space /10;
+    final curve = space / 10;
 
     path.lineTo(0, 0);
-    path.cubicTo(
-        0,
-        0,
-        halfSpace,
-        curve,
-        halfSpace,
-        halfSpace);
+    path.cubicTo(0, 0, halfSpace, curve, halfSpace, halfSpace);
 
-    path.cubicTo(halfSpace, halfSpace, halfSpace,
-        space - curve, 0, space);
+    path.cubicTo(halfSpace, halfSpace, halfSpace, space - curve, 0, space);
 
     path.lineTo(halfSpace, space);
     path.lineTo(halfSpace, halfSpace);

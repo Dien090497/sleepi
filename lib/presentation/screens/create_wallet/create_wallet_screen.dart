@@ -9,7 +9,7 @@ import 'package:slee_fi/common/widgets/sf_buttons.dart';
 import 'package:slee_fi/common/widgets/sf_card.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
 import 'package:slee_fi/common/widgets/sf_textfield_text_button.dart';
-import 'package:slee_fi/di/translations/keys.dart';
+import 'package:slee_fi/l10n/locale_keys.g.dart';
 import 'package:slee_fi/presentation/screens/passcode/create_passcode_screen.dart';
 
 class CreateWalletScreen extends StatelessWidget {
@@ -21,10 +21,10 @@ class CreateWalletScreen extends StatelessWidget {
       child: BackgroundWidget(
         child: Scaffold(
           backgroundColor: AppColors.transparent,
-          appBar:  SFAppBar(
-              context: context,
-              title: Keys.createWallet,
-              textStyle: TextStyles.bold18LightWhite,
+          appBar: SFAppBar(
+            context: context,
+            title: LocaleKeys.createWallet,
+            textStyle: TextStyles.bold18LightWhite,
           ),
           body: SafeArea(
             child: Padding(
@@ -35,33 +35,36 @@ class CreateWalletScreen extends StatelessWidget {
                     child: ListView(
                       children: [
                         SFCard(
-                          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 24),
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 16, vertical: 24),
                           child: Column(
                             children: [
                               SFTextFieldTextButton(
-                                labelText: Keys.emailVerificationCode,
-                                textButton: Keys.sendCode,
+                                labelText: LocaleKeys.emailVerificationCode,
+                                textButton: LocaleKeys.sendCode,
                                 onPressed: () {},
                               ),
                               const SizedBox(height: 16),
                               SFText(
-                                keyText: Keys.youHaveAlreadyCreatedAWalletAddress,
+                                keyText: LocaleKeys
+                                    .youHaveAlreadyCreatedAWalletAddress,
                                 style: TextStyles.w400lightGrey12,
                               ),
                             ],
                           ),
                         ),
-                       ],
+                      ],
                     ),
                   ),
                   SFButton(
-                    text: Keys.createWallet,
+                    text: LocaleKeys.createWallet,
                     textStyle: TextStyles.w600WhiteSize16,
                     height: 48,
                     width: double.infinity,
                     color: AppColors.blue,
                     onPressed: () {
-                      Navigator.pushNamed(context, R.createPasscode, arguments: CreatePasscodeArguments(R.showSeedPhrase));
+                      Navigator.pushNamed(context, R.createPasscode,
+                          arguments: CreatePasscodeArguments(R.showSeedPhrase));
                     },
                   ),
                 ],

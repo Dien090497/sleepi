@@ -7,7 +7,7 @@ import 'package:slee_fi/common/widgets/sf_button_outlined.dart';
 import 'package:slee_fi/common/widgets/sf_card.dart';
 import 'package:slee_fi/common/widgets/sf_list_tile.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
-import 'package:slee_fi/di/translations/keys.dart';
+import 'package:slee_fi/l10n/locale_keys.g.dart';
 import 'package:slee_fi/presentation/screens/setting/widgets/modal_pop_up_sex.dart';
 
 import 'modal_pop_up_birth_year.dart';
@@ -32,7 +32,7 @@ class ProfileWidget extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           SFText(
-            keyText: Keys.profile,
+            keyText: LocaleKeys.profile,
             style: TextStyles.lightGrey14,
           ),
           SFCard(
@@ -40,7 +40,7 @@ class ProfileWidget extends StatelessWidget {
             child: Column(
               children: [
                 SFListTile(
-                  text: Keys.birthYear,
+                  text: LocaleKeys.birthYear,
                   trailing: Row(
                     mainAxisSize: MainAxisSize.min,
                     children: [
@@ -56,7 +56,7 @@ class ProfileWidget extends StatelessWidget {
                 ),
                 divider,
                 SFListTile(
-                    text: Keys.sex,
+                    text: LocaleKeys.sex,
                     trailing: Row(
                       mainAxisSize: MainAxisSize.min,
                       children: [
@@ -71,7 +71,7 @@ class ProfileWidget extends StatelessWidget {
                         context, 0.36, const ModalPopUpSex())),
                 divider,
                 SFListTile(
-                  text: Keys.email,
+                  text: LocaleKeys.email,
                   trailing: Row(
                     mainAxisSize: MainAxisSize.min,
                     children: [
@@ -86,7 +86,7 @@ class ProfileWidget extends StatelessWidget {
                 ),
                 divider,
                 SFListTile(
-                  text: Keys.changePassword,
+                  text: LocaleKeys.changePassword,
                   trailing: icon,
                   onPressed: () =>
                       Navigator.pushNamed(context, R.changePassword),
@@ -100,10 +100,10 @@ class ProfileWidget extends StatelessWidget {
           SizedBox(
             height: 48,
             child: SFButtonOutLined(
-              title: Keys.logout,
+              title: LocaleKeys.logout,
               textStyle: TextStyles.bold16Blue,
               borderColor: AppColors.blue,
-              onPressed: (){},
+              onPressed: () {},
             ),
           ),
           const SizedBox(

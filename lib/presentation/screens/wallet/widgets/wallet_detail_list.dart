@@ -4,7 +4,7 @@ import 'package:slee_fi/common/style/text_styles.dart';
 import 'package:slee_fi/common/widgets/sf_card.dart';
 import 'package:slee_fi/common/widgets/sf_icon.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
-import 'package:slee_fi/di/translations/keys.dart';
+import 'package:slee_fi/l10n/locale_keys.g.dart';
 import 'package:slee_fi/resources/resources.dart';
 
 class WalletDetailList extends StatelessWidget {
@@ -13,12 +13,12 @@ class WalletDetailList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     List keyList = [
-      Keys.avax,
-      Keys.slft,
-      Keys.slgt,
-      Keys.beds,
-      Keys.jewels,
-      Keys.bedBox
+      LocaleKeys.avax,
+      LocaleKeys.slft,
+      LocaleKeys.slgt,
+      LocaleKeys.beds,
+      LocaleKeys.jewels,
+      LocaleKeys.bedBox
     ];
     List icons = [
       Ics.icSolanaCircle,
@@ -44,10 +44,12 @@ class WalletDetailList extends StatelessWidget {
           itemBuilder: (BuildContext context, int index) {
             return SFCard(
               child: ListTile(
-                leading: SFIcon(icons[index], width: 32,),
+                leading: SFIcon(
+                  icons[index],
+                  width: 32,
+                ),
                 title: SFText(
-                    keyText: keyList[index],
-                    style: TextStyles.lightWhite16),
+                    keyText: keyList[index], style: TextStyles.lightWhite16),
                 trailing: SFText(
                   keyText: "xxxxxxxxx",
                   style: TextStyles.lightWhite16,

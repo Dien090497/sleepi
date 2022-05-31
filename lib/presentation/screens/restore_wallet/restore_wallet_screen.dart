@@ -7,7 +7,7 @@ import 'package:slee_fi/common/widgets/sf_buttons.dart';
 import 'package:slee_fi/common/widgets/sf_card.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
 import 'package:slee_fi/common/widgets/sf_textfield.dart';
-import 'package:slee_fi/di/translations/keys.dart';
+import 'package:slee_fi/l10n/locale_keys.g.dart';
 
 class RestoreWalletScreen extends StatelessWidget {
   const RestoreWalletScreen({Key? key}) : super(key: key);
@@ -19,7 +19,7 @@ class RestoreWalletScreen extends StatelessWidget {
         backgroundColor: AppColors.transparent,
         appBar: SFAppBar(
           context: context,
-          title: Keys.restoreWallet,
+          title: LocaleKeys.restoreWallet,
           textStyle: TextStyles.bold18LightWhite,
         ),
         body: SafeArea(
@@ -31,7 +31,7 @@ class RestoreWalletScreen extends StatelessWidget {
                     padding: const EdgeInsets.symmetric(
                         horizontal: 24.0, vertical: 8.0),
                     child: SFButton(
-                      text: Keys.importWallet,
+                      text: LocaleKeys.importWallet,
                       textStyle: TextStyles.w600WhiteSize16,
                       height: 48,
                       width: double.infinity,
@@ -51,7 +51,7 @@ class RestoreWalletScreen extends StatelessWidget {
                       children: [
                         const SizedBox(height: 24),
                         SFText(
-                          keyText: Keys.emailVerificationCode,
+                          keyText: LocaleKeys.emailVerificationCode,
                           style: TextStyles.lightGrey14,
                         ),
                         const SizedBox(
@@ -68,12 +68,12 @@ class RestoreWalletScreen extends StatelessWidget {
                             children: const [
                               Expanded(
                                 child: SFTextField(
-                                  // hintText: Keys.emailVerification,
+                                  // hintText: LocaleKeys.emailVerification,
                                   noBorder: true,
                                 ),
                               ),
                               SFTextButton(
-                                text: Keys.sendCode,
+                                text: LocaleKeys.sendCode,
                                 textStyle: TextStyles.blue12,
                                 // color: Colors.transparent,
                               ),
@@ -84,7 +84,7 @@ class RestoreWalletScreen extends StatelessWidget {
                         const SFTextField(
                           maxLine: 10,
                           maxLength: 100,
-                          hintText: Keys.hintRestoreWallet,
+                          hintText: LocaleKeys.hintRestoreWallet,
                           hintStyle: TextStyles.lightGrey16,
                         ),
                       ],

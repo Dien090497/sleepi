@@ -4,7 +4,7 @@ import 'package:slee_fi/common/style/text_styles.dart';
 import 'package:slee_fi/common/widgets/background_widget.dart';
 import 'package:slee_fi/common/widgets/sf_app_bar.dart';
 import 'package:slee_fi/common/widgets/sf_buttons.dart';
-import 'package:slee_fi/di/translations/keys.dart';
+import 'package:slee_fi/l10n/locale_keys.g.dart';
 
 class QuestionScreen extends StatelessWidget {
   const QuestionScreen({Key? key}) : super(key: key);
@@ -15,7 +15,9 @@ class QuestionScreen extends StatelessWidget {
     return BackgroundWidget(
       child: Scaffold(
           backgroundColor: AppColors.transparent,
-          appBar: SFAppBar(context: context,),
+          appBar: SFAppBar(
+            context: context,
+          ),
           body: SafeArea(
             child: Padding(
               padding: const EdgeInsets.symmetric(vertical: 50),
@@ -23,32 +25,38 @@ class QuestionScreen extends StatelessWidget {
                 child: Column(
                   children: [
                     SFButton(
-                      text: Keys.howToPlay,
+                      text: LocaleKeys.howToPlay,
                       textStyle: TextStyles.w600WhiteSize16,
                       gradient: AppColors.gradientBlueButton,
                       onPressed: () {},
                       width: size.width * 0.45,
                       height: 48,
                     ),
-                    const SizedBox(height: 24,),
-                     SFButton(
-                      text: Keys.whitePaper,
+                    const SizedBox(
+                      height: 24,
+                    ),
+                    SFButton(
+                      text: LocaleKeys.whitePaper,
                       textStyle: TextStyles.bold16LightWhite,
                       color: AppColors.white.withOpacity(0.07),
                       width: size.width * 0.45,
                       height: 48,
                     ),
-                    const SizedBox(height: 24,),
+                    const SizedBox(
+                      height: 24,
+                    ),
                     SFButton(
-                      text: Keys.litePaper,
+                      text: LocaleKeys.litePaper,
                       textStyle: TextStyles.bold16LightWhite,
                       color: AppColors.white.withOpacity(0.07),
                       width: size.width * 0.45,
                       height: 48,
                     ),
-                    const SizedBox(height: 24,),
+                    const SizedBox(
+                      height: 24,
+                    ),
                     SFButton(
-                      text: Keys.linkTree,
+                      text: LocaleKeys.linkTree,
                       textStyle: TextStyles.bold16LightWhite,
                       color: AppColors.white.withOpacity(0.07),
                       width: size.width * 0.45,
