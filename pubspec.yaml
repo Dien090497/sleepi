@@ -29,10 +29,9 @@ dependencies:
   logger: ^1.1.0
   retrofit: ^3.0.1+1
   dio: ^4.0.6
-  widgetbook_annotation: ^2.0.2
   cached_network_image: ^3.2.1
-  fl_chart: ^0.50.6
-  flutter_date_pickers: ^0.3.1
+  fl_chart: ^0.51.0
+  flutter_date_pickers: ^0.4.0
   flutter_screenutil: ^5.5.3+2
   pin_code_fields: ^7.4.0
   loop_page_view: ^1.1.1
@@ -43,8 +42,9 @@ dependencies:
   qr_flutter: ^4.0.0
   cool_dropdown: ^1.4.1
   url_launcher: ^6.1.2
-  syncfusion_flutter_sliders: ^20.1.57
+  syncfusion_flutter_sliders: ^20.1.58
   pie_chart: ^5.3.1
+  pull_to_refresh: ^2.0.0
 
 dependency_overrides:
   analyzer: ^4.1.0
@@ -57,8 +57,6 @@ dev_dependencies:
   injectable_generator: ^1.5.3
   json_serializable: ^6.2.0
   retrofit_generator: ^4.0.1
-  widgetbook: ^2.2.1
-  widgetbook_generator: ^2.1.1
   flutter_launcher_icons: ^0.9.2
 
 flutter_icons:
