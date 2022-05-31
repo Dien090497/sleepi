@@ -14,7 +14,7 @@ class TabBarIcon extends TabBar {
     Key? key,
   }) : super(
           onTap: (index) {
-            if(index == 1){
+            if (index == 1) {
               showCustomAlertDialog(context,
                   children: const PopUpAvalancheWallet());
             }
@@ -22,28 +22,27 @@ class TabBarIcon extends TabBar {
           tabs: List.generate(
               texts.length,
               (i) => Tab(
-                    child: Row(
-                      mainAxisSize: MainAxisSize.max,
-                      children: [
-                        SFIcon(
-                          images.isNotEmpty ? images[i] : "",
-                          color: AppColors.white,
-                        ),
-                        const SizedBox(width: 8),
-                        Expanded(
-                            child: SFText(
-                          keyText: texts[i],
-                          style: TextStyles.white16,
-                        )),
-                      ],
+                child: Row(
+                  mainAxisSize: MainAxisSize.max,
+                  children: [
+                    SFIcon(
+                      images.isNotEmpty ? images[i] : "",
+                      color: AppColors.white,
                     ),
-                  )),
+                    const SizedBox(width: 8),
+                    Expanded(
+                        child: SFText(
+                      keyText: texts[i],
+                      style: TextStyles.white16,
+                    )),
+                  ],
+                ),
+              )),
 
           indicator: BoxDecoration(
-            borderRadius: BorderRadius.circular(100),
-            gradient: AppColors.gradientBluePurple,
-            color: AppColors.blue
-          ),
+              borderRadius: BorderRadius.circular(100),
+              gradient: AppColors.gradientBluePurple,
+              color: AppColors.blue),
 
           indicatorColor: AppColors.purple,
           labelColor: AppColors.white,
