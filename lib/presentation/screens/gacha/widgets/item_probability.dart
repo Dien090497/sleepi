@@ -41,7 +41,7 @@ class ItemProbability extends StatelessWidget {
     );
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 30, horizontal: 20),
-      child: Column(
+      child: ListView(
         children: [
           Container(
             height: 300,
