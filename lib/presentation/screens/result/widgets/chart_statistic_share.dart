@@ -134,7 +134,7 @@ class ChartStatisticShare extends StatelessWidget {
       aspectRatio: 1.70,
       child: Container(
         padding: const EdgeInsets.all(20),
-        margin: const EdgeInsets.symmetric(horizontal: 16),
+        // margin: const EdgeInsets.symmetric(horizontal: 16),
         decoration: BoxDecoration(
           color: Colors.white.withOpacity(0.05),
           borderRadius: const BorderRadius.all(

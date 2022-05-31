@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
+import 'package:slee_fi/common/widgets/sf_buttons.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
 import 'package:slee_fi/di/translations/keys.dart';
 import 'package:syncfusion_flutter_core/theme.dart';
@@ -28,6 +29,7 @@ class _FilterSheetState extends State<FilterSheet> {
 
   @override
   Widget build(BuildContext context) {
+    final Size size = MediaQuery.of(context).size;
     return Column(
       children: [
         const SizedBox(height: 8),
@@ -121,6 +123,17 @@ class _FilterSheetState extends State<FilterSheet> {
             },
           ),
         ),
+        const Spacer(),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 24.0),
+          child: SFButton(
+            text: Keys.confirm,
+            textStyle: TextStyles.white16,
+            width: size.width,
+            gradient: AppColors.gradientBlueButton,
+          ),
+        ),
+        const SizedBox(height: 28),
       ],
     );
   }

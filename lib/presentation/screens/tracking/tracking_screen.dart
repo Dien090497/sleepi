@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:slee_fi/common/routes/app_routes.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
 import 'package:slee_fi/common/widgets/background_widget.dart';
@@ -22,13 +23,16 @@ class TrackingScreen extends StatelessWidget {
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 24),
             child: Column(
-              children: const [
-                Spacer(),
+              children: [
+                const Spacer(),
                 SFButton(
                   text: Keys.wakeUp,
                   width: double.infinity,
                   color: AppColors.blue,
                   textStyle: TextStyles.w600WhiteSize16,
+                  onPressed: (){
+                    Navigator.pushNamed(context, R.result);
+                  },
                 ),
               ],
             ),
