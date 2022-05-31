@@ -24,16 +24,7 @@ class TabSpendingDetail extends StatelessWidget {
               const SizedBox(
                 height: 20.0,
               ),
-              Row(
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 12.0),
-                    child: SFText(
-                        keyText: Keys.spendingAccount, style: TextStyles.blue12),
-                  ),
-                  const PopupInfoSpending(),
-                ],
-              ),
+              const PopupInfoSpending(),
               const SizedBox(
                 height: 16.0,
               ),
@@ -94,6 +85,7 @@ class TabSpendingDetail extends StatelessWidget {
                     height: 48,
                     child: SFButtonOutLined(
                       title: Keys.stake,
+                      withBorder: 0.5,
                       textStyle: TextStyles.bold16Blue,
                       borderColor: AppColors.blue,
                       onPressed: () {Navigator.pushNamed(context, R.staking);},

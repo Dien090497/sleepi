@@ -4,7 +4,9 @@ import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
 
 class ChartStatisticShare extends StatelessWidget {
-  ChartStatisticShare({Key? key}) : super(key: key);
+  ChartStatisticShare({this.margin, Key? key}) : super(key: key);
+
+  final EdgeInsets? margin;
 
   final List<Color> gradientColors = [
     AppColors.blue,
@@ -134,7 +136,7 @@ class ChartStatisticShare extends StatelessWidget {
       aspectRatio: 1.70,
       child: Container(
         padding: const EdgeInsets.all(20),
-        margin: const EdgeInsets.symmetric(horizontal: 16),
+        margin: margin ?? const EdgeInsets.symmetric(horizontal: 16),
         decoration: BoxDecoration(
           color: Colors.white.withOpacity(0.05),
           borderRadius: const BorderRadius.all(

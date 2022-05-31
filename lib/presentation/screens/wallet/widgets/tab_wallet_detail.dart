@@ -80,16 +80,7 @@ class TabWalletDetail extends StatelessWidget {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Row(
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                      child: SFText(
-                          keyText: Keys.walletAccount, style: TextStyles.blue12),
-                    ),
-                    const PopupInfoWallet(),
-                  ],
-                ),
+                const PopupInfoWallet(),
                 ElevatedButton(
                     onPressed: _launchUrl,
                     style: ElevatedButton.styleFrom(
