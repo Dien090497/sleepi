@@ -465,6 +465,8 @@ class Keys {
 
   static const String to = 'to';
 
+  static const String tracking = 'tracking';
+
   static const String inventory = 'inventory';
 
   static const String wallet = 'wallet';
@@ -486,6 +488,8 @@ class Keys {
   static const String selectBedType = 'select_bed_type';
 
   static const String confirm = 'confirm';
+
+  static const String wakeUp = 'wake_up';
 
   static const String statistics = 'Statistics';
 
