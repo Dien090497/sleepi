@@ -39,7 +39,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   void initState() {
-    startTime = 2 * 60 * 60;
+    startTime = 1 * 60;
     startTimer();
     super.initState();
   }
@@ -277,7 +277,7 @@ class _HomeScreenState extends State<HomeScreen> {
             height: 40,
             width: size.width,
             onPressed: () {
-              if (startTime == 0) Navigator.pushNamed(context, R.result);
+              if (startTime == 0) Navigator.pushNamed(context, R.tracking);
             },
           ),
           const SizedBox(

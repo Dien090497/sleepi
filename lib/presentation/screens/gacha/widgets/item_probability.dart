@@ -41,28 +41,30 @@ class ItemProbability extends StatelessWidget {
     );
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 30, horizontal: 20),
-      child: ListView(
-        children: [
-          Container(
-            height: 300,
-            width: size.width,
-            decoration: BoxDecoration(
-              color: AppColors.whiteOpacity5,
-              borderRadius: BorderRadius.circular(10),
+      child: SingleChildScrollView(
+        child: Column(
+          children: [
+            Container(
+              height: 300,
+              width: size.width,
+              decoration: BoxDecoration(
+                color: AppColors.whiteOpacity5,
+                borderRadius: BorderRadius.circular(10),
+              ),
+              child: LayoutBuilder(
+                builder: (_, constraints) {
+                  return chart;
+                },
+              ),
             ),
-            child: LayoutBuilder(
-              builder: (_, constraints) {
-                return chart;
-              },
-            ),
-          ),
-          const SizedBox(height: 30,),
-          InfoChartColor(typeBed: Keys.commonBed, valueInChart: dataMap[Keys.commonBed]!.toStringAsFixed(0), color: colorList[0],),
-          InfoChartColor(typeBed: Keys.uncommonBed, valueInChart: dataMap[Keys.uncommonBed]!.toStringAsFixed(0), color: colorList[1],),
-          InfoChartColor(typeBed: Keys.rareBed, valueInChart: dataMap[Keys.rareBed]!.toStringAsFixed(0), color: colorList[2],),
-          InfoChartColor(typeBed: Keys.epicBed, valueInChart: dataMap[Keys.epicBed]!.toStringAsFixed(0), color: colorList[3],),
-          InfoChartColor(typeBed: Keys.legendaryBed, valueInChart: dataMap[Keys.legendaryBed]!.toStringAsFixed(0), color: colorList[4],),
-        ],
+            const SizedBox(height: 30,),
+            InfoChartColor(typeBed: Keys.commonBed, valueInChart: dataMap[Keys.commonBed]!.toStringAsFixed(0), color: colorList[0],),
+            InfoChartColor(typeBed: Keys.uncommonBed, valueInChart: dataMap[Keys.uncommonBed]!.toStringAsFixed(0), color: colorList[1],),
+            InfoChartColor(typeBed: Keys.rareBed, valueInChart: dataMap[Keys.rareBed]!.toStringAsFixed(0), color: colorList[2],),
+            InfoChartColor(typeBed: Keys.epicBed, valueInChart: dataMap[Keys.epicBed]!.toStringAsFixed(0), color: colorList[3],),
+            InfoChartColor(typeBed: Keys.legendaryBed, valueInChart: dataMap[Keys.legendaryBed]!.toStringAsFixed(0), color: colorList[4],),
+          ],
+        ),
       ),
     );
   }

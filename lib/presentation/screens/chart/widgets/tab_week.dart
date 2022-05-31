@@ -49,7 +49,7 @@ class TabWeek extends StatelessWidget {
           padding: EdgeInsets.zero,
         ),
         const SizedBox(height: 12),
-        ChartStatisticShare(margin: EdgeInsets.zero,),
+        ChartStatisticShare(),
         const SizedBox(height: 40),
         const ChartTitle(
             title: Keys.averageSleepScore,
@@ -59,14 +59,14 @@ class TabWeek extends StatelessWidget {
             padding: EdgeInsets.zero
         ),
         const SizedBox(height: 12),
-        ChartStatisticShare(margin: EdgeInsets.zero,),
+        ChartStatisticShare(),
         const SizedBox(height: 40),
         const ChartTitle(
           title: Keys.bedTime,
           textStyleTitle: TextStyles.bold16LightWhite,
         ),
         const SizedBox(height: 12),
-        ChartStatisticShare(margin: EdgeInsets.zero,),
+        ChartStatisticShare(),
         const SizedBox(height: 40),
         const ChartTitle(
             title: Keys.sleepOnsetTime,
@@ -74,7 +74,7 @@ class TabWeek extends StatelessWidget {
             padding: EdgeInsets.zero
         ),
         const SizedBox(height: 12),
-        ChartStatisticShare(margin: EdgeInsets.zero,),
+        ChartStatisticShare(),
         const SizedBox(height: 40),
         const ChartTitle(
             title: Keys.wokeUp,
@@ -82,7 +82,7 @@ class TabWeek extends StatelessWidget {
             padding: EdgeInsets.zero
         ),
         const SizedBox(height: 12),
-        ChartStatisticShare(margin: EdgeInsets.zero,),
+        ChartStatisticShare(),
         const SizedBox(height: 40),
         const ChartTitle(
             title: Keys.sleepDuration,
@@ -90,7 +90,7 @@ class TabWeek extends StatelessWidget {
             padding: EdgeInsets.zero
         ),
         const SizedBox(height: 4),
-        ChartStatisticShare(margin: EdgeInsets.zero,),
+        ChartStatisticShare(),
         const SizedBox(height: 16),
         const ChartTitle(
             title: Keys.timeInBed,
@@ -98,7 +98,7 @@ class TabWeek extends StatelessWidget {
             padding: EdgeInsets.zero
         ),
         const SizedBox(height: 12),
-        ChartStatisticShare(margin: EdgeInsets.zero,),
+        ChartStatisticShare(),
         const SizedBox(height: 40),
         const ChartTitle(
             title: Keys.nocturnalAwakening,
@@ -106,7 +106,7 @@ class TabWeek extends StatelessWidget {
             padding: EdgeInsets.zero
         ),
         const SizedBox(height: 12),
-        ChartStatisticShare(margin: EdgeInsets.zero,),
+        ChartStatisticShare(),
       ],
     );
   }
