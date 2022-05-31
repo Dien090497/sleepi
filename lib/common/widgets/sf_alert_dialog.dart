@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
 
-
-
 Future<T?> showCustomAlertDialog<T>(
     BuildContext context, {
       required Widget? children,

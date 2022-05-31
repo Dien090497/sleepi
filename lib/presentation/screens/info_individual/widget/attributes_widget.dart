@@ -20,11 +20,17 @@ class AttributesWidget extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: const [
-          ItemAttribute(linkImage: Imgs.efficiency, title: 'Efficiency', valueActive: 10),
+          ItemAttribute(
+              linkImage: Imgs.efficiency, title: 'Efficiency', valueActive: 10),
           ItemAttribute(linkImage: Imgs.luck, title: 'Luck', valueActive: 2.5),
-          ItemAttribute(linkImage: Imgs.bonus, title: 'Bonus',valueActive: 8.2),
-          ItemAttribute(linkImage: Imgs.special, title: 'Special', valueActive: 5.3),
-          ItemAttribute(linkImage: Imgs.resilience, title: 'Resilience',valueActive: 6.2),
+          ItemAttribute(
+              linkImage: Imgs.bonus, title: 'Bonus', valueActive: 8.2),
+          ItemAttribute(
+              linkImage: Imgs.special, title: 'Special', valueActive: 5.3),
+          ItemAttribute(
+              linkImage: Imgs.resilience,
+              title: 'Resilience',
+              valueActive: 6.2),
         ],
       ),
     );

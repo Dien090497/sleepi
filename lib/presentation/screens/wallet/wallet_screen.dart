@@ -4,7 +4,7 @@ import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/widgets/background_widget.dart';
 import 'package:slee_fi/common/widgets/sf_back_button.dart';
 import 'package:slee_fi/common/widgets/sf_icon.dart';
-import 'package:slee_fi/di/translations/keys.dart';
+import 'package:slee_fi/l10n/locale_keys.g.dart';
 import 'package:slee_fi/presentation/screens/passcode/passcode_screen.dart';
 import 'package:slee_fi/presentation/screens/wallet/widgets/tab_bar_icon.dart';
 import 'package:slee_fi/presentation/screens/wallet/widgets/tab_spending_detail.dart';
@@ -28,7 +28,8 @@ class WalletScreen extends StatelessWidget {
             ),
             actions: [
               GestureDetector(
-                onTap: () => Navigator.pushNamed(context, R.passcode, arguments: PasscodeArguments(R.settingWallet)),
+                onTap: () => Navigator.pushNamed(context, R.passcode,
+                    arguments: PasscodeArguments(R.settingWallet)),
                 child: const SFIcon(Ics.icSetting),
               )
             ],
@@ -41,7 +42,7 @@ class WalletScreen extends StatelessWidget {
             title: Center(
               child: TabBarIcon(
                 context: context,
-                texts: const [Keys.spending, Keys.wallet],
+                texts: const [LocaleKeys.spending, LocaleKeys.wallet],
                 images: const [Ics.icTwoEyes, Ics.icWallet],
               ),
             ),

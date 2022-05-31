@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:slee_fi/common/widgets/sf_list_tile.dart';
 import 'package:slee_fi/common/widgets/sf_slider.dart';
-import 'package:slee_fi/di/translations/keys.dart';
+import 'package:slee_fi/l10n/locale_keys.g.dart';
 
 class AlarmVolumnChangeWidget extends StatefulWidget {
   const AlarmVolumnChangeWidget({Key? key}) : super(key: key);
@@ -17,7 +17,7 @@ class _AlarmVolumnChangeWidgetState extends State<AlarmVolumnChangeWidget> {
   @override
   Widget build(BuildContext context) {
     return SFListTile(
-      text: Keys.alarm,
+      text: LocaleKeys.alarm,
       trailing: SFSlider(
         value: volume,
         onChanged: (value) {

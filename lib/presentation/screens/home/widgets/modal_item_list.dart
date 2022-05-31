@@ -6,7 +6,7 @@ import 'package:slee_fi/common/widgets/sf_buttons.dart';
 import 'package:slee_fi/common/widgets/sf_gridview.dart';
 import 'package:slee_fi/common/widgets/sf_icon.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
-import 'package:slee_fi/di/translations/keys.dart';
+import 'package:slee_fi/l10n/locale_keys.g.dart';
 import 'package:slee_fi/presentation/screens/home/widgets/pop_up_item.dart';
 import 'package:slee_fi/presentation/screens/product_detail/widgets/my_jewel_short_widget.dart';
 import 'package:slee_fi/resources/resources.dart';
@@ -30,7 +30,10 @@ class ModalItemList extends StatelessWidget {
             padding: const EdgeInsets.all(32.0),
             child: Row(
               children: [
-                SFText(keyText: Keys.itemList, style: TextStyles.bold18White,),
+                SFText(
+                  keyText: LocaleKeys.itemList,
+                  style: TextStyles.bold18White,
+                ),
                 const Spacer(),
                 GestureDetector(
                   onTap: () {},
@@ -38,7 +41,8 @@ class ModalItemList extends StatelessWidget {
                     children: [
                       const SFIcon(Ics.filter, color: AppColors.blue),
                       const SizedBox(width: 4),
-                      SFText(keyText: Keys.filter, style: TextStyles.blue16),
+                      SFText(
+                          keyText: LocaleKeys.filter, style: TextStyles.blue16),
                     ],
                   ),
                 ),
@@ -54,11 +58,11 @@ class ModalItemList extends StatelessWidget {
                 itemBuilder: (context, i) {
                   return GestureDetector(
                     onTap: () {
-                     showCustomAlertDialog(context,
-                         children:  PopUpItem(
-                           icon: Ics.shortBed,
-                           onConfirm: () {},
-                         ));
+                      showCustomAlertDialog(context,
+                          children: PopUpItem(
+                            icon: Ics.shortBed,
+                            onConfirm: () {},
+                          ));
                     },
                     child: MyJewelsShortWidget(
                       color: AppColors.light4,
@@ -70,7 +74,7 @@ class ModalItemList extends StatelessWidget {
             ),
           ),
           SFButton(
-              text: Keys.cancel,
+              text: LocaleKeys.cancel,
               width: MediaQuery.of(context).size.width * 0.9,
               color: AppColors.blue,
               textStyle: TextStyles.w600WhiteSize16,

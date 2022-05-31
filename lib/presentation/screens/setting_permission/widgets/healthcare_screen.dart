@@ -5,7 +5,7 @@ import 'package:slee_fi/common/style/text_styles.dart';
 import 'package:slee_fi/common/widgets/background_widget.dart';
 import 'package:slee_fi/common/widgets/sf_buttons.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
-import 'package:slee_fi/di/translations/keys.dart';
+import 'package:slee_fi/l10n/locale_keys.g.dart';
 import 'package:slee_fi/resources/resources.dart';
 
 class HealthcarePermissionScreen extends StatelessWidget {
@@ -28,7 +28,7 @@ class HealthcarePermissionScreen extends StatelessWidget {
                   height: 24.0,
                 ),
                 SFText(
-                  keyText: Keys.healthcarePermission,
+                  keyText: LocaleKeys.healthcarePermission,
                   style: TextStyles.bold24LightWhite,
                   textAlign: TextAlign.center,
                 ),
@@ -36,7 +36,7 @@ class HealthcarePermissionScreen extends StatelessWidget {
                   height: 32.0,
                 ),
                 SFText(
-                  keyText: Keys.displaysMessageHealthcarePermission,
+                  keyText: LocaleKeys.displaysMessageHealthcarePermission,
                   style: TextStyles.lightGrey16,
                 ),
               ],
@@ -49,7 +49,7 @@ class HealthcarePermissionScreen extends StatelessWidget {
                   height: 48,
                   width: double.infinity,
                   color: AppColors.blue,
-                  text: Keys.allow,
+                  text: LocaleKeys.allow,
                   textStyle: TextStyles.w600WhiteSize16,
                   onPressed: () =>
                       Navigator.pushNamed(context, R.motionDataPermission),

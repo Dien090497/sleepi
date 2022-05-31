@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
-import 'package:slee_fi/di/translations/keys.dart';
+import 'package:slee_fi/l10n/locale_keys.g.dart';
 import 'package:slee_fi/presentation/screens/setting_activation_code/widgets/container_box_widget.dart';
 
 class AvailableWidget extends StatelessWidget {
@@ -20,7 +20,7 @@ class AvailableWidget extends StatelessWidget {
           children: [
             Center(
                 child: SFText(
-              keyText: Keys.availableTotal,
+              keyText: LocaleKeys.availableTotal,
               style: TextStyles.lightGrey16,
             )),
             const SizedBox(height: 8.0),

@@ -3,7 +3,7 @@ import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
 import 'package:slee_fi/common/widgets/sf_icon.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
-import 'package:slee_fi/di/translations/keys.dart';
+import 'package:slee_fi/l10n/locale_keys.g.dart';
 import 'package:slee_fi/resources/resources.dart';
 
 class CategoryHeaderShare extends StatelessWidget {
@@ -28,7 +28,7 @@ class CategoryHeaderShare extends StatelessWidget {
           child: Column(
             children: [
               SFText(
-                keyText: Keys.earning,
+                keyText: LocaleKeys.earning,
                 style: TextStyles.lightGrey11,
               ),
               Row(
@@ -76,7 +76,7 @@ class CategoryHeaderShare extends StatelessWidget {
           child: Column(
             children: [
               SFText(
-                keyText: Keys.sleepDuration,
+                keyText: LocaleKeys.sleepDuration,
                 style: TextStyles.lightGrey11,
               ),
               SFText(
@@ -104,7 +104,7 @@ class CategoryHeaderShare extends StatelessWidget {
           child: Column(
             children: [
               SFText(
-                keyText: Keys.sleepScore,
+                keyText: LocaleKeys.sleepScore,
                 style: TextStyles.lightGrey11,
               ),
               SFText(

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_translate/flutter_translate.dart';
+// import 'package:flutter_translate/flutter_translate.dart';
 import 'package:slee_fi/common/enum/enum.dart';
 import 'package:slee_fi/common/extensions/enum_x.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
@@ -9,7 +9,7 @@ import 'package:slee_fi/common/widgets/sf_gridview.dart';
 import 'package:slee_fi/common/widgets/sf_icon.dart';
 import 'package:slee_fi/common/widgets/sf_percent_border.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
-import 'package:slee_fi/di/translations/keys.dart';
+import 'package:slee_fi/l10n/locale_keys.g.dart';
 import 'package:slee_fi/presentation/screens/product_detail/widgets/top_left_banner.dart';
 
 class GridViewBedItem extends StatelessWidget {
@@ -92,18 +92,20 @@ class GridViewBedItem extends StatelessWidget {
                           ],
                         ),
                         SizedBox(height: 4.h),
-                        const SFPercentBorderGradient(valueActive: 70, totalValue: 100),
+                        const SFPercentBorderGradient(
+                            valueActive: 70, totalValue: 100),
                         const SizedBox(height: 12),
                         if (price != null)
                           Row(
                             children: [
                               Expanded(
                                   child: SFText(
-                                keyText: '$price ${translate(Keys.avax)}',
+                                // keyText: '$price ${translate(LocaleKeys.avax)}',
+                                keyText: '$price ${LocaleKeys.avax}',
                                 style: TextStyles.white14W700,
                               )),
                               SFText(
-                                keyText: Keys.buy,
+                                keyText: LocaleKeys.buy,
                                 style: TextStyles.blue14W700,
                               ),
                             ],

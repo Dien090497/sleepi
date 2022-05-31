@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:slee_fi/common/enum/enum.dart';
 import 'package:slee_fi/common/widgets/sf_dialog.dart';
 import 'package:slee_fi/common/widgets/sf_sub_tab_bar.dart';
-import 'package:slee_fi/di/translations/keys.dart';
+import 'package:slee_fi/l10n/locale_keys.g.dart';
 import 'package:slee_fi/presentation/screens/product_detail/widgets/gridview_bed_item.dart';
 import 'package:slee_fi/presentation/screens/product_detail/widgets/pop_up_beds_detail.dart';
 import 'package:slee_fi/resources/resources.dart';
@@ -37,7 +37,7 @@ class TabBedsDetail extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          SFSubTabBar(texts: const [Keys.beds, Keys.bedBox]),
+          SFSubTabBar(texts: const [LocaleKeys.beds, LocaleKeys.bedBox]),
           const SizedBox(height: 12),
           Expanded(
             child: TabBarView(

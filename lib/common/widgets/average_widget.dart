@@ -21,8 +21,8 @@ class AverageWidget extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.fromLTRB(24, 24, 33, 0),
       decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(16.0),
-          color: color,
+        borderRadius: BorderRadius.circular(16.0),
+        color: color,
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,

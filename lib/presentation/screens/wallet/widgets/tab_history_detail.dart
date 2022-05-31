@@ -3,7 +3,7 @@ import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
 import 'package:slee_fi/common/widgets/sf_card.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
-import 'package:slee_fi/di/translations/keys.dart';
+import 'package:slee_fi/l10n/locale_keys.g.dart';
 
 class TabHistoryDetail extends StatelessWidget {
   const TabHistoryDetail({Key? key}) : super(key: key);
@@ -30,7 +30,7 @@ class TabHistoryDetail extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   SFText(
-                    keyText: Keys.confirm,
+                    keyText: LocaleKeys.confirm,
                     style: TextStyles.bold16Blue,
                   ),
                   const SizedBox(

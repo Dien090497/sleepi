@@ -9,7 +9,7 @@ import 'package:slee_fi/common/widgets/sf_drop_down.dart';
 import 'package:slee_fi/common/widgets/sf_logo.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
 import 'package:slee_fi/common/widgets/sf_textfield.dart';
-import 'package:slee_fi/di/translations/keys.dart';
+import 'package:slee_fi/l10n/locale_keys.g.dart';
 import 'package:slee_fi/presentation/screens/login_signup/widgets/login_box.dart';
 
 class EnterActivationCodeScreen extends StatelessWidget {

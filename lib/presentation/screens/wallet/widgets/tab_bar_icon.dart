@@ -22,22 +22,22 @@ class TabBarIcon extends TabBar {
           tabs: List.generate(
               texts.length,
               (i) => Tab(
-                child: Row(
-                  mainAxisSize: MainAxisSize.max,
-                  children: [
-                    SFIcon(
-                      images.isNotEmpty ? images[i] : "",
-                      color: AppColors.white,
+                    child: Row(
+                      mainAxisSize: MainAxisSize.max,
+                      children: [
+                        SFIcon(
+                          images.isNotEmpty ? images[i] : "",
+                          color: AppColors.white,
+                        ),
+                        const SizedBox(width: 8),
+                        Expanded(
+                            child: SFText(
+                          keyText: texts[i],
+                          style: TextStyles.white16,
+                        )),
+                      ],
                     ),
-                    const SizedBox(width: 8),
-                    Expanded(
-                        child: SFText(
-                      keyText: texts[i],
-                      style: TextStyles.white16,
-                    )),
-                  ],
-                ),
-              )),
+                  )),
 
           indicator: BoxDecoration(
               borderRadius: BorderRadius.circular(100),

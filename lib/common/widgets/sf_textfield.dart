@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_translate/flutter_translate.dart';
+// import 'package:flutter_translate/flutter_translate.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
@@ -56,7 +56,8 @@ class SFTextField extends StatelessWidget {
           style: TextStyles.w400White16,
           decoration: InputDecoration(
             isDense: true,
-            hintText: hintText != null ? translate(hintText!) : null,
+            // hintText: hintText != null ? translate(hintText!) : null,
+            hintText: hintText != null ? hintText! : null,
             hintStyle: hintStyle ?? TextStyles.lightGrey14,
             suffix: suffix,
             suffixIcon: suffixIcon,

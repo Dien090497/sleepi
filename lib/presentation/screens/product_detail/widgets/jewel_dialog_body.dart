@@ -5,7 +5,7 @@ import 'package:slee_fi/common/widgets/sf_buttons.dart';
 import 'package:slee_fi/common/widgets/sf_card.dart';
 import 'package:slee_fi/common/widgets/sf_icon.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
-import 'package:slee_fi/di/translations/keys.dart';
+import 'package:slee_fi/l10n/locale_keys.g.dart';
 
 class JewelDialogBody extends StatelessWidget {
   const JewelDialogBody(
@@ -80,7 +80,7 @@ class JewelDialogBody extends StatelessWidget {
               child: Row(
                 children: [
                   SFText(
-                    keyText: Keys.attributes,
+                    keyText: LocaleKeys.attributes,
                     style: TextStyles.lightGrey16,
                   ),
                   const SizedBox(width: 4),
@@ -101,7 +101,7 @@ class JewelDialogBody extends StatelessWidget {
               child: Row(
                 children: [
                   SFText(
-                    keyText: Keys.attributes,
+                    keyText: LocaleKeys.attributes,
                     style: TextStyles.lightGrey16,
                   ),
                   const SizedBox(width: 4),

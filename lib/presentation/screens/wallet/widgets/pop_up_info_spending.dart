@@ -14,7 +14,6 @@ class PopupInfoSpending extends StatefulWidget {
 }
 
 class _PopupInfoSpendingState extends State<PopupInfoSpending> {
-
   bool _dropdownShown = false;
 
   void _toggleDropdown() {

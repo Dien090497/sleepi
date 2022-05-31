@@ -5,7 +5,7 @@ import 'package:slee_fi/common/style/text_styles.dart';
 import 'package:slee_fi/common/widgets/sf_button_outlined.dart';
 import 'package:slee_fi/common/widgets/sf_buttons.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
-import 'package:slee_fi/di/translations/keys.dart';
+import 'package:slee_fi/l10n/locale_keys.g.dart';
 
 class PopUpAvalancheWallet extends StatelessWidget {
   const PopUpAvalancheWallet({Key? key}) : super(key: key);
@@ -18,24 +18,27 @@ class PopUpAvalancheWallet extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           SFText(
-            keyText: Keys.avalancheWallet,
+            keyText: LocaleKeys.avalancheWallet,
             style: TextStyles.bold18LightWhite,
           ),
-          const SizedBox(height: 32,),
+          const SizedBox(
+            height: 32,
+          ),
           SizedBox(
               height: 48,
               child: SFButtonOutLined(
-                title: Keys.createANewWallet,
+                title: LocaleKeys.createANewWallet,
                 textStyle: TextStyles.bold16Blue,
                 borderColor: AppColors.blue,
                 onPressed: () {
                   Navigator.pushNamed(context, R.createWallet);
-                  },
-              )
+                },
+              )),
+          const SizedBox(
+            height: 17,
           ),
-          const SizedBox(height: 17,),
           SFButton(
-            text: Keys.importAWalletUsingSeedPhrase,
+            text: LocaleKeys.importAWalletUsingSeedPhrase,
             textStyle: TextStyles.w600WhiteSize16,
             height: 48,
             width: double.infinity,

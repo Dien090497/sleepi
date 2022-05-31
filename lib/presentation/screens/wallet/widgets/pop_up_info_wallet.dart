@@ -14,7 +14,6 @@ class PopupInfoWallet extends StatefulWidget {
 }
 
 class _PopupInfoWalletState extends State<PopupInfoWallet> {
-
   bool _dropdownShown = false;
 
   void _toggleDropdown() {

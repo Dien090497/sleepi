@@ -5,7 +5,7 @@ import 'package:slee_fi/common/widgets/background_widget.dart';
 import 'package:slee_fi/common/widgets/sf_alert_dialog.dart';
 import 'package:slee_fi/common/widgets/sf_app_bar.dart';
 import 'package:slee_fi/common/widgets/sf_buttons.dart';
-import 'package:slee_fi/di/translations/keys.dart';
+import 'package:slee_fi/l10n/locale_keys.g.dart';
 import 'package:slee_fi/presentation/screens/transfer/widgets/pop_up_confirm_transfer.dart';
 import 'package:slee_fi/presentation/screens/transfer/widgets/transfer_list.dart';
 import 'package:slee_fi/presentation/screens/transfer/widgets/transfer_widget.dart';
@@ -20,7 +20,7 @@ class TransferScreen extends StatelessWidget {
         backgroundColor: AppColors.transparent,
         appBar: SFAppBar(
           context: context,
-          title: Keys.transfer,
+          title: LocaleKeys.transfer,
           textStyle: TextStyles.bold18LightWhite,
         ),
         body: SafeArea(
@@ -43,7 +43,7 @@ class TransferScreen extends StatelessWidget {
                 child: Padding(
                   padding: const EdgeInsets.all(12.0),
                   child: SFButton(
-                    text: Keys.confirmTransfer,
+                    text: LocaleKeys.confirmTransfer,
                     textStyle: TextStyles.w600WhiteSize16,
                     width: double.infinity,
                     color: AppColors.blue,

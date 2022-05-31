@@ -6,7 +6,7 @@ import 'package:slee_fi/common/widgets/sf_drop_down.dart';
 import 'package:slee_fi/common/widgets/sf_icon.dart';
 import 'package:slee_fi/common/widgets/sf_sub_tab_bar.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
-import 'package:slee_fi/di/translations/keys.dart';
+import 'package:slee_fi/l10n/locale_keys.g.dart';
 import 'package:slee_fi/resources/resources.dart';
 
 class TabBarFilter extends StatelessWidget {
@@ -51,7 +51,8 @@ class TabBarFilter extends StatelessWidget {
               children: [
                 const SFIcon(Ics.filter, color: AppColors.blue),
                 const SizedBox(width: 4),
-                SFText(keyText: Keys.filter, style: TextStyles.blue16W700),
+                SFText(
+                    keyText: LocaleKeys.filter, style: TextStyles.blue16W700),
               ],
             ),
           ),

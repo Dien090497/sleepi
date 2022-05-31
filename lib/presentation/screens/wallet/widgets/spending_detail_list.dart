@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/widgets/sf_sub_tab_bar.dart';
-import 'package:slee_fi/di/translations/keys.dart';
+import 'package:slee_fi/l10n/locale_keys.g.dart';
 import 'package:slee_fi/presentation/screens/wallet/widgets/tab_history_detail.dart';
 import 'package:slee_fi/presentation/screens/wallet/widgets/tab_pending_detail.dart';
 
@@ -25,7 +25,7 @@ class SpendingDetailList extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             SFSubTabBar(
-              texts: const [Keys.pending, Keys.history],
+              texts: const [LocaleKeys.pending, LocaleKeys.history],
             ),
             const Expanded(
               child: TabBarView(

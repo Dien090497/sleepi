@@ -4,7 +4,7 @@ import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
 import 'package:slee_fi/common/widgets/sf_image_border.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
-import 'package:slee_fi/di/translations/keys.dart';
+import 'package:slee_fi/l10n/locale_keys.g.dart';
 import 'package:slee_fi/resources/resources.dart';
 
 class CategoryHeader extends StatelessWidget {
@@ -75,7 +75,7 @@ class CategoryHeader extends StatelessWidget {
                       Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 16.0),
                         child: SFText(
-                          keyText: Keys.earning,
+                          keyText: LocaleKeys.earning,
                           style: TextStyles.blue14,
                         ),
                       ),
@@ -136,7 +136,7 @@ class CategoryHeader extends StatelessWidget {
                       Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 16.0),
                         child: SFText(
-                          keyText: Keys.sleepDurationEnter,
+                          keyText: LocaleKeys.sleepDurationEnter,
                           style: TextStyles.green14,
                         ),
                       ),
@@ -187,7 +187,7 @@ class CategoryHeader extends StatelessWidget {
                       Padding(
                         padding: const EdgeInsets.only(left: 16.0),
                         child: SFText(
-                          keyText: Keys.sleepScore,
+                          keyText: LocaleKeys.sleepScore,
                           style: TextStyles.blue14,
                         ),
                       ),

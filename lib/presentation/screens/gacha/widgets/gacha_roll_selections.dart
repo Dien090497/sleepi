@@ -3,7 +3,7 @@ import 'package:slee_fi/common/routes/app_routes.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
-import 'package:slee_fi/di/translations/keys.dart';
+import 'package:slee_fi/l10n/locale_keys.g.dart';
 
 class GachaRollSelections extends StatelessWidget {
   const GachaRollSelections({Key? key}) : super(key: key);
@@ -27,9 +27,17 @@ class GachaRollSelections extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  SFText(keyText: '12 SLFT', style: TextStyles.boldWhite18,),
-                  const SizedBox(height: 5,),
-                  SFText(keyText: Keys.singleGacha, style: TextStyles.white14WithOpacity,),
+                  SFText(
+                    keyText: '12 SLFT',
+                    style: TextStyles.boldWhite18,
+                  ),
+                  const SizedBox(
+                    height: 5,
+                  ),
+                  SFText(
+                    keyText: LocaleKeys.singleGacha,
+                    style: TextStyles.white14WithOpacity,
+                  ),
                 ],
               ),
             ),
@@ -52,9 +60,11 @@ class GachaRollSelections extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   SFText(keyText: '100 SLFT', style: TextStyles.boldWhite18),
-                  const SizedBox(height: 5,),
+                  const SizedBox(
+                    height: 5,
+                  ),
                   SFText(
-                    keyText: Keys.timesGacha,
+                    keyText: LocaleKeys.timesGacha,
                     args: const {'num': '10'},
                     style: TextStyles.white14WithOpacity,
                   ),

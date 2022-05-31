@@ -6,7 +6,7 @@ import 'package:slee_fi/common/widgets/background_widget.dart';
 import 'package:slee_fi/common/widgets/sf_buttons.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
 import 'package:slee_fi/common/widgets/topbar_common.dart';
-import 'package:slee_fi/di/translations/keys.dart';
+import 'package:slee_fi/l10n/locale_keys.g.dart';
 import 'package:slee_fi/presentation/screens/gacha/widgets/attributes_widget.dart';
 import 'package:slee_fi/presentation/screens/gacha/widgets/custom_radio_button.dart';
 import 'package:slee_fi/resources/resources.dart';
@@ -31,7 +31,9 @@ class _GachaChance500ScreenState extends State<GachaChance500Screen> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                const TopBarCommon(iconBack: true,),
+                const TopBarCommon(
+                  iconBack: true,
+                ),
                 const SizedBox(height: 16),
                 Expanded(
                   child: SingleChildScrollView(
@@ -39,9 +41,11 @@ class _GachaChance500ScreenState extends State<GachaChance500Screen> {
                     child: Column(
                       children: [
                         Container(
-                          padding:
-                          const EdgeInsets.symmetric(vertical: 12),
-                          child: SFText(keyText: 'Congratulations！', style: TextStyles.boldWhite18,),
+                          padding: const EdgeInsets.symmetric(vertical: 12),
+                          child: SFText(
+                            keyText: 'Congratulations！',
+                            style: TextStyles.boldWhite18,
+                          ),
                         ),
                         SizedBox(
                           width: double.infinity,
@@ -51,19 +55,23 @@ class _GachaChance500ScreenState extends State<GachaChance500Screen> {
                                 Container(
                                     decoration: BoxDecoration(
                                         image: const DecorationImage(
-                                          image: AssetImage("assets/images/borderBed.png",),
+                                          image: AssetImage(
+                                            "assets/images/borderBed.png",
+                                          ),
                                           fit: BoxFit.cover,
                                         ),
                                         boxShadow: [
                                           BoxShadow(
-                                            color: AppColors.purple.withOpacity(0.02),
+                                            color: AppColors.purple
+                                                .withOpacity(0.02),
                                             spreadRadius: 3,
                                             blurRadius: 7,
-                                            offset: const Offset(0, 3), // changes position of shadow
+                                            offset: const Offset(0,
+                                                3), // changes position of shadow
                                           ),
                                         ],
-                                        borderRadius: BorderRadius.circular(20)
-                                    ),
+                                        borderRadius:
+                                            BorderRadius.circular(20)),
                                     width: 150,
                                     height: 150,
                                     child: SizedBox(
@@ -81,14 +89,17 @@ class _GachaChance500ScreenState extends State<GachaChance500Screen> {
                                       padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 15),
                                       child: SFText(keyText: Keys.quality, style: TextStyles.blue14,),
                                     ),
-                                    const SizedBox(width: 25,),
                                     Container(
                                       decoration: BoxDecoration(
                                         color: Colors.white.withOpacity(0.1),
                                         borderRadius: BorderRadius.circular(16),
                                       ),
-                                      padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 15),
-                                      child: SFText(keyText: 'IDIDIDIDID', style: TextStyles.white14WithOpacity,),
+                                      padding: const EdgeInsets.symmetric(
+                                          vertical: 8, horizontal: 15),
+                                      child: SFText(
+                                        keyText: 'IDIDIDIDID',
+                                        style: TextStyles.white14WithOpacity,
+                                      ),
                                     ),
                                   ],
                                 ),
@@ -99,36 +110,53 @@ class _GachaChance500ScreenState extends State<GachaChance500Screen> {
                         ),
                         SFText(keyText: Keys.attributes, style: TextStyles.boldWhite18,),
                         Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 15),
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 20, vertical: 15),
                           child: Column(
                             children: [
                               const AttributesWidget(),
                               const SizedBox(height: 16),
                               Padding(
-                                padding: const EdgeInsets.symmetric(horizontal: 10),
+                                padding:
+                                    const EdgeInsets.symmetric(horizontal: 10),
                                 child: Row(
                                   children: [
                                     Expanded(
                                       child: Padding(
-                                        padding: const EdgeInsets.symmetric(horizontal: 10),
+                                        padding: const EdgeInsets.symmetric(
+                                            horizontal: 10),
                                         child: Container(
                                           decoration: BoxDecoration(
-                                            borderRadius: BorderRadius.circular(10),
-                                            color: AppColors.white.withOpacity(0.1)
-                                          ),
+                                              borderRadius:
+                                                  BorderRadius.circular(10),
+                                              color: AppColors.white
+                                                  .withOpacity(0.1)),
                                           child: Column(
                                             children: [
-                                              const SizedBox(height: 5,),
+                                              const SizedBox(
+                                                height: 5,
+                                              ),
                                               Align(
                                                 alignment: Alignment.topRight,
                                                 child: Container(
-                                                  margin: const EdgeInsets.only(top: 3, right: 8),
-                                                  child: CustomRadio(value: 1, groupValue: 1, onChanged: (value) {  },),
+                                                  margin: const EdgeInsets.only(
+                                                      top: 3, right: 8),
+                                                  child: CustomRadio(
+                                                    value: 1,
+                                                    groupValue: 1,
+                                                    onChanged: (value) {},
+                                                  ),
                                                 ),
                                               ),
                                               Padding(
-                                                padding: const EdgeInsets.only(bottom: 10),
-                                                child: Center(child: SFText(keyText: 'Short\n Bed', style: TextStyles.white14WithOpacity,)),
+                                                padding: const EdgeInsets.only(
+                                                    bottom: 10),
+                                                child: Center(
+                                                    child: SFText(
+                                                  keyText: 'Short\n Bed',
+                                                  style: TextStyles
+                                                      .white14WithOpacity,
+                                                )),
                                               ),
                                             ],
                                           ),
@@ -137,25 +165,40 @@ class _GachaChance500ScreenState extends State<GachaChance500Screen> {
                                     ),
                                     Expanded(
                                       child: Padding(
-                                        padding: const EdgeInsets.symmetric(horizontal: 10),
+                                        padding: const EdgeInsets.symmetric(
+                                            horizontal: 10),
                                         child: Container(
                                           decoration: BoxDecoration(
-                                              borderRadius: BorderRadius.circular(10),
-                                              color: AppColors.white.withOpacity(0.1)
-                                          ),
+                                              borderRadius:
+                                                  BorderRadius.circular(10),
+                                              color: AppColors.white
+                                                  .withOpacity(0.1)),
                                           child: Column(
                                             children: [
-                                              const SizedBox(height: 5,),
+                                              const SizedBox(
+                                                height: 5,
+                                              ),
                                               Align(
                                                 alignment: Alignment.topRight,
                                                 child: Container(
-                                                  margin: const EdgeInsets.only(top: 3, right: 8),
-                                                  child: CustomRadio(value: 1, groupValue: 1, onChanged: (value) {  },),
+                                                  margin: const EdgeInsets.only(
+                                                      top: 3, right: 8),
+                                                  child: CustomRadio(
+                                                    value: 1,
+                                                    groupValue: 1,
+                                                    onChanged: (value) {},
+                                                  ),
                                                 ),
                                               ),
                                               Padding(
-                                                padding: const EdgeInsets.only(bottom: 10),
-                                                child: Center(child: SFText(keyText: 'Short\n Bed', style: TextStyles.white14WithOpacity,)),
+                                                padding: const EdgeInsets.only(
+                                                    bottom: 10),
+                                                child: Center(
+                                                    child: SFText(
+                                                  keyText: 'Short\n Bed',
+                                                  style: TextStyles
+                                                      .white14WithOpacity,
+                                                )),
                                               ),
                                             ],
                                           ),
@@ -164,25 +207,40 @@ class _GachaChance500ScreenState extends State<GachaChance500Screen> {
                                     ),
                                     Expanded(
                                       child: Padding(
-                                        padding: const EdgeInsets.symmetric(horizontal: 10),
+                                        padding: const EdgeInsets.symmetric(
+                                            horizontal: 10),
                                         child: Container(
                                           decoration: BoxDecoration(
-                                              borderRadius: BorderRadius.circular(10),
-                                              color: AppColors.white.withOpacity(0.1)
-                                          ),
+                                              borderRadius:
+                                                  BorderRadius.circular(10),
+                                              color: AppColors.white
+                                                  .withOpacity(0.1)),
                                           child: Column(
                                             children: [
-                                              const SizedBox(height: 5,),
+                                              const SizedBox(
+                                                height: 5,
+                                              ),
                                               Align(
                                                 alignment: Alignment.topRight,
                                                 child: Container(
-                                                  margin: const EdgeInsets.only(top: 3, right: 8),
-                                                  child: CustomRadio(value: 1, groupValue: 1, onChanged: (value) {  },),
+                                                  margin: const EdgeInsets.only(
+                                                      top: 3, right: 8),
+                                                  child: CustomRadio(
+                                                    value: 1,
+                                                    groupValue: 1,
+                                                    onChanged: (value) {},
+                                                  ),
                                                 ),
                                               ),
                                               Padding(
-                                                padding: const EdgeInsets.only(bottom: 10),
-                                                child: Center(child: SFText(keyText: 'Short\n Bed', style: TextStyles.white14WithOpacity,)),
+                                                padding: const EdgeInsets.only(
+                                                    bottom: 10),
+                                                child: Center(
+                                                    child: SFText(
+                                                  keyText: 'Short\n Bed',
+                                                  style: TextStyles
+                                                      .white14WithOpacity,
+                                                )),
                                               ),
                                             ],
                                           ),
@@ -194,10 +252,11 @@ class _GachaChance500ScreenState extends State<GachaChance500Screen> {
                               ),
                               const SizedBox(height: 16),
                               Padding(
-                                padding: const EdgeInsets.symmetric(horizontal: 10),
+                                padding:
+                                    const EdgeInsets.symmetric(horizontal: 10),
                                 child: Center(
                                   child: SFButton(
-                                    text: Keys.confirm,
+                                    text: LocaleKeys.confirm,
                                     textStyle: TextStyles.white16,
                                     radius: 100,
                                     gradient: AppColors.gradientBlueButton,

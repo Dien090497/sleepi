@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_translate/flutter_translate.dart';
+// import 'package:flutter_translate/flutter_translate.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
 import 'package:slee_fi/common/widgets/background_widget.dart';
@@ -8,7 +8,7 @@ import 'package:slee_fi/common/widgets/sf_buttons.dart';
 import 'package:slee_fi/common/widgets/sf_icon.dart';
 import 'package:slee_fi/common/widgets/sf_label_value.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
-import 'package:slee_fi/di/translations/keys.dart';
+import 'package:slee_fi/l10n/locale_keys.g.dart';
 import 'package:slee_fi/resources/resources.dart';
 
 class MintScreen extends StatefulWidget {
@@ -53,7 +53,7 @@ class _MintScreenState extends State<MintScreen> {
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 20),
                       child: SFText(
-                        keyText: Keys.bedRecycle,
+                        keyText: LocaleKeys.bedRecycle,
                         style: TextStyles.boldWhite18,
                       ),
                     ),
@@ -80,7 +80,8 @@ class _MintScreenState extends State<MintScreen> {
                             ),
                           ),
                           const SFLabelValue(
-                              label: Keys.token, value: '0 SLFT + 0 SLGT'),
+                              label: LocaleKeys.token,
+                              value: '0 SLFT + 0 SLGT'),
                           const SizedBox(
                             height: 24,
                           ),
@@ -88,7 +89,7 @@ class _MintScreenState extends State<MintScreen> {
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Text(
-                                '${translate(Keys.insurance)}: 5%',
+                                '${translate(LocaleKeys.insurance)}: 5%',
                                 style: TextStyles.bold16LightWhite,
                               ),
                               SizedBox(
@@ -112,7 +113,7 @@ class _MintScreenState extends State<MintScreen> {
                             crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
                               SFText(
-                                keyText: Keys.whatInsurance,
+                                keyText: LocaleKeys.whatInsurance,
                                 style: TextStyles.lightGrey12,
                               ),
                               const SizedBox(
@@ -145,7 +146,7 @@ class _MintScreenState extends State<MintScreen> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             SFText(
-                              keyText: Keys.withoutCase,
+                              keyText: LocaleKeys.withoutCase,
                               style: TextStyles.lightGrey14,
                             ),
                             const SizedBox(
@@ -159,7 +160,7 @@ class _MintScreenState extends State<MintScreen> {
                               child: Column(
                                 children: [
                                   const SFLabelValue(
-                                    label: Keys.commonBed,
+                                    label: LocaleKeys.commonBed,
                                     value: '98%',
                                     colorBorder: Colors.transparent,
                                   ),
@@ -172,7 +173,7 @@ class _MintScreenState extends State<MintScreen> {
                                     ),
                                   ),
                                   const SFLabelValue(
-                                    label: Keys.failure,
+                                    label: LocaleKeys.failure,
                                     value: '98%',
                                     colorBorder: Colors.transparent,
                                   ),
@@ -183,19 +184,19 @@ class _MintScreenState extends State<MintScreen> {
                               height: 24,
                             ),
                             SFText(
-                              keyText: Keys.withoutCase,
+                              keyText: LocaleKeys.withoutCase,
                               style: TextStyles.lightGrey14,
                             ),
                             const SizedBox(
                               height: 12,
                             ),
                             const SFLabelValue(
-                                label: Keys.commonBed, value: '100%'),
+                                label: LocaleKeys.commonBed, value: '100%'),
                             const SizedBox(
                               height: 24,
                             ),
                             SFButton(
-                              text: Keys.mint,
+                              text: LocaleKeys.mint,
                               width: size.width,
                               gradient: AppColors.gradientBlueButton,
                               textStyle: TextStyles.white16,

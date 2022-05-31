@@ -6,14 +6,11 @@ import 'package:slee_fi/common/widgets/sf_card.dart';
 import 'package:slee_fi/common/widgets/sf_dialog.dart';
 import 'package:slee_fi/common/widgets/sf_icon.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
-import 'package:slee_fi/di/translations/keys.dart';
+import 'package:slee_fi/l10n/locale_keys.g.dart';
 
 class PopUpItem extends StatelessWidget {
   const PopUpItem(
-      {Key? key,
-        required this.icon,
-        required this.onConfirm,
-        this.onCancel})
+      {Key? key, required this.icon, required this.onConfirm, this.onCancel})
       : super(key: key);
 
   final String icon;
@@ -41,12 +38,12 @@ class PopUpItem extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               SFText(
-                keyText: Keys.effect,
+                keyText: LocaleKeys.effect,
                 style: TextStyles.lightWhite16,
               ),
               const SizedBox(height: 4),
               SFText(
-                keyText: Keys.displaysMessageEffectItem,
+                keyText: LocaleKeys.displaysMessageEffectItem,
                 style: TextStyles.lightGrey14,
               ),
             ],
@@ -58,21 +55,20 @@ class PopUpItem extends StatelessWidget {
           children: [
             Expanded(
               child: SFButton(
-                  text: Keys.cancel,
+                  text: LocaleKeys.cancel,
                   textStyle: TextStyles.w600LightGreySize16,
                   color: AppColors.light4,
                   onPressed: () {
                     onCancel;
                     Navigator.maybePop(context);
-                  }
-              ),
+                  }),
             ),
             const SizedBox(
               width: 16.0,
             ),
             Expanded(
               child: SFButton(
-                text: Keys.confirm,
+                text: LocaleKeys.confirm,
                 textStyle: TextStyles.bold14LightWhite,
                 color: AppColors.blue,
                 onPressed: () {

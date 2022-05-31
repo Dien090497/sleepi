@@ -3,7 +3,7 @@ import 'package:slee_fi/common/style/text_styles.dart';
 import 'package:slee_fi/common/widgets/sf_card.dart';
 import 'package:slee_fi/common/widgets/sf_icon.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
-import 'package:slee_fi/di/translations/keys.dart';
+import 'package:slee_fi/l10n/locale_keys.g.dart';
 import 'package:slee_fi/resources/resources.dart';
 
 class ModalTransferBetween extends StatelessWidget {
@@ -12,12 +12,12 @@ class ModalTransferBetween extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     List keyList = [
-      Keys.avax,
-      Keys.slft,
-      Keys.slgt,
-      Keys.bed,
-      Keys.jewels,
-      Keys.bedBox
+      LocaleKeys.avax,
+      LocaleKeys.slft,
+      LocaleKeys.slgt,
+      LocaleKeys.bed,
+      LocaleKeys.jewels,
+      LocaleKeys.bedBox
     ];
     List urlImages = [
       Ics.icSolanaCircle,
@@ -34,7 +34,10 @@ class ModalTransferBetween extends StatelessWidget {
         itemBuilder: (BuildContext context, int index) {
           return SFCard(
             child: ListTile(
-              leading: SFIcon(urlImages[index], width: 32,),
+              leading: SFIcon(
+                urlImages[index],
+                width: 32,
+              ),
               title: SFText(
                   keyText: keyList[index], style: TextStyles.lightWhite16),
             ),

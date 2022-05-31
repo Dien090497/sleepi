@@ -4,7 +4,7 @@ import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
 import 'package:slee_fi/common/widgets/background_widget.dart';
 import 'package:slee_fi/common/widgets/sf_app_bar.dart';
-import 'package:slee_fi/di/translations/keys.dart';
+import 'package:slee_fi/l10n/locale_keys.g.dart';
 import 'package:slee_fi/presentation/screens/passcode/passcode_screen.dart';
 import 'package:slee_fi/presentation/screens/setting_wallet/widgets/box_info_widget.dart';
 import 'package:slee_fi/resources/resources.dart';
@@ -19,7 +19,7 @@ class SettingWalletScreen extends StatelessWidget {
         backgroundColor: AppColors.transparent,
         appBar: SFAppBar(
           context: context,
-          title: Keys.setting,
+          title: LocaleKeys.setting,
           textStyle: TextStyles.bold18LightWhite,
         ),
         body: SafeArea(
@@ -28,20 +28,26 @@ class SettingWalletScreen extends StatelessWidget {
             children: [
               BoxInfoWidget(
                 urlIcon: Ics.icShieldLock,
-                title: Keys.backup,
-                info: Keys.displaysBackupInfo,
-                onTap: () {Navigator.pushNamed(context, R.passcode, arguments: PasscodeArguments(R.seedPhrase));},
+                title: LocaleKeys.backup,
+                info: LocaleKeys.displaysBackupInfo,
+                onTap: () {
+                  Navigator.pushNamed(context, R.passcode,
+                      arguments: PasscodeArguments(R.seedPhrase));
+                },
               ),
               BoxInfoWidget(
                 urlIcon: Ics.lock,
-                title: Keys.resetWithPasscode,
-                info: Keys.displaysResetWithPasscodeInfo,
-                onTap: () {Navigator.pushNamed(context, R.passcode, arguments: PasscodeArguments(R.createPasscode));},
+                title: LocaleKeys.resetWithPasscode,
+                info: LocaleKeys.displaysResetWithPasscodeInfo,
+                onTap: () {
+                  Navigator.pushNamed(context, R.passcode,
+                      arguments: PasscodeArguments(R.createPasscode));
+                },
               ),
               BoxInfoWidget(
                 urlIcon: Ics.icRefresh,
-                title: Keys.restoreWallet,
-                info: Keys.displaysRestoreWalletInfo,
+                title: LocaleKeys.restoreWallet,
+                info: LocaleKeys.displaysRestoreWalletInfo,
                 onTap: () => Navigator.pushNamed(context, R.restoreWallet),
               ),
             ],

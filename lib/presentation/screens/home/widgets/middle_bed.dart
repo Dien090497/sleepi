@@ -5,7 +5,7 @@ import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
 import 'package:slee_fi/common/widgets/sf_buttons.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
-import 'package:slee_fi/di/translations/keys.dart';
+import 'package:slee_fi/l10n/locale_keys.g.dart';
 import 'package:slee_fi/resources/resources.dart';
 
 class MiddleBed extends StatelessWidget {
@@ -20,7 +20,7 @@ class MiddleBed extends StatelessWidget {
           height: 20,
         ),
         SFText(
-          keyText: Keys.mainBed,
+          keyText: LocaleKeys.mainBed,
           style: TextStyles.white18,
         ),
         const SizedBox(
@@ -40,7 +40,7 @@ class MiddleBed extends StatelessWidget {
           child: Column(
             children: [
               SFText(
-                keyText: Keys.middleBed,
+                keyText: LocaleKeys.middleBed,
                 style: TextStyles.blue14,
               ),
               const SizedBox(height: 24),

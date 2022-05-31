@@ -9,7 +9,7 @@ import 'package:slee_fi/common/widgets/sf_buttons.dart';
 import 'package:slee_fi/common/widgets/sf_card.dart';
 import 'package:slee_fi/common/widgets/sf_dialog.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
-import 'package:slee_fi/di/translations/keys.dart';
+import 'package:slee_fi/l10n/locale_keys.g.dart';
 import 'package:slee_fi/presentation/screens/staking/widgets/pop_up_calculator.dart';
 import 'package:slee_fi/presentation/screens/staking/widgets/pop_up_compound.dart';
 import 'package:slee_fi/presentation/screens/staking/widgets/pop_up_info_staking.dart';
@@ -24,7 +24,7 @@ class StakingList extends StatelessWidget {
       padding: const EdgeInsets.all(15.0),
       children: [
         SFText(
-          keyText: Keys.tvlInSleefi,
+          keyText: LocaleKeys.tvlInSleefi,
           style: TextStyles.lightGrey14,
         ),
         const SizedBox(height: 16),
@@ -38,9 +38,9 @@ class StakingList extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               SFText(
-                keyText: Keys.tvlInSleefi,
+                keyText: LocaleKeys.tvlInSleefi,
                 style: TextStyles.bold16LightWhite,
-                ),
+              ),
               const SizedBox(
                 height: 19.0,
               ),
@@ -48,20 +48,17 @@ class StakingList extends StatelessWidget {
                 children: [
                   Expanded(
                       child: SFText(
-                        keyText: "xxxxxx SLFT",
-                        style: TextStyles.w700WhiteSize24,
-                      )
-                  ),
+                    keyText: "xxxxxx SLFT",
+                    style: TextStyles.w700WhiteSize24,
+                  )),
                   Expanded(
                       child: SFText(
-                        keyText: "(=xxxxxx USD)",
-                        style: TextStyles.w400White14,
-                        textAlign: TextAlign.end,
-                      )
-                  )
+                    keyText: "(=xxxxxx USD)",
+                    style: TextStyles.w400White14,
+                    textAlign: TextAlign.end,
+                  ))
                 ],
               ),
-
             ],
           ),
         ),
@@ -72,7 +69,7 @@ class StakingList extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: const [
             SizedBox(),
-           PopupInfoStaking(),
+            PopupInfoStaking(),
           ],
         ),
         const SizedBox(
@@ -84,7 +81,7 @@ class StakingList extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               SFText(
-                keyText: Keys.earningToken,
+                keyText: LocaleKeys.earningToken,
                 style: TextStyles.lightWhite16,
               ),
               SFText(
@@ -100,7 +97,7 @@ class StakingList extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               SFText(
-                keyText: Keys.mintingDiscount,
+                keyText: LocaleKeys.mintingDiscount,
                 style: TextStyles.lightWhite16,
               ),
               SFText(
@@ -116,7 +113,7 @@ class StakingList extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               SFText(
-                keyText: Keys.levelUpDiscount,
+                keyText: LocaleKeys.levelUpDiscount,
                 style: TextStyles.lightWhite16,
               ),
               SFText(
@@ -133,7 +130,7 @@ class StakingList extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             SFText(
-              keyText: Keys.stakeTokens,
+              keyText: LocaleKeys.stakeTokens,
               style: TextStyles.lightGrey14,
             ),
             GestureDetector(
@@ -158,7 +155,7 @@ class StakingList extends StatelessWidget {
                 children: [
                   Expanded(
                       child: SFText(
-                    keyText: Keys.yourSlftEarned,
+                    keyText: LocaleKeys.yourSlftEarned,
                     style: TextStyles.lightWhite16,
                   )),
                   Row(
@@ -184,7 +181,7 @@ class StakingList extends StatelessWidget {
                 children: [
                   Expanded(
                       child: SFText(
-                    keyText: Keys.yourStakedAmount,
+                    keyText: LocaleKeys.yourStakedAmount,
                     style: TextStyles.lightWhite16,
                   )),
                   Row(
@@ -210,7 +207,7 @@ class StakingList extends StatelessWidget {
                 children: [
                   Expanded(
                       child: SFText(
-                    keyText: Keys.apr,
+                    keyText: LocaleKeys.apr,
                     style: TextStyles.lightWhite16,
                     toUpperCase: true,
                   )),
@@ -234,7 +231,7 @@ class StakingList extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   SFButton(
-                    text: Keys.deposit,
+                    text: LocaleKeys.deposit,
                     textStyle: TextStyles.bold14LightWhite,
                     color: AppColors.blue,
                     onPressed: () =>
@@ -242,7 +239,7 @@ class StakingList extends StatelessWidget {
                   ),
                   SFButtonOutLined(
                     borderColor: AppColors.blue,
-                    title: Keys.withdraw,
+                    title: LocaleKeys.withdraw,
                     textStyle: TextStyles.bold14Blue,
                     onPressed: () =>
                         Navigator.pushNamed(context, R.withdrawSLFT),
@@ -253,7 +250,7 @@ class StakingList extends StatelessWidget {
                           children: [const PopUpCompound()]);
                     },
                     child: SFText(
-                      keyText: Keys.compound,
+                      keyText: LocaleKeys.compound,
                       style: TextStyles.bold14Blue,
                     ),
                   )
@@ -268,7 +265,7 @@ class StakingList extends StatelessWidget {
         Column(
           children: [
             SFButton(
-              text: Keys.buySlft,
+              text: LocaleKeys.buySlft,
               textStyle: TextStyles.bold14LightWhite,
               color: AppColors.blue,
               width: double.infinity,
@@ -280,7 +277,7 @@ class StakingList extends StatelessWidget {
             SizedBox(
               height: 48,
               child: SFButtonOutLined(
-                  title: Keys.showContractOnAvascan,
+                  title: LocaleKeys.showContractOnAvascan,
                   textStyle: TextStyles.bold16Blue,
                   borderColor: AppColors.blue,
                   onPressed: () {}),

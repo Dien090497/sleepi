@@ -6,7 +6,7 @@ import 'package:slee_fi/common/widgets/sf_bottom_sheet.dart';
 import 'package:slee_fi/common/widgets/sf_card.dart';
 import 'package:slee_fi/common/widgets/sf_list_tile.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
-import 'package:slee_fi/di/translations/keys.dart';
+import 'package:slee_fi/l10n/locale_keys.g.dart';
 import 'package:slee_fi/presentation/screens/setting/widgets/modal_multi_chain_switch.dart';
 import 'package:slee_fi/presentation/screens/setting/widgets/modal_pop_up_language.dart';
 
