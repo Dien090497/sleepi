@@ -31,7 +31,7 @@ class RestoreWalletScreen extends StatelessWidget {
                     padding: const EdgeInsets.symmetric(
                         horizontal: 24.0, vertical: 8.0),
                     child: SFButton(
-                      text: LocaleKeys.importWallet,
+                      text: LocaleKeys.import_wallet,
                       textStyle: TextStyles.w600WhiteSize16,
                       height: 48,
                       width: double.infinity,

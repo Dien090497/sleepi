@@ -45,7 +45,7 @@ class PopUpLevelUp extends StatelessWidget {
         Column(
           children: [
             SFText(
-              keyText: LocaleKeys.levelUp,
+              keyText: LocaleKeys.level_up,
               style: TextStyles.white1w700size16,
             ),
             const SizedBox(height: 20),
