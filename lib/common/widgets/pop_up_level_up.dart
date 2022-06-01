@@ -5,6 +5,7 @@ import 'package:slee_fi/common/widgets/sf_buttons.dart';
 import 'package:slee_fi/common/widgets/sf_card.dart';
 import 'package:slee_fi/common/widgets/sf_dialog.dart';
 import 'package:slee_fi/common/widgets/sf_icon.dart';
+import 'package:slee_fi/common/widgets/sf_label_value.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
 import 'package:slee_fi/di/translations/keys.dart';
 
@@ -67,51 +68,23 @@ class PopUpLevelUp extends StatelessWidget {
                     text: 'Level up to ',
                     style: TextStyles.lightGrey14,
                     children: [
-                      TextSpan(text: 'Lv $level', style: TextStyles.bold14Blue),
+                      TextSpan(
+                          text: 'Lv ${level + 1}',
+                          style: TextStyles.bold14Blue),
                     ]),
               ),
             ),
             const SizedBox(height: 8),
-            SFCard(
-              margin: EdgeInsets.zero,
-              padding: const EdgeInsets.symmetric(vertical: 24, horizontal: 18),
-              child: Row(
-                children: [
-                  SFText(
-                    keyText: Keys.attributes,
-                    style: TextStyles.lightGrey16,
-                  ),
-                  const SizedBox(width: 4),
-                  Expanded(
-                    child: SFText(
-                      keyText: '+2 Luck',
-                      style: TextStyles.blue16,
-                      textAlign: TextAlign.right,
-                    ),
-                  ),
-                ],
-              ),
+            SFLabelValue(
+              label: Keys.cost,
+              value: '$cost',
+              styleValue: TextStyles.textColorSize16,
             ),
             const SizedBox(height: 8),
-            SFCard(
-              margin: EdgeInsets.zero,
-              padding: const EdgeInsets.symmetric(vertical: 24, horizontal: 18),
-              child: Row(
-                children: [
-                  SFText(
-                    keyText: Keys.attributes,
-                    style: TextStyles.lightGrey16,
-                  ),
-                  const SizedBox(width: 4),
-                  Expanded(
-                    child: SFText(
-                      keyText: '+2 Luck',
-                      style: TextStyles.blue16,
-                      textAlign: TextAlign.right,
-                    ),
-                  ),
-                ],
-              ),
+            SFLabelValue(
+              label: Keys.time,
+              value: '$time mins',
+              styleValue: TextStyles.textColorSize16,
             ),
             const SizedBox(height: 24),
             Row(
@@ -119,7 +92,9 @@ class PopUpLevelUp extends StatelessWidget {
                 Expanded(
                   child: SFButton(
                     text: Keys.cancel,
-                    onPressed: onCancel,
+                    onPressed: (){
+                      Navigator.pop(context);
+                    },
                     textStyle: TextStyles.lightGrey16,
                     color: AppColors.light4,
                   ),

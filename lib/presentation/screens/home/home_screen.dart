@@ -151,7 +151,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                 width: size.width,
                                 height: 46,
                                 padding:
-                                    const EdgeInsets.symmetric(horizontal: 15),
+                                    const EdgeInsets.symmetric(horizontal: 12),
                                 alignment: Alignment.centerRight,
                                 child: Text(
                                   index < 10 ? '0$index' : '$index',
@@ -203,7 +203,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                 width: size.width,
                                 height: 46,
                                 padding:
-                                    const EdgeInsets.symmetric(horizontal: 15),
+                                    const EdgeInsets.symmetric(horizontal: 12),
                                 alignment: Alignment.centerLeft,
                                 child: Text(
                                   index < 10 ? '0$index' : '$index',
@@ -247,7 +247,6 @@ class _HomeScreenState extends State<HomeScreen> {
                 },
                 fixedSize: const Size(274, 40),
                 textStyle: TextStyles.blue16,
-                icon: Icons.add_circle_outline,
                 borderColor: AppColors.blue,
                 iconColor: AppColors.blue,
                 withBorder: 1,
@@ -443,20 +442,12 @@ class _HomeScreenState extends State<HomeScreen> {
                                       const SizedBox(
                                         height: 2,
                                       ),
-                                      Row(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.center,
-                                        children: [
-                                          SFText(
-                                            keyText: Keys.whatInsurance,
-                                            style: TextStyles.lightGrey12,
-                                          ),
-                                          const SizedBox(
-                                            width: 8,
-                                          ),
-                                          SvgPicture.asset(
-                                              Ics.icCircleQuestion),
-                                        ],
+                                      Container(
+                                        alignment: Alignment.centerLeft,
+                                        child: SFText(
+                                          keyText: Keys.whatInsurance,
+                                          style: TextStyles.lightGrey12,
+                                        ),
                                       ),
                                     ],
                                   ),

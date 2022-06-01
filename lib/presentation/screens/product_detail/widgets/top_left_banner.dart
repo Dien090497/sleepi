@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
 
@@ -17,7 +16,7 @@ class TopLeftBanner extends StatelessWidget {
     return RotationTransition(
       turns: const AlwaysStoppedAnimation(315 / 360),
       child: Container(
-        color: backgroundColor ?? AppColors.red.withOpacity(.1),
+        color: backgroundColor ?? textColor!.withOpacity(0.1),
         padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 40),
         child: SFText(
           keyText: text,

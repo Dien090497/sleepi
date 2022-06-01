@@ -53,7 +53,7 @@ class _PopUpSellState extends State<PopUpSell> {
             children: [
               SFText(
                   keyText: step == 2 ? Keys.confirmToSell : Keys.sell,
-                  style: TextStyles.white1w700size16),
+                  style: TextStyles.white1w700size18),
               const SizedBox(height: 20),
               if (step < 2) SFIcon(widget.icon),
               if (step < 2) const SizedBox(height: 24),
@@ -86,14 +86,21 @@ class _PopUpSellState extends State<PopUpSell> {
               Row(
                 children: [
                   Expanded(
-                      child: SFButton(
-                    text: Keys.cancel,
-                    onPressed: widget.onCancel,
-                  )),
+                    child: SFButton(
+                      text: Keys.cancel,
+                      onPressed: () {
+                        Navigator.pop(context);
+                      },
+                      textStyle: TextStyles.lightGrey16,
+                      color: AppColors.light4,
+                    ),
+                  ),
                   const SizedBox(width: 12),
                   Expanded(
                     child: SFButton(
                       text: step < 2 ? Keys.next : Keys.confirm,
+                      textStyle: TextStyles.white16,
+                      gradient: AppColors.gradientBlueButton,
                       onPressed: () {
                         switch (step) {
                           case 0:
@@ -134,11 +141,14 @@ class _Confirm extends StatelessWidget {
             Expanded(
               flex: 3,
               child: SFText(
-                  keyText: Keys.listingCancel, style: TextStyles.lightGrey14),
+                  keyText: Keys.listPrice, style: TextStyles.lightGrey14),
             ),
             Expanded(
               child: SFText(
-                  keyText: '19 SLFT', style: TextStyles.lightWhite16W700),
+                keyText: '19 SLFT',
+                style: TextStyles.lightWhite16,
+                textAlign: TextAlign.right,
+              ),
             ),
           ],
         ),
@@ -151,7 +161,11 @@ class _Confirm extends StatelessWidget {
                   keyText: Keys.artistRoyalties, style: TextStyles.lightGrey14),
             ),
             Expanded(
-              child: SFText(keyText: '4%', style: TextStyles.lightWhite16W700),
+              child: SFText(
+                keyText: '4%',
+                style: TextStyles.lightWhite16,
+                textAlign: TextAlign.right,
+              ),
             ),
           ],
         ),
@@ -164,7 +178,11 @@ class _Confirm extends StatelessWidget {
                   keyText: Keys.transactionFee, style: TextStyles.lightGrey14),
             ),
             Expanded(
-              child: SFText(keyText: '2%', style: TextStyles.lightWhite16W700),
+              child: SFText(
+                keyText: '2%',
+                style: TextStyles.lightWhite16,
+                textAlign: TextAlign.right,
+              ),
             ),
           ],
         ),
@@ -178,7 +196,10 @@ class _Confirm extends StatelessWidget {
             ),
             Expanded(
               child: SFText(
-                  keyText: Keys.free, style: TextStyles.lightWhite16W700),
+                keyText: Keys.free,
+                style: TextStyles.lightWhite16,
+                textAlign: TextAlign.right,
+              ),
             ),
           ],
         ),
