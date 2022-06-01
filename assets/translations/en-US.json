@@ -397,5 +397,12 @@
   "bed_recycle" : "Bed Recycle",
   "what_recycle" : "What Recycling?",
   "body_recycle" : "Amet minim mollit non deserunt ullamco est\n sit aliqua dolor do amet sint. Velit officia\n consequat duis enim velit mollit.",
-  "common_bed_box" : "Common Bed Box"
+  "common_bed_box" : "Common Bed Box",
+  "female": "Female",
+  "male": "Male",
+  "other": "Other",
+  "bed_recycle": "Bed Recycle",
+  "what_recycle": "What Recycling?",
+  "body_recycle": "Amet minim mollit non deserunt ullamco est\n sit aliqua dolor do amet sint. Velit officia\n consequat duis enim velit mollit.",
+  "common_bed_box": "Common Bed Box"
 }

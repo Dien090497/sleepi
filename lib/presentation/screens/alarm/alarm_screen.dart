@@ -52,7 +52,7 @@ class AlarmScreen extends StatelessWidget {
                       const AlarmStatusChangeWidget(),
                       divider,
                       SFListTile(
-                        text: LocaleKeys.music,
+                        text: LocaleKeys.sound,
                         trailing: icon,
                         onPressed: () =>
                             Navigator.pushNamed(context, R.alarmSoundEffect),

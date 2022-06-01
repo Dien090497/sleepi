@@ -395,5 +395,4 @@ abstract class  LocaleKeys {
   static const what_recycle = 'what_recycle';
   static const body_recycle = 'body_recycle';
   static const common_bed_box = 'common_bed_box';
-
 }

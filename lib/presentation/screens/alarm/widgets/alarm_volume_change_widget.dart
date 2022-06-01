@@ -17,7 +17,7 @@ class _AlarmVolumnChangeWidgetState extends State<AlarmVolumnChangeWidget> {
   @override
   Widget build(BuildContext context) {
     return SFListTile(
-      text: LocaleKeys.alarm,
+      text: LocaleKeys.volume,
       trailing: SFSlider(
         value: volume,
         onChanged: (value) {
