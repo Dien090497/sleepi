@@ -40,7 +40,7 @@ class TransferList extends StatelessWidget {
               leading: Image.asset(Imgs.avax),
               title: SFText(
                 keyText: LocaleKeys.avax,
-                toUpperCase: true,
+                stringCase: true,
                 style: TextStyles.lightWhite16,
               ),
               trailing: const Icon(

@@ -27,7 +27,7 @@ class SFChip extends StatelessWidget {
       child: SFText(
         keyText: text,
         style: textStyle,
-        toUpperCase: toUpperCase,
+        stringCase: toUpperCase,
       ),
     );
   }

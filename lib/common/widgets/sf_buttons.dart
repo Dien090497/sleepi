@@ -57,7 +57,7 @@ class SFButton extends StatelessWidget {
         child: SFText(
           keyText: text,
           style: textStyle,
-          toUpperCase: toUpperCase,
+          stringCase: toUpperCase,
         ),
       ),
     );
@@ -85,7 +85,7 @@ class SFTextButton extends StatelessWidget {
       child: SFText(
         keyText: text,
         style: textStyle,
-        toUpperCase: toUpperCase,
+        stringCase: toUpperCase,
       ),
     );
   }

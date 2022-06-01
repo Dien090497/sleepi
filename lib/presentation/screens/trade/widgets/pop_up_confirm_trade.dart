@@ -56,7 +56,7 @@ class PopUpConfirmTrade extends StatelessWidget {
                     ),
                     SFText(
                       keyText: LocaleKeys.avax,
-                      toUpperCase: true,
+                      stringCase: true,
                       style: TextStyles.bold18White,
                     ),
                   ],

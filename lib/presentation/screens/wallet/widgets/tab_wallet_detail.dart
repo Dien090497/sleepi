@@ -125,7 +125,7 @@ class TabWalletDetail extends StatelessWidget {
           SFText(
             keyText: LocaleKeys.wallet,
             prefix: 'SOLANA ',
-            toUpperCase: true,
+            stringCase: true,
           ),
           const Spacer(),
           Container(

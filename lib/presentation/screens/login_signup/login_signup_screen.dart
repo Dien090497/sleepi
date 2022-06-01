@@ -33,7 +33,7 @@ class LoginSignUpScreen extends StatelessWidget {
                     SFText(
                       keyText: LocaleKeys.login,
                       style: TextStyles.bold18LightWhite,
-                      toUpperCase: true,
+                      stringCase: true,
                     ),
                     const SizedBox(height: 25),
                     const SFTextField(
