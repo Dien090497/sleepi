@@ -4,7 +4,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:flutter_translate/flutter_translate.dart';
 import 'package:slee_fi/common/routes/app_routes.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
@@ -14,7 +13,7 @@ import 'package:slee_fi/common/widgets/sf_button_outlined.dart';
 import 'package:slee_fi/common/widgets/sf_buttons.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
 import 'package:slee_fi/common/widgets/topbar_common.dart';
-import 'package:slee_fi/di/translations/keys.dart';
+import 'package:slee_fi/l10n/locale_keys.g.dart';
 import 'package:slee_fi/presentation/blocs/home/home_bloc.dart';
 import 'package:slee_fi/presentation/blocs/home/home_state.dart';
 import 'package:slee_fi/presentation/screens/home/widgets/introduce_app.dart';
@@ -230,8 +229,9 @@ class _HomeScreenState extends State<HomeScreen> {
           const SizedBox(
             height: 16,
           ),
-          Text(
-            '${translate(Keys.range)}: 06:00-09:00',
+          const Text(
+            // '${translate(LocaleKeys.range)}: 06:00-09:00',
+            '${LocaleKeys.range}: 06:00-09:00',
             style: TextStyles.white16500,
           ),
           const SizedBox(
@@ -241,7 +241,7 @@ class _HomeScreenState extends State<HomeScreen> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               SFButtonOutLined(
-                title: Keys.alarmBell,
+                title: LocaleKeys.alarm_bell,
                 onPressed: () {
                   Navigator.pushNamed(context, R.alarmSoundEffect);
                 },
@@ -254,6 +254,7 @@ class _HomeScreenState extends State<HomeScreen> {
               const SizedBox(
                 height: 22,
               ),
+              const SizedBox(width: 22,),
               CupertinoSwitch(
                 activeColor: AppColors.green,
                 value: swCheck,
@@ -269,7 +270,7 @@ class _HomeScreenState extends State<HomeScreen> {
             height: 16,
           ),
           SFButton(
-            text: startTime == 0 ? Keys.start : '${convertTimer()}',
+            text: startTime == 0 ? LocaleKeys.start : '${convertTimer()}',
             textStyle: TextStyles.white16,
             radius: 100,
             gradient: startTime == 0 ? AppColors.gradientBlueButton : null,
@@ -402,7 +403,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                   child: Column(
                                     children: [
                                       SFButtonOutLined(
-                                        title: Keys.useItem,
+                                        title: LocaleKeys.use_item,
                                         onPressed: () {
                                           SFModalBottomSheet.show(context, 0.8,
                                               const ModalItemList());
@@ -421,8 +422,9 @@ class _HomeScreenState extends State<HomeScreen> {
                                         mainAxisAlignment:
                                             MainAxisAlignment.spaceBetween,
                                         children: [
-                                          Text(
-                                            '${translate(Keys.insurance)}: 5%',
+                                          const Text(
+                                            // '${translate(LocaleKeys.insurance)}: 5%',
+                                            '${LocaleKeys.insurance}: 5%',
                                             style: TextStyles.bold16LightWhite,
                                           ),
                                           SizedBox(
@@ -442,12 +444,20 @@ class _HomeScreenState extends State<HomeScreen> {
                                       const SizedBox(
                                         height: 2,
                                       ),
-                                      Container(
-                                        alignment: Alignment.centerLeft,
-                                        child: SFText(
-                                          keyText: Keys.whatInsurance,
-                                          style: TextStyles.lightGrey12,
-                                        ),
+                                      Row(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.center,
+                                        children: [
+                                          SFText(
+                                            keyText: LocaleKeys.what_insurance,
+                                            style: TextStyles.lightGrey12,
+                                          ),
+                                          const SizedBox(
+                                            width: 8,
+                                          ),
+                                          SvgPicture.asset(
+                                              Ics.icCircleQuestion),
+                                        ],
                                       ),
                                     ],
                                   ),

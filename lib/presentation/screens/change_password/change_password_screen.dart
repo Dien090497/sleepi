@@ -8,7 +8,7 @@ import 'package:slee_fi/common/widgets/sf_card.dart';
 import 'package:slee_fi/common/widgets/sf_textfield.dart';
 import 'package:slee_fi/common/widgets/sf_textfield_password.dart';
 import 'package:slee_fi/common/widgets/sf_textfield_text_button.dart';
-import 'package:slee_fi/di/translations/keys.dart';
+import 'package:slee_fi/l10n/locale_keys.g.dart';
 
 class ChangePasswordScreen extends StatelessWidget {
   const ChangePasswordScreen({Key? key}) : super(key: key);
@@ -20,7 +20,7 @@ class ChangePasswordScreen extends StatelessWidget {
         backgroundColor: AppColors.transparent,
         appBar: SFAppBar(
           context: context,
-          title: Keys.changePassword,
+          title: LocaleKeys.change_password,
           textStyle: TextStyles.bold18LightWhite,
         ),
         body: SafeArea(
@@ -33,16 +33,25 @@ class ChangePasswordScreen extends StatelessWidget {
                   child: ListView(
                     children: [
                       SFCard(
-                        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 24),
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 16, vertical: 24),
                         child: Column(
-                          children:  const [
-                            SFTextField(labelText: Keys.email),
-                            SizedBox(height: 20,),
-                            SFTextFieldTextButton(labelText: Keys.verificationCode,),
-                            SizedBox(height: 20,),
-                            SFTextFieldPassword(labelText: Keys.yourPassword),
-                            SizedBox(height: 20,),
-                            SFTextFieldPassword(labelText: Keys.newPassword),
+                          children: const [
+                            SFTextField(labelText: LocaleKeys.email),
+                            SizedBox(height: 20),
+                            SFTextFieldTextButton(
+                              labelText: LocaleKeys.verification_code,
+                            ),
+                            SizedBox(
+                              height: 20,
+                            ),
+                            SFTextFieldPassword(
+                                labelText: LocaleKeys.your_password),
+                            SizedBox(
+                              height: 20,
+                            ),
+                            SFTextFieldPassword(
+                                labelText: LocaleKeys.new_password),
                           ],
                         ),
                       ),
@@ -50,12 +59,13 @@ class ChangePasswordScreen extends StatelessWidget {
                   ),
                 ),
                 SFButton(
-                  text: Keys.save,
+                  text: LocaleKeys.save,
                   textStyle: TextStyles.w600WhiteSize16,
                   gradient: AppColors.gradientBlueButton,
                   width: double.infinity,
                   onPressed: () {},
-                )
+                ),
+                const SizedBox(height: 37,)
               ],
             ),
           ),

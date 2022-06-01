@@ -6,7 +6,7 @@ class SFGridView extends StatelessWidget {
       required this.count,
       Key? key,
       this.childAspectRatio = 9 / 10,
-      this.isScroll=true})
+      this.isScroll = true})
       : super(key: key);
 
   final IndexedWidgetBuilder itemBuilder;
@@ -19,7 +19,9 @@ class SFGridView extends StatelessWidget {
     return GridView.builder(
       itemCount: count,
       shrinkWrap: true,
-      physics: isScroll ? const ScrollPhysics() : const NeverScrollableScrollPhysics(),
+      physics: isScroll
+          ? const ScrollPhysics()
+          : const NeverScrollableScrollPhysics(),
       keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
         crossAxisCount: 2,

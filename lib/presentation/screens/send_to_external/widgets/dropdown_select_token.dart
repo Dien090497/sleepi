@@ -3,19 +3,21 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
-import 'package:slee_fi/di/translations/keys.dart';
+import 'package:slee_fi/l10n/locale_keys.g.dart';
 import 'package:slee_fi/resources/resources.dart';
 
 class DropdownSelectToken extends StatefulWidget {
-  const DropdownSelectToken({
-    this.value,
-    this.width,
-    this.height,
-    this.padding,
-    this.margin,
-    this.backgroundColor,
-    this.isResultLabel = false,
-    Key? key, this.dropdownItems}) : super(key: key);
+  const DropdownSelectToken(
+      {this.value,
+      this.width,
+      this.height,
+      this.padding,
+      this.margin,
+      this.backgroundColor,
+      this.isResultLabel = false,
+      Key? key,
+      this.dropdownItems})
+      : super(key: key);
 
   final String? value;
   final double? width;
@@ -31,15 +33,15 @@ class DropdownSelectToken extends StatefulWidget {
 }
 
 class _DropdownSelectTokenState extends State<DropdownSelectToken> {
-  var  selectedValue = '';
+  var selectedValue = '';
 
   List dropdownItemList = [];
 
   List<String> token = [
-    Keys.avax.toUpperCase(),
-    Keys.slft.toUpperCase(),
-    Keys.slgt.toUpperCase(),
-    Keys.usdc.toUpperCase(),
+    LocaleKeys.avax.toUpperCase(),
+    LocaleKeys.slft.toUpperCase(),
+    LocaleKeys.slgt.toUpperCase(),
+    LocaleKeys.usdc.toUpperCase(),
   ];
 
   List<String> iconsToken = [
@@ -61,14 +63,16 @@ class _DropdownSelectTokenState extends State<DropdownSelectToken> {
             key: UniqueKey(),
             height: 20,
             width: 20,
-            child: SvgPicture.asset(iconsToken[i],),
+            child: SvgPicture.asset(
+              iconsToken[i],
+            ),
           ),
           'selectedIcon': SizedBox(
             key: UniqueKey(),
             width: 24,
             height: 24,
             child: SvgPicture.asset(
-               iconsToken[i],
+              iconsToken[i],
               // color: Color(0xFF6FCC76),
             ),
           ),
@@ -80,7 +84,7 @@ class _DropdownSelectTokenState extends State<DropdownSelectToken> {
 
   @override
   Widget build(BuildContext context) {
-    return  CoolDropdown(
+    return CoolDropdown(
       resultWidth: widget.width ?? 70,
       resultHeight: widget.height ?? 32,
       defaultValue: dropdownItemList[0],
@@ -97,10 +101,10 @@ class _DropdownSelectTokenState extends State<DropdownSelectToken> {
         borderRadius: BorderRadius.circular(4.0),
       ),
       resultBD: BoxDecoration(
-        color: widget.backgroundColor ??  AppColors.white.withOpacity(0.1),
+        color: widget.backgroundColor ?? AppColors.white.withOpacity(0.1),
         borderRadius: BorderRadius.circular(4.0),
       ),
-      selectedItemBD : const BoxDecoration(
+      selectedItemBD: const BoxDecoration(
         color: AppColors.transparent,
       ),
       resultTS: TextStyles.lightWhite16,
@@ -113,11 +117,16 @@ class _DropdownSelectTokenState extends State<DropdownSelectToken> {
       onOpen: (isOpen) {
         // print('$isOpen');
       },
-      resultIcon: const SizedBox(
-        width: 16,
-        // height: 10,
-        child: Icon(Icons.keyboard_arrow_up, color: AppColors.lightGrey,),
-      ),
+      resultIconRotation: false,
+
+      // resultIcon: const SizedBox(
+      //   width: 16,
+      //   // height: 10,
+      //   child: Icon(
+      //     Icons.keyboard_arrow_up,
+      //     color: AppColors.lightGrey,
+      //   ),
+      // ),
     );
   }
 }

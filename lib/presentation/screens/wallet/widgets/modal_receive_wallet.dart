@@ -3,7 +3,7 @@ import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
 import 'package:slee_fi/common/widgets/sf_buttons.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
-import 'package:slee_fi/di/translations/keys.dart';
+import 'package:slee_fi/l10n/locale_keys.g.dart';
 import 'package:slee_fi/resources/resources.dart';
 
 class ModalReceiveWallet extends StatelessWidget {
@@ -18,9 +18,9 @@ class ModalReceiveWallet extends StatelessWidget {
           height: 32,
         ),
         SFText(
-          keyText: Keys.receive,
+          keyText: LocaleKeys.receive,
           style: TextStyles.bold18White,
-          toUpperCase: true,
+          stringCase: true,
           textAlign: TextAlign.center,
         ),
         const SizedBox(
@@ -36,7 +36,7 @@ class ModalReceiveWallet extends StatelessWidget {
                   borderRadius: BorderRadius.circular(100.0),
                   color: AppColors.blue.withOpacity(0.15)),
               child: SFText(
-                keyText: Keys.avalanche,
+                keyText: LocaleKeys.avalanche,
                 style: TextStyles.blue14,
                 textAlign: TextAlign.center,
               ),
@@ -50,7 +50,7 @@ class ModalReceiveWallet extends StatelessWidget {
           height: 32.0,
         ),
         SFText(
-          keyText: Keys.scanAddressToReceivePayment,
+          keyText: LocaleKeys.scan_address_to_receive_payment,
           style: TextStyles.lightGrey12,
           textAlign: TextAlign.center,
         ),
@@ -78,7 +78,7 @@ class ModalReceiveWallet extends StatelessWidget {
           height: 32,
         ),
         SFButton(
-          text: Keys.copyAddress,
+          text: LocaleKeys.copy_address,
           textStyle: TextStyles.bold16LightWhite,
           height: 50,
           color: AppColors.blue,

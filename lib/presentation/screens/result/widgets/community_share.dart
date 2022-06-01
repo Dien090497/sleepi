@@ -3,7 +3,7 @@ import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
 import 'package:slee_fi/common/widgets/sf_icon.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
-import 'package:slee_fi/di/translations/keys.dart';
+import 'package:slee_fi/l10n/locale_keys.g.dart';
 import 'package:slee_fi/resources/resources.dart';
 
 class CommunityShare extends StatelessWidget {
@@ -47,10 +47,10 @@ class CommunityShare extends StatelessWidget {
       width: MediaQuery.of(context).size.width,
       child: Row(
         children: [
-          itemCommunity(context, Ics.icDownload, Keys.download),
-          itemCommunity(context, Ics.twitter, Keys.twitter),
-          itemCommunity(context, Ics.facebook, Keys.facebook),
-          itemCommunity(context, Ics.telegram, Keys.telegram),
+          itemCommunity(context, Ics.icDownload, LocaleKeys.download),
+          itemCommunity(context, Ics.twitter, LocaleKeys.twitter),
+          itemCommunity(context, Ics.facebook, LocaleKeys.facebook),
+          itemCommunity(context, Ics.telegram, LocaleKeys.telegram),
         ],
       ),
     );

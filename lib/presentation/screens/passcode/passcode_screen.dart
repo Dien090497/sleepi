@@ -8,7 +8,7 @@ import 'package:slee_fi/common/widgets/sf_back_button.dart';
 import 'package:slee_fi/common/widgets/sf_buttons.dart';
 import 'package:slee_fi/common/widgets/sf_logo.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
-import 'package:slee_fi/di/translations/keys.dart';
+import 'package:slee_fi/l10n/locale_keys.g.dart';
 import 'package:slee_fi/presentation/screens/passcode/widgets/passcode_numpad.dart';
 import 'package:slee_fi/presentation/screens/passcode/widgets/pin_code_widget.dart';
 
@@ -46,7 +46,8 @@ class PasscodeScreen extends StatelessWidget {
               const SizedBox(height: 60),
               Center(
                 child: SFText(
-                    keyText: Keys.enterYourPasscode, style: TextStyles.white12),
+                    keyText: LocaleKeys.enter_your_passcode,
+                    style: TextStyles.white12),
               ),
               const SizedBox(height: 24),
               PinCodeWidget(controller: passcodeController),
@@ -64,9 +65,11 @@ class PasscodeScreen extends StatelessWidget {
               ),
               SizedBox(height: 32.h),
               SFTextButton(
-                text: Keys.forgotPasscode,
+                text: LocaleKeys.forgot_passcode,
                 textStyle: TextStyles.white12Underline,
-                onPressed: () {Navigator.pushNamed(context, R.restoreWallet);},
+                onPressed: () {
+                  Navigator.pushNamed(context, R.restoreWallet);
+                },
               )
             ],
           ),

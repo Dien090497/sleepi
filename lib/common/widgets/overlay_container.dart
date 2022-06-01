@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
@@ -35,7 +37,7 @@ class OverlayContainer extends StatefulWidget {
     required this.show,
     this.height,
     this.width,
-     this.child,
+    this.child,
     required this.message,
     this.asWideAsParent = false,
     this.position = const OverlayContainerPosition(0, 0),
@@ -113,6 +115,9 @@ class _OverlayContainerState extends State<OverlayContainer>
       Overlay.of(context)?.insert(_overlayEntry);
       _opened = true;
     });
+    // Timer(const Duration(seconds: 5), () {
+    //   _hide();
+    // });
   }
 
   void _hide() {
@@ -144,19 +149,22 @@ class _OverlayContainerState extends State<OverlayContainer>
           width: widget.asWideAsParent ? size.width : null,
           child: Material(
             color: widget.materialColor,
-            child: widget.child ?? Container(
-              height: widget.height ?? 90,
-              width: widget.width ?? 184,
-              padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 6),
-              margin: const EdgeInsets.only(top: 5),
-              decoration: BoxDecoration(
-                color: AppColors.darkColor1,
-                borderRadius: BorderRadius.circular(2),
-              ),
-              child: SFText(
-                keyText: widget.message,
-                style: TextStyles.w400LightWhite12,),
-            ),
+            child: widget.child ??
+                Container(
+                  height: widget.height ?? 90,
+                  width: widget.width ?? 184,
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 8, vertical: 6),
+                  margin: const EdgeInsets.only(top: 5),
+                  decoration: BoxDecoration(
+                    color: AppColors.darkColor1,
+                    borderRadius: BorderRadius.circular(2),
+                  ),
+                  child: SFText(
+                    keyText: widget.message,
+                    style: TextStyles.w400LightWhite12,
+                  ),
+                ),
           ),
         );
       },

@@ -3,7 +3,7 @@ import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
 import 'package:slee_fi/common/widgets/sf_buttons.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
-import 'package:slee_fi/di/translations/keys.dart';
+import 'package:slee_fi/l10n/locale_keys.g.dart';
 import 'package:syncfusion_flutter_core/theme.dart';
 import 'package:syncfusion_flutter_sliders/sliders.dart';
 
@@ -19,11 +19,11 @@ class FilterSheet extends StatefulWidget {
 class _FilterSheetState extends State<FilterSheet> {
   double quality = 5;
   final List<String> filters = [
-    Keys.efficiency,
-    Keys.luck,
-    Keys.resilience,
-    Keys.special,
-    Keys.bonus,
+    LocaleKeys.efficiency,
+    LocaleKeys.luck,
+    LocaleKeys.resilience,
+    LocaleKeys.special,
+    LocaleKeys.bonus,
   ];
   List<String> listSelected = [];
 
@@ -40,7 +40,7 @@ class _FilterSheetState extends State<FilterSheet> {
               Row(
                 children: [
                   SFText(
-                    keyText: Keys.filter,
+                    keyText: LocaleKeys.filter,
                     suffix: ' (${listSelected.length})',
                     style: TextStyles.white18W700,
                   ),
@@ -51,7 +51,7 @@ class _FilterSheetState extends State<FilterSheet> {
                         setState(() {});
                       },
                       child: SFText(
-                        keyText: Keys.clearFilter,
+                        keyText: LocaleKeys.clear_filter,
                         style: TextStyles.red14,
                       )),
                 ],
@@ -60,7 +60,7 @@ class _FilterSheetState extends State<FilterSheet> {
               Align(
                 alignment: Alignment.centerLeft,
                 child: SFText(
-                  keyText: Keys.type,
+                  keyText: LocaleKeys.type,
                   style: TextStyles.lightGrey14,
                 ),
               ),
@@ -81,7 +81,7 @@ class _FilterSheetState extends State<FilterSheet> {
           alignment: Alignment.centerLeft,
           padding: const EdgeInsets.symmetric(horizontal: 32),
           child: SFText(
-            keyText: Keys.quality,
+            keyText: LocaleKeys.quality,
             style: TextStyles.lightGrey14,
           ),
         ),
@@ -127,7 +127,7 @@ class _FilterSheetState extends State<FilterSheet> {
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 24.0),
           child: SFButton(
-            text: Keys.confirm,
+            text: LocaleKeys.confirm,
             textStyle: TextStyles.white16,
             width: size.width,
             gradient: AppColors.gradientBlueButton,

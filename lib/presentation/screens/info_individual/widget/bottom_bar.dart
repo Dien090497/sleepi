@@ -6,7 +6,7 @@ import 'package:slee_fi/common/widgets/pop_up_level_up.dart';
 import 'package:slee_fi/common/widgets/sf_dialog.dart';
 import 'package:slee_fi/common/widgets/sf_icon.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
-import 'package:slee_fi/di/translations/keys.dart';
+import 'package:slee_fi/l10n/locale_keys.g.dart';
 import 'package:slee_fi/presentation/screens/home/widgets/pop_up_repair.dart';
 import 'package:slee_fi/presentation/screens/home/widgets/pop_up_transfer.dart';
 import 'package:slee_fi/presentation/screens/info_individual/widget/pop_up_sell.dart';
@@ -57,7 +57,7 @@ class BottomBarWidget extends StatelessWidget {
       width: MediaQuery.of(context).size.width,
       child: Row(
         children: [
-          itemBottomBar(context, Ics.levelUp, Keys.levelUp, () {
+          itemBottomBar(context, Ics.levelUp, LocaleKeys.level_up, () {
             showCustomDialog(
               context,
               children: [
@@ -72,7 +72,7 @@ class BottomBarWidget extends StatelessWidget {
               ],
             );
           }),
-          itemBottomBar(context, Ics.repair, Keys.repair, () {
+          itemBottomBar(context, Ics.repair, LocaleKeys.repair, () {
             showCustomDialog(
               context,
               children: [
@@ -86,10 +86,10 @@ class BottomBarWidget extends StatelessWidget {
               ],
             );
           }),
-          itemBottomBar(context, Ics.heart, Keys.mint, () {
+          itemBottomBar(context, Ics.heart, LocaleKeys.mint, () {
             Navigator.pushNamed(context, R.mint);
           }),
-          itemBottomBar(context, Ics.shopping, Keys.sell, () {
+          itemBottomBar(context, Ics.shopping, LocaleKeys.sell, () {
             showCustomDialog(context, children: [
               PopUpSell(
                 onConfirm: () {},
@@ -100,10 +100,10 @@ class BottomBarWidget extends StatelessWidget {
               ),
             ]);
           }),
-          itemBottomBar(context, Ics.recycling, Keys.recycle, () {
+          itemBottomBar(context, Ics.recycling, LocaleKeys.recycle, () {
             Navigator.pushNamed(context, R.recycle);
           }),
-          itemBottomBar(context, Ics.transfer, Keys.transfer, () {
+          itemBottomBar(context, Ics.transfer, LocaleKeys.transfer, () {
             showCustomDialog(
               context,
               children: [

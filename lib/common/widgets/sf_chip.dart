@@ -24,7 +24,11 @@ class SFChip extends StatelessWidget {
         borderRadius: BorderRadius.circular(100),
         color: color ?? AppColors.white.withOpacity(0.05),
       ),
-      child: SFText(keyText: text, style: textStyle, toUpperCase: toUpperCase,),
+      child: SFText(
+        keyText: text,
+        style: textStyle,
+        stringCase: toUpperCase,
+      ),
     );
   }
 }

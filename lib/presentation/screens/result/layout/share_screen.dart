@@ -5,7 +5,7 @@ import 'package:slee_fi/common/widgets/background_widget.dart';
 import 'package:slee_fi/common/widgets/sf_app_bar.dart';
 import 'package:slee_fi/common/widgets/sf_icon.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
-import 'package:slee_fi/di/translations/keys.dart';
+import 'package:slee_fi/l10n/locale_keys.g.dart';
 import 'package:slee_fi/presentation/screens/product_detail/widgets/top_left_banner.dart';
 import 'package:slee_fi/presentation/screens/result/widgets/category_header_share.dart';
 import 'package:slee_fi/presentation/screens/result/widgets/chart_statistic_share.dart';
@@ -85,7 +85,7 @@ class _ShareScreenState extends State<ShareScreen> {
               backgroundColor: AppColors.transparent,
               appBar: SFAppBar(
                 context: context,
-                title: Keys.share,
+                title: LocaleKeys.share,
                 textStyle: TextStyles.bold18LightWhite,
               ),
               body: Column(

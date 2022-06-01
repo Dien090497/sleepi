@@ -7,7 +7,7 @@ import 'package:slee_fi/common/widgets/sf_app_bar.dart';
 import 'package:slee_fi/common/widgets/sf_card.dart';
 import 'package:slee_fi/common/widgets/sf_list_tile.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
-import 'package:slee_fi/di/translations/keys.dart';
+import 'package:slee_fi/l10n/locale_keys.g.dart';
 
 class ShowSeedPhraseScreen extends StatelessWidget {
   const ShowSeedPhraseScreen({Key? key}) : super(key: key);
@@ -19,64 +19,64 @@ class ShowSeedPhraseScreen extends StatelessWidget {
         backgroundColor: AppColors.transparent,
         appBar: SFAppBar(
           context: context,
-          title: Keys.seedPhrase,
+          title: LocaleKeys.seed_phrase,
           textStyle: TextStyles.bold18LightWhite,
         ),
         body: SafeArea(
             child: Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: Column(children: [
-                // AvailableWidget(),
-                Expanded(
-                    child: SFCard(
-                      onTap: () {
-                        Navigator.pushNamed(context, R.exportSeedPhrase);
-                      },
-                      child: ListView.builder(
-                          itemCount: 15,
-                          itemBuilder: (BuildContext context, int index) {
-                            return Column(
-                              children: [
-                                SFListTile(
-                                  text: "${index + 1}",
-                                  trailing: SFText(
-                                    keyText: "-----",
-                                    style: TextStyles.lightGrey14,
-                                  ),
-                                ),
-                                Divider(
-                                  color: AppColors.lightWhite.withOpacity(0.05),
-                                  height: 1,
-                                ),
-                              ],
-                            );
-                          }),
-                    )),
-                const SizedBox(
-                  height: 12.0,
-                ),
-                SFText(
-                  keyText: Keys.displaysMessageShowSeedPhrase,
-                  style: TextStyles.lightGrey12,
-                ),
-                const SizedBox(
-                  height: 16.0,
-                ),
-                InkWell(
-                  onTap: () {
-                    Navigator.pushNamed(context, R.exportSeedPhrase);
-                  },
-                  child: SFText(
-                    keyText: Keys.pressAndHoldToReveal,
-                    style: TextStyles.bold18White,
-                  ),
-                ),
-                const SizedBox(
-                  height: 16.0,
-                ),
-                // ActivationCodeList(),
-              ]),
+          padding: const EdgeInsets.all(16.0),
+          child: Column(children: [
+            // AvailableWidget(),
+            Expanded(
+                child: SFCard(
+              onTap: () {
+                Navigator.pushNamed(context, R.exportSeedPhrase);
+              },
+              child: ListView.builder(
+                  itemCount: 15,
+                  itemBuilder: (BuildContext context, int index) {
+                    return Column(
+                      children: [
+                        SFListTile(
+                          text: "${index + 1}",
+                          trailing: SFText(
+                            keyText: "-----",
+                            style: TextStyles.lightGrey14,
+                          ),
+                        ),
+                        Divider(
+                          color: AppColors.lightWhite.withOpacity(0.05),
+                          height: 1,
+                        ),
+                      ],
+                    );
+                  }),
             )),
+            const SizedBox(
+              height: 12.0,
+            ),
+            SFText(
+              keyText: LocaleKeys.displays_message_show_seed_phrase,
+              style: TextStyles.lightGrey12,
+            ),
+            const SizedBox(
+              height: 16.0,
+            ),
+            InkWell(
+              onTap: () {
+                Navigator.pushNamed(context, R.exportSeedPhrase);
+              },
+              child: SFText(
+                keyText: LocaleKeys.press_and_hold_to_reveal,
+                style: TextStyles.bold18White,
+              ),
+            ),
+            const SizedBox(
+              height: 16.0,
+            ),
+            // ActivationCodeList(),
+          ]),
+        )),
       ),
     );
   }

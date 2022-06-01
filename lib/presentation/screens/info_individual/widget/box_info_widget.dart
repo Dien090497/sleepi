@@ -1,11 +1,12 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_translate/flutter_translate.dart';
+// import 'package:flutter_translate/flutter_translate.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
 import 'package:slee_fi/common/widgets/sf_buttons.dart';
 import 'package:slee_fi/common/widgets/sf_percent_border.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
-import 'package:slee_fi/di/translations/keys.dart';
+import 'package:slee_fi/l10n/locale_keys.g.dart';
 
 class BoxInfoWidget extends StatelessWidget {
   const BoxInfoWidget({Key? key}) : super(key: key);
@@ -25,7 +26,7 @@ class BoxInfoWidget extends StatelessWidget {
             height: 16,
           ),
           Text(
-            '${translate(Keys.time)}: 6h -8h',
+            '${LocaleKeys.time.tr()}: 6h -8h',
             style: TextStyles.lightGrey14,
           ),
           const SizedBox(
@@ -36,7 +37,7 @@ class BoxInfoWidget extends StatelessWidget {
             children: [
               const Spacer(),
               SFButton(
-                text: Keys.quality,
+                text: LocaleKeys.quality,
                 textStyle: TextStyles.blue14,
                 color: Colors.blue.withOpacity(0.05),
                 radius: 50,
@@ -45,7 +46,7 @@ class BoxInfoWidget extends StatelessWidget {
                 width: 8,
               ),
               SFButton(
-                text: Keys.flexibleBed,
+                text: LocaleKeys.flexible_bed,
                 textStyle: TextStyles.green14,
                 color: Colors.green.withOpacity(0.05),
                 radius: 50,
@@ -78,7 +79,11 @@ class BoxInfoWidget extends StatelessWidget {
               ),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                child:  SFText(keyText: Keys.level, args: const {'num': '5'}, style: TextStyles.white10,),
+                child: SFText(
+                  keyText: LocaleKeys.level,
+                  args: const {'num': '5'},
+                  style: TextStyles.white10,
+                ),
               )
             ],
           ),
@@ -98,7 +103,10 @@ class BoxInfoWidget extends StatelessWidget {
               ),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                child: Text('${translate(Keys.bedMint)} 0/7', style: TextStyles.white10,),
+                child: Text(
+                  '${LocaleKeys.bed_mint.tr()} 0/7',
+                  style: TextStyles.white10,
+                ),
               )
             ],
           ),

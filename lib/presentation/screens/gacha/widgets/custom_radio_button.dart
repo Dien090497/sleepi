@@ -5,7 +5,11 @@ class CustomRadio extends StatefulWidget {
   final int value;
   final int groupValue;
   final void Function(int) onChanged;
-  const CustomRadio({Key? key, required this.value, required this.groupValue, required this.onChanged})
+  const CustomRadio(
+      {Key? key,
+      required this.value,
+      required this.groupValue,
+      required this.onChanged})
       : super(key: key);
 
   @override
@@ -21,10 +25,9 @@ class _CustomRadioState extends State<CustomRadio> {
       onTap: () => widget.onChanged(widget.value),
       child: Container(
         decoration: BoxDecoration(
-          shape: BoxShape.circle,
-          color: selected ? AppColors.transparent : Colors.grey,
-          border: Border.all(color: AppColors.greyBottomNavBar)
-        ),
+            shape: BoxShape.circle,
+            color: selected ? AppColors.transparent : Colors.grey,
+            border: Border.all(color: AppColors.greyBottomNavBar)),
         child: Icon(
           Icons.circle,
           size: 12,

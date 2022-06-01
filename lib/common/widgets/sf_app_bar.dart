@@ -9,6 +9,7 @@ class SFAppBar extends AppBar {
     TextStyle? textStyle,
     VoidCallback? onPressedBack,
     bool toUpperCase = false,
+    EdgeInsets? paddingLeading,
     Color? backgroundColor,
     required BuildContext context,
     Key? key,
@@ -16,17 +17,17 @@ class SFAppBar extends AppBar {
           backgroundColor: backgroundColor ?? AppColors.transparent,
           shadowColor: backgroundColor,
           automaticallyImplyLeading: false,
-          leadingWidth: 32,
+          leadingWidth: 48,
           elevation: 0,
-          leading: GestureDetector(
-            onTap: onPressedBack ?? () => Navigator.maybePop(context),
-            child: const SFBackButton(),
+          leading:  const Padding(
+            padding: EdgeInsets.only(left: 16),
+            child: SFBackButton(),
           ),
           // centerTitle: true,
           title: SFText(
             keyText: title ?? "",
             style: textStyle,
-            toUpperCase: toUpperCase,
+            stringCase: toUpperCase,
           ),
           key: key,
         );

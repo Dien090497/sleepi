@@ -9,7 +9,7 @@ import 'package:slee_fi/common/widgets/sf_drop_down.dart';
 import 'package:slee_fi/common/widgets/sf_logo.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
 import 'package:slee_fi/common/widgets/sf_textfield.dart';
-import 'package:slee_fi/di/translations/keys.dart';
+import 'package:slee_fi/l10n/locale_keys.g.dart';
 import 'package:slee_fi/presentation/screens/login_signup/widgets/login_box.dart';
 
 class EnterActivationCodeScreen extends StatelessWidget {
@@ -22,7 +22,7 @@ class EnterActivationCodeScreen extends StatelessWidget {
         backgroundColor: AppColors.transparent,
         appBar: SFAppBar(
           context: context,
-          title: Keys.activationCodeLanguageLowercase,
+          title: LocaleKeys.activation_code_language_lowercase,
           textStyle: TextStyles.bold18LightWhite,
         ),
         body: SafeArea(
@@ -40,60 +40,64 @@ class EnterActivationCodeScreen extends StatelessWidget {
                     const SFLogo(),
                     const SizedBox(height: 40),
                     const SFTextField(
-                      labelText: Keys.pleaseEnter,
+                      labelText: LocaleKeys.please_enter,
                     ),
                     const SizedBox(height: 20),
-                    SFText(keyText: Keys.pleaseSelectYourLanguage, style: TextStyles.lightGrey14),
+                    SFText(keyText: LocaleKeys.please_select_your_language, style: TextStyles.lightGrey14),
                     const SizedBox(height: 4,),
                     SizedBox(
                       width: double.infinity,
                       height: 48,
-                      child: SFDropDown(
-                          value: "1",
-                          dropdownItems: [
-                            DropdownMenuItem(
-                              value: '1',
-                              child: SFText(
-                                keyText: Keys.english,
-                                style: TextStyles.white16,
+                      child: Expanded(
+                        child: SFDropDown(
+                            value: "1",
+                            icon: const Icon(Icons.keyboard_arrow_down, size: 24,),
+                            dropdownWidth: MediaQuery.of(context).size.width * 0.8,
+                            dropdownItems: [
+                              DropdownMenuItem(
+                                value: '1',
+                                child: SFText(
+                                  keyText: LocaleKeys.english,
+                                  style: TextStyles.white16,
+                                ),
                               ),
-                            ),
-                            DropdownMenuItem(
-                              value: '2',
-                              child: SFText(
-                                keyText: Keys.japanese,
-                                style: TextStyles.white16,
+                              DropdownMenuItem(
+                                value: '2',
+                                child: SFText(
+                                  keyText: LocaleKeys.japanese,
+                                  style: TextStyles.white16,
+                                ),
                               ),
-                            ),
-                            DropdownMenuItem(
-                              value: '3',
-                              child: SFText(
-                                keyText: "Korea",
-                                style: TextStyles.white16,
+                              DropdownMenuItem(
+                                value: '3',
+                                child: SFText(
+                                  keyText: "Korea",
+                                  style: TextStyles.white16,
+                                ),
                               ),
-                            ),
-                            DropdownMenuItem(
-                              value: '4',
-                              child: SFText(
-                                keyText: "China",
-                                style: TextStyles.white16,
+                              DropdownMenuItem(
+                                value: '4',
+                                child: SFText(
+                                  keyText: "China",
+                                  style: TextStyles.white16,
+                                ),
                               ),
-                            ),
-                            DropdownMenuItem(
-                              value: '5',
-                              child: SFText(
-                                keyText: "Spanish",
-                                style: TextStyles.white16,
+                              DropdownMenuItem(
+                                value: '5',
+                                child: SFText(
+                                  keyText: "Spanish",
+                                  style: TextStyles.white16,
+                                ),
                               ),
-                            ),
-                          ]
+                            ]
+                        ),
                       ),
                     ),
                     const SizedBox(
                       height: 20,
                     ),
                     SFButton(
-                      text: Keys.start,
+                      text: LocaleKeys.start,
                       color: AppColors.blue,
                       textStyle: TextStyles.white1w700size16,
                       onPressed: () {
@@ -105,7 +109,7 @@ class EnterActivationCodeScreen extends StatelessWidget {
                     const SizedBox(height: 16),
                     const Center(
                       child: SFTextButton(
-                        text: Keys.getActivationCode,
+                        text: LocaleKeys.get_activation_code,
                         textStyle: TextStyles.blue14,
                       ),
                     ),

@@ -8,12 +8,12 @@ class BackgroundWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration: const BoxDecoration(
-        image: DecorationImage(
-          image: AssetImage(Imgs.background),
-          fit: BoxFit.fill,
-        ),
-      ),
+      decoration:  const BoxDecoration(
+          image: DecorationImage(
+            image: AssetImage(Imgs.background),
+            fit: BoxFit.fill,
+          ),
+          ),
       child: child,
     );
   }

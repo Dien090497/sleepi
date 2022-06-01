@@ -5,7 +5,7 @@ import 'package:slee_fi/common/widgets/sf_bottom_sheet.dart';
 import 'package:slee_fi/common/widgets/sf_card.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
 import 'package:slee_fi/common/widgets/sf_textfield_text_button.dart';
-import 'package:slee_fi/di/translations/keys.dart';
+import 'package:slee_fi/l10n/locale_keys.g.dart';
 import 'package:slee_fi/resources/resources.dart';
 
 import 'modal_transfer_between.dart';
@@ -27,7 +27,7 @@ class TransferList extends StatelessWidget {
       child: ListView(
         children: [
           SFText(
-            keyText: Keys.asset,
+            keyText: LocaleKeys.asset,
             style: TextStyles.lightGrey14,
           ),
           const SizedBox(
@@ -39,8 +39,8 @@ class TransferList extends StatelessWidget {
             child: ListTile(
               leading: Image.asset(Imgs.avax),
               title: SFText(
-                keyText: Keys.avax,
-                toUpperCase: true,
+                keyText: LocaleKeys.avax,
+                stringCase: true,
                 style: TextStyles.lightWhite16,
               ),
               trailing: const Icon(
@@ -54,8 +54,8 @@ class TransferList extends StatelessWidget {
             height: 24.0,
           ),
           const SFTextFieldTextButton(
-            labelText: Keys.amount,
-            textButton: Keys.all,
+            labelText: LocaleKeys.amount,
+            textButton: LocaleKeys.all,
           ),
           const SizedBox(
             height: 4.0,

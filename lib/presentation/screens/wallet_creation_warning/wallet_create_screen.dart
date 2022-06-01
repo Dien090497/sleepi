@@ -7,7 +7,7 @@ import 'package:slee_fi/common/widgets/sf_buttons.dart';
 import 'package:slee_fi/common/widgets/sf_card.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
 import 'package:slee_fi/common/widgets/sf_textfield.dart';
-import 'package:slee_fi/di/translations/keys.dart';
+import 'package:slee_fi/l10n/locale_keys.g.dart';
 
 class WalletCreateScreen extends StatelessWidget {
   const WalletCreateScreen({Key? key}) : super(key: key);
@@ -19,7 +19,7 @@ class WalletCreateScreen extends StatelessWidget {
         backgroundColor: AppColors.transparent,
         appBar: SFAppBar(
           context: context,
-          title: Keys.createWallet,
+          title: LocaleKeys.create_wallet,
           textStyle: TextStyles.bold18LightWhite,
         ),
         body: SafeArea(
@@ -30,7 +30,7 @@ class WalletCreateScreen extends StatelessWidget {
                 child: Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: SFButton(
-                    text: Keys.createWallet,
+                    text: LocaleKeys.create_wallet,
                     textStyle: TextStyles.w600WhiteSize16,
                     color: AppColors.blue,
                     onPressed: () {},
@@ -48,7 +48,7 @@ class WalletCreateScreen extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         SFText(
-                          keyText: Keys.emailVerificationCode,
+                          keyText: LocaleKeys.email_verification_code,
                           style: TextStyles.lightGrey14,
                         ),
                         const SizedBox(
@@ -69,7 +69,7 @@ class WalletCreateScreen extends StatelessWidget {
                                 ),
                               ),
                               SFTextButton(
-                                text: Keys.sendCode,
+                                text: LocaleKeys.send_code,
                                 textStyle: TextStyles.blue12,
                               ),
                             ],

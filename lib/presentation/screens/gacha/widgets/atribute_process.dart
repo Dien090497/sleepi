@@ -43,18 +43,19 @@ class AttributeProcessWidget extends StatelessWidget {
             ),
           ),
           const SizedBox(width: 35),
-          isUpGrade ?
-          Padding(
-            padding: const EdgeInsets.only(left: 5),
-            child: SFText(
-              keyText: '${(valueActive / totalValue * 100).toStringAsFixed(0)} %',
-              style: TextStyles.boldWhite14,
-            ),
-          )
+          isUpGrade
+              ? Padding(
+                  padding: const EdgeInsets.only(left: 5),
+                  child: SFText(
+                    keyText:
+                        '${(valueActive / totalValue * 100).toStringAsFixed(0)} %',
+                    style: TextStyles.boldWhite14,
+                  ),
+                )
               : SFText(
-            keyText: (valueActive / totalValue * 10).toStringAsFixed(1),
-            style: TextStyles.boldWhite14,
-          ),
+                  keyText: (valueActive / totalValue * 10).toStringAsFixed(1),
+                  style: TextStyles.boldWhite14,
+                ),
         ],
       ),
     );

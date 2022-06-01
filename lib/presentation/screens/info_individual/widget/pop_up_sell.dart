@@ -7,7 +7,7 @@ import 'package:slee_fi/common/widgets/sf_card.dart';
 import 'package:slee_fi/common/widgets/sf_dialog.dart';
 import 'package:slee_fi/common/widgets/sf_icon.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
-import 'package:slee_fi/di/translations/keys.dart';
+import 'package:slee_fi/l10n/locale_keys.g.dart';
 import 'package:slee_fi/resources/resources.dart';
 
 class PopUpSell extends StatefulWidget {
@@ -52,7 +52,7 @@ class _PopUpSellState extends State<PopUpSell> {
           Column(
             children: [
               SFText(
-                  keyText: step == 2 ? Keys.confirmToSell : Keys.sell,
+                  keyText: step == 2 ? LocaleKeys.confirm_to_sell : LocaleKeys.sell,
                   style: TextStyles.white1w700size18),
               const SizedBox(height: 20),
               if (step < 2) SFIcon(widget.icon),
@@ -74,7 +74,7 @@ class _PopUpSellState extends State<PopUpSell> {
                 Align(
                   alignment: Alignment.centerLeft,
                   child: SFText(
-                    keyText: Keys.sellingPrice,
+                    keyText: LocaleKeys.selling_price,
                     style: TextStyles.lightGrey14,
                   ),
                 ),
@@ -87,7 +87,7 @@ class _PopUpSellState extends State<PopUpSell> {
                 children: [
                   Expanded(
                     child: SFButton(
-                      text: Keys.cancel,
+                      text: LocaleKeys.cancel,
                       onPressed: () {
                         Navigator.pop(context);
                       },
@@ -98,7 +98,7 @@ class _PopUpSellState extends State<PopUpSell> {
                   const SizedBox(width: 12),
                   Expanded(
                     child: SFButton(
-                      text: step < 2 ? Keys.next : Keys.confirm,
+                      text: step < 2 ? LocaleKeys.next : LocaleKeys.confirm,
                       textStyle: TextStyles.white16,
                       gradient: AppColors.gradientBlueButton,
                       onPressed: () {
@@ -141,7 +141,8 @@ class _Confirm extends StatelessWidget {
             Expanded(
               flex: 3,
               child: SFText(
-                  keyText: Keys.listPrice, style: TextStyles.lightGrey14),
+                  keyText: LocaleKeys.listing_cancel,
+                  style: TextStyles.lightGrey14),
             ),
             Expanded(
               child: SFText(
@@ -158,7 +159,8 @@ class _Confirm extends StatelessWidget {
             Expanded(
               flex: 3,
               child: SFText(
-                  keyText: Keys.artistRoyalties, style: TextStyles.lightGrey14),
+                  keyText: LocaleKeys.artist_royalties,
+                  style: TextStyles.lightGrey14),
             ),
             Expanded(
               child: SFText(
@@ -175,7 +177,8 @@ class _Confirm extends StatelessWidget {
             Expanded(
               flex: 3,
               child: SFText(
-                  keyText: Keys.transactionFee, style: TextStyles.lightGrey14),
+                  keyText: LocaleKeys.transaction_fee,
+                  style: TextStyles.lightGrey14),
             ),
             Expanded(
               child: SFText(
@@ -192,11 +195,12 @@ class _Confirm extends StatelessWidget {
             Expanded(
               flex: 3,
               child: SFText(
-                  keyText: Keys.listingCancel, style: TextStyles.lightGrey14),
+                  keyText: LocaleKeys.listing_cancel,
+                  style: TextStyles.lightGrey14),
             ),
             Expanded(
               child: SFText(
-                keyText: Keys.free,
+                keyText: LocaleKeys.free,
                 style: TextStyles.lightWhite16,
                 textAlign: TextAlign.right,
               ),
@@ -257,11 +261,11 @@ class _Detail extends StatelessWidget {
               Expanded(
                 flex: 3,
                 child: SFText(
-                    keyText: Keys.classSf, style: TextStyles.lightGrey14),
+                    keyText: LocaleKeys.class_sf, style: TextStyles.lightGrey14),
               ),
               Expanded(
                 child: SFText(
-                    keyText: Keys.level,
+                    keyText: LocaleKeys.level,
                     args: const {'num': ''},
                     style: TextStyles.lightGrey14),
               ),
@@ -277,7 +281,7 @@ class _Detail extends StatelessWidget {
                     const SFIcon(Ics.icTwoEyes, color: AppColors.blue),
                     const SizedBox(width: 12),
                     SFText(
-                        keyText: Keys.sleep,
+                        keyText: LocaleKeys.sleep,
                         style: TextStyles.lightWhite16W700),
                   ],
                 ),
@@ -296,11 +300,12 @@ class _Detail extends StatelessWidget {
               Expanded(
                 flex: 3,
                 child: SFText(
-                    keyText: Keys.durability, style: TextStyles.lightGrey14),
+                    keyText: LocaleKeys.durability,
+                    style: TextStyles.lightGrey14),
               ),
               Expanded(
                 child: SFText(
-                    keyText: Keys.bedMint, style: TextStyles.lightGrey14),
+                    keyText: LocaleKeys.bed_mint, style: TextStyles.lightGrey14),
               ),
             ],
           ),

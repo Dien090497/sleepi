@@ -3,7 +3,7 @@ import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
 import 'package:slee_fi/common/widgets/sf_card.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
-import 'package:slee_fi/di/translations/keys.dart';
+import 'package:slee_fi/l10n/locale_keys.g.dart';
 
 class TabPendingDetail extends StatelessWidget {
   const TabPendingDetail({Key? key}) : super(key: key);
@@ -26,38 +26,38 @@ class TabPendingDetail extends StatelessWidget {
               ),
               Expanded(
                   child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  SFText(
-                    keyText: Keys.confirm,
-                    style: TextStyles.bold16Blue,
-                  ),
-                  const SizedBox(
-                    height: 4.0,
-                  ),
-                  SFText(
-                    keyText: "27/04/2022  14:08",
-                    style: TextStyles.lightGrey14,
-                  ),
-                ],
-              )),
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      SFText(
+                        keyText: LocaleKeys.confirm,
+                        style: TextStyles.bold16Blue,
+                      ),
+                      const SizedBox(
+                        height: 4.0,
+                      ),
+                      SFText(
+                        keyText: "27/04/2022  14:08",
+                        style: TextStyles.lightGrey14,
+                      ),
+                    ],
+                  )),
               Expanded(
                   child: Column(
-                crossAxisAlignment: CrossAxisAlignment.end,
-                children: [
-                  SFText(
-                    keyText: "+1 NFT",
-                    style: TextStyles.bold16Blue,
-                  ),
-                  const SizedBox(
-                    height: 4.0,
-                  ),
-                  SFText(
-                    keyText: "53LqDpU...wihRe3",
-                    style: TextStyles.lightGrey14,
-                  ),
-                ],
-              )),
+                    crossAxisAlignment: CrossAxisAlignment.end,
+                    children: [
+                      SFText(
+                        keyText: "+1 NFT",
+                        style: TextStyles.bold16Blue,
+                      ),
+                      const SizedBox(
+                        height: 4.0,
+                      ),
+                      SFText(
+                        keyText: "53LqDpU...wihRe3",
+                        style: TextStyles.lightGrey14,
+                      ),
+                    ],
+                  )),
             ],
           ),
         )

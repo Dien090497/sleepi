@@ -7,7 +7,7 @@ import 'package:slee_fi/common/widgets/sf_buttons.dart';
 import 'package:slee_fi/common/widgets/sf_card.dart';
 import 'package:slee_fi/common/widgets/sf_icon.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
-import 'package:slee_fi/di/translations/keys.dart';
+import 'package:slee_fi/l10n/locale_keys.g.dart';
 import 'package:slee_fi/resources/resources.dart';
 
 class RecycleScreen extends StatelessWidget {
@@ -46,7 +46,7 @@ class RecycleScreen extends StatelessWidget {
                       Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 20),
                         child: SFText(
-                          keyText: Keys.bedRecycle,
+                          keyText: LocaleKeys.bed_recycle,
                           style: TextStyles.boldWhite18,
                         ),
                       ),
@@ -95,7 +95,7 @@ class RecycleScreen extends StatelessWidget {
                         child: Row(
                           children: [
                             SFText(
-                              keyText: Keys.token,
+                              keyText: LocaleKeys.token,
                               style: TextStyles.lightGrey16,
                             ),
                             const SizedBox(width: 4),
@@ -125,54 +125,95 @@ class RecycleScreen extends StatelessWidget {
                     ),
                   ),
                   child: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 15, vertical: 10),
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.start,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        const SizedBox(height: 20,),
-                        SFText(keyText: Keys.successRate, style: TextStyles.lightWhite14,),
-                        const SizedBox(height: 20,),
+                        const SizedBox(
+                          height: 20,
+                        ),
+                        SFText(
+                          keyText: LocaleKeys.success_rate,
+                          style: TextStyles.lightWhite14,
+                        ),
+                        const SizedBox(
+                          height: 20,
+                        ),
                         Container(
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(15),
                             color: AppColors.white.withOpacity(0.05),
                           ),
                           child: Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: 20, vertical: 20),
                             child: Column(
                               children: [
-                                 Row(
-                                    children: [
-                                      SFText(keyText: Keys.commonBedBox, style: TextStyles.white14,),
-                                      const Spacer(),
-                                      SFText(keyText: '35%', style: TextStyles.lightWhite14,),
-                                    ],
-                                  ),
-                                const SizedBox(height: 15,),
-                                const Divider(thickness: 0.3, color: AppColors.lightWhite, height: 1,),
-                                const SizedBox(height: 15,),
                                 Row(
                                   children: [
-                                    SFText(keyText: Keys.failure, style: TextStyles.white14,),
+                                    SFText(
+                                      keyText: LocaleKeys.common_bed,
+                                      style: TextStyles.white14,
+                                    ),
                                     const Spacer(),
-                                    SFText(keyText: '65%', style: TextStyles.lightWhite14,),
+                                    SFText(
+                                      keyText: '35%',
+                                      style: TextStyles.lightWhite14,
+                                    ),
+                                  ],
+                                ),
+                                const SizedBox(
+                                  height: 15,
+                                ),
+                                const Divider(
+                                  thickness: 0.3,
+                                  color: AppColors.lightWhite,
+                                  height: 1,
+                                ),
+                                const SizedBox(
+                                  height: 15,
+                                ),
+                                Row(
+                                  children: [
+                                    SFText(
+                                      keyText: LocaleKeys.failure,
+                                      style: TextStyles.white14,
+                                    ),
+                                    const Spacer(),
+                                    SFText(
+                                      keyText: '65%',
+                                      style: TextStyles.lightWhite14,
+                                    ),
                                   ],
                                 ),
                               ],
                             ),
                           ),
                         ),
-                        const SizedBox(height: 40,),
-                        SFText(keyText: Keys.whatRecycle, style: TextStyles.lightWhite14,),
-                        const SizedBox(height: 10,),
-                        SFText(keyText: Keys.bodyRecycle, style: TextStyles.white14,),
-                        const SizedBox(height: 40,),
+                        const SizedBox(
+                          height: 40,
+                        ),
+                        SFText(
+                          keyText: LocaleKeys.what_recycle,
+                          style: TextStyles.lightWhite14,
+                        ),
+                        const SizedBox(
+                          height: 10,
+                        ),
+                        SFText(
+                          keyText: LocaleKeys.body_recycle,
+                          style: TextStyles.white14,
+                        ),
+                        const SizedBox(
+                          height: 40,
+                        ),
                         Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 10),
                           child: Center(
                             child: SFButton(
-                              text: Keys.recycle,
+                              text: LocaleKeys.recycle,
                               textStyle: TextStyles.white16,
                               radius: 100,
                               gradient: AppColors.gradientBlueButton,

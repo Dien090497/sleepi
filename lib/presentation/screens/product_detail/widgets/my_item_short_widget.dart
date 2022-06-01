@@ -6,7 +6,8 @@ import 'package:slee_fi/common/widgets/sf_text.dart';
 import 'package:slee_fi/presentation/screens/product_detail/widgets/top_left_banner.dart';
 
 class MyItemShortWidget extends StatelessWidget {
-  const MyItemShortWidget({Key? key, required this.icon, this.color}) : super(key: key);
+  const MyItemShortWidget({Key? key, required this.icon, this.color})
+      : super(key: key);
 
   final String icon;
   final Color? color;
@@ -48,7 +49,7 @@ class MyItemShortWidget extends StatelessWidget {
                       border: Border.all(color: AppColors.light4),
                     ),
                     padding:
-                    const EdgeInsets.symmetric(vertical: 5, horizontal: 16),
+                        const EdgeInsets.symmetric(vertical: 5, horizontal: 16),
                     alignment: Alignment.center,
                     child: SFText(
                       keyText: 'IDIDIDID',
@@ -62,7 +63,7 @@ class MyItemShortWidget extends StatelessWidget {
                         // border: Border.all(color: AppColors.light4),
                         color: AppColors.green.withOpacity(0.15)),
                     padding:
-                    const EdgeInsets.symmetric(vertical: 4, horizontal: 12),
+                        const EdgeInsets.symmetric(vertical: 4, horizontal: 12),
                     alignment: Alignment.center,
                     child: SFText(
                       keyText: '25%',

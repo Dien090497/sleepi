@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
-import 'package:slee_fi/di/translations/keys.dart';
+import 'package:slee_fi/l10n/locale_keys.g.dart';
 
 class NFTItem extends StatelessWidget {
   const NFTItem({Key? key}) : super(key: key);
@@ -42,7 +42,7 @@ class NFTItem extends StatelessWidget {
               borderRadius: BorderRadius.circular(16),
             ),
             padding: const EdgeInsets.symmetric(vertical: 2, horizontal: 12),
-            child: SFText(keyText: Keys.use),
+            child: SFText(keyText: LocaleKeys.use),
           ),
         ],
       ),

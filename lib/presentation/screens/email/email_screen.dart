@@ -8,7 +8,7 @@ import 'package:slee_fi/common/widgets/sf_card.dart';
 import 'package:slee_fi/common/widgets/sf_textfield.dart';
 import 'package:slee_fi/common/widgets/sf_textfield_password.dart';
 import 'package:slee_fi/common/widgets/sf_textfield_text_button.dart';
-import 'package:slee_fi/di/translations/keys.dart';
+import 'package:slee_fi/l10n/locale_keys.g.dart';
 
 class EmailScreen extends StatelessWidget {
   const EmailScreen({Key? key}) : super(key: key);
@@ -20,7 +20,7 @@ class EmailScreen extends StatelessWidget {
         backgroundColor: AppColors.transparent,
         appBar: SFAppBar(
           context: context,
-          title: Keys.email,
+          title: LocaleKeys.email,
           textStyle: TextStyles.bold18LightWhite,
         ),
         body: SafeArea(
@@ -33,27 +33,37 @@ class EmailScreen extends StatelessWidget {
                   child: ListView(
                     children: [
                       SFCard(
-                        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 24),
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 16, vertical: 24),
                         child: Column(
-                          children:const [
-                            SFTextField(labelText: Keys.newEmail),
-                            SizedBox(height: 20,),
-                            SFTextFieldTextButton(labelText: Keys.verificationCode,),
-                            SizedBox(height: 20,),
-                            SFTextFieldPassword(labelText: Keys.password,),
+                          children: const [
+                            SFTextField(labelText: LocaleKeys.new_email),
+                            SizedBox(
+                              height: 20,
+                            ),
+                            SFTextFieldTextButton(
+                              labelText: LocaleKeys.verification_code,
+                            ),
+                            SizedBox(
+                              height: 20,
+                            ),
+                            SFTextFieldPassword(
+                              labelText: LocaleKeys.password,
+                            ),
                           ],
                         ),
                       ),
                     ],
                   ),
                 ),
-                SFButton(
-                  text: Keys.save,
+                 const SFButton(
+                  text: LocaleKeys.save,
                   textStyle: TextStyles.w600WhiteSize16,
                   gradient: AppColors.gradientBlueButton,
                   width: double.infinity,
-                  onPressed: () {},
-                )
+                  onPressed: null,
+                ),
+                const SizedBox(height: 24,),
               ],
             ),
           ),

@@ -3,7 +3,7 @@ import 'package:flutter_date_pickers/flutter_date_pickers.dart' as dp;
 import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
 import 'package:slee_fi/common/widgets/sf_dialog.dart';
-import 'package:slee_fi/di/translations/keys.dart';
+import 'package:slee_fi/l10n/locale_keys.g.dart';
 import 'package:slee_fi/presentation/screens/result/widgets/chart_statistic_share.dart';
 
 import 'chart_title.dart';
@@ -24,7 +24,7 @@ class TabMonth extends StatelessWidget {
                 ChartMonthPicker(
                   selectedDate: DateTime.now(),
                   firstAllowedDate:
-                  DateTime.now().subtract(const Duration(days: 45)),
+                      DateTime.now().subtract(const Duration(days: 45)),
                   lastAllowedDate: DateTime.now().add(const Duration(days: 45)),
                   onNewSelected: (period) {},
                 )
@@ -34,17 +34,22 @@ class TabMonth extends StatelessWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: const [
-              Icon(Icons.arrow_back_ios, size: 16, color: AppColors.lightGrey,),
+              Icon(
+                Icons.arrow_back_ios,
+                size: 16,
+                color: AppColors.lightGrey,
+              ),
               SizedBox(width: 12),
               Text('April 20th ~ May 19th, 2022'),
               SizedBox(width: 12),
-              Icon(Icons.arrow_forward_ios, size: 16, color: AppColors.lightGrey),
+              Icon(Icons.arrow_forward_ios,
+                  size: 16, color: AppColors.lightGrey),
             ],
           ),
         ),
         const SizedBox(height: 33),
         const ChartTitle(
-          title: Keys.slft,
+          title: LocaleKeys.slft,
           textStyleTitle: TextStyles.bold16LightWhite,
           toUpperCase: true,
           padding: EdgeInsets.zero,
@@ -53,59 +58,53 @@ class TabMonth extends StatelessWidget {
         ChartStatisticShare(),
         const SizedBox(height: 40),
         const ChartTitle(
-            title: Keys.averageSleepScore,
+            title: LocaleKeys.average_sleep_score,
             textStyleTitle: TextStyles.bold16LightWhite,
             result: "80/100",
             textStyleResult: TextStyles.bold16Blue,
-            padding: EdgeInsets.zero
-        ),
+            padding: EdgeInsets.zero),
         const SizedBox(height: 12),
         ChartStatisticShare(),
         const SizedBox(height: 40),
         const ChartTitle(
-          title: Keys.bedTime,
+          title: LocaleKeys.bed_time,
           textStyleTitle: TextStyles.bold16LightWhite,
         ),
         const SizedBox(height: 12),
         ChartStatisticShare(),
         const SizedBox(height: 40),
         const ChartTitle(
-            title: Keys.sleepOnsetTime,
+            title: LocaleKeys.sleep_onset_time,
             textStyleTitle: TextStyles.bold16LightWhite,
-            padding: EdgeInsets.zero
-        ),
+            padding: EdgeInsets.zero),
         const SizedBox(height: 12),
         ChartStatisticShare(),
         const SizedBox(height: 40),
         const ChartTitle(
-            title: Keys.wokeUp,
+            title: LocaleKeys.woke_up,
             textStyleTitle: TextStyles.bold16LightWhite,
-            padding: EdgeInsets.zero
-        ),
+            padding: EdgeInsets.zero),
         const SizedBox(height: 12),
         ChartStatisticShare(),
         const SizedBox(height: 40),
         const ChartTitle(
-            title: Keys.sleepDuration,
+            title: LocaleKeys.sleep_duration,
             textStyleTitle: TextStyles.bold16LightWhite,
-            padding: EdgeInsets.zero
-        ),
+            padding: EdgeInsets.zero),
         const SizedBox(height: 4),
         ChartStatisticShare(),
         const SizedBox(height: 16),
         const ChartTitle(
-            title: Keys.timeInBed,
+            title: LocaleKeys.time_in_bed,
             textStyleTitle: TextStyles.bold16LightWhite,
-            padding: EdgeInsets.zero
-        ),
+            padding: EdgeInsets.zero),
         const SizedBox(height: 12),
         ChartStatisticShare(),
         const SizedBox(height: 40),
         const ChartTitle(
-            title: Keys.nocturnalAwakening,
+            title: LocaleKeys.nocturnal_awakenings,
             textStyleTitle: TextStyles.bold16LightWhite,
-            padding: EdgeInsets.zero
-        ),
+            padding: EdgeInsets.zero),
         const SizedBox(height: 12),
         ChartStatisticShare(),
       ],

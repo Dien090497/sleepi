@@ -1,9 +1,10 @@
+import 'dart:math' as math;
+
 import 'package:flutter/material.dart';
 import 'package:pie_chart/pie_chart.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
-import 'package:slee_fi/di/translations/keys.dart';
+import 'package:slee_fi/l10n/locale_keys.g.dart';
 import 'package:slee_fi/presentation/screens/gacha/widgets/info_chart_color.dart';
-import 'dart:math' as math;
 
 class ItemProbability extends StatelessWidget {
   const ItemProbability({Key? key}) : super(key: key);
@@ -12,11 +13,11 @@ class ItemProbability extends StatelessWidget {
   Widget build(BuildContext context) {
     final Size size = MediaQuery.of(context).size;
     final dataMap = <String, double>{
-      Keys.commonBed: 23,
-      Keys.uncommonBed: 32,
-      Keys.rareBed: 12,
-      Keys.epicBed: 10,
-      Keys.legendaryBed: 28,
+      LocaleKeys.common_bed: 23,
+      LocaleKeys.uncommon_bed: 32,
+      LocaleKeys.rare_bed: 12,
+      LocaleKeys.epic_bed: 10,
+      LocaleKeys.legendary_bed: 28,
     };
     final colorList = <Color>[
       AppColors.commonBed,
@@ -36,7 +37,7 @@ class ItemProbability extends StatelessWidget {
         showLegends: false,
       ),
       chartValuesOptions: const ChartValuesOptions(
-        showChartValues: false  ,
+        showChartValues: false,
       ),
     );
     return Padding(
@@ -57,12 +58,35 @@ class ItemProbability extends StatelessWidget {
                 },
               ),
             ),
-            const SizedBox(height: 30,),
-            InfoChartColor(typeBed: Keys.commonBed, valueInChart: dataMap[Keys.commonBed]!.toStringAsFixed(0), color: colorList[0],),
-            InfoChartColor(typeBed: Keys.uncommonBed, valueInChart: dataMap[Keys.uncommonBed]!.toStringAsFixed(0), color: colorList[1],),
-            InfoChartColor(typeBed: Keys.rareBed, valueInChart: dataMap[Keys.rareBed]!.toStringAsFixed(0), color: colorList[2],),
-            InfoChartColor(typeBed: Keys.epicBed, valueInChart: dataMap[Keys.epicBed]!.toStringAsFixed(0), color: colorList[3],),
-            InfoChartColor(typeBed: Keys.legendaryBed, valueInChart: dataMap[Keys.legendaryBed]!.toStringAsFixed(0), color: colorList[4],),
+            const SizedBox(
+              height: 30,
+            ),
+            InfoChartColor(
+              typeBed: LocaleKeys.common_bed,
+              valueInChart: dataMap[LocaleKeys.common_bed]!.toStringAsFixed(0),
+              color: colorList[0],
+            ),
+            InfoChartColor(
+              typeBed: LocaleKeys.uncommon_bed,
+              valueInChart: dataMap[LocaleKeys.uncommon_bed]!.toStringAsFixed(0),
+              color: colorList[1],
+            ),
+            InfoChartColor(
+              typeBed: LocaleKeys.rare_bed,
+              valueInChart: dataMap[LocaleKeys.rare_bed]!.toStringAsFixed(0),
+              color: colorList[2],
+            ),
+            InfoChartColor(
+              typeBed: LocaleKeys.epic_bed,
+              valueInChart: dataMap[LocaleKeys.epic_bed]!.toStringAsFixed(0),
+              color: colorList[3],
+            ),
+            InfoChartColor(
+              typeBed: LocaleKeys.legendary_bed,
+              valueInChart:
+                  dataMap[LocaleKeys.legendary_bed]!.toStringAsFixed(0),
+              color: colorList[4],
+            ),
           ],
         ),
       ),

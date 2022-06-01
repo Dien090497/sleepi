@@ -4,7 +4,7 @@ import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
 import 'package:slee_fi/common/widgets/sf_gridview.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
-import 'package:slee_fi/di/translations/keys.dart';
+import 'package:slee_fi/l10n/locale_keys.g.dart';
 import 'package:slee_fi/presentation/screens/info_individual/widget/item_bed.dart';
 
 class MintFromWidget extends StatelessWidget {
@@ -30,7 +30,7 @@ class MintFromWidget extends StatelessWidget {
             child: Align(
               alignment: Alignment.centerLeft,
               child: SFText(
-                keyText: Keys.mintFrom,
+                keyText: LocaleKeys.mint_from,
                 style: TextStyles.bold18LightWhite,
               ),
             ),

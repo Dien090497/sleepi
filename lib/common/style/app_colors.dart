@@ -88,7 +88,7 @@ class AppColors {
       begin: Alignment.topLeft,
       end: Alignment.bottomRight);
 
-  static LinearGradient gradientBluePurpleStaking =  LinearGradient(
+  static LinearGradient gradientBluePurpleStaking = LinearGradient(
       colors: [blue.withOpacity(0.3), purple.withOpacity(0.3)],
       begin: Alignment.topLeft,
       end: Alignment.bottomRight);

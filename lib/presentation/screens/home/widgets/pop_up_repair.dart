@@ -6,7 +6,7 @@ import 'package:slee_fi/common/widgets/sf_card.dart';
 import 'package:slee_fi/common/widgets/sf_dialog.dart';
 import 'package:slee_fi/common/widgets/sf_icon.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
-import 'package:slee_fi/di/translations/keys.dart';
+import 'package:slee_fi/l10n/locale_keys.g.dart';
 
 class PopUpRepair extends StatelessWidget {
   const PopUpRepair(
@@ -45,14 +45,14 @@ class PopUpRepair extends StatelessWidget {
         Column(
           children: [
             SFText(
-              keyText: Keys.repair,
+              keyText: LocaleKeys.repair,
               style: TextStyles.white1w700size16,
             ),
             const SizedBox(height: 20),
             SFIcon(icon),
             const SizedBox(height: 24),
             SFText(
-              keyText: Keys.durability,
+              keyText: LocaleKeys.durability,
               suffix: ' : 78/100',
               style: TextStyles.white16,
             ),
@@ -91,7 +91,7 @@ class PopUpRepair extends StatelessWidget {
               children: [
                 Expanded(
                   child: SFButton(
-                    text: Keys.cancel,
+                    text: LocaleKeys.cancel,
                     onPressed: onCancel,
                     textStyle: TextStyles.lightGrey16,
                     color: AppColors.light4,
@@ -100,7 +100,7 @@ class PopUpRepair extends StatelessWidget {
                 const SizedBox(width: 12),
                 Expanded(
                   child: SFButton(
-                    text: Keys.confirm,
+                    text: LocaleKeys.confirm,
                     onPressed: () {
                       onConfirm();
                       Navigator.pop(context);

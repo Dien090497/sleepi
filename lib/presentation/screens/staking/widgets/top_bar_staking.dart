@@ -3,7 +3,7 @@ import 'package:slee_fi/common/routes/app_routes.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
 import 'package:slee_fi/common/widgets/sf_statistic_resource.dart';
 import 'package:slee_fi/common/widgets/sf_sub_app_bar.dart';
-import 'package:slee_fi/di/translations/keys.dart';
+import 'package:slee_fi/l10n/locale_keys.g.dart';
 import 'package:slee_fi/resources/resources.dart';
 
 class TopBarStaking extends StatelessWidget {
@@ -18,13 +18,14 @@ class TopBarStaking extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(
         vertical: 20,
+        horizontal: 16,
       ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           const Expanded(
             child: SFSubAppBar(
-              title: Keys.staking,
+              title: LocaleKeys.staking,
               textStyle: TextStyles.bold18LightWhite,
             ),
           ),

@@ -5,7 +5,7 @@ import 'package:slee_fi/common/style/text_styles.dart';
 import 'package:slee_fi/common/widgets/background_widget.dart';
 import 'package:slee_fi/common/widgets/sf_app_bar.dart';
 import 'package:slee_fi/common/widgets/sf_list_tile.dart';
-import 'package:slee_fi/di/translations/keys.dart';
+import 'package:slee_fi/l10n/locale_keys.g.dart';
 import 'package:slee_fi/presentation/screens/alarm/widgets/alarm_status_change_widget.dart';
 import 'package:slee_fi/presentation/screens/alarm/widgets/alarm_volume_change_widget.dart';
 import 'package:slee_fi/presentation/screens/alarm/widgets/snooze_status_change.dart';
@@ -29,37 +29,33 @@ class AlarmScreen extends StatelessWidget {
         backgroundColor: AppColors.transparent,
         appBar: SFAppBar(
           context: context,
-          title: Keys.alarm,
+          title: LocaleKeys.alarm,
           textStyle: TextStyles.bold18LightWhite,
         ),
         body: SafeArea(
           child: ListView(
-            padding: const EdgeInsets.symmetric(horizontal: 12.0),
+            padding: const EdgeInsets.symmetric(horizontal: 16),
             children: [
               const SizedBox(
                 height: 36.0,
               ),
               Container(
                 width: double.infinity,
-                padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                padding: const EdgeInsets.only(left: 16),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(16.0),
                   color: AppColors.white.withOpacity(0.05),
-                  boxShadow: [
-                    BoxShadow(
-                      color: AppColors.white.withOpacity(0.05),
-                      blurRadius: 4,
-                      offset: const Offset(2, 4), // Shadow position
-                    ),
-                  ],
                 ),
                 child: Column(
                   children: [
                     const AlarmStatusChangeWidget(),
                     divider,
                     SFListTile(
-                      text: Keys.music,
-                      trailing: icon,
+                      text: LocaleKeys.sound,
+                      trailing: const Padding(
+                        padding: EdgeInsets.only(right: 16),
+                        child: icon,
+                      ),
                       onPressed: () =>
                           Navigator.pushNamed(context, R.alarmSoundEffect),
                     ),
@@ -68,7 +64,7 @@ class AlarmScreen extends StatelessWidget {
                     divider,
                     const SnoozeStatusChangeWidget(),
                     divider,
-                    const AlarmVolumnChangeWidget(),
+                    const AlarmVolumeChangeWidget(),
                   ],
                 ),
               ),

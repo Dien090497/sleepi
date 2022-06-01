@@ -5,7 +5,7 @@ import 'package:slee_fi/common/widgets/sf_icon.dart';
 import 'package:slee_fi/common/widgets/sf_image_border.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
 import 'package:slee_fi/common/widgets/topbar_common.dart';
-import 'package:slee_fi/di/translations/keys.dart';
+import 'package:slee_fi/l10n/locale_keys.g.dart';
 import 'package:slee_fi/presentation/screens/info_individual/widget/attributes_widget.dart';
 import 'package:slee_fi/presentation/screens/info_individual/widget/bottom_bar.dart';
 import 'package:slee_fi/presentation/screens/info_individual/widget/bottom_bar_market_place.dart';
@@ -107,7 +107,7 @@ class InfoIndividualScreen extends StatelessWidget {
                       height: 24,
                     ),
                     SFText(
-                      keyText: Keys.attributes,
+                      keyText: LocaleKeys.attributes,
                       style: TextStyles.bold18LightWhite,
                     ),
                     const SizedBox(

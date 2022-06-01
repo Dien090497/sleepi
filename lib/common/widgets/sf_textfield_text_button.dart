@@ -4,7 +4,7 @@ import 'package:slee_fi/common/style/text_styles.dart';
 import 'package:slee_fi/common/widgets/sf_buttons.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
 import 'package:slee_fi/common/widgets/sf_textfield.dart';
-import 'package:slee_fi/di/translations/keys.dart';
+import 'package:slee_fi/l10n/locale_keys.g.dart';
 
 class SFTextFieldTextButton extends StatelessWidget {
   const SFTextFieldTextButton({
@@ -72,7 +72,7 @@ class SFTextFieldTextButton extends StatelessWidget {
                 ),
               ),
               SFTextButton(
-                text: textButton ?? Keys.sendCode,
+                text: textButton ?? LocaleKeys.send_code,
                 textStyle: textButtonStyle ?? TextStyles.blue12,
                 onPressed: onPressed,
                 // color: Colors.transparent,

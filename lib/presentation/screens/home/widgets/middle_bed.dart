@@ -6,7 +6,7 @@ import 'package:slee_fi/common/style/text_styles.dart';
 import 'package:slee_fi/common/widgets/sf_buttons.dart';
 import 'package:slee_fi/common/widgets/sf_icon.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
-import 'package:slee_fi/di/translations/keys.dart';
+import 'package:slee_fi/l10n/locale_keys.g.dart';
 
 class MiddleBed extends StatefulWidget {
   const MiddleBed({Key? key}) : super(key: key);
@@ -28,7 +28,7 @@ class _MiddleBedState extends State<MiddleBed> {
           height: 20,
         ),
         SFText(
-          keyText: Keys.mainBed,
+          keyText: LocaleKeys.main_bed,
           style: TextStyles.white18,
         ),
         const SizedBox(

@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:slee_fi/common/style/text_styles.dart';
 import 'package:slee_fi/common/widgets/overlay_container.dart';
 import 'package:slee_fi/common/widgets/sf_icon.dart';
-import 'package:slee_fi/di/translations/keys.dart';
+import 'package:slee_fi/common/widgets/sf_text.dart';
+import 'package:slee_fi/l10n/locale_keys.g.dart';
 import 'package:slee_fi/resources/resources.dart';
 
 class PopupInfoWallet extends StatefulWidget {
@@ -12,7 +14,6 @@ class PopupInfoWallet extends StatefulWidget {
 }
 
 class _PopupInfoWalletState extends State<PopupInfoWallet> {
-
   bool _dropdownShown = false;
 
   void _toggleDropdown() {
@@ -23,21 +24,28 @@ class _PopupInfoWalletState extends State<PopupInfoWallet> {
 
   @override
   Widget build(BuildContext context) {
-    return  Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 12.0),
-      child: Column(
-        children: [
-          GestureDetector(
-            onTap: _toggleDropdown,
-            child: const SFIcon(Ics.icQuestion),
-          ),
-          OverlayContainer(
-            show: _dropdownShown,
-            position: const OverlayContainerPosition(-120, 0),
-            message: Keys.displaysMessageFromWalletDetail,
-          ),
-        ],
+    return  GestureDetector(
+      onTap: _toggleDropdown,
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 12.0),
+        child: Column(
+          children: [
+            Row(
+              children: [
+                SFText(
+                    keyText: LocaleKeys.wallet_account, style: TextStyles.blue12),
+                const SizedBox(width: 6,),
+                const SFIcon(Ics.icQuestion),
+              ],
+            ),
+            OverlayContainer(
+              show: _dropdownShown,
+              message: LocaleKeys.displays_message_from_wallet_detail,
+            ),
+          ],
+        ),
       ),
+
     );
   }
 }

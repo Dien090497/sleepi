@@ -9,7 +9,7 @@ import 'package:slee_fi/common/widgets/sf_logo.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
 import 'package:slee_fi/common/widgets/sf_textfield.dart';
 import 'package:slee_fi/common/widgets/sf_textfield_text_button.dart';
-import 'package:slee_fi/di/translations/keys.dart';
+import 'package:slee_fi/l10n/locale_keys.g.dart';
 import 'package:slee_fi/presentation/screens/login_signup/widgets/login_box.dart';
 
 class LoginSignUpScreen extends StatelessWidget {
@@ -31,22 +31,22 @@ class LoginSignUpScreen extends StatelessWidget {
                 child: Column(
                   children: [
                     SFText(
-                      keyText: Keys.login,
+                      keyText: LocaleKeys.login,
                       style: TextStyles.bold18LightWhite,
-                      toUpperCase: true,
+                      stringCase: true,
                     ),
                     const SizedBox(height: 25),
                     const SFTextField(
-                      labelText: Keys.emailAddress,
-                      // hintText: Keys.emailAddress,
+                      labelText: LocaleKeys.email_address,
+                      // hintText: LocaleKeys.emailAddress,
                     ),
                     const SizedBox(height: 12),
                     const SFTextFieldTextButton(
-                      labelText: Keys.emailVerificationCode,
+                      labelText: LocaleKeys.email_verification_code,
                     ),
                     const SizedBox(height: 37),
                     SFButton(
-                      text: Keys.login,
+                      text: LocaleKeys.login,
                       color: AppColors.blue,
                       textStyle: TextStyles.w600WhiteSize16,
                       onPressed: () {
@@ -55,7 +55,9 @@ class LoginSignUpScreen extends StatelessWidget {
                       width: MediaQuery.of(context).size.width,
                     ),
                     const SizedBox(height: 10),
-                    SFText(keyText: Keys.accountLogin, style: TextStyles.blue14)
+                    SFText(
+                        keyText: LocaleKeys.account_login,
+                        style: TextStyles.blue14)
                   ],
                 ),
               ),

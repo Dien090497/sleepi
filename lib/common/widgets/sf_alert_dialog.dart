@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
 
-
-
 Future<T?> showCustomAlertDialog<T>(
     BuildContext context, {
       required Widget? children,
@@ -11,6 +9,7 @@ Future<T?> showCustomAlertDialog<T>(
       EdgeInsets? padding,
       double? width,
       double? height,
+      bool showClosed = true,
     }) async {
   return showDialog(
       context: context,
@@ -20,6 +19,7 @@ Future<T?> showCustomAlertDialog<T>(
           width: width,
           height: height,
           padding: padding,
+          showClose: showClosed,
           children: children,
         );
       });
@@ -32,6 +32,7 @@ class SFAlertDialog extends StatelessWidget {
       this.backgroundColor,
       this.padding,
       this.height,
+        this.showClose = true,
       this.width})
       : super(key: key);
 
@@ -40,6 +41,7 @@ class SFAlertDialog extends StatelessWidget {
   final EdgeInsets? padding;
   final double? height;
   final double? width;
+  final bool showClose;
 
   @override
   Widget build(BuildContext context) {
@@ -60,14 +62,14 @@ class SFAlertDialog extends StatelessWidget {
           padding: padding ?? const EdgeInsets.all(8),
           child: Column(
             children: [
-              Align(
+              showClose ? Align(
                   alignment: Alignment.topRight,
                   child: GestureDetector(
                       onTap: () => Navigator.maybePop(context),
                       child: const Icon(
                         Icons.close,
                         color: AppColors.lightGrey,
-                      ))),
+                      ))) : const SizedBox(),
               children!,
             ],
           )),

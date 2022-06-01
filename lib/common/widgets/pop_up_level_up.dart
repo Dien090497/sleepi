@@ -2,11 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
 import 'package:slee_fi/common/widgets/sf_buttons.dart';
+import 'package:slee_fi/common/widgets/sf_card.dart';
 import 'package:slee_fi/common/widgets/sf_dialog.dart';
 import 'package:slee_fi/common/widgets/sf_icon.dart';
 import 'package:slee_fi/common/widgets/sf_label_value.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
-import 'package:slee_fi/di/translations/keys.dart';
+import 'package:slee_fi/l10n/locale_keys.g.dart';
 
 class PopUpLevelUp extends StatelessWidget {
   const PopUpLevelUp(
@@ -45,7 +46,7 @@ class PopUpLevelUp extends StatelessWidget {
         Column(
           children: [
             SFText(
-              keyText: Keys.levelUp,
+              keyText: LocaleKeys.level_up,
               style: TextStyles.white1w700size16,
             ),
             const SizedBox(height: 20),
@@ -74,14 +75,36 @@ class PopUpLevelUp extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 8),
+            SFCard(
+              margin: EdgeInsets.zero,
+              padding: const EdgeInsets.symmetric(vertical: 24, horizontal: 18),
+              child: Row(
+                children: [
+                  SFText(
+                    keyText: LocaleKeys.attributes,
+                    style: TextStyles.lightGrey16,
+                  ),
+                  const SizedBox(width: 4),
+                  Expanded(
+                    child: SFText(
+                      keyText: '+2 Luck',
+                      style: TextStyles.blue16,
+                      textAlign: TextAlign.right,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            const SizedBox(height: 8),
+
             SFLabelValue(
-              label: Keys.cost,
+              label: LocaleKeys.cost,
               value: '$cost',
               styleValue: TextStyles.textColorSize16,
             ),
             const SizedBox(height: 8),
             SFLabelValue(
-              label: Keys.time,
+              label: LocaleKeys.time,
               value: '$time mins',
               styleValue: TextStyles.textColorSize16,
             ),
@@ -90,10 +113,8 @@ class PopUpLevelUp extends StatelessWidget {
               children: [
                 Expanded(
                   child: SFButton(
-                    text: Keys.cancel,
-                    onPressed: (){
-                      Navigator.pop(context);
-                    },
+                    text: LocaleKeys.cancel,
+                    onPressed: onCancel,
                     textStyle: TextStyles.lightGrey16,
                     color: AppColors.light4,
                   ),
@@ -101,7 +122,7 @@ class PopUpLevelUp extends StatelessWidget {
                 const SizedBox(width: 12),
                 Expanded(
                   child: SFButton(
-                    text: Keys.confirm,
+                    text: LocaleKeys.confirm,
                     onPressed: () {
                       onConfirm();
                       Navigator.pop(context);

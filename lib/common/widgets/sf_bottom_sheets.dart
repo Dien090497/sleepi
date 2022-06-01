@@ -11,7 +11,6 @@ Future<T?> showFilterModalBottomSheet<T>(BuildContext context) {
     shape: const RoundedRectangleBorder(
       borderRadius: BorderRadius.vertical(top: Radius.circular(40)),
     ),
-
     builder: (_) {
       return const FilterSheet();
     },

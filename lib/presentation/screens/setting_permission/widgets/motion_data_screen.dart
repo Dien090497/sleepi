@@ -5,7 +5,7 @@ import 'package:slee_fi/common/style/text_styles.dart';
 import 'package:slee_fi/common/widgets/background_widget.dart';
 import 'package:slee_fi/common/widgets/sf_buttons.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
-import 'package:slee_fi/di/translations/keys.dart';
+import 'package:slee_fi/l10n/locale_keys.g.dart';
 import 'package:slee_fi/resources/resources.dart';
 
 class MotionDataPermissionScreen extends StatelessWidget {
@@ -28,7 +28,7 @@ class MotionDataPermissionScreen extends StatelessWidget {
                   height: 24.0,
                 ),
                 SFText(
-                  keyText: Keys.motionDataPermission,
+                  keyText: LocaleKeys.motion_data_permission,
                   style: TextStyles.bold24LightWhite,
                   textAlign: TextAlign.center,
                 ),
@@ -36,7 +36,7 @@ class MotionDataPermissionScreen extends StatelessWidget {
                   height: 32.0,
                 ),
                 SFText(
-                  keyText: Keys.displaysMessageMotionDataPermission,
+                  keyText: LocaleKeys.displays_message_motion_data_permission,
                   style: TextStyles.lightGrey16,
                 ),
               ],
@@ -44,11 +44,11 @@ class MotionDataPermissionScreen extends StatelessWidget {
             Align(
               alignment: Alignment.bottomCenter,
               child: Padding(
-                padding: const EdgeInsets.all(16.0),
+                padding: const EdgeInsets.fromLTRB(16, 0, 16, 50),
                 child: SFButton(
                   height: 48,
                   width: double.infinity,
-                  text: Keys.allow,
+                  text: LocaleKeys.allow,
                   textStyle: TextStyles.w600WhiteSize16,
                   color: AppColors.blue,
                   onPressed: () =>

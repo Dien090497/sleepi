@@ -6,7 +6,8 @@ import 'package:slee_fi/common/widgets/sf_text.dart';
 import 'package:slee_fi/presentation/screens/product_detail/widgets/top_left_banner.dart';
 
 class MyJewelsShortWidget extends StatelessWidget {
-  const MyJewelsShortWidget({required this.icon, this.color, Key? key}) : super(key: key);
+  const MyJewelsShortWidget({required this.icon, this.color, Key? key})
+      : super(key: key);
 
   final String icon;
   final Color? color;
