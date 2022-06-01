@@ -41,7 +41,6 @@ abstract class  LocaleKeys {
   static const from = 'from';
   static const to = 'to';
   static const estimate = 'estimate';
-  static const ? = '?';
   static const create_wallet = 'create_wallet';
   static const you_have_already_created_a_wallet_address = 'you_have_already_created_a_wallet_address';
   static const create_a_new_wallet = 'create_a_new_wallet';
