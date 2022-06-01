@@ -17,49 +17,52 @@ class ItemBed extends StatelessWidget {
   Widget build(BuildContext context) {
     final bed = beds[i % BedType.values.length];
     return GestureDetector(
-        onTap: () {},
-        child: Container(
-          decoration: BoxDecoration(
+      onTap: () {},
+      child: Container(
+        decoration: BoxDecoration(
             color: AppColors.lightDark,
             borderRadius: BorderRadius.circular(16),
-          ),
-          child: Stack(
-            clipBehavior: Clip.hardEdge,
-            children: [
-              Positioned(
-                top: 14,
-                left: -30,
-                child: TopLeftBanner(
-                  text: bed.name,
-                  textColor: bed.color,
-                ),
+            border: Border.all(
+              color: AppColors.white.withOpacity(0.05),
+              width: 1,
+            )),
+        child: Stack(
+          clipBehavior: Clip.hardEdge,
+          children: [
+            Positioned(
+              top: 14,
+              left: -30,
+              child: TopLeftBanner(
+                text: bed.name,
+                textColor: bed.color,
               ),
-              Container(
-                alignment: Alignment.center,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    SFIcon(bed.icon, color: AppColors.blue),
-                    const SizedBox(height: 24),
-                    Container(
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(50),
-                        border: Border.all(color: AppColors.light4),
-                      ),
-                      padding: const EdgeInsets.symmetric(
-                          vertical: 8, horizontal: 16),
-                      child: SFText(
-                        keyText: 'IDIDIDID',
-                        style: TextStyles.white1w700size12,
-                      ),
+            ),
+            Container(
+              alignment: Alignment.center,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  SFIcon(bed.icon, color: AppColors.blue),
+                  const SizedBox(height: 24),
+                  Container(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(50),
+                      border: Border.all(color: AppColors.light4),
                     ),
-                  ],
-                ),
+                    padding:
+                        const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+                    child: SFText(
+                      keyText: 'IDIDIDID',
+                      style: TextStyles.white1w700size12,
+                    ),
+                  ),
+                ],
               ),
-            ],
-          ),
+            ),
+          ],
         ),
+      ),
     );
   }
 }

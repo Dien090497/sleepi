@@ -62,11 +62,13 @@ class BottomBarWidget extends StatelessWidget {
               context,
               children: [
                 PopUpLevelUp(
-                    icon: Ics.longBed,
-                    level: 3,
-                    cost: 1,
-                    time: 2300,
-                    onConfirm: () {})
+                    icon: Ics.middleBed,
+                    level: 20,
+                    cost: 21,
+                    time: 1260,
+                    onConfirm: () {
+                      Navigator.pop(context);
+                    }),
               ],
             );
           }),
@@ -77,7 +79,7 @@ class BottomBarWidget extends StatelessWidget {
                 PopUpRepair(
                   icon: Ics.shortBed,
                   cost: 120,
-                  level: 3,
+                  level: 20,
                   time: 122,
                   onConfirm: () {},
                 ),

@@ -5,8 +5,8 @@ enum UserRole { guest, admin }
 enum BedType {
   short('Short', Ics.shortBed),
   middle('Middle', Ics.middleBed),
-  long('Long', Ics.longBed),
-  flexible('Flexible', Ics.flexibleBed);
+  flexible('Flexible', Ics.flexibleBed),
+  long('Long', Ics.longBed);
 
   final String name;
   final String image;
