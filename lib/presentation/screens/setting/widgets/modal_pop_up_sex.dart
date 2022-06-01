@@ -12,7 +12,7 @@ class ModalPopUpSex extends StatelessWidget {
   Widget build(BuildContext context) {
     List<Widget> gender = [
       SFText(
-        keyText: LocaleKeys.secret,
+        keyText: LocaleKeys.,
         style: TextStyles.bold16LightWhite,
       ),
       SFText(keyText: LocaleKeys.secret, style: TextStyles.bold16LightWhite),
