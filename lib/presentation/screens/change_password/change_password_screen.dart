@@ -38,9 +38,7 @@ class ChangePasswordScreen extends StatelessWidget {
                         child: Column(
                           children: const [
                             SFTextField(labelText: LocaleKeys.email),
-                            SizedBox(
-                              height: 20,
-                            ),
+                            SizedBox(height: 20),
                             SFTextFieldTextButton(
                               labelText: LocaleKeys.verification_code,
                             ),
