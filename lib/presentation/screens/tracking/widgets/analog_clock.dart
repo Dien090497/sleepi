@@ -5,6 +5,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'analog_clock_painter.dart';
 
+// ignore_for_file: no_logic_in_create_state
 class AnalogClock extends StatefulWidget {
   final DateTime? datetime;
   final bool showDigitalClock;
