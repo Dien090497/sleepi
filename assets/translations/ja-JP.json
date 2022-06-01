@@ -69,7 +69,6 @@
   "average_sleep_duration": "平均睡眠時間",
   "average_sleep_quality": "平均睡眠効率",
   "alarm": "アラーム",
-  "multi_chain_switch": "チェーン切り替え",
   "version": "バージョン",
   "profile": "プロフィール",
   "email": "メール",
@@ -78,9 +77,9 @@
   "vibration": "バイブ",
   "snooze": "スヌーズ",
   "volume": "音量",
-  "female": "女性",
-  "male": "男性",
-  "other": "その他",
+  "fe_male": "女性",
+  "sex_male": "男性",
+  "sex_other": "その他",
   "done": "完了",
   "used": "使用済",
   "available": "",
@@ -100,7 +99,6 @@
   "allow_to_access_motion_data": "〇〇 にモーションデータへのアクセスを許可する",
   "allow": "許可",
   "setup_microphone_access": "マイクのアクセスを設定する",
-  "would_like_to_send_you_notifications": "〇〇 は通知を送信します。許可しますか。",
   "attributes": "属性",
   "effciency": "Efficiency",
   "luck": "Luck",
@@ -188,9 +186,6 @@
   "notification_may_include_alert_sound_and_icon": "通知には警告、サウンド、アイコンバッジが含まれます。\n設定で変更できます。",
   "how_to_play_whitepaper_litepaper_linktree": "プレイ方法/ホワイトペーパー/ライトペーパー/リンクツリー",
   "apple_health": "アップルヘルス",
-
-
-
   "home": "Home",
   "gacha": "Gacha",
   "list": "List",
