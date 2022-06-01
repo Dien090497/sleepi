@@ -17,13 +17,16 @@ class _AlarmStatusChangeState extends State<AlarmStatusChangeWidget> {
   Widget build(BuildContext context) {
     return SFListTile(
       text: LocaleKeys.alarm,
-      trailing: SFSwitch(
-        value: swAlarm,
-        onChanged: (value) {
-          setState(() {
-            swAlarm = value;
-          });
-        },
+      trailing: Padding(
+        padding: const EdgeInsets.only(right: 16),
+        child: SFSwitch(
+          value: swAlarm,
+          onChanged: (value) {
+            setState(() {
+              swAlarm = value;
+            });
+          },
+        ),
       ),
     );
   }

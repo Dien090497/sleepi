@@ -23,141 +23,138 @@ class TradeScreen extends StatelessWidget {
       child: Scaffold(
         backgroundColor: AppColors.transparent,
         body: SafeArea(
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 24.0),
-            child: Column(
-              children: [
-                Padding(
-                  padding: const EdgeInsets.symmetric(
-                    vertical: 20,
-                  ),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      const Expanded(
-                        child: SFSubAppBar(
-                          title: LocaleKeys.trade,
-                          textStyle: TextStyles.bold18LightWhite,
-                        ),
+          child: Column(
+            children: [
+              Padding(
+                padding: const EdgeInsets.symmetric(
+                  vertical: 20,
+                ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    const Expanded(
+                      child: SFSubAppBar(
+                        title: LocaleKeys.trade,
+                        textStyle: TextStyles.bold18LightWhite,
                       ),
-                      GestureDetector(
-                          child: const SFIconBorder(
-                              icon: Icons.refresh, sizeIcon: 28)),
-                    ],
-                  ),
+                    ),
+                    GestureDetector(
+                        child: const SFIconBorder(
+                            icon: Icons.refresh, sizeIcon: 28)),
+                  ],
                 ),
-                Expanded(
-                  child: ListView(
-                    padding: const EdgeInsets.symmetric(vertical: 16),
-                    children: [
-                      SFCard(
-                        padding: const EdgeInsets.all(16),
-                        child: Column(
-                          children: [
-                            Row(
-                              children: [
-                                SFText(
-                                  keyText: LocaleKeys.from,
-                                  style: TextStyles.lightGrey12,
+              ),
+              Expanded(
+                child: ListView(
+                  padding: const EdgeInsets.symmetric(vertical: 16),
+                  children: [
+                    SFCard(
+                      padding: const EdgeInsets.all(16),
+                      child: Column(
+                        children: [
+                          Row(
+                            children: [
+                              SFText(
+                                keyText: LocaleKeys.from,
+                                style: TextStyles.lightGrey12,
+                              ),
+                              const Spacer(),
+                              SFText(
+                                  keyText: LocaleKeys.balance,
+                                  style: TextStyles.lightGrey12),
+                              SFText(
+                                keyText: ': 0',
+                                style: TextStyles.lightGrey12,
+                              ),
+                            ],
+                          ),
+                          Row(
+                            children: [
+                              SFText(
+                                keyText: '0.00',
+                                style: TextStyles.bold18White,
+                              ),
+                              const Spacer(),
+                              GestureDetector(
+                                onTap: () {},
+                                child: Row(
+                                  children: [
+                                    SFButtonOutLined(
+                                        title: LocaleKeys.max,
+                                        textStyle: TextStyles.bold14Blue,
+                                        borderColor: AppColors.blue,
+                                        onPressed: () {}),
+                                    const SizedBox(width: 8),
+                                    const DropdownSelectToken(
+                                      width: 115,
+                                      height: 36,
+                                      backgroundColor: AppColors.transparent,
+                                      isResultLabel: true,
+                                    ),
+                                  ],
                                 ),
-                                const Spacer(),
-                                SFText(
-                                    keyText: LocaleKeys.balance,
-                                    style: TextStyles.lightGrey12),
-                                SFText(
-                                  keyText: ': 0',
-                                  style: TextStyles.lightGrey12,
-                                ),
-                              ],
-                            ),
-                            Row(
-                              children: [
-                                SFText(
-                                  keyText: '0.00',
-                                  style: TextStyles.bold18White,
-                                ),
-                                const Spacer(),
-                                GestureDetector(
-                                  onTap: () {},
-                                  child: Row(
-                                    children: [
-                                      SFButtonOutLined(
-                                          title: LocaleKeys.max,
-                                          textStyle: TextStyles.bold14Blue,
-                                          borderColor: AppColors.blue,
-                                          onPressed: () {}),
-                                      const SizedBox(width: 8),
-                                      const DropdownSelectToken(
-                                        width: 115,
-                                        height: 36,
-                                        backgroundColor: AppColors.transparent,
-                                        isResultLabel: true,
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ],
-                        ),
+                              ),
+                            ],
+                          ),
+                        ],
                       ),
-                      const SizedBox(height: 8),
-                      const Center(
-                          child: Icon(
-                        Icons.swap_vert,
-                        color: AppColors.lightWhite,
-                        size: 32,
-                      )),
-                      const SizedBox(height: 8),
-                      SFCard(
-                        padding: const EdgeInsets.all(16),
-                        child: Column(
-                          children: [
-                            Row(
-                              children: [
-                                SFText(
-                                  keyText: LocaleKeys.to,
-                                  style: TextStyles.lightGrey14,
-                                ),
-                                SFText(
-                                    keyText:
-                                        ' (${LocaleKeys.estimate.tr()})',
-                                    style: TextStyles.lightGrey14),
-                              ],
-                            ),
-                            const SizedBox(height: 12),
-                            Row(
-                              children: const [
-                                Spacer(),
-                                DropdownSelectToken(
-                                  width: 115,
-                                  height: 36,
-                                  backgroundColor: AppColors.transparent,
-                                  isResultLabel: true,
-                                ),
-                              ],
-                            ),
-                          ],
-                        ),
+                    ),
+                    const SizedBox(height: 8),
+                    const Center(
+                        child: Icon(
+                      Icons.swap_vert,
+                      color: AppColors.lightWhite,
+                      size: 32,
+                    )),
+                    const SizedBox(height: 8),
+                    SFCard(
+                      padding: const EdgeInsets.all(16),
+                      child: Column(
+                        children: [
+                          Row(
+                            children: [
+                              SFText(
+                                keyText: LocaleKeys.to,
+                                style: TextStyles.lightGrey14,
+                              ),
+                              SFText(
+                                  keyText:
+                                      ' (${LocaleKeys.estimate.tr()})',
+                                  style: TextStyles.lightGrey14),
+                            ],
+                          ),
+                          const SizedBox(height: 12),
+                          Row(
+                            children: const [
+                              Spacer(),
+                              DropdownSelectToken(
+                                width: 115,
+                                height: 36,
+                                backgroundColor: AppColors.transparent,
+                                isResultLabel: true,
+                              ),
+                            ],
+                          ),
+                        ],
                       ),
-                    ],
-                  ),
+                    ),
+                  ],
                 ),
-                SFButton(
-                  width: double.infinity,
-                  text: LocaleKeys.trade,
-                  textStyle: TextStyles.w600WhiteSize16,
-                  color: AppColors.blue,
-                  onPressed: () {
-                    showCustomAlertDialog(context,
-                        children: const PopUpConfirmTrade());
-                  },
-                ),
-                const SizedBox(
-                  height: 8.0,
-                ),
-              ],
-            ),
+              ),
+              SFButton(
+                width: double.infinity,
+                text: LocaleKeys.trade,
+                textStyle: TextStyles.w600WhiteSize16,
+                color: AppColors.blue,
+                onPressed: () {
+                  showCustomAlertDialog(context,
+                      children: const PopUpConfirmTrade());
+                },
+              ),
+              const SizedBox(
+                height: 37.0,
+              ),
+            ],
           ),
         ),
       ),

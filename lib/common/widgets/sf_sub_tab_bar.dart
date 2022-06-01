@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 // import 'package:flutter_translate/flutter_translate.dart';
@@ -15,7 +16,7 @@ class SFSubTabBar extends TabBar {
           tabs: List.generate(
               // texts.length, (i) => Tab(text: translate(texts[i]))),
               texts.length,
-              (i) => Tab(text: texts[i])),
+              (i) => Tab(text: texts[i].tr())),
           isScrollable: isScrollable,
           labelColor: AppColors.white,
           unselectedLabelColor: AppColors.lightGrey,

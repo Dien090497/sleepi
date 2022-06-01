@@ -18,6 +18,7 @@ class ModalPopUpLanguage extends StatelessWidget {
       SFText(keyText: LocaleKeys.english, style: TextStyles.bold16LightWhite),
       SFText(keyText: LocaleKeys.chinese, style: TextStyles.bold16LightWhite),
     ];
+    int middle = language.length ~/ 2;
 
     return SafeArea(
       child: Column(
@@ -26,10 +27,9 @@ class ModalPopUpLanguage extends StatelessWidget {
           Expanded(
             child: CupertinoPicker(
               onSelectedItemChanged: (value) {},
-              itemExtent: 25,
+              itemExtent: 30,
+              scrollController: FixedExtentScrollController(initialItem: middle),
               diameterRatio: 1,
-              useMagnifier: true,
-              magnification: 1.3,
               children: language,
             ),
           ),
@@ -39,7 +39,8 @@ class ModalPopUpLanguage extends StatelessWidget {
               color: AppColors.blue,
               textStyle: TextStyles.w600WhiteSize16,
               height: 48,
-              onPressed: () => Navigator.pop(context))
+              onPressed: () => Navigator.pop(context)),
+          const SizedBox(height: 37,)
         ],
       ),
     );

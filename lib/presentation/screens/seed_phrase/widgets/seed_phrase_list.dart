@@ -11,6 +11,7 @@ class SeedPhraseList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SFCard(
+        height: MediaQuery.of(context).size.height * 0.75,
       margin: const EdgeInsets.all(16.0),
       child: ListView.builder(
           itemCount: 12,

@@ -62,7 +62,7 @@ class GeneralWidget extends StatelessWidget {
               ),
               divider,
               SFListTile(
-                text: LocaleKeys.multi,
+                text: LocaleKeys.multi_chain_switch,
                 trailing: icon,
                 onPressed: () => SFModalBottomSheet.show(
                     context, 0.5, const ModalMultiChainSwitch()),

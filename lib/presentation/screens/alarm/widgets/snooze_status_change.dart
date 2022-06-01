@@ -18,13 +18,16 @@ class _SnoozeStatusChangeWidgetState extends State<SnoozeStatusChangeWidget> {
   Widget build(BuildContext context) {
     return SFListTile(
       text: LocaleKeys.snooze,
-      trailing: SFSwitch(
-        value: swSnooze,
-        onChanged: (value) {
-          setState(() {
-            swSnooze = value;
-          });
-        },
+      trailing: Padding(
+        padding: const EdgeInsets.only(right: 16),
+        child: SFSwitch(
+          value: swSnooze,
+          onChanged: (value) {
+            setState(() {
+              swSnooze = value;
+            });
+          },
+        ),
       ),
     );
   }

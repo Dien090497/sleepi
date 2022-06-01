@@ -64,7 +64,8 @@ class ChangePasswordScreen extends StatelessWidget {
                   gradient: AppColors.gradientBlueButton,
                   width: double.infinity,
                   onPressed: () {},
-                )
+                ),
+                const SizedBox(height: 37,)
               ],
             ),
           ),

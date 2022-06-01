@@ -99,7 +99,7 @@ abstract class  LocaleKeys {
   static const allow_to_access_motion_data = 'allow_to_access_motion_data';
   static const allow = 'allow';
   static const setup_microphone_access = 'setup_microphone_access';
-  static const would_like_to_send_you notifications = 'would_like_to_send_you notifications';
+  static const would_like_to_send_you_notifications = 'would_like_to_send_you_notifications';
   static const attributes = 'attributes';
   static const effciency = 'effciency';
   static const luck = 'luck';
@@ -183,7 +183,6 @@ abstract class  LocaleKeys {
   static const the_data_would_access_will_only = 'the_data_would_access_will_only';
   static const to_allow_access_to_motion_data_is_inportant = 'to_allow_access_to_motion_data_is_inportant';
   static const the_data_would_acquire_will_only = 'the_data_would_acquire_will_only';
-  static const would_like_to_send_you_notifications = 'would_like_to_send_you_notifications';
   static const notification_may_include_alert_sound_and_icon = 'notification_may_include_alert_sound_and_icon';
   static const how_to_play_whitepaper_litepaper_linktree = 'how_to_play_whitepaper_litepaper_linktree';
   static const apple_health = 'apple_health';
@@ -251,7 +250,6 @@ abstract class  LocaleKeys {
   static const Statistics = 'Statistics';
   static const woke_up = 'woke_up';
   static const sleep_duration_enter = 'sleep_duration_enter';
-  static const nocturnal_awakening = 'nocturnal_awakening';
   static const token_earned = 'token_earned';
   static const sleep_score = 'sleep_score';
   static const result = 'result';
@@ -268,7 +266,7 @@ abstract class  LocaleKeys {
   static const avax = 'avax';
   static const usdc = 'usdc';
   static const bace_on_solana = 'bace_on_solana';
-  static const avax_c-chain = 'avax_c-chain';
+  static const avax_c_chain = 'avax_c_chain';
   static const receive = 'receive';
   static const to_spending = 'to_spending';
   static const to_external = 'to_external';
@@ -299,14 +297,13 @@ abstract class  LocaleKeys {
   static const average_of_sleep_duration = 'average_of_sleep_duration';
   static const average_of_sleep_quality = 'average_of_sleep_quality';
   static const general = 'general';
-  static const multi-chain_switch = 'multi-chain_switch';
   static const secret = 'secret';
   static const activation_code_language_lowercase = 'activation_code_language_lowercase';
   static const available_total = 'available_total';
   static const english = 'english';
   static const japanese = 'japanese';
   static const chinese = 'chinese';
-  static const multi-chain_switch_uppercase = 'multi-chain_switch_uppercase';
+  static const multi_chain_switch_uppercase = 'multi_chain_switch_uppercase';
   static const mic_permission = 'mic_permission';
   static const displays_message_mic_permission = 'displays_message_mic_permission';
   static const displays_message_mic_permission_1 = 'displays_message_mic_permission_1';

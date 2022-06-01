@@ -21,13 +21,8 @@ class StakingList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListView(
-      padding: const EdgeInsets.all(15.0),
+      padding: const EdgeInsets.all(16.0),
       children: [
-        SFText(
-          keyText: LocaleKeys.tvl_in_sleefi,
-          style: TextStyles.lightGrey14,
-        ),
-        const SizedBox(height: 16),
         Container(
           padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 24.0),
           decoration: BoxDecoration(
@@ -228,21 +223,27 @@ class StakingList extends StatelessWidget {
                 height: 16.0,
               ),
               Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
                   SFButton(
                     text: LocaleKeys.deposit,
-                    textStyle: TextStyles.bold14LightWhite,
-                    color: AppColors.blue,
+                    textStyle: TextStyles.boldWhite14,
+                    gradient: AppColors.gradientBlueButton,
+                    // width: 84,
+                    height: 32,
                     onPressed: () =>
                         Navigator.pushNamed(context, R.depositSLFT),
                   ),
-                  SFButtonOutLined(
-                    borderColor: AppColors.blue,
-                    title: LocaleKeys.withdraw,
-                    textStyle: TextStyles.bold14Blue,
-                    onPressed: () =>
-                        Navigator.pushNamed(context, R.withdrawSLFT),
+                  SizedBox(
+                    // width: 84,
+                    height: 32,
+                    child: SFButtonOutLined(
+                      borderColor: AppColors.blue,
+                      title: LocaleKeys.withdraw,
+                      textStyle: TextStyles.bold14Blue,
+                      onPressed: () =>
+                          Navigator.pushNamed(context, R.withdrawSLFT),
+                    ),
                   ),
                   GestureDetector(
                     onTap: () {
@@ -282,6 +283,7 @@ class StakingList extends StatelessWidget {
                   borderColor: AppColors.blue,
                   onPressed: () {}),
             ),
+            const SizedBox(height: 37,),
           ],
         )
       ],

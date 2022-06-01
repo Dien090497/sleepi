@@ -13,6 +13,7 @@ class ModalPopUpBirthYear extends StatelessWidget {
     List _range(int from, int to) =>
         List.generate(to - from + 1, (i) => i + from);
     List years = _range(1900, DateTime.now().year);
+    int middle = years.length ~/ 2;
 
     return SafeArea(
       child: Column(
@@ -21,10 +22,11 @@ class ModalPopUpBirthYear extends StatelessWidget {
           Expanded(
             child: CupertinoPicker(
               onSelectedItemChanged: (value) {},
-              itemExtent: 25,
+              itemExtent: 30,
+              scrollController: FixedExtentScrollController(initialItem: middle),
               diameterRatio: 1,
-              useMagnifier: true,
-              magnification: 1.3,
+              // useMagnifier: true,
+              // magnification: 1.3,
               children: List.generate(
                   years.length,
                   (i) => SFText(
@@ -39,7 +41,8 @@ class ModalPopUpBirthYear extends StatelessWidget {
               color: AppColors.blue,
               textStyle: TextStyles.w600WhiteSize16,
               height: 48,
-              onPressed: () => Navigator.pop(context))
+              onPressed: () => Navigator.pop(context)),
+          const SizedBox(height: 37,)
         ],
       ),
     );

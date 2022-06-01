@@ -14,25 +14,23 @@ class SettingScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BackgroundWidget(
-      child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 16),
-        child: Scaffold(
-          backgroundColor: AppColors.transparent,
-          appBar: SFAppBar(
-            context: context,
-            title: LocaleKeys.setting,
-            textStyle: TextStyles.bold18LightWhite,
-          ),
-          body: SafeArea(
-            child: ListView(
-              children: const [
-                AverageInfoWidget(),
-                SizedBox(height: 24,),
-                GeneralWidget(),
-                SizedBox(height: 24,),
-                ProfileWidget(),
-              ],
-            ),
+      child: Scaffold(
+        backgroundColor: AppColors.transparent,
+        appBar: SFAppBar(
+          context: context,
+          title: LocaleKeys.setting,
+          textStyle: TextStyles.bold18LightWhite,
+        ),
+        body: SafeArea(
+          child: ListView(
+            padding: const EdgeInsets.symmetric(horizontal: 16),
+            children: const [
+              AverageInfoWidget(),
+              SizedBox(height: 24,),
+              GeneralWidget(),
+              SizedBox(height: 24,),
+              ProfileWidget(),
+            ],
           ),
         ),
       ),

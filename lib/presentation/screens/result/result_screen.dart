@@ -68,7 +68,7 @@ class _ResultScreenState extends State<ResultScreen> {
                     height: 8,
                   ),
                   const SFLabelValue(
-                      label: LocaleKeys.nocturnal_awakening, value: '1'),
+                      label: LocaleKeys.nocturnal_awakenings, value: '1'),
                   const SizedBox(
                     height: 8,
                   ),

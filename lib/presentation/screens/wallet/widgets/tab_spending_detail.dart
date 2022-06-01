@@ -102,16 +102,16 @@ class TabSpendingDetail extends StatelessWidget {
               alignment: Alignment.bottomCenter,
               child: Padding(
                 padding:
-                    const EdgeInsets.symmetric(horizontal: 24.0, vertical: 8.0),
+                    const EdgeInsets.symmetric(horizontal: 24.0, vertical: 37.0),
                 child: SFButton(
                   text: LocaleKeys.transfer,
                   textStyle: TextStyles.w600WhiteSize16,
+                  gradient: AppColors.gradientBlueButton,
                   height: 48,
                   width: double.infinity,
-                  color: AppColors.blue,
                   onPressed: () => Navigator.pushNamed(context, R.transfer),
                 ),
-              ))
+              )),
         ],
       ),
     );

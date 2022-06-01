@@ -117,14 +117,16 @@ class _DropdownSelectTokenState extends State<DropdownSelectToken> {
       onOpen: (isOpen) {
         // print('$isOpen');
       },
-      resultIcon: const SizedBox(
-        width: 16,
-        // height: 10,
-        child: Icon(
-          Icons.keyboard_arrow_up,
-          color: AppColors.lightGrey,
-        ),
-      ),
+      resultIconRotation: false,
+
+      // resultIcon: const SizedBox(
+      //   width: 16,
+      //   // height: 10,
+      //   child: Icon(
+      //     Icons.keyboard_arrow_up,
+      //     color: AppColors.lightGrey,
+      //   ),
+      // ),
     );
   }
 }

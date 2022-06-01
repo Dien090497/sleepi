@@ -43,7 +43,7 @@ class SleepScore extends StatelessWidget {
           ),
           divider,
           const ChartTitle(
-            title: LocaleKeys.nocturnal_awakening,
+            title: LocaleKeys.nocturnal_awakenings,
             result: "2",
           ),
           divider,

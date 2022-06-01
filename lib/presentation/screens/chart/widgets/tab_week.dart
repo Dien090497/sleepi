@@ -101,7 +101,7 @@ class TabWeek extends StatelessWidget {
         ChartStatisticShare(),
         const SizedBox(height: 40),
         const ChartTitle(
-            title: LocaleKeys.nocturnal_awakening,
+            title: LocaleKeys.nocturnal_awakenings,
             textStyleTitle: TextStyles.bold16LightWhite,
             padding: EdgeInsets.zero),
         const SizedBox(height: 12),

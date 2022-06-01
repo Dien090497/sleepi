@@ -60,12 +60,8 @@ class _TransferWidgetState extends State<TransferWidget> {
                 ],
               ),
               Row(
+                mainAxisAlignment: MainAxisAlignment.end,
                 children: [
-                  Expanded(
-                      child: Divider(
-                    height: 1,
-                    color: AppColors.white.withOpacity(0.05),
-                  )),
                   GestureDetector(
                     onTap: () {
                       setState(() {

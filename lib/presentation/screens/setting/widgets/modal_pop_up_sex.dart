@@ -19,6 +19,7 @@ class ModalPopUpSex extends StatelessWidget {
       SFText(keyText: LocaleKeys.secret, style: TextStyles.bold16LightWhite),
       SFText(keyText: LocaleKeys.secret, style: TextStyles.bold16LightWhite),
     ];
+    int middle = gender.length ~/ 2;
 
     return SafeArea(
       child: Column(
@@ -27,10 +28,9 @@ class ModalPopUpSex extends StatelessWidget {
           Expanded(
             child: CupertinoPicker(
               onSelectedItemChanged: (value) {},
-              itemExtent: 25,
+              itemExtent: 30,
+              scrollController: FixedExtentScrollController(initialItem: middle),
               diameterRatio: 1,
-              useMagnifier: true,
-              magnification: 1.3,
               children: gender,
             ),
           ),
@@ -40,7 +40,8 @@ class ModalPopUpSex extends StatelessWidget {
               color: AppColors.blue,
               textStyle: TextStyles.w600WhiteSize16,
               height: 48,
-              onPressed: () => Navigator.pop(context))
+              onPressed: () => Navigator.pop(context)),
+          const SizedBox(height: 37,)
         ],
       ),
     );

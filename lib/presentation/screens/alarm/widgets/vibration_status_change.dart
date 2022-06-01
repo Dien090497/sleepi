@@ -19,13 +19,16 @@ class _VibrationStatusChangeWidgetState
   Widget build(BuildContext context) {
     return SFListTile(
       text: LocaleKeys.vibration,
-      trailing: SFSwitch(
-        value: swVibration,
-        onChanged: (value) {
-          setState(() {
-            swVibration = value;
-          });
-        },
+      trailing: Padding(
+        padding: const EdgeInsets.only(right: 16),
+        child: SFSwitch(
+          value: swVibration,
+          onChanged: (value) {
+            setState(() {
+              swVibration = value;
+            });
+          },
+        ),
       ),
     );
   }

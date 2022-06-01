@@ -1,6 +1,5 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-// import 'package:flutter_translate/flutter_translate.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
 import 'package:slee_fi/common/widgets/background_widget.dart';
@@ -31,7 +30,7 @@ class SendToExternalScreen extends StatelessWidget {
         ),
         body: SafeArea(
           child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 24.0),
+            padding: const EdgeInsets.symmetric(horizontal: 16.0),
             child: Column(
               children: [
                 Expanded(
@@ -116,6 +115,9 @@ class SendToExternalScreen extends StatelessWidget {
                     showCustomAlertDialog(context,
                         children: const PopUpConfirmSend());
                   },
+                ),
+                const SizedBox(
+                  height: 37.0,
                 ),
               ],
             ),

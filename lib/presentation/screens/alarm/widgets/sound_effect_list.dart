@@ -16,6 +16,7 @@ class _AlarmSoundEffectListState extends State<AlarmSoundEffectList> {
   @override
   Widget build(BuildContext context) {
     return SFCard(
+      margin: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 24),
       padding: const EdgeInsets.symmetric(horizontal: 16.0),
       child: ListView.builder(
           itemCount: 5,

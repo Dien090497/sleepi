@@ -6,14 +6,21 @@ import 'package:slee_fi/common/style/text_styles.dart';
 class SFDropDown<T> extends StatefulWidget {
   const SFDropDown(
       {Key? key,
-      required this.value,
-      required this.dropdownItems,
-      this.onChanged})
+        required this.value,
+        required this.dropdownItems,
+        this.icon,
+        this.onChanged,
+        this.dropdownHeight,
+        this.dropdownWidth,
+      })
       : super(key: key);
 
   final T value;
   final List<DropdownMenuItem<T>> dropdownItems;
   final ValueChanged<T?>? onChanged;
+  final Widget? icon;
+  final double? dropdownWidth;
+  final double? dropdownHeight;
 
   @override
   State<SFDropDown<T>> createState() => _SFDropDownState<T>();
@@ -27,6 +34,9 @@ class _SFDropDownState<T> extends State<SFDropDown<T>> {
     return CustomDropdownButton2<T>(
       dropdownItems: widget.dropdownItems,
       value: selectedValue,
+      icon: widget.icon,
+      dropdownHeight: widget.dropdownHeight,
+      dropdownWidth: widget.dropdownWidth,
       onChanged: (value) {
         if (widget.onChanged != null) widget.onChanged!(value);
         if (value != null) {
@@ -107,17 +117,17 @@ class CustomDropdownButton2<T> extends StatelessWidget {
         isExpanded: true,
         hint: hint != null
             ? Container(
-                alignment: hintAlignment,
-                child: Text(
-                  hint!,
-                  overflow: TextOverflow.ellipsis,
-                  maxLines: 1,
-                  style: TextStyle(
-                    fontSize: 14,
-                    color: Theme.of(context).hintColor,
-                  ),
-                ),
-              )
+          alignment: hintAlignment,
+          child: Text(
+            hint!,
+            overflow: TextOverflow.ellipsis,
+            maxLines: 1,
+            style: TextStyle(
+              fontSize: 14,
+              color: Theme.of(context).hintColor,
+            ),
+          ),
+        )
             : null,
         value: value,
         items: dropdownItems,
@@ -146,7 +156,7 @@ class CustomDropdownButton2<T> extends StatelessWidget {
         buttonHeight: buttonHeight ?? 40,
         buttonWidth: buttonWidth ?? 140,
         buttonPadding:
-            buttonPadding ?? const EdgeInsets.only(left: 14, right: 14),
+        buttonPadding ?? const EdgeInsets.only(left: 14, right: 14),
         buttonDecoration: buttonDecoration ??
             BoxDecoration(
               borderRadius: BorderRadius.circular(8),

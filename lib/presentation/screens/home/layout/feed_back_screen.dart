@@ -4,6 +4,7 @@ import 'package:slee_fi/common/style/text_styles.dart';
 import 'package:slee_fi/common/widgets/background_widget.dart';
 import 'package:slee_fi/common/widgets/sf_app_bar.dart';
 import 'package:slee_fi/common/widgets/sf_buttons.dart';
+import 'package:slee_fi/common/widgets/sf_card.dart';
 import 'package:slee_fi/common/widgets/sf_drop_down.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
 import 'package:slee_fi/common/widgets/sf_textfield.dart';
@@ -32,7 +33,11 @@ class FeedBackScreen extends StatelessWidget {
                       SizedBox(
                           width: size.width / 3,
                           height: 48,
-                          child: SFDropDown(value: "Other", dropdownItems: [
+                          child: SFDropDown(
+                              value: "Other",
+                              dropdownWidth: size.width / 3,
+                              icon: const Icon(Icons.keyboard_arrow_down, size: 24,),
+                              dropdownItems: [
                             DropdownMenuItem(
                               value: 'Other',
                               child: SFText(
@@ -51,42 +56,49 @@ class FeedBackScreen extends StatelessWidget {
                       const SizedBox(width: 10),
                       Expanded(
                           child: SizedBox(
-                        height: 48,
-                        child: SFDropDown(value: "Other", dropdownItems: [
-                          DropdownMenuItem(
-                            value: 'Other',
-                            child: SFText(
-                              keyText: 'Other',
-                              style: TextStyles.white16,
-                            ),
-                          ),
-                          DropdownMenuItem(
-                            value: 'Other1',
-                            child: SFText(
-                              keyText: 'Other',
-                              style: TextStyles.white16,
-                            ),
-                          ),
-                        ]),
-                      )),
+                            height: 48,
+                            child: SFDropDown(
+                                value: "Other",
+                                dropdownWidth: size.width * 0.55,
+                                icon: const Icon(Icons.keyboard_arrow_down, size: 24,),
+                                dropdownItems: [
+                              DropdownMenuItem(
+                                value: 'Other',
+                                child: SFText(
+                                  keyText: 'Other',
+                                  style: TextStyles.white16,
+                                ),
+                              ),
+                              DropdownMenuItem(
+                                value: 'Other1',
+                                child: SFText(
+                                  keyText: 'Other',
+                                  style: TextStyles.white16,
+                                ),
+                              ),
+                            ]),
+                          )),
                     ],
                   ),
                   const Expanded(
-                    child: SFTextField(
-                      maxLine: 12,
-                      maxLength: 100,
-                      hintText: LocaleKeys.hint_feedback,
-                      hintStyle: TextStyles.lightGrey16,
-                    ),
-                  ),
-
-                  // const Spacer(),
+                     child: SFCard(
+                       child: SFTextField(
+                         noBorder: true,
+                         maxLine: 15,
+                         maxLength: 100,
+                         hintText: LocaleKeys.hint_feedback,
+                         hintStyle: TextStyles.lightGrey16,
+                       ),
+                     ),
+                   ),
+                  const SizedBox(height: 34,),
                   SFButton(
                     text: LocaleKeys.submit,
                     width: size.width,
-                    color: AppColors.blue,
+                    gradient: AppColors.gradientBlueButton,
                     textStyle: TextStyles.w600WhiteSize16,
-                  )
+                  ),
+                  const SizedBox(height: 37,)
                 ],
               ),
             ),

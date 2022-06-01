@@ -25,7 +25,7 @@ class TabWalletDetail extends StatelessWidget {
           const SizedBox(
             height: 32,
           ),
-          SFText(keyText: LocaleKeys.avax_c, style: TextStyles.bold12Blue),
+          SFText(keyText: LocaleKeys.avax_c_chain, style: TextStyles.bold12Blue),
           const SizedBox(
             height: 4.0,
           ),
@@ -85,16 +85,15 @@ class TabWalletDetail extends StatelessWidget {
                 ElevatedButton(
                     onPressed: _launchUrl,
                     style: ElevatedButton.styleFrom(
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 12.0, vertical: 8.0),
-                      primary: AppColors.yellow.withOpacity(0.15),
+                      padding: const EdgeInsets.fromLTRB(12, 8, 16,8),
+                      primary: AppColors.yellow.withOpacity(0.1),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(100.0),
                       ),
                     ),
                     child: Row(
                       children: [
-                        const SFIcon(Imgs.binance),
+                        const SFIcon(Imgs.binance, width: 24,),
                         const SizedBox(
                           width: 8.0,
                         ),

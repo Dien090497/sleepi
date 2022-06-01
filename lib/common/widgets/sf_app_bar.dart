@@ -17,9 +17,12 @@ class SFAppBar extends AppBar {
           backgroundColor: backgroundColor ?? AppColors.transparent,
           shadowColor: backgroundColor,
           automaticallyImplyLeading: false,
-          leadingWidth: 32,
+          leadingWidth: 48,
           elevation: 0,
-          leading:  const SFBackButton(),
+          leading:  const Padding(
+            padding: EdgeInsets.only(left: 16),
+            child: SFBackButton(),
+          ),
           // centerTitle: true,
           title: SFText(
             keyText: title ?? "",

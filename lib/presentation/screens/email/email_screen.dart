@@ -56,13 +56,14 @@ class EmailScreen extends StatelessWidget {
                     ],
                   ),
                 ),
-                SFButton(
+                 const SFButton(
                   text: LocaleKeys.save,
                   textStyle: TextStyles.w600WhiteSize16,
                   gradient: AppColors.gradientBlueButton,
                   width: double.infinity,
-                  onPressed: () {},
-                )
+                  onPressed: null,
+                ),
+                const SizedBox(height: 24,),
               ],
             ),
           ),

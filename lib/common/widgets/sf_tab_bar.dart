@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 // import 'package:flutter_translate/flutter_translate.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
@@ -59,7 +60,7 @@ class _SFTabBarState extends State<SFTabBar>
                 ),
                 padding: widget.padding ??
                     const EdgeInsets.symmetric(horizontal: 20),
-                child: Tab(text: widget.texts[i])),
+                child: Tab(text: widget.texts[i].tr())),
           ),
           indicator: BoxDecoration(
             borderRadius: BorderRadius.circular(100),
