@@ -75,31 +75,9 @@ class PopUpLevelUp extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 8),
-            SFCard(
-              margin: EdgeInsets.zero,
-              padding: const EdgeInsets.symmetric(vertical: 24, horizontal: 18),
-              child: Row(
-                children: [
-                  SFText(
-                    keyText: LocaleKeys.attributes,
-                    style: TextStyles.lightGrey16,
-                  ),
-                  const SizedBox(width: 4),
-                  Expanded(
-                    child: SFText(
-                      keyText: '+2 Luck',
-                      style: TextStyles.blue16,
-                      textAlign: TextAlign.right,
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            const SizedBox(height: 8),
-
             SFLabelValue(
               label: LocaleKeys.cost,
-              value: '$cost',
+              value: '$cost SLFT',
               styleValue: TextStyles.textColorSize16,
             ),
             const SizedBox(height: 8),
@@ -117,12 +95,14 @@ class PopUpLevelUp extends StatelessWidget {
                     onPressed: onCancel,
                     textStyle: TextStyles.lightGrey16,
                     color: AppColors.light4,
+                    width: double.infinity,
                   ),
                 ),
                 const SizedBox(width: 12),
                 Expanded(
                   child: SFButton(
                     text: LocaleKeys.confirm,
+                    width: double.infinity,
                     onPressed: () {
                       onConfirm();
                       Navigator.pop(context);

@@ -17,7 +17,7 @@ class ItemBed extends StatelessWidget {
   Widget build(BuildContext context) {
     final bed = beds[i % BedType.values.length];
     return GestureDetector(
-      onTap: () {},
+      onTap: (){},
       child: Container(
         decoration: BoxDecoration(
             color: AppColors.lightDark,

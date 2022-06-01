@@ -9,6 +9,7 @@ import 'package:slee_fi/common/widgets/sf_icon.dart';
 import 'package:slee_fi/common/widgets/sf_label_value.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
 import 'package:slee_fi/l10n/locale_keys.g.dart';
+import 'package:slee_fi/presentation/screens/info_individual/widget/connect_bed_widget.dart';
 import 'package:slee_fi/resources/resources.dart';
 
 class MintScreen extends StatefulWidget {
@@ -70,26 +71,11 @@ class _MintScreenState extends State<MintScreen> {
                       child: Column(
                         children: [
                           const SizedBox(
-                            height: 16,
+                            height: 60,
                           ),
-                          Container(
-                            width: 188,
-                            height: 188,
-                            padding: const EdgeInsets.symmetric(
-                              horizontal: 13,
-                            ),
-                            decoration: const BoxDecoration(
-                              image: DecorationImage(
-                                image: AssetImage(
-                                  "assets/images/borderBed.png",
-                                ),
-                                fit: BoxFit.cover,
-                              ),
-                            ),
-                            child: const SFIcon(Ics.sleep),
-                          ),
+                          const ConnectBedWidget(),
                           const SizedBox(
-                            height: 16,
+                            height: 60,
                           ),
                           const SFLabelValue(
                               label: LocaleKeys.token,
@@ -121,18 +107,9 @@ class _MintScreenState extends State<MintScreen> {
                           const SizedBox(
                             height: 2,
                           ),
-                          Row(
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              SFText(
-                                keyText: LocaleKeys.what_insurance,
-                                style: TextStyles.lightGrey12,
-                              ),
-                              const SizedBox(
-                                width: 8,
-                              ),
-                              const SFIcon(Ics.icCircleQuestion),
-                            ],
+                          SFText(
+                            keyText: LocaleKeys.what_insurance,
+                            style: TextStyles.lightGrey12,
                           ),
                           const SizedBox(
                             height: 24,
@@ -212,6 +189,7 @@ class _MintScreenState extends State<MintScreen> {
                               width: size.width,
                               gradient: AppColors.gradientBlueButton,
                               textStyle: TextStyles.white16,
+                              disabled: true,
                             )
                           ],
                         ),

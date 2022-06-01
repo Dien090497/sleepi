@@ -70,6 +70,9 @@ class AppColors {
 
   static const legendaryBed = Color(0xFF4A9E45);
 
+  static const gray = Color(0xFFC4C4C4);
+
+
   static LinearGradient gradientBlue = LinearGradient(colors: [
     const Color(0xFFC4C4C4).withOpacity(0),
     const Color(0xFF18A0FB).withOpacity(0.01),
