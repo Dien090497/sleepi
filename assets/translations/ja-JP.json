@@ -39,7 +39,6 @@
   "from": "送金元",
   "to": "送金先",
   "estimate": "推定",
-  "?": "取引する",
   "create_wallet": "ウォレットを作る",
   "you_have_already_created_a_wallet_address": "すでにウォレットは作成済みです。\n新しいウォレットを作る場合は確認後、続けてください。",
   "create_a_new_wallet": "新しいウォレットを作る",

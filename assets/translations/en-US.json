@@ -39,7 +39,6 @@
   "from": "From ",
   "to": "To",
   "estimate": "Estimate",
-  "?": "TRADE",
   "create_wallet": "CREATE WALLET",
   "you_have_already_created_a_wallet_address": "You have already created a wallet address. if you want to create a new wallet, please verify and continue.",
   "create_a_new_wallet": "Create a new wallet",
