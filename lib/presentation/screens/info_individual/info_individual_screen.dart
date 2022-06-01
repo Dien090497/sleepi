@@ -30,21 +30,32 @@ class InfoIndividualScreen extends StatelessWidget {
             const TopBarCommon(
               iconBack: true,
             ),
-            const SizedBox(height: 10,),
+            const SizedBox(
+              height: 10,
+            ),
             Expanded(
               child: SingleChildScrollView(
                 physics: const ScrollPhysics(),
                 child: Column(
                   children: [
-                    SizedBox(
-                      height: 230,
-                      child: Stack(
-                        alignment: Alignment.center,
-                        children: const [
-                          SFIcon(Imgs.borderBed),
-                          SFIcon(Ics.sleep),
-                        ],
+                    Container(
+                      width: 180,
+                      height: 180,
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 13,
                       ),
+                      margin: const EdgeInsets.symmetric(
+                        vertical: 24,
+                      ),
+                      decoration: const BoxDecoration(
+                        image: DecorationImage(
+                          image: AssetImage(
+                            "assets/images/borderBed.png",
+                          ),
+                          fit: BoxFit.cover,
+                        ),
+                      ),
+                      child: const SFIcon(Ics.sleep),
                     ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -56,7 +67,9 @@ class InfoIndividualScreen extends StatelessWidget {
                           size: const Size(75, 75),
                           padding: 20,
                         ),
-                        const SizedBox(width: 10,),
+                        const SizedBox(
+                          width: 10,
+                        ),
                         SFImageBorder(
                           icon: Imgs.jewelGreen,
                           onTap: () {},
@@ -64,7 +77,9 @@ class InfoIndividualScreen extends StatelessWidget {
                           size: const Size(75, 75),
                           padding: 20,
                         ),
-                        const SizedBox(width: 10,),
+                        const SizedBox(
+                          width: 10,
+                        ),
                         SFImageBorder(
                           icon: Imgs.jewelBlue,
                           onTap: () {},
@@ -72,7 +87,9 @@ class InfoIndividualScreen extends StatelessWidget {
                           size: const Size(75, 75),
                           padding: 20,
                         ),
-                        const SizedBox(width: 10,),
+                        const SizedBox(
+                          width: 10,
+                        ),
                         SFImageBorder(
                           icon: Imgs.jewelRed,
                           onTap: () {},
@@ -82,13 +99,24 @@ class InfoIndividualScreen extends StatelessWidget {
                         ),
                       ],
                     ),
-                    const SizedBox(height: 16,),
+                    const SizedBox(
+                      height: 16,
+                    ),
                     const BoxInfoWidget(),
-                    const SizedBox(height: 24,),
-                    SFText(keyText: Keys.attributes, style: TextStyles.bold18LightWhite,),
-                    const SizedBox(height: 15,),
+                    const SizedBox(
+                      height: 24,
+                    ),
+                    SFText(
+                      keyText: Keys.attributes,
+                      style: TextStyles.bold18LightWhite,
+                    ),
+                    const SizedBox(
+                      height: 15,
+                    ),
                     const AttributesWidget(),
-                    const SizedBox(height: 33,),
+                    const SizedBox(
+                      height: 33,
+                    ),
                     const MintFromWidget(),
                   ],
                 ),

@@ -69,15 +69,27 @@ class _MintScreenState extends State<MintScreen> {
                       padding: const EdgeInsets.symmetric(horizontal: 16.0),
                       child: Column(
                         children: [
-                          SizedBox(
-                            height: 230,
-                            child: Stack(
-                              alignment: Alignment.center,
-                              children: const [
-                                SFIcon(Imgs.borderBed),
-                                SFIcon(Ics.sleep),
-                              ],
+                          const SizedBox(
+                            height: 16,
+                          ),
+                          Container(
+                            width: 188,
+                            height: 188,
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 13,
                             ),
+                            decoration: const BoxDecoration(
+                              image: DecorationImage(
+                                image: AssetImage(
+                                  "assets/images/borderBed.png",
+                                ),
+                                fit: BoxFit.cover,
+                              ),
+                            ),
+                            child: const SFIcon(Ics.sleep),
+                          ),
+                          const SizedBox(
+                            height: 16,
                           ),
                           const SFLabelValue(
                               label: Keys.token, value: '0 SLFT + 0 SLGT'),

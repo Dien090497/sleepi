@@ -9,10 +9,12 @@ class Imgs {
   static const String binance = 'assets/images/binance.png';
   static const String bonus = 'assets/images/bonus.png';
   static const String borderBed = 'assets/images/borderBed.png';
+  static const String borderClock = 'assets/images/border_clock.png';
   static const String efficiency = 'assets/images/efficiency.png';
   static const String gacha = 'assets/images/gacha.png';
   static const String healthcare = 'assets/images/healthcare.png';
   static const String homePage = 'assets/images/home_page.png';
+  static const String iconApp = 'assets/images/icon_app.png';
   static const String jewelBlue = 'assets/images/jewel_blue.png';
   static const String jewelGreen = 'assets/images/jewel_green.png';
   static const String jewelPurple = 'assets/images/jewel_purple.png';
@@ -52,10 +54,12 @@ class Imgs {
     binance,
     bonus,
     borderBed,
+    borderClock,
     efficiency,
     gacha,
     healthcare,
     homePage,
+    iconApp,
     jewelBlue,
     jewelGreen,
     jewelPurple,
