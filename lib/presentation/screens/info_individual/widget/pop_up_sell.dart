@@ -93,6 +93,7 @@ class _PopUpSellState extends State<PopUpSell> {
                       },
                       textStyle: TextStyles.lightGrey16,
                       color: AppColors.light4,
+                      width: double.infinity,
                     ),
                   ),
                   const SizedBox(width: 12),
@@ -100,6 +101,7 @@ class _PopUpSellState extends State<PopUpSell> {
                     child: SFButton(
                       text: step < 2 ? LocaleKeys.next : LocaleKeys.confirm,
                       textStyle: TextStyles.white16,
+                      width: double.infinity,
                       gradient: AppColors.gradientBlueButton,
                       onPressed: () {
                         switch (step) {

@@ -3,6 +3,7 @@ part of 'resources.dart';
 class Ics {
   Ics._();
 
+  static const String addBed = 'assets/icons/add_bed.svg';
   static const String arrowLeft = 'assets/icons/arrow_left.svg';
   static const String bedBunk = 'assets/icons/bed_bunk.svg';
   static const String bedsCouple = 'assets/icons/beds_couple.svg';
@@ -59,6 +60,7 @@ class Ics {
   static const String twitter = 'assets/icons/twitter.svg';
 
   static const List<String> values = [
+    addBed,
     arrowLeft,
     bedBunk,
     bedsCouple,

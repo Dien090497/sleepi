@@ -126,6 +126,7 @@ class PopUpTransfer extends StatelessWidget {
                     onPressed: onCancel,
                     textStyle: TextStyles.lightGrey16,
                     color: AppColors.light4,
+                    width: double.infinity,
                   ),
                 ),
                 const SizedBox(width: 12),
@@ -137,6 +138,7 @@ class PopUpTransfer extends StatelessWidget {
                       Navigator.pop(context);
                       showSuccessfulDialog(context);
                     },
+                    width: double.infinity,
                     textStyle: TextStyles.white16,
                     gradient: AppColors.gradientBlueButton,
                   ),
