@@ -2,33 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:slee_fi/common/enum/enum.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
-import 'package:slee_fi/common/widgets/sf_dialog.dart';
+import 'package:slee_fi/common/widgets/sf_gridview.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
 import 'package:slee_fi/di/translations/keys.dart';
-import 'package:slee_fi/presentation/screens/product_detail/widgets/gridview_bed_item.dart';
-import 'package:slee_fi/presentation/screens/product_detail/widgets/jewel_dialog_body.dart';
+import 'package:slee_fi/presentation/screens/info_individual/widget/item_bed.dart';
 
 class MintFromWidget extends StatelessWidget {
   const MintFromWidget({Key? key}) : super(key: key);
-
-  void _showBedDialog(BuildContext context) {
-    showCustomDialog(
-      context,
-      padding: const EdgeInsets.all(24),
-      children: [
-        JewelDialogBody(
-          icon: 'icon',
-          name: 'name',
-          level: 'level',
-          id: 'id',
-          attribute: 'attribute',
-          effect: 'effect',
-          onSellTap: () {},
-          onTransferTap: () {},
-        ),
-      ],
-    );
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -58,13 +38,18 @@ class MintFromWidget extends StatelessWidget {
           // const SizedBox(height: 16),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 12.0),
-            child: GridViewBedItem(
-                beds: beds,
-                onBedTap: (bed) {
-                  _showBedDialog(context);
-                }),
+            child: SFGridView(
+              count: beds.length,
+              isScroll: false,
+              childAspectRatio: 1,
+              itemBuilder: (context, i) {
+                return ItemBed(beds: beds, i: i);
+              },
+            ),
           ),
-          const SizedBox(height: 20,),
+          const SizedBox(
+            height: 20,
+          ),
         ],
       ),
     );

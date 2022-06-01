@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
-import 'package:slee_fi/common/widgets/sf_prercent_blue.dart';
+import 'package:slee_fi/common/widgets/sf_percent_border.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
 
-class AtributeProcessWidget extends StatelessWidget {
-  const AtributeProcessWidget({
+class AttributeProcessWidget extends StatelessWidget {
+  const AttributeProcessWidget({
     Key? key,
     required this.linkImage,
     required this.title,
@@ -37,7 +37,7 @@ class AtributeProcessWidget extends StatelessWidget {
           ),
           Expanded(
             flex: 3,
-            child: SFPercentBlue(
+            child: SFPercentBorderGradient(
               totalValue: totalValue,
               valueActive: valueActive,
             ),

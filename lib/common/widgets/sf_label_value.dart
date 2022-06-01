@@ -39,7 +39,7 @@ class SFLabelValue extends StatelessWidget {
             flex: 1,
             child: SFText(
               keyText: label,
-              style: TextStyles.lightGrey16,
+              style: styleLabel,
             ),
           ),
           Container(

@@ -49,6 +49,8 @@ class AppColors {
 
   static const purple = Color(0xFFB800E7);
 
+  static const tick = Color(0xFF51638D);
+
   static const red = Color(0xFFFF511A);
   static const rank1 = Color(0xFF94D4FF);
   static const rank2 = Color(0xFF5FBFFF);
