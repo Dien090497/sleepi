@@ -114,7 +114,7 @@ abstract class  LocaleKeys {
   static const normal_gacha = 'normal_gacha';
   static const profitability = 'profitability';
   static const single_gacha = 'single_gacha';
-  static const 10_times_gacha = '10_times_gacha';
+  static const ten_times_gacha = 'ten_times_gacha';
   static const common = 'common';
   static const uncommon = 'uncommon';
   static const rare_beds_chance = 'rare_beds_chance';
@@ -395,4 +395,5 @@ abstract class  LocaleKeys {
   static const what_recycle = 'what_recycle';
   static const body_recycle = 'body_recycle';
   static const common_bed_box = 'common_bed_box';
+
 }
