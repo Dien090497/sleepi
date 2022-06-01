@@ -52,7 +52,7 @@ class _PopUpSellState extends State<PopUpSell> {
           Column(
             children: [
               SFText(
-                  keyText: step == 2 ? Keys.confirmToSell : Keys.sell,
+                  keyText: step == 2 ? LocaleKeys.confirm_to_sell : LocaleKeys.sell,
                   style: TextStyles.white1w700size18),
               const SizedBox(height: 20),
               if (step < 2) SFIcon(widget.icon),
@@ -87,7 +87,7 @@ class _PopUpSellState extends State<PopUpSell> {
                 children: [
                   Expanded(
                     child: SFButton(
-                      text: Keys.cancel,
+                      text: LocaleKeys.cancel,
                       onPressed: () {
                         Navigator.pop(context);
                       },
@@ -98,7 +98,7 @@ class _PopUpSellState extends State<PopUpSell> {
                   const SizedBox(width: 12),
                   Expanded(
                     child: SFButton(
-                      text: step < 2 ? Keys.next : Keys.confirm,
+                      text: step < 2 ? LocaleKeys.next : LocaleKeys.confirm,
                       textStyle: TextStyles.white16,
                       gradient: AppColors.gradientBlueButton,
                       onPressed: () {

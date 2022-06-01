@@ -241,7 +241,7 @@ class _HomeScreenState extends State<HomeScreen> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               SFButtonOutLined(
-                title: Keys.alarmBell,
+                title: LocaleKeys.alarm_bell,
                 onPressed: () {
                   Navigator.pushNamed(context, R.alarmSoundEffect);
                 },

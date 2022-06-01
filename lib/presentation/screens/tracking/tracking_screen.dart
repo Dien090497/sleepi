@@ -5,9 +5,8 @@ import 'package:slee_fi/common/style/text_styles.dart';
 import 'package:slee_fi/common/widgets/background_widget.dart';
 import 'package:slee_fi/common/widgets/sf_app_bar.dart';
 import 'package:slee_fi/common/widgets/sf_buttons.dart';
-import 'package:slee_fi/l10n/locale_keys.g.dart';
 import 'package:slee_fi/common/widgets/sf_label_value.dart';
-import 'package:slee_fi/di/translations/keys.dart';
+import 'package:slee_fi/l10n/locale_keys.g.dart';
 import 'package:slee_fi/presentation/screens/tracking/widgets/analog_clock.dart';
 import 'package:slee_fi/resources/resources.dart';
 
@@ -28,7 +27,7 @@ class _TrackingScreenState extends State<TrackingScreen> {
           backgroundColor: AppColors.transparent,
           appBar: SFAppBar(
               context: context,
-              title: Keys.tracking,
+              title: LocaleKeys.tracking,
               textStyle: TextStyles.bold18LightWhite),
           body: Column(
             children: [
@@ -77,7 +76,7 @@ class _TrackingScreenState extends State<TrackingScreen> {
               const Padding(
                 padding: EdgeInsets.symmetric(horizontal: 8.0),
                 child: SFLabelValue(
-                  label: Keys.alarm,
+                  label: LocaleKeys.alarm,
                   value: '10:00',
                   styleLabel: TextStyles.textColorSize16,
                   styleValue: TextStyles.textColorSize16,
@@ -85,7 +84,7 @@ class _TrackingScreenState extends State<TrackingScreen> {
               ),
               const Spacer(),
               SFButton(
-                text: Keys.wakeUp,
+                text: LocaleKeys.wake_up,
                 width: double.infinity,
                 color: AppColors.blue,
                 textStyle: TextStyles.w600WhiteSize16,

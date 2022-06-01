@@ -24,7 +24,7 @@ class ChanceWidget extends StatelessWidget {
               barRadius: 20,
               backgroundColor: Colors.white.withOpacity(0.05),
             ),
-
+]
           ),
         ),
 
@@ -36,27 +36,28 @@ class ChanceWidget extends StatelessWidget {
               ),
             )
           ],
-        )),
+        );
+    // ),
 		
-        GestureDetector(
-          child: Padding(
-            padding: const EdgeInsets.only(left: 20),
-            child: Container(
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(16),
-                  border: Border.all(color: AppColors.blue)),
-              padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 18),
-              child: SFText(
-                keyText: 'Get',
-                style: TextStyles.blue14,
-              ),
-            ),
-          ),
-          onTap: () {
-            Navigator.pushNamed(context, R.gacha500TimesChance);
-          },
-        )
-      ],
-    );
+    //     GestureDetector(
+    //       child: Padding(
+    //         padding: const EdgeInsets.only(left: 20),
+    //         child: Container(
+    //           decoration: BoxDecoration(
+    //               borderRadius: BorderRadius.circular(16),
+    //               border: Border.all(color: AppColors.blue)),
+    //           padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 18),
+    //           child: SFText(
+    //             keyText: 'Get',
+    //             style: TextStyles.blue14,
+    //           ),
+    //         ),
+    //       ),
+    //       onTap: () {
+    //         Navigator.pushNamed(context, R.gacha500TimesChance);
+    //       },
+    //     )
+    //   ],
+    // );
   }
 }
