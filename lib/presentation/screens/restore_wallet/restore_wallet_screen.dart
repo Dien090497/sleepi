@@ -15,84 +15,88 @@ class RestoreWalletScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BackgroundWidget(
-      child: Scaffold(
-        backgroundColor: AppColors.transparent,
-        appBar: SFAppBar(
-          context: context,
-          title: LocaleKeys.restore_wallet,
-          textStyle: TextStyles.bold18LightWhite,
-        ),
-        body: SafeArea(
-          child: Stack(
-            children: [
-              Align(
-                  alignment: Alignment.bottomCenter,
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: 24.0, vertical: 8.0),
-                    child: SFButton(
-                      text: LocaleKeys.import_wallet,
-                      textStyle: TextStyles.w600WhiteSize16,
-                      height: 48,
-                      width: double.infinity,
-                      color: AppColors.blue,
-                      onPressed: () {},
-                    ),
-                  )),
-              ListView(
-                padding: const EdgeInsets.symmetric(horizontal: 24.0),
-                children: [
-                  SFCard(
-                    margin: const EdgeInsets.only(top: 16.0),
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: 16.0, vertical: 12.0),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        const SizedBox(height: 24),
-                        SFText(
-                          keyText: LocaleKeys.email_verification_code,
-                          style: TextStyles.lightGrey14,
-                        ),
-                        const SizedBox(
-                          height: 4,
-                        ),
-                        Container(
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(8),
-                            border: Border.all(
-                                color: AppColors.white.withOpacity(0.1)),
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 16),
+        child: Scaffold(
+          backgroundColor: AppColors.transparent,
+          appBar: SFAppBar(
+            context: context,
+            title: LocaleKeys.restore_wallet,
+            textStyle: TextStyles.bold18LightWhite,
+          ),
+          body: SafeArea(
+            child: Stack(
+              children: [
+                Align(
+                    alignment: Alignment.bottomCenter,
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 24.0, vertical: 8.0),
+                      child: SFButton(
+                        text: LocaleKeys.import_wallet,
+                        textStyle: TextStyles.w600WhiteSize16,
+                        height: 48,
+                        width: double.infinity,
+                        color: AppColors.blue,
+                        onPressed: () {},
+                      ),
+                    )),
+                ListView(
+                  padding: const EdgeInsets.symmetric(horizontal: 24.0),
+                  children: [
+                    SFCard(
+                      margin: const EdgeInsets.only(top: 16.0),
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 16.0, vertical: 12.0),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          const SizedBox(height: 24),
+                          SFText(
+                            keyText: LocaleKeys.email_verification_code,
+                            style: TextStyles.lightGrey14,
                           ),
-                          padding: const EdgeInsets.only(left: 12, right: 4),
-                          child: Row(
-                            children: const [
-                              Expanded(
-                                child: SFTextField(
-                                  // hintText: LocaleKeys.emailVerification,
-                                  noBorder: true,
+                          const SizedBox(
+                            height: 4,
+                          ),
+                          Container(
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(8),
+                              border: Border.all(
+                                  color: AppColors.white.withOpacity(0.1)),
+                            ),
+                            padding: const EdgeInsets.only(left: 12, right: 4),
+                            child: Row(
+                              children: const [
+                                Expanded(
+                                  child: SFTextField(
+                                    // hintText: LocaleKeys.emailVerification,
+                                    noBorder: true,
+                                  ),
                                 ),
-                              ),
-                              SFTextButton(
-                                text: LocaleKeys.send_code,
-                                textStyle: TextStyles.blue12,
-                                // color: Colors.transparent,
-                              ),
-                            ],
+                                SFTextButton(
+                                  text: LocaleKeys.send_code,
+                                  textStyle: TextStyles.blue12,
+                                  // color: Colors.transparent,
+                                ),
+                              ],
+                            ),
                           ),
-                        ),
-                        const SizedBox(height: 20),
-                        const SFTextField(
-                          maxLine: 10,
-                          maxLength: 100,
-                          hintText: LocaleKeys.hint_restore_wallet,
-                          hintStyle: TextStyles.lightGrey16,
-                        ),
-                      ],
+                          const SizedBox(height: 20),
+                          const SFTextField(
+                            maxLine: 10,
+                            maxLength: 100,
+                            labelText: LocaleKeys.seed_phrase,
+                            hintText: LocaleKeys.hint_restore_wallet,
+                            hintStyle: TextStyles.lightGrey16,
+                          ),
+                        ],
+                      ),
                     ),
-                  ),
-                ],
-              )
-            ],
+                  ],
+                )
+              ],
+            ),
           ),
         ),
       ),
