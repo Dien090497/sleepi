@@ -11,16 +11,16 @@ import 'package:slee_fi/resources/resources.dart';
 class TabJewelsDetail extends StatelessWidget {
   const TabJewelsDetail({Key? key}) : super(key: key);
 
-  void _showJewelDialog(BuildContext context) {
+  void _showJewelDialog(BuildContext context, String img) {
     showCustomDialog(
       context,
       padding: const EdgeInsets.all(24),
       children: [
         JewelDialogBody(
-          icon: Imgs.jewelGreen,
+          icon: img,
           name: 'name',
-          level: 'level',
-          id: 'id',
+          level: 'Lv.1',
+          id: '12345678910',
           attribute: 'attribute',
           effect: 'effect',
           onSellTap: () {},
@@ -54,7 +54,7 @@ class TabJewelsDetail extends StatelessWidget {
                   itemBuilder: (context, i) {
                     return GestureDetector(
                       onTap: () {
-                        _showJewelDialog(context);
+                        _showJewelDialog(context, jewels[i]);
                       },
                       child: MyJewelsShortWidget(
                         icon: jewels[i % jewels.length],
