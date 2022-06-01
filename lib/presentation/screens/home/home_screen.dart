@@ -150,7 +150,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                 width: size.width,
                                 height: 46,
                                 padding:
-                                    const EdgeInsets.symmetric(horizontal: 15),
+                                    const EdgeInsets.symmetric(horizontal: 12),
                                 alignment: Alignment.centerRight,
                                 child: Text(
                                   index < 10 ? '0$index' : '$index',
@@ -202,7 +202,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                 width: size.width,
                                 height: 46,
                                 padding:
-                                    const EdgeInsets.symmetric(horizontal: 15),
+                                    const EdgeInsets.symmetric(horizontal: 12),
                                 alignment: Alignment.centerLeft,
                                 child: Text(
                                   index < 10 ? '0$index' : '$index',
@@ -240,19 +240,19 @@ class _HomeScreenState extends State<HomeScreen> {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Expanded(
-                child: SFButtonOutLined(
-                  title: LocaleKeys.alarm_bell,
-                  onPressed: () {
-                    Navigator.pushNamed(context, R.alarmSoundEffect);
-                  },
-                  fixedSize: const Size(274, 40),
-                  textStyle: TextStyles.blue16,
-                  icon: Icons.add_circle_outline,
-                  borderColor: AppColors.blue,
-                  iconColor: AppColors.blue,
-                  withBorder: 1,
-                ),
+              SFButtonOutLined(
+                title: Keys.alarmBell,
+                onPressed: () {
+                  Navigator.pushNamed(context, R.alarmSoundEffect);
+                },
+                fixedSize: const Size(274, 40),
+                textStyle: TextStyles.blue16,
+                borderColor: AppColors.blue,
+                iconColor: AppColors.blue,
+                withBorder: 1,
+              ),
+              const SizedBox(
+                height: 22,
               ),
               const SizedBox(width: 22,),
               CupertinoSwitch(

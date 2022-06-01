@@ -4,6 +4,7 @@ import 'package:slee_fi/common/style/text_styles.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
 import 'package:slee_fi/l10n/locale_keys.g.dart';
 import 'package:slee_fi/presentation/screens/gacha/widgets/atribute_process.dart';
+import 'package:slee_fi/resources/resources.dart';
 
 class UpGradeTab extends StatelessWidget {
   const UpGradeTab({Key? key}) : super(key: key);
@@ -92,6 +93,22 @@ class UpGradeTab extends StatelessWidget {
                 ],
               ),
             ),
+        Container(
+          decoration: BoxDecoration(
+            color: AppColors.whiteOpacity5,
+            borderRadius: BorderRadius.circular(15),
+          ),
+          width: double.infinity,
+          margin: const EdgeInsets.symmetric(horizontal: 8),
+          padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 8),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: const [
+              AttributeProcessWidget(linkImage: Imgs.efficiency, title: 'Level 2 Jewel', totalValue: 10, valueActive: 3.3, isUpGrade: true,),
+              AttributeProcessWidget(linkImage: Imgs.efficiency, title: 'Failure', totalValue: 10, valueActive: 6.8, isUpGrade: true,),
+            ],
+          ),
+        ),
           ],
         ),
       ),

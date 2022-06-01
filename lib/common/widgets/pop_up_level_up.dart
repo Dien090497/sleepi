@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
 import 'package:slee_fi/common/widgets/sf_buttons.dart';
-import 'package:slee_fi/common/widgets/sf_card.dart';
 import 'package:slee_fi/common/widgets/sf_dialog.dart';
 import 'package:slee_fi/common/widgets/sf_icon.dart';
+import 'package:slee_fi/common/widgets/sf_label_value.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
 import 'package:slee_fi/l10n/locale_keys.g.dart';
 
@@ -67,11 +67,14 @@ class PopUpLevelUp extends StatelessWidget {
                     text: 'Level up to ',
                     style: TextStyles.lightGrey14,
                     children: [
-                      TextSpan(text: 'Lv $level', style: TextStyles.bold14Blue),
+                      TextSpan(
+                          text: 'Lv ${level + 1}',
+                          style: TextStyles.bold14Blue),
                     ]),
               ),
             ),
             const SizedBox(height: 8),
+
             SFCard(
               margin: EdgeInsets.zero,
               padding: const EdgeInsets.symmetric(vertical: 24, horizontal: 18),
@@ -112,6 +115,17 @@ class PopUpLevelUp extends StatelessWidget {
                   ),
                 ],
               ),
+			  
+            SFLabelValue(
+              label: Keys.cost,
+              value: '$cost',
+              styleValue: TextStyles.textColorSize16,
+            ),
+            const SizedBox(height: 8),
+            SFLabelValue(
+              label: Keys.time,
+              value: '$time mins',
+              styleValue: TextStyles.textColorSize16,
             ),
             const SizedBox(height: 24),
             Row(

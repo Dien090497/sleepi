@@ -19,10 +19,14 @@ class TextStyles {
       fontSize: 24, color: AppColors.white, fontWeight: FontWeight.w700);
   static const w700TextColorSize14 = TextStyle(
       fontSize: 14, color: AppColors.textColor, fontWeight: FontWeight.w700);
+  static const textColorSize16 = TextStyle(
+      fontSize: 16, color: AppColors.textColor);
   static const w600LightGreySize16 = TextStyle(
       fontSize: 16, color: AppColors.lightGrey, fontWeight: FontWeight.w600);
   static const white1w700size16 = TextStyle(
       fontSize: 16, color: AppColors.light1, fontWeight: FontWeight.w700);
+  static const white1w700size18 = TextStyle(
+      fontSize: 18, color: AppColors.light1, fontWeight: FontWeight.w700);
   static const white1w700size12 = TextStyle(
       fontSize: 12, color: AppColors.light1, fontWeight: FontWeight.w700);
   static const greenW700size12 = TextStyle(

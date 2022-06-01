@@ -38,15 +38,24 @@ class InfoIndividualScreen extends StatelessWidget {
                 physics: const ScrollPhysics(),
                 child: Column(
                   children: [
-                    SizedBox(
-                      height: 230,
-                      child: Stack(
-                        alignment: Alignment.center,
-                        children: const [
-                          SFIcon(Imgs.borderBed),
-                          SFIcon(Ics.sleep),
-                        ],
+                    Container(
+                      width: 180,
+                      height: 180,
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 13,
                       ),
+                      margin: const EdgeInsets.symmetric(
+                        vertical: 24,
+                      ),
+                      decoration: const BoxDecoration(
+                        image: DecorationImage(
+                          image: AssetImage(
+                            "assets/images/borderBed.png",
+                          ),
+                          fit: BoxFit.cover,
+                        ),
+                      ),
+                      child: const SFIcon(Ics.sleep),
                     ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,

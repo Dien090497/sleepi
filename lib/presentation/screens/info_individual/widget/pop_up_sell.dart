@@ -52,9 +52,8 @@ class _PopUpSellState extends State<PopUpSell> {
           Column(
             children: [
               SFText(
-                  keyText:
-                      step == 2 ? LocaleKeys.confirm_to_sell : LocaleKeys.sell,
-                  style: TextStyles.white1w700size16),
+                  keyText: step == 2 ? Keys.confirmToSell : Keys.sell,
+                  style: TextStyles.white1w700size18),
               const SizedBox(height: 20),
               if (step < 2) SFIcon(widget.icon),
               if (step < 2) const SizedBox(height: 24),
@@ -87,14 +86,21 @@ class _PopUpSellState extends State<PopUpSell> {
               Row(
                 children: [
                   Expanded(
-                      child: SFButton(
-                    text: LocaleKeys.cancel,
-                    onPressed: widget.onCancel,
-                  )),
+                    child: SFButton(
+                      text: Keys.cancel,
+                      onPressed: () {
+                        Navigator.pop(context);
+                      },
+                      textStyle: TextStyles.lightGrey16,
+                      color: AppColors.light4,
+                    ),
+                  ),
                   const SizedBox(width: 12),
                   Expanded(
                     child: SFButton(
-                      text: step < 2 ? LocaleKeys.next : LocaleKeys.confirm,
+                      text: step < 2 ? Keys.next : Keys.confirm,
+                      textStyle: TextStyles.white16,
+                      gradient: AppColors.gradientBlueButton,
                       onPressed: () {
                         switch (step) {
                           case 0:
@@ -140,7 +146,10 @@ class _Confirm extends StatelessWidget {
             ),
             Expanded(
               child: SFText(
-                  keyText: '19 SLFT', style: TextStyles.lightWhite16W700),
+                keyText: '19 SLFT',
+                style: TextStyles.lightWhite16,
+                textAlign: TextAlign.right,
+              ),
             ),
           ],
         ),
@@ -154,7 +163,11 @@ class _Confirm extends StatelessWidget {
                   style: TextStyles.lightGrey14),
             ),
             Expanded(
-              child: SFText(keyText: '4%', style: TextStyles.lightWhite16W700),
+              child: SFText(
+                keyText: '4%',
+                style: TextStyles.lightWhite16,
+                textAlign: TextAlign.right,
+              ),
             ),
           ],
         ),
@@ -168,7 +181,11 @@ class _Confirm extends StatelessWidget {
                   style: TextStyles.lightGrey14),
             ),
             Expanded(
-              child: SFText(keyText: '2%', style: TextStyles.lightWhite16W700),
+              child: SFText(
+                keyText: '2%',
+                style: TextStyles.lightWhite16,
+                textAlign: TextAlign.right,
+              ),
             ),
           ],
         ),
@@ -183,7 +200,10 @@ class _Confirm extends StatelessWidget {
             ),
             Expanded(
               child: SFText(
-                  keyText: LocaleKeys.free, style: TextStyles.lightWhite16W700),
+                keyText: LocaleKeys.free,
+                style: TextStyles.lightWhite16,
+                textAlign: TextAlign.right,
+              ),
             ),
           ],
         ),

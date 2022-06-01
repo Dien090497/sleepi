@@ -90,44 +90,82 @@ class _ShareScreenState extends State<ShareScreen> {
               ),
               body: Column(
                 children: [
-                  Container(
-                    decoration: BoxDecoration(
-                      color: AppColors.white.withOpacity(0.05),
-                      borderRadius: const BorderRadius.only(
-                        topLeft: Radius.circular(16),
-                        topRight: Radius.circular(16),
-                      ),
-                    ),
-                    child: Column(
-                      children: [
-                        ClipPath(
-                          clipper: CurvedBottomClipper(),
-                          child: Container(
-                            height: 190.0,
-                            alignment: Alignment.center,
-                            decoration: BoxDecoration(
-                              color: AppColors.purple.withOpacity(0.05),
-                              borderRadius: BorderRadius.circular(16),
-                            ),
-                            child: itemSleep(),
+                  Stack(
+                    children: [
+                      Container(
+                        decoration: BoxDecoration(
+                          color: AppColors.white.withOpacity(0.05),
+                          borderRadius: const BorderRadius.only(
+                            topLeft: Radius.circular(16),
+                            topRight: Radius.circular(16),
                           ),
                         ),
-                        const SizedBox(
-                          height: 16,
+                        child: Column(
+                          children: [
+                            ClipPath(
+                              clipper: CurvedBottomClipper(),
+                              child: Container(
+                                height: 190.0,
+                                alignment: Alignment.center,
+                                decoration: BoxDecoration(
+                                  color: AppColors.purple.withOpacity(0.05),
+                                  borderRadius: BorderRadius.circular(16),
+                                ),
+                                child: Column(
+                                  children: [
+                                    const SizedBox(height: 35),
+                                    const SFIcon(
+                                      Ics.shortBed,
+                                      color: AppColors.blue,
+                                      width: 155,
+                                      height: 72,
+                                    ),
+                                    const SizedBox(height: 29),
+                                    Container(
+                                      decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(50),
+                                        border: Border.all(
+                                            color: AppColors.white
+                                                .withOpacity(0.1)),
+                                      ),
+                                      padding: const EdgeInsets.symmetric(
+                                          vertical: 5, horizontal: 16),
+                                      child: SFText(
+                                        keyText: 'IDIDIDID',
+                                        style: TextStyles.white1w700size12,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                            const SizedBox(
+                              height: 16,
+                            ),
+                            const CategoryHeaderShare(),
+                            const SizedBox(
+                              height: 12,
+                            ),
+                            Padding(
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 16.0),
+                              child: ChartStatisticShare(),
+                            ),
+                            const SizedBox(
+                              height: 10,
+                            ),
+                          ],
                         ),
-                        const CategoryHeaderShare(),
-                        const SizedBox(
-                          height: 12,
+                      ),
+                      const Positioned(
+                        top: 14,
+                        left: -30,
+                        child: TopLeftBanner(
+                          text: 'Short',
+                          textColor: AppColors.red,
                         ),
-                        Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                          child: ChartStatisticShare(),
-                        ),
-                        const SizedBox(
-                          height: 10,
-                        ),
-                      ],
-                    ),
+                      ),
+                    ],
                   ),
                   const SleepFiQrCode(value: 'SLeepFi'),
                 ],
