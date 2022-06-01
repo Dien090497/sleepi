@@ -28,7 +28,7 @@ class MicPermissionScreen extends StatelessWidget {
                         height: 24.0,
                       ),
                       SFText(
-                        keyText: Keys.micPermission,
+                        keyText: LocaleKeys.mic_permission,
                         style: TextStyles.bold24LightWhite,
                         textAlign: TextAlign.center,
                       ),
@@ -36,14 +36,14 @@ class MicPermissionScreen extends StatelessWidget {
                         height: 32.0,
                       ),
                       SFText(
-                        keyText: Keys.displaysMessageMicPermission,
+                        keyText: LocaleKeys.displays_message_mic_permission,
                         style: TextStyles.lightGrey16,
                       ),
                       const SizedBox(
                         height: 16.0,
                       ),
                       SFText(
-                        keyText: Keys.displaysMessageMicPermission1,
+                        keyText: LocaleKeys.displays_message_mic_permission_1,
                         style: TextStyles.lightGrey16,
                       ),
                       // SizedBox(height: MediaQuery.of(context).size.height * 0.2,),
@@ -58,7 +58,7 @@ class MicPermissionScreen extends StatelessWidget {
                         height: 48,
                         width: double.infinity,
                         color: AppColors.blue,
-                        text: Keys.setupMicrophoneAccess,
+                        text: LocaleKeys.setup_microphone_access,
                         textStyle: TextStyles.w600WhiteSize16,
                         onPressed: () =>
                             Navigator.pushNamed(context, R.healthcarePermission),

@@ -24,7 +24,7 @@ class StakingList extends StatelessWidget {
       padding: const EdgeInsets.all(15.0),
       children: [
         SFText(
-          keyText: LocaleKeys.tvlInSleefi,
+          keyText: LocaleKeys.tvl_in_sleefi,
           style: TextStyles.lightGrey14,
         ),
         const SizedBox(height: 16),
@@ -38,7 +38,7 @@ class StakingList extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               SFText(
-                keyText: LocaleKeys.tvlInSleefi,
+                keyText: LocaleKeys.tvl_in_sleefi,
                 style: TextStyles.bold16LightWhite,
               ),
               const SizedBox(
@@ -81,7 +81,7 @@ class StakingList extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               SFText(
-                keyText: LocaleKeys.earningToken,
+                keyText: LocaleKeys.earning_token,
                 style: TextStyles.lightWhite16,
               ),
               SFText(
@@ -97,7 +97,7 @@ class StakingList extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               SFText(
-                keyText: LocaleKeys.mintingDiscount,
+                keyText: LocaleKeys.minting_discount,
                 style: TextStyles.lightWhite16,
               ),
               SFText(
@@ -113,7 +113,7 @@ class StakingList extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               SFText(
-                keyText: LocaleKeys.levelUpDiscount,
+                keyText: LocaleKeys.level_up_discount,
                 style: TextStyles.lightWhite16,
               ),
               SFText(
@@ -130,7 +130,7 @@ class StakingList extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             SFText(
-              keyText: LocaleKeys.stakeTokens,
+              keyText: LocaleKeys.stake_tokens,
               style: TextStyles.lightGrey14,
             ),
             GestureDetector(
@@ -155,7 +155,7 @@ class StakingList extends StatelessWidget {
                 children: [
                   Expanded(
                       child: SFText(
-                    keyText: LocaleKeys.yourSlftEarned,
+                    keyText: LocaleKeys.your_slft_earned,
                     style: TextStyles.lightWhite16,
                   )),
                   Row(
@@ -181,7 +181,7 @@ class StakingList extends StatelessWidget {
                 children: [
                   Expanded(
                       child: SFText(
-                    keyText: LocaleKeys.yourStakedAmount,
+                    keyText: LocaleKeys.your_staked_amount,
                     style: TextStyles.lightWhite16,
                   )),
                   Row(
@@ -265,7 +265,7 @@ class StakingList extends StatelessWidget {
         Column(
           children: [
             SFButton(
-              text: LocaleKeys.buySlft,
+              text: LocaleKeys.buy_slft,
               textStyle: TextStyles.bold14LightWhite,
               color: AppColors.blue,
               width: double.infinity,
@@ -277,7 +277,7 @@ class StakingList extends StatelessWidget {
             SizedBox(
               height: 48,
               child: SFButtonOutLined(
-                  title: LocaleKeys.showContractOnAvascan,
+                  title: LocaleKeys.show_contract_on_avascan,
                   textStyle: TextStyles.bold16Blue,
                   borderColor: AppColors.blue,
                   onPressed: () {}),

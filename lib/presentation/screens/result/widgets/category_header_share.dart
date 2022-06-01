@@ -76,7 +76,7 @@ class CategoryHeaderShare extends StatelessWidget {
           child: Column(
             children: [
               SFText(
-                keyText: LocaleKeys.sleepDuration,
+                keyText: LocaleKeys.sleep_duration,
                 style: TextStyles.lightGrey11,
               ),
               SFText(
@@ -104,7 +104,7 @@ class CategoryHeaderShare extends StatelessWidget {
           child: Column(
             children: [
               SFText(
-                keyText: LocaleKeys.sleepScore,
+                keyText: LocaleKeys.sleep_score,
                 style: TextStyles.lightGrey11,
               ),
               SFText(

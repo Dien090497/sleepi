@@ -3,7 +3,7 @@ import 'package:slee_fi/common/style/text_styles.dart';
 import 'package:slee_fi/common/widgets/overlay_container.dart';
 import 'package:slee_fi/common/widgets/sf_icon.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
-import 'package:slee_fi/di/translations/keys.dart';
+import 'package:slee_fi/l10n/locale_keys.g.dart';
 import 'package:slee_fi/resources/resources.dart';
 
 class PopupInfoSpending extends StatefulWidget {
@@ -33,14 +33,14 @@ class _PopupInfoSpendingState extends State<PopupInfoSpending> {
             Row(
               children: [
                 SFText(
-                    keyText: Keys.spendingAccount, style: TextStyles.blue12),
+                    keyText: LocaleKeys.spending_account, style: TextStyles.blue12),
                 const SizedBox(width: 6,),
                 const SFIcon(Ics.icQuestion),
               ],
             ),
             OverlayContainer(
               show: _dropdownShown,
-              message: Keys.displaysMessageFromSpendingDetail,
+              message: LocaleKeys.displays_message_from_spending_detail,
             ),
           ],
         ),

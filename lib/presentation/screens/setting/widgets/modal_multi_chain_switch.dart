@@ -27,7 +27,7 @@ class _ModalMultiChainSwitchState extends State<ModalMultiChainSwitch> {
           height: 32.0,
         ),
         SFText(
-            keyText: LocaleKeys.multiChainSwitch,
+            keyText: LocaleKeys.multi,
             style: TextStyles.bold18White),
         const SizedBox(
           height: 32.0,

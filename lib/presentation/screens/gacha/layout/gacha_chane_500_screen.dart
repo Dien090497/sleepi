@@ -87,7 +87,7 @@ class _GachaChance500ScreenState extends State<GachaChance500Screen> {
                                         borderRadius: BorderRadius.circular(16),
                                       ),
                                       padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 15),
-                                      child: SFText(keyText: Keys.quality, style: TextStyles.blue14,),
+                                      child: SFText(keyText: LocaleKeys.quality, style: TextStyles.blue14,),
                                     ),
                                     Container(
                                       decoration: BoxDecoration(
@@ -108,7 +108,7 @@ class _GachaChance500ScreenState extends State<GachaChance500Screen> {
                             ),
                           ),
                         ),
-                        SFText(keyText: Keys.attributes, style: TextStyles.boldWhite18,),
+                        SFText(keyText: LocaleKeys.attributes, style: TextStyles.boldWhite18,),
                         Padding(
                           padding: const EdgeInsets.symmetric(
                               horizontal: 20, vertical: 15),

@@ -31,7 +31,7 @@ class ConfirmPasscodeScreen extends StatelessWidget {
         backgroundColor: AppColors.transparent,
         appBar: SFAppBar(
           context: context,
-          title: LocaleKeys.secureWallet,
+          title: LocaleKeys.secure_wallet,
           textStyle: TextStyles.bold18LightWhite,
         ),
         body: SafeArea(
@@ -42,7 +42,7 @@ class ConfirmPasscodeScreen extends StatelessWidget {
               ),
               Center(
                   child: SFText(
-                      keyText: LocaleKeys.confirmYourPasscode,
+                      keyText: LocaleKeys.confirm_your_passcode,
                       style: TextStyles.white12)),
               const SizedBox(height: 12),
               PinCodeWidget(controller: passcodeController),

@@ -43,7 +43,7 @@ class PopUpItem extends StatelessWidget {
               ),
               const SizedBox(height: 4),
               SFText(
-                keyText: LocaleKeys.displaysMessageEffectItem,
+                keyText: LocaleKeys.displays_message_effect_item,
                 style: TextStyles.lightGrey14,
               ),
             ],

@@ -60,7 +60,7 @@ class UpGradeTab extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.symmetric(vertical: 10),
               child: SFText(
-                keyText: LocaleKeys.successRate,
+                keyText: LocaleKeys.success_rate,
                 style: TextStyles.white14,
               ),
             ),

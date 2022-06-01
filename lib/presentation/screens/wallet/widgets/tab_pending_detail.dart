@@ -29,7 +29,7 @@ class TabPendingDetail extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       SFText(
-                        keyText: Keys.confirm,
+                        keyText: LocaleKeys.confirm,
                         style: TextStyles.bold16Blue,
                       ),
                       const SizedBox(

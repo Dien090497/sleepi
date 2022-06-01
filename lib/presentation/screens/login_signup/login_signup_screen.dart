@@ -37,12 +37,12 @@ class LoginSignUpScreen extends StatelessWidget {
                     ),
                     const SizedBox(height: 25),
                     const SFTextField(
-                      labelText: LocaleKeys.emailAddress,
+                      labelText: LocaleKeys.email_address,
                       // hintText: LocaleKeys.emailAddress,
                     ),
                     const SizedBox(height: 12),
                     const SFTextFieldTextButton(
-                      labelText: LocaleKeys.emailVerificationCode,
+                      labelText: LocaleKeys.email_verification_code,
                     ),
                     const SizedBox(height: 37),
                     SFButton(
@@ -56,7 +56,7 @@ class LoginSignUpScreen extends StatelessWidget {
                     ),
                     const SizedBox(height: 10),
                     SFText(
-                        keyText: LocaleKeys.accountLogin,
+                        keyText: LocaleKeys.account_login,
                         style: TextStyles.blue14)
                   ],
                 ),

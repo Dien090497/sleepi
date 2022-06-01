@@ -31,7 +31,7 @@ class ModalItemList extends StatelessWidget {
             child: Row(
               children: [
                 SFText(
-                  keyText: LocaleKeys.itemList,
+                  keyText: LocaleKeys.item_list,
                   style: TextStyles.bold18White,
                 ),
                 const Spacer(),

@@ -40,7 +40,7 @@ class PopUpTransfer extends StatelessWidget {
         Column(
           children: [
             SFText(
-              keyText: LocaleKeys.confirmTransfer,
+              keyText: LocaleKeys.confirm_transfer,
               style: TextStyles.white1w700size16,
             ),
             const SizedBox(height: 20),
@@ -105,7 +105,7 @@ class PopUpTransfer extends StatelessWidget {
             Row(
               children: [
                 SFText(
-                  keyText: LocaleKeys.youWillTransfer,
+                  keyText: LocaleKeys.you_will_transfer,
                   style: TextStyles.lightGrey12,
                 ),
                 const SizedBox(width: 4),

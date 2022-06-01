@@ -80,15 +80,15 @@ abstract class  LocaleKeys {
   static const epic_bed = 'epic_bed';
   static const legendary_bed = 'legendary_bed';
   static const attributes = 'attributes';
-  static const Efficiency = 'Efficiency';
-  static const Luck = 'Luck';
-  static const Bonus = 'Bonus';
-  static const Special = 'Special';
-  static const Resilience = 'Resilience';
+  static const efficiency = 'efficiency';
+  static const luck = 'luck';
+  static const bonus = 'bonus';
+  static const special = 'special';
+  static const resilience = 'resilience';
   static const select_bed_type = 'select_bed_type';
   static const confirm = 'confirm';
   static const wake_up = 'wake_up';
-  static const Statistics = 'Statistics';
+  static const statistics = 'statistics';
   static const day = 'day';
   static const week = 'week';
   static const month = 'month';
@@ -155,6 +155,7 @@ abstract class  LocaleKeys {
   static const setting = 'setting';
   static const alarm = 'alarm';
   static const music = 'music';
+  static const sound = 'sound';
   static const vibration = 'vibration';
   static const snooze = 'snooze';
   static const volume = 'volume';
@@ -174,6 +175,7 @@ abstract class  LocaleKeys {
   static const multi-chain_switch = 'multi-chain_switch';
   static const version = 'version';
   static const done = 'done';
+  static const secret = 'secret';
   static const activation_code_language_lowercase = 'activation_code_language_lowercase';
   static const activation_code = 'activation_code';
   static const language = 'language';
@@ -274,7 +276,8 @@ abstract class  LocaleKeys {
   static const hint_restore_wallet = 'hint_restore_wallet';
   static const roi_calculator = 'roi_calculator';
   static const flexible = 'flexible';
-  static const sleeFi_stacked = 'sleeFi_stacked';
+  static const sleeFi_staked = 'sleeFi_staked';
+  static const slft_staked = 'slft_staked';
   static const add_duration = 'add_duration';
   static const roi_current_rates = 'roi_current_rates';
   static const download = 'download';

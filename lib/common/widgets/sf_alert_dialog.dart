@@ -9,7 +9,7 @@ Future<T?> showCustomAlertDialog<T>(
       EdgeInsets? padding,
       double? width,
       double? height,
-      bool? showClosed,
+      bool showClosed = true,
     }) async {
   return showDialog(
       context: context,
@@ -41,7 +41,7 @@ class SFAlertDialog extends StatelessWidget {
   final EdgeInsets? padding;
   final double? height;
   final double? width;
-  final bool? showClose;
+  final bool showClose;
 
   @override
   Widget build(BuildContext context) {

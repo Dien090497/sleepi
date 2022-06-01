@@ -26,7 +26,7 @@ class TrackingScreen extends StatelessWidget {
               children: [
                 const Spacer(),
                 SFButton(
-                  text: LocaleKeys.wakeUp,
+                  text: LocaleKeys.wake_up,
                   width: double.infinity,
                   color: AppColors.blue,
                   textStyle: TextStyles.w600WhiteSize16,

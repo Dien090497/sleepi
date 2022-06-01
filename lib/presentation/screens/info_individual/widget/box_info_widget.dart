@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 // import 'package:flutter_translate/flutter_translate.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
@@ -25,7 +26,7 @@ class BoxInfoWidget extends StatelessWidget {
             height: 16,
           ),
           Text(
-            '${translate(LocaleKeys.time)}: 6h -8h',
+            '${LocaleKeys.time.tr()}: 6h -8h',
             style: TextStyles.lightGrey14,
           ),
           const SizedBox(
@@ -45,7 +46,7 @@ class BoxInfoWidget extends StatelessWidget {
                 width: 8,
               ),
               SFButton(
-                text: LocaleKeys.flexibleBed,
+                text: LocaleKeys.flexible_bed,
                 textStyle: TextStyles.green14,
                 color: Colors.green.withOpacity(0.05),
                 radius: 50,
@@ -103,7 +104,7 @@ class BoxInfoWidget extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 16.0),
                 child: Text(
-                  '${translate(LocaleKeys.bedMint)} 0/7',
+                  '${LocaleKeys.bed_mint.tr()} 0/7',
                   style: TextStyles.white10,
                 ),
               )

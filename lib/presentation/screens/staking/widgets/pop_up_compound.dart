@@ -3,7 +3,7 @@ import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
 import 'package:slee_fi/common/widgets/sf_buttons.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
-import 'package:slee_fi/di/translations/keys.dart';
+import 'package:slee_fi/l10n/locale_keys.g.dart';
 
 class PopUpCompound extends StatelessWidget {
   const PopUpCompound({Key? key}) : super(key: key);
@@ -21,7 +21,7 @@ class PopUpCompound extends StatelessWidget {
           children: [
             Expanded(
               child: SFButton(
-                text: Keys.yes,
+                text: LocaleKeys.yes,
                 textStyle: TextStyles.bold14LightWhite,
                 color: AppColors.blue,
                 onPressed: () {},
@@ -32,7 +32,7 @@ class PopUpCompound extends StatelessWidget {
             ),
             Expanded(
               child: SFButton(
-                text: Keys.no,
+                text: LocaleKeys.no,
                 textStyle: TextStyles.w600LightGreySize16,
                 color: AppColors.light4,
                 onPressed: () => Navigator.maybePop(context),

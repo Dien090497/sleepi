@@ -23,7 +23,7 @@ class CreateWalletScreen extends StatelessWidget {
           backgroundColor: AppColors.transparent,
           appBar: SFAppBar(
             context: context,
-            title: LocaleKeys.createWallet,
+            title: LocaleKeys.create_wallet,
             textStyle: TextStyles.bold18LightWhite,
           ),
           body: SafeArea(
@@ -40,14 +40,14 @@ class CreateWalletScreen extends StatelessWidget {
                           child: Column(
                             children: [
                               SFTextFieldTextButton(
-                                labelText: LocaleKeys.emailVerificationCode,
-                                textButton: LocaleKeys.sendCode,
+                                labelText: LocaleKeys.email_verification_code,
+                                textButton: LocaleKeys.send_code,
                                 onPressed: () {},
                               ),
                               const SizedBox(height: 16),
                               SFText(
                                 keyText: LocaleKeys
-                                    .youHaveAlreadyCreatedAWalletAddress,
+                                    .you_have_already_created_a_wallet_address,
                                 style: TextStyles.w400lightGrey12,
                               ),
                             ],
@@ -57,7 +57,7 @@ class CreateWalletScreen extends StatelessWidget {
                     ),
                   ),
                   SFButton(
-                    text: LocaleKeys.createWallet,
+                    text: LocaleKeys.create_wallet,
                     textStyle: TextStyles.w600WhiteSize16,
                     height: 48,
                     width: double.infinity,

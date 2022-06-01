@@ -22,7 +22,7 @@ class WithdrawSlftScreen extends StatelessWidget {
         backgroundColor: AppColors.transparent,
         appBar: SFAppBar(
           context: context,
-          title: LocaleKeys.withdrawSlft,
+          title: LocaleKeys.withdraw_slft,
           textStyle: TextStyles.bold18LightWhite,
         ),
         body: SafeArea(
@@ -44,7 +44,7 @@ class WithdrawSlftScreen extends StatelessWidget {
                           children: [
                             Expanded(
                                 child: SFText(
-                              keyText: LocaleKeys.yourStakedAmount,
+                              keyText: LocaleKeys.your_staked_amount,
                               style: TextStyles.lightGrey12,
                             )),
                             SFText(

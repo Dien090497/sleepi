@@ -22,10 +22,10 @@ class GachaScreen extends StatelessWidget {
                       horizontal: 24.0, vertical: 12),
                   children: const [
                     ItemsGacha(
-                      title: LocaleKeys.normalGacha,
+                      title: LocaleKeys.normal_gacha,
                     ),
                     ItemsGacha(
-                      title: LocaleKeys.specialGacha,
+                      title: LocaleKeys.special_gacha,
                     ),
                   ],
                 ),

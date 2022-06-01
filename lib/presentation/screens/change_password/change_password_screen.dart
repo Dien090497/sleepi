@@ -20,7 +20,7 @@ class ChangePasswordScreen extends StatelessWidget {
         backgroundColor: AppColors.transparent,
         appBar: SFAppBar(
           context: context,
-          title: LocaleKeys.changePassword,
+          title: LocaleKeys.change_password,
           textStyle: TextStyles.bold18LightWhite,
         ),
         body: SafeArea(
@@ -42,18 +42,18 @@ class ChangePasswordScreen extends StatelessWidget {
                               height: 20,
                             ),
                             SFTextFieldTextButton(
-                              labelText: LocaleKeys.verificationCode,
+                              labelText: LocaleKeys.verification_code,
                             ),
                             SizedBox(
                               height: 20,
                             ),
                             SFTextFieldPassword(
-                                labelText: LocaleKeys.yourPassword),
+                                labelText: LocaleKeys.your_password),
                             SizedBox(
                               height: 20,
                             ),
                             SFTextFieldPassword(
-                                labelText: LocaleKeys.newPassword),
+                                labelText: LocaleKeys.new_password),
                           ],
                         ),
                       ),

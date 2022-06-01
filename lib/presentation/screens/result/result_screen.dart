@@ -54,31 +54,31 @@ class _ResultScreenState extends State<ResultScreen> {
                   const SizedBox(
                     height: 24,
                   ),
-                  const SFLabelValue(label: LocaleKeys.bedTime, value: '23:30'),
+                  const SFLabelValue(label: LocaleKeys.bed_time, value: '23:30'),
                   const SizedBox(
                     height: 8,
                   ),
                   const SFLabelValue(
-                      label: LocaleKeys.sleepOnsetTime, value: '00:30'),
+                      label: LocaleKeys.sleep_onset_time, value: '00:30'),
                   const SizedBox(
                     height: 8,
                   ),
-                  const SFLabelValue(label: LocaleKeys.wokeUp, value: '08:30'),
-                  const SizedBox(
-                    height: 8,
-                  ),
-                  const SFLabelValue(
-                      label: LocaleKeys.nocturnalAwakening, value: '1'),
+                  const SFLabelValue(label: LocaleKeys.woke_up, value: '08:30'),
                   const SizedBox(
                     height: 8,
                   ),
                   const SFLabelValue(
-                      label: LocaleKeys.sleepDuration, value: '8h45min'),
+                      label: LocaleKeys.nocturnal_awakening, value: '1'),
                   const SizedBox(
                     height: 8,
                   ),
                   const SFLabelValue(
-                      label: LocaleKeys.sleepQuality, value: '99/100'),
+                      label: LocaleKeys.sleep_duration, value: '8h45min'),
+                  const SizedBox(
+                    height: 8,
+                  ),
+                  const SFLabelValue(
+                      label: LocaleKeys.sleep_quality, value: '99/100'),
                   const SizedBox(
                     height: 92,
                   ),
@@ -92,7 +92,7 @@ class _ResultScreenState extends State<ResultScreen> {
           left: 16,
           right: 16,
           child: SFButton(
-            text: LocaleKeys.shareYourSleep,
+            text: LocaleKeys.share_your_sleep,
             textStyle: TextStyles.white16,
             gradient: AppColors.gradientBlueButton,
             width: double.infinity,

@@ -51,7 +51,7 @@ class TabDay extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               SFText(
-                keyText: LocaleKeys.tokenEarned,
+                keyText: LocaleKeys.token_earned,
                 style: TextStyles.lightWhite16,
               ),
               Expanded(
@@ -71,7 +71,7 @@ class TabDay extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               SFText(
-                keyText: Keys.sleepScore,
+                keyText: LocaleKeys.sleep_score,
                 style: TextStyles.lightWhite16,
               ),
               Expanded(

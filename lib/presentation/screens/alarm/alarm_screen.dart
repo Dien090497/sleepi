@@ -31,7 +31,7 @@ class AlarmScreen extends StatelessWidget {
           backgroundColor: AppColors.transparent,
           appBar: SFAppBar(
             context: context,
-            title: Keys.alarm,
+            title: LocaleKeys.alarm,
             textStyle: TextStyles.bold18LightWhite,
           ),
           body: SafeArea(
@@ -52,7 +52,7 @@ class AlarmScreen extends StatelessWidget {
                       const AlarmStatusChangeWidget(),
                       divider,
                       SFListTile(
-                        text: Keys.sound,
+                        text: LocaleKeys.music,
                         trailing: icon,
                         onPressed: () =>
                             Navigator.pushNamed(context, R.alarmSoundEffect),

@@ -28,7 +28,7 @@ class MotionDataPermissionScreen extends StatelessWidget {
                   height: 24.0,
                 ),
                 SFText(
-                  keyText: LocaleKeys.motionDataPermission,
+                  keyText: LocaleKeys.motion_data_permission,
                   style: TextStyles.bold24LightWhite,
                   textAlign: TextAlign.center,
                 ),
@@ -36,7 +36,7 @@ class MotionDataPermissionScreen extends StatelessWidget {
                   height: 32.0,
                 ),
                 SFText(
-                  keyText: LocaleKeys.displaysMessageMotionDataPermission,
+                  keyText: LocaleKeys.displays_message_motion_data_permission,
                   style: TextStyles.lightGrey16,
                 ),
               ],

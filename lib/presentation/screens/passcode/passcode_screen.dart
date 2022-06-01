@@ -46,7 +46,7 @@ class PasscodeScreen extends StatelessWidget {
               const SizedBox(height: 60),
               Center(
                 child: SFText(
-                    keyText: LocaleKeys.enterYourPasscode,
+                    keyText: LocaleKeys.enter_your_passcode,
                     style: TextStyles.white12),
               ),
               const SizedBox(height: 24),
@@ -65,7 +65,7 @@ class PasscodeScreen extends StatelessWidget {
               ),
               SizedBox(height: 32.h),
               SFTextButton(
-                text: LocaleKeys.forgotPasscode,
+                text: LocaleKeys.forgot_passcode,
                 textStyle: TextStyles.white12Underline,
                 onPressed: () {
                   Navigator.pushNamed(context, R.restoreWallet);

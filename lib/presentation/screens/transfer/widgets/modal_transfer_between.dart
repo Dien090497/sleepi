@@ -17,7 +17,7 @@ class ModalTransferBetween extends StatelessWidget {
       LocaleKeys.slgt,
       LocaleKeys.bed,
       LocaleKeys.jewels,
-      LocaleKeys.bedBox
+      LocaleKeys.bed_box
     ];
     List urlImages = [
       Ics.icSolanaCircle,

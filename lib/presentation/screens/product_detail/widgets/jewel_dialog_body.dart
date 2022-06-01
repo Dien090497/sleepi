@@ -120,7 +120,7 @@ class JewelDialogBody extends StatelessWidget {
               children: [
                 Expanded(
                     child: SFButton(
-                      text: Keys.sell,
+                      text: LocaleKeys.sell,
                       onPressed: onSellTap,
                       textStyle: TextStyles.lightGrey16,
                       color: AppColors.whiteOpacity5,
@@ -128,7 +128,7 @@ class JewelDialogBody extends StatelessWidget {
                 const SizedBox(width: 12),
                 Expanded(
                     child: SFButton(
-                      text: Keys.transfer,
+                      text: LocaleKeys.transfer,
                       onPressed: onTransferTap,
                       textStyle: TextStyles.white16,
                       gradient: AppColors.blueGradient,

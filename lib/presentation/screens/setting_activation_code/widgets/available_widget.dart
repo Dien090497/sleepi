@@ -20,7 +20,7 @@ class AvailableWidget extends StatelessWidget {
           children: [
             Center(
                 child: SFText(
-              keyText: LocaleKeys.availableTotal,
+              keyText: LocaleKeys.available_total,
               style: TextStyles.lightGrey16,
             )),
             const SizedBox(height: 8.0),

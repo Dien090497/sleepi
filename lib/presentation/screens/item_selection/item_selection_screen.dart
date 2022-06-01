@@ -32,7 +32,7 @@ class _ItemSelectionScreenState extends State<ItemSelectionScreen> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 const SizedBox(width: 40),
-                SFText(keyText: LocaleKeys.itemList),
+                SFText(keyText: LocaleKeys.item_list),
                 ElevatedButton(
                     style: ElevatedButton.styleFrom(
                       shape: const CircleBorder(),

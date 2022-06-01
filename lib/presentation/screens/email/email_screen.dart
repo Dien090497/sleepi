@@ -37,12 +37,12 @@ class EmailScreen extends StatelessWidget {
                             horizontal: 16, vertical: 24),
                         child: Column(
                           children: const [
-                            SFTextField(labelText: LocaleKeys.newEmail),
+                            SFTextField(labelText: LocaleKeys.new_email),
                             SizedBox(
                               height: 20,
                             ),
                             SFTextFieldTextButton(
-                              labelText: LocaleKeys.verificationCode,
+                              labelText: LocaleKeys.verification_code,
                             ),
                             SizedBox(
                               height: 20,

@@ -40,7 +40,7 @@ class _PopupInfoStakingState extends State<PopupInfoStaking> {
             width: 200,
             height: 130,
             position: const OverlayContainerPosition(-180, 0),
-            message: LocaleKeys.displaysMessageFromStakingSlftDetail,
+            message: LocaleKeys.displays_message_from_staking_slft_detail,
           ),
         ],
       ),

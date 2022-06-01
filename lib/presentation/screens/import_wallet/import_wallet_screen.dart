@@ -22,7 +22,7 @@ class ImportWalletScreen extends StatelessWidget {
           backgroundColor: AppColors.transparent,
           appBar: SFAppBar(
             context: context,
-            title: LocaleKeys.secureWallet,
+            title: LocaleKeys.secure_wallet,
             textStyle: TextStyles.bold18LightWhite,
           ),
           body: SafeArea(
@@ -40,14 +40,14 @@ class ImportWalletScreen extends StatelessWidget {
                           child: Column(
                             children: [
                               SFTextFieldTextButton(
-                                labelText: LocaleKeys.emailVerificationCode,
-                                textButton: LocaleKeys.sendCode,
+                                labelText: LocaleKeys.email_verification_code,
+                                textButton: LocaleKeys.send_code,
                                 onPressed: () {},
                               ),
                               const SizedBox(height: 20),
                               const SFTextField(
-                                labelText: LocaleKeys.seedPhrase,
-                                hintText: LocaleKeys.enterTheSeedPhrase,
+                                labelText: LocaleKeys.seed_phrase,
+                                hintText: LocaleKeys.enter_the_seed_phrase,
                                 hintStyle: TextStyles.w400lightGrey12,
                                 maxLine: 10,
                                 maxLength: 256,
@@ -59,7 +59,7 @@ class ImportWalletScreen extends StatelessWidget {
                     ),
                   ),
                   SFButton(
-                    text: LocaleKeys.importWallet,
+                    text: LocaleKeys.import_wallet,
                     textStyle: TextStyles.w600WhiteSize16,
                     height: 48,
                     width: double.infinity,

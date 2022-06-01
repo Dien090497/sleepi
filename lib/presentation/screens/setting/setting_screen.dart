@@ -20,7 +20,7 @@ class SettingScreen extends StatelessWidget {
           backgroundColor: AppColors.transparent,
           appBar: SFAppBar(
             context: context,
-            title: Keys.setting,
+            title: LocaleKeys.setting,
             textStyle: TextStyles.bold18LightWhite,
           ),
           body: SafeArea(

@@ -46,7 +46,7 @@ class RecycleScreen extends StatelessWidget {
                       Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 20),
                         child: SFText(
-                          keyText: LocaleKeys.bedRecycle,
+                          keyText: LocaleKeys.bed_recycle,
                           style: TextStyles.boldWhite18,
                         ),
                       ),
@@ -135,7 +135,7 @@ class RecycleScreen extends StatelessWidget {
                           height: 20,
                         ),
                         SFText(
-                          keyText: LocaleKeys.successRate,
+                          keyText: LocaleKeys.success_rate,
                           style: TextStyles.lightWhite14,
                         ),
                         const SizedBox(
@@ -154,7 +154,7 @@ class RecycleScreen extends StatelessWidget {
                                 Row(
                                   children: [
                                     SFText(
-                                      keyText: LocaleKeys.commonBedBox,
+                                      keyText: LocaleKeys.common_bed,
                                       style: TextStyles.white14,
                                     ),
                                     const Spacer(),
@@ -196,14 +196,14 @@ class RecycleScreen extends StatelessWidget {
                           height: 40,
                         ),
                         SFText(
-                          keyText: LocaleKeys.whatRecycle,
+                          keyText: LocaleKeys.what_recycle,
                           style: TextStyles.lightWhite14,
                         ),
                         const SizedBox(
                           height: 10,
                         ),
                         SFText(
-                          keyText: LocaleKeys.bodyRecycle,
+                          keyText: LocaleKeys.body_recycle,
                           style: TextStyles.white14,
                         ),
                         const SizedBox(

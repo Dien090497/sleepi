@@ -28,7 +28,7 @@ class GeneralWidget extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         SFText(
-          keyText: Keys.general,
+          keyText: LocaleKeys.general,
           style: TextStyles.lightGrey14,
         ),
         SFCard(
@@ -36,40 +36,40 @@ class GeneralWidget extends StatelessWidget {
           child: Column(
             children: [
               SFListTile(
-                text: Keys.permissions,
+                text: LocaleKeys.permissions,
                 trailing: icon,
                 onPressed: () => Navigator.pushNamed(context, R.permission),
               ),
               divider,
               SFListTile(
-                text: Keys.alarm,
+                text: LocaleKeys.alarm,
                 trailing: icon,
                 onPressed: () => Navigator.pushNamed(context, R.alarm),
               ),
               divider,
               SFListTile(
-                text: Keys.activationCode,
+                text: LocaleKeys.activation_code,
                 trailing: icon,
                 onPressed: () =>
                     Navigator.pushNamed(context, R.activationCode),
               ),
               divider,
               SFListTile(
-                text: Keys.language,
+                text: LocaleKeys.language,
                 trailing: icon,
                 onPressed: () => SFModalBottomSheet.show(
                     context, 0.36, const ModalPopUpLanguage()),
               ),
               divider,
               SFListTile(
-                text: Keys.multiChainSwitch,
+                text: LocaleKeys.multi,
                 trailing: icon,
                 onPressed: () => SFModalBottomSheet.show(
                     context, 0.5, const ModalMultiChainSwitch()),
               ),
               divider,
               SFListTile(
-                text: Keys.version,
+                text: LocaleKeys.version,
                 trailing:
                     SFText(keyText: "0.01", style: TextStyles.lightGrey14),
               ),

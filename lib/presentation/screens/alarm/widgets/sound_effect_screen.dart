@@ -18,7 +18,7 @@ class AlarmSoundEffectScreen extends StatelessWidget {
           backgroundColor: AppColors.transparent,
           appBar: SFAppBar(
             context: context,
-            title: Keys.soundEffect,
+            title: LocaleKeys.sound_effect,
             textStyle: TextStyles.bold18LightWhite,
           ),
           body: const SafeArea(

@@ -46,7 +46,7 @@ class PopUpBedsDetail extends StatelessWidget {
         Column(
           children: [
             SFText(
-              keyText: LocaleKeys.matchingBed,
+              keyText: LocaleKeys.matching_bed,
               style: TextStyles.white1w700size16,
             ),
             const SizedBox(height: 20),
