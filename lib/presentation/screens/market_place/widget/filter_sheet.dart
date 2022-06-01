@@ -51,7 +51,7 @@ class _FilterSheetState extends State<FilterSheet> {
                         setState(() {});
                       },
                       child: SFText(
-                        keyText: LocaleKeys.clearFilter,
+                        keyText: LocaleKeys.clear_filter,
                         style: TextStyles.red14,
                       )),
                 ],

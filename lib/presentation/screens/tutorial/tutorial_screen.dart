@@ -15,10 +15,10 @@ class TutorialScreen extends StatefulWidget {
 
 class _TutorialScreenState extends State<TutorialScreen> {
   final texts = [
-    LocaleKeys.howToSetUp,
-    LocaleKeys.elevateYourPhone,
-    LocaleKeys.trackingRange,
-    LocaleKeys.tokenAndSleep,
+    LocaleKeys.how_to_set_up,
+    LocaleKeys.elevate_your_phone,
+    LocaleKeys.tracking_range,
+    LocaleKeys.token_and_sleep,
   ];
   final images = [
     Imgs.tutorial1,

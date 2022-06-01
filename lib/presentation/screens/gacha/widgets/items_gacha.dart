@@ -31,10 +31,7 @@ class ItemsGacha extends StatelessWidget {
                 borderRadius: BorderRadius.circular(16),
               ),
               padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 15),
-              child: SFText(
-                keyText: 'Move',
-                style: TextStyles.white14,
-              ),
+              child: SFText(keyText: LocaleKeys.probability, style: TextStyles.white14,),
             )
           ],
         ),
@@ -44,7 +41,7 @@ class ItemsGacha extends StatelessWidget {
         const GachaRollSelections(),
         const SizedBox(height: 13),
         SFText(
-          keyText: LocaleKeys.uncommonBedsChance,
+          keyText: LocaleKeys.uncommon_beds_chance,
           style: TextStyles.white14WithOpacity,
         ),
         const SizedBox(height: 10),

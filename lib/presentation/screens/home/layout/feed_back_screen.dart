@@ -75,7 +75,7 @@ class FeedBackScreen extends StatelessWidget {
                     child: SFTextField(
                       maxLine: 12,
                       maxLength: 100,
-                      hintText: LocaleKeys.hintFeedback,
+                      hintText: LocaleKeys.hint_feedback,
                       hintStyle: TextStyles.lightGrey16,
                     ),
                   ),

@@ -17,7 +17,7 @@ class ActivationCodeScreen extends StatelessWidget {
         backgroundColor: AppColors.transparent,
         appBar: SFAppBar(
           context: context,
-          title: LocaleKeys.activationCode,
+          title: LocaleKeys.activation_code,
           textStyle: TextStyles.bold18LightWhite,
           toUpperCase: true,
         ),

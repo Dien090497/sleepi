@@ -20,7 +20,7 @@ class MiddleBed extends StatelessWidget {
           height: 20,
         ),
         SFText(
-          keyText: LocaleKeys.mainBed,
+          keyText: LocaleKeys.main_bed,
           style: TextStyles.white18,
         ),
         const SizedBox(
@@ -40,7 +40,7 @@ class MiddleBed extends StatelessWidget {
           child: Column(
             children: [
               SFText(
-                keyText: LocaleKeys.middleBed,
+                keyText: LocaleKeys.middle_bed,
                 style: TextStyles.blue14,
               ),
               const SizedBox(height: 24),

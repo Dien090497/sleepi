@@ -19,12 +19,12 @@ class PopUpWalletWarning extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.symmetric(vertical: 24.0),
           child: SFText(
-            keyText: LocaleKeys.yourWalletIsBeingCreated,
+            keyText: LocaleKeys.your_wallet_is_being_created,
             style: TextStyles.bold18LightWhite,
           ),
         ),
         SFText(
-          keyText: LocaleKeys.yourWalletIsBeingCreated,
+          keyText: LocaleKeys.your_wallet_is_being_created,
           style: TextStyles.lightGrey16,
         )
       ],

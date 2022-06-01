@@ -25,7 +25,7 @@ class QuestionScreen extends StatelessWidget {
                 child: Column(
                   children: [
                     SFButton(
-                      text: LocaleKeys.howToPlay,
+                      text: LocaleKeys.how_to_play,
                       textStyle: TextStyles.w600WhiteSize16,
                       gradient: AppColors.gradientBlueButton,
                       onPressed: () {},
@@ -36,7 +36,7 @@ class QuestionScreen extends StatelessWidget {
                       height: 24,
                     ),
                     SFButton(
-                      text: LocaleKeys.whitePaper,
+                      text: LocaleKeys.white_paper,
                       textStyle: TextStyles.bold16LightWhite,
                       color: AppColors.white.withOpacity(0.07),
                       width: size.width * 0.45,
@@ -46,7 +46,7 @@ class QuestionScreen extends StatelessWidget {
                       height: 24,
                     ),
                     SFButton(
-                      text: LocaleKeys.litePaper,
+                      text: LocaleKeys.lite_paper,
                       textStyle: TextStyles.bold16LightWhite,
                       color: AppColors.white.withOpacity(0.07),
                       width: size.width * 0.45,
@@ -56,7 +56,7 @@ class QuestionScreen extends StatelessWidget {
                       height: 24,
                     ),
                     SFButton(
-                      text: LocaleKeys.linkTree,
+                      text: LocaleKeys.link_tree,
                       textStyle: TextStyles.bold16LightWhite,
                       color: AppColors.white.withOpacity(0.07),
                       width: size.width * 0.45,

@@ -18,7 +18,7 @@ class PopUpAvalancheWallet extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           SFText(
-            keyText: LocaleKeys.avalancheWallet,
+            keyText: LocaleKeys.avalanche_wallet,
             style: TextStyles.bold18LightWhite,
           ),
           const SizedBox(
@@ -27,7 +27,7 @@ class PopUpAvalancheWallet extends StatelessWidget {
           SizedBox(
               height: 48,
               child: SFButtonOutLined(
-                title: LocaleKeys.createANewWallet,
+                title: LocaleKeys.create_a_new_wallet,
                 textStyle: TextStyles.bold16Blue,
                 borderColor: AppColors.blue,
                 onPressed: () {
@@ -38,7 +38,7 @@ class PopUpAvalancheWallet extends StatelessWidget {
             height: 17,
           ),
           SFButton(
-            text: LocaleKeys.importAWalletUsingSeedPhrase,
+            text: LocaleKeys.import_a_wallet_using_seed_phrase,
             textStyle: TextStyles.w600WhiteSize16,
             height: 48,
             width: double.infinity,

@@ -21,6 +21,7 @@ class TabBedsDetail extends StatelessWidget {
           cost: 2,
           time: 1200,
           onConfirm: () {},
+          onCancel: () {Navigator.pop(context);},
         ),
       ],
     );
@@ -36,7 +37,7 @@ class TabBedsDetail extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          SFSubTabBar(texts: const [LocaleKeys.beds, LocaleKeys.bedBox]),
+          SFSubTabBar(texts: const [LocaleKeys.beds, LocaleKeys.bed_box]),
           const SizedBox(height: 12),
           Expanded(
             child: TabBarView(

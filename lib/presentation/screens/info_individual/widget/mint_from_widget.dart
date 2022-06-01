@@ -50,7 +50,7 @@ class MintFromWidget extends StatelessWidget {
             child: Align(
               alignment: Alignment.centerLeft,
               child: SFText(
-                keyText: LocaleKeys.mintFrom,
+                keyText: LocaleKeys.mint_from,
                 style: TextStyles.bold18LightWhite,
               ),
             ),

@@ -25,92 +25,89 @@ class ProfileWidget extends StatelessWidget {
       color: AppColors.lightWhite.withOpacity(0.05),
       height: 1,
     );
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 12.0, vertical: 24.0),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          SFText(
-            keyText: LocaleKeys.profile,
-            style: TextStyles.lightGrey14,
-          ),
-          SFCard(
-            padding: const EdgeInsets.symmetric(horizontal: 16.0),
-            child: Column(
-              children: [
-                SFListTile(
-                  text: LocaleKeys.birthYear,
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.start,
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        SFText(
+          keyText: LocaleKeys.profile,
+          style: TextStyles.lightGrey14,
+        ),
+        SFCard(
+          padding: const EdgeInsets.symmetric(horizontal: 16.0),
+          child: Column(
+            children: [
+              SFListTile(
+                text: LocaleKeys.birth_year,
+                trailing: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    SFText(
+                      keyText: "1998",
+                      style: TextStyles.lightWhite14,
+                    ),
+                    icon,
+                  ],
+                ),
+                onPressed: () => SFModalBottomSheet.show(
+                    context, 0.36, const ModalPopUpBirthYear()),
+              ),
+              divider,
+              SFListTile(
+                  text: LocaleKeys.sex,
                   trailing: Row(
                     mainAxisSize: MainAxisSize.min,
                     children: [
                       SFText(
-                        keyText: "1998",
+                        keyText: "Male",
                         style: TextStyles.lightWhite14,
                       ),
                       icon,
                     ],
                   ),
                   onPressed: () => SFModalBottomSheet.show(
-                      context, 0.36, const ModalPopUpBirthYear()),
-                ),
-                divider,
-                SFListTile(
-                    text: LocaleKeys.sex,
-                    trailing: Row(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        SFText(
-                          keyText: "Male",
-                          style: TextStyles.lightWhite14,
-                        ),
-                        icon,
-                      ],
+                      context, 0.36, const ModalPopUpSex())),
+              divider,
+              SFListTile(
+                text: LocaleKeys.email,
+                trailing: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    SFText(
+                      keyText: "sample@aaa.com",
+                      style: TextStyles.lightWhite14,
                     ),
-                    onPressed: () => SFModalBottomSheet.show(
-                        context, 0.36, const ModalPopUpSex())),
-                divider,
-                SFListTile(
-                  text: LocaleKeys.email,
-                  trailing: Row(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      SFText(
-                        keyText: "sample@aaa.com",
-                        style: TextStyles.lightWhite14,
-                      ),
-                      icon,
-                    ],
-                  ),
-                  onPressed: () => Navigator.pushNamed(context, R.email),
+                    icon,
+                  ],
                 ),
-                divider,
-                SFListTile(
-                  text: LocaleKeys.changePassword,
-                  trailing: icon,
-                  onPressed: () =>
-                      Navigator.pushNamed(context, R.changePassword),
-                ),
-              ],
-            ),
+                onPressed: () => Navigator.pushNamed(context, R.email),
+              ),
+              divider,
+              SFListTile(
+                text: LocaleKeys.change_password,
+                trailing: icon,
+                onPressed: () =>
+                    Navigator.pushNamed(context, R.changePassword),
+              ),
+            ],
           ),
-          const SizedBox(
-            height: 20.0,
+        ),
+        const SizedBox(
+          height: 20.0,
+        ),
+        SizedBox(
+          height: 48,
+          child: SFButtonOutLined(
+            title: LocaleKeys.logout,
+            textStyle: TextStyles.bold16Blue,
+            borderColor: AppColors.blue,
+            onPressed: (){},
           ),
-          SizedBox(
-            height: 48,
-            child: SFButtonOutLined(
-              title: LocaleKeys.logout,
-              textStyle: TextStyles.bold16Blue,
-              borderColor: AppColors.blue,
-              onPressed: () {},
-            ),
-          ),
-          const SizedBox(
-            height: 20.0,
-          ),
-        ],
-      ),
+        ),
+        const SizedBox(
+          height: 20.0,
+        ),
+      ],
     );
   }
 }

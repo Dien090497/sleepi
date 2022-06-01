@@ -20,7 +20,7 @@ class ExportSeedPhraseScreen extends StatelessWidget {
         backgroundColor: AppColors.transparent,
         appBar: SFAppBar(
           context: context,
-          title: LocaleKeys.depositSlft,
+          title: LocaleKeys.deposit_slft,
           textStyle: TextStyles.bold18LightWhite,
         ),
         body: SafeArea(

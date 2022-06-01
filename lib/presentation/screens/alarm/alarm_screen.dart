@@ -25,54 +25,49 @@ class AlarmScreen extends StatelessWidget {
       height: 1,
     );
     return BackgroundWidget(
-      child: Scaffold(
-        backgroundColor: AppColors.transparent,
-        appBar: SFAppBar(
-          context: context,
-          title: LocaleKeys.alarm,
-          textStyle: TextStyles.bold18LightWhite,
-        ),
-        body: SafeArea(
-          child: ListView(
-            padding: const EdgeInsets.symmetric(horizontal: 12.0),
-            children: [
-              const SizedBox(
-                height: 36.0,
-              ),
-              Container(
-                width: double.infinity,
-                padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(16.0),
-                  color: AppColors.white.withOpacity(0.05),
-                  boxShadow: [
-                    BoxShadow(
-                      color: AppColors.white.withOpacity(0.05),
-                      blurRadius: 4,
-                      offset: const Offset(2, 4), // Shadow position
-                    ),
-                  ],
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 16),
+        child: Scaffold(
+          backgroundColor: AppColors.transparent,
+          appBar: SFAppBar(
+            context: context,
+            title: LocaleKeys.alarm,
+            textStyle: TextStyles.bold18LightWhite,
+          ),
+          body: SafeArea(
+            child: ListView(
+              children: [
+                const SizedBox(
+                  height: 36.0,
                 ),
-                child: Column(
-                  children: [
-                    const AlarmStatusChangeWidget(),
-                    divider,
-                    SFListTile(
-                      text: LocaleKeys.music,
-                      trailing: icon,
-                      onPressed: () =>
-                          Navigator.pushNamed(context, R.alarmSoundEffect),
-                    ),
-                    divider,
-                    const VibrationStatusChangeWidget(),
-                    divider,
-                    const SnoozeStatusChangeWidget(),
-                    divider,
-                    const AlarmVolumnChangeWidget(),
-                  ],
+                Container(
+                  width: double.infinity,
+                  padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(16.0),
+                    color: AppColors.white.withOpacity(0.05),
+                  ),
+                  child: Column(
+                    children: [
+                      const AlarmStatusChangeWidget(),
+                      divider,
+                      SFListTile(
+                        text: LocaleKeys.music,
+                        trailing: icon,
+                        onPressed: () =>
+                            Navigator.pushNamed(context, R.alarmSoundEffect),
+                      ),
+                      divider,
+                      const VibrationStatusChangeWidget(),
+                      divider,
+                      const SnoozeStatusChangeWidget(),
+                      divider,
+                      const AlarmVolumnChangeWidget(),
+                    ],
+                  ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),

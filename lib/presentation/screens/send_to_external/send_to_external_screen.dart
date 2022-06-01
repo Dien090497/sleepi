@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 // import 'package:flutter_translate/flutter_translate.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
@@ -24,7 +25,7 @@ class SendToExternalScreen extends StatelessWidget {
       child: Scaffold(
         backgroundColor: AppColors.transparent,
         appBar: SFAppBar(
-          title: LocaleKeys.sendTo,
+          title: LocaleKeys.send_to,
           textStyle: TextStyles.bold18White,
           context: context,
         ),
@@ -46,7 +47,7 @@ class SendToExternalScreen extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             const SFTextField(
-                                labelText: LocaleKeys.toAddress,
+                                labelText: LocaleKeys.to_address,
                                 suffixIcon: Padding(
                                     padding: EdgeInsets.all(10),
                                     child: SFIcon(
@@ -73,31 +74,32 @@ class SendToExternalScreen extends StatelessWidget {
                       ),
                       Text.rich(
                         TextSpan(
-                          text:
-                              translate(LocaleKeys.theNetworkYouHaveSelectedIs),
-                          style: TextStyles.lightGrey12,
+                          text: LocaleKeys.the_network_you_have_selected_is.tr(),
+                          style: TextStyles.w400lightGrey12,
                           children: [
+                            const TextSpan(text: ' '),
                             const TextSpan(
-                                text: ' Solana ',
-                                style: TextStyles.red16Italic),
-                            TextSpan(text: translate(LocaleKeys.network)),
+                                text: LocaleKeys.avalanche,
+                                style: TextStyles.w400Red12),
+                            const TextSpan(text: ' '),
+                            TextSpan(text: LocaleKeys.network.tr()),
                             const TextSpan(text: '. '),
                             TextSpan(
-                                text: translate(LocaleKeys
-                                    .pleaseEnsureThatTheWithdrawalAddress)),
+                                text: LocaleKeys.please_ensure_that_the_withdrawal_address.tr()),
+                            const TextSpan(text: ' '),
                             const TextSpan(
-                                text: ' Solana ',
-                                style: TextStyles.red16Italic),
-                            TextSpan(text: translate(LocaleKeys.network)),
+                                text: LocaleKeys.avalanche,
+                                style: TextStyles.w400Red12),
+                            const TextSpan(text: ' '),
+                            TextSpan(text: LocaleKeys.network.tr()),
                             const TextSpan(text: '. '),
                             TextSpan(
-                                text:
-                                    translate(LocaleKeys.youWillLoseYourAssets),
-                                style: TextStyles.red16Italic),
+                                text: LocaleKeys.you_will_lose_your_assets.tr(),
+                                style: TextStyles.w400Red12),
                             const TextSpan(text: ' '),
                             TextSpan(
-                                text: translate(LocaleKeys
-                                    .ifTheChosenPlatformDoesNotSupport)),
+                                text: LocaleKeys
+                                    .if_the_chosen_platform_does_not_support.tr()),
                             const TextSpan(text: '.'),
                           ],
                         ),

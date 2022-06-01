@@ -72,7 +72,7 @@ class SFTextFieldTextButton extends StatelessWidget {
                 ),
               ),
               SFTextButton(
-                text: textButton ?? LocaleKeys.sendCode,
+                text: textButton ?? LocaleKeys.send_code,
                 textStyle: textButtonStyle ?? TextStyles.blue12,
                 onPressed: onPressed,
                 // color: Colors.transparent,

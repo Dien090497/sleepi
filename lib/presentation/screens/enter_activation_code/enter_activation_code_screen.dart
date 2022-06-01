@@ -18,102 +18,103 @@ class EnterActivationCodeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BackgroundWidget(
-      child: Scaffold(
-        backgroundColor: AppColors.transparent,
-        appBar: SFAppBar(
-          context: context,
-          title: LocaleKeys.activationCodeLanguageLowercase,
-          textStyle: TextStyles.bold18LightWhite,
-        ),
-        body: SafeArea(
-          child: ListView(
-            padding: const EdgeInsets.symmetric(horizontal: 16),
-            children: [
-              const SizedBox(
-                height: 90.0,
-              ),
-              LoginBox(
-                padding: const EdgeInsets.fromLTRB(28, 24, 28, 0),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    const SFLogo(),
-                    const SizedBox(height: 40),
-                    const SFTextField(
-                      labelText: LocaleKeys.pleaseEnter,
-                    ),
-                    const SizedBox(height: 20),
-                    SFText(
-                        keyText: LocaleKeys.pleaseSelectYourLanguage,
-                        style: TextStyles.lightGrey14),
-                    const SizedBox(
-                      height: 4,
-                    ),
-                    SizedBox(
-                      width: double.infinity,
-                      height: 48,
-                      child: SFDropDown(value: "1", dropdownItems: [
-                        DropdownMenuItem(
-                          value: '1',
-                          child: SFText(
-                            keyText: LocaleKeys.english,
-                            style: TextStyles.white16,
-                          ),
-                        ),
-                        DropdownMenuItem(
-                          value: '2',
-                          child: SFText(
-                            keyText: LocaleKeys.japanese,
-                            style: TextStyles.white16,
-                          ),
-                        ),
-                        DropdownMenuItem(
-                          value: '3',
-                          child: SFText(
-                            keyText: "Korea",
-                            style: TextStyles.white16,
-                          ),
-                        ),
-                        DropdownMenuItem(
-                          value: '4',
-                          child: SFText(
-                            keyText: "China",
-                            style: TextStyles.white16,
-                          ),
-                        ),
-                        DropdownMenuItem(
-                          value: '5',
-                          child: SFText(
-                            keyText: "Spanish",
-                            style: TextStyles.white16,
-                          ),
-                        ),
-                      ]),
-                    ),
-                    const SizedBox(
-                      height: 20,
-                    ),
-                    SFButton(
-                      text: LocaleKeys.start,
-                      color: AppColors.blue,
-                      textStyle: TextStyles.white1w700size16,
-                      onPressed: () {
-                        Navigator.pushNamedAndRemoveUntil(
-                            context, R.bottomNavigation, (_) => false);
-                      },
-                      width: MediaQuery.of(context).size.width,
-                    ),
-                    const SizedBox(height: 16),
-                    const Center(
-                      child: SFTextButton(
-                        text: LocaleKeys.getActivationCode,
-                        textStyle: TextStyles.blue14,
-                      ),
-                    ),
-                  ],
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 16),
+        child: Scaffold(
+          backgroundColor: AppColors.transparent,
+          appBar: SFAppBar(
+            context: context,
+            title: LocaleKeys.activation_code_language_lowercase,
+            textStyle: TextStyles.bold18LightWhite,
+          ),
+          body: SafeArea(
+            child: ListView(
+              children: [
+                const SizedBox(
+                  height: 90.0,
                 ),
-              ),
-            ],
+                LoginBox(
+                  padding: const EdgeInsets.fromLTRB(28, 24, 28, 0),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const SFLogo(),
+                      const SizedBox(height: 40),
+                      const SFTextField(
+                        labelText: LocaleKeys.please_enter,
+                      ),
+                      const SizedBox(height: 20),
+                      SFText(keyText: LocaleKeys.please_select_your_language, style: TextStyles.lightGrey14),
+                      const SizedBox(height: 4,),
+                      SizedBox(
+                        width: double.infinity,
+                        height: 48,
+                        child: SFDropDown(
+                            value: "1",
+                            dropdownItems: [
+                              DropdownMenuItem(
+                                value: '1',
+                                child: SFText(
+                                  keyText: LocaleKeys.english,
+                                  style: TextStyles.white16,
+                                ),
+                              ),
+                              DropdownMenuItem(
+                                value: '2',
+                                child: SFText(
+                                  keyText: LocaleKeys.japanese,
+                                  style: TextStyles.white16,
+                                ),
+                              ),
+                              DropdownMenuItem(
+                                value: '3',
+                                child: SFText(
+                                  keyText: "Korea",
+                                  style: TextStyles.white16,
+                                ),
+                              ),
+                              DropdownMenuItem(
+                                value: '4',
+                                child: SFText(
+                                  keyText: "China",
+                                  style: TextStyles.white16,
+                                ),
+                              ),
+                              DropdownMenuItem(
+                                value: '5',
+                                child: SFText(
+                                  keyText: "Spanish",
+                                  style: TextStyles.white16,
+                                ),
+                              ),
+                            ]
+                        ),
+                      ),
+                      const SizedBox(
+                        height: 20,
+                      ),
+                      SFButton(
+                        text: LocaleKeys.start,
+                        color: AppColors.blue,
+                        textStyle: TextStyles.white1w700size16,
+                        onPressed: () {
+                          Navigator.pushNamedAndRemoveUntil(
+                              context, R.bottomNavigation, (_) => false);
+                        },
+                        width: MediaQuery.of(context).size.width,
+                      ),
+                      const SizedBox(height: 16),
+                      const Center(
+                        child: SFTextButton(
+                          text: LocaleKeys.get_activation_code,
+                          textStyle: TextStyles.blue14,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
           ),
         ),
       ),

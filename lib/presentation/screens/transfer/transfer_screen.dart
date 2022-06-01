@@ -43,12 +43,13 @@ class TransferScreen extends StatelessWidget {
                 child: Padding(
                   padding: const EdgeInsets.all(12.0),
                   child: SFButton(
-                    text: LocaleKeys.confirmTransfer,
+                    text: LocaleKeys.confirm_transfer,
                     textStyle: TextStyles.w600WhiteSize16,
                     width: double.infinity,
                     color: AppColors.blue,
                     onPressed: () {
                       showCustomAlertDialog(context,
+                          showClosed: false,
                           children: const PopUpConfirmTransfer());
                     },
                   ),

@@ -86,15 +86,8 @@ class _GachaChance500ScreenState extends State<GachaChance500Screen> {
                                         color: AppColors.blue.withOpacity(0.1),
                                         borderRadius: BorderRadius.circular(16),
                                       ),
-                                      padding: const EdgeInsets.symmetric(
-                                          vertical: 8, horizontal: 15),
-                                      child: SFText(
-                                        keyText: 'Quality',
-                                        style: TextStyles.blue14,
-                                      ),
-                                    ),
-                                    const SizedBox(
-                                      width: 25,
+                                      padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 15),
+                                      child: SFText(keyText: LocaleKeys.quality, style: TextStyles.blue14,),
                                     ),
                                     Container(
                                       decoration: BoxDecoration(
@@ -115,10 +108,7 @@ class _GachaChance500ScreenState extends State<GachaChance500Screen> {
                             ),
                           ),
                         ),
-                        SFText(
-                          keyText: 'Attributes',
-                          style: TextStyles.boldWhite18,
-                        ),
+                        SFText(keyText: LocaleKeys.attributes, style: TextStyles.boldWhite18,),
                         Padding(
                           padding: const EdgeInsets.symmetric(
                               horizontal: 20, vertical: 15),
@@ -272,7 +262,6 @@ class _GachaChance500ScreenState extends State<GachaChance500Screen> {
                                     gradient: AppColors.gradientBlueButton,
                                     height: 45,
                                     width: size.width,
-                                    toUpperCase: true,
                                   ),
                                 ),
                               ),

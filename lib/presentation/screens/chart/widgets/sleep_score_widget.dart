@@ -18,37 +18,37 @@ class SleepScore extends StatelessWidget {
       child: Column(
         children: [
           const ChartTitle(
-            title: LocaleKeys.bedTime,
+            title: LocaleKeys.bed_time,
             result: "2:11",
           ),
           divider,
           const ChartTitle(
-            title: LocaleKeys.sleepOnsetTime,
+            title: LocaleKeys.sleep_onset_time,
             result: "3:11",
           ),
           divider,
           const ChartTitle(
-            title: LocaleKeys.wokeUp,
+            title: LocaleKeys.woke_up,
             result: "10:04",
           ),
           divider,
           const ChartTitle(
-            title: LocaleKeys.timeInBed,
+            title: LocaleKeys.time_in_bed,
             result: "7h52m54s",
           ),
           divider,
           const ChartTitle(
-            title: LocaleKeys.sleepDuration,
+            title: LocaleKeys.sleep_duration,
             result: "6h52m54s",
           ),
           divider,
           const ChartTitle(
-            title: LocaleKeys.nocturnalAwakening,
+            title: LocaleKeys.nocturnal_awakening,
             result: "2",
           ),
           divider,
           const ChartTitle(
-            title: LocaleKeys.sleepScore,
+            title: LocaleKeys.sleep_score,
             result: "85,6%",
           ),
         ],

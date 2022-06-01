@@ -10,10 +10,13 @@ class AverageInfoWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     List<String> texts = [
-      LocaleKeys.averageOfBedTime,
-      LocaleKeys.averageOfWokeUp,
-      LocaleKeys.averageOfSleepDuration,
-      LocaleKeys.averageOfSleepQuality
+      LocaleKeys.average_of_bed_time,
+      LocaleKeys.average_of_woke_up,
+      LocaleKeys.average_of_sleep_duration,
+      LocaleKeys.average_of_sleep_quality
+    ];
+    List<String> averages = [
+      "10:55","09:55","07:55","87/100",
     ];
     List<Color> colors = [
       AppColors.blue.withOpacity(0.15),
@@ -40,10 +43,10 @@ class AverageInfoWidget extends StatelessWidget {
       crossAxisSpacing: 15.0,
       mainAxisSpacing: 16.0,
       shrinkWrap: true,
-      padding: const EdgeInsets.symmetric(horizontal: 12.0),
       children: List.generate(texts.length, (i) {
         return AverageWidget(
           title: texts[i],
+          average: averages[i],
           textStyle: textStyleTitle[i],
           textStyleNumber: textStyleNum[i],
           color: colors[i],

@@ -25,7 +25,7 @@ class TabWalletDetail extends StatelessWidget {
           const SizedBox(
             height: 32,
           ),
-          SFText(keyText: LocaleKeys.avaxCChain, style: TextStyles.bold12Blue),
+          SFText(keyText: LocaleKeys.avax_c, style: TextStyles.bold12Blue),
           const SizedBox(
             height: 4.0,
           ),
@@ -58,12 +58,12 @@ class TabWalletDetail extends StatelessWidget {
               ),
               BoxButtonWidget(
                 onTap: () => Navigator.pushNamed(context, R.transfer),
-                text: LocaleKeys.toSpending,
+                text: LocaleKeys.to_spending,
                 assetImage: Ics.icRefresh,
               ),
               BoxButtonWidget(
                 onTap: () => Navigator.pushNamed(context, R.sendToExternal),
-                text: LocaleKeys.toExternal,
+                text: LocaleKeys.to_external,
                 assetImage: Ics.icArrowUpRight,
               ),
               BoxButtonWidget(
@@ -81,17 +81,7 @@ class TabWalletDetail extends StatelessWidget {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Row(
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                      child: SFText(
-                          keyText: LocaleKeys.walletAccount,
-                          style: TextStyles.blue12),
-                    ),
-                    const PopupInfoWallet(),
-                  ],
-                ),
+                const PopupInfoWallet(),
                 ElevatedButton(
                     onPressed: _launchUrl,
                     style: ElevatedButton.styleFrom(
@@ -164,7 +154,7 @@ class TabWalletDetail extends StatelessWidget {
                 ),
                 alignment: Alignment.center,
                 padding: const EdgeInsets.symmetric(vertical: 12),
-                child: SFText(keyText: LocaleKeys.createANewWallet),
+                child: SFText(keyText: LocaleKeys.create_a_new_wallet),
               ),
             ),
             const SizedBox(height: 24),
@@ -179,7 +169,7 @@ class TabWalletDetail extends StatelessWidget {
                 ),
                 alignment: Alignment.center,
                 padding: const EdgeInsets.symmetric(vertical: 12),
-                child: SFText(keyText: LocaleKeys.importAWalletUsingSeedPhrase),
+                child: SFText(keyText: LocaleKeys.import_a_wallet_using_seed_phrase),
               ),
             ),
           ],

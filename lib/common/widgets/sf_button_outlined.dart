@@ -11,7 +11,7 @@ class SFButtonOutLined extends StatelessWidget {
     this.textStyle,
     this.borderColor = AppColors.lightGrey,
     this.iconColor = AppColors.lightGrey,
-    this.withBorder = 2,
+    this.withBorder = 1,
     this.icon,
   }) : super(key: key);
 

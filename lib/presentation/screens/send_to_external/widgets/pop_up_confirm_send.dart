@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
 import 'package:slee_fi/common/widgets/sf_buttons.dart';
+import 'package:slee_fi/common/widgets/sf_dialog.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
 import 'package:slee_fi/l10n/locale_keys.g.dart';
 
@@ -42,7 +43,7 @@ class PopUpConfirmSend extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               SFText(
-                keyText: LocaleKeys.youllSend,
+                keyText: LocaleKeys.youll_send,
                 style: TextStyles.lightGrey14,
               ),
               Expanded(
@@ -61,7 +62,7 @@ class PopUpConfirmSend extends StatelessWidget {
             children: [
               Expanded(
                 child: SFText(
-                  keyText: LocaleKeys.sendAddress,
+                  keyText: LocaleKeys.send_address,
                   style: TextStyles.lightGrey14,
                 ),
               ),
@@ -95,7 +96,10 @@ class PopUpConfirmSend extends StatelessWidget {
                   text: LocaleKeys.confirm,
                   textStyle: TextStyles.bold14LightWhite,
                   color: AppColors.blue,
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.pop(context);
+                    showSuccessfulDialog(context);
+                  },
                 ),
               ),
             ],

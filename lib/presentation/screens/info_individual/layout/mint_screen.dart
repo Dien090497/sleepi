@@ -1,6 +1,6 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-// import 'package:flutter_translate/flutter_translate.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
 import 'package:slee_fi/common/widgets/background_widget.dart';
@@ -53,7 +53,7 @@ class _MintScreenState extends State<MintScreen> {
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 20),
                       child: SFText(
-                        keyText: LocaleKeys.bedRecycle,
+                        keyText: LocaleKeys.bed_recycle,
                         style: TextStyles.boldWhite18,
                       ),
                     ),
@@ -89,7 +89,7 @@ class _MintScreenState extends State<MintScreen> {
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Text(
-                                '${translate(LocaleKeys.insurance)}: 5%',
+                                '${LocaleKeys.insurance.tr()}: 5%',
                                 style: TextStyles.bold16LightWhite,
                               ),
                               SizedBox(
@@ -113,7 +113,7 @@ class _MintScreenState extends State<MintScreen> {
                             crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
                               SFText(
-                                keyText: LocaleKeys.whatInsurance,
+                                keyText: LocaleKeys.what_insurance,
                                 style: TextStyles.lightGrey12,
                               ),
                               const SizedBox(
@@ -146,7 +146,7 @@ class _MintScreenState extends State<MintScreen> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             SFText(
-                              keyText: LocaleKeys.withoutCase,
+                              keyText: LocaleKeys.without_case,
                               style: TextStyles.lightGrey14,
                             ),
                             const SizedBox(
@@ -160,7 +160,7 @@ class _MintScreenState extends State<MintScreen> {
                               child: Column(
                                 children: [
                                   const SFLabelValue(
-                                    label: LocaleKeys.commonBed,
+                                    label: LocaleKeys.common_bed,
                                     value: '98%',
                                     colorBorder: Colors.transparent,
                                   ),
@@ -184,14 +184,14 @@ class _MintScreenState extends State<MintScreen> {
                               height: 24,
                             ),
                             SFText(
-                              keyText: LocaleKeys.withoutCase,
+                              keyText: LocaleKeys.without_case,
                               style: TextStyles.lightGrey14,
                             ),
                             const SizedBox(
                               height: 12,
                             ),
                             const SFLabelValue(
-                                label: LocaleKeys.commonBed, value: '100%'),
+                                label: LocaleKeys.common_bed, value: '100%'),
                             const SizedBox(
                               height: 24,
                             ),

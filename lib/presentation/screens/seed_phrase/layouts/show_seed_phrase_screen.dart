@@ -19,7 +19,7 @@ class ShowSeedPhraseScreen extends StatelessWidget {
         backgroundColor: AppColors.transparent,
         appBar: SFAppBar(
           context: context,
-          title: LocaleKeys.seedPhrase,
+          title: LocaleKeys.seed_phrase,
           textStyle: TextStyles.bold18LightWhite,
         ),
         body: SafeArea(
@@ -56,7 +56,7 @@ class ShowSeedPhraseScreen extends StatelessWidget {
               height: 12.0,
             ),
             SFText(
-              keyText: LocaleKeys.displaysMessageShowSeedPhrase,
+              keyText: LocaleKeys.displays_message_show_seed_phrase,
               style: TextStyles.lightGrey12,
             ),
             const SizedBox(
@@ -67,7 +67,7 @@ class ShowSeedPhraseScreen extends StatelessWidget {
                 Navigator.pushNamed(context, R.exportSeedPhrase);
               },
               child: SFText(
-                keyText: LocaleKeys.pressAndHoldToReveal,
+                keyText: LocaleKeys.press_and_hold_to_reveal,
                 style: TextStyles.bold18White,
               ),
             ),

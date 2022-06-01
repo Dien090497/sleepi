@@ -15,7 +15,7 @@ class PopUpConfirmTrade extends StatelessWidget {
     return Column(
       children: [
         SFText(
-          keyText: LocaleKeys.confirmTrade,
+          keyText: LocaleKeys.confirm_trade,
           style: TextStyles.bold18LightWhite,
         ),
         const SizedBox(

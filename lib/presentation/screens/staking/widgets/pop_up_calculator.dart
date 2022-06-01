@@ -19,7 +19,7 @@ class PopUpCalculator extends StatelessWidget {
       children: [
         Center(
             child: SFText(
-          keyText: LocaleKeys.roiCalculator,
+          keyText: LocaleKeys.roi_calculator,
           style: TextStyles.bold18LightWhite,
         )),
         const SizedBox(
@@ -34,7 +34,7 @@ class PopUpCalculator extends StatelessWidget {
           height: 12.0,
         ),
         SFText(
-          keyText: LocaleKeys.sleefiStacked,
+          keyText: LocaleKeys.slft_staked,
           style: TextStyles.lightGrey14,
         ),
         SFCard(
@@ -98,7 +98,7 @@ class PopUpCalculator extends StatelessWidget {
           height: 32.0,
         ),
         SFText(
-          keyText: LocaleKeys.addDuration,
+          keyText: LocaleKeys.add_duration,
           style: TextStyles.lightGrey14,
         ),
         const SizedBox(
@@ -158,7 +158,7 @@ class PopUpCalculator extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   SFText(
-                    keyText: LocaleKeys.roiCurrentRates,
+                    keyText: LocaleKeys.roi_current_rates,
                     style: TextStyles.blue14,
                   ),
                   const SizedBox(

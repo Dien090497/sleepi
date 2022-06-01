@@ -50,7 +50,7 @@ class ModalReceiveWallet extends StatelessWidget {
           height: 32.0,
         ),
         SFText(
-          keyText: LocaleKeys.scanAddressToReceivePayment,
+          keyText: LocaleKeys.scan_address_to_receive_payment,
           style: TextStyles.lightGrey12,
           textAlign: TextAlign.center,
         ),
@@ -78,7 +78,7 @@ class ModalReceiveWallet extends StatelessWidget {
           height: 32,
         ),
         SFButton(
-          text: LocaleKeys.copyAddress,
+          text: LocaleKeys.copy_address,
           textStyle: TextStyles.bold16LightWhite,
           height: 50,
           color: AppColors.blue,

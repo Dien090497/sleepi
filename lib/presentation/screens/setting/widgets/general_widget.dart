@@ -23,63 +23,60 @@ class GeneralWidget extends StatelessWidget {
       color: AppColors.lightWhite.withOpacity(0.05),
       height: 1,
     );
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 12.0, vertical: 24.0),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          SFText(
-            keyText: LocaleKeys.general,
-            style: TextStyles.lightGrey14,
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.start,
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        SFText(
+          keyText: LocaleKeys.general,
+          style: TextStyles.lightGrey14,
+        ),
+        SFCard(
+          padding: const EdgeInsets.symmetric(horizontal: 16.0),
+          child: Column(
+            children: [
+              SFListTile(
+                text: LocaleKeys.permissions,
+                trailing: icon,
+                onPressed: () => Navigator.pushNamed(context, R.permission),
+              ),
+              divider,
+              SFListTile(
+                text: LocaleKeys.alarm,
+                trailing: icon,
+                onPressed: () => Navigator.pushNamed(context, R.alarm),
+              ),
+              divider,
+              SFListTile(
+                text: LocaleKeys.activation_code,
+                trailing: icon,
+                onPressed: () =>
+                    Navigator.pushNamed(context, R.activationCode),
+              ),
+              divider,
+              SFListTile(
+                text: LocaleKeys.language,
+                trailing: icon,
+                onPressed: () => SFModalBottomSheet.show(
+                    context, 0.36, const ModalPopUpLanguage()),
+              ),
+              divider,
+              SFListTile(
+                text: LocaleKeys.multi,
+                trailing: icon,
+                onPressed: () => SFModalBottomSheet.show(
+                    context, 0.5, const ModalMultiChainSwitch()),
+              ),
+              divider,
+              SFListTile(
+                text: LocaleKeys.version,
+                trailing:
+                    SFText(keyText: "0.01", style: TextStyles.lightGrey14),
+              ),
+            ],
           ),
-          SFCard(
-            padding: const EdgeInsets.symmetric(horizontal: 16.0),
-            child: Column(
-              children: [
-                SFListTile(
-                  text: LocaleKeys.permissions,
-                  trailing: icon,
-                  onPressed: () => Navigator.pushNamed(context, R.permission),
-                ),
-                divider,
-                SFListTile(
-                  text: LocaleKeys.alarm,
-                  trailing: icon,
-                  onPressed: () => Navigator.pushNamed(context, R.alarm),
-                ),
-                divider,
-                SFListTile(
-                  text: LocaleKeys.activationCode,
-                  trailing: icon,
-                  onPressed: () =>
-                      Navigator.pushNamed(context, R.activationCode),
-                ),
-                divider,
-                SFListTile(
-                  text: LocaleKeys.language,
-                  trailing: icon,
-                  onPressed: () => SFModalBottomSheet.show(
-                      context, 0.36, const ModalPopUpLanguage()),
-                ),
-                divider,
-                SFListTile(
-                  text: LocaleKeys.multiChainSwitch,
-                  trailing: icon,
-                  onPressed: () => SFModalBottomSheet.show(
-                      context, 0.5, const ModalMultiChainSwitch()),
-                ),
-                divider,
-                SFListTile(
-                  text: LocaleKeys.version,
-                  trailing:
-                      SFText(keyText: "0.01", style: TextStyles.lightGrey14),
-                ),
-              ],
-            ),
-          ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 }

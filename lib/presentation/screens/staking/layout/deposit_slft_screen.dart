@@ -22,7 +22,7 @@ class DepositSlftScreen extends StatelessWidget {
         backgroundColor: AppColors.transparent,
         appBar: SFAppBar(
           context: context,
-          title: LocaleKeys.depositSlft,
+          title: LocaleKeys.deposit_slft,
           textStyle: TextStyles.bold18LightWhite,
         ),
         body: SafeArea(
@@ -44,7 +44,7 @@ class DepositSlftScreen extends StatelessWidget {
                           children: [
                             Expanded(
                                 child: SFText(
-                              keyText: LocaleKeys.yourSlftInSpending,
+                              keyText: LocaleKeys.your_slft_in_spending,
                               style: TextStyles.lightGrey12,
                             )),
                             SFText(

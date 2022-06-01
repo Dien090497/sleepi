@@ -31,7 +31,7 @@ class TakingScreen extends StatelessWidget {
                     Padding(
                         padding: const EdgeInsets.only(left: 12.0),
                         child: SFText(
-                            keyText: LocaleKeys.stakeSlft,
+                            keyText: LocaleKeys.stake_slft,
                             style: TextStyles.bold32black)),
                     const SizedBox(
                       height: 16.0,
@@ -40,7 +40,7 @@ class TakingScreen extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         SFText(
-                            keyText: LocaleKeys.yourSlftInSpending,
+                            keyText: LocaleKeys.your_slft_in_spending,
                             style: TextStyles.bold20black),
                         SFText(
                             keyText: "XXXXXXX  SLFT",
@@ -55,7 +55,7 @@ class TakingScreen extends StatelessWidget {
                         Expanded(
                           flex: 3,
                           child: SFText(
-                              keyText: LocaleKeys.stakeWithdraw,
+                              keyText: LocaleKeys.stake_withdraw,
                               style: TextStyles.bold32black),
                         ),
                         Expanded(

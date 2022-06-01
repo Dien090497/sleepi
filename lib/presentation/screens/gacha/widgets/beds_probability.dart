@@ -14,11 +14,11 @@ class BedsProbability extends StatelessWidget {
   Widget build(BuildContext context) {
     final Size size = MediaQuery.of(context).size;
     final dataMap = <String, double>{
-      LocaleKeys.commonBed: 35,
-      LocaleKeys.uncommonBed: 15,
-      LocaleKeys.rareBed: 22,
-      LocaleKeys.epicBed: 20,
-      LocaleKeys.legendaryBed: 8,
+      LocaleKeys.common_bed: 35,
+      LocaleKeys.uncommon_bed: 15,
+      LocaleKeys.rare_bed: 22,
+      LocaleKeys.epic_bed: 20,
+      LocaleKeys.legendary_bed: 8,
     };
     final colorList = <Color>[
       AppColors.commonBed,
@@ -63,29 +63,29 @@ class BedsProbability extends StatelessWidget {
               height: 30,
             ),
             InfoChartColor(
-              typeBed: LocaleKeys.commonBed,
-              valueInChart: dataMap[LocaleKeys.commonBed]!.toStringAsFixed(0),
+              typeBed: LocaleKeys.common_bed,
+              valueInChart: dataMap[LocaleKeys.common_bed]!.toStringAsFixed(0),
               color: colorList[0],
             ),
             InfoChartColor(
-              typeBed: LocaleKeys.uncommonBed,
-              valueInChart: dataMap[LocaleKeys.uncommonBed]!.toStringAsFixed(0),
+              typeBed: LocaleKeys.uncommon_bed,
+              valueInChart: dataMap[LocaleKeys.uncommon_bed]!.toStringAsFixed(0),
               color: colorList[1],
             ),
             InfoChartColor(
-              typeBed: LocaleKeys.rareBed,
-              valueInChart: dataMap[LocaleKeys.rareBed]!.toStringAsFixed(0),
+              typeBed: LocaleKeys.rare_bed,
+              valueInChart: dataMap[LocaleKeys.rare_bed]!.toStringAsFixed(0),
               color: colorList[2],
             ),
             InfoChartColor(
-              typeBed: LocaleKeys.epicBed,
-              valueInChart: dataMap[LocaleKeys.epicBed]!.toStringAsFixed(0),
+              typeBed: LocaleKeys.epic_bed,
+              valueInChart: dataMap[LocaleKeys.epic_bed]!.toStringAsFixed(0),
               color: colorList[3],
             ),
             InfoChartColor(
-              typeBed: LocaleKeys.legendaryBed,
+              typeBed: LocaleKeys.legendary_bed,
               valueInChart:
-                  dataMap[LocaleKeys.legendaryBed]!.toStringAsFixed(0),
+                  dataMap[LocaleKeys.legendary_bed]!.toStringAsFixed(0),
               color: colorList[4],
             ),
           ],

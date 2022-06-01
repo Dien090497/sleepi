@@ -29,7 +29,7 @@ class SettingWalletScreen extends StatelessWidget {
               BoxInfoWidget(
                 urlIcon: Ics.icShieldLock,
                 title: LocaleKeys.backup,
-                info: LocaleKeys.displaysBackupInfo,
+                info: LocaleKeys.displays_backup_info,
                 onTap: () {
                   Navigator.pushNamed(context, R.passcode,
                       arguments: PasscodeArguments(R.seedPhrase));
@@ -37,8 +37,8 @@ class SettingWalletScreen extends StatelessWidget {
               ),
               BoxInfoWidget(
                 urlIcon: Ics.lock,
-                title: LocaleKeys.resetWithPasscode,
-                info: LocaleKeys.displaysResetWithPasscodeInfo,
+                title: LocaleKeys.reset_with_passcode,
+                info: LocaleKeys.displays_reset_with_passcode_info,
                 onTap: () {
                   Navigator.pushNamed(context, R.passcode,
                       arguments: PasscodeArguments(R.createPasscode));
@@ -46,8 +46,8 @@ class SettingWalletScreen extends StatelessWidget {
               ),
               BoxInfoWidget(
                 urlIcon: Ics.icRefresh,
-                title: LocaleKeys.restoreWallet,
-                info: LocaleKeys.displaysRestoreWalletInfo,
+                title: LocaleKeys.restore_wallet,
+                info: LocaleKeys.displays_restore_wallet_info,
                 onTap: () => Navigator.pushNamed(context, R.restoreWallet),
               ),
             ],

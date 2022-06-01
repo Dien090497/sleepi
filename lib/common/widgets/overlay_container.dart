@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
@@ -113,6 +115,9 @@ class _OverlayContainerState extends State<OverlayContainer>
       Overlay.of(context)?.insert(_overlayEntry);
       _opened = true;
     });
+    // Timer(const Duration(seconds: 5), () {
+    //   _hide();
+    // });
   }
 
   void _hide() {

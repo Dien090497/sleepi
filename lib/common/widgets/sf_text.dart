@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
-// import 'package:flutter_translate/flutter_translate.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
 
 class SFText extends Text {
-  SFText({
+  const SFText({
     required String keyText,
     String suffix = '',
     String prefix = '',

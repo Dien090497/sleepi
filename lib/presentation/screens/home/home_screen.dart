@@ -4,7 +4,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-// import 'package:flutter_translate/flutter_translate.dart';
 import 'package:slee_fi/common/routes/app_routes.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
@@ -230,7 +229,7 @@ class _HomeScreenState extends State<HomeScreen> {
           const SizedBox(
             height: 16,
           ),
-          Text(
+          const Text(
             // '${translate(LocaleKeys.range)}: 06:00-09:00',
             '${LocaleKeys.range}: 06:00-09:00',
             style: TextStyles.white16500,
@@ -243,7 +242,7 @@ class _HomeScreenState extends State<HomeScreen> {
             children: [
               Expanded(
                 child: SFButtonOutLined(
-                  title: LocaleKeys.alarmBell,
+                  title: LocaleKeys.alarm_bell,
                   onPressed: () {
                     Navigator.pushNamed(context, R.alarmSoundEffect);
                   },
@@ -255,6 +254,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   withBorder: 1,
                 ),
               ),
+              const SizedBox(width: 22,),
               CupertinoSwitch(
                 activeColor: AppColors.green,
                 value: swCheck,
@@ -403,7 +403,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                   child: Column(
                                     children: [
                                       SFButtonOutLined(
-                                        title: LocaleKeys.useItem,
+                                        title: LocaleKeys.use_item,
                                         onPressed: () {
                                           SFModalBottomSheet.show(context, 0.8,
                                               const ModalItemList());
@@ -422,7 +422,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                         mainAxisAlignment:
                                             MainAxisAlignment.spaceBetween,
                                         children: [
-                                          Text(
+                                          const Text(
                                             // '${translate(LocaleKeys.insurance)}: 5%',
                                             '${LocaleKeys.insurance}: 5%',
                                             style: TextStyles.bold16LightWhite,
@@ -449,7 +449,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                             CrossAxisAlignment.center,
                                         children: [
                                           SFText(
-                                            keyText: LocaleKeys.whatInsurance,
+                                            keyText: LocaleKeys.what_insurance,
                                             style: TextStyles.lightGrey12,
                                           ),
                                           const SizedBox(

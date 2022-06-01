@@ -57,7 +57,7 @@ class BottomBarWidget extends StatelessWidget {
       width: MediaQuery.of(context).size.width,
       child: Row(
         children: [
-          itemBottomBar(context, Ics.levelUp, LocaleKeys.levelUp, () {
+          itemBottomBar(context, Ics.levelUp, LocaleKeys.level_up, () {
             showCustomDialog(
               context,
               children: [

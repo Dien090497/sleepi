@@ -34,7 +34,7 @@ class GachaResultOverview extends StatelessWidget {
                 padding:
                     const EdgeInsets.symmetric(vertical: 90, horizontal: 20),
                 child: SFText(
-                    keyText: LocaleKeys.displaysTheNftDischargedFromTheGacha),
+                    keyText: LocaleKeys.displays_the_nft_discharged_from_the_gacha),
               ),
               const SizedBox(height: 28),
               SFButton(

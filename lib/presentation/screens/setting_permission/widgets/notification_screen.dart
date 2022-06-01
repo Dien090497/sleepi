@@ -29,7 +29,7 @@ class NotificationPermissionScreen extends StatelessWidget {
                     height: 24.0,
                   ),
                   SFText(
-                    keyText: LocaleKeys.notificationPermission,
+                    keyText: LocaleKeys.notification_permission,
                     style: TextStyles.bold24LightWhite,
                     textAlign: TextAlign.center,
                   ),
@@ -37,7 +37,7 @@ class NotificationPermissionScreen extends StatelessWidget {
                     height: 32.0,
                   ),
                   SFText(
-                    keyText: LocaleKeys.displaysMessageNotificationPermission,
+                    keyText: LocaleKeys.displays_message_notification_permission,
                     style: TextStyles.lightGrey16,
                   ),
                 ],
@@ -45,7 +45,7 @@ class NotificationPermissionScreen extends StatelessWidget {
               Align(
                 alignment: Alignment.bottomCenter,
                 child: Padding(
-                  padding: const EdgeInsets.all(16.0),
+                  padding: const EdgeInsets.fromLTRB(16, 0, 16, 50),
                   child: SFButton(
                       height: 48,
                       width: double.infinity,
