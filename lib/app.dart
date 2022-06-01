@@ -12,8 +12,6 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // final localizationDelegate = LocalizedApp.of(context).delegate;
-
     return MultiBlocProvider(
       providers: [
         BlocProvider(create: (_) => BottomNavigationBloc()),
@@ -23,14 +21,7 @@ class MyApp extends StatelessWidget {
         builder: (context, child) {
           return MaterialApp(
             title: 'SleeFi',
-            // localizationsDelegates: [
-            //   GlobalMaterialLocalizations.delegate,
-            //   GlobalWidgetsLocalizations.delegate,
-            //   localizationDelegate,
-            // ],
             home: child,
-            // supportedLocales: localizationDelegate.supportedLocales,
-            // locale: localizationDelegate.currentLocale,
             localizationsDelegates: context.localizationDelegates,
             supportedLocales: context.supportedLocales,
             locale: context.locale,

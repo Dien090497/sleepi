@@ -14,19 +14,21 @@ void main() async {
     configureDependencies(),
   ]);
 
-  // final delegate = await LocalizationDelegate.create(
-  //   fallbackLocale: 'en_US',
-  //   supportedLocales: ['en_US', 'ja_JP'],
-  //   preferences: getIt<ITranslatePreferences>(),
-  // );
-
   /// Lock in portrait mode only
   SystemChrome.setPreferredOrientations(
       [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]).then((_) {
     BlocOverrides.runZoned(
-      // () => runApp(LocalizedApp(delegate, const MyApp())),
       () => runApp(EasyLocalization(
-        supportedLocales: const [Locale('en', 'US'), Locale('ja', 'JP')],
+        supportedLocales: const [
+          Locale('de', 'DE'),
+          Locale('en', 'US'),
+          Locale('es', 'ES'),
+          Locale('fr', 'FR'),
+          Locale('ja', 'JP'),
+          Locale('pt', 'T'),
+          Locale('ru', 'RU'),
+          Locale('zh', 'Hans'),
+        ],
         path: 'assets/translations',
         fallbackLocale: const Locale('en', 'US'),
         child: const MyApp(),

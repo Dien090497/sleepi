@@ -10,6 +10,7 @@ abstract class  LocaleKeys {
   static const start = 'start';
   static const activation_code = 'activation_code';
   static const get_activation_code = 'get_activation_code';
+  static const activation_code_language = 'activation_code_language';
   static const please_enter_your_activation_code = 'please_enter_your_activation_code';
   static const please_select_your_language = 'please_select_your_language';
   static const settings = 'settings';
@@ -41,6 +42,7 @@ abstract class  LocaleKeys {
   static const from = 'from';
   static const to = 'to';
   static const estimate = 'estimate';
+  static const ? = '?';
   static const create_wallet = 'create_wallet';
   static const you_have_already_created_a_wallet_address = 'you_have_already_created_a_wallet_address';
   static const create_a_new_wallet = 'create_a_new_wallet';
@@ -71,6 +73,7 @@ abstract class  LocaleKeys {
   static const average_sleep_duration = 'average_sleep_duration';
   static const average_sleep_quality = 'average_sleep_quality';
   static const alarm = 'alarm';
+  static const multi_chain_switch = 'multi_chain_switch';
   static const version = 'version';
   static const profile = 'profile';
   static const email = 'email';
@@ -79,10 +82,6 @@ abstract class  LocaleKeys {
   static const vibration = 'vibration';
   static const snooze = 'snooze';
   static const volume = 'volume';
-  static const fe_male = 'fe_male';
-  static const sex_male = 'sex_male';
-  static const sex_other = 'sex_other';
-  static const done = 'done';
   static const used = 'used';
   static const available = 'available';
   static const total = 'total';
@@ -101,6 +100,7 @@ abstract class  LocaleKeys {
   static const allow_to_access_motion_data = 'allow_to_access_motion_data';
   static const allow = 'allow';
   static const setup_microphone_access = 'setup_microphone_access';
+  static const would_like_to_send_you notifications = 'would_like_to_send_you notifications';
   static const attributes = 'attributes';
   static const effciency = 'effciency';
   static const luck = 'luck';
@@ -111,9 +111,10 @@ abstract class  LocaleKeys {
   static const mints = 'mints';
   static const insurance = 'insurance';
   static const what_is_insurance = 'what_is_insurance';
+  static const normal_gacha = 'normal_gacha';
   static const profitability = 'profitability';
   static const single_gacha = 'single_gacha';
-  static const ten_times_gacha = 'ten_times_gacha';
+  static const 10_times_gacha = '10_times_gacha';
   static const common = 'common';
   static const uncommon = 'uncommon';
   static const rare_beds_chance = 'rare_beds_chance';
@@ -149,6 +150,7 @@ abstract class  LocaleKeys {
   static const token_and_sleep = 'token_and_sleep';
   static const the_closer_user_are_to_the_time = 'the_closer_user_are_to_the_time';
   static const to_maximize_the_number_of_tokens = 'to_maximize_the_number_of_tokens';
+  static const done = 'done';
   static const tap_and_hold_to_stop = 'tap_and_hold_to_stop';
   static const token_to_be_earned = 'token_to_be_earned';
   static const minting_discount = 'minting_discount';
@@ -218,8 +220,6 @@ abstract class  LocaleKeys {
   static const lite_paper = 'lite_paper';
   static const link_tree = 'link_tree';
   static const please_enter = 'please_enter';
-  static const activation_code_language = 'activation_code_language';
-  static const normal_gacha = 'normal_gacha';
   static const probability = 'probability';
   static const times_gacha = 'times_gacha';
   static const uncommon_beds_chance = 'uncommon_beds_chance';
@@ -299,7 +299,6 @@ abstract class  LocaleKeys {
   static const average_of_sleep_duration = 'average_of_sleep_duration';
   static const average_of_sleep_quality = 'average_of_sleep_quality';
   static const general = 'general';
-  static const multi_chain_switch = 'multi_chain_switch';
   static const secret = 'secret';
   static const activation_code_language_lowercase = 'activation_code_language_lowercase';
   static const available_total = 'available_total';

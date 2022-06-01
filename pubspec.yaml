@@ -15,8 +15,6 @@ dependencies:
     sdk: flutter
 
   cupertino_icons: ^1.0.4
-#  flutter_translate_annotations: ^2.1.0
-#  flutter_translate: ^4.0.2
   shared_preferences: ^2.0.15
   flutter_bloc: ^8.0.1
   equatable: ^2.0.3
@@ -53,7 +51,6 @@ dependency_overrides:
 
 dev_dependencies:
   flutter_lints: ^2.0.1
-#  flutter_translate_gen: ^2.2.0
   build_runner: ^2.1.11
   freezed: ^2.0.3+1
   injectable_generator: ^1.5.3
