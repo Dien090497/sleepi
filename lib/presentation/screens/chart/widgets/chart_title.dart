@@ -30,7 +30,7 @@ class ChartTitle extends StatelessWidget {
           SFText(
             keyText: title ?? "",
             style: textStyleTitle ?? TextStyles.lightWhite14,
-            toUpperCase: toUpperCase,
+            stringCase: toUpperCase,
           ),
           Expanded(
               child: SFText(

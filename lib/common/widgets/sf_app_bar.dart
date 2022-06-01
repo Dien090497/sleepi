@@ -24,7 +24,7 @@ class SFAppBar extends AppBar {
           title: SFText(
             keyText: title ?? "",
             style: textStyle,
-            toUpperCase: toUpperCase,
+            stringCase: toUpperCase,
           ),
           key: key,
         );

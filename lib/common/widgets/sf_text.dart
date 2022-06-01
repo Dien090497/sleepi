@@ -9,13 +9,13 @@ class SFText extends Text {
     String prefix = '',
     Map<String, String>? args,
     TextStyle? style,
-    bool toUpperCase = false,
+    bool stringCase = false,
+    // StringCase? stringCase,
     TextAlign? textAlign,
     Key? key,
   }) : super(
-          toUpperCase
-              ? prefix + keyText.tr(namedArgs: args).toUpperCase() + suffix
-              : prefix + keyText.tr(namedArgs: args) + suffix,
+          // prefix + keyText.tr(namedArgs: args).reCase(stringCase) + suffix,
+          prefix + keyText.tr(namedArgs: args) + suffix,
           style: style ?? TextStyles.textBasic15,
           textAlign: textAlign,
           key: key,

@@ -209,7 +209,7 @@ class StakingList extends StatelessWidget {
                       child: SFText(
                     keyText: LocaleKeys.apr,
                     style: TextStyles.lightWhite16,
-                    toUpperCase: true,
+                    stringCase: true,
                   )),
                   SFText(
                     keyText: "X%",

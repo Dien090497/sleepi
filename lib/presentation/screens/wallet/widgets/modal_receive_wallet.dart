@@ -20,7 +20,7 @@ class ModalReceiveWallet extends StatelessWidget {
         SFText(
           keyText: LocaleKeys.receive,
           style: TextStyles.bold18White,
-          toUpperCase: true,
+          stringCase: true,
           textAlign: TextAlign.center,
         ),
         const SizedBox(

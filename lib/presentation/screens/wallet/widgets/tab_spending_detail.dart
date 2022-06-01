@@ -39,7 +39,7 @@ class TabSpendingDetail extends StatelessWidget {
                         title: SFText(
                             keyText: LocaleKeys.slft,
                             style: TextStyles.lightWhite16,
-                            toUpperCase: true),
+                            stringCase: true),
                         trailing: SFText(
                           keyText: "0",
                           style: TextStyles.lightWhite16,
@@ -52,7 +52,7 @@ class TabSpendingDetail extends StatelessWidget {
                         title: SFText(
                             keyText: LocaleKeys.slgt,
                             style: TextStyles.lightWhite16,
-                            toUpperCase: true),
+                            stringCase: true),
                         trailing: SFText(
                           keyText: "0",
                           style: TextStyles.lightWhite16,
@@ -65,7 +65,7 @@ class TabSpendingDetail extends StatelessWidget {
                         title: SFText(
                           keyText: LocaleKeys.avax,
                           style: TextStyles.lightWhite16,
-                          toUpperCase: true,
+                          stringCase: true,
                         ),
                         trailing: SFText(
                           keyText: "0",

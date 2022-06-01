@@ -23,7 +23,7 @@ class SFSubAppBar extends StatelessWidget {
           child: SFText(
             keyText: title ?? "",
             style: textStyle,
-            toUpperCase: toUpperCase,
+            stringCase: toUpperCase,
           ),
         )
       ],

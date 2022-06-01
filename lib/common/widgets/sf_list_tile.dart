@@ -17,7 +17,7 @@ class SFListTile extends ListTile {
             title: SFText(
               keyText: text ?? "",
               style: textStyle ?? TextStyles.lightWhite14,
-              toUpperCase: toUpperCase,
+              stringCase: toUpperCase,
             ),
             leading: leading,
             trailing: trailing,

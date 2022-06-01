@@ -46,6 +46,7 @@ dependencies:
   syncfusion_flutter_sliders: ^20.1.58
   pie_chart: ^5.3.1
   pull_to_refresh: ^2.0.0
+  recase: ^4.0.0
 
 dependency_overrides:
   analyzer: ^4.1.0
