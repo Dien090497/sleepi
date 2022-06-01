@@ -11,12 +11,9 @@ class ModalPopUpSex extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     List<Widget> gender = [
-      SFText(
-        keyText: LocaleKeys.fe_male,
-        style: TextStyles.bold16LightWhite,
-      ),
-      SFText(keyText: LocaleKeys.sex_male, style: TextStyles.bold16LightWhite),
-      SFText(keyText: LocaleKeys.sex_other, style: TextStyles.bold16LightWhite),
+      SFText(keyText: LocaleKeys.secret, style: TextStyles.bold16LightWhite),
+      SFText(keyText: LocaleKeys.secret, style: TextStyles.bold16LightWhite),
+      SFText(keyText: LocaleKeys.secret, style: TextStyles.bold16LightWhite),
       SFText(keyText: LocaleKeys.secret, style: TextStyles.bold16LightWhite),
     ];
     int middle = gender.length ~/ 2;
