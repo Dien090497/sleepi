@@ -7,6 +7,7 @@ class BackgroundWidget extends Scaffold {
     Key? key,
   }) : super(
           key: key,
+          backgroundColor: AppColors.transparent,
           body: Stack(
             children: [
               Container(
