@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -229,9 +230,9 @@ class _HomeScreenState extends State<HomeScreen> {
           const SizedBox(
             height: 16,
           ),
-          const Text(
+          Text(
             // '${translate(LocaleKeys.range)}: 06:00-09:00',
-            '${LocaleKeys.range}: 06:00-09:00',
+            '${LocaleKeys.range.tr()}: 06:00-09:00',
             style: TextStyles.white16500,
           ),
           const SizedBox(
@@ -270,7 +271,7 @@ class _HomeScreenState extends State<HomeScreen> {
             height: 16,
           ),
           SFButton(
-            text: startTime == 0 ? LocaleKeys.start : '${convertTimer()}',
+            text: startTime == 0 ? LocaleKeys.start.tr() : '${convertTimer()}',
             textStyle: TextStyles.white16,
             radius: 100,
             gradient: startTime == 0 ? AppColors.gradientBlueButton : null,
@@ -423,9 +424,9 @@ class _HomeScreenState extends State<HomeScreen> {
                                         mainAxisAlignment:
                                             MainAxisAlignment.spaceBetween,
                                         children: [
-                                          const Text(
+                                          Text(
                                             // '${translate(LocaleKeys.insurance)}: 5%',
-                                            '${LocaleKeys.insurance}: 5%',
+                                            '${LocaleKeys.insurance.tr()}: 5%',
                                             style: TextStyles.bold16LightWhite,
                                           ),
                                           SizedBox(
