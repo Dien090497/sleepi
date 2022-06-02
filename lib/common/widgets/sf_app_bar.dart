@@ -17,10 +17,9 @@ class SFAppBar extends AppBar {
   }) : super(
           backgroundColor: backgroundColor ?? AppColors.transparent,
           shadowColor: backgroundColor,
-          centerTitle: centerTitle,
+          centerTitle: centerTitle ?? false,
           automaticallyImplyLeading: false,
           leadingWidth: 48,
-          centerTitle: false,
           elevation: 0,
           leading:  const Padding(
             padding: EdgeInsets.only(left: 16),

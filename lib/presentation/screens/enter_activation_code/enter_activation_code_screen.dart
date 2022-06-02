@@ -62,7 +62,6 @@ class EnterActivationCodeScreen extends StatelessWidget {
                                   style: TextStyles.white16,
                                 ),
                               ),
-                            ),
                             DropdownMenuItem(
                               value: '2',
                               child: SFText(
@@ -92,6 +91,7 @@ class EnterActivationCodeScreen extends StatelessWidget {
                               ),
                             ),
                           ]
+                        )
                       ),
                       const SizedBox(
                         height: 20,
