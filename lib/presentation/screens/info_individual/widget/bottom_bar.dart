@@ -77,7 +77,7 @@ class BottomBarWidget extends StatelessWidget {
               context,
               children: [
                 PopUpRepair(
-                  icon: Ics.shortBed,
+                  icon: Ics.middleBed,
                   cost: 120,
                   level: 20,
                   time: 122,
@@ -95,7 +95,7 @@ class BottomBarWidget extends StatelessWidget {
                 onConfirm: () {},
                 time: 1,
                 cost: 1,
-                icon: Ics.flexibleBed,
+                icon: Ics.middleBed,
                 level: 2,
               ),
             ]);

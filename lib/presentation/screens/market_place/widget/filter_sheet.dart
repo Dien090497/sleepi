@@ -30,110 +30,118 @@ class _FilterSheetState extends State<FilterSheet> {
   @override
   Widget build(BuildContext context) {
     final Size size = MediaQuery.of(context).size;
-    return Column(
+    return Stack(
       children: [
-        const SizedBox(height: 8),
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 32),
-          child: Column(
-            children: [
-              Row(
+        Column(
+          children: [
+            const SizedBox(height: 8),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 32),
+              child: Column(
                 children: [
-                  SFText(
-                    keyText: LocaleKeys.filter,
-                    suffix: ' (${listSelected.length})',
-                    style: TextStyles.white18W700,
+                  Row(
+                    children: [
+                      SFText(
+                        keyText: LocaleKeys.filter,
+                        suffix: ' (${listSelected.length})',
+                        style: TextStyles.white18W700,
+                      ),
+                      const Spacer(),
+                      TextButton(
+                          onPressed: () {
+                            listSelected.clear();
+                            setState(() {});
+                          },
+                          child: SFText(
+                            keyText: LocaleKeys.clear_filter,
+                            style: TextStyles.red14,
+                          )),
+                    ],
                   ),
-                  const Spacer(),
-                  TextButton(
-                      onPressed: () {
-                        listSelected.clear();
-                        setState(() {});
-                      },
-                      child: SFText(
-                        keyText: LocaleKeys.clear_filter,
-                        style: TextStyles.red14,
-                      )),
+                  const SizedBox(height: 20),
+                  Align(
+                    alignment: Alignment.centerLeft,
+                    child: SFText(
+                      keyText: LocaleKeys.type,
+                      style: TextStyles.lightGrey14,
+                    ),
+                  ),
+                  const SizedBox(height: 20),
+                  TypeSelectionWidget(
+                    types: filters,
+                    listSelected: listSelected,
+                    onSelect: (List<String> value) {
+                      listSelected = value;
+                      setState(() {});
+                    },
+                  ),
                 ],
               ),
-              const SizedBox(height: 20),
-              Align(
-                alignment: Alignment.centerLeft,
-                child: SFText(
-                  keyText: LocaleKeys.type,
-                  style: TextStyles.lightGrey14,
-                ),
-              ),
-              const SizedBox(height: 20),
-              TypeSelectionWidget(
-                types: filters,
-                listSelected: listSelected,
-                onSelect: (List<String> value) {
-                  listSelected = value;
-                  setState(() {});
-                },
-              ),
-            ],
-          ),
-        ),
-        const SizedBox(height: 28),
-        Container(
-          alignment: Alignment.centerLeft,
-          padding: const EdgeInsets.symmetric(horizontal: 32),
-          child: SFText(
-            keyText: LocaleKeys.quality,
-            style: TextStyles.lightGrey14,
-          ),
-        ),
-        SfSliderTheme(
-          data: SfSliderThemeData(
-            activeLabelStyle: TextStyles.lightGrey12,
-            inactiveLabelStyle: TextStyles.lightGrey12,
-          ),
-          child: SfSlider(
-            min: 0,
-            max: 10,
-            value: quality,
-            interval: 10,
-            showTicks: true,
-            showLabels: true,
-            enableTooltip: true,
-            showDividers: false,
-            stepSize: 1,
-            thumbIcon: Container(
-              width: 16,
-              height: 16,
-              decoration: const BoxDecoration(
-                color: AppColors.white,
-                shape: BoxShape.circle,
-              ),
-              padding: const EdgeInsets.all(4),
-              child: Container(
-                decoration: const BoxDecoration(
-                  color: AppColors.blue,
-                  shape: BoxShape.circle,
-                ),
+            ),
+            const SizedBox(height: 28),
+            Container(
+              alignment: Alignment.centerLeft,
+              padding: const EdgeInsets.symmetric(horizontal: 32),
+              child: SFText(
+                keyText: LocaleKeys.quality,
+                style: TextStyles.lightGrey14,
               ),
             ),
-            minorTicksPerInterval: 1,
-            onChanged: (dynamic value) {
-              setState(() {
-                quality = value;
-              });
-            },
-          ),
+            SfSliderTheme(
+              data: SfSliderThemeData(
+                activeLabelStyle: TextStyles.lightGrey12,
+                inactiveLabelStyle: TextStyles.lightGrey12,
+              ),
+              child: SfSlider(
+                min: 0,
+                max: 10,
+                value: quality,
+                interval: quality,
+                showTicks: true,
+                showLabels: true,
+                enableTooltip: true,
+                showDividers: false,
+                stepSize: 1,
+                thumbIcon: Container(
+                  width: 16,
+                  height: 16,
+                  decoration: const BoxDecoration(
+                    color: AppColors.white,
+                    shape: BoxShape.circle,
+                  ),
+                  padding: const EdgeInsets.all(4),
+                  child: Container(
+                    decoration: const BoxDecoration(
+                      color: AppColors.blue,
+                      shape: BoxShape.circle,
+                    ),
+                  ),
+                ),
+                minorTicksPerInterval: 1,
+                onChanged: (dynamic value) {
+                  setState(() {
+                    quality = value;
+                  });
+                },
+              ),
+            ),
+            const Spacer(),
+            const SizedBox(height: 26),
+          ],
         ),
-        const Spacer(),
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 24.0),
-          child: SFButton(
-            text: LocaleKeys.confirm,
-            textStyle: TextStyles.white16,
-            width: size.width,
-            gradient: AppColors.gradientBlueButton,
-          ),
-        ),
-        const SizedBox(height: 28),
+        Positioned(
+          bottom: 26,
+            left: 24,
+            right: 24,
+            child: SFButton(
+              text: LocaleKeys.confirm,
+              textStyle: TextStyles.white16,
+              width: size.width,
+              gradient: AppColors.gradientBlueButton,
+              onPressed: (){
+                Navigator.pop(context);
+              },
+            ),),
       ],
     );
   }

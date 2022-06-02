@@ -8,7 +8,6 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:slee_fi/common/routes/app_routes.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
-import 'package:slee_fi/common/widgets/background_widget.dart';
 import 'package:slee_fi/common/widgets/loading_screen.dart';
 import 'package:slee_fi/common/widgets/sf_bottom_sheet.dart';
 import 'package:slee_fi/common/widgets/sf_button_outlined.dart';
@@ -116,39 +115,33 @@ class _HomeScreenState extends State<HomeScreen> {
               topRight: Radius.circular(40),
               topLeft: Radius.circular(40),
             ),
-            child: SizedBox(
-              height: 320.0,
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: <Widget>[
-                  Expanded(
-                    child: CupertinoPicker(
-                        looping: true,
-                        selectionOverlay: Container(),
-                        offAxisFraction: -0.5,
-                        squeeze: 1,
-                        scrollController: FixedExtentScrollController(
-                          initialItem: _selectedHour,
-                        ),
-                        itemExtent: 48.0,
-                        backgroundColor: AppColors.dark,
-                        onSelectedItemChanged: (int index) {
-                          setState(() {
-                            _selectedHour = index;
-                          });
-                        },
-                        children: List<Widget>.generate(24, (int index) {
-                          return Column(
-                            children: [
-                              if (_selectedHour == index)
-                                Container(
-                                  height: 1,
-                                  decoration: BoxDecoration(
-                                    gradient: AppColors
-                                        .gradientWhiteBorderLeftToRight,
-                                  ),
-                                ),
-                              Container(
+            child: Stack(
+              alignment: Alignment.center,
+              children: [
+                SizedBox(
+                  height: 320.0,
+                  width: 100,
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: <Widget>[
+                      Expanded(
+                        child: CupertinoPicker(
+                            looping: true,
+                            selectionOverlay: Container(),
+                            offAxisFraction: -0.5,
+                            squeeze: 1,
+                            scrollController: FixedExtentScrollController(
+                              initialItem: _selectedHour,
+                            ),
+                            itemExtent: 48.0,
+                            backgroundColor: AppColors.dark,
+                            onSelectedItemChanged: (int index) {
+                              setState(() {
+                                _selectedHour = index;
+                              });
+                            },
+                            children: List<Widget>.generate(24, (int index) {
+                              return Container(
                                 width: size.width,
                                 height: 46,
                                 padding:
@@ -159,48 +152,28 @@ class _HomeScreenState extends State<HomeScreen> {
                                   textAlign: TextAlign.right,
                                   style: TextStyles.white1w700size16,
                                 ),
-                              ),
-                              if (_selectedHour == index)
-                                Container(
-                                  height: 1,
-                                  decoration: BoxDecoration(
-                                    gradient: AppColors
-                                        .gradientWhiteBorderLeftToRight,
-                                  ),
-                                ),
-                            ],
-                          );
-                        })),
-                  ),
-                  Expanded(
-                    child: CupertinoPicker(
-                        selectionOverlay: Container(),
-                        looping: true,
-                        squeeze: 1,
-                        offAxisFraction: 0.5,
-                        useMagnifier: true,
-                        scrollController: FixedExtentScrollController(
-                          initialItem: _selectedMinute,
-                        ),
-                        itemExtent: 48.0,
-                        backgroundColor: AppColors.dark,
-                        onSelectedItemChanged: (int index) {
-                          setState(() {
-                            _selectedMinute = index;
-                          });
-                        },
-                        children: List<Widget>.generate(60, (int index) {
-                          return Column(
-                            children: [
-                              if (_selectedMinute == index)
-                                Container(
-                                  height: 1,
-                                  decoration: BoxDecoration(
-                                    gradient: AppColors
-                                        .gradientWhiteBorderRightToLeft,
-                                  ),
-                                ),
-                              Container(
+                              );
+                            })),
+                      ),
+                      Expanded(
+                        child: CupertinoPicker(
+                            selectionOverlay: Container(),
+                            looping: true,
+                            squeeze: 1,
+                            offAxisFraction: 0.5,
+                            useMagnifier: true,
+                            scrollController: FixedExtentScrollController(
+                              initialItem: _selectedMinute,
+                            ),
+                            itemExtent: 48.0,
+                            backgroundColor: AppColors.dark,
+                            onSelectedItemChanged: (int index) {
+                              setState(() {
+                                _selectedMinute = index;
+                              });
+                            },
+                            children: List<Widget>.generate(60, (int index) {
+                              return Container(
                                 width: size.width,
                                 height: 46,
                                 padding:
@@ -211,21 +184,69 @@ class _HomeScreenState extends State<HomeScreen> {
                                   textAlign: TextAlign.right,
                                   style: TextStyles.white1w700size16,
                                 ),
-                              ),
-                              if (_selectedMinute == index)
-                                Container(
-                                  height: 1,
-                                  decoration: BoxDecoration(
-                                    gradient: AppColors
-                                        .gradientWhiteBorderRightToLeft,
-                                  ),
-                                ),
-                            ],
-                          );
-                        })),
+                              );
+                            })),
+                      ),
+                    ],
                   ),
-                ],
-              ),
+                ),
+                SizedBox(
+                  height: 320,
+                  width: double.infinity,
+                  child: Row(
+                    children: [
+                      Expanded(
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Container(
+                              height: 1,
+                              decoration: BoxDecoration(
+                                gradient:
+                                AppColors.gradientWhiteBorderLeftToRight,
+                              ),
+                            ),
+                            const SizedBox(
+                              height: 46,
+                            ),
+                            Container(
+                              height: 1,
+                              decoration: BoxDecoration(
+                                gradient:
+                                AppColors.gradientWhiteBorderLeftToRight,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      Expanded(
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Container(
+                              height: 1,
+                              decoration: BoxDecoration(
+                                gradient:
+                                AppColors.gradientWhiteBorderRightToLeft,
+                              ),
+                            ),
+                            const SizedBox(
+                              height: 46,
+                            ),
+                            Container(
+                              height: 1,
+                              decoration: BoxDecoration(
+                                gradient:
+                                AppColors.gradientWhiteBorderRightToLeft,
+                              ),
+                            ),
+                          ],
+                        ),
+                      )
+                    ],
+                  ),
+                ),
+              ],
             ),
           ),
           const SizedBox(
@@ -274,10 +295,11 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
           SFButton(
             text: startTime == 0 ? LocaleKeys.start.tr() : '${convertTimer()}',
-            textStyle: TextStyles.white16,
+            textStyle:
+                startTime == 0 ? TextStyles.white16 : TextStyles.lightGrey16,
             radius: 100,
             gradient: startTime == 0 ? AppColors.gradientBlueButton : null,
-            color: AppColors.lightGrey,
+            color: AppColors.lightDark,
             height: 40,
             width: size.width,
             onPressed: () {
@@ -362,117 +384,124 @@ class _HomeScreenState extends State<HomeScreen> {
     final Size size = MediaQuery.of(context).size;
     return BlocProvider(
       create: (_) => HomeBloc()..add(const FetchData()),
-      child: BackgroundWidget(
-        child: SafeArea(
-          child: Stack(
-            children: [
-              BlocBuilder<HomeBloc, HomeState>(
-                builder: (context, state) {
-                  return state.when(
-                    initial: () => const SizedBox.shrink(),
-                    loading: () => const LoadingIcon(),
-                    loaded: () {
-                      return Column(
-                        children: [
-                          const TopBarCommon(),
-                          const SizedBox(
-                            height: 7,
-                          ),
-                          Expanded(
-                            child: SingleChildScrollView(
-                              physics: const ScrollPhysics(),
-                              child: Column(
-                                children: [
-                                  const Padding(
-                                    padding:
-                                        EdgeInsets.symmetric(horizontal: 16.0),
-                                    child: MiddleBed(),
-                                  ),
-                                  const SizedBox(
-                                    height: 16,
-                                  ),
-                                  Padding(
-                                    padding: const EdgeInsets.symmetric(
-                                        horizontal: 16.0),
-                                    child: Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        SFButtonOutLined(
-                                          title: LocaleKeys.use_item,
-                                          onPressed: () {
-                                            SFModalBottomSheet.show(context,
-                                                0.8, const ModalItemList());
-                                          },
-                                          fixedSize: Size(size.width, 40),
-                                          textStyle: TextStyles.lightGrey16500,
-                                          icon: Icons.add_circle_outline,
-                                          borderColor:
-                                              Colors.white.withOpacity(0.1),
-                                          withBorder: 1,
-                                        ),
-                                        const SizedBox(
-                                          height: 24,
-                                        ),
-                                        Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceBetween,
-                                          children: [
-                                            Text(
-                                              // '${translate(LocaleKeys.insurance)}: 5%',
-                                              '${LocaleKeys.insurance.tr()}: 5%',
-                                              style:
-                                                  TextStyles.bold16LightWhite,
+      child: Scaffold(
+        body: Stack(
+          children: [
+            SizedBox(
+                width: size.width,
+                height: size.height,
+                child: Image.asset(
+                  Imgs.background,
+                  fit: BoxFit.fill,
+                )),
+            BlocBuilder<HomeBloc, HomeState>(
+              builder: (context, state) {
+                return state.when(
+                  initial: () => const SizedBox.shrink(),
+                  loading: () => const LoadingIcon(),
+                  loaded: () {
+                    return Column(
+                      children: [
+                        SizedBox(
+                          height: MediaQuery.of(context).padding.top,
+                        ),
+                        const TopBarCommon(),
+                        const SizedBox(
+                          height: 7,
+                        ),
+                        Expanded(
+                          child: SingleChildScrollView(
+                            physics: const ScrollPhysics(),
+                            child: Column(
+                              children: [
+                                const Padding(
+                                  padding:
+                                      EdgeInsets.symmetric(horizontal: 16.0),
+                                  child: MiddleBed(),
+                                ),
+                                const SizedBox(
+                                  height: 16,
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 16.0),
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      SFButtonOutLined(
+                                        title: LocaleKeys.use_item,
+                                        onPressed: () {
+                                          SFModalBottomSheet.show(context, 0.8,
+                                              const ModalItemList());
+                                        },
+                                        fixedSize: Size(size.width, 40),
+                                        textStyle: TextStyles.lightGrey16500,
+                                        icon: Icons.add_circle_outline,
+                                        borderColor:
+                                            Colors.white.withOpacity(0.1),
+                                        withBorder: 1,
+                                      ),
+                                      const SizedBox(
+                                        height: 24,
+                                      ),
+                                      Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          Text(
+                                            // '${translate(LocaleKeys.insurance)}: 5%',
+                                            '${LocaleKeys.insurance.tr()}: 5%',
+                                            style: TextStyles.bold16LightWhite,
+                                          ),
+                                          SizedBox(
+                                            height: 24,
+                                            child: CupertinoSwitch(
+                                              activeColor: AppColors.green,
+                                              value: swCheck,
+                                              onChanged: (value) {
+                                                setState(() {
+                                                  swCheck = value;
+                                                });
+                                              },
                                             ),
-                                            SizedBox(
-                                              height: 24,
-                                              child: CupertinoSwitch(
-                                                activeColor: AppColors.green,
-                                                value: swCheck,
-                                                onChanged: (value) {
-                                                  setState(() {
-                                                    swCheck = value;
-                                                  });
-                                                },
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                        const SizedBox(
-                                          height: 2,
-                                        ),
-                                        SFText(
-                                          keyText: LocaleKeys.what_insurance,
-                                          style: TextStyles.lightGrey12,
-                                        ),
-                                      ],
-                                    ),
+                                          ),
+                                        ],
+                                      ),
+                                      const SizedBox(
+                                        height: 2,
+                                      ),
+                                      SFText(
+                                        keyText: LocaleKeys.what_insurance,
+                                        style: TextStyles.lightGrey12,
+                                      ),
+                                    ],
                                   ),
-                                  const SizedBox(
-                                    height: 16,
-                                  ),
-                                  alarmBell(size),
-                                ],
-                              ),
+                                ),
+                                const SizedBox(
+                                  height: 16,
+                                ),
+                                alarmBell(size),
+                              ],
                             ),
                           ),
-                        ],
-                      );
+                        ),
+                      ],
+                    );
+                  },
+                );
+              },
+            ),
+            checkIntroduce
+                ? IntroduceApp(
+                    backOnPress: (check) {
+                      setState(() {
+                        checkIntroduce = check;
+                      });
                     },
-                  );
-                },
-              ),
-              checkIntroduce
-                  ? IntroduceApp(
-                      backOnPress: (check) {
-                        setState(() {
-                          checkIntroduce = check;
-                        });
-                      },
-                    )
-                  : const SizedBox()
-            ],
-          ),
+                  )
+                : const SizedBox()
+          ],
         ),
       ),
     );

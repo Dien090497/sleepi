@@ -21,6 +21,7 @@ class MintScreen extends StatefulWidget {
 
 class _MintScreenState extends State<MintScreen> {
   bool swCheck = true;
+  late int indexSelected = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -74,7 +75,14 @@ class _MintScreenState extends State<MintScreen> {
                           const SizedBox(
                             height: 60,
                           ),
-                          const ConnectBedWidget(),
+                          ConnectBedWidget(
+                            indexSelected: indexSelected,
+                            callback: () {
+                              Navigator.pop(context);
+                              indexSelected = 1;
+                              setState(() {});
+                            },
+                          ),
                           const SizedBox(
                             height: 60,
                           ),
@@ -190,7 +198,7 @@ class _MintScreenState extends State<MintScreen> {
                               width: size.width,
                               gradient: AppColors.gradientBlueButton,
                               textStyle: TextStyles.white16,
-                              disabled: true,
+                              disabled: indexSelected == 0,
                             )
                           ],
                         ),

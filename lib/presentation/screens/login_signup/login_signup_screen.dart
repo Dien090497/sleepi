@@ -17,50 +17,52 @@ class LoginSignUpScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // return BackgroundWidget();
     return BackgroundWidget(
-      child: DismissKeyboardWidget(
-        child: ListView(
-          padding: const EdgeInsets.symmetric(horizontal: 24),
-          children: [
-            SizedBox(height: MediaQuery.of(context).size.height * 0.15),
-            const SFLogo(),
-            const SizedBox(height: 50),
-            LoginBox(
-              child: Column(
-                children: [
-                  SFText(
-                    keyText: LocaleKeys.login,
-                    style: TextStyles.bold18LightWhite,
-                    stringCase: true,
-                  ),
-                  const SizedBox(height: 25),
-                  const SFTextField(
-                    labelText: LocaleKeys.email_address,
-                    // hintText: LocaleKeys.emailAddress,
-                  ),
-                  const SizedBox(height: 12),
-                  const SFTextFieldTextButton(
-                    labelText: LocaleKeys.email_verification_code,
-                  ),
-                  const SizedBox(height: 37),
-                  SFButton(
-                    text: LocaleKeys.login,
-                    color: AppColors.blue,
-                    textStyle: TextStyles.w600WhiteSize16,
-                    onPressed: () {
-                      Navigator.pushNamed(context, R.enterActivationCode);
-                    },
-                    width: MediaQuery.of(context).size.width,
-                  ),
-                  const SizedBox(height: 10),
-                  SFText(
-                      keyText: LocaleKeys.account_login,
-                      style: TextStyles.blue14)
-                ],
+      child: Scaffold(
+        backgroundColor: AppColors.transparent,
+        body: DismissKeyboardWidget(
+          child: ListView(
+            padding: const EdgeInsets.symmetric(horizontal: 24),
+            children: [
+              SizedBox(height: MediaQuery.of(context).size.height * 0.15),
+              const SFLogo(),
+              const SizedBox(height: 50),
+              LoginBox(
+                child: Column(
+                  children: [
+                    SFText(
+                      keyText: LocaleKeys.login_signup,
+                      style: TextStyles.bold18LightWhite,
+                      stringCase: true,
+                    ),
+                    const SizedBox(height: 25),
+                    const SFTextField(
+                      labelText: LocaleKeys.email_address,
+                      // hintText: LocaleKeys.emailAddress,
+                    ),
+                    const SizedBox(height: 12),
+                    const SFTextFieldTextButton(
+                      labelText: LocaleKeys.email_verification_code,
+                    ),
+                    const SizedBox(height: 37),
+                    SFButton(
+                      text: LocaleKeys.login,
+                      color: AppColors.blue,
+                      textStyle: TextStyles.w600WhiteSize16,
+                      onPressed: () {
+                        Navigator.pushNamed(context, R.enterActivationCode);
+                      },
+                      width: MediaQuery.of(context).size.width,
+                    ),
+                    const SizedBox(height: 10),
+                    SFText(
+                        keyText: LocaleKeys.account_login,
+                        style: TextStyles.blue14)
+                  ],
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );
