@@ -15,14 +15,9 @@ class GeneralWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    const icon = Icon(
-      Icons.chevron_right,
-      color: AppColors.lightGrey,
-    );
-    Divider divider = Divider(
-      color: AppColors.lightWhite.withOpacity(0.05),
-      height: 1,
-    );
+    const icon = Icon(Icons.chevron_right, color: AppColors.lightGrey);
+    Divider divider =
+        Divider(color: AppColors.lightWhite.withOpacity(0.05), height: 1);
     return Column(
       mainAxisAlignment: MainAxisAlignment.start,
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -50,8 +45,7 @@ class GeneralWidget extends StatelessWidget {
               SFListTile(
                 text: LocaleKeys.activation_code,
                 trailing: icon,
-                onPressed: () =>
-                    Navigator.pushNamed(context, R.activationCode),
+                onPressed: () => Navigator.pushNamed(context, R.activationCode),
               ),
               divider,
               SFListTile(

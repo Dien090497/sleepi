@@ -6,17 +6,21 @@ import 'package:slee_fi/common/widgets/sf_text.dart';
 import 'package:slee_fi/l10n/locale_keys.g.dart';
 
 class ModalPopUpSex extends StatelessWidget {
-  const ModalPopUpSex({Key? key}) : super(key: key);
+  const ModalPopUpSex(
+      {Key? key, required this.onSelect, required this.selectedGender})
+      : super(key: key);
+
+  final ValueChanged<String> onSelect;
+  final String selectedGender;
 
   @override
   Widget build(BuildContext context) {
-    List<Widget> gender = [
-      Center(child: SFText(keyText: LocaleKeys.fe_male, style: TextStyles.bold16LightWhite)),
-      Center(child: SFText(keyText: LocaleKeys.sex_male, style: TextStyles.bold16LightWhite)),
-      Center(child: SFText(keyText: LocaleKeys.sex_other, style: TextStyles.bold16LightWhite)),
-      Center(child: SFText(keyText: LocaleKeys.secret, style: TextStyles.bold16LightWhite)),
+    final List<String> genders = [
+      LocaleKeys.fe_male,
+      LocaleKeys.sex_male,
+      LocaleKeys.sex_other,
     ];
-    int middle = gender.length ~/ 2;
+    int selectedIndex = genders.indexOf(selectedGender);
 
     return SafeArea(
       child: Column(
@@ -24,11 +28,19 @@ class ModalPopUpSex extends StatelessWidget {
         children: [
           Expanded(
             child: CupertinoPicker(
-              onSelectedItemChanged: (value) {},
+              onSelectedItemChanged: (index) {
+                selectedIndex = index;
+              },
               itemExtent: 30,
-              scrollController: FixedExtentScrollController(initialItem: middle),
+              scrollController:
+                  FixedExtentScrollController(initialItem: selectedIndex),
               diameterRatio: 1,
-              children: gender,
+              children: List.generate(genders.length, (i) {
+                return Center(
+                  child: SFText(
+                      keyText: genders[i], style: TextStyles.bold16LightWhite),
+                );
+              }),
             ),
           ),
           SFButton(
@@ -37,8 +49,13 @@ class ModalPopUpSex extends StatelessWidget {
               color: AppColors.blue,
               textStyle: TextStyles.w600WhiteSize16,
               height: 48,
-              onPressed: () => Navigator.pop(context)),
-          const SizedBox(height: 37,)
+              onPressed: () {
+                onSelect(genders[selectedIndex]);
+                Navigator.pop(context);
+              }),
+          const SizedBox(
+            height: 37,
+          )
         ],
       ),
     );

@@ -1,31 +1,31 @@
 import 'package:flutter/material.dart';
 import 'package:slee_fi/common/enum/enum.dart';
-import 'package:slee_fi/common/widgets/sf_dialog.dart';
+import 'package:slee_fi/common/routes/app_routes.dart';
 import 'package:slee_fi/common/widgets/sf_sub_tab_bar.dart';
 import 'package:slee_fi/l10n/locale_keys.g.dart';
 import 'package:slee_fi/presentation/screens/product_detail/widgets/gridview_bed_item.dart';
-import 'package:slee_fi/presentation/screens/product_detail/widgets/pop_up_beds_detail.dart';
-import 'package:slee_fi/resources/resources.dart';
 
 class TabBedsDetail extends StatelessWidget {
+  //   showCustomDialog(
+  //     context,
+  //     padding: const EdgeInsets.all(24),
+  //     children: [
+  //       PopUpBedsDetail(
+  //         icon: Ics.sleep,
+  //         level: 1,
+  //         cost: 2,
+  //         time: 1200,
+  //         onConfirm: () {},
+  //         onCancel: () {
+  //           Navigator.pop(context);
+  //         },
+  //       ),
+  //     ],
+  //   );
+  // }
   const TabBedsDetail({Key? key}) : super(key: key);
 
-  void _showBedDialog(BuildContext context) {
-    showCustomDialog(
-      context,
-      padding: const EdgeInsets.all(24),
-      children: [
-        PopUpBedsDetail(
-          icon: Ics.sleep,
-          level: 1,
-          cost: 2,
-          time: 1200,
-          onConfirm: () {},
-          onCancel: () {Navigator.pop(context);},
-        ),
-      ],
-    );
-  }
+  // void _showBedDialog(BuildContext context) {
 
   @override
   Widget build(BuildContext context) {
@@ -45,12 +45,12 @@ class TabBedsDetail extends StatelessWidget {
                 GridViewBedItem(
                     beds: beds,
                     onBedTap: (bed) {
-                      _showBedDialog(context);
+                      Navigator.pushNamed(context, R.nftInfo);
                     }),
                 GridViewBedItem(
                     beds: beds,
                     onBedTap: (bed) {
-                      _showBedDialog(context);
+                      Navigator.pushNamed(context, R.nftInfo);
                     }),
               ],
             ),
