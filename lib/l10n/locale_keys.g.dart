@@ -82,6 +82,7 @@ abstract class  LocaleKeys {
   static const vibration = 'vibration';
   static const snooze = 'snooze';
   static const volume = 'volume';
+  static const done = 'done';
   static const used = 'used';
   static const available = 'available';
   static const total = 'total';
@@ -100,13 +101,12 @@ abstract class  LocaleKeys {
   static const allow_to_access_motion_data = 'allow_to_access_motion_data';
   static const allow = 'allow';
   static const setup_microphone_access = 'setup_microphone_access';
-  static const would_like_to_send_you notifications = 'would_like_to_send_you notifications';
   static const attributes = 'attributes';
-  static const effciency = 'effciency';
+  static const efficiency = 'efficiency';
   static const luck = 'luck';
   static const bonus = 'bonus';
   static const special = 'special';
-  static const resillience = 'resillience';
+  static const resilience = 'resilience';
   static const minted_from = 'minted_from';
   static const mints = 'mints';
   static const insurance = 'insurance';
@@ -114,7 +114,7 @@ abstract class  LocaleKeys {
   static const normal_gacha = 'normal_gacha';
   static const profitability = 'profitability';
   static const single_gacha = 'single_gacha';
-  static const 10_times_gacha = '10_times_gacha';
+  static const ten_times_gacha = 'ten_times_gacha';
   static const common = 'common';
   static const uncommon = 'uncommon';
   static const rare_beds_chance = 'rare_beds_chance';
@@ -150,7 +150,6 @@ abstract class  LocaleKeys {
   static const token_and_sleep = 'token_and_sleep';
   static const the_closer_user_are_to_the_time = 'the_closer_user_are_to_the_time';
   static const to_maximize_the_number_of_tokens = 'to_maximize_the_number_of_tokens';
-  static const done = 'done';
   static const tap_and_hold_to_stop = 'tap_and_hold_to_stop';
   static const token_to_be_earned = 'token_to_be_earned';
   static const minting_discount = 'minting_discount';
@@ -242,9 +241,6 @@ abstract class  LocaleKeys {
   static const rare_bed = 'rare_bed';
   static const epic_bed = 'epic_bed';
   static const legendary_bed = 'legendary_bed';
-  static const efficiency = 'efficiency';
-  static const resilience = 'resilience';
-  static const Efficiency = 'Efficiency';
   static const Luck = 'Luck';
   static const Bonus = 'Bonus';
   static const Special = 'Special';
