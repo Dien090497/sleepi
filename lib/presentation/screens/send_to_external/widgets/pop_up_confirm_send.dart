@@ -85,6 +85,7 @@ class PopUpConfirmSend extends StatelessWidget {
                   text: LocaleKeys.cancel,
                   textStyle: TextStyles.w600LightGreySize16,
                   color: AppColors.light4,
+                  width: double.infinity,
                   onPressed: () => Navigator.maybePop(context),
                 ),
               ),
@@ -96,6 +97,7 @@ class PopUpConfirmSend extends StatelessWidget {
                   text: LocaleKeys.confirm,
                   textStyle: TextStyles.bold14LightWhite,
                   color: AppColors.blue,
+                  width: double.infinity,
                   onPressed: () {
                     Navigator.pop(context);
                     showSuccessfulDialog(context);

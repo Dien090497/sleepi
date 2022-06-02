@@ -124,6 +124,7 @@ class JewelDialogBody extends StatelessWidget {
                       onPressed: onSellTap,
                       textStyle: TextStyles.lightGrey16,
                       color: AppColors.whiteOpacity5,
+                      width: double.infinity,
                     )),
                 const SizedBox(width: 12),
                 Expanded(
@@ -132,6 +133,7 @@ class JewelDialogBody extends StatelessWidget {
                       onPressed: onTransferTap,
                       textStyle: TextStyles.white16,
                       gradient: AppColors.blueGradient,
+                      width: double.infinity,
                     )),
               ],
             ),

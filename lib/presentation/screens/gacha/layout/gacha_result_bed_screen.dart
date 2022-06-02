@@ -83,16 +83,9 @@ class GachaResultBedScreen extends StatelessWidget {
                                         padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 15),
                                         child: SFText(keyText: LocaleKeys.quality, style: TextStyles.blue14,),
                                       ),
-                                      Padding(
-                                      padding: const EdgeInsets.symmetric(
-                                          vertical: 8, horizontal: 15),
-                                      child: SFText(
-                                        keyText: 'Quality',
-                                        style: TextStyles.blue14,
-                                      ),
-                                    ),
+
                                     const SizedBox(
-                                      width: 25,
+                                      width: 15,
                                     ),
                                     Container(
                                       decoration: BoxDecoration(

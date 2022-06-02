@@ -162,6 +162,7 @@ class PopUpBedsDetail extends StatelessWidget {
                   onPressed: onCancel,
                   textStyle: TextStyles.lightGrey16,
                   color: AppColors.whiteOpacity5,
+                  width: double.infinity,
                 )),
                 const SizedBox(width: 12),
                 Expanded(
@@ -169,6 +170,7 @@ class PopUpBedsDetail extends StatelessWidget {
                     text: LocaleKeys.confirm,
                     textStyle: TextStyles.white16,
                     gradient: AppColors.blueGradient,
+                    width: double.infinity,
                     onPressed: () {
                       onConfirm();
                       Navigator.pop(context);
