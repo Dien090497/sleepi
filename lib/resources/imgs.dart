@@ -12,6 +12,7 @@ class Imgs {
   static const String borderClock = 'assets/images/border_clock.png';
   static const String connectBorder = 'assets/images/connect_border.png';
   static const String efficiency = 'assets/images/efficiency.png';
+  static const String errorNoBed = 'assets/images/error_no_bed.png';
   static const String gacha = 'assets/images/gacha.png';
   static const String healthcare = 'assets/images/healthcare.png';
   static const String homePage = 'assets/images/home_page.png';
@@ -58,6 +59,7 @@ class Imgs {
     borderClock,
     connectBorder,
     efficiency,
+    errorNoBed,
     gacha,
     healthcare,
     homePage,

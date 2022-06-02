@@ -174,7 +174,7 @@
   "select_bed_type": "Selelct Bed Type",
   "back": "Back",
   "get_txt": "Get",
-  "earning": "earning",
+  "earning": "Earning",
   "enter_your_passcode": "Enter your passcode",
   "to_track_ambient_noise_levels_and_sounds": "To track ambient noise levels and sounds that occur while you're asleep, access to your phone's mic is required.",
   "microphone_records_only_when_tracking": "Microphone records only when tracking has begun.",
@@ -387,5 +387,7 @@
   "bed_recycle" : "Bed Recycle",
   "what_recycle" : "What Recycling?",
   "body_recycle" : "Amet minim mollit non deserunt ullamco est\n sit aliqua dolor do amet sint. Velit officia\n consequat duis enim velit mollit.",
-  "common_bed_box" : "Common Bed Box"
+  "common_bed_box" : "Common Bed Box",
+  "no_bed": "No Bed",
+  "id": "ID"
 }

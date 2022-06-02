@@ -15,7 +15,7 @@ class SFTextField extends StatelessWidget {
     this.showLabel = true,
     Key? key,
     this.maxLine,
-    this.maxLength,
+    this.maxLength, this.controller,
   }) : super(key: key);
 
   final String? labelText;
@@ -26,6 +26,7 @@ class SFTextField extends StatelessWidget {
   final bool noBorder;
   final int? maxLine;
   final int? maxLength;
+  final TextEditingController? controller;
   final bool showLabel;
 
   @override
@@ -54,6 +55,7 @@ class SFTextField extends StatelessWidget {
             : const SizedBox(),
         TextField(
           style: TextStyles.w400White16,
+          controller: controller,
           decoration: InputDecoration(
             isDense: true,
             // hintText: hintText != null ? translate(hintText!) : null,

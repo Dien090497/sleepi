@@ -20,6 +20,7 @@ class SFAppBar extends AppBar {
           centerTitle: centerTitle,
           automaticallyImplyLeading: false,
           leadingWidth: 48,
+          centerTitle: false,
           elevation: 0,
           leading:  const Padding(
             padding: EdgeInsets.only(left: 16),
