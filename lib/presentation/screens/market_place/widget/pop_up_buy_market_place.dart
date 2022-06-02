@@ -9,7 +9,6 @@ class PopUpBuyMarketPlace extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final Size size = MediaQuery.of(context).size;
     return SFDialog(
       children: [
         Row(
