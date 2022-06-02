@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:slee_fi/common/enum/enum.dart';
+import 'package:slee_fi/common/routes/app_routes.dart';
 import 'package:slee_fi/common/widgets/sf_dialog.dart';
 import 'package:slee_fi/common/widgets/sf_sub_tab_bar.dart';
 import 'package:slee_fi/l10n/locale_keys.g.dart';
@@ -21,7 +22,9 @@ class TabBedsDetail extends StatelessWidget {
           cost: 2,
           time: 1200,
           onConfirm: () {},
-          onCancel: () {Navigator.pop(context);},
+          onCancel: () {
+            Navigator.pop(context);
+          },
         ),
       ],
     );
@@ -45,12 +48,12 @@ class TabBedsDetail extends StatelessWidget {
                 GridViewBedItem(
                     beds: beds,
                     onBedTap: (bed) {
-                      _showBedDialog(context);
+                      Navigator.pushNamed(context, R.nftInfo);
                     }),
                 GridViewBedItem(
                     beds: beds,
                     onBedTap: (bed) {
-                      _showBedDialog(context);
+                      Navigator.pushNamed(context, R.nftInfo);
                     }),
               ],
             ),
