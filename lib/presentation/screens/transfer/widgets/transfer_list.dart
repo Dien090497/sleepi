@@ -35,7 +35,7 @@ class TransferList extends StatelessWidget {
           ),
           SFCard(
             onTap: () => SFModalBottomSheet.show(
-                context, 0.55, const ModalTransferBetween()),
+                context, 0.6, const ModalTransferBetween()),
             child: ListTile(
               leading: Image.asset(Imgs.avax),
               title: SFText(

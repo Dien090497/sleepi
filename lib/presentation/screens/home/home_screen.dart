@@ -48,7 +48,7 @@ class _HomeScreenState extends State<HomeScreen> {
     const oneSec = Duration(seconds: 1);
     _timer = Timer.periodic(
       oneSec,
-      (Timer timer) {
+          (Timer timer) {
         if (startTime == 0) {
           setState(() {
             timer.cancel();
@@ -151,7 +151,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                 width: size.width,
                                 height: 46,
                                 padding:
-                                    const EdgeInsets.symmetric(horizontal: 12),
+                                const EdgeInsets.symmetric(horizontal: 12),
                                 alignment: Alignment.centerRight,
                                 child: Text(
                                   index < 10 ? '0$index' : '$index',
@@ -203,7 +203,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                 width: size.width,
                                 height: 46,
                                 padding:
-                                    const EdgeInsets.symmetric(horizontal: 12),
+                                const EdgeInsets.symmetric(horizontal: 12),
                                 alignment: Alignment.centerLeft,
                                 child: Text(
                                   index < 10 ? '0$index' : '$index',
@@ -289,7 +289,7 @@ class _HomeScreenState extends State<HomeScreen> {
               Expanded(
                 child: Container(
                   padding:
-                      const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
+                  const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
                   decoration: BoxDecoration(
                       color: AppColors.darkColor,
                       borderRadius: BorderRadius.circular(20)),
@@ -391,7 +391,7 @@ class _HomeScreenState extends State<HomeScreen> {
                               children: [
                                 const Padding(
                                   padding:
-                                      EdgeInsets.symmetric(horizontal: 16.0),
+                                  EdgeInsets.symmetric(horizontal: 16.0),
                                   child: MiddleBed(),
                                 ),
                                 const SizedBox(
@@ -413,7 +413,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                         textStyle: TextStyles.lightGrey16500,
                                         icon: Icons.add_circle_outline,
                                         borderColor:
-                                            Colors.white.withOpacity(0.1),
+                                        Colors.white.withOpacity(0.1),
                                         withBorder: 1,
                                       ),
                                       const SizedBox(
@@ -421,7 +421,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                       ),
                                       Row(
                                         mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
+                                        MainAxisAlignment.spaceBetween,
                                         children: [
                                           Text(
                                             // '${translate(LocaleKeys.insurance)}: 5%',
@@ -468,12 +468,12 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
             checkIntroduce
                 ? IntroduceApp(
-                    backOnPress: (check) {
-                      setState(() {
-                        checkIntroduce = check;
-                      });
-                    },
-                  )
+              backOnPress: (check) {
+                setState(() {
+                  checkIntroduce = check;
+                });
+              },
+            )
                 : const SizedBox()
           ],
         ),

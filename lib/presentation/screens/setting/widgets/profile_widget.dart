@@ -37,21 +37,7 @@ class ProfileWidget extends StatelessWidget {
           padding: const EdgeInsets.symmetric(horizontal: 16.0),
           child: Column(
             children: [
-              SFListTile(
-                text: LocaleKeys.birth_year,
-                trailing: Row(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    SFText(
-                      keyText: "1998",
-                      style: TextStyles.lightWhite14,
-                    ),
-                    icon,
-                  ],
-                ),
-                onPressed: () => SFModalBottomSheet.show(
-                    context, 0.36, const ModalPopUpBirthYear()),
-              ),
+              const SettingBirthYear(),
               divider,
               SFListTile(
                   text: LocaleKeys.sex,
@@ -66,7 +52,7 @@ class ProfileWidget extends StatelessWidget {
                     ],
                   ),
                   onPressed: () => SFModalBottomSheet.show(
-                      context, 0.36, const ModalPopUpSex())),
+                      context, 0.5, const ModalPopUpSex())),
               divider,
               SFListTile(
                 text: LocaleKeys.email,

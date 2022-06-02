@@ -67,6 +67,7 @@ class SFTextField extends StatelessWidget {
             enabledBorder: border,
             errorBorder: border,
             focusedErrorBorder: border,
+            counterText: ""
           ),
           maxLines: maxLine ?? 1,
           maxLength: maxLength,

@@ -58,7 +58,7 @@ class GeneralWidget extends StatelessWidget {
                 text: LocaleKeys.language,
                 trailing: icon,
                 onPressed: () => SFModalBottomSheet.show(
-                    context, 0.36, const ModalPopUpLanguage()),
+                    context, 0.5, const ModalPopUpLanguage()),
               ),
               divider,
               SFListTile(

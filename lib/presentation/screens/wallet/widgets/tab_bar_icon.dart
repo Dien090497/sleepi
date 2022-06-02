@@ -28,8 +28,9 @@ class TabBarIcon extends TabBar {
                         SFIcon(
                           images.isNotEmpty ? images[i] : "",
                           color: AppColors.white,
+                          width: 24,
                         ),
-                        const SizedBox(width: 8),
+                        const SizedBox(width: 6),
                         Expanded(
                             child: SFText(
                           keyText: texts[i],

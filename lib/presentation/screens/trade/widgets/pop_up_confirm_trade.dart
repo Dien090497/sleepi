@@ -94,6 +94,7 @@ class PopUpConfirmTrade extends StatelessWidget {
                 child: SFButton(
                   text: LocaleKeys.cancel,
                   textStyle: TextStyles.w600LightGreySize16,
+                  width: double.infinity,
                   color: AppColors.light4,
                   onPressed: () => Navigator.maybePop(context),
                 ),
@@ -104,8 +105,9 @@ class PopUpConfirmTrade extends StatelessWidget {
               Expanded(
                 child: SFButton(
                   text: LocaleKeys.confirm,
+                  width: double.infinity,
                   textStyle: TextStyles.bold14LightWhite,
-                  color: AppColors.blue,
+                  gradient: AppColors.gradientBlueButton,
                   onPressed: () {
                     Navigator.pop(context);
                     showSuccessfulDialog(context);

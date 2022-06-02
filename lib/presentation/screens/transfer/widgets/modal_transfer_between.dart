@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
 import 'package:slee_fi/common/widgets/sf_card.dart';
 import 'package:slee_fi/common/widgets/sf_icon.dart';
@@ -15,7 +16,7 @@ class ModalTransferBetween extends StatelessWidget {
       LocaleKeys.avax,
       LocaleKeys.slft,
       LocaleKeys.slgt,
-      LocaleKeys.bed,
+      LocaleKeys.beds,
       LocaleKeys.jewels,
       LocaleKeys.bed_box
     ];
@@ -40,6 +41,7 @@ class ModalTransferBetween extends StatelessWidget {
               ),
               title: SFText(
                   keyText: keyList[index], style: TextStyles.lightWhite16),
+              trailing: index > 2 ? const Icon(Icons.keyboard_arrow_down, color: AppColors.lightGrey,) : const SizedBox(),
             ),
           );
         });

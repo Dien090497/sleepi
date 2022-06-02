@@ -3,6 +3,7 @@ import 'package:slee_fi/common/routes/app_routes.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
 import 'package:slee_fi/common/widgets/background_widget.dart';
+import 'package:slee_fi/common/widgets/dismiss_keyboard_widget.dart';
 import 'package:slee_fi/common/widgets/sf_app_bar.dart';
 import 'package:slee_fi/common/widgets/sf_buttons.dart';
 import 'package:slee_fi/common/widgets/sf_drop_down.dart';
@@ -17,38 +18,38 @@ class EnterActivationCodeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BackgroundWidget(
-      child: Scaffold(
-        backgroundColor: AppColors.transparent,
-        appBar: SFAppBar(
-          context: context,
-          title: LocaleKeys.activation_code_language_lowercase,
-          textStyle: TextStyles.bold18LightWhite,
-        ),
-        body: SafeArea(
-          child: ListView(
-            padding: const EdgeInsets.symmetric(horizontal: 16),
-            children: [
-              const SizedBox(
-                height: 90.0,
-              ),
-              LoginBox(
-                padding: const EdgeInsets.fromLTRB(28, 24, 28, 0),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    const SFLogo(),
-                    const SizedBox(height: 40),
-                    const SFTextField(
-                      labelText: LocaleKeys.please_enter,
-                    ),
-                    const SizedBox(height: 20),
-                    SFText(keyText: LocaleKeys.please_select_your_language, style: TextStyles.lightGrey14),
-                    const SizedBox(height: 4,),
-                    SizedBox(
-                      width: double.infinity,
-                      height: 48,
-                      child: Expanded(
+    return DismissKeyboardWidget(
+      child: BackgroundWidget(
+        child: Scaffold(
+          backgroundColor: AppColors.transparent,
+          appBar: SFAppBar(
+            context: context,
+            title: LocaleKeys.activation_code_language_lowercase,
+            textStyle: TextStyles.bold18LightWhite,
+          ),
+          body: SafeArea(
+            child: ListView(
+              padding: const EdgeInsets.symmetric(horizontal: 16),
+              children: [
+                const SizedBox(
+                  height: 90.0,
+                ),
+                LoginBox(
+                  padding: const EdgeInsets.fromLTRB(28, 24, 28, 0),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const SFLogo(),
+                      const SizedBox(height: 40),
+                      const SFTextField(
+                        labelText: LocaleKeys.please_enter,
+                      ),
+                      const SizedBox(height: 20),
+                      SFText(keyText: LocaleKeys.please_select_your_language, style: TextStyles.lightGrey14),
+                      const SizedBox(height: 4,),
+                      SizedBox(
+                        width: double.infinity,
+                        height: 48,
                         child: SFDropDown(
                             value: "1",
                             icon: const Icon(Icons.keyboard_arrow_down, size: 24,),
@@ -92,31 +93,31 @@ class EnterActivationCodeScreen extends StatelessWidget {
                             ]
                         ),
                       ),
-                    ),
-                    const SizedBox(
-                      height: 20,
-                    ),
-                    SFButton(
-                      text: LocaleKeys.start,
-                      color: AppColors.blue,
-                      textStyle: TextStyles.white1w700size16,
-                      onPressed: () {
-                        Navigator.pushNamedAndRemoveUntil(
-                            context, R.bottomNavigation, (_) => false);
-                      },
-                      width: MediaQuery.of(context).size.width,
-                    ),
-                    const SizedBox(height: 16),
-                    const Center(
-                      child: SFTextButton(
-                        text: LocaleKeys.get_activation_code,
-                        textStyle: TextStyles.blue14,
+                      const SizedBox(
+                        height: 20,
                       ),
-                    ),
-                  ],
+                      SFButton(
+                        text: LocaleKeys.start,
+                        color: AppColors.blue,
+                        textStyle: TextStyles.white1w700size16,
+                        onPressed: () {
+                          Navigator.pushNamedAndRemoveUntil(
+                              context, R.bottomNavigation, (_) => false);
+                        },
+                        width: MediaQuery.of(context).size.width,
+                      ),
+                      const SizedBox(height: 16),
+                      const Center(
+                        child: SFTextButton(
+                          text: LocaleKeys.get_activation_code,
+                          textStyle: TextStyles.blue14,
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),

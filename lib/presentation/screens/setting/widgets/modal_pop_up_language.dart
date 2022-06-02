@@ -11,12 +11,14 @@ class ModalPopUpLanguage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     List<Widget> language = [
-      SFText(
-        keyText: LocaleKeys.japanese,
-        style: TextStyles.bold16LightWhite,
+      Center(
+        child: SFText(
+          keyText: LocaleKeys.japanese,
+          style: TextStyles.bold16LightWhite,
+        ),
       ),
-      SFText(keyText: LocaleKeys.english, style: TextStyles.bold16LightWhite),
-      SFText(keyText: LocaleKeys.chinese, style: TextStyles.bold16LightWhite),
+      Center(child: SFText(keyText: LocaleKeys.english, style: TextStyles.bold16LightWhite)),
+      Center(child: SFText(keyText: LocaleKeys.chinese, style: TextStyles.bold16LightWhite)),
     ];
     int middle = language.length ~/ 2;
 

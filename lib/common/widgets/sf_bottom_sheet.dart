@@ -10,6 +10,7 @@ class SFModalBottomSheet {
           borderRadius: BorderRadius.circular(40.0),
         ),
         context: context,
+        barrierColor: AppColors.backgroundDialog,
         builder: (BuildContext bc) {
           return Container(
             height: size.height * height,

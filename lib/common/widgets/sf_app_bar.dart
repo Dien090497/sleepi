@@ -9,6 +9,7 @@ class SFAppBar extends AppBar {
     TextStyle? textStyle,
     VoidCallback? onPressedBack,
     bool toUpperCase = false,
+    bool? centerTitle ,
     EdgeInsets? paddingLeading,
     Color? backgroundColor,
     required BuildContext context,
@@ -16,6 +17,7 @@ class SFAppBar extends AppBar {
   }) : super(
           backgroundColor: backgroundColor ?? AppColors.transparent,
           shadowColor: backgroundColor,
+          centerTitle: centerTitle,
           automaticallyImplyLeading: false,
           leadingWidth: 48,
           elevation: 0,

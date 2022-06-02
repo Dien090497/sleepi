@@ -13,7 +13,7 @@ class PopUpConfirmTransfer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(24.0),
+      padding: const EdgeInsets.all(12.0),
       child: Column(
         children: [
           SFText(
@@ -105,13 +105,14 @@ class PopUpConfirmTransfer extends StatelessWidget {
             height: 32.0,
           ),
           Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Expanded(
                 child: SFButton(
                   text: LocaleKeys.cancel,
                   textStyle: TextStyles.w600LightGreySize16,
                   color: AppColors.light4,
+                  width: double.infinity,
                   onPressed: () => Navigator.maybePop(context),
                 ),
               ),
@@ -122,7 +123,8 @@ class PopUpConfirmTransfer extends StatelessWidget {
                 child: SFButton(
                   text: LocaleKeys.confirm,
                   textStyle: TextStyles.bold14LightWhite,
-                  color: AppColors.blue,
+                  width: double.infinity,
+                  gradient: AppColors.gradientBlueButton,
                   onPressed: () {
                     Navigator.pop(context);
                     showSuccessfulDialog(context);
