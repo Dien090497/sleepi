@@ -24,9 +24,13 @@ class SpendingDetailList extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            SFSubTabBar(
-              texts: const [LocaleKeys.pending, LocaleKeys.history],
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 24.0),
+              child: SFSubTabBar(
+                texts: const [LocaleKeys.pending, LocaleKeys.history],
+              ),
             ),
+            const SizedBox(height: 20,),
             const Expanded(
               child: TabBarView(
                 children: [TabPendingDetail(), TabHistoryDetail()],

@@ -22,20 +22,22 @@ class TabSpendingDetail extends StatelessWidget {
           Column(
             children: [
               const SizedBox(
-                height: 20.0,
+                height: 19.0,
               ),
               const PopupInfoSpending(),
               const SizedBox(
-                height: 16.0,
+                height: 12.0,
               ),
               Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 12.0),
+                padding: const EdgeInsets.symmetric(horizontal: 24.0),
                 child: Column(
                   children: [
                     SFCard(
                       // onTap: () => Navigator.pushNamed(context, R.staking),
+                      margin: const EdgeInsets.only(top: 8),
                       child: ListTile(
                         leading: Image.asset(Imgs.slft),
+                        minLeadingWidth: 12,
                         title: SFText(
                             keyText: LocaleKeys.slft,
                             style: TextStyles.lightWhite16,
@@ -47,8 +49,10 @@ class TabSpendingDetail extends StatelessWidget {
                       ),
                     ),
                     SFCard(
+                      margin: const EdgeInsets.only(top: 8),
                       child: ListTile(
                         leading: Image.asset(Imgs.slgt),
+                        minLeadingWidth: 12,
                         title: SFText(
                             keyText: LocaleKeys.slgt,
                             style: TextStyles.lightWhite16,
@@ -60,8 +64,10 @@ class TabSpendingDetail extends StatelessWidget {
                       ),
                     ),
                     SFCard(
+                      margin: const EdgeInsets.only(top: 8),
                       child: ListTile(
                         leading: Image.asset(Imgs.avax),
+                        minLeadingWidth: 12,
                         title: SFText(
                           keyText: LocaleKeys.avax,
                           style: TextStyles.lightWhite16,
@@ -77,10 +83,10 @@ class TabSpendingDetail extends StatelessWidget {
                 ),
               ),
               const SizedBox(
-                height: 16.0,
+                height: 18.0,
               ),
               Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 12),
+                padding: const EdgeInsets.symmetric(horizontal: 24),
                 child: SizedBox(
                     height: 48,
                     child: SFButtonOutLined(
@@ -93,25 +99,24 @@ class TabSpendingDetail extends StatelessWidget {
                     )),
               ),
               const SizedBox(
-                height: 16.0,
+                height: 25.0,
               ),
               const Expanded(child: SpendingDetailList()),
             ],
           ),
-          Align(
-              alignment: Alignment.bottomCenter,
-              child: Padding(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 24.0, vertical: 12.0),
-                child: SFButton(
-                  text: LocaleKeys.transfer,
-                  textStyle: TextStyles.w600WhiteSize16,
-                  gradient: AppColors.gradientBlueButton,
-                  height: 48,
-                  width: double.infinity,
-                  onPressed: () => Navigator.pushNamed(context, R.transfer),
-                ),
-              )),
+          Positioned(
+            bottom: 26,
+            left: 24,
+            right: 24,
+            child: SFButton(
+              text: LocaleKeys.transfer,
+              textStyle: TextStyles.w600WhiteSize16,
+              gradient: AppColors.gradientBlueButton,
+              height: 48,
+              width: double.infinity,
+              onPressed: () => Navigator.pushNamed(context, R.transfer),
+            ),
+          ),
         ],
       ),
     );

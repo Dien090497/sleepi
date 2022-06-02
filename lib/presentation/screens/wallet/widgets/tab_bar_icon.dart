@@ -11,30 +11,31 @@ class TabBarIcon extends TabBar {
     required context,
     required List<String> texts,
     required List<String> images,
+    required Function(int) onTap,
+    required int index,
     Key? key,
   }) : super(
-          onTap: (index) {
-            if (index == 1) {
-              showCustomAlertDialog(context,
-                  children: const PopUpAvalancheWallet());
-            }
-          },
+          onTap: onTap,
           tabs: List.generate(
               texts.length,
               (i) => Tab(
+                    height: 40,
                     child: Row(
                       mainAxisSize: MainAxisSize.max,
                       children: [
                         SFIcon(
                           images.isNotEmpty ? images[i] : "",
-                          color: AppColors.white,
+                          color:
+                              i == index ? AppColors.white : AppColors.purple,
                           width: 24,
                         ),
                         const SizedBox(width: 6),
                         Expanded(
                             child: SFText(
                           keyText: texts[i],
-                          style: TextStyles.white16,
+                          style: i == index
+                              ? TextStyles.white16
+                              : TextStyles.purple16,
                         )),
                       ],
                     ),
