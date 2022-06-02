@@ -48,49 +48,47 @@ class EnterActivationCodeScreen extends StatelessWidget {
                     SizedBox(
                       width: double.infinity,
                       height: 48,
-                      child: Expanded(
-                        child: SFDropDown(
-                            value: "1",
-                            icon: const Icon(Icons.keyboard_arrow_down, size: 24,),
-                            dropdownWidth: MediaQuery.of(context).size.width * 0.8,
-                            dropdownItems: [
-                              DropdownMenuItem(
-                                value: '1',
-                                child: SFText(
-                                  keyText: LocaleKeys.english,
-                                  style: TextStyles.white16,
-                                ),
+                      child: SFDropDown(
+                          value: "1",
+                          icon: const Icon(Icons.keyboard_arrow_down, size: 24,),
+                          dropdownWidth: MediaQuery.of(context).size.width * 0.8,
+                          dropdownItems: [
+                            DropdownMenuItem(
+                              value: '1',
+                              child: SFText(
+                                keyText: LocaleKeys.english,
+                                style: TextStyles.white16,
                               ),
-                              DropdownMenuItem(
-                                value: '2',
-                                child: SFText(
-                                  keyText: LocaleKeys.japanese,
-                                  style: TextStyles.white16,
-                                ),
+                            ),
+                            DropdownMenuItem(
+                              value: '2',
+                              child: SFText(
+                                keyText: LocaleKeys.japanese,
+                                style: TextStyles.white16,
                               ),
-                              DropdownMenuItem(
-                                value: '3',
-                                child: SFText(
-                                  keyText: "Korea",
-                                  style: TextStyles.white16,
-                                ),
+                            ),
+                            DropdownMenuItem(
+                              value: '3',
+                              child: SFText(
+                                keyText: "Korea",
+                                style: TextStyles.white16,
                               ),
-                              DropdownMenuItem(
-                                value: '4',
-                                child: SFText(
-                                  keyText: "China",
-                                  style: TextStyles.white16,
-                                ),
+                            ),
+                            DropdownMenuItem(
+                              value: '4',
+                              child: SFText(
+                                keyText: "China",
+                                style: TextStyles.white16,
                               ),
-                              DropdownMenuItem(
-                                value: '5',
-                                child: SFText(
-                                  keyText: "Spanish",
-                                  style: TextStyles.white16,
-                                ),
+                            ),
+                            DropdownMenuItem(
+                              value: '5',
+                              child: SFText(
+                                keyText: "Spanish",
+                                style: TextStyles.white16,
                               ),
-                            ]
-                        ),
+                            ),
+                          ]
                       ),
                     ),
                     const SizedBox(
