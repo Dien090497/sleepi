@@ -21,15 +21,15 @@ class _TrackingScreenState extends State<TrackingScreen> {
   @override
   Widget build(BuildContext context) {
     return BackgroundWidget(
-      child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 16.0),
-        child: Scaffold(
-          backgroundColor: AppColors.transparent,
-          appBar: SFAppBar(
-              context: context,
-              title: LocaleKeys.tracking,
-              textStyle: TextStyles.bold18LightWhite),
-          body: Column(
+      child: Scaffold(
+        backgroundColor: AppColors.transparent,
+        appBar: SFAppBar(
+            context: context,
+            title: LocaleKeys.tracking,
+            textStyle: TextStyles.bold18LightWhite),
+        body: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 16.0),
+          child: Column(
             children: [
               Stack(
                 alignment: Alignment.center,

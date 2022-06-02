@@ -8,8 +8,11 @@ import 'package:slee_fi/common/widgets/sf_text.dart';
 import 'package:slee_fi/presentation/screens/info_individual/widget/item_bed.dart';
 
 class PopUpSelectBed extends StatelessWidget {
-  const PopUpSelectBed({Key? key, required this.beds}) : super(key: key);
+  const PopUpSelectBed({Key? key, required this.beds, required this.callback})
+      : super(key: key);
   final List<BedType> beds;
+  final VoidCallback callback;
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -34,23 +37,29 @@ class PopUpSelectBed extends StatelessWidget {
                     isScroll: true,
                     childAspectRatio: 1,
                     itemBuilder: (context, i) {
-                      return ItemBed(beds: beds, i: i,);
+                      return ItemBed(
+                        beds: beds,
+                        i: i,
+                      );
                     },
                   ),
                 ),
               ),
-              const SizedBox(height: 80,),
+              const SizedBox(
+                height: 80,
+              ),
             ],
           ),
           Positioned(
             bottom: 20,
             child: SFButton(
-                text: 'Continue',
-                width: MediaQuery.of(context).size.width * 0.9,
-                color: AppColors.blue,
-                textStyle: TextStyles.w600WhiteSize16,
-                height: 48,
-                onPressed: () => Navigator.pop(context)),
+              text: 'Continue',
+              width: MediaQuery.of(context).size.width * 0.9,
+              color: AppColors.blue,
+              textStyle: TextStyles.w600WhiteSize16,
+              height: 48,
+              onPressed: callback,
+            ),
           )
         ],
       ),

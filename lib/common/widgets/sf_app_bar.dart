@@ -18,6 +18,7 @@ class SFAppBar extends AppBar {
           shadowColor: backgroundColor,
           automaticallyImplyLeading: false,
           leadingWidth: 48,
+          centerTitle: false,
           elevation: 0,
           leading:  const Padding(
             padding: EdgeInsets.only(left: 16),

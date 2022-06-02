@@ -84,7 +84,6 @@ abstract class  LocaleKeys {
   static const fe_male = 'fe_male';
   static const sex_male = 'sex_male';
   static const sex_other = 'sex_other';
-  static const done = 'done';
   static const used = 'used';
   static const available = 'available';
   static const total = 'total';
@@ -152,6 +151,7 @@ abstract class  LocaleKeys {
   static const token_and_sleep = 'token_and_sleep';
   static const the_closer_user_are_to_the_time = 'the_closer_user_are_to_the_time';
   static const to_maximize_the_number_of_tokens = 'to_maximize_the_number_of_tokens';
+  static const done = 'done';
   static const tap_and_hold_to_stop = 'tap_and_hold_to_stop';
   static const token_to_be_earned = 'token_to_be_earned';
   static const minting_discount = 'minting_discount';
@@ -389,5 +389,7 @@ abstract class  LocaleKeys {
   static const what_recycle = 'what_recycle';
   static const body_recycle = 'body_recycle';
   static const common_bed_box = 'common_bed_box';
+  static const no_bed = 'no_bed';
+  static const id = 'id';
 
 }

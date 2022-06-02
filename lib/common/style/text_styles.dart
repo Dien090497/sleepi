@@ -61,7 +61,7 @@ class TextStyles {
   static const lightGrey14 =
       TextStyle(fontSize: 14, color: AppColors.lightGrey);
   static const lightGrey16 =
-      TextStyle(fontSize: 14, color: AppColors.lightGrey);
+      TextStyle(fontSize: 16, color: AppColors.lightGrey);
   static const lightGrey16500 = TextStyle(
       fontSize: 16, color: AppColors.lightGrey, fontWeight: FontWeight.w500);
   static const grey12 = TextStyle(fontSize: 12, color: AppColors.black);
