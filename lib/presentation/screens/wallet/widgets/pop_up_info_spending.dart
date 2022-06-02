@@ -27,7 +27,7 @@ class _PopupInfoSpendingState extends State<PopupInfoSpending> {
     return  GestureDetector(
       onTap: _toggleDropdown,
       child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 12.0),
+        padding: const EdgeInsets.symmetric(horizontal: 24.0),
         child: Column(
           children: [
             Row(
@@ -41,6 +41,7 @@ class _PopupInfoSpendingState extends State<PopupInfoSpending> {
             OverlayContainer(
               show: _dropdownShown,
               message: LocaleKeys.displays_message_from_spending_detail,
+              position: const OverlayContainerPosition(25,-8),
             ),
           ],
         ),

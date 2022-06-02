@@ -256,7 +256,7 @@
   "displays_the_nft_discharged_from_the_gacha": "Displays the NFTs discharged from the gacha.",
   "spending": "Spending",
   "spending_account": "Spending Account",
-  "displays_message_from_spending_detail": "You need to have AVAX in Spending to purchase NFTs in the Marketplace. Your earnings will also be stored in Spending.",
+  "displays_message_from_spending_detail": "Users will need to have AVAX  in”Spending”to purchase NFTs in the Marketplace. Earned SLFT and SLGT are also stored in Spending.",
   "displays_message_from_wallet_detail": "You can send, receive and trade your assets.",
   "slft": "SLFT",
   "slgt": "SLGT",
