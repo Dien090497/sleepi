@@ -241,19 +241,18 @@ class _HomeScreenState extends State<HomeScreen> {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              SFButtonOutLined(
-                title: LocaleKeys.alarm_bell,
-                onPressed: () {
-                  Navigator.pushNamed(context, R.alarmSoundEffect);
-                },
-                fixedSize: const Size(274, 40),
-                textStyle: TextStyles.blue16,
-                borderColor: AppColors.blue,
-                iconColor: AppColors.blue,
-                withBorder: 1,
-              ),
-              const SizedBox(
-                height: 22,
+              Expanded(
+                child: SFButtonOutLined(
+                  title: LocaleKeys.alarm_bell,
+                  onPressed: () {
+                    Navigator.pushNamed(context, R.alarmSoundEffect);
+                  },
+                  fixedSize: const Size(274, 40),
+                  textStyle: TextStyles.blue16,
+                  borderColor: AppColors.blue,
+                  iconColor: AppColors.blue,
+                  withBorder: 1,
+                ),
               ),
               const SizedBox(width: 22,),
               CupertinoSwitch(
