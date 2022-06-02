@@ -11,8 +11,8 @@ import 'package:slee_fi/common/widgets/sf_dialog.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
 import 'package:slee_fi/l10n/locale_keys.g.dart';
 import 'package:slee_fi/presentation/screens/staking/widgets/pop_up_calculator.dart';
-import 'package:slee_fi/presentation/screens/staking/widgets/pop_up_compound.dart';
 import 'package:slee_fi/presentation/screens/staking/widgets/pop_up_info_staking.dart';
+import 'package:slee_fi/presentation/screens/staking/widgets/popup_staking.dart';
 import 'package:slee_fi/resources/resources.dart';
 
 class StakingList extends StatelessWidget {
@@ -248,7 +248,7 @@ class StakingList extends StatelessWidget {
                   GestureDetector(
                     onTap: () {
                       showCustomDialog(context,
-                          children: [const PopUpCompound()]);
+                          children: [const PopUpStaking(message: LocaleKeys.do_you_really_want_to_compound,)]);
                     },
                     child: SFText(
                       keyText: LocaleKeys.compound,
@@ -283,7 +283,7 @@ class StakingList extends StatelessWidget {
                   borderColor: AppColors.blue,
                   onPressed: () {}),
             ),
-            const SizedBox(height: 37,),
+            const SizedBox(height: 16,),
           ],
         )
       ],

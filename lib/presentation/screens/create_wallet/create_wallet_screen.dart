@@ -67,6 +67,7 @@ class CreateWalletScreen extends StatelessWidget {
                           arguments: CreatePasscodeArguments(R.showSeedPhrase));
                     },
                   ),
+                  const SizedBox(height: 24,),
                 ],
               ),
             ),

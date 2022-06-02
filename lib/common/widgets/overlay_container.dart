@@ -56,9 +56,9 @@ class _OverlayContainerState extends State<OverlayContainer>
   @override
   void initState() {
     super.initState();
-    if (widget.show) {
-      _show();
-    }
+    // if (widget.show) {
+    //   _show();
+    // }
     WidgetsBinding.instance.addObserver(this);
   }
 

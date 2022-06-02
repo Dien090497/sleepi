@@ -6,7 +6,10 @@ import 'package:slee_fi/common/widgets/sf_text.dart';
 import 'package:slee_fi/l10n/locale_keys.g.dart';
 
 class PopUpStaking extends StatelessWidget {
-  const PopUpStaking({Key? key}) : super(key: key);
+  const PopUpStaking({this.message, this.onPressed, Key? key}) : super(key: key);
+
+  final String? message;
+  final VoidCallback? onPressed;
 
   @override
   Widget build(BuildContext context) {
@@ -15,7 +18,7 @@ class PopUpStaking extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 30),
           child: SFText(
-            keyText: "Do you really want to deposit XXXX SLFT?",
+            keyText: message ?? "",
             style: TextStyles.w600LightWhiteSize16,
             textAlign: TextAlign.center,
           ),
@@ -29,9 +32,13 @@ class PopUpStaking extends StatelessWidget {
             Expanded(
               child: SFButton(
                 text: LocaleKeys.yes,
+                width: double.infinity,
                 textStyle: TextStyles.bold14LightWhite,
                 color: AppColors.blue,
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.maybePop(context);
+                  onPressed;
+                },
               ),
             ),
             const SizedBox(
@@ -40,6 +47,7 @@ class PopUpStaking extends StatelessWidget {
             Expanded(
               child: SFButton(
                 text: LocaleKeys.no,
+                width: double.infinity,
                 textStyle: TextStyles.w600LightGreySize16,
                 color: AppColors.light4,
                 onPressed: () => Navigator.maybePop(context),

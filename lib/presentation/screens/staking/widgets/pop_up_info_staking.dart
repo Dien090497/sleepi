@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/widgets/overlay_container.dart';
@@ -17,7 +19,12 @@ class _PopupInfoStakingState extends State<PopupInfoStaking> {
 
   void _toggleDropdown() {
     setState(() {
-      _dropdownShown = !_dropdownShown;
+      _dropdownShown = true;
+    });
+    Future.delayed(const Duration(seconds: 5), () {
+      setState(() {
+        _dropdownShown = false;
+      });
     });
   }
 

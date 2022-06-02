@@ -13,6 +13,7 @@ Future<T?> showCustomAlertDialog<T>(
     }) async {
   return showDialog(
       context: context,
+      barrierColor: AppColors.backgroundDialog,
       builder: (_) {
         return SFAlertDialog(
           backgroundColor: backgroundColor,

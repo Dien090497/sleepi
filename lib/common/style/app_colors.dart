@@ -76,6 +76,7 @@ class AppColors {
 
   static const gray = Color(0xFFC4C4C4);
 
+  static final backgroundDialog = const Color(0xFF060616).withOpacity(0.9);
 
   static LinearGradient gradientBlue = LinearGradient(colors: [
     const Color(0xFFC4C4C4).withOpacity(0),

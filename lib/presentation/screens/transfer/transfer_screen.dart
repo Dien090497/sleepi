@@ -18,6 +18,8 @@ class TransferScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return BackgroundWidget(
       child: Scaffold(
+        extendBody: true,
+        resizeToAvoidBottomInset: false,
         backgroundColor: AppColors.transparent,
         appBar: SFAppBar(
           context: context,
@@ -26,16 +28,17 @@ class TransferScreen extends StatelessWidget {
         ),
         body: DismissKeyboardWidget(
           child: SafeArea(
-            child: Column(
-              children:  [
-                const SizedBox(
-                  height: 32.0,
+            child: Stack(
+              children: [
+                Column(
+                  children:  const [
+                    TransferWidget(),
+                    SizedBox(
+                      height: 24,
+                    ),
+                    Expanded(child: TransferList()),
+                  ],
                 ),
-                const TransferWidget(),
-                const SizedBox(
-                  height: 40,
-                ),
-                const Expanded(child: TransferList()),
                 Align(
                   alignment: Alignment.bottomCenter,
                   child: Padding(
@@ -44,7 +47,7 @@ class TransferScreen extends StatelessWidget {
                       text: LocaleKeys.confirm_transfer,
                       textStyle: TextStyles.w600WhiteSize16,
                       width: double.infinity,
-                      color: AppColors.blue,
+                      gradient: AppColors.gradientBlueButton,
                       onPressed: () {
                         showCustomAlertDialog(context,
                             showClosed: false,
