@@ -42,7 +42,6 @@ abstract class  LocaleKeys {
   static const from = 'from';
   static const to = 'to';
   static const estimate = 'estimate';
-  static const ? = '?';
   static const create_wallet = 'create_wallet';
   static const you_have_already_created_a_wallet_address = 'you_have_already_created_a_wallet_address';
   static const create_a_new_wallet = 'create_a_new_wallet';
@@ -82,6 +81,9 @@ abstract class  LocaleKeys {
   static const vibration = 'vibration';
   static const snooze = 'snooze';
   static const volume = 'volume';
+  static const fe_male = 'fe_male';
+  static const sex_male = 'sex_male';
+  static const sex_other = 'sex_other';
   static const done = 'done';
   static const used = 'used';
   static const available = 'available';
@@ -173,7 +175,7 @@ abstract class  LocaleKeys {
   static const bell = 'bell';
   static const select_bed_type = 'select_bed_type';
   static const back = 'back';
-  static const get = 'get';
+  static const get_txt = 'get_txt';
   static const earning = 'earning';
   static const enter_your_passcode = 'enter_your_passcode';
   static const to_track_ambient_noise_levels_and_sounds = 'to_track_ambient_noise_levels_and_sounds';
@@ -244,8 +246,6 @@ abstract class  LocaleKeys {
   static const Luck = 'Luck';
   static const Bonus = 'Bonus';
   static const Special = 'Special';
-  static const Resilience = 'Resilience';
-  static const Statistics = 'Statistics';
   static const woke_up = 'woke_up';
   static const sleep_duration_enter = 'sleep_duration_enter';
   static const token_earned = 'token_earned';
