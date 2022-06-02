@@ -60,14 +60,14 @@ class PopUpBuyMarketPlace extends StatelessWidget {
           padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
+            children: const [
               SFButton(
                 text: 'button_cancel',
-                width: size.width / 3,
+                width: double.infinity,
               ),
               SFButton(
                 text: 'button_confirm',
-                width: size.width / 3,
+                width: double.infinity,
               )
             ],
           ),

@@ -20,6 +20,7 @@ class GachaChance500Screen extends StatefulWidget {
 
 class _GachaChance500ScreenState extends State<GachaChance500Screen> {
   int val = -1;
+
   @override
   Widget build(BuildContext context) {
     final Size size = MediaQuery.of(context).size;
@@ -86,8 +87,15 @@ class _GachaChance500ScreenState extends State<GachaChance500Screen> {
                                         color: AppColors.blue.withOpacity(0.1),
                                         borderRadius: BorderRadius.circular(16),
                                       ),
-                                      padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 15),
-                                      child: SFText(keyText: LocaleKeys.quality, style: TextStyles.blue14,),
+                                      padding: const EdgeInsets.symmetric(
+                                          vertical: 8, horizontal: 15),
+                                      child: SFText(
+                                        keyText: LocaleKeys.quality,
+                                        style: TextStyles.blue14,
+                                      ),
+                                    ),
+                                    const SizedBox(
+                                      width: 16,
                                     ),
                                     Container(
                                       decoration: BoxDecoration(
@@ -98,7 +106,7 @@ class _GachaChance500ScreenState extends State<GachaChance500Screen> {
                                           vertical: 8, horizontal: 15),
                                       child: SFText(
                                         keyText: 'IDIDIDIDID',
-                                        style: TextStyles.white14WithOpacity,
+                                        style: TextStyles.lightWhite14,
                                       ),
                                     ),
                                   ],
@@ -108,7 +116,10 @@ class _GachaChance500ScreenState extends State<GachaChance500Screen> {
                             ),
                           ),
                         ),
-                        SFText(keyText: LocaleKeys.attributes, style: TextStyles.boldWhite18,),
+                        SFText(
+                          keyText: LocaleKeys.attributes,
+                          style: TextStyles.boldWhite18,
+                        ),
                         Padding(
                           padding: const EdgeInsets.symmetric(
                               horizontal: 20, vertical: 15),
