@@ -401,6 +401,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                   padding: const EdgeInsets.symmetric(
                                       horizontal: 16.0),
                                   child: Column(
+                                    crossAxisAlignment: CrossAxisAlignment.start,
                                     children: [
                                       SFButtonOutLined(
                                         title: LocaleKeys.use_item,
@@ -444,20 +445,9 @@ class _HomeScreenState extends State<HomeScreen> {
                                       const SizedBox(
                                         height: 2,
                                       ),
-                                      Row(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.center,
-                                        children: [
-                                          SFText(
-                                            keyText: LocaleKeys.what_insurance,
-                                            style: TextStyles.lightGrey12,
-                                          ),
-                                          const SizedBox(
-                                            width: 8,
-                                          ),
-                                          SvgPicture.asset(
-                                              Ics.icCircleQuestion),
-                                        ],
+                                      SFText(
+                                        keyText: LocaleKeys.what_insurance,
+                                        style: TextStyles.lightGrey12,
                                       ),
                                     ],
                                   ),
