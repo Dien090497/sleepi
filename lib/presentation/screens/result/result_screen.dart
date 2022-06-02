@@ -24,19 +24,17 @@ class _ResultScreenState extends State<ResultScreen> {
     return BackgroundWidget(
         child: Stack(
       children: [
-        Container(
-          width: double.infinity,
-          height: double.infinity,
-          padding: const EdgeInsets.symmetric(horizontal: 16.0),
-          child: Scaffold(
-            backgroundColor: AppColors.transparent,
-            appBar: SFAppBar(
-              context: context,
-              title: LocaleKeys.result,
-              textStyle: TextStyles.bold18LightWhite,
-            ),
-            body: SingleChildScrollView(
-              physics: const ScrollPhysics(),
+        Scaffold(
+          backgroundColor: AppColors.transparent,
+          appBar: SFAppBar(
+            context: context,
+            title: LocaleKeys.result,
+            textStyle: TextStyles.bold18LightWhite,
+          ),
+          body: SingleChildScrollView(
+            physics: const ScrollPhysics(),
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16.0),
               child: Column(
                 children: [
                   const SizedBox(

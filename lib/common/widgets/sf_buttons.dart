@@ -71,7 +71,7 @@ class SFButton extends StatelessWidget {
             height: height ?? 48,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(radius),
-              color: AppColors.dark.withOpacity(0.7),
+              color: AppColors.dark.withOpacity(0.4),
             ),
           ),
       ],

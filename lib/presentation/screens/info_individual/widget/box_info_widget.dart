@@ -80,8 +80,7 @@ class BoxInfoWidget extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 16.0),
                 child: SFText(
-                  keyText: LocaleKeys.level,
-                  args: const {'num': '5'},
+                  keyText: '${LocaleKeys.level.tr()} 5',
                   style: TextStyles.white10,
                 ),
               )

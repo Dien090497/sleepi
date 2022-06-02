@@ -31,7 +31,7 @@ class LoginSignUpScreen extends StatelessWidget {
                 child: Column(
                   children: [
                     SFText(
-                      keyText: LocaleKeys.login,
+                      keyText: LocaleKeys.login_signup,
                       style: TextStyles.bold18LightWhite,
                       stringCase: true,
                     ),

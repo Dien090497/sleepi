@@ -48,7 +48,7 @@ class _MiddleBedState extends State<MiddleBed> {
           child: Column(
             children: [
               SFText(
-                keyText: beds[i].name,
+                keyText: '${beds[i].name} Bed',
                 style: TextStyles.blue14,
               ),
               const SizedBox(height: 24),

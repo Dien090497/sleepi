@@ -15,6 +15,11 @@ class ChangePasswordScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    TextEditingController emailController = TextEditingController(text: '');
+    TextEditingController codeController = TextEditingController(text: '');
+    TextEditingController youPasswordController = TextEditingController(text: '');
+    TextEditingController newPasswordController = TextEditingController(text: '');
+
     return BackgroundWidget(
       child: Scaffold(
         backgroundColor: AppColors.transparent,
@@ -36,22 +41,30 @@ class ChangePasswordScreen extends StatelessWidget {
                         padding: const EdgeInsets.symmetric(
                             horizontal: 16, vertical: 24),
                         child: Column(
-                          children: const [
-                            SFTextField(labelText: LocaleKeys.email),
-                            SizedBox(height: 20),
+                          children: [
+                            SFTextField(
+                              labelText: LocaleKeys.email,
+                              controller: emailController,
+                            ),
+                            const SizedBox(height: 20),
                             SFTextFieldTextButton(
                               labelText: LocaleKeys.verification_code,
+                              controller: codeController,
                             ),
-                            SizedBox(
+                            const SizedBox(
                               height: 20,
                             ),
                             SFTextFieldPassword(
-                                labelText: LocaleKeys.your_password),
-                            SizedBox(
+                              labelText: LocaleKeys.your_password,
+                              controller: youPasswordController,
+                            ),
+                            const SizedBox(
                               height: 20,
                             ),
                             SFTextFieldPassword(
-                                labelText: LocaleKeys.new_password),
+                              labelText: LocaleKeys.new_password,
+                              controller: newPasswordController,
+                            ),
                           ],
                         ),
                       ),
@@ -63,9 +76,15 @@ class ChangePasswordScreen extends StatelessWidget {
                   textStyle: TextStyles.w600WhiteSize16,
                   gradient: AppColors.gradientBlueButton,
                   width: double.infinity,
+                  disabled: emailController.text == '' ||
+                      codeController.text == '' ||
+                      youPasswordController.text == '' ||
+                      newPasswordController.text == '',
                   onPressed: () {},
                 ),
-                const SizedBox(height: 37,)
+                const SizedBox(
+                  height: 26,
+                )
               ],
             ),
           ),

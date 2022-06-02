@@ -16,7 +16,7 @@ class SFTextFieldPassword extends StatefulWidget {
     this.showLabel = true,
     Key? key,
     this.maxLine,
-    this.maxLength,
+    this.maxLength, this.controller,
   }) : super(key: key);
 
   final String? labelText;
@@ -26,6 +26,7 @@ class SFTextFieldPassword extends StatefulWidget {
   final bool noBorder;
   final int? maxLine;
   final int? maxLength;
+  final TextEditingController? controller;
   final bool showLabel;
 
   @override
@@ -61,6 +62,7 @@ class _SFTextFieldPasswordState extends State<SFTextFieldPassword> {
             : const SizedBox(),
         TextField(
           style: TextStyles.w400White16,
+          controller: widget.controller,
           obscureText: obscureText,
           decoration: InputDecoration(
             isDense: true,

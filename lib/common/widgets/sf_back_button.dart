@@ -11,8 +11,8 @@ class SFBackButton extends StatelessWidget {
       onTap: () => Navigator.pop(context),
       child: const SFIcon(
         Ics.arrowLeft,
-        width: 32,
-        height: 32,
+        width: 24,
+        height: 24,
       ),
     );
   }

@@ -20,7 +20,7 @@ class SFTextFieldTextButton extends StatelessWidget {
     this.onPressed,
     Key? key,
     this.maxLine,
-    this.maxLength,
+    this.maxLength, this.controller,
   }) : super(key: key);
 
   final String? labelText;
@@ -35,6 +35,7 @@ class SFTextFieldTextButton extends StatelessWidget {
   final int? maxLength;
   final bool showLabel;
   final VoidCallback? onPressed;
+  final TextEditingController? controller;
 
   @override
   Widget build(BuildContext context) {
@@ -64,6 +65,7 @@ class SFTextFieldTextButton extends StatelessWidget {
               Expanded(
                 child: SFTextField(
                   hintText: hintText,
+                  controller: controller,
                   hintStyle: hintStyle ?? TextStyles.lightGrey14,
                   suffix: suffix,
                   suffixIcon: suffixIcon,
