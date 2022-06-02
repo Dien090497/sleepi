@@ -8,6 +8,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:slee_fi/common/routes/app_routes.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
+import 'package:slee_fi/common/widgets/background_widget.dart';
 import 'package:slee_fi/common/widgets/loading_screen.dart';
 import 'package:slee_fi/common/widgets/sf_bottom_sheet.dart';
 import 'package:slee_fi/common/widgets/sf_button_outlined.dart';
@@ -254,7 +255,9 @@ class _HomeScreenState extends State<HomeScreen> {
                   withBorder: 1,
                 ),
               ),
-              const SizedBox(width: 22,),
+              const SizedBox(
+                width: 22,
+              ),
               CupertinoSwitch(
                 activeColor: AppColors.green,
                 value: swCheck,
@@ -359,123 +362,117 @@ class _HomeScreenState extends State<HomeScreen> {
     final Size size = MediaQuery.of(context).size;
     return BlocProvider(
       create: (_) => HomeBloc()..add(const FetchData()),
-      child: Scaffold(
-        body: Stack(
-          children: [
-            SizedBox(
-                width: size.width,
-                height: size.height,
-                child: Image.asset(
-                  Imgs.background,
-                  fit: BoxFit.fill,
-                )),
-            BlocBuilder<HomeBloc, HomeState>(
-              builder: (context, state) {
-                return state.when(
-                  initial: () => const SizedBox.shrink(),
-                  loading: () => const LoadingIcon(),
-                  loaded: () {
-                    return Column(
-                      children: [
-                        SizedBox(
-                          height: MediaQuery.of(context).padding.top,
-                        ),
-                        const TopBarCommon(),
-                        const SizedBox(
-                          height: 7,
-                        ),
-                        Expanded(
-                          child: SingleChildScrollView(
-                            physics: const ScrollPhysics(),
-                            child: Column(
-                              children: [
-                                const Padding(
-                                  padding:
-                                      EdgeInsets.symmetric(horizontal: 16.0),
-                                  child: MiddleBed(),
-                                ),
-                                const SizedBox(
-                                  height: 16,
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.symmetric(
-                                      horizontal: 16.0),
-                                  child: Column(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
-                                    children: [
-                                      SFButtonOutLined(
-                                        title: LocaleKeys.use_item,
-                                        onPressed: () {
-                                          SFModalBottomSheet.show(context, 0.8,
-                                              const ModalItemList());
-                                        },
-                                        fixedSize: Size(size.width, 40),
-                                        textStyle: TextStyles.lightGrey16500,
-                                        icon: Icons.add_circle_outline,
-                                        borderColor:
-                                            Colors.white.withOpacity(0.1),
-                                        withBorder: 1,
-                                      ),
-                                      const SizedBox(
-                                        height: 24,
-                                      ),
-                                      Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
-                                        children: [
-                                          Text(
-                                            // '${translate(LocaleKeys.insurance)}: 5%',
-                                            '${LocaleKeys.insurance.tr()}: 5%',
-                                            style: TextStyles.bold16LightWhite,
-                                          ),
-                                          SizedBox(
-                                            height: 24,
-                                            child: CupertinoSwitch(
-                                              activeColor: AppColors.green,
-                                              value: swCheck,
-                                              onChanged: (value) {
-                                                setState(() {
-                                                  swCheck = value;
-                                                });
-                                              },
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                      const SizedBox(
-                                        height: 2,
-                                      ),
-                                      SFText(
-                                        keyText: LocaleKeys.what_insurance,
-                                        style: TextStyles.lightGrey12,
-                                      ),
-                                    ],
+      child: BackgroundWidget(
+        child: SafeArea(
+          child: Stack(
+            children: [
+              BlocBuilder<HomeBloc, HomeState>(
+                builder: (context, state) {
+                  return state.when(
+                    initial: () => const SizedBox.shrink(),
+                    loading: () => const LoadingIcon(),
+                    loaded: () {
+                      return Column(
+                        children: [
+                          const TopBarCommon(),
+                          const SizedBox(
+                            height: 7,
+                          ),
+                          Expanded(
+                            child: SingleChildScrollView(
+                              physics: const ScrollPhysics(),
+                              child: Column(
+                                children: [
+                                  const Padding(
+                                    padding:
+                                        EdgeInsets.symmetric(horizontal: 16.0),
+                                    child: MiddleBed(),
                                   ),
-                                ),
-                                const SizedBox(
-                                  height: 16,
-                                ),
-                                alarmBell(size),
-                              ],
+                                  const SizedBox(
+                                    height: 16,
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.symmetric(
+                                        horizontal: 16.0),
+                                    child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        SFButtonOutLined(
+                                          title: LocaleKeys.use_item,
+                                          onPressed: () {
+                                            SFModalBottomSheet.show(context,
+                                                0.8, const ModalItemList());
+                                          },
+                                          fixedSize: Size(size.width, 40),
+                                          textStyle: TextStyles.lightGrey16500,
+                                          icon: Icons.add_circle_outline,
+                                          borderColor:
+                                              Colors.white.withOpacity(0.1),
+                                          withBorder: 1,
+                                        ),
+                                        const SizedBox(
+                                          height: 24,
+                                        ),
+                                        Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
+                                          children: [
+                                            Text(
+                                              // '${translate(LocaleKeys.insurance)}: 5%',
+                                              '${LocaleKeys.insurance.tr()}: 5%',
+                                              style:
+                                                  TextStyles.bold16LightWhite,
+                                            ),
+                                            SizedBox(
+                                              height: 24,
+                                              child: CupertinoSwitch(
+                                                activeColor: AppColors.green,
+                                                value: swCheck,
+                                                onChanged: (value) {
+                                                  setState(() {
+                                                    swCheck = value;
+                                                  });
+                                                },
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                        const SizedBox(
+                                          height: 2,
+                                        ),
+                                        SFText(
+                                          keyText: LocaleKeys.what_insurance,
+                                          style: TextStyles.lightGrey12,
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                  const SizedBox(
+                                    height: 16,
+                                  ),
+                                  alarmBell(size),
+                                ],
+                              ),
                             ),
                           ),
-                        ),
-                      ],
-                    );
-                  },
-                );
-              },
-            ),
-            checkIntroduce
-                ? IntroduceApp(
-                    backOnPress: (check) {
-                      setState(() {
-                        checkIntroduce = check;
-                      });
+                        ],
+                      );
                     },
-                  )
-                : const SizedBox()
-          ],
+                  );
+                },
+              ),
+              checkIntroduce
+                  ? IntroduceApp(
+                      backOnPress: (check) {
+                        setState(() {
+                          checkIntroduce = check;
+                        });
+                      },
+                    )
+                  : const SizedBox()
+            ],
+          ),
         ),
       ),
     );
