@@ -15,8 +15,7 @@ class ProbabilityScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: BackgroundWidget(
+    return BackgroundWidget(
         child: SafeArea(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -72,7 +71,6 @@ class ProbabilityScreen extends StatelessWidget {
             ],
           ),
         ),
-      ),
-    );
+      );
   }
 }

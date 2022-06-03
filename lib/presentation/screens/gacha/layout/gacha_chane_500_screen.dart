@@ -24,8 +24,7 @@ class _GachaChance500ScreenState extends State<GachaChance500Screen> {
   @override
   Widget build(BuildContext context) {
     final Size size = MediaQuery.of(context).size;
-    return Scaffold(
-      body: BackgroundWidget(
+    return BackgroundWidget(
         child: SafeArea(
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 0),
@@ -287,7 +286,6 @@ class _GachaChance500ScreenState extends State<GachaChance500Screen> {
             ),
           ),
         ),
-      ),
-    );
+      );
   }
 }
