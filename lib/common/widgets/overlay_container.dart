@@ -151,7 +151,7 @@ class _OverlayContainerState extends State<OverlayContainer>
             color: widget.materialColor,
             child: widget.child ??
                 Container(
-                  height: widget.height ?? 90,
+                  height: widget.height ?? 82,
                   width: widget.width ?? 184,
                   padding:
                       const EdgeInsets.symmetric(horizontal: 8, vertical: 6),

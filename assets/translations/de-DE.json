@@ -256,7 +256,7 @@
   "displays_the_nft_discharged_from_the_gacha": "Displays the NFTs discharged from the gacha.",
   "spending": "Spending",
   "spending_account": "Spending Account",
-  "displays_message_from_spending_detail": "You need to have AVAX in Spending to purchase NFTs in the Marketplace. Your earnings will also be stored in Spending.",
+  "displays_message_from_spending_detail": "Users will need to have AVAX  in”Spending”to purchase NFTs in the Marketplace.\u2028Earned SLFT and SLGT are also stored in Spending.",
   "displays_message_from_wallet_detail": "You can send, receive and trade your assets.",
   "slft": "SLFT",
   "slgt": "SLGT",
@@ -386,7 +386,7 @@
   "with_case": "Success Rate: With Insurance Case",
   "bed_recycle" : "Bed Recycle",
   "what_recycle" : "What Recycling?",
-  "body_recycle" : "Amet minim mollit non deserunt ullamco est\n sit aliqua dolor do amet sint. Velit officia\n consequat duis enim velit mollit.",
+  "body_recycle" : "Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit.",
   "common_bed_box" : "Common Bed Box",
   "no_bed": "No Bed",
   "id": "ID"
