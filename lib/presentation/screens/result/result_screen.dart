@@ -52,7 +52,8 @@ class _ResultScreenState extends State<ResultScreen> {
                   const SizedBox(
                     height: 24,
                   ),
-                  const SFLabelValue(label: LocaleKeys.bed_time, value: '23:30'),
+                  const SFLabelValue(
+                      label: LocaleKeys.bed_time, value: '23:30'),
                   const SizedBox(
                     height: 8,
                   ),
@@ -86,18 +87,27 @@ class _ResultScreenState extends State<ResultScreen> {
           ),
         ),
         Positioned(
-          bottom: 20,
-          left: 16,
-          right: 16,
-          child: SFButton(
-            text: LocaleKeys.share_your_sleep,
-            textStyle: TextStyles.white16,
-            gradient: AppColors.gradientBlueButton,
-            width: double.infinity,
-            height: 48,
-            onPressed: () {
-              Navigator.pushNamed(context, R.share);
-            },
+          bottom: 0,
+          left: 0,
+          right: 0,
+          child: Container(
+            padding: const EdgeInsets.only(
+              bottom: 20,
+              left: 16,
+              right: 16,
+              top: 12
+            ),
+            color: AppColors.dark,
+            child: SFButton(
+              text: LocaleKeys.share_your_sleep,
+              textStyle: TextStyles.white16,
+              gradient: AppColors.gradientBlueButton,
+              width: double.infinity,
+              height: 48,
+              onPressed: () {
+                Navigator.pushNamed(context, R.share);
+              },
+            ),
           ),
         ),
       ],

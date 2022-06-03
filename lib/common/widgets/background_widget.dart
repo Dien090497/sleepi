@@ -29,7 +29,7 @@ class BackgroundWidget extends Scaffold {
               Container(
                 decoration: BoxDecoration(
                   gradient: RadialGradient(
-                    center: const Alignment(0.65, 0.75),
+                    center: const Alignment(0.65, 0.65),
                     colors: [
                       AppColors.radial2,
                       AppColors.radial2.withOpacity(0.8),
@@ -38,7 +38,7 @@ class BackgroundWidget extends Scaffold {
                       AppColors.radial2.withOpacity(0.05),
                       AppColors.black.withOpacity(0),
                     ],
-                    radius: 1.35,
+                    radius: 1.55,
                   ),
                 ),
               ),
