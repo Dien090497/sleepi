@@ -62,7 +62,6 @@ class UpGradeTab extends StatelessWidget {
                 borderRadius: BorderRadius.circular(15),
               ),
               width: double.infinity,
-              margin: const EdgeInsets.symmetric(horizontal: 8),
               padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 8),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,

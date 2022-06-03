@@ -64,70 +64,71 @@ class _MintScreenState extends State<MintScreen> {
                 ),
               ),
               Expanded(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          const SizedBox(
-                            height: 60,
-                          ),
-                          ConnectBedWidget(
-                            indexSelected: indexSelected,
-                            callback: () {
-                              Navigator.pop(context);
-                              indexSelected = 1;
-                              setState(() {});
-                            },
-                          ),
-                          const SizedBox(
-                            height: 60,
-                          ),
-                          const SFLabelValue(
-                              label: LocaleKeys.token,
-                              value: '0 SLFT + 0 SLGT'),
-                          const SizedBox(
-                            height: 24,
-                          ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Text(
-                                '${LocaleKeys.insurance.tr()}: 5%',
-                                style: TextStyles.bold16LightWhite,
-                              ),
-                              SizedBox(
-                                height: 24,
-                                child: CupertinoSwitch(
-                                  activeColor: AppColors.green,
-                                  value: swCheck,
-                                  onChanged: (value) {
-                                    setState(() {
-                                      swCheck = value;
-                                    });
-                                  },
+                child: SingleChildScrollView(
+                  physics: const BouncingScrollPhysics(),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            const SizedBox(
+                              height: 60,
+                            ),
+                            ConnectBedWidget(
+                              indexSelected: indexSelected,
+                              callback: () {
+                                Navigator.pop(context);
+                                indexSelected = 1;
+                                setState(() {});
+                              },
+                            ),
+                            const SizedBox(
+                              height: 60,
+                            ),
+                            const SFLabelValue(
+                                label: LocaleKeys.token,
+                                value: '0 SLFT + 0 SLGT'),
+                            const SizedBox(
+                              height: 24,
+                            ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Text(
+                                  '${LocaleKeys.insurance.tr()}: 5%',
+                                  style: TextStyles.bold16LightWhite,
                                 ),
-                              ),
-                            ],
-                          ),
-                          const SizedBox(
-                            height: 2,
-                          ),
-                          SFText(
-                            keyText: LocaleKeys.what_insurance,
-                            style: TextStyles.lightGrey12,
-                          ),
-                          const SizedBox(
-                            height: 24,
-                          ),
-                        ],
+                                SizedBox(
+                                  height: 24,
+                                  child: CupertinoSwitch(
+                                    activeColor: AppColors.green,
+                                    value: swCheck,
+                                    onChanged: (value) {
+                                      setState(() {
+                                        swCheck = value;
+                                      });
+                                    },
+                                  ),
+                                ),
+                              ],
+                            ),
+                            const SizedBox(
+                              height: 2,
+                            ),
+                            SFText(
+                              keyText: LocaleKeys.what_insurance,
+                              style: TextStyles.lightGrey12,
+                            ),
+                            const SizedBox(
+                              height: 24,
+                            ),
+                          ],
+                        ),
                       ),
-                    ),
-                    Expanded(
-                      child: Container(
+                      Container(
                         width: size.width,
                         padding: const EdgeInsets.symmetric(
                           horizontal: 24,
@@ -148,7 +149,7 @@ class _MintScreenState extends State<MintScreen> {
                               style: TextStyles.lightGrey14,
                             ),
                             const SizedBox(
-                              height: 12,
+                              height: 12
                             ),
                             Container(
                               decoration: BoxDecoration(
@@ -158,7 +159,7 @@ class _MintScreenState extends State<MintScreen> {
                               child: Column(
                                 children: [
                                   const SFLabelValue(
-                                    label: LocaleKeys.common_bed,
+                                    label: LocaleKeys.common_bed_box,
                                     value: '98%',
                                     colorBorder: Colors.transparent,
                                   ),
@@ -179,19 +180,19 @@ class _MintScreenState extends State<MintScreen> {
                               ),
                             ),
                             const SizedBox(
-                              height: 24,
+                              height: 24
                             ),
                             SFText(
                               keyText: LocaleKeys.without_case,
                               style: TextStyles.lightGrey14,
                             ),
                             const SizedBox(
-                              height: 12,
+                              height: 12
                             ),
                             const SFLabelValue(
-                                label: LocaleKeys.common_bed, value: '100%'),
+                                label: LocaleKeys.common_bed_box, value: '100%'),
                             const SizedBox(
-                              height: 24,
+                              height: 24
                             ),
                             SFButton(
                               text: LocaleKeys.mint,
@@ -203,8 +204,8 @@ class _MintScreenState extends State<MintScreen> {
                           ],
                         ),
                       ),
-                    )
-                  ],
+                    ],
+                  ),
                 ),
               ),
             ],
