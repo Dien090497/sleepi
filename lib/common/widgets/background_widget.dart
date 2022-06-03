@@ -4,10 +4,15 @@ import 'package:slee_fi/common/style/app_colors.dart';
 class BackgroundWidget extends Scaffold {
   BackgroundWidget({
     Widget? child,
+    AppBar? appBar,
+    bool resizeToAvoidBottomInset = true,
     Key? key,
   }) : super(
           key: key,
+          appBar: appBar,
+          resizeToAvoidBottomInset: resizeToAvoidBottomInset,
           backgroundColor: AppColors.transparent,
+
           body: Stack(
             children: [
               Container(

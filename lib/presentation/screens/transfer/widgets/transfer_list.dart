@@ -56,6 +56,7 @@ class TransferList extends StatelessWidget {
           const SFTextFieldTextButton(
             labelText: LocaleKeys.amount,
             textButton: LocaleKeys.all,
+            textInputType: TextInputType.number,
           ),
           const SizedBox(
             height: 4.0,

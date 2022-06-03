@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
 import 'package:slee_fi/common/widgets/sf_alert_dialog.dart';
+import 'package:slee_fi/common/widgets/sf_bottom_sheets.dart';
 import 'package:slee_fi/common/widgets/sf_buttons.dart';
 import 'package:slee_fi/common/widgets/sf_gridview.dart';
 import 'package:slee_fi/common/widgets/sf_icon.dart';
@@ -36,14 +37,19 @@ class ModalItemList extends StatelessWidget {
                 ),
                 const Spacer(),
                 GestureDetector(
-                  onTap: () {},
-                  child: Row(
-                    children: [
-                      const SFIcon(Ics.filter, color: AppColors.blue),
-                      const SizedBox(width: 4),
-                      SFText(
-                          keyText: LocaleKeys.filter, style: TextStyles.blue16),
-                    ],
+                  onTap: () {
+                    showFilterModalBottomSheet(context);
+                  },
+                  child: Padding(
+                    padding: const EdgeInsets.only(left: 8),
+                    child: Row(
+                      children: [
+                        const SFIcon(Ics.filter, color: AppColors.blue),
+                        const SizedBox(width: 4),
+                        SFText(
+                            keyText: LocaleKeys.filter, style: TextStyles.blue16),
+                      ],
+                    ),
                   ),
                 ),
               ],

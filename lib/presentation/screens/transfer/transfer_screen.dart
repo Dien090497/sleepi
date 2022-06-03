@@ -17,7 +17,8 @@ class TransferScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BackgroundWidget(
-      child: Scaffold(
+      resizeToAvoidBottomInset: false,
+      child: Scaffold( 
         extendBody: true,
         resizeToAvoidBottomInset: false,
         backgroundColor: AppColors.transparent,

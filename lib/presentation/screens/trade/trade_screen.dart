@@ -80,38 +80,51 @@ class _TradeScreenState extends State<TradeScreen> {
                             Row(
                               children: [
                                 Expanded(
-                                  child: SFTextField(
-                                    showLabel: false,
-                                    noBorder: true,
-                                    hintText: "0.00",
-                                    hintStyle: TextStyles.bold16LightWhite,
-                                    onChanged: (value){
-                                      if(value.isNotEmpty){
-                                        setState((){
-                                          isDisabled = false;
-                                        });
-                                      }
-                                    },
+                                  child: Align(
+                                    alignment: Alignment.centerLeft,
+                                    child: SFTextField(
+                                      showLabel: false,
+                                      noBorder: true,
+                                      hintText: "0.00",
+                                      hintStyle: TextStyles.bold16LightWhite,
+                                      onChanged: (value){
+                                        if(value.isNotEmpty){
+                                          setState((){
+                                            isDisabled = false;
+                                          });
+                                        }
+                                      },
+                                    ),
                                   ),
                                 ),
                                 // SFText(
                                 //   keyText: '0.00',
                                 //   style: TextStyles.bold18White,
                                 // ),
-                                SFButtonOutLined(
-                                    title: LocaleKeys.max,
-                                    textStyle: TextStyles.bold14Blue,
-                                    borderColor: AppColors.blue,
-                                    onPressed: () {}),
-                                 SizedBox(width: MediaQuery.of(context).size.width * 0.045,),
-                                SizedBox(
-                                  width: MediaQuery.of(context).size.width * 0.25,
-                                  child:  const DropdownSelectToken(
-                                    width: 90,
-                                    height: 36,
-                                    resultPadding: EdgeInsets.all(0),
-                                    backgroundColor: AppColors.transparent,
-                                    isResultLabel: true,
+                                Expanded(
+                                  child: Align(
+                                    alignment: Alignment.center,
+                                    child: FittedBox(
+                                      fit: BoxFit.fitWidth,
+                                      child: SFButtonOutLined(
+                                        fixedSize:const Size(34,21),
+                                          title: LocaleKeys.max,
+                                          textStyle: TextStyles.bold14Blue,
+                                          borderColor: AppColors.blue,
+                                          onPressed: () {}),
+                                    ),
+                                  ),
+                                ),
+                                const Expanded(
+                                  child: Align(
+                                    alignment: Alignment.centerRight,
+                                    child: DropdownSelectToken(
+                                      width: 90,
+                                      height: 36,
+                                      resultPadding: EdgeInsets.all(0),
+                                      backgroundColor: AppColors.transparent,
+                                      isResultLabel: true,
+                                    ),
                                   ),
                                 ),
                               ],

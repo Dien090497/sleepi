@@ -112,18 +112,18 @@ class GachaResultBedScreen extends StatelessWidget {
                           child: Column(
                             children: [
                               const AttributesWidget(),
-                              const SizedBox(height: 16),
-                              Center(
-                                child: SFButton(
-                                  text: LocaleKeys.next,
-                                  textStyle: TextStyles.white16,
-                                  radius: 100,
-                                  gradient: AppColors.gradientBlueButton,
-                                  height: 45,
-                                  width: size.width,
-                                ),
-                              ),
-                              const SizedBox(height: 16),
+                              const SizedBox(height: 32),
+                              // Center(
+                              //   child: SFButton(
+                              //     text: LocaleKeys.next,
+                              //     textStyle: TextStyles.white16,
+                              //     radius: 100,
+                              //     gradient: AppColors.gradientBlueButton,
+                              //     height: 45,
+                              //     width: size.width,
+                              //   ),
+                              // ),
+                              // const SizedBox(height: 16),
                               Center(
                                 child: SFButtonOutLined(
                                   title: LocaleKeys.show_all_result,

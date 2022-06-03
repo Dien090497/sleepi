@@ -131,6 +131,7 @@ class _GachaChance500ScreenState extends State<GachaChance500Screen> {
                                     const EdgeInsets.symmetric(horizontal: 10),
                                 child: Row(
                                   children: [
+
                                     Expanded(
                                       child: Padding(
                                         padding: const EdgeInsets.symmetric(
@@ -205,7 +206,7 @@ class _GachaChance500ScreenState extends State<GachaChance500Screen> {
                                                     bottom: 10),
                                                 child: Center(
                                                     child: SFText(
-                                                  keyText: 'Short\n Bed',
+                                                  keyText: 'Middle\n Bed',
                                                   style: TextStyles
                                                       .white14WithOpacity,
                                                 )),
@@ -247,7 +248,7 @@ class _GachaChance500ScreenState extends State<GachaChance500Screen> {
                                                     bottom: 10),
                                                 child: Center(
                                                     child: SFText(
-                                                  keyText: 'Short\n Bed',
+                                                  keyText: 'Long\n Bed',
                                                   style: TextStyles
                                                       .white14WithOpacity,
                                                 )),

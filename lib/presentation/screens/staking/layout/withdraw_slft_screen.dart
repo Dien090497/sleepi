@@ -90,6 +90,7 @@ class WithdrawSlftScreen extends StatelessWidget {
                                   const Expanded(
                                       child: SFTextField(
                                         showLabel: false,
+                                        textInputType: TextInputType.number,
                                         hintText: LocaleKeys.amount,
                                       )),
                                   const SizedBox(

@@ -66,6 +66,9 @@ class BottomBarWidget extends StatelessWidget {
                     level: 20,
                     cost: 21,
                     time: 1260,
+                    onCancel: (){
+                      Navigator.pop(context);
+                    },
                     onConfirm: () {
                       Navigator.pop(context);
                     }),

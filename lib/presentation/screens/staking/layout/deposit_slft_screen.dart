@@ -22,8 +22,10 @@ class DepositSlftScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return DismissKeyboardWidget(
       child: BackgroundWidget(
+        resizeToAvoidBottomInset: false,
         child: Scaffold(
           backgroundColor: AppColors.transparent,
+          resizeToAvoidBottomInset: false,
           appBar: SFAppBar(
             context: context,
             title: LocaleKeys.deposit_slft,
@@ -90,6 +92,7 @@ class DepositSlftScreen extends StatelessWidget {
                                   const Expanded(
                                       child: SFTextField(
                                         showLabel: false,
+                                        textInputType: TextInputType.number,
                                         hintText: LocaleKeys.amount,
                                       )),
                                   const SizedBox(

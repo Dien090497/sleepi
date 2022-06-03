@@ -119,7 +119,6 @@ class _DropdownSelectTokenState extends State<DropdownSelectToken> {
         onOpen: (isOpen) {
           // print('$isOpen');
         },
-        resultIconRotation: false,
 
         // resultIcon: const SizedBox(
         //   width: 16,

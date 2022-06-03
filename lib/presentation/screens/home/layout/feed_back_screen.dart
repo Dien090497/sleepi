@@ -19,6 +19,7 @@ class FeedBackScreen extends StatelessWidget {
     final size = MediaQuery.of(context).size;
     return DismissKeyboardWidget(
       child: BackgroundWidget(
+        resizeToAvoidBottomInset: false,
         child: Scaffold(
             backgroundColor: AppColors.transparent,
             resizeToAvoidBottomInset: false,

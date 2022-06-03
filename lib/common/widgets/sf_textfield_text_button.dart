@@ -23,6 +23,7 @@ class SFTextFieldTextButton extends StatelessWidget {
     this.maxLength,
     this.controller,
     this.valueChanged,
+    this.textInputType,
   }) : super(key: key);
 
   final String? labelText;
@@ -39,7 +40,7 @@ class SFTextFieldTextButton extends StatelessWidget {
   final VoidCallback? onPressed;
   final TextEditingController? controller;
   final ValueChanged<String>? valueChanged;
-
+  final TextInputType? textInputType;
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -70,6 +71,7 @@ class SFTextFieldTextButton extends StatelessWidget {
                   hintText: hintText,
                   controller: controller,
                   onChanged: valueChanged,
+                  textInputType: textInputType,
                   hintStyle: hintStyle ?? TextStyles.lightGrey14,
                   suffix: suffix,
                   suffixIcon: suffixIcon,
