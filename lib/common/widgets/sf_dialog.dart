@@ -27,6 +27,7 @@ Future<T?> showCustomDialog<T>(
 Future<T?> showSuccessfulDialog<T>(BuildContext context) async {
   return showDialog(
       context: context,
+      barrierColor: AppColors.backgroundDialog,
       builder: (context) {
         return SFDialog(
           children: [

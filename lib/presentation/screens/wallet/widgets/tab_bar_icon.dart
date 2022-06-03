@@ -18,24 +18,26 @@ class TabBarIcon extends TabBar {
               texts.length,
               (i) => Tab(
                     height: 40,
-                    child: Row(
-                      mainAxisSize: MainAxisSize.max,
-                      children: [
-                        SFIcon(
-                          images.isNotEmpty ? images[i] : "",
-                          color:
-                              i == index ? AppColors.white : AppColors.purple,
-                          width: 24,
-                        ),
-                        const SizedBox(width: 6),
-                        Expanded(
-                            child: SFText(
-                          keyText: texts[i],
-                          style: i == index
-                              ? TextStyles.white16
-                              : TextStyles.purple16,
-                        )),
-                      ],
+                    child: FittedBox(
+                      fit: BoxFit.fitWidth,
+                      child: Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          SFIcon(
+                            images.isNotEmpty ? images[i] : "",
+                            color:
+                                i == index ? AppColors.white : AppColors.purple,
+                            width: 24,
+                          ),
+                          const SizedBox(width: 4),
+                          SFText(
+                            keyText: texts[i],
+                            style: i == index
+                                ? TextStyles.white16
+                                : TextStyles.purple16,
+                          ),
+                        ],
+                      ),
                     ),
                   )),
 

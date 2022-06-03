@@ -10,12 +10,20 @@ import 'package:slee_fi/common/widgets/sf_card.dart';
 import 'package:slee_fi/common/widgets/sf_icon_border.dart';
 import 'package:slee_fi/common/widgets/sf_sub_app_bar.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
+import 'package:slee_fi/common/widgets/sf_textfield.dart';
 import 'package:slee_fi/l10n/locale_keys.g.dart';
 import 'package:slee_fi/presentation/screens/send_to_external/widgets/dropdown_select_token.dart';
 import 'package:slee_fi/presentation/screens/trade/widgets/pop_up_confirm_trade.dart';
 
-class TradeScreen extends StatelessWidget {
+class TradeScreen extends StatefulWidget {
   const TradeScreen({Key? key}) : super(key: key);
+
+  @override
+  State<TradeScreen> createState() => _TradeScreenState();
+}
+
+class _TradeScreenState extends State<TradeScreen> {
+  bool isDisabled = true;
 
   @override
   Widget build(BuildContext context) {
@@ -70,23 +78,41 @@ class TradeScreen extends StatelessWidget {
                               ],
                             ),
                             Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                SFText(
-                                  keyText: '0.00',
-                                  style: TextStyles.bold18White,
+                                Expanded(
+                                  child: SFTextField(
+                                    showLabel: false,
+                                    noBorder: true,
+                                    hintText: "0.00",
+                                    hintStyle: TextStyles.bold16LightWhite,
+                                    onChanged: (value){
+                                      if(value.isNotEmpty){
+                                        setState((){
+                                          isDisabled = false;
+                                        });
+                                      }
+                                    },
+                                  ),
                                 ),
-                                const SizedBox(width: 4,),
+                                // SFText(
+                                //   keyText: '0.00',
+                                //   style: TextStyles.bold18White,
+                                // ),
                                 SFButtonOutLined(
                                     title: LocaleKeys.max,
                                     textStyle: TextStyles.bold14Blue,
                                     borderColor: AppColors.blue,
                                     onPressed: () {}),
-                                const DropdownSelectToken(
-                                  width: 115,
-                                  height: 36,
-                                  backgroundColor: AppColors.transparent,
-                                  isResultLabel: true,
+                                 SizedBox(width: MediaQuery.of(context).size.width * 0.045,),
+                                SizedBox(
+                                  width: MediaQuery.of(context).size.width * 0.25,
+                                  child:  const DropdownSelectToken(
+                                    width: 90,
+                                    height: 36,
+                                    resultPadding: EdgeInsets.all(0),
+                                    backgroundColor: AppColors.transparent,
+                                    isResultLabel: true,
+                                  ),
                                 ),
                               ],
                             ),
@@ -119,11 +145,13 @@ class TradeScreen extends StatelessWidget {
                             ),
                             const SizedBox(height: 12),
                             Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: const [
-                                Spacer(),
+                                 SizedBox(),
                                 DropdownSelectToken(
-                                  width: 115,
+                                  width: 90,
                                   height: 36,
+                                  resultPadding: EdgeInsets.all(0),
                                   backgroundColor: AppColors.transparent,
                                   isResultLabel: true,
                                 ),
@@ -140,7 +168,7 @@ class TradeScreen extends StatelessWidget {
                   text: LocaleKeys.trade,
                   textStyle: TextStyles.w600WhiteSize16,
                   gradient: AppColors.gradientBlueButton,
-                  disabled: true,
+                  disabled: isDisabled,
                   onPressed: () {
                     showCustomAlertDialog(context,
                         children: const PopUpConfirmTrade());

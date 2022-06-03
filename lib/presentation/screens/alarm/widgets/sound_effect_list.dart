@@ -30,6 +30,7 @@ class _AlarmSoundEffectListState extends State<AlarmSoundEffectList> {
                       ? const Icon(
                           Icons.check,
                           color: AppColors.green,
+                          size: 20,
                         )
                       : const SizedBox(),
                   onPressed: () {
