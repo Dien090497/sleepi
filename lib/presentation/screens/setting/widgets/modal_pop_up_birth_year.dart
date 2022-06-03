@@ -63,9 +63,9 @@ class ModalPopUpBirthYear extends StatelessWidget {
   Widget build(BuildContext context) {
     final currentYear = DateTime.now().year;
     List<int> years =
-    List<int>.generate(currentYear - 1900 + 1, (i) => i + 1900);
+        List<int>.generate(currentYear - 1900 + 1, (i) => i + 1900);
     final initialIndex =
-    selectedYear != null ? years.indexOf(selectedYear!) : years.length ~/ 2;
+        selectedYear != null ? years.indexOf(selectedYear!) : years.length ~/ 2;
     int year = selectedYear ?? years[initialIndex];
     return SafeArea(
       child: Column(
@@ -78,18 +78,18 @@ class ModalPopUpBirthYear extends StatelessWidget {
               },
               itemExtent: 30,
               scrollController:
-              FixedExtentScrollController(initialItem: initialIndex),
+                  FixedExtentScrollController(initialItem: initialIndex),
               diameterRatio: 1,
               // useMagnifier: true,
               // magnification: 1.3,
               children: List.generate(
                   years.length,
-                      (i) => Center(
-                    child: SFText(
-                      keyText: years[i].toString(),
-                      style: TextStyles.bold16LightWhite,
-                    ),
-                  )).toList(),
+                  (i) => Center(
+                        child: SFText(
+                          keyText: years[i].toString(),
+                          style: TextStyles.bold16LightWhite,
+                        ),
+                      )).toList(),
             ),
           ),
           SFButton(

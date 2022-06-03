@@ -12,6 +12,7 @@ class TabPendingDetail extends StatelessWidget {
     return ListView(
       children: [
         SFCard(
+          radius: 8,
           margin: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 12.0),
           padding: const EdgeInsets.symmetric(vertical: 7.0, horizontal: 16.0),
           child: Row(

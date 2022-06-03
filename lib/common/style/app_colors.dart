@@ -3,6 +3,10 @@ import 'package:flutter/material.dart';
 class AppColors {
   static const primary = Color(0xFF000000);
 
+  static const radial1 = Color(0xFF241352);
+
+  static const radial2 = Color(0xFF0A204A);
+
   static const textColor = Color(0xFFCBD5E1);
 
   static const black = Color(0xFF000000);

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
 import 'package:slee_fi/common/widgets/sf_percent_border.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
@@ -35,14 +36,18 @@ class AttributeProcessWidget extends StatelessWidget {
               style: TextStyles.white14WithOpacity,
             ),
           ),
+          const SizedBox(width: 20),
           Expanded(
             flex: 3,
             child: SFPercentBorderGradient(
               totalValue: totalValue,
               valueActive: valueActive,
+              linearGradient: AppColors.gradientBlueButton,
+              lineHeight: 8,
+              barRadius: 20,
             ),
           ),
-          const SizedBox(width: 35),
+          const SizedBox(width: 10),
           isUpGrade
               ? Padding(
                   padding: const EdgeInsets.only(left: 5),

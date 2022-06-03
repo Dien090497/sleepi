@@ -18,7 +18,8 @@ class InfoIndividualScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final args = ModalRoute.of(context)?.settings.arguments as bool;
+    final args = ModalRoute.of(context)?.settings.arguments as bool?;
+
     return BackgroundWidget(
       child: Scaffold(
         backgroundColor: Colors.transparent,
@@ -27,12 +28,8 @@ class InfoIndividualScreen extends StatelessWidget {
             SizedBox(
               height: MediaQuery.of(context).padding.top,
             ),
-            const TopBarCommon(
-              iconBack: true,
-            ),
-            const SizedBox(
-              height: 10,
-            ),
+            const TopBarCommon(iconBack: true),
+            const SizedBox(height: 10),
             Expanded(
               child: SingleChildScrollView(
                 physics: const ScrollPhysics(),
@@ -122,7 +119,9 @@ class InfoIndividualScreen extends StatelessWidget {
                 ),
               ),
             ),
-            args ? const BottomBarMarketPlaceWidget() : const BottomBarWidget(),
+            args ?? false
+                ? const BottomBarMarketPlaceWidget()
+                : const BottomBarWidget(),
           ],
         ),
       ),

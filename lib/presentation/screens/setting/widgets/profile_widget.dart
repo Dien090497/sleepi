@@ -2,13 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:slee_fi/common/routes/app_routes.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
-import 'package:slee_fi/common/widgets/sf_bottom_sheet.dart';
 import 'package:slee_fi/common/widgets/sf_button_outlined.dart';
 import 'package:slee_fi/common/widgets/sf_card.dart';
 import 'package:slee_fi/common/widgets/sf_list_tile.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
 import 'package:slee_fi/l10n/locale_keys.g.dart';
-import 'package:slee_fi/presentation/screens/setting/widgets/modal_pop_up_sex.dart';
+import 'package:slee_fi/presentation/screens/setting/widgets/gender_tile.dart';
 
 import 'modal_pop_up_birth_year.dart';
 
@@ -17,10 +16,7 @@ class ProfileWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    const icon = Icon(
-      Icons.chevron_right,
-      color: AppColors.lightGrey,
-    );
+    const icon = Icon(Icons.chevron_right, color: AppColors.lightGrey);
     Divider divider = Divider(
       color: AppColors.lightWhite.withOpacity(0.05),
       height: 1,
@@ -39,20 +35,7 @@ class ProfileWidget extends StatelessWidget {
             children: [
               const SettingBirthYear(),
               divider,
-              SFListTile(
-                  text: LocaleKeys.sex,
-                  trailing: Row(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      SFText(
-                        keyText: "Male",
-                        style: TextStyles.lightWhite14,
-                      ),
-                      icon,
-                    ],
-                  ),
-                  onPressed: () => SFModalBottomSheet.show(
-                      context, 0.5, const ModalPopUpSex())),
+              const GenderTile(),
               divider,
               SFListTile(
                 text: LocaleKeys.email,
@@ -72,8 +55,7 @@ class ProfileWidget extends StatelessWidget {
               SFListTile(
                 text: LocaleKeys.change_password,
                 trailing: icon,
-                onPressed: () =>
-                    Navigator.pushNamed(context, R.changePassword),
+                onPressed: () => Navigator.pushNamed(context, R.changePassword),
               ),
             ],
           ),
@@ -87,7 +69,7 @@ class ProfileWidget extends StatelessWidget {
             title: LocaleKeys.logout,
             textStyle: TextStyles.bold16Blue,
             borderColor: AppColors.blue,
-            onPressed: (){},
+            onPressed: () {},
           ),
         ),
         const SizedBox(

@@ -1,40 +1,39 @@
 import 'package:flutter/material.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
-import 'package:slee_fi/common/widgets/sf_alert_dialog.dart';
 import 'package:slee_fi/common/widgets/sf_icon.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
-import 'package:slee_fi/presentation/screens/wallet_creation_warning/widgets/pop_up_avalanche_wallet.dart';
 
 class TabBarIcon extends TabBar {
   TabBarIcon({
     required context,
     required List<String> texts,
     required List<String> images,
+    required Function(int) onTap,
+    required int index,
     Key? key,
   }) : super(
-          onTap: (index) {
-            if (index == 1) {
-              showCustomAlertDialog(context,
-                  children: const PopUpAvalancheWallet());
-            }
-          },
+          onTap: onTap,
           tabs: List.generate(
               texts.length,
               (i) => Tab(
+                    height: 40,
                     child: Row(
                       mainAxisSize: MainAxisSize.max,
                       children: [
                         SFIcon(
                           images.isNotEmpty ? images[i] : "",
-                          color: AppColors.white,
+                          color:
+                              i == index ? AppColors.white : AppColors.purple,
                           width: 24,
                         ),
                         const SizedBox(width: 6),
                         Expanded(
                             child: SFText(
                           keyText: texts[i],
-                          style: TextStyles.white16,
+                          style: i == index
+                              ? TextStyles.white16
+                              : TextStyles.purple16,
                         )),
                       ],
                     ),

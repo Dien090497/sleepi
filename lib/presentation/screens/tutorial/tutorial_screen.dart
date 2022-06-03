@@ -24,7 +24,7 @@ class _TutorialScreenState extends State<TutorialScreen> {
     Imgs.tutorial1,
     Imgs.tutorial2,
     Imgs.tutorial3,
-    Imgs.tutorial4,
+    Imgs.tutorial4
   ];
 
   final PageController _pageController = PageController();

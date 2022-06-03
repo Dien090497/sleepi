@@ -9,29 +9,27 @@ class GachaScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: BackgroundWidget(
-        child: SafeArea(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              const TopBarCommon(),
-              Expanded(
-                child: ListView(
-                  padding: const EdgeInsets.symmetric(
-                      horizontal: 24.0, vertical: 12),
-                  children: const [
-                    ItemsGacha(
-                      title: LocaleKeys.normal_gacha,
-                    ),
-                    ItemsGacha(
-                      title: LocaleKeys.special_gacha,
-                    ),
-                  ],
-                ),
-              )
-            ],
-          ),
+    return BackgroundWidget(
+      child: SafeArea(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const TopBarCommon(),
+            Expanded(
+              child: ListView(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 24.0, vertical: 12),
+                children: const [
+                  ItemsGacha(
+                    title: LocaleKeys.normal_gacha,
+                  ),
+                  ItemsGacha(
+                    title: LocaleKeys.special_gacha,
+                  ),
+                ],
+              ),
+            )
+          ],
         ),
       ),
     );

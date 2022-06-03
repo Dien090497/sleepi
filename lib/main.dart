@@ -5,6 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 // import 'package:flutter_translate/flutter_translate.dart';
 import 'package:logger/logger.dart';
 import 'package:slee_fi/app.dart';
+import 'package:slee_fi/common/const/const.dart';
 import 'package:slee_fi/di/injector.dart';
 
 void main() async {
@@ -19,18 +20,9 @@ void main() async {
       [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]).then((_) {
     BlocOverrides.runZoned(
       () => runApp(EasyLocalization(
-        supportedLocales: const [
-          Locale('de', 'DE'),
-          Locale('en', 'US'),
-          Locale('es', 'ES'),
-          Locale('fr', 'FR'),
-          Locale('ja', 'JP'),
-          Locale('pt', 'T'),
-          Locale('ru', 'RU'),
-          Locale('zh', 'Hans'),
-        ],
+        supportedLocales: Const.locales,
         path: 'assets/translations',
-        fallbackLocale: const Locale('en', 'US'),
+        fallbackLocale: Const.localeEN,
         child: const MyApp(),
       )),
       blocObserver: AppBlocObserver(),

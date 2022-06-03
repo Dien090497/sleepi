@@ -1,4 +1,6 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:slee_fi/common/const/const.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
 import 'package:slee_fi/common/widgets/sf_buttons.dart';
@@ -10,17 +12,9 @@ class ModalPopUpLanguage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    List<Widget> language = [
-      Center(
-        child: SFText(
-          keyText: LocaleKeys.japanese,
-          style: TextStyles.bold16LightWhite,
-        ),
-      ),
-      Center(child: SFText(keyText: LocaleKeys.english, style: TextStyles.bold16LightWhite)),
-      Center(child: SFText(keyText: LocaleKeys.chinese, style: TextStyles.bold16LightWhite)),
-    ];
-    int middle = language.length ~/ 2;
+    final langCodes = Const.locales.map<String>((e) => e.languageCode).toList();
+    final currentLocale = context.locale;
+    int selectedIndex = langCodes.indexOf(currentLocale.languageCode);
 
     return SafeArea(
       child: Column(
@@ -28,11 +22,19 @@ class ModalPopUpLanguage extends StatelessWidget {
         children: [
           Expanded(
             child: CupertinoPicker(
-              onSelectedItemChanged: (value) {},
+              onSelectedItemChanged: (index) {
+                selectedIndex = index;
+              },
               itemExtent: 30,
-              scrollController: FixedExtentScrollController(initialItem: middle),
+              scrollController:
+                  FixedExtentScrollController(initialItem: selectedIndex),
               diameterRatio: 1,
-              children: language,
+              children: List.generate(Const.locales.length, (i) {
+                return Center(
+                    child: SFText(
+                        keyText: Const.locales[i].languageCode,
+                        style: TextStyles.bold16LightWhite));
+              }),
             ),
           ),
           SFButton(
@@ -41,8 +43,13 @@ class ModalPopUpLanguage extends StatelessWidget {
               color: AppColors.blue,
               textStyle: TextStyles.w600WhiteSize16,
               height: 48,
-              onPressed: () => Navigator.pop(context)),
-          const SizedBox(height: 37,)
+              onPressed: () {
+                Navigator.pop(context);
+                context.setLocale(Const.locales[selectedIndex]);
+              }),
+          const SizedBox(
+            height: 37,
+          )
         ],
       ),
     );
