@@ -16,12 +16,10 @@ class SettingBirthYear extends StatefulWidget {
 }
 
 class _SettingBirthYearState extends State<SettingBirthYear> {
-
-   int? birthYear;
+  int? birthYear;
 
   @override
   Widget build(BuildContext context) {
-
     return SFListTile(
       text: LocaleKeys.birth_year,
       trailing: Row(
@@ -38,30 +36,37 @@ class _SettingBirthYearState extends State<SettingBirthYear> {
         ],
       ),
       onPressed: () => SFModalBottomSheet.show(
-          context, 0.5,  ModalPopUpBirthYear(
-        onBirthYearChanged: (value) {
-          setState(() {
-            birthYear = value;
-          });
+        context,
+        0.5,
+        ModalPopUpBirthYear(
+          selectedYear: birthYear,
+          onBirthYearChanged: (value) {
+            setState(() {
+              birthYear = value;
+            });
           },
-      )),
+        ),
+      ),
     );
   }
 }
 
-
 class ModalPopUpBirthYear extends StatelessWidget {
-  const ModalPopUpBirthYear({required this.onBirthYearChanged, Key? key}) : super(key: key);
+  const ModalPopUpBirthYear(
+      {required this.onBirthYearChanged, this.selectedYear, Key? key})
+      : super(key: key);
 
+  final int? selectedYear;
   final Function(int) onBirthYearChanged;
 
   @override
   Widget build(BuildContext context) {
-    List _range(int from, int to) =>
-        List.generate(to - from + 1, (i) => i + from);
-    List years = _range(1900, DateTime.now().year);
-    int? middle ;
-    int year =0;
+    final currentYear = DateTime.now().year;
+    List<int> years =
+    List<int>.generate(currentYear - 1900 + 1, (i) => i + 1900);
+    final initialIndex =
+    selectedYear != null ? years.indexOf(selectedYear!) : years.length ~/ 2;
+    int year = selectedYear ?? years[initialIndex];
     return SafeArea(
       child: Column(
         mainAxisSize: MainAxisSize.min,
@@ -70,20 +75,20 @@ class ModalPopUpBirthYear extends StatelessWidget {
             child: CupertinoPicker(
               onSelectedItemChanged: (value) {
                 year = years[value];
-                middle = value;
               },
               itemExtent: 30,
-              scrollController: FixedExtentScrollController(initialItem: middle ?? years.length ~/ 2),
+              scrollController:
+              FixedExtentScrollController(initialItem: initialIndex),
               diameterRatio: 1,
               // useMagnifier: true,
               // magnification: 1.3,
               children: List.generate(
                   years.length,
-                  (i) => Center(
+                      (i) => Center(
                     child: SFText(
-                          keyText: years[i].toString(),
-                          style: TextStyles.bold16LightWhite,
-                        ),
+                      keyText: years[i].toString(),
+                      style: TextStyles.bold16LightWhite,
+                    ),
                   )).toList(),
             ),
           ),
@@ -94,11 +99,12 @@ class ModalPopUpBirthYear extends StatelessWidget {
               textStyle: TextStyles.w600WhiteSize16,
               height: 48,
               onPressed: () {
-                Navigator.pop(context);
                 onBirthYearChanged(year);
-              }
-          ),
-          const SizedBox(height: 37,)
+                Navigator.pop(context);
+              }),
+          const SizedBox(
+            height: 37,
+          )
         ],
       ),
     );

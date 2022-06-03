@@ -15,6 +15,9 @@ class RestoreWalletScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    TextEditingController emailController = TextEditingController();
+    TextEditingController seedPhraseController = TextEditingController();
+
     return DismissKeyboardWidget(
       child: BackgroundWidget(
         child: Scaffold(
@@ -37,7 +40,9 @@ class RestoreWalletScreen extends StatelessWidget {
                         textStyle: TextStyles.w600WhiteSize16,
                         height: 48,
                         width: double.infinity,
-                        color: AppColors.blue,
+                        gradient: AppColors.gradientBlueButton,
+                        disabled: emailController.text.isNotEmpty ||
+                                  seedPhraseController.text.isNotEmpty ? false : true,
                         onPressed: () {},
                       ),
                     )),
@@ -67,25 +72,28 @@ class RestoreWalletScreen extends StatelessWidget {
                             ),
                             padding: const EdgeInsets.only(left: 12, right: 4),
                             child: Row(
-                              children: const [
+                              children:  [
                                 Expanded(
                                   child: SFTextField(
                                     // hintText: LocaleKeys.emailVerification,
+                                    controller: emailController,
                                     noBorder: true,
                                   ),
                                 ),
                                 SFTextButton(
                                   text: LocaleKeys.send_code,
                                   textStyle: TextStyles.blue12,
+                                  onPressed: () {},
                                   // color: Colors.transparent,
                                 ),
                               ],
                             ),
                           ),
                           const SizedBox(height: 20),
-                          const SFTextField(
+                           SFTextField(
                             maxLine: 10,
                             maxLength: 100,
+                            controller: seedPhraseController,
                             labelText: LocaleKeys.seed_phrase,
                             hintText: LocaleKeys.enter_the_seed_phrase_word,
                             hintStyle: TextStyles.lightGrey16,
