@@ -39,6 +39,7 @@ class WalletDetailList extends StatelessWidget {
       padding: const EdgeInsets.only(top: 20),
       child: ListView.builder(
           itemCount: keyList.length,
+          physics: const ClampingScrollPhysics(),
           shrinkWrap: true,
           padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 12.0),
           itemBuilder: (BuildContext context, int index) {
