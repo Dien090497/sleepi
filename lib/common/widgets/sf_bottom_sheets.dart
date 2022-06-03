@@ -15,5 +15,6 @@ Future<T?> showFilterModalBottomSheet<T>(BuildContext context) {
     builder: (_) {
       return const FilterSheet();
     },
+    barrierColor: AppColors.dark.withOpacity(0.8)
   );
 }
