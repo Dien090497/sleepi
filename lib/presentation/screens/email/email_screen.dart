@@ -11,8 +11,31 @@ import 'package:slee_fi/common/widgets/sf_textfield_password.dart';
 import 'package:slee_fi/common/widgets/sf_textfield_text_button.dart';
 import 'package:slee_fi/l10n/locale_keys.g.dart';
 
-class EmailScreen extends StatelessWidget {
+class EmailScreen extends StatefulWidget {
   const EmailScreen({Key? key}) : super(key: key);
+
+  @override
+  State<EmailScreen> createState() => _EmailScreenState();
+}
+
+class _EmailScreenState extends State<EmailScreen> {
+  String _email = '';
+  String _code = '';
+  String _password = '';
+
+  bool isDisabled = true;
+  void validateButton() {
+
+    if(_email.isNotEmpty &&
+        _code.isNotEmpty &&
+        _password.isNotEmpty){
+      setState(() {
+        isDisabled = false;
+      });
+    } else {
+      isDisabled = true;
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -38,19 +61,33 @@ class EmailScreen extends StatelessWidget {
                           padding: const EdgeInsets.symmetric(
                               horizontal: 16, vertical: 24),
                           child: Column(
-                            children: const [
-                              SFTextField(labelText: LocaleKeys.new_email),
-                              SizedBox(
+                            children:  [
+                              SFTextField(
+                                  onChanged: (email) {
+                                    _email = email;
+                                    validateButton();
+                                  },
+                                  labelText: LocaleKeys.new_email),
+                              const SizedBox(
                                 height: 20,
                               ),
                               SFTextFieldTextButton(
+                                valueChanged: (code) {
+                                  _code = code;
+                                  validateButton();
+                                },
                                 labelText: LocaleKeys.verification_code,
                               ),
-                              SizedBox(
+                              const SizedBox(
                                 height: 20,
                               ),
                               SFTextFieldPassword(
+                                valueChanged: (pw) {
+                                  _password = pw;
+                                  validateButton();
+                                },
                                 labelText: LocaleKeys.password,
+
                               ),
                             ],
                           ),
@@ -63,7 +100,7 @@ class EmailScreen extends StatelessWidget {
                     textStyle: TextStyles.w600WhiteSize16,
                     gradient: AppColors.gradientBlueButton,
                     width: double.infinity,
-                    disabled: true,
+                    disabled: isDisabled,
                     onPressed: () {},
                   ),
                   const SizedBox(height: 24,),

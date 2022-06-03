@@ -16,7 +16,7 @@ class ModalMultiChainSwitch extends StatefulWidget {
 
 class _ModalMultiChainSwitchState extends State<ModalMultiChainSwitch> {
   int selectItem = 0;
-  List<String> keyText = [LocaleKeys.avax, "BNB Smart Chain(BEP20)"];
+  List<String> keyText = [LocaleKeys.avax, "BNB Smart Chain (BEP20)"];
   List icons = [Ics.icSolanaCircle, Imgs.binance];
 
   @override
@@ -41,6 +41,8 @@ class _ModalMultiChainSwitchState extends State<ModalMultiChainSwitch> {
               itemBuilder: (BuildContext context, int index) {
                 return SFCard(
                   child: ListTile(
+                    contentPadding: const EdgeInsets.symmetric(horizontal: 8),
+                    horizontalTitleGap: 4,
                     leading: SFIcon(icons[index]),
                     title: SFText(
                       keyText: keyText[index],

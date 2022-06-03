@@ -11,7 +11,7 @@ class DropdownSelectToken extends StatefulWidget {
       {this.value,
       this.width,
       this.height,
-      this.padding,
+      this.resultPadding,
       this.margin,
       this.backgroundColor,
       this.isResultLabel = false,
@@ -23,7 +23,7 @@ class DropdownSelectToken extends StatefulWidget {
   final double? width;
   final double? height;
   final EdgeInsets? margin;
-  final EdgeInsets? padding;
+  final EdgeInsets? resultPadding;
   final Color? backgroundColor;
   final List<DropdownMenuItem>? dropdownItems;
   final bool isResultLabel;
@@ -84,49 +84,52 @@ class _DropdownSelectTokenState extends State<DropdownSelectToken> {
 
   @override
   Widget build(BuildContext context) {
-    return CoolDropdown(
-      resultWidth: widget.width ?? 70,
-      resultHeight: widget.height ?? 32,
-      defaultValue: dropdownItemList[0],
-      dropdownList: dropdownItemList,
-      isResultLabel: widget.isResultLabel,
-      dropdownItemReverse: true,
-      dropdownItemMainAxis: MainAxisAlignment.start,
-      resultMainAxis: MainAxisAlignment.start,
-      dropdownWidth: 110,
-      dropdownHeight: 250,
-      gap: 8,
-      dropdownBD: BoxDecoration(
-        color: AppColors.lightDark,
-        borderRadius: BorderRadius.circular(4.0),
-      ),
-      resultBD: BoxDecoration(
-        color: widget.backgroundColor ?? AppColors.white.withOpacity(0.1),
-        borderRadius: BorderRadius.circular(4.0),
-      ),
-      selectedItemBD: const BoxDecoration(
-        color: AppColors.transparent,
-      ),
-      resultTS: TextStyles.lightWhite16,
-      resultPadding: const EdgeInsets.only(left: 5, right: 10),
-      selectedItemTS: TextStyles.w400White16,
-      unselectedItemTS: TextStyles.w400lightGrey16,
-      onChange: (selectedItem) {
-        // print(selectedItem);
-      },
-      onOpen: (isOpen) {
-        // print('$isOpen');
-      },
-      resultIconRotation: false,
+    return FittedBox(
+      fit: BoxFit.fitWidth,
+      child: CoolDropdown(
+        resultWidth: widget.width ?? 70,
+        resultHeight: widget.height ?? 32,
+        defaultValue: dropdownItemList[0],
+        dropdownList: dropdownItemList,
+        isResultLabel: widget.isResultLabel,
+        dropdownItemReverse: true,
+        dropdownItemMainAxis: MainAxisAlignment.start,
+        resultMainAxis: MainAxisAlignment.start,
+        dropdownWidth: 110,
+        dropdownHeight: 220,
+        gap: 8,
+        dropdownBD: BoxDecoration(
+          color: AppColors.lightDark,
+          borderRadius: BorderRadius.circular(4.0),
+        ),
+        resultBD: BoxDecoration(
+          color: widget.backgroundColor ?? AppColors.white.withOpacity(0.1),
+          borderRadius: BorderRadius.circular(4.0),
+        ),
+        selectedItemBD: const BoxDecoration(
+          color: AppColors.transparent,
+        ),
+        resultTS: TextStyles.lightWhite16,
+        resultPadding: widget.resultPadding ??  const EdgeInsets.only(left: 5, right: 10),
+        selectedItemTS: TextStyles.w400White16,
+        unselectedItemTS: TextStyles.w400lightGrey16,
+        onChange: (selectedItem) {
+          // print(selectedItem);
+        },
+        onOpen: (isOpen) {
+          // print('$isOpen');
+        },
+        resultIconRotation: false,
 
-      // resultIcon: const SizedBox(
-      //   width: 16,
-      //   // height: 10,
-      //   child: Icon(
-      //     Icons.keyboard_arrow_up,
-      //     color: AppColors.lightGrey,
-      //   ),
-      // ),
+        // resultIcon: const SizedBox(
+        //   width: 16,
+        //   // height: 10,
+        //   child: Icon(
+        //     Icons.keyboard_arrow_up,
+        //     color: AppColors.lightGrey,
+        //   ),
+        // ),
+      ),
     );
   }
 }

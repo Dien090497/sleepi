@@ -12,11 +12,11 @@ class TabItemsBuy extends StatelessWidget {
   final Function() onPress;
   @override
   Widget build(BuildContext context) {
-    final jewels = [
-      Imgs.jewelGreen,
-      Imgs.jewelPurple,
-      Imgs.jewelBlue,
-      Imgs.jewelRed
+    final beds = [
+    Ics.shortBed,
+    Ics.middleBed,
+    Ics.flexibleBed,
+      Ics.longBed,
     ];
     return DefaultTabController(
       length: 2,
@@ -39,7 +39,7 @@ class TabItemsBuy extends StatelessWidget {
                     count: 20,
                     itemBuilder: (context, i) {
                       return ItemBedBuyWidget(
-                        icon: jewels[i % jewels.length],
+                        icon: beds[i % beds.length],
                       );
                     },
                   ),
@@ -47,7 +47,7 @@ class TabItemsBuy extends StatelessWidget {
                     count: 20,
                     itemBuilder: (context, i) {
                       return ItemBedBuyWidget(
-                        icon: jewels[i % jewels.length],
+                        icon: beds[i % beds.length],
                       );
                     },
                   )

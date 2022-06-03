@@ -66,7 +66,7 @@ class MyJewelsShortWidget extends StatelessWidget {
                         const EdgeInsets.symmetric(vertical: 4, horizontal: 12),
                     alignment: Alignment.center,
                     child: SFText(
-                      keyText: '25%',
+                      keyText: '+ 25%',
                       style: TextStyles.greenW700size12,
                     ),
                   ),

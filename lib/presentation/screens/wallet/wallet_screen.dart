@@ -51,7 +51,7 @@ class _WalletScreenState extends State<WalletScreen> {
             leadingWidth: 48,
             elevation: 0,
             centerTitle: true,
-            titleSpacing: 14,
+            titleSpacing: 6,
             title: Container(
               decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(100),

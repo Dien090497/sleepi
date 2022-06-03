@@ -19,6 +19,7 @@ class TabItemDetail extends StatelessWidget {
     return DefaultTabController(
       length: 2,
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           SFSubTabBar(
             texts: const [LocaleKeys.item, LocaleKeys.upgrade],

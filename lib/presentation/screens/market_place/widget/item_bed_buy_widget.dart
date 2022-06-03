@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
+import 'package:slee_fi/common/widgets/sf_icon.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
 import 'package:slee_fi/l10n/locale_keys.g.dart';
 import 'package:slee_fi/presentation/screens/product_detail/widgets/top_left_banner.dart';
@@ -37,11 +38,12 @@ class ItemBedBuyWidget extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               SizedBox(height: 37.h),
-              Image.asset(
-                icon,
-                width: 62,
-                height: 60,
-              ),
+              SFIcon(icon, width: 62, height: 60,),
+              // Image.asset(
+              //   icon,
+              //   width: 62,
+              //   height: 60,
+              // ),
               SizedBox(height: 20.h),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 12.0),
@@ -71,7 +73,7 @@ class ItemBedBuyWidget extends StatelessWidget {
                       const EdgeInsets.symmetric(vertical: 8, horizontal: 12),
                       alignment: Alignment.center,
                       child: SFText(
-                        keyText: '25%',
+                        keyText: '+ 25%',
                         style: TextStyles.greenW700size12,
                       ),
                     ),

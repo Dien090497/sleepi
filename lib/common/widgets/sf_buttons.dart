@@ -58,10 +58,13 @@ class SFButton extends StatelessWidget {
                       ),
                     ),
                   ),
-            child: SFText(
-              keyText: text,
-              style: textStyle,
-              stringCase: toUpperCase,
+            child: FittedBox(
+              fit: BoxFit.fitWidth,
+              child: SFText(
+                keyText: text,
+                style: textStyle,
+                stringCase: toUpperCase,
+              ),
             ),
           ),
         ),
