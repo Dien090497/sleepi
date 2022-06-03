@@ -203,6 +203,7 @@ class RecycleScreen extends StatelessWidget {
                                   toUpperCase: true,
                                 ),
                               ),
+                              const SizedBox(height: 26),
                             ],
                           ),
                         ),
