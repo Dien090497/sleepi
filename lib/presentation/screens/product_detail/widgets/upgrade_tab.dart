@@ -1,6 +1,8 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
+import 'package:slee_fi/common/widgets/sf_label_value.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
 import 'package:slee_fi/l10n/locale_keys.g.dart';
 import 'package:slee_fi/presentation/screens/gacha/widgets/atribute_process.dart';
@@ -11,10 +13,10 @@ class UpGradeTab extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final Size size = MediaQuery.of(context).size;
     return SingleChildScrollView(
+      physics: const ScrollPhysics(),
       child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 30),
+        padding: const EdgeInsets.symmetric(horizontal: 24),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -33,41 +35,34 @@ class UpGradeTab extends StatelessWidget {
                 fit: BoxFit.cover,
               ),
             ),
-            Container(
-              width: size.width,
-              height: 50,
-              decoration: BoxDecoration(
-                color: Colors.white.withOpacity(0.08),
-                borderRadius: BorderRadius.circular(8),
-              ),
-              alignment: Alignment.center,
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 20),
-                child: Row(
-                  children: [
-                    SFText(keyText: LocaleKeys.cost, style: TextStyles.lightWhite16,),
-                    const Spacer(),
-                    SFText(keyText: '21 SLFT', style: TextStyles.white14,),
-                  ],
-                ),
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(vertical: 10),
-              child: SFText(keyText: LocaleKeys.success_rate, style: TextStyles.white14,),
-            ),
+            const SFLabelValue(label: LocaleKeys.cost,
+              value: '21 SLFT',
+              styleLabel: TextStyles.lightGrey16,
+              styleValue: TextStyles.textColorSize16,),
+            const SizedBox(height: 24,),
+            SFText(
+              keyText: LocaleKeys.success_rate, style: TextStyles.lightWhite14,),
+            const SizedBox(height: 16,),
             Container(
               decoration: BoxDecoration(
                 color: AppColors.whiteOpacity5,
-                borderRadius: BorderRadius.circular(15),
+                borderRadius: BorderRadius.circular(8),
               ),
               width: double.infinity,
               padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 8),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
-                children: const [
-                  AttributeProcessWidget(linkImage: Imgs.efficiency, title: 'Level 2 Jewel', totalValue: 10, valueActive: 3.3, isUpGrade: true,),
-                  AttributeProcessWidget(linkImage: Imgs.efficiency, title: 'Failure', totalValue: 10, valueActive: 6.8, isUpGrade: true,),
+                children: [
+                  AttributeProcessWidget(linkImage: Imgs.efficiency,
+                    title: '${LocaleKeys.level.tr()} 2 Jewel',
+                    totalValue: 10,
+                    valueActive: 3.3,
+                    isUpGrade: true,),
+                  const AttributeProcessWidget(linkImage: Imgs.efficiency,
+                    title: LocaleKeys.failure,
+                    totalValue: 10,
+                    valueActive: 6.8,
+                    isUpGrade: true,),
                 ],
               ),
             ),

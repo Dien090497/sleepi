@@ -33,7 +33,7 @@ class AttributeProcessWidget extends StatelessWidget {
             flex: 2,
             child: SFText(
               keyText: title,
-              style: TextStyles.white14WithOpacity,
+              style: TextStyles.lightGrey14,
             ),
           ),
           const SizedBox(width: 20),
@@ -42,8 +42,9 @@ class AttributeProcessWidget extends StatelessWidget {
             child: SFPercentBorderGradient(
               totalValue: totalValue,
               valueActive: valueActive,
+              backgroundColor: AppColors.borderDarkColor,
               linearGradient: AppColors.gradientBlueButton,
-              lineHeight: 8,
+              lineHeight: 6,
               barRadius: 20,
             ),
           ),
@@ -54,12 +55,12 @@ class AttributeProcessWidget extends StatelessWidget {
                   child: SFText(
                     keyText:
                         '${(valueActive / totalValue * 100).toStringAsFixed(0)} %',
-                    style: TextStyles.boldWhite14,
+                    style: TextStyles.bold14LightWhite,
                   ),
                 )
               : SFText(
                   keyText: (valueActive / totalValue * 10).toStringAsFixed(1),
-                  style: TextStyles.boldWhite14,
+                  style: TextStyles.bold14LightWhite,
                 ),
         ],
       ),
