@@ -58,7 +58,7 @@ class StakingList extends StatelessWidget {
           ),
         ),
         const SizedBox(
-          height: 12.0,
+          height: 20.0,
         ),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -68,9 +68,11 @@ class StakingList extends StatelessWidget {
           ],
         ),
         const SizedBox(
-          height: 12.0,
+          height: 16.0,
         ),
         SFCard(
+          radius: 8,
+          margin: const EdgeInsets.only(top: 8),
           padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 18.0),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -87,6 +89,8 @@ class StakingList extends StatelessWidget {
           ),
         ),
         SFCard(
+          radius: 8,
+          margin: const EdgeInsets.only(top: 8),
           padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 18.0),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -103,6 +107,8 @@ class StakingList extends StatelessWidget {
           ),
         ),
         SFCard(
+          radius: 8,
+          margin: const EdgeInsets.only(top: 8),
           padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 18.0),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,

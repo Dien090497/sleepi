@@ -50,9 +50,7 @@ class _HomeScreenState extends State<HomeScreen> {
       oneSec,
           (Timer timer) {
         if (startTime == 0) {
-          setState(() {
-            timer.cancel();
-          });
+            _timer.cancel();
         } else {
           setState(() {
             startTime--;
