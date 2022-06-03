@@ -1,9 +1,8 @@
-import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
-import 'package:slee_fi/common/widgets/overlay_container.dart';
+import 'package:slee_fi/common/style/text_styles.dart';
 import 'package:slee_fi/common/widgets/sf_icon.dart';
+import 'package:slee_fi/common/widgets/show_more_text_group.dart';
 import 'package:slee_fi/l10n/locale_keys.g.dart';
 import 'package:slee_fi/resources/resources.dart';
 
@@ -15,42 +14,44 @@ class PopupInfoStaking extends StatefulWidget {
 }
 
 class _PopupInfoStakingState extends State<PopupInfoStaking> {
-  bool _dropdownShown = false;
+  GlobalKey key = GlobalKey();
 
   void _toggleDropdown() {
-    setState(() {
-      _dropdownShown = true;
-    });
-    Future.delayed(const Duration(seconds: 5), () {
-      setState(() {
-        _dropdownShown = false;
-      });
-    });
+    showMoreText(LocaleKeys.displays_message_from_staking_slft_detail);
   }
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 12.0),
-      child: Column(
-        children: [
-          GestureDetector(
-            onTap: _toggleDropdown,
-            child: const SFIcon(
-              Ics.icQuestion,
-              color: AppColors.lightGrey,
-              width: 18,
-            ),
+    return Column(
+      children: [
+        GestureDetector(
+          onTap: _toggleDropdown,
+          child: SFIcon(
+            Ics.icQuestion,
+            color: AppColors.lightGrey,
+            width: 18,
+            key: key,
           ),
-          OverlayContainer(
-            show: _dropdownShown,
-            width: 200,
-            height: 130,
-            position: const OverlayContainerPosition(-180, 0),
-            message: LocaleKeys.displays_message_from_staking_slft_detail,
-          ),
-        ],
-      ),
+        ),
+      ],
+    );
+  }
+  void showMoreText(String text) {
+    ShowMoreTextPopup popup = ShowMoreTextPopup(
+      context,
+      text: text,
+      width: 200,
+      height: 138,
+      textStyle: TextStyles.w400LightWhite12,
+      backgroundColor: AppColors.darkColor1,
+      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 6),
+      borderRadius: BorderRadius.circular(2),
+      isLeftArrow: false,
+    );
+
+    /// show the popup for specific widget
+    popup.show(
+      widgetKey: key,
     );
   }
 }

@@ -16,9 +16,9 @@ class ModalPopUpSex extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final List<String> genders = [
-      LocaleKeys.fe_male,
-      LocaleKeys.sex_male,
-      LocaleKeys.sex_other,
+      LocaleKeys.female_,
+      LocaleKeys.male_,
+      LocaleKeys.other_,
     ];
     int selectedIndex = genders.indexOf(selectedGender);
 

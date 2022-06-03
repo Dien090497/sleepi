@@ -46,34 +46,37 @@ class _SFTabBarState extends State<SFTabBar>
   Widget build(BuildContext context) {
     return Column(
       children: [
-        TabBar(
-          controller: _tabController,
-          isScrollable: true,
-          tabs: List.generate(
-            widget.texts.length,
-            (i) => Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 8),
-              child: Container(
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(100),
-                    color: _tabController.index == i
-                        ? AppColors.transparent
-                        : AppColors.whiteOpacity5,
-                  ),
-                  padding: widget.padding ??
-                      const EdgeInsets.symmetric(horizontal: 20),
-                  child: Tab(text: widget.texts[i].tr())),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 16.0),
+          child: TabBar(
+            controller: _tabController,
+            isScrollable: true,
+            tabs: List.generate(
+              widget.texts.length,
+              (i) => Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 8),
+                child: Container(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(100),
+                      color: _tabController.index == i
+                          ? AppColors.transparent
+                          : AppColors.whiteOpacity5,
+                    ),
+                    padding: widget.padding ??
+                        const EdgeInsets.symmetric(horizontal: 20),
+                    child: Tab(text: widget.texts[i].tr())),
+              ),
             ),
+            indicator: BoxDecoration(
+              borderRadius: BorderRadius.circular(100),
+              gradient: AppColors.gradientBluePurple,
+            ),
+            labelPadding: EdgeInsets.zero,
+            labelStyle: TextStyles.white1w700size16,
+            unselectedLabelStyle: TextStyles.white1w700size16,
+            labelColor: AppColors.light1,
+            indicatorSize: TabBarIndicatorSize.label,
           ),
-          indicator: BoxDecoration(
-            borderRadius: BorderRadius.circular(100),
-            gradient: AppColors.gradientBluePurple,
-          ),
-          labelPadding: EdgeInsets.zero,
-          labelStyle: TextStyles.white1w700size16,
-          unselectedLabelStyle: TextStyles.white1w700size16,
-          labelColor: AppColors.light1,
-          indicatorSize: TabBarIndicatorSize.label,
         ),
         const SizedBox(height: 8),
         Expanded(

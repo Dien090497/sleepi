@@ -178,6 +178,9 @@ Easy Localization command
 
 ```dart
 flutter pub run easy_localization:generate -S assets/translations -f keys -O lib/l10n -o locale_keys.g.dart
+
+flutter pub run easy_localization:generate -S assets/translations -s en-US.json -f keys -O lib/l10n -o locale_keys.g.dart
+
 ```
 
 ```terminal
