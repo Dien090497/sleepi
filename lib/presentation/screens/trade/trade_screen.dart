@@ -30,7 +30,6 @@ class _TradeScreenState extends State<TradeScreen> {
   Widget build(BuildContext context) {
     return DismissKeyboardWidget(
       child: BackgroundWidget(
-        resizeToAvoidBottomInset: false,
         child: Scaffold(
           resizeToAvoidBottomInset: false,
           backgroundColor: AppColors.transparent,

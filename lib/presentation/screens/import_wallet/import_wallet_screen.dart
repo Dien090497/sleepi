@@ -18,7 +18,6 @@ class ImportWalletScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return DismissKeyboardWidget(
       child: BackgroundWidget(
-        resizeToAvoidBottomInset: false,
         child: Scaffold(
           resizeToAvoidBottomInset: false,
           backgroundColor: AppColors.transparent,

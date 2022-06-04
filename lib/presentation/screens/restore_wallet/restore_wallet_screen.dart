@@ -19,7 +19,6 @@ class RestoreWalletScreen extends StatelessWidget {
 
     return DismissKeyboardWidget(
       child: BackgroundWidget(
-        resizeToAvoidBottomInset: false,
         child: Scaffold(
           resizeToAvoidBottomInset: false,
           backgroundColor: AppColors.transparent,
