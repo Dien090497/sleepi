@@ -1,4 +1,6 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:slee_fi/common/const/const.dart';
 import 'package:slee_fi/common/routes/app_routes.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
@@ -45,57 +47,34 @@ class EnterActivationCodeScreen extends StatelessWidget {
                         labelText: LocaleKeys.please_enter,
                       ),
                       const SizedBox(height: 20),
-                      SFText(keyText: LocaleKeys.please_select_your_language, style: TextStyles.lightGrey14),
-                      const SizedBox(height: 4,),
-                      SizedBox(
-                        width: double.infinity,
-                        height: 48,
-                        child: SFDropDown(
-                            value: "1",
-                            icon: const Icon(Icons.keyboard_arrow_down, size: 24,),
-                            dropdownWidth: MediaQuery.of(context).size.width * 0.8,
-                            dropdownItems: [
-                              DropdownMenuItem(
-                                value: '1',
-                                child: SFText(
-                                  keyText: LocaleKeys.english,
-                                  style: TextStyles.white16,
-                                ),
-                              ),
-                            DropdownMenuItem(
-                              value: '2',
-                              child: SFText(
-                                keyText: LocaleKeys.japanese,
-                                style: TextStyles.white16,
-                              ),
-                            ),
-                            DropdownMenuItem(
-                              value: '3',
-                              child: SFText(
-                                keyText: "Korea",
-                                style: TextStyles.white16,
-                              ),
-                            ),
-                            DropdownMenuItem(
-                              value: '4',
-                              child: SFText(
-                                keyText: "China",
-                                style: TextStyles.white16,
-                              ),
-                            ),
-                            DropdownMenuItem(
-                              value: '5',
-                              child: SFText(
-                                keyText: "Spanish",
-                                style: TextStyles.white16,
-                              ),
-                            ),
-                          ]
-                        )
-                      ),
+                      SFText(
+                          keyText: LocaleKeys.please_select_your_language,
+                          style: TextStyles.lightGrey14),
                       const SizedBox(
-                        height: 20,
+                        height: 4,
                       ),
+                      SizedBox(
+                          width: double.infinity,
+                          height: 48,
+                          child: SFDropDown<String>(
+                              value: context.locale.displayName,
+                              icon: const Icon(
+                                Icons.keyboard_arrow_down,
+                                size: 24,
+                              ),
+                              dropdownWidth:
+                                  MediaQuery.of(context).size.width * 0.8,
+                              dropdownItems: List.generate(
+                                Const.locales.length,
+                                (i) => DropdownMenuItem(
+                                  value: Const.locales[i].displayName,
+                                  child: SFText(
+                                    keyText: Const.locales[i].displayName,
+                                    style: TextStyles.white16,
+                                  ),
+                                ),
+                              ))),
+                      const SizedBox(height: 20),
                       SFButton(
                         text: LocaleKeys.start,
                         color: AppColors.blue,
