@@ -25,11 +25,8 @@ class ActivationCodeScreen extends StatelessWidget {
           child: Column(
             children: const [
               AvailableWidget(),
-              SizedBox(
-                height: 32,
-              ),
+              SizedBox(height: 32),
               Expanded(child: ActivationCodeList()),
-              // ActivationCodeList(),
             ],
           ),
         ),

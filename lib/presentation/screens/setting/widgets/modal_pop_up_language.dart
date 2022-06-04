@@ -32,7 +32,7 @@ class ModalPopUpLanguage extends StatelessWidget {
               children: List.generate(Const.locales.length, (i) {
                 return Center(
                     child: SFText(
-                        keyText: Const.locales[i].languageCode,
+                        keyText: Const.locales[i].displayName,
                         style: TextStyles.bold16LightWhite));
               }),
             ),
