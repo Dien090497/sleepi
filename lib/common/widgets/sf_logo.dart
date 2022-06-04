@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:slee_fi/resources/resources.dart';
 
 class SFLogo extends StatelessWidget {
   const SFLogo({Key? key}) : super(key: key);
@@ -13,7 +14,7 @@ class SFLogo extends StatelessWidget {
       // ),
       // alignment: Alignment.center,
       child: Image.asset(
-        "assets/images/logo.png",
+        Imgs.logo,
         width: 112.14,
         height: 50,
       ),

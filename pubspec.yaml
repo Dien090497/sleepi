@@ -14,7 +14,7 @@ dependencies:
   flutter_localizations:
     sdk: flutter
 
-  cupertino_icons: ^1.0.4
+  cupertino_icons: ^1.0.5
   shared_preferences: ^2.0.15
   flutter_bloc: ^8.0.1
   equatable: ^2.0.3

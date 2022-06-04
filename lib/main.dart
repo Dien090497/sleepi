@@ -2,7 +2,6 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-// import 'package:flutter_translate/flutter_translate.dart';
 import 'package:logger/logger.dart';
 import 'package:slee_fi/app.dart';
 import 'package:slee_fi/common/const/const.dart';
@@ -16,8 +15,8 @@ void main() async {
   ]);
 
   /// Lock in portrait mode only
-  SystemChrome.setPreferredOrientations(
-      [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]).then((_) {
+  SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp])
+      .then((_) {
     BlocOverrides.runZoned(
       () => runApp(EasyLocalization(
         supportedLocales: Const.locales,
