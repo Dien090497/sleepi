@@ -5,6 +5,7 @@ class CustomRadio extends StatefulWidget {
   final int value;
   final int groupValue;
   final void Function(int) onChanged;
+
   const CustomRadio(
       {Key? key,
       required this.value,
@@ -24,14 +25,21 @@ class _CustomRadioState extends State<CustomRadio> {
     return InkWell(
       onTap: () => widget.onChanged(widget.value),
       child: Container(
+        width: 16,
+        height: 16,
+        padding: const EdgeInsets.all(1),
         decoration: BoxDecoration(
             shape: BoxShape.circle,
-            color: selected ? AppColors.transparent : Colors.grey,
-            border: Border.all(color: AppColors.greyBottomNavBar)),
+            color: AppColors.transparent,
+            border: Border.all(
+                width: 1,
+                color: selected
+                    ? AppColors.blue
+                    : AppColors.white.withOpacity(0.1))),
         child: Icon(
           Icons.circle,
           size: 12,
-          color: selected ? Colors.transparent : Colors.grey,
+          color: selected ? AppColors.blue : Colors.transparent,
         ),
       ),
     );
