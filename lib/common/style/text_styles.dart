@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/painting.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
 
 class TextStyles {
@@ -49,6 +50,8 @@ class TextStyles {
   );
   static const lightGrey12 =
       TextStyle(fontSize: 12, color: AppColors.lightGrey);
+  static const lightGrey12W700 =
+      TextStyle(fontSize: 12, color: AppColors.lightGrey, fontWeight: FontWeight.bold);
   static const w400lightGrey12 = TextStyle(
       fontSize: 12, color: AppColors.lightGrey, fontWeight: FontWeight.w400);
   static const w400lightGrey14 = TextStyle(
@@ -178,6 +181,7 @@ class TextStyles {
       fontSize: 24, color: AppColors.yellow, fontWeight: FontWeight.w700);
   static const purple16 = TextStyle(fontSize: 16, color: AppColors.purple);
   static const blue12 = TextStyle(fontSize: 14, color: AppColors.blue);
+  static const blue12W700 = TextStyle(fontSize: 14, color: AppColors.blue, fontWeight: FontWeight.bold);
   static const blue14 = TextStyle(fontSize: 14, color: AppColors.blue);
   static const blue14W700 = TextStyle(
       fontSize: 14, color: AppColors.blue, fontWeight: FontWeight.w700);

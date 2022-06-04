@@ -129,7 +129,7 @@ class ShowMoreTextPopup {
             children: <Widget>[
               // triangle arrow
               Positioned(
-                left: _isLeftArrow ? _showRect.right : _showRect.left,
+                left: _isLeftArrow ? _showRect.right + 5 : _showRect.left,
                 top: _offset.dy + _popupHeight + 30,
                 child: CustomPaint(
                   size: Size(15.0, arrowHeight),
