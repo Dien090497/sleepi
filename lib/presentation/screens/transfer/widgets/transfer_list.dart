@@ -23,7 +23,6 @@ class _TransferListState extends State<TransferList> {
   }
   @override
   Widget build(BuildContext context) {
-    var bottom = MediaQuery.of(context).viewInsets.bottom;
     return Container(
       alignment: Alignment.center,
       decoration: const BoxDecoration(
