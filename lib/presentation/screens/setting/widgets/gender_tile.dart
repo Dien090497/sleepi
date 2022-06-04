@@ -15,7 +15,7 @@ class GenderTile extends StatefulWidget {
 }
 
 class _GenderTileState extends State<GenderTile> {
-  String selectedGender = LocaleKeys.male_;
+  String selectedGender = LocaleKeys.sex_male;
 
   @override
   Widget build(BuildContext context) {

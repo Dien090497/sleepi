@@ -90,8 +90,11 @@ class _MintScreenState extends State<MintScreen> {
                                   height: 60,
                                 ),
                                 const SFLabelValue(
-                                    label: LocaleKeys.token,
-                                    value: '0 SLFT + 0 SLGT'),
+                                  label: LocaleKeys.token_consumption,
+                                  value: '0 SLFT + 0 SLGT',
+                                  styleValue: TextStyles.lightWhite14,
+                                  styleLabel: TextStyles.lightWhite14,
+                                ),
                                 const SizedBox(
                                   height: 24,
                                 ),
@@ -160,6 +163,7 @@ class _MintScreenState extends State<MintScreen> {
                                       children: [
                                         const SFLabelValue(
                                           label: LocaleKeys.common_bed_box,
+                                          styleLabel: TextStyles.lightWhite14,
                                           value: '98%',
                                           colorBorder: Colors.transparent,
                                         ),
@@ -174,7 +178,8 @@ class _MintScreenState extends State<MintScreen> {
                                         ),
                                         const SFLabelValue(
                                           label: LocaleKeys.failure,
-                                          value: '98%',
+                                          styleLabel: TextStyles.lightWhite14,
+                                          value: '2%',
                                           colorBorder: Colors.transparent,
                                         ),
                                       ],
@@ -185,9 +190,10 @@ class _MintScreenState extends State<MintScreen> {
                                     keyText: LocaleKeys.without_case,
                                     style: TextStyles.lightGrey14,
                                   ),
-                                  const SizedBox(height: 12),
+                                  const SizedBox(height: 17),
                                   const SFLabelValue(
                                       label: LocaleKeys.common_bed_box,
+                                      styleLabel: TextStyles.lightWhite14,
                                       value: '100%'),
                                 ],
                               ),

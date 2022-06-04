@@ -389,5 +389,6 @@
   "body_recycle" : "Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit.",
   "common_bed_box" : "Common Bed Box",
   "no_bed": "No Bed",
-  "id": "ID"
+  "id": "ID",
+  "token_consumption": "Token Consumption"
 }
