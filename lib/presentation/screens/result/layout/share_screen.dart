@@ -170,6 +170,7 @@ class _ShareScreenState extends State<ShareScreen> {
                       ],
                     ),
                     const SleepFiQrCode(value: 'SLeepFi'),
+                    const SizedBox(height: 100,),
                   ],
                 ),
               ),
