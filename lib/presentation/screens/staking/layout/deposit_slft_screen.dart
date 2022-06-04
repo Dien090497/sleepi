@@ -22,130 +22,128 @@ class DepositSlftScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return DismissKeyboardWidget(
       child: BackgroundWidget(
-        child: Scaffold(
-          backgroundColor: AppColors.transparent,
-          resizeToAvoidBottomInset: false,
+        resizeToAvoidBottomInset: false,
           appBar: SFAppBar(
             context: context,
             title: LocaleKeys.deposit_slft,
             textStyle: TextStyles.bold18LightWhite,
           ),
-          body: SafeArea(
-              child: Column(
-                children: [
-                  Expanded(
-                    child: ListView(
-                      padding: const EdgeInsets.symmetric(horizontal: 24.0),
-                      children: [
-                        SFCard(
-                          margin: const EdgeInsets.only(top: 16.0),
-                          padding: const EdgeInsets.symmetric(
-                              horizontal: 16.0, vertical: 24.0),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Expanded(
-                                      child: SFText(
-                                        keyText: LocaleKeys.your_slft_in_spending,
-                                        style: TextStyles.lightGrey12,
-                                      )),
-                                  SFText(
-                                    keyText: "xxxx SLFT",
-                                    style: TextStyles.lightGrey12,
-                                  )
-                                ],
-                              ),
-                              const SizedBox(
-                                height: 12.0,
-                              ),
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                children: [
-                                  SFText(
-                                    keyText: LocaleKeys.deposit,
-                                    style: TextStyles.bold18LightWhite,
-                                  ),
-                                  Row(
-                                    crossAxisAlignment: CrossAxisAlignment.center,
-                                    children: [
-                                      const SFIcon(Ics.icGold),
-                                      const SizedBox(
-                                        width: 6,
-                                      ),
-                                      SFText(
-                                        keyText: "XXX",
-                                        style: TextStyles.lightWhite16,
-                                      )
-                                    ],
-                                  ),
-                                ],
-                              ),
-                              const SizedBox(
-                                height: 21,
-                              ),
-                              Row(
-                                children: [
-                                  const Expanded(
-                                      child: SFTextField(
-                                        showLabel: false,
-                                        textInputType: TextInputType.number,
-                                        hintText: LocaleKeys.amount,
-                                      )),
-                                  const SizedBox(
-                                    width: 12,
-                                  ),
-                                  SFButtonOutLined(
-                                      title: LocaleKeys.max,
-                                      textStyle: TextStyles.bold14Blue,
-                                      borderColor: AppColors.blue,
-                                      onPressed: () {}),
-                                ],
-                              )
-                            ],
-                          ),
+        child: SafeArea(
+            child: Column(
+              children: [
+                Expanded(
+                  child: ListView(
+                    padding: const EdgeInsets.symmetric(horizontal: 24.0),
+                    children: [
+                      SFCard(
+                        margin: const EdgeInsets.only(top: 16.0),
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 16.0, vertical: 24.0),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Expanded(
+                                    child: SFText(
+                                      keyText: LocaleKeys.your_slft_in_spending,
+                                      style: TextStyles.lightGrey12,
+                                    )),
+                                SFText(
+                                  keyText: "xxxx SLFT",
+                                  style: TextStyles.lightGrey12,
+                                )
+                              ],
+                            ),
+                            const SizedBox(
+                              height: 12.0,
+                            ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                SFText(
+                                  keyText: LocaleKeys.deposit,
+                                  style: TextStyles.bold18LightWhite,
+                                ),
+                                Row(
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  children: [
+                                    const SFIcon(Ics.icGold),
+                                    const SizedBox(
+                                      width: 6,
+                                    ),
+                                    SFText(
+                                      keyText: "XXX",
+                                      style: TextStyles.lightWhite16,
+                                    )
+                                  ],
+                                ),
+                              ],
+                            ),
+                            const SizedBox(
+                              height: 21,
+                            ),
+                            Row(
+                              children: [
+                                const Expanded(
+                                    child: SFTextField(
+                                      showLabel: false,
+                                      textInputType: TextInputType.number,
+                                      hintText: LocaleKeys.amount,
+                                    )),
+                                const SizedBox(
+                                  width: 12,
+                                ),
+                                SFButtonOutLined(
+                                    title: LocaleKeys.max,
+                                    textStyle: TextStyles.bold14Blue,
+                                    borderColor: AppColors.blue,
+                                    onPressed: () {}),
+                              ],
+                            )
+                          ],
                         ),
-                      ],
-                    ),
+                      ),
+                    ],
                   ),
-                  Padding(
-                    padding:
-                    const EdgeInsets.symmetric(horizontal: 24.0),
-                    child: Column(
-                      children: [
-                        SFButton(
-                          text: LocaleKeys.confirm,
-                          textStyle: TextStyles.w600WhiteSize16,
+                ),
+                Padding(
+                  padding:
+                  const EdgeInsets.symmetric(horizontal: 24.0),
+                  child: Column(
+                    children: [
+                      SFButton(
+                        text: LocaleKeys.confirm,
+                        textStyle: TextStyles.w600WhiteSize16,
+                        height: 48,
+                        width: double.infinity,
+                        color: AppColors.blue,
+                        onPressed: () {
+                          showCustomDialog(context,
+                              children: [const PopUpStaking(message: LocaleKeys.do_you_really_want_to_deposit,)]);
+                        },
+                      ),
+                      const SizedBox(
+                        height: 17,
+                      ),
+                      SizedBox(
                           height: 48,
-                          width: double.infinity,
-                          color: AppColors.blue,
-                          onPressed: () {
-                            showCustomDialog(context,
-                                children: [const PopUpStaking(message: LocaleKeys.do_you_really_want_to_deposit,)]);
-                          },
-                        ),
-                        const SizedBox(
-                          height: 17,
-                        ),
-                        SizedBox(
-                            height: 48,
-                            child: SFButtonOutLined(
-                              title: LocaleKeys.cancel,
-                              textStyle: TextStyles.bold16Blue,
-                              borderColor: AppColors.blue,
-                              onPressed: () {
-                                Navigator.pop(context);
-                              },
-                            )),
-                      ],
-                    ),
+                          child: SFButtonOutLined(
+                            title: LocaleKeys.cancel,
+                            textStyle: TextStyles.bold16Blue,
+                            borderColor: AppColors.blue,
+                            onPressed: () {
+                              Navigator.pop(context);
+                            },
+                          )),
+                    ],
                   ),
-                  const SizedBox(height: 24,),
-                ],
-              )),
-        ),
+                ),
+                const SizedBox(height: 24,),
+              ],
+            )
+        )
       ),
     );
   }

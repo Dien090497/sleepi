@@ -7,11 +7,23 @@ import 'package:slee_fi/l10n/locale_keys.g.dart';
 
 import 'asset_tile.dart';
 
-class TransferList extends StatelessWidget {
+class TransferList extends StatefulWidget {
   const TransferList({Key? key}) : super(key: key);
 
   @override
+  State<TransferList> createState() => _TransferListState();
+}
+
+class _TransferListState extends State<TransferList> {
+
+  @override
+  initState(){
+    super.initState();
+
+  }
+  @override
   Widget build(BuildContext context) {
+    var bottom = MediaQuery.of(context).viewInsets.bottom;
     return Container(
       alignment: Alignment.center,
       decoration: const BoxDecoration(
@@ -19,9 +31,10 @@ class TransferList extends StatelessWidget {
         borderRadius: BorderRadius.only(
             topLeft: Radius.circular(40), topRight: Radius.circular(40)),
       ),
-      width: double.infinity,
+      // width: double.infinity,
       padding: const EdgeInsets.all(12.0),
       child: ListView(
+        physics:const ClampingScrollPhysics(),
         children: [
           SFText(
             keyText: LocaleKeys.asset,
