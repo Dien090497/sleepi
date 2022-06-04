@@ -26,7 +26,6 @@ class MyApp extends StatelessWidget {
             supportedLocales: context.supportedLocales,
             locale: context.locale,
             theme: lightTheme,
-            debugShowCheckedModeBanner: false,
             routes: AppRoutes.routes,
             initialRoute: R.loginSignUp,
           );
