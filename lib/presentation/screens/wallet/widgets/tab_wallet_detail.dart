@@ -19,98 +19,100 @@ class TabWalletDetail extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Column(
-        children: [
-          const SizedBox(
-            height: 32,
-          ),
-          SFText(keyText: LocaleKeys.avax_c_chain, style: TextStyles.bold12Blue),
-          const SizedBox(
-            height: 4.0,
-          ),
-          SFText(keyText: "0 AVAX", style: TextStyles.bold30White),
-          const SizedBox(
-            height: 20.0,
-          ),
-          Container(
-            padding:
-                const EdgeInsets.symmetric(vertical: 6.0, horizontal: 16.0),
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(20.0),
-              color: AppColors.lightWhite.withOpacity(0.05),
+    return SafeArea( 
+      child: SingleChildScrollView(
+        child: Column(
+          children: [
+            const SizedBox(
+              height: 32,
             ),
-            child: SFText(
-                keyText: "Eq7fbho...asdasd.9aj92as",
-                style: TextStyles.lightWhite14),
-          ),
-          const SizedBox(
-            height: 16.0,
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              BoxButtonWidget(
-                onTap: () => SFModalBottomSheet.show(
-                    context, 0.7, const ModalReceiveWallet()),
-                text: LocaleKeys.receive,
-                assetImage: Ics.icDownload,
+            SFText(keyText: LocaleKeys.avax_c_chain, style: TextStyles.bold12Blue),
+            const SizedBox(
+              height: 4.0,
+            ),
+            SFText(keyText: "0 AVAX", style: TextStyles.bold30White),
+            const SizedBox(
+              height: 20.0,
+            ),
+            Container(
+              padding:
+                  const EdgeInsets.symmetric(vertical: 6.0, horizontal: 16.0),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(20.0),
+                color: AppColors.lightWhite.withOpacity(0.05),
               ),
-              BoxButtonWidget(
-                onTap: () => Navigator.pushNamed(context, R.transfer),
-                text: LocaleKeys.to_spending,
-                assetImage: Ics.icRefresh,
-              ),
-              BoxButtonWidget(
-                onTap: () => Navigator.pushNamed(context, R.sendToExternal),
-                text: LocaleKeys.to_external,
-                assetImage: Ics.icArrowUpRight,
-              ),
-              BoxButtonWidget(
-                onTap: () => Navigator.pushNamed(context, R.trade),
-                text: LocaleKeys.trade,
-                assetImage: Ics.icTransfer,
-              ),
-            ],
-          ),
-          const SizedBox(
-            height: 20.0,
-          ),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 12.0),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              child: SFText(
+                  keyText: "Eq7fbho...asdasd.9aj92as",
+                  style: TextStyles.lightWhite14),
+            ),
+            const SizedBox(
+              height: 16.0,
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                const PopupInfoWallet(),
-                ElevatedButton(
-                    onPressed: _launchUrl,
-                    style: ElevatedButton.styleFrom(
-                      padding: const EdgeInsets.fromLTRB(12, 8, 16,8),
-                      primary: AppColors.yellow.withOpacity(0.1),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(100.0),
-                      ),
-                    ),
-                    child: Row(
-                      children: [
-                        const SFIcon(Imgs.binance, width: 24,),
-                        const SizedBox(
-                          width: 8.0,
-                        ),
-                        SFText(
-                          keyText: LocaleKeys.buy,
-                          style: TextStyles.bold14Yellow,
-                        )
-                      ],
-                    )),
+                BoxButtonWidget(
+                  onTap: () => SFModalBottomSheet.show(
+                      context, 0.7, const ModalReceiveWallet()),
+                  text: LocaleKeys.receive,
+                  assetImage: Ics.icDownload,
+                ),
+                BoxButtonWidget(
+                  onTap: () => Navigator.pushNamed(context, R.transfer),
+                  text: LocaleKeys.to_spending,
+                  assetImage: Ics.icRefresh,
+                ),
+                BoxButtonWidget(
+                  onTap: () => Navigator.pushNamed(context, R.sendToExternal),
+                  text: LocaleKeys.to_external,
+                  assetImage: Ics.icArrowUpRight,
+                ),
+                BoxButtonWidget(
+                  onTap: () => Navigator.pushNamed(context, R.trade),
+                  text: LocaleKeys.trade,
+                  assetImage: Ics.icTransfer,
+                ),
               ],
             ),
-          ),
-          const SizedBox(
-            height: 12.0,
-          ),
-          const Expanded(child: WalletDetailList())
-        ],
+            const SizedBox(
+              height: 20.0,
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 12.0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  const PopupInfoWallet(),
+                  ElevatedButton(
+                      onPressed: _launchUrl,
+                      style: ElevatedButton.styleFrom(
+                        padding: const EdgeInsets.fromLTRB(12, 8, 16,8),
+                        primary: AppColors.yellow.withOpacity(0.1),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(100.0),
+                        ),
+                      ),
+                      child: Row(
+                        children: [
+                          const SFIcon(Imgs.binance, width: 24,),
+                          const SizedBox(
+                            width: 8.0,
+                          ),
+                          SFText(
+                            keyText: LocaleKeys.buy,
+                            style: TextStyles.bold14Yellow,
+                          )
+                        ],
+                      )),
+                ],
+              ),
+            ),
+            const SizedBox(
+              height: 12.0,
+            ),
+            const WalletDetailList()
+          ],
+        ),
       ),
     );
   }

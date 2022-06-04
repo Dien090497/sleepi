@@ -19,7 +19,7 @@ class AverageWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.fromLTRB(24, 24, 33, 0),
+      padding: const EdgeInsets.fromLTRB(16, 24, 16, 0),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(16.0),
         color: color,

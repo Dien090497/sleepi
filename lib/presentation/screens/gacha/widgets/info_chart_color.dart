@@ -17,28 +17,30 @@ class InfoChartColor extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 15),
+      padding: const EdgeInsets.symmetric(vertical: 8),
       child: Row(
         children: [
           Container(
-            height: 25,
-            width: 25,
+            height: 16,
+            width: 16,
             decoration: BoxDecoration(
               color: color,
               shape: BoxShape.circle,
             ),
           ),
           const SizedBox(
-            width: 20,
+            width: 8,
           ),
           SFText(
             keyText: typeBed,
             style: TextStyles.lightWhite14,
           ),
-          const Expanded(child: SizedBox()),
+          const SizedBox(
+            width: 8,
+          ),
           SFText(
-            keyText: valueInChart,
-            style: TextStyles.lightWhite14,
+            keyText: "$valueInChart%",
+            style: TextStyles.w400White14,
           )
           //SFText(keyText: ,),
         ],

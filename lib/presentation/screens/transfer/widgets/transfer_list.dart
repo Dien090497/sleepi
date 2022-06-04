@@ -1,14 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
-import 'package:slee_fi/common/widgets/sf_bottom_sheet.dart';
-import 'package:slee_fi/common/widgets/sf_card.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
 import 'package:slee_fi/common/widgets/sf_textfield_text_button.dart';
 import 'package:slee_fi/l10n/locale_keys.g.dart';
-import 'package:slee_fi/resources/resources.dart';
 
-import 'modal_transfer_between.dart';
+import 'asset_tile.dart';
 
 class TransferList extends StatelessWidget {
   const TransferList({Key? key}) : super(key: key);
@@ -33,29 +30,14 @@ class TransferList extends StatelessWidget {
           const SizedBox(
             height: 4.0,
           ),
-          SFCard(
-            onTap: () => SFModalBottomSheet.show(
-                context, 0.6, const ModalTransferBetween()),
-            child: ListTile(
-              leading: Image.asset(Imgs.avax),
-              title: SFText(
-                keyText: LocaleKeys.avax,
-                stringCase: true,
-                style: TextStyles.lightWhite16,
-              ),
-              trailing: const Icon(
-                Icons.chevron_right,
-                size: 32,
-                color: AppColors.lightGrey,
-              ),
-            ),
-          ),
+          const AssetTile(),
           const SizedBox(
             height: 24.0,
           ),
           const SFTextFieldTextButton(
             labelText: LocaleKeys.amount,
             textButton: LocaleKeys.all,
+            textInputType: TextInputType.number,
           ),
           const SizedBox(
             height: 4.0,

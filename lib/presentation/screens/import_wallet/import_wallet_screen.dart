@@ -19,6 +19,7 @@ class ImportWalletScreen extends StatelessWidget {
     return DismissKeyboardWidget(
       child: BackgroundWidget(
         child: Scaffold(
+          resizeToAvoidBottomInset: false,
           backgroundColor: AppColors.transparent,
           appBar: SFAppBar(
             context: context,
@@ -69,6 +70,7 @@ class ImportWalletScreen extends StatelessWidget {
                           context, (r) => r.settings.name == R.wallet);
                     },
                   ),
+                  const SizedBox(height: 24,)
                 ],
               ),
             ),

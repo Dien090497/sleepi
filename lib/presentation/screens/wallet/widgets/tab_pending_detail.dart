@@ -13,7 +13,7 @@ class TabPendingDetail extends StatelessWidget {
       children: [
         SFCard(
           radius: 8,
-          margin: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 12.0),
+          margin: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 3.0),
           padding: const EdgeInsets.symmetric(vertical: 7.0, horizontal: 16.0),
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -61,7 +61,8 @@ class TabPendingDetail extends StatelessWidget {
                   )),
             ],
           ),
-        )
+        ),
+        const SizedBox(height: 100,),
       ],
     );
   }

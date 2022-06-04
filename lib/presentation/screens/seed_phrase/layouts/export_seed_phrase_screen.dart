@@ -134,7 +134,8 @@ class ExportSeedPhraseScreen extends StatelessWidget {
                       context, (r) => r.settings.name == R.wallet);
                 },
               ),
-            )
+            ),
+            const SizedBox(height: 16,),
           ],
         )),
       ),

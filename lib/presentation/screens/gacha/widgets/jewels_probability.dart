@@ -61,30 +61,46 @@ class JewelsProbability extends StatelessWidget {
             const SizedBox(
               height: 30,
             ),
-            InfoChartColor(
-              typeBed: LocaleKeys.common_bed,
-              valueInChart: dataMap[LocaleKeys.common_bed]!.toStringAsFixed(0),
-              color: colorList[0],
+            Row(
+              children: [
+                Expanded(
+                  child: InfoChartColor(
+                    typeBed: LocaleKeys.common_bed,
+                    valueInChart: dataMap[LocaleKeys.common_bed]!.toStringAsFixed(0),
+                    color: colorList[0],
+                  ),
+                ),
+                Expanded(
+                  child: InfoChartColor(
+                    typeBed: LocaleKeys.uncommon_bed,
+                    valueInChart: dataMap[LocaleKeys.uncommon_bed]!.toStringAsFixed(0),
+                    color: colorList[1],
+                  ),
+                ),
+              ],
             ),
-            InfoChartColor(
-              typeBed: LocaleKeys.uncommon_bed,
-              valueInChart: dataMap[LocaleKeys.uncommon_bed]!.toStringAsFixed(0),
-              color: colorList[1],
-            ),
-            InfoChartColor(
-              typeBed: LocaleKeys.rare_bed,
-              valueInChart: dataMap[LocaleKeys.rare_bed]!.toStringAsFixed(0),
-              color: colorList[2],
-            ),
-            InfoChartColor(
-              typeBed: LocaleKeys.epic_bed,
-              valueInChart: dataMap[LocaleKeys.epic_bed]!.toStringAsFixed(0),
-              color: colorList[3],
+            Row(
+              children: [
+                Expanded(
+                  child: InfoChartColor(
+                    typeBed: LocaleKeys.rare_bed,
+                    valueInChart: dataMap[LocaleKeys.rare_bed]!.toStringAsFixed(0),
+                    color: colorList[2],
+                  ),
+                ),
+                Expanded(
+                  child: InfoChartColor(
+                    typeBed: LocaleKeys.epic_bed,
+                    valueInChart: dataMap[LocaleKeys.epic_bed]!.toStringAsFixed(0),
+                    color: colorList[3],
+                  ),
+                ),
+              ],
             ),
             InfoChartColor(
               typeBed: LocaleKeys.legendary_bed,
               valueInChart:
-                  dataMap[LocaleKeys.legendary_bed]!.toStringAsFixed(0),
+              dataMap[LocaleKeys.legendary_bed]!.toStringAsFixed(0),
               color: colorList[4],
             ),
           ],

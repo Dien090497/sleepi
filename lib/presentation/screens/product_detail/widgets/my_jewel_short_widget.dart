@@ -6,11 +6,12 @@ import 'package:slee_fi/common/widgets/sf_text.dart';
 import 'package:slee_fi/presentation/screens/product_detail/widgets/top_left_banner.dart';
 
 class MyJewelsShortWidget extends StatelessWidget {
-  const MyJewelsShortWidget({required this.icon, this.color, Key? key})
+  const MyJewelsShortWidget({required this.icon, this.color, this.increase = true, Key? key})
       : super(key: key);
 
   final String icon;
   final Color? color;
+  final bool increase;
 
   @override
   Widget build(BuildContext context) {
@@ -61,13 +62,13 @@ class MyJewelsShortWidget extends StatelessWidget {
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(50),
                         // border: Border.all(color: AppColors.light4),
-                        color: AppColors.green.withOpacity(0.15)),
+                        color: increase ? AppColors.green.withOpacity(0.15) : AppColors.red.withOpacity(0.15)),
                     padding:
-                        const EdgeInsets.symmetric(vertical: 4, horizontal: 12),
+                        const EdgeInsets.symmetric(vertical: 5, horizontal: 8),
                     alignment: Alignment.center,
                     child: SFText(
-                      keyText: '+ 25%',
-                      style: TextStyles.greenW700size12,
+                      keyText: increase ? '+ 25%' : '- 25%',
+                      style: increase ? TextStyles.greenW700size12: TextStyles.red12W700,
                     ),
                   ),
                 ],
