@@ -4,7 +4,6 @@ import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
 import 'package:slee_fi/common/widgets/background_widget.dart';
 import 'package:slee_fi/common/widgets/sf_button_outlined.dart';
-import 'package:slee_fi/common/widgets/sf_buttons.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
 import 'package:slee_fi/common/widgets/topbar_common.dart';
 import 'package:slee_fi/l10n/locale_keys.g.dart';
@@ -112,18 +111,18 @@ class GachaResultBedScreen extends StatelessWidget {
                           child: Column(
                             children: [
                               const AttributesWidget(),
-                              const SizedBox(height: 16),
-                              Center(
-                                child: SFButton(
-                                  text: LocaleKeys.next,
-                                  textStyle: TextStyles.white16,
-                                  radius: 100,
-                                  gradient: AppColors.gradientBlueButton,
-                                  height: 45,
-                                  width: size.width,
-                                ),
-                              ),
-                              const SizedBox(height: 16),
+                              const SizedBox(height: 60),
+                              // Center(
+                              //   child: SFButton(
+                              //     text: LocaleKeys.next,
+                              //     textStyle: TextStyles.white16,
+                              //     radius: 100,
+                              //     gradient: AppColors.gradientBlueButton,
+                              //     height: 45,
+                              //     width: size.width,
+                              //   ),
+                              // ),
+                              // const SizedBox(height: 16),
                               Center(
                                 child: SFButtonOutLined(
                                   title: LocaleKeys.show_all_result,

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
-import 'package:slee_fi/common/style/text_styles.dart';
 import 'package:slee_fi/common/widgets/sf_icon.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
 
@@ -33,8 +32,8 @@ class TabBarIcon extends TabBar {
                           SFText(
                             keyText: texts[i],
                             style: i == index
-                                ? TextStyles.white16
-                                : TextStyles.purple16,
+                                ? const TextStyle(color: AppColors.white)
+                                : const TextStyle(color: AppColors.purple),
                           ),
                         ],
                       ),
@@ -48,9 +47,9 @@ class TabBarIcon extends TabBar {
 
           indicatorColor: AppColors.purple,
           labelColor: AppColors.white,
-          labelStyle: TextStyles.white16,
+          // labelStyle: const TextStyle(color: AppColors.white),
           unselectedLabelColor: AppColors.purple,
-          unselectedLabelStyle: TextStyles.purple16,
+          // unselectedLabelStyle: const TextStyle(color: AppColors.purple),
           splashBorderRadius: BorderRadius.circular(100),
 
           // padding: const EdgeInsets.symmetric(horizontal: 12),

@@ -18,6 +18,7 @@ class SFTextField extends StatelessWidget {
     this.maxLength,
     this.controller,
     this.onChanged,
+    this.textInputType,
   }) : super(key: key);
 
   final String? labelText;
@@ -31,6 +32,7 @@ class SFTextField extends StatelessWidget {
   final TextEditingController? controller;
   final bool showLabel;
   final ValueChanged<String>? onChanged;
+  final TextInputType? textInputType;
 
   @override
   Widget build(BuildContext context) {
@@ -60,6 +62,7 @@ class SFTextField extends StatelessWidget {
           style: TextStyles.w400White16,
           controller: controller,
           onChanged: onChanged,
+          keyboardType: textInputType,
           decoration: InputDecoration(
             isDense: true,
             // hintText: hintText != null ? translate(hintText!) : null,

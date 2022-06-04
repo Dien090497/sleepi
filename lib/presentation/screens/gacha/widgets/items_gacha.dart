@@ -42,9 +42,9 @@ class ItemsGacha extends StatelessWidget {
         const SizedBox(height: 13),
         SFText(
           keyText: LocaleKeys.uncommon_beds_chance,
-          style: TextStyles.white14WithOpacity,
+          style: TextStyles.lightGrey12,
         ),
-        const SizedBox(height: 10),
+        const SizedBox(height: 2),
         const ChanceWidget(),
         const SizedBox(height: 28),
       ],

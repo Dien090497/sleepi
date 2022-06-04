@@ -319,7 +319,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       color: AppColors.darkColor,
                       borderRadius: BorderRadius.circular(20)),
                   child: SFText(
-                    keyText: '000/160 SLTF',
+                    keyText: '0.00/160 SLTF',
                     style: TextStyles.lightGrey10,
                   ),
                 ),

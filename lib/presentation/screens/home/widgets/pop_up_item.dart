@@ -19,70 +19,73 @@ class PopUpItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        SFText(
-          keyText: "ID",
-          style: TextStyles.white1w700size16,
-        ),
-        const SizedBox(height: 20),
-        SFIcon(icon),
-        const SizedBox(height: 24),
-        SFText(keyText: 'Level 5', style: TextStyles.lightGrey14),
-        const SizedBox(height: 32),
-        SFCard(
-          width: double.infinity,
-          margin: EdgeInsets.zero,
-          padding: const EdgeInsets.symmetric(vertical: 24, horizontal: 18),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
+    return Padding(
+      padding: const EdgeInsets.fromLTRB(16, 0, 16, 16),
+      child: Column(
+        children: [
+          SFText(
+            keyText: "ID",
+            style: TextStyles.white1w700size16,
+          ),
+          const SizedBox(height: 24),
+          SFIcon(icon,),
+          const SizedBox(height: 24),
+          SFText(keyText: 'Level 5', style: TextStyles.lightGrey14),
+          const SizedBox(height: 32),
+          SFCard(
+            width: double.infinity,
+            margin: EdgeInsets.zero,
+            padding: const EdgeInsets.symmetric(vertical: 24, horizontal: 18),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                SFText(
+                  keyText: LocaleKeys.effect,
+                  style: TextStyles.lightWhite16,
+                ),
+                const SizedBox(height: 4),
+                SFText(
+                  keyText: LocaleKeys.displays_message_effect_item,
+                  style: TextStyles.lightGrey14,
+                ),
+              ],
+            ),
+          ),
+          const SizedBox(height: 32),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
-              SFText(
-                keyText: LocaleKeys.effect,
-                style: TextStyles.lightWhite16,
+              Expanded(
+                child: SFButton(
+                    text: LocaleKeys.cancel,
+                    textStyle: TextStyles.w600LightGreySize16,
+                    color: AppColors.light4,
+                    width: double.infinity,
+                    onPressed: () {
+                      onCancel;
+                      Navigator.maybePop(context);
+                    }),
               ),
-              const SizedBox(height: 4),
-              SFText(
-                keyText: LocaleKeys.displays_message_effect_item,
-                style: TextStyles.lightGrey14,
+              const SizedBox(
+                width: 16.0,
+              ),
+              Expanded(
+                child: SFButton(
+                  text: LocaleKeys.confirm,
+                  textStyle: TextStyles.bold14LightWhite,
+                  color: AppColors.blue,
+                  width: double.infinity,
+                  onPressed: () {
+                    onConfirm();
+                    Navigator.pop(context);
+                    showSuccessfulDialog(context);
+                  },
+                ),
               ),
             ],
           ),
-        ),
-        const SizedBox(height: 24),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: [
-            Expanded(
-              child: SFButton(
-                  text: LocaleKeys.cancel,
-                  textStyle: TextStyles.w600LightGreySize16,
-                  color: AppColors.light4,
-                  width: double.infinity,
-                  onPressed: () {
-                    onCancel;
-                    Navigator.maybePop(context);
-                  }),
-            ),
-            const SizedBox(
-              width: 16.0,
-            ),
-            Expanded(
-              child: SFButton(
-                text: LocaleKeys.confirm,
-                textStyle: TextStyles.bold14LightWhite,
-                color: AppColors.blue,
-                width: double.infinity,
-                onPressed: () {
-                  onConfirm();
-                  Navigator.pop(context);
-                  showSuccessfulDialog(context);
-                },
-              ),
-            ),
-          ],
-        ),
-      ],
+        ],
+      ),
     );
   }
 }

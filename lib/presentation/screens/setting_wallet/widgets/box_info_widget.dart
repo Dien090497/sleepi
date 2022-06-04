@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
 import 'package:slee_fi/common/widgets/sf_card.dart';
+import 'package:slee_fi/common/widgets/sf_icon.dart';
 import 'package:slee_fi/common/widgets/sf_list_tile.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
 
@@ -33,7 +33,7 @@ class BoxInfoWidget extends StatelessWidget {
         child: Column(
           children: [
             SFListTile(
-              leading: SvgPicture.asset(urlIcon ?? "", color: AppColors.blue),
+              leading: SFIcon(urlIcon!, color: AppColors.blue,),
               text: title,
               textStyle: textStyle ?? TextStyles.bold16Blue,
               trailing: const Icon(

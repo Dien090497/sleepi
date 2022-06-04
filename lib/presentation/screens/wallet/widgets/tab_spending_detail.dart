@@ -105,7 +105,7 @@ class TabSpendingDetail extends StatelessWidget {
             ],
           ),
           Positioned(
-            bottom: 26,
+            bottom: 24,
             left: 24,
             right: 24,
             child: SFButton(
