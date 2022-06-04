@@ -23,60 +23,62 @@ class ShowSeedPhraseScreen extends StatelessWidget {
           textStyle: TextStyles.bold18LightWhite,
         ),
         body: SafeArea(
-            child: Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: Column(children: [
-            // AvailableWidget(),
-            Expanded(
-                child: SFCard(
-              onTap: () {
-                Navigator.pushNamed(context, R.exportSeedPhrase);
-              },
-              child: ListView.builder(
-                  itemCount: 15,
-                  itemBuilder: (BuildContext context, int index) {
-                    return Column(
-                      children: [
-                        SFListTile(
-                          text: "${index + 1}",
-                          trailing: SFText(
-                            keyText: "-----",
-                            style: TextStyles.lightGrey14,
-                          ),
-                        ),
-                        Divider(
-                          color: AppColors.lightWhite.withOpacity(0.05),
-                          height: 1,
-                        ),
-                      ],
-                    );
-                  }),
-            )),
-            const SizedBox(
-              height: 12.0,
+          child: Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Column(
+              children: [
+                // AvailableWidget(),
+                Expanded(
+                    child: SFCard(
+                      onTap: () {
+                        Navigator.pushNamed(context, R.exportSeedPhrase);
+                      },
+                      child: ListView.builder(
+                          itemCount: 15,
+                          itemBuilder: (BuildContext context, int index) {
+                            return Column(
+                              children: [
+                                SFListTile(
+                                  text: "${index + 1}",
+                                  trailing: SFText(
+                                    keyText: "-----",
+                                    style: TextStyles.lightGrey14,
+                                  ),
+                                ),
+                                Divider(
+                                  color: AppColors.lightWhite.withOpacity(0.05),
+                                  height: 1,
+                                ),
+                              ],
+                            );
+                          }),
+                    )),
+                const SizedBox(
+                  height: 12.0,
+                ),
+                SFText(
+                  keyText: LocaleKeys.displays_message_show_seed_phrase,
+                  style: TextStyles.lightGrey12,
+                ),
+                const SizedBox(
+                  height: 16.0,
+                ),
+                InkWell(
+                  onTap: () {
+                    // Navigator.pushNamed(context, R.exportSeedPhrase);
+                  },
+                  child: SFText(
+                    keyText: LocaleKeys.press_and_hold_to_reveal,
+                    style: TextStyles.bold18White,
+                  ),
+                ),
+                const SizedBox(
+                  height: 16.0,
+                ),
+              ],
             ),
-            SFText(
-              keyText: LocaleKeys.displays_message_show_seed_phrase,
-              style: TextStyles.lightGrey12,
-            ),
-            const SizedBox(
-              height: 16.0,
-            ),
-            InkWell(
-              onTap: () {
-                Navigator.pushNamed(context, R.exportSeedPhrase);
-              },
-              child: SFText(
-                keyText: LocaleKeys.press_and_hold_to_reveal,
-                style: TextStyles.bold18White,
-              ),
-            ),
-            const SizedBox(
-              height: 16.0,
-            ),
-            // ActivationCodeList(),
-          ]),
-        )),
+          ),
+        ),
       ),
     );
   }
