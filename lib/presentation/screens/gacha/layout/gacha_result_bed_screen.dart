@@ -111,7 +111,7 @@ class GachaResultBedScreen extends StatelessWidget {
                           child: Column(
                             children: [
                               const AttributesWidget(),
-                              const SizedBox(height: 32),
+                              const SizedBox(height: 60),
                               // Center(
                               //   child: SFButton(
                               //     text: LocaleKeys.next,

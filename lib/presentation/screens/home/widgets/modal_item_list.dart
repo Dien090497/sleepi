@@ -66,11 +66,12 @@ class ModalItemList extends StatelessWidget {
                     onTap: () {
                       showCustomAlertDialog(context,
                           children: PopUpItem(
-                            icon: Ics.shortBed,
+                            icon: Ics.middleBed,
                             onConfirm: () {},
                           ));
                     },
                     child: MyJewelsShortWidget(
+                      increase:  i == 2 ? false : true,
                       color: AppColors.light4,
                       icon: jewels[i % jewels.length],
                     ),

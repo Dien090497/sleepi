@@ -29,6 +29,7 @@ class SFListTile extends StatelessWidget {
         child: Row(
           children: [
             leading ?? const SizedBox(),
+            const SizedBox(width: 4,),
             Expanded(
               child: SFText(
                 keyText: text ?? "",
