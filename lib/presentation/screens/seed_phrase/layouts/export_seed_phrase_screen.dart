@@ -20,7 +20,7 @@ class ExportSeedPhraseScreen extends StatelessWidget {
         backgroundColor: AppColors.transparent,
         appBar: SFAppBar(
           context: context,
-          title: LocaleKeys.deposit_slft,
+          title: LocaleKeys.export,
           textStyle: TextStyles.bold18LightWhite,
         ),
         body: SafeArea(
@@ -31,8 +31,7 @@ class ExportSeedPhraseScreen extends StatelessWidget {
                 padding: const EdgeInsets.symmetric(horizontal: 24.0),
                 children: [
                   SFText(
-                    keyText:
-                        "Please choose Seed Phrase in order and make sure your Seed Phrase was correct written, once forgotten, it cannot be recovered",
+                    keyText: LocaleKeys.please_choose_seed_phrase,
                     style: TextStyles.w400Red12,
                     textAlign: TextAlign.center,
                   ),
@@ -135,7 +134,9 @@ class ExportSeedPhraseScreen extends StatelessWidget {
                 },
               ),
             ),
-            const SizedBox(height: 16,),
+            const SizedBox(
+              height: 16,
+            ),
           ],
         )),
       ),

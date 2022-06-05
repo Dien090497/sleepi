@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:slee_fi/common/routes/app_routes.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
 import 'package:slee_fi/common/widgets/background_widget.dart';
@@ -30,32 +29,27 @@ class ShowSeedPhraseScreen extends StatelessWidget {
                 // AvailableWidget(),
                 Expanded(
                     child: SFCard(
-                      onTap: () {
-                        Navigator.pushNamed(context, R.exportSeedPhrase);
-                      },
-                      child: ListView.builder(
-                          itemCount: 15,
-                          itemBuilder: (BuildContext context, int index) {
-                            return Column(
-                              children: [
-                                SFListTile(
-                                  text: "${index + 1}",
-                                  trailing: SFText(
-                                    keyText: "-----",
-                                    style: TextStyles.lightGrey14,
-                                  ),
-                                ),
-                                Divider(
-                                  color: AppColors.lightWhite.withOpacity(0.05),
-                                  height: 1,
-                                ),
-                              ],
-                            );
-                          }),
-                    )),
-                const SizedBox(
-                  height: 12.0,
-                ),
+                  child: ListView.builder(
+                      itemCount: 15,
+                      itemBuilder: (BuildContext context, int index) {
+                        return Column(
+                          children: [
+                            SFListTile(
+                              text: "${index + 1}",
+                              trailing: SFText(
+                                keyText: "-----",
+                                style: TextStyles.lightGrey14,
+                              ),
+                            ),
+                            Divider(
+                              color: AppColors.lightWhite.withOpacity(0.05),
+                              height: 1,
+                            ),
+                          ],
+                        );
+                      }),
+                )),
+                const SizedBox(height: 12.0),
                 SFText(
                   keyText: LocaleKeys.displays_message_show_seed_phrase,
                   style: TextStyles.lightGrey12,
