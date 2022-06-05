@@ -10,6 +10,8 @@ class ChartWeekState with _$ChartWeekState {
 
   const factory ChartWeekState.loaded({
     required DatePeriod week,
+    required DateTime firstAllowedDate,
+    required DateTime lastAllowedDate,
   }) = ChartWeekLoaded;
 
   const factory ChartWeekState.error(String msg) = ChartWeekError;

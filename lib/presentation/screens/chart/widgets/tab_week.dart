@@ -5,11 +5,11 @@ import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
 import 'package:slee_fi/common/utils/date_time_utils.dart';
 import 'package:slee_fi/common/widgets/loading_screen.dart';
-import 'package:slee_fi/common/widgets/sf_dialog.dart';
 import 'package:slee_fi/di/injector.dart';
 import 'package:slee_fi/l10n/locale_keys.g.dart';
 import 'package:slee_fi/presentation/blocs/chart/chart_week_cubit.dart';
 import 'package:slee_fi/presentation/blocs/chart/chart_week_state.dart';
+import 'package:slee_fi/presentation/screens/chart/widgets/chart_tab_body.dart';
 import 'package:slee_fi/presentation/screens/chart/widgets/chart_title.dart';
 import 'package:slee_fi/presentation/screens/result/widgets/chart_statistic_share.dart';
 
@@ -32,58 +32,24 @@ class TabWeek extends StatelessWidget {
           final startYear = start.year;
           final endYear = end.year;
 
-          return ListView(
-            padding: const EdgeInsets.fromLTRB(16, 0, 16, 16),
+          return ChartTabBody(
+            picker: ChartWeekPicker(
+              selectedDate: state.week.start,
+              firstAllowedDate: state.firstAllowedDate,
+              lastAllowedDate: state.lastAllowedDate,
+              onNewSelected: (period) {
+                cubit.selectWeek(period);
+              },
+            ),
+            onPreviousTap: () {
+              cubit.previousTap();
+            },
+            onNextTap: () {
+              cubit.nextTap();
+            },
+            text:
+                '${dateTimeUtils.MMMd(start)} ${startYear == endYear ? '' : '$startYear '}~ ${startMonth != endMonth ? dateTimeUtils.MMMd(end) : dateTimeUtils.d(end)}, $endYear',
             children: [
-              GestureDetector(
-                onTap: () {
-                  showCustomDialog(
-                    context,
-                    children: [
-                      ChartWeekPicker(
-                        selectedDate: state.week.start,
-                        firstAllowedDate:
-                            DateTime.now().subtract(const Duration(days: 366)),
-                        lastAllowedDate: DateTime.now(),
-                        onNewSelected: (period) {
-                          cubit.selectWeek(period);
-                        },
-                      )
-                    ],
-                  );
-                },
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    IconButton(
-                      onPressed: () {
-                        cubit.previousTap();
-                      },
-                      padding: EdgeInsets.zero,
-                      iconSize: 20,
-                      splashRadius: 18,
-                      alignment: Alignment.center,
-                      icon: const Icon(Icons.arrow_back_ios,
-                          color: AppColors.lightGrey),
-                    ),
-                    // const Text('April 20th ~ 26th, 2022'),
-                    Text(
-                        '${dateTimeUtils.MMMd(start)} ${startYear == endYear ? '' : '$startYear '}~ ${startMonth != endMonth ? dateTimeUtils.MMMd(end) : dateTimeUtils.d(end)}, $endYear'),
-                    IconButton(
-                      onPressed: () {
-                        cubit.previousTap();
-                      },
-                      padding: EdgeInsets.zero,
-                      iconSize: 20,
-                      splashRadius: 18,
-                      alignment: Alignment.center,
-                      icon: const Icon(Icons.arrow_forward_ios,
-                          color: AppColors.lightGrey),
-                    ),
-                  ],
-                ),
-              ),
-              const SizedBox(height: 8),
               const ChartTitle(
                 title: LocaleKeys.slft,
                 textStyleTitle: TextStyles.bold16LightWhite,

@@ -9,6 +9,8 @@ class ChartDayState with _$ChartDayState {
 
   const factory ChartDayState.loaded({
     required DateTime selectedDate,
+    required DateTime firstAllowedDate,
+    required DateTime lastAllowedDate,
 
 }) = ChartDayLoaded;
 

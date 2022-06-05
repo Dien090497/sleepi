@@ -1,4 +1,3 @@
-import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_date_pickers/flutter_date_pickers.dart';
@@ -7,12 +6,12 @@ import 'package:slee_fi/common/style/text_styles.dart';
 import 'package:slee_fi/common/utils/date_time_utils.dart';
 import 'package:slee_fi/common/widgets/loading_screen.dart';
 import 'package:slee_fi/common/widgets/sf_card.dart';
-import 'package:slee_fi/common/widgets/sf_dialog.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
 import 'package:slee_fi/di/injector.dart';
 import 'package:slee_fi/l10n/locale_keys.g.dart';
 import 'package:slee_fi/presentation/blocs/chart/chart_day_cubit.dart';
 import 'package:slee_fi/presentation/blocs/chart/chart_day_state.dart';
+import 'package:slee_fi/presentation/screens/chart/widgets/chart_tab_body.dart';
 import 'package:slee_fi/presentation/screens/chart/widgets/sleep_score_widget.dart';
 import 'package:slee_fi/presentation/screens/result/widgets/chart_statistic_share.dart';
 
@@ -25,59 +24,23 @@ class TabDay extends StatelessWidget {
       builder: (context, state) {
         if (state is ChartDayLoaded) {
           final cubit = context.read<ChartDayCubit>();
-
-          return ListView(
-            padding: const EdgeInsets.fromLTRB(16, 0, 16, 16),
+          return ChartTabBody(
+            picker: ChartDayPicker(
+              selectedDate: state.selectedDate,
+              firstAllowedDate: state.firstAllowedDate,
+              lastAllowedDate: state.lastAllowedDate,
+              onNewSelected: (day) {
+                cubit.selectDay(day);
+              },
+            ),
+            onPreviousTap: () {
+              cubit.previousTap();
+            },
+            onNextTap: () {
+              cubit.nextTap();
+            },
+            text: getIt<DateTimeUtils>().MMMdyyyy(state.selectedDate),
             children: [
-              GestureDetector(
-                onTap: () {
-                  showCustomDialog(
-                    context,
-                    children: [
-                      ChartDayPicker(
-                        selectedDate: state.selectedDate,
-                        firstAllowedDate:
-                            DateTime.now().subtract(const Duration(days: 60)),
-                        lastAllowedDate: DateTime.now(),
-                        onNewSelected: (day) {
-                          cubit.selectDay(day);
-                        },
-                      )
-                    ],
-                  );
-                },
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    IconButton(
-                      onPressed: () {
-                        cubit.previousTap();
-                      },
-                      padding: EdgeInsets.zero,
-                      iconSize: 20,
-                      splashRadius: 18,
-                      alignment: Alignment.center,
-                      icon: const Icon(Icons.arrow_back_ios,
-                          color: AppColors.lightGrey),
-                    ),
-                    Text(
-                      getIt<DateTimeUtils>()
-                          .MMMdyyyy(state.selectedDate, context.locale),
-                    ),
-                    IconButton(
-                      onPressed: () {
-                        cubit.nextTap();
-                      },
-                      padding: EdgeInsets.zero,
-                      iconSize: 20,
-                      splashRadius: 18,
-                      alignment: Alignment.center,
-                      icon: const Icon(Icons.arrow_forward_ios,
-                          color: AppColors.lightGrey),
-                    ),
-                  ],
-                ),
-              ),
               SFCard(
                 padding:
                     const EdgeInsets.symmetric(horizontal: 24, vertical: 18),

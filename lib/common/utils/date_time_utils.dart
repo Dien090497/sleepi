@@ -26,4 +26,12 @@ class DateTimeUtils {
     final int currentDay = time.weekday;
     return time.add(Duration(days: DateTime.daysPerWeek - currentDay));
   }
+
+  DateTime startOfMonth(DateTime time) {
+    return DateTime(time.year, time.month, 1);
+  }
+
+  DateTime endOfMonth(DateTime time) {
+    return DateTime(time.year, time.month + 1, 0);
+  }
 }
