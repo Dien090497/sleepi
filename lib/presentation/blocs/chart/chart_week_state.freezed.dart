@@ -19,21 +19,21 @@ mixin _$ChartWeekState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function() loaded,
+    required TResult Function(DatePeriod week) loaded,
     required TResult Function(String msg) error,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function()? loaded,
+    TResult Function(DatePeriod week)? loaded,
     TResult Function(String msg)? error,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function()? loaded,
+    TResult Function(DatePeriod week)? loaded,
     TResult Function(String msg)? error,
     required TResult orElse(),
   }) =>
@@ -129,7 +129,7 @@ class _$ChartWeekInitial
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function() loaded,
+    required TResult Function(DatePeriod week) loaded,
     required TResult Function(String msg) error,
   }) {
     return initial();
@@ -139,7 +139,7 @@ class _$ChartWeekInitial
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function()? loaded,
+    TResult Function(DatePeriod week)? loaded,
     TResult Function(String msg)? error,
   }) {
     return initial?.call();
@@ -149,7 +149,7 @@ class _$ChartWeekInitial
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function()? loaded,
+    TResult Function(DatePeriod week)? loaded,
     TResult Function(String msg)? error,
     required TResult orElse(),
   }) {
@@ -203,6 +203,7 @@ abstract class _$$ChartWeekLoadedCopyWith<$Res> {
   factory _$$ChartWeekLoadedCopyWith(
           _$ChartWeekLoaded value, $Res Function(_$ChartWeekLoaded) then) =
       __$$ChartWeekLoadedCopyWithImpl<$Res>;
+  $Res call({DatePeriod week});
 }
 
 /// @nodoc
@@ -215,6 +216,18 @@ class __$$ChartWeekLoadedCopyWithImpl<$Res>
 
   @override
   _$ChartWeekLoaded get _value => super._value as _$ChartWeekLoaded;
+
+  @override
+  $Res call({
+    Object? week = freezed,
+  }) {
+    return _then(_$ChartWeekLoaded(
+      week: week == freezed
+          ? _value.week
+          : week // ignore: cast_nullable_to_non_nullable
+              as DatePeriod,
+    ));
+  }
 }
 
 /// @nodoc
@@ -222,58 +235,71 @@ class __$$ChartWeekLoadedCopyWithImpl<$Res>
 class _$ChartWeekLoaded
     with DiagnosticableTreeMixin
     implements ChartWeekLoaded {
-  const _$ChartWeekLoaded();
+  const _$ChartWeekLoaded({required this.week});
+
+  @override
+  final DatePeriod week;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'ChartWeekState.loaded()';
+    return 'ChartWeekState.loaded(week: $week)';
   }
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty('type', 'ChartWeekState.loaded'));
+    properties
+      ..add(DiagnosticsProperty('type', 'ChartWeekState.loaded'))
+      ..add(DiagnosticsProperty('week', week));
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$ChartWeekLoaded);
+        (other.runtimeType == runtimeType &&
+            other is _$ChartWeekLoaded &&
+            const DeepCollectionEquality().equals(other.week, week));
   }
 
   @override
-  int get hashCode => runtimeType.hashCode;
+  int get hashCode =>
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(week));
+
+  @JsonKey(ignore: true)
+  @override
+  _$$ChartWeekLoadedCopyWith<_$ChartWeekLoaded> get copyWith =>
+      __$$ChartWeekLoadedCopyWithImpl<_$ChartWeekLoaded>(this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function() loaded,
+    required TResult Function(DatePeriod week) loaded,
     required TResult Function(String msg) error,
   }) {
-    return loaded();
+    return loaded(week);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function()? loaded,
+    TResult Function(DatePeriod week)? loaded,
     TResult Function(String msg)? error,
   }) {
-    return loaded?.call();
+    return loaded?.call(week);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function()? loaded,
+    TResult Function(DatePeriod week)? loaded,
     TResult Function(String msg)? error,
     required TResult orElse(),
   }) {
     if (loaded != null) {
-      return loaded();
+      return loaded(week);
     }
     return orElse();
   }
@@ -314,7 +340,13 @@ class _$ChartWeekLoaded
 }
 
 abstract class ChartWeekLoaded implements ChartWeekState {
-  const factory ChartWeekLoaded() = _$ChartWeekLoaded;
+  const factory ChartWeekLoaded({required final DatePeriod week}) =
+      _$ChartWeekLoaded;
+
+  DatePeriod get week => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  _$$ChartWeekLoadedCopyWith<_$ChartWeekLoaded> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -391,7 +423,7 @@ class _$ChartWeekError with DiagnosticableTreeMixin implements ChartWeekError {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function() loaded,
+    required TResult Function(DatePeriod week) loaded,
     required TResult Function(String msg) error,
   }) {
     return error(msg);
@@ -401,7 +433,7 @@ class _$ChartWeekError with DiagnosticableTreeMixin implements ChartWeekError {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function()? loaded,
+    TResult Function(DatePeriod week)? loaded,
     TResult Function(String msg)? error,
   }) {
     return error?.call(msg);
@@ -411,7 +443,7 @@ class _$ChartWeekError with DiagnosticableTreeMixin implements ChartWeekError {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function()? loaded,
+    TResult Function(DatePeriod week)? loaded,
     TResult Function(String msg)? error,
     required TResult orElse(),
   }) {

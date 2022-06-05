@@ -62,7 +62,7 @@ class TabDay extends StatelessWidget {
                     ),
                     Text(
                       getIt<DateTimeUtils>()
-                          .chartTimeFormat(state.selectedDate, context.locale),
+                          .MMMdyyyy(state.selectedDate, context.locale),
                     ),
                     IconButton(
                       onPressed: () {
