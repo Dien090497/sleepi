@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:slee_fi/common/extensions/string_x.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
 import 'package:slee_fi/common/widgets/sf_buttons.dart';
@@ -18,7 +19,7 @@ class ModalReceiveWallet extends StatelessWidget {
         SFText(
           keyText: LocaleKeys.receive,
           style: TextStyles.bold18White,
-          stringCase: true,
+          stringCase: StringCase.upperCase,
           textAlign: TextAlign.center,
         ),
         const SizedBox(

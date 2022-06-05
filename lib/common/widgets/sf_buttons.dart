@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:slee_fi/common/extensions/string_x.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
 
@@ -63,7 +64,7 @@ class SFButton extends StatelessWidget {
               child: SFText(
                 keyText: text,
                 style: textStyle,
-                stringCase: toUpperCase,
+                stringCase: StringCase.upperCase,
               ),
             ),
           ),
@@ -103,7 +104,7 @@ class SFTextButton extends StatelessWidget {
       child: SFText(
         keyText: text,
         style: textStyle,
-        stringCase: toUpperCase,
+        stringCase: StringCase.upperCase,
       ),
     );
   }

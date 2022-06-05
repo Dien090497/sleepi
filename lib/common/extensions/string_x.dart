@@ -27,10 +27,20 @@ extension StringX on String {
         return rc.pascalCase;
       case StringCase.snakeCase:
         return rc.snakeCase;
-      default:
+      case StringCase.upperCase:
+        return toUpperCase();
+      case StringCase.lowerCaseCase:
+        return toLowerCase();
+      case null:
         return this;
     }
   }
 }
 
-enum StringCase { camelCase, pascalCase, snakeCase }
+enum StringCase {
+  upperCase,
+  lowerCaseCase,
+  camelCase,
+  pascalCase,
+  snakeCase,
+}

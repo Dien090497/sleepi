@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:slee_fi/common/extensions/string_x.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/widgets/sf_back_button.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
@@ -29,7 +30,7 @@ class SFAppBar extends AppBar {
           title: SFText(
             keyText: title ?? "",
             style: textStyle,
-            stringCase: toUpperCase,
+            stringCase: StringCase.camelCase,
           ),
           key: key,
         );

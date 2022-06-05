@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:slee_fi/common/extensions/string_x.dart';
 import 'package:slee_fi/common/routes/app_routes.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
@@ -210,7 +211,7 @@ class StakingList extends StatelessWidget {
                       child: SFText(
                     keyText: LocaleKeys.apr,
                     style: TextStyles.lightWhite16,
-                    stringCase: true,
+                    stringCase: StringCase.upperCase,
                   )),
                   SFText(
                     keyText: "X%",

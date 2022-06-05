@@ -27,7 +27,7 @@ class TabDay extends StatelessWidget {
           final cubit = context.read<ChartDayCubit>();
 
           return ListView(
-            padding: const EdgeInsets.all(16),
+            padding: const EdgeInsets.fromLTRB(16, 0, 16, 16),
             children: [
               GestureDetector(
                 onTap: () {

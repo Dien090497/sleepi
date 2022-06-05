@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:slee_fi/common/extensions/string_x.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
 
@@ -34,7 +35,7 @@ class SFListTile extends StatelessWidget {
               child: SFText(
                 keyText: text ?? "",
                 style: textStyle ?? TextStyles.lightWhite14,
-                stringCase: toUpperCase,
+                stringCase: StringCase.upperCase,
               ),
             ),
             trailing ?? const SizedBox(),
@@ -63,7 +64,7 @@ class SFListTile extends StatelessWidget {
 //             title: SFText(
 //               keyText: text ?? "",
 //               style: textStyle ?? TextStyles.lightWhite14,
-//               stringCase: toUpperCase,
+//               stringCase: StringCase.upperCase,
 //             ),
 //             leading: leading,
 //             trailing: trailing,
