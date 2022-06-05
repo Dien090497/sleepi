@@ -224,12 +224,6 @@ abstract class  LocaleKeys {
   static const probability = 'probability';
   static const times_gacha = 'times_gacha';
   static const uncommon_beds_chance = 'uncommon_beds_chance';
-  static const title_repair = 'title_repair';
-  static const button_confirm = 'button_confirm';
-  static const button_cancel = 'button_cancel';
-  static const title_level_up = 'title_level_up';
-  static const title_confirm_transfer = 'title_confirm_transfer';
-  static const title_transfer = 'title_transfer';
   static const repair = 'repair';
   static const level_up = 'level_up';
   static const confirm_transfer = 'confirm_transfer';
