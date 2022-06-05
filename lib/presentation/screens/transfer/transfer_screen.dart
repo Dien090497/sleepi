@@ -17,47 +17,43 @@ class TransferScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BackgroundWidget(
-      child: Scaffold(
-        extendBody: true,
-        resizeToAvoidBottomInset: false,
-        backgroundColor: AppColors.transparent,
-        appBar: SFAppBar(
-          context: context,
-          title: LocaleKeys.transfer,
-          textStyle: TextStyles.bold18LightWhite,
-        ),
-        body: DismissKeyboardWidget(
-          child: SafeArea(
-            child: Stack(
-              children: [
-                Column(
-                  children:  const [
-                    TransferWidget(),
-                    SizedBox(
-                      height: 24,
-                    ),
-                    Expanded(child: TransferList()),
-                  ],
-                ),
-                Align(
-                  alignment: Alignment.bottomCenter,
-                  child: Padding(
-                    padding: const EdgeInsets.fromLTRB(12, 0, 12, 24),
-                    child: SFButton(
-                      text: LocaleKeys.confirm_transfer,
-                      textStyle: TextStyles.w600WhiteSize16,
-                      width: double.infinity,
-                      gradient: AppColors.gradientBlueButton,
-                      onPressed: () {
-                        showCustomAlertDialog(context,
-                            showClosed: false,
-                            children: const PopUpConfirmTransfer());
-                      },
-                    ),
+      // resizeToAvoidBottomInset: false,
+      appBar: SFAppBar(
+        context: context,
+        title: LocaleKeys.transfer,
+        textStyle: TextStyles.bold18LightWhite,
+      ),
+      child: DismissKeyboardWidget(
+        child: SafeArea(
+          child: Stack(
+            children: [
+              Column(
+                children:  const [
+                  TransferWidget(),
+                  SizedBox(
+                    height: 24,
+                  ),
+                  Expanded(child: TransferList()),
+                ],
+              ),
+              Align(
+                alignment: Alignment.bottomCenter,
+                child: Padding(
+                  padding: const EdgeInsets.fromLTRB(12, 0, 12, 24),
+                  child: SFButton(
+                    text: LocaleKeys.confirm_transfer,
+                    textStyle: TextStyles.w600WhiteSize16,
+                    width: double.infinity,
+                    gradient: AppColors.gradientBlueButton,
+                    onPressed: () {
+                      showCustomAlertDialog(context,
+                          showClosed: false,
+                          children: const PopUpConfirmTransfer());
+                    },
                   ),
                 ),
-              ],
-            ),
+              ),
+            ],
           ),
         ),
       ),

@@ -393,5 +393,6 @@ abstract class  LocaleKeys {
   static const id = 'id';
   static const export = 'export';
   static const token_consumption = 'token_consumption';
+  static const buy_now = 'buy_now';
 
 }

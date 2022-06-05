@@ -20,111 +20,120 @@ class InfoIndividualScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final args = ModalRoute.of(context)?.settings.arguments as bool?;
 
-    return BackgroundWidget(
-      child: Scaffold(
-        backgroundColor: Colors.transparent,
-        body: Column(
-          children: [
-            SizedBox(
-              height: MediaQuery.of(context).padding.top,
-            ),
-            const TopBarCommon(iconBack: true),
-            const SizedBox(height: 10),
-            Expanded(
-              child: SingleChildScrollView(
-                physics: const ScrollPhysics(),
-                child: Column(
-                  children: [
-                    Container(
-                      width: 180,
-                      height: 180,
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: 13,
-                      ),
-                      margin: const EdgeInsets.symmetric(
-                        vertical: 24,
-                      ),
-                      decoration: const BoxDecoration(
-                        image: DecorationImage(
-                          image: AssetImage(
-                            "assets/images/borderBed.png",
-                          ),
-                          fit: BoxFit.cover,
-                        ),
-                      ),
-                      child: const SFIcon(Ics.sleep),
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
+    return Stack(
+      children: [
+        BackgroundWidget(
+          child: Scaffold(
+            backgroundColor: Colors.transparent,
+            body: Column(
+              children: [
+                SizedBox(
+                  height: MediaQuery.of(context).padding.top,
+                ),
+                const TopBarCommon(iconBack: true),
+                const SizedBox(height: 10),
+                Expanded(
+                  child: SingleChildScrollView(
+                    physics: const ScrollPhysics(),
+                    child: Column(
                       children: [
-                        SFImageBorder(
-                          icon: Imgs.jewelPurple,
-                          onTap: () {},
-                          radius: 16,
-                          size: const Size(75, 75),
-                          padding: 20,
+                        Container(
+                          width: 180,
+                          height: 180,
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 13,
+                          ),
+                          margin: const EdgeInsets.symmetric(
+                            vertical: 24,
+                          ),
+                          decoration: const BoxDecoration(
+                            image: DecorationImage(
+                              image: AssetImage(
+                                "assets/images/borderBed.png",
+                              ),
+                              fit: BoxFit.cover,
+                            ),
+                          ),
+                          child: const SFIcon(Ics.sleep),
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            SFImageBorder(
+                              icon: Imgs.jewelPurple,
+                              onTap: () {},
+                              radius: 16,
+                              size: const Size(75, 75),
+                              padding: 20,
+                            ),
+                            const SizedBox(
+                              width: 10,
+                            ),
+                            SFImageBorder(
+                              icon: Imgs.jewelGreen,
+                              onTap: () {},
+                              radius: 16,
+                              size: const Size(75, 75),
+                              padding: 20,
+                            ),
+                            const SizedBox(
+                              width: 10,
+                            ),
+                            SFImageBorder(
+                              icon: Imgs.jewelBlue,
+                              onTap: () {},
+                              radius: 16,
+                              size: const Size(75, 75),
+                              padding: 20,
+                            ),
+                            const SizedBox(
+                              width: 10,
+                            ),
+                            SFImageBorder(
+                              icon: Imgs.jewelRed,
+                              onTap: () {},
+                              radius: 16,
+                              size: const Size(75, 75),
+                              padding: 20,
+                            ),
+                          ],
                         ),
                         const SizedBox(
-                          width: 10,
+                          height: 16,
                         ),
-                        SFImageBorder(
-                          icon: Imgs.jewelGreen,
-                          onTap: () {},
-                          radius: 16,
-                          size: const Size(75, 75),
-                          padding: 20,
+                        const BoxInfoWidget(),
+                        const SizedBox(
+                          height: 24,
+                        ),
+                        SFText(
+                          keyText: LocaleKeys.attributes,
+                          style: TextStyles.bold18LightWhite,
                         ),
                         const SizedBox(
-                          width: 10,
+                          height: 15,
                         ),
-                        SFImageBorder(
-                          icon: Imgs.jewelBlue,
-                          onTap: () {},
-                          radius: 16,
-                          size: const Size(75, 75),
-                          padding: 20,
-                        ),
+                        const AttributesWidget(),
                         const SizedBox(
-                          width: 10,
+                          height: 33,
                         ),
-                        SFImageBorder(
-                          icon: Imgs.jewelRed,
-                          onTap: () {},
-                          radius: 16,
-                          size: const Size(75, 75),
-                          padding: 20,
-                        ),
+                        const MintFromWidget(),
                       ],
                     ),
-                    const SizedBox(
-                      height: 16,
-                    ),
-                    const BoxInfoWidget(),
-                    const SizedBox(
-                      height: 24,
-                    ),
-                    SFText(
-                      keyText: LocaleKeys.attributes,
-                      style: TextStyles.bold18LightWhite,
-                    ),
-                    const SizedBox(
-                      height: 15,
-                    ),
-                    const AttributesWidget(),
-                    const SizedBox(
-                      height: 33,
-                    ),
-                    const MintFromWidget(),
-                  ],
+                  ),
                 ),
-              ),
+              ],
             ),
-            args ?? false
-                ? const BottomBarMarketPlaceWidget()
-                : const BottomBarWidget(),
-          ],
+          ),
         ),
-      ),
+        Positioned(
+          bottom: 0,
+          left: 0,
+          right: 0,
+          child: args ?? false
+              ? const BottomBarMarketPlaceWidget()
+              : const BottomBarWidget(),
+        )
+      ],
     );
   }
 }

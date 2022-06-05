@@ -16,7 +16,7 @@ class AttributesWidget extends StatelessWidget {
       ),
       width: double.infinity,
       margin: const EdgeInsets.symmetric(horizontal: 24),
-      padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 30),
+      padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 30),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: const [

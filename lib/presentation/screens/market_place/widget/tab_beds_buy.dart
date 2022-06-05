@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:slee_fi/common/enum/enum.dart';
+import 'package:slee_fi/common/routes/app_routes.dart';
 import 'package:slee_fi/common/widgets/sf_bottom_sheets.dart';
 import 'package:slee_fi/common/widgets/sf_dialog.dart';
 import 'package:slee_fi/l10n/locale_keys.g.dart';
@@ -57,7 +58,10 @@ class TabBedsBuy extends StatelessWidget {
                   GridViewBedItem(
                     beds: beds,
                     price: 10,
-                    onBuyTap: (bed) {},
+                    onBuyTap: (bed) {
+                      Navigator.pushNamed(context, R.nftInfo,
+                          arguments: true);
+                    },
                   ),
                   GridViewBedItem(
                     beds: beds,
@@ -65,7 +69,9 @@ class TabBedsBuy extends StatelessWidget {
                       _showBedDialog(context);
                     },
                     price: 10,
-                    onBuyTap: (bed) {},
+                    onBuyTap: (bed) {
+
+                    },
                   ),
                 ],
               ),

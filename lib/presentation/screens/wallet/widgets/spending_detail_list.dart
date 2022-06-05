@@ -17,7 +17,8 @@ class SpendingDetailList extends StatelessWidget {
         borderRadius: BorderRadius.only(
             topLeft: Radius.circular(40), topRight: Radius.circular(40)),
       ),
-      width: double.infinity,
+      width: MediaQuery.of(context).size.width,
+      height: MediaQuery.of(context).size.height * 0.65,
       padding: const EdgeInsets.only(top: 20),
       child: DefaultTabController(
         length: 2,
@@ -32,7 +33,7 @@ class SpendingDetailList extends StatelessWidget {
             ),
             const SizedBox(height: 20,),
             const Expanded(
-              child: TabBarView(
+              child:  TabBarView(
                 children: [TabPendingDetail(), TabHistoryDetail()],
               ),
             ),

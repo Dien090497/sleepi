@@ -9,60 +9,67 @@ class TabPendingDetail extends StatelessWidget {
   const TabPendingDetail({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    return ListView(
+    return Column(
       children: [
-        SFCard(
-          radius: 8,
-          margin: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 3.0),
-          padding: const EdgeInsets.symmetric(vertical: 7.0, horizontal: 16.0),
-          child: Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              const Padding(
-                padding: EdgeInsets.only(right: 8.0),
-                child: Icon(
-                  CupertinoIcons.cloud_download,
-                  color: AppColors.blue,
-                ),
-              ),
-              Expanded(
-                  child: Column(
+        Expanded(
+          child: ListView.builder(
+              itemCount: 12,
+              shrinkWrap: true,
+              padding: const EdgeInsets.symmetric(horizontal: 24.0),
+              itemBuilder: (BuildContext context, int index) {
+                return  SFCard(
+                  radius: 8,
+                  padding: const EdgeInsets.symmetric(vertical: 12.0, horizontal: 16.0),
+                  child: Row(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      SFText(
-                        keyText: LocaleKeys.confirm,
-                        style: TextStyles.bold16Blue,
+                      const Padding(
+                        padding: EdgeInsets.only(right: 8.0),
+                        child: Icon(
+                          CupertinoIcons.cloud_download,
+                          color: AppColors.blue,
+                        ),
                       ),
-                      const SizedBox(
-                        height: 4.0,
-                      ),
-                      SFText(
-                        keyText: "27/04/2022  14:08",
-                        style: TextStyles.lightGrey14,
-                      ),
+                      Expanded(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              SFText(
+                                keyText: LocaleKeys.confirm,
+                                style: TextStyles.bold16Blue,
+                              ),
+                              const SizedBox(
+                                height: 4.0,
+                              ),
+                              SFText(
+                                keyText: "27/04/2022  14:08",
+                                style: TextStyles.lightGrey14,
+                              ),
+                            ],
+                          )),
+                      Expanded(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.end,
+                            children: [
+                              SFText(
+                                keyText: "+1 NFT",
+                                style: TextStyles.bold16Blue,
+                              ),
+                              const SizedBox(
+                                height: 4.0,
+                              ),
+                              SFText(
+                                keyText: "53LqDpU...wihRe3",
+                                style: TextStyles.lightGrey14,
+                              ),
+                            ],
+                          )),
                     ],
-                  )),
-              Expanded(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.end,
-                    children: [
-                      SFText(
-                        keyText: "+1 NFT",
-                        style: TextStyles.bold16Blue,
-                      ),
-                      const SizedBox(
-                        height: 4.0,
-                      ),
-                      SFText(
-                        keyText: "53LqDpU...wihRe3",
-                        style: TextStyles.lightGrey14,
-                      ),
-                    ],
-                  )),
-            ],
-          ),
+                  ),
+                );
+              }),
         ),
-        const SizedBox(height: 100,),
+         const SizedBox(height: 75,)
       ],
     );
   }
