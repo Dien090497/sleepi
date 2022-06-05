@@ -81,9 +81,10 @@ abstract class  LocaleKeys {
   static const vibration = 'vibration';
   static const snooze = 'snooze';
   static const volume = 'volume';
-  static const fe_male = 'fe_male';
-  static const sex_male = 'sex_male';
-  static const sex_other = 'sex_other';
+  static const female_ = 'female_';
+  static const male_ = 'male_';
+  static const other_ = 'other_';
+  static const done = 'done';
   static const used = 'used';
   static const available = 'available';
   static const total = 'total';
@@ -151,7 +152,6 @@ abstract class  LocaleKeys {
   static const token_and_sleep = 'token_and_sleep';
   static const the_closer_user_are_to_the_time = 'the_closer_user_are_to_the_time';
   static const to_maximize_the_number_of_tokens = 'to_maximize_the_number_of_tokens';
-  static const done = 'done';
   static const tap_and_hold_to_stop = 'tap_and_hold_to_stop';
   static const token_to_be_earned = 'token_to_be_earned';
   static const minting_discount = 'minting_discount';
@@ -253,6 +253,8 @@ abstract class  LocaleKeys {
   static const result = 'result';
   static const next = 'next';
   static const show_all_result = 'show_all_result';
+  static const all_result = 'all_result';
+  static const return_ = 'return_';
   static const special_gacha = 'special_gacha';
   static const displays_the_nft_discharged_from_the_gacha = 'displays_the_nft_discharged_from_the_gacha';
   static const spending = 'spending';

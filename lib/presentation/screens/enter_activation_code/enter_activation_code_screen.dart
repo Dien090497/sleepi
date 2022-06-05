@@ -28,9 +28,10 @@ class EnterActivationCodeScreen extends StatelessWidget {
             textStyle: TextStyles.bold18LightWhite),
         child: SafeArea(
           child: ListView(
+            physics: const ClampingScrollPhysics(),
             padding: const EdgeInsets.symmetric(horizontal: 16),
             children: [
-              const SizedBox(height: 90.0),
+               SizedBox(height: MediaQuery.of(context).size.height * 0.15),
               LoginBox(
                 padding: const EdgeInsets.fromLTRB(28, 24, 28, 0),
                 child: Column(
@@ -85,6 +86,7 @@ class EnterActivationCodeScreen extends StatelessWidget {
                   ],
                 ),
               ),
+              const SizedBox(height: 40),
             ],
           ),
         ),
