@@ -1,8 +1,10 @@
-### 1. Jira : 
-[Name](link)
-### 2. CheckList
+## 1. Jira : [Name](link)
+## 2. CheckList
+### **Important**
+- [ ] **_Test lại trường hợp success_**
+- [ ] **_Show error trường hợp có lỗi xảy ra_**
+- [ ] **_Check case user có thể ấn button liên tục_**
 - [ ] Dispose Controller
-- [ ] Quản lý UI bằng Bloc hoặc Cubit
 - [ ] Sử dụng, tạo Common widgets
 - [ ] Fix analyze
-- [ ] Translations thêm vào đủ 8 file ngôn ngữ
+- [ ] Thêm translation vào file en_US.json
