@@ -37,9 +37,8 @@ class TabDay extends StatelessWidget {
                       ChartDayPicker(
                         selectedDate: state.selectedDate,
                         firstAllowedDate:
-                            DateTime.now().subtract(const Duration(days: 45)),
-                        lastAllowedDate:
-                            DateTime.now().add(const Duration(days: 45)),
+                            DateTime.now().subtract(const Duration(days: 60)),
+                        lastAllowedDate: DateTime.now(),
                         onNewSelected: (day) {
                           cubit.selectDay(day);
                         },
@@ -50,20 +49,35 @@ class TabDay extends StatelessWidget {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    const Icon(Icons.arrow_back_ios,
-                        size: 16, color: AppColors.lightGrey),
-                    const SizedBox(width: 12),
+                    IconButton(
+                      onPressed: () {
+                        cubit.previousTap();
+                      },
+                      padding: EdgeInsets.zero,
+                      iconSize: 20,
+                      splashRadius: 18,
+                      alignment: Alignment.center,
+                      icon: const Icon(Icons.arrow_back_ios,
+                          color: AppColors.lightGrey),
+                    ),
                     Text(
                       getIt<DateTimeUtils>()
                           .chartTimeFormat(state.selectedDate, context.locale),
                     ),
-                    const SizedBox(width: 12),
-                    const Icon(Icons.arrow_forward_ios,
-                        size: 16, color: AppColors.lightGrey),
+                    IconButton(
+                      onPressed: () {
+                        cubit.nextTap();
+                      },
+                      padding: EdgeInsets.zero,
+                      iconSize: 20,
+                      splashRadius: 18,
+                      alignment: Alignment.center,
+                      icon: const Icon(Icons.arrow_forward_ios,
+                          color: AppColors.lightGrey),
+                    ),
                   ],
                 ),
               ),
-              const SizedBox(height: 16),
               SFCard(
                 padding:
                     const EdgeInsets.symmetric(horizontal: 24, vertical: 18),
@@ -147,7 +161,6 @@ class ChartDayPicker extends StatelessWidget {
       prevIcon: const Icon(Icons.chevron_left, color: AppColors.white),
       selectedPeriodEndTextStyle: TextStyles.white14,
       selectedDateStyle: TextStyles.white14,
-      currentDateStyle: TextStyles.white14,
       defaultDateTextStyle: TextStyles.lightGrey14,
       selectedPeriodMiddleTextStyle: TextStyles.white14,
       selectedPeriodStartTextStyle: TextStyles.white14,

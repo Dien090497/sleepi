@@ -10,8 +10,26 @@ class ChartDayCubit extends Cubit<ChartDayState> {
 
   void selectDay(DateTime day) {
     final currentState = state;
-    if(currentState is ChartDayLoaded) {
+    if (currentState is ChartDayLoaded) {
       emit(currentState.copyWith(selectedDate: day));
+    }
+  }
+
+  void previousTap() {
+    final currentState = state;
+    if (currentState is ChartDayLoaded) {
+      emit(currentState.copyWith(
+          selectedDate:
+              currentState.selectedDate.subtract(const Duration(days: 1))));
+    }
+  }
+
+  void nextTap() {
+    final currentState = state;
+    if (currentState is ChartDayLoaded) {
+      emit(currentState.copyWith(
+          selectedDate:
+              currentState.selectedDate.add(const Duration(days: 1))));
     }
   }
 }
