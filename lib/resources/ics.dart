@@ -5,6 +5,7 @@ class Ics {
 
   static const String addBed = 'assets/icons/add_bed.svg';
   static const String arrowLeft = 'assets/icons/arrow_left.svg';
+  static const String bed3d = 'assets/icons/bed_3d.svg';
   static const String bedBunk = 'assets/icons/bed_bunk.svg';
   static const String bedsCouple = 'assets/icons/beds_couple.svg';
   static const String chart = 'assets/icons/chart.svg';
@@ -61,6 +62,7 @@ class Ics {
   static const List<String> values = [
     addBed,
     arrowLeft,
+    bed3d,
     bedBunk,
     bedsCouple,
     chart,
