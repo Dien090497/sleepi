@@ -33,12 +33,13 @@ class ChartWeekCubit extends Cubit<ChartWeekState> {
       final end = currentState.week.end;
       final nextWeekFirstDate =
           start.add(const Duration(days: DateTime.daysPerWeek));
-      // if (nextWeekFirstDate.day > currentState.lastAllowedDate.day) {
-      // } else {
-        final nextWeek = DatePeriod(nextWeekFirstDate,
-            end.add(const Duration(days: DateTime.daysPerWeek)));
+      final nextWeekLastDate =
+          end.add(const Duration(days: DateTime.daysPerWeek));
+      if (nextWeekFirstDate.isBefore(currentState.lastAllowedDate) &&
+          nextWeekLastDate.isBefore(currentState.lastAllowedDate)) {
+        final nextWeek = DatePeriod(nextWeekFirstDate, nextWeekLastDate);
         emit(currentState.copyWith(week: nextWeek));
-      // }
+      } else {}
     }
   }
 
@@ -48,13 +49,14 @@ class ChartWeekCubit extends Cubit<ChartWeekState> {
       final start = currentState.week.start;
       final end = currentState.week.end;
       final prevWeekFirstDate =
-          start.add(const Duration(days: DateTime.daysPerWeek));
-      if (prevWeekFirstDate.isBefore(currentState.firstAllowedDate)) {
-        final nextWeek = DatePeriod(prevWeekFirstDate,
-            end.subtract(const Duration(days: DateTime.daysPerWeek)));
+          start.subtract(const Duration(days: DateTime.daysPerWeek));
+      final prevWeekLastDate =
+          end.subtract(const Duration(days: DateTime.daysPerWeek));
+      if (prevWeekFirstDate.isAfter(currentState.firstAllowedDate) &&
+          prevWeekLastDate.isAfter(currentState.firstAllowedDate)) {
+        final nextWeek = DatePeriod(prevWeekFirstDate, prevWeekLastDate);
         emit(currentState.copyWith(week: nextWeek));
-      } else {
-      }
+      } else {}
     }
   }
 }

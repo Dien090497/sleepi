@@ -44,7 +44,7 @@ class TabMonth extends StatelessWidget {
               cubit.nextTap();
             },
             text:
-                '${dateUtils.MMMd(dateUtils.startOfMonth(date))} ~ ${dateUtils.MMMd(dateUtils.endOfMonth(date))}, ${date.year}',
+                '${dateUtils.MMMdo(dateUtils.startOfMonth(date))} ~ ${dateUtils.MMMdo(dateUtils.endOfMonth(date))}, ${date.year}',
             children: [
               const ChartTitle(
                 title: LocaleKeys.slft,

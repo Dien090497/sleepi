@@ -1,20 +1,19 @@
-import 'package:easy_localization/easy_localization.dart';
-import 'package:flutter/material.dart';
 import 'package:injectable/injectable.dart';
+import 'package:jiffy/jiffy.dart';
 
 // ignore_for_file: non_constant_identifier_names
 @Injectable()
 class DateTimeUtils {
-  String MMMdyyyy(DateTime time, [Locale? locale]) {
-    return DateFormat("MMM d, yyyy", locale?.languageCode ?? 'en').format(time);
+  String MMMdyyyy(DateTime time) {
+    return Jiffy(time).format("MMM do, yyyy");
   }
 
-  String MMMd(DateTime time, [Locale? locale]) {
-    return DateFormat("MMM d", locale?.languageCode ?? 'en').format(time);
+  String MMMdo(DateTime time) {
+    return Jiffy(time).format("MMM do");
   }
 
-  String d(DateTime time, [Locale? locale]) {
-    return DateFormat("d", locale?.languageCode ?? 'en').format(time);
+  String doFormat(DateTime time) {
+    return Jiffy(time).format("do");
   }
 
   DateTime startOfWeek(DateTime time) {
@@ -33,5 +32,13 @@ class DateTimeUtils {
 
   DateTime endOfMonth(DateTime time) {
     return DateTime(time.year, time.month + 1, 0);
+  }
+
+  DateTime addMonth(DateTime time, int months) {
+    return Jiffy(time).add(months: months).dateTime;
+  }
+
+  DateTime subtractMonth(DateTime time, int months) {
+    return Jiffy(time).subtract(months: months).dateTime;
   }
 }

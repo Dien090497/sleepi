@@ -6,7 +6,7 @@ import 'package:slee_fi/presentation/blocs/chart/chart_month_state.dart';
 class ChartMonthCubit extends Cubit<ChartMonthState> {
   ChartMonthCubit() : super(const ChartMonthState.initial());
 
-  final dateTimeUtils = getIt<DateTimeUtils>();
+  final _dateUtils = getIt<DateTimeUtils>();
 
   void init() async {
     final now = DateTime.now();
@@ -28,12 +28,20 @@ class ChartMonthCubit extends Cubit<ChartMonthState> {
   void nextTap() async {
     final currentState = state;
     if (currentState is ChartMonthLoaded) {
-      // emit(currentState.copyWith(selectedDate: month));
+      final nextMonth = _dateUtils.addMonth(currentState.selectedDate, 1);
+      if (nextMonth.isBefore(currentState.lastAllowedDate)) {
+        emit(currentState.copyWith(selectedDate: nextMonth));
+      } else {}
     }
   }
 
   void previousTap() async {
     final currentState = state;
-    if (currentState is ChartMonthLoaded) {}
+    if (currentState is ChartMonthLoaded) {
+      final prevMonth = _dateUtils.subtractMonth(currentState.selectedDate, 1);
+      if (prevMonth.isAfter(currentState.firstAllowedDate)) {
+        emit(currentState.copyWith(selectedDate: prevMonth));
+      } else {}
+    }
   }
 }

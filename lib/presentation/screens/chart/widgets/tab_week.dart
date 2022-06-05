@@ -48,7 +48,7 @@ class TabWeek extends StatelessWidget {
               cubit.nextTap();
             },
             text:
-                '${dateTimeUtils.MMMd(start)} ${startYear == endYear ? '' : '$startYear '}~ ${startMonth != endMonth ? dateTimeUtils.MMMd(end) : dateTimeUtils.d(end)}, $endYear',
+                '${dateTimeUtils.MMMdo(start)} ${startYear == endYear ? '' : '$startYear '}~ ${startMonth != endMonth ? dateTimeUtils.MMMdo(end) : dateTimeUtils.doFormat(end)}, $endYear',
             children: [
               const ChartTitle(
                 title: LocaleKeys.slft,
