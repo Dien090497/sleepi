@@ -136,7 +136,7 @@ class CategoryHeader extends StatelessWidget {
                       Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 16.0),
                         child: SFText(
-                          keyText: LocaleKeys.sleep_duration_enter,
+                          keyText: LocaleKeys.sleep_duration,
                           style: TextStyles.green14,
                         ),
                       ),

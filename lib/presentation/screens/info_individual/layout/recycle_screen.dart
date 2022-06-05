@@ -174,7 +174,7 @@ class RecycleScreen extends StatelessWidget {
                             Align(
                               alignment: Alignment.centerLeft,
                               child: SFText(
-                                keyText: LocaleKeys.what_recycle,
+                                keyText: LocaleKeys.what_recycling,
                                 style: TextStyles.lightGrey14,
                               ),
                             ),

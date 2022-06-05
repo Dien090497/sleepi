@@ -263,7 +263,7 @@ class _Detail extends StatelessWidget {
               Expanded(
                 flex: 3,
                 child: SFText(
-                    keyText: LocaleKeys.class_sf, style: TextStyles.lightGrey14),
+                    keyText: LocaleKeys.class_, style: TextStyles.lightGrey14),
               ),
               Expanded(
                 child: SFText(

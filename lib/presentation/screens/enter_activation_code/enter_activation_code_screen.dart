@@ -24,7 +24,7 @@ class EnterActivationCodeScreen extends StatelessWidget {
       child: BackgroundWidget(
         appBar: SFAppBar(
             context: context,
-            title: LocaleKeys.activation_code_language_lowercase,
+            title: LocaleKeys.activation_code_language,
             textStyle: TextStyles.bold18LightWhite),
         child: SafeArea(
           child: ListView(
