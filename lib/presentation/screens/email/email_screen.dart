@@ -41,71 +41,69 @@ class _EmailScreenState extends State<EmailScreen> {
   Widget build(BuildContext context) {
     return DismissKeyboardWidget(
       child: BackgroundWidget(
-        child: Scaffold(
-          backgroundColor: AppColors.transparent,
-          appBar: SFAppBar(
-            context: context,
-            title: LocaleKeys.email,
-            textStyle: TextStyles.bold18LightWhite,
-          ),
-          body: SafeArea(
-            child: Padding(
-              padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 23),
-              child: Column(
-                children: [
-                  const SizedBox(height: 24),
-                  Expanded(
-                    child: ListView(
-                      children: [
-                        SFCard(
-                          padding: const EdgeInsets.symmetric(
-                              horizontal: 16, vertical: 24),
-                          child: Column(
-                            children:  [
-                              SFTextField(
-                                  onChanged: (email) {
-                                    _email = email;
-                                    validateButton();
-                                  },
-                                  labelText: LocaleKeys.new_email),
-                              const SizedBox(
-                                height: 20,
-                              ),
-                              SFTextFieldTextButton(
-                                valueChanged: (code) {
-                                  _code = code;
+        resizeToAvoidBottomInset: false,
+        appBar: SFAppBar(
+          context: context,
+          title: LocaleKeys.email,
+          textStyle: TextStyles.bold18LightWhite,
+        ),
+        child: SafeArea(
+          child: Padding(
+            padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 23),
+            child: Column(
+              children: [
+                const SizedBox(height: 24),
+                Expanded(
+                  child: ListView(
+                    children: [
+                      SFCard(
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 16, vertical: 24),
+                        child: Column(
+                          children:  [
+                            SFTextField(
+                                onChanged: (email) {
+                                  _email = email;
                                   validateButton();
                                 },
-                                labelText: LocaleKeys.verification_code,
-                              ),
-                              const SizedBox(
-                                height: 20,
-                              ),
-                              SFTextFieldPassword(
-                                valueChanged: (pw) {
-                                  _password = pw;
-                                  validateButton();
-                                },
-                                labelText: LocaleKeys.password,
+                                labelText: LocaleKeys.new_email),
+                            const SizedBox(
+                              height: 20,
+                            ),
+                            SFTextFieldTextButton(
+                              valueChanged: (code) {
+                                _code = code;
+                                validateButton();
+                              },
+                              labelText: LocaleKeys.verification_code,
+                            ),
+                            const SizedBox(
+                              height: 20,
+                            ),
+                            SFTextFieldPassword(
+                              valueChanged: (pw) {
+                                _password = pw;
+                                validateButton();
+                              },
+                              labelText: LocaleKeys.password,
 
-                              ),
-                            ],
-                          ),
+                            ),
+                          ],
                         ),
-                      ],
-                    ),
+                      ),
+                    ],
                   ),
-                    SFButton(
-                    text: LocaleKeys.save,
-                    textStyle: TextStyles.w600WhiteSize16,
-                    gradient: AppColors.gradientBlueButton,
-                    width: double.infinity,
-                    disabled: isDisabled,
-                    onPressed: () {},
-                  ),
-                  const SizedBox(height: 24,),
-                ],
-              ),
+                ),
+                SFButton(
+                  text: LocaleKeys.save,
+                  textStyle: TextStyles.w600WhiteSize16,
+                  gradient: AppColors.gradientBlueButton,
+                  width: double.infinity,
+                  disabled: isDisabled,
+                  onPressed: () {},
+                ),
+                const SizedBox(height: 24,),
+              ],
             ),
           ),
         ),

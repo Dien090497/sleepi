@@ -19,90 +19,92 @@ class TabSpendingDetail extends StatelessWidget {
     return SafeArea(
       child: Stack(
         children: [
-          Column(
-            children: [
-              const SizedBox(
-                height: 19.0,
-              ),
-              const PopupInfoSpending(),
-              const SizedBox(
-                height: 12.0,
-              ),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 24.0),
-                child: Column(
-                  children: [
-                    SFCard(
-                      // onTap: () => Navigator.pushNamed(context, R.staking),
-                      margin: const EdgeInsets.only(top: 8),
-                      child: ListTile(
-                        leading: Image.asset(Imgs.slft),
-                        minLeadingWidth: 12,
-                        title: SFText(
-                            keyText: LocaleKeys.slft,
-                            style: TextStyles.lightWhite16,
-                            stringCase: true),
-                        trailing: SFText(
-                          keyText: "0",
-                          style: TextStyles.lightWhite16,
-                        ),
-                      ),
-                    ),
-                    SFCard(
-                      margin: const EdgeInsets.only(top: 8),
-                      child: ListTile(
-                        leading: Image.asset(Imgs.slgt),
-                        minLeadingWidth: 12,
-                        title: SFText(
-                            keyText: LocaleKeys.slgt,
-                            style: TextStyles.lightWhite16,
-                            stringCase: true),
-                        trailing: SFText(
-                          keyText: "0",
-                          style: TextStyles.lightWhite16,
-                        ),
-                      ),
-                    ),
-                    SFCard(
-                      margin: const EdgeInsets.only(top: 8),
-                      child: ListTile(
-                        leading: Image.asset(Imgs.avax),
-                        minLeadingWidth: 12,
-                        title: SFText(
-                          keyText: LocaleKeys.avax,
-                          style: TextStyles.lightWhite16,
-                          stringCase: true,
-                        ),
-                        trailing: SFText(
-                          keyText: "0",
-                          style: TextStyles.lightWhite16,
-                        ),
-                      ),
-                    ),
-                  ],
+          SingleChildScrollView(
+            child: Column(
+              children: [
+                const SizedBox(
+                  height: 19.0,
                 ),
-              ),
-              const SizedBox(
-                height: 18.0,
-              ),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 24),
-                child: SizedBox(
-                    height: 48,
-                    child: SFButtonOutLined(
-                      title: LocaleKeys.stake,
-                      textStyle: TextStyles.bold16Blue,
-                      borderColor: AppColors.blue,
-                      onPressed: () {
-                        Navigator.pushNamed(context, R.staking);
-                      },
-                    )),
-              ),
-              const SizedBox(
-                height: 25.0,
-              ),
-              const Expanded(child: SpendingDetailList()),
-            ],
+                const PopupInfoSpending(),
+                const SizedBox(
+                  height: 12.0,
+                ),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 24.0),
+                  child: Column(
+                    children: [
+                      SFCard(
+                        // onTap: () => Navigator.pushNamed(context, R.staking),
+                        margin: const EdgeInsets.only(top: 8),
+                        child: ListTile(
+                          leading: Image.asset(Imgs.slft),
+                          minLeadingWidth: 12,
+                          title: SFText(
+                              keyText: LocaleKeys.slft,
+                              style: TextStyles.lightWhite16,
+                              stringCase: true),
+                          trailing: SFText(
+                            keyText: "0",
+                            style: TextStyles.lightWhite16,
+                          ),
+                        ),
+                      ),
+                      SFCard(
+                        margin: const EdgeInsets.only(top: 8),
+                        child: ListTile(
+                          leading: Image.asset(Imgs.slgt),
+                          minLeadingWidth: 12,
+                          title: SFText(
+                              keyText: LocaleKeys.slgt,
+                              style: TextStyles.lightWhite16,
+                              stringCase: true),
+                          trailing: SFText(
+                            keyText: "0",
+                            style: TextStyles.lightWhite16,
+                          ),
+                        ),
+                      ),
+                      SFCard(
+                        margin: const EdgeInsets.only(top: 8),
+                        child: ListTile(
+                          leading: Image.asset(Imgs.avax),
+                          minLeadingWidth: 12,
+                          title: SFText(
+                            keyText: LocaleKeys.avax,
+                            style: TextStyles.lightWhite16,
+                            stringCase: true,
+                          ),
+                          trailing: SFText(
+                            keyText: "0",
+                            style: TextStyles.lightWhite16,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                const SizedBox(
+                  height: 18.0,
+                ),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 24),
+                  child: SizedBox(
+                      height: 48,
+                      child: SFButtonOutLined(
+                        title: LocaleKeys.stake,
+                        textStyle: TextStyles.bold16Blue,
+                        borderColor: AppColors.blue,
+                        onPressed: () {
+                          Navigator.pushNamed(context, R.staking);
+                        },
+                      )),
+                ),
+                const SizedBox(
+                  height: 25.0,
+                ),
+                const SpendingDetailList(),
+              ],
+            ),
           ),
           Positioned(
             bottom: 24,

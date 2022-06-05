@@ -62,7 +62,7 @@ class _ModalTransferBetweenState extends State<ModalTransferBetween> {
                   mainAxisSize: MainAxisSize.min,
                   children: [
                     index > 2 ? const Icon(Icons.keyboard_arrow_down, color: AppColors.lightGrey,) : const SizedBox(),
-                    selectedIndex == index
+                    selectedIndex == index && index < 3
                         ? const Icon(
                       Icons.check,
                       color: AppColors.green,
@@ -76,7 +76,10 @@ class _ModalTransferBetweenState extends State<ModalTransferBetween> {
               setState(() {
                 selectedIndex = index;
               });
-              widget.onSelect!({"text" : keyList[index], "urlImage" : urlImages[index]});
+              if(index < 3) {
+                widget.onSelect!({"text" : keyList[index], "urlImage" : urlImages[index]});
+                Navigator.pop(context);
+              }
             },
           );
         });
