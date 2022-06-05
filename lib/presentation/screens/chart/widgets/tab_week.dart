@@ -25,7 +25,8 @@ class TabWeek extends StatelessWidget {
                   firstAllowedDate:
                       DateTime.now().subtract(const Duration(days: 45)),
                   lastAllowedDate: DateTime.now().add(const Duration(days: 45)),
-                  onNewSelected: (period) {},
+                  onNewSelected: (period) {
+                  },
                 )
               ],
             );
