@@ -394,5 +394,6 @@ abstract class  LocaleKeys {
   static const no_bed = 'no_bed';
   static const id = 'id';
   static const token_consumption = 'token_consumption';
+  static const buy_now = 'buy_now';
 
 }

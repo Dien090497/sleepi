@@ -392,5 +392,6 @@
   "common_bed_box" : "Common Bed Box",
   "no_bed": "No Bed",
   "id": "ID",
-  "token_consumption": "Token Consumption"
+  "token_consumption": "Token Consumption",
+  "buy_now": "Buy Now"
 }
