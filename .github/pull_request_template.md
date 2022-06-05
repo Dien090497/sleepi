@@ -5,4 +5,4 @@
 - [ ] Quản lý UI bằng Bloc hoặc Cubit
 - [ ] Sử dụng, tạo Common widgets
 - [ ] Fix analyze
-- [ ] Translations thêm vào đủ 8 file ngôn ngữ
+- [ ] Thêm translation vào file en_US.json
