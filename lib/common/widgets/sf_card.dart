@@ -4,13 +4,14 @@ import 'package:slee_fi/common/style/app_colors.dart';
 class SFCard extends StatelessWidget {
   const SFCard(
       {this.padding,
-      this.margin,
-      this.height,
-      this.width,
-      this.child,
-      this.onTap,
-      this.radius = 16,
-      Key? key})
+        this.margin,
+        this.height,
+        this.width,
+        this.child,
+        this.onTap,
+        this.border,
+        this.radius = 16,
+        Key? key})
       : super(key: key);
 
   final Widget? child;
@@ -20,6 +21,7 @@ class SFCard extends StatelessWidget {
   final double? height;
   final VoidCallback? onTap;
   final double radius;
+  final Border? border;
 
   @override
   Widget build(BuildContext context) {
@@ -33,6 +35,7 @@ class SFCard extends StatelessWidget {
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(radius),
           color: AppColors.white.withOpacity(0.05),
+          border: border
         ),
         child: child,
       ),

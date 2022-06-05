@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:slee_fi/common/routes/app_routes.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
 import 'package:slee_fi/common/widgets/background_widget.dart';
@@ -126,7 +127,9 @@ class GachaResultBedScreen extends StatelessWidget {
                               Center(
                                 child: SFButtonOutLined(
                                   title: LocaleKeys.show_all_result,
-                                  onPressed: () {},
+                                  onPressed: () {
+                                    Navigator.pushNamed(context, R.allResult);
+                                  },
                                   fixedSize: Size(size.width, 45),
                                   textStyle: TextStyles.blue16,
                                   borderColor: AppColors.blue,

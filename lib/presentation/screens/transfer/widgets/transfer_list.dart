@@ -31,9 +31,11 @@ class _TransferListState extends State<TransferList> {
             topLeft: Radius.circular(40), topRight: Radius.circular(40)),
       ),
       // width: double.infinity,
-      padding: const EdgeInsets.all(12.0),
-      child: ListView(
-        physics:const ClampingScrollPhysics(),
+      height: MediaQuery.of(context).size.height * 0.5,
+        padding: EdgeInsets.fromLTRB(12, 12, 12,
+          MediaQuery.of(context).viewInsets.bottom),
+    child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           SFText(
             keyText: LocaleKeys.asset,

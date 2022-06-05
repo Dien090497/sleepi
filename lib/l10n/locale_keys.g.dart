@@ -253,6 +253,8 @@ abstract class  LocaleKeys {
   static const result = 'result';
   static const next = 'next';
   static const show_all_result = 'show_all_result';
+  static const all_result = 'all_result';
+  static const return_ = 'return_';
   static const special_gacha = 'special_gacha';
   static const displays_the_nft_discharged_from_the_gacha = 'displays_the_nft_discharged_from_the_gacha';
   static const spending = 'spending';
