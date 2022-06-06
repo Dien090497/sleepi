@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:slee_fi/common/extensions/string_x.dart';
 import 'package:slee_fi/common/routes/app_routes.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
 import 'package:slee_fi/common/widgets/sf_bottom_sheet.dart';
-import 'package:slee_fi/common/widgets/sf_dialog.dart';
 import 'package:slee_fi/common/widgets/sf_icon.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
 import 'package:slee_fi/l10n/locale_keys.g.dart';
@@ -118,67 +116,6 @@ class TabWalletDetail extends StatelessWidget {
     );
   }
 
-  void createWalletDialog(BuildContext context) {
-    showCustomDialog(context, children: [
-      Row(
-        children: [
-          const SizedBox(width: 24),
-          const Spacer(),
-          SFText(
-            keyText: LocaleKeys.wallet,
-            prefix: 'SOLANA ',
-            stringCase: StringCase.upperCase,
-          ),
-          const Spacer(),
-          Container(
-            decoration: const BoxDecoration(
-              shape: BoxShape.circle,
-              color: AppColors.green,
-            ),
-            padding: const EdgeInsets.all(6),
-            child: const Icon(Icons.close, size: 16),
-          ),
-        ],
-      ),
-      Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 8.0),
-        child: Column(
-          children: [
-            const SizedBox(height: 24),
-            GestureDetector(
-              onTap: () {
-                Navigator.pushNamed(context, R.walletCreationWarning);
-              },
-              child: Container(
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(24),
-                  border: Border.all(color: AppColors.black),
-                ),
-                alignment: Alignment.center,
-                padding: const EdgeInsets.symmetric(vertical: 12),
-                child: SFText(keyText: LocaleKeys.create_a_new_wallet),
-              ),
-            ),
-            const SizedBox(height: 24),
-            GestureDetector(
-              onTap: () {
-                Navigator.pushNamed(context, R.importWallet);
-              },
-              child: Container(
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(24),
-                  border: Border.all(color: AppColors.black),
-                ),
-                alignment: Alignment.center,
-                padding: const EdgeInsets.symmetric(vertical: 12),
-                child: SFText(keyText: LocaleKeys.import_a_wallet_using_seed_phrase),
-              ),
-            ),
-          ],
-        ),
-      )
-    ]);
-  }
 }
 
 final Uri _url = Uri.parse('https://www.binance.com/');
