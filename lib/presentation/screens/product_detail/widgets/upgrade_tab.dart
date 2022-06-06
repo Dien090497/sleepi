@@ -66,6 +66,7 @@ class UpGradeTab extends StatelessWidget {
                 ],
               ),
             ),
+            const SizedBox(height: 26,),
           ],
         ),
       ),

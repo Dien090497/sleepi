@@ -187,7 +187,7 @@ class _MintScreenState extends State<MintScreen> {
                                   ),
                                   const SizedBox(height: 24),
                                   SFText(
-                                    keyText: LocaleKeys.without_case,
+                                    keyText: LocaleKeys.with_case,
                                     style: TextStyles.lightGrey14,
                                   ),
                                   const SizedBox(height: 17),
