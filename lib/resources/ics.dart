@@ -19,6 +19,7 @@ class Ics {
   static const String group = 'assets/icons/group.svg';
   static const String heart = 'assets/icons/heart.svg';
   static const String home = 'assets/icons/home.svg';
+  static const String icAppleHealth = 'assets/icons/ic_apple_health.svg';
   static const String icArrowUpRight = 'assets/icons/ic_arrow_up_right.svg';
   static const String icBedBoxes = 'assets/icons/ic_bed_boxes.svg';
   static const String icBeds = 'assets/icons/ic_beds.svg';
@@ -30,6 +31,9 @@ class Ics {
   static const String icEye = 'assets/icons/ic_eye.svg';
   static const String icGold = 'assets/icons/ic_gold.svg';
   static const String icLock = 'assets/icons/ic_lock.svg';
+  static const String icMicrophone = 'assets/icons/ic_microphone.svg';
+  static const String icMotionData = 'assets/icons/ic_motion_data.svg';
+  static const String icNotifications = 'assets/icons/ic_notifications.svg';
   static const String icQuestion = 'assets/icons/ic_question.svg';
   static const String icRefresh = 'assets/icons/ic_refresh.svg';
   static const String icScanOutlined = 'assets/icons/ic_scan_outlined.svg';
@@ -76,6 +80,7 @@ class Ics {
     group,
     heart,
     home,
+    icAppleHealth,
     icArrowUpRight,
     icBedBoxes,
     icBeds,
@@ -87,6 +92,9 @@ class Ics {
     icEye,
     icGold,
     icLock,
+    icMicrophone,
+    icMotionData,
+    icNotifications,
     icQuestion,
     icRefresh,
     icScanOutlined,

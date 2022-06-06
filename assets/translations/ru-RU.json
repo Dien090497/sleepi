@@ -12,6 +12,7 @@
   "please_enter_your_activation_code": "Пожалуйста, введите ваш код активации",
   "please_select_your_language": "Пожалуйста, выберите ваш язык",
   "settings": "Настройки",
+  "about_permissions": "About permissions",
   "permissions": "Разрешения",
   "pillow_ai": "Pillow A.I.",
   "siri_and_shortcuts": "Siri & Быстрый доступ",
@@ -189,5 +190,4 @@
   "how_to_play_whitepaper_litepaper_linktree": "Руководство/ Whitepaper/Litepaper/Linktree",
   "apple_health": "",
   "one_bed_will_be_burned": "One bed will be burned"
-
 }

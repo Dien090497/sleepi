@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:slee_fi/common/widgets/sf_icon.dart';
 import 'package:slee_fi/resources/resources.dart';
 
-class TabTrophysBuy extends StatelessWidget {
-  const TabTrophysBuy({Key? key}) : super(key: key);
+class TabTrophyDetail extends StatelessWidget {
+  const TabTrophyDetail({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

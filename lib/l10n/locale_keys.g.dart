@@ -14,6 +14,7 @@ abstract class  LocaleKeys {
   static const please_enter_your_activation_code = 'please_enter_your_activation_code';
   static const please_select_your_language = 'please_select_your_language';
   static const settings = 'settings';
+  static const about_permissions = 'about_permissions';
   static const permissions = 'permissions';
   static const pillow_ai = 'pillow_ai';
   static const siri_and_shortcuts = 'siri_and_shortcuts';
@@ -291,6 +292,10 @@ abstract class  LocaleKeys {
   static const english = 'english';
   static const japanese = 'japanese';
   static const chinese = 'chinese';
+  static const multi_chain_switch_uppercase = 'multi_chain_switch_uppercase';
+  static const microphone = 'microphone';
+  static const motion_data = 'motion_data';
+  static const notifications = 'notifications';
   static const mic_permission = 'mic_permission';
   static const displays_message_mic_permission = 'displays_message_mic_permission';
   static const displays_message_mic_permission_1 = 'displays_message_mic_permission_1';
@@ -315,6 +320,7 @@ abstract class  LocaleKeys {
   static const comfort = 'comfort';
   static const if_the_chosen_platform_does_not_support = 'if_the_chosen_platform_does_not_support';
   static const verification_code = 'verification_code';
+  static const verification_login = 'verification_login';
   static const change_password = 'change_password';
   static const new_password = 'new_password';
   static const your_password = 'your_password';
@@ -380,7 +386,7 @@ abstract class  LocaleKeys {
   static const common_bed_box = 'common_bed_box';
   static const no_bed = 'no_bed';
   static const id = 'id';
-  static const token_consumption = 'token_consumption';
+  static const token_consumptions = 'token_consumptions';
   static const buy_now = 'buy_now';
   static const export = 'export';
   static const one_bed_will_be_burned = 'one_bed_will_be_burned';

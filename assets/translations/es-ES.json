@@ -12,6 +12,7 @@
   "please_enter_your_activation_code": "Por favor, introduzca su código de activación",
   "please_select_your_language": "Por favor, seleccione su idioma",
   "settings": "Ajustes",
+  "about_permissions": "About permissions",
   "permissions": "Permisos",
   "pillow_ai": "Almohada I.A",
   "siri_and_shortcuts": "Siri & accesos directos",
@@ -189,5 +190,4 @@
   "how_to_play_whitepaper_litepaper_linktree": "Cómo jugar/ Whitepaper/Litepaper/Linktree",
   "apple_health": "Salud de la manzana",
   "one_bed_will_be_burned": "One bed will be burned"
-
 }

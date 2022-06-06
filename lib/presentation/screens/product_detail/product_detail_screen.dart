@@ -6,6 +6,7 @@ import 'package:slee_fi/l10n/locale_keys.g.dart';
 import 'package:slee_fi/presentation/screens/product_detail/widgets/tab_beds_detail.dart';
 import 'package:slee_fi/presentation/screens/product_detail/widgets/tab_item_detail.dart';
 import 'package:slee_fi/presentation/screens/product_detail/widgets/tab_jewels_detail.dart';
+import 'package:slee_fi/presentation/screens/product_detail/widgets/tab_trophy_detail.dart';
 
 class ProductDetailScreen extends StatelessWidget {
   const ProductDetailScreen({Key? key}) : super(key: key);
@@ -32,7 +33,7 @@ class ProductDetailScreen extends StatelessWidget {
                   TabBedsDetail(),
                   TabJewelsDetail(),
                   TabItemDetail(),
-                  SizedBox.shrink(),
+                  TabTrophyDetail()
                 ],
               ),
             ),
