@@ -191,6 +191,7 @@ abstract class  LocaleKeys {
   static const notification_may_include_alert_sound_and_icon = 'notification_may_include_alert_sound_and_icon';
   static const how_to_play_whitepaper_litepaper_linktree = 'how_to_play_whitepaper_litepaper_linktree';
   static const apple_health = 'apple_health';
+  static const one_bed_will_be_burned = 'one_bed_will_be_burned';
   static const home = 'home';
   static const gacha = 'gacha';
   static const list = 'list';
@@ -389,6 +390,5 @@ abstract class  LocaleKeys {
   static const token_consumptions = 'token_consumptions';
   static const buy_now = 'buy_now';
   static const export = 'export';
-  static const one_bed_will_be_burned = 'one_bed_will_be_burned';
 
 }
