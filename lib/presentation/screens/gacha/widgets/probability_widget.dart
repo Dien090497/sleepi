@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:slee_fi/common/routes/app_routes.dart';
+import 'package:slee_fi/resources/resources.dart';
 
 class ProbabilityWidget extends StatelessWidget {
   const ProbabilityWidget({Key? key}) : super(key: key);
@@ -12,7 +13,7 @@ class ProbabilityWidget extends StatelessWidget {
         onTap: () {
           Navigator.pushNamed(context, R.probability);
         },
-        child: Image.asset('assets/images/bedroom_gacha.png'),
+        child: Image.asset(Imgs.bedroomGacha),
       ),
     );
   }
