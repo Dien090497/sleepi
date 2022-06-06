@@ -52,8 +52,8 @@ class _PopupInfoWalletState extends State<PopupInfoWallet> {
     ShowMoreTextPopup popup = ShowMoreTextPopup(
       context,
       text: text,
-      width: 200,
-      height: 66,
+      width: 184,
+      height: 50,
       textStyle: TextStyles.w400LightWhite12,
       backgroundColor: AppColors.darkColor1,
       textAlign: TextAlign.center,
