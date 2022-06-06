@@ -178,7 +178,7 @@ class _ShareScreenState extends State<ShareScreen> {
           ),
           const Positioned(
             bottom: 0,
-            child: Material(child: CommunityShare()),
+            child: CommunityShare(),
           ),
         ],
       ),
