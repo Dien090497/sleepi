@@ -58,7 +58,7 @@ class _MintScreenState extends State<MintScreen> {
                           Padding(
                             padding: const EdgeInsets.symmetric(horizontal: 20),
                             child: SFText(
-                              keyText: LocaleKeys.bed_recycle,
+                              keyText: LocaleKeys.bed_mint,
                               style: TextStyles.boldWhite18,
                             ),
                           ),
@@ -177,7 +177,7 @@ class _MintScreenState extends State<MintScreen> {
                                           ),
                                         ),
                                         const SFLabelValue(
-                                          label: LocaleKeys.failure,
+                                          label: LocaleKeys.one_bed_will_be_burned,
                                           styleLabel: TextStyles.lightWhite14,
                                           value: '2%',
                                           colorBorder: Colors.transparent,
