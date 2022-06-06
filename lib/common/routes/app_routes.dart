@@ -44,6 +44,7 @@ import 'package:slee_fi/presentation/screens/tracking/tracking_screen.dart';
 import 'package:slee_fi/presentation/screens/trade/trade_screen.dart';
 import 'package:slee_fi/presentation/screens/transfer/transfer_screen.dart';
 import 'package:slee_fi/presentation/screens/tutorial/tutorial_screen.dart';
+import 'package:slee_fi/presentation/screens/wallet/layouts/transaction_detail_screen.dart';
 import 'package:slee_fi/presentation/screens/wallet/wallet_screen.dart';
 import 'package:slee_fi/presentation/screens/wallet_creation_warning/wallet_create_screen.dart';
 import 'package:slee_fi/presentation/screens/wallet_creation_warning/wallet_creation_warning_screen.dart';
@@ -100,6 +101,7 @@ class R {
   static const String exportSeedPhrase = '${_}export_seed_phrase';
   static const String probability = '${_}probability';
   static const String tracking = '${_}tracking';
+  static const String transactionDetail = '${_}transaction_detail';
 }
 
 class AppRoutes {
@@ -153,5 +155,6 @@ class AppRoutes {
     R.question: (_) => const QuestionScreen(),
     R.probability: (_) => const ProbabilityScreen(),
     R.tracking: (_) => const TrackingScreen(),
+    R.transactionDetail: (_) => const TransactionDetail(),
   };
 }
