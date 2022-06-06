@@ -90,24 +90,23 @@ class _ResultScreenState extends State<ResultScreen> {
           bottom: 0,
           left: 0,
           right: 0,
-          child: Material(
+          child: Container(
+            padding: const EdgeInsets.only(
+              bottom: 20,
+              left: 16,
+              right: 16,
+              top: 12
+            ),
             color: AppColors.dark,
-            child: SafeArea(
-              top: false,
-              child: Container(
-                padding: const EdgeInsets.only(
-                    bottom: 20, left: 16, right: 16, top: 12),
-                child: SFButton(
-                  text: LocaleKeys.share_your_sleep,
-                  textStyle: TextStyles.white16,
-                  gradient: AppColors.gradientBlueButton,
-                  width: double.infinity,
-                  height: 48,
-                  onPressed: () {
-                    Navigator.pushNamed(context, R.share);
-                  },
-                ),
-              ),
+            child: SFButton(
+              text: LocaleKeys.share_your_sleep,
+              textStyle: TextStyles.white16,
+              gradient: AppColors.gradientBlueButton,
+              width: double.infinity,
+              height: 48,
+              onPressed: () {
+                Navigator.pushNamed(context, R.share);
+              },
             ),
           ),
         ),
