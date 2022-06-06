@@ -3,6 +3,7 @@ import 'package:slee_fi/common/widgets/sf_gridview.dart';
 import 'package:slee_fi/common/widgets/sf_sub_tab_bar.dart';
 import 'package:slee_fi/l10n/locale_keys.g.dart';
 import 'package:slee_fi/presentation/screens/product_detail/widgets/my_item_short_widget.dart';
+import 'package:slee_fi/presentation/screens/product_detail/widgets/upgrade_tab.dart';
 import 'package:slee_fi/resources/resources.dart';
 
 class TabItemDetail extends StatelessWidget {
@@ -36,14 +37,7 @@ class TabItemDetail extends StatelessWidget {
                     );
                   },
                 ),
-                SFGridView(
-                  count: 20,
-                  itemBuilder: (context, i) {
-                    return MyItemShortWidget(
-                      icon: items[i % items.length],
-                    );
-                  },
-                ),
+                const UpGradeTab(),
               ],
             ),
           ),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:slee_fi/common/extensions/string_x.dart';
 import 'package:slee_fi/common/routes/app_routes.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
@@ -31,7 +32,7 @@ class AccountLoginScreen extends StatelessWidget {
                   SFText(
                     keyText: LocaleKeys.account_login,
                     style: TextStyles.bold18LightWhite,
-                    stringCase: true,
+                    stringCase: StringCase.upperCase,
                   ),
                   const SizedBox(height: 25),
                   const SFTextField(

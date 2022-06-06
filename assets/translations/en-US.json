@@ -385,7 +385,7 @@
   "common_bed_box" : "Common Bed Box",
   "no_bed": "No Bed",
   "id": "ID",
-  "token_consumption": "Token Consumption",
+  "token_consumptions": "Token Consumptions",
   "buy_now": "Buy Now",
   "export": "Export",
   "one_bed_will_be_burned": "One bed will be burned"
