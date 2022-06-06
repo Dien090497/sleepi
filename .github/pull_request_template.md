@@ -6,3 +6,4 @@
 - [ ] Sử dụng, tạo Common widgets
 - [ ] Fix analyze
 - [ ] Thêm translation vào file en_US.json
+- [ ] Kiểm tra lại multi language

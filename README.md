@@ -24,9 +24,9 @@
 # About SleeFi
 
 - A **sleep to earn** app
-- Support 2 language: **Japanese** and **English**
+- Support 8 languages:
 - Base on **StepN**
-- Figma [Wireframe](https://www.figma.com/file/EtlTv6nD9XYAbzvHavYl6C/Wireframing-IOS-UI-(Community)?node-id=0%3A1)
+- Figma [App Design](https://www.figma.com/file/8XtGibBv8QYwzpRm2swz66/SleeFi)
 - [Jira Tasks](https://jira.sotatek.com/secure/RapidBoard.jspa?rapidView=342&projectKey=SLEEP)
 
 # App Guide
@@ -35,18 +35,20 @@
 
 Package using:
 
-- [flutter_translate](https://pub.dev/packages/flutter_translate)
-- [flutter_translate_gen](https://pub.dev/packages/flutter_translate_gen)
-- [flutter_translate_annotation](https://pub.dev/packages/flutter_translate_annotations)
-
-Full Guide For Package install can be found here: [Wiki](https://github.com/Jesway/Flutter-Translate/wiki)
+- [easy_localization](https://pub.dev/packages/easy_localization)
 
 ### Add translation
 
-- For English: `assets/i18n/en_US.json`
-- For Japanese: `assets/i18n/ja_JP.json`
+- For English: `assets/i18n/en-US.json`
+- For Japanese: `assets/i18n/ja-JP.json`
+- For Germany: `assets/i18n/de-DE.json`
+- For Spanish: `assets/i18n/es-ES.json`
+- For French: `assets/i18n/fr-FR.json`
+- For Portuguese: `assets/i18n/pt-T.json`
+- For Standard Chinese: `assets/i18n/zh-Hans.json`
+- For Russian: `assets/i18n/ru-RU.json`
 
-After adding run `build_runner` [command](#command). A file called `LocaleKeys.g.dart` will be generated as part of `LocaleKeys.dart`
+Run [easy_localization:generate](#command). A file called `locale_keys.g.dart` will be generated
 
 ```dart
 import 'package:slee_fi/l10n/locale_keys.g.dart';
@@ -63,6 +65,24 @@ import 'package:slee_fi/common/widgets/sf_text.dart';
 ```dart
 SFText(keyText: LocaleKeys.Test_Hello)
 ```
+
+# Image and Icons
+
+## Should use SVG as much as possible
+
+- Add icons in to assets/icons or assets/images
+
+- Use [Spider](https://pub.dev/packages/spider)
+
+```
+flutter pub global activate spider
+```
+
+```
+spider build
+```
+
+- Use icon reference from `resources`. Eg: Ics.arrow
 
 # Model and Entity
 
