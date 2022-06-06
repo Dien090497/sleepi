@@ -31,6 +31,8 @@ class Imgs {
   static const String mint = 'assets/images/mint.png';
   static const String mintShoe = 'assets/images/mint_shoe.png';
   static const String motionData = 'assets/images/motion_data.png';
+  static const String noTransactionRecord =
+      'assets/images/no_transaction_record.png';
   static const String notification = 'assets/images/notification.png';
   static const String productDetail = 'assets/images/product_detail.png';
   static const String qrCodeTest = 'assets/images/qr_code_test.png';
@@ -79,6 +81,7 @@ class Imgs {
     mint,
     mintShoe,
     motionData,
+    noTransactionRecord,
     notification,
     productDetail,
     qrCodeTest,

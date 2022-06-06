@@ -183,9 +183,9 @@ abstract class  LocaleKeys {
   static const microphone_records_only_when_tracking = 'microphone_records_only_when_tracking';
   static const recorded_audio = 'recorded_audio';
   static const to_allow_access_to_healthcare_data = 'to_allow_access_to_healthcare_data';
-  static const sleep_quality_will_derectly_affect = 'sleep_quality_will_derectly_affect';
+  static const sleep_quality_will_directly_affect = 'sleep_quality_will_directly_affect';
   static const the_data_would_access_will_only = 'the_data_would_access_will_only';
-  static const to_allow_access_to_motion_data_is_inportant = 'to_allow_access_to_motion_data_is_inportant';
+  static const to_allow_access_to_motion_data_is_important = 'to_allow_access_to_motion_data_is_important';
   static const the_data_would_acquire_will_only = 'the_data_would_acquire_will_only';
   static const would_like_to_send_you_notifications = 'would_like_to_send_you_notifications';
   static const notification_may_include_alert_sound_and_icon = 'notification_may_include_alert_sound_and_icon';
