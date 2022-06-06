@@ -15,7 +15,7 @@ class SFText extends Text {
     Key? key,
   }) : super(
           // prefix + keyText.tr(namedArgs: args).reCase(stringCase) + suffix,
-          prefix + keyText.tr(namedArgs: args) + suffix,
+          prefix + (stringCase ? keyText.tr(namedArgs: args).toUpperCase() : keyText.tr(namedArgs: args)) + suffix,
           style: style ?? TextStyles.textBasic15,
           textAlign: textAlign,
           key: key,

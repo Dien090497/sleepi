@@ -8,12 +8,12 @@ import 'package:slee_fi/common/widgets/sf_buttons.dart';
 import 'package:slee_fi/common/widgets/sf_logo.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
 import 'package:slee_fi/common/widgets/sf_textfield.dart';
-import 'package:slee_fi/common/widgets/sf_textfield_text_button.dart';
+import 'package:slee_fi/common/widgets/sf_textfield_password.dart';
 import 'package:slee_fi/l10n/locale_keys.g.dart';
 import 'package:slee_fi/presentation/screens/login_signup/widgets/login_box.dart';
 
-class LoginSignUpScreen extends StatelessWidget {
-  const LoginSignUpScreen({Key? key}) : super(key: key);
+class AccountLoginScreen extends StatelessWidget {
+  const AccountLoginScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -29,10 +29,9 @@ class LoginSignUpScreen extends StatelessWidget {
               child: Column(
                 children: [
                   SFText(
-                    keyText: LocaleKeys.login_signup,
+                    keyText: LocaleKeys.account_login,
                     style: TextStyles.bold18LightWhite,
                     stringCase: true,
-
                   ),
                   const SizedBox(height: 25),
                   const SFTextField(
@@ -40,24 +39,25 @@ class LoginSignUpScreen extends StatelessWidget {
                     // hintText: LocaleKeys.emailAddress,
                   ),
                   const SizedBox(height: 12),
-                  const SFTextFieldTextButton(
-                    labelText: LocaleKeys.email_verification_code,
+                  const SFTextFieldPassword(
+                    labelText: LocaleKeys.password,
                   ),
                   const SizedBox(height: 37),
                   SFButton(
-                    text: LocaleKeys.login_signup,
+                    text: LocaleKeys.login,
                     color: AppColors.blue,
                     textStyle: TextStyles.w600WhiteSize16,
                     onPressed: () {
-                      Navigator.pushNamed(context, R.enterActivationCode);
+                      Navigator.pushNamedAndRemoveUntil(
+                          context, R.bottomNavigation, (_) => false);
                     },
                     width: MediaQuery.of(context).size.width,
                   ),
                   const SizedBox(height: 32),
                   InkWell(
-                    onTap: () => Navigator.pushNamed(context, R.accountLogin),
+                    onTap: () => Navigator.pop(context),
                     child: SFText(
-                        keyText: LocaleKeys.account_login,
+                        keyText: LocaleKeys.verification_login,
                         style: TextStyles.blue14),
                   )
                 ],
