@@ -11,6 +11,7 @@ class ItemsGacha extends StatelessWidget {
   const ItemsGacha({Key? key, required this.title}) : super(key: key);
 
   final String title;
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -19,11 +20,7 @@ class ItemsGacha extends StatelessWidget {
         Row(
           children: [
             DecoratedWidget(
-              child: SFText(
-                keyText: title,
-                style: TextStyles.bold18White,
-              ),
-            ),
+                child: SFText(keyText: title, style: TextStyles.bold18White)),
             const Spacer(),
             Container(
               decoration: BoxDecoration(
@@ -31,7 +28,8 @@ class ItemsGacha extends StatelessWidget {
                 borderRadius: BorderRadius.circular(16),
               ),
               padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 15),
-              child: SFText(keyText: LocaleKeys.probability, style: TextStyles.white14,),
+              child: SFText(
+                  keyText: LocaleKeys.probability, style: TextStyles.white14),
             )
           ],
         ),
@@ -41,9 +39,8 @@ class ItemsGacha extends StatelessWidget {
         const GachaRollSelections(),
         const SizedBox(height: 13),
         SFText(
-          keyText: LocaleKeys.uncommon_beds_chance,
-          style: TextStyles.lightGrey12,
-        ),
+            keyText: LocaleKeys.uncommon_beds_chance,
+            style: TextStyles.lightGrey12),
         const SizedBox(height: 2),
         const ChanceWidget(),
         const SizedBox(height: 28),

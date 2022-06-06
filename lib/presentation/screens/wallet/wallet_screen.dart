@@ -41,10 +41,7 @@ class _WalletScreenState extends State<WalletScreen> {
                 onTap: () => Navigator.pushNamed(context, R.passcode,
                     arguments: PasscodeArguments(R.settingWallet)),
                 child: const Padding(
-                  padding: EdgeInsets.only(
-                    right: 16.0,
-                    left: 12,
-                  ),
+                  padding: EdgeInsets.only(right: 16.0, left: 12),
                   child: SFIcon(Ics.icSetting),
                 ),
               )

@@ -28,9 +28,7 @@ class PopUpTransfer extends StatelessWidget {
         Positioned(
           right: 0,
           child: GestureDetector(
-            onTap: () {
-              Navigator.pop(context);
-            },
+            onTap: onCancel,
             child: const Icon(
               Icons.close,
               color: AppColors.lightGrey,

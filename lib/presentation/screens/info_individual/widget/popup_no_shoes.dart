@@ -75,7 +75,7 @@ class PopupNoShoes extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         SFText(
-                          keyText: LocaleKeys.class_sf,
+                          keyText: LocaleKeys.class_,
                           style: TextStyles.lightGrey12,
                         ),
                         SFText(

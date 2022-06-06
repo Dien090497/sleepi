@@ -119,7 +119,7 @@
   "common": "Allgemein",
   "uncommon": "Ungewöhnlich",
   "rare_beds_chance": "Seltene betten chance",
-  "congraturations": "Glückwunsch",
+  "congratulations": "Glückwunsch",
   "quality": "Qualität",
   "next_upper": "Nächste",
   "show_all_result_upper": "ALLE ERGEBNISSE ANZEIGEN",
@@ -396,4 +396,5 @@
   "id": "ID",
   "token_consumption": "Token Consumption",
   "buy_now": "Buy Now"
+  "one_bed_will_be_burned": "One bed will be burned"
 }

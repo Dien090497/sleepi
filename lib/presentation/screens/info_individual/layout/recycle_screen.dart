@@ -61,12 +61,8 @@ class RecycleScreen extends StatelessWidget {
                     Container(
                       width: 160,
                       height: 160,
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: 13,
-                      ),
-                      margin: const EdgeInsets.symmetric(
-                        vertical: 24,
-                      ),
+                      padding: const EdgeInsets.symmetric(horizontal: 13),
+                      margin: const EdgeInsets.symmetric(vertical: 24),
                       decoration: const BoxDecoration(
                         image: DecorationImage(
                           image: AssetImage(Imgs.borderBed),
@@ -174,7 +170,7 @@ class RecycleScreen extends StatelessWidget {
                             Align(
                               alignment: Alignment.centerLeft,
                               child: SFText(
-                                keyText: LocaleKeys.what_recycle,
+                                keyText: LocaleKeys.what_recycling,
                                 style: TextStyles.lightGrey14,
                               ),
                             ),
@@ -183,20 +179,27 @@ class RecycleScreen extends StatelessWidget {
                               keyText: LocaleKeys.body_recycle,
                               style: TextStyles.white14,
                             ),
-                            const SizedBox(height: 40),
-                            SFButton(
-                              text: LocaleKeys.recycle,
-                              textStyle: TextStyles.white16,
-                              radius: 100,
-                              gradient: AppColors.gradientBlueButton,
-                              width: size.width,
-                              toUpperCase: true,
-                            ),
+                            const SizedBox(height: 24),
                           ],
                         ),
                       ),
                     ),
                   ],
+                ),
+              ),
+            ),
+            Container(
+              color: AppColors.dark,
+              padding: const EdgeInsets.symmetric(vertical: 16),
+              child: SafeArea(
+                top: false,
+                child: SFButton(
+                  text: LocaleKeys.recycle,
+                  textStyle: TextStyles.white16,
+                  radius: 100,
+                  gradient: AppColors.gradientBlueButton,
+                  width: size.width,
+                  toUpperCase: true,
                 ),
               ),
             ),

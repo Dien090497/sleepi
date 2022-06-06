@@ -43,7 +43,8 @@ class _PopUpSellState extends State<PopUpSell> {
           Positioned(
             right: 0,
             child: GestureDetector(
-              onTap: () {
+              onTap: (){
+                widget.onCancel!();
                 Navigator.pop(context);
               },
               child: const Icon(Icons.close, color: AppColors.lightGrey),
@@ -89,6 +90,7 @@ class _PopUpSellState extends State<PopUpSell> {
                     child: SFButton(
                       text: LocaleKeys.cancel,
                       onPressed: () {
+                        widget.onCancel!();
                         Navigator.pop(context);
                       },
                       textStyle: TextStyles.lightGrey16,
@@ -263,7 +265,7 @@ class _Detail extends StatelessWidget {
               Expanded(
                 flex: 3,
                 child: SFText(
-                    keyText: LocaleKeys.class_sf, style: TextStyles.lightGrey14),
+                    keyText: LocaleKeys.class_, style: TextStyles.lightGrey14),
               ),
               Expanded(
                 child: SFText(

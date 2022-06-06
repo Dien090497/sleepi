@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:slee_fi/common/extensions/string_x.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
 import 'package:slee_fi/common/widgets/sf_buttons.dart';
@@ -58,7 +59,7 @@ class PopUpConfirmTrade extends StatelessWidget {
                       ),
                       SFText(
                         keyText: LocaleKeys.avax,
-                        stringCase: true,
+                        stringCase: StringCase.upperCase,
                         style: TextStyles.bold18White,
                       ),
                     ],

@@ -14,6 +14,7 @@ import 'package:slee_fi/common/widgets/sf_text.dart';
 import 'package:slee_fi/common/widgets/sf_textfield.dart';
 import 'package:slee_fi/l10n/locale_keys.g.dart';
 import 'package:slee_fi/presentation/screens/login_signup/widgets/login_box.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class EnterActivationCodeScreen extends StatelessWidget {
   const EnterActivationCodeScreen({Key? key}) : super(key: key);
@@ -24,14 +25,14 @@ class EnterActivationCodeScreen extends StatelessWidget {
       child: BackgroundWidget(
         appBar: SFAppBar(
             context: context,
-            title: LocaleKeys.activation_code_language_lowercase,
+            title: LocaleKeys.activation_code_language,
             textStyle: TextStyles.bold18LightWhite),
         child: SafeArea(
           child: ListView(
             physics: const ClampingScrollPhysics(),
             padding: const EdgeInsets.symmetric(horizontal: 16),
             children: [
-               SizedBox(height: MediaQuery.of(context).size.height * 0.15),
+              SizedBox(height: MediaQuery.of(context).size.height * 0.15),
               LoginBox(
                 padding: const EdgeInsets.fromLTRB(28, 24, 28, 0),
                 child: Column(
@@ -78,10 +79,17 @@ class EnterActivationCodeScreen extends StatelessWidget {
                       width: MediaQuery.of(context).size.width,
                     ),
                     const SizedBox(height: 16),
-                    const Center(
+                    Center(
                       child: SFTextButton(
-                          text: LocaleKeys.get_activation_code,
-                          textStyle: TextStyles.blue14),
+                        text: LocaleKeys.get_activation_code,
+                        textStyle: TextStyles.blue14,
+                        onPressed: () async {
+                          final url = Uri.parse(Const.linkTreeUrl);
+                          if (await canLaunchUrl(url)) {
+                            launchUrl(url);
+                          }
+                        },
+                      ),
                     ),
                   ],
                 ),

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:slee_fi/common/routes/app_routes.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
 import 'package:slee_fi/common/widgets/background_widget.dart';
@@ -135,8 +136,8 @@ class _GachaChance500ScreenState extends State<GachaChance500Screen> {
                                       decoration: BoxDecoration(
                                           borderRadius:
                                               BorderRadius.circular(10),
-                                          color: AppColors.white
-                                              .withOpacity(0.1)),
+                                          color:
+                                              AppColors.white.withOpacity(0.1)),
                                       child: Column(
                                         children: [
                                           const SizedBox(
@@ -176,8 +177,8 @@ class _GachaChance500ScreenState extends State<GachaChance500Screen> {
                                       decoration: BoxDecoration(
                                           borderRadius:
                                               BorderRadius.circular(10),
-                                          color: AppColors.white
-                                              .withOpacity(0.1)),
+                                          color:
+                                              AppColors.white.withOpacity(0.1)),
                                       child: Column(
                                         children: [
                                           const SizedBox(
@@ -201,8 +202,7 @@ class _GachaChance500ScreenState extends State<GachaChance500Screen> {
                                             child: Center(
                                                 child: SFText(
                                               keyText: 'Middle\n Bed',
-                                              style: TextStyles
-                                                  .lightGrey12W700,
+                                              style: TextStyles.lightGrey12W700,
                                             )),
                                           ),
                                         ],
@@ -218,8 +218,8 @@ class _GachaChance500ScreenState extends State<GachaChance500Screen> {
                                       decoration: BoxDecoration(
                                           borderRadius:
                                               BorderRadius.circular(10),
-                                          color: AppColors.white
-                                              .withOpacity(0.1)),
+                                          color:
+                                              AppColors.white.withOpacity(0.1)),
                                       child: Column(
                                         children: [
                                           const SizedBox(
@@ -243,8 +243,7 @@ class _GachaChance500ScreenState extends State<GachaChance500Screen> {
                                             child: Center(
                                                 child: SFText(
                                               keyText: 'Long\n Bed',
-                                              style: TextStyles
-                                                  .lightGrey12W700,
+                                              style: TextStyles.lightGrey12W700,
                                             )),
                                           ),
                                         ],
@@ -266,6 +265,10 @@ class _GachaChance500ScreenState extends State<GachaChance500Screen> {
                                   gradient: AppColors.gradientBlueButton,
                                   height: 45,
                                   width: size.width,
+                                  onPressed: () {
+                                    Navigator.pushNamed(
+                                        context, R.gachaResultBed);
+                                  },
                                 ),
                               ),
                             ),

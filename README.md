@@ -170,10 +170,6 @@ Watching changes
 flutter pub run build_runner watch --delete-conflicting-outputs
 ```
 
-```dart
-flutter pub run build_runner watch --delete-conflicting-outputs
-```
-
 Easy Localization command
 
 ```dart

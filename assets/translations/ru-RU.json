@@ -119,7 +119,7 @@
   "common": "Обычный",
   "uncommon": "Уникальный",
   "rare_beds_chance": "Шанс на получение редкой кровати",
-  "congraturations": "Поздравляем",
+  "congratulations": "Поздравляем",
   "quality": "Качество",
   "next_upper": "СЛЕДУЮЩЕЕ",
   "show_all_result_upper": "ПОКАЗАТЬ ВСЕ РЕЗУЛЬТАТЫ",
@@ -189,6 +189,7 @@
   "notification_may_include_alert_sound_and_icon": "Уведомления могут включать оповещения, звуки и значки. Они могут быть изменены в Настройках",
   "how_to_play_whitepaper_litepaper_linktree": "Руководство/ Whitepaper/Litepaper/Linktree",
   "apple_health": "",
+  "one_bed_will_be_burned": "One bed will be burned"
 
   "home": "Home",
   "gacha": "Gacha",

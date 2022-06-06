@@ -71,15 +71,17 @@ class CategoryHeader extends StatelessWidget {
                 children: [
                   Row(
                     crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                        child: SFText(
-                          keyText: LocaleKeys.earning,
-                          style: TextStyles.blue14,
+                      Expanded(
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                          child: SFText(
+                            keyText: LocaleKeys.earning,
+                            style: TextStyles.blue14,
+                          ),
                         ),
                       ),
-                      const Spacer(),
                       Padding(
                         padding: const EdgeInsets.all(10.0),
                         child: SFImageBorder(
@@ -132,15 +134,17 @@ class CategoryHeader extends StatelessWidget {
                 children: [
                   Row(
                     crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                        child: SFText(
-                          keyText: LocaleKeys.sleep_duration_enter,
-                          style: TextStyles.green14,
+                      Expanded(
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                          child: SFText(
+                            keyText: LocaleKeys.sleep_duration,
+                            style: TextStyles.green14,
+                          ),
                         ),
                       ),
-                      const Spacer(),
                       Padding(
                         padding: const EdgeInsets.all(10.0),
                         child: SFImageBorder(
@@ -184,11 +188,13 @@ class CategoryHeader extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Padding(
-                        padding: const EdgeInsets.only(left: 16.0),
-                        child: SFText(
-                          keyText: LocaleKeys.sleep_score,
-                          style: TextStyles.yellow14,
+                      Expanded(
+                        child: Padding(
+                          padding: const EdgeInsets.only(left: 16.0),
+                          child: SFText(
+                            keyText: LocaleKeys.sleep_score,
+                            style: TextStyles.yellow14,
+                          ),
                         ),
                       ),
                       Padding(

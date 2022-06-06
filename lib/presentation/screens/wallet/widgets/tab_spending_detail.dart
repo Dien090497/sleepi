@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:slee_fi/common/extensions/string_x.dart';
 import 'package:slee_fi/common/routes/app_routes.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
@@ -42,7 +43,7 @@ class TabSpendingDetail extends StatelessWidget {
                           title: SFText(
                               keyText: LocaleKeys.slft,
                               style: TextStyles.lightWhite16,
-                              stringCase: true),
+                              stringCase: StringCase.upperCase),
                           trailing: SFText(
                             keyText: "0",
                             style: TextStyles.lightWhite16,
@@ -57,7 +58,7 @@ class TabSpendingDetail extends StatelessWidget {
                           title: SFText(
                               keyText: LocaleKeys.slgt,
                               style: TextStyles.lightWhite16,
-                              stringCase: true),
+                              stringCase: StringCase.upperCase),
                           trailing: SFText(
                             keyText: "0",
                             style: TextStyles.lightWhite16,
@@ -72,7 +73,7 @@ class TabSpendingDetail extends StatelessWidget {
                           title: SFText(
                             keyText: LocaleKeys.avax,
                             style: TextStyles.lightWhite16,
-                            stringCase: true,
+                            stringCase: StringCase.upperCase,
                           ),
                           trailing: SFText(
                             keyText: "0",

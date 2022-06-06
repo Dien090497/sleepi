@@ -2,11 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
 
 class BackgroundWidget extends StatelessWidget {
-  const BackgroundWidget({Key? key, this.child, this.appBar, this.resizeToAvoidBottomInset = true}) : super(key: key);
+  const BackgroundWidget(
+      {Key? key, this.child, this.appBar, this.resizeToAvoidBottomInset = true})
+      : super(key: key);
 
   final Widget? child;
   final PreferredSizeWidget? appBar;
   final bool resizeToAvoidBottomInset;
+
   @override
   Widget build(BuildContext context) {
     return Stack(

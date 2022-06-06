@@ -119,7 +119,7 @@
   "common": "Común",
   "uncommon": "Inusual",
   "rare_beds_chance": "Oportunidad de camas pocos comunes",
-  "congraturations": "Felicidades",
+  "congratulations": "Felicidades",
   "quality": "Calidad",
   "next_upper": "SIGUIENTE",
   "show_all_result_upper": "MOSTRAR TODOS LOS RESULTADOS",
@@ -189,6 +189,7 @@
   "notification_may_include_alert_sound_and_icon": "Las notificaciones pueden incluir alertas, sonidos e iconos. Estos se pueden configurar en Ajustes.",
   "how_to_play_whitepaper_litepaper_linktree": "Cómo jugar/ Whitepaper/Litepaper/Linktree",
   "apple_health": "Salud de la manzana",
+  "one_bed_will_be_burned": "One bed will be burned"
 
   "home": "Home",
   "gacha": "Gacha",

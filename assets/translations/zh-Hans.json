@@ -119,7 +119,7 @@
   "common": "普通",
   "uncommon": "罕见",
   "rare_beds_chance": "稀有床机遇",
-  "congraturations": "恭喜",
+  "congratulations": "恭喜",
   "quality": "质量",
   "next_upper": "下一个",
   "show_all_result_upper": "显示所有结果",
@@ -189,6 +189,7 @@
   "notification_may_include_alert_sound_and_icon": "通知可能包括警报、声音和图标标记。 这些可以在设置中进行配置。",
   "how_to_play_whitepaper_litepaper_linktree": "玩法 / Whitepaper / Litepaper / Linktree",
   "apple_health": "",
+  "one_bed_will_be_burned": "One bed will be burned"
 
   "home": "Home",
   "gacha": "Gacha",

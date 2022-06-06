@@ -121,7 +121,7 @@ abstract class  LocaleKeys {
   static const common = 'common';
   static const uncommon = 'uncommon';
   static const rare_beds_chance = 'rare_beds_chance';
-  static const congraturations = 'congraturations';
+  static const congratulations = 'congratulations';
   static const quality = 'quality';
   static const next_upper = 'next_upper';
   static const show_all_result_upper = 'show_all_result_upper';
@@ -225,30 +225,19 @@ abstract class  LocaleKeys {
   static const probability = 'probability';
   static const times_gacha = 'times_gacha';
   static const uncommon_beds_chance = 'uncommon_beds_chance';
-  static const title_repair = 'title_repair';
-  static const button_confirm = 'button_confirm';
-  static const button_cancel = 'button_cancel';
-  static const title_level_up = 'title_level_up';
-  static const title_confirm_transfer = 'title_confirm_transfer';
-  static const title_transfer = 'title_transfer';
   static const repair = 'repair';
   static const level_up = 'level_up';
   static const confirm_transfer = 'confirm_transfer';
   static const free = 'free';
   static const inventory = 'inventory';
   static const wallet = 'wallet';
-  static const you_win_transfer = 'you_win_transfer';
   static const bed = 'bed';
   static const common_bed = 'common_bed';
   static const uncommon_bed = 'uncommon_bed';
   static const rare_bed = 'rare_bed';
   static const epic_bed = 'epic_bed';
   static const legendary_bed = 'legendary_bed';
-  static const Luck = 'Luck';
-  static const Bonus = 'Bonus';
-  static const Special = 'Special';
   static const woke_up = 'woke_up';
-  static const sleep_duration_enter = 'sleep_duration_enter';
   static const token_earned = 'token_earned';
   static const sleep_score = 'sleep_score';
   static const result = 'result';
@@ -271,7 +260,7 @@ abstract class  LocaleKeys {
   static const receive = 'receive';
   static const to_spending = 'to_spending';
   static const to_external = 'to_external';
-  static const successful = 'successful';
+  static const successfully = 'successfully';
   static const durability = 'durability';
   static const wallet_account = 'wallet_account';
   static const buy = 'buy';
@@ -299,7 +288,6 @@ abstract class  LocaleKeys {
   static const average_of_sleep_quality = 'average_of_sleep_quality';
   static const general = 'general';
   static const secret = 'secret';
-  static const activation_code_language_lowercase = 'activation_code_language_lowercase';
   static const available_total = 'available_total';
   static const english = 'english';
   static const japanese = 'japanese';
@@ -362,7 +350,7 @@ abstract class  LocaleKeys {
   static const tvl_in_dapps = 'tvl_in_dapps';
   static const share_your_sleep = 'share_your_sleep';
   static const share = 'share';
-  static const class_sf = 'class_sf';
+  static const class_ = 'class_';
   static const you_will_transfer = 'you_will_transfer';
   static const displays_message_show_seed_phrase = 'displays_message_show_seed_phrase';
   static const feedback = 'feedback';
@@ -393,12 +381,14 @@ abstract class  LocaleKeys {
   static const without_case = 'without_case';
   static const with_case = 'with_case';
   static const bed_recycle = 'bed_recycle';
-  static const what_recycle = 'what_recycle';
+  static const what_recycling = 'what_recycling';
   static const body_recycle = 'body_recycle';
   static const common_bed_box = 'common_bed_box';
   static const no_bed = 'no_bed';
   static const id = 'id';
   static const token_consumption = 'token_consumption';
   static const buy_now = 'buy_now';
+  static const export = 'export';
+  static const one_bed_will_be_burned = 'one_bed_will_be_burned';
 
 }
