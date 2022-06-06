@@ -27,6 +27,7 @@ class MyApp extends StatelessWidget {
             theme: lightTheme,
             routes: AppRoutes.routes,
             initialRoute: R.loginSignUp,
+            debugShowCheckedModeBanner: false,
           );
         },
       ),
