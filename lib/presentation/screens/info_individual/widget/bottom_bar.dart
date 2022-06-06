@@ -45,80 +45,83 @@ class BottomBarWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: const BoxDecoration(
-          color: AppColors.dark,
-          border: Border(
-              top: BorderSide(
-            width: 1,
-            color: AppColors.lightDark,
-          ))),
-      height: 80,
-      width: MediaQuery.of(context).size.width,
-      child: Row(
-        children: [
-          itemBottomBar(context, Ics.levelUp, LocaleKeys.level_up, () {
-            showCustomDialog(
-              context,
-              children: [
-                PopUpLevelUp(
+    return Material(
+      color: Colors.transparent,
+      child: Container(
+        decoration: const BoxDecoration(
+            color: AppColors.dark,
+            border: Border(
+                top: BorderSide(
+              width: 1,
+              color: AppColors.lightDark,
+            ))),
+        height: 80,
+        width: MediaQuery.of(context).size.width,
+        child: Row(
+          children: [
+            itemBottomBar(context, Ics.levelUp, LocaleKeys.level_up, () {
+              showCustomDialog(
+                context,
+                children: [
+                  PopUpLevelUp(
+                      icon: Ics.middleBed,
+                      level: 20,
+                      cost: 21,
+                      time: 1260,
+                      onCancel: (){
+                        Navigator.pop(context);
+                      },
+                      onConfirm: () {
+                        Navigator.pop(context);
+                      }),
+                ],
+              );
+            }),
+            itemBottomBar(context, Ics.repair, LocaleKeys.repair, () {
+              showCustomDialog(
+                context,
+                children: [
+                  PopUpRepair(
                     icon: Ics.middleBed,
+                    cost: 120,
                     level: 20,
-                    cost: 21,
-                    time: 1260,
-                    onCancel: (){
-                      Navigator.pop(context);
-                    },
-                    onConfirm: () {
-                      Navigator.pop(context);
-                    }),
-              ],
-            );
-          }),
-          itemBottomBar(context, Ics.repair, LocaleKeys.repair, () {
-            showCustomDialog(
-              context,
-              children: [
-                PopUpRepair(
+                    time: 122,
+                    onConfirm: () {},
+                  ),
+                ],
+              );
+            }),
+            itemBottomBar(context, Ics.heart, LocaleKeys.mint, () {
+              Navigator.pushNamed(context, R.mint);
+            }),
+            itemBottomBar(context, Ics.shopping, LocaleKeys.sell, () {
+              showCustomDialog(context, children: [
+                PopUpSell(
+                  onConfirm: () {},
+                  time: 1,
+                  cost: 1,
                   icon: Ics.middleBed,
-                  cost: 120,
-                  level: 20,
-                  time: 122,
-                  onConfirm: () {},
+                  level: 2,
                 ),
-              ],
-            );
-          }),
-          itemBottomBar(context, Ics.heart, LocaleKeys.mint, () {
-            Navigator.pushNamed(context, R.mint);
-          }),
-          itemBottomBar(context, Ics.shopping, LocaleKeys.sell, () {
-            showCustomDialog(context, children: [
-              PopUpSell(
-                onConfirm: () {},
-                time: 1,
-                cost: 1,
-                icon: Ics.middleBed,
-                level: 2,
-              ),
-            ]);
-          }),
-          itemBottomBar(context, Ics.recycling, LocaleKeys.recycle, () {
-            Navigator.pushNamed(context, R.recycle);
-          }),
-          itemBottomBar(context, Ics.transfer, LocaleKeys.transfer, () {
-            showCustomDialog(
-              context,
-              children: [
-                PopUpTransfer(
-                  onConfirm: () {},
-                  valueTransfer: 1,
-                  fee: 1,
-                )
-              ],
-            );
-          }),
-        ],
+              ]);
+            }),
+            itemBottomBar(context, Ics.recycling, LocaleKeys.recycle, () {
+              Navigator.pushNamed(context, R.recycle);
+            }),
+            itemBottomBar(context, Ics.transfer, LocaleKeys.transfer, () {
+              showCustomDialog(
+                context,
+                children: [
+                  PopUpTransfer(
+                    onConfirm: () {},
+                    valueTransfer: 1,
+                    fee: 1,
+                  )
+                ],
+              );
+            }),
+          ],
+        ),
       ),
     );
   }
