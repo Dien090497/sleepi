@@ -36,9 +36,9 @@ class TransactionDetailList extends StatelessWidget {
         borderRadius: BorderRadius.only(
             topLeft: Radius.circular(40), topRight: Radius.circular(40)),
       ),
-      width: double.infinity,
+      height: MediaQuery.of(context).size.height * 0.5,
       padding: const EdgeInsets.only(top: 20),
-      child:isTransactionRecord ? ListView.builder(
+      child: isTransactionRecord ? ListView.builder(
           itemCount: keyList.length,
           physics: const ClampingScrollPhysics(),
           shrinkWrap: true,

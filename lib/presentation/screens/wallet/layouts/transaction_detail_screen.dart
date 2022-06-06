@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:slee_fi/common/extensions/string_x.dart';
 import 'package:slee_fi/common/routes/app_routes.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
@@ -11,14 +12,24 @@ import 'package:slee_fi/l10n/locale_keys.g.dart';
 import 'package:slee_fi/presentation/screens/passcode/passcode_screen.dart';
 import 'package:slee_fi/presentation/screens/wallet/widgets/box_button_widget.dart';
 import 'package:slee_fi/presentation/screens/wallet/widgets/modal_receive_wallet.dart';
+import 'package:slee_fi/presentation/screens/wallet/widgets/transaction_detail_list.dart';
 import 'package:slee_fi/resources/resources.dart';
 
+class TransactionDetailArguments {
+  final String title;
+  final String img;
+
+  TransactionDetailArguments(this.title, this.img);
+}
 
 class TransactionDetail extends StatelessWidget {
   const TransactionDetail({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    final args =
+    ModalRoute.of(context)?.settings.arguments as TransactionDetailArguments?;
+
     return  BackgroundWidget(
       appBar:  AppBar(
         toolbarHeight: 80,
@@ -42,16 +53,14 @@ class TransactionDetail extends StatelessWidget {
         elevation: 0,
         centerTitle: true,
         titleSpacing: 14,
-        title: SFText(keyText: "Avax",  style: TextStyles.bold14Blue,)
+        title: SFText(keyText: args != null ? args.title : "",  style: TextStyles.bold14Blue, stringCase: StringCase.upperCase,)
       ),
       child:  SafeArea(
         child: SingleChildScrollView(
+          physics: const ClampingScrollPhysics(),
           child: Column(
             children: [
-              const SizedBox(
-                height: 32,
-              ),
-              const SFIcon(Ics.icSolana),
+               args != null ?  SFIcon(args.img, width: 32,) : const SizedBox(),
               const SizedBox(
                 height: 16.0,
               ),
@@ -94,7 +103,7 @@ class TransactionDetail extends StatelessWidget {
               const SizedBox(
                 height: 12.0,
               ),
-              const TransactionDetail()
+              const TransactionDetailList()
             ],
           ),
         ),
