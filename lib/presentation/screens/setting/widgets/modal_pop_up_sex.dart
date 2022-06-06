@@ -19,6 +19,7 @@ class ModalPopUpSex extends StatelessWidget {
       LocaleKeys.female_,
       LocaleKeys.male_,
       LocaleKeys.other_,
+      LocaleKeys.secret,
     ];
     int selectedIndex = genders.indexOf(selectedGender);
 

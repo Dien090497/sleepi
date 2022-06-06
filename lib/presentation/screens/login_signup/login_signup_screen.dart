@@ -14,6 +14,7 @@ import 'package:slee_fi/common/widgets/sf_text.dart';
 import 'package:slee_fi/common/widgets/sf_textfield.dart';
 import 'package:slee_fi/common/widgets/sf_textfield_text_button.dart';
 import 'package:slee_fi/l10n/locale_keys.g.dart';
+import 'package:slee_fi/presentation/screens/login_signup/widgets/account_login_widget.dart';
 import 'package:slee_fi/presentation/screens/login_signup/widgets/login_box.dart';
 
 class LoginSignUpScreen extends StatelessWidget {
@@ -49,26 +50,7 @@ class LoginSignUpScreen extends StatelessWidget {
                     // hintText: LocaleKeys.emailAddress,
                   ),
                   const SizedBox(height: 12),
-                  const SFTextFieldTextButton(
-                    labelText: LocaleKeys.email_verification_code,
-                  ),
-                  const SizedBox(height: 37),
-                  SFButton(
-                    text: LocaleKeys.login_signup,
-                    color: AppColors.blue,
-                    textStyle: TextStyles.w600WhiteSize16,
-                    onPressed: () {
-                      Navigator.pushNamed(context, R.enterActivationCode);
-                    },
-                    width: MediaQuery.of(context).size.width,
-                  ),
-                  const SizedBox(height: 32),
-                  InkWell(
-                    onTap: () => Navigator.pushNamed(context, R.accountLogin),
-                    child: SFText(
-                        keyText: LocaleKeys.account_login,
-                        style: TextStyles.blue14),
-                  )
+                  const AccountLoginWidget(),
                 ],
               ),
             ),

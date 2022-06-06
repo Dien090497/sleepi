@@ -164,7 +164,7 @@ class _MintScreenState extends State<MintScreen> {
                                         const SFLabelValue(
                                           label: LocaleKeys.common_bed_box,
                                           styleLabel: TextStyles.lightWhite14,
-                                          value: '98%',
+                                          value: '95%',
                                           colorBorder: Colors.transparent,
                                         ),
                                         Padding(

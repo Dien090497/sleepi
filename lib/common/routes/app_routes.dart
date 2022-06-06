@@ -16,7 +16,6 @@ import 'package:slee_fi/presentation/screens/info_individual/info_individual_scr
 import 'package:slee_fi/presentation/screens/info_individual/layout/mint_screen.dart';
 import 'package:slee_fi/presentation/screens/info_individual/layout/recycle_screen.dart';
 import 'package:slee_fi/presentation/screens/item_selection/item_selection_screen.dart';
-import 'package:slee_fi/presentation/screens/login_signup/layouts/account_login_screen.dart';
 import 'package:slee_fi/presentation/screens/login_signup/login_signup_screen.dart';
 import 'package:slee_fi/presentation/screens/passcode/confirm_passcode_screen.dart';
 import 'package:slee_fi/presentation/screens/passcode/create_passcode_screen.dart';
@@ -52,7 +51,6 @@ import 'package:slee_fi/presentation/screens/wallet_creation_warning/wallet_crea
 class R {
   static const String _ = '/';
   static const String loginSignUp = '${_}login_signup';
-  static const String accountLogin = '${_}account_login';
   static const String enterActivationCode = '${_}enter_activation_code';
   static const String bottomNavigation = '${_}bottom_navigation';
   static const String recycle = '${_}recycle';
@@ -107,7 +105,6 @@ class R {
 class AppRoutes {
   static final routes = {
     R.loginSignUp: (_) => const LoginSignUpScreen(),
-    R.accountLogin: (_) => const AccountLoginScreen(),
     R.enterActivationCode: (_) => const EnterActivationCodeScreen(),
     R.bottomNavigation: (_) => const BottomNavigationScreen(),
     R.recycle: (_) => const RecycleScreen(),
