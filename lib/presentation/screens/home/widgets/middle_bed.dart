@@ -24,9 +24,6 @@ class _MiddleBedState extends State<MiddleBed> {
             (i) => BedType.values[i % BedType.values.length]);
     return Column(
       children: [
-        const SizedBox(
-          height: 20,
-        ),
         SFText(
           keyText: LocaleKeys.main_bed,
           style: TextStyles.white18,
@@ -130,7 +127,7 @@ class _MiddleBedState extends State<MiddleBed> {
               const SizedBox(height: 16),
               SFText(
                 keyText: 'Time: 6h - 8h',
-                style: TextStyles.labelStyle,
+                style: TextStyles.lightGrey16,
               ),
             ],
           ),

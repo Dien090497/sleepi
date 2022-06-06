@@ -53,125 +53,128 @@ class _BottomBarWidgetState extends State<BottomBarWidget> {
   @override
   Widget build(BuildContext context) {
     return Material(
-      color: Colors.transparent,
-      child: Container(
-        decoration: const BoxDecoration(
-            color: AppColors.dark,
-            border: Border(
-                top: BorderSide(
-              width: 1,
-              color: AppColors.lightDark,
-            ))),
-        height: 80,
-        width: MediaQuery.of(context).size.width,
-        child: Row(
-          children: [
-            itemBottomBar(0, context, Ics.levelUp, LocaleKeys.level_up, () {
-              setState(() {
-                index = 0;
-              });
-              showCustomDialog(
-                context,
-                children: [
-                  PopUpLevelUp(
+      color: AppColors.dark,
+      child: SafeArea(
+        top: false,
+        child: Container(
+          decoration: const BoxDecoration(
+              color: AppColors.dark,
+              border: Border(
+                  top: BorderSide(
+                width: 1,
+                color: AppColors.lightDark,
+              ))),
+          height: 80,
+          width: MediaQuery.of(context).size.width,
+          child: Row(
+            children: [
+              itemBottomBar(0, context, Ics.levelUp, LocaleKeys.level_up, () {
+                setState(() {
+                  index = 0;
+                });
+                showCustomDialog(
+                  context,
+                  children: [
+                    PopUpLevelUp(
+                        icon: Ics.middleBed,
+                        level: 20,
+                        cost: 21,
+                        time: 1260,
+                        onCancel: () {
+                          Navigator.pop(context);
+                        },
+                        onConfirm: () {}),
+                  ],
+                ).then((value) => setState(() {
+                      setState(() {
+                        index = -1;
+                      });
+                    }));
+              }),
+              itemBottomBar(1, context, Ics.repair, LocaleKeys.repair, () {
+                setState(() {
+                  index = 1;
+                });
+                showCustomDialog(
+                  context,
+                  children: [
+                    PopUpRepair(
                       icon: Ics.middleBed,
+                      cost: 120,
                       level: 20,
-                      cost: 21,
-                      time: 1260,
+                      time: 122,
                       onCancel: () {
                         Navigator.pop(context);
                       },
-                      onConfirm: () {}),
-                ],
-              ).then((value) => setState(() {
-                    setState(() {
+                      onConfirm: () {},
+                    ),
+                  ],
+                ).then((value) => setState(() {
+                      setState(() {
+                        index = -1;
+                      });
+                    }));
+              }),
+              itemBottomBar(2, context, Ics.heart, LocaleKeys.mint, () {
+                setState(() {
+                  index = 2;
+                });
+                Navigator.pushNamed(context, R.mint).then((value) => setState(() {
                       index = -1;
-                    });
-                  }));
-            }),
-            itemBottomBar(1, context, Ics.repair, LocaleKeys.repair, () {
-              setState(() {
-                index = 1;
-              });
-              showCustomDialog(
-                context,
-                children: [
-                  PopUpRepair(
+                    }));
+              }),
+              itemBottomBar(3, context, Ics.shopping, LocaleKeys.sell, () {
+                setState(() {
+                  index = 3;
+                });
+                showCustomDialog(context, children: [
+                  PopUpSell(
+                    time: 1,
+                    cost: 1,
                     icon: Ics.middleBed,
-                    cost: 120,
-                    level: 20,
-                    time: 122,
-                    onCancel: () {
-                      Navigator.pop(context);
-                    },
+                    level: 2,
+                    onCancel: () {},
                     onConfirm: () {},
                   ),
-                ],
-              ).then((value) => setState(() {
-                    setState(() {
-                      index = -1;
-                    });
-                  }));
-            }),
-            itemBottomBar(2, context, Ics.heart, LocaleKeys.mint, () {
-              setState(() {
-                index = 2;
-              });
-              Navigator.pushNamed(context, R.mint).then((value) => setState(() {
-                    index = -1;
-                  }));
-            }),
-            itemBottomBar(3, context, Ics.shopping, LocaleKeys.sell, () {
-              setState(() {
-                index = 3;
-              });
-              showCustomDialog(context, children: [
-                PopUpSell(
-                  time: 1,
-                  cost: 1,
-                  icon: Ics.middleBed,
-                  level: 2,
-                  onCancel: () {},
-                  onConfirm: () {},
-                ),
-              ]).then((value) => setState(() {
-                    setState(() {
-                      index = -1;
-                    });
-                  }));
-            }),
-            itemBottomBar(4, context, Ics.recycling, LocaleKeys.recycle, () {
-              setState(() {
-                index = 4;
-              });
-              Navigator.pushNamed(context, R.recycle)
-                  .then((value) => setState(() {
+                ]).then((value) => setState(() {
+                      setState(() {
                         index = -1;
-                      }));
-            }),
-            itemBottomBar(5, context, Ics.transfer, LocaleKeys.transfer, () {
-              setState(() {
-                index = 5;
-              });
-              showCustomDialog(
-                context,
-                children: [
-                  PopUpTransfer(
-                    onConfirm: () {},
-                    onCancel: () {
-                      Navigator.pop(context);
-                    },
-                    valueTransfer: 1,
-                    fee: 1,
-                  )
-                ],
-              ).then((value) => setState(() {
-                    setState(() {
-                      index = -1;
-                    });
-                  }));
-            }),
-          ],
+                      });
+                    }));
+              }),
+              itemBottomBar(4, context, Ics.recycling, LocaleKeys.recycle, () {
+                setState(() {
+                  index = 4;
+                });
+                Navigator.pushNamed(context, R.recycle)
+                    .then((value) => setState(() {
+                          index = -1;
+                        }));
+              }),
+              itemBottomBar(5, context, Ics.transfer, LocaleKeys.transfer, () {
+                setState(() {
+                  index = 5;
+                });
+                showCustomDialog(
+                  context,
+                  children: [
+                    PopUpTransfer(
+                      onConfirm: () {},
+                      onCancel: () {
+                        Navigator.pop(context);
+                      },
+                      valueTransfer: 1,
+                      fee: 1,
+                    )
+                  ],
+                ).then((value) => setState(() {
+                      setState(() {
+                        index = -1;
+                      });
+                    }));
+              }),
+            ],
+          ),
         ),
       ),
     );

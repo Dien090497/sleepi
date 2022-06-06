@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:slee_fi/common/routes/app_routes.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
 import 'package:slee_fi/l10n/locale_keys.g.dart';
@@ -22,14 +23,19 @@ class ItemsGacha extends StatelessWidget {
             DecoratedWidget(
                 child: SFText(keyText: title, style: TextStyles.bold18White)),
             const Spacer(),
-            Container(
-              decoration: BoxDecoration(
-                color: Colors.white.withOpacity(0.2),
-                borderRadius: BorderRadius.circular(16),
+            GestureDetector(
+              onTap: (){
+                Navigator.pushNamed(context, R.probability);
+              },
+              child: Container(
+                decoration: BoxDecoration(
+                  color: Colors.white.withOpacity(0.2),
+                  borderRadius: BorderRadius.circular(16),
+                ),
+                padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 15),
+                child: SFText(
+                    keyText: LocaleKeys.probability, style: TextStyles.white14),
               ),
-              padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 15),
-              child: SFText(
-                  keyText: LocaleKeys.probability, style: TextStyles.white14),
             )
           ],
         ),
