@@ -12,6 +12,7 @@
   "please_enter_your_activation_code": "Veuillez entrer votre code d'activation.",
   "please_select_your_language": "Veuillez sélectionner votre langue.",
   "settings": "Paramètres",
+  "about_permissions": "About permissions",
   "permissions": "Autorisations",
   "pillow_ai": "I.A. de l'oreiller",
   "siri_and_shortcuts": "Siri et raccourcis",
@@ -188,5 +189,5 @@
   "notification_may_include_alert_sound_and_icon": "",
   "how_to_play_whitepaper_litepaper_linktree": "",
   "apple_health": "",
-
+  "one_bed_will_be_burned": "One bed will be burned"
 }

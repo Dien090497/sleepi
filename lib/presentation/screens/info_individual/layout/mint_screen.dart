@@ -58,7 +58,7 @@ class _MintScreenState extends State<MintScreen> {
                           Padding(
                             padding: const EdgeInsets.symmetric(horizontal: 20),
                             child: SFText(
-                              keyText: LocaleKeys.bed_recycle,
+                              keyText: LocaleKeys.bed_mint,
                               style: TextStyles.boldWhite18,
                             ),
                           ),
@@ -90,7 +90,7 @@ class _MintScreenState extends State<MintScreen> {
                                   height: 60,
                                 ),
                                 const SFLabelValue(
-                                  label: LocaleKeys.token_consumption,
+                                  label: LocaleKeys.token_consumptions,
                                   value: '0 SLFT + 0 SLGT',
                                   styleValue: TextStyles.lightWhite14,
                                   styleLabel: TextStyles.lightWhite14,
@@ -164,7 +164,7 @@ class _MintScreenState extends State<MintScreen> {
                                         const SFLabelValue(
                                           label: LocaleKeys.common_bed_box,
                                           styleLabel: TextStyles.lightWhite14,
-                                          value: '98%',
+                                          value: '95%',
                                           colorBorder: Colors.transparent,
                                         ),
                                         Padding(
@@ -177,7 +177,7 @@ class _MintScreenState extends State<MintScreen> {
                                           ),
                                         ),
                                         const SFLabelValue(
-                                          label: LocaleKeys.failure,
+                                          label: LocaleKeys.one_bed_will_be_burned,
                                           styleLabel: TextStyles.lightWhite14,
                                           value: '2%',
                                           colorBorder: Colors.transparent,

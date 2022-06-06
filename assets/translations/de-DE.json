@@ -12,6 +12,7 @@
   "please_enter_your_activation_code": "Bitte, geben sie ihren aktivierungscode ein",
   "please_select_your_language": "Bitte, wählen sie ihre sprache",
   "settings": "Einstellungen",
+  "about_permissions": "About permissions",
   "permissions": "Erlaubnisse",
   "pillow_ai": "Kopfkissen A.I",
   "siri_and_shortcuts": "Siri & Direktzugänge",
@@ -187,6 +188,6 @@
   "would_like_to_send_you_notifications": "〇〇 würde Ihnen gerne Benachrichtigungen schicken",
   "notification_may_include_alert_sound_and_icon": "Die Benachrichtigung kann Warnungen, Töne und Symbolabzeichen umfassen. Diese können in den Einstellungen konfiguriert werden.",
   "how_to_play_whitepaper_litepaper_linktree": "Spielanleitung/ Whitepaper/Litepaper/Linktree",
-  "apple_health": ""
-
+  "apple_health": "",
+  "one_bed_will_be_burned": "One bed will be burned"
 }

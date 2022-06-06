@@ -91,8 +91,8 @@ class _Option extends StatelessWidget {
       child: Container(
         width: 70.w,
         height: 70.h,
-        margin: EdgeInsets.only(
-            bottom: 16.h, right: int.parse(num) % 3 == 0 ? 0 : 22.h),
+        margin: EdgeInsets.only( left: 11.h,
+            bottom: 16.h, right: 11.h),
         decoration: BoxDecoration(
           shape: BoxShape.circle,
           color: color,

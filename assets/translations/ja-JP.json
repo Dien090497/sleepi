@@ -12,6 +12,7 @@
   "please_enter_your_activation_code": "アクティベーションコードを入力してください。",
   "please_select_your_language": "言語を選択してください。",
   "settings": "設定",
+  "about_permissions": "About permissions",
   "permissions": "許可",
   "pillow_ai": "枕A.I.",
   "siri_and_shortcuts": "Siri & ショートカット",
@@ -187,6 +188,6 @@
   "would_like_to_send_you_notifications": "〇〇は通知を送信します。",
   "notification_may_include_alert_sound_and_icon": "通知には警告、サウンド、アイコンバッジが含まれます。\n設定で変更できます。",
   "how_to_play_whitepaper_litepaper_linktree": "プレイ方法/ホワイトペーパー/ライトペーパー/リンクツリー",
-  "apple_health": "アップルヘルス"
-
+  "apple_health": "アップルヘルス",
+  "one_bed_will_be_burned": "One bed will be burned"
 }
