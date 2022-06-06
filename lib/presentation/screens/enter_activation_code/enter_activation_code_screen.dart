@@ -84,7 +84,7 @@ class EnterActivationCodeScreen extends StatelessWidget {
                         text: LocaleKeys.get_activation_code,
                         textStyle: TextStyles.blue14,
                         onPressed: () async {
-                          final url = Uri.parse('https://linktr.ee/sleefi');
+                          final url = Uri.parse(Const.linkTreeUrl);
                           if (await canLaunchUrl(url)) {
                             launchUrl(url);
                           }

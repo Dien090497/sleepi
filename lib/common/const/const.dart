@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 class Const {
   static const int passcodeLength = 6;
 
+  static const String linkTreeUrl = 'https://linktr.ee/sleefi';
+
   static const localeDE = Locale('de', 'DE');
   static const localeEN = Locale('en', 'US');
   static const localeES = Locale('es', 'ES');
