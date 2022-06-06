@@ -79,18 +79,15 @@ class _BottomBarWidgetState extends State<BottomBarWidget> {
                       cost: 21,
                       time: 1260,
                       onCancel: () {
-                        setState(() {
-                          index = -1;
-                        });
                         Navigator.pop(context);
                       },
-                      onConfirm: () {
-                        setState(() {
-                          index = -1;
-                        });
-                      }),
+                      onConfirm: () {}),
                 ],
-              );
+              ).then((value) => setState(() {
+                    setState(() {
+                      index = -1;
+                    });
+                  }));
             }),
             itemBottomBar(1, context, Ics.repair, LocaleKeys.repair, () {
               setState(() {
@@ -105,19 +102,16 @@ class _BottomBarWidgetState extends State<BottomBarWidget> {
                     level: 20,
                     time: 122,
                     onCancel: () {
-                      setState(() {
-                        index = -1;
-                      });
                       Navigator.pop(context);
                     },
-                    onConfirm: () {
-                      setState(() {
-                        index = -1;
-                      });
-                    },
+                    onConfirm: () {},
                   ),
                 ],
-              );
+              ).then((value) => setState(() {
+                    setState(() {
+                      index = -1;
+                    });
+                  }));
             }),
             itemBottomBar(2, context, Ics.heart, LocaleKeys.mint, () {
               setState(() {
@@ -133,22 +127,18 @@ class _BottomBarWidgetState extends State<BottomBarWidget> {
               });
               showCustomDialog(context, children: [
                 PopUpSell(
-                  onConfirm: () {
-                    setState(() {
-                      index = -1;
-                    });
-                  },
                   time: 1,
                   cost: 1,
                   icon: Ics.middleBed,
                   level: 2,
-                  onCancel: () {
+                  onCancel: () {},
+                  onConfirm: () {},
+                ),
+              ]).then((value) => setState(() {
                     setState(() {
                       index = -1;
                     });
-                  },
-                ),
-              ]);
+                  }));
             }),
             itemBottomBar(4, context, Ics.recycling, LocaleKeys.recycle, () {
               setState(() {
@@ -167,22 +157,19 @@ class _BottomBarWidgetState extends State<BottomBarWidget> {
                 context,
                 children: [
                   PopUpTransfer(
-                    onConfirm: () {
-                      setState(() {
-                        index = -1;
-                      });
-                    },
+                    onConfirm: () {},
                     onCancel: () {
-                      setState(() {
-                        index = -1;
-                      });
                       Navigator.pop(context);
                     },
                     valueTransfer: 1,
                     fee: 1,
                   )
                 ],
-              );
+              ).then((value) => setState(() {
+                    setState(() {
+                      index = -1;
+                    });
+                  }));
             }),
           ],
         ),
