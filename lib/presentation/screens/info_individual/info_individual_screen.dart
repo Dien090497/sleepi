@@ -117,6 +117,9 @@ class InfoIndividualScreen extends StatelessWidget {
                           height: 33,
                         ),
                         const MintFromWidget(),
+                        const SizedBox(
+                          height: 80,
+                        ),
                       ],
                     ),
                   ),
