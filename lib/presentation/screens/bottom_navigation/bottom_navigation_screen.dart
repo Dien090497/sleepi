@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/widgets/background_widget.dart';
 import 'package:slee_fi/common/widgets/sf_bottom_navigator_home.dart';
 import 'package:slee_fi/presentation/blocs/bottom_navigation/bottom_navigation_bloc.dart';
@@ -28,6 +29,7 @@ class BottomNavigationScreen extends StatelessWidget {
           final navBloc = context.read<BottomNavigationBloc>();
           return Scaffold(
             extendBody: false,
+            backgroundColor: AppColors.transparent,
             bottomNavigationBar: SFBottomNavigatorHome(
               navState.tabIndex,
               onTap: (i) {

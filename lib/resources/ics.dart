@@ -3,7 +3,11 @@ part of 'resources.dart';
 class Ics {
   Ics._();
 
+  static const String addBed = 'assets/icons/add_bed.svg';
   static const String arrowLeft = 'assets/icons/arrow_left.svg';
+  static const String bed3d = 'assets/icons/bed_3d.svg';
+  static const String bedBunk = 'assets/icons/bed_bunk.svg';
+  static const String bedsCouple = 'assets/icons/beds_couple.svg';
   static const String chart = 'assets/icons/chart.svg';
   static const String efficiency = 'assets/icons/efficiency.svg';
   static const String ellipse = 'assets/icons/ellipse.svg';
@@ -15,15 +19,24 @@ class Ics {
   static const String group = 'assets/icons/group.svg';
   static const String heart = 'assets/icons/heart.svg';
   static const String home = 'assets/icons/home.svg';
+  static const String icAppleHealth = 'assets/icons/ic_apple_health.svg';
   static const String icArrowUpRight = 'assets/icons/ic_arrow_up_right.svg';
+  static const String icBedBoxes = 'assets/icons/ic_bed_boxes.svg';
+  static const String icBeds = 'assets/icons/ic_beds.svg';
   static const String icCalculator = 'assets/icons/ic_calculator.svg';
   static const String icCircleQuestion = 'assets/icons/ic_circle_question.svg';
+  static const String icDeleteTwo = 'assets/icons/ic_delete_two.svg';
   static const String icDownload = 'assets/icons/ic_download.svg';
   static const String icEdit = 'assets/icons/ic_edit.svg';
+  static const String icEye = 'assets/icons/ic_eye.svg';
   static const String icGold = 'assets/icons/ic_gold.svg';
   static const String icLock = 'assets/icons/ic_lock.svg';
+  static const String icMicrophone = 'assets/icons/ic_microphone.svg';
+  static const String icMotionData = 'assets/icons/ic_motion_data.svg';
+  static const String icNotifications = 'assets/icons/ic_notifications.svg';
   static const String icQuestion = 'assets/icons/ic_question.svg';
   static const String icRefresh = 'assets/icons/ic_refresh.svg';
+  static const String icScanOutlined = 'assets/icons/ic_scan_outlined.svg';
   static const String icSetting = 'assets/icons/ic_setting.svg';
   static const String icShieldLock = 'assets/icons/ic_shield_lock.svg';
   static const String icSilver = 'assets/icons/ic_silver.svg';
@@ -31,6 +44,7 @@ class Ics {
   static const String icSolanaCircle = 'assets/icons/ic_solana_circle.svg';
   static const String icTransfer = 'assets/icons/ic_transfer.svg';
   static const String icTwoEyes = 'assets/icons/ic_two_eyes.svg';
+  static const String icUsdc = 'assets/icons/ic_usdc.svg';
   static const String icWallet = 'assets/icons/ic_wallet.svg';
   static const String levelUp = 'assets/icons/level_up.svg';
   static const String lock = 'assets/icons/lock.svg';
@@ -46,12 +60,15 @@ class Ics {
   static const String starOutlined = 'assets/icons/star_outlined.svg';
   static const String successful = 'assets/icons/successful.svg';
   static const String telegram = 'assets/icons/telegram.svg';
-  static const String test = 'assets/icons/test.svg';
   static const String transfer = 'assets/icons/transfer.svg';
   static const String twitter = 'assets/icons/twitter.svg';
 
   static const List<String> values = [
+    addBed,
     arrowLeft,
+    bed3d,
+    bedBunk,
+    bedsCouple,
     chart,
     efficiency,
     ellipse,
@@ -63,15 +80,24 @@ class Ics {
     group,
     heart,
     home,
+    icAppleHealth,
     icArrowUpRight,
+    icBedBoxes,
+    icBeds,
     icCalculator,
     icCircleQuestion,
+    icDeleteTwo,
     icDownload,
     icEdit,
+    icEye,
     icGold,
     icLock,
+    icMicrophone,
+    icMotionData,
+    icNotifications,
     icQuestion,
     icRefresh,
+    icScanOutlined,
     icSetting,
     icShieldLock,
     icSilver,
@@ -79,6 +105,7 @@ class Ics {
     icSolanaCircle,
     icTransfer,
     icTwoEyes,
+    icUsdc,
     icWallet,
     levelUp,
     lock,
@@ -94,7 +121,6 @@ class Ics {
     starOutlined,
     successful,
     telegram,
-    test,
     transfer,
     twitter
   ];

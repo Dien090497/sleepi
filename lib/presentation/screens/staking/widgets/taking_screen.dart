@@ -3,7 +3,7 @@ import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
 import 'package:slee_fi/common/widgets/sf_dialog.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
-import 'package:slee_fi/di/translations/keys.dart';
+import 'package:slee_fi/l10n/locale_keys.g.dart';
 import 'package:slee_fi/presentation/screens/staking/widgets/popup_staking.dart';
 
 class TakingScreen extends StatelessWidget {
@@ -31,7 +31,7 @@ class TakingScreen extends StatelessWidget {
                     Padding(
                         padding: const EdgeInsets.only(left: 12.0),
                         child: SFText(
-                            keyText: Keys.stakeSlft,
+                            keyText: LocaleKeys.stake_slft,
                             style: TextStyles.bold32black)),
                     const SizedBox(
                       height: 16.0,
@@ -40,7 +40,7 @@ class TakingScreen extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         SFText(
-                            keyText: Keys.yourSlftInSpending,
+                            keyText: LocaleKeys.your_slft_in_spending,
                             style: TextStyles.bold20black),
                         SFText(
                             keyText: "XXXXXXX  SLFT",
@@ -55,7 +55,7 @@ class TakingScreen extends StatelessWidget {
                         Expanded(
                           flex: 3,
                           child: SFText(
-                              keyText: Keys.stakeWithdraw,
+                              keyText: LocaleKeys.stake_withdraw,
                               style: TextStyles.bold32black),
                         ),
                         Expanded(
@@ -63,7 +63,7 @@ class TakingScreen extends StatelessWidget {
                           child: GestureDetector(
                               onTap: () {},
                               child: SFText(
-                                  keyText: Keys.max,
+                                  keyText: LocaleKeys.max,
                                   style: TextStyles.bold20black)),
                         ),
                         Expanded(
@@ -86,12 +86,12 @@ class TakingScreen extends StatelessWidget {
                                   children: [const PopUpStaking()]);
                             },
                             child: SFText(
-                                keyText: Keys.confirm,
+                                keyText: LocaleKeys.confirm,
                                 style: TextStyles.bold32black)),
                         GestureDetector(
                             onTap: () => Navigator.pop(context),
                             child: SFText(
-                                keyText: Keys.cancel,
+                                keyText: LocaleKeys.cancel,
                                 style: TextStyles.bold32black))
                       ],
                     )

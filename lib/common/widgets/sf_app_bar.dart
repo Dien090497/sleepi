@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:slee_fi/common/extensions/string_x.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/widgets/sf_back_button.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
@@ -9,24 +10,27 @@ class SFAppBar extends AppBar {
     TextStyle? textStyle,
     VoidCallback? onPressedBack,
     bool toUpperCase = false,
+    bool? centerTitle ,
+    EdgeInsets? paddingLeading,
     Color? backgroundColor,
     required BuildContext context,
     Key? key,
   }) : super(
           backgroundColor: backgroundColor ?? AppColors.transparent,
           shadowColor: backgroundColor,
+          centerTitle: centerTitle ?? false,
           automaticallyImplyLeading: false,
-          leadingWidth: 32,
+          leadingWidth: 48,
           elevation: 0,
-          leading: GestureDetector(
-            onTap: onPressedBack ?? () => Navigator.maybePop(context),
-            child: const SFBackButton(),
+          leading:  const Padding(
+            padding: EdgeInsets.only(left: 16),
+            child: SFBackButton(),
           ),
           // centerTitle: true,
           title: SFText(
             keyText: title ?? "",
             style: textStyle,
-            toUpperCase: toUpperCase,
+            stringCase: StringCase.camelCase,
           ),
           key: key,
         );

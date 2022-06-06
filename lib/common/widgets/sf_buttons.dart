@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:slee_fi/common/extensions/string_x.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
 
@@ -11,6 +12,7 @@ class SFButton extends StatelessWidget {
     this.height,
     this.color,
     this.toUpperCase = false,
+    this.disabled = false,
     this.radius = 100,
     this.gradient,
     Key? key,
@@ -24,42 +26,59 @@ class SFButton extends StatelessWidget {
   final Color? color;
   final double radius;
   final bool toUpperCase;
+  final bool disabled;
   final LinearGradient? gradient;
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: width,
-      height: height ?? 48,
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(radius),
-        gradient: gradient,
-      ),
-      child: ElevatedButton(
-        onPressed: onPressed,
-        style: gradient == null
-            ? ButtonStyle(
-                backgroundColor: MaterialStateProperty.all<Color>(
-                    color ?? AppColors.greyBottomNavBar),
-                shape: MaterialStateProperty.all(
-                  RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(radius),
+    return Stack(
+      children: [
+        Container(
+          width: width,
+          height: height ?? 48,
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(radius),
+            gradient: gradient,
+          ),
+          child: ElevatedButton(
+            onPressed: onPressed,
+            style: gradient == null
+                ? ButtonStyle(
+                    backgroundColor: MaterialStateProperty.all<Color>(
+                        color ?? AppColors.greyBottomNavBar),
+                    shape: MaterialStateProperty.all(
+                      RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(radius),
+                      ),
+                    ),
+                  )
+                : ButtonStyle(
+                    shape: MaterialStateProperty.all(
+                      RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(radius),
+                      ),
+                    ),
                   ),
-                ),
-              )
-            : ButtonStyle(
-                shape: MaterialStateProperty.all(
-                  RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(radius),
-                  ),
-                ),
+            child: FittedBox(
+              fit: BoxFit.fitWidth,
+              child: SFText(
+                keyText: text,
+                style: textStyle,
+                stringCase: StringCase.upperCase,
               ),
-        child: SFText(
-          keyText: text,
-          style: textStyle,
-          toUpperCase: toUpperCase,
+            ),
+          ),
         ),
-      ),
+        if (disabled)
+          Container(
+            width: width,
+            height: height ?? 48,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(radius),
+              color: AppColors.dark.withOpacity(0.4),
+            ),
+          ),
+      ],
     );
   }
 }
@@ -85,7 +104,7 @@ class SFTextButton extends StatelessWidget {
       child: SFText(
         keyText: text,
         style: textStyle,
-        toUpperCase: toUpperCase,
+        stringCase: StringCase.upperCase,
       ),
     );
   }

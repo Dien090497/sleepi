@@ -3,6 +3,10 @@ import 'package:flutter/material.dart';
 class AppColors {
   static const primary = Color(0xFF000000);
 
+  static const radial1 = Color(0xFF241352);
+
+  static const radial2 = Color(0xFF0A204A);
+
   static const textColor = Color(0xFFCBD5E1);
 
   static const black = Color(0xFF000000);
@@ -49,12 +53,30 @@ class AppColors {
 
   static const purple = Color(0xFFB800E7);
 
+  static const lightPurple = Color(0xFFAD82F3);
+
+  static const tick = Color(0xFF51638D);
+
   static const red = Color(0xFFFF511A);
   static const rank1 = Color(0xFF94D4FF);
   static const rank2 = Color(0xFF5FBFFF);
   static const rank3 = Color(0xFF1DA4FF);
   static const rank4 = Color(0xFF0092F3);
   static const rank5 = Color(0xFF426BFF);
+
+  static const commonBed = Color(0xFFEEB049);
+
+  static const uncommonBed = Color(0xFFEA7636);
+
+  static const rareBed = Color(0xFF337CBF);
+
+  static const epicBed = Color(0xFF79BFFF);
+
+  static const legendaryBed = Color(0xFF4A9E45);
+
+  static const gray = Color(0xFFC4C4C4);
+
+  static final backgroundDialog = const Color(0xFF060616).withOpacity(0.9);
 
   static LinearGradient gradientBlue = LinearGradient(colors: [
     const Color(0xFFC4C4C4).withOpacity(0),
@@ -71,6 +93,11 @@ class AppColors {
 
   static const gradientBluePurple = LinearGradient(
       colors: [blue, purple],
+      begin: Alignment.topLeft,
+      end: Alignment.bottomRight);
+
+  static LinearGradient gradientBluePurpleStaking = LinearGradient(
+      colors: [blue.withOpacity(0.3), purple.withOpacity(0.3)],
       begin: Alignment.topLeft,
       end: Alignment.bottomRight);
 

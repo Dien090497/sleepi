@@ -3,6 +3,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:slee_fi/common/const/const.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
+import 'package:slee_fi/common/widgets/sf_icon.dart';
+import 'package:slee_fi/resources/resources.dart';
 
 class PasscodeNumPad extends StatelessWidget {
   const PasscodeNumPad(
@@ -19,7 +21,8 @@ class PasscodeNumPad extends StatelessWidget {
         ...List.generate(
           4,
           (index) => Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            mainAxisSize: MainAxisSize.min,
             children: List.generate(
               3,
               (i) {
@@ -73,19 +76,23 @@ class _Option extends StatelessWidget {
       color = AppColors.transparent;
       child = const SizedBox();
     } else if (num == '12') {
-      color = AppColors.greyBottomNavBar;
-      child = const Text('X', style: TextStyles.white22Italic);
+      color = AppColors.transparent;
+      child = const SFIcon(
+        Ics.icDeleteTwo,
+        width: 36,
+      );
     } else {
-      color = AppColors.greyBottomNavBar;
-      child = Text(num, style: TextStyles.white22Italic);
+      color = AppColors.white.withOpacity(0.1);
+      child = Text(num, style: TextStyles.lightWhite24);
     }
 
     return GestureDetector(
       onTap: onTap,
       child: Container(
-        width: 60.w,
-        height: 60.h,
-        margin: EdgeInsets.only(bottom: 8.h),
+        width: 70.w,
+        height: 70.h,
+        margin: EdgeInsets.only( left: 11.h,
+            bottom: 16.h, right: 11.h),
         decoration: BoxDecoration(
           shape: BoxShape.circle,
           color: color,

@@ -1,36 +1,64 @@
 import 'package:flutter/material.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
+import 'package:slee_fi/common/style/text_styles.dart';
 import 'package:slee_fi/common/widgets/sf_buttons.dart';
-import 'package:slee_fi/common/widgets/sf_dialog.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
-import 'package:slee_fi/presentation/screens/market_place/widget/pop_up_buy_market_place.dart';
+import 'package:slee_fi/l10n/locale_keys.g.dart';
 
 class BottomBarMarketPlaceWidget extends StatelessWidget {
   const BottomBarMarketPlaceWidget({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 15),
-      child: Container(
-        decoration: BoxDecoration(
-            color: AppColors.greyBottomNavBar,
-            borderRadius: BorderRadius.circular(25),
-            border: Border.all(color: AppColors.primary)),
-        child: Padding(
-          padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 15),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              SFText(keyText: '12.45 SOL'),
-              SFButton(
-                text: 'Buy Now',
-                onPressed: () {
-                  showCustomDialog(context, children: [const PopUpBuyMarketPlace()]);
-                },
+    return Material(
+      color: Colors.transparent,
+      child: Padding(
+        padding: const EdgeInsets.all(24.0),
+        child: Stack(
+          alignment: Alignment.center,
+          children: [
+            Container(
+              height: 56,
+              decoration: BoxDecoration(
+                gradient: AppColors.gradientBlueButton,
+                borderRadius: BorderRadius.circular(25),
               ),
-            ],
-          ),
+            ),
+            Container(
+              height: 54,
+              margin: const EdgeInsets.all(1),
+              decoration: BoxDecoration(
+                color: AppColors.lightDark,
+                borderRadius: BorderRadius.circular(25),
+              ),
+              child: Padding(
+                padding: const EdgeInsets.all(12),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    const SizedBox(
+                      width: 12,
+                    ),
+                    Expanded(
+                      child: SFText(
+                        keyText: '1000 SLFT',
+                        style: TextStyles.white16,
+                      ),
+                    ),
+                    SFButton(
+                      text: LocaleKeys.buy_now,
+                      textStyle: TextStyles.white14W700,
+                      gradient: AppColors.gradientBlueButton,
+                      onPressed: () {
+                        // showCustomDialog(context,
+                        //     children: [const PopUpBuyMarketPlace()]);
+                      },
+                    ),
+                  ],
+                ),
+              ),
+            )
+          ],
         ),
       ),
     );

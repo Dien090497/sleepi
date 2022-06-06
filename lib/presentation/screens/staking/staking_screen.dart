@@ -14,12 +14,12 @@ class StakingScreen extends StatelessWidget {
         backgroundColor: AppColors.transparent,
         body: SafeArea(
             child: Column(children: const [
-          TopBarStaking(
-            valueGold: 47.52,
-            valueSilver: 52.88,
-          ),
-          Expanded(child: StakingList()),
-        ])),
+              TopBarStaking(
+                valueGold: 47.52,
+                valueSilver: 52.88,
+              ),
+              Expanded(child: StakingList()),
+            ])),
       ),
     );
   }

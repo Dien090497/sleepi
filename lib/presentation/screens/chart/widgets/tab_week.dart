@@ -1,131 +1,119 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_date_pickers/flutter_date_pickers.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
-import 'package:slee_fi/common/widgets/sf_dialog.dart';
-import 'package:slee_fi/common/widgets/sf_text.dart';
-import 'package:slee_fi/di/translations/keys.dart';
+import 'package:slee_fi/common/style/text_styles.dart';
+import 'package:slee_fi/common/utils/date_time_utils.dart';
+import 'package:slee_fi/common/widgets/loading_screen.dart';
+import 'package:slee_fi/di/injector.dart';
+import 'package:slee_fi/l10n/locale_keys.g.dart';
+import 'package:slee_fi/presentation/blocs/chart/chart_week_cubit.dart';
+import 'package:slee_fi/presentation/blocs/chart/chart_week_state.dart';
+import 'package:slee_fi/presentation/screens/chart/widgets/chart_tab_body.dart';
 import 'package:slee_fi/presentation/screens/chart/widgets/chart_title.dart';
-import 'package:slee_fi/presentation/screens/chart/widgets/chart_widget.dart';
+import 'package:slee_fi/presentation/screens/result/widgets/chart_statistic_share.dart';
 
 class TabWeek extends StatelessWidget {
   const TabWeek({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return ListView(
-      padding: const EdgeInsets.symmetric(vertical: 16),
-      children: [
-        GestureDetector(
-          onTap: () {
-            showCustomDialog(
-              context,
-              children: [
-                ChartWeekPicker(
-                  selectedDate: DateTime.now(),
-                  firstAllowedDate:
-                      DateTime.now().subtract(const Duration(days: 45)),
-                  lastAllowedDate: DateTime.now().add(const Duration(days: 45)),
-                  onNewSelected: (period) {},
-                )
-              ],
-            );
-          },
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: const [
-              Icon(Icons.arrow_back_ios, size: 16),
-              SizedBox(width: 12),
-              Text('April 20th ~ 26th, 2022'),
-              SizedBox(width: 12),
-              Icon(Icons.arrow_forward_ios, size: 16),
+    final dateTimeUtils = getIt<DateTimeUtils>();
+
+    return BlocBuilder<ChartWeekCubit, ChartWeekState>(
+      builder: (context, state) {
+        if (state is ChartWeekLoaded) {
+          final cubit = context.read<ChartWeekCubit>();
+
+          final start = state.week.start;
+          final end = state.week.end;
+          final startMonth = start.month;
+          final endMonth = end.month;
+          final startYear = start.year;
+          final endYear = end.year;
+
+          return ChartTabBody(
+            picker: ChartWeekPicker(
+              selectedDate: state.week.start,
+              firstAllowedDate: state.firstAllowedDate,
+              lastAllowedDate: state.lastAllowedDate,
+              onNewSelected: (period) {
+                cubit.selectWeek(period);
+              },
+            ),
+            onPreviousTap: () {
+              cubit.previousTap();
+            },
+            onNextTap: () {
+              cubit.nextTap();
+            },
+            text:
+                '${dateTimeUtils.MMMdo(start)} ${startYear == endYear ? '' : '$startYear '}~ ${startMonth != endMonth ? dateTimeUtils.MMMdo(end) : dateTimeUtils.doFormat(end)}, $endYear',
+            children: [
+              const ChartTitle(
+                title: LocaleKeys.slft,
+                textStyleTitle: TextStyles.bold16LightWhite,
+                toUpperCase: true,
+                padding: EdgeInsets.zero,
+              ),
+              const SizedBox(height: 12),
+              ChartStatisticShare(),
+              const SizedBox(height: 40),
+              const ChartTitle(
+                  title: LocaleKeys.average_sleep_score,
+                  textStyleTitle: TextStyles.bold16LightWhite,
+                  result: "80/100",
+                  textStyleResult: TextStyles.bold16Blue,
+                  padding: EdgeInsets.zero),
+              const SizedBox(height: 12),
+              ChartStatisticShare(),
+              const SizedBox(height: 40),
+              const ChartTitle(
+                title: LocaleKeys.bed_time,
+                textStyleTitle: TextStyles.bold16LightWhite,
+              ),
+              const SizedBox(height: 12),
+              ChartStatisticShare(),
+              const SizedBox(height: 40),
+              const ChartTitle(
+                  title: LocaleKeys.sleep_onset_time,
+                  textStyleTitle: TextStyles.bold16LightWhite,
+                  padding: EdgeInsets.zero),
+              const SizedBox(height: 12),
+              ChartStatisticShare(),
+              const SizedBox(height: 40),
+              const ChartTitle(
+                  title: LocaleKeys.woke_up,
+                  textStyleTitle: TextStyles.bold16LightWhite,
+                  padding: EdgeInsets.zero),
+              const SizedBox(height: 12),
+              ChartStatisticShare(),
+              const SizedBox(height: 40),
+              const ChartTitle(
+                  title: LocaleKeys.sleep_duration,
+                  textStyleTitle: TextStyles.bold16LightWhite,
+                  padding: EdgeInsets.zero),
+              const SizedBox(height: 4),
+              ChartStatisticShare(),
+              const SizedBox(height: 16),
+              const ChartTitle(
+                  title: LocaleKeys.time_in_bed,
+                  textStyleTitle: TextStyles.bold16LightWhite,
+                  padding: EdgeInsets.zero),
+              const SizedBox(height: 12),
+              ChartStatisticShare(),
+              const SizedBox(height: 40),
+              const ChartTitle(
+                  title: LocaleKeys.nocturnal_awakenings,
+                  textStyleTitle: TextStyles.bold16LightWhite,
+                  padding: EdgeInsets.zero),
+              const SizedBox(height: 12),
+              ChartStatisticShare(),
             ],
-          ),
-        ),
-        const SizedBox(height: 16),
-        ChartTitle(
-          text: Keys.totalTokenEarned,
-          child: Container(
-            decoration: BoxDecoration(
-              border: Border.all(color: AppColors.black),
-              borderRadius: BorderRadius.circular(8),
-              color: AppColors.greyBottomNavBar,
-            ),
-            padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 8),
-            alignment: Alignment.centerRight,
-            child: SFText(
-              keyText: 'SFLT',
-            ),
-          ),
-        ),
-        const SizedBox(height: 16),
-        const SizedBox(
-          height: 200,
-          child: ChartWidget(),
-        ),
-        const SizedBox(height: 16),
-        ChartTitle(
-          text: Keys.averageSleepScore,
-          child: Container(
-            decoration: BoxDecoration(
-              border: Border.all(color: AppColors.black),
-              borderRadius: BorderRadius.circular(8),
-              color: AppColors.greyBottomNavBar,
-            ),
-            padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 8),
-            alignment: Alignment.centerRight,
-            child: SFText(
-              keyText: '/100',
-            ),
-          ),
-        ),
-        const SizedBox(height: 16),
-        const SizedBox(
-          height: 200,
-          child: ChartWidget(),
-        ),
-        const SizedBox(height: 16),
-        const ChartTitle(text: Keys.bedTime),
-        const SizedBox(height: 4),
-        const SizedBox(
-          height: 200,
-          child: ChartWidget(),
-        ),
-        const SizedBox(height: 16),
-        const ChartTitle(text: Keys.sleepOnsetTime),
-        const SizedBox(height: 4),
-        const SizedBox(
-          height: 200,
-          child: ChartWidget(),
-        ),
-        const SizedBox(height: 16),
-        const ChartTitle(text: Keys.wokeUp),
-        const SizedBox(height: 4),
-        const SizedBox(
-          height: 200,
-          child: ChartWidget(),
-        ),
-        const SizedBox(height: 16),
-        const ChartTitle(text: Keys.sleepDuration),
-        const SizedBox(height: 4),
-        const SizedBox(
-          height: 200,
-          child: ChartWidget(),
-        ),
-        const SizedBox(height: 16),
-        const ChartTitle(text: Keys.timeInBed),
-        const SizedBox(height: 4),
-        const SizedBox(
-          height: 200,
-          child: ChartWidget(),
-        ),
-        const SizedBox(height: 16),
-        const ChartTitle(text: Keys.nocturnalAwakening),
-        const SizedBox(height: 4),
-        const SizedBox(
-          height: 200,
-          child: ChartWidget(),
-        ),
-      ],
+          );
+        }
+        return const LoadingIcon();
+      },
     );
   }
 }
@@ -161,24 +149,31 @@ class ChartWeekPicker extends StatelessWidget {
         color: AppColors.green,
         shape: BoxShape.rectangle,
       ),
+      nextIcon: const Icon(Icons.chevron_right, color: AppColors.white),
+      prevIcon: const Icon(Icons.chevron_left, color: AppColors.white),
+      selectedPeriodEndTextStyle: TextStyles.white14,
+      selectedDateStyle: TextStyles.white14,
+      defaultDateTextStyle: TextStyles.lightGrey14,
+      selectedPeriodMiddleTextStyle: TextStyles.white14,
+      selectedPeriodStartTextStyle: TextStyles.white14,
+      disabledDateStyle: TextStyles.lightGrey14,
+      displayedPeriodTitle: TextStyles.white14,
+      dayHeaderStyle: const DayHeaderStyle(textStyle: TextStyles.white14),
     );
 
     return Column(
       mainAxisSize: MainAxisSize.min,
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        Container(
-          color: Colors.white,
-          child: WeekPicker(
-            selectedDate: selectedDate,
-            onChanged: (period) {
-              onNewSelected(period);
-              Navigator.pop(context);
-            },
-            firstDate: firstAllowedDate,
-            lastDate: lastAllowedDate,
-            datePickerStyles: styles,
-          ),
+        WeekPicker(
+          selectedDate: selectedDate,
+          onChanged: (period) {
+            onNewSelected(period);
+            Navigator.pop(context);
+          },
+          firstDate: firstAllowedDate,
+          lastDate: lastAllowedDate,
+          datePickerStyles: styles,
         ),
       ],
     );

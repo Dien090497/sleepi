@@ -3,7 +3,7 @@ import 'package:slee_fi/common/routes/app_routes.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
-import 'package:slee_fi/di/translations/keys.dart';
+import 'package:slee_fi/l10n/locale_keys.g.dart';
 import 'package:slee_fi/resources/resources.dart';
 
 class TutorialScreen extends StatefulWidget {
@@ -15,16 +15,16 @@ class TutorialScreen extends StatefulWidget {
 
 class _TutorialScreenState extends State<TutorialScreen> {
   final texts = [
-    Keys.howToSetUp,
-    Keys.elevateYourPhone,
-    Keys.trackingRange,
-    Keys.tokenAndSleep,
+    LocaleKeys.how_to_set_up,
+    LocaleKeys.elevate_your_phone,
+    LocaleKeys.tracking_range,
+    LocaleKeys.token_and_sleep,
   ];
   final images = [
     Imgs.tutorial1,
     Imgs.tutorial2,
     Imgs.tutorial3,
-    Imgs.tutorial4,
+    Imgs.tutorial4
   ];
 
   final PageController _pageController = PageController();
@@ -82,7 +82,7 @@ class _TutorialScreenState extends State<TutorialScreen> {
                   }
                 },
                 child: SFText(
-                  keyText: Keys.next,
+                  keyText: LocaleKeys.next,
                 ),
               ),
             ),

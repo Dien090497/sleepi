@@ -2,11 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
 import 'package:slee_fi/common/widgets/sf_buttons.dart';
-import 'package:slee_fi/common/widgets/sf_card.dart';
 import 'package:slee_fi/common/widgets/sf_dialog.dart';
 import 'package:slee_fi/common/widgets/sf_icon.dart';
+import 'package:slee_fi/common/widgets/sf_label_value.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
-import 'package:slee_fi/di/translations/keys.dart';
+import 'package:slee_fi/l10n/locale_keys.g.dart';
+import 'package:syncfusion_flutter_sliders/sliders.dart';
 
 class PopUpRepair extends StatelessWidget {
   const PopUpRepair(
@@ -33,9 +34,7 @@ class PopUpRepair extends StatelessWidget {
         Positioned(
           right: 0,
           child: GestureDetector(
-            onTap: () {
-              Navigator.pop(context);
-            },
+            onTap: onCancel,
             child: const Icon(
               Icons.close,
               color: AppColors.lightGrey,
@@ -45,54 +44,56 @@ class PopUpRepair extends StatelessWidget {
         Column(
           children: [
             SFText(
-              keyText: Keys.repair,
+              keyText: LocaleKeys.repair,
               style: TextStyles.white1w700size16,
             ),
             const SizedBox(height: 20),
             SFIcon(icon),
             const SizedBox(height: 24),
             SFText(
-              keyText: Keys.durability,
+              keyText: LocaleKeys.durability,
               suffix: ' : 78/100',
               style: TextStyles.white16,
             ),
             Padding(
               padding: const EdgeInsets.symmetric(vertical: 12),
-              child: Slider(
+              child: SfSlider(
                 value: 78,
                 min: 0,
                 max: 100,
+                activeColor: AppColors.green,
+                thumbIcon: Container(
+                  width: 16,
+                  height: 16,
+                  decoration: const BoxDecoration(
+                    color: AppColors.white,
+                    shape: BoxShape.circle,
+                  ),
+                  padding: const EdgeInsets.all(4),
+                  child: Container(
+                    decoration: const BoxDecoration(
+                      color: AppColors.green,
+                      shape: BoxShape.circle,
+                    ),
+                  ),
+                ),
                 onChanged: (v) {},
               ),
             ),
             const SizedBox(height: 32),
-            SFCard(
-              margin: EdgeInsets.zero,
-              padding: const EdgeInsets.symmetric(vertical: 24, horizontal: 18),
-              child: Row(
-                children: [
-                  SFText(
-                    keyText: 'Cost',
-                    style: TextStyles.lightGrey16,
-                  ),
-                  const SizedBox(width: 4),
-                  Expanded(
-                    child: SFText(
-                      keyText: '$cost SLFT',
-                      style: TextStyles.blue16,
-                      textAlign: TextAlign.right,
-                    ),
-                  ),
-                ],
-              ),
+            const SFLabelValue(
+              label: LocaleKeys.cost,
+              value: '120 SLFT',
+              styleValue: TextStyles.white16,
             ),
             const SizedBox(height: 24),
             Row(
               children: [
                 Expanded(
                   child: SFButton(
-                    text: Keys.cancel,
+                    text: LocaleKeys.cancel,
                     onPressed: onCancel,
+                    width: double.infinity,
                     textStyle: TextStyles.lightGrey16,
                     color: AppColors.light4,
                   ),
@@ -100,12 +101,13 @@ class PopUpRepair extends StatelessWidget {
                 const SizedBox(width: 12),
                 Expanded(
                   child: SFButton(
-                    text: Keys.confirm,
+                    text: LocaleKeys.confirm,
                     onPressed: () {
                       onConfirm();
                       Navigator.pop(context);
                       showSuccessfulDialog(context);
                     },
+                    width: double.infinity,
                     textStyle: TextStyles.white16,
                     gradient: AppColors.gradientBlueButton,
                   ),

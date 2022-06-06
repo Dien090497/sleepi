@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_translate/flutter_translate.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 class SFTextField extends StatelessWidget {
   const SFTextField({
@@ -16,6 +16,9 @@ class SFTextField extends StatelessWidget {
     Key? key,
     this.maxLine,
     this.maxLength,
+    this.controller,
+    this.onChanged,
+    this.textInputType,
   }) : super(key: key);
 
   final String? labelText;
@@ -26,7 +29,10 @@ class SFTextField extends StatelessWidget {
   final bool noBorder;
   final int? maxLine;
   final int? maxLength;
+  final TextEditingController? controller;
   final bool showLabel;
+  final ValueChanged<String>? onChanged;
+  final TextInputType? textInputType;
 
   @override
   Widget build(BuildContext context) {
@@ -53,9 +59,14 @@ class SFTextField extends StatelessWidget {
               )
             : const SizedBox(),
         TextField(
+          style: TextStyles.w400White16,
+          controller: controller,
+          onChanged: onChanged,
+          keyboardType: textInputType,
           decoration: InputDecoration(
             isDense: true,
-            hintText: hintText != null ? translate(hintText!) : null,
+            // hintText: hintText != null ? translate(hintText!) : null,
+            hintText: hintText?.tr(),
             hintStyle: hintStyle ?? TextStyles.lightGrey14,
             suffix: suffix,
             suffixIcon: suffixIcon,
@@ -65,6 +76,7 @@ class SFTextField extends StatelessWidget {
             enabledBorder: border,
             errorBorder: border,
             focusedErrorBorder: border,
+            counterText: ""
           ),
           maxLines: maxLine ?? 1,
           maxLength: maxLength,

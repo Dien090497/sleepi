@@ -3,6 +3,7 @@ import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
 import 'package:slee_fi/common/widgets/background_widget.dart';
 import 'package:slee_fi/common/widgets/sf_app_bar.dart';
+import 'package:slee_fi/l10n/locale_keys.g.dart';
 import 'package:slee_fi/presentation/screens/seed_phrase/widgets/seed_phrase_list.dart';
 
 class SeedPhraseScreen extends StatelessWidget {
@@ -15,15 +16,11 @@ class SeedPhraseScreen extends StatelessWidget {
         backgroundColor: AppColors.transparent,
         appBar: SFAppBar(
           context: context,
-          title: "Seed Phrase",
+          title: LocaleKeys.seed_phrase,
           textStyle: TextStyles.bold18LightWhite,
         ),
-        body: SafeArea(
-            child: Column(children: const [
-          // AvailableWidget(),
-          Expanded(child: SeedPhraseList()),
-          // ActivationCodeList(),
-        ])),
+        body: const SafeArea(
+            child: SeedPhraseList()),
       ),
     );
   }

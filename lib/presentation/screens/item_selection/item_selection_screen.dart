@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/widgets/sf_buttons.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
-import 'package:slee_fi/di/translations/keys.dart';
+import 'package:slee_fi/l10n/locale_keys.g.dart';
 import 'package:slee_fi/presentation/screens/item_selection/widgets/nft_item.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
@@ -32,7 +32,7 @@ class _ItemSelectionScreenState extends State<ItemSelectionScreen> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 const SizedBox(width: 40),
-                SFText(keyText: Keys.itemList),
+                SFText(keyText: LocaleKeys.item_list),
                 ElevatedButton(
                     style: ElevatedButton.styleFrom(
                       shape: const CircleBorder(),
@@ -52,9 +52,9 @@ class _ItemSelectionScreenState extends State<ItemSelectionScreen> {
               padding: const EdgeInsets.all(12),
               child: Row(
                 children: [
-                  SFText(keyText: Keys.all),
+                  SFText(keyText: LocaleKeys.all),
                   const Spacer(),
-                  SFText(keyText: Keys.filter),
+                  SFText(keyText: LocaleKeys.filter),
                 ],
               ),
             ),
@@ -113,7 +113,7 @@ class _ItemSelectionScreenState extends State<ItemSelectionScreen> {
               ],
             ),
             SFButton(
-              text: Keys.cancel,
+              text: LocaleKeys.cancel,
               onPressed: () {
                 Navigator.pop(context);
               },

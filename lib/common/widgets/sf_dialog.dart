@@ -3,7 +3,7 @@ import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
 import 'package:slee_fi/common/widgets/sf_icon.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
-import 'package:slee_fi/di/translations/keys.dart';
+import 'package:slee_fi/l10n/locale_keys.g.dart';
 import 'package:slee_fi/resources/resources.dart';
 
 Future<T?> showCustomDialog<T>(
@@ -14,7 +14,8 @@ Future<T?> showCustomDialog<T>(
 }) async {
   return showDialog(
       context: context,
-      builder: (_) {
+      barrierColor: AppColors.backgroundDialog,
+      builder: (context) {
         return SFDialog(
           backgroundColor: backgroundColor,
           padding: padding,
@@ -26,7 +27,8 @@ Future<T?> showCustomDialog<T>(
 Future<T?> showSuccessfulDialog<T>(BuildContext context) async {
   return showDialog(
       context: context,
-      builder: (_) {
+      barrierColor: AppColors.backgroundDialog,
+      builder: (context) {
         return SFDialog(
           children: [
             Align(
@@ -35,15 +37,13 @@ Future<T?> showSuccessfulDialog<T>(BuildContext context) async {
                 onPressed: () {
                   Navigator.pop(context);
                 },
-                icon: const Icon(
-                  Icons.close,
-                  color: AppColors.white,
-                ),
+                icon: const Icon(Icons.close, color: AppColors.white),
               ),
             ),
             const SFIcon(Ics.successful),
             const SizedBox(height: 36),
-            SFText(keyText: Keys.successful, style: TextStyles.bold18White),
+            SFText(
+                keyText: LocaleKeys.successfully, style: TextStyles.bold18White),
             const SizedBox(height: 40),
           ],
         );

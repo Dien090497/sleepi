@@ -5,19 +5,19 @@ import 'package:slee_fi/common/widgets/sf_buttons.dart';
 import 'package:slee_fi/common/widgets/sf_card.dart';
 import 'package:slee_fi/common/widgets/sf_icon.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
-import 'package:slee_fi/di/translations/keys.dart';
+import 'package:slee_fi/l10n/locale_keys.g.dart';
 
 class JewelDialogBody extends StatelessWidget {
   const JewelDialogBody(
       {Key? key,
-      required this.icon,
-      required this.name,
-      required this.level,
-      required this.id,
-      required this.attribute,
-      required this.effect,
-      required this.onSellTap,
-      required this.onTransferTap})
+        required this.icon,
+        required this.name,
+        required this.level,
+        required this.id,
+        required this.attribute,
+        required this.effect,
+        required this.onSellTap,
+        required this.onTransferTap})
       : super(key: key);
 
   final String icon;
@@ -80,7 +80,7 @@ class JewelDialogBody extends StatelessWidget {
               child: Row(
                 children: [
                   SFText(
-                    keyText: Keys.attributes,
+                    keyText: LocaleKeys.attributes,
                     style: TextStyles.lightGrey16,
                   ),
                   const SizedBox(width: 4),
@@ -101,13 +101,13 @@ class JewelDialogBody extends StatelessWidget {
               child: Row(
                 children: [
                   SFText(
-                    keyText: Keys.attributes,
+                    keyText: LocaleKeys.effect,
                     style: TextStyles.lightGrey16,
                   ),
                   const SizedBox(width: 4),
                   Expanded(
                     child: SFText(
-                      keyText: '+2 Luck',
+                      keyText: '+5% Base Luck',
                       style: TextStyles.blue16,
                       textAlign: TextAlign.right,
                     ),
@@ -120,15 +120,21 @@ class JewelDialogBody extends StatelessWidget {
               children: [
                 Expanded(
                     child: SFButton(
-                  text: 'Sell',
-                  onPressed: onSellTap,
-                )),
+                      text: LocaleKeys.sell,
+                      onPressed: onSellTap,
+                      textStyle: TextStyles.lightGrey16,
+                      color: AppColors.whiteOpacity5,
+                      width: double.infinity,
+                    )),
                 const SizedBox(width: 12),
                 Expanded(
                     child: SFButton(
-                  text: 'Transfer',
-                  onPressed: onTransferTap,
-                )),
+                      text: LocaleKeys.transfer,
+                      onPressed: onTransferTap,
+                      textStyle: TextStyles.white16,
+                      gradient: AppColors.blueGradient,
+                      width: double.infinity,
+                    )),
               ],
             ),
           ],

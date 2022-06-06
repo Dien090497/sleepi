@@ -1,26 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
-import 'package:slee_fi/common/widgets/sf_alert_dialog.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
-import 'package:slee_fi/di/translations/keys.dart';
+import 'package:slee_fi/l10n/locale_keys.g.dart';
 
 class PopUpWalletWarning extends StatelessWidget {
   const PopUpWalletWarning({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return SFAlertDialog(
-      padding: const EdgeInsets.all(20.0),
+    return Column(
       children: [
-        Align(
-            alignment: Alignment.topRight,
-            child: GestureDetector(
-                onTap: () => Navigator.maybePop(context),
-                child: const Icon(
-                  Icons.close,
-                  color: AppColors.lightGrey,
-                ))),
         const Icon(
           Icons.warning_amber_outlined,
           color: AppColors.yellow,
@@ -29,12 +19,12 @@ class PopUpWalletWarning extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.symmetric(vertical: 24.0),
           child: SFText(
-            keyText: Keys.yourWalletIsBeingCreated,
+            keyText: LocaleKeys.your_wallet_is_being_created,
             style: TextStyles.bold18LightWhite,
           ),
         ),
         SFText(
-          keyText: Keys.yourWalletIsBeingCreated,
+          keyText: LocaleKeys.your_wallet_is_being_created,
           style: TextStyles.lightGrey16,
         )
       ],

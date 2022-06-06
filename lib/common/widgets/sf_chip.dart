@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:slee_fi/common/extensions/string_x.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
 
@@ -18,16 +19,17 @@ class SFChip extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Chip(
-      labelPadding: const EdgeInsets.all(2.0),
-      label: SFText(
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(100),
+        color: color ?? AppColors.white.withOpacity(0.05),
+      ),
+      child: SFText(
         keyText: text,
         style: textStyle,
-        toUpperCase: toUpperCase,
+        stringCase: StringCase.upperCase,
       ),
-      backgroundColor: color ?? AppColors.white.withOpacity(0.05),
-      // shadowColor: Colors.grey[60],
-      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
     );
   }
 }

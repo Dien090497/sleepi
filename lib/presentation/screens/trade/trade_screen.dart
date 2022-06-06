@@ -1,31 +1,39 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_translate/flutter_translate.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
 import 'package:slee_fi/common/widgets/background_widget.dart';
+import 'package:slee_fi/common/widgets/dismiss_keyboard_widget.dart';
 import 'package:slee_fi/common/widgets/sf_alert_dialog.dart';
 import 'package:slee_fi/common/widgets/sf_button_outlined.dart';
 import 'package:slee_fi/common/widgets/sf_buttons.dart';
 import 'package:slee_fi/common/widgets/sf_card.dart';
-import 'package:slee_fi/common/widgets/sf_icon.dart';
 import 'package:slee_fi/common/widgets/sf_icon_border.dart';
 import 'package:slee_fi/common/widgets/sf_sub_app_bar.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
-import 'package:slee_fi/di/translations/keys.dart';
+import 'package:slee_fi/common/widgets/sf_textfield.dart';
+import 'package:slee_fi/l10n/locale_keys.g.dart';
+import 'package:slee_fi/presentation/screens/send_to_external/widgets/dropdown_select_token.dart';
 import 'package:slee_fi/presentation/screens/trade/widgets/pop_up_confirm_trade.dart';
-import 'package:slee_fi/resources/resources.dart';
 
-class TradeScreen extends StatelessWidget {
+class TradeScreen extends StatefulWidget {
   const TradeScreen({Key? key}) : super(key: key);
 
   @override
+  State<TradeScreen> createState() => _TradeScreenState();
+}
+
+class _TradeScreenState extends State<TradeScreen> {
+  bool isDisabled = true;
+
+  @override
   Widget build(BuildContext context) {
-    return BackgroundWidget(
-      child: Scaffold(
-        backgroundColor: AppColors.transparent,
-        body: SafeArea(
+    return DismissKeyboardWidget(
+      child: BackgroundWidget(
+        resizeToAvoidBottomInset: false,
+        child: SafeArea(
           child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 24.0),
+            padding: const EdgeInsets.symmetric(horizontal: 16),
             child: Column(
               children: [
                 Padding(
@@ -37,7 +45,7 @@ class TradeScreen extends StatelessWidget {
                     children: [
                       const Expanded(
                         child: SFSubAppBar(
-                          title: Keys.trade,
+                          title: LocaleKeys.trade,
                           textStyle: TextStyles.bold18LightWhite,
                         ),
                       ),
@@ -49,7 +57,6 @@ class TradeScreen extends StatelessWidget {
                 ),
                 Expanded(
                   child: ListView(
-                    padding: const EdgeInsets.symmetric(vertical: 16),
                     children: [
                       SFCard(
                         padding: const EdgeInsets.all(16),
@@ -58,12 +65,12 @@ class TradeScreen extends StatelessWidget {
                             Row(
                               children: [
                                 SFText(
-                                  keyText: Keys.from,
+                                  keyText: LocaleKeys.from,
                                   style: TextStyles.lightGrey12,
                                 ),
                                 const Spacer(),
                                 SFText(
-                                    keyText: Keys.balance,
+                                    keyText: LocaleKeys.balance,
                                     style: TextStyles.lightGrey12),
                                 SFText(
                                   keyText: ': 0',
@@ -73,35 +80,53 @@ class TradeScreen extends StatelessWidget {
                             ),
                             Row(
                               children: [
-                                SFText(
-                                  keyText: '0.00',
-                                  style: TextStyles.bold18White,
+                                Expanded(
+                                  child: Align(
+                                    alignment: Alignment.centerLeft,
+                                    child: SFTextField(
+                                      showLabel: false,
+                                      noBorder: true,
+                                      textInputType: TextInputType.number,
+                                      hintText: "0.00",
+                                      hintStyle: TextStyles.bold16LightWhite,
+                                      onChanged: (value){
+                                        if(value.isNotEmpty){
+                                          setState((){
+                                            isDisabled = false;
+                                          });
+                                        }
+                                      },
+                                    ),
+                                  ),
                                 ),
-                                const Spacer(),
-                                GestureDetector(
-                                  onTap: () {},
-                                  child: Row(
-                                    children: [
-                                      SFButtonOutLined(
-                                          title: Keys.max,
+                                // SFText(
+                                //   keyText: '0.00',
+                                //   style: TextStyles.bold18White,
+                                // ),
+                                Expanded(
+                                  child: Align(
+                                    alignment: Alignment.center,
+                                    child: FittedBox(
+                                      fit: BoxFit.fitWidth,
+                                      child: SFButtonOutLined(
+                                          fixedSize:const Size(34,21),
+                                          title: LocaleKeys.max,
                                           textStyle: TextStyles.bold14Blue,
                                           borderColor: AppColors.blue,
                                           onPressed: () {}),
-                                      const SizedBox(width: 8),
-                                      const Icon(
-                                        Icons.monetization_on_outlined,
-                                        color: AppColors.blue,
-                                      ),
-                                      const SizedBox(width: 4),
-                                      SFText(
-                                        keyText: 'USDC',
-                                        style: TextStyles.lightGrey12,
-                                      ),
-                                      const Icon(
-                                        Icons.keyboard_arrow_down_rounded,
-                                        color: AppColors.lightGrey,
-                                      )
-                                    ],
+                                    ),
+                                  ),
+                                ),
+                                const Expanded(
+                                  child: Align(
+                                    alignment: Alignment.centerRight,
+                                    child: DropdownSelectToken(
+                                      width: 90,
+                                      height: 36,
+                                      resultPadding: EdgeInsets.all(0),
+                                      backgroundColor: AppColors.transparent,
+                                      isResultLabel: true,
+                                    ),
                                   ),
                                 ),
                               ],
@@ -112,10 +137,10 @@ class TradeScreen extends StatelessWidget {
                       const SizedBox(height: 8),
                       const Center(
                           child: Icon(
-                        Icons.swap_vert,
-                        color: AppColors.lightWhite,
-                        size: 32,
-                      )),
+                            Icons.swap_vert,
+                            color: AppColors.lightWhite,
+                            size: 32,
+                          )),
                       const SizedBox(height: 8),
                       SFCard(
                         padding: const EdgeInsets.all(16),
@@ -124,45 +149,29 @@ class TradeScreen extends StatelessWidget {
                             Row(
                               children: [
                                 SFText(
-                                  keyText: Keys.to,
+                                  keyText: LocaleKeys.to,
                                   style: TextStyles.lightGrey14,
                                 ),
                                 SFText(
-                                    keyText: ' (${translate(Keys.estimate)})',
+                                    keyText:
+                                    ' (${LocaleKeys.estimate.tr()})',
                                     style: TextStyles.lightGrey14),
                               ],
                             ),
-                            const SizedBox(height: 24),
-                            Padding(
-                              padding:
-                                  const EdgeInsets.symmetric(horizontal: 12.0),
-                              child: Row(
-                                children: [
-                                  const Spacer(),
-                                  GestureDetector(
-                                    onTap: () {},
-                                    child: Row(
-                                      children: [
-                                        const SFIcon(
-                                          Ics.icSilver,
-                                          width: 24,
-                                        ),
-                                        const SizedBox(width: 4),
-                                        SFText(
-                                          keyText: 'USDC',
-                                          style: TextStyles.lightGrey12,
-                                        ),
-                                        const Icon(
-                                          Icons.keyboard_arrow_down_rounded,
-                                          color: AppColors.lightGrey,
-                                        )
-                                      ],
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
                             const SizedBox(height: 12),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: const [
+                                SizedBox(),
+                                DropdownSelectToken(
+                                  width: 90,
+                                  height: 36,
+                                  resultPadding: EdgeInsets.all(0),
+                                  backgroundColor: AppColors.transparent,
+                                  isResultLabel: true,
+                                ),
+                              ],
+                            ),
                           ],
                         ),
                       ),
@@ -171,16 +180,17 @@ class TradeScreen extends StatelessWidget {
                 ),
                 SFButton(
                   width: double.infinity,
-                  text: Keys.trade,
+                  text: LocaleKeys.trade,
                   textStyle: TextStyles.w600WhiteSize16,
-                  color: AppColors.blue,
+                  gradient: AppColors.gradientBlueButton,
+                  disabled: isDisabled,
                   onPressed: () {
                     showCustomAlertDialog(context,
-                        children: [const PopUpConfirmTrade()]);
+                        children: const PopUpConfirmTrade());
                   },
                 ),
                 const SizedBox(
-                  height: 8.0,
+                  height: 24.0,
                 ),
               ],
             ),

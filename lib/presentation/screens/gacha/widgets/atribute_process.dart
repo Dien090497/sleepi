@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
-import 'package:slee_fi/common/widgets/sf_prercent_blue.dart';
+import 'package:slee_fi/common/widgets/sf_percent_border.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
 
-class AtributeProcessWidget extends StatelessWidget {
-  const AtributeProcessWidget({
+class AttributeProcessWidget extends StatelessWidget {
+  const AttributeProcessWidget({
     Key? key,
     required this.linkImage,
     required this.title,
@@ -32,29 +33,35 @@ class AtributeProcessWidget extends StatelessWidget {
             flex: 2,
             child: SFText(
               keyText: title,
-              style: TextStyles.white14WithOpacity,
+              style: TextStyles.lightGrey14,
             ),
           ),
+          const SizedBox(width: 20),
           Expanded(
             flex: 3,
-            child: SFPercentBlue(
+            child: SFPercentBorderGradient(
               totalValue: totalValue,
               valueActive: valueActive,
+              backgroundColor: AppColors.borderDarkColor,
+              linearGradient: AppColors.gradientBlueButton,
+              lineHeight: 6,
+              barRadius: 20,
             ),
           ),
-          const SizedBox(width: 35),
-          isUpGrade ?
-          Padding(
-            padding: const EdgeInsets.only(left: 5),
-            child: SFText(
-              keyText: '${(valueActive / totalValue * 100).toStringAsFixed(0)} %',
-              style: TextStyles.boldWhite14,
-            ),
-          )
+          const SizedBox(width: 10),
+          isUpGrade
+              ? Padding(
+                  padding: const EdgeInsets.only(left: 5),
+                  child: SFText(
+                    keyText:
+                        '${(valueActive / totalValue * 100).toStringAsFixed(0)} %',
+                    style: TextStyles.bold14LightWhite,
+                  ),
+                )
               : SFText(
-            keyText: (valueActive / totalValue * 10).toStringAsFixed(1),
-            style: TextStyles.boldWhite14,
-          ),
+                  keyText: (valueActive / totalValue * 10).toStringAsFixed(1),
+                  style: TextStyles.bold14LightWhite,
+                ),
         ],
       ),
     );

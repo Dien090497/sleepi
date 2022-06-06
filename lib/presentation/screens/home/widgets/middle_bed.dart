@@ -1,26 +1,34 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
+import 'package:slee_fi/common/enum/enum.dart';
 import 'package:slee_fi/common/routes/app_routes.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
 import 'package:slee_fi/common/widgets/sf_buttons.dart';
+import 'package:slee_fi/common/widgets/sf_icon.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
-import 'package:slee_fi/di/translations/keys.dart';
-import 'package:slee_fi/resources/resources.dart';
+import 'package:slee_fi/l10n/locale_keys.g.dart';
 
-class MiddleBed extends StatelessWidget {
+class MiddleBed extends StatefulWidget {
   const MiddleBed({Key? key}) : super(key: key);
 
   @override
+  State<MiddleBed> createState() => _MiddleBedState();
+}
+
+class _MiddleBedState extends State<MiddleBed> {
+  late int i = 1;
+  @override
   Widget build(BuildContext context) {
     final Size size = MediaQuery.of(context).size;
+    final beds = List.generate(BedType.values.length * 5,
+            (i) => BedType.values[i % BedType.values.length]);
     return Column(
       children: [
         const SizedBox(
           height: 20,
         ),
         SFText(
-          keyText: Keys.mainBed,
+          keyText: LocaleKeys.main_bed,
           style: TextStyles.white18,
         ),
         const SizedBox(
@@ -40,7 +48,7 @@ class MiddleBed extends StatelessWidget {
           child: Column(
             children: [
               SFText(
-                keyText: Keys.middleBed,
+                keyText: '${beds[i].name} Bed',
                 style: TextStyles.blue14,
               ),
               const SizedBox(height: 24),
@@ -49,20 +57,40 @@ class MiddleBed extends StatelessWidget {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    const Icon(
-                      Icons.arrow_back_ios,
-                      color: AppColors.lightGrey,
+                    InkWell(
+                      onTap: (){
+                        if(i!=0) {
+                          i-=1;
+                        }
+                        setState(() {
+
+                        });
+                      },
+                      child: const Icon(
+                        Icons.arrow_back_ios,
+                        color: AppColors.lightGrey,
+                      ),
                     ),
                     GestureDetector(
                       onTap: () {
                         Navigator.pushNamed(context, R.nftInfo,
                             arguments: false);
                       },
-                      child: SvgPicture.asset(Ics.sleep),
+                      child: SFIcon(beds[i].image),
                     ),
-                    const Icon(
-                      Icons.arrow_forward_ios_sharp,
-                      color: AppColors.lightGrey,
+                    InkWell(
+                      onTap: (){
+                        if(i!=beds.length-1) {
+                          i+=1;
+                        }
+                        setState(() {
+
+                        });
+                      },
+                      child: const Icon(
+                        Icons.arrow_forward_ios_sharp,
+                        color: AppColors.lightGrey,
+                      ),
                     ),
                   ],
                 ),
@@ -101,7 +129,7 @@ class MiddleBed extends StatelessWidget {
               ),
               const SizedBox(height: 16),
               SFText(
-                keyText: 'Time: 4h - 7h',
+                keyText: 'Time: 6h - 8h',
                 style: TextStyles.labelStyle,
               ),
             ],

@@ -5,7 +5,7 @@ import 'package:slee_fi/common/widgets/sf_buttons.dart';
 import 'package:slee_fi/common/widgets/sf_card.dart';
 import 'package:slee_fi/common/widgets/sf_dialog.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
-import 'package:slee_fi/di/translations/keys.dart';
+import 'package:slee_fi/l10n/locale_keys.g.dart';
 
 class PopUpTransfer extends StatelessWidget {
   const PopUpTransfer({
@@ -28,9 +28,7 @@ class PopUpTransfer extends StatelessWidget {
         Positioned(
           right: 0,
           child: GestureDetector(
-            onTap: () {
-              Navigator.pop(context);
-            },
+            onTap: onCancel,
             child: const Icon(
               Icons.close,
               color: AppColors.lightGrey,
@@ -40,7 +38,7 @@ class PopUpTransfer extends StatelessWidget {
         Column(
           children: [
             SFText(
-              keyText: Keys.confirmTransfer,
+              keyText: LocaleKeys.confirm_transfer,
               style: TextStyles.white1w700size16,
             ),
             const SizedBox(height: 20),
@@ -52,13 +50,13 @@ class PopUpTransfer extends StatelessWidget {
                   Row(
                     children: [
                       SFText(
-                        keyText: Keys.from,
+                        keyText: LocaleKeys.from,
                         style: TextStyles.lightGrey12,
                       ),
                       const SizedBox(width: 4),
                       Expanded(
                         child: SFText(
-                          keyText: Keys.to,
+                          keyText: LocaleKeys.to,
                           style: TextStyles.lightGrey12,
                           textAlign: TextAlign.right,
                         ),
@@ -69,13 +67,13 @@ class PopUpTransfer extends StatelessWidget {
                   Row(
                     children: [
                       SFText(
-                        keyText: Keys.inventory,
+                        keyText: LocaleKeys.inventory,
                         style: TextStyles.bold16LightWhite,
                       ),
                       const SizedBox(width: 4),
                       Expanded(
                         child: SFText(
-                          keyText: Keys.wallet,
+                          keyText: LocaleKeys.wallet,
                           style: TextStyles.bold16LightWhite,
                           textAlign: TextAlign.right,
                         ),
@@ -89,7 +87,7 @@ class PopUpTransfer extends StatelessWidget {
             Row(
               children: [
                 SFText(
-                  keyText: Keys.fee,
+                  keyText: LocaleKeys.fee,
                   style: TextStyles.lightGrey12,
                 ),
                 const SizedBox(width: 4),
@@ -105,7 +103,7 @@ class PopUpTransfer extends StatelessWidget {
             Row(
               children: [
                 SFText(
-                  keyText: Keys.youWillTransfer,
+                  keyText: LocaleKeys.you_will_transfer,
                   style: TextStyles.lightGrey12,
                 ),
                 const SizedBox(width: 4),
@@ -122,21 +120,23 @@ class PopUpTransfer extends StatelessWidget {
               children: [
                 Expanded(
                   child: SFButton(
-                    text: Keys.cancel,
+                    text: LocaleKeys.cancel,
                     onPressed: onCancel,
                     textStyle: TextStyles.lightGrey16,
                     color: AppColors.light4,
+                    width: double.infinity,
                   ),
                 ),
                 const SizedBox(width: 12),
                 Expanded(
                   child: SFButton(
-                    text: Keys.confirm,
+                    text: LocaleKeys.confirm,
                     onPressed: () {
                       onConfirm();
                       Navigator.pop(context);
                       showSuccessfulDialog(context);
                     },
+                    width: double.infinity,
                     textStyle: TextStyles.white16,
                     gradient: AppColors.gradientBlueButton,
                   ),

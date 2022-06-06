@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:slee_fi/common/style/app_colors.dart';
-import 'package:slee_fi/common/style/text_styles.dart';
+import 'package:slee_fi/common/widgets/sf_bottom_sheets.dart';
 import 'package:slee_fi/common/widgets/sf_gridview.dart';
-import 'package:slee_fi/common/widgets/sf_text.dart';
+import 'package:slee_fi/l10n/locale_keys.g.dart';
 import 'package:slee_fi/presentation/screens/market_place/widget/item_bed_buy_widget.dart';
+import 'package:slee_fi/presentation/screens/market_place/widget/tab_bar_filter.dart';
+import 'package:slee_fi/resources/resources.dart';
 
 class TabJewelsBuy extends StatelessWidget {
   const TabJewelsBuy({
@@ -14,43 +15,51 @@ class TabJewelsBuy extends StatelessWidget {
   final Function() onPress;
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 12),
-          child: Container(
-            height: 50,
-            decoration: const BoxDecoration(color: AppColors.greyBottomNavBar),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [
-                SFText(
-                  keyText: 'Low Price ',
-                  style: TextStyles.bold15black,
-                ),
-                GestureDetector(
-                  child: SFText(
-                    keyText: 'Filter',
-                    style: TextStyles.bold15black,
-                  ),
-                  onTap: () => onPress(),
-                ),
-              ],
+    final jewels = [
+      Imgs.jewelGreen,
+      Imgs.jewelPurple,
+      Imgs.jewelBlue,
+      Imgs.jewelRed
+    ];
+    return DefaultTabController(
+      length: 2,
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 12.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            TabBarFilter(
+              tabTexts: const [LocaleKeys.buy, LocaleKeys.rent],
+              onFilterTap: () {
+                showFilterModalBottomSheet(context);
+              },
             ),
-          ),
+            const SizedBox(height: 12),
+            Expanded(
+              child: TabBarView(
+                children: [
+                  SFGridView(
+                    count: 20,
+                    itemBuilder: (context, i) {
+                      return ItemBedBuyWidget(
+                        icon: jewels[i % jewels.length],
+                      );
+                    },
+                  ),
+                  SFGridView(
+                    count: 20,
+                    itemBuilder: (context, i) {
+                      return ItemBedBuyWidget(
+                        icon: jewels[i % jewels.length],
+                      );
+                    },
+                  )
+                ],
+              ),
+            ),
+          ],
         ),
-        Expanded(
-          child: SFGridView(
-            count: 20,
-            itemBuilder: (context, i) {
-              return ItemBedBuyWidget(
-                index: i,
-                checkJewelsOrItems: true,
-              );
-            },
-          ),
-        ),
-      ],
+      ),
     );
   }
 }

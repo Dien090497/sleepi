@@ -11,12 +11,14 @@ class SFLabelValue extends StatelessWidget {
     this.icon,
     required this.value,
     this.styleValue = TextStyles.labelStyle,
+    this.colorBorder = Colors.white,
   }) : super(key: key);
 
   final String label;
   final TextStyle? styleLabel;
   final String? icon;
   final String value;
+  final Color colorBorder;
   final TextStyle? styleValue;
 
   @override
@@ -27,7 +29,7 @@ class SFLabelValue extends StatelessWidget {
         horizontal: 24,
       ),
       decoration: BoxDecoration(
-        color: Colors.white.withOpacity(0.07),
+        color: colorBorder.withOpacity(0.05),
         borderRadius: BorderRadius.circular(8),
       ),
       child: Row(
@@ -37,7 +39,7 @@ class SFLabelValue extends StatelessWidget {
             flex: 1,
             child: SFText(
               keyText: label,
-              style: TextStyles.lightGrey16,
+              style: styleLabel,
             ),
           ),
           Container(

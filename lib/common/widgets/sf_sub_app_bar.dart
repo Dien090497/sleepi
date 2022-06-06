@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:slee_fi/common/extensions/string_x.dart';
 import 'package:slee_fi/common/widgets/sf_back_button.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
 
@@ -23,7 +24,7 @@ class SFSubAppBar extends StatelessWidget {
           child: SFText(
             keyText: title ?? "",
             style: textStyle,
-            toUpperCase: toUpperCase,
+            stringCase: StringCase.upperCase,
           ),
         )
       ],

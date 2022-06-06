@@ -6,16 +6,24 @@ import 'package:slee_fi/common/widgets/pop_up_level_up.dart';
 import 'package:slee_fi/common/widgets/sf_dialog.dart';
 import 'package:slee_fi/common/widgets/sf_icon.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
-import 'package:slee_fi/di/translations/keys.dart';
+import 'package:slee_fi/l10n/locale_keys.g.dart';
 import 'package:slee_fi/presentation/screens/home/widgets/pop_up_repair.dart';
 import 'package:slee_fi/presentation/screens/home/widgets/pop_up_transfer.dart';
+import 'package:slee_fi/presentation/screens/info_individual/widget/pop_up_sell.dart';
 import 'package:slee_fi/resources/resources.dart';
 
-class BottomBarWidget extends StatelessWidget {
+class BottomBarWidget extends StatefulWidget {
   const BottomBarWidget({Key? key}) : super(key: key);
 
-  Widget itemBottomBar(
-      BuildContext context, String icon, String key, VoidCallback onTap) {
+  @override
+  State<BottomBarWidget> createState() => _BottomBarWidgetState();
+}
+
+class _BottomBarWidgetState extends State<BottomBarWidget> {
+  int index = -1;
+
+  Widget itemBottomBar(int i, BuildContext context, String icon, String key,
+      VoidCallback onTap) {
     return GestureDetector(
       onTap: onTap,
       child: Container(
@@ -27,14 +35,14 @@ class BottomBarWidget extends StatelessWidget {
           children: [
             SFIcon(
               icon,
-              color: AppColors.lightGrey,
+              color: index == i ? AppColors.blue : AppColors.lightGrey,
             ),
             const SizedBox(
               height: 6,
             ),
             SFText(
               keyText: key,
-              style: TextStyles.lightGrey12,
+              style: index == i ? TextStyles.blue12 : TextStyles.lightGrey12,
             ),
           ],
         ),
@@ -44,65 +52,127 @@ class BottomBarWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: const BoxDecoration(
-          color: AppColors.dark,
-          border: Border(
-              top: BorderSide(
-            width: 1,
-            color: AppColors.lightDark,
-          ))),
-      height: 80,
-      width: MediaQuery.of(context).size.width,
-      child: Row(
-        children: [
-          itemBottomBar(context, Ics.levelUp, Keys.levelUp, () {
-            showCustomDialog(
-              context,
-              children: [
-                PopUpLevelUp(
-                    icon: Ics.longBed,
-                    level: 3,
-                    cost: 1,
-                    time: 2300,
-                    onConfirm: () {})
-              ],
-            );
-          }),
-          itemBottomBar(context, Ics.repair, Keys.repair, () {
-            showCustomDialog(
-              context,
-              children: [
-                PopUpRepair(
-                  icon: Ics.shortBed,
-                  cost: 120,
-                  level: 3,
-                  time: 122,
+    return Material(
+      color: Colors.transparent,
+      child: Container(
+        decoration: const BoxDecoration(
+            color: AppColors.dark,
+            border: Border(
+                top: BorderSide(
+              width: 1,
+              color: AppColors.lightDark,
+            ))),
+        height: 80,
+        width: MediaQuery.of(context).size.width,
+        child: Row(
+          children: [
+            itemBottomBar(0, context, Ics.levelUp, LocaleKeys.level_up, () {
+              setState(() {
+                index = 0;
+              });
+              showCustomDialog(
+                context,
+                children: [
+                  PopUpLevelUp(
+                      icon: Ics.middleBed,
+                      level: 20,
+                      cost: 21,
+                      time: 1260,
+                      onCancel: () {
+                        Navigator.pop(context);
+                      },
+                      onConfirm: () {}),
+                ],
+              ).then((value) => setState(() {
+                    setState(() {
+                      index = -1;
+                    });
+                  }));
+            }),
+            itemBottomBar(1, context, Ics.repair, LocaleKeys.repair, () {
+              setState(() {
+                index = 1;
+              });
+              showCustomDialog(
+                context,
+                children: [
+                  PopUpRepair(
+                    icon: Ics.middleBed,
+                    cost: 120,
+                    level: 20,
+                    time: 122,
+                    onCancel: () {
+                      Navigator.pop(context);
+                    },
+                    onConfirm: () {},
+                  ),
+                ],
+              ).then((value) => setState(() {
+                    setState(() {
+                      index = -1;
+                    });
+                  }));
+            }),
+            itemBottomBar(2, context, Ics.heart, LocaleKeys.mint, () {
+              setState(() {
+                index = 2;
+              });
+              Navigator.pushNamed(context, R.mint).then((value) => setState(() {
+                    index = -1;
+                  }));
+            }),
+            itemBottomBar(3, context, Ics.shopping, LocaleKeys.sell, () {
+              setState(() {
+                index = 3;
+              });
+              showCustomDialog(context, children: [
+                PopUpSell(
+                  time: 1,
+                  cost: 1,
+                  icon: Ics.middleBed,
+                  level: 2,
+                  onCancel: () {},
                   onConfirm: () {},
                 ),
-              ],
-            );
-          }),
-          itemBottomBar(context, Ics.heart, Keys.mint, () {
-            Navigator.pushNamed(context, R.mint);
-          }),
-          itemBottomBar(context, Ics.shopping, Keys.sell, () {}),
-          itemBottomBar(context, Ics.recycling, Keys.recycle, () {
-            Navigator.pushNamed(context, R.recycle);
-          }),
-          itemBottomBar(context, Ics.transfer, Keys.transfer, () {
-            showCustomDialog(
-              context,
-              children: [
-                PopUpTransfer(
-                  onConfirm: () {},
-                  valueTransfer: 1,
-                  fee: 1,
-                )
-              ],
-            );
-          }),
-        ],
+              ]).then((value) => setState(() {
+                    setState(() {
+                      index = -1;
+                    });
+                  }));
+            }),
+            itemBottomBar(4, context, Ics.recycling, LocaleKeys.recycle, () {
+              setState(() {
+                index = 4;
+              });
+              Navigator.pushNamed(context, R.recycle)
+                  .then((value) => setState(() {
+                        index = -1;
+                      }));
+            }),
+            itemBottomBar(5, context, Ics.transfer, LocaleKeys.transfer, () {
+              setState(() {
+                index = 5;
+              });
+              showCustomDialog(
+                context,
+                children: [
+                  PopUpTransfer(
+                    onConfirm: () {},
+                    onCancel: () {
+                      Navigator.pop(context);
+                    },
+                    valueTransfer: 1,
+                    fee: 1,
+                  )
+                ],
+              ).then((value) => setState(() {
+                    setState(() {
+                      index = -1;
+                    });
+                  }));
+            }),
+          ],
+        ),
       ),
     );
   }

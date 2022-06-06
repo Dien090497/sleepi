@@ -4,7 +4,7 @@ import 'package:slee_fi/common/style/text_styles.dart';
 import 'package:slee_fi/common/widgets/sf_buttons.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
 import 'package:slee_fi/common/widgets/sf_textfield.dart';
-import 'package:slee_fi/di/translations/keys.dart';
+import 'package:slee_fi/l10n/locale_keys.g.dart';
 
 class SFTextFieldTextButton extends StatelessWidget {
   const SFTextFieldTextButton({
@@ -17,9 +17,13 @@ class SFTextFieldTextButton extends StatelessWidget {
     this.suffixIcon,
     this.noBorder = false,
     this.showLabel = true,
+    this.onPressed,
     Key? key,
     this.maxLine,
     this.maxLength,
+    this.controller,
+    this.valueChanged,
+    this.textInputType,
   }) : super(key: key);
 
   final String? labelText;
@@ -33,7 +37,10 @@ class SFTextFieldTextButton extends StatelessWidget {
   final int? maxLine;
   final int? maxLength;
   final bool showLabel;
-
+  final VoidCallback? onPressed;
+  final TextEditingController? controller;
+  final ValueChanged<String>? valueChanged;
+  final TextInputType? textInputType;
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -62,6 +69,9 @@ class SFTextFieldTextButton extends StatelessWidget {
               Expanded(
                 child: SFTextField(
                   hintText: hintText,
+                  controller: controller,
+                  onChanged: valueChanged,
+                  textInputType: textInputType,
                   hintStyle: hintStyle ?? TextStyles.lightGrey14,
                   suffix: suffix,
                   suffixIcon: suffixIcon,
@@ -70,8 +80,9 @@ class SFTextFieldTextButton extends StatelessWidget {
                 ),
               ),
               SFTextButton(
-                text: textButton ?? Keys.sendCode,
+                text: textButton ?? LocaleKeys.send_code,
                 textStyle: textButtonStyle ?? TextStyles.blue12,
+                onPressed: onPressed,
                 // color: Colors.transparent,
               ),
             ],

@@ -12,7 +12,7 @@ extension BedTypeX on BedType {
       case BedType.middle:
         return AppColors.yellow;
       case BedType.long:
-        return AppColors.purple;
+        return AppColors.lightPurple;
       case BedType.flexible:
         return AppColors.green;
     }

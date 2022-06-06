@@ -1,160 +1,106 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:slee_fi/common/routes/app_routes.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
-import 'package:slee_fi/common/widgets/sf_buttons.dart';
-import 'package:slee_fi/common/widgets/sf_dialog.dart';
+import 'package:slee_fi/common/widgets/sf_icon.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
-import 'package:slee_fi/presentation/screens/market_place/widget/pop_up_buy_market_place.dart';
+import 'package:slee_fi/l10n/locale_keys.g.dart';
+import 'package:slee_fi/presentation/screens/product_detail/widgets/top_left_banner.dart';
 
 class ItemBedBuyWidget extends StatelessWidget {
-  const ItemBedBuyWidget(
-      {required this.index,
-      Key? key,
-      this.width,
-      this.height,
-      this.checkJewelsOrItems = false})
+  const ItemBedBuyWidget({required this.icon, this.color, Key? key})
       : super(key: key);
 
-  final int index;
-  final double? width;
-  final double? height;
-  final bool checkJewelsOrItems;
+  final String icon;
+  final Color? color;
 
   @override
   Widget build(BuildContext context) {
-    bool isMarketPlace = true;
-    final Size size = MediaQuery.of(context).size;
     return Container(
-      width: width ?? 180,
-      height: height ?? 220,
-      decoration: const BoxDecoration(
-        color: AppColors.greyBottomNavBar,
+      decoration: BoxDecoration(
+        color: color ?? AppColors.lightDark,
+        borderRadius: BorderRadius.circular(16),
       ),
-      margin: EdgeInsets.only(right: index % 2 == 0 ? 24 : 0, bottom: 15),
-      child: SingleChildScrollView(
-        physics: const BouncingScrollPhysics(),
-        child: Column(
-          children: [
-            checkJewelsOrItems
-                ? Align(
-                    alignment: Alignment.centerLeft,
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 10),
-                      child: Column(
-                        children: [
-                          SFText(
-                            keyText: 'Level 3',
-                            style: TextStyles.bold15black,
-                          ),
-                          Container(
-                            margin: const EdgeInsets.only(left: 10),
-                            child: SFText(
-                              keyText: '+ 25%',
-                              style: TextStyles.bold15black,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  )
-                : Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 6),
-                    child: Container(
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(10),
-                        border: Border.all(color: AppColors.black),
-                      ),
-                      padding: const EdgeInsets.symmetric(
-                          vertical: 2, horizontal: 20),
-                      child: SFText(
-                        keyText: 'Short Beds',
-                        style: TextStyles.black10Bold,
-                      ),
-                    ),
-                  ),
-            GestureDetector(
-              onTap: () {
-                Navigator.pushNamed(context, R.nftInfo,
-                    arguments: isMarketPlace);
-              },
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 10),
-                child: Container(
-                  width: size.width,
-                  height: 70,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(15),
-                    border: Border.all(color: AppColors.black),
-                  ),
-                ),
-              ),
+      child: Stack(
+        clipBehavior: Clip.hardEdge,
+        children: [
+          Positioned(
+            top: 14,
+            left: -30,
+            child: TopLeftBanner(
+              text: 'Level 3',
+              textColor: AppColors.lightGrey,
+              backgroundColor: AppColors.lightGrey.withOpacity(0.1),
             ),
-            Padding(
-              padding: const EdgeInsets.symmetric(vertical: 5),
-              child: Container(
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(10),
-                  border: Border.all(color: AppColors.black),
-                ),
-                padding:
-                    const EdgeInsets.symmetric(vertical: 2, horizontal: 20),
-                child: SFText(
-                  keyText: 'IDIDIDID',
-                  style: TextStyles.black10Bold,
-                ),
-              ),
-            ),
-            checkJewelsOrItems
-                ? const SizedBox()
-                : Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      SFText(
-                        keyText: 'Mint: 0',
-                        style: TextStyles.black10Bold,
-                      ),
-                      SFText(
-                        keyText: 'LV 0',
-                        style: TextStyles.black10Bold,
-                      ),
-                    ],
-                  ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 0),
-              child: Container(
-                padding: const EdgeInsets.symmetric(vertical: 5),
-                width: size.width,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(15),
-                  border: Border.all(color: AppColors.black),
-                ),
+          ),
+          Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              SizedBox(height: 37.h),
+              SFIcon(icon, width: 62, height: 60,),
+              // Image.asset(
+              //   icon,
+              //   width: 62,
+              //   height: 60,
+              // ),
+              SizedBox(height: 20.h),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 12.0),
                 child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    SFText(
-                      keyText: '10AVAX',
-                      style: TextStyles.black10Bold,
+                    Container(
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(50),
+                        border: Border.all(color: AppColors.light4),
+                      ),
+                      padding:
+                      const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+                      alignment: Alignment.center,
+                      child: SFText(
+                        keyText: 'IDIDIDID',
+                        style: TextStyles.white1w700size12,
+                      ),
                     ),
-                    const SizedBox(
-                      width: 8,
-                    ),
-                    SFButton(
-                      text: 'Buy',
-                      height: 20,
-                      onPressed: () {
-                        showCustomDialog(
-                          context,
-                          children: [const PopUpBuyMarketPlace()],
-                        );
-                      },
+                    const SizedBox(width: 6),
+                    Container(
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(50),
+                          // border: Border.all(color: AppColors.light4),
+                          color: AppColors.green.withOpacity(0.15)),
+                      padding:
+                      const EdgeInsets.symmetric(vertical: 8, horizontal: 12),
+                      alignment: Alignment.center,
+                      child: SFText(
+                        keyText: '+ 25%',
+                        style: TextStyles.greenW700size12,
+                      ),
                     ),
                   ],
                 ),
               ),
-            ),
-          ],
-        ),
+              const Spacer(),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                child: Row(
+                    children: [
+                      Expanded(
+                          child: SFText(
+                            keyText: '10 ${LocaleKeys.avax.tr()}',
+                            style: TextStyles.white14W700,
+                          )),
+                      SFText(
+                        keyText: LocaleKeys.buy,
+                        style: TextStyles.blue14W700,
+                      ),
+                    ],
+                  ),
+              ),
+              const SizedBox(height: 18),
+            ],
+          ),
+        ],
       ),
     );
   }

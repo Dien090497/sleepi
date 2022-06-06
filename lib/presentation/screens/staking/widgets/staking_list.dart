@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:slee_fi/common/extensions/string_x.dart';
 import 'package:slee_fi/common/routes/app_routes.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
@@ -7,9 +8,12 @@ import 'package:slee_fi/common/widgets/sf_alert_dialog.dart';
 import 'package:slee_fi/common/widgets/sf_button_outlined.dart';
 import 'package:slee_fi/common/widgets/sf_buttons.dart';
 import 'package:slee_fi/common/widgets/sf_card.dart';
+import 'package:slee_fi/common/widgets/sf_dialog.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
-import 'package:slee_fi/di/translations/keys.dart';
+import 'package:slee_fi/l10n/locale_keys.g.dart';
 import 'package:slee_fi/presentation/screens/staking/widgets/pop_up_calculator.dart';
+import 'package:slee_fi/presentation/screens/staking/widgets/pop_up_info_staking.dart';
+import 'package:slee_fi/presentation/screens/staking/widgets/popup_staking.dart';
 import 'package:slee_fi/resources/resources.dart';
 
 class StakingList extends StatelessWidget {
@@ -18,70 +22,64 @@ class StakingList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListView(
-      padding: const EdgeInsets.all(15.0),
+      padding: const EdgeInsets.all(16.0),
       children: [
-        SFText(
-          keyText: Keys.tvlInSleefi,
-          style: TextStyles.lightGrey14,
-        ),
-        const SizedBox(height: 16),
         Container(
-          padding: const EdgeInsets.symmetric(horizontal: 12.0, vertical: 24.0),
+          padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 24.0),
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(16),
-            gradient: AppColors.gradientBlueAccent,
+            gradient: AppColors.gradientBluePurpleStaking,
           ),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               SFText(
-                keyText: Keys.tvlInDapps,
-                style: TextStyles.bold24LightWhite,
-                toUpperCase: true,
+                keyText: LocaleKeys.tvl_in_sleefi,
+                style: TextStyles.bold16LightWhite,
               ),
               const SizedBox(
-                height: 24.0,
+                height: 19.0,
               ),
-              Center(
-                  child: SFText(
-                keyText: "2.905B ASTR",
-                style: TextStyles.bold24LightWhite,
-              )),
-              Center(
-                  child: SFText(
-                keyText: "163.2M USD",
-                style: TextStyles.bold24LightWhite,
-              )),
-              const SizedBox(
-                height: 12.0,
-              )
+              Row(
+                children: [
+                  Expanded(
+                      child: SFText(
+                    keyText: "xxxxxx SLFT",
+                    style: TextStyles.w700WhiteSize24,
+                  )),
+                  Expanded(
+                      child: SFText(
+                    keyText: "(=xxxxxx USD)",
+                    style: TextStyles.w400White14,
+                    textAlign: TextAlign.end,
+                  ))
+                ],
+              ),
             ],
           ),
         ),
         const SizedBox(
-          height: 12.0,
+          height: 20.0,
         ),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            const SizedBox(),
-            GestureDetector(
-              onTap: () {},
-              child: SvgPicture.asset(Ics.icQuestion,
-                  color: AppColors.lightGrey, width: 22),
-            )
+          children: const [
+            SizedBox(),
+            PopupInfoStaking(),
           ],
         ),
         const SizedBox(
-          height: 12.0,
+          height: 16.0,
         ),
         SFCard(
+          radius: 8,
+          margin: const EdgeInsets.only(top: 8),
           padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 18.0),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               SFText(
-                keyText: Keys.earningToken,
+                keyText: LocaleKeys.earning_token,
                 style: TextStyles.lightWhite16,
               ),
               SFText(
@@ -92,12 +90,14 @@ class StakingList extends StatelessWidget {
           ),
         ),
         SFCard(
+          radius: 8,
+          margin: const EdgeInsets.only(top: 8),
           padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 18.0),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               SFText(
-                keyText: Keys.mintingDiscount,
+                keyText: LocaleKeys.minting_discount,
                 style: TextStyles.lightWhite16,
               ),
               SFText(
@@ -108,12 +108,14 @@ class StakingList extends StatelessWidget {
           ),
         ),
         SFCard(
+          radius: 8,
+          margin: const EdgeInsets.only(top: 8),
           padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 18.0),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               SFText(
-                keyText: Keys.levelUpDiscount,
+                keyText: LocaleKeys.level_up_discount,
                 style: TextStyles.lightWhite16,
               ),
               SFText(
@@ -130,14 +132,15 @@ class StakingList extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             SFText(
-              keyText: Keys.stakeTokens,
+              keyText: LocaleKeys.stake_tokens,
               style: TextStyles.lightGrey14,
             ),
             GestureDetector(
               onTap: () {
                 showCustomAlertDialog(
                   context,
-                  children: [const PopUpCalculator()],
+                  padding: const EdgeInsets.all(24),
+                  children: const PopUpCalculator(),
                 );
               },
               child: SvgPicture.asset(Ics.icCalculator,
@@ -154,7 +157,7 @@ class StakingList extends StatelessWidget {
                 children: [
                   Expanded(
                       child: SFText(
-                    keyText: Keys.yourSlftEarned,
+                    keyText: LocaleKeys.your_slft_earned,
                     style: TextStyles.lightWhite16,
                   )),
                   Row(
@@ -180,7 +183,7 @@ class StakingList extends StatelessWidget {
                 children: [
                   Expanded(
                       child: SFText(
-                    keyText: Keys.yourStakedAmount,
+                    keyText: LocaleKeys.your_staked_amount,
                     style: TextStyles.lightWhite16,
                   )),
                   Row(
@@ -206,9 +209,9 @@ class StakingList extends StatelessWidget {
                 children: [
                   Expanded(
                       child: SFText(
-                    keyText: Keys.apr,
+                    keyText: LocaleKeys.apr,
                     style: TextStyles.lightWhite16,
-                    toUpperCase: true,
+                    stringCase: StringCase.upperCase,
                   )),
                   SFText(
                     keyText: "X%",
@@ -227,26 +230,35 @@ class StakingList extends StatelessWidget {
                 height: 16.0,
               ),
               Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
                   SFButton(
-                    text: Keys.deposit,
-                    textStyle: TextStyles.bold14LightWhite,
-                    color: AppColors.blue,
+                    text: LocaleKeys.deposit,
+                    textStyle: TextStyles.boldWhite14,
+                    gradient: AppColors.gradientBlueButton,
+                    // width: 84,
+                    height: 32,
                     onPressed: () =>
                         Navigator.pushNamed(context, R.depositSLFT),
                   ),
-                  SFButtonOutLined(
-                    borderColor: AppColors.blue,
-                    title: Keys.withdraw,
-                    textStyle: TextStyles.bold14Blue,
-                    onPressed: () =>
-                        Navigator.pushNamed(context, R.withdrawSLFT),
+                  SizedBox(
+                    // width: 84,
+                    height: 32,
+                    child: SFButtonOutLined(
+                      borderColor: AppColors.blue,
+                      title: LocaleKeys.withdraw,
+                      textStyle: TextStyles.bold14Blue,
+                      onPressed: () =>
+                          Navigator.pushNamed(context, R.withdrawSLFT),
+                    ),
                   ),
                   GestureDetector(
-                    onTap: () {},
+                    onTap: () {
+                      showCustomDialog(context,
+                          children: [const PopUpStaking(message: LocaleKeys.do_you_really_want_to_compound,)]);
+                    },
                     child: SFText(
-                      keyText: Keys.compound,
+                      keyText: LocaleKeys.compound,
                       style: TextStyles.bold14Blue,
                     ),
                   )
@@ -258,30 +270,27 @@ class StakingList extends StatelessWidget {
         const SizedBox(
           height: 32.0,
         ),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
+        Column(
           children: [
-            Expanded(
-              child: SFButton(
-                text: Keys.buySlft,
-                textStyle: TextStyles.bold14LightWhite,
-                color: AppColors.blue,
-                onPressed: () {},
-              ),
+            SFButton(
+              text: LocaleKeys.buy_slft,
+              textStyle: TextStyles.bold14LightWhite,
+              color: AppColors.blue,
+              width: double.infinity,
+              onPressed: () {},
             ),
             const SizedBox(
-              width: 16.0,
+              height: 16.0,
             ),
-            Expanded(
-              child: SizedBox(
-                height: 48,
-                child: SFButtonOutLined(
-                    title: Keys.showContract,
-                    textStyle: TextStyles.bold16Blue,
-                    borderColor: AppColors.blue,
-                    onPressed: () {}),
-              ),
+            SizedBox(
+              height: 48,
+              child: SFButtonOutLined(
+                  title: LocaleKeys.show_contract_on_avascan,
+                  textStyle: TextStyles.bold16Blue,
+                  borderColor: AppColors.blue,
+                  onPressed: () {}),
             ),
+            const SizedBox(height: 16,),
           ],
         )
       ],

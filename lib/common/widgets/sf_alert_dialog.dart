@@ -1,26 +1,26 @@
 import 'package:flutter/material.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
 
-
-
 Future<T?> showCustomAlertDialog<T>(
     BuildContext context, {
-      required List<Widget> children,
+      required Widget? children,
       Color? backgroundColor,
       CrossAxisAlignment? crossAxisAlignment,
       EdgeInsets? padding,
       double? width,
       double? height,
+      bool showClosed = true,
     }) async {
   return showDialog(
       context: context,
+      barrierColor: AppColors.backgroundDialog,
       builder: (_) {
         return SFAlertDialog(
           backgroundColor: backgroundColor,
           width: width,
           height: height,
           padding: padding,
-          crossAxisAlignment: crossAxisAlignment,
+          showClose: showClosed,
           children: children,
         );
       });
@@ -31,18 +31,18 @@ class SFAlertDialog extends StatelessWidget {
       {required this.children,
       Key? key,
       this.backgroundColor,
-      this.crossAxisAlignment,
       this.padding,
       this.height,
+        this.showClose = true,
       this.width})
       : super(key: key);
 
-  final List<Widget> children;
+  final Widget? children;
   final Color? backgroundColor;
   final EdgeInsets? padding;
   final double? height;
   final double? width;
-  final CrossAxisAlignment? crossAxisAlignment;
+  final bool showClose;
 
   @override
   Widget build(BuildContext context) {
@@ -61,12 +61,18 @@ class SFAlertDialog extends StatelessWidget {
           height: height,
           width: width ?? sizeWidth * 0.95,
           padding: padding ?? const EdgeInsets.all(8),
-          child: SingleChildScrollView(
-            child: Column(
-              crossAxisAlignment:
-              crossAxisAlignment ?? CrossAxisAlignment.center,
-              children: children,
-            ),
+          child: Column(
+            children: [
+              showClose ? Align(
+                  alignment: Alignment.topRight,
+                  child: GestureDetector(
+                      onTap: () => Navigator.maybePop(context),
+                      child: const Icon(
+                        Icons.close,
+                        color: AppColors.lightGrey,
+                      ))) : const SizedBox(),
+              children!,
+            ],
           )),
     );
   }

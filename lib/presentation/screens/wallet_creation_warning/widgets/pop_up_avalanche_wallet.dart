@@ -1,39 +1,53 @@
 import 'package:flutter/material.dart';
+import 'package:slee_fi/common/routes/app_routes.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
-import 'package:slee_fi/common/widgets/sf_alert_dialog.dart';
 import 'package:slee_fi/common/widgets/sf_button_outlined.dart';
 import 'package:slee_fi/common/widgets/sf_buttons.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
-import 'package:slee_fi/di/translations/keys.dart';
+import 'package:slee_fi/l10n/locale_keys.g.dart';
 
 class PopUpAvalancheWallet extends StatelessWidget {
   const PopUpAvalancheWallet({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return SFAlertDialog(
-      padding: const EdgeInsets.all(12.0),
-      children: [
-        Align(
-            alignment: Alignment.topRight,
-            child: GestureDetector(
-                onTap: () => Navigator.maybePop(context),
-                child: const Icon(
-                  Icons.close,
-                  color: AppColors.lightGrey,
-                ))),
-        SFText(
-          keyText: Keys.avalancheWallet,
-          style: TextStyles.bold18LightWhite,
-        ),
-        SFButtonOutLined(title: Keys.createANewWallet, onPressed: () {}),
-        const SizedBox(height: 6.0),
-        SFButton(
-          text: Keys.importAWalletUsingSeedPhrase,
-          onPressed: () {},
-        )
-      ],
+    return Padding(
+      padding: const EdgeInsets.fromLTRB(16, 0, 16, 16),
+      child: Column(
+        children: [
+          SFText(
+            keyText: LocaleKeys.avalanche_wallet,
+            style: TextStyles.bold18LightWhite,
+          ),
+          const SizedBox(
+            height: 32,
+          ),
+          SizedBox(
+              height: 48,
+              child: SFButtonOutLined(
+                title: LocaleKeys.create_a_new_wallet,
+                textStyle: TextStyles.bold16Blue,
+                borderColor: AppColors.blue,
+                onPressed: () {
+                  Navigator.pushNamed(context, R.createWallet);
+                },
+              )),
+          const SizedBox(
+            height: 17,
+          ),
+          SFButton(
+            text: LocaleKeys.import_a_wallet_using_seed_phrase,
+            textStyle: TextStyles.w600WhiteSize16,
+            height: 48,
+            width: double.infinity,
+            color: AppColors.blue,
+            onPressed: () {
+              Navigator.pushNamed(context, R.importWallet);
+            },
+          ),
+        ],
+      ),
     );
   }
 }

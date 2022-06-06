@@ -5,9 +5,10 @@ import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
 import 'package:slee_fi/common/widgets/background_widget.dart';
 import 'package:slee_fi/common/widgets/sf_back_button.dart';
+import 'package:slee_fi/common/widgets/sf_buttons.dart';
 import 'package:slee_fi/common/widgets/sf_logo.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
-import 'package:slee_fi/di/translations/keys.dart';
+import 'package:slee_fi/l10n/locale_keys.g.dart';
 import 'package:slee_fi/presentation/screens/passcode/widgets/passcode_numpad.dart';
 import 'package:slee_fi/presentation/screens/passcode/widgets/pin_code_widget.dart';
 
@@ -31,7 +32,7 @@ class PasscodeScreen extends StatelessWidget {
       child: Scaffold(
         backgroundColor: AppColors.transparent,
         body: SafeArea(
-          child: Column(
+          child: ListView(
             children: [
               const SizedBox(
                 height: 12.0,
@@ -43,8 +44,11 @@ class PasscodeScreen extends StatelessWidget {
                 ],
               ),
               const SizedBox(height: 60),
-              SFText(
-                  keyText: Keys.enterYourPasscode, style: TextStyles.white12),
+              Center(
+                child: SFText(
+                    keyText: LocaleKeys.enter_your_passcode,
+                    style: TextStyles.white12),
+              ),
               const SizedBox(height: 24),
               PinCodeWidget(controller: passcodeController),
               SizedBox(height: 4.h),
@@ -60,9 +64,13 @@ class PasscodeScreen extends StatelessWidget {
                 },
               ),
               SizedBox(height: 32.h),
-              SFText(
-                  keyText: Keys.forgotPasscode,
-                  style: TextStyles.white12Underline),
+              SFTextButton(
+                text: LocaleKeys.forgot_passcode,
+                textStyle: TextStyles.white12Underline,
+                onPressed: () {
+                  Navigator.pushNamed(context, R.restoreWallet);
+                },
+              )
             ],
           ),
         ),

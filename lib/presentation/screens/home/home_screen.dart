@@ -1,21 +1,25 @@
+import 'dart:async';
+
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:flutter_translate/flutter_translate.dart';
 import 'package:slee_fi/common/routes/app_routes.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
 import 'package:slee_fi/common/widgets/loading_screen.dart';
+import 'package:slee_fi/common/widgets/sf_bottom_sheet.dart';
 import 'package:slee_fi/common/widgets/sf_button_outlined.dart';
 import 'package:slee_fi/common/widgets/sf_buttons.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
 import 'package:slee_fi/common/widgets/topbar_common.dart';
-import 'package:slee_fi/di/translations/keys.dart';
+import 'package:slee_fi/l10n/locale_keys.g.dart';
 import 'package:slee_fi/presentation/blocs/home/home_bloc.dart';
 import 'package:slee_fi/presentation/blocs/home/home_state.dart';
 import 'package:slee_fi/presentation/screens/home/widgets/introduce_app.dart';
 import 'package:slee_fi/presentation/screens/home/widgets/middle_bed.dart';
+import 'package:slee_fi/presentation/screens/home/widgets/modal_item_list.dart';
 import 'package:slee_fi/resources/resources.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -30,6 +34,37 @@ class _HomeScreenState extends State<HomeScreen> {
   bool checkIntroduce = false;
   late int _selectedHour = DateTime.now().hour;
   late int _selectedMinute = DateTime.now().minute;
+  late Timer _timer;
+  late int startTime = 0;
+
+  @override
+  void initState() {
+    startTime = 1 * 60;
+    startTimer();
+    super.initState();
+  }
+
+  void startTimer() {
+    const oneSec = Duration(seconds: 1);
+    _timer = Timer.periodic(
+      oneSec,
+      (Timer timer) {
+        if (startTime == 0) {
+          _timer.cancel();
+        } else {
+          setState(() {
+            startTime--;
+          });
+        }
+      },
+    );
+  }
+
+  @override
+  void dispose() {
+    _timer.cancel();
+    super.dispose();
+  }
 
   Widget viewGif() {
     return Container(
@@ -46,6 +81,16 @@ class _HomeScreenState extends State<HomeScreen> {
         color: AppColors.borderDarkColor,
       ),
     );
+  }
+
+  convertTimer() {
+    if (startTime <= 0) {
+      return '00:00:00';
+    } else {
+      return '${startTime ~/ (60 * 60) < 10 ? '0${startTime ~/ (60 * 60)}' : startTime ~/ (60 * 60)}'
+          ':${(startTime % (60 * 60)) ~/ 60 < 10 ? '0${(startTime % (60 * 60)) ~/ 60}' : (startTime % (60 * 60)) ~/ 60}'
+          ':${(startTime % (60 * 60)) % 60 < 10 ? '0${(startTime % (60 * 60)) % 60}' : (startTime % (60 * 60)) % 60}';
+    }
   }
 
   Widget alarmBell(size) {
@@ -68,123 +113,148 @@ class _HomeScreenState extends State<HomeScreen> {
               topRight: Radius.circular(40),
               topLeft: Radius.circular(40),
             ),
-            child: SizedBox(
-              height: 320.0,
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: <Widget>[
-                  Expanded(
-                    child: CupertinoPicker(
-                        looping: true,
-                        selectionOverlay: Container(),
-                        offAxisFraction: -0.5,
-                        squeeze: 1,
-                        scrollController: FixedExtentScrollController(
-                          initialItem: _selectedHour,
-                        ),
-                        itemExtent: 48.0,
-                        backgroundColor: AppColors.dark,
-                        onSelectedItemChanged: (int index) {
-                          setState(() {
-                            _selectedHour = index;
-                          });
-                        },
-                        children: List<Widget>.generate(24, (int index) {
-                          return Column(
-                            children: [
-                              if (_selectedHour == index)
-                                Container(
-                                  height: 1,
-                                  decoration: BoxDecoration(
-                                    gradient: AppColors
-                                        .gradientWhiteBorderLeftToRight,
-                                  ),
-                                ),
-                              Container(
+            child: Stack(
+              alignment: Alignment.center,
+              children: [
+                Container(
+                  height: 320.0,
+                  margin: const EdgeInsets.symmetric(
+                    horizontal: 50,
+                  ),
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: <Widget>[
+                      Expanded(
+                        child: CupertinoPicker(
+                            looping: true,
+                            selectionOverlay: Container(),
+                            offAxisFraction: -0.5,
+                            squeeze: 1,
+                            scrollController: FixedExtentScrollController(
+                              initialItem: _selectedHour,
+                            ),
+                            itemExtent: 48.0,
+                            backgroundColor: AppColors.dark,
+                            onSelectedItemChanged: (int index) {
+                              setState(() {
+                                _selectedHour = index;
+                              });
+                            },
+                            children: List<Widget>.generate(24, (int index) {
+                              return Container(
                                 width: size.width,
                                 height: 46,
                                 padding:
-                                    const EdgeInsets.symmetric(horizontal: 15),
+                                    const EdgeInsets.symmetric(horizontal: 12),
                                 alignment: Alignment.centerRight,
                                 child: Text(
                                   index < 10 ? '0$index' : '$index',
                                   textAlign: TextAlign.right,
                                   style: TextStyles.white1w700size16,
                                 ),
-                              ),
-                              if (_selectedHour == index)
-                                Container(
-                                  height: 1,
-                                  decoration: BoxDecoration(
-                                    gradient: AppColors
-                                        .gradientWhiteBorderLeftToRight,
-                                  ),
-                                ),
-                            ],
-                          );
-                        })),
-                  ),
-                  Expanded(
-                    child: CupertinoPicker(
-                        selectionOverlay: Container(),
-                        looping: true,
-                        squeeze: 1,
-                        offAxisFraction: 0.5,
-                        useMagnifier: true,
-                        scrollController: FixedExtentScrollController(
-                          initialItem: _selectedMinute,
-                        ),
-                        itemExtent: 48.0,
-                        backgroundColor: AppColors.dark,
-                        onSelectedItemChanged: (int index) {
-                          setState(() {
-                            _selectedMinute = index;
-                          });
-                        },
-                        children: List<Widget>.generate(60, (int index) {
-                          return Column(
-                            children: [
-                              if (_selectedMinute == index)
-                                Container(
-                                  height: 1,
-                                  decoration: BoxDecoration(
-                                    gradient: AppColors
-                                        .gradientWhiteBorderRightToLeft,
-                                  ),
-                                ),
-                              Container(
+                              );
+                            })),
+                      ),
+                      Expanded(
+                        child: CupertinoPicker(
+                            selectionOverlay: Container(),
+                            looping: true,
+                            squeeze: 1,
+                            offAxisFraction: 0.5,
+                            useMagnifier: true,
+                            scrollController: FixedExtentScrollController(
+                              initialItem: _selectedMinute,
+                            ),
+                            itemExtent: 48.0,
+                            backgroundColor: AppColors.dark,
+                            onSelectedItemChanged: (int index) {
+                              setState(() {
+                                _selectedMinute = index;
+                              });
+                            },
+                            children: List<Widget>.generate(60, (int index) {
+                              return Container(
                                 width: size.width,
                                 height: 46,
                                 padding:
-                                    const EdgeInsets.symmetric(horizontal: 15),
+                                    const EdgeInsets.symmetric(horizontal: 12),
                                 alignment: Alignment.centerLeft,
                                 child: Text(
                                   index < 10 ? '0$index' : '$index',
                                   textAlign: TextAlign.right,
                                   style: TextStyles.white1w700size16,
                                 ),
-                              ),
-                              if (_selectedMinute == index)
-                                Container(
-                                  height: 1,
-                                  decoration: BoxDecoration(
-                                    gradient: AppColors
-                                        .gradientWhiteBorderRightToLeft,
-                                  ),
-                                ),
-                            ],
-                          );
-                        })),
+                              );
+                            })),
+                      ),
+                    ],
                   ),
-                ],
-              ),
+                ),
+                SizedBox(
+                  height: 320,
+                  width: double.infinity,
+                  child: Row(
+                    children: [
+                      Expanded(
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Container(
+                              height: 1,
+                              decoration: BoxDecoration(
+                                gradient:
+                                    AppColors.gradientWhiteBorderLeftToRight,
+                              ),
+                            ),
+                            const SizedBox(
+                              height: 46,
+                            ),
+                            Container(
+                              height: 1,
+                              decoration: BoxDecoration(
+                                gradient:
+                                    AppColors.gradientWhiteBorderLeftToRight,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      Expanded(
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Container(
+                              height: 1,
+                              decoration: BoxDecoration(
+                                gradient:
+                                    AppColors.gradientWhiteBorderRightToLeft,
+                              ),
+                            ),
+                            const SizedBox(
+                              height: 46,
+                            ),
+                            Container(
+                              height: 1,
+                              decoration: BoxDecoration(
+                                gradient:
+                                    AppColors.gradientWhiteBorderRightToLeft,
+                              ),
+                            ),
+                          ],
+                        ),
+                      )
+                    ],
+                  ),
+                ),
+              ],
             ),
           ),
           const SizedBox(
             height: 16,
           ),
           Text(
-            '${translate(Keys.range)}: 06:00-09:00',
+            // '${translate(LocaleKeys.range)}: 06:00-09:00',
+            '${LocaleKeys.range.tr()}: 06:00-09:00',
             style: TextStyles.white16500,
           ),
           const SizedBox(
@@ -195,15 +265,19 @@ class _HomeScreenState extends State<HomeScreen> {
             children: [
               Expanded(
                 child: SFButtonOutLined(
-                  title: Keys.alarmBell,
-                  onPressed: () {},
+                  title: LocaleKeys.alarm_bell,
+                  onPressed: () {
+                    Navigator.pushNamed(context, R.alarmSoundEffect);
+                  },
                   fixedSize: const Size(274, 40),
                   textStyle: TextStyles.blue16,
-                  icon: Icons.add_circle_outline,
                   borderColor: AppColors.blue,
                   iconColor: AppColors.blue,
                   withBorder: 1,
                 ),
+              ),
+              const SizedBox(
+                width: 22,
               ),
               CupertinoSwitch(
                 activeColor: AppColors.green,
@@ -220,14 +294,16 @@ class _HomeScreenState extends State<HomeScreen> {
             height: 16,
           ),
           SFButton(
-            text: Keys.start,
-            textStyle: TextStyles.white16,
+            text: startTime == 0 ? LocaleKeys.start.tr() : '${convertTimer()}',
+            textStyle:
+                startTime == 0 ? TextStyles.white16 : TextStyles.lightGrey16,
             radius: 100,
-            gradient: AppColors.gradientBlueButton,
+            gradient: startTime == 0 ? AppColors.gradientBlueButton : null,
+            color: AppColors.lightDark,
             height: 40,
             width: size.width,
             onPressed: () {
-              Navigator.pushNamed(context, R.result);
+              if (startTime == 0) Navigator.pushNamed(context, R.tracking);
             },
           ),
           const SizedBox(
@@ -243,7 +319,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       color: AppColors.darkColor,
                       borderRadius: BorderRadius.circular(20)),
                   child: SFText(
-                    keyText: '000/160 SLTF',
+                    keyText: '0.00/160 SLTF',
                     style: TextStyles.lightGrey10,
                   ),
                 ),
@@ -251,20 +327,26 @@ class _HomeScreenState extends State<HomeScreen> {
               const SizedBox(
                 width: 12,
               ),
-              SvgPicture.asset(
-                Ics.icCircleQuestion,
-                width: 20,
-                height: 20,
-                color: AppColors.lightGrey,
+              GestureDetector(
+                onTap: () => Navigator.pushNamed(context, R.question),
+                child: SvgPicture.asset(
+                  Ics.icCircleQuestion,
+                  width: 20,
+                  height: 20,
+                  color: AppColors.lightGrey,
+                ),
               ),
               const SizedBox(
                 width: 12,
               ),
-              SvgPicture.asset(
-                Ics.starOutlined,
-                width: 20,
-                height: 20,
-                color: AppColors.yellow,
+              GestureDetector(
+                onTap: () => Navigator.pushNamed(context, R.feedback),
+                child: SvgPicture.asset(
+                  Ics.starOutlined,
+                  width: 20,
+                  height: 20,
+                  color: AppColors.yellow,
+                ),
               ),
             ],
           ),
@@ -344,10 +426,15 @@ class _HomeScreenState extends State<HomeScreen> {
                                   padding: const EdgeInsets.symmetric(
                                       horizontal: 16.0),
                                   child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
                                     children: [
                                       SFButtonOutLined(
-                                        title: Keys.useItem,
-                                        onPressed: () {},
+                                        title: LocaleKeys.use_item,
+                                        onPressed: () {
+                                          SFModalBottomSheet.show(context, 0.8,
+                                              const ModalItemList());
+                                        },
                                         fixedSize: Size(size.width, 40),
                                         textStyle: TextStyles.lightGrey16500,
                                         icon: Icons.add_circle_outline,
@@ -363,7 +450,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                             MainAxisAlignment.spaceBetween,
                                         children: [
                                           Text(
-                                            '${translate(Keys.insurance)}: 5%',
+                                            // '${translate(LocaleKeys.insurance)}: 5%',
+                                            '${LocaleKeys.insurance.tr()}: 5%',
                                             style: TextStyles.bold16LightWhite,
                                           ),
                                           SizedBox(
@@ -383,20 +471,9 @@ class _HomeScreenState extends State<HomeScreen> {
                                       const SizedBox(
                                         height: 2,
                                       ),
-                                      Row(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.center,
-                                        children: [
-                                          SFText(
-                                            keyText: Keys.whatInsurance,
-                                            style: TextStyles.lightGrey12,
-                                          ),
-                                          const SizedBox(
-                                            width: 8,
-                                          ),
-                                          SvgPicture.asset(
-                                              Ics.icCircleQuestion),
-                                        ],
+                                      SFText(
+                                        keyText: LocaleKeys.what_insurance,
+                                        style: TextStyles.lightGrey12,
                                       ),
                                     ],
                                   ),

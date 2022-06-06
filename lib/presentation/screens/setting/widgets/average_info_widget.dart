@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
-import 'package:slee_fi/common/widgets/sf_text.dart';
-import 'package:slee_fi/di/translations/keys.dart';
+import 'package:slee_fi/common/widgets/average_widget.dart';
+import 'package:slee_fi/l10n/locale_keys.g.dart';
 
 class AverageInfoWidget extends StatelessWidget {
   const AverageInfoWidget({Key? key}) : super(key: key);
@@ -10,10 +10,13 @@ class AverageInfoWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     List<String> texts = [
-      Keys.averageOfBedTime,
-      Keys.averageOfWokeUp,
-      Keys.averageOfSleepDuration,
-      Keys.averageOfSleepQuality
+      LocaleKeys.average_of_bed_time,
+      LocaleKeys.average_of_woke_up,
+      LocaleKeys.average_of_sleep_duration,
+      LocaleKeys.average_of_sleep_quality
+    ];
+    List<String> averages = [
+      "10:55","09:55","07:55","87/100",
     ];
     List<Color> colors = [
       AppColors.blue.withOpacity(0.15),
@@ -40,25 +43,13 @@ class AverageInfoWidget extends StatelessWidget {
       crossAxisSpacing: 15.0,
       mainAxisSpacing: 16.0,
       shrinkWrap: true,
-      padding: const EdgeInsets.symmetric(horizontal: 12.0),
       children: List.generate(texts.length, (i) {
-        return Container(
-          padding: const EdgeInsets.all(24.0),
-          decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(16.0), color: colors[i]),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              SFText(
-                keyText: texts[i],
-                style: textStyleTitle[i],
-              ),
-              const SizedBox(
-                height: 11.0,
-              ),
-              SFText(keyText: "10:55", style: textStyleNum[i])
-            ],
-          ),
+        return AverageWidget(
+          title: texts[i],
+          average: averages[i],
+          textStyle: textStyleTitle[i],
+          textStyleNumber: textStyleNum[i],
+          color: colors[i],
         );
       }),
     );

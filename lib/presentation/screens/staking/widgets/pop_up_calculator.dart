@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
-import 'package:slee_fi/common/widgets/sf_alert_dialog.dart';
 import 'package:slee_fi/common/widgets/sf_card.dart';
 import 'package:slee_fi/common/widgets/sf_chip.dart';
 import 'package:slee_fi/common/widgets/sf_icon.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
 import 'package:slee_fi/common/widgets/sf_textfield_text_button.dart';
-import 'package:slee_fi/di/translations/keys.dart';
+import 'package:slee_fi/l10n/locale_keys.g.dart';
 import 'package:slee_fi/resources/resources.dart';
 
 class PopUpCalculator extends StatelessWidget {
@@ -15,28 +14,19 @@ class PopUpCalculator extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SFAlertDialog(
-      padding: const EdgeInsets.all(20.0),
+    return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Align(
-            alignment: Alignment.topRight,
-            child: GestureDetector(
-                onTap: () => Navigator.maybePop(context),
-                child: const Icon(
-                  Icons.close,
-                  color: AppColors.lightGrey,
-                ))),
         Center(
             child: SFText(
-          keyText: Keys.roiCalculator,
+          keyText: LocaleKeys.roi_calculator,
           style: TextStyles.bold18LightWhite,
         )),
         const SizedBox(
           height: 24,
         ),
         SFText(
-          keyText: Keys.flexible,
+          keyText: LocaleKeys.flexible,
           style: TextStyles.bold16Blue,
           textAlign: TextAlign.start,
         ),
@@ -44,7 +34,7 @@ class PopUpCalculator extends StatelessWidget {
           height: 12.0,
         ),
         SFText(
-          keyText: Keys.sleefiStacked,
+          keyText: LocaleKeys.slft_staked,
           style: TextStyles.lightGrey14,
         ),
         SFCard(
@@ -81,43 +71,34 @@ class PopUpCalculator extends StatelessWidget {
           ),
         ),
         const SizedBox(
-          height: 8.0,
+          height: 12.0,
         ),
-        Row(
-          crossAxisAlignment: CrossAxisAlignment.start,
+        Wrap(
+          spacing: 6.0,
+          runSpacing: 6.0,
           children: [
-            Expanded(
-              child: Wrap(
-                spacing: 6.0,
-                runSpacing: 6.0,
-                children: const [
-                  SFChip(
-                    text: "100",
-                    textStyle: TextStyles.w700LightGreySize14,
-                  ),
-                  SFChip(
-                    text: "10000",
-                    textStyle: TextStyles.w700LightGreySize14,
-                  ),
-                  SFChip(
-                    text: "My Balance",
-                    textStyle: TextStyles.w700LightGreySize14,
-                  ),
-                ],
-              ),
+            SFChip(
+              text: "100",
+              textStyle: TextStyles.w700LightGreySize14,
+              color: AppColors.white.withOpacity(0.05),
             ),
-            const Padding(
-              padding: EdgeInsets.only(top: 12),
-              child:
-                  SFIcon(Ics.icQuestion, color: AppColors.lightGrey, width: 24),
+            SFChip(
+              text: "10000",
+              textStyle: TextStyles.w700LightGreySize14,
+              color: AppColors.white.withOpacity(0.05),
+            ),
+            SFChip(
+              text: "My Balance",
+              textStyle: TextStyles.w700LightGreySize14,
+              color: AppColors.white.withOpacity(0.05),
             ),
           ],
         ),
         const SizedBox(
-          height: 12.0,
+          height: 32.0,
         ),
         SFText(
-          keyText: Keys.addDuration,
+          keyText: LocaleKeys.add_duration,
           style: TextStyles.lightGrey14,
         ),
         const SizedBox(
@@ -128,24 +109,24 @@ class PopUpCalculator extends StatelessWidget {
           runSpacing: 6.0,
           children: const [
             SFChip(
-              text: "1D",
+              text: "1W",
               textStyle: TextStyles.w700WhiteSize14,
               color: AppColors.blue,
             ),
             SFChip(
-              text: "3D",
+              text: "3W",
               textStyle: TextStyles.w700LightGreySize14,
             ),
             SFChip(
-              text: "7D",
+              text: "7W",
               textStyle: TextStyles.w700LightGreySize14,
             ),
             SFChip(
-              text: "30D",
+              text: "30W",
               textStyle: TextStyles.w700LightGreySize14,
             ),
             SFChip(
-              text: "60D",
+              text: "60W",
               textStyle: TextStyles.w700LightGreySize14,
             ),
           ],
@@ -155,7 +136,7 @@ class PopUpCalculator extends StatelessWidget {
         ),
         const SFTextFieldTextButton(
           showLabel: false,
-          textButton: Keys.day,
+          textButton: LocaleKeys.week,
           textButtonStyle: TextStyles.lightGrey14,
         ),
         const SizedBox(
@@ -177,7 +158,7 @@ class PopUpCalculator extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   SFText(
-                    keyText: Keys.roiCurrentRates,
+                    keyText: LocaleKeys.roi_current_rates,
                     style: TextStyles.blue14,
                   ),
                   const SizedBox(

@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
 import 'package:slee_fi/common/widgets/sf_buttons.dart';
-import 'package:slee_fi/common/widgets/sf_card.dart';
 import 'package:slee_fi/common/widgets/sf_dialog.dart';
 import 'package:slee_fi/common/widgets/sf_icon.dart';
+import 'package:slee_fi/common/widgets/sf_label_value.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
-import 'package:slee_fi/di/translations/keys.dart';
+import 'package:slee_fi/l10n/locale_keys.g.dart';
 
 class PopUpLevelUp extends StatelessWidget {
   const PopUpLevelUp(
@@ -33,9 +33,7 @@ class PopUpLevelUp extends StatelessWidget {
         Positioned(
           right: 0,
           child: GestureDetector(
-            onTap: () {
-              Navigator.pop(context);
-            },
+            onTap: onCancel,
             child: const Icon(
               Icons.close,
               color: AppColors.lightGrey,
@@ -45,7 +43,7 @@ class PopUpLevelUp extends StatelessWidget {
         Column(
           children: [
             SFText(
-              keyText: Keys.levelUp,
+              keyText: LocaleKeys.level_up,
               style: TextStyles.white1w700size16,
             ),
             const SizedBox(height: 20),
@@ -67,67 +65,41 @@ class PopUpLevelUp extends StatelessWidget {
                     text: 'Level up to ',
                     style: TextStyles.lightGrey14,
                     children: [
-                      TextSpan(text: 'Lv $level', style: TextStyles.bold14Blue),
+                      TextSpan(
+                          text: 'Lv ${level + 1}',
+                          style: TextStyles.bold14Blue),
                     ]),
               ),
             ),
             const SizedBox(height: 8),
-            SFCard(
-              margin: EdgeInsets.zero,
-              padding: const EdgeInsets.symmetric(vertical: 24, horizontal: 18),
-              child: Row(
-                children: [
-                  SFText(
-                    keyText: Keys.attributes,
-                    style: TextStyles.lightGrey16,
-                  ),
-                  const SizedBox(width: 4),
-                  Expanded(
-                    child: SFText(
-                      keyText: '+2 Luck',
-                      style: TextStyles.blue16,
-                      textAlign: TextAlign.right,
-                    ),
-                  ),
-                ],
-              ),
+            SFLabelValue(
+              label: LocaleKeys.cost,
+              value: '$cost SLFT',
+              styleValue: TextStyles.textColorSize16,
             ),
             const SizedBox(height: 8),
-            SFCard(
-              margin: EdgeInsets.zero,
-              padding: const EdgeInsets.symmetric(vertical: 24, horizontal: 18),
-              child: Row(
-                children: [
-                  SFText(
-                    keyText: Keys.attributes,
-                    style: TextStyles.lightGrey16,
-                  ),
-                  const SizedBox(width: 4),
-                  Expanded(
-                    child: SFText(
-                      keyText: '+2 Luck',
-                      style: TextStyles.blue16,
-                      textAlign: TextAlign.right,
-                    ),
-                  ),
-                ],
-              ),
+            SFLabelValue(
+              label: LocaleKeys.time,
+              value: '$time mins',
+              styleValue: TextStyles.textColorSize16,
             ),
             const SizedBox(height: 24),
             Row(
               children: [
                 Expanded(
                   child: SFButton(
-                    text: Keys.cancel,
+                    text: LocaleKeys.cancel,
                     onPressed: onCancel,
                     textStyle: TextStyles.lightGrey16,
                     color: AppColors.light4,
+                    width: double.infinity,
                   ),
                 ),
                 const SizedBox(width: 12),
                 Expanded(
                   child: SFButton(
-                    text: Keys.confirm,
+                    text: LocaleKeys.confirm,
+                    width: double.infinity,
                     onPressed: () {
                       onConfirm();
                       Navigator.pop(context);

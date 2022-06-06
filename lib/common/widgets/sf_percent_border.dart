@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:percent_indicator/percent_indicator.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
+
 class SFPercentBorderGradient extends StatelessWidget {
   const SFPercentBorderGradient({
     Key? key,
@@ -11,7 +12,7 @@ class SFPercentBorderGradient extends StatelessWidget {
     this.linearGradient,
     this.progressColor,
     this.lineHeight = 6.0,
-    this.barRadius =3,
+    this.barRadius = 3,
   }) : super(key: key);
 
   final double valueActive;
