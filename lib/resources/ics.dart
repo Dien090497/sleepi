@@ -9,6 +9,7 @@ class Ics {
   static const String bedBunk = 'assets/icons/bed_bunk.svg';
   static const String bedsCouple = 'assets/icons/beds_couple.svg';
   static const String chart = 'assets/icons/chart.svg';
+  static const String commingSoon = 'assets/icons/comming_soon.svg';
   static const String efficiency = 'assets/icons/efficiency.svg';
   static const String ellipse = 'assets/icons/ellipse.svg';
   static const String facebook = 'assets/icons/facebook.svg';
@@ -70,6 +71,7 @@ class Ics {
     bedBunk,
     bedsCouple,
     chart,
+    commingSoon,
     efficiency,
     ellipse,
     facebook,

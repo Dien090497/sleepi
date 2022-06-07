@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:slee_fi/common/widgets/sf_bottom_sheets.dart';
 import 'package:slee_fi/common/widgets/sf_gridview.dart';
+import 'package:slee_fi/common/widgets/sf_icon.dart';
 import 'package:slee_fi/l10n/locale_keys.g.dart';
 import 'package:slee_fi/presentation/screens/market_place/widget/filter_sheet.dart';
 import 'package:slee_fi/presentation/screens/market_place/widget/item_bed_buy_widget.dart';
@@ -44,14 +45,18 @@ class TabItemsBuy extends StatelessWidget {
                       );
                     },
                   ),
-                  SFGridView(
-                    count: 20,
-                    itemBuilder: (context, i) {
-                      return ItemBedBuyWidget(
-                        icon: beds[i % beds.length],
-                      );
-                    },
+                  Padding(
+                    padding:  EdgeInsets.only(bottom: MediaQuery.of(context).size.height * 0.3),
+                    child: const Center(child: SFIcon(Ics.commingSoon),),
                   )
+                  // SFGridView(
+                  //   count: 20,
+                  //   itemBuilder: (context, i) {
+                  //     return ItemBedBuyWidget(
+                  //       icon: beds[i % beds.length],
+                  //     );
+                  //   },
+                  // )
                 ],
               ),
             ),

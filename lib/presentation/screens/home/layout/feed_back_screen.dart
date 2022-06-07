@@ -10,30 +10,20 @@ import 'package:slee_fi/common/widgets/sf_text.dart';
 import 'package:slee_fi/common/widgets/sf_textfield.dart';
 import 'package:slee_fi/l10n/locale_keys.g.dart';
 
-class FeedBackScreen extends StatelessWidget {
+class FeedBackScreen extends StatefulWidget {
   const FeedBackScreen({Key? key}) : super(key: key);
+
+  @override
+  State<FeedBackScreen> createState() => _FeedBackScreenState();
+}
+
+class _FeedBackScreenState extends State<FeedBackScreen> {
+  bool isDisabled = true;
 
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
-    List<String> topics = [LocaleKeys.suggestion, LocaleKeys.bug, LocaleKeys.other_];
-    List<String> subTopics = [LocaleKeys.running_gps, LocaleKeys.marketplace, LocaleKeys.wallet, LocaleKeys.nft, LocaleKeys.display, LocaleKeys.earning, LocaleKeys.others];
-    List<DropdownMenuItem<String>> topicItems = List.generate(topics.length, (index) => DropdownMenuItem(
-      value: topics[index],
-      child: SFText(
-        keyText: topics[index],
-        style: TextStyles.white16,
-      ),
-    ),
-    );
-    List<DropdownMenuItem<String>> subTopicItems = List.generate(subTopics.length, (index) => DropdownMenuItem(
-      value: subTopics[index],
-      child: SFText(
-        keyText: subTopics[index],
-        style: TextStyles.white16,
-      ),
-    ),
-    );
+
     return DismissKeyboardWidget(
       child: BackgroundWidget(
         resizeToAvoidBottomInset: false,
@@ -69,11 +59,22 @@ class FeedBackScreen extends StatelessWidget {
                         )),
                   ],
                 ),
-                const SFTextField(
+                 SFTextField(
                   maxLine: 15,
                   maxLength: 100,
                   hintText: LocaleKeys.hint_feedback,
                   hintStyle: TextStyles.lightGrey16,
+                  onChanged: (value){
+                    if(value.isNotEmpty){
+                      setState((){
+                        isDisabled = false;
+                      });
+                    }else {
+                      setState((){
+                        isDisabled = true;
+                      });
+                    }
+                  },
                 ),
                 const Spacer(),
                 SFButton(
@@ -81,6 +82,7 @@ class FeedBackScreen extends StatelessWidget {
                   width: size.width,
                   gradient: AppColors.gradientBlueButton,
                   textStyle: TextStyles.w600WhiteSize16,
+                  disabled: isDisabled,
                 ),
                 const SizedBox(height: 24,)
               ],
@@ -91,3 +93,22 @@ class FeedBackScreen extends StatelessWidget {
     );
   }
 }
+
+  List<String> topics = [LocaleKeys.suggestion, LocaleKeys.bug, LocaleKeys.other_];
+  List<String> subTopics = [LocaleKeys.running_gps, LocaleKeys.marketplace, LocaleKeys.wallet, LocaleKeys.nft, LocaleKeys.display, LocaleKeys.earning, LocaleKeys.others];
+  List<DropdownMenuItem<String>> topicItems = List.generate(topics.length, (index) => DropdownMenuItem(
+    value: topics[index],
+    child: SFText(
+      keyText: topics[index],
+      style: TextStyles.white16,
+    ),
+  ),
+  );
+  List<DropdownMenuItem<String>> subTopicItems = List.generate(subTopics.length, (index) => DropdownMenuItem(
+    value: subTopics[index],
+    child: SFText(
+      keyText: subTopics[index],
+      style: TextStyles.white16,
+    ),
+  ),
+  );

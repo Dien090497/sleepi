@@ -25,7 +25,7 @@ class _MotionDataStatusChangeState extends State<MotionDataStatusChangeWidget> {
       text: LocaleKeys.motion_data,
       trailing:  Padding(
         padding:const  EdgeInsets.only(right: 16),
-        child: isChecked ? const Icon(Icons.check, color: AppColors.green,) : const SizedBox(),
+        child: isChecked ? const Icon(Icons.check_circle_rounded, color: AppColors.green,) : const SizedBox(),
       ),
       onPressed: (){
         setState((){
