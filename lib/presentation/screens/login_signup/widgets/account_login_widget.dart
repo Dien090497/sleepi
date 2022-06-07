@@ -48,7 +48,7 @@ class _AccountLoginState extends State<AccountLoginWidget> {
             : const SFTextFieldPassword(labelText: LocaleKeys.password,),
         const SizedBox(height: 37),
         SFButton(
-          text: isLoginSignup ? LocaleKeys.login_signup : LocaleKeys.account_login,
+          text: isLoginSignup ? LocaleKeys.login_signup : LocaleKeys.login,
           color: AppColors.blue,
           textStyle: TextStyles.w600WhiteSize16,
           onPressed: () {
@@ -59,12 +59,11 @@ class _AccountLoginState extends State<AccountLoginWidget> {
           width: MediaQuery.of(context).size.width,
         ),
         const SizedBox(height: 32),
-        InkWell(
-          onTap: () => changeStatus(),
-          child: SFText(
-              keyText: isLoginSignup ? LocaleKeys.account_login : LocaleKeys.verification_login,
-              style: TextStyles.blue14),
-        )
+        SFTextButton(
+          text: isLoginSignup ? LocaleKeys.account_login : LocaleKeys.verification_login,
+          textStyle: TextStyles.blue14,
+          onPressed: () => changeStatus(),
+        ),
       ],
     );
   }

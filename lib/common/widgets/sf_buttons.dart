@@ -11,7 +11,7 @@ class SFButton extends StatelessWidget {
     this.width,
     this.height,
     this.color,
-    this.toUpperCase = false,
+    this.stringCase,
     this.disabled = false,
     this.radius = 100,
     this.gradient,
@@ -25,7 +25,7 @@ class SFButton extends StatelessWidget {
   final double? height;
   final Color? color;
   final double radius;
-  final bool toUpperCase;
+  final StringCase? stringCase;
   final bool disabled;
   final LinearGradient? gradient;
 
@@ -64,7 +64,7 @@ class SFButton extends StatelessWidget {
               child: SFText(
                 keyText: text,
                 style: textStyle,
-                stringCase: StringCase.upperCase,
+                stringCase: stringCase,
               ),
             ),
           ),
@@ -87,14 +87,14 @@ class SFTextButton extends StatelessWidget {
   const SFTextButton(
       {required this.text,
       this.textStyle,
-      this.toUpperCase = false,
+      this.stringCase,
       this.onPressed,
       Key? key})
       : super(key: key);
 
   final String text;
   final TextStyle? textStyle;
-  final bool toUpperCase;
+  final StringCase? stringCase;
   final VoidCallback? onPressed;
 
   @override
@@ -104,7 +104,7 @@ class SFTextButton extends StatelessWidget {
       child: SFText(
         keyText: text,
         style: textStyle,
-        stringCase: StringCase.upperCase,
+        stringCase: stringCase,
       ),
     );
   }

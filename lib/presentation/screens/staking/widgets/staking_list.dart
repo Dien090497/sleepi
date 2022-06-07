@@ -274,7 +274,7 @@ class StakingList extends StatelessWidget {
           children: [
             SFButton(
               text: LocaleKeys.buy_slft,
-              textStyle: TextStyles.bold14LightWhite,
+              textStyle: TextStyles.boldWhite14,
               color: AppColors.blue,
               width: double.infinity,
               onPressed: () {},

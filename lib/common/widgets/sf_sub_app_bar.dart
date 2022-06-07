@@ -5,12 +5,12 @@ import 'package:slee_fi/common/widgets/sf_text.dart';
 
 class SFSubAppBar extends StatelessWidget {
   const SFSubAppBar(
-      {this.title, this.textStyle, this.toUpperCase = false, Key? key})
+      {this.title, this.textStyle, this.stringCase, Key? key})
       : super(key: key);
 
   final String? title;
   final TextStyle? textStyle;
-  final bool toUpperCase;
+  final StringCase? stringCase;
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +24,7 @@ class SFSubAppBar extends StatelessWidget {
           child: SFText(
             keyText: title ?? "",
             style: textStyle,
-            stringCase: StringCase.upperCase,
+            stringCase: stringCase,
           ),
         )
       ],

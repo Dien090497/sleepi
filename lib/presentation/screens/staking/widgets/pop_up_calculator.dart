@@ -78,12 +78,12 @@ class PopUpCalculator extends StatelessWidget {
           runSpacing: 6.0,
           children: [
             SFChip(
-              text: "100",
+              text: "\$100",
               textStyle: TextStyles.w700LightGreySize14,
               color: AppColors.white.withOpacity(0.05),
             ),
             SFChip(
-              text: "10000",
+              text: "\$10000",
               textStyle: TextStyles.w700LightGreySize14,
               color: AppColors.white.withOpacity(0.05),
             ),
@@ -109,24 +109,24 @@ class PopUpCalculator extends StatelessWidget {
           runSpacing: 6.0,
           children: const [
             SFChip(
-              text: "1W",
+              text: "1D",
               textStyle: TextStyles.w700WhiteSize14,
               color: AppColors.blue,
             ),
             SFChip(
-              text: "3W",
+              text: "3D",
               textStyle: TextStyles.w700LightGreySize14,
             ),
             SFChip(
-              text: "7W",
+              text: "7D",
               textStyle: TextStyles.w700LightGreySize14,
             ),
             SFChip(
-              text: "30W",
+              text: "30D",
               textStyle: TextStyles.w700LightGreySize14,
             ),
             SFChip(
-              text: "60W",
+              text: "60D",
               textStyle: TextStyles.w700LightGreySize14,
             ),
           ],
@@ -136,7 +136,7 @@ class PopUpCalculator extends StatelessWidget {
         ),
         const SFTextFieldTextButton(
           showLabel: false,
-          textButton: LocaleKeys.week,
+          textButton: LocaleKeys.day,
           textButtonStyle: TextStyles.lightGrey14,
         ),
         const SizedBox(

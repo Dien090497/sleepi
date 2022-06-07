@@ -9,7 +9,7 @@ class SFAppBar extends AppBar {
     String? title,
     TextStyle? textStyle,
     VoidCallback? onPressedBack,
-    bool toUpperCase = false,
+    StringCase? stringCase,
     bool? centerTitle ,
     EdgeInsets? paddingLeading,
     Color? backgroundColor,
@@ -30,7 +30,7 @@ class SFAppBar extends AppBar {
           title: SFText(
             keyText: title ?? "",
             style: textStyle,
-            stringCase: StringCase.camelCase,
+            stringCase: stringCase,
           ),
           key: key,
         );
