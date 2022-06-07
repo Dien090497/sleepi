@@ -50,6 +50,7 @@ class _FeedBackScreenState extends State<FeedBackScreen> {
                     const SizedBox(width: 10),
                     Expanded(
                         child: SizedBox(
+                          height: 48,
                           child: SFDropDown(
                               value: subTopics[2],
                               dropdownWidth: size.width * 0.55,
