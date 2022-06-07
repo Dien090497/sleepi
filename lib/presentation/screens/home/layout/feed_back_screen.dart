@@ -17,7 +17,7 @@ class FeedBackScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     List<String> topics = [LocaleKeys.suggestion, LocaleKeys.bug, LocaleKeys.other_];
-    List<String> subTopics = [LocaleKeys.running_gps, LocaleKeys.marketplace, LocaleKeys.wallet, LocaleKeys.nft, LocaleKeys.display, LocaleKeys.earning, LocaleKeys.others];
+    List<String> subTopics = [LocaleKeys.running_gps, LocaleKeys.marketplace, LocaleKeys.wallet, LocaleKeys.nft, LocaleKeys.display, LocaleKeys.earning, LocaleKeys.other_];
     List<DropdownMenuItem<String>> topicItems = List.generate(topics.length, (index) => DropdownMenuItem(
       value: topics[index],
       child: SFText(
@@ -53,7 +53,7 @@ class FeedBackScreen extends StatelessWidget {
                         width: size.width / 3,
                         height: 48,
                         child: SFDropDown(
-                            value: topics[1],
+                            value: topics[2],
                             dropdownWidth: size.width / 3,
                             icon: const Icon(Icons.keyboard_arrow_down, size: 24,),
                             dropdownItems:  topicItems)),
@@ -61,7 +61,7 @@ class FeedBackScreen extends StatelessWidget {
                     Expanded(
                         child: SizedBox(
                           child: SFDropDown(
-                              value: subTopics[2],
+                              value: subTopics[6],
                               dropdownWidth: size.width * 0.55,
                               dropdownHeight: size.width * 0.75,
                               icon: const Icon(Icons.keyboard_arrow_down, size: 24,),

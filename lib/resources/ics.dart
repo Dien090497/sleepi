@@ -34,6 +34,7 @@ class Ics {
   static const String icMicrophone = 'assets/icons/ic_microphone.svg';
   static const String icMotionData = 'assets/icons/ic_motion_data.svg';
   static const String icNotifications = 'assets/icons/ic_notifications.svg';
+  static const String icPlus = 'assets/icons/ic_plus.svg';
   static const String icQuestion = 'assets/icons/ic_question.svg';
   static const String icRefresh = 'assets/icons/ic_refresh.svg';
   static const String icScanOutlined = 'assets/icons/ic_scan_outlined.svg';
@@ -95,6 +96,7 @@ class Ics {
     icMicrophone,
     icMotionData,
     icNotifications,
+    icPlus,
     icQuestion,
     icRefresh,
     icScanOutlined,

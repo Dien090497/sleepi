@@ -395,6 +395,8 @@
   "marketplace": "Marketplace",
   "nft": "NFT",
   "display": "Display",
-  "others": "Others"
+  "others": "Others",
+  "ok": "OK",
+  "close": "Close"
 
 }
