@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:slee_fi/common/enum/enum.dart';
 import 'package:slee_fi/common/widgets/sf_bottom_sheet.dart';
-import 'package:slee_fi/common/widgets/sf_dialog.dart';
 import 'package:slee_fi/common/widgets/sf_icon.dart';
-import 'package:slee_fi/presentation/screens/info_individual/widget/popup_no_shoes.dart';
 import 'package:slee_fi/presentation/screens/info_individual/widget/popup_select_bed.dart';
 import 'package:slee_fi/resources/resources.dart';
 
@@ -29,24 +27,32 @@ class ConnectBedWidget extends StatelessWidget {
               GestureDetector(
                 child: const SFIcon(Ics.middleBed),
                 onTap: () {
-                  SFModalBottomSheet.show(
-                    context,
-                    0.8,
-                    PopUpSelectBed(
-                      beds: beds,
-                      callback: callback,
-                    ),
-                  );
+                  // SFModalBottomSheet.show(
+                  //   context,
+                  //   0.8,
+                  //   PopUpSelectBed(
+                  //     beds: beds,
+                  //     callback: callback,
+                  //   ),
+                  // );
                 },
               ),
               indexSelected != 0
                   ? SFIcon(beds[indexSelected].image)
                   : GestureDetector(
                       onTap: () {
-                        showCustomDialog(context, children: [
-                          const PopupNoShoes(),
-
-                        ]);
+                        // showCustomDialog(context, children: [
+                        //   const PopupNoShoes(),
+                        //
+                        // ]);
+                        SFModalBottomSheet.show(
+                          context,
+                          0.8,
+                          PopUpSelectBed(
+                            beds: beds,
+                            callback: callback,
+                          ),
+                        );
                       },
                       child: const SFIcon(Ics.addBed),
                     ),
