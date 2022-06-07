@@ -250,7 +250,7 @@
   "spending": "Spending",
   "spending_account": "Spending Account",
   "displays_message_from_spending_detail": "Users will need to have AVAX  in”Spending”to purchase NFTs in the Marketplace. Earned SLFT and SLGT are also stored in Spending.",
-  "displays_message_from_wallet_detail":"Users can use send and\n receive funds function and\n trade function.",
+  "displays_message_from_wallet_detail":"You can send, receive and\n trade your assets",
   "slft": "SLFT",
   "slgt": "SLGT",
   "avax": "AVAX",

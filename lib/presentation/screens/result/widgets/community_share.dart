@@ -35,23 +35,29 @@ class CommunityShare extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: const BoxDecoration(
-          color: AppColors.dark,
-          border: Border(
-              top: BorderSide(
-            width: 1,
-            color: AppColors.lightDark,
-          ))),
-      height: 80,
-      width: MediaQuery.of(context).size.width,
-      child: Row(
-        children: [
-          itemCommunity(context, Ics.icDownload, LocaleKeys.download),
-          itemCommunity(context, Ics.twitter, LocaleKeys.twitter),
-          itemCommunity(context, Ics.facebook, LocaleKeys.facebook),
-          itemCommunity(context, Ics.telegram, LocaleKeys.telegram),
-        ],
+    return Material(
+      color: AppColors.dark,
+      child: SafeArea(
+        top: false,
+        child: Container(
+          decoration: const BoxDecoration(
+              color: AppColors.dark,
+              border: Border(
+                  top: BorderSide(
+                width: 1,
+                color: AppColors.lightDark,
+              ))),
+          height: 80,
+          width: MediaQuery.of(context).size.width,
+          child: Row(
+            children: [
+              itemCommunity(context, Ics.icDownload, LocaleKeys.download),
+              itemCommunity(context, Ics.twitter, LocaleKeys.twitter),
+              itemCommunity(context, Ics.facebook, LocaleKeys.facebook),
+              itemCommunity(context, Ics.telegram, LocaleKeys.telegram),
+            ],
+          ),
+        ),
       ),
     );
   }
