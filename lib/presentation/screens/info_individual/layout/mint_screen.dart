@@ -42,7 +42,6 @@ class _MintScreenState extends State<MintScreen> {
                 child: ConstrainedBox(
                   constraints: BoxConstraints(
                     minHeight: size.height,
-                    maxHeight: size.height,
                   ),
                   child: IntrinsicHeight(
                     child: Column(
@@ -177,7 +176,7 @@ class _MintScreenState extends State<MintScreen> {
                           ),
                         ),
                         const SizedBox(
-                          height: 20,
+                          height: 24,
                         )
                       ],
                     ),
