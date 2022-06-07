@@ -99,7 +99,7 @@ class _MiddleBedState extends State<MiddleBed> {
                   const Spacer(),
                   SFButton(
                     text: 'IDIDID',
-                    textStyle: TextStyles.blue12,
+                    textStyle: TextStyles.blue14,
                     color: Colors.white.withOpacity(0.05),
                     radius: 50,
                     height: 36,
@@ -109,7 +109,7 @@ class _MiddleBedState extends State<MiddleBed> {
                   ),
                   SFButton(
                     text: '100/100',
-                    textStyle: TextStyles.green12,
+                    textStyle: TextStyles.green14,
                     color: Colors.white.withOpacity(0.05),
                     radius: 50,
                     height: 36,
@@ -119,7 +119,7 @@ class _MiddleBedState extends State<MiddleBed> {
                   ),
                   SFButton(
                     text: 'Lv9999',
-                    textStyle: TextStyles.yellow12,
+                    textStyle: TextStyles.yellow14,
                     color: Colors.white.withOpacity(0.05),
                     radius: 50,
                     height: 36,
@@ -127,10 +127,10 @@ class _MiddleBedState extends State<MiddleBed> {
                   const Spacer(),
                 ],
               ),
-              const SizedBox(height: 16),
+              const SizedBox(height: 24),
               SFText(
                 keyText: 'Time: 6h - 8h',
-                style: TextStyles.lightGrey14,
+                style: TextStyles.lightGrey12,
               ),
             ],
           ),

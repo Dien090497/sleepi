@@ -397,5 +397,7 @@ abstract class  LocaleKeys {
   static const nft = 'nft';
   static const display = 'display';
   static const others = 'others';
+  static const ok = 'ok';
+  static const close = 'close';
 
 }
