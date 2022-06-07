@@ -1,0 +1,16 @@
+<svg enable-background="new 1000 -1000 2500 2500" viewBox="1000 -1000 2500 2500"
+    xmlns="http://www.w3.org/2000/svg">
+    <g fill="#21a5de">
+        <circle cx="1864.16" cy="554.61" r="203.074" />
+        <circle cx="2252.901" cy="165.87" r="203.074" />
+        <circle cx="2641.642" cy="554.61" r="203.074" />
+        <circle cx="3030.383" cy="165.87" r="203.074" />
+        <circle cx="1475.419" cy="165.87" r="203.074" />
+        <circle cx="1669.79" cy="360.24" r="72.526" />
+        <circle cx="2058.531" cy="360.24" r="72.526" />
+        <circle cx="2447.271" cy="360.24" r="72.526" />
+        <circle cx="2836.012" cy="360.24" r="72.526" />
+    </g>
+    <circle cx="2250" cy="250" fill="none" r="1201.035" stroke="#21a5de" stroke-miterlimit="10"
+        stroke-width="7" />
+</svg>

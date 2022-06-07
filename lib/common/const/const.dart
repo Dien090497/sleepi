@@ -3,6 +3,9 @@ import 'package:flutter/material.dart';
 class Const {
   static const int passcodeLength = 6;
 
+  /// GWei
+  static const double gasPrice = 1.5;
+
   static const String linkTreeUrl = 'https://linktr.ee/sleefi';
 
   static const localeDE = Locale('de', 'DE');
