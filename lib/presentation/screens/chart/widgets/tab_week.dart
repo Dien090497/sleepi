@@ -135,6 +135,7 @@ class ChartWeekPicker extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final DatePickerRangeStyles styles = DatePickerRangeStyles(
+      firstDayOfWeekIndex:1 ,
       selectedPeriodLastDecoration: const BoxDecoration(
           color: AppColors.green,
           borderRadius: BorderRadiusDirectional.only(
