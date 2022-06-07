@@ -2,12 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:slee_fi/common/enum/enum.dart';
 import 'package:slee_fi/common/routes/app_routes.dart';
 import 'package:slee_fi/common/widgets/sf_bottom_sheets.dart';
-import 'package:slee_fi/common/widgets/sf_dialog.dart';
+import 'package:slee_fi/common/widgets/sf_icon.dart';
 import 'package:slee_fi/l10n/locale_keys.g.dart';
 import 'package:slee_fi/presentation/screens/market_place/widget/filter_sheet.dart';
 import 'package:slee_fi/presentation/screens/market_place/widget/tab_bar_filter.dart';
 import 'package:slee_fi/presentation/screens/product_detail/widgets/gridview_bed_item.dart';
-import 'package:slee_fi/presentation/screens/product_detail/widgets/jewel_dialog_body.dart';
 import 'package:slee_fi/resources/resources.dart';
 
 class TabBedsBuy extends StatelessWidget {
@@ -15,24 +14,24 @@ class TabBedsBuy extends StatelessWidget {
 
   final Function() onPress;
 
-  void _showBedDialog(BuildContext context) {
-    showCustomDialog(
-      context,
-      padding: const EdgeInsets.all(24),
-      children: [
-        JewelDialogBody(
-          icon: Imgs.jewelGreen,
-          name: 'name',
-          level: 'level',
-          id: 'id',
-          attribute: 'attribute',
-          effect: 'effect',
-          onSellTap: () {},
-          onTransferTap: () {},
-        ),
-      ],
-    );
-  }
+  // void _showBedDialog(BuildContext context) {
+  //   showCustomDialog(
+  //     context,
+  //     padding: const EdgeInsets.all(24),
+  //     children: [
+  //       JewelDialogBody(
+  //         icon: Imgs.jewelGreen,
+  //         name: 'name',
+  //         level: 'level',
+  //         id: 'id',
+  //         attribute: 'attribute',
+  //         effect: 'effect',
+  //         onSellTap: () {},
+  //         onTransferTap: () {},
+  //       ),
+  //     ],
+  //   );
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -64,16 +63,20 @@ class TabBedsBuy extends StatelessWidget {
                           arguments: true);
                     },
                   ),
-                  GridViewBedItem(
-                    beds: beds,
-                    onBedTap: (bed) {
-                      _showBedDialog(context);
-                    },
-                    price: 10,
-                    onBuyTap: (bed) {
-
-                    },
-                  ),
+                   Padding(
+                    padding:  EdgeInsets.only(bottom: MediaQuery.of(context).size.height * 0.3),
+                    child: const Center(child: SFIcon(Imgs.commingSoon),),
+                  )
+                  // GridViewBedItem(
+                  //   beds: beds,
+                  //   onBedTap: (bed) {
+                  //     _showBedDialog(context);
+                  //   },
+                  //   price: 10,
+                  //   onBuyTap: (bed) {
+                  //
+                  //   },
+                  // ),
                 ],
               ),
             ),
