@@ -23,7 +23,7 @@ class GachaRollSelections extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 SFText(
-                  keyText: '12 SLFT',
+                  keyText: '120 SLFT',
                   style: TextStyles.boldWhite18,
                 ),
                 const SizedBox(
@@ -49,7 +49,7 @@ class GachaRollSelections extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                SFText(keyText: '100 SLFT', style: TextStyles.boldWhite18),
+                SFText(keyText: '1000 SLFT', style: TextStyles.boldWhite18),
                 const SizedBox(
                   height: 5,
                 ),
