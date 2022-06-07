@@ -12,7 +12,7 @@ class MintFromWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final beds = List.generate(BedType.values.length * 5,
+    final beds = List.generate(BedType.values.length,
         (i) => BedType.values[i % BedType.values.length]);
     return Container(
       decoration: const BoxDecoration(

@@ -9,9 +9,16 @@ import 'package:slee_fi/presentation/screens/gacha/widgets/gacha_roll_selections
 import 'package:slee_fi/presentation/screens/gacha/widgets/probability_widget.dart';
 
 class ItemsGacha extends StatelessWidget {
-  const ItemsGacha({Key? key, required this.title}) : super(key: key);
+  const ItemsGacha(
+      {Key? key,
+      required this.title,
+      required this.singleGacha,
+      required this.timesGacha})
+      : super(key: key);
 
   final String title;
+  final int singleGacha;
+  final int timesGacha;
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +31,7 @@ class ItemsGacha extends StatelessWidget {
                 child: SFText(keyText: title, style: TextStyles.bold18White)),
             const Spacer(),
             GestureDetector(
-              onTap: (){
+              onTap: () {
                 Navigator.pushNamed(context, R.probability);
               },
               child: Container(
@@ -32,7 +39,8 @@ class ItemsGacha extends StatelessWidget {
                   color: Colors.white.withOpacity(0.2),
                   borderRadius: BorderRadius.circular(16),
                 ),
-                padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 15),
+                padding:
+                    const EdgeInsets.symmetric(vertical: 8, horizontal: 15),
                 child: SFText(
                     keyText: LocaleKeys.probability, style: TextStyles.white14),
               ),
@@ -42,10 +50,10 @@ class ItemsGacha extends StatelessWidget {
         const SizedBox(height: 17),
         const ProbabilityWidget(),
         const SizedBox(height: 20),
-        const GachaRollSelections(),
+        GachaRollSelections(singleGacha: singleGacha, timesGacha: timesGacha),
         const SizedBox(height: 13),
         SFText(
-            keyText: LocaleKeys.uncommon_beds_chance,
+            keyText: LocaleKeys.rare_beds_chance,
             style: TextStyles.lightGrey12),
         const SizedBox(height: 2),
         const ChanceWidget(),
