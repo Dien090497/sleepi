@@ -20,8 +20,8 @@ class GachaScreen extends StatelessWidget {
                 padding:
                     const EdgeInsets.symmetric(horizontal: 24.0, vertical: 12),
                 children: const [
-                  ItemsGacha(title: LocaleKeys.normal_gacha),
-                  ItemsGacha(title: LocaleKeys.special_gacha),
+                  ItemsGacha(title: LocaleKeys.normal_gacha, singleGacha: 12, timesGacha: 100,),
+                  ItemsGacha(title: LocaleKeys.special_gacha, singleGacha: 120, timesGacha: 1000,),
                 ],
               ),
             )

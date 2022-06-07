@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:slee_fi/common/routes/app_routes.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
 import 'package:slee_fi/common/widgets/background_widget.dart';
@@ -16,7 +15,7 @@ class GachaResultBedScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final Size size = MediaQuery.of(context).size;
+    // final Size size = MediaQuery.of(context).size;
     return BackgroundWidget(
         child: SafeArea(
           child: Padding(
@@ -113,28 +112,13 @@ class GachaResultBedScreen extends StatelessWidget {
                             children: [
                               const AttributesWidget(),
                               const SizedBox(height: 60),
-                              // Center(
-                              //   child: SFButton(
-                              //     text: LocaleKeys.next,
-                              //     textStyle: TextStyles.white16,
-                              //     radius: 100,
-                              //     gradient: AppColors.gradientBlueButton,
-                              //     height: 45,
-                              //     width: size.width,
-                              //   ),
-                              // ),
-                              // const SizedBox(height: 16),
                               Center(
                                 child: SFButtonOutLined(
-                                  title: LocaleKeys.show_all_result,
-                                  onPressed: () {
-                                    Navigator.pushNamed(context, R.allResult);
-                                  },
-                                  fixedSize: Size(size.width, 45),
+                                  title: LocaleKeys.return_,
+                                  fixedSize: const Size(double.infinity, 48),
                                   textStyle: TextStyles.blue16,
                                   borderColor: AppColors.blue,
-                                  iconColor: AppColors.blue,
-                                  withBorder: 1,
+                                  onPressed: () => Navigator.pop(context),
                                 ),
                               ),
                             ],
