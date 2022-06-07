@@ -53,7 +53,7 @@ class ItemsGacha extends StatelessWidget {
         GachaRollSelections(singleGacha: singleGacha, timesGacha: timesGacha),
         const SizedBox(height: 13),
         SFText(
-            keyText: LocaleKeys.uncommon_beds_chance,
+            keyText: LocaleKeys.rare_beds_chance,
             style: TextStyles.lightGrey12),
         const SizedBox(height: 2),
         const ChanceWidget(),
