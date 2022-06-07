@@ -50,8 +50,8 @@ class SFLabelValue extends StatelessWidget {
                 const SizedBox(
                   width: 8,
                 ),
-                Text(
-                  value,
+                SFText(
+                  keyText: value,
                   style: styleValue,
                 ),
               ],
