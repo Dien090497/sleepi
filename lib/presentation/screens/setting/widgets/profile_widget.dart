@@ -53,7 +53,7 @@ class ProfileWidget extends StatelessWidget {
               ),
               divider,
               SFListTile(
-                text: LocaleKeys.change_password,
+                text: LocaleKeys.password,
                 trailing: icon,
                 onPressed: () => Navigator.pushNamed(context, R.changePassword),
               ),

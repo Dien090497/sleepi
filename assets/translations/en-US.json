@@ -321,7 +321,7 @@
   "if_the_chosen_platform_does_not_support": "if the chosen platform does not support retrievals",
   "verification_code": "Verification code",
   "verification_login": "Verification Login",
-  "change_password": "Change password",
+  "change_password": "Change Password",
   "new_password": "New password",
   "your_password": "Your password",
   "save": "Save",
@@ -388,5 +388,13 @@
   "id": "ID",
   "token_consumptions": "Token Consumptions",
   "buy_now": "Buy Now",
-  "export": "Export"
+  "export": "Export",
+  "suggestion": "Suggestion",
+  "bug": "Bug",
+  "running_gps": "Running/GPS",
+  "marketplace": "Marketplace",
+  "nft": "NFT",
+  "display": "Display",
+  "others": "Others"
+
 }
