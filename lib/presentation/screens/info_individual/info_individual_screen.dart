@@ -49,12 +49,12 @@ class InfoIndividualScreen extends StatelessWidget {
                           decoration: const BoxDecoration(
                             image: DecorationImage(
                               image: AssetImage(
-                                "assets/images/borderBed.png",
+                                Imgs.borderBed,
                               ),
                               fit: BoxFit.cover,
                             ),
                           ),
-                          child: const SFIcon(Ics.sleep),
+                          child: const SFIcon(Ics.middleBed),
                         ),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
