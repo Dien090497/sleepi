@@ -9,7 +9,7 @@ class TabTrophyDetail extends StatelessWidget {
   Widget build(BuildContext context) {
     return  Padding(
       padding: EdgeInsets.only(bottom: MediaQuery.of(context).size.height * 0.3),
-      child: const Center(child: SFIcon(Imgs.commingSoon)),
+      child: const Center(child: SFIcon(Ics.commingSoon)),
     );
   }
 }

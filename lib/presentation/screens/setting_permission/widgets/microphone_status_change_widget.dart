@@ -25,7 +25,7 @@ class _MicrophoneStatusChangeState extends State<MicrophoneStatusChangeWidget> {
       text: LocaleKeys.microphone,
       trailing:  Padding(
         padding:const  EdgeInsets.only(right: 16),
-        child: isChecked ? const Icon(Icons.check, color: AppColors.green,) : const SizedBox(),
+        child: isChecked ? const Icon(Icons.check_circle_rounded, color: AppColors.green,) : const SizedBox(),
       ),
       onPressed: (){
         setState((){
