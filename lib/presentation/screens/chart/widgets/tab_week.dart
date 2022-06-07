@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_date_pickers/flutter_date_pickers.dart';
-import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
 import 'package:slee_fi/common/utils/date_time_utils.dart';
 import 'package:slee_fi/common/widgets/loading_screen.dart';
@@ -12,6 +11,7 @@ import 'package:slee_fi/presentation/blocs/chart/chart_week_state.dart';
 import 'package:slee_fi/presentation/screens/chart/widgets/chart_tab_body.dart';
 import 'package:slee_fi/presentation/screens/chart/widgets/chart_title.dart';
 import 'package:slee_fi/presentation/screens/result/widgets/chart_statistic_share.dart';
+import 'package:syncfusion_flutter_datepicker/datepicker.dart';
 
 class TabWeek extends StatelessWidget {
   const TabWeek({Key? key}) : super(key: key);
@@ -133,48 +133,51 @@ class ChartWeekPicker extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final DatePickerRangeStyles styles = DatePickerRangeStyles(
-      selectedPeriodLastDecoration: const BoxDecoration(
-          color: AppColors.green,
-          borderRadius: BorderRadiusDirectional.only(
-              topEnd: Radius.circular(10.0), bottomEnd: Radius.circular(10.0))),
-      selectedPeriodStartDecoration: const BoxDecoration(
-        color: AppColors.green,
-        borderRadius: BorderRadiusDirectional.only(
-            topStart: Radius.circular(10.0),
-            bottomStart: Radius.circular(10.0)),
-      ),
-      selectedPeriodMiddleDecoration: const BoxDecoration(
-        color: AppColors.green,
-        shape: BoxShape.rectangle,
-      ),
-      nextIcon: const Icon(Icons.chevron_right, color: AppColors.white),
-      prevIcon: const Icon(Icons.chevron_left, color: AppColors.white),
-      selectedPeriodEndTextStyle: TextStyles.white14,
-      selectedDateStyle: TextStyles.white14,
-      defaultDateTextStyle: TextStyles.lightGrey14,
-      selectedPeriodMiddleTextStyle: TextStyles.white14,
-      selectedPeriodStartTextStyle: TextStyles.white14,
-      disabledDateStyle: TextStyles.lightGrey14,
-      displayedPeriodTitle: TextStyles.white14,
-      dayHeaderStyle: const DayHeaderStyle(textStyle: TextStyles.white14),
-    );
+    final dateTimeUtils = getIt<DateTimeUtils>();
 
-    return Column(
-      mainAxisSize: MainAxisSize.min,
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        WeekPicker(
-          selectedDate: selectedDate,
-          onChanged: (period) {
-            onNewSelected(period);
-            Navigator.pop(context);
-          },
-          firstDate: firstAllowedDate,
-          lastDate: lastAllowedDate,
-          datePickerStyles: styles,
-        ),
-      ],
+    return SfDateRangePicker(
+      maxDate: lastAllowedDate,
+      minDate: firstAllowedDate,
+      showNavigationArrow: true,
+      selectionTextStyle: TextStyles.white14,
+      initialDisplayDate: selectedDate,
+      showTodayButton: false,
+      monthCellStyle: const DateRangePickerMonthCellStyle(
+        disabledDatesTextStyle: TextStyles.lightGrey14,
+        textStyle: TextStyles.lightGrey14,
+        leadingDatesTextStyle: TextStyles.white14,
+      ),
+      yearCellStyle: const DateRangePickerYearCellStyle(
+        textStyle: TextStyles.white14,
+        disabledDatesTextStyle: TextStyles.lightGrey14,
+      ),
+      monthViewSettings: const DateRangePickerMonthViewSettings(
+          firstDayOfWeek: 1,
+          viewHeaderStyle:
+              DateRangePickerViewHeaderStyle(textStyle: TextStyles.white14)),
+      rangeTextStyle: TextStyles.white14,
+      headerStyle: const DateRangePickerHeaderStyle(
+        textAlign: TextAlign.center,
+        textStyle: TextStyles.white14,
+      ),
+      selectionMode: DateRangePickerSelectionMode.range,
+      initialSelectedRange: PickerDateRange(
+          dateTimeUtils.startOfWeek(selectedDate),
+          _endOfWeek(selectedDate, dateTimeUtils)),
+      onSelectionChanged: (DateRangePickerSelectionChangedArgs value) {
+        var selectedDate = value.value;
+        if (selectedDate is PickerDateRange && selectedDate.startDate != null) {
+          onNewSelected(DatePeriod(
+              dateTimeUtils.startOfWeek(selectedDate.startDate!),
+              _endOfWeek(selectedDate.startDate!, dateTimeUtils)));
+        }
+        Navigator.pop(context);
+      },
     );
+  }
+
+  DateTime _endOfWeek(DateTime time, DateTimeUtils dateTimeUtils) {
+    var endOfWeek = dateTimeUtils.endOfWeek(time);
+    return DateTime.now().isBefore(endOfWeek) ? DateTime.now() : endOfWeek;
   }
 }

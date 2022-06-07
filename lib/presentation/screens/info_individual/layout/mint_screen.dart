@@ -156,7 +156,7 @@ class _MintScreenState extends State<MintScreen> {
                                         label:
                                             LocaleKeys.one_bed_will_be_burned,
                                         styleLabel: TextStyles.lightWhite14,
-                                        value: '2%',
+                                        value: '5%',
                                         colorBorder: Colors.transparent,
                                       ),
                                     ],

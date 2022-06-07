@@ -152,7 +152,7 @@ class ChartMonthPicker extends StatelessWidget {
           .bodyText1
           ?.copyWith(color: AppColors.textColor),
       selectedSingleDateDecoration:
-          const BoxDecoration(color: AppColors.green, shape: BoxShape.circle),
+          const BoxDecoration(color: AppColors.blue, shape: BoxShape.circle),
       nextIcon: const Icon(Icons.chevron_right, color: AppColors.white),
       prevIcon: const Icon(Icons.chevron_left, color: AppColors.white),
       selectedPeriodEndTextStyle: TextStyles.white14,

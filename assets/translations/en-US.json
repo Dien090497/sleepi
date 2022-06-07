@@ -386,7 +386,7 @@
   "common_bed_box" : "Common Bed Box",
   "no_bed": "No Bed",
   "id": "ID",
-  "token_consumptions": "Token Consumptions",
+  "token_consumptions": "Token Consumption",
   "buy_now": "Buy Now",
   "export": "Export",
   "suggestion": "Suggestion",
@@ -395,6 +395,8 @@
   "marketplace": "Marketplace",
   "nft": "NFT",
   "display": "Display",
-  "others": "Others"
+  "others": "Others",
+  "ok": "OK",
+  "close": "Close"
 
 }
