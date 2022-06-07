@@ -9,6 +9,7 @@ import 'package:slee_fi/common/widgets/sf_icon.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
 import 'package:slee_fi/l10n/locale_keys.g.dart';
 import 'package:slee_fi/presentation/screens/home/widgets/pop_up_item.dart';
+import 'package:slee_fi/presentation/screens/market_place/widget/filter_sheet.dart';
 import 'package:slee_fi/presentation/screens/product_detail/widgets/my_jewel_short_widget.dart';
 import 'package:slee_fi/resources/resources.dart';
 
@@ -38,7 +39,7 @@ class ModalItemList extends StatelessWidget {
                 const Spacer(),
                 GestureDetector(
                   onTap: () {
-                    showFilterModalBottomSheet(context);
+                    showFilterModalBottomSheet(context, FilterType.item);
                   },
                   child: Padding(
                     padding: const EdgeInsets.only(left: 8),
@@ -47,7 +48,8 @@ class ModalItemList extends StatelessWidget {
                         const SFIcon(Ics.filter, color: AppColors.blue),
                         const SizedBox(width: 4),
                         SFText(
-                            keyText: LocaleKeys.filter, style: TextStyles.blue16),
+                            keyText: LocaleKeys.filter,
+                            style: TextStyles.blue16),
                       ],
                     ),
                   ),
@@ -71,7 +73,7 @@ class ModalItemList extends StatelessWidget {
                           ));
                     },
                     child: MyJewelsShortWidget(
-                      increase:  i == 2 ? false : true,
+                      increase: i == 2 ? false : true,
                       color: AppColors.light4,
                       icon: jewels[i % jewels.length],
                     ),

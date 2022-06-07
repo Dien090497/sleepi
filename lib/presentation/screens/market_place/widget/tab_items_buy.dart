@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:slee_fi/common/widgets/sf_bottom_sheets.dart';
 import 'package:slee_fi/common/widgets/sf_gridview.dart';
 import 'package:slee_fi/l10n/locale_keys.g.dart';
+import 'package:slee_fi/presentation/screens/market_place/widget/filter_sheet.dart';
 import 'package:slee_fi/presentation/screens/market_place/widget/item_bed_buy_widget.dart';
 import 'package:slee_fi/presentation/screens/market_place/widget/tab_bar_filter.dart';
 import 'package:slee_fi/resources/resources.dart';
@@ -28,7 +29,7 @@ class TabItemsBuy extends StatelessWidget {
             TabBarFilter(
               tabTexts: const [LocaleKeys.buy, LocaleKeys.rent],
               onFilterTap: () {
-                showFilterModalBottomSheet(context);
+                showFilterModalBottomSheet(context, FilterType.item);
               },
             ),
             const SizedBox(height: 12),
