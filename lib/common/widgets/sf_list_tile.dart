@@ -10,7 +10,7 @@ class SFListTile extends StatelessWidget {
     this.trailing,
     this.leading,
     this.onPressed,
-    this.toUpperCase = false,
+    this.stringCase,
     Key? key
   }) : super(key: key);
 
@@ -19,7 +19,7 @@ class SFListTile extends StatelessWidget {
   final Widget? leading;
   final VoidCallback? onPressed;
   final Widget? trailing;
-  final bool toUpperCase;
+  final StringCase? stringCase;
 
   @override
   Widget build(BuildContext context) {
@@ -35,7 +35,7 @@ class SFListTile extends StatelessWidget {
               child: SFText(
                 keyText: text ?? "",
                 style: textStyle ?? TextStyles.lightWhite14,
-                stringCase: StringCase.upperCase,
+                stringCase: stringCase,
               ),
             ),
             trailing ?? const SizedBox(),

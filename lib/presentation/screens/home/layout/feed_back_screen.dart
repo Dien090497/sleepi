@@ -38,65 +38,106 @@ class FeedBackScreen extends StatelessWidget {
                             width: size.width / 3,
                             height: 48,
                             child: SFDropDown(
-                                value: "Other",
+                                value: "Bug",
                                 dropdownWidth: size.width / 3,
                                 icon: const Icon(Icons.keyboard_arrow_down, size: 24,),
                                 dropdownItems: [
-                              DropdownMenuItem(
-                                value: 'Other',
-                                child: SFText(
-                                  keyText: 'Other',
-                                  style: TextStyles.white16,
-                                ),
-                              ),
-                              DropdownMenuItem(
-                                value: 'Other1',
-                                child: SFText(
-                                  keyText: 'Other',
-                                  style: TextStyles.white16,
-                                ),
-                              ),
-                            ])),
+                                  DropdownMenuItem(
+                                    value: 'Suggestion',
+                                    child: SFText(
+                                      keyText: 'Suggestion',
+                                      style: TextStyles.white16,
+                                    ),
+                                  ),
+                                  DropdownMenuItem(
+                                    value: 'Bug',
+                                    child: SFText(
+                                      keyText: 'Bug',
+                                      style: TextStyles.white16,
+                                    ),
+                                  ),
+                                  DropdownMenuItem(
+                                    value: 'Other',
+                                    child: SFText(
+                                      keyText: 'Other',
+                                      style: TextStyles.white16,
+                                    ),
+                                  ),
+                                ])),
                         const SizedBox(width: 10),
                         Expanded(
                             child: SizedBox(
-                              height: 48,
                               child: SFDropDown(
-                                  value: "Other",
+                                  value: "Wallet",
                                   dropdownWidth: size.width * 0.55,
                                   icon: const Icon(Icons.keyboard_arrow_down, size: 24,),
                                   dropdownItems: [
-                                DropdownMenuItem(
-                                  value: 'Other',
-                                  child: SFText(
-                                    keyText: 'Other',
-                                    style: TextStyles.white16,
-                                  ),
-                                ),
-                                DropdownMenuItem(
-                                  value: 'Other1',
-                                  child: SFText(
-                                    keyText: 'Other',
-                                    style: TextStyles.white16,
-                                  ),
-                                ),
-                              ]),
+                                    DropdownMenuItem(
+                                      value: 'Running/GPS',
+                                      child: SFText(
+                                        keyText: 'Running/GPS',
+                                        style: TextStyles.white16,
+                                      ),
+                                    ),
+                                    DropdownMenuItem(
+                                      value: 'Marketplace',
+                                      child: SFText(
+                                        keyText: 'Marketplace',
+                                        style: TextStyles.white16,
+                                      ),
+                                    ),
+                                    DropdownMenuItem(
+                                      value: 'Wallet',
+                                      child: SFText(
+                                        keyText: 'Wallet',
+                                        style: TextStyles.white16,
+                                      ),
+                                    ),
+                                    DropdownMenuItem(
+                                      value: 'NFT',
+                                      child: SFText(
+                                        keyText: 'NFT',
+                                        style: TextStyles.white16,
+                                      ),
+                                    ),
+                                    DropdownMenuItem(
+                                      value: 'Display',
+                                      child: SFText(
+                                        keyText: 'Display',
+                                        style: TextStyles.white16,
+                                      ),
+                                    ),
+                                    DropdownMenuItem(
+                                      value: 'Earning',
+                                      child: SFText(
+                                        keyText: 'Earning',
+                                        style: TextStyles.white16,
+                                      ),
+                                    ),
+                                    DropdownMenuItem(
+                                      value: 'Others',
+                                      child: SFText(
+                                        keyText: 'Others',
+                                        style: TextStyles.white16,
+                                      ),
+                                    ),
+                                  ]),
                             )),
                       ],
                     ),
                     const Expanded(
-                       child: SFCard(
-                         child: SingleChildScrollView(
-                           child: SFTextField(
-                             noBorder: true,
-                             maxLine: 15,
-                             maxLength: 100,
-                             hintText: LocaleKeys.hint_feedback,
-                             hintStyle: TextStyles.lightGrey16,
-                           ),
-                         ),
-                       ),
-                     ),
+                      child: SFCard(
+                        child: SingleChildScrollView(
+                          child: SFTextField(
+                            noBorder: true,
+                            maxLine: 15,
+                            maxLength: 100,
+                            hintText: LocaleKeys.hint_feedback,
+                            hintStyle: TextStyles.lightGrey16,
+                          ),
+                        ),
+                      ),
+                    ),
                     const SizedBox(height: 34,),
                     SFButton(
                       text: LocaleKeys.submit,
