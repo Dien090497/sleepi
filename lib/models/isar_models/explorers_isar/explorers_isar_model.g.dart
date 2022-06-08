@@ -227,7 +227,7 @@ extension ExplorersIsarModelQueryFilter
   }
 
   QueryBuilder<ExplorersIsarModel, ExplorersIsarModel, QAfterFilterCondition>
-      idEqualTo(int? value) {
+      idEqualTo(int value) {
     return addFilterConditionInternal(FilterCondition(
       type: ConditionType.eq,
       property: 'id',
@@ -237,7 +237,7 @@ extension ExplorersIsarModelQueryFilter
 
   QueryBuilder<ExplorersIsarModel, ExplorersIsarModel, QAfterFilterCondition>
       idGreaterThan(
-    int? value, {
+    int value, {
     bool include = false,
   }) {
     return addFilterConditionInternal(FilterCondition(
@@ -250,7 +250,7 @@ extension ExplorersIsarModelQueryFilter
 
   QueryBuilder<ExplorersIsarModel, ExplorersIsarModel, QAfterFilterCondition>
       idLessThan(
-    int? value, {
+    int value, {
     bool include = false,
   }) {
     return addFilterConditionInternal(FilterCondition(
@@ -263,8 +263,8 @@ extension ExplorersIsarModelQueryFilter
 
   QueryBuilder<ExplorersIsarModel, ExplorersIsarModel, QAfterFilterCondition>
       idBetween(
-    int? lower,
-    int? upper, {
+    int lower,
+    int upper, {
     bool includeLower = true,
     bool includeUpper = true,
   }) {

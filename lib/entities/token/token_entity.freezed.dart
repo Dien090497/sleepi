@@ -103,11 +103,11 @@ class _$TokenEntityCopyWithImpl<$Res> implements $TokenEntityCopyWith<$Res> {
 }
 
 /// @nodoc
-abstract class _$TokenEntityCopyWith<$Res>
+abstract class _$$_TokenEntityCopyWith<$Res>
     implements $TokenEntityCopyWith<$Res> {
-  factory _$TokenEntityCopyWith(
-          _TokenEntity value, $Res Function(_TokenEntity) then) =
-      __$TokenEntityCopyWithImpl<$Res>;
+  factory _$$_TokenEntityCopyWith(
+          _$_TokenEntity value, $Res Function(_$_TokenEntity) then) =
+      __$$_TokenEntityCopyWithImpl<$Res>;
   @override
   $Res call(
       {int? id,
@@ -121,14 +121,14 @@ abstract class _$TokenEntityCopyWith<$Res>
 }
 
 /// @nodoc
-class __$TokenEntityCopyWithImpl<$Res> extends _$TokenEntityCopyWithImpl<$Res>
-    implements _$TokenEntityCopyWith<$Res> {
-  __$TokenEntityCopyWithImpl(
-      _TokenEntity _value, $Res Function(_TokenEntity) _then)
-      : super(_value, (v) => _then(v as _TokenEntity));
+class __$$_TokenEntityCopyWithImpl<$Res> extends _$TokenEntityCopyWithImpl<$Res>
+    implements _$$_TokenEntityCopyWith<$Res> {
+  __$$_TokenEntityCopyWithImpl(
+      _$_TokenEntity _value, $Res Function(_$_TokenEntity) _then)
+      : super(_value, (v) => _then(v as _$_TokenEntity));
 
   @override
-  _TokenEntity get _value => super._value as _TokenEntity;
+  _$_TokenEntity get _value => super._value as _$_TokenEntity;
 
   @override
   $Res call({
@@ -141,7 +141,7 @@ class __$TokenEntityCopyWithImpl<$Res> extends _$TokenEntityCopyWithImpl<$Res>
     Object? balance = freezed,
     Object? txns = freezed,
   }) {
-    return _then(_TokenEntity(
+    return _then(_$_TokenEntity(
       id: id == freezed
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
@@ -171,7 +171,7 @@ class __$TokenEntityCopyWithImpl<$Res> extends _$TokenEntityCopyWithImpl<$Res>
           : balance // ignore: cast_nullable_to_non_nullable
               as int,
       txns: txns == freezed
-          ? _value.txns
+          ? _value._txns
           : txns // ignore: cast_nullable_to_non_nullable
               as List<String>,
     ));
@@ -238,7 +238,7 @@ class _$_TokenEntity with DiagnosticableTreeMixin implements _TokenEntity {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _TokenEntity &&
+            other is _$_TokenEntity &&
             const DeepCollectionEquality().equals(other.id, id) &&
             const DeepCollectionEquality().equals(other.address, address) &&
             const DeepCollectionEquality()
@@ -247,7 +247,7 @@ class _$_TokenEntity with DiagnosticableTreeMixin implements _TokenEntity {
             const DeepCollectionEquality().equals(other.symbol, symbol) &&
             const DeepCollectionEquality().equals(other.icon, icon) &&
             const DeepCollectionEquality().equals(other.balance, balance) &&
-            const DeepCollectionEquality().equals(other.txns, txns));
+            const DeepCollectionEquality().equals(other._txns, _txns));
   }
 
   @override
@@ -260,12 +260,12 @@ class _$_TokenEntity with DiagnosticableTreeMixin implements _TokenEntity {
       const DeepCollectionEquality().hash(symbol),
       const DeepCollectionEquality().hash(icon),
       const DeepCollectionEquality().hash(balance),
-      const DeepCollectionEquality().hash(txns));
+      const DeepCollectionEquality().hash(_txns));
 
   @JsonKey(ignore: true)
   @override
-  _$TokenEntityCopyWith<_TokenEntity> get copyWith =>
-      __$TokenEntityCopyWithImpl<_TokenEntity>(this, _$identity);
+  _$$_TokenEntityCopyWith<_$_TokenEntity> get copyWith =>
+      __$$_TokenEntityCopyWithImpl<_$_TokenEntity>(this, _$identity);
 }
 
 abstract class _TokenEntity implements TokenEntity {
@@ -297,6 +297,6 @@ abstract class _TokenEntity implements TokenEntity {
   List<String> get txns => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
-  _$TokenEntityCopyWith<_TokenEntity> get copyWith =>
+  _$$_TokenEntityCopyWith<_$_TokenEntity> get copyWith =>
       throw _privateConstructorUsedError;
 }

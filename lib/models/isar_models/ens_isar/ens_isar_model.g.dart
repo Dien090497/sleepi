@@ -204,7 +204,7 @@ extension EnsIsarModelQueryFilter
   }
 
   QueryBuilder<EnsIsarModel, EnsIsarModel, QAfterFilterCondition> idEqualTo(
-      int? value) {
+      int value) {
     return addFilterConditionInternal(FilterCondition(
       type: ConditionType.eq,
       property: 'id',
@@ -213,7 +213,7 @@ extension EnsIsarModelQueryFilter
   }
 
   QueryBuilder<EnsIsarModel, EnsIsarModel, QAfterFilterCondition> idGreaterThan(
-    int? value, {
+    int value, {
     bool include = false,
   }) {
     return addFilterConditionInternal(FilterCondition(
@@ -225,7 +225,7 @@ extension EnsIsarModelQueryFilter
   }
 
   QueryBuilder<EnsIsarModel, EnsIsarModel, QAfterFilterCondition> idLessThan(
-    int? value, {
+    int value, {
     bool include = false,
   }) {
     return addFilterConditionInternal(FilterCondition(
@@ -237,8 +237,8 @@ extension EnsIsarModelQueryFilter
   }
 
   QueryBuilder<EnsIsarModel, EnsIsarModel, QAfterFilterCondition> idBetween(
-    int? lower,
-    int? upper, {
+    int lower,
+    int upper, {
     bool includeLower = true,
     bool includeUpper = true,
   }) {

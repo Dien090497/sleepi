@@ -58,29 +58,30 @@ class _$EnsEntityCopyWithImpl<$Res> implements $EnsEntityCopyWith<$Res> {
 }
 
 /// @nodoc
-abstract class _$EnsEntityCopyWith<$Res> implements $EnsEntityCopyWith<$Res> {
-  factory _$EnsEntityCopyWith(
-          _EnsEntity value, $Res Function(_EnsEntity) then) =
-      __$EnsEntityCopyWithImpl<$Res>;
+abstract class _$$_EnsEntityCopyWith<$Res> implements $EnsEntityCopyWith<$Res> {
+  factory _$$_EnsEntityCopyWith(
+          _$_EnsEntity value, $Res Function(_$_EnsEntity) then) =
+      __$$_EnsEntityCopyWithImpl<$Res>;
   @override
   $Res call({int id, String registry});
 }
 
 /// @nodoc
-class __$EnsEntityCopyWithImpl<$Res> extends _$EnsEntityCopyWithImpl<$Res>
-    implements _$EnsEntityCopyWith<$Res> {
-  __$EnsEntityCopyWithImpl(_EnsEntity _value, $Res Function(_EnsEntity) _then)
-      : super(_value, (v) => _then(v as _EnsEntity));
+class __$$_EnsEntityCopyWithImpl<$Res> extends _$EnsEntityCopyWithImpl<$Res>
+    implements _$$_EnsEntityCopyWith<$Res> {
+  __$$_EnsEntityCopyWithImpl(
+      _$_EnsEntity _value, $Res Function(_$_EnsEntity) _then)
+      : super(_value, (v) => _then(v as _$_EnsEntity));
 
   @override
-  _EnsEntity get _value => super._value as _EnsEntity;
+  _$_EnsEntity get _value => super._value as _$_EnsEntity;
 
   @override
   $Res call({
     Object? id = freezed,
     Object? registry = freezed,
   }) {
-    return _then(_EnsEntity(
+    return _then(_$_EnsEntity(
       id == freezed
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
@@ -121,7 +122,7 @@ class _$_EnsEntity with DiagnosticableTreeMixin implements _EnsEntity {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _EnsEntity &&
+            other is _$_EnsEntity &&
             const DeepCollectionEquality().equals(other.id, id) &&
             const DeepCollectionEquality().equals(other.registry, registry));
   }
@@ -134,8 +135,8 @@ class _$_EnsEntity with DiagnosticableTreeMixin implements _EnsEntity {
 
   @JsonKey(ignore: true)
   @override
-  _$EnsEntityCopyWith<_EnsEntity> get copyWith =>
-      __$EnsEntityCopyWithImpl<_EnsEntity>(this, _$identity);
+  _$$_EnsEntityCopyWith<_$_EnsEntity> get copyWith =>
+      __$$_EnsEntityCopyWithImpl<_$_EnsEntity>(this, _$identity);
 }
 
 abstract class _EnsEntity implements EnsEntity {
@@ -147,6 +148,6 @@ abstract class _EnsEntity implements EnsEntity {
   String get registry => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
-  _$EnsEntityCopyWith<_EnsEntity> get copyWith =>
+  _$$_EnsEntityCopyWith<_$_EnsEntity> get copyWith =>
       throw _privateConstructorUsedError;
 }

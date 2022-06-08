@@ -693,7 +693,7 @@ extension TokenIsarModelQueryFilter
   }
 
   QueryBuilder<TokenIsarModel, TokenIsarModel, QAfterFilterCondition> idEqualTo(
-      int? value) {
+      int value) {
     return addFilterConditionInternal(FilterCondition(
       type: ConditionType.eq,
       property: 'id',
@@ -703,7 +703,7 @@ extension TokenIsarModelQueryFilter
 
   QueryBuilder<TokenIsarModel, TokenIsarModel, QAfterFilterCondition>
       idGreaterThan(
-    int? value, {
+    int value, {
     bool include = false,
   }) {
     return addFilterConditionInternal(FilterCondition(
@@ -716,7 +716,7 @@ extension TokenIsarModelQueryFilter
 
   QueryBuilder<TokenIsarModel, TokenIsarModel, QAfterFilterCondition>
       idLessThan(
-    int? value, {
+    int value, {
     bool include = false,
   }) {
     return addFilterConditionInternal(FilterCondition(
@@ -728,8 +728,8 @@ extension TokenIsarModelQueryFilter
   }
 
   QueryBuilder<TokenIsarModel, TokenIsarModel, QAfterFilterCondition> idBetween(
-    int? lower,
-    int? upper, {
+    int lower,
+    int upper, {
     bool includeLower = true,
     bool includeUpper = true,
   }) {

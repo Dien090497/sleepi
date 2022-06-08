@@ -72,25 +72,25 @@ class _$ExplorersEntityCopyWithImpl<$Res>
 }
 
 /// @nodoc
-abstract class _$ExplorersEntityCopyWith<$Res>
+abstract class _$$_ExplorersEntityCopyWith<$Res>
     implements $ExplorersEntityCopyWith<$Res> {
-  factory _$ExplorersEntityCopyWith(
-          _ExplorersEntity value, $Res Function(_ExplorersEntity) then) =
-      __$ExplorersEntityCopyWithImpl<$Res>;
+  factory _$$_ExplorersEntityCopyWith(
+          _$_ExplorersEntity value, $Res Function(_$_ExplorersEntity) then) =
+      __$$_ExplorersEntityCopyWithImpl<$Res>;
   @override
   $Res call({int id, String name, String url, String standard});
 }
 
 /// @nodoc
-class __$ExplorersEntityCopyWithImpl<$Res>
+class __$$_ExplorersEntityCopyWithImpl<$Res>
     extends _$ExplorersEntityCopyWithImpl<$Res>
-    implements _$ExplorersEntityCopyWith<$Res> {
-  __$ExplorersEntityCopyWithImpl(
-      _ExplorersEntity _value, $Res Function(_ExplorersEntity) _then)
-      : super(_value, (v) => _then(v as _ExplorersEntity));
+    implements _$$_ExplorersEntityCopyWith<$Res> {
+  __$$_ExplorersEntityCopyWithImpl(
+      _$_ExplorersEntity _value, $Res Function(_$_ExplorersEntity) _then)
+      : super(_value, (v) => _then(v as _$_ExplorersEntity));
 
   @override
-  _ExplorersEntity get _value => super._value as _ExplorersEntity;
+  _$_ExplorersEntity get _value => super._value as _$_ExplorersEntity;
 
   @override
   $Res call({
@@ -99,7 +99,7 @@ class __$ExplorersEntityCopyWithImpl<$Res>
     Object? url = freezed,
     Object? standard = freezed,
   }) {
-    return _then(_ExplorersEntity(
+    return _then(_$_ExplorersEntity(
       id == freezed
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
@@ -143,7 +143,7 @@ class _$_ExplorersEntity implements _ExplorersEntity {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _ExplorersEntity &&
+            other is _$_ExplorersEntity &&
             const DeepCollectionEquality().equals(other.id, id) &&
             const DeepCollectionEquality().equals(other.name, name) &&
             const DeepCollectionEquality().equals(other.url, url) &&
@@ -160,8 +160,8 @@ class _$_ExplorersEntity implements _ExplorersEntity {
 
   @JsonKey(ignore: true)
   @override
-  _$ExplorersEntityCopyWith<_ExplorersEntity> get copyWith =>
-      __$ExplorersEntityCopyWithImpl<_ExplorersEntity>(this, _$identity);
+  _$$_ExplorersEntityCopyWith<_$_ExplorersEntity> get copyWith =>
+      __$$_ExplorersEntityCopyWithImpl<_$_ExplorersEntity>(this, _$identity);
 }
 
 abstract class _ExplorersEntity implements ExplorersEntity {
@@ -178,6 +178,6 @@ abstract class _ExplorersEntity implements ExplorersEntity {
   String get standard => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
-  _$ExplorersEntityCopyWith<_ExplorersEntity> get copyWith =>
+  _$$_ExplorersEntityCopyWith<_$_ExplorersEntity> get copyWith =>
       throw _privateConstructorUsedError;
 }

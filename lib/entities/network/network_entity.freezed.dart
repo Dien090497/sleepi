@@ -174,11 +174,11 @@ class _$NetworkEntityCopyWithImpl<$Res>
 }
 
 /// @nodoc
-abstract class _$NetworkEntityCopyWith<$Res>
+abstract class _$$_NetworkEntityCopyWith<$Res>
     implements $NetworkEntityCopyWith<$Res> {
-  factory _$NetworkEntityCopyWith(
-          _NetworkEntity value, $Res Function(_NetworkEntity) then) =
-      __$NetworkEntityCopyWithImpl<$Res>;
+  factory _$$_NetworkEntityCopyWith(
+          _$_NetworkEntity value, $Res Function(_$_NetworkEntity) then) =
+      __$$_NetworkEntityCopyWithImpl<$Res>;
   @override
   $Res call(
       {int chainId,
@@ -204,15 +204,15 @@ abstract class _$NetworkEntityCopyWith<$Res>
 }
 
 /// @nodoc
-class __$NetworkEntityCopyWithImpl<$Res>
+class __$$_NetworkEntityCopyWithImpl<$Res>
     extends _$NetworkEntityCopyWithImpl<$Res>
-    implements _$NetworkEntityCopyWith<$Res> {
-  __$NetworkEntityCopyWithImpl(
-      _NetworkEntity _value, $Res Function(_NetworkEntity) _then)
-      : super(_value, (v) => _then(v as _NetworkEntity));
+    implements _$$_NetworkEntityCopyWith<$Res> {
+  __$$_NetworkEntityCopyWithImpl(
+      _$_NetworkEntity _value, $Res Function(_$_NetworkEntity) _then)
+      : super(_value, (v) => _then(v as _$_NetworkEntity));
 
   @override
-  _NetworkEntity get _value => super._value as _NetworkEntity;
+  _$_NetworkEntity get _value => super._value as _$_NetworkEntity;
 
   @override
   $Res call({
@@ -232,7 +232,7 @@ class __$NetworkEntityCopyWithImpl<$Res>
     Object? ens = freezed,
     Object? explorers = freezed,
   }) {
-    return _then(_NetworkEntity(
+    return _then(_$_NetworkEntity(
       chainId: chainId == freezed
           ? _value.chainId
           : chainId // ignore: cast_nullable_to_non_nullable
@@ -258,11 +258,11 @@ class __$NetworkEntityCopyWithImpl<$Res>
           : network // ignore: cast_nullable_to_non_nullable
               as String?,
       rpc: rpc == freezed
-          ? _value.rpc
+          ? _value._rpc
           : rpc // ignore: cast_nullable_to_non_nullable
               as List<String>,
       faucets: faucets == freezed
-          ? _value.faucets
+          ? _value._faucets
           : faucets // ignore: cast_nullable_to_non_nullable
               as List<String>,
       nativeCurrency: nativeCurrency == freezed
@@ -290,7 +290,7 @@ class __$NetworkEntityCopyWithImpl<$Res>
           : ens // ignore: cast_nullable_to_non_nullable
               as EnsEntity?,
       explorers: explorers == freezed
-          ? _value.explorers
+          ? _value._explorers
           : explorers // ignore: cast_nullable_to_non_nullable
               as List<ExplorersEntity>?,
     ));
@@ -398,15 +398,15 @@ class _$_NetworkEntity with DiagnosticableTreeMixin implements _NetworkEntity {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _NetworkEntity &&
+            other is _$_NetworkEntity &&
             const DeepCollectionEquality().equals(other.chainId, chainId) &&
             const DeepCollectionEquality().equals(other.name, name) &&
             const DeepCollectionEquality().equals(other.title, title) &&
             const DeepCollectionEquality().equals(other.chain, chain) &&
             const DeepCollectionEquality().equals(other.icon, icon) &&
             const DeepCollectionEquality().equals(other.network, network) &&
-            const DeepCollectionEquality().equals(other.rpc, rpc) &&
-            const DeepCollectionEquality().equals(other.faucets, faucets) &&
+            const DeepCollectionEquality().equals(other._rpc, _rpc) &&
+            const DeepCollectionEquality().equals(other._faucets, _faucets) &&
             const DeepCollectionEquality()
                 .equals(other.nativeCurrency, nativeCurrency) &&
             const DeepCollectionEquality().equals(other.infoURL, infoURL) &&
@@ -414,7 +414,8 @@ class _$_NetworkEntity with DiagnosticableTreeMixin implements _NetworkEntity {
             const DeepCollectionEquality().equals(other.networkId, networkId) &&
             const DeepCollectionEquality().equals(other.slip44, slip44) &&
             const DeepCollectionEquality().equals(other.ens, ens) &&
-            const DeepCollectionEquality().equals(other.explorers, explorers));
+            const DeepCollectionEquality()
+                .equals(other._explorers, _explorers));
   }
 
   @override
@@ -426,20 +427,20 @@ class _$_NetworkEntity with DiagnosticableTreeMixin implements _NetworkEntity {
       const DeepCollectionEquality().hash(chain),
       const DeepCollectionEquality().hash(icon),
       const DeepCollectionEquality().hash(network),
-      const DeepCollectionEquality().hash(rpc),
-      const DeepCollectionEquality().hash(faucets),
+      const DeepCollectionEquality().hash(_rpc),
+      const DeepCollectionEquality().hash(_faucets),
       const DeepCollectionEquality().hash(nativeCurrency),
       const DeepCollectionEquality().hash(infoURL),
       const DeepCollectionEquality().hash(shortName),
       const DeepCollectionEquality().hash(networkId),
       const DeepCollectionEquality().hash(slip44),
       const DeepCollectionEquality().hash(ens),
-      const DeepCollectionEquality().hash(explorers));
+      const DeepCollectionEquality().hash(_explorers));
 
   @JsonKey(ignore: true)
   @override
-  _$NetworkEntityCopyWith<_NetworkEntity> get copyWith =>
-      __$NetworkEntityCopyWithImpl<_NetworkEntity>(this, _$identity);
+  _$$_NetworkEntityCopyWith<_$_NetworkEntity> get copyWith =>
+      __$$_NetworkEntityCopyWithImpl<_$_NetworkEntity>(this, _$identity);
 }
 
 abstract class _NetworkEntity implements NetworkEntity {
@@ -492,6 +493,6 @@ abstract class _NetworkEntity implements NetworkEntity {
   List<ExplorersEntity>? get explorers => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
-  _$NetworkEntityCopyWith<_NetworkEntity> get copyWith =>
+  _$$_NetworkEntityCopyWith<_$_NetworkEntity> get copyWith =>
       throw _privateConstructorUsedError;
 }
