@@ -24,94 +24,96 @@ class CategoryHeader extends StatelessWidget {
     return Column(
       children: [
         Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Container(
-              padding: const EdgeInsets.all(1),
-              decoration: BoxDecoration(
-                gradient: AppColors.gradientBlueButton,
-                borderRadius: BorderRadius.circular(16),
-              ),
-              child: Stack(
-                children: [
-                  Container(
-                    width: 164,
-                    height: 164,
-                    decoration: BoxDecoration(
-                      color: AppColors.darkPurple,
-                      borderRadius: BorderRadius.circular(16),
+            Expanded(
+              child: Container(
+                padding: const EdgeInsets.all(1),
+                decoration: BoxDecoration(
+                  gradient: AppColors.gradientBlueButton,
+                  borderRadius: BorderRadius.circular(16),
+                ),
+                child: Stack(
+                  children: [
+                    Container(
+                      height: 164,
+                      decoration: BoxDecoration(
+                        color: AppColors.darkPurple,
+                        borderRadius: BorderRadius.circular(16),
+                      ),
                     ),
-                  ),
-                  Container(
-                    width: 164,
-                    height: 164,
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: 30, vertical: 58),
-                    decoration: BoxDecoration(
-                      color: AppColors.white.withOpacity(0.07),
-                      borderRadius: BorderRadius.circular(16),
-                    ),
-                    child: SvgPicture.asset(Ics.sleep),
-                  )
-                ],
+                    Container(
+                      height: 164,
+                      alignment: Alignment.center,
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 30, vertical: 58),
+                      decoration: BoxDecoration(
+                        color: AppColors.white.withOpacity(0.07),
+                        borderRadius: BorderRadius.circular(16),
+                      ),
+                      child: SvgPicture.asset(Ics.sleep),
+                    )
+                  ],
+                ),
               ),
             ),
             const SizedBox(
               width: 16,
             ),
-            Container(
-              width: 164,
-              height: 164,
-              decoration: BoxDecoration(
-                color: AppColors.blue.withOpacity(0.15),
-                borderRadius: BorderRadius.circular(16),
-              ),
-              margin: const EdgeInsets.all(1),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Row(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Expanded(
-                        child: Padding(
-                          padding: const EdgeInsets.only(left: 16.0),
-                          child: SFText(
-                            keyText: LocaleKeys.earning,
-                            style: TextStyles.blue14,
+            Expanded(
+              child: Container(
+                height: 164,
+                decoration: BoxDecoration(
+                  color: AppColors.blue.withOpacity(0.15),
+                  borderRadius: BorderRadius.circular(16),
+                ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Row(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Expanded(
+                          child: Padding(
+                            padding: const EdgeInsets.only(left: 16.0),
+                            child: SFText(
+                              keyText: LocaleKeys.earning,
+                              style: TextStyles.blue14,
+                            ),
                           ),
                         ),
+                        Padding(
+                          padding: const EdgeInsets.all(10.0),
+                          child: SFImageBorder(
+                            icon: Ics.icGold,
+                            onTap: () {},
+                            radius: 8,
+                            size: const Size(40, 40),
+                          ),
+                        )
+                      ],
+                    ),
+                    const Spacer(),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                      child: Text(
+                        '$earning SLFT',
+                        style: TextStyles.bold24Blue,
                       ),
-                      Padding(
-                        padding: const EdgeInsets.all(10.0),
-                        child: SFImageBorder(
-                          icon: Ics.icGold,
-                          onTap: () {},
-                          radius: 8,
-                          size: const Size(40, 40),
-                        ),
-                      )
-                    ],
-                  ),
-                  const Spacer(),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                    child: Text(
-                      '$earning SLFT',
-                      style: TextStyles.bold24Blue,
                     ),
-                  ),
-                  const Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 16.0),
-                    child: Text(
-                      '~ 100 USD',
-                      style: TextStyles.lightGrey12,
+                    const Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 16.0),
+                      child: Text(
+                        '~ 100 USD',
+                        style: TextStyles.lightGrey12,
+                      ),
                     ),
-                  ),
-                  const SizedBox(
-                    height: 29,
-                  ),
-                ],
+                    const SizedBox(
+                      height: 29,
+                    ),
+                  ],
+                ),
               ),
             ),
           ],
@@ -120,105 +122,109 @@ class CategoryHeader extends StatelessWidget {
           height: 16,
         ),
         Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Container(
-              width: 164,
-              height: 164,
-              decoration: BoxDecoration(
-                color: AppColors.green.withOpacity(0.15),
-                borderRadius: BorderRadius.circular(16),
-              ),
-              margin: const EdgeInsets.all(1),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Row(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Expanded(
-                        child: Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                          child: SFText(
-                            keyText: LocaleKeys.sleep_duration,
-                            style: TextStyles.green14,
+            Expanded(
+              child: Container(
+                height: 164,
+                decoration: BoxDecoration(
+                  color: AppColors.green.withOpacity(0.15),
+                  borderRadius: BorderRadius.circular(16),
+                ),
+                margin: const EdgeInsets.all(1),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Row(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Expanded(
+                          child: Padding(
+                            padding:
+                                const EdgeInsets.symmetric(horizontal: 16.0),
+                            child: SFText(
+                              keyText: LocaleKeys.sleep_duration,
+                              style: TextStyles.green14,
+                            ),
                           ),
                         ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.all(10.0),
-                        child: SFImageBorder(
-                          icon: Ics.icTwoEyes,
-                          onTap: () {},
-                          radius: 8,
-                          size: const Size(40, 40),
-                          iconColor: AppColors.green,
-                        ),
-                      )
-                    ],
-                  ),
-                  const SizedBox(
-                    height: 20,
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                    child: Text(
-                      sleepDuration,
-                      style: TextStyles.bold24Green,
+                        Padding(
+                          padding: const EdgeInsets.all(10.0),
+                          child: SFImageBorder(
+                            icon: Ics.icTwoEyes,
+                            onTap: () {},
+                            radius: 8,
+                            size: const Size(40, 40),
+                            iconColor: AppColors.green,
+                          ),
+                        )
+                      ],
                     ),
-                  ),
-                ],
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                      child: Text(
+                        sleepDuration,
+                        style: TextStyles.bold24Green,
+                      ),
+                    ),
+                  ],
+                ),
               ),
             ),
             const SizedBox(
               width: 16,
             ),
-            Container(
-              width: 164,
-              height: 164,
-              decoration: BoxDecoration(
-                color: AppColors.yellow.withOpacity(0.15),
-                borderRadius: BorderRadius.circular(16),
-              ),
-              margin: const EdgeInsets.all(1),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Row(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Expanded(
-                        child: Padding(
-                          padding: const EdgeInsets.only(left: 16.0),
-                          child: SFText(
-                            keyText: LocaleKeys.sleep_score,
-                            style: TextStyles.yellow14,
+            Expanded(
+              child: Container(
+                width: 164,
+                height: 164,
+                decoration: BoxDecoration(
+                  color: AppColors.yellow.withOpacity(0.15),
+                  borderRadius: BorderRadius.circular(16),
+                ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Row(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Expanded(
+                          child: Padding(
+                            padding: const EdgeInsets.only(left: 16.0),
+                            child: SFText(
+                              keyText: LocaleKeys.sleep_score,
+                              style: TextStyles.yellow14,
+                            ),
                           ),
                         ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.all(10.0),
-                        child: SFImageBorder(
-                          icon: Ics.star,
-                          onTap: () {},
-                          radius: 8,
-                          size: const Size(40, 40),
+                        Padding(
+                          padding: const EdgeInsets.all(10.0),
+                          child: SFImageBorder(
+                            icon: Ics.star,
+                            onTap: () {},
+                            radius: 8,
+                            size: const Size(40, 40),
+                          ),
                         ),
-                      ),
-                    ],
-                  ),
-                  const SizedBox(
-                    height: 20,
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                    child: SFText(
-                      keyText: '$score/100',
-                      style: TextStyles.bold24Yellow,
+                      ],
                     ),
-                  ),
-                ],
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                      child: SFText(
+                        keyText: '$score/100',
+                        style: TextStyles.bold24Yellow,
+                      ),
+                    ),
+                  ],
+                ),
               ),
             ),
           ],

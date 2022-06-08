@@ -30,7 +30,7 @@ class _ModalTransferBetweenState extends State<ModalTransferBetween> {
   List urlImages = [
     Ics.icSolanaCircle,
     Ics.icGold,
-    Ics.icSilver,
+    Ics.icSliver,
     Ics.icBeds,
     Imgs.jewels,
     Ics.icBedBoxes
