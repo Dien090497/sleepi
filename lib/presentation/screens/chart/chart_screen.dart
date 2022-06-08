@@ -19,49 +19,46 @@ class ChartScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BackgroundWidget(
-      child: Scaffold(
-        backgroundColor: AppColors.transparent,
-        appBar: AppBar(
-          title: SFText(
-            keyText: LocaleKeys.statistics,
-            style: TextStyles.bold18LightWhite,
-          ),
-          centerTitle: true,
-          backgroundColor: AppColors.transparent,
-          automaticallyImplyLeading: false,
-          elevation: 0,
+      appBar: AppBar(
+        title: SFText(
+          keyText: LocaleKeys.statistics,
+          style: TextStyles.bold18LightWhite,
         ),
-        body: SafeArea(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Expanded(
-                child: SFTabBar(
-                  isScrollable: true,
-                  texts: const [
-                    LocaleKeys.day,
-                    LocaleKeys.week,
-                    LocaleKeys.month
-                  ],
-                  padding: const EdgeInsets.symmetric(horizontal: 32),
-                  children: [
-                    BlocProvider(
-                      create: (_) => ChartDayCubit()..init(),
-                      child: const TabDay(),
-                    ),
-                    BlocProvider(
-                      create: (_) => ChartWeekCubit()..init(),
-                      child: const TabWeek(),
-                    ),
-                    BlocProvider(
-                      create: (_) => ChartMonthCubit()..init(),
-                      child: const TabMonth(),
-                    ),
-                  ],
-                ),
+        centerTitle: true,
+        backgroundColor: AppColors.transparent,
+        automaticallyImplyLeading: false,
+        elevation: 0,
+      ),
+      child: SafeArea(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Expanded(
+              child: SFTabBar(
+                isScrollable: true,
+                texts: const [
+                  LocaleKeys.day,
+                  LocaleKeys.week,
+                  LocaleKeys.month
+                ],
+                padding: const EdgeInsets.symmetric(horizontal: 32),
+                children: [
+                  BlocProvider(
+                    create: (_) => ChartDayCubit()..init(),
+                    child: const TabDay(),
+                  ),
+                  BlocProvider(
+                    create: (_) => ChartWeekCubit()..init(),
+                    child: const TabWeek(),
+                  ),
+                  BlocProvider(
+                    create: (_) => ChartMonthCubit()..init(),
+                    child: const TabMonth(),
+                  ),
+                ],
               ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );

@@ -9,6 +9,7 @@ class BackgroundWidget extends StatelessWidget {
     this.bottomNavigationBar,
     this.resizeToAvoidBottomInset = true,
     this.extendBody = false,
+    this.scaffoldKey,
   }) : super(key: key);
 
   final Widget? child;
@@ -16,11 +17,13 @@ class BackgroundWidget extends StatelessWidget {
   final Widget? bottomNavigationBar;
   final bool resizeToAvoidBottomInset;
   final bool extendBody;
+  final Key? scaffoldKey;
 
   @override
   Widget build(BuildContext context) {
     return Stack(
       children: [
+        // const SizedBox.expand(child: SFIcon(Imgs.background, fit: BoxFit.fill)),
         Container(color: AppColors.black),
         Container(
           decoration: BoxDecoration(
@@ -56,6 +59,7 @@ class BackgroundWidget extends StatelessWidget {
           ),
         ),
         Scaffold(
+          key: scaffoldKey,
           backgroundColor: AppColors.transparent,
           resizeToAvoidBottomInset: resizeToAvoidBottomInset,
           bottomNavigationBar: bottomNavigationBar,

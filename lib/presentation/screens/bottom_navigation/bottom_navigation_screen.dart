@@ -38,9 +38,7 @@ class BottomNavigationScreen extends StatelessWidget {
           extendBody: false,
           bottomNavigationBar: SFBottomNavigatorHome(
             onTap: (i) {
-              pageController.animateToPage(i,
-                  duration: const Duration(milliseconds: 50),
-                  curve: Curves.easeInQuint);
+              pageController.jumpToPage(i);
             },
             pageController: pageController,
           ),

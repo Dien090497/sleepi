@@ -30,36 +30,6 @@ class TimePicker extends StatelessWidget {
                   offAxisFraction: -.5,
                   timeChanged: (time) {},
                 )),
-                // Expanded(
-                //   child: CupertinoPicker(
-                //       looping: true,
-                //       selectionOverlay: Container(),
-                //       offAxisFraction: -0.5,
-                //       squeeze: 1,
-                //       scrollController: FixedExtentScrollController(
-                //         initialItem: _selectedHour,
-                //       ),
-                //       itemExtent: 48.0,
-                //       backgroundColor: AppColors.dark,
-                //       onSelectedItemChanged: (int index) {
-                //         setState(() {
-                //           _selectedHour = index;
-                //         });
-                //       },
-                //       children: List<Widget>.generate(24, (int index) {
-                //         return Container(
-                //           width: size.width,
-                //           height: 46,
-                //           padding: const EdgeInsets.symmetric(horizontal: 12),
-                //           alignment: Alignment.centerRight,
-                //           child: Text(
-                //             index < 10 ? '0$index' : '$index',
-                //             textAlign: TextAlign.right,
-                //             style: TextStyles.white1w700size16,
-                //           ),
-                //         );
-                //       })),
-                // ),
                 Expanded(
                     child: SFDatePicker(
                   selectedTime: DateTime.now().minute,
@@ -68,37 +38,6 @@ class TimePicker extends StatelessWidget {
                   timeChanged: (time) {},
                   useMagnifier: true,
                 )),
-                // Expanded(
-                //   child: CupertinoPicker(
-                //       selectionOverlay: Container(),
-                //       looping: true,
-                //       squeeze: 1,
-                //       offAxisFraction: 0.5,
-                //       useMagnifier: true,
-                //       scrollController: FixedExtentScrollController(
-                //         initialItem: _selectedMinute,
-                //       ),
-                //       itemExtent: 48.0,
-                //       backgroundColor: AppColors.dark,
-                //       onSelectedItemChanged: (int index) {
-                //         setState(() {
-                //           _selectedMinute = index;
-                //         });
-                //       },
-                //       children: List<Widget>.generate(60, (int index) {
-                //         return Container(
-                //           width: size.width,
-                //           height: 46,
-                //           padding: const EdgeInsets.symmetric(horizontal: 12),
-                //           alignment: Alignment.centerLeft,
-                //           child: Text(
-                //             index < 10 ? '0$index' : '$index',
-                //             textAlign: TextAlign.right,
-                //             style: TextStyles.white1w700size16,
-                //           ),
-                //         );
-                //       })),
-                // ),
               ],
             ),
           ),
@@ -139,9 +78,7 @@ class TimePicker extends StatelessWidget {
                           gradient: AppColors.gradientWhiteBorderRightToLeft,
                         ),
                       ),
-                      const SizedBox(
-                        height: 46,
-                      ),
+                      const SizedBox(height: 46),
                       Container(
                         height: 1,
                         decoration: BoxDecoration(
