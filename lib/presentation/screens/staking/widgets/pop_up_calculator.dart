@@ -103,7 +103,7 @@ class _AddDurationState extends State<AddDuration> {
   TextEditingController dayEditingController = TextEditingController();
   int? selectedIndex;
 
-  List<String> days = ["1", "3", "7", "30", "70"];
+  List<String> days = ["1", "7", "30", "60", "180"];
 
   @override
   Widget build(BuildContext context) {

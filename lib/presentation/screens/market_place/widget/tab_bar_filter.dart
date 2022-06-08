@@ -51,8 +51,10 @@ class TabBarFilter extends StatelessWidget {
               children: [
                 const SFIcon(Ics.filter, color: AppColors.blue),
                 const SizedBox(width: 4),
-                SFText(
-                    keyText: LocaleKeys.filter, style: TextStyles.blue16W700),
+                Expanded(
+                  child: SFText(
+                      keyText: LocaleKeys.filter, style: TextStyles.blue16W700),
+                ),
               ],
             ),
           ),
