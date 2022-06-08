@@ -32,7 +32,7 @@ class SettingWalletScreen extends StatelessWidget {
                 info: LocaleKeys.displays_backup_info,
                 onTap: () {
                   Navigator.pushNamed(context, R.passcode,
-                      arguments: PasscodeArguments(R.seedPhrase));
+                      arguments: PasscodeArguments(R.showSeedPhrase));
                 },
               ),
               BoxInfoWidget(

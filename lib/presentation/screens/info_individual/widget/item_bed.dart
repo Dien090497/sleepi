@@ -19,8 +19,8 @@ class ItemBed extends StatelessWidget {
   Widget build(BuildContext context) {
     final bed = beds[i % BedType.values.length];
     var rnd = Random();
-    var id = rnd.nextDouble() * 1000000;
-    while (id < 100000) {
+    var id = rnd.nextDouble() * 10000;
+    while (id < 1000) {
       id *= 10;
     }
     return GestureDetector(
