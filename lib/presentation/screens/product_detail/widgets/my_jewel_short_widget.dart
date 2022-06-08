@@ -6,11 +6,12 @@ import 'package:slee_fi/common/widgets/sf_text.dart';
 import 'package:slee_fi/presentation/screens/product_detail/widgets/top_left_banner.dart';
 
 class MyJewelsShortWidget extends StatelessWidget {
-  const MyJewelsShortWidget({required this.icon, this.color, this.increase = true, Key? key})
+  const MyJewelsShortWidget({required this.id, required this.icon, this.color, this.increase = true, Key? key})
       : super(key: key);
 
   final String icon;
   final Color? color;
+  final int id;
   final bool increase;
 
   @override
@@ -53,7 +54,7 @@ class MyJewelsShortWidget extends StatelessWidget {
                         const EdgeInsets.symmetric(vertical: 5, horizontal: 16),
                     alignment: Alignment.center,
                     child: SFText(
-                      keyText: 'IDIDIDID',
+                      keyText: '#$id',
                       style: TextStyles.white1w700size12,
                     ),
                   ),

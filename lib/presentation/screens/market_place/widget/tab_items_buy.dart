@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:slee_fi/common/widgets/sf_bottom_sheets.dart';
 import 'package:slee_fi/common/widgets/sf_gridview.dart';
@@ -40,7 +42,13 @@ class TabItemsBuy extends StatelessWidget {
                   SFGridView(
                     count: 20,
                     itemBuilder: (context, i) {
+                      var rnd = Random();
+                      var id = rnd.nextDouble() * 1000000;
+                      while (id < 100000) {
+                        id *= 10;
+                      }
                       return ItemBedBuyWidget(
+                        id: id.toInt(),
                         icon: beds[i % beds.length],
                       );
                     },

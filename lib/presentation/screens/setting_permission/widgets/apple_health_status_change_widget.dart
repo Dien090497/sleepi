@@ -19,13 +19,13 @@ class _AppleHealthStatusChangeState extends State<AppleHealthStatusChangeWidget>
   Widget build(BuildContext context) {
     return SFListTile(
       leading:const Padding(
-        padding:  EdgeInsets.only(right: 8),
+        padding:  EdgeInsets.only(left: 8, right: 8),
         child: SFIcon(Ics.icAppleHealth, width: 24,),
       ),
       text: LocaleKeys.apple_health,
       trailing:  Padding(
         padding:const  EdgeInsets.only(right: 16),
-        child: isChecked ? const Icon(Icons.check_circle_rounded, color: AppColors.green,) : const SizedBox(),
+        child: Icon(Icons.check_circle_rounded, color: isChecked ? AppColors.green : AppColors.white,),
       ),
       onPressed: (){
         setState((){

@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:slee_fi/common/enum/enum.dart';
 import 'package:slee_fi/common/extensions/enum_x.dart';
@@ -16,6 +18,11 @@ class ItemBed extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final bed = beds[i % BedType.values.length];
+    var rnd = Random();
+    var id = rnd.nextDouble() * 1000000;
+    while (id < 100000) {
+      id *= 10;
+    }
     return GestureDetector(
       onTap: (){},
       child: Container(
@@ -53,7 +60,7 @@ class ItemBed extends StatelessWidget {
                     padding:
                         const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
                     child: SFText(
-                      keyText: 'IDIDIDID',
+                      keyText: '#${id.toInt()}',
                       style: TextStyles.white1w700size12,
                     ),
                   ),
