@@ -18,6 +18,7 @@ class Imgs {
   static const String gacha = 'assets/images/gacha.png';
   static const String healthcare = 'assets/images/healthcare.png';
   static const String homePage = 'assets/images/home_page.png';
+  static const String icItems = 'assets/images/ic_items.png';
   static const String iconApp = 'assets/images/icon_app.png';
   static const String jewelBlue = 'assets/images/jewel_blue.png';
   static const String jewelGreen = 'assets/images/jewel_green.png';
@@ -44,8 +45,6 @@ class Imgs {
   static const String resilience = 'assets/images/resilience.png';
   static const String sell = 'assets/images/sell.png';
   static const String sendToExternal = 'assets/images/send_to_external.png';
-  static const String slft = 'assets/images/slft.png';
-  static const String slgt = 'assets/images/slgt.png';
   static const String special = 'assets/images/special.png';
   static const String statistics = 'assets/images/statistics.png';
   static const String transfer = 'assets/images/transfer.png';
@@ -71,6 +70,7 @@ class Imgs {
     gacha,
     healthcare,
     homePage,
+    icItems,
     iconApp,
     jewelBlue,
     jewelGreen,
@@ -96,8 +96,6 @@ class Imgs {
     resilience,
     sell,
     sendToExternal,
-    slft,
-    slgt,
     special,
     statistics,
     transfer,

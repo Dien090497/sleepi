@@ -129,11 +129,11 @@ class _$WalletInfoEntityCopyWithImpl<$Res>
 }
 
 /// @nodoc
-abstract class _$WalletInfoEntityCopyWith<$Res>
+abstract class _$$_WalletInfoEntityCopyWith<$Res>
     implements $WalletInfoEntityCopyWith<$Res> {
-  factory _$WalletInfoEntityCopyWith(
-          _WalletInfoEntity value, $Res Function(_WalletInfoEntity) then) =
-      __$WalletInfoEntityCopyWithImpl<$Res>;
+  factory _$$_WalletInfoEntityCopyWith(
+          _$_WalletInfoEntity value, $Res Function(_$_WalletInfoEntity) then) =
+      __$$_WalletInfoEntityCopyWithImpl<$Res>;
   @override
   $Res call(
       {int id,
@@ -152,15 +152,15 @@ abstract class _$WalletInfoEntityCopyWith<$Res>
 }
 
 /// @nodoc
-class __$WalletInfoEntityCopyWithImpl<$Res>
+class __$$_WalletInfoEntityCopyWithImpl<$Res>
     extends _$WalletInfoEntityCopyWithImpl<$Res>
-    implements _$WalletInfoEntityCopyWith<$Res> {
-  __$WalletInfoEntityCopyWithImpl(
-      _WalletInfoEntity _value, $Res Function(_WalletInfoEntity) _then)
-      : super(_value, (v) => _then(v as _WalletInfoEntity));
+    implements _$$_WalletInfoEntityCopyWith<$Res> {
+  __$$_WalletInfoEntityCopyWithImpl(
+      _$_WalletInfoEntity _value, $Res Function(_$_WalletInfoEntity) _then)
+      : super(_value, (v) => _then(v as _$_WalletInfoEntity));
 
   @override
-  _WalletInfoEntity get _value => super._value as _WalletInfoEntity;
+  _$_WalletInfoEntity get _value => super._value as _$_WalletInfoEntity;
 
   @override
   $Res call({
@@ -175,7 +175,7 @@ class __$WalletInfoEntityCopyWithImpl<$Res>
     Object? transactions = freezed,
     Object? image = freezed,
   }) {
-    return _then(_WalletInfoEntity(
+    return _then(_$_WalletInfoEntity(
       id: id == freezed
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
@@ -205,11 +205,11 @@ class __$WalletInfoEntityCopyWithImpl<$Res>
           : isImported // ignore: cast_nullable_to_non_nullable
               as bool,
       nfts: nfts == freezed
-          ? _value.nfts
+          ? _value._nfts
           : nfts // ignore: cast_nullable_to_non_nullable
               as List<String>,
       transactions: transactions == freezed
-          ? _value.transactions
+          ? _value._transactions
           : transactions // ignore: cast_nullable_to_non_nullable
               as List<TransactionEntity>,
       image: image == freezed
@@ -302,7 +302,7 @@ class _$_WalletInfoEntity
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _WalletInfoEntity &&
+            other is _$_WalletInfoEntity &&
             const DeepCollectionEquality().equals(other.id, id) &&
             const DeepCollectionEquality()
                 .equals(other.nativeCurrency, nativeCurrency) &&
@@ -314,9 +314,9 @@ class _$_WalletInfoEntity
                 .equals(other.derivedIndex, derivedIndex) &&
             const DeepCollectionEquality()
                 .equals(other.isImported, isImported) &&
-            const DeepCollectionEquality().equals(other.nfts, nfts) &&
+            const DeepCollectionEquality().equals(other._nfts, _nfts) &&
             const DeepCollectionEquality()
-                .equals(other.transactions, transactions) &&
+                .equals(other._transactions, _transactions) &&
             const DeepCollectionEquality().equals(other.image, image));
   }
 
@@ -330,14 +330,14 @@ class _$_WalletInfoEntity
       const DeepCollectionEquality().hash(credentials),
       const DeepCollectionEquality().hash(derivedIndex),
       const DeepCollectionEquality().hash(isImported),
-      const DeepCollectionEquality().hash(nfts),
-      const DeepCollectionEquality().hash(transactions),
+      const DeepCollectionEquality().hash(_nfts),
+      const DeepCollectionEquality().hash(_transactions),
       const DeepCollectionEquality().hash(image));
 
   @JsonKey(ignore: true)
   @override
-  _$WalletInfoEntityCopyWith<_WalletInfoEntity> get copyWith =>
-      __$WalletInfoEntityCopyWithImpl<_WalletInfoEntity>(this, _$identity);
+  _$$_WalletInfoEntityCopyWith<_$_WalletInfoEntity> get copyWith =>
+      __$$_WalletInfoEntityCopyWithImpl<_$_WalletInfoEntity>(this, _$identity);
 }
 
 abstract class _WalletInfoEntity implements WalletInfoEntity {
@@ -376,6 +376,6 @@ abstract class _WalletInfoEntity implements WalletInfoEntity {
   String get image => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
-  _$WalletInfoEntityCopyWith<_WalletInfoEntity> get copyWith =>
+  _$$_WalletInfoEntityCopyWith<_$_WalletInfoEntity> get copyWith =>
       throw _privateConstructorUsedError;
 }

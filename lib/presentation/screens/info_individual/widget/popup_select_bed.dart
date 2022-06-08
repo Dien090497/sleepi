@@ -38,8 +38,10 @@ class PopUpSelectBed extends StatelessWidget {
                     childAspectRatio: 1,
                     itemBuilder: (context, i) {
                       return ItemBed(
-                        beds: beds,
-                        i: i,
+                        bed: beds[i],
+                        onTap: (){
+
+                        },
                       );
                     },
                   ),

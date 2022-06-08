@@ -19,6 +19,7 @@ class SFIcon extends StatelessWidget {
         color: color,
         width: width,
         height: height,
+        fit: BoxFit.contain,
       );
     }
     return Image.asset(

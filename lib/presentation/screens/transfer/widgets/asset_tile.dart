@@ -20,21 +20,23 @@ class AssetTile extends StatefulWidget {
 
 class _AssetTileState extends State<AssetTile> {
   String selected = LocaleKeys.avax;
-  String image = Imgs.avax;
+  String image = Ics.icAvax;
 
   @override
   Widget build(BuildContext context) {
     return SFCard(
       onTap: () => SFModalBottomSheet.show(
-          context, 0.6,  ModalTransferBetween(
-        selected: selected,
-        onSelect: (Object object) {
-          var value = object as Map<String, dynamic>;
-          selected = value['text'];
-          image = value['urlImage'];
-          setState(() {});
-        },
-      )),
+          context,
+          0.6,
+          ModalTransferBetween(
+            selected: selected,
+            onSelect: (Object object) {
+              var value = object as Map<String, dynamic>;
+              selected = value['text'];
+              image = value['urlImage'];
+              setState(() {});
+            },
+          )),
       child: ListTile(
         contentPadding: EdgeInsets.zero,
         leading: SFIcon(image),

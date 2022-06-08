@@ -130,7 +130,7 @@ class _$WalletIsarModelCWProxyImpl implements _$WalletIsarModelCWProxy {
 }
 
 extension $WalletIsarModelCopyWith on WalletIsarModel {
-  /// Returns a callable class that can be used as follows: `instanceOfclass WalletIsarModel.name.copyWith(...)` or like so:`instanceOfclass WalletIsarModel.name.copyWith.fieldName(...)`.
+  /// Returns a callable class that can be used as follows: `instanceOfWalletIsarModel.copyWith(...)` or like so:`instanceOfWalletIsarModel.copyWith.fieldName(...)`.
   _$WalletIsarModelCWProxy get copyWith => _$WalletIsarModelCWProxyImpl(this);
 }
 
@@ -646,7 +646,7 @@ extension WalletIsarModelQueryFilter
   }
 
   QueryBuilder<WalletIsarModel, WalletIsarModel, QAfterFilterCondition>
-      idEqualTo(int? value) {
+      idEqualTo(int value) {
     return addFilterConditionInternal(FilterCondition(
       type: ConditionType.eq,
       property: 'id',
@@ -656,7 +656,7 @@ extension WalletIsarModelQueryFilter
 
   QueryBuilder<WalletIsarModel, WalletIsarModel, QAfterFilterCondition>
       idGreaterThan(
-    int? value, {
+    int value, {
     bool include = false,
   }) {
     return addFilterConditionInternal(FilterCondition(
@@ -669,7 +669,7 @@ extension WalletIsarModelQueryFilter
 
   QueryBuilder<WalletIsarModel, WalletIsarModel, QAfterFilterCondition>
       idLessThan(
-    int? value, {
+    int value, {
     bool include = false,
   }) {
     return addFilterConditionInternal(FilterCondition(
@@ -682,8 +682,8 @@ extension WalletIsarModelQueryFilter
 
   QueryBuilder<WalletIsarModel, WalletIsarModel, QAfterFilterCondition>
       idBetween(
-    int? lower,
-    int? upper, {
+    int lower,
+    int upper, {
     bool includeLower = true,
     bool includeUpper = true,
   }) {

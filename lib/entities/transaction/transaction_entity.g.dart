@@ -196,7 +196,7 @@ class _$TransactionEntityCWProxyImpl implements _$TransactionEntityCWProxy {
 }
 
 extension $TransactionEntityCopyWith on TransactionEntity {
-  /// Returns a callable class that can be used as follows: `instanceOfclass TransactionEntity.name.copyWith(...)` or like so:`instanceOfclass TransactionEntity.name.copyWith.fieldName(...)`.
+  /// Returns a callable class that can be used as follows: `instanceOfTransactionEntity.copyWith(...)` or like so:`instanceOfTransactionEntity.copyWith.fieldName(...)`.
   _$TransactionEntityCWProxy get copyWith =>
       _$TransactionEntityCWProxyImpl(this);
 }

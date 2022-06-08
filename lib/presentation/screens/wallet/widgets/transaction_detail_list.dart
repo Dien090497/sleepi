@@ -23,10 +23,10 @@ class TransactionDetailList extends StatelessWidget {
     ];
     List icons = [
       Ics.icSolanaCircle,
-      Ics.icGold,
-      Ics.icSliver,
+      Ics.icSlgt,
+      Ics.icSlgt,
       Ics.icBeds,
-      Imgs.jewels,
+      Ics.icJewels,
       Ics.icBedBoxes
     ];
     return Container(

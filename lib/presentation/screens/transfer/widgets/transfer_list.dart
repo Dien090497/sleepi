@@ -15,12 +15,11 @@ class TransferList extends StatefulWidget {
 }
 
 class _TransferListState extends State<TransferList> {
-
   @override
-  initState(){
+  initState() {
     super.initState();
-
   }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -32,9 +31,9 @@ class _TransferListState extends State<TransferList> {
       ),
       // width: double.infinity,
       height: MediaQuery.of(context).size.height * 0.5,
-        padding: EdgeInsets.fromLTRB(12, 12, 12,
-          MediaQuery.of(context).viewInsets.bottom),
-    child: Column(
+      padding: EdgeInsets.fromLTRB(
+          24, 24, 24, MediaQuery.of(context).viewInsets.bottom),
+      child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           SFText(
