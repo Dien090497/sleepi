@@ -51,6 +51,7 @@ class ChangePasswordScreen extends StatelessWidget {
                               const SizedBox(height: 20),
                               SFTextFieldTextButton(
                                 labelText: LocaleKeys.verification_code,
+                                textInputType: TextInputType.number,
                                 controller: codeController,
                               ),
                               const SizedBox(

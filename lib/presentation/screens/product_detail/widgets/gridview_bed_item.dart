@@ -32,7 +32,7 @@ class GridViewBedItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
+    int min = 65, max = 90;
     return SFGridView(
       count: beds.length,
       isScroll: isScroll,
@@ -42,6 +42,10 @@ class GridViewBedItem extends StatelessWidget {
         var id = rnd.nextDouble() * 10000;
         while (id < 1000) {
           id *= 10;
+        }
+        int r = min + rnd.nextInt(max - min);
+        String generateRandomString(int len) {
+          return String.fromCharCodes(List.generate(len, (index) => r));
         }
 
         return GestureDetector(
@@ -83,7 +87,7 @@ class GridViewBedItem extends StatelessWidget {
                           padding: const EdgeInsets.symmetric(
                               vertical: 5, horizontal: 16),
                           child: SFText(
-                            keyText: '#${id.toInt()}',
+                            keyText: '${generateRandomString(1)}${id.toInt()}',
                             style: TextStyles.white1w700size12,
                           ),
                         ),

@@ -20,7 +20,8 @@ class WalletDetailList extends StatelessWidget {
       LocaleKeys.slgt,
       LocaleKeys.beds,
       LocaleKeys.jewels,
-      LocaleKeys.bed_box
+      LocaleKeys.bed_box,
+      LocaleKeys.item
     ];
     List icons = [
       Ics.icSolanaCircle,
@@ -28,7 +29,8 @@ class WalletDetailList extends StatelessWidget {
       Ics.icSliver,
       Ics.icBeds,
       Imgs.jewels,
-      Ics.icBedBoxes
+      Ics.icBedBoxes,
+      Ics.icDiamond
     ];
     return Container(
       alignment: Alignment.center,

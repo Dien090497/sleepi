@@ -25,7 +25,15 @@ class _AppleHealthStatusChangeState extends State<AppleHealthStatusChangeWidget>
       text: LocaleKeys.apple_health,
       trailing:  Padding(
         padding:const  EdgeInsets.only(right: 16),
-        child: Icon(Icons.check_circle_rounded, color: isChecked ? AppColors.green : AppColors.white,),
+        child:  SizedBox(
+          width: 24,
+          height: 24,
+          child: CircleAvatar(
+            radius: 100,
+            backgroundColor:  isChecked ? AppColors.green : AppColors.white,
+            child: Icon(Icons.check, color: isChecked ? AppColors.white : AppColors.black,),
+          ),
+        ),
       ),
       onPressed: (){
         setState((){

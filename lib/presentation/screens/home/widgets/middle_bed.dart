@@ -98,7 +98,7 @@ class _MiddleBedState extends State<MiddleBed> {
                 children: [
                   const Spacer(),
                   SFButton(
-                    text: 'IDIDID',
+                    text: 'B1768',
                     textStyle: TextStyles.blue14,
                     color: Colors.white.withOpacity(0.05),
                     radius: 50,

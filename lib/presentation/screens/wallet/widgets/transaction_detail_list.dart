@@ -36,7 +36,7 @@ class TransactionDetailList extends StatelessWidget {
         borderRadius: BorderRadius.only(
             topLeft: Radius.circular(40), topRight: Radius.circular(40)),
       ),
-      height: MediaQuery.of(context).size.height * 0.5,
+      height: MediaQuery.of(context).size.height * 0.55,
       padding: const EdgeInsets.only(top: 20),
       child: isTransactionRecord ? ListView.builder(
           itemCount: keyList.length,
