@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:slee_fi/common/enum/enum.dart';
 import 'package:slee_fi/common/routes/app_routes.dart';
+import 'package:slee_fi/common/style/text_styles.dart';
 import 'package:slee_fi/common/widgets/sf_sub_tab_bar.dart';
+import 'package:slee_fi/common/widgets/sf_text.dart';
 import 'package:slee_fi/l10n/locale_keys.g.dart';
 import 'package:slee_fi/presentation/screens/product_detail/widgets/gridview_bed_item.dart';
+import 'package:slee_fi/resources/resources.dart';
 
 class TabBedsDetail extends StatelessWidget {
   //   showCustomDialog(
@@ -47,11 +50,19 @@ class TabBedsDetail extends StatelessWidget {
                     onBedTap: (bed) {
                       Navigator.pushNamed(context, R.nftInfo);
                     }),
-                GridViewBedItem(
-                    beds: beds,
-                    onBedTap: (bed) {
-                      Navigator.pushNamed(context, R.nftInfo);
-                    }),
+                Center(
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      const Image(image: AssetImage(Imgs.emptyBedBox)),
+                      const SizedBox(height: 28),
+                      SFText(
+                        keyText: LocaleKeys.there_is_no_item,
+                        style: TextStyles.lightGrey14,
+                      )
+                    ],
+                  ),
+                ),
               ],
             ),
           ),

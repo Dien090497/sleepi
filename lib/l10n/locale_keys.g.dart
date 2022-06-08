@@ -390,6 +390,7 @@ abstract class  LocaleKeys {
   static const token_consumptions = 'token_consumptions';
   static const buy_now = 'buy_now';
   static const export = 'export';
+  static const there_is_no_item = 'there_is_no_item';
   static const suggestion = 'suggestion';
   static const bug = 'bug';
   static const running_gps = 'running_gps';
@@ -399,5 +400,4 @@ abstract class  LocaleKeys {
   static const others = 'others';
   static const ok = 'ok';
   static const close = 'close';
-
 }
