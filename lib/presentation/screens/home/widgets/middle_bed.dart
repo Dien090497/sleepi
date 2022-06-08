@@ -17,11 +17,12 @@ class MiddleBed extends StatefulWidget {
 
 class _MiddleBedState extends State<MiddleBed> {
   late int i = 1;
+
   @override
   Widget build(BuildContext context) {
     final Size size = MediaQuery.of(context).size;
     final beds = List.generate(BedType.values.length * 5,
-            (i) => BedType.values[i % BedType.values.length]);
+        (i) => BedType.values[i % BedType.values.length]);
     return Column(
       children: [
         SFText(
@@ -55,13 +56,11 @@ class _MiddleBedState extends State<MiddleBed> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     InkWell(
-                      onTap: (){
-                        if(i!=0) {
-                          i-=1;
+                      onTap: () {
+                        if (i != 0) {
+                          i -= 1;
                         }
-                        setState(() {
-
-                        });
+                        setState(() {});
                       },
                       child: const Icon(
                         Icons.arrow_back_ios,
@@ -73,16 +72,17 @@ class _MiddleBedState extends State<MiddleBed> {
                         Navigator.pushNamed(context, R.nftInfo,
                             arguments: false);
                       },
-                      child: SFIcon(beds[i].image),
+                      child: SFIcon(
+                        beds[i].image,
+                        height: 72,
+                      ),
                     ),
                     InkWell(
-                      onTap: (){
-                        if(i!=beds.length-1) {
-                          i+=1;
+                      onTap: () {
+                        if (i != beds.length - 1) {
+                          i += 1;
                         }
-                        setState(() {
-
-                        });
+                        setState(() {});
                       },
                       child: const Icon(
                         Icons.arrow_forward_ios_sharp,
@@ -102,6 +102,7 @@ class _MiddleBedState extends State<MiddleBed> {
                     textStyle: TextStyles.blue14,
                     color: Colors.white.withOpacity(0.05),
                     radius: 50,
+                    height: 36,
                   ),
                   const SizedBox(
                     width: 8,
@@ -111,6 +112,7 @@ class _MiddleBedState extends State<MiddleBed> {
                     textStyle: TextStyles.green14,
                     color: Colors.white.withOpacity(0.05),
                     radius: 50,
+                    height: 36,
                   ),
                   const SizedBox(
                     width: 8,
@@ -120,14 +122,15 @@ class _MiddleBedState extends State<MiddleBed> {
                     textStyle: TextStyles.yellow14,
                     color: Colors.white.withOpacity(0.05),
                     radius: 50,
+                    height: 36,
                   ),
                   const Spacer(),
                 ],
               ),
-              const SizedBox(height: 16),
+              const SizedBox(height: 24),
               SFText(
                 keyText: 'Time: 6h - 8h',
-                style: TextStyles.lightGrey16,
+                style: TextStyles.lightGrey12,
               ),
             ],
           ),

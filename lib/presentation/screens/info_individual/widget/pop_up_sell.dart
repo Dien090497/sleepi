@@ -285,7 +285,7 @@ class _Detail extends StatelessWidget {
                     const SFIcon(Ics.icTwoEyes, color: AppColors.blue),
                     const SizedBox(width: 12),
                     SFText(
-                        keyText: LocaleKeys.sleep,
+                        keyText: 'Middle',
                         style: TextStyles.lightWhite16W700),
                   ],
                 ),

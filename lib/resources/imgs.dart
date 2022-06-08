@@ -10,7 +10,6 @@ class Imgs {
   static const String bonus = 'assets/images/bonus.png';
   static const String borderBed = 'assets/images/borderBed.png';
   static const String borderClock = 'assets/images/border_clock.png';
-  static const String commingSoon = 'assets/images/comming_soon.png';
   static const String connectBorder = 'assets/images/connect_border.png';
   static const String efficiency = 'assets/images/efficiency.png';
   static const String emptyBedBox = 'assets/images/empty_bed_box.png';
@@ -61,7 +60,6 @@ class Imgs {
     bonus,
     borderBed,
     borderClock,
-    commingSoon,
     connectBorder,
     efficiency,
     emptyBedBox,

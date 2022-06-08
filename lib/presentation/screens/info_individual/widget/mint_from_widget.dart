@@ -4,15 +4,16 @@ import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
 import 'package:slee_fi/common/widgets/sf_gridview.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
-import 'package:slee_fi/l10n/locale_keys.g.dart';
 import 'package:slee_fi/presentation/screens/info_individual/widget/item_bed.dart';
 
 class MintFromWidget extends StatelessWidget {
-  const MintFromWidget({Key? key}) : super(key: key);
+  const MintFromWidget({Key? key, required this.title, required this.numbers}) : super(key: key);
+  final String title;
+  final int numbers;
 
   @override
   Widget build(BuildContext context) {
-    final beds = List.generate(BedType.values.length * 5,
+    final beds = List.generate(numbers,
         (i) => BedType.values[i % BedType.values.length]);
     return Container(
       decoration: const BoxDecoration(
@@ -30,7 +31,7 @@ class MintFromWidget extends StatelessWidget {
             child: Align(
               alignment: Alignment.centerLeft,
               child: SFText(
-                keyText: LocaleKeys.mint_from,
+                keyText: title,
                 style: TextStyles.bold18LightWhite,
               ),
             ),
@@ -39,7 +40,7 @@ class MintFromWidget extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 12.0),
             child: SFGridView(
-              count: beds.length,
+              count: numbers,
               isScroll: false,
               childAspectRatio: 1,
               itemBuilder: (context, i) {

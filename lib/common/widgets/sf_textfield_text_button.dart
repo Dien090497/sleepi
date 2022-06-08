@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:slee_fi/common/extensions/string_x.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
 import 'package:slee_fi/common/widgets/sf_buttons.dart';
@@ -24,6 +25,7 @@ class SFTextFieldTextButton extends StatelessWidget {
     this.controller,
     this.valueChanged,
     this.textInputType,
+    this.stringCase,
   }) : super(key: key);
 
   final String? labelText;
@@ -41,6 +43,7 @@ class SFTextFieldTextButton extends StatelessWidget {
   final TextEditingController? controller;
   final ValueChanged<String>? valueChanged;
   final TextInputType? textInputType;
+  final StringCase? stringCase;
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -83,6 +86,7 @@ class SFTextFieldTextButton extends StatelessWidget {
                 text: textButton ?? LocaleKeys.send_code,
                 textStyle: textButtonStyle ?? TextStyles.blue12,
                 onPressed: onPressed,
+                stringCase: stringCase,
                 // color: Colors.transparent,
               ),
             ],

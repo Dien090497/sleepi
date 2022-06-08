@@ -41,6 +41,8 @@ class AppColors {
 
   static const darkColor1 = Color(0xFF1E212C);
 
+  static const darkColor2 = Color(0xFF121212);
+
   static const green = Color(0xFF2ADF9E);
 
   static const greenAccent = Colors.greenAccent;

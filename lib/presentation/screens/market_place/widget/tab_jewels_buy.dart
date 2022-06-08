@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:slee_fi/common/widgets/sf_bottom_sheets.dart';
+import 'package:slee_fi/common/widgets/sf_dialog.dart';
 import 'package:slee_fi/common/widgets/sf_gridview.dart';
+import 'package:slee_fi/common/widgets/sf_icon.dart';
 import 'package:slee_fi/l10n/locale_keys.g.dart';
 import 'package:slee_fi/presentation/screens/market_place/widget/filter_sheet.dart';
 import 'package:slee_fi/presentation/screens/market_place/widget/item_bed_buy_widget.dart';
+import 'package:slee_fi/presentation/screens/market_place/widget/pop_up_jewel_market_place.dart';
 import 'package:slee_fi/presentation/screens/market_place/widget/tab_bar_filter.dart';
 import 'package:slee_fi/resources/resources.dart';
 
@@ -12,6 +15,24 @@ class TabJewelsBuy extends StatelessWidget {
     Key? key,
     required this.onPress,
   }) : super(key: key);
+
+  void _showJewelDialog(BuildContext context, String img) {
+    showCustomDialog(
+      context,
+      padding: const EdgeInsets.all(24),
+      children: [
+        PopUpJewelMarketPlace(
+          icon: img,
+          name: 'name',
+          level: 'Lv.1',
+          id: '12345678910',
+          attribute: 'attribute',
+          effect: 'effect',
+          onConfirmTap: () {  },
+        ),
+      ],
+    );
+  }
 
   final Function() onPress;
   @override
@@ -42,19 +63,28 @@ class TabJewelsBuy extends StatelessWidget {
                   SFGridView(
                     count: 20,
                     itemBuilder: (context, i) {
-                      return ItemBedBuyWidget(
-                        icon: jewels[i % jewels.length],
+                      return GestureDetector(
+                        onTap: () {
+                          _showJewelDialog(context, jewels[i]);
+                        },
+                        child: ItemBedBuyWidget(
+                          icon: jewels[i % jewels.length],
+                        ),
                       );
                     },
                   ),
-                  SFGridView(
-                    count: 20,
-                    itemBuilder: (context, i) {
-                      return ItemBedBuyWidget(
-                        icon: jewels[i % jewels.length],
-                      );
-                    },
+                  Padding(
+                    padding:  EdgeInsets.only(bottom: MediaQuery.of(context).size.height * 0.3),
+                    child: const Center(child: SFIcon(Ics.commingSoon),),
                   )
+                  // SFGridView(
+                  //   count: 20,
+                  //   itemBuilder: (context, i) {
+                  //     return ItemBedBuyWidget(
+                  //       icon: jewels[i % jewels.length],
+                  //     );
+                  //   },
+                  // )
                 ],
               ),
             ),

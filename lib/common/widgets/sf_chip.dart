@@ -7,14 +7,14 @@ class SFChip extends StatelessWidget {
   const SFChip(
       {required this.text,
       this.textStyle,
-      this.toUpperCase = false,
+      this.stringCase,
       this.color,
       Key? key})
       : super(key: key);
 
   final String text;
   final TextStyle? textStyle;
-  final bool toUpperCase;
+  final StringCase? stringCase;
   final Color? color;
 
   @override
@@ -28,7 +28,7 @@ class SFChip extends StatelessWidget {
       child: SFText(
         keyText: text,
         style: textStyle,
-        stringCase: StringCase.upperCase,
+        stringCase: stringCase,
       ),
     );
   }

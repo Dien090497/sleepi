@@ -1,0 +1,10 @@
+<svg enable-background="new 1000 -1000 2500 2500" viewBox="1000 -1000 2500 2500"
+    xmlns="http://www.w3.org/2000/svg">
+    <linearGradient gradientUnits="userSpaceOnUse" id="a" x1="1618.4081" x2="2904.9446" y1="220.441"
+        y2="1036.2222">
+        <stop offset="0" stop-color="#16b9bc" />
+        <stop offset="1" stop-color="#64727d" />
+    </linearGradient>
+    <path d="m2250-310.924 714.729 1504.113h-1429.458zm0-670.603-1169.951 2463.054h2339.902z"
+        fill="url(#a)" />
+</svg>

@@ -391,5 +391,13 @@ abstract class  LocaleKeys {
   static const buy_now = 'buy_now';
   static const export = 'export';
   static const there_is_no_item = 'there_is_no_item';
-
+  static const suggestion = 'suggestion';
+  static const bug = 'bug';
+  static const running_gps = 'running_gps';
+  static const marketplace = 'marketplace';
+  static const nft = 'nft';
+  static const display = 'display';
+  static const others = 'others';
+  static const ok = 'ok';
+  static const close = 'close';
 }

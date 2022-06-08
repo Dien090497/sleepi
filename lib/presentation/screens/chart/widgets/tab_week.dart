@@ -53,7 +53,6 @@ class TabWeek extends StatelessWidget {
               const ChartTitle(
                 title: LocaleKeys.slft,
                 textStyleTitle: TextStyles.bold16LightWhite,
-                toUpperCase: true,
                 padding: EdgeInsets.zero,
               ),
               const SizedBox(height: 12),

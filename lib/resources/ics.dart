@@ -9,6 +9,7 @@ class Ics {
   static const String bedBunk = 'assets/icons/bed_bunk.svg';
   static const String bedsCouple = 'assets/icons/beds_couple.svg';
   static const String chart = 'assets/icons/chart.svg';
+  static const String commingSoon = 'assets/icons/comming_soon.svg';
   static const String efficiency = 'assets/icons/efficiency.svg';
   static const String ellipse = 'assets/icons/ellipse.svg';
   static const String facebook = 'assets/icons/facebook.svg';
@@ -34,6 +35,7 @@ class Ics {
   static const String icMicrophone = 'assets/icons/ic_microphone.svg';
   static const String icMotionData = 'assets/icons/ic_motion_data.svg';
   static const String icNotifications = 'assets/icons/ic_notifications.svg';
+  static const String icPlus = 'assets/icons/ic_plus.svg';
   static const String icQuestion = 'assets/icons/ic_question.svg';
   static const String icRefresh = 'assets/icons/ic_refresh.svg';
   static const String icScanOutlined = 'assets/icons/ic_scan_outlined.svg';
@@ -70,6 +72,7 @@ class Ics {
     bedBunk,
     bedsCouple,
     chart,
+    commingSoon,
     efficiency,
     ellipse,
     facebook,
@@ -95,6 +98,7 @@ class Ics {
     icMicrophone,
     icMotionData,
     icNotifications,
+    icPlus,
     icQuestion,
     icRefresh,
     icScanOutlined,

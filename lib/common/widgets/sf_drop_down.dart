@@ -12,6 +12,7 @@ class SFDropDown<T> extends StatefulWidget {
         this.onChanged,
         this.dropdownHeight,
         this.dropdownWidth,
+        this.selectedItemHighlightColor,
       })
       : super(key: key);
 
@@ -21,6 +22,7 @@ class SFDropDown<T> extends StatefulWidget {
   final Widget? icon;
   final double? dropdownWidth;
   final double? dropdownHeight;
+  final Color? selectedItemHighlightColor;
 
   @override
   State<SFDropDown<T>> createState() => _SFDropDownState<T>();
@@ -37,6 +39,7 @@ class _SFDropDownState<T> extends State<SFDropDown<T>> {
       icon: widget.icon,
       dropdownHeight: widget.dropdownHeight,
       dropdownWidth: widget.dropdownWidth,
+      selectedItemHighlightColor: widget.selectedItemHighlightColor,
       onChanged: (value) {
         if (widget.onChanged != null) widget.onChanged!(value);
         if (value != null) {
@@ -66,6 +69,7 @@ class CustomDropdownButton2<T> extends StatelessWidget {
   final Color? iconEnabledColor;
   final Color? iconDisabledColor;
   final Color? borderColor;
+  final Color? selectedItemHighlightColor;
   final double? itemHeight;
   final EdgeInsetsGeometry? itemPadding;
   final double? dropdownHeight, dropdownWidth;
@@ -94,6 +98,7 @@ class CustomDropdownButton2<T> extends StatelessWidget {
     this.iconSize,
     this.iconEnabledColor,
     this.iconDisabledColor,
+    this.selectedItemHighlightColor,
     this.itemHeight,
     this.itemPadding,
     this.dropdownHeight,
@@ -131,6 +136,7 @@ class CustomDropdownButton2<T> extends StatelessWidget {
             : null,
         value: value,
         items: dropdownItems,
+        selectedItemHighlightColor: selectedItemHighlightColor ?? AppColors.darkColor1,
         // items: dropdownItems
         //     .map((item) => DropdownMenuItem<T>(
         //           value: item,
@@ -169,11 +175,11 @@ class CustomDropdownButton2<T> extends StatelessWidget {
         dropdownMaxHeight: dropdownHeight ?? 200,
         dropdownWidth: dropdownWidth ?? 140,
         dropdownPadding: dropdownPadding,
-        style: TextStyles.white16,
+        style: TextStyles.lightWhite16,
         dropdownDecoration: dropdownDecoration ??
             BoxDecoration(
               borderRadius: BorderRadius.circular(8),
-              color: AppColors.darkColor1,
+              color: AppColors.darkColor2,
             ),
         dropdownElevation: dropdownElevation ?? 8,
         scrollbarRadius: scrollbarRadius ?? const Radius.circular(40),

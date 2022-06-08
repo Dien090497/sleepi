@@ -1,0 +1,22 @@
+<svg xmlns:xlink="http://www.w3.org/1999/xlink" enable-background="new 0 0 500 500"
+    viewBox="0 0 500 500" xmlns="http://www.w3.org/2000/svg">
+    <linearGradient id="a">
+        <stop offset="0" stop-color="#42c0ef" />
+        <stop offset="1" stop-color="#4b69b2" />
+    </linearGradient>
+    <linearGradient gradientUnits="userSpaceOnUse" id="b" x1="58.0955" x2="58.0955" y1="58.9679"
+        y2="445.1097" xlink:href="#a" />
+    <linearGradient gradientUnits="userSpaceOnUse" id="c" x1="441.429" x2="441.429" y1="58.9679"
+        y2="445.1097" xlink:href="#a" />
+    <linearGradient gradientUnits="userSpaceOnUse" id="d" x1="251.9754" x2="251.9754" y1="58.9679"
+        y2="445.1097" xlink:href="#a" />
+    <path
+        d="m101.6 97.1-78.7-36.4c-6.1-2.7-13 1.8-12.9 8.5l-.9 364.4c.1 6.9 7.4 11.3 13.5 8l79.6-42.3c3-1.6 4.9-4.7 4.9-8.1v-285.7c0-3.6-2.2-6.9-5.5-8.4z"
+        fill="url(#b)" />
+    <path
+        d="m479.2 60.7-83 36.4c-3.3 1.5-5.5 4.8-5.5 8.4v291.3c0 3.4 1.9 6.5 4.9 8.1l79.6 36.7c6.1 3.2 13.5-1.1 13.5-8l3.4-364.4c.1-6.7-6.8-11.2-12.9-8.5z"
+        fill="url(#c)" />
+    <path
+        d="m340.9 191.9-80.3-47.5c-5.3-3.1-11.9-3.1-17.3 0l-80.3 47.5c-5.2 3.1-8.3 8.6-8.3 14.6v95.8c0 6 3.2 11.5 8.3 14.6l80.3 47.5c5.3 3.1 11.9 3.1 17.3 0l80.3-47.5c5.2-3.1 8.3-8.6 8.3-14.6v-95.8c0-6-3.1-11.5-8.3-14.6z"
+        fill="url(#d)" />
+</svg>

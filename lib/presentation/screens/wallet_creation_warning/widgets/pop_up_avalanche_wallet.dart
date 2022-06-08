@@ -30,7 +30,7 @@ class PopUpAvalancheWallet extends StatelessWidget {
                 textStyle: TextStyles.bold16Blue,
                 borderColor: AppColors.blue,
                 onPressed: () {
-                  Navigator.pushNamed(context, R.createWallet);
+                  Navigator.pushNamed(context, R.createPasscode);
                 },
               )),
           const SizedBox(
