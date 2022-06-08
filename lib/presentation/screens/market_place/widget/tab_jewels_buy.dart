@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:slee_fi/common/widgets/sf_bottom_sheets.dart';
 import 'package:slee_fi/common/widgets/sf_dialog.dart';
@@ -63,11 +65,17 @@ class TabJewelsBuy extends StatelessWidget {
                   SFGridView(
                     count: 20,
                     itemBuilder: (context, i) {
+                      var rnd = Random();
+                      var id = rnd.nextDouble() * 1000000;
+                      while (id < 100000) {
+                        id *= 10;
+                      }
                       return GestureDetector(
                         onTap: () {
                           _showJewelDialog(context, jewels[i]);
                         },
                         child: ItemBedBuyWidget(
+                          id: id.toInt(),
                           icon: jewels[i % jewels.length],
                         ),
                       );

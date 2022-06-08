@@ -45,6 +45,12 @@ class PopUpJewelMarketPlace extends StatelessWidget {
         ),
         Column(
           children: [
+            const SizedBox(height: 12),
+            SFText(
+              keyText: LocaleKeys.buy,
+              style: TextStyles.white1w700size16,
+            ),
+            const SizedBox(height: 16),
             Container(
               decoration: BoxDecoration(
                 color: AppColors.purple.withOpacity(0.1),

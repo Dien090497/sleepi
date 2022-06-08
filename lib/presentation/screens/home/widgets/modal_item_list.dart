@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/cupertino.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
@@ -64,6 +66,11 @@ class ModalItemList extends StatelessWidget {
                 count: jewels.length * 3,
                 childAspectRatio: 1,
                 itemBuilder: (context, i) {
+                  var rnd = Random();
+                  var id = rnd.nextDouble() * 1000000;
+                  while (id < 100000) {
+                    id *= 10;
+                  }
                   return GestureDetector(
                     onTap: () {
                       showCustomAlertDialog(context,
@@ -73,6 +80,7 @@ class ModalItemList extends StatelessWidget {
                           ));
                     },
                     child: MyJewelsShortWidget(
+                      id: id.toInt(),
                       increase: i == 2 ? false : true,
                       color: AppColors.light4,
                       icon: jewels[i % jewels.length],

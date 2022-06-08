@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 // import 'package:flutter_translate/flutter_translate.dart';
@@ -30,11 +32,17 @@ class GridViewBedItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
     return SFGridView(
       count: beds.length,
       isScroll: isScroll,
       itemBuilder: (context, i) {
         final bed = beds[i % BedType.values.length];
+        var rnd = Random();
+        var id = rnd.nextDouble() * 1000000;
+        while (id < 100000) {
+          id *= 10;
+        }
 
         return GestureDetector(
             onTap: () {
@@ -75,7 +83,7 @@ class GridViewBedItem extends StatelessWidget {
                           padding: const EdgeInsets.symmetric(
                               vertical: 5, horizontal: 16),
                           child: SFText(
-                            keyText: 'IDIDIDID',
+                            keyText: '#${id.toInt()}',
                             style: TextStyles.white1w700size12,
                           ),
                         ),

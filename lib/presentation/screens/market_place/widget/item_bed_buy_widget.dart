@@ -9,11 +9,12 @@ import 'package:slee_fi/l10n/locale_keys.g.dart';
 import 'package:slee_fi/presentation/screens/product_detail/widgets/top_left_banner.dart';
 
 class ItemBedBuyWidget extends StatelessWidget {
-  const ItemBedBuyWidget({required this.icon, this.color, Key? key})
+  const ItemBedBuyWidget({required this.id, required this.icon, this.color, Key? key})
       : super(key: key);
 
   final String icon;
   final Color? color;
+  final int id;
 
   @override
   Widget build(BuildContext context) {
@@ -59,7 +60,7 @@ class ItemBedBuyWidget extends StatelessWidget {
                       const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
                       alignment: Alignment.center,
                       child: SFText(
-                        keyText: 'IDIDIDID',
+                        keyText: '#$id',
                         style: TextStyles.white1w700size12,
                       ),
                     ),

@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:slee_fi/common/routes/app_routes.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
+import 'package:slee_fi/common/widgets/sf_alert_dialog.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
 import 'package:slee_fi/l10n/locale_keys.g.dart';
 import 'package:slee_fi/presentation/screens/gacha/widgets/chance_widget.dart';
 import 'package:slee_fi/presentation/screens/gacha/widgets/decorated_widget.dart';
 import 'package:slee_fi/presentation/screens/gacha/widgets/gacha_roll_selections.dart';
+import 'package:slee_fi/presentation/screens/gacha/widgets/probability_dialog.dart';
 import 'package:slee_fi/presentation/screens/gacha/widgets/probability_widget.dart';
 
 class ItemsGacha extends StatelessWidget {
@@ -32,7 +33,9 @@ class ItemsGacha extends StatelessWidget {
             const Spacer(),
             GestureDetector(
               onTap: () {
-                Navigator.pushNamed(context, R.probability);
+                // Navigator.pushNamed(context, R.probability);
+                showCustomAlertDialog(context,
+                    children: const ProbabilityDialog());
               },
               child: Container(
                 decoration: BoxDecoration(
