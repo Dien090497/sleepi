@@ -86,7 +86,7 @@ class CategoryHeader extends StatelessWidget {
                         Padding(
                           padding: const EdgeInsets.all(10.0),
                           child: SFImageBorder(
-                            icon: Ics.icGold,
+                            icon: Ics.icSlgt,
                             onTap: () {},
                             radius: 8,
                             size: const Size(40, 40),

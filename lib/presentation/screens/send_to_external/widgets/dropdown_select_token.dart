@@ -46,8 +46,8 @@ class _DropdownSelectTokenState extends State<DropdownSelectToken> {
 
   List<String> iconsToken = [
     Ics.icSolanaCircle,
-    Ics.icGold,
-    Ics.icSliver,
+    Ics.icSlft,
+    Ics.icSlgt,
     Ics.icUsdc,
   ];
 

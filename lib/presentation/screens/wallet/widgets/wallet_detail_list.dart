@@ -24,8 +24,8 @@ class WalletDetailList extends StatelessWidget {
     ];
     List icons = [
       Ics.icSolanaCircle,
-      Ics.icGold,
-      Ics.icSliver,
+      Ics.icSlft,
+      Ics.icSlgt,
       Ics.icBeds,
       Imgs.jewels,
       Ics.icBedBoxes
@@ -52,7 +52,6 @@ class WalletDetailList extends StatelessWidget {
               child: ListTile(
                 leading: SFIcon(
                   icons[index],
-                  width: 32,
                 ),
                 title: SFText(
                     keyText: keyList[index], style: TextStyles.lightWhite16),

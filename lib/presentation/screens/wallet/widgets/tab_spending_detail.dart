@@ -6,6 +6,7 @@ import 'package:slee_fi/common/style/text_styles.dart';
 import 'package:slee_fi/common/widgets/sf_button_outlined.dart';
 import 'package:slee_fi/common/widgets/sf_buttons.dart';
 import 'package:slee_fi/common/widgets/sf_card.dart';
+import 'package:slee_fi/common/widgets/sf_icon.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
 import 'package:slee_fi/l10n/locale_keys.g.dart';
 import 'package:slee_fi/presentation/screens/wallet/widgets/pop_up_info_spending.dart';
@@ -38,7 +39,7 @@ class TabSpendingDetail extends StatelessWidget {
                         // onTap: () => Navigator.pushNamed(context, R.staking),
                         margin: const EdgeInsets.only(top: 8),
                         child: ListTile(
-                          leading: Image.asset(Imgs.slft),
+                          leading: const SFIcon(Ics.icSlft),
                           minLeadingWidth: 12,
                           title: SFText(
                               keyText: LocaleKeys.slft,
@@ -53,7 +54,7 @@ class TabSpendingDetail extends StatelessWidget {
                       SFCard(
                         margin: const EdgeInsets.only(top: 8),
                         child: ListTile(
-                          leading: Image.asset(Imgs.slgt),
+                          leading: const SFIcon(Ics.icSlgt),
                           minLeadingWidth: 12,
                           title: SFText(
                               keyText: LocaleKeys.slgt,

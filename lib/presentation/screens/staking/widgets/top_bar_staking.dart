@@ -45,14 +45,14 @@ class TopBarStaking extends StatelessWidget {
                   children: [
                     ItemResource(
                       value: valueSilver ?? 0,
-                      url: Ics.icSliver,
+                      url: Ics.icSlgt,
                     ),
                     const SizedBox(
                       width: 16,
                     ),
                     ItemResource(
                       value: valueGold ?? 0,
-                      url: Ics.icGold,
+                      url: Ics.icSlgt,
                     ),
                   ],
                 ),
