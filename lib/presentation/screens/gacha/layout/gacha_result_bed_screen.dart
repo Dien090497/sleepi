@@ -119,11 +119,11 @@ class GachaResultBedScreen extends StatelessWidget {
                           ),
                           Padding(
                             padding: const EdgeInsets.symmetric(
-                                horizontal: 20, vertical: 15),
+                                horizontal: 24, vertical: 15),
                             child: Column(
                               children: const [
                                 AttributesWidget(),
-                                SizedBox(height: 60),
+                                SizedBox(height: 76),
                               ],
                             ),
                           )
@@ -144,7 +144,7 @@ class GachaResultBedScreen extends StatelessWidget {
                   top: false,
                   child: Container(
                     padding: const EdgeInsets.only(
-                        bottom: 20, left: 16, right: 16, top: 12),
+                        bottom: 20, left: 24, right: 24, top: 12),
                     child: SFButtonOutLined(
                       title: LocaleKeys.ok,
                       fixedSize: const Size(double.infinity, 48),
