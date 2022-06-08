@@ -34,8 +34,8 @@ class _ModalTransferBetweenState extends State<ModalTransferBetween> {
     Ics.icSlgt,
     Ics.icBeds,
     Ics.icJewels,
-    Ics.icBedBoxes
-    Ics.icDiamond,
+    Ics.icBedBoxes,
+    Imgs.icItems,
   ];
 
   @override
