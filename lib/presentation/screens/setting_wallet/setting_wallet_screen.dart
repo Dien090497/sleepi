@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:slee_fi/common/routes/app_routes.dart';
-import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
 import 'package:slee_fi/common/widgets/background_widget.dart';
 import 'package:slee_fi/common/widgets/sf_app_bar.dart';
@@ -15,43 +14,40 @@ class SettingWalletScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BackgroundWidget(
-      child: Scaffold(
-        backgroundColor: AppColors.transparent,
-        appBar: SFAppBar(
-          context: context,
-          title: LocaleKeys.setting,
-          textStyle: TextStyles.bold18LightWhite,
-        ),
-        body: SafeArea(
-          child: ListView(
-            padding: const EdgeInsets.symmetric(horizontal: 24.0),
-            children: [
-              BoxInfoWidget(
-                urlIcon: Ics.icShieldLock,
-                title: LocaleKeys.backup,
-                info: LocaleKeys.displays_backup_info,
-                onTap: () {
-                  Navigator.pushNamed(context, R.passcode,
-                      arguments: PasscodeArguments(R.showSeedPhrase));
-                },
-              ),
-              BoxInfoWidget(
-                urlIcon: Ics.lock,
-                title: LocaleKeys.reset_with_passcode,
-                info: LocaleKeys.displays_reset_with_passcode_info,
-                onTap: () {
-                  Navigator.pushNamed(context, R.passcode,
-                      arguments: PasscodeArguments(R.createPasscode));
-                },
-              ),
-              BoxInfoWidget(
-                urlIcon: Ics.icRefresh,
-                title: LocaleKeys.restore_wallet,
-                info: LocaleKeys.displays_restore_wallet_info,
-                onTap: () => Navigator.pushNamed(context, R.restoreWallet),
-              ),
-            ],
-          ),
+      appBar: SFAppBar(
+        context: context,
+        title: LocaleKeys.setting,
+        textStyle: TextStyles.bold18LightWhite,
+      ),
+      child: SafeArea(
+        child: ListView(
+          padding: const EdgeInsets.symmetric(horizontal: 24.0),
+          children: [
+            BoxInfoWidget(
+              urlIcon: Ics.icShieldLock,
+              title: LocaleKeys.backup,
+              info: LocaleKeys.displays_backup_info,
+              onTap: () {
+                Navigator.pushNamed(context, R.passcode,
+                    arguments: PasscodeArguments(R.showSeedPhrase));
+              },
+            ),
+            BoxInfoWidget(
+              urlIcon: Ics.lock,
+              title: LocaleKeys.reset_with_passcode,
+              info: LocaleKeys.displays_reset_with_passcode_info,
+              onTap: () {
+                Navigator.pushNamed(context, R.passcode,
+                    arguments: PasscodeArguments(R.createPasscode));
+              },
+            ),
+            BoxInfoWidget(
+              urlIcon: Ics.icRefresh,
+              title: LocaleKeys.restore_wallet,
+              info: LocaleKeys.displays_restore_wallet_info,
+              onTap: () => Navigator.pushNamed(context, R.restoreWallet),
+            ),
+          ],
         ),
       ),
     );

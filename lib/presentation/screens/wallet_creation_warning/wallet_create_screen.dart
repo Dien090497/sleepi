@@ -17,79 +17,76 @@ class WalletCreateScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return DismissKeyboardWidget(
       child: BackgroundWidget(
-        child: Scaffold(
-          backgroundColor: AppColors.transparent,
-          appBar: SFAppBar(
-            context: context,
-            title: LocaleKeys.create_wallet,
-            textStyle: TextStyles.bold18LightWhite,
-          ),
-          body: SafeArea(
-            child: Stack(
-              children: [
-                Align(
-                  alignment: Alignment.bottomCenter,
-                  child: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: SFButton(
-                      text: LocaleKeys.create_wallet,
-                      textStyle: TextStyles.w600WhiteSize16,
-                      color: AppColors.blue,
-                      onPressed: () {},
-                    ),
+        appBar: SFAppBar(
+          context: context,
+          title: LocaleKeys.create_wallet,
+          textStyle: TextStyles.bold18LightWhite,
+        ),
+        child: SafeArea(
+          child: Stack(
+            children: [
+              Align(
+                alignment: Alignment.bottomCenter,
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: SFButton(
+                    text: LocaleKeys.create_wallet,
+                    textStyle: TextStyles.w600WhiteSize16,
+                    color: AppColors.blue,
+                    onPressed: () {},
                   ),
                 ),
-                ListView(
-                  padding: const EdgeInsets.symmetric(horizontal: 24.0),
-                  children: [
-                    SFCard(
-                      margin: const EdgeInsets.only(top: 16.0),
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 16.0, vertical: 24.0),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          SFText(
-                            keyText: LocaleKeys.email_verification_code,
-                            style: TextStyles.lightGrey14,
+              ),
+              ListView(
+                padding: const EdgeInsets.symmetric(horizontal: 24.0),
+                children: [
+                  SFCard(
+                    margin: const EdgeInsets.only(top: 16.0),
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 16.0, vertical: 24.0),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        SFText(
+                          keyText: LocaleKeys.email_verification_code,
+                          style: TextStyles.lightGrey14,
+                        ),
+                        const SizedBox(
+                          height: 4,
+                        ),
+                        Container(
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(8),
+                            border: Border.all(
+                                color: AppColors.white.withOpacity(0.1)),
                           ),
-                          const SizedBox(
-                            height: 4,
-                          ),
-                          Container(
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(8),
-                              border: Border.all(
-                                  color: AppColors.white.withOpacity(0.1)),
-                            ),
-                            padding: const EdgeInsets.only(left: 12, right: 4),
-                            child: Row(
-                              children: const [
-                                Expanded(
-                                  child: SFTextField(
-                                    noBorder: true,
-                                  ),
+                          padding: const EdgeInsets.only(left: 12, right: 4),
+                          child: Row(
+                            children: const [
+                              Expanded(
+                                child: SFTextField(
+                                  noBorder: true,
                                 ),
-                                SFTextButton(
-                                  text: LocaleKeys.send_code,
-                                  textStyle: TextStyles.blue12,
-                                ),
-                              ],
-                            ),
+                              ),
+                              SFTextButton(
+                                text: LocaleKeys.send_code,
+                                textStyle: TextStyles.blue12,
+                              ),
+                            ],
                           ),
-                          const SizedBox(height: 16),
-                          SFText(
-                            keyText:
-                                "You have already created a wallet  address. If you want to create a new wallet, please verify and continue.",
-                            style: TextStyles.lightGrey16,
-                          )
-                        ],
-                      ),
+                        ),
+                        const SizedBox(height: 16),
+                        SFText(
+                          keyText:
+                          "You have already created a wallet  address. If you want to create a new wallet, please verify and continue.",
+                          style: TextStyles.lightGrey16,
+                        )
+                      ],
                     ),
-                  ],
-                )
-              ],
-            ),
+                  ),
+                ],
+              )
+            ],
           ),
         ),
       ),

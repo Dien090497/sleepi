@@ -14,63 +14,60 @@ class ShowSeedPhraseScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BackgroundWidget(
-      child: Scaffold(
-        backgroundColor: AppColors.transparent,
-        appBar: SFAppBar(
-          context: context,
-          title: LocaleKeys.seed_phrase,
-          textStyle: TextStyles.bold18LightWhite,
-        ),
-        body: SafeArea(
-          child: Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: Column(
-              children: [
-                // AvailableWidget(),
-                Expanded(
-                    child: SFCard(
-                  child: ListView.builder(
-                      itemCount: 15,
-                      itemBuilder: (BuildContext context, int index) {
-                        return Column(
-                          children: [
-                            SFListTile(
-                              text: "${index + 1}",
-                              trailing: SFText(
-                                keyText: "-----",
-                                style: TextStyles.lightGrey14,
-                              ),
+      appBar: SFAppBar(
+        context: context,
+        title: LocaleKeys.seed_phrase,
+        textStyle: TextStyles.bold18LightWhite,
+      ),
+      child: SafeArea(
+        child: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Column(
+            children: [
+              // AvailableWidget(),
+              Expanded(
+                  child: SFCard(
+                child: ListView.builder(
+                    itemCount: 15,
+                    itemBuilder: (BuildContext context, int index) {
+                      return Column(
+                        children: [
+                          SFListTile(
+                            text: "${index + 1}",
+                            trailing: SFText(
+                              keyText: "-----",
+                              style: TextStyles.lightGrey14,
                             ),
-                            Divider(
-                              color: AppColors.lightWhite.withOpacity(0.05),
-                              height: 1,
-                            ),
-                          ],
-                        );
-                      }),
-                )),
-                const SizedBox(height: 12.0),
-                SFText(
-                  keyText: LocaleKeys.displays_message_show_seed_phrase,
-                  style: TextStyles.lightGrey12,
+                          ),
+                          Divider(
+                            color: AppColors.lightWhite.withOpacity(0.05),
+                            height: 1,
+                          ),
+                        ],
+                      );
+                    }),
+              )),
+              const SizedBox(height: 12.0),
+              SFText(
+                keyText: LocaleKeys.displays_message_show_seed_phrase,
+                style: TextStyles.lightGrey12,
+              ),
+              const SizedBox(
+                height: 16.0,
+              ),
+              InkWell(
+                onTap: () {
+                  // Navigator.pushNamed(context, R.exportSeedPhrase);
+                },
+                child: SFText(
+                  keyText: LocaleKeys.press_and_hold_to_reveal,
+                  style: TextStyles.bold18White,
                 ),
-                const SizedBox(
-                  height: 16.0,
-                ),
-                InkWell(
-                  onTap: () {
-                    // Navigator.pushNamed(context, R.exportSeedPhrase);
-                  },
-                  child: SFText(
-                    keyText: LocaleKeys.press_and_hold_to_reveal,
-                    style: TextStyles.bold18White,
-                  ),
-                ),
-                const SizedBox(
-                  height: 16.0,
-                ),
-              ],
-            ),
+              ),
+              const SizedBox(
+                height: 16.0,
+              ),
+            ],
           ),
         ),
       ),

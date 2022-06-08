@@ -24,123 +24,120 @@ class InfoIndividualScreen extends StatelessWidget {
     return Stack(
       children: [
         BackgroundWidget(
-          child: Scaffold(
-            backgroundColor: Colors.transparent,
-            body: Column(
-              children: [
-                SizedBox(
-                  height: MediaQuery.of(context).padding.top,
-                ),
-                const TopBarCommon(iconBack: true),
-                const SizedBox(height: 10),
-                Expanded(
-                  child: SingleChildScrollView(
-                    physics: const ScrollPhysics(),
-                    child: Column(
-                      children: [
-                        Container(
-                          width: 180,
-                          height: 180,
-                          padding: const EdgeInsets.symmetric(
-                            horizontal: 13,
-                          ),
-                          margin: const EdgeInsets.symmetric(
-                            vertical: 24,
-                          ),
-                          decoration: const BoxDecoration(
-                            image: DecorationImage(
-                              image: AssetImage(
-                                Imgs.borderBed,
-                              ),
-                              fit: BoxFit.cover,
-                            ),
-                          ),
-                          child: const SFIcon(Ics.middleBed),
+          child: Column(
+            children: [
+              SizedBox(
+                height: MediaQuery.of(context).padding.top,
+              ),
+              const TopBarCommon(iconBack: true),
+              const SizedBox(height: 10),
+              Expanded(
+                child: SingleChildScrollView(
+                  physics: const ScrollPhysics(),
+                  child: Column(
+                    children: [
+                      Container(
+                        width: 180,
+                        height: 180,
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 13,
                         ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            SFImageBorder(
-                              icon: Imgs.jewelPurple,
-                              onTap: () {},
-                              radius: 16,
-                              size: const Size(75, 75),
-                              padding: 20,
+                        margin: const EdgeInsets.symmetric(
+                          vertical: 24,
+                        ),
+                        decoration: const BoxDecoration(
+                          image: DecorationImage(
+                            image: AssetImage(
+                              Imgs.borderBed,
                             ),
-                            const SizedBox(
-                              width: 10,
-                            ),
-                            SFImageBorder(
-                              icon: Imgs.jewelGreen,
-                              onTap: () {},
-                              radius: 16,
-                              size: const Size(75, 75),
-                              padding: 20,
-                            ),
-                            const SizedBox(
-                              width: 10,
-                            ),
-                            SFImageBorder(
-                              icon: Imgs.jewelBlue,
-                              onTap: () {},
-                              radius: 16,
-                              size: const Size(75, 75),
-                              padding: 20,
-                            ),
-                            const SizedBox(
-                              width: 10,
-                            ),
-                            SFImageBorder(
-                              icon: Imgs.jewelRed,
-                              onTap: () {},
-                              radius: 16,
-                              size: const Size(75, 75),
-                              padding: 20,
-                            ),
+                            fit: BoxFit.cover,
+                          ),
+                        ),
+                        child: const SFIcon(Ics.middleBed),
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          SFImageBorder(
+                            icon: Imgs.jewelPurple,
+                            onTap: () {},
+                            radius: 16,
+                            size: const Size(75, 75),
+                            padding: 20,
+                          ),
+                          const SizedBox(
+                            width: 10,
+                          ),
+                          SFImageBorder(
+                            icon: Imgs.jewelGreen,
+                            onTap: () {},
+                            radius: 16,
+                            size: const Size(75, 75),
+                            padding: 20,
+                          ),
+                          const SizedBox(
+                            width: 10,
+                          ),
+                          SFImageBorder(
+                            icon: Imgs.jewelBlue,
+                            onTap: () {},
+                            radius: 16,
+                            size: const Size(75, 75),
+                            padding: 20,
+                          ),
+                          const SizedBox(
+                            width: 10,
+                          ),
+                          SFImageBorder(
+                            icon: Imgs.jewelRed,
+                            onTap: () {},
+                            radius: 16,
+                            size: const Size(75, 75),
+                            padding: 20,
+                          ),
+                        ],
+                      ),
+                      const SizedBox(
+                        height: 16,
+                      ),
+                      const BoxInfoWidget(),
+                      const SizedBox(
+                        height: 24,
+                      ),
+                      SFText(
+                        keyText: LocaleKeys.attributes,
+                        style: TextStyles.bold18LightWhite,
+                      ),
+                      const SizedBox(
+                        height: 15,
+                      ),
+                      const AttributesWidget(),
+                      const SizedBox(
+                        height: 33,
+                      ),
+                      Container(
+                        decoration: const BoxDecoration(
+                          color: AppColors.dark,
+                          borderRadius: BorderRadius.only(
+                            topLeft: Radius.circular(40),
+                            topRight: Radius.circular(40),
+                          ),
+                        ),
+                        child: Column(
+                          children: const [
+                            MintFromWidget(title: LocaleKeys.mint_from, numbers: 2,),
+                            MintFromWidget(title: LocaleKeys.mint, numbers: 7,),
                           ],
                         ),
-                        const SizedBox(
-                          height: 16,
-                        ),
-                        const BoxInfoWidget(),
-                        const SizedBox(
-                          height: 24,
-                        ),
-                        SFText(
-                          keyText: LocaleKeys.attributes,
-                          style: TextStyles.bold18LightWhite,
-                        ),
-                        const SizedBox(
-                          height: 15,
-                        ),
-                        const AttributesWidget(),
-                        const SizedBox(
-                          height: 33,
-                        ),
-                        Container(
-                          decoration: const BoxDecoration(
-                            color: AppColors.dark,
-                            borderRadius: BorderRadius.only(
-                              topLeft: Radius.circular(40),
-                              topRight: Radius.circular(40),
-                            ),
-                          ),
-                          child: Column(
-                            children: const [
-                              MintFromWidget(title: LocaleKeys.mint_from, numbers: 2,),
-                              MintFromWidget(title: LocaleKeys.mint, numbers: 7,),
-                            ],
-                          ),
-                        ),
-                        const SizedBox(
-                          height: 80,
-                        ),
-                      ],
-                    ),
+                      ),
+                      const SizedBox(
+                        height: 80,
+                      ),
+                    ],
                   ),
                 ),
-              ],
-            ),
+              ),
+            ],
           ),
         ),
         Positioned(
