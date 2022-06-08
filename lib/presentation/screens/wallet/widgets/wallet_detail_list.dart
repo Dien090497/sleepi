@@ -25,7 +25,7 @@ class WalletDetailList extends StatelessWidget {
     List icons = [
       Ics.icSolanaCircle,
       Ics.icGold,
-      Ics.icSilver,
+      Ics.icSliver,
       Ics.icBeds,
       Imgs.jewels,
       Ics.icBedBoxes
