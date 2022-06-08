@@ -89,8 +89,8 @@ class ModalItemList extends StatelessWidget {
               color: AppColors.blue,
               textStyle: TextStyles.w600WhiteSize16,
               height: 48,
-              onPressed: () => Navigator.pop(context),),
-          const SizedBox(height: 16,),
+              onPressed: () => Navigator.pop(context)),
+          const SizedBox(height: 16,)
         ],
       ),
     );
