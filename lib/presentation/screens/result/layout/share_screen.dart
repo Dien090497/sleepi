@@ -61,7 +61,7 @@ class _ShareScreenState extends State<ShareScreen> {
                   padding:
                       const EdgeInsets.symmetric(vertical: 5, horizontal: 16),
                   child: SFText(
-                    keyText: 'IDIDIDID',
+                    keyText: 'A2347',
                     style: TextStyles.white1w700size12,
                   ),
                 ),
@@ -133,7 +133,7 @@ class _ShareScreenState extends State<ShareScreen> {
                                         padding: const EdgeInsets.symmetric(
                                             vertical: 5, horizontal: 16),
                                         child: SFText(
-                                          keyText: 'IDIDIDID',
+                                          keyText: 'A2347',
                                           style: TextStyles.white1w700size12,
                                         ),
                                       ),

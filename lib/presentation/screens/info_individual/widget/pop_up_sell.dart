@@ -66,7 +66,7 @@ class _PopUpSellState extends State<PopUpSell> {
                   ),
                   padding:
                       const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
-                  child: SFText(keyText: 'IDIDIDID', style: TextStyles.blue14),
+                  child: SFText(keyText: 'C1373', style: TextStyles.blue14),
                 ),
               if (step < 2) const SizedBox(height: 32),
               if (step == 0)

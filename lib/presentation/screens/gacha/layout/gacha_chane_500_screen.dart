@@ -105,7 +105,7 @@ class _GachaChance500ScreenState extends State<GachaChance500Screen> {
                                       padding: const EdgeInsets.symmetric(
                                           vertical: 8, horizontal: 15),
                                       child: SFText(
-                                        keyText: 'IDIDIDIDID',
+                                        keyText: 'I5683',
                                         style: TextStyles.lightWhite14,
                                       ),
                                     ),

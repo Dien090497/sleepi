@@ -20,12 +20,20 @@ class _MotionDataStatusChangeState extends State<MotionDataStatusChangeWidget> {
     return SFListTile(
       leading:const Padding(
         padding:  EdgeInsets.only(left: 8, right: 8),
-        child: SFIcon(Ics.icMotionData, width: 24,),
+        child: SFIcon(Imgs.motion, width: 24,),
       ),
       text: LocaleKeys.motion_data,
       trailing:  Padding(
         padding:const  EdgeInsets.only(right: 16),
-        child: Icon(Icons.check_circle_rounded, color: isChecked ? AppColors.green : AppColors.white,),
+        child:  SizedBox(
+          width: 24,
+          height: 24,
+          child: CircleAvatar(
+            radius: 100,
+            backgroundColor:  isChecked ? AppColors.green : AppColors.white,
+            child: Icon(Icons.check, color: isChecked ? AppColors.white : AppColors.black,),
+          ),
+        ),
       ),
       onPressed: (){
         setState((){

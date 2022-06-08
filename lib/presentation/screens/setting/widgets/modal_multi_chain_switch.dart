@@ -59,6 +59,7 @@ class _ModalMultiChainSwitchState extends State<ModalMultiChainSwitch> {
                   onTap: () {
                     setState(() {
                       selectItem = index;
+                      Navigator.pop(context);
                     });
                   },
                 );

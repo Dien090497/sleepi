@@ -22,6 +22,8 @@ class TabItemsBuy extends StatelessWidget {
     Ics.flexibleBed,
       Ics.longBed,
     ];
+    int min = 65, max = 90;
+
     return DefaultTabController(
       length: 2,
       child: Padding(
@@ -47,8 +49,13 @@ class TabItemsBuy extends StatelessWidget {
                       while (id < 1000) {
                         id *= 10;
                       }
+                      int r = min + rnd.nextInt(max - min);
+                      String generateRandomString(int len) {
+                        return String.fromCharCodes(List.generate(len, (index) => r));
+                      }
+
                       return ItemBedBuyWidget(
-                        id: id.toInt(),
+                        id: '${generateRandomString(1)}${id.toInt()}',
                         icon: beds[i % beds.length],
                       );
                     },
