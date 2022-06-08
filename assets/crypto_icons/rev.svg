@@ -1,0 +1,38 @@
+<svg xmlns:xlink="http://www.w3.org/1999/xlink" enable-background="new 0 0 500 500"
+    viewBox="0 0 500 500" xmlns="http://www.w3.org/2000/svg">
+    <linearGradient gradientTransform="matrix(.6667 0 0 -.6667 .3138 334.9031)"
+        gradientUnits="userSpaceOnUse" id="a" x1="343.4828" x2="22.0232" y1="117.9361"
+        y2="136.9375">
+        <stop offset="0" stop-color="#0a1c40" />
+        <stop offset=".258" stop-color="#131d43" />
+        <stop offset=".567" stop-color="#252048" />
+        <stop offset=".865" stop-color="#441946" />
+        <stop offset=".994" stop-color="#7f004e" />
+    </linearGradient>
+    <linearGradient gradientTransform="matrix(.6667 0 0 -.6667 .3138 334.9031)"
+        gradientUnits="userSpaceOnUse" id="b" x1="253.0308" x2="599.4958" y1="364.32" y2="366.7922">
+        <stop offset="0" stop-color="#232048" />
+        <stop offset=".219" stop-color="#421d47" />
+        <stop offset=".462" stop-color="#691946" />
+        <stop offset="1" stop-color="#0a1c40" />
+    </linearGradient>
+    <linearGradient id="c">
+        <stop offset="0" stop-color="#0a1c40" />
+        <stop offset=".184" stop-color="#131e43" />
+        <stop offset=".382" stop-color="#232048" />
+        <stop offset=".502" stop-color="#252048" />
+        <stop offset=".657" stop-color="#441946" />
+        <stop offset=".776" stop-color="#471846" />
+        <stop offset=".994" stop-color="#7f004e" />
+    </linearGradient>
+    <linearGradient gradientTransform="matrix(.6667 0 0 -.6667 .3138 334.9031)"
+        gradientUnits="userSpaceOnUse" id="d" x1="580.5408" x2="418.0842" y1="-274.6645"
+        y2="51.3857" xlink:href="#c" />
+    <linearGradient gradientTransform="matrix(.6667 0 0 -.6667 .3138 334.9031)"
+        gradientUnits="userSpaceOnUse" id="e" x1="302.8592" x2="599.9449" y1="145.3195"
+        y2="145.2769" xlink:href="#c" />
+    <path d="m169.2 0-.8 435.1-91.5 64.9v-450.5z" fill="url(#a)" />
+    <path d="m400.3 132.4-93.7 50.7-137.4-77.7v-105.4z" fill="url(#b)" />
+    <path d="m420.2 386.8v113.2l-218-156.3 90.2-48.7z" fill="url(#d)" />
+    <path d="m400.3 132.4v104.7l-198.1 106.6v-104.4z" fill="url(#e)" />
+</svg>

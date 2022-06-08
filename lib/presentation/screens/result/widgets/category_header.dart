@@ -75,7 +75,7 @@ class CategoryHeader extends StatelessWidget {
                     children: [
                       Expanded(
                         child: Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                          padding: const EdgeInsets.only(left: 16.0),
                           child: SFText(
                             keyText: LocaleKeys.earning,
                             style: TextStyles.blue14,
@@ -205,7 +205,7 @@ class CategoryHeader extends StatelessWidget {
                           radius: 8,
                           size: const Size(40, 40),
                         ),
-                      )
+                      ),
                     ],
                   ),
                   const SizedBox(

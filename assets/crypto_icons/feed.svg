@@ -1,0 +1,17 @@
+<svg enable-background="new 0 0 500 500" viewBox="0 0 500 500" xmlns="http://www.w3.org/2000/svg">
+    <circle cx="250" cy="250" fill="#11182d" r="250" />
+    <g fill="#fff">
+        <circle cx="160.2" cy="157.9" r="28.6" />
+        <ellipse cx="252.6" cy="157.9" opacity=".5" rx="28.6" ry="28.6"
+            transform="matrix(.1602 -.9871 .9871 .1602 56.2521 381.9458)" />
+        <circle cx="339.8" cy="157.9" opacity=".9" r="28.6" />
+        <circle cx="165.4" cy="229.1" opacity=".7" r="28.6" />
+        <ellipse cx="252.6" cy="229.1" rx="28.6" ry="28.6"
+            transform="matrix(.1602 -.9871 .9871 .1602 -14.0506 441.7596)" />
+        <circle cx="339.8" cy="229.1" opacity=".2" r="28.6" />
+        <circle cx="165.4" cy="300.4" r="28.6" />
+        <circle cx="252.6" cy="300.4" opacity=".3" r="28.6" />
+        <circle cx="253" cy="371.4" opacity=".85" r="28.6" />
+        <circle cx="339.8" cy="300.4" r="28.6" />
+    </g>
+</svg>

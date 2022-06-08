@@ -12,7 +12,7 @@ class SFButtonOutLined extends StatelessWidget {
     this.borderColor = AppColors.lightGrey,
     this.iconColor = AppColors.lightGrey,
     this.withBorder = 1,
-    this.icon,
+    this.icon, this.bgColor,
   }) : super(key: key);
 
   final String title;
@@ -22,13 +22,14 @@ class SFButtonOutLined extends StatelessWidget {
   final Color borderColor;
   final Color iconColor;
   final IconData? icon;
+  final Color? bgColor;
   final double withBorder;
 
   @override
   Widget build(BuildContext context) {
     return OutlinedButton(
       style: OutlinedButton.styleFrom(
-        backgroundColor: Colors.transparent,
+        backgroundColor: bgColor ?? Colors.transparent,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(100),
         ),

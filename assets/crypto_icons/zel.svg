@@ -1,0 +1,9 @@
+<svg enable-background="new 0 0 500 500" viewBox="0 0 500 500" xmlns="http://www.w3.org/2000/svg">
+    <circle cx="250.6" cy="249.6" fill="#183c87" r="247.3" />
+    <g clip-rule="evenodd" fill="#fff" fill-rule="evenodd">
+        <path d="m69.2 242.6 73.6-42.6 73.3 42.6v85.2l-73.3 42.6-73.6-42.6z" />
+        <path d="m285.3 242.6 73.6-42.6 73.3 42.6v85.2l-73.3 42.6-73.6-42.6z" />
+        <path
+            d="m157.6 168 92.9-54.3 93.2 54.3v30.5l-66.7 38.7v78.1l-26.5 15.4-26.3-15.4v-78.1l-66.7-38.7v-30.5z" />
+    </g>
+</svg>

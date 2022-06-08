@@ -1,0 +1,19 @@
+<svg enable-background="new 0 0 500 500" viewBox="0 0 500 500" xmlns="http://www.w3.org/2000/svg">
+    <g fill="#383534">
+        <path d="m156.1 172.5-40.6 23.8 42.9 24.1v143.4l40.6-25.4v-140.6z" />
+        <path d="m240.6 172.5-40.6 23.8 42.9 24.1v143.4l40.7-25.4v-140.6z" />
+        <path d="m326.5 172.5-40.7 23.8 43 24.1v143.4l40.6-25.4v-140.6z" />
+    </g>
+    <circle cx="429.2" cy="126.5" fill="#fac83a" r="12" />
+    <circle cx="467.2" cy="230.3" fill="#13608a" r="29.5" />
+    <circle cx="448.7" cy="343.6" fill="#1077a6" r="23.5" />
+    <circle cx="376.1" cy="427.3" fill="#228dc1" r="20.2" />
+    <circle cx="272" cy="466.4" fill="#29a7d6" r="15" />
+    <circle cx="159.7" cy="446" fill="#33bdee" r="10" />
+    <circle cx="73" cy="376.8" fill="#e61912" r="36.2" />
+    <circle cx="34.8" cy="269.7" fill="#e44114" r="31.5" />
+    <circle cx="55.1" cy="158.2" fill="#e65a12" r="27.2" />
+    <circle cx="125.7" cy="73.5" fill="#ee7523" r="23.5" />
+    <circle cx="231.5" cy="34.1" fill="#ea8e17" r="19.5" />
+    <circle cx="345.6" cy="53.3" fill="#eda717" r="15.2" />
+</svg>

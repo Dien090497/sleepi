@@ -17,9 +17,11 @@ analyzer:
     - lib/di/injector.config.dart
     - test/**.mocks.dart
     - lib/generated_plugin_registrant.dart
+    - lib/resources/**
 
   errors:
     library_private_types_in_public_api: ignore
+    depend_on_referenced_packages: ignore
 
 linter:
   # The lint rules applied to this project can be customized in the

@@ -71,7 +71,8 @@ class _GachaChance500ScreenState extends State<GachaChance500Screen> {
                                                 3), // changes position of shadow
                                           ),
                                         ],
-                                        borderRadius: BorderRadius.circular(20)),
+                                        borderRadius:
+                                            BorderRadius.circular(20)),
                                     width: 150,
                                     height: 150,
                                     child: SizedBox(
@@ -135,9 +136,9 @@ class _GachaChance500ScreenState extends State<GachaChance500Screen> {
                                       child: Container(
                                         decoration: BoxDecoration(
                                             borderRadius:
-                                            BorderRadius.circular(10),
-                                            color:
-                                            AppColors.white.withOpacity(0.1)),
+                                                BorderRadius.circular(10),
+                                            color: AppColors.white
+                                                .withOpacity(0.1)),
                                         child: Column(
                                           children: [
                                             const SizedBox(
@@ -160,9 +161,9 @@ class _GachaChance500ScreenState extends State<GachaChance500Screen> {
                                                   bottom: 10),
                                               child: Center(
                                                   child: SFText(
-                                                    keyText: 'Short\n Bed',
-                                                    style: TextStyles.blue12W700,
-                                                  )),
+                                                keyText: 'Short\n Bed',
+                                                style: TextStyles.blue12W700,
+                                              )),
                                             ),
                                           ],
                                         ),
@@ -176,9 +177,9 @@ class _GachaChance500ScreenState extends State<GachaChance500Screen> {
                                       child: Container(
                                         decoration: BoxDecoration(
                                             borderRadius:
-                                            BorderRadius.circular(10),
-                                            color:
-                                            AppColors.white.withOpacity(0.1)),
+                                                BorderRadius.circular(10),
+                                            color: AppColors.white
+                                                .withOpacity(0.1)),
                                         child: Column(
                                           children: [
                                             const SizedBox(
@@ -201,9 +202,10 @@ class _GachaChance500ScreenState extends State<GachaChance500Screen> {
                                                   bottom: 10),
                                               child: Center(
                                                   child: SFText(
-                                                    keyText: 'Middle\n Bed',
-                                                    style: TextStyles.lightGrey12W700,
-                                                  )),
+                                                keyText: 'Middle\n Bed',
+                                                style:
+                                                    TextStyles.lightGrey12W700,
+                                              )),
                                             ),
                                           ],
                                         ),
@@ -217,9 +219,9 @@ class _GachaChance500ScreenState extends State<GachaChance500Screen> {
                                       child: Container(
                                         decoration: BoxDecoration(
                                             borderRadius:
-                                            BorderRadius.circular(10),
-                                            color:
-                                            AppColors.white.withOpacity(0.1)),
+                                                BorderRadius.circular(10),
+                                            color: AppColors.white
+                                                .withOpacity(0.1)),
                                         child: Column(
                                           children: [
                                             const SizedBox(
@@ -242,9 +244,10 @@ class _GachaChance500ScreenState extends State<GachaChance500Screen> {
                                                   bottom: 10),
                                               child: Center(
                                                   child: SFText(
-                                                    keyText: 'Long\n Bed',
-                                                    style: TextStyles.lightGrey12W700,
-                                                  )),
+                                                keyText: 'Long\n Bed',
+                                                style:
+                                                    TextStyles.lightGrey12W700,
+                                              )),
                                             ),
                                           ],
                                         ),
@@ -253,7 +256,7 @@ class _GachaChance500ScreenState extends State<GachaChance500Screen> {
                                   ),
                                 ],
                               ),
-                              const SizedBox(height: 40),
+                              const SizedBox(height: 77),
                             ],
                           ),
                         )
@@ -275,8 +278,7 @@ class _GachaChance500ScreenState extends State<GachaChance500Screen> {
                 height: 45,
                 width: size.width,
                 onPressed: () {
-                  Navigator.pushNamed(
-                      context, R.gachaResultBed);
+                  Navigator.pushNamed(context, R.gachaResultBed);
                 },
               ),
             ),

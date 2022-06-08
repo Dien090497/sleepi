@@ -150,6 +150,7 @@ class GachaResultBedScreen extends StatelessWidget {
                       fixedSize: const Size(double.infinity, 48),
                       textStyle: TextStyles.blue16,
                       borderColor: AppColors.blue,
+                      bgColor: AppColors.lightDark,
                       onPressed: () => Navigator.pop(context),
                     ),
                   ),

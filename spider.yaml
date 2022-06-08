@@ -19,6 +19,11 @@ use_references_list: true
 package: resources
 
 groups:
+  - path: assets/crypto_icons
+    class_name: CryptoIcons
+    types: [ .svg ]
+    prefix: ic
+    use_underscores: true
   - path: assets/icons/
     class_name: Ics
     types: [ .svg ]
