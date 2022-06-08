@@ -37,108 +37,11 @@ class PopUpCalculator extends StatelessWidget {
           keyText: LocaleKeys.slft_staked,
           style: TextStyles.lightGrey14,
         ),
-        SFCard(
-          padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 18),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.end,
-            children: [
-              Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.end,
-                  children: [
-                    SFText(
-                      keyText: "0.00 USD",
-                      style: TextStyles.lightWhite16,
-                    ),
-                    const SizedBox(
-                      height: 12.0,
-                    ),
-                    SFText(
-                      keyText: "0.00 SLFT",
-                      style: TextStyles.lightGrey12,
-                    ),
-                  ],
-                ),
-              ),
-              GestureDetector(
-                onTap: () {},
-                child: const Icon(
-                  Icons.swap_vert,
-                  color: AppColors.blue,
-                ),
-              ),
-            ],
-          ),
-        ),
-        const SizedBox(
-          height: 12.0,
-        ),
-        Wrap(
-          spacing: 6.0,
-          runSpacing: 6.0,
-          children: [
-            SFChip(
-              text: "\$100",
-              textStyle: TextStyles.w700LightGreySize14,
-              color: AppColors.white.withOpacity(0.05),
-            ),
-            SFChip(
-              text: "\$10000",
-              textStyle: TextStyles.w700LightGreySize14,
-              color: AppColors.white.withOpacity(0.05),
-            ),
-            SFChip(
-              text: "My Balance",
-              textStyle: TextStyles.w700LightGreySize14,
-              color: AppColors.white.withOpacity(0.05),
-            ),
-          ],
-        ),
+        const SLFTStaked(),
         const SizedBox(
           height: 32.0,
         ),
-        SFText(
-          keyText: LocaleKeys.add_duration,
-          style: TextStyles.lightGrey14,
-        ),
-        const SizedBox(
-          height: 8.0,
-        ),
-        Wrap(
-          spacing: 6.0,
-          runSpacing: 6.0,
-          children: const [
-            SFChip(
-              text: "1D",
-              textStyle: TextStyles.w700WhiteSize14,
-              color: AppColors.blue,
-            ),
-            SFChip(
-              text: "3D",
-              textStyle: TextStyles.w700LightGreySize14,
-            ),
-            SFChip(
-              text: "7D",
-              textStyle: TextStyles.w700LightGreySize14,
-            ),
-            SFChip(
-              text: "30D",
-              textStyle: TextStyles.w700LightGreySize14,
-            ),
-            SFChip(
-              text: "60D",
-              textStyle: TextStyles.w700LightGreySize14,
-            ),
-          ],
-        ),
-        const SizedBox(
-          height: 8.0,
-        ),
-        const SFTextFieldTextButton(
-          showLabel: false,
-          textButton: LocaleKeys.day,
-          textButtonStyle: TextStyles.lightGrey14,
-        ),
+        const AddDuration(),
         const SizedBox(
           height: 16,
         ),
@@ -188,3 +91,149 @@ class PopUpCalculator extends StatelessWidget {
     );
   }
 }
+
+class AddDuration extends StatefulWidget {
+  const AddDuration({Key? key}) : super(key: key);
+
+  @override
+  State<AddDuration> createState() => _AddDurationState();
+}
+
+class _AddDurationState extends State<AddDuration> {
+  TextEditingController dayEditingController = TextEditingController();
+  int? selectedIndex;
+
+  List<String> days = ["1", "3", "7", "30", "70"];
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        SFText(
+          keyText: LocaleKeys.add_duration,
+          style: TextStyles.lightGrey14,
+        ),
+        const SizedBox(
+          height: 8.0,
+        ),
+        Wrap(
+          spacing: 6.0,
+          runSpacing: 6.0,
+          children: List.generate(days.length, (index) =>  GestureDetector(
+            onTap: (){
+              setState((){
+                selectedIndex = index;
+                dayEditingController.text = days[index];
+              });
+            },
+            child: SFChip(
+              text: "${days[index]}D",
+              textStyle: selectedIndex == index ? TextStyles.w700WhiteSize14 : TextStyles.w700LightGreySize14,
+              color: selectedIndex == index ? AppColors.blue : AppColors.white.withOpacity(0.05),
+            ),
+          ),
+          ),
+        ),
+        const SizedBox(
+          height: 8.0,
+        ),
+         SFTextFieldTextButton(
+          showLabel: false,
+          controller: dayEditingController,
+          textInputType: TextInputType.number,
+          valueChanged: (value){
+            if(selectedIndex != null && value != days[selectedIndex!]){
+              setState((){
+                selectedIndex = null;
+              });
+            }
+          },
+          textButton: LocaleKeys.day,
+          textButtonStyle: TextStyles.lightGrey14,
+        ),
+      ],
+    );
+  }
+}
+
+
+class SLFTStaked extends StatefulWidget {
+  const SLFTStaked({Key? key}) : super(key: key);
+
+  @override
+  State<SLFTStaked> createState() => _SLFTStakedState();
+}
+
+class _SLFTStakedState extends State<SLFTStaked> {
+  bool swapText = false;
+   int? selectedIndex;
+
+  List<String> balance = ["100", "10000", "My Balance"];
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        SFCard(
+          padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 18),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.end,
+                  children: [
+                    SFText(
+                      keyText: swapText ? "${selectedIndex != null ? (selectedIndex! + 1 == balance.length ? 0 : balance[selectedIndex!]) : 0}.00 USD" : "0.00 SLFT",
+                      style:TextStyles.lightWhite16,
+                    ),
+                    const SizedBox(
+                      height: 12.0,
+                    ),
+                    SFText(
+                      keyText: swapText ? "0.00 SLFT" : "${selectedIndex != null ? (selectedIndex! + 1 == balance.length ? 0 : balance[selectedIndex!]) : 0}.00 USD",
+                      style: TextStyles.lightGrey12 ,
+                    ),
+                  ],
+                ),
+              ),
+              GestureDetector(
+                onTap: () {
+                  setState(() {
+                    swapText = !swapText;
+                  });
+                },
+                child: const Icon(
+                  Icons.swap_vert,
+                  color: AppColors.blue,
+                ),
+              ),
+            ],
+          ),
+        ),
+        const SizedBox(
+          height: 12.0,
+        ),
+        Wrap(
+          spacing: 6.0,
+          runSpacing: 6.0,
+          children: List.generate(balance.length, (index) =>  GestureDetector(
+            onTap: (){
+              setState((){
+                selectedIndex = index;
+              });
+            },
+            child: SFChip(
+              text: index + 1 == balance.length ? balance[index] : "\$${balance[index]}",
+              textStyle: selectedIndex == index ? TextStyles.w700WhiteSize14 : TextStyles.w700LightGreySize14,
+              color: selectedIndex == index ? AppColors.blue : AppColors.white.withOpacity(0.05),
+            ),
+          ),
+          ),
+        ),
+      ],
+    );
+  }
+}
+

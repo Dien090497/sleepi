@@ -82,13 +82,15 @@ class ModalItemList extends StatelessWidget {
               ),
             ),
           ),
+          const SizedBox(height: 16,),
           SFButton(
               text: LocaleKeys.cancel,
               width: MediaQuery.of(context).size.width * 0.9,
               color: AppColors.blue,
               textStyle: TextStyles.w600WhiteSize16,
               height: 48,
-              onPressed: () => Navigator.pop(context))
+              onPressed: () => Navigator.pop(context)),
+          const SizedBox(height: 16,)
         ],
       ),
     );
