@@ -28,6 +28,9 @@ class TabMonth extends StatelessWidget {
           final date = state.selectedDate;
 
           return ChartTabBody(
+
+            nextEnable: true,
+            prevEnable: true,
             picker: ChartMonthPicker(
               selectedDate: state.selectedDate,
               firstAllowedDate:
