@@ -1,8 +1,8 @@
 import 'package:cool_dropdown/cool_dropdown.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
+import 'package:slee_fi/common/widgets/sf_icon.dart';
 import 'package:slee_fi/l10n/locale_keys.g.dart';
 import 'package:slee_fi/resources/resources.dart';
 
@@ -45,7 +45,7 @@ class _DropdownSelectTokenState extends State<DropdownSelectToken> {
   ];
 
   List<String> iconsToken = [
-    Ics.icSolanaCircle,
+    Ics.icAvax,
     Ics.icSlft,
     Ics.icSlgt,
     Ics.icUsdc,
@@ -61,19 +61,43 @@ class _DropdownSelectTokenState extends State<DropdownSelectToken> {
           'value': token[i],
           'icon': SizedBox(
             key: UniqueKey(),
-            height: 20,
-            width: 20,
-            child: SvgPicture.asset(
-              iconsToken[i],
+            child: Padding(
+              padding: EdgeInsets.only(
+                  left:
+                      iconsToken[i] == Ics.icSlft || iconsToken[i] == Ics.icSlgt
+                          ? 0
+                          : 4),
+              child: SFIcon(
+                iconsToken[i],
+                height:
+                    iconsToken[i] == Ics.icSlft || iconsToken[i] == Ics.icSlgt
+                        ? 28
+                        : 20,
+                width:
+                    iconsToken[i] == Ics.icSlft || iconsToken[i] == Ics.icSlgt
+                        ? 28
+                        : 20,
+              ),
             ),
           ),
           'selectedIcon': SizedBox(
             key: UniqueKey(),
-            width: 24,
-            height: 24,
-            child: SvgPicture.asset(
-              iconsToken[i],
-              // color: Color(0xFF6FCC76),
+            child: Padding(
+              padding: EdgeInsets.only(
+                  left:
+                  iconsToken[i] == Ics.icSlft || iconsToken[i] == Ics.icSlgt
+                      ? 0
+                      : 4),
+              child: SFIcon(
+                iconsToken[i],
+                width: iconsToken[i] == Ics.icSlft || iconsToken[i] == Ics.icSlgt
+                    ? 32
+                    : 24,
+                height: iconsToken[i] == Ics.icSlft || iconsToken[i] == Ics.icSlgt
+                    ? 32
+                    : 24,
+                // color: Color(0xFF6FCC76),
+              ),
             ),
           ),
         },
@@ -110,7 +134,8 @@ class _DropdownSelectTokenState extends State<DropdownSelectToken> {
           color: AppColors.transparent,
         ),
         resultTS: TextStyles.lightWhite16,
-        resultPadding: widget.resultPadding ??  const EdgeInsets.only(left: 5, right: 10),
+        resultPadding:
+            widget.resultPadding ?? const EdgeInsets.only(left: 5, right: 10),
         selectedItemTS: TextStyles.w400White16,
         unselectedItemTS: TextStyles.w400lightGrey16,
         onChange: (selectedItem) {

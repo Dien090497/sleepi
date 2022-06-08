@@ -52,7 +52,7 @@ class TopBarStaking extends StatelessWidget {
                     ),
                     ItemResource(
                       value: valueGold ?? 0,
-                      url: Ics.icSlgt,
+                      url: Ics.icSlft,
                     ),
                   ],
                 ),
