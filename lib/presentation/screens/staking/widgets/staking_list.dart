@@ -163,7 +163,7 @@ class StakingList extends StatelessWidget {
                   Row(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      SvgPicture.asset(Ics.icGold),
+                      SvgPicture.asset(Ics.icSlgt),
                       const SizedBox(
                         width: 6,
                       ),
@@ -189,7 +189,7 @@ class StakingList extends StatelessWidget {
                   Row(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      SvgPicture.asset(Ics.icGold),
+                      SvgPicture.asset(Ics.icSlgt),
                       const SizedBox(
                         width: 6,
                       ),

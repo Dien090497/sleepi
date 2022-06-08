@@ -69,7 +69,7 @@ class DepositSlftScreen extends StatelessWidget {
                                 Row(
                                   crossAxisAlignment: CrossAxisAlignment.center,
                                   children: [
-                                    const SFIcon(Ics.icGold),
+                                    const SFIcon(Ics.icSlgt),
                                     const SizedBox(
                                       width: 6,
                                     ),

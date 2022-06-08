@@ -30,7 +30,6 @@ class Ics {
   static const String icDownload = 'assets/icons/ic_download.svg';
   static const String icEdit = 'assets/icons/ic_edit.svg';
   static const String icEye = 'assets/icons/ic_eye.svg';
-  static const String icGold = 'assets/icons/ic_gold.svg';
   static const String icLock = 'assets/icons/ic_lock.svg';
   static const String icMicrophone = 'assets/icons/ic_microphone.svg';
   static const String icMotionData = 'assets/icons/ic_motion_data.svg';
@@ -41,7 +40,8 @@ class Ics {
   static const String icScanOutlined = 'assets/icons/ic_scan_outlined.svg';
   static const String icSetting = 'assets/icons/ic_setting.svg';
   static const String icShieldLock = 'assets/icons/ic_shield_lock.svg';
-  static const String icSliver = 'assets/icons/ic_sliver.svg';
+  static const String icSlft = 'assets/icons/ic_slft.svg';
+  static const String icSlgt = 'assets/icons/ic_slgt.svg';
   static const String icSolana = 'assets/icons/ic_solana.svg';
   static const String icSolanaCircle = 'assets/icons/ic_solana_circle.svg';
   static const String icTransfer = 'assets/icons/ic_transfer.svg';
@@ -93,7 +93,6 @@ class Ics {
     icDownload,
     icEdit,
     icEye,
-    icGold,
     icLock,
     icMicrophone,
     icMotionData,
@@ -104,7 +103,8 @@ class Ics {
     icScanOutlined,
     icSetting,
     icShieldLock,
-    icSliver,
+    icSlft,
+    icSlgt,
     icSolana,
     icSolanaCircle,
     icTransfer,

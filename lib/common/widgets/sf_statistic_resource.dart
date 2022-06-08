@@ -31,14 +31,14 @@ class SFStatisticResource extends StatelessWidget {
           ),
           ItemResource(
             value: valueSliver,
-            url: Ics.icSliver,
+            url: Ics.icSlgt,
           ),
           const SizedBox(
             width: 16,
           ),
           ItemResource(
             value: valueGold,
-            url: Ics.icGold,
+            url: Ics.icSlft,
           ),
           const SizedBox(
             width: 16,

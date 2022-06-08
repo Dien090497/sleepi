@@ -41,8 +41,6 @@ class Imgs {
   static const String resilience = 'assets/images/resilience.png';
   static const String sell = 'assets/images/sell.png';
   static const String sendToExternal = 'assets/images/send_to_external.png';
-  static const String slft = 'assets/images/slft.png';
-  static const String slgt = 'assets/images/slgt.png';
   static const String special = 'assets/images/special.png';
   static const String statistics = 'assets/images/statistics.png';
   static const String transfer = 'assets/images/transfer.png';
@@ -90,8 +88,6 @@ class Imgs {
     resilience,
     sell,
     sendToExternal,
-    slft,
-    slgt,
     special,
     statistics,
     transfer,
