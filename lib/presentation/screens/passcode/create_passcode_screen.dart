@@ -53,8 +53,12 @@ class CreatePasscodeScreen extends StatelessWidget {
                   if (args != null) {
                     Navigator.pushReplacementNamed(context, args.route);
                   } else {
-                    Navigator.pushReplacementNamed(context, R.confirmPasscode);
-                    // Navigator.popUntil(context, (r) => r.settings.name == R.confirmPasscode);
+                    Navigator.pushNamed(context, R.confirmPasscode)
+                        .then((confirmSuccess) {
+                      if (confirmSuccess != null && confirmSuccess == true) {
+                        Navigator.pop(context, confirmSuccess);
+                      }
+                    });
                   }
                 },
               ),

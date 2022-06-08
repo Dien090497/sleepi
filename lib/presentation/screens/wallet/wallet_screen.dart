@@ -11,6 +11,7 @@ import 'package:slee_fi/presentation/screens/wallet/widgets/tab_bar_icon.dart';
 import 'package:slee_fi/presentation/screens/wallet/widgets/tab_spending_detail.dart';
 import 'package:slee_fi/presentation/screens/wallet/widgets/tab_wallet_detail.dart';
 import 'package:slee_fi/presentation/screens/wallet_creation_warning/widgets/pop_up_avalanche_wallet.dart';
+import 'package:slee_fi/presentation/screens/wallet_creation_warning/widgets/pop_up_wallet_warning.dart';
 import 'package:slee_fi/resources/resources.dart';
 
 class WalletScreen extends StatefulWidget {
@@ -66,7 +67,8 @@ class _WalletScreenState extends State<WalletScreen> {
                   });
                   if (i == 1) {
                     showCustomAlertDialog(context,
-                        children: const PopUpAvalancheWallet());
+                            children: const PopUpAvalancheWallet())
+                        .then((value) => _showWarningDialog(value));
                   }
                 },
                 index: indexTap,
@@ -82,5 +84,11 @@ class _WalletScreenState extends State<WalletScreen> {
         ),
       ),
     );
+  }
+
+  _showWarningDialog(dynamic value) {
+    if (value != null && value == true) {
+      showCustomAlertDialog(context, children: const PopUpWalletWarning());
+    }
   }
 }
