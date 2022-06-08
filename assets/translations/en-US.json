@@ -389,6 +389,7 @@
   "token_consumptions": "Token Consumption",
   "buy_now": "Buy Now",
   "export": "Export",
+  "there_is_no_item" : "There is no item",
   "suggestion": "Suggestion",
   "bug": "Bug",
   "running_gps": "Running/GPS",
@@ -398,5 +399,4 @@
   "others": "Others",
   "ok": "OK",
   "close": "Close"
-
 }
