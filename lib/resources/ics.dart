@@ -22,6 +22,7 @@ class Ics {
   static const String home = 'assets/icons/home.svg';
   static const String icAppleHealth = 'assets/icons/ic_apple_health.svg';
   static const String icArrowUpRight = 'assets/icons/ic_arrow_up_right.svg';
+  static const String icAvax = 'assets/icons/ic_avax.svg';
   static const String icBedBoxes = 'assets/icons/ic_bed_boxes.svg';
   static const String icBeds = 'assets/icons/ic_beds.svg';
   static const String icCalculator = 'assets/icons/ic_calculator.svg';
@@ -86,6 +87,7 @@ class Ics {
     home,
     icAppleHealth,
     icArrowUpRight,
+    icAvax,
     icBedBoxes,
     icBeds,
     icCalculator,
