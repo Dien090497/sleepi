@@ -39,8 +39,8 @@ class GridViewBedItem extends StatelessWidget {
       itemBuilder: (context, i) {
         final bed = beds[i % BedType.values.length];
         var rnd = Random();
-        var id = rnd.nextDouble() * 1000000;
-        while (id < 100000) {
+        var id = rnd.nextDouble() * 10000;
+        while (id < 1000) {
           id *= 10;
         }
 
