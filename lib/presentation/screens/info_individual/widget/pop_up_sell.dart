@@ -158,24 +158,24 @@ class _Confirm extends StatelessWidget {
           ],
         ),
         const SizedBox(height: 16),
-        Row(
-          children: [
-            Expanded(
-              flex: 3,
-              child: SFText(
-                  keyText: LocaleKeys.artist_royalties,
-                  style: TextStyles.lightGrey14),
-            ),
-            Expanded(
-              child: SFText(
-                keyText: '4%',
-                style: TextStyles.lightWhite16,
-                textAlign: TextAlign.right,
-              ),
-            ),
-          ],
-        ),
-        const SizedBox(height: 16),
+        // Row(
+        //   children: [
+        //     Expanded(
+        //       flex: 3,
+        //       child: SFText(
+        //           keyText: LocaleKeys.artist_royalties,
+        //           style: TextStyles.lightGrey14),
+        //     ),
+        //     Expanded(
+        //       child: SFText(
+        //         keyText: '4%',
+        //         style: TextStyles.lightWhite16,
+        //         textAlign: TextAlign.right,
+        //       ),
+        //     ),
+        //   ],
+        // ),
+        // const SizedBox(height: 16),
         Row(
           children: [
             Expanded(
@@ -186,7 +186,7 @@ class _Confirm extends StatelessWidget {
             ),
             Expanded(
               child: SFText(
-                keyText: '2%',
+                keyText: '6%',
                 style: TextStyles.lightWhite16,
                 textAlign: TextAlign.right,
               ),
