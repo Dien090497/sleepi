@@ -24,26 +24,38 @@ class SFGridView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SmartRefresher(
-      controller: _refreshController,
-      enablePullDown: true,
-      header: const WaterDropHeader(),
-      onRefresh: _onRefresh,
-      child: GridView.builder(
-        itemCount: count,
-        shrinkWrap: true,
-        physics: isScroll
-            ? const ScrollPhysics()
-            : const NeverScrollableScrollPhysics(),
-        keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
-        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: 2,
-          childAspectRatio: childAspectRatio,
-          crossAxisSpacing: 12,
-          mainAxisSpacing: 12,
-        ),
-        itemBuilder: itemBuilder,
-      ),
-    );
+    return isScroll
+        ? SmartRefresher(
+            controller: _refreshController,
+            enablePullDown: true,
+            header: const WaterDropHeader(),
+            onRefresh: _onRefresh,
+            child: GridView.builder(
+              itemCount: count,
+              shrinkWrap: true,
+              physics: const ScrollPhysics(),
+              keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
+              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 2,
+                childAspectRatio: childAspectRatio,
+                crossAxisSpacing: 12,
+                mainAxisSpacing: 12,
+              ),
+              itemBuilder: itemBuilder,
+            ),
+          )
+        : GridView.builder(
+            itemCount: count,
+            shrinkWrap: true,
+            physics: const NeverScrollableScrollPhysics(),
+            keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
+            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 2,
+              childAspectRatio: childAspectRatio,
+              crossAxisSpacing: 12,
+              mainAxisSpacing: 12,
+            ),
+            itemBuilder: itemBuilder,
+          );
   }
 }
