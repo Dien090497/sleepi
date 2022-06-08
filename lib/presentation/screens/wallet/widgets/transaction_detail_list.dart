@@ -26,7 +26,7 @@ class TransactionDetailList extends StatelessWidget {
       Ics.icSlgt,
       Ics.icSlgt,
       Ics.icBeds,
-      Imgs.jewels,
+      Ics.icJewels,
       Ics.icBedBoxes
     ];
     return Container(

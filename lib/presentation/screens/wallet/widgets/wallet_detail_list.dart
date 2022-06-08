@@ -27,7 +27,7 @@ class WalletDetailList extends StatelessWidget {
       Ics.icSlft,
       Ics.icSlgt,
       Ics.icBeds,
-      Imgs.jewels,
+      Ics.icJewels,
       Ics.icBedBoxes
     ];
     return Container(
@@ -47,11 +47,17 @@ class WalletDetailList extends StatelessWidget {
           itemBuilder: (BuildContext context, int index) {
             return SFCard(
               onTap: () {
-                if(index < 3 )Navigator.pushNamed(context, R.transactionDetail, arguments: TransactionDetailArguments(keyList[index], icons[index]));
+                if (index < 3) {
+                  Navigator.pushNamed(context, R.transactionDetail,
+                      arguments: TransactionDetailArguments(
+                          keyList[index], icons[index]));
+                }
               },
               child: ListTile(
                 leading: SFIcon(
                   icons[index],
+                  width: 32,
+                  height: 32,
                 ),
                 title: SFText(
                     keyText: keyList[index], style: TextStyles.lightWhite16),

@@ -15,7 +15,7 @@ class ConnectBedWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final List<BedType> beds = List.generate(BedType.values.length * 5,
+    final List<BedType> beds = List.generate(BedType.values.length*5,
         (i) => BedType.values[i % BedType.values.length]);
     return Column(
       children: [

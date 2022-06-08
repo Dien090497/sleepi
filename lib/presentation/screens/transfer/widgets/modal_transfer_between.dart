@@ -32,7 +32,7 @@ class _ModalTransferBetweenState extends State<ModalTransferBetween> {
     Ics.icSlgt,
     Ics.icSlgt,
     Ics.icBeds,
-    Imgs.jewels,
+    Ics.icJewels,
     Ics.icBedBoxes
   ];
 

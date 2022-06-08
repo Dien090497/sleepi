@@ -18,26 +18,20 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$MintState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() initial,
+    required TResult Function(List<BedType> beds) initial,
     required TResult Function() loading,
-    required TResult Function() loaded,
-    required TResult Function() error,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function()? initial,
+    TResult Function(List<BedType> beds)? initial,
     TResult Function()? loading,
-    TResult Function()? loaded,
-    TResult Function()? error,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initial,
+    TResult Function(List<BedType> beds)? initial,
     TResult Function()? loading,
-    TResult Function()? loaded,
-    TResult Function()? error,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -45,24 +39,18 @@ mixin _$MintState {
   TResult map<TResult extends Object?>({
     required TResult Function(MintStateInitial value) initial,
     required TResult Function(MintStateLoading value) loading,
-    required TResult Function(MintStateLoaded value) loaded,
-    required TResult Function(MintStateError value) error,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult Function(MintStateInitial value)? initial,
     TResult Function(MintStateLoading value)? loading,
-    TResult Function(MintStateLoaded value)? loaded,
-    TResult Function(MintStateError value)? error,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(MintStateInitial value)? initial,
     TResult Function(MintStateLoading value)? loading,
-    TResult Function(MintStateLoaded value)? loaded,
-    TResult Function(MintStateError value)? error,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -88,6 +76,7 @@ abstract class _$$MintStateInitialCopyWith<$Res> {
   factory _$$MintStateInitialCopyWith(
           _$MintStateInitial value, $Res Function(_$MintStateInitial) then) =
       __$$MintStateInitialCopyWithImpl<$Res>;
+  $Res call({List<BedType> beds});
 }
 
 /// @nodoc
@@ -100,6 +89,18 @@ class __$$MintStateInitialCopyWithImpl<$Res>
 
   @override
   _$MintStateInitial get _value => super._value as _$MintStateInitial;
+
+  @override
+  $Res call({
+    Object? beds = freezed,
+  }) {
+    return _then(_$MintStateInitial(
+      beds: beds == freezed
+          ? _value._beds
+          : beds // ignore: cast_nullable_to_non_nullable
+              as List<BedType>,
+    ));
+  }
 }
 
 /// @nodoc
@@ -107,61 +108,72 @@ class __$$MintStateInitialCopyWithImpl<$Res>
 class _$MintStateInitial
     with DiagnosticableTreeMixin
     implements MintStateInitial {
-  const _$MintStateInitial();
+  const _$MintStateInitial({required final List<BedType> beds}) : _beds = beds;
+
+  final List<BedType> _beds;
+  @override
+  List<BedType> get beds {
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_beds);
+  }
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'MintState.initial()';
+    return 'MintState.initial(beds: $beds)';
   }
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty('type', 'MintState.initial'));
+    properties
+      ..add(DiagnosticsProperty('type', 'MintState.initial'))
+      ..add(DiagnosticsProperty('beds', beds));
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$MintStateInitial);
+        (other.runtimeType == runtimeType &&
+            other is _$MintStateInitial &&
+            const DeepCollectionEquality().equals(other._beds, _beds));
   }
 
   @override
-  int get hashCode => runtimeType.hashCode;
+  int get hashCode =>
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(_beds));
+
+  @JsonKey(ignore: true)
+  @override
+  _$$MintStateInitialCopyWith<_$MintStateInitial> get copyWith =>
+      __$$MintStateInitialCopyWithImpl<_$MintStateInitial>(this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() initial,
+    required TResult Function(List<BedType> beds) initial,
     required TResult Function() loading,
-    required TResult Function() loaded,
-    required TResult Function() error,
   }) {
-    return initial();
+    return initial(beds);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function()? initial,
+    TResult Function(List<BedType> beds)? initial,
     TResult Function()? loading,
-    TResult Function()? loaded,
-    TResult Function()? error,
   }) {
-    return initial?.call();
+    return initial?.call(beds);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initial,
+    TResult Function(List<BedType> beds)? initial,
     TResult Function()? loading,
-    TResult Function()? loaded,
-    TResult Function()? error,
     required TResult orElse(),
   }) {
     if (initial != null) {
-      return initial();
+      return initial(beds);
     }
     return orElse();
   }
@@ -171,8 +183,6 @@ class _$MintStateInitial
   TResult map<TResult extends Object?>({
     required TResult Function(MintStateInitial value) initial,
     required TResult Function(MintStateLoading value) loading,
-    required TResult Function(MintStateLoaded value) loaded,
-    required TResult Function(MintStateError value) error,
   }) {
     return initial(this);
   }
@@ -182,8 +192,6 @@ class _$MintStateInitial
   TResult? mapOrNull<TResult extends Object?>({
     TResult Function(MintStateInitial value)? initial,
     TResult Function(MintStateLoading value)? loading,
-    TResult Function(MintStateLoaded value)? loaded,
-    TResult Function(MintStateError value)? error,
   }) {
     return initial?.call(this);
   }
@@ -193,8 +201,6 @@ class _$MintStateInitial
   TResult maybeMap<TResult extends Object?>({
     TResult Function(MintStateInitial value)? initial,
     TResult Function(MintStateLoading value)? loading,
-    TResult Function(MintStateLoaded value)? loaded,
-    TResult Function(MintStateError value)? error,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -205,7 +211,13 @@ class _$MintStateInitial
 }
 
 abstract class MintStateInitial implements MintState {
-  const factory MintStateInitial() = _$MintStateInitial;
+  const factory MintStateInitial({required final List<BedType> beds}) =
+      _$MintStateInitial;
+
+  List<BedType> get beds => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  _$$MintStateInitialCopyWith<_$MintStateInitial> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -257,10 +269,8 @@ class _$MintStateLoading
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() initial,
+    required TResult Function(List<BedType> beds) initial,
     required TResult Function() loading,
-    required TResult Function() loaded,
-    required TResult Function() error,
   }) {
     return loading();
   }
@@ -268,10 +278,8 @@ class _$MintStateLoading
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function()? initial,
+    TResult Function(List<BedType> beds)? initial,
     TResult Function()? loading,
-    TResult Function()? loaded,
-    TResult Function()? error,
   }) {
     return loading?.call();
   }
@@ -279,10 +287,8 @@ class _$MintStateLoading
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initial,
+    TResult Function(List<BedType> beds)? initial,
     TResult Function()? loading,
-    TResult Function()? loaded,
-    TResult Function()? error,
     required TResult orElse(),
   }) {
     if (loading != null) {
@@ -296,8 +302,6 @@ class _$MintStateLoading
   TResult map<TResult extends Object?>({
     required TResult Function(MintStateInitial value) initial,
     required TResult Function(MintStateLoading value) loading,
-    required TResult Function(MintStateLoaded value) loaded,
-    required TResult Function(MintStateError value) error,
   }) {
     return loading(this);
   }
@@ -307,8 +311,6 @@ class _$MintStateLoading
   TResult? mapOrNull<TResult extends Object?>({
     TResult Function(MintStateInitial value)? initial,
     TResult Function(MintStateLoading value)? loading,
-    TResult Function(MintStateLoaded value)? loaded,
-    TResult Function(MintStateError value)? error,
   }) {
     return loading?.call(this);
   }
@@ -318,8 +320,6 @@ class _$MintStateLoading
   TResult maybeMap<TResult extends Object?>({
     TResult Function(MintStateInitial value)? initial,
     TResult Function(MintStateLoading value)? loading,
-    TResult Function(MintStateLoaded value)? loaded,
-    TResult Function(MintStateError value)? error,
     required TResult orElse(),
   }) {
     if (loading != null) {
@@ -331,251 +331,4 @@ class _$MintStateLoading
 
 abstract class MintStateLoading implements MintState {
   const factory MintStateLoading() = _$MintStateLoading;
-}
-
-/// @nodoc
-abstract class _$$MintStateLoadedCopyWith<$Res> {
-  factory _$$MintStateLoadedCopyWith(
-          _$MintStateLoaded value, $Res Function(_$MintStateLoaded) then) =
-      __$$MintStateLoadedCopyWithImpl<$Res>;
-}
-
-/// @nodoc
-class __$$MintStateLoadedCopyWithImpl<$Res>
-    extends _$MintStateCopyWithImpl<$Res>
-    implements _$$MintStateLoadedCopyWith<$Res> {
-  __$$MintStateLoadedCopyWithImpl(
-      _$MintStateLoaded _value, $Res Function(_$MintStateLoaded) _then)
-      : super(_value, (v) => _then(v as _$MintStateLoaded));
-
-  @override
-  _$MintStateLoaded get _value => super._value as _$MintStateLoaded;
-}
-
-/// @nodoc
-
-class _$MintStateLoaded
-    with DiagnosticableTreeMixin
-    implements MintStateLoaded {
-  const _$MintStateLoaded();
-
-  @override
-  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'MintState.loaded()';
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty('type', 'MintState.loaded'));
-  }
-
-  @override
-  bool operator ==(dynamic other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$MintStateLoaded);
-  }
-
-  @override
-  int get hashCode => runtimeType.hashCode;
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() initial,
-    required TResult Function() loading,
-    required TResult Function() loaded,
-    required TResult Function() error,
-  }) {
-    return loaded();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult Function()? initial,
-    TResult Function()? loading,
-    TResult Function()? loaded,
-    TResult Function()? error,
-  }) {
-    return loaded?.call();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initial,
-    TResult Function()? loading,
-    TResult Function()? loaded,
-    TResult Function()? error,
-    required TResult orElse(),
-  }) {
-    if (loaded != null) {
-      return loaded();
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(MintStateInitial value) initial,
-    required TResult Function(MintStateLoading value) loading,
-    required TResult Function(MintStateLoaded value) loaded,
-    required TResult Function(MintStateError value) error,
-  }) {
-    return loaded(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(MintStateInitial value)? initial,
-    TResult Function(MintStateLoading value)? loading,
-    TResult Function(MintStateLoaded value)? loaded,
-    TResult Function(MintStateError value)? error,
-  }) {
-    return loaded?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(MintStateInitial value)? initial,
-    TResult Function(MintStateLoading value)? loading,
-    TResult Function(MintStateLoaded value)? loaded,
-    TResult Function(MintStateError value)? error,
-    required TResult orElse(),
-  }) {
-    if (loaded != null) {
-      return loaded(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class MintStateLoaded implements MintState {
-  const factory MintStateLoaded() = _$MintStateLoaded;
-}
-
-/// @nodoc
-abstract class _$$MintStateErrorCopyWith<$Res> {
-  factory _$$MintStateErrorCopyWith(
-          _$MintStateError value, $Res Function(_$MintStateError) then) =
-      __$$MintStateErrorCopyWithImpl<$Res>;
-}
-
-/// @nodoc
-class __$$MintStateErrorCopyWithImpl<$Res> extends _$MintStateCopyWithImpl<$Res>
-    implements _$$MintStateErrorCopyWith<$Res> {
-  __$$MintStateErrorCopyWithImpl(
-      _$MintStateError _value, $Res Function(_$MintStateError) _then)
-      : super(_value, (v) => _then(v as _$MintStateError));
-
-  @override
-  _$MintStateError get _value => super._value as _$MintStateError;
-}
-
-/// @nodoc
-
-class _$MintStateError with DiagnosticableTreeMixin implements MintStateError {
-  const _$MintStateError();
-
-  @override
-  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'MintState.error()';
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty('type', 'MintState.error'));
-  }
-
-  @override
-  bool operator ==(dynamic other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$MintStateError);
-  }
-
-  @override
-  int get hashCode => runtimeType.hashCode;
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() initial,
-    required TResult Function() loading,
-    required TResult Function() loaded,
-    required TResult Function() error,
-  }) {
-    return error();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult Function()? initial,
-    TResult Function()? loading,
-    TResult Function()? loaded,
-    TResult Function()? error,
-  }) {
-    return error?.call();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initial,
-    TResult Function()? loading,
-    TResult Function()? loaded,
-    TResult Function()? error,
-    required TResult orElse(),
-  }) {
-    if (error != null) {
-      return error();
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(MintStateInitial value) initial,
-    required TResult Function(MintStateLoading value) loading,
-    required TResult Function(MintStateLoaded value) loaded,
-    required TResult Function(MintStateError value) error,
-  }) {
-    return error(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(MintStateInitial value)? initial,
-    TResult Function(MintStateLoading value)? loading,
-    TResult Function(MintStateLoaded value)? loaded,
-    TResult Function(MintStateError value)? error,
-  }) {
-    return error?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(MintStateInitial value)? initial,
-    TResult Function(MintStateLoading value)? loading,
-    TResult Function(MintStateLoaded value)? loaded,
-    TResult Function(MintStateError value)? error,
-    required TResult orElse(),
-  }) {
-    if (error != null) {
-      return error(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class MintStateError implements MintState {
-  const factory MintStateError() = _$MintStateError;
 }

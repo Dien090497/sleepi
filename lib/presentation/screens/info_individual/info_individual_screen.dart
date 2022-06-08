@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
 import 'package:slee_fi/common/widgets/background_widget.dart';
 import 'package:slee_fi/common/widgets/sf_icon.dart';
@@ -116,8 +117,21 @@ class InfoIndividualScreen extends StatelessWidget {
                         const SizedBox(
                           height: 33,
                         ),
-                        const MintFromWidget(title: LocaleKeys.mint_from, numbers: 2,),
-                        const MintFromWidget(title: LocaleKeys.mint, numbers: 7,),
+                        Container(
+                          decoration: const BoxDecoration(
+                            color: AppColors.dark,
+                            borderRadius: BorderRadius.only(
+                              topLeft: Radius.circular(40),
+                              topRight: Radius.circular(40),
+                            ),
+                          ),
+                          child: Column(
+                            children: const [
+                              MintFromWidget(title: LocaleKeys.mint_from, numbers: 2,),
+                              MintFromWidget(title: LocaleKeys.mint, numbers: 7,),
+                            ],
+                          ),
+                        ),
                         const SizedBox(
                           height: 80,
                         ),

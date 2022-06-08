@@ -30,6 +30,7 @@ class Ics {
   static const String icDownload = 'assets/icons/ic_download.svg';
   static const String icEdit = 'assets/icons/ic_edit.svg';
   static const String icEye = 'assets/icons/ic_eye.svg';
+  static const String icJewels = 'assets/icons/ic_jewels.svg';
   static const String icLock = 'assets/icons/ic_lock.svg';
   static const String icMicrophone = 'assets/icons/ic_microphone.svg';
   static const String icMotionData = 'assets/icons/ic_motion_data.svg';
@@ -93,6 +94,7 @@ class Ics {
     icDownload,
     icEdit,
     icEye,
+    icJewels,
     icLock,
     icMicrophone,
     icMotionData,

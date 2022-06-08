@@ -10,29 +10,31 @@ import 'package:slee_fi/common/widgets/sf_text.dart';
 import 'package:slee_fi/presentation/screens/product_detail/widgets/top_left_banner.dart';
 
 class ItemBed extends StatelessWidget {
-  const ItemBed({Key? key, required this.beds, required this.i})
+  const ItemBed({Key? key, required this.bed, required this.onTap})
       : super(key: key);
-  final List<BedType> beds;
-  final int i;
+  final BedType bed;
+  final VoidCallback onTap;
 
   @override
   Widget build(BuildContext context) {
-    final bed = beds[i % BedType.values.length];
     var rnd = Random();
     var id = rnd.nextDouble() * 10000;
     while (id < 1000) {
       id *= 10;
     }
     return GestureDetector(
-      onTap: (){},
+      onTap: onTap,
       child: Container(
         decoration: BoxDecoration(
-            color: AppColors.lightDark,
-            borderRadius: BorderRadius.circular(16),
-            border: Border.all(
-              color: AppColors.white.withOpacity(0.05),
-              width: 1,
-            )),
+          color: AppColors.lightDark,
+          borderRadius: BorderRadius.circular(16),
+          border: Border.all(
+            color: bed.selected
+                ? AppColors.blue
+                : AppColors.white.withOpacity(0.05),
+            width: 1,
+          ),
+        ),
         child: Stack(
           clipBehavior: Clip.hardEdge,
           children: [

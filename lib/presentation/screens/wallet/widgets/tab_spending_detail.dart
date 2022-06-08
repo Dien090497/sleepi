@@ -69,7 +69,7 @@ class TabSpendingDetail extends StatelessWidget {
                       SFCard(
                         margin: const EdgeInsets.only(top: 8),
                         child: ListTile(
-                          leading: Image.asset(Imgs.avax),
+                          leading: const SFIcon(Ics.icSolanaCircle, width: 32, height: 32,),
                           minLeadingWidth: 12,
                           title: SFText(
                             keyText: LocaleKeys.avax,
