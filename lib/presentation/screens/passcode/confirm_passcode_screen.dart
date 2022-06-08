@@ -37,9 +37,7 @@ class ConfirmPasscodeScreen extends StatelessWidget {
         body: SafeArea(
           child: ListView(
             children: [
-              const SizedBox(
-                height: 65,
-              ),
+              const SizedBox(height: 65),
               Center(
                   child: SFText(
                       keyText: LocaleKeys.confirm_your_passcode,
@@ -53,8 +51,7 @@ class ConfirmPasscodeScreen extends StatelessWidget {
                   if (args != null) {
                     Navigator.pushReplacementNamed(context, args.route);
                   } else {
-                    Navigator.popUntil(
-                        context, (r) => r.settings.name == R.settingWallet);
+                    Navigator.pop(context, true);
                   }
                 },
               ),
