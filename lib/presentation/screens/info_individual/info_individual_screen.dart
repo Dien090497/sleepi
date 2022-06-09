@@ -37,14 +37,8 @@ class InfoIndividualScreen extends StatelessWidget {
                   child: Column(
                     children: [
                       Container(
-                        width: 180,
                         height: 180,
-                        padding: const EdgeInsets.symmetric(
-                          horizontal: 13,
-                        ),
-                        margin: const EdgeInsets.symmetric(
-                          vertical: 24,
-                        ),
+                        margin: const EdgeInsets.symmetric(vertical: 24),
                         decoration: const BoxDecoration(
                           image: DecorationImage(
                             image: AssetImage(
@@ -53,7 +47,7 @@ class InfoIndividualScreen extends StatelessWidget {
                             fit: BoxFit.cover,
                           ),
                         ),
-                        child: const SFIcon(Ics.middleBed),
+                        child: const SFIcon(Imgs.bed600),
                       ),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
@@ -125,14 +119,13 @@ class InfoIndividualScreen extends StatelessWidget {
                         ),
                         child: Column(
                           children: const [
-                            MintFromWidget(title: LocaleKeys.mint_from, numbers: 2,),
-                            MintFromWidget(title: LocaleKeys.mint, numbers: 7,),
+                            MintFromWidget(
+                                title: LocaleKeys.minted_from, numbers: 2),
+                            MintFromWidget(title: LocaleKeys.mint, numbers: 7),
                           ],
                         ),
                       ),
-                      const SizedBox(
-                        height: 80,
-                      ),
+                      const SizedBox(height: 80),
                     ],
                   ),
                 ),

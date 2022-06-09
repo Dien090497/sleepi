@@ -45,7 +45,9 @@ class _EnterActivationCodeScreenState extends State<EnterActivationCodeScreen> {
                   children: [
                     const SFLogo(),
                     const SizedBox(height: 40),
-                    const SFTextField(labelText: LocaleKeys.please_enter),
+                     const SFTextField(
+                        labelText: LocaleKeys.please_enter,
+                        textInputType: TextInputType.number,),
                     const SizedBox(height: 20),
                     SFText(
                         keyText: LocaleKeys.please_select_your_language,

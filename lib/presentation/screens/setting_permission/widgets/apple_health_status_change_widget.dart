@@ -20,7 +20,7 @@ class _AppleHealthStatusChangeState extends State<AppleHealthStatusChangeWidget>
     return SFListTile(
       leading:const Padding(
         padding:  EdgeInsets.only(left: 8, right: 8),
-        child: SFIcon(Ics.icAppleHealth, width: 24,),
+        child: SFIcon(Imgs.health, width: 24, ),
       ),
       text: LocaleKeys.apple_health,
       trailing:  Padding(

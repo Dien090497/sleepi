@@ -11,20 +11,22 @@ import 'package:slee_fi/common/widgets/sf_textfield_password.dart';
 import 'package:slee_fi/common/widgets/sf_textfield_text_button.dart';
 import 'package:slee_fi/l10n/locale_keys.g.dart';
 
-class ChangePasswordScreen extends StatelessWidget {
+class ChangePasswordScreen extends StatefulWidget {
   const ChangePasswordScreen({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
-    TextEditingController emailController = TextEditingController(text: '');
-    TextEditingController codeController = TextEditingController(text: '');
-    TextEditingController youPasswordController =
-        TextEditingController(text: '');
-    TextEditingController newPasswordController =
-        TextEditingController(text: '');
+  State<ChangePasswordScreen> createState() => _ChangePasswordScreenState();
+}
 
+class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
+  String email = '', code = '', yourPassword = '', newPassword = '';
+  bool isDisabled = true;
+
+  @override
+  Widget build(BuildContext context) {
     return DismissKeyboardWidget(
       child: BackgroundWidget(
+        resizeToAvoidBottomInset: false,
         appBar: SFAppBar(
           context: context,
           title: LocaleKeys.change_password,
@@ -46,27 +48,75 @@ class ChangePasswordScreen extends StatelessWidget {
                           children: [
                             SFTextField(
                               labelText: LocaleKeys.email,
-                              controller: emailController,
+                              onChanged: (e){
+                                email = e ;
+                                if(
+                                email.isNotEmpty && code.isNotEmpty && yourPassword.isNotEmpty && newPassword.isNotEmpty ){
+                                  setState((){
+                                    isDisabled = false;
+                                  });
+                                }else {
+                                  setState((){
+                                    isDisabled = true;
+                                  });
+                                }
+                              },
                             ),
                             const SizedBox(height: 20),
                             SFTextFieldTextButton(
                               labelText: LocaleKeys.verification_code,
                               textInputType: TextInputType.number,
-                              controller: codeController,
+                              valueChanged: (value){
+                                code = value ;
+                                if(
+                                email.isNotEmpty && code.isNotEmpty && yourPassword.isNotEmpty && newPassword.isNotEmpty ){
+                                  setState((){
+                                    isDisabled = false;
+                                  });
+                                }else {
+                                  setState((){
+                                    isDisabled = true;
+                                  });
+                                }
+                              },
                             ),
                             const SizedBox(
                               height: 20,
                             ),
                             SFTextFieldPassword(
                               labelText: LocaleKeys.your_password,
-                              controller: youPasswordController,
+                              valueChanged: (value){
+                                yourPassword = value ;
+                                if(
+                                email.isNotEmpty && code.isNotEmpty && yourPassword.isNotEmpty && newPassword.isNotEmpty ){
+                                  setState((){
+                                    isDisabled = false;
+                                  });
+                                }else {
+                                  setState((){
+                                    isDisabled = true;
+                                  });
+                                }
+                              },
                             ),
                             const SizedBox(
                               height: 20,
                             ),
                             SFTextFieldPassword(
                               labelText: LocaleKeys.new_password,
-                              controller: newPasswordController,
+                              valueChanged: (value){
+                                newPassword = value ;
+                                if(
+                                email.isNotEmpty && code.isNotEmpty && yourPassword.isNotEmpty && newPassword.isNotEmpty ){
+                                  setState((){
+                                    isDisabled = false;
+                                  });
+                                }else {
+                                  setState((){
+                                    isDisabled = true;
+                                  });
+                                }
+                              },
                             ),
                           ],
                         ),
@@ -79,10 +129,7 @@ class ChangePasswordScreen extends StatelessWidget {
                   textStyle: TextStyles.w600WhiteSize16,
                   gradient: AppColors.gradientBlueButton,
                   width: double.infinity,
-                  disabled: emailController.text == '' ||
-                      codeController.text == '' ||
-                      youPasswordController.text == '' ||
-                      newPasswordController.text == '',
+                  disabled: isDisabled,
                   onPressed: () {},
                 ),
                 const SizedBox(

@@ -41,6 +41,7 @@ class ImportWalletScreen extends StatelessWidget {
                             SFTextFieldTextButton(
                               labelText: LocaleKeys.email_verification_code,
                               textButton: LocaleKeys.send_code,
+                              textInputType: TextInputType.number,
                               onPressed: () {},
                             ),
                             const SizedBox(height: 20),
