@@ -5,15 +5,21 @@ import 'package:slee_fi/common/widgets/sf_gridview.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
 import 'package:slee_fi/presentation/screens/info_individual/widget/item_bed.dart';
 
+import '../../../../common/utils/random_utils.dart';
+import '../../../../di/injector.dart';
+
 class MintFromWidget extends StatelessWidget {
-  const MintFromWidget({Key? key, required this.title, required this.numbers}) : super(key: key);
+  const MintFromWidget({Key? key, required this.title, required this.numbers})
+      : super(key: key);
   final String title;
   final int numbers;
 
   @override
   Widget build(BuildContext context) {
-    final beds = List.generate(numbers,
-        (i) => BedType.values[i % BedType.values.length]);
+    final beds = List.generate(
+        numbers, (i) => BedType.values[i % BedType.values.length]);
+    final randomUtils = getIt<RandomUtils>();
+
     return Column(
       children: [
         const SizedBox(height: 32),
@@ -35,7 +41,11 @@ class MintFromWidget extends StatelessWidget {
             isScroll: false,
             childAspectRatio: 1,
             itemBuilder: (context, i) {
-              return ItemBed(bed: beds[i], selected: false, onTap: (){});
+              return ItemBed(
+                  id: randomUtils.randomId(),
+                  bed: beds[i],
+                  selected: false,
+                  onTap: () {});
             },
           ),
         ),
