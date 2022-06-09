@@ -4,19 +4,23 @@ import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/widgets/sf_dialog.dart';
 
 class ChartTabBody extends StatelessWidget {
-  ChartTabBody(
-      {Key? key,
-      required this.picker,
-      required this.onPreviousTap,
-      required this.onNextTap,
-      required this.text,
-      required this.children})
-      : super(key: key);
+  ChartTabBody({
+    Key? key,
+    required this.picker,
+    required this.onPreviousTap,
+    required this.onNextTap,
+    required this.text,
+    required this.children,
+    required this.nextEnable,
+    required this.prevEnable,
+  }) : super(key: key);
 
   final Widget picker;
   final VoidCallback onPreviousTap;
   final VoidCallback onNextTap;
   final String text;
+  final bool nextEnable;
+  final bool prevEnable;
   final List<Widget> children;
   final RefreshController _refreshController =
       RefreshController(initialRefresh: false);
@@ -52,8 +56,10 @@ class ChartTabBody extends StatelessWidget {
                   iconSize: 20,
                   splashRadius: 18,
                   alignment: Alignment.center,
-                  icon: const Icon(Icons.arrow_back_ios,
-                      color: AppColors.lightGrey),
+                  icon: Icon(
+                    Icons.arrow_back_ios,
+                    color: prevEnable ? AppColors.light1 : AppColors.lightGrey,
+                  ),
                 ),
                 Text(text),
                 IconButton(
@@ -62,8 +68,10 @@ class ChartTabBody extends StatelessWidget {
                   iconSize: 20,
                   splashRadius: 18,
                   alignment: Alignment.center,
-                  icon: const Icon(Icons.arrow_forward_ios,
-                      color: AppColors.lightGrey),
+                  icon: Icon(
+                    Icons.arrow_forward_ios,
+                    color: nextEnable ? AppColors.light1 : AppColors.lightGrey,
+                  ),
                 ),
               ],
             ),

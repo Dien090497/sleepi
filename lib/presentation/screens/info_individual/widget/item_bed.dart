@@ -10,9 +10,14 @@ import 'package:slee_fi/di/injector.dart';
 import 'package:slee_fi/presentation/screens/product_detail/widgets/top_left_banner.dart';
 
 class ItemBed extends StatelessWidget {
-  const ItemBed({Key? key, required this.bed, required this.onTap})
+  const ItemBed(
+      {Key? key,
+      required this.bed,
+      required this.selected,
+      required this.onTap})
       : super(key: key);
   final BedType bed;
+  final bool selected;
   final VoidCallback onTap;
 
   @override
@@ -25,9 +30,8 @@ class ItemBed extends StatelessWidget {
           color: AppColors.lightDark,
           borderRadius: BorderRadius.circular(16),
           border: Border.all(
-            color: bed.selected
-                ? AppColors.blue
-                : AppColors.white.withOpacity(0.05),
+            color:
+                selected ? AppColors.blue : AppColors.white.withOpacity(0.05),
             width: 1,
           ),
         ),
