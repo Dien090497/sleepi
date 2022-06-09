@@ -150,7 +150,7 @@ class _Confirm extends StatelessWidget {
             ),
             Expanded(
               child: SFText(
-                keyText: '19 SLFT',
+                keyText: '19 AVAX',
                 style: TextStyles.lightWhite16,
                 textAlign: TextAlign.right,
               ),
