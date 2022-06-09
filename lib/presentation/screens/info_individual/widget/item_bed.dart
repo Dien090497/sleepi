@@ -8,7 +8,6 @@ import 'package:slee_fi/common/widgets/sf_icon.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
 import 'package:slee_fi/di/injector.dart';
 import 'package:slee_fi/presentation/screens/product_detail/widgets/top_left_banner.dart';
-import 'package:slee_fi/resources/resources.dart';
 
 class ItemBed extends StatelessWidget {
   const ItemBed(
@@ -17,6 +16,7 @@ class ItemBed extends StatelessWidget {
       required this.selected,
       required this.onTap})
       : super(key: key);
+
   final BedType bed;
   final bool selected;
   final VoidCallback onTap;
@@ -42,10 +42,7 @@ class ItemBed extends StatelessWidget {
             Positioned(
               top: 14,
               left: -30,
-              child: TopLeftBanner(
-                text: bed.name,
-                textColor: bed.color,
-              ),
+              child: TopLeftBanner(text: bed.name, textColor: bed.color),
             ),
             Container(
               alignment: Alignment.center,
@@ -53,7 +50,7 @@ class ItemBed extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  const SFIcon(Imgs.bed180),
+                  SFIcon(bed.image),
                   const SizedBox(height: 24),
                   Container(
                     decoration: BoxDecoration(
