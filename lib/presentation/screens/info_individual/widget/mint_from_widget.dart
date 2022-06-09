@@ -35,7 +35,7 @@ class MintFromWidget extends StatelessWidget {
             isScroll: false,
             childAspectRatio: 1,
             itemBuilder: (context, i) {
-              return ItemBed(bed: beds[i], onTap: (){},);
+              return ItemBed(bed: beds[i], selected: false, onTap: (){});
             },
           ),
         ),
