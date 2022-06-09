@@ -23,12 +23,15 @@ class TabBarFilter extends StatelessWidget {
       children: [
         Container(
           constraints: BoxConstraints(maxWidth: 140.w),
-          child: const SFDropDownRotation(
+          child: SFDropDownRotation(
             dropdownHeight: 40,
             dropdownWidth: 140,
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             value: 'Low Price',
-            spinnerItems: ['Low Price','High Price'],
+            spinnerItems: const ['Low Price','High Price'],
+            onChange: (int value, int index){
+
+            },
           ),
         ),
         SFSubTabBar(texts: tabTexts),
