@@ -5,6 +5,7 @@ import 'package:slee_fi/common/style/text_styles.dart';
 import 'package:slee_fi/common/widgets/sf_bottom_sheet.dart';
 import 'package:slee_fi/common/widgets/sf_card.dart';
 import 'package:slee_fi/common/widgets/sf_icon.dart';
+import 'package:slee_fi/common/widgets/sf_list_tile.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
 import 'package:slee_fi/l10n/locale_keys.g.dart';
 import 'package:slee_fi/resources/resources.dart';
@@ -37,14 +38,10 @@ class _AssetTileState extends State<AssetTile> {
               setState(() {});
             },
           )),
-      child: ListTile(
-        contentPadding: EdgeInsets.zero,
+      child: SFListTile(
         leading: SFIcon(image),
-        title: SFText(
-          keyText: selected,
-          stringCase: StringCase.upperCase,
-          style: TextStyles.lightWhite16,
-        ),
+        text: selected,
+        textStyle: TextStyles.lightWhite16,
         trailing: const Icon(
           Icons.chevron_right,
           size: 32,

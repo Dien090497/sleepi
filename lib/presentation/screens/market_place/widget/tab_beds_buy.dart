@@ -40,45 +40,48 @@ class TabBedsBuy extends StatelessWidget {
 
     return DefaultTabController(
       length: 2,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          TabBarFilter(
-            tabTexts: const [LocaleKeys.buy, LocaleKeys.rent],
-            onFilterTap: () {
-              showFilterModalBottomSheet(context, FilterType.bed);
-            },
-          ),
-          const SizedBox(height: 12),
-          Expanded(
-            child: TabBarView(
-              children: [
-                GridViewBedItem(
-                  beds: beds,
-                  price: 10,
-                  onBuyTap: (bed) {
-                    Navigator.pushNamed(context, R.nftInfo,
-                        arguments: true);
-                  },
-                ),
-                 Padding(
-                  padding:  EdgeInsets.only(bottom: MediaQuery.of(context).size.height * 0.3),
-                  child: const Center(child: SFIcon(Ics.commingSoon),),
-                )
-                // GridViewBedItem(
-                //   beds: beds,
-                //   onBedTap: (bed) {
-                //     _showBedDialog(context);
-                //   },
-                //   price: 10,
-                //   onBuyTap: (bed) {
-                //
-                //   },
-                // ),
-              ],
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 6),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            TabBarFilter(
+              tabTexts: const [LocaleKeys.buy, LocaleKeys.rent],
+              onFilterTap: () {
+                showFilterModalBottomSheet(context, FilterType.bed);
+              },
             ),
-          ),
-        ],
+            const SizedBox(height: 12),
+            Expanded(
+              child: TabBarView(
+                children: [
+                  GridViewBedItem(
+                    beds: beds,
+                    price: 10,
+                    onBuyTap: (bed) {
+                      Navigator.pushNamed(context, R.nftInfo,
+                          arguments: true);
+                    },
+                  ),
+                   Padding(
+                    padding:  EdgeInsets.only(bottom: MediaQuery.of(context).size.height * 0.3),
+                    child: const Center(child: SFIcon(Ics.commingSoon),),
+                  )
+                  // GridViewBedItem(
+                  //   beds: beds,
+                  //   onBedTap: (bed) {
+                  //     _showBedDialog(context);
+                  //   },
+                  //   price: 10,
+                  //   onBuyTap: (bed) {
+                  //
+                  //   },
+                  // ),
+                ],
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:slee_fi/common/enum/enum.dart';
 import 'package:slee_fi/common/extensions/enum_x.dart';
+import 'package:slee_fi/common/extensions/string_x.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
 import 'package:slee_fi/common/utils/random_utils.dart';
@@ -16,11 +17,11 @@ import 'package:slee_fi/presentation/screens/product_detail/widgets/top_left_ban
 class GridViewBedItem extends StatelessWidget {
   const GridViewBedItem(
       {Key? key,
-      required this.beds,
-      this.onBedTap,
-      this.price,
-      this.onBuyTap,
-      this.isScroll = true})
+        required this.beds,
+        this.onBedTap,
+        this.price,
+        this.onBuyTap,
+        this.isScroll = true})
       : super(key: key);
 
   final List<BedType> beds;
@@ -102,9 +103,10 @@ class GridViewBedItem extends StatelessWidget {
                             children: [
                               Expanded(
                                   child: SFText(
-                                keyText: '$price ${LocaleKeys.avax}',
-                                style: TextStyles.white14W700,
-                              )),
+                                    keyText: '$price ${LocaleKeys.avax}',
+                                    style: TextStyles.white14W700,
+                                    stringCase: StringCase.upperCase,
+                                  )),
                               SFText(
                                 keyText: LocaleKeys.buy,
                                 style: TextStyles.blue14W700,

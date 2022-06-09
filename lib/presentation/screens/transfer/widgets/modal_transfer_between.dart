@@ -3,6 +3,7 @@ import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
 import 'package:slee_fi/common/widgets/sf_card.dart';
 import 'package:slee_fi/common/widgets/sf_icon.dart';
+import 'package:slee_fi/common/widgets/sf_list_tile.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
 import 'package:slee_fi/l10n/locale_keys.g.dart';
 import 'package:slee_fi/resources/resources.dart';
@@ -30,7 +31,7 @@ class _ModalTransferBetweenState extends State<ModalTransferBetween> {
   ];
   List urlImages = [
     Ics.icSolanaCircle,
-    Ics.icSlgt,
+    Ics.icSlft,
     Ics.icSlgt,
     Ics.icBeds,
     Ics.icJewels,
@@ -52,14 +53,13 @@ class _ModalTransferBetweenState extends State<ModalTransferBetween> {
         padding: const EdgeInsets.all(16.0),
         itemBuilder: (BuildContext context, int index) {
           return SFCard(
-            child: ListTile(
-              contentPadding: EdgeInsets.zero,
+            child: SFListTile(
               leading: SFIcon(
                 urlImages[index],
                 width: 32,
               ),
-              title: SFText(
-                  keyText: keyList[index], style: TextStyles.lightWhite16),
+              text: keyList[index],
+              textStyle :TextStyles.lightWhite16,
                 trailing: Row(
                   mainAxisSize: MainAxisSize.min,
                   children: [

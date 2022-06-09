@@ -19,23 +19,11 @@ class ChangePasswordScreen extends StatefulWidget {
 }
 
 class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
-  TextEditingController emailController = TextEditingController(text: '');
-  TextEditingController codeController = TextEditingController(text: '');
-  TextEditingController youPasswordController = TextEditingController(text: '');
-  TextEditingController newPasswordController = TextEditingController(text: '');
+  String email = '', code = '', yourPassword = '', newPassword = '';
+  bool isDisabled = true;
 
-
-  @override
-  void dispose() {
-    emailController.dispose();
-    codeController.dispose();
-    youPasswordController.dispose();
-    newPasswordController.dispose();
-    super.dispose();
-  }
   @override
   Widget build(BuildContext context) {
-
     return DismissKeyboardWidget(
       child: BackgroundWidget(
         resizeToAvoidBottomInset: false,
@@ -60,27 +48,75 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                           children: [
                             SFTextField(
                               labelText: LocaleKeys.email,
-                              controller: emailController,
+                              onChanged: (e){
+                                email = e ;
+                                if(
+                                email.isNotEmpty && code.isNotEmpty && yourPassword.isNotEmpty && newPassword.isNotEmpty ){
+                                  setState((){
+                                    isDisabled = false;
+                                  });
+                                }else {
+                                  setState((){
+                                    isDisabled = true;
+                                  });
+                                }
+                              },
                             ),
                             const SizedBox(height: 20),
                             SFTextFieldTextButton(
                               labelText: LocaleKeys.verification_code,
                               textInputType: TextInputType.number,
-                              controller: codeController,
+                              valueChanged: (value){
+                                code = value ;
+                                if(
+                                email.isNotEmpty && code.isNotEmpty && yourPassword.isNotEmpty && newPassword.isNotEmpty ){
+                                  setState((){
+                                    isDisabled = false;
+                                  });
+                                }else {
+                                  setState((){
+                                    isDisabled = true;
+                                  });
+                                }
+                              },
                             ),
                             const SizedBox(
                               height: 20,
                             ),
                             SFTextFieldPassword(
                               labelText: LocaleKeys.your_password,
-                              controller: youPasswordController,
+                              valueChanged: (value){
+                                yourPassword = value ;
+                                if(
+                                email.isNotEmpty && code.isNotEmpty && yourPassword.isNotEmpty && newPassword.isNotEmpty ){
+                                  setState((){
+                                    isDisabled = false;
+                                  });
+                                }else {
+                                  setState((){
+                                    isDisabled = true;
+                                  });
+                                }
+                              },
                             ),
                             const SizedBox(
                               height: 20,
                             ),
                             SFTextFieldPassword(
                               labelText: LocaleKeys.new_password,
-                              controller: newPasswordController,
+                              valueChanged: (value){
+                                newPassword = value ;
+                                if(
+                                email.isNotEmpty && code.isNotEmpty && yourPassword.isNotEmpty && newPassword.isNotEmpty ){
+                                  setState((){
+                                    isDisabled = false;
+                                  });
+                                }else {
+                                  setState((){
+                                    isDisabled = true;
+                                  });
+                                }
+                              },
                             ),
                           ],
                         ),
@@ -93,10 +129,7 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                   textStyle: TextStyles.w600WhiteSize16,
                   gradient: AppColors.gradientBlueButton,
                   width: double.infinity,
-                  disabled: emailController.text.isEmpty ||
-                      codeController.text.isEmpty ||
-                      youPasswordController.text.isEmpty ||
-                      newPasswordController.text.isEmpty ? true : false,
+                  disabled: isDisabled,
                   onPressed: () {},
                 ),
                 const SizedBox(

@@ -149,7 +149,7 @@ class StakingList extends StatelessWidget {
           ],
         ),
         SFCard(
-          padding: const EdgeInsets.all(24.0),
+          padding:  EdgeInsets.all(MediaQuery.of(context).size.width * 0.05),
           child: Column(
             children: [
               Row(
