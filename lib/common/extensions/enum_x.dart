@@ -2,7 +2,6 @@ import 'dart:ui';
 
 import 'package:slee_fi/common/enum/enum.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
-import 'package:slee_fi/resources/resources.dart';
 
 extension BedTypeX on BedType {
   Color get color {
