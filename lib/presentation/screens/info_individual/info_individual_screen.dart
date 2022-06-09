@@ -53,7 +53,7 @@ class InfoIndividualScreen extends StatelessWidget {
                             fit: BoxFit.cover,
                           ),
                         ),
-                        child: const SFIcon(Imgs.bed180),
+                        child: const SFIcon(Imgs.bed600),
                       ),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,

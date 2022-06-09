@@ -138,6 +138,12 @@ class _AddDurationState extends State<AddDuration> {
   List<String> days = ["1", "7", "30", "60", "180"];
 
   @override
+  void dispose() {
+    dayEditingController.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,

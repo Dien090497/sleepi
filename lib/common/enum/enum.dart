@@ -3,7 +3,7 @@ import 'package:slee_fi/resources/resources.dart';
 enum UserRole { guest, admin }
 
 enum BedType {
-  short('Short', Imgs.bed180),
+  short('Short', Imgs.bed600),
   middle('Middle', Ics.middleBed),
   flexible('Flexible', Ics.flexibleBed),
   long('Long', Ics.longBed);

@@ -7,6 +7,8 @@ class Imgs {
   static const String background = 'assets/images/background.png';
   static const String bed120 = 'assets/images/bed_120.png';
   static const String bed180 = 'assets/images/bed_180.png';
+  static const String bed360 = 'assets/images/bed_360.png';
+  static const String bed600 = 'assets/images/bed_600.png';
   static const String bedroomGacha = 'assets/images/bedroom_gacha.png';
   static const String bell = 'assets/images/bell.png';
   static const String binance = 'assets/images/binance.png';
@@ -18,6 +20,7 @@ class Imgs {
   static const String emptyBedBox = 'assets/images/empty_bed_box.png';
   static const String errorNoBed = 'assets/images/error_no_bed.png';
   static const String gacha = 'assets/images/gacha.png';
+  static const String health = 'assets/images/health.png';
   static const String healthcare = 'assets/images/healthcare.png';
   static const String homePage = 'assets/images/home_page.png';
   static const String icItems = 'assets/images/ic_items.png';
@@ -61,6 +64,8 @@ class Imgs {
     background,
     bed120,
     bed180,
+    bed360,
+    bed600,
     bedroomGacha,
     bell,
     binance,
@@ -72,6 +77,7 @@ class Imgs {
     emptyBedBox,
     errorNoBed,
     gacha,
+    health,
     healthcare,
     homePage,
     icItems,

@@ -11,20 +11,34 @@ import 'package:slee_fi/common/widgets/sf_textfield_password.dart';
 import 'package:slee_fi/common/widgets/sf_textfield_text_button.dart';
 import 'package:slee_fi/l10n/locale_keys.g.dart';
 
-class ChangePasswordScreen extends StatelessWidget {
+class ChangePasswordScreen extends StatefulWidget {
   const ChangePasswordScreen({Key? key}) : super(key: key);
 
   @override
+  State<ChangePasswordScreen> createState() => _ChangePasswordScreenState();
+}
+
+class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
+  TextEditingController emailController = TextEditingController(text: '');
+  TextEditingController codeController = TextEditingController(text: '');
+  TextEditingController youPasswordController = TextEditingController(text: '');
+  TextEditingController newPasswordController = TextEditingController(text: '');
+
+
+  @override
+  void dispose() {
+    emailController.dispose();
+    codeController.dispose();
+    youPasswordController.dispose();
+    newPasswordController.dispose();
+    super.dispose();
+  }
+  @override
   Widget build(BuildContext context) {
-    TextEditingController emailController = TextEditingController(text: '');
-    TextEditingController codeController = TextEditingController(text: '');
-    TextEditingController youPasswordController =
-        TextEditingController(text: '');
-    TextEditingController newPasswordController =
-        TextEditingController(text: '');
 
     return DismissKeyboardWidget(
       child: BackgroundWidget(
+        resizeToAvoidBottomInset: false,
         appBar: SFAppBar(
           context: context,
           title: LocaleKeys.change_password,
@@ -79,10 +93,10 @@ class ChangePasswordScreen extends StatelessWidget {
                   textStyle: TextStyles.w600WhiteSize16,
                   gradient: AppColors.gradientBlueButton,
                   width: double.infinity,
-                  disabled: emailController.text == '' ||
-                      codeController.text == '' ||
-                      youPasswordController.text == '' ||
-                      newPasswordController.text == '',
+                  disabled: emailController.text.isEmpty ||
+                      codeController.text.isEmpty ||
+                      youPasswordController.text.isEmpty ||
+                      newPasswordController.text.isEmpty ? true : false,
                   onPressed: () {},
                 ),
                 const SizedBox(
