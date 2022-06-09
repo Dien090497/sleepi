@@ -152,10 +152,11 @@ class _$TimeEntityCopyWithImpl<$Res> implements $TimeEntityCopyWith<$Res> {
 }
 
 /// @nodoc
-abstract class _$TimeEntityCopyWith<$Res> implements $TimeEntityCopyWith<$Res> {
-  factory _$TimeEntityCopyWith(
-          _TimeEntity value, $Res Function(_TimeEntity) then) =
-      __$TimeEntityCopyWithImpl<$Res>;
+abstract class _$$_TimeEntityCopyWith<$Res>
+    implements $TimeEntityCopyWith<$Res> {
+  factory _$$_TimeEntityCopyWith(
+          _$_TimeEntity value, $Res Function(_$_TimeEntity) then) =
+      __$$_TimeEntityCopyWithImpl<$Res>;
   @override
   $Res call(
       {String abbreviation,
@@ -176,14 +177,14 @@ abstract class _$TimeEntityCopyWith<$Res> implements $TimeEntityCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$TimeEntityCopyWithImpl<$Res> extends _$TimeEntityCopyWithImpl<$Res>
-    implements _$TimeEntityCopyWith<$Res> {
-  __$TimeEntityCopyWithImpl(
-      _TimeEntity _value, $Res Function(_TimeEntity) _then)
-      : super(_value, (v) => _then(v as _TimeEntity));
+class __$$_TimeEntityCopyWithImpl<$Res> extends _$TimeEntityCopyWithImpl<$Res>
+    implements _$$_TimeEntityCopyWith<$Res> {
+  __$$_TimeEntityCopyWithImpl(
+      _$_TimeEntity _value, $Res Function(_$_TimeEntity) _then)
+      : super(_value, (v) => _then(v as _$_TimeEntity));
 
   @override
-  _TimeEntity get _value => super._value as _TimeEntity;
+  _$_TimeEntity get _value => super._value as _$_TimeEntity;
 
   @override
   $Res call({
@@ -203,7 +204,7 @@ class __$TimeEntityCopyWithImpl<$Res> extends _$TimeEntityCopyWithImpl<$Res>
     Object? utcOffset = freezed,
     Object? weekNumber = freezed,
   }) {
-    return _then(_TimeEntity(
+    return _then(_$_TimeEntity(
       abbreviation: abbreviation == freezed
           ? _value.abbreviation
           : abbreviation // ignore: cast_nullable_to_non_nullable
@@ -350,7 +351,7 @@ class _$_TimeEntity with DiagnosticableTreeMixin implements _TimeEntity {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _TimeEntity &&
+            other is _$_TimeEntity &&
             const DeepCollectionEquality()
                 .equals(other.abbreviation, abbreviation) &&
             const DeepCollectionEquality().equals(other.clientIp, clientIp) &&
@@ -392,8 +393,8 @@ class _$_TimeEntity with DiagnosticableTreeMixin implements _TimeEntity {
 
   @JsonKey(ignore: true)
   @override
-  _$TimeEntityCopyWith<_TimeEntity> get copyWith =>
-      __$TimeEntityCopyWithImpl<_TimeEntity>(this, _$identity);
+  _$$_TimeEntityCopyWith<_$_TimeEntity> get copyWith =>
+      __$$_TimeEntityCopyWithImpl<_$_TimeEntity>(this, _$identity);
 }
 
 abstract class _TimeEntity implements TimeEntity {
@@ -446,6 +447,6 @@ abstract class _TimeEntity implements TimeEntity {
   int get weekNumber => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
-  _$TimeEntityCopyWith<_TimeEntity> get copyWith =>
+  _$$_TimeEntityCopyWith<_$_TimeEntity> get copyWith =>
       throw _privateConstructorUsedError;
 }

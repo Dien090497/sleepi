@@ -25,15 +25,17 @@ class _ModalTransferBetweenState extends State<ModalTransferBetween> {
     LocaleKeys.slgt,
     LocaleKeys.beds,
     LocaleKeys.jewels,
-    LocaleKeys.bed_box
+    LocaleKeys.bed_box,
+    LocaleKeys.item
   ];
   List urlImages = [
     Ics.icSolanaCircle,
     Ics.icSlgt,
     Ics.icSlgt,
     Ics.icBeds,
-    Imgs.jewels,
-    Ics.icBedBoxes
+    Ics.icJewels,
+    Ics.icBedBoxes,
+    Imgs.icItems,
   ];
 
   @override

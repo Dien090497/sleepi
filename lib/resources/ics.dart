@@ -22,14 +22,17 @@ class Ics {
   static const String home = 'assets/icons/home.svg';
   static const String icAppleHealth = 'assets/icons/ic_apple_health.svg';
   static const String icArrowUpRight = 'assets/icons/ic_arrow_up_right.svg';
+  static const String icAvax = 'assets/icons/ic_avax.svg';
   static const String icBedBoxes = 'assets/icons/ic_bed_boxes.svg';
   static const String icBeds = 'assets/icons/ic_beds.svg';
   static const String icCalculator = 'assets/icons/ic_calculator.svg';
   static const String icCircleQuestion = 'assets/icons/ic_circle_question.svg';
   static const String icDeleteTwo = 'assets/icons/ic_delete_two.svg';
+  static const String icDiamond = 'assets/icons/ic_diamond.svg';
   static const String icDownload = 'assets/icons/ic_download.svg';
   static const String icEdit = 'assets/icons/ic_edit.svg';
   static const String icEye = 'assets/icons/ic_eye.svg';
+  static const String icJewels = 'assets/icons/ic_jewels.svg';
   static const String icLock = 'assets/icons/ic_lock.svg';
   static const String icMicrophone = 'assets/icons/ic_microphone.svg';
   static const String icMotionData = 'assets/icons/ic_motion_data.svg';
@@ -85,14 +88,17 @@ class Ics {
     home,
     icAppleHealth,
     icArrowUpRight,
+    icAvax,
     icBedBoxes,
     icBeds,
     icCalculator,
     icCircleQuestion,
     icDeleteTwo,
+    icDiamond,
     icDownload,
     icEdit,
     icEye,
+    icJewels,
     icLock,
     icMicrophone,
     icMotionData,

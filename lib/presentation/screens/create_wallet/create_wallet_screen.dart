@@ -19,57 +19,54 @@ class CreateWalletScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return DismissKeyboardWidget(
       child: BackgroundWidget(
-        child: Scaffold(
-          backgroundColor: AppColors.transparent,
-          appBar: SFAppBar(
-            context: context,
-            title: LocaleKeys.create_wallet,
-            textStyle: TextStyles.bold18LightWhite,
-          ),
-          body: SafeArea(
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 23),
-              child: Column(
-                children: [
-                  Expanded(
-                    child: ListView(
-                      children: [
-                        SFCard(
-                          padding: const EdgeInsets.symmetric(
-                              horizontal: 16, vertical: 24),
-                          child: Column(
-                            children: [
-                              SFTextFieldTextButton(
-                                labelText: LocaleKeys.email_verification_code,
-                                textButton: LocaleKeys.send_code,
-                                onPressed: () {},
-                              ),
-                              const SizedBox(height: 16),
-                              SFText(
-                                keyText: LocaleKeys
-                                    .you_have_already_created_a_wallet_address,
-                                style: TextStyles.w400lightGrey12,
-                              ),
-                            ],
-                          ),
+        appBar: SFAppBar(
+          context: context,
+          title: LocaleKeys.create_wallet,
+          textStyle: TextStyles.bold18LightWhite,
+        ),
+        child: SafeArea(
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 23),
+            child: Column(
+              children: [
+                Expanded(
+                  child: ListView(
+                    children: [
+                      SFCard(
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 16, vertical: 24),
+                        child: Column(
+                          children: [
+                            SFTextFieldTextButton(
+                              labelText: LocaleKeys.email_verification_code,
+                              textButton: LocaleKeys.send_code,
+                              onPressed: () {},
+                            ),
+                            const SizedBox(height: 16),
+                            SFText(
+                              keyText: LocaleKeys
+                                  .you_have_already_created_a_wallet_address,
+                              style: TextStyles.w400lightGrey12,
+                            ),
+                          ],
                         ),
-                      ],
-                    ),
+                      ),
+                    ],
                   ),
-                  SFButton(
-                    text: LocaleKeys.create_wallet,
-                    textStyle: TextStyles.w600WhiteSize16,
-                    height: 48,
-                    width: double.infinity,
-                    color: AppColors.blue,
-                    onPressed: () {
-                      Navigator.pushNamed(context, R.createPasscode,
-                          arguments: CreatePasscodeArguments(R.showSeedPhrase));
-                    },
-                  ),
-                  const SizedBox(height: 24,),
-                ],
-              ),
+                ),
+                SFButton(
+                  text: LocaleKeys.create_wallet,
+                  textStyle: TextStyles.w600WhiteSize16,
+                  height: 48,
+                  width: double.infinity,
+                  color: AppColors.blue,
+                  onPressed: () {
+                    Navigator.pushNamed(context, R.createPasscode,
+                        arguments: CreatePasscodeArguments(R.showSeedPhrase));
+                  },
+                ),
+                const SizedBox(height: 24,),
+              ],
             ),
           ),
         ),

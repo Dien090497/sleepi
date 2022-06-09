@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
 import 'package:slee_fi/common/widgets/background_widget.dart';
 import 'package:slee_fi/common/widgets/sf_app_bar.dart';
@@ -12,16 +11,12 @@ class SeedPhraseScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BackgroundWidget(
-      child: Scaffold(
-        backgroundColor: AppColors.transparent,
-        appBar: SFAppBar(
-          context: context,
-          title: LocaleKeys.seed_phrase,
-          textStyle: TextStyles.bold18LightWhite,
-        ),
-        body: const SafeArea(
-            child: SeedPhraseList()),
+      appBar: SFAppBar(
+        context: context,
+        title: LocaleKeys.seed_phrase,
+        textStyle: TextStyles.bold18LightWhite,
       ),
+      child: const SafeArea(child: SeedPhraseList()),
     );
   }
 }

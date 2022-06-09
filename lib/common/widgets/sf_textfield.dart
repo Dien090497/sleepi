@@ -12,6 +12,7 @@ class SFTextField extends StatelessWidget {
     this.suffix,
     this.suffixIcon,
     this.noBorder = false,
+    this.readonly = false,
     this.showLabel = true,
     Key? key,
     this.maxLine,
@@ -19,14 +20,17 @@ class SFTextField extends StatelessWidget {
     this.controller,
     this.onChanged,
     this.textInputType,
+    this.textStyle,
   }) : super(key: key);
 
   final String? labelText;
   final String? hintText;
+  final TextStyle? textStyle;
   final TextStyle? hintStyle;
   final Widget? suffix;
   final Widget? suffixIcon;
   final bool noBorder;
+  final bool readonly;
   final int? maxLine;
   final int? maxLength;
   final TextEditingController? controller;
@@ -59,10 +63,11 @@ class SFTextField extends StatelessWidget {
               )
             : const SizedBox(),
         TextField(
-          style: TextStyles.w400White16,
+          style: textStyle ?? TextStyles.w400White16,
           controller: controller,
           onChanged: onChanged,
           keyboardType: textInputType,
+          readOnly: readonly,
           decoration: InputDecoration(
             isDense: true,
             // hintText: hintText != null ? translate(hintText!) : null,
@@ -76,7 +81,7 @@ class SFTextField extends StatelessWidget {
             enabledBorder: border,
             errorBorder: border,
             focusedErrorBorder: border,
-            counterText: ""
+            counterText: "",
           ),
           maxLines: maxLine ?? 1,
           maxLength: maxLength,

@@ -29,9 +29,7 @@ class _MiddleBedState extends State<MiddleBed> {
           keyText: LocaleKeys.main_bed,
           style: TextStyles.white18,
         ),
-        const SizedBox(
-          height: 16,
-        ),
+        const SizedBox(height: 16),
         Container(
           width: size.width,
           padding: const EdgeInsets.symmetric(
@@ -72,10 +70,7 @@ class _MiddleBedState extends State<MiddleBed> {
                         Navigator.pushNamed(context, R.nftInfo,
                             arguments: false);
                       },
-                      child: SFIcon(
-                        beds[i].image,
-                        height: 72,
-                      ),
+                      child: SFIcon(beds[i].image, height: 72),
                     ),
                     InkWell(
                       onTap: () {
@@ -98,7 +93,7 @@ class _MiddleBedState extends State<MiddleBed> {
                 children: [
                   const Spacer(),
                   SFButton(
-                    text: 'IDIDID',
+                    text: 'B1768',
                     textStyle: TextStyles.blue14,
                     color: Colors.white.withOpacity(0.05),
                     radius: 50,

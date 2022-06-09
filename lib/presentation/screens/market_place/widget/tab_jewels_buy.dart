@@ -1,8 +1,8 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:slee_fi/common/widgets/sf_alert_dialog.dart';
 import 'package:slee_fi/common/widgets/sf_bottom_sheets.dart';
-import 'package:slee_fi/common/widgets/sf_dialog.dart';
 import 'package:slee_fi/common/widgets/sf_gridview.dart';
 import 'package:slee_fi/common/widgets/sf_icon.dart';
 import 'package:slee_fi/l10n/locale_keys.g.dart';
@@ -19,20 +19,18 @@ class TabJewelsBuy extends StatelessWidget {
   }) : super(key: key);
 
   void _showJewelDialog(BuildContext context, String img) {
-    showCustomDialog(
+    showCustomAlertDialog(
       context,
       padding: const EdgeInsets.all(24),
-      children: [
-        PopUpJewelMarketPlace(
-          icon: img,
-          name: 'name',
-          level: 'Lv.1',
-          id: '12345678910',
-          attribute: 'attribute',
-          effect: 'effect',
-          onConfirmTap: () {  },
-        ),
-      ],
+      children:   PopUpJewelMarketPlace(
+        icon: img,
+        name: 'name',
+        level: 'Lv.1',
+        id: '12345678910',
+        attribute: 'attribute',
+        effect: 'effect',
+        onConfirmTap: () {  },
+      ),
     );
   }
 
@@ -45,6 +43,8 @@ class TabJewelsBuy extends StatelessWidget {
       Imgs.jewelBlue,
       Imgs.jewelRed
     ];
+    int min = 65, max = 90;
+
     return DefaultTabController(
       length: 2,
       child: Padding(
@@ -70,12 +70,17 @@ class TabJewelsBuy extends StatelessWidget {
                       while (id < 1000) {
                         id *= 10;
                       }
+                      int r = min + rnd.nextInt(max - min);
+                      String generateRandomString(int len) {
+                        return String.fromCharCodes(List.generate(len, (index) => r));
+                      }
+
                       return GestureDetector(
                         onTap: () {
                           _showJewelDialog(context, jewels[i]);
                         },
                         child: ItemBedBuyWidget(
-                          id: id.toInt(),
+                          id: '${generateRandomString(1)}${id.toInt()}',
                           icon: jewels[i % jewels.length],
                         ),
                       );

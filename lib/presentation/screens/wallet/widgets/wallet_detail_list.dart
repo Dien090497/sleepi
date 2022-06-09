@@ -15,20 +15,22 @@ class WalletDetailList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     List keyList = [
-      LocaleKeys.avax,
       LocaleKeys.slft,
       LocaleKeys.slgt,
+      LocaleKeys.avax,
       LocaleKeys.beds,
       LocaleKeys.jewels,
-      LocaleKeys.bed_box
+      LocaleKeys.bed_box,
+      LocaleKeys.item
     ];
     List icons = [
-      Ics.icSolanaCircle,
       Ics.icSlft,
       Ics.icSlgt,
+      Ics.icAvax,
       Ics.icBeds,
-      Imgs.jewels,
-      Ics.icBedBoxes
+      Ics.icJewels,
+      Ics.icBedBoxes,
+      Imgs.icItems
     ];
     return Container(
       alignment: Alignment.center,
@@ -47,11 +49,20 @@ class WalletDetailList extends StatelessWidget {
           itemBuilder: (BuildContext context, int index) {
             return SFCard(
               onTap: () {
-                if(index < 3 )Navigator.pushNamed(context, R.transactionDetail, arguments: TransactionDetailArguments(keyList[index], icons[index]));
+                if (index < 3) {
+                  Navigator.pushNamed(context, R.transactionDetail,
+                      arguments: TransactionDetailArguments(
+                          keyList[index], icons[index]));
+                }
               },
               child: ListTile(
-                leading: SFIcon(
-                  icons[index],
+                leading: Padding(
+                  padding: EdgeInsets.only(left: icons[index] == Ics.icAvax ? 4 : 0),
+                  child: SFIcon(
+                    icons[index],
+                    width: icons[index] == Ics.icAvax ? 32 : 40,
+                    height: icons[index] == Ics.icAvax ? 32 : 40,
+                  ),
                 ),
                 title: SFText(
                     keyText: keyList[index], style: TextStyles.lightWhite16),

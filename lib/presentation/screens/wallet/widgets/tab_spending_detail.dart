@@ -39,7 +39,7 @@ class TabSpendingDetail extends StatelessWidget {
                         // onTap: () => Navigator.pushNamed(context, R.staking),
                         margin: const EdgeInsets.only(top: 8),
                         child: ListTile(
-                          leading: const SFIcon(Ics.icSlft),
+                          leading: const SFIcon(Ics.icSlft, width: 40, height: 40,),
                           minLeadingWidth: 12,
                           title: SFText(
                               keyText: LocaleKeys.slft,
@@ -54,7 +54,7 @@ class TabSpendingDetail extends StatelessWidget {
                       SFCard(
                         margin: const EdgeInsets.only(top: 8),
                         child: ListTile(
-                          leading: const SFIcon(Ics.icSlgt),
+                          leading: const SFIcon(Ics.icSlgt, width: 40, height: 40,),
                           minLeadingWidth: 12,
                           title: SFText(
                               keyText: LocaleKeys.slgt,
@@ -69,7 +69,10 @@ class TabSpendingDetail extends StatelessWidget {
                       SFCard(
                         margin: const EdgeInsets.only(top: 8),
                         child: ListTile(
-                          leading: Image.asset(Imgs.avax),
+                          leading: const Padding(
+                            padding: EdgeInsets.only(left: 4.0),
+                            child: SFIcon(Ics.icAvax, width: 32, height: 32,),
+                          ),
                           minLeadingWidth: 12,
                           title: SFText(
                             keyText: LocaleKeys.avax,

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
 import 'package:slee_fi/common/widgets/background_widget.dart';
 import 'package:slee_fi/common/widgets/sf_app_bar.dart';
@@ -14,24 +13,25 @@ class SettingScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BackgroundWidget(
-      child: Scaffold(
-        backgroundColor: AppColors.transparent,
-        appBar: SFAppBar(
-          context: context,
-          title: LocaleKeys.setting,
-          textStyle: TextStyles.bold18LightWhite,
-        ),
-        body: SafeArea(
-          child: ListView(
-            padding: const EdgeInsets.symmetric(horizontal: 16),
-            children: const [
-              AverageInfoWidget(),
-              SizedBox(height: 24,),
-              GeneralWidget(),
-              SizedBox(height: 24,),
-              ProfileWidget(),
-            ],
-          ),
+      appBar: SFAppBar(
+        context: context,
+        title: LocaleKeys.setting,
+        textStyle: TextStyles.bold18LightWhite,
+      ),
+      child: SafeArea(
+        child: ListView(
+          padding: const EdgeInsets.symmetric(horizontal: 16),
+          children: const [
+            AverageInfoWidget(),
+            SizedBox(
+              height: 24,
+            ),
+            GeneralWidget(),
+            SizedBox(
+              height: 24,
+            ),
+            ProfileWidget(),
+          ],
         ),
       ),
     );

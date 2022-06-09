@@ -24,35 +24,46 @@ class TransferScreen extends StatelessWidget {
       ),
       child: DismissKeyboardWidget(
         child: SafeArea(
-          child: SingleChildScrollView(
-            physics: const ClampingScrollPhysics(),
-            child:  Column(
-              mainAxisSize: MainAxisSize.max,
-              children:   [
-                const TransferWidget(),
-                const  SizedBox(
-                  height: 24,
-                ),
-                const TransferList(),
-                Align(
-                  alignment: Alignment.bottomCenter,
-                  child: Padding(
-                    padding: const EdgeInsets.fromLTRB(12, 0, 12, 24),
-                    child: SFButton(
-                      text: LocaleKeys.confirm_transfer,
-                      textStyle: TextStyles.w600WhiteSize16,
-                      width: double.infinity,
-                      gradient: AppColors.gradientBlueButton,
-                      onPressed: () {
-                        showCustomAlertDialog(context,
-                            showClosed: false,
-                            children: const PopUpConfirmTransfer());
-                      },
+          child: Stack(
+            children: [
+              SingleChildScrollView(
+                physics: const ClampingScrollPhysics(),
+                child:  ConstrainedBox(
+                  constraints: BoxConstraints(
+                    minHeight: MediaQuery.of(context).size.height,
+                  ),
+                  child: IntrinsicHeight(
+                    child: Column(
+                      mainAxisSize: MainAxisSize.max,
+                      children:   const [
+                        TransferWidget(),
+                        SizedBox(
+                          height: 24,
+                        ),
+                        Expanded(child: TransferList()),
+                      ],
                     ),
                   ),
                 ),
-              ],
-            ),
+              ),
+              Align(
+                alignment: Alignment.bottomCenter,
+                child: Padding(
+                  padding: const EdgeInsets.fromLTRB(24, 0, 24, 24),
+                  child: SFButton(
+                    text: LocaleKeys.confirm_transfer,
+                    textStyle: TextStyles.w600WhiteSize16,
+                    width: double.infinity,
+                    gradient: AppColors.gradientBlueButton,
+                    onPressed: () {
+                      showCustomAlertDialog(context,
+                          showClosed: false,
+                          children: const PopUpConfirmTransfer());
+                    },
+                  ),
+                ),
+              ),
+            ],
           ),
         ),
       ),

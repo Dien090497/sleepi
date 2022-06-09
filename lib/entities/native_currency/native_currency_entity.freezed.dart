@@ -97,11 +97,11 @@ class _$NativeCurrencyEntityCopyWithImpl<$Res>
 }
 
 /// @nodoc
-abstract class _$NativeCurrencyEntityCopyWith<$Res>
+abstract class _$$_NativeCurrencyEntityCopyWith<$Res>
     implements $NativeCurrencyEntityCopyWith<$Res> {
-  factory _$NativeCurrencyEntityCopyWith(_NativeCurrencyEntity value,
-          $Res Function(_NativeCurrencyEntity) then) =
-      __$NativeCurrencyEntityCopyWithImpl<$Res>;
+  factory _$$_NativeCurrencyEntityCopyWith(_$_NativeCurrencyEntity value,
+          $Res Function(_$_NativeCurrencyEntity) then) =
+      __$$_NativeCurrencyEntityCopyWithImpl<$Res>;
   @override
   $Res call(
       {int id,
@@ -114,15 +114,15 @@ abstract class _$NativeCurrencyEntityCopyWith<$Res>
 }
 
 /// @nodoc
-class __$NativeCurrencyEntityCopyWithImpl<$Res>
+class __$$_NativeCurrencyEntityCopyWithImpl<$Res>
     extends _$NativeCurrencyEntityCopyWithImpl<$Res>
-    implements _$NativeCurrencyEntityCopyWith<$Res> {
-  __$NativeCurrencyEntityCopyWithImpl(
-      _NativeCurrencyEntity _value, $Res Function(_NativeCurrencyEntity) _then)
-      : super(_value, (v) => _then(v as _NativeCurrencyEntity));
+    implements _$$_NativeCurrencyEntityCopyWith<$Res> {
+  __$$_NativeCurrencyEntityCopyWithImpl(_$_NativeCurrencyEntity _value,
+      $Res Function(_$_NativeCurrencyEntity) _then)
+      : super(_value, (v) => _then(v as _$_NativeCurrencyEntity));
 
   @override
-  _NativeCurrencyEntity get _value => super._value as _NativeCurrencyEntity;
+  _$_NativeCurrencyEntity get _value => super._value as _$_NativeCurrencyEntity;
 
   @override
   $Res call({
@@ -134,7 +134,7 @@ class __$NativeCurrencyEntityCopyWithImpl<$Res>
     Object? balance = freezed,
     Object? balanceUpdated = freezed,
   }) {
-    return _then(_NativeCurrencyEntity(
+    return _then(_$_NativeCurrencyEntity(
       id == freezed
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
@@ -214,7 +214,7 @@ class _$_NativeCurrencyEntity
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _NativeCurrencyEntity &&
+            other is _$_NativeCurrencyEntity &&
             const DeepCollectionEquality().equals(other.id, id) &&
             const DeepCollectionEquality().equals(other.name, name) &&
             const DeepCollectionEquality().equals(other.symbol, symbol) &&
@@ -238,8 +238,8 @@ class _$_NativeCurrencyEntity
 
   @JsonKey(ignore: true)
   @override
-  _$NativeCurrencyEntityCopyWith<_NativeCurrencyEntity> get copyWith =>
-      __$NativeCurrencyEntityCopyWithImpl<_NativeCurrencyEntity>(
+  _$$_NativeCurrencyEntityCopyWith<_$_NativeCurrencyEntity> get copyWith =>
+      __$$_NativeCurrencyEntityCopyWithImpl<_$_NativeCurrencyEntity>(
           this, _$identity);
 }
 
@@ -266,6 +266,6 @@ abstract class _NativeCurrencyEntity implements NativeCurrencyEntity {
   bool get balanceUpdated => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
-  _$NativeCurrencyEntityCopyWith<_NativeCurrencyEntity> get copyWith =>
+  _$$_NativeCurrencyEntityCopyWith<_$_NativeCurrencyEntity> get copyWith =>
       throw _privateConstructorUsedError;
 }

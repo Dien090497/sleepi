@@ -472,7 +472,7 @@ extension NativeCurrencyIsarModelQueryFilter on QueryBuilder<
   }
 
   QueryBuilder<NativeCurrencyIsarModel, NativeCurrencyIsarModel,
-      QAfterFilterCondition> idEqualTo(int? value) {
+      QAfterFilterCondition> idEqualTo(int value) {
     return addFilterConditionInternal(FilterCondition(
       type: ConditionType.eq,
       property: 'id',
@@ -482,7 +482,7 @@ extension NativeCurrencyIsarModelQueryFilter on QueryBuilder<
 
   QueryBuilder<NativeCurrencyIsarModel, NativeCurrencyIsarModel,
       QAfterFilterCondition> idGreaterThan(
-    int? value, {
+    int value, {
     bool include = false,
   }) {
     return addFilterConditionInternal(FilterCondition(
@@ -495,7 +495,7 @@ extension NativeCurrencyIsarModelQueryFilter on QueryBuilder<
 
   QueryBuilder<NativeCurrencyIsarModel, NativeCurrencyIsarModel,
       QAfterFilterCondition> idLessThan(
-    int? value, {
+    int value, {
     bool include = false,
   }) {
     return addFilterConditionInternal(FilterCondition(
@@ -508,8 +508,8 @@ extension NativeCurrencyIsarModelQueryFilter on QueryBuilder<
 
   QueryBuilder<NativeCurrencyIsarModel, NativeCurrencyIsarModel,
       QAfterFilterCondition> idBetween(
-    int? lower,
-    int? upper, {
+    int lower,
+    int upper, {
     bool includeLower = true,
     bool includeUpper = true,
   }) {

@@ -40,6 +40,7 @@ class TabJewelsDetail extends StatelessWidget {
       Imgs.jewelBlue,
       Imgs.jewelRed
     ];
+    int min = 65, max = 90;
 
     return DefaultTabController(
       length: 2,
@@ -60,12 +61,16 @@ class TabJewelsDetail extends StatelessWidget {
                     while (id < 1000) {
                       id *= 10;
                     }
+                    int r = min + rnd.nextInt(max - min);
+                    String generateRandomString(int len) {
+                      return String.fromCharCodes(List.generate(len, (index) => r));
+                    }
                     return GestureDetector(
                       onTap: () {
                         _showJewelDialog(context, jewels[i]);
                       },
                       child: MyJewelsShortWidget(
-                        id: id.toInt(),
+                        id: '${generateRandomString(1)}${id.toInt()}',
                         icon: jewels[i % jewels.length],
                       ),
                     );

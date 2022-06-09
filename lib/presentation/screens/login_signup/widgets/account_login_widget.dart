@@ -44,6 +44,7 @@ class _AccountLoginState extends State<AccountLoginWidget> {
         isLoginSignup
             ? const SFTextFieldTextButton(
           labelText: LocaleKeys.email_verification_code,
+          textInputType: TextInputType.number,
         )
             : const SFTextFieldPassword(labelText: LocaleKeys.password,),
         const SizedBox(height: 37),
