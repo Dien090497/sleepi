@@ -5,6 +5,7 @@ import 'package:slee_fi/common/widgets/background_widget.dart';
 import 'package:slee_fi/common/widgets/sf_app_bar.dart';
 import 'package:slee_fi/common/widgets/sf_buttons.dart';
 import 'package:slee_fi/l10n/locale_keys.g.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class QuestionScreen extends StatelessWidget {
   const QuestionScreen({Key? key}) : super(key: key);
@@ -26,37 +27,34 @@ class QuestionScreen extends StatelessWidget {
                   text: LocaleKeys.how_to_play,
                   textStyle: TextStyles.w600WhiteSize16,
                   gradient: AppColors.gradientBlueButton,
-                  onPressed: () {},
+                  onPressed: () => _launchUrl('https://sleefi.com/how-to-play'),
                   width: size.width * 0.45,
                   height: 48,
                 ),
-                const SizedBox(
-                  height: 24,
-                ),
+                const SizedBox(height: 24),
                 SFButton(
                   text: LocaleKeys.white_paper,
                   textStyle: TextStyles.bold16LightWhite,
                   color: AppColors.white.withOpacity(0.07),
+                  onPressed: () => _launchUrl('https://sleefi.gitbook.io/en/v/whitepaper'),
                   width: size.width * 0.45,
                   height: 48,
                 ),
-                const SizedBox(
-                  height: 24,
-                ),
+                const SizedBox(height: 24),
                 SFButton(
                   text: LocaleKeys.lite_paper,
                   textStyle: TextStyles.bold16LightWhite,
                   color: AppColors.white.withOpacity(0.07),
                   width: size.width * 0.45,
+                  onPressed: () => _launchUrl('https://sleefi.com/litepaper'),
                   height: 48,
                 ),
-                const SizedBox(
-                  height: 24,
-                ),
+                const SizedBox(height: 24),
                 SFButton(
                   text: LocaleKeys.link_tree,
                   textStyle: TextStyles.bold16LightWhite,
                   color: AppColors.white.withOpacity(0.07),
+                  onPressed: () => _launchUrl('https://linktr.ee/sleefi'),
                   width: size.width * 0.45,
                   height: 48,
                 ),
@@ -66,5 +64,9 @@ class QuestionScreen extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  _launchUrl(String url) async {
+    if (!await launchUrl(Uri.parse(url))) throw 'Could not launch $url';
   }
 }
