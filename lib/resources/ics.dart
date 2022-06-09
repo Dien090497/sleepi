@@ -28,6 +28,7 @@ class Ics {
   static const String icCalculator = 'assets/icons/ic_calculator.svg';
   static const String icCircleQuestion = 'assets/icons/ic_circle_question.svg';
   static const String icDeleteTwo = 'assets/icons/ic_delete_two.svg';
+  static const String icDiamond = 'assets/icons/ic_diamond.svg';
   static const String icDownload = 'assets/icons/ic_download.svg';
   static const String icEdit = 'assets/icons/ic_edit.svg';
   static const String icEye = 'assets/icons/ic_eye.svg';
@@ -93,6 +94,7 @@ class Ics {
     icCalculator,
     icCircleQuestion,
     icDeleteTwo,
+    icDiamond,
     icDownload,
     icEdit,
     icEye,

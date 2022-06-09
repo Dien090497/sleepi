@@ -6,6 +6,7 @@ class Imgs {
   static const String avax = 'assets/images/avax.png';
   static const String background = 'assets/images/background.png';
   static const String bedroomGacha = 'assets/images/bedroom_gacha.png';
+  static const String bell = 'assets/images/bell.png';
   static const String binance = 'assets/images/binance.png';
   static const String bonus = 'assets/images/bonus.png';
   static const String borderBed = 'assets/images/borderBed.png';
@@ -29,8 +30,10 @@ class Imgs {
   static const String lvUp = 'assets/images/lv_up.png';
   static const String market = 'assets/images/market.png';
   static const String mic = 'assets/images/mic.png';
+  static const String microphone = 'assets/images/microphone.png';
   static const String mint = 'assets/images/mint.png';
   static const String mintShoe = 'assets/images/mint_shoe.png';
+  static const String motion = 'assets/images/motion.png';
   static const String motionData = 'assets/images/motion_data.png';
   static const String noTransactionRecord =
       'assets/images/no_transaction_record.png';
@@ -55,6 +58,7 @@ class Imgs {
     avax,
     background,
     bedroomGacha,
+    bell,
     binance,
     bonus,
     borderBed,
@@ -78,8 +82,10 @@ class Imgs {
     lvUp,
     market,
     mic,
+    microphone,
     mint,
     mintShoe,
+    motion,
     motionData,
     noTransactionRecord,
     notification,

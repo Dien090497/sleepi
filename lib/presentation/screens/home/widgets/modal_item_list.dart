@@ -26,6 +26,7 @@ class ModalItemList extends StatelessWidget {
       Imgs.jewelBlue,
       Imgs.jewelRed
     ];
+    int min = 65, max = 90;
 
     return SafeArea(
       child: Column(
@@ -71,6 +72,11 @@ class ModalItemList extends StatelessWidget {
                   while (id < 1000) {
                     id *= 10;
                   }
+                  int r = min + rnd.nextInt(max - min);
+                  String generateRandomString(int len) {
+                    return String.fromCharCodes(List.generate(len, (index) => r));
+                  }
+
                   return GestureDetector(
                     onTap: () {
                       showCustomAlertDialog(context,
@@ -80,7 +86,7 @@ class ModalItemList extends StatelessWidget {
                           ));
                     },
                     child: MyJewelsShortWidget(
-                      id: id.toInt(),
+                      id: '${generateRandomString(1)}${id.toInt()}',
                       increase: i == 2 ? false : true,
                       color: AppColors.light4,
                       icon: jewels[i % jewels.length],

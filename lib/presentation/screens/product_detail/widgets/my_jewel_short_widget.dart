@@ -11,7 +11,7 @@ class MyJewelsShortWidget extends StatelessWidget {
 
   final String icon;
   final Color? color;
-  final int id;
+  final String id;
   final bool increase;
 
   @override
@@ -54,7 +54,7 @@ class MyJewelsShortWidget extends StatelessWidget {
                         const EdgeInsets.symmetric(vertical: 5, horizontal: 16),
                     alignment: Alignment.center,
                     child: SFText(
-                      keyText: '#$id',
+                      keyText: id,
                       style: TextStyles.white1w700size12,
                     ),
                   ),

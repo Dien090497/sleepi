@@ -23,7 +23,11 @@ class TabDay extends StatelessWidget {
       builder: (context, state) {
         if (state is ChartDayLoaded) {
           final cubit = context.read<ChartDayCubit>();
+          final nextDay = state.selectedDate.add(const Duration(days: 1));
+          final prevDay = state.selectedDate.add(const Duration(days: 1));
           return ChartTabBody(
+            nextEnable: nextDay.isBefore(state.lastAllowedDate),
+            prevEnable: prevDay.isAfter(state.firstAllowedDate),
             picker: ChartDayPicker(
               selectedDate: state.selectedDate,
               firstAllowedDate: state.firstAllowedDate,
@@ -127,7 +131,7 @@ class ChartDayPicker extends StatelessWidget {
       monthViewSettings: const DateRangePickerMonthViewSettings(
           firstDayOfWeek: 1,
           viewHeaderStyle:
-          DateRangePickerViewHeaderStyle(textStyle: TextStyles.white14)),
+              DateRangePickerViewHeaderStyle(textStyle: TextStyles.white14)),
       rangeTextStyle: TextStyles.white14,
       headerStyle: const DateRangePickerHeaderStyle(
         textAlign: TextAlign.center,

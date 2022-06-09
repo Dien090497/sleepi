@@ -21,7 +21,7 @@ class WalletDetailList extends StatelessWidget {
       LocaleKeys.beds,
       LocaleKeys.jewels,
       LocaleKeys.bed_box,
-      LocaleKeys.item,
+      LocaleKeys.item
     ];
     List icons = [
       Ics.icSlft,

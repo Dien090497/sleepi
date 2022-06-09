@@ -21,82 +21,76 @@ class _TrackingScreenState extends State<TrackingScreen> {
   @override
   Widget build(BuildContext context) {
     return BackgroundWidget(
-      child: Scaffold(
-        backgroundColor: AppColors.transparent,
-        appBar: SFAppBar(
-            context: context,
-            title: LocaleKeys.tracking,
-            textStyle: TextStyles.bold18LightWhite),
-        body: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16.0),
-          child: Column(
-            children: [
-              Stack(
-                alignment: Alignment.center,
-                children: [
-                  Container(
-                    width: 318,
-                    height: 318,
-                    decoration: const BoxDecoration(
-                        image: DecorationImage(
-                          image: AssetImage(Imgs.borderClock),
-                        )
-                    ),
-                  ),
-                  Container(
-                    width: 190,
-                    height: 190,
-                    decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      color: AppColors.white.withOpacity(0.07),
-                    ),
-                  ),
-                  const SizedBox(
-                    width: 230,
-                    height: 230,
-                    child: AnalogClock(
-                      isLive: true,
-                      hourHandColor: Colors.white,
-                      minuteHandColor: Colors.white,
-                      showSecondHand: true,
-                      secondHandColor: AppColors.blue,
-                      numberColor: AppColors.textColor,
-                      showNumbers: true,
-                      textScaleFactor: 1.2,
-                      showTicks: true,
-                      tickColor: AppColors.tick,
-                      showDigitalClock: false,
-                    ),
-                  ),
-                ],
-              ),
-              const SizedBox(
-                height: 30,
-              ),
-              const Padding(
-                padding: EdgeInsets.symmetric(horizontal: 8.0),
-                child: SFLabelValue(
-                  label: LocaleKeys.alarm,
-                  value: '10:00',
-                  styleLabel: TextStyles.textColorSize16,
-                  styleValue: TextStyles.textColorSize16,
+      appBar: SFAppBar(
+          context: context,
+          title: LocaleKeys.tracking,
+          textStyle: TextStyles.bold18LightWhite),
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 16.0),
+        child: Column(
+          children: [
+            Stack(
+              alignment: Alignment.center,
+              children: [
+                Container(
+                  width: 318,
+                  height: 318,
+                  decoration: const BoxDecoration(
+                      image: DecorationImage(
+                    image: AssetImage(Imgs.borderClock),
+                  )),
                 ),
+                Container(
+                  width: 190,
+                  height: 190,
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    color: AppColors.white.withOpacity(0.07),
+                  ),
+                ),
+                const SizedBox(
+                  width: 230,
+                  height: 230,
+                  child: AnalogClock(
+                    isLive: true,
+                    hourHandColor: Colors.white,
+                    minuteHandColor: Colors.white,
+                    showSecondHand: true,
+                    secondHandColor: AppColors.blue,
+                    numberColor: AppColors.textColor,
+                    showNumbers: true,
+                    textScaleFactor: 1.2,
+                    showTicks: true,
+                    tickColor: AppColors.tick,
+                    showDigitalClock: false,
+                  ),
+                ),
+              ],
+            ),
+            const SizedBox(
+              height: 30,
+            ),
+            const Padding(
+              padding: EdgeInsets.symmetric(horizontal: 8.0),
+              child: SFLabelValue(
+                label: LocaleKeys.alarm,
+                value: '10:00',
+                styleLabel: TextStyles.textColorSize16,
+                styleValue: TextStyles.textColorSize16,
               ),
-              const Spacer(),
-              SFButton(
-                text: LocaleKeys.wake_up,
-                width: double.infinity,
-                color: AppColors.blue,
-                textStyle: TextStyles.w600WhiteSize16,
-                onPressed: () {
-                  Navigator.pushNamed(context, R.result);
-                },
-              ),
-              const SizedBox(
-                height: 26,
-              ),
-            ],
-          ),
+            ),
+            const Spacer(),
+            SFButton(
+              text: LocaleKeys.wake_up,
+              width: double.infinity,
+              color: AppColors.blue,
+              textStyle: TextStyles.w600WhiteSize16,
+              onPressed: () {
+                Navigator.pushNamed(context, R.result);
+              },
+            ),
+            const SizedBox(height: 26),
+          ],
         ),
       ),
     );

@@ -13,60 +13,58 @@ class QuestionScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     return BackgroundWidget(
-      child: Scaffold(
-          backgroundColor: AppColors.transparent,
-          appBar: SFAppBar(
-            context: context,
-          ),
-          body: SafeArea(
-            child: Padding(
-              padding: const EdgeInsets.symmetric(vertical: 50),
-              child: Center(
-                child: Column(
-                  children: [
-                    SFButton(
-                      text: LocaleKeys.how_to_play,
-                      textStyle: TextStyles.w600WhiteSize16,
-                      gradient: AppColors.gradientBlueButton,
-                      onPressed: () {},
-                      width: size.width * 0.45,
-                      height: 48,
-                    ),
-                    const SizedBox(
-                      height: 24,
-                    ),
-                    SFButton(
-                      text: LocaleKeys.white_paper,
-                      textStyle: TextStyles.bold16LightWhite,
-                      color: AppColors.white.withOpacity(0.07),
-                      width: size.width * 0.45,
-                      height: 48,
-                    ),
-                    const SizedBox(
-                      height: 24,
-                    ),
-                    SFButton(
-                      text: LocaleKeys.lite_paper,
-                      textStyle: TextStyles.bold16LightWhite,
-                      color: AppColors.white.withOpacity(0.07),
-                      width: size.width * 0.45,
-                      height: 48,
-                    ),
-                    const SizedBox(
-                      height: 24,
-                    ),
-                    SFButton(
-                      text: LocaleKeys.link_tree,
-                      textStyle: TextStyles.bold16LightWhite,
-                      color: AppColors.white.withOpacity(0.07),
-                      width: size.width * 0.45,
-                      height: 48,
-                    ),
-                  ],
+      appBar: SFAppBar(
+        context: context,
+      ),
+      child: SafeArea(
+        child: Padding(
+          padding: const EdgeInsets.symmetric(vertical: 50),
+          child: Center(
+            child: Column(
+              children: [
+                SFButton(
+                  text: LocaleKeys.how_to_play,
+                  textStyle: TextStyles.w600WhiteSize16,
+                  gradient: AppColors.gradientBlueButton,
+                  onPressed: () {},
+                  width: size.width * 0.45,
+                  height: 48,
                 ),
-              ),
+                const SizedBox(
+                  height: 24,
+                ),
+                SFButton(
+                  text: LocaleKeys.white_paper,
+                  textStyle: TextStyles.bold16LightWhite,
+                  color: AppColors.white.withOpacity(0.07),
+                  width: size.width * 0.45,
+                  height: 48,
+                ),
+                const SizedBox(
+                  height: 24,
+                ),
+                SFButton(
+                  text: LocaleKeys.lite_paper,
+                  textStyle: TextStyles.bold16LightWhite,
+                  color: AppColors.white.withOpacity(0.07),
+                  width: size.width * 0.45,
+                  height: 48,
+                ),
+                const SizedBox(
+                  height: 24,
+                ),
+                SFButton(
+                  text: LocaleKeys.link_tree,
+                  textStyle: TextStyles.bold16LightWhite,
+                  color: AppColors.white.withOpacity(0.07),
+                  width: size.width * 0.45,
+                  height: 48,
+                ),
+              ],
             ),
-          )),
+          ),
+        ),
+      ),
     );
   }
 }

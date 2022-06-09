@@ -24,7 +24,6 @@ class TabWeek extends StatelessWidget {
       builder: (context, state) {
         if (state is ChartWeekLoaded) {
           final cubit = context.read<ChartWeekCubit>();
-
           final start = state.week.start;
           final end = state.week.end;
           final startMonth = start.month;
@@ -32,7 +31,13 @@ class TabWeek extends StatelessWidget {
           final startYear = start.year;
           final endYear = end.year;
 
+          final startNextWeek =
+              start.add(const Duration(days: DateTime.daysPerWeek));
+          final startPrevWeek =
+              start.subtract(const Duration(days: DateTime.daysPerWeek));
           return ChartTabBody(
+            nextEnable: startNextWeek.isBefore(state.lastAllowedDate),
+            prevEnable: startPrevWeek.isAfter(state.firstAllowedDate),
             picker: ChartWeekPicker(
               selectedDate: state.week.start,
               firstAllowedDate: state.firstAllowedDate,

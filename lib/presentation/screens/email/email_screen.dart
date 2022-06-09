@@ -76,6 +76,7 @@ class _EmailScreenState extends State<EmailScreen> {
                                 validateButton();
                               },
                               labelText: LocaleKeys.verification_code,
+                              textInputType: TextInputType.number,
                             ),
                             const SizedBox(
                               height: 20,

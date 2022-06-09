@@ -5,6 +5,7 @@ import 'package:slee_fi/common/widgets/sf_card.dart';
 import 'package:slee_fi/common/widgets/sf_chip.dart';
 import 'package:slee_fi/common/widgets/sf_icon.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
+import 'package:slee_fi/common/widgets/sf_textfield.dart';
 import 'package:slee_fi/common/widgets/sf_textfield_text_button.dart';
 import 'package:slee_fi/l10n/locale_keys.g.dart';
 import 'package:slee_fi/resources/resources.dart';
@@ -19,9 +20,9 @@ class PopUpCalculator extends StatelessWidget {
       children: [
         Center(
             child: SFText(
-          keyText: LocaleKeys.roi_calculator,
-          style: TextStyles.bold18LightWhite,
-        )),
+              keyText: LocaleKeys.roi_calculator,
+              style: TextStyles.bold18LightWhite,
+            )),
         const SizedBox(
           height: 24,
         ),
@@ -52,45 +53,76 @@ class PopUpCalculator extends StatelessWidget {
               borderRadius: BorderRadius.circular(8.0),
               border: Border.all(color: AppColors.lightDark),
               gradient: AppColors.gradientROI),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Expanded(
-                  child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  SFText(
-                    keyText: LocaleKeys.roi_current_rates,
-                    style: TextStyles.blue14,
-                  ),
-                  const SizedBox(
-                    height: 4,
-                  ),
-                  SFText(
-                    keyText: "0.00",
-                    style: TextStyles.bold24LightWhite,
-                  ),
-                  const SizedBox(
-                    height: 4,
-                  ),
-                  SFText(
-                    keyText: "~ 0 SLFT (0.00%)",
-                    style: TextStyles.lightGrey14,
-                  ),
-                ],
-              )),
-              const SFIcon(
-                Ics.icEdit,
-                width: 28,
-              ),
-            ],
-          ),
+          child: const RoiCurrentRates()
         ),
       ],
     );
   }
 }
+
+class RoiCurrentRates extends StatefulWidget {
+  const RoiCurrentRates({Key? key}) : super(key: key);
+
+  @override
+  State<RoiCurrentRates> createState() => _RoiCurrentRatesState();
+}
+
+class _RoiCurrentRatesState extends State<RoiCurrentRates> {
+  bool isChangedRates = true;
+
+
+  @override
+  Widget build(BuildContext context) {
+    return  Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children:  [
+        Expanded(
+            child:  Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                SFText(
+                  keyText: LocaleKeys.roi_current_rates,
+                  style: TextStyles.blue14,
+                ),
+                const SizedBox(
+                  height: 4,
+                ),
+                SFTextField(
+                  showLabel: false,
+                  noBorder: true,
+                  readonly: isChangedRates,
+                  textInputType: TextInputType.number,
+                  textStyle: TextStyles.bold24LightWhite,
+                  hintText: '0.00',
+                  hintStyle: TextStyles.bold24LightWhite,
+                ),
+
+                const SizedBox(
+                  height: 4,
+                ),
+                SFText(
+                  keyText: "~ 0 SLFT (0.00%)",
+                  style: TextStyles.lightGrey14,
+                ),
+              ],
+            )),
+        GestureDetector(
+          onTap: () {
+            setState((){
+              isChangedRates = !isChangedRates;
+            });
+          },
+          child: isChangedRates ? const SFIcon(
+            Ics.icEdit,
+            width: 28,
+          ) : const Icon(Icons.check_circle_rounded, color: AppColors.lightWhite, size: 32,),
+        ),
+      ],
+    );
+  }
+}
+
 
 class AddDuration extends StatefulWidget {
   const AddDuration({Key? key}) : super(key: key);
@@ -122,10 +154,18 @@ class _AddDurationState extends State<AddDuration> {
           runSpacing: 6.0,
           children: List.generate(days.length, (index) =>  GestureDetector(
             onTap: (){
-              setState((){
-                selectedIndex = index;
-                dayEditingController.text = days[index];
-              });
+              if(selectedIndex == index){
+                setState((){
+                  selectedIndex = null;
+                  dayEditingController.text = '';
+                });
+              }else{
+                setState((){
+                  selectedIndex = index;
+                  dayEditingController.text = days[index];
+                });
+              }
+
             },
             child: SFChip(
               text: "${days[index]}D",
@@ -138,7 +178,7 @@ class _AddDurationState extends State<AddDuration> {
         const SizedBox(
           height: 8.0,
         ),
-         SFTextFieldTextButton(
+        SFTextFieldTextButton(
           showLabel: false,
           controller: dayEditingController,
           textInputType: TextInputType.number,
@@ -167,7 +207,7 @@ class SLFTStaked extends StatefulWidget {
 
 class _SLFTStakedState extends State<SLFTStaked> {
   bool swapText = false;
-   int? selectedIndex;
+  int? selectedIndex;
 
   List<String> balance = ["100", "10000", "My Balance"];
   @override
@@ -220,9 +260,15 @@ class _SLFTStakedState extends State<SLFTStaked> {
           runSpacing: 6.0,
           children: List.generate(balance.length, (index) =>  GestureDetector(
             onTap: (){
-              setState((){
-                selectedIndex = index;
-              });
+              if(selectedIndex == index){
+                setState((){
+                  selectedIndex = null;
+                });
+              }else{
+                setState((){
+                  selectedIndex = index;
+                });
+              }
             },
             child: SFChip(
               text: index + 1 == balance.length ? balance[index] : "\$${balance[index]}",

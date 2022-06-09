@@ -10,6 +10,7 @@ class SFBottomNavigatorBar extends StatelessWidget {
     required this.onTap,
     required this.items,
   }) : super(key: key);
+
   final int index;
   final Function(int)? onTap;
   final List<ItemBottomNav> items;

@@ -9,6 +9,9 @@ import 'package:slee_fi/presentation/screens/product_detail/widgets/gridview_bed
 import 'package:slee_fi/resources/resources.dart';
 
 class TabBedsDetail extends StatelessWidget {
+  const TabBedsDetail({Key? key}) : super(key: key);
+
+  // void _showBedDialog(BuildContext context) {
   //   showCustomDialog(
   //     context,
   //     padding: const EdgeInsets.all(24),
@@ -26,9 +29,6 @@ class TabBedsDetail extends StatelessWidget {
   //     ],
   //   );
   // }
-  const TabBedsDetail({Key? key}) : super(key: key);
-
-  // void _showBedDialog(BuildContext context) {
 
   @override
   Widget build(BuildContext context) {
