@@ -64,7 +64,7 @@ class _FeedBackScreenState extends State<FeedBackScreen> {
                         child: SizedBox(
                       height: 48,
                       child: SFDropDownRotation<String>(
-                        value: subTopics[2],
+                        value: subTopics[indexSubTopic],
                         dropdownWidth: size.width * 0.55,
                         dropdownHeight: size.width * 0.75,
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
