@@ -8,6 +8,7 @@ import 'package:slee_fi/common/widgets/sf_icon.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
 import 'package:slee_fi/di/injector.dart';
 import 'package:slee_fi/presentation/screens/product_detail/widgets/top_left_banner.dart';
+import 'package:slee_fi/resources/resources.dart';
 
 class ItemBed extends StatelessWidget {
   const ItemBed(
@@ -52,7 +53,7 @@ class ItemBed extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  SFIcon(bed.icon, color: AppColors.blue),
+                  const SFIcon(Imgs.bed180),
                   const SizedBox(height: 24),
                   Container(
                     decoration: BoxDecoration(

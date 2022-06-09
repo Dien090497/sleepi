@@ -66,8 +66,8 @@ class GridViewBedItem extends StatelessWidget {
                   child: Column(
                     children: [
                       const Spacer(),
-                      SFIcon(bed.icon, color: AppColors.blue),
-                      const SizedBox(height: 20),
+                      SFIcon(bed.image),
+                      const SizedBox(height: 12),
                       Container(
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(50),
@@ -95,20 +95,22 @@ class GridViewBedItem extends StatelessWidget {
                       SizedBox(height: 4.h),
                       const SFPercentBorderGradient(
                           valueActive: 70, totalValue: 100),
-                      const SizedBox(height: 12),
                       if (price != null)
-                        Row(
-                          children: [
-                            Expanded(
-                                child: SFText(
-                              keyText: '$price ${LocaleKeys.avax}',
-                              style: TextStyles.white14W700,
-                            )),
-                            SFText(
-                              keyText: LocaleKeys.buy,
-                              style: TextStyles.blue14W700,
-                            ),
-                          ],
+                        Padding(
+                          padding: const EdgeInsets.only(top: 12),
+                          child: Row(
+                            children: [
+                              Expanded(
+                                  child: SFText(
+                                keyText: '$price ${LocaleKeys.avax}',
+                                style: TextStyles.white14W700,
+                              )),
+                              SFText(
+                                keyText: LocaleKeys.buy,
+                                style: TextStyles.blue14W700,
+                              ),
+                            ],
+                          ),
                         ),
                       const SizedBox(height: 12),
                     ],

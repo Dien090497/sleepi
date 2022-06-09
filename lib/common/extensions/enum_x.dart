@@ -17,17 +17,4 @@ extension BedTypeX on BedType {
         return AppColors.green;
     }
   }
-
-  String get icon {
-    switch (this) {
-      case BedType.short:
-        return Ics.shortBed;
-      case BedType.middle:
-        return Ics.middleBed;
-      case BedType.long:
-        return Ics.longBed;
-      case BedType.flexible:
-        return Ics.flexibleBed;
-    }
-  }
 }
