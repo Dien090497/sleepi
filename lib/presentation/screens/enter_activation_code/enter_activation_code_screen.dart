@@ -8,7 +8,7 @@ import 'package:slee_fi/common/widgets/background_widget.dart';
 import 'package:slee_fi/common/widgets/dismiss_keyboard_widget.dart';
 import 'package:slee_fi/common/widgets/sf_app_bar.dart';
 import 'package:slee_fi/common/widgets/sf_buttons.dart';
-import 'package:slee_fi/common/widgets/sf_drop_down.dart';
+import 'package:slee_fi/common/widgets/sf_dropdown_rotation.dart';
 import 'package:slee_fi/common/widgets/sf_logo.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
 import 'package:slee_fi/common/widgets/sf_textfield.dart';
@@ -16,9 +16,14 @@ import 'package:slee_fi/l10n/locale_keys.g.dart';
 import 'package:slee_fi/presentation/screens/login_signup/widgets/login_box.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-class EnterActivationCodeScreen extends StatelessWidget {
+class EnterActivationCodeScreen extends StatefulWidget {
   const EnterActivationCodeScreen({Key? key}) : super(key: key);
 
+  @override
+  State<EnterActivationCodeScreen> createState() => _EnterActivationCodeScreenState();
+}
+
+class _EnterActivationCodeScreenState extends State<EnterActivationCodeScreen> {
   @override
   Widget build(BuildContext context) {
     return DismissKeyboardWidget(
@@ -49,24 +54,25 @@ class EnterActivationCodeScreen extends StatelessWidget {
                     SizedBox(
                         width: double.infinity,
                         height: 48,
-                        child: SFDropDown<String>(
+                        child: SFDropDownRotation<String>(
                             value: context.locale.displayName,
-                            icon: const Icon(
-                              Icons.keyboard_arrow_down,
-                              size: 24,
-                            ),
                             dropdownWidth:
                                 MediaQuery.of(context).size.width * 0.8,
-                            dropdownItems: List.generate(
+                            dropdownHeight: 48,
+                            selectedItemHighlightColor: AppColors.lightDark,
+
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            spinnerItems: List.generate(
                               Const.locales.length,
-                              (i) => DropdownMenuItem(
-                                value: Const.locales[i].displayName,
-                                child: SFText(
-                                  keyText: Const.locales[i].displayName,
-                                  style: TextStyles.white16,
-                                ),
-                              ),
-                            ))),
+                              (i) => Const.locales[i].displayName,
+                            ),
+                            onChange: (int value, int index) {
+                              context.setLocale(Const.locales[index]);
+                              setState(() {
+
+                              });
+                            },
+                        )),
                     const SizedBox(height: 20),
                     SFButton(
                       text: LocaleKeys.start,
