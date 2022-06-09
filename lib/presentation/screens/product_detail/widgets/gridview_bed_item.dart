@@ -1,16 +1,15 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-// import 'package:flutter_translate/flutter_translate.dart';
 import 'package:slee_fi/common/enum/enum.dart';
 import 'package:slee_fi/common/extensions/enum_x.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
+import 'package:slee_fi/common/utils/random_utils.dart';
 import 'package:slee_fi/common/widgets/sf_gridview.dart';
 import 'package:slee_fi/common/widgets/sf_icon.dart';
 import 'package:slee_fi/common/widgets/sf_percent_border.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
+import 'package:slee_fi/di/injector.dart';
 import 'package:slee_fi/l10n/locale_keys.g.dart';
 import 'package:slee_fi/presentation/screens/product_detail/widgets/top_left_banner.dart';
 
@@ -32,22 +31,12 @@ class GridViewBedItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    int min = 65, max = 90;
+    final randomUtils = getIt<RandomUtils>();
     return SFGridView(
       count: beds.length,
       isScroll: isScroll,
       itemBuilder: (context, i) {
         final bed = beds[i % BedType.values.length];
-        var rnd = Random();
-        var id = rnd.nextDouble() * 10000;
-        while (id < 1000) {
-          id *= 10;
-        }
-        int r = min + rnd.nextInt(max - min);
-        String generateRandomString(int len) {
-          return String.fromCharCodes(List.generate(len, (index) => r));
-        }
-
         return GestureDetector(
           onTap: () {
             if (onBuyTap != null) {
@@ -87,7 +76,7 @@ class GridViewBedItem extends StatelessWidget {
                         padding: const EdgeInsets.symmetric(
                             vertical: 5, horizontal: 16),
                         child: SFText(
-                          keyText: '${generateRandomString(1)}${id.toInt()}',
+                          keyText: randomUtils.randomId(),
                           style: TextStyles.white1w700size12,
                         ),
                       ),

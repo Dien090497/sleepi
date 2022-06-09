@@ -1,8 +1,8 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
+import 'package:slee_fi/common/utils/random_utils.dart';
 import 'package:slee_fi/common/widgets/sf_gridview.dart';
 import 'package:slee_fi/common/widgets/sf_sub_tab_bar.dart';
+import 'package:slee_fi/di/injector.dart';
 import 'package:slee_fi/l10n/locale_keys.g.dart';
 import 'package:slee_fi/presentation/screens/product_detail/widgets/my_item_short_widget.dart';
 import 'package:slee_fi/presentation/screens/product_detail/widgets/upgrade_tab.dart';
@@ -19,7 +19,7 @@ class TabItemDetail extends StatelessWidget {
       Imgs.jewelBlue,
       Imgs.jewelRed
     ];
-    int min = 65, max = 90;
+    final randomUtils = getIt<RandomUtils>();
 
     return DefaultTabController(
       length: 2,
@@ -36,17 +36,8 @@ class TabItemDetail extends StatelessWidget {
                 SFGridView(
                   count: 20,
                   itemBuilder: (context, i) {
-                    var rnd = Random();
-                    var id = rnd.nextDouble() * 10000;
-                    while (id < 1000) {
-                      id *= 10;
-                    }
-                    int r = min + rnd.nextInt(max - min);
-                    String generateRandomString(int len) {
-                      return String.fromCharCodes(List.generate(len, (index) => r));
-                    }
                     return MyItemShortWidget(
-                      id: '${generateRandomString(1)}${id.toInt()}',
+                      id: randomUtils.randomId(),
                       icon: items[i % items.length],
                     );
                   },

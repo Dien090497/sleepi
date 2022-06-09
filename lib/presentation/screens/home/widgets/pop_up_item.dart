@@ -10,10 +10,11 @@ import 'package:slee_fi/l10n/locale_keys.g.dart';
 
 class PopUpItem extends StatelessWidget {
   const PopUpItem(
-      {Key? key, required this.icon, required this.onConfirm, this.onCancel})
+      {Key? key, required this.id, required this.icon, required this.onConfirm, this.onCancel})
       : super(key: key);
 
   final String icon;
+  final String id;
   final VoidCallback onConfirm;
   final VoidCallback? onCancel;
 
@@ -24,7 +25,7 @@ class PopUpItem extends StatelessWidget {
       child: Column(
         children: [
           SFText(
-            keyText: "ID",
+            keyText: id,
             style: TextStyles.white1w700size16,
           ),
           const SizedBox(height: 24),
