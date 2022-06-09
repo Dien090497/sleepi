@@ -3,12 +3,14 @@ import 'dart:math';
 import 'package:flutter/cupertino.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
+import 'package:slee_fi/common/utils/random_utils.dart';
 import 'package:slee_fi/common/widgets/sf_alert_dialog.dart';
 import 'package:slee_fi/common/widgets/sf_bottom_sheets.dart';
 import 'package:slee_fi/common/widgets/sf_buttons.dart';
 import 'package:slee_fi/common/widgets/sf_gridview.dart';
 import 'package:slee_fi/common/widgets/sf_icon.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
+import 'package:slee_fi/di/injector.dart';
 import 'package:slee_fi/l10n/locale_keys.g.dart';
 import 'package:slee_fi/presentation/screens/home/widgets/pop_up_item.dart';
 import 'package:slee_fi/presentation/screens/market_place/widget/filter_sheet.dart';
@@ -26,7 +28,7 @@ class ModalItemList extends StatelessWidget {
       Imgs.jewelBlue,
       Imgs.jewelRed
     ];
-    int min = 65, max = 90;
+    final randomUtils = getIt<RandomUtils>();
 
     return SafeArea(
       child: Column(
@@ -67,26 +69,18 @@ class ModalItemList extends StatelessWidget {
                 count: jewels.length * 3,
                 childAspectRatio: 1,
                 itemBuilder: (context, i) {
-                  var rnd = Random();
-                  var id = rnd.nextDouble() * 10000;
-                  while (id < 1000) {
-                    id *= 10;
-                  }
-                  int r = min + rnd.nextInt(max - min);
-                  String generateRandomString(int len) {
-                    return String.fromCharCodes(List.generate(len, (index) => r));
-                  }
-
+                  String id = randomUtils.randomId();
                   return GestureDetector(
                     onTap: () {
                       showCustomAlertDialog(context,
                           children: PopUpItem(
+                            id: id,
                             icon: Ics.middleBed,
                             onConfirm: () {},
                           ));
                     },
                     child: MyJewelsShortWidget(
-                      id: '${generateRandomString(1)}${id.toInt()}',
+                      id: id,
                       increase: i == 2 ? false : true,
                       color: AppColors.light4,
                       icon: jewels[i % jewels.length],
