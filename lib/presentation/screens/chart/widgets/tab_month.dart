@@ -26,15 +26,14 @@ class TabMonth extends StatelessWidget {
         if (state is ChartMonthLoaded) {
           final cubit = context.read<ChartMonthCubit>();
           final date = state.selectedDate;
-
+          final nextMonth = DateTime(date.year, date.month + 1, date.day);
+          final prevMonth = DateTime(date.year, date.month - 1, date.day);
           return ChartTabBody(
-
-            nextEnable: true,
-            prevEnable: true,
+            nextEnable: nextMonth.isBefore(state.lastAllowedDate),
+            prevEnable: prevMonth.isAfter(state.firstAllowedDate),
             picker: ChartMonthPicker(
               selectedDate: state.selectedDate,
-              firstAllowedDate:
-               state.firstAllowedDate,
+              firstAllowedDate: state.firstAllowedDate,
               lastAllowedDate: state.lastAllowedDate,
               onMonthSelected: (period) {
                 cubit.selectMonth(period);

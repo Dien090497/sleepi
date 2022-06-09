@@ -53,11 +53,9 @@ class ChartWeekCubit extends Cubit<ChartWeekState> {
     final currentState = state;
     if (currentState is ChartWeekLoaded) {
       final start = currentState.week.start;
-      final end = currentState.week.end;
       final prevWeekFirstDate =
           start.subtract(const Duration(days: DateTime.daysPerWeek));
-      final prevWeekLastDate =
-          end.subtract(const Duration(days: DateTime.daysPerWeek));
+      final prevWeekLastDate = dateTimeUtils.endOfWeek(prevWeekFirstDate);
       if (prevWeekFirstDate.isAfter(currentState.firstAllowedDate) &&
           prevWeekLastDate.isAfter(currentState.firstAllowedDate)) {
         final nextWeek = DatePeriod(prevWeekFirstDate, prevWeekLastDate);
