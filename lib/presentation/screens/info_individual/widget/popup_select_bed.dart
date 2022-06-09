@@ -10,6 +10,9 @@ import 'package:slee_fi/presentation/blocs/mint/mint_cubit.dart';
 import 'package:slee_fi/presentation/blocs/mint/mint_state.dart';
 import 'package:slee_fi/presentation/screens/info_individual/widget/item_bed.dart';
 
+import '../../../../common/utils/random_utils.dart';
+import '../../../../di/injector.dart';
+
 class PopUpSelectBed extends StatefulWidget {
   const PopUpSelectBed({Key? key, required this.beds, required this.callBack})
       : super(key: key);
@@ -21,6 +24,11 @@ class PopUpSelectBed extends StatefulWidget {
 }
 
 class _PopUpSelectBedState extends State<PopUpSelectBed> {
+  final randomUtils = getIt<RandomUtils>();
+
+  late final List<String> listID =
+      List.generate(widget.beds.length, (index) => randomUtils.randomId());
+
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
@@ -52,6 +60,7 @@ class _PopUpSelectBedState extends State<PopUpSelectBed> {
                           childAspectRatio: 1,
                           itemBuilder: (context, i) {
                             return ItemBed(
+                              id: listID[i],
                               bed: widget.beds[i],
                               selected: state.indexSelected == i,
                               onTap: () {

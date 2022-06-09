@@ -44,7 +44,7 @@ class UpGradeTab extends StatelessWidget {
                     fit: BoxFit.cover,
                   ),
                   Positioned(
-                    top: 26,
+                    top: 28,
                     left: 0,
                     right: 0,
                     child: GestureDetector(

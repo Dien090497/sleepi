@@ -18,32 +18,28 @@ class _AlarmSoundEffectListState extends State<AlarmSoundEffectList> {
     return SFCard(
       margin: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 24),
       padding: const EdgeInsets.symmetric(horizontal: 16.0),
-      child: ListView.builder(
+      child: ListView.separated(
           itemCount: 5,
           shrinkWrap: true,
+          separatorBuilder: (context, index) => Divider(
+                color: AppColors.lightWhite.withOpacity(0.05),
+                height: 1,
+              ),
           itemBuilder: (BuildContext context, int index) {
-            return Column(
-              children: [
-                SFListTile(
-                  text: "Sound ${index + 1}",
-                  trailing: index == temp
-                      ? const Icon(
-                          Icons.check,
-                          color: AppColors.green,
-                          size: 20,
-                        )
-                      : const SizedBox(),
-                  onPressed: () {
-                    setState(() {
-                      temp = index;
-                    });
-                  },
-                ),
-                Divider(
-                  color: AppColors.lightWhite.withOpacity(0.05),
-                  height: 1,
-                ),
-              ],
+            return SFListTile(
+              text: "Sound ${index + 1}",
+              trailing: index == temp
+                  ? const Icon(
+                      Icons.check,
+                      color: AppColors.green,
+                      size: 20,
+                    )
+                  : const SizedBox(height: 20),
+              onPressed: () {
+                setState(() {
+                  temp = index;
+                });
+              },
             );
           }),
     );

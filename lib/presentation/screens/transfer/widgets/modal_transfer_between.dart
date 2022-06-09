@@ -30,7 +30,7 @@ class _ModalTransferBetweenState extends State<ModalTransferBetween> {
     LocaleKeys.item
   ];
   List urlImages = [
-    Ics.icSolanaCircle,
+    Ics.icAvax,
     Ics.icSlft,
     Ics.icSlgt,
     Ics.icBeds,
@@ -50,13 +50,21 @@ class _ModalTransferBetweenState extends State<ModalTransferBetween> {
     return ListView.builder(
         itemCount: keyList.length,
         shrinkWrap: true,
-        padding: const EdgeInsets.all(16.0),
+        padding: const EdgeInsets.all(24.0),
         itemBuilder: (BuildContext context, int index) {
           return SFCard(
-            child: SFListTile(
-              leading: SFIcon(
-                urlImages[index],
-                width: 32,
+            padding: const EdgeInsets.symmetric(horizontal: 16,),
+            margin: const EdgeInsets.only(top: 8.0),
+            radius: 8,
+            child: ListTile(
+              contentPadding: EdgeInsets.zero,
+              leading: Padding(
+                padding: EdgeInsets.only(left: urlImages[index] == Ics.icAvax ? 4.0 : 0),
+                child: SFIcon(
+                  urlImages[index],
+                  width: urlImages[index] == Ics.icAvax ? 32 : 40,
+                  height: urlImages[index] == Ics.icAvax ? 32 : 40,
+                ),
               ),
               text: keyList[index],
               textStyle :TextStyles.lightWhite16,

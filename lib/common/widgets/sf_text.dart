@@ -13,10 +13,12 @@ class SFText extends Text {
     StringCase? stringCase,
     TextAlign? textAlign,
     Key? key,
+    int? maxLines,
   }) : super(
           prefix + keyText.tr(namedArgs: args).reCase(stringCase) + suffix,
           style: style ?? TextStyles.textBasic15,
           textAlign: textAlign,
+          maxLines: maxLines,
           key: key,
         );
 }
