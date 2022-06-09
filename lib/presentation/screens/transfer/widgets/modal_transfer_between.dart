@@ -4,7 +4,6 @@ import 'package:slee_fi/common/style/text_styles.dart';
 import 'package:slee_fi/common/widgets/sf_card.dart';
 import 'package:slee_fi/common/widgets/sf_icon.dart';
 import 'package:slee_fi/common/widgets/sf_list_tile.dart';
-import 'package:slee_fi/common/widgets/sf_text.dart';
 import 'package:slee_fi/l10n/locale_keys.g.dart';
 import 'package:slee_fi/resources/resources.dart';
 
@@ -56,8 +55,7 @@ class _ModalTransferBetweenState extends State<ModalTransferBetween> {
             padding: const EdgeInsets.symmetric(horizontal: 16,),
             margin: const EdgeInsets.only(top: 8.0),
             radius: 8,
-            child: ListTile(
-              contentPadding: EdgeInsets.zero,
+            child: SFListTile(
               leading: Padding(
                 padding: EdgeInsets.only(left: urlImages[index] == Ics.icAvax ? 4.0 : 0),
                 child: SFIcon(
