@@ -1,12 +1,12 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:slee_fi/common/enum/enum.dart';
 import 'package:slee_fi/common/extensions/enum_x.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
+import 'package:slee_fi/common/utils/random_utils.dart';
 import 'package:slee_fi/common/widgets/sf_icon.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
+import 'package:slee_fi/di/injector.dart';
 import 'package:slee_fi/presentation/screens/product_detail/widgets/top_left_banner.dart';
 
 class ItemBed extends StatelessWidget {
@@ -22,12 +22,7 @@ class ItemBed extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var rnd = Random();
-    var id = rnd.nextDouble() * 10000;
-    while (id < 1000) {
-      id *= 10;
-    }
-
+    final randomUtils = getIt<RandomUtils>();
     return GestureDetector(
       onTap: onTap,
       child: Container(
@@ -67,7 +62,7 @@ class ItemBed extends StatelessWidget {
                     padding:
                         const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
                     child: SFText(
-                      keyText: '#${id.toInt()}',
+                      keyText: randomUtils.randomId(),
                       style: TextStyles.white1w700size12,
                     ),
                   ),

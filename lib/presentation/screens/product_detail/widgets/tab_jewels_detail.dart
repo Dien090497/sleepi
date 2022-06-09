@@ -1,9 +1,9 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
+import 'package:slee_fi/common/utils/random_utils.dart';
 import 'package:slee_fi/common/widgets/sf_dialog.dart';
 import 'package:slee_fi/common/widgets/sf_gridview.dart';
 import 'package:slee_fi/common/widgets/sf_sub_tab_bar.dart';
+import 'package:slee_fi/di/injector.dart';
 import 'package:slee_fi/l10n/locale_keys.g.dart';
 import 'package:slee_fi/presentation/screens/product_detail/widgets/jewel_dialog_body.dart';
 import 'package:slee_fi/presentation/screens/product_detail/widgets/my_jewel_short_widget.dart';
@@ -13,7 +13,7 @@ import 'package:slee_fi/resources/resources.dart';
 class TabJewelsDetail extends StatelessWidget {
   const TabJewelsDetail({Key? key}) : super(key: key);
 
-  void _showJewelDialog(BuildContext context, String img) {
+  void _showJewelDialog(BuildContext context, String img, String id) {
     showCustomDialog(
       context,
       padding: const EdgeInsets.all(24),
@@ -22,7 +22,7 @@ class TabJewelsDetail extends StatelessWidget {
           icon: img,
           name: 'name',
           level: 'Lv.1',
-          id: '12345678910',
+          id: id,
           attribute: 'attribute',
           effect: 'effect',
           onSellTap: () {},
@@ -40,7 +40,7 @@ class TabJewelsDetail extends StatelessWidget {
       Imgs.jewelBlue,
       Imgs.jewelRed
     ];
-    int min = 65, max = 90;
+    final randomUtils = getIt<RandomUtils>();
 
     return DefaultTabController(
       length: 2,
@@ -56,21 +56,13 @@ class TabJewelsDetail extends StatelessWidget {
                   count: jewels.length * 3,
                   childAspectRatio: 1,
                   itemBuilder: (context, i) {
-                    var rnd = Random();
-                    var id = rnd.nextDouble() * 10000;
-                    while (id < 1000) {
-                      id *= 10;
-                    }
-                    int r = min + rnd.nextInt(max - min);
-                    String generateRandomString(int len) {
-                      return String.fromCharCodes(List.generate(len, (index) => r));
-                    }
+                    String randomId = randomUtils.randomId();
                     return GestureDetector(
                       onTap: () {
-                        _showJewelDialog(context, jewels[i]);
+                        _showJewelDialog(context, jewels[i], randomId);
                       },
                       child: MyJewelsShortWidget(
-                        id: '${generateRandomString(1)}${id.toInt()}',
+                        id: randomId,
                         icon: jewels[i % jewels.length],
                       ),
                     );
