@@ -3,26 +3,25 @@ import 'package:slee_fi/common/enum/enum.dart';
 import 'package:slee_fi/common/extensions/enum_x.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
-import 'package:slee_fi/common/utils/random_utils.dart';
 import 'package:slee_fi/common/widgets/sf_icon.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
-import 'package:slee_fi/di/injector.dart';
 import 'package:slee_fi/presentation/screens/product_detail/widgets/top_left_banner.dart';
 
 class ItemBed extends StatelessWidget {
-  const ItemBed(
-      {Key? key,
-      required this.bed,
-      required this.selected,
-      required this.onTap})
-      : super(key: key);
+  const ItemBed({
+    Key? key,
+    required this.bed,
+    required this.selected,
+    required this.onTap,
+    required this.id,
+  }) : super(key: key);
   final BedType bed;
   final bool selected;
+  final String id;
   final VoidCallback onTap;
 
   @override
   Widget build(BuildContext context) {
-    final randomUtils = getIt<RandomUtils>();
     return GestureDetector(
       onTap: onTap,
       child: Container(
@@ -62,7 +61,7 @@ class ItemBed extends StatelessWidget {
                     padding:
                         const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
                     child: SFText(
-                      keyText: randomUtils.randomId(),
+                      keyText: id,
                       style: TextStyles.white1w700size12,
                     ),
                   ),

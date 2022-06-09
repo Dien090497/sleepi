@@ -29,7 +29,6 @@ class TransactionDetail extends StatelessWidget {
   Widget build(BuildContext context) {
     final args = ModalRoute.of(context)?.settings.arguments
         as TransactionDetailArguments?;
-
     return BackgroundWidget(
         appBar: AppBar(
             toolbarHeight: 80,
@@ -70,17 +69,13 @@ class TransactionDetail extends StatelessWidget {
                         height: args.img == Ics.icAvax ? 32 : 40,
                       )
                     : const SizedBox(),
-                const SizedBox(
-                  height: 16.0,
-                ),
+                const SizedBox(height: 16.0),
                 SFText(
-                    keyText: "00.500583 AVAX", style: TextStyles.bold30White),
-                const SizedBox(
-                  height: 20.0,
-                ),
-                const SizedBox(
-                  height: 16.0,
-                ),
+                    keyText:
+                        "00.500583 ${args != null ? args.title.toUpperCase() : 'AVAX'}",
+                    style: TextStyles.bold30White),
+                const SizedBox(height: 20.0),
+                const SizedBox(height: 16.0),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
@@ -108,12 +103,8 @@ class TransactionDetail extends StatelessWidget {
                     ),
                   ],
                 ),
-                const SizedBox(
-                  height: 20.0,
-                ),
-                const SizedBox(
-                  height: 12.0,
-                ),
+                const SizedBox(height: 20.0),
+                const SizedBox(height: 12.0),
                 const TransactionDetailList()
               ],
             ),
