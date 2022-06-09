@@ -1,70 +1,94 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:slee_fi/common/enum/enum.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
 import 'package:slee_fi/common/widgets/sf_buttons.dart';
 import 'package:slee_fi/common/widgets/sf_gridview.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
+import 'package:slee_fi/presentation/blocs/mint/mint_cubit.dart';
+import 'package:slee_fi/presentation/blocs/mint/mint_state.dart';
 import 'package:slee_fi/presentation/screens/info_individual/widget/item_bed.dart';
 
-class PopUpSelectBed extends StatelessWidget {
-  const PopUpSelectBed({Key? key, required this.beds, required this.callback})
+class PopUpSelectBed extends StatefulWidget {
+  const PopUpSelectBed({Key? key, required this.beds, required this.callBack})
       : super(key: key);
   final List<BedType> beds;
-  final VoidCallback callback;
+  final Function(int) callBack;
 
   @override
-  Widget build(BuildContext context) {
-    return SafeArea(
-      child: Stack(
-        alignment: Alignment.center,
-        children: [
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Padding(
-                padding: const EdgeInsets.only(top: 32.0, left: 32, bottom: 24),
-                child: SFText(
-                  keyText: 'Select Bed',
-                  style: TextStyles.bold18White,
-                ),
-              ),
-              Expanded(
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 12.0),
-                  child: SFGridView(
-                    count: beds.length,
-                    isScroll: true,
-                    childAspectRatio: 1,
-                    itemBuilder: (context, i) {
-                      return ItemBed(
-                        bed: beds[i],
-                        onTap: (){
+  State<PopUpSelectBed> createState() => _PopUpSelectBedState();
+}
 
-                        },
-                      );
+class _PopUpSelectBedState extends State<PopUpSelectBed> {
+  @override
+  Widget build(BuildContext context) {
+    return BlocProvider(
+      create: (_) => MintCubit()..init(),
+      child: BlocBuilder<MintCubit, MintState>(builder: (context, state) {
+        if (state is MintStateSelected) {
+          final cubit = context.read<MintCubit>();
+          return SafeArea(
+            child: Stack(
+              alignment: Alignment.center,
+              children: [
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.only(
+                          top: 32.0, left: 32, bottom: 24),
+                      child: SFText(
+                        keyText: 'Select Bed',
+                        style: TextStyles.bold18White,
+                      ),
+                    ),
+                    Expanded(
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 12.0),
+                        child: SFGridView(
+                          count: widget.beds.length,
+                          isScroll: true,
+                          childAspectRatio: 1,
+                          itemBuilder: (context, i) {
+                            return ItemBed(
+                              bed: widget.beds[i],
+                              selected: state.indexSelected == i,
+                              onTap: () {
+                                cubit.selectBed(i);
+                                setState(() {});
+                              },
+                            );
+                          },
+                        ),
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 80,
+                    ),
+                  ],
+                ),
+                Positioned(
+                  bottom: 20,
+                  child: SFButton(
+                    text: 'Continue',
+                    width: MediaQuery.of(context).size.width * 0.9,
+                    color: AppColors.blue,
+                    textStyle: TextStyles.w600WhiteSize16,
+                    height: 48,
+                    onPressed: () {
+                      Navigator.pop(context);
+                      widget.callBack(state.indexSelected);
                     },
                   ),
-                ),
-              ),
-              const SizedBox(
-                height: 80,
-              ),
-            ],
-          ),
-          Positioned(
-            bottom: 20,
-            child: SFButton(
-              text: 'Continue',
-              width: MediaQuery.of(context).size.width * 0.9,
-              color: AppColors.blue,
-              textStyle: TextStyles.w600WhiteSize16,
-              height: 48,
-              onPressed: callback,
+                )
+              ],
             ),
-          )
-        ],
-      ),
+          );
+        } else {
+          return Container();
+        }
+      }),
     );
   }
 }

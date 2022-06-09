@@ -18,39 +18,39 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$MintState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(List<BedType> beds) initial,
-    required TResult Function() loading,
+    required TResult Function() initial,
+    required TResult Function(int indexSelected) loaded,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(List<BedType> beds)? initial,
-    TResult Function()? loading,
+    TResult Function()? initial,
+    TResult Function(int indexSelected)? loaded,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(List<BedType> beds)? initial,
-    TResult Function()? loading,
+    TResult Function()? initial,
+    TResult Function(int indexSelected)? loaded,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(MintStateInitial value) initial,
-    required TResult Function(MintStateLoading value) loading,
+    required TResult Function(MintStateSelected value) loaded,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult Function(MintStateInitial value)? initial,
-    TResult Function(MintStateLoading value)? loading,
+    TResult Function(MintStateSelected value)? loaded,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(MintStateInitial value)? initial,
-    TResult Function(MintStateLoading value)? loading,
+    TResult Function(MintStateSelected value)? loaded,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -76,7 +76,6 @@ abstract class _$$MintStateInitialCopyWith<$Res> {
   factory _$$MintStateInitialCopyWith(
           _$MintStateInitial value, $Res Function(_$MintStateInitial) then) =
       __$$MintStateInitialCopyWithImpl<$Res>;
-  $Res call({List<BedType> beds});
 }
 
 /// @nodoc
@@ -89,18 +88,6 @@ class __$$MintStateInitialCopyWithImpl<$Res>
 
   @override
   _$MintStateInitial get _value => super._value as _$MintStateInitial;
-
-  @override
-  $Res call({
-    Object? beds = freezed,
-  }) {
-    return _then(_$MintStateInitial(
-      beds: beds == freezed
-          ? _value._beds
-          : beds // ignore: cast_nullable_to_non_nullable
-              as List<BedType>,
-    ));
-  }
 }
 
 /// @nodoc
@@ -108,72 +95,55 @@ class __$$MintStateInitialCopyWithImpl<$Res>
 class _$MintStateInitial
     with DiagnosticableTreeMixin
     implements MintStateInitial {
-  const _$MintStateInitial({required final List<BedType> beds}) : _beds = beds;
-
-  final List<BedType> _beds;
-  @override
-  List<BedType> get beds {
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_beds);
-  }
+  const _$MintStateInitial();
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'MintState.initial(beds: $beds)';
+    return 'MintState.initial()';
   }
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
-    properties
-      ..add(DiagnosticsProperty('type', 'MintState.initial'))
-      ..add(DiagnosticsProperty('beds', beds));
+    properties.add(DiagnosticsProperty('type', 'MintState.initial'));
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$MintStateInitial &&
-            const DeepCollectionEquality().equals(other._beds, _beds));
+        (other.runtimeType == runtimeType && other is _$MintStateInitial);
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(_beds));
-
-  @JsonKey(ignore: true)
-  @override
-  _$$MintStateInitialCopyWith<_$MintStateInitial> get copyWith =>
-      __$$MintStateInitialCopyWithImpl<_$MintStateInitial>(this, _$identity);
+  int get hashCode => runtimeType.hashCode;
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(List<BedType> beds) initial,
-    required TResult Function() loading,
+    required TResult Function() initial,
+    required TResult Function(int indexSelected) loaded,
   }) {
-    return initial(beds);
+    return initial();
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(List<BedType> beds)? initial,
-    TResult Function()? loading,
+    TResult Function()? initial,
+    TResult Function(int indexSelected)? loaded,
   }) {
-    return initial?.call(beds);
+    return initial?.call();
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(List<BedType> beds)? initial,
-    TResult Function()? loading,
+    TResult Function()? initial,
+    TResult Function(int indexSelected)? loaded,
     required TResult orElse(),
   }) {
     if (initial != null) {
-      return initial(beds);
+      return initial();
     }
     return orElse();
   }
@@ -182,7 +152,7 @@ class _$MintStateInitial
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(MintStateInitial value) initial,
-    required TResult Function(MintStateLoading value) loading,
+    required TResult Function(MintStateSelected value) loaded,
   }) {
     return initial(this);
   }
@@ -191,7 +161,7 @@ class _$MintStateInitial
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult Function(MintStateInitial value)? initial,
-    TResult Function(MintStateLoading value)? loading,
+    TResult Function(MintStateSelected value)? loaded,
   }) {
     return initial?.call(this);
   }
@@ -200,7 +170,7 @@ class _$MintStateInitial
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(MintStateInitial value)? initial,
-    TResult Function(MintStateLoading value)? loading,
+    TResult Function(MintStateSelected value)? loaded,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -211,88 +181,109 @@ class _$MintStateInitial
 }
 
 abstract class MintStateInitial implements MintState {
-  const factory MintStateInitial({required final List<BedType> beds}) =
-      _$MintStateInitial;
-
-  List<BedType> get beds => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
-  _$$MintStateInitialCopyWith<_$MintStateInitial> get copyWith =>
-      throw _privateConstructorUsedError;
+  const factory MintStateInitial() = _$MintStateInitial;
 }
 
 /// @nodoc
-abstract class _$$MintStateLoadingCopyWith<$Res> {
-  factory _$$MintStateLoadingCopyWith(
-          _$MintStateLoading value, $Res Function(_$MintStateLoading) then) =
-      __$$MintStateLoadingCopyWithImpl<$Res>;
+abstract class _$$MintStateSelectedCopyWith<$Res> {
+  factory _$$MintStateSelectedCopyWith(
+          _$MintStateSelected value, $Res Function(_$MintStateSelected) then) =
+      __$$MintStateSelectedCopyWithImpl<$Res>;
+  $Res call({int indexSelected});
 }
 
 /// @nodoc
-class __$$MintStateLoadingCopyWithImpl<$Res>
+class __$$MintStateSelectedCopyWithImpl<$Res>
     extends _$MintStateCopyWithImpl<$Res>
-    implements _$$MintStateLoadingCopyWith<$Res> {
-  __$$MintStateLoadingCopyWithImpl(
-      _$MintStateLoading _value, $Res Function(_$MintStateLoading) _then)
-      : super(_value, (v) => _then(v as _$MintStateLoading));
+    implements _$$MintStateSelectedCopyWith<$Res> {
+  __$$MintStateSelectedCopyWithImpl(
+      _$MintStateSelected _value, $Res Function(_$MintStateSelected) _then)
+      : super(_value, (v) => _then(v as _$MintStateSelected));
 
   @override
-  _$MintStateLoading get _value => super._value as _$MintStateLoading;
+  _$MintStateSelected get _value => super._value as _$MintStateSelected;
+
+  @override
+  $Res call({
+    Object? indexSelected = freezed,
+  }) {
+    return _then(_$MintStateSelected(
+      indexSelected: indexSelected == freezed
+          ? _value.indexSelected
+          : indexSelected // ignore: cast_nullable_to_non_nullable
+              as int,
+    ));
+  }
 }
 
 /// @nodoc
 
-class _$MintStateLoading
+class _$MintStateSelected
     with DiagnosticableTreeMixin
-    implements MintStateLoading {
-  const _$MintStateLoading();
+    implements MintStateSelected {
+  const _$MintStateSelected({required this.indexSelected});
+
+  @override
+  final int indexSelected;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'MintState.loading()';
+    return 'MintState.loaded(indexSelected: $indexSelected)';
   }
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty('type', 'MintState.loading'));
+    properties
+      ..add(DiagnosticsProperty('type', 'MintState.loaded'))
+      ..add(DiagnosticsProperty('indexSelected', indexSelected));
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$MintStateLoading);
+        (other.runtimeType == runtimeType &&
+            other is _$MintStateSelected &&
+            const DeepCollectionEquality()
+                .equals(other.indexSelected, indexSelected));
   }
 
   @override
-  int get hashCode => runtimeType.hashCode;
+  int get hashCode => Object.hash(
+      runtimeType, const DeepCollectionEquality().hash(indexSelected));
+
+  @JsonKey(ignore: true)
+  @override
+  _$$MintStateSelectedCopyWith<_$MintStateSelected> get copyWith =>
+      __$$MintStateSelectedCopyWithImpl<_$MintStateSelected>(this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(List<BedType> beds) initial,
-    required TResult Function() loading,
+    required TResult Function() initial,
+    required TResult Function(int indexSelected) loaded,
   }) {
-    return loading();
+    return loaded(indexSelected);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(List<BedType> beds)? initial,
-    TResult Function()? loading,
+    TResult Function()? initial,
+    TResult Function(int indexSelected)? loaded,
   }) {
-    return loading?.call();
+    return loaded?.call(indexSelected);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(List<BedType> beds)? initial,
-    TResult Function()? loading,
+    TResult Function()? initial,
+    TResult Function(int indexSelected)? loaded,
     required TResult orElse(),
   }) {
-    if (loading != null) {
-      return loading();
+    if (loaded != null) {
+      return loaded(indexSelected);
     }
     return orElse();
   }
@@ -301,34 +292,40 @@ class _$MintStateLoading
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(MintStateInitial value) initial,
-    required TResult Function(MintStateLoading value) loading,
+    required TResult Function(MintStateSelected value) loaded,
   }) {
-    return loading(this);
+    return loaded(this);
   }
 
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult Function(MintStateInitial value)? initial,
-    TResult Function(MintStateLoading value)? loading,
+    TResult Function(MintStateSelected value)? loaded,
   }) {
-    return loading?.call(this);
+    return loaded?.call(this);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(MintStateInitial value)? initial,
-    TResult Function(MintStateLoading value)? loading,
+    TResult Function(MintStateSelected value)? loaded,
     required TResult orElse(),
   }) {
-    if (loading != null) {
-      return loading(this);
+    if (loaded != null) {
+      return loaded(this);
     }
     return orElse();
   }
 }
 
-abstract class MintStateLoading implements MintState {
-  const factory MintStateLoading() = _$MintStateLoading;
+abstract class MintStateSelected implements MintState {
+  const factory MintStateSelected({required final int indexSelected}) =
+      _$MintStateSelected;
+
+  int get indexSelected => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  _$$MintStateSelectedCopyWith<_$MintStateSelected> get copyWith =>
+      throw _privateConstructorUsedError;
 }
