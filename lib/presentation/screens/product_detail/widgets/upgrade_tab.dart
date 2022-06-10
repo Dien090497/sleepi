@@ -51,7 +51,7 @@ class UpGradeTab extends StatelessWidget {
                       onTap: () {
                         showCustomDialog(context, children: [
                           PopUpBedsDetail(
-                              icon: Ics.middleBed,
+                              icon: Imgs.middleBed,
                               level: 20,
                               cost: 1,
                               time: 2,
@@ -75,7 +75,7 @@ class UpGradeTab extends StatelessWidget {
                       onTap: () {
                         showCustomDialog(context, children: [
                           PopUpBedsDetail(
-                              icon: Ics.middleBed,
+                              icon: Imgs.middleBed,
                               level: 20,
                               cost: 1,
                               time: 2,
@@ -95,7 +95,7 @@ class UpGradeTab extends StatelessWidget {
                       onTap: () {
                         showCustomDialog(context, children: [
                           PopUpBedsDetail(
-                              icon: Ics.middleBed,
+                              icon: Imgs.middleBed,
                               level: 20,
                               cost: 1,
                               time: 2,

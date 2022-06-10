@@ -63,9 +63,6 @@ class _MintScreenState extends State<MintScreen> {
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,
                                     children: [
-                                      const SizedBox(
-                                        height: 60,
-                                      ),
                                       const ConnectBedWidget(),
                                       const SizedBox(
                                         height: 60,

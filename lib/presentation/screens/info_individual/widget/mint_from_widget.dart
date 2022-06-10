@@ -45,6 +45,7 @@ class MintFromWidget extends StatelessWidget {
           child: SFGridView(
             count: numbers,
             isScroll: false,
+            childAspectRatio: 9/10,
             itemBuilder: (context, i) {
               return ItemBed(
                   id: randomUtils.randomId(),

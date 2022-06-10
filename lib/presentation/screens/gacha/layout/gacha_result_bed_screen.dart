@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
 import 'package:slee_fi/common/widgets/background_widget.dart';
 import 'package:slee_fi/common/widgets/sf_button_outlined.dart';
+import 'package:slee_fi/common/widgets/sf_icon.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
 import 'package:slee_fi/common/widgets/topbar_common.dart';
 import 'package:slee_fi/l10n/locale_keys.g.dart';
@@ -47,7 +47,6 @@ class GachaResultBedScreen extends StatelessWidget {
                               child: Column(
                                 children: [
                                   Container(
-                                      padding: const EdgeInsets.all(20),
                                       decoration: BoxDecoration(
                                           image: const DecorationImage(
                                             image: AssetImage(
@@ -69,8 +68,8 @@ class GachaResultBedScreen extends StatelessWidget {
                                               BorderRadius.circular(20)),
                                       width: 180,
                                       height: 180,
-                                      child: SizedBox(
-                                        child: SvgPicture.asset(Ics.sleep),
+                                      child: const SizedBox(
+                                        child: SFIcon(Imgs.shortBed),
                                       )),
                                   const SizedBox(height: 12),
                                   Row(

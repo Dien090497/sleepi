@@ -16,9 +16,9 @@ class AllResultScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    List<String> beds1 = [Ics.flexibleBed, Ics.middleBed, Ics.longBed];
-    List<String> beds2 = [Ics.longBed, Ics.middleBed,Ics.flexibleBed, Ics.longBed];
-    List<String> beds3 = [Ics.middleBed,Ics.shortBed,  Ics.longBed];
+    List<String> beds1 = [Imgs.flexibleBed, Imgs.middleBed, Imgs.longBed];
+    List<String> beds2 = [Imgs.longBed, Imgs.middleBed,Imgs.flexibleBed, Imgs.longBed];
+    List<String> beds3 = [Imgs.middleBed,Imgs.shortBed,  Imgs.longBed];
     return BackgroundWidget(
       appBar: SFAppBar(
         context: context,

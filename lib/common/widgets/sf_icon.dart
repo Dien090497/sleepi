@@ -29,7 +29,7 @@ class SFIcon extends StatelessWidget {
       color: color,
       width: width,
       height: height,
-      fit: fit ?? BoxFit.fill,
+      fit: fit ?? BoxFit.contain,
       errorBuilder: (context, e, trace) {
         return const Icon(Icons.error);
       },
