@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
@@ -198,7 +199,7 @@ class _Confirm extends StatelessWidget {
             Expanded(
               flex: 3,
               child: SFText(
-                  keyText: "${LocaleKeys.listing}/${LocaleKeys.cancel}",
+                  keyText: "${LocaleKeys.listing.tr()}/${LocaleKeys.cancel.tr()}",
                   style: TextStyles.lightGrey14),
             ),
             Expanded(

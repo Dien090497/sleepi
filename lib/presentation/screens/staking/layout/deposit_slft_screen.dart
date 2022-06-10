@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
@@ -25,7 +26,7 @@ class DepositSlftScreen extends StatelessWidget {
           resizeToAvoidBottomInset: false,
           appBar: SFAppBar(
             context: context,
-            title: "${LocaleKeys.deposit} SLFT",
+            title: "${LocaleKeys.deposit.tr()} SLFT",
             textStyle: TextStyles.bold18LightWhite,
           ),
           child: SafeArea(

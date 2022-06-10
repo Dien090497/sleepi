@@ -158,7 +158,7 @@ class StakingList extends StatelessWidget {
                 children: [
                   Expanded(
                       child: SFText(
-                    keyText: LocaleKeys.your_earned.tr(),
+                    keyText: LocaleKeys.your_earned.tr(namedArgs: {'token': "SLFT"}),
                     style: TextStyles.lightWhite16,
                   )),
                   Row(
