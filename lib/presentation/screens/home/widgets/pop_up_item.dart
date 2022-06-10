@@ -28,9 +28,7 @@ class PopUpItem extends StatelessWidget {
             keyText: id,
             style: TextStyles.white1w700size16,
           ),
-          const SizedBox(height: 24),
-          SFIcon(icon,),
-          const SizedBox(height: 24),
+          SFIcon(icon, width: 160,),
           SFText(keyText: 'Level 5', style: TextStyles.lightGrey14),
           const SizedBox(height: 32),
           SFCard(

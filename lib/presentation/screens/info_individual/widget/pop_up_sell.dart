@@ -143,7 +143,6 @@ class _Confirm extends StatelessWidget {
         Row(
           children: [
             Expanded(
-              flex: 3,
               child: SFText(
                   keyText: LocaleKeys.list_price,
                   style: TextStyles.lightGrey14),
