@@ -49,9 +49,7 @@ class PopUpBedsDetail extends StatelessWidget {
               keyText: LocaleKeys.matching_bed,
               style: TextStyles.white1w700size16,
             ),
-            const SizedBox(height: 20),
-            SFIcon(icon),
-            const SizedBox(height: 25),
+            SFIcon(icon, height: 160,),
             Row(
               children: [
                 Expanded(
