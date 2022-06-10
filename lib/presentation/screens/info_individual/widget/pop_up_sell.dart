@@ -280,15 +280,9 @@ class _Detail extends StatelessWidget {
             children: [
               Expanded(
                 flex: 3,
-                child: Row(
-                  children: [
-                    const SFIcon(Ics.icTwoEyes, color: AppColors.blue),
-                    const SizedBox(width: 12),
-                    SFText(
-                        keyText: 'Middle',
-                        style: TextStyles.lightWhite16W700),
-                  ],
-                ),
+                child:   SFText(
+                    keyText: 'Middle',
+                    style: TextStyles.lightWhite16W700),
               ),
               Expanded(
                 child: SFText(
