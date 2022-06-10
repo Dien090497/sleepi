@@ -149,7 +149,7 @@ class StakingList extends StatelessWidget {
           ],
         ),
         SFCard(
-          padding:  EdgeInsets.all(MediaQuery.of(context).size.width * 0.05),
+          padding: EdgeInsets.all(MediaQuery.of(context).size.width * 0.05),
           child: Column(
             children: [
               Row(
@@ -163,7 +163,12 @@ class StakingList extends StatelessWidget {
                   Row(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      SvgPicture.asset(Ics.icSlft, width: 32, height: 32, fit: BoxFit.contain,),
+                      SvgPicture.asset(
+                        Ics.icSlft,
+                        width: 32,
+                        height: 32,
+                        fit: BoxFit.contain,
+                      ),
                       const SizedBox(
                         width: 6,
                       ),
@@ -189,7 +194,12 @@ class StakingList extends StatelessWidget {
                   Row(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      SvgPicture.asset(Ics.icSlft, width: 32, height: 32, fit: BoxFit.contain,),
+                      SvgPicture.asset(
+                        Ics.icSlft,
+                        width: 32,
+                        height: 32,
+                        fit: BoxFit.contain,
+                      ),
                       const SizedBox(
                         width: 6,
                       ),
@@ -254,8 +264,12 @@ class StakingList extends StatelessWidget {
                   ),
                   GestureDetector(
                     onTap: () {
-                      showCustomDialog(context,
-                          children: [const PopUpStaking(message: LocaleKeys.do_you_really_want_to_compound,)]);
+                      showCustomDialog(context, children: [
+                        PopUpStaking(
+                          message: LocaleKeys.do_you_really_want_to_compound,
+                          onPressed: () => showSuccessfulDialog(context),
+                        )
+                      ]);
                     },
                     child: SFText(
                       keyText: LocaleKeys.compound,
@@ -290,7 +304,9 @@ class StakingList extends StatelessWidget {
                   borderColor: AppColors.blue,
                   onPressed: () {}),
             ),
-            const SizedBox(height: 16,),
+            const SizedBox(
+              height: 16,
+            ),
           ],
         )
       ],
