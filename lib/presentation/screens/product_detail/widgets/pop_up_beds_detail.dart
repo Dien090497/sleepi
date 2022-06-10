@@ -49,9 +49,7 @@ class PopUpBedsDetail extends StatelessWidget {
               keyText: LocaleKeys.matching_bed,
               style: TextStyles.white1w700size16,
             ),
-            const SizedBox(height: 20),
-            SFIcon(icon),
-            const SizedBox(height: 25),
+            SFIcon(icon, height: 160,),
             Row(
               children: [
                 Expanded(
@@ -62,7 +60,7 @@ class PopUpBedsDetail extends StatelessWidget {
                       color: AppColors.whiteOpacity5,
                       borderRadius: BorderRadius.circular(10),
                     ),
-                    child: const SFIcon(Ics.shortBed),
+                    child: const SFIcon(Imgs.shortBed),
                   ),
                 ),
                 const SizedBox(
@@ -90,7 +88,7 @@ class PopUpBedsDetail extends StatelessWidget {
                       color: AppColors.whiteOpacity5,
                       borderRadius: BorderRadius.circular(10),
                     ),
-                    child: const SFIcon(Ics.bedsCouple),
+                    child: const SFIcon(Imgs.flexibleBed),
                   ),
                 ),
                 const SizedBox(
@@ -104,7 +102,7 @@ class PopUpBedsDetail extends StatelessWidget {
                       color: AppColors.whiteOpacity5,
                       borderRadius: BorderRadius.circular(10),
                     ),
-                    child: const SFIcon(Ics.bedBunk),
+                    child: const SFIcon(Imgs.middleBed),
                   ),
                 )
               ],

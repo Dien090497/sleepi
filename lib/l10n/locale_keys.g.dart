@@ -400,4 +400,6 @@ abstract class  LocaleKeys {
   static const others = 'others';
   static const ok = 'ok';
   static const close = 'close';
+  static const not_yours = 'not_yours';
+
 }

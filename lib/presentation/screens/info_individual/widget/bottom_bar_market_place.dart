@@ -46,7 +46,7 @@ class BottomBarMarketPlaceWidget extends StatelessWidget {
                       ),
                       Expanded(
                         child: SFText(
-                          keyText: '1000 SLFT',
+                          keyText: '1,000 AVAX',
                           style: TextStyles.white16,
                         ),
                       ),

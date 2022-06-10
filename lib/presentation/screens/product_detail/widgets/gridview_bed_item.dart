@@ -13,15 +13,16 @@ import 'package:slee_fi/common/widgets/sf_text.dart';
 import 'package:slee_fi/di/injector.dart';
 import 'package:slee_fi/l10n/locale_keys.g.dart';
 import 'package:slee_fi/presentation/screens/product_detail/widgets/top_left_banner.dart';
+import 'package:slee_fi/resources/resources.dart';
 
 class GridViewBedItem extends StatelessWidget {
   const GridViewBedItem(
       {Key? key,
-        required this.beds,
-        this.onBedTap,
-        this.price,
-        this.onBuyTap,
-        this.isScroll = true})
+      required this.beds,
+      this.onBedTap,
+      this.price,
+      this.onBuyTap,
+      this.isScroll = true})
       : super(key: key);
 
   final List<BedType> beds;
@@ -36,7 +37,7 @@ class GridViewBedItem extends StatelessWidget {
     return SFGridView(
       count: beds.length,
       isScroll: isScroll,
-      childAspectRatio: 8/10,
+      childAspectRatio: 9 / 10,
       itemBuilder: (context, i) {
         final bed = beds[i % BedType.values.length];
         return GestureDetector(
@@ -67,9 +68,12 @@ class GridViewBedItem extends StatelessWidget {
                   padding: const EdgeInsets.symmetric(horizontal: 16.0),
                   child: Column(
                     children: [
-                      const Spacer(),
-                      SFIcon(bed.image),
-                      const SizedBox(height: 12),
+                      Expanded(
+                        child: Container(
+                          alignment: Alignment.center,
+                          child: SFIcon(bed.image),
+                        ),
+                      ),
                       Container(
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(50),
@@ -108,10 +112,27 @@ class GridViewBedItem extends StatelessWidget {
                                     style: TextStyles.white14W700,
                                     stringCase: StringCase.upperCase,
                                   )),
-                              SFText(
-                                keyText: LocaleKeys.buy,
-                                style: TextStyles.blue14W700,
+                              SizedBox(
+                                width: 70,
+                                height: 28,
+                                child: ElevatedButton.icon(
+                                  icon: const SFIcon(Ics.icCart, width: 18,),
+                                  label:  SFText(keyText: LocaleKeys.buy, stringCase: StringCase.upperCase, style: TextStyles.white12,),
+                                  onPressed: () {
+                                    // print('Button Pressed');
+                                  },
+                                  style: ElevatedButton.styleFrom(
+                                    padding: const EdgeInsets.symmetric(horizontal: 6),
+                                    shape:  RoundedRectangleBorder(
+                                      borderRadius:  BorderRadius.circular(100),
+                                    ),
+                                  ),
+                                ),
                               ),
+                              // SFText(
+                              //   keyText: LocaleKeys.buy,
+                              //   style: TextStyles.blue14W700,
+                              // ),
                             ],
                           ),
                         ),

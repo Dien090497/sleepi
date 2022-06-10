@@ -7,7 +7,7 @@
 import 'dart:io' as _i6;
 
 import 'package:dio/dio.dart' as _i5;
-import 'package:flutter_secure_storage/flutter_secure_storage.dart' as _i18;
+import 'package:flutter_secure_storage/flutter_secure_storage.dart' as _i19;
 import 'package:get_it/get_it.dart' as _i1;
 import 'package:get_storage/get_storage.dart' as _i8;
 import 'package:http/http.dart' as _i3;
@@ -17,15 +17,16 @@ import 'package:shared_preferences/shared_preferences.dart' as _i15;
 
 import '../common/utils/date_time_utils.dart' as _i4;
 import '../common/utils/random_utils.dart' as _i14;
+import '../common/utils/toast_utils.dart' as _i16;
 import '../datasources/local/get_storage_datasource.dart' as _i7;
 import '../datasources/local/isar/isar_datasource.dart' as _i12;
-import '../datasources/local/secure_storage.dart' as _i17;
-import '../datasources/local/shared_preference_datasource.dart' as _i19;
-import '../datasources/remote/network/web3_datasource.dart' as _i16;
+import '../datasources/local/secure_storage.dart' as _i18;
+import '../datasources/local/shared_preference_datasource.dart' as _i20;
+import '../datasources/remote/network/web3_datasource.dart' as _i17;
 import '../repository/auth_repository.dart' as _i9;
 import '../repository/implementations/auth_implementation.dart' as _i10;
 import '../usecase/login_usecase.dart' as _i13;
-import 'register_module.dart' as _i20; // ignore_for_file: unnecessary_lambdas
+import 'register_module.dart' as _i21; // ignore_for_file: unnecessary_lambdas
 
 // ignore_for_file: lines_longer_than_80_chars
 /// initializes the registration of provided dependencies inside of [GetIt]
@@ -51,14 +52,15 @@ Future<_i1.GetIt> $initGetIt(_i1.GetIt get,
   await gh.factoryAsync<_i15.SharedPreferences>(() => registerModule.sharedPref,
       preResolve: true);
   gh.factory<_i7.StorageKeys>(() => _i7.StorageKeys());
-  gh.singleton<_i16.Web3DataSource>(_i16.Web3DataSource(get<_i3.Client>()));
-  gh.factory<_i17.SecureStorage>(() => _i17.SecureStorage(
-      get<_i18.FlutterSecureStorage>(), get<_i15.SharedPreferences>()));
-  gh.factory<_i19.SharedPreferenceDataSource>(
-      () => _i19.SharedPreferenceDataSource(get<_i15.SharedPreferences>()));
+  gh.factory<_i16.ToastUtils>(() => _i16.ToastUtils());
+  gh.singleton<_i17.Web3DataSource>(_i17.Web3DataSource(get<_i3.Client>()));
+  gh.factory<_i18.SecureStorage>(() => _i18.SecureStorage(
+      get<_i19.FlutterSecureStorage>(), get<_i15.SharedPreferences>()));
+  gh.factory<_i20.SharedPreferenceDataSource>(
+      () => _i20.SharedPreferenceDataSource(get<_i15.SharedPreferences>()));
   return get;
 }
 
-class _$RPCModule extends _i16.RPCModule {}
+class _$RPCModule extends _i17.RPCModule {}
 
-class _$RegisterModule extends _i20.RegisterModule {}
+class _$RegisterModule extends _i21.RegisterModule {}

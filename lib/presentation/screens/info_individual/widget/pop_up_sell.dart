@@ -8,7 +8,6 @@ import 'package:slee_fi/common/widgets/sf_dialog.dart';
 import 'package:slee_fi/common/widgets/sf_icon.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
 import 'package:slee_fi/l10n/locale_keys.g.dart';
-import 'package:slee_fi/resources/resources.dart';
 
 class PopUpSell extends StatefulWidget {
   const PopUpSell({
@@ -55,9 +54,9 @@ class _PopUpSellState extends State<PopUpSell> {
               SFText(
                   keyText: step == 2 ? LocaleKeys.confirm_to_sell : LocaleKeys.sell,
                   style: TextStyles.white1w700size18),
+              if (step >= 2)
               const SizedBox(height: 20),
-              if (step < 2) SFIcon(widget.icon),
-              if (step < 2) const SizedBox(height: 24),
+              if (step < 2) SFIcon(widget.icon, height: 160,),
               if (step < 2)
                 Container(
                   decoration: BoxDecoration(
@@ -280,15 +279,9 @@ class _Detail extends StatelessWidget {
             children: [
               Expanded(
                 flex: 3,
-                child: Row(
-                  children: [
-                    const SFIcon(Ics.icTwoEyes, color: AppColors.blue),
-                    const SizedBox(width: 12),
-                    SFText(
-                        keyText: 'Middle',
-                        style: TextStyles.lightWhite16W700),
-                  ],
-                ),
+                child:   SFText(
+                    keyText: 'Middle',
+                    style: TextStyles.lightWhite16W700),
               ),
               Expanded(
                 child: SFText(

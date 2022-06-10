@@ -164,9 +164,9 @@
   "show_contract_visit_snowtrace": "Show Contract / Visit Snowtrace to see contract",
   "yes": "Yes ",
   "no": "No",
-  "do_you_really_want_to_deposit": "Do you really want to deposit xxx 〇〇?",
-  "do_you_really_want_to_withdraw": "Do you really want to withdraw xxx 〇〇?",
-  "do_you_really_want_to_compound": "Do you really want to compound xxx 〇〇?",
+  "do_you_really_want_to_deposit": "Do you really want to deposit xxx SLFT?",
+  "do_you_really_want_to_withdraw": "Do you really want to withdraw xxx SLFT?",
+  "do_you_really_want_to_compound": "Do you really want to compound xxx SLFT?",
   "max_upper": "MAX",
   "in_spending": "〇〇 in spending",
   "your_wallet_is_being_prepared": "Your wallet is being prepared.",
@@ -199,7 +199,7 @@
   "main_bed": "Main Bed",
   "time": "Time",
   "use_item": "Use item",
-  "what_insurance": "What's Insurance?",
+  "what_insurance": "What's Insurance",
   "range": "Range",
   "alarm_bell": "Alarm: Bell",
   "rent": "Rent",
@@ -305,7 +305,7 @@
   "displays_message_motion_data_permission": "1. To allow access to motion data is important to accurately measure sleep quality.\n\n2. The data “SleeFi” would acquire will only be used to measure sleep quality.",
   "notification_permission": "“SLeeFi” Would Like to Send You Notifications",
   "displays_message_notification_permission": "Notificatinos may include alerts, sounds, and icon badges. These can be configured in Settings.\n\n",
-  "forgot_passcode": "Forgot passcode",
+  "forgot_passcode": "Forgot passcode?",
   "enter_the_seed_phrase": "Enter the Seed Phrase word and separate with space",
   "to_address": "To Address",
   "amount": "Amount",
@@ -398,5 +398,6 @@
   "display": "Display",
   "others": "Others",
   "ok": "OK",
-  "close": "Close"
+  "close": "Close",
+  "not_yours": "This bed is not yours."
 }

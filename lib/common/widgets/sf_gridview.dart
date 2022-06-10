@@ -47,6 +47,7 @@ class SFGridView extends StatelessWidget {
         : GridView.builder(
             itemCount: count,
             shrinkWrap: true,
+            padding: const EdgeInsets.symmetric(vertical: 16),
             physics: const NeverScrollableScrollPhysics(),
             keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
             gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(

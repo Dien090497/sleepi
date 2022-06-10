@@ -14,13 +14,14 @@ class TabItemsBuy extends StatelessWidget {
   const TabItemsBuy({Key? key, required this.onPress}) : super(key: key);
 
   final Function() onPress;
+
   @override
   Widget build(BuildContext context) {
     final beds = [
-    Ics.shortBed,
-    Ics.middleBed,
-    Ics.flexibleBed,
-      Ics.longBed,
+      Imgs.shortBed,
+      Imgs.middleBed,
+      Imgs.flexibleBed,
+      Imgs.longBed,
     ];
     final randomUtils = getIt<RandomUtils>();
 
@@ -44,7 +45,6 @@ class TabItemsBuy extends StatelessWidget {
                   SFGridView(
                     count: 20,
                     itemBuilder: (context, i) {
-
                       return ItemBedBuyWidget(
                         id: randomUtils.randomId(),
                         icon: beds[i % beds.length],
@@ -52,8 +52,11 @@ class TabItemsBuy extends StatelessWidget {
                     },
                   ),
                   Padding(
-                    padding:  EdgeInsets.only(bottom: MediaQuery.of(context).size.height * 0.3),
-                    child: const Center(child: SFIcon(Ics.commingSoon),),
+                    padding: EdgeInsets.only(
+                        bottom: MediaQuery.of(context).size.height * 0.3),
+                    child: const Center(
+                      child: SFIcon(Ics.commingSoon),
+                    ),
                   )
                   // SFGridView(
                   //   count: 20,

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:slee_fi/common/extensions/string_x.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
 import 'package:slee_fi/common/widgets/background_widget.dart';
@@ -60,11 +59,9 @@ class RecycleScreen extends StatelessWidget {
                     physics: const BouncingScrollPhysics(),
                     child: Column(
                       children: [
-                        const SizedBox(height: 24),
                         Container(
-                          width: 160,
-                          height: 160,
-                          padding: const EdgeInsets.symmetric(horizontal: 13),
+                          width: 180,
+                          height: 180,
                           margin: const EdgeInsets.symmetric(vertical: 24),
                           decoration: const BoxDecoration(
                             image: DecorationImage(
@@ -72,9 +69,8 @@ class RecycleScreen extends StatelessWidget {
                               fit: BoxFit.cover,
                             ),
                           ),
-                          child: const SFIcon(Ics.middleBed),
+                          child: const SFIcon(Imgs.shortBed),
                         ),
-                        const SizedBox(height: 30),
                         const Padding(
                           padding: EdgeInsets.symmetric(horizontal: 24.0),
                           child: SFLabelValue(
@@ -197,7 +193,6 @@ class RecycleScreen extends StatelessWidget {
                     radius: 100,
                     gradient: AppColors.gradientBlueButton,
                     width: size.width,
-                    stringCase: StringCase.upperCase,
                   ),
                 ),
               ),

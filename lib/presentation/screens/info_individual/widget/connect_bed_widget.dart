@@ -30,7 +30,7 @@ class ConnectBedWidget extends StatelessWidget {
                       child: Container(
                         alignment: Alignment.center,
                         child: GestureDetector(
-                          child: const SFIcon(Ics.middleBed),
+                          child: const SFIcon(Imgs.shortBed),
                           onTap: () {
                             // SFModalBottomSheet.show(
                             //   context,
