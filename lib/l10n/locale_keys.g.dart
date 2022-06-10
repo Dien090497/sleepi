@@ -344,5 +344,7 @@ abstract class  LocaleKeys {
   static const staked = 'staked';
   static const amet_minim_mollit_non = 'amet_minim_mollit_non';
   static const my_balance = 'my_balance';
+  static const high_price = 'high_price';
+  static const base_luck = 'base_luck';
 
 }

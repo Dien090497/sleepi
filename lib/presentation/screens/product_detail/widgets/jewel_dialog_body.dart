@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
@@ -58,7 +59,7 @@ class JewelDialogBody extends StatelessWidget {
             ),
             const SizedBox(height: 20),
             SFText(
-              keyText: 'Luck Jewel ($level)',
+              keyText: '${LocaleKeys.luck.tr()} Jewel ($level)',
               style: TextStyles.white1w700size16,
             ),
             const SizedBox(height: 24),
@@ -86,7 +87,7 @@ class JewelDialogBody extends StatelessWidget {
                   const SizedBox(width: 4),
                   Expanded(
                     child: SFText(
-                      keyText: '+2 Luck',
+                      keyText: '+2 ${LocaleKeys.luck.tr()}',
                       style: TextStyles.blue16,
                       textAlign: TextAlign.right,
                     ),
@@ -107,7 +108,7 @@ class JewelDialogBody extends StatelessWidget {
                   const SizedBox(width: 4),
                   Expanded(
                     child: SFText(
-                      keyText: '+5% Base Luck',
+                      keyText: '+5% ${LocaleKeys.base_luck}',
                       style: TextStyles.blue16,
                       textAlign: TextAlign.right,
                     ),
