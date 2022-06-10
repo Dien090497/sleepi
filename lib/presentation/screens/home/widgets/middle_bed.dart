@@ -16,7 +16,7 @@ class MiddleBed extends StatefulWidget {
 }
 
 class _MiddleBedState extends State<MiddleBed> {
-  late int i = 1;
+  late int i = 0;
 
   @override
   Widget build(BuildContext context) {
