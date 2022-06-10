@@ -32,6 +32,9 @@ class PasscodeNumPad extends StatelessWidget {
                 return _Option(
                   num: num,
                   onTap: () {
+                    if (num == '10') {
+                      return;
+                    }
                     if (num == '12') {
                       if (passcodeController.text.isEmpty) {
                         return;
@@ -91,8 +94,7 @@ class _Option extends StatelessWidget {
       child: Container(
         width: 70.w,
         height: 70.h,
-        margin: EdgeInsets.only( left: 11.h,
-            bottom: 16.h, right: 11.h),
+        margin: EdgeInsets.only(left: 11.h, bottom: 16.h, right: 11.h),
         decoration: BoxDecoration(
           shape: BoxShape.circle,
           color: color,
