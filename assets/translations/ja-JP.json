@@ -187,7 +187,7 @@
  "to_allow_access_to_motion_data_is_inportant": "正確に睡眠計測をするために、モーションデータへのアクセス許可は重要です。",
  "the_data_would_acquire_will_only": "〇〇 が取得するデータは睡眠の計測のみに利用されます。",
  "notification_may_include_alert_sound_and_icon": "通知には警告、サウンド、アイコンバッジが含まれます。設定で変更できます。",
- "how_to_play_whitepaper_litepaper_linktree": "プレイ方法",
+ "how_to_play": "プレイ方法",
  "whitepaper": "ホワイトペーパー",
  "litepaper": "ライトペーパー",
  "linktree": "リンクツリー",
