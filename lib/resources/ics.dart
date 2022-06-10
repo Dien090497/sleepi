@@ -6,15 +6,12 @@ class Ics {
   static const String addBed = 'assets/icons/add_bed.svg';
   static const String arrowLeft = 'assets/icons/arrow_left.svg';
   static const String bed3d = 'assets/icons/bed_3d.svg';
-  static const String bedBunk = 'assets/icons/bed_bunk.svg';
-  static const String bedsCouple = 'assets/icons/beds_couple.svg';
   static const String chart = 'assets/icons/chart.svg';
   static const String commingSoon = 'assets/icons/comming_soon.svg';
   static const String efficiency = 'assets/icons/efficiency.svg';
   static const String ellipse = 'assets/icons/ellipse.svg';
   static const String facebook = 'assets/icons/facebook.svg';
   static const String filter = 'assets/icons/filter.svg';
-  static const String flexibleBed = 'assets/icons/flexible_bed.svg';
   static const String gacha = 'assets/icons/gacha.svg';
   static const String gift = 'assets/icons/gift.svg';
   static const String group = 'assets/icons/group.svg';
@@ -54,14 +51,10 @@ class Ics {
   static const String icWallet = 'assets/icons/ic_wallet.svg';
   static const String levelUp = 'assets/icons/level_up.svg';
   static const String lock = 'assets/icons/lock.svg';
-  static const String longBed = 'assets/icons/long_bed.svg';
-  static const String middleBed = 'assets/icons/middle_bed.svg';
   static const String recycling = 'assets/icons/recycling.svg';
   static const String repair = 'assets/icons/repair.svg';
   static const String shopping = 'assets/icons/shopping.svg';
-  static const String shortBed = 'assets/icons/short_bed.svg';
   static const String signOut = 'assets/icons/sign_out.svg';
-  static const String sleep = 'assets/icons/sleep.svg';
   static const String star = 'assets/icons/star.svg';
   static const String starOutlined = 'assets/icons/star_outlined.svg';
   static const String successful = 'assets/icons/successful.svg';
@@ -73,15 +66,12 @@ class Ics {
     addBed,
     arrowLeft,
     bed3d,
-    bedBunk,
-    bedsCouple,
     chart,
     commingSoon,
     efficiency,
     ellipse,
     facebook,
     filter,
-    flexibleBed,
     gacha,
     gift,
     group,
@@ -121,14 +111,10 @@ class Ics {
     icWallet,
     levelUp,
     lock,
-    longBed,
-    middleBed,
     recycling,
     repair,
     shopping,
-    shortBed,
     signOut,
-    sleep,
     star,
     starOutlined,
     successful,

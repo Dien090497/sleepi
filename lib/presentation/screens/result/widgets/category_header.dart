@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
+import 'package:slee_fi/common/widgets/sf_icon.dart';
 import 'package:slee_fi/common/widgets/sf_image_border.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
 import 'package:slee_fi/l10n/locale_keys.g.dart';
@@ -45,13 +45,11 @@ class CategoryHeader extends StatelessWidget {
                     Container(
                       height: 164,
                       alignment: Alignment.center,
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 30, vertical: 58),
                       decoration: BoxDecoration(
                         color: AppColors.white.withOpacity(0.07),
                         borderRadius: BorderRadius.circular(16),
                       ),
-                      child: SvgPicture.asset(Ics.sleep),
+                      child: const SFIcon(Imgs.shortBed, height: 160,),
                     )
                   ],
                 ),

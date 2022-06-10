@@ -47,7 +47,6 @@ class _MiddleBedState extends State<MiddleBed> {
                 keyText: '${beds[i].name} Bed',
                 style: TextStyles.blue14,
               ),
-              const SizedBox(height: 24),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 7),
                 child: Row(
@@ -70,7 +69,11 @@ class _MiddleBedState extends State<MiddleBed> {
                         Navigator.pushNamed(context, R.nftInfo,
                             arguments: false);
                       },
-                      child: SFIcon(beds[i].image, height: 72),
+                      child: SFIcon(
+                        beds[i].image,
+                        height: 180,
+                        fit: BoxFit.fitHeight,
+                      ),
                     ),
                     InkWell(
                       onTap: () {
@@ -87,7 +90,6 @@ class _MiddleBedState extends State<MiddleBed> {
                   ],
                 ),
               ),
-              const SizedBox(height: 32),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [

@@ -76,7 +76,7 @@ class _BottomBarWidgetState extends State<BottomBarWidget> {
                   context,
                   children: [
                     PopUpLevelUp(
-                        icon: Ics.middleBed,
+                        icon: Imgs.middleBed,
                         level: 20,
                         cost: 21,
                         time: 1260,
@@ -99,7 +99,7 @@ class _BottomBarWidgetState extends State<BottomBarWidget> {
                   context,
                   children: [
                     PopUpRepair(
-                      icon: Ics.middleBed,
+                      icon: Imgs.middleBed,
                       cost: 120,
                       level: 20,
                       time: 122,
@@ -131,7 +131,7 @@ class _BottomBarWidgetState extends State<BottomBarWidget> {
                   PopUpSell(
                     time: 1,
                     cost: 1,
-                    icon: Ics.middleBed,
+                    icon: Imgs.middleBed,
                     level: 2,
                     onCancel: () {},
                     onConfirm: () {},
