@@ -57,7 +57,7 @@ class _PopUpSelectBedState extends State<PopUpSelectBed> {
                         child: SFGridView(
                           count: widget.beds.length,
                           isScroll: true,
-                          childAspectRatio: 1,
+                          childAspectRatio: 9/10,
                           itemBuilder: (context, i) {
                             return ItemBed(
                               id: listID[i],

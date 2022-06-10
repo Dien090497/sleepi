@@ -17,11 +17,11 @@ import 'package:slee_fi/presentation/screens/product_detail/widgets/top_left_ban
 class GridViewBedItem extends StatelessWidget {
   const GridViewBedItem(
       {Key? key,
-        required this.beds,
-        this.onBedTap,
-        this.price,
-        this.onBuyTap,
-        this.isScroll = true})
+      required this.beds,
+      this.onBedTap,
+      this.price,
+      this.onBuyTap,
+      this.isScroll = true})
       : super(key: key);
 
   final List<BedType> beds;
@@ -36,7 +36,7 @@ class GridViewBedItem extends StatelessWidget {
     return SFGridView(
       count: beds.length,
       isScroll: isScroll,
-      childAspectRatio: 8/10,
+      childAspectRatio: 9 / 10,
       itemBuilder: (context, i) {
         final bed = beds[i % BedType.values.length];
         return GestureDetector(
@@ -67,9 +67,12 @@ class GridViewBedItem extends StatelessWidget {
                   padding: const EdgeInsets.symmetric(horizontal: 16.0),
                   child: Column(
                     children: [
-                      const Spacer(),
-                      SFIcon(bed.image),
-                      const SizedBox(height: 12),
+                      Expanded(
+                        child: Container(
+                          alignment: Alignment.center,
+                          child: SFIcon(bed.image),
+                        ),
+                      ),
                       Container(
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(50),
@@ -104,10 +107,10 @@ class GridViewBedItem extends StatelessWidget {
                             children: [
                               Expanded(
                                   child: SFText(
-                                    keyText: '$price ${LocaleKeys.avax}',
-                                    style: TextStyles.white14W700,
-                                    stringCase: StringCase.upperCase,
-                                  )),
+                                keyText: '$price ${LocaleKeys.avax}',
+                                style: TextStyles.white14W700,
+                                stringCase: StringCase.upperCase,
+                              )),
                               SFText(
                                 keyText: LocaleKeys.buy,
                                 style: TextStyles.blue14W700,

@@ -71,7 +71,7 @@ class RecycleScreen extends StatelessWidget {
                               fit: BoxFit.cover,
                             ),
                           ),
-                          child: const SFIcon(Ics.middleBed),
+                          child: const SFIcon(Imgs.middleBed),
                         ),
                         const SizedBox(height: 30),
                         const Padding(

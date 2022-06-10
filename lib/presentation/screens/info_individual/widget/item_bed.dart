@@ -10,10 +10,10 @@ import 'package:slee_fi/presentation/screens/product_detail/widgets/top_left_ban
 class ItemBed extends StatelessWidget {
   const ItemBed(
       {Key? key,
-        required this.bed,
-        required this.selected,
-        required this.id,
-        required this.onTap})
+      required this.bed,
+      required this.selected,
+      required this.id,
+      required this.onTap})
       : super(key: key);
 
   final BedType bed;
@@ -31,7 +31,7 @@ class ItemBed extends StatelessWidget {
           borderRadius: BorderRadius.circular(16),
           border: Border.all(
             color:
-            selected ? AppColors.blue : AppColors.white.withOpacity(0.05),
+                selected ? AppColors.blue : AppColors.white.withOpacity(0.05),
             width: 1,
           ),
         ),
@@ -47,17 +47,20 @@ class ItemBed extends StatelessWidget {
               alignment: Alignment.center,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisAlignment: MainAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  SFIcon(bed.image),
-                  const SizedBox(height: 24),
+                  Expanded(
+                      child: Container(
+                          alignment: Alignment.center,
+                          child: SFIcon(bed.image))),
                   Container(
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(50),
                       border: Border.all(color: AppColors.light4),
                     ),
                     padding:
-                    const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+                        const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+                    margin: const EdgeInsets.only(bottom: 20),
                     child: SFText(
                       keyText: id,
                       style: TextStyles.white1w700size12,

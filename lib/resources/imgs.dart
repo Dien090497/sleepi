@@ -5,8 +5,6 @@ class Imgs {
 
   static const String avax = 'assets/images/avax.png';
   static const String background = 'assets/images/background.png';
-  static const String bedShortBig = 'assets/images/bed_short_big.png';
-  static const String bedShortNormal = 'assets/images/bed_short_normal.png';
   static const String bedroomGacha = 'assets/images/bedroom_gacha.png';
   static const String bell = 'assets/images/bell.png';
   static const String binance = 'assets/images/binance.png';
@@ -17,6 +15,7 @@ class Imgs {
   static const String efficiency = 'assets/images/efficiency.png';
   static const String emptyBedBox = 'assets/images/empty_bed_box.png';
   static const String errorNoBed = 'assets/images/error_no_bed.png';
+  static const String flexibleBed = 'assets/images/flexible_bed.png';
   static const String gacha = 'assets/images/gacha.png';
   static const String health = 'assets/images/health.png';
   static const String healthcare = 'assets/images/healthcare.png';
@@ -29,11 +28,13 @@ class Imgs {
   static const String jewelRed = 'assets/images/jewel_red.png';
   static const String jewels = 'assets/images/jewels.png';
   static const String logo = 'assets/images/logo.png';
+  static const String longBed = 'assets/images/long_bed.png';
   static const String luck = 'assets/images/luck.png';
   static const String lvUp = 'assets/images/lv_up.png';
   static const String market = 'assets/images/market.png';
   static const String mic = 'assets/images/mic.png';
   static const String microphone = 'assets/images/microphone.png';
+  static const String middleBed = 'assets/images/middle_bed.png';
   static const String mint = 'assets/images/mint.png';
   static const String mintShoe = 'assets/images/mint_shoe.png';
   static const String motion = 'assets/images/motion.png';
@@ -48,6 +49,7 @@ class Imgs {
   static const String resilience = 'assets/images/resilience.png';
   static const String sell = 'assets/images/sell.png';
   static const String sendToExternal = 'assets/images/send_to_external.png';
+  static const String shortBed = 'assets/images/short_bed.png';
   static const String special = 'assets/images/special.png';
   static const String statistics = 'assets/images/statistics.png';
   static const String transfer = 'assets/images/transfer.png';
@@ -60,8 +62,6 @@ class Imgs {
   static const List<String> values = [
     avax,
     background,
-    bedShortBig,
-    bedShortNormal,
     bedroomGacha,
     bell,
     binance,
@@ -72,6 +72,7 @@ class Imgs {
     efficiency,
     emptyBedBox,
     errorNoBed,
+    flexibleBed,
     gacha,
     health,
     healthcare,
@@ -84,11 +85,13 @@ class Imgs {
     jewelRed,
     jewels,
     logo,
+    longBed,
     luck,
     lvUp,
     market,
     mic,
     microphone,
+    middleBed,
     mint,
     mintShoe,
     motion,
@@ -102,6 +105,7 @@ class Imgs {
     resilience,
     sell,
     sendToExternal,
+    shortBed,
     special,
     statistics,
     transfer,
