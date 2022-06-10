@@ -197,7 +197,6 @@ class RecycleScreen extends StatelessWidget {
                     radius: 100,
                     gradient: AppColors.gradientBlueButton,
                     width: size.width,
-                    stringCase: StringCase.upperCase,
                   ),
                 ),
               ),

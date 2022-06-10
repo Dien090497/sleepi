@@ -199,7 +199,7 @@
   "main_bed": "Main Bed",
   "time": "Time",
   "use_item": "Use item",
-  "what_insurance": "What's Insurance?",
+  "what_insurance": "What's Insurance",
   "range": "Range",
   "alarm_bell": "Alarm: Bell",
   "rent": "Rent",
@@ -398,5 +398,6 @@
   "display": "Display",
   "others": "Others",
   "ok": "OK",
-  "close": "Close"
+  "close": "Close",
+  "not_yours": "This bed is not yours."
 }
