@@ -343,5 +343,6 @@ abstract class  LocaleKeys {
   static const this_bed_is_not_yours = 'this_bed_is_not_yours';
   static const staked = 'staked';
   static const amet_minim_mollit_non = 'amet_minim_mollit_non';
+  static const my_balance = 'my_balance';
 
 }

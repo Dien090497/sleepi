@@ -216,7 +216,7 @@ class _SLFTStakedState extends State<SLFTStaked> {
   bool swapText = false;
   int? selectedIndex;
 
-  List<String> balance = ["100", "10000", "My Balance"];
+  List<String> balance = ["100", "10000", LocaleKeys.my_balance.tr()];
   @override
   Widget build(BuildContext context) {
     return Column(
