@@ -23,13 +23,9 @@ class SettingScreen extends StatelessWidget {
           padding: const EdgeInsets.symmetric(horizontal: 16),
           children: const [
             AverageInfoWidget(),
-            SizedBox(
-              height: 24,
-            ),
+            SizedBox(height: 24),
             GeneralWidget(),
-            SizedBox(
-              height: 24,
-            ),
+            SizedBox(height: 24),
             ProfileWidget(),
           ],
         ),
