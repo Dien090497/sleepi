@@ -108,7 +108,7 @@ class GridViewBedItem extends StatelessWidget {
                             children: [
                               Expanded(
                                   child: SFText(
-                                    keyText: '$price ${LocaleKeys.avax}',
+                                    keyText: '$price AVAX',
                                     style: TextStyles.white14W700,
                                     stringCase: StringCase.upperCase,
                                   )),

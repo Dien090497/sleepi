@@ -47,7 +47,7 @@ class ImportWalletScreen extends StatelessWidget {
                             const SizedBox(height: 20),
                             const SFTextField(
                               labelText: LocaleKeys.seed_phrase,
-                              hintText: LocaleKeys.enter_the_seed_phrase,
+                              hintText: LocaleKeys.enter_the_seed_phrase_word,
                               hintStyle: TextStyles.w400lightGrey12,
                               maxLine: 10,
                               maxLength: 256,

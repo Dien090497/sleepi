@@ -18,7 +18,7 @@ class AssetTile extends StatefulWidget {
 }
 
 class _AssetTileState extends State<AssetTile> {
-  String selected = LocaleKeys.avax;
+  String selected = "AVAX";
   String image = Ics.icAvax;
 
   @override

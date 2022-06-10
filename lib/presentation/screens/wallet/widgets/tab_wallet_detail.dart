@@ -25,7 +25,7 @@ class TabWalletDetail extends StatelessWidget {
             const SizedBox(
               height: 32,
             ),
-            SFText(keyText: LocaleKeys.avax_c_chain, style: TextStyles.bold12Blue),
+            SFText(keyText: "AVAX C-Chain", style: TextStyles.bold12Blue),
             const SizedBox(
               height: 4.0,
             ),

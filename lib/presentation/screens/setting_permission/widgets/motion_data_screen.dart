@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:slee_fi/common/routes/app_routes.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
@@ -26,7 +27,7 @@ class MotionDataPermissionScreen extends StatelessWidget {
                 height: 24.0,
               ),
               SFText(
-                keyText: LocaleKeys.motion_data_permission,
+                keyText: LocaleKeys.allow_to_access_motion_data,
                 style: TextStyles.bold24LightWhite,
                 textAlign: TextAlign.center,
               ),
@@ -34,7 +35,11 @@ class MotionDataPermissionScreen extends StatelessWidget {
                 height: 32.0,
               ),
               SFText(
-                keyText: LocaleKeys.displays_message_motion_data_permission,
+                keyText: "1.${LocaleKeys.to_allow_access_to_motion_data_is_inportant.tr()}",
+                style: TextStyles.lightGrey16,
+              ),
+              SFText(
+                keyText: "2.${LocaleKeys.the_data_would_acquire_will_only.tr()}",
                 style: TextStyles.lightGrey16,
               ),
             ],

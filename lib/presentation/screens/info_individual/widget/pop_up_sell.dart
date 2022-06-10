@@ -198,7 +198,7 @@ class _Confirm extends StatelessWidget {
             Expanded(
               flex: 3,
               child: SFText(
-                  keyText: LocaleKeys.listing_cancel,
+                  keyText: "${LocaleKeys.listing}/${LocaleKeys.cancel}",
                   style: TextStyles.lightGrey14),
             ),
             Expanded(

@@ -106,7 +106,7 @@ class HomeScreen extends StatelessWidget {
                                       CrossAxisAlignment.center,
                                       children: [
                                         SFText(
-                                          keyText: LocaleKeys.what_insurance,
+                                          keyText: LocaleKeys.what_is_insurance,
                                           style: TextStyles.lightGrey12,
                                         ),
                                         const SizedBox(

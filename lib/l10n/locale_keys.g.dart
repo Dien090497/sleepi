@@ -62,7 +62,7 @@ abstract class  LocaleKeys {
   static const restore_wallet = 'restore_wallet';
   static const your_12_word_seed_phrase = 'your_12_word_seed_phrase';
   static const keep_your_assets_safe = 'keep_your_assets_safe';
-  static const overwite_your_current_mobile_wallet = 'overwite_your_current_mobile_wallet';
+  static const overwrite_your_current_mobile_wallet = 'overwrite_your_current_mobile_wallet';
   static const new_email = 'new_email';
   static const please_set_password_first = 'please_set_password_first';
   static const average_bed_time = 'average_bed_time';
@@ -103,7 +103,7 @@ abstract class  LocaleKeys {
   static const allow_to_access_motion_data = 'allow_to_access_motion_data';
   static const allow = 'allow';
   static const setup_microphone_access = 'setup_microphone_access';
-  static const would_like_to_send_you notifications = 'would_like_to_send_you notifications';
+  static const would_like_to_send_you_notifications = 'would_like_to_send_you_notifications';
   static const attributes = 'attributes';
   static const effciency = 'effciency';
   static const luck = 'luck';
@@ -117,7 +117,7 @@ abstract class  LocaleKeys {
   static const normal_gacha = 'normal_gacha';
   static const profitability = 'profitability';
   static const single_gacha = 'single_gacha';
-  static const 10_times_gacha = '10_times_gacha';
+  static const ten_times_gacha = 'ten_times_gacha';
   static const common = 'common';
   static const uncommon = 'uncommon';
   static const rare_beds_chance = 'rare_beds_chance';
@@ -189,7 +189,7 @@ abstract class  LocaleKeys {
   static const to_allow_access_to_motion_data_is_inportant = 'to_allow_access_to_motion_data_is_inportant';
   static const the_data_would_acquire_will_only = 'the_data_would_acquire_will_only';
   static const notification_may_include_alert_sound_and_icon = 'notification_may_include_alert_sound_and_icon';
-  static const how_to_play_whitepaper_litepaper_linktree = 'how_to_play_whitepaper_litepaper_linktree';
+  static const how_to_play = 'how_to_play';
   static const whitepaper = 'whitepaper';
   static const litepaper = 'litepaper';
   static const linktree = 'linktree';
@@ -249,7 +249,6 @@ abstract class  LocaleKeys {
   static const wallet_account = 'wallet_account';
   static const your_in_spending = 'your_in_spending';
   static const stake = 'stake';
-  static const in = 'in';
   static const staking_not_only_allows_you_to_increase_your_tokens = 'staking_not_only_allows_you_to_increase_your_tokens';
   static const earning_token = 'earning_token';
   static const your_earned = 'your_earned';
@@ -331,5 +330,18 @@ abstract class  LocaleKeys {
   static const display = 'display';
   static const others = 'others';
   static const close = 'close';
+  static const one_bed_will_be_burned = 'one_bed_will_be_burned';
+  static const verification_login = 'verification_login';
+  static const export = 'export';
+  static const avalanche = 'avalanche';
+  static const about_permissions = 'about_permissions';
+  static const avalanche_wallet = 'avalanche_wallet';
+  static const notifications = 'notifications';
+  static const microphone = 'microphone';
+  static const motion_data = 'motion_data';
+  static const your_slft_in_spending = 'your_slft_in_spending';
+  static const this_bed_is_not_yours = 'this_bed_is_not_yours';
+  static const staked = 'staked';
+  static const amet_minim_mollit_non = 'amet_minim_mollit_non';
 
 }

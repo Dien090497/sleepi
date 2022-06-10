@@ -15,9 +15,9 @@ class WalletDetailList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     List keyList = [
-      LocaleKeys.slft,
-      LocaleKeys.slgt,
-      LocaleKeys.avax,
+      "SLFT"
+      "SLGT",
+      "AVAX",
       LocaleKeys.beds,
       LocaleKeys.jewels,
       LocaleKeys.bed_box,

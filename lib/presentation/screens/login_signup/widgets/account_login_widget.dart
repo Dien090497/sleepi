@@ -31,7 +31,7 @@ class _AccountLoginState extends State<AccountLoginWidget> {
     return Column(
       children: [
         SFText(
-          keyText: isLoginSignup ? LocaleKeys.login_signup : LocaleKeys.account_login,
+          keyText: isLoginSignup ? "${LocaleKeys.login}/${LocaleKeys.signup}" : LocaleKeys.account_login,
           style: TextStyles.bold18LightWhite,
           stringCase: StringCase.upperCase,
         ),
@@ -49,7 +49,7 @@ class _AccountLoginState extends State<AccountLoginWidget> {
             : const SFTextFieldPassword(labelText: LocaleKeys.password,),
         const SizedBox(height: 37),
         SFButton(
-          text: isLoginSignup ? LocaleKeys.login_signup : LocaleKeys.login,
+          text: isLoginSignup ? "${LocaleKeys.login}/${LocaleKeys.signup}" : LocaleKeys.login,
           color: AppColors.blue,
           textStyle: TextStyles.w600WhiteSize16,
           onPressed: () {

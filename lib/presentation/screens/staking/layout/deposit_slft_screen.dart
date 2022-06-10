@@ -25,7 +25,7 @@ class DepositSlftScreen extends StatelessWidget {
           resizeToAvoidBottomInset: false,
           appBar: SFAppBar(
             context: context,
-            title: LocaleKeys.deposit_slft,
+            title: "${LocaleKeys.deposit} SLFT",
             textStyle: TextStyles.bold18LightWhite,
           ),
           child: SafeArea(

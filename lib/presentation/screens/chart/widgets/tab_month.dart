@@ -49,7 +49,7 @@ class TabMonth extends StatelessWidget {
                 '${dateUtils.MMMdo(dateUtils.startOfMonth(date))} ~ ${dateUtils.MMMdo(dateUtils.endOfMonth(date))}, ${date.year}',
             children: [
               const ChartTitle(
-                title: LocaleKeys.slft,
+                title: "SLFT",
                 textStyleTitle: TextStyles.bold16LightWhite,
                 padding: EdgeInsets.zero,
               ),

@@ -56,7 +56,7 @@ class TabWeek extends StatelessWidget {
                 '${dateTimeUtils.MMMdo(start)} ${startYear == endYear ? '' : '$startYear '}~ ${startMonth != endMonth ? dateTimeUtils.MMMdo(end) : dateTimeUtils.doFormat(end)}, $endYear',
             children: [
               const ChartTitle(
-                title: LocaleKeys.slft,
+                title: "SLFT",
                 textStyleTitle: TextStyles.bold16LightWhite,
                 padding: EdgeInsets.zero,
               ),
