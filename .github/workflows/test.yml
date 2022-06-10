@@ -1,0 +1,86 @@
+name: Test Only
+
+on:
+  workflow_call:
+    secrets:
+      json:
+        required: true
+      webhook:
+        required: true
+    inputs:
+      diawi_qr:
+        required: false
+        type: string
+      diawi_url:
+        required: true
+        type: string
+      dg_url:
+        required: false
+        type: string
+      dg_icon:
+        required: true
+        type: string
+
+jobs:
+  #  test:
+  #    name: Test
+  #    runs-on: ubuntu-latest
+  #    steps:
+  #
+  #      - id: json
+  #        run: echo ::set-output name=data::'${{ secrets.json }}'
+  #
+  #      - id: json_results
+  #        run: echo ::set-output name=data::${{ fromJSON(steps.json.outputs.data).results.file }}
+
+  send-message:
+    name: Send Msg
+    runs-on: ubuntu-latest
+    steps:
+      - name: Google Chat Notification
+        run: |
+          curl --location --request POST '${{ secrets.webhook }}' \
+          --header 'Content-Type: application/json' \
+          --data-raw '
+          {
+            "cards": [
+              {
+                "sections": [
+                  {
+                    "header": "Diawi",
+                    "widgets": [
+                      {
+                        "image": {
+                          "imageUrl": "${{ inputs.diawi_qr }}",
+                          "onClick": {
+                            "openLink": {
+                              "url": "${{ inputs.diawi_url }}"
+                            }
+                          }
+                        }
+                      }
+                    ]
+                  },
+                  {
+                    "header": "Deploy Gate",
+                    "widgets": [
+                      {
+                        "buttons": [
+                          {
+                            "textButton": {
+                              "text": "Download APK",
+                              "onClick": {
+                                "openLink": {
+                                  "url": "${{ inputs.dg_url }}"
+                                }
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }'

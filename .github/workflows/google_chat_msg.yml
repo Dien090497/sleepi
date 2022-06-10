@@ -1,4 +1,4 @@
-name: Reusable Send Notification
+name: Send GG Chat
 
 on:
   workflow_call:
@@ -6,43 +6,53 @@ on:
       webhook:
         required: true
     inputs:
-      imageUrl:
+      diawi_qr:
         required: false
         type: string
-      url:
+      diawi_url:
         required: true
         type: string
+#      deploygate_url:
+#        required: false
+#        type: string
+#      deploygate_icon:
+#        required: true
+#        type: string
 
 jobs:
   send-message:
+    name: Send Msg
     runs-on: ubuntu-latest
     steps:
-      - run: echo "${{ inputs.imageUrl }}"
-      - run: echo "${{ inputs.url }}"
+      - name: Submit string
+        run: |
+          echo ${{ inputs }}
+
       - name: Google Chat Notification
         run: |
           curl --location --request POST '${{ secrets.webhook }}' \
           --header 'Content-Type: application/json' \
           --data-raw '
           {
-              "cards": [
+            "cards": [
+              {
+                "sections": [
                   {
-                      "sections": [
-                          {
-                              "widgets": [
-                                  {
-                                      "image": {
-                                          "imageUrl": "${{ inputs.imageUrl }}",
-                                          "onClick": {
-                                              "openLink": {
-                                                  "url": "${{ inputs.url }}"
-                                              }
-                                          }
-                                      }
-                                  }
-                              ]
+                    "header": "Diawi",
+                    "widgets": [
+                      {
+                        "image": {
+                          "imageUrl": "${{ inputs.diawi_qr }}",
+                          "onClick": {
+                            "openLink": {
+                              "url": "${{ inputs.diawi_url }}"
+                            }
                           }
-                      ]
+                        }
+                      }
+                    ]
                   }
-              ]
+                ]
+              }
+            ]
           }'
