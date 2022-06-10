@@ -13,6 +13,7 @@ import 'package:slee_fi/common/widgets/sf_text.dart';
 import 'package:slee_fi/di/injector.dart';
 import 'package:slee_fi/l10n/locale_keys.g.dart';
 import 'package:slee_fi/presentation/screens/product_detail/widgets/top_left_banner.dart';
+import 'package:slee_fi/resources/resources.dart';
 
 class GridViewBedItem extends StatelessWidget {
   const GridViewBedItem(
@@ -108,10 +109,27 @@ class GridViewBedItem extends StatelessWidget {
                                     style: TextStyles.white14W700,
                                     stringCase: StringCase.upperCase,
                                   )),
-                              SFText(
-                                keyText: LocaleKeys.buy,
-                                style: TextStyles.blue14W700,
+                              SizedBox(
+                                width: 70,
+                                height: 28,
+                                child: ElevatedButton.icon(
+                                  icon: const SFIcon(Ics.icCart, width: 18,),
+                                  label:  SFText(keyText: LocaleKeys.buy, stringCase: StringCase.upperCase, style: TextStyles.white12,),
+                                  onPressed: () {
+                                    // print('Button Pressed');
+                                  },
+                                  style: ElevatedButton.styleFrom(
+                                    padding: const EdgeInsets.symmetric(horizontal: 6),
+                                    shape:  RoundedRectangleBorder(
+                                      borderRadius:  BorderRadius.circular(100),
+                                    ),
+                                  ),
+                                ),
                               ),
+                              // SFText(
+                              //   keyText: LocaleKeys.buy,
+                              //   style: TextStyles.blue14W700,
+                              // ),
                             ],
                           ),
                         ),
