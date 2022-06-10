@@ -35,44 +35,47 @@ class TabJewelsDetail extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final jewels = [
-      Imgs.jewelGreen,
+      Imgs.jewelSliver,
       Imgs.jewelPurple,
-      Imgs.jewelBlue,
+      Imgs.jewelGreen,
       Imgs.jewelRed
     ];
     final randomUtils = getIt<RandomUtils>();
 
     return DefaultTabController(
       length: 2,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          SFSubTabBar(texts: const [LocaleKeys.jewels, LocaleKeys.upgrade]),
-          const SizedBox(height: 12),
-          Expanded(
-            child: TabBarView(
-              children: [
-                SFGridView(
-                  count: jewels.length * 3,
-                  childAspectRatio: 1,
-                  itemBuilder: (context, i) {
-                    String randomId = randomUtils.randomId();
-                    return GestureDetector(
-                      onTap: () {
-                        _showJewelDialog(context, jewels[i], randomId);
-                      },
-                      child: MyJewelsShortWidget(
-                        id: randomId,
-                        icon: jewels[i % jewels.length],
-                      ),
-                    );
-                  },
-                ),
-                const UpGradeTab(),
-              ],
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 12.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            SFSubTabBar(texts: const [LocaleKeys.jewels, LocaleKeys.upgrade]),
+            const SizedBox(height: 12),
+            Expanded(
+              child: TabBarView(
+                children: [
+                  SFGridView(
+                    count: jewels.length * 3,
+                    childAspectRatio: 1,
+                    itemBuilder: (context, i) {
+                      String randomId = randomUtils.randomId();
+                      return GestureDetector(
+                        onTap: () {
+                          _showJewelDialog(context, jewels[i], randomId);
+                        },
+                        child: MyJewelsShortWidget(
+                          id: randomId,
+                          icon: jewels[i % jewels.length],
+                        ),
+                      );
+                    },
+                  ),
+                  const UpGradeTab(),
+                ],
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

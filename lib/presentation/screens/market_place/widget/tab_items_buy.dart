@@ -18,17 +18,17 @@ class TabItemsBuy extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final beds = [
-      Imgs.shortBed,
-      Imgs.middleBed,
-      Imgs.flexibleBed,
-      Imgs.longBed,
+      Imgs.jewelSliver,
+      Imgs.jewelPurple,
+      Imgs.jewelGreen,
+      Imgs.jewelRed
     ];
     final randomUtils = getIt<RandomUtils>();
 
     return DefaultTabController(
       length: 2,
       child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 6.0),
+        padding: const EdgeInsets.symmetric(horizontal: 12.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -44,6 +44,7 @@ class TabItemsBuy extends StatelessWidget {
                 children: [
                   SFGridView(
                     count: 20,
+                    childAspectRatio: 8/10,
                     itemBuilder: (context, i) {
                       return ItemBedBuyWidget(
                         id: randomUtils.randomId(),
@@ -59,13 +60,6 @@ class TabItemsBuy extends StatelessWidget {
                     ),
                   )
                   // SFGridView(
-                  //   count: 20,
-                  //   itemBuilder: (context, i) {
-                  //     return ItemBedBuyWidget(
-                  //       icon: beds[i % beds.length],
-                  //     );
-                  //   },
-                  // )
                 ],
               ),
             ),

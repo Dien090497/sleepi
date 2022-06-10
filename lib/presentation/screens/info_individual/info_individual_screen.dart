@@ -57,7 +57,7 @@ class InfoIndividualScreen extends StatelessWidget {
                             onTap: () {},
                             radius: 16,
                             size: const Size(75, 75),
-                            padding: 20,
+                            padding: 8,
                           ),
                           const SizedBox(
                             width: 10,
@@ -67,17 +67,17 @@ class InfoIndividualScreen extends StatelessWidget {
                             onTap: () {},
                             radius: 16,
                             size: const Size(75, 75),
-                            padding: 20,
+                            padding: 8,
                           ),
                           const SizedBox(
                             width: 10,
                           ),
                           SFImageBorder(
-                            icon: Imgs.jewelBlue,
+                            icon: Imgs.jewelSliver,
                             onTap: () {},
                             radius: 16,
                             size: const Size(75, 75),
-                            padding: 20,
+                            padding: 8,
                           ),
                           const SizedBox(
                             width: 10,
@@ -87,7 +87,7 @@ class InfoIndividualScreen extends StatelessWidget {
                             onTap: () {},
                             radius: 16,
                             size: const Size(75, 75),
-                            padding: 20,
+                            padding: 8,
                           ),
                         ],
                       ),

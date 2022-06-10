@@ -37,7 +37,7 @@ class GridViewBedItem extends StatelessWidget {
     return SFGridView(
       count: beds.length,
       isScroll: isScroll,
-      childAspectRatio: 9 / 10,
+      childAspectRatio: 8 / 10,
       itemBuilder: (context, i) {
         final bed = beds[i % BedType.values.length];
         return GestureDetector(

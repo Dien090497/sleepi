@@ -14,39 +14,43 @@ class TabItemDetail extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final items = [
-      Imgs.jewelGreen,
+      Imgs.jewelSliver,
       Imgs.jewelPurple,
-      Imgs.jewelBlue,
+      Imgs.jewelGreen,
       Imgs.jewelRed
     ];
     final randomUtils = getIt<RandomUtils>();
 
     return DefaultTabController(
       length: 2,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          SFSubTabBar(
-            texts: const [LocaleKeys.item, LocaleKeys.upgrade],
-          ),
-          const SizedBox(height: 12),
-          Expanded(
-            child: TabBarView(
-              children: [
-                SFGridView(
-                  count: 20,
-                  itemBuilder: (context, i) {
-                    return MyItemShortWidget(
-                      id: randomUtils.randomId(),
-                      icon: items[i % items.length],
-                    );
-                  },
-                ),
-                const UpGradeTab(),
-              ],
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 12.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            SFSubTabBar(
+              texts: const [LocaleKeys.item, LocaleKeys.upgrade],
             ),
-          ),
-        ],
+            const SizedBox(height: 12),
+            Expanded(
+              child: TabBarView(
+                children: [
+                  SFGridView(
+                    count: 20,
+                    childAspectRatio: 1,
+                    itemBuilder: (context, i) {
+                      return MyItemShortWidget(
+                        id: randomUtils.randomId(),
+                        icon: items[i % items.length],
+                      );
+                    },
+                  ),
+                  const UpGradeTab(),
+                ],
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

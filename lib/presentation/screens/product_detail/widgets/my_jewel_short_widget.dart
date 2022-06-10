@@ -38,8 +38,7 @@ class MyJewelsShortWidget extends StatelessWidget {
             children: [
               Image.asset(
                 icon,
-                width: 62,
-                height: 60,
+                width: 80,
               ),
               SizedBox(height: 20.h),
               Row(

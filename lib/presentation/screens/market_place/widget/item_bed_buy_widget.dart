@@ -40,50 +40,42 @@ class ItemBedBuyWidget extends StatelessWidget {
           Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              SizedBox(height: 37.h),
-              SFIcon(icon, width: 62, height: 60,),
-              // Image.asset(
-              //   icon,
-              //   width: 62,
-              //   height: 60,
-              // ),
               SizedBox(height: 20.h),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 12.0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Container(
-                      decoration: BoxDecoration(
+              SFIcon(icon, width: 80,),
+              SizedBox(height: 22.h),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Container(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(50),
+                      border: Border.all(color: AppColors.light4),
+                    ),
+                    padding:
+                    const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+                    alignment: Alignment.center,
+                    child: SFText(
+                      keyText: id,
+                      style: TextStyles.white1w700size12,
+                    ),
+                  ),
+                  const SizedBox(width: 6),
+                  Container(
+                    decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(50),
-                        border: Border.all(color: AppColors.light4),
-                      ),
-                      padding:
-                      const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
-                      alignment: Alignment.center,
-                      child: SFText(
-                        keyText: id,
-                        style: TextStyles.white1w700size12,
-                      ),
+                        // border: Border.all(color: AppColors.light4),
+                        color: AppColors.green.withOpacity(0.15)),
+                    padding:
+                    const EdgeInsets.symmetric(vertical: 8, horizontal: 12),
+                    alignment: Alignment.center,
+                    child: SFText(
+                      keyText: '+ 25%',
+                      style: TextStyles.greenW700size12,
                     ),
-                    const SizedBox(width: 6),
-                    Container(
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(50),
-                          // border: Border.all(color: AppColors.light4),
-                          color: AppColors.green.withOpacity(0.15)),
-                      padding:
-                      const EdgeInsets.symmetric(vertical: 8, horizontal: 12),
-                      alignment: Alignment.center,
-                      child: SFText(
-                        keyText: '+ 25%',
-                        style: TextStyles.greenW700size12,
-                      ),
-                    ),
-                  ],
-                ),
+                  ),
+                ],
               ),
-              const Spacer(),
+              SizedBox(height: 16.h),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 16.0),
                 child: Row(

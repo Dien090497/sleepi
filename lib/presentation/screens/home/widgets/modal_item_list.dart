@@ -21,9 +21,9 @@ class ModalItemList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final jewels = [
-      Imgs.jewelGreen,
+      Imgs.jewelSliver,
       Imgs.jewelPurple,
-      Imgs.jewelBlue,
+      Imgs.jewelGreen,
       Imgs.jewelRed
     ];
     final randomUtils = getIt<RandomUtils>();
@@ -73,7 +73,7 @@ class ModalItemList extends StatelessWidget {
                       showCustomAlertDialog(context,
                           children: PopUpItem(
                             id: id,
-                            icon: Imgs.middleBed,
+                            icon: Imgs.shortBed,
                             onConfirm: () {},
                           ));
                     },
