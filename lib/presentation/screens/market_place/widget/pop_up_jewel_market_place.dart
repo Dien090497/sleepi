@@ -51,7 +51,7 @@ class PopUpJewelMarketPlace extends StatelessWidget {
         ),
         const SizedBox(height: 20),
         SFText(
-          keyText: 'Luck Jewel ($level)',
+          keyText: 'LocaleKeys.luck.tr() ($level)',
           style: TextStyles.white1w700size16,
         ),
         const SizedBox(height: 24),

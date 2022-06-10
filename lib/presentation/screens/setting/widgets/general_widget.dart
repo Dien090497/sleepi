@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:slee_fi/common/extensions/string_x.dart';
 import 'package:slee_fi/common/routes/app_routes.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
@@ -43,7 +44,7 @@ class GeneralWidget extends StatelessWidget {
               ),
               divider,
               SFListTile(
-                text: LocaleKeys.activation_code,
+                text: LocaleKeys.activation_code.reCase(StringCase.titleCase),
                 trailing: icon,
                 onPressed: () => Navigator.pushNamed(context, R.activationCode),
               ),

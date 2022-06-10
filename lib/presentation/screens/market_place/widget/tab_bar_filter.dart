@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
@@ -27,11 +28,12 @@ class TabBarFilter extends StatelessWidget {
             dropdownHeight: 40,
             dropdownWidth: 140,
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            value: 'Low Price',
-            spinnerItems: const ['Low Price','High Price'],
-            onChange: (int value, int index){
-
-            },
+            value: LocaleKeys.low_price.tr(),
+            spinnerItems: [
+              LocaleKeys.low_price.tr(),
+              LocaleKeys.high_price.tr()
+            ],
+            onChange: (int value, int index) {},
           ),
         ),
         SFSubTabBar(texts: tabTexts),

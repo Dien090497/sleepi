@@ -30,7 +30,7 @@ class _EnterActivationCodeScreenState extends State<EnterActivationCodeScreen> {
       child: BackgroundWidget(
         appBar: SFAppBar(
             context: context,
-            title: LocaleKeys.activation_code_language,
+            title: "${LocaleKeys.activation_code.tr()}/${LocaleKeys.language.tr().toUpperCase()}",
             textStyle: TextStyles.bold18LightWhite),
         child: SafeArea(
           child: ListView(
@@ -46,7 +46,7 @@ class _EnterActivationCodeScreenState extends State<EnterActivationCodeScreen> {
                     const SFLogo(),
                     const SizedBox(height: 40),
                      const SFTextField(
-                        labelText: LocaleKeys.please_enter,
+                        labelText: LocaleKeys.please_enter_your_activation_code,
                         textInputType: TextInputType.number,),
                     const SizedBox(height: 20),
                     SFText(

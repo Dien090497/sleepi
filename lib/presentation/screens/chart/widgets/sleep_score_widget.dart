@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/widgets/sf_card.dart';
@@ -17,8 +18,8 @@ class SleepScore extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 16.0),
       child: Column(
         children: [
-          const ChartTitle(
-            title: LocaleKeys.bed_time,
+          ChartTitle(
+            title: LocaleKeys.bed_time.tr(),
             result: "2:11",
           ),
           divider,

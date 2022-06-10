@@ -26,7 +26,7 @@ class HealthcarePermissionScreen extends StatelessWidget {
                 height: 24.0,
               ),
               SFText(
-                keyText: LocaleKeys.healthcare_permission,
+                keyText: LocaleKeys.allow_to_access_healthcare_data,
                 style: TextStyles.bold24LightWhite,
                 textAlign: TextAlign.center,
               ),
@@ -34,7 +34,7 @@ class HealthcarePermissionScreen extends StatelessWidget {
                 height: 32.0,
               ),
               SFText(
-                keyText: LocaleKeys.displays_message_healthcare_permission,
+                keyText: LocaleKeys.to_allow_access_to_healthcare_data,
                 style: TextStyles.lightGrey16,
               ),
             ],

@@ -145,7 +145,7 @@ class GachaResultBedScreen extends StatelessWidget {
                     padding: const EdgeInsets.only(
                         bottom: 20, left: 24, right: 24, top: 12),
                     child: SFButtonOutLined(
-                      title: LocaleKeys.ok,
+                      title: "OK",
                       fixedSize: const Size(double.infinity, 48),
                       textStyle: TextStyles.blue16,
                       borderColor: AppColors.blue,

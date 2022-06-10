@@ -1,5 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:slee_fi/common/extensions/string_x.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
 import 'package:slee_fi/common/widgets/background_widget.dart';
@@ -43,9 +44,9 @@ class _TradeScreenState extends State<TradeScreen> {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      const Expanded(
+                      Expanded(
                         child: SFSubAppBar(
-                          title: LocaleKeys.trade,
+                          title: LocaleKeys.trade.reCase(StringCase.titleCase),
                           textStyle: TextStyles.bold18LightWhite,
                         ),
                       ),
@@ -89,9 +90,9 @@ class _TradeScreenState extends State<TradeScreen> {
                                       textInputType: TextInputType.number,
                                       hintText: "0.00",
                                       hintStyle: TextStyles.bold16LightWhite,
-                                      onChanged: (value){
-                                        if(value.isNotEmpty){
-                                          setState((){
+                                      onChanged: (value) {
+                                        if (value.isNotEmpty) {
+                                          setState(() {
                                             isDisabled = false;
                                           });
                                         }
@@ -109,7 +110,7 @@ class _TradeScreenState extends State<TradeScreen> {
                                     child: FittedBox(
                                       fit: BoxFit.fitWidth,
                                       child: SFButtonOutLined(
-                                          fixedSize:const Size(34,21),
+                                          fixedSize: const Size(34, 21),
                                           title: LocaleKeys.max,
                                           textStyle: TextStyles.bold14Blue,
                                           borderColor: AppColors.blue,
@@ -137,10 +138,10 @@ class _TradeScreenState extends State<TradeScreen> {
                       const SizedBox(height: 8),
                       const Center(
                           child: Icon(
-                            Icons.swap_vert,
-                            color: AppColors.lightWhite,
-                            size: 32,
-                          )),
+                        Icons.swap_vert,
+                        color: AppColors.lightWhite,
+                        size: 32,
+                      )),
                       const SizedBox(height: 8),
                       SFCard(
                         padding: const EdgeInsets.all(16),
@@ -153,8 +154,7 @@ class _TradeScreenState extends State<TradeScreen> {
                                   style: TextStyles.lightGrey14,
                                 ),
                                 SFText(
-                                    keyText:
-                                    ' (${LocaleKeys.estimate.tr()})',
+                                    keyText: ' (${LocaleKeys.estimate.tr()})',
                                     style: TextStyles.lightGrey14),
                               ],
                             ),
@@ -180,7 +180,7 @@ class _TradeScreenState extends State<TradeScreen> {
                 ),
                 SFButton(
                   width: double.infinity,
-                  text: LocaleKeys.trade,
+                  text: LocaleKeys.trade.reCase(StringCase.titleCase),
                   textStyle: TextStyles.w600WhiteSize16,
                   gradient: AppColors.gradientBlueButton,
                   disabled: isDisabled,

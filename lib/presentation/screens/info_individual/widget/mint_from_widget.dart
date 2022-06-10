@@ -52,7 +52,7 @@ class MintFromWidget extends StatelessWidget {
                   bed: beds[i],
                   selected: false,
                   onTap: () {
-                      ToastUtils.showToast(fToast, AppColors.white.withOpacity(0.55), LocaleKeys.not_yours);
+                      ToastUtils.showToast(fToast, AppColors.white.withOpacity(0.55), LocaleKeys.this_bed_is_not_yours);
                   });
             },
           ),

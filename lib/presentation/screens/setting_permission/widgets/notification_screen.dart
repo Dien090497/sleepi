@@ -27,7 +27,7 @@ class NotificationPermissionScreen extends StatelessWidget {
                   height: 24.0,
                 ),
                 SFText(
-                  keyText: LocaleKeys.notification_permission,
+                  keyText: LocaleKeys.would_like_to_send_you_notifications,
                   style: TextStyles.bold24LightWhite,
                   textAlign: TextAlign.center,
                 ),
@@ -35,7 +35,7 @@ class NotificationPermissionScreen extends StatelessWidget {
                   height: 32.0,
                 ),
                 SFText(
-                  keyText: LocaleKeys.displays_message_notification_permission,
+                  keyText: LocaleKeys.notification_may_include_alert_sound_and_icon,
                   style: TextStyles.lightGrey16,
                 ),
               ],

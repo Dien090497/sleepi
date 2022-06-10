@@ -1,4 +1,3 @@
-import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:slee_fi/common/extensions/string_x.dart';
@@ -82,7 +81,7 @@ class ItemBedBuyWidget extends StatelessWidget {
                     children: [
                       Expanded(
                           child: SFText(
-                            keyText: '10 ${LocaleKeys.avax.tr()}',
+                            keyText: '10 AVAX',
                             style: TextStyles.white14W700,
                           )),
                       SizedBox(

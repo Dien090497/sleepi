@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:slee_fi/common/extensions/string_x.dart';
@@ -34,7 +35,7 @@ class StakingList extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               SFText(
-                keyText: LocaleKeys.tvl_in_sleefi,
+                keyText: "TVL",
                 style: TextStyles.bold16LightWhite,
               ),
               const SizedBox(
@@ -157,7 +158,7 @@ class StakingList extends StatelessWidget {
                 children: [
                   Expanded(
                       child: SFText(
-                    keyText: LocaleKeys.your_slft_earned,
+                    keyText: LocaleKeys.your_earned.tr(namedArgs: {'token': "SLFT"}),
                     style: TextStyles.lightWhite16,
                   )),
                   Row(
@@ -287,7 +288,7 @@ class StakingList extends StatelessWidget {
         Column(
           children: [
             SFButton(
-              text: LocaleKeys.buy_slft,
+              text: "${LocaleKeys.buy.tr()} SLFT",
               textStyle: TextStyles.boldWhite14,
               color: AppColors.blue,
               width: double.infinity,

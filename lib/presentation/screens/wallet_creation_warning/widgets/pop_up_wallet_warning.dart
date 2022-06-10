@@ -25,7 +25,7 @@ class PopUpWalletWarning extends StatelessWidget {
           ),
           const SizedBox(height: 24),
           SFText(
-            keyText: LocaleKeys.displays_wallet_warning_info,
+            keyText: LocaleKeys.caution_please_check_your_seed_phrase,
             style: TextStyles.lightGrey16.copyWith(height: 1.5),
             textAlign: TextAlign.center,
           )

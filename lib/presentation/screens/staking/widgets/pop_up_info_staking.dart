@@ -17,7 +17,7 @@ class _PopupInfoStakingState extends State<PopupInfoStaking> {
   GlobalKey key = GlobalKey();
 
   void _toggleDropdown() {
-    showMoreText(LocaleKeys.displays_message_from_staking_slft_detail);
+    showMoreText(LocaleKeys.staking_not_only_allows_you_to_increase_your_tokens);
   }
 
   @override

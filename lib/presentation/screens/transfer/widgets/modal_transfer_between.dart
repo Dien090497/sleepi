@@ -20,9 +20,9 @@ class _ModalTransferBetweenState extends State<ModalTransferBetween> {
 
   int selectedIndex = 0 ;
   List keyList = [
-    LocaleKeys.avax,
-    LocaleKeys.slft,
-    LocaleKeys.slgt,
+    "AVAX",
+    "SLFT"
+    "SLGT",
     LocaleKeys.beds,
     LocaleKeys.jewels,
     LocaleKeys.bed_box,

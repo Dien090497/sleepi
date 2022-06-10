@@ -33,7 +33,7 @@ class QuestionScreen extends StatelessWidget {
                 ),
                 const SizedBox(height: 24),
                 SFButton(
-                  text: LocaleKeys.white_paper,
+                  text: LocaleKeys.whitepaper,
                   textStyle: TextStyles.bold16LightWhite,
                   color: AppColors.white.withOpacity(0.07),
                   onPressed: () => _launchUrl('https://sleefi.gitbook.io/en/v/whitepaper'),
@@ -42,7 +42,7 @@ class QuestionScreen extends StatelessWidget {
                 ),
                 const SizedBox(height: 24),
                 SFButton(
-                  text: LocaleKeys.lite_paper,
+                  text: LocaleKeys.litepaper,
                   textStyle: TextStyles.bold16LightWhite,
                   color: AppColors.white.withOpacity(0.07),
                   width: size.width * 0.45,
@@ -51,7 +51,7 @@ class QuestionScreen extends StatelessWidget {
                 ),
                 const SizedBox(height: 24),
                 SFButton(
-                  text: LocaleKeys.link_tree,
+                  text: LocaleKeys.linktree,
                   textStyle: TextStyles.bold16LightWhite,
                   color: AppColors.white.withOpacity(0.07),
                   onPressed: () => _launchUrl('https://linktr.ee/sleefi'),
