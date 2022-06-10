@@ -8,7 +8,6 @@ import 'package:slee_fi/common/widgets/sf_dialog.dart';
 import 'package:slee_fi/common/widgets/sf_icon.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
 import 'package:slee_fi/l10n/locale_keys.g.dart';
-import 'package:slee_fi/resources/resources.dart';
 
 class PopUpSell extends StatefulWidget {
   const PopUpSell({
@@ -280,15 +279,9 @@ class _Detail extends StatelessWidget {
             children: [
               Expanded(
                 flex: 3,
-                child: Row(
-                  children: [
-                    const SFIcon(Ics.icTwoEyes, color: AppColors.blue),
-                    const SizedBox(width: 12),
-                    SFText(
-                        keyText: 'Middle',
-                        style: TextStyles.lightWhite16W700),
-                  ],
-                ),
+                child:   SFText(
+                    keyText: 'Middle',
+                    style: TextStyles.lightWhite16W700),
               ),
               Expanded(
                 child: SFText(

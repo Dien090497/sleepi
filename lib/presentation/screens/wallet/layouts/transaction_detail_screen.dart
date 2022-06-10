@@ -72,7 +72,7 @@ class TransactionDetail extends StatelessWidget {
                 const SizedBox(height: 16.0),
                 SFText(
                     keyText:
-                        "00.500583 ${args != null ? args.title.toUpperCase() : 'AVAX'}",
+                        "0.543 ${args != null ? args.title.toUpperCase() : 'AVAX'}",
                     style: TextStyles.bold30White),
                 const SizedBox(height: 20.0),
                 const SizedBox(height: 16.0),

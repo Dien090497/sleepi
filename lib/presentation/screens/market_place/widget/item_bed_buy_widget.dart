@@ -1,12 +1,14 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:slee_fi/common/extensions/string_x.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
 import 'package:slee_fi/common/widgets/sf_icon.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
 import 'package:slee_fi/l10n/locale_keys.g.dart';
 import 'package:slee_fi/presentation/screens/product_detail/widgets/top_left_banner.dart';
+import 'package:slee_fi/resources/resources.dart';
 
 class ItemBedBuyWidget extends StatelessWidget {
   const ItemBedBuyWidget({required this.id, required this.icon, this.color, Key? key})
@@ -91,10 +93,27 @@ class ItemBedBuyWidget extends StatelessWidget {
                             keyText: '10 ${LocaleKeys.avax.tr()}',
                             style: TextStyles.white14W700,
                           )),
-                      SFText(
-                        keyText: LocaleKeys.buy,
-                        style: TextStyles.blue14W700,
+                      SizedBox(
+                        width: 70,
+                        height: 28,
+                        child: ElevatedButton.icon(
+                          icon: const SFIcon(Ics.icCart, width: 18,),
+                          label:  SFText(keyText: LocaleKeys.buy, stringCase: StringCase.upperCase, style: TextStyles.white12,),
+                          onPressed: () {
+                            // print('Button Pressed');
+                          },
+                          style: ElevatedButton.styleFrom(
+                            padding: const EdgeInsets.symmetric(horizontal: 6),
+                            shape:  RoundedRectangleBorder(
+                              borderRadius:  BorderRadius.circular(100),
+                            ),
+                          ),
+                        ),
                       ),
+                      // SFText(
+                      //   keyText: LocaleKeys.buy,
+                      //   style: TextStyles.blue14W700,
+                      // ),
                     ],
                   ),
               ),

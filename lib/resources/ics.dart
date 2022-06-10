@@ -26,6 +26,7 @@ class Ics {
   static const String icBedBoxes = 'assets/icons/ic_bed_boxes.svg';
   static const String icBeds = 'assets/icons/ic_beds.svg';
   static const String icCalculator = 'assets/icons/ic_calculator.svg';
+  static const String icCart = 'assets/icons/ic_cart.svg';
   static const String icCircleQuestion = 'assets/icons/ic_circle_question.svg';
   static const String icDeleteTwo = 'assets/icons/ic_delete_two.svg';
   static const String icDiamond = 'assets/icons/ic_diamond.svg';
@@ -92,6 +93,7 @@ class Ics {
     icBedBoxes,
     icBeds,
     icCalculator,
+    icCart,
     icCircleQuestion,
     icDeleteTwo,
     icDiamond,
