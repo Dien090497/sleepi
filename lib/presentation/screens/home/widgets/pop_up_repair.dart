@@ -47,9 +47,7 @@ class PopUpRepair extends StatelessWidget {
               keyText: LocaleKeys.repair,
               style: TextStyles.white1w700size16,
             ),
-            const SizedBox(height: 20),
-            SFIcon(icon),
-            const SizedBox(height: 24),
+            SFIcon(icon, height: 160,),
             SFText(
               keyText: LocaleKeys.durability,
               suffix: ' : 78/100',

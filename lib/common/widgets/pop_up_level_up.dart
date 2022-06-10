@@ -46,9 +46,7 @@ class PopUpLevelUp extends StatelessWidget {
               keyText: LocaleKeys.level_up,
               style: TextStyles.white1w700size16,
             ),
-            const SizedBox(height: 20),
-            SFIcon(icon),
-            const SizedBox(height: 24),
+            SFIcon(icon, height: 160,),
             Container(
               decoration: BoxDecoration(
                 color: AppColors.blue.withOpacity(0.1),

@@ -54,9 +54,9 @@ class _PopUpSellState extends State<PopUpSell> {
               SFText(
                   keyText: step == 2 ? LocaleKeys.confirm_to_sell : LocaleKeys.sell,
                   style: TextStyles.white1w700size18),
+              if (step >= 2)
               const SizedBox(height: 20),
-              if (step < 2) SFIcon(widget.icon),
-              if (step < 2) const SizedBox(height: 24),
+              if (step < 2) SFIcon(widget.icon, height: 160,),
               if (step < 2)
                 Container(
                   decoration: BoxDecoration(
