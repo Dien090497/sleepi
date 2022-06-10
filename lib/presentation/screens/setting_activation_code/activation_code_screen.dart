@@ -15,9 +15,8 @@ class ActivationCodeScreen extends StatelessWidget {
     return BackgroundWidget(
       appBar: SFAppBar(
         context: context,
-        title: LocaleKeys.activation_code,
+        title: LocaleKeys.activation_code.reCase(StringCase.titleCase),
         textStyle: TextStyles.bold18LightWhite,
-        stringCase: StringCase.upperCase,
       ),
       child: SafeArea(
         child: Column(

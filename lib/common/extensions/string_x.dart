@@ -40,6 +40,8 @@ extension StringX on String {
         return rc.pascalCase;
       case StringCase.snakeCase:
         return rc.snakeCase;
+      case StringCase.titleCase:
+        return rc.titleCase;
       case StringCase.upperCase:
         return toUpperCase();
       case StringCase.lowerCaseCase:
@@ -56,4 +58,5 @@ enum StringCase {
   camelCase,
   pascalCase,
   snakeCase,
+  titleCase
 }
