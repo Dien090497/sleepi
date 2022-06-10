@@ -7,12 +7,15 @@ import 'package:slee_fi/common/style/text_styles.dart';
 import 'package:slee_fi/common/widgets/background_widget.dart';
 import 'package:slee_fi/common/widgets/sf_app_bar.dart';
 import 'package:slee_fi/common/widgets/sf_buttons.dart';
+import 'package:slee_fi/common/widgets/sf_icon.dart';
 import 'package:slee_fi/common/widgets/sf_label_value.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
 import 'package:slee_fi/l10n/locale_keys.g.dart';
 import 'package:slee_fi/presentation/blocs/mint/mint_cubit.dart';
 import 'package:slee_fi/presentation/blocs/mint/mint_state.dart';
 import 'package:slee_fi/presentation/screens/info_individual/widget/connect_bed_widget.dart';
+import 'package:slee_fi/resources/resources.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class MintScreen extends StatefulWidget {
   const MintScreen({Key? key}) : super(key: key);
@@ -101,9 +104,25 @@ class _MintScreenState extends State<MintScreen> {
                                       const SizedBox(
                                         height: 2,
                                       ),
-                                      SFText(
-                                        keyText: LocaleKeys.what_insurance,
-                                        style: TextStyles.lightGrey12,
+                                      GestureDetector(
+                                        onTap: () {
+                                          _launchUrl();
+                                        },
+                                        child: Row(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.center,
+                                          children: [
+                                            SFText(
+                                              keyText:
+                                                  LocaleKeys.what_insurance,
+                                              style: TextStyles.lightGrey12,
+                                            ),
+                                            const SizedBox(
+                                              width: 8,
+                                            ),
+                                            const SFIcon(Ics.icCircleQuestion),
+                                          ],
+                                        ),
                                       ),
                                       const SizedBox(
                                         height: 24,
@@ -226,5 +245,12 @@ class _MintScreenState extends State<MintScreen> {
         },
       ),
     );
+  }
+
+  void _launchUrl() async {
+    if (!await launchUrl(
+        Uri.parse('https://sleefi.gitbook.io/en/v/whitepaper/'))) {
+      throw 'Could not launch';
+    }
   }
 }

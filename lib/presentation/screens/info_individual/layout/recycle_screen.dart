@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:slee_fi/common/extensions/string_x.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
 import 'package:slee_fi/common/widgets/background_widget.dart';
@@ -197,7 +196,6 @@ class RecycleScreen extends StatelessWidget {
                     radius: 100,
                     gradient: AppColors.gradientBlueButton,
                     width: size.width,
-                    stringCase: StringCase.upperCase,
                   ),
                 ),
               ),
