@@ -59,8 +59,10 @@ class RestoreWalletScreen extends StatelessWidget {
                               children:  [
                                 const Expanded(
                                   child: SFTextField(
+                                    maxLength: 6,
                                     // hintText: LocaleKeys.emailVerification,
                                     textInputType: TextInputType.number,
+                                    showLabel: false,
                                     noBorder: true,
                                   ),
                                 ),
