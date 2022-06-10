@@ -10,10 +10,10 @@ class AverageInfoWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     List<String> texts = [
-      LocaleKeys.average_of_bed_time,
-      LocaleKeys.average_of_woke_up,
-      LocaleKeys.average_of_sleep_duration,
-      LocaleKeys.average_of_sleep_quality
+      LocaleKeys.average_bed_time,
+      LocaleKeys.average_woke_up,
+      LocaleKeys.average_sleep_duration,
+      LocaleKeys.average_sleep_quality
     ];
     List<String> averages = [
       "10:55","09:55","07:55","87/100",

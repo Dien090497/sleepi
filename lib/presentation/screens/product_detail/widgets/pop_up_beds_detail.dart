@@ -111,7 +111,7 @@ class PopUpBedsDetail extends StatelessWidget {
               height: 26,
             ),
             const SFLabelValue(
-              label: LocaleKeys.id,
+              label: "ID",
               value: LocaleKeys.level,
               styleLabel: TextStyles.lightGrey16,
               styleValue: TextStyles.lightWhite16,

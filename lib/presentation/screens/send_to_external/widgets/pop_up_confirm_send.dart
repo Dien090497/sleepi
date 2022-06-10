@@ -43,7 +43,7 @@ class PopUpConfirmSend extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               SFText(
-                keyText: LocaleKeys.youll_send,
+                keyText: LocaleKeys.you_will_send,
                 style: TextStyles.lightGrey14,
               ),
               Expanded(

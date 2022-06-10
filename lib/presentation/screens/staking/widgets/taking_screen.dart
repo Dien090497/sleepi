@@ -31,7 +31,7 @@ class TakingScreen extends StatelessWidget {
                     Padding(
                         padding: const EdgeInsets.only(left: 12.0),
                         child: SFText(
-                            keyText: LocaleKeys.stake_slft,
+                            keyText: "LocaleKeys.stake_slft",
                             style: TextStyles.bold32black)),
                     const SizedBox(
                       height: 16.0,
@@ -55,7 +55,7 @@ class TakingScreen extends StatelessWidget {
                         Expanded(
                           flex: 3,
                           child: SFText(
-                              keyText: LocaleKeys.stake_withdraw,
+                              keyText: "LocaleKeys.stake_withdraw",
                               style: TextStyles.bold32black),
                         ),
                         Expanded(

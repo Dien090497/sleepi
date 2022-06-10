@@ -90,7 +90,7 @@ class ItemBedBuyWidget extends StatelessWidget {
                     children: [
                       Expanded(
                           child: SFText(
-                            keyText: '10 ${LocaleKeys.avax.tr()}',
+                            keyText: '10 AVAX',
                             style: TextStyles.white14W700,
                           )),
                       SizedBox(

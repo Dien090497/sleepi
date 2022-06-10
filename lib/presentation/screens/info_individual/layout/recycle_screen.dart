@@ -160,7 +160,7 @@ class RecycleScreen extends StatelessWidget {
                                 ),
                                 const SizedBox(height: 10),
                                 SFText(
-                                  keyText: LocaleKeys.body_recycle,
+                                  keyText: LocaleKeys.amet_minim_mollit_non,
                                   style: TextStyles.white14,
                                 ),
                                 const SizedBox(height: 24),

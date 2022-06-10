@@ -86,7 +86,7 @@ class _FeedBackScreenState extends State<FeedBackScreen> {
                 SFTextField(
                   maxLine: 15,
                   maxLength: 100,
-                  hintText: LocaleKeys.hint_feedback,
+                  hintText: LocaleKeys.notification_may_include_alert_sound_and_icon,
                   hintStyle: TextStyles.lightGrey16,
                   onChanged: (value) {
                     if (value.isNotEmpty) {
@@ -126,10 +126,10 @@ List<String> topics = [
   LocaleKeys.other_
 ];
 List<String> subTopics = [
-  LocaleKeys.running_gps,
+  '${LocaleKeys.running}/${LocaleKeys.gps}',
   LocaleKeys.marketplace,
   LocaleKeys.wallet,
-  LocaleKeys.nft,
+  'NFT',
   LocaleKeys.display,
   LocaleKeys.earning,
   LocaleKeys.others

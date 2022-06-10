@@ -18,7 +18,7 @@ class _PopupInfoWalletState extends State<PopupInfoWallet> {
   GlobalKey key = GlobalKey();
 
   void _toggleDropdown() {
-    showMoreText(LocaleKeys.displays_message_from_wallet_detail);
+    showMoreText(LocaleKeys.you_can_send_receive_and_trade);
   }
 
   @override

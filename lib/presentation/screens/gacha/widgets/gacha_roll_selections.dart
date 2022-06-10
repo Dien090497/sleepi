@@ -71,7 +71,7 @@ class GachaRollSelections extends StatelessWidget {
                     height: 5,
                   ),
                   SFText(
-                    keyText: LocaleKeys.times_gacha,
+                    keyText: LocaleKeys.ten_times_gacha,
                     args: const {'num': '10'},
                     style: TextStyles.white14WithOpacity,
                   ),

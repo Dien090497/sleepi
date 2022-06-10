@@ -38,10 +38,10 @@ class _DropdownSelectTokenState extends State<DropdownSelectToken> {
   List dropdownItemList = [];
 
   List<String> token = [
-    LocaleKeys.avax.toUpperCase(),
-    LocaleKeys.slft.toUpperCase(),
-    LocaleKeys.slgt.toUpperCase(),
-    LocaleKeys.usdc.toUpperCase(),
+    "AVAX",
+    "SLFT",
+    "SLGT",
+    "USDC"
   ];
 
   List<String> iconsToken = [

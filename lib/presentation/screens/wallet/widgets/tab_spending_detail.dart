@@ -42,7 +42,7 @@ class TabSpendingDetail extends StatelessWidget {
                           leading: const SFIcon(Ics.icSlft, width: 40, height: 40,),
                           minLeadingWidth: 12,
                           title: SFText(
-                              keyText: LocaleKeys.slft,
+                              keyText: "SLFT",
                               style: TextStyles.lightWhite16,
                               stringCase: StringCase.upperCase),
                           trailing: SFText(
@@ -57,7 +57,7 @@ class TabSpendingDetail extends StatelessWidget {
                           leading: const SFIcon(Ics.icSlgt, width: 40, height: 40,),
                           minLeadingWidth: 12,
                           title: SFText(
-                              keyText: LocaleKeys.slgt,
+                              keyText: "SLGT",
                               style: TextStyles.lightWhite16,
                               stringCase: StringCase.upperCase),
                           trailing: SFText(
@@ -75,7 +75,7 @@ class TabSpendingDetail extends StatelessWidget {
                           ),
                           minLeadingWidth: 12,
                           title: SFText(
-                            keyText: LocaleKeys.avax,
+                            keyText: "AVAX",
                             style: TextStyles.lightWhite16,
                             stringCase: StringCase.upperCase,
                           ),
