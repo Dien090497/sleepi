@@ -247,7 +247,6 @@ abstract class  LocaleKeys {
   static const successfully = 'successfully';
   static const durability = 'durability';
   static const wallet_account = 'wallet_account';
-  static const do_you_really_want_to = 'do_you_really_want_to';
   static const your_in_spending = 'your_in_spending';
   static const stake = 'stake';
   static const in = 'in';
