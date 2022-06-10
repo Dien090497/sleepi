@@ -249,7 +249,8 @@ class _MintScreenState extends State<MintScreen> {
 
   void _launchUrl() async {
     if (!await launchUrl(
-        Uri.parse('https://sleefi.gitbook.io/en/v/whitepaper/')))
+        Uri.parse('https://sleefi.gitbook.io/en/v/whitepaper/'))) {
       throw 'Could not launch';
+    }
   }
 }
