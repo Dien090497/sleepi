@@ -18,13 +18,13 @@ extension StringX on String {
 
   BedType get bedType {
     switch (this) {
-      case Ics.shortBed:
+      case Imgs.shortBed:
         return BedType.short;
-      case Ics.middleBed:
+      case Imgs.middleBed:
         return BedType.middle;
-      case Ics.longBed:
+      case Imgs.longBed:
         return BedType.long;
-      case Ics.flexibleBed:
+      case Imgs.flexibleBed:
         return BedType.flexible;
       default:
         return BedType.short;

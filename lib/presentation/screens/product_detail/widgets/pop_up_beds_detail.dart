@@ -62,7 +62,7 @@ class PopUpBedsDetail extends StatelessWidget {
                       color: AppColors.whiteOpacity5,
                       borderRadius: BorderRadius.circular(10),
                     ),
-                    child: const SFIcon(Ics.shortBed),
+                    child: const SFIcon(Imgs.shortBed),
                   ),
                 ),
                 const SizedBox(
@@ -90,7 +90,7 @@ class PopUpBedsDetail extends StatelessWidget {
                       color: AppColors.whiteOpacity5,
                       borderRadius: BorderRadius.circular(10),
                     ),
-                    child: const SFIcon(Ics.bedsCouple),
+                    child: const SFIcon(Imgs.flexibleBed),
                   ),
                 ),
                 const SizedBox(
@@ -104,7 +104,7 @@ class PopUpBedsDetail extends StatelessWidget {
                       color: AppColors.whiteOpacity5,
                       borderRadius: BorderRadius.circular(10),
                     ),
-                    child: const SFIcon(Ics.bedBunk),
+                    child: const SFIcon(Imgs.middleBed),
                   ),
                 )
               ],
