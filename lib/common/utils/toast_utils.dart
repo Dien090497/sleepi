@@ -14,7 +14,7 @@ class ToastUtils {
     Widget toast = Container(
       padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 10),
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(50),
+        borderRadius: BorderRadius.circular(8),
         color: bgColor,
       ),
       child: SFText(
@@ -22,22 +22,17 @@ class ToastUtils {
         style: const TextStyle(
           fontSize: 12,
           fontWeight: FontWeight.w400,
-          color: AppColors.white,
+          color: AppColors.lightDark,
         ),
       ),
     );
 
     fToast.showToast(
         child: toast,
-        gravity: ToastGravity.BOTTOM,
-        toastDuration: const Duration(seconds: 2),
+        gravity: ToastGravity.CENTER,
+        toastDuration: const Duration(milliseconds: 800),
         positionedToastBuilder: (context, child) {
-          return Positioned(
-            bottom: 90,
-            left: 0,
-            right: 0,
-            child: child,
-          );
+          return child;
         });
   }
 }
