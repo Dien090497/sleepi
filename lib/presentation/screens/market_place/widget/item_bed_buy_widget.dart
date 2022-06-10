@@ -40,14 +40,9 @@ class ItemBedBuyWidget extends StatelessWidget {
           Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              SizedBox(height: 37.h),
-              SFIcon(icon, width: 62, height: 60,),
-              // Image.asset(
-              //   icon,
-              //   width: 62,
-              //   height: 60,
-              // ),
               SizedBox(height: 20.h),
+              SFIcon(icon, width: 80,),
+              SizedBox(height: 22.h),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 12.0),
                 child: Row(
@@ -83,7 +78,7 @@ class ItemBedBuyWidget extends StatelessWidget {
                   ],
                 ),
               ),
-              const Spacer(),
+              SizedBox(height: 16.h),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 16.0),
                 child: Row(

@@ -49,12 +49,12 @@ class JewelDialogBody extends StatelessWidget {
           children: [
             Container(
               decoration: BoxDecoration(
-                color: AppColors.purple.withOpacity(0.1),
+                color: AppColors.pink.withOpacity(0.1),
                 shape: BoxShape.circle,
               ),
               alignment: Alignment.center,
-              padding: const EdgeInsets.all(24),
-              child: SFIcon(icon),
+              padding: const EdgeInsets.all(10),
+              child: SFIcon(icon, width: 80,),
             ),
             const SizedBox(height: 20),
             SFText(
