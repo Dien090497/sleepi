@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
@@ -126,7 +127,7 @@ List<String> topics = [
   LocaleKeys.other_
 ];
 List<String> subTopics = [
-  '${LocaleKeys.running}/${LocaleKeys.gps}',
+  '${LocaleKeys.running.tr()}/${LocaleKeys.gps.tr()}',
   LocaleKeys.marketplace,
   LocaleKeys.wallet,
   'NFT',
