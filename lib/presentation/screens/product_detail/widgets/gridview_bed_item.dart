@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:slee_fi/common/enum/enum.dart';
 import 'package:slee_fi/common/extensions/enum_x.dart';
+import 'package:slee_fi/common/extensions/string_x.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
 import 'package:slee_fi/common/utils/random_utils.dart';
@@ -16,11 +17,11 @@ import 'package:slee_fi/presentation/screens/product_detail/widgets/top_left_ban
 class GridViewBedItem extends StatelessWidget {
   const GridViewBedItem(
       {Key? key,
-      required this.beds,
-      this.onBedTap,
-      this.price,
-      this.onBuyTap,
-      this.isScroll = true})
+        required this.beds,
+        this.onBedTap,
+        this.price,
+        this.onBuyTap,
+        this.isScroll = true})
       : super(key: key);
 
   final List<BedType> beds;
@@ -35,6 +36,7 @@ class GridViewBedItem extends StatelessWidget {
     return SFGridView(
       count: beds.length,
       isScroll: isScroll,
+      childAspectRatio: 8/10,
       itemBuilder: (context, i) {
         final bed = beds[i % BedType.values.length];
         return GestureDetector(
@@ -66,8 +68,8 @@ class GridViewBedItem extends StatelessWidget {
                   child: Column(
                     children: [
                       const Spacer(),
-                      SFIcon(bed.icon, color: AppColors.blue),
-                      const SizedBox(height: 20),
+                      SFIcon(bed.image),
+                      const SizedBox(height: 12),
                       Container(
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(50),
@@ -95,20 +97,23 @@ class GridViewBedItem extends StatelessWidget {
                       SizedBox(height: 4.h),
                       const SFPercentBorderGradient(
                           valueActive: 70, totalValue: 100),
-                      const SizedBox(height: 12),
                       if (price != null)
-                        Row(
-                          children: [
-                            Expanded(
-                                child: SFText(
-                              keyText: '$price ${LocaleKeys.avax}',
-                              style: TextStyles.white14W700,
-                            )),
-                            SFText(
-                              keyText: LocaleKeys.buy,
-                              style: TextStyles.blue14W700,
-                            ),
-                          ],
+                        Padding(
+                          padding: const EdgeInsets.only(top: 12),
+                          child: Row(
+                            children: [
+                              Expanded(
+                                  child: SFText(
+                                    keyText: '$price ${LocaleKeys.avax}',
+                                    style: TextStyles.white14W700,
+                                    stringCase: StringCase.upperCase,
+                                  )),
+                              SFText(
+                                keyText: LocaleKeys.buy,
+                                style: TextStyles.blue14W700,
+                              ),
+                            ],
+                          ),
                         ),
                       const SizedBox(height: 12),
                     ],

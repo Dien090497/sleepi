@@ -39,7 +39,7 @@ class MyBedShortWidget extends StatelessWidget {
             child: Column(
               children: [
                 const Spacer(),
-                SvgPicture.asset(bedType.icon, color: AppColors.blue),
+                SvgPicture.asset(bedType.image, color: AppColors.blue),
                 SizedBox(height: 24.h),
                 Container(
                   decoration: BoxDecoration(
@@ -49,7 +49,7 @@ class MyBedShortWidget extends StatelessWidget {
                   padding:
                       const EdgeInsets.symmetric(vertical: 5, horizontal: 16),
                   child: SFText(
-                    keyText: 'IDIDIDID',
+                    keyText: "A2342",
                     style: TextStyles.white1w700size12,
                   ),
                 ),

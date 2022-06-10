@@ -3,7 +3,7 @@ import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
 import 'package:slee_fi/common/widgets/sf_card.dart';
 import 'package:slee_fi/common/widgets/sf_icon.dart';
-import 'package:slee_fi/common/widgets/sf_text.dart';
+import 'package:slee_fi/common/widgets/sf_list_tile.dart';
 import 'package:slee_fi/l10n/locale_keys.g.dart';
 import 'package:slee_fi/resources/resources.dart';
 
@@ -29,8 +29,8 @@ class _ModalTransferBetweenState extends State<ModalTransferBetween> {
     LocaleKeys.item
   ];
   List urlImages = [
-    Ics.icSolanaCircle,
-    Ics.icSlgt,
+    Ics.icAvax,
+    Ics.icSlft,
     Ics.icSlgt,
     Ics.icBeds,
     Ics.icJewels,
@@ -49,17 +49,23 @@ class _ModalTransferBetweenState extends State<ModalTransferBetween> {
     return ListView.builder(
         itemCount: keyList.length,
         shrinkWrap: true,
-        padding: const EdgeInsets.all(16.0),
+        padding: const EdgeInsets.all(24.0),
         itemBuilder: (BuildContext context, int index) {
           return SFCard(
-            child: ListTile(
-              contentPadding: EdgeInsets.zero,
-              leading: SFIcon(
-                urlImages[index],
-                width: 32,
+            padding: const EdgeInsets.symmetric(horizontal: 16,),
+            margin: const EdgeInsets.only(top: 8.0),
+            radius: 8,
+            child: SFListTile(
+              leading: Padding(
+                padding: EdgeInsets.only(left: urlImages[index] == Ics.icAvax ? 4.0 : 0),
+                child: SFIcon(
+                  urlImages[index],
+                  width: urlImages[index] == Ics.icAvax ? 32 : 40,
+                  height: urlImages[index] == Ics.icAvax ? 32 : 40,
+                ),
               ),
-              title: SFText(
-                  keyText: keyList[index], style: TextStyles.lightWhite16),
+              text: keyList[index],
+              textStyle :TextStyles.lightWhite16,
                 trailing: Row(
                   mainAxisSize: MainAxisSize.min,
                   children: [

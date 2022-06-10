@@ -5,8 +5,7 @@ import 'package:slee_fi/common/widgets/background_widget.dart';
 import 'package:slee_fi/common/widgets/dismiss_keyboard_widget.dart';
 import 'package:slee_fi/common/widgets/sf_app_bar.dart';
 import 'package:slee_fi/common/widgets/sf_buttons.dart';
-import 'package:slee_fi/common/widgets/sf_drop_down.dart';
-import 'package:slee_fi/common/widgets/sf_text.dart';
+import 'package:slee_fi/common/widgets/sf_dropdown_rotation.dart';
 import 'package:slee_fi/common/widgets/sf_textfield.dart';
 import 'package:slee_fi/l10n/locale_keys.g.dart';
 
@@ -19,6 +18,8 @@ class FeedBackScreen extends StatefulWidget {
 
 class _FeedBackScreenState extends State<FeedBackScreen> {
   bool isDisabled = true;
+  int indexTopic = 2;
+  int indexSubTopic = 6;
 
   @override
   Widget build(BuildContext context) {
@@ -40,38 +41,60 @@ class _FeedBackScreenState extends State<FeedBackScreen> {
                 Row(
                   children: [
                     SizedBox(
-                        width: size.width / 3,
+                        width: size.width / 2.8,
                         height: 48,
-                        child: SFDropDown(
-                            value: topics[1],
-                            dropdownWidth: size.width / 3,
-                            icon: const Icon(Icons.keyboard_arrow_down, size: 24,),
-                            dropdownItems:  topicItems)),
+                        child: SFDropDownRotation<String>(
+                          value: topics[indexTopic],
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          dropdownWidth: size.width / 2.8,
+                          selectedItemHighlightColor: AppColors.lightDark,
+                          icon: const Icon(
+                            Icons.keyboard_arrow_down,
+                            size: 24,
+                          ),
+                          spinnerItems: topics,
+                          onChange: (int value, int index) {
+                            setState(() {
+                              indexTopic = index;
+                            });
+                          },
+                        )),
                     const SizedBox(width: 10),
                     Expanded(
                         child: SizedBox(
-                          height: 48,
-                          child: SFDropDown(
-                              value: subTopics[2],
-                              dropdownWidth: size.width * 0.55,
-                              dropdownHeight: size.width * 0.75,
-                              icon: const Icon(Icons.keyboard_arrow_down, size: 24,),
-                              dropdownItems: subTopicItems),
-                        )),
+                      height: 48,
+                      child: SFDropDownRotation<String>(
+                        value: subTopics[indexSubTopic],
+                        dropdownWidth: size.width * 0.55,
+                        dropdownHeight: size.width * 0.75,
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        selectedItemHighlightColor: AppColors.lightDark,
+                        icon: const Icon(
+                          Icons.keyboard_arrow_down,
+                          size: 24,
+                        ),
+                        spinnerItems: subTopics,
+                        onChange: (int value, int index) {
+                          setState(() {
+                            indexSubTopic = index;
+                          });
+                        },
+                      ),
+                    )),
                   ],
                 ),
-                 SFTextField(
+                SFTextField(
                   maxLine: 15,
                   maxLength: 100,
                   hintText: LocaleKeys.hint_feedback,
                   hintStyle: TextStyles.lightGrey16,
-                  onChanged: (value){
-                    if(value.isNotEmpty){
-                      setState((){
+                  onChanged: (value) {
+                    if (value.isNotEmpty) {
+                      setState(() {
                         isDisabled = false;
                       });
-                    }else {
-                      setState((){
+                    } else {
+                      setState(() {
                         isDisabled = true;
                       });
                     }
@@ -85,7 +108,9 @@ class _FeedBackScreenState extends State<FeedBackScreen> {
                   textStyle: TextStyles.w600WhiteSize16,
                   disabled: isDisabled,
                 ),
-                const SizedBox(height: 24,)
+                const SizedBox(
+                  height: 24,
+                )
               ],
             ),
           ),
@@ -95,21 +120,17 @@ class _FeedBackScreenState extends State<FeedBackScreen> {
   }
 }
 
-  List<String> topics = [LocaleKeys.suggestion, LocaleKeys.bug, LocaleKeys.other_];
-  List<String> subTopics = [LocaleKeys.running_gps, LocaleKeys.marketplace, LocaleKeys.wallet, LocaleKeys.nft, LocaleKeys.display, LocaleKeys.earning, LocaleKeys.others];
-  List<DropdownMenuItem<String>> topicItems = List.generate(topics.length, (index) => DropdownMenuItem(
-    value: topics[index],
-    child: SFText(
-      keyText: topics[index],
-      style: TextStyles.white16,
-    ),
-  ),
-  );
-  List<DropdownMenuItem<String>> subTopicItems = List.generate(subTopics.length, (index) => DropdownMenuItem(
-    value: subTopics[index],
-    child: SFText(
-      keyText: subTopics[index],
-      style: TextStyles.white16,
-    ),
-  ),
-  );
+List<String> topics = [
+  LocaleKeys.suggestion,
+  LocaleKeys.bug,
+  LocaleKeys.other_
+];
+List<String> subTopics = [
+  LocaleKeys.running_gps,
+  LocaleKeys.marketplace,
+  LocaleKeys.wallet,
+  LocaleKeys.nft,
+  LocaleKeys.display,
+  LocaleKeys.earning,
+  LocaleKeys.others
+];

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
-import 'package:slee_fi/common/widgets/sf_drop_down.dart';
+import 'package:slee_fi/common/widgets/sf_dropdown_rotation.dart';
 import 'package:slee_fi/common/widgets/sf_icon.dart';
 import 'package:slee_fi/common/widgets/sf_sub_tab_bar.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
@@ -19,27 +19,19 @@ class TabBarFilter extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Row(
+      crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         Container(
           constraints: BoxConstraints(maxWidth: 140.w),
-          child: SFDropDown(
+          child: SFDropDownRotation(
+            dropdownHeight: 40,
+            dropdownWidth: 140,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             value: 'Low Price',
-            dropdownItems: [
-              DropdownMenuItem(
-                value: 'Low Price',
-                child: SFText(
-                  keyText: 'Low Price',
-                  style: TextStyles.white16,
-                ),
-              ),
-              DropdownMenuItem(
-                value: 'High Price',
-                child: SFText(
-                  keyText: 'High Price',
-                  style: TextStyles.white16,
-                ),
-              ),
-            ],
+            spinnerItems: const ['Low Price','High Price'],
+            onChange: (int value, int index){
+
+            },
           ),
         ),
         SFSubTabBar(texts: tabTexts),
