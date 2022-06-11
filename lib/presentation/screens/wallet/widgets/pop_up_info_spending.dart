@@ -19,7 +19,7 @@ class _PopupInfoSpendingState extends State<PopupInfoSpending> {
   GlobalKey key = GlobalKey();
 
   void _toggleDropdown() {
-    showMoreText(LocaleKeys.users_will_need_to_have.tr());
+    showMoreText(LocaleKeys.you_need_to_have_token_in_spending.tr(namedArgs: {"token":"AVAX"}));
   }
 
   @override

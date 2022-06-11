@@ -7,6 +7,7 @@ import 'package:slee_fi/common/extensions/string_x.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
 import 'package:slee_fi/common/utils/random_utils.dart';
+import 'package:slee_fi/common/widgets/sf_buttons.dart';
 import 'package:slee_fi/common/widgets/sf_gridview.dart';
 import 'package:slee_fi/common/widgets/sf_icon.dart';
 import 'package:slee_fi/common/widgets/sf_percent_border.dart';
@@ -113,22 +114,14 @@ class GridViewBedItem extends StatelessWidget {
                                     style: TextStyles.white14W700,
                                     stringCase: StringCase.upperCase,
                                   )),
-                              SizedBox(
-                                width: 70,
-                                height: 28,
-                                child: ElevatedButton.icon(
-                                  icon: const SFIcon(Ics.icCart, width: 18,),
-                                  label:  SFText(keyText: LocaleKeys.buy, stringCase: StringCase.upperCase, style: TextStyles.white12,),
-                                  onPressed: () {
-                                    // print('Button Pressed');
-                                  },
-                                  style: ElevatedButton.styleFrom(
-                                    padding: const EdgeInsets.symmetric(horizontal: 6),
-                                    shape:  RoundedRectangleBorder(
-                                      borderRadius:  BorderRadius.circular(100),
-                                    ),
-                                  ),
-                                ),
+                              SFIconButton(
+                                text: LocaleKeys.buy,
+                                textStyle: TextStyles.white12,
+                                stringCase: StringCase.upperCase,
+                                icon: Ics.icCart,
+                                onPressed: (){
+                                  onBuyTap!(bed);
+                                },
                               ),
                               // SFText(
                               //   keyText: LocaleKeys.buy,

@@ -20,8 +20,39 @@ class FilterSheet extends StatefulWidget {
 }
 
 class _FilterSheetState extends State<FilterSheet> {
-  // double level = 5;
-  // double mint = 5;
+  double level = 5;
+  double mint = 5;
+  final List<String> filterJewels = [
+    LocaleKeys.efficiency,
+    LocaleKeys.luck,
+    LocaleKeys.resilience,
+    LocaleKeys.special,
+    LocaleKeys.bonus,
+  ];
+  final List<String> filterItems = [
+    LocaleKeys.efficiency,
+    LocaleKeys.luck,
+    LocaleKeys.resilience,
+    LocaleKeys.special,
+  ];
+  final List<String> filterBedType = [
+    LocaleKeys.beds,
+    LocaleKeys.bed_box,
+  ];
+
+  final List<String> filterBedClass = [
+    LocaleKeys.short_bed,
+    LocaleKeys.middle_bed,
+    LocaleKeys.long_bed,
+    LocaleKeys.flexible_bed,
+  ];
+  final List<String> filterBedQuality = [
+    LocaleKeys.common_bed,
+    LocaleKeys.uncommon_bed,
+    LocaleKeys.rare_bed,
+    LocaleKeys.epic_bed,
+    LocaleKeys.legendary_bed,
+  ];
 
   List<String> listSelected = [];
 

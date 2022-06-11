@@ -48,6 +48,7 @@ class _TradeScreenState extends State<TradeScreen> {
                         child: SFSubAppBar(
                           title: LocaleKeys.trade.reCase(StringCase.titleCase),
                           textStyle: TextStyles.bold18LightWhite,
+                          stringCase: StringCase.titleCase,
                         ),
                       ),
                       GestureDetector(

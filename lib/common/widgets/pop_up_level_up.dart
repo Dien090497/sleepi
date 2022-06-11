@@ -1,4 +1,3 @@
-import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
@@ -57,19 +56,32 @@ class PopUpLevelUp extends StatelessWidget {
               child: SFText(keyText: 'Lv $level', style: TextStyles.blue14),
             ),
             const SizedBox(height: 32),
-            Align(
-              alignment: Alignment.centerLeft,
-              child: RichText(
-                text: TextSpan(
-                    text: LocaleKeys.level_up_to.tr(),
-                    style: TextStyles.lightGrey14,
-                    children: [
-                      TextSpan(
-                          text: '${LocaleKeys.level.tr()} ${level + 1}',
-                          style: TextStyles.bold14Blue),
-                    ]),
-              ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Expanded(
+                    child: SFText(
+                      keyText: LocaleKeys.level_up_to,
+                       style: TextStyles.lightGrey14,)
+                ),
+                SFText(
+                  keyText: 'Lv ${level + 1}',
+                  style: TextStyles.bold14Blue)
+              ],
             ),
+            // Align(
+            //   alignment: Alignment.centerLeft,
+            //   child: RichText(
+            //     text: TextSpan(
+            //         text: 'Level up to ',
+            //         style: TextStyles.lightGrey14,
+            //         children: [
+            //           TextSpan(
+            //               text: 'Lv ${level + 1}',
+            //               style: TextStyles.bold14Blue),
+            //         ]),
+            //   ),
+            // ),
             const SizedBox(height: 8),
             SFLabelValue(
               label: LocaleKeys.cost,

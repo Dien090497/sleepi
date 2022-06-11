@@ -17,3 +17,18 @@ enum BedType {
   const BedType(this.name, this.image);
 }
 
+enum ItemType {
+  short(LocaleKeys.short, Imgs.candyBlue),
+  middle(LocaleKeys.middle, Imgs.candyGreen),
+  long(LocaleKeys.long, Imgs.candyPink),
+  flexible(LocaleKeys.flexible, Imgs.candyPurple);
+
+
+  final String name;
+  final String image;
+
+
+  const ItemType(this.name, this.image);
+}
+
+

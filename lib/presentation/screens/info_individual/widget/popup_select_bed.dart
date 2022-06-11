@@ -3,15 +3,17 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:slee_fi/common/enum/enum.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
+import 'package:slee_fi/common/utils/random_utils.dart';
 import 'package:slee_fi/common/widgets/sf_buttons.dart';
+import 'package:slee_fi/common/widgets/sf_dialog.dart';
 import 'package:slee_fi/common/widgets/sf_gridview.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
+import 'package:slee_fi/di/injector.dart';
 import 'package:slee_fi/presentation/blocs/mint/mint_cubit.dart';
 import 'package:slee_fi/presentation/blocs/mint/mint_state.dart';
 import 'package:slee_fi/presentation/screens/info_individual/widget/item_bed.dart';
+import 'package:slee_fi/presentation/screens/info_individual/widget/popup_no_shoes.dart';
 
-import '../../../../common/utils/random_utils.dart';
-import '../../../../di/injector.dart';
 
 class PopUpSelectBed extends StatefulWidget {
   const PopUpSelectBed({Key? key, required this.beds, required this.callBack})
@@ -86,8 +88,14 @@ class _PopUpSelectBedState extends State<PopUpSelectBed> {
                     textStyle: TextStyles.w600WhiteSize16,
                     height: 48,
                     onPressed: () {
-                      Navigator.pop(context);
-                      widget.callBack(state.indexSelected);
+                      if(state.indexSelected % 3 == 0){
+                        showCustomDialog(context, children: [
+                          const PopupNoShoes(),
+                        ]);
+                      }else{
+                        Navigator.pop(context);
+                        widget.callBack(state.indexSelected);
+                      }
                     },
                   ),
                 )

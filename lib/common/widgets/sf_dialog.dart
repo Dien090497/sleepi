@@ -43,7 +43,7 @@ Future<T?> showSuccessfulDialog<T>(BuildContext context) async {
             const SFIcon(Ics.successful),
             const SizedBox(height: 36),
             SFText(
-                keyText: LocaleKeys.successfully, style: TextStyles.bold18White),
+                keyText: LocaleKeys.success, style: TextStyles.bold18White),
             const SizedBox(height: 40),
           ],
         );

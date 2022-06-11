@@ -3,15 +3,17 @@ import 'package:flutter/material.dart';
 import 'package:slee_fi/common/utils/random_utils.dart';
 import 'package:slee_fi/common/widgets/sf_alert_dialog.dart';
 import 'package:slee_fi/common/widgets/sf_bottom_sheets.dart';
+import 'package:slee_fi/common/widgets/sf_dialog.dart';
 import 'package:slee_fi/common/widgets/sf_gridview.dart';
 import 'package:slee_fi/common/widgets/sf_icon.dart';
 import 'package:slee_fi/di/injector.dart';
 import 'package:slee_fi/l10n/locale_keys.g.dart';
 import 'package:slee_fi/presentation/screens/market_place/widget/filter_sheet.dart';
-import 'package:slee_fi/presentation/screens/market_place/widget/item_bed_buy_widget.dart';
 import 'package:slee_fi/presentation/screens/market_place/widget/pop_up_jewel_market_place.dart';
 import 'package:slee_fi/presentation/screens/market_place/widget/tab_bar_filter.dart';
 import 'package:slee_fi/resources/resources.dart';
+
+import 'jewel_buy_widget.dart';
 
 class TabJewelsBuy extends StatelessWidget {
   const TabJewelsBuy({Key? key}) : super(key: key);
@@ -27,7 +29,10 @@ class TabJewelsBuy extends StatelessWidget {
         id: id,
         attribute: 'attribute',
         effect: 'effect',
-        onConfirmTap: () {},
+        onConfirmTap: () {
+          Navigator.pop(context);
+          showSuccessfulDialog(context);
+        },
       ),
     );
   }
@@ -83,9 +88,12 @@ class TabJewelsBuy extends StatelessWidget {
                         onTap: () {
                           _showJewelDialog(context, jewels[i], id);
                         },
-                        child: ItemBedBuyWidget(
+                        child: JewelsBuyWidget(
                           id: id,
                           icon: jewels[i % jewels.length],
+                          onPressedButton: () {
+                            _showJewelDialog(context, jewels[i], id);
+                          },
                         ),
                       );
                     },

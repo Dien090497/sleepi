@@ -38,11 +38,40 @@ class ChartStatisticShare extends StatelessWidget {
       case 20:
         text = const Text('05:30', style: TextStyles.lightGrey12);
         break;
+      case 25:
+        text = const Text('06:00', style: TextStyles.lightGrey12);
+        break;
       default:
         text = const Text('', style: TextStyles.lightGrey12);
         break;
     }
+    return text;
+  }
 
+  Widget bottomTitleWidgets(double value, TitleMeta meta) {
+    Widget text;
+    switch (value.toInt()) {
+      case 0:
+        text = const Padding(
+          padding: EdgeInsets.only(right: 10.0),
+          child: Text('0',
+              textAlign: TextAlign.right, style: TextStyles.lightGrey12),
+        );
+        break;
+      case 5:
+        text = const Text('2021-01', style: TextStyles.lightGrey12);
+        break;
+      case 15:
+        text = const Text('2021-06', style: TextStyles.lightGrey12);
+        break;
+      case 25:
+        text = const Text('2021-12', style: TextStyles.lightGrey12);
+        break;
+
+      default:
+        text = const Text('', style: TextStyles.lightGrey12);
+        break;
+    }
     return text;
   }
 
@@ -73,7 +102,12 @@ class ChartStatisticShare extends StatelessWidget {
           sideTitles: SideTitles(showTitles: false),
         ),
         bottomTitles: AxisTitles(
-          sideTitles: SideTitles(showTitles: false),
+          sideTitles: SideTitles(
+              showTitles: true,
+            reservedSize: 40,
+            interval: 1,
+            getTitlesWidget: bottomTitleWidgets,
+          ),
         ),
         leftTitles: AxisTitles(
           sideTitles: SideTitles(
@@ -92,9 +126,9 @@ class ChartStatisticShare extends StatelessWidget {
             width: 1,
           ))),
       minX: 0,
-      maxX: 20,
+      maxX: 25,
       minY: 0,
-      maxY: 22,
+      maxY: 26,
       lineBarsData: [
         LineChartBarData(
           spots: const [
@@ -103,6 +137,7 @@ class ChartStatisticShare extends StatelessWidget {
             FlSpot(10, 9),
             FlSpot(15, 17),
             FlSpot(20, 14),
+            FlSpot(25, 25),
           ],
           isCurved: false,
           gradient: LinearGradient(

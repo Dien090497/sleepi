@@ -11,13 +11,32 @@ import 'package:slee_fi/resources/resources.dart';
 class TabItemDetail extends StatelessWidget {
   const TabItemDetail({Key? key}) : super(key: key);
 
+  // void _showItemDialog(BuildContext context, String img, String id) {
+  //   showCustomDialog(
+  //     context,
+  //     padding: const EdgeInsets.all(24),
+  //     children: [
+  //         ItemDialog(
+  //         icon: img,
+  //         name: 'name',
+  //         level: 'Lv.1',
+  //         id: id,
+  //         attribute: 'attribute',
+  //         effect: 'effect',
+  //         onSellTap: () {},
+  //         onTransferTap: () {},
+  //       ),
+  //     ],
+  //   );
+  // }
+
   @override
   Widget build(BuildContext context) {
     final items = [
-      Imgs.jewelSliver,
-      Imgs.jewelPurple,
-      Imgs.jewelGreen,
-      Imgs.jewelRed
+      Imgs.candyBlue,
+      Imgs.candyGreen,
+      Imgs.candyPink,
+      Imgs.candyPurple
     ];
     final randomUtils = getIt<RandomUtils>();
 
@@ -39,9 +58,15 @@ class TabItemDetail extends StatelessWidget {
                     count: 20,
                     childAspectRatio: 1,
                     itemBuilder: (context, i) {
-                      return MyItemShortWidget(
-                        id: randomUtils.randomId(),
-                        icon: items[i % items.length],
+                      String randomId = randomUtils.randomId();
+                      return GestureDetector(
+                        onTap: () {
+                          // _showItemDialog(context, items[i], randomId);
+                        },
+                        child: MyItemShortWidget(
+                          id: randomId,
+                          icon: items[i % items.length],
+                        ),
                       );
                     },
                   ),

@@ -34,7 +34,7 @@ class _BottomBarWidgetState extends State<BottomBarWidget> {
           children: [
             SFIcon(
               icon,
-              color: index == i ? AppColors.blue : AppColors.lightGrey,
+              color: index == i ? AppColors.blue : AppColors.greyBottomIndividual,
             ),
             const SizedBox(
               height: 6,

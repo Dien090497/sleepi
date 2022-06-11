@@ -100,6 +100,7 @@ class TransactionDetail extends StatelessWidget {
                       onTap: () => Navigator.pushNamed(context, R.trade),
                       text: LocaleKeys.trade.reCase(StringCase.titleCase),
                       assetImage: Ics.icTransfer,
+
                     ),
                   ],
                 ),

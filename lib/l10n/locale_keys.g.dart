@@ -239,12 +239,12 @@ abstract class  LocaleKeys {
   static const displays_the_nft_discharged_from_the_gacha = 'displays_the_nft_discharged_from_the_gacha';
   static const spending = 'spending';
   static const spending_account = 'spending_account';
-  static const users_will_need_to_have = 'users_will_need_to_have';
+  static const you_need_to_have_token_in_spending = 'you_need_to_have_token_in_spending';
   static const you_can_send_receive_and_trade = 'you_can_send_receive_and_trade';
   static const receive = 'receive';
   static const to_spending = 'to_spending';
   static const to_external = 'to_external';
-  static const successfully = 'successfully';
+  static const success = 'success';
   static const durability = 'durability';
   static const wallet_account = 'wallet_account';
   static const your_token_in_spending = 'your_token_in_spending';
@@ -350,8 +350,14 @@ abstract class  LocaleKeys {
   static const spanish = 'spanish';
   static const portuguese = 'portuguese';
   static const russian = 'russian';
+  static const return_to_home = 'return_to_home';
+  static const point = 'point';
+  static const amount_earned = 'amount_earned';
+  static const amet_minim_mollit_non = 'amet_minim_mollit_non';
   static const rare = 'rare';
   static const epic = 'epic';
   static const legendary = 'legendary';
+  static const short = 'short';
+  static const long = 'long';
 
 }

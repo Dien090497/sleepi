@@ -16,7 +16,7 @@ class WalletDetailList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     List keyList = [
-      "SLFT"
+      "SLFT",
       "SLGT",
       "AVAX",
       LocaleKeys.beds.tr(),

@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:slee_fi/common/extensions/string_x.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
+import 'package:slee_fi/common/widgets/sf_icon.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
+import 'package:slee_fi/resources/resources.dart';
 
 class SFButton extends StatelessWidget {
   const SFButton({
@@ -105,6 +107,51 @@ class SFTextButton extends StatelessWidget {
         keyText: text,
         style: textStyle,
         stringCase: stringCase,
+      ),
+    );
+  }
+}
+
+class SFIconButton extends StatelessWidget {
+  const SFIconButton(
+      {required this.text,
+        this.textStyle,
+        this.stringCase,
+        this.onPressed,
+        this.width,
+        this.height,
+        this.color,
+        this.radius = 100,
+        this.icon,
+        Key? key})
+      : super(key: key);
+
+  final String text;
+  final String? icon;
+  final double? height;
+  final double? width;
+  final double radius;
+  final Color? color;
+  final TextStyle? textStyle;
+  final StringCase? stringCase;
+  final VoidCallback? onPressed;
+
+  @override
+  Widget build(BuildContext context) {
+    return  SizedBox(
+      width: width ?? 70,
+      height: height ?? 28,
+      child: ElevatedButton.icon(
+        icon:  SFIcon(icon ?? Ics.icCart, width: 18,),
+        label:  SFText(keyText: text, stringCase: stringCase, style: textStyle),
+        onPressed: onPressed,
+        style: ElevatedButton.styleFrom(
+          primary: color,
+          padding: const EdgeInsets.symmetric(horizontal: 6),
+          shape:  RoundedRectangleBorder(
+            borderRadius:  BorderRadius.circular(radius),
+          ),
+        ),
       ),
     );
   }
