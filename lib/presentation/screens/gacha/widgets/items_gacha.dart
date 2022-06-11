@@ -14,10 +14,13 @@ class ItemsGacha extends StatelessWidget {
       {Key? key,
       required this.title,
       required this.singleGacha,
-      required this.timesGacha})
+      required this.timesGacha,
+      required this.typeReward,
+      })
       : super(key: key);
 
   final String title;
+  final String typeReward;
   final int singleGacha;
   final int timesGacha;
 
@@ -56,7 +59,7 @@ class ItemsGacha extends StatelessWidget {
         GachaRollSelections(singleGacha: singleGacha, timesGacha: timesGacha),
         const SizedBox(height: 13),
         SFText(
-            keyText: LocaleKeys.rare_beds_chance,
+            keyText: typeReward,
             style: TextStyles.lightGrey12),
         const SizedBox(height: 2),
         const ChanceWidget(),
