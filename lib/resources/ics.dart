@@ -22,19 +22,27 @@ class Ics {
   static const String icAvax = 'assets/icons/ic_avax.svg';
   static const String icBedBoxes = 'assets/icons/ic_bed_boxes.svg';
   static const String icBeds = 'assets/icons/ic_beds.svg';
+  static const String icBedsNew = 'assets/icons/ic_beds_new.svg';
+  static const String icBedsProbability =
+      'assets/icons/ic_beds_probability.svg';
   static const String icCalculator = 'assets/icons/ic_calculator.svg';
   static const String icCart = 'assets/icons/ic_cart.svg';
+  static const String icChartNew = 'assets/icons/ic_chart_new.svg';
   static const String icCircleQuestion = 'assets/icons/ic_circle_question.svg';
   static const String icDeleteTwo = 'assets/icons/ic_delete_two.svg';
   static const String icDiamond = 'assets/icons/ic_diamond.svg';
   static const String icDownload = 'assets/icons/ic_download.svg';
   static const String icEdit = 'assets/icons/ic_edit.svg';
   static const String icEye = 'assets/icons/ic_eye.svg';
+  static const String icGacha = 'assets/icons/ic_gacha.svg';
+  static const String icHomeNew = 'assets/icons/ic_home_new.svg';
   static const String icJewels = 'assets/icons/ic_jewels.svg';
   static const String icLock = 'assets/icons/ic_lock.svg';
+  static const String icMarketNew = 'assets/icons/ic_market_new.svg';
   static const String icMicrophone = 'assets/icons/ic_microphone.svg';
   static const String icMotionData = 'assets/icons/ic_motion_data.svg';
   static const String icNotifications = 'assets/icons/ic_notifications.svg';
+  static const String icPillows = 'assets/icons/ic_pillows.svg';
   static const String icPlus = 'assets/icons/ic_plus.svg';
   static const String icQuestion = 'assets/icons/ic_question.svg';
   static const String icRefresh = 'assets/icons/ic_refresh.svg';
@@ -82,19 +90,26 @@ class Ics {
     icAvax,
     icBedBoxes,
     icBeds,
+    icBedsNew,
+    icBedsProbability,
     icCalculator,
     icCart,
+    icChartNew,
     icCircleQuestion,
     icDeleteTwo,
     icDiamond,
     icDownload,
     icEdit,
     icEye,
+    icGacha,
+    icHomeNew,
     icJewels,
     icLock,
+    icMarketNew,
     icMicrophone,
     icMotionData,
     icNotifications,
+    icPillows,
     icPlus,
     icQuestion,
     icRefresh,

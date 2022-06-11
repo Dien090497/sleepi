@@ -16,6 +16,7 @@ class Imgs {
   static const String candyPink = 'assets/images/candy_pink.png';
   static const String candyPurple = 'assets/images/candy_purple.png';
   static const String connectBorder = 'assets/images/connect_border.png';
+  static const String doubleIcon = 'assets/images/double_icon.png';
   static const String efficiency = 'assets/images/efficiency.png';
   static const String emptyBedBox = 'assets/images/empty_bed_box.png';
   static const String errorNoBed = 'assets/images/error_no_bed.png';
@@ -77,6 +78,7 @@ class Imgs {
     candyPink,
     candyPurple,
     connectBorder,
+    doubleIcon,
     efficiency,
     emptyBedBox,
     errorNoBed,

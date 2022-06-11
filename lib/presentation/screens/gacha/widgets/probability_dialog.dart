@@ -3,6 +3,8 @@ import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
 import 'package:slee_fi/l10n/locale_keys.g.dart';
+import 'package:slee_fi/presentation/screens/gacha/widgets/items_probability.dart';
+import 'package:slee_fi/resources/resources.dart';
 
 class ProbabilityDialog extends StatelessWidget {
   const ProbabilityDialog({Key? key}) : super(key: key);
@@ -10,65 +12,89 @@ class ProbabilityDialog extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final List<Map> users = [
-      {'title': LocaleKeys.bed, 'content': 'Common Bed 99999%\nUncommon Bed 9999%\nRare Bed 9999%\nEpic Bed 9999%\nLegendaly Bed 9999%'},
-      {'title': LocaleKeys.jewels, 'content': 'Level1 9999%\nLevel2 9999%\nLevel3 9999%\nLevel4 9999%\nLevel5 9999%'},
-      {'title': LocaleKeys.item, 'content': 'Level1 9999%\nLevel2 9999%\nLevel3 9999%\nLevel4 9999%\nLevel5 9999%'},
-      {'title': LocaleKeys.token, 'content': '999999SLFT  9999%\n999999SLFT  9999%\n999999SLFT  9999%\n999999SLGT  9999%\n999999SLGT  9999%\n999999SLGT  9999%\n999999SLGT  9999%\n999999SLGT  9999%'},
+    //TODO: Just For Test Delete when have real data
+    final List<FakeListData> fakeListBed = [
+      FakeListData(title: LocaleKeys.common_bed, parameter: '100%'),
+      FakeListData(title: LocaleKeys.uncommon, parameter: '90%'),
+      FakeListData(title: LocaleKeys.rare_bed, parameter: '80%'),
+      FakeListData(title: LocaleKeys.epic_bed, parameter: '15%'),
+      FakeListData(title: LocaleKeys.legendary_bed, parameter: '5%'),
+    ];
+    final List<FakeListData> fakeListJewels = [
+      FakeListData(title: '${LocaleKeys.level} 1', parameter: '100%'),
+      FakeListData(title: '${LocaleKeys.level} 2', parameter: '90%'),
+      FakeListData(title: '${LocaleKeys.level} 3', parameter: '80%'),
+      FakeListData(title: '${LocaleKeys.level} 4', parameter: '15%'),
+      FakeListData(title: '${LocaleKeys.level} 5', parameter: '5%'),
+    ];
+    final List<FakeListData> fakeListItems = [
+      FakeListData(title: '${LocaleKeys.level} 1', parameter: '100%'),
+      FakeListData(title: '${LocaleKeys.level} 2', parameter: '90%'),
+      FakeListData(title: '${LocaleKeys.level} 3', parameter: '80%'),
+      FakeListData(title: '${LocaleKeys.level} 4', parameter: '15%'),
+      FakeListData(title: '${LocaleKeys.level} 5', parameter: '5%'),
+    ];
+    final List<FakeListData> fakeListToken = [
+      FakeListData(title: 'SLFT', parameter: '100%'),
+      FakeListData(title: 'SLGT', parameter: '90%'),
     ];
     return Padding(
       padding: const EdgeInsets.fromLTRB(16, 0, 16, 16),
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          SFText(
-            keyText: LocaleKeys.probability,
-            style: TextStyles.bold18LightWhite,
+          Center(
+            child: SFText(
+              keyText: LocaleKeys.probability,
+              style: TextStyles.bold18LightWhite,
+            ),
           ),
-          const SizedBox(
-            height: 24,
-          ),
+          const SizedBox(height: 24),
           SingleChildScrollView(
             child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Container(
-                  width: MediaQuery.of(context).size.width,
-                  alignment: Alignment.center,
-                  decoration:  BoxDecoration(
-                    borderRadius: const BorderRadius.only(topLeft: Radius.circular(8), topRight: Radius.circular(8),),
-                    color: AppColors.white.withOpacity(0.05),
-                  ),
-                  padding: const EdgeInsets.all(12),
-                  child: SFText(keyText: LocaleKeys.product_line_up, style: TextStyles.bold14LightWhite,),
+                SFText(keyText: LocaleKeys.product_line_up, style: TextStyles.bold14LightWhiteWithOpacity,),
+                const SizedBox(height: 16),
+                ItemsProbability(
+                  iconPath: Ics.icBedsProbability,
+                  fakeListData: fakeListBed,
+                  title: LocaleKeys.bed,
+                  colorBgIcon: [
+                    AppColors.blue.withOpacity(0.1),
+                    AppColors.blue.withOpacity(0.1)
+                  ],
                 ),
-                Table(
-                  columnWidths: const {
-                    0: FixedColumnWidth(100),
-                    1: FlexColumnWidth(),
-                  },
-                  defaultVerticalAlignment: TableCellVerticalAlignment.middle,
-                  children: users.map((user) {
-                    return TableRow(
-                        children: [
-                          TableCell(
-                            verticalAlignment: TableCellVerticalAlignment.fill,
-                            child: Container(
-                                color: users.indexOf(user) % 2 == 0
-                                    ? AppColors.transparent
-                                    : AppColors.white.withOpacity(0.03),
-                                padding: const EdgeInsets.all(10),
-                                child: Center(child: SFText(keyText: user["title"], style: TextStyles.bold14Blue, textAlign: TextAlign.center,))),
-                          ),
-                      Container(
-                          color: users.indexOf(user) % 2 == 0
-                              ? AppColors.transparent
-                              : AppColors.white.withOpacity(0.03),
-                          padding: const EdgeInsets.all(10),
-                          child: SFText(keyText : user['content'], style: TextStyles.w400lightGrey14))
-                    ]);
-                  }).toList(),
-                  border: TableBorder.all(width: 1, color: AppColors.white.withOpacity(0.1),
-                      borderRadius:  const BorderRadius.only(bottomLeft: Radius.circular(8), bottomRight: Radius.circular(8))
-                  ),
+                const SizedBox(height: 12),
+                ItemsProbability(
+                  iconPath: Ics.icPillows,
+                  fakeListData: fakeListJewels,
+                  title: LocaleKeys.jewels,
+                  colorBgIcon: [
+                    AppColors.green.withOpacity(0.1),
+                    AppColors.blue.withOpacity(0.1)
+                  ],
+                ),
+                const SizedBox(height: 12),
+                ItemsProbability(
+                  iconPath: Imgs.icItems,
+                  fakeListData: fakeListItems,
+                  title: LocaleKeys.item,
+                  colorBgIcon: [
+                    AppColors.blue.withOpacity(0.1),
+                    AppColors.purple.withOpacity(0.1)
+                  ],
+                  isGradientText: true,
+                  width: 45,
+                  height: 45,
+                ),
+                const SizedBox(height: 12),
+                ItemsProbability(
+                  iconPath: Imgs.doubleIcon,
+                  fakeListData: fakeListToken,
+                  title: LocaleKeys.token,
+                  width: 40,
+                  height: 40,
                 ),
               ],
             ),
@@ -77,4 +103,12 @@ class ProbabilityDialog extends StatelessWidget {
       ),
     );
   }
+}
+
+//TODO: Just For Test Delete when have real data
+class FakeListData {
+  String title;
+  String parameter;
+
+  FakeListData({required this.title, required this.parameter});
 }

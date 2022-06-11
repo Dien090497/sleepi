@@ -42,11 +42,13 @@ class _GachaScreenState extends State<GachaScreen> {
                     title: LocaleKeys.normal_gacha,
                     singleGacha: 12,
                     timesGacha: 100,
+                    typeReward: LocaleKeys.uncommon_beds_chance,
                   ),
                   ItemsGacha(
                     title: LocaleKeys.special_gacha,
                     singleGacha: 120,
                     timesGacha: 1000,
+                    typeReward: LocaleKeys.rare_beds_chance,
                   ),
                 ],
               ),
