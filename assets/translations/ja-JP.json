@@ -337,5 +337,11 @@
  "microphone": "マイク",
  "motion_data": "モーションデータ",
  "this_bed_is_not_yours": "これはあなたのデッドではありません。",
- "staked": "ステーク済み"
+ "staked": "ステーク済み",
+ "one_bed_will_be_burned": "ベッドが1つバーンされます",
+ "middle": "ミドル",
+ "high_price": "High Price",
+ "base_luck": "Base Luck",
+ "my_balance": "My Balance",
+ "luck_jewel": "Luck Jewel"
 }
