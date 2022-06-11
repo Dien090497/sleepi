@@ -353,7 +353,6 @@ abstract class  LocaleKeys {
   static const return_to_home = 'return_to_home';
   static const point = 'point';
   static const amount_earned = 'amount_earned';
-  static const amet_minim_mollit_non = 'amet_minim_mollit_non';
   static const rare = 'rare';
   static const epic = 'epic';
   static const legendary = 'legendary';
