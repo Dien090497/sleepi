@@ -15,6 +15,16 @@ class Const {
   static const String avascanUrl = 'https://avascan.info/';
   static const String binanceUrl = 'https://www.binance.com/';
 
+  static const String whitePaperEn =
+      'https://sleefi.gitbook.io/en/v/whitepaper/';
+
+  static const String whitePaperJa =
+      'https://sleefi.gitbook.io/jp/v/whitepaper-jp/';
+
+  static const String whitePaperInsuranceEn = '${whitePaperEn}insurance';
+
+  static const String whitePaperInsuranceJa = '${whitePaperJa}insurance';
+
   static const localeDE = Locale('de', 'DE');
   static const localeEN = Locale('en', 'US');
   static const localeES = Locale('es', 'ES');

@@ -354,5 +354,8 @@ abstract class  LocaleKeys {
   static const spanish = 'spanish';
   static const portuguese = 'portuguese';
   static const russian = 'russian';
+  static const rare = 'rare';
+  static const epic = 'epic';
+  static const legendary = 'legendary';
 
 }

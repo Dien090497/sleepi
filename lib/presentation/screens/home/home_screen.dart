@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:slee_fi/common/const/const.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
+import 'package:slee_fi/common/utils/launch_url_utils.dart';
 import 'package:slee_fi/common/widgets/loading_screen.dart';
 import 'package:slee_fi/common/widgets/sf_bottom_sheet.dart';
 import 'package:slee_fi/common/widgets/sf_button_outlined.dart';
@@ -18,7 +19,6 @@ import 'package:slee_fi/presentation/screens/home/widgets/home_switch.dart';
 import 'package:slee_fi/presentation/screens/home/widgets/middle_bed.dart';
 import 'package:slee_fi/presentation/screens/home/widgets/modal_item_list.dart';
 import 'package:slee_fi/resources/resources.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -99,15 +99,12 @@ class HomeScreen extends StatelessWidget {
                                   ),
                                   const SizedBox(height: 2),
                                   GestureDetector(
-                                    onTap: () async{
-                                      final url = Uri.parse(Const.whitePaperUrl);
-                                      if (await canLaunchUrl(url)) {
-                                      launchUrl(url);
-                                      }
+                                    onTap: () {
+                                      launchInsurance(context);
                                     },
                                     child: Row(
                                       crossAxisAlignment:
-                                      CrossAxisAlignment.center,
+                                          CrossAxisAlignment.center,
                                       children: [
                                         SFText(
                                           keyText: LocaleKeys.what_is_insurance,
@@ -116,8 +113,7 @@ class HomeScreen extends StatelessWidget {
                                         const SizedBox(
                                           width: 8,
                                         ),
-                                        const SFIcon(
-                                            Ics.icCircleQuestion),
+                                        const SFIcon(Ics.icCircleQuestion),
                                       ],
                                     ),
                                   ),
