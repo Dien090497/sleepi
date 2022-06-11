@@ -13,41 +13,27 @@ class MarketPlaceScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
     return BackgroundWidget(
-      scaffoldKey: scaffoldKey,
       child: SafeArea(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            const TopBarCommon(),
-            const SizedBox(height: 20),
+          children: const [
+            TopBarCommon(),
+            SizedBox(height: 20),
             Expanded(
               child: SFTabBar(
                 isScrollable: true,
-                texts: const [
+                texts: [
                   LocaleKeys.beds,
                   LocaleKeys.jewels,
                   LocaleKeys.item,
                   LocaleKeys.trophy
                 ],
                 children: [
-                  TabBedsBuy(
-                    onPress: () {
-                      scaffoldKey.currentState?.openEndDrawer();
-                    },
-                  ),
-                  TabJewelsBuy(
-                    onPress: () {
-                      scaffoldKey.currentState?.openEndDrawer();
-                    },
-                  ),
-                  TabItemsBuy(
-                    onPress: () {
-                      scaffoldKey.currentState?.openEndDrawer();
-                    },
-                  ),
-                  const TabTrophysBuy(),
+                  TabBedsBuy(),
+                  TabJewelsBuy(),
+                  TabItemsBuy(),
+                  TabTrophysBuy(),
                 ],
               ),
             ),

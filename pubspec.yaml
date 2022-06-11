@@ -63,6 +63,7 @@ dependencies:
   decimal: ^2.2.0
   path_provider: ^2.0.11
   fluttertoast: ^8.0.9
+  flutter_phoenix: ^1.0.0
 
 dev_dependencies:
   flutter_lints: ^2.0.1

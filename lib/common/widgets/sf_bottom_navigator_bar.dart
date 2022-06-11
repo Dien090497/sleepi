@@ -38,7 +38,7 @@ class SFBottomNavigatorBar extends StatelessWidget {
                   width: 24,
                   height: 24,
                   color: index == items.indexOf(element)
-                      ? Colors.blueAccent
+                      ? AppColors.blue
                       : AppColors.lightGrey,
                 ),
                 const SizedBox(height: 4),
@@ -46,7 +46,7 @@ class SFBottomNavigatorBar extends StatelessWidget {
                   keyText: element.label,
                   style: TextStyle(
                     color: index == items.indexOf(element)
-                        ? Colors.blueAccent
+                        ? AppColors.blue
                         : AppColors.lightGrey,
                     fontSize: 12,
                     fontWeight: FontWeight.bold,
@@ -61,7 +61,7 @@ class SFBottomNavigatorBar extends StatelessWidget {
     return BottomNavigationBar(
       elevation: 5,
       currentIndex: index,
-      selectedItemColor: Colors.blue,
+      selectedItemColor: AppColors.blue,
       selectedFontSize: 0,
       backgroundColor: AppColors.dark,
       unselectedItemColor: AppColors.lightGrey,

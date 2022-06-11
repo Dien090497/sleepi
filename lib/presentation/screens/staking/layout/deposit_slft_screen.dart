@@ -127,7 +127,11 @@ class DepositSlftScreen extends StatelessWidget {
                       onPressed: () {
                         showCustomDialog(context, children: [
                           PopUpStaking(
-                            message: LocaleKeys.do_you_really_want_to_deposit,
+                            message: LocaleKeys.do_you_really_want_to_deposit
+                                .tr(namedArgs: {
+                              'amount': 'xxx',
+                              'token': 'SLFT',
+                            }),
                             onPressed: () => showSuccessfulDialog(context),
                           )
                         ]);

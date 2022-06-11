@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:slee_fi/common/utils/random_utils.dart';
 import 'package:slee_fi/common/widgets/sf_alert_dialog.dart';
@@ -13,10 +14,7 @@ import 'package:slee_fi/presentation/screens/market_place/widget/tab_bar_filter.
 import 'package:slee_fi/resources/resources.dart';
 
 class TabJewelsBuy extends StatelessWidget {
-  const TabJewelsBuy({
-    Key? key,
-    required this.onPress,
-  }) : super(key: key);
+  const TabJewelsBuy({Key? key}) : super(key: key);
 
   void _showJewelDialog(BuildContext context, String img, String id) {
     showCustomAlertDialog(
@@ -33,8 +31,6 @@ class TabJewelsBuy extends StatelessWidget {
       ),
     );
   }
-
-  final Function() onPress;
 
   @override
   Widget build(BuildContext context) {
@@ -56,7 +52,22 @@ class TabJewelsBuy extends StatelessWidget {
             TabBarFilter(
               tabTexts: const [LocaleKeys.buy, LocaleKeys.rent],
               onFilterTap: () {
-                showFilterModalBottomSheet(context, FilterType.jewel);
+                showFilterModalBottomSheet(
+                  context,
+                  sections: {
+                    LocaleKeys.type: [
+                      LocaleKeys.efficiency.tr(),
+                      LocaleKeys.luck.tr(),
+                      LocaleKeys.resilience.tr(),
+                      LocaleKeys.special.tr(),
+                      LocaleKeys.bonus.tr(),
+                    ],
+                  },
+                  sliders: {
+                    LocaleKeys.level:
+                        const FilterSliderValues(max: 5, min: 1, interval: 2),
+                  },
+                );
               },
             ),
             const SizedBox(height: 12),
@@ -65,7 +76,7 @@ class TabJewelsBuy extends StatelessWidget {
                 children: [
                   SFGridView(
                     count: 20,
-                    childAspectRatio: 8/10,
+                    childAspectRatio: 8 / 10,
                     itemBuilder: (context, i) {
                       String id = randomUtils.randomId();
                       return GestureDetector(

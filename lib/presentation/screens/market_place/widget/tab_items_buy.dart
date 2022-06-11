@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:slee_fi/common/utils/random_utils.dart';
 import 'package:slee_fi/common/widgets/sf_bottom_sheets.dart';
@@ -11,9 +12,7 @@ import 'package:slee_fi/presentation/screens/market_place/widget/tab_bar_filter.
 import 'package:slee_fi/resources/resources.dart';
 
 class TabItemsBuy extends StatelessWidget {
-  const TabItemsBuy({Key? key, required this.onPress}) : super(key: key);
-
-  final Function() onPress;
+  const TabItemsBuy({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -35,7 +34,21 @@ class TabItemsBuy extends StatelessWidget {
             TabBarFilter(
               tabTexts: const [LocaleKeys.buy, LocaleKeys.rent],
               onFilterTap: () {
-                showFilterModalBottomSheet(context, FilterType.item);
+                showFilterModalBottomSheet(
+                  context,
+                  sections: {
+                    LocaleKeys.type: [
+                      LocaleKeys.efficiency.tr(),
+                      LocaleKeys.luck.tr(),
+                      LocaleKeys.resilience.tr(),
+                      LocaleKeys.special.tr(),
+                    ],
+                  },
+                  sliders: {
+                    LocaleKeys.level:
+                        const FilterSliderValues(max: 5, min: 1, interval: 2),
+                  },
+                );
               },
             ),
             const SizedBox(height: 12),
@@ -44,7 +57,7 @@ class TabItemsBuy extends StatelessWidget {
                 children: [
                   SFGridView(
                     count: 20,
-                    childAspectRatio: 8/10,
+                    childAspectRatio: 8 / 10,
                     itemBuilder: (context, i) {
                       return ItemBedBuyWidget(
                         id: randomUtils.randomId(),
