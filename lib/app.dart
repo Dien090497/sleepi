@@ -19,6 +19,7 @@ class MyApp extends StatelessWidget {
         designSize: const Size(375, 812),
         builder: (_, child) {
           return MaterialApp(
+            key: Key(context.locale.languageCode),
             title: 'SleeFi',
             home: child,
             localizationsDelegates: context.localizationDelegates,

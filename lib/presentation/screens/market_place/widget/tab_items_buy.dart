@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:slee_fi/common/utils/random_utils.dart';
 import 'package:slee_fi/common/widgets/sf_bottom_sheets.dart';
@@ -33,7 +34,21 @@ class TabItemsBuy extends StatelessWidget {
             TabBarFilter(
               tabTexts: const [LocaleKeys.buy, LocaleKeys.rent],
               onFilterTap: () {
-                showFilterModalBottomSheet(context, FilterType.item);
+                showFilterModalBottomSheet(
+                  context,
+                  sections: {
+                    LocaleKeys.type: [
+                      LocaleKeys.efficiency.tr(),
+                      LocaleKeys.luck.tr(),
+                      LocaleKeys.resilience.tr(),
+                      LocaleKeys.special.tr(),
+                    ],
+                  },
+                  sliders: {
+                    LocaleKeys.level:
+                        const FilterSliderValues(max: 5, min: 1, interval: 2),
+                  },
+                );
               },
             ),
             const SizedBox(height: 12),

@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:slee_fi/common/enum/enum.dart';
 import 'package:slee_fi/common/routes/app_routes.dart';
@@ -46,7 +47,33 @@ class TabBedsBuy extends StatelessWidget {
             TabBarFilter(
               tabTexts: const [LocaleKeys.buy, LocaleKeys.rent],
               onFilterTap: () {
-                showFilterModalBottomSheet(context, FilterType.bed);
+                showFilterModalBottomSheet(
+                  context,
+                  sections: {
+                    LocaleKeys.type.tr(): [
+                      LocaleKeys.beds.tr(),
+                      LocaleKeys.bed_box.tr(),
+                    ],
+                    LocaleKeys.class_.tr(): [
+                      LocaleKeys.short_bed.tr(),
+                      LocaleKeys.middle_bed.tr(),
+                      LocaleKeys.long_bed.tr(),
+                      LocaleKeys.flexible_bed.tr(),
+                    ],
+                    LocaleKeys.quality.tr(): [
+                      LocaleKeys.common_bed.tr(),
+                      LocaleKeys.uncommon_bed.tr(),
+                      LocaleKeys.rare_bed.tr(),
+                      LocaleKeys.epic_bed.tr(),
+                      LocaleKeys.legendary_bed.tr(),
+                    ],
+                  },
+                  sliders: {
+                    LocaleKeys.level:
+                        const FilterSliderValues(max: 50, min: 1, interval: 49),
+                    LocaleKeys.mint: const FilterSliderValues(max: 7, min: 0),
+                  },
+                );
               },
             ),
             const SizedBox(height: 12),

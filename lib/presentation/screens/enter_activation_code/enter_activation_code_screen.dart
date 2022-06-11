@@ -1,6 +1,5 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_phoenix/flutter_phoenix.dart';
 import 'package:slee_fi/common/const/const.dart';
 import 'package:slee_fi/common/routes/app_routes.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
@@ -73,7 +72,6 @@ class _EnterActivationCodeScreenState extends State<EnterActivationCodeScreen> {
                           ),
                           onChange: (int value, int index) {
                             context.setLocale(Const.locales[index]);
-                            Phoenix.rebirth(context);
                           },
                         )),
                     const SizedBox(height: 20),

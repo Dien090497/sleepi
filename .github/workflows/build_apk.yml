@@ -50,15 +50,12 @@ jobs:
           token: ${{ secrets.diawi_token }}
           file: build/app/outputs/flutter-apk/app-release.apk
 
-      - uses: jmatsu/dg-upload-app-action@v0.2.1
-        id: deploygate
-        with:
-          app_owner_name: kevinthai
-          api_token: ${{ secrets.dg_token }}
-          app_file_path: build/app/outputs/flutter-apk/app-release.apk
-
-      - run: |
-          echo
+#      - uses: jmatsu/dg-upload-app-action@v0.2.1
+#        id: deploygate
+#        with:
+#          app_owner_name: kevinthai
+#          api_token: ${{ secrets.dg_token }}
+#          app_file_path: build/app/outputs/flutter-apk/app-release.apk
 
 #      - id: json
 #        run: echo ${{ toJSON(steps.deploygate.outputs) }}
