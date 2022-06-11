@@ -11,20 +11,14 @@ class PopUpItemMarketPlace extends StatelessWidget {
   const PopUpItemMarketPlace(
       {Key? key,
         required this.icon,
-        required this.name,
         required this.level,
         required this.id,
-        required this.attribute,
-        required this.effect,
         required this.onConfirmTap})
       : super(key: key);
 
   final String icon;
-  final String name;
   final String level;
   final String id;
-  final String attribute;
-  final String effect;
   final VoidCallback onConfirmTap;
 
   @override

@@ -24,11 +24,8 @@ class TabItemsBuy extends StatelessWidget {
       padding: const EdgeInsets.all(24),
       children: PopUpItemMarketPlace(
         icon: img,
-        name: 'name',
         level: 'Lv.1',
         id: id,
-        attribute: 'attribute',
-        effect: 'effect',
         onConfirmTap: () {
           Navigator.pop(context);
           showSuccessfulDialog(context);
