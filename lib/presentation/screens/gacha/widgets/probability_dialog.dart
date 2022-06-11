@@ -11,10 +11,10 @@ class ProbabilityDialog extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final List<Map> users = [
-      {'title': "Bed", 'content': 'Common Bed 99999%\nUncommon Bed 9999%\nRare Bed 9999%\nEpic Bed 9999%\nLegendaly Bed 9999%'},
-      {'title': "Jewels", 'content': 'Level1 9999%\nLevel2 9999%\nLevel3 9999%\nLevel4 9999%\nLevel5 9999%'},
-      {'title': "Items", 'content': 'Level1 9999%\nLevel2 9999%\nLevel3 9999%\nLevel4 9999%\nLevel5 9999%'},
-      {'title': "Token", 'content': '999999SLFT  9999%\n999999SLFT  9999%\n999999SLFT  9999%\n999999SLGT  9999%\n999999SLGT  9999%\n999999SLGT  9999%\n999999SLGT  9999%\n999999SLGT  9999%'},
+      {'title': LocaleKeys.bed, 'content': 'Common Bed 99999%\nUncommon Bed 9999%\nRare Bed 9999%\nEpic Bed 9999%\nLegendaly Bed 9999%'},
+      {'title': LocaleKeys.jewels, 'content': 'Level1 9999%\nLevel2 9999%\nLevel3 9999%\nLevel4 9999%\nLevel5 9999%'},
+      {'title': LocaleKeys.item, 'content': 'Level1 9999%\nLevel2 9999%\nLevel3 9999%\nLevel4 9999%\nLevel5 9999%'},
+      {'title': LocaleKeys.token, 'content': '999999SLFT  9999%\n999999SLFT  9999%\n999999SLFT  9999%\n999999SLGT  9999%\n999999SLGT  9999%\n999999SLGT  9999%\n999999SLGT  9999%\n999999SLGT  9999%'},
     ];
     return Padding(
       padding: const EdgeInsets.fromLTRB(16, 0, 16, 16),

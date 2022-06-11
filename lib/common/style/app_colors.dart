@@ -39,6 +39,8 @@ class AppColors {
 
   static const greyBottomNavBar = Color(0xFFC4C4C4);
 
+  static const greyBottomIndividual = Color(0xFF8E9EB5);
+
   static const transparent = Colors.transparent;
 
   static const darkColor1 = Color(0xFF1E212C);
@@ -79,6 +81,10 @@ class AppColors {
   static const legendaryBed = Color(0xFF4A9E45);
 
   static const gray = Color(0xFFC4C4C4);
+
+  static const ruby = Color(0XFFFC476A);
+
+  static const amethst = Color(0xFF7962E7);
 
   static final backgroundDialog = const Color(0xFF060616).withOpacity(0.9);
 

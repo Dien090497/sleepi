@@ -10,6 +10,7 @@ import 'package:slee_fi/common/widgets/sf_button_outlined.dart';
 import 'package:slee_fi/common/widgets/sf_buttons.dart';
 import 'package:slee_fi/common/widgets/sf_card.dart';
 import 'package:slee_fi/common/widgets/sf_dialog.dart';
+import 'package:slee_fi/common/widgets/sf_icon.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
 import 'package:slee_fi/l10n/locale_keys.g.dart';
 import 'package:slee_fi/presentation/screens/staking/widgets/pop_up_calculator.dart';
@@ -144,8 +145,14 @@ class StakingList extends StatelessWidget {
                   children: const PopUpCalculator(),
                 );
               },
-              child: SvgPicture.asset(Ics.icCalculator,
-                  color: AppColors.lightGrey, width: 22),
+              child: Row(
+                children: [
+                 const SFIcon(Ics.icCalculator,
+                      color: AppColors.lightGrey, width: 22),
+                  const SizedBox(width: 4,),
+                  SFText(keyText: "ROI", style: TextStyles.lightGrey16,)
+                ],
+              ),
             )
           ],
         ),

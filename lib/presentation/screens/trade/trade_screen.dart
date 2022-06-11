@@ -1,5 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:slee_fi/common/extensions/string_x.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
 import 'package:slee_fi/common/widgets/background_widget.dart';
@@ -47,6 +48,7 @@ class _TradeScreenState extends State<TradeScreen> {
                         child: SFSubAppBar(
                           title: LocaleKeys.trade,
                           textStyle: TextStyles.bold18LightWhite,
+                          stringCase: StringCase.titleCase,
                         ),
                       ),
                       GestureDetector(
@@ -181,6 +183,7 @@ class _TradeScreenState extends State<TradeScreen> {
                 SFButton(
                   width: double.infinity,
                   text: LocaleKeys.trade,
+                  stringCase: StringCase.titleCase,
                   textStyle: TextStyles.w600WhiteSize16,
                   gradient: AppColors.gradientBlueButton,
                   disabled: isDisabled,

@@ -5,7 +5,9 @@ import 'package:slee_fi/common/style/text_styles.dart';
 import 'package:slee_fi/common/widgets/background_widget.dart';
 import 'package:slee_fi/common/widgets/sf_app_bar.dart';
 import 'package:slee_fi/common/widgets/sf_buttons.dart';
+import 'package:slee_fi/common/widgets/sf_icon.dart';
 import 'package:slee_fi/common/widgets/sf_label_value.dart';
+import 'package:slee_fi/common/widgets/sf_text.dart';
 import 'package:slee_fi/l10n/locale_keys.g.dart';
 import 'package:slee_fi/presentation/screens/tracking/widgets/analog_clock.dart';
 import 'package:slee_fi/resources/resources.dart';
@@ -37,8 +39,8 @@ class _TrackingScreenState extends State<TrackingScreen> {
                   height: 318,
                   decoration: const BoxDecoration(
                       image: DecorationImage(
-                    image: AssetImage(Imgs.borderClock),
-                  )),
+                        image: AssetImage(Imgs.borderClock),
+                      )),
                 ),
                 Container(
                   width: 190,
@@ -68,8 +70,23 @@ class _TrackingScreenState extends State<TrackingScreen> {
               ],
             ),
             const SizedBox(
-              height: 30,
+              height: 24,
             ),
+            Column(
+              children: [
+                SFText(keyText: LocaleKeys.amount_earned, style: TextStyles.w400lightGrey14,),
+                const SizedBox(height: 12,),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children:  [
+                    const SFIcon(Ics.icSlft, width: 40,),
+                    const SizedBox(width: 8,),
+                    SFText(keyText: "10 SLFT", style: TextStyles.bold30White,),
+                  ],
+                )
+              ],
+            ),
+            const SizedBox(height: 24,),
             const Padding(
               padding: EdgeInsets.symmetric(horizontal: 8.0),
               child: SFLabelValue(

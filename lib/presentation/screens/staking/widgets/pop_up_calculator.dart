@@ -36,7 +36,7 @@ class PopUpCalculator extends StatelessWidget {
           height: 12.0,
         ),
         SFText(
-          keyText: LocaleKeys.staked.tr(namedArgs: {"token": "SLFT"}),
+          keyText: "SLFT ${LocaleKeys.staked.tr()}",
           style: TextStyles.lightGrey14,
         ),
         const SLFTStaked(),
@@ -176,7 +176,7 @@ class _AddDurationState extends State<AddDuration> {
             },
             child: SFChip(
               text: "${days[index]}D",
-              textStyle: selectedIndex == index ? TextStyles.w700WhiteSize14 : TextStyles.w700LightGreySize14,
+              textStyle: selectedIndex == index ? TextStyles.w700WhiteSize14 : TextStyles.lightGrey14,
               color: selectedIndex == index ? AppColors.blue : AppColors.white.withOpacity(0.05),
             ),
           ),
@@ -223,7 +223,7 @@ class _SLFTStakedState extends State<SLFTStaked> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         SFCard(
-          padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 18),
+          padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 18),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
@@ -233,14 +233,14 @@ class _SLFTStakedState extends State<SLFTStaked> {
                   children: [
                     SFText(
                       keyText: swapText ? "${selectedIndex != null ? (selectedIndex! + 1 == balance.length ? 0 : balance[selectedIndex!]) : 0}.00 USD" : "0.00 SLFT",
-                      style:TextStyles.lightWhite16,
+                      style:TextStyles.bold16LightWhite,
                     ),
                     const SizedBox(
                       height: 12.0,
                     ),
                     SFText(
                       keyText: swapText ? "0.00 SLFT" : "${selectedIndex != null ? (selectedIndex! + 1 == balance.length ? 0 : balance[selectedIndex!]) : 0}.00 USD",
-                      style: TextStyles.lightGrey12 ,
+                      style: TextStyles.lightGrey14,
                     ),
                   ],
                 ),
@@ -254,6 +254,7 @@ class _SLFTStakedState extends State<SLFTStaked> {
                 child: const Icon(
                   Icons.swap_vert,
                   color: AppColors.blue,
+                  size: 36,
                 ),
               ),
             ],
@@ -279,7 +280,7 @@ class _SLFTStakedState extends State<SLFTStaked> {
             },
             child: SFChip(
               text: index + 1 == balance.length ? balance[index] : "\$${balance[index]}",
-              textStyle: selectedIndex == index ? TextStyles.w700WhiteSize14 : TextStyles.w700LightGreySize14,
+              textStyle: selectedIndex == index ? TextStyles.w700WhiteSize14 : TextStyles.lightGrey14,
               color: selectedIndex == index ? AppColors.blue : AppColors.white.withOpacity(0.05),
             ),
           ),

@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:slee_fi/common/routes/app_routes.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
 import 'package:slee_fi/common/widgets/background_widget.dart';
 import 'package:slee_fi/common/widgets/sf_app_bar.dart';
+import 'package:slee_fi/common/widgets/sf_buttons.dart';
 import 'package:slee_fi/common/widgets/sf_icon.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
 import 'package:slee_fi/l10n/locale_keys.g.dart';
@@ -58,7 +60,7 @@ class _ShareScreenState extends State<ShareScreen> {
                                   padding: const EdgeInsets.only(bottom: 26),
                                   alignment: Alignment.center,
                                   decoration: BoxDecoration(
-                                    color: AppColors.purple.withOpacity(0.05),
+                                    color: AppColors.blue.withOpacity(0.05),
                                     borderRadius: BorderRadius.circular(16),
                                   ),
                                   child: Column(
@@ -114,6 +116,15 @@ class _ShareScreenState extends State<ShareScreen> {
                       ],
                     ),
                     const SleepFiQrCode(value: 'SLeepFi'),
+                    const SizedBox(height: 20,),
+                    SFButton(
+                      text: LocaleKeys.return_to_home,
+                      textStyle: TextStyles.w600WhiteSize16,
+                      gradient: AppColors.gradientBlueButton,
+                      width: double.infinity,
+                      onPressed: () {
+                        Navigator.popUntil(context, (r) => r.settings.name == R.bottomNavigation);
+                      },),
                     const SizedBox(height: 100,),
                   ],
                 ),

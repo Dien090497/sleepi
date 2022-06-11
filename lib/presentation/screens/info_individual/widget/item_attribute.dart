@@ -10,11 +10,13 @@ class ItemAttribute extends StatelessWidget {
     required this.title,
     required this.valueActive,
     required this.linkImage,
+    this.colorIcon,
   }) : super(key: key);
 
   final String title;
   final double valueActive;
   final String linkImage;
+  final Color? colorIcon;
 
   Color checkColor(int i) {
     if (valueActive > 0 && i == 0) {
@@ -69,6 +71,7 @@ class ItemAttribute extends StatelessWidget {
             linkImage,
             width: 12,
             height: 12,
+            color: colorIcon,
           ),
           const SizedBox(
             width: 8,

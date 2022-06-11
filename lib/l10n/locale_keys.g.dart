@@ -105,11 +105,11 @@ abstract class  LocaleKeys {
   static const setup_microphone_access = 'setup_microphone_access';
   static const would_like_to_send_you_notifications = 'would_like_to_send_you_notifications';
   static const attributes = 'attributes';
-  static const effciency = 'effciency';
+  static const efficiency = 'efficiency';
   static const luck = 'luck';
   static const bonus = 'bonus';
   static const special = 'special';
-  static const resillience = 'resillience';
+  static const resilience = 'resilience';
   static const minted_from = 'minted_from';
   static const mints = 'mints';
   static const insurance = 'insurance';
@@ -239,12 +239,12 @@ abstract class  LocaleKeys {
   static const displays_the_nft_discharged_from_the_gacha = 'displays_the_nft_discharged_from_the_gacha';
   static const spending = 'spending';
   static const spending_account = 'spending_account';
-  static const users_will_need_to_have = 'users_will_need_to_have';
+  static const you_need_to_have_token_in_spending = 'you_need_to_have_token_in_spending';
   static const you_can_send_receive_and_trade = 'you_can_send_receive_and_trade';
   static const receive = 'receive';
   static const to_spending = 'to_spending';
   static const to_external = 'to_external';
-  static const successfully = 'successfully';
+  static const success = 'success';
   static const durability = 'durability';
   static const wallet_account = 'wallet_account';
   static const your_in_spending = 'your_in_spending';
@@ -342,6 +342,9 @@ abstract class  LocaleKeys {
   static const your_slft_in_spending = 'your_slft_in_spending';
   static const this_bed_is_not_yours = 'this_bed_is_not_yours';
   static const staked = 'staked';
+  static const return_to_home = 'return_to_home';
+  static const point = 'point';
+  static const amount_earned = 'amount_earned';
   static const amet_minim_mollit_non = 'amet_minim_mollit_non';
 
 }

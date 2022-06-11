@@ -5,6 +5,7 @@ import 'package:slee_fi/common/routes/app_routes.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
 import 'package:slee_fi/common/widgets/sf_button_outlined.dart';
+import 'package:slee_fi/common/widgets/sf_percent_border.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
 import 'package:slee_fi/l10n/locale_keys.g.dart';
 import 'package:slee_fi/presentation/screens/home/widgets/button_start.dart';
@@ -63,19 +64,39 @@ class AlarmBell extends StatelessWidget {
           const SizedBox(height: 32),
           Row(
             children: [
-              Expanded(
-                child: Container(
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
-                  decoration: BoxDecoration(
-                      color: AppColors.darkColor,
-                      borderRadius: BorderRadius.circular(20)),
-                  child: SFText(
-                    keyText: '0.00/160 SLTF',
-                    style: TextStyles.lightGrey10,
+              Expanded(child: Stack(
+                alignment: Alignment.centerLeft,
+                children: [
+                  SFPercentBorderGradient(
+                    valueActive: 70,
+                    totalValue: 100,
+                    linearGradient: AppColors.gradientBluePurple,
+                    lineHeight: 18,
+                    barRadius: 20,
+                    backgroundColor: Colors.white.withOpacity(0.05),
                   ),
-                ),
-              ),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                    child: SFText(
+                      keyText: '100/150 SLFT',
+                      style: TextStyles.white10,
+                    ),
+                  )
+                ],
+              ),),
+              // Expanded(
+              //   child: Container(
+              //     padding:
+              //         const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
+              //     decoration: BoxDecoration(
+              //         color: AppColors.darkColor,
+              //         borderRadius: BorderRadius.circular(20)),
+              //     child: SFText(
+              //       keyText: '0.00/160 SLTF',
+              //       style: TextStyles.lightGrey10,
+              //     ),
+              //   ),
+              // ),
               const SizedBox(width: 12),
               GestureDetector(
                 onTap: () => Navigator.pushNamed(context, R.question),
@@ -109,6 +130,10 @@ class AlarmBell extends StatelessWidget {
               ViewGif(),
               SizedBox(height: 20),
               ViewGif(),
+              SizedBox(height: 20),
+              ViewGif(),
+              SizedBox(height: 20),
+              ViewGif(),
             ],
           ),
           const SizedBox(height: 20),
@@ -124,9 +149,9 @@ class ViewGif extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: 70,
-      height: 70,
-      padding: const EdgeInsets.symmetric(vertical: 19, horizontal: 19),
+      width: 48,
+      height: 48,
+      padding: const EdgeInsets.all(12),
       decoration: BoxDecoration(
         color: AppColors.darkColor,
         borderRadius: BorderRadius.circular(16),

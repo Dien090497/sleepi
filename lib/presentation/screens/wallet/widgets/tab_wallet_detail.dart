@@ -117,8 +117,6 @@ class TabWalletDetail extends StatelessWidget {
   }
 
 }
-
-final Uri _url = Uri.parse('https://www.binance.com/');
 void _launchUrl() async {
-  if (!await launchUrl(_url)) throw 'Could not launch $_url';
+  if (!await launchUrl(Uri.parse('https://www.binance.com/'))) throw 'Could not launch';
 }

@@ -56,19 +56,32 @@ class PopUpLevelUp extends StatelessWidget {
               child: SFText(keyText: 'Lv $level', style: TextStyles.blue14),
             ),
             const SizedBox(height: 32),
-            Align(
-              alignment: Alignment.centerLeft,
-              child: RichText(
-                text: TextSpan(
-                    text: 'Level up to ',
-                    style: TextStyles.lightGrey14,
-                    children: [
-                      TextSpan(
-                          text: 'Lv ${level + 1}',
-                          style: TextStyles.bold14Blue),
-                    ]),
-              ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Expanded(
+                    child: SFText(
+                      keyText: "Level up to ",
+                       style: TextStyles.lightGrey14,)
+                ),
+                SFText(
+                  keyText: 'Lv ${level + 1}',
+                  style: TextStyles.bold14Blue)
+              ],
             ),
+            // Align(
+            //   alignment: Alignment.centerLeft,
+            //   child: RichText(
+            //     text: TextSpan(
+            //         text: 'Level up to ',
+            //         style: TextStyles.lightGrey14,
+            //         children: [
+            //           TextSpan(
+            //               text: 'Lv ${level + 1}',
+            //               style: TextStyles.bold14Blue),
+            //         ]),
+            //   ),
+            // ),
             const SizedBox(height: 8),
             SFLabelValue(
               label: LocaleKeys.cost,

@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:slee_fi/common/enum/enum.dart';
-import 'package:slee_fi/common/extensions/enum_x.dart';
 import 'package:slee_fi/common/extensions/string_x.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
@@ -12,11 +10,11 @@ import 'package:slee_fi/l10n/locale_keys.g.dart';
 import 'package:slee_fi/presentation/screens/product_detail/widgets/top_left_banner.dart';
 import 'package:slee_fi/resources/resources.dart';
 
-class ItemBedBuyWidget extends StatelessWidget {
-  const ItemBedBuyWidget({required this.id, required this.item, this.color, this.onPressedButton, Key? key})
+class JewelsBuyWidget extends StatelessWidget {
+  const JewelsBuyWidget({required this.id, required this.icon, this.color, this.onPressedButton, Key? key})
       : super(key: key);
 
-  final ItemType item;
+  final String icon;
   final Color? color;
   final String id;
   final VoidCallback? onPressedButton;
@@ -35,15 +33,16 @@ class ItemBedBuyWidget extends StatelessWidget {
             top: 14,
             left: -30,
             child: TopLeftBanner(
-              text: item.name,
-              textColor: item.color,
+              text: 'Level 3',
+              textColor: AppColors.lightGrey,
+              backgroundColor: AppColors.lightGrey.withOpacity(0.1),
             ),
           ),
           Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               SizedBox(height: 20.h),
-              SFIcon(item.image, width: 80,),
+              SFIcon(icon, width: 80,),
               SizedBox(height: 22.h),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -81,21 +80,21 @@ class ItemBedBuyWidget extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 16.0),
                 child: Row(
-                    children: [
-                      Expanded(
-                          child: SFText(
-                            keyText: '10 AVAX',
-                            style: TextStyles.white14W700,
-                          )),
-                      SFIconButton(
-                          text: LocaleKeys.buy,
-                         textStyle: TextStyles.white12,
-                        stringCase: StringCase.upperCase,
-                        icon: Ics.icCart,
-                        onPressed: onPressedButton,
-                      ),
-                    ],
-                  ),
+                  children: [
+                    Expanded(
+                        child: SFText(
+                          keyText: '10 AVAX',
+                          style: TextStyles.white14W700,
+                        )),
+                    SFIconButton(
+                      text: LocaleKeys.buy,
+                      textStyle: TextStyles.white12,
+                      stringCase: StringCase.upperCase,
+                      icon: Ics.icCart,
+                      onPressed: onPressedButton,
+                    ),
+                  ],
+                ),
               ),
               const SizedBox(height: 18),
             ],

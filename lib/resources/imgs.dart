@@ -11,6 +11,10 @@ class Imgs {
   static const String bonus = 'assets/images/bonus.png';
   static const String borderBed = 'assets/images/borderBed.png';
   static const String borderClock = 'assets/images/border_clock.png';
+  static const String candyBlue = 'assets/images/candy_blue.png';
+  static const String candyGreen = 'assets/images/candy_green.png';
+  static const String candyPink = 'assets/images/candy_pink.png';
+  static const String candyPurple = 'assets/images/candy_purple.png';
   static const String connectBorder = 'assets/images/connect_border.png';
   static const String efficiency = 'assets/images/efficiency.png';
   static const String emptyBedBox = 'assets/images/empty_bed_box.png';
@@ -68,6 +72,10 @@ class Imgs {
     bonus,
     borderBed,
     borderClock,
+    candyBlue,
+    candyGreen,
+    candyPink,
+    candyPurple,
     connectBorder,
     efficiency,
     emptyBedBox,

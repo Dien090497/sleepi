@@ -23,16 +23,16 @@ class _FilterSheetState extends State<FilterSheet> {
   double level = 5;
   double mint = 5;
   final List<String> filterJewels = [
-    LocaleKeys.effciency,
+    LocaleKeys.efficiency,
     LocaleKeys.luck,
-    LocaleKeys.resillience,
+    LocaleKeys.resilience,
     LocaleKeys.special,
     LocaleKeys.bonus,
   ];
   final List<String> filterItems = [
-    LocaleKeys.effciency,
+    LocaleKeys.efficiency,
     LocaleKeys.luck,
-    LocaleKeys.resillience,
+    LocaleKeys.resilience,
     LocaleKeys.special,
   ];
   final List<String> filterBedType = [
