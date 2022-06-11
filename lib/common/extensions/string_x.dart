@@ -46,8 +46,6 @@ extension StringX on String {
         return toUpperCase();
       case StringCase.lowerCaseCase:
         return toLowerCase();
-      case StringCase.titleCase:
-        return rc.titleCase;
       case null:
         return this;
     }
