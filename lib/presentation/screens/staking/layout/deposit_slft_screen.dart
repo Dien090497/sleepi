@@ -48,7 +48,8 @@ class DepositSlftScreen extends StatelessWidget {
                             children: [
                               Expanded(
                                   child: SFText(
-                                keyText: LocaleKeys.your_slft_in_spending,
+                                keyText: LocaleKeys.your_token_in_spending
+                                    .tr(namedArgs: {"token": "SLFT"}),
                                 style: TextStyles.lightGrey12,
                               )),
                               SFText(

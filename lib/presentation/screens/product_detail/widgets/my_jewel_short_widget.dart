@@ -1,8 +1,10 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
+import 'package:slee_fi/l10n/locale_keys.g.dart';
 import 'package:slee_fi/presentation/screens/product_detail/widgets/top_left_banner.dart';
 
 class MyJewelsShortWidget extends StatelessWidget {
@@ -28,7 +30,7 @@ class MyJewelsShortWidget extends StatelessWidget {
             top: 14,
             left: -30,
             child: TopLeftBanner(
-              text: 'Level 3',
+              text: '${LocaleKeys.level.tr()} 3',
               textColor: AppColors.lightGrey,
               backgroundColor: AppColors.lightGrey.withOpacity(0.1),
             ),

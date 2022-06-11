@@ -108,7 +108,7 @@ class JewelDialogBody extends StatelessWidget {
                   const SizedBox(width: 4),
                   Expanded(
                     child: SFText(
-                      keyText: '+5% ${LocaleKeys.base_luck}',
+                      keyText: '+5% ${LocaleKeys.base} Res.',
                       style: TextStyles.blue16,
                       textAlign: TextAlign.right,
                     ),

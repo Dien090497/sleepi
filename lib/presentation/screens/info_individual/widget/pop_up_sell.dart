@@ -14,6 +14,7 @@ class PopUpSell extends StatefulWidget {
   const PopUpSell({
     Key? key,
     required this.icon,
+    required this.className,
     required this.cost,
     required this.level,
     required this.time,
@@ -22,6 +23,7 @@ class PopUpSell extends StatefulWidget {
   }) : super(key: key);
 
   final String icon;
+  final String className;
   final int cost;
   final int level;
   final int time;
@@ -43,7 +45,7 @@ class _PopUpSellState extends State<PopUpSell> {
           Positioned(
             right: 0,
             child: GestureDetector(
-              onTap: (){
+              onTap: () {
                 widget.onCancel!();
                 Navigator.pop(context);
               },
@@ -53,11 +55,15 @@ class _PopUpSellState extends State<PopUpSell> {
           Column(
             children: [
               SFText(
-                  keyText: step == 2 ? LocaleKeys.confirm_to_sell : LocaleKeys.sell,
+                  keyText:
+                      step == 2 ? LocaleKeys.confirm_to_sell : LocaleKeys.sell,
                   style: TextStyles.white1w700size18),
-              if (step >= 2)
-              const SizedBox(height: 20),
-              if (step < 2) SFIcon(widget.icon, height: 160,),
+              if (step >= 2) const SizedBox(height: 20),
+              if (step < 2)
+                SFIcon(
+                  widget.icon,
+                  height: 160,
+                ),
               if (step < 2)
                 Container(
                   decoration: BoxDecoration(
@@ -70,7 +76,7 @@ class _PopUpSellState extends State<PopUpSell> {
                 ),
               if (step < 2) const SizedBox(height: 32),
               if (step == 0)
-                const _Detail()
+                _Detail(className: widget.className)
               else if (step == 1) ...[
                 Align(
                   alignment: Alignment.centerLeft,
@@ -198,7 +204,8 @@ class _Confirm extends StatelessWidget {
             Expanded(
               flex: 3,
               child: SFText(
-                  keyText: "${LocaleKeys.listing.tr()}/${LocaleKeys.cancel.tr()}",
+                  keyText:
+                      "${LocaleKeys.listing.tr()}/${LocaleKeys.cancel.tr()}",
                   style: TextStyles.lightGrey14),
             ),
             Expanded(
@@ -250,7 +257,9 @@ class _InputPrice extends StatelessWidget {
 }
 
 class _Detail extends StatelessWidget {
-  const _Detail({Key? key}) : super(key: key);
+  const _Detail({Key? key, required this.className}) : super(key: key);
+
+  final String className;
 
   @override
   Widget build(BuildContext context) {
@@ -279,9 +288,8 @@ class _Detail extends StatelessWidget {
             children: [
               Expanded(
                 flex: 3,
-                child:   SFText(
-                    keyText: 'Middle',
-                    style: TextStyles.lightWhite16W700),
+                child: SFText(
+                    keyText: className, style: TextStyles.lightWhite16W700),
               ),
               Expanded(
                 child: SFText(
@@ -302,7 +310,8 @@ class _Detail extends StatelessWidget {
               ),
               Expanded(
                 child: SFText(
-                    keyText: LocaleKeys.bed_mint, style: TextStyles.lightGrey14),
+                    keyText: LocaleKeys.bed_mint,
+                    style: TextStyles.lightGrey14),
               ),
             ],
           ),

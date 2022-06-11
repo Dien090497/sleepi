@@ -22,7 +22,7 @@ class AttributesWidget extends StatelessWidget {
         children: [
           ItemAttribute(
               linkImage: Imgs.efficiency,
-              title: LocaleKeys.effciency.tr(),
+              title: LocaleKeys.efficiency.tr(),
               valueActive: 10),
           ItemAttribute(
               linkImage: Imgs.luck,
@@ -38,7 +38,7 @@ class AttributesWidget extends StatelessWidget {
               valueActive: 5.3),
           ItemAttribute(
               linkImage: Imgs.resilience,
-              title: LocaleKeys.resillience.tr(),
+              title: LocaleKeys.resilience.tr(),
               valueActive: 6.2),
         ],
       ),

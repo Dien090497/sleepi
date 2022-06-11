@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
@@ -40,7 +41,8 @@ class TakingScreen extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         SFText(
-                            keyText: LocaleKeys.your_slft_in_spending,
+                            keyText: LocaleKeys.your_token_in_spending
+                                .tr(namedArgs: {"token": "SLFT"}),
                             style: TextStyles.bold20black),
                         SFText(
                             keyText: "XXXXXXX  SLFT",

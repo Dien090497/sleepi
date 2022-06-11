@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
+import 'package:slee_fi/l10n/locale_keys.g.dart';
 import 'package:slee_fi/resources/resources.dart';
 
 import 'item_attribute.dart';
@@ -21,15 +22,20 @@ class AttributesWidget extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: const [
           ItemAttribute(
-              linkImage: Imgs.efficiency, title: 'Efficiency', valueActive: 10),
-          ItemAttribute(linkImage: Imgs.luck, title: 'Luck', valueActive: 2.5),
+              linkImage: Imgs.efficiency,
+              title: LocaleKeys.efficiency,
+              valueActive: 10),
           ItemAttribute(
-              linkImage: Imgs.bonus, title: 'Bonus', valueActive: 8.2),
+              linkImage: Imgs.luck, title: LocaleKeys.luck, valueActive: 2.5),
           ItemAttribute(
-              linkImage: Imgs.special, title: 'Special', valueActive: 5.3),
+              linkImage: Imgs.bonus, title: LocaleKeys.bonus, valueActive: 8.2),
+          ItemAttribute(
+              linkImage: Imgs.special,
+              title: LocaleKeys.special,
+              valueActive: 5.3),
           ItemAttribute(
               linkImage: Imgs.resilience,
-              title: 'Resilience',
+              title: LocaleKeys.resilience,
               valueActive: 6.2),
         ],
       ),

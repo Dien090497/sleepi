@@ -134,7 +134,7 @@ class _BottomBarWidgetState extends State<BottomBarWidget> {
                     icon: Imgs.shortBed,
                     level: 2,
                     onCancel: () {},
-                    onConfirm: () {},
+                    onConfirm: () {}, className: LocaleKeys.middle,
                   ),
                 ]).then((value) => setState(() {
                       setState(() {
