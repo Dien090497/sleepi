@@ -44,7 +44,8 @@ class GeneralWidget extends StatelessWidget {
               ),
               divider,
               SFListTile(
-                text: LocaleKeys.activation_code.reCase(StringCase.titleCase),
+                text: LocaleKeys.activation_code
+                    .reCase(StringCase.titleCase),
                 trailing: icon,
                 onPressed: () => Navigator.pushNamed(context, R.activationCode),
               ),

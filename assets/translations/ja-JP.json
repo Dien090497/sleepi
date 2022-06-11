@@ -60,7 +60,7 @@
  "restore_wallet": "ウォレットの復元",
  "your_12_word_seed_phrase": "ウォレットにアクセスできなくなった場合、シードフレーズの入力が唯一の復元方法です。",
  "keep_your_assets_safe": "パスコード入力を有効にして資産を守る",
- "overwite_your_current_mobile_wallet": "ウォレットをシードフレーズを使って上書きする",
+ "overwrite_your_current_mobile_wallet": "ウォレットをシードフレーズを使って上書きする",
  "new_email": "新しいメールアドレス",
  "please_set_password_first": "まずはパスワードを設定してください",
  "average_bed_time": "平均就床時刻",

@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:slee_fi/common/routes/app_routes.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
@@ -44,7 +45,7 @@ class SettingWalletScreen extends StatelessWidget {
             BoxInfoWidget(
               urlIcon: Ics.icRefresh,
               title: LocaleKeys.restore_wallet,
-              info: LocaleKeys.overwrite_your_current_mobile_wallet,
+              info: LocaleKeys.overwrite_your_current_mobile_wallet.tr(),
               onTap: () => Navigator.pushNamed(context, R.restoreWallet),
             ),
           ],

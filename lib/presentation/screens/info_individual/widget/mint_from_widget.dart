@@ -13,11 +13,11 @@ import '../../../../common/utils/random_utils.dart';
 import '../../../../di/injector.dart';
 
 class MintFromWidget extends StatelessWidget {
-   const MintFromWidget({Key? key, required this.title, required this.numbers})
+  const MintFromWidget({Key? key, required this.title, required this.numbers})
       : super(key: key);
+
   final String title;
   final int numbers;
-
 
   @override
   Widget build(BuildContext context) {
@@ -45,14 +45,17 @@ class MintFromWidget extends StatelessWidget {
           child: SFGridView(
             count: numbers,
             isScroll: false,
-            childAspectRatio: 9/10,
+            childAspectRatio: 9 / 10,
             itemBuilder: (context, i) {
               return ItemBed(
                   id: randomUtils.randomId(),
                   bed: beds[i],
                   selected: false,
                   onTap: () {
-                      ToastUtils.showToast(fToast, AppColors.white.withOpacity(0.55), LocaleKeys.this_bed_is_not_yours);
+                    ToastUtils.showToast(
+                        fToast,
+                        AppColors.white.withOpacity(0.55),
+                        LocaleKeys.this_bed_is_not_yours);
                   });
             },
           ),

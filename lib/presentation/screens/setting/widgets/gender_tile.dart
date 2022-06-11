@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
@@ -22,7 +23,7 @@ class _GenderTileState extends State<GenderTile> {
     const icon = Icon(Icons.chevron_right, color: AppColors.lightGrey);
 
     return SFListTile(
-      text: LocaleKeys.sex,
+      text: LocaleKeys.sex.tr(),
       trailing: Row(
         mainAxisSize: MainAxisSize.min,
         children: [

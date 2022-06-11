@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:eip55/eip55.dart';
 import 'package:path/path.dart';
 import 'package:recase/recase.dart';
@@ -32,7 +33,7 @@ extension StringX on String {
   }
 
   String reCase(StringCase? stringCase) {
-    final ReCase rc = ReCase(this);
+    final ReCase rc = ReCase(this.tr());
     switch (stringCase) {
       case StringCase.camelCase:
         return rc.camelCase;
@@ -47,7 +48,7 @@ extension StringX on String {
       case StringCase.titleCase:
         return rc.titleCase;
       case null:
-        return this;
+        return this.tr();
     }
   }
 }
