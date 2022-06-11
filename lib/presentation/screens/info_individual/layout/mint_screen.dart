@@ -2,6 +2,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:slee_fi/common/const/const.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
 import 'package:slee_fi/common/widgets/background_widget.dart';
@@ -102,8 +103,11 @@ class _MintScreenState extends State<MintScreen> {
                                         height: 2,
                                       ),
                                       GestureDetector(
-                                        onTap: () {
-                                          _launchUrl();
+                                        onTap: () async{
+                                          final url = Uri.parse(Const.whitePaperUrl);
+                                          if (await canLaunchUrl(url)) {
+                                          launchUrl(url);
+                                          }
                                         },
                                         child: Row(
                                           crossAxisAlignment:
@@ -244,10 +248,4 @@ class _MintScreenState extends State<MintScreen> {
     );
   }
 
-  void _launchUrl() async {
-    if (!await launchUrl(
-        Uri.parse('https://sleefi.gitbook.io/en/v/whitepaper/'))) {
-      throw 'Could not launch';
-    }
-  }
 }

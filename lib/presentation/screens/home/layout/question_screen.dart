@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:slee_fi/common/const/const.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
 import 'package:slee_fi/common/widgets/background_widget.dart';
@@ -27,7 +28,7 @@ class QuestionScreen extends StatelessWidget {
                   text: LocaleKeys.how_to_play,
                   textStyle: TextStyles.w600WhiteSize16,
                   gradient: AppColors.gradientBlueButton,
-                  onPressed: () => _launchUrl('https://sleefi.com/how-to-play'),
+                  onPressed: () => _launchUrl(Const.howToPlayUrl),
                   width: size.width * 0.45,
                   height: 48,
                 ),
@@ -36,7 +37,7 @@ class QuestionScreen extends StatelessWidget {
                   text: LocaleKeys.whitepaper,
                   textStyle: TextStyles.bold16LightWhite,
                   color: AppColors.white.withOpacity(0.07),
-                  onPressed: () => _launchUrl('https://sleefi.gitbook.io/en/v/whitepaper'),
+                  onPressed: () => _launchUrl(Const.whitePaperUrl),
                   width: size.width * 0.45,
                   height: 48,
                 ),
@@ -46,7 +47,7 @@ class QuestionScreen extends StatelessWidget {
                   textStyle: TextStyles.bold16LightWhite,
                   color: AppColors.white.withOpacity(0.07),
                   width: size.width * 0.45,
-                  onPressed: () => _launchUrl('https://sleefi.com/litepaper'),
+                  onPressed: () => _launchUrl(Const.litePaperUrl),
                   height: 48,
                 ),
                 const SizedBox(height: 24),
@@ -54,7 +55,7 @@ class QuestionScreen extends StatelessWidget {
                   text: LocaleKeys.linktree,
                   textStyle: TextStyles.bold16LightWhite,
                   color: AppColors.white.withOpacity(0.07),
-                  onPressed: () => _launchUrl('https://linktr.ee/sleefi'),
+                  onPressed: () => _launchUrl(Const.linkTreeUrl),
                   width: size.width * 0.45,
                   height: 48,
                 ),

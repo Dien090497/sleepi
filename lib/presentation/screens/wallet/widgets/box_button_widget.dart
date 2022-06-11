@@ -21,6 +21,7 @@ class BoxButtonWidget extends StatelessWidget {
       onTap: onTap,
       child: Container(
         width: 76,
+        height: 94,
         padding: const EdgeInsets.all(8),
         decoration: BoxDecoration(
           color: AppColors.white.withOpacity(0.05),

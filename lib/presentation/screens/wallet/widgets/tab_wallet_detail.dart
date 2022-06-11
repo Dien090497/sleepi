@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:slee_fi/common/const/const.dart';
 import 'package:slee_fi/common/extensions/string_x.dart';
 import 'package:slee_fi/common/routes/app_routes.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
@@ -84,7 +85,12 @@ class TabWalletDetail extends StatelessWidget {
                 children: [
                   const PopupInfoWallet(),
                   ElevatedButton(
-                      onPressed: _launchUrl,
+                      onPressed: () async {
+                        final url = Uri.parse(Const.binanceUrl);
+                        if (await canLaunchUrl(url)) {
+                        launchUrl(url);
+                        }
+                      },
                       style: ElevatedButton.styleFrom(
                         padding: const EdgeInsets.fromLTRB(12, 8, 16,8),
                         primary: AppColors.yellow.withOpacity(0.1),
@@ -117,7 +123,4 @@ class TabWalletDetail extends StatelessWidget {
     );
   }
 
-}
-void _launchUrl() async {
-  if (!await launchUrl(Uri.parse('https://www.binance.com/'))) throw 'Could not launch';
 }

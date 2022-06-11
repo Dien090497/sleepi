@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:slee_fi/common/const/const.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
 import 'package:slee_fi/common/widgets/sf_card.dart';
@@ -21,7 +22,7 @@ class TabHistoryDetail extends StatelessWidget {
               itemBuilder: (BuildContext context, int index) {
                 return  GestureDetector(
                   onTap: () async {
-                    final url = Uri.parse('https://avascan.info/');
+                    final url = Uri.parse(Const.avascanUrl);
                     if (await canLaunchUrl(url)) {
                       launchUrl(url);
                     }

@@ -36,9 +36,8 @@ class ItemBedBuyWidget extends StatelessWidget {
             top: 14,
             left: -30,
             child: TopLeftBanner(
-              text: '${LocaleKeys.level.tr()} 3',
-              textColor: AppColors.lightGrey,
-              backgroundColor: AppColors.lightGrey.withOpacity(0.1),
+              text: item.name,
+              textColor: item.color,
             ),
           ),
           Column(

@@ -2,6 +2,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
+import 'package:slee_fi/common/const/const.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
 import 'package:slee_fi/common/widgets/loading_screen.dart';
 import 'package:slee_fi/common/widgets/sf_bottom_sheet.dart';
@@ -98,8 +99,11 @@ class HomeScreen extends StatelessWidget {
                                   ),
                                   const SizedBox(height: 2),
                                   GestureDetector(
-                                    onTap: (){
-                                      _launchUrl();
+                                    onTap: () async{
+                                      final url = Uri.parse(Const.whitePaperUrl);
+                                      if (await canLaunchUrl(url)) {
+                                      launchUrl(url);
+                                      }
                                     },
                                     child: Row(
                                       crossAxisAlignment:
@@ -134,8 +138,5 @@ class HomeScreen extends StatelessWidget {
         },
       ),
     );
-  }
-  void _launchUrl() async {
-    if (!await launchUrl(Uri.parse('https://sleefi.gitbook.io/en/v/whitepaper/'))) throw 'Could not launch';
   }
 }
