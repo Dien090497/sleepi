@@ -43,7 +43,7 @@ class TabWalletDetail extends StatelessWidget {
                 color: AppColors.lightWhite.withOpacity(0.05),
               ),
               child: SFText(
-                  keyText: "Eq7fbho...asdasd.9aj92as",
+                  keyText: "0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2",
                   style: TextStyles.lightWhite14),
             ),
             const SizedBox(
