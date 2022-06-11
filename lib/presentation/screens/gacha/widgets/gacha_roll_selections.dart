@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:slee_fi/common/routes/app_routes.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
@@ -21,7 +22,7 @@ class GachaRollSelections extends StatelessWidget {
       children: [
         Expanded(
           child: GestureDetector(
-            onTap: (){
+            onTap: () {
               Navigator.pushNamed(context, R.gachaResultBed);
             },
             child: Container(
@@ -53,7 +54,7 @@ class GachaRollSelections extends StatelessWidget {
         const SizedBox(width: 35),
         Expanded(
           child: GestureDetector(
-            onTap: (){
+            onTap: () {
               Navigator.pushNamed(context, R.allResult);
             },
             child: Container(
@@ -66,13 +67,15 @@ class GachaRollSelections extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  SFText(keyText: '$timesGacha SLFT', style: TextStyles.boldWhite18),
+                  SFText(
+                      keyText: '$timesGacha SLFT',
+                      style: TextStyles.boldWhite18),
                   const SizedBox(
                     height: 5,
                   ),
                   SFText(
-                    keyText: LocaleKeys.times_gacha,
-                    args: const {'num': '10'},
+                    keyText:
+                        LocaleKeys.ten_times_gacha.tr(namedArgs: {'num': '10'}),
                     style: TextStyles.white14WithOpacity,
                   ),
                 ],

@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
@@ -60,11 +61,11 @@ class PopUpLevelUp extends StatelessWidget {
               alignment: Alignment.centerLeft,
               child: RichText(
                 text: TextSpan(
-                    text: 'Level up to ',
+                    text: LocaleKeys.level_up_to.tr(),
                     style: TextStyles.lightGrey14,
                     children: [
                       TextSpan(
-                          text: 'Lv ${level + 1}',
+                          text: '${LocaleKeys.level.tr()} ${level + 1}',
                           style: TextStyles.bold14Blue),
                     ]),
               ),

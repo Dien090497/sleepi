@@ -6,13 +6,13 @@ import 'package:slee_fi/presentation/screens/market_place/widget/filter_sheet.da
 Future<T?> showFilterModalBottomSheet<T>(
     BuildContext context, FilterType filterType) {
   return showModalBottomSheet(
-      context: context,
-      backgroundColor: AppColors.lightDark,
-      constraints: BoxConstraints(minHeight: 640.h, maxHeight: 640.h),
-      isScrollControlled: true,
-      shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.vertical(top: Radius.circular(40)),
-      ),
-      builder: (_) => FilterSheet(filterType: filterType),
-      barrierColor: AppColors.dark.withOpacity(0.8));
+    context: context,
+    backgroundColor: AppColors.lightDark,
+    constraints: BoxConstraints(minHeight: 640.h, maxHeight: 640.h),
+    isScrollControlled: true,
+    shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(40))),
+    builder: (_) => FilterSheet(filterType: filterType),
+    barrierColor: AppColors.dark.withOpacity(0.8),
+  );
 }

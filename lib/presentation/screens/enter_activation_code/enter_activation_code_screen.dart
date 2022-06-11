@@ -1,5 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_phoenix/flutter_phoenix.dart';
 import 'package:slee_fi/common/const/const.dart';
 import 'package:slee_fi/common/routes/app_routes.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
@@ -20,7 +21,8 @@ class EnterActivationCodeScreen extends StatefulWidget {
   const EnterActivationCodeScreen({Key? key}) : super(key: key);
 
   @override
-  State<EnterActivationCodeScreen> createState() => _EnterActivationCodeScreenState();
+  State<EnterActivationCodeScreen> createState() =>
+      _EnterActivationCodeScreenState();
 }
 
 class _EnterActivationCodeScreenState extends State<EnterActivationCodeScreen> {
@@ -30,7 +32,8 @@ class _EnterActivationCodeScreenState extends State<EnterActivationCodeScreen> {
       child: BackgroundWidget(
         appBar: SFAppBar(
             context: context,
-            title: LocaleKeys.activation_code_language,
+            title:
+                "${LocaleKeys.activation_code.tr()}/${LocaleKeys.language.tr()}",
             textStyle: TextStyles.bold18LightWhite),
         child: SafeArea(
           child: ListView(
@@ -45,9 +48,10 @@ class _EnterActivationCodeScreenState extends State<EnterActivationCodeScreen> {
                   children: [
                     const SFLogo(),
                     const SizedBox(height: 40),
-                     const SFTextField(
-                        labelText: LocaleKeys.please_enter,
-                        textInputType: TextInputType.number,),
+                    const SFTextField(
+                      labelText: LocaleKeys.please_enter_your_activation_code,
+                      textInputType: TextInputType.number,
+                    ),
                     const SizedBox(height: 20),
                     SFText(
                         keyText: LocaleKeys.please_select_your_language,
@@ -57,23 +61,20 @@ class _EnterActivationCodeScreenState extends State<EnterActivationCodeScreen> {
                         width: double.infinity,
                         height: 48,
                         child: SFDropDownRotation<String>(
-                            value: context.locale.displayName,
-                            dropdownWidth:
-                                MediaQuery.of(context).size.width * 0.8,
-                            dropdownHeight: 48,
-                            selectedItemHighlightColor: AppColors.lightDark,
-
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            spinnerItems: List.generate(
-                              Const.locales.length,
-                              (i) => Const.locales[i].displayName,
-                            ),
-                            onChange: (int value, int index) {
-                              context.setLocale(Const.locales[index]);
-                              setState(() {
-
-                              });
-                            },
+                          value: context.locale.displayName,
+                          dropdownWidth:
+                              MediaQuery.of(context).size.width * 0.8,
+                          dropdownHeight: 48,
+                          selectedItemHighlightColor: AppColors.lightDark,
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          spinnerItems: List.generate(
+                            Const.locales.length,
+                            (i) => Const.locales[i].displayName,
+                          ),
+                          onChange: (int value, int index) {
+                            context.setLocale(Const.locales[index]);
+                            Phoenix.rebirth(context);
+                          },
                         )),
                     const SizedBox(height: 20),
                     SFButton(

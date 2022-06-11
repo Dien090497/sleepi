@@ -13,34 +13,30 @@ import 'package:slee_fi/presentation/screens/market_place/widget/tab_bar_filter.
 import 'package:slee_fi/resources/resources.dart';
 
 class TabJewelsBuy extends StatelessWidget {
-  const TabJewelsBuy({
-    Key? key,
-    required this.onPress,
-  }) : super(key: key);
+  const TabJewelsBuy({Key? key}) : super(key: key);
 
   void _showJewelDialog(BuildContext context, String img, String id) {
     showCustomAlertDialog(
       context,
       padding: const EdgeInsets.all(24),
-      children:   PopUpJewelMarketPlace(
+      children: PopUpJewelMarketPlace(
         icon: img,
         name: 'name',
         level: 'Lv.1',
         id: id,
         attribute: 'attribute',
         effect: 'effect',
-        onConfirmTap: () {  },
+        onConfirmTap: () {},
       ),
     );
   }
 
-  final Function() onPress;
   @override
   Widget build(BuildContext context) {
     final jewels = [
-      Imgs.jewelGreen,
+      Imgs.jewelSliver,
       Imgs.jewelPurple,
-      Imgs.jewelBlue,
+      Imgs.jewelGreen,
       Imgs.jewelRed
     ];
     final randomUtils = getIt<RandomUtils>();
@@ -48,7 +44,7 @@ class TabJewelsBuy extends StatelessWidget {
     return DefaultTabController(
       length: 2,
       child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 6.0),
+        padding: const EdgeInsets.symmetric(horizontal: 12.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -64,6 +60,7 @@ class TabJewelsBuy extends StatelessWidget {
                 children: [
                   SFGridView(
                     count: 20,
+                    childAspectRatio: 8 / 10,
                     itemBuilder: (context, i) {
                       String id = randomUtils.randomId();
                       return GestureDetector(
@@ -78,8 +75,11 @@ class TabJewelsBuy extends StatelessWidget {
                     },
                   ),
                   Padding(
-                    padding:  EdgeInsets.only(bottom: MediaQuery.of(context).size.height * 0.3),
-                    child: const Center(child: SFIcon(Ics.commingSoon),),
+                    padding: EdgeInsets.only(
+                        bottom: MediaQuery.of(context).size.height * 0.3),
+                    child: const Center(
+                      child: SFIcon(Ics.commingSoon),
+                    ),
                   )
                   // SFGridView(
                   //   count: 20,

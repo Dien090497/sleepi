@@ -3,7 +3,7 @@ import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
 
-class SFDropDownRotation<T> extends StatefulWidget {
+class SFDropDownRotation<T> extends StatelessWidget {
   const SFDropDownRotation(
       {Key? key,
       required this.value,
@@ -28,15 +28,10 @@ class SFDropDownRotation<T> extends StatefulWidget {
   final Color? selectedItemHighlightColor;
 
   @override
-  State<SFDropDownRotation> createState() => _SFDropDownRotationState();
-}
-
-class _SFDropDownRotationState extends State<SFDropDownRotation> {
-  @override
   Widget build(BuildContext context) {
     return Container(
-      height: widget.dropdownHeight ?? 40,
-      width: widget.dropdownWidth ?? 140,
+      height: dropdownHeight ?? 40,
+      width: dropdownWidth,
       decoration: BoxDecoration(
         border: Border.all(width: 1, color: AppColors.darkColor1),
         borderRadius: BorderRadius.circular(8),
@@ -46,33 +41,33 @@ class _SFDropDownRotationState extends State<SFDropDownRotation> {
           Icons.keyboard_arrow_down_outlined,
           color: AppColors.lightGrey,
         ),
-        onChange: widget.onChange,
+        onChange: onChange,
         dropdownButtonStyle: DropdownButtonStyle(
           elevation: 4,
           backgroundColor: Colors.white,
           primaryColor: AppColors.dark,
-          mainAxisAlignment: widget.mainAxisAlignment,
+          mainAxisAlignment: mainAxisAlignment,
         ),
         dropdownStyle: DropdownStyle(
-          // constraints: widget.constraints,
+          // constraints: constraints,
           borderRadius: BorderRadius.circular(8),
           elevation: 5,
           color: AppColors.dark,
         ),
-        items: widget.spinnerItems
+        items: spinnerItems
             .asMap()
             .entries
             .map(
               (item) => DropdownItem<int>(
                 value: item.key + 1,
                 child: Container(
-                  color: item.value == widget.value
-                      ? widget.selectedItemHighlightColor
+                  color: item.value == value
+                      ? selectedItemHighlightColor
                       : Colors.transparent,
                   padding:
                       const EdgeInsets.symmetric(vertical: 8, horizontal: 12),
                   child: SFText(
-                    keyText: item.value ?? '',
+                    keyText: '${item.value ?? ''}',
                     maxLines: 1,
                     style: TextStyles.lightWhite16,
                   ),
@@ -80,7 +75,7 @@ class _SFDropDownRotationState extends State<SFDropDownRotation> {
               ),
             )
             .toList(),
-        itemValues: widget.spinnerItems
+        itemValues: spinnerItems
             .asMap()
             .entries
             .map(
@@ -89,7 +84,7 @@ class _SFDropDownRotationState extends State<SFDropDownRotation> {
                 child: Padding(
                   padding: const EdgeInsets.symmetric(vertical: 8.0),
                   child: SFText(
-                    keyText: item.value ?? '',
+                    keyText: '${item.value ?? ' '}',
                     maxLines: 1,
                     style: TextStyles.lightWhite16,
                   ),
@@ -97,11 +92,11 @@ class _SFDropDownRotationState extends State<SFDropDownRotation> {
               ),
             )
             .toList(),
-        listValue: widget.spinnerItems,
+        listValue: spinnerItems,
         child: Container(
           padding: const EdgeInsets.symmetric(vertical: 8),
           child: SFText(
-            keyText: widget.value ?? '',
+            keyText: '${value ?? ' '}',
             maxLines: 1,
             style: TextStyles.lightWhite16,
           ),
@@ -176,6 +171,12 @@ class _CustomDropdownState<T> extends State<CustomDropdown<T>>
       parent: _animationController!,
       curve: Curves.easeInOut,
     ));
+  }
+
+  @override
+  void dispose() {
+    _animationController?.dispose();
+    super.dispose();
   }
 
   @override

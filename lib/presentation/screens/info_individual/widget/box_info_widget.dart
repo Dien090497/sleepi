@@ -20,6 +20,7 @@ class BoxInfoWidget extends StatelessWidget {
           SFButton(
             text: 'Eq7fbho...9gQJxjh',
             color: Colors.white.withOpacity(0.05),
+            height: 32,
             textStyle: TextStyles.lightWhite14,
           ),
           const SizedBox(

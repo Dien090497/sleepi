@@ -15,6 +15,8 @@ class AppColors {
 
   static const darkPurple = Color(0xFF23193D);
 
+  static const pink = Color(0xFFD773AA);
+
   static const darkColor = Color(0xFF181722);
 
   static const borderDarkColor = Color(0xFF272E39);

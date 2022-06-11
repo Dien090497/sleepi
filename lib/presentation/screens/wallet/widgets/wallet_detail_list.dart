@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:slee_fi/common/routes/app_routes.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
@@ -15,13 +16,13 @@ class WalletDetailList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     List keyList = [
-      LocaleKeys.slft,
-      LocaleKeys.slgt,
-      LocaleKeys.avax,
-      LocaleKeys.beds,
-      LocaleKeys.jewels,
-      LocaleKeys.bed_box,
-      LocaleKeys.item
+      "SLFT"
+      "SLGT",
+      "AVAX",
+      LocaleKeys.beds.tr(),
+      LocaleKeys.jewels.tr(),
+      LocaleKeys.bed_box.tr(),
+      LocaleKeys.item.tr(),
     ];
     List icons = [
       Ics.icSlft,

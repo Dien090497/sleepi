@@ -28,9 +28,7 @@ class PopUpItem extends StatelessWidget {
             keyText: id,
             style: TextStyles.white1w700size16,
           ),
-          const SizedBox(height: 24),
-          SFIcon(icon,),
-          const SizedBox(height: 24),
+          SFIcon(icon, width: 160,),
           SFText(keyText: 'Level 5', style: TextStyles.lightGrey14),
           const SizedBox(height: 32),
           SFCard(
@@ -46,7 +44,7 @@ class PopUpItem extends StatelessWidget {
                 ),
                 const SizedBox(height: 4),
                 SFText(
-                  keyText: LocaleKeys.displays_message_effect_item,
+                  keyText: 'amet_minim_mollit_non',
                   style: TextStyles.lightGrey14,
                 ),
               ],

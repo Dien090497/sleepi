@@ -34,6 +34,7 @@ class SFImageBorder extends StatelessWidget {
       child: SFIcon(
         icon,
         color: iconColor,
+        fit: BoxFit.contain,
       ),
     );
   }

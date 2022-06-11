@@ -3,15 +3,16 @@ import 'package:slee_fi/common/widgets/sf_text.dart';
 
 class AverageWidget extends StatelessWidget {
   const AverageWidget({
+    required this.title,
     this.color,
     this.textStyle,
-    this.title,
     this.average,
     this.textStyleNumber,
-    Key? key}) : super(key: key);
+    Key? key,
+  }) : super(key: key);
 
   final Color? color;
-  final String? title;
+  final String title;
   final String? average;
   final TextStyle? textStyle;
   final TextStyle? textStyleNumber;
@@ -27,10 +28,7 @@ class AverageWidget extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          SFText(
-            keyText: title ?? "",
-            style: textStyle,
-          ),
+          SFText(keyText: title, style: textStyle),
           const SizedBox(
             height: 11.0,
           ),

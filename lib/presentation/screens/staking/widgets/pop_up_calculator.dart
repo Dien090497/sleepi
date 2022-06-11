@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
@@ -35,7 +36,7 @@ class PopUpCalculator extends StatelessWidget {
           height: 12.0,
         ),
         SFText(
-          keyText: LocaleKeys.slft_staked,
+          keyText: LocaleKeys.staked.tr(namedArgs: {"token": "SLFT"}),
           style: TextStyles.lightGrey14,
         ),
         const SLFTStaked(),
@@ -215,7 +216,7 @@ class _SLFTStakedState extends State<SLFTStaked> {
   bool swapText = false;
   int? selectedIndex;
 
-  List<String> balance = ["100", "10000", "My Balance"];
+  List<String> balance = ["100", "10000", LocaleKeys.my_balance.tr()];
   @override
   Widget build(BuildContext context) {
     return Column(

@@ -1,12 +1,13 @@
+import 'package:slee_fi/l10n/locale_keys.g.dart';
 import 'package:slee_fi/resources/resources.dart';
 
 enum UserRole { guest, admin }
 
 enum BedType {
-  short('Short', Imgs.shortBed),
-  middle('Middle', Imgs.middleBed),
-  long('Long', Imgs.longBed),
-  flexible('Flexible', Imgs.flexibleBed);
+  short(LocaleKeys.short_bed, Imgs.shortBed),
+  middle(LocaleKeys.middle_bed, Imgs.middleBed),
+  long(LocaleKeys.long_bed, Imgs.longBed),
+  flexible(LocaleKeys.flexible_bed, Imgs.flexibleBed);
 
 
   final String name;

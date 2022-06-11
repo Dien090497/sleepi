@@ -10,9 +10,7 @@ import 'package:slee_fi/presentation/screens/product_detail/widgets/gridview_bed
 import 'package:slee_fi/resources/resources.dart';
 
 class TabBedsBuy extends StatelessWidget {
-  const TabBedsBuy({Key? key, required this.onPress}) : super(key: key);
-
-  final Function() onPress;
+  const TabBedsBuy({Key? key}) : super(key: key);
 
   // void _showBedDialog(BuildContext context) {
   //   showCustomDialog(
@@ -41,7 +39,7 @@ class TabBedsBuy extends StatelessWidget {
     return DefaultTabController(
       length: 2,
       child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 6),
+        padding: const EdgeInsets.symmetric(horizontal: 12),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -59,13 +57,15 @@ class TabBedsBuy extends StatelessWidget {
                     beds: beds,
                     price: 10,
                     onBuyTap: (bed) {
-                      Navigator.pushNamed(context, R.nftInfo,
-                          arguments: true);
+                      Navigator.pushNamed(context, R.nftInfo, arguments: true);
                     },
                   ),
-                   Padding(
-                    padding:  EdgeInsets.only(bottom: MediaQuery.of(context).size.height * 0.3),
-                    child: const Center(child: SFIcon(Ics.commingSoon),),
+                  Padding(
+                    padding: EdgeInsets.only(
+                        bottom: MediaQuery.of(context).size.height * 0.3),
+                    child: const Center(
+                      child: SFIcon(Ics.commingSoon),
+                    ),
                   )
                   // GridViewBedItem(
                   //   beds: beds,

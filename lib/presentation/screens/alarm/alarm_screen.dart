@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:slee_fi/common/routes/app_routes.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
@@ -49,7 +50,7 @@ class AlarmScreen extends StatelessWidget {
                   const AlarmStatusChangeWidget(),
                   divider,
                   SFListTile(
-                    text: LocaleKeys.sound,
+                    text: LocaleKeys.sound.tr(),
                     trailing: const Padding(
                       padding: EdgeInsets.only(right: 16),
                       child: icon,

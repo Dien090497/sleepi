@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
@@ -86,7 +87,7 @@ class _FeedBackScreenState extends State<FeedBackScreen> {
                 SFTextField(
                   maxLine: 15,
                   maxLength: 100,
-                  hintText: LocaleKeys.hint_feedback,
+                  hintText: LocaleKeys.notification_may_include_alert_sound_and_icon,
                   hintStyle: TextStyles.lightGrey16,
                   onChanged: (value) {
                     if (value.isNotEmpty) {
@@ -126,10 +127,10 @@ List<String> topics = [
   LocaleKeys.other_
 ];
 List<String> subTopics = [
-  LocaleKeys.running_gps,
+  '${LocaleKeys.running.tr()}/${LocaleKeys.gps.tr()}',
   LocaleKeys.marketplace,
   LocaleKeys.wallet,
-  LocaleKeys.nft,
+  'NFT',
   LocaleKeys.display,
   LocaleKeys.earning,
   LocaleKeys.others

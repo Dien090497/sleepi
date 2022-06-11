@@ -111,7 +111,7 @@ class _MintScreenState extends State<MintScreen> {
                                           children: [
                                             SFText(
                                               keyText:
-                                                  LocaleKeys.what_insurance,
+                                                  LocaleKeys.what_is_insurance,
                                               style: TextStyles.lightGrey12,
                                             ),
                                             const SizedBox(
@@ -145,7 +145,7 @@ class _MintScreenState extends State<MintScreen> {
                                           CrossAxisAlignment.start,
                                       children: [
                                         SFText(
-                                          keyText: LocaleKeys.without_case,
+                                          keyText: LocaleKeys.without_insurance_case,
                                           style: TextStyles.lightGrey14,
                                         ),
                                         const SizedBox(height: 12),
@@ -189,7 +189,7 @@ class _MintScreenState extends State<MintScreen> {
                                         ),
                                         const SizedBox(height: 24),
                                         SFText(
-                                          keyText: LocaleKeys.with_case,
+                                          keyText: LocaleKeys.with_insurance_case,
                                           style: TextStyles.lightGrey14,
                                         ),
                                         const SizedBox(height: 17),

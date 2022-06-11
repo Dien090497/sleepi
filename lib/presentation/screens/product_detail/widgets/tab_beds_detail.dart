@@ -37,36 +37,39 @@ class TabBedsDetail extends StatelessWidget {
 
     return DefaultTabController(
       length: 2,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          SFSubTabBar(texts: const [LocaleKeys.beds, LocaleKeys.bed_box]),
-          const SizedBox(height: 12),
-          Expanded(
-            child: TabBarView(
-              children: [
-                GridViewBedItem(
-                    beds: beds,
-                    onBedTap: (bed) {
-                      Navigator.pushNamed(context, R.nftInfo);
-                    }),
-                Center(
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      const Image(image: AssetImage(Imgs.emptyBedBox)),
-                      const SizedBox(height: 28),
-                      SFText(
-                        keyText: LocaleKeys.there_is_no_item,
-                        style: TextStyles.lightGrey14,
-                      )
-                    ],
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 12.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            SFSubTabBar(texts: const [LocaleKeys.beds, LocaleKeys.bed_box]),
+            const SizedBox(height: 12),
+            Expanded(
+              child: TabBarView(
+                children: [
+                  GridViewBedItem(
+                      beds: beds,
+                      onBedTap: (bed) {
+                        Navigator.pushNamed(context, R.nftInfo);
+                      }),
+                  Center(
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        const Image(image: AssetImage(Imgs.emptyBedBox)),
+                        const SizedBox(height: 28),
+                        SFText(
+                          keyText: LocaleKeys.there_is_no_item,
+                          style: TextStyles.lightGrey14,
+                        )
+                      ],
+                    ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

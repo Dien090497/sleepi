@@ -1,5 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter_phoenix/flutter_phoenix.dart';
 import 'package:slee_fi/common/const/const.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
@@ -44,12 +45,10 @@ class ModalPopUpLanguage extends StatelessWidget {
               textStyle: TextStyles.w600WhiteSize16,
               height: 48,
               onPressed: () {
-                Navigator.pop(context);
                 context.setLocale(Const.locales[selectedIndex]);
+                Phoenix.rebirth(context);
               }),
-          const SizedBox(
-            height: 37,
-          )
+          const SizedBox(height: 37)
         ],
       ),
     );

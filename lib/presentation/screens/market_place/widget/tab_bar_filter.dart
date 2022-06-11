@@ -1,5 +1,5 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
 import 'package:slee_fi/common/widgets/sf_dropdown_rotation.dart';
@@ -21,18 +21,12 @@ class TabBarFilter extends StatelessWidget {
     return Row(
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        Container(
-          constraints: BoxConstraints(maxWidth: 140.w),
-          child: SFDropDownRotation(
-            dropdownHeight: 40,
-            dropdownWidth: 140,
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            value: 'Low Price',
-            spinnerItems: const ['Low Price','High Price'],
-            onChange: (int value, int index){
-
-            },
-          ),
+        SFDropDownRotation(
+          dropdownHeight: 40,
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          value: LocaleKeys.low_price.tr(),
+          spinnerItems: [LocaleKeys.low_price.tr(), LocaleKeys.high_price.tr()],
+          onChange: (int value, int index) {},
         ),
         SFSubTabBar(texts: tabTexts),
         Expanded(

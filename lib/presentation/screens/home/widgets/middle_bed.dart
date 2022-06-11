@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:slee_fi/common/enum/enum.dart';
 import 'package:slee_fi/common/routes/app_routes.dart';
@@ -43,10 +44,7 @@ class _MiddleBedState extends State<MiddleBed> {
           ),
           child: Column(
             children: [
-              SFText(
-                keyText: '${beds[i].name} Bed',
-                style: TextStyles.blue14,
-              ),
+              SFText(keyText: beds[i].name, style: TextStyles.blue14),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 7),
                 child: Row(
@@ -126,7 +124,7 @@ class _MiddleBedState extends State<MiddleBed> {
               ),
               const SizedBox(height: 24),
               SFText(
-                keyText: 'Time: 6h - 8h',
+                keyText: '${LocaleKeys.time.tr()}: 6h - 8h',
                 style: TextStyles.lightGrey12,
               ),
             ],

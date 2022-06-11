@@ -19,7 +19,7 @@ class WalletCreationWarningScreen extends StatelessWidget {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  SFText(keyText: LocaleKeys.your_wallet_is_being_made_right_now),
+                  SFText(keyText:" LocaleKeys.your_wallet_is_being_made_right_now"),
                   const SizedBox(height: 12),
                   SFText(
                     keyText: LocaleKeys.caution_please_check_your_seed_phrase,

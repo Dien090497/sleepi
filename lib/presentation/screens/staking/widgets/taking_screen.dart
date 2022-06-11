@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
@@ -31,7 +32,7 @@ class TakingScreen extends StatelessWidget {
                     Padding(
                         padding: const EdgeInsets.only(left: 12.0),
                         child: SFText(
-                            keyText: LocaleKeys.stake_slft,
+                            keyText: "LocaleKeys.stake_slft",
                             style: TextStyles.bold32black)),
                     const SizedBox(
                       height: 16.0,
@@ -40,7 +41,8 @@ class TakingScreen extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         SFText(
-                            keyText: LocaleKeys.your_slft_in_spending,
+                            keyText: LocaleKeys.your_token_in_spending
+                                .tr(namedArgs: {"token": "SLFT"}),
                             style: TextStyles.bold20black),
                         SFText(
                             keyText: "XXXXXXX  SLFT",
@@ -55,7 +57,7 @@ class TakingScreen extends StatelessWidget {
                         Expanded(
                           flex: 3,
                           child: SFText(
-                              keyText: LocaleKeys.stake_withdraw,
+                              keyText: "LocaleKeys.stake_withdraw",
                               style: TextStyles.bold32black),
                         ),
                         Expanded(

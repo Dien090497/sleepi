@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:slee_fi/common/routes/app_routes.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
@@ -38,7 +39,7 @@ class ProfileWidget extends StatelessWidget {
               const GenderTile(),
               divider,
               SFListTile(
-                text: LocaleKeys.email,
+                text: LocaleKeys.email.tr(),
                 trailing: Row(
                   mainAxisSize: MainAxisSize.min,
                   children: [

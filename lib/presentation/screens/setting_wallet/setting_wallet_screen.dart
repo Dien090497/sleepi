@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:slee_fi/common/routes/app_routes.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
@@ -26,7 +27,7 @@ class SettingWalletScreen extends StatelessWidget {
             BoxInfoWidget(
               urlIcon: Ics.icShieldLock,
               title: LocaleKeys.backup,
-              info: LocaleKeys.displays_backup_info,
+              info: LocaleKeys.your_12_word_seed_phrase,
               onTap: () {
                 Navigator.pushNamed(context, R.passcode,
                     arguments: PasscodeArguments(R.showSeedPhrase));
@@ -35,7 +36,7 @@ class SettingWalletScreen extends StatelessWidget {
             BoxInfoWidget(
               urlIcon: Ics.lock,
               title: LocaleKeys.reset_with_passcode,
-              info: LocaleKeys.displays_reset_with_passcode_info,
+              info: LocaleKeys.keep_your_assets_safe,
               onTap: () {
                 Navigator.pushNamed(context, R.passcode,
                     arguments: PasscodeArguments(R.createPasscode));
@@ -44,7 +45,7 @@ class SettingWalletScreen extends StatelessWidget {
             BoxInfoWidget(
               urlIcon: Ics.icRefresh,
               title: LocaleKeys.restore_wallet,
-              info: LocaleKeys.displays_restore_wallet_info,
+              info: LocaleKeys.overwrite_your_current_mobile_wallet.tr(),
               onTap: () => Navigator.pushNamed(context, R.restoreWallet),
             ),
           ],

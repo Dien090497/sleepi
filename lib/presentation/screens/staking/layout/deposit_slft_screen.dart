@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
@@ -25,7 +26,7 @@ class DepositSlftScreen extends StatelessWidget {
           resizeToAvoidBottomInset: false,
           appBar: SFAppBar(
             context: context,
-            title: LocaleKeys.deposit_slft,
+            title: "${LocaleKeys.deposit.tr()} SLFT",
             textStyle: TextStyles.bold18LightWhite,
           ),
           child: SafeArea(
@@ -47,7 +48,8 @@ class DepositSlftScreen extends StatelessWidget {
                             children: [
                               Expanded(
                                   child: SFText(
-                                keyText: LocaleKeys.your_slft_in_spending,
+                                keyText: LocaleKeys.your_token_in_spending
+                                    .tr(namedArgs: {"token": "SLFT"}),
                                 style: TextStyles.lightGrey12,
                               )),
                               SFText(
@@ -125,7 +127,11 @@ class DepositSlftScreen extends StatelessWidget {
                       onPressed: () {
                         showCustomDialog(context, children: [
                           PopUpStaking(
-                            message: LocaleKeys.do_you_really_want_to_deposit,
+                            message: LocaleKeys.do_you_really_want_to_deposit
+                                .tr(namedArgs: {
+                              'amount': 'xxx',
+                              'token': 'SLFT',
+                            }),
                             onPressed: () => showSuccessfulDialog(context),
                           )
                         ]);

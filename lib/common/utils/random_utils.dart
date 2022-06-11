@@ -8,8 +8,8 @@ class RandomUtils {
   String randomId() {
     int min = 65, max = 90;
     var rnd = Random();
-    var number = rnd.nextDouble() * 10000;
-    while (number < 1000) {
+    var number = rnd.nextDouble() * 100000;
+    while (number < 10000) {
       number *= 10;
     }
     int r = min + rnd.nextInt(max - min);

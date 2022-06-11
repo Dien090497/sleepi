@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
@@ -22,36 +23,37 @@ class FilterSheet extends StatefulWidget {
 class _FilterSheetState extends State<FilterSheet> {
   double level = 5;
   double mint = 5;
+
   final List<String> filterJewels = [
-    LocaleKeys.efficiency,
-    LocaleKeys.luck,
-    LocaleKeys.resilience,
-    LocaleKeys.special,
-    LocaleKeys.bonus,
+    LocaleKeys.efficiency.tr(),
+    LocaleKeys.luck.tr(),
+    LocaleKeys.resilience.tr(),
+    LocaleKeys.special.tr(),
+    LocaleKeys.bonus.tr(),
   ];
   final List<String> filterItems = [
-    LocaleKeys.efficiency,
-    LocaleKeys.luck,
-    LocaleKeys.resilience,
-    LocaleKeys.special,
+    LocaleKeys.efficiency.tr(),
+    LocaleKeys.luck.tr(),
+    LocaleKeys.resilience.tr(),
+    LocaleKeys.special.tr(),
   ];
   final List<String> filterBedType = [
-    LocaleKeys.beds,
-    LocaleKeys.bed_box,
+    LocaleKeys.beds.tr(),
+    LocaleKeys.bed_box.tr(),
   ];
 
   final List<String> filterBedClass = [
-    LocaleKeys.short_bed,
-    LocaleKeys.middle_bed,
-    LocaleKeys.long_bed,
-    LocaleKeys.flexible_bed,
+    LocaleKeys.short_bed.tr(),
+    LocaleKeys.middle_bed.tr(),
+    LocaleKeys.long_bed.tr(),
+    LocaleKeys.flexible_bed.tr(),
   ];
   final List<String> filterBedQuality = [
-    LocaleKeys.common_bed,
-    LocaleKeys.uncommon_bed,
-    LocaleKeys.rare_bed,
-    LocaleKeys.epic_bed,
-    LocaleKeys.legendary_bed,
+    LocaleKeys.common_bed.tr(),
+    LocaleKeys.uncommon_bed.tr(),
+    LocaleKeys.rare_bed.tr(),
+    LocaleKeys.epic_bed.tr(),
+    LocaleKeys.legendary_bed.tr(),
   ];
 
   List<String> listSelected = [];

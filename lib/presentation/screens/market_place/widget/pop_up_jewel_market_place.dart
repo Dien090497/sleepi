@@ -10,13 +10,13 @@ import 'package:slee_fi/l10n/locale_keys.g.dart';
 class PopUpJewelMarketPlace extends StatelessWidget {
   const PopUpJewelMarketPlace(
       {Key? key,
-        required this.icon,
-        required this.name,
-        required this.level,
-        required this.id,
-        required this.attribute,
-        required this.effect,
-        required this.onConfirmTap})
+      required this.icon,
+      required this.name,
+      required this.level,
+      required this.id,
+      required this.attribute,
+      required this.effect,
+      required this.onConfirmTap})
       : super(key: key);
 
   final String icon;
@@ -39,16 +39,19 @@ class PopUpJewelMarketPlace extends StatelessWidget {
         const SizedBox(height: 16),
         Container(
           decoration: BoxDecoration(
-            color: AppColors.purple.withOpacity(0.1),
+            color: AppColors.pink.withOpacity(0.1),
             shape: BoxShape.circle,
           ),
           alignment: Alignment.center,
-          padding: const EdgeInsets.all(24),
-          child: SFIcon(icon),
+          padding: const EdgeInsets.all(8),
+          child: SFIcon(
+            icon,
+            height: 80,
+          ),
         ),
         const SizedBox(height: 20),
         SFText(
-          keyText: 'Luck Jewel ($level)',
+          keyText: 'LocaleKeys.luck.tr() ($level)',
           style: TextStyles.white1w700size16,
         ),
         const SizedBox(height: 24),
@@ -65,8 +68,9 @@ class PopUpJewelMarketPlace extends StatelessWidget {
         ),
         const SizedBox(height: 32),
         SFCard(
+          radius: 8,
           margin: EdgeInsets.zero,
-          padding: const EdgeInsets.symmetric(vertical: 24, horizontal: 18),
+          padding: const EdgeInsets.symmetric(vertical: 18, horizontal: 24),
           child: Row(
             children: [
               SFText(
@@ -86,8 +90,9 @@ class PopUpJewelMarketPlace extends StatelessWidget {
         ),
         const SizedBox(height: 8),
         SFCard(
+          radius: 8,
           margin: EdgeInsets.zero,
-          padding: const EdgeInsets.symmetric(vertical: 24, horizontal: 18),
+          padding: const EdgeInsets.symmetric(vertical: 18, horizontal: 24),
           child: Row(
             children: [
               SFText(
@@ -107,8 +112,9 @@ class PopUpJewelMarketPlace extends StatelessWidget {
         ),
         const SizedBox(height: 8),
         SFCard(
+          radius: 8,
           margin: EdgeInsets.zero,
-          padding: const EdgeInsets.symmetric(vertical: 24, horizontal: 18),
+          padding: const EdgeInsets.symmetric(vertical: 18, horizontal: 24),
           child: Row(
             children: [
               SFText(
@@ -131,21 +137,21 @@ class PopUpJewelMarketPlace extends StatelessWidget {
           children: [
             Expanded(
                 child: SFButton(
-                  text: LocaleKeys.cancel,
-                  onPressed: () => Navigator.pop(context),
-                  textStyle: TextStyles.lightGrey16,
-                  color: AppColors.whiteOpacity5,
-                  width: double.infinity,
-                )),
+              text: LocaleKeys.cancel,
+              onPressed: () => Navigator.pop(context),
+              textStyle: TextStyles.lightGrey16,
+              color: AppColors.whiteOpacity5,
+              width: double.infinity,
+            )),
             const SizedBox(width: 12),
             Expanded(
                 child: SFButton(
-                  text: LocaleKeys.confirm,
-                  onPressed: onConfirmTap,
-                  textStyle: TextStyles.white16,
-                  gradient: AppColors.blueGradient,
-                  width: double.infinity,
-                )),
+              text: LocaleKeys.confirm,
+              onPressed: onConfirmTap,
+              textStyle: TextStyles.white16,
+              gradient: AppColors.blueGradient,
+              width: double.infinity,
+            )),
           ],
         ),
       ],
