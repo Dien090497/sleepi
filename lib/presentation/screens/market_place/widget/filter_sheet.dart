@@ -1,3 +1,4 @@
+import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
@@ -7,13 +8,12 @@ import 'package:slee_fi/l10n/locale_keys.g.dart';
 import 'package:syncfusion_flutter_core/theme.dart';
 import 'package:syncfusion_flutter_sliders/sliders.dart';
 
-// ignore_for_file: depend_on_referenced_packages
-enum FilterType { bed, jewel, item }
-
 class FilterSheet extends StatefulWidget {
-  final FilterType filterType;
+  const FilterSheet({Key? key, required this.sections, required this.sliders})
+      : super(key: key);
 
-  const FilterSheet({required this.filterType, Key? key}) : super(key: key);
+  final Map<String, FilterSliderValues> sliders;
+  final Map<String, List<String>> sections;
 
   @override
   State<FilterSheet> createState() => _FilterSheetState();
@@ -90,45 +90,23 @@ class _FilterSheetState extends State<FilterSheet> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                TypeSelectionWidget(
-                  name: LocaleKeys.type,
-                  types: widget.filterType == FilterType.bed
-                      ? filterBedType
-                      : widget.filterType == FilterType.jewel
-                          ? filterJewels
-                          : filterItems,
-                  listSelected: listSelected,
-                  onSelect: (List<String> value) {
-                    listSelected = value;
-                    setState(() {});
-                  },
+                ...List<Widget>.generate(
+                  widget.sections.length,
+                  (i) => TypeSelectionWidget(
+                    name: widget.sections.keys.elementAt(i),
+                    types: widget.sections.values.elementAt(i),
+                    listSelected: listSelected,
+                    onSelect: (List<String> value) {
+                      listSelected = value;
+                      setState(() {});
+                    },
+                  ),
                 ),
-                if (widget.filterType == FilterType.bed)
-                  TypeSelectionWidget(
-                    name: LocaleKeys.class_,
-                    types: filterBedClass,
-                    listSelected: listSelected,
-                    onSelect: (List<String> value) {
-                      listSelected = value;
-                      setState(() {});
-                    },
-                  ),
-                if (widget.filterType == FilterType.bed)
-                  TypeSelectionWidget(
-                    name: LocaleKeys.quality,
-                    types: filterBedQuality,
-                    listSelected: listSelected,
-                    onSelect: (List<String> value) {
-                      listSelected = value;
-                      setState(() {});
-                    },
-                  ),
-                ..._slider(LocaleKeys.level, 25, 0, level,
-                    (value) => setState(() => level = value)),
-                if (widget.filterType == FilterType.bed)
-                  ..._slider(LocaleKeys.mint, 25, 0, mint,
-                      (value) => setState(() => mint = value)),
-                // const Spacer(),
+                ...List<Widget>.generate(
+                  widget.sliders.length,
+                  (i) => _Slider(widget.sliders.keys.elementAt(i),
+                      widget.sliders.values.elementAt(i)),
+                ),
                 const SizedBox(height: 26),
               ],
             ),
@@ -149,50 +127,70 @@ class _FilterSheetState extends State<FilterSheet> {
       ],
     );
   }
+}
 
-  List<Widget> _slider(String label, int max, int min, double currentValue,
-      Function(double value) onChange) {
-    return [
-      const SizedBox(height: 28),
-      Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 32),
-        child: SFText(keyText: label, style: TextStyles.lightGrey14),
-      ),
-      SfSliderTheme(
-        data: SfSliderThemeData(
-          activeLabelStyle: TextStyles.lightGrey12,
-          inactiveLabelStyle: TextStyles.lightGrey12,
+class _Slider extends StatefulWidget {
+  const _Slider(this.label, this.values, {Key? key}) : super(key: key);
+
+  final String label;
+  final FilterSliderValues values;
+
+  @override
+  State<_Slider> createState() => _SliderState();
+}
+
+class _SliderState extends State<_Slider> {
+  late FilterSliderValues slider = widget.values;
+  late double _value =
+      (slider.value ?? (slider.min + slider.max) / 2).floorToDouble();
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        const SizedBox(height: 28),
+        Padding(
+          padding: const EdgeInsets.only(left: 28),
+          child: SFText(keyText: widget.label, style: TextStyles.lightGrey14),
         ),
-        child: SfSlider(
-          min: min,
-          max: max,
-          value: currentValue,
-          interval: currentValue > 1 ? currentValue : 2,
-          showTicks: true,
-          showLabels: true,
-          enableTooltip: true,
-          showDividers: false,
-          stepSize: 1,
-          thumbIcon: Container(
-            width: 16,
-            height: 16,
-            decoration: const BoxDecoration(
-              color: AppColors.white,
-              shape: BoxShape.circle,
-            ),
-            padding: const EdgeInsets.all(4),
-            child: const DecoratedBox(
-              decoration: BoxDecoration(
-                color: AppColors.blue,
-                shape: BoxShape.circle,
+        SfSliderTheme(
+          data: SfSliderThemeData(
+              activeLabelStyle: TextStyles.lightGrey12,
+              inactiveLabelStyle: TextStyles.lightGrey12),
+          child: SfSlider(
+            min: slider.min,
+            max: slider.max,
+            value: _value,
+            interval: slider.interval,
+            showTicks: true,
+            showLabels: true,
+            enableTooltip: true,
+            showDividers: false,
+            stepSize: 1,
+            thumbIcon: Container(
+              width: 16,
+              height: 16,
+              decoration: const BoxDecoration(
+                  color: AppColors.white, shape: BoxShape.circle),
+              padding: const EdgeInsets.all(4),
+              child: const DecoratedBox(
+                decoration: BoxDecoration(
+                    color: AppColors.blue, shape: BoxShape.circle),
               ),
             ),
+            // minorTicksPerInterval: 1,
+            onChanged: (dynamic v) {
+              if (widget.values.onChanged != null) {
+                widget.values.onChanged!(v);
+              }
+              _value = v;
+              setState(() {});
+            },
           ),
-          // minorTicksPerInterval: 1,
-          onChanged: (dynamic value) => onChange(value),
-        ),
-      )
-    ];
+        )
+      ],
+    );
   }
 }
 
@@ -204,6 +202,7 @@ class TypeSelectionWidget extends StatelessWidget {
       required this.onSelect,
       required this.listSelected})
       : super(key: key);
+
   final String name;
   final List<String> types;
   final List<String> listSelected;
@@ -301,4 +300,23 @@ class _Container extends StatelessWidget {
       ),
     );
   }
+}
+
+class FilterSliderValues extends Equatable {
+  final double min;
+  final double max;
+  final double? value;
+  final double interval;
+  final ValueChanged<dynamic>? onChanged;
+
+  const FilterSliderValues({
+    required this.min,
+    required this.max,
+    this.interval = 1,
+    this.value,
+    this.onChanged,
+  });
+
+  @override
+  List<Object?> get props => [min, max, value, onChanged, interval];
 }

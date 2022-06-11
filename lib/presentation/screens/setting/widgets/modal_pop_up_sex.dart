@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
@@ -16,10 +17,10 @@ class ModalPopUpSex extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final List<String> genders = [
-      LocaleKeys.female_,
-      LocaleKeys.male_,
-      LocaleKeys.other_,
-      LocaleKeys.secret,
+      LocaleKeys.female_.tr(),
+      LocaleKeys.male_.tr(),
+      LocaleKeys.other_.tr(),
+      LocaleKeys.secret.tr(),
     ];
     int selectedIndex = genders.indexOf(selectedGender);
 

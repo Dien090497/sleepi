@@ -21,8 +21,8 @@ class AccountLoginWidget extends StatefulWidget {
 class _AccountLoginState extends State<AccountLoginWidget> {
   bool isLoginSignup = true;
 
-  void changeStatus(){
-    setState((){
+  void changeStatus() {
+    setState(() {
       isLoginSignup = !isLoginSignup;
     });
   }
@@ -32,7 +32,9 @@ class _AccountLoginState extends State<AccountLoginWidget> {
     return Column(
       children: [
         SFText(
-          keyText: isLoginSignup ? "${LocaleKeys.login}/${LocaleKeys.signup}" : LocaleKeys.account_login,
+          keyText: isLoginSignup
+              ? "${LocaleKeys.login.tr()}/${LocaleKeys.signup.tr()}"
+              : LocaleKeys.account_login.tr(),
           style: TextStyles.bold18LightWhite,
           stringCase: StringCase.upperCase,
         ),
@@ -44,25 +46,32 @@ class _AccountLoginState extends State<AccountLoginWidget> {
         const SizedBox(height: 12),
         isLoginSignup
             ? const SFTextFieldTextButton(
-          labelText: LocaleKeys.email_verification_code,
-          textInputType: TextInputType.number,
-        )
-            : const SFTextFieldPassword(labelText: LocaleKeys.password,),
+                labelText: LocaleKeys.email_verification_code,
+                textInputType: TextInputType.number,
+              )
+            : const SFTextFieldPassword(
+                labelText: LocaleKeys.password,
+              ),
         const SizedBox(height: 37),
         SFButton(
-          text: isLoginSignup ? "${LocaleKeys.login.tr()}/${LocaleKeys.signup.tr()}" : LocaleKeys.login,
+          text: isLoginSignup
+              ? "${LocaleKeys.login.tr()}/${LocaleKeys.signup.tr()}"
+              : LocaleKeys.login,
           color: AppColors.blue,
           textStyle: TextStyles.w600WhiteSize16,
           onPressed: () {
-            isLoginSignup ? Navigator.pushNamed(context, R.enterActivationCode)
+            isLoginSignup
+                ? Navigator.pushNamed(context, R.enterActivationCode)
                 : Navigator.pushNamedAndRemoveUntil(
-                context, R.bottomNavigation, (_) => false);
+                    context, R.bottomNavigation, (_) => false);
           },
           width: MediaQuery.of(context).size.width,
         ),
         const SizedBox(height: 32),
         SFTextButton(
-          text: isLoginSignup ? LocaleKeys.account_login : LocaleKeys.verification_login,
+          text: isLoginSignup
+              ? LocaleKeys.account_login
+              : LocaleKeys.verification_login,
           textStyle: TextStyles.blue14,
           onPressed: () => changeStatus(),
         ),

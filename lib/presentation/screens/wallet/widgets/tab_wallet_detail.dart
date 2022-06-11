@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:slee_fi/common/extensions/string_x.dart';
 import 'package:slee_fi/common/routes/app_routes.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
@@ -68,7 +69,7 @@ class TabWalletDetail extends StatelessWidget {
                 ),
                 BoxButtonWidget(
                   onTap: () => Navigator.pushNamed(context, R.trade),
-                  text: LocaleKeys.trade,
+                  text: LocaleKeys.trade.reCase(StringCase.titleCase),
                   assetImage: Ics.icTransfer,
                 ),
               ],

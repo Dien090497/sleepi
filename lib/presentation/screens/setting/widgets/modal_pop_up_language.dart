@@ -44,12 +44,9 @@ class ModalPopUpLanguage extends StatelessWidget {
               textStyle: TextStyles.w600WhiteSize16,
               height: 48,
               onPressed: () {
-                Navigator.pop(context);
                 context.setLocale(Const.locales[selectedIndex]);
               }),
-          const SizedBox(
-            height: 37,
-          )
+          const SizedBox(height: 37)
         ],
       ),
     );

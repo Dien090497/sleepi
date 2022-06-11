@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:slee_fi/common/enum/enum.dart';
@@ -35,8 +36,9 @@ class ItemBedBuyWidget extends StatelessWidget {
             top: 14,
             left: -30,
             child: TopLeftBanner(
-              text: item.name,
-              textColor: item.color,
+              text: '${LocaleKeys.level.tr()} 3',
+              textColor: AppColors.lightGrey,
+              backgroundColor: AppColors.lightGrey.withOpacity(0.1),
             ),
           ),
           Column(

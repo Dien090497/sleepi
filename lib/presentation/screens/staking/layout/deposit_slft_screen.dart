@@ -48,7 +48,8 @@ class DepositSlftScreen extends StatelessWidget {
                             children: [
                               Expanded(
                                   child: SFText(
-                                keyText: LocaleKeys.your_slft_in_spending,
+                                keyText: LocaleKeys.your_token_in_spending
+                                    .tr(namedArgs: {"token": "SLFT"}),
                                 style: TextStyles.lightGrey12,
                               )),
                               SFText(
@@ -126,7 +127,11 @@ class DepositSlftScreen extends StatelessWidget {
                       onPressed: () {
                         showCustomDialog(context, children: [
                           PopUpStaking(
-                            message: LocaleKeys.do_you_really_want_to_deposit,
+                            message: LocaleKeys.do_you_really_want_to_deposit
+                                .tr(namedArgs: {
+                              'amount': 'xxx',
+                              'token': 'SLFT',
+                            }),
                             onPressed: () => showSuccessfulDialog(context),
                           )
                         ]);

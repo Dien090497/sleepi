@@ -247,7 +247,7 @@ abstract class  LocaleKeys {
   static const success = 'success';
   static const durability = 'durability';
   static const wallet_account = 'wallet_account';
-  static const your_in_spending = 'your_in_spending';
+  static const your_token_in_spending = 'your_token_in_spending';
   static const stake = 'stake';
   static const staking_not_only_allows_you_to_increase_your_tokens = 'staking_not_only_allows_you_to_increase_your_tokens';
   static const earning_token = 'earning_token';
@@ -273,7 +273,6 @@ abstract class  LocaleKeys {
   static const send = 'send';
   static const you_will_lose_your_assets = 'you_will_lose_your_assets';
   static const clear_filter = 'clear_filter';
-  static const comfort = 'comfort';
   static const if_the_chosen_platform_does_not_support = 'if_the_chosen_platform_does_not_support';
   static const verification_code = 'verification_code';
   static const change_password = 'change_password';
@@ -339,12 +338,21 @@ abstract class  LocaleKeys {
   static const notifications = 'notifications';
   static const microphone = 'microphone';
   static const motion_data = 'motion_data';
-  static const your_slft_in_spending = 'your_slft_in_spending';
   static const this_bed_is_not_yours = 'this_bed_is_not_yours';
   static const staked = 'staked';
   static const return_to_home = 'return_to_home';
   static const point = 'point';
   static const amount_earned = 'amount_earned';
   static const amet_minim_mollit_non = 'amet_minim_mollit_non';
+  static const my_balance = 'my_balance';
+  static const high_price = 'high_price';
+  static const level_up_to = 'level_up_to';
+  static const middle = 'middle';
+  static const base = 'base';
+  static const german = 'german';
+  static const french = 'french';
+  static const spanish = 'spanish';
+  static const portuguese = 'portuguese';
+  static const russian = 'russian';
 
 }

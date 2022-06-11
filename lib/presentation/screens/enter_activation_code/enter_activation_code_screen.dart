@@ -20,7 +20,8 @@ class EnterActivationCodeScreen extends StatefulWidget {
   const EnterActivationCodeScreen({Key? key}) : super(key: key);
 
   @override
-  State<EnterActivationCodeScreen> createState() => _EnterActivationCodeScreenState();
+  State<EnterActivationCodeScreen> createState() =>
+      _EnterActivationCodeScreenState();
 }
 
 class _EnterActivationCodeScreenState extends State<EnterActivationCodeScreen> {
@@ -30,7 +31,8 @@ class _EnterActivationCodeScreenState extends State<EnterActivationCodeScreen> {
       child: BackgroundWidget(
         appBar: SFAppBar(
             context: context,
-            title: "${LocaleKeys.activation_code.tr()}/${LocaleKeys.language.tr().toUpperCase()}",
+            title:
+                "${LocaleKeys.activation_code.tr()}/${LocaleKeys.language.tr()}",
             textStyle: TextStyles.bold18LightWhite),
         child: SafeArea(
           child: ListView(
@@ -45,9 +47,10 @@ class _EnterActivationCodeScreenState extends State<EnterActivationCodeScreen> {
                   children: [
                     const SFLogo(),
                     const SizedBox(height: 40),
-                     const SFTextField(
-                        labelText: LocaleKeys.please_enter_your_activation_code,
-                        textInputType: TextInputType.number,),
+                    const SFTextField(
+                      labelText: LocaleKeys.please_enter_your_activation_code,
+                      textInputType: TextInputType.number,
+                    ),
                     const SizedBox(height: 20),
                     SFText(
                         keyText: LocaleKeys.please_select_your_language,
@@ -57,23 +60,19 @@ class _EnterActivationCodeScreenState extends State<EnterActivationCodeScreen> {
                         width: double.infinity,
                         height: 48,
                         child: SFDropDownRotation<String>(
-                            value: context.locale.displayName,
-                            dropdownWidth:
-                                MediaQuery.of(context).size.width * 0.8,
-                            dropdownHeight: 48,
-                            selectedItemHighlightColor: AppColors.lightDark,
-
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            spinnerItems: List.generate(
-                              Const.locales.length,
-                              (i) => Const.locales[i].displayName,
-                            ),
-                            onChange: (int value, int index) {
-                              context.setLocale(Const.locales[index]);
-                              setState(() {
-
-                              });
-                            },
+                          value: context.locale.displayName,
+                          dropdownWidth:
+                              MediaQuery.of(context).size.width * 0.8,
+                          dropdownHeight: 48,
+                          selectedItemHighlightColor: AppColors.lightDark,
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          spinnerItems: List.generate(
+                            Const.locales.length,
+                            (i) => Const.locales[i].displayName,
+                          ),
+                          onChange: (int value, int index) {
+                            context.setLocale(Const.locales[index]);
+                          },
                         )),
                     const SizedBox(height: 20),
                     SFButton(

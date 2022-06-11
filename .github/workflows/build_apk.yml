@@ -1,40 +1,46 @@
-name: Reusable Build APK and Upload Diawi
+name: Build APK & Upload Artifact
 
 on:
   workflow_call:
     secrets:
       diawi_token:
         required: true
+      dg_token:
+        required: true
     outputs:
       diawi_url:
         value: ${{ jobs.build.outputs.diawi_url }}
       diawi_qrcode:
         value: ${{ jobs.build.outputs.diawi_qrcode }}
+#      deploygate_url:
+#        value: ${{ jobs.build.outputs.deploygate.deploygate_url }}
+#      deploygate_icon:
+#        value: ${{ jobs.build.outputs.deploygate.deploygate_icon }}
 
 jobs:
   build:
     runs-on: ubuntu-latest
+
     outputs:
-      diawi_url: ${{ steps.diawi_url.outputs.result }}
-      diawi_qrcode: ${{ steps.diawi_qrcode.outputs.result }}
+      diawi_url: ${{ steps.diawi.outputs.url }}
+      diawi_qrcode: ${{ steps.diawi.outputs.qrcode }}
+    #      deploygate_url: ${{ steps.deploy_gate_json_result.outputs.file }}
+    #      deploygate_icon: ${{ steps.deploy_gate_json_result.outputs.icon }}
 
     steps:
       - uses: actions/checkout@v3
 
       - uses: subosito/flutter-action@v2
         with:
-          flutter-version: '3.0.0'
+          flutter-version: '3.0.1'
           channel: 'stable'
 
-      - run: flutter --version
-
-      - uses: dart-lang/setup-dart@9a04e6d73cca37bd455e0608d7e5092f881fd603
+      - uses: dart-lang/setup-dart@v1
 
       - name: Install dependencies
         run: flutter pub get
 
       - name: Build Release APK
-        id: apk
         run: flutter build apk
 
       - name: Upload Diawi
@@ -44,10 +50,22 @@ jobs:
           token: ${{ secrets.diawi_token }}
           file: build/app/outputs/flutter-apk/app-release.apk
 
-      - name: Set Diawi Url
-        id: diawi_url
-        run: echo "::set-output name=result::${{ steps.diawi.outputs.url }}"
+#      - uses: jmatsu/dg-upload-app-action@v0.2.1
+#        id: deploygate
+#        with:
+#          app_owner_name: kevinthai
+#          api_token: ${{ secrets.dg_token }}
+#          app_file_path: build/app/outputs/flutter-apk/app-release.apk
 
-      - name: Set Diawi QRCode
-        id: diawi_qrcode
-        run: echo "::set-output name=result::${{ steps.diawi.outputs.qrcode }}"
+#      - id: json
+#        run: echo ${{ toJSON(steps.deploygate.outputs) }}
+#
+#      - id: deploy_gate_json_result
+#        run: |
+#          echo ::set-output name=file::${{ fromJSON(toJSON(steps.deploygate.outputs)).results.file }}
+#
+#      - name: Echo Deploy Gate File Path
+#        run: |
+#          echo ${{ steps.deploy_gate_json_result.outputs.file }}
+#          echo ${{ steps.deploy_gate_json_result.outputs.icon }}
+#          echo ${{ fromJSON('steps.deploygate.outputs').results }}

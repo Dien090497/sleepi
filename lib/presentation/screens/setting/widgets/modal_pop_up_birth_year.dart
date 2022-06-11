@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
@@ -21,7 +22,7 @@ class _SettingBirthYearState extends State<SettingBirthYear> {
   @override
   Widget build(BuildContext context) {
     return SFListTile(
-      text: LocaleKeys.birth_year,
+      text: LocaleKeys.birth_year.tr(),
       trailing: Row(
         mainAxisSize: MainAxisSize.min,
         children: [

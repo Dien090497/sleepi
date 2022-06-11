@@ -1,8 +1,8 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/widgets.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:injectable/injectable.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
-import 'package:slee_fi/common/widgets/sf_text.dart';
 
 @Injectable()
 class ToastUtils {
@@ -17,8 +17,8 @@ class ToastUtils {
         borderRadius: BorderRadius.circular(8),
         color: bgColor,
       ),
-      child: SFText(
-        keyText: content,
+      child: Text(
+        content.tr(),
         style: const TextStyle(
           fontSize: 12,
           fontWeight: FontWeight.w400,

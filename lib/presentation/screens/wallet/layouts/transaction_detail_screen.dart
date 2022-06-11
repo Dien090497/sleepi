@@ -71,9 +71,9 @@ class TransactionDetail extends StatelessWidget {
                     : const SizedBox(),
                 const SizedBox(height: 16.0),
                 SFText(
-                    keyText:
-                        "0.543 ${args != null ? args.title.toUpperCase() : 'AVAX'}",
-                    style: TextStyles.bold30White),
+                    keyText: "0.543 ${args != null ? args.title : 'AVAX'}",
+                    style: TextStyles.bold30White,
+                    stringCase: StringCase.upperCase),
                 const SizedBox(height: 20.0),
                 const SizedBox(height: 16.0),
                 Row(
@@ -98,7 +98,7 @@ class TransactionDetail extends StatelessWidget {
                     ),
                     BoxButtonWidget(
                       onTap: () => Navigator.pushNamed(context, R.trade),
-                      text: LocaleKeys.trade,
+                      text: LocaleKeys.trade.reCase(StringCase.titleCase),
                       assetImage: Ics.icTransfer,
 
                     ),

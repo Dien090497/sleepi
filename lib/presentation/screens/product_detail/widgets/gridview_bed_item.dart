@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:slee_fi/common/enum/enum.dart';
@@ -92,10 +93,10 @@ class GridViewBedItem extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           SFText(
-                              keyText: 'Mint 3',
+                              keyText: '${LocaleKeys.mint.tr()} 3',
                               style: TextStyles.lightGrey11W500),
                           SFText(
-                              keyText: 'Level 15',
+                              keyText: '${LocaleKeys.level.tr()} 15',
                               style: TextStyles.lightGrey11W500),
                         ],
                       ),
