@@ -348,5 +348,8 @@
  "french": "French",
  "spanish": "Spanish",
  "portuguese": "Portuguese",
- "russian": "Russian"
+ "russian": "Russian",
+ "rare": "レア",
+ "epic": "エピック",
+ "legendary": "レジェンダリー"
 }

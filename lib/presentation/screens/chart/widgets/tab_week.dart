@@ -182,7 +182,8 @@ class ChartWeekPicker extends StatelessWidget {
   }
 
   DateTime _endOfWeek(DateTime time, DateTimeUtils dateTimeUtils) {
-    var endOfWeek = dateTimeUtils.endOfWeek(time);
-    return DateTime.now().isBefore(endOfWeek) ? DateTime.now() : endOfWeek;
+    final endOfWeek = dateTimeUtils.endOfWeek(time);
+    final now = DateTime.now();
+    return now.isBefore(endOfWeek) ? now : endOfWeek;
   }
 }

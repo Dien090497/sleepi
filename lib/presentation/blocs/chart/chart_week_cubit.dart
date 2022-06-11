@@ -12,10 +12,10 @@ class ChartWeekCubit extends Cubit<ChartWeekState> {
   void init() async {
     final now = DateTime.now();
     emit(ChartWeekState.loaded(
-      week: DatePeriod(
-          dateTimeUtils.startOfWeek(now), dateTimeUtils.endOfWeek(now)),
+      week: DatePeriod(dateTimeUtils.startOfWeek(now),
+          dateTimeUtils.endOfWeek(now, checkNow: true)),
       firstAllowedDate: DateTime.now().subtract(const Duration(days: 366)),
-      lastAllowedDate: DateTime.now(),
+      lastAllowedDate: DateTime.now().add(const Duration(days: 366)),
     ));
   }
 
