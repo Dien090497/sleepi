@@ -34,11 +34,11 @@ class _SFBottomNavigatorHomeState extends State<SFBottomNavigatorHome> {
         setState(() {});
       },
       items: [
-        ItemBottomNav(icon: Ics.home, label: LocaleKeys.home),
-        ItemBottomNav(icon: Ics.signOut, label: LocaleKeys.gacha),
-        ItemBottomNav(icon: Ics.group, label: LocaleKeys.list),
-        ItemBottomNav(icon: Ics.chart, label: LocaleKeys.chart),
-        ItemBottomNav(icon: Ics.shopping, label: LocaleKeys.market),
+        ItemBottomNav(icon: Ics.icHomeNew, label: LocaleKeys.home),
+        ItemBottomNav(icon: Ics.icGacha, label: LocaleKeys.gacha),
+        ItemBottomNav(icon: Ics.icBedsNew, label: LocaleKeys.list),
+        ItemBottomNav(icon: Ics.icChartNew, label: LocaleKeys.chart),
+        ItemBottomNav(icon: Ics.icMarketNew, label: LocaleKeys.market),
       ],
     );
   }

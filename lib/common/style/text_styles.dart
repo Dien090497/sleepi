@@ -164,6 +164,8 @@ class TextStyles {
       fontSize: 16, color: AppColors.lightWhite, fontWeight: FontWeight.w700);
   static const bold14LightWhite = TextStyle(
       fontSize: 14, color: AppColors.lightWhite, fontWeight: FontWeight.w700);
+  static final bold14LightWhiteWithOpacity = TextStyle(
+      fontSize: 14, color: AppColors.lightWhite.withOpacity(0.5), fontWeight: FontWeight.w700); 
 
   static const bold12Blue = TextStyle(
       fontSize: 12, color: AppColors.blue, fontWeight: FontWeight.w700);
