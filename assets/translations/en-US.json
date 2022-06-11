@@ -347,5 +347,9 @@
   "french": "French",
   "spanish": "Spanish",
   "portuguese": "Portuguese",
-  "russian": "Russian"
+  "russian": "Russian",
+  "rare": "Rare",
+  "epic": "Epic",
+  "legendary": "Legendary"
+
 }

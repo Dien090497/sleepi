@@ -38,7 +38,7 @@ class BoxInfoWidget extends StatelessWidget {
             children: [
               const Spacer(),
               SFButton(
-                text: LocaleKeys.quality,
+                text: LocaleKeys.legendary,
                 textStyle: TextStyles.blue14,
                 color: Colors.blue.withOpacity(0.05),
                 radius: 50,
