@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
@@ -11,7 +12,6 @@ import 'package:slee_fi/common/widgets/sf_text.dart';
 import 'package:slee_fi/di/injector.dart';
 import 'package:slee_fi/l10n/locale_keys.g.dart';
 import 'package:slee_fi/presentation/screens/home/widgets/pop_up_item.dart';
-import 'package:slee_fi/presentation/screens/market_place/widget/filter_sheet.dart';
 import 'package:slee_fi/presentation/screens/product_detail/widgets/my_jewel_short_widget.dart';
 import 'package:slee_fi/resources/resources.dart';
 
@@ -42,7 +42,18 @@ class ModalItemList extends StatelessWidget {
                 const Spacer(),
                 GestureDetector(
                   onTap: () {
-                    showFilterModalBottomSheet(context, FilterType.item);
+                    showFilterModalBottomSheet(
+                      context,
+                      sections: {
+                        LocaleKeys.item: [
+                          LocaleKeys.efficiency.tr(),
+                          LocaleKeys.luck.tr(),
+                          LocaleKeys.resilience.tr(),
+                          LocaleKeys.special.tr(),
+                        ]
+                      },
+                      sliders: {},
+                    );
                   },
                   child: Padding(
                     padding: const EdgeInsets.only(left: 8),
@@ -88,7 +99,9 @@ class ModalItemList extends StatelessWidget {
               ),
             ),
           ),
-          const SizedBox(height: 16,),
+          const SizedBox(
+            height: 16,
+          ),
           SFButton(
               text: LocaleKeys.cancel,
               width: MediaQuery.of(context).size.width * 0.9,
@@ -96,7 +109,9 @@ class ModalItemList extends StatelessWidget {
               textStyle: TextStyles.w600WhiteSize16,
               height: 48,
               onPressed: () => Navigator.pop(context)),
-          const SizedBox(height: 16,)
+          const SizedBox(
+            height: 16,
+          )
         ],
       ),
     );
