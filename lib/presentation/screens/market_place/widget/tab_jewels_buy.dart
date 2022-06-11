@@ -13,10 +13,7 @@ import 'package:slee_fi/presentation/screens/market_place/widget/tab_bar_filter.
 import 'package:slee_fi/resources/resources.dart';
 
 class TabJewelsBuy extends StatelessWidget {
-  const TabJewelsBuy({
-    Key? key,
-    required this.onPress,
-  }) : super(key: key);
+  const TabJewelsBuy({Key? key}) : super(key: key);
 
   void _showJewelDialog(BuildContext context, String img, String id) {
     showCustomAlertDialog(
@@ -33,8 +30,6 @@ class TabJewelsBuy extends StatelessWidget {
       ),
     );
   }
-
-  final Function() onPress;
 
   @override
   Widget build(BuildContext context) {
@@ -65,7 +60,7 @@ class TabJewelsBuy extends StatelessWidget {
                 children: [
                   SFGridView(
                     count: 20,
-                    childAspectRatio: 8/10,
+                    childAspectRatio: 8 / 10,
                     itemBuilder: (context, i) {
                       String id = randomUtils.randomId();
                       return GestureDetector(

@@ -23,6 +23,7 @@ class FilterSheet extends StatefulWidget {
 class _FilterSheetState extends State<FilterSheet> {
   double level = 5;
   double mint = 5;
+
   final List<String> filterJewels = [
     LocaleKeys.efficiency.tr(),
     LocaleKeys.luck.tr(),

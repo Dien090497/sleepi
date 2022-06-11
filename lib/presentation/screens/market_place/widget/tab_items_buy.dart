@@ -11,9 +11,7 @@ import 'package:slee_fi/presentation/screens/market_place/widget/tab_bar_filter.
 import 'package:slee_fi/resources/resources.dart';
 
 class TabItemsBuy extends StatelessWidget {
-  const TabItemsBuy({Key? key, required this.onPress}) : super(key: key);
-
-  final Function() onPress;
+  const TabItemsBuy({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -44,7 +42,7 @@ class TabItemsBuy extends StatelessWidget {
                 children: [
                   SFGridView(
                     count: 20,
-                    childAspectRatio: 8/10,
+                    childAspectRatio: 8 / 10,
                     itemBuilder: (context, i) {
                       return ItemBedBuyWidget(
                         id: randomUtils.randomId(),
