@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
+import 'package:slee_fi/common/utils/launch_url_utils.dart';
 import 'package:slee_fi/common/widgets/background_widget.dart';
 import 'package:slee_fi/common/widgets/sf_app_bar.dart';
 import 'package:slee_fi/common/widgets/sf_buttons.dart';
@@ -15,7 +16,6 @@ import 'package:slee_fi/presentation/blocs/mint/mint_cubit.dart';
 import 'package:slee_fi/presentation/blocs/mint/mint_state.dart';
 import 'package:slee_fi/presentation/screens/info_individual/widget/connect_bed_widget.dart';
 import 'package:slee_fi/resources/resources.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 class MintScreen extends StatefulWidget {
   const MintScreen({Key? key}) : super(key: key);
@@ -103,7 +103,7 @@ class _MintScreenState extends State<MintScreen> {
                                       ),
                                       GestureDetector(
                                         onTap: () {
-                                          _launchUrl();
+                                          launchInsurance(context);
                                         },
                                         child: Row(
                                           crossAxisAlignment:
@@ -145,7 +145,8 @@ class _MintScreenState extends State<MintScreen> {
                                           CrossAxisAlignment.start,
                                       children: [
                                         SFText(
-                                          keyText: LocaleKeys.without_insurance_case,
+                                          keyText:
+                                              LocaleKeys.without_insurance_case,
                                           style: TextStyles.lightGrey14,
                                         ),
                                         const SizedBox(height: 12),
@@ -189,7 +190,8 @@ class _MintScreenState extends State<MintScreen> {
                                         ),
                                         const SizedBox(height: 24),
                                         SFText(
-                                          keyText: LocaleKeys.with_insurance_case,
+                                          keyText:
+                                              LocaleKeys.with_insurance_case,
                                           style: TextStyles.lightGrey14,
                                         ),
                                         const SizedBox(height: 17),
@@ -242,12 +244,5 @@ class _MintScreenState extends State<MintScreen> {
         },
       ),
     );
-  }
-
-  void _launchUrl() async {
-    if (!await launchUrl(
-        Uri.parse('https://sleefi.gitbook.io/en/v/whitepaper/'))) {
-      throw 'Could not launch';
-    }
   }
 }

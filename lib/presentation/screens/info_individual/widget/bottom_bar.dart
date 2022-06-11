@@ -28,7 +28,6 @@ class _BottomBarWidgetState extends State<BottomBarWidget> {
       onTap: onTap,
       child: Container(
         alignment: Alignment.center,
-        width: MediaQuery.of(context).size.width / 6,
         height: 80,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -67,6 +66,7 @@ class _BottomBarWidgetState extends State<BottomBarWidget> {
           height: 80,
           width: MediaQuery.of(context).size.width,
           child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               itemBottomBar(0, context, Ics.levelUp, LocaleKeys.level_up, () {
                 setState(() {
