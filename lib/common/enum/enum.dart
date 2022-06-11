@@ -18,10 +18,10 @@ enum BedType {
 }
 
 enum ItemType {
-  short('Short', Imgs.candyBlue),
-  middle('Middle', Imgs.candyGreen),
-  long('Long', Imgs.candyPink),
-  flexible('Flexible', Imgs.candyPurple);
+  short(LocaleKeys.short, Imgs.candyBlue),
+  middle(LocaleKeys.middle, Imgs.candyGreen),
+  long(LocaleKeys.long, Imgs.candyPink),
+  flexible(LocaleKeys.flexible, Imgs.candyPurple);
 
 
   final String name;

@@ -340,10 +340,6 @@ abstract class  LocaleKeys {
   static const motion_data = 'motion_data';
   static const this_bed_is_not_yours = 'this_bed_is_not_yours';
   static const staked = 'staked';
-  static const return_to_home = 'return_to_home';
-  static const point = 'point';
-  static const amount_earned = 'amount_earned';
-  static const amet_minim_mollit_non = 'amet_minim_mollit_non';
   static const my_balance = 'my_balance';
   static const high_price = 'high_price';
   static const level_up_to = 'level_up_to';
@@ -354,8 +350,14 @@ abstract class  LocaleKeys {
   static const spanish = 'spanish';
   static const portuguese = 'portuguese';
   static const russian = 'russian';
+  static const return_to_home = 'return_to_home';
+  static const point = 'point';
+  static const amount_earned = 'amount_earned';
+  static const amet_minim_mollit_non = 'amet_minim_mollit_non';
   static const rare = 'rare';
   static const epic = 'epic';
   static const legendary = 'legendary';
+  static const short = 'short';
+  static const long = 'long';
 
 }

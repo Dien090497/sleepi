@@ -354,5 +354,7 @@
   "amet_minim_mollit_non": "Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. ",
   "rare": "Rare",
   "epic": "Epic",
-  "legendary": "Legendary"
+  "legendary": "Legendary",
+  "short": "Short",
+  "long": "Long"
 }
