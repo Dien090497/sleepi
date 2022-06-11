@@ -12,6 +12,7 @@ class Imgs {
   static const String borderBed = 'assets/images/borderBed.png';
   static const String borderClock = 'assets/images/border_clock.png';
   static const String connectBorder = 'assets/images/connect_border.png';
+  static const String doubleIcon = 'assets/images/double_icon.png';
   static const String efficiency = 'assets/images/efficiency.png';
   static const String emptyBedBox = 'assets/images/empty_bed_box.png';
   static const String errorNoBed = 'assets/images/error_no_bed.png';
@@ -69,6 +70,7 @@ class Imgs {
     borderBed,
     borderClock,
     connectBorder,
+    doubleIcon,
     efficiency,
     emptyBedBox,
     errorNoBed,
