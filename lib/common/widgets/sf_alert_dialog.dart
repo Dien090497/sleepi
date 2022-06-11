@@ -63,18 +63,20 @@ class SFAlertDialog extends StatelessWidget {
             height: height,
             width: width ?? sizeWidth * 0.95,
             padding: padding ?? const EdgeInsets.all(8),
-            child: Column(
-              children: [
-                showClose ? Align(
-                    alignment: Alignment.topRight,
-                    child: GestureDetector(
-                        onTap: () => Navigator.maybePop(context),
-                        child: const Icon(
-                          Icons.close,
-                          color: AppColors.lightGrey,
-                        ))) : const SizedBox(),
-                children!,
-              ],
+            child: SingleChildScrollView(
+              child: Column(
+                children: [
+                  showClose ? Align(
+                      alignment: Alignment.topRight,
+                      child: GestureDetector(
+                          onTap: () => Navigator.maybePop(context),
+                          child: const Icon(
+                            Icons.close,
+                            color: AppColors.lightGrey,
+                          ))) : const SizedBox(),
+                  children!,
+                ],
+              ),
             )),
       ),
     );
