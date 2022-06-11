@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:slee_fi/common/extensions/string_x.dart';
 import 'package:slee_fi/common/routes/app_routes.dart';
@@ -45,6 +46,7 @@ class GeneralWidget extends StatelessWidget {
               divider,
               SFListTile(
                 text: LocaleKeys.activation_code
+                    .tr()
                     .reCase(StringCase.titleCase),
                 trailing: icon,
                 onPressed: () => Navigator.pushNamed(context, R.activationCode),

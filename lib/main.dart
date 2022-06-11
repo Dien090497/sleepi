@@ -2,6 +2,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_phoenix/flutter_phoenix.dart';
 import 'package:logger/logger.dart';
 import 'package:slee_fi/app.dart';
 import 'package:slee_fi/common/const/const.dart';
@@ -18,11 +19,13 @@ void main() async {
   SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp])
       .then((_) {
     BlocOverrides.runZoned(
-      () => runApp(EasyLocalization(
-        supportedLocales: Const.locales,
-        path: 'assets/translations',
-        fallbackLocale: Const.localeEN,
-        child: const MyApp(),
+      () => runApp(Phoenix(
+        child: EasyLocalization(
+          supportedLocales: Const.locales,
+          path: 'assets/translations',
+          fallbackLocale: Const.localeEN,
+          child: const MyApp(),
+        ),
       )),
       blocObserver: AppBlocObserver(),
     );

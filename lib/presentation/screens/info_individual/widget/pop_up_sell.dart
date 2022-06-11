@@ -248,7 +248,7 @@ class _InputPrice extends StatelessWidget {
           ),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 12),
-            child: SFText(keyText: 'SLFT', style: TextStyles.blue14W700),
+            child: SFText(keyText: 'AVAX', style: TextStyles.blue14W700),
           ),
         ],
       ),
@@ -278,7 +278,7 @@ class _Detail extends StatelessWidget {
               Expanded(
                 child: SFText(
                     keyText: LocaleKeys.level,
-                    args: const {'num': ''},
+                    namedArgs: const {'num': ''},
                     style: TextStyles.lightGrey14),
               ),
             ],
@@ -294,7 +294,7 @@ class _Detail extends StatelessWidget {
               Expanded(
                 child: SFText(
                     keyText: '9',
-                    args: const {'num': ''},
+                    namedArgs: const {'num': ''},
                     style: TextStyles.lightWhite16W700),
               ),
             ],

@@ -17,7 +17,7 @@ class MyApp extends StatelessWidget {
       ],
       child: ScreenUtilInit(
         designSize: const Size(375, 812),
-        builder: (context, child) {
+        builder: (_, child) {
           return MaterialApp(
             title: 'SleeFi',
             home: child,
