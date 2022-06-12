@@ -367,5 +367,6 @@
   "matching_jewels": "Matching Jewels",
   "no_transaction_record": "No transaction record",
   "do_you_want_to_leave": "Do you want to leave?",
-  "ok": "OK"
+  "ok": "OK",
+   "you_have_only_just_started": "You've only just started - are you sure you want to give up."
 }

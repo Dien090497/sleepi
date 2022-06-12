@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:slee_fi/common/routes/app_routes.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
 import 'package:slee_fi/common/widgets/background_widget.dart';
+import 'package:slee_fi/common/widgets/sf_alert_dialog.dart';
 import 'package:slee_fi/common/widgets/sf_app_bar.dart';
 import 'package:slee_fi/common/widgets/sf_buttons.dart';
 import 'package:slee_fi/common/widgets/sf_icon.dart';
@@ -10,6 +10,7 @@ import 'package:slee_fi/common/widgets/sf_label_value.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
 import 'package:slee_fi/l10n/locale_keys.g.dart';
 import 'package:slee_fi/presentation/screens/tracking/widgets/analog_clock.dart';
+import 'package:slee_fi/presentation/screens/tracking/widgets/pop_up_confirm_wake_up.dart';
 import 'package:slee_fi/resources/resources.dart';
 
 class TrackingScreen extends StatefulWidget {
@@ -103,7 +104,11 @@ class _TrackingScreenState extends State<TrackingScreen> {
               color: AppColors.blue,
               textStyle: TextStyles.w600WhiteSize16,
               onPressed: () {
-                Navigator.pushNamed(context, R.result);
+                showCustomAlertDialog(
+                  context,
+                  padding: const EdgeInsets.all(24),
+                  children: const PopUpConfirmWakeUp(),
+                );
               },
             ),
             const SizedBox(height: 26),

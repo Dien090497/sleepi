@@ -362,5 +362,6 @@
   "no_transaction_record": "取引履歴はありません。",
   "amount_earned": "獲得トークン量",
   "do_you_want_to_leave": "帰りたい？",
-  "ok": "わかった"
+  "ok": "わかった",
+  "you_have_only_just_started": "You've only just started - are you sure you want to give up."
 }

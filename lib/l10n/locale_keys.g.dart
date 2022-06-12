@@ -370,5 +370,6 @@ abstract class  LocaleKeys {
   static const no_transaction_record = 'no_transaction_record';
   static const do_you_want_to_leave = 'do_you_want_to_leave';
   static const ok = 'ok';
+  static const you_have_only_just_started = 'you_have_only_just_started';
 
 }
