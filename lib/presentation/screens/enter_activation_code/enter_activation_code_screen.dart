@@ -8,6 +8,7 @@ import 'package:slee_fi/common/widgets/background_widget.dart';
 import 'package:slee_fi/common/widgets/dismiss_keyboard_widget.dart';
 import 'package:slee_fi/common/widgets/sf_app_bar.dart';
 import 'package:slee_fi/common/widgets/sf_buttons.dart';
+import 'package:slee_fi/common/widgets/sf_dialog.dart';
 import 'package:slee_fi/common/widgets/sf_dropdown_rotation.dart';
 import 'package:slee_fi/common/widgets/sf_logo.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
@@ -16,15 +17,9 @@ import 'package:slee_fi/l10n/locale_keys.g.dart';
 import 'package:slee_fi/presentation/screens/login_signup/widgets/login_box.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-class EnterActivationCodeScreen extends StatefulWidget {
+class EnterActivationCodeScreen extends StatelessWidget {
   const EnterActivationCodeScreen({Key? key}) : super(key: key);
 
-  @override
-  State<EnterActivationCodeScreen> createState() =>
-      _EnterActivationCodeScreenState();
-}
-
-class _EnterActivationCodeScreenState extends State<EnterActivationCodeScreen> {
   @override
   Widget build(BuildContext context) {
     return DismissKeyboardWidget(
@@ -71,7 +66,11 @@ class _EnterActivationCodeScreenState extends State<EnterActivationCodeScreen> {
                             (i) => Const.locales[i].displayName,
                           ),
                           onChange: (int value, int index) {
-                            context.setLocale(Const.locales[index]);
+                            final locale = Const.locales[index];
+                            if (locale.languageCode !=
+                                context.locale.languageCode) {
+                              showChangeLanguageDialog(context, locale: locale);
+                            }
                           },
                         )),
                     const SizedBox(height: 20),

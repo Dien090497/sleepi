@@ -88,11 +88,10 @@ class AppColors {
 
   static final backgroundDialog = const Color(0xFF060616).withOpacity(0.9);
 
-  static LinearGradient gradientBlue = LinearGradient(colors: [
-    const Color(0xFFC4C4C4).withOpacity(0),
-    const Color(0xFF18A0FB).withOpacity(0.01),
-    const Color(0xFF426BFF)
-  ], begin: Alignment.topCenter, end: Alignment.bottomCenter);
+  static LinearGradient gradientBlue = const LinearGradient(
+      colors: [blue, Color(0xFF426BFF)],
+      begin: Alignment.topCenter,
+      end: Alignment.bottomCenter);
 
   static const gradientBlueAccent = LinearGradient(
       colors: [Color(0xFF62519F), Color(0xFF396CBB), Color(0xFF549CBF)],
