@@ -39,37 +39,51 @@ class TabWalletDetail extends StatelessWidget {
                 color: AppColors.lightWhite.withOpacity(0.05),
               ),
               child: SFText(
-                  keyText: "0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2",
+                  keyText: "0xC02aa...C756Cc2",
                   style: TextStyles.lightWhite14),
             ),
             const SizedBox(height: 16.0),
             ConstrainedBox(
-              constraints: const BoxConstraints(maxHeight: 116),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  BoxButtonWidget(
-                    onTap: () => SFModalBottomSheet.show(
-                        context, 0.7, const ModalReceiveWallet()),
-                    text: LocaleKeys.receive,
-                    assetImage: Ics.icDownload,
-                  ),
-                  BoxButtonWidget(
-                    onTap: () => Navigator.pushNamed(context, R.transfer),
-                    text: LocaleKeys.to_spending,
-                    assetImage: Ics.icRefresh,
-                  ),
-                  BoxButtonWidget(
-                    onTap: () => Navigator.pushNamed(context, R.sendToExternal),
-                    text: LocaleKeys.to_external,
-                    assetImage: Ics.icArrowUpRight,
-                  ),
-                  BoxButtonWidget(
-                    onTap: () => Navigator.pushNamed(context, R.trade),
-                    text: LocaleKeys.trade.tr().reCase(StringCase.titleCase),
-                    assetImage: Ics.icTransfer,
-                  ),
-                ],
+              constraints: const BoxConstraints(maxHeight: 130),
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 23),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    Expanded(
+                      child: BoxButtonWidget(
+                        onTap: () => SFModalBottomSheet.show(
+                            context, 0.7, const ModalReceiveWallet()),
+                        text: LocaleKeys.receive,
+                        assetImage: Ics.icDownload,
+                      ),
+                    ),
+                    const SizedBox(width: 10,),
+                    Expanded(
+                      child: BoxButtonWidget(
+                        onTap: () => Navigator.pushNamed(context, R.transfer),
+                        text: LocaleKeys.to_spending,
+                        assetImage: Ics.icRefresh,
+                      ),
+                    ),
+                    const SizedBox(width: 10,),
+                    Expanded(
+                      child: BoxButtonWidget(
+                        onTap: () => Navigator.pushNamed(context, R.sendToExternal),
+                        text: LocaleKeys.to_external,
+                        assetImage: Ics.icArrowUpRight,
+                      ),
+                    ),
+                    const SizedBox(width: 10,),
+                    Expanded(
+                      child: BoxButtonWidget(
+                        onTap: () => Navigator.pushNamed(context, R.trade),
+                        text: LocaleKeys.trade.tr().reCase(StringCase.titleCase),
+                        assetImage: Ics.icTransfer,
+                      ),
+                    ),
+                  ],
+                ),
               ),
             ),
             const SizedBox(

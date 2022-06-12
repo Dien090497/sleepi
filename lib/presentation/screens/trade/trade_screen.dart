@@ -110,12 +110,15 @@ class _TradeScreenState extends State<TradeScreen> {
                                     alignment: Alignment.center,
                                     child: FittedBox(
                                       fit: BoxFit.fitWidth,
-                                      child: SFButtonOutLined(
-                                          fixedSize: const Size(34, 21),
-                                          title: LocaleKeys.max,
-                                          textStyle: TextStyles.bold14Blue,
-                                          borderColor: AppColors.blue,
-                                          onPressed: () {}),
+                                      child: SizedBox(
+                                        width: 80,
+                                        child: SFButtonOutLined(
+                                            fixedSize: const Size(34, 21),
+                                            title: LocaleKeys.max,
+                                            textStyle: TextStyles.bold14Blue,
+                                            borderColor: AppColors.blue,
+                                            onPressed: () {}),
+                                      ),
                                     ),
                                   ),
                                 ),
