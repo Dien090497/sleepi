@@ -50,7 +50,7 @@ class SleepScore extends StatelessWidget {
           divider,
           const ChartTitle(
             title: LocaleKeys.sleep_score,
-            result: "85,6%",
+            result: "85.6%",
           ),
         ],
       ),

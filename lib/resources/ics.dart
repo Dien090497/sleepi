@@ -6,6 +6,7 @@ class Ics {
   static const String addBed = 'assets/icons/add_bed.svg';
   static const String arrowLeft = 'assets/icons/arrow_left.svg';
   static const String bed3d = 'assets/icons/bed_3d.svg';
+  static const String bonus = 'assets/icons/bonus.svg';
   static const String chart = 'assets/icons/chart.svg';
   static const String commingSoon = 'assets/icons/comming_soon.svg';
   static const String efficiency = 'assets/icons/efficiency.svg';
@@ -37,6 +38,7 @@ class Ics {
   static const String icEye = 'assets/icons/ic_eye.svg';
   static const String icGacha = 'assets/icons/ic_gacha.svg';
   static const String icHomeNew = 'assets/icons/ic_home_new.svg';
+  static const String icItemsEmpty = 'assets/icons/ic_items_empty.svg';
   static const String icJewels = 'assets/icons/ic_jewels.svg';
   static const String icLock = 'assets/icons/ic_lock.svg';
   static const String icMarketNew = 'assets/icons/ic_market_new.svg';
@@ -62,8 +64,10 @@ class Ics {
   static const String lock = 'assets/icons/lock.svg';
   static const String recycling = 'assets/icons/recycling.svg';
   static const String repair = 'assets/icons/repair.svg';
+  static const String resilience = 'assets/icons/resilience.svg';
   static const String shopping = 'assets/icons/shopping.svg';
   static const String signOut = 'assets/icons/sign_out.svg';
+  static const String special = 'assets/icons/special.svg';
   static const String star = 'assets/icons/star.svg';
   static const String starOutlined = 'assets/icons/star_outlined.svg';
   static const String successful = 'assets/icons/successful.svg';
@@ -76,6 +80,7 @@ class Ics {
     addBed,
     arrowLeft,
     bed3d,
+    bonus,
     chart,
     commingSoon,
     efficiency,
@@ -106,6 +111,7 @@ class Ics {
     icEye,
     icGacha,
     icHomeNew,
+    icItemsEmpty,
     icJewels,
     icLock,
     icMarketNew,
@@ -131,8 +137,10 @@ class Ics {
     lock,
     recycling,
     repair,
+    resilience,
     shopping,
     signOut,
+    special,
     star,
     starOutlined,
     successful,

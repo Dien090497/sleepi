@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:slee_fi/common/extensions/string_x.dart';
 import 'package:slee_fi/common/routes/app_routes.dart';
@@ -110,18 +111,16 @@ class TransactionDetail extends StatelessWidget {
                               Navigator.pushNamed(context, R.sendToExternal),
                           text: LocaleKeys.to_external,
                           assetImage: Ics.icArrowUpRight,
+                        ),),
+                        const SizedBox(width: 10,),
+                        Expanded(
+                          child: BoxButtonWidget(
+                            onTap: () => Navigator.pushNamed(context, R.trade),
+                            text: LocaleKeys.trade.tr().reCase(StringCase.titleCase),
+                            assetImage: Ics.icTransfer,
+
+                          ),
                         ),
-                      ),
-                      const SizedBox(
-                        width: 10,
-                      ),
-                      Expanded(
-                        child: BoxButtonWidget(
-                          onTap: () => Navigator.pushNamed(context, R.trade),
-                          text: LocaleKeys.trade.reCase(StringCase.titleCase),
-                          assetImage: Ics.icTransfer,
-                        ),
-                      ),
                     ],
                   ),
                 ),

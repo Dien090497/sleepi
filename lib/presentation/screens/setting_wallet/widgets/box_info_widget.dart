@@ -31,6 +31,7 @@ class BoxInfoWidget extends StatelessWidget {
         padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 12.0),
         height: 141,
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             SFListTile(
               leading: SFIcon(urlIcon!, color: AppColors.blue,),
@@ -51,6 +52,7 @@ class BoxInfoWidget extends StatelessWidget {
             SFText(
               keyText: info ?? "",
               style: TextStyles.lightGrey14,
+              textAlign: TextAlign.left,
             ),
           ],
         ),
