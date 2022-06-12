@@ -62,15 +62,17 @@ class _MiddleBedState extends State<MiddleBed> {
                         color: AppColors.lightGrey,
                       ),
                     ),
-                    GestureDetector(
-                      onTap: () {
-                        Navigator.pushNamed(context, R.nftInfo,
-                            arguments: false);
-                      },
-                      child: SFIcon(
-                        beds[i].image,
-                        height: 180,
-                        fit: BoxFit.fitHeight,
+                    Expanded(
+                      child: GestureDetector(
+                        onTap: () {
+                          Navigator.pushNamed(context, R.nftInfo,
+                              arguments: false);
+                        },
+                        child: SFIcon(
+                          beds[i].image,
+                          height: 180,
+                          fit: BoxFit.fitHeight,
+                        ),
                       ),
                     ),
                     InkWell(
