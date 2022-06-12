@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:slee_fi/common/routes/app_routes.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
@@ -34,7 +35,8 @@ class _BottomBarWidgetState extends State<BottomBarWidget> {
           children: [
             SFIcon(
               icon,
-              color: index == i ? AppColors.blue : AppColors.greyBottomIndividual,
+              color:
+                  index == i ? AppColors.blue : AppColors.greyBottomIndividual,
             ),
             const SizedBox(
               height: 6,
@@ -65,6 +67,7 @@ class _BottomBarWidgetState extends State<BottomBarWidget> {
               ))),
           height: 80,
           width: MediaQuery.of(context).size.width,
+          padding: EdgeInsets.symmetric(horizontal: 8.w),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -119,9 +122,10 @@ class _BottomBarWidgetState extends State<BottomBarWidget> {
                 setState(() {
                   index = 2;
                 });
-                Navigator.pushNamed(context, R.mint).then((value) => setState(() {
-                      index = -1;
-                    }));
+                Navigator.pushNamed(context, R.mint)
+                    .then((value) => setState(() {
+                          index = -1;
+                        }));
               }),
               itemBottomBar(3, context, Ics.shopping, LocaleKeys.sell, () {
                 setState(() {
@@ -134,7 +138,8 @@ class _BottomBarWidgetState extends State<BottomBarWidget> {
                     icon: Imgs.shortBed,
                     level: 2,
                     onCancel: () {},
-                    onConfirm: () {}, className: LocaleKeys.middle,
+                    onConfirm: () {},
+                    className: LocaleKeys.middle,
                   ),
                 ]).then((value) => setState(() {
                       setState(() {

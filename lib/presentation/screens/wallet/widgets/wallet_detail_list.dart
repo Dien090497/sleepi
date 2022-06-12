@@ -42,41 +42,44 @@ class WalletDetailList extends StatelessWidget {
       ),
       width: double.infinity,
       padding: const EdgeInsets.only(top: 20),
-      child: ListView.builder(
-          itemCount: keyList.length,
-          physics: const ClampingScrollPhysics(),
-          shrinkWrap: true,
-          padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 12.0),
-          itemBuilder: (BuildContext context, int index) {
-            return SFCard(
-              onTap: () {
-                if (index < 3) {
-                  Navigator.pushNamed(context, R.transactionDetail,
-                      arguments: TransactionDetailArguments(
-                        keyList[index],
-                        icons[index],
-                      ));
-                }
-              },
-              child: ListTile(
-                leading: Padding(
-                  padding:
-                      EdgeInsets.only(left: icons[index] == Ics.icAvax ? 4 : 0),
-                  child: SFIcon(
-                    icons[index],
-                    width: icons[index] == Ics.icAvax ? 32 : 40,
-                    height: icons[index] == Ics.icAvax ? 32 : 40,
+      child: SafeArea(
+        top: false,
+        child: ListView.builder(
+            itemCount: keyList.length,
+            physics: const ClampingScrollPhysics(),
+            shrinkWrap: true,
+            padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 12.0),
+            itemBuilder: (BuildContext context, int index) {
+              return SFCard(
+                onTap: () {
+                  if (index < 3) {
+                    Navigator.pushNamed(context, R.transactionDetail,
+                        arguments: TransactionDetailArguments(
+                          keyList[index],
+                          icons[index],
+                        ));
+                  }
+                },
+                child: ListTile(
+                  leading: Padding(
+                    padding:
+                        EdgeInsets.only(left: icons[index] == Ics.icAvax ? 4 : 0),
+                    child: SFIcon(
+                      icons[index],
+                      width: icons[index] == Ics.icAvax ? 32 : 40,
+                      height: icons[index] == Ics.icAvax ? 32 : 40,
+                    ),
+                  ),
+                  title: SFText(
+                      keyText: keyList[index], style: TextStyles.lightWhite16),
+                  trailing: SFText(
+                    keyText: "xxxxxxxxx",
+                    style: TextStyles.lightWhite16,
                   ),
                 ),
-                title: SFText(
-                    keyText: keyList[index], style: TextStyles.lightWhite16),
-                trailing: SFText(
-                  keyText: "xxxxxxxxx",
-                  style: TextStyles.lightWhite16,
-                ),
-              ),
-            );
-          }),
+              );
+            }),
+      ),
     );
   }
 }

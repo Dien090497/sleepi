@@ -18,7 +18,6 @@ class Imgs {
   static const String connectBorder = 'assets/images/connect_border.png';
   static const String doubleIcon = 'assets/images/double_icon.png';
   static const String efficiency = 'assets/images/efficiency.png';
-  static const String emptyBedBox = 'assets/images/empty_bed_box.png';
   static const String errorNoBed = 'assets/images/error_no_bed.png';
   static const String flexibleBed = 'assets/images/flexible_bed.png';
   static const String gacha = 'assets/images/gacha.png';
@@ -80,7 +79,6 @@ class Imgs {
     connectBorder,
     doubleIcon,
     efficiency,
-    emptyBedBox,
     errorNoBed,
     flexibleBed,
     gacha,

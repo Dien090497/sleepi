@@ -29,6 +29,7 @@ class TransactionDetail extends StatelessWidget {
   Widget build(BuildContext context) {
     final args = ModalRoute.of(context)?.settings.arguments
         as TransactionDetailArguments?;
+
     return BackgroundWidget(
         appBar: AppBar(
             toolbarHeight: 80,
@@ -57,73 +58,77 @@ class TransactionDetail extends StatelessWidget {
               style: TextStyles.bold14Blue,
               stringCase: StringCase.upperCase,
             )),
-        child: SafeArea(
-          child: SingleChildScrollView(
-            physics: const ClampingScrollPhysics(),
-            child: Column(
-              children: [
-                args != null
-                    ? SFIcon(
-                        args.img,
-                        width: args.img == Ics.icAvax ? 32 : 40,
-                        height: args.img == Ics.icAvax ? 32 : 40,
-                      )
-                    : const SizedBox(),
-                const SizedBox(height: 16.0),
-                SFText(
-                    keyText: "0.543 ${args != null ? args.title : 'AVAX'}",
-                    style: TextStyles.bold30White,
-                    stringCase: StringCase.upperCase),
-                const SizedBox(height: 36.0),
-                ConstrainedBox(
-                  constraints: const BoxConstraints(maxHeight: 130),
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 23),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                        Expanded(
-                          child: BoxButtonWidget(
-                            onTap: () => SFModalBottomSheet.show(
-                                context, 0.7, const ModalReceiveWallet()),
-                            text: LocaleKeys.receive,
-                            assetImage: Ics.icDownload,
-                          ),
+        child: SingleChildScrollView(
+          physics: const ClampingScrollPhysics(),
+          child: Column(
+            children: [
+              args != null
+                  ? SFIcon(
+                      args.img,
+                      width: args.img == Ics.icAvax ? 32 : 40,
+                      height: args.img == Ics.icAvax ? 32 : 40,
+                    )
+                  : const SizedBox(),
+              const SizedBox(height: 16.0),
+              SFText(
+                  keyText: "0.543 ${args != null ? args.title : 'AVAX'}",
+                  style: TextStyles.bold30White,
+                  stringCase: StringCase.upperCase),
+              const SizedBox(height: 36.0),
+              ConstrainedBox(
+                constraints: const BoxConstraints(maxHeight: 130),
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 23),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      Expanded(
+                        child: BoxButtonWidget(
+                          onTap: () => SFModalBottomSheet.show(
+                              context, 0.7, const ModalReceiveWallet()),
+                          text: LocaleKeys.receive,
+                          assetImage: Ics.icDownload,
                         ),
-                        const SizedBox(width: 10,),
-                        Expanded(
-                          child: BoxButtonWidget(
-                            onTap: () => Navigator.pushNamed(context, R.transfer),
-                            text: LocaleKeys.to_spending,
-                            assetImage: Ics.icRefresh,
-                          ),
+                      ),
+                      const SizedBox(
+                        width: 10,
+                      ),
+                      Expanded(
+                        child: BoxButtonWidget(
+                          onTap: () =>
+                              Navigator.pushNamed(context, R.transfer),
+                          text: LocaleKeys.to_spending,
+                          assetImage: Ics.icRefresh,
                         ),
-                        const SizedBox(width: 10,),
-                        Expanded(
-                          child: BoxButtonWidget(
-                            onTap: () =>
-                                Navigator.pushNamed(context, R.sendToExternal),
-                            text: LocaleKeys.to_external,
-                            assetImage: Ics.icArrowUpRight,
-                          ),
+                      ),
+                      const SizedBox(
+                        width: 10,
+                      ),
+                      Expanded(
+                        child: BoxButtonWidget(
+                          onTap: () =>
+                              Navigator.pushNamed(context, R.sendToExternal),
+                          text: LocaleKeys.to_external,
+                          assetImage: Ics.icArrowUpRight,
                         ),
-                        const SizedBox(width: 10,),
-                        Expanded(
-                          child: BoxButtonWidget(
-                            onTap: () => Navigator.pushNamed(context, R.trade),
-                            text: LocaleKeys.trade.reCase(StringCase.titleCase),
-                            assetImage: Ics.icTransfer,
-
-                          ),
+                      ),
+                      const SizedBox(
+                        width: 10,
+                      ),
+                      Expanded(
+                        child: BoxButtonWidget(
+                          onTap: () => Navigator.pushNamed(context, R.trade),
+                          text: LocaleKeys.trade.reCase(StringCase.titleCase),
+                          assetImage: Ics.icTransfer,
                         ),
-                      ],
-                    ),
+                      ),
+                    ],
                   ),
                 ),
-                const SizedBox(height: 32.0),
-                const TransactionDetailList()
-              ],
-            ),
+              ),
+              const SizedBox(height: 32.0),
+              const TransactionDetailList()
+            ],
           ),
         ));
   }

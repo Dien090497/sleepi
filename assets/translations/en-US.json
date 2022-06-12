@@ -359,7 +359,10 @@
   "legendary": "Legendary",
   "short": "Short",
   "long": "Long",
+  "jewel": "Jewel",
   "withdraw_token": "Withdraw {}",
   "deposit_token": "Deposit {}",
-  "matching_jewels": "Matching Jewels"
+  "luck_jewel": "Luck Jewel",
+  "matching_jewels": "Matching Jewels",
+  "no_transaction_record": "No transaction record"
 }

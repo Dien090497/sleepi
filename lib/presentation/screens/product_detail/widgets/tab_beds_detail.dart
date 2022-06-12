@@ -56,7 +56,7 @@ class TabBedsDetail extends StatelessWidget {
                     child: Column(
                       mainAxisSize: MainAxisSize.min,
                       children: [
-                        const Image(image: AssetImage(Imgs.emptyBedBox)),
+                        const Image(image: AssetImage(Ics.emptyBox)),
                         const SizedBox(height: 28),
                         SFText(
                           keyText: LocaleKeys.there_is_no_item,
