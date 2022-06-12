@@ -267,13 +267,16 @@ abstract class  LocaleKeys {
   static const to_address = 'to_address';
   static const amount = 'amount';
   static const balance = 'balance';
-  static const the_network_you_have_selected_is = 'the_network_you_have_selected_is';
-  static const please_ensure_that_the_withdrawal_address = 'please_ensure_that_the_withdrawal_address';
+  static const the_network_you_have_selected_1 = 'the_network_you_have_selected_1';
+  static const the_network_you_have_selected_2 = 'the_network_you_have_selected_2';
+  static const the_network_you_have_selected_3 = 'the_network_you_have_selected_3';
+  static const the_network_you_have_selected_4 = 'the_network_you_have_selected_4';
+  static const the_network_you_have_selected_5 = 'the_network_you_have_selected_5';
+  static const the_network_you_have_selected_6 = 'the_network_you_have_selected_6';
+  static const the_network_you_have_selected_7 = 'the_network_you_have_selected_7';
   static const network = 'network';
   static const send = 'send';
-  static const you_will_lose_your_assets = 'you_will_lose_your_assets';
   static const clear_filter = 'clear_filter';
-  static const if_the_chosen_platform_does_not_support = 'if_the_chosen_platform_does_not_support';
   static const verification_code = 'verification_code';
   static const change_password = 'change_password';
   static const new_password = 'new_password';
@@ -358,5 +361,7 @@ abstract class  LocaleKeys {
   static const legendary = 'legendary';
   static const short = 'short';
   static const long = 'long';
+  static const withdraw_token = 'withdraw_token';
+  static const deposit_token = 'deposit_token';
 
 }

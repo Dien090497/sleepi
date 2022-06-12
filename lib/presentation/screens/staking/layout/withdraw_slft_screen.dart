@@ -26,7 +26,7 @@ class WithdrawSlftScreen extends StatelessWidget {
         resizeToAvoidBottomInset: false,
         appBar: SFAppBar(
           context: context,
-          title: "${LocaleKeys.withdraw.tr()} SLFT",
+          title: LocaleKeys.withdraw_token.tr(args: ['SLFT']),
           textStyle: TextStyles.bold18LightWhite,
         ),
         child: SafeArea(

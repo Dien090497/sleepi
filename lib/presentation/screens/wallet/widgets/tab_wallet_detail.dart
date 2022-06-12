@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:slee_fi/common/const/const.dart';
 import 'package:slee_fi/common/extensions/string_x.dart';
@@ -20,7 +21,7 @@ class TabWalletDetail extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea( 
+    return SafeArea(
       child: SingleChildScrollView(
         child: Column(
           children: [
@@ -38,6 +39,7 @@ class TabWalletDetail extends StatelessWidget {
             Container(
               padding:
                   const EdgeInsets.symmetric(vertical: 6.0, horizontal: 16.0),
+              margin: const EdgeInsets.symmetric(horizontal: 16),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(20.0),
                 color: AppColors.lightWhite.withOpacity(0.05),
@@ -46,34 +48,35 @@ class TabWalletDetail extends StatelessWidget {
                   keyText: "0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2",
                   style: TextStyles.lightWhite14),
             ),
-            const SizedBox(
-              height: 16.0,
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                BoxButtonWidget(
-                  onTap: () => SFModalBottomSheet.show(
-                      context, 0.7, const ModalReceiveWallet()),
-                  text: LocaleKeys.receive,
-                  assetImage: Ics.icDownload,
-                ),
-                BoxButtonWidget(
-                  onTap: () => Navigator.pushNamed(context, R.transfer),
-                  text: LocaleKeys.to_spending,
-                  assetImage: Ics.icRefresh,
-                ),
-                BoxButtonWidget(
-                  onTap: () => Navigator.pushNamed(context, R.sendToExternal),
-                  text: LocaleKeys.to_external,
-                  assetImage: Ics.icArrowUpRight,
-                ),
-                BoxButtonWidget(
-                  onTap: () => Navigator.pushNamed(context, R.trade),
-                  text: LocaleKeys.trade.reCase(StringCase.titleCase),
-                  assetImage: Ics.icTransfer,
-                ),
-              ],
+            const SizedBox(height: 16.0),
+            ConstrainedBox(
+              constraints: const BoxConstraints(maxHeight: 116),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  BoxButtonWidget(
+                    onTap: () => SFModalBottomSheet.show(
+                        context, 0.7, const ModalReceiveWallet()),
+                    text: LocaleKeys.receive,
+                    assetImage: Ics.icDownload,
+                  ),
+                  BoxButtonWidget(
+                    onTap: () => Navigator.pushNamed(context, R.transfer),
+                    text: LocaleKeys.to_spending,
+                    assetImage: Ics.icRefresh,
+                  ),
+                  BoxButtonWidget(
+                    onTap: () => Navigator.pushNamed(context, R.sendToExternal),
+                    text: LocaleKeys.to_external,
+                    assetImage: Ics.icArrowUpRight,
+                  ),
+                  BoxButtonWidget(
+                    onTap: () => Navigator.pushNamed(context, R.trade),
+                    text: LocaleKeys.trade.tr().reCase(StringCase.titleCase),
+                    assetImage: Ics.icTransfer,
+                  ),
+                ],
+              ),
             ),
             const SizedBox(
               height: 20.0,
@@ -88,11 +91,11 @@ class TabWalletDetail extends StatelessWidget {
                       onPressed: () async {
                         final url = Uri.parse(Const.binanceUrl);
                         if (await canLaunchUrl(url)) {
-                        launchUrl(url);
+                          launchUrl(url);
                         }
                       },
                       style: ElevatedButton.styleFrom(
-                        padding: const EdgeInsets.fromLTRB(12, 8, 16,8),
+                        padding: const EdgeInsets.fromLTRB(12, 8, 16, 8),
                         primary: AppColors.yellow.withOpacity(0.1),
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(100.0),
@@ -100,7 +103,10 @@ class TabWalletDetail extends StatelessWidget {
                       ),
                       child: Row(
                         children: [
-                          const SFIcon(Imgs.binance, width: 24,),
+                          const SFIcon(
+                            Imgs.binance,
+                            width: 24,
+                          ),
                           const SizedBox(
                             width: 8.0,
                           ),
@@ -122,5 +128,4 @@ class TabWalletDetail extends StatelessWidget {
       ),
     );
   }
-
 }

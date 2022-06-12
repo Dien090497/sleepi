@@ -1,8 +1,10 @@
 import 'package:cool_dropdown/cool_dropdown.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
 import 'package:slee_fi/common/widgets/sf_icon.dart';
+import 'package:slee_fi/l10n/locale_keys.g.dart';
 import 'package:slee_fi/resources/resources.dart';
 
 class DropdownSelectToken extends StatefulWidget {
@@ -40,7 +42,11 @@ class _DropdownSelectTokenState extends State<DropdownSelectToken> {
     "AVAX",
     "SLFT",
     "SLGT",
-    "USDC"
+    "USDC",
+    LocaleKeys.bed.tr(),
+    LocaleKeys.bed_box.tr(),
+    LocaleKeys.item.tr(),
+    LocaleKeys.jewels.tr(),
   ];
 
   List<String> iconsToken = [
@@ -48,6 +54,10 @@ class _DropdownSelectTokenState extends State<DropdownSelectToken> {
     Ics.icSlft,
     Ics.icSlgt,
     Ics.icUsdc,
+    Imgs.flexibleBed,
+    Ics.icBedBoxes,
+    Imgs.icItems,
+    Imgs.jewelGreen,
   ];
 
   @override
@@ -84,17 +94,19 @@ class _DropdownSelectTokenState extends State<DropdownSelectToken> {
             child: Padding(
               padding: EdgeInsets.only(
                   left:
-                  iconsToken[i] == Ics.icSlft || iconsToken[i] == Ics.icSlgt
-                      ? 0
-                      : 4),
+                      iconsToken[i] == Ics.icSlft || iconsToken[i] == Ics.icSlgt
+                          ? 0
+                          : 4),
               child: SFIcon(
                 iconsToken[i],
-                width: iconsToken[i] == Ics.icSlft || iconsToken[i] == Ics.icSlgt
-                    ? 32
-                    : 24,
-                height: iconsToken[i] == Ics.icSlft || iconsToken[i] == Ics.icSlgt
-                    ? 32
-                    : 24,
+                width:
+                    iconsToken[i] == Ics.icSlft || iconsToken[i] == Ics.icSlgt
+                        ? 32
+                        : 24,
+                height:
+                    iconsToken[i] == Ics.icSlft || iconsToken[i] == Ics.icSlgt
+                        ? 32
+                        : 24,
                 // color: Color(0xFF6FCC76),
               ),
             ),
