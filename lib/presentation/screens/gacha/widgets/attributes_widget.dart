@@ -21,23 +21,23 @@ class AttributesWidget extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           ItemAttribute(
-              linkImage: Imgs.efficiency,
+              linkImage: Ics.efficiency,
               title: LocaleKeys.efficiency.tr(),
               valueActive: 10),
           ItemAttribute(
-              linkImage: Imgs.luck,
+              linkImage: Ics.gift,
               title: LocaleKeys.luck.tr(),
               valueActive: 2.5),
           ItemAttribute(
-              linkImage: Imgs.bonus,
+              linkImage: Ics.bonus,
               title: LocaleKeys.bonus.tr(),
               valueActive: 8.2),
           ItemAttribute(
-              linkImage: Imgs.special,
+              linkImage: Ics.special,
               title: LocaleKeys.special.tr(),
               valueActive: 5.3),
           ItemAttribute(
-              linkImage: Imgs.resilience,
+              linkImage: Ics.resilience,
               title: LocaleKeys.resilience.tr(),
               valueActive: 6.2),
         ],
