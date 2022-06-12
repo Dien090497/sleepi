@@ -354,5 +354,6 @@
   "epic": "エピック",
   "legendary": "レジェンダリー",
   "withdraw_token": "{}の引出し",
-  "deposit_token": "{}の預入"
+  "deposit_token": "{}の預入",
+  "matching_jewels": "Matching Jewels"
 }

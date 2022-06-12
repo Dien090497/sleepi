@@ -8,6 +8,7 @@ import 'package:slee_fi/common/utils/launch_url_utils.dart';
 import 'package:slee_fi/common/widgets/background_widget.dart';
 import 'package:slee_fi/common/widgets/sf_app_bar.dart';
 import 'package:slee_fi/common/widgets/sf_buttons.dart';
+import 'package:slee_fi/common/widgets/sf_dialog.dart';
 import 'package:slee_fi/common/widgets/sf_icon.dart';
 import 'package:slee_fi/common/widgets/sf_label_value.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
@@ -229,6 +230,9 @@ class _MintScreenState extends State<MintScreen> {
                               gradient: AppColors.gradientBlueButton,
                               textStyle: TextStyles.white16,
                               disabled: state.indexSelected == -1,
+                              onPressed: () {
+                                showSuccessfulDialog(context);
+                              },
                             ),
                           ),
                         ),
