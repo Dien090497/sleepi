@@ -46,10 +46,14 @@ class PopUpBedsDetail extends StatelessWidget {
         Column(
           children: [
             SFText(
-              keyText: LocaleKeys.matching_bed,
+              keyText: LocaleKeys.matching_jewels,
               style: TextStyles.white1w700size16,
             ),
             SFIcon(icon, height: 160,),
+            /*Imgs.jewelSliver,
+            Imgs.jewelPurple,
+            Imgs.jewelGreen,
+            Imgs.jewelRed*/
             Row(
               children: [
                 Expanded(
@@ -60,7 +64,7 @@ class PopUpBedsDetail extends StatelessWidget {
                       color: AppColors.whiteOpacity5,
                       borderRadius: BorderRadius.circular(10),
                     ),
-                    child: const SFIcon(Imgs.shortBed),
+                    child: const SFIcon(Imgs.jewelSliver),
                   ),
                 ),
                 const SizedBox(
@@ -74,7 +78,7 @@ class PopUpBedsDetail extends StatelessWidget {
                       color: AppColors.whiteOpacity5,
                       borderRadius: BorderRadius.circular(10),
                     ),
-                    child: SFIcon(icon),
+                    child: const SFIcon(Imgs.jewelGreen),
                   ),
                 ),
                 const SizedBox(
@@ -88,7 +92,7 @@ class PopUpBedsDetail extends StatelessWidget {
                       color: AppColors.whiteOpacity5,
                       borderRadius: BorderRadius.circular(10),
                     ),
-                    child: const SFIcon(Imgs.flexibleBed),
+                    child: const SFIcon(Imgs.jewelPurple),
                   ),
                 ),
                 const SizedBox(
@@ -102,7 +106,7 @@ class PopUpBedsDetail extends StatelessWidget {
                       color: AppColors.whiteOpacity5,
                       borderRadius: BorderRadius.circular(10),
                     ),
-                    child: const SFIcon(Imgs.middleBed),
+                    child: const SFIcon(Imgs.jewelRed),
                   ),
                 )
               ],
@@ -113,13 +117,6 @@ class PopUpBedsDetail extends StatelessWidget {
             const SFLabelValue(
               label: "ID",
               value: LocaleKeys.level,
-              styleLabel: TextStyles.lightGrey16,
-              styleValue: TextStyles.lightWhite16,
-            ),
-            const SizedBox(height: 8),
-            const SFLabelValue(
-              label: LocaleKeys.close,
-              value: LocaleKeys.bed_mint,
               styleLabel: TextStyles.lightGrey16,
               styleValue: TextStyles.lightWhite16,
             ),
