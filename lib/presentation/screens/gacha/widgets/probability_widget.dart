@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:slee_fi/common/widgets/sf_alert_dialog.dart';
 import 'package:slee_fi/presentation/screens/gacha/widgets/probability_dialog.dart';
-import 'package:slee_fi/resources/resources.dart';
 
 class ProbabilityWidget extends StatelessWidget {
-  const ProbabilityWidget({Key? key}) : super(key: key);
+  const ProbabilityWidget({Key? key, required this.imagePath}) : super(key: key);
 
+  final String imagePath;
   @override
   Widget build(BuildContext context) {
     return ClipRRect(
@@ -18,7 +18,7 @@ class ProbabilityWidget extends StatelessWidget {
               width: MediaQuery.of(context).size.width * 0.9,
               children: const ProbabilityDialog());
         },
-        child: Image.asset(Imgs.bedroomGacha),
+        child: Image.asset(imagePath),
       ),
     );
   }

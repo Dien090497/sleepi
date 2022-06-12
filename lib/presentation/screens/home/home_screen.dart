@@ -1,6 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
@@ -62,52 +63,75 @@ class HomeScreen extends StatelessWidget {
                               padding: EdgeInsets.symmetric(horizontal: 16.0),
                               child: MiddleBed(),
                             ),
-                            const SizedBox(height: 16),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                SFImageBorder(
-                                  icon: Imgs.jewelPurple,
-                                  onTap: () {},
-                                  radius: 16,
-                                  size: const Size(75, 75),
-                                  padding: 8,
-                                ),
-                                const SizedBox(
-                                  width: 10,
-                                ),
-                                SFImageBorder(
-                                  icon: Imgs.jewelGreen,
-                                  onTap: () {},
-                                  radius: 16,
-                                  size: const Size(75, 75),
-                                  padding: 8,
-                                ),
-                                const SizedBox(
-                                  width: 10,
-                                ),
-                                SFImageBorder(
-                                  icon: Ics.icItemsEmpty,
-                                  onTap: () {},
-                                  radius: 16,
-                                  size: const Size(75, 75),
-                                  padding: 25,
-                                  iconColor: AppColors.lightGrey,
-                                ),
-                                const SizedBox(
-                                  width: 10,
-                                ),
-                                SFImageBorder(
-                                  icon: Ics.icItemsEmpty,
-                                  onTap: () {},
-                                  radius: 16,
-                                  size: const Size(75, 75),
-                                  padding: 25,
-                                  iconColor: AppColors.lightGrey,
-                                ),
-                              ],
+                            const SizedBox(height: 10),
+                            Padding(
+                              padding: const EdgeInsets.symmetric(horizontal: 16),
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Expanded(
+                                    child: SFImageBorder(
+                                      icon: Imgs.jewelPurple,
+                                      onTap: () {},
+                                      radius: 16,
+                                      size: const Size(75, 68),
+                                      padding: 8,
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    width: 10.w,
+                                  ),
+                                  Expanded(
+                                    child: SFImageBorder(
+                                      icon: Imgs.jewelGreen,
+                                      onTap: () {},
+                                      radius: 16,
+                                      size: const Size(75, 68),
+                                      padding: 8,
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    width: 10.w,
+                                  ),
+                                  Expanded(
+                                    child: SFImageBorder(
+                                      icon: Imgs.jewelRed,
+                                      onTap: () {},
+                                      radius: 16,
+                                      size: const Size(75, 68),
+                                      padding: 8,
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    width: 10.w,
+                                  ),
+                                  Expanded(
+                                    child: SFImageBorder(
+                                      icon: Ics.icItemsEmpty,
+                                      onTap: () {},
+                                      radius: 16,
+                                      size: const Size(75, 68),
+                                      padding: 20,
+                                      iconColor: AppColors.lightGrey,
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    width: 10.w,
+                                  ),
+                                  Expanded(
+                                    child: SFImageBorder(
+                                      icon: Ics.icItemsEmpty,
+                                      onTap: () {},
+                                      radius: 16,
+                                      size: const Size(75, 68),
+                                      padding: 20,
+                                      iconColor: AppColors.lightGrey,
+                                    ),
+                                  ),
+                                ],
+                              ),
                             ),
-                            const SizedBox(height: 16),
+                            const SizedBox(height: 10),
                             Padding(
                               padding:
                                   const EdgeInsets.symmetric(horizontal: 16.0),

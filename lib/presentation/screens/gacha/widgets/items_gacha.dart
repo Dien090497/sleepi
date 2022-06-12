@@ -16,6 +16,7 @@ class ItemsGacha extends StatelessWidget {
       required this.singleGacha,
       required this.timesGacha,
       required this.typeReward,
+      required this.imagePath,
       })
       : super(key: key);
 
@@ -23,6 +24,7 @@ class ItemsGacha extends StatelessWidget {
   final String typeReward;
   final int singleGacha;
   final int timesGacha;
+  final String imagePath;
 
   @override
   Widget build(BuildContext context) {
@@ -54,7 +56,7 @@ class ItemsGacha extends StatelessWidget {
           ],
         ),
         const SizedBox(height: 17),
-        const ProbabilityWidget(),
+        ProbabilityWidget(imagePath: imagePath,),
         const SizedBox(height: 20),
         GachaRollSelections(singleGacha: singleGacha, timesGacha: timesGacha),
         const SizedBox(height: 13),

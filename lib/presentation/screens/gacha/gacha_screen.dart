@@ -3,6 +3,7 @@ import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:slee_fi/common/widgets/topbar_common.dart';
 import 'package:slee_fi/l10n/locale_keys.g.dart';
 import 'package:slee_fi/presentation/screens/gacha/widgets/items_gacha.dart';
+import 'package:slee_fi/resources/resources.dart';
 
 class GachaScreen extends StatefulWidget {
   const GachaScreen({Key? key}) : super(key: key);
@@ -43,12 +44,14 @@ class _GachaScreenState extends State<GachaScreen> {
                     singleGacha: 12,
                     timesGacha: 100,
                     typeReward: LocaleKeys.uncommon_beds_chance,
+                    imagePath: Imgs.normalGacha,
                   ),
                   ItemsGacha(
                     title: LocaleKeys.special_gacha,
                     singleGacha: 120,
                     timesGacha: 1000,
                     typeReward: LocaleKeys.rare_beds_chance,
+                    imagePath: Imgs.specialGacha,
                   ),
                 ],
               ),

@@ -43,6 +43,7 @@ class Imgs {
   static const String motionData = 'assets/images/motion_data.png';
   static const String noTransactionRecord =
       'assets/images/no_transaction_record.png';
+  static const String normalGacha = 'assets/images/normal_gacha.png';
   static const String notification = 'assets/images/notification.png';
   static const String productDetail = 'assets/images/product_detail.png';
   static const String qrCodeTest = 'assets/images/qr_code_test.png';
@@ -51,6 +52,7 @@ class Imgs {
   static const String sell = 'assets/images/sell.png';
   static const String sendToExternal = 'assets/images/send_to_external.png';
   static const String shortBed = 'assets/images/short_bed.png';
+  static const String specialGacha = 'assets/images/special_gacha.png';
   static const String statistics = 'assets/images/statistics.png';
   static const String transfer = 'assets/images/transfer.png';
   static const String tutorial1 = 'assets/images/tutorial_1.png';
@@ -99,6 +101,7 @@ class Imgs {
     motion,
     motionData,
     noTransactionRecord,
+    normalGacha,
     notification,
     productDetail,
     qrCodeTest,
@@ -107,6 +110,7 @@ class Imgs {
     sell,
     sendToExternal,
     shortBed,
+    specialGacha,
     statistics,
     transfer,
     tutorial1,
