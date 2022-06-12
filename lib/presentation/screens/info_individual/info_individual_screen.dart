@@ -119,13 +119,9 @@ class InfoIndividualScreen extends StatelessWidget {
                           ],
                         ),
                       ),
-                      const SizedBox(
-                        height: 15,
-                      ),
+                      const SizedBox(height: 15),
                       const AttributesWidget(),
-                      const SizedBox(
-                        height: 33,
-                      ),
+                      const SizedBox(height: 33),
                       Container(
                         decoration: const BoxDecoration(
                           color: AppColors.dark,

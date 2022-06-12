@@ -27,7 +27,8 @@ class AttributesWidget extends StatelessWidget {
             valueActive: 10,
             colorIcon: AppColors.ruby,
           ),
-          ItemAttribute(linkImage: Imgs.luck,
+          ItemAttribute(
+            linkImage: Imgs.luck,
             title: LocaleKeys.luck,
             valueActive: 2.5,
             colorIcon: AppColors.blue,

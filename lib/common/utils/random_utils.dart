@@ -2,7 +2,6 @@ import 'dart:math';
 
 import 'package:injectable/injectable.dart';
 
-// ignore_for_file: non_constant_identifier_names
 @Injectable()
 class RandomUtils {
   String randomId() {
