@@ -1,5 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:slee_fi/common/const/const.dart';
 import 'package:slee_fi/common/extensions/string_x.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
@@ -87,7 +88,6 @@ class SendToExternalScreen extends StatelessWidget {
                             TextSpan(
                                 text: LocaleKeys.the_network_you_have_selected_2
                                     .tr()),
-                            const TextSpan(text: '. '),
                             TextSpan(
                                 text: LocaleKeys.the_network_you_have_selected_3
                                     .tr()),
@@ -99,19 +99,21 @@ class SendToExternalScreen extends StatelessWidget {
                             TextSpan(
                                 text: LocaleKeys.the_network_you_have_selected_4
                                     .tr()),
-                            const TextSpan(text: '. '),
                             TextSpan(
                                 text: LocaleKeys.the_network_you_have_selected_5
                                     .tr(),
-                                style: TextStyles.w400Red12),
+                                style: context.locale.languageCode ==
+                                        Const.localeJA.languageCode
+                                    ? null
+                                    : TextStyles.w400Red12),
                             const TextSpan(text: ' '),
                             TextSpan(
                                 text: LocaleKeys.the_network_you_have_selected_6
-                                    .tr()),
-                            TextSpan(
-                                text: LocaleKeys.the_network_you_have_selected_7
                                     .tr(),
-                                style: TextStyles.w400Red12),
+                                style: context.locale.languageCode ==
+                                        Const.localeJA.languageCode
+                                    ? TextStyles.w400Red12
+                                    : null),
                           ],
                         ),
                       ),

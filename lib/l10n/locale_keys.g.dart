@@ -274,7 +274,6 @@ abstract class  LocaleKeys {
   static const the_network_you_have_selected_4 = 'the_network_you_have_selected_4';
   static const the_network_you_have_selected_5 = 'the_network_you_have_selected_5';
   static const the_network_you_have_selected_6 = 'the_network_you_have_selected_6';
-  static const the_network_you_have_selected_7 = 'the_network_you_have_selected_7';
   static const network = 'network';
   static const send = 'send';
   static const clear_filter = 'clear_filter';

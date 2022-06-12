@@ -19,7 +19,7 @@ class BoxInfoWidget extends StatelessWidget {
         _Col(
           children: [
             SFButton(
-              text: 'Eq7fbho...9gQJxjh',
+              text: '0xC02a...6Cc2',
               color: Colors.white.withOpacity(0.05),
               height: 32,
               textStyle: TextStyles.lightWhite14,
