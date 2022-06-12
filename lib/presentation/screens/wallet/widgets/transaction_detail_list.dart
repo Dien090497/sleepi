@@ -21,7 +21,7 @@ class TransactionDetailList extends StatelessWidget {
       "SLGT",
       LocaleKeys.beds,
       LocaleKeys.jewels,
-      LocaleKeys.bed_box,
+      LocaleKeys.bed_boxes,
     ];
     List icons = [
       Ics.icSolanaCircle,
