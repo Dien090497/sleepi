@@ -359,5 +359,6 @@
   "withdraw_token": "{}の引出し",
   "deposit_token": "{}の預入",
   "matching_jewels": "マッチングさせる宝石",
-  "no_transaction_record": "取引履歴はありません。"
+  "no_transaction_record": "取引履歴はありません。",
+  "amount_earned": "獲得トークン量"
 }

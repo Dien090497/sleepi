@@ -41,14 +41,14 @@ class BoxInfoWidget extends StatelessWidget {
                 text: LocaleKeys.legendary,
                 textStyle: TextStyles.blue14,
                 color: Colors.blue.withOpacity(0.05),
-                radius: 50,
+                radius: 50.h,
               ),
               SizedBox(width: 8.w),
               SFButton(
                 text: LocaleKeys.flexible_bed,
                 textStyle: TextStyles.green14,
                 color: Colors.green.withOpacity(0.05),
-                radius: 50,
+                radius: 50.h,
               ),
               SizedBox(width: 8.w),
               SFButton(
