@@ -8,7 +8,8 @@ import 'package:slee_fi/l10n/locale_keys.g.dart';
 import 'package:slee_fi/resources/resources.dart';
 
 class ModalTransferBetween extends StatefulWidget {
-  const ModalTransferBetween({this.onSelect, this.selected, Key? key}) : super(key: key);
+  const ModalTransferBetween({this.onSelect, this.selected, Key? key})
+      : super(key: key);
   final ValueChanged<Object>? onSelect;
   final String? selected;
 
@@ -17,11 +18,11 @@ class ModalTransferBetween extends StatefulWidget {
 }
 
 class _ModalTransferBetweenState extends State<ModalTransferBetween> {
+  int selectedIndex = 0;
 
-  int selectedIndex = 0 ;
   List keyList = [
     "AVAX",
-    "SLFT"
+    "SLFT",
     "SLGT",
     LocaleKeys.beds,
     LocaleKeys.jewels,
@@ -52,40 +53,48 @@ class _ModalTransferBetweenState extends State<ModalTransferBetween> {
         padding: const EdgeInsets.all(24.0),
         itemBuilder: (BuildContext context, int index) {
           return SFCard(
-            padding: const EdgeInsets.symmetric(horizontal: 16,),
+            padding: const EdgeInsets.symmetric(
+              horizontal: 16,
+            ),
             margin: const EdgeInsets.only(top: 8.0),
             radius: 8,
             child: SFListTile(
-              leading: Padding(
-                padding: EdgeInsets.only(left: urlImages[index] == Ics.icAvax ? 4.0 : 0),
-                child: SFIcon(
-                  urlImages[index],
-                  width: urlImages[index] == Ics.icAvax ? 32 : 40,
-                  height: urlImages[index] == Ics.icAvax ? 32 : 40,
+                leading: Padding(
+                  padding: EdgeInsets.only(
+                      left: urlImages[index] == Ics.icAvax ? 4.0 : 0),
+                  child: SFIcon(
+                    urlImages[index],
+                    width: urlImages[index] == Ics.icAvax ? 32 : 40,
+                    height: urlImages[index] == Ics.icAvax ? 32 : 40,
+                  ),
                 ),
-              ),
-              text: keyList[index],
-              textStyle :TextStyles.lightWhite16,
+                text: keyList[index],
+                textStyle: TextStyles.lightWhite16,
                 trailing: Row(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    index > 2 ? const Icon(Icons.keyboard_arrow_down, color: AppColors.lightGrey,) : const SizedBox(),
+                    index > 2
+                        ? const Icon(
+                            Icons.keyboard_arrow_down,
+                            color: AppColors.lightGrey,
+                          )
+                        : const SizedBox(),
                     selectedIndex == index && index < 3
                         ? const Icon(
-                      Icons.check,
-                      color: AppColors.green,
-                      size: 32,
-                    )
+                            Icons.check,
+                            color: AppColors.green,
+                            size: 32,
+                          )
                         : const SizedBox(),
                   ],
-                )
-            ),
+                )),
             onTap: () {
               setState(() {
                 selectedIndex = index;
               });
-              if(index < 3) {
-                widget.onSelect!({"text" : keyList[index], "urlImage" : urlImages[index]});
+              if (index < 3) {
+                widget.onSelect!(
+                    {"text": keyList[index], "urlImage": urlImages[index]});
                 Navigator.pop(context);
               }
             },

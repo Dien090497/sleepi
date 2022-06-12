@@ -96,7 +96,7 @@ class DepositSlftScreen extends StatelessWidget {
                                   child: SFTextField(
                                 showLabel: false,
                                 textInputType: TextInputType.number,
-                                hintText: LocaleKeys.amount,
+                                // hintText: LocaleKeys.amount,
                               )),
                               const SizedBox(
                                 width: 12,
