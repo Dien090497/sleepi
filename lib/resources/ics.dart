@@ -10,6 +10,7 @@ class Ics {
   static const String commingSoon = 'assets/icons/comming_soon.svg';
   static const String efficiency = 'assets/icons/efficiency.svg';
   static const String ellipse = 'assets/icons/ellipse.svg';
+  static const String emptyBox = 'assets/icons/empty_box.svg';
   static const String facebook = 'assets/icons/facebook.svg';
   static const String filter = 'assets/icons/filter.svg';
   static const String gacha = 'assets/icons/gacha.svg';
@@ -78,6 +79,7 @@ class Ics {
     commingSoon,
     efficiency,
     ellipse,
+    emptyBox,
     facebook,
     filter,
     gacha,
