@@ -74,6 +74,7 @@ class Ics {
   static const String telegram = 'assets/icons/telegram.svg';
   static const String transfer = 'assets/icons/transfer.svg';
   static const String twitter = 'assets/icons/twitter.svg';
+  static const String warning = 'assets/icons/warning.svg';
 
   static const List<String> values = [
     addBed,
@@ -145,6 +146,7 @@ class Ics {
     successful,
     telegram,
     transfer,
-    twitter
+    twitter,
+    warning
   ];
 }
