@@ -1,5 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
 import 'package:slee_fi/common/widgets/dismiss_keyboard_widget.dart';
@@ -266,67 +267,38 @@ class _Detail extends StatelessWidget {
     return SFCard(
       margin: EdgeInsets.zero,
       padding: const EdgeInsets.symmetric(vertical: 24, horizontal: 18),
-      child: Column(
+      child: Row(
         children: [
-          Row(
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Expanded(
-                flex: 3,
-                child: SFText(
-                    keyText: LocaleKeys.class_, style: TextStyles.lightGrey14),
-              ),
-              Expanded(
-                child: SFText(
-                    keyText: LocaleKeys.level,
-                    namedArgs: const {'num': ''},
-                    style: TextStyles.lightGrey14),
-              ),
+              SFText(keyText: LocaleKeys.class_, style: TextStyles.lightGrey14),
+              SizedBox(height: 8.h),
+              SFText(keyText: className, style: TextStyles.lightWhite16W700),
+              SizedBox(height: 24.h),
+              SFText(
+                  keyText: LocaleKeys.durability,
+                  style: TextStyles.lightGrey14),
+              SizedBox(height: 8.h),
+              SFText(keyText: '90/100', style: TextStyles.lightWhite16W700),
             ],
           ),
-          const SizedBox(height: 4),
-          Row(
+          const Spacer(),
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Expanded(
-                flex: 3,
-                child: SFText(
-                    keyText: className, style: TextStyles.lightWhite16W700),
-              ),
-              Expanded(
-                child: SFText(
-                    keyText: '9',
-                    namedArgs: const {'num': ''},
-                    style: TextStyles.lightWhite16W700),
-              ),
-            ],
-          ),
-          const SizedBox(height: 16),
-          Row(
-            children: [
-              Expanded(
-                flex: 3,
-                child: SFText(
-                    keyText: LocaleKeys.durability,
-                    style: TextStyles.lightGrey14),
-              ),
-              Expanded(
-                child: SFText(
-                    keyText: LocaleKeys.bed_mint,
-                    style: TextStyles.lightGrey14),
-              ),
-            ],
-          ),
-          const SizedBox(height: 4),
-          Row(
-            children: [
-              Expanded(
-                flex: 3,
-                child: SFText(
-                    keyText: '90/100', style: TextStyles.lightWhite16W700),
-              ),
-              Expanded(
-                child:
-                    SFText(keyText: '3/7', style: TextStyles.lightWhite16W700),
-              ),
+              SFText(keyText: LocaleKeys.level, style: TextStyles.lightGrey14),
+              SizedBox(height: 8.h),
+              SFText(
+                  keyText: '9',
+                  namedArgs: const {'num': ''},
+                  style: TextStyles.lightWhite16W700),
+              SizedBox(height: 24.h),
+              SFText(
+                  keyText: LocaleKeys.bed_mint, style: TextStyles.lightGrey14),
+              SizedBox(height: 8.h),
+
+              SFText(keyText: '3/7', style: TextStyles.lightWhite16W700),
             ],
           ),
         ],
