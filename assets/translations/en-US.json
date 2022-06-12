@@ -249,7 +249,7 @@
   "stake": "Stake",
   "staking_not_only_allows_you_to_increase_your_tokens": "Staking not only allows you to increase your tokens, but also to gain in-game benefits.Staking rewards are given based on the amount of your deposit. Also, rewards are only granted during staking.",
   "earning_token": "Earning Token",
-  "your_earned": "Your {token} Earned",
+  "your_token_earned": "Your {} Earned",
   "your_staked_amount": "Your Staked Amount",
   "apr": "APR",
   "setting": "Setting",

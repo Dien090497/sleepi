@@ -44,11 +44,8 @@ class InfoIndividualScreen extends StatelessWidget {
                         margin: const EdgeInsets.symmetric(vertical: 24),
                         decoration: const BoxDecoration(
                           image: DecorationImage(
-                            image: AssetImage(
-                              Imgs.borderBed,
-                            ),
-                            fit: BoxFit.cover,
-                          ),
+                              image: AssetImage(Imgs.borderBed),
+                              fit: BoxFit.cover),
                         ),
                         child: const SFIcon(Imgs.shortBed),
                       ),
@@ -56,15 +53,12 @@ class InfoIndividualScreen extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           SFImageBorder(
-                            icon: Imgs.jewelPurple,
-                            onTap: () {},
-                            radius: 16,
-                            size: const Size(75, 75),
-                            padding: 8,
-                          ),
-                          const SizedBox(
-                            width: 10,
-                          ),
+                              icon: Imgs.jewelPurple,
+                              onTap: () {},
+                              radius: 16,
+                              size: const Size(75, 75),
+                              padding: 8),
+                          const SizedBox(width: 10),
                           SFImageBorder(
                             icon: Imgs.jewelGreen,
                             onTap: () {},
@@ -72,19 +66,14 @@ class InfoIndividualScreen extends StatelessWidget {
                             size: const Size(75, 75),
                             padding: 8,
                           ),
-                          const SizedBox(
-                            width: 10,
-                          ),
+                          const SizedBox(width: 10),
                           SFImageBorder(
-                            icon: Imgs.jewelSliver,
-                            onTap: () {},
-                            radius: 16,
-                            size: const Size(75, 75),
-                            padding: 8,
-                          ),
-                          const SizedBox(
-                            width: 10,
-                          ),
+                              icon: Imgs.jewelSliver,
+                              onTap: () {},
+                              radius: 16,
+                              size: const Size(75, 75),
+                              padding: 8),
+                          const SizedBox(width: 10),
                           SFImageBorder(
                             icon: Imgs.jewelRed,
                             onTap: () {},
@@ -94,13 +83,9 @@ class InfoIndividualScreen extends StatelessWidget {
                           ),
                         ],
                       ),
-                      const SizedBox(
-                        height: 16,
-                      ),
+                      const SizedBox(height: 16),
                       const BoxInfoWidget(),
-                      const SizedBox(
-                        height: 24,
-                      ),
+                      const SizedBox(height: 24),
                       Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 24),
                         child: Row(
@@ -116,12 +101,12 @@ class InfoIndividualScreen extends StatelessWidget {
                               mainAxisAlignment: MainAxisAlignment.end,
                               children: [
                                 SFButtonOutLined(
-                                  title: "Base",
+                                  title: LocaleKeys.base,
                                   textStyle: TextStyles.bold14Blue,
                                   borderColor: AppColors.blue,
                                   onPressed: () {},
                                 ),
-                                const SizedBox(width: 8,),
+                                const SizedBox(width: 8),
                                 SFButton(
                                   height: 38,
                                   text: "+ ${LocaleKeys.point.tr()}",

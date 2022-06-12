@@ -251,7 +251,7 @@ abstract class  LocaleKeys {
   static const stake = 'stake';
   static const staking_not_only_allows_you_to_increase_your_tokens = 'staking_not_only_allows_you_to_increase_your_tokens';
   static const earning_token = 'earning_token';
-  static const your_earned = 'your_earned';
+  static const your_token_earned = 'your_token_earned';
   static const your_staked_amount = 'your_staked_amount';
   static const apr = 'apr';
   static const setting = 'setting';
