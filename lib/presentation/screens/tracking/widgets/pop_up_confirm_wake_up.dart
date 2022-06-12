@@ -20,7 +20,7 @@ class PopUpConfirmWakeUp extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 30),
           child: SFText(
-            keyText: "You've only just started - are you sure you want to give up",
+            keyText: LocaleKeys.you_have_only_just_started,
             style: TextStyles.w600LightWhiteSize16,
             textAlign: TextAlign.center,
           ),

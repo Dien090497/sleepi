@@ -365,5 +365,6 @@
   "deposit_token": "Deposit {}",
   "luck_jewel": "Luck Jewel",
   "matching_jewels": "Matching Jewels",
-  "no_transaction_record": "No transaction record"
+  "no_transaction_record": "No transaction record",
+  "you_have_only_just_started": "You've only just started - are you sure you want to give up."
 }

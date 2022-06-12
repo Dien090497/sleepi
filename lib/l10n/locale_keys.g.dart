@@ -368,5 +368,6 @@ abstract class  LocaleKeys {
   static const luck_jewel = 'luck_jewel';
   static const matching_jewels = 'matching_jewels';
   static const no_transaction_record = 'no_transaction_record';
+  static const you_have_only_just_started = 'you_have_only_just_started';
 
 }
