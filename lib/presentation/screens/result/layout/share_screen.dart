@@ -125,7 +125,7 @@ class _ShareScreenState extends State<ShareScreen> {
                       onPressed: () {
                         Navigator.popUntil(context, (r) => r.settings.name == R.bottomNavigation);
                       },),
-                    const SizedBox(height: 100,),
+                    const SizedBox(height: 150,),
                   ],
                 ),
               ),

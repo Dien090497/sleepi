@@ -206,6 +206,7 @@ abstract class  LocaleKeys {
   static const alarm_bell = 'alarm_bell';
   static const item_list = 'item_list';
   static const bed_box = 'bed_box';
+  static const bed_boxes = 'bed_boxes';
   static const use = 'use';
   static const type = 'type';
   static const sleep = 'sleep';

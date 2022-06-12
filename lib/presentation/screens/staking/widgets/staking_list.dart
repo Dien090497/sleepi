@@ -1,5 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:slee_fi/common/extensions/string_x.dart';
 import 'package:slee_fi/common/routes/app_routes.dart';
@@ -147,11 +148,8 @@ class StakingList extends StatelessWidget {
               },
               child: Row(
                 children: [
-                  const SFIcon(Ics.icCalculator,
-                      color: AppColors.lightGrey, width: 22),
-                  const SizedBox(
-                    width: 4,
-                  ),
+                  const SFIcon(Ics.icCalculator),
+                  SizedBox(width: 8.w),
                   SFText(
                     keyText: "ROI",
                     style: TextStyles.lightGrey16,
@@ -170,7 +168,7 @@ class StakingList extends StatelessWidget {
                 children: [
                   Expanded(
                       child: SFText(
-                    keyText: LocaleKeys.your_token_earned.tr(args: ['SLFT']),
+                    keyText: LocaleKeys.your_token_earned.tr(args: ['NFT']),
                     style: TextStyles.lightWhite16,
                   )),
                   Row(

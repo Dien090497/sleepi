@@ -38,6 +38,7 @@ class Ics {
   static const String icEye = 'assets/icons/ic_eye.svg';
   static const String icGacha = 'assets/icons/ic_gacha.svg';
   static const String icHomeNew = 'assets/icons/ic_home_new.svg';
+  static const String icItemsEmpty = 'assets/icons/ic_items_empty.svg';
   static const String icJewels = 'assets/icons/ic_jewels.svg';
   static const String icLock = 'assets/icons/ic_lock.svg';
   static const String icMarketNew = 'assets/icons/ic_market_new.svg';
@@ -109,6 +110,7 @@ class Ics {
     icEye,
     icGacha,
     icHomeNew,
+    icItemsEmpty,
     icJewels,
     icLock,
     icMarketNew,
