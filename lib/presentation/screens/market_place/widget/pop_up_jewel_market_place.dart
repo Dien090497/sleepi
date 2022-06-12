@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
@@ -51,7 +52,7 @@ class PopUpJewelMarketPlace extends StatelessWidget {
         ),
         const SizedBox(height: 20),
         SFText(
-          keyText: 'LocaleKeys.luck.tr() ($level)',
+          keyText: '${LocaleKeys.luck_jewel.tr()} ($level)',
           style: TextStyles.white1w700size16,
         ),
         const SizedBox(height: 24),

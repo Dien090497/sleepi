@@ -72,7 +72,7 @@ class ModalReceiveWallet extends StatelessWidget {
           height: 32,
         ),
         SFButton(
-          text: LocaleKeys.copy_address,
+          text: LocaleKeys.copy_address.reCase(StringCase.titleCase),
           textStyle: TextStyles.w600WhiteSize16,
           width: double.infinity,
           height: 48,

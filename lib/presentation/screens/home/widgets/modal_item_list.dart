@@ -84,7 +84,7 @@ class ModalItemList extends StatelessWidget {
                       showCustomAlertDialog(context,
                           children: PopUpItem(
                             id: id,
-                            icon: Imgs.shortBed,
+                            icon: jewels[i % jewels.length],
                             onConfirm: () {},
                           ));
                     },

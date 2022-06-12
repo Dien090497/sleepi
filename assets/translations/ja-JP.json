@@ -262,7 +262,7 @@
   "english": "英語",
   "japanese": "日本語",
   "chinese": "中国語",
-  "forgot_passcode": "パスワードを忘れた場合",
+  "forgot_passcode": "パスワードを忘れた場合 ？",
   "to_address": "送金先",
   "amount": "送金量",
   "balance": "残高",

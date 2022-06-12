@@ -8,7 +8,6 @@ class Imgs {
   static const String bedroomGacha = 'assets/images/bedroom_gacha.png';
   static const String bell = 'assets/images/bell.png';
   static const String binance = 'assets/images/binance.png';
-  static const String bonus = 'assets/images/bonus.png';
   static const String borderBed = 'assets/images/borderBed.png';
   static const String borderClock = 'assets/images/border_clock.png';
   static const String candyBlue = 'assets/images/candy_blue.png';
@@ -33,7 +32,6 @@ class Imgs {
   static const String jewels = 'assets/images/jewels.png';
   static const String logo = 'assets/images/logo.png';
   static const String longBed = 'assets/images/long_bed.png';
-  static const String luck = 'assets/images/luck.png';
   static const String lvUp = 'assets/images/lv_up.png';
   static const String market = 'assets/images/market.png';
   static const String mic = 'assets/images/mic.png';
@@ -50,11 +48,9 @@ class Imgs {
   static const String qrCodeTest = 'assets/images/qr_code_test.png';
   static const String recyle = 'assets/images/recyle.png';
   static const String repair = 'assets/images/repair.png';
-  static const String resilience = 'assets/images/resilience.png';
   static const String sell = 'assets/images/sell.png';
   static const String sendToExternal = 'assets/images/send_to_external.png';
   static const String shortBed = 'assets/images/short_bed.png';
-  static const String special = 'assets/images/special.png';
   static const String statistics = 'assets/images/statistics.png';
   static const String transfer = 'assets/images/transfer.png';
   static const String tutorial1 = 'assets/images/tutorial_1.png';
@@ -69,7 +65,6 @@ class Imgs {
     bedroomGacha,
     bell,
     binance,
-    bonus,
     borderBed,
     borderClock,
     candyBlue,
@@ -94,7 +89,6 @@ class Imgs {
     jewels,
     logo,
     longBed,
-    luck,
     lvUp,
     market,
     mic,
@@ -110,11 +104,9 @@ class Imgs {
     qrCodeTest,
     recyle,
     repair,
-    resilience,
     sell,
     sendToExternal,
     shortBed,
-    special,
     statistics,
     transfer,
     tutorial1,
