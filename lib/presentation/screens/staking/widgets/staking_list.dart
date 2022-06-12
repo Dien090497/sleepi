@@ -147,10 +147,15 @@ class StakingList extends StatelessWidget {
               },
               child: Row(
                 children: [
-                 const SFIcon(Ics.icCalculator,
+                  const SFIcon(Ics.icCalculator,
                       color: AppColors.lightGrey, width: 22),
-                  const SizedBox(width: 4,),
-                  SFText(keyText: "ROI", style: TextStyles.lightGrey16,)
+                  const SizedBox(
+                    width: 4,
+                  ),
+                  SFText(
+                    keyText: "ROI",
+                    style: TextStyles.lightGrey16,
+                  )
                 ],
               ),
             )
@@ -165,7 +170,8 @@ class StakingList extends StatelessWidget {
                 children: [
                   Expanded(
                       child: SFText(
-                    keyText: LocaleKeys.your_earned.tr(namedArgs: {'token': "SLFT"}),
+                    keyText:
+                        LocaleKeys.your_earned.tr(namedArgs: {'token': "SLFT"}),
                     style: TextStyles.lightWhite16,
                   )),
                   Row(
@@ -274,7 +280,11 @@ class StakingList extends StatelessWidget {
                     onTap: () {
                       showCustomDialog(context, children: [
                         PopUpStaking(
-                          message: LocaleKeys.do_you_really_want_to_compound,
+                          message: LocaleKeys.do_you_really_want_to_compound
+                              .tr(namedArgs: {
+                            'amount': 'xxx',
+                            'token': 'SLFT',
+                          }),
                           onPressed: () => showSuccessfulDialog(context),
                         )
                       ]);

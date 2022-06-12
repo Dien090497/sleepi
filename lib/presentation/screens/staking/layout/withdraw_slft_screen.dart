@@ -26,7 +26,7 @@ class WithdrawSlftScreen extends StatelessWidget {
         resizeToAvoidBottomInset: false,
         appBar: SFAppBar(
           context: context,
-          title: "${LocaleKeys.withdraw.tr()} SLFT",
+          title: LocaleKeys.withdraw_token.tr(args: ['SLFT']),
           textStyle: TextStyles.bold18LightWhite,
         ),
         child: SafeArea(
@@ -95,7 +95,7 @@ class WithdrawSlftScreen extends StatelessWidget {
                                 child: SFTextField(
                               showLabel: false,
                               textInputType: TextInputType.number,
-                              hintText: LocaleKeys.amount,
+                              // hintText: LocaleKeys.amount,
                             )),
                             const SizedBox(
                               width: 12,
@@ -126,15 +126,17 @@ class WithdrawSlftScreen extends StatelessWidget {
                     onPressed: () {
                       showCustomDialog(context, children: [
                         PopUpStaking(
-                          message: LocaleKeys.do_you_really_want_to_withdraw,
+                          message: LocaleKeys.do_you_really_want_to_withdraw
+                              .tr(namedArgs: {
+                            'amount': 'xxx',
+                            'token': 'SLFT',
+                          }),
                           onPressed: () => showSuccessfulDialog(context),
                         )
                       ]);
                     },
                   ),
-                  const SizedBox(
-                    height: 17,
-                  ),
+                  const SizedBox(height: 17),
                   SizedBox(
                       height: 48,
                       child: SFButtonOutLined(

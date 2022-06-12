@@ -92,7 +92,7 @@ class AlarmBell extends StatelessWidget {
               //         color: AppColors.darkColor,
               //         borderRadius: BorderRadius.circular(20)),
               //     child: SFText(
-              //       keyText: '0.00/160 SLTF',
+              //       keyText: '0.00/160 SLFT',
               //       style: TextStyles.lightGrey10,
               //     ),
               //   ),

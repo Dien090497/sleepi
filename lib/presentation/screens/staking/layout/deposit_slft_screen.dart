@@ -26,7 +26,7 @@ class DepositSlftScreen extends StatelessWidget {
           resizeToAvoidBottomInset: false,
           appBar: SFAppBar(
             context: context,
-            title: "${LocaleKeys.deposit.tr()} SLFT",
+            title: LocaleKeys.deposit_token.tr(args: ['SLFT']),
             textStyle: TextStyles.bold18LightWhite,
           ),
           child: SafeArea(
@@ -96,7 +96,7 @@ class DepositSlftScreen extends StatelessWidget {
                                   child: SFTextField(
                                 showLabel: false,
                                 textInputType: TextInputType.number,
-                                hintText: LocaleKeys.amount,
+                                // hintText: LocaleKeys.amount,
                               )),
                               const SizedBox(
                                 width: 12,

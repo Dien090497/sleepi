@@ -76,7 +76,6 @@ class R {
   static const String createWallet = '${_}create_wallet';
   static const String importWallet = '${_}import_wallet';
   static const String sendToExternal = '${_}send_to_external';
-  static const String sendToSpending = '${_}send_to_spending';
   static const String trade = '${_}trade';
   static const String email = '${_}email';
   static const String changePassword = '${_}change_password';
