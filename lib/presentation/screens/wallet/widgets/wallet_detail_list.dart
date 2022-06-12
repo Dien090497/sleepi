@@ -53,12 +53,15 @@ class WalletDetailList extends StatelessWidget {
                 if (index < 3) {
                   Navigator.pushNamed(context, R.transactionDetail,
                       arguments: TransactionDetailArguments(
-                          keyList[index], icons[index]));
+                        keyList[index],
+                        icons[index],
+                      ));
                 }
               },
               child: ListTile(
                 leading: Padding(
-                  padding: EdgeInsets.only(left: icons[index] == Ics.icAvax ? 4 : 0),
+                  padding:
+                      EdgeInsets.only(left: icons[index] == Ics.icAvax ? 4 : 0),
                   child: SFIcon(
                     icons[index],
                     width: icons[index] == Ics.icAvax ? 32 : 40,

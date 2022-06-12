@@ -25,17 +25,11 @@ class TabWalletDetail extends StatelessWidget {
       child: SingleChildScrollView(
         child: Column(
           children: [
-            const SizedBox(
-              height: 32,
-            ),
+            const SizedBox(height: 32),
             SFText(keyText: "AVAX C-Chain", style: TextStyles.bold12Blue),
-            const SizedBox(
-              height: 4.0,
-            ),
+            const SizedBox(height: 4.0),
             SFText(keyText: "0 AVAX", style: TextStyles.bold30White),
-            const SizedBox(
-              height: 20.0,
-            ),
+            const SizedBox(height: 20.0),
             Container(
               padding:
                   const EdgeInsets.symmetric(vertical: 6.0, horizontal: 16.0),
@@ -119,9 +113,7 @@ class TabWalletDetail extends StatelessWidget {
                 ],
               ),
             ),
-            const SizedBox(
-              height: 12.0,
-            ),
+            const SizedBox(height: 12.0),
             const WalletDetailList()
           ],
         ),

@@ -28,7 +28,7 @@ class BoxButtonWidget extends StatelessWidget {
           borderRadius: BorderRadius.circular(16.0),
         ),
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.start,
           children: [
             CircleAvatar(
               backgroundColor: AppColors.blue,
