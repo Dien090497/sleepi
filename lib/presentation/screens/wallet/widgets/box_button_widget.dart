@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:slee_fi/common/extensions/string_x.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
 import 'package:slee_fi/common/widgets/sf_icon.dart';
@@ -20,26 +19,24 @@ class BoxButtonWidget extends StatelessWidget {
     return GestureDetector(
       onTap: onTap,
       child: Container(
-        width: 76,
-        // height: 94,
-        padding: const EdgeInsets.all(8),
+        padding: const EdgeInsets.only(left: 10, right: 10, top: 20),
         decoration: BoxDecoration(
           color: AppColors.white.withOpacity(0.05),
           borderRadius: BorderRadius.circular(16.0),
         ),
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
           children: [
             CircleAvatar(
               backgroundColor: AppColors.blue,
               child: SFIcon(assetImage!),
             ),
-            const SizedBox(height: 8.0),
-            SFText(
-              keyText: text ?? "",
-              style: textStyle ?? TextStyles.lightGrey12,
-              stringCase: StringCase.titleCase,
-              textAlign: TextAlign.center,
+            const SizedBox(height: 15),
+            Expanded(
+              child: SFText(
+                keyText: text ?? "",
+                style: textStyle ?? TextStyles.lightGrey12,
+                textAlign: TextAlign.center,
+              ),
             )
           ],
         ),

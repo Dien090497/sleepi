@@ -363,5 +363,6 @@ abstract class  LocaleKeys {
   static const long = 'long';
   static const withdraw_token = 'withdraw_token';
   static const deposit_token = 'deposit_token';
+  static const matching_jewels = 'matching_jewels';
 
 }

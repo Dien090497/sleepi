@@ -360,5 +360,6 @@
   "short": "Short",
   "long": "Long",
   "withdraw_token": "Withdraw {}",
-  "deposit_token": "Deposit {}"
+  "deposit_token": "Deposit {}",
+  "matching_jewels": "Matching Jewels"
 }
