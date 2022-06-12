@@ -85,6 +85,68 @@ class SFButton extends StatelessWidget {
   }
 }
 
+class SFButton2 extends StatelessWidget {
+  const SFButton2({
+    required this.text,
+    this.textStyle,
+    this.onPressed,
+    this.width,
+    this.height,
+    this.color,
+    this.stringCase,
+    this.gradient,
+    Key? key,
+  }) : super(key: key);
+
+  final String text;
+  final TextStyle? textStyle;
+  final VoidCallback? onPressed;
+  final double? width;
+  final double? height;
+  final Color? color;
+  final StringCase? stringCase;
+  final LinearGradient? gradient;
+
+  @override
+  Widget build(BuildContext context) {
+    final borderRadius = BorderRadius.circular(100);
+
+    return Container(
+      width: width,
+      height: height ?? 48,
+      decoration: BoxDecoration(
+        gradient: gradient,
+        borderRadius: borderRadius,
+      ),
+      child: ElevatedButton(
+        onPressed: onPressed,
+        style: ButtonStyle(
+          backgroundColor: MaterialStateProperty.resolveWith((states) {
+            if (states.contains(MaterialState.pressed)) {
+              return color?.withOpacity(0.5) ?? AppColors.blue.withOpacity(0.5);
+            } else if (states.contains(MaterialState.disabled)) {
+              return AppColors.greyBottomNavBar;
+            }
+            return gradient == null ? color : AppColors.transparent;
+          }),
+          // minimumSize: MaterialStateProperty.all(Size.fromHeight(height ?? 48)),
+          shadowColor: MaterialStateProperty.all(AppColors.transparent),
+          shape: MaterialStateProperty.all(
+            RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(100),
+            ),
+          ),
+        ),
+        child: SFText(
+          keyText: text,
+          style: textStyle,
+          stringCase: stringCase,
+        ),
+      ),
+    );
+  }
+}
+
 class SFTextButton extends StatelessWidget {
   const SFTextButton(
       {required this.text,
@@ -115,15 +177,15 @@ class SFTextButton extends StatelessWidget {
 class SFIconButton extends StatelessWidget {
   const SFIconButton(
       {required this.text,
-        this.textStyle,
-        this.stringCase,
-        this.onPressed,
-        this.width,
-        this.height,
-        this.color,
-        this.radius = 100,
-        this.icon,
-        Key? key})
+      this.textStyle,
+      this.stringCase,
+      this.onPressed,
+      this.width,
+      this.height,
+      this.color,
+      this.radius = 100,
+      this.icon,
+      Key? key})
       : super(key: key);
 
   final String text;
@@ -138,18 +200,21 @@ class SFIconButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return  SizedBox(
+    return SizedBox(
       width: width ?? 70,
       height: height ?? 28,
       child: ElevatedButton.icon(
-        icon:  SFIcon(icon ?? Ics.icCart, width: 18,),
-        label:  SFText(keyText: text, stringCase: stringCase, style: textStyle),
+        icon: SFIcon(
+          icon ?? Ics.icCart,
+          width: 18,
+        ),
+        label: SFText(keyText: text, stringCase: stringCase, style: textStyle),
         onPressed: onPressed,
         style: ElevatedButton.styleFrom(
           primary: color,
           padding: const EdgeInsets.symmetric(horizontal: 6),
-          shape:  RoundedRectangleBorder(
-            borderRadius:  BorderRadius.circular(radius),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(radius),
           ),
         ),
       ),
