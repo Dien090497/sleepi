@@ -59,7 +59,17 @@ class TransactionDetailList extends StatelessWidget {
               ),
             );
           })
-      :const Center(child: SFIcon(Imgs.noTransactionRecord),),
+      : Center(child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          const SFIcon(Imgs.emptyBedBox),
+          const SizedBox(height: 28),
+          SFText(
+            keyText: LocaleKeys.no_transaction_record,
+            style: TextStyles.lightGrey14,
+          )
+        ],
+      )),
     );
   }
 }

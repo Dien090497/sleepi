@@ -260,21 +260,18 @@ class StakingList extends StatelessWidget {
                     text: LocaleKeys.deposit,
                     textStyle: TextStyles.boldWhite14,
                     gradient: AppColors.gradientBlueButton,
-                    // width: 84,
-                    height: 32,
+                    width: 95,
+                    height: 36,
                     onPressed: () =>
                         Navigator.pushNamed(context, R.depositSLFT),
                   ),
-                  SizedBox(
-                    // width: 84,
-                    height: 32,
-                    child: SFButtonOutLined(
-                      borderColor: AppColors.blue,
-                      title: LocaleKeys.withdraw,
-                      textStyle: TextStyles.bold14Blue,
-                      onPressed: () =>
-                          Navigator.pushNamed(context, R.withdrawSLFT),
-                    ),
+                  SFButtonOutLined(
+                    fixedSize: const Size(95, 32),
+                    borderColor: AppColors.blue,
+                    title: LocaleKeys.withdraw,
+                    textStyle: TextStyles.bold14Blue,
+                    onPressed: () =>
+                        Navigator.pushNamed(context, R.withdrawSLFT),
                   ),
                   GestureDetector(
                     onTap: () {
