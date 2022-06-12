@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:slee_fi/common/extensions/string_x.dart';
 import 'package:slee_fi/common/routes/app_routes.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
@@ -92,7 +93,7 @@ class RestoreWalletScreen extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.fromLTRB(24, 0, 24, 24),
                 child: SFButton(
-                  text: LocaleKeys.import_wallet,
+                  text: LocaleKeys.import_wallet.reCase(StringCase.titleCase),
                   textStyle: TextStyles.w600WhiteSize16,
                   height: 48,
                   width: double.infinity,
