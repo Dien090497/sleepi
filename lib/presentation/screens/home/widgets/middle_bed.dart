@@ -115,7 +115,7 @@ class _MiddleBedState extends State<MiddleBed> {
                     width: 8,
                   ),
                   SFButton(
-                    text: 'Lv9999',
+                    text: 'Lv50',
                     textStyle: TextStyles.yellow14,
                     color: Colors.white.withOpacity(0.05),
                     radius: 50,
