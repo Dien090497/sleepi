@@ -138,8 +138,6 @@ class ChartWeekPicker extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final dateTimeUtils = getIt<DateTimeUtils>();
-
     return SfDateRangePicker(
       maxDate: lastAllowedDate,
       minDate: firstAllowedDate,
@@ -172,7 +170,6 @@ class ChartWeekPicker extends StatelessWidget {
         if (value is PickerDateRange &&
             value.startDate != null &&
             !value.endDate!.isTheSameDay(value.startDate!)) {
-          print('end date  ${value.endDate}   ${value.startDate}');
           onNewSelected(DatePeriod(value.startDate!, value.endDate!));
         }
         Navigator.pop(context);
