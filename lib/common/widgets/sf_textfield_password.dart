@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 // import 'package:flutter_translate/flutter_translate.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
@@ -79,13 +80,13 @@ class _SFTextFieldPasswordState extends State<SFTextFieldPassword> {
                   obscureText = !obscureText;
                 });
               },
-              child: const Padding(
-                padding: EdgeInsets.all(10),
-                child: SFIcon(
+              child:  Padding(
+                padding:const EdgeInsets.all(10),
+                child: obscureText ? const SFIcon(
                   Ics.icEye,
                   width: 24,
                   height: 24,
-                ),
+                ) :const Icon(CupertinoIcons.eye, size: 28, color: AppColors.lightGrey,),
               ),
             ),
             border: border,

@@ -47,7 +47,7 @@ class _UseItemState extends State<UseItem> {
               ),
               Expanded(
                 child: SFImageBorder(
-                  icon: items.length == 2 ? items.elementAt(1) :Ics.icItemsEmpty,
+                  icon: items.length > 1 ? items.elementAt(1) :Ics.icItemsEmpty,
                   onTap: ()  {
                     setState((){
                       items.removeAt(1);
@@ -55,8 +55,8 @@ class _UseItemState extends State<UseItem> {
                   },
                   radius: 16,
                   size: const Size(75, 68),
-                  padding: items.length == 2 ? 8 : 20,
-                  iconColor: items.length == 2 ? null : AppColors.lightGrey,
+                  padding: items.length > 1 ? 8 : 20,
+                  iconColor: items.length > 1 ? null : AppColors.lightGrey,
                 ),
               ),
               SizedBox(
@@ -64,7 +64,7 @@ class _UseItemState extends State<UseItem> {
               ),
               Expanded(
                 child: SFImageBorder(
-                  icon: items.length == 3 ? items.elementAt(2) :Ics.icItemsEmpty,
+                  icon: items.length > 2 ? items.elementAt(2) :Ics.icItemsEmpty,
                   onTap: ()  {
                     setState((){
                       items.removeAt(2);
@@ -72,8 +72,8 @@ class _UseItemState extends State<UseItem> {
                   },
                   radius: 16,
                   size: const Size(75, 68),
-                  padding: items.length == 3 ? 8 : 20,
-                  iconColor: AppColors.lightGrey,
+                  padding: items.length > 2 ? 8 : 20,
+                  iconColor: items.length > 2 ? null : AppColors.lightGrey,
                 ),
               ),
               SizedBox(
@@ -81,7 +81,7 @@ class _UseItemState extends State<UseItem> {
               ),
               Expanded(
                 child: SFImageBorder(
-                  icon: items.length == 4 ? items.elementAt(3) :Ics.icItemsEmpty,
+                  icon: items.length > 3 ? items.elementAt(3) :Ics.icItemsEmpty,
                   onTap: ()  {
                     setState((){
                       items.removeAt(3);
@@ -89,8 +89,8 @@ class _UseItemState extends State<UseItem> {
                   },
                   radius: 16,
                   size: const Size(75, 68),
-                  padding: items.length == 4 ? 8 : 20,
-                  iconColor: items.length == 4 ? null : AppColors.lightGrey,
+                  padding: items.length > 3 ? 8 : 20,
+                  iconColor: items.length > 3 ? null : AppColors.lightGrey,
                 ),
               ),
               SizedBox(
@@ -98,7 +98,7 @@ class _UseItemState extends State<UseItem> {
               ),
               Expanded(
                 child: SFImageBorder(
-                  icon: items.length == 5 ? items.elementAt(4) :Ics.icItemsEmpty,
+                  icon: items.length > 4 ? items.elementAt(4) :Ics.icItemsEmpty,
                   onTap: ()  {
                     setState((){
                       items.removeAt(4);
@@ -106,8 +106,8 @@ class _UseItemState extends State<UseItem> {
                   },
                   radius: 16,
                   size: const Size(75, 68),
-                  padding: items.length == 5 ? 8 : 20,
-                  iconColor: AppColors.lightGrey,
+                  padding: items.length > 4 ? 8 : 20,
+                  iconColor:  items.length > 4 ? null : AppColors.lightGrey,
                 ),
               ),
             ],

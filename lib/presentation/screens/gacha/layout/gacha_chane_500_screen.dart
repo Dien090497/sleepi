@@ -9,7 +9,7 @@ import 'package:slee_fi/common/widgets/sf_text.dart';
 import 'package:slee_fi/common/widgets/topbar_common.dart';
 import 'package:slee_fi/l10n/locale_keys.g.dart';
 import 'package:slee_fi/presentation/screens/gacha/widgets/attributes_widget.dart';
-import 'package:slee_fi/presentation/screens/gacha/widgets/custom_radio_button.dart';
+import 'package:slee_fi/presentation/screens/gacha/widgets/option_beds.dart';
 import 'package:slee_fi/resources/resources.dart';
 
 class GachaChance500Screen extends StatefulWidget {
@@ -124,139 +124,11 @@ class _GachaChance500ScreenState extends State<GachaChance500Screen> {
                           padding: const EdgeInsets.symmetric(
                               horizontal: 14, vertical: 15),
                           child: Column(
-                            children: [
-                              const AttributesWidget(),
-                              const SizedBox(height: 25),
-                              Row(
-                                children: [
-                                  Expanded(
-                                    child: Padding(
-                                      padding: const EdgeInsets.symmetric(
-                                          horizontal: 10),
-                                      child: Container(
-                                        decoration: BoxDecoration(
-                                            borderRadius:
-                                                BorderRadius.circular(10),
-                                            color: AppColors.white
-                                                .withOpacity(0.1)),
-                                        child: Column(
-                                          children: [
-                                            const SizedBox(
-                                              height: 5,
-                                            ),
-                                            Align(
-                                              alignment: Alignment.topRight,
-                                              child: Container(
-                                                margin: const EdgeInsets.only(
-                                                    top: 3, right: 8),
-                                                child: CustomRadio(
-                                                  value: 1,
-                                                  groupValue: 1,
-                                                  onChanged: (value) {},
-                                                ),
-                                              ),
-                                            ),
-                                            Padding(
-                                              padding: const EdgeInsets.only(
-                                                  bottom: 10),
-                                              child: Center(
-                                                  child: SFText(
-                                                keyText: 'Short\n Bed',
-                                                style: TextStyles.blue12W700,
-                                              )),
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                  Expanded(
-                                    child: Padding(
-                                      padding: const EdgeInsets.symmetric(
-                                          horizontal: 10),
-                                      child: Container(
-                                        decoration: BoxDecoration(
-                                            borderRadius:
-                                                BorderRadius.circular(10),
-                                            color: AppColors.white
-                                                .withOpacity(0.1)),
-                                        child: Column(
-                                          children: [
-                                            const SizedBox(
-                                              height: 5,
-                                            ),
-                                            Align(
-                                              alignment: Alignment.topRight,
-                                              child: Container(
-                                                margin: const EdgeInsets.only(
-                                                    top: 3, right: 8),
-                                                child: CustomRadio(
-                                                  value: 1,
-                                                  groupValue: 2,
-                                                  onChanged: (value) {},
-                                                ),
-                                              ),
-                                            ),
-                                            Padding(
-                                              padding: const EdgeInsets.only(
-                                                  bottom: 10),
-                                              child: Center(
-                                                  child: SFText(
-                                                keyText: 'Middle\n Bed',
-                                                style:
-                                                    TextStyles.lightGrey12W700,
-                                              )),
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                  Expanded(
-                                    child: Padding(
-                                      padding: const EdgeInsets.symmetric(
-                                          horizontal: 10),
-                                      child: Container(
-                                        decoration: BoxDecoration(
-                                            borderRadius:
-                                                BorderRadius.circular(10),
-                                            color: AppColors.white
-                                                .withOpacity(0.1)),
-                                        child: Column(
-                                          children: [
-                                            const SizedBox(
-                                              height: 5,
-                                            ),
-                                            Align(
-                                              alignment: Alignment.topRight,
-                                              child: Container(
-                                                margin: const EdgeInsets.only(
-                                                    top: 3, right: 8),
-                                                child: CustomRadio(
-                                                  value: 1,
-                                                  groupValue: 3,
-                                                  onChanged: (value) {},
-                                                ),
-                                              ),
-                                            ),
-                                            Padding(
-                                              padding: const EdgeInsets.only(
-                                                  bottom: 10),
-                                              child: Center(
-                                                  child: SFText(
-                                                keyText: 'Long\n Bed',
-                                                style:
-                                                    TextStyles.lightGrey12W700,
-                                              )),
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              const SizedBox(height: 77),
+                            children: const [
+                              AttributesWidget(),
+                              SizedBox(height: 25),
+                              OptionBeds(),
+                              SizedBox(height: 77),
                             ],
                           ),
                         )

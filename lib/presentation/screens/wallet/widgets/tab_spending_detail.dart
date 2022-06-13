@@ -9,6 +9,7 @@ import 'package:slee_fi/common/widgets/sf_card.dart';
 import 'package:slee_fi/common/widgets/sf_icon.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
 import 'package:slee_fi/l10n/locale_keys.g.dart';
+import 'package:slee_fi/presentation/screens/passcode/passcode_screen.dart';
 import 'package:slee_fi/presentation/screens/wallet/widgets/pop_up_info_spending.dart';
 import 'package:slee_fi/presentation/screens/wallet/widgets/spending_detail_list.dart';
 import 'package:slee_fi/resources/resources.dart';
@@ -121,7 +122,10 @@ class TabSpendingDetail extends StatelessWidget {
               gradient: AppColors.gradientBlueButton,
               height: 48,
               width: double.infinity,
-              onPressed: () => Navigator.pushNamed(context, R.transfer),
+              onPressed: () {
+              Navigator.pushNamed(context, R.passcode,
+              arguments: PasscodeArguments(R.transfer));
+              }
             ),
           ),
         ],
