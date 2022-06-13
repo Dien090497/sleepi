@@ -116,14 +116,16 @@ class _UseItemState extends State<UseItem> {
           SFButtonOutLined(
             title: LocaleKeys.use_item,
             onPressed: () {
-              SFModalBottomSheet.show(
-                  context, 0.8,  ModalItemList(
-                onSelected: (item){
-                  setState((){
-                    items.add(item);
-                  });
-                },
-              ));
+              if(items.length<5) {
+                SFModalBottomSheet.show(
+                    context, 0.8, ModalItemList(
+                  onSelected: (item) {
+                    setState(() {
+                      items.add(item);
+                    });
+                  },
+                ));
+              }
             },
             fixedSize: const Size.fromHeight(40),
             textStyle: TextStyles.lightGrey16500,

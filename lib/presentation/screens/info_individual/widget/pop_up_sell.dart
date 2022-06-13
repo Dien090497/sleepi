@@ -237,7 +237,10 @@ class _InputPrice extends StatelessWidget {
         children: [
           const Expanded(
             child: TextField(
+              style: TextStyles.lightWhite14,
+              keyboardType: TextInputType.number,
               decoration: InputDecoration(
+                contentPadding: EdgeInsets.symmetric(horizontal: 16),
                 border: InputBorder.none,
                 focusedBorder: InputBorder.none,
                 disabledBorder: InputBorder.none,
