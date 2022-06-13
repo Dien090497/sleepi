@@ -90,6 +90,7 @@ class _MiddleBedState extends State<MiddleBed> {
                   ],
                 ),
               ),
+              const SizedBox(height: 20,),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [

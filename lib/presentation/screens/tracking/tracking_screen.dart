@@ -29,7 +29,7 @@ class _TrackingScreenState extends State<TrackingScreen> {
           title: LocaleKeys.tracking,
           textStyle: TextStyles.bold18LightWhite),
       child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 16.0),
+        padding: const EdgeInsets.symmetric(horizontal: 24.0),
         child: Column(
           children: [
             Stack(
@@ -88,14 +88,11 @@ class _TrackingScreenState extends State<TrackingScreen> {
               ],
             ),
             const SizedBox(height: 24,),
-            const Padding(
-              padding: EdgeInsets.symmetric(horizontal: 8.0),
-              child: SFLabelValue(
-                label: LocaleKeys.alarm,
-                value: '10:00',
-                styleLabel: TextStyles.textColorSize16,
-                styleValue: TextStyles.textColorSize16,
-              ),
+            const SFLabelValue(
+              label: LocaleKeys.alarm,
+              value: '10:00',
+              styleLabel: TextStyles.textColorSize16,
+              styleValue: TextStyles.textColorSize16,
             ),
             const Spacer(),
             SFButton(

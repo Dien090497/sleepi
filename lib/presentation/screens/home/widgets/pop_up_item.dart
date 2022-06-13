@@ -75,6 +75,7 @@ class PopUpItem extends StatelessWidget {
                   color: AppColors.blue,
                   width: double.infinity,
                   onPressed: () {
+                    Navigator.pop(context);
                     onConfirm();
                     Navigator.pop(context);
                     showSuccessfulDialog(context);

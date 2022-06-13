@@ -39,8 +39,8 @@ class ItemBed extends StatelessWidget {
           clipBehavior: Clip.hardEdge,
           children: [
             Positioned(
-              top: 14,
-              left: -30,
+              top: 20,
+              left: -40,
               child: TopLeftBanner(text: bed.name, textColor: bed.color),
             ),
             Container(
