@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
+import 'package:slee_fi/common/widgets/sf_icon.dart';
 import 'package:slee_fi/common/widgets/sf_percent_border.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
 
@@ -27,7 +28,7 @@ class AttributeProcessWidget extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
-          isUpGrade ? const SizedBox() : Image.asset(linkImage),
+          isUpGrade ? const SizedBox() : SFIcon(linkImage),
           const SizedBox(width: 5),
           Expanded(
             flex: 2,

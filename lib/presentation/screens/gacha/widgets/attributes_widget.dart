@@ -13,7 +13,7 @@ class AttributesWidget extends StatelessWidget {
     return Container(
       decoration: BoxDecoration(
         color: AppColors.whiteOpacity5,
-        borderRadius: BorderRadius.circular(15),
+        borderRadius: BorderRadius.circular(16),
       ),
       width: double.infinity,
       padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 30),

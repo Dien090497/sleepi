@@ -24,7 +24,7 @@ enum ItemType {
   flexible(LocaleKeys.flexible, Imgs.candyPurple);
 
 
-  final String name;
+  final String? name;
   final String image;
 
 
