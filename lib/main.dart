@@ -16,8 +16,10 @@ void main() async {
   ]);
 
   /// Lock in portrait mode only
-  SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp])
-      .then((_) {
+  SystemChrome.setPreferredOrientations([
+    DeviceOrientation.portraitUp,
+    DeviceOrientation.portraitDown,
+  ]).then((_) {
     BlocOverrides.runZoned(
       () => runApp(Phoenix(
         child: EasyLocalization(
