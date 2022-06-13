@@ -22,14 +22,17 @@ class AttributesWidget extends StatelessWidget {
         children: [
           ItemAttribute(
               linkImage: Ics.efficiency,
+              colorIcon: AppColors.ruby,
               title: LocaleKeys.efficiency.tr(),
               valueActive: 10),
           ItemAttribute(
               linkImage: Ics.gift,
+              colorIcon: AppColors.blue,
               title: LocaleKeys.luck.tr(),
               valueActive: 2.5),
           ItemAttribute(
               linkImage: Ics.bonus,
+              colorIcon: AppColors.green,
               title: LocaleKeys.bonus.tr(),
               valueActive: 8.2),
           ItemAttribute(

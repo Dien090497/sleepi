@@ -23,18 +23,21 @@ class SFImageBorder extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: size.width,
-      height: size.height,
-      padding: EdgeInsets.all(padding),
-      decoration: BoxDecoration(
-        color: Colors.white.withOpacity(0.05),
-        borderRadius: BorderRadius.circular(radius),
-      ),
-      child: SFIcon(
-        icon,
-        color: iconColor,
-        fit: BoxFit.contain,
+    return GestureDetector(
+      onTap: onTap,
+      child: Container(
+        width: size.width,
+        height: size.height,
+        padding: EdgeInsets.all(padding),
+        decoration: BoxDecoration(
+          color: Colors.white.withOpacity(0.05),
+          borderRadius: BorderRadius.circular(radius),
+        ),
+        child: SFIcon(
+          icon,
+          color: iconColor,
+          fit: BoxFit.contain,
+        ),
       ),
     );
   }
