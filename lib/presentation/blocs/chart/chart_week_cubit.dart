@@ -1,3 +1,5 @@
+import 'dart:core';
+
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_date_pickers/flutter_date_pickers.dart';
 import 'package:slee_fi/common/utils/date_time_utils.dart';
@@ -30,16 +32,15 @@ class ChartWeekCubit extends Cubit<ChartWeekState> {
     final currentState = state;
     if (currentState is ChartWeekLoaded) {
       final start = currentState.week.start;
-      final end = currentState.week.end;
-      final nextWeekFirstDate =
-          start.add(const Duration(days: DateTime.daysPerWeek));
-      var nextWeekLastDate =
-          end.add(const Duration(days: DateTime.daysPerWeek));
+      final nextWeekFirstDate = dateTimeUtils
+          .startOfWeek(start.add(const Duration(days: DateTime.daysPerWeek)));
+      if (nextWeekFirstDate.isAfter(DateTime.now())) {
+        return;
+      }
+      var nextWeekLastDate = dateTimeUtils.endOfWeek(nextWeekFirstDate);
       if (nextWeekLastDate.isAfter(DateTime.now())) {
         nextWeekLastDate = DateTime(
-            currentState.lastAllowedDate.year,
-            currentState.lastAllowedDate.month,
-            currentState.lastAllowedDate.day);
+            DateTime.now().year, DateTime.now().month, DateTime.now().day);
       }
       if (nextWeekFirstDate.isBefore(currentState.lastAllowedDate) &&
           nextWeekLastDate.isBefore(currentState.lastAllowedDate)) {

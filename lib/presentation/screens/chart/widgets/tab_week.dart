@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_date_pickers/flutter_date_pickers.dart';
+import 'package:slee_fi/common/extensions/date_time_x.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
 import 'package:slee_fi/common/utils/date_time_utils.dart';
 import 'package:slee_fi/common/widgets/loading_screen.dart';
@@ -36,10 +37,10 @@ class TabWeek extends StatelessWidget {
           final startPrevWeek =
               start.subtract(const Duration(days: DateTime.daysPerWeek));
           return ChartTabBody(
-            nextEnable: startNextWeek.isBefore(state.lastAllowedDate),
+            nextEnable: startNextWeek.isBefore(DateTime.now()),
             prevEnable: startPrevWeek.isAfter(state.firstAllowedDate),
             picker: ChartWeekPicker(
-              selectedDate: state.week.start,
+              datePeriod: state.week,
               firstAllowedDate: state.firstAllowedDate,
               lastAllowedDate: state.lastAllowedDate,
               onNewSelected: (period) {
@@ -125,13 +126,12 @@ class TabWeek extends StatelessWidget {
 class ChartWeekPicker extends StatelessWidget {
   const ChartWeekPicker(
       {Key? key,
-      required this.selectedDate,
+      required this.datePeriod,
       required this.firstAllowedDate,
       required this.lastAllowedDate,
       required this.onNewSelected})
       : super(key: key);
-
-  final DateTime selectedDate;
+  final DatePeriod datePeriod;
   final DateTime firstAllowedDate;
   final DateTime lastAllowedDate;
   final ValueChanged<DatePeriod> onNewSelected;
@@ -145,7 +145,7 @@ class ChartWeekPicker extends StatelessWidget {
       minDate: firstAllowedDate,
       showNavigationArrow: true,
       selectionTextStyle: TextStyles.white14,
-      initialDisplayDate: selectedDate,
+      initialDisplayDate: datePeriod.start,
       showTodayButton: false,
       monthCellStyle: const DateRangePickerMonthCellStyle(
         disabledDatesTextStyle: TextStyles.lightGrey14,
@@ -166,24 +166,18 @@ class ChartWeekPicker extends StatelessWidget {
         textStyle: TextStyles.white14,
       ),
       selectionMode: DateRangePickerSelectionMode.range,
-      initialSelectedRange: PickerDateRange(
-          dateTimeUtils.startOfWeek(selectedDate),
-          _endOfWeek(selectedDate, dateTimeUtils)),
-      onSelectionChanged: (DateRangePickerSelectionChangedArgs value) {
-        var selectedDate = value.value;
-        if (selectedDate is PickerDateRange && selectedDate.startDate != null) {
-          onNewSelected(DatePeriod(
-              dateTimeUtils.startOfWeek(selectedDate.startDate!),
-              _endOfWeek(selectedDate.startDate!, dateTimeUtils)));
+      initialSelectedRange: PickerDateRange(datePeriod.start, datePeriod.end),
+      showActionButtons: true,
+      onSubmit: (value) {
+        if (value is PickerDateRange &&
+            value.startDate != null &&
+            !value.endDate!.isTheSameDay(value.startDate!)) {
+          print('end date  ${value.endDate}   ${value.startDate}');
+          onNewSelected(DatePeriod(value.startDate!, value.endDate!));
         }
         Navigator.pop(context);
       },
+      onCancel: () => Navigator.pop(context),
     );
-  }
-
-  DateTime _endOfWeek(DateTime time, DateTimeUtils dateTimeUtils) {
-    final endOfWeek = dateTimeUtils.endOfWeek(time);
-    final now = DateTime.now();
-    return now.isBefore(endOfWeek) ? now : endOfWeek;
   }
 }
