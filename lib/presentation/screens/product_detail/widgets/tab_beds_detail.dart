@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:slee_fi/common/enum/enum.dart';
 import 'package:slee_fi/common/routes/app_routes.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
+import 'package:slee_fi/common/widgets/sf_icon.dart';
 import 'package:slee_fi/common/widgets/sf_sub_tab_bar.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
 import 'package:slee_fi/l10n/locale_keys.g.dart';
@@ -56,7 +57,7 @@ class TabBedsDetail extends StatelessWidget {
                     child: Column(
                       mainAxisSize: MainAxisSize.min,
                       children: [
-                        const Image(image: AssetImage(Ics.emptyBox)),
+                        const SFIcon(Ics.emptyBox),
                         const SizedBox(height: 28),
                         SFText(
                           keyText: LocaleKeys.there_is_no_item,
