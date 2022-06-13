@@ -29,6 +29,7 @@ class GachaRollSelections extends StatelessWidget {
               decoration: BoxDecoration(
                 border: Border.all(
                     color: AppColors.blue),
+                color: AppColors.blue.withOpacity(0.05),
                 borderRadius: BorderRadius.circular(15),
               ),
               alignment: Alignment.centerLeft,
@@ -62,6 +63,7 @@ class GachaRollSelections extends StatelessWidget {
               decoration: BoxDecoration(
                 border: Border.all(color: AppColors.blue),
                 borderRadius: BorderRadius.circular(15),
+                color: AppColors.blue.withOpacity(0.05)
               ),
               alignment: Alignment.centerLeft,
               padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 20),
