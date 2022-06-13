@@ -73,7 +73,7 @@ class GachaResultBedScreen extends StatelessWidget {
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               SFButton(
-                                text: LocaleKeys.legendary,
+                                text: LocaleKeys.common,
                                 textStyle: TextStyles.blue14,
                                 color: Colors.white.withOpacity(0.1),
                                 radius: 50,
