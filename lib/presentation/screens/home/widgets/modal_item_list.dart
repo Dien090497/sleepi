@@ -16,7 +16,9 @@ import 'package:slee_fi/presentation/screens/product_detail/widgets/my_jewel_sho
 import 'package:slee_fi/resources/resources.dart';
 
 class ModalItemList extends StatelessWidget {
-  const ModalItemList({Key? key}) : super(key: key);
+  const ModalItemList({this.onSelected, Key? key}) : super(key: key);
+
+  final ValueChanged<dynamic>? onSelected;
 
   @override
   Widget build(BuildContext context) {
@@ -85,7 +87,9 @@ class ModalItemList extends StatelessWidget {
                           children: PopUpItem(
                             id: id,
                             icon: jewels[i % jewels.length],
-                            onConfirm: () {},
+                            onConfirm: () {
+                              onSelected!(jewels[i % jewels.length]);
+                            },
                           ));
                     },
                     child: MyJewelsShortWidget(
