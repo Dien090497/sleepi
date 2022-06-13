@@ -90,7 +90,7 @@ class _GachaChance500ScreenState extends State<GachaChance500Screen> {
                                       padding: const EdgeInsets.symmetric(
                                           vertical: 8, horizontal: 15),
                                       child: SFText(
-                                        keyText: LocaleKeys.quality,
+                                        keyText: LocaleKeys.common,
                                         style: TextStyles.blue14,
                                       ),
                                     ),
