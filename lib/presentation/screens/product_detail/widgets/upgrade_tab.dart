@@ -138,14 +138,14 @@ class UpGradeTab extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   AttributeProcessWidget(
-                    linkImage: Imgs.efficiency,
+                    linkImage: Ics.efficiency,
                     title: '${LocaleKeys.level.tr()} 2 Jewel',
                     totalValue: 10,
                     valueActive: 3.5,
                     isUpGrade: true,
                   ),
                   const AttributeProcessWidget(
-                    linkImage: Imgs.efficiency,
+                    linkImage: Ics.efficiency,
                     title: LocaleKeys.failure,
                     totalValue: 10,
                     valueActive: 6.5,
