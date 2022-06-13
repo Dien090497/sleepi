@@ -35,7 +35,7 @@ class ItemBedBuyWidget extends StatelessWidget {
             top: 14,
             left: -30,
             child: TopLeftBanner(
-              text: item.name,
+              text: item.name!,
               textColor: item.color,
             ),
           ),

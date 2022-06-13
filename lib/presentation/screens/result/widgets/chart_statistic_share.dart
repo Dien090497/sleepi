@@ -4,8 +4,9 @@ import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
 
 class ChartStatisticShare extends StatelessWidget {
-  ChartStatisticShare({Key? key}) : super(key: key);
+  ChartStatisticShare({Key? key, this.titleBottom = true}) : super(key: key);
 
+  final bool titleBottom;
   final List<Color> gradientColors = [
     AppColors.blue,
     AppColors.blue,
@@ -51,28 +52,23 @@ class ChartStatisticShare extends StatelessWidget {
   Widget bottomTitleWidgets(double value, TitleMeta meta) {
     Widget text;
     switch (value.toInt()) {
-      case 0:
-        text = const Padding(
-          padding: EdgeInsets.only(right: 10.0),
-          child: Text('0',
-              textAlign: TextAlign.right, style: TextStyles.lightGrey12),
-        );
-        break;
-      case 5:
+      case 2:
         text = const Text('2021-01', style: TextStyles.lightGrey12);
         break;
-      case 15:
+      case 10:
         text = const Text('2021-06', style: TextStyles.lightGrey12);
         break;
-      case 25:
+      case 20:
         text = const Text('2021-12', style: TextStyles.lightGrey12);
         break;
-
       default:
         text = const Text('', style: TextStyles.lightGrey12);
         break;
     }
-    return text;
+    return Padding(
+      padding: const EdgeInsets.only(top: 8.0),
+      child: text,
+    );
   }
 
   LineChartData mainData() {
@@ -103,8 +99,8 @@ class ChartStatisticShare extends StatelessWidget {
         ),
         bottomTitles: AxisTitles(
           sideTitles: SideTitles(
-              showTitles: true,
-            reservedSize: 40,
+            showTitles: titleBottom,
+            reservedSize: 20,
             interval: 1,
             getTitlesWidget: bottomTitleWidgets,
           ),
