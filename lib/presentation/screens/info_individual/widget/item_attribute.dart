@@ -42,7 +42,7 @@ class ItemAttribute extends StatelessWidget {
           margin: const EdgeInsets.symmetric(horizontal: 2),
           decoration: BoxDecoration(
             color: checkColor(i),
-            borderRadius: BorderRadius.circular(3),
+            borderRadius: BorderRadius.circular(1),
           ),
         ),
         // if ((i + 1) * 2 - valueActive < 2)

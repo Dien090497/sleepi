@@ -1,4 +1,3 @@
-import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
@@ -20,7 +19,7 @@ class FeedBackScreen extends StatefulWidget {
 class _FeedBackScreenState extends State<FeedBackScreen> {
   bool isDisabled = true;
   int indexTopic = 2;
-  int indexSubTopic = 6;
+  int indexSubTopic = subTopics.length - 1;
 
   @override
   Widget build(BuildContext context) {
@@ -127,7 +126,7 @@ List<String> topics = [
   LocaleKeys.other_
 ];
 List<String> subTopics = [
-  '${LocaleKeys.running.tr()}/${LocaleKeys.gps.tr()}',
+  // '${LocaleKeys.running.tr()}/${LocaleKeys.gps.tr()}',
   LocaleKeys.marketplace,
   LocaleKeys.wallet,
   'NFT',

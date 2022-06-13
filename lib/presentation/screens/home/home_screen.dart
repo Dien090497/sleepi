@@ -71,6 +71,18 @@ class HomeScreen extends StatelessWidget {
                                 children: [
                                   Expanded(
                                     child: SFImageBorder(
+                                      icon: Imgs.jewelSliver,
+                                      onTap: () {},
+                                      radius: 16,
+                                      size: const Size(75, 68),
+                                      padding: 8,
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    width: 10.w,
+                                  ),
+                                  Expanded(
+                                    child: SFImageBorder(
                                       icon: Imgs.jewelPurple,
                                       onTap: () {},
                                       radius: 16,
@@ -100,19 +112,6 @@ class HomeScreen extends StatelessWidget {
                                       radius: 16,
                                       size: const Size(75, 68),
                                       padding: 8,
-                                    ),
-                                  ),
-                                  SizedBox(
-                                    width: 10.w,
-                                  ),
-                                  Expanded(
-                                    child: SFImageBorder(
-                                      icon: Ics.icItemsEmpty,
-                                      onTap: () {},
-                                      radius: 16,
-                                      size: const Size(75, 68),
-                                      padding: 20,
-                                      iconColor: AppColors.lightGrey,
                                     ),
                                   ),
                                   SizedBox(

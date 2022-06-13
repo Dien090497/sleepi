@@ -4,6 +4,7 @@ import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
 import 'package:slee_fi/common/widgets/background_widget.dart';
 import 'package:slee_fi/common/widgets/sf_button_outlined.dart';
+import 'package:slee_fi/common/widgets/sf_buttons.dart';
 import 'package:slee_fi/common/widgets/sf_icon.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
 import 'package:slee_fi/common/widgets/topbar_common.dart';
@@ -42,77 +43,55 @@ class GachaResultBedScreen extends StatelessWidget {
                               style: TextStyles.boldWhite18,
                             ),
                           ),
-                          SizedBox(
-                            width: double.infinity,
-                            child: SingleChildScrollView(
-                              child: Column(
-                                children: [
-                                  Container(
-                                      decoration: BoxDecoration(
-                                          image: const DecorationImage(
-                                            image: AssetImage(
-                                              Imgs.borderBed,
-                                            ),
-                                            fit: BoxFit.cover,
-                                          ),
-                                          boxShadow: [
-                                            BoxShadow(
-                                              color: AppColors.purple
-                                                  .withOpacity(0.02),
-                                              spreadRadius: 3,
-                                              blurRadius: 7,
-                                              offset: const Offset(0,
-                                                  3), // changes position of shadow
-                                            ),
-                                          ],
-                                          borderRadius:
-                                              BorderRadius.circular(20)),
-                                      width: 180,
-                                      height: 180,
-                                      child: const SizedBox(
-                                        child: SFIcon(Imgs.shortBed),
-                                      )),
-                                  const SizedBox(height: 12),
-                                  Row(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      Container(
-                                        decoration: BoxDecoration(
-                                          color:
-                                              AppColors.blue.withOpacity(0.1),
-                                          borderRadius:
-                                              BorderRadius.circular(16),
-                                        ),
-                                        padding: const EdgeInsets.symmetric(
-                                            vertical: 9, horizontal: 12),
-                                        child: SFText(
-                                          keyText: LocaleKeys.legendary,
-                                          style: TextStyles.blue14,
-                                        ),
-                                      ),
-                                      const SizedBox(
-                                        width: 15,
-                                      ),
-                                      Container(
-                                        decoration: BoxDecoration(
-                                          color: Colors.white.withOpacity(0.1),
-                                          borderRadius:
-                                              BorderRadius.circular(16),
-                                        ),
-                                        padding: const EdgeInsets.symmetric(
-                                            vertical: 9, horizontal: 12),
-                                        child: SFText(
-                                          keyText: 'D1283',
-                                          style: TextStyles.white14WithOpacity,
-                                        ),
-                                      ),
-                                    ],
+                          Container(
+                              decoration: BoxDecoration(
+                                  image: const DecorationImage(
+                                    image: AssetImage(
+                                      Imgs.borderBed,
+                                    ),
+                                    fit: BoxFit.cover,
                                   ),
-                                  const SizedBox(height: 28),
-                                ],
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: AppColors.purple
+                                          .withOpacity(0.02),
+                                      spreadRadius: 3,
+                                      blurRadius: 7,
+                                      offset: const Offset(0,
+                                          3), // changes position of shadow
+                                    ),
+                                  ],
+                                  borderRadius:
+                                      BorderRadius.circular(20)),
+                              width: 180,
+                              height: 180,
+                              child: const SizedBox(
+                                child: SFIcon(Imgs.shortBed),
+                              )),
+                          const SizedBox(height: 12),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              SFButton(
+                                text: LocaleKeys.legendary,
+                                textStyle: TextStyles.blue14,
+                                color: Colors.white.withOpacity(0.1),
+                                radius: 50,
+                                height: 36,
                               ),
-                            ),
+                              const SizedBox(
+                                width: 15,
+                              ),
+                              SFButton(
+                                text: 'D1283',
+                                textStyle: TextStyles.white14WithOpacity,
+                                color: Colors.white.withOpacity(0.1),
+                                radius: 50,
+                                height: 36,
+                              ),
+                            ],
                           ),
+                          const SizedBox(height: 28),
                           SFText(
                             keyText: LocaleKeys.attributes,
                             style: TextStyles.boldWhite18,

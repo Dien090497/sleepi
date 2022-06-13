@@ -33,7 +33,7 @@ class SFDropDownRotation<T> extends StatelessWidget {
       height: dropdownHeight ?? 40,
       width: dropdownWidth,
       decoration: BoxDecoration(
-        border: Border.all(width: 1, color: AppColors.darkColor1),
+        border: Border.all(width: 1, color: AppColors.white.withOpacity(0.1)),
         borderRadius: BorderRadius.circular(8),
       ),
       child: CustomDropdown(
