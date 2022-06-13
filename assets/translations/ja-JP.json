@@ -362,7 +362,7 @@
   "matching_jewels": "マッチングさせる宝石",
   "no_transaction_record": "取引履歴はありません。",
   "amount_earned": "獲得トークン量",
-  "do_you_want_to_leave": "帰りたい？",
+  "do_you_want_to_leave": "ログイン画面に戻りますか？",
   "ok": "OK",
-  "you_have_only_just_started": "計測を開始したばかりですが、\n終了しますか？"
+  "you_have_only_just_started": "計測を開始したばかりですが、終了しますか？"
 }

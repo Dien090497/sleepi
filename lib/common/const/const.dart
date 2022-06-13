@@ -10,16 +10,16 @@ class Const {
 
   static const String howToPlayUrl = 'https://sleefi.com/how-to-play';
   static const String linkTreeUrl = 'https://linktr.ee/sleefi';
-  static const String whitePaperUrl = 'https://sleefi.gitbook.io/en/v/whitepaper/';
+  static const String whitePaperUrl =
+      'https://sleefi.gitbook.io/en/v/whitepaper/';
   static const String litePaperUrl = 'https://sleefi.com/litepaper';
   static const String avascanUrl = 'https://avascan.info/';
   static const String binanceUrl = 'https://www.binance.com/';
 
-  static const String whitePaperEn =
-      'https://sleefi.gitbook.io/en/v/whitepaper/';
+  static const String whitePaperEn = 'https://sleefi.gitbook.io/whitepaper/';
 
   static const String whitePaperJa =
-      'https://sleefi.gitbook.io/jp/v/whitepaper-jp/';
+      'https://sleefi.gitbook.io/whitepaper/v/whitepaper-jp/';
 
   static const String whitePaperInsuranceEn = '${whitePaperEn}insurance';
 

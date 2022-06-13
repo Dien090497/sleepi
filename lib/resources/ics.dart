@@ -74,6 +74,7 @@ class Ics {
   static const String telegram = 'assets/icons/telegram.svg';
   static const String transfer = 'assets/icons/transfer.svg';
   static const String twitter = 'assets/icons/twitter.svg';
+  static const String walletTo = 'assets/icons/wallet_to.svg';
   static const String warning = 'assets/icons/warning.svg';
 
   static const List<String> values = [
@@ -147,6 +148,7 @@ class Ics {
     telegram,
     transfer,
     twitter,
+    walletTo,
     warning
   ];
 }

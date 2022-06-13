@@ -31,9 +31,7 @@ class PasscodeScreen extends StatelessWidget {
       child: SafeArea(
         child: ListView(
           children: [
-            const SizedBox(
-              height: 12.0,
-            ),
+            const SizedBox(height: 12.0),
             Stack(
               children: const [
                 Positioned(left: 10, top: 0, child: SFBackButton()),

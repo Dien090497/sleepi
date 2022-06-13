@@ -1,5 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:slee_fi/common/enum/enum.dart';
 import 'package:slee_fi/common/routes/app_routes.dart';
 import 'package:slee_fi/common/widgets/sf_bottom_sheets.dart';
@@ -40,7 +41,7 @@ class TabBedsBuy extends StatelessWidget {
     return DefaultTabController(
       length: 2,
       child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 12),
+        padding:  EdgeInsets.symmetric(horizontal: 12.w),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [

@@ -1,5 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:slee_fi/common/enum/enum.dart';
 import 'package:slee_fi/common/utils/random_utils.dart';
 import 'package:slee_fi/common/widgets/sf_alert_dialog.dart';
@@ -36,15 +37,14 @@ class TabItemsBuy extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     final items = List.generate(ItemType.values.length * 5,
-            (i) => ItemType.values[i % ItemType.values.length]);
+        (i) => ItemType.values[i % ItemType.values.length]);
     final randomUtils = getIt<RandomUtils>();
 
     return DefaultTabController(
       length: 2,
       child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 12.0),
+        padding: EdgeInsets.symmetric(horizontal: 12.w),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -75,7 +75,7 @@ class TabItemsBuy extends StatelessWidget {
                   SFGridView(
                     count: items.length,
                     isScroll: true,
-                    childAspectRatio: 8/10,
+                    childAspectRatio: 8 / 10,
                     itemBuilder: (context, i) {
                       String id = randomUtils.randomId();
                       return GestureDetector(
@@ -85,7 +85,7 @@ class TabItemsBuy extends StatelessWidget {
                         child: ItemBedBuyWidget(
                           id: id,
                           item: items[i % ItemType.values.length],
-                          onPressedButton: (){
+                          onPressedButton: () {
                             _showItemDialog(context, items[i].image, id);
                           },
                         ),
