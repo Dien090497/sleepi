@@ -1,16 +1,11 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
-import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
 import 'package:slee_fi/common/utils/launch_url_utils.dart';
 import 'package:slee_fi/common/widgets/loading_screen.dart';
-import 'package:slee_fi/common/widgets/sf_bottom_sheet.dart';
-import 'package:slee_fi/common/widgets/sf_button_outlined.dart';
 import 'package:slee_fi/common/widgets/sf_icon.dart';
-import 'package:slee_fi/common/widgets/sf_image_border.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
 import 'package:slee_fi/common/widgets/topbar_common.dart';
 import 'package:slee_fi/l10n/locale_keys.g.dart';
@@ -19,7 +14,6 @@ import 'package:slee_fi/presentation/blocs/home/home_state.dart';
 import 'package:slee_fi/presentation/screens/home/widgets/alarm_bell.dart';
 import 'package:slee_fi/presentation/screens/home/widgets/home_switch.dart';
 import 'package:slee_fi/presentation/screens/home/widgets/middle_bed.dart';
-import 'package:slee_fi/presentation/screens/home/widgets/modal_item_list.dart';
 import 'package:slee_fi/presentation/screens/home/widgets/use_item.dart';
 import 'package:slee_fi/resources/resources.dart';
 

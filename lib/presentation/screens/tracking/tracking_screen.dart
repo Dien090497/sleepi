@@ -82,7 +82,7 @@ class _TrackingScreenState extends State<TrackingScreen> {
                   children:  [
                     const SFIcon(Ics.icSlft, width: 40,),
                     const SizedBox(width: 8,),
-                    SFText(keyText: "10 SLFT", style: TextStyles.bold30White,),
+                    SFText(keyText: "0 SLFT", style: TextStyles.bold30White,),
                   ],
                 )
               ],
