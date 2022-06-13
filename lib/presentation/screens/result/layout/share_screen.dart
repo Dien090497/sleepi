@@ -97,7 +97,7 @@ class _ShareScreenState extends State<ShareScreen> {
                               Padding(
                                 padding:
                                     const EdgeInsets.symmetric(horizontal: 16.0),
-                                child: ChartStatisticShare(),
+                                child: ChartStatisticShare(titleBottom: false,),
                               ),
                               const SizedBox(
                                 height: 10,

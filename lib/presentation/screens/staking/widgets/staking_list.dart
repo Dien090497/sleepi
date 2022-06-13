@@ -168,7 +168,7 @@ class StakingList extends StatelessWidget {
                 children: [
                   Expanded(
                       child: SFText(
-                    keyText: LocaleKeys.your_token_earned.tr(args: ['NFT']),
+                    keyText: LocaleKeys.your_token_earned.tr(args: ['SLFT']),
                     style: TextStyles.lightWhite16,
                   )),
                   Row(
