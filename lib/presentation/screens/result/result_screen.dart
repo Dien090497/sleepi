@@ -43,7 +43,7 @@ class _ResultScreenState extends State<ResultScreen> {
                       height: 20,
                     ),
                     const CategoryHeader(
-                      earning: 1000,
+                      earning: 2.4,
                       score: 99,
                       sleepDuration: '7h35min',
                     ),

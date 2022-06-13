@@ -1,16 +1,11 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
-import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
 import 'package:slee_fi/common/utils/launch_url_utils.dart';
 import 'package:slee_fi/common/widgets/loading_screen.dart';
-import 'package:slee_fi/common/widgets/sf_bottom_sheet.dart';
-import 'package:slee_fi/common/widgets/sf_button_outlined.dart';
 import 'package:slee_fi/common/widgets/sf_icon.dart';
-import 'package:slee_fi/common/widgets/sf_image_border.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
 import 'package:slee_fi/common/widgets/topbar_common.dart';
 import 'package:slee_fi/l10n/locale_keys.g.dart';
@@ -19,7 +14,7 @@ import 'package:slee_fi/presentation/blocs/home/home_state.dart';
 import 'package:slee_fi/presentation/screens/home/widgets/alarm_bell.dart';
 import 'package:slee_fi/presentation/screens/home/widgets/home_switch.dart';
 import 'package:slee_fi/presentation/screens/home/widgets/middle_bed.dart';
-import 'package:slee_fi/presentation/screens/home/widgets/modal_item_list.dart';
+import 'package:slee_fi/presentation/screens/home/widgets/use_item.dart';
 import 'package:slee_fi/resources/resources.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -64,92 +59,14 @@ class HomeScreen extends StatelessWidget {
                               child: MiddleBed(),
                             ),
                             const SizedBox(height: 10),
-                            Padding(
-                              padding: const EdgeInsets.symmetric(horizontal: 16),
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Expanded(
-                                    child: SFImageBorder(
-                                      icon: Imgs.jewelSliver,
-                                      onTap: () {},
-                                      radius: 16,
-                                      size: const Size(75, 68),
-                                      padding: 8,
-                                    ),
-                                  ),
-                                  SizedBox(
-                                    width: 10.w,
-                                  ),
-                                  Expanded(
-                                    child: SFImageBorder(
-                                      icon: Imgs.jewelPurple,
-                                      onTap: () {},
-                                      radius: 16,
-                                      size: const Size(75, 68),
-                                      padding: 8,
-                                    ),
-                                  ),
-                                  SizedBox(
-                                    width: 10.w,
-                                  ),
-                                  Expanded(
-                                    child: SFImageBorder(
-                                      icon: Imgs.jewelGreen,
-                                      onTap: () {},
-                                      radius: 16,
-                                      size: const Size(75, 68),
-                                      padding: 8,
-                                    ),
-                                  ),
-                                  SizedBox(
-                                    width: 10.w,
-                                  ),
-                                  Expanded(
-                                    child: SFImageBorder(
-                                      icon: Imgs.jewelRed,
-                                      onTap: () {},
-                                      radius: 16,
-                                      size: const Size(75, 68),
-                                      padding: 8,
-                                    ),
-                                  ),
-                                  SizedBox(
-                                    width: 10.w,
-                                  ),
-                                  Expanded(
-                                    child: SFImageBorder(
-                                      icon: Ics.icItemsEmpty,
-                                      onTap: () {},
-                                      radius: 16,
-                                      size: const Size(75, 68),
-                                      padding: 20,
-                                      iconColor: AppColors.lightGrey,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                            const SizedBox(height: 10),
+                            const UseItem(),
+                            const SizedBox(height: 24),
                             Padding(
                               padding:
                                   const EdgeInsets.symmetric(horizontal: 16.0),
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  SFButtonOutLined(
-                                    title: LocaleKeys.use_item,
-                                    onPressed: () {
-                                      SFModalBottomSheet.show(
-                                          context, 0.8, const ModalItemList());
-                                    },
-                                    fixedSize: const Size.fromHeight(40),
-                                    textStyle: TextStyles.lightGrey16500,
-                                    icon: Icons.add_circle_outline,
-                                    borderColor: Colors.white.withOpacity(0.1),
-                                    withBorder: 1,
-                                  ),
-                                  const SizedBox(height: 24),
                                   Row(
                                     mainAxisAlignment:
                                         MainAxisAlignment.spaceBetween,

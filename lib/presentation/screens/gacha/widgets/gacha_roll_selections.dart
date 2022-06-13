@@ -27,7 +27,9 @@ class GachaRollSelections extends StatelessWidget {
             },
             child: Container(
               decoration: BoxDecoration(
-                border: Border.all(color: AppColors.white.withOpacity(0.1)),
+                border: Border.all(
+                    color: AppColors.blue),
+                color: AppColors.blue.withOpacity(0.05),
                 borderRadius: BorderRadius.circular(15),
               ),
               alignment: Alignment.centerLeft,
@@ -37,14 +39,14 @@ class GachaRollSelections extends StatelessWidget {
                 children: [
                   SFText(
                     keyText: '$singleGacha SLFT',
-                    style: TextStyles.boldWhite18,
+                    style: TextStyles.bold18Blue,
                   ),
                   const SizedBox(
                     height: 5,
                   ),
                   SFText(
                     keyText: LocaleKeys.single_gacha,
-                    style: TextStyles.white14WithOpacity,
+                    style: TextStyles.blue14,
                   ),
                 ],
               ),
@@ -59,8 +61,9 @@ class GachaRollSelections extends StatelessWidget {
             },
             child: Container(
               decoration: BoxDecoration(
-                border: Border.all(color: AppColors.white.withOpacity(0.1)),
+                border: Border.all(color: AppColors.blue),
                 borderRadius: BorderRadius.circular(15),
+                color: AppColors.blue.withOpacity(0.05)
               ),
               alignment: Alignment.centerLeft,
               padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 20),
@@ -69,14 +72,14 @@ class GachaRollSelections extends StatelessWidget {
                 children: [
                   SFText(
                       keyText: '$timesGacha SLFT',
-                      style: TextStyles.boldWhite18),
+                      style: TextStyles.bold18Blue),
                   const SizedBox(
                     height: 5,
                   ),
                   SFText(
                     keyText:
                         LocaleKeys.ten_times_gacha.tr(namedArgs: {'num': '10'}),
-                    style: TextStyles.white14WithOpacity,
+                    style: TextStyles.blue14,
                   ),
                 ],
               ),
