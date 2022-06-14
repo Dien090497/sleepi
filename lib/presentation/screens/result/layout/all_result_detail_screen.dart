@@ -109,7 +109,7 @@ class AllResultDetailScreen extends StatelessWidget {
                                   onPressed: () {},
                                   borderColor: AppColors.blue,
                                   textStyle: TextStyles.blue14,
-                                  fixedSize: const Size(73, 32),
+                                  fixedSize: const Size(72, 32),
                                 )
                               ],
                             ),
