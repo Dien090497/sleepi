@@ -13,6 +13,10 @@ extension StringX on String {
         orElse: () => '',
       );
 
+  bool get isJapanese{
+    return this == 'ja-JP';
+  }
+
   String get checkSum => toChecksumAddress(this);
 
   String get lowerCaseName => basename(this).toLowerCase().split('.').first;
