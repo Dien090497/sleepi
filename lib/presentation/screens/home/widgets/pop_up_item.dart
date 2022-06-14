@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:slee_fi/common/enum/enum.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
 import 'package:slee_fi/common/widgets/sf_buttons.dart';
@@ -13,7 +14,7 @@ class PopUpItem extends StatelessWidget {
       {Key? key, required this.id, required this.icon, required this.onConfirm, this.onCancel})
       : super(key: key);
 
-  final String icon;
+  final ItemType icon;
   final String id;
   final VoidCallback onConfirm;
   final VoidCallback? onCancel;
@@ -28,7 +29,7 @@ class PopUpItem extends StatelessWidget {
             keyText: id,
             style: TextStyles.white1w700size16,
           ),
-          SFIcon(icon, width: 160,),
+          SFIcon(icon.image, width: 160,),
           SFText(keyText: 'Level 5', style: TextStyles.lightGrey14),
           const SizedBox(height: 32),
           SFCard(

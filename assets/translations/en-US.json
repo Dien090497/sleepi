@@ -367,5 +367,13 @@
   "no_transaction_record": "No transaction record",
   "do_you_want_to_leave": "Do you want to leave?",
   "ok": "OK",
-  "you_have_only_just_started": "You've only just started - are you sure you want to give up?"
+  "you_have_only_just_started": "You've only just started - are you sure you want to give up?",
+  "pink_candy": "Pink Candy",
+  "blue_candy": "Blue Candy",
+  "green_candy": "Green Candy",
+  "purple_candy": "Purple Candy",
+  "effect_luck": "Put positive correction to Luck",
+  "effect_special": "Put positive correction to Special",
+  "effect_efficiency": "Put positive correction to Efficiency",
+  "effect_resilience": "Put positive correction to Resilience"
 }
