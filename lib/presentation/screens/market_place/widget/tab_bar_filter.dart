@@ -29,20 +29,22 @@ class TabBarFilter extends StatelessWidget {
           onChange: (int value, int index) {},
         ),
         const SizedBox(width: 4),
-        Expanded(child: SFSubTabBar(texts: tabTexts)),
+        SFSubTabBar(texts: tabTexts),
         const SizedBox(width: 4),
-        GestureDetector(
-          onTap: onFilterTap,
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              const SFIcon(Ics.filter, color: AppColors.blue),
-              const SizedBox(width: 4),
-              Expanded(
-                child: SFText(
-                    keyText: LocaleKeys.filter, style: TextStyles.blue16W700),
-              ),
-            ],
+        Expanded(
+          child: GestureDetector(
+            onTap: onFilterTap,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                const SFIcon(Ics.filter, color: AppColors.blue),
+                const SizedBox(width: 4),
+                Expanded(
+                  child: SFText(
+                      keyText: LocaleKeys.filter, style: TextStyles.blue16W700),
+                ),
+              ],
+            ),
           ),
         ),
       ],
