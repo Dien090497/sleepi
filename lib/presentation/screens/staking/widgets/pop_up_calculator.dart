@@ -1,5 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:slee_fi/common/extensions/string_x.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
 import 'package:slee_fi/common/widgets/sf_card.dart';
@@ -36,7 +37,8 @@ class PopUpCalculator extends StatelessWidget {
           height: 12.0,
         ),
         SFText(
-          keyText: "SLFT ${Localizations.localeOf(context).toLanguageTag() == 'ja-JP' ? '' : LocaleKeys.staked.tr()}",
+          keyText:
+              "SLFT ${Localizations.localeOf(context).toLanguageTag().isJapanese ? '' : LocaleKeys.staked.tr()}",
           style: TextStyles.lightGrey14,
         ),
         const SLFTStaked(),
