@@ -21,6 +21,7 @@ class TabWalletDetail extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var isJapanese = Localizations.localeOf(context).toLanguageTag().isJapanese;
     return SingleChildScrollView(
       child: Column(
         children: [
@@ -83,8 +84,7 @@ class TabWalletDetail extends StatelessWidget {
                   Expanded(
                     child: BoxButtonWidget(
                       onTap: () => Navigator.pushNamed(context, R.trade),
-                      text:
-                          LocaleKeys.trade.tr().reCase(StringCase.titleCase),
+                      text: LocaleKeys.trade.tr().reCase(StringCase.titleCase),
                       assetImage: Ics.icTransfer,
                     ),
                   ),
@@ -103,9 +103,10 @@ class TabWalletDetail extends StatelessWidget {
                 const PopupInfoWallet(),
                 ElevatedButton(
                     onPressed: () async {
-                      final url = Uri.parse(Const.binanceUrl);
-                      if (await canLaunchUrl(url)) {
-                        launchUrl(url);
+                      var url = isJapanese ? Const.okCoinUrl : Const.binanceUrl;
+                      final uri = Uri.parse(url);
+                      if (await canLaunchUrl(uri)) {
+                        launchUrl(uri);
                       }
                     },
                     style: ElevatedButton.styleFrom(
@@ -117,11 +118,16 @@ class TabWalletDetail extends StatelessWidget {
                     ),
                     child: Row(
                       children: [
-                        const SFIcon(Imgs.binance, width: 24),
+                        SFIcon(
+                          isJapanese ? Ics.okcoin : Imgs.binance,
+                          width: 24,
+                        ),
                         const SizedBox(width: 8.0),
                         SFText(
                           keyText: LocaleKeys.buy,
-                          style: TextStyles.bold14Yellow,
+                          style: isJapanese
+                              ? TextStyles.bold14Blue
+                              : TextStyles.bold14Yellow,
                         )
                       ],
                     )),

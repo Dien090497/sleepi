@@ -13,6 +13,7 @@ class Const {
   static const String litePaperUrl = 'https://sleefi.com/litepaper';
   static const String avascanUrl = 'https://avascan.info/';
   static const String binanceUrl = 'https://www.binance.com/';
+  static const String okCoinUrl = 'https://www.okcoin.jp/';
 
   static const String whitePaperEn = 'https://sleefi.gitbook.io/whitepaper/';
 
