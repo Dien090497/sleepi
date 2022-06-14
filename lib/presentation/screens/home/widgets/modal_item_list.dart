@@ -1,5 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:slee_fi/common/enum/enum.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
 import 'package:slee_fi/common/utils/random_utils.dart';
@@ -18,16 +19,12 @@ import 'package:slee_fi/resources/resources.dart';
 class ModalItemList extends StatelessWidget {
   const ModalItemList({this.onSelected, Key? key}) : super(key: key);
 
-  final ValueChanged<dynamic>? onSelected;
+  final Function(ItemType item, String id)? onSelected;
 
   @override
   Widget build(BuildContext context) {
-    final jewels = [
-      Imgs.jewelSliver,
-      Imgs.jewelPurple,
-      Imgs.jewelGreen,
-      Imgs.jewelRed
-    ];
+    final items = List.generate(
+        12, (i) => ItemType.values[i % ItemType.values.length]);
     final randomUtils = getIt<RandomUtils>();
 
     return SafeArea(
@@ -77,7 +74,7 @@ class ModalItemList extends StatelessWidget {
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 8),
               child: SFGridView(
-                count: jewels.length * 3,
+                count: items.length,
                 childAspectRatio: 1,
                 itemBuilder: (context, i) {
                   String id = randomUtils.randomId();
@@ -86,9 +83,9 @@ class ModalItemList extends StatelessWidget {
                       showCustomAlertDialog(context,
                           children: PopUpItem(
                             id: id,
-                            icon: jewels[i % jewels.length],
+                            icon: items[i],
                             onConfirm: () {
-                              onSelected!(jewels[i % jewels.length]);
+                              onSelected!(items[i], id);
                             },
                           ));
                     },
@@ -96,7 +93,7 @@ class ModalItemList extends StatelessWidget {
                       id: id,
                       increase: i == 2 ? false : true,
                       color: AppColors.light4,
-                      icon: jewels[i % jewels.length],
+                      icon: items[i].image,
                     ),
                   );
                 },

@@ -370,5 +370,13 @@ abstract class  LocaleKeys {
   static const do_you_want_to_leave = 'do_you_want_to_leave';
   static const ok = 'ok';
   static const you_have_only_just_started = 'you_have_only_just_started';
+  static const pink_candy = 'pink_candy';
+  static const blue_candy = 'blue_candy';
+  static const green_candy = 'green_candy';
+  static const purple_candy = 'purple_candy';
+  static const effect_luck = 'effect_luck';
+  static const effect_special = 'effect_special';
+  static const effect_efficiency = 'effect_efficiency';
+  static const effect_resilience = 'effect_resilience';
 
 }

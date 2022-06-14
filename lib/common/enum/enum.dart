@@ -18,17 +18,18 @@ enum BedType {
 }
 
 enum ItemType {
-  short(LocaleKeys.short, Imgs.candyBlue),
-  middle(LocaleKeys.middle, Imgs.candyGreen),
-  long(LocaleKeys.long, Imgs.candyPink),
-  flexible(LocaleKeys.flexible, Imgs.candyPurple);
+  short(LocaleKeys.blue_candy, Imgs.candyBlue, LocaleKeys.effect_luck),
+  middle(LocaleKeys.green_candy, Imgs.candyGreen, LocaleKeys.effect_special),
+  long(LocaleKeys.pink_candy, Imgs.candyPink, LocaleKeys.effect_efficiency),
+  flexible(LocaleKeys.purple_candy, Imgs.candyPurple, LocaleKeys.effect_resilience);
 
 
   final String? name;
   final String image;
+  final String effect;
 
 
-  const ItemType(this.name, this.image);
+  const ItemType(this.name, this.image, this.effect);
 }
 
 

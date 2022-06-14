@@ -364,5 +364,13 @@
   "amount_earned": "獲得トークン量",
   "do_you_want_to_leave": "ログイン画面に戻りますか？",
   "ok": "OK",
-  "you_have_only_just_started": "計測を開始したばかりですが、終了しますか？"
+  "you_have_only_just_started": "計測を開始したばかりですが、終了しますか？",
+  "pink_candy": "ピンクキャンディ",
+  "blue_candy": "青キャンディ",
+  "green_candy": "緑キャンディ",
+  "purple_candy": "紫キャンディ",
+  "effect_luck": "ラックにプラス補正をかける",
+  "effect_special": "スペシャルにプラス補正をかける",
+  "effect_efficiency": "効率性にプラス補正をかける",
+  "effect_resilience": "レジリエンスにプラス補正をかける"
 }
