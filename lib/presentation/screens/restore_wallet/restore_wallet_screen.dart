@@ -17,7 +17,6 @@ class RestoreWalletScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     return DismissKeyboardWidget(
       child: BackgroundWidget(
         resizeToAvoidBottomInset: false,
@@ -26,7 +25,7 @@ class RestoreWalletScreen extends StatelessWidget {
           title: LocaleKeys.restore_wallet,
           textStyle: TextStyles.bold18LightWhite,
         ),
-        child:SafeArea(
+        child: SafeArea(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
@@ -57,7 +56,7 @@ class RestoreWalletScreen extends StatelessWidget {
                             ),
                             padding: const EdgeInsets.only(left: 12, right: 4),
                             child: Row(
-                              children:  [
+                              children: [
                                 const Expanded(
                                   child: SFTextField(
                                     maxLength: 6,

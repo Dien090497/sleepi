@@ -2,6 +2,7 @@
     package="com.sotatek.slee_fi">
 
     <uses-permission android:name="android.permission.QUERY_ALL_PACKAGES"/>
+    <uses-permission android:name="android.permission.INTERNET"/>
 
     <application
         android:name="${applicationName}"

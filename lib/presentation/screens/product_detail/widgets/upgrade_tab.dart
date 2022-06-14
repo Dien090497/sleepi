@@ -55,7 +55,7 @@ class UpGradeTab extends StatelessWidget {
                               level: 20,
                               cost: 1,
                               time: 2,
-                              onCancel: (){
+                              onCancel: () {
                                 Navigator.pop(context);
                               },
                               onConfirm: () {})
@@ -79,7 +79,7 @@ class UpGradeTab extends StatelessWidget {
                               level: 20,
                               cost: 1,
                               time: 2,
-                              onCancel: (){
+                              onCancel: () {
                                 Navigator.pop(context);
                               },
                               onConfirm: () {})
@@ -99,7 +99,7 @@ class UpGradeTab extends StatelessWidget {
                               level: 20,
                               cost: 1,
                               time: 2,
-                              onCancel: (){
+                              onCancel: () {
                                 Navigator.pop(context);
                               },
                               onConfirm: () {})

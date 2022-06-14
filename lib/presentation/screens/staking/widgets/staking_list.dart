@@ -263,7 +263,7 @@ class StakingList extends StatelessWidget {
                         Navigator.pushNamed(context, R.depositSLFT),
                   ),
                   SFButtonOutLined(
-                    fixedSize: const Size(95, 32),
+                    fixedSize: Size(102.w, 32.h),
                     borderColor: AppColors.blue,
                     title: LocaleKeys.withdraw,
                     textStyle: TextStyles.bold14Blue,
