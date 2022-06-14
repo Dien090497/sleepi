@@ -40,7 +40,6 @@ import 'package:slee_fi/presentation/screens/setting_wallet/setting_wallet_scree
 import 'package:slee_fi/presentation/screens/staking/layout/deposit_slft_screen.dart';
 import 'package:slee_fi/presentation/screens/staking/layout/withdraw_slft_screen.dart';
 import 'package:slee_fi/presentation/screens/staking/staking_screen.dart';
-import 'package:slee_fi/presentation/screens/staking/widgets/taking_screen.dart';
 import 'package:slee_fi/presentation/screens/tracking/tracking_screen.dart';
 import 'package:slee_fi/presentation/screens/trade/trade_screen.dart';
 import 'package:slee_fi/presentation/screens/transfer/transfer_screen.dart';
@@ -63,7 +62,6 @@ class R {
   static const String passcode = '${_}passcode';
   static const String nftInfo = '${_}nft_info';
   static const String mint = '${_}mint';
-  static const String taking = '${_}taking';
   static const String staking = '${_}staking';
   static const String wallet = '${_}wallet';
   static const String setting = '${_}setting';
@@ -119,7 +117,6 @@ class AppRoutes {
     R.mint: (_) => const MintScreen(),
     R.wallet: (_) => const WalletScreen(),
     R.staking: (_) => const StakingScreen(),
-    R.taking: (_) => const TakingScreen(),
     R.setting: (_) => const SettingScreen(),
     R.alarm: (_) => const AlarmScreen(),
     R.alarmSoundEffect: (_) => const AlarmSoundEffectScreen(),
