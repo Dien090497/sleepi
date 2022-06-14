@@ -55,7 +55,7 @@ class UpGradeTab extends StatelessWidget {
                               level: 20,
                               cost: 1,
                               time: 2,
-                              onCancel: (){
+                              onCancel: () {
                                 Navigator.pop(context);
                               },
                               onConfirm: () {})
@@ -79,7 +79,7 @@ class UpGradeTab extends StatelessWidget {
                               level: 20,
                               cost: 1,
                               time: 2,
-                              onCancel: (){
+                              onCancel: () {
                                 Navigator.pop(context);
                               },
                               onConfirm: () {})
@@ -99,7 +99,7 @@ class UpGradeTab extends StatelessWidget {
                               level: 20,
                               cost: 1,
                               time: 2,
-                              onCancel: (){
+                              onCancel: () {
                                 Navigator.pop(context);
                               },
                               onConfirm: () {})
@@ -111,7 +111,7 @@ class UpGradeTab extends StatelessWidget {
                 ],
               ),
             ),
-            const SFLabelValue(
+            SFLabelValue(
               label: LocaleKeys.token_consumptions,
               value: '0 SLFT + 0 SLGT',
               styleLabel: TextStyles.lightGrey16,

@@ -1,5 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
 import 'package:slee_fi/common/widgets/sf_dropdown_rotation.dart';
@@ -36,7 +37,7 @@ class TabBarFilter extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 const SFIcon(Ics.filter, color: AppColors.blue),
-                const SizedBox(width: 4),
+                SizedBox(width: 4.w),
                 Expanded(
                   child: SFText(
                       keyText: LocaleKeys.filter, style: TextStyles.blue16W700),
