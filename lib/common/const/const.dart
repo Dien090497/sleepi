@@ -10,8 +10,6 @@ class Const {
 
   static const String howToPlayUrl = 'https://sleefi.com/how-to-play';
   static const String linkTreeUrl = 'https://linktr.ee/sleefi';
-  static const String whitePaperUrl =
-      'https://sleefi.gitbook.io/en/v/whitepaper/';
   static const String litePaperUrl = 'https://sleefi.com/litepaper';
   static const String avascanUrl = 'https://avascan.info/';
   static const String binanceUrl = 'https://www.binance.com/';
