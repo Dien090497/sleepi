@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
+import 'package:slee_fi/common/widgets/sf_icon.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
 
 class SFButtonOutLined extends StatelessWidget {
@@ -12,7 +13,7 @@ class SFButtonOutLined extends StatelessWidget {
     this.borderColor = AppColors.lightGrey,
     this.iconColor = AppColors.lightGrey,
     this.withBorder = 1,
-    this.icon, this.bgColor,
+    this.icon, this.bgColor, this.image
   }) : super(key: key);
 
   final String title;
@@ -22,6 +23,7 @@ class SFButtonOutLined extends StatelessWidget {
   final Color borderColor;
   final Color iconColor;
   final IconData? icon;
+  final String? image;
   final Color? bgColor;
   final double withBorder;
 
@@ -47,6 +49,8 @@ class SFButtonOutLined extends StatelessWidget {
               size: 20,
               color: iconColor,
             ),
+          if (image !=null)
+            SFIcon(image!, width: 20, height: 20,),
           if (icon != null) const SizedBox(width: 9),
           SFText(
             keyText: title,
