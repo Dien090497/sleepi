@@ -54,7 +54,7 @@ class _PopupInfoSpendingState extends State<PopupInfoSpending> {
       context,
       text: text,
       width: 200,
-      height: 82,
+      height: 102,
       textStyle: TextStyles.w400LightWhite12,
       backgroundColor: AppColors.darkColor1,
       padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 6),
