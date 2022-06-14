@@ -74,6 +74,7 @@ class Ics {
   static const String successful = 'assets/icons/successful.svg';
   static const String telegram = 'assets/icons/telegram.svg';
   static const String transfer = 'assets/icons/transfer.svg';
+  static const String trash = 'assets/icons/trash.svg';
   static const String twitter = 'assets/icons/twitter.svg';
   static const String walletTo = 'assets/icons/wallet_to.svg';
   static const String warning = 'assets/icons/warning.svg';
@@ -149,6 +150,7 @@ class Ics {
     successful,
     telegram,
     transfer,
+    trash,
     twitter,
     walletTo,
     warning
