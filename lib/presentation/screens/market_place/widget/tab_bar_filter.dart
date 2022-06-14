@@ -28,7 +28,9 @@ class TabBarFilter extends StatelessWidget {
           spinnerItems: [LocaleKeys.low_price.tr(), LocaleKeys.high_price.tr()],
           onChange: (int value, int index) {},
         ),
-        Expanded(child: SFSubTabBar(texts: tabTexts)),
+        const SizedBox(width: 4),
+        SFSubTabBar(texts: tabTexts),
+        const SizedBox(width: 4),
         Expanded(
           child: GestureDetector(
             onTap: onFilterTap,

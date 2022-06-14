@@ -37,7 +37,7 @@ class QuestionScreen extends StatelessWidget {
                   text: LocaleKeys.whitepaper,
                   textStyle: TextStyles.bold16LightWhite,
                   color: AppColors.white.withOpacity(0.07),
-                  onPressed: () => _launchUrl(Const.whitePaperUrl),
+                  onPressed: () => _launchUrl(Const.whitePaperEn),
                   width: size.width * 0.45,
                   height: 48,
                 ),
