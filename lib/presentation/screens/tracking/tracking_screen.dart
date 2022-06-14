@@ -60,7 +60,7 @@ class _TrackingScreenState extends State<TrackingScreen> {
                     minuteHandColor: Colors.white,
                     showSecondHand: true,
                     secondHandColor: AppColors.blue,
-                    numberColor: AppColors.textColor,
+                    numberColor: AppColors.lightWhite,
                     showNumbers: true,
                     textScaleFactor: 1.2,
                     showTicks: true,
@@ -91,8 +91,8 @@ class _TrackingScreenState extends State<TrackingScreen> {
             const SFLabelValue(
               label: LocaleKeys.alarm,
               value: '10:00',
-              styleLabel: TextStyles.textColorSize16,
-              styleValue: TextStyles.textColorSize16,
+              styleLabel: TextStyles.lightWhite16,
+              styleValue: TextStyles.lightWhite16,
             ),
             const Spacer(),
             SFButton(

@@ -180,7 +180,7 @@ class _AddDurationState extends State<AddDuration> {
               child: SFChip(
                 text: "${days[index]}D",
                 textStyle: selectedIndex == index
-                    ? TextStyles.w700WhiteSize14
+                    ? TextStyles.white14W700
                     : TextStyles.lightGrey14,
                 color: selectedIndex == index
                     ? AppColors.blue
@@ -296,7 +296,7 @@ class _SLFTStakedState extends State<SLFTStaked> {
                     ? balance[index]
                     : "\$${balance[index]}",
                 textStyle: selectedIndex == index
-                    ? TextStyles.w700WhiteSize14
+                    ? TextStyles.white14W700
                     : TextStyles.lightGrey14,
                 color: selectedIndex == index
                     ? AppColors.blue
