@@ -76,7 +76,7 @@ class RestoreWalletScreen extends StatelessWidget {
                             ),
                           ),
                           const SizedBox(height: 20),
-                          SFTextField(
+                          const SFTextField(
                             maxLine: 10,
                             maxLength: 100,
                             labelText: LocaleKeys.seed_phrase,
