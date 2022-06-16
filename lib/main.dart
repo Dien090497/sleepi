@@ -7,6 +7,8 @@ import 'package:logger/logger.dart';
 import 'package:slee_fi/app.dart';
 import 'package:slee_fi/common/const/const.dart';
 import 'package:slee_fi/di/injector.dart';
+import 'package:slee_fi/usecase/run_app_init_usecase.dart';
+import 'package:slee_fi/usecase/usecase.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -14,6 +16,7 @@ void main() async {
   await Future.wait([
     configureDependencies(),
   ]);
+  await getIt<RunAppInitUseCase>().call(NoParams());
 
   /// Lock in portrait mode only
   SystemChrome.setPreferredOrientations([

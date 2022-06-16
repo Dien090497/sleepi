@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:slee_fi/common/routes/app_routes.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
@@ -10,6 +11,8 @@ import 'package:slee_fi/common/widgets/sf_card.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
 import 'package:slee_fi/common/widgets/sf_textfield_text_button.dart';
 import 'package:slee_fi/l10n/locale_keys.g.dart';
+import 'package:slee_fi/presentation/blocs/create_wallet/create_wallet_cubit.dart';
+import 'package:slee_fi/presentation/blocs/create_wallet/create_wallet_state.dart';
 import 'package:slee_fi/presentation/screens/passcode/create_passcode_screen.dart';
 
 class CreateWalletScreen extends StatelessWidget {
@@ -17,59 +20,71 @@ class CreateWalletScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return DismissKeyboardWidget(
-      child: BackgroundWidget(
-        appBar: SFAppBar(
-          context: context,
-          title: LocaleKeys.create_wallet,
-          textStyle: TextStyles.bold18LightWhite,
-        ),
-        child: SafeArea(
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 23),
-            child: Column(
-              children: [
-                Expanded(
-                  child: ListView(
+    return BlocProvider(
+      create: (_) => CreateWalletCubit()..init(),
+      child: BlocBuilder<CreateWalletCubit, CreateWalletState>(
+        builder: (context, state) {
+          final cubit = context.read<CreateWalletCubit>();
+          return DismissKeyboardWidget(
+            child: BackgroundWidget(
+              appBar: SFAppBar(
+                context: context,
+                title: LocaleKeys.create_wallet,
+                textStyle: TextStyles.bold18LightWhite,
+              ),
+              child: SafeArea(
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 23),
+                  child: Column(
                     children: [
-                      SFCard(
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: 16, vertical: 24),
-                        child: Column(
+                      Expanded(
+                        child: ListView(
                           children: [
-                            SFTextFieldTextButton(
-                              labelText: LocaleKeys.email_verification_code,
-                              textButton: LocaleKeys.send_code,
-                              onPressed: () {},
-                            ),
-                            const SizedBox(height: 16),
-                            SFText(
-                              keyText: LocaleKeys
-                                  .you_have_already_created_a_wallet_address,
-                              style: TextStyles.w400lightGrey12,
+                            SFCard(
+                              padding: const EdgeInsets.symmetric(
+                                  horizontal: 16, vertical: 24),
+                              child: Column(
+                                children: [
+                                  SFTextFieldTextButton(
+                                    labelText:
+                                        LocaleKeys.email_verification_code,
+                                    textButton: LocaleKeys.send_code,
+                                    onPressed: () {},
+                                  ),
+                                  const SizedBox(height: 16),
+                                  SFText(
+                                    keyText: LocaleKeys
+                                        .you_have_already_created_a_wallet_address,
+                                    style: TextStyles.w400lightGrey12,
+                                  ),
+                                ],
+                              ),
                             ),
                           ],
                         ),
                       ),
+                      SFButton(
+                        text: LocaleKeys.create_wallet,
+                        textStyle: TextStyles.w600WhiteSize16,
+                        height: 48,
+                        width: double.infinity,
+                        color: AppColors.blue,
+                        onPressed: () {
+                          // Navigator.pushNamed(context, R.createPasscode,
+                          //     arguments: CreatePasscodeArguments(R.showSeedPhrase));
+                          cubit.createWallet();
+                        },
+                      ),
+                      const SizedBox(
+                        height: 24,
+                      ),
                     ],
                   ),
                 ),
-                SFButton(
-                  text: LocaleKeys.create_wallet,
-                  textStyle: TextStyles.w600WhiteSize16,
-                  height: 48,
-                  width: double.infinity,
-                  color: AppColors.blue,
-                  onPressed: () {
-                    Navigator.pushNamed(context, R.createPasscode,
-                        arguments: CreatePasscodeArguments(R.showSeedPhrase));
-                  },
-                ),
-                const SizedBox(height: 24,),
-              ],
+              ),
             ),
-          ),
-        ),
+          );
+        },
       ),
     );
   }

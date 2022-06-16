@@ -8,3 +8,5 @@ abstract class UseCase<T, Params> {
 abstract class UseCaseSync<T, Params> {
   Either<Failure, T> call(Params params);
 }
+
+class NoParams {}
