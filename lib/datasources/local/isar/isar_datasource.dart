@@ -14,7 +14,9 @@ import 'package:slee_fi/models/network/network.dart';
 class IsarDataSource {
   final Isar _isar;
 
-  IsarDataSource(this._isar);
+  IsarDataSource(this._isar) {
+    init();
+  }
 
   Future<void> init() async {
     final count = await networksCount();

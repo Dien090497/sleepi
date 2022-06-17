@@ -1,5 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:slee_fi/common/const/const.dart';
 import 'package:slee_fi/common/extensions/string_x.dart';
 import 'package:slee_fi/common/routes/app_routes.dart';
@@ -9,6 +10,8 @@ import 'package:slee_fi/common/widgets/sf_bottom_sheet.dart';
 import 'package:slee_fi/common/widgets/sf_icon.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
 import 'package:slee_fi/l10n/locale_keys.g.dart';
+import 'package:slee_fi/presentation/blocs/wallet/wallet_cubit.dart';
+import 'package:slee_fi/presentation/blocs/wallet/wallet_state.dart';
 import 'package:slee_fi/presentation/screens/wallet/widgets/box_button_widget.dart';
 import 'package:slee_fi/presentation/screens/wallet/widgets/modal_receive_wallet.dart';
 import 'package:slee_fi/presentation/screens/wallet/widgets/pop_up_info_wallet.dart';
@@ -26,20 +29,29 @@ class TabWalletDetail extends StatelessWidget {
       child: Column(
         children: [
           const SizedBox(height: 32),
-          SFText(keyText: "AVAX C-Chain", style: TextStyles.bold12Blue),
-          const SizedBox(height: 4.0),
-          SFText(keyText: "0 AVAX", style: TextStyles.bold30White),
-          const SizedBox(height: 20.0),
-          Container(
-            padding:
-                const EdgeInsets.symmetric(vertical: 6.0, horizontal: 16.0),
-            margin: const EdgeInsets.symmetric(horizontal: 16),
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(20.0),
-              color: AppColors.lightWhite.withOpacity(0.05),
-            ),
-            child: SFText(
-                keyText: "0xC02aa...C756Cc2", style: TextStyles.lightWhite14),
+          BlocBuilder<WalletCubit, WalletState>(
+            builder: (context, state) {
+              return Column(
+                children: [
+                  SFText(keyText: "AVAX C-Chain", style: TextStyles.bold12Blue),
+                  const SizedBox(height: 4.0),
+                  SFText(keyText: "0 AVAX", style: TextStyles.bold30White),
+                  const SizedBox(height: 20.0),
+                  Container(
+                    padding: const EdgeInsets.symmetric(
+                        vertical: 6.0, horizontal: 16.0),
+                    margin: const EdgeInsets.symmetric(horizontal: 16),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(20.0),
+                      color: AppColors.lightWhite.withOpacity(0.05),
+                    ),
+                    child: SFText(
+                        keyText: "0xC02aa...C756Cc2",
+                        style: TextStyles.lightWhite14),
+                  ),
+                ],
+              );
+            },
           ),
           const SizedBox(height: 16.0),
           ConstrainedBox(
