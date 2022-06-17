@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:bip32/bip32.dart' as bip32;
 import 'package:bip39/bip39.dart' as bip39;
 import 'package:erc20/erc20.dart';
@@ -6,6 +8,7 @@ import 'package:hex/hex.dart';
 import 'package:http/http.dart';
 import 'package:injectable/injectable.dart';
 import 'package:slee_fi/common/abi/erc721.g.dart';
+import 'package:slee_fi/common/abi/avax.g.dart';
 import 'package:slee_fi/common/const/const.dart';
 import 'package:slee_fi/common/extensions/num_ext.dart';
 import 'package:slee_fi/models/isar_models/network_isar/network_isar_model.dart';
@@ -77,7 +80,7 @@ class Web3DataSource {
   Future<void> _tryOtherRpc() async {
     if (_network != null && _currentUrl != null) {
       final nextUrl =
-          _network!.rpc.elementAt(_network!.rpc.indexOf(_currentUrl!) + 1);
+      _network!.rpc.elementAt(_network!.rpc.indexOf(_currentUrl!) + 1);
       await _setWeb3(nextUrl, _currentWsUrl);
     }
   }
@@ -118,7 +121,7 @@ class Web3DataSource {
     final seed = bip39.mnemonicToSeed(mnemonic);
     final rootKey = bip32.BIP32.fromSeed(seed);
     final keyChild =
-        rootKey.derivePath("m/44'/${slip44 ?? 60}'/0'/0/$derivedIndex");
+    rootKey.derivePath("m/44'/${slip44 ?? 60}'/0'/0/$derivedIndex");
     return HEX.encode(keyChild.privateKey!);
   }
 
@@ -148,10 +151,10 @@ class Web3DataSource {
     double? gasPrice,
   }) async =>
       (await _web3client!.estimateGas(
-              sender: sender,
-              to: to != null ? EthereumAddress.fromHex(to) : null,
-              value: value?.etherToWei.toWeiEtherAmount,
-              gasPrice: gasPrice?.toWeiEtherAmount))
+          sender: sender,
+          to: to != null ? EthereumAddress.fromHex(to) : null,
+          value: value?.etherToWei.toWeiEtherAmount,
+          gasPrice: gasPrice?.toWeiEtherAmount))
           .toInt();
 
   Future<String> sendCoinTxn({
@@ -177,17 +180,58 @@ class Web3DataSource {
         fetchChainIdFromNetworkId: chainId == null,
       );
 
+  Future<void> swapToken() async {
+    final contract = avaxFrom("0x60aE616a2155Ee3d9A68541Ba4544862310933d4");
+    EthereumAddress avax =
+    EthereumAddress.fromHex('0xB31f66AA3C1e785363F0875A1B74E27b85FD66c7');
+    EthereumAddress usdc =
+    EthereumAddress.fromHex('0xB97EF9Ef8734C71904D8002F8b6Bc66Dd9c48a6E');
+    final amount = await _web3client
+        ?.getBalance(
+        EthereumAddress.fromHex("0x52839A88E9FdD2b137E32c65fEc8E7b3f1F1CCC6"));
+    log('Calculated Amounts eth: ${amount?.getInWei.toInt()}');
+    int? amountInt = amount?.getInWei.toInt();
+    final List<EthereumAddress> pairAddress = [avax, usdc];
+    final List<BigInt> amounts =
+    await contract.getAmountsOut(BigInt.from(amountInt! - 10000000000000000), pairAddress);
+    log('Calculated amounts: $amounts');
+    BigInt amountOutMin = amounts[1]; //slipapge set here
+    log('Calculated Amounts out: $amountOutMin');
+    EthereumAddress to =
+    EthereumAddress.fromHex('0x52839A88E9FdD2b137E32c65fEc8E7b3f1F1CCC6');
+    BigInt deadline =
+    BigInt.from((DateTime
+        .now()
+        .millisecond/1000).floor() + 60 * 20);
+    log('Calculated deadline out: $deadline');
+    Credentials credentials = EthPrivateKey.fromHex(
+        '389bdb4733b975e6495f4dd225778b6a3d0200e4b72ff8924a81b266113bfec7');
+    final tx = await contract.swapExactAVAXForTokens(
+      amountOutMin,
+      pairAddress,
+      to,
+      BigInt.from(1655346774824),
+      credentials: credentials,
+    );
+    log('swapExactAVAXForTokens ${tx.toString()}');
+  }
+
+
   ERC20 tokenFrom(String address) =>
       ERC20(address: EthereumAddress.fromHex(address), client: _web3client!);
 
   Erc721 nftFrom(String address) =>
       Erc721(address: EthereumAddress.fromHex(address), client: _web3client!);
 
+  Avax avaxFrom(String address) =>
+      Avax(address: EthereumAddress.fromHex(address), client: _web3client!);
+
   Stream<String> streamPendingTransactions() =>
       _web3client!.pendingTransactions();
 
-  Stream<FilterEvent> streamEvents(String address) => _web3client!
-      .events(FilterOptions(address: EthereumAddress.fromHex(address)));
+  Stream<FilterEvent> streamEvents(String address) =>
+      _web3client!
+          .events(FilterOptions(address: EthereumAddress.fromHex(address)));
 
   Future<TransactionInformation> getTxnByHash(String hash) =>
       _web3client!.getTransactionByHash(hash);
