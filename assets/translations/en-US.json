@@ -375,5 +375,6 @@
   "effect_luck": "Put positive correction to Luck",
   "effect_special": "Put positive correction to Special",
   "effect_efficiency": "Put positive correction to Efficiency",
-  "effect_resilience": "Put positive correction to Resilience"
+  "effect_resilience": "Put positive correction to Resilience",
+  "successfully_copied": "Successfully Copied"
 }

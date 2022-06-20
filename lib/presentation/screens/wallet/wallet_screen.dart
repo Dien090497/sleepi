@@ -28,7 +28,6 @@ class _WalletScreenState extends State<WalletScreen> {
 
   @override
   Widget build(BuildContext context) {
-    print('run to wallet screen');
     return DefaultTabController(
       length: 2,
       child: BlocProvider(
@@ -69,6 +68,7 @@ class _WalletScreenState extends State<WalletScreen> {
                     indexTap = i;
                   });
                   if (i == 1) {
+
                     showCustomAlertDialog(context,
                             children: const PopUpAvalancheWallet())
                         .then((value) => _showWarningDialog(value));

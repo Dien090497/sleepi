@@ -1,7 +1,8 @@
+import 'dart:developer';
 import 'dart:io';
 
 import 'package:http/http.dart';
-import 'package:path/path.dart' show join, dirname;
+import 'package:path/path.dart' show  dirname;
 import 'package:test/test.dart';
 import 'package:web3dart/web3dart.dart';
 
@@ -24,7 +25,7 @@ void main() {
 
   test('Get balance', () async {
     final balance = await ethClient.getBalance(cre.address);
-    print(balance.getValueInUnit(EtherUnit.ether));
+    log('${balance.getValueInUnit(EtherUnit.ether)}');
   });
 
   test('quote', () async {
@@ -44,7 +45,7 @@ void main() {
         BigInt.from(999999),
       ],
     );
-    print('### $res');
+    log('### $res');
   });
 
   test('swapExactAVAXForTokens', () async {
@@ -65,6 +66,6 @@ void main() {
         BigInt.from(999999),
       ],
     );
-    print('### $res');
+    log('### $res');
   });
 }

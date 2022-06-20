@@ -1,9 +1,11 @@
+import 'dart:developer';
+
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:slee_fi/di/injector.dart';
 import 'package:slee_fi/presentation/blocs/wallet/wallet_state.dart';
-import 'package:slee_fi/usecase/wallet_usecase.dart';
 
 import '../../../datasources/remote/network/web3_datasource.dart';
+import '../../../usecase/wallet_usecase.dart';
 
 class WalletCubit extends Cubit<WalletState> {
   late final Web3DataSource web3dataSource;
@@ -13,10 +15,9 @@ class WalletCubit extends Cubit<WalletState> {
   }
 
   init() async {
-    print(' init function ');
     var balance = await WalletUseCase().call(params: null);
     balance.foldRight(int, (r, previous) {
-      print(' on right is  $r');
+      log(' on right is  $r');
     });
   }
 }

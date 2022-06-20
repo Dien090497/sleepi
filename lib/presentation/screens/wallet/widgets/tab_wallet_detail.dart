@@ -64,7 +64,7 @@ class TabWalletDetail extends StatelessWidget {
                   Expanded(
                     child: BoxButtonWidget(
                       onTap: () => SFModalBottomSheet.show(
-                          context, 0.7, const ModalReceiveWallet()),
+                          context, 0.7, const ModalReceiveWallet(address: 'dddd',)),
                       text: LocaleKeys.receive,
                       assetImage: Ics.icDownload,
                     ),

@@ -7,7 +7,7 @@ abstract class IWalletRepository {
 
   Future<Either<Failure, int>> createWallet(String address);
 
-  Future<Either<Failure, int>> importSeedPhrase(String address);
+  Future<Either<Failure, int>> importSeedPhrase(String seedPhrase);
 
   Future<Either<Failure, bool>> switchNetwork(String address);
 

@@ -1,6 +1,4 @@
-import 'dart:developer';
 import 'dart:math' as math;
-import 'dart:typed_data';
 
 import 'package:dartz/dartz.dart';
 import 'package:injectable/injectable.dart';
@@ -9,8 +7,7 @@ import 'package:slee_fi/datasources/remote/network/web3_datasource.dart';
 import 'package:slee_fi/di/injector.dart';
 import 'package:slee_fi/failures/failure.dart';
 import 'package:slee_fi/repository/wallet_repository.dart';
-import 'package:bip32/bip32.dart' as bip32;
-import 'package:bip39/bip39.dart' as bip39;
+
 import '../../datasources/local/isar/isar_datasource.dart';
 import '../../entities/wallet_info/wallet_info_entity.dart';
 import '../../models/isar_models/native_currency_isar/native_currency_isar_model.dart';
@@ -51,7 +48,7 @@ class WalletImplementation extends IWalletRepository {
   }
 
   @override
-  Future<Either<Failure, int>> importSeedPhrase(String seedphrase) {
+  Future<Either<Failure, int>> importSeedPhrase(String seedPhrase) {
     // TODO: implement switchNetwork
     throw UnimplementedError();
   }
