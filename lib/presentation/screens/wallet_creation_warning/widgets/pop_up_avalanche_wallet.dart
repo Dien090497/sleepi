@@ -30,7 +30,8 @@ class PopUpAvalancheWallet extends StatelessWidget {
                 textStyle: TextStyles.bold16Blue,
                 borderColor: AppColors.blue,
                 onPressed: () {
-                  Navigator.pushNamed(context, R.createPasscode).then((value) {
+                  Navigator.pop(context);
+                  Navigator.pushNamed(context, R.createWallet).then((value) {
                     if(value != null && value == true){
                       Navigator.pop(context, value);
                     }

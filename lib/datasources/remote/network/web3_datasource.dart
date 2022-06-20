@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:bip32/bip32.dart' as bip32;
 import 'package:bip39/bip39.dart' as bip39;
 import 'package:erc20/erc20.dart';
@@ -6,6 +8,7 @@ import 'package:hex/hex.dart';
 import 'package:http/http.dart';
 import 'package:injectable/injectable.dart';
 import 'package:slee_fi/common/abi/erc721.g.dart';
+import 'package:slee_fi/common/abi/avax.g.dart';
 import 'package:slee_fi/common/const/const.dart';
 import 'package:slee_fi/common/extensions/num_ext.dart';
 import 'package:slee_fi/models/isar_models/network_isar/network_isar_model.dart';
@@ -177,11 +180,55 @@ class Web3DataSource {
         fetchChainIdFromNetworkId: chainId == null,
       );
 
+  Future<void> swapToken() async {
+    final contract = avaxFrom("0x60aE616a2155Ee3d9A68541Ba4544862310933d4");
+    EthereumAddress avax =
+        EthereumAddress.fromHex('0xB31f66AA3C1e785363F0875A1B74E27b85FD66c7');
+    EthereumAddress usdc =
+        EthereumAddress.fromHex('0xB97EF9Ef8734C71904D8002F8b6Bc66Dd9c48a6E');
+    final amount = await _web3client?.getBalance(
+        EthereumAddress.fromHex("0x52839A88E9FdD2b137E32c65fEc8E7b3f1F1CCC6"));
+    log('Calculated Amounts eth: ${amount?.getInWei.toInt()}');
+    int? amountInt = amount?.getInWei.toInt();
+    final List<EthereumAddress> pairAddress = [avax, usdc];
+    final List<BigInt> amounts =
+        await contract.getAmountsOut(BigInt.from(amountInt!), pairAddress);
+    log('Calculated amounts: $amounts');
+    BigInt amountOutMin = amounts[1] -
+        BigInt.from(amounts[1] / BigInt.from(18)); //slippage set here
+    log('Calculated Amounts out: $amountOutMin');
+    EthereumAddress to =
+        EthereumAddress.fromHex('0x52839A88E9FdD2b137E32c65fEc8E7b3f1F1CCC6');
+    BigInt deadline = BigInt.from(
+        ((DateTime.now().millisecond / 1000).floor() + 60 * 20) * 1000000000);
+    log('Calculated deadline: $deadline');
+    Credentials credentials = EthPrivateKey.fromHex(
+        '389bdb4733b975e6495f4dd225778b6a3d0200e4b72ff8924a81b266113bfec7');
+    final tx = await contract.swapExactAVAXForTokens(
+      amountOutMin,
+      pairAddress,
+      to,
+      deadline,
+      credentials: credentials,
+      transaction: Transaction(
+        from: to,
+        to: to,
+        value: EtherAmount.inWei(amounts[0]-BigInt.from(10000000000000000)),
+        gasPrice: await _web3client?.getGasPrice(),
+        nonce: await _web3client?.getTransactionCount(to),
+      ),
+    );
+    log('swapExactAVAXForTokens ${tx.toString()}');
+  }
+
   ERC20 tokenFrom(String address) =>
       ERC20(address: EthereumAddress.fromHex(address), client: _web3client!);
 
   Erc721 nftFrom(String address) =>
       Erc721(address: EthereumAddress.fromHex(address), client: _web3client!);
+
+  Avax avaxFrom(String address) =>
+      Avax(address: EthereumAddress.fromHex(address), client: _web3client!);
 
   Stream<String> streamPendingTransactions() =>
       _web3client!.pendingTransactions();

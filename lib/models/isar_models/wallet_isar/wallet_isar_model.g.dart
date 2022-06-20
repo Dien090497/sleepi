@@ -15,6 +15,8 @@ abstract class _$WalletIsarModelCWProxy {
 
   WalletIsarModel isImported(bool isImported);
 
+  WalletIsarModel mnemonic(String mnemonic);
+
   WalletIsarModel name(String name);
 
   WalletIsarModel nftIds(List<int> nftIds);
@@ -34,6 +36,7 @@ abstract class _$WalletIsarModelCWProxy {
     int? derivedIndex,
     String? image,
     bool? isImported,
+    String? mnemonic,
     String? name,
     List<int>? nftIds,
     String? privateKey,
@@ -61,6 +64,9 @@ class _$WalletIsarModelCWProxyImpl implements _$WalletIsarModelCWProxy {
   WalletIsarModel isImported(bool isImported) => this(isImported: isImported);
 
   @override
+  WalletIsarModel mnemonic(String mnemonic) => this(mnemonic: mnemonic);
+
+  @override
   WalletIsarModel name(String name) => this(name: name);
 
   @override
@@ -85,6 +91,7 @@ class _$WalletIsarModelCWProxyImpl implements _$WalletIsarModelCWProxy {
     Object? derivedIndex = const $CopyWithPlaceholder(),
     Object? image = const $CopyWithPlaceholder(),
     Object? isImported = const $CopyWithPlaceholder(),
+    Object? mnemonic = const $CopyWithPlaceholder(),
     Object? name = const $CopyWithPlaceholder(),
     Object? nftIds = const $CopyWithPlaceholder(),
     Object? privateKey = const $CopyWithPlaceholder(),
@@ -108,6 +115,10 @@ class _$WalletIsarModelCWProxyImpl implements _$WalletIsarModelCWProxy {
               ? _value.isImported
               // ignore: cast_nullable_to_non_nullable
               : isImported as bool,
+      mnemonic: mnemonic == const $CopyWithPlaceholder() || mnemonic == null
+          ? _value.mnemonic
+          // ignore: cast_nullable_to_non_nullable
+          : mnemonic as String,
       name: name == const $CopyWithPlaceholder() || name == null
           ? _value.name
           // ignore: cast_nullable_to_non_nullable
@@ -147,17 +158,18 @@ extension GetWalletIsarModelCollection on Isar {
 const WalletIsarModelSchema = CollectionSchema(
   name: 'WalletIsarModel',
   schema:
-      '{"name":"WalletIsarModel","idName":"id","properties":[{"name":"address","type":"String"},{"name":"derivedIndex","type":"Long"},{"name":"image","type":"String"},{"name":"isImported","type":"Bool"},{"name":"name","type":"String"},{"name":"nftIds","type":"LongList"},{"name":"privateKey","type":"String"},{"name":"txnsIds","type":"LongList"}],"indexes":[{"name":"isImported","unique":false,"properties":[{"name":"isImported","type":"Value","caseSensitive":false}]}],"links":[]}',
+      '{"name":"WalletIsarModel","idName":"id","properties":[{"name":"address","type":"String"},{"name":"derivedIndex","type":"Long"},{"name":"image","type":"String"},{"name":"isImported","type":"Bool"},{"name":"mnemonic","type":"String"},{"name":"name","type":"String"},{"name":"nftIds","type":"LongList"},{"name":"privateKey","type":"String"},{"name":"txnsIds","type":"LongList"}],"indexes":[{"name":"isImported","unique":false,"properties":[{"name":"isImported","type":"Value","caseSensitive":false}]}],"links":[]}',
   idName: 'id',
   propertyIds: {
     'address': 0,
     'derivedIndex': 1,
     'image': 2,
     'isImported': 3,
-    'name': 4,
-    'nftIds': 5,
-    'privateKey': 6,
-    'txnsIds': 7
+    'mnemonic': 4,
+    'name': 5,
+    'nftIds': 6,
+    'privateKey': 7,
+    'txnsIds': 8
   },
   listProperties: {'nftIds', 'txnsIds'},
   indexIds: {'isImported': 0},
@@ -215,18 +227,21 @@ void _walletIsarModelSerializeNative(
   dynamicSize += (_image.length) as int;
   final value3 = object.isImported;
   final _isImported = value3;
-  final value4 = object.name;
-  final _name = IsarBinaryWriter.utf8Encoder.convert(value4);
+  final value4 = object.mnemonic;
+  final _mnemonic = IsarBinaryWriter.utf8Encoder.convert(value4);
+  dynamicSize += (_mnemonic.length) as int;
+  final value5 = object.name;
+  final _name = IsarBinaryWriter.utf8Encoder.convert(value5);
   dynamicSize += (_name.length) as int;
-  final value5 = object.nftIds;
-  dynamicSize += (value5.length) * 8;
-  final _nftIds = value5;
-  final value6 = object.privateKey;
-  final _privateKey = IsarBinaryWriter.utf8Encoder.convert(value6);
+  final value6 = object.nftIds;
+  dynamicSize += (value6.length) * 8;
+  final _nftIds = value6;
+  final value7 = object.privateKey;
+  final _privateKey = IsarBinaryWriter.utf8Encoder.convert(value7);
   dynamicSize += (_privateKey.length) as int;
-  final value7 = object.txnsIds;
-  dynamicSize += (value7.length) * 8;
-  final _txnsIds = value7;
+  final value8 = object.txnsIds;
+  dynamicSize += (value8.length) * 8;
+  final _txnsIds = value8;
   final size = staticSize + dynamicSize;
 
   rawObj.buffer = alloc(size);
@@ -237,10 +252,11 @@ void _walletIsarModelSerializeNative(
   writer.writeLong(offsets[1], _derivedIndex);
   writer.writeBytes(offsets[2], _image);
   writer.writeBool(offsets[3], _isImported);
-  writer.writeBytes(offsets[4], _name);
-  writer.writeLongList(offsets[5], _nftIds);
-  writer.writeBytes(offsets[6], _privateKey);
-  writer.writeLongList(offsets[7], _txnsIds);
+  writer.writeBytes(offsets[4], _mnemonic);
+  writer.writeBytes(offsets[5], _name);
+  writer.writeLongList(offsets[6], _nftIds);
+  writer.writeBytes(offsets[7], _privateKey);
+  writer.writeLongList(offsets[8], _txnsIds);
 }
 
 WalletIsarModel _walletIsarModelDeserializeNative(
@@ -253,10 +269,11 @@ WalletIsarModel _walletIsarModelDeserializeNative(
     derivedIndex: reader.readLongOrNull(offsets[1]),
     image: reader.readString(offsets[2]),
     isImported: reader.readBool(offsets[3]),
-    name: reader.readString(offsets[4]),
-    nftIds: reader.readLongList(offsets[5]) ?? [],
-    privateKey: reader.readString(offsets[6]),
-    txnsIds: reader.readLongList(offsets[7]) ?? [],
+    mnemonic: reader.readString(offsets[4]),
+    name: reader.readString(offsets[5]),
+    nftIds: reader.readLongList(offsets[6]) ?? [],
+    privateKey: reader.readString(offsets[7]),
+    txnsIds: reader.readLongList(offsets[8]) ?? [],
   );
   object.id = id;
   return object;
@@ -278,10 +295,12 @@ P _walletIsarModelDeserializePropNative<P>(
     case 4:
       return (reader.readString(offset)) as P;
     case 5:
-      return (reader.readLongList(offset) ?? []) as P;
-    case 6:
       return (reader.readString(offset)) as P;
+    case 6:
+      return (reader.readLongList(offset) ?? []) as P;
     case 7:
+      return (reader.readString(offset)) as P;
+    case 8:
       return (reader.readLongList(offset) ?? []) as P;
     default:
       throw 'Illegal propertyIndex';
@@ -296,6 +315,7 @@ dynamic _walletIsarModelSerializeWeb(
   IsarNative.jsObjectSet(jsObj, 'id', object.id);
   IsarNative.jsObjectSet(jsObj, 'image', object.image);
   IsarNative.jsObjectSet(jsObj, 'isImported', object.isImported);
+  IsarNative.jsObjectSet(jsObj, 'mnemonic', object.mnemonic);
   IsarNative.jsObjectSet(jsObj, 'name', object.name);
   IsarNative.jsObjectSet(jsObj, 'nftIds', object.nftIds);
   IsarNative.jsObjectSet(jsObj, 'privateKey', object.privateKey);
@@ -310,6 +330,7 @@ WalletIsarModel _walletIsarModelDeserializeWeb(
     derivedIndex: IsarNative.jsObjectGet(jsObj, 'derivedIndex'),
     image: IsarNative.jsObjectGet(jsObj, 'image') ?? '',
     isImported: IsarNative.jsObjectGet(jsObj, 'isImported') ?? false,
+    mnemonic: IsarNative.jsObjectGet(jsObj, 'mnemonic') ?? '',
     name: IsarNative.jsObjectGet(jsObj, 'name') ?? '',
     nftIds: (IsarNative.jsObjectGet(jsObj, 'nftIds') as List?)
             ?.map((e) => e ?? double.negativeInfinity)
@@ -339,6 +360,8 @@ P _walletIsarModelDeserializePropWeb<P>(Object jsObj, String propertyName) {
       return (IsarNative.jsObjectGet(jsObj, 'image') ?? '') as P;
     case 'isImported':
       return (IsarNative.jsObjectGet(jsObj, 'isImported') ?? false) as P;
+    case 'mnemonic':
+      return (IsarNative.jsObjectGet(jsObj, 'mnemonic') ?? '') as P;
     case 'name':
       return (IsarNative.jsObjectGet(jsObj, 'name') ?? '') as P;
     case 'nftIds':
@@ -813,6 +836,113 @@ extension WalletIsarModelQueryFilter
   }
 
   QueryBuilder<WalletIsarModel, WalletIsarModel, QAfterFilterCondition>
+      mnemonicEqualTo(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return addFilterConditionInternal(FilterCondition(
+      type: ConditionType.eq,
+      property: 'mnemonic',
+      value: value,
+      caseSensitive: caseSensitive,
+    ));
+  }
+
+  QueryBuilder<WalletIsarModel, WalletIsarModel, QAfterFilterCondition>
+      mnemonicGreaterThan(
+    String value, {
+    bool caseSensitive = true,
+    bool include = false,
+  }) {
+    return addFilterConditionInternal(FilterCondition(
+      type: ConditionType.gt,
+      include: include,
+      property: 'mnemonic',
+      value: value,
+      caseSensitive: caseSensitive,
+    ));
+  }
+
+  QueryBuilder<WalletIsarModel, WalletIsarModel, QAfterFilterCondition>
+      mnemonicLessThan(
+    String value, {
+    bool caseSensitive = true,
+    bool include = false,
+  }) {
+    return addFilterConditionInternal(FilterCondition(
+      type: ConditionType.lt,
+      include: include,
+      property: 'mnemonic',
+      value: value,
+      caseSensitive: caseSensitive,
+    ));
+  }
+
+  QueryBuilder<WalletIsarModel, WalletIsarModel, QAfterFilterCondition>
+      mnemonicBetween(
+    String lower,
+    String upper, {
+    bool caseSensitive = true,
+    bool includeLower = true,
+    bool includeUpper = true,
+  }) {
+    return addFilterConditionInternal(FilterCondition.between(
+      property: 'mnemonic',
+      lower: lower,
+      includeLower: includeLower,
+      upper: upper,
+      includeUpper: includeUpper,
+      caseSensitive: caseSensitive,
+    ));
+  }
+
+  QueryBuilder<WalletIsarModel, WalletIsarModel, QAfterFilterCondition>
+      mnemonicStartsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return addFilterConditionInternal(FilterCondition(
+      type: ConditionType.startsWith,
+      property: 'mnemonic',
+      value: value,
+      caseSensitive: caseSensitive,
+    ));
+  }
+
+  QueryBuilder<WalletIsarModel, WalletIsarModel, QAfterFilterCondition>
+      mnemonicEndsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return addFilterConditionInternal(FilterCondition(
+      type: ConditionType.endsWith,
+      property: 'mnemonic',
+      value: value,
+      caseSensitive: caseSensitive,
+    ));
+  }
+
+  QueryBuilder<WalletIsarModel, WalletIsarModel, QAfterFilterCondition>
+      mnemonicContains(String value, {bool caseSensitive = true}) {
+    return addFilterConditionInternal(FilterCondition(
+      type: ConditionType.contains,
+      property: 'mnemonic',
+      value: value,
+      caseSensitive: caseSensitive,
+    ));
+  }
+
+  QueryBuilder<WalletIsarModel, WalletIsarModel, QAfterFilterCondition>
+      mnemonicMatches(String pattern, {bool caseSensitive = true}) {
+    return addFilterConditionInternal(FilterCondition(
+      type: ConditionType.matches,
+      property: 'mnemonic',
+      value: pattern,
+      caseSensitive: caseSensitive,
+    ));
+  }
+
+  QueryBuilder<WalletIsarModel, WalletIsarModel, QAfterFilterCondition>
       nameEqualTo(
     String value, {
     bool caseSensitive = true,
@@ -1180,6 +1310,16 @@ extension WalletIsarModelQueryWhereSortBy
     return addSortByInternal('isImported', Sort.desc);
   }
 
+  QueryBuilder<WalletIsarModel, WalletIsarModel, QAfterSortBy>
+      sortByMnemonic() {
+    return addSortByInternal('mnemonic', Sort.asc);
+  }
+
+  QueryBuilder<WalletIsarModel, WalletIsarModel, QAfterSortBy>
+      sortByMnemonicDesc() {
+    return addSortByInternal('mnemonic', Sort.desc);
+  }
+
   QueryBuilder<WalletIsarModel, WalletIsarModel, QAfterSortBy> sortByName() {
     return addSortByInternal('name', Sort.asc);
   }
@@ -1248,6 +1388,16 @@ extension WalletIsarModelQueryWhereSortThenBy
     return addSortByInternal('isImported', Sort.desc);
   }
 
+  QueryBuilder<WalletIsarModel, WalletIsarModel, QAfterSortBy>
+      thenByMnemonic() {
+    return addSortByInternal('mnemonic', Sort.asc);
+  }
+
+  QueryBuilder<WalletIsarModel, WalletIsarModel, QAfterSortBy>
+      thenByMnemonicDesc() {
+    return addSortByInternal('mnemonic', Sort.desc);
+  }
+
   QueryBuilder<WalletIsarModel, WalletIsarModel, QAfterSortBy> thenByName() {
     return addSortByInternal('name', Sort.asc);
   }
@@ -1294,6 +1444,11 @@ extension WalletIsarModelQueryWhereDistinct
     return addDistinctByInternal('isImported');
   }
 
+  QueryBuilder<WalletIsarModel, WalletIsarModel, QDistinct> distinctByMnemonic(
+      {bool caseSensitive = true}) {
+    return addDistinctByInternal('mnemonic', caseSensitive: caseSensitive);
+  }
+
   QueryBuilder<WalletIsarModel, WalletIsarModel, QDistinct> distinctByName(
       {bool caseSensitive = true}) {
     return addDistinctByInternal('name', caseSensitive: caseSensitive);
@@ -1325,6 +1480,10 @@ extension WalletIsarModelQueryProperty
 
   QueryBuilder<WalletIsarModel, bool, QQueryOperations> isImportedProperty() {
     return addPropertyNameInternal('isImported');
+  }
+
+  QueryBuilder<WalletIsarModel, String, QQueryOperations> mnemonicProperty() {
+    return addPropertyNameInternal('mnemonic');
   }
 
   QueryBuilder<WalletIsarModel, String, QQueryOperations> nameProperty() {
