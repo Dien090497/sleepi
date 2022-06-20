@@ -11,6 +11,8 @@ part 'wallet_isar_model.g.dart';
 class WalletIsarModel {
   int? id = Isar.autoIncrement;
 
+  late final String mnemonic;
+
   late final String privateKey;
 
   late final String name;
@@ -33,6 +35,7 @@ class WalletIsarModel {
 
   WalletIsarModel({
     required this.privateKey,
+    required this.mnemonic,
     required this.name,
     required this.address,
     this.image = '',

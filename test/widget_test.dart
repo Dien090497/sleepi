@@ -2,7 +2,7 @@ import 'dart:developer';
 import 'dart:io';
 
 import 'package:http/http.dart';
-import 'package:path/path.dart' show  dirname;
+import 'package:path/path.dart' show dirname;
 import 'package:test/test.dart';
 import 'package:web3dart/web3dart.dart';
 
