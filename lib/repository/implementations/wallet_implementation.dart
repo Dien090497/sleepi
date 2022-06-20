@@ -30,9 +30,11 @@ class WalletImplementation extends IWalletRepository{
       _web3DataSource.credentialsFromPrivateKey(privateKey);
       final ethereumAddress = await credentials.extractAddress();
 
+
       /// Store Wallet
 
       final model = WalletIsarModel(
+        mnemonic: mnemonic,
         privateKey: privateKey,
         name: 'Account $derivedIndex',
         address: ethereumAddress.hex,

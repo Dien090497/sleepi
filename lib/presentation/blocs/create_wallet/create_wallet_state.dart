@@ -9,9 +9,9 @@ class CreateWalletState with _$CreateWalletState{
       String passCode, {
         required String mnemonic,
         @Default(false) bool isLoading,
-      }) = CreateWalletStateInitial;
+      }) = createWalletStateInitial;
 
-  const factory CreateWalletState.done() =
+  const factory CreateWalletState.done(WalletInfoEntity entity) =
   createWalletDone;
 
   const factory CreateWalletState.error(String msg) =

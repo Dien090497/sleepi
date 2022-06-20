@@ -4,13 +4,13 @@ import 'package:slee_fi/failures/failure.dart';
 import 'package:slee_fi/repository/implementations/wallet_repository.dart';
 import 'package:slee_fi/usecase/usecase.dart';
 
-class CreateWalletUseCase extends UseCase<bool, NoParams> {
+class CreateWalletUseCase extends UseCase<WalletInfoEntity, NoParams> {
   final IWalletRepository _iWalletRepository;
 
   CreateWalletUseCase(this._iWalletRepository);
 
   @override
-  Future<Either<Failure, bool>> call(NoParams params) {
-    return _iWalletRepository.swapToken();
+  Future<Either<Failure, WalletInfoEntity>> call(NoParams params) {
+    return _iWalletRepository.createWallet();
   }
 }
