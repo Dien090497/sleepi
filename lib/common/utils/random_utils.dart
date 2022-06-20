@@ -16,4 +16,9 @@ class RandomUtils {
     String id = '$alphabet${number.toInt()}';
     return id;
   }
+  String randomOTPCode(){
+    var rnd = Random();
+    var l = List.generate(6, (_) => rnd.nextInt(10));
+    return l.join('');
+  }
 }

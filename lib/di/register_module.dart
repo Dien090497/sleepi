@@ -2,6 +2,8 @@ import 'dart:async';
 import 'dart:io';
 
 import 'package:dio/dio.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:injectable/injectable.dart';
 import 'package:isar/isar.dart';
 import 'package:path_provider/path_provider.dart';
@@ -37,4 +39,8 @@ abstract class RegisterModule {
     directory: isarDir.path,
     // inspector: true,
   );
+
+  GetStorage get getStorage => GetStorage();
+
+  FlutterSecureStorage get flutterSecureStorage => const FlutterSecureStorage();
 }

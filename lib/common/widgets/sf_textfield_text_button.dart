@@ -26,6 +26,7 @@ class SFTextFieldTextButton extends StatelessWidget {
     this.valueChanged,
     this.textInputType,
     this.stringCase,
+    this.errorText = '',
   }) : super(key: key);
 
   final String? labelText;
@@ -44,6 +45,8 @@ class SFTextFieldTextButton extends StatelessWidget {
   final ValueChanged<String>? valueChanged;
   final TextInputType? textInputType;
   final StringCase? stringCase;
+  final String? errorText;
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -64,7 +67,10 @@ class SFTextFieldTextButton extends StatelessWidget {
         Container(
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(8),
-            border: Border.all(color: AppColors.white.withOpacity(0.1)),
+            border: Border.all(
+                color: errorText != ''
+                    ? AppColors.red.withOpacity(0.1)
+                    : AppColors.white.withOpacity(0.1)),
           ),
           padding: const EdgeInsets.only(left: 12, right: 4),
           child: Row(
@@ -92,6 +98,12 @@ class SFTextFieldTextButton extends StatelessWidget {
             ],
           ),
         ),
+        const SizedBox(height: 8,),
+        if (errorText != '')
+          Text(
+            errorText!,
+            style: TextStyles.w400Red12,
+          ),
       ],
     );
   }
