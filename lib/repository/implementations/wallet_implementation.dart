@@ -12,15 +12,13 @@ import 'package:slee_fi/models/isar_models/wallet_isar/wallet_isar_model.dart';
 import 'package:slee_fi/repository/implementations/wallet_repository.dart';
 
 @Injectable(as: IWalletRepository)
-class WalletImplementation extends IWalletRepository{
+class WalletImplementation extends IWalletRepository {
   final Web3DataSource _web3DataSource;
   final GetStorageDataSource _getStorageDataSource;
   final IsarDataSource _isarDataSource;
 
-  WalletImplementation(this._web3DataSource, this._getStorageDataSource, this._isarDataSource);
-
-
-
+  WalletImplementation(
+      this._web3DataSource, this._getStorageDataSource, this._isarDataSource);
 
   @override
   Future<Either<Failure, int>> currentWalletInfo() async {
@@ -37,7 +35,6 @@ class WalletImplementation extends IWalletRepository{
     }
   }
 
-
   @override
   Future<Either<Failure, WalletInfoEntity>> createWallet() async {
     try {
@@ -46,10 +43,8 @@ class WalletImplementation extends IWalletRepository{
       final network = await _getCurrentNetwork();
       final privateKey = _web3DataSource.mnemonicToPrivateKey(
           mnemonic, derivedIndex, network.slip44);
-      final credentials =
-      _web3DataSource.credentialsFromPrivateKey(privateKey);
+      final credentials = _web3DataSource.credentialsFromPrivateKey(privateKey);
       final ethereumAddress = await credentials.extractAddress();
-
 
       /// Store Wallet
 
@@ -75,7 +70,6 @@ class WalletImplementation extends IWalletRepository{
     }
   }
 
-
   Future<NativeCurrencyIsarModel?> _getNativeCurrency() async {
     final chainId = _getStorageDataSource.getCurrentChainId();
     return _isarDataSource.getNativeCurrency(chainId!);
@@ -91,7 +85,51 @@ class WalletImplementation extends IWalletRepository{
     try {
       _web3DataSource.swapToken();
       return const Right(true);
-    }catch(e){
+    } catch (e) {
+      return Left(FailureMessage('$e'));
+    }
+  }
+
+  @override
+  Future<Either<Failure, WalletInfoEntity>> importWallet(String mnemonic) {
+    // TODO: implement importWallet
+    throw UnimplementedError();
+  }
+
+  Future<Either<Failure, WalletInfoEntity>> importWalletFromMnemonic(
+      String mnemonic) async {
+    try {
+      if (_web3DataSource.validateMnemonic(mnemonic)) {
+        final derivedIndex = _getStorageDataSource.getDerivedIndexAndIncrease();
+        final network = await _getCurrentNetwork();
+        final privateKey = _web3DataSource.mnemonicToPrivateKey(
+            mnemonic, derivedIndex, network.slip44);
+        final credentials =
+            _web3DataSource.credentialsFromPrivateKey(privateKey);
+        final ethereumAddress = await credentials.extractAddress();
+
+        /// Store Wallet
+
+        final model = WalletIsarModel(
+          privateKey: privateKey,
+          name: 'Account $derivedIndex',
+          address: ethereumAddress.hex,
+          derivedIndex: derivedIndex,
+          mnemonic: mnemonic,
+        );
+        final int walletId = await _isarDataSource.putWallet(model);
+        model.id = walletId;
+        await _getStorageDataSource.setCurrentWalletId(walletId);
+        final nativeCurrency = await _getNativeCurrency();
+        final balance = await _web3DataSource.getBalance(ethereumAddress.hex);
+        return Right(model.toEntity(
+          credentials,
+          derivedIndex: derivedIndex,
+          nativeCurrency: nativeCurrency!.toEntity(balance: balance),
+        ));
+      }
+      return const Left(FailureMessage('Invalid Mnemonic'));
+    } catch (e) {
       return Left(FailureMessage('$e'));
     }
   }

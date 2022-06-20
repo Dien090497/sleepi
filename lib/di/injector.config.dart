@@ -22,16 +22,16 @@ import '../datasources/local/get_storage_datasource.dart' as _i9;
 import '../datasources/local/isar/isar_datasource.dart' as _i11;
 import '../datasources/local/secure_storage.dart' as _i21;
 import '../datasources/local/shared_preference_datasource.dart' as _i22;
-import '../datasources/remote/network/web3_datasource.dart' as _i17;
+import '../datasources/remote/network/web3_datasource.dart' as _i16;
 import '../repository/auth_repository.dart' as _i24;
 import '../repository/implementations/auth_implementation.dart' as _i25;
-import '../repository/implementations/wallet_implementation.dart' as _i19;
-import '../repository/implementations/wallet_repository.dart' as _i18;
+import '../repository/implementations/wallet_implementation.dart' as _i18;
+import '../repository/implementations/wallet_repository.dart' as _i17;
 import '../usecase/create_pass_code_usecase.dart' as _i26;
 import '../usecase/create_wallet_usecase.dart' as _i23;
+import '../usecase/import_wallet_usecase.dart' as _i19;
 import '../usecase/login_usecase.dart' as _i12;
 import '../usecase/run_app_init_usecase.dart' as _i20;
-import '../usecase/wallet_usecase.dart' as _i16;
 import 'register_module.dart' as _i27; // ignore_for_file: unnecessary_lambdas
 
 // ignore_for_file: lines_longer_than_80_chars
@@ -61,14 +61,15 @@ Future<_i1.GetIt> $initGetIt(_i1.GetIt get,
       preResolve: true);
   gh.factory<_i9.StorageKeys>(() => _i9.StorageKeys());
   gh.factory<_i15.ToastUtils>(() => _i15.ToastUtils());
-  gh.factory<_i16.WalletUseCase>(() => _i16.WalletUseCase());
-  gh.singleton<_i17.Web3DataSource>(_i17.Web3DataSource(get<_i3.Client>()));
-  gh.factory<_i18.IWalletRepository>(() => _i19.WalletImplementation(
-      get<_i17.Web3DataSource>(),
+  gh.singleton<_i16.Web3DataSource>(_i16.Web3DataSource(get<_i3.Client>()));
+  gh.factory<_i17.IWalletRepository>(() => _i18.WalletImplementation(
+      get<_i16.Web3DataSource>(),
       get<_i9.GetStorageDataSource>(),
       get<_i11.IsarDataSource>()));
+  gh.factory<_i19.ImportWalletUseCase>(
+      () => _i19.ImportWalletUseCase(get<_i17.IWalletRepository>()));
   gh.factory<_i20.RunAppInitUseCase>(() => _i20.RunAppInitUseCase(
-      get<_i17.Web3DataSource>(),
+      get<_i16.Web3DataSource>(),
       get<_i11.IsarDataSource>(),
       get<_i9.GetStorageDataSource>()));
   gh.factory<_i21.SecureStorage>(() => _i21.SecureStorage(
@@ -76,7 +77,7 @@ Future<_i1.GetIt> $initGetIt(_i1.GetIt get,
   gh.factory<_i22.SharedPreferenceDataSource>(
       () => _i22.SharedPreferenceDataSource(get<_i14.SharedPreferences>()));
   gh.factory<_i23.CreateWalletUseCase>(
-      () => _i23.CreateWalletUseCase(get<_i18.IWalletRepository>()));
+      () => _i23.CreateWalletUseCase(get<_i17.IWalletRepository>()));
   gh.factory<_i24.IAuthRepository>(
       () => _i25.AuthImplementation(get<_i21.SecureStorage>()));
   gh.factory<_i26.CreatePassCodeUseCase>(
@@ -84,6 +85,6 @@ Future<_i1.GetIt> $initGetIt(_i1.GetIt get,
   return get;
 }
 
-class _$RPCModule extends _i17.RPCModule {}
+class _$RPCModule extends _i16.RPCModule {}
 
 class _$RegisterModule extends _i27.RegisterModule {}
