@@ -1,9 +1,8 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-
-import '../../../common/utils/random_utils.dart';
-import '../../../di/injector.dart';
-import '../../../failures/failure.dart';
-import '../../../usecase/wallet/import_wallet_usecase.dart';
+import 'package:slee_fi/common/utils/random_utils.dart';
+import 'package:slee_fi/di/injector.dart';
+import 'package:slee_fi/failures/failure.dart';
+import 'package:slee_fi/usecase/wallet/import_wallet_usecase.dart';
 import 'import_wallet_state.dart';
 
 class ImportWalletCubit extends Cubit<ImportWalletState> {

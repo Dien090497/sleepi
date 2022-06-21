@@ -5,11 +5,10 @@ import 'package:qr_flutter/qr_flutter.dart';
 import 'package:slee_fi/common/extensions/string_x.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
+import 'package:slee_fi/common/utils/toast_utils.dart';
 import 'package:slee_fi/common/widgets/sf_buttons.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
 import 'package:slee_fi/l10n/locale_keys.g.dart';
-
-import '../../../../common/utils/toast_utils.dart';
 
 class ModalReceiveWallet extends StatelessWidget {
   const ModalReceiveWallet({Key? key, required this.address}) : super(key: key);

@@ -3,8 +3,8 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
 import 'package:slee_fi/common/widgets/sf_buttons.dart';
+import 'package:slee_fi/l10n/locale_keys.g.dart';
 
-import '../../l10n/locale_keys.g.dart';
 
 class OtpCountdownTimer extends StatefulWidget {
   const OtpCountdownTimer({

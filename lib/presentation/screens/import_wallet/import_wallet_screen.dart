@@ -13,9 +13,9 @@ import 'package:slee_fi/common/widgets/sf_text.dart';
 import 'package:slee_fi/common/widgets/sf_textfield.dart';
 import 'package:slee_fi/common/widgets/textfield_verification.dart';
 import 'package:slee_fi/l10n/locale_keys.g.dart';
+import 'package:slee_fi/presentation/blocs/import_wallet/import_wallet_cubit.dart';
+import 'package:slee_fi/presentation/blocs/import_wallet/import_wallet_state.dart';
 
-import '../../blocs/import_wallet/import_wallet_cubit.dart';
-import '../../blocs/import_wallet/import_wallet_state.dart';
 
 class ImportWalletScreen extends StatelessWidget {
   const ImportWalletScreen({Key? key}) : super(key: key);

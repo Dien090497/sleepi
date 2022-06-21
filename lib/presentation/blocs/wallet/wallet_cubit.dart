@@ -1,12 +1,13 @@
 import 'dart:developer';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:slee_fi/di/injector.dart';
+import 'package:slee_fi/failures/failure.dart';
 import 'package:slee_fi/presentation/blocs/wallet/wallet_state.dart';
 import 'package:slee_fi/usecase/usecase.dart';
 import 'package:slee_fi/usecase/wallet/current_wallet_usecase.dart';
 
-import '../../../di/injector.dart';
-import '../../../failures/failure.dart';
+
 
 class WalletCubit extends Cubit<WalletState> {
   WalletCubit() : super(const WalletState.initial());

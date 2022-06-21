@@ -1,6 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-
-import '../../../entities/wallet_info/wallet_info_entity.dart';
+import 'package:slee_fi/entities/wallet_info/wallet_info_entity.dart';
 
 part 'import_wallet_state.freezed.dart';
 
