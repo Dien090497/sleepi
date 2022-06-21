@@ -20,18 +20,20 @@ import '../common/utils/random_utils.dart' as _i13;
 import '../common/utils/toast_utils.dart' as _i15;
 import '../datasources/local/get_storage_datasource.dart' as _i9;
 import '../datasources/local/isar/isar_datasource.dart' as _i11;
-import '../datasources/local/secure_storage.dart' as _i20;
-import '../datasources/local/shared_preference_datasource.dart' as _i21;
+import '../datasources/local/secure_storage.dart' as _i21;
+import '../datasources/local/shared_preference_datasource.dart' as _i22;
 import '../datasources/remote/network/web3_datasource.dart' as _i16;
-import '../repository/auth_repository.dart' as _i23;
-import '../repository/implementations/auth_implementation.dart' as _i24;
+import '../repository/auth_repository.dart' as _i25;
+import '../repository/implementations/auth_implementation.dart' as _i26;
 import '../repository/implementations/wallet_implementation.dart' as _i18;
 import '../repository/implementations/wallet_repository.dart' as _i17;
-import '../usecase/create_pass_code_usecase.dart' as _i25;
-import '../usecase/create_wallet_usecase.dart' as _i22;
+import '../usecase/create_pass_code_usecase.dart' as _i27;
 import '../usecase/login_usecase.dart' as _i12;
-import '../usecase/run_app_init_usecase.dart' as _i19;
-import 'register_module.dart' as _i26; // ignore_for_file: unnecessary_lambdas
+import '../usecase/run_app_init_usecase.dart' as _i20;
+import '../usecase/wallet/create_wallet_usecase.dart' as _i23;
+import '../usecase/wallet/current_wallet_usecase.dart' as _i24;
+import '../usecase/wallet/import_wallet_usecase.dart' as _i19;
+import 'register_module.dart' as _i28; // ignore_for_file: unnecessary_lambdas
 
 // ignore_for_file: lines_longer_than_80_chars
 /// initializes the registration of provided dependencies inside of [GetIt]
@@ -65,23 +67,27 @@ Future<_i1.GetIt> $initGetIt(_i1.GetIt get,
       get<_i16.Web3DataSource>(),
       get<_i9.GetStorageDataSource>(),
       get<_i11.IsarDataSource>()));
-  gh.factory<_i19.RunAppInitUseCase>(() => _i19.RunAppInitUseCase(
+  gh.factory<_i19.ImportWalletUseCase>(
+      () => _i19.ImportWalletUseCase(get<_i17.IWalletRepository>()));
+  gh.factory<_i20.RunAppInitUseCase>(() => _i20.RunAppInitUseCase(
       get<_i16.Web3DataSource>(),
       get<_i11.IsarDataSource>(),
       get<_i9.GetStorageDataSource>()));
-  gh.factory<_i20.SecureStorage>(() => _i20.SecureStorage(
+  gh.factory<_i21.SecureStorage>(() => _i21.SecureStorage(
       get<_i7.FlutterSecureStorage>(), get<_i14.SharedPreferences>()));
-  gh.factory<_i21.SharedPreferenceDataSource>(
-      () => _i21.SharedPreferenceDataSource(get<_i14.SharedPreferences>()));
-  gh.factory<_i22.CreateWalletUseCase>(
-      () => _i22.CreateWalletUseCase(get<_i17.IWalletRepository>()));
-  gh.factory<_i23.IAuthRepository>(
-      () => _i24.AuthImplementation(get<_i20.SecureStorage>()));
-  gh.factory<_i25.CreatePassCodeUseCase>(
-      () => _i25.CreatePassCodeUseCase(get<_i23.IAuthRepository>()));
+  gh.factory<_i22.SharedPreferenceDataSource>(
+      () => _i22.SharedPreferenceDataSource(get<_i14.SharedPreferences>()));
+  gh.factory<_i23.CreateWalletUseCase>(
+      () => _i23.CreateWalletUseCase(get<_i17.IWalletRepository>()));
+  gh.factory<_i24.CurrentWalletUsecase>(
+      () => _i24.CurrentWalletUsecase(get<_i17.IWalletRepository>()));
+  gh.factory<_i25.IAuthRepository>(
+      () => _i26.AuthImplementation(get<_i21.SecureStorage>()));
+  gh.factory<_i27.CreatePassCodeUseCase>(
+      () => _i27.CreatePassCodeUseCase(get<_i25.IAuthRepository>()));
   return get;
 }
 
 class _$RPCModule extends _i16.RPCModule {}
 
-class _$RegisterModule extends _i26.RegisterModule {}
+class _$RegisterModule extends _i28.RegisterModule {}
