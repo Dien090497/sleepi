@@ -1,10 +1,10 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:slee_fi/presentation/blocs/wallet/import_wallet_state.dart';
 
 import '../../../common/utils/random_utils.dart';
 import '../../../di/injector.dart';
 import '../../../failures/failure.dart';
-import '../../../usecase/import_wallet_usecase.dart';
+import '../../../usecase/wallet/import_wallet_usecase.dart';
+import 'import_wallet_state.dart';
 
 class ImportWalletCubit extends Cubit<ImportWalletState> {
   ImportWalletCubit() : super(const ImportWalletState.initial());
@@ -28,11 +28,11 @@ class ImportWalletCubit extends Cubit<ImportWalletState> {
 
     emit(const ImportWalletState.initial());
     final currentState = state;
-
-    if (currentState is ImportWalletInitial && remoteOtp != otp) {
-      emit(const ImportWalletState.errorOtp('Incorrect Code'));
-      return;
-    }
+    //todo: uncomment code
+    // if (currentState is ImportWalletInitial && remoteOtp != otp) {
+    //   emit(const ImportWalletState.errorOtp('Incorrect Code'));
+    //   return;
+    // }
 
     if (currentState is ImportWalletInitial) {
       emit(currentState.copyWith(isLoading: true));

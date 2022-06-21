@@ -2,7 +2,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:slee_fi/di/injector.dart';
 import 'package:slee_fi/failures/failure.dart';
 import 'package:slee_fi/presentation/blocs/create_wallet/create_wallet_state.dart';
-import 'package:slee_fi/usecase/create_wallet_usecase.dart';
+import 'package:slee_fi/usecase/wallet/create_wallet_usecase.dart';
 import 'package:slee_fi/usecase/usecase.dart';
 
 class CreateWalletCubit extends Cubit<CreateWalletState> {

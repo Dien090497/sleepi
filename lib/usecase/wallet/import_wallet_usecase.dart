@@ -3,7 +3,7 @@ import 'package:slee_fi/failures/failure.dart';
 import 'package:slee_fi/repository/implementations/wallet_repository.dart';
 import 'package:slee_fi/usecase/usecase.dart';
 
-import '../entities/wallet_info/wallet_info_entity.dart';
+import '../../entities/wallet_info/wallet_info_entity.dart';
 
 class ImportWalletUseCase extends UseCase<WalletInfoEntity, String> {
   final IWalletRepository _iWalletRepository;

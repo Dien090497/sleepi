@@ -68,7 +68,7 @@ class ModalReceiveWallet extends StatelessWidget {
               borderRadius: BorderRadius.circular(100.0),
               color: AppColors.white.withOpacity(0.05)),
           child: SFText(
-            keyText: address,
+            keyText: address.formatAddress,
             style: TextStyles.lightGrey16,
             textAlign: TextAlign.center,
           ),

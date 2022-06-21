@@ -13,8 +13,12 @@ extension StringX on String {
         orElse: () => '',
       );
 
-  bool get isJapanese{
+  bool get isJapanese {
     return this == 'ja-JP';
+  }
+
+  String get formatAddress {
+    return '${substring(0, 5)}...${substring(length - 5, length)}';
   }
 
   String get checkSum => toChecksumAddress(this);

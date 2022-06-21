@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:slee_fi/common/extensions/string_x.dart';
-import 'package:slee_fi/common/routes/app_routes.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
 import 'package:slee_fi/common/widgets/background_widget.dart';
@@ -14,8 +13,9 @@ import 'package:slee_fi/common/widgets/sf_text.dart';
 import 'package:slee_fi/common/widgets/sf_textfield.dart';
 import 'package:slee_fi/common/widgets/textfield_verification.dart';
 import 'package:slee_fi/l10n/locale_keys.g.dart';
-import 'package:slee_fi/presentation/blocs/wallet/import_wallet_cubit.dart';
-import 'package:slee_fi/presentation/blocs/wallet/import_wallet_state.dart';
+
+import '../../blocs/import_wallet/import_wallet_cubit.dart';
+import '../../blocs/import_wallet/import_wallet_state.dart';
 
 class ImportWalletScreen extends StatelessWidget {
   const ImportWalletScreen({Key? key}) : super(key: key);
@@ -27,7 +27,7 @@ class ImportWalletScreen extends StatelessWidget {
       child: BlocConsumer<ImportWalletCubit, ImportWalletState>(
         listener: (context, state) {
           if (state is ImportWalletDone) {
-            Navigator.pop(context);
+            Navigator.pop(context, state.entity);
           }
         },
         builder: (context, state) {
@@ -59,6 +59,7 @@ class ImportWalletScreen extends StatelessWidget {
                                         CrossAxisAlignment.start,
                                     children: [
                                       TextfieldVerificationEmail(
+                                          maxLength: 6,
                                           onPressed: () => cubit.sendOtp(),
                                           valueChanged: (otp) =>
                                               cubit.otp = otp,

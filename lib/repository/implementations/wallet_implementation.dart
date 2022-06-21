@@ -2,7 +2,6 @@ import 'dart:developer';
 
 import 'package:dartz/dartz.dart';
 import 'package:injectable/injectable.dart';
-import 'dart:math' as math;
 import 'package:slee_fi/datasources/local/get_storage_datasource.dart';
 import 'package:slee_fi/datasources/local/isar/isar_datasource.dart';
 import 'package:slee_fi/datasources/remote/network/web3_datasource.dart';
@@ -21,21 +20,6 @@ class WalletImplementation extends IWalletRepository {
 
   WalletImplementation(
       this._web3DataSource, this._getStorageDataSource, this._isarDataSource);
-
-  @override
-  Future<Either<Failure, int>> currentWalletInfo() async {
-    try {
-      const String address = '0x8b3C0e6753572A123591D50bB0bCE13A00f10e9f';
-      var network = await _isarDataSource.getNetworkAt(43113);
-      await _web3DataSource.init(network!);
-      var result = await _web3DataSource.getBalance(address);
-      var end = result / math.pow(10, 18);
-
-      return Right(end.toInt());
-    } catch (e) {
-      return Left(FailureMessage('$e'));
-    }
-  }
 
   @override
   Future<Either<Failure, WalletInfoEntity>> createWallet() async {
@@ -96,8 +80,9 @@ class WalletImplementation extends IWalletRepository {
   Future<Either<Failure, WalletInfoEntity>> importWallet(
       String mnemonic) async {
     try {
-      _web3DataSource
-          .setCurrentNetwork((await _isarDataSource.getAllNetwork()).first);
+      var testNetwork = (await _isarDataSource.getAllNetwork()).first;
+      _web3DataSource.setCurrentNetwork(testNetwork);
+      _getStorageDataSource.setCurrentChainId(testNetwork.chainId);
       if (_web3DataSource.validateMnemonic(mnemonic)) {
         final derivedIndex = _getStorageDataSource.getDerivedIndexAndIncrease();
         final network = await _getCurrentNetwork();
@@ -116,6 +101,7 @@ class WalletImplementation extends IWalletRepository {
           derivedIndex: derivedIndex,
           mnemonic: mnemonic,
         );
+        log('address import is ${model.address}');
         final int walletId = await _isarDataSource.putWallet(model);
         model.id = walletId;
         await _getStorageDataSource.setCurrentWalletId(walletId);
@@ -128,6 +114,42 @@ class WalletImplementation extends IWalletRepository {
         ));
       }
       return const Left(FailureMessage('Invalid Mnemonic'));
+    } catch (e) {
+      return Left(FailureMessage('$e'));
+    }
+  }
+
+  @override
+  Future<Either<Failure, WalletInfoEntity>> currentWallet() async {
+    try {
+      var testNetwork = (await _isarDataSource.getAllNetwork()).first;
+      _web3DataSource.setCurrentNetwork(testNetwork);
+      _getStorageDataSource.setCurrentChainId(testNetwork.chainId);
+      var walletId = _getStorageDataSource.getCurrentWalletId();
+      if (walletId == null) {
+        return const Left(FailureMessage('Invalid Wallet'));
+      }
+
+      var wallet = await _isarDataSource.getWalletAt(walletId);
+
+      if (wallet == null) {
+        return const Left(FailureMessage('Invalid Wallet'));
+      }
+
+      final network = await _getCurrentNetwork();
+      final privateKey = _web3DataSource.mnemonicToPrivateKey(
+          wallet.mnemonic, wallet.derivedIndex!, network.slip44);
+      final credentials = _web3DataSource.credentialsFromPrivateKey(privateKey);
+      log('info wallet  ${wallet.name}   ${wallet.address}  ${wallet.mnemonic}');
+      var balance = await _web3DataSource.getBalance(wallet.address);
+
+      var nativeCurrency = await _getNativeCurrency();
+      return Right(
+        wallet.toEntity(
+          credentials,
+          nativeCurrency: nativeCurrency!.toEntity(balance: balance.toInt()),
+        ),
+      );
     } catch (e) {
       return Left(FailureMessage('$e'));
     }
