@@ -12,28 +12,38 @@ class ImportWalletCubit extends Cubit<ImportWalletState> {
   final randomUtils = getIt<RandomUtils>();
   final importWalletUC = getIt<ImportWalletUseCase>();
 
-  late String otp;
-  late String mnemonic;
-  late String remoteOtp;
+  String otp = '';
+  String mnemonic = '';
+  String remoteOtp = '';
 
+  Future importWallet() async {
+    if (otp.isEmpty) {
+      emit(const ImportWalletState.errorOtp('Verification Code required'));
+      return;
+    }
+    if (mnemonic.isEmpty) {
+      emit(const ImportWalletState.errorMnemonic('Please Enter Seed Phrase'));
+      return;
+    }
 
-  Future<bool> importWallet() async {
     emit(const ImportWalletState.initial());
     final currentState = state;
 
     if (currentState is ImportWalletInitial && remoteOtp != otp) {
       emit(const ImportWalletState.errorOtp('Incorrect Code'));
-      return false;
+      return;
     }
+
     if (currentState is ImportWalletInitial) {
       emit(currentState.copyWith(isLoading: true));
       var result = await importWalletUC.call(mnemonic);
-      result.fold(
-          (l) => emit(ImportWalletState.errorMnemonic(
-              l is FailureMessage ? l.msg : '$l')),
-          (r) => emit(ImportWalletState.success(r)));
+      result.fold((l) {
+        emit(ImportWalletState.errorMnemonic(
+            l is FailureMessage ? l.msg : '$l'));
+      }, (r) {
+        emit(ImportWalletState.success(r));
+      });
     }
-    return false;
   }
 
   sendOtp() {

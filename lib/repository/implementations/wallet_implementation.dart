@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:dartz/dartz.dart';
 import 'package:injectable/injectable.dart';
 import 'dart:math' as math;
@@ -91,14 +93,11 @@ class WalletImplementation extends IWalletRepository {
   }
 
   @override
-  Future<Either<Failure, WalletInfoEntity>> importWallet(String mnemonic) {
-    // TODO: implement importWallet
-    throw UnimplementedError();
-  }
-
-  Future<Either<Failure, WalletInfoEntity>> importWalletFromMnemonic(
+  Future<Either<Failure, WalletInfoEntity>> importWallet(
       String mnemonic) async {
     try {
+      _web3DataSource
+          .setCurrentNetwork((await _isarDataSource.getAllNetwork()).first);
       if (_web3DataSource.validateMnemonic(mnemonic)) {
         final derivedIndex = _getStorageDataSource.getDerivedIndexAndIncrease();
         final network = await _getCurrentNetwork();

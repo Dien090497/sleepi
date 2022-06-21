@@ -6,6 +6,7 @@ import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
 import 'package:slee_fi/common/widgets/background_widget.dart';
 import 'package:slee_fi/common/widgets/dismiss_keyboard_widget.dart';
+import 'package:slee_fi/common/widgets/loading_screen.dart';
 import 'package:slee_fi/common/widgets/sf_app_bar.dart';
 import 'package:slee_fi/common/widgets/sf_buttons.dart';
 import 'package:slee_fi/common/widgets/sf_card.dart';
@@ -24,77 +25,90 @@ class ImportWalletScreen extends StatelessWidget {
     return BlocProvider(
       create: (context) => ImportWalletCubit(),
       child: BlocConsumer<ImportWalletCubit, ImportWalletState>(
-        listener: (context, state) {},
+        listener: (context, state) {
+          if (state is ImportWalletDone) {
+            Navigator.pop(context);
+          }
+        },
         builder: (context, state) {
           final cubit = context.read<ImportWalletCubit>();
-          return DismissKeyboardWidget(
-            child: BackgroundWidget(
-              resizeToAvoidBottomInset: false,
-              appBar: SFAppBar(
-                context: context,
-                title: LocaleKeys.secure_wallet,
-                textStyle: TextStyles.bold18LightWhite,
-              ),
-              child: SafeArea(
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 23),
-                  child: Column(
-                    children: [
-                      Expanded(
-                        child: ListView(
-                          padding: const EdgeInsets.symmetric(vertical: 36),
-                          children: [
-                            SFCard(
-                              padding: const EdgeInsets.symmetric(
-                                  horizontal: 16, vertical: 24),
-                              child: Column(
-                                children: [
-                                  TextfieldVerificationEmail(
-                                      onPressed: () => cubit.sendOtp(),
-                                      valueChanged: (otp) => cubit.otp = otp,
-                                      errorText: state is ImportWalletErrorOtp
-                                          ? state.msg
-                                          : ''),
-                                  const SizedBox(height: 20),
-                                  SFTextField(
-                                    labelText: LocaleKeys.seed_phrase,
-                                    hintText:
-                                        LocaleKeys.enter_the_seed_phrase_word,
-                                    hintStyle: TextStyles.w400lightGrey12,
-                                    onChanged: (mnemonic) =>
-                                        cubit.mnemonic = mnemonic,
-                                    maxLine: 10,
-                                    maxLength: 256,
+          return Stack(
+            children: [
+              DismissKeyboardWidget(
+                child: BackgroundWidget(
+                  resizeToAvoidBottomInset: false,
+                  appBar: SFAppBar(
+                    context: context,
+                    title: LocaleKeys.secure_wallet,
+                    textStyle: TextStyles.bold18LightWhite,
+                  ),
+                  child: SafeArea(
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 23),
+                      child: Column(
+                        children: [
+                          Expanded(
+                            child: ListView(
+                              padding: const EdgeInsets.symmetric(vertical: 36),
+                              children: [
+                                SFCard(
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 16, vertical: 24),
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      TextfieldVerificationEmail(
+                                          onPressed: () => cubit.sendOtp(),
+                                          valueChanged: (otp) =>
+                                              cubit.otp = otp,
+                                          errorText:
+                                              state is ImportWalletErrorOtp
+                                                  ? state.msg
+                                                  : ''),
+                                      const SizedBox(height: 20),
+                                      SFTextField(
+                                        labelText: LocaleKeys.seed_phrase,
+                                        hintText: LocaleKeys
+                                            .enter_the_seed_phrase_word,
+                                        hintStyle: TextStyles.w400lightGrey12,
+                                        onChanged: (mnemonic) =>
+                                            cubit.mnemonic = mnemonic,
+                                        maxLine: 10,
+                                        maxLength: 256,
+                                      ),
+                                      const SizedBox(height: 5),
+                                      state is ImportWalletErrorMnemonic
+                                          ? SFText(
+                                              keyText: state.msg,
+                                              style: TextStyles.w400Red12,
+                                            )
+                                          : const SizedBox()
+                                    ],
                                   ),
-                                  state is ImportWalletErrorMnemonic
-                                      ? SFText(keyText: state.msg)
-                                      : const SizedBox()
-                                ],
-                              ),
+                                ),
+                              ],
                             ),
-                          ],
-                        ),
+                          ),
+                          SFButton(
+                            text: LocaleKeys.import_wallet
+                                .reCase(StringCase.titleCase),
+                            textStyle: TextStyles.w600WhiteSize16,
+                            height: 48,
+                            width: double.infinity,
+                            color: AppColors.blue,
+                            onPressed: () => cubit.importWallet(),
+                          ),
+                          const SizedBox(height: 24)
+                        ],
                       ),
-                      SFButton(
-                        text: LocaleKeys.import_wallet
-                            .reCase(StringCase.titleCase),
-                        textStyle: TextStyles.w600WhiteSize16,
-                        height: 48,
-                        width: double.infinity,
-                        color: AppColors.blue,
-                        onPressed: () => cubit.importWallet().then((value) {
-                          if (value) {
-                            Navigator.popUntil(
-                                context, (r) => r.settings.name == R.wallet);
-                          }
-                        }),
-                      ),
-                      const SizedBox(height: 24)
-                    ],
+                    ),
                   ),
                 ),
               ),
-            ),
+              if (state is ImportWalletInitial && state.isLoading)
+                const LoadingScreen()
+            ],
           );
         },
       ),
