@@ -102,7 +102,6 @@ class WalletImplementation extends IWalletRepository {
           derivedIndex: derivedIndex,
           mnemonic: mnemonic,
         );
-        log('address import is ${model.address}');
         final int walletId = await _isarDataSource.putWallet(model);
         model.id = walletId;
         await _getStorageDataSource.setCurrentWalletId(walletId);
@@ -142,7 +141,6 @@ class WalletImplementation extends IWalletRepository {
       final privateKey = _web3DataSource.mnemonicToPrivateKey(
           wallet.mnemonic, wallet.derivedIndex!, network.slip44);
       final credentials = _web3DataSource.credentialsFromPrivateKey(privateKey);
-      log('info wallet ${network.name} ${wallet.name}   ${wallet.address}  ${wallet.mnemonic}');
       var balance = await _web3DataSource.getBalance(wallet.address);
 
       var nativeCurrency = await _getNativeCurrency();
