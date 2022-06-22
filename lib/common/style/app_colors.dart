@@ -15,6 +15,8 @@ class AppColors {
 
   static const darkPurple = Color(0xFF23193D);
 
+  static const pink = Color(0xFFD773AA);
+
   static const darkColor = Color(0xFF181722);
 
   static const borderDarkColor = Color(0xFF272E39);
@@ -37,9 +39,13 @@ class AppColors {
 
   static const greyBottomNavBar = Color(0xFFC4C4C4);
 
+  static const greyBottomIndividual = Color(0xFF8E9EB5);
+
   static const transparent = Colors.transparent;
 
   static const darkColor1 = Color(0xFF1E212C);
+
+  static const darkColor2 = Color(0xFF121212);
 
   static const green = Color(0xFF2ADF9E);
 
@@ -76,13 +82,16 @@ class AppColors {
 
   static const gray = Color(0xFFC4C4C4);
 
+  static const ruby = Color(0XFFFC476A);
+
+  static const amethst = Color(0xFF7962E7);
+
   static final backgroundDialog = const Color(0xFF060616).withOpacity(0.9);
 
-  static LinearGradient gradientBlue = LinearGradient(colors: [
-    const Color(0xFFC4C4C4).withOpacity(0),
-    const Color(0xFF18A0FB).withOpacity(0.01),
-    const Color(0xFF426BFF)
-  ], begin: Alignment.topCenter, end: Alignment.bottomCenter);
+  static LinearGradient gradientBlue = const LinearGradient(
+      colors: [blue, Color(0xFF426BFF)],
+      begin: Alignment.topCenter,
+      end: Alignment.bottomCenter);
 
   static const gradientBlueAccent = LinearGradient(
       colors: [Color(0xFF62519F), Color(0xFF396CBB), Color(0xFF549CBF)],
@@ -103,6 +112,11 @@ class AppColors {
 
   static const blueGradient = LinearGradient(
       colors: [blue, blue],
+      begin: Alignment.topLeft,
+      end: Alignment.bottomRight);
+
+  static final gradientGacha = LinearGradient(
+      colors: [blue.withOpacity(0.1), rank5.withOpacity(0.1)],
       begin: Alignment.topLeft,
       end: Alignment.bottomRight);
 

@@ -1,5 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:slee_fi/common/const/const.dart';
+import 'package:slee_fi/common/extensions/string_x.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
 import 'package:slee_fi/common/widgets/background_widget.dart';
@@ -24,12 +26,12 @@ class SendToExternalScreen extends StatelessWidget {
     return DismissKeyboardWidget(
       child: BackgroundWidget(
         appBar: SFAppBar(
-          title: LocaleKeys.send_to,
+          title: LocaleKeys.send_to.tr().reCase(StringCase.titleCase),
           textStyle: TextStyles.bold18White,
           context: context,
         ),
         resizeToAvoidBottomInset: false,
-        child:  SafeArea(
+        child: SafeArea(
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16.0),
             child: Column(
@@ -75,33 +77,43 @@ class SendToExternalScreen extends StatelessWidget {
                       ),
                       Text.rich(
                         TextSpan(
-                          text: LocaleKeys.the_network_you_have_selected_is.tr(),
+                          text: LocaleKeys.the_network_you_have_selected_1.tr(),
                           style: TextStyles.w400lightGrey12,
                           children: [
                             const TextSpan(text: ' '),
-                            const TextSpan(
-                                text: LocaleKeys.avalanche,
-                                style: TextStyles.w400Red12),
-                            const TextSpan(text: ' '),
-                            TextSpan(text: LocaleKeys.network.tr()),
-                            const TextSpan(text: '. '),
                             TextSpan(
-                                text: LocaleKeys.please_ensure_that_the_withdrawal_address.tr()),
-                            const TextSpan(text: ' '),
-                            const TextSpan(
-                                text: LocaleKeys.avalanche,
-                                style: TextStyles.w400Red12),
-                            const TextSpan(text: ' '),
-                            TextSpan(text: LocaleKeys.network.tr()),
-                            const TextSpan(text: '. '),
-                            TextSpan(
-                                text: LocaleKeys.you_will_lose_your_assets.tr(),
+                                text: LocaleKeys.avalanche.tr(),
                                 style: TextStyles.w400Red12),
                             const TextSpan(text: ' '),
                             TextSpan(
-                                text: LocaleKeys
-                                    .if_the_chosen_platform_does_not_support.tr()),
-                            const TextSpan(text: '.'),
+                                text: LocaleKeys.the_network_you_have_selected_2
+                                    .tr()),
+                            TextSpan(
+                                text: LocaleKeys.the_network_you_have_selected_3
+                                    .tr()),
+                            const TextSpan(text: ' '),
+                            TextSpan(
+                                text: LocaleKeys.avalanche.tr(),
+                                style: TextStyles.w400Red12),
+                            const TextSpan(text: ' '),
+                            TextSpan(
+                                text: LocaleKeys.the_network_you_have_selected_4
+                                    .tr()),
+                            TextSpan(
+                                text: LocaleKeys.the_network_you_have_selected_5
+                                    .tr(),
+                                style: context.locale.languageCode ==
+                                        Const.localeJA.languageCode
+                                    ? null
+                                    : TextStyles.w400Red12),
+                            const TextSpan(text: ' '),
+                            TextSpan(
+                                text: LocaleKeys.the_network_you_have_selected_6
+                                    .tr(),
+                                style: context.locale.languageCode ==
+                                        Const.localeJA.languageCode
+                                    ? TextStyles.w400Red12
+                                    : null),
                           ],
                         ),
                       ),

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:slee_fi/common/routes/app_routes.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
 import 'package:slee_fi/common/widgets/sf_statistic_resource.dart';
 import 'package:slee_fi/common/widgets/sf_sub_app_bar.dart';
@@ -31,7 +30,7 @@ class TopBarStaking extends StatelessWidget {
           ),
           GestureDetector(
               onTap: () {
-                Navigator.pushNamed(context, R.passcode);
+                Navigator.pop(context);
               },
               child: Container(
                 padding:
@@ -46,14 +45,14 @@ class TopBarStaking extends StatelessWidget {
                   children: [
                     ItemResource(
                       value: valueSilver ?? 0,
-                      url: Ics.icSilver,
+                      url: Ics.icSlgt,
                     ),
                     const SizedBox(
                       width: 16,
                     ),
                     ItemResource(
                       value: valueGold ?? 0,
-                      url: Ics.icGold,
+                      url: Ics.icSlft,
                     ),
                   ],
                 ),

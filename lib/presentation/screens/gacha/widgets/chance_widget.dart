@@ -4,6 +4,7 @@ import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
 import 'package:slee_fi/common/widgets/sf_percent_border.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
+import 'package:slee_fi/l10n/locale_keys.g.dart';
 
 class ChanceWidget extends StatelessWidget {
   const ChanceWidget({Key? key}) : super(key: key);
@@ -40,7 +41,7 @@ class ChanceWidget extends StatelessWidget {
                   border: Border.all(color: AppColors.blue)),
               padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 18),
               child: SFText(
-                keyText: 'Get',
+                keyText: LocaleKeys.get,
                 style: TextStyles.blue14,
               ),
             ),

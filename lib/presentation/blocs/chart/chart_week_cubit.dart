@@ -1,3 +1,5 @@
+import 'dart:core';
+
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_date_pickers/flutter_date_pickers.dart';
 import 'package:slee_fi/common/utils/date_time_utils.dart';
@@ -12,10 +14,10 @@ class ChartWeekCubit extends Cubit<ChartWeekState> {
   void init() async {
     final now = DateTime.now();
     emit(ChartWeekState.loaded(
-      week: DatePeriod(
-          dateTimeUtils.startOfWeek(now), dateTimeUtils.endOfWeek(now)),
+      week: DatePeriod(dateTimeUtils.startOfWeek(now),
+          dateTimeUtils.endOfWeek(now, checkNow: true)),
       firstAllowedDate: DateTime.now().subtract(const Duration(days: 366)),
-      lastAllowedDate: DateTime.now(),
+      lastAllowedDate: DateTime.now().add(const Duration(days: 366)),
     ));
   }
 
@@ -30,11 +32,16 @@ class ChartWeekCubit extends Cubit<ChartWeekState> {
     final currentState = state;
     if (currentState is ChartWeekLoaded) {
       final start = currentState.week.start;
-      final end = currentState.week.end;
-      final nextWeekFirstDate =
-          start.add(const Duration(days: DateTime.daysPerWeek));
-      final nextWeekLastDate =
-          end.add(const Duration(days: DateTime.daysPerWeek));
+      final nextWeekFirstDate = dateTimeUtils
+          .startOfWeek(start.add(const Duration(days: DateTime.daysPerWeek)));
+      if (nextWeekFirstDate.isAfter(DateTime.now())) {
+        return;
+      }
+      var nextWeekLastDate = dateTimeUtils.endOfWeek(nextWeekFirstDate);
+      if (nextWeekLastDate.isAfter(DateTime.now())) {
+        nextWeekLastDate = DateTime(
+            DateTime.now().year, DateTime.now().month, DateTime.now().day);
+      }
       if (nextWeekFirstDate.isBefore(currentState.lastAllowedDate) &&
           nextWeekLastDate.isBefore(currentState.lastAllowedDate)) {
         final nextWeek = DatePeriod(nextWeekFirstDate, nextWeekLastDate);
@@ -47,11 +54,9 @@ class ChartWeekCubit extends Cubit<ChartWeekState> {
     final currentState = state;
     if (currentState is ChartWeekLoaded) {
       final start = currentState.week.start;
-      final end = currentState.week.end;
       final prevWeekFirstDate =
           start.subtract(const Duration(days: DateTime.daysPerWeek));
-      final prevWeekLastDate =
-          end.subtract(const Duration(days: DateTime.daysPerWeek));
+      final prevWeekLastDate = dateTimeUtils.endOfWeek(prevWeekFirstDate);
       if (prevWeekFirstDate.isAfter(currentState.firstAllowedDate) &&
           prevWeekLastDate.isAfter(currentState.firstAllowedDate)) {
         final nextWeek = DatePeriod(prevWeekFirstDate, prevWeekLastDate);

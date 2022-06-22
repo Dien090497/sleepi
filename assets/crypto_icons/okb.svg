@@ -1,0 +1,10 @@
+<svg enable-background="new 0 0 500 500" viewBox="0 0 500 500" xmlns="http://www.w3.org/2000/svg">
+    <path d="m1.9 0h500v500h-500z" />
+    <g fill="#fff">
+        <path d="m58.1 56.2h129.2v129.2h-129.2z" />
+        <path d="m316.5 56.2h129.2v129.2h-129.2z" />
+        <path d="m58.1 314.6h129.2v129.2h-129.2z" />
+        <path d="m316.5 314.6h129.2v129.2h-129.2z" />
+        <path d="m187.3 185.4h129.2v129.2h-129.2z" />
+    </g>
+</svg>

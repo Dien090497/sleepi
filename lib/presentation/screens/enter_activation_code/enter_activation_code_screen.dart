@@ -8,7 +8,8 @@ import 'package:slee_fi/common/widgets/background_widget.dart';
 import 'package:slee_fi/common/widgets/dismiss_keyboard_widget.dart';
 import 'package:slee_fi/common/widgets/sf_app_bar.dart';
 import 'package:slee_fi/common/widgets/sf_buttons.dart';
-import 'package:slee_fi/common/widgets/sf_drop_down.dart';
+import 'package:slee_fi/common/widgets/sf_dialog.dart';
+import 'package:slee_fi/common/widgets/sf_dropdown_rotation.dart';
 import 'package:slee_fi/common/widgets/sf_logo.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
 import 'package:slee_fi/common/widgets/sf_textfield.dart';
@@ -25,7 +26,8 @@ class EnterActivationCodeScreen extends StatelessWidget {
       child: BackgroundWidget(
         appBar: SFAppBar(
             context: context,
-            title: LocaleKeys.activation_code_language,
+            title:
+                "${LocaleKeys.activation_code.tr()}/${LocaleKeys.language.tr()}",
             textStyle: TextStyles.bold18LightWhite),
         child: SafeArea(
           child: ListView(
@@ -40,7 +42,10 @@ class EnterActivationCodeScreen extends StatelessWidget {
                   children: [
                     const SFLogo(),
                     const SizedBox(height: 40),
-                    const SFTextField(labelText: LocaleKeys.please_enter),
+                    const SFTextField(
+                      labelText: LocaleKeys.please_enter_your_activation_code,
+                      textInputType: TextInputType.number,
+                    ),
                     const SizedBox(height: 20),
                     SFText(
                         keyText: LocaleKeys.please_select_your_language,
@@ -49,24 +54,25 @@ class EnterActivationCodeScreen extends StatelessWidget {
                     SizedBox(
                         width: double.infinity,
                         height: 48,
-                        child: SFDropDown<String>(
-                            value: context.locale.displayName,
-                            icon: const Icon(
-                              Icons.keyboard_arrow_down,
-                              size: 24,
-                            ),
-                            dropdownWidth:
-                                MediaQuery.of(context).size.width * 0.8,
-                            dropdownItems: List.generate(
-                              Const.locales.length,
-                              (i) => DropdownMenuItem(
-                                value: Const.locales[i].displayName,
-                                child: SFText(
-                                  keyText: Const.locales[i].displayName,
-                                  style: TextStyles.white16,
-                                ),
-                              ),
-                            ))),
+                        child: SFDropDownRotation<String>(
+                          value: context.locale.displayName,
+                          dropdownWidth:
+                              MediaQuery.of(context).size.width * 0.8,
+                          dropdownHeight: 48,
+                          selectedItemHighlightColor: AppColors.lightDark,
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          spinnerItems: List.generate(
+                            Const.locales.length,
+                            (i) => Const.locales[i].displayName,
+                          ),
+                          onChange: (int value, int index) {
+                            final locale = Const.locales[index];
+                            if (locale.languageCode !=
+                                context.locale.languageCode) {
+                              showChangeLanguageDialog(context, locale: locale);
+                            }
+                          },
+                        )),
                     const SizedBox(height: 20),
                     SFButton(
                       text: LocaleKeys.start,

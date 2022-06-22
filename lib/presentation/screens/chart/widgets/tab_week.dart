@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_date_pickers/flutter_date_pickers.dart';
+import 'package:slee_fi/common/extensions/date_time_x.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
 import 'package:slee_fi/common/utils/date_time_utils.dart';
 import 'package:slee_fi/common/widgets/loading_screen.dart';
@@ -24,7 +25,6 @@ class TabWeek extends StatelessWidget {
       builder: (context, state) {
         if (state is ChartWeekLoaded) {
           final cubit = context.read<ChartWeekCubit>();
-
           final start = state.week.start;
           final end = state.week.end;
           final startMonth = start.month;
@@ -32,9 +32,15 @@ class TabWeek extends StatelessWidget {
           final startYear = start.year;
           final endYear = end.year;
 
+          final startNextWeek =
+              start.add(const Duration(days: DateTime.daysPerWeek));
+          final startPrevWeek =
+              start.subtract(const Duration(days: DateTime.daysPerWeek));
           return ChartTabBody(
+            nextEnable: startNextWeek.isBefore(DateTime.now()),
+            prevEnable: startPrevWeek.isAfter(state.firstAllowedDate),
             picker: ChartWeekPicker(
-              selectedDate: state.week.start,
+              datePeriod: state.week,
               firstAllowedDate: state.firstAllowedDate,
               lastAllowedDate: state.lastAllowedDate,
               onNewSelected: (period) {
@@ -51,9 +57,8 @@ class TabWeek extends StatelessWidget {
                 '${dateTimeUtils.MMMdo(start)} ${startYear == endYear ? '' : '$startYear '}~ ${startMonth != endMonth ? dateTimeUtils.MMMdo(end) : dateTimeUtils.doFormat(end)}, $endYear',
             children: [
               const ChartTitle(
-                title: LocaleKeys.slft,
+                title: "SLFT",
                 textStyleTitle: TextStyles.bold16LightWhite,
-                toUpperCase: true,
                 padding: EdgeInsets.zero,
               ),
               const SizedBox(height: 12),
@@ -121,27 +126,24 @@ class TabWeek extends StatelessWidget {
 class ChartWeekPicker extends StatelessWidget {
   const ChartWeekPicker(
       {Key? key,
-      required this.selectedDate,
+      required this.datePeriod,
       required this.firstAllowedDate,
       required this.lastAllowedDate,
       required this.onNewSelected})
       : super(key: key);
-
-  final DateTime selectedDate;
+  final DatePeriod datePeriod;
   final DateTime firstAllowedDate;
   final DateTime lastAllowedDate;
   final ValueChanged<DatePeriod> onNewSelected;
 
   @override
   Widget build(BuildContext context) {
-    final dateTimeUtils = getIt<DateTimeUtils>();
-
     return SfDateRangePicker(
       maxDate: lastAllowedDate,
       minDate: firstAllowedDate,
       showNavigationArrow: true,
       selectionTextStyle: TextStyles.white14,
-      initialDisplayDate: selectedDate,
+      initialDisplayDate: datePeriod.start,
       showTodayButton: false,
       monthCellStyle: const DateRangePickerMonthCellStyle(
         disabledDatesTextStyle: TextStyles.lightGrey14,
@@ -162,23 +164,17 @@ class ChartWeekPicker extends StatelessWidget {
         textStyle: TextStyles.white14,
       ),
       selectionMode: DateRangePickerSelectionMode.range,
-      initialSelectedRange: PickerDateRange(
-          dateTimeUtils.startOfWeek(selectedDate),
-          _endOfWeek(selectedDate, dateTimeUtils)),
-      onSelectionChanged: (DateRangePickerSelectionChangedArgs value) {
-        var selectedDate = value.value;
-        if (selectedDate is PickerDateRange && selectedDate.startDate != null) {
-          onNewSelected(DatePeriod(
-              dateTimeUtils.startOfWeek(selectedDate.startDate!),
-              _endOfWeek(selectedDate.startDate!, dateTimeUtils)));
+      initialSelectedRange: PickerDateRange(datePeriod.start, datePeriod.end),
+      showActionButtons: true,
+      onSubmit: (value) {
+        if (value is PickerDateRange &&
+            value.startDate != null &&
+            !value.endDate!.isTheSameDay(value.startDate!)) {
+          onNewSelected(DatePeriod(value.startDate!, value.endDate!));
         }
         Navigator.pop(context);
       },
+      onCancel: () => Navigator.pop(context),
     );
-  }
-
-  DateTime _endOfWeek(DateTime time, DateTimeUtils dateTimeUtils) {
-    var endOfWeek = dateTimeUtils.endOfWeek(time);
-    return DateTime.now().isBefore(endOfWeek) ? DateTime.now() : endOfWeek;
   }
 }

@@ -19,8 +19,8 @@ class _NotificationStatusChangeState extends State<NotificationStatusChangeWidge
   Widget build(BuildContext context) {
     return SFListTile(
       leading:const Padding(
-        padding:  EdgeInsets.only(right: 8),
-        child: SFIcon(Ics.icNotifications, width: 24,),
+        padding:  EdgeInsets.only(left: 8, right: 8),
+        child: SFIcon(Imgs.bell, width: 24,),
       ),
       text: LocaleKeys.notifications,
       trailing: Padding(

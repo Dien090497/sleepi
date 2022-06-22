@@ -1,6 +1,9 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
+import 'package:slee_fi/common/widgets/sf_buttons.dart';
 import 'package:slee_fi/common/widgets/sf_icon.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
 import 'package:slee_fi/l10n/locale_keys.g.dart';
@@ -42,9 +45,62 @@ Future<T?> showSuccessfulDialog<T>(BuildContext context) async {
             ),
             const SFIcon(Ics.successful),
             const SizedBox(height: 36),
-            SFText(
-                keyText: LocaleKeys.successfully, style: TextStyles.bold18White),
+            SFText(keyText: LocaleKeys.success, style: TextStyles.bold18White),
             const SizedBox(height: 40),
+          ],
+        );
+      });
+}
+
+Future<T?> showChangeLanguageDialog<T>(BuildContext context,
+    {required Locale locale}) async {
+  return showDialog(
+      context: context,
+      barrierColor: AppColors.backgroundDialog,
+      builder: (context) {
+        return SFDialog(
+          children: [
+            Align(
+              alignment: Alignment.centerRight,
+              child: IconButton(
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+                icon: const Icon(Icons.close, color: AppColors.white),
+              ),
+            ),
+            const SFIcon(Ics.warning),
+            const SizedBox(height: 20),
+            SFText(
+              keyText: LocaleKeys.do_you_want_to_leave,
+              style: TextStyles.white1w700size18,
+            ),
+            const SizedBox(height: 38),
+            Row(
+              children: [
+                Expanded(
+                  child: SFButton2(
+                    text: LocaleKeys.cancel,
+                    color: AppColors.greyBottomNavBar,
+                    textStyle: TextStyles.lightGrey16,
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                  ),
+                ),
+                SizedBox(width: 16.w),
+                Expanded(
+                  child: SFButton2(
+                    text: LocaleKeys.ok,
+                    gradient: AppColors.gradientBlue,
+                    textStyle: TextStyles.white16,
+                    onPressed: () {
+                      context.setLocale(locale);
+                    },
+                  ),
+                ),
+              ],
+            ),
           ],
         );
       });

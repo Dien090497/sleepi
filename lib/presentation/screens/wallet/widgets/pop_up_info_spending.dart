@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
@@ -18,7 +19,7 @@ class _PopupInfoSpendingState extends State<PopupInfoSpending> {
   GlobalKey key = GlobalKey();
 
   void _toggleDropdown() {
-    showMoreText(LocaleKeys.displays_message_from_spending_detail);
+    showMoreText(LocaleKeys.you_need_to_have_token_in_spending.tr(namedArgs: {"token":"AVAX"}));
   }
 
   @override

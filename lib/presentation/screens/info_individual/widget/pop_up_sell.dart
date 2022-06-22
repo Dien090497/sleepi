@@ -1,4 +1,6 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
 import 'package:slee_fi/common/widgets/dismiss_keyboard_widget.dart';
@@ -8,12 +10,12 @@ import 'package:slee_fi/common/widgets/sf_dialog.dart';
 import 'package:slee_fi/common/widgets/sf_icon.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
 import 'package:slee_fi/l10n/locale_keys.g.dart';
-import 'package:slee_fi/resources/resources.dart';
 
 class PopUpSell extends StatefulWidget {
   const PopUpSell({
     Key? key,
     required this.icon,
+    required this.className,
     required this.cost,
     required this.level,
     required this.time,
@@ -22,6 +24,7 @@ class PopUpSell extends StatefulWidget {
   }) : super(key: key);
 
   final String icon;
+  final String className;
   final int cost;
   final int level;
   final int time;
@@ -43,7 +46,7 @@ class _PopUpSellState extends State<PopUpSell> {
           Positioned(
             right: 0,
             child: GestureDetector(
-              onTap: (){
+              onTap: () {
                 widget.onCancel!();
                 Navigator.pop(context);
               },
@@ -53,11 +56,15 @@ class _PopUpSellState extends State<PopUpSell> {
           Column(
             children: [
               SFText(
-                  keyText: step == 2 ? LocaleKeys.confirm_to_sell : LocaleKeys.sell,
+                  keyText:
+                      step == 2 ? LocaleKeys.confirm_to_sell : LocaleKeys.sell,
                   style: TextStyles.white1w700size18),
-              const SizedBox(height: 20),
-              if (step < 2) SFIcon(widget.icon),
-              if (step < 2) const SizedBox(height: 24),
+              if (step >= 2) const SizedBox(height: 20),
+              if (step < 2)
+                SFIcon(
+                  widget.icon,
+                  height: 160,
+                ),
               if (step < 2)
                 Container(
                   decoration: BoxDecoration(
@@ -66,11 +73,11 @@ class _PopUpSellState extends State<PopUpSell> {
                   ),
                   padding:
                       const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
-                  child: SFText(keyText: 'IDIDIDID', style: TextStyles.blue14),
+                  child: SFText(keyText: 'C1373', style: TextStyles.blue14),
                 ),
               if (step < 2) const SizedBox(height: 32),
               if (step == 0)
-                const _Detail()
+                _Detail(className: widget.className)
               else if (step == 1) ...[
                 Align(
                   alignment: Alignment.centerLeft,
@@ -143,14 +150,13 @@ class _Confirm extends StatelessWidget {
         Row(
           children: [
             Expanded(
-              flex: 3,
               child: SFText(
                   keyText: LocaleKeys.list_price,
                   style: TextStyles.lightGrey14),
             ),
             Expanded(
               child: SFText(
-                keyText: '19 SLFT',
+                keyText: '19 AVAX',
                 style: TextStyles.lightWhite16,
                 textAlign: TextAlign.right,
               ),
@@ -158,24 +164,24 @@ class _Confirm extends StatelessWidget {
           ],
         ),
         const SizedBox(height: 16),
-        Row(
-          children: [
-            Expanded(
-              flex: 3,
-              child: SFText(
-                  keyText: LocaleKeys.artist_royalties,
-                  style: TextStyles.lightGrey14),
-            ),
-            Expanded(
-              child: SFText(
-                keyText: '4%',
-                style: TextStyles.lightWhite16,
-                textAlign: TextAlign.right,
-              ),
-            ),
-          ],
-        ),
-        const SizedBox(height: 16),
+        // Row(
+        //   children: [
+        //     Expanded(
+        //       flex: 3,
+        //       child: SFText(
+        //           keyText: LocaleKeys.artist_royalties,
+        //           style: TextStyles.lightGrey14),
+        //     ),
+        //     Expanded(
+        //       child: SFText(
+        //         keyText: '4%',
+        //         style: TextStyles.lightWhite16,
+        //         textAlign: TextAlign.right,
+        //       ),
+        //     ),
+        //   ],
+        // ),
+        // const SizedBox(height: 16),
         Row(
           children: [
             Expanded(
@@ -186,7 +192,7 @@ class _Confirm extends StatelessWidget {
             ),
             Expanded(
               child: SFText(
-                keyText: '2%',
+                keyText: '6%',
                 style: TextStyles.lightWhite16,
                 textAlign: TextAlign.right,
               ),
@@ -199,7 +205,8 @@ class _Confirm extends StatelessWidget {
             Expanded(
               flex: 3,
               child: SFText(
-                  keyText: LocaleKeys.listing_cancel,
+                  keyText:
+                      "${LocaleKeys.listing.tr()}/${LocaleKeys.cancel.tr()}",
                   style: TextStyles.lightGrey14),
             ),
             Expanded(
@@ -230,7 +237,10 @@ class _InputPrice extends StatelessWidget {
         children: [
           const Expanded(
             child: TextField(
+              style: TextStyles.lightWhite14,
+              keyboardType: TextInputType.number,
               decoration: InputDecoration(
+                contentPadding: EdgeInsets.symmetric(horizontal: 16),
                 border: InputBorder.none,
                 focusedBorder: InputBorder.none,
                 disabledBorder: InputBorder.none,
@@ -242,7 +252,7 @@ class _InputPrice extends StatelessWidget {
           ),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 12),
-            child: SFText(keyText: 'SLFT', style: TextStyles.blue14W700),
+            child: SFText(keyText: 'AVAX', style: TextStyles.blue14W700),
           ),
         ],
       ),
@@ -251,80 +261,47 @@ class _InputPrice extends StatelessWidget {
 }
 
 class _Detail extends StatelessWidget {
-  const _Detail({Key? key}) : super(key: key);
+  const _Detail({Key? key, required this.className}) : super(key: key);
+
+  final String className;
 
   @override
   Widget build(BuildContext context) {
     return SFCard(
       margin: EdgeInsets.zero,
       padding: const EdgeInsets.symmetric(vertical: 24, horizontal: 18),
-      child: Column(
+      child: Row(
         children: [
-          Row(
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Expanded(
-                flex: 3,
-                child: SFText(
-                    keyText: LocaleKeys.class_, style: TextStyles.lightGrey14),
-              ),
-              Expanded(
-                child: SFText(
-                    keyText: LocaleKeys.level,
-                    args: const {'num': ''},
-                    style: TextStyles.lightGrey14),
-              ),
+              SFText(keyText: LocaleKeys.class_, style: TextStyles.lightGrey14),
+              SizedBox(height: 8.h),
+              SFText(keyText: className, style: TextStyles.lightWhite16W700),
+              SizedBox(height: 24.h),
+              SFText(
+                  keyText: LocaleKeys.durability,
+                  style: TextStyles.lightGrey14),
+              SizedBox(height: 8.h),
+              SFText(keyText: '90/100', style: TextStyles.lightWhite16W700),
             ],
           ),
-          const SizedBox(height: 4),
-          Row(
+          const Spacer(),
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Expanded(
-                flex: 3,
-                child: Row(
-                  children: [
-                    const SFIcon(Ics.icTwoEyes, color: AppColors.blue),
-                    const SizedBox(width: 12),
-                    SFText(
-                        keyText: LocaleKeys.sleep,
-                        style: TextStyles.lightWhite16W700),
-                  ],
-                ),
-              ),
-              Expanded(
-                child: SFText(
-                    keyText: '9',
-                    args: const {'num': ''},
-                    style: TextStyles.lightWhite16W700),
-              ),
-            ],
-          ),
-          const SizedBox(height: 16),
-          Row(
-            children: [
-              Expanded(
-                flex: 3,
-                child: SFText(
-                    keyText: LocaleKeys.durability,
-                    style: TextStyles.lightGrey14),
-              ),
-              Expanded(
-                child: SFText(
-                    keyText: LocaleKeys.bed_mint, style: TextStyles.lightGrey14),
-              ),
-            ],
-          ),
-          const SizedBox(height: 4),
-          Row(
-            children: [
-              Expanded(
-                flex: 3,
-                child: SFText(
-                    keyText: '90/100', style: TextStyles.lightWhite16W700),
-              ),
-              Expanded(
-                child:
-                    SFText(keyText: '3/7', style: TextStyles.lightWhite16W700),
-              ),
+              SFText(keyText: LocaleKeys.level, style: TextStyles.lightGrey14),
+              SizedBox(height: 8.h),
+              SFText(
+                  keyText: '9',
+                  namedArgs: const {'num': ''},
+                  style: TextStyles.lightWhite16W700),
+              SizedBox(height: 24.h),
+              SFText(
+                  keyText: LocaleKeys.bed_mint, style: TextStyles.lightGrey14),
+              SizedBox(height: 8.h),
+
+              SFText(keyText: '3/7', style: TextStyles.lightWhite16W700),
             ],
           ),
         ],

@@ -1,8 +1,17 @@
 import 'dart:async';
+import 'dart:io';
 
 import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
+import 'package:isar/isar.dart';
+import 'package:path_provider/path_provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:slee_fi/models/isar_models/ens_isar/ens_isar_model.dart';
+import 'package:slee_fi/models/isar_models/explorers_isar/explorers_isar_model.dart';
+import 'package:slee_fi/models/isar_models/native_currency_isar/native_currency_isar_model.dart';
+import 'package:slee_fi/models/isar_models/network_isar/network_isar_model.dart';
+import 'package:slee_fi/models/isar_models/token_isar/token_isar_model.dart';
+import 'package:slee_fi/models/isar_models/wallet_isar/wallet_isar_model.dart';
 
 /// Package được thêm vào đây
 @module
@@ -11,4 +20,21 @@ abstract class RegisterModule {
   Future<SharedPreferences> get sharedPref => SharedPreferences.getInstance();
 
   Dio get dio => Dio();
+
+  @preResolve
+  Future<Directory> get isarDir => getApplicationSupportDirectory();
+
+  @preResolve
+  Future<Isar> isar(Directory isarDir) => Isar.open(
+    schemas: [
+      NetworkIsarModelSchema,
+      WalletIsarModelSchema,
+      NativeCurrencyIsarModelSchema,
+      TokenIsarModelSchema,
+      EnsIsarModelSchema,
+      ExplorersIsarModelSchema,
+    ],
+    directory: isarDir.path,
+    // inspector: true,
+  );
 }

@@ -19,9 +19,7 @@ class BoxButtonWidget extends StatelessWidget {
     return GestureDetector(
       onTap: onTap,
       child: Container(
-        width: 76,
-        height: 94,
-        padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 10.0),
+        padding: const EdgeInsets.only(left: 10, right: 10, top: 20),
         decoration: BoxDecoration(
           color: AppColors.white.withOpacity(0.05),
           borderRadius: BorderRadius.circular(16.0),
@@ -32,13 +30,13 @@ class BoxButtonWidget extends StatelessWidget {
               backgroundColor: AppColors.blue,
               child: SFIcon(assetImage!),
             ),
-            const SizedBox(
-              height: 8.0,
-            ),
-            SFText(
-              keyText: text ?? "",
-              style: textStyle ?? TextStyles.lightGrey12,
-              textAlign: TextAlign.center,
+            const SizedBox(height: 15),
+            Expanded(
+              child: SFText(
+                keyText: text ?? "",
+                style: textStyle ?? TextStyles.lightGrey12,
+                textAlign: TextAlign.center,
+              ),
             )
           ],
         ),

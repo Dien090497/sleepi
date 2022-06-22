@@ -31,57 +31,60 @@ class _ResultScreenState extends State<ResultScreen> {
             title: LocaleKeys.result,
             textStyle: TextStyles.bold18LightWhite,
           ),
-          body: SingleChildScrollView(
-            physics: const ScrollPhysics(),
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16.0),
-              child: Column(
-                children: [
-                  const SizedBox(
-                    height: 20,
-                  ),
-                  const CategoryHeader(
-                    earning: 1000,
-                    score: 99,
-                    sleepDuration: '7h35min',
-                  ),
-                  const SizedBox(
-                    height: 32,
-                  ),
-                  ChartStatistic(),
-                  const SizedBox(
-                    height: 24,
-                  ),
-                  const SFLabelValue(
-                      label: LocaleKeys.bed_time, value: '23:30'),
-                  const SizedBox(
-                    height: 8,
-                  ),
-                  const SFLabelValue(
-                      label: LocaleKeys.sleep_onset_time, value: '00:30'),
-                  const SizedBox(
-                    height: 8,
-                  ),
-                  const SFLabelValue(label: LocaleKeys.woke_up, value: '08:30'),
-                  const SizedBox(
-                    height: 8,
-                  ),
-                  const SFLabelValue(
-                      label: LocaleKeys.nocturnal_awakenings, value: '1'),
-                  const SizedBox(
-                    height: 8,
-                  ),
-                  const SFLabelValue(
-                      label: LocaleKeys.sleep_duration, value: '8h45min'),
-                  const SizedBox(
-                    height: 8,
-                  ),
-                  const SFLabelValue(
-                      label: LocaleKeys.sleep_quality, value: '99/100'),
-                  const SizedBox(
-                    height: 92,
-                  ),
-                ],
+          body: SafeArea(
+            top: false,
+            child: SingleChildScrollView(
+              physics: const ScrollPhysics(),
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                child: Column(
+                  children: [
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    const CategoryHeader(
+                      earning: 2.4,
+                      score: 99,
+                      sleepDuration: '7h35min',
+                    ),
+                    const SizedBox(
+                      height: 32,
+                    ),
+                    ChartStatistic(),
+                    const SizedBox(
+                      height: 24,
+                    ),
+                    const SFLabelValue(
+                        label: LocaleKeys.bed_time, value: '23:30'),
+                    const SizedBox(
+                      height: 8,
+                    ),
+                    const SFLabelValue(
+                        label: LocaleKeys.sleep_onset_time, value: '00:30'),
+                    const SizedBox(
+                      height: 8,
+                    ),
+                    const SFLabelValue(label: LocaleKeys.woke_up, value: '08:30'),
+                    const SizedBox(
+                      height: 8,
+                    ),
+                    const SFLabelValue(
+                        label: LocaleKeys.nocturnal_awakenings, value: '1'),
+                    const SizedBox(
+                      height: 8,
+                    ),
+                    const SFLabelValue(
+                        label: LocaleKeys.sleep_duration, value: '8h45min'),
+                    const SizedBox(
+                      height: 8,
+                    ),
+                    const SFLabelValue(
+                        label: LocaleKeys.sleep_quality, value: '99/100'),
+                    const SizedBox(
+                      height: 92,
+                    ),
+                  ],
+                ),
               ),
             ),
           ),
@@ -90,23 +93,24 @@ class _ResultScreenState extends State<ResultScreen> {
           bottom: 0,
           left: 0,
           right: 0,
-          child: Container(
-            padding: const EdgeInsets.only(
-              bottom: 20,
-              left: 16,
-              right: 16,
-              top: 12
-            ),
+          child: Material(
             color: AppColors.dark,
-            child: SFButton(
-              text: LocaleKeys.share_your_sleep,
-              textStyle: TextStyles.white16,
-              gradient: AppColors.gradientBlueButton,
-              width: double.infinity,
-              height: 48,
-              onPressed: () {
-                Navigator.pushNamed(context, R.share);
-              },
+            child: SafeArea(
+              top: false,
+              child: Container(
+                padding: const EdgeInsets.only(
+                    bottom: 20, left: 16, right: 16, top: 12),
+                child: SFButton(
+                  text: LocaleKeys.share_your_sleep,
+                  textStyle: TextStyles.white16,
+                  gradient: AppColors.gradientBlueButton,
+                  width: double.infinity,
+                  height: 48,
+                  onPressed: () {
+                    Navigator.pushNamed(context, R.share);
+                  },
+                ),
+              ),
             ),
           ),
         ),

@@ -1,4 +1,7 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:slee_fi/common/const/const.dart';
+import 'package:slee_fi/common/extensions/string_x.dart';
 import 'package:slee_fi/common/routes/app_routes.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
@@ -18,107 +21,123 @@ class TabWalletDetail extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea( 
-      child: SingleChildScrollView(
-        child: Column(
-          children: [
-            const SizedBox(
-              height: 32,
+    var isJapanese = Localizations.localeOf(context).toLanguageTag().isJapanese;
+    return SingleChildScrollView(
+      child: Column(
+        children: [
+          const SizedBox(height: 32),
+          SFText(keyText: "AVAX C-Chain", style: TextStyles.bold12Blue),
+          const SizedBox(height: 4.0),
+          SFText(keyText: "0 AVAX", style: TextStyles.bold30White),
+          const SizedBox(height: 20.0),
+          Container(
+            padding:
+                const EdgeInsets.symmetric(vertical: 6.0, horizontal: 16.0),
+            margin: const EdgeInsets.symmetric(horizontal: 16),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(20.0),
+              color: AppColors.lightWhite.withOpacity(0.05),
             ),
-            SFText(keyText: LocaleKeys.avax_c_chain, style: TextStyles.bold12Blue),
-            const SizedBox(
-              height: 4.0,
-            ),
-            SFText(keyText: "0 AVAX", style: TextStyles.bold30White),
-            const SizedBox(
-              height: 20.0,
-            ),
-            Container(
-              padding:
-                  const EdgeInsets.symmetric(vertical: 6.0, horizontal: 16.0),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(20.0),
-                color: AppColors.lightWhite.withOpacity(0.05),
-              ),
-              child: SFText(
-                  keyText: "Eq7fbho...asdasd.9aj92as",
-                  style: TextStyles.lightWhite14),
-            ),
-            const SizedBox(
-              height: 16.0,
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                BoxButtonWidget(
-                  onTap: () => SFModalBottomSheet.show(
-                      context, 0.7, const ModalReceiveWallet()),
-                  text: LocaleKeys.receive,
-                  assetImage: Ics.icDownload,
-                ),
-                BoxButtonWidget(
-                  onTap: () => Navigator.pushNamed(context, R.transfer),
-                  text: LocaleKeys.to_spending,
-                  assetImage: Ics.icRefresh,
-                ),
-                BoxButtonWidget(
-                  onTap: () => Navigator.pushNamed(context, R.sendToExternal),
-                  text: LocaleKeys.to_external,
-                  assetImage: Ics.icArrowUpRight,
-                ),
-                BoxButtonWidget(
-                  onTap: () => Navigator.pushNamed(context, R.trade),
-                  text: LocaleKeys.trade,
-                  assetImage: Ics.icTransfer,
-                ),
-              ],
-            ),
-            const SizedBox(
-              height: 20.0,
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 12.0),
+            child: SFText(
+                keyText: "0xC02aa...C756Cc2", style: TextStyles.lightWhite14),
+          ),
+          const SizedBox(height: 16.0),
+          ConstrainedBox(
+            constraints: const BoxConstraints(maxHeight: 130),
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 23),
               child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  const PopupInfoWallet(),
-                  ElevatedButton(
-                      onPressed: _launchUrl,
-                      style: ElevatedButton.styleFrom(
-                        padding: const EdgeInsets.fromLTRB(12, 8, 16,8),
-                        primary: AppColors.yellow.withOpacity(0.1),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(100.0),
-                        ),
-                      ),
-                      child: Row(
-                        children: [
-                          const SFIcon(Imgs.binance, width: 24,),
-                          const SizedBox(
-                            width: 8.0,
-                          ),
-                          SFText(
-                            keyText: LocaleKeys.buy,
-                            style: TextStyles.bold14Yellow,
-                          )
-                        ],
-                      )),
+                  Expanded(
+                    child: BoxButtonWidget(
+                      onTap: () => SFModalBottomSheet.show(
+                          context, 0.7, const ModalReceiveWallet()),
+                      text: LocaleKeys.receive,
+                      assetImage: Ics.icDownload,
+                    ),
+                  ),
+                  const SizedBox(
+                    width: 10,
+                  ),
+                  Expanded(
+                    child: BoxButtonWidget(
+                      onTap: () => Navigator.pushNamed(context, R.transfer),
+                      text: LocaleKeys.to_spending,
+                      assetImage: Ics.icRefresh,
+                    ),
+                  ),
+                  const SizedBox(
+                    width: 10,
+                  ),
+                  Expanded(
+                    child: BoxButtonWidget(
+                      onTap: () =>
+                          Navigator.pushNamed(context, R.sendToExternal),
+                      text: LocaleKeys.to_external,
+                      assetImage: Ics.icArrowUpRight,
+                    ),
+                  ),
+                  const SizedBox(
+                    width: 10,
+                  ),
+                  Expanded(
+                    child: BoxButtonWidget(
+                      onTap: () => Navigator.pushNamed(context, R.trade),
+                      text: LocaleKeys.trade.tr().reCase(StringCase.titleCase),
+                      assetImage: Ics.icTransfer,
+                    ),
+                  ),
                 ],
               ),
             ),
-            const SizedBox(
-              height: 12.0,
+          ),
+          const SizedBox(
+            height: 20.0,
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 12.0),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                const PopupInfoWallet(),
+                ElevatedButton(
+                    onPressed: () async {
+                      var url = isJapanese ? Const.okCoinUrl : Const.binanceUrl;
+                      final uri = Uri.parse(url);
+                      if (await canLaunchUrl(uri)) {
+                        launchUrl(uri);
+                      }
+                    },
+                    style: ElevatedButton.styleFrom(
+                      padding: const EdgeInsets.fromLTRB(12, 8, 16, 8),
+                      primary: AppColors.yellow.withOpacity(0.1),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(100.0),
+                      ),
+                    ),
+                    child: Row(
+                      children: [
+                        SFIcon(
+                          isJapanese ? Ics.okcoin : Imgs.binance,
+                          width: 24,
+                        ),
+                        const SizedBox(width: 8.0),
+                        SFText(
+                          keyText: LocaleKeys.buy,
+                          style: isJapanese
+                              ? TextStyles.bold14Blue
+                              : TextStyles.bold14Yellow,
+                        )
+                      ],
+                    )),
+              ],
             ),
-            const WalletDetailList()
-          ],
-        ),
+          ),
+          const SizedBox(height: 12.0),
+          const WalletDetailList()
+        ],
       ),
     );
   }
-
-}
-
-final Uri _url = Uri.parse('https://www.binance.com/');
-void _launchUrl() async {
-  if (!await launchUrl(_url)) throw 'Could not launch $_url';
 }

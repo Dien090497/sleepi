@@ -1,4 +1,6 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:slee_fi/common/extensions/string_x.dart';
 import 'package:slee_fi/common/routes/app_routes.dart';
@@ -9,6 +11,7 @@ import 'package:slee_fi/common/widgets/sf_button_outlined.dart';
 import 'package:slee_fi/common/widgets/sf_buttons.dart';
 import 'package:slee_fi/common/widgets/sf_card.dart';
 import 'package:slee_fi/common/widgets/sf_dialog.dart';
+import 'package:slee_fi/common/widgets/sf_icon.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
 import 'package:slee_fi/l10n/locale_keys.g.dart';
 import 'package:slee_fi/presentation/screens/staking/widgets/pop_up_calculator.dart';
@@ -34,7 +37,7 @@ class StakingList extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               SFText(
-                keyText: LocaleKeys.tvl_in_sleefi,
+                keyText: "TVL",
                 style: TextStyles.bold16LightWhite,
               ),
               const SizedBox(
@@ -143,13 +146,21 @@ class StakingList extends StatelessWidget {
                   children: const PopUpCalculator(),
                 );
               },
-              child: SvgPicture.asset(Ics.icCalculator,
-                  color: AppColors.lightGrey, width: 22),
+              child: Row(
+                children: [
+                  const SFIcon(Ics.icCalculator),
+                  SizedBox(width: 8.w),
+                  SFText(
+                    keyText: "ROI",
+                    style: TextStyles.lightGrey16,
+                  )
+                ],
+              ),
             )
           ],
         ),
         SFCard(
-          padding: const EdgeInsets.all(24.0),
+          padding: EdgeInsets.all(MediaQuery.of(context).size.width * 0.05),
           child: Column(
             children: [
               Row(
@@ -157,13 +168,18 @@ class StakingList extends StatelessWidget {
                 children: [
                   Expanded(
                       child: SFText(
-                    keyText: LocaleKeys.your_slft_earned,
+                    keyText: LocaleKeys.your_token_earned.tr(args: ['SLFT']),
                     style: TextStyles.lightWhite16,
                   )),
                   Row(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      SvgPicture.asset(Ics.icGold),
+                      SvgPicture.asset(
+                        Ics.icSlft,
+                        width: 32,
+                        height: 32,
+                        fit: BoxFit.contain,
+                      ),
                       const SizedBox(
                         width: 6,
                       ),
@@ -189,7 +205,12 @@ class StakingList extends StatelessWidget {
                   Row(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      SvgPicture.asset(Ics.icGold),
+                      SvgPicture.asset(
+                        Ics.icSlft,
+                        width: 32,
+                        height: 32,
+                        fit: BoxFit.contain,
+                      ),
                       const SizedBox(
                         width: 6,
                       ),
@@ -236,26 +257,31 @@ class StakingList extends StatelessWidget {
                     text: LocaleKeys.deposit,
                     textStyle: TextStyles.boldWhite14,
                     gradient: AppColors.gradientBlueButton,
-                    // width: 84,
-                    height: 32,
+                    width: 95,
+                    height: 36,
                     onPressed: () =>
                         Navigator.pushNamed(context, R.depositSLFT),
                   ),
-                  SizedBox(
-                    // width: 84,
-                    height: 32,
-                    child: SFButtonOutLined(
-                      borderColor: AppColors.blue,
-                      title: LocaleKeys.withdraw,
-                      textStyle: TextStyles.bold14Blue,
-                      onPressed: () =>
-                          Navigator.pushNamed(context, R.withdrawSLFT),
-                    ),
+                  SFButtonOutLined(
+                    fixedSize: Size(102.w, 32.h),
+                    borderColor: AppColors.blue,
+                    title: LocaleKeys.withdraw,
+                    textStyle: TextStyles.bold14Blue,
+                    onPressed: () =>
+                        Navigator.pushNamed(context, R.withdrawSLFT),
                   ),
                   GestureDetector(
                     onTap: () {
-                      showCustomDialog(context,
-                          children: [const PopUpStaking(message: LocaleKeys.do_you_really_want_to_compound,)]);
+                      showCustomDialog(context, children: [
+                        PopUpStaking(
+                          message: LocaleKeys.do_you_really_want_to_compound
+                              .tr(namedArgs: {
+                            'amount': 'xxx',
+                            'token': 'SLFT',
+                          }),
+                          onPressed: () => showSuccessfulDialog(context),
+                        )
+                      ]);
                     },
                     child: SFText(
                       keyText: LocaleKeys.compound,
@@ -273,8 +299,8 @@ class StakingList extends StatelessWidget {
         Column(
           children: [
             SFButton(
-              text: LocaleKeys.buy_slft,
-              textStyle: TextStyles.bold14LightWhite,
+              text: "${LocaleKeys.buy.tr()} SLFT",
+              textStyle: TextStyles.boldWhite14,
               color: AppColors.blue,
               width: double.infinity,
               onPressed: () {},
@@ -290,7 +316,9 @@ class StakingList extends StatelessWidget {
                   borderColor: AppColors.blue,
                   onPressed: () {}),
             ),
-            const SizedBox(height: 16,),
+            const SizedBox(
+              height: 16,
+            ),
           ],
         )
       ],

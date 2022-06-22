@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:slee_fi/common/routes/app_routes.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
@@ -15,20 +16,22 @@ class WalletDetailList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     List keyList = [
-      LocaleKeys.avax,
-      LocaleKeys.slft,
-      LocaleKeys.slgt,
-      LocaleKeys.beds,
-      LocaleKeys.jewels,
-      LocaleKeys.bed_box
+      "SLFT",
+      "SLGT",
+      "AVAX",
+      LocaleKeys.beds.tr(),
+      LocaleKeys.jewels.tr(),
+      LocaleKeys.bed_box.tr(),
+      LocaleKeys.item.tr(),
     ];
     List icons = [
-      Ics.icSolanaCircle,
-      Ics.icGold,
-      Ics.icSilver,
+      Ics.icSlft,
+      Ics.icSlgt,
+      Ics.icAvax,
       Ics.icBeds,
-      Imgs.jewels,
-      Ics.icBedBoxes
+      Ics.icJewels,
+      Ics.icBedBoxes,
+      Imgs.icItems
     ];
     return Container(
       alignment: Alignment.center,
@@ -39,30 +42,44 @@ class WalletDetailList extends StatelessWidget {
       ),
       width: double.infinity,
       padding: const EdgeInsets.only(top: 20),
-      child: ListView.builder(
-          itemCount: keyList.length,
-          physics: const ClampingScrollPhysics(),
-          shrinkWrap: true,
-          padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 12.0),
-          itemBuilder: (BuildContext context, int index) {
-            return SFCard(
-              onTap: () {
-                if(index < 3 )Navigator.pushNamed(context, R.transactionDetail, arguments: TransactionDetailArguments(keyList[index], icons[index]));
-              },
-              child: ListTile(
-                leading: SFIcon(
-                  icons[index],
-                  width: 32,
+      child: SafeArea(
+        top: false,
+        child: ListView.builder(
+            itemCount: keyList.length,
+            physics: const ClampingScrollPhysics(),
+            shrinkWrap: true,
+            padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 12.0),
+            itemBuilder: (BuildContext context, int index) {
+              return SFCard(
+                onTap: () {
+                  if (index < 3) {
+                    Navigator.pushNamed(context, R.transactionDetail,
+                        arguments: TransactionDetailArguments(
+                          keyList[index],
+                          icons[index],
+                        ));
+                  }
+                },
+                child: ListTile(
+                  leading: Padding(
+                    padding:
+                        EdgeInsets.only(left: icons[index] == Ics.icAvax ? 4 : 0),
+                    child: SFIcon(
+                      icons[index],
+                      width: icons[index] == Ics.icAvax ? 32 : 40,
+                      height: icons[index] == Ics.icAvax ? 32 : 40,
+                    ),
+                  ),
+                  title: SFText(
+                      keyText: keyList[index], style: TextStyles.lightWhite16),
+                  trailing: SFText(
+                    keyText: "xxxxxxxxx",
+                    style: TextStyles.lightWhite16,
+                  ),
                 ),
-                title: SFText(
-                    keyText: keyList[index], style: TextStyles.lightWhite16),
-                trailing: SFText(
-                  keyText: "xxxxxxxxx",
-                  style: TextStyles.lightWhite16,
-                ),
-              ),
-            );
-          }),
+              );
+            }),
+      ),
     );
   }
 }

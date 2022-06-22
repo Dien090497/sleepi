@@ -16,7 +16,7 @@ class ModalMultiChainSwitch extends StatefulWidget {
 
 class _ModalMultiChainSwitchState extends State<ModalMultiChainSwitch> {
   int selectItem = 0;
-  List<String> keyText = [LocaleKeys.avax, "BNB Smart Chain (BEP20)"];
+  List<String> keyText = ["AVAX", "BNB Smart Chain (BEP20)"];
   List icons = [Ics.icSolanaCircle, Imgs.binance];
 
   @override
@@ -59,6 +59,7 @@ class _ModalMultiChainSwitchState extends State<ModalMultiChainSwitch> {
                   onTap: () {
                     setState(() {
                       selectItem = index;
+                      Navigator.pop(context);
                     });
                   },
                 );

@@ -9,25 +9,28 @@ class PopUpWalletWarning extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        const Icon(
-          Icons.warning_amber_outlined,
-          color: AppColors.yellow,
-          size: 32,
-        ),
-        Padding(
-          padding: const EdgeInsets.symmetric(vertical: 24.0),
-          child: SFText(
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 24.0, horizontal: 24),
+      child: Column(
+        children: [
+          const Icon(
+            Icons.warning_amber_outlined,
+            color: AppColors.yellow,
+            size: 32,
+          ),
+          const SizedBox(height: 20),
+          SFText(
             keyText: LocaleKeys.your_wallet_is_being_created,
             style: TextStyles.bold18LightWhite,
           ),
-        ),
-        SFText(
-          keyText: LocaleKeys.your_wallet_is_being_created,
-          style: TextStyles.lightGrey16,
-        )
-      ],
+          const SizedBox(height: 24),
+          SFText(
+            keyText: LocaleKeys.caution_please_check_your_seed_phrase,
+            style: TextStyles.lightGrey16.copyWith(height: 1.5),
+            textAlign: TextAlign.center,
+          )
+        ],
+      ),
     );
   }
 }

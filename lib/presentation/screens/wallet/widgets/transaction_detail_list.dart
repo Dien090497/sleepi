@@ -8,25 +8,27 @@ import 'package:slee_fi/l10n/locale_keys.g.dart';
 import 'package:slee_fi/resources/resources.dart';
 
 class TransactionDetailList extends StatelessWidget {
-  const TransactionDetailList({this.isTransactionRecord = false, Key? key}) : super(key: key);
+  const TransactionDetailList({this.isTransactionRecord = false, Key? key})
+      : super(key: key);
 
   final bool isTransactionRecord;
+
   @override
   Widget build(BuildContext context) {
     List keyList = [
-      LocaleKeys.avax,
-      LocaleKeys.slft,
-      LocaleKeys.slgt,
+      "AVAX",
+      "SLFT",
+      "SLGT",
       LocaleKeys.beds,
       LocaleKeys.jewels,
-      LocaleKeys.bed_box
+      LocaleKeys.bed_boxes,
     ];
     List icons = [
       Ics.icSolanaCircle,
-      Ics.icGold,
-      Ics.icSilver,
+      Ics.icSlgt,
+      Ics.icSlgt,
       Ics.icBeds,
-      Imgs.jewels,
+      Ics.icJewels,
       Ics.icBedBoxes
     ];
     return Container(
@@ -36,30 +38,47 @@ class TransactionDetailList extends StatelessWidget {
         borderRadius: BorderRadius.only(
             topLeft: Radius.circular(40), topRight: Radius.circular(40)),
       ),
-      height: MediaQuery.of(context).size.height * 0.5,
+      height: MediaQuery.of(context).size.height * 0.55,
       padding: const EdgeInsets.only(top: 20),
-      child: isTransactionRecord ? ListView.builder(
-          itemCount: keyList.length,
-          physics: const ClampingScrollPhysics(),
-          shrinkWrap: true,
-          padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 12.0),
-          itemBuilder: (BuildContext context, int index) {
-            return SFCard(
-              child: ListTile(
-                leading: SFIcon(
-                  icons[index],
-                  width: 32,
-                ),
-                title: SFText(
-                    keyText: keyList[index], style: TextStyles.lightWhite16),
-                trailing: SFText(
-                  keyText: "xxxxxxxxx",
-                  style: TextStyles.lightWhite16,
-                ),
-              ),
-            );
-          })
-      :const Center(child: SFIcon(Imgs.noTransactionRecord),),
+      child: isTransactionRecord
+          ? SafeArea(
+              top: false,
+              child: ListView.builder(
+                  itemCount: keyList.length,
+                  physics: const ClampingScrollPhysics(),
+                  shrinkWrap: true,
+                  padding: const EdgeInsets.symmetric(
+                      horizontal: 24.0, vertical: 12.0),
+                  itemBuilder: (BuildContext context, int index) {
+                    return SFCard(
+                      child: ListTile(
+                        leading: SFIcon(
+                          icons[index],
+                          width: 32,
+                        ),
+                        title: SFText(
+                            keyText: keyList[index],
+                            style: TextStyles.lightWhite16),
+                        trailing: SFText(
+                          keyText: "xxxxxxxxx",
+                          style: TextStyles.lightWhite16,
+                        ),
+                      ),
+                    );
+                  }),
+            )
+          : Center(
+              child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                const SFIcon(Ics.emptyBox),
+                const SizedBox(height: 24),
+                SFText(
+                  keyText: LocaleKeys.no_transaction_record,
+                  style: TextStyles.lightGrey14,
+                )
+              ],
+            )),
     );
   }
 }

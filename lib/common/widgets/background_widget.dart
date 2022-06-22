@@ -2,18 +2,28 @@ import 'package:flutter/material.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
 
 class BackgroundWidget extends StatelessWidget {
-  const BackgroundWidget(
-      {Key? key, this.child, this.appBar, this.resizeToAvoidBottomInset = true})
-      : super(key: key);
+  const BackgroundWidget({
+    Key? key,
+    this.child,
+    this.appBar,
+    this.bottomNavigationBar,
+    this.resizeToAvoidBottomInset = true,
+    this.extendBody = false,
+    this.scaffoldKey,
+  }) : super(key: key);
 
   final Widget? child;
   final PreferredSizeWidget? appBar;
+  final Widget? bottomNavigationBar;
   final bool resizeToAvoidBottomInset;
+  final bool extendBody;
+  final Key? scaffoldKey;
 
   @override
   Widget build(BuildContext context) {
     return Stack(
       children: [
+        // const SizedBox.expand(child: SFIcon(Imgs.background, fit: BoxFit.fill)),
         Container(color: AppColors.black),
         Container(
           decoration: BoxDecoration(
@@ -49,27 +59,15 @@ class BackgroundWidget extends StatelessWidget {
           ),
         ),
         Scaffold(
+          key: scaffoldKey,
           backgroundColor: AppColors.transparent,
           resizeToAvoidBottomInset: resizeToAvoidBottomInset,
+          bottomNavigationBar: bottomNavigationBar,
           appBar: appBar,
+          extendBody: extendBody,
           body: child,
         ),
       ],
     );
   }
 }
-
-// class BackgroundWidget extends Scaffold {
-//   BackgroundWidget({
-//     Widget? child,
-//     Key? key,
-//   }) : super(
-//           key: key,
-//           backgroundColor: AppColors.transparent,
-//           body: Stack(
-//             children: [
-//               child ?? const SizedBox.shrink(),
-//             ],
-//           ),
-//         );
-// }

@@ -50,7 +50,7 @@ class _SFTabBarState extends State<SFTabBar>
           padding: const EdgeInsets.symmetric(horizontal: 16.0),
           child: TabBar(
             controller: _tabController,
-            isScrollable: true,
+            isScrollable: widget.isScrollable,
             tabs: List.generate(
               widget.texts.length,
               (i) => Padding(

@@ -19,13 +19,21 @@ class _MicrophoneStatusChangeState extends State<MicrophoneStatusChangeWidget> {
   Widget build(BuildContext context) {
     return SFListTile(
       leading:const Padding(
-        padding:  EdgeInsets.only(right: 8),
-        child: SFIcon(Ics.icMicrophone, width: 24,),
+        padding:  EdgeInsets.only(left: 8, right: 8),
+        child: SFIcon(Imgs.microphone, width: 24,),
       ),
       text: LocaleKeys.microphone,
       trailing:  Padding(
         padding:const  EdgeInsets.only(right: 16),
-        child: isChecked ? const Icon(Icons.check, color: AppColors.green,) : const SizedBox(),
+        child:  SizedBox(
+          width: 24,
+          height: 24,
+          child: CircleAvatar(
+            radius: 100,
+            backgroundColor:  isChecked ? AppColors.green : AppColors.white,
+            child: Icon(Icons.check, color: isChecked ? AppColors.white : AppColors.black,),
+          ),
+        ),
       ),
       onPressed: (){
         setState((){

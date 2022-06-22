@@ -1,19 +1,25 @@
-import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:slee_fi/common/enum/enum.dart';
+import 'package:slee_fi/common/extensions/enum_x.dart';
+import 'package:slee_fi/common/extensions/string_x.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
+import 'package:slee_fi/common/widgets/sf_buttons.dart';
 import 'package:slee_fi/common/widgets/sf_icon.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
 import 'package:slee_fi/l10n/locale_keys.g.dart';
 import 'package:slee_fi/presentation/screens/product_detail/widgets/top_left_banner.dart';
+import 'package:slee_fi/resources/resources.dart';
 
 class ItemBedBuyWidget extends StatelessWidget {
-  const ItemBedBuyWidget({required this.icon, this.color, Key? key})
+  const ItemBedBuyWidget({required this.id, required this.item, this.color, this.onPressedButton, Key? key})
       : super(key: key);
 
-  final String icon;
+  final ItemType item;
   final Color? color;
+  final String id;
+  final VoidCallback? onPressedButton;
 
   @override
   Widget build(BuildContext context) {
@@ -29,70 +35,64 @@ class ItemBedBuyWidget extends StatelessWidget {
             top: 14,
             left: -30,
             child: TopLeftBanner(
-              text: 'Level 3',
-              textColor: AppColors.lightGrey,
-              backgroundColor: AppColors.lightGrey.withOpacity(0.1),
+              text: item.name!,
+              textColor: item.color,
             ),
           ),
           Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              SizedBox(height: 37.h),
-              SFIcon(icon, width: 62, height: 60,),
-              // Image.asset(
-              //   icon,
-              //   width: 62,
-              //   height: 60,
-              // ),
               SizedBox(height: 20.h),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 12.0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Container(
-                      decoration: BoxDecoration(
+              SFIcon(item.image, width: 80,),
+              SizedBox(height: 22.h),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Container(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(50),
+                      border: Border.all(color: AppColors.light4),
+                    ),
+                    padding:
+                    const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+                    alignment: Alignment.center,
+                    child: SFText(
+                      keyText: id,
+                      style: TextStyles.white1w700size12,
+                    ),
+                  ),
+                  const SizedBox(width: 6),
+                  Container(
+                    decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(50),
-                        border: Border.all(color: AppColors.light4),
-                      ),
-                      padding:
-                      const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
-                      alignment: Alignment.center,
-                      child: SFText(
-                        keyText: 'IDIDIDID',
-                        style: TextStyles.white1w700size12,
-                      ),
+                        // border: Border.all(color: AppColors.light4),
+                        color: AppColors.green.withOpacity(0.15)),
+                    padding:
+                    const EdgeInsets.symmetric(vertical: 8, horizontal: 12),
+                    alignment: Alignment.center,
+                    child: SFText(
+                      keyText: '+ 25%',
+                      style: TextStyles.greenW700size12,
                     ),
-                    const SizedBox(width: 6),
-                    Container(
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(50),
-                          // border: Border.all(color: AppColors.light4),
-                          color: AppColors.green.withOpacity(0.15)),
-                      padding:
-                      const EdgeInsets.symmetric(vertical: 8, horizontal: 12),
-                      alignment: Alignment.center,
-                      child: SFText(
-                        keyText: '+ 25%',
-                        style: TextStyles.greenW700size12,
-                      ),
-                    ),
-                  ],
-                ),
+                  ),
+                ],
               ),
-              const Spacer(),
+              SizedBox(height: 16.h),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 16.0),
                 child: Row(
                     children: [
                       Expanded(
                           child: SFText(
-                            keyText: '10 ${LocaleKeys.avax.tr()}',
+                            keyText: '10 AVAX',
                             style: TextStyles.white14W700,
                           )),
-                      SFText(
-                        keyText: LocaleKeys.buy,
-                        style: TextStyles.blue14W700,
+                      SFIconButton(
+                          text: LocaleKeys.buy,
+                         textStyle: TextStyles.white12,
+                        stringCase: StringCase.upperCase,
+                        icon: Ics.icCart,
+                        onPressed: onPressedButton,
                       ),
                     ],
                   ),

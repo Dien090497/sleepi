@@ -10,7 +10,7 @@ class ChartTitle extends StatelessWidget {
     this.textStyleTitle,
     this.textStyleResult,
     this.padding,
-    this.toUpperCase = false,
+    this.stringCase,
     Key? key,
   }) : super(key: key);
 
@@ -18,7 +18,7 @@ class ChartTitle extends StatelessWidget {
   final String? result;
   final TextStyle? textStyleTitle;
   final TextStyle? textStyleResult;
-  final bool toUpperCase;
+  final StringCase? stringCase;
   final EdgeInsets? padding;
 
   @override
@@ -31,7 +31,7 @@ class ChartTitle extends StatelessWidget {
           SFText(
             keyText: title ?? "",
             style: textStyleTitle ?? TextStyles.lightWhite14,
-            stringCase: StringCase.upperCase,
+            stringCase: stringCase,
           ),
           Expanded(
               child: SFText(

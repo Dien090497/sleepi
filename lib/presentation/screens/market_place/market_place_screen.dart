@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/widgets/background_widget.dart';
 import 'package:slee_fi/common/widgets/sf_tab_bar.dart';
 import 'package:slee_fi/common/widgets/topbar_common.dart';
@@ -14,48 +13,31 @@ class MarketPlaceScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
-    return Scaffold(
-      key: scaffoldKey,
-      backgroundColor: AppColors.transparent,
-      body: BackgroundWidget(
-        child: SafeArea(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              const TopBarCommon(),
-              const SizedBox(height: 20),
-              Expanded(
-                child: SFTabBar(
-                  isScrollable: true,
-                  texts: const [
-                    LocaleKeys.beds,
-                    LocaleKeys.jewels,
-                    LocaleKeys.item,
-                    LocaleKeys.trophy
-                  ],
-                  children: [
-                    TabBedsBuy(
-                      onPress: () {
-                        scaffoldKey.currentState?.openEndDrawer();
-                      },
-                    ),
-                    TabJewelsBuy(
-                      onPress: () {
-                        scaffoldKey.currentState?.openEndDrawer();
-                      },
-                    ),
-                    TabItemsBuy(
-                      onPress: () {
-                        scaffoldKey.currentState?.openEndDrawer();
-                      },
-                    ),
-                    const TabTrophysBuy(),
-                  ],
-                ),
+    return BackgroundWidget(
+      child: SafeArea(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: const [
+            TopBarCommon(),
+            SizedBox(height: 20),
+            Expanded(
+              child: SFTabBar(
+                isScrollable: true,
+                texts: [
+                  LocaleKeys.beds,
+                  LocaleKeys.jewels,
+                  LocaleKeys.item,
+                  LocaleKeys.trophy
+                ],
+                children: [
+                  TabBedsBuy(),
+                  TabJewelsBuy(),
+                  TabItemsBuy(),
+                  TabTrophysBuy(),
+                ],
               ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );

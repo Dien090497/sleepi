@@ -2,7 +2,6 @@ import 'dart:ui';
 
 import 'package:slee_fi/common/enum/enum.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
-import 'package:slee_fi/resources/resources.dart';
 
 extension BedTypeX on BedType {
   Color get color {
@@ -17,17 +16,19 @@ extension BedTypeX on BedType {
         return AppColors.green;
     }
   }
+}
 
-  String get icon {
+extension ItemTypeX on ItemType {
+  Color get color {
     switch (this) {
-      case BedType.short:
-        return Ics.shortBed;
-      case BedType.middle:
-        return Ics.middleBed;
-      case BedType.long:
-        return Ics.longBed;
-      case BedType.flexible:
-        return Ics.flexibleBed;
+      case ItemType.short:
+        return AppColors.red;
+      case ItemType.middle:
+        return AppColors.yellow;
+      case ItemType.long:
+        return AppColors.lightPurple;
+      case ItemType.flexible:
+        return AppColors.green;
     }
   }
 }

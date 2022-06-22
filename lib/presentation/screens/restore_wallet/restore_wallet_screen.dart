@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:slee_fi/common/extensions/string_x.dart';
 import 'package:slee_fi/common/routes/app_routes.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
@@ -16,7 +17,6 @@ class RestoreWalletScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     return DismissKeyboardWidget(
       child: BackgroundWidget(
         resizeToAvoidBottomInset: false,
@@ -25,7 +25,7 @@ class RestoreWalletScreen extends StatelessWidget {
           title: LocaleKeys.restore_wallet,
           textStyle: TextStyles.bold18LightWhite,
         ),
-        child:SafeArea(
+        child: SafeArea(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
@@ -56,10 +56,13 @@ class RestoreWalletScreen extends StatelessWidget {
                             ),
                             padding: const EdgeInsets.only(left: 12, right: 4),
                             child: Row(
-                              children:  [
+                              children: [
                                 const Expanded(
                                   child: SFTextField(
+                                    maxLength: 6,
                                     // hintText: LocaleKeys.emailVerification,
+                                    textInputType: TextInputType.number,
+                                    showLabel: false,
                                     noBorder: true,
                                   ),
                                 ),
@@ -89,7 +92,7 @@ class RestoreWalletScreen extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.fromLTRB(24, 0, 24, 24),
                 child: SFButton(
-                  text: LocaleKeys.import_wallet,
+                  text: LocaleKeys.import_wallet.reCase(StringCase.titleCase),
                   textStyle: TextStyles.w600WhiteSize16,
                   height: 48,
                   width: double.infinity,

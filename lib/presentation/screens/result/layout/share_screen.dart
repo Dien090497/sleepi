@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:slee_fi/common/routes/app_routes.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
 import 'package:slee_fi/common/widgets/background_widget.dart';
 import 'package:slee_fi/common/widgets/sf_app_bar.dart';
+import 'package:slee_fi/common/widgets/sf_buttons.dart';
 import 'package:slee_fi/common/widgets/sf_icon.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
 import 'package:slee_fi/l10n/locale_keys.g.dart';
@@ -21,58 +23,6 @@ class ShareScreen extends StatefulWidget {
 }
 
 class _ShareScreenState extends State<ShareScreen> {
-  Widget itemSleep() {
-    return Container(
-      width: 140,
-      height: 130,
-      decoration: BoxDecoration(
-        color: AppColors.lightDark,
-        borderRadius: BorderRadius.circular(16),
-      ),
-      child: Stack(
-        clipBehavior: Clip.hardEdge,
-        children: [
-          const Positioned(
-            top: 14,
-            left: -30,
-            child: TopLeftBanner(
-              text: 'Short',
-              textColor: AppColors.red,
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16.0),
-            child: Column(
-              children: [
-                const Spacer(),
-                const Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 22.0),
-                  child: SFIcon(
-                    Ics.shortBed,
-                    color: AppColors.blue,
-                  ),
-                ),
-                const SizedBox(height: 12),
-                Container(
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(50),
-                    border: Border.all(color: AppColors.lightDark),
-                  ),
-                  padding:
-                      const EdgeInsets.symmetric(vertical: 5, horizontal: 16),
-                  child: SFText(
-                    keyText: 'IDIDIDID',
-                    style: TextStyles.white1w700size12,
-                  ),
-                ),
-                const SizedBox(height: 12),
-              ],
-            ),
-          ),
-        ],
-      ),
-    );
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -107,22 +57,18 @@ class _ShareScreenState extends State<ShareScreen> {
                               ClipPath(
                                 clipper: CurvedBottomClipper(),
                                 child: Container(
-                                  height: 190.0,
+                                  padding: const EdgeInsets.only(bottom: 26),
                                   alignment: Alignment.center,
                                   decoration: BoxDecoration(
-                                    color: AppColors.purple.withOpacity(0.05),
+                                    color: AppColors.blue.withOpacity(0.05),
                                     borderRadius: BorderRadius.circular(16),
                                   ),
                                   child: Column(
                                     children: [
-                                      const SizedBox(height: 35),
                                       const SFIcon(
-                                        Ics.shortBed,
-                                        color: AppColors.blue,
-                                        width: 155,
-                                        height: 72,
+                                        Imgs.shortBed,
+                                        height: 160,
                                       ),
-                                      const SizedBox(height: 29),
                                       Container(
                                         decoration: BoxDecoration(
                                           borderRadius: BorderRadius.circular(50),
@@ -133,7 +79,7 @@ class _ShareScreenState extends State<ShareScreen> {
                                         padding: const EdgeInsets.symmetric(
                                             vertical: 5, horizontal: 16),
                                         child: SFText(
-                                          keyText: 'IDIDIDID',
+                                          keyText: 'A2347',
                                           style: TextStyles.white1w700size12,
                                         ),
                                       ),
@@ -151,7 +97,7 @@ class _ShareScreenState extends State<ShareScreen> {
                               Padding(
                                 padding:
                                     const EdgeInsets.symmetric(horizontal: 16.0),
-                                child: ChartStatisticShare(),
+                                child: ChartStatisticShare(titleBottom: false,),
                               ),
                               const SizedBox(
                                 height: 10,
@@ -170,7 +116,16 @@ class _ShareScreenState extends State<ShareScreen> {
                       ],
                     ),
                     const SleepFiQrCode(value: 'SLeepFi'),
-                    const SizedBox(height: 100,),
+                    const SizedBox(height: 20,),
+                    SFButton(
+                      text: LocaleKeys.return_to_home,
+                      textStyle: TextStyles.w600WhiteSize16,
+                      gradient: AppColors.gradientBlueButton,
+                      width: double.infinity,
+                      onPressed: () {
+                        Navigator.popUntil(context, (r) => r.settings.name == R.bottomNavigation);
+                      },),
+                    const SizedBox(height: 150,),
                   ],
                 ),
               ),

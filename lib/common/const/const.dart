@@ -1,9 +1,28 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:slee_fi/l10n/locale_keys.g.dart';
 
 class Const {
   static const int passcodeLength = 6;
 
+  /// GWei
+  static const double gasPrice = 1.5;
+
+  static const String howToPlayUrl = 'https://sleefi.com/how-to-play';
   static const String linkTreeUrl = 'https://linktr.ee/sleefi';
+  static const String litePaperUrl = 'https://sleefi.com/litepaper';
+  static const String avascanUrl = 'https://avascan.info/';
+  static const String binanceUrl = 'https://www.binance.com/';
+  static const String okCoinUrl = 'https://www.okcoin.jp/';
+
+  static const String whitePaperEn = 'https://sleefi.gitbook.io/whitepaper/';
+
+  static const String whitePaperJa =
+      'https://sleefi.gitbook.io/whitepaper/v/whitepaper-jp/';
+
+  static const String whitePaperInsuranceEn = '${whitePaperEn}insurance';
+
+  static const String whitePaperInsuranceJa = '${whitePaperJa}insurance';
 
   static const localeDE = Locale('de', 'DE');
   static const localeEN = Locale('en', 'US');
@@ -49,11 +68,25 @@ class Const {
 
 extension LocaleX on Locale {
   String get displayName {
-    try {
-      return Const.isoLangs[languageCode]!['name']!;
-    } catch (e) {
-      return languageCode;
+    switch (languageCode) {
+      case "de":
+        return LocaleKeys.german.tr();
+      case "en":
+        return LocaleKeys.english.tr();
+      case "es":
+        return LocaleKeys.spanish.tr();
+      case "fr":
+        return LocaleKeys.french.tr();
+      case "ja":
+        return LocaleKeys.japanese.tr();
+      case "pt":
+        return LocaleKeys.portuguese.tr();
+      case "ru":
+        return LocaleKeys.russian.tr();
+      case "zh":
+        return LocaleKeys.chinese.tr();
     }
+    return languageCode;
   }
 
   String get nativeName {

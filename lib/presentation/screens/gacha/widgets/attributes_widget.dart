@@ -1,5 +1,7 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
+import 'package:slee_fi/l10n/locale_keys.g.dart';
 import 'package:slee_fi/presentation/screens/info_individual/widget/item_attribute.dart';
 import 'package:slee_fi/resources/resources.dart';
 
@@ -11,24 +13,35 @@ class AttributesWidget extends StatelessWidget {
     return Container(
       decoration: BoxDecoration(
         color: AppColors.whiteOpacity5,
-        borderRadius: BorderRadius.circular(15),
+        borderRadius: BorderRadius.circular(16),
       ),
       width: double.infinity,
-      margin: const EdgeInsets.symmetric(horizontal: 8),
-      padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 8),
+      padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 30),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
-        children: const [
+        children: [
           ItemAttribute(
-              linkImage: Imgs.efficiency, title: 'Efficiency', valueActive: 10),
-          ItemAttribute(linkImage: Imgs.luck, title: 'Luck', valueActive: 2.5),
+              linkImage: Ics.efficiency,
+              colorIcon: AppColors.ruby,
+              title: LocaleKeys.efficiency.tr(),
+              valueActive: 10),
           ItemAttribute(
-              linkImage: Imgs.bonus, title: 'Bonus', valueActive: 8.2),
+              linkImage: Ics.gift,
+              colorIcon: AppColors.blue,
+              title: LocaleKeys.luck.tr(),
+              valueActive: 2.5),
           ItemAttribute(
-              linkImage: Imgs.special, title: 'Special', valueActive: 5.3),
+              linkImage: Ics.bonus,
+              colorIcon: AppColors.green,
+              title: LocaleKeys.bonus.tr(),
+              valueActive: 8.2),
           ItemAttribute(
-              linkImage: Imgs.resilience,
-              title: 'Resilience',
+              linkImage: Ics.special,
+              title: LocaleKeys.special.tr(),
+              valueActive: 5.3),
+          ItemAttribute(
+              linkImage: Ics.resilience,
+              title: LocaleKeys.resilience.tr(),
               valueActive: 6.2),
         ],
       ),

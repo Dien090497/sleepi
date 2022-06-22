@@ -63,7 +63,7 @@ class ModalReceiveWallet extends StatelessWidget {
               borderRadius: BorderRadius.circular(100.0),
               color: AppColors.white.withOpacity(0.05)),
           child: SFText(
-            keyText: "Eq7fbhoajsdRA29asjBWRmxwwo9aj92as",
+            keyText: "0xC02a...6Cc2",
             style: TextStyles.lightGrey16,
             textAlign: TextAlign.center,
           ),
@@ -72,7 +72,7 @@ class ModalReceiveWallet extends StatelessWidget {
           height: 32,
         ),
         SFButton(
-          text: LocaleKeys.copy_address,
+          text: LocaleKeys.copy_address.reCase(StringCase.titleCase),
           textStyle: TextStyles.w600WhiteSize16,
           width: double.infinity,
           height: 48,

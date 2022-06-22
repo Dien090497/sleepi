@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:slee_fi/common/style/app_colors.dart';
+import 'package:slee_fi/common/extensions/string_x.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
 import 'package:slee_fi/common/widgets/background_widget.dart';
 import 'package:slee_fi/common/widgets/sf_app_bar.dart';
@@ -13,22 +13,18 @@ class ActivationCodeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BackgroundWidget(
-      child: Scaffold(
-        backgroundColor: AppColors.transparent,
-        appBar: SFAppBar(
-          context: context,
-          title: LocaleKeys.activation_code,
-          textStyle: TextStyles.bold18LightWhite,
-          toUpperCase: true,
-        ),
-        body: SafeArea(
-          child: Column(
-            children: const [
-              AvailableWidget(),
-              SizedBox(height: 32),
-              Expanded(child: ActivationCodeList()),
-            ],
-          ),
+      appBar: SFAppBar(
+        context: context,
+        title: LocaleKeys.activation_code.reCase(StringCase.titleCase),
+        textStyle: TextStyles.bold18LightWhite,
+      ),
+      child: SafeArea(
+        child: Column(
+          children: const [
+            AvailableWidget(),
+            SizedBox(height: 32),
+            Expanded(child: ActivationCodeList()),
+          ],
         ),
       ),
     );

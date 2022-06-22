@@ -1,6 +1,8 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:slee_fi/common/widgets/sf_buttons.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
+import 'package:slee_fi/l10n/locale_keys.g.dart';
 
 class DrawerWidget extends StatelessWidget {
   const DrawerWidget({Key? key}) : super(key: key);
@@ -15,15 +17,15 @@ class DrawerWidget extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                SFText(keyText: 'Filter(0)'),
-                SFText(keyText: 'Clear Filter'),
+                SFText(keyText: '${LocaleKeys.filter.tr()}(0)'),
+                SFText(keyText: LocaleKeys.clear_filter),
               ],
             ),
             Align(
               alignment: Alignment.centerLeft,
               child: Padding(
                 padding: const EdgeInsets.symmetric(vertical: 10),
-                child: SFText(keyText: 'type'),
+                child: SFText(keyText: LocaleKeys.type),
               ),
             ),
             Row(
@@ -31,11 +33,11 @@ class DrawerWidget extends StatelessWidget {
               children: const [
                 SizedBox(
                   width: 110,
-                  child: SFButton(text: 'Efficiency'),
+                  child: SFButton(text: LocaleKeys.efficiency),
                 ),
                 SizedBox(
                   width: 110,
-                  child: SFButton(text: 'Luck'),
+                  child: SFButton(text: LocaleKeys.luck),
                 ),
               ],
             ),
@@ -44,11 +46,11 @@ class DrawerWidget extends StatelessWidget {
               children: const [
                 SizedBox(
                   width: 110,
-                  child: SFButton(text: 'comfort'),
+                  child: SFButton(text: 'Comfort'),
                 ),
                 SizedBox(
                   width: 110,
-                  child: SFButton(text: 'Resilience'),
+                  child: SFButton(text: LocaleKeys.resilience),
                 ),
               ],
             ),
@@ -56,7 +58,7 @@ class DrawerWidget extends StatelessWidget {
               alignment: Alignment.centerLeft,
               child: Padding(
                 padding: const EdgeInsets.symmetric(vertical: 10),
-                child: SFText(keyText: 'quality'),
+                child: SFText(keyText: LocaleKeys.quality),
               ),
             ),
           ],

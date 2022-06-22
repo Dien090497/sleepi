@@ -16,24 +16,26 @@ class ButtonStart extends StatefulWidget {
 }
 
 class _ButtonStartState extends State<ButtonStart> {
-  late Timer _timer;
-  late int startTime = 0;
+  Timer? _timer;
+  int startTime = 1 * 60;
 
   @override
   void initState() {
-    startTime = 1 * 60;
     startTimer();
     super.initState();
   }
 
-
   void startTimer() {
+    if (_timer != null) {
+      _timer?.cancel();
+      _timer = null;
+    }
     const oneSec = Duration(seconds: 1);
     _timer = Timer.periodic(
       oneSec,
-          (Timer timer) {
+      (Timer timer) {
         if (startTime == 0) {
-          _timer.cancel();
+          _timer?.cancel();
         } else {
           setState(() {
             startTime--;
@@ -43,7 +45,7 @@ class _ButtonStartState extends State<ButtonStart> {
     );
   }
 
-  convertTimer() {
+  String convertTimer() {
     if (startTime <= 0) {
       return '00:00:00';
     } else {
@@ -55,22 +57,20 @@ class _ButtonStartState extends State<ButtonStart> {
 
   @override
   void dispose() {
-    _timer.cancel();
+    _timer?.cancel();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    final Size size = MediaQuery.of(context).size;
     return SFButton(
-      text: startTime == 0 ? LocaleKeys.start.tr() : '${convertTimer()}',
-      textStyle:
-      startTime == 0 ? TextStyles.white16 : TextStyles.lightGrey16,
+      text: startTime == 0 ? LocaleKeys.start.tr() : convertTimer(),
+      textStyle: startTime == 0 ? TextStyles.white16 : TextStyles.lightGrey16,
       radius: 100,
       gradient: startTime == 0 ? AppColors.gradientBlueButton : null,
       color: AppColors.lightDark,
       height: 40,
-      width: size.width,
+      width: double.infinity,
       onPressed: () {
         if (startTime == 0) Navigator.pushNamed(context, R.tracking);
       },

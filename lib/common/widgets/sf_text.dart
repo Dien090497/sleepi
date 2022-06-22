@@ -8,15 +8,17 @@ class SFText extends Text {
     required String keyText,
     String suffix = '',
     String prefix = '',
-    Map<String, String>? args,
+    Map<String, String>? namedArgs,
     TextStyle? style,
     StringCase? stringCase,
     TextAlign? textAlign,
     Key? key,
+    int? maxLines,
   }) : super(
-          prefix + keyText.tr(namedArgs: args).reCase(stringCase) + suffix,
+          prefix + keyText.tr(namedArgs: namedArgs).reCase(stringCase) + suffix,
           style: style ?? TextStyles.textBasic15,
           textAlign: textAlign,
+          maxLines: maxLines,
           key: key,
         );
 }

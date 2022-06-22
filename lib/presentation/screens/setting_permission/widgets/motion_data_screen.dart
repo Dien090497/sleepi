@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:slee_fi/common/routes/app_routes.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
@@ -15,49 +16,50 @@ class MotionDataPermissionScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(
       child: BackgroundWidget(
-        child: Scaffold(
-          backgroundColor: AppColors.transparent,
-          body: Stack(children: [
-            ListView(
-              padding: const EdgeInsets.all(24.0),
-              children: [
-                Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 65),
-                    child: Image.asset(Imgs.motionData, fit: BoxFit.fill)),
-                const SizedBox(
-                  height: 24.0,
-                ),
-                SFText(
-                  keyText: LocaleKeys.motion_data_permission,
-                  style: TextStyles.bold24LightWhite,
-                  textAlign: TextAlign.center,
-                ),
-                const SizedBox(
-                  height: 32.0,
-                ),
-                SFText(
-                  keyText: LocaleKeys.displays_message_motion_data_permission,
-                  style: TextStyles.lightGrey16,
-                ),
-              ],
-            ),
-            Align(
-              alignment: Alignment.bottomCenter,
-              child: Padding(
-                padding: const EdgeInsets.fromLTRB(16, 0, 16, 50),
-                child: SFButton(
-                  height: 48,
-                  width: double.infinity,
-                  text: LocaleKeys.allow,
-                  textStyle: TextStyles.w600WhiteSize16,
-                  color: AppColors.blue,
-                  onPressed: () =>
-                      Navigator.pushNamed(context, R.notificationPermission),
-                ),
+        child: Stack(children: [
+          ListView(
+            padding: const EdgeInsets.all(24.0),
+            children: [
+              Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 65),
+                  child: Image.asset(Imgs.motionData, fit: BoxFit.fill)),
+              const SizedBox(
+                height: 24.0,
+              ),
+              SFText(
+                keyText: LocaleKeys.allow_to_access_motion_data,
+                style: TextStyles.bold24LightWhite,
+                textAlign: TextAlign.center,
+              ),
+              const SizedBox(
+                height: 32.0,
+              ),
+              SFText(
+                keyText: "1.${LocaleKeys.to_allow_access_to_motion_data_is_inportant.tr()}",
+                style: TextStyles.lightGrey16,
+              ),
+              SFText(
+                keyText: "2.${LocaleKeys.the_data_would_acquire_will_only.tr()}",
+                style: TextStyles.lightGrey16,
+              ),
+            ],
+          ),
+          Align(
+            alignment: Alignment.bottomCenter,
+            child: Padding(
+              padding: const EdgeInsets.fromLTRB(16, 0, 16, 50),
+              child: SFButton(
+                height: 48,
+                width: double.infinity,
+                text: LocaleKeys.allow,
+                textStyle: TextStyles.w600WhiteSize16,
+                color: AppColors.blue,
+                onPressed: () =>
+                    Navigator.pushNamed(context, R.notificationPermission),
               ),
             ),
-          ]),
-        ),
+          ),
+        ]),
       ),
     );
   }

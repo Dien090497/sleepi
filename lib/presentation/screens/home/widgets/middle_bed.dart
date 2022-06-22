@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:slee_fi/common/enum/enum.dart';
 import 'package:slee_fi/common/routes/app_routes.dart';
@@ -16,21 +17,20 @@ class MiddleBed extends StatefulWidget {
 }
 
 class _MiddleBedState extends State<MiddleBed> {
-  late int i = 1;
+  late int i = 0;
+
   @override
   Widget build(BuildContext context) {
     final Size size = MediaQuery.of(context).size;
     final beds = List.generate(BedType.values.length * 5,
-            (i) => BedType.values[i % BedType.values.length]);
+        (i) => BedType.values[i % BedType.values.length]);
     return Column(
       children: [
         SFText(
           keyText: LocaleKeys.main_bed,
           style: TextStyles.white18,
         ),
-        const SizedBox(
-          height: 16,
-        ),
+        const SizedBox(height: 16),
         Container(
           width: size.width,
           padding: const EdgeInsets.symmetric(
@@ -44,45 +44,43 @@ class _MiddleBedState extends State<MiddleBed> {
           ),
           child: Column(
             children: [
-              SFText(
-                keyText: '${beds[i].name} Bed',
-                style: TextStyles.blue14,
-              ),
-              const SizedBox(height: 24),
+              SFText(keyText: beds[i].name, style: TextStyles.blue14),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 7),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     InkWell(
-                      onTap: (){
-                        if(i!=0) {
-                          i-=1;
+                      onTap: () {
+                        if (i != 0) {
+                          i -= 1;
                         }
-                        setState(() {
-
-                        });
+                        setState(() {});
                       },
                       child: const Icon(
                         Icons.arrow_back_ios,
                         color: AppColors.lightGrey,
                       ),
                     ),
-                    GestureDetector(
-                      onTap: () {
-                        Navigator.pushNamed(context, R.nftInfo,
-                            arguments: false);
-                      },
-                      child: SFIcon(beds[i].image),
+                    Expanded(
+                      child: GestureDetector(
+                        onTap: () {
+                          Navigator.pushNamed(context, R.nftInfo,
+                              arguments: false);
+                        },
+                        child: SFIcon(
+                          beds[i].image,
+                          height: 180,
+                          fit: BoxFit.fitHeight,
+                        ),
+                      ),
                     ),
                     InkWell(
-                      onTap: (){
-                        if(i!=beds.length-1) {
-                          i+=1;
+                      onTap: () {
+                        if (i != beds.length - 1) {
+                          i += 1;
                         }
-                        setState(() {
-
-                        });
+                        setState(() {});
                       },
                       child: const Icon(
                         Icons.arrow_forward_ios_sharp,
@@ -92,16 +90,17 @@ class _MiddleBedState extends State<MiddleBed> {
                   ],
                 ),
               ),
-              const SizedBox(height: 32),
+              const SizedBox(height: 20,),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   const Spacer(),
                   SFButton(
-                    text: 'IDIDID',
+                    text: 'B1768',
                     textStyle: TextStyles.blue14,
                     color: Colors.white.withOpacity(0.05),
                     radius: 50,
+                    height: 36,
                   ),
                   const SizedBox(
                     width: 8,
@@ -111,23 +110,25 @@ class _MiddleBedState extends State<MiddleBed> {
                     textStyle: TextStyles.green14,
                     color: Colors.white.withOpacity(0.05),
                     radius: 50,
+                    height: 36,
                   ),
                   const SizedBox(
                     width: 8,
                   ),
                   SFButton(
-                    text: 'Lv9999',
+                    text: 'Lv50',
                     textStyle: TextStyles.yellow14,
                     color: Colors.white.withOpacity(0.05),
                     radius: 50,
+                    height: 36,
                   ),
                   const Spacer(),
                 ],
               ),
-              const SizedBox(height: 16),
+              const SizedBox(height: 24),
               SFText(
-                keyText: 'Time: 6h - 8h',
-                style: TextStyles.lightGrey16,
+                keyText: '${LocaleKeys.time.tr()}: 6h - 8h',
+                style: TextStyles.lightGrey12,
               ),
             ],
           ),

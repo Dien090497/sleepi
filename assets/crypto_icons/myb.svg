@@ -1,0 +1,18 @@
+<svg enable-background="new 0 0 500 500" viewBox="0 0 500 500" xmlns="http://www.w3.org/2000/svg">
+    <linearGradient gradientTransform="matrix(1 0 0 -1 0 502)" gradientUnits="userSpaceOnUse" id="a"
+        x1="125.7471" x2="373.8489" y1="127.3712" y2="375.924">
+        <stop offset="0" stop-color="#273469" />
+        <stop offset="1" stop-color="#2e58db" />
+    </linearGradient>
+    <linearGradient gradientTransform="matrix(1 0 0 -1 0 502)" gradientUnits="userSpaceOnUse" id="b"
+        x1="121.9812" x2="377.6826" y1="93.8406" y2="93.8406">
+        <stop offset="0" stop-color="#1990f2" />
+        <stop offset="1" stop-color="#3cbcf7" />
+    </linearGradient>
+    <path
+        d="m498.3 250.4-93.2 93.1h-.1c-41.2-41.2-97-64.3-155.2-64.3s-114 23.1-155.2 64.3h-.2l-93.1-93.1 248.5-248.1z"
+        fill="url(#a)" />
+    <path
+        d="m377.7 370.8-127.8 127.6-127.9-127.6c33.8-34 79.8-53.1 127.8-52.9 8.5 0 17.1.6 25.5 1.8 38.8 5.4 74.8 23.4 102.4 51.1z"
+        fill="url(#b)" />
+</svg>

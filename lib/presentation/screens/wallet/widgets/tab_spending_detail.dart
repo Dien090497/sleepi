@@ -6,8 +6,10 @@ import 'package:slee_fi/common/style/text_styles.dart';
 import 'package:slee_fi/common/widgets/sf_button_outlined.dart';
 import 'package:slee_fi/common/widgets/sf_buttons.dart';
 import 'package:slee_fi/common/widgets/sf_card.dart';
+import 'package:slee_fi/common/widgets/sf_icon.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
 import 'package:slee_fi/l10n/locale_keys.g.dart';
+import 'package:slee_fi/presentation/screens/passcode/passcode_screen.dart';
 import 'package:slee_fi/presentation/screens/wallet/widgets/pop_up_info_spending.dart';
 import 'package:slee_fi/presentation/screens/wallet/widgets/spending_detail_list.dart';
 import 'package:slee_fi/resources/resources.dart';
@@ -38,10 +40,10 @@ class TabSpendingDetail extends StatelessWidget {
                         // onTap: () => Navigator.pushNamed(context, R.staking),
                         margin: const EdgeInsets.only(top: 8),
                         child: ListTile(
-                          leading: Image.asset(Imgs.slft),
+                          leading: const SFIcon(Ics.icSlft, width: 40, height: 40,),
                           minLeadingWidth: 12,
                           title: SFText(
-                              keyText: LocaleKeys.slft,
+                              keyText: "SLFT",
                               style: TextStyles.lightWhite16,
                               stringCase: StringCase.upperCase),
                           trailing: SFText(
@@ -53,10 +55,10 @@ class TabSpendingDetail extends StatelessWidget {
                       SFCard(
                         margin: const EdgeInsets.only(top: 8),
                         child: ListTile(
-                          leading: Image.asset(Imgs.slgt),
+                          leading: const SFIcon(Ics.icSlgt, width: 40, height: 40,),
                           minLeadingWidth: 12,
                           title: SFText(
-                              keyText: LocaleKeys.slgt,
+                              keyText: "SLGT",
                               style: TextStyles.lightWhite16,
                               stringCase: StringCase.upperCase),
                           trailing: SFText(
@@ -68,10 +70,13 @@ class TabSpendingDetail extends StatelessWidget {
                       SFCard(
                         margin: const EdgeInsets.only(top: 8),
                         child: ListTile(
-                          leading: Image.asset(Imgs.avax),
+                          leading: const Padding(
+                            padding: EdgeInsets.only(left: 4.0),
+                            child: SFIcon(Ics.icAvax, width: 32, height: 32,),
+                          ),
                           minLeadingWidth: 12,
                           title: SFText(
-                            keyText: LocaleKeys.avax,
+                            keyText: "AVAX",
                             style: TextStyles.lightWhite16,
                             stringCase: StringCase.upperCase,
                           ),
@@ -117,7 +122,10 @@ class TabSpendingDetail extends StatelessWidget {
               gradient: AppColors.gradientBlueButton,
               height: 48,
               width: double.infinity,
-              onPressed: () => Navigator.pushNamed(context, R.transfer),
+              onPressed: () {
+              Navigator.pushNamed(context, R.passcode,
+              arguments: PasscodeArguments(R.transfer));
+              }
             ),
           ),
         ],

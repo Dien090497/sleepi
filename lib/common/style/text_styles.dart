@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/painting.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
 
 class TextStyles {
@@ -26,8 +27,8 @@ class TextStyles {
       fontSize: 16, color: AppColors.lightGrey, fontWeight: FontWeight.w600);
   static const white1w700size16 = TextStyle(
       fontSize: 16, color: AppColors.light1, fontWeight: FontWeight.w700);
-  static const white1w700size18 = TextStyle(
-      fontSize: 18, color: AppColors.light1, fontWeight: FontWeight.w700);
+  static final white1w700size18 = TextStyle(
+      fontSize: 18.sp, color: AppColors.light1, fontWeight: FontWeight.w700);
   static const white1w700size12 = TextStyle(
       fontSize: 12, color: AppColors.light1, fontWeight: FontWeight.w700);
   static const greenW700size12 = TextStyle(
@@ -164,6 +165,8 @@ class TextStyles {
       fontSize: 16, color: AppColors.lightWhite, fontWeight: FontWeight.w700);
   static const bold14LightWhite = TextStyle(
       fontSize: 14, color: AppColors.lightWhite, fontWeight: FontWeight.w700);
+  static final bold14LightWhiteWithOpacity = TextStyle(
+      fontSize: 14, color: AppColors.lightWhite.withOpacity(0.5), fontWeight: FontWeight.w700); 
 
   static const bold12Blue = TextStyle(
       fontSize: 12, color: AppColors.blue, fontWeight: FontWeight.w700);
@@ -171,6 +174,8 @@ class TextStyles {
       fontSize: 14, color: AppColors.blue, fontWeight: FontWeight.w700);
   static const bold16Blue = TextStyle(
       fontSize: 16, color: AppColors.blue, fontWeight: FontWeight.w700);
+  static const bold18Blue = TextStyle(
+      fontSize: 18, color: AppColors.blue, fontWeight: FontWeight.w700);
   static const bold24Blue = TextStyle(
       fontSize: 24, color: AppColors.blue, fontWeight: FontWeight.w700);
   static const bold24Green = TextStyle(
@@ -182,14 +187,14 @@ class TextStyles {
   static const purple16 = TextStyle(fontSize: 16, color: AppColors.purple);
   static const blue12 = TextStyle(fontSize: 14, color: AppColors.blue);
   static const blue12W700 = TextStyle(fontSize: 14, color: AppColors.blue, fontWeight: FontWeight.bold);
-  static const blue14 = TextStyle(fontSize: 14, color: AppColors.blue);
+  static final blue14 = TextStyle(fontSize: 14.sp, color: AppColors.blue);
   static const blue14W700 = TextStyle(
       fontSize: 14, color: AppColors.blue, fontWeight: FontWeight.w700);
   static const blue16 = TextStyle(fontSize: 16, color: AppColors.blue);
   static const blue16W700 = TextStyle(
       fontSize: 16, color: AppColors.blue, fontWeight: FontWeight.w700);
-  static const green14 = TextStyle(fontSize: 14, color: AppColors.green);
-
+  static const green12 = TextStyle(fontSize: 12, color: AppColors.green);
+  static final green14 = TextStyle(fontSize: 14.sp, color: AppColors.green);
   static const green16 = TextStyle(fontSize: 16, color: AppColors.green);
 
   static const red14 = TextStyle(fontSize: 14, color: AppColors.red);
@@ -197,7 +202,8 @@ class TextStyles {
       fontSize: 12, color: AppColors.red, fontWeight: FontWeight.w400);
   static const red12W700 = TextStyle(
       fontSize: 12, color: AppColors.red, fontWeight: FontWeight.w700);
-  static const yellow14 = TextStyle(fontSize: 14, color: AppColors.yellow);
+  static const yellow12 = TextStyle(fontSize: 12, color: AppColors.yellow);
+  static final yellow14 = TextStyle(fontSize: 14.sp, color: AppColors.yellow);
   static const bold14Yellow = TextStyle(
       fontSize: 14, color: AppColors.yellow, fontWeight: FontWeight.w700);
 

@@ -37,7 +37,7 @@ class CategoryHeaderShare extends StatelessWidget {
                   const Padding(
                     padding: EdgeInsets.only(left: 10.0),
                     child: SFIcon(
-                      Ics.icGold,
+                      Ics.icSlft,
                     ),
                   ),
                   const SizedBox(

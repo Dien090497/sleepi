@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:slee_fi/common/enum/enum.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
 import 'package:slee_fi/common/widgets/sf_buttons.dart';
@@ -10,10 +11,15 @@ import 'package:slee_fi/l10n/locale_keys.g.dart';
 
 class PopUpItem extends StatelessWidget {
   const PopUpItem(
-      {Key? key, required this.icon, required this.onConfirm, this.onCancel})
+      {Key? key,
+      required this.id,
+      required this.icon,
+      required this.onConfirm,
+      this.onCancel})
       : super(key: key);
 
-  final String icon;
+  final ItemType icon;
+  final String id;
   final VoidCallback onConfirm;
   final VoidCallback? onCancel;
 
@@ -24,12 +30,13 @@ class PopUpItem extends StatelessWidget {
       child: Column(
         children: [
           SFText(
-            keyText: "ID",
+            keyText: id,
             style: TextStyles.white1w700size16,
           ),
-          const SizedBox(height: 24),
-          SFIcon(icon,),
-          const SizedBox(height: 24),
+          SFIcon(
+            icon.image,
+            width: 160,
+          ),
           SFText(keyText: 'Level 5', style: TextStyles.lightGrey14),
           const SizedBox(height: 32),
           SFCard(
@@ -45,7 +52,7 @@ class PopUpItem extends StatelessWidget {
                 ),
                 const SizedBox(height: 4),
                 SFText(
-                  keyText: LocaleKeys.displays_message_effect_item,
+                  keyText: icon.effect,
                   style: TextStyles.lightGrey14,
                 ),
               ],
@@ -76,6 +83,7 @@ class PopUpItem extends StatelessWidget {
                   color: AppColors.blue,
                   width: double.infinity,
                   onPressed: () {
+                    Navigator.pop(context);
                     onConfirm();
                     Navigator.pop(context);
                     showSuccessfulDialog(context);

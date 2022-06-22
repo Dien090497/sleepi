@@ -4,22 +4,22 @@ import 'package:slee_fi/common/style/text_styles.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
 
 class SFListTile extends StatelessWidget {
-  const SFListTile({
-    this.text,
-    this.textStyle,
-    this.trailing,
-    this.leading,
-    this.onPressed,
-    this.toUpperCase = false,
-    Key? key
-  }) : super(key: key);
+  const SFListTile(
+      {this.text,
+      this.textStyle,
+      this.trailing,
+      this.leading,
+      this.onPressed,
+      this.stringCase,
+      Key? key})
+      : super(key: key);
 
   final String? text;
   final TextStyle? textStyle;
   final Widget? leading;
   final VoidCallback? onPressed;
   final Widget? trailing;
-  final bool toUpperCase;
+  final StringCase? stringCase;
 
   @override
   Widget build(BuildContext context) {
@@ -30,18 +30,18 @@ class SFListTile extends StatelessWidget {
         child: Row(
           children: [
             leading ?? const SizedBox(),
-            const SizedBox(width: 4,),
+            const SizedBox(
+              width: 4,
+            ),
             Expanded(
               child: SFText(
                 keyText: text ?? "",
                 style: textStyle ?? TextStyles.lightWhite14,
-                stringCase: StringCase.upperCase,
+                stringCase: stringCase,
               ),
             ),
             trailing ?? const SizedBox(),
-
           ],
-
         ),
       ),
     );

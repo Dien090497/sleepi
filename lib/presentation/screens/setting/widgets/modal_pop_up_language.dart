@@ -4,6 +4,7 @@ import 'package:slee_fi/common/const/const.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
 import 'package:slee_fi/common/widgets/sf_buttons.dart';
+import 'package:slee_fi/common/widgets/sf_dialog.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
 import 'package:slee_fi/l10n/locale_keys.g.dart';
 
@@ -44,12 +45,12 @@ class ModalPopUpLanguage extends StatelessWidget {
               textStyle: TextStyles.w600WhiteSize16,
               height: 48,
               onPressed: () {
-                Navigator.pop(context);
-                context.setLocale(Const.locales[selectedIndex]);
+                final locale = Const.locales[selectedIndex];
+                if (locale.languageCode != context.locale.languageCode) {
+                  showChangeLanguageDialog(context, locale: locale);
+                }
               }),
-          const SizedBox(
-            height: 37,
-          )
+          const SizedBox(height: 37)
         ],
       ),
     );

@@ -144,7 +144,6 @@ class ShowMoreTextPopup {
                 child: Container(
                     padding: _padding,
                     width: _popupWidth,
-                    height: _popupHeight,
                     decoration: BoxDecoration(
                         color: _backgroundColor,
                         borderRadius: _borderRadius,

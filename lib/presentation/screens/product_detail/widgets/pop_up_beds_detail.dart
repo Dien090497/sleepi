@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
 import 'package:slee_fi/common/widgets/sf_buttons.dart';
-import 'package:slee_fi/common/widgets/sf_card.dart';
 import 'package:slee_fi/common/widgets/sf_dialog.dart';
 import 'package:slee_fi/common/widgets/sf_icon.dart';
+import 'package:slee_fi/common/widgets/sf_label_value.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
 import 'package:slee_fi/l10n/locale_keys.g.dart';
 import 'package:slee_fi/resources/resources.dart';
@@ -46,12 +46,14 @@ class PopUpBedsDetail extends StatelessWidget {
         Column(
           children: [
             SFText(
-              keyText: LocaleKeys.matching_bed,
+              keyText: LocaleKeys.matching_jewels,
               style: TextStyles.white1w700size16,
             ),
-            const SizedBox(height: 20),
-            SFIcon(icon),
-            const SizedBox(height: 25),
+            SFIcon(icon, height: 160,),
+            /*Imgs.jewelSliver,
+            Imgs.jewelPurple,
+            Imgs.jewelGreen,
+            Imgs.jewelRed*/
             Row(
               children: [
                 Expanded(
@@ -62,7 +64,7 @@ class PopUpBedsDetail extends StatelessWidget {
                       color: AppColors.whiteOpacity5,
                       borderRadius: BorderRadius.circular(10),
                     ),
-                    child: const SFIcon(Ics.shortBed),
+                    child: const SFIcon(Imgs.jewelSliver),
                   ),
                 ),
                 const SizedBox(
@@ -76,7 +78,7 @@ class PopUpBedsDetail extends StatelessWidget {
                       color: AppColors.whiteOpacity5,
                       borderRadius: BorderRadius.circular(10),
                     ),
-                    child: SFIcon(icon),
+                    child: const SFIcon(Imgs.jewelGreen),
                   ),
                 ),
                 const SizedBox(
@@ -90,7 +92,7 @@ class PopUpBedsDetail extends StatelessWidget {
                       color: AppColors.whiteOpacity5,
                       borderRadius: BorderRadius.circular(10),
                     ),
-                    child: const SFIcon(Ics.bedsCouple),
+                    child: const SFIcon(Imgs.jewelPurple),
                   ),
                 ),
                 const SizedBox(
@@ -104,7 +106,7 @@ class PopUpBedsDetail extends StatelessWidget {
                       color: AppColors.whiteOpacity5,
                       borderRadius: BorderRadius.circular(10),
                     ),
-                    child: const SFIcon(Ics.bedBunk),
+                    child: const SFIcon(Imgs.jewelRed),
                   ),
                 )
               ],
@@ -112,46 +114,11 @@ class PopUpBedsDetail extends StatelessWidget {
             const SizedBox(
               height: 26,
             ),
-            SFCard(
-              margin: EdgeInsets.zero,
-              padding: const EdgeInsets.symmetric(vertical: 24, horizontal: 18),
-              child: Row(
-                children: [
-                  SFText(
-                    keyText: LocaleKeys.cost,
-                    style: TextStyles.lightGrey16,
-                  ),
-                  const SizedBox(width: 4),
-                  Expanded(
-                    child: SFText(
-                      keyText: '21 SLFT',
-                      style: TextStyles.white16,
-                      textAlign: TextAlign.right,
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            const SizedBox(height: 8),
-            SFCard(
-              margin: EdgeInsets.zero,
-              padding: const EdgeInsets.symmetric(vertical: 24, horizontal: 18),
-              child: Row(
-                children: [
-                  SFText(
-                    keyText: LocaleKeys.cost,
-                    style: TextStyles.lightGrey16,
-                  ),
-                  const SizedBox(width: 4),
-                  Expanded(
-                    child: SFText(
-                      keyText: '21 SLFT',
-                      style: TextStyles.white16,
-                      textAlign: TextAlign.right,
-                    ),
-                  ),
-                ],
-              ),
+             const SFLabelValue(
+              label: "ID",
+              value: LocaleKeys.level,
+              styleLabel: TextStyles.lightGrey16,
+              styleValue: TextStyles.lightWhite16,
             ),
             const SizedBox(height: 24),
             Row(

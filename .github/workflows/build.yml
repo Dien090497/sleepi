@@ -2,19 +2,33 @@ name: Build APK, Upload Diawi, Send GG Chat Noti
 
 on:
   push:
-    branches: [ main, build ]
+    branches: [ build ]
 
 jobs:
+  #  test:
+  #    uses: ./.github/workflows/test.yml
+  #    secrets:
+  #      json: ${{ secrets.JSON }}
+  #      webhook: ${{ secrets.GGCHATWEBHOOK }}
+  #    with:
+  #      diawi_qr: 'https://deploygate.s3.ap-northeast-1.amazonaws.com/icons/89389_6424fca86a67f6d3861f8b49cb534ee694690d37/icon.png'
+  #      diawi_url: 'https://deploygate.com/api/users/kevinthai/platforms/android/apps/com.sotatek.betme/binaries/2/download/binary.apk'
+  #      dg_url: 'https://deploygate.com/api/users/kevinthai/platforms/android/apps/com.sotatek.betme/binaries/2/download/binary.apk'
+  #      dg_icon: 'https://deploygate.s3.ap-northeast-1.amazonaws.com/icons/89389_6424fca86a67f6d3861f8b49cb534ee694690d37/icon.png'
+
   build-apk:
     uses: ./.github/workflows/build_apk.yml
     secrets:
       diawi_token: ${{ secrets.DIAWI_TOKEN }}
+      dg_token: ${{ secrets.DEPLOYGATE_API_TOKEN }}
 
-  noti-gg-chat:
+  send-gg-chat:
     needs: build-apk
     uses: ./.github/workflows/google_chat_msg.yml
     secrets:
       webhook: ${{ secrets.GGCHATWEBHOOK }}
     with:
-      imageUrl: ${{ needs.build-apk.outputs.diawi_qrcode }}
-      url: ${{ needs.build-apk.outputs.diawi_url }}
+      diawi_qr: ${{ needs.build-apk.outputs.diawi_qrcode }}
+      diawi_url: ${{ needs.build-apk.outputs.diawi_url }}
+#      deploygate_url: ${{ needs.build-apk.outputs.deploygate_url }}
+#      deploygate_icon: ${{ needs.build-apk.outputs.deploygate_icon }}

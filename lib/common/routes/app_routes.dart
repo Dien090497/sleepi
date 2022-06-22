@@ -13,6 +13,7 @@ import 'package:slee_fi/presentation/screens/home/layout/feed_back_screen.dart';
 import 'package:slee_fi/presentation/screens/home/layout/question_screen.dart';
 import 'package:slee_fi/presentation/screens/import_wallet/import_wallet_screen.dart';
 import 'package:slee_fi/presentation/screens/info_individual/info_individual_screen.dart';
+import 'package:slee_fi/presentation/screens/info_individual/layout/comming_soon.dart';
 import 'package:slee_fi/presentation/screens/info_individual/layout/mint_screen.dart';
 import 'package:slee_fi/presentation/screens/info_individual/layout/recycle_screen.dart';
 import 'package:slee_fi/presentation/screens/item_selection/item_selection_screen.dart';
@@ -76,7 +77,6 @@ class R {
   static const String createWallet = '${_}create_wallet';
   static const String importWallet = '${_}import_wallet';
   static const String sendToExternal = '${_}send_to_external';
-  static const String sendToSpending = '${_}send_to_spending';
   static const String trade = '${_}trade';
   static const String email = '${_}email';
   static const String changePassword = '${_}change_password';
@@ -102,6 +102,7 @@ class R {
   static const String probability = '${_}probability';
   static const String tracking = '${_}tracking';
   static const String transactionDetail = '${_}transaction_detail';
+  static const String commingSoon = '${_}comming_soon';
 }
 
 class AppRoutes {
@@ -156,5 +157,6 @@ class AppRoutes {
     R.probability: (_) => const ProbabilityScreen(),
     R.tracking: (_) => const TrackingScreen(),
     R.transactionDetail: (_) => const TransactionDetail(),
+    R.commingSoon: (_) => const CommingSoon(),
   };
 }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:slee_fi/common/routes/app_routes.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
@@ -28,14 +29,14 @@ class _BottomBarWidgetState extends State<BottomBarWidget> {
       onTap: onTap,
       child: Container(
         alignment: Alignment.center,
-        width: MediaQuery.of(context).size.width / 6,
         height: 80,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             SFIcon(
               icon,
-              color: index == i ? AppColors.blue : AppColors.lightGrey,
+              color:
+                  index == i ? AppColors.blue : AppColors.greyBottomIndividual,
             ),
             const SizedBox(
               height: 6,
@@ -66,7 +67,9 @@ class _BottomBarWidgetState extends State<BottomBarWidget> {
               ))),
           height: 80,
           width: MediaQuery.of(context).size.width,
+          padding: EdgeInsets.symmetric(horizontal: 8.w),
           child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               itemBottomBar(0, context, Ics.levelUp, LocaleKeys.level_up, () {
                 setState(() {
@@ -76,7 +79,7 @@ class _BottomBarWidgetState extends State<BottomBarWidget> {
                   context,
                   children: [
                     PopUpLevelUp(
-                        icon: Ics.middleBed,
+                        icon: Imgs.shortBed,
                         level: 20,
                         cost: 21,
                         time: 1260,
@@ -99,7 +102,7 @@ class _BottomBarWidgetState extends State<BottomBarWidget> {
                   context,
                   children: [
                     PopUpRepair(
-                      icon: Ics.middleBed,
+                      icon: Imgs.shortBed,
                       cost: 120,
                       level: 20,
                       time: 122,
@@ -119,9 +122,10 @@ class _BottomBarWidgetState extends State<BottomBarWidget> {
                 setState(() {
                   index = 2;
                 });
-                Navigator.pushNamed(context, R.mint).then((value) => setState(() {
-                      index = -1;
-                    }));
+                Navigator.pushNamed(context, R.mint)
+                    .then((value) => setState(() {
+                          index = -1;
+                        }));
               }),
               itemBottomBar(3, context, Ics.shopping, LocaleKeys.sell, () {
                 setState(() {
@@ -131,10 +135,11 @@ class _BottomBarWidgetState extends State<BottomBarWidget> {
                   PopUpSell(
                     time: 1,
                     cost: 1,
-                    icon: Ics.middleBed,
+                    icon: Imgs.shortBed,
                     level: 2,
                     onCancel: () {},
                     onConfirm: () {},
+                    className: LocaleKeys.middle,
                   ),
                 ]).then((value) => setState(() {
                       setState(() {

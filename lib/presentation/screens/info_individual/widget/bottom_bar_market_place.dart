@@ -12,53 +12,59 @@ class BottomBarMarketPlaceWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Material(
       color: Colors.transparent,
-      child: Padding(
-        padding: const EdgeInsets.all(24.0),
-        child: Stack(
-          alignment: Alignment.center,
-          children: [
-            Container(
-              height: 56,
-              decoration: BoxDecoration(
-                gradient: AppColors.gradientBlueButton,
-                borderRadius: BorderRadius.circular(25),
-              ),
-            ),
-            Container(
-              height: 54,
-              margin: const EdgeInsets.all(1),
-              decoration: BoxDecoration(
-                color: AppColors.lightDark,
-                borderRadius: BorderRadius.circular(25),
-              ),
-              child: Padding(
-                padding: const EdgeInsets.all(12),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    const SizedBox(
-                      width: 12,
-                    ),
-                    Expanded(
-                      child: SFText(
-                        keyText: '1000 SLFT',
-                        style: TextStyles.white16,
-                      ),
-                    ),
-                    SFButton(
-                      text: LocaleKeys.buy_now,
-                      textStyle: TextStyles.white14W700,
-                      gradient: AppColors.gradientBlueButton,
-                      onPressed: () {
-                        // showCustomDialog(context,
-                        //     children: [const PopUpBuyMarketPlace()]);
-                      },
-                    ),
-                  ],
+      child: SafeArea(
+        top: false,
+        child: Padding(
+          padding: const EdgeInsets.symmetric(
+            horizontal: 24.0,
+            vertical: 16,
+          ),
+          child: Stack(
+            alignment: Alignment.center,
+            children: [
+              Container(
+                height: 56,
+                decoration: BoxDecoration(
+                  gradient: AppColors.gradientBlueButton,
+                  borderRadius: BorderRadius.circular(25),
                 ),
               ),
-            )
-          ],
+              Container(
+                height: 54,
+                margin: const EdgeInsets.all(1),
+                decoration: BoxDecoration(
+                  color: AppColors.lightDark,
+                  borderRadius: BorderRadius.circular(25),
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.all(12),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      const SizedBox(
+                        width: 12,
+                      ),
+                      Expanded(
+                        child: SFText(
+                          keyText: '1,000 AVAX',
+                          style: TextStyles.white16,
+                        ),
+                      ),
+                      SFButton(
+                        text: LocaleKeys.buy_now,
+                        textStyle: TextStyles.white14W700,
+                        gradient: AppColors.gradientBlueButton,
+                        onPressed: () {
+                          // showCustomDialog(context,
+                          //     children: [const PopUpBuyMarketPlace()]);
+                        },
+                      ),
+                    ],
+                  ),
+                ),
+              )
+            ],
+          ),
         ),
       ),
     );

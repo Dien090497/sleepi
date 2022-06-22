@@ -15,49 +15,46 @@ class HealthcarePermissionScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(
       child: BackgroundWidget(
-        child: Scaffold(
-          backgroundColor: AppColors.transparent,
-          body: Stack(children: [
-            ListView(
-              padding: const EdgeInsets.all(24.0),
-              children: [
-                Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 65),
-                    child: Image.asset(Imgs.healthcare, fit: BoxFit.fill)),
-                const SizedBox(
-                  height: 24.0,
-                ),
-                SFText(
-                  keyText: LocaleKeys.healthcare_permission,
-                  style: TextStyles.bold24LightWhite,
-                  textAlign: TextAlign.center,
-                ),
-                const SizedBox(
-                  height: 32.0,
-                ),
-                SFText(
-                  keyText: LocaleKeys.displays_message_healthcare_permission,
-                  style: TextStyles.lightGrey16,
-                ),
-              ],
-            ),
-            Align(
-              alignment: Alignment.bottomCenter,
-              child: Padding(
-                padding: const EdgeInsets.fromLTRB(16, 0, 16, 50),
-                child: SFButton(
-                  height: 48,
-                  width: double.infinity,
-                  color: AppColors.blue,
-                  text: LocaleKeys.allow,
-                  textStyle: TextStyles.w600WhiteSize16,
-                  onPressed: () =>
-                      Navigator.pushNamed(context, R.motionDataPermission),
-                ),
+        child: Stack(children: [
+          ListView(
+            padding: const EdgeInsets.all(24.0),
+            children: [
+              Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 65),
+                  child: Image.asset(Imgs.healthcare, fit: BoxFit.fill)),
+              const SizedBox(
+                height: 24.0,
               ),
-            )
-          ]),
-        ),
+              SFText(
+                keyText: LocaleKeys.allow_to_access_healthcare_data,
+                style: TextStyles.bold24LightWhite,
+                textAlign: TextAlign.center,
+              ),
+              const SizedBox(
+                height: 32.0,
+              ),
+              SFText(
+                keyText: LocaleKeys.to_allow_access_to_healthcare_data,
+                style: TextStyles.lightGrey16,
+              ),
+            ],
+          ),
+          Align(
+            alignment: Alignment.bottomCenter,
+            child: Padding(
+              padding: const EdgeInsets.fromLTRB(16, 0, 16, 50),
+              child: SFButton(
+                height: 48,
+                width: double.infinity,
+                color: AppColors.blue,
+                text: LocaleKeys.allow,
+                textStyle: TextStyles.w600WhiteSize16,
+                onPressed: () =>
+                    Navigator.pushNamed(context, R.motionDataPermission),
+              ),
+            ),
+          )
+        ]),
       ),
     );
   }

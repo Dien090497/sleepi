@@ -4,8 +4,9 @@ import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
 
 class ChartStatisticShare extends StatelessWidget {
-  ChartStatisticShare({Key? key}) : super(key: key);
+  ChartStatisticShare({Key? key, this.titleBottom = true}) : super(key: key);
 
+  final bool titleBottom;
   final List<Color> gradientColors = [
     AppColors.blue,
     AppColors.blue,
@@ -38,12 +39,36 @@ class ChartStatisticShare extends StatelessWidget {
       case 20:
         text = const Text('05:30', style: TextStyles.lightGrey12);
         break;
+      case 25:
+        text = const Text('06:00', style: TextStyles.lightGrey12);
+        break;
       default:
         text = const Text('', style: TextStyles.lightGrey12);
         break;
     }
-
     return text;
+  }
+
+  Widget bottomTitleWidgets(double value, TitleMeta meta) {
+    Widget text;
+    switch (value.toInt()) {
+      case 2:
+        text = const Text('2021-01', style: TextStyles.lightGrey12);
+        break;
+      case 10:
+        text = const Text('2021-06', style: TextStyles.lightGrey12);
+        break;
+      case 20:
+        text = const Text('2021-12', style: TextStyles.lightGrey12);
+        break;
+      default:
+        text = const Text('', style: TextStyles.lightGrey12);
+        break;
+    }
+    return Padding(
+      padding: const EdgeInsets.only(top: 8.0),
+      child: text,
+    );
   }
 
   LineChartData mainData() {
@@ -73,7 +98,12 @@ class ChartStatisticShare extends StatelessWidget {
           sideTitles: SideTitles(showTitles: false),
         ),
         bottomTitles: AxisTitles(
-          sideTitles: SideTitles(showTitles: false),
+          sideTitles: SideTitles(
+            showTitles: titleBottom,
+            reservedSize: 20,
+            interval: 1,
+            getTitlesWidget: bottomTitleWidgets,
+          ),
         ),
         leftTitles: AxisTitles(
           sideTitles: SideTitles(
@@ -92,9 +122,9 @@ class ChartStatisticShare extends StatelessWidget {
             width: 1,
           ))),
       minX: 0,
-      maxX: 20,
+      maxX: 25,
       minY: 0,
-      maxY: 22,
+      maxY: 26,
       lineBarsData: [
         LineChartBarData(
           spots: const [
@@ -103,6 +133,7 @@ class ChartStatisticShare extends StatelessWidget {
             FlSpot(10, 9),
             FlSpot(15, 17),
             FlSpot(20, 14),
+            FlSpot(25, 25),
           ],
           isCurved: false,
           gradient: LinearGradient(
