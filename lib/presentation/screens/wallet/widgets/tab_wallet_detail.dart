@@ -3,6 +3,7 @@ import 'dart:math';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:slee_fi/common/const/const.dart';
 import 'package:slee_fi/common/extensions/string_x.dart';
 import 'package:slee_fi/common/routes/app_routes.dart';
@@ -70,7 +71,7 @@ class TabWalletDetail extends StatelessWidget {
                 ConstrainedBox(
                   constraints: const BoxConstraints(maxHeight: 130),
                   child: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 23),
+                    padding: EdgeInsets.symmetric(horizontal: 16.w),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
@@ -88,9 +89,7 @@ class TabWalletDetail extends StatelessWidget {
                             assetImage: Ics.icDownload,
                           ),
                         ),
-                        const SizedBox(
-                          width: 10,
-                        ),
+                        const SizedBox(width: 10),
                         Expanded(
                           child: BoxButtonWidget(
                             onTap: () =>
@@ -99,9 +98,7 @@ class TabWalletDetail extends StatelessWidget {
                             assetImage: Ics.icRefresh,
                           ),
                         ),
-                        const SizedBox(
-                          width: 10,
-                        ),
+                        const SizedBox(width: 10),
                         Expanded(
                           child: BoxButtonWidget(
                             onTap: () =>
@@ -110,9 +107,7 @@ class TabWalletDetail extends StatelessWidget {
                             assetImage: Ics.icArrowUpRight,
                           ),
                         ),
-                        const SizedBox(
-                          width: 10,
-                        ),
+                        const SizedBox(width: 10),
                         Expanded(
                           child: BoxButtonWidget(
                             onTap: () => Navigator.pushNamed(context, R.trade),
