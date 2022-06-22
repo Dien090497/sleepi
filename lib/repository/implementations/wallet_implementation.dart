@@ -49,6 +49,7 @@ class WalletImplementation extends IWalletRepository {
       return Right(model.toEntity(
         credentials,
         derivedIndex: derivedIndex,
+        networkName: network.name,
         nativeCurrency: nativeCurrency!.toEntity(balance: balance),
       ));
     } catch (e) {
@@ -110,6 +111,7 @@ class WalletImplementation extends IWalletRepository {
         return Right(model.toEntity(
           credentials,
           derivedIndex: derivedIndex,
+          networkName: network.name,
           nativeCurrency: nativeCurrency!.toEntity(balance: balance),
         ));
       }
@@ -140,13 +142,14 @@ class WalletImplementation extends IWalletRepository {
       final privateKey = _web3DataSource.mnemonicToPrivateKey(
           wallet.mnemonic, wallet.derivedIndex!, network.slip44);
       final credentials = _web3DataSource.credentialsFromPrivateKey(privateKey);
-      log('info wallet  ${wallet.name}   ${wallet.address}  ${wallet.mnemonic}');
+      log('info wallet ${network.name} ${wallet.name}   ${wallet.address}  ${wallet.mnemonic}');
       var balance = await _web3DataSource.getBalance(wallet.address);
 
       var nativeCurrency = await _getNativeCurrency();
       return Right(
         wallet.toEntity(
           credentials,
+          networkName: network.name,
           nativeCurrency: nativeCurrency!.toEntity(balance: balance.toInt()),
         ),
       );

@@ -12,6 +12,7 @@ class WalletInfoEntity with _$WalletInfoEntity {
     required int id,
     required NativeCurrencyEntity nativeCurrency,
     required String address,
+    required String networkName,
     required String name,
     required Credentials credentials,
     int? derivedIndex,

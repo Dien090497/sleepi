@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:slee_fi/common/routes/app_routes.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/widgets/background_widget.dart';
+import 'package:slee_fi/common/widgets/sf_alert_dialog.dart';
 import 'package:slee_fi/common/widgets/sf_back_button.dart';
 import 'package:slee_fi/common/widgets/sf_icon.dart';
 import 'package:slee_fi/l10n/locale_keys.g.dart';
@@ -9,6 +10,8 @@ import 'package:slee_fi/presentation/screens/passcode/passcode_screen.dart';
 import 'package:slee_fi/presentation/screens/wallet/widgets/tab_bar_icon.dart';
 import 'package:slee_fi/presentation/screens/wallet/widgets/tab_spending_detail.dart';
 import 'package:slee_fi/presentation/screens/wallet/widgets/tab_wallet_detail.dart';
+import 'package:slee_fi/presentation/screens/wallet_creation_warning/widgets/pop_up_avalanche_wallet.dart';
+import 'package:slee_fi/presentation/screens/wallet_creation_warning/widgets/pop_up_wallet_warning.dart';
 import 'package:slee_fi/resources/resources.dart';
 
 class WalletScreen extends StatefulWidget {
@@ -60,6 +63,16 @@ class _WalletScreenState extends State<WalletScreen> {
                 setState(() {
                   indexTap = i;
                 });
+
+                if (i == 1) {
+                  showCustomAlertDialog(
+                    context,
+                    barrierDismissible: false,
+                    children: const PopUpAvalancheWallet(),
+                  ).then((value) {
+                    _showWarningDialog(value, context);
+                  });
+                }
               },
               index: indexTap,
             ),
@@ -73,5 +86,11 @@ class _WalletScreenState extends State<WalletScreen> {
         ),
       ),
     );
+  }
+
+  _showWarningDialog(dynamic value, BuildContext context) {
+    if (value != null && value == true) {
+      showCustomAlertDialog(context, children: const PopUpWalletWarning());
+    }
   }
 }

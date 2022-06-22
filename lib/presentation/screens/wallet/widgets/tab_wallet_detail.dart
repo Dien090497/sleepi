@@ -8,7 +8,6 @@ import 'package:slee_fi/common/extensions/string_x.dart';
 import 'package:slee_fi/common/routes/app_routes.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
-import 'package:slee_fi/common/widgets/sf_alert_dialog.dart';
 import 'package:slee_fi/common/widgets/sf_bottom_sheet.dart';
 import 'package:slee_fi/common/widgets/sf_icon.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
@@ -19,12 +18,8 @@ import 'package:slee_fi/presentation/screens/wallet/widgets/box_button_widget.da
 import 'package:slee_fi/presentation/screens/wallet/widgets/modal_receive_wallet.dart';
 import 'package:slee_fi/presentation/screens/wallet/widgets/pop_up_info_wallet.dart';
 import 'package:slee_fi/presentation/screens/wallet/widgets/wallet_detail_list.dart';
-import 'package:slee_fi/presentation/screens/wallet_creation_warning/widgets/pop_up_avalanche_wallet.dart';
-import 'package:slee_fi/presentation/screens/wallet_creation_warning/widgets/pop_up_wallet_warning.dart';
 import 'package:slee_fi/resources/resources.dart';
 import 'package:url_launcher/url_launcher.dart';
-
-
 
 class TabWalletDetail extends StatelessWidget {
   const TabWalletDetail({Key? key}) : super(key: key);
@@ -36,17 +31,7 @@ class TabWalletDetail extends StatelessWidget {
       child: BlocProvider(
         create: (context) => WalletCubit()..loadCurrentWallet(),
         child: BlocConsumer<WalletCubit, WalletState>(
-          listener: (context, state) {
-            if (state is WalletStateEmpty) {
-              showCustomAlertDialog(
-                context,
-                barrierDismissible: false,
-                children: const PopUpAvalancheWallet(),
-              ).then((value) {
-                _showWarningDialog(value, context);
-              });
-            }
-          },
+          listener: (context, state) {},
           builder: (context, state) {
             return Column(
               children: [
@@ -55,13 +40,13 @@ class TabWalletDetail extends StatelessWidget {
                   children: [
                     SFText(
                         keyText: state is WalletStateSuccess
-                            ? state.walletInfoEntity.nativeCurrency.name
+                            ? state.walletInfoEntity.networkName
                             : "AVAX C-Chain",
                         style: TextStyles.bold12Blue),
                     const SizedBox(height: 4.0),
                     SFText(
                         keyText: state is WalletStateSuccess
-                            ? '${(state.walletInfoEntity.nativeCurrency.balance / pow(10, 18))}   ${state.walletInfoEntity.nativeCurrency.symbol}'
+                            ? '${(state.walletInfoEntity.nativeCurrency.balance / pow(10, 18))} ${state.walletInfoEntity.nativeCurrency.symbol}'
                             : "0 AVAX",
                         style: TextStyles.bold30White),
                     const SizedBox(height: 20.0),
@@ -190,11 +175,5 @@ class TabWalletDetail extends StatelessWidget {
         ),
       ),
     );
-  }
-
-  _showWarningDialog(dynamic value, BuildContext context) {
-    if (value != null && value == true) {
-      showCustomAlertDialog(context, children: const PopUpWalletWarning());
-    }
   }
 }
