@@ -13,7 +13,7 @@ class PopUpAvalancheWallet extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var enableBack = false;
+    var enableBack = true;
     return WillPopScope(
         child: Padding(
           padding: const EdgeInsets.fromLTRB(16, 0, 16, 16),

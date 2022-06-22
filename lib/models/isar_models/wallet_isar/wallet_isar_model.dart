@@ -47,11 +47,13 @@ class WalletIsarModel {
 
   WalletInfoEntity toEntity(
     Credentials credentials, {
+    required String networkName,
     required NativeCurrencyEntity nativeCurrency,
     int? derivedIndex,
   }) {
     assert(id != null, "Id must be assigned");
     return WalletInfoEntity(
+      networkName: networkName,
       id: id!,
       address: address,
       credentials: credentials,
