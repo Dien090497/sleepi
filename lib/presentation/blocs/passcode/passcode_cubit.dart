@@ -1,39 +1,59 @@
-import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:slee_fi/di/injector.dart';
-import 'package:slee_fi/entities/wallet_info/wallet_info_entity.dart';
 import 'package:slee_fi/failures/failure.dart';
 import 'package:slee_fi/presentation/blocs/passcode/passcode_state.dart';
 import 'package:slee_fi/usecase/create_pass_code_usecase.dart';
+import 'package:slee_fi/usecase/get_passcode_usecase.dart';
 
-class PasscodeCubit extends Cubit<PasscodeState>{
-  PasscodeCubit(String passcode, String mnemonic)
-      : super(PasscodeState.initial(passcode,
-      mnemonic: mnemonic));
-
-  final TextEditingController passCodeController = TextEditingController();
+class PasscodeCubit extends Cubit<PasscodeState> {
+  PasscodeCubit()
+      : super(const PasscodeState.initial());
 
   final _createPassCodeUC = getIt<CreatePassCodeUseCase>();
+  final _passcode = getIt<GetPassCodeUseCase>();
 
-  void createPassCode(WalletInfoEntity wallet) async {
+  void init(){
+    emit(const PasscodeState.initial());
+  }
+
+
+  Future<void> checkPassCode(String pass) async {
     final currentState = state;
     if (currentState is PasscodeStateInitial) {
-      final passCode = passCodeController.text;
-      final result = await _createPassCodeUC.call(passCode);
+      final result = await _passcode.call(pass);
 
       result.fold(
             (l) {
-          emit(
-              PasscodeState.error(l is FailureMessage ? l.msg : '$l'));
+          emit(PasscodeState.error(l is FailureMessage ? l.msg : '$l'));
           emit(currentState.copyWith(isLoading: false));
         },
             (success) {
           if (success) {
-            emit(PasscodeState.done(wallet));
+            emit(const PasscodeState.valid());
+          }else{
+            emit(const PasscodeState.inValid());
           }
         },
       );
     }
   }
 
+  void createPassCode(String pass) async {
+    final currentState = state;
+    if (currentState is PasscodeStateInitial) {
+      final result = await _createPassCodeUC.call(pass);
+
+      result.fold(
+        (l) {
+          emit(PasscodeState.error(l is FailureMessage ? l.msg : '$l'));
+          emit(currentState.copyWith(isLoading: false));
+        },
+        (success) {
+          if (success) {
+            emit(PasscodeState.done(pass));
+          }
+        },
+      );
+    }
+  }
 }
