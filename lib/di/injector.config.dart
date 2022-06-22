@@ -15,6 +15,7 @@ import 'package:injectable/injectable.dart' as _i2;
 import 'package:isar/isar.dart' as _i11;
 import 'package:shared_preferences/shared_preferences.dart' as _i15;
 
+<<<<<<< HEAD
 import '../common/utils/appsflyer_custom.dart' as _i3;
 import '../common/utils/date_time_utils.dart' as _i5;
 import '../common/utils/random_utils.dart' as _i14;
@@ -34,6 +35,27 @@ import '../usecase/run_app_init_usecase.dart' as _i21;
 import '../usecase/wallet/create_wallet_usecase.dart' as _i24;
 import '../usecase/wallet/current_wallet_usecase.dart' as _i25;
 import '../usecase/wallet/import_wallet_usecase.dart' as _i20;
+=======
+import '../common/utils/date_time_utils.dart' as _i4;
+import '../common/utils/random_utils.dart' as _i13;
+import '../common/utils/toast_utils.dart' as _i15;
+import '../datasources/local/get_storage_datasource.dart' as _i9;
+import '../datasources/local/isar/isar_datasource.dart' as _i11;
+import '../datasources/local/secure_storage.dart' as _i21;
+import '../datasources/local/shared_preference_datasource.dart' as _i22;
+import '../datasources/remote/network/web3_datasource.dart' as _i16;
+import '../repository/auth_repository.dart' as _i25;
+import '../repository/implementations/auth_implementation.dart' as _i26;
+import '../repository/implementations/wallet_implementation.dart' as _i18;
+import '../repository/implementations/wallet_repository.dart' as _i17;
+import '../usecase/create_pass_code_usecase.dart' as _i27;
+import '../usecase/get_passcode_usecase.dart' as _i28;
+import '../usecase/login_usecase.dart' as _i12;
+import '../usecase/run_app_init_usecase.dart' as _i20;
+import '../usecase/wallet/create_wallet_usecase.dart' as _i23;
+import '../usecase/wallet/current_wallet_usecase.dart' as _i24;
+import '../usecase/wallet/import_wallet_usecase.dart' as _i19;
+>>>>>>> develop
 import 'register_module.dart' as _i29; // ignore_for_file: unnecessary_lambdas
 
 // ignore_for_file: lines_longer_than_80_chars
@@ -62,6 +84,7 @@ Future<_i1.GetIt> $initGetIt(_i1.GetIt get,
   gh.factory<_i14.RandomUtils>(() => _i14.RandomUtils());
   await gh.factoryAsync<_i15.SharedPreferences>(() => registerModule.sharedPref,
       preResolve: true);
+<<<<<<< HEAD
   gh.factory<_i10.StorageKeys>(() => _i10.StorageKeys());
   gh.factory<_i16.ToastUtils>(() => _i16.ToastUtils());
   gh.singleton<_i17.Web3DataSource>(_i17.Web3DataSource(get<_i4.Client>()));
@@ -88,6 +111,35 @@ Future<_i1.GetIt> $initGetIt(_i1.GetIt get,
       () => _i27.AuthImplementation(get<_i22.SecureStorage>()));
   gh.factory<_i28.CreatePassCodeUseCase>(
       () => _i28.CreatePassCodeUseCase(get<_i26.IAuthRepository>()));
+=======
+  gh.factory<_i9.StorageKeys>(() => _i9.StorageKeys());
+  gh.factory<_i15.ToastUtils>(() => _i15.ToastUtils());
+  gh.singleton<_i16.Web3DataSource>(_i16.Web3DataSource(get<_i3.Client>()));
+  gh.factory<_i17.IWalletRepository>(() => _i18.WalletImplementation(
+      get<_i16.Web3DataSource>(),
+      get<_i9.GetStorageDataSource>(),
+      get<_i11.IsarDataSource>()));
+  gh.factory<_i19.ImportWalletUseCase>(
+      () => _i19.ImportWalletUseCase(get<_i17.IWalletRepository>()));
+  gh.factory<_i20.RunAppInitUseCase>(() => _i20.RunAppInitUseCase(
+      get<_i16.Web3DataSource>(),
+      get<_i11.IsarDataSource>(),
+      get<_i9.GetStorageDataSource>()));
+  gh.factory<_i21.SecureStorage>(() => _i21.SecureStorage(
+      get<_i7.FlutterSecureStorage>(), get<_i14.SharedPreferences>()));
+  gh.factory<_i22.SharedPreferenceDataSource>(
+      () => _i22.SharedPreferenceDataSource(get<_i14.SharedPreferences>()));
+  gh.factory<_i23.CreateWalletUseCase>(
+      () => _i23.CreateWalletUseCase(get<_i17.IWalletRepository>()));
+  gh.factory<_i24.CurrentWalletUsecase>(
+      () => _i24.CurrentWalletUsecase(get<_i17.IWalletRepository>()));
+  gh.factory<_i25.IAuthRepository>(
+      () => _i26.AuthImplementation(get<_i21.SecureStorage>()));
+  gh.factory<_i27.CreatePassCodeUseCase>(
+      () => _i27.CreatePassCodeUseCase(get<_i25.IAuthRepository>()));
+  gh.factory<_i28.GetPassCodeUseCase>(
+      () => _i28.GetPassCodeUseCase(get<_i25.IAuthRepository>()));
+>>>>>>> develop
   return get;
 }
 

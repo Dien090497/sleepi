@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:dartz/dartz.dart';
 import 'package:injectable/injectable.dart';
 import 'package:slee_fi/datasources/local/secure_storage.dart';
@@ -13,7 +15,7 @@ class AuthImplementation extends IAuthRepository {
   @override
   Future<Either<Failure, bool>> createPassCode(String passcode) async {
     assert(passcode.isNotEmpty && passcode.length == 6,
-    'Pass Code must not be empty');
+        'Pass Code must not be empty');
     try {
       await _secureStorage.writePassCode(passcode);
       return const Right(true);
@@ -21,10 +23,26 @@ class AuthImplementation extends IAuthRepository {
       return Left(FailureMessage('$e'));
     }
   }
+
   @override
   Future<Either<Failure, String>> logIn() async {
     try {
       return const Right('');
+    } catch (e) {
+      return Left(FailureMessage('$e'));
+    }
+  }
+
+  @override
+  Future<Either<Failure, bool>> checkPassCode(String passcode) async {
+    try {
+      String? pass = await _secureStorage.readPassCode();
+      if(pass == null){
+        await _secureStorage.writePassCode(passcode);
+        return const Right(true);
+      }
+      log('passcode: $pass');
+      return Right(passcode == pass);
     } catch (e) {
       return Left(FailureMessage('$e'));
     }
