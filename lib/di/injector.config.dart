@@ -26,7 +26,7 @@ import '../datasources/remote/network/web3_datasource.dart' as _i16;
 import '../repository/auth_repository.dart' as _i25;
 import '../repository/implementations/auth_implementation.dart' as _i26;
 import '../repository/implementations/wallet_implementation.dart' as _i18;
-import '../repository/implementations/wallet_repository.dart' as _i17;
+import '../repository/wallet_repository.dart' as _i17;
 import '../usecase/create_pass_code_usecase.dart' as _i27;
 import '../usecase/get_passcode_usecase.dart' as _i28;
 import '../usecase/login_usecase.dart' as _i12;
