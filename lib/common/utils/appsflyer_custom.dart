@@ -1,10 +1,9 @@
-import 'dart:developer';
 
 import 'package:appsflyer_sdk/appsflyer_sdk.dart';
 import 'package:flutter/foundation.dart';
 import 'package:injectable/injectable.dart';
 
-@Injectable()
+@Singleton()
 class AppFlyerCustom {
   AppsFlyerOptions appsFlyerOptions = AppsFlyerOptions(
     afDevKey: 'qCWYnmVaZy4cwWWjm3RB5P',
@@ -22,28 +21,20 @@ class AppFlyerCustom {
         registerOnDeepLinkingCallback: true);
 
     _appsflyerSdk.onInstallConversionData((res) {
-      log("res: onInstallConversionData $res");
     });
 
     _appsflyerSdk.onAppOpenAttribution((res) {
-      log(" res: onAppOpenAttribution: $res");
     });
 
     _appsflyerSdk.onDeepLinking((DeepLinkResult dp) {
       switch (dp.status) {
         case Status.FOUND:
-          log('${dp.deepLink?.toString()}');
-          log('${dp.toJson()}');
-          log("deep link value: ${dp.deepLink?.deepLinkValue}");
           break;
         case Status.NOT_FOUND:
-          log("deep link not found");
           break;
         case Status.ERROR:
-          log("deep link error: ${dp.error}");
           break;
         case Status.PARSE_ERROR:
-          log("deep link status parsing error");
           break;
       }
     });
