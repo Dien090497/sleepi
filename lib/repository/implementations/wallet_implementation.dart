@@ -10,7 +10,7 @@ import 'package:slee_fi/failures/failure.dart';
 import 'package:slee_fi/models/isar_models/native_currency_isar/native_currency_isar_model.dart';
 import 'package:slee_fi/models/isar_models/network_isar/network_isar_model.dart';
 import 'package:slee_fi/models/isar_models/wallet_isar/wallet_isar_model.dart';
-import 'package:slee_fi/repository/implementations/wallet_repository.dart';
+import 'package:slee_fi/repository/wallet_repository.dart';
 
 @Injectable(as: IWalletRepository)
 class WalletImplementation extends IWalletRepository {
