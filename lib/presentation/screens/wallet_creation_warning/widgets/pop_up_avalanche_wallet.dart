@@ -6,6 +6,7 @@ import 'package:slee_fi/common/widgets/sf_button_outlined.dart';
 import 'package:slee_fi/common/widgets/sf_buttons.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
 import 'package:slee_fi/l10n/locale_keys.g.dart';
+import 'package:slee_fi/presentation/screens/passcode/create_passcode_screen.dart';
 
 class PopUpAvalancheWallet extends StatelessWidget {
   const PopUpAvalancheWallet({Key? key}) : super(key: key);
@@ -33,15 +34,19 @@ class PopUpAvalancheWallet extends StatelessWidget {
                     borderColor: AppColors.blue,
                     onPressed: () {
                       Navigator.pop(context);
-                      Navigator.pushNamed(context, R.createWallet)
-                          .then((value) {
-                        if (value != null && value == true) {
-                          Navigator.pop(context, value);
-                        }
-                      });
+                      Navigator.pushNamed(context, R.createPasscode,
+                          arguments: CreatePasscodeArguments(R.createWallet));
+                      // Navigator.pushNamed(context, R.createWallet)
+                      //     .then((value) {
+                      //   if (value != null && value == true) {
+                      //     Navigator.pop(context, value);
+                      //   }
+                      // });
                     },
                   )),
-              const SizedBox(height: 17),
+              const SizedBox(
+                height: 17,
+              ),
               SFButton(
                 text: LocaleKeys.import_a_wallet_using_seed_phrase,
                 textStyle: TextStyles.w600WhiteSize16,

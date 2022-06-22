@@ -28,12 +28,13 @@ import '../repository/implementations/auth_implementation.dart' as _i26;
 import '../repository/implementations/wallet_implementation.dart' as _i18;
 import '../repository/implementations/wallet_repository.dart' as _i17;
 import '../usecase/create_pass_code_usecase.dart' as _i27;
+import '../usecase/get_passcode_usecase.dart' as _i28;
 import '../usecase/login_usecase.dart' as _i12;
 import '../usecase/run_app_init_usecase.dart' as _i20;
 import '../usecase/wallet/create_wallet_usecase.dart' as _i23;
 import '../usecase/wallet/current_wallet_usecase.dart' as _i24;
 import '../usecase/wallet/import_wallet_usecase.dart' as _i19;
-import 'register_module.dart' as _i28; // ignore_for_file: unnecessary_lambdas
+import 'register_module.dart' as _i29; // ignore_for_file: unnecessary_lambdas
 
 // ignore_for_file: lines_longer_than_80_chars
 /// initializes the registration of provided dependencies inside of [GetIt]
@@ -85,9 +86,11 @@ Future<_i1.GetIt> $initGetIt(_i1.GetIt get,
       () => _i26.AuthImplementation(get<_i21.SecureStorage>()));
   gh.factory<_i27.CreatePassCodeUseCase>(
       () => _i27.CreatePassCodeUseCase(get<_i25.IAuthRepository>()));
+  gh.factory<_i28.GetPassCodeUseCase>(
+      () => _i28.GetPassCodeUseCase(get<_i25.IAuthRepository>()));
   return get;
 }
 
 class _$RPCModule extends _i16.RPCModule {}
 
-class _$RegisterModule extends _i28.RegisterModule {}
+class _$RegisterModule extends _i29.RegisterModule {}
