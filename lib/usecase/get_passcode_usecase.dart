@@ -9,7 +9,7 @@ class GetPassCodeUseCase extends UseCase<bool, String> {
   GetPassCodeUseCase(this._authRepository);
 
   @override
-  Future<Either<Failure, bool>> call(String passcode) {
-    return _authRepository.checkPassCode(passcode);
+  Future<Either<Failure, bool>> call(String params) {
+    return _authRepository.checkPassCode(params);
   }
 }
