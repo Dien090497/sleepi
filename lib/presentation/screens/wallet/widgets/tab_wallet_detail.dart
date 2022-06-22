@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -46,7 +44,7 @@ class TabWalletDetail extends StatelessWidget {
                     const SizedBox(height: 4.0),
                     SFText(
                         keyText: state is WalletStateSuccess
-                            ? '${(state.walletInfoEntity.nativeCurrency.balance / pow(10, 18))} ${state.walletInfoEntity.nativeCurrency.symbol}'
+                            ? '${state.balance} ${state.walletInfoEntity.nativeCurrency.symbol}'
                             : "0 AVAX",
                         style: TextStyles.bold30White),
                     const SizedBox(height: 20.0),

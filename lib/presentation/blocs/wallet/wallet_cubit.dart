@@ -1,13 +1,10 @@
-import 'dart:developer';
+import 'dart:math';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:slee_fi/di/injector.dart';
-import 'package:slee_fi/failures/failure.dart';
 import 'package:slee_fi/presentation/blocs/wallet/wallet_state.dart';
 import 'package:slee_fi/usecase/usecase.dart';
 import 'package:slee_fi/usecase/wallet/current_wallet_usecase.dart';
-
-
 
 class WalletCubit extends Cubit<WalletState> {
   WalletCubit() : super(const WalletState.initial());
@@ -19,13 +16,10 @@ class WalletCubit extends Cubit<WalletState> {
 
     result.fold((l) {
       emit(const WalletState.empty());
-      log('WalletCubit on failed   ${l is FailureMessage ? l.msg : '$l'} ');
     }, (r) {
-      log('WalletCubit on success ');
-
-      emit(WalletState.success(walletInfoEntity: r));
+      var balance = r.nativeCurrency.balance / pow(10, 18);
+      if(balance == 0.0) balance = 0;
+      emit(WalletState.success(walletInfoEntity: r, balance: balance));
     });
   }
-
-
 }

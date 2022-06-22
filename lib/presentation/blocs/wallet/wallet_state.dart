@@ -10,6 +10,6 @@ class WalletState with _$WalletState {
   const factory WalletState.loading() = WalletStateLoading;
   const factory WalletState.empty() = WalletStateEmpty;
 
-  const factory WalletState.success({required WalletInfoEntity walletInfoEntity}) =
+  const factory WalletState.success({required WalletInfoEntity walletInfoEntity,required double balance}) =
       WalletStateSuccess;
 }
