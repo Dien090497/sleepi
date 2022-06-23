@@ -43,68 +43,74 @@ class TabItemsBuy extends StatelessWidget {
 
     return DefaultTabController(
       length: 2,
-      child: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 12.w),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            TabBarFilter(
-              tabTexts: const [LocaleKeys.buy, LocaleKeys.rent],
-              onFilterTap: () {
-                showFilterModalBottomSheet(
-                  context,
-                  sections: {
-                    LocaleKeys.type: [
-                      LocaleKeys.efficiency.tr(),
-                      LocaleKeys.luck.tr(),
-                      LocaleKeys.resilience.tr(),
-                      LocaleKeys.special.tr(),
-                    ],
-                  },
-                  sliders: {
-                    LocaleKeys.level:
-                        const FilterSliderValues(max: 5, min: 1, interval: 2),
-                  },
-                );
-              },
-            ),
-            const SizedBox(height: 12),
-            Expanded(
-              child: TabBarView(
+      child: Column(
+        children: [
+          TabBarFilter(
+            tabTexts: const [LocaleKeys.buy, LocaleKeys.rent],
+            onFilterTap: () {
+              showFilterModalBottomSheet(
+                context,
+                sections: {
+                  LocaleKeys.type: [
+                    LocaleKeys.efficiency.tr(),
+                    LocaleKeys.luck.tr(),
+                    LocaleKeys.resilience.tr(),
+                    LocaleKeys.special.tr(),
+                  ],
+                },
+                sliders: {
+                  LocaleKeys.level:
+                      const FilterSliderValues(max: 5, min: 1, interval: 2),
+                },
+              );
+            },
+          ),
+          Expanded(
+            child: Padding(
+              padding: EdgeInsets.symmetric(horizontal: 12.w),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  SFGridView(
-                    count: items.length,
-                    isScroll: true,
-                    childAspectRatio: 8 / 10,
-                    itemBuilder: (context, i) {
-                      String id = randomUtils.randomId();
-                      return GestureDetector(
-                        onTap: () {
-                          _showItemDialog(context, items[i].image, id);
-                        },
-                        child: ItemBedBuyWidget(
-                          id: id,
-                          item: items[i % ItemType.values.length],
-                          onPressedButton: () {
-                            _showItemDialog(context, items[i].image, id);
+                  const SizedBox(height: 12),
+                  Expanded(
+                    child: TabBarView(
+                      children: [
+                        SFGridView(
+                          count: items.length,
+                          isScroll: true,
+                          childAspectRatio: 8 / 10,
+                          itemBuilder: (context, i) {
+                            String id = randomUtils.randomId();
+                            return GestureDetector(
+                              onTap: () {
+                                _showItemDialog(context, items[i].image, id);
+                              },
+                              child: ItemBedBuyWidget(
+                                id: id,
+                                item: items[i % ItemType.values.length],
+                                onPressedButton: () {
+                                  _showItemDialog(context, items[i].image, id);
+                                },
+                              ),
+                            );
                           },
                         ),
-                      );
-                    },
-                  ),
-                  Padding(
-                    padding: EdgeInsets.only(
-                        bottom: MediaQuery.of(context).size.height * 0.3),
-                    child: const Center(
-                      child: SFIcon(Ics.commingSoon),
+                        Padding(
+                          padding: EdgeInsets.only(
+                              bottom: MediaQuery.of(context).size.height * 0.3),
+                          child: const Center(
+                            child: SFIcon(Ics.commingSoon),
+                          ),
+                        )
+                        // SFGridView(
+                      ],
                     ),
-                  )
-                  // SFGridView(
+                  ),
                 ],
               ),
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }

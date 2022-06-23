@@ -32,6 +32,7 @@ class SFDropDownRotation<T> extends StatelessWidget {
     return Container(
       height: dropdownHeight ?? 40,
       width: dropdownWidth,
+      // constraints: BoxConstraints(maxWidth: 90.w),
       decoration: BoxDecoration(
         border: Border.all(width: 1, color: AppColors.white.withOpacity(0.1)),
         borderRadius: BorderRadius.circular(8),
@@ -57,23 +58,21 @@ class SFDropDownRotation<T> extends StatelessWidget {
         items: spinnerItems
             .asMap()
             .entries
-            .map(
-              (item) => DropdownItem<int>(
-                value: item.key + 1,
-                child: Container(
-                  color: item.value == value
-                      ? selectedItemHighlightColor
-                      : Colors.transparent,
-                  padding:
-                      const EdgeInsets.symmetric(vertical: 8, horizontal: 12),
-                  child: SFText(
-                    keyText: '${item.value ?? ''}',
-                    maxLines: 1,
-                    style: TextStyles.lightWhite16,
+            .map((item) => DropdownItem<int>(
+                  value: item.key + 1,
+                  child: Container(
+                    color: item.value == value
+                        ? selectedItemHighlightColor
+                        : Colors.transparent,
+                    padding:
+                        const EdgeInsets.symmetric(vertical: 8, horizontal: 12),
+                    child: SFText(
+                      keyText: '${item.value ?? ''}',
+                      maxLines: 1,
+                      style: TextStyles.lightWhite16,
+                    ),
                   ),
-                ),
-              ),
-            )
+                ))
             .toList(),
         itemValues: spinnerItems
             .asMap()
@@ -93,7 +92,7 @@ class SFDropDownRotation<T> extends StatelessWidget {
             )
             .toList(),
         listValue: spinnerItems,
-        child: Container(
+        child: Padding(
           padding: const EdgeInsets.symmetric(vertical: 8),
           child: SFText(
             keyText: '${value ?? ' '}',
@@ -191,7 +190,7 @@ class _CustomDropdownState<T> extends State<CustomDropdown<T>>
           width: style.width,
           height: style.height,
           child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 8.0),
+            padding: const EdgeInsets.only(left: 8, right: 2),
             child: Row(
               mainAxisAlignment:
                   style.mainAxisAlignment ?? MainAxisAlignment.center,
@@ -204,9 +203,7 @@ class _CustomDropdownState<T> extends State<CustomDropdown<T>>
                 ] else ...[
                   widget.itemValues[_currentIndex],
                 ],
-                const SizedBox(
-                  width: 8,
-                ),
+                const SizedBox(width: 2),
                 if (!widget.hideIcon)
                   RotationTransition(
                     turns: _rotateAnimation!,

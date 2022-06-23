@@ -50,75 +50,81 @@ class TabJewelsBuy extends StatelessWidget {
 
     return DefaultTabController(
       length: 2,
-      child: Padding(
-        padding:  EdgeInsets.symmetric(horizontal: 12.w),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            TabBarFilter(
-              tabTexts: const [LocaleKeys.buy, LocaleKeys.rent],
-              onFilterTap: () {
-                showFilterModalBottomSheet(
-                  context,
-                  sections: {
-                    LocaleKeys.type: [
-                      LocaleKeys.efficiency.tr(),
-                      LocaleKeys.luck.tr(),
-                      LocaleKeys.resilience.tr(),
-                      LocaleKeys.special.tr(),
-                      LocaleKeys.bonus.tr(),
-                    ],
-                  },
-                  sliders: {
-                    LocaleKeys.level:
-                        const FilterSliderValues(max: 5, min: 1, interval: 2),
-                  },
-                );
-              },
-            ),
-            const SizedBox(height: 12),
-            Expanded(
-              child: TabBarView(
+      child: Column(
+        children: [
+          TabBarFilter(
+            tabTexts: const [LocaleKeys.buy, LocaleKeys.rent],
+            onFilterTap: () {
+              showFilterModalBottomSheet(
+                context,
+                sections: {
+                  LocaleKeys.type: [
+                    LocaleKeys.efficiency.tr(),
+                    LocaleKeys.luck.tr(),
+                    LocaleKeys.resilience.tr(),
+                    LocaleKeys.special.tr(),
+                    LocaleKeys.bonus.tr(),
+                  ],
+                },
+                sliders: {
+                  LocaleKeys.level:
+                      const FilterSliderValues(max: 5, min: 1, interval: 2),
+                },
+              );
+            },
+          ),
+          Expanded(
+            child: Padding(
+              padding: EdgeInsets.symmetric(horizontal: 12.w),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  SFGridView(
-                    count: 20,
-                    childAspectRatio: 8 / 10,
-                    itemBuilder: (context, i) {
-                      String id = randomUtils.randomId();
-                      return GestureDetector(
-                        onTap: () {
-                          _showJewelDialog(context, jewels[i], id);
-                        },
-                        child: JewelsBuyWidget(
-                          id: id,
-                          icon: jewels[i % jewels.length],
-                          onPressedButton: () {
-                            _showJewelDialog(context, jewels[i], id);
+                  const SizedBox(height: 12),
+                  Expanded(
+                    child: TabBarView(
+                      children: [
+                        SFGridView(
+                          count: 20,
+                          childAspectRatio: 8 / 10,
+                          itemBuilder: (context, i) {
+                            String id = randomUtils.randomId();
+                            return GestureDetector(
+                              onTap: () {
+                                _showJewelDialog(context, jewels[i], id);
+                              },
+                              child: JewelsBuyWidget(
+                                id: id,
+                                icon: jewels[i % jewels.length],
+                                onPressedButton: () {
+                                  _showJewelDialog(context, jewels[i], id);
+                                },
+                              ),
+                            );
                           },
                         ),
-                      );
-                    },
-                  ),
-                  Padding(
-                    padding: EdgeInsets.only(
-                        bottom: MediaQuery.of(context).size.height * 0.3),
-                    child: const Center(
-                      child: SFIcon(Ics.commingSoon),
+                        Padding(
+                          padding: EdgeInsets.only(
+                              bottom: MediaQuery.of(context).size.height * 0.3),
+                          child: const Center(
+                            child: SFIcon(Ics.commingSoon),
+                          ),
+                        )
+                        // SFGridView(
+                        //   count: 20,
+                        //   itemBuilder: (context, i) {
+                        //     return ItemBedBuyWidget(
+                        //       icon: jewels[i % jewels.length],
+                        //     );
+                        //   },
+                        // )
+                      ],
                     ),
-                  )
-                  // SFGridView(
-                  //   count: 20,
-                  //   itemBuilder: (context, i) {
-                  //     return ItemBedBuyWidget(
-                  //       icon: jewels[i % jewels.length],
-                  //     );
-                  //   },
-                  // )
+                  ),
                 ],
               ),
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }
