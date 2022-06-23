@@ -29,7 +29,9 @@
     "name": "Avalanche C-Chain",
     "chain": "AVAX",
     "rpc": [
-      "https://api.avax.network/ext/bc/C/rpc"
+      "https://api.avax.network/ext/bc/C/rpc",
+      "https://rpc.ankr.com/avalanche",
+      "https://ava-mainnet.public.blastapi.io/ext/bc/C/rpc"
     ],
     "faucets": [
       "https://free-online-app.com/faucet-for-eth-evm-chains/"
