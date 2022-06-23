@@ -90,6 +90,7 @@ class TransactionDetail extends StatelessWidget {
                             0.7,
                             const ModalReceiveWallet(
                               address: 'input the address',
+                              networkName: LocaleKeys.avalanche_wallet,
                             ),
                           ),
                           text: LocaleKeys.receive,

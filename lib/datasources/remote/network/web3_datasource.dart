@@ -78,9 +78,12 @@ class Web3DataSource {
   }
 
   Future<void> _tryOtherRpc() async {
+    final currentIndex = _network!.rpc.indexOf(_currentUrl!);
+    if (currentIndex + 1 >= _network!.rpc.length) {
+      throw('error init network');
+    }
     if (_network != null && _currentUrl != null) {
-      final nextUrl =
-          _network!.rpc.elementAt(_network!.rpc.indexOf(_currentUrl!) + 1);
+      final nextUrl = _network!.rpc.elementAt(currentIndex + 1);
       await _setWeb3(nextUrl, _currentWsUrl);
     }
   }
@@ -213,7 +216,7 @@ class Web3DataSource {
       transaction: Transaction(
         from: to,
         to: to,
-        value: EtherAmount.inWei(amounts[0]-BigInt.from(10000000000000000)),
+        value: EtherAmount.inWei(amounts[0] - BigInt.from(10000000000000000)),
         gasPrice: await _web3client?.getGasPrice(),
         nonce: await _web3client?.getTransactionCount(to),
       ),

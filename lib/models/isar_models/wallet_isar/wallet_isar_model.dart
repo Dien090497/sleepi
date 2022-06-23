@@ -57,6 +57,7 @@ class WalletIsarModel {
       id: id!,
       address: address,
       credentials: credentials,
+      mnemonic: mnemonic,
       name: name,
       derivedIndex: derivedIndex ?? this.derivedIndex,
       isImported: isImported,

@@ -22,6 +22,7 @@ mixin _$WalletInfoEntity {
   String get networkName => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
   Credentials get credentials => throw _privateConstructorUsedError;
+  String get mnemonic => throw _privateConstructorUsedError;
   int? get derivedIndex => throw _privateConstructorUsedError;
   bool get isImported =>
       throw _privateConstructorUsedError; // @Default([]) List<TokenEntity> tokens,
@@ -47,6 +48,7 @@ abstract class $WalletInfoEntityCopyWith<$Res> {
       String networkName,
       String name,
       Credentials credentials,
+      String mnemonic,
       int? derivedIndex,
       bool isImported,
       List<String> nfts,
@@ -73,6 +75,7 @@ class _$WalletInfoEntityCopyWithImpl<$Res>
     Object? networkName = freezed,
     Object? name = freezed,
     Object? credentials = freezed,
+    Object? mnemonic = freezed,
     Object? derivedIndex = freezed,
     Object? isImported = freezed,
     Object? nfts = freezed,
@@ -104,6 +107,10 @@ class _$WalletInfoEntityCopyWithImpl<$Res>
           ? _value.credentials
           : credentials // ignore: cast_nullable_to_non_nullable
               as Credentials,
+      mnemonic: mnemonic == freezed
+          ? _value.mnemonic
+          : mnemonic // ignore: cast_nullable_to_non_nullable
+              as String,
       derivedIndex: derivedIndex == freezed
           ? _value.derivedIndex
           : derivedIndex // ignore: cast_nullable_to_non_nullable
@@ -149,6 +156,7 @@ abstract class _$$_WalletInfoEntityCopyWith<$Res>
       String networkName,
       String name,
       Credentials credentials,
+      String mnemonic,
       int? derivedIndex,
       bool isImported,
       List<String> nfts,
@@ -178,6 +186,7 @@ class __$$_WalletInfoEntityCopyWithImpl<$Res>
     Object? networkName = freezed,
     Object? name = freezed,
     Object? credentials = freezed,
+    Object? mnemonic = freezed,
     Object? derivedIndex = freezed,
     Object? isImported = freezed,
     Object? nfts = freezed,
@@ -209,6 +218,10 @@ class __$$_WalletInfoEntityCopyWithImpl<$Res>
           ? _value.credentials
           : credentials // ignore: cast_nullable_to_non_nullable
               as Credentials,
+      mnemonic: mnemonic == freezed
+          ? _value.mnemonic
+          : mnemonic // ignore: cast_nullable_to_non_nullable
+              as String,
       derivedIndex: derivedIndex == freezed
           ? _value.derivedIndex
           : derivedIndex // ignore: cast_nullable_to_non_nullable
@@ -245,6 +258,7 @@ class _$_WalletInfoEntity
       required this.networkName,
       required this.name,
       required this.credentials,
+      required this.mnemonic,
       this.derivedIndex,
       this.isImported = false,
       final List<String> nfts = const [],
@@ -265,6 +279,8 @@ class _$_WalletInfoEntity
   final String name;
   @override
   final Credentials credentials;
+  @override
+  final String mnemonic;
   @override
   final int? derivedIndex;
   @override
@@ -294,7 +310,7 @@ class _$_WalletInfoEntity
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'WalletInfoEntity(id: $id, nativeCurrency: $nativeCurrency, address: $address, networkName: $networkName, name: $name, credentials: $credentials, derivedIndex: $derivedIndex, isImported: $isImported, nfts: $nfts, transactions: $transactions, image: $image)';
+    return 'WalletInfoEntity(id: $id, nativeCurrency: $nativeCurrency, address: $address, networkName: $networkName, name: $name, credentials: $credentials, mnemonic: $mnemonic, derivedIndex: $derivedIndex, isImported: $isImported, nfts: $nfts, transactions: $transactions, image: $image)';
   }
 
   @override
@@ -308,6 +324,7 @@ class _$_WalletInfoEntity
       ..add(DiagnosticsProperty('networkName', networkName))
       ..add(DiagnosticsProperty('name', name))
       ..add(DiagnosticsProperty('credentials', credentials))
+      ..add(DiagnosticsProperty('mnemonic', mnemonic))
       ..add(DiagnosticsProperty('derivedIndex', derivedIndex))
       ..add(DiagnosticsProperty('isImported', isImported))
       ..add(DiagnosticsProperty('nfts', nfts))
@@ -329,6 +346,7 @@ class _$_WalletInfoEntity
             const DeepCollectionEquality().equals(other.name, name) &&
             const DeepCollectionEquality()
                 .equals(other.credentials, credentials) &&
+            const DeepCollectionEquality().equals(other.mnemonic, mnemonic) &&
             const DeepCollectionEquality()
                 .equals(other.derivedIndex, derivedIndex) &&
             const DeepCollectionEquality()
@@ -348,6 +366,7 @@ class _$_WalletInfoEntity
       const DeepCollectionEquality().hash(networkName),
       const DeepCollectionEquality().hash(name),
       const DeepCollectionEquality().hash(credentials),
+      const DeepCollectionEquality().hash(mnemonic),
       const DeepCollectionEquality().hash(derivedIndex),
       const DeepCollectionEquality().hash(isImported),
       const DeepCollectionEquality().hash(_nfts),
@@ -368,6 +387,7 @@ abstract class _WalletInfoEntity implements WalletInfoEntity {
       required final String networkName,
       required final String name,
       required final Credentials credentials,
+      required final String mnemonic,
       final int? derivedIndex,
       final bool isImported,
       final List<String> nfts,
@@ -386,6 +406,8 @@ abstract class _WalletInfoEntity implements WalletInfoEntity {
   String get name => throw _privateConstructorUsedError;
   @override
   Credentials get credentials => throw _privateConstructorUsedError;
+  @override
+  String get mnemonic => throw _privateConstructorUsedError;
   @override
   int? get derivedIndex => throw _privateConstructorUsedError;
   @override

@@ -23,7 +23,7 @@ class GetStorageDataSource {
   Future<void> setCurrentChainId(int id) =>
       _getStorage.write(StorageKeys.currentChainIdKey, id);
 
-  int? getCurrentWalletId() =>
+  int getCurrentWalletId() =>
       _getStorage.read<int?>(StorageKeys.currentWalletIdKey) ?? 1;
 
   int? getCurrentChainId() =>

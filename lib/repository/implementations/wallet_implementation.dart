@@ -125,10 +125,6 @@ class WalletImplementation extends IWalletRepository {
       _web3DataSource.setCurrentNetwork(testNetwork);
       _getStorageDataSource.setCurrentChainId(testNetwork.chainId);
       var walletId = _getStorageDataSource.getCurrentWalletId();
-      if (walletId == null) {
-        return const Left(FailureMessage('Invalid Wallet'));
-      }
-
       var wallet = await _isarDataSource.getWalletAt(walletId);
 
       if (wallet == null) {
@@ -139,18 +135,23 @@ class WalletImplementation extends IWalletRepository {
       final privateKey = _web3DataSource.mnemonicToPrivateKey(
           wallet.mnemonic, wallet.derivedIndex!, network.slip44);
       final credentials = _web3DataSource.credentialsFromPrivateKey(privateKey);
-      var balance = await _web3DataSource.getBalance(wallet.address);
+      int balance = await _web3DataSource.getBalance(wallet.address);
 
       var nativeCurrency = await _getNativeCurrency();
       return Right(
         wallet.toEntity(
           credentials,
           networkName: network.name,
-          nativeCurrency: nativeCurrency!.toEntity(balance: balance.toInt()),
+          nativeCurrency: nativeCurrency!.toEntity(balance: balance),
         ),
       );
     } catch (e) {
       return Left(FailureMessage('$e'));
     }
+  }
+
+  @override
+  Future<Either<Failure, bool>> checkFirstOpenWallet() async {
+    return const Right(true);
   }
 }

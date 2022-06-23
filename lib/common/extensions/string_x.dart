@@ -4,6 +4,7 @@ import 'package:path/path.dart';
 import 'package:recase/recase.dart';
 import 'package:slee_fi/common/enum/enum.dart';
 import 'package:slee_fi/resources/resources.dart';
+import 'dart:developer' as d;
 
 extension StringX on String {
   String get cryptoIcon => CryptoIcons.values.firstWhere(
@@ -17,7 +18,14 @@ extension StringX on String {
     return this == 'ja-JP';
   }
 
+  get log {
+    d.log(this);
+  }
+
   String get formatAddress {
+    if (isEmpty) {
+      return '';
+    }
     return '${substring(0, 5)}...${substring(length - 5, length)}';
   }
 

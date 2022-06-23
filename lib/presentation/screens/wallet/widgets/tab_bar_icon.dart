@@ -10,8 +10,10 @@ class TabBarIcon extends TabBar {
     required List<String> images,
     required Function(int) onTap,
     required int index,
+    required TabController tabController,
     Key? key,
   }) : super(
+          controller: tabController,
           onTap: onTap,
           tabs: List.generate(
               texts.length,

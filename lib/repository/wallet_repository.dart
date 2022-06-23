@@ -7,4 +7,5 @@ abstract class IWalletRepository{
   Future<Either<Failure, WalletInfoEntity>> currentWallet();
   Future<Either<Failure, WalletInfoEntity>> importWallet(String mnemonic);
   Future<Either<Failure, bool>> swapToken();
+  Future<Either<Failure, bool>> checkFirstOpenWallet();
 }
