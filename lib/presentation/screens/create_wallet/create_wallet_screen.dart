@@ -13,7 +13,7 @@ import 'package:slee_fi/common/widgets/sf_app_bar.dart';
 import 'package:slee_fi/common/widgets/sf_buttons.dart';
 import 'package:slee_fi/common/widgets/sf_card.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
-import 'package:slee_fi/common/widgets/sf_textfield_text_button.dart';
+import 'package:slee_fi/common/widgets/textfield_verification.dart';
 import 'package:slee_fi/di/injector.dart';
 import 'package:slee_fi/l10n/locale_keys.g.dart';
 import 'package:slee_fi/models/pop_with_result.dart';
@@ -98,14 +98,14 @@ class _CreateWalletScreenState extends State<CreateWalletScreen> {
                                       horizontal: 16, vertical: 24),
                                   child: Column(
                                     children: [
-                                      SFTextFieldTextButton(
-                                        controller: otpCodeController,
-                                        labelText:
-                                            LocaleKeys.email_verification_code,
-                                        textButton: LocaleKeys.send_code,
-                                        onPressed: () {},
-                                        errorText: error,
-                                      ),
+                                      TextfieldVerificationEmail(
+                                          maxLength: 6,
+                                          onPressed: () {
+                                            //todo: send otp in here
+                                          },
+                                          controller: otpCodeController,
+                                          valueChanged: (otp) {},
+                                          errorText: ''),
                                       const SizedBox(height: 16),
                                       SFText(
                                         keyText: LocaleKeys
