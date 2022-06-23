@@ -6,12 +6,15 @@ import 'package:slee_fi/common/style/text_styles.dart';
 import 'package:slee_fi/common/widgets/sf_card.dart';
 import 'package:slee_fi/common/widgets/sf_icon.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
+import 'package:slee_fi/entities/token/token_entity.dart';
 import 'package:slee_fi/l10n/locale_keys.g.dart';
 import 'package:slee_fi/presentation/screens/wallet/layouts/transaction_detail_screen.dart';
 import 'package:slee_fi/resources/resources.dart';
 
 class WalletDetailList extends StatelessWidget {
-  const WalletDetailList({Key? key}) : super(key: key);
+  const WalletDetailList({Key? key, required this.tokenList}) : super(key: key);
+
+  final List<TokenEntity> tokenList;
 
   @override
   Widget build(BuildContext context) {
@@ -44,7 +47,8 @@ class WalletDetailList extends StatelessWidget {
       padding: const EdgeInsets.only(top: 20),
       child: SafeArea(
         top: false,
-        child: ListView.builder(
+        child: tokenList.isEmpty ?
+        ListView.builder(
             itemCount: keyList.length,
             physics: const ClampingScrollPhysics(),
             shrinkWrap: true,
@@ -73,12 +77,47 @@ class WalletDetailList extends StatelessWidget {
                   title: SFText(
                       keyText: keyList[index], style: TextStyles.lightWhite16),
                   trailing: SFText(
-                    keyText: "xxxxxxxxx",
+                    keyText: "0.00",
                     style: TextStyles.lightWhite16,
                   ),
                 ),
               );
-            }),
+            }) :
+        ListView.builder(
+            itemCount: tokenList.length,
+            physics: const ClampingScrollPhysics(),
+            shrinkWrap: true,
+            padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 12.0),
+            itemBuilder: (BuildContext context, int index) {
+              return SFCard(
+                onTap: () {
+                  if (index < 3) {
+                    Navigator.pushNamed(context, R.transactionDetail,
+                        arguments: TransactionDetailArguments(
+                          tokenList[index].displayName,
+                          tokenList[index].icon,
+                        ));
+                  }
+                },
+                child: ListTile(
+                  leading: Padding(
+                    padding:
+                    EdgeInsets.only(left: tokenList[index].icon == Ics.icAvax ? 4 : 0),
+                    child: SFIcon(
+                      tokenList[index].icon,
+                      width: tokenList[index].icon == Ics.icAvax ? 32 : 40,
+                      height: tokenList[index].icon == Ics.icAvax ? 32 : 40,
+                    ),
+                  ),
+                  title: SFText(
+                      keyText: tokenList[index].displayName, style: TextStyles.lightWhite16),
+                  trailing: SFText(
+                    keyText: tokenList[index].balance.toStringAsFixed(2),
+                    style: TextStyles.lightWhite16,
+                  ),
+                ),
+              );
+            })
       ),
     );
   }

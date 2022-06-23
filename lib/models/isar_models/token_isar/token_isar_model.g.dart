@@ -15,7 +15,7 @@ extension GetTokenIsarModelCollection on Isar {
 const TokenIsarModelSchema = CollectionSchema(
   name: 'TokenIsarModel',
   schema:
-      '{"name":"TokenIsarModel","idName":"id","properties":[{"name":"address","type":"String"},{"name":"balance","type":"Long"},{"name":"displayName","type":"String"},{"name":"icon","type":"String"},{"name":"name","type":"String"},{"name":"networkChainId","type":"Long"},{"name":"symbol","type":"String"},{"name":"txns","type":"StringList"},{"name":"walletId","type":"Long"}],"indexes":[],"links":[]}',
+      '{"name":"TokenIsarModel","idName":"id","properties":[{"name":"address","type":"String"},{"name":"balance","type":"Double"},{"name":"displayName","type":"String"},{"name":"icon","type":"String"},{"name":"name","type":"String"},{"name":"networkChainId","type":"Long"},{"name":"symbol","type":"String"},{"name":"txns","type":"StringList"},{"name":"walletId","type":"Long"}],"indexes":[],"links":[]}',
   idName: 'id',
   propertyIds: {
     'address': 0,
@@ -107,7 +107,7 @@ void _tokenIsarModelSerializeNative(
   final buffer = IsarNative.bufAsBytes(rawObj.buffer, size);
   final writer = IsarBinaryWriter(buffer, staticSize);
   writer.writeBytes(offsets[0], _address);
-  writer.writeLong(offsets[1], _balance);
+  writer.writeDouble(offsets[1], _balance);
   writer.writeBytes(offsets[2], _displayName);
   writer.writeBytes(offsets[3], _icon);
   writer.writeBytes(offsets[4], _name);
@@ -124,7 +124,7 @@ TokenIsarModel _tokenIsarModelDeserializeNative(
     List<int> offsets) {
   final object = TokenIsarModel(
     address: reader.readString(offsets[0]),
-    balance: reader.readLong(offsets[1]),
+    balance: reader.readDouble(offsets[1]),
     displayName: reader.readString(offsets[2]),
     icon: reader.readString(offsets[3]),
     id: id,
@@ -145,7 +145,7 @@ P _tokenIsarModelDeserializePropNative<P>(
     case 0:
       return (reader.readString(offset)) as P;
     case 1:
-      return (reader.readLong(offset)) as P;
+      return (reader.readDouble(offset)) as P;
     case 2:
       return (reader.readString(offset)) as P;
     case 3:
@@ -419,53 +419,33 @@ extension TokenIsarModelQueryFilter
   }
 
   QueryBuilder<TokenIsarModel, TokenIsarModel, QAfterFilterCondition>
-      balanceEqualTo(int value) {
-    return addFilterConditionInternal(FilterCondition(
-      type: ConditionType.eq,
-      property: 'balance',
-      value: value,
-    ));
-  }
-
-  QueryBuilder<TokenIsarModel, TokenIsarModel, QAfterFilterCondition>
-      balanceGreaterThan(
-    int value, {
-    bool include = false,
-  }) {
+      balanceGreaterThan(double value) {
     return addFilterConditionInternal(FilterCondition(
       type: ConditionType.gt,
-      include: include,
+      include: false,
       property: 'balance',
       value: value,
     ));
   }
 
   QueryBuilder<TokenIsarModel, TokenIsarModel, QAfterFilterCondition>
-      balanceLessThan(
-    int value, {
-    bool include = false,
-  }) {
+      balanceLessThan(double value) {
     return addFilterConditionInternal(FilterCondition(
       type: ConditionType.lt,
-      include: include,
+      include: false,
       property: 'balance',
       value: value,
     ));
   }
 
   QueryBuilder<TokenIsarModel, TokenIsarModel, QAfterFilterCondition>
-      balanceBetween(
-    int lower,
-    int upper, {
-    bool includeLower = true,
-    bool includeUpper = true,
-  }) {
+      balanceBetween(double lower, double upper) {
     return addFilterConditionInternal(FilterCondition.between(
       property: 'balance',
       lower: lower,
-      includeLower: includeLower,
+      includeLower: false,
       upper: upper,
-      includeUpper: includeUpper,
+      includeUpper: false,
     ));
   }
 
@@ -1386,7 +1366,7 @@ extension TokenIsarModelQueryProperty
     return addPropertyNameInternal('address');
   }
 
-  QueryBuilder<TokenIsarModel, int, QQueryOperations> balanceProperty() {
+  QueryBuilder<TokenIsarModel, double, QQueryOperations> balanceProperty() {
     return addPropertyNameInternal('balance');
   }
 
