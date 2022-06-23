@@ -22,7 +22,7 @@ mixin _$TokenEntity {
   String get name => throw _privateConstructorUsedError;
   String get symbol => throw _privateConstructorUsedError;
   String get icon => throw _privateConstructorUsedError;
-  int get balance => throw _privateConstructorUsedError;
+  double get balance => throw _privateConstructorUsedError;
   List<String> get txns => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -42,7 +42,7 @@ abstract class $TokenEntityCopyWith<$Res> {
       String name,
       String symbol,
       String icon,
-      int balance,
+      double balance,
       List<String> txns});
 }
 
@@ -93,7 +93,7 @@ class _$TokenEntityCopyWithImpl<$Res> implements $TokenEntityCopyWith<$Res> {
       balance: balance == freezed
           ? _value.balance
           : balance // ignore: cast_nullable_to_non_nullable
-              as int,
+              as double,
       txns: txns == freezed
           ? _value.txns
           : txns // ignore: cast_nullable_to_non_nullable
@@ -116,7 +116,7 @@ abstract class _$$_TokenEntityCopyWith<$Res>
       String name,
       String symbol,
       String icon,
-      int balance,
+      double balance,
       List<String> txns});
 }
 
@@ -169,7 +169,7 @@ class __$$_TokenEntityCopyWithImpl<$Res> extends _$TokenEntityCopyWithImpl<$Res>
       balance: balance == freezed
           ? _value.balance
           : balance // ignore: cast_nullable_to_non_nullable
-              as int,
+              as double,
       txns: txns == freezed
           ? _value._txns
           : txns // ignore: cast_nullable_to_non_nullable
@@ -205,7 +205,7 @@ class _$_TokenEntity with DiagnosticableTreeMixin implements _TokenEntity {
   @override
   final String icon;
   @override
-  final int balance;
+  final double balance;
   final List<String> _txns;
   @override
   @JsonKey()
@@ -276,7 +276,7 @@ abstract class _TokenEntity implements TokenEntity {
       required final String name,
       required final String symbol,
       required final String icon,
-      required final int balance,
+      required final double balance,
       final List<String> txns}) = _$_TokenEntity;
 
   @override
@@ -292,7 +292,7 @@ abstract class _TokenEntity implements TokenEntity {
   @override
   String get icon => throw _privateConstructorUsedError;
   @override
-  int get balance => throw _privateConstructorUsedError;
+  double get balance => throw _privateConstructorUsedError;
   @override
   List<String> get txns => throw _privateConstructorUsedError;
   @override
