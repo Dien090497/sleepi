@@ -12,12 +12,14 @@ import 'package:slee_fi/presentation/blocs/send_to_external/send_to_external_cub
 import 'package:slee_fi/presentation/blocs/send_to_external/send_to_external_state.dart';
 
 class PopUpConfirmSend extends StatelessWidget {
-  const PopUpConfirmSend({Key? key}) : super(key: key);
+  const PopUpConfirmSend({required this.toAddress, required this.valueInEther, Key? key}) : super(key: key);
 
+  final String toAddress;
+  final double valueInEther;
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (_) => SendToExternalCubit()..init(),
+      create: (context) => SendToExternalCubit(),
       child: BlocConsumer<SendToExternalCubit, SendToExternalState>(
         listener: (context, state) {
           if (state is sendToExternalDone) {
@@ -26,6 +28,8 @@ class PopUpConfirmSend extends StatelessWidget {
         },
         builder: (context, state) {
           final cubit = context.read<SendToExternalCubit>();
+          cubit.toAddress = toAddress;
+          cubit.valueInEther = valueInEther;
           return Padding(
             padding: const EdgeInsets.symmetric(horizontal: 24),
             child: Column(
@@ -63,7 +67,7 @@ class PopUpConfirmSend extends StatelessWidget {
                     ),
                     Expanded(
                         child: SFText(
-                          keyText: "0.007930727 AVAX",
+                          keyText: "$valueInEther AVAX",
                           style: TextStyles.lightWhite16,
                           textAlign: TextAlign.end,
                         )),
@@ -83,7 +87,7 @@ class PopUpConfirmSend extends StatelessWidget {
                     ),
                     Expanded(
                         child: SFText(
-                          keyText: "shgshiusa94Djkus0njhsNsu342Bdh",
+                          keyText: toAddress,
                           style: TextStyles.lightWhite16,
                           textAlign: TextAlign.end,
                         )),
@@ -117,6 +121,7 @@ class PopUpConfirmSend extends StatelessWidget {
                           cubit.sendToExternal();
                           Navigator.pop(context);
                           showSuccessfulDialog(context);
+                          cubit.getBalance();
                         },
                       ),
                     ),

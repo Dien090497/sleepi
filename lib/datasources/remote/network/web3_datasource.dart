@@ -9,7 +9,6 @@ import 'package:http/http.dart';
 import 'package:injectable/injectable.dart';
 import 'package:slee_fi/common/abi/erc721.g.dart';
 import 'package:slee_fi/common/abi/avax.g.dart';
-import 'package:slee_fi/common/const/const.dart';
 import 'package:slee_fi/common/extensions/num_ext.dart';
 import 'package:slee_fi/models/isar_models/network_isar/network_isar_model.dart';
 import 'package:slee_fi/secret.dart';

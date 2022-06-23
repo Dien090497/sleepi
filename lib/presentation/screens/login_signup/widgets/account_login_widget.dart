@@ -33,7 +33,7 @@ class _AccountLoginState extends State<AccountLoginWidget> {
       children: [
         SFText(
           keyText: isLoginSignup
-              ? "${LocaleKeys.login.tr()}/${LocaleKeys.signup.tr()}"
+              ? LocaleKeys.signup.tr()
               : LocaleKeys.account_login.tr(),
           style: TextStyles.bold18LightWhite,
           stringCase: StringCase.upperCase,
@@ -55,7 +55,7 @@ class _AccountLoginState extends State<AccountLoginWidget> {
         const SizedBox(height: 37),
         SFButton(
           text: isLoginSignup
-              ? "${LocaleKeys.login.tr()}/${LocaleKeys.signup.tr()}"
+              ? LocaleKeys.signup.tr()
               : LocaleKeys.login,
           color: AppColors.blue,
           textStyle: TextStyles.w600WhiteSize16,

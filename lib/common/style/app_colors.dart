@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class AppColors {
-
+  static const black = Color(0xFF000000);
   static const qrColor = Color(0xffCBD5E1);
   static const primary = Color(0xFF000000);
 

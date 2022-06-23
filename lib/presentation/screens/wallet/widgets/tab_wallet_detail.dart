@@ -15,6 +15,7 @@ import 'package:slee_fi/common/widgets/sf_text.dart';
 import 'package:slee_fi/l10n/locale_keys.g.dart';
 import 'package:slee_fi/presentation/blocs/wallet/wallet_cubit.dart';
 import 'package:slee_fi/presentation/blocs/wallet/wallet_state.dart';
+import 'package:slee_fi/presentation/screens/send_to_external/send_to_external_screen.dart';
 import 'package:slee_fi/presentation/screens/wallet/widgets/box_button_widget.dart';
 import 'package:slee_fi/presentation/screens/wallet/widgets/modal_receive_wallet.dart';
 import 'package:slee_fi/presentation/screens/wallet/widgets/pop_up_info_wallet.dart';
@@ -102,7 +103,8 @@ class TabWalletDetail extends StatelessWidget {
                         Expanded(
                           child: BoxButtonWidget(
                             onTap: () =>
-                                Navigator.pushNamed(context, R.sendToExternal),
+                                Navigator.pushNamed(context, R.sendToExternal,
+                                    arguments: SendToExternalArguments(state is WalletStateSuccess ? state.walletInfoEntity.nativeCurrency.symbol : "")),
                             text: LocaleKeys.to_external,
                             assetImage: Ics.icArrowUpRight,
                           ),

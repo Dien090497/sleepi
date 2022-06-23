@@ -20,21 +20,30 @@ mixin _$SendToExternalState {
   TResult when<TResult extends Object?>({
     required TResult Function(bool isLoading) initial,
     required TResult Function(SendToExternalEntity entity) done,
-    required TResult Function(String msg) error,
+    required TResult Function() loading,
+    required TResult Function(int balance) getSuccess,
+    required TResult Function(String msg) errorToAddress,
+    required TResult Function(String msg) errorValueInEther,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function(bool isLoading)? initial,
     TResult Function(SendToExternalEntity entity)? done,
-    TResult Function(String msg)? error,
+    TResult Function()? loading,
+    TResult Function(int balance)? getSuccess,
+    TResult Function(String msg)? errorToAddress,
+    TResult Function(String msg)? errorValueInEther,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(bool isLoading)? initial,
     TResult Function(SendToExternalEntity entity)? done,
-    TResult Function(String msg)? error,
+    TResult Function()? loading,
+    TResult Function(int balance)? getSuccess,
+    TResult Function(String msg)? errorToAddress,
+    TResult Function(String msg)? errorValueInEther,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -42,21 +51,32 @@ mixin _$SendToExternalState {
   TResult map<TResult extends Object?>({
     required TResult Function(sendToExternalStateInitial value) initial,
     required TResult Function(sendToExternalDone value) done,
-    required TResult Function(sendToExternalError value) error,
+    required TResult Function(SendToExternalLoading value) loading,
+    required TResult Function(SendToExternalGetSuccess value) getSuccess,
+    required TResult Function(SendToExternalErrorToAddress value)
+        errorToAddress,
+    required TResult Function(SendToExternalErrorValueInEther value)
+        errorValueInEther,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult Function(sendToExternalStateInitial value)? initial,
     TResult Function(sendToExternalDone value)? done,
-    TResult Function(sendToExternalError value)? error,
+    TResult Function(SendToExternalLoading value)? loading,
+    TResult Function(SendToExternalGetSuccess value)? getSuccess,
+    TResult Function(SendToExternalErrorToAddress value)? errorToAddress,
+    TResult Function(SendToExternalErrorValueInEther value)? errorValueInEther,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(sendToExternalStateInitial value)? initial,
     TResult Function(sendToExternalDone value)? done,
-    TResult Function(sendToExternalError value)? error,
+    TResult Function(SendToExternalLoading value)? loading,
+    TResult Function(SendToExternalGetSuccess value)? getSuccess,
+    TResult Function(SendToExternalErrorToAddress value)? errorToAddress,
+    TResult Function(SendToExternalErrorValueInEther value)? errorValueInEther,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -161,7 +181,10 @@ class _$sendToExternalStateInitial
   TResult when<TResult extends Object?>({
     required TResult Function(bool isLoading) initial,
     required TResult Function(SendToExternalEntity entity) done,
-    required TResult Function(String msg) error,
+    required TResult Function() loading,
+    required TResult Function(int balance) getSuccess,
+    required TResult Function(String msg) errorToAddress,
+    required TResult Function(String msg) errorValueInEther,
   }) {
     return initial(isLoading);
   }
@@ -171,7 +194,10 @@ class _$sendToExternalStateInitial
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function(bool isLoading)? initial,
     TResult Function(SendToExternalEntity entity)? done,
-    TResult Function(String msg)? error,
+    TResult Function()? loading,
+    TResult Function(int balance)? getSuccess,
+    TResult Function(String msg)? errorToAddress,
+    TResult Function(String msg)? errorValueInEther,
   }) {
     return initial?.call(isLoading);
   }
@@ -181,7 +207,10 @@ class _$sendToExternalStateInitial
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(bool isLoading)? initial,
     TResult Function(SendToExternalEntity entity)? done,
-    TResult Function(String msg)? error,
+    TResult Function()? loading,
+    TResult Function(int balance)? getSuccess,
+    TResult Function(String msg)? errorToAddress,
+    TResult Function(String msg)? errorValueInEther,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -195,7 +224,12 @@ class _$sendToExternalStateInitial
   TResult map<TResult extends Object?>({
     required TResult Function(sendToExternalStateInitial value) initial,
     required TResult Function(sendToExternalDone value) done,
-    required TResult Function(sendToExternalError value) error,
+    required TResult Function(SendToExternalLoading value) loading,
+    required TResult Function(SendToExternalGetSuccess value) getSuccess,
+    required TResult Function(SendToExternalErrorToAddress value)
+        errorToAddress,
+    required TResult Function(SendToExternalErrorValueInEther value)
+        errorValueInEther,
   }) {
     return initial(this);
   }
@@ -205,7 +239,10 @@ class _$sendToExternalStateInitial
   TResult? mapOrNull<TResult extends Object?>({
     TResult Function(sendToExternalStateInitial value)? initial,
     TResult Function(sendToExternalDone value)? done,
-    TResult Function(sendToExternalError value)? error,
+    TResult Function(SendToExternalLoading value)? loading,
+    TResult Function(SendToExternalGetSuccess value)? getSuccess,
+    TResult Function(SendToExternalErrorToAddress value)? errorToAddress,
+    TResult Function(SendToExternalErrorValueInEther value)? errorValueInEther,
   }) {
     return initial?.call(this);
   }
@@ -215,7 +252,10 @@ class _$sendToExternalStateInitial
   TResult maybeMap<TResult extends Object?>({
     TResult Function(sendToExternalStateInitial value)? initial,
     TResult Function(sendToExternalDone value)? done,
-    TResult Function(sendToExternalError value)? error,
+    TResult Function(SendToExternalLoading value)? loading,
+    TResult Function(SendToExternalGetSuccess value)? getSuccess,
+    TResult Function(SendToExternalErrorToAddress value)? errorToAddress,
+    TResult Function(SendToExternalErrorValueInEther value)? errorValueInEther,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -322,7 +362,10 @@ class _$sendToExternalDone
   TResult when<TResult extends Object?>({
     required TResult Function(bool isLoading) initial,
     required TResult Function(SendToExternalEntity entity) done,
-    required TResult Function(String msg) error,
+    required TResult Function() loading,
+    required TResult Function(int balance) getSuccess,
+    required TResult Function(String msg) errorToAddress,
+    required TResult Function(String msg) errorValueInEther,
   }) {
     return done(entity);
   }
@@ -332,7 +375,10 @@ class _$sendToExternalDone
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function(bool isLoading)? initial,
     TResult Function(SendToExternalEntity entity)? done,
-    TResult Function(String msg)? error,
+    TResult Function()? loading,
+    TResult Function(int balance)? getSuccess,
+    TResult Function(String msg)? errorToAddress,
+    TResult Function(String msg)? errorValueInEther,
   }) {
     return done?.call(entity);
   }
@@ -342,7 +388,10 @@ class _$sendToExternalDone
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(bool isLoading)? initial,
     TResult Function(SendToExternalEntity entity)? done,
-    TResult Function(String msg)? error,
+    TResult Function()? loading,
+    TResult Function(int balance)? getSuccess,
+    TResult Function(String msg)? errorToAddress,
+    TResult Function(String msg)? errorValueInEther,
     required TResult orElse(),
   }) {
     if (done != null) {
@@ -356,7 +405,12 @@ class _$sendToExternalDone
   TResult map<TResult extends Object?>({
     required TResult Function(sendToExternalStateInitial value) initial,
     required TResult Function(sendToExternalDone value) done,
-    required TResult Function(sendToExternalError value) error,
+    required TResult Function(SendToExternalLoading value) loading,
+    required TResult Function(SendToExternalGetSuccess value) getSuccess,
+    required TResult Function(SendToExternalErrorToAddress value)
+        errorToAddress,
+    required TResult Function(SendToExternalErrorValueInEther value)
+        errorValueInEther,
   }) {
     return done(this);
   }
@@ -366,7 +420,10 @@ class _$sendToExternalDone
   TResult? mapOrNull<TResult extends Object?>({
     TResult Function(sendToExternalStateInitial value)? initial,
     TResult Function(sendToExternalDone value)? done,
-    TResult Function(sendToExternalError value)? error,
+    TResult Function(SendToExternalLoading value)? loading,
+    TResult Function(SendToExternalGetSuccess value)? getSuccess,
+    TResult Function(SendToExternalErrorToAddress value)? errorToAddress,
+    TResult Function(SendToExternalErrorValueInEther value)? errorValueInEther,
   }) {
     return done?.call(this);
   }
@@ -376,7 +433,10 @@ class _$sendToExternalDone
   TResult maybeMap<TResult extends Object?>({
     TResult Function(sendToExternalStateInitial value)? initial,
     TResult Function(sendToExternalDone value)? done,
-    TResult Function(sendToExternalError value)? error,
+    TResult Function(SendToExternalLoading value)? loading,
+    TResult Function(SendToExternalGetSuccess value)? getSuccess,
+    TResult Function(SendToExternalErrorToAddress value)? errorToAddress,
+    TResult Function(SendToExternalErrorValueInEther value)? errorValueInEther,
     required TResult orElse(),
   }) {
     if (done != null) {
@@ -397,29 +457,345 @@ abstract class sendToExternalDone implements SendToExternalState {
 }
 
 /// @nodoc
-abstract class _$$sendToExternalErrorCopyWith<$Res> {
-  factory _$$sendToExternalErrorCopyWith(_$sendToExternalError value,
-          $Res Function(_$sendToExternalError) then) =
-      __$$sendToExternalErrorCopyWithImpl<$Res>;
+abstract class _$$SendToExternalLoadingCopyWith<$Res> {
+  factory _$$SendToExternalLoadingCopyWith(_$SendToExternalLoading value,
+          $Res Function(_$SendToExternalLoading) then) =
+      __$$SendToExternalLoadingCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$SendToExternalLoadingCopyWithImpl<$Res>
+    extends _$SendToExternalStateCopyWithImpl<$Res>
+    implements _$$SendToExternalLoadingCopyWith<$Res> {
+  __$$SendToExternalLoadingCopyWithImpl(_$SendToExternalLoading _value,
+      $Res Function(_$SendToExternalLoading) _then)
+      : super(_value, (v) => _then(v as _$SendToExternalLoading));
+
+  @override
+  _$SendToExternalLoading get _value => super._value as _$SendToExternalLoading;
+}
+
+/// @nodoc
+
+class _$SendToExternalLoading
+    with DiagnosticableTreeMixin
+    implements SendToExternalLoading {
+  const _$SendToExternalLoading();
+
+  @override
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+    return 'SendToExternalState.loading()';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty('type', 'SendToExternalState.loading'));
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$SendToExternalLoading);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(bool isLoading) initial,
+    required TResult Function(SendToExternalEntity entity) done,
+    required TResult Function() loading,
+    required TResult Function(int balance) getSuccess,
+    required TResult Function(String msg) errorToAddress,
+    required TResult Function(String msg) errorValueInEther,
+  }) {
+    return loading();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult Function(bool isLoading)? initial,
+    TResult Function(SendToExternalEntity entity)? done,
+    TResult Function()? loading,
+    TResult Function(int balance)? getSuccess,
+    TResult Function(String msg)? errorToAddress,
+    TResult Function(String msg)? errorValueInEther,
+  }) {
+    return loading?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(bool isLoading)? initial,
+    TResult Function(SendToExternalEntity entity)? done,
+    TResult Function()? loading,
+    TResult Function(int balance)? getSuccess,
+    TResult Function(String msg)? errorToAddress,
+    TResult Function(String msg)? errorValueInEther,
+    required TResult orElse(),
+  }) {
+    if (loading != null) {
+      return loading();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(sendToExternalStateInitial value) initial,
+    required TResult Function(sendToExternalDone value) done,
+    required TResult Function(SendToExternalLoading value) loading,
+    required TResult Function(SendToExternalGetSuccess value) getSuccess,
+    required TResult Function(SendToExternalErrorToAddress value)
+        errorToAddress,
+    required TResult Function(SendToExternalErrorValueInEther value)
+        errorValueInEther,
+  }) {
+    return loading(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(sendToExternalStateInitial value)? initial,
+    TResult Function(sendToExternalDone value)? done,
+    TResult Function(SendToExternalLoading value)? loading,
+    TResult Function(SendToExternalGetSuccess value)? getSuccess,
+    TResult Function(SendToExternalErrorToAddress value)? errorToAddress,
+    TResult Function(SendToExternalErrorValueInEther value)? errorValueInEther,
+  }) {
+    return loading?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(sendToExternalStateInitial value)? initial,
+    TResult Function(sendToExternalDone value)? done,
+    TResult Function(SendToExternalLoading value)? loading,
+    TResult Function(SendToExternalGetSuccess value)? getSuccess,
+    TResult Function(SendToExternalErrorToAddress value)? errorToAddress,
+    TResult Function(SendToExternalErrorValueInEther value)? errorValueInEther,
+    required TResult orElse(),
+  }) {
+    if (loading != null) {
+      return loading(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class SendToExternalLoading implements SendToExternalState {
+  const factory SendToExternalLoading() = _$SendToExternalLoading;
+}
+
+/// @nodoc
+abstract class _$$SendToExternalGetSuccessCopyWith<$Res> {
+  factory _$$SendToExternalGetSuccessCopyWith(_$SendToExternalGetSuccess value,
+          $Res Function(_$SendToExternalGetSuccess) then) =
+      __$$SendToExternalGetSuccessCopyWithImpl<$Res>;
+  $Res call({int balance});
+}
+
+/// @nodoc
+class __$$SendToExternalGetSuccessCopyWithImpl<$Res>
+    extends _$SendToExternalStateCopyWithImpl<$Res>
+    implements _$$SendToExternalGetSuccessCopyWith<$Res> {
+  __$$SendToExternalGetSuccessCopyWithImpl(_$SendToExternalGetSuccess _value,
+      $Res Function(_$SendToExternalGetSuccess) _then)
+      : super(_value, (v) => _then(v as _$SendToExternalGetSuccess));
+
+  @override
+  _$SendToExternalGetSuccess get _value =>
+      super._value as _$SendToExternalGetSuccess;
+
+  @override
+  $Res call({
+    Object? balance = freezed,
+  }) {
+    return _then(_$SendToExternalGetSuccess(
+      balance == freezed
+          ? _value.balance
+          : balance // ignore: cast_nullable_to_non_nullable
+              as int,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$SendToExternalGetSuccess
+    with DiagnosticableTreeMixin
+    implements SendToExternalGetSuccess {
+  const _$SendToExternalGetSuccess(this.balance);
+
+  @override
+  final int balance;
+
+  @override
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+    return 'SendToExternalState.getSuccess(balance: $balance)';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('type', 'SendToExternalState.getSuccess'))
+      ..add(DiagnosticsProperty('balance', balance));
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$SendToExternalGetSuccess &&
+            const DeepCollectionEquality().equals(other.balance, balance));
+  }
+
+  @override
+  int get hashCode =>
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(balance));
+
+  @JsonKey(ignore: true)
+  @override
+  _$$SendToExternalGetSuccessCopyWith<_$SendToExternalGetSuccess>
+      get copyWith =>
+          __$$SendToExternalGetSuccessCopyWithImpl<_$SendToExternalGetSuccess>(
+              this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(bool isLoading) initial,
+    required TResult Function(SendToExternalEntity entity) done,
+    required TResult Function() loading,
+    required TResult Function(int balance) getSuccess,
+    required TResult Function(String msg) errorToAddress,
+    required TResult Function(String msg) errorValueInEther,
+  }) {
+    return getSuccess(balance);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult Function(bool isLoading)? initial,
+    TResult Function(SendToExternalEntity entity)? done,
+    TResult Function()? loading,
+    TResult Function(int balance)? getSuccess,
+    TResult Function(String msg)? errorToAddress,
+    TResult Function(String msg)? errorValueInEther,
+  }) {
+    return getSuccess?.call(balance);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(bool isLoading)? initial,
+    TResult Function(SendToExternalEntity entity)? done,
+    TResult Function()? loading,
+    TResult Function(int balance)? getSuccess,
+    TResult Function(String msg)? errorToAddress,
+    TResult Function(String msg)? errorValueInEther,
+    required TResult orElse(),
+  }) {
+    if (getSuccess != null) {
+      return getSuccess(balance);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(sendToExternalStateInitial value) initial,
+    required TResult Function(sendToExternalDone value) done,
+    required TResult Function(SendToExternalLoading value) loading,
+    required TResult Function(SendToExternalGetSuccess value) getSuccess,
+    required TResult Function(SendToExternalErrorToAddress value)
+        errorToAddress,
+    required TResult Function(SendToExternalErrorValueInEther value)
+        errorValueInEther,
+  }) {
+    return getSuccess(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(sendToExternalStateInitial value)? initial,
+    TResult Function(sendToExternalDone value)? done,
+    TResult Function(SendToExternalLoading value)? loading,
+    TResult Function(SendToExternalGetSuccess value)? getSuccess,
+    TResult Function(SendToExternalErrorToAddress value)? errorToAddress,
+    TResult Function(SendToExternalErrorValueInEther value)? errorValueInEther,
+  }) {
+    return getSuccess?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(sendToExternalStateInitial value)? initial,
+    TResult Function(sendToExternalDone value)? done,
+    TResult Function(SendToExternalLoading value)? loading,
+    TResult Function(SendToExternalGetSuccess value)? getSuccess,
+    TResult Function(SendToExternalErrorToAddress value)? errorToAddress,
+    TResult Function(SendToExternalErrorValueInEther value)? errorValueInEther,
+    required TResult orElse(),
+  }) {
+    if (getSuccess != null) {
+      return getSuccess(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class SendToExternalGetSuccess implements SendToExternalState {
+  const factory SendToExternalGetSuccess(final int balance) =
+      _$SendToExternalGetSuccess;
+
+  int get balance => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  _$$SendToExternalGetSuccessCopyWith<_$SendToExternalGetSuccess>
+      get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$SendToExternalErrorToAddressCopyWith<$Res> {
+  factory _$$SendToExternalErrorToAddressCopyWith(
+          _$SendToExternalErrorToAddress value,
+          $Res Function(_$SendToExternalErrorToAddress) then) =
+      __$$SendToExternalErrorToAddressCopyWithImpl<$Res>;
   $Res call({String msg});
 }
 
 /// @nodoc
-class __$$sendToExternalErrorCopyWithImpl<$Res>
+class __$$SendToExternalErrorToAddressCopyWithImpl<$Res>
     extends _$SendToExternalStateCopyWithImpl<$Res>
-    implements _$$sendToExternalErrorCopyWith<$Res> {
-  __$$sendToExternalErrorCopyWithImpl(
-      _$sendToExternalError _value, $Res Function(_$sendToExternalError) _then)
-      : super(_value, (v) => _then(v as _$sendToExternalError));
+    implements _$$SendToExternalErrorToAddressCopyWith<$Res> {
+  __$$SendToExternalErrorToAddressCopyWithImpl(
+      _$SendToExternalErrorToAddress _value,
+      $Res Function(_$SendToExternalErrorToAddress) _then)
+      : super(_value, (v) => _then(v as _$SendToExternalErrorToAddress));
 
   @override
-  _$sendToExternalError get _value => super._value as _$sendToExternalError;
+  _$SendToExternalErrorToAddress get _value =>
+      super._value as _$SendToExternalErrorToAddress;
 
   @override
   $Res call({
     Object? msg = freezed,
   }) {
-    return _then(_$sendToExternalError(
+    return _then(_$SendToExternalErrorToAddress(
       msg == freezed
           ? _value.msg
           : msg // ignore: cast_nullable_to_non_nullable
@@ -430,24 +806,24 @@ class __$$sendToExternalErrorCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$sendToExternalError
+class _$SendToExternalErrorToAddress
     with DiagnosticableTreeMixin
-    implements sendToExternalError {
-  const _$sendToExternalError(this.msg);
+    implements SendToExternalErrorToAddress {
+  const _$SendToExternalErrorToAddress(this.msg);
 
   @override
   final String msg;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'SendToExternalState.error(msg: $msg)';
+    return 'SendToExternalState.errorToAddress(msg: $msg)';
   }
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
-      ..add(DiagnosticsProperty('type', 'SendToExternalState.error'))
+      ..add(DiagnosticsProperty('type', 'SendToExternalState.errorToAddress'))
       ..add(DiagnosticsProperty('msg', msg));
   }
 
@@ -455,7 +831,7 @@ class _$sendToExternalError
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$sendToExternalError &&
+            other is _$SendToExternalErrorToAddress &&
             const DeepCollectionEquality().equals(other.msg, msg));
   }
 
@@ -465,18 +841,21 @@ class _$sendToExternalError
 
   @JsonKey(ignore: true)
   @override
-  _$$sendToExternalErrorCopyWith<_$sendToExternalError> get copyWith =>
-      __$$sendToExternalErrorCopyWithImpl<_$sendToExternalError>(
-          this, _$identity);
+  _$$SendToExternalErrorToAddressCopyWith<_$SendToExternalErrorToAddress>
+      get copyWith => __$$SendToExternalErrorToAddressCopyWithImpl<
+          _$SendToExternalErrorToAddress>(this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(bool isLoading) initial,
     required TResult Function(SendToExternalEntity entity) done,
-    required TResult Function(String msg) error,
+    required TResult Function() loading,
+    required TResult Function(int balance) getSuccess,
+    required TResult Function(String msg) errorToAddress,
+    required TResult Function(String msg) errorValueInEther,
   }) {
-    return error(msg);
+    return errorToAddress(msg);
   }
 
   @override
@@ -484,9 +863,12 @@ class _$sendToExternalError
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function(bool isLoading)? initial,
     TResult Function(SendToExternalEntity entity)? done,
-    TResult Function(String msg)? error,
+    TResult Function()? loading,
+    TResult Function(int balance)? getSuccess,
+    TResult Function(String msg)? errorToAddress,
+    TResult Function(String msg)? errorValueInEther,
   }) {
-    return error?.call(msg);
+    return errorToAddress?.call(msg);
   }
 
   @override
@@ -494,11 +876,14 @@ class _$sendToExternalError
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(bool isLoading)? initial,
     TResult Function(SendToExternalEntity entity)? done,
-    TResult Function(String msg)? error,
+    TResult Function()? loading,
+    TResult Function(int balance)? getSuccess,
+    TResult Function(String msg)? errorToAddress,
+    TResult Function(String msg)? errorValueInEther,
     required TResult orElse(),
   }) {
-    if (error != null) {
-      return error(msg);
+    if (errorToAddress != null) {
+      return errorToAddress(msg);
     }
     return orElse();
   }
@@ -508,9 +893,14 @@ class _$sendToExternalError
   TResult map<TResult extends Object?>({
     required TResult Function(sendToExternalStateInitial value) initial,
     required TResult Function(sendToExternalDone value) done,
-    required TResult Function(sendToExternalError value) error,
+    required TResult Function(SendToExternalLoading value) loading,
+    required TResult Function(SendToExternalGetSuccess value) getSuccess,
+    required TResult Function(SendToExternalErrorToAddress value)
+        errorToAddress,
+    required TResult Function(SendToExternalErrorValueInEther value)
+        errorValueInEther,
   }) {
-    return error(this);
+    return errorToAddress(this);
   }
 
   @override
@@ -518,9 +908,12 @@ class _$sendToExternalError
   TResult? mapOrNull<TResult extends Object?>({
     TResult Function(sendToExternalStateInitial value)? initial,
     TResult Function(sendToExternalDone value)? done,
-    TResult Function(sendToExternalError value)? error,
+    TResult Function(SendToExternalLoading value)? loading,
+    TResult Function(SendToExternalGetSuccess value)? getSuccess,
+    TResult Function(SendToExternalErrorToAddress value)? errorToAddress,
+    TResult Function(SendToExternalErrorValueInEther value)? errorValueInEther,
   }) {
-    return error?.call(this);
+    return errorToAddress?.call(this);
   }
 
   @override
@@ -528,21 +921,201 @@ class _$sendToExternalError
   TResult maybeMap<TResult extends Object?>({
     TResult Function(sendToExternalStateInitial value)? initial,
     TResult Function(sendToExternalDone value)? done,
-    TResult Function(sendToExternalError value)? error,
+    TResult Function(SendToExternalLoading value)? loading,
+    TResult Function(SendToExternalGetSuccess value)? getSuccess,
+    TResult Function(SendToExternalErrorToAddress value)? errorToAddress,
+    TResult Function(SendToExternalErrorValueInEther value)? errorValueInEther,
     required TResult orElse(),
   }) {
-    if (error != null) {
-      return error(this);
+    if (errorToAddress != null) {
+      return errorToAddress(this);
     }
     return orElse();
   }
 }
 
-abstract class sendToExternalError implements SendToExternalState {
-  const factory sendToExternalError(final String msg) = _$sendToExternalError;
+abstract class SendToExternalErrorToAddress implements SendToExternalState {
+  const factory SendToExternalErrorToAddress(final String msg) =
+      _$SendToExternalErrorToAddress;
 
   String get msg => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  _$$sendToExternalErrorCopyWith<_$sendToExternalError> get copyWith =>
-      throw _privateConstructorUsedError;
+  _$$SendToExternalErrorToAddressCopyWith<_$SendToExternalErrorToAddress>
+      get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$SendToExternalErrorValueInEtherCopyWith<$Res> {
+  factory _$$SendToExternalErrorValueInEtherCopyWith(
+          _$SendToExternalErrorValueInEther value,
+          $Res Function(_$SendToExternalErrorValueInEther) then) =
+      __$$SendToExternalErrorValueInEtherCopyWithImpl<$Res>;
+  $Res call({String msg});
+}
+
+/// @nodoc
+class __$$SendToExternalErrorValueInEtherCopyWithImpl<$Res>
+    extends _$SendToExternalStateCopyWithImpl<$Res>
+    implements _$$SendToExternalErrorValueInEtherCopyWith<$Res> {
+  __$$SendToExternalErrorValueInEtherCopyWithImpl(
+      _$SendToExternalErrorValueInEther _value,
+      $Res Function(_$SendToExternalErrorValueInEther) _then)
+      : super(_value, (v) => _then(v as _$SendToExternalErrorValueInEther));
+
+  @override
+  _$SendToExternalErrorValueInEther get _value =>
+      super._value as _$SendToExternalErrorValueInEther;
+
+  @override
+  $Res call({
+    Object? msg = freezed,
+  }) {
+    return _then(_$SendToExternalErrorValueInEther(
+      msg == freezed
+          ? _value.msg
+          : msg // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$SendToExternalErrorValueInEther
+    with DiagnosticableTreeMixin
+    implements SendToExternalErrorValueInEther {
+  const _$SendToExternalErrorValueInEther(this.msg);
+
+  @override
+  final String msg;
+
+  @override
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+    return 'SendToExternalState.errorValueInEther(msg: $msg)';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(
+          DiagnosticsProperty('type', 'SendToExternalState.errorValueInEther'))
+      ..add(DiagnosticsProperty('msg', msg));
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$SendToExternalErrorValueInEther &&
+            const DeepCollectionEquality().equals(other.msg, msg));
+  }
+
+  @override
+  int get hashCode =>
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(msg));
+
+  @JsonKey(ignore: true)
+  @override
+  _$$SendToExternalErrorValueInEtherCopyWith<_$SendToExternalErrorValueInEther>
+      get copyWith => __$$SendToExternalErrorValueInEtherCopyWithImpl<
+          _$SendToExternalErrorValueInEther>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(bool isLoading) initial,
+    required TResult Function(SendToExternalEntity entity) done,
+    required TResult Function() loading,
+    required TResult Function(int balance) getSuccess,
+    required TResult Function(String msg) errorToAddress,
+    required TResult Function(String msg) errorValueInEther,
+  }) {
+    return errorValueInEther(msg);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult Function(bool isLoading)? initial,
+    TResult Function(SendToExternalEntity entity)? done,
+    TResult Function()? loading,
+    TResult Function(int balance)? getSuccess,
+    TResult Function(String msg)? errorToAddress,
+    TResult Function(String msg)? errorValueInEther,
+  }) {
+    return errorValueInEther?.call(msg);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(bool isLoading)? initial,
+    TResult Function(SendToExternalEntity entity)? done,
+    TResult Function()? loading,
+    TResult Function(int balance)? getSuccess,
+    TResult Function(String msg)? errorToAddress,
+    TResult Function(String msg)? errorValueInEther,
+    required TResult orElse(),
+  }) {
+    if (errorValueInEther != null) {
+      return errorValueInEther(msg);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(sendToExternalStateInitial value) initial,
+    required TResult Function(sendToExternalDone value) done,
+    required TResult Function(SendToExternalLoading value) loading,
+    required TResult Function(SendToExternalGetSuccess value) getSuccess,
+    required TResult Function(SendToExternalErrorToAddress value)
+        errorToAddress,
+    required TResult Function(SendToExternalErrorValueInEther value)
+        errorValueInEther,
+  }) {
+    return errorValueInEther(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(sendToExternalStateInitial value)? initial,
+    TResult Function(sendToExternalDone value)? done,
+    TResult Function(SendToExternalLoading value)? loading,
+    TResult Function(SendToExternalGetSuccess value)? getSuccess,
+    TResult Function(SendToExternalErrorToAddress value)? errorToAddress,
+    TResult Function(SendToExternalErrorValueInEther value)? errorValueInEther,
+  }) {
+    return errorValueInEther?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(sendToExternalStateInitial value)? initial,
+    TResult Function(sendToExternalDone value)? done,
+    TResult Function(SendToExternalLoading value)? loading,
+    TResult Function(SendToExternalGetSuccess value)? getSuccess,
+    TResult Function(SendToExternalErrorToAddress value)? errorToAddress,
+    TResult Function(SendToExternalErrorValueInEther value)? errorValueInEther,
+    required TResult orElse(),
+  }) {
+    if (errorValueInEther != null) {
+      return errorValueInEther(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class SendToExternalErrorValueInEther implements SendToExternalState {
+  const factory SendToExternalErrorValueInEther(final String msg) =
+      _$SendToExternalErrorValueInEther;
+
+  String get msg => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  _$$SendToExternalErrorValueInEtherCopyWith<_$SendToExternalErrorValueInEther>
+      get copyWith => throw _privateConstructorUsedError;
 }

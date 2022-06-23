@@ -14,6 +14,12 @@ class SendToExternalState with _$SendToExternalState {
   const factory SendToExternalState.done(SendToExternalEntity entity) =
   sendToExternalDone;
 
-  const factory SendToExternalState.error(String msg) =
-  sendToExternalError;
+  const factory SendToExternalState.loading() = SendToExternalLoading;
+
+  const factory SendToExternalState.getSuccess(int balance) = SendToExternalGetSuccess;
+
+  const factory SendToExternalState.errorToAddress(String msg) = SendToExternalErrorToAddress;
+
+  const factory SendToExternalState.errorValueInEther(String msg) =
+  SendToExternalErrorValueInEther;
 }
