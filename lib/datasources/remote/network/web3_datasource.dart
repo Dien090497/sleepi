@@ -7,8 +7,8 @@ import 'package:flutter/foundation.dart';
 import 'package:hex/hex.dart';
 import 'package:http/http.dart';
 import 'package:injectable/injectable.dart';
-import 'package:slee_fi/common/abi/erc721.g.dart';
 import 'package:slee_fi/common/abi/avax.g.dart';
+import 'package:slee_fi/common/abi/erc721.g.dart';
 import 'package:slee_fi/common/const/const.dart';
 import 'package:slee_fi/common/extensions/num_ext.dart';
 import 'package:slee_fi/models/isar_models/network_isar/network_isar_model.dart';
@@ -51,6 +51,7 @@ class Web3DataSource {
           ///
           /// Break For Loop nếu thành công
           final chainId = await _setWeb3(url, wsUrl);
+          debugPrint('### $chainId');
           assert(chainId.toInt() == network.chainId, "Chain Id must match");
           break;
         } catch (e) {
@@ -78,12 +79,11 @@ class Web3DataSource {
   }
 
   Future<void> _tryOtherRpc() async {
-    final currentIndex = _network!.rpc.indexOf(_currentUrl!);
-    if (currentIndex + 1 >= _network!.rpc.length) {
-      throw('error init network');
-    }
-    if (_network != null && _currentUrl != null) {
-      final nextUrl = _network!.rpc.elementAt(currentIndex + 1);
+    final nextIndex = _network!.rpc.indexOf(_currentUrl!) + 1;
+    if (_network != null &&
+        _currentUrl != null &&
+        _network!.rpc.length < nextIndex) {
+      final nextUrl = _network!.rpc.elementAt(nextIndex);
       await _setWeb3(nextUrl, _currentWsUrl);
     }
   }

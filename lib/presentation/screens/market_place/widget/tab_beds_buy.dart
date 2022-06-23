@@ -40,76 +40,83 @@ class TabBedsBuy extends StatelessWidget {
 
     return DefaultTabController(
       length: 2,
-      child: Padding(
-        padding:  EdgeInsets.symmetric(horizontal: 12.w),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            TabBarFilter(
-              tabTexts: const [LocaleKeys.buy, LocaleKeys.rent],
-              onFilterTap: () {
-                showFilterModalBottomSheet(
-                  context,
-                  sections: {
-                    LocaleKeys.type.tr(): [
-                      LocaleKeys.beds.tr(),
-                      LocaleKeys.bed_box.tr(),
-                    ],
-                    LocaleKeys.class_.tr(): [
-                      LocaleKeys.short_bed.tr(),
-                      LocaleKeys.middle_bed.tr(),
-                      LocaleKeys.long_bed.tr(),
-                      LocaleKeys.flexible_bed.tr(),
-                    ],
-                    LocaleKeys.quality.tr(): [
-                      LocaleKeys.common_bed.tr(),
-                      LocaleKeys.uncommon_bed.tr(),
-                      LocaleKeys.rare_bed.tr(),
-                      LocaleKeys.epic_bed.tr(),
-                      LocaleKeys.legendary_bed.tr(),
-                    ],
-                  },
-                  sliders: {
-                    LocaleKeys.level:
-                        const FilterSliderValues(max: 50, min: 1, interval: 49),
-                    LocaleKeys.mint: const FilterSliderValues(max: 7, min: 0),
-                  },
-                );
-              },
-            ),
-            const SizedBox(height: 12),
-            Expanded(
-              child: TabBarView(
+      child: Column(
+        children: [
+          TabBarFilter(
+            tabTexts: const [LocaleKeys.buy, LocaleKeys.rent],
+            onFilterTap: () {
+              showFilterModalBottomSheet(
+                context,
+                sections: {
+                  LocaleKeys.type.tr(): [
+                    LocaleKeys.beds.tr(),
+                    LocaleKeys.bed_box.tr(),
+                  ],
+                  LocaleKeys.class_.tr(): [
+                    LocaleKeys.short_bed.tr(),
+                    LocaleKeys.middle_bed.tr(),
+                    LocaleKeys.long_bed.tr(),
+                    LocaleKeys.flexible_bed.tr(),
+                  ],
+                  LocaleKeys.quality.tr(): [
+                    LocaleKeys.common_bed.tr(),
+                    LocaleKeys.uncommon_bed.tr(),
+                    LocaleKeys.rare_bed.tr(),
+                    LocaleKeys.epic_bed.tr(),
+                    LocaleKeys.legendary_bed.tr(),
+                  ],
+                },
+                sliders: {
+                  LocaleKeys.level:
+                      const FilterSliderValues(max: 50, min: 1, interval: 49),
+                  LocaleKeys.mint: const FilterSliderValues(max: 7, min: 0),
+                },
+              );
+            },
+          ),
+          Expanded(
+            child: Padding(
+              padding: EdgeInsets.symmetric(horizontal: 12.w),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  GridViewBedItem(
-                    beds: beds,
-                    price: 10,
-                    onBuyTap: (bed) {
-                      Navigator.pushNamed(context, R.nftInfo, arguments: true);
-                    },
-                  ),
-                  Padding(
-                    padding: EdgeInsets.only(
-                        bottom: MediaQuery.of(context).size.height * 0.3),
-                    child: const Center(
-                      child: SFIcon(Ics.commingSoon),
+                  const SizedBox(height: 12),
+                  Expanded(
+                    child: TabBarView(
+                      children: [
+                        GridViewBedItem(
+                          beds: beds,
+                          price: 10,
+                          onBuyTap: (bed) {
+                            Navigator.pushNamed(context, R.nftInfo,
+                                arguments: true);
+                          },
+                        ),
+                        Padding(
+                          padding: EdgeInsets.only(
+                              bottom: MediaQuery.of(context).size.height * 0.3),
+                          child: const Center(
+                            child: SFIcon(Ics.commingSoon),
+                          ),
+                        )
+                        // GridViewBedItem(
+                        //   beds: beds,
+                        //   onBedTap: (bed) {
+                        //     _showBedDialog(context);
+                        //   },
+                        //   price: 10,
+                        //   onBuyTap: (bed) {
+                        //
+                        //   },
+                        // ),
+                      ],
                     ),
-                  )
-                  // GridViewBedItem(
-                  //   beds: beds,
-                  //   onBedTap: (bed) {
-                  //     _showBedDialog(context);
-                  //   },
-                  //   price: 10,
-                  //   onBuyTap: (bed) {
-                  //
-                  //   },
-                  // ),
+                  ),
                 ],
               ),
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }
