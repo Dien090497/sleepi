@@ -18,7 +18,7 @@ class RunAppInitUseCase extends UseCase<bool, NoParams> {
     await _isarDataSource.init();
     int? chainId = _getStorageDataSource.getCurrentChainId();
     if (chainId == null) {
-      chainId = 43114;
+      chainId = 43113;
       _getStorageDataSource.setCurrentChainId(chainId);
     }
     final network = await _isarDataSource.getNetworkAt(chainId);

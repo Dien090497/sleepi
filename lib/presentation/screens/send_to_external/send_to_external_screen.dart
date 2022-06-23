@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:slee_fi/common/const/const.dart';
@@ -10,10 +12,10 @@ import 'package:slee_fi/common/widgets/sf_alert_dialog.dart';
 import 'package:slee_fi/common/widgets/sf_app_bar.dart';
 import 'package:slee_fi/common/widgets/sf_buttons.dart';
 import 'package:slee_fi/common/widgets/sf_card.dart';
-import 'package:slee_fi/common/widgets/sf_icon.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
 import 'package:slee_fi/common/widgets/sf_textfield.dart';
 import 'package:slee_fi/l10n/locale_keys.g.dart';
+import 'package:slee_fi/presentation/screens/send_to_external/widgets/address_scan.dart';
 import 'package:slee_fi/presentation/screens/send_to_external/widgets/dropdown_select_token.dart';
 import 'package:slee_fi/presentation/screens/send_to_external/widgets/pop_up_confirm_send.dart';
 import 'package:slee_fi/resources/resources.dart';
@@ -48,13 +50,11 @@ class SendToExternalScreen extends StatelessWidget {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            const SFTextField(
-                                labelText: LocaleKeys.to_address,
-                                suffixIcon: Padding(
-                                    padding: EdgeInsets.all(10),
-                                    child: SFIcon(
-                                      Ics.icScanOutlined,
-                                    ))),
+                            AddressScan(
+                              onChangedAddress: (address){
+                                log("ADDRESS: $address");
+                              },
+                            ),
                             const SizedBox(height: 24),
                             const SFTextField(
                               labelText: LocaleKeys.amount,

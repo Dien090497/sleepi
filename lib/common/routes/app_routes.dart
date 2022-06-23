@@ -30,6 +30,7 @@ import 'package:slee_fi/presentation/screens/seed_phrase/layouts/export_seed_phr
 import 'package:slee_fi/presentation/screens/seed_phrase/layouts/show_seed_phrase_screen.dart';
 import 'package:slee_fi/presentation/screens/seed_phrase/seed_phrase_screen.dart';
 import 'package:slee_fi/presentation/screens/send_to_external/send_to_external_screen.dart';
+import 'package:slee_fi/presentation/screens/send_to_external/widgets/mobile_scanner.dart';
 import 'package:slee_fi/presentation/screens/setting/setting_screen.dart';
 import 'package:slee_fi/presentation/screens/setting_activation_code/activation_code_screen.dart';
 import 'package:slee_fi/presentation/screens/setting_permission/setting_permission_screen.dart';
@@ -101,6 +102,7 @@ class R {
   static const String tracking = '${_}tracking';
   static const String transactionDetail = '${_}transaction_detail';
   static const String commingSoon = '${_}comming_soon';
+  static const String qrCodeScan = '${_}qr_code_scan';
 }
 
 class AppRoutes {
@@ -155,5 +157,6 @@ class AppRoutes {
     R.tracking: (_) => const TrackingScreen(),
     R.transactionDetail: (_) => const TransactionDetail(),
     R.commingSoon: (_) => const CommingSoon(),
+    R.qrCodeScan: (_) => const QRCodeScanner(),
   };
 }
