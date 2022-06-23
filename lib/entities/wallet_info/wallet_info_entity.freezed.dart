@@ -19,6 +19,7 @@ mixin _$WalletInfoEntity {
   int get id => throw _privateConstructorUsedError;
   NativeCurrencyEntity get nativeCurrency => throw _privateConstructorUsedError;
   String get address => throw _privateConstructorUsedError;
+  String get networkName => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
   Credentials get credentials => throw _privateConstructorUsedError;
   int? get derivedIndex => throw _privateConstructorUsedError;
@@ -43,6 +44,7 @@ abstract class $WalletInfoEntityCopyWith<$Res> {
       {int id,
       NativeCurrencyEntity nativeCurrency,
       String address,
+      String networkName,
       String name,
       Credentials credentials,
       int? derivedIndex,
@@ -68,6 +70,7 @@ class _$WalletInfoEntityCopyWithImpl<$Res>
     Object? id = freezed,
     Object? nativeCurrency = freezed,
     Object? address = freezed,
+    Object? networkName = freezed,
     Object? name = freezed,
     Object? credentials = freezed,
     Object? derivedIndex = freezed,
@@ -88,6 +91,10 @@ class _$WalletInfoEntityCopyWithImpl<$Res>
       address: address == freezed
           ? _value.address
           : address // ignore: cast_nullable_to_non_nullable
+              as String,
+      networkName: networkName == freezed
+          ? _value.networkName
+          : networkName // ignore: cast_nullable_to_non_nullable
               as String,
       name: name == freezed
           ? _value.name
@@ -139,6 +146,7 @@ abstract class _$$_WalletInfoEntityCopyWith<$Res>
       {int id,
       NativeCurrencyEntity nativeCurrency,
       String address,
+      String networkName,
       String name,
       Credentials credentials,
       int? derivedIndex,
@@ -167,6 +175,7 @@ class __$$_WalletInfoEntityCopyWithImpl<$Res>
     Object? id = freezed,
     Object? nativeCurrency = freezed,
     Object? address = freezed,
+    Object? networkName = freezed,
     Object? name = freezed,
     Object? credentials = freezed,
     Object? derivedIndex = freezed,
@@ -187,6 +196,10 @@ class __$$_WalletInfoEntityCopyWithImpl<$Res>
       address: address == freezed
           ? _value.address
           : address // ignore: cast_nullable_to_non_nullable
+              as String,
+      networkName: networkName == freezed
+          ? _value.networkName
+          : networkName // ignore: cast_nullable_to_non_nullable
               as String,
       name: name == freezed
           ? _value.name
@@ -229,6 +242,7 @@ class _$_WalletInfoEntity
       {required this.id,
       required this.nativeCurrency,
       required this.address,
+      required this.networkName,
       required this.name,
       required this.credentials,
       this.derivedIndex,
@@ -245,6 +259,8 @@ class _$_WalletInfoEntity
   final NativeCurrencyEntity nativeCurrency;
   @override
   final String address;
+  @override
+  final String networkName;
   @override
   final String name;
   @override
@@ -278,7 +294,7 @@ class _$_WalletInfoEntity
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'WalletInfoEntity(id: $id, nativeCurrency: $nativeCurrency, address: $address, name: $name, credentials: $credentials, derivedIndex: $derivedIndex, isImported: $isImported, nfts: $nfts, transactions: $transactions, image: $image)';
+    return 'WalletInfoEntity(id: $id, nativeCurrency: $nativeCurrency, address: $address, networkName: $networkName, name: $name, credentials: $credentials, derivedIndex: $derivedIndex, isImported: $isImported, nfts: $nfts, transactions: $transactions, image: $image)';
   }
 
   @override
@@ -289,6 +305,7 @@ class _$_WalletInfoEntity
       ..add(DiagnosticsProperty('id', id))
       ..add(DiagnosticsProperty('nativeCurrency', nativeCurrency))
       ..add(DiagnosticsProperty('address', address))
+      ..add(DiagnosticsProperty('networkName', networkName))
       ..add(DiagnosticsProperty('name', name))
       ..add(DiagnosticsProperty('credentials', credentials))
       ..add(DiagnosticsProperty('derivedIndex', derivedIndex))
@@ -307,6 +324,8 @@ class _$_WalletInfoEntity
             const DeepCollectionEquality()
                 .equals(other.nativeCurrency, nativeCurrency) &&
             const DeepCollectionEquality().equals(other.address, address) &&
+            const DeepCollectionEquality()
+                .equals(other.networkName, networkName) &&
             const DeepCollectionEquality().equals(other.name, name) &&
             const DeepCollectionEquality()
                 .equals(other.credentials, credentials) &&
@@ -326,6 +345,7 @@ class _$_WalletInfoEntity
       const DeepCollectionEquality().hash(id),
       const DeepCollectionEquality().hash(nativeCurrency),
       const DeepCollectionEquality().hash(address),
+      const DeepCollectionEquality().hash(networkName),
       const DeepCollectionEquality().hash(name),
       const DeepCollectionEquality().hash(credentials),
       const DeepCollectionEquality().hash(derivedIndex),
@@ -345,6 +365,7 @@ abstract class _WalletInfoEntity implements WalletInfoEntity {
       {required final int id,
       required final NativeCurrencyEntity nativeCurrency,
       required final String address,
+      required final String networkName,
       required final String name,
       required final Credentials credentials,
       final int? derivedIndex,
@@ -359,6 +380,8 @@ abstract class _WalletInfoEntity implements WalletInfoEntity {
   NativeCurrencyEntity get nativeCurrency => throw _privateConstructorUsedError;
   @override
   String get address => throw _privateConstructorUsedError;
+  @override
+  String get networkName => throw _privateConstructorUsedError;
   @override
   String get name => throw _privateConstructorUsedError;
   @override
