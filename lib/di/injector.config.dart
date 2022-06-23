@@ -44,7 +44,7 @@ Future<_i1.GetIt> $initGetIt(_i1.GetIt get,
   final gh = _i2.GetItHelper(get, environment, environmentFilter);
   final rPCModule = _$RPCModule();
   final registerModule = _$RegisterModule();
-  gh.factory<_i3.AppFlyerCustom>(() => _i3.AppFlyerCustom());
+  gh.singleton<_i3.AppFlyerCustom>(_i3.AppFlyerCustom());
   gh.factory<_i4.Client>(() => rPCModule.httpClient);
   gh.factory<_i5.DateTimeUtils>(() => _i5.DateTimeUtils());
   gh.factory<_i6.Dio>(() => registerModule.dio);
