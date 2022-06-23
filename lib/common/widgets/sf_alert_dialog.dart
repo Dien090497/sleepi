@@ -3,17 +3,19 @@ import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/widgets/dismiss_keyboard_widget.dart';
 
 Future<T?> showCustomAlertDialog<T>(
-    BuildContext context, {
-      required Widget? children,
-      Color? backgroundColor,
-      CrossAxisAlignment? crossAxisAlignment,
-      EdgeInsets? padding,
-      double? width,
-      double? height,
-      bool showClosed = true,
-    }) async {
+  BuildContext context, {
+  required Widget? children,
+  Color? backgroundColor,
+  CrossAxisAlignment? crossAxisAlignment,
+  EdgeInsets? padding,
+  bool barrierDismissible = true,
+  double? width,
+  double? height,
+  bool showClosed = true,
+}) async {
   return showDialog(
       context: context,
+      barrierDismissible: barrierDismissible,
       barrierColor: AppColors.backgroundDialog,
       builder: (_) {
         return SFAlertDialog(
@@ -34,7 +36,7 @@ class SFAlertDialog extends StatelessWidget {
       this.backgroundColor,
       this.padding,
       this.height,
-        this.showClose = true,
+      this.showClose = true,
       this.width})
       : super(key: key);
 
@@ -66,14 +68,16 @@ class SFAlertDialog extends StatelessWidget {
             child: SingleChildScrollView(
               child: Column(
                 children: [
-                  showClose ? Align(
-                      alignment: Alignment.topRight,
-                      child: GestureDetector(
-                          onTap: () => Navigator.maybePop(context),
-                          child: const Icon(
-                            Icons.close,
-                            color: AppColors.lightGrey,
-                          ))) : const SizedBox(),
+                  showClose
+                      ? Align(
+                          alignment: Alignment.topRight,
+                          child: GestureDetector(
+                              onTap: () => Navigator.maybePop(context),
+                              child: const Icon(
+                                Icons.close,
+                                color: AppColors.lightGrey,
+                              )))
+                      : const SizedBox(),
                   children!,
                 ],
               ),

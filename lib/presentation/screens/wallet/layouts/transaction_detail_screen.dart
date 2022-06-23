@@ -86,7 +86,12 @@ class TransactionDetail extends StatelessWidget {
                       Expanded(
                         child: BoxButtonWidget(
                           onTap: () => SFModalBottomSheet.show(
-                              context, 0.7, const ModalReceiveWallet()),
+                            context,
+                            0.7,
+                            const ModalReceiveWallet(
+                              address: 'input the address',
+                            ),
+                          ),
                           text: LocaleKeys.receive,
                           assetImage: Ics.icDownload,
                         ),
@@ -96,8 +101,7 @@ class TransactionDetail extends StatelessWidget {
                       ),
                       Expanded(
                         child: BoxButtonWidget(
-                          onTap: () =>
-                              Navigator.pushNamed(context, R.transfer),
+                          onTap: () => Navigator.pushNamed(context, R.transfer),
                           text: LocaleKeys.to_spending,
                           assetImage: Ics.icRefresh,
                         ),
@@ -111,16 +115,20 @@ class TransactionDetail extends StatelessWidget {
                               Navigator.pushNamed(context, R.sendToExternal),
                           text: LocaleKeys.to_external,
                           assetImage: Ics.icArrowUpRight,
-                        ),),
-                        const SizedBox(width: 10,),
-                        Expanded(
-                          child: BoxButtonWidget(
-                            onTap: () => Navigator.pushNamed(context, R.trade),
-                            text: LocaleKeys.trade.tr().reCase(StringCase.titleCase),
-                            assetImage: Ics.icTransfer,
-
-                          ),
                         ),
+                      ),
+                      const SizedBox(
+                        width: 10,
+                      ),
+                      Expanded(
+                        child: BoxButtonWidget(
+                          onTap: () => Navigator.pushNamed(context, R.trade),
+                          text: LocaleKeys.trade
+                              .tr()
+                              .reCase(StringCase.titleCase),
+                          assetImage: Ics.icTransfer,
+                        ),
+                      ),
                     ],
                   ),
                 ),

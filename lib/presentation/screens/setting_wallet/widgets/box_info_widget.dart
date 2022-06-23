@@ -29,12 +29,15 @@ class BoxInfoWidget extends StatelessWidget {
       child: SFCard(
         margin: const EdgeInsets.only(top: 16.0),
         padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 12.0),
-        height: 141,
+        height: 142,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             SFListTile(
-              leading: SFIcon(urlIcon!, color: AppColors.blue,),
+              leading: SFIcon(
+                urlIcon!,
+                color: AppColors.blue,
+              ),
               text: title,
               textStyle: textStyle ?? TextStyles.bold16Blue,
               trailing: const Icon(
@@ -42,13 +45,8 @@ class BoxInfoWidget extends StatelessWidget {
                 color: AppColors.lightGrey,
               ),
             ),
-            Divider(
-              color: AppColors.lightWhite.withOpacity(0.05),
-              height: 1,
-            ),
-            const SizedBox(
-              height: 12.0,
-            ),
+            Divider(color: AppColors.lightWhite.withOpacity(0.05), height: 1),
+            const SizedBox(height: 12.0),
             SFText(
               keyText: info ?? "",
               style: TextStyles.lightGrey14,

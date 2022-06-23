@@ -378,5 +378,6 @@ abstract class  LocaleKeys {
   static const effect_special = 'effect_special';
   static const effect_efficiency = 'effect_efficiency';
   static const effect_resilience = 'effect_resilience';
+  static const successfully_copied = 'successfully_copied';
 
 }

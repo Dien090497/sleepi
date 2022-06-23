@@ -63,10 +63,15 @@ class _WalletScreenState extends State<WalletScreen> {
                 setState(() {
                   indexTap = i;
                 });
+
                 if (i == 1) {
-                  showCustomAlertDialog(context,
-                          children: const PopUpAvalancheWallet())
-                      .then((value) => _showWarningDialog(value));
+                  showCustomAlertDialog(
+                    context,
+                    barrierDismissible: false,
+                    children: const PopUpAvalancheWallet(),
+                  ).then((value) {
+                    _showWarningDialog(value, context);
+                  });
                 }
               },
               index: indexTap,
@@ -83,7 +88,7 @@ class _WalletScreenState extends State<WalletScreen> {
     );
   }
 
-  _showWarningDialog(dynamic value) {
+  _showWarningDialog(dynamic value, BuildContext context) {
     if (value != null && value == true) {
       showCustomAlertDialog(context, children: const PopUpWalletWarning());
     }

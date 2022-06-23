@@ -18,24 +18,29 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$PasscodeState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(String passCode, String mnemonic, bool isLoading)
-        initial,
-    required TResult Function(WalletInfoEntity wallet) done,
+    required TResult Function(bool isLoading) initial,
+    required TResult Function(String passcode) done,
     required TResult Function(String msg) error,
+    required TResult Function() valid,
+    required TResult Function() inValid,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(String passCode, String mnemonic, bool isLoading)? initial,
-    TResult Function(WalletInfoEntity wallet)? done,
+    TResult Function(bool isLoading)? initial,
+    TResult Function(String passcode)? done,
     TResult Function(String msg)? error,
+    TResult Function()? valid,
+    TResult Function()? inValid,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String passCode, String mnemonic, bool isLoading)? initial,
-    TResult Function(WalletInfoEntity wallet)? done,
+    TResult Function(bool isLoading)? initial,
+    TResult Function(String passcode)? done,
     TResult Function(String msg)? error,
+    TResult Function()? valid,
+    TResult Function()? inValid,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -44,6 +49,8 @@ mixin _$PasscodeState {
     required TResult Function(PasscodeStateInitial value) initial,
     required TResult Function(createPassCodeDone value) done,
     required TResult Function(createNewPassCodeError value) error,
+    required TResult Function(checkPassCodeValid value) valid,
+    required TResult Function(checkPassCodeInValid value) inValid,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -51,6 +58,8 @@ mixin _$PasscodeState {
     TResult Function(PasscodeStateInitial value)? initial,
     TResult Function(createPassCodeDone value)? done,
     TResult Function(createNewPassCodeError value)? error,
+    TResult Function(checkPassCodeValid value)? valid,
+    TResult Function(checkPassCodeInValid value)? inValid,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -58,6 +67,8 @@ mixin _$PasscodeState {
     TResult Function(PasscodeStateInitial value)? initial,
     TResult Function(createPassCodeDone value)? done,
     TResult Function(createNewPassCodeError value)? error,
+    TResult Function(checkPassCodeValid value)? valid,
+    TResult Function(checkPassCodeInValid value)? inValid,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -85,7 +96,7 @@ abstract class _$$PasscodeStateInitialCopyWith<$Res> {
   factory _$$PasscodeStateInitialCopyWith(_$PasscodeStateInitial value,
           $Res Function(_$PasscodeStateInitial) then) =
       __$$PasscodeStateInitialCopyWithImpl<$Res>;
-  $Res call({String passCode, String mnemonic, bool isLoading});
+  $Res call({bool isLoading});
 }
 
 /// @nodoc
@@ -101,19 +112,9 @@ class __$$PasscodeStateInitialCopyWithImpl<$Res>
 
   @override
   $Res call({
-    Object? passCode = freezed,
-    Object? mnemonic = freezed,
     Object? isLoading = freezed,
   }) {
     return _then(_$PasscodeStateInitial(
-      passCode == freezed
-          ? _value.passCode
-          : passCode // ignore: cast_nullable_to_non_nullable
-              as String,
-      mnemonic: mnemonic == freezed
-          ? _value.mnemonic
-          : mnemonic // ignore: cast_nullable_to_non_nullable
-              as String,
       isLoading: isLoading == freezed
           ? _value.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
@@ -127,20 +128,15 @@ class __$$PasscodeStateInitialCopyWithImpl<$Res>
 class _$PasscodeStateInitial
     with DiagnosticableTreeMixin
     implements PasscodeStateInitial {
-  const _$PasscodeStateInitial(this.passCode,
-      {required this.mnemonic, this.isLoading = false});
+  const _$PasscodeStateInitial({this.isLoading = false});
 
-  @override
-  final String passCode;
-  @override
-  final String mnemonic;
   @override
   @JsonKey()
   final bool isLoading;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'PasscodeState.initial(passCode: $passCode, mnemonic: $mnemonic, isLoading: $isLoading)';
+    return 'PasscodeState.initial(isLoading: $isLoading)';
   }
 
   @override
@@ -148,8 +144,6 @@ class _$PasscodeStateInitial
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty('type', 'PasscodeState.initial'))
-      ..add(DiagnosticsProperty('passCode', passCode))
-      ..add(DiagnosticsProperty('mnemonic', mnemonic))
       ..add(DiagnosticsProperty('isLoading', isLoading));
   }
 
@@ -158,17 +152,12 @@ class _$PasscodeStateInitial
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$PasscodeStateInitial &&
-            const DeepCollectionEquality().equals(other.passCode, passCode) &&
-            const DeepCollectionEquality().equals(other.mnemonic, mnemonic) &&
             const DeepCollectionEquality().equals(other.isLoading, isLoading));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(passCode),
-      const DeepCollectionEquality().hash(mnemonic),
-      const DeepCollectionEquality().hash(isLoading));
+  int get hashCode =>
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(isLoading));
 
   @JsonKey(ignore: true)
   @override
@@ -179,34 +168,39 @@ class _$PasscodeStateInitial
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(String passCode, String mnemonic, bool isLoading)
-        initial,
-    required TResult Function(WalletInfoEntity wallet) done,
+    required TResult Function(bool isLoading) initial,
+    required TResult Function(String passcode) done,
     required TResult Function(String msg) error,
+    required TResult Function() valid,
+    required TResult Function() inValid,
   }) {
-    return initial(passCode, mnemonic, isLoading);
+    return initial(isLoading);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(String passCode, String mnemonic, bool isLoading)? initial,
-    TResult Function(WalletInfoEntity wallet)? done,
+    TResult Function(bool isLoading)? initial,
+    TResult Function(String passcode)? done,
     TResult Function(String msg)? error,
+    TResult Function()? valid,
+    TResult Function()? inValid,
   }) {
-    return initial?.call(passCode, mnemonic, isLoading);
+    return initial?.call(isLoading);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String passCode, String mnemonic, bool isLoading)? initial,
-    TResult Function(WalletInfoEntity wallet)? done,
+    TResult Function(bool isLoading)? initial,
+    TResult Function(String passcode)? done,
     TResult Function(String msg)? error,
+    TResult Function()? valid,
+    TResult Function()? inValid,
     required TResult orElse(),
   }) {
     if (initial != null) {
-      return initial(passCode, mnemonic, isLoading);
+      return initial(isLoading);
     }
     return orElse();
   }
@@ -217,6 +211,8 @@ class _$PasscodeStateInitial
     required TResult Function(PasscodeStateInitial value) initial,
     required TResult Function(createPassCodeDone value) done,
     required TResult Function(createNewPassCodeError value) error,
+    required TResult Function(checkPassCodeValid value) valid,
+    required TResult Function(checkPassCodeInValid value) inValid,
   }) {
     return initial(this);
   }
@@ -227,6 +223,8 @@ class _$PasscodeStateInitial
     TResult Function(PasscodeStateInitial value)? initial,
     TResult Function(createPassCodeDone value)? done,
     TResult Function(createNewPassCodeError value)? error,
+    TResult Function(checkPassCodeValid value)? valid,
+    TResult Function(checkPassCodeInValid value)? inValid,
   }) {
     return initial?.call(this);
   }
@@ -237,6 +235,8 @@ class _$PasscodeStateInitial
     TResult Function(PasscodeStateInitial value)? initial,
     TResult Function(createPassCodeDone value)? done,
     TResult Function(createNewPassCodeError value)? error,
+    TResult Function(checkPassCodeValid value)? valid,
+    TResult Function(checkPassCodeInValid value)? inValid,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -247,12 +247,9 @@ class _$PasscodeStateInitial
 }
 
 abstract class PasscodeStateInitial implements PasscodeState {
-  const factory PasscodeStateInitial(final String passCode,
-      {required final String mnemonic,
-      final bool isLoading}) = _$PasscodeStateInitial;
+  const factory PasscodeStateInitial({final bool isLoading}) =
+      _$PasscodeStateInitial;
 
-  String get passCode => throw _privateConstructorUsedError;
-  String get mnemonic => throw _privateConstructorUsedError;
   bool get isLoading => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
   _$$PasscodeStateInitialCopyWith<_$PasscodeStateInitial> get copyWith =>
@@ -264,9 +261,7 @@ abstract class _$$createPassCodeDoneCopyWith<$Res> {
   factory _$$createPassCodeDoneCopyWith(_$createPassCodeDone value,
           $Res Function(_$createPassCodeDone) then) =
       __$$createPassCodeDoneCopyWithImpl<$Res>;
-  $Res call({WalletInfoEntity wallet});
-
-  $WalletInfoEntityCopyWith<$Res> get wallet;
+  $Res call({String passcode});
 }
 
 /// @nodoc
@@ -282,21 +277,14 @@ class __$$createPassCodeDoneCopyWithImpl<$Res>
 
   @override
   $Res call({
-    Object? wallet = freezed,
+    Object? passcode = freezed,
   }) {
     return _then(_$createPassCodeDone(
-      wallet == freezed
-          ? _value.wallet
-          : wallet // ignore: cast_nullable_to_non_nullable
-              as WalletInfoEntity,
+      passcode == freezed
+          ? _value.passcode
+          : passcode // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
-  }
-
-  @override
-  $WalletInfoEntityCopyWith<$Res> get wallet {
-    return $WalletInfoEntityCopyWith<$Res>(_value.wallet, (value) {
-      return _then(_value.copyWith(wallet: value));
-    });
   }
 }
 
@@ -305,14 +293,14 @@ class __$$createPassCodeDoneCopyWithImpl<$Res>
 class _$createPassCodeDone
     with DiagnosticableTreeMixin
     implements createPassCodeDone {
-  const _$createPassCodeDone(this.wallet);
+  const _$createPassCodeDone(this.passcode);
 
   @override
-  final WalletInfoEntity wallet;
+  final String passcode;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'PasscodeState.done(wallet: $wallet)';
+    return 'PasscodeState.done(passcode: $passcode)';
   }
 
   @override
@@ -320,7 +308,7 @@ class _$createPassCodeDone
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty('type', 'PasscodeState.done'))
-      ..add(DiagnosticsProperty('wallet', wallet));
+      ..add(DiagnosticsProperty('passcode', passcode));
   }
 
   @override
@@ -328,12 +316,12 @@ class _$createPassCodeDone
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$createPassCodeDone &&
-            const DeepCollectionEquality().equals(other.wallet, wallet));
+            const DeepCollectionEquality().equals(other.passcode, passcode));
   }
 
   @override
   int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(wallet));
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(passcode));
 
   @JsonKey(ignore: true)
   @override
@@ -344,34 +332,39 @@ class _$createPassCodeDone
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(String passCode, String mnemonic, bool isLoading)
-        initial,
-    required TResult Function(WalletInfoEntity wallet) done,
+    required TResult Function(bool isLoading) initial,
+    required TResult Function(String passcode) done,
     required TResult Function(String msg) error,
+    required TResult Function() valid,
+    required TResult Function() inValid,
   }) {
-    return done(wallet);
+    return done(passcode);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(String passCode, String mnemonic, bool isLoading)? initial,
-    TResult Function(WalletInfoEntity wallet)? done,
+    TResult Function(bool isLoading)? initial,
+    TResult Function(String passcode)? done,
     TResult Function(String msg)? error,
+    TResult Function()? valid,
+    TResult Function()? inValid,
   }) {
-    return done?.call(wallet);
+    return done?.call(passcode);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String passCode, String mnemonic, bool isLoading)? initial,
-    TResult Function(WalletInfoEntity wallet)? done,
+    TResult Function(bool isLoading)? initial,
+    TResult Function(String passcode)? done,
     TResult Function(String msg)? error,
+    TResult Function()? valid,
+    TResult Function()? inValid,
     required TResult orElse(),
   }) {
     if (done != null) {
-      return done(wallet);
+      return done(passcode);
     }
     return orElse();
   }
@@ -382,6 +375,8 @@ class _$createPassCodeDone
     required TResult Function(PasscodeStateInitial value) initial,
     required TResult Function(createPassCodeDone value) done,
     required TResult Function(createNewPassCodeError value) error,
+    required TResult Function(checkPassCodeValid value) valid,
+    required TResult Function(checkPassCodeInValid value) inValid,
   }) {
     return done(this);
   }
@@ -392,6 +387,8 @@ class _$createPassCodeDone
     TResult Function(PasscodeStateInitial value)? initial,
     TResult Function(createPassCodeDone value)? done,
     TResult Function(createNewPassCodeError value)? error,
+    TResult Function(checkPassCodeValid value)? valid,
+    TResult Function(checkPassCodeInValid value)? inValid,
   }) {
     return done?.call(this);
   }
@@ -402,6 +399,8 @@ class _$createPassCodeDone
     TResult Function(PasscodeStateInitial value)? initial,
     TResult Function(createPassCodeDone value)? done,
     TResult Function(createNewPassCodeError value)? error,
+    TResult Function(checkPassCodeValid value)? valid,
+    TResult Function(checkPassCodeInValid value)? inValid,
     required TResult orElse(),
   }) {
     if (done != null) {
@@ -412,10 +411,10 @@ class _$createPassCodeDone
 }
 
 abstract class createPassCodeDone implements PasscodeState {
-  const factory createPassCodeDone(final WalletInfoEntity wallet) =
+  const factory createPassCodeDone(final String passcode) =
       _$createPassCodeDone;
 
-  WalletInfoEntity get wallet => throw _privateConstructorUsedError;
+  String get passcode => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
   _$$createPassCodeDoneCopyWith<_$createPassCodeDone> get copyWith =>
       throw _privateConstructorUsedError;
@@ -498,10 +497,11 @@ class _$createNewPassCodeError
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(String passCode, String mnemonic, bool isLoading)
-        initial,
-    required TResult Function(WalletInfoEntity wallet) done,
+    required TResult Function(bool isLoading) initial,
+    required TResult Function(String passcode) done,
     required TResult Function(String msg) error,
+    required TResult Function() valid,
+    required TResult Function() inValid,
   }) {
     return error(msg);
   }
@@ -509,9 +509,11 @@ class _$createNewPassCodeError
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(String passCode, String mnemonic, bool isLoading)? initial,
-    TResult Function(WalletInfoEntity wallet)? done,
+    TResult Function(bool isLoading)? initial,
+    TResult Function(String passcode)? done,
     TResult Function(String msg)? error,
+    TResult Function()? valid,
+    TResult Function()? inValid,
   }) {
     return error?.call(msg);
   }
@@ -519,9 +521,11 @@ class _$createNewPassCodeError
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String passCode, String mnemonic, bool isLoading)? initial,
-    TResult Function(WalletInfoEntity wallet)? done,
+    TResult Function(bool isLoading)? initial,
+    TResult Function(String passcode)? done,
     TResult Function(String msg)? error,
+    TResult Function()? valid,
+    TResult Function()? inValid,
     required TResult orElse(),
   }) {
     if (error != null) {
@@ -536,6 +540,8 @@ class _$createNewPassCodeError
     required TResult Function(PasscodeStateInitial value) initial,
     required TResult Function(createPassCodeDone value) done,
     required TResult Function(createNewPassCodeError value) error,
+    required TResult Function(checkPassCodeValid value) valid,
+    required TResult Function(checkPassCodeInValid value) inValid,
   }) {
     return error(this);
   }
@@ -546,6 +552,8 @@ class _$createNewPassCodeError
     TResult Function(PasscodeStateInitial value)? initial,
     TResult Function(createPassCodeDone value)? done,
     TResult Function(createNewPassCodeError value)? error,
+    TResult Function(checkPassCodeValid value)? valid,
+    TResult Function(checkPassCodeInValid value)? inValid,
   }) {
     return error?.call(this);
   }
@@ -556,6 +564,8 @@ class _$createNewPassCodeError
     TResult Function(PasscodeStateInitial value)? initial,
     TResult Function(createPassCodeDone value)? done,
     TResult Function(createNewPassCodeError value)? error,
+    TResult Function(checkPassCodeValid value)? valid,
+    TResult Function(checkPassCodeInValid value)? inValid,
     required TResult orElse(),
   }) {
     if (error != null) {
@@ -573,4 +583,266 @@ abstract class createNewPassCodeError implements PasscodeState {
   @JsonKey(ignore: true)
   _$$createNewPassCodeErrorCopyWith<_$createNewPassCodeError> get copyWith =>
       throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$checkPassCodeValidCopyWith<$Res> {
+  factory _$$checkPassCodeValidCopyWith(_$checkPassCodeValid value,
+          $Res Function(_$checkPassCodeValid) then) =
+      __$$checkPassCodeValidCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$checkPassCodeValidCopyWithImpl<$Res>
+    extends _$PasscodeStateCopyWithImpl<$Res>
+    implements _$$checkPassCodeValidCopyWith<$Res> {
+  __$$checkPassCodeValidCopyWithImpl(
+      _$checkPassCodeValid _value, $Res Function(_$checkPassCodeValid) _then)
+      : super(_value, (v) => _then(v as _$checkPassCodeValid));
+
+  @override
+  _$checkPassCodeValid get _value => super._value as _$checkPassCodeValid;
+}
+
+/// @nodoc
+
+class _$checkPassCodeValid
+    with DiagnosticableTreeMixin
+    implements checkPassCodeValid {
+  const _$checkPassCodeValid();
+
+  @override
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+    return 'PasscodeState.valid()';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty('type', 'PasscodeState.valid'));
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$checkPassCodeValid);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(bool isLoading) initial,
+    required TResult Function(String passcode) done,
+    required TResult Function(String msg) error,
+    required TResult Function() valid,
+    required TResult Function() inValid,
+  }) {
+    return valid();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult Function(bool isLoading)? initial,
+    TResult Function(String passcode)? done,
+    TResult Function(String msg)? error,
+    TResult Function()? valid,
+    TResult Function()? inValid,
+  }) {
+    return valid?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(bool isLoading)? initial,
+    TResult Function(String passcode)? done,
+    TResult Function(String msg)? error,
+    TResult Function()? valid,
+    TResult Function()? inValid,
+    required TResult orElse(),
+  }) {
+    if (valid != null) {
+      return valid();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(PasscodeStateInitial value) initial,
+    required TResult Function(createPassCodeDone value) done,
+    required TResult Function(createNewPassCodeError value) error,
+    required TResult Function(checkPassCodeValid value) valid,
+    required TResult Function(checkPassCodeInValid value) inValid,
+  }) {
+    return valid(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(PasscodeStateInitial value)? initial,
+    TResult Function(createPassCodeDone value)? done,
+    TResult Function(createNewPassCodeError value)? error,
+    TResult Function(checkPassCodeValid value)? valid,
+    TResult Function(checkPassCodeInValid value)? inValid,
+  }) {
+    return valid?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(PasscodeStateInitial value)? initial,
+    TResult Function(createPassCodeDone value)? done,
+    TResult Function(createNewPassCodeError value)? error,
+    TResult Function(checkPassCodeValid value)? valid,
+    TResult Function(checkPassCodeInValid value)? inValid,
+    required TResult orElse(),
+  }) {
+    if (valid != null) {
+      return valid(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class checkPassCodeValid implements PasscodeState {
+  const factory checkPassCodeValid() = _$checkPassCodeValid;
+}
+
+/// @nodoc
+abstract class _$$checkPassCodeInValidCopyWith<$Res> {
+  factory _$$checkPassCodeInValidCopyWith(_$checkPassCodeInValid value,
+          $Res Function(_$checkPassCodeInValid) then) =
+      __$$checkPassCodeInValidCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$checkPassCodeInValidCopyWithImpl<$Res>
+    extends _$PasscodeStateCopyWithImpl<$Res>
+    implements _$$checkPassCodeInValidCopyWith<$Res> {
+  __$$checkPassCodeInValidCopyWithImpl(_$checkPassCodeInValid _value,
+      $Res Function(_$checkPassCodeInValid) _then)
+      : super(_value, (v) => _then(v as _$checkPassCodeInValid));
+
+  @override
+  _$checkPassCodeInValid get _value => super._value as _$checkPassCodeInValid;
+}
+
+/// @nodoc
+
+class _$checkPassCodeInValid
+    with DiagnosticableTreeMixin
+    implements checkPassCodeInValid {
+  const _$checkPassCodeInValid();
+
+  @override
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+    return 'PasscodeState.inValid()';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty('type', 'PasscodeState.inValid'));
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$checkPassCodeInValid);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(bool isLoading) initial,
+    required TResult Function(String passcode) done,
+    required TResult Function(String msg) error,
+    required TResult Function() valid,
+    required TResult Function() inValid,
+  }) {
+    return inValid();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult Function(bool isLoading)? initial,
+    TResult Function(String passcode)? done,
+    TResult Function(String msg)? error,
+    TResult Function()? valid,
+    TResult Function()? inValid,
+  }) {
+    return inValid?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(bool isLoading)? initial,
+    TResult Function(String passcode)? done,
+    TResult Function(String msg)? error,
+    TResult Function()? valid,
+    TResult Function()? inValid,
+    required TResult orElse(),
+  }) {
+    if (inValid != null) {
+      return inValid();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(PasscodeStateInitial value) initial,
+    required TResult Function(createPassCodeDone value) done,
+    required TResult Function(createNewPassCodeError value) error,
+    required TResult Function(checkPassCodeValid value) valid,
+    required TResult Function(checkPassCodeInValid value) inValid,
+  }) {
+    return inValid(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(PasscodeStateInitial value)? initial,
+    TResult Function(createPassCodeDone value)? done,
+    TResult Function(createNewPassCodeError value)? error,
+    TResult Function(checkPassCodeValid value)? valid,
+    TResult Function(checkPassCodeInValid value)? inValid,
+  }) {
+    return inValid?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(PasscodeStateInitial value)? initial,
+    TResult Function(createPassCodeDone value)? done,
+    TResult Function(createNewPassCodeError value)? error,
+    TResult Function(checkPassCodeValid value)? valid,
+    TResult Function(checkPassCodeInValid value)? inValid,
+    required TResult orElse(),
+  }) {
+    if (inValid != null) {
+      return inValid(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class checkPassCodeInValid implements PasscodeState {
+  const factory checkPassCodeInValid() = _$checkPassCodeInValid;
 }
