@@ -1,6 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:slee_fi/l10n/locale_keys.g.dart';
+import 'package:slee_fi/resources/resources.dart';
 
 class Const {
   static const int passcodeLength = 6;
@@ -42,6 +43,34 @@ class Const {
     localePT,
     localeRU,
     localeZH,
+  ];
+
+  static const tokens = [
+    {
+      "address": "0xB31f66AA3C1e785363F0875A1B74E27b85FD66c7",
+      "symbol": "AVAX",
+      "decimal": 18,
+      "icon": Ics.icAvax,
+    },
+    {
+      "address": "0xB31f66AA3C1e785363F0875A1B74E27b85FD66c7",
+      "symbol": "SLFT",
+      "decimal": 18,
+      "icon": Ics.icSlft,
+    },
+    {
+      "address": "0xB31f66AA3C1e785363F0875A1B74E27b85FD66c7",
+      "symbol": "SLGT",
+      "decimal": 18,
+      "icon": Ics.icSlgt,
+    },
+    {
+      "address": "0xB97EF9Ef8734C71904D8002F8b6Bc66Dd9c48a6E",//mainnet
+      // "address": "0x43CDA502069B1dFa4f7C1a1625Bc6be47cD0bD88",//testnet
+      "symbol": "USDC",
+      "decimal": 6,
+      "icon": Ics.icUsdc,
+    },
   ];
 
   static const isoLangs = {

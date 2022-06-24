@@ -11,6 +11,7 @@ class ImportWalletCubit extends Cubit<ImportWalletState> {
   final randomUtils = getIt<RandomUtils>();
   final importWalletUC = getIt<ImportWalletUseCase>();
 
+
   String otp = '';
   String mnemonic = '';
   String remoteOtp = '';

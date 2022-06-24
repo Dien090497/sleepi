@@ -11,8 +11,9 @@ import 'package:slee_fi/common/widgets/sf_text.dart';
 import 'package:slee_fi/l10n/locale_keys.g.dart';
 
 class ModalReceiveWallet extends StatelessWidget {
-  const ModalReceiveWallet({Key? key, required this.address}) : super(key: key);
+  const ModalReceiveWallet({Key? key, required this.address, required this.networkName}) : super(key: key);
   final String address;
+  final String networkName;
 
   @override
   Widget build(BuildContext context) {
@@ -32,14 +33,14 @@ class ModalReceiveWallet extends StatelessWidget {
         const SizedBox(height: 16),
         Padding(
           padding: EdgeInsets.symmetric(
-              horizontal: MediaQuery.of(context).size.width * 0.28),
+              horizontal: MediaQuery.of(context).size.width * 0.18),
           child: Container(
             padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
             decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(100.0),
                 color: AppColors.blue.withOpacity(0.15)),
             child: SFText(
-              keyText: LocaleKeys.avalanche,
+              keyText: networkName,
               style: TextStyles.blue14,
               textAlign: TextAlign.center,
             ),

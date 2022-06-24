@@ -20,33 +20,27 @@ mixin _$WalletState {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function() empty,
-    required TResult Function(
-            WalletInfoEntity walletInfoEntity, List<TokenEntity> tokenList)
-        success,
-    required TResult Function(String message) error,
+    required TResult Function(WalletInfoEntity? walletInfoEntity,
+            bool firstOpenWallet, String mnemonic)
+        loaded,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function()? empty,
-    TResult Function(
-            WalletInfoEntity walletInfoEntity, List<TokenEntity> tokenList)?
-        success,
-    TResult Function(String message)? error,
+    TResult Function(WalletInfoEntity? walletInfoEntity, bool firstOpenWallet,
+            String mnemonic)?
+        loaded,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function()? empty,
-    TResult Function(
-            WalletInfoEntity walletInfoEntity, List<TokenEntity> tokenList)?
-        success,
-    TResult Function(String message)? error,
+    TResult Function(WalletInfoEntity? walletInfoEntity, bool firstOpenWallet,
+            String mnemonic)?
+        loaded,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -54,27 +48,21 @@ mixin _$WalletState {
   TResult map<TResult extends Object?>({
     required TResult Function(WalletStateInitial value) initial,
     required TResult Function(WalletStateLoading value) loading,
-    required TResult Function(WalletStateEmpty value) empty,
-    required TResult Function(WalletStateSuccess value) success,
-    required TResult Function(WalletStateError value) error,
+    required TResult Function(WalletStateLoaded value) loaded,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult Function(WalletStateInitial value)? initial,
     TResult Function(WalletStateLoading value)? loading,
-    TResult Function(WalletStateEmpty value)? empty,
-    TResult Function(WalletStateSuccess value)? success,
-    TResult Function(WalletStateError value)? error,
+    TResult Function(WalletStateLoaded value)? loaded,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(WalletStateInitial value)? initial,
     TResult Function(WalletStateLoading value)? loading,
-    TResult Function(WalletStateEmpty value)? empty,
-    TResult Function(WalletStateSuccess value)? success,
-    TResult Function(WalletStateError value)? error,
+    TResult Function(WalletStateLoaded value)? loaded,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -139,11 +127,9 @@ class _$WalletStateInitial implements WalletStateInitial {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function() empty,
-    required TResult Function(
-            WalletInfoEntity walletInfoEntity, List<TokenEntity> tokenList)
-        success,
-    required TResult Function(String message) error,
+    required TResult Function(WalletInfoEntity? walletInfoEntity,
+            bool firstOpenWallet, String mnemonic)
+        loaded,
   }) {
     return initial();
   }
@@ -153,11 +139,9 @@ class _$WalletStateInitial implements WalletStateInitial {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function()? empty,
-    TResult Function(
-            WalletInfoEntity walletInfoEntity, List<TokenEntity> tokenList)?
-        success,
-    TResult Function(String message)? error,
+    TResult Function(WalletInfoEntity? walletInfoEntity, bool firstOpenWallet,
+            String mnemonic)?
+        loaded,
   }) {
     return initial?.call();
   }
@@ -167,11 +151,9 @@ class _$WalletStateInitial implements WalletStateInitial {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function()? empty,
-    TResult Function(
-            WalletInfoEntity walletInfoEntity, List<TokenEntity> tokenList)?
-        success,
-    TResult Function(String message)? error,
+    TResult Function(WalletInfoEntity? walletInfoEntity, bool firstOpenWallet,
+            String mnemonic)?
+        loaded,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -185,9 +167,7 @@ class _$WalletStateInitial implements WalletStateInitial {
   TResult map<TResult extends Object?>({
     required TResult Function(WalletStateInitial value) initial,
     required TResult Function(WalletStateLoading value) loading,
-    required TResult Function(WalletStateEmpty value) empty,
-    required TResult Function(WalletStateSuccess value) success,
-    required TResult Function(WalletStateError value) error,
+    required TResult Function(WalletStateLoaded value) loaded,
   }) {
     return initial(this);
   }
@@ -197,9 +177,7 @@ class _$WalletStateInitial implements WalletStateInitial {
   TResult? mapOrNull<TResult extends Object?>({
     TResult Function(WalletStateInitial value)? initial,
     TResult Function(WalletStateLoading value)? loading,
-    TResult Function(WalletStateEmpty value)? empty,
-    TResult Function(WalletStateSuccess value)? success,
-    TResult Function(WalletStateError value)? error,
+    TResult Function(WalletStateLoaded value)? loaded,
   }) {
     return initial?.call(this);
   }
@@ -209,9 +187,7 @@ class _$WalletStateInitial implements WalletStateInitial {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(WalletStateInitial value)? initial,
     TResult Function(WalletStateLoading value)? loading,
-    TResult Function(WalletStateEmpty value)? empty,
-    TResult Function(WalletStateSuccess value)? success,
-    TResult Function(WalletStateError value)? error,
+    TResult Function(WalletStateLoaded value)? loaded,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -268,11 +244,9 @@ class _$WalletStateLoading implements WalletStateLoading {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function() empty,
-    required TResult Function(
-            WalletInfoEntity walletInfoEntity, List<TokenEntity> tokenList)
-        success,
-    required TResult Function(String message) error,
+    required TResult Function(WalletInfoEntity? walletInfoEntity,
+            bool firstOpenWallet, String mnemonic)
+        loaded,
   }) {
     return loading();
   }
@@ -282,11 +256,9 @@ class _$WalletStateLoading implements WalletStateLoading {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function()? empty,
-    TResult Function(
-            WalletInfoEntity walletInfoEntity, List<TokenEntity> tokenList)?
-        success,
-    TResult Function(String message)? error,
+    TResult Function(WalletInfoEntity? walletInfoEntity, bool firstOpenWallet,
+            String mnemonic)?
+        loaded,
   }) {
     return loading?.call();
   }
@@ -296,11 +268,9 @@ class _$WalletStateLoading implements WalletStateLoading {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function()? empty,
-    TResult Function(
-            WalletInfoEntity walletInfoEntity, List<TokenEntity> tokenList)?
-        success,
-    TResult Function(String message)? error,
+    TResult Function(WalletInfoEntity? walletInfoEntity, bool firstOpenWallet,
+            String mnemonic)?
+        loaded,
     required TResult orElse(),
   }) {
     if (loading != null) {
@@ -314,9 +284,7 @@ class _$WalletStateLoading implements WalletStateLoading {
   TResult map<TResult extends Object?>({
     required TResult Function(WalletStateInitial value) initial,
     required TResult Function(WalletStateLoading value) loading,
-    required TResult Function(WalletStateEmpty value) empty,
-    required TResult Function(WalletStateSuccess value) success,
-    required TResult Function(WalletStateError value) error,
+    required TResult Function(WalletStateLoaded value) loaded,
   }) {
     return loading(this);
   }
@@ -326,9 +294,7 @@ class _$WalletStateLoading implements WalletStateLoading {
   TResult? mapOrNull<TResult extends Object?>({
     TResult Function(WalletStateInitial value)? initial,
     TResult Function(WalletStateLoading value)? loading,
-    TResult Function(WalletStateEmpty value)? empty,
-    TResult Function(WalletStateSuccess value)? success,
-    TResult Function(WalletStateError value)? error,
+    TResult Function(WalletStateLoaded value)? loaded,
   }) {
     return loading?.call(this);
   }
@@ -338,9 +304,7 @@ class _$WalletStateLoading implements WalletStateLoading {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(WalletStateInitial value)? initial,
     TResult Function(WalletStateLoading value)? loading,
-    TResult Function(WalletStateEmpty value)? empty,
-    TResult Function(WalletStateSuccess value)? success,
-    TResult Function(WalletStateError value)? error,
+    TResult Function(WalletStateLoaded value)? loaded,
     required TResult orElse(),
   }) {
     if (loading != null) {
@@ -355,175 +319,58 @@ abstract class WalletStateLoading implements WalletState {
 }
 
 /// @nodoc
-abstract class _$$WalletStateEmptyCopyWith<$Res> {
-  factory _$$WalletStateEmptyCopyWith(
-          _$WalletStateEmpty value, $Res Function(_$WalletStateEmpty) then) =
-      __$$WalletStateEmptyCopyWithImpl<$Res>;
+abstract class _$$WalletStateLoadedCopyWith<$Res> {
+  factory _$$WalletStateLoadedCopyWith(
+          _$WalletStateLoaded value, $Res Function(_$WalletStateLoaded) then) =
+      __$$WalletStateLoadedCopyWithImpl<$Res>;
+  $Res call(
+      {WalletInfoEntity? walletInfoEntity,
+      bool firstOpenWallet,
+      String mnemonic});
+
+  $WalletInfoEntityCopyWith<$Res>? get walletInfoEntity;
 }
 
 /// @nodoc
-class __$$WalletStateEmptyCopyWithImpl<$Res>
+class __$$WalletStateLoadedCopyWithImpl<$Res>
     extends _$WalletStateCopyWithImpl<$Res>
-    implements _$$WalletStateEmptyCopyWith<$Res> {
-  __$$WalletStateEmptyCopyWithImpl(
-      _$WalletStateEmpty _value, $Res Function(_$WalletStateEmpty) _then)
-      : super(_value, (v) => _then(v as _$WalletStateEmpty));
+    implements _$$WalletStateLoadedCopyWith<$Res> {
+  __$$WalletStateLoadedCopyWithImpl(
+      _$WalletStateLoaded _value, $Res Function(_$WalletStateLoaded) _then)
+      : super(_value, (v) => _then(v as _$WalletStateLoaded));
 
   @override
-  _$WalletStateEmpty get _value => super._value as _$WalletStateEmpty;
-}
-
-/// @nodoc
-
-class _$WalletStateEmpty implements WalletStateEmpty {
-  const _$WalletStateEmpty();
-
-  @override
-  String toString() {
-    return 'WalletState.empty()';
-  }
-
-  @override
-  bool operator ==(dynamic other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$WalletStateEmpty);
-  }
-
-  @override
-  int get hashCode => runtimeType.hashCode;
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() initial,
-    required TResult Function() loading,
-    required TResult Function() empty,
-    required TResult Function(
-            WalletInfoEntity walletInfoEntity, List<TokenEntity> tokenList)
-        success,
-    required TResult Function(String message) error,
-  }) {
-    return empty();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult Function()? initial,
-    TResult Function()? loading,
-    TResult Function()? empty,
-    TResult Function(
-            WalletInfoEntity walletInfoEntity, List<TokenEntity> tokenList)?
-        success,
-    TResult Function(String message)? error,
-  }) {
-    return empty?.call();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initial,
-    TResult Function()? loading,
-    TResult Function()? empty,
-    TResult Function(
-            WalletInfoEntity walletInfoEntity, List<TokenEntity> tokenList)?
-        success,
-    TResult Function(String message)? error,
-    required TResult orElse(),
-  }) {
-    if (empty != null) {
-      return empty();
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(WalletStateInitial value) initial,
-    required TResult Function(WalletStateLoading value) loading,
-    required TResult Function(WalletStateEmpty value) empty,
-    required TResult Function(WalletStateSuccess value) success,
-    required TResult Function(WalletStateError value) error,
-  }) {
-    return empty(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(WalletStateInitial value)? initial,
-    TResult Function(WalletStateLoading value)? loading,
-    TResult Function(WalletStateEmpty value)? empty,
-    TResult Function(WalletStateSuccess value)? success,
-    TResult Function(WalletStateError value)? error,
-  }) {
-    return empty?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(WalletStateInitial value)? initial,
-    TResult Function(WalletStateLoading value)? loading,
-    TResult Function(WalletStateEmpty value)? empty,
-    TResult Function(WalletStateSuccess value)? success,
-    TResult Function(WalletStateError value)? error,
-    required TResult orElse(),
-  }) {
-    if (empty != null) {
-      return empty(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class WalletStateEmpty implements WalletState {
-  const factory WalletStateEmpty() = _$WalletStateEmpty;
-}
-
-/// @nodoc
-abstract class _$$WalletStateSuccessCopyWith<$Res> {
-  factory _$$WalletStateSuccessCopyWith(_$WalletStateSuccess value,
-          $Res Function(_$WalletStateSuccess) then) =
-      __$$WalletStateSuccessCopyWithImpl<$Res>;
-  $Res call({WalletInfoEntity walletInfoEntity, List<TokenEntity> tokenList});
-
-  $WalletInfoEntityCopyWith<$Res> get walletInfoEntity;
-}
-
-/// @nodoc
-class __$$WalletStateSuccessCopyWithImpl<$Res>
-    extends _$WalletStateCopyWithImpl<$Res>
-    implements _$$WalletStateSuccessCopyWith<$Res> {
-  __$$WalletStateSuccessCopyWithImpl(
-      _$WalletStateSuccess _value, $Res Function(_$WalletStateSuccess) _then)
-      : super(_value, (v) => _then(v as _$WalletStateSuccess));
-
-  @override
-  _$WalletStateSuccess get _value => super._value as _$WalletStateSuccess;
+  _$WalletStateLoaded get _value => super._value as _$WalletStateLoaded;
 
   @override
   $Res call({
     Object? walletInfoEntity = freezed,
-    Object? tokenList = freezed,
+    Object? firstOpenWallet = freezed,
+    Object? mnemonic = freezed,
   }) {
-    return _then(_$WalletStateSuccess(
+    return _then(_$WalletStateLoaded(
       walletInfoEntity: walletInfoEntity == freezed
           ? _value.walletInfoEntity
           : walletInfoEntity // ignore: cast_nullable_to_non_nullable
-              as WalletInfoEntity,
-      tokenList: tokenList == freezed
-          ? _value._tokenList
-          : tokenList // ignore: cast_nullable_to_non_nullable
-              as List<TokenEntity>,
+              as WalletInfoEntity?,
+      firstOpenWallet: firstOpenWallet == freezed
+          ? _value.firstOpenWallet
+          : firstOpenWallet // ignore: cast_nullable_to_non_nullable
+              as bool,
+      mnemonic: mnemonic == freezed
+          ? _value.mnemonic
+          : mnemonic // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 
   @override
-  $WalletInfoEntityCopyWith<$Res> get walletInfoEntity {
-    return $WalletInfoEntityCopyWith<$Res>(_value.walletInfoEntity, (value) {
+  $WalletInfoEntityCopyWith<$Res>? get walletInfoEntity {
+    if (_value.walletInfoEntity == null) {
+      return null;
+    }
+
+    return $WalletInfoEntityCopyWith<$Res>(_value.walletInfoEntity!, (value) {
       return _then(_value.copyWith(walletInfoEntity: value));
     });
   }
@@ -531,61 +378,59 @@ class __$$WalletStateSuccessCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$WalletStateSuccess implements WalletStateSuccess {
-  const _$WalletStateSuccess(
+class _$WalletStateLoaded implements WalletStateLoaded {
+  const _$WalletStateLoaded(
       {required this.walletInfoEntity,
-      required final List<TokenEntity> tokenList})
-      : _tokenList = tokenList;
+      required this.firstOpenWallet,
+      this.mnemonic = ''});
 
   @override
-  final WalletInfoEntity walletInfoEntity;
-  final List<TokenEntity> _tokenList;
+  final WalletInfoEntity? walletInfoEntity;
   @override
-  List<TokenEntity> get tokenList {
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_tokenList);
-  }
+  final bool firstOpenWallet;
+  @override
+  @JsonKey()
+  final String mnemonic;
 
   @override
   String toString() {
-    return 'WalletState.success(walletInfoEntity: $walletInfoEntity, tokenList: $tokenList)';
+    return 'WalletState.loaded(walletInfoEntity: $walletInfoEntity, firstOpenWallet: $firstOpenWallet, mnemonic: $mnemonic)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$WalletStateSuccess &&
+            other is _$WalletStateLoaded &&
             const DeepCollectionEquality()
                 .equals(other.walletInfoEntity, walletInfoEntity) &&
             const DeepCollectionEquality()
-                .equals(other._tokenList, _tokenList));
+                .equals(other.firstOpenWallet, firstOpenWallet) &&
+            const DeepCollectionEquality().equals(other.mnemonic, mnemonic));
   }
 
   @override
   int get hashCode => Object.hash(
       runtimeType,
       const DeepCollectionEquality().hash(walletInfoEntity),
-      const DeepCollectionEquality().hash(_tokenList));
+      const DeepCollectionEquality().hash(firstOpenWallet),
+      const DeepCollectionEquality().hash(mnemonic));
 
   @JsonKey(ignore: true)
   @override
-  _$$WalletStateSuccessCopyWith<_$WalletStateSuccess> get copyWith =>
-      __$$WalletStateSuccessCopyWithImpl<_$WalletStateSuccess>(
-          this, _$identity);
+  _$$WalletStateLoadedCopyWith<_$WalletStateLoaded> get copyWith =>
+      __$$WalletStateLoadedCopyWithImpl<_$WalletStateLoaded>(this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function() empty,
-    required TResult Function(
-            WalletInfoEntity walletInfoEntity, List<TokenEntity> tokenList)
-        success,
-    required TResult Function(String message) error,
+    required TResult Function(WalletInfoEntity? walletInfoEntity,
+            bool firstOpenWallet, String mnemonic)
+        loaded,
   }) {
-    return success(walletInfoEntity, tokenList);
+    return loaded(walletInfoEntity, firstOpenWallet, mnemonic);
   }
 
   @override
@@ -593,13 +438,11 @@ class _$WalletStateSuccess implements WalletStateSuccess {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function()? empty,
-    TResult Function(
-            WalletInfoEntity walletInfoEntity, List<TokenEntity> tokenList)?
-        success,
-    TResult Function(String message)? error,
+    TResult Function(WalletInfoEntity? walletInfoEntity, bool firstOpenWallet,
+            String mnemonic)?
+        loaded,
   }) {
-    return success?.call(walletInfoEntity, tokenList);
+    return loaded?.call(walletInfoEntity, firstOpenWallet, mnemonic);
   }
 
   @override
@@ -607,15 +450,13 @@ class _$WalletStateSuccess implements WalletStateSuccess {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function()? empty,
-    TResult Function(
-            WalletInfoEntity walletInfoEntity, List<TokenEntity> tokenList)?
-        success,
-    TResult Function(String message)? error,
+    TResult Function(WalletInfoEntity? walletInfoEntity, bool firstOpenWallet,
+            String mnemonic)?
+        loaded,
     required TResult orElse(),
   }) {
-    if (success != null) {
-      return success(walletInfoEntity, tokenList);
+    if (loaded != null) {
+      return loaded(walletInfoEntity, firstOpenWallet, mnemonic);
     }
     return orElse();
   }
@@ -625,11 +466,9 @@ class _$WalletStateSuccess implements WalletStateSuccess {
   TResult map<TResult extends Object?>({
     required TResult Function(WalletStateInitial value) initial,
     required TResult Function(WalletStateLoading value) loading,
-    required TResult Function(WalletStateEmpty value) empty,
-    required TResult Function(WalletStateSuccess value) success,
-    required TResult Function(WalletStateError value) error,
+    required TResult Function(WalletStateLoaded value) loaded,
   }) {
-    return success(this);
+    return loaded(this);
   }
 
   @override
@@ -637,11 +476,9 @@ class _$WalletStateSuccess implements WalletStateSuccess {
   TResult? mapOrNull<TResult extends Object?>({
     TResult Function(WalletStateInitial value)? initial,
     TResult Function(WalletStateLoading value)? loading,
-    TResult Function(WalletStateEmpty value)? empty,
-    TResult Function(WalletStateSuccess value)? success,
-    TResult Function(WalletStateError value)? error,
+    TResult Function(WalletStateLoaded value)? loaded,
   }) {
-    return success?.call(this);
+    return loaded?.call(this);
   }
 
   @override
@@ -649,185 +486,26 @@ class _$WalletStateSuccess implements WalletStateSuccess {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(WalletStateInitial value)? initial,
     TResult Function(WalletStateLoading value)? loading,
-    TResult Function(WalletStateEmpty value)? empty,
-    TResult Function(WalletStateSuccess value)? success,
-    TResult Function(WalletStateError value)? error,
+    TResult Function(WalletStateLoaded value)? loaded,
     required TResult orElse(),
   }) {
-    if (success != null) {
-      return success(this);
+    if (loaded != null) {
+      return loaded(this);
     }
     return orElse();
   }
 }
 
-abstract class WalletStateSuccess implements WalletState {
-  const factory WalletStateSuccess(
-      {required final WalletInfoEntity walletInfoEntity,
-      required final List<TokenEntity> tokenList}) = _$WalletStateSuccess;
+abstract class WalletStateLoaded implements WalletState {
+  const factory WalletStateLoaded(
+      {required final WalletInfoEntity? walletInfoEntity,
+      required final bool firstOpenWallet,
+      final String mnemonic}) = _$WalletStateLoaded;
 
-  WalletInfoEntity get walletInfoEntity => throw _privateConstructorUsedError;
-  List<TokenEntity> get tokenList => throw _privateConstructorUsedError;
+  WalletInfoEntity? get walletInfoEntity => throw _privateConstructorUsedError;
+  bool get firstOpenWallet => throw _privateConstructorUsedError;
+  String get mnemonic => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  _$$WalletStateSuccessCopyWith<_$WalletStateSuccess> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class _$$WalletStateErrorCopyWith<$Res> {
-  factory _$$WalletStateErrorCopyWith(
-          _$WalletStateError value, $Res Function(_$WalletStateError) then) =
-      __$$WalletStateErrorCopyWithImpl<$Res>;
-  $Res call({String message});
-}
-
-/// @nodoc
-class __$$WalletStateErrorCopyWithImpl<$Res>
-    extends _$WalletStateCopyWithImpl<$Res>
-    implements _$$WalletStateErrorCopyWith<$Res> {
-  __$$WalletStateErrorCopyWithImpl(
-      _$WalletStateError _value, $Res Function(_$WalletStateError) _then)
-      : super(_value, (v) => _then(v as _$WalletStateError));
-
-  @override
-  _$WalletStateError get _value => super._value as _$WalletStateError;
-
-  @override
-  $Res call({
-    Object? message = freezed,
-  }) {
-    return _then(_$WalletStateError(
-      message: message == freezed
-          ? _value.message
-          : message // ignore: cast_nullable_to_non_nullable
-              as String,
-    ));
-  }
-}
-
-/// @nodoc
-
-class _$WalletStateError implements WalletStateError {
-  const _$WalletStateError({required this.message});
-
-  @override
-  final String message;
-
-  @override
-  String toString() {
-    return 'WalletState.error(message: $message)';
-  }
-
-  @override
-  bool operator ==(dynamic other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$WalletStateError &&
-            const DeepCollectionEquality().equals(other.message, message));
-  }
-
-  @override
-  int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(message));
-
-  @JsonKey(ignore: true)
-  @override
-  _$$WalletStateErrorCopyWith<_$WalletStateError> get copyWith =>
-      __$$WalletStateErrorCopyWithImpl<_$WalletStateError>(this, _$identity);
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() initial,
-    required TResult Function() loading,
-    required TResult Function() empty,
-    required TResult Function(
-            WalletInfoEntity walletInfoEntity, List<TokenEntity> tokenList)
-        success,
-    required TResult Function(String message) error,
-  }) {
-    return error(message);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult Function()? initial,
-    TResult Function()? loading,
-    TResult Function()? empty,
-    TResult Function(
-            WalletInfoEntity walletInfoEntity, List<TokenEntity> tokenList)?
-        success,
-    TResult Function(String message)? error,
-  }) {
-    return error?.call(message);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initial,
-    TResult Function()? loading,
-    TResult Function()? empty,
-    TResult Function(
-            WalletInfoEntity walletInfoEntity, List<TokenEntity> tokenList)?
-        success,
-    TResult Function(String message)? error,
-    required TResult orElse(),
-  }) {
-    if (error != null) {
-      return error(message);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(WalletStateInitial value) initial,
-    required TResult Function(WalletStateLoading value) loading,
-    required TResult Function(WalletStateEmpty value) empty,
-    required TResult Function(WalletStateSuccess value) success,
-    required TResult Function(WalletStateError value) error,
-  }) {
-    return error(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(WalletStateInitial value)? initial,
-    TResult Function(WalletStateLoading value)? loading,
-    TResult Function(WalletStateEmpty value)? empty,
-    TResult Function(WalletStateSuccess value)? success,
-    TResult Function(WalletStateError value)? error,
-  }) {
-    return error?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(WalletStateInitial value)? initial,
-    TResult Function(WalletStateLoading value)? loading,
-    TResult Function(WalletStateEmpty value)? empty,
-    TResult Function(WalletStateSuccess value)? success,
-    TResult Function(WalletStateError value)? error,
-    required TResult orElse(),
-  }) {
-    if (error != null) {
-      return error(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class WalletStateError implements WalletState {
-  const factory WalletStateError({required final String message}) =
-      _$WalletStateError;
-
-  String get message => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
-  _$$WalletStateErrorCopyWith<_$WalletStateError> get copyWith =>
+  _$$WalletStateLoadedCopyWith<_$WalletStateLoaded> get copyWith =>
       throw _privateConstructorUsedError;
 }

@@ -64,39 +64,28 @@ class AlarmBell extends StatelessWidget {
           const SizedBox(height: 32),
           Row(
             children: [
-              Expanded(child: Stack(
-                alignment: Alignment.centerLeft,
-                children: [
-                  SFPercentBorderGradient(
-                    valueActive: 70,
-                    totalValue: 100,
-                    linearGradient: AppColors.gradientBluePurple,
-                    lineHeight: 18,
-                    barRadius: 20,
-                    backgroundColor: Colors.white.withOpacity(0.05),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                    child: SFText(
-                      keyText: '100/150 SLFT',
-                      style: TextStyles.white10,
+              Expanded(
+                child: Stack(
+                  alignment: Alignment.centerLeft,
+                  children: [
+                    SFPercentBorderGradient(
+                      valueActive: 70,
+                      totalValue: 100,
+                      linearGradient: AppColors.gradientBluePurple,
+                      lineHeight: 18,
+                      barRadius: 20,
+                      backgroundColor: Colors.white.withOpacity(0.05),
                     ),
-                  )
-                ],
-              ),),
-              // Expanded(
-              //   child: Container(
-              //     padding:
-              //         const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
-              //     decoration: BoxDecoration(
-              //         color: AppColors.darkColor,
-              //         borderRadius: BorderRadius.circular(20)),
-              //     child: SFText(
-              //       keyText: '0.00/160 SLFT',
-              //       style: TextStyles.lightGrey10,
-              //     ),
-              //   ),
-              // ),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                      child: SFText(
+                        keyText: '100/150 SLFT',
+                        style: TextStyles.white10,
+                      ),
+                    )
+                  ],
+                ),
+              ),
               const SizedBox(width: 12),
               GestureDetector(
                 onTap: () => Navigator.pushNamed(context, R.question),

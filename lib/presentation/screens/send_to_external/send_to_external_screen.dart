@@ -56,6 +56,7 @@ class SendToExternalScreen extends StatelessWidget {
                       Expanded(
                         child: ListView(
                           children: [
+						  
                             Image.asset(Imgs.sendToExternal),
                             // const SizedBox(height: 32,),
                             SFCard(
@@ -101,6 +102,23 @@ class SendToExternalScreen extends StatelessWidget {
                                       style: TextStyles.w400lightGrey12,
                                       suffix: ': $balance AVAX'),
                                 ],
+								
+                            const SFTextField(
+                                labelText: LocaleKeys.to_address,
+                                suffixIcon: Padding(
+                                    padding: EdgeInsets.all(10),
+                                    child: SFIcon(
+                                      Ics.icScanOutlined,
+                                    ))),
+                            const SizedBox(height: 24),
+                            const SFTextField(
+                              labelText: LocaleKeys.amount,
+                              textInputType: TextInputType.number,
+                              suffixIcon: Padding(
+                                padding: EdgeInsets.all(8.0),
+                                child: DropdownSelectToken(
+                                  tokens: Const.tokens,
+                                ),
                               ),
                             ),
                             const SizedBox(

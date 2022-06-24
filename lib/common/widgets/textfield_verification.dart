@@ -9,7 +9,7 @@ import 'package:slee_fi/l10n/locale_keys.g.dart';
 
 class TextfieldVerificationEmail extends StatelessWidget {
   const TextfieldVerificationEmail({
-    this.labelText = LocaleKeys.verification_code,
+    this.labelText = LocaleKeys.email_verification_code,
     this.hintText,
     this.textButtonStyle,
     this.hintStyle,
@@ -82,6 +82,7 @@ class TextfieldVerificationEmail extends StatelessWidget {
                   controller: controller,
                   onChanged: valueChanged,
                   textInputType: textInputType,
+                  maxLength: maxLength,
                   hintStyle: hintStyle ?? TextStyles.lightGrey14,
                   suffix: suffix,
                   suffixIcon: suffixIcon,

@@ -3,7 +3,6 @@ import 'dart:math';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:slee_fi/common/const/const.dart';
 import 'package:slee_fi/common/extensions/string_x.dart';
 import 'package:slee_fi/common/routes/app_routes.dart';
@@ -16,6 +15,8 @@ import 'package:slee_fi/l10n/locale_keys.g.dart';
 import 'package:slee_fi/presentation/blocs/wallet/wallet_cubit.dart';
 import 'package:slee_fi/presentation/blocs/wallet/wallet_state.dart';
 import 'package:slee_fi/presentation/screens/send_to_external/send_to_external_screen.dart';
+import 'package:slee_fi/presentation/blocs/detail_wallet/detail_wallet_cubit.dart';
+import 'package:slee_fi/presentation/blocs/detail_wallet/detail_wallet_state.dart';
 import 'package:slee_fi/presentation/screens/wallet/widgets/box_button_widget.dart';
 import 'package:slee_fi/presentation/screens/wallet/widgets/modal_receive_wallet.dart';
 import 'package:slee_fi/presentation/screens/wallet/widgets/pop_up_info_wallet.dart';
@@ -24,33 +25,38 @@ import 'package:slee_fi/resources/resources.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class TabWalletDetail extends StatelessWidget {
-  const TabWalletDetail({Key? key}) : super(key: key);
+  const TabWalletDetail({
+    Key? key,
+    required this.balance,
+    required this.networkName,
+    required this.currencySymbol,
+    required this.addressWallet,
+  }) : super(key: key);
+  final int balance;
+  final String networkName;
+  final String currencySymbol;
+  final String addressWallet;
 
   @override
   Widget build(BuildContext context) {
     var isJapanese = Localizations.localeOf(context).toLanguageTag().isJapanese;
     return SingleChildScrollView(
       child: BlocProvider(
-        create: (context) => WalletCubit()..loadCurrentWallet(),
-        child: BlocConsumer<WalletCubit, WalletState>(
+        create: (context) => DetailWalletCubit()..loadCurrentWallet(),
+        child: BlocConsumer<DetailWalletCubit, DetailWalletState>(
           listener: (context, state) {},
           builder: (context, state) {
-            final cubit = context.read<WalletCubit>();
+            final cubit = context.read<DetailWalletCubit>();
             return Column(
               children: [
                 const SizedBox(height: 32),
                 Column(
                   children: [
-                    SFText(
-                        keyText: state is WalletStateSuccess
-                            ? state.walletInfoEntity.networkName
-                            : "AVAX C-Chain",
-                        style: TextStyles.bold12Blue),
+                    SFText(keyText: networkName, style: TextStyles.bold12Blue),
                     const SizedBox(height: 4.0),
                     SFText(
-                        keyText: state is WalletStateSuccess
-                            ? '${(state.walletInfoEntity.nativeCurrency.balance / pow(10, 18))} ${state.walletInfoEntity.nativeCurrency.symbol}'
-                            : "0 AVAX",
+                        keyText:
+                            '${balance == 0 ? 0 : balance / pow(10, 18)} $currencySymbol',
                         style: TextStyles.bold30White),
                     const SizedBox(height: 20.0),
                     Container(
@@ -62,9 +68,7 @@ class TabWalletDetail extends StatelessWidget {
                         color: AppColors.lightWhite.withOpacity(0.05),
                       ),
                       child: SFText(
-                          keyText: state is WalletStateSuccess
-                              ? state.walletInfoEntity.address.formatAddress
-                              : "0xC02aa...C756Cc2",
+                          keyText: addressWallet.formatAddress,
                           style: TextStyles.lightWhite14),
                     ),
                   ],
@@ -73,7 +77,7 @@ class TabWalletDetail extends StatelessWidget {
                 ConstrainedBox(
                   constraints: const BoxConstraints(maxHeight: 130),
                   child: Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 16.w),
+                    padding: const EdgeInsets.symmetric(horizontal: 23),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
@@ -83,9 +87,8 @@ class TabWalletDetail extends StatelessWidget {
                                 context,
                                 0.7,
                                 ModalReceiveWallet(
-                                  address: state is WalletStateSuccess
-                                      ? state.walletInfoEntity.address
-                                      : 'no address',
+                                  networkName: networkName,
+                                  address: addressWallet,
                                 )),
                             text: LocaleKeys.receive,
                             assetImage: Ics.icDownload,
@@ -94,14 +97,15 @@ class TabWalletDetail extends StatelessWidget {
                         const SizedBox(width: 10),
                         Expanded(
                           child: BoxButtonWidget(
-                            onTap: () {
-                              cubit.loadCurrentWallet();
-                            },
+                            onTap: () =>
+                                Navigator.pushNamed(context, R.transfer),
                             text: LocaleKeys.to_spending,
                             assetImage: Ics.icRefresh,
                           ),
                         ),
-                        const SizedBox(width: 10),
+                        const SizedBox(
+                          width: 10,
+                        ),
                         Expanded(
                           child: BoxButtonWidget(
                             onTap: () =>
@@ -110,7 +114,9 @@ class TabWalletDetail extends StatelessWidget {
                             assetImage: Ics.icArrowUpRight,
                           ),
                         ),
-                        const SizedBox(width: 10),
+                        const SizedBox(
+                          width: 10,
+                        ),
                         Expanded(
                           child: BoxButtonWidget(
                             onTap: () => Navigator.pushNamed(context, R.trade),
@@ -166,9 +172,9 @@ class TabWalletDetail extends StatelessWidget {
                   ),
                 ),
                 const SizedBox(height: 12.0),
-                state is WalletStateSuccess ?
-                WalletDetailList(tokenList: state.tokenList,) :
-                WalletDetailList(tokenList: cubit.tokenList,)
+                state is DetailWalletStateSuccess
+                    ? WalletDetailList(tokenList: state.tokenList)
+                    : WalletDetailList(tokenList: cubit.tokenList)
               ],
             );
           },
