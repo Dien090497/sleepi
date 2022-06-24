@@ -235,4 +235,12 @@ class WalletImplementation extends IWalletRepository {
 
     return Right(wallet.mnemonic);
   }
+
+  @override
+  Future<Either<Failure, double>> getAmountOutMin(double value, String contractAddressFrom, String contractAddressTo) async {
+    var walletId = _getStorageDataSource.getCurrentWalletId();
+    var wallet = await _isarDataSource.getWalletAt(walletId);
+    double amount = await _web3DataSource.getAmountOutMin(wallet!.address, contractAddressFrom, contractAddressTo, value);
+    return Right(amount);
+  }
 }

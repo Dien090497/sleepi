@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
@@ -15,9 +14,10 @@ class DropdownSelectToken extends StatefulWidget {
     this.margin,
     this.backgroundColor,
     this.isResultLabel = false,
-
     Key? key,
-    this.onChange, required this.tokens, this.globalKey,
+    this.onChange,
+    required this.tokens,
+    this.globalKey,
   }) : super(key: key);
 
   final int indexInit;
