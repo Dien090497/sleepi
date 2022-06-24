@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
@@ -12,20 +10,17 @@ import 'package:slee_fi/presentation/blocs/send_to_external/send_to_external_cub
 import 'package:slee_fi/presentation/blocs/send_to_external/send_to_external_state.dart';
 
 class PopUpConfirmSend extends StatelessWidget {
-  const PopUpConfirmSend({required this.toAddress, required this.valueInEther, Key? key}) : super(key: key);
+  const PopUpConfirmSend({required this.toAddress, required this.valueInEther, required this.fee, Key? key}) : super(key: key);
 
   final String toAddress;
   final double valueInEther;
+  final double fee;
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => SendToExternalCubit(),
+      create: (context) => SendToExternalCubit()..estimateGas(),
       child: BlocConsumer<SendToExternalCubit, SendToExternalState>(
-        listener: (context, state) {
-          if (state is sendToExternalDone) {
-           log("$state");
-          }
-        },
+        listener: (context, state) { },
         builder: (context, state) {
           final cubit = context.read<SendToExternalCubit>();
           cubit.toAddress = toAddress;
@@ -50,7 +45,7 @@ class PopUpConfirmSend extends StatelessWidget {
                     ),
                     Expanded(
                         child: SFText(
-                            keyText: "0.000005 AVAX",
+                            keyText: "$fee AVAX",
                             style: TextStyles.lightWhite16,
                             textAlign: TextAlign.end)),
                   ],

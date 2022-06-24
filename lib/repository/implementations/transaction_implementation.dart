@@ -1,6 +1,7 @@
 import 'dart:developer';
 
 import 'package:dartz/dartz.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:injectable/injectable.dart';
 import 'package:slee_fi/datasources/local/get_storage_datasource.dart';
 import 'package:slee_fi/datasources/local/isar/isar_datasource.dart';
@@ -65,10 +66,32 @@ class TransactionImplementation extends ITransactionRepository{
   }
 
   @override
-  Future<Either<Failure, double>> calculatorFee() async{
-    try{
-      var gasPrice = await _web3DataSource.getGasPrice();
-      return const Right(0);
+  Future<Either<Failure, int>> calculatorFee(SendToExternalParams params) async{
+    try {
+      var walletId = _getStorageDataSource.getCurrentWalletId();
+      if (walletId == null) {
+        return const Left(FailureMessage('Invalid Wallet'));
+      }
+
+      var wallet = await _isarDataSource.getWalletAt(walletId);
+
+      if (wallet == null) {
+        return const Left(FailureMessage('Invalid Wallet'));
+      }
+
+      final network = await _getCurrentNetwork();
+      final privateKey = _web3DataSource.mnemonicToPrivateKey(
+          wallet.mnemonic, wallet.derivedIndex!, network.slip44);
+      final credentials = _web3DataSource.credentialsFromPrivateKey("8bc930e084ce3b80402e990aeff7a27ba6829ecf0c398a3bed12ffadaecd39ae");
+      final ethereumAddress = await credentials.extractAddress();
+      final fee = await _web3DataSource.estimateGas(
+           sender: ethereumAddress,
+            to: "0x52839A88E9FdD2b137E32c65fEc8E7b3f1F1CCC6",
+        value: 0.001,
+        // gasPrice: 50
+
+      );
+      return Right(fee);
     } catch (e) {
       return Left(FailureMessage('$e'));
     }
@@ -77,7 +100,6 @@ class TransactionImplementation extends ITransactionRepository{
   @override
   Future<Either<Failure, int>> getBalance() async{
     try {
-      final chainId = _getStorageDataSource.getCurrentChainId();
       var walletId = _getStorageDataSource.getCurrentWalletId();
       if (walletId == null) {
         return const Left(FailureMessage('Invalid Wallet'));

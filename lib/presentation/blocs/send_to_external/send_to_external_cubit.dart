@@ -16,15 +16,8 @@ class SendToExternalCubit extends Cubit<SendToExternalState> {
 
   final _sendToExternalUC = getIt<SendToExternalUseCase>();
 
-  void sendToExternal() async {
-    if (toAddress.isEmpty) {
-      emit(const SendToExternalState.errorToAddress('Please Enter to address'));
-      return;
-    }
-    if (valueInEther == null) {
-      emit(const SendToExternalState.errorValueInEther('Please Enter value'));
-      return;
-    }
+  Future sendToExternal() async {
+
     var sendToExternalParams = SendToExternalParams(toAddress, valueInEther!);
     emit(const SendToExternalState.initial());
     final currentState = state;
@@ -53,4 +46,29 @@ class SendToExternalCubit extends Cubit<SendToExternalState> {
     });
   }
 
+   estimateGas() async {
+     if (toAddress.isEmpty) {
+       emit(
+           const SendToExternalState.errorToAddress('Please Enter to address'));
+       return;
+     }
+     if (valueInEther == null) {
+       emit(const SendToExternalState.errorValueInEther('Please Enter value'));
+       return;
+     }
+     var sendToExternalParams = SendToExternalParams(toAddress, valueInEther!);
+     emit(const SendToExternalState.initial());
+     final currentState = state;
+     if (currentState is sendToExternalStateInitial) {
+       emit(currentState.copyWith(isLoading: true));
+       final result = await _sendToExternalUC.calculatorFee(
+           sendToExternalParams);
+       result.fold((l) {
+         emit(SendToExternalState.errorToAddress(
+             l is FailureMessage ? l.msg : '$l'));
+       }, (r) {
+         emit(SendToExternalState.calculatorFee(r));
+       });
+     }
+   }
 }

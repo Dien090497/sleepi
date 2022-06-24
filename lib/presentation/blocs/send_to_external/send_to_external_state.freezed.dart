@@ -22,6 +22,7 @@ mixin _$SendToExternalState {
     required TResult Function(SendToExternalEntity entity) done,
     required TResult Function() loading,
     required TResult Function(int balance) getSuccess,
+    required TResult Function(int fee) calculatorFee,
     required TResult Function(String msg) errorToAddress,
     required TResult Function(String msg) errorValueInEther,
   }) =>
@@ -32,6 +33,7 @@ mixin _$SendToExternalState {
     TResult Function(SendToExternalEntity entity)? done,
     TResult Function()? loading,
     TResult Function(int balance)? getSuccess,
+    TResult Function(int fee)? calculatorFee,
     TResult Function(String msg)? errorToAddress,
     TResult Function(String msg)? errorValueInEther,
   }) =>
@@ -42,6 +44,7 @@ mixin _$SendToExternalState {
     TResult Function(SendToExternalEntity entity)? done,
     TResult Function()? loading,
     TResult Function(int balance)? getSuccess,
+    TResult Function(int fee)? calculatorFee,
     TResult Function(String msg)? errorToAddress,
     TResult Function(String msg)? errorValueInEther,
     required TResult orElse(),
@@ -53,6 +56,7 @@ mixin _$SendToExternalState {
     required TResult Function(sendToExternalDone value) done,
     required TResult Function(SendToExternalLoading value) loading,
     required TResult Function(SendToExternalGetSuccess value) getSuccess,
+    required TResult Function(SendToExternalCalculatorFee value) calculatorFee,
     required TResult Function(SendToExternalErrorToAddress value)
         errorToAddress,
     required TResult Function(SendToExternalErrorValueInEther value)
@@ -65,6 +69,7 @@ mixin _$SendToExternalState {
     TResult Function(sendToExternalDone value)? done,
     TResult Function(SendToExternalLoading value)? loading,
     TResult Function(SendToExternalGetSuccess value)? getSuccess,
+    TResult Function(SendToExternalCalculatorFee value)? calculatorFee,
     TResult Function(SendToExternalErrorToAddress value)? errorToAddress,
     TResult Function(SendToExternalErrorValueInEther value)? errorValueInEther,
   }) =>
@@ -75,6 +80,7 @@ mixin _$SendToExternalState {
     TResult Function(sendToExternalDone value)? done,
     TResult Function(SendToExternalLoading value)? loading,
     TResult Function(SendToExternalGetSuccess value)? getSuccess,
+    TResult Function(SendToExternalCalculatorFee value)? calculatorFee,
     TResult Function(SendToExternalErrorToAddress value)? errorToAddress,
     TResult Function(SendToExternalErrorValueInEther value)? errorValueInEther,
     required TResult orElse(),
@@ -183,6 +189,7 @@ class _$sendToExternalStateInitial
     required TResult Function(SendToExternalEntity entity) done,
     required TResult Function() loading,
     required TResult Function(int balance) getSuccess,
+    required TResult Function(int fee) calculatorFee,
     required TResult Function(String msg) errorToAddress,
     required TResult Function(String msg) errorValueInEther,
   }) {
@@ -196,6 +203,7 @@ class _$sendToExternalStateInitial
     TResult Function(SendToExternalEntity entity)? done,
     TResult Function()? loading,
     TResult Function(int balance)? getSuccess,
+    TResult Function(int fee)? calculatorFee,
     TResult Function(String msg)? errorToAddress,
     TResult Function(String msg)? errorValueInEther,
   }) {
@@ -209,6 +217,7 @@ class _$sendToExternalStateInitial
     TResult Function(SendToExternalEntity entity)? done,
     TResult Function()? loading,
     TResult Function(int balance)? getSuccess,
+    TResult Function(int fee)? calculatorFee,
     TResult Function(String msg)? errorToAddress,
     TResult Function(String msg)? errorValueInEther,
     required TResult orElse(),
@@ -226,6 +235,7 @@ class _$sendToExternalStateInitial
     required TResult Function(sendToExternalDone value) done,
     required TResult Function(SendToExternalLoading value) loading,
     required TResult Function(SendToExternalGetSuccess value) getSuccess,
+    required TResult Function(SendToExternalCalculatorFee value) calculatorFee,
     required TResult Function(SendToExternalErrorToAddress value)
         errorToAddress,
     required TResult Function(SendToExternalErrorValueInEther value)
@@ -241,6 +251,7 @@ class _$sendToExternalStateInitial
     TResult Function(sendToExternalDone value)? done,
     TResult Function(SendToExternalLoading value)? loading,
     TResult Function(SendToExternalGetSuccess value)? getSuccess,
+    TResult Function(SendToExternalCalculatorFee value)? calculatorFee,
     TResult Function(SendToExternalErrorToAddress value)? errorToAddress,
     TResult Function(SendToExternalErrorValueInEther value)? errorValueInEther,
   }) {
@@ -254,6 +265,7 @@ class _$sendToExternalStateInitial
     TResult Function(sendToExternalDone value)? done,
     TResult Function(SendToExternalLoading value)? loading,
     TResult Function(SendToExternalGetSuccess value)? getSuccess,
+    TResult Function(SendToExternalCalculatorFee value)? calculatorFee,
     TResult Function(SendToExternalErrorToAddress value)? errorToAddress,
     TResult Function(SendToExternalErrorValueInEther value)? errorValueInEther,
     required TResult orElse(),
@@ -364,6 +376,7 @@ class _$sendToExternalDone
     required TResult Function(SendToExternalEntity entity) done,
     required TResult Function() loading,
     required TResult Function(int balance) getSuccess,
+    required TResult Function(int fee) calculatorFee,
     required TResult Function(String msg) errorToAddress,
     required TResult Function(String msg) errorValueInEther,
   }) {
@@ -377,6 +390,7 @@ class _$sendToExternalDone
     TResult Function(SendToExternalEntity entity)? done,
     TResult Function()? loading,
     TResult Function(int balance)? getSuccess,
+    TResult Function(int fee)? calculatorFee,
     TResult Function(String msg)? errorToAddress,
     TResult Function(String msg)? errorValueInEther,
   }) {
@@ -390,6 +404,7 @@ class _$sendToExternalDone
     TResult Function(SendToExternalEntity entity)? done,
     TResult Function()? loading,
     TResult Function(int balance)? getSuccess,
+    TResult Function(int fee)? calculatorFee,
     TResult Function(String msg)? errorToAddress,
     TResult Function(String msg)? errorValueInEther,
     required TResult orElse(),
@@ -407,6 +422,7 @@ class _$sendToExternalDone
     required TResult Function(sendToExternalDone value) done,
     required TResult Function(SendToExternalLoading value) loading,
     required TResult Function(SendToExternalGetSuccess value) getSuccess,
+    required TResult Function(SendToExternalCalculatorFee value) calculatorFee,
     required TResult Function(SendToExternalErrorToAddress value)
         errorToAddress,
     required TResult Function(SendToExternalErrorValueInEther value)
@@ -422,6 +438,7 @@ class _$sendToExternalDone
     TResult Function(sendToExternalDone value)? done,
     TResult Function(SendToExternalLoading value)? loading,
     TResult Function(SendToExternalGetSuccess value)? getSuccess,
+    TResult Function(SendToExternalCalculatorFee value)? calculatorFee,
     TResult Function(SendToExternalErrorToAddress value)? errorToAddress,
     TResult Function(SendToExternalErrorValueInEther value)? errorValueInEther,
   }) {
@@ -435,6 +452,7 @@ class _$sendToExternalDone
     TResult Function(sendToExternalDone value)? done,
     TResult Function(SendToExternalLoading value)? loading,
     TResult Function(SendToExternalGetSuccess value)? getSuccess,
+    TResult Function(SendToExternalCalculatorFee value)? calculatorFee,
     TResult Function(SendToExternalErrorToAddress value)? errorToAddress,
     TResult Function(SendToExternalErrorValueInEther value)? errorValueInEther,
     required TResult orElse(),
@@ -509,6 +527,7 @@ class _$SendToExternalLoading
     required TResult Function(SendToExternalEntity entity) done,
     required TResult Function() loading,
     required TResult Function(int balance) getSuccess,
+    required TResult Function(int fee) calculatorFee,
     required TResult Function(String msg) errorToAddress,
     required TResult Function(String msg) errorValueInEther,
   }) {
@@ -522,6 +541,7 @@ class _$SendToExternalLoading
     TResult Function(SendToExternalEntity entity)? done,
     TResult Function()? loading,
     TResult Function(int balance)? getSuccess,
+    TResult Function(int fee)? calculatorFee,
     TResult Function(String msg)? errorToAddress,
     TResult Function(String msg)? errorValueInEther,
   }) {
@@ -535,6 +555,7 @@ class _$SendToExternalLoading
     TResult Function(SendToExternalEntity entity)? done,
     TResult Function()? loading,
     TResult Function(int balance)? getSuccess,
+    TResult Function(int fee)? calculatorFee,
     TResult Function(String msg)? errorToAddress,
     TResult Function(String msg)? errorValueInEther,
     required TResult orElse(),
@@ -552,6 +573,7 @@ class _$SendToExternalLoading
     required TResult Function(sendToExternalDone value) done,
     required TResult Function(SendToExternalLoading value) loading,
     required TResult Function(SendToExternalGetSuccess value) getSuccess,
+    required TResult Function(SendToExternalCalculatorFee value) calculatorFee,
     required TResult Function(SendToExternalErrorToAddress value)
         errorToAddress,
     required TResult Function(SendToExternalErrorValueInEther value)
@@ -567,6 +589,7 @@ class _$SendToExternalLoading
     TResult Function(sendToExternalDone value)? done,
     TResult Function(SendToExternalLoading value)? loading,
     TResult Function(SendToExternalGetSuccess value)? getSuccess,
+    TResult Function(SendToExternalCalculatorFee value)? calculatorFee,
     TResult Function(SendToExternalErrorToAddress value)? errorToAddress,
     TResult Function(SendToExternalErrorValueInEther value)? errorValueInEther,
   }) {
@@ -580,6 +603,7 @@ class _$SendToExternalLoading
     TResult Function(sendToExternalDone value)? done,
     TResult Function(SendToExternalLoading value)? loading,
     TResult Function(SendToExternalGetSuccess value)? getSuccess,
+    TResult Function(SendToExternalCalculatorFee value)? calculatorFee,
     TResult Function(SendToExternalErrorToAddress value)? errorToAddress,
     TResult Function(SendToExternalErrorValueInEther value)? errorValueInEther,
     required TResult orElse(),
@@ -677,6 +701,7 @@ class _$SendToExternalGetSuccess
     required TResult Function(SendToExternalEntity entity) done,
     required TResult Function() loading,
     required TResult Function(int balance) getSuccess,
+    required TResult Function(int fee) calculatorFee,
     required TResult Function(String msg) errorToAddress,
     required TResult Function(String msg) errorValueInEther,
   }) {
@@ -690,6 +715,7 @@ class _$SendToExternalGetSuccess
     TResult Function(SendToExternalEntity entity)? done,
     TResult Function()? loading,
     TResult Function(int balance)? getSuccess,
+    TResult Function(int fee)? calculatorFee,
     TResult Function(String msg)? errorToAddress,
     TResult Function(String msg)? errorValueInEther,
   }) {
@@ -703,6 +729,7 @@ class _$SendToExternalGetSuccess
     TResult Function(SendToExternalEntity entity)? done,
     TResult Function()? loading,
     TResult Function(int balance)? getSuccess,
+    TResult Function(int fee)? calculatorFee,
     TResult Function(String msg)? errorToAddress,
     TResult Function(String msg)? errorValueInEther,
     required TResult orElse(),
@@ -720,6 +747,7 @@ class _$SendToExternalGetSuccess
     required TResult Function(sendToExternalDone value) done,
     required TResult Function(SendToExternalLoading value) loading,
     required TResult Function(SendToExternalGetSuccess value) getSuccess,
+    required TResult Function(SendToExternalCalculatorFee value) calculatorFee,
     required TResult Function(SendToExternalErrorToAddress value)
         errorToAddress,
     required TResult Function(SendToExternalErrorValueInEther value)
@@ -735,6 +763,7 @@ class _$SendToExternalGetSuccess
     TResult Function(sendToExternalDone value)? done,
     TResult Function(SendToExternalLoading value)? loading,
     TResult Function(SendToExternalGetSuccess value)? getSuccess,
+    TResult Function(SendToExternalCalculatorFee value)? calculatorFee,
     TResult Function(SendToExternalErrorToAddress value)? errorToAddress,
     TResult Function(SendToExternalErrorValueInEther value)? errorValueInEther,
   }) {
@@ -748,6 +777,7 @@ class _$SendToExternalGetSuccess
     TResult Function(sendToExternalDone value)? done,
     TResult Function(SendToExternalLoading value)? loading,
     TResult Function(SendToExternalGetSuccess value)? getSuccess,
+    TResult Function(SendToExternalCalculatorFee value)? calculatorFee,
     TResult Function(SendToExternalErrorToAddress value)? errorToAddress,
     TResult Function(SendToExternalErrorValueInEther value)? errorValueInEther,
     required TResult orElse(),
@@ -766,6 +796,187 @@ abstract class SendToExternalGetSuccess implements SendToExternalState {
   int get balance => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
   _$$SendToExternalGetSuccessCopyWith<_$SendToExternalGetSuccess>
+      get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$SendToExternalCalculatorFeeCopyWith<$Res> {
+  factory _$$SendToExternalCalculatorFeeCopyWith(
+          _$SendToExternalCalculatorFee value,
+          $Res Function(_$SendToExternalCalculatorFee) then) =
+      __$$SendToExternalCalculatorFeeCopyWithImpl<$Res>;
+  $Res call({int fee});
+}
+
+/// @nodoc
+class __$$SendToExternalCalculatorFeeCopyWithImpl<$Res>
+    extends _$SendToExternalStateCopyWithImpl<$Res>
+    implements _$$SendToExternalCalculatorFeeCopyWith<$Res> {
+  __$$SendToExternalCalculatorFeeCopyWithImpl(
+      _$SendToExternalCalculatorFee _value,
+      $Res Function(_$SendToExternalCalculatorFee) _then)
+      : super(_value, (v) => _then(v as _$SendToExternalCalculatorFee));
+
+  @override
+  _$SendToExternalCalculatorFee get _value =>
+      super._value as _$SendToExternalCalculatorFee;
+
+  @override
+  $Res call({
+    Object? fee = freezed,
+  }) {
+    return _then(_$SendToExternalCalculatorFee(
+      fee == freezed
+          ? _value.fee
+          : fee // ignore: cast_nullable_to_non_nullable
+              as int,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$SendToExternalCalculatorFee
+    with DiagnosticableTreeMixin
+    implements SendToExternalCalculatorFee {
+  const _$SendToExternalCalculatorFee(this.fee);
+
+  @override
+  final int fee;
+
+  @override
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+    return 'SendToExternalState.calculatorFee(fee: $fee)';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('type', 'SendToExternalState.calculatorFee'))
+      ..add(DiagnosticsProperty('fee', fee));
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$SendToExternalCalculatorFee &&
+            const DeepCollectionEquality().equals(other.fee, fee));
+  }
+
+  @override
+  int get hashCode =>
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(fee));
+
+  @JsonKey(ignore: true)
+  @override
+  _$$SendToExternalCalculatorFeeCopyWith<_$SendToExternalCalculatorFee>
+      get copyWith => __$$SendToExternalCalculatorFeeCopyWithImpl<
+          _$SendToExternalCalculatorFee>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(bool isLoading) initial,
+    required TResult Function(SendToExternalEntity entity) done,
+    required TResult Function() loading,
+    required TResult Function(int balance) getSuccess,
+    required TResult Function(int fee) calculatorFee,
+    required TResult Function(String msg) errorToAddress,
+    required TResult Function(String msg) errorValueInEther,
+  }) {
+    return calculatorFee(fee);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult Function(bool isLoading)? initial,
+    TResult Function(SendToExternalEntity entity)? done,
+    TResult Function()? loading,
+    TResult Function(int balance)? getSuccess,
+    TResult Function(int fee)? calculatorFee,
+    TResult Function(String msg)? errorToAddress,
+    TResult Function(String msg)? errorValueInEther,
+  }) {
+    return calculatorFee?.call(fee);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(bool isLoading)? initial,
+    TResult Function(SendToExternalEntity entity)? done,
+    TResult Function()? loading,
+    TResult Function(int balance)? getSuccess,
+    TResult Function(int fee)? calculatorFee,
+    TResult Function(String msg)? errorToAddress,
+    TResult Function(String msg)? errorValueInEther,
+    required TResult orElse(),
+  }) {
+    if (calculatorFee != null) {
+      return calculatorFee(fee);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(sendToExternalStateInitial value) initial,
+    required TResult Function(sendToExternalDone value) done,
+    required TResult Function(SendToExternalLoading value) loading,
+    required TResult Function(SendToExternalGetSuccess value) getSuccess,
+    required TResult Function(SendToExternalCalculatorFee value) calculatorFee,
+    required TResult Function(SendToExternalErrorToAddress value)
+        errorToAddress,
+    required TResult Function(SendToExternalErrorValueInEther value)
+        errorValueInEther,
+  }) {
+    return calculatorFee(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(sendToExternalStateInitial value)? initial,
+    TResult Function(sendToExternalDone value)? done,
+    TResult Function(SendToExternalLoading value)? loading,
+    TResult Function(SendToExternalGetSuccess value)? getSuccess,
+    TResult Function(SendToExternalCalculatorFee value)? calculatorFee,
+    TResult Function(SendToExternalErrorToAddress value)? errorToAddress,
+    TResult Function(SendToExternalErrorValueInEther value)? errorValueInEther,
+  }) {
+    return calculatorFee?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(sendToExternalStateInitial value)? initial,
+    TResult Function(sendToExternalDone value)? done,
+    TResult Function(SendToExternalLoading value)? loading,
+    TResult Function(SendToExternalGetSuccess value)? getSuccess,
+    TResult Function(SendToExternalCalculatorFee value)? calculatorFee,
+    TResult Function(SendToExternalErrorToAddress value)? errorToAddress,
+    TResult Function(SendToExternalErrorValueInEther value)? errorValueInEther,
+    required TResult orElse(),
+  }) {
+    if (calculatorFee != null) {
+      return calculatorFee(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class SendToExternalCalculatorFee implements SendToExternalState {
+  const factory SendToExternalCalculatorFee(final int fee) =
+      _$SendToExternalCalculatorFee;
+
+  int get fee => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  _$$SendToExternalCalculatorFeeCopyWith<_$SendToExternalCalculatorFee>
       get copyWith => throw _privateConstructorUsedError;
 }
 
@@ -852,6 +1063,7 @@ class _$SendToExternalErrorToAddress
     required TResult Function(SendToExternalEntity entity) done,
     required TResult Function() loading,
     required TResult Function(int balance) getSuccess,
+    required TResult Function(int fee) calculatorFee,
     required TResult Function(String msg) errorToAddress,
     required TResult Function(String msg) errorValueInEther,
   }) {
@@ -865,6 +1077,7 @@ class _$SendToExternalErrorToAddress
     TResult Function(SendToExternalEntity entity)? done,
     TResult Function()? loading,
     TResult Function(int balance)? getSuccess,
+    TResult Function(int fee)? calculatorFee,
     TResult Function(String msg)? errorToAddress,
     TResult Function(String msg)? errorValueInEther,
   }) {
@@ -878,6 +1091,7 @@ class _$SendToExternalErrorToAddress
     TResult Function(SendToExternalEntity entity)? done,
     TResult Function()? loading,
     TResult Function(int balance)? getSuccess,
+    TResult Function(int fee)? calculatorFee,
     TResult Function(String msg)? errorToAddress,
     TResult Function(String msg)? errorValueInEther,
     required TResult orElse(),
@@ -895,6 +1109,7 @@ class _$SendToExternalErrorToAddress
     required TResult Function(sendToExternalDone value) done,
     required TResult Function(SendToExternalLoading value) loading,
     required TResult Function(SendToExternalGetSuccess value) getSuccess,
+    required TResult Function(SendToExternalCalculatorFee value) calculatorFee,
     required TResult Function(SendToExternalErrorToAddress value)
         errorToAddress,
     required TResult Function(SendToExternalErrorValueInEther value)
@@ -910,6 +1125,7 @@ class _$SendToExternalErrorToAddress
     TResult Function(sendToExternalDone value)? done,
     TResult Function(SendToExternalLoading value)? loading,
     TResult Function(SendToExternalGetSuccess value)? getSuccess,
+    TResult Function(SendToExternalCalculatorFee value)? calculatorFee,
     TResult Function(SendToExternalErrorToAddress value)? errorToAddress,
     TResult Function(SendToExternalErrorValueInEther value)? errorValueInEther,
   }) {
@@ -923,6 +1139,7 @@ class _$SendToExternalErrorToAddress
     TResult Function(sendToExternalDone value)? done,
     TResult Function(SendToExternalLoading value)? loading,
     TResult Function(SendToExternalGetSuccess value)? getSuccess,
+    TResult Function(SendToExternalCalculatorFee value)? calculatorFee,
     TResult Function(SendToExternalErrorToAddress value)? errorToAddress,
     TResult Function(SendToExternalErrorValueInEther value)? errorValueInEther,
     required TResult orElse(),
@@ -1028,6 +1245,7 @@ class _$SendToExternalErrorValueInEther
     required TResult Function(SendToExternalEntity entity) done,
     required TResult Function() loading,
     required TResult Function(int balance) getSuccess,
+    required TResult Function(int fee) calculatorFee,
     required TResult Function(String msg) errorToAddress,
     required TResult Function(String msg) errorValueInEther,
   }) {
@@ -1041,6 +1259,7 @@ class _$SendToExternalErrorValueInEther
     TResult Function(SendToExternalEntity entity)? done,
     TResult Function()? loading,
     TResult Function(int balance)? getSuccess,
+    TResult Function(int fee)? calculatorFee,
     TResult Function(String msg)? errorToAddress,
     TResult Function(String msg)? errorValueInEther,
   }) {
@@ -1054,6 +1273,7 @@ class _$SendToExternalErrorValueInEther
     TResult Function(SendToExternalEntity entity)? done,
     TResult Function()? loading,
     TResult Function(int balance)? getSuccess,
+    TResult Function(int fee)? calculatorFee,
     TResult Function(String msg)? errorToAddress,
     TResult Function(String msg)? errorValueInEther,
     required TResult orElse(),
@@ -1071,6 +1291,7 @@ class _$SendToExternalErrorValueInEther
     required TResult Function(sendToExternalDone value) done,
     required TResult Function(SendToExternalLoading value) loading,
     required TResult Function(SendToExternalGetSuccess value) getSuccess,
+    required TResult Function(SendToExternalCalculatorFee value) calculatorFee,
     required TResult Function(SendToExternalErrorToAddress value)
         errorToAddress,
     required TResult Function(SendToExternalErrorValueInEther value)
@@ -1086,6 +1307,7 @@ class _$SendToExternalErrorValueInEther
     TResult Function(sendToExternalDone value)? done,
     TResult Function(SendToExternalLoading value)? loading,
     TResult Function(SendToExternalGetSuccess value)? getSuccess,
+    TResult Function(SendToExternalCalculatorFee value)? calculatorFee,
     TResult Function(SendToExternalErrorToAddress value)? errorToAddress,
     TResult Function(SendToExternalErrorValueInEther value)? errorValueInEther,
   }) {
@@ -1099,6 +1321,7 @@ class _$SendToExternalErrorValueInEther
     TResult Function(sendToExternalDone value)? done,
     TResult Function(SendToExternalLoading value)? loading,
     TResult Function(SendToExternalGetSuccess value)? getSuccess,
+    TResult Function(SendToExternalCalculatorFee value)? calculatorFee,
     TResult Function(SendToExternalErrorToAddress value)? errorToAddress,
     TResult Function(SendToExternalErrorValueInEther value)? errorValueInEther,
     required TResult orElse(),

@@ -18,6 +18,8 @@ class SendToExternalState with _$SendToExternalState {
 
   const factory SendToExternalState.getSuccess(int balance) = SendToExternalGetSuccess;
 
+  const factory SendToExternalState.calculatorFee(int fee) = SendToExternalCalculatorFee;
+
   const factory SendToExternalState.errorToAddress(String msg) = SendToExternalErrorToAddress;
 
   const factory SendToExternalState.errorValueInEther(String msg) =

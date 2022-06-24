@@ -6,5 +6,5 @@ import 'package:slee_fi/usecase/send_to_external_usecase.dart';
 abstract class ITransactionRepository{
   Future<Either<Failure, SendToExternalEntity>> sendToExternal(SendToExternalParams params);
   Future<Either<Failure, int>> getBalance();
-  Future<Either<Failure, double>> calculatorFee();
+  Future<Either<Failure, int>> calculatorFee(SendToExternalParams params);
 }

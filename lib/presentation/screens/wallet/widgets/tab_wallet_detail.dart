@@ -105,8 +105,7 @@ class TabWalletDetail extends StatelessWidget {
                         Expanded(
                           child: BoxButtonWidget(
                             onTap: () =>
-                                Navigator.pushNamed(context, R.sendToExternal,
-                                    arguments: SendToExternalArguments(state is WalletStateSuccess ? state.walletInfoEntity.nativeCurrency.symbol : "")),
+                                Navigator.pushNamed(context, R.sendToExternal),
                             text: LocaleKeys.to_external,
                             assetImage: Ics.icArrowUpRight,
                           ),

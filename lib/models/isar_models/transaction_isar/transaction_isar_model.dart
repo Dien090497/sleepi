@@ -8,6 +8,8 @@ part 'transaction_isar_model.g.dart';
 @CopyWith()
 @Collection(accessor: 'transaction')
 class TransactionIsarModel {
+  int? id = Isar.autoIncrement;
+
   late final String? transactionHash;
 
   late final String toAddress;

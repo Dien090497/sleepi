@@ -22,8 +22,8 @@ class SendToExternalUseCase extends UseCase<SendToExternalEntity, SendToExternal
     return _iTransactionRepository.sendToExternal(params);
   }
 
-  Future<Either<Failure, double>> calculatorFee(NoParams params) {
-    return _iTransactionRepository.calculatorFee();
+  Future<Either<Failure, int>> calculatorFee(SendToExternalParams params) {
+    return _iTransactionRepository.calculatorFee(params);
   }
 
   Future<Either<Failure, int>> getBalance(NoParams params) {

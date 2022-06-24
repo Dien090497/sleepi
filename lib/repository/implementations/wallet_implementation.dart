@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:dartz/dartz.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:injectable/injectable.dart';
 import 'package:slee_fi/datasources/local/get_storage_datasource.dart';
 import 'package:slee_fi/datasources/local/isar/isar_datasource.dart';
@@ -125,7 +126,7 @@ class WalletImplementation extends IWalletRepository {
   @override
   Future<Either<Failure, WalletInfoEntity>> currentWallet() async {
     try {
-      var testNetwork = (await _isarDataSource.getAllNetwork())[1];
+      var testNetwork = (await _isarDataSource.getAllNetwork())[0];
       _web3DataSource.setCurrentNetwork(testNetwork);
       _getStorageDataSource.setCurrentChainId(testNetwork.chainId);
       var walletId = _getStorageDataSource.getCurrentWalletId();
