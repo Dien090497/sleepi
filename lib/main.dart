@@ -4,7 +4,6 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_phoenix/flutter_phoenix.dart';
 import 'package:get_storage/get_storage.dart';
-import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:logger/logger.dart';
 import 'package:slee_fi/app.dart';
 import 'package:slee_fi/common/const/const.dart';
@@ -17,7 +16,6 @@ void main() async {
   await Future.wait([
     GetStorage.init(),
     EasyLocalization.ensureInitialized(),
-    initHiveForFlutter(),
     configureDependencies(),
   ]);
   await Future.wait([
