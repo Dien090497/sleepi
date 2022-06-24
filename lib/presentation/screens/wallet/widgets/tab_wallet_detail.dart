@@ -35,6 +35,7 @@ class TabWalletDetail extends StatelessWidget {
         child: BlocConsumer<WalletCubit, WalletState>(
           listener: (context, state) {},
           builder: (context, state) {
+            final cubit = context.read<WalletCubit>();
             return Column(
               children: [
                 const SizedBox(height: 32),
@@ -93,8 +94,9 @@ class TabWalletDetail extends StatelessWidget {
                         const SizedBox(width: 10),
                         Expanded(
                           child: BoxButtonWidget(
-                            onTap: () =>
-                                Navigator.pushNamed(context, R.transfer),
+                            onTap: () {
+                              cubit.loadCurrentWallet();
+                            },
                             text: LocaleKeys.to_spending,
                             assetImage: Ics.icRefresh,
                           ),
@@ -165,7 +167,9 @@ class TabWalletDetail extends StatelessWidget {
                   ),
                 ),
                 const SizedBox(height: 12.0),
-                const WalletDetailList()
+                state is WalletStateSuccess ?
+                WalletDetailList(tokenList: state.tokenList,) :
+                WalletDetailList(tokenList: cubit.tokenList,)
               ],
             );
           },
