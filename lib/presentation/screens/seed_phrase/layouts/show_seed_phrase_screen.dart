@@ -55,7 +55,7 @@ class _ShowSeedPhraseScreenState extends State<ShowSeedPhraseScreen> {
                         SFListTile(
                           text: "${index + 1}",
                           trailing: SFText(
-                            keyText: hide ? "*******" : seedPhrase[index],
+                            keyText: hide ? "-----" : seedPhrase[index],
                             style: TextStyles.lightGrey14,
                           ),
                         )),

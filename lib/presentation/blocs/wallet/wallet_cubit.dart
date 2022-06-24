@@ -1,11 +1,11 @@
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:slee_fi/di/injector.dart';
+import 'package:slee_fi/entities/wallet_info/wallet_info_entity.dart';
 import 'package:slee_fi/usecase/usecase.dart';
 import 'package:slee_fi/usecase/wallet/current_wallet_usecase.dart';
 import 'package:slee_fi/usecase/wallet/first_open_wallet_session_usecase.dart';
 
-import '../../../entities/wallet_info/wallet_info_entity.dart';
 import 'wallet_state.dart';
 
 class WalletCubit extends Cubit<WalletState> {
