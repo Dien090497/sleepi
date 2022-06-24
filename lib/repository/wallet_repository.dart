@@ -12,5 +12,9 @@ abstract class IWalletRepository {
 
   Future<Either<Failure, bool>> swapToken();
 
-  Future<Either<Failure, List<double>>> getBalanceOfToken(ParamsBalanceOfToken params);
+  Future<Either<Failure, List<double>>> getBalanceOfToken(
+      ParamsBalanceOfToken params);
+
+  Future<Either<Failure, bool>> checkFirstOpenWallet();
+  Future<Either<FailureMessage, String>> getCurrentMnemonic();
 }

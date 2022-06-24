@@ -49,7 +49,7 @@ class _PasscodeScreenState extends State<PasscodeScreen> {
               Navigator.pushReplacementNamed(context, args.route);
             } else {
               // _createWalletDialog(context);
-              Navigator.pushReplacementNamed(context, R.wallet);
+              Navigator.pop(context, true);
             }
           } else {
             passCodeController.text = '';

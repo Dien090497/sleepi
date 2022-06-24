@@ -8,8 +8,8 @@ import 'package:slee_fi/common/widgets/dismiss_keyboard_widget.dart';
 import 'package:slee_fi/common/widgets/sf_app_bar.dart';
 import 'package:slee_fi/common/widgets/sf_buttons.dart';
 import 'package:slee_fi/common/widgets/sf_card.dart';
-import 'package:slee_fi/common/widgets/sf_text.dart';
 import 'package:slee_fi/common/widgets/sf_textfield.dart';
+import 'package:slee_fi/common/widgets/textfield_verification.dart';
 import 'package:slee_fi/l10n/locale_keys.g.dart';
 
 class RestoreWalletScreen extends StatelessWidget {
@@ -41,40 +41,13 @@ class RestoreWalletScreen extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           const SizedBox(height: 24),
-                          SFText(
-                            keyText: LocaleKeys.email_verification_code,
-                            style: TextStyles.lightGrey14,
-                          ),
-                          const SizedBox(
-                            height: 4,
-                          ),
-                          Container(
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(8),
-                              border: Border.all(
-                                  color: AppColors.white.withOpacity(0.1)),
-                            ),
-                            padding: const EdgeInsets.only(left: 12, right: 4),
-                            child: Row(
-                              children: [
-                                const Expanded(
-                                  child: SFTextField(
-                                    maxLength: 6,
-                                    // hintText: LocaleKeys.emailVerification,
-                                    textInputType: TextInputType.number,
-                                    showLabel: false,
-                                    noBorder: true,
-                                  ),
-                                ),
-                                SFTextButton(
-                                  text: LocaleKeys.send_code,
-                                  textStyle: TextStyles.blue12,
-                                  onPressed: () {},
-                                  // color: Colors.transparent,
-                                ),
-                              ],
-                            ),
-                          ),
+                          TextfieldVerificationEmail(
+                              maxLength: 6,
+                              onPressed: () {
+                                //todo: send otp in here
+                              },
+                              valueChanged: (otp) {},
+                              errorText: ''),
                           const SizedBox(height: 20),
                           const SFTextField(
                             maxLine: 10,

@@ -39,7 +39,7 @@ class TopBarCommon extends StatelessWidget {
                 ),
           GestureDetector(
             onTap: () {
-              Navigator.pushNamed(context, R.passcode);
+              Navigator.pushNamed(context, R.wallet);
             },
             child: const SFStatisticResource(
               valueSliver: 46.87,
