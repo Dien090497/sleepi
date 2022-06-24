@@ -40,6 +40,19 @@ import '../usecase/wallet/create_wallet_usecase.dart' as _i27;
 import '../usecase/wallet/current_wallet_usecase.dart' as _i28;
 import '../usecase/wallet/import_wallet_usecase.dart' as _i22;
 import 'register_module.dart' as _i34; // ignore_for_file: unnecessary_lambdas
+import '../repository/auth_repository.dart' as _i27;
+import '../repository/implementations/auth_implementation.dart' as _i28;
+import '../repository/implementations/wallet_implementation.dart' as _i19;
+import '../repository/wallet_repository.dart' as _i18;
+import '../usecase/create_pass_code_usecase.dart' as _i29;
+import '../usecase/get_balance_token_usecase.dart' as _i26;
+import '../usecase/get_passcode_usecase.dart' as _i30;
+import '../usecase/login_usecase.dart' as _i13;
+import '../usecase/run_app_init_usecase.dart' as _i21;
+import '../usecase/wallet/create_wallet_usecase.dart' as _i24;
+import '../usecase/wallet/current_wallet_usecase.dart' as _i25;
+import '../usecase/wallet/import_wallet_usecase.dart' as _i20;
+import 'register_module.dart' as _i31; // ignore_for_file: unnecessary_lambdas
 
 // ignore_for_file: lines_longer_than_80_chars
 /// initializes the registration of provided dependencies inside of [GetIt]
@@ -103,9 +116,23 @@ Future<_i1.GetIt> $initGetIt(_i1.GetIt get,
       () => _i32.CreatePassCodeUseCase(get<_i30.IAuthRepository>()));
   gh.factory<_i33.GetPassCodeUseCase>(
       () => _i33.GetPassCodeUseCase(get<_i30.IAuthRepository>()));
+  gh.factory<_i23.SharedPreferenceDataSource>(
+      () => _i23.SharedPreferenceDataSource(get<_i15.SharedPreferences>()));
+  gh.factory<_i24.CreateWalletUseCase>(
+      () => _i24.CreateWalletUseCase(get<_i18.IWalletRepository>()));
+  gh.factory<_i25.CurrentWalletUsecase>(
+      () => _i25.CurrentWalletUsecase(get<_i18.IWalletRepository>()));
+  gh.factory<_i26.GetBalanceTokenUseCase>(
+      () => _i26.GetBalanceTokenUseCase(get<_i18.IWalletRepository>()));
+  gh.factory<_i27.IAuthRepository>(
+      () => _i28.AuthImplementation(get<_i22.SecureStorage>()));
+  gh.factory<_i29.CreatePassCodeUseCase>(
+      () => _i29.CreatePassCodeUseCase(get<_i27.IAuthRepository>()));
+  gh.factory<_i30.GetPassCodeUseCase>(
+      () => _i30.GetPassCodeUseCase(get<_i27.IAuthRepository>()));
   return get;
 }
 
 class _$RPCModule extends _i17.RPCModule {}
 
-class _$RegisterModule extends _i34.RegisterModule {}
+class _$RegisterModule extends _i31.RegisterModule {}
