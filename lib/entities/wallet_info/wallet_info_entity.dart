@@ -15,7 +15,6 @@ class WalletInfoEntity with _$WalletInfoEntity {
     required String networkName,
     required String name,
     required Credentials credentials,
-    required String mnemonic,
     int? derivedIndex,
     @Default(false) bool isImported,
     // @Default([]) List<TokenEntity> tokens,

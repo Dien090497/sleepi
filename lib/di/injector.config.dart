@@ -24,20 +24,21 @@ import '../datasources/local/isar/isar_datasource.dart' as _i12;
 import '../datasources/local/secure_storage.dart' as _i22;
 import '../datasources/local/shared_preference_datasource.dart' as _i23;
 import '../datasources/remote/network/web3_datasource.dart' as _i17;
-import '../repository/auth_repository.dart' as _i28;
-import '../repository/implementations/auth_implementation.dart' as _i29;
+import '../repository/auth_repository.dart' as _i29;
+import '../repository/implementations/auth_implementation.dart' as _i30;
 import '../repository/implementations/wallet_implementation.dart' as _i19;
 import '../repository/wallet_repository.dart' as _i18;
-import '../usecase/create_pass_code_usecase.dart' as _i30;
+import '../usecase/create_pass_code_usecase.dart' as _i31;
 import '../usecase/get_balance_token_usecase.dart' as _i27;
-import '../usecase/get_passcode_usecase.dart' as _i31;
+import '../usecase/get_passcode_usecase.dart' as _i32;
 import '../usecase/login_usecase.dart' as _i13;
 import '../usecase/run_app_init_usecase.dart' as _i21;
 import '../usecase/wallet/create_wallet_usecase.dart' as _i25;
 import '../usecase/wallet/current_wallet_usecase.dart' as _i26;
 import '../usecase/wallet/first_open_wallet_session_usecase.dart' as _i24;
+import '../usecase/wallet/get_current_mnemonic_usecasse.dart' as _i28;
 import '../usecase/wallet/import_wallet_usecase.dart' as _i20;
-import 'register_module.dart' as _i32; // ignore_for_file: unnecessary_lambdas
+import 'register_module.dart' as _i33; // ignore_for_file: unnecessary_lambdas
 
 // ignore_for_file: lines_longer_than_80_chars
 /// initializes the registration of provided dependencies inside of [GetIt]
@@ -91,15 +92,17 @@ Future<_i1.GetIt> $initGetIt(_i1.GetIt get,
       () => _i26.CurrentWalletUsecase(get<_i18.IWalletRepository>()));
   gh.factory<_i27.GetBalanceTokenUseCase>(
       () => _i27.GetBalanceTokenUseCase(get<_i18.IWalletRepository>()));
-  gh.factory<_i28.IAuthRepository>(
-      () => _i29.AuthImplementation(get<_i22.SecureStorage>()));
-  gh.factory<_i30.CreatePassCodeUseCase>(
-      () => _i30.CreatePassCodeUseCase(get<_i28.IAuthRepository>()));
-  gh.factory<_i31.GetPassCodeUseCase>(
-      () => _i31.GetPassCodeUseCase(get<_i28.IAuthRepository>()));
+  gh.factory<_i28.GetCurrentMnemonicUsecase>(
+      () => _i28.GetCurrentMnemonicUsecase(get<_i18.IWalletRepository>()));
+  gh.factory<_i29.IAuthRepository>(
+      () => _i30.AuthImplementation(get<_i22.SecureStorage>()));
+  gh.factory<_i31.CreatePassCodeUseCase>(
+      () => _i31.CreatePassCodeUseCase(get<_i29.IAuthRepository>()));
+  gh.factory<_i32.GetPassCodeUseCase>(
+      () => _i32.GetPassCodeUseCase(get<_i29.IAuthRepository>()));
   return get;
 }
 
 class _$RPCModule extends _i17.RPCModule {}
 
-class _$RegisterModule extends _i32.RegisterModule {}
+class _$RegisterModule extends _i33.RegisterModule {}

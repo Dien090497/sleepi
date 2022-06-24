@@ -4,7 +4,6 @@ import 'package:slee_fi/common/routes/app_routes.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
 import 'package:slee_fi/common/widgets/background_widget.dart';
 import 'package:slee_fi/common/widgets/sf_app_bar.dart';
-import 'package:slee_fi/entities/wallet_info/wallet_info_entity.dart';
 import 'package:slee_fi/l10n/locale_keys.g.dart';
 import 'package:slee_fi/presentation/screens/passcode/passcode_screen.dart';
 import 'package:slee_fi/presentation/screens/seed_phrase/layouts/show_seed_phrase_screen.dart';
@@ -12,9 +11,9 @@ import 'package:slee_fi/presentation/screens/setting_wallet/widgets/box_info_wid
 import 'package:slee_fi/resources/resources.dart';
 
 class SettingWalletArgument {
-  final WalletInfoEntity entity;
+  final String  mnemonic;
 
-  SettingWalletArgument(this.entity);
+  SettingWalletArgument(this.mnemonic);
 }
 
 class SettingWalletScreen extends StatelessWidget {
@@ -43,7 +42,7 @@ class SettingWalletScreen extends StatelessWidget {
                 Navigator.pushNamed(context, R.passcode).then((value) {
                   if (value == true) {
                     Navigator.pushNamed(context, R.showSeedPhrase,
-                        arguments: SeedPhraseArgument(arg!.entity.mnemonic));
+                        arguments: SeedPhraseArgument(arg!.mnemonic));
                   }
                 });
               },

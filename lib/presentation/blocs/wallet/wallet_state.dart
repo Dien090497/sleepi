@@ -9,7 +9,8 @@ class WalletState with _$WalletState {
 
   const factory WalletState.loading() = WalletStateLoading;
 
-  const factory WalletState.loaded({required WalletInfoEntity? walletInfoEntity, required bool firstOpenWallet}) =
-      WalletStateLoaded;
-
+  const factory WalletState.loaded(
+      {required WalletInfoEntity? walletInfoEntity,
+      required bool firstOpenWallet,
+      @Default('') String mnemonic}) = WalletStateLoaded;
 }
