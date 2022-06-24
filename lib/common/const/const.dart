@@ -53,13 +53,13 @@ class Const {
       "icon": Ics.icAvax,
     },
     {
-      "address": "0xB31f66AA3C1e785363F0875A1B74E27b85FD66c7",
+      "address": "0xB31f66AA3C1e785363F0875A1B74E27b85FD66c8",
       "symbol": "SLFT",
       "decimal": 18,
       "icon": Ics.icSlft,
     },
     {
-      "address": "0xB31f66AA3C1e785363F0875A1B74E27b85FD66c7",
+      "address": "0xB31f66AA3C1e785363F0875A1B74E27b85FD66c9",
       "symbol": "SLGT",
       "decimal": 18,
       "icon": Ics.icSlgt,
