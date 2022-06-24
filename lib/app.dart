@@ -6,6 +6,9 @@ import 'package:slee_fi/common/routes/app_routes.dart';
 import 'package:slee_fi/common/style/theme.dart';
 import 'package:slee_fi/presentation/blocs/bottom_navigation/bottom_navigation_bloc.dart';
 
+final RouteObserver<ModalRoute<void>> routeObserver =
+    RouteObserver<ModalRoute<void>>();
+
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
 
@@ -29,6 +32,7 @@ class MyApp extends StatelessWidget {
             routes: AppRoutes.routes,
             initialRoute: R.loginSignUp,
             debugShowCheckedModeBanner: false,
+            navigatorObservers: [routeObserver],
           );
         },
       ),

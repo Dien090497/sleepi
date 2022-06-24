@@ -1,3 +1,4 @@
+import 'package:slee_fi/common/widgets/route_aware_widget.dart';
 import 'package:slee_fi/presentation/screens/alarm/alarm_screen.dart';
 import 'package:slee_fi/presentation/screens/alarm/widgets/sound_effect_screen.dart';
 import 'package:slee_fi/presentation/screens/bottom_navigation/bottom_navigation_screen.dart';
@@ -47,7 +48,6 @@ import 'package:slee_fi/presentation/screens/transfer/transfer_screen.dart';
 import 'package:slee_fi/presentation/screens/tutorial/tutorial_screen.dart';
 import 'package:slee_fi/presentation/screens/wallet/layouts/transaction_detail_screen.dart';
 import 'package:slee_fi/presentation/screens/wallet/wallet_screen.dart';
-import 'package:slee_fi/presentation/screens/wallet_creation_warning/wallet_create_screen.dart';
 import 'package:slee_fi/presentation/screens/wallet_creation_warning/wallet_creation_warning_screen.dart';
 
 class R {
@@ -89,7 +89,6 @@ class R {
   static const String question = '${_}question';
   static const String settingWallet = '${_}setting_wallet';
   static const String restoreWallet = '${_}restore_wallet';
-  static const String walletCreate = '${_}wallet_create';
   static const String depositSLFT = '${_}deposit_slft';
   static const String withdrawSLFT = '${_}withdraw_slft';
   static const String result = '${_}result';
@@ -109,7 +108,8 @@ class AppRoutes {
   static final routes = {
     R.loginSignUp: (_) => const LoginSignUpScreen(),
     R.enterActivationCode: (_) => const EnterActivationCodeScreen(),
-    R.bottomNavigation: (_) => const BottomNavigationScreen(),
+    R.bottomNavigation: (_) =>
+        const RouteAwareWidget(child: BottomNavigationScreen()),
     R.recycle: (_) => const RecycleScreen(),
     R.feedback: (_) => const FeedBackScreen(),
     R.gacha500TimesChance: (_) => const GachaChance500Screen(),
@@ -117,7 +117,7 @@ class AppRoutes {
     R.gachaResultOverview: (_) => const GachaResultOverview(),
     R.nftInfo: (_) => const InfoIndividualScreen(),
     R.mint: (_) => const MintScreen(),
-    R.wallet: (_) => const WalletScreen(),
+    R.wallet: (_) => const RouteAwareWidget(child: WalletScreen()),
     R.staking: (_) => const StakingScreen(),
     R.taking: (_) => const TakingScreen(),
     R.setting: (_) => const SettingScreen(),
@@ -143,7 +143,6 @@ class AppRoutes {
     R.itemSelection: (_) => const ItemSelectionScreen(),
     R.settingWallet: (_) => const SettingWalletScreen(),
     R.restoreWallet: (_) => const RestoreWalletScreen(),
-    R.walletCreate: (_) => const WalletCreateScreen(),
     R.depositSLFT: (_) => const DepositSlftScreen(),
     R.withdrawSLFT: (_) => const WithdrawSlftScreen(),
     R.result: (_) => const ResultScreen(),
