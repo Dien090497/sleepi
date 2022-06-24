@@ -180,14 +180,15 @@ class _TradeScreenState extends State<TradeScreen> {
                                               setState(() {
                                                 if (selectItem["value"] ==
                                                     Const.tokens[indexTo]
-                                                    ['address']) {
+                                                        ['address']) {
                                                   indexTo = indexFrom;
                                                 }
                                                 indexFrom = getIndexAddress(
                                                     selectItem["value"]
                                                         .toString());
                                                 cubit.getBalanceToken(Const
-                                                    .tokens[indexFrom]['address']
+                                                    .tokens[indexFrom]
+                                                        ['address']
                                                     .toString());
                                                 valueController.text = '';
                                                 log("message $indexFrom $indexTo");

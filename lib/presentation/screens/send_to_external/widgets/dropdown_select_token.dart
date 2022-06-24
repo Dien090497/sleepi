@@ -14,9 +14,9 @@ class DropdownSelectToken extends StatefulWidget {
     this.margin,
     this.backgroundColor,
     this.isResultLabel = false,
-
     Key? key,
-    this.onChange, required this.tokens,
+    this.onChange,
+    required this.tokens,
   }) : super(key: key);
 
   final int indexInit;
