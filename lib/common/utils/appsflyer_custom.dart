@@ -1,4 +1,6 @@
 
+import 'dart:developer';
+
 import 'package:appsflyer_sdk/appsflyer_sdk.dart';
 import 'package:flutter/foundation.dart';
 import 'package:injectable/injectable.dart';
@@ -6,8 +8,8 @@ import 'package:injectable/injectable.dart';
 @Singleton()
 class AppFlyerCustom {
   AppsFlyerOptions appsFlyerOptions = AppsFlyerOptions(
-    afDevKey: 'qCWYnmVaZy4cwWWjm3RB5P',
-    appId: '',
+    afDevKey: 'Be7KEPxvVdSNz26dG7f79B',
+    appId: '1623163183',
     showDebug: kDebugMode,
     disableAdvertisingIdentifier: true,
   );
@@ -19,7 +21,7 @@ class AppFlyerCustom {
         registerConversionDataCallback: true,
         registerOnAppOpenAttributionCallback: true,
         registerOnDeepLinkingCallback: true);
-
+    _logEvent('iostest');
     _appsflyerSdk.onInstallConversionData((res) {
     });
 
@@ -42,17 +44,17 @@ class AppFlyerCustom {
 
 
 
-  // _logEvent(String eventName, {Map? map}) async {
-  //   if (kDebugMode) {
-  //     log('event name  $eventName    data $map');
-  //     return;
-  //   }
-  //
-  //   try {
-  //     var result = await _appsflyerSdk.logEvent(eventName, map);
-  //     log(' result log   $result $eventName');
-  //   } on Exception catch (e) {
-  //     log('$e');
-  //   }
-  // }
+  _logEvent(String eventName, {Map? map}) async {
+    // if (kDebugMode) {
+    //   log('event name  $eventName    data $map');
+    //   return;
+    // }
+
+    try {
+      var result = await _appsflyerSdk.logEvent(eventName, map);
+      log(' result log   $result $eventName');
+    } on Exception catch (e) {
+      log('$e');
+    }
+  }
 }

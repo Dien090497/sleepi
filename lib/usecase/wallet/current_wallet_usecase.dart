@@ -6,10 +6,10 @@ import 'package:slee_fi/repository/wallet_repository.dart';
 import 'package:slee_fi/usecase/usecase.dart';
 
 @Injectable()
-class CurrentWalletUsecase extends UseCase<WalletInfoEntity, NoParams> {
+class CurrentWalletUseCase extends UseCase<WalletInfoEntity, NoParams> {
   final IWalletRepository _iWalletRepository;
 
-  CurrentWalletUsecase(this._iWalletRepository);
+  CurrentWalletUseCase(this._iWalletRepository);
 
   @override
   Future<Either<Failure, WalletInfoEntity>> call(NoParams params) {
