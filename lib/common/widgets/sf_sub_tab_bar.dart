@@ -10,6 +10,7 @@ class SFSubTabBar extends TabBar {
   SFSubTabBar({
     required List<String> texts,
     EdgeInsets? padding,
+    EdgeInsets? labelPadding,
     bool isScrollable = true,
     Key? key,
   }) : super(
@@ -33,7 +34,7 @@ class SFSubTabBar extends TabBar {
           // indicatorWeight: 5,
           // indicatorColor: AppColors.blue,
           padding: padding ?? EdgeInsets.zero,
-          labelPadding: EdgeInsets.zero,
+          labelPadding: labelPadding ?? EdgeInsets.zero,
           key: key,
         );
 }

@@ -13,8 +13,8 @@ import 'package:slee_fi/usecase/usecase.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await GetStorage.init();
   await Future.wait([
+    GetStorage.init(),
     EasyLocalization.ensureInitialized(),
     configureDependencies(),
   ]);

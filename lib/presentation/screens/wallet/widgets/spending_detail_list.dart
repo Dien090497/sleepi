@@ -28,6 +28,7 @@ class SpendingDetailList extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 24.0),
               child: SFSubTabBar(
+                labelPadding: const EdgeInsets.symmetric(horizontal: 8),
                 texts: const [LocaleKeys.pending, LocaleKeys.history],
               ),
             ),
