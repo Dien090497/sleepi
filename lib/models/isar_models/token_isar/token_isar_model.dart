@@ -26,7 +26,7 @@ class TokenIsarModel {
 
   final String icon;
 
-  final int balance;
+  final double balance;
 
   final List<String> txns;
 
@@ -69,12 +69,12 @@ class TokenIsarModel {
       displayName: displayName ?? name,
       icon: symbol.cryptoIcon,
       symbol: symbol,
-      balance: balance.toInt(),
+      balance: balance.toDouble(),
     );
     return tokenModel;
   }
 
-  TokenEntity toEntity({int? balance, String? displayName}) {
+  TokenEntity toEntity({double? balance, String? displayName}) {
     return TokenEntity(
       id: id,
       address: address,

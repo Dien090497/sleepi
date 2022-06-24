@@ -8,6 +8,8 @@ class WalletState with _$WalletState {
   const factory WalletState.initial() = WalletStateInitial;
 
   const factory WalletState.loading() = WalletStateLoading;
+
   const factory WalletState.loaded({required WalletInfoEntity? walletInfoEntity, required bool firstOpenWallet}) =
       WalletStateLoaded;
+
 }
