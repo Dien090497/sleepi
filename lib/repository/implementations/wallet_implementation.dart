@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:dartz/dartz.dart';
 import 'package:injectable/injectable.dart';
 import 'package:slee_fi/datasources/local/get_storage_datasource.dart';
@@ -9,6 +11,8 @@ import 'package:slee_fi/models/isar_models/native_currency_isar/native_currency_
 import 'package:slee_fi/models/isar_models/network_isar/network_isar_model.dart';
 import 'package:slee_fi/models/isar_models/wallet_isar/wallet_isar_model.dart';
 import 'package:slee_fi/repository/wallet_repository.dart';
+import 'package:slee_fi/usecase/get_balance_token_usecase.dart';
+import 'package:web3dart/web3dart.dart';
 
 @Injectable(as: IWalletRepository)
 class WalletImplementation extends IWalletRepository {
@@ -121,7 +125,7 @@ class WalletImplementation extends IWalletRepository {
   @override
   Future<Either<Failure, WalletInfoEntity>> currentWallet() async {
     try {
-      var testNetwork = (await _isarDataSource.getAllNetwork()).first;
+      var testNetwork = (await _isarDataSource.getAllNetwork())[1];
       _web3DataSource.setCurrentNetwork(testNetwork);
       _getStorageDataSource.setCurrentChainId(testNetwork.chainId);
       var walletId = _getStorageDataSource.getCurrentWalletId();
@@ -149,6 +153,23 @@ class WalletImplementation extends IWalletRepository {
           nativeCurrency: nativeCurrency!.toEntity(balance: balance.toInt()),
         ),
       );
+    } catch (e) {
+      return Left(FailureMessage('$e'));
+    }
+  }
+
+  @override
+  Future<Either<Failure, List<double>>> getBalanceOfToken(ParamsBalanceOfToken params) async {
+    try {
+      List<double> values = [];
+      for (int i =0; i< params.addressContract.length; i++) {
+        final erc20 = _web3DataSource.tokenFrom(params.addressContract[i]);
+        final value = await erc20.balanceOf(EthereumAddress.fromHex(params.walletInfoEntity.address));
+        final decimals = await erc20.decimals();
+        final result = value/BigInt.from(pow(10, decimals.toInt()));
+        values.add(result);
+      }
+      return Right(values);
     } catch (e) {
       return Left(FailureMessage('$e'));
     }
