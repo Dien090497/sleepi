@@ -227,7 +227,7 @@ class Web3DataSource {
     final List<BigInt> amounts = await contract.getAmountsOut(
         BigInt.from(value.etherToWei), pairAddress);
     log('Calculated amounts: $amounts');
-    var decimal = await getDecimals(contractAddress);
+    var decimal = await getDecimals(Const.tokens[0]['address'].toString());
     BigInt amountOutMin =
         amounts[1] - BigInt.from(amounts[1] / decimal); //slippage set here
     log('Calculated Amounts out: $amountOutMin');
@@ -261,13 +261,12 @@ class Web3DataSource {
     EthereumAddress token = EthereumAddress.fromHex(contractAddress);
 
     final List<EthereumAddress> pairAddress = [token, avax];
-    BigInt amountIn = BigInt.from(value);
-    final List<BigInt> amounts =
-        await contract.getAmountsOut(amountIn, pairAddress);
+    final List<BigInt> amounts = await contract.getAmountsOut(
+        BigInt.from(value.etherToWei), pairAddress);
     log('Calculated amounts: $amounts');
-
-    BigInt amountOutMin = amounts[1] -
-        BigInt.from(amounts[1] / BigInt.from(tokenDecimal)); //slippage set here
+    var decimal = await getDecimals(contractAddress);
+    BigInt amountOutMin =
+        amounts[1] - BigInt.from(amounts[1] / decimal); ////slippage set here
     log('Calculated Amounts out: $amountOutMin');
     EthereumAddress to = EthereumAddress.fromHex(walletAddress);
     BigInt deadline = BigInt.from(
@@ -275,7 +274,7 @@ class Web3DataSource {
 
     Credentials credentials = EthPrivateKey.fromHex(privateKey);
     final tx = await contract.swapExactTokensForAVAX(
-      amountIn,
+      BigInt.from(value.etherToWei),
       amountOutMin,
       pairAddress,
       to,
@@ -284,12 +283,12 @@ class Web3DataSource {
       transaction: Transaction(
         from: to,
         to: to,
-        value: EtherAmount.inWei(BigInt.from(value)),
+        value: value.etherToWei.toWeiEtherAmount,
         gasPrice: await _web3client?.getGasPrice(),
         nonce: await _web3client?.getTransactionCount(to),
       ),
     );
-    log('swapExactAVAXForTokens ${tx.toString()}');
+    log('swapExactTokensForAVAX ${tx.toString()}');
   }
 
   ERC20 tokenFrom(String address) =>
