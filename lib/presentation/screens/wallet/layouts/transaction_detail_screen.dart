@@ -11,6 +11,7 @@ import 'package:slee_fi/common/widgets/sf_icon.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
 import 'package:slee_fi/l10n/locale_keys.g.dart';
 import 'package:slee_fi/presentation/screens/passcode/passcode_screen.dart';
+import 'package:slee_fi/presentation/screens/send_to_external/send_to_external_screen.dart';
 import 'package:slee_fi/presentation/screens/wallet/widgets/box_button_widget.dart';
 import 'package:slee_fi/presentation/screens/wallet/widgets/modal_receive_wallet.dart';
 import 'package:slee_fi/presentation/screens/wallet/widgets/transaction_detail_list.dart';
@@ -113,7 +114,7 @@ class TransactionDetail extends StatelessWidget {
                       Expanded(
                         child: BoxButtonWidget(
                           onTap: () =>
-                              Navigator.pushNamed(context, R.sendToExternal),
+                              Navigator.pushNamed(context, R.sendToExternal ,arguments: SendToExternalArguments(args != null ? args.img : '')),
                           text: LocaleKeys.to_external,
                           assetImage: Ics.icArrowUpRight,
                         ),

@@ -16,7 +16,11 @@ class SendToExternalState with _$SendToExternalState {
 
   const factory SendToExternalState.loading() = SendToExternalLoading;
 
-  const factory SendToExternalState.getSuccess(int balance) = SendToExternalGetSuccess;
+  const factory SendToExternalState.getBalance(double balance) = getTokenBalance;
+
+  const factory SendToExternalState.success() = getTokenSuccess;
+
+  const factory SendToExternalState.fail(String msg) = getTokenFail;
 
   const factory SendToExternalState.calculatorFee(int fee) = SendToExternalCalculatorFee;
 

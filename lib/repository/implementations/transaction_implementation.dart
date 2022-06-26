@@ -1,7 +1,4 @@
-import 'dart:developer';
-
 import 'package:dartz/dartz.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:injectable/injectable.dart';
 import 'package:slee_fi/datasources/local/get_storage_datasource.dart';
 import 'package:slee_fi/datasources/local/isar/isar_datasource.dart';
@@ -82,12 +79,12 @@ class TransactionImplementation extends ITransactionRepository{
       final network = await _getCurrentNetwork();
       final privateKey = _web3DataSource.mnemonicToPrivateKey(
           wallet.mnemonic, wallet.derivedIndex!, network.slip44);
-      final credentials = _web3DataSource.credentialsFromPrivateKey("8bc930e084ce3b80402e990aeff7a27ba6829ecf0c398a3bed12ffadaecd39ae");
+      final credentials = _web3DataSource.credentialsFromPrivateKey(privateKey);
       final ethereumAddress = await credentials.extractAddress();
       final fee = await _web3DataSource.estimateGas(
            sender: ethereumAddress,
-            to: "0x52839A88E9FdD2b137E32c65fEc8E7b3f1F1CCC6",
-        value: 0.001,
+            to: params.toAddress,
+        value: params.valueInEther,
         // gasPrice: 50
 
       );

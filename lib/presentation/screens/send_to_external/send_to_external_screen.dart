@@ -13,33 +13,64 @@ import 'package:slee_fi/common/widgets/sf_alert_dialog.dart';
 import 'package:slee_fi/common/widgets/sf_app_bar.dart';
 import 'package:slee_fi/common/widgets/sf_buttons.dart';
 import 'package:slee_fi/common/widgets/sf_card.dart';
+import 'package:slee_fi/common/widgets/sf_icon.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
 import 'package:slee_fi/common/widgets/sf_textfield.dart';
 import 'package:slee_fi/l10n/locale_keys.g.dart';
 import 'package:slee_fi/presentation/blocs/send_to_external/send_to_external_cubit.dart';
 import 'package:slee_fi/presentation/blocs/send_to_external/send_to_external_state.dart';
 import 'package:slee_fi/presentation/screens/send_to_external/widgets/address_scan.dart';
-import 'package:slee_fi/presentation/screens/send_to_external/widgets/dropdown_select_token.dart';
 import 'package:slee_fi/presentation/screens/send_to_external/widgets/pop_up_confirm_send.dart';
 import 'package:slee_fi/resources/resources.dart';
 
-class SendToExternalScreen extends StatelessWidget {
+class SendToExternalArguments{
+  final String icon;
+
+  SendToExternalArguments(this.icon);
+}
+
+class SendToExternalScreen extends StatefulWidget {
   const SendToExternalScreen({Key? key}) : super(key: key);
 
   @override
+  State<SendToExternalScreen> createState() => _SendToExternalScreenState();
+}
+
+class _SendToExternalScreenState extends State<SendToExternalScreen> {
+  String tokenFrom = Const.tokens[0]["address"].toString();
+
+  double balance = 0;
+  double fee = 0;
+
+  @override
   Widget build(BuildContext context) {
-   double balance = 0;
-   double fee = 0;
+    final args =
+    ModalRoute.of(context)?.settings.arguments as SendToExternalArguments?;
+
     return BlocProvider(
-      create: (context) => SendToExternalCubit()..getBalance(),
+      create: (context) => SendToExternalCubit()..init(),
       child: BlocConsumer<SendToExternalCubit, SendToExternalState>(
         listener: (context, state) {
-          if(state is SendToExternalGetSuccess){
-            balance = (state.balance / pow(10, 18)) ;
+          final cubit = context.read<SendToExternalCubit>();
+          if (state is getTokenBalance) {
+            balance = state.balance;
+            debugPrint("message  $balance");
+            setState(() {});
+          }
+          if (state is SendToExternalCalculatorFee) {
+            fee = ((state.fee * 50000000000) / pow(10, 18));
+            debugPrint("fee  $fee");
+            showCustomAlertDialog(context,
+                children:  PopUpConfirmSend(toAddress: cubit.toAddress, valueInEther: cubit.valueInEther!, fee: fee,));
+            setState(() {});
           }
         },
         builder: (context, state) {
           final cubit = context.read<SendToExternalCubit>();
+          if (state is sendToExternalStateInitial) {
+            cubit.getBalanceToken(tokenFrom);
+          }
+
           return DismissKeyboardWidget(
             child: BackgroundWidget(
               appBar: SFAppBar(
@@ -56,7 +87,7 @@ class SendToExternalScreen extends StatelessWidget {
                       Expanded(
                         child: ListView(
                           children: [
-						  
+
                             Image.asset(Imgs.sendToExternal),
                             // const SizedBox(height: 32,),
                             SFCard(
@@ -82,9 +113,11 @@ class SendToExternalScreen extends StatelessWidget {
                                   SFTextField(
                                     labelText: LocaleKeys.amount,
                                     textInputType: TextInputType.number,
-                                    suffixIcon: const Padding(
-                                      padding: EdgeInsets.all(8.0),
-                                      child: DropdownSelectToken(),
+                                    suffixIcon:  Padding(
+                                      padding: const EdgeInsets.all(8.0),
+                                      child: SFIcon(
+                                        args != null ? args.icon : Ics.icAvax
+                                      )
                                     ),
                                     onChanged: (v) {
                                       cubit.valueInEther = double.parse(v);
@@ -102,23 +135,6 @@ class SendToExternalScreen extends StatelessWidget {
                                       style: TextStyles.w400lightGrey12,
                                       suffix: ': $balance AVAX'),
                                 ],
-								
-                            const SFTextField(
-                                labelText: LocaleKeys.to_address,
-                                suffixIcon: Padding(
-                                    padding: EdgeInsets.all(10),
-                                    child: SFIcon(
-                                      Ics.icScanOutlined,
-                                    ))),
-                            const SizedBox(height: 24),
-                            const SFTextField(
-                              labelText: LocaleKeys.amount,
-                              textInputType: TextInputType.number,
-                              suffixIcon: Padding(
-                                padding: EdgeInsets.all(8.0),
-                                child: DropdownSelectToken(
-                                  tokens: Const.tokens,
-                                ),
                               ),
                             ),
                             const SizedBox(
@@ -174,14 +190,7 @@ class SendToExternalScreen extends StatelessWidget {
                         textStyle: TextStyles.w600WhiteSize16,
                         width: double.infinity,
                         gradient: AppColors.gradientBlueButton,
-                        onPressed: () {
-                        cubit.estimateGas();
-                         if(state is SendToExternalCalculatorFee) {
-                           fee = ((state.fee * 50000000000) / pow(10, 18));
-                           showCustomAlertDialog(context,
-                               children:  PopUpConfirmSend(toAddress: cubit.toAddress, valueInEther: cubit.valueInEther!, fee: fee,));
-                         }
-                        },
+                        onPressed: () => cubit.estimateGas(),
                       ),
                       const SizedBox(
                         height: 37.0,
