@@ -139,14 +139,14 @@ class _WalletScreenState extends State<WalletScreen>
                               .pushNamed(R.passcode)
                               .then((value) {
                             if (value == true) {
-                              indexTap = 1;
+                              setState(() => indexTap = 1);
                               controller.animateTo(1);
                             }
                           });
                           return;
                         }
 
-                        indexTap = i;
+                        setState(() => indexTap = i);
                       },
                       index: indexTap,
                     ),
@@ -203,7 +203,7 @@ class _WalletScreenState extends State<WalletScreen>
   _showWarningDialog(dynamic value, BuildContext context) {
     if (value is PopWithResults) {
       context.read<WalletCubit>().init();
-      indexTap = 1;
+      setState(() => indexTap = 1);
       controller.animateTo(1);
       var cubit = context.read<WalletCubit>();
       cubit.importWallet(value.results['data'] as WalletInfoEntity);

@@ -7,7 +7,6 @@ import 'package:slee_fi/common/widgets/background_widget.dart';
 import 'package:slee_fi/common/widgets/sf_app_bar.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
 import 'package:slee_fi/l10n/locale_keys.g.dart';
-import 'package:slee_fi/models/pop_with_result.dart';
 import 'package:slee_fi/presentation/blocs/passcode/passcode_cubit.dart';
 import 'package:slee_fi/presentation/blocs/passcode/passcode_state.dart';
 import 'package:slee_fi/presentation/screens/passcode/widgets/passcode_numpad.dart';
@@ -46,9 +45,7 @@ class _CreatePasscodeScreenState extends State<CreatePasscodeScreen> {
           if (state is createPassCodeDone) {
             if (args != null) {
               Navigator.pushNamed(context, args.route).then((results) {
-                if (results is PopWithResults) {
-                  Navigator.of(context).pop(results);
-                }
+                Navigator.pop(context, results);
               });
             } else {
               Navigator.pushNamed(context, R.confirmPasscode)
