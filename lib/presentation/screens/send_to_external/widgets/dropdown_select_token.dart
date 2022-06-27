@@ -1,8 +1,9 @@
-import 'package:cool_dropdown/cool_dropdown.dart';
+
 import 'package:flutter/material.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
 import 'package:slee_fi/common/widgets/sf_icon.dart';
+import 'package:slee_fi/cool_dropdown/cool_dropdown.dart';
 import 'package:slee_fi/resources/resources.dart';
 
 class DropdownSelectToken extends StatefulWidget {
@@ -16,7 +17,7 @@ class DropdownSelectToken extends StatefulWidget {
     this.isResultLabel = false,
 
     Key? key,
-    this.onChange, required this.tokens,
+    this.onChange, required this.tokens, this.globalKey,
   }) : super(key: key);
 
   final int indexInit;
@@ -28,6 +29,7 @@ class DropdownSelectToken extends StatefulWidget {
   final bool isResultLabel;
   final Function(dynamic)? onChange;
   final List<dynamic> tokens;
+  final GlobalKey<CoolDropdownState>? globalKey;
 
   @override
   State<DropdownSelectToken> createState() => _DropdownSelectTokenState();
@@ -100,6 +102,7 @@ class _DropdownSelectTokenState extends State<DropdownSelectToken> {
     return FittedBox(
       fit: BoxFit.fitWidth,
       child: CoolDropdown(
+        key: widget.globalKey,
         resultWidth: widget.width ?? 70,
         resultHeight: widget.height ?? 32,
         defaultValue: dropdownItemList[widget.indexInit],

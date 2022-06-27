@@ -17,6 +17,7 @@ import 'package:slee_fi/common/widgets/sf_icon_border.dart';
 import 'package:slee_fi/common/widgets/sf_sub_app_bar.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
 import 'package:slee_fi/common/widgets/sf_textfield.dart';
+import 'package:slee_fi/cool_dropdown/cool_dropdown.dart';
 import 'package:slee_fi/l10n/locale_keys.g.dart';
 import 'package:slee_fi/presentation/blocs/trade/trade_cubit.dart';
 import 'package:slee_fi/presentation/blocs/trade/trade_state.dart';
@@ -35,6 +36,9 @@ class _TradeScreenState extends State<TradeScreen> {
   late double balance = 0;
   int indexFrom = 0;
   int indexTo = Const.tokens.length - 1;
+
+  final GlobalKey<CoolDropdownState> firstToken = GlobalKey();
+  final GlobalKey<CoolDropdownState> secondToken = GlobalKey();
   TextEditingController valueController = TextEditingController();
 
   int getIndexAddress(String address) {
@@ -167,6 +171,7 @@ class _TradeScreenState extends State<TradeScreen> {
                                         child: Align(
                                           alignment: Alignment.centerRight,
                                           child: DropdownSelectToken(
+                                            globalKey: firstToken,
                                             width: 90,
                                             height: 36,
                                             indexInit: indexFrom,
@@ -178,20 +183,29 @@ class _TradeScreenState extends State<TradeScreen> {
                                             tokens: Const.tokens,
                                             onChange: (selectItem) {
                                               setState(() {
+                                                'run to set default value start'
+                                                    .log;
                                                 if (selectItem["value"] ==
                                                     Const.tokens[indexTo]
-                                                    ['address']) {
+                                                        ['address']) {
                                                   indexTo = indexFrom;
                                                 }
                                                 indexFrom = getIndexAddress(
                                                     selectItem["value"]
                                                         .toString());
                                                 cubit.getBalanceToken(Const
-                                                    .tokens[indexFrom]['address']
+                                                    .tokens[indexFrom]
+                                                        ['address']
                                                     .toString());
                                                 valueController.text = '';
                                                 log("message $indexFrom $indexTo");
                                               });
+                                              Future.delayed(
+                                                const Duration(
+                                                    milliseconds: 100),
+                                                () => secondToken.currentState
+                                                    ?.changeSelectedItem(),
+                                              );
                                             },
                                           ),
                                         ),
@@ -232,6 +246,7 @@ class _TradeScreenState extends State<TradeScreen> {
                                     children: [
                                       const SizedBox(),
                                       DropdownSelectToken(
+                                        globalKey: secondToken,
                                         width: 90,
                                         height: 36,
                                         indexInit: indexTo,
