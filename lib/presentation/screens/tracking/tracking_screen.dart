@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:slee_fi/common/routes/app_routes.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
 import 'package:slee_fi/common/widgets/background_widget.dart';
@@ -101,11 +102,12 @@ class _TrackingScreenState extends State<TrackingScreen> {
               color: AppColors.blue,
               textStyle: TextStyles.w600WhiteSize16,
               onPressed: () {
-                showCustomAlertDialog(
-                  context,
-                  padding: const EdgeInsets.all(24),
-                  children: const PopUpConfirmWakeUp(),
-                );
+                Navigator.pushNamed(context, R.preResult);
+                // showCustomAlertDialog(
+                //   context,
+                //   padding: const EdgeInsets.all(24),
+                //   children: const PopUpConfirmWakeUp(),
+                // );
               },
             ),
             const SizedBox(height: 26),

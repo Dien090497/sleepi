@@ -114,7 +114,7 @@ class TransactionDetail extends StatelessWidget {
                       Expanded(
                         child: BoxButtonWidget(
                           onTap: () =>
-                              Navigator.pushNamed(context, R.sendToExternal ,arguments: SendToExternalArguments(args != null ? args.img : '')),
+                              Navigator.pushNamed(context, R.sendToExternal ,arguments: SendToExternalArguments(args != null ? args.title : '', args != null ? args.img : '')),
                           text: LocaleKeys.to_external,
                           assetImage: Ics.icArrowUpRight,
                         ),

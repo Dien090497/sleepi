@@ -6,19 +6,19 @@ import 'package:slee_fi/usecase/usecase.dart';
 
 class SendToExternalParams {
   final double valueInEther;
-  final String toAddress;
+  final String contractAddressTo;
 
-  const SendToExternalParams(this.toAddress, this.valueInEther);
+  const SendToExternalParams({required this.contractAddressTo, required this.valueInEther});
 }
 
 
-class SendToExternalUseCase extends UseCase<SendToExternalEntity, SendToExternalParams> {
+class SendToExternalUseCase extends UseCase<bool, SendToExternalParams> {
   final ITransactionRepository _iTransactionRepository;
 
   SendToExternalUseCase(this._iTransactionRepository);
 
   @override
-  Future<Either<Failure, SendToExternalEntity>> call(SendToExternalParams params) {
+  Future<Either<Failure, bool>> call(SendToExternalParams params) {
     return _iTransactionRepository.sendToExternal(params);
   }
 
@@ -26,7 +26,7 @@ class SendToExternalUseCase extends UseCase<SendToExternalEntity, SendToExternal
     return _iTransactionRepository.calculatorFee(params);
   }
 
-  Future<Either<Failure, int>> getBalance(NoParams params) {
-    return _iTransactionRepository.getBalance();
+  Future<Either<Failure, double>> getTokenBalance(NoParams params) {
+    return _iTransactionRepository.getTokenBalance();
   }
 }

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:slee_fi/common/const/const.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
 import 'package:slee_fi/common/widgets/sf_buttons.dart';
@@ -18,15 +17,18 @@ class PopUpConfirmSend extends StatelessWidget {
   final double fee;
   @override
   Widget build(BuildContext context) {
-    String tokenFrom = Const.tokens[0]["address"].toString();
     return BlocProvider(
-      create: (context) => SendToExternalCubit()..estimateGas(),
+      create: (context) => SendToExternalCubit()..init(),
       child: BlocConsumer<SendToExternalCubit, SendToExternalState>(
-        listener: (context, state) { },
+        listener: (context, state) {
+          if(state is sendToExternalSuccess){
+            Navigator.pop(context);
+            Navigator.pop(context);
+            showSuccessfulDialog(context);
+          }
+        },
         builder: (context, state) {
           final cubit = context.read<SendToExternalCubit>();
-          cubit.toAddress = toAddress;
-          cubit.valueInEther = valueInEther;
           return Padding(
             padding: const EdgeInsets.symmetric(horizontal: 24),
             child: Column(
@@ -114,12 +116,7 @@ class PopUpConfirmSend extends StatelessWidget {
                         textStyle: TextStyles.bold14LightWhite,
                         color: AppColors.blue,
                         width: double.infinity,
-                        onPressed: () {
-                          cubit.sendToExternal();
-                          Navigator.pop(context);
-                          showSuccessfulDialog(context);
-                          cubit.getBalanceToken(tokenFrom);
-                        },
+                        onPressed: () => cubit.sendToExternal(toAddress, valueInEther),
                       ),
                     ),
                   ],

@@ -62,7 +62,7 @@ mixin _$SendToExternalState {
     required TResult Function(sendToExternalDone value) done,
     required TResult Function(SendToExternalLoading value) loading,
     required TResult Function(getTokenBalance value) getBalance,
-    required TResult Function(getTokenSuccess value) success,
+    required TResult Function(sendToExternalSuccess value) success,
     required TResult Function(getTokenFail value) fail,
     required TResult Function(SendToExternalCalculatorFee value) calculatorFee,
     required TResult Function(SendToExternalErrorToAddress value)
@@ -77,7 +77,7 @@ mixin _$SendToExternalState {
     TResult Function(sendToExternalDone value)? done,
     TResult Function(SendToExternalLoading value)? loading,
     TResult Function(getTokenBalance value)? getBalance,
-    TResult Function(getTokenSuccess value)? success,
+    TResult Function(sendToExternalSuccess value)? success,
     TResult Function(getTokenFail value)? fail,
     TResult Function(SendToExternalCalculatorFee value)? calculatorFee,
     TResult Function(SendToExternalErrorToAddress value)? errorToAddress,
@@ -90,7 +90,7 @@ mixin _$SendToExternalState {
     TResult Function(sendToExternalDone value)? done,
     TResult Function(SendToExternalLoading value)? loading,
     TResult Function(getTokenBalance value)? getBalance,
-    TResult Function(getTokenSuccess value)? success,
+    TResult Function(sendToExternalSuccess value)? success,
     TResult Function(getTokenFail value)? fail,
     TResult Function(SendToExternalCalculatorFee value)? calculatorFee,
     TResult Function(SendToExternalErrorToAddress value)? errorToAddress,
@@ -253,7 +253,7 @@ class _$sendToExternalStateInitial
     required TResult Function(sendToExternalDone value) done,
     required TResult Function(SendToExternalLoading value) loading,
     required TResult Function(getTokenBalance value) getBalance,
-    required TResult Function(getTokenSuccess value) success,
+    required TResult Function(sendToExternalSuccess value) success,
     required TResult Function(getTokenFail value) fail,
     required TResult Function(SendToExternalCalculatorFee value) calculatorFee,
     required TResult Function(SendToExternalErrorToAddress value)
@@ -271,7 +271,7 @@ class _$sendToExternalStateInitial
     TResult Function(sendToExternalDone value)? done,
     TResult Function(SendToExternalLoading value)? loading,
     TResult Function(getTokenBalance value)? getBalance,
-    TResult Function(getTokenSuccess value)? success,
+    TResult Function(sendToExternalSuccess value)? success,
     TResult Function(getTokenFail value)? fail,
     TResult Function(SendToExternalCalculatorFee value)? calculatorFee,
     TResult Function(SendToExternalErrorToAddress value)? errorToAddress,
@@ -287,7 +287,7 @@ class _$sendToExternalStateInitial
     TResult Function(sendToExternalDone value)? done,
     TResult Function(SendToExternalLoading value)? loading,
     TResult Function(getTokenBalance value)? getBalance,
-    TResult Function(getTokenSuccess value)? success,
+    TResult Function(sendToExternalSuccess value)? success,
     TResult Function(getTokenFail value)? fail,
     TResult Function(SendToExternalCalculatorFee value)? calculatorFee,
     TResult Function(SendToExternalErrorToAddress value)? errorToAddress,
@@ -452,7 +452,7 @@ class _$sendToExternalDone
     required TResult Function(sendToExternalDone value) done,
     required TResult Function(SendToExternalLoading value) loading,
     required TResult Function(getTokenBalance value) getBalance,
-    required TResult Function(getTokenSuccess value) success,
+    required TResult Function(sendToExternalSuccess value) success,
     required TResult Function(getTokenFail value) fail,
     required TResult Function(SendToExternalCalculatorFee value) calculatorFee,
     required TResult Function(SendToExternalErrorToAddress value)
@@ -470,7 +470,7 @@ class _$sendToExternalDone
     TResult Function(sendToExternalDone value)? done,
     TResult Function(SendToExternalLoading value)? loading,
     TResult Function(getTokenBalance value)? getBalance,
-    TResult Function(getTokenSuccess value)? success,
+    TResult Function(sendToExternalSuccess value)? success,
     TResult Function(getTokenFail value)? fail,
     TResult Function(SendToExternalCalculatorFee value)? calculatorFee,
     TResult Function(SendToExternalErrorToAddress value)? errorToAddress,
@@ -486,7 +486,7 @@ class _$sendToExternalDone
     TResult Function(sendToExternalDone value)? done,
     TResult Function(SendToExternalLoading value)? loading,
     TResult Function(getTokenBalance value)? getBalance,
-    TResult Function(getTokenSuccess value)? success,
+    TResult Function(sendToExternalSuccess value)? success,
     TResult Function(getTokenFail value)? fail,
     TResult Function(SendToExternalCalculatorFee value)? calculatorFee,
     TResult Function(SendToExternalErrorToAddress value)? errorToAddress,
@@ -615,7 +615,7 @@ class _$SendToExternalLoading
     required TResult Function(sendToExternalDone value) done,
     required TResult Function(SendToExternalLoading value) loading,
     required TResult Function(getTokenBalance value) getBalance,
-    required TResult Function(getTokenSuccess value) success,
+    required TResult Function(sendToExternalSuccess value) success,
     required TResult Function(getTokenFail value) fail,
     required TResult Function(SendToExternalCalculatorFee value) calculatorFee,
     required TResult Function(SendToExternalErrorToAddress value)
@@ -633,7 +633,7 @@ class _$SendToExternalLoading
     TResult Function(sendToExternalDone value)? done,
     TResult Function(SendToExternalLoading value)? loading,
     TResult Function(getTokenBalance value)? getBalance,
-    TResult Function(getTokenSuccess value)? success,
+    TResult Function(sendToExternalSuccess value)? success,
     TResult Function(getTokenFail value)? fail,
     TResult Function(SendToExternalCalculatorFee value)? calculatorFee,
     TResult Function(SendToExternalErrorToAddress value)? errorToAddress,
@@ -649,7 +649,7 @@ class _$SendToExternalLoading
     TResult Function(sendToExternalDone value)? done,
     TResult Function(SendToExternalLoading value)? loading,
     TResult Function(getTokenBalance value)? getBalance,
-    TResult Function(getTokenSuccess value)? success,
+    TResult Function(sendToExternalSuccess value)? success,
     TResult Function(getTokenFail value)? fail,
     TResult Function(SendToExternalCalculatorFee value)? calculatorFee,
     TResult Function(SendToExternalErrorToAddress value)? errorToAddress,
@@ -798,7 +798,7 @@ class _$getTokenBalance
     required TResult Function(sendToExternalDone value) done,
     required TResult Function(SendToExternalLoading value) loading,
     required TResult Function(getTokenBalance value) getBalance,
-    required TResult Function(getTokenSuccess value) success,
+    required TResult Function(sendToExternalSuccess value) success,
     required TResult Function(getTokenFail value) fail,
     required TResult Function(SendToExternalCalculatorFee value) calculatorFee,
     required TResult Function(SendToExternalErrorToAddress value)
@@ -816,7 +816,7 @@ class _$getTokenBalance
     TResult Function(sendToExternalDone value)? done,
     TResult Function(SendToExternalLoading value)? loading,
     TResult Function(getTokenBalance value)? getBalance,
-    TResult Function(getTokenSuccess value)? success,
+    TResult Function(sendToExternalSuccess value)? success,
     TResult Function(getTokenFail value)? fail,
     TResult Function(SendToExternalCalculatorFee value)? calculatorFee,
     TResult Function(SendToExternalErrorToAddress value)? errorToAddress,
@@ -832,7 +832,7 @@ class _$getTokenBalance
     TResult Function(sendToExternalDone value)? done,
     TResult Function(SendToExternalLoading value)? loading,
     TResult Function(getTokenBalance value)? getBalance,
-    TResult Function(getTokenSuccess value)? success,
+    TResult Function(sendToExternalSuccess value)? success,
     TResult Function(getTokenFail value)? fail,
     TResult Function(SendToExternalCalculatorFee value)? calculatorFee,
     TResult Function(SendToExternalErrorToAddress value)? errorToAddress,
@@ -856,30 +856,30 @@ abstract class getTokenBalance implements SendToExternalState {
 }
 
 /// @nodoc
-abstract class _$$getTokenSuccessCopyWith<$Res> {
-  factory _$$getTokenSuccessCopyWith(
-          _$getTokenSuccess value, $Res Function(_$getTokenSuccess) then) =
-      __$$getTokenSuccessCopyWithImpl<$Res>;
+abstract class _$$sendToExternalSuccessCopyWith<$Res> {
+  factory _$$sendToExternalSuccessCopyWith(_$sendToExternalSuccess value,
+          $Res Function(_$sendToExternalSuccess) then) =
+      __$$sendToExternalSuccessCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$getTokenSuccessCopyWithImpl<$Res>
+class __$$sendToExternalSuccessCopyWithImpl<$Res>
     extends _$SendToExternalStateCopyWithImpl<$Res>
-    implements _$$getTokenSuccessCopyWith<$Res> {
-  __$$getTokenSuccessCopyWithImpl(
-      _$getTokenSuccess _value, $Res Function(_$getTokenSuccess) _then)
-      : super(_value, (v) => _then(v as _$getTokenSuccess));
+    implements _$$sendToExternalSuccessCopyWith<$Res> {
+  __$$sendToExternalSuccessCopyWithImpl(_$sendToExternalSuccess _value,
+      $Res Function(_$sendToExternalSuccess) _then)
+      : super(_value, (v) => _then(v as _$sendToExternalSuccess));
 
   @override
-  _$getTokenSuccess get _value => super._value as _$getTokenSuccess;
+  _$sendToExternalSuccess get _value => super._value as _$sendToExternalSuccess;
 }
 
 /// @nodoc
 
-class _$getTokenSuccess
+class _$sendToExternalSuccess
     with DiagnosticableTreeMixin
-    implements getTokenSuccess {
-  const _$getTokenSuccess();
+    implements sendToExternalSuccess {
+  const _$sendToExternalSuccess();
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
@@ -895,7 +895,7 @@ class _$getTokenSuccess
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$getTokenSuccess);
+        (other.runtimeType == runtimeType && other is _$sendToExternalSuccess);
   }
 
   @override
@@ -960,7 +960,7 @@ class _$getTokenSuccess
     required TResult Function(sendToExternalDone value) done,
     required TResult Function(SendToExternalLoading value) loading,
     required TResult Function(getTokenBalance value) getBalance,
-    required TResult Function(getTokenSuccess value) success,
+    required TResult Function(sendToExternalSuccess value) success,
     required TResult Function(getTokenFail value) fail,
     required TResult Function(SendToExternalCalculatorFee value) calculatorFee,
     required TResult Function(SendToExternalErrorToAddress value)
@@ -978,7 +978,7 @@ class _$getTokenSuccess
     TResult Function(sendToExternalDone value)? done,
     TResult Function(SendToExternalLoading value)? loading,
     TResult Function(getTokenBalance value)? getBalance,
-    TResult Function(getTokenSuccess value)? success,
+    TResult Function(sendToExternalSuccess value)? success,
     TResult Function(getTokenFail value)? fail,
     TResult Function(SendToExternalCalculatorFee value)? calculatorFee,
     TResult Function(SendToExternalErrorToAddress value)? errorToAddress,
@@ -994,7 +994,7 @@ class _$getTokenSuccess
     TResult Function(sendToExternalDone value)? done,
     TResult Function(SendToExternalLoading value)? loading,
     TResult Function(getTokenBalance value)? getBalance,
-    TResult Function(getTokenSuccess value)? success,
+    TResult Function(sendToExternalSuccess value)? success,
     TResult Function(getTokenFail value)? fail,
     TResult Function(SendToExternalCalculatorFee value)? calculatorFee,
     TResult Function(SendToExternalErrorToAddress value)? errorToAddress,
@@ -1008,8 +1008,8 @@ class _$getTokenSuccess
   }
 }
 
-abstract class getTokenSuccess implements SendToExternalState {
-  const factory getTokenSuccess() = _$getTokenSuccess;
+abstract class sendToExternalSuccess implements SendToExternalState {
+  const factory sendToExternalSuccess() = _$sendToExternalSuccess;
 }
 
 /// @nodoc
@@ -1141,7 +1141,7 @@ class _$getTokenFail with DiagnosticableTreeMixin implements getTokenFail {
     required TResult Function(sendToExternalDone value) done,
     required TResult Function(SendToExternalLoading value) loading,
     required TResult Function(getTokenBalance value) getBalance,
-    required TResult Function(getTokenSuccess value) success,
+    required TResult Function(sendToExternalSuccess value) success,
     required TResult Function(getTokenFail value) fail,
     required TResult Function(SendToExternalCalculatorFee value) calculatorFee,
     required TResult Function(SendToExternalErrorToAddress value)
@@ -1159,7 +1159,7 @@ class _$getTokenFail with DiagnosticableTreeMixin implements getTokenFail {
     TResult Function(sendToExternalDone value)? done,
     TResult Function(SendToExternalLoading value)? loading,
     TResult Function(getTokenBalance value)? getBalance,
-    TResult Function(getTokenSuccess value)? success,
+    TResult Function(sendToExternalSuccess value)? success,
     TResult Function(getTokenFail value)? fail,
     TResult Function(SendToExternalCalculatorFee value)? calculatorFee,
     TResult Function(SendToExternalErrorToAddress value)? errorToAddress,
@@ -1175,7 +1175,7 @@ class _$getTokenFail with DiagnosticableTreeMixin implements getTokenFail {
     TResult Function(sendToExternalDone value)? done,
     TResult Function(SendToExternalLoading value)? loading,
     TResult Function(getTokenBalance value)? getBalance,
-    TResult Function(getTokenSuccess value)? success,
+    TResult Function(sendToExternalSuccess value)? success,
     TResult Function(getTokenFail value)? fail,
     TResult Function(SendToExternalCalculatorFee value)? calculatorFee,
     TResult Function(SendToExternalErrorToAddress value)? errorToAddress,
@@ -1333,7 +1333,7 @@ class _$SendToExternalCalculatorFee
     required TResult Function(sendToExternalDone value) done,
     required TResult Function(SendToExternalLoading value) loading,
     required TResult Function(getTokenBalance value) getBalance,
-    required TResult Function(getTokenSuccess value) success,
+    required TResult Function(sendToExternalSuccess value) success,
     required TResult Function(getTokenFail value) fail,
     required TResult Function(SendToExternalCalculatorFee value) calculatorFee,
     required TResult Function(SendToExternalErrorToAddress value)
@@ -1351,7 +1351,7 @@ class _$SendToExternalCalculatorFee
     TResult Function(sendToExternalDone value)? done,
     TResult Function(SendToExternalLoading value)? loading,
     TResult Function(getTokenBalance value)? getBalance,
-    TResult Function(getTokenSuccess value)? success,
+    TResult Function(sendToExternalSuccess value)? success,
     TResult Function(getTokenFail value)? fail,
     TResult Function(SendToExternalCalculatorFee value)? calculatorFee,
     TResult Function(SendToExternalErrorToAddress value)? errorToAddress,
@@ -1367,7 +1367,7 @@ class _$SendToExternalCalculatorFee
     TResult Function(sendToExternalDone value)? done,
     TResult Function(SendToExternalLoading value)? loading,
     TResult Function(getTokenBalance value)? getBalance,
-    TResult Function(getTokenSuccess value)? success,
+    TResult Function(sendToExternalSuccess value)? success,
     TResult Function(getTokenFail value)? fail,
     TResult Function(SendToExternalCalculatorFee value)? calculatorFee,
     TResult Function(SendToExternalErrorToAddress value)? errorToAddress,
@@ -1526,7 +1526,7 @@ class _$SendToExternalErrorToAddress
     required TResult Function(sendToExternalDone value) done,
     required TResult Function(SendToExternalLoading value) loading,
     required TResult Function(getTokenBalance value) getBalance,
-    required TResult Function(getTokenSuccess value) success,
+    required TResult Function(sendToExternalSuccess value) success,
     required TResult Function(getTokenFail value) fail,
     required TResult Function(SendToExternalCalculatorFee value) calculatorFee,
     required TResult Function(SendToExternalErrorToAddress value)
@@ -1544,7 +1544,7 @@ class _$SendToExternalErrorToAddress
     TResult Function(sendToExternalDone value)? done,
     TResult Function(SendToExternalLoading value)? loading,
     TResult Function(getTokenBalance value)? getBalance,
-    TResult Function(getTokenSuccess value)? success,
+    TResult Function(sendToExternalSuccess value)? success,
     TResult Function(getTokenFail value)? fail,
     TResult Function(SendToExternalCalculatorFee value)? calculatorFee,
     TResult Function(SendToExternalErrorToAddress value)? errorToAddress,
@@ -1560,7 +1560,7 @@ class _$SendToExternalErrorToAddress
     TResult Function(sendToExternalDone value)? done,
     TResult Function(SendToExternalLoading value)? loading,
     TResult Function(getTokenBalance value)? getBalance,
-    TResult Function(getTokenSuccess value)? success,
+    TResult Function(sendToExternalSuccess value)? success,
     TResult Function(getTokenFail value)? fail,
     TResult Function(SendToExternalCalculatorFee value)? calculatorFee,
     TResult Function(SendToExternalErrorToAddress value)? errorToAddress,
@@ -1720,7 +1720,7 @@ class _$SendToExternalErrorValueInEther
     required TResult Function(sendToExternalDone value) done,
     required TResult Function(SendToExternalLoading value) loading,
     required TResult Function(getTokenBalance value) getBalance,
-    required TResult Function(getTokenSuccess value) success,
+    required TResult Function(sendToExternalSuccess value) success,
     required TResult Function(getTokenFail value) fail,
     required TResult Function(SendToExternalCalculatorFee value) calculatorFee,
     required TResult Function(SendToExternalErrorToAddress value)
@@ -1738,7 +1738,7 @@ class _$SendToExternalErrorValueInEther
     TResult Function(sendToExternalDone value)? done,
     TResult Function(SendToExternalLoading value)? loading,
     TResult Function(getTokenBalance value)? getBalance,
-    TResult Function(getTokenSuccess value)? success,
+    TResult Function(sendToExternalSuccess value)? success,
     TResult Function(getTokenFail value)? fail,
     TResult Function(SendToExternalCalculatorFee value)? calculatorFee,
     TResult Function(SendToExternalErrorToAddress value)? errorToAddress,
@@ -1754,7 +1754,7 @@ class _$SendToExternalErrorValueInEther
     TResult Function(sendToExternalDone value)? done,
     TResult Function(SendToExternalLoading value)? loading,
     TResult Function(getTokenBalance value)? getBalance,
-    TResult Function(getTokenSuccess value)? success,
+    TResult Function(sendToExternalSuccess value)? success,
     TResult Function(getTokenFail value)? fail,
     TResult Function(SendToExternalCalculatorFee value)? calculatorFee,
     TResult Function(SendToExternalErrorToAddress value)? errorToAddress,

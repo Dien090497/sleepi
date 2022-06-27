@@ -67,13 +67,31 @@ class _AccountLoginState extends State<AccountLoginWidget> {
           },
           width: MediaQuery.of(context).size.width,
         ),
-        const SizedBox(height: 32),
+        const SizedBox(height: 16),
         SFTextButton(
           text: isLoginSignup
               ? LocaleKeys.account_login
               : LocaleKeys.verification_login,
           textStyle: TextStyles.blue14,
           onPressed: () => changeStatus(),
+        ),
+        const SizedBox(height: 16),
+        SFText(keyText: "Registration means that you agree to STEPN's", style: TextStyles.w400lightGrey12,),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            SFTextButton(
+              text: "User Agreement",
+              textStyle: TextStyles.red12W700,
+              onPressed: () => null,
+            ),
+            SFText(keyText: "&"),
+            SFTextButton(
+              text: "User Privacy",
+              textStyle: TextStyles.red12W700,
+              onPressed: () => null,
+            ),
+          ],
         ),
       ],
     );

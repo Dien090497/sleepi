@@ -24,9 +24,10 @@ import 'package:slee_fi/presentation/screens/send_to_external/widgets/pop_up_con
 import 'package:slee_fi/resources/resources.dart';
 
 class SendToExternalArguments{
+  final String symbol;
   final String icon;
 
-  SendToExternalArguments(this.icon);
+  SendToExternalArguments(this.symbol, this.icon);
 }
 
 class SendToExternalScreen extends StatefulWidget {
@@ -37,10 +38,11 @@ class SendToExternalScreen extends StatefulWidget {
 }
 
 class _SendToExternalScreenState extends State<SendToExternalScreen> {
-  String tokenFrom = Const.tokens[0]["address"].toString();
-
-  double balance = 0;
+  bool isDisabled = true;
+  late double balance = 0;
   double fee = 0;
+  String contractAddressTo = '';
+  double valueInEther = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -51,24 +53,26 @@ class _SendToExternalScreenState extends State<SendToExternalScreen> {
       create: (context) => SendToExternalCubit()..init(),
       child: BlocConsumer<SendToExternalCubit, SendToExternalState>(
         listener: (context, state) {
-          final cubit = context.read<SendToExternalCubit>();
           if (state is getTokenBalance) {
             balance = state.balance;
-            debugPrint("message  $balance");
             setState(() {});
           }
           if (state is SendToExternalCalculatorFee) {
             fee = ((state.fee * 50000000000) / pow(10, 18));
-            debugPrint("fee  $fee");
+           setState(() {});
             showCustomAlertDialog(context,
-                children:  PopUpConfirmSend(toAddress: cubit.toAddress, valueInEther: cubit.valueInEther!, fee: fee,));
-            setState(() {});
+                children:  PopUpConfirmSend(
+                  toAddress: contractAddressTo,
+                  valueInEther: valueInEther,
+                  fee: fee,
+                )
+            );
           }
         },
         builder: (context, state) {
           final cubit = context.read<SendToExternalCubit>();
           if (state is sendToExternalStateInitial) {
-            cubit.getBalanceToken(tokenFrom);
+            cubit.getTokenBalance();
           }
 
           return DismissKeyboardWidget(
@@ -87,9 +91,8 @@ class _SendToExternalScreenState extends State<SendToExternalScreen> {
                       Expanded(
                         child: ListView(
                           children: [
-
-                            Image.asset(Imgs.sendToExternal),
-                            // const SizedBox(height: 32,),
+                          args != null ?  SFIcon(args.icon, width: 60, height: 60,) : Image.asset(Imgs.sendToExternal),
+                             SizedBox(height: args != null ? 32 : 0,),
                             SFCard(
                               margin: EdgeInsets.zero,
                               padding: const EdgeInsets.symmetric(
@@ -99,7 +102,16 @@ class _SendToExternalScreenState extends State<SendToExternalScreen> {
                                 children: [
                                   AddressScan(
                                     onChangedAddress: (address){
-                                      cubit.toAddress = address;
+                                      contractAddressTo = address;
+                                      if(contractAddressTo.isNotEmpty && valueInEther != 0){
+                                        setState((){
+                                          isDisabled = false;
+                                        });
+                                      } else {
+                                        setState((){
+                                          isDisabled = true;
+                                        });
+                                      }
                                     },
                                   ),
                                    SizedBox(height: state is SendToExternalErrorToAddress ? 5 : 0),
@@ -120,7 +132,16 @@ class _SendToExternalScreenState extends State<SendToExternalScreen> {
                                       )
                                     ),
                                     onChanged: (v) {
-                                      cubit.valueInEther = double.parse(v);
+                                      valueInEther = double.parse(v);
+                                      if(contractAddressTo.isNotEmpty && valueInEther != 0){
+                                        setState((){
+                                          isDisabled = false;
+                                        });
+                                      }else {
+                                        setState((){
+                                          isDisabled = true;
+                                        });
+                                      }
                                     },
                                   ),
                                   const SizedBox(height: 8),
@@ -133,7 +154,7 @@ class _SendToExternalScreenState extends State<SendToExternalScreen> {
                                   SFText(
                                       keyText: LocaleKeys.balance,
                                       style: TextStyles.w400lightGrey12,
-                                      suffix: ': $balance AVAX'),
+                                      suffix: ': $balance ${args != null ? args.symbol : "AVAX"}'),
                                 ],
                               ),
                             ),
@@ -190,7 +211,11 @@ class _SendToExternalScreenState extends State<SendToExternalScreen> {
                         textStyle: TextStyles.w600WhiteSize16,
                         width: double.infinity,
                         gradient: AppColors.gradientBlueButton,
-                        onPressed: () => cubit.estimateGas(),
+                        disabled: isDisabled,
+                        onPressed: () {
+                          cubit.estimateGas(contractAddressTo, valueInEther);
+
+                        },
                       ),
                       const SizedBox(
                         height: 37.0,

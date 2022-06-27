@@ -2,41 +2,35 @@ import 'package:bloc/bloc.dart';
 import 'package:slee_fi/di/injector.dart';
 import 'package:slee_fi/failures/failure.dart';
 import 'package:slee_fi/presentation/blocs/send_to_external/send_to_external_state.dart';
-import 'package:slee_fi/usecase/get_balance_token_usecase.dart';
 import 'package:slee_fi/usecase/send_to_external_usecase.dart';
+import 'package:slee_fi/usecase/usecase.dart';
 
 class SendToExternalCubit extends Cubit<SendToExternalState> {
   SendToExternalCubit(): super(const SendToExternalState.initial());
 
-  String toAddress = '';
-  double? valueInEther;
-
   final _sendToExternalUC = getIt<SendToExternalUseCase>();
-
-  final _getBalanceToken = getIt<GetBalanceTokenUseCase>();
 
   void init() {
     emit(const SendToExternalState.initial());
   }
 
-  Future sendToExternal() async {
-
-    var sendToExternalParams = SendToExternalParams(toAddress, valueInEther!);
+  Future<void> sendToExternal(String contractAddressTo , double valueInEther) async {
     final currentState = state;
     if (currentState is sendToExternalStateInitial) {
-      emit(currentState.copyWith(isLoading: true));
-      final result = await _sendToExternalUC.call(sendToExternalParams);
+      final result = await _sendToExternalUC.call(SendToExternalParams(
+          contractAddressTo : contractAddressTo, valueInEther : valueInEther));
+
       result.fold((l) {
-        emit(SendToExternalState.errorToAddress(
-            l is FailureMessage ? l.msg : '$l'));
-      }, (r) {
-        emit(SendToExternalState.done(r));
+        emit(SendToExternalState.fail(l is FailureMessage ? l.msg : '$l'));
+        emit(currentState.copyWith(isLoading: false));
+      }, (success)  {
+        emit(const SendToExternalState.success());
       });
     }
   }
 
-  Future<void> getBalanceToken(String contractAddress) async {
-    final result = await _getBalanceToken.call(contractAddress);
+  Future<void> getTokenBalance() async {
+    final result = await _sendToExternalUC.getTokenBalance(NoParams());
     result.fold(
           (l) {
         emit(SendToExternalState.fail(l is FailureMessage ? l.msg : '$l'));
@@ -47,26 +41,16 @@ class SendToExternalCubit extends Cubit<SendToExternalState> {
     );
   }
 
-  Future<void> estimateGas() async {
-     if (toAddress.isEmpty) {
-       emit(
-           const SendToExternalState.errorToAddress('Please Enter to address'));
-       return;
-     }
-     if (valueInEther == null) {
-       emit(const SendToExternalState.errorValueInEther('Please Enter value '));
-       return;
-     }
-     var sendToExternalParams = SendToExternalParams(toAddress, valueInEther!);
-
-     final result = await  _sendToExternalUC.calculatorFee(sendToExternalParams);
-     result.fold(
-           (l) {
-         emit(SendToExternalState.fail(l is FailureMessage ? l.msg : '$l'));
-       },
-           (success) {
-         emit(SendToExternalState.calculatorFee(success));
-       },
-     );
+  Future<void> estimateGas(String contractAddressTo , double valueInEther) async {
+    final result = await _sendToExternalUC.calculatorFee(SendToExternalParams(
+        contractAddressTo : contractAddressTo, valueInEther : valueInEther));
+    result.fold(
+          (l) {
+        emit(SendToExternalState.fail(l is FailureMessage ? l.msg : '$l'));
+      },
+          (success) {
+        emit(SendToExternalState.calculatorFee(success));
+      },
+    );
    }
 }

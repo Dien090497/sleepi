@@ -18,7 +18,7 @@ class SendToExternalState with _$SendToExternalState {
 
   const factory SendToExternalState.getBalance(double balance) = getTokenBalance;
 
-  const factory SendToExternalState.success() = getTokenSuccess;
+  const factory SendToExternalState.success() = sendToExternalSuccess;
 
   const factory SendToExternalState.fail(String msg) = getTokenFail;
 
