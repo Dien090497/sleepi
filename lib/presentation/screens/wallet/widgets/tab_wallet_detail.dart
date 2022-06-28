@@ -1,9 +1,8 @@
-import 'dart:math';
-
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:slee_fi/common/const/const.dart';
+import 'package:slee_fi/common/extensions/num_ext.dart';
 import 'package:slee_fi/common/extensions/string_x.dart';
 import 'package:slee_fi/common/routes/app_routes.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
@@ -40,8 +39,7 @@ class TabWalletDetail extends StatelessWidget {
     return SingleChildScrollView(
       child: BlocProvider(
         create: (context) => DetailWalletCubit()..loadCurrentWallet(),
-        child: BlocConsumer<DetailWalletCubit, DetailWalletState>(
-          listener: (context, state) {},
+        child: BlocBuilder<DetailWalletCubit, DetailWalletState>(
           builder: (context, state) {
             final cubit = context.read<DetailWalletCubit>();
             return Column(
@@ -52,8 +50,7 @@ class TabWalletDetail extends StatelessWidget {
                     SFText(keyText: networkName, style: TextStyles.bold12Blue),
                     const SizedBox(height: 4.0),
                     SFText(
-                        keyText:
-                            '${balance == 0 ? 0 : balance / pow(10, 18)} $currencySymbol',
+                        keyText: '${balance.formatBalance} $currencySymbol',
                         style: TextStyles.bold30White),
                     const SizedBox(height: 20.0),
                     Container(
