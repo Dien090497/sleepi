@@ -10,15 +10,15 @@ import 'package:slee_fi/failures/failure.dart';
 import 'package:slee_fi/l10n/locale_keys.g.dart';
 import 'package:slee_fi/presentation/blocs/detail_wallet/detail_wallet_state.dart';
 import 'package:slee_fi/resources/resources.dart';
-import 'package:slee_fi/usecase/get_balance_token_usecase.dart';
+import 'package:slee_fi/usecase/get_balance_for_tokens_usecase.dart';
 import 'package:slee_fi/usecase/usecase.dart';
 import 'package:slee_fi/usecase/wallet/current_wallet_usecase.dart';
 
 class DetailWalletCubit extends Cubit<DetailWalletState> {
   DetailWalletCubit() : super(const DetailWalletState.initial());
-  final _currentWalletUC = getIt<CurrentWalletUsecase>();
+  final _currentWalletUC = getIt<CurrentWalletUseCase>();
 
-  final _getBalanceTokenUseCase = getIt<GetBalanceTokenUseCase>();
+  final _getBalanceForTokensUseCase = getIt<GetBalanceForTokensUseCase>();
   final List<TokenEntity> tokenList = [];
 
   loadCurrentWallet() async {
@@ -39,7 +39,7 @@ class DetailWalletCubit extends Cubit<DetailWalletState> {
         '0x90fBE9dfe76F6EF971c7A297641dfa397099a13e',
         '0x6e7f5C0b9f4432716bDd0a77a3601291b9D9e985',
       ], walletInfoEntity: r);
-      final result = await _getBalanceTokenUseCase.call(params);
+      final result = await _getBalanceForTokensUseCase.call(params);
       result.fold((l) {
         emit(const DetailWalletState.error(message: 'Error when get balance token'));
       }, (values) {

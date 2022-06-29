@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:slee_fi/common/routes/app_routes.dart';
 import 'package:slee_fi/common/widgets/sf_icon.dart';
@@ -29,7 +30,7 @@ class TopBarCommon extends StatelessWidget {
                   ),
                 )
               : SFIconBorder(
-                  icon: Icons.settings_outlined,
+                  icon: CupertinoIcons.profile_circled,
                   onTap: () {
                     Navigator.pushNamed(context, R.setting);
                   },

@@ -8,7 +8,7 @@ class SFAppBar extends AppBar {
   SFAppBar({
     String? title,
     TextStyle? textStyle,
-    VoidCallback? onPressedBack,
+    bool disableLeading = false,
     StringCase? stringCase,
     bool? centerTitle ,
     EdgeInsets? paddingLeading,
@@ -22,7 +22,7 @@ class SFAppBar extends AppBar {
           automaticallyImplyLeading: false,
           leadingWidth: 48,
           elevation: 0,
-          leading:  const Padding(
+          leading: disableLeading ? const SizedBox()  : const Padding(
             padding: EdgeInsets.only(left: 16),
             child: SFBackButton(),
           ),

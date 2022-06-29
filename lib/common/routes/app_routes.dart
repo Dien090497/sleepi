@@ -3,6 +3,7 @@ import 'package:slee_fi/presentation/screens/alarm/alarm_screen.dart';
 import 'package:slee_fi/presentation/screens/alarm/widgets/sound_effect_screen.dart';
 import 'package:slee_fi/presentation/screens/bottom_navigation/bottom_navigation_screen.dart';
 import 'package:slee_fi/presentation/screens/change_password/change_password_screen.dart';
+import 'package:slee_fi/presentation/screens/create_password/create_password_screen.dart';
 import 'package:slee_fi/presentation/screens/create_wallet/create_wallet_screen.dart';
 import 'package:slee_fi/presentation/screens/email/email_screen.dart';
 import 'package:slee_fi/presentation/screens/enter_activation_code/enter_activation_code_screen.dart';
@@ -25,12 +26,14 @@ import 'package:slee_fi/presentation/screens/passcode/passcode_screen.dart';
 import 'package:slee_fi/presentation/screens/restore_wallet/restore_wallet_screen.dart';
 import 'package:slee_fi/presentation/screens/result/layout/all_result_detail_screen.dart';
 import 'package:slee_fi/presentation/screens/result/layout/all_result_screen.dart';
+import 'package:slee_fi/presentation/screens/result/layout/pre_result_screen.dart';
 import 'package:slee_fi/presentation/screens/result/layout/share_screen.dart';
 import 'package:slee_fi/presentation/screens/result/result_screen.dart';
 import 'package:slee_fi/presentation/screens/seed_phrase/layouts/export_seed_phrase_screen.dart';
 import 'package:slee_fi/presentation/screens/seed_phrase/layouts/show_seed_phrase_screen.dart';
 import 'package:slee_fi/presentation/screens/seed_phrase/seed_phrase_screen.dart';
 import 'package:slee_fi/presentation/screens/send_to_external/send_to_external_screen.dart';
+import 'package:slee_fi/presentation/screens/send_to_external/widgets/mobile_scanner.dart';
 import 'package:slee_fi/presentation/screens/setting/setting_screen.dart';
 import 'package:slee_fi/presentation/screens/setting_activation_code/activation_code_screen.dart';
 import 'package:slee_fi/presentation/screens/setting_permission/setting_permission_screen.dart';
@@ -41,7 +44,6 @@ import 'package:slee_fi/presentation/screens/setting_wallet/setting_wallet_scree
 import 'package:slee_fi/presentation/screens/staking/layout/deposit_slft_screen.dart';
 import 'package:slee_fi/presentation/screens/staking/layout/withdraw_slft_screen.dart';
 import 'package:slee_fi/presentation/screens/staking/staking_screen.dart';
-import 'package:slee_fi/presentation/screens/staking/widgets/taking_screen.dart';
 import 'package:slee_fi/presentation/screens/tracking/tracking_screen.dart';
 import 'package:slee_fi/presentation/screens/trade/trade_screen.dart';
 import 'package:slee_fi/presentation/screens/transfer/transfer_screen.dart';
@@ -63,7 +65,6 @@ class R {
   static const String passcode = '${_}passcode';
   static const String nftInfo = '${_}nft_info';
   static const String mint = '${_}mint';
-  static const String taking = '${_}taking';
   static const String staking = '${_}staking';
   static const String wallet = '${_}wallet';
   static const String setting = '${_}setting';
@@ -80,6 +81,7 @@ class R {
   static const String trade = '${_}trade';
   static const String email = '${_}email';
   static const String changePassword = '${_}change_password';
+  static const String createPassword = '${_}create_password';
   static const String transfer = '${_}transfer';
   static const String tutorial = '${_}tutorial';
   static const String walletCreationWarning = '${_}wallet_creation_warning';
@@ -92,6 +94,7 @@ class R {
   static const String depositSLFT = '${_}deposit_slft';
   static const String withdrawSLFT = '${_}withdraw_slft';
   static const String result = '${_}result';
+  static const String preResult = '${_}pre_result';
   static const String allResult = '${_}all_result';
   static const String allResultDetail = '${_}all_result_detail';
   static const String share = '${_}share';
@@ -102,6 +105,7 @@ class R {
   static const String tracking = '${_}tracking';
   static const String transactionDetail = '${_}transaction_detail';
   static const String commingSoon = '${_}comming_soon';
+  static const String qrCodeScan = '${_}qr_code_scan';
 }
 
 class AppRoutes {
@@ -119,7 +123,6 @@ class AppRoutes {
     R.mint: (_) => const MintScreen(),
     R.wallet: (_) => const RouteAwareWidget(child: WalletScreen()),
     R.staking: (_) => const StakingScreen(),
-    R.taking: (_) => const TakingScreen(),
     R.setting: (_) => const SettingScreen(),
     R.alarm: (_) => const AlarmScreen(),
     R.alarmSoundEffect: (_) => const AlarmSoundEffectScreen(),
@@ -135,6 +138,7 @@ class AppRoutes {
     R.trade: (_) => const TradeScreen(),
     R.email: (_) => const EmailScreen(),
     R.changePassword: (_) => const ChangePasswordScreen(),
+    R.createPassword: (_) => const CreatePasswordScreen(),
     R.transfer: (_) => const TransferScreen(),
     R.tutorial: (_) => const TutorialScreen(),
     R.walletCreationWarning: (_) => const WalletCreationWarningScreen(),
@@ -146,6 +150,7 @@ class AppRoutes {
     R.depositSLFT: (_) => const DepositSlftScreen(),
     R.withdrawSLFT: (_) => const WithdrawSlftScreen(),
     R.result: (_) => const ResultScreen(),
+    R.preResult: (_) => const PreResultScreen(),
     R.allResult: (_) => const AllResultScreen(),
     R.allResultDetail: (_) => const AllResultDetailScreen(),
     R.share: (_) => const ShareScreen(),
@@ -157,5 +162,6 @@ class AppRoutes {
     R.tracking: (_) => const TrackingScreen(),
     R.transactionDetail: (_) => const TransactionDetail(),
     R.commingSoon: (_) => const CommingSoon(),
+    R.qrCodeScan: (_) => const QRCodeScanner(),
   };
 }

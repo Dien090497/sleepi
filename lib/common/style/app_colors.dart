@@ -1,17 +1,13 @@
 import 'package:flutter/material.dart';
 
 class AppColors {
-
+  static const black = Color(0xFF000000);
   static const qrColor = Color(0xffCBD5E1);
   static const primary = Color(0xFF000000);
 
   static const radial1 = Color(0xFF241352);
 
   static const radial2 = Color(0xFF0A204A);
-
-  static const textColor = Color(0xFFCBD5E1);
-
-  static const black = Color(0xFF000000);
 
   static const dark = Color(0xFF060616);
 
@@ -51,8 +47,6 @@ class AppColors {
 
   static const green = Color(0xFF2ADF9E);
 
-  static const greenAccent = Colors.greenAccent;
-
   static const yellow = Color(0xFFF0B90A);
 
   static const lightYellow = Color(0xFFFDF5DA);
@@ -81,8 +75,6 @@ class AppColors {
   static const epicBed = Color(0xFF79BFFF);
 
   static const legendaryBed = Color(0xFF4A9E45);
-
-  static const gray = Color(0xFFC4C4C4);
 
   static const ruby = Color(0XFFFC476A);
 

@@ -6,8 +6,8 @@ final ThemeData darkTheme = ThemeData.dark();
 final ThemeData lightTheme = ThemeData(
   fontFamily: 'Montserrat',
   textTheme: const TextTheme(bodyText2: TextStyles.lightWhite14).apply(
-    bodyColor: AppColors.textColor,
-    displayColor: AppColors.textColor,
+    bodyColor: AppColors.lightWhite,
+    displayColor: AppColors.lightWhite,
   ),
-  tabBarTheme: const TabBarTheme(labelColor: AppColors.textColor),
+  tabBarTheme: const TabBarTheme(labelColor: AppColors.lightWhite),
 );

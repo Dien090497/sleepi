@@ -27,7 +27,7 @@ class GetStorageDataSource {
       _getStorage.read<int?>(StorageKeys.currentWalletIdKey) ?? 1;
 
   int? getCurrentChainId() =>
-      _getStorage.read<int?>(StorageKeys.currentChainIdKey) ?? 43114;
+      _getStorage.read<int?>(StorageKeys.currentChainIdKey) ?? 43113;
 
   Future<void> clearAll() => _getStorage.erase();
 }

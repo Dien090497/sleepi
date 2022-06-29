@@ -116,7 +116,7 @@ class _ShareScreenState extends State<ShareScreen> {
                       ],
                     ),
                     const SleepFiQrCode(value: 'SLeepFi'),
-                    const SizedBox(height: 20,),
+                    const SizedBox(height: 32,),
                     SFButton(
                       text: LocaleKeys.return_to_home,
                       textStyle: TextStyles.w600WhiteSize16,

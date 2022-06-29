@@ -1,5 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:slee_fi/common/const/const.dart';
 import 'package:slee_fi/common/extensions/string_x.dart';
 import 'package:slee_fi/common/routes/app_routes.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
@@ -12,6 +14,8 @@ import 'package:slee_fi/common/widgets/sf_textfield_password.dart';
 import 'package:slee_fi/common/widgets/sf_textfield_text_button.dart';
 import 'package:slee_fi/di/injector.dart';
 import 'package:slee_fi/l10n/locale_keys.g.dart';
+import 'package:slee_fi/presentation/screens/enter_activation_code/widgets/checkbox_letter_widget.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class AccountLoginWidget extends StatefulWidget {
   const AccountLoginWidget({Key? key}) : super(key: key);
@@ -35,7 +39,7 @@ class _AccountLoginState extends State<AccountLoginWidget> {
       children: [
         SFText(
           keyText: isLoginSignup
-              ? "${LocaleKeys.login.tr()}/${LocaleKeys.signup.tr()}"
+              ? LocaleKeys.signup.tr()
               : LocaleKeys.account_login.tr(),
           style: TextStyles.bold18LightWhite,
           stringCase: StringCase.upperCase,
@@ -48,16 +52,17 @@ class _AccountLoginState extends State<AccountLoginWidget> {
         const SizedBox(height: 12),
         isLoginSignup
             ? const SFTextFieldTextButton(
-                labelText: LocaleKeys.email_verification_code,
-                textInputType: TextInputType.number,
-              )
+          labelText: LocaleKeys.email_verification_code,
+          textInputType: TextInputType.number,
+        )
             : const SFTextFieldPassword(
-                labelText: LocaleKeys.password,
-              ),
-        const SizedBox(height: 37),
+          labelText: LocaleKeys.password,
+        ),
+        isLoginSignup ? const CheckBoxLetterWidget() : const SizedBox(),
+        const SizedBox(height: 24),
         SFButton(
           text: isLoginSignup
-              ? "${LocaleKeys.login.tr()}/${LocaleKeys.signup.tr()}"
+              ? LocaleKeys.signup.tr()
               : LocaleKeys.login,
           color: AppColors.blue,
           textStyle: TextStyles.w600WhiteSize16,
@@ -66,17 +71,54 @@ class _AccountLoginState extends State<AccountLoginWidget> {
             isLoginSignup
                 ? Navigator.pushNamed(context, R.enterActivationCode)
                 : Navigator.pushNamedAndRemoveUntil(
-                    context, R.bottomNavigation, (_) => false);
+                context, R.bottomNavigation, (_) => false);
           },
           width: MediaQuery.of(context).size.width,
         ),
-        const SizedBox(height: 32),
+        const SizedBox(height: 16),
         SFTextButton(
           text: isLoginSignup
               ? LocaleKeys.account_login
               : LocaleKeys.verification_login,
           textStyle: TextStyles.blue14,
           onPressed: () => changeStatus(),
+        ),
+        const SizedBox(height: 16),
+        Text.rich(
+          textAlign: TextAlign.center,
+          TextSpan(
+            text: LocaleKeys.registration_means_that_you_agree_to.tr(),
+            style: TextStyles.w400lightGrey12,
+            children: [
+              const TextSpan(text: ' '),
+              TextSpan(
+                text: LocaleKeys.user_agreement.tr(),
+                style: TextStyles.w400Red12,
+                recognizer: TapGestureRecognizer()..onTap = () async{
+                  final url = Uri.parse(Const.sleeFiUrl);
+                  if (await canLaunchUrl(url)) {
+                    launchUrl(url);
+                  }
+                },
+              ),
+              const TextSpan(text: ' '),
+              TextSpan(
+                  text: "&"
+                      .tr()),
+              const TextSpan(text: ' '),
+              TextSpan(
+                text: LocaleKeys.user_privacy.tr(),
+                style: TextStyles.w400Red12,
+                recognizer: TapGestureRecognizer()..onTap = () async{
+                  final url = Uri.parse(Const.sleeFiUrl);
+                  if (await canLaunchUrl(url)) {
+                    launchUrl(url);
+                  }
+                },
+              ),
+              const TextSpan(text: ' '),
+            ],
+          ),
         ),
       ],
     );

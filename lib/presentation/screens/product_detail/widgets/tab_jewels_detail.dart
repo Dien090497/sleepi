@@ -49,7 +49,9 @@ class TabJewelsDetail extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            SFSubTabBar(texts: const [LocaleKeys.jewels, LocaleKeys.upgrade]),
+            SFSubTabBar(
+                labelPadding: const EdgeInsets.symmetric(horizontal: 8),
+                texts: const [LocaleKeys.jewels, LocaleKeys.upgrade]),
             const SizedBox(height: 12),
             Expanded(
               child: TabBarView(
