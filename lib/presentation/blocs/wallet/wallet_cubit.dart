@@ -13,7 +13,7 @@ class WalletCubit extends Cubit<WalletState> {
   WalletCubit() : super(const WalletState.initial());
 
   final _firstOpenWalletUC = getIt<CheckFirstOpenWallet>();
-  final _currentWalletUC = getIt<CurrentWalletUsecase>();
+  final _currentWalletUC = getIt<CurrentWalletUseCase>();
   final _currentMnemonic = getIt<GetCurrentMnemonicUsecase>();
   var firstOpenWallet = true;
 

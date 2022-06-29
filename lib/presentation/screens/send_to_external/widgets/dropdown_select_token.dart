@@ -1,33 +1,35 @@
-import 'package:cool_dropdown/cool_dropdown.dart';
-import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
 import 'package:slee_fi/common/widgets/sf_icon.dart';
-import 'package:slee_fi/l10n/locale_keys.g.dart';
+import 'package:slee_fi/cool_dropdown/cool_dropdown.dart';
 import 'package:slee_fi/resources/resources.dart';
 
 class DropdownSelectToken extends StatefulWidget {
-  const DropdownSelectToken(
-      {this.value,
-      this.width,
-      this.height,
-      this.resultPadding,
-      this.margin,
-      this.backgroundColor,
-      this.isResultLabel = false,
-      Key? key,
-      this.dropdownItems})
-      : super(key: key);
+  const DropdownSelectToken({
+    this.indexInit = 0,
+    this.width,
+    this.height,
+    this.resultPadding,
+    this.margin,
+    this.backgroundColor,
+    this.isResultLabel = false,
+    Key? key,
+    this.onChange,
+    required this.tokens,
+    this.globalKey,
+  }) : super(key: key);
 
-  final String? value;
+  final int indexInit;
   final double? width;
   final double? height;
   final EdgeInsets? margin;
   final EdgeInsets? resultPadding;
   final Color? backgroundColor;
-  final List<DropdownMenuItem>? dropdownItems;
   final bool isResultLabel;
+  final Function(dynamic)? onChange;
+  final List<dynamic> tokens;
+  final GlobalKey<CoolDropdownState>? globalKey;
 
   @override
   State<DropdownSelectToken> createState() => _DropdownSelectTokenState();
@@ -38,54 +40,32 @@ class _DropdownSelectTokenState extends State<DropdownSelectToken> {
 
   List dropdownItemList = [];
 
-  List<String> token = [
-    "AVAX",
-    "SLFT",
-    "SLGT",
-    "USDC",
-    LocaleKeys.bed.tr(),
-    LocaleKeys.bed_box.tr(),
-    LocaleKeys.item.tr(),
-    LocaleKeys.jewels.tr(),
-  ];
-
-  List<String> iconsToken = [
-    Ics.icAvax,
-    Ics.icSlft,
-    Ics.icSlgt,
-    Ics.icUsdc,
-    Imgs.flexibleBed,
-    Ics.icBedBoxes,
-    Imgs.icItems,
-    Imgs.jewelGreen,
-  ];
-
   @override
   void initState() {
-    for (var i = 0; i < token.length; i++) {
-      selectedValue = token[i];
+    for (var i = 0; i < widget.tokens.length; i++) {
+      selectedValue = widget.tokens[i]["symbol"].toString();
       dropdownItemList.add(
         {
-          'label': token[i],
-          'value': token[i],
+          'label': widget.tokens[i]["symbol"],
+          'value': widget.tokens[i]["address"],
           'icon': SizedBox(
             key: UniqueKey(),
             child: Padding(
               padding: EdgeInsets.only(
-                  left:
-                      iconsToken[i] == Ics.icSlft || iconsToken[i] == Ics.icSlgt
-                          ? 0
-                          : 4),
+                  left: widget.tokens[i]["icon"] == Ics.icSlft ||
+                          widget.tokens[i]["icon"] == Ics.icSlgt
+                      ? 0
+                      : 4),
               child: SFIcon(
-                iconsToken[i],
-                height:
-                    iconsToken[i] == Ics.icSlft || iconsToken[i] == Ics.icSlgt
-                        ? 28
-                        : 20,
-                width:
-                    iconsToken[i] == Ics.icSlft || iconsToken[i] == Ics.icSlgt
-                        ? 28
-                        : 20,
+                widget.tokens[i]["icon"].toString(),
+                height: widget.tokens[i]["icon"] == Ics.icSlft ||
+                        widget.tokens[i]["icon"] == Ics.icSlgt
+                    ? 28
+                    : 20,
+                width: widget.tokens[i]["icon"] == Ics.icSlft ||
+                        widget.tokens[i]["icon"] == Ics.icSlgt
+                    ? 28
+                    : 20,
               ),
             ),
           ),
@@ -93,20 +73,20 @@ class _DropdownSelectTokenState extends State<DropdownSelectToken> {
             key: UniqueKey(),
             child: Padding(
               padding: EdgeInsets.only(
-                  left:
-                      iconsToken[i] == Ics.icSlft || iconsToken[i] == Ics.icSlgt
-                          ? 0
-                          : 4),
+                  left: widget.tokens[i]["icon"] == Ics.icSlft ||
+                          widget.tokens[i]["icon"] == Ics.icSlgt
+                      ? 0
+                      : 4),
               child: SFIcon(
-                iconsToken[i],
-                width:
-                    iconsToken[i] == Ics.icSlft || iconsToken[i] == Ics.icSlgt
-                        ? 32
-                        : 24,
-                height:
-                    iconsToken[i] == Ics.icSlft || iconsToken[i] == Ics.icSlgt
-                        ? 32
-                        : 24,
+                widget.tokens[i]["icon"].toString(),
+                width: widget.tokens[i]["icon"] == Ics.icSlft ||
+                        widget.tokens[i]["icon"] == Ics.icSlgt
+                    ? 32
+                    : 24,
+                height: widget.tokens[i]["icon"] == Ics.icSlft ||
+                        widget.tokens[i]["icon"] == Ics.icSlgt
+                    ? 32
+                    : 24,
                 // color: Color(0xFF6FCC76),
               ),
             ),
@@ -122,9 +102,10 @@ class _DropdownSelectTokenState extends State<DropdownSelectToken> {
     return FittedBox(
       fit: BoxFit.fitWidth,
       child: CoolDropdown(
+        key: widget.globalKey,
         resultWidth: widget.width ?? 70,
         resultHeight: widget.height ?? 32,
-        defaultValue: dropdownItemList[0],
+        defaultValue: dropdownItemList[widget.indexInit],
         dropdownList: dropdownItemList,
         isResultLabel: widget.isResultLabel,
         dropdownItemReverse: true,
@@ -149,9 +130,7 @@ class _DropdownSelectTokenState extends State<DropdownSelectToken> {
             widget.resultPadding ?? const EdgeInsets.only(left: 5, right: 10),
         selectedItemTS: TextStyles.w400White16,
         unselectedItemTS: TextStyles.w400lightGrey16,
-        onChange: (selectedItem) {
-          // print(selectedItem);
-        },
+        onChange: widget.onChange!,
         onOpen: (isOpen) {
           // print('$isOpen');
         },

@@ -61,7 +61,9 @@ class SendToExternalScreen extends StatelessWidget {
                               textInputType: TextInputType.number,
                               suffixIcon: Padding(
                                 padding: EdgeInsets.all(8.0),
-                                child: DropdownSelectToken(),
+                                child: DropdownSelectToken(
+                                  tokens: Const.tokens,
+                                ),
                               ),
                             ),
                             const SizedBox(height: 8),
