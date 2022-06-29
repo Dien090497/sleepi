@@ -16,6 +16,8 @@ class Const {
   static const String avascanUrl = 'https://avascan.info/';
   static const String binanceUrl = 'https://www.binance.com/';
   static const String okCoinUrl = 'https://www.okcoin.jp/';
+  static const String contractRouterTestNet = '0xd7f655E3376cE2D7A2b08fF01Eb3B1023191A901';
+  static const String contractRouterMainNet = '0x60aE616a2155Ee3d9A68541Ba4544862310933d4';
 
   static const String whitePaperEn = 'https://sleefi.gitbook.io/whitepaper/';
 
@@ -48,7 +50,8 @@ class Const {
 
   static const tokens = [
     {
-      "address": "0xB31f66AA3C1e785363F0875A1B74E27b85FD66c7",
+      "address": "0xB31f66AA3C1e785363F0875A1B74E27b85FD66c7",//mainnet
+      // "address": "0xd00ae08403B9bbb9124bB305C09058E32C39A48c",//testnet
       "symbol": "AVAX",
       "decimal": 18,
       "icon": Ics.icAvax,
@@ -67,7 +70,7 @@ class Const {
     },
     {
       "address": "0xB97EF9Ef8734C71904D8002F8b6Bc66Dd9c48a6E",//mainnet
-      // "address": "0x43CDA502069B1dFa4f7C1a1625Bc6be47cD0bD88",//testnet
+      // "address": "0x81ffb06e8a31F645ED5F52b19e4E4e9bbC8F4695",//testnet
       "symbol": "USDC",
       "decimal": 6,
       "icon": Ics.icUsdc,

@@ -19,6 +19,7 @@ class PopUpConfirmTrade extends StatelessWidget {
     required this.symbolTo,
     required this.addressFrom,
     required this.addressTo,
+    required this.onSwap,
   }) : super(key: key);
 
   final double value;
@@ -26,6 +27,7 @@ class PopUpConfirmTrade extends StatelessWidget {
   final String addressFrom;
   final String symbolTo;
   final String addressTo;
+  final VoidCallback onSwap;
 
   @override
   Widget build(BuildContext context) {
@@ -44,7 +46,7 @@ class PopUpConfirmTrade extends StatelessWidget {
         },
         builder: (context, state) {
           final cubit = context.read<TradeCubit>();
-          if(state is TradeStateInitial){
+          if (state is TradeStateInitial) {
             cubit.getAmountOutMin(addressFrom, addressTo, value);
           }
           return Padding(
@@ -115,7 +117,8 @@ class PopUpConfirmTrade extends StatelessWidget {
                     ),
                     Expanded(
                         child: SFText(
-                            keyText: "$amountOutMin $symbolTo",
+                            keyText:
+                                "${amountOutMin.toStringAsFixed(6)} $symbolTo",
                             style: TextStyles.lightWhite16,
                             textAlign: TextAlign.end)),
                   ],
@@ -144,9 +147,7 @@ class PopUpConfirmTrade extends StatelessWidget {
                         width: double.infinity,
                         textStyle: TextStyles.bold14LightWhite,
                         gradient: AppColors.gradientBlueButton,
-                        onPressed: () {
-                          cubit.swapToken(value, addressFrom, addressTo);
-                        },
+                        onPressed: onSwap,
                       ),
                     ),
                   ],
