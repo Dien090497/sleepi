@@ -380,5 +380,7 @@
   "news_letters" : "News Letters",
   "registration_means_that_you_agree_to": "Registration means that you agree to SleeFi's",
   "user_agreement": "User Agreement",
-  "user_privacy": "User Privacy"
+  "user_privacy": "User Privacy",
+  "create_password": "Create Password",
+  "confirm_password": "Confirm Password"
 }

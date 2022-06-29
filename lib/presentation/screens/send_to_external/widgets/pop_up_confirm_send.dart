@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
@@ -9,12 +11,19 @@ import 'package:slee_fi/l10n/locale_keys.g.dart';
 import 'package:slee_fi/presentation/blocs/send_to_external/send_to_external_cubit.dart';
 import 'package:slee_fi/presentation/blocs/send_to_external/send_to_external_state.dart';
 
-class PopUpConfirmSend extends StatelessWidget {
-  const PopUpConfirmSend({required this.toAddress, required this.valueInEther, required this.fee, Key? key}) : super(key: key);
+class PopUpConfirmSend extends StatefulWidget {
+  const PopUpConfirmSend({required this.toAddress, required this.valueInEther, Key? key}) : super(key: key);
 
   final String toAddress;
   final double valueInEther;
-  final double fee;
+
+  @override
+  State<PopUpConfirmSend> createState() => _PopUpConfirmSendState();
+}
+
+class _PopUpConfirmSendState extends State<PopUpConfirmSend> {
+  double? fee;
+  bool isDisabled = true;
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
@@ -26,9 +35,24 @@ class PopUpConfirmSend extends StatelessWidget {
             Navigator.pop(context);
             showSuccessfulDialog(context);
           }
+          if (state is SendToExternalCalculatorFee) {
+            fee = ((state.fee * 50000000000) / pow(10, 18));
+            if(fee == null) {
+              setState((){
+                isDisabled = true;
+              });
+            }else {
+              setState((){
+                isDisabled = false;
+              });
+            }
+          }
         },
         builder: (context, state) {
           final cubit = context.read<SendToExternalCubit>();
+          if (state is sendToExternalStateInitial) {
+            cubit.estimateGas(widget.toAddress, widget.valueInEther);
+          }
           return Padding(
             padding: const EdgeInsets.symmetric(horizontal: 24),
             child: Column(
@@ -49,7 +73,7 @@ class PopUpConfirmSend extends StatelessWidget {
                     ),
                     Expanded(
                         child: SFText(
-                            keyText: "$fee AVAX",
+                            keyText: "${fee ?? "---"} AVAX",
                             style: TextStyles.lightWhite16,
                             textAlign: TextAlign.end)),
                   ],
@@ -66,7 +90,7 @@ class PopUpConfirmSend extends StatelessWidget {
                     ),
                     Expanded(
                         child: SFText(
-                          keyText: "$valueInEther AVAX",
+                          keyText: "${widget.valueInEther} AVAX",
                           style: TextStyles.lightWhite16,
                           textAlign: TextAlign.end,
                         )),
@@ -86,7 +110,7 @@ class PopUpConfirmSend extends StatelessWidget {
                     ),
                     Expanded(
                         child: SFText(
-                          keyText: toAddress,
+                          keyText: widget.toAddress,
                           style: TextStyles.lightWhite16,
                           textAlign: TextAlign.end,
                         )),
@@ -116,7 +140,8 @@ class PopUpConfirmSend extends StatelessWidget {
                         textStyle: TextStyles.bold14LightWhite,
                         color: AppColors.blue,
                         width: double.infinity,
-                        onPressed: () => cubit.sendToExternal(toAddress, valueInEther),
+                        disabled: isDisabled,
+                        onPressed: () => cubit.sendToExternal(widget.toAddress, widget.valueInEther),
                       ),
                     ),
                   ],

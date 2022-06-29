@@ -383,5 +383,7 @@ abstract class  LocaleKeys {
   static const registration_means_that_you_agree_to = 'registration_means_that_you_agree_to';
   static const user_agreement = 'user_agreement';
   static const user_privacy = 'user_privacy';
+  static const create_password = 'create_password';
+  static const confirm_password = 'confirm_password';
 
 }

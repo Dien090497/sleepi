@@ -8,6 +8,7 @@ class SFTextField extends StatelessWidget {
   const SFTextField({
     this.labelText,
     this.hintText,
+    this.errorText,
     this.hintStyle,
     this.suffix,
     this.suffixIcon,
@@ -25,6 +26,7 @@ class SFTextField extends StatelessWidget {
 
   final String? labelText;
   final String? hintText;
+  final String? errorText;
   final TextStyle? textStyle;
   final TextStyle? hintStyle;
   final Widget? suffix;
@@ -82,6 +84,8 @@ class SFTextField extends StatelessWidget {
             errorBorder: border,
             focusedErrorBorder: border,
             counterText: "",
+            errorText: errorText,
+            errorMaxLines: 10
           ),
           maxLines: maxLine ?? 1,
           maxLength: maxLength,

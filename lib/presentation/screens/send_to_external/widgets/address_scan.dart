@@ -6,8 +6,9 @@ import 'package:slee_fi/l10n/locale_keys.g.dart';
 import 'package:slee_fi/resources/resources.dart';
 
 class AddressScan extends StatefulWidget {
-  const AddressScan({required this.onChangedAddress, Key? key}) : super(key: key);
+  const AddressScan({required this.onChangedAddress, this.errorText, Key? key}) : super(key: key);
   final Function(String) onChangedAddress;
+  final String? errorText;
   @override
   State<AddressScan> createState() => _AddressScanState();
 }
@@ -35,11 +36,11 @@ class _AddressScanState extends State<AddressScan> {
     return SFTextField(
         controller: _editingController,
         labelText: LocaleKeys.to_address,
+        errorText: widget.errorText,
         suffixIcon: GestureDetector(
           onTap: () async{
             final result = await Navigator.pushNamed(context, R.qrCodeScan);
             if(result != null ) _editingController.text = "$result";
-            debugPrint("$result");
           },
           child: const Padding(
               padding: EdgeInsets.all(10),

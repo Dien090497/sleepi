@@ -48,6 +48,7 @@ class TabItemDetail extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             SFSubTabBar(
+              labelPadding: const EdgeInsets.symmetric(horizontal: 8),
               texts: const [LocaleKeys.item, LocaleKeys.upgrade],
             ),
             const SizedBox(height: 12),

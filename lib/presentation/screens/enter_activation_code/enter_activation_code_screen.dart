@@ -82,8 +82,7 @@ class EnterActivationCodeScreen extends StatelessWidget {
                       color: AppColors.blue,
                       textStyle: TextStyles.white1w700size16,
                       onPressed: () {
-                        Navigator.pushNamedAndRemoveUntil(
-                            context, R.bottomNavigation, (_) => false);
+                        Navigator.pushNamed(context, R.createPassword);
                       },
                       width: MediaQuery.of(context).size.width,
                     ),

@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -38,7 +36,6 @@ class SendToExternalScreen extends StatefulWidget {
 }
 
 class _SendToExternalScreenState extends State<SendToExternalScreen> {
-  bool isDisabled = true;
   late double balance = 0;
   double fee = 0;
   String contractAddressTo = '';
@@ -53,18 +50,15 @@ class _SendToExternalScreenState extends State<SendToExternalScreen> {
       create: (context) => SendToExternalCubit()..init(),
       child: BlocConsumer<SendToExternalCubit, SendToExternalState>(
         listener: (context, state) {
-          if (state is getTokenBalance) {
+          if (state is GetTokenBalanceSuccess) {
             balance = state.balance;
             setState(() {});
           }
-          if (state is SendToExternalCalculatorFee) {
-            fee = ((state.fee * 50000000000) / pow(10, 18));
-           setState(() {});
+          if (state is SendToExternalValidatorSuccess) {
             showCustomAlertDialog(context,
                 children:  PopUpConfirmSend(
                   toAddress: contractAddressTo,
                   valueInEther: valueInEther,
-                  fee: fee,
                 )
             );
           }
@@ -101,30 +95,21 @@ class _SendToExternalScreenState extends State<SendToExternalScreen> {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   AddressScan(
+                                    errorText: state is SendToExternalErrorToAddress
+                                        ? state.msg
+                                        : null,
                                     onChangedAddress: (address){
+                                      cubit.contractAddressTo = address;
                                       contractAddressTo = address;
-                                      if(contractAddressTo.isNotEmpty && valueInEther != 0){
-                                        setState((){
-                                          isDisabled = false;
-                                        });
-                                      } else {
-                                        setState((){
-                                          isDisabled = true;
-                                        });
-                                      }
                                     },
                                   ),
-                                   SizedBox(height: state is SendToExternalErrorToAddress ? 5 : 0),
-                                  state is SendToExternalErrorToAddress
-                                      ? SFText(
-                                    keyText: state.msg,
-                                    style: TextStyles.w400Red12,
-                                  )
-                                      : const SizedBox(),
                                   const SizedBox(height: 24),
                                   SFTextField(
                                     labelText: LocaleKeys.amount,
                                     textInputType: TextInputType.number,
+                                    errorText:state is SendToExternalErrorValueInEther
+                                        ? state.msg
+                                        : null,
                                     suffixIcon:  Padding(
                                       padding: const EdgeInsets.all(8.0),
                                       child: SFIcon(
@@ -132,25 +117,10 @@ class _SendToExternalScreenState extends State<SendToExternalScreen> {
                                       )
                                     ),
                                     onChanged: (v) {
+                                      cubit.valueInEther = double.parse(v);
                                       valueInEther = double.parse(v);
-                                      if(contractAddressTo.isNotEmpty && valueInEther != 0){
-                                        setState((){
-                                          isDisabled = false;
-                                        });
-                                      }else {
-                                        setState((){
-                                          isDisabled = true;
-                                        });
-                                      }
-                                    },
+                                    }
                                   ),
-                                  const SizedBox(height: 8),
-                                  state is SendToExternalErrorValueInEther
-                                      ? SFText(
-                                    keyText: state.msg,
-                                    style: TextStyles.w400Red12,
-                                  )
-                                      : const SizedBox(),
                                   SFText(
                                       keyText: LocaleKeys.balance,
                                       style: TextStyles.w400lightGrey12,
@@ -211,11 +181,8 @@ class _SendToExternalScreenState extends State<SendToExternalScreen> {
                         textStyle: TextStyles.w600WhiteSize16,
                         width: double.infinity,
                         gradient: AppColors.gradientBlueButton,
-                        disabled: isDisabled,
-                        onPressed: () {
-                          cubit.estimateGas(contractAddressTo, valueInEther);
-
-                        },
+                        // disabled: isDisabled,
+                        onPressed: () =>  cubit.validator(balance),
                       ),
                       const SizedBox(
                         height: 37.0,

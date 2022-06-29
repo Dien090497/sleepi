@@ -75,7 +75,6 @@ class TransactionImplementation extends ITransactionRepository{
             to: params.contractAddressTo,
         value: params.valueInEther,
         // gasPrice: 50
-
       );
       return Right(fee);
     } catch (e) {

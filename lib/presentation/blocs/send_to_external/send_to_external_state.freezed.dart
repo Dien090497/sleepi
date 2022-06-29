@@ -25,8 +25,11 @@ mixin _$SendToExternalState {
     required TResult Function() success,
     required TResult Function(String msg) fail,
     required TResult Function(int fee) calculatorFee,
+    required TResult Function() calculatorFeeSuccess,
     required TResult Function(String msg) errorToAddress,
     required TResult Function(String msg) errorValueInEther,
+    required TResult Function() checkedValidator,
+    required TResult Function() validatorSuccess,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -38,8 +41,11 @@ mixin _$SendToExternalState {
     TResult Function()? success,
     TResult Function(String msg)? fail,
     TResult Function(int fee)? calculatorFee,
+    TResult Function()? calculatorFeeSuccess,
     TResult Function(String msg)? errorToAddress,
     TResult Function(String msg)? errorValueInEther,
+    TResult Function()? checkedValidator,
+    TResult Function()? validatorSuccess,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -51,8 +57,11 @@ mixin _$SendToExternalState {
     TResult Function()? success,
     TResult Function(String msg)? fail,
     TResult Function(int fee)? calculatorFee,
+    TResult Function()? calculatorFeeSuccess,
     TResult Function(String msg)? errorToAddress,
     TResult Function(String msg)? errorValueInEther,
+    TResult Function()? checkedValidator,
+    TResult Function()? validatorSuccess,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -61,14 +70,20 @@ mixin _$SendToExternalState {
     required TResult Function(sendToExternalStateInitial value) initial,
     required TResult Function(sendToExternalDone value) done,
     required TResult Function(SendToExternalLoading value) loading,
-    required TResult Function(getTokenBalance value) getBalance,
+    required TResult Function(GetTokenBalanceSuccess value) getBalance,
     required TResult Function(sendToExternalSuccess value) success,
-    required TResult Function(getTokenFail value) fail,
+    required TResult Function(SendToExternalFailed value) fail,
     required TResult Function(SendToExternalCalculatorFee value) calculatorFee,
+    required TResult Function(SendToExternalCalculatorFeeSuccess value)
+        calculatorFeeSuccess,
     required TResult Function(SendToExternalErrorToAddress value)
         errorToAddress,
     required TResult Function(SendToExternalErrorValueInEther value)
         errorValueInEther,
+    required TResult Function(SendToExternalCheckedValidator value)
+        checkedValidator,
+    required TResult Function(SendToExternalValidatorSuccess value)
+        validatorSuccess,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -76,12 +91,16 @@ mixin _$SendToExternalState {
     TResult Function(sendToExternalStateInitial value)? initial,
     TResult Function(sendToExternalDone value)? done,
     TResult Function(SendToExternalLoading value)? loading,
-    TResult Function(getTokenBalance value)? getBalance,
+    TResult Function(GetTokenBalanceSuccess value)? getBalance,
     TResult Function(sendToExternalSuccess value)? success,
-    TResult Function(getTokenFail value)? fail,
+    TResult Function(SendToExternalFailed value)? fail,
     TResult Function(SendToExternalCalculatorFee value)? calculatorFee,
+    TResult Function(SendToExternalCalculatorFeeSuccess value)?
+        calculatorFeeSuccess,
     TResult Function(SendToExternalErrorToAddress value)? errorToAddress,
     TResult Function(SendToExternalErrorValueInEther value)? errorValueInEther,
+    TResult Function(SendToExternalCheckedValidator value)? checkedValidator,
+    TResult Function(SendToExternalValidatorSuccess value)? validatorSuccess,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -89,12 +108,16 @@ mixin _$SendToExternalState {
     TResult Function(sendToExternalStateInitial value)? initial,
     TResult Function(sendToExternalDone value)? done,
     TResult Function(SendToExternalLoading value)? loading,
-    TResult Function(getTokenBalance value)? getBalance,
+    TResult Function(GetTokenBalanceSuccess value)? getBalance,
     TResult Function(sendToExternalSuccess value)? success,
-    TResult Function(getTokenFail value)? fail,
+    TResult Function(SendToExternalFailed value)? fail,
     TResult Function(SendToExternalCalculatorFee value)? calculatorFee,
+    TResult Function(SendToExternalCalculatorFeeSuccess value)?
+        calculatorFeeSuccess,
     TResult Function(SendToExternalErrorToAddress value)? errorToAddress,
     TResult Function(SendToExternalErrorValueInEther value)? errorValueInEther,
+    TResult Function(SendToExternalCheckedValidator value)? checkedValidator,
+    TResult Function(SendToExternalValidatorSuccess value)? validatorSuccess,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -204,8 +227,11 @@ class _$sendToExternalStateInitial
     required TResult Function() success,
     required TResult Function(String msg) fail,
     required TResult Function(int fee) calculatorFee,
+    required TResult Function() calculatorFeeSuccess,
     required TResult Function(String msg) errorToAddress,
     required TResult Function(String msg) errorValueInEther,
+    required TResult Function() checkedValidator,
+    required TResult Function() validatorSuccess,
   }) {
     return initial(isLoading);
   }
@@ -220,8 +246,11 @@ class _$sendToExternalStateInitial
     TResult Function()? success,
     TResult Function(String msg)? fail,
     TResult Function(int fee)? calculatorFee,
+    TResult Function()? calculatorFeeSuccess,
     TResult Function(String msg)? errorToAddress,
     TResult Function(String msg)? errorValueInEther,
+    TResult Function()? checkedValidator,
+    TResult Function()? validatorSuccess,
   }) {
     return initial?.call(isLoading);
   }
@@ -236,8 +265,11 @@ class _$sendToExternalStateInitial
     TResult Function()? success,
     TResult Function(String msg)? fail,
     TResult Function(int fee)? calculatorFee,
+    TResult Function()? calculatorFeeSuccess,
     TResult Function(String msg)? errorToAddress,
     TResult Function(String msg)? errorValueInEther,
+    TResult Function()? checkedValidator,
+    TResult Function()? validatorSuccess,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -252,14 +284,20 @@ class _$sendToExternalStateInitial
     required TResult Function(sendToExternalStateInitial value) initial,
     required TResult Function(sendToExternalDone value) done,
     required TResult Function(SendToExternalLoading value) loading,
-    required TResult Function(getTokenBalance value) getBalance,
+    required TResult Function(GetTokenBalanceSuccess value) getBalance,
     required TResult Function(sendToExternalSuccess value) success,
-    required TResult Function(getTokenFail value) fail,
+    required TResult Function(SendToExternalFailed value) fail,
     required TResult Function(SendToExternalCalculatorFee value) calculatorFee,
+    required TResult Function(SendToExternalCalculatorFeeSuccess value)
+        calculatorFeeSuccess,
     required TResult Function(SendToExternalErrorToAddress value)
         errorToAddress,
     required TResult Function(SendToExternalErrorValueInEther value)
         errorValueInEther,
+    required TResult Function(SendToExternalCheckedValidator value)
+        checkedValidator,
+    required TResult Function(SendToExternalValidatorSuccess value)
+        validatorSuccess,
   }) {
     return initial(this);
   }
@@ -270,12 +308,16 @@ class _$sendToExternalStateInitial
     TResult Function(sendToExternalStateInitial value)? initial,
     TResult Function(sendToExternalDone value)? done,
     TResult Function(SendToExternalLoading value)? loading,
-    TResult Function(getTokenBalance value)? getBalance,
+    TResult Function(GetTokenBalanceSuccess value)? getBalance,
     TResult Function(sendToExternalSuccess value)? success,
-    TResult Function(getTokenFail value)? fail,
+    TResult Function(SendToExternalFailed value)? fail,
     TResult Function(SendToExternalCalculatorFee value)? calculatorFee,
+    TResult Function(SendToExternalCalculatorFeeSuccess value)?
+        calculatorFeeSuccess,
     TResult Function(SendToExternalErrorToAddress value)? errorToAddress,
     TResult Function(SendToExternalErrorValueInEther value)? errorValueInEther,
+    TResult Function(SendToExternalCheckedValidator value)? checkedValidator,
+    TResult Function(SendToExternalValidatorSuccess value)? validatorSuccess,
   }) {
     return initial?.call(this);
   }
@@ -286,12 +328,16 @@ class _$sendToExternalStateInitial
     TResult Function(sendToExternalStateInitial value)? initial,
     TResult Function(sendToExternalDone value)? done,
     TResult Function(SendToExternalLoading value)? loading,
-    TResult Function(getTokenBalance value)? getBalance,
+    TResult Function(GetTokenBalanceSuccess value)? getBalance,
     TResult Function(sendToExternalSuccess value)? success,
-    TResult Function(getTokenFail value)? fail,
+    TResult Function(SendToExternalFailed value)? fail,
     TResult Function(SendToExternalCalculatorFee value)? calculatorFee,
+    TResult Function(SendToExternalCalculatorFeeSuccess value)?
+        calculatorFeeSuccess,
     TResult Function(SendToExternalErrorToAddress value)? errorToAddress,
     TResult Function(SendToExternalErrorValueInEther value)? errorValueInEther,
+    TResult Function(SendToExternalCheckedValidator value)? checkedValidator,
+    TResult Function(SendToExternalValidatorSuccess value)? validatorSuccess,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -403,8 +449,11 @@ class _$sendToExternalDone
     required TResult Function() success,
     required TResult Function(String msg) fail,
     required TResult Function(int fee) calculatorFee,
+    required TResult Function() calculatorFeeSuccess,
     required TResult Function(String msg) errorToAddress,
     required TResult Function(String msg) errorValueInEther,
+    required TResult Function() checkedValidator,
+    required TResult Function() validatorSuccess,
   }) {
     return done(entity);
   }
@@ -419,8 +468,11 @@ class _$sendToExternalDone
     TResult Function()? success,
     TResult Function(String msg)? fail,
     TResult Function(int fee)? calculatorFee,
+    TResult Function()? calculatorFeeSuccess,
     TResult Function(String msg)? errorToAddress,
     TResult Function(String msg)? errorValueInEther,
+    TResult Function()? checkedValidator,
+    TResult Function()? validatorSuccess,
   }) {
     return done?.call(entity);
   }
@@ -435,8 +487,11 @@ class _$sendToExternalDone
     TResult Function()? success,
     TResult Function(String msg)? fail,
     TResult Function(int fee)? calculatorFee,
+    TResult Function()? calculatorFeeSuccess,
     TResult Function(String msg)? errorToAddress,
     TResult Function(String msg)? errorValueInEther,
+    TResult Function()? checkedValidator,
+    TResult Function()? validatorSuccess,
     required TResult orElse(),
   }) {
     if (done != null) {
@@ -451,14 +506,20 @@ class _$sendToExternalDone
     required TResult Function(sendToExternalStateInitial value) initial,
     required TResult Function(sendToExternalDone value) done,
     required TResult Function(SendToExternalLoading value) loading,
-    required TResult Function(getTokenBalance value) getBalance,
+    required TResult Function(GetTokenBalanceSuccess value) getBalance,
     required TResult Function(sendToExternalSuccess value) success,
-    required TResult Function(getTokenFail value) fail,
+    required TResult Function(SendToExternalFailed value) fail,
     required TResult Function(SendToExternalCalculatorFee value) calculatorFee,
+    required TResult Function(SendToExternalCalculatorFeeSuccess value)
+        calculatorFeeSuccess,
     required TResult Function(SendToExternalErrorToAddress value)
         errorToAddress,
     required TResult Function(SendToExternalErrorValueInEther value)
         errorValueInEther,
+    required TResult Function(SendToExternalCheckedValidator value)
+        checkedValidator,
+    required TResult Function(SendToExternalValidatorSuccess value)
+        validatorSuccess,
   }) {
     return done(this);
   }
@@ -469,12 +530,16 @@ class _$sendToExternalDone
     TResult Function(sendToExternalStateInitial value)? initial,
     TResult Function(sendToExternalDone value)? done,
     TResult Function(SendToExternalLoading value)? loading,
-    TResult Function(getTokenBalance value)? getBalance,
+    TResult Function(GetTokenBalanceSuccess value)? getBalance,
     TResult Function(sendToExternalSuccess value)? success,
-    TResult Function(getTokenFail value)? fail,
+    TResult Function(SendToExternalFailed value)? fail,
     TResult Function(SendToExternalCalculatorFee value)? calculatorFee,
+    TResult Function(SendToExternalCalculatorFeeSuccess value)?
+        calculatorFeeSuccess,
     TResult Function(SendToExternalErrorToAddress value)? errorToAddress,
     TResult Function(SendToExternalErrorValueInEther value)? errorValueInEther,
+    TResult Function(SendToExternalCheckedValidator value)? checkedValidator,
+    TResult Function(SendToExternalValidatorSuccess value)? validatorSuccess,
   }) {
     return done?.call(this);
   }
@@ -485,12 +550,16 @@ class _$sendToExternalDone
     TResult Function(sendToExternalStateInitial value)? initial,
     TResult Function(sendToExternalDone value)? done,
     TResult Function(SendToExternalLoading value)? loading,
-    TResult Function(getTokenBalance value)? getBalance,
+    TResult Function(GetTokenBalanceSuccess value)? getBalance,
     TResult Function(sendToExternalSuccess value)? success,
-    TResult Function(getTokenFail value)? fail,
+    TResult Function(SendToExternalFailed value)? fail,
     TResult Function(SendToExternalCalculatorFee value)? calculatorFee,
+    TResult Function(SendToExternalCalculatorFeeSuccess value)?
+        calculatorFeeSuccess,
     TResult Function(SendToExternalErrorToAddress value)? errorToAddress,
     TResult Function(SendToExternalErrorValueInEther value)? errorValueInEther,
+    TResult Function(SendToExternalCheckedValidator value)? checkedValidator,
+    TResult Function(SendToExternalValidatorSuccess value)? validatorSuccess,
     required TResult orElse(),
   }) {
     if (done != null) {
@@ -566,8 +635,11 @@ class _$SendToExternalLoading
     required TResult Function() success,
     required TResult Function(String msg) fail,
     required TResult Function(int fee) calculatorFee,
+    required TResult Function() calculatorFeeSuccess,
     required TResult Function(String msg) errorToAddress,
     required TResult Function(String msg) errorValueInEther,
+    required TResult Function() checkedValidator,
+    required TResult Function() validatorSuccess,
   }) {
     return loading();
   }
@@ -582,8 +654,11 @@ class _$SendToExternalLoading
     TResult Function()? success,
     TResult Function(String msg)? fail,
     TResult Function(int fee)? calculatorFee,
+    TResult Function()? calculatorFeeSuccess,
     TResult Function(String msg)? errorToAddress,
     TResult Function(String msg)? errorValueInEther,
+    TResult Function()? checkedValidator,
+    TResult Function()? validatorSuccess,
   }) {
     return loading?.call();
   }
@@ -598,8 +673,11 @@ class _$SendToExternalLoading
     TResult Function()? success,
     TResult Function(String msg)? fail,
     TResult Function(int fee)? calculatorFee,
+    TResult Function()? calculatorFeeSuccess,
     TResult Function(String msg)? errorToAddress,
     TResult Function(String msg)? errorValueInEther,
+    TResult Function()? checkedValidator,
+    TResult Function()? validatorSuccess,
     required TResult orElse(),
   }) {
     if (loading != null) {
@@ -614,14 +692,20 @@ class _$SendToExternalLoading
     required TResult Function(sendToExternalStateInitial value) initial,
     required TResult Function(sendToExternalDone value) done,
     required TResult Function(SendToExternalLoading value) loading,
-    required TResult Function(getTokenBalance value) getBalance,
+    required TResult Function(GetTokenBalanceSuccess value) getBalance,
     required TResult Function(sendToExternalSuccess value) success,
-    required TResult Function(getTokenFail value) fail,
+    required TResult Function(SendToExternalFailed value) fail,
     required TResult Function(SendToExternalCalculatorFee value) calculatorFee,
+    required TResult Function(SendToExternalCalculatorFeeSuccess value)
+        calculatorFeeSuccess,
     required TResult Function(SendToExternalErrorToAddress value)
         errorToAddress,
     required TResult Function(SendToExternalErrorValueInEther value)
         errorValueInEther,
+    required TResult Function(SendToExternalCheckedValidator value)
+        checkedValidator,
+    required TResult Function(SendToExternalValidatorSuccess value)
+        validatorSuccess,
   }) {
     return loading(this);
   }
@@ -632,12 +716,16 @@ class _$SendToExternalLoading
     TResult Function(sendToExternalStateInitial value)? initial,
     TResult Function(sendToExternalDone value)? done,
     TResult Function(SendToExternalLoading value)? loading,
-    TResult Function(getTokenBalance value)? getBalance,
+    TResult Function(GetTokenBalanceSuccess value)? getBalance,
     TResult Function(sendToExternalSuccess value)? success,
-    TResult Function(getTokenFail value)? fail,
+    TResult Function(SendToExternalFailed value)? fail,
     TResult Function(SendToExternalCalculatorFee value)? calculatorFee,
+    TResult Function(SendToExternalCalculatorFeeSuccess value)?
+        calculatorFeeSuccess,
     TResult Function(SendToExternalErrorToAddress value)? errorToAddress,
     TResult Function(SendToExternalErrorValueInEther value)? errorValueInEther,
+    TResult Function(SendToExternalCheckedValidator value)? checkedValidator,
+    TResult Function(SendToExternalValidatorSuccess value)? validatorSuccess,
   }) {
     return loading?.call(this);
   }
@@ -648,12 +736,16 @@ class _$SendToExternalLoading
     TResult Function(sendToExternalStateInitial value)? initial,
     TResult Function(sendToExternalDone value)? done,
     TResult Function(SendToExternalLoading value)? loading,
-    TResult Function(getTokenBalance value)? getBalance,
+    TResult Function(GetTokenBalanceSuccess value)? getBalance,
     TResult Function(sendToExternalSuccess value)? success,
-    TResult Function(getTokenFail value)? fail,
+    TResult Function(SendToExternalFailed value)? fail,
     TResult Function(SendToExternalCalculatorFee value)? calculatorFee,
+    TResult Function(SendToExternalCalculatorFeeSuccess value)?
+        calculatorFeeSuccess,
     TResult Function(SendToExternalErrorToAddress value)? errorToAddress,
     TResult Function(SendToExternalErrorValueInEther value)? errorValueInEther,
+    TResult Function(SendToExternalCheckedValidator value)? checkedValidator,
+    TResult Function(SendToExternalValidatorSuccess value)? validatorSuccess,
     required TResult orElse(),
   }) {
     if (loading != null) {
@@ -668,29 +760,30 @@ abstract class SendToExternalLoading implements SendToExternalState {
 }
 
 /// @nodoc
-abstract class _$$getTokenBalanceCopyWith<$Res> {
-  factory _$$getTokenBalanceCopyWith(
-          _$getTokenBalance value, $Res Function(_$getTokenBalance) then) =
-      __$$getTokenBalanceCopyWithImpl<$Res>;
+abstract class _$$GetTokenBalanceSuccessCopyWith<$Res> {
+  factory _$$GetTokenBalanceSuccessCopyWith(_$GetTokenBalanceSuccess value,
+          $Res Function(_$GetTokenBalanceSuccess) then) =
+      __$$GetTokenBalanceSuccessCopyWithImpl<$Res>;
   $Res call({double balance});
 }
 
 /// @nodoc
-class __$$getTokenBalanceCopyWithImpl<$Res>
+class __$$GetTokenBalanceSuccessCopyWithImpl<$Res>
     extends _$SendToExternalStateCopyWithImpl<$Res>
-    implements _$$getTokenBalanceCopyWith<$Res> {
-  __$$getTokenBalanceCopyWithImpl(
-      _$getTokenBalance _value, $Res Function(_$getTokenBalance) _then)
-      : super(_value, (v) => _then(v as _$getTokenBalance));
+    implements _$$GetTokenBalanceSuccessCopyWith<$Res> {
+  __$$GetTokenBalanceSuccessCopyWithImpl(_$GetTokenBalanceSuccess _value,
+      $Res Function(_$GetTokenBalanceSuccess) _then)
+      : super(_value, (v) => _then(v as _$GetTokenBalanceSuccess));
 
   @override
-  _$getTokenBalance get _value => super._value as _$getTokenBalance;
+  _$GetTokenBalanceSuccess get _value =>
+      super._value as _$GetTokenBalanceSuccess;
 
   @override
   $Res call({
     Object? balance = freezed,
   }) {
-    return _then(_$getTokenBalance(
+    return _then(_$GetTokenBalanceSuccess(
       balance == freezed
           ? _value.balance
           : balance // ignore: cast_nullable_to_non_nullable
@@ -701,10 +794,10 @@ class __$$getTokenBalanceCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$getTokenBalance
+class _$GetTokenBalanceSuccess
     with DiagnosticableTreeMixin
-    implements getTokenBalance {
-  const _$getTokenBalance(this.balance);
+    implements GetTokenBalanceSuccess {
+  const _$GetTokenBalanceSuccess(this.balance);
 
   @override
   final double balance;
@@ -726,7 +819,7 @@ class _$getTokenBalance
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$getTokenBalance &&
+            other is _$GetTokenBalanceSuccess &&
             const DeepCollectionEquality().equals(other.balance, balance));
   }
 
@@ -736,8 +829,9 @@ class _$getTokenBalance
 
   @JsonKey(ignore: true)
   @override
-  _$$getTokenBalanceCopyWith<_$getTokenBalance> get copyWith =>
-      __$$getTokenBalanceCopyWithImpl<_$getTokenBalance>(this, _$identity);
+  _$$GetTokenBalanceSuccessCopyWith<_$GetTokenBalanceSuccess> get copyWith =>
+      __$$GetTokenBalanceSuccessCopyWithImpl<_$GetTokenBalanceSuccess>(
+          this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -749,8 +843,11 @@ class _$getTokenBalance
     required TResult Function() success,
     required TResult Function(String msg) fail,
     required TResult Function(int fee) calculatorFee,
+    required TResult Function() calculatorFeeSuccess,
     required TResult Function(String msg) errorToAddress,
     required TResult Function(String msg) errorValueInEther,
+    required TResult Function() checkedValidator,
+    required TResult Function() validatorSuccess,
   }) {
     return getBalance(balance);
   }
@@ -765,8 +862,11 @@ class _$getTokenBalance
     TResult Function()? success,
     TResult Function(String msg)? fail,
     TResult Function(int fee)? calculatorFee,
+    TResult Function()? calculatorFeeSuccess,
     TResult Function(String msg)? errorToAddress,
     TResult Function(String msg)? errorValueInEther,
+    TResult Function()? checkedValidator,
+    TResult Function()? validatorSuccess,
   }) {
     return getBalance?.call(balance);
   }
@@ -781,8 +881,11 @@ class _$getTokenBalance
     TResult Function()? success,
     TResult Function(String msg)? fail,
     TResult Function(int fee)? calculatorFee,
+    TResult Function()? calculatorFeeSuccess,
     TResult Function(String msg)? errorToAddress,
     TResult Function(String msg)? errorValueInEther,
+    TResult Function()? checkedValidator,
+    TResult Function()? validatorSuccess,
     required TResult orElse(),
   }) {
     if (getBalance != null) {
@@ -797,14 +900,20 @@ class _$getTokenBalance
     required TResult Function(sendToExternalStateInitial value) initial,
     required TResult Function(sendToExternalDone value) done,
     required TResult Function(SendToExternalLoading value) loading,
-    required TResult Function(getTokenBalance value) getBalance,
+    required TResult Function(GetTokenBalanceSuccess value) getBalance,
     required TResult Function(sendToExternalSuccess value) success,
-    required TResult Function(getTokenFail value) fail,
+    required TResult Function(SendToExternalFailed value) fail,
     required TResult Function(SendToExternalCalculatorFee value) calculatorFee,
+    required TResult Function(SendToExternalCalculatorFeeSuccess value)
+        calculatorFeeSuccess,
     required TResult Function(SendToExternalErrorToAddress value)
         errorToAddress,
     required TResult Function(SendToExternalErrorValueInEther value)
         errorValueInEther,
+    required TResult Function(SendToExternalCheckedValidator value)
+        checkedValidator,
+    required TResult Function(SendToExternalValidatorSuccess value)
+        validatorSuccess,
   }) {
     return getBalance(this);
   }
@@ -815,12 +924,16 @@ class _$getTokenBalance
     TResult Function(sendToExternalStateInitial value)? initial,
     TResult Function(sendToExternalDone value)? done,
     TResult Function(SendToExternalLoading value)? loading,
-    TResult Function(getTokenBalance value)? getBalance,
+    TResult Function(GetTokenBalanceSuccess value)? getBalance,
     TResult Function(sendToExternalSuccess value)? success,
-    TResult Function(getTokenFail value)? fail,
+    TResult Function(SendToExternalFailed value)? fail,
     TResult Function(SendToExternalCalculatorFee value)? calculatorFee,
+    TResult Function(SendToExternalCalculatorFeeSuccess value)?
+        calculatorFeeSuccess,
     TResult Function(SendToExternalErrorToAddress value)? errorToAddress,
     TResult Function(SendToExternalErrorValueInEther value)? errorValueInEther,
+    TResult Function(SendToExternalCheckedValidator value)? checkedValidator,
+    TResult Function(SendToExternalValidatorSuccess value)? validatorSuccess,
   }) {
     return getBalance?.call(this);
   }
@@ -831,12 +944,16 @@ class _$getTokenBalance
     TResult Function(sendToExternalStateInitial value)? initial,
     TResult Function(sendToExternalDone value)? done,
     TResult Function(SendToExternalLoading value)? loading,
-    TResult Function(getTokenBalance value)? getBalance,
+    TResult Function(GetTokenBalanceSuccess value)? getBalance,
     TResult Function(sendToExternalSuccess value)? success,
-    TResult Function(getTokenFail value)? fail,
+    TResult Function(SendToExternalFailed value)? fail,
     TResult Function(SendToExternalCalculatorFee value)? calculatorFee,
+    TResult Function(SendToExternalCalculatorFeeSuccess value)?
+        calculatorFeeSuccess,
     TResult Function(SendToExternalErrorToAddress value)? errorToAddress,
     TResult Function(SendToExternalErrorValueInEther value)? errorValueInEther,
+    TResult Function(SendToExternalCheckedValidator value)? checkedValidator,
+    TResult Function(SendToExternalValidatorSuccess value)? validatorSuccess,
     required TResult orElse(),
   }) {
     if (getBalance != null) {
@@ -846,12 +963,13 @@ class _$getTokenBalance
   }
 }
 
-abstract class getTokenBalance implements SendToExternalState {
-  const factory getTokenBalance(final double balance) = _$getTokenBalance;
+abstract class GetTokenBalanceSuccess implements SendToExternalState {
+  const factory GetTokenBalanceSuccess(final double balance) =
+      _$GetTokenBalanceSuccess;
 
   double get balance => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  _$$getTokenBalanceCopyWith<_$getTokenBalance> get copyWith =>
+  _$$GetTokenBalanceSuccessCopyWith<_$GetTokenBalanceSuccess> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -911,8 +1029,11 @@ class _$sendToExternalSuccess
     required TResult Function() success,
     required TResult Function(String msg) fail,
     required TResult Function(int fee) calculatorFee,
+    required TResult Function() calculatorFeeSuccess,
     required TResult Function(String msg) errorToAddress,
     required TResult Function(String msg) errorValueInEther,
+    required TResult Function() checkedValidator,
+    required TResult Function() validatorSuccess,
   }) {
     return success();
   }
@@ -927,8 +1048,11 @@ class _$sendToExternalSuccess
     TResult Function()? success,
     TResult Function(String msg)? fail,
     TResult Function(int fee)? calculatorFee,
+    TResult Function()? calculatorFeeSuccess,
     TResult Function(String msg)? errorToAddress,
     TResult Function(String msg)? errorValueInEther,
+    TResult Function()? checkedValidator,
+    TResult Function()? validatorSuccess,
   }) {
     return success?.call();
   }
@@ -943,8 +1067,11 @@ class _$sendToExternalSuccess
     TResult Function()? success,
     TResult Function(String msg)? fail,
     TResult Function(int fee)? calculatorFee,
+    TResult Function()? calculatorFeeSuccess,
     TResult Function(String msg)? errorToAddress,
     TResult Function(String msg)? errorValueInEther,
+    TResult Function()? checkedValidator,
+    TResult Function()? validatorSuccess,
     required TResult orElse(),
   }) {
     if (success != null) {
@@ -959,14 +1086,20 @@ class _$sendToExternalSuccess
     required TResult Function(sendToExternalStateInitial value) initial,
     required TResult Function(sendToExternalDone value) done,
     required TResult Function(SendToExternalLoading value) loading,
-    required TResult Function(getTokenBalance value) getBalance,
+    required TResult Function(GetTokenBalanceSuccess value) getBalance,
     required TResult Function(sendToExternalSuccess value) success,
-    required TResult Function(getTokenFail value) fail,
+    required TResult Function(SendToExternalFailed value) fail,
     required TResult Function(SendToExternalCalculatorFee value) calculatorFee,
+    required TResult Function(SendToExternalCalculatorFeeSuccess value)
+        calculatorFeeSuccess,
     required TResult Function(SendToExternalErrorToAddress value)
         errorToAddress,
     required TResult Function(SendToExternalErrorValueInEther value)
         errorValueInEther,
+    required TResult Function(SendToExternalCheckedValidator value)
+        checkedValidator,
+    required TResult Function(SendToExternalValidatorSuccess value)
+        validatorSuccess,
   }) {
     return success(this);
   }
@@ -977,12 +1110,16 @@ class _$sendToExternalSuccess
     TResult Function(sendToExternalStateInitial value)? initial,
     TResult Function(sendToExternalDone value)? done,
     TResult Function(SendToExternalLoading value)? loading,
-    TResult Function(getTokenBalance value)? getBalance,
+    TResult Function(GetTokenBalanceSuccess value)? getBalance,
     TResult Function(sendToExternalSuccess value)? success,
-    TResult Function(getTokenFail value)? fail,
+    TResult Function(SendToExternalFailed value)? fail,
     TResult Function(SendToExternalCalculatorFee value)? calculatorFee,
+    TResult Function(SendToExternalCalculatorFeeSuccess value)?
+        calculatorFeeSuccess,
     TResult Function(SendToExternalErrorToAddress value)? errorToAddress,
     TResult Function(SendToExternalErrorValueInEther value)? errorValueInEther,
+    TResult Function(SendToExternalCheckedValidator value)? checkedValidator,
+    TResult Function(SendToExternalValidatorSuccess value)? validatorSuccess,
   }) {
     return success?.call(this);
   }
@@ -993,12 +1130,16 @@ class _$sendToExternalSuccess
     TResult Function(sendToExternalStateInitial value)? initial,
     TResult Function(sendToExternalDone value)? done,
     TResult Function(SendToExternalLoading value)? loading,
-    TResult Function(getTokenBalance value)? getBalance,
+    TResult Function(GetTokenBalanceSuccess value)? getBalance,
     TResult Function(sendToExternalSuccess value)? success,
-    TResult Function(getTokenFail value)? fail,
+    TResult Function(SendToExternalFailed value)? fail,
     TResult Function(SendToExternalCalculatorFee value)? calculatorFee,
+    TResult Function(SendToExternalCalculatorFeeSuccess value)?
+        calculatorFeeSuccess,
     TResult Function(SendToExternalErrorToAddress value)? errorToAddress,
     TResult Function(SendToExternalErrorValueInEther value)? errorValueInEther,
+    TResult Function(SendToExternalCheckedValidator value)? checkedValidator,
+    TResult Function(SendToExternalValidatorSuccess value)? validatorSuccess,
     required TResult orElse(),
   }) {
     if (success != null) {
@@ -1013,29 +1154,29 @@ abstract class sendToExternalSuccess implements SendToExternalState {
 }
 
 /// @nodoc
-abstract class _$$getTokenFailCopyWith<$Res> {
-  factory _$$getTokenFailCopyWith(
-          _$getTokenFail value, $Res Function(_$getTokenFail) then) =
-      __$$getTokenFailCopyWithImpl<$Res>;
+abstract class _$$SendToExternalFailedCopyWith<$Res> {
+  factory _$$SendToExternalFailedCopyWith(_$SendToExternalFailed value,
+          $Res Function(_$SendToExternalFailed) then) =
+      __$$SendToExternalFailedCopyWithImpl<$Res>;
   $Res call({String msg});
 }
 
 /// @nodoc
-class __$$getTokenFailCopyWithImpl<$Res>
+class __$$SendToExternalFailedCopyWithImpl<$Res>
     extends _$SendToExternalStateCopyWithImpl<$Res>
-    implements _$$getTokenFailCopyWith<$Res> {
-  __$$getTokenFailCopyWithImpl(
-      _$getTokenFail _value, $Res Function(_$getTokenFail) _then)
-      : super(_value, (v) => _then(v as _$getTokenFail));
+    implements _$$SendToExternalFailedCopyWith<$Res> {
+  __$$SendToExternalFailedCopyWithImpl(_$SendToExternalFailed _value,
+      $Res Function(_$SendToExternalFailed) _then)
+      : super(_value, (v) => _then(v as _$SendToExternalFailed));
 
   @override
-  _$getTokenFail get _value => super._value as _$getTokenFail;
+  _$SendToExternalFailed get _value => super._value as _$SendToExternalFailed;
 
   @override
   $Res call({
     Object? msg = freezed,
   }) {
-    return _then(_$getTokenFail(
+    return _then(_$SendToExternalFailed(
       msg == freezed
           ? _value.msg
           : msg // ignore: cast_nullable_to_non_nullable
@@ -1046,8 +1187,10 @@ class __$$getTokenFailCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$getTokenFail with DiagnosticableTreeMixin implements getTokenFail {
-  const _$getTokenFail(this.msg);
+class _$SendToExternalFailed
+    with DiagnosticableTreeMixin
+    implements SendToExternalFailed {
+  const _$SendToExternalFailed(this.msg);
 
   @override
   final String msg;
@@ -1069,7 +1212,7 @@ class _$getTokenFail with DiagnosticableTreeMixin implements getTokenFail {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$getTokenFail &&
+            other is _$SendToExternalFailed &&
             const DeepCollectionEquality().equals(other.msg, msg));
   }
 
@@ -1079,8 +1222,9 @@ class _$getTokenFail with DiagnosticableTreeMixin implements getTokenFail {
 
   @JsonKey(ignore: true)
   @override
-  _$$getTokenFailCopyWith<_$getTokenFail> get copyWith =>
-      __$$getTokenFailCopyWithImpl<_$getTokenFail>(this, _$identity);
+  _$$SendToExternalFailedCopyWith<_$SendToExternalFailed> get copyWith =>
+      __$$SendToExternalFailedCopyWithImpl<_$SendToExternalFailed>(
+          this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -1092,8 +1236,11 @@ class _$getTokenFail with DiagnosticableTreeMixin implements getTokenFail {
     required TResult Function() success,
     required TResult Function(String msg) fail,
     required TResult Function(int fee) calculatorFee,
+    required TResult Function() calculatorFeeSuccess,
     required TResult Function(String msg) errorToAddress,
     required TResult Function(String msg) errorValueInEther,
+    required TResult Function() checkedValidator,
+    required TResult Function() validatorSuccess,
   }) {
     return fail(msg);
   }
@@ -1108,8 +1255,11 @@ class _$getTokenFail with DiagnosticableTreeMixin implements getTokenFail {
     TResult Function()? success,
     TResult Function(String msg)? fail,
     TResult Function(int fee)? calculatorFee,
+    TResult Function()? calculatorFeeSuccess,
     TResult Function(String msg)? errorToAddress,
     TResult Function(String msg)? errorValueInEther,
+    TResult Function()? checkedValidator,
+    TResult Function()? validatorSuccess,
   }) {
     return fail?.call(msg);
   }
@@ -1124,8 +1274,11 @@ class _$getTokenFail with DiagnosticableTreeMixin implements getTokenFail {
     TResult Function()? success,
     TResult Function(String msg)? fail,
     TResult Function(int fee)? calculatorFee,
+    TResult Function()? calculatorFeeSuccess,
     TResult Function(String msg)? errorToAddress,
     TResult Function(String msg)? errorValueInEther,
+    TResult Function()? checkedValidator,
+    TResult Function()? validatorSuccess,
     required TResult orElse(),
   }) {
     if (fail != null) {
@@ -1140,14 +1293,20 @@ class _$getTokenFail with DiagnosticableTreeMixin implements getTokenFail {
     required TResult Function(sendToExternalStateInitial value) initial,
     required TResult Function(sendToExternalDone value) done,
     required TResult Function(SendToExternalLoading value) loading,
-    required TResult Function(getTokenBalance value) getBalance,
+    required TResult Function(GetTokenBalanceSuccess value) getBalance,
     required TResult Function(sendToExternalSuccess value) success,
-    required TResult Function(getTokenFail value) fail,
+    required TResult Function(SendToExternalFailed value) fail,
     required TResult Function(SendToExternalCalculatorFee value) calculatorFee,
+    required TResult Function(SendToExternalCalculatorFeeSuccess value)
+        calculatorFeeSuccess,
     required TResult Function(SendToExternalErrorToAddress value)
         errorToAddress,
     required TResult Function(SendToExternalErrorValueInEther value)
         errorValueInEther,
+    required TResult Function(SendToExternalCheckedValidator value)
+        checkedValidator,
+    required TResult Function(SendToExternalValidatorSuccess value)
+        validatorSuccess,
   }) {
     return fail(this);
   }
@@ -1158,12 +1317,16 @@ class _$getTokenFail with DiagnosticableTreeMixin implements getTokenFail {
     TResult Function(sendToExternalStateInitial value)? initial,
     TResult Function(sendToExternalDone value)? done,
     TResult Function(SendToExternalLoading value)? loading,
-    TResult Function(getTokenBalance value)? getBalance,
+    TResult Function(GetTokenBalanceSuccess value)? getBalance,
     TResult Function(sendToExternalSuccess value)? success,
-    TResult Function(getTokenFail value)? fail,
+    TResult Function(SendToExternalFailed value)? fail,
     TResult Function(SendToExternalCalculatorFee value)? calculatorFee,
+    TResult Function(SendToExternalCalculatorFeeSuccess value)?
+        calculatorFeeSuccess,
     TResult Function(SendToExternalErrorToAddress value)? errorToAddress,
     TResult Function(SendToExternalErrorValueInEther value)? errorValueInEther,
+    TResult Function(SendToExternalCheckedValidator value)? checkedValidator,
+    TResult Function(SendToExternalValidatorSuccess value)? validatorSuccess,
   }) {
     return fail?.call(this);
   }
@@ -1174,12 +1337,16 @@ class _$getTokenFail with DiagnosticableTreeMixin implements getTokenFail {
     TResult Function(sendToExternalStateInitial value)? initial,
     TResult Function(sendToExternalDone value)? done,
     TResult Function(SendToExternalLoading value)? loading,
-    TResult Function(getTokenBalance value)? getBalance,
+    TResult Function(GetTokenBalanceSuccess value)? getBalance,
     TResult Function(sendToExternalSuccess value)? success,
-    TResult Function(getTokenFail value)? fail,
+    TResult Function(SendToExternalFailed value)? fail,
     TResult Function(SendToExternalCalculatorFee value)? calculatorFee,
+    TResult Function(SendToExternalCalculatorFeeSuccess value)?
+        calculatorFeeSuccess,
     TResult Function(SendToExternalErrorToAddress value)? errorToAddress,
     TResult Function(SendToExternalErrorValueInEther value)? errorValueInEther,
+    TResult Function(SendToExternalCheckedValidator value)? checkedValidator,
+    TResult Function(SendToExternalValidatorSuccess value)? validatorSuccess,
     required TResult orElse(),
   }) {
     if (fail != null) {
@@ -1189,12 +1356,12 @@ class _$getTokenFail with DiagnosticableTreeMixin implements getTokenFail {
   }
 }
 
-abstract class getTokenFail implements SendToExternalState {
-  const factory getTokenFail(final String msg) = _$getTokenFail;
+abstract class SendToExternalFailed implements SendToExternalState {
+  const factory SendToExternalFailed(final String msg) = _$SendToExternalFailed;
 
   String get msg => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  _$$getTokenFailCopyWith<_$getTokenFail> get copyWith =>
+  _$$SendToExternalFailedCopyWith<_$SendToExternalFailed> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -1284,8 +1451,11 @@ class _$SendToExternalCalculatorFee
     required TResult Function() success,
     required TResult Function(String msg) fail,
     required TResult Function(int fee) calculatorFee,
+    required TResult Function() calculatorFeeSuccess,
     required TResult Function(String msg) errorToAddress,
     required TResult Function(String msg) errorValueInEther,
+    required TResult Function() checkedValidator,
+    required TResult Function() validatorSuccess,
   }) {
     return calculatorFee(fee);
   }
@@ -1300,8 +1470,11 @@ class _$SendToExternalCalculatorFee
     TResult Function()? success,
     TResult Function(String msg)? fail,
     TResult Function(int fee)? calculatorFee,
+    TResult Function()? calculatorFeeSuccess,
     TResult Function(String msg)? errorToAddress,
     TResult Function(String msg)? errorValueInEther,
+    TResult Function()? checkedValidator,
+    TResult Function()? validatorSuccess,
   }) {
     return calculatorFee?.call(fee);
   }
@@ -1316,8 +1489,11 @@ class _$SendToExternalCalculatorFee
     TResult Function()? success,
     TResult Function(String msg)? fail,
     TResult Function(int fee)? calculatorFee,
+    TResult Function()? calculatorFeeSuccess,
     TResult Function(String msg)? errorToAddress,
     TResult Function(String msg)? errorValueInEther,
+    TResult Function()? checkedValidator,
+    TResult Function()? validatorSuccess,
     required TResult orElse(),
   }) {
     if (calculatorFee != null) {
@@ -1332,14 +1508,20 @@ class _$SendToExternalCalculatorFee
     required TResult Function(sendToExternalStateInitial value) initial,
     required TResult Function(sendToExternalDone value) done,
     required TResult Function(SendToExternalLoading value) loading,
-    required TResult Function(getTokenBalance value) getBalance,
+    required TResult Function(GetTokenBalanceSuccess value) getBalance,
     required TResult Function(sendToExternalSuccess value) success,
-    required TResult Function(getTokenFail value) fail,
+    required TResult Function(SendToExternalFailed value) fail,
     required TResult Function(SendToExternalCalculatorFee value) calculatorFee,
+    required TResult Function(SendToExternalCalculatorFeeSuccess value)
+        calculatorFeeSuccess,
     required TResult Function(SendToExternalErrorToAddress value)
         errorToAddress,
     required TResult Function(SendToExternalErrorValueInEther value)
         errorValueInEther,
+    required TResult Function(SendToExternalCheckedValidator value)
+        checkedValidator,
+    required TResult Function(SendToExternalValidatorSuccess value)
+        validatorSuccess,
   }) {
     return calculatorFee(this);
   }
@@ -1350,12 +1532,16 @@ class _$SendToExternalCalculatorFee
     TResult Function(sendToExternalStateInitial value)? initial,
     TResult Function(sendToExternalDone value)? done,
     TResult Function(SendToExternalLoading value)? loading,
-    TResult Function(getTokenBalance value)? getBalance,
+    TResult Function(GetTokenBalanceSuccess value)? getBalance,
     TResult Function(sendToExternalSuccess value)? success,
-    TResult Function(getTokenFail value)? fail,
+    TResult Function(SendToExternalFailed value)? fail,
     TResult Function(SendToExternalCalculatorFee value)? calculatorFee,
+    TResult Function(SendToExternalCalculatorFeeSuccess value)?
+        calculatorFeeSuccess,
     TResult Function(SendToExternalErrorToAddress value)? errorToAddress,
     TResult Function(SendToExternalErrorValueInEther value)? errorValueInEther,
+    TResult Function(SendToExternalCheckedValidator value)? checkedValidator,
+    TResult Function(SendToExternalValidatorSuccess value)? validatorSuccess,
   }) {
     return calculatorFee?.call(this);
   }
@@ -1366,12 +1552,16 @@ class _$SendToExternalCalculatorFee
     TResult Function(sendToExternalStateInitial value)? initial,
     TResult Function(sendToExternalDone value)? done,
     TResult Function(SendToExternalLoading value)? loading,
-    TResult Function(getTokenBalance value)? getBalance,
+    TResult Function(GetTokenBalanceSuccess value)? getBalance,
     TResult Function(sendToExternalSuccess value)? success,
-    TResult Function(getTokenFail value)? fail,
+    TResult Function(SendToExternalFailed value)? fail,
     TResult Function(SendToExternalCalculatorFee value)? calculatorFee,
+    TResult Function(SendToExternalCalculatorFeeSuccess value)?
+        calculatorFeeSuccess,
     TResult Function(SendToExternalErrorToAddress value)? errorToAddress,
     TResult Function(SendToExternalErrorValueInEther value)? errorValueInEther,
+    TResult Function(SendToExternalCheckedValidator value)? checkedValidator,
+    TResult Function(SendToExternalValidatorSuccess value)? validatorSuccess,
     required TResult orElse(),
   }) {
     if (calculatorFee != null) {
@@ -1389,6 +1579,193 @@ abstract class SendToExternalCalculatorFee implements SendToExternalState {
   @JsonKey(ignore: true)
   _$$SendToExternalCalculatorFeeCopyWith<_$SendToExternalCalculatorFee>
       get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$SendToExternalCalculatorFeeSuccessCopyWith<$Res> {
+  factory _$$SendToExternalCalculatorFeeSuccessCopyWith(
+          _$SendToExternalCalculatorFeeSuccess value,
+          $Res Function(_$SendToExternalCalculatorFeeSuccess) then) =
+      __$$SendToExternalCalculatorFeeSuccessCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$SendToExternalCalculatorFeeSuccessCopyWithImpl<$Res>
+    extends _$SendToExternalStateCopyWithImpl<$Res>
+    implements _$$SendToExternalCalculatorFeeSuccessCopyWith<$Res> {
+  __$$SendToExternalCalculatorFeeSuccessCopyWithImpl(
+      _$SendToExternalCalculatorFeeSuccess _value,
+      $Res Function(_$SendToExternalCalculatorFeeSuccess) _then)
+      : super(_value, (v) => _then(v as _$SendToExternalCalculatorFeeSuccess));
+
+  @override
+  _$SendToExternalCalculatorFeeSuccess get _value =>
+      super._value as _$SendToExternalCalculatorFeeSuccess;
+}
+
+/// @nodoc
+
+class _$SendToExternalCalculatorFeeSuccess
+    with DiagnosticableTreeMixin
+    implements SendToExternalCalculatorFeeSuccess {
+  const _$SendToExternalCalculatorFeeSuccess();
+
+  @override
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+    return 'SendToExternalState.calculatorFeeSuccess()';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty(
+        'type', 'SendToExternalState.calculatorFeeSuccess'));
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$SendToExternalCalculatorFeeSuccess);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(bool isLoading) initial,
+    required TResult Function(SendToExternalEntity entity) done,
+    required TResult Function() loading,
+    required TResult Function(double balance) getBalance,
+    required TResult Function() success,
+    required TResult Function(String msg) fail,
+    required TResult Function(int fee) calculatorFee,
+    required TResult Function() calculatorFeeSuccess,
+    required TResult Function(String msg) errorToAddress,
+    required TResult Function(String msg) errorValueInEther,
+    required TResult Function() checkedValidator,
+    required TResult Function() validatorSuccess,
+  }) {
+    return calculatorFeeSuccess();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult Function(bool isLoading)? initial,
+    TResult Function(SendToExternalEntity entity)? done,
+    TResult Function()? loading,
+    TResult Function(double balance)? getBalance,
+    TResult Function()? success,
+    TResult Function(String msg)? fail,
+    TResult Function(int fee)? calculatorFee,
+    TResult Function()? calculatorFeeSuccess,
+    TResult Function(String msg)? errorToAddress,
+    TResult Function(String msg)? errorValueInEther,
+    TResult Function()? checkedValidator,
+    TResult Function()? validatorSuccess,
+  }) {
+    return calculatorFeeSuccess?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(bool isLoading)? initial,
+    TResult Function(SendToExternalEntity entity)? done,
+    TResult Function()? loading,
+    TResult Function(double balance)? getBalance,
+    TResult Function()? success,
+    TResult Function(String msg)? fail,
+    TResult Function(int fee)? calculatorFee,
+    TResult Function()? calculatorFeeSuccess,
+    TResult Function(String msg)? errorToAddress,
+    TResult Function(String msg)? errorValueInEther,
+    TResult Function()? checkedValidator,
+    TResult Function()? validatorSuccess,
+    required TResult orElse(),
+  }) {
+    if (calculatorFeeSuccess != null) {
+      return calculatorFeeSuccess();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(sendToExternalStateInitial value) initial,
+    required TResult Function(sendToExternalDone value) done,
+    required TResult Function(SendToExternalLoading value) loading,
+    required TResult Function(GetTokenBalanceSuccess value) getBalance,
+    required TResult Function(sendToExternalSuccess value) success,
+    required TResult Function(SendToExternalFailed value) fail,
+    required TResult Function(SendToExternalCalculatorFee value) calculatorFee,
+    required TResult Function(SendToExternalCalculatorFeeSuccess value)
+        calculatorFeeSuccess,
+    required TResult Function(SendToExternalErrorToAddress value)
+        errorToAddress,
+    required TResult Function(SendToExternalErrorValueInEther value)
+        errorValueInEther,
+    required TResult Function(SendToExternalCheckedValidator value)
+        checkedValidator,
+    required TResult Function(SendToExternalValidatorSuccess value)
+        validatorSuccess,
+  }) {
+    return calculatorFeeSuccess(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(sendToExternalStateInitial value)? initial,
+    TResult Function(sendToExternalDone value)? done,
+    TResult Function(SendToExternalLoading value)? loading,
+    TResult Function(GetTokenBalanceSuccess value)? getBalance,
+    TResult Function(sendToExternalSuccess value)? success,
+    TResult Function(SendToExternalFailed value)? fail,
+    TResult Function(SendToExternalCalculatorFee value)? calculatorFee,
+    TResult Function(SendToExternalCalculatorFeeSuccess value)?
+        calculatorFeeSuccess,
+    TResult Function(SendToExternalErrorToAddress value)? errorToAddress,
+    TResult Function(SendToExternalErrorValueInEther value)? errorValueInEther,
+    TResult Function(SendToExternalCheckedValidator value)? checkedValidator,
+    TResult Function(SendToExternalValidatorSuccess value)? validatorSuccess,
+  }) {
+    return calculatorFeeSuccess?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(sendToExternalStateInitial value)? initial,
+    TResult Function(sendToExternalDone value)? done,
+    TResult Function(SendToExternalLoading value)? loading,
+    TResult Function(GetTokenBalanceSuccess value)? getBalance,
+    TResult Function(sendToExternalSuccess value)? success,
+    TResult Function(SendToExternalFailed value)? fail,
+    TResult Function(SendToExternalCalculatorFee value)? calculatorFee,
+    TResult Function(SendToExternalCalculatorFeeSuccess value)?
+        calculatorFeeSuccess,
+    TResult Function(SendToExternalErrorToAddress value)? errorToAddress,
+    TResult Function(SendToExternalErrorValueInEther value)? errorValueInEther,
+    TResult Function(SendToExternalCheckedValidator value)? checkedValidator,
+    TResult Function(SendToExternalValidatorSuccess value)? validatorSuccess,
+    required TResult orElse(),
+  }) {
+    if (calculatorFeeSuccess != null) {
+      return calculatorFeeSuccess(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class SendToExternalCalculatorFeeSuccess
+    implements SendToExternalState {
+  const factory SendToExternalCalculatorFeeSuccess() =
+      _$SendToExternalCalculatorFeeSuccess;
 }
 
 /// @nodoc
@@ -1477,8 +1854,11 @@ class _$SendToExternalErrorToAddress
     required TResult Function() success,
     required TResult Function(String msg) fail,
     required TResult Function(int fee) calculatorFee,
+    required TResult Function() calculatorFeeSuccess,
     required TResult Function(String msg) errorToAddress,
     required TResult Function(String msg) errorValueInEther,
+    required TResult Function() checkedValidator,
+    required TResult Function() validatorSuccess,
   }) {
     return errorToAddress(msg);
   }
@@ -1493,8 +1873,11 @@ class _$SendToExternalErrorToAddress
     TResult Function()? success,
     TResult Function(String msg)? fail,
     TResult Function(int fee)? calculatorFee,
+    TResult Function()? calculatorFeeSuccess,
     TResult Function(String msg)? errorToAddress,
     TResult Function(String msg)? errorValueInEther,
+    TResult Function()? checkedValidator,
+    TResult Function()? validatorSuccess,
   }) {
     return errorToAddress?.call(msg);
   }
@@ -1509,8 +1892,11 @@ class _$SendToExternalErrorToAddress
     TResult Function()? success,
     TResult Function(String msg)? fail,
     TResult Function(int fee)? calculatorFee,
+    TResult Function()? calculatorFeeSuccess,
     TResult Function(String msg)? errorToAddress,
     TResult Function(String msg)? errorValueInEther,
+    TResult Function()? checkedValidator,
+    TResult Function()? validatorSuccess,
     required TResult orElse(),
   }) {
     if (errorToAddress != null) {
@@ -1525,14 +1911,20 @@ class _$SendToExternalErrorToAddress
     required TResult Function(sendToExternalStateInitial value) initial,
     required TResult Function(sendToExternalDone value) done,
     required TResult Function(SendToExternalLoading value) loading,
-    required TResult Function(getTokenBalance value) getBalance,
+    required TResult Function(GetTokenBalanceSuccess value) getBalance,
     required TResult Function(sendToExternalSuccess value) success,
-    required TResult Function(getTokenFail value) fail,
+    required TResult Function(SendToExternalFailed value) fail,
     required TResult Function(SendToExternalCalculatorFee value) calculatorFee,
+    required TResult Function(SendToExternalCalculatorFeeSuccess value)
+        calculatorFeeSuccess,
     required TResult Function(SendToExternalErrorToAddress value)
         errorToAddress,
     required TResult Function(SendToExternalErrorValueInEther value)
         errorValueInEther,
+    required TResult Function(SendToExternalCheckedValidator value)
+        checkedValidator,
+    required TResult Function(SendToExternalValidatorSuccess value)
+        validatorSuccess,
   }) {
     return errorToAddress(this);
   }
@@ -1543,12 +1935,16 @@ class _$SendToExternalErrorToAddress
     TResult Function(sendToExternalStateInitial value)? initial,
     TResult Function(sendToExternalDone value)? done,
     TResult Function(SendToExternalLoading value)? loading,
-    TResult Function(getTokenBalance value)? getBalance,
+    TResult Function(GetTokenBalanceSuccess value)? getBalance,
     TResult Function(sendToExternalSuccess value)? success,
-    TResult Function(getTokenFail value)? fail,
+    TResult Function(SendToExternalFailed value)? fail,
     TResult Function(SendToExternalCalculatorFee value)? calculatorFee,
+    TResult Function(SendToExternalCalculatorFeeSuccess value)?
+        calculatorFeeSuccess,
     TResult Function(SendToExternalErrorToAddress value)? errorToAddress,
     TResult Function(SendToExternalErrorValueInEther value)? errorValueInEther,
+    TResult Function(SendToExternalCheckedValidator value)? checkedValidator,
+    TResult Function(SendToExternalValidatorSuccess value)? validatorSuccess,
   }) {
     return errorToAddress?.call(this);
   }
@@ -1559,12 +1955,16 @@ class _$SendToExternalErrorToAddress
     TResult Function(sendToExternalStateInitial value)? initial,
     TResult Function(sendToExternalDone value)? done,
     TResult Function(SendToExternalLoading value)? loading,
-    TResult Function(getTokenBalance value)? getBalance,
+    TResult Function(GetTokenBalanceSuccess value)? getBalance,
     TResult Function(sendToExternalSuccess value)? success,
-    TResult Function(getTokenFail value)? fail,
+    TResult Function(SendToExternalFailed value)? fail,
     TResult Function(SendToExternalCalculatorFee value)? calculatorFee,
+    TResult Function(SendToExternalCalculatorFeeSuccess value)?
+        calculatorFeeSuccess,
     TResult Function(SendToExternalErrorToAddress value)? errorToAddress,
     TResult Function(SendToExternalErrorValueInEther value)? errorValueInEther,
+    TResult Function(SendToExternalCheckedValidator value)? checkedValidator,
+    TResult Function(SendToExternalValidatorSuccess value)? validatorSuccess,
     required TResult orElse(),
   }) {
     if (errorToAddress != null) {
@@ -1671,8 +2071,11 @@ class _$SendToExternalErrorValueInEther
     required TResult Function() success,
     required TResult Function(String msg) fail,
     required TResult Function(int fee) calculatorFee,
+    required TResult Function() calculatorFeeSuccess,
     required TResult Function(String msg) errorToAddress,
     required TResult Function(String msg) errorValueInEther,
+    required TResult Function() checkedValidator,
+    required TResult Function() validatorSuccess,
   }) {
     return errorValueInEther(msg);
   }
@@ -1687,8 +2090,11 @@ class _$SendToExternalErrorValueInEther
     TResult Function()? success,
     TResult Function(String msg)? fail,
     TResult Function(int fee)? calculatorFee,
+    TResult Function()? calculatorFeeSuccess,
     TResult Function(String msg)? errorToAddress,
     TResult Function(String msg)? errorValueInEther,
+    TResult Function()? checkedValidator,
+    TResult Function()? validatorSuccess,
   }) {
     return errorValueInEther?.call(msg);
   }
@@ -1703,8 +2109,11 @@ class _$SendToExternalErrorValueInEther
     TResult Function()? success,
     TResult Function(String msg)? fail,
     TResult Function(int fee)? calculatorFee,
+    TResult Function()? calculatorFeeSuccess,
     TResult Function(String msg)? errorToAddress,
     TResult Function(String msg)? errorValueInEther,
+    TResult Function()? checkedValidator,
+    TResult Function()? validatorSuccess,
     required TResult orElse(),
   }) {
     if (errorValueInEther != null) {
@@ -1719,14 +2128,20 @@ class _$SendToExternalErrorValueInEther
     required TResult Function(sendToExternalStateInitial value) initial,
     required TResult Function(sendToExternalDone value) done,
     required TResult Function(SendToExternalLoading value) loading,
-    required TResult Function(getTokenBalance value) getBalance,
+    required TResult Function(GetTokenBalanceSuccess value) getBalance,
     required TResult Function(sendToExternalSuccess value) success,
-    required TResult Function(getTokenFail value) fail,
+    required TResult Function(SendToExternalFailed value) fail,
     required TResult Function(SendToExternalCalculatorFee value) calculatorFee,
+    required TResult Function(SendToExternalCalculatorFeeSuccess value)
+        calculatorFeeSuccess,
     required TResult Function(SendToExternalErrorToAddress value)
         errorToAddress,
     required TResult Function(SendToExternalErrorValueInEther value)
         errorValueInEther,
+    required TResult Function(SendToExternalCheckedValidator value)
+        checkedValidator,
+    required TResult Function(SendToExternalValidatorSuccess value)
+        validatorSuccess,
   }) {
     return errorValueInEther(this);
   }
@@ -1737,12 +2152,16 @@ class _$SendToExternalErrorValueInEther
     TResult Function(sendToExternalStateInitial value)? initial,
     TResult Function(sendToExternalDone value)? done,
     TResult Function(SendToExternalLoading value)? loading,
-    TResult Function(getTokenBalance value)? getBalance,
+    TResult Function(GetTokenBalanceSuccess value)? getBalance,
     TResult Function(sendToExternalSuccess value)? success,
-    TResult Function(getTokenFail value)? fail,
+    TResult Function(SendToExternalFailed value)? fail,
     TResult Function(SendToExternalCalculatorFee value)? calculatorFee,
+    TResult Function(SendToExternalCalculatorFeeSuccess value)?
+        calculatorFeeSuccess,
     TResult Function(SendToExternalErrorToAddress value)? errorToAddress,
     TResult Function(SendToExternalErrorValueInEther value)? errorValueInEther,
+    TResult Function(SendToExternalCheckedValidator value)? checkedValidator,
+    TResult Function(SendToExternalValidatorSuccess value)? validatorSuccess,
   }) {
     return errorValueInEther?.call(this);
   }
@@ -1753,12 +2172,16 @@ class _$SendToExternalErrorValueInEther
     TResult Function(sendToExternalStateInitial value)? initial,
     TResult Function(sendToExternalDone value)? done,
     TResult Function(SendToExternalLoading value)? loading,
-    TResult Function(getTokenBalance value)? getBalance,
+    TResult Function(GetTokenBalanceSuccess value)? getBalance,
     TResult Function(sendToExternalSuccess value)? success,
-    TResult Function(getTokenFail value)? fail,
+    TResult Function(SendToExternalFailed value)? fail,
     TResult Function(SendToExternalCalculatorFee value)? calculatorFee,
+    TResult Function(SendToExternalCalculatorFeeSuccess value)?
+        calculatorFeeSuccess,
     TResult Function(SendToExternalErrorToAddress value)? errorToAddress,
     TResult Function(SendToExternalErrorValueInEther value)? errorValueInEther,
+    TResult Function(SendToExternalCheckedValidator value)? checkedValidator,
+    TResult Function(SendToExternalValidatorSuccess value)? validatorSuccess,
     required TResult orElse(),
   }) {
     if (errorValueInEther != null) {
@@ -1776,4 +2199,376 @@ abstract class SendToExternalErrorValueInEther implements SendToExternalState {
   @JsonKey(ignore: true)
   _$$SendToExternalErrorValueInEtherCopyWith<_$SendToExternalErrorValueInEther>
       get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$SendToExternalCheckedValidatorCopyWith<$Res> {
+  factory _$$SendToExternalCheckedValidatorCopyWith(
+          _$SendToExternalCheckedValidator value,
+          $Res Function(_$SendToExternalCheckedValidator) then) =
+      __$$SendToExternalCheckedValidatorCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$SendToExternalCheckedValidatorCopyWithImpl<$Res>
+    extends _$SendToExternalStateCopyWithImpl<$Res>
+    implements _$$SendToExternalCheckedValidatorCopyWith<$Res> {
+  __$$SendToExternalCheckedValidatorCopyWithImpl(
+      _$SendToExternalCheckedValidator _value,
+      $Res Function(_$SendToExternalCheckedValidator) _then)
+      : super(_value, (v) => _then(v as _$SendToExternalCheckedValidator));
+
+  @override
+  _$SendToExternalCheckedValidator get _value =>
+      super._value as _$SendToExternalCheckedValidator;
+}
+
+/// @nodoc
+
+class _$SendToExternalCheckedValidator
+    with DiagnosticableTreeMixin
+    implements SendToExternalCheckedValidator {
+  const _$SendToExternalCheckedValidator();
+
+  @override
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+    return 'SendToExternalState.checkedValidator()';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(
+        DiagnosticsProperty('type', 'SendToExternalState.checkedValidator'));
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$SendToExternalCheckedValidator);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(bool isLoading) initial,
+    required TResult Function(SendToExternalEntity entity) done,
+    required TResult Function() loading,
+    required TResult Function(double balance) getBalance,
+    required TResult Function() success,
+    required TResult Function(String msg) fail,
+    required TResult Function(int fee) calculatorFee,
+    required TResult Function() calculatorFeeSuccess,
+    required TResult Function(String msg) errorToAddress,
+    required TResult Function(String msg) errorValueInEther,
+    required TResult Function() checkedValidator,
+    required TResult Function() validatorSuccess,
+  }) {
+    return checkedValidator();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult Function(bool isLoading)? initial,
+    TResult Function(SendToExternalEntity entity)? done,
+    TResult Function()? loading,
+    TResult Function(double balance)? getBalance,
+    TResult Function()? success,
+    TResult Function(String msg)? fail,
+    TResult Function(int fee)? calculatorFee,
+    TResult Function()? calculatorFeeSuccess,
+    TResult Function(String msg)? errorToAddress,
+    TResult Function(String msg)? errorValueInEther,
+    TResult Function()? checkedValidator,
+    TResult Function()? validatorSuccess,
+  }) {
+    return checkedValidator?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(bool isLoading)? initial,
+    TResult Function(SendToExternalEntity entity)? done,
+    TResult Function()? loading,
+    TResult Function(double balance)? getBalance,
+    TResult Function()? success,
+    TResult Function(String msg)? fail,
+    TResult Function(int fee)? calculatorFee,
+    TResult Function()? calculatorFeeSuccess,
+    TResult Function(String msg)? errorToAddress,
+    TResult Function(String msg)? errorValueInEther,
+    TResult Function()? checkedValidator,
+    TResult Function()? validatorSuccess,
+    required TResult orElse(),
+  }) {
+    if (checkedValidator != null) {
+      return checkedValidator();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(sendToExternalStateInitial value) initial,
+    required TResult Function(sendToExternalDone value) done,
+    required TResult Function(SendToExternalLoading value) loading,
+    required TResult Function(GetTokenBalanceSuccess value) getBalance,
+    required TResult Function(sendToExternalSuccess value) success,
+    required TResult Function(SendToExternalFailed value) fail,
+    required TResult Function(SendToExternalCalculatorFee value) calculatorFee,
+    required TResult Function(SendToExternalCalculatorFeeSuccess value)
+        calculatorFeeSuccess,
+    required TResult Function(SendToExternalErrorToAddress value)
+        errorToAddress,
+    required TResult Function(SendToExternalErrorValueInEther value)
+        errorValueInEther,
+    required TResult Function(SendToExternalCheckedValidator value)
+        checkedValidator,
+    required TResult Function(SendToExternalValidatorSuccess value)
+        validatorSuccess,
+  }) {
+    return checkedValidator(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(sendToExternalStateInitial value)? initial,
+    TResult Function(sendToExternalDone value)? done,
+    TResult Function(SendToExternalLoading value)? loading,
+    TResult Function(GetTokenBalanceSuccess value)? getBalance,
+    TResult Function(sendToExternalSuccess value)? success,
+    TResult Function(SendToExternalFailed value)? fail,
+    TResult Function(SendToExternalCalculatorFee value)? calculatorFee,
+    TResult Function(SendToExternalCalculatorFeeSuccess value)?
+        calculatorFeeSuccess,
+    TResult Function(SendToExternalErrorToAddress value)? errorToAddress,
+    TResult Function(SendToExternalErrorValueInEther value)? errorValueInEther,
+    TResult Function(SendToExternalCheckedValidator value)? checkedValidator,
+    TResult Function(SendToExternalValidatorSuccess value)? validatorSuccess,
+  }) {
+    return checkedValidator?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(sendToExternalStateInitial value)? initial,
+    TResult Function(sendToExternalDone value)? done,
+    TResult Function(SendToExternalLoading value)? loading,
+    TResult Function(GetTokenBalanceSuccess value)? getBalance,
+    TResult Function(sendToExternalSuccess value)? success,
+    TResult Function(SendToExternalFailed value)? fail,
+    TResult Function(SendToExternalCalculatorFee value)? calculatorFee,
+    TResult Function(SendToExternalCalculatorFeeSuccess value)?
+        calculatorFeeSuccess,
+    TResult Function(SendToExternalErrorToAddress value)? errorToAddress,
+    TResult Function(SendToExternalErrorValueInEther value)? errorValueInEther,
+    TResult Function(SendToExternalCheckedValidator value)? checkedValidator,
+    TResult Function(SendToExternalValidatorSuccess value)? validatorSuccess,
+    required TResult orElse(),
+  }) {
+    if (checkedValidator != null) {
+      return checkedValidator(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class SendToExternalCheckedValidator implements SendToExternalState {
+  const factory SendToExternalCheckedValidator() =
+      _$SendToExternalCheckedValidator;
+}
+
+/// @nodoc
+abstract class _$$SendToExternalValidatorSuccessCopyWith<$Res> {
+  factory _$$SendToExternalValidatorSuccessCopyWith(
+          _$SendToExternalValidatorSuccess value,
+          $Res Function(_$SendToExternalValidatorSuccess) then) =
+      __$$SendToExternalValidatorSuccessCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$SendToExternalValidatorSuccessCopyWithImpl<$Res>
+    extends _$SendToExternalStateCopyWithImpl<$Res>
+    implements _$$SendToExternalValidatorSuccessCopyWith<$Res> {
+  __$$SendToExternalValidatorSuccessCopyWithImpl(
+      _$SendToExternalValidatorSuccess _value,
+      $Res Function(_$SendToExternalValidatorSuccess) _then)
+      : super(_value, (v) => _then(v as _$SendToExternalValidatorSuccess));
+
+  @override
+  _$SendToExternalValidatorSuccess get _value =>
+      super._value as _$SendToExternalValidatorSuccess;
+}
+
+/// @nodoc
+
+class _$SendToExternalValidatorSuccess
+    with DiagnosticableTreeMixin
+    implements SendToExternalValidatorSuccess {
+  const _$SendToExternalValidatorSuccess();
+
+  @override
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+    return 'SendToExternalState.validatorSuccess()';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(
+        DiagnosticsProperty('type', 'SendToExternalState.validatorSuccess'));
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$SendToExternalValidatorSuccess);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(bool isLoading) initial,
+    required TResult Function(SendToExternalEntity entity) done,
+    required TResult Function() loading,
+    required TResult Function(double balance) getBalance,
+    required TResult Function() success,
+    required TResult Function(String msg) fail,
+    required TResult Function(int fee) calculatorFee,
+    required TResult Function() calculatorFeeSuccess,
+    required TResult Function(String msg) errorToAddress,
+    required TResult Function(String msg) errorValueInEther,
+    required TResult Function() checkedValidator,
+    required TResult Function() validatorSuccess,
+  }) {
+    return validatorSuccess();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult Function(bool isLoading)? initial,
+    TResult Function(SendToExternalEntity entity)? done,
+    TResult Function()? loading,
+    TResult Function(double balance)? getBalance,
+    TResult Function()? success,
+    TResult Function(String msg)? fail,
+    TResult Function(int fee)? calculatorFee,
+    TResult Function()? calculatorFeeSuccess,
+    TResult Function(String msg)? errorToAddress,
+    TResult Function(String msg)? errorValueInEther,
+    TResult Function()? checkedValidator,
+    TResult Function()? validatorSuccess,
+  }) {
+    return validatorSuccess?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(bool isLoading)? initial,
+    TResult Function(SendToExternalEntity entity)? done,
+    TResult Function()? loading,
+    TResult Function(double balance)? getBalance,
+    TResult Function()? success,
+    TResult Function(String msg)? fail,
+    TResult Function(int fee)? calculatorFee,
+    TResult Function()? calculatorFeeSuccess,
+    TResult Function(String msg)? errorToAddress,
+    TResult Function(String msg)? errorValueInEther,
+    TResult Function()? checkedValidator,
+    TResult Function()? validatorSuccess,
+    required TResult orElse(),
+  }) {
+    if (validatorSuccess != null) {
+      return validatorSuccess();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(sendToExternalStateInitial value) initial,
+    required TResult Function(sendToExternalDone value) done,
+    required TResult Function(SendToExternalLoading value) loading,
+    required TResult Function(GetTokenBalanceSuccess value) getBalance,
+    required TResult Function(sendToExternalSuccess value) success,
+    required TResult Function(SendToExternalFailed value) fail,
+    required TResult Function(SendToExternalCalculatorFee value) calculatorFee,
+    required TResult Function(SendToExternalCalculatorFeeSuccess value)
+        calculatorFeeSuccess,
+    required TResult Function(SendToExternalErrorToAddress value)
+        errorToAddress,
+    required TResult Function(SendToExternalErrorValueInEther value)
+        errorValueInEther,
+    required TResult Function(SendToExternalCheckedValidator value)
+        checkedValidator,
+    required TResult Function(SendToExternalValidatorSuccess value)
+        validatorSuccess,
+  }) {
+    return validatorSuccess(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(sendToExternalStateInitial value)? initial,
+    TResult Function(sendToExternalDone value)? done,
+    TResult Function(SendToExternalLoading value)? loading,
+    TResult Function(GetTokenBalanceSuccess value)? getBalance,
+    TResult Function(sendToExternalSuccess value)? success,
+    TResult Function(SendToExternalFailed value)? fail,
+    TResult Function(SendToExternalCalculatorFee value)? calculatorFee,
+    TResult Function(SendToExternalCalculatorFeeSuccess value)?
+        calculatorFeeSuccess,
+    TResult Function(SendToExternalErrorToAddress value)? errorToAddress,
+    TResult Function(SendToExternalErrorValueInEther value)? errorValueInEther,
+    TResult Function(SendToExternalCheckedValidator value)? checkedValidator,
+    TResult Function(SendToExternalValidatorSuccess value)? validatorSuccess,
+  }) {
+    return validatorSuccess?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(sendToExternalStateInitial value)? initial,
+    TResult Function(sendToExternalDone value)? done,
+    TResult Function(SendToExternalLoading value)? loading,
+    TResult Function(GetTokenBalanceSuccess value)? getBalance,
+    TResult Function(sendToExternalSuccess value)? success,
+    TResult Function(SendToExternalFailed value)? fail,
+    TResult Function(SendToExternalCalculatorFee value)? calculatorFee,
+    TResult Function(SendToExternalCalculatorFeeSuccess value)?
+        calculatorFeeSuccess,
+    TResult Function(SendToExternalErrorToAddress value)? errorToAddress,
+    TResult Function(SendToExternalErrorValueInEther value)? errorValueInEther,
+    TResult Function(SendToExternalCheckedValidator value)? checkedValidator,
+    TResult Function(SendToExternalValidatorSuccess value)? validatorSuccess,
+    required TResult orElse(),
+  }) {
+    if (validatorSuccess != null) {
+      return validatorSuccess(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class SendToExternalValidatorSuccess implements SendToExternalState {
+  const factory SendToExternalValidatorSuccess() =
+      _$SendToExternalValidatorSuccess;
 }
