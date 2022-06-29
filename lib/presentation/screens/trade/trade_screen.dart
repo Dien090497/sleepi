@@ -115,7 +115,8 @@ class _TradeScreenState extends State<TradeScreen> {
                                           keyText: LocaleKeys.balance,
                                           style: TextStyles.lightGrey12),
                                       SFText(
-                                        keyText: ': $balance',
+                                        keyText:
+                                            ': ${balance.toStringAsFixed(6)}',
                                         style: TextStyles.lightGrey12,
                                       ),
                                     ],
@@ -136,7 +137,6 @@ class _TradeScreenState extends State<TradeScreen> {
                                             onChanged: (value) {
                                               if (value.isNotEmpty) {
                                                 setState(() {
-                                                  valueController.text = value;
                                                   isDisabled = false;
                                                 });
                                               }
@@ -159,7 +159,10 @@ class _TradeScreenState extends State<TradeScreen> {
                                                   borderColor: AppColors.blue,
                                                   onPressed: () {
                                                     valueController.text =
-                                                        '${indexFrom == 0 ? balance - balance * 0.1 : balance}';
+                                                        (indexFrom == 0
+                                                                ? balance - 0.01
+                                                                : balance)
+                                                            .toStringAsFixed(6);
                                                     isDisabled = false;
                                                     setState(() {});
                                                   }),
@@ -235,7 +238,7 @@ class _TradeScreenState extends State<TradeScreen> {
                                       ),
                                       SFText(
                                           keyText:
-                                              ' (${LocaleKeys.estimate.tr()}) $indexTo',
+                                              ' (${LocaleKeys.estimate.tr()})',
                                           style: TextStyles.lightGrey14),
                                     ],
                                   ),
@@ -263,8 +266,17 @@ class _TradeScreenState extends State<TradeScreen> {
                                             }
                                             indexTo = getIndexAddress(
                                                 selectItem['value'].toString());
+                                            cubit.getBalanceToken(Const
+                                                .tokens[indexFrom]['address']
+                                                .toString());
+                                            valueController.text = '';
                                             log("message $indexFrom $indexTo");
                                           });
+                                          Future.delayed(
+                                            const Duration(milliseconds: 100),
+                                            () => firstToken.currentState
+                                                ?.changeSelectedItem(),
+                                          );
                                         },
                                       ),
                                     ],
@@ -294,6 +306,15 @@ class _TradeScreenState extends State<TradeScreen> {
                                     .toString(),
                                 addressTo:
                                     Const.tokens[indexTo]['address'].toString(),
+                                onSwap: () {
+                                  cubit.swapToken(
+                                      double.parse(
+                                          valueController.text.toString()),
+                                      Const.tokens[indexFrom]['address']
+                                          .toString(),
+                                      Const.tokens[indexTo]['address']
+                                          .toString());
+                                },
                               ));
                         },
                       ),

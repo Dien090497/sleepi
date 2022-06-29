@@ -1,52 +1,55 @@
 library cool_dropdown;
 
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:cool_dropdown/utils/animation_util.dart';
 import 'package:cool_dropdown/utils/extension_util.dart';
 import 'package:cool_dropdown/drop_down_body.dart';
 import 'package:slee_fi/common/extensions/string_x.dart';
 
+
 class CoolDropdown extends StatefulWidget {
-  List dropdownList;
-  Function onChange;
-  Function? onOpen;
-  String placeholder;
+  final List dropdownList;
+  final Function onChange;
+  final Function? onOpen;
+  final String placeholder;
   late Map defaultValue;
-  bool isTriangle;
-  bool isAnimation;
-  bool isResultIconLabel;
-  bool isResultLabel;
-  bool isDropdownLabel; // late
-  bool resultIconRotation;
+  final bool isTriangle;
+  final bool isAnimation;
+  final bool isResultIconLabel;
+  final bool isResultLabel;
+  final bool isDropdownLabel; // late
+  final bool resultIconRotation;
   late Widget resultIcon;
-  double resultIconRotationValue;
+  final double resultIconRotationValue;
 
   // size
-  double resultWidth;
-  double resultHeight;
-  double? dropdownWidth; // late
-  double dropdownHeight; // late
-  double dropdownItemHeight;
-  double triangleWidth;
-  double triangleHeight;
-  double iconSize;
+  final double resultWidth;
+  final double resultHeight;
+  final double? dropdownWidth; // late
+  final double dropdownHeight; // late
+  final double dropdownItemHeight;
+  final double triangleWidth;
+  final double triangleHeight;
+  final double iconSize;
 
   // align
-  Alignment resultAlign;
-  String dropdownAlign; // late
-  Alignment dropdownItemAlign;
-  String triangleAlign;
-  double triangleLeft;
-  bool dropdownItemReverse;
-  bool resultReverse;
-  MainAxisAlignment resultMainAxis;
-  MainAxisAlignment dropdownItemMainAxis;
+  final Alignment resultAlign;
+  final String dropdownAlign; // late
+  final Alignment dropdownItemAlign;
+  final String triangleAlign;
+  final double triangleLeft;
+  final bool dropdownItemReverse;
+  final bool resultReverse;
+  final MainAxisAlignment resultMainAxis;
+  final MainAxisAlignment dropdownItemMainAxis;
 
   // padding
-  EdgeInsets resultPadding;
-  EdgeInsets dropdownItemPadding;
-  EdgeInsets dropdownPadding; // late
-  EdgeInsets selectedItemPadding;
+  final EdgeInsets resultPadding;
+  final EdgeInsets dropdownItemPadding;
+  final EdgeInsets dropdownPadding; // late
+  final EdgeInsets selectedItemPadding;
   final GlobalKey? globalKey;
 
   // style
@@ -59,12 +62,12 @@ class CoolDropdown extends StatefulWidget {
   late TextStyle placeholderTS;
 
   // gap
-  double gap;
-  double labelIconGap;
-  double dropdownItemGap;
-  double dropdownItemTopGap;
-  double dropdownItemBottomGap;
-  double resultIconLeftGap;
+  final double gap;
+  final double labelIconGap;
+  final double dropdownItemGap;
+  final double dropdownItemTopGap;
+  final double dropdownItemBottomGap;
+  final double resultIconLeftGap;
 
   CoolDropdown({
     Key? key,
@@ -119,7 +122,7 @@ class CoolDropdown extends StatefulWidget {
   }) : super(key: key) {
     // 기본값 셋팅
     if (defaultValue != null) {
-      print('.. $defaultValue');
+      log('.. $defaultValue');
       this.defaultValue = defaultValue;
     } else {
       this.defaultValue = {};
@@ -147,7 +150,7 @@ class CoolDropdown extends StatefulWidget {
               color: Colors.grey.withOpacity(0.1),
               spreadRadius: 1,
               blurRadius: 10,
-              offset: Offset(0, 1), // changes position of shadow
+              offset: const Offset(0, 1), // changes position of shadow
             ),
           ],
         );
@@ -160,26 +163,24 @@ class CoolDropdown extends StatefulWidget {
               color: Colors.grey.withOpacity(0.1),
               spreadRadius: 1,
               blurRadius: 10,
-              offset: Offset(0, 1),
+              offset: const Offset(0, 1),
             ),
           ],
         );
     this.selectedItemBD = selectedItemBD ??
         BoxDecoration(
-          color: Color(0XFFEFFAF0),
+          color: const Color(0XFFEFFAF0),
           borderRadius: BorderRadius.circular(10),
         );
     // text style 셋팅
     this.selectedItemTS =
-        selectedItemTS ?? TextStyle(color: Color(0xFF6FCC76), fontSize: 20);
-    this.unselectedItemTS = unselectedItemTS != null
-        ? unselectedItemTS
-        : TextStyle(
+        selectedItemTS ?? const TextStyle(color: Color(0xFF6FCC76), fontSize: 20);
+    this.unselectedItemTS = unselectedItemTS ?? const TextStyle(
             fontSize: 20,
             color: Colors.black,
           );
     this.resultTS = resultTS ??
-        TextStyle(
+        const TextStyle(
           fontSize: 20,
           color: Colors.black,
         );
@@ -187,12 +188,12 @@ class CoolDropdown extends StatefulWidget {
         TextStyle(color: Colors.grey.withOpacity(0.7), fontSize: 20);
     // Icon Container 셋팅
     this.resultIcon = resultIcon ??
-        Container(
-          width: this.iconSize,
-          height: this.iconSize,
+        SizedBox(
+          width: iconSize,
+          height: iconSize,
           child: CustomPaint(
             size: Size(
-                this.iconSize * 0.01, (this.iconSize * 0.01 * 1).toDouble()),
+                iconSize * 0.01, (iconSize * 0.01 * 1).toDouble()),
             painter: DropdownArrow(),
           ),
         );
@@ -206,7 +207,7 @@ class CoolDropdownState extends State<CoolDropdown>
     with TickerProviderStateMixin {
   GlobalKey<DropdownBodyState> dropdownBodyChild = GlobalKey();
   GlobalKey inputKey = GlobalKey();
-  Offset triangleOffset = Offset(0, 0);
+  Offset triangleOffset = const Offset(0, 0);
   late OverlayEntry _overlayEntry;
   late Map selectedItem;
   late AnimationController rotationController;
@@ -220,8 +221,8 @@ class CoolDropdownState extends State<CoolDropdown>
     if (widget.onOpen != null) {
       widget.onOpen!(isOpen);
     }
-    this._overlayEntry = this._createOverlayEntry();
-    Overlay.of(inputKey.currentContext!)!.insert(this._overlayEntry);
+    _overlayEntry = _createOverlayEntry();
+    Overlay.of(inputKey.currentContext!)!.insert(_overlayEntry);
     rotationController.forward();
   }
 
@@ -230,7 +231,7 @@ class CoolDropdownState extends State<CoolDropdown>
     if (widget.onOpen != null) {
       widget.onOpen!(isOpen);
     }
-    this._overlayEntry.remove();
+    _overlayEntry.remove();
     rotationController.reverse();
   }
 
@@ -277,7 +278,7 @@ class CoolDropdownState extends State<CoolDropdown>
             vsync: this,
             duration: au.isAnimation(
                 status: widget.isAnimation,
-                duration: Duration(milliseconds: 150)),
+                duration: const Duration(milliseconds: 150)),
           );
           textWidth = CurvedAnimation(
             parent: sizeController,
@@ -309,12 +310,12 @@ class CoolDropdownState extends State<CoolDropdown>
   void initState() {
     rotationController = AnimationController(
         duration: au.isAnimation(
-            status: widget.isAnimation, duration: Duration(milliseconds: 150)),
+            status: widget.isAnimation, duration: const Duration(milliseconds: 150)),
         vsync: this);
     sizeController = AnimationController(
         vsync: this,
         duration: au.isAnimation(
-            status: widget.isAnimation, duration: Duration(milliseconds: 150)));
+            status: widget.isAnimation, duration: const Duration(milliseconds: 150)));
     textWidth = CurvedAnimation(
       parent: sizeController,
       curve: Curves.fastOutSlowIn,
@@ -334,7 +335,7 @@ class CoolDropdownState extends State<CoolDropdown>
         parent: sizeController,
         curve: Curves.fastOutSlowIn,
       );
-      this.selectedItem = widget.defaultValue;
+      selectedItem = widget.defaultValue;
       sizeController.forward();
     });
   }
@@ -386,15 +387,13 @@ class CoolDropdownState extends State<CoolDropdown>
                                 children: [
                                   if (widget.isResultLabel)
                                     Flexible(
-                                      child: Container(
-                                        child: Text(
-                                          selectedItem['label'] ??
-                                              widget.placeholder,
-                                          overflow: TextOverflow.ellipsis,
-                                          style: selectedItem['label'] != null
-                                              ? widget.resultTS
-                                              : widget.placeholderTS,
-                                        ),
+                                      child: Text(
+                                        selectedItem['label'] ??
+                                            widget.placeholder,
+                                        overflow: TextOverflow.ellipsis,
+                                        style: selectedItem['label'] != null
+                                            ? widget.resultTS
+                                            : widget.placeholderTS,
                                       ),
                                     ),
                                   if (widget.isResultLabel)
@@ -486,9 +485,9 @@ class DropdownArrow extends CustomPainter {
     path_0.lineTo(size.width * 0.4178592, size.height * 0.7748810);
     path_0.close();
 
-    Paint paint_0_fill = Paint()..style = PaintingStyle.fill;
-    paint_0_fill.color = Colors.grey.withOpacity(0.7);
-    canvas.drawPath(path_0, paint_0_fill);
+    Paint paint0Fill = Paint()..style = PaintingStyle.fill;
+    paint0Fill.color = Colors.grey.withOpacity(0.7);
+    canvas.drawPath(path_0, paint0Fill);
   }
 
   @override

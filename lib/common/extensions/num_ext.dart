@@ -24,7 +24,9 @@ extension NumX on num {
   String get format => Decimal.parse('$this').toString();
 
   String get formatBalance {
-    var balance = (this == 0 ? 0 : this / pow(10, 18)).toString();
-    return balance.length > 5 ? '${balance.substring(0, 5)}...' : balance;
+    double balance = this == 0 ? 0 : this / pow(10, 18);
+    return balance.toStringAsFixed(6);
   }
+
+
 }

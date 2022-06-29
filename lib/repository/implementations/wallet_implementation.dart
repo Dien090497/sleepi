@@ -1,3 +1,4 @@
+import 'dart:developer';
 import 'dart:math' as math;
 import 'dart:math';
 
@@ -183,7 +184,7 @@ class WalletImplementation extends IWalletRepository {
       var walletId = _getStorageDataSource.getCurrentWalletId();
       var wallet = await _isarDataSource.getWalletAt(walletId);
       _web3DataSource.swapExactTokensForAvax(
-          wallet!.privateKey, wallet.address, contractAddress, 18, value);
+          wallet!.privateKey, wallet.address, contractAddress, value);
       return const Right(true);
     } catch (e) {
       return Left(FailureMessage('$e'));
@@ -215,8 +216,12 @@ class WalletImplementation extends IWalletRepository {
   Future<Either<Failure, bool>> swapToken(double value, String contractAddressFrom, String contractAddressTo) {
     if (contractAddressFrom == Const.tokens[0]['address']) {
       return swapAvaxToken(value, contractAddressTo);
+    }else{
+      if(contractAddressTo == Const.tokens[0]['address']){
+        return swapTokenAvax(value, contractAddressFrom);
+      }
+      return swapTokenAvax(value, contractAddressFrom);
     }
-    return swapTokenAvax(value, contractAddressFrom);
   }
 
   @override

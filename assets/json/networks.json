@@ -45,7 +45,7 @@
     "shortName": "Avalanche",
     "chainId": 43114,
     "networkId": 43114,
-    "slip44": 9005,
+    "slip44": 60,
     "explorers": [
       {
         "name": "snowtrace",
