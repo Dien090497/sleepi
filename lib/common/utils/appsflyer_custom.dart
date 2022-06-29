@@ -1,9 +1,9 @@
-
 import 'dart:developer';
 
 import 'package:appsflyer_sdk/appsflyer_sdk.dart';
 import 'package:flutter/foundation.dart';
 import 'package:injectable/injectable.dart';
+import 'package:slee_fi/common/extensions/string_x.dart';
 
 @Singleton()
 class AppFlyerCustom {
@@ -22,11 +22,9 @@ class AppFlyerCustom {
         registerOnAppOpenAttributionCallback: true,
         registerOnDeepLinkingCallback: true);
     _logEvent('iostest');
-    _appsflyerSdk.onInstallConversionData((res) {
-    });
+    _appsflyerSdk.onInstallConversionData((res) {});
 
-    _appsflyerSdk.onAppOpenAttribution((res) {
-    });
+    _appsflyerSdk.onAppOpenAttribution((res) {});
 
     _appsflyerSdk.onDeepLinking((DeepLinkResult dp) {
       switch (dp.status) {
@@ -42,19 +40,17 @@ class AppFlyerCustom {
     });
   }
 
-
-
   _logEvent(String eventName, {Map? map}) async {
-    // if (kDebugMode) {
-    //   log('event name  $eventName    data $map');
-    //   return;
-    // }
+    if (kDebugMode) {
+      'event name  $eventName    data $map'.log;
+      return;
+    }
 
     try {
       var result = await _appsflyerSdk.logEvent(eventName, map);
-      log(' result log   $result $eventName');
+      ' result log   $result $eventName'.log;
     } on Exception catch (e) {
-      log('$e');
+      '$e'.log;
     }
   }
 }

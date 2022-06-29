@@ -11,6 +11,7 @@ import 'package:slee_fi/entities/wallet_info/wallet_info_entity.dart';
 import 'package:slee_fi/models/pop_with_result.dart';
 import 'package:slee_fi/presentation/blocs/wallet/wallet_cubit.dart';
 import 'package:slee_fi/presentation/blocs/wallet/wallet_state.dart';
+import 'package:slee_fi/presentation/screens/passcode/passcode_screen.dart';
 import 'package:slee_fi/presentation/screens/setting_wallet/setting_wallet_screen.dart';
 import 'package:slee_fi/presentation/screens/wallet/widgets/tab_bar.dart';
 import 'package:slee_fi/presentation/screens/wallet/widgets/tab_spending_detail.dart';
@@ -57,26 +58,9 @@ class _WalletScreenState extends State<WalletScreen>
                 child: SFBackButton(),
               ),
               actions: [
-                BlocConsumer<WalletCubit, WalletState>(
-                  listenWhen: (previous, current) {
-                    return previous is WalletStateLoading &&
-                        current is WalletStateLoaded;
-                  },
-                  listener: (context, state) {
-                    if (state is WalletStateLoaded &&
-                        state.mnemonic.isNotEmpty) {
-                      Navigator.pushNamed(context, R.passcode).then((value) {
-                        if (value == true) {
-                          Future.delayed(
-                              const Duration(milliseconds: 200),
-                              () => Navigator.pushNamed(
-                                  context, R.settingWallet,
-                                  arguments:
-                                      SettingWalletArgument(state.mnemonic)));
-                        }
-                      });
-                    }
-                  },
+                BlocBuilder<WalletCubit, WalletState>(
+                  buildWhen: (previous, current) =>
+                      current is WalletStateLoaded,
                   builder: (context, state) => GestureDetector(
                     onTap: () async {
                       if (state is WalletStateLoaded) {
@@ -84,8 +68,8 @@ class _WalletScreenState extends State<WalletScreen>
                           _showCreateOrImportWallet();
                           return;
                         }
-                        var cubit = context.read<WalletCubit>();
-                        cubit.getMnemonic();
+                        Navigator.pushNamed(context, R.passcode,
+                            arguments: PasscodeArguments(R.settingWallet));
                       }
                     },
                     child: const Padding(

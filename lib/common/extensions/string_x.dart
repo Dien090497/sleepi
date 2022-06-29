@@ -1,5 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:eip55/eip55.dart';
+import 'package:flutter/foundation.dart';
 import 'package:path/path.dart';
 import 'package:recase/recase.dart';
 import 'package:slee_fi/common/enum/enum.dart';
@@ -19,7 +20,9 @@ extension StringX on String {
   }
 
   get log {
-    d.log(this);
+    if (kDebugMode) {
+      d.log(this);
+    }
   }
 
   String get formatAddress {
