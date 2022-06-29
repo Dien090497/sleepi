@@ -6,11 +6,13 @@ import 'package:slee_fi/common/extensions/string_x.dart';
 import 'package:slee_fi/common/routes/app_routes.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
+import 'package:slee_fi/common/utils/appsflyer_custom.dart';
 import 'package:slee_fi/common/widgets/sf_buttons.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
 import 'package:slee_fi/common/widgets/sf_textfield.dart';
 import 'package:slee_fi/common/widgets/sf_textfield_password.dart';
 import 'package:slee_fi/common/widgets/sf_textfield_text_button.dart';
+import 'package:slee_fi/di/injector.dart';
 import 'package:slee_fi/l10n/locale_keys.g.dart';
 import 'package:slee_fi/presentation/screens/enter_activation_code/widgets/checkbox_letter_widget.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -65,6 +67,7 @@ class _AccountLoginState extends State<AccountLoginWidget> {
           color: AppColors.blue,
           textStyle: TextStyles.w600WhiteSize16,
           onPressed: () {
+            getIt<AppFlyerCustom>().signIn();
             isLoginSignup
                 ? Navigator.pushNamed(context, R.enterActivationCode)
                 : Navigator.pushNamedAndRemoveUntil(
