@@ -1,5 +1,5 @@
 class AnimationUtil {
-  Duration disable = Duration(milliseconds: 0);
+  Duration disable = const Duration(milliseconds: 0);
 
   Duration isAnimation(
       {required bool status,
