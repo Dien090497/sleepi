@@ -1,19 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:slee_fi/common/extensions/string_x.dart';
 import 'package:slee_fi/common/routes/app_routes.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/widgets/background_widget.dart';
-import 'package:slee_fi/common/widgets/loading_screen.dart';
 import 'package:slee_fi/common/widgets/sf_alert_dialog.dart';
 import 'package:slee_fi/common/widgets/sf_back_button.dart';
 import 'package:slee_fi/common/widgets/sf_icon.dart';
 import 'package:slee_fi/entities/wallet_info/wallet_info_entity.dart';
-import 'package:slee_fi/l10n/locale_keys.g.dart';
 import 'package:slee_fi/models/pop_with_result.dart';
 import 'package:slee_fi/presentation/blocs/wallet/wallet_cubit.dart';
 import 'package:slee_fi/presentation/blocs/wallet/wallet_state.dart';
 import 'package:slee_fi/presentation/screens/setting_wallet/setting_wallet_screen.dart';
-import 'package:slee_fi/presentation/screens/wallet/widgets/tab_bar_icon.dart';
+import 'package:slee_fi/presentation/screens/wallet/widgets/tab_bar.dart';
 import 'package:slee_fi/presentation/screens/wallet/widgets/tab_spending_detail.dart';
 import 'package:slee_fi/presentation/screens/wallet/widgets/tab_wallet_detail.dart';
 import 'package:slee_fi/presentation/screens/wallet_creation_warning/widgets/pop_up_avalanche_wallet.dart';
@@ -35,7 +34,7 @@ class _WalletScreenState extends State<WalletScreen>
     vsync: this,
     length: 2,
     initialIndex: 0,
-    animationDuration: const Duration(milliseconds: 200),
+    animationDuration: const Duration(milliseconds: 500),
   );
 
   @override
@@ -69,11 +68,11 @@ class _WalletScreenState extends State<WalletScreen>
                       Navigator.pushNamed(context, R.passcode).then((value) {
                         if (value == true) {
                           Future.delayed(
-                            const Duration(milliseconds: 200),
-                            () => Navigator.pushNamed(context, R.settingWallet,
-                                arguments:
-                                    SettingWalletArgument(state.mnemonic)),
-                          );
+                              const Duration(milliseconds: 200),
+                              () => Navigator.pushNamed(
+                                  context, R.settingWallet,
+                                  arguments:
+                                      SettingWalletArgument(state.mnemonic)));
                         }
                       });
                     }
@@ -103,20 +102,12 @@ class _WalletScreenState extends State<WalletScreen>
               centerTitle: true,
               titleSpacing: 14,
               title: BlocBuilder<WalletCubit, WalletState>(
+                buildWhen: (previous, current) => current is WalletStateLoaded,
                 builder: (context, state) {
-                  return Container(
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(100),
-                        color: AppColors.purple.withOpacity(0.07)),
-                    child: TabBarIcon(
-                      tabController: controller,
-                      context: context,
-                      texts: const [LocaleKeys.spending, LocaleKeys.wallet],
-                      images: const [Ics.icTwoEyes, Ics.icWallet],
-                      onTap: (i) async {
-                        if (indexTap == i) {
-                          return;
-                        }
+                  return WalletTabBar(
+                      controller: controller,
+                      checkMoveNewTab: (currentIndex, i) {
+                        'check move new tab   $currentIndex $i '.log;
                         if (i == 1 ||
                             (state is WalletStateLoaded &&
                                 (state.walletInfoEntity == null ||
@@ -129,7 +120,7 @@ class _WalletScreenState extends State<WalletScreen>
                             i == 1) {
                           _showCreateOrImportWallet().then(
                               (value) => _showWarningDialog(value, context));
-                          return;
+                          return false;
                         }
 
                         if (state is WalletStateLoaded &&
@@ -139,18 +130,13 @@ class _WalletScreenState extends State<WalletScreen>
                               .pushNamed(R.passcode)
                               .then((value) {
                             if (value == true) {
-                              setState(() => indexTap = 1);
                               controller.animateTo(1);
                             }
                           });
-                          return;
+                          return false;
                         }
-
-                        setState(() => indexTap = i);
-                      },
-                      index: indexTap,
-                    ),
-                  );
+                        return true;
+                      });
                 },
               ),
             ),
@@ -160,6 +146,8 @@ class _WalletScreenState extends State<WalletScreen>
               children: [
                 const TabSpendingDetail(),
                 BlocBuilder<WalletCubit, WalletState>(
+                  buildWhen: (previous, current) =>
+                      current is WalletStateLoaded,
                   builder: (context, state) => TabWalletDetail(
                     balance: state is WalletStateLoaded &&
                             state.walletInfoEntity != null
@@ -182,11 +170,11 @@ class _WalletScreenState extends State<WalletScreen>
               ],
             ),
           ),
-          BlocBuilder<WalletCubit, WalletState>(
-            builder: (context, state) => (state is WalletStateLoading)
-                ? const LoadingScreen()
-                : const SizedBox(),
-          )
+          // BlocBuilder<WalletCubit, WalletState>(
+          //   builder: (context, state) => (state is WalletStateLoading)
+          //       ? const LoadingScreen()
+          //       : const SizedBox(),
+          // )
         ],
       ),
     );
@@ -203,7 +191,6 @@ class _WalletScreenState extends State<WalletScreen>
   _showWarningDialog(dynamic value, BuildContext context) {
     if (value is PopWithResults) {
       context.read<WalletCubit>().init();
-      setState(() => indexTap = 1);
       controller.animateTo(1);
       var cubit = context.read<WalletCubit>();
       cubit.importWallet(value.results['data'] as WalletInfoEntity);

@@ -4,6 +4,7 @@ import 'dart:developer';
 
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:slee_fi/common/extensions/string_x.dart';
 import 'package:slee_fi/di/injector.dart';
 import 'package:slee_fi/entities/token/token_entity.dart';
 import 'package:slee_fi/failures/failure.dart';
@@ -22,6 +23,7 @@ class DetailWalletCubit extends Cubit<DetailWalletState> {
   final List<TokenEntity> tokenList = [];
 
   loadCurrentWallet() async {
+    'current wallet loadding '.log;
     emit(const DetailWalletState.loading());
     final result = await _currentWalletUC.call(NoParams());
     result.fold((l) {
