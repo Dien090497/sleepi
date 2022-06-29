@@ -70,7 +70,9 @@ class ProfileWidget extends StatelessWidget {
             title: LocaleKeys.logout,
             textStyle: TextStyles.bold16Blue,
             borderColor: AppColors.blue,
-            onPressed: () {},
+            onPressed: () {
+              Navigator.pushNamedAndRemoveUntil(context, R.loginSignUp, (route) => false);
+            },
           ),
         ),
         const SizedBox(

@@ -1,4 +1,5 @@
 import 'package:easy_localization/easy_localization.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:slee_fi/common/extensions/string_x.dart';
 import 'package:slee_fi/common/routes/app_routes.dart';
@@ -10,6 +11,7 @@ import 'package:slee_fi/common/widgets/sf_textfield.dart';
 import 'package:slee_fi/common/widgets/sf_textfield_password.dart';
 import 'package:slee_fi/common/widgets/sf_textfield_text_button.dart';
 import 'package:slee_fi/l10n/locale_keys.g.dart';
+import 'package:slee_fi/presentation/screens/enter_activation_code/widgets/checkbox_letter_widget.dart';
 
 class AccountLoginWidget extends StatefulWidget {
   const AccountLoginWidget({Key? key}) : super(key: key);
@@ -52,7 +54,8 @@ class _AccountLoginState extends State<AccountLoginWidget> {
             : const SFTextFieldPassword(
                 labelText: LocaleKeys.password,
               ),
-        const SizedBox(height: 37),
+        isLoginSignup ? const CheckBoxLetterWidget() : const SizedBox(),
+        const SizedBox(height: 24),
         SFButton(
           text: isLoginSignup
               ? LocaleKeys.signup.tr()
@@ -76,22 +79,37 @@ class _AccountLoginState extends State<AccountLoginWidget> {
           onPressed: () => changeStatus(),
         ),
         const SizedBox(height: 16),
-        SFText(keyText: "Registration means that you agree to STEPN's", style: TextStyles.w400lightGrey12,),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            SFTextButton(
-              text: "User Agreement",
-              textStyle: TextStyles.red12W700,
-              onPressed: () => null,
-            ),
-            SFText(keyText: "&"),
-            SFTextButton(
-              text: "User Privacy",
-              textStyle: TextStyles.red12W700,
-              onPressed: () => null,
-            ),
-          ],
+        Text.rich(
+          textAlign: TextAlign.center,
+          TextSpan(
+            text: LocaleKeys.registration_means_that_you_agree_to.tr(),
+            style: TextStyles.w400lightGrey12,
+            children: [
+              const TextSpan(text: ' '),
+               TextSpan(
+                  text: LocaleKeys.user_agreement.tr(),
+                  style: TextStyles.w400Red12,
+                  recognizer: TapGestureRecognizer()..onTap = () {
+                  // Single tapped.
+                },
+               ),
+              const TextSpan(text: ' '),
+              TextSpan(
+                  text: "&"
+                      .tr()),
+              const TextSpan(text: ' '),
+              TextSpan(
+                  text: LocaleKeys.user_privacy.tr(),
+                  style: TextStyles.w400Red12,
+                recognizer: TapGestureRecognizer()..onTap = () {
+                  // Single tapped.
+                },
+              ),
+
+              const TextSpan(text: ' '),
+
+            ],
+          ),
         ),
       ],
     );

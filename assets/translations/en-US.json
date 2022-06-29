@@ -376,5 +376,9 @@
   "effect_special": "Put positive correction to Special",
   "effect_efficiency": "Put positive correction to Efficiency",
   "effect_resilience": "Put positive correction to Resilience",
-  "successfully_copied": "Successfully Copied"
+  "successfully_copied": "Successfully Copied",
+  "news_letters" : "News Letters",
+  "registration_means_that_you_agree_to": "Registration means that you agree to SleeFi's",
+  "user_agreement": "User Agreement",
+  "user_privacy": "User Privacy"
 }

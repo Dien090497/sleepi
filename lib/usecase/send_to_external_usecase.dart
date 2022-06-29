@@ -1,5 +1,4 @@
 import 'package:dartz/dartz.dart';
-import 'package:slee_fi/entities/send_to_external/send_to_external_entity.dart';
 import 'package:slee_fi/failures/failure.dart';
 import 'package:slee_fi/repository/transaction_repository.dart';
 import 'package:slee_fi/usecase/usecase.dart';
