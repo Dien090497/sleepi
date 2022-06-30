@@ -32,4 +32,6 @@ enum ItemType {
   const ItemType(this.name, this.image, this.effect);
 }
 
+enum  NetWorkEnum { mainNet, testNet }
+
 

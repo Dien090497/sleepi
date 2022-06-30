@@ -9,6 +9,7 @@ import 'package:slee_fi/common/widgets/sf_card.dart';
 import 'package:slee_fi/common/widgets/sf_list_tile.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
 import 'package:slee_fi/l10n/locale_keys.g.dart';
+import 'package:slee_fi/presentation/screens/setting/widgets/modal_multi_chain_switch.dart';
 import 'package:slee_fi/presentation/screens/setting/widgets/modal_pop_up_language.dart';
 
 class GeneralWidget extends StatelessWidget {
@@ -58,13 +59,13 @@ class GeneralWidget extends StatelessWidget {
                     context, 0.5, const ModalPopUpLanguage()),
               ),
               divider,
-              // SFListTile(
-              //   text: LocaleKeys.multi_chain_switch,
-              //   trailing: icon,
-              //   onPressed: () => SFModalBottomSheet.show(
-              //       context, 0.5, const ModalMultiChainSwitch()),
-              // ),
-              // divider,
+              SFListTile(
+                text: LocaleKeys.multi_chain_switch,
+                trailing: icon,
+                onPressed: () => SFModalBottomSheet.show(
+                    context, 0.5, const ModalMultiChainSwitch()),
+              ),
+              divider,
               SFListTile(
                 text: LocaleKeys.version,
                 trailing:
