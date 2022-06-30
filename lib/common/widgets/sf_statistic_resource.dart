@@ -1,20 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:slee_fi/common/extensions/string_x.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
 import 'package:slee_fi/common/widgets/sf_icon.dart';
+import 'package:slee_fi/entities/token/token_entity.dart';
+import 'package:slee_fi/presentation/blocs/global_wallet/global_wallet_cubit.dart';
+import 'package:slee_fi/presentation/blocs/global_wallet/global_wallet_state.dart';
 import 'package:slee_fi/resources/resources.dart';
 
 class SFStatisticResource extends StatelessWidget {
-  const SFStatisticResource({
-    Key? key,
-    required this.valueSliver,
-    required this.valueGold,
-    required this.valueSolana,
-  }) : super(key: key);
-
-  final double valueSliver;
-  final double valueGold;
-  final double valueSolana;
+  const SFStatisticResource({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -24,35 +20,43 @@ class SFStatisticResource extends StatelessWidget {
         border: Border.all(width: 1, color: Colors.white.withOpacity(0.15)),
         borderRadius: BorderRadius.circular(100),
       ),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        children: [
-          const SizedBox(
-            width: 4,
-          ),
-          ItemResource(
-            value: valueSliver,
-            url: Ics.icSlgt,
-          ),
-          const SizedBox(
-            width: 16,
-          ),
-          ItemResource(
-            value: valueGold,
-            url: Ics.icSlft,
-          ),
-          const SizedBox(
-            width: 16,
-          ),
-          ItemResource(
-            value: valueSolana,
-            url: Ics.icSolana,
-          ),
-          const SizedBox(
-            width: 12,
-          ),
-          const SFIcon(Ics.icSolanaCircle),
-        ],
+      child: BlocBuilder<GlobalWalletCubit, GlobalWalletState>(
+        builder: (context, state) {
+          double valueSliver = 0;
+          double valueGold = 0;
+          double valueSolana = 0;
+          final tokenList = <TokenEntity>[];
+          'state in builder   $state'.log;
+          if (state is GlobalWalletStateLoaded) {
+            tokenList.addAll(state.tokenList);
+          }
+          'state in builder   $valueSliver    $valueGold   $valueSolana '.log;
+          return Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              const SizedBox(width: 4),
+              ItemResource(
+                  value: tokenList.isNotEmpty ? tokenList[0].balance : 0,
+                  url: tokenList.isNotEmpty
+                      ? tokenList[0].icon
+                      : Ics.icSlgt),
+              const SizedBox(width: 16),
+              ItemResource(
+                  value: tokenList.isNotEmpty ? tokenList[1].balance : 0,
+                  url: tokenList.isNotEmpty
+                      ? tokenList[1].icon
+                      : Ics.icSlft),
+              const SizedBox(width: 16),
+              ItemResource(
+                  value: tokenList.isNotEmpty ? tokenList[2].balance : 0,
+                  url: tokenList.isNotEmpty
+                      ? tokenList[2].icon
+                      : Ics.icSolana),
+              const SizedBox(width: 12),
+              const SFIcon(Ics.icSolanaCircle),
+            ],
+          );
+        },
       ),
     );
   }
@@ -69,14 +73,13 @@ class ItemResource extends StatelessWidget {
     return Row(
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        SvgPicture.asset(url,),
-        const SizedBox(
-          width: 4,
-        ),
+        SvgPicture.asset(url),
+        const SizedBox(width: 4),
         Text(
-          value.toStringAsFixed(2),
-          style: TextStyles.white14,
-        ),
+            value == 0
+                ? value.toStringAsFixed(2)
+                : (value / 100000000).toStringAsFixed(0),
+            style: TextStyles.white14),
       ],
     );
   }
