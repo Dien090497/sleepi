@@ -1,5 +1,6 @@
 import 'package:dartz/dartz.dart' as dartz;
 import 'package:flutter/material.dart';
+import 'package:slee_fi/common/extensions/string_x.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
 import 'package:slee_fi/common/widgets/background_widget.dart';
@@ -61,6 +62,7 @@ class _ShowSeedPhraseScreenState extends State<ShowSeedPhraseScreen> {
                                 text: "${index + 1}",
                                 trailing: SFText(
                                   keyText: hide ? "-----" : seedPhrase[index],
+                                  stringCase: StringCase.lowerCaseCase,
                                   style: TextStyles.lightGrey14,
                                 ),
                               ));
