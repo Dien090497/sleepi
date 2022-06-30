@@ -385,5 +385,7 @@
   "confirm_password": "Confirm Password",
   "genesis_beds": "Genesis Beds",
   "start_sleep_tracking": "Start Sleep Tracking?",
-  "forgot_password": "Forgot password?"
+  "forgot_password": "Forgot password?",
+  "warning_bind_wallet": "Each account can only be linked to a unique wallet address",
+  "warning": "Warning"
 }

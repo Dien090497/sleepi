@@ -388,5 +388,7 @@ abstract class  LocaleKeys {
   static const genesis_beds = 'genesis_beds';
   static const start_sleep_tracking = 'start_sleep_tracking';
   static const forgot_password = 'forgot_password';
+  static const warning_bind_wallet = 'warning_bind_wallet';
+  static const warning = 'warning';
 
 }

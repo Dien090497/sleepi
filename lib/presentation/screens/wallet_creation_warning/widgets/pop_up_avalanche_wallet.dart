@@ -2,12 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:slee_fi/common/routes/app_routes.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
+import 'package:slee_fi/common/widgets/sf_alert_dialog.dart';
 import 'package:slee_fi/common/widgets/sf_button_outlined.dart';
 import 'package:slee_fi/common/widgets/sf_buttons.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
 import 'package:slee_fi/l10n/locale_keys.g.dart';
 import 'package:slee_fi/models/pop_with_result.dart';
-import 'package:slee_fi/presentation/screens/passcode/create_passcode_screen.dart';
+
+import 'pop_up_warning_bind_wallet.dart';
 
 class PopUpAvalancheWallet extends StatelessWidget {
   const PopUpAvalancheWallet({Key? key}) : super(key: key);
@@ -32,13 +34,18 @@ class PopUpAvalancheWallet extends StatelessWidget {
                 textStyle: TextStyles.bold16Blue,
                 borderColor: AppColors.blue,
                 onPressed: () {
-                  Navigator.pushNamed(context, R.createPasscode,
-                          arguments: CreatePasscodeArguments(R.createWallet))
-                      .then((value) {
-                    if (value is PopWithResults) {
-                      Navigator.pop(context, value);
-                    }
-                  });
+                  _showWarningDialog(context).then((_) =>
+                      Navigator.pushNamed(context, R.createPasscode)
+                          .then((value) {
+                        if (value == true) {
+                          Navigator.pushNamed(context, R.createWallet)
+                              .then((value) {
+                            if (value is PopWithResults) {
+                              Navigator.pop(context, value);
+                            }
+                          });
+                        }
+                      }));
                 },
               )),
           const SizedBox(
@@ -51,15 +58,21 @@ class PopUpAvalancheWallet extends StatelessWidget {
             width: double.infinity,
             color: AppColors.blue,
             onPressed: () async {
-              Navigator.pushNamed(context, R.importWallet).then((value) {
-                if (value is PopWithResults) {
-                  Navigator.pop(context, value);
-                }
-              });
+              _showWarningDialog(context).then((value) =>
+                  Navigator.pushNamed(context, R.importWallet).then((value) {
+                    if (value is PopWithResults) {
+                      Navigator.pop(context, value);
+                    }
+                  }));
             },
           ),
         ],
       ),
     );
+  }
+
+  _showWarningDialog(BuildContext context) async {
+    await showCustomAlertDialog(context,
+        children: const PopUpWarningBindWallet());
   }
 }
