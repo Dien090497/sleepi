@@ -31,6 +31,7 @@ class _CreatePasscodeScreenState extends State<CreatePasscodeScreen> {
 
   @override
   void dispose() {
+    passCodeController.dispose();
     super.dispose();
   }
 
@@ -45,7 +46,8 @@ class _CreatePasscodeScreenState extends State<CreatePasscodeScreen> {
         listener: (context, state) {
           if (state is createPassCodeDone) {
             if (args != null) {
-              Navigator.pushNamed(context, args.route).then((results) {
+              Navigator.pushReplacementNamed(context, args.route)
+                  .then((results) {
                 if (results is PopWithResults) {
                   Navigator.of(context).pop(results);
                 }
@@ -71,9 +73,7 @@ class _CreatePasscodeScreenState extends State<CreatePasscodeScreen> {
             child: SafeArea(
               child: ListView(
                 children: [
-                  const SizedBox(
-                    height: 65,
-                  ),
+                  const SizedBox(height: 65),
                   Center(
                       child: SFText(
                           keyText: LocaleKeys.create_your_passcode,

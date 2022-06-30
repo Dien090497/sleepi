@@ -55,6 +55,7 @@ import 'package:slee_fi/presentation/screens/wallet_creation_warning/wallet_crea
 class R {
   static const String _ = '/';
   static const String loginSignUp = '${_}login_signup';
+  static const String splash = '${_}splash';
   static const String enterActivationCode = '${_}enter_activation_code';
   static const String bottomNavigation = '${_}bottom_navigation';
   static const String recycle = '${_}recycle';
@@ -111,6 +112,7 @@ class R {
 class AppRoutes {
   static final routes = {
     R.loginSignUp: (_) => const LoginSignUpScreen(),
+    R.splash: (_) => const LoginSignUpScreen(),
     R.enterActivationCode: (_) => const EnterActivationCodeScreen(),
     R.bottomNavigation: (_) =>
         const RouteAwareWidget(child: BottomNavigationScreen()),
