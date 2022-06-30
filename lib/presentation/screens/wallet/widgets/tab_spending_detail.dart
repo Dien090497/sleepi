@@ -29,9 +29,7 @@ class TabSpendingDetail extends StatelessWidget {
                   height: 19.0,
                 ),
                 const PopupInfoSpending(),
-                const SizedBox(
-                  height: 12.0,
-                ),
+                const SizedBox(height: 12.0),
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 24.0),
                   child: Column(
@@ -40,7 +38,11 @@ class TabSpendingDetail extends StatelessWidget {
                         // onTap: () => Navigator.pushNamed(context, R.staking),
                         margin: const EdgeInsets.only(top: 8),
                         child: ListTile(
-                          leading: const SFIcon(Ics.icSlft, width: 40, height: 40,),
+                          leading: const SFIcon(
+                            Ics.icSlft,
+                            width: 40,
+                            height: 40,
+                          ),
                           minLeadingWidth: 12,
                           title: SFText(
                               keyText: "SLFT",
@@ -55,7 +57,11 @@ class TabSpendingDetail extends StatelessWidget {
                       SFCard(
                         margin: const EdgeInsets.only(top: 8),
                         child: ListTile(
-                          leading: const SFIcon(Ics.icSlgt, width: 40, height: 40,),
+                          leading: const SFIcon(
+                            Ics.icSlgt,
+                            width: 40,
+                            height: 40,
+                          ),
                           minLeadingWidth: 12,
                           title: SFText(
                               keyText: "SLGT",
@@ -72,7 +78,11 @@ class TabSpendingDetail extends StatelessWidget {
                         child: ListTile(
                           leading: const Padding(
                             padding: EdgeInsets.only(left: 4.0),
-                            child: SFIcon(Ics.icAvax, width: 32, height: 32,),
+                            child: SFIcon(
+                              Ics.icAvax,
+                              width: 32,
+                              height: 32,
+                            ),
                           ),
                           minLeadingWidth: 12,
                           title: SFText(
@@ -89,9 +99,7 @@ class TabSpendingDetail extends StatelessWidget {
                     ],
                   ),
                 ),
-                const SizedBox(
-                  height: 18.0,
-                ),
+                const SizedBox(height: 18.0),
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 24),
                   child: SizedBox(
@@ -105,9 +113,7 @@ class TabSpendingDetail extends StatelessWidget {
                         },
                       )),
                 ),
-                const SizedBox(
-                  height: 25.0,
-                ),
+                const SizedBox(height: 25),
                 const SpendingDetailList(),
               ],
             ),
@@ -117,16 +123,15 @@ class TabSpendingDetail extends StatelessWidget {
             left: 24,
             right: 24,
             child: SFButton(
-              text: LocaleKeys.transfer,
-              textStyle: TextStyles.w600WhiteSize16,
-              gradient: AppColors.gradientBlueButton,
-              height: 48,
-              width: double.infinity,
-              onPressed: () {
-              Navigator.pushNamed(context, R.passcode,
-              arguments: PasscodeArguments(R.transfer));
-              }
-            ),
+                text: LocaleKeys.transfer,
+                textStyle: TextStyles.w600WhiteSize16,
+                gradient: AppColors.gradientBlueButton,
+                height: 48,
+                width: double.infinity,
+                onPressed: () {
+                  Navigator.pushNamed(context, R.passcode,
+                      arguments: PasscodeArguments(R.transfer));
+                }),
           ),
         ],
       ),
