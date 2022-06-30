@@ -49,7 +49,6 @@ class Ics {
   static const String icPlus = 'assets/icons/ic_plus.svg';
   static const String icQuestion = 'assets/icons/ic_question.svg';
   static const String icRefresh = 'assets/icons/ic_refresh.svg';
-  static const String icReload = 'assets/icons/ic_reload.svg';
   static const String icScanOutlined = 'assets/icons/ic_scan_outlined.svg';
   static const String icSetting = 'assets/icons/ic_setting.svg';
   static const String icShieldLock = 'assets/icons/ic_shield_lock.svg';
@@ -127,7 +126,6 @@ class Ics {
     icPlus,
     icQuestion,
     icRefresh,
-    icReload,
     icScanOutlined,
     icSetting,
     icShieldLock,

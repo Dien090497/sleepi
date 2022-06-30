@@ -379,6 +379,7 @@ abstract class  LocaleKeys {
   static const effect_efficiency = 'effect_efficiency';
   static const effect_resilience = 'effect_resilience';
   static const successfully_copied = 'successfully_copied';
+  static const news_letters = 'news_letters';
   static const receive_news_letters = 'receive_news_letters';
   static const registration_means_that_you_agree_to = 'registration_means_that_you_agree_to';
   static const user_agreement = 'user_agreement';
