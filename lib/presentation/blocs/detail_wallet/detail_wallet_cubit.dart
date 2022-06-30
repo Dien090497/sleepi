@@ -19,6 +19,7 @@ class DetailWalletCubit extends Cubit<DetailWalletState> {
 
   final _getBalanceForTokensUseCase = getIt<GetBalanceForTokensUseCase>();
   final List<TokenEntity> tokenList = [];
+  late ParamsBalanceOfToken params;
 
   loadCurrentWallet() async {
     'current wallet loading '.log;
@@ -30,16 +31,29 @@ class DetailWalletCubit extends Cubit<DetailWalletState> {
       log('WalletCubit on failed   ${l is FailureMessage ? l.msg : '$l'} ');
     }, (r) async {
       log('WalletCubit on success ');
-      ParamsBalanceOfToken params = ParamsBalanceOfToken(addressContract: [
-        '0x2bB8Bc1C29F34f3795661452Bf806cB5D65DF8DC',
-        '0x41Dd35f9e440ADecB9A04fA839D0be2b19722Ade',
-        '0xD9D01A9F7C810EC035C0e42cB9E80Ef44D7f8692',
-        // Mock address for test in test net
-        '0xdB051670fc5610Ffe2ec8A4471086AAa9c5529c1',
-        '0xdB051670fc5610Ffe2ec8A4471086AAa9c5529c1',
-        '0xdB051670fc5610Ffe2ec8A4471086AAa9c5529c1',
-        '0xdB051670fc5610Ffe2ec8A4471086AAa9c5529c1',
-      ], walletInfoEntity: r);
+      if (r.chainID == 43113) {
+        //TODO: Mock address for test net
+        params = ParamsBalanceOfToken(addressContract: [
+          '0x2bB8Bc1C29F34f3795661452Bf806cB5D65DF8DC',
+          '0x41Dd35f9e440ADecB9A04fA839D0be2b19722Ade',
+          '0xD9D01A9F7C810EC035C0e42cB9E80Ef44D7f8692',
+          '0xdB051670fc5610Ffe2ec8A4471086AAa9c5529c1',
+          '0xdB051670fc5610Ffe2ec8A4471086AAa9c5529c1',
+          '0xdB051670fc5610Ffe2ec8A4471086AAa9c5529c1',
+          '0xdB051670fc5610Ffe2ec8A4471086AAa9c5529c1',
+        ], walletInfoEntity: r);
+      } else {
+        //TODO: Mock address for Main net
+        params = ParamsBalanceOfToken(addressContract: [
+          '0xB97EF9Ef8734C71904D8002F8b6Bc66Dd9c48a6E',
+          '0xB97EF9Ef8734C71904D8002F8b6Bc66Dd9c48a6E',
+          '0xB97EF9Ef8734C71904D8002F8b6Bc66Dd9c48a6E',
+          '0xA90Cded6dad06dF521f22643B2cA98c068CEe866',
+          '0xA90Cded6dad06dF521f22643B2cA98c068CEe866',
+          '0xA90Cded6dad06dF521f22643B2cA98c068CEe866',
+          '0xA90Cded6dad06dF521f22643B2cA98c068CEe866',
+        ], walletInfoEntity: r);
+      }
       final result = await _getBalanceForTokensUseCase.call(params);
       result.fold((l) {
         emit(const DetailWalletState.error(
