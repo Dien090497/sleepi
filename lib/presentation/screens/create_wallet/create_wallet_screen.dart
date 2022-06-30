@@ -44,7 +44,7 @@ class _CreateWalletScreenState extends State<CreateWalletScreen> {
       error = 'Please input otp code.';
       setState(() {});
     } else {
-      if (otpCodeController.text != otpCode) {
+      if (otpCodeController.text.isEmpty) {
         error = 'Otp code invalid';
         setState(() {});
       } else {

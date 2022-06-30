@@ -72,7 +72,7 @@ class AppFlyerCustom {
     }
 
     try {
-      var result = await _appsflyerSdk.logEvent('test_$eventName', map);
+      var result = await _appsflyerSdk.logEvent(eventName, map);
       ' result log   $result $eventName'.log;
     } on Exception catch (e) {
       '$e'.log;
