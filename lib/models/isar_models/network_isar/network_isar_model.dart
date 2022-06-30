@@ -77,19 +77,18 @@ class NetworkIsarModel {
 
   factory NetworkIsarModel.fromNetwork(Network e) {
     final model = NetworkIsarModel(
-      chainId: e.chainId,
-      name: e.name,
-      chain: e.chain,
-      rpc: e.rpc,
-      faucets: e.faucets,
-      infoURL: e.infoURL,
-      shortName: e.shortName,
-      networkId: e.networkId,
-      network: e.network,
-      icon: e.icon,
-      slip44: e.slip44,
-      title: e.title,
-    );
+        chainId: e.chainId,
+        name: e.name,
+        chain: e.chain,
+        rpc: e.rpc,
+        faucets: e.faucets,
+        infoURL: e.infoURL,
+        shortName: e.shortName,
+        networkId: e.networkId,
+        network: e.network,
+        icon: e.icon,
+        slip44: e.slip44,
+        title: e.title,);
     model
       ..ens.value = EnsIsarModel.fromEns(e.ens)
       ..nativeCurrency.value = NativeCurrencyIsarModel.fromNativeCurrency(
@@ -105,19 +104,18 @@ class NetworkIsarModel {
 
   factory NetworkIsarModel.fromEntity(NetworkEntity e) {
     final model = NetworkIsarModel(
-      chainId: e.chainId,
-      name: e.name,
-      chain: e.chain,
-      rpc: e.rpc,
-      faucets: e.faucets,
-      infoURL: e.infoURL,
-      shortName: e.shortName,
-      networkId: e.networkId,
-      title: e.title,
-      slip44: e.slip44,
-      icon: e.icon,
-      network: e.network,
-    );
+        chainId: e.chainId,
+        name: e.name,
+        chain: e.chain,
+        rpc: e.rpc,
+        faucets: e.faucets,
+        infoURL: e.infoURL,
+        shortName: e.shortName,
+        networkId: e.networkId,
+        title: e.title,
+        slip44: e.slip44,
+        icon: e.icon,
+        network: e.network,);
     model
       ..nativeCurrency.value =
           NativeCurrencyIsarModel.fromEntity(e.nativeCurrency)

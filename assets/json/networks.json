@@ -23,7 +23,8 @@
         "url": "https://testnet.snowtrace.io",
         "standard": "EIP3091"
       }
-    ]
+    ],
+    "routerAddress": "0xd7f655E3376cE2D7A2b08fF01Eb3B1023191A901"
   },
   {
     "name": "Avalanche C-Chain",
@@ -45,13 +46,14 @@
     "shortName": "Avalanche",
     "chainId": 43114,
     "networkId": 43114,
-    "slip44": 9005,
+    "slip44": 60,
     "explorers": [
       {
         "name": "snowtrace",
         "url": "https://snowtrace.io",
         "standard": "EIP3091"
       }
-    ]
+    ],
+    "routerAddress": "0x60aE616a2155Ee3d9A68541Ba4544862310933d4"
   }
 ]

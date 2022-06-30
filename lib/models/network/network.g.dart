@@ -28,6 +28,7 @@ Network _$NetworkFromJson(Map<String, dynamic> json) => Network(
       explorers: (json['explorers'] as List<dynamic>?)
           ?.map((e) => Explorers.fromJson(e as Map<String, dynamic>))
           .toList(),
+      routerAddress: json['routerAddress'] as String,
     );
 
 Map<String, dynamic> _$NetworkToJson(Network instance) => <String, dynamic>{
@@ -46,4 +47,5 @@ Map<String, dynamic> _$NetworkToJson(Network instance) => <String, dynamic>{
       'slip44': instance.slip44,
       'ens': instance.ens?.toJson(),
       'explorers': instance.explorers?.map((e) => e.toJson()).toList(),
+      'routerAddress': instance.routerAddress,
     };
