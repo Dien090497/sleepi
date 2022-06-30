@@ -385,5 +385,7 @@ abstract class  LocaleKeys {
   static const user_privacy = 'user_privacy';
   static const create_password = 'create_password';
   static const confirm_password = 'confirm_password';
+  static const warning_bind_wallet = 'warning_bind_wallet';
+  static const warning = 'warning';
 
 }

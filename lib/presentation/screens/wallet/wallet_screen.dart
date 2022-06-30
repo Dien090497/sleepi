@@ -47,10 +47,11 @@ class _WalletScreenState extends State<WalletScreen>
 
   @override
   Widget build(BuildContext context) {
-    return MultiBlocProvider(providers: [
-      BlocProvider<WalletCubit>(create:(context) => walletCubit),
-      BlocProvider<DetailWalletCubit>(create:(context) => detailWalletCubit),
-    ],
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider<WalletCubit>(create: (context) => walletCubit),
+        BlocProvider<DetailWalletCubit>(create: (context) => detailWalletCubit),
+      ],
       child: Stack(
         children: [
           BackgroundWidget(
@@ -169,7 +170,7 @@ class _WalletScreenState extends State<WalletScreen>
   }
 
   _showCreateOrImportWallet() async {
-    return await showCustomAlertDialog(
+    return showCustomAlertDialog(
       context,
       barrierDismissible: false,
       children: const PopUpAvalancheWallet(),
