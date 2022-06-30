@@ -9,9 +9,9 @@ import 'package:slee_fi/presentation/screens/passcode/widgets/passcode_numpad.da
 import 'package:slee_fi/presentation/screens/passcode/widgets/pin_code_widget.dart';
 
 class ConfirmPasscodeArguments {
-  final String route;
+  final String passcode;
 
-  ConfirmPasscodeArguments(this.route);
+  ConfirmPasscodeArguments(this.passcode);
 }
 
 class ConfirmPasscodeScreen extends StatelessWidget {
@@ -44,9 +44,9 @@ class ConfirmPasscodeScreen extends StatelessWidget {
             PasscodeNumPad(
               passcodeController: passcodeController,
               onCompleted: (String passcode) {
-                if (args != null) {
-                  Navigator.pushReplacementNamed(context, args.route);
-                } else {
+                if (args != null && passcode != args.passcode) {
+                  passcodeController.clear();
+                } else if (args != null && passcode == args.passcode) {
                   Navigator.pop(context, true);
                 }
               },
