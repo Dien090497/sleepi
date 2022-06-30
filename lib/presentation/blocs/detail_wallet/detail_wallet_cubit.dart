@@ -1,5 +1,3 @@
-
-
 import 'dart:developer';
 
 import 'package:easy_localization/easy_localization.dart';
@@ -24,6 +22,7 @@ class DetailWalletCubit extends Cubit<DetailWalletState> {
 
   loadCurrentWallet() async {
     'current wallet loadding '.log;
+    await Future.delayed(const Duration(milliseconds: 500));
     emit(const DetailWalletState.loading());
     final result = await _currentWalletUC.call(NoParams());
     result.fold((l) {
@@ -43,7 +42,8 @@ class DetailWalletCubit extends Cubit<DetailWalletState> {
       ], walletInfoEntity: r);
       final result = await _getBalanceForTokensUseCase.call(params);
       result.fold((l) {
-        emit(const DetailWalletState.error(message: 'Error when get balance token'));
+        emit(const DetailWalletState.error(
+            message: 'Error when get balance token'));
       }, (values) {
         List keyList = [
           "SLFT",
@@ -63,20 +63,21 @@ class DetailWalletCubit extends Cubit<DetailWalletState> {
           Ics.icBedBoxes,
           Imgs.icItems
         ];
-        for (int i=0; i< values.length; i++) {
+        for (int i = 0; i < values.length; i++) {
           TokenEntity tokenEntity = TokenEntity(
             address: params.addressContract[i],
             displayName: keyList[i],
             name: keyList[i],
             symbol: keyList[i],
             icon: icons[i],
-            balance: values[i],);
+            balance: values[i],
+          );
           tokenList.add(tokenEntity);
         }
-        emit(DetailWalletState.success(walletInfoEntity: r, tokenList: tokenList));
+        emit(DetailWalletState.success(
+            walletInfoEntity: r, tokenList: tokenList));
       });
     });
-
 
     // result.fold((l) {
     //   emit(const DetailWalletState.empty());

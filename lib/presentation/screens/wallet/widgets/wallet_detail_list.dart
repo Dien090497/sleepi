@@ -14,7 +14,9 @@ import 'package:slee_fi/presentation/screens/wallet/layouts/transaction_detail_s
 import 'package:slee_fi/resources/resources.dart';
 
 class WalletDetailList extends StatelessWidget {
-  WalletDetailList({Key? key,}) : super(key: key);
+  WalletDetailList({
+    Key? key,
+  }) : super(key: key);
 
   final List keyList = [
     "SLFT",
@@ -48,88 +50,99 @@ class WalletDetailList extends StatelessWidget {
       padding: const EdgeInsets.only(top: 20),
       child: SafeArea(
           top: false,
-          child: BlocBuilder<DetailWalletCubit, DetailWalletState>(builder: (context, state) {
-
-            final tokenList =  [];
-            return tokenList.isEmpty
-                ? ListView.builder(
-                itemCount: keyList.length,
-                physics: const ClampingScrollPhysics(),
-                shrinkWrap: true,
-                padding: const EdgeInsets.symmetric(
-                    horizontal: 24.0, vertical: 12.0),
-                itemBuilder: (BuildContext context, int index) {
-                  return SFCard(
-                    onTap: () {
-                      if (index < 3) {
-                        Navigator.pushNamed(context, R.transactionDetail,
-                            arguments: TransactionDetailArguments(
-                              keyList[index],
-                              icons[index],
-                            ));
-                      }
-                    },
-                    child: ListTile(
-                      leading: Padding(
-                        padding: EdgeInsets.only(
-                            left: icons[index] == Ics.icAvax ? 4 : 0),
-                        child: SFIcon(
-                          icons[index],
-                          width: icons[index] == Ics.icAvax ? 32 : 40,
-                          height: icons[index] == Ics.icAvax ? 32 : 40,
-                        ),
-                      ),
-                      title: SFText(
-                          keyText: keyList[index],
-                          style: TextStyles.lightWhite16),
-                      trailing: SFText(
-                        keyText: "0.00",
-                        style: TextStyles.lightWhite16,
-                      ),
-                    ),
-                  );
-                })
-                : ListView.builder(
-                itemCount: tokenList.length,
-                physics: const ClampingScrollPhysics(),
-                shrinkWrap: true,
-                padding: const EdgeInsets.symmetric(
-                    horizontal: 24.0, vertical: 12.0),
-                itemBuilder: (BuildContext context, int index) {
-                  return SFCard(
-                    onTap: () {
-                      if (index < 3) {
-                        Navigator.pushNamed(context, R.transactionDetail,
-                            arguments: TransactionDetailArguments(
-                              tokenList[index].displayName,
-                              tokenList[index].icon,
-                            ));
-                      }
-                    },
-                    child: ListTile(
-                      leading: Padding(
-                        padding: EdgeInsets.only(
-                            left:
-                            tokenList[index].icon == Ics.icAvax ? 4 : 0),
-                        child: SFIcon(
-                          tokenList[index].icon,
-                          width:
-                          tokenList[index].icon == Ics.icAvax ? 32 : 40,
-                          height:
-                          tokenList[index].icon == Ics.icAvax ? 32 : 40,
-                        ),
-                      ),
-                      title: SFText(
-                          keyText: tokenList[index].displayName,
-                          style: TextStyles.lightWhite16),
-                      trailing: SFText(
-                        keyText: tokenList[index].balance.toStringAsFixed(2),
-                        style: TextStyles.lightWhite16,
-                      ),
-                    ),
-                  );
-                });
-          },)),
+          child: BlocBuilder<DetailWalletCubit, DetailWalletState>(
+            builder: (context, state) {
+              var cubit = context.read<DetailWalletCubit>();
+              if (state is DetailWalletStateInitial) {
+                cubit.loadCurrentWallet();
+              }
+              final tokenList = state is DetailWalletStateSuccess
+                  ? state.tokenList
+                  : cubit.tokenList;
+              return tokenList.isEmpty
+                  ? ListView.builder(
+                      itemCount: keyList.length,
+                      physics: const ClampingScrollPhysics(),
+                      shrinkWrap: true,
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 24.0, vertical: 12.0),
+                      itemBuilder: (BuildContext context, int index) {
+                        return SFCard(
+                          onTap: () {
+                            if (index < 3) {
+                              Navigator.pushNamed(context, R.transactionDetail,
+                                  arguments: TransactionDetailArguments(
+                                    keyList[index],
+                                    icons[index],
+                                  ));
+                            }
+                          },
+                          child: ListTile(
+                            leading: Padding(
+                              padding: EdgeInsets.only(
+                                  left: icons[index] == Ics.icAvax ? 4 : 0),
+                              child: SFIcon(
+                                icons[index],
+                                width: icons[index] == Ics.icAvax ? 32 : 40,
+                                height: icons[index] == Ics.icAvax ? 32 : 40,
+                              ),
+                            ),
+                            title: SFText(
+                                keyText: keyList[index],
+                                style: TextStyles.lightWhite16),
+                            trailing: SFText(
+                              keyText: "0.00",
+                              style: TextStyles.lightWhite16,
+                            ),
+                          ),
+                        );
+                      })
+                  : ListView.builder(
+                      itemCount: tokenList.length,
+                      physics: const ClampingScrollPhysics(),
+                      shrinkWrap: true,
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 24.0, vertical: 12.0),
+                      itemBuilder: (BuildContext context, int index) {
+                        return SFCard(
+                          onTap: () {
+                            if (index < 3) {
+                              Navigator.pushNamed(context, R.transactionDetail,
+                                  arguments: TransactionDetailArguments(
+                                    tokenList[index].displayName,
+                                    tokenList[index].icon,
+                                  ));
+                            }
+                          },
+                          child: ListTile(
+                            leading: Padding(
+                              padding: EdgeInsets.only(
+                                  left: tokenList[index].icon == Ics.icAvax
+                                      ? 4
+                                      : 0),
+                              child: SFIcon(
+                                tokenList[index].icon,
+                                width: tokenList[index].icon == Ics.icAvax
+                                    ? 32
+                                    : 40,
+                                height: tokenList[index].icon == Ics.icAvax
+                                    ? 32
+                                    : 40,
+                              ),
+                            ),
+                            title: SFText(
+                                keyText: tokenList[index].displayName,
+                                style: TextStyles.lightWhite16),
+                            trailing: SFText(
+                              keyText:
+                                  tokenList[index].balance.toStringAsFixed(2),
+                              style: TextStyles.lightWhite16,
+                            ),
+                          ),
+                        );
+                      });
+            },
+          )),
     );
   }
 }

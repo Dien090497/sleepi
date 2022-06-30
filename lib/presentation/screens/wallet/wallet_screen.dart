@@ -9,6 +9,7 @@ import 'package:slee_fi/common/widgets/sf_back_button.dart';
 import 'package:slee_fi/common/widgets/sf_icon.dart';
 import 'package:slee_fi/entities/wallet_info/wallet_info_entity.dart';
 import 'package:slee_fi/models/pop_with_result.dart';
+import 'package:slee_fi/presentation/blocs/detail_wallet/detail_wallet_cubit.dart';
 import 'package:slee_fi/presentation/blocs/wallet/wallet_cubit.dart';
 import 'package:slee_fi/presentation/blocs/wallet/wallet_state.dart';
 import 'package:slee_fi/presentation/screens/passcode/passcode_screen.dart';
@@ -29,7 +30,8 @@ class WalletScreen extends StatefulWidget {
 class _WalletScreenState extends State<WalletScreen>
     with SingleTickerProviderStateMixin {
   late int indexTap = 0;
-
+  final walletCubit = WalletCubit()..init();
+  final detailWalletCubit = DetailWalletCubit();
   late final TabController controller = TabController(
     vsync: this,
     length: 2,
@@ -45,8 +47,10 @@ class _WalletScreenState extends State<WalletScreen>
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider<WalletCubit>(
-      create: (context) => WalletCubit()..init(),
+    return MultiBlocProvider(providers: [
+      BlocProvider<WalletCubit>(create:(context) => walletCubit),
+      BlocProvider<DetailWalletCubit>(create:(context) => detailWalletCubit),
+    ],
       child: Stack(
         children: [
           BackgroundWidget(
@@ -65,7 +69,7 @@ class _WalletScreenState extends State<WalletScreen>
                       if (state is WalletStateLoaded) {
                         if (state.walletInfoEntity == null) {
                           _showCreateOrImportWallet().then(
-                                  (value) => _showWarningDialog(value, context));
+                              (value) => _showWarningDialog(value, context));
                           return;
                         }
                         Navigator.pushNamed(context, R.passcode,
