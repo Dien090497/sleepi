@@ -24,16 +24,17 @@ import '../datasources/local/isar/isar_datasource.dart' as _i12;
 import '../datasources/local/secure_storage.dart' as _i24;
 import '../datasources/local/shared_preference_datasource.dart' as _i26;
 import '../datasources/remote/network/web3_datasource.dart' as _i17;
-import '../repository/auth_repository.dart' as _i34;
-import '../repository/implementations/auth_implementation.dart' as _i35;
+import '../repository/auth_repository.dart' as _i35;
+import '../repository/implementations/auth_implementation.dart' as _i36;
 import '../repository/implementations/transaction_implementation.dart' as _i19;
 import '../repository/implementations/wallet_implementation.dart' as _i21;
 import '../repository/transaction_repository.dart' as _i18;
 import '../repository/wallet_repository.dart' as _i20;
-import '../usecase/create_pass_code_usecase.dart' as _i36;
-import '../usecase/get_balance_for_tokens_usecase.dart' as _i31;
-import '../usecase/get_balance_token_usecase.dart' as _i32;
-import '../usecase/get_passcode_usecase.dart' as _i37;
+import '../usecase/create_pass_code_usecase.dart' as _i37;
+import '../usecase/get_amount_out_min_usecase.dart' as _i31;
+import '../usecase/get_balance_for_tokens_usecase.dart' as _i32;
+import '../usecase/get_balance_token_usecase.dart' as _i33;
+import '../usecase/get_passcode_usecase.dart' as _i38;
 import '../usecase/login_usecase.dart' as _i13;
 import '../usecase/run_app_init_usecase.dart' as _i23;
 import '../usecase/send_to_external_usecase.dart' as _i25;
@@ -41,9 +42,9 @@ import '../usecase/swap_token_usecase.dart' as _i27;
 import '../usecase/wallet/create_wallet_usecase.dart' as _i29;
 import '../usecase/wallet/current_wallet_usecase.dart' as _i30;
 import '../usecase/wallet/first_open_wallet_session_usecase.dart' as _i28;
-import '../usecase/wallet/get_current_mnemonic_usecasse.dart' as _i33;
+import '../usecase/wallet/get_current_mnemonic_usecasse.dart' as _i34;
 import '../usecase/wallet/import_wallet_usecase.dart' as _i22;
-import 'register_module.dart' as _i38; // ignore_for_file: unnecessary_lambdas
+import 'register_module.dart' as _i39; // ignore_for_file: unnecessary_lambdas
 
 // ignore_for_file: lines_longer_than_80_chars
 /// initializes the registration of provided dependencies inside of [GetIt]
@@ -103,21 +104,23 @@ Future<_i1.GetIt> $initGetIt(_i1.GetIt get,
       () => _i29.CreateWalletUseCase(get<_i20.IWalletRepository>()));
   gh.factory<_i30.CurrentWalletUseCase>(
       () => _i30.CurrentWalletUseCase(get<_i20.IWalletRepository>()));
-  gh.factory<_i31.GetBalanceForTokensUseCase>(
-      () => _i31.GetBalanceForTokensUseCase(get<_i20.IWalletRepository>()));
-  gh.factory<_i32.GetBalanceTokenUseCase>(
-      () => _i32.GetBalanceTokenUseCase(get<_i20.IWalletRepository>()));
-  gh.factory<_i33.GetCurrentMnemonicUsecase>(
-      () => _i33.GetCurrentMnemonicUsecase(get<_i20.IWalletRepository>()));
-  gh.factory<_i34.IAuthRepository>(
-      () => _i35.AuthImplementation(get<_i24.SecureStorage>()));
-  gh.factory<_i36.CreatePassCodeUseCase>(
-      () => _i36.CreatePassCodeUseCase(get<_i34.IAuthRepository>()));
-  gh.factory<_i37.GetPassCodeUseCase>(
-      () => _i37.GetPassCodeUseCase(get<_i34.IAuthRepository>()));
+  gh.factory<_i31.GetAmountOutMinUseCase>(
+      () => _i31.GetAmountOutMinUseCase(get<_i20.IWalletRepository>()));
+  gh.factory<_i32.GetBalanceForTokensUseCase>(
+      () => _i32.GetBalanceForTokensUseCase(get<_i20.IWalletRepository>()));
+  gh.factory<_i33.GetBalanceTokenUseCase>(
+      () => _i33.GetBalanceTokenUseCase(get<_i20.IWalletRepository>()));
+  gh.factory<_i34.GetCurrentMnemonicUsecase>(
+      () => _i34.GetCurrentMnemonicUsecase(get<_i20.IWalletRepository>()));
+  gh.factory<_i35.IAuthRepository>(
+      () => _i36.AuthImplementation(get<_i24.SecureStorage>()));
+  gh.factory<_i37.CreatePassCodeUseCase>(
+      () => _i37.CreatePassCodeUseCase(get<_i35.IAuthRepository>()));
+  gh.factory<_i38.GetPassCodeUseCase>(
+      () => _i38.GetPassCodeUseCase(get<_i35.IAuthRepository>()));
   return get;
 }
 
 class _$RPCModule extends _i17.RPCModule {}
 
-class _$RegisterModule extends _i38.RegisterModule {}
+class _$RegisterModule extends _i39.RegisterModule {}

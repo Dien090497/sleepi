@@ -17,6 +17,7 @@ import 'package:slee_fi/common/widgets/sf_icon_border.dart';
 import 'package:slee_fi/common/widgets/sf_sub_app_bar.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
 import 'package:slee_fi/common/widgets/sf_textfield.dart';
+import 'package:slee_fi/cool_dropdown/cool_dropdown.dart';
 import 'package:slee_fi/l10n/locale_keys.g.dart';
 import 'package:slee_fi/presentation/blocs/trade/trade_cubit.dart';
 import 'package:slee_fi/presentation/blocs/trade/trade_state.dart';
@@ -33,11 +34,22 @@ class TradeScreen extends StatefulWidget {
 class _TradeScreenState extends State<TradeScreen> {
   bool isDisabled = true;
   late double balance = 0;
-  String tokenFrom = Const.tokens[0]["address"].toString();
-  String tokenTo = Const.tokens[Const.tokens.length - 1]["address"].toString();
-  String symbolFrom = 'AVAX';
-  String symbolTo = 'USDC';
+  int indexFrom = 0;
+  int indexTo = Const.tokens.length - 1;
+
+  final GlobalKey<CoolDropdownState> firstToken = GlobalKey();
+  final GlobalKey<CoolDropdownState> secondToken = GlobalKey();
   TextEditingController valueController = TextEditingController();
+
+  int getIndexAddress(String address) {
+    int index = -1;
+    for (int i = 0; i < Const.tokens.length; i++) {
+      if (address == Const.tokens[i]['address'].toString()) {
+        index = i;
+      }
+    }
+    return index;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -47,14 +59,14 @@ class _TradeScreenState extends State<TradeScreen> {
         listener: (BuildContext context, state) {
           if (state is swapTokenBalance) {
             balance = state.balance;
-            log("message  $balance");
             setState(() {});
           }
         },
         builder: (BuildContext context, state) {
           final cubit = context.read<TradeCubit>();
           if (state is TradeStateInitial) {
-            cubit.getBalanceToken(tokenFrom);
+            cubit
+                .getBalanceToken(Const.tokens[indexFrom]['address'].toString());
           }
           return DismissKeyboardWidget(
             child: BackgroundWidget(
@@ -147,7 +159,7 @@ class _TradeScreenState extends State<TradeScreen> {
                                                   borderColor: AppColors.blue,
                                                   onPressed: () {
                                                     valueController.text =
-                                                        '${balance - balance * 0.1}';
+                                                        '${indexFrom == 0 ? balance - balance * 0.1 : balance}';
                                                     isDisabled = false;
                                                     setState(() {});
                                                   }),
@@ -159,8 +171,10 @@ class _TradeScreenState extends State<TradeScreen> {
                                         child: Align(
                                           alignment: Alignment.centerRight,
                                           child: DropdownSelectToken(
+                                            globalKey: firstToken,
                                             width: 90,
                                             height: 36,
+                                            indexInit: indexFrom,
                                             resultPadding:
                                                 const EdgeInsets.all(0),
                                             backgroundColor:
@@ -168,12 +182,30 @@ class _TradeScreenState extends State<TradeScreen> {
                                             isResultLabel: true,
                                             tokens: Const.tokens,
                                             onChange: (selectItem) {
-                                              log("  $selectItem");
-                                              tokenFrom = selectItem["value"];
-                                              symbolFrom = selectItem["label"];
-                                              cubit.getBalanceToken(tokenFrom);
-                                              valueController.text = '';
-                                              setState(() {});
+                                              setState(() {
+                                                'run to set default value start'
+                                                    .log;
+                                                if (selectItem["value"] ==
+                                                    Const.tokens[indexTo]
+                                                        ['address']) {
+                                                  indexTo = indexFrom;
+                                                }
+                                                indexFrom = getIndexAddress(
+                                                    selectItem["value"]
+                                                        .toString());
+                                                cubit.getBalanceToken(Const
+                                                    .tokens[indexFrom]
+                                                        ['address']
+                                                    .toString());
+                                                valueController.text = '';
+                                                log("message $indexFrom $indexTo");
+                                              });
+                                              Future.delayed(
+                                                const Duration(
+                                                    milliseconds: 100),
+                                                () => secondToken.currentState
+                                                    ?.changeSelectedItem(),
+                                              );
                                             },
                                           ),
                                         ),
@@ -203,7 +235,7 @@ class _TradeScreenState extends State<TradeScreen> {
                                       ),
                                       SFText(
                                           keyText:
-                                              ' (${LocaleKeys.estimate.tr()})',
+                                              ' (${LocaleKeys.estimate.tr()}) $indexTo',
                                           style: TextStyles.lightGrey14),
                                     ],
                                   ),
@@ -214,17 +246,25 @@ class _TradeScreenState extends State<TradeScreen> {
                                     children: [
                                       const SizedBox(),
                                       DropdownSelectToken(
+                                        globalKey: secondToken,
                                         width: 90,
                                         height: 36,
-                                        indexInit: Const.tokens.length - 1,
+                                        indexInit: indexTo,
                                         resultPadding: const EdgeInsets.all(0),
                                         backgroundColor: AppColors.transparent,
                                         isResultLabel: true,
                                         tokens: Const.tokens,
                                         onChange: (selectItem) {
-                                          tokenTo = selectItem['value'];
-                                          symbolTo = selectItem['label'];
-                                          setState(() {});
+                                          setState(() {
+                                            if (selectItem['value'] ==
+                                                Const.tokens[indexFrom]
+                                                    ['address']) {
+                                              indexFrom = indexTo;
+                                            }
+                                            indexTo = getIndexAddress(
+                                                selectItem['value'].toString());
+                                            log("message $indexFrom $indexTo");
+                                          });
                                         },
                                       ),
                                     ],
@@ -244,11 +284,16 @@ class _TradeScreenState extends State<TradeScreen> {
                         onPressed: () {
                           showCustomAlertDialog(context,
                               children: PopUpConfirmTrade(
-                                value: double.parse(valueController.text.toString()),
-                                symbolFrom: symbolFrom,
-                                symbolTo: symbolTo,
-                                addressFrom: tokenFrom,
-                                addressTo: tokenTo,
+                                value: double.parse(
+                                    valueController.text.toString()),
+                                symbolFrom: Const.tokens[indexFrom]['symbol']
+                                    .toString(),
+                                symbolTo:
+                                    Const.tokens[indexTo]['symbol'].toString(),
+                                addressFrom: Const.tokens[indexFrom]['address']
+                                    .toString(),
+                                addressTo:
+                                    Const.tokens[indexTo]['address'].toString(),
                               ));
                         },
                       ),

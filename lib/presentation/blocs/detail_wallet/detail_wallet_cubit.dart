@@ -1,9 +1,8 @@
-
-
 import 'dart:developer';
 
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:slee_fi/common/extensions/string_x.dart';
 import 'package:slee_fi/di/injector.dart';
 import 'package:slee_fi/entities/token/token_entity.dart';
 import 'package:slee_fi/failures/failure.dart';
@@ -22,6 +21,8 @@ class DetailWalletCubit extends Cubit<DetailWalletState> {
   final List<TokenEntity> tokenList = [];
 
   loadCurrentWallet() async {
+    'current wallet loading '.log;
+    await Future.delayed(const Duration(milliseconds: 500));
     emit(const DetailWalletState.loading());
     final result = await _currentWalletUC.call(NoParams());
     result.fold((l) {
@@ -41,7 +42,8 @@ class DetailWalletCubit extends Cubit<DetailWalletState> {
       ], walletInfoEntity: r);
       final result = await _getBalanceForTokensUseCase.call(params);
       result.fold((l) {
-        emit(const DetailWalletState.error(message: 'Error when get balance token'));
+        emit(const DetailWalletState.error(
+            message: 'Error when get balance token'));
       }, (values) {
         List keyList = [
           "SLFT",
@@ -61,20 +63,21 @@ class DetailWalletCubit extends Cubit<DetailWalletState> {
           Ics.icBedBoxes,
           Imgs.icItems
         ];
-        for (int i=0; i< values.length; i++) {
+        for (int i = 0; i < values.length; i++) {
           TokenEntity tokenEntity = TokenEntity(
             address: params.addressContract[i],
             displayName: keyList[i],
             name: keyList[i],
             symbol: keyList[i],
             icon: icons[i],
-            balance: values[i],);
+            balance: values[i],
+          );
           tokenList.add(tokenEntity);
         }
-        emit(DetailWalletState.success(walletInfoEntity: r, tokenList: tokenList));
+        emit(DetailWalletState.success(
+            walletInfoEntity: r, tokenList: tokenList));
       });
     });
-
 
     // result.fold((l) {
     //   emit(const DetailWalletState.empty());
