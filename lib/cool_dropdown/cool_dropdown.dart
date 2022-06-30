@@ -1,3 +1,5 @@
+// ignore_for_file: must_be_immutable, prefer_const_constructors, prefer_if_null_operators, unnecessary_this, avoid_print, sized_box_for_whitespace, avoid_unnecessary_containers, non_constant_identifier_names
+
 library cool_dropdown;
 
 import 'package:flutter/material.dart';
