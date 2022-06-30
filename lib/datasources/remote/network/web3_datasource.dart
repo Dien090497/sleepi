@@ -9,9 +9,7 @@ import 'package:http/http.dart';
 import 'package:injectable/injectable.dart';
 import 'package:slee_fi/common/abi/avax.g.dart';
 import 'package:slee_fi/common/abi/erc721.g.dart';
-import 'package:slee_fi/common/abi/spending.g.dart';
 import 'package:slee_fi/common/const/const.dart';
-import 'package:slee_fi/common/contract_addresses/contract_addresses.dart';
 import 'package:slee_fi/common/extensions/num_ext.dart';
 import 'package:slee_fi/datasources/remote/network/web3_provider.dart';
 import 'package:web3dart/web3dart.dart';
@@ -216,28 +214,6 @@ class Web3DataSource {
 
   Future<TransactionInformation> getTxnByHash(String hash) =>
       _web3provider.web3client.getTransactionByHash(hash);
-
-  Spending get _spendingContract {
-    return Spending(
-        address: ContractAddresses.spending, client: _web3provider.web3client);
-  }
-
-  Future<String> depositTokenSpending(
-      {required Credentials owner,
-      required ERC20 token,
-      required int amount}) async {
-    return _spendingContract.depositToken(
-        token.self.address, BigInt.from(amount),
-        credentials: owner);
-  }
-
-  Future<String> approveSpending(Credentials owner, int value) async {
-    return slft.approve(ContractAddresses.spending, BigInt.from(value),
-        credentials: owner);
-  }
-
-  ERC20 get slft =>
-      ERC20(address: ContractAddresses.slft, client: _web3provider.web3client);
 }
 
 @module

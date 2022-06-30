@@ -11,12 +11,24 @@ abstract class IWalletRepository {
   Future<Either<Failure, WalletInfoEntity>> currentWallet();
 
   Future<Either<Failure, WalletInfoEntity>> importWallet(String mnemonic);
+
   Future<Either<Failure, double>> getBalanceToken(String contractAddress);
-  Future<Either<Failure, double>> getAmountOutMin(double value, String contractAddressFrom, String contractAddressTo);
-  Future<Either<Failure, bool>> swapToken(double value, String contractAddressFrom, String contractAddressTo);
-  Future<Either<Failure, List<double>>> getBalanceOfTokens(ParamsBalanceOfToken params);
+
+  Future<Either<Failure, double>> getAmountOutMin(
+      double value, String contractAddressFrom, String contractAddressTo);
+
+  Future<Either<Failure, bool>> swapToken(
+      double value, String contractAddressFrom, String contractAddressTo);
+
+  Future<Either<Failure, List<double>>> getBalanceOfTokens(
+      ParamsBalanceOfToken params);
+
   Future<Either<Failure, bool>> checkFirstOpenWallet();
+
   Future<Either<FailureMessage, String>> getCurrentMnemonic();
-  Future<Either<FailureMessage, NetworkIsarModel>> getCurrentNetWork(NetWorkEnum? params);
+
+  Future<Either<FailureMessage, NetworkIsarModel>> getCurrentNetWork(
+      NetWorkEnum? params);
+
   Future<Either<FailureMessage, NetworkIsarModel>> switchNetWork();
 }

@@ -29,9 +29,7 @@ class TabSpendingDetail extends StatelessWidget {
                   height: 19.0,
                 ),
                 const PopupInfoSpending(),
-                const SizedBox(
-                  height: 12.0,
-                ),
+                const SizedBox(height: 12.0),
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 24.0),
                   child: Column(
