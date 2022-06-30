@@ -7,8 +7,8 @@ import 'package:slee_fi/common/extensions/string_x.dart';
 class AppFlyerCustom {
   final AppsFlyerOptions _appsFlyerOptions = AppsFlyerOptions(
     afDevKey: 'qCWYnmVaZy4cwWWjm3RB5P',
-    appId: '',
-    showDebug: kDebugMode,
+    appId: '1623163183',
+    showDebug: true,
   );
 
   late final AppsflyerSdk _appsflyerSdk;
@@ -64,8 +64,6 @@ class AppFlyerCustom {
     }
     _logEvent('home_action_$event');
   }
-
-
 
   _logEvent(String eventName, {Map? map}) async {
     if (kDebugMode) {

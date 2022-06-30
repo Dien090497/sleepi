@@ -134,28 +134,7 @@ class _WalletScreenState extends State<WalletScreen>
               physics: const NeverScrollableScrollPhysics(),
               children: [
                 const TabSpendingDetail(),
-                BlocBuilder<WalletCubit, WalletState>(
-                  buildWhen: (previous, current) =>
-                      current is WalletStateLoaded,
-                  builder: (context, state) => TabWalletDetail(
-                    balance: state is WalletStateLoaded &&
-                            state.walletInfoEntity != null
-                        ? state.walletInfoEntity!.nativeCurrency.balance
-                        : 0,
-                    addressWallet: state is WalletStateLoaded &&
-                            state.walletInfoEntity != null
-                        ? state.walletInfoEntity!.address
-                        : '',
-                    currencySymbol: state is WalletStateLoaded &&
-                            state.walletInfoEntity != null
-                        ? state.walletInfoEntity!.nativeCurrency.symbol
-                        : '',
-                    networkName: state is WalletStateLoaded &&
-                            state.walletInfoEntity != null
-                        ? state.walletInfoEntity!.networkName
-                        : '',
-                  ),
-                ),
+                TabWalletDetail(walletCubit: walletCubit)
               ],
             ),
           ),

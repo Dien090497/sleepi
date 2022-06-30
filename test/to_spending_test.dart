@@ -5,6 +5,7 @@ import 'package:http/http.dart';
 import 'package:slee_fi/common/abi/spending.g.dart';
 import 'package:slee_fi/common/contract_addresses/contract_addresses.dart';
 import 'package:slee_fi/common/extensions/num_ext.dart';
+import 'package:slee_fi/common/extensions/string_x.dart';
 import 'package:test/test.dart';
 import 'package:web3dart/web3dart.dart';
 
@@ -23,13 +24,13 @@ void main() {
   test('Without approve', () async {
     final result =
         await spending.depositToken(slft.self.address, value, credentials: cre);
-    print(result);
+    result.log;
   });
 
   test('Approve', () async {
     final str =
         await slft.approve(spending.self.address, value, credentials: cre);
-    print(str);
+    str.log;
     // final result = await spending.depositToken(
     //     slft.self.address, BigInt.from(1 * pow(10, 18)),
     //     credentials: cre);
@@ -38,7 +39,7 @@ void main() {
 
   test('Allowance', () async {
     final allowance = await slft.allowance(cre.address, spending.self.address);
-    print('allowance ${allowance.toInt().weiToEther}' );
+    'allowance ${allowance.toInt().weiToEther}'.log;
     // final result = await spending.depositToken(
     //     slft.self.address, BigInt.from(1 * pow(10, 18)),
     //     credentials: cre);
