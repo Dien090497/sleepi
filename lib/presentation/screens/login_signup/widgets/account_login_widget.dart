@@ -58,8 +58,17 @@ class _AccountLoginState extends State<AccountLoginWidget> {
             : const SFTextFieldPassword(
           labelText: LocaleKeys.password,
         ),
-        isLoginSignup ? const CheckBoxLetterWidget() : const SizedBox(),
-        const SizedBox(height: 24),
+        isLoginSignup
+            ? const SizedBox()
+            : Align(
+              alignment: Alignment.centerRight,
+              child: SFTextButton(
+              text: LocaleKeys.forgot_password,
+              textStyle: TextStyles.w400lightGrey12,
+              onPressed: () {},
+        ),
+            ),
+         SizedBox(height: isLoginSignup ? 24: 8),
         SFButton(
           text: isLoginSignup
               ? LocaleKeys.signup.tr()
