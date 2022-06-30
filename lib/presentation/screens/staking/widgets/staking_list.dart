@@ -294,33 +294,18 @@ class StakingList extends StatelessWidget {
           ),
         ),
         const SizedBox(
-          height: 32.0,
+          height: 48.0,
         ),
-        Column(
-          children: [
-            SFButton(
-              text: "${LocaleKeys.buy.tr()} SLFT",
-              textStyle: TextStyles.boldWhite14,
-              color: AppColors.blue,
-              width: double.infinity,
-              onPressed: () {},
-            ),
-            const SizedBox(
-              height: 16.0,
-            ),
-            SizedBox(
-              height: 48,
-              child: SFButtonOutLined(
-                  title: LocaleKeys.show_contract_on_avascan,
-                  textStyle: TextStyles.bold16Blue,
-                  borderColor: AppColors.blue,
-                  onPressed: () {}),
-            ),
-            const SizedBox(
-              height: 16,
-            ),
-          ],
-        )
+        SFButton(
+          text: "${LocaleKeys.buy.tr()} SLFT",
+          textStyle: TextStyles.boldWhite14,
+          color: AppColors.blue,
+          width: double.infinity,
+          onPressed: () {},
+        ),
+        const SizedBox(
+          height: 16.0,
+        ),
       ],
     );
   }

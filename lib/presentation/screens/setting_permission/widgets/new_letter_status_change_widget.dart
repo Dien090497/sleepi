@@ -22,7 +22,7 @@ class _NewLetterStatusChangeWidgetState extends State<NewLetterStatusChangeWidge
         padding:  EdgeInsets.only(left: 8, right: 8),
         child: SFIcon(Imgs.motion, width: 24,),
       ),
-      text: LocaleKeys.news_letters,
+      text: LocaleKeys.receive_news_letters,
       trailing:  Padding(
         padding:const  EdgeInsets.only(right: 16),
         child:  SizedBox(

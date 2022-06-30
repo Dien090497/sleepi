@@ -18,7 +18,7 @@ class CreatePasswordScreen extends StatefulWidget {
 }
 
 class _CreatePasswordScreenState extends State<CreatePasswordScreen> {
-  String email = '', code = '', password = '', newPassword = '';
+  String password = '', newPassword = '';
   bool isDisabled = true;
 
   @override
@@ -49,11 +49,11 @@ class _CreatePasswordScreenState extends State<CreatePasswordScreen> {
                               height: 20,
                             ),
                             SFTextFieldPassword(
-                              labelText: LocaleKeys.your_password,
+                              labelText: LocaleKeys.new_password,
                               valueChanged: (value){
                                 password = value ;
                                 if(
-                                email.isNotEmpty && code.isNotEmpty && password.isNotEmpty && newPassword.isNotEmpty ){
+                                 password.isNotEmpty && newPassword.isNotEmpty ){
                                   setState((){
                                     isDisabled = false;
                                   });
@@ -72,7 +72,7 @@ class _CreatePasswordScreenState extends State<CreatePasswordScreen> {
                               valueChanged: (value){
                                 newPassword = value ;
                                 if(
-                                email.isNotEmpty && code.isNotEmpty && password.isNotEmpty && newPassword.isNotEmpty ){
+                               password.isNotEmpty && newPassword.isNotEmpty ){
                                   setState((){
                                     isDisabled = false;
                                   });

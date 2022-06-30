@@ -2,11 +2,12 @@ import 'dart:async';
 
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:slee_fi/common/routes/app_routes.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
+import 'package:slee_fi/common/widgets/sf_alert_dialog.dart';
 import 'package:slee_fi/common/widgets/sf_buttons.dart';
 import 'package:slee_fi/l10n/locale_keys.g.dart';
+import 'package:slee_fi/presentation/screens/home/widgets/pop_up_start_tracking.dart';
 
 class ButtonStart extends StatefulWidget {
   const ButtonStart({Key? key}) : super(key: key);
@@ -72,7 +73,13 @@ class _ButtonStartState extends State<ButtonStart> {
       height: 40,
       width: double.infinity,
       onPressed: () {
-        if (startTime == 0) Navigator.pushNamed(context, R.tracking);
+        if (startTime == 0) {
+          showCustomAlertDialog(context,
+            children:  PopUpConfirmStartTracking(
+             onPressed: () {},
+            )
+        );
+        }
       },
     );
   }

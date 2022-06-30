@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
@@ -27,7 +25,7 @@ class _PopUpConfirmSendState extends State<PopUpConfirmSend> {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => SendToExternalCubit()..init(),
+      create: (context) => SendToExternalCubit()..estimateGas(widget.toAddress, widget.valueInEther),
       child: BlocConsumer<SendToExternalCubit, SendToExternalState>(
         listener: (context, state) {
           if(state is sendToExternalSuccess){
@@ -36,8 +34,8 @@ class _PopUpConfirmSendState extends State<PopUpConfirmSend> {
             showSuccessfulDialog(context);
           }
           if (state is SendToExternalCalculatorFee) {
-            fee = ((state.fee * 50000000000) / pow(10, 18));
-            if(fee == null) {
+            fee = state.fee;
+            if(state.fee == null) {
               setState((){
                 isDisabled = true;
               });
@@ -50,10 +48,10 @@ class _PopUpConfirmSendState extends State<PopUpConfirmSend> {
         },
         builder: (context, state) {
           final cubit = context.read<SendToExternalCubit>();
-          if (state is sendToExternalStateInitial) {
-            cubit.estimateGas(widget.toAddress, widget.valueInEther);
-          }
-          return Padding(
+          // if (state is sendToExternalStateInitial) {
+          //   cubit.estimateGas(widget.toAddress, widget.valueInEther);
+          // }
+          return isDisabled == false ? Padding(
             padding: const EdgeInsets.symmetric(horizontal: 24),
             child: Column(
               children: [
@@ -148,6 +146,10 @@ class _PopUpConfirmSendState extends State<PopUpConfirmSend> {
                 )
               ],
             ),
+          )
+          : const Padding(
+            padding:  EdgeInsets.all(24.0),
+            child:  Center(child: CircularProgressIndicator(),),
           );
         },
       ),
