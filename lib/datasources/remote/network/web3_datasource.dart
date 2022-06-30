@@ -51,6 +51,7 @@ class Web3DataSource {
           /// Set và get thử chainId theo từng url
           ///
           /// Break For Loop nếu thành công
+          ///
           final chainId = await _setWeb3(url, wsUrl);
           assert(chainId.toInt() == network.chainId, "Chain Id must match");
           break;

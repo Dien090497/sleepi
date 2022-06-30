@@ -4,6 +4,7 @@ import 'dart:math';
 import 'package:dartz/dartz.dart';
 import 'package:injectable/injectable.dart';
 import 'package:slee_fi/common/const/const.dart';
+import 'package:slee_fi/common/enum/enum.dart';
 import 'package:slee_fi/datasources/local/get_storage_datasource.dart';
 import 'package:slee_fi/datasources/local/isar/isar_datasource.dart';
 import 'package:slee_fi/datasources/remote/network/web3_datasource.dart';
@@ -55,6 +56,7 @@ class WalletImplementation extends IWalletRepository {
         derivedIndex: derivedIndex,
         networkName: network.name,
         nativeCurrency: nativeCurrency!.toEntity(balance: balance),
+        chainId: network.chainId,
       ));
     } catch (e) {
       return Left(FailureMessage('$e'));
@@ -106,6 +108,7 @@ class WalletImplementation extends IWalletRepository {
           derivedIndex: derivedIndex,
           networkName: network.name,
           nativeCurrency: nativeCurrency!.toEntity(balance: balance),
+          chainId: network.chainId,
         ));
       }
       return const Left(FailureMessage('Invalid Mnemonic'));
@@ -117,9 +120,9 @@ class WalletImplementation extends IWalletRepository {
   @override
   Future<Either<Failure, WalletInfoEntity>> currentWallet() async {
     try {
-      var testNetwork = (await _isarDataSource.getAllNetwork()).first;
+      /*var testNetwork = (await _isarDataSource.getAllNetwork()).first;
       _web3DataSource.setCurrentNetwork(testNetwork);
-      _getStorageDataSource.setCurrentChainId(testNetwork.chainId);
+      _getStorageDataSource.setCurrentChainId(testNetwork.chainId);*/
       // var testNetwork = (await _isarDataSource.getAllNetwork()).last;
       // _web3DataSource.setCurrentNetwork(testNetwork);
       // _getStorageDataSource.setCurrentChainId(testNetwork.chainId);
@@ -142,6 +145,7 @@ class WalletImplementation extends IWalletRepository {
           credentials,
           networkName: network.name,
           nativeCurrency: nativeCurrency!.toEntity(balance: balance),
+          chainId: network.chainId
         ),
       );
     } catch (e) {
@@ -249,7 +253,45 @@ class WalletImplementation extends IWalletRepository {
   Future<Either<Failure, double>> getAmountOutMin(double value, String contractAddressFrom, String contractAddressTo) async {
     var walletId = _getStorageDataSource.getCurrentWalletId();
     var wallet = await _isarDataSource.getWalletAt(walletId);
-    double amount = await _web3DataSource.getAmountOutMin(wallet!.address, contractAddressFrom, contractAddressTo, value);
+    double amount = await _web3DataSource.getAmountOutMin(
+        wallet!.address, contractAddressFrom, contractAddressTo, value);
     return Right(amount);
+  }
+
+  @override
+  Future<Either<FailureMessage, NetworkIsarModel>> getCurrentNetWork(NetWorkEnum? params) async {
+    try {
+      if (params == null) {
+        final network = await _getCurrentNetwork();
+        return Right(network);
+      }
+      else {
+        if (params == NetWorkEnum.mainNet) {
+          var network = (await _isarDataSource.getAllNetwork())[1];
+          _web3DataSource.setCurrentNetwork(network);
+          _getStorageDataSource.setCurrentChainId(network.chainId);
+          final networkCurrent = await _getCurrentNetwork();
+          return Right(networkCurrent);
+        } else {
+          var testnet = (await _isarDataSource.getAllNetwork()).first;
+          _web3DataSource.setCurrentNetwork(testnet);
+          _getStorageDataSource.setCurrentChainId(testnet.chainId);
+          final networkCurrent = await _getCurrentNetwork();
+          return Right(networkCurrent);
+        }
+      }
+    } catch (e) {
+      return Left(FailureMessage('$e'));
+    }
+  }
+
+  @override
+  Future<Either<FailureMessage, NetworkIsarModel>> switchNetWork() async {
+    try {
+      final network = await _getCurrentNetwork();
+      return Right(network);
+    } catch (e) {
+      return Left(FailureMessage('$e'));
+    }
   }
 }
