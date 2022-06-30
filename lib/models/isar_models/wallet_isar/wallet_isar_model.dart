@@ -50,6 +50,7 @@ class WalletIsarModel {
     required String networkName,
     required NativeCurrencyEntity nativeCurrency,
     int? derivedIndex,
+    required int chainId,
   }) {
     assert(id != null, "Id must be assigned");
     return WalletInfoEntity(
@@ -62,6 +63,7 @@ class WalletIsarModel {
       isImported: isImported,
       image: image,
       nativeCurrency: nativeCurrency,
+      chainID: chainId,
     );
   }
 }
