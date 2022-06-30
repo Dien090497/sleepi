@@ -30,14 +30,14 @@ class DetailWalletCubit extends Cubit<DetailWalletState> {
     }, (r) async {
       log('WalletCubit on success ');
       ParamsBalanceOfToken params = ParamsBalanceOfToken(addressContract: [
-        '0xB97EF9Ef8734C71904D8002F8b6Bc66Dd9c48a6E',
-        '0x0802d66f029c46E042b74d543fC43B6705ccb4ba',
-        '0x264c1383EA520f73dd837F915ef3a732e204a493',
+        '0x2bB8Bc1C29F34f3795661452Bf806cB5D65DF8DC',
+        '0x41Dd35f9e440ADecB9A04fA839D0be2b19722Ade',
+        '0xD9D01A9F7C810EC035C0e42cB9E80Ef44D7f8692',
         // Mock address for test in test net
-        '0x5541D83EFaD1f281571B343977648B75d95cdAC2',
-        '0xb27c8941a7Df8958A1778c0259f76D1F8B711C35',
-        '0x90fBE9dfe76F6EF971c7A297641dfa397099a13e',
-        '0x6e7f5C0b9f4432716bDd0a77a3601291b9D9e985',
+        '0xdB051670fc5610Ffe2ec8A4471086AAa9c5529c1',
+        '0xdB051670fc5610Ffe2ec8A4471086AAa9c5529c1',
+        '0xdB051670fc5610Ffe2ec8A4471086AAa9c5529c1',
+        '0xdB051670fc5610Ffe2ec8A4471086AAa9c5529c1',
       ], walletInfoEntity: r);
       final result = await _getBalanceForTokensUseCase.call(params);
       result.fold((l) {

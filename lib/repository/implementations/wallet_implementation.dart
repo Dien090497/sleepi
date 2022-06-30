@@ -117,7 +117,7 @@ class WalletImplementation extends IWalletRepository {
   @override
   Future<Either<Failure, WalletInfoEntity>> currentWallet() async {
     try {
-      var testNetwork = (await _isarDataSource.getAllNetwork())[0];
+      var testNetwork = (await _isarDataSource.getAllNetwork()).first;
       _web3DataSource.setCurrentNetwork(testNetwork);
       _getStorageDataSource.setCurrentChainId(testNetwork.chainId);
       // var testNetwork = (await _isarDataSource.getAllNetwork()).last;
@@ -154,12 +154,18 @@ class WalletImplementation extends IWalletRepository {
     try {
       List<double> values = [];
       for (int i = 0; i < params.addressContract.length; i++) {
-        final erc20 = _web3DataSource.tokenFrom(params.addressContract[i]);
-        final value = await erc20.balanceOf(
-            EthereumAddress.fromHex(params.walletInfoEntity.address));
-        final decimals = await erc20.decimals();
-        final result = value / BigInt.from(math.pow(10, decimals.toInt()));
-        values.add(result);
+        if (i < 3) {
+          final erc20 = _web3DataSource.tokenFrom(params.addressContract[i]);
+          final value = await erc20.balanceOf(
+              EthereumAddress.fromHex(params.walletInfoEntity.address));
+          final decimals = await erc20.decimals();
+          final result = value / BigInt.from(math.pow(10, decimals.toInt()));
+          values.add(result);
+        } else {
+          final erc721 = _web3DataSource.nftFrom(params.addressContract[i]);
+          final value = await erc721.balanceOf(EthereumAddress.fromHex(params.walletInfoEntity.address));
+          values.add(value.toDouble());
+        }
       }
       return Right(values);
     } catch (e) {
