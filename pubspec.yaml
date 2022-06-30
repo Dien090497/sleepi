@@ -68,7 +68,7 @@ dependencies:
   appsflyer_sdk: ^6.5.2+2
   card_swiper: ^2.0.4
   safe_device: ^1.1.1
-  permission_handler: ^10.0.0
+  permission_handler: 9.2.0
 
 dev_dependencies:
   flutter_lints: ^2.0.1
