@@ -33,7 +33,7 @@ class AlarmBell extends StatelessWidget {
           const TimePicker(),
           const SizedBox(height: 16),
           Text(
-            '${LocaleKeys.range.tr()}: 06:00-09:00',
+            '${LocaleKeys.range.tr()}: 03:00-06:00',
             style: TextStyles.white16500,
           ),
           const SizedBox(height: 24),

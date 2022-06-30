@@ -14,6 +14,7 @@ import 'package:slee_fi/common/widgets/sf_logo.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
 import 'package:slee_fi/common/widgets/sf_textfield.dart';
 import 'package:slee_fi/l10n/locale_keys.g.dart';
+import 'package:slee_fi/presentation/screens/enter_activation_code/widgets/checkbox_letter_widget.dart';
 import 'package:slee_fi/presentation/screens/login_signup/widgets/login_box.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -73,14 +74,15 @@ class EnterActivationCodeScreen extends StatelessWidget {
                             }
                           },
                         )),
-                    const SizedBox(height: 20),
+                    const SizedBox(height: 12),
+                    const CheckBoxLetterWidget(),
+                    const SizedBox(height: 12),
                     SFButton(
                       text: LocaleKeys.start,
                       color: AppColors.blue,
                       textStyle: TextStyles.white1w700size16,
                       onPressed: () {
-                        Navigator.pushNamedAndRemoveUntil(
-                            context, R.bottomNavigation, (_) => false);
+                        Navigator.pushNamed(context, R.createPassword);
                       },
                       width: MediaQuery.of(context).size.width,
                     ),

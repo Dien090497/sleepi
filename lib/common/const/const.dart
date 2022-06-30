@@ -9,6 +9,7 @@ class Const {
   /// GWei
   static const double gasPrice = 1.5;
 
+  static const String sleeFiUrl = 'https://sleefi.com';
   static const String howToPlayUrl = 'https://sleefi.com/how-to-play';
   static const String linkTreeUrl = 'https://linktr.ee/sleefi';
   static const String litePaperUrl = 'https://sleefi.com/litepaper';

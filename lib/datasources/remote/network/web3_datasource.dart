@@ -180,13 +180,14 @@ class Web3DataSource {
     /// GWei
     double? gasPrice,
     int? maxGas,
-  }) =>
+  }) async =>
       _web3client!.sendTransaction(
         credentials,
         Transaction(
           to: EthereumAddress.fromHex(to),
-          gasPrice: EtherAmount.inWei(
-              BigInt.from(gasPrice?.gweiToWei ?? Const.gasPrice.gweiToWei)),
+          // gasPrice: EtherAmount.inWei(
+          //     BigInt.from(gasPrice?.gweiToWei ?? Const.gasPrice.gweiToWei)),
+          gasPrice: await _web3client?.getGasPrice(),
           maxGas: maxGas,
           value: valueInEther.etherToWei.toWeiEtherAmount,
         ),

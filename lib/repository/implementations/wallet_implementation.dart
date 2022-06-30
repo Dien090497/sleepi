@@ -117,6 +117,9 @@ class WalletImplementation extends IWalletRepository {
   @override
   Future<Either<Failure, WalletInfoEntity>> currentWallet() async {
     try {
+      var testNetwork = (await _isarDataSource.getAllNetwork())[0];
+      _web3DataSource.setCurrentNetwork(testNetwork);
+      _getStorageDataSource.setCurrentChainId(testNetwork.chainId);
       // var testNetwork = (await _isarDataSource.getAllNetwork()).last;
       // _web3DataSource.setCurrentNetwork(testNetwork);
       // _getStorageDataSource.setCurrentChainId(testNetwork.chainId);

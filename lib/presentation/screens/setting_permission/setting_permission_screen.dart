@@ -9,6 +9,7 @@ import 'package:slee_fi/l10n/locale_keys.g.dart';
 import 'package:slee_fi/presentation/screens/setting_permission/widgets/apple_health_status_change_widget.dart';
 import 'package:slee_fi/presentation/screens/setting_permission/widgets/microphone_status_change_widget.dart';
 import 'package:slee_fi/presentation/screens/setting_permission/widgets/motion_data_status_change_widget.dart';
+import 'package:slee_fi/presentation/screens/setting_permission/widgets/new_letter_status_change_widget.dart';
 import 'package:slee_fi/presentation/screens/setting_permission/widgets/notification_status_change_widget.dart';
 import 'package:slee_fi/resources/resources.dart';
 
@@ -59,8 +60,9 @@ class SettingPermissionScreen extends StatelessWidget {
                   divider,
                   const MotionDataStatusChangeWidget(),
                   divider,
+                  const NewLetterStatusChangeWidget(),
+                  divider,
                   const NotificationStatusChangeWidget(),
-
                 ],
               ),
             ),

@@ -58,7 +58,7 @@ class SFButtonOutLined extends StatelessWidget {
                 Theme.of(context)
                     .textTheme
                     .button
-                    ?.copyWith(color: AppColors.primary),
+                    ?.copyWith(color: AppColors.black),
           ),
         ],
       ),

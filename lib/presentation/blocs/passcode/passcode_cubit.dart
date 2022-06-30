@@ -6,31 +6,29 @@ import 'package:slee_fi/usecase/create_pass_code_usecase.dart';
 import 'package:slee_fi/usecase/get_passcode_usecase.dart';
 
 class PasscodeCubit extends Cubit<PasscodeState> {
-  PasscodeCubit()
-      : super(const PasscodeState.initial());
+  PasscodeCubit() : super(const PasscodeState.initial());
 
   final _createPassCodeUC = getIt<CreatePassCodeUseCase>();
-  final _passcode = getIt<GetPassCodeUseCase>();
+  final _getPasscode = getIt<GetPassCodeUseCase>();
 
-  void init(){
+  void init() {
     emit(const PasscodeState.initial());
   }
-
 
   Future<void> checkPassCode(String pass) async {
     final currentState = state;
     if (currentState is PasscodeStateInitial) {
-      final result = await _passcode.call(pass);
+      final result = await _getPasscode.call(pass);
 
       result.fold(
-            (l) {
+        (l) {
           emit(PasscodeState.error(l is FailureMessage ? l.msg : '$l'));
           emit(currentState.copyWith(isLoading: false));
         },
-            (success) {
+        (success) {
           if (success) {
             emit(const PasscodeState.valid());
-          }else{
+          } else {
             emit(const PasscodeState.inValid());
           }
         },

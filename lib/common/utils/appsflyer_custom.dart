@@ -5,21 +5,22 @@ import 'package:slee_fi/common/extensions/string_x.dart';
 
 @Singleton()
 class AppFlyerCustom {
-  AppsFlyerOptions appsFlyerOptions = AppsFlyerOptions(
-    afDevKey: 'Be7KEPxvVdSNz26dG7f79B',
-    appId: '1623163183',
+  final AppsFlyerOptions _appsFlyerOptions = AppsFlyerOptions(
+    afDevKey: 'qCWYnmVaZy4cwWWjm3RB5P',
+    appId: '',
     showDebug: kDebugMode,
-    disableAdvertisingIdentifier: true,
   );
 
-  late final AppsflyerSdk _appsflyerSdk = AppsflyerSdk(appsFlyerOptions);
+  late final AppsflyerSdk _appsflyerSdk;
 
   init() async {
+    _appsflyerSdk = AppsflyerSdk(_appsFlyerOptions);
+    'init appsflyer '.log;
     await _appsflyerSdk.initSdk(
         registerConversionDataCallback: true,
         registerOnAppOpenAttributionCallback: true,
         registerOnDeepLinkingCallback: true);
-    _logEvent('iostest');
+
     _appsflyerSdk.onInstallConversionData((res) {});
 
     _appsflyerSdk.onAppOpenAttribution((res) {});
@@ -37,6 +38,34 @@ class AppFlyerCustom {
       }
     });
   }
+
+  signIn() {
+    _logEvent('sign_in');
+  }
+
+  homeAction(int index) {
+    var event = '';
+    switch (index) {
+      case 0:
+        event = 'home';
+        break;
+      case 1:
+        event = 'gacha';
+        break;
+      case 2:
+        event = 'list';
+        break;
+      case 3:
+        event = 'chart';
+        break;
+      case 4:
+        event = 'market';
+        break;
+    }
+    _logEvent('home_action_$event');
+  }
+
+
 
   _logEvent(String eventName, {Map? map}) async {
     if (kDebugMode) {

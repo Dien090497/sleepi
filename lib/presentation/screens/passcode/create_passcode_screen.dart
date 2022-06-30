@@ -68,9 +68,7 @@ class _CreatePasscodeScreenState extends State<CreatePasscodeScreen> {
             child: SafeArea(
               child: ListView(
                 children: [
-                  const SizedBox(
-                    height: 65,
-                  ),
+                  const SizedBox(height: 65),
                   Center(
                       child: SFText(
                           keyText: LocaleKeys.create_your_passcode,

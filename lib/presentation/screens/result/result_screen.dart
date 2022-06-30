@@ -28,7 +28,9 @@ class _ResultScreenState extends State<ResultScreen> {
           backgroundColor: AppColors.transparent,
           appBar: SFAppBar(
             context: context,
+            disableLeading: true,
             title: LocaleKeys.result,
+            centerTitle: true,
             textStyle: TextStyles.bold18LightWhite,
           ),
           body: SafeArea(
@@ -80,8 +82,17 @@ class _ResultScreenState extends State<ResultScreen> {
                     ),
                     const SFLabelValue(
                         label: LocaleKeys.sleep_quality, value: '99/100'),
+                    const SizedBox(height: 32,),
+                    SFButton(
+                      text: LocaleKeys.return_to_home,
+                      textStyle: TextStyles.w600WhiteSize16,
+                      gradient: AppColors.gradientBlueButton,
+                      width: double.infinity,
+                      onPressed: () {
+                        Navigator.popUntil(context, (r) => r.settings.name == R.bottomNavigation);
+                      },),
                     const SizedBox(
-                      height: 92,
+                      height: 100,
                     ),
                   ],
                 ),

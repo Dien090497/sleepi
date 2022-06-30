@@ -47,15 +47,15 @@ class StakingList extends StatelessWidget {
                 children: [
                   Expanded(
                       child: SFText(
-                    keyText: "xxxxxx SLFT",
-                    style: TextStyles.w700WhiteSize24,
-                  )),
+                        keyText: "xxxxxx SLFT",
+                        style: TextStyles.w700WhiteSize24,
+                      )),
                   Expanded(
                       child: SFText(
-                    keyText: "(=xxxxxx USD)",
-                    style: TextStyles.w400White14,
-                    textAlign: TextAlign.end,
-                  ))
+                        keyText: "(=xxxxxx USD)",
+                        style: TextStyles.w400White14,
+                        textAlign: TextAlign.end,
+                      ))
                 ],
               ),
             ],
@@ -168,9 +168,9 @@ class StakingList extends StatelessWidget {
                 children: [
                   Expanded(
                       child: SFText(
-                    keyText: LocaleKeys.your_token_earned.tr(args: ['SLFT']),
-                    style: TextStyles.lightWhite16,
-                  )),
+                        keyText: LocaleKeys.your_token_earned.tr(args: ['SLFT']),
+                        style: TextStyles.lightWhite16,
+                      )),
                   Row(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
@@ -199,9 +199,9 @@ class StakingList extends StatelessWidget {
                 children: [
                   Expanded(
                       child: SFText(
-                    keyText: LocaleKeys.your_staked_amount,
-                    style: TextStyles.lightWhite16,
-                  )),
+                        keyText: LocaleKeys.your_staked_amount,
+                        style: TextStyles.lightWhite16,
+                      )),
                   Row(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
@@ -230,10 +230,10 @@ class StakingList extends StatelessWidget {
                 children: [
                   Expanded(
                       child: SFText(
-                    keyText: LocaleKeys.apr,
-                    style: TextStyles.lightWhite16,
-                    stringCase: StringCase.upperCase,
-                  )),
+                        keyText: LocaleKeys.apr,
+                        style: TextStyles.lightWhite16,
+                        stringCase: StringCase.upperCase,
+                      )),
                   SFText(
                     keyText: "X%",
                     style: TextStyles.lightWhite16,

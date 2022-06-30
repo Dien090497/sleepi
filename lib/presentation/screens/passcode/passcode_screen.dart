@@ -31,11 +31,6 @@ class _PasscodeScreenState extends State<PasscodeScreen> {
   TextEditingController passCodeController = TextEditingController();
 
   @override
-  void dispose() {
-    super.dispose();
-  }
-
-  @override
   Widget build(BuildContext context) {
     final args =
         ModalRoute.of(context)?.settings.arguments as PasscodeArguments?;

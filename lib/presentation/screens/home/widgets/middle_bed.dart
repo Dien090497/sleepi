@@ -1,8 +1,8 @@
+import 'package:card_swiper/card_swiper.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:slee_fi/common/enum/enum.dart';
 import 'package:slee_fi/common/routes/app_routes.dart';
-import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
 import 'package:slee_fi/common/widgets/sf_buttons.dart';
 import 'package:slee_fi/common/widgets/sf_icon.dart';
@@ -44,50 +44,34 @@ class _MiddleBedState extends State<MiddleBed> {
           ),
           child: Column(
             children: [
-              SFText(keyText: beds[i].name, style: TextStyles.blue14),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 7),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    InkWell(
-                      onTap: () {
-                        if (i != 0) {
-                          i -= 1;
-                        }
-                        setState(() {});
-                      },
-                      child: const Icon(
-                        Icons.arrow_back_ios,
-                        color: AppColors.lightGrey,
-                      ),
-                    ),
-                    Expanded(
-                      child: GestureDetector(
-                        onTap: () {
-                          Navigator.pushNamed(context, R.nftInfo,
-                              arguments: false);
-                        },
-                        child: SFIcon(
-                          beds[i].image,
-                          height: 180,
-                          fit: BoxFit.fitHeight,
+              SizedBox(
+                width: size.width,
+                height: 200,
+                child: Swiper(
+                  itemBuilder: (BuildContext context, int index) {
+                    return   Column(
+                      children: [
+                        SFText(keyText: beds[index].name, style: TextStyles.blue14),
+                        GestureDetector(
+                          onTap: () {
+                            Navigator.pushNamed(context, R.nftInfo,
+                                arguments: false);
+                          },
+                          child: SFIcon(
+                            beds[index].image,
+                            height: 180,
+                            fit: BoxFit.fitHeight,
+                          ),
                         ),
-                      ),
-                    ),
-                    InkWell(
-                      onTap: () {
-                        if (i != beds.length - 1) {
-                          i += 1;
-                        }
-                        setState(() {});
-                      },
-                      child: const Icon(
-                        Icons.arrow_forward_ios_sharp,
-                        color: AppColors.lightGrey,
-                      ),
-                    ),
-                  ],
+                      ],
+                    );
+                  },
+
+                  // indicatorLayout: PageIndicatorLayout.COLOR,
+                  // autoplay: true,
+                  itemCount: beds.length,
+                  // pagination:  const SwiperPagination(),
+                  control:  const SwiperControl(),
                 ),
               ),
               const SizedBox(height: 20,),
