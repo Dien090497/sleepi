@@ -323,6 +323,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.0.0"
+  ethereum_addresses:
+    dependency: "direct main"
+    description:
+      name: ethereum_addresses
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.0.2"
   ffi:
     dependency: transitive
     description:

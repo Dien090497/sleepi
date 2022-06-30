@@ -54,7 +54,7 @@ class _SendToExternalScreenState extends State<SendToExternalScreen> {
             balance = state.balance;
             setState(() {});
           }
-          if (state is SendToExternalValidatorSuccess) {
+          if (state is SendToExternalCheckedValidator) {
             showCustomAlertDialog(context,
                 children:  PopUpConfirmSend(
                   toAddress: contractAddressTo,

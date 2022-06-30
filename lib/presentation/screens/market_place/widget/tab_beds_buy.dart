@@ -51,6 +51,7 @@ class TabBedsBuy extends StatelessWidget {
                   LocaleKeys.type.tr(): [
                     LocaleKeys.beds.tr(),
                     LocaleKeys.bed_box.tr(),
+                    LocaleKeys.genesis_beds.tr(),
                   ],
                   LocaleKeys.class_.tr(): [
                     LocaleKeys.short_bed.tr(),

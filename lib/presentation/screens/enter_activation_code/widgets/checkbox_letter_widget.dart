@@ -27,10 +27,10 @@ class _CheckBoxLetterWidgetState extends State<CheckBoxLetterWidget> {
             ),
             side: MaterialStateBorderSide.resolveWith((states) {
               if(states.contains(MaterialState.pressed)){
-                return const BorderSide(color: AppColors.lightGrey);
+                return const BorderSide(color: AppColors.lightGrey, width: 1.5);
               }
               else{
-                return const BorderSide(color: AppColors.lightGrey);
+                return const BorderSide(color: AppColors.lightGrey, width: 1.5);
               }
             }),
             checkColor: AppColors.green,
@@ -44,7 +44,7 @@ class _CheckBoxLetterWidgetState extends State<CheckBoxLetterWidget> {
           ),
         ),
         const SizedBox(width: 4,),
-        SFText(keyText: LocaleKeys.news_letters, style: TextStyles.w400lightGrey12,),
+        SFText(keyText: LocaleKeys.receive_news_letters, style: TextStyles.w400lightGrey12,),
       ],
     );
   }

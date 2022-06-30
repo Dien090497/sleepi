@@ -22,7 +22,7 @@ class SendToExternalState with _$SendToExternalState {
 
   const factory SendToExternalState.fail(String msg) = SendToExternalFailed;
 
-  const factory SendToExternalState.calculatorFee(int fee) = SendToExternalCalculatorFee;
+  const factory SendToExternalState.calculatorFee(double? fee) = SendToExternalCalculatorFee;
 
   const factory SendToExternalState.calculatorFeeSuccess() = SendToExternalCalculatorFeeSuccess;
 
