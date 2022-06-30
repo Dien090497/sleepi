@@ -65,14 +65,17 @@ class AppFlyerCustom {
     _logEvent('home_action_$event');
   }
 
+
+
   _logEvent(String eventName, {Map? map}) async {
-    // if (kDebugMode) {
-    //   'event name  $eventName    data $map'.log;
-    //   return;
-    // }
+    if (kDebugMode) {
+      'event name  $eventName    data $map'.log;
+      return;
+    }
 
     try {
-      await _appsflyerSdk.logEvent(eventName, map);
+      var result = await _appsflyerSdk.logEvent(eventName, map);
+      ' result log   $result $eventName'.log;
     } on Exception catch (e) {
       '$e'.log;
     }
