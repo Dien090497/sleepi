@@ -21,6 +21,8 @@ extension NumX on num {
 
   static int gweiFactor = pow(10, 9).toInt();
 
+  double get weiToEther => this / weiFactor;
+
   String get format => Decimal.parse('$this').toString();
 
   String get formatBalance {

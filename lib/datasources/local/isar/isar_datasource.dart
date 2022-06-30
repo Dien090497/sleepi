@@ -19,12 +19,12 @@ class IsarDataSource {
   }
 
   Future<void> init() async {
-    final count = await networksCount();
-    if (count == null || count < 1) {
+    // final count = await networksCount();
+    // if (count == null || count < 1) {
       final list = await _networksFromJson();
       final ids = await putAllNetworks(list);
       assert(list.length == ids.length, "Length must equal");
-    }
+    // }
   }
 
   Future<List<NetworkIsarModel>> _networksFromJson() async {

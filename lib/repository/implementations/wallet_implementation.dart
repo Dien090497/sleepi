@@ -8,6 +8,7 @@ import 'package:slee_fi/common/enum/enum.dart';
 import 'package:slee_fi/datasources/local/get_storage_datasource.dart';
 import 'package:slee_fi/datasources/local/isar/isar_datasource.dart';
 import 'package:slee_fi/datasources/remote/network/web3_datasource.dart';
+import 'package:slee_fi/datasources/remote/network/web3_provider.dart';
 import 'package:slee_fi/entities/wallet_info/wallet_info_entity.dart';
 import 'package:slee_fi/failures/failure.dart';
 import 'package:slee_fi/models/isar_models/native_currency_isar/native_currency_isar_model.dart';
@@ -19,12 +20,13 @@ import 'package:web3dart/web3dart.dart';
 
 @Injectable(as: IWalletRepository)
 class WalletImplementation extends IWalletRepository {
+  final Web3Provider _web3provider;
   final Web3DataSource _web3DataSource;
   final GetStorageDataSource _getStorageDataSource;
   final IsarDataSource _isarDataSource;
 
-  WalletImplementation(
-      this._web3DataSource, this._getStorageDataSource, this._isarDataSource);
+  WalletImplementation(this._web3DataSource, this._getStorageDataSource,
+      this._isarDataSource, this._web3provider);
 
   @override
   Future<Either<Failure, WalletInfoEntity>> createWallet() async {
@@ -120,9 +122,9 @@ class WalletImplementation extends IWalletRepository {
   @override
   Future<Either<Failure, WalletInfoEntity>> currentWallet() async {
     try {
-      /*var testNetwork = (await _isarDataSource.getAllNetwork()).first;
-      _web3DataSource.setCurrentNetwork(testNetwork);
-      _getStorageDataSource.setCurrentChainId(testNetwork.chainId);*/
+      // var testNetwork = (await _isarDataSource.getAllNetwork()).first;
+      // _web3provider.setCurrentNetwork(testNetwork);
+      // _getStorageDataSource.setCurrentChainId(testNetwork.chainId);
       // var testNetwork = (await _isarDataSource.getAllNetwork()).last;
       // _web3DataSource.setCurrentNetwork(testNetwork);
       // _getStorageDataSource.setCurrentChainId(testNetwork.chainId);
@@ -292,13 +294,13 @@ class WalletImplementation extends IWalletRepository {
       } else {
         if (params == NetWorkEnum.mainNet) {
           var network = (await _isarDataSource.getAllNetwork())[1];
-          _web3DataSource.setCurrentNetwork(network);
+          _web3provider.setCurrentNetwork(network);
           _getStorageDataSource.setCurrentChainId(network.chainId);
           final networkCurrent = await _getCurrentNetwork();
           return Right(networkCurrent);
         } else {
           var testnet = (await _isarDataSource.getAllNetwork()).first;
-          _web3DataSource.setCurrentNetwork(testnet);
+          _web3provider.setCurrentNetwork(testnet);
           _getStorageDataSource.setCurrentChainId(testnet.chainId);
           final networkCurrent = await _getCurrentNetwork();
           return Right(networkCurrent);
