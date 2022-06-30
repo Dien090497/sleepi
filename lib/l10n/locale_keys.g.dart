@@ -385,5 +385,6 @@ abstract class  LocaleKeys {
   static const user_privacy = 'user_privacy';
   static const create_password = 'create_password';
   static const confirm_password = 'confirm_password';
+  static const genesis_beds = 'genesis_beds';
 
 }
