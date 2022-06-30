@@ -24,6 +24,5 @@ class NetworkEntity with _$NetworkEntity {
     required int? slip44,
     required EnsEntity? ens,
     required List<ExplorersEntity>? explorers,
-    required String routerAddress,
   }) = _NetworkEntity;
 }

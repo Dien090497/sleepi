@@ -103,7 +103,7 @@ class Web3DataSource {
       String contractAddressTo,
       double value) async {
     try {
-      final contract = avaxFrom(_network!.routerAddress);
+      final contract = avaxFrom(Const.contractRouterTestNet);
       EthereumAddress from = EthereumAddress.fromHex(contractAddressFrom);
       EthereumAddress to = EthereumAddress.fromHex(contractAddressTo);
       log(" ${from.toString()} ${to.toString()}");
@@ -123,7 +123,7 @@ class Web3DataSource {
   Future<bool> swapExactAVAXForTokens(String privateKey, String walletAddress,
       String contractAddress, double value) async {
     try {
-      final contract = avaxFrom(_network!.routerAddress);
+      final contract = avaxFrom(Const.contractRouterTestNet);
       EthereumAddress avax =
           EthereumAddress.fromHex(Const.tokens[0]['address'].toString());
       EthereumAddress token = EthereumAddress.fromHex(contractAddress);
@@ -151,8 +151,8 @@ class Web3DataSource {
           from: to,
           to: to,
           value: value.etherToWei.toWeiEtherAmount,
-          gasPrice: await _web3client?.getGasPrice(),
-          nonce: await _web3client?.getTransactionCount(to),
+          gasPrice: await _web3provider.web3client.getGasPrice(),
+          nonce: await _web3provider.web3client.getTransactionCount(to),
         ),
       );
       log('swapExactAVAXForTokens ${tx.toString()}');
@@ -166,7 +166,7 @@ class Web3DataSource {
   Future<bool> swapExactTokensForAvax(String privateKey, String walletAddress,
       String contractAddress, double value) async {
     try {
-      final contract = avaxFrom(_network!.routerAddress);
+      final contract = avaxFrom(Const.contractRouterTestNet);
       EthereumAddress toToken =
       EthereumAddress.fromHex(Const.tokens[0]['address'].toString());
       EthereumAddress fromToken = EthereumAddress.fromHex(contractAddress);
@@ -201,8 +201,8 @@ class Web3DataSource {
           value: (amountOutMin.toInt() / math.pow(10, decimalTo.toInt()))
               .etherToWei
               .toWeiEtherAmount,
-          gasPrice: await _web3client?.getGasPrice(),
-          nonce: await _web3client?.getTransactionCount(to),
+          gasPrice: await _web3provider.web3client.getGasPrice(),
+          nonce: await _web3provider.web3client.getTransactionCount(to),
         ),
       );
       log('swapExactTokensForAVAX ${tx.toString()}');
@@ -216,7 +216,7 @@ class Web3DataSource {
   Future<bool> swapExactTokensForTokens(String privateKey, String walletAddress,
       String contractAddressFrom, String contractAddressTo, double value) async {
     try {
-      final contract = avaxFrom(_network!.routerAddress);
+      final contract = avaxFrom(Const.contractRouterTestNet);
       EthereumAddress toToken =
       EthereumAddress.fromHex(contractAddressTo);
       EthereumAddress fromToken = EthereumAddress.fromHex(contractAddressFrom);
@@ -251,8 +251,8 @@ class Web3DataSource {
           value: (amountOutMin.toInt() / math.pow(10, decimalTo.toInt()))
               .etherToWei
               .toWeiEtherAmount,
-          gasPrice: await _web3client?.getGasPrice(),
-          nonce: await _web3client?.getTransactionCount(to),
+          gasPrice: await _web3provider.web3client.getGasPrice(),
+          nonce: await _web3provider.web3client.getTransactionCount(to),
         ),
       );
       log('swapExactTokensForTokens ${tx.toString()}');

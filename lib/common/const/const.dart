@@ -16,6 +16,9 @@ class Const {
   static const String avascanUrl = 'https://avascan.info/';
   static const String binanceUrl = 'https://www.binance.com/';
   static const String okCoinUrl = 'https://www.okcoin.jp/';
+  static const String contractRouterTestNet = '0xd7f655E3376cE2D7A2b08fF01Eb3B1023191A901';
+  static const String contractRouterMainNet = '0x60aE616a2155Ee3d9A68541Ba4544862310933d4';
+
 
   static const String whitePaperEn = 'https://sleefi.gitbook.io/whitepaper/';
 

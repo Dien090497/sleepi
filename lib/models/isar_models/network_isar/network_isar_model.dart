@@ -40,7 +40,6 @@ class NetworkIsarModel {
   final ens = IsarLink<EnsIsarModel>();
 
   final explorers = IsarLinks<ExplorersIsarModel>();
-  final String routerAddress;
 
   NetworkIsarModel({
     required this.chainId,
@@ -55,7 +54,6 @@ class NetworkIsarModel {
     required this.shortName,
     required this.networkId,
     this.slip44,
-    required this.routerAddress,
   });
 
   NetworkEntity toEntity() => NetworkEntity(
@@ -75,7 +73,6 @@ class NetworkIsarModel {
         slip44: slip44,
         ens: ens.value?.toEntity(),
         explorers: explorers.map((e) => e.toEntity()).toList(),
-        routerAddress: routerAddress,
       );
 
   factory NetworkIsarModel.fromNetwork(Network e) {
@@ -91,8 +88,7 @@ class NetworkIsarModel {
         network: e.network,
         icon: e.icon,
         slip44: e.slip44,
-        title: e.title,
-        routerAddress: e.routerAddress);
+        title: e.title,);
     model
       ..ens.value = EnsIsarModel.fromEns(e.ens)
       ..nativeCurrency.value = NativeCurrencyIsarModel.fromNativeCurrency(
@@ -119,8 +115,7 @@ class NetworkIsarModel {
         title: e.title,
         slip44: e.slip44,
         icon: e.icon,
-        network: e.network,
-        routerAddress: e.routerAddress);
+        network: e.network,);
     model
       ..nativeCurrency.value =
           NativeCurrencyIsarModel.fromEntity(e.nativeCurrency)
