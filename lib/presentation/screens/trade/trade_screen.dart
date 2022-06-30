@@ -13,6 +13,7 @@ import 'package:slee_fi/common/widgets/sf_alert_dialog.dart';
 import 'package:slee_fi/common/widgets/sf_button_outlined.dart';
 import 'package:slee_fi/common/widgets/sf_buttons.dart';
 import 'package:slee_fi/common/widgets/sf_card.dart';
+import 'package:slee_fi/common/widgets/sf_dialog.dart';
 import 'package:slee_fi/common/widgets/sf_icon_border.dart';
 import 'package:slee_fi/common/widgets/sf_sub_app_bar.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
@@ -40,6 +41,7 @@ class _TradeScreenState extends State<TradeScreen> {
   final GlobalKey<CoolDropdownState> firstToken = GlobalKey();
   final GlobalKey<CoolDropdownState> secondToken = GlobalKey();
   TextEditingController valueController = TextEditingController();
+  double amountOutMin = 0;
 
   int getIndexAddress(String address) {
     int index = -1;
@@ -51,15 +53,73 @@ class _TradeScreenState extends State<TradeScreen> {
     return index;
   }
 
+  onReset(cubit) {
+    setState(() {
+      isDisabled = true;
+      valueController.text = '';
+      indexFrom = 0;
+      indexTo = Const.tokens.length - 1;
+      Future.delayed(const Duration(milliseconds: 100), () {
+        firstToken.currentState?.changeSelectedItem();
+        secondToken.currentState?.changeSelectedItem();
+      });
+      cubit.getBalanceToken(Const.tokens[indexFrom]['address'].toString());
+    });
+  }
+
+  onSwapIndex(cubit) {
+    setState(() {
+      isDisabled = true;
+      valueController.text = '';
+      int swap = indexTo;
+      indexTo = indexFrom;
+      indexFrom = swap;
+      Future.delayed(const Duration(milliseconds: 100), () {
+        firstToken.currentState?.changeSelectedItem();
+        secondToken.currentState?.changeSelectedItem();
+      });
+      cubit.getBalanceToken(Const.tokens[indexFrom]['address'].toString());
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (BuildContext context) => TradeCubit()..init(),
       child: BlocConsumer<TradeCubit, TradeState>(
         listener: (BuildContext context, state) {
+          final cubit = context.read<TradeCubit>();
           if (state is swapTokenBalance) {
             balance = state.balance;
-            setState(() {});
+            valueController.text = '';
+            setState(() {
+              isDisabled = true;
+            });
+          }
+          if (state is swapTokenSuccess) {
+            Navigator.pop(context);
+            showSwapSuccessfulDialog(context, () {
+              cubit.getBalanceToken(
+                  Const.tokens[indexFrom]['address'].toString());
+            });
+          }
+          if (state is tradeGetAmountOutMin) {
+            amountOutMin = state.amountOutMin;
+            showCustomAlertDialog(context,
+                children: PopUpConfirmTrade(
+                  value: double.parse(valueController.text.toString()),
+                  symbolFrom: Const.tokens[indexFrom]['symbol'].toString(),
+                  symbolTo: Const.tokens[indexTo]['symbol'].toString(),
+                  addressFrom: Const.tokens[indexFrom]['address'].toString(),
+                  addressTo: Const.tokens[indexTo]['address'].toString(),
+                  onSwap: () {
+                    cubit.swapToken(
+                        double.parse(valueController.text.toString()),
+                        Const.tokens[indexFrom]['address'].toString(),
+                        Const.tokens[indexTo]['address'].toString());
+                  },
+                  amountOutMin: amountOutMin,
+                ));
           }
         },
         builder: (BuildContext context, state) {
@@ -92,6 +152,9 @@ class _TradeScreenState extends State<TradeScreen> {
                               ),
                             ),
                             GestureDetector(
+                                onTap: () {
+                                  onReset(cubit);
+                                },
                                 child: const SFIconBorder(
                                     icon: Icons.refresh, sizeIcon: 28)),
                           ],
@@ -219,11 +282,16 @@ class _TradeScreenState extends State<TradeScreen> {
                               ),
                             ),
                             const SizedBox(height: 8),
-                            const Center(
-                                child: Icon(
-                              Icons.swap_vert,
-                              color: AppColors.lightWhite,
-                              size: 32,
+                            Center(
+                                child: GestureDetector(
+                              onTap: () {
+                                onSwapIndex(cubit);
+                              },
+                              child: const Icon(
+                                Icons.swap_vert,
+                                color: AppColors.lightWhite,
+                                size: 32,
+                              ),
                             )),
                             const SizedBox(height: 8),
                             SFCard(
@@ -294,28 +362,10 @@ class _TradeScreenState extends State<TradeScreen> {
                         gradient: AppColors.gradientBlueButton,
                         disabled: isDisabled,
                         onPressed: () {
-                          showCustomAlertDialog(context,
-                              children: PopUpConfirmTrade(
-                                value: double.parse(
-                                    valueController.text.toString()),
-                                symbolFrom: Const.tokens[indexFrom]['symbol']
-                                    .toString(),
-                                symbolTo:
-                                    Const.tokens[indexTo]['symbol'].toString(),
-                                addressFrom: Const.tokens[indexFrom]['address']
-                                    .toString(),
-                                addressTo:
-                                    Const.tokens[indexTo]['address'].toString(),
-                                onSwap: () {
-                                  cubit.swapToken(
-                                      double.parse(
-                                          valueController.text.toString()),
-                                      Const.tokens[indexFrom]['address']
-                                          .toString(),
-                                      Const.tokens[indexTo]['address']
-                                          .toString());
-                                },
-                              ));
+                          cubit.getAmountOutMin(
+                              Const.tokens[indexFrom]['address'].toString(),
+                              Const.tokens[indexTo]['address'].toString(),
+                              double.parse(valueController.text.toString()));
                         },
                       ),
                       const SizedBox(

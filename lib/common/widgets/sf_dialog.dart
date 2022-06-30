@@ -52,6 +52,32 @@ Future<T?> showSuccessfulDialog<T>(BuildContext context) async {
       });
 }
 
+Future<T?> showSwapSuccessfulDialog<T>(BuildContext context, VoidCallback onSwap) async {
+  return showDialog(
+      context: context,
+      barrierColor: AppColors.backgroundDialog,
+      builder: (context) {
+        return SFDialog(
+          children: [
+            Align(
+              alignment: Alignment.centerRight,
+              child: IconButton(
+                onPressed: () {
+                  onSwap();
+                  Navigator.pop(context);
+                },
+                icon: const Icon(Icons.close, color: AppColors.white),
+              ),
+            ),
+            const SFIcon(Ics.successful),
+            const SizedBox(height: 36),
+            SFText(keyText: LocaleKeys.success, style: TextStyles.bold18White),
+            const SizedBox(height: 40),
+          ],
+        );
+      });
+}
+
 Future<T?> showChangeLanguageDialog<T>(BuildContext context,
     {required Locale locale}) async {
   return showDialog(

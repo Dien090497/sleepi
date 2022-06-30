@@ -15,7 +15,7 @@ extension GetNetworkIsarModelCollection on Isar {
 const NetworkIsarModelSchema = CollectionSchema(
   name: 'NetworkIsarModel',
   schema:
-      '{"name":"NetworkIsarModel","idName":"chainId","properties":[{"name":"chain","type":"String"},{"name":"faucets","type":"StringList"},{"name":"icon","type":"String"},{"name":"infoURL","type":"String"},{"name":"name","type":"String"},{"name":"network","type":"String"},{"name":"networkId","type":"Long"},{"name":"rpc","type":"StringList"},{"name":"shortName","type":"String"},{"name":"slip44","type":"Long"},{"name":"title","type":"String"}],"indexes":[],"links":[{"name":"ens","target":"EnsIsarModel"},{"name":"explorers","target":"ExplorersIsarModel"},{"name":"nativeCurrency","target":"NativeCurrencyIsarModel"}]}',
+      '{"name":"NetworkIsarModel","idName":"chainId","properties":[{"name":"chain","type":"String"},{"name":"faucets","type":"StringList"},{"name":"icon","type":"String"},{"name":"infoURL","type":"String"},{"name":"name","type":"String"},{"name":"network","type":"String"},{"name":"networkId","type":"Long"},{"name":"routerAddress","type":"String"},{"name":"rpc","type":"StringList"},{"name":"shortName","type":"String"},{"name":"slip44","type":"Long"},{"name":"title","type":"String"}],"indexes":[],"links":[{"name":"ens","target":"EnsIsarModel"},{"name":"explorers","target":"ExplorersIsarModel"},{"name":"nativeCurrency","target":"NativeCurrencyIsarModel"}]}',
   idName: 'chainId',
   propertyIds: {
     'chain': 0,
@@ -25,10 +25,11 @@ const NetworkIsarModelSchema = CollectionSchema(
     'name': 4,
     'network': 5,
     'networkId': 6,
-    'rpc': 7,
-    'shortName': 8,
-    'slip44': 9,
-    'title': 10
+    'routerAddress': 7,
+    'rpc': 8,
+    'shortName': 9,
+    'slip44': 10,
+    'title': 11
   },
   listProperties: {'faucets', 'rpc'},
   indexIds: {},
@@ -104,24 +105,27 @@ void _networkIsarModelSerializeNative(
   dynamicSize += (_network?.length ?? 0) as int;
   final value6 = object.networkId;
   final _networkId = value6;
-  final value7 = object.rpc;
-  dynamicSize += (value7.length) * 8;
-  final bytesList7 = <IsarUint8List>[];
-  for (var str in value7) {
+  final value7 = object.routerAddress;
+  final _routerAddress = IsarBinaryWriter.utf8Encoder.convert(value7);
+  dynamicSize += (_routerAddress.length) as int;
+  final value8 = object.rpc;
+  dynamicSize += (value8.length) * 8;
+  final bytesList8 = <IsarUint8List>[];
+  for (var str in value8) {
     final bytes = IsarBinaryWriter.utf8Encoder.convert(str);
-    bytesList7.add(bytes);
+    bytesList8.add(bytes);
     dynamicSize += bytes.length as int;
   }
-  final _rpc = bytesList7;
-  final value8 = object.shortName;
-  final _shortName = IsarBinaryWriter.utf8Encoder.convert(value8);
+  final _rpc = bytesList8;
+  final value9 = object.shortName;
+  final _shortName = IsarBinaryWriter.utf8Encoder.convert(value9);
   dynamicSize += (_shortName.length) as int;
-  final value9 = object.slip44;
-  final _slip44 = value9;
-  final value10 = object.title;
+  final value10 = object.slip44;
+  final _slip44 = value10;
+  final value11 = object.title;
   IsarUint8List? _title;
-  if (value10 != null) {
-    _title = IsarBinaryWriter.utf8Encoder.convert(value10);
+  if (value11 != null) {
+    _title = IsarBinaryWriter.utf8Encoder.convert(value11);
   }
   dynamicSize += (_title?.length ?? 0) as int;
   final size = staticSize + dynamicSize;
@@ -137,10 +141,11 @@ void _networkIsarModelSerializeNative(
   writer.writeBytes(offsets[4], _name);
   writer.writeBytes(offsets[5], _network);
   writer.writeLong(offsets[6], _networkId);
-  writer.writeStringList(offsets[7], _rpc);
-  writer.writeBytes(offsets[8], _shortName);
-  writer.writeLong(offsets[9], _slip44);
-  writer.writeBytes(offsets[10], _title);
+  writer.writeBytes(offsets[7], _routerAddress);
+  writer.writeStringList(offsets[8], _rpc);
+  writer.writeBytes(offsets[9], _shortName);
+  writer.writeLong(offsets[10], _slip44);
+  writer.writeBytes(offsets[11], _title);
 }
 
 NetworkIsarModel _networkIsarModelDeserializeNative(
@@ -157,10 +162,11 @@ NetworkIsarModel _networkIsarModelDeserializeNative(
     name: reader.readString(offsets[4]),
     network: reader.readStringOrNull(offsets[5]),
     networkId: reader.readLong(offsets[6]),
-    rpc: reader.readStringList(offsets[7]) ?? [],
-    shortName: reader.readString(offsets[8]),
-    slip44: reader.readLongOrNull(offsets[9]),
-    title: reader.readStringOrNull(offsets[10]),
+    routerAddress: reader.readString(offsets[7]),
+    rpc: reader.readStringList(offsets[8]) ?? [],
+    shortName: reader.readString(offsets[9]),
+    slip44: reader.readLongOrNull(offsets[10]),
+    title: reader.readStringOrNull(offsets[11]),
   );
   _networkIsarModelAttachLinks(collection, id, object);
   return object;
@@ -186,12 +192,14 @@ P _networkIsarModelDeserializePropNative<P>(
     case 6:
       return (reader.readLong(offset)) as P;
     case 7:
-      return (reader.readStringList(offset) ?? []) as P;
-    case 8:
       return (reader.readString(offset)) as P;
+    case 8:
+      return (reader.readStringList(offset) ?? []) as P;
     case 9:
-      return (reader.readLongOrNull(offset)) as P;
+      return (reader.readString(offset)) as P;
     case 10:
+      return (reader.readLongOrNull(offset)) as P;
+    case 11:
       return (reader.readStringOrNull(offset)) as P;
     default:
       throw 'Illegal propertyIndex';
@@ -209,6 +217,7 @@ dynamic _networkIsarModelSerializeWeb(
   IsarNative.jsObjectSet(jsObj, 'name', object.name);
   IsarNative.jsObjectSet(jsObj, 'network', object.network);
   IsarNative.jsObjectSet(jsObj, 'networkId', object.networkId);
+  IsarNative.jsObjectSet(jsObj, 'routerAddress', object.routerAddress);
   IsarNative.jsObjectSet(jsObj, 'rpc', object.rpc);
   IsarNative.jsObjectSet(jsObj, 'shortName', object.shortName);
   IsarNative.jsObjectSet(jsObj, 'slip44', object.slip44);
@@ -233,6 +242,7 @@ NetworkIsarModel _networkIsarModelDeserializeWeb(
     network: IsarNative.jsObjectGet(jsObj, 'network'),
     networkId:
         IsarNative.jsObjectGet(jsObj, 'networkId') ?? double.negativeInfinity,
+    routerAddress: IsarNative.jsObjectGet(jsObj, 'routerAddress') ?? '',
     rpc: (IsarNative.jsObjectGet(jsObj, 'rpc') as List?)
             ?.map((e) => e ?? '')
             .toList()
@@ -273,6 +283,8 @@ P _networkIsarModelDeserializePropWeb<P>(Object jsObj, String propertyName) {
     case 'networkId':
       return (IsarNative.jsObjectGet(jsObj, 'networkId') ??
           double.negativeInfinity) as P;
+    case 'routerAddress':
+      return (IsarNative.jsObjectGet(jsObj, 'routerAddress') ?? '') as P;
     case 'rpc':
       return ((IsarNative.jsObjectGet(jsObj, 'rpc') as List?)
               ?.map((e) => e ?? '')
@@ -1129,6 +1141,113 @@ extension NetworkIsarModelQueryFilter
   }
 
   QueryBuilder<NetworkIsarModel, NetworkIsarModel, QAfterFilterCondition>
+      routerAddressEqualTo(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return addFilterConditionInternal(FilterCondition(
+      type: ConditionType.eq,
+      property: 'routerAddress',
+      value: value,
+      caseSensitive: caseSensitive,
+    ));
+  }
+
+  QueryBuilder<NetworkIsarModel, NetworkIsarModel, QAfterFilterCondition>
+      routerAddressGreaterThan(
+    String value, {
+    bool caseSensitive = true,
+    bool include = false,
+  }) {
+    return addFilterConditionInternal(FilterCondition(
+      type: ConditionType.gt,
+      include: include,
+      property: 'routerAddress',
+      value: value,
+      caseSensitive: caseSensitive,
+    ));
+  }
+
+  QueryBuilder<NetworkIsarModel, NetworkIsarModel, QAfterFilterCondition>
+      routerAddressLessThan(
+    String value, {
+    bool caseSensitive = true,
+    bool include = false,
+  }) {
+    return addFilterConditionInternal(FilterCondition(
+      type: ConditionType.lt,
+      include: include,
+      property: 'routerAddress',
+      value: value,
+      caseSensitive: caseSensitive,
+    ));
+  }
+
+  QueryBuilder<NetworkIsarModel, NetworkIsarModel, QAfterFilterCondition>
+      routerAddressBetween(
+    String lower,
+    String upper, {
+    bool caseSensitive = true,
+    bool includeLower = true,
+    bool includeUpper = true,
+  }) {
+    return addFilterConditionInternal(FilterCondition.between(
+      property: 'routerAddress',
+      lower: lower,
+      includeLower: includeLower,
+      upper: upper,
+      includeUpper: includeUpper,
+      caseSensitive: caseSensitive,
+    ));
+  }
+
+  QueryBuilder<NetworkIsarModel, NetworkIsarModel, QAfterFilterCondition>
+      routerAddressStartsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return addFilterConditionInternal(FilterCondition(
+      type: ConditionType.startsWith,
+      property: 'routerAddress',
+      value: value,
+      caseSensitive: caseSensitive,
+    ));
+  }
+
+  QueryBuilder<NetworkIsarModel, NetworkIsarModel, QAfterFilterCondition>
+      routerAddressEndsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return addFilterConditionInternal(FilterCondition(
+      type: ConditionType.endsWith,
+      property: 'routerAddress',
+      value: value,
+      caseSensitive: caseSensitive,
+    ));
+  }
+
+  QueryBuilder<NetworkIsarModel, NetworkIsarModel, QAfterFilterCondition>
+      routerAddressContains(String value, {bool caseSensitive = true}) {
+    return addFilterConditionInternal(FilterCondition(
+      type: ConditionType.contains,
+      property: 'routerAddress',
+      value: value,
+      caseSensitive: caseSensitive,
+    ));
+  }
+
+  QueryBuilder<NetworkIsarModel, NetworkIsarModel, QAfterFilterCondition>
+      routerAddressMatches(String pattern, {bool caseSensitive = true}) {
+    return addFilterConditionInternal(FilterCondition(
+      type: ConditionType.matches,
+      property: 'routerAddress',
+      value: pattern,
+      caseSensitive: caseSensitive,
+    ));
+  }
+
+  QueryBuilder<NetworkIsarModel, NetworkIsarModel, QAfterFilterCondition>
       rpcAnyEqualTo(
     String value, {
     bool caseSensitive = true,
@@ -1619,6 +1738,16 @@ extension NetworkIsarModelQueryWhereSortBy
   }
 
   QueryBuilder<NetworkIsarModel, NetworkIsarModel, QAfterSortBy>
+      sortByRouterAddress() {
+    return addSortByInternal('routerAddress', Sort.asc);
+  }
+
+  QueryBuilder<NetworkIsarModel, NetworkIsarModel, QAfterSortBy>
+      sortByRouterAddressDesc() {
+    return addSortByInternal('routerAddress', Sort.desc);
+  }
+
+  QueryBuilder<NetworkIsarModel, NetworkIsarModel, QAfterSortBy>
       sortByShortName() {
     return addSortByInternal('shortName', Sort.asc);
   }
@@ -1718,6 +1847,16 @@ extension NetworkIsarModelQueryWhereSortThenBy
   }
 
   QueryBuilder<NetworkIsarModel, NetworkIsarModel, QAfterSortBy>
+      thenByRouterAddress() {
+    return addSortByInternal('routerAddress', Sort.asc);
+  }
+
+  QueryBuilder<NetworkIsarModel, NetworkIsarModel, QAfterSortBy>
+      thenByRouterAddressDesc() {
+    return addSortByInternal('routerAddress', Sort.desc);
+  }
+
+  QueryBuilder<NetworkIsarModel, NetworkIsarModel, QAfterSortBy>
       thenByShortName() {
     return addSortByInternal('shortName', Sort.asc);
   }
@@ -1785,6 +1924,11 @@ extension NetworkIsarModelQueryWhereDistinct
   }
 
   QueryBuilder<NetworkIsarModel, NetworkIsarModel, QDistinct>
+      distinctByRouterAddress({bool caseSensitive = true}) {
+    return addDistinctByInternal('routerAddress', caseSensitive: caseSensitive);
+  }
+
+  QueryBuilder<NetworkIsarModel, NetworkIsarModel, QDistinct>
       distinctByShortName({bool caseSensitive = true}) {
     return addDistinctByInternal('shortName', caseSensitive: caseSensitive);
   }
@@ -1833,6 +1977,11 @@ extension NetworkIsarModelQueryProperty
 
   QueryBuilder<NetworkIsarModel, int, QQueryOperations> networkIdProperty() {
     return addPropertyNameInternal('networkId');
+  }
+
+  QueryBuilder<NetworkIsarModel, String, QQueryOperations>
+      routerAddressProperty() {
+    return addPropertyNameInternal('routerAddress');
   }
 
   QueryBuilder<NetworkIsarModel, List<String>, QQueryOperations> rpcProperty() {

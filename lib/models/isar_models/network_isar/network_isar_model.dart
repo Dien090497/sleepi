@@ -40,6 +40,7 @@ class NetworkIsarModel {
   final ens = IsarLink<EnsIsarModel>();
 
   final explorers = IsarLinks<ExplorersIsarModel>();
+  final String routerAddress;
 
   NetworkIsarModel({
     required this.chainId,
@@ -54,6 +55,7 @@ class NetworkIsarModel {
     required this.shortName,
     required this.networkId,
     this.slip44,
+    required this.routerAddress,
   });
 
   NetworkEntity toEntity() => NetworkEntity(
@@ -73,23 +75,24 @@ class NetworkIsarModel {
         slip44: slip44,
         ens: ens.value?.toEntity(),
         explorers: explorers.map((e) => e.toEntity()).toList(),
+        routerAddress: routerAddress,
       );
 
   factory NetworkIsarModel.fromNetwork(Network e) {
     final model = NetworkIsarModel(
-      chainId: e.chainId,
-      name: e.name,
-      chain: e.chain,
-      rpc: e.rpc,
-      faucets: e.faucets,
-      infoURL: e.infoURL,
-      shortName: e.shortName,
-      networkId: e.networkId,
-      network: e.network,
-      icon: e.icon,
-      slip44: e.slip44,
-      title: e.title,
-    );
+        chainId: e.chainId,
+        name: e.name,
+        chain: e.chain,
+        rpc: e.rpc,
+        faucets: e.faucets,
+        infoURL: e.infoURL,
+        shortName: e.shortName,
+        networkId: e.networkId,
+        network: e.network,
+        icon: e.icon,
+        slip44: e.slip44,
+        title: e.title,
+        routerAddress: e.routerAddress);
     model
       ..ens.value = EnsIsarModel.fromEns(e.ens)
       ..nativeCurrency.value = NativeCurrencyIsarModel.fromNativeCurrency(
@@ -105,19 +108,19 @@ class NetworkIsarModel {
 
   factory NetworkIsarModel.fromEntity(NetworkEntity e) {
     final model = NetworkIsarModel(
-      chainId: e.chainId,
-      name: e.name,
-      chain: e.chain,
-      rpc: e.rpc,
-      faucets: e.faucets,
-      infoURL: e.infoURL,
-      shortName: e.shortName,
-      networkId: e.networkId,
-      title: e.title,
-      slip44: e.slip44,
-      icon: e.icon,
-      network: e.network,
-    );
+        chainId: e.chainId,
+        name: e.name,
+        chain: e.chain,
+        rpc: e.rpc,
+        faucets: e.faucets,
+        infoURL: e.infoURL,
+        shortName: e.shortName,
+        networkId: e.networkId,
+        title: e.title,
+        slip44: e.slip44,
+        icon: e.icon,
+        network: e.network,
+        routerAddress: e.routerAddress);
     model
       ..nativeCurrency.value =
           NativeCurrencyIsarModel.fromEntity(e.nativeCurrency)

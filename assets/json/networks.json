@@ -23,7 +23,8 @@
         "url": "https://testnet.snowtrace.io",
         "standard": "EIP3091"
       }
-    ]
+    ],
+    "routerAddress": "0xd7f655E3376cE2D7A2b08fF01Eb3B1023191A901"
   },
   {
     "name": "Avalanche C-Chain",
@@ -52,6 +53,7 @@
         "url": "https://snowtrace.io",
         "standard": "EIP3091"
       }
-    ]
+    ],
+    "routerAddress": "0x60aE616a2155Ee3d9A68541Ba4544862310933d4"
   }
 ]

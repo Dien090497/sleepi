@@ -1,4 +1,3 @@
-import 'dart:developer';
 import 'dart:math' as math;
 import 'dart:math';
 
@@ -142,12 +141,10 @@ class WalletImplementation extends IWalletRepository {
 
       var nativeCurrency = await _getNativeCurrency();
       return Right(
-        wallet.toEntity(
-          credentials,
-          networkName: network.name,
-          nativeCurrency: nativeCurrency!.toEntity(balance: balance),
-          chainId: network.chainId
-        ),
+        wallet.toEntity(credentials,
+            networkName: network.name,
+            nativeCurrency: nativeCurrency!.toEntity(balance: balance),
+            chainId: network.chainId),
       );
     } catch (e) {
       return Left(FailureMessage('$e'));
@@ -155,7 +152,8 @@ class WalletImplementation extends IWalletRepository {
   }
 
   @override
-  Future<Either<Failure, List<double>>> getBalanceOfTokens(ParamsBalanceOfToken params) async {
+  Future<Either<Failure, List<double>>> getBalanceOfTokens(
+      ParamsBalanceOfToken params) async {
     try {
       List<double> values = [];
       for (int i = 0; i < params.addressContract.length; i++) {
@@ -168,7 +166,8 @@ class WalletImplementation extends IWalletRepository {
           values.add(result);
         } else {
           final erc721 = _web3DataSource.nftFrom(params.addressContract[i]);
-          final value = await erc721.balanceOf(EthereumAddress.fromHex(params.walletInfoEntity.address));
+          final value = await erc721.balanceOf(
+              EthereumAddress.fromHex(params.walletInfoEntity.address));
           values.add(value.toDouble());
         }
       }
@@ -183,9 +182,9 @@ class WalletImplementation extends IWalletRepository {
     try {
       var walletId = _getStorageDataSource.getCurrentWalletId();
       var wallet = await _isarDataSource.getWalletAt(walletId);
-      _web3DataSource.swapExactAVAXForTokens(
+      bool success = await _web3DataSource.swapExactAVAXForTokens(
           wallet!.privateKey, wallet.address, contractAddress, value);
-      return const Right(true);
+      return Right(success);
     } catch (e) {
       return Left(FailureMessage('$e'));
     }
@@ -196,9 +195,26 @@ class WalletImplementation extends IWalletRepository {
     try {
       var walletId = _getStorageDataSource.getCurrentWalletId();
       var wallet = await _isarDataSource.getWalletAt(walletId);
-      _web3DataSource.swapExactTokensForAvax(
+      bool success = await _web3DataSource.swapExactTokensForAvax(
           wallet!.privateKey, wallet.address, contractAddress, value);
-      return const Right(true);
+      return Right(success);
+    } catch (e) {
+      return Left(FailureMessage('$e'));
+    }
+  }
+
+  Future<Either<Failure, bool>> swapTokenForToken(double value,
+      String contractAddressFrom, String contractAddressTo) async {
+    try {
+      var walletId = _getStorageDataSource.getCurrentWalletId();
+      var wallet = await _isarDataSource.getWalletAt(walletId);
+      bool success = await _web3DataSource.swapExactTokensForTokens(
+          wallet!.privateKey,
+          wallet.address,
+          contractAddressFrom,
+          contractAddressTo,
+          value);
+      return Right(success);
     } catch (e) {
       return Left(FailureMessage('$e'));
     }
@@ -213,12 +229,12 @@ class WalletImplementation extends IWalletRepository {
       var wallet = await _isarDataSource.getWalletAt(walletId);
       if (contractAddress == Const.tokens[0]['address']) {
         balance = await _web3DataSource.getBalance(wallet!.address);
-        return Right(balance/(pow(10, 18)));
+        return Right(balance / (pow(10, 18)));
       } else {
         balance = await _web3DataSource.getBalanceOf(
             wallet!.address, contractAddress);
         var decimals = await _web3DataSource.getDecimals(contractAddress);
-        return Right(balance/(pow(10, decimals.toInt())));
+        return Right(balance / (pow(10, decimals.toInt())));
       }
     } catch (e) {
       return Left(FailureMessage('$e'));
@@ -226,14 +242,16 @@ class WalletImplementation extends IWalletRepository {
   }
 
   @override
-  Future<Either<Failure, bool>> swapToken(double value, String contractAddressFrom, String contractAddressTo) {
+  Future<Either<Failure, bool>> swapToken(
+      double value, String contractAddressFrom, String contractAddressTo) {
     if (contractAddressFrom == Const.tokens[0]['address']) {
       return swapAvaxToken(value, contractAddressTo);
-    }else{
-      if(contractAddressTo == Const.tokens[0]['address']){
+    } else {
+      if (contractAddressTo == Const.tokens[0]['address']) {
         return swapTokenAvax(value, contractAddressFrom);
+      }else {
+        return swapTokenForToken(value, contractAddressFrom, contractAddressTo);
       }
-      return swapTokenAvax(value, contractAddressFrom);
     }
   }
 
@@ -255,7 +273,8 @@ class WalletImplementation extends IWalletRepository {
   }
 
   @override
-  Future<Either<Failure, double>> getAmountOutMin(double value, String contractAddressFrom, String contractAddressTo) async {
+  Future<Either<Failure, double>> getAmountOutMin(double value,
+      String contractAddressFrom, String contractAddressTo) async {
     var walletId = _getStorageDataSource.getCurrentWalletId();
     var wallet = await _isarDataSource.getWalletAt(walletId);
     double amount = await _web3DataSource.getAmountOutMin(
@@ -264,13 +283,13 @@ class WalletImplementation extends IWalletRepository {
   }
 
   @override
-  Future<Either<FailureMessage, NetworkIsarModel>> getCurrentNetWork(NetWorkEnum? params) async {
+  Future<Either<FailureMessage, NetworkIsarModel>> getCurrentNetWork(
+      NetWorkEnum? params) async {
     try {
       if (params == null) {
         final network = await _getCurrentNetwork();
         return Right(network);
-      }
-      else {
+      } else {
         if (params == NetWorkEnum.mainNet) {
           var network = (await _isarDataSource.getAllNetwork())[1];
           _web3DataSource.setCurrentNetwork(network);

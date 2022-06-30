@@ -31,6 +31,7 @@ mixin _$NetworkEntity {
   int? get slip44 => throw _privateConstructorUsedError;
   EnsEntity? get ens => throw _privateConstructorUsedError;
   List<ExplorersEntity>? get explorers => throw _privateConstructorUsedError;
+  String get routerAddress => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $NetworkEntityCopyWith<NetworkEntity> get copyWith =>
@@ -57,7 +58,8 @@ abstract class $NetworkEntityCopyWith<$Res> {
       int networkId,
       int? slip44,
       EnsEntity? ens,
-      List<ExplorersEntity>? explorers});
+      List<ExplorersEntity>? explorers,
+      String routerAddress});
 
   $NativeCurrencyEntityCopyWith<$Res> get nativeCurrency;
   $EnsEntityCopyWith<$Res>? get ens;
@@ -89,6 +91,7 @@ class _$NetworkEntityCopyWithImpl<$Res>
     Object? slip44 = freezed,
     Object? ens = freezed,
     Object? explorers = freezed,
+    Object? routerAddress = freezed,
   }) {
     return _then(_value.copyWith(
       chainId: chainId == freezed
@@ -151,6 +154,10 @@ class _$NetworkEntityCopyWithImpl<$Res>
           ? _value.explorers
           : explorers // ignore: cast_nullable_to_non_nullable
               as List<ExplorersEntity>?,
+      routerAddress: routerAddress == freezed
+          ? _value.routerAddress
+          : routerAddress // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 
@@ -195,7 +202,8 @@ abstract class _$$_NetworkEntityCopyWith<$Res>
       int networkId,
       int? slip44,
       EnsEntity? ens,
-      List<ExplorersEntity>? explorers});
+      List<ExplorersEntity>? explorers,
+      String routerAddress});
 
   @override
   $NativeCurrencyEntityCopyWith<$Res> get nativeCurrency;
@@ -231,6 +239,7 @@ class __$$_NetworkEntityCopyWithImpl<$Res>
     Object? slip44 = freezed,
     Object? ens = freezed,
     Object? explorers = freezed,
+    Object? routerAddress = freezed,
   }) {
     return _then(_$_NetworkEntity(
       chainId: chainId == freezed
@@ -293,6 +302,10 @@ class __$$_NetworkEntityCopyWithImpl<$Res>
           ? _value._explorers
           : explorers // ignore: cast_nullable_to_non_nullable
               as List<ExplorersEntity>?,
+      routerAddress: routerAddress == freezed
+          ? _value.routerAddress
+          : routerAddress // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
@@ -315,7 +328,8 @@ class _$_NetworkEntity with DiagnosticableTreeMixin implements _NetworkEntity {
       required this.networkId,
       required this.slip44,
       required this.ens,
-      required final List<ExplorersEntity>? explorers})
+      required final List<ExplorersEntity>? explorers,
+      required this.routerAddress})
       : _rpc = rpc,
         _faucets = faucets,
         _explorers = explorers;
@@ -368,8 +382,11 @@ class _$_NetworkEntity with DiagnosticableTreeMixin implements _NetworkEntity {
   }
 
   @override
+  final String routerAddress;
+
+  @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'NetworkEntity(chainId: $chainId, name: $name, title: $title, chain: $chain, icon: $icon, network: $network, rpc: $rpc, faucets: $faucets, nativeCurrency: $nativeCurrency, infoURL: $infoURL, shortName: $shortName, networkId: $networkId, slip44: $slip44, ens: $ens, explorers: $explorers)';
+    return 'NetworkEntity(chainId: $chainId, name: $name, title: $title, chain: $chain, icon: $icon, network: $network, rpc: $rpc, faucets: $faucets, nativeCurrency: $nativeCurrency, infoURL: $infoURL, shortName: $shortName, networkId: $networkId, slip44: $slip44, ens: $ens, explorers: $explorers, routerAddress: $routerAddress)';
   }
 
   @override
@@ -391,7 +408,8 @@ class _$_NetworkEntity with DiagnosticableTreeMixin implements _NetworkEntity {
       ..add(DiagnosticsProperty('networkId', networkId))
       ..add(DiagnosticsProperty('slip44', slip44))
       ..add(DiagnosticsProperty('ens', ens))
-      ..add(DiagnosticsProperty('explorers', explorers));
+      ..add(DiagnosticsProperty('explorers', explorers))
+      ..add(DiagnosticsProperty('routerAddress', routerAddress));
   }
 
   @override
@@ -415,7 +433,9 @@ class _$_NetworkEntity with DiagnosticableTreeMixin implements _NetworkEntity {
             const DeepCollectionEquality().equals(other.slip44, slip44) &&
             const DeepCollectionEquality().equals(other.ens, ens) &&
             const DeepCollectionEquality()
-                .equals(other._explorers, _explorers));
+                .equals(other._explorers, _explorers) &&
+            const DeepCollectionEquality()
+                .equals(other.routerAddress, routerAddress));
   }
 
   @override
@@ -435,7 +455,8 @@ class _$_NetworkEntity with DiagnosticableTreeMixin implements _NetworkEntity {
       const DeepCollectionEquality().hash(networkId),
       const DeepCollectionEquality().hash(slip44),
       const DeepCollectionEquality().hash(ens),
-      const DeepCollectionEquality().hash(_explorers));
+      const DeepCollectionEquality().hash(_explorers),
+      const DeepCollectionEquality().hash(routerAddress));
 
   @JsonKey(ignore: true)
   @override
@@ -459,7 +480,8 @@ abstract class _NetworkEntity implements NetworkEntity {
       required final int networkId,
       required final int? slip44,
       required final EnsEntity? ens,
-      required final List<ExplorersEntity>? explorers}) = _$_NetworkEntity;
+      required final List<ExplorersEntity>? explorers,
+      required final String routerAddress}) = _$_NetworkEntity;
 
   @override
   int get chainId => throw _privateConstructorUsedError;
@@ -491,6 +513,8 @@ abstract class _NetworkEntity implements NetworkEntity {
   EnsEntity? get ens => throw _privateConstructorUsedError;
   @override
   List<ExplorersEntity>? get explorers => throw _privateConstructorUsedError;
+  @override
+  String get routerAddress => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
   _$$_NetworkEntityCopyWith<_$_NetworkEntity> get copyWith =>
