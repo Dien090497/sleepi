@@ -12,7 +12,6 @@ import 'package:slee_fi/models/pop_with_result.dart';
 import 'package:slee_fi/presentation/blocs/wallet/wallet_cubit.dart';
 import 'package:slee_fi/presentation/blocs/wallet/wallet_state.dart';
 import 'package:slee_fi/presentation/screens/passcode/passcode_screen.dart';
-import 'package:slee_fi/presentation/screens/setting_wallet/setting_wallet_screen.dart';
 import 'package:slee_fi/presentation/screens/wallet/widgets/tab_bar.dart';
 import 'package:slee_fi/presentation/screens/wallet/widgets/tab_spending_detail.dart';
 import 'package:slee_fi/presentation/screens/wallet/widgets/tab_wallet_detail.dart';
@@ -65,7 +64,8 @@ class _WalletScreenState extends State<WalletScreen>
                     onTap: () async {
                       if (state is WalletStateLoaded) {
                         if (state.walletInfoEntity == null) {
-                          _showCreateOrImportWallet();
+                          _showCreateOrImportWallet().then(
+                                  (value) => _showWarningDialog(value, context));
                           return;
                         }
                         Navigator.pushNamed(context, R.passcode,

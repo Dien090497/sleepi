@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:appsflyer_sdk/appsflyer_sdk.dart';
 import 'package:flutter/foundation.dart';
 import 'package:injectable/injectable.dart';
