@@ -112,7 +112,7 @@ class WalletDetailList extends StatelessWidget {
                   title: SFText(
                       keyText: tokenList[index].displayName, style: TextStyles.lightWhite16),
                   trailing: SFText(
-                    keyText: tokenList[index].balance.toStringAsFixed(2),
+                    keyText: index < 3 ? tokenList[index].balance.toStringAsFixed(2) : tokenList[index].balance.toStringAsFixed(0),
                     style: TextStyles.lightWhite16,
                   ),
                 ),
