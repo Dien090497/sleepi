@@ -16,20 +16,23 @@ class SpendingDataSource {
         address: ContractAddresses.spending, client: _web3provider.web3client);
   }
 
-  Future<String> slftToSpending(
-      {required Credentials owner, required int amount}) async {
+  Future<String> toSpending({
+    required Credentials owner,
+    required int amount,
+    required ERC20 token,
+  }) async {
     return _spendingContract.depositToken(
-        _slft.self.address, BigInt.from(amount),
+        token.self.address, BigInt.from(amount),
         credentials: owner);
   }
 
-  Future<String> slftApprove(Credentials owner, int value) =>
-      _slft.approve(ContractAddresses.spending, BigInt.from(value),
+  Future<String> approve(Credentials owner, int value, ERC20 token) =>
+      token.approve(ContractAddresses.spending, BigInt.from(value),
           credentials: owner);
 
-  Future<BigInt> slftAllowance(EthereumAddress owner) =>
-      _slft.allowance(owner, _spendingContract.self.address);
+  Future<BigInt> allowance(EthereumAddress owner, ERC20 token) =>
+      token.allowance(owner, _spendingContract.self.address);
 
-  ERC20 get _slft =>
-      ERC20(address: ContractAddresses.slft, client: _web3provider.web3client);
+// ERC20 get _slft =>
+//     ERC20(address: ContractAddresses.slft, client: _web3provider.web3client);
 }
