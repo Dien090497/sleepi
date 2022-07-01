@@ -377,8 +377,8 @@
   "effect_efficiency": "Put positive correction to Efficiency",
   "effect_resilience": "Put positive correction to Resilience",
   "successfully_copied": "Successfully Copied",
-  "news_letters" : "News Letters",
-  "receive_news_letters" : "Receive News Letters",
+  "news_letters": "News Letters",
+  "receive_news_letters": "Receive News Letters",
   "registration_means_that_you_agree_to": "Registration means that you agree to SleeFi's",
   "user_agreement": "User Agreement",
   "user_privacy": "User Privacy",
@@ -387,7 +387,7 @@
   "genesis_beds": "Genesis Beds",
   "start_sleep_tracking": "Start Sleep Tracking?",
   "forgot_password": "Forgot password?",
-  "warning_bind_wallet": "Each account can only be linked to a unique wallet address",
   "warning": "Warning",
+  "warning_bind_wallet": "Each account can only be linked to a unique wallet address",
   "incorrect_passcode": "Incorrect Passcode"
 }
