@@ -40,6 +40,7 @@ class Imgs {
   static const String mintShoe = 'assets/images/mint_shoe.png';
   static const String motion = 'assets/images/motion.png';
   static const String motionData = 'assets/images/motion_data.png';
+  static const String newsLetters = 'assets/images/news_letters.png';
   static const String noTransactionRecord =
       'assets/images/no_transaction_record.png';
   static const String normalGacha = 'assets/images/normal_gacha.png';
@@ -98,6 +99,7 @@ class Imgs {
     mintShoe,
     motion,
     motionData,
+    newsLetters,
     noTransactionRecord,
     normalGacha,
     notification,

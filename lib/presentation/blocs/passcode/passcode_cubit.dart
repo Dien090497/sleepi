@@ -1,4 +1,5 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:slee_fi/common/extensions/string_x.dart';
 import 'package:slee_fi/di/injector.dart';
 import 'package:slee_fi/failures/failure.dart';
 import 'package:slee_fi/presentation/blocs/passcode/passcode_state.dart';
@@ -16,24 +17,24 @@ class PasscodeCubit extends Cubit<PasscodeState> {
   }
 
   Future<void> checkPassCode(String pass) async {
-    final currentState = state;
-    if (currentState is PasscodeStateInitial) {
-      final result = await _getPasscode.call(pass);
-
-      result.fold(
-        (l) {
-          emit(PasscodeState.error(l is FailureMessage ? l.msg : '$l'));
-          emit(currentState.copyWith(isLoading: false));
-        },
-        (success) {
-          if (success) {
-            emit(const PasscodeState.valid());
-          } else {
-            emit(const PasscodeState.inValid());
-          }
-        },
-      );
-    }
+    'on check pass '.log;
+    final result = await _getPasscode.call(pass);
+    'on result $result'.log;
+    result.fold(
+      (l) {
+        'run to passcode error '.log;
+        emit(PasscodeState.error(l is FailureMessage ? l.msg : '$l'));
+        // emit(currentState.copyWith(isLoading: false));
+      },
+      (success) {
+        'on success $success'.log;
+        if (success) {
+          emit(const PasscodeState.valid());
+        } else {
+          emit(const PasscodeState.inValid());
+        }
+      },
+    );
   }
 
   void createPassCode(String pass) async {

@@ -116,7 +116,12 @@ class _WalletScreenState extends State<WalletScreen>
                             state.walletInfoEntity == null &&
                             i == 1) {
                           _showCreateOrImportWallet().then(
-                              (value) => _showWarningDialog(value, context));
+                              (value) {
+                                _showWarningDialog(value, context);
+                                if (value == true) {
+                                  controller.animateTo(1);
+                                }
+                              });
                           return false;
                         }
 

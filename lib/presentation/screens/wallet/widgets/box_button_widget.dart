@@ -19,7 +19,7 @@ class BoxButtonWidget extends StatelessWidget {
     return GestureDetector(
       onTap: onTap,
       child: Container(
-        padding: const EdgeInsets.only(left: 10, right: 10, top: 20),
+        padding: const EdgeInsets.only(top: 20),
         decoration: BoxDecoration(
           color: AppColors.white.withOpacity(0.05),
           borderRadius: BorderRadius.circular(16.0),

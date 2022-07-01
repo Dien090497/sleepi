@@ -12,9 +12,9 @@ part 'token_isar_model.g.dart';
 class TokenIsarModel {
   int? id = Isar.autoIncrement;
 
-  final int walletId;
+  final int? walletId;
 
-  final int networkChainId;
+  final int? networkChainId;
 
   final String address;
 
@@ -32,8 +32,8 @@ class TokenIsarModel {
 
   TokenIsarModel({
     this.id,
-    required this.walletId,
-    required this.networkChainId,
+    this.walletId,
+    this.networkChainId,
     required this.address,
     required this.name,
     required this.displayName,
