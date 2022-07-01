@@ -10,10 +10,11 @@ import 'package:slee_fi/presentation/blocs/send_to_external/send_to_external_cub
 import 'package:slee_fi/presentation/blocs/send_to_external/send_to_external_state.dart';
 
 class PopUpConfirmSend extends StatefulWidget {
-  const PopUpConfirmSend({required this.toAddress, required this.valueInEther, Key? key}) : super(key: key);
+  const PopUpConfirmSend({required this.toAddress, required this.valueInEther,required this.balance, Key? key}) : super(key: key);
 
   final String toAddress;
   final double valueInEther;
+  final double balance;
 
   @override
   State<PopUpConfirmSend> createState() => _PopUpConfirmSendState();
@@ -152,7 +153,7 @@ class _PopUpConfirmSendState extends State<PopUpConfirmSend> {
           )
           : const Padding(
             padding:  EdgeInsets.all(24.0),
-            child:  Center(child: CircularProgressIndicator(),),
+            child:  SizedBox(height: 100, child: Center(child: CircularProgressIndicator()),),
           );
         },
       ),

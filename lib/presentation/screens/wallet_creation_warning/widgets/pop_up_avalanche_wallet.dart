@@ -19,6 +19,7 @@ class PopUpAvalancheWallet extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    bool isLoadingCreateWallet = false;
     return BlocProvider(
       create: (_) => CreateWalletCubit()..init(),
       child: BlocConsumer<CreateWalletCubit, CreateWalletState>(
@@ -35,7 +36,14 @@ class PopUpAvalancheWallet extends StatelessWidget {
         },
         builder: (context, state) {
           final cubit = context.read<CreateWalletCubit>();
-          return Padding(
+          return isLoadingCreateWallet
+          ?
+          const Padding(
+            padding:  EdgeInsets.all(24.0),
+            child:  SizedBox(height: 100, child: Center(child: CircularProgressIndicator()),),
+          )
+          :
+          Padding(
             padding: const EdgeInsets.fromLTRB(16, 0, 16, 16),
             child: Column(
               children: [
@@ -53,13 +61,19 @@ class PopUpAvalancheWallet extends StatelessWidget {
                       textStyle: TextStyles.bold16Blue,
                       borderColor: AppColors.blue,
                       onPressed: () {
-                        _showWarningDialog(context).then((_) =>
-                            Navigator.pushNamed(context, R.createPasscode)
-                                .then((value) {
-                              if (value == true) {
-                                cubit.createWallet();
+                        showCustomAlertDialog(context,
+                            children:  PopUpWarningBindWallet(
+                              onPressed: () {
+                                Navigator.pop(context);
+                                Navigator.pushNamed(context, R.createPasscode)
+                                    .then((value) {
+                                  if (value == true) {
+                                    cubit.createWallet();
+                                    isLoadingCreateWallet = true;
+                                  }
+                                });
                               }
-                            }));
+                            ));
                       },
                     )),
                 const SizedBox(
@@ -72,12 +86,23 @@ class PopUpAvalancheWallet extends StatelessWidget {
                   width: double.infinity,
                   color: AppColors.blue,
                   onPressed: () async {
-                    _showWarningDialog(context).then((value) =>
-                        Navigator.pushNamed(context, R.importWallet).then((value) {
-                          if (value is PopWithResults) {
-                            Navigator.pop(context, value);
+                    showCustomAlertDialog(context,
+                        children:  PopUpWarningBindWallet(
+                          onPressed: () {
+                            Navigator.pop(context);
+                            Navigator.pushNamed(context, R.importWallet).then((value) {
+                              if (value is PopWithResults) {
+                                Navigator.pop(context, value);
+                              }
+                            });
                           }
-                        }));
+                        ));
+                    // _showWarningDialog(context).then((value) =>
+                    //     Navigator.pushNamed(context, R.importWallet).then((value) {
+                    //       if (value is PopWithResults) {
+                    //         Navigator.pop(context, value);
+                    //       }
+                    //     }));
                   },
                 ),
               ],
