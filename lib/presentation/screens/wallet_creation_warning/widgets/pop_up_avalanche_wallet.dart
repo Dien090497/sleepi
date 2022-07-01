@@ -72,7 +72,10 @@ class PopUpAvalancheWallet extends StatelessWidget {
   }
 
   _showWarningDialog(BuildContext context) async {
-    await showCustomAlertDialog(context,
-        children: const PopUpWarningBindWallet());
+    await showCustomAlertDialog(
+      context,
+      showClosed: false,
+      children: const PopUpWarningBindWallet(),
+    );
   }
 }
