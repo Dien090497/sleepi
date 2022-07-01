@@ -37,5 +37,9 @@ class WalletCubit extends Cubit<WalletState> {
     }
   }
 
+  reloadBalance(){
+
+  }
+
 
 }

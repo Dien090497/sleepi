@@ -1,15 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:slee_fi/common/extensions/string_x.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
 import 'package:slee_fi/common/widgets/sf_buttons.dart';
 import 'package:slee_fi/common/widgets/sf_card.dart';
-import 'package:slee_fi/common/widgets/sf_dialog.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
 import 'package:slee_fi/l10n/locale_keys.g.dart';
-import 'package:slee_fi/presentation/blocs/trade/trade_cubit.dart';
-import 'package:slee_fi/presentation/blocs/trade/trade_state.dart';
 
 class PopUpConfirmTrade extends StatelessWidget {
   const PopUpConfirmTrade({
@@ -19,6 +15,7 @@ class PopUpConfirmTrade extends StatelessWidget {
     required this.symbolTo,
     required this.addressFrom,
     required this.addressTo,
+    required this.onSwap, required this.amountOutMin,
   }) : super(key: key);
 
   final double value;
@@ -26,28 +23,11 @@ class PopUpConfirmTrade extends StatelessWidget {
   final String addressFrom;
   final String symbolTo;
   final String addressTo;
-
+  final VoidCallback onSwap;
+  final double amountOutMin;
   @override
   Widget build(BuildContext context) {
-    double amountOutMin = 0;
-    return BlocProvider(
-      create: (BuildContext context) => TradeCubit()..init(),
-      child: BlocConsumer<TradeCubit, TradeState>(
-        listener: (context, state) {
-          if (state is swapTokenSuccess) {
-            Navigator.pop(context);
-            showSuccessfulDialog(context);
-          }
-          if (state is tradeGetAmountOutMin) {
-            amountOutMin = state.amountOutMin;
-          }
-        },
-        builder: (context, state) {
-          final cubit = context.read<TradeCubit>();
-          if(state is TradeStateInitial){
-            cubit.getAmountOutMin(addressFrom, addressTo, value);
-          }
-          return Padding(
+    return Padding(
             padding: const EdgeInsets.fromLTRB(16, 0, 16, 16),
             child: Column(
               children: [
@@ -115,7 +95,8 @@ class PopUpConfirmTrade extends StatelessWidget {
                     ),
                     Expanded(
                         child: SFText(
-                            keyText: "$amountOutMin $symbolTo",
+                            keyText:
+                                "${amountOutMin.toStringAsFixed(6)} $symbolTo",
                             style: TextStyles.lightWhite16,
                             textAlign: TextAlign.end)),
                   ],
@@ -144,9 +125,7 @@ class PopUpConfirmTrade extends StatelessWidget {
                         width: double.infinity,
                         textStyle: TextStyles.bold14LightWhite,
                         gradient: AppColors.gradientBlueButton,
-                        onPressed: () {
-                          cubit.swapToken(value, addressFrom, addressTo);
-                        },
+                        onPressed: onSwap,
                       ),
                     ),
                   ],
@@ -154,8 +133,5 @@ class PopUpConfirmTrade extends StatelessWidget {
               ],
             ),
           );
-        },
-      ),
-    );
   }
 }

@@ -13,7 +13,7 @@ class TopBarCommon extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    const size =  ui.Size(40, 40);
+    const size = ui.Size(40, 40);
     return Padding(
       padding: const EdgeInsets.only(top: 20, left: 16, right: 16),
       child: Row(
@@ -34,31 +34,27 @@ class TopBarCommon extends StatelessWidget {
                   onTap: () {
                     Navigator.pushNamed(context, R.setting);
                   },
-                child: Container(
-                  width: size.width,
-                  height: size.height,
-                  decoration: BoxDecoration(
-                    color: Colors.white.withOpacity(0.05),
-                    borderRadius: BorderRadius.circular(100),
-                  ),
-                  child:const SFIcon(
-                    Ics.personOutline,
-                    width: 16,
-                    height: 16,
-                    fit: BoxFit.none,
-                    color: AppColors.white,
+                  child: Container(
+                    width: size.width,
+                    height: size.height,
+                    decoration: BoxDecoration(
+                      color: Colors.white.withOpacity(0.05),
+                      borderRadius: BorderRadius.circular(100),
+                    ),
+                    child: const SFIcon(
+                      Ics.personOutline,
+                      width: 16,
+                      height: 16,
+                      fit: BoxFit.none,
+                      color: AppColors.white,
+                    ),
                   ),
                 ),
-              ),
           GestureDetector(
             onTap: () {
               Navigator.pushNamed(context, R.wallet);
             },
-            child: const SFStatisticResource(
-              valueSliver: 46.87,
-              valueSolana: 0,
-              valueGold: 54.47,
-            ),
+            child: const SFStatisticResource(),
           )
         ],
       ),

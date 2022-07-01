@@ -184,9 +184,9 @@ class WalletImplementation extends IWalletRepository {
     try {
       var walletId = _getStorageDataSource.getCurrentWalletId();
       var wallet = await _isarDataSource.getWalletAt(walletId);
-      _web3DataSource.swapExactAVAXForTokens(
+      bool success = await _web3DataSource.swapExactAVAXForTokens(
           wallet!.privateKey, wallet.address, contractAddress, value);
-      return const Right(true);
+      return Right(success);
     } catch (e) {
       return Left(FailureMessage('$e'));
     }
@@ -197,9 +197,26 @@ class WalletImplementation extends IWalletRepository {
     try {
       var walletId = _getStorageDataSource.getCurrentWalletId();
       var wallet = await _isarDataSource.getWalletAt(walletId);
-      _web3DataSource.swapExactTokensForAvax(
-          wallet!.privateKey, wallet.address, contractAddress, 18, value);
-      return const Right(true);
+      bool success = await _web3DataSource.swapExactTokensForAvax(
+          wallet!.privateKey, wallet.address, contractAddress, value);
+      return Right(success);
+    } catch (e) {
+      return Left(FailureMessage('$e'));
+    }
+  }
+
+  Future<Either<Failure, bool>> swapTokenForToken(double value,
+      String contractAddressFrom, String contractAddressTo) async {
+    try {
+      var walletId = _getStorageDataSource.getCurrentWalletId();
+      var wallet = await _isarDataSource.getWalletAt(walletId);
+      bool success = await _web3DataSource.swapExactTokensForTokens(
+          wallet!.privateKey,
+          wallet.address,
+          contractAddressFrom,
+          contractAddressTo,
+          value);
+      return Right(success);
     } catch (e) {
       return Left(FailureMessage('$e'));
     }
@@ -231,8 +248,13 @@ class WalletImplementation extends IWalletRepository {
       double value, String contractAddressFrom, String contractAddressTo) {
     if (contractAddressFrom == Const.tokens[0]['address']) {
       return swapAvaxToken(value, contractAddressTo);
+    } else {
+      if (contractAddressTo == Const.tokens[0]['address']) {
+        return swapTokenAvax(value, contractAddressFrom);
+      }else {
+        return swapTokenForToken(value, contractAddressFrom, contractAddressTo);
+      }
     }
-    return swapTokenAvax(value, contractAddressFrom);
   }
 
   @override

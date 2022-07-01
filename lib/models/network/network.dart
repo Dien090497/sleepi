@@ -22,6 +22,7 @@ class Network {
   final int? slip44;
   final Ens? ens;
   final List<Explorers>? explorers;
+  final String routerAddress;
 
   Network({
     required this.name,
@@ -39,6 +40,7 @@ class Network {
     required this.slip44,
     this.ens,
     this.explorers,
+    required this.routerAddress,
   });
 
   factory Network.fromJson(Map<String, dynamic> json) =>

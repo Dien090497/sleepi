@@ -20,26 +20,22 @@ class TradeCubit extends Cubit<TradeState> {
 
   Future<void> swapToken(double value, String contractAddressFrom,
       String contractAddressTo) async {
-    final currentState = state;
-    if (currentState is TradeStateInitial) {
-      final result = await _swapToken.call(SwapTokenParams(
-          value: value,
-          contractAddressFrom: contractAddressFrom,
-          contractAddressTo: contractAddressTo));
+    final result = await _swapToken.call(SwapTokenParams(
+        value: value,
+        contractAddressFrom: contractAddressFrom,
+        contractAddressTo: contractAddressTo));
 
-      result.fold(
-        (l) {
-          emit(TradeState.fail(l is FailureMessage ? l.msg : '$l'));
-          emit(currentState.copyWith(isLoading: false));
-        },
-        (success) {
-          if (success) {
-            getBalanceToken(contractAddressFrom);
-            emit(const TradeState.success());
-          }
-        },
-      );
-    }
+    result.fold(
+      (l) {
+        emit(TradeState.fail(l is FailureMessage ? l.msg : '$l'));
+      },
+      (success) {
+        if (success) {
+          emit(const TradeState.success());
+          getBalanceToken(contractAddressFrom);
+        }
+      },
+    );
   }
 
   Future<void> getBalanceToken(String contractAddress) async {
