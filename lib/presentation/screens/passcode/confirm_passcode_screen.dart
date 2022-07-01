@@ -20,9 +20,13 @@ class ConfirmPasscodeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final args =
-        ModalRoute.of(context)?.settings.arguments as ConfirmPasscodeArguments?;
+    ModalRoute
+        .of(context)
+        ?.settings
+        .arguments as ConfirmPasscodeArguments?;
 
     final TextEditingController passcodeController = TextEditingController();
+    bool wrongPassword = false;
 
     return BackgroundWidget(
       appBar: SFAppBar(
@@ -40,17 +44,33 @@ class ConfirmPasscodeScreen extends StatelessWidget {
                     style: TextStyles.white12)),
             const SizedBox(height: 12),
             PinCodeWidget(controller: passcodeController),
-            SizedBox(height: 4.h),
-            PasscodeNumPad(
-              passcodeController: passcodeController,
-              onCompleted: (String passcode) {
-                if (args != null && passcode != args.passcode) {
-                  passcodeController.clear();
-                } else if (args != null && passcode == args.passcode) {
-                  Navigator.pop(context, true);
-                }
-              },
-            ),
+
+            StatefulBuilder(builder: (context, setState) {
+              return Column(
+                children: [
+                  if (wrongPassword)
+                    Center(
+                      child: SFText(
+                          keyText: LocaleKeys.incorrect_passcode,
+                          style: TextStyles.red14),
+                    ),
+                  SizedBox(height: 15.h),
+                  PasscodeNumPad(
+                    passcodeController: passcodeController,
+                    onCompleted: (String passcode) {
+                      if (args != null && passcode != args.passcode) {
+                        // wrongPassword = true;
+                        setState(()=> wrongPassword = true);
+                        passcodeController.clear();
+                      } else if (args != null && passcode == args.passcode) {
+                        Navigator.pop(context, true);
+                      }
+                    },
+                  )
+                ],
+              );
+            }),
+
             SizedBox(height: 32.h),
             // SFTextButton(
             //   text: LocaleKeys.forgotPasscode,
