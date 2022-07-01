@@ -40,7 +40,12 @@ class _AddressScanState extends State<AddressScan> {
         suffixIcon: GestureDetector(
           onTap: () async{
             final result = await Navigator.pushNamed(context, R.qrCodeScan);
-            if(result != null ) _editingController.text = "$result";
+            if(result != null ){
+              int idx = result.toString().indexOf(":");
+              var contractAddress = result.toString().substring(idx+1).trim(); // date: "'2019:04:01'"
+              _editingController.text = contractAddress;
+            }
+
           },
           child: const Padding(
               padding: EdgeInsets.all(10),

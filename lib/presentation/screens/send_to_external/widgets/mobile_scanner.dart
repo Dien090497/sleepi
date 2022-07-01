@@ -33,8 +33,8 @@ class QRCodeScanner extends StatelessWidget {
               debugPrint('Failed to scan QRCode');
             } else {
               final String code = qrcode.rawValue!;
-              debugPrint('QRCode found! $code');
-              Navigator.pop(context, "123");
+              debugPrint('QRCode found : $code');
+              Navigator.pop(context, code);
             }
           }),
 

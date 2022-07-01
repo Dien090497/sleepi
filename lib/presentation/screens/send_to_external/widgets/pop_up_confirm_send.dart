@@ -20,12 +20,13 @@ class PopUpConfirmSend extends StatefulWidget {
 }
 
 class _PopUpConfirmSendState extends State<PopUpConfirmSend> {
+
   double? fee;
   bool isDisabled = true;
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => SendToExternalCubit()..estimateGas(widget.toAddress, widget.valueInEther),
+      create: (context) => SendToExternalCubit()..init(),
       child: BlocConsumer<SendToExternalCubit, SendToExternalState>(
         listener: (context, state) {
           if(state is sendToExternalSuccess){
@@ -48,9 +49,9 @@ class _PopUpConfirmSendState extends State<PopUpConfirmSend> {
         },
         builder: (context, state) {
           final cubit = context.read<SendToExternalCubit>();
-          // if (state is sendToExternalStateInitial) {
-          //   cubit.estimateGas(widget.toAddress, widget.valueInEther);
-          // }
+          if (state is sendToExternalStateInitial) {
+            cubit.estimateGas(widget.toAddress, widget.valueInEther);
+          }
           return isDisabled == false ? Padding(
             padding: const EdgeInsets.symmetric(horizontal: 24),
             child: Column(
@@ -139,7 +140,9 @@ class _PopUpConfirmSendState extends State<PopUpConfirmSend> {
                         color: AppColors.blue,
                         width: double.infinity,
                         disabled: isDisabled,
-                        onPressed: () => cubit.sendToExternal(widget.toAddress, widget.valueInEther),
+                        onPressed: () {
+                          cubit.sendToExternal(widget.toAddress, widget.valueInEther);
+                        }
                       ),
                     ),
                   ],

@@ -2,6 +2,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:slee_fi/common/const/const.dart';
+import 'package:slee_fi/common/extensions/num_ext.dart';
 import 'package:slee_fi/common/extensions/string_x.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
@@ -106,7 +107,7 @@ class _SendToExternalScreenState extends State<SendToExternalScreen> {
                                   const SizedBox(height: 24),
                                   SFTextField(
                                     labelText: LocaleKeys.amount,
-                                    textInputType: TextInputType.number,
+                                    textInputType: const TextInputType.numberWithOptions(decimal: true, signed: false),
                                     errorText:state is SendToExternalErrorValueInEther
                                         ? state.msg
                                         : null,
@@ -124,7 +125,7 @@ class _SendToExternalScreenState extends State<SendToExternalScreen> {
                                   SFText(
                                       keyText: LocaleKeys.balance,
                                       style: TextStyles.w400lightGrey12,
-                                      suffix: ': $balance ${args != null ? args.symbol : "AVAX"}'),
+                                      suffix: ': ${balance.formatBalance} ${args != null ? args.symbol : "AVAX"}'),
                                 ],
                               ),
                             ),
