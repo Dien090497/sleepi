@@ -2,6 +2,7 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:slee_fi/models/ens/ens.dart';
 import 'package:slee_fi/models/explorers/explorers.dart';
 import 'package:slee_fi/models/native_currency/native_currency.dart';
+import 'package:slee_fi/models/token_default/token_default.dart';
 
 part 'network.g.dart';
 
@@ -23,6 +24,7 @@ class Network {
   final Ens? ens;
   final List<Explorers>? explorers;
   final String routerAddress;
+  final TokenDefault tokenDefault;
 
   Network({
     required this.name,
@@ -41,6 +43,7 @@ class Network {
     this.ens,
     this.explorers,
     required this.routerAddress,
+    required this.tokenDefault,
   });
 
   factory Network.fromJson(Map<String, dynamic> json) =>

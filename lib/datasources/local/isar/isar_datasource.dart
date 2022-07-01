@@ -6,6 +6,7 @@ import 'package:injectable/injectable.dart';
 import 'package:isar/isar.dart';
 import 'package:slee_fi/models/isar_models/native_currency_isar/native_currency_isar_model.dart';
 import 'package:slee_fi/models/isar_models/network_isar/network_isar_model.dart';
+import 'package:slee_fi/models/isar_models/token_default_isar/token_default_model.dart';
 import 'package:slee_fi/models/isar_models/token_isar/token_isar_model.dart';
 import 'package:slee_fi/models/isar_models/wallet_isar/wallet_isar_model.dart';
 import 'package:slee_fi/models/network/network.dart';
@@ -127,6 +128,7 @@ class IsarDataSource {
             e.nativeCurrency.save(),
             e.ens.save(),
             e.explorers.save(),
+            e.tokenDefault.save()
           ]);
         }
         return ids;
@@ -158,4 +160,18 @@ class IsarDataSource {
   }
 
   Future<void> clearAll() => _isar.writeTxn((isar) => isar.clear());
+
+  Future<TokenDefaultModel?> getContractToken(int chainId) async {
+    final list = await _isar.tokenDefault.where().findAll();
+    for (final c in list) {
+      if (!c.tokenDefault.isLoaded) {
+        await c.tokenDefault.load();
+      }
+
+      if (c.tokenDefault.value?.chainId == chainId) {
+        return c;
+      }
+    }
+    return null;
+  }
 }

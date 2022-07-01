@@ -4,6 +4,7 @@ import 'package:slee_fi/entities/network/network_entity.dart';
 import 'package:slee_fi/models/isar_models/ens_isar/ens_isar_model.dart';
 import 'package:slee_fi/models/isar_models/explorers_isar/explorers_isar_model.dart';
 import 'package:slee_fi/models/isar_models/native_currency_isar/native_currency_isar_model.dart';
+import 'package:slee_fi/models/isar_models/token_default_isar/token_default_model.dart';
 import 'package:slee_fi/models/network/network.dart';
 
 part 'network_isar_model.g.dart';
@@ -40,6 +41,8 @@ class NetworkIsarModel {
   final ens = IsarLink<EnsIsarModel>();
 
   final explorers = IsarLinks<ExplorersIsarModel>();
+
+  final tokenDefault = IsarLink<TokenDefaultModel>();
 
   NetworkIsarModel({
     required this.chainId,
@@ -88,7 +91,8 @@ class NetworkIsarModel {
         network: e.network,
         icon: e.icon,
         slip44: e.slip44,
-        title: e.title,);
+        title: e.title,
+    );
     model
       ..ens.value = EnsIsarModel.fromEns(e.ens)
       ..nativeCurrency.value = NativeCurrencyIsarModel.fromNativeCurrency(
@@ -98,7 +102,8 @@ class NetworkIsarModel {
       )
       ..explorers.addAll(e.explorers != null
           ? e.explorers!.map((e) => ExplorersIsarModel.fromExplorers(e))
-          : []);
+          : [])
+      ..tokenDefault.value = TokenDefaultModel.fromTokenDefault(e.tokenDefault);
     return model;
   }
 
