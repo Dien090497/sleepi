@@ -388,5 +388,6 @@
   "start_sleep_tracking": "Start Sleep Tracking?",
   "forgot_password": "Forgot password?",
   "warning_bind_wallet": "Each account can only be linked to a unique wallet address",
-  "warning": "Warning"
+  "warning": "Warning",
+  "incorrect_passcode": "Incorrect Passcode"
 }

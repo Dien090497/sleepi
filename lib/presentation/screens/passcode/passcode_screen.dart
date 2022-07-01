@@ -48,8 +48,10 @@ class _PasscodeScreenState extends State<PasscodeScreen> {
             }
           } else {
             passCodeController.text = '';
-            cubit.init();
-            setState(() {});
+            Future.delayed(
+              const Duration(milliseconds: 1000),
+              () => cubit.init(),
+            );
           }
         },
         builder: (context, state) {
@@ -73,7 +75,13 @@ class _PasscodeScreenState extends State<PasscodeScreen> {
                   ),
                   const SizedBox(height: 24),
                   PinCodeWidget(controller: passCodeController),
-                  SizedBox(height: 4.h),
+                  if (state is checkPassCodeInValid)
+                    Center(
+                      child: SFText(
+                          keyText: LocaleKeys.incorrect_passcode,
+                          style: TextStyles.red14),
+                    ),
+                  SizedBox(height: 15.h),
                   PasscodeNumPad(
                     passcodeController: passCodeController,
                     onCompleted: (String passcode) {
