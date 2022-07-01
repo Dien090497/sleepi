@@ -7,6 +7,7 @@ import 'package:slee_fi/presentation/screens/create_password/create_password_scr
 import 'package:slee_fi/presentation/screens/create_wallet/create_wallet_screen.dart';
 import 'package:slee_fi/presentation/screens/email/email_screen.dart';
 import 'package:slee_fi/presentation/screens/enter_activation_code/enter_activation_code_screen.dart';
+import 'package:slee_fi/presentation/screens/forgot_passcode/forgot_passcode_screen.dart';
 import 'package:slee_fi/presentation/screens/gacha/layout/gacha_chane_500_screen.dart';
 import 'package:slee_fi/presentation/screens/gacha/layout/gacha_result_bed_screen.dart';
 import 'package:slee_fi/presentation/screens/gacha/layout/gacha_result_overview.dart';
@@ -107,6 +108,7 @@ class R {
   static const String transactionDetail = '${_}transaction_detail';
   static const String commingSoon = '${_}comming_soon';
   static const String qrCodeScan = '${_}qr_code_scan';
+  static const String forgotPasscode = '${_}forgot_passcode';
 }
 
 class AppRoutes {
@@ -165,5 +167,6 @@ class AppRoutes {
     R.transactionDetail: (_) => const TransactionDetail(),
     R.commingSoon: (_) => const CommingSoon(),
     R.qrCodeScan: (_) => const QRCodeScanner(),
+    R.forgotPasscode: (_) => const ForgotPasscodeScreen(),
   };
 }

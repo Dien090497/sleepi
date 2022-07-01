@@ -141,7 +141,7 @@ class PopUpBedsDetail extends StatelessWidget {
                     onPressed: () {
                       onConfirm();
                       Navigator.pop(context);
-                      showSuccessfulDialog(context);
+                      showSuccessfulDialog(context, null);
                     },
                   ),
                 ),

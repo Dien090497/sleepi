@@ -21,9 +21,9 @@ class SendToExternalCubit extends Cubit<SendToExternalState> {
     emit(const SendToExternalState.initial());
   }
 
-  Future<void> sendToExternal(String contractAddressTo , double valueInEther) async {
+  Future<void> sendToExternal(String contractAddressTo , double valueInEther, double fee) async {
     final result = await _sendToExternalUC.call(SendToExternalParams(
-        contractAddressTo : contractAddressTo, valueInEther : valueInEther));
+        contractAddressTo : contractAddressTo, valueInEther : valueInEther, fee: fee));
 
     result.fold((l) {
       emit(SendToExternalState.fail(l is FailureMessage ? l.msg : '$l'));
