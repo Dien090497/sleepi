@@ -129,10 +129,10 @@ TokenIsarModel _tokenIsarModelDeserializeNative(
     icon: reader.readString(offsets[3]),
     id: id,
     name: reader.readString(offsets[4]),
-    networkChainId: reader.readLong(offsets[5]),
+    networkChainId: reader.readLongOrNull(offsets[5]),
     symbol: reader.readString(offsets[6]),
     txns: reader.readStringList(offsets[7]) ?? [],
-    walletId: reader.readLong(offsets[8]),
+    walletId: reader.readLongOrNull(offsets[8]),
   );
   return object;
 }
@@ -153,13 +153,13 @@ P _tokenIsarModelDeserializePropNative<P>(
     case 4:
       return (reader.readString(offset)) as P;
     case 5:
-      return (reader.readLong(offset)) as P;
+      return (reader.readLongOrNull(offset)) as P;
     case 6:
       return (reader.readString(offset)) as P;
     case 7:
       return (reader.readStringList(offset) ?? []) as P;
     case 8:
-      return (reader.readLong(offset)) as P;
+      return (reader.readLongOrNull(offset)) as P;
     default:
       throw 'Illegal propertyIndex';
   }
@@ -191,16 +191,14 @@ TokenIsarModel _tokenIsarModelDeserializeWeb(
     icon: IsarNative.jsObjectGet(jsObj, 'icon') ?? '',
     id: IsarNative.jsObjectGet(jsObj, 'id'),
     name: IsarNative.jsObjectGet(jsObj, 'name') ?? '',
-    networkChainId: IsarNative.jsObjectGet(jsObj, 'networkChainId') ??
-        double.negativeInfinity,
+    networkChainId: IsarNative.jsObjectGet(jsObj, 'networkChainId'),
     symbol: IsarNative.jsObjectGet(jsObj, 'symbol') ?? '',
     txns: (IsarNative.jsObjectGet(jsObj, 'txns') as List?)
             ?.map((e) => e ?? '')
             .toList()
             .cast<String>() ??
         [],
-    walletId:
-        IsarNative.jsObjectGet(jsObj, 'walletId') ?? double.negativeInfinity,
+    walletId: IsarNative.jsObjectGet(jsObj, 'walletId'),
   );
   return object;
 }
@@ -221,8 +219,7 @@ P _tokenIsarModelDeserializePropWeb<P>(Object jsObj, String propertyName) {
     case 'name':
       return (IsarNative.jsObjectGet(jsObj, 'name') ?? '') as P;
     case 'networkChainId':
-      return (IsarNative.jsObjectGet(jsObj, 'networkChainId') ??
-          double.negativeInfinity) as P;
+      return (IsarNative.jsObjectGet(jsObj, 'networkChainId')) as P;
     case 'symbol':
       return (IsarNative.jsObjectGet(jsObj, 'symbol') ?? '') as P;
     case 'txns':
@@ -232,8 +229,7 @@ P _tokenIsarModelDeserializePropWeb<P>(Object jsObj, String propertyName) {
               .cast<String>() ??
           []) as P;
     case 'walletId':
-      return (IsarNative.jsObjectGet(jsObj, 'walletId') ??
-          double.negativeInfinity) as P;
+      return (IsarNative.jsObjectGet(jsObj, 'walletId')) as P;
     default:
       throw 'Illegal propertyName';
   }
@@ -830,7 +826,16 @@ extension TokenIsarModelQueryFilter
   }
 
   QueryBuilder<TokenIsarModel, TokenIsarModel, QAfterFilterCondition>
-      networkChainIdEqualTo(int value) {
+      networkChainIdIsNull() {
+    return addFilterConditionInternal(FilterCondition(
+      type: ConditionType.isNull,
+      property: 'networkChainId',
+      value: null,
+    ));
+  }
+
+  QueryBuilder<TokenIsarModel, TokenIsarModel, QAfterFilterCondition>
+      networkChainIdEqualTo(int? value) {
     return addFilterConditionInternal(FilterCondition(
       type: ConditionType.eq,
       property: 'networkChainId',
@@ -840,7 +845,7 @@ extension TokenIsarModelQueryFilter
 
   QueryBuilder<TokenIsarModel, TokenIsarModel, QAfterFilterCondition>
       networkChainIdGreaterThan(
-    int value, {
+    int? value, {
     bool include = false,
   }) {
     return addFilterConditionInternal(FilterCondition(
@@ -853,7 +858,7 @@ extension TokenIsarModelQueryFilter
 
   QueryBuilder<TokenIsarModel, TokenIsarModel, QAfterFilterCondition>
       networkChainIdLessThan(
-    int value, {
+    int? value, {
     bool include = false,
   }) {
     return addFilterConditionInternal(FilterCondition(
@@ -866,8 +871,8 @@ extension TokenIsarModelQueryFilter
 
   QueryBuilder<TokenIsarModel, TokenIsarModel, QAfterFilterCondition>
       networkChainIdBetween(
-    int lower,
-    int upper, {
+    int? lower,
+    int? upper, {
     bool includeLower = true,
     bool includeUpper = true,
   }) {
@@ -1095,7 +1100,16 @@ extension TokenIsarModelQueryFilter
   }
 
   QueryBuilder<TokenIsarModel, TokenIsarModel, QAfterFilterCondition>
-      walletIdEqualTo(int value) {
+      walletIdIsNull() {
+    return addFilterConditionInternal(FilterCondition(
+      type: ConditionType.isNull,
+      property: 'walletId',
+      value: null,
+    ));
+  }
+
+  QueryBuilder<TokenIsarModel, TokenIsarModel, QAfterFilterCondition>
+      walletIdEqualTo(int? value) {
     return addFilterConditionInternal(FilterCondition(
       type: ConditionType.eq,
       property: 'walletId',
@@ -1105,7 +1119,7 @@ extension TokenIsarModelQueryFilter
 
   QueryBuilder<TokenIsarModel, TokenIsarModel, QAfterFilterCondition>
       walletIdGreaterThan(
-    int value, {
+    int? value, {
     bool include = false,
   }) {
     return addFilterConditionInternal(FilterCondition(
@@ -1118,7 +1132,7 @@ extension TokenIsarModelQueryFilter
 
   QueryBuilder<TokenIsarModel, TokenIsarModel, QAfterFilterCondition>
       walletIdLessThan(
-    int value, {
+    int? value, {
     bool include = false,
   }) {
     return addFilterConditionInternal(FilterCondition(
@@ -1131,8 +1145,8 @@ extension TokenIsarModelQueryFilter
 
   QueryBuilder<TokenIsarModel, TokenIsarModel, QAfterFilterCondition>
       walletIdBetween(
-    int lower,
-    int upper, {
+    int? lower,
+    int? upper, {
     bool includeLower = true,
     bool includeUpper = true,
   }) {
@@ -1386,7 +1400,8 @@ extension TokenIsarModelQueryProperty
     return addPropertyNameInternal('name');
   }
 
-  QueryBuilder<TokenIsarModel, int, QQueryOperations> networkChainIdProperty() {
+  QueryBuilder<TokenIsarModel, int?, QQueryOperations>
+      networkChainIdProperty() {
     return addPropertyNameInternal('networkChainId');
   }
 
@@ -1398,7 +1413,7 @@ extension TokenIsarModelQueryProperty
     return addPropertyNameInternal('txns');
   }
 
-  QueryBuilder<TokenIsarModel, int, QQueryOperations> walletIdProperty() {
+  QueryBuilder<TokenIsarModel, int?, QQueryOperations> walletIdProperty() {
     return addPropertyNameInternal('walletId');
   }
 }

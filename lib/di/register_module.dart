@@ -12,6 +12,7 @@ import 'package:slee_fi/models/isar_models/ens_isar/ens_isar_model.dart';
 import 'package:slee_fi/models/isar_models/explorers_isar/explorers_isar_model.dart';
 import 'package:slee_fi/models/isar_models/native_currency_isar/native_currency_isar_model.dart';
 import 'package:slee_fi/models/isar_models/network_isar/network_isar_model.dart';
+import 'package:slee_fi/models/isar_models/token_default_isar/token_default_model.dart';
 import 'package:slee_fi/models/isar_models/token_isar/token_isar_model.dart';
 import 'package:slee_fi/models/isar_models/wallet_isar/wallet_isar_model.dart';
 
@@ -35,6 +36,7 @@ abstract class RegisterModule {
       TokenIsarModelSchema,
       EnsIsarModelSchema,
       ExplorersIsarModelSchema,
+      TokenDefaultModelSchema,
     ],
     directory: isarDir.path,
     // inspector: true,
