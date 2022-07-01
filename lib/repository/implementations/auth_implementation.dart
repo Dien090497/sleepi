@@ -68,7 +68,7 @@ class AuthImplementation extends IAuthRepository {
 
   @override
   Future<Either<FailureMessage, dynamic>> verifyOTP(
-      VerifySchema verifySchema) async {
+      VerifyOTPSchema verifySchema) async {
     try {
       var result = await _authDataSource.verifyOTP(verifySchema);
       return Right(result);

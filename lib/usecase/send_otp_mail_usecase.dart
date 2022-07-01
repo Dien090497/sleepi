@@ -3,7 +3,6 @@ import 'package:slee_fi/common/enum/enum.dart';
 import 'package:slee_fi/failures/failure.dart';
 import 'package:slee_fi/models/send_email_response/send_email_response.dart';
 import 'package:slee_fi/repository/auth_repository.dart';
-import 'package:slee_fi/repository/implementations/auth_implementation.dart';
 import 'package:slee_fi/usecase/usecase.dart';
 
 class SendOTPMailUseCase extends UseCase<SendEmailResponse, SendOTPParam> {

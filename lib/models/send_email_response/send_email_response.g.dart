@@ -8,7 +8,7 @@ part of 'send_email_response.dart';
 
 SendEmailResponse _$SendEmailResponseFromJson(Map<String, dynamic> json) =>
     SendEmailResponse(
-      Data.fromJson(json['data'] as Map<String, dynamic>),
+      Content.fromJson(json['data'] as Map<String, dynamic>),
       json['meta'],
     );
 
@@ -16,4 +16,12 @@ Map<String, dynamic> _$SendEmailResponseToJson(SendEmailResponse instance) =>
     <String, dynamic>{
       'data': instance.data.toJson(),
       'meta': instance.meta,
+    };
+
+Content _$ContentFromJson(Map<String, dynamic> json) => Content(
+      json['message'] as String,
+    );
+
+Map<String, dynamic> _$ContentToJson(Content instance) => <String, dynamic>{
+      'message': instance.message,
     };

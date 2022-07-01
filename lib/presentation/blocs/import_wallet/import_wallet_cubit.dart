@@ -44,7 +44,7 @@ class ImportWalletCubit extends Cubit<ImportWalletState> {
     emit(const ImportWalletState.initial());
 
     var result = await verifyOtpUC
-        .call(VerifySchema(int.parse(otp), userEmail, OTPType.importWallet));
+        .call(VerifyOTPSchema(int.parse(otp), userEmail, OTPType.importWallet));
 
     result.fold((l) {
       emit(ImportWalletState.errorOtp(l.msg));

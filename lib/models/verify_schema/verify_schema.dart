@@ -4,14 +4,14 @@ part 'verify_schema.g.dart';
 
 
 @JsonSerializable()
-class VerifySchema {
+class VerifyOTPSchema {
   final int otp;
   final String email;
   final OTPType otpType;
 
-  VerifySchema(this.otp, this.email, this.otpType);
+  VerifyOTPSchema(this.otp, this.email, this.otpType);
 
-  factory VerifySchema.fromJson(Map<String, dynamic> json) => _$VerifySchemaFromJson(json);
+  factory VerifyOTPSchema.fromJson(Map<String, dynamic> json) => _$VerifyOTPSchemaFromJson(json);
 
-  Map<String, dynamic> toJson() => _$VerifySchemaToJson(this);
+  Map<String, dynamic> toJson() => _$VerifyOTPSchemaToJson(this);
 }

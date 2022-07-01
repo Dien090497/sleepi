@@ -6,13 +6,14 @@ part of 'verify_schema.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-VerifySchema _$VerifySchemaFromJson(Map<String, dynamic> json) => VerifySchema(
+VerifyOTPSchema _$VerifyOTPSchemaFromJson(Map<String, dynamic> json) =>
+    VerifyOTPSchema(
       json['otp'] as int,
       json['email'] as String,
       $enumDecode(_$OTPTypeEnumMap, json['otpType']),
     );
 
-Map<String, dynamic> _$VerifySchemaToJson(VerifySchema instance) =>
+Map<String, dynamic> _$VerifyOTPSchemaToJson(VerifyOTPSchema instance) =>
     <String, dynamic>{
       'otp': instance.otp,
       'email': instance.email,

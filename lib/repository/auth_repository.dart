@@ -9,5 +9,5 @@ abstract class IAuthRepository {
   Future<Either<Failure, bool>> createPassCode(String passcode);
   Future<Either<Failure, bool>> checkPassCode(String passcode);
   Future<Either<FailureMessage, SendEmailResponse>> sendOTPEmail(SendOTPParam sendOTPParam);
-  Future<Either<FailureMessage, dynamic>> verifyOTP(VerifySchema verifySchema);
+  Future<Either<FailureMessage, dynamic>> verifyOTP(VerifyOTPSchema verifySchema);
 }
