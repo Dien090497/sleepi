@@ -20,18 +20,13 @@ class PopUpWarningBindWallet extends StatelessWidget {
             color: AppColors.yellow,
             size: 32,
           ),
-          const SizedBox(height: 20),
-          SFText(
-            keyText: LocaleKeys.warning,
-            style: TextStyles.bold18LightWhite,
-          ),
-          const SizedBox(height: 24),
+          const SizedBox(height: 28),
           SFText(
             keyText: LocaleKeys.warning_bind_wallet,
             style: TextStyles.lightGrey16.copyWith(height: 1.5),
             textAlign: TextAlign.center,
           ),
-          const SizedBox(height: 12),
+          const SizedBox(height: 24),
           SFButton(
             text: LocaleKeys.confirm,
             textStyle: TextStyles.w600WhiteSize16,
