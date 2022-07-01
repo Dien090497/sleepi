@@ -15,7 +15,7 @@ extension GetNetworkIsarModelCollection on Isar {
 const NetworkIsarModelSchema = CollectionSchema(
   name: 'NetworkIsarModel',
   schema:
-      '{"name":"NetworkIsarModel","idName":"chainId","properties":[{"name":"chain","type":"String"},{"name":"faucets","type":"StringList"},{"name":"icon","type":"String"},{"name":"infoURL","type":"String"},{"name":"name","type":"String"},{"name":"network","type":"String"},{"name":"networkId","type":"Long"},{"name":"rpc","type":"StringList"},{"name":"shortName","type":"String"},{"name":"slip44","type":"Long"},{"name":"title","type":"String"}],"indexes":[],"links":[{"name":"ens","target":"EnsIsarModel"},{"name":"explorers","target":"ExplorersIsarModel"},{"name":"nativeCurrency","target":"NativeCurrencyIsarModel"}]}',
+      '{"name":"NetworkIsarModel","idName":"chainId","properties":[{"name":"chain","type":"String"},{"name":"faucets","type":"StringList"},{"name":"icon","type":"String"},{"name":"infoURL","type":"String"},{"name":"name","type":"String"},{"name":"network","type":"String"},{"name":"networkId","type":"Long"},{"name":"rpc","type":"StringList"},{"name":"shortName","type":"String"},{"name":"slip44","type":"Long"},{"name":"title","type":"String"}],"indexes":[],"links":[{"name":"ens","target":"EnsIsarModel"},{"name":"explorers","target":"ExplorersIsarModel"},{"name":"nativeCurrency","target":"NativeCurrencyIsarModel"},{"name":"tokenDefault","target":"TokenDefaultModel"}]}',
   idName: 'chainId',
   propertyIds: {
     'chain': 0,
@@ -33,7 +33,7 @@ const NetworkIsarModelSchema = CollectionSchema(
   listProperties: {'faucets', 'rpc'},
   indexIds: {},
   indexValueTypes: {},
-  linkIds: {'ens': 0, 'explorers': 1, 'nativeCurrency': 2},
+  linkIds: {'ens': 0, 'explorers': 1, 'nativeCurrency': 2, 'tokenDefault': 3},
   backlinkLinkNames: {},
   getId: _networkIsarModelGetId,
   setId: _networkIsarModelSetId,
@@ -61,7 +61,12 @@ void _networkIsarModelSetId(NetworkIsarModel object, int id) {
 }
 
 List<IsarLinkBase> _networkIsarModelGetLinks(NetworkIsarModel object) {
-  return [object.ens, object.explorers, object.nativeCurrency];
+  return [
+    object.ens,
+    object.explorers,
+    object.nativeCurrency,
+    object.tokenDefault
+  ];
 }
 
 void _networkIsarModelSerializeNative(
@@ -296,6 +301,7 @@ void _networkIsarModelAttachLinks(
   object.explorers.attach(col, col.isar.explorersIsarModels, 'explorers', id);
   object.nativeCurrency
       .attach(col, col.isar.nativeCurrencies, 'nativeCurrency', id);
+  object.tokenDefault.attach(col, col.isar.tokenDefault, 'tokenDefault', id);
 }
 
 extension NetworkIsarModelQueryWhereSort
@@ -1545,6 +1551,15 @@ extension NetworkIsarModelQueryLinks
       isar.nativeCurrencies,
       q,
       'nativeCurrency',
+    );
+  }
+
+  QueryBuilder<NetworkIsarModel, NetworkIsarModel, QAfterFilterCondition>
+      tokenDefault(FilterQuery<TokenDefaultModel> q) {
+    return linkInternal(
+      isar.tokenDefault,
+      q,
+      'tokenDefault',
     );
   }
 }
