@@ -9,6 +9,7 @@ import 'package:slee_fi/common/widgets/sf_back_button.dart';
 import 'package:slee_fi/common/widgets/sf_bottom_sheet.dart';
 import 'package:slee_fi/common/widgets/sf_icon.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
+import 'package:slee_fi/entities/token/token_entity.dart';
 import 'package:slee_fi/l10n/locale_keys.g.dart';
 import 'package:slee_fi/presentation/screens/passcode/passcode_screen.dart';
 import 'package:slee_fi/presentation/screens/send_to_external/send_to_external_screen.dart';
@@ -20,8 +21,9 @@ import 'package:slee_fi/resources/resources.dart';
 class TransactionDetailArguments {
   final String title;
   final String img;
+  final TokenEntity tokenEntity;
 
-  TransactionDetailArguments(this.title, this.img);
+  TransactionDetailArguments({required this.title, required this.img, required this.tokenEntity});
 }
 
 class TransactionDetail extends StatelessWidget {
@@ -73,7 +75,7 @@ class TransactionDetail extends StatelessWidget {
                   : const SizedBox(),
               const SizedBox(height: 16.0),
               SFText(
-                  keyText: "0.543 ${args != null ? args.title : 'AVAX'}",
+                  keyText: "${args?.tokenEntity.balance} ${args != null ? args.title : 'AVAX'}",
                   style: TextStyles.bold30White,
                   stringCase: StringCase.upperCase),
               const SizedBox(height: 36.0),
@@ -113,9 +115,16 @@ class TransactionDetail extends StatelessWidget {
                       ),
                       Expanded(
                         child: BoxButtonWidget(
-                          onTap: () =>
-                              Navigator.pushNamed(context, R.sendToExternal ,arguments: SendToExternalArguments(args != null ? args.title : '', args != null ? args.img : '')),
-                          text: LocaleKeys.to_external,
+                          onTap: () {
+                            Navigator.pushNamed(context, R.sendToExternal,
+                              arguments: SendToExternalArguments(
+                                tokenEntity: args?.tokenEntity,
+                                symbol: args?.title ?? '',
+                                icon: args?.img ?? '',
+                              ),
+                            );
+                          },
+                              text: LocaleKeys.to_external,
                           assetImage: Ics.icArrowUpRight,
                         ),
                       ),
