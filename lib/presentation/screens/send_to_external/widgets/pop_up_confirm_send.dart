@@ -33,7 +33,7 @@ class _PopUpConfirmSendState extends State<PopUpConfirmSend> {
           if(state is sendToExternalSuccess){
             Navigator.pop(context);
             Navigator.pop(context);
-            showSuccessfulDialog(context);
+            showSuccessfulDialog(context, null);
           }
           if (state is SendToExternalCalculatorFee) {
             fee = state.fee;
@@ -142,7 +142,7 @@ class _PopUpConfirmSendState extends State<PopUpConfirmSend> {
                         width: double.infinity,
                         disabled: isDisabled,
                         onPressed: () {
-                          cubit.sendToExternal(widget.toAddress, widget.valueInEther);
+                          cubit.sendToExternal(widget.toAddress, widget.valueInEther, fee!);
                         }
                       ),
                     ),

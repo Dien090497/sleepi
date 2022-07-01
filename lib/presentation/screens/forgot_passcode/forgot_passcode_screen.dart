@@ -8,7 +8,7 @@ import 'package:slee_fi/common/widgets/dismiss_keyboard_widget.dart';
 import 'package:slee_fi/common/widgets/sf_app_bar.dart';
 import 'package:slee_fi/common/widgets/sf_buttons.dart';
 import 'package:slee_fi/common/widgets/sf_card.dart';
-import 'package:slee_fi/common/widgets/sf_textfield.dart';
+import 'package:slee_fi/common/widgets/sf_dialog.dart';
 import 'package:slee_fi/common/widgets/textfield_verification.dart';
 import 'package:slee_fi/l10n/locale_keys.g.dart';
 
@@ -64,7 +64,11 @@ class ForgotPasscodeScreen extends StatelessWidget {
                   gradient: AppColors.gradientBlueButton,
                   onPressed: () {
                     Navigator.pushNamed(
-                        context, R.createPasscode).then((value) => Navigator.pop(context));
+                        context, R.createPasscode).then((value) {
+                          Navigator.pop(context);
+                          Navigator.pop(context);
+                          showSuccessfulDialog(context, LocaleKeys.reset_passcode_successfully);
+                    });
                   },
                 ),
               )

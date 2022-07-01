@@ -127,7 +127,7 @@ class PopUpConfirmTransfer extends StatelessWidget {
                   gradient: AppColors.gradientBlueButton,
                   onPressed: () {
                     Navigator.pop(context);
-                    showSuccessfulDialog(context);
+                    showSuccessfulDialog(context, null);
                   },
                 ),
               ),

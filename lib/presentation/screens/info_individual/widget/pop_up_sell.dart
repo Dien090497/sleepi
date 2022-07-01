@@ -123,7 +123,7 @@ class _PopUpSellState extends State<PopUpSell> {
                           case 2:
                             widget.onConfirm();
                             Navigator.pop(context);
-                            showSuccessfulDialog(context);
+                            showSuccessfulDialog(context, null);
                             break;
                         }
                         setState(() {});

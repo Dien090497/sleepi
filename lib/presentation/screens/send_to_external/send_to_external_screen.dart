@@ -108,7 +108,7 @@ class _SendToExternalScreenState extends State<SendToExternalScreen> {
                                   SFTextField(
                                     labelText: LocaleKeys.amount,
                                       inputFormatters: [DecimalTextInputFormatter(decimalRange: 6)],
-                                    textInputType: const TextInputType.numberWithOptions(decimal: true, signed: false),
+                                    textInputType: const TextInputType.numberWithOptions(decimal: true),
                                     errorText:state is SendToExternalErrorValueInEther
                                         ? state.msg
                                         : null,

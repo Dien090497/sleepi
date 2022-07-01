@@ -134,7 +134,7 @@ class PopUpTransfer extends StatelessWidget {
                     onPressed: () {
                       onConfirm();
                       Navigator.pop(context);
-                      showSuccessfulDialog(context);
+                      showSuccessfulDialog(context, null);
                     },
                     width: double.infinity,
                     textStyle: TextStyles.white16,

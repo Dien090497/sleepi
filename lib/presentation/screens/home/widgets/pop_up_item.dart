@@ -86,7 +86,7 @@ class PopUpItem extends StatelessWidget {
                     Navigator.pop(context);
                     onConfirm();
                     Navigator.pop(context);
-                    showSuccessfulDialog(context);
+                    showSuccessfulDialog(context, null);
                   },
                 ),
               ),

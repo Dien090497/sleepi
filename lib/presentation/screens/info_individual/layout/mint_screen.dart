@@ -231,7 +231,7 @@ class _MintScreenState extends State<MintScreen> {
                               textStyle: TextStyles.white16,
                               disabled: state.indexSelected == -1,
                               onPressed: () {
-                                showSuccessfulDialog(context);
+                                showSuccessfulDialog(context, null);
                               },
                             ),
                           ),

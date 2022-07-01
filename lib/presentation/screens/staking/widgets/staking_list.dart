@@ -279,7 +279,7 @@ class StakingList extends StatelessWidget {
                             'amount': 'xxx',
                             'token': 'SLFT',
                           }),
-                          onPressed: () => showSuccessfulDialog(context),
+                          onPressed: () => showSuccessfulDialog(context, null),
                         )
                       ]);
                     },

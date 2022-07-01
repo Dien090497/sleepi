@@ -32,7 +32,7 @@ class TabJewelsBuy extends StatelessWidget {
         effect: 'effect',
         onConfirmTap: () {
           Navigator.pop(context);
-          showSuccessfulDialog(context);
+          showSuccessfulDialog(context, null);
         },
       ),
     );

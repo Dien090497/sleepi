@@ -389,5 +389,6 @@
   "forgot_password": "Forgot password?",
   "warning": "Warning",
   "warning_bind_wallet": "Each account can only be linked to a unique wallet address",
-  "incorrect_passcode": "Incorrect Passcode"
+  "incorrect_passcode": "Incorrect Passcode",
+  "reset_passcode_successfully": "Reset passcode successfully"
 }
