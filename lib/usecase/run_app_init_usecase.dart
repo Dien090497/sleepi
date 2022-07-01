@@ -12,6 +12,7 @@ class RunAppInitUseCase extends UseCase<bool, NoParams> {
   final GetStorageDataSource _getStorageDataSource;
   final AppFlyerCustom _appFlyerCustom;
 
+
   RunAppInitUseCase(this._web3provider, this._isarDataSource,
       this._getStorageDataSource, this._appFlyerCustom);
 

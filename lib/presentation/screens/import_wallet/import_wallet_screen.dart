@@ -105,7 +105,7 @@ class ImportWalletScreen extends StatelessWidget {
                             height: 48,
                             width: double.infinity,
                             color: AppColors.blue,
-                            onPressed: () => cubit.importWallet(),
+                            onPressed: () => cubit.process(),
                           ),
                           const SizedBox(height: 24)
                         ],
