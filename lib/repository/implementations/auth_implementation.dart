@@ -57,16 +57,12 @@ class AuthImplementation extends IAuthRepository {
   @override
   Future<Either<FailureMessage, SendEmailResponse>> sendOTPEmail(
       SendOTPParam sendOTPParam) async {
-
-    "start send otp ".log;
     try {
       var result = await _authDataSource.sendOTP(
           sendOTPParam.email, sendOTPParam.otpType);
-      'send otp result 0 ${result.toJson()}'.log;
       return Right(result);
     } catch (e) {
-      'on error send email $e'.log;
-      return const Left(FailureMessage('msg'));
+      return Left(FailureMessage('$e'));
     }
   }
 
@@ -77,8 +73,8 @@ class AuthImplementation extends IAuthRepository {
       var result = await _authDataSource.verifyOTP(verifySchema);
       return Right(result);
     } catch (e) {
-      'on error verify otp $e'.log;
-      return const Left(FailureMessage('msg'));
+      'error import wallet $e'.log;
+      return Left(FailureMessage('$e'));
     }
   }
 }
