@@ -391,5 +391,6 @@ abstract class  LocaleKeys {
   static const forgot_password = 'forgot_password';
   static const warning_bind_wallet = 'warning_bind_wallet';
   static const warning = 'warning';
+  static const incorrect_passcode = 'incorrect_passcode';
 
 }
