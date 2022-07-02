@@ -20,25 +20,14 @@ class CreatePasscodeArguments {
   CreatePasscodeArguments(this.route);
 }
 
-class CreatePasscodeScreen extends StatefulWidget {
+class CreatePasscodeScreen extends StatelessWidget {
   const CreatePasscodeScreen({Key? key}) : super(key: key);
-
-  @override
-  State<CreatePasscodeScreen> createState() => _CreatePasscodeScreenState();
-}
-
-class _CreatePasscodeScreenState extends State<CreatePasscodeScreen> {
-  TextEditingController passCodeController = TextEditingController();
-
-  @override
-  void dispose() {
-    super.dispose();
-  }
 
   @override
   Widget build(BuildContext context) {
     final args =
         ModalRoute.of(context)?.settings.arguments as CreatePasscodeArguments?;
+    TextEditingController passCodeController = TextEditingController();
 
     return BlocProvider(
       create: (BuildContext context) => PasscodeCubit(),
@@ -54,7 +43,8 @@ class _CreatePasscodeScreenState extends State<CreatePasscodeScreen> {
                       arguments: ConfirmPasscodeArguments(state.passcode))
                   .then((confirmSuccess) {
                 Navigator.pop(context, confirmSuccess);
-                showSuccessfulDialog(context, LocaleKeys.reset_passcode_successfully);
+                showSuccessfulDialog(
+                    context, LocaleKeys.reset_passcode_successfully);
               });
             }
           }

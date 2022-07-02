@@ -40,7 +40,7 @@ class AuthImplementation extends IAuthRepository {
   }
 
   @override
-  Future<Either<Failure, bool>> checkPassCode(String passcode) async {
+  Future<Either<Failure, bool>> validatePassCode(String passcode) async {
     try {
       String? pass = await _secureStorage.readPassCode();
       if (pass == null) {
@@ -74,6 +74,15 @@ class AuthImplementation extends IAuthRepository {
       return Right(result);
     } catch (e) {
       'error import wallet $e'.log;
+      return Left(FailureMessage('$e'));
+    }
+  }
+
+  @override
+  Future<Either<Failure, bool>> isPassCodeCreated() async {
+    try {
+      return Right((await _secureStorage.hasPassCode()));
+    } catch (e) {
       return Left(FailureMessage('$e'));
     }
   }
