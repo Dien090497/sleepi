@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:slee_fi/common/extensions/string_x.dart';
@@ -82,7 +83,14 @@ class _WalletScreenState extends State<WalletScreen>
                       child: SFIcon(Ics.icSetting),
                     ),
                   ),
-                )
+                ),
+                if (kDebugMode)
+                  IconButton(
+                      onPressed: () {
+                        //todo: remove wallet in here
+
+                      },
+                      icon: const Icon(Icons.delete_outline))
               ],
               automaticallyImplyLeading: false,
               backgroundColor: AppColors.transparent,

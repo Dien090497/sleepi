@@ -9,10 +9,8 @@ enum BedType {
   long(LocaleKeys.long_bed, Imgs.longBed),
   flexible(LocaleKeys.flexible_bed, Imgs.flexibleBed);
 
-
   final String name;
   final String image;
-
 
   const BedType(this.name, this.image);
 }
@@ -21,17 +19,30 @@ enum ItemType {
   short(LocaleKeys.blue_candy, Imgs.candyBlue, LocaleKeys.effect_luck),
   middle(LocaleKeys.green_candy, Imgs.candyGreen, LocaleKeys.effect_special),
   long(LocaleKeys.pink_candy, Imgs.candyPink, LocaleKeys.effect_efficiency),
-  flexible(LocaleKeys.purple_candy, Imgs.candyPurple, LocaleKeys.effect_resilience);
-
+  flexible(
+      LocaleKeys.purple_candy, Imgs.candyPurple, LocaleKeys.effect_resilience);
 
   final String? name;
   final String image;
   final String effect;
 
-
   const ItemType(this.name, this.image, this.effect);
 }
 
-enum  NetWorkEnum { mainNet, testNet }
+enum NetWorkEnum { mainNet, testNet }
 
+enum OTPType {
+  signUp('SIGN_UP'),
+  addWallet('ADD_WALLET'),
+  changePass('CHANGE_PASS'),
+  importWallet('IMPORT_WALLET');
 
+  final String name;
+
+  const OTPType(this.name);
+
+  @override
+  String toString() => name;
+
+  String toJson() => name;
+}

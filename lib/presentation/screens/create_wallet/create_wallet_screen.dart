@@ -1,11 +1,8 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:slee_fi/common/routes/app_routes.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
-import 'package:slee_fi/common/utils/random_utils.dart';
 import 'package:slee_fi/common/widgets/background_widget.dart';
 import 'package:slee_fi/common/widgets/dismiss_keyboard_widget.dart';
 import 'package:slee_fi/common/widgets/loading_screen.dart';
@@ -14,7 +11,6 @@ import 'package:slee_fi/common/widgets/sf_buttons.dart';
 import 'package:slee_fi/common/widgets/sf_card.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
 import 'package:slee_fi/common/widgets/textfield_verification.dart';
-import 'package:slee_fi/di/injector.dart';
 import 'package:slee_fi/l10n/locale_keys.g.dart';
 import 'package:slee_fi/models/pop_with_result.dart';
 import 'package:slee_fi/presentation/blocs/create_wallet/create_wallet_cubit.dart';
@@ -28,38 +24,10 @@ class CreateWalletScreen extends StatefulWidget {
 }
 
 class _CreateWalletScreenState extends State<CreateWalletScreen> {
-  TextEditingController otpCodeController = TextEditingController();
-  String error = '';
-  late String otpCode;
 
-  @override
-  void dispose() {
-    otpCodeController.dispose();
-    super.dispose();
-  }
-
-  Future<void> onCreateWallet(cubit) async {
-    FocusScope.of(context).unfocus();
-    if (otpCodeController.text == '') {
-      error = 'Please input otp code.';
-      setState(() {});
-    } else {
-      if (otpCodeController.text.isEmpty) {
-        error = 'Otp code invalid';
-        setState(() {});
-      } else {
-        error = '';
-        setState(() {});
-        cubit.createWallet();
-      }
-    }
-  }
 
   @override
   Widget build(BuildContext context) {
-    final randomUtils = getIt<RandomUtils>();
-    otpCode = randomUtils.randomOTPCode();
-    log('otp code: $otpCode');
     return BlocProvider(
       create: (_) => CreateWalletCubit()..init(),
       child: BlocConsumer<CreateWalletCubit, CreateWalletState>(
@@ -100,11 +68,9 @@ class _CreateWalletScreenState extends State<CreateWalletScreen> {
                                     children: [
                                       TextfieldVerificationEmail(
                                           maxLength: 6,
-                                          onPressed: () {
-                                            //todo: send otp in here
-                                          },
-                                          controller: otpCodeController,
-                                          valueChanged: (otp) {},
+                                          onPressed: () => cubit.sendOtp(),
+                                          valueChanged: (otp) =>
+                                              cubit.otp = otp,
                                           errorText: ''),
                                       const SizedBox(height: 16),
                                       SFText(
@@ -124,13 +90,9 @@ class _CreateWalletScreenState extends State<CreateWalletScreen> {
                             height: 48,
                             width: double.infinity,
                             color: AppColors.blue,
-                            onPressed: () {
-                              onCreateWallet(cubit);
-                            },
+                            onPressed: () => cubit.process(),
                           ),
-                          const SizedBox(
-                            height: 24,
-                          ),
+                          const SizedBox(height: 24),
                         ],
                       ),
                     ),
