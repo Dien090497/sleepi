@@ -21,7 +21,7 @@ import 'package:slee_fi/presentation/screens/info_individual/layout/mint_screen.
 import 'package:slee_fi/presentation/screens/info_individual/layout/recycle_screen.dart';
 import 'package:slee_fi/presentation/screens/item_selection/item_selection_screen.dart';
 import 'package:slee_fi/presentation/screens/login_signup/login_signup_screen.dart';
-import 'package:slee_fi/presentation/screens/passcode/confirm_passcode_screen.dart';
+import 'package:slee_fi/presentation/screens/passcode/confirm_create_passcode_screen.dart';
 import 'package:slee_fi/presentation/screens/passcode/create_passcode_screen.dart';
 import 'package:slee_fi/presentation/screens/passcode/passcode_screen.dart';
 import 'package:slee_fi/presentation/screens/restore_wallet/restore_wallet_screen.dart';
@@ -147,7 +147,7 @@ class AppRoutes {
     R.tutorial: (_) => const TutorialScreen(),
     R.walletCreationWarning: (_) => const WalletCreationWarningScreen(),
     R.createPasscode: (_) => const CreatePasscodeScreen(),
-    R.confirmPasscode: (_) => const ConfirmPasscodeScreen(),
+    R.confirmPasscode: (_) => const ConfirmCreatePasscodeScreen(),
     R.itemSelection: (_) => const ItemSelectionScreen(),
     R.settingWallet: (_) => const SettingWalletScreen(),
     R.restoreWallet: (_) => const RestoreWalletScreen(),

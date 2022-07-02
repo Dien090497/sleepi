@@ -8,22 +8,19 @@ import 'package:slee_fi/l10n/locale_keys.g.dart';
 import 'package:slee_fi/presentation/screens/passcode/widgets/passcode_numpad.dart';
 import 'package:slee_fi/presentation/screens/passcode/widgets/pin_code_widget.dart';
 
-class ConfirmPasscodeArguments {
+class ConfirmCreatePasscodeArguments {
   final String passcode;
 
-  ConfirmPasscodeArguments(this.passcode);
+  ConfirmCreatePasscodeArguments(this.passcode);
 }
 
-class ConfirmPasscodeScreen extends StatelessWidget {
-  const ConfirmPasscodeScreen({Key? key}) : super(key: key);
+class ConfirmCreatePasscodeScreen extends StatelessWidget {
+  const ConfirmCreatePasscodeScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final args =
-    ModalRoute
-        .of(context)
-        ?.settings
-        .arguments as ConfirmPasscodeArguments?;
+    final args = ModalRoute.of(context)?.settings.arguments
+        as ConfirmCreatePasscodeArguments?;
 
     final TextEditingController passcodeController = TextEditingController();
     bool wrongPassword = false;
@@ -60,7 +57,7 @@ class ConfirmPasscodeScreen extends StatelessWidget {
                     onCompleted: (String passcode) {
                       if (args != null && passcode != args.passcode) {
                         // wrongPassword = true;
-                        setState(()=> wrongPassword = true);
+                        setState(() => wrongPassword = true);
                         passcodeController.clear();
                       } else if (args != null && passcode == args.passcode) {
                         Navigator.pop(context, true);
