@@ -5,11 +5,12 @@ import 'package:slee_fi/common/routes/app_routes.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
 import 'package:slee_fi/common/widgets/background_widget.dart';
 import 'package:slee_fi/common/widgets/sf_app_bar.dart';
+import 'package:slee_fi/common/widgets/sf_dialog.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
 import 'package:slee_fi/l10n/locale_keys.g.dart';
 import 'package:slee_fi/presentation/blocs/passcode/passcode_cubit.dart';
 import 'package:slee_fi/presentation/blocs/passcode/passcode_state.dart';
-import 'package:slee_fi/presentation/screens/passcode/confirm_passcode_screen.dart';
+import 'package:slee_fi/presentation/screens/passcode/confirm_create_passcode_screen.dart';
 import 'package:slee_fi/presentation/screens/passcode/widgets/passcode_numpad.dart';
 import 'package:slee_fi/presentation/screens/passcode/widgets/pin_code_widget.dart';
 
@@ -19,25 +20,14 @@ class CreatePasscodeArguments {
   CreatePasscodeArguments(this.route);
 }
 
-class CreatePasscodeScreen extends StatefulWidget {
+class CreatePasscodeScreen extends StatelessWidget {
   const CreatePasscodeScreen({Key? key}) : super(key: key);
-
-  @override
-  State<CreatePasscodeScreen> createState() => _CreatePasscodeScreenState();
-}
-
-class _CreatePasscodeScreenState extends State<CreatePasscodeScreen> {
-  TextEditingController passCodeController = TextEditingController();
-
-  @override
-  void dispose() {
-    super.dispose();
-  }
 
   @override
   Widget build(BuildContext context) {
     final args =
         ModalRoute.of(context)?.settings.arguments as CreatePasscodeArguments?;
+    TextEditingController passCodeController = TextEditingController();
 
     return BlocProvider(
       create: (BuildContext context) => PasscodeCubit(),
@@ -50,9 +40,11 @@ class _CreatePasscodeScreenState extends State<CreatePasscodeScreen> {
               });
             } else {
               Navigator.pushNamed(context, R.confirmPasscode,
-                      arguments: ConfirmPasscodeArguments(state.passcode))
+                      arguments: ConfirmCreatePasscodeArguments(state.passcode))
                   .then((confirmSuccess) {
                 Navigator.pop(context, confirmSuccess);
+                showSuccessfulDialog(
+                    context, LocaleKeys.reset_passcode_successfully);
               });
             }
           }

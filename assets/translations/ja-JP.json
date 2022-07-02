@@ -373,6 +373,6 @@
   "effect_special": "スペシャルにプラス補正をかける",
   "effect_efficiency": "効率性にプラス補正をかける",
   "effect_resilience": "レジリエンスにプラス補正をかける",
-  "input_incorrect_seed_phrase": "Input incorrect seed Phrase: Invalid Mnemonic. Please try again",
-  "leave_seed_phrase_blank": "Leave Seed Phrase blank: This field is required"
+  "invalid_mnemonic_please_try_again": "Invalid Mnemonic. Please try again",
+  "this_field_is_required": "This field is required"
 }

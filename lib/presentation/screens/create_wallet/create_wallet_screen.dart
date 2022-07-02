@@ -16,15 +16,8 @@ import 'package:slee_fi/models/pop_with_result.dart';
 import 'package:slee_fi/presentation/blocs/create_wallet/create_wallet_cubit.dart';
 import 'package:slee_fi/presentation/blocs/create_wallet/create_wallet_state.dart';
 
-class CreateWalletScreen extends StatefulWidget {
+class CreateWalletScreen extends StatelessWidget {
   const CreateWalletScreen({Key? key}) : super(key: key);
-
-  @override
-  State<CreateWalletScreen> createState() => _CreateWalletScreenState();
-}
-
-class _CreateWalletScreenState extends State<CreateWalletScreen> {
-
 
   @override
   Widget build(BuildContext context) {
@@ -44,6 +37,7 @@ class _CreateWalletScreenState extends State<CreateWalletScreen> {
         },
         builder: (context, state) {
           final cubit = context.read<CreateWalletCubit>();
+
           return Stack(
             children: [
               DismissKeyboardWidget(

@@ -21,7 +21,7 @@ import 'package:slee_fi/presentation/screens/info_individual/layout/mint_screen.
 import 'package:slee_fi/presentation/screens/info_individual/layout/recycle_screen.dart';
 import 'package:slee_fi/presentation/screens/item_selection/item_selection_screen.dart';
 import 'package:slee_fi/presentation/screens/login_signup/login_signup_screen.dart';
-import 'package:slee_fi/presentation/screens/passcode/confirm_passcode_screen.dart';
+import 'package:slee_fi/presentation/screens/passcode/confirm_create_passcode_screen.dart';
 import 'package:slee_fi/presentation/screens/passcode/create_passcode_screen.dart';
 import 'package:slee_fi/presentation/screens/passcode/passcode_screen.dart';
 import 'package:slee_fi/presentation/screens/restore_wallet/restore_wallet_screen.dart';
@@ -64,7 +64,6 @@ class R {
   static const String gacha500TimesChance = '${_}gacha_500_times_chance';
   static const String gachaResultBed = '${_}gacha_result_bed';
   static const String gachaResultOverview = '${_}gacha_result_overview';
-  static const String passcode = '${_}passcode';
   static const String nftInfo = '${_}nft_info';
   static const String mint = '${_}mint';
   static const String staking = '${_}staking';
@@ -87,8 +86,10 @@ class R {
   static const String transfer = '${_}transfer';
   static const String tutorial = '${_}tutorial';
   static const String walletCreationWarning = '${_}wallet_creation_warning';
+  static const String passcode = '${_}passcode';
   static const String createPasscode = '${_}create_passcode';
   static const String confirmPasscode = '${_}confirm_passcode';
+  static const String forgotPasscode = '${_}forgot_passcode';
   static const String itemSelection = '${_}item_selection';
   static const String question = '${_}question';
   static const String settingWallet = '${_}setting_wallet';
@@ -108,7 +109,6 @@ class R {
   static const String transactionDetail = '${_}transaction_detail';
   static const String commingSoon = '${_}comming_soon';
   static const String qrCodeScan = '${_}qr_code_scan';
-  static const String forgotPasscode = '${_}forgot_passcode';
 }
 
 class AppRoutes {
@@ -147,7 +147,7 @@ class AppRoutes {
     R.tutorial: (_) => const TutorialScreen(),
     R.walletCreationWarning: (_) => const WalletCreationWarningScreen(),
     R.createPasscode: (_) => const CreatePasscodeScreen(),
-    R.confirmPasscode: (_) => const ConfirmPasscodeScreen(),
+    R.confirmPasscode: (_) => const ConfirmCreatePasscodeScreen(),
     R.itemSelection: (_) => const ItemSelectionScreen(),
     R.settingWallet: (_) => const SettingWalletScreen(),
     R.restoreWallet: (_) => const RestoreWalletScreen(),

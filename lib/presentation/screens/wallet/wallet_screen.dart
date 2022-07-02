@@ -8,6 +8,7 @@ import 'package:slee_fi/common/widgets/background_widget.dart';
 import 'package:slee_fi/common/widgets/sf_alert_dialog.dart';
 import 'package:slee_fi/common/widgets/sf_back_button.dart';
 import 'package:slee_fi/common/widgets/sf_icon.dart';
+import 'package:slee_fi/di/injector.dart';
 import 'package:slee_fi/entities/wallet_info/wallet_info_entity.dart';
 import 'package:slee_fi/models/pop_with_result.dart';
 import 'package:slee_fi/presentation/blocs/detail_wallet/detail_wallet_cubit.dart';
@@ -20,6 +21,8 @@ import 'package:slee_fi/presentation/screens/wallet/widgets/tab_wallet_detail.da
 import 'package:slee_fi/presentation/screens/wallet_creation_warning/widgets/pop_up_avalanche_wallet.dart';
 import 'package:slee_fi/presentation/screens/wallet_creation_warning/widgets/pop_up_wallet_warning.dart';
 import 'package:slee_fi/resources/resources.dart';
+import 'package:slee_fi/usecase/logout_usecase.dart';
+import 'package:slee_fi/usecase/usecase.dart';
 
 class WalletScreen extends StatefulWidget {
   const WalletScreen({Key? key}) : super(key: key);
@@ -87,8 +90,7 @@ class _WalletScreenState extends State<WalletScreen>
                 if (kDebugMode)
                   IconButton(
                       onPressed: () {
-                        //todo: remove wallet in here
-
+                        getIt<LogOutUseCase>().call(NoParams());
                       },
                       icon: const Icon(Icons.delete_outline))
               ],
@@ -115,13 +117,12 @@ class _WalletScreenState extends State<WalletScreen>
                         if (state is WalletStateLoaded &&
                             state.walletInfoEntity == null &&
                             i == 1) {
-                          _showCreateOrImportWallet().then(
-                              (value) {
-                                _showWarningDialog(value, context);
-                                if (value == true) {
-                                  controller.animateTo(1);
-                                }
-                              });
+                          _showCreateOrImportWallet().then((value) {
+                            _showWarningDialog(value, context);
+                            if (value == true) {
+                              controller.animateTo(1);
+                            }
+                          });
                           return false;
                         }
 

@@ -6,8 +6,18 @@ import 'package:slee_fi/usecase/send_otp_mail_usecase.dart';
 
 abstract class IAuthRepository {
   Future<Either<Failure, String>> logIn();
+
+  Future<Either<Failure, bool>> isPassCodeCreated();
+
   Future<Either<Failure, bool>> createPassCode(String passcode);
-  Future<Either<Failure, bool>> checkPassCode(String passcode);
-  Future<Either<FailureMessage, SendEmailResponse>> sendOTPEmail(SendOTPParam sendOTPParam);
-  Future<Either<FailureMessage, dynamic>> verifyOTP(VerifyOTPSchema verifySchema);
+
+  Future<Either<Failure, bool>> validatePassCode(String passcode);
+
+  Future<Either<FailureMessage, SendEmailResponse>> sendOTPEmail(
+      SendOTPParam sendOTPParam);
+
+  Future<Either<FailureMessage, dynamic>> verifyOTP(
+      VerifyOTPSchema verifySchema);
+
+  Future<Either<Failure, bool>> logOut();
 }

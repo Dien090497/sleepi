@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'package:dartz/dartz.dart';
 import 'package:injectable/injectable.dart';
 import 'package:slee_fi/common/extensions/string_x.dart';
+import 'package:slee_fi/datasources/local/isar/isar_datasource.dart';
 import 'package:slee_fi/datasources/local/secure_storage.dart';
 import 'package:slee_fi/datasources/remote/network/auth_datasource/auth_datasource.dart';
 import 'package:slee_fi/failures/failure.dart';
@@ -15,8 +16,10 @@ import 'package:slee_fi/usecase/send_otp_mail_usecase.dart';
 class AuthImplementation extends IAuthRepository {
   final SecureStorage _secureStorage;
   final AuthDataSource _authDataSource;
+  final IsarDataSource _isarDataSource;
 
-  AuthImplementation(this._secureStorage, this._authDataSource);
+  AuthImplementation(
+      this._secureStorage, this._authDataSource, this._isarDataSource);
 
   @override
   Future<Either<Failure, bool>> createPassCode(String passcode) async {
@@ -40,7 +43,7 @@ class AuthImplementation extends IAuthRepository {
   }
 
   @override
-  Future<Either<Failure, bool>> checkPassCode(String passcode) async {
+  Future<Either<Failure, bool>> validatePassCode(String passcode) async {
     try {
       String? pass = await _secureStorage.readPassCode();
       if (pass == null) {
@@ -74,6 +77,28 @@ class AuthImplementation extends IAuthRepository {
       return Right(result);
     } catch (e) {
       'error import wallet $e'.log;
+      return Left(FailureMessage('$e'));
+    }
+  }
+
+  @override
+  Future<Either<Failure, bool>> isPassCodeCreated() async {
+    try {
+      return Right((await _secureStorage.hasPassCode()));
+    } catch (e) {
+      return Left(FailureMessage('$e'));
+    }
+  }
+
+  @override
+  Future<Either<Failure, bool>> logOut() async {
+    try {
+      await Future.wait([
+        _secureStorage.clearStorage(),
+        _isarDataSource.clearWallet(),
+      ]);
+      return const Right(true);
+    } catch (e) {
       return Left(FailureMessage('$e'));
     }
   }
