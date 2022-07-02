@@ -98,7 +98,7 @@ class _TradeScreenState extends State<TradeScreen> {
           }
           if (state is swapTokenSuccess) {
             Navigator.pop(context);
-            showSuccessfulDialog(context).then((value) =>  cubit
+            showSuccessfulDialog(context, null).then((value) =>  cubit
                 .getBalanceToken(Const.tokens[indexFrom]['address'].toString()));
           }
           if (state is tradeGetAmountOutMin) {

@@ -2,7 +2,6 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:slee_fi/common/const/const.dart';
-import 'package:slee_fi/common/extensions/num_ext.dart';
 import 'package:slee_fi/common/extensions/string_x.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
@@ -15,6 +14,7 @@ import 'package:slee_fi/common/widgets/sf_card.dart';
 import 'package:slee_fi/common/widgets/sf_icon.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
 import 'package:slee_fi/common/widgets/sf_textfield.dart';
+import 'package:slee_fi/entities/token/token_entity.dart';
 import 'package:slee_fi/l10n/locale_keys.g.dart';
 import 'package:slee_fi/presentation/blocs/send_to_external/send_to_external_cubit.dart';
 import 'package:slee_fi/presentation/blocs/send_to_external/send_to_external_state.dart';
@@ -25,8 +25,9 @@ import 'package:slee_fi/resources/resources.dart';
 class SendToExternalArguments{
   final String symbol;
   final String icon;
+  final TokenEntity? tokenEntity;
 
-  SendToExternalArguments(this.symbol, this.icon);
+  SendToExternalArguments({required this.symbol, required this.icon, this.tokenEntity});
 }
 
 class SendToExternalScreen extends StatefulWidget {
@@ -60,6 +61,8 @@ class _SendToExternalScreenState extends State<SendToExternalScreen> {
                 children:  PopUpConfirmSend(
                   toAddress: contractAddressTo,
                   valueInEther: valueInEther,
+                  transferToken: args != null ? true : false,
+                  arg: args,
                 )
             );
           }
@@ -69,6 +72,7 @@ class _SendToExternalScreenState extends State<SendToExternalScreen> {
           if (state is sendToExternalStateInitial) {
             cubit.getTokenBalance();
           }
+
 
           return DismissKeyboardWidget(
             child: BackgroundWidget(
@@ -107,7 +111,8 @@ class _SendToExternalScreenState extends State<SendToExternalScreen> {
                                   const SizedBox(height: 24),
                                   SFTextField(
                                     labelText: LocaleKeys.amount,
-                                    textInputType: const TextInputType.numberWithOptions(decimal: true, signed: false),
+                                      inputFormatters: [DecimalTextInputFormatter(decimalRange: 6)],
+                                    textInputType: const TextInputType.numberWithOptions(decimal: true),
                                     errorText:state is SendToExternalErrorValueInEther
                                         ? state.msg
                                         : null,
@@ -118,14 +123,17 @@ class _SendToExternalScreenState extends State<SendToExternalScreen> {
                                       )
                                     ),
                                     onChanged: (v) {
-                                      cubit.valueInEther = double.parse(v);
-                                      valueInEther = double.parse(v);
+                                      if (v.isNotEmpty) {
+                                        cubit.valueInEther = double.parse(v);
+                                        valueInEther = double.parse(v);
+                                      }
+
                                     }
                                   ),
                                   SFText(
                                       keyText: LocaleKeys.balance,
                                       style: TextStyles.w400lightGrey12,
-                                      suffix: ': ${balance.formatBalance} ${args != null ? args.symbol : "AVAX"}'),
+                                      suffix: ': ${args != null ? args.tokenEntity?.balance : balance} ${args != null ? args.symbol : "AVAX"}'),
                                 ],
                               ),
                             ),
@@ -183,7 +191,13 @@ class _SendToExternalScreenState extends State<SendToExternalScreen> {
                         width: double.infinity,
                         gradient: AppColors.gradientBlueButton,
                         // disabled: isDisabled,
-                        onPressed: () =>  cubit.validator(balance),
+                        onPressed: () {
+                          if (args != null) {
+                            cubit.validator(args.tokenEntity?.balance ?? 0.0);
+                          } else {
+                            cubit.validator(balance);
+                          }
+                        },
                       ),
                       const SizedBox(
                         height: 37.0,

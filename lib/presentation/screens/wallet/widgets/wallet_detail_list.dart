@@ -72,8 +72,9 @@ class WalletDetailList extends StatelessWidget {
                             if (index < 3) {
                               Navigator.pushNamed(context, R.transactionDetail,
                                   arguments: TransactionDetailArguments(
-                                    keyList[index],
-                                    icons[index],
+                                    img: icons[index],
+                                    title: keyList[index],
+                                    tokenEntity: tokenList[index],
                                   ));
                             }
                           },
@@ -109,9 +110,11 @@ class WalletDetailList extends StatelessWidget {
                             if (index < 3) {
                               Navigator.pushNamed(context, R.transactionDetail,
                                   arguments: TransactionDetailArguments(
-                                    tokenList[index].displayName,
-                                    tokenList[index].icon,
-                                  ));
+                                    title: tokenList[index].displayName,
+                                    img: tokenList[index].icon,
+                                    tokenEntity: tokenList[index],
+                                  )
+                              );
                             }
                           },
                           child: ListTile(

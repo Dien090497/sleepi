@@ -114,7 +114,7 @@ class PopUpLevelUp extends StatelessWidget {
                     onPressed: () {
                       onConfirm();
                       Navigator.pop(context);
-                      showSuccessfulDialog(context);
+                      showSuccessfulDialog(context, null);
                     },
                     textStyle: TextStyles.white16,
                     gradient: AppColors.gradientBlueButton,

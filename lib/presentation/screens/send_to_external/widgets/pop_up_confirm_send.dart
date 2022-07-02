@@ -8,12 +8,15 @@ import 'package:slee_fi/common/widgets/sf_text.dart';
 import 'package:slee_fi/l10n/locale_keys.g.dart';
 import 'package:slee_fi/presentation/blocs/send_to_external/send_to_external_cubit.dart';
 import 'package:slee_fi/presentation/blocs/send_to_external/send_to_external_state.dart';
+import 'package:slee_fi/presentation/screens/send_to_external/send_to_external_screen.dart';
 
 class PopUpConfirmSend extends StatefulWidget {
-  const PopUpConfirmSend({required this.toAddress, required this.valueInEther, Key? key}) : super(key: key);
+  const PopUpConfirmSend({required this.toAddress, required this.valueInEther, this.transferToken = false, this.arg, Key? key}) : super(key: key);
 
   final String toAddress;
   final double valueInEther;
+  final bool transferToken;
+  final SendToExternalArguments? arg;
 
   @override
   State<PopUpConfirmSend> createState() => _PopUpConfirmSendState();
@@ -32,7 +35,7 @@ class _PopUpConfirmSendState extends State<PopUpConfirmSend> {
           if(state is sendToExternalSuccess){
             Navigator.pop(context);
             Navigator.pop(context);
-            showSuccessfulDialog(context);
+            showSuccessfulDialog(context, null);
           }
           if (state is SendToExternalCalculatorFee) {
             fee = state.fee;
@@ -50,7 +53,11 @@ class _PopUpConfirmSendState extends State<PopUpConfirmSend> {
         builder: (context, state) {
           final cubit = context.read<SendToExternalCubit>();
           if (state is sendToExternalStateInitial) {
-            cubit.estimateGas(widget.toAddress, widget.valueInEther);
+            if (widget.transferToken) {
+              cubit.estimateGas(widget.toAddress);
+            } else {
+              cubit.estimateGas(widget.toAddress, valueInEther: widget.valueInEther);
+            }
           }
           return isDisabled == false ? Padding(
             padding: const EdgeInsets.symmetric(horizontal: 24),
@@ -61,7 +68,7 @@ class _PopUpConfirmSendState extends State<PopUpConfirmSend> {
                   style: TextStyles.bold18LightWhite,
                 ),
                 const SizedBox(
-                  height: 32,
+                  height: 32
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -89,14 +96,14 @@ class _PopUpConfirmSendState extends State<PopUpConfirmSend> {
                     ),
                     Expanded(
                         child: SFText(
-                          keyText: "${widget.valueInEther} AVAX",
+                          keyText: "${widget.valueInEther} ${widget.transferToken ? widget.arg?.symbol : 'AVAX'}",
                           style: TextStyles.lightWhite16,
                           textAlign: TextAlign.end,
                         )),
                   ],
                 ),
                 const SizedBox(
-                  height: 32.0,
+                  height: 32.0
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -141,7 +148,11 @@ class _PopUpConfirmSendState extends State<PopUpConfirmSend> {
                         width: double.infinity,
                         disabled: isDisabled,
                         onPressed: () {
-                          cubit.sendToExternal(widget.toAddress, widget.valueInEther);
+                          if (widget.transferToken) {
+                            cubit.sendTokenExternal(widget.toAddress, widget.valueInEther, widget.arg);
+                          } else {
+                            cubit.sendToExternal(widget.toAddress, widget.valueInEther, fee!);
+                          }
                         }
                       ),
                     ),
@@ -152,7 +163,7 @@ class _PopUpConfirmSendState extends State<PopUpConfirmSend> {
           )
           : const Padding(
             padding:  EdgeInsets.all(24.0),
-            child:  Center(child: CircularProgressIndicator(),),
+            child:  SizedBox(height: 100, child: Center(child: CircularProgressIndicator()),),
           );
         },
       ),

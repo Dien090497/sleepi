@@ -90,10 +90,10 @@ class _PasscodeScreenState extends State<PasscodeScreen> {
                   ),
                   SizedBox(height: 32.h),
                   SFTextButton(
-                    text: LocaleKeys.forgot_passcode,
+                    text: "${LocaleKeys.forgot_passcode}?",
                     textStyle: TextStyles.white12Underline,
                     onPressed: () {
-                      Navigator.pushNamed(context, R.restoreWallet);
+                      Navigator.pushNamed(context, R.forgotPasscode);
                     },
                   )
                 ],

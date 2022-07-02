@@ -27,7 +27,7 @@ Future<T?> showCustomDialog<T>(
       });
 }
 
-Future<T?> showSuccessfulDialog<T>(BuildContext context) async {
+Future<T?> showSuccessfulDialog<T>(BuildContext context, String? message) async {
   return showDialog(
       context: context,
       barrierColor: AppColors.backgroundDialog,
@@ -45,7 +45,7 @@ Future<T?> showSuccessfulDialog<T>(BuildContext context) async {
             ),
             const SFIcon(Ics.successful),
             const SizedBox(height: 36),
-            SFText(keyText: LocaleKeys.success, style: TextStyles.bold18White),
+            SFText(keyText: message ?? LocaleKeys.success, style: TextStyles.bold18White),
             const SizedBox(height: 40),
           ],
         );

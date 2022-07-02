@@ -389,8 +389,11 @@ abstract class  LocaleKeys {
   static const genesis_beds = 'genesis_beds';
   static const start_sleep_tracking = 'start_sleep_tracking';
   static const forgot_password = 'forgot_password';
-  static const warning_bind_wallet = 'warning_bind_wallet';
   static const warning = 'warning';
+  static const warning_bind_wallet = 'warning_bind_wallet';
   static const incorrect_passcode = 'incorrect_passcode';
+  static const reset_passcode_successfully = 'reset_passcode_successfully';
+  static const input_incorrect_seed_phrase = 'input_incorrect_seed_phrase';
+  static const leave_seed_phrase_blank = 'leave_seed_phrase_blank';
 
 }

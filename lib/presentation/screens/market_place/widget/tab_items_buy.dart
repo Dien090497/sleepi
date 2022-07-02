@@ -29,7 +29,7 @@ class TabItemsBuy extends StatelessWidget {
         id: id,
         onConfirmTap: () {
           Navigator.pop(context);
-          showSuccessfulDialog(context);
+          showSuccessfulDialog(context, null);
         },
       ),
     );
