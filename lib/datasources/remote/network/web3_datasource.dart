@@ -17,6 +17,7 @@ import 'package:web3dart/web3dart.dart';
 @Injectable()
 class Web3DataSource {
   final Web3Provider _web3provider;
+  final String avaxContractAddress = Const.tokens[0]['address'].toString();
 
   Web3DataSource(this._web3provider);
 
@@ -107,7 +108,11 @@ class Web3DataSource {
       EthereumAddress from = EthereumAddress.fromHex(contractAddressFrom);
       EthereumAddress to = EthereumAddress.fromHex(contractAddressTo);
       log(" ${from.toString()} ${to.toString()}");
-      final List<EthereumAddress> pairAddress = [from, to];
+      final List<EthereumAddress> pairAddress =
+          (contractAddressTo != avaxContractAddress &&
+                  contractAddressFrom != avaxContractAddress)
+              ? [from, EthereumAddress.fromHex(avaxContractAddress), to]
+              : [from, to];
       var decimalFrom = await getDecimals(contractAddressFrom);
       final List<BigInt> amounts = await contract.getAmountsOut(
           BigInt.from(value * math.pow(10, decimalFrom.toInt())), pairAddress);
@@ -124,8 +129,7 @@ class Web3DataSource {
       String contractAddress, double value) async {
     try {
       final contract = avaxFrom(Const.contractRouterTestNet);
-      EthereumAddress avax =
-          EthereumAddress.fromHex(Const.tokens[0]['address'].toString());
+      EthereumAddress avax = EthereumAddress.fromHex(avaxContractAddress);
       EthereumAddress token = EthereumAddress.fromHex(contractAddress);
 
       final List<EthereumAddress> pairAddress = [avax, token];
@@ -176,8 +180,7 @@ class Web3DataSource {
       String contractAddress, double value) async {
     try {
       final contract = avaxFrom(Const.contractRouterTestNet);
-      EthereumAddress toToken =
-          EthereumAddress.fromHex(Const.tokens[0]['address'].toString());
+      EthereumAddress toToken = EthereumAddress.fromHex(avaxContractAddress);
       EthereumAddress fromToken = EthereumAddress.fromHex(contractAddress);
 
       final List<EthereumAddress> pairAddress = [fromToken, toToken];
@@ -227,15 +230,18 @@ class Web3DataSource {
       EthereumAddress toToken = EthereumAddress.fromHex(contractAddressTo);
       EthereumAddress fromToken = EthereumAddress.fromHex(contractAddressFrom);
 
-      final List<EthereumAddress> pairAddress = [fromToken, toToken];
+      final List<EthereumAddress> pairAddress = [
+        fromToken,
+        EthereumAddress.fromHex(Const.tokens[0]['address'].toString()),
+        toToken
+      ];
       var decimalFrom = await getDecimals(contractAddressFrom);
-      var decimalTo = await getDecimals(contractAddressTo);
       final List<BigInt> amounts = await contract.getAmountsOut(
           BigInt.from(value * math.pow(10, decimalFrom.toInt())), pairAddress);
       log('Calculated amounts: $amounts');
 
-      BigInt amountOutMin = BigInt.from(amounts[1].toInt() /
-          math.pow(10, decimalTo.toInt())); ////slippage set here
+      BigInt amountOutMin = amounts[1] -
+          BigInt.from((amounts[1].toInt() * 0.01) / 100); //slippage set here
       log('Calculated Amounts out: ${amountOutMin.toInt()}');
       EthereumAddress to = EthereumAddress.fromHex(walletAddress);
       BigInt deadline = BigInt.from(
@@ -252,8 +258,7 @@ class Web3DataSource {
         transaction: Transaction(
           from: to,
           to: to,
-          value: (amounts[1].toInt() / math.pow(10, decimalTo.toInt()))
-              .toWeiEtherAmount,
+          value: 0.toWeiEtherAmount,
           gasPrice: await _web3provider.web3client.getGasPrice(),
           nonce: await _web3provider.web3client.getTransactionCount(to),
         ),

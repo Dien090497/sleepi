@@ -12,7 +12,7 @@ class TradeState with _$TradeState {
 
   const factory TradeState.getAmountOutMin(double amountOutMin) = tradeGetAmountOutMin;
 
-  const factory TradeState.success() = swapTokenSuccess;
+  const factory TradeState.success(bool success) = swapTokenSuccess;
 
   const factory TradeState.fail(String msg) = swapTokenFail;
 }

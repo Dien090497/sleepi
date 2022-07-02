@@ -47,7 +47,6 @@ class CreateWalletCubit extends Cubit<CreateWalletState> {
 
   verifyOtp() async {
     emit(const CreateWalletState.initial('', mnemonic: '', isLoading: true));
-
     var result = await _verifyOtpUC
         .call(VerifyOTPSchema(int.parse(otp), userEmail, OTPType.addWallet));
 
