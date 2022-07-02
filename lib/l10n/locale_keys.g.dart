@@ -395,5 +395,7 @@ abstract class  LocaleKeys {
   static const reset_passcode_successfully = 'reset_passcode_successfully';
   static const input_incorrect_seed_phrase = 'input_incorrect_seed_phrase';
   static const leave_seed_phrase_blank = 'leave_seed_phrase_blank';
+  static const insufficient_balance = 'insufficient_balance';
+  static const not_be_zero = 'not_be_zero';
 
 }
