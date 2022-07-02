@@ -76,7 +76,6 @@ class ImportWalletScreen extends StatelessWidget {
                                                   : ''),
                                       const SizedBox(height: 20),
                                       SFTextField(
-                                        controller: TextEditingController(text: 'blind later more near guide door mystery cheap gap clip address appear'),
                                         labelText: LocaleKeys.seed_phrase,
                                         hintText: LocaleKeys
                                             .enter_the_seed_phrase_word,
@@ -87,12 +86,11 @@ class ImportWalletScreen extends StatelessWidget {
                                         maxLength: 256,
                                       ),
                                       const SizedBox(height: 5),
-                                      state is ImportWalletErrorMnemonic
-                                          ? SFText(
-                                              keyText: state.msg,
-                                              style: TextStyles.w400Red12,
-                                            )
-                                          : const SizedBox()
+                                      if (state is ImportWalletErrorMnemonic)
+                                        SFText(
+                                          keyText: state.msg,
+                                          style: TextStyles.w400Red12,
+                                        ),
                                     ],
                                   ),
                                 ),

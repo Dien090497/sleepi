@@ -22,7 +22,7 @@ class CreateWalletScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (_) => CreateWalletCubit(),
+      create: (_) => CreateWalletCubit()..init(),
       child: BlocConsumer<CreateWalletCubit, CreateWalletState>(
         listener: (context, state) {
           if (state is createWalletDone) {

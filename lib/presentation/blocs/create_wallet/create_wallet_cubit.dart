@@ -19,6 +19,8 @@ class CreateWalletCubit extends Cubit<CreateWalletState> {
   final _sendOtpUC = getIt<SendOTPMailUseCase>();
   final _verifyOtpUC = getIt<VerifyOTPUseCase>();
 
+  void init() {}
+
   process() {
     if (otp.isEmpty || otp.length < 6) {
       emit(const CreateWalletState.error('Please input otp code.'));
