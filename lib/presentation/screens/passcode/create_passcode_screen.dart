@@ -43,8 +43,6 @@ class CreatePasscodeScreen extends StatelessWidget {
                       arguments: ConfirmCreatePasscodeArguments(state.passcode))
                   .then((confirmSuccess) {
                 Navigator.pop(context, confirmSuccess);
-                showSuccessfulDialog(
-                    context, LocaleKeys.reset_passcode_successfully);
               });
             }
           }
