@@ -2,6 +2,7 @@ import 'dart:developer';
 
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:slee_fi/common/const/const.dart';
 import 'package:slee_fi/common/extensions/string_x.dart';
@@ -37,6 +38,7 @@ class _TradeScreenState extends State<TradeScreen> {
   late double balance = 0;
   int indexFrom = 0;
   int indexTo = Const.tokens.length - 1;
+  String error = '';
 
   final GlobalKey<CoolDropdownState> firstToken = GlobalKey();
   final GlobalKey<CoolDropdownState> secondToken = GlobalKey();
@@ -53,10 +55,22 @@ class _TradeScreenState extends State<TradeScreen> {
     return index;
   }
 
+  onValidValue() {
+    if (double.parse(valueController.text) > balance) {
+      error = LocaleKeys.insufficient_balance;
+    } else if (double.parse(valueController.text) == 0) {
+      error = LocaleKeys.not_be_zero;
+    } else {
+      error = '';
+    }
+  }
+
   onReset(cubit) {
     setState(() {
       isDisabled = true;
       valueController.text = '';
+      amountOutMin = 0;
+      error = '';
       indexFrom = 0;
       indexTo = Const.tokens.length - 1;
       Future.delayed(const Duration(milliseconds: 100), () {
@@ -71,6 +85,8 @@ class _TradeScreenState extends State<TradeScreen> {
     setState(() {
       isDisabled = true;
       valueController.text = '';
+      amountOutMin = 0;
+      error = '';
       int swap = indexTo;
       indexTo = indexFrom;
       indexFrom = swap;
@@ -98,26 +114,24 @@ class _TradeScreenState extends State<TradeScreen> {
           }
           if (state is swapTokenSuccess) {
             Navigator.pop(context);
-            showSuccessfulDialog(context, null).then((value) =>  cubit
-                .getBalanceToken(Const.tokens[indexFrom]['address'].toString()));
+            showSuccessfulDialog(context, null).then((value) =>
+                cubit.getBalanceToken(
+                    Const.tokens[indexFrom]['address'].toString()));
           }
           if (state is tradeGetAmountOutMin) {
-            amountOutMin = state.amountOutMin;
-            showCustomAlertDialog(context,
-                children: PopUpConfirmTrade(
-                  value: double.parse(valueController.text.toString()),
-                  symbolFrom: Const.tokens[indexFrom]['symbol'].toString(),
-                  symbolTo: Const.tokens[indexTo]['symbol'].toString(),
-                  addressFrom: Const.tokens[indexFrom]['address'].toString(),
-                  addressTo: Const.tokens[indexTo]['address'].toString(),
-                  onSwap: () {
-                    cubit.swapToken(
-                        double.parse(valueController.text.toString()),
-                        Const.tokens[indexFrom]['address'].toString(),
-                        Const.tokens[indexTo]['address'].toString());
-                  },
-                  amountOutMin: amountOutMin,
-                ));
+            setState(() {
+              if (!isDisabled) {
+                amountOutMin = state.amountOutMin;
+              } else {
+                amountOutMin = 0;
+              }
+            });
+          }
+          if (state is TradeStateInitial) {
+            isDisabled = true;
+            valueController.text = '';
+            amountOutMin = 0;
+            error = '';
           }
         },
         builder: (BuildContext context, state) {
@@ -182,98 +196,161 @@ class _TradeScreenState extends State<TradeScreen> {
                                       ),
                                     ],
                                   ),
-                                  Row(
+                                  Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
                                     children: [
-                                      Expanded(
-                                        child: Align(
-                                          alignment: Alignment.centerLeft,
-                                          child: SFTextField(
-                                            controller: valueController,
-                                            showLabel: false,
-                                            noBorder: true,
-                                            textInputType: TextInputType.number,
-                                            hintText: "0.00",
-                                            hintStyle:
-                                                TextStyles.bold16LightWhite,
-                                            onChanged: (value) {
-                                              if (value.isNotEmpty) {
-                                                setState(() {
-                                                  isDisabled = false;
-                                                });
-                                              }
-                                            },
-                                          ),
-                                        ),
-                                      ),
-                                      Expanded(
-                                        child: Align(
-                                          alignment: Alignment.center,
-                                          child: FittedBox(
-                                            fit: BoxFit.fitWidth,
-                                            child: SizedBox(
-                                              width: 80,
-                                              child: SFButtonOutLined(
-                                                  fixedSize: const Size(34, 21),
-                                                  title: LocaleKeys.max,
-                                                  textStyle:
-                                                      TextStyles.bold14Blue,
-                                                  borderColor: AppColors.blue,
-                                                  onPressed: () {
-                                                    valueController.text =
-                                                        (indexFrom == 0
-                                                                ? balance - 0.01
-                                                                : balance)
-                                                            .toStringAsFixed(6);
-                                                    isDisabled = false;
-                                                    setState(() {});
-                                                  }),
+                                      Row(
+                                        children: [
+                                          Expanded(
+                                            child: Align(
+                                              alignment: Alignment.centerLeft,
+                                              child: SFTextField(
+                                                controller: valueController,
+                                                showLabel: false,
+                                                noBorder: true,
+                                                inputFormatters: [
+                                                  FilteringTextInputFormatter
+                                                      .allow(RegExp(
+                                                          r'^\d{1,}\.?\d{0,6}')),
+                                                ],
+                                                textInputType:
+                                                    TextInputType.number,
+                                                hintText: "0.00",
+                                                hintStyle:
+                                                    TextStyles.bold16LightWhite,
+                                                onChanged: (value) {
+                                                  if (value.isNotEmpty) {
+                                                    setState(() {
+                                                      onValidValue();
+                                                      isDisabled = false;
+                                                      Future.delayed(
+                                                        const Duration(
+                                                            milliseconds: 100),
+                                                        () => cubit.getAmountOutMin(
+                                                            Const.tokens[
+                                                                    indexFrom]
+                                                                    ['address']
+                                                                .toString(),
+                                                            Const
+                                                                .tokens[indexTo]
+                                                                    ['address']
+                                                                .toString(),
+                                                            double.parse(
+                                                                valueController
+                                                                    .text
+                                                                    .toString())),
+                                                      );
+                                                    });
+                                                  } else {
+                                                    setState(() {
+                                                      isDisabled = true;
+                                                    });
+                                                  }
+                                                },
+                                              ),
                                             ),
                                           ),
-                                        ),
-                                      ),
-                                      Expanded(
-                                        child: Align(
-                                          alignment: Alignment.centerRight,
-                                          child: DropdownSelectToken(
-                                            globalKey: firstToken,
-                                            width: 90,
-                                            height: 36,
-                                            indexInit: indexFrom,
-                                            resultPadding:
-                                                const EdgeInsets.all(0),
-                                            backgroundColor:
-                                                AppColors.transparent,
-                                            isResultLabel: true,
-                                            tokens: Const.tokens,
-                                            onChange: (selectItem) {
-                                              setState(() {
-                                                'run to set default value start'
-                                                    .log;
-                                                if (selectItem["value"] ==
-                                                    Const.tokens[indexTo]
-                                                        ['address']) {
-                                                  indexTo = indexFrom;
-                                                }
-                                                indexFrom = getIndexAddress(
-                                                    selectItem["value"]
-                                                        .toString());
-                                                cubit.getBalanceToken(Const
-                                                    .tokens[indexFrom]
-                                                        ['address']
-                                                    .toString());
-                                                valueController.text = '';
-                                                log("message $indexFrom $indexTo");
-                                              });
-                                              Future.delayed(
-                                                const Duration(
-                                                    milliseconds: 100),
-                                                () => secondToken.currentState
-                                                    ?.changeSelectedItem(),
-                                              );
-                                            },
+                                          Expanded(
+                                            child: Align(
+                                              alignment: Alignment.center,
+                                              child: FittedBox(
+                                                fit: BoxFit.fitWidth,
+                                                child: SizedBox(
+                                                  width: 80,
+                                                  child: SFButtonOutLined(
+                                                      fixedSize:
+                                                          const Size(34, 21),
+                                                      title: LocaleKeys.max,
+                                                      textStyle:
+                                                          TextStyles.bold14Blue,
+                                                      borderColor:
+                                                          AppColors.blue,
+                                                      onPressed: () {
+                                                        valueController.text =
+                                                            (indexFrom == 0
+                                                                    ? balance -
+                                                                        0.01
+                                                                    : balance)
+                                                                .toString();
+                                                        Future.delayed(
+                                                          const Duration(
+                                                              milliseconds:
+                                                                  100),
+                                                          () => cubit.getAmountOutMin(
+                                                              Const.tokens[
+                                                                      indexFrom]
+                                                                      [
+                                                                      'address']
+                                                                  .toString(),
+                                                              Const.tokens[
+                                                                      indexTo][
+                                                                      'address']
+                                                                  .toString(),
+                                                              double.parse(
+                                                                  valueController
+                                                                      .text
+                                                                      .toString())),
+                                                        );
+                                                        isDisabled = false;
+                                                        error = '';
+                                                        setState(() {});
+                                                      }),
+                                                ),
+                                              ),
+                                            ),
                                           ),
-                                        ),
+                                          Expanded(
+                                            child: Align(
+                                              alignment: Alignment.centerRight,
+                                              child: DropdownSelectToken(
+                                                globalKey: firstToken,
+                                                width: 110,
+                                                height: 36,
+                                                indexInit: indexFrom,
+                                                resultPadding:
+                                                    const EdgeInsets.all(0),
+                                                backgroundColor:
+                                                    AppColors.transparent,
+                                                isResultLabel: true,
+                                                tokens: Const.tokens,
+                                                onChange: (selectItem) {
+                                                  setState(() {
+                                                    'run to set default value start'
+                                                        .log;
+                                                    if (selectItem["value"] ==
+                                                        Const.tokens[indexTo]
+                                                            ['address']) {
+                                                      indexTo = indexFrom;
+                                                    }
+                                                    indexFrom = getIndexAddress(
+                                                        selectItem["value"]
+                                                            .toString());
+                                                    cubit.getBalanceToken(Const
+                                                        .tokens[indexFrom]
+                                                            ['address']
+                                                        .toString());
+                                                    valueController.text = '';
+                                                    log("message $indexFrom $indexTo");
+                                                  });
+                                                  Future.delayed(
+                                                    const Duration(
+                                                        milliseconds: 100),
+                                                    () => secondToken
+                                                        .currentState
+                                                        ?.changeSelectedItem(),
+                                                  );
+                                                },
+                                              ),
+                                            ),
+                                          ),
+                                        ],
                                       ),
+                                      if (error != '')
+                                        SFText(
+                                          keyText: error,
+                                          style: TextStyles.red12W700,
+                                        ),
                                     ],
                                   ),
                                 ],
@@ -313,10 +390,15 @@ class _TradeScreenState extends State<TradeScreen> {
                                     mainAxisAlignment:
                                         MainAxisAlignment.spaceBetween,
                                     children: [
-                                      const SizedBox(),
+                                      SizedBox(
+                                        child: SFText(
+                                          keyText: "$amountOutMin",
+                                          style: TextStyles.bold18White,
+                                        ),
+                                      ),
                                       DropdownSelectToken(
                                         globalKey: secondToken,
-                                        width: 90,
+                                        width: 110,
                                         height: 36,
                                         indexInit: indexTo,
                                         resultPadding: const EdgeInsets.all(0),
@@ -360,10 +442,35 @@ class _TradeScreenState extends State<TradeScreen> {
                         gradient: AppColors.gradientBlueButton,
                         disabled: isDisabled,
                         onPressed: () {
-                          cubit.getAmountOutMin(
-                              Const.tokens[indexFrom]['address'].toString(),
-                              Const.tokens[indexTo]['address'].toString(),
-                              double.parse(valueController.text.toString()));
+                          setState(() {
+                            onValidValue();
+                          });
+                          if (error == '') {
+                            showCustomAlertDialog(context,
+                                children: PopUpConfirmTrade(
+                                  value: double.parse(
+                                      valueController.text.toString()),
+                                  symbolFrom: Const.tokens[indexFrom]['symbol']
+                                      .toString(),
+                                  symbolTo: Const.tokens[indexTo]['symbol']
+                                      .toString(),
+                                  addressFrom: Const.tokens[indexFrom]
+                                          ['address']
+                                      .toString(),
+                                  addressTo: Const.tokens[indexTo]['address']
+                                      .toString(),
+                                  onSwap: () {
+                                    cubit.swapToken(
+                                        double.parse(
+                                            valueController.text.toString()),
+                                        Const.tokens[indexFrom]['address']
+                                            .toString(),
+                                        Const.tokens[indexTo]['address']
+                                            .toString());
+                                  },
+                                  amountOutMin: amountOutMin,
+                                )).then((value) => cubit.init());
+                          }
                         },
                       ),
                       const SizedBox(
