@@ -114,18 +114,13 @@ class _TradeScreenState extends State<TradeScreen> {
           }
           if (state is swapTokenSuccess) {
             Navigator.pop(context);
-            showSuccessfulDialog(context, null).then((value) =>
-                cubit.getBalanceToken(
-                    Const.tokens[indexFrom]['address'].toString()));
-          }
-          if (state is tradeGetAmountOutMin) {
-            setState(() {
-              if (!isDisabled) {
-                amountOutMin = state.amountOutMin;
-              } else {
-                amountOutMin = 0;
-              }
-            });
+            if(state.success) {
+              showSuccessfulDialog(context, null).then((value) =>
+                  cubit.getBalanceToken(
+                      Const.tokens[indexFrom]['address'].toString()));
+            }else{
+
+            }
           }
           if (state is TradeStateInitial) {
             isDisabled = true;
@@ -135,6 +130,13 @@ class _TradeScreenState extends State<TradeScreen> {
           }
         },
         builder: (BuildContext context, state) {
+          if (state is tradeGetAmountOutMin) {
+            if (!isDisabled) {
+              amountOutMin = state.amountOutMin;
+            } else {
+              amountOutMin = 0;
+            }
+          }
           final cubit = context.read<TradeCubit>();
           if (state is TradeStateInitial) {
             cubit
@@ -224,27 +226,23 @@ class _TradeScreenState extends State<TradeScreen> {
                                                     setState(() {
                                                       onValidValue();
                                                       isDisabled = false;
-                                                      Future.delayed(
-                                                        const Duration(
-                                                            milliseconds: 100),
-                                                        () => cubit.getAmountOutMin(
-                                                            Const.tokens[
-                                                                    indexFrom]
-                                                                    ['address']
-                                                                .toString(),
-                                                            Const
-                                                                .tokens[indexTo]
-                                                                    ['address']
-                                                                .toString(),
-                                                            double.parse(
-                                                                valueController
-                                                                    .text
-                                                                    .toString())),
-                                                      );
+                                                      cubit.getAmountOutMin(
+                                                          Const
+                                                              .tokens[indexFrom]
+                                                                  ['address']
+                                                              .toString(),
+                                                          Const.tokens[indexTo]
+                                                                  ['address']
+                                                              .toString(),
+                                                          double.parse(
+                                                              valueController
+                                                                  .text
+                                                                  .toString()));
                                                     });
                                                   } else {
                                                     setState(() {
                                                       isDisabled = true;
+                                                      amountOutMin = 0;
                                                     });
                                                   }
                                                 },
@@ -331,6 +329,8 @@ class _TradeScreenState extends State<TradeScreen> {
                                                             ['address']
                                                         .toString());
                                                     valueController.text = '';
+                                                    amountOutMin = 0;
+                                                    error = '';
                                                     log("message $indexFrom $indexTo");
                                                   });
                                                   Future.delayed(
@@ -418,6 +418,8 @@ class _TradeScreenState extends State<TradeScreen> {
                                                 .tokens[indexFrom]['address']
                                                 .toString());
                                             valueController.text = '';
+                                            amountOutMin = 0;
+                                            error = '';
                                             log("message $indexFrom $indexTo");
                                           });
                                           Future.delayed(

@@ -20,20 +20,15 @@ class PasscodeArguments {
   PasscodeArguments(this.route);
 }
 
-class PasscodeScreen extends StatefulWidget {
+class PasscodeScreen extends StatelessWidget {
   const PasscodeScreen({Key? key}) : super(key: key);
-
-  @override
-  State<PasscodeScreen> createState() => _PasscodeScreenState();
-}
-
-class _PasscodeScreenState extends State<PasscodeScreen> {
-  TextEditingController passCodeController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
     final args =
         ModalRoute.of(context)?.settings.arguments as PasscodeArguments?;
+    TextEditingController passCodeController = TextEditingController();
+
     return BlocProvider(
       create: (BuildContext context) => PasscodeCubit(),
       child: BlocConsumer<PasscodeCubit, PasscodeState>(

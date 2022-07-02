@@ -391,8 +391,8 @@
   "warning_bind_wallet": "Each account can only be linked to a unique wallet address",
   "incorrect_passcode": "Incorrect Passcode",
   "reset_passcode_successfully": "Reset passcode successfully",
-  "input_incorrect_seed_phrase": "Input incorrect seed Phrase: Invalid Mnemonic. Please try again",
-  "leave_seed_phrase_blank": "Leave Seed Phrase blank: This field is required",
+  "invalid_mnemonic_please_try_again": "Invalid Mnemonic. Please try again",
+  "this_field_is_required": "This field is required",
   "insufficient_balance": "Insufficient balance",
   "not_be_zero": "Your input can not be zero",
   "please_enter_email" : "Please enter email"

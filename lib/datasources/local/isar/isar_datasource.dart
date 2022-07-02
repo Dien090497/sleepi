@@ -22,9 +22,9 @@ class IsarDataSource {
   Future<void> init() async {
     // final count = await networksCount();
     // if (count == null || count < 1) {
-      final list = await _networksFromJson();
-      final ids = await putAllNetworks(list);
-      assert(list.length == ids.length, "Length must equal");
+    final list = await _networksFromJson();
+    final ids = await putAllNetworks(list);
+    assert(list.length == ids.length, "Length must equal");
     // }
   }
 
@@ -160,6 +160,8 @@ class IsarDataSource {
   }
 
   Future<void> clearAll() => _isar.writeTxn((isar) => isar.clear());
+
+  Future<void> clearWallet() => _isar.writeTxn((isar) => isar.wallets.clear());
 
   Future<TokenDefaultModel?> getContractToken(int chainId) async {
     final list = await _isar.tokenDefault.where().findAll();

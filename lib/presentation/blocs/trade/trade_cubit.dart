@@ -30,7 +30,7 @@ class TradeCubit extends Cubit<TradeState> {
         emit(TradeState.fail(l is FailureMessage ? l.msg : '$l'));
       },
       (success) {
-        emit(const TradeState.success());
+        emit(TradeState.success(success));
       },
     );
   }

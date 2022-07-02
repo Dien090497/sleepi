@@ -22,6 +22,9 @@ class SecureStorage {
   Future<String?> readPassCode() =>
       _secureStorage.read(key: StorageKeys.passCodeKey);
 
+  Future<bool> hasPassCode() async =>
+      await _secureStorage.read(key: StorageKeys.passCodeKey) != null;
+
   Future<void> clearStorage() async {
     await Future.wait([
       _secureStorage.deleteAll(),

@@ -393,8 +393,8 @@ abstract class  LocaleKeys {
   static const warning_bind_wallet = 'warning_bind_wallet';
   static const incorrect_passcode = 'incorrect_passcode';
   static const reset_passcode_successfully = 'reset_passcode_successfully';
-  static const input_incorrect_seed_phrase = 'input_incorrect_seed_phrase';
-  static const leave_seed_phrase_blank = 'leave_seed_phrase_blank';
+  static const invalid_mnemonic_please_try_again = 'invalid_mnemonic_please_try_again';
+  static const this_field_is_required = 'this_field_is_required';
   static const insufficient_balance = 'insufficient_balance';
   static const not_be_zero = 'not_be_zero';
   static const please_enter_email = 'please_enter_email';

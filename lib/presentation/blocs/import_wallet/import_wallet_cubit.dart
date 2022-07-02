@@ -2,10 +2,10 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:slee_fi/common/enum/enum.dart';
 import 'package:slee_fi/di/injector.dart';
+import 'package:slee_fi/l10n/locale_keys.g.dart';
 import 'package:slee_fi/models/verify_schema/verify_schema.dart';
 import 'package:slee_fi/usecase/send_otp_mail_usecase.dart';
 import 'package:slee_fi/usecase/verify_otp_usecase.dart';
-import 'package:slee_fi/l10n/locale_keys.g.dart';
 import 'package:slee_fi/usecase/wallet/import_wallet_usecase.dart';
 
 import 'import_wallet_state.dart';
@@ -27,7 +27,7 @@ class ImportWalletCubit extends Cubit<ImportWalletState> {
     }
     if (mnemonic.isEmpty) {
       emit(ImportWalletState.errorMnemonic(
-          LocaleKeys.leave_seed_phrase_blank.tr()));
+          LocaleKeys.this_field_is_required.tr()));
       return;
     }
 
@@ -60,7 +60,7 @@ class ImportWalletCubit extends Cubit<ImportWalletState> {
       var result = await importWalletUC.call(mnemonic);
       result.fold((l) {
         emit(ImportWalletState.errorMnemonic(
-            LocaleKeys.input_incorrect_seed_phrase.tr()));
+            LocaleKeys.invalid_mnemonic_please_try_again.tr()));
       }, (r) {
         emit(ImportWalletState.success(r));
       });

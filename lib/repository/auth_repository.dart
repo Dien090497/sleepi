@@ -16,7 +16,7 @@ abstract class IAuthRepository {
 
   Future<Either<Failure, bool>> createPassCode(String passcode);
 
-  Future<Either<Failure, bool>> checkPassCode(String passcode);
+  // Future<Either<Failure, bool>> checkPassCode(String passcode);
 
   Future<Either<FailureMessage, SendEmailResponse>> sendOTPEmail(SendOTPParam sendOTPParam);
 
@@ -27,4 +27,11 @@ abstract class IAuthRepository {
   Future<Either<FailureMessage, UserResponse>> signUp(SignUpSchema signUpSchema);
 
   Future<Either<FailureMessage, CreatePasswordResponse>> createPassword(CreatePasswordSchema createPasswordSchema);
+
+  Future<Either<Failure, bool>> validatePassCode(String passcode);
+
+  Future<Either<Failure, bool>> logOut();
+
+  Future<Either<Failure, bool>> isPassCodeCreated();
+
 }
