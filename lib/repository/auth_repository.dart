@@ -18,4 +18,6 @@ abstract class IAuthRepository {
 
   Future<Either<FailureMessage, dynamic>> verifyOTP(
       VerifyOTPSchema verifySchema);
+
+  Future<Either<Failure, bool>> logOut();
 }

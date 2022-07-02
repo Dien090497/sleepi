@@ -13,10 +13,6 @@ class CreateWalletCubit extends Cubit<CreateWalletState> {
   CreateWalletCubit()
       : super(const CreateWalletState.initial('', mnemonic: ''));
 
-  void init() {
-    emit(const CreateWalletState.initial('', mnemonic: ''));
-  }
-
   String userEmail = 'duong.nguyen3@sotatek.com';
   String otp = '';
   final _createWalletUC = getIt<CreateWalletUseCase>();
@@ -65,7 +61,6 @@ class CreateWalletCubit extends Cubit<CreateWalletState> {
         await _sendOtpUC.call(SendOTPParam(userEmail, OTPType.addWallet));
     result.fold((l) {
       emit(CreateWalletState.error(l.msg));
-    }, (r) {
-    });
+    }, (r) {});
   }
 }
