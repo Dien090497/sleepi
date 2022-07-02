@@ -8,11 +8,19 @@ import 'package:slee_fi/common/widgets/sf_text.dart';
 import 'package:slee_fi/l10n/locale_keys.g.dart';
 import 'package:slee_fi/resources/resources.dart';
 
+class NotificationPermissionArg {
+  final bool isSignUp;
+
+  NotificationPermissionArg(this.isSignUp);
+}
+
 class NotificationPermissionScreen extends StatelessWidget {
   const NotificationPermissionScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    final arg = ModalRoute.of(context)?.settings.arguments
+        as NotificationPermissionArg?;
     return SafeArea(
       child: BackgroundWidget(
         child: Stack(
@@ -35,7 +43,8 @@ class NotificationPermissionScreen extends StatelessWidget {
                   height: 32.0,
                 ),
                 SFText(
-                  keyText: LocaleKeys.notification_may_include_alert_sound_and_icon,
+                  keyText:
+                      LocaleKeys.notification_may_include_alert_sound_and_icon,
                   style: TextStyles.lightGrey16,
                 ),
               ],
@@ -50,8 +59,15 @@ class NotificationPermissionScreen extends StatelessWidget {
                     color: AppColors.blue,
                     text: LocaleKeys.allow,
                     textStyle: TextStyles.w600WhiteSize16,
-                    onPressed: () => Navigator.popUntil(
-                        context, ModalRoute.withName(R.setting))),
+                    onPressed: () {
+                      if (arg?.isSignUp == true) {
+                        Navigator.pushNamedAndRemoveUntil(
+                            context, R.bottomNavigation, (_) => false);
+                        return;
+                      }
+                      Navigator.popUntil(
+                          context, ModalRoute.withName(R.setting));
+                    }),
               ),
             ),
           ],

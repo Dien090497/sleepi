@@ -397,5 +397,6 @@ abstract class  LocaleKeys {
   static const leave_seed_phrase_blank = 'leave_seed_phrase_blank';
   static const insufficient_balance = 'insufficient_balance';
   static const not_be_zero = 'not_be_zero';
+  static const please_enter_email = 'please_enter_email';
 
 }

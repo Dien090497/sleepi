@@ -16,6 +16,7 @@ class Web3Provider {
 
   Web3Provider(this._client);
 
+
   Future<void> init(NetworkIsarModel model) {
     return setCurrentNetwork(model);
   }

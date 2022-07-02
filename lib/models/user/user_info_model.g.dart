@@ -9,8 +9,8 @@ part of 'user_info_model.dart';
 UserInfoModel _$UserInfoModelFromJson(Map<String, dynamic> json) =>
     UserInfoModel(
       json['id'] as int,
-      json['name'] as String,
-      json['username'] as String,
+      json['name'] as String?,
+      json['username'] as String?,
       (json['roles'] as List<dynamic>).map((e) => e as String).toList(),
       json['email'] as String,
       json['isAccountDisabled'] as bool,

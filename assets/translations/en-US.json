@@ -394,5 +394,6 @@
   "input_incorrect_seed_phrase": "Input incorrect seed Phrase: Invalid Mnemonic. Please try again",
   "leave_seed_phrase_blank": "Leave Seed Phrase blank: This field is required",
   "insufficient_balance": "Insufficient balance",
-  "not_be_zero": "Your input can not be zero"
+  "not_be_zero": "Your input can not be zero",
+  "please_enter_email" : "Please enter email"
 }

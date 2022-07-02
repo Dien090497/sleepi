@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+
 // import 'package:flutter_translate/flutter_translate.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
@@ -20,6 +21,7 @@ class SFTextFieldPassword extends StatefulWidget {
     this.maxLength,
     this.controller,
     this.valueChanged,
+    this.errorText = '',
   }) : super(key: key);
 
   final String? labelText;
@@ -32,6 +34,7 @@ class SFTextFieldPassword extends StatefulWidget {
   final TextEditingController? controller;
   final bool showLabel;
   final ValueChanged<String>? valueChanged;
+  final String errorText;
 
   @override
   State<SFTextFieldPassword> createState() => _SFTextFieldPasswordState();
@@ -80,13 +83,19 @@ class _SFTextFieldPasswordState extends State<SFTextFieldPassword> {
                   obscureText = !obscureText;
                 });
               },
-              child:  Padding(
-                padding:const EdgeInsets.all(10),
-                child: obscureText ? const SFIcon(
-                  Ics.icEye,
-                  width: 24,
-                  height: 24,
-                ) :const Icon(CupertinoIcons.eye, size: 28, color: AppColors.lightGrey,),
+              child: Padding(
+                padding: const EdgeInsets.all(10),
+                child: obscureText
+                    ? const SFIcon(
+                        Ics.icEye,
+                        width: 24,
+                        height: 24,
+                      )
+                    : const Icon(
+                        CupertinoIcons.eye,
+                        size: 28,
+                        color: AppColors.lightGrey,
+                      ),
               ),
             ),
             border: border,
@@ -99,6 +108,9 @@ class _SFTextFieldPasswordState extends State<SFTextFieldPassword> {
           maxLines: widget.maxLine ?? 1,
           maxLength: widget.maxLength,
         ),
+        const SizedBox(height: 8),
+        if (widget.errorText != '')
+          Text(widget.errorText, style: TextStyles.w400Red12),
       ],
     );
   }

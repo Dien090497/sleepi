@@ -6,13 +6,24 @@ import 'package:slee_fi/common/widgets/background_widget.dart';
 import 'package:slee_fi/common/widgets/sf_buttons.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
 import 'package:slee_fi/l10n/locale_keys.g.dart';
+import 'package:slee_fi/presentation/screens/setting_permission/widgets/notification_screen.dart';
 import 'package:slee_fi/resources/resources.dart';
+
+class HealthcareArg {
+  final bool isSignUp;
+
+  HealthcareArg(this.isSignUp);
+}
 
 class HealthcarePermissionScreen extends StatelessWidget {
   const HealthcarePermissionScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    final arg = ModalRoute
+        .of(context)
+        ?.settings
+        .arguments as HealthcareArg?;
     return SafeArea(
       child: BackgroundWidget(
         child: Stack(children: [
@@ -49,8 +60,15 @@ class HealthcarePermissionScreen extends StatelessWidget {
                 color: AppColors.blue,
                 text: LocaleKeys.allow,
                 textStyle: TextStyles.w600WhiteSize16,
-                onPressed: () =>
-                    Navigator.pushNamed(context, R.motionDataPermission),
+                onPressed: () {
+                  if (arg?.isSignUp == true) {
+                    Navigator.pushNamedAndRemoveUntil(
+                        context, R.notificationPermission, (_) => false,
+                    arguments: NotificationPermissionArg(true));
+                    return;
+                  }
+                  Navigator.pushNamed(context, R.motionDataPermission);
+                },
               ),
             ),
           )
