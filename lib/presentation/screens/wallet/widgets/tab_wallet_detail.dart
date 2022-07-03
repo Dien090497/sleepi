@@ -48,9 +48,6 @@ class TabWalletDetail extends StatelessWidget {
         bloc: walletCubit,
         builder: (context, state) {
           final cubit = context.read<WalletCubit>();
-          'run to build wallet ${state is WalletStateLoaded && state.walletInfoEntity != null}    '
-              .log;
-          'run to build wallet $state     '.log;
           if (state is WalletStateLoaded && state.walletInfoEntity != null) {
             balance = state.walletInfoEntity!.nativeCurrency.balance;
             addressWallet = state.walletInfoEntity!.address;
