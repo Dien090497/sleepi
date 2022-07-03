@@ -14,16 +14,17 @@ import 'package:slee_fi/common/widgets/sf_logo.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
 import 'package:slee_fi/common/widgets/sf_textfield.dart';
 import 'package:slee_fi/l10n/locale_keys.g.dart';
+import 'package:slee_fi/models/user/user_info_model.dart';
 import 'package:slee_fi/presentation/screens/create_password/create_password_screen.dart';
 import 'package:slee_fi/presentation/screens/enter_activation_code/widgets/checkbox_letter_widget.dart';
 import 'package:slee_fi/presentation/screens/login_signup/widgets/login_box.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class EnterActiveCodeArg {
-  final String email;
   final int otp;
+  final UserInfoModel userInfoModel;
 
-  EnterActiveCodeArg(this.email, this.otp);
+  EnterActiveCodeArg(this.otp, this.userInfoModel);
 }
 
 class EnterActivationCodeScreen extends StatelessWidget {
@@ -32,7 +33,7 @@ class EnterActivationCodeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final arg =
-        ModalRoute.of(context)?.settings.arguments as EnterActiveCodeArg?;
+        ModalRoute.of(context)?.settings.arguments as EnterActiveCodeArg;
 
     return DismissKeyboardWidget(
       child: BackgroundWidget(
@@ -95,9 +96,7 @@ class EnterActivationCodeScreen extends StatelessWidget {
                       onPressed: () {
                         Navigator.pushNamed(context, R.createPassword,
                             arguments: CreatePasswordArg(
-                                arg?.email ?? 'aduonggm@gmail.com',
-                                '',
-                                arg?.otp ?? 0));
+                                '', arg.otp, arg.userInfoModel));
                       },
                       width: MediaQuery.of(context).size.width,
                     ),

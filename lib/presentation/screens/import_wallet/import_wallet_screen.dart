@@ -87,6 +87,7 @@ class ImportWalletScreen extends StatelessWidget {
                                                   : ''),
                                       const SizedBox(height: 20),
                                       SFTextField(
+                                        controller: TextEditingController(text: 'blind later more near guide door mystery cheap gap clip address appear'),
                                         labelText: LocaleKeys.seed_phrase,
                                         hintText: LocaleKeys
                                             .enter_the_seed_phrase_word,

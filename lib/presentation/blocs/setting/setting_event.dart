@@ -19,3 +19,9 @@ class SwitchNetWork extends SettingEvent {
   @override
   List<Object?> get props => [netWorkEnum];
 }
+
+class InitSetting extends SettingEvent{
+
+  @override
+  List<Object?> get props => [];
+}

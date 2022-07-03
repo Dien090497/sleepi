@@ -1,4 +1,5 @@
 import 'package:dartz/dartz.dart';
+import 'package:slee_fi/entities/user/user_info_entity.dart';
 import 'package:slee_fi/failures/failure.dart';
 import 'package:slee_fi/models/create_password_reponse/create_password_response.dart';
 import 'package:slee_fi/models/create_password_schema/create_password_schema.dart';
@@ -7,6 +8,7 @@ import 'package:slee_fi/models/setting_active_code_response/setting_active_code_
 import 'package:slee_fi/models/sign_in_response/sign_in_response.dart';
 import 'package:slee_fi/models/sign_in_schema/sign_in_schema.dart';
 import 'package:slee_fi/models/sign_up_schema/sign_up_schema.dart';
+import 'package:slee_fi/models/user/user_info_model.dart';
 import 'package:slee_fi/models/user_response/user_response.dart';
 import 'package:slee_fi/models/verify_schema/verify_schema.dart';
 import 'package:slee_fi/usecase/send_otp_mail_usecase.dart';
@@ -33,5 +35,12 @@ abstract class IAuthRepository {
   Future<Either<Failure, bool>> logOut();
 
   Future<Either<Failure, bool>> isPassCodeCreated();
+
+  Future<Either<FailureMessage, UserInfoEntity>> currentUser();
+
+
+  Future<Either<FailureMessage, bool>> saveUser(UserInfoModel userInfoModel);
+
+
 
 }
