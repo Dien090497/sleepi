@@ -28,11 +28,13 @@ class WalletCubit extends Cubit<WalletState> {
     emit(const WalletState.loading());
     var openWallet = await _firstOpenWalletUC.call(NoParams());
     final walletCall = await _currentWalletUC.call(NoParams());
-
-    WalletInfoEntity? walletInfo;
     openWallet.foldRight(bool, (r, previous) => firstOpenWallet = r);
-    walletCall.fold((l) => null, (r) => walletInfo = r);
-    loadCurrentWallet(walletInfo!);
+    walletCall.fold(
+        (l) => emit(WalletState.loaded(
+            walletInfoEntity: null,
+            firstOpenWallet: firstOpenWallet,
+            tokenList: tokenList)),
+        (r) => loadCurrentWallet(r));
   }
 
   importWallet(WalletInfoEntity walletInfoEntity) {

@@ -48,7 +48,10 @@ class TabWalletDetail extends StatelessWidget {
         bloc: walletCubit,
         builder: (context, state) {
           final cubit = context.read<WalletCubit>();
-          if (state is WalletStateLoaded) {
+          'run to build wallet ${state is WalletStateLoaded && state.walletInfoEntity != null}    '
+              .log;
+          'run to build wallet $state     '.log;
+          if (state is WalletStateLoaded && state.walletInfoEntity != null) {
             balance = state.walletInfoEntity!.nativeCurrency.balance;
             addressWallet = state.walletInfoEntity!.address;
             currencySymbol = state.walletInfoEntity!.nativeCurrency.symbol;
@@ -56,7 +59,7 @@ class TabWalletDetail extends StatelessWidget {
             tokenList = state.tokenList;
           }
           return FocusDetector(
-            onFocusGained: (){
+            onFocusGained: () {
               cubit.init();
             },
             child: SmartRefresher(
@@ -115,8 +118,8 @@ class TabWalletDetail extends StatelessWidget {
                                 const SizedBox(width: 10),
                                 Expanded(
                                   child: BoxButtonWidget(
-                                    onTap: () =>
-                                        Navigator.pushNamed(context, R.transfer),
+                                    onTap: () => Navigator.pushNamed(
+                                        context, R.transfer),
                                     text: LocaleKeys.to_spending,
                                     assetImage: Ics.icRefresh,
                                   ),
@@ -166,7 +169,8 @@ class TabWalletDetail extends StatelessWidget {
                                 }
                               },
                               style: ElevatedButton.styleFrom(
-                                padding: const EdgeInsets.fromLTRB(12, 8, 16, 8),
+                                padding:
+                                    const EdgeInsets.fromLTRB(12, 8, 16, 8),
                                 primary: AppColors.yellow.withOpacity(0.1),
                                 shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(100.0),
