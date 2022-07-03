@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:slee_fi/common/const/const.dart';
+import 'package:slee_fi/common/extensions/num_ext.dart';
 import 'package:slee_fi/common/extensions/string_x.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
@@ -202,7 +203,7 @@ class _TradeScreenState extends State<TradeScreen> {
                                           style: TextStyles.lightGrey12),
                                       SFText(
                                         keyText:
-                                            ': ${balance.toStringAsFixed(6)}',
+                                            ': ${balance.formatDoubleBalance}',
                                         style: TextStyles.lightGrey12,
                                       ),
                                     ],
@@ -250,6 +251,7 @@ class _TradeScreenState extends State<TradeScreen> {
                                                   } else {
                                                     setState(() {
                                                       amountOutMin = 0;
+                                                      error = '';
                                                     });
                                                   }
                                                 },

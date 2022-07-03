@@ -3,12 +3,26 @@ import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
 import 'package:slee_fi/common/widgets/sf_buttons.dart';
 import 'package:slee_fi/common/widgets/sf_card.dart';
-import 'package:slee_fi/common/widgets/sf_dialog.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
 import 'package:slee_fi/l10n/locale_keys.g.dart';
+import 'package:slee_fi/presentation/blocs/transfer_spending/transfer_spending.dart';
 
 class PopUpConfirmTransfer extends StatelessWidget {
-  const PopUpConfirmTransfer({Key? key}) : super(key: key);
+  const PopUpConfirmTransfer(
+      {Key? key,
+        required this.fee,
+        required this.cubit,
+        required this.amount,
+        required this.tokenName,
+        required this.contractAddress,
+      })
+      : super(key: key);
+
+  final double fee;
+  final TransferSpendingCubit cubit;
+  final double amount;
+  final String tokenName;
+  final String contractAddress;
 
   @override
   Widget build(BuildContext context) {
@@ -78,7 +92,7 @@ class PopUpConfirmTransfer extends StatelessWidget {
               ),
               Expanded(
                   child: SFText(
-                      keyText: "0.000005 AVAX",
+                      keyText: "$fee AVAX",
                       style: TextStyles.lightWhite16,
                       textAlign: TextAlign.end)),
             ],
@@ -95,7 +109,7 @@ class PopUpConfirmTransfer extends StatelessWidget {
               ),
               Expanded(
                   child: SFText(
-                keyText: "0.007930727 AVAX",
+                keyText: "$amount ${tokenName.toUpperCase()}",
                 style: TextStyles.lightWhite16,
                 textAlign: TextAlign.end,
               )),
@@ -127,7 +141,8 @@ class PopUpConfirmTransfer extends StatelessWidget {
                   gradient: AppColors.gradientBlueButton,
                   onPressed: () {
                     Navigator.pop(context);
-                    showSuccessfulDialog(context, null);
+                    //showSuccessfulDialog(context, null);
+                    cubit.transferSpending(amount: amount, addressContract: contractAddress);
                   },
                 ),
               ),

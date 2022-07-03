@@ -46,3 +46,5 @@ enum OTPType {
 
   String toJson() => name;
 }
+
+enum TokenToSpending { approve, spending}

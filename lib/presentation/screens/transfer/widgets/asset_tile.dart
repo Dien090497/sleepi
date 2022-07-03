@@ -1,29 +1,25 @@
 import 'package:flutter/material.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
-import 'package:slee_fi/common/widgets/sf_bottom_sheet.dart';
 import 'package:slee_fi/common/widgets/sf_card.dart';
 import 'package:slee_fi/common/widgets/sf_icon.dart';
 import 'package:slee_fi/common/widgets/sf_list_tile.dart';
-import 'package:slee_fi/resources/resources.dart';
 
-import 'modal_transfer_between.dart';
 
 class AssetTile extends StatefulWidget {
-  const AssetTile({Key? key}) : super(key: key);
-
+  const AssetTile({Key? key, required this.tokenName, required this.img}) : super(key: key);
+  final String tokenName;
+  final String img;
   @override
   State<AssetTile> createState() => _AssetTileState();
 }
 
 class _AssetTileState extends State<AssetTile> {
-  String selected = "AVAX";
-  String image = Ics.icAvax;
 
   @override
   Widget build(BuildContext context) {
     return SFCard(
-      onTap: () => SFModalBottomSheet.show(
+      /*onTap: () => SFModalBottomSheet.show(
           context,
           0.6,
           ModalTransferBetween(
@@ -34,10 +30,10 @@ class _AssetTileState extends State<AssetTile> {
               image = value['urlImage'];
               setState(() {});
             },
-          )),
+          )),*/
       child: SFListTile(
-        leading: SFIcon(image),
-        text: selected,
+        leading: SFIcon(widget.img),
+        text: widget.tokenName,
         textStyle: TextStyles.lightWhite16,
         trailing: const Icon(
           Icons.chevron_right,

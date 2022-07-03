@@ -374,5 +374,8 @@
   "effect_efficiency": "効率性にプラス補正をかける",
   "effect_resilience": "レジリエンスにプラス補正をかける",
   "invalid_mnemonic_please_try_again": "Invalid Mnemonic. Please try again",
-  "this_field_is_required": "This field is required"
+  "this_field_is_required": "This field is required",
+  "confirm_approve": "Confirm Approve",
+  "approve" : "Approve",
+  "successfull" : "Successfull!"
 }
