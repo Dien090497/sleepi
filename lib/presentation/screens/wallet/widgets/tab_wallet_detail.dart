@@ -192,9 +192,7 @@ class TabWalletDetail extends StatelessWidget {
                       ),
                     ),
                     const SizedBox(height: 12.0),
-                    WalletDetailList(
-                      tokenList: tokenList,
-                    )
+                    WalletDetailList(tokenList: tokenList)
                   ],
                 ),
               ),

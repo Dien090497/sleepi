@@ -16,6 +16,7 @@ class WalletDetailList extends StatelessWidget {
     Key? key,
     required this.tokenList,
   }) : super(key: key);
+
   final List<TokenEntity> tokenList;
 
   final List keyList = [
