@@ -5,11 +5,15 @@ import 'package:retrofit/retrofit.dart';
 import 'package:slee_fi/common/const/const.dart';
 import 'package:slee_fi/common/enum/enum.dart';
 import 'package:slee_fi/models/buy_nft_schema/buy_nft_schema.dart';
+import 'package:slee_fi/models/create_password_reponse/create_password_response.dart';
 import 'package:slee_fi/models/create_password_schema/create_password_schema.dart';
 import 'package:slee_fi/models/global_config_response/global_config_response.dart';
 import 'package:slee_fi/models/refresh_token_schema/refresh_token_schema.dart';
 import 'package:slee_fi/models/send_email_response/send_email_response.dart';
+import 'package:slee_fi/models/setting_active_code_response/setting_active_code_response.dart';
+import 'package:slee_fi/models/sign_in_response/sign_in_response.dart';
 import 'package:slee_fi/models/sign_in_schema/sign_in_schema.dart';
+import 'package:slee_fi/models/sign_up_schema/sign_up_schema.dart';
 import 'package:slee_fi/models/user_response/user_response.dart';
 import 'package:slee_fi/models/users_response/users_response.dart';
 import 'package:slee_fi/models/verify_schema/verify_schema.dart';
@@ -59,11 +63,11 @@ abstract class AuthDataSource {
 
   @POST('/auth/login')
   @Header('Content-Type: application/json')
-  Future<dynamic> signIn(@Body() SignInSchema signInSchema);
+  Future<SignInResponse> signIn(@Body() SignInSchema signInSchema);
 
-  @POST('/auth/register')
+  @POST('/auth/signup')
   @Header('Content-Type: application/json')
-  Future<UserResponse> signUp(@Body() SignInSchema signInSchema);
+  Future<UserResponse> signUp(@Body() SignUpSchema signUpSchema);
 
   @POST('/auth/refresh-token')
   @Header('Content-Type: application/json')
@@ -72,11 +76,10 @@ abstract class AuthDataSource {
 
   @POST('/auth/create-password-step')
   @Header('Content-Type: application/json')
-  Future<dynamic> createPassword(
-      @Body() CreatePasscodeSchema refreshTokenSchema);
+  Future<CreatePasswordResponse> createPassword(@Body() CreatePasswordSchema createPasswordSchema);
 
   @GET('/auth/setting-active-code')
-  Future<dynamic> getSettingActiveCode();
+  Future<SettingActiveCodeResponse> getSettingActiveCode();
 
   @GET('/auth/verify-active-code')
   Future<dynamic> verifyActiveCode(@Query('activeCode') String activeCode);
@@ -84,7 +87,7 @@ abstract class AuthDataSource {
   ///stacking
   @POST('/stacking')
   @Header('Content-Type: application/json')
-  Future<dynamic> stacking(@Body() CreatePasscodeSchema refreshTokenSchema);
+  Future<dynamic> stacking(@Body() CreatePasswordSchema refreshTokenSchema);
 
   ///white draw
   @POST('/withdraw/token')

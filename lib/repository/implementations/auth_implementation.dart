@@ -1,13 +1,21 @@
 import 'dart:developer';
 
 import 'package:dartz/dartz.dart';
+import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
 import 'package:slee_fi/common/extensions/string_x.dart';
 import 'package:slee_fi/datasources/local/isar/isar_datasource.dart';
 import 'package:slee_fi/datasources/local/secure_storage.dart';
 import 'package:slee_fi/datasources/remote/network/auth_datasource/auth_datasource.dart';
 import 'package:slee_fi/failures/failure.dart';
+import 'package:slee_fi/models/create_password_reponse/create_password_response.dart';
+import 'package:slee_fi/models/create_password_schema/create_password_schema.dart';
 import 'package:slee_fi/models/send_email_response/send_email_response.dart';
+import 'package:slee_fi/models/setting_active_code_response/setting_active_code_response.dart';
+import 'package:slee_fi/models/sign_in_response/sign_in_response.dart';
+import 'package:slee_fi/models/sign_in_schema/sign_in_schema.dart';
+import 'package:slee_fi/models/sign_up_schema/sign_up_schema.dart';
+import 'package:slee_fi/models/user_response/user_response.dart';
 import 'package:slee_fi/models/verify_schema/verify_schema.dart';
 import 'package:slee_fi/repository/auth_repository.dart';
 import 'package:slee_fi/usecase/send_otp_mail_usecase.dart';
@@ -34,11 +42,14 @@ class AuthImplementation extends IAuthRepository {
   }
 
   @override
-  Future<Either<Failure, String>> logIn() async {
+  Future<Either<FailureMessage, SignInResponse>> logIn(
+      SignInSchema signInSchema) async {
     try {
-      return const Right('');
-    } catch (e) {
-      return Left(FailureMessage('$e'));
+      var result = await _authDataSource.signIn(signInSchema);
+      'sign success $result'.log;
+      return Right(result);
+    } on Exception catch (e) {
+      return Left(FailureMessage(_catchErrorDio(e)));
     }
   }
 
@@ -64,8 +75,8 @@ class AuthImplementation extends IAuthRepository {
       var result = await _authDataSource.sendOTP(
           sendOTPParam.email, sendOTPParam.otpType);
       return Right(result);
-    } catch (e) {
-      return Left(FailureMessage('$e'));
+    } on Exception catch (e) {
+      return Left(FailureMessage(_catchErrorDio(e)));
     }
   }
 
@@ -75,9 +86,8 @@ class AuthImplementation extends IAuthRepository {
     try {
       var result = await _authDataSource.verifyOTP(verifySchema);
       return Right(result);
-    } catch (e) {
-      'error import wallet $e'.log;
-      return Left(FailureMessage('$e'));
+    } on Exception catch (e) {
+      return Left(FailureMessage(_catchErrorDio(e)));
     }
   }
 
@@ -102,4 +112,55 @@ class AuthImplementation extends IAuthRepository {
       return Left(FailureMessage('$e'));
     }
   }
+
+  @override
+  Future<Either<FailureMessage, SettingActiveCodeResponse>>
+      fetchSettingActiveCode() async {
+    try {
+      var result = await _authDataSource.getSettingActiveCode();
+      return Right(result);
+    } on Exception catch (e) {
+      return Left(FailureMessage(_catchErrorDio(e)));
+    }
+  }
+
+  @override
+  Future<Either<FailureMessage, UserResponse>> signUp(
+      SignUpSchema signUpSchema) async {
+    try {
+      var result = await _authDataSource.signUp(signUpSchema);
+      return Right(result);
+    } on Exception catch (e) {
+      return Left(FailureMessage(_catchErrorDio(e)));
+    }
+  }
+
+  @override
+  Future<Either<FailureMessage, CreatePasswordResponse>> createPassword(
+      CreatePasswordSchema createPasswordSchema) async {
+    try {
+      var result = await _authDataSource.createPassword(createPasswordSchema);
+      'create success $result'.log;
+      return Right(result);
+    } on Exception catch (e) {
+      return Left(FailureMessage(_catchErrorDio(e)));
+    }
+  }
+
+  String _catchErrorDio(Exception e) {
+    if (e is DioError) {
+      'error is ${e.response?.data['error']['message']}'.log;
+      ' errror  ${e.response}'.log;
+      return e.response?.data['error']['message'] ??
+          'Error! An error occurred. Please try again later';
+    }
+
+    return '$e';
+  }
+
+  // @override
+  // Future<Either<Failure, bool>> checkPassCode(String passcode) {
+  //   // TODO: implement checkPassCode
+  //   throw UnimplementedError();
+  // }
 }

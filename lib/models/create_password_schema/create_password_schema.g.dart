@@ -6,17 +6,17 @@ part of 'create_password_schema.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-CreatePasscodeSchema _$CreatePasscodeSchemaFromJson(
+CreatePasswordSchema _$CreatePasswordSchemaFromJson(
         Map<String, dynamic> json) =>
-    CreatePasscodeSchema(
+    CreatePasswordSchema(
       json['email'] as String,
       json['password'] as String,
       json['activeCode'] as String,
       json['otp'] as int,
     );
 
-Map<String, dynamic> _$CreatePasscodeSchemaToJson(
-        CreatePasscodeSchema instance) =>
+Map<String, dynamic> _$CreatePasswordSchemaToJson(
+        CreatePasswordSchema instance) =>
     <String, dynamic>{
       'email': instance.email,
       'password': instance.password,

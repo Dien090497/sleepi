@@ -29,5 +29,6 @@ class RunAppInitUseCase extends UseCase<bool, NoParams> {
     assert(network != null, "Network must not be null");
     await _web3provider.init(network!);
     return const Right(true);
+
   }
 }

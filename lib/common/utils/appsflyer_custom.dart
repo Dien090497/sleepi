@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:appsflyer_sdk/appsflyer_sdk.dart';
 import 'package:flutter/foundation.dart';
 import 'package:injectable/injectable.dart';
@@ -6,7 +8,8 @@ import 'package:slee_fi/common/extensions/string_x.dart';
 @Singleton()
 class AppFlyerCustom {
   final AppsFlyerOptions _appsFlyerOptions = AppsFlyerOptions(
-    afDevKey: 'qCWYnmVaZy4cwWWjm3RB5P',
+    afDevKey: Platform.isAndroid ?  'qCWYnmVaZy4cwWWjm3RB5P' : 'Be7KEPxvVdSNz26dG7f79B',
+
     appId: '1623163183',
     showDebug: true,
   );

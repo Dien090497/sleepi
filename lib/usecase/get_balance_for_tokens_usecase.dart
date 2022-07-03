@@ -9,6 +9,7 @@ class GetBalanceForTokensUseCase extends UseCase<List<double>, ParamsBalanceOfTo
 
   GetBalanceForTokensUseCase(this._walletRepository);
 
+
   @override
   Future<Either<Failure, List<double>>> call(ParamsBalanceOfToken params) {
     return _walletRepository.getBalanceOfTokens(params);
