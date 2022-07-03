@@ -1,7 +1,6 @@
 import 'package:dartz/dartz.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:slee_fi/common/extensions/string_x.dart';
 import 'package:slee_fi/di/injector.dart';
 import 'package:slee_fi/entities/nft_entity/nft_entity.dart';
 import 'package:slee_fi/entities/token/token_entity.dart';
@@ -22,7 +21,6 @@ class DetailWalletCubit extends Cubit<DetailWalletState> {
   final _getNFTsUC = getIt<GetNFTsUseCase>();
 
   Future<void> loadCurrentWallet() async {
-    'current wallet loading '.log;
     await Future.delayed(const Duration(milliseconds: 500));
     emit(const DetailWalletState.loading());
     final currentWalletRes = await _currentWalletUC.call(NoParams());
@@ -32,12 +30,6 @@ class DetailWalletCubit extends Cubit<DetailWalletState> {
       emit(DetailWalletState.success(walletInfoEntity: r));
     });
     await _getTokensAndNFTsBalance();
-    // result.fold((l) {
-    //   emit(const DetailWalletState.empty());
-    // }, (r) {
-    //   var balance = r.nativeCurrency.balance / pow(10, 18);
-    //   emit(DetailWalletState.success(walletInfoEntity: r, balance: balance));
-    // });
   }
 
   Future<void> _getTokensAndNFTsBalance() async {

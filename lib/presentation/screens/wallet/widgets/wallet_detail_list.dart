@@ -60,9 +60,6 @@ class WalletDetailList extends StatelessWidget {
               if (state is DetailWalletStateInitial) {
                 cubit.loadCurrentWallet();
               }
-              final tokenList = state is DetailWalletStateSuccess
-                  ? state.tokenList
-                  : cubit.tokenList;
               return tokenList.isEmpty
                   ? ListView.builder(
                       itemCount: keyList.length,
@@ -93,8 +90,7 @@ class WalletDetailList extends StatelessWidget {
                               ),
                             ),
                             title: SFText(
-                                keyText:
-                                keyList[index],
+                                keyText: keyList[index],
                                 style: TextStyles.lightWhite16),
                             trailing: SFText(
                               keyText: "0.00",
@@ -118,8 +114,7 @@ class WalletDetailList extends StatelessWidget {
                                     title: tokenList[index].displayName,
                                     img: tokenList[index].icon,
                                     tokenEntity: tokenList[index],
-                                  )
-                              );
+                                  ));
                             }
                           },
                           child: ListTile(
@@ -139,7 +134,9 @@ class WalletDetailList extends StatelessWidget {
                               ),
                             ),
                             title: SFText(
-                                keyText: index < 3 ? tokenList[index].displayName.toUpperCase() : tokenList[index].displayName,
+                                keyText: index < 3
+                                    ? tokenList[index].displayName.toUpperCase()
+                                    : tokenList[index].displayName,
                                 style: TextStyles.lightWhite16),
                             trailing: SFText(
                               keyText:

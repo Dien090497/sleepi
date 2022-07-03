@@ -39,13 +39,14 @@ import '../repository/nft_repository.dart' as _i27;
 import '../repository/spending_repository.dart' as _i29;
 import '../repository/transaction_repository.dart' as _i31;
 import '../repository/wallet_repository.dart' as _i33;
-import '../usecase/create_pass_code_usecase.dart' as _i50;
-import '../usecase/create_password_usecase.dart' as _i51;
-import '../usecase/get_amount_out_min_usecase.dart' as _i54;
-import '../usecase/get_balance_for_tokens_usecase.dart' as _i55;
-import '../usecase/get_balance_token_usecase.dart' as _i56;
-import '../usecase/get_current_network_usecase.dart' as _i58;
-import '../usecase/get_nfts_usecase.dart' as _i59;
+import '../usecase/approve_usecase.dart' as _i49;
+import '../usecase/create_pass_code_usecase.dart' as _i51;
+import '../usecase/create_password_usecase.dart' as _i52;
+import '../usecase/get_amount_out_min_usecase.dart' as _i55;
+import '../usecase/get_balance_for_tokens_usecase.dart' as _i56;
+import '../usecase/get_balance_token_usecase.dart' as _i57;
+import '../usecase/get_current_network_usecase.dart' as _i59;
+import '../usecase/get_nfts_usecase.dart' as _i60;
 import '../usecase/is_passcode_created_usecase.dart' as _i36;
 import '../usecase/login_usecase.dart' as _i37;
 import '../usecase/logout_usecase.dart' as _i38;
@@ -60,12 +61,12 @@ import '../usecase/to_spending_usecase.dart' as _i45;
 import '../usecase/validate_mnemonic.dart' as _i46;
 import '../usecase/validate_passcode_usecase.dart' as _i47;
 import '../usecase/verify_otp_usecase.dart' as _i48;
-import '../usecase/wallet/create_wallet_usecase.dart' as _i52;
-import '../usecase/wallet/current_wallet_usecase.dart' as _i53;
-import '../usecase/wallet/first_open_wallet_session_usecase.dart' as _i49;
-import '../usecase/wallet/get_current_mnemonic_usecasse.dart' as _i57;
+import '../usecase/wallet/create_wallet_usecase.dart' as _i53;
+import '../usecase/wallet/current_wallet_usecase.dart' as _i54;
+import '../usecase/wallet/first_open_wallet_session_usecase.dart' as _i50;
+import '../usecase/wallet/get_current_mnemonic_usecasse.dart' as _i58;
 import '../usecase/wallet/import_wallet_usecase.dart' as _i35;
-import 'register_module.dart' as _i60; // ignore_for_file: unnecessary_lambdas
+import 'register_module.dart' as _i61; // ignore_for_file: unnecessary_lambdas
 
 // ignore_for_file: lines_longer_than_80_chars
 /// initializes the registration of provided dependencies inside of [GetIt]
@@ -119,8 +120,8 @@ Future<_i1.GetIt> $initGetIt(_i1.GetIt get,
       get<_i11.GetStorageDataSource>()));
   gh.factory<_i27.INFTRepository>(
       () => _i28.NFTImplementation(get<_i19.NFTDataSource>()));
-  gh.factory<_i29.ISpendingRepository>(
-      () => _i30.SpendingImplementation(get<_i23.SpendingDataSource>()));
+  gh.factory<_i29.ISpendingRepository>(() => _i30.SpendingImplementation(
+      get<_i23.SpendingDataSource>(), get<_i24.Web3DataSource>()));
   gh.factory<_i31.ITransactionRepository>(() => _i32.TransactionImplementation(
       get<_i24.Web3DataSource>(),
       get<_i11.GetStorageDataSource>(),
@@ -158,31 +159,33 @@ Future<_i1.GetIt> $initGetIt(_i1.GetIt get,
       () => _i47.ValidatePassCodeUseCase(get<_i25.IAuthRepository>()));
   gh.factory<_i48.VerifyOTPUseCase>(
       () => _i48.VerifyOTPUseCase(get<_i25.IAuthRepository>()));
-  gh.factory<_i49.CheckFirstOpenWallet>(
-      () => _i49.CheckFirstOpenWallet(get<_i33.IWalletRepository>()));
-  gh.factory<_i50.CreatePassCodeUseCase>(
-      () => _i50.CreatePassCodeUseCase(get<_i25.IAuthRepository>()));
-  gh.factory<_i51.CreatePasswordUseCase>(
-      () => _i51.CreatePasswordUseCase(get<_i25.IAuthRepository>()));
-  gh.factory<_i52.CreateWalletUseCase>(
-      () => _i52.CreateWalletUseCase(get<_i33.IWalletRepository>()));
-  gh.factory<_i53.CurrentWalletUseCase>(
-      () => _i53.CurrentWalletUseCase(get<_i33.IWalletRepository>()));
-  gh.factory<_i54.GetAmountOutMinUseCase>(
-      () => _i54.GetAmountOutMinUseCase(get<_i33.IWalletRepository>()));
-  gh.factory<_i55.GetBalanceForTokensUseCase>(
-      () => _i55.GetBalanceForTokensUseCase(get<_i33.IWalletRepository>()));
-  gh.factory<_i56.GetBalanceTokenUseCase>(
-      () => _i56.GetBalanceTokenUseCase(get<_i33.IWalletRepository>()));
-  gh.factory<_i57.GetCurrentMnemonicUsecase>(
-      () => _i57.GetCurrentMnemonicUsecase(get<_i33.IWalletRepository>()));
-  gh.factory<_i58.GetCurrentNetworkUseCase>(
-      () => _i58.GetCurrentNetworkUseCase(get<_i33.IWalletRepository>()));
-  gh.factory<_i59.GetNFTsUseCase>(
-      () => _i59.GetNFTsUseCase(get<_i27.INFTRepository>()));
+  gh.factory<_i49.ApproveUseCase>(() => _i49.ApproveUseCase(
+      get<_i29.ISpendingRepository>(), get<_i33.IWalletRepository>()));
+  gh.factory<_i50.CheckFirstOpenWallet>(
+      () => _i50.CheckFirstOpenWallet(get<_i33.IWalletRepository>()));
+  gh.factory<_i51.CreatePassCodeUseCase>(
+      () => _i51.CreatePassCodeUseCase(get<_i25.IAuthRepository>()));
+  gh.factory<_i52.CreatePasswordUseCase>(
+      () => _i52.CreatePasswordUseCase(get<_i25.IAuthRepository>()));
+  gh.factory<_i53.CreateWalletUseCase>(
+      () => _i53.CreateWalletUseCase(get<_i33.IWalletRepository>()));
+  gh.factory<_i54.CurrentWalletUseCase>(
+      () => _i54.CurrentWalletUseCase(get<_i33.IWalletRepository>()));
+  gh.factory<_i55.GetAmountOutMinUseCase>(
+      () => _i55.GetAmountOutMinUseCase(get<_i33.IWalletRepository>()));
+  gh.factory<_i56.GetBalanceForTokensUseCase>(
+      () => _i56.GetBalanceForTokensUseCase(get<_i33.IWalletRepository>()));
+  gh.factory<_i57.GetBalanceTokenUseCase>(
+      () => _i57.GetBalanceTokenUseCase(get<_i33.IWalletRepository>()));
+  gh.factory<_i58.GetCurrentMnemonicUsecase>(
+      () => _i58.GetCurrentMnemonicUsecase(get<_i33.IWalletRepository>()));
+  gh.factory<_i59.GetCurrentNetworkUseCase>(
+      () => _i59.GetCurrentNetworkUseCase(get<_i33.IWalletRepository>()));
+  gh.factory<_i60.GetNFTsUseCase>(
+      () => _i60.GetNFTsUseCase(get<_i27.INFTRepository>()));
   return get;
 }
 
 class _$RPCModule extends _i24.RPCModule {}
 
-class _$RegisterModule extends _i60.RegisterModule {}
+class _$RegisterModule extends _i61.RegisterModule {}
