@@ -21,10 +21,11 @@ class WalletCubit extends Cubit<WalletState> {
   var firstOpenWallet = true;
 
   final _getBalanceForTokensUseCase = getIt<GetBalanceForTokensUseCase>();
-  final List<TokenEntity> tokenList = [];
+  late List<TokenEntity> tokenList = [];
   late ParamsBalanceOfToken params;
 
   init() async {
+    tokenList = [];
     emit(const WalletState.loading());
     var openWallet = await _firstOpenWalletUC.call(NoParams());
     final walletCall = await _currentWalletUC.call(NoParams());
@@ -46,55 +47,62 @@ class WalletCubit extends Cubit<WalletState> {
     }
   }
 
-  loadCurrentWallet(WalletInfoEntity wallet) async {
-    if (wallet.chainID == 43113) {
-      //TODO: Mock address for test net
-      params = ParamsBalanceOfToken(
-          addressContract: Const.listContractAddressTestNet,
-          walletInfoEntity: wallet);
-    } else {
-      //TODO: Mock address for Main net
-      params = ParamsBalanceOfToken(
-          addressContract: Const.listContractAddressMainNet,
-          walletInfoEntity: wallet);
-    }
-    final result = await _getBalanceForTokensUseCase.call(params);
-    result.fold((l) {
-      emit(const WalletState.error(message: 'Error when get balance token'));
-    }, (values) {
-      List keyList = [
-        "SLFT",
-        "SLGT",
-        "AVAX",
-        LocaleKeys.beds.tr(),
-        LocaleKeys.jewels.tr(),
-        LocaleKeys.bed_box.tr(),
-        LocaleKeys.item.tr(),
-      ];
-      List icons = [
-        Ics.icSlft,
-        Ics.icSlgt,
-        Ics.icAvax,
-        Ics.icBeds,
-        Ics.icJewels,
-        Ics.icBedBoxes,
-        Imgs.icItems
-      ];
-      for (int i = 0; i < values.length; i++) {
-        TokenEntity tokenEntity = TokenEntity(
-          address: params.addressContract[i],
-          displayName: keyList[i],
-          name: keyList[i],
-          symbol: keyList[i],
-          icon: icons[i],
-          balance: values[i],
-        );
-        tokenList.add(tokenEntity);
+  loadCurrentWallet(WalletInfoEntity? wallet) async {
+    if(wallet!=null) {
+      if (wallet.chainID == 43113) {
+        //TODO: Mock address for test net
+        params = ParamsBalanceOfToken(
+            addressContract: Const.listContractAddressTestNet,
+            walletInfoEntity: wallet);
+      } else {
+        //TODO: Mock address for Main net
+        params = ParamsBalanceOfToken(
+            addressContract: Const.listContractAddressMainNet,
+            walletInfoEntity: wallet);
       }
+      final result = await _getBalanceForTokensUseCase.call(params);
+      result.fold((l) {
+        emit(const WalletState.error(message: 'Error when get balance token'));
+      }, (values) {
+        List keyList = [
+          "SLFT",
+          "SLGT",
+          "AVAX",
+          LocaleKeys.beds.tr(),
+          LocaleKeys.jewels.tr(),
+          LocaleKeys.bed_box.tr(),
+          LocaleKeys.item.tr(),
+        ];
+        List icons = [
+          Ics.icSlft,
+          Ics.icSlgt,
+          Ics.icAvax,
+          Ics.icBeds,
+          Ics.icJewels,
+          Ics.icBedBoxes,
+          Imgs.icItems
+        ];
+        for (int i = 0; i < values.length; i++) {
+          TokenEntity tokenEntity = TokenEntity(
+            address: params.addressContract[i],
+            displayName: keyList[i],
+            name: keyList[i],
+            symbol: keyList[i],
+            icon: icons[i],
+            balance: values[i],
+          );
+          tokenList.add(tokenEntity);
+        }
+        emit(WalletState.loaded(
+            walletInfoEntity: wallet,
+            firstOpenWallet: firstOpenWallet,
+            tokenList: tokenList));
+      });
+    }else{
       emit(WalletState.loaded(
-          walletInfoEntity: wallet,
+          walletInfoEntity: null,
           firstOpenWallet: firstOpenWallet,
           tokenList: tokenList));
-    });
+    }
   }
 }
