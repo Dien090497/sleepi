@@ -20,7 +20,6 @@ class SigInSignUpCubit extends Cubit<SignInSignUpState> {
   final SignUpUseCase _signUpUseCase = getIt<SignUpUseCase>();
   final LogInUseCase _logInUseCase = getIt<LogInUseCase>();
 
-
   final _saveUserUC = getIt<SaveUserLocalUseCase>();
 
   final fetchSettingActiveCode = getIt<SettingActiveCodeUseCase>();
@@ -52,10 +51,8 @@ class SigInSignUpCubit extends Cubit<SignInSignUpState> {
     result.fold((l) => emit(SignInSignUpState.error(l.msg)),
         (userResponse) async {
       var setting = await fetchSettingActiveCode.call(NoParams());
-      setting.fold(
-          (l) => emit(SignInSignUpState.error(l.msg)),
-          (r) => emit(SignInSignUpState.signUpSuccess(
-              r.data.isEnable, userResponse.data)));
+      setting.fold((l) => emit(SignInSignUpState.error(l.msg)),
+          (r) => emit(SignInSignUpState.signUpSuccess(userResponse.data)));
     });
   }
 
