@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:developer';
 
 import 'package:easy_localization/easy_localization.dart';
@@ -34,7 +35,6 @@ class TradeScreen extends StatefulWidget {
 }
 
 class _TradeScreenState extends State<TradeScreen> {
-  bool isDisabled = true;
   late double balance = 0;
   int indexFrom = 0;
   int indexTo = Const.tokens.length - 1;
@@ -44,6 +44,7 @@ class _TradeScreenState extends State<TradeScreen> {
   final GlobalKey<CoolDropdownState> secondToken = GlobalKey();
   TextEditingController valueController = TextEditingController();
   double amountOutMin = 0;
+  Timer? _debounce;
 
   int getIndexAddress(String address) {
     int index = -1;
@@ -56,46 +57,52 @@ class _TradeScreenState extends State<TradeScreen> {
   }
 
   onValidValue() {
-    if (double.parse(valueController.text) > balance) {
-      error = LocaleKeys.insufficient_balance;
-    } else if (double.parse(valueController.text) == 0) {
-      error = LocaleKeys.not_be_zero;
-    } else {
-      error = '';
+    if (valueController.text != '') {
+      if (double.parse(valueController.text) > balance) {
+        error = LocaleKeys.insufficient_balance;
+      } else if (double.parse(valueController.text) == 0) {
+        error = LocaleKeys.not_be_zero;
+      } else {
+        error = '';
+      }
     }
   }
 
   onReset(cubit) {
     setState(() {
-      isDisabled = true;
       valueController.text = '';
       amountOutMin = 0;
       error = '';
       indexFrom = 0;
       indexTo = Const.tokens.length - 1;
-      Future.delayed(const Duration(milliseconds: 100), () {
-        firstToken.currentState?.changeSelectedItem();
-        secondToken.currentState?.changeSelectedItem();
-      });
+    });
+    Future.delayed(const Duration(milliseconds: 100), () {
+      firstToken.currentState?.changeSelectedItem();
+      secondToken.currentState?.changeSelectedItem();
       cubit.getBalanceToken(Const.tokens[indexFrom]['address'].toString());
     });
   }
 
   onSwapIndex(cubit) {
     setState(() {
-      isDisabled = true;
       valueController.text = '';
       amountOutMin = 0;
       error = '';
       int swap = indexTo;
       indexTo = indexFrom;
       indexFrom = swap;
-      Future.delayed(const Duration(milliseconds: 100), () {
-        firstToken.currentState?.changeSelectedItem();
-        secondToken.currentState?.changeSelectedItem();
-      });
+    });
+    Future.delayed(const Duration(milliseconds: 100), () {
+      firstToken.currentState?.changeSelectedItem();
+      secondToken.currentState?.changeSelectedItem();
       cubit.getBalanceToken(Const.tokens[indexFrom]['address'].toString());
     });
+  }
+
+  @override
+  void dispose() {
+    if (_debounce != null) _debounce!.cancel();
+    super.dispose();
   }
 
   @override
@@ -106,32 +113,34 @@ class _TradeScreenState extends State<TradeScreen> {
         listener: (BuildContext context, state) {
           final cubit = context.read<TradeCubit>();
           if (state is swapTokenBalance) {
-            balance = state.balance;
-            valueController.text = '';
             setState(() {
-              isDisabled = true;
+              balance = state.balance;
+              valueController.text = '';
             });
           }
           if (state is swapTokenSuccess) {
             Navigator.pop(context);
-            if(state.success) {
-              showSuccessfulDialog(context, null).then((value) =>
+            if (state.success) {
+              showSuccessfulDialog(context, null).then((value) {
+                if (_debounce?.isActive ?? false) _debounce!.cancel();
+                _debounce = Timer(const Duration(milliseconds: 3000), () async {
                   cubit.getBalanceToken(
-                      Const.tokens[indexFrom]['address'].toString()));
-            }else{
-
+                      Const.tokens[indexFrom]['address'].toString());
+                });
+              });
             }
           }
           if (state is TradeStateInitial) {
-            isDisabled = true;
-            valueController.text = '';
-            amountOutMin = 0;
-            error = '';
+            setState(() {
+              valueController.text = '';
+              amountOutMin = 0;
+              error = '';
+            });
           }
         },
         builder: (BuildContext context, state) {
           if (state is tradeGetAmountOutMin) {
-            if (!isDisabled) {
+            if (valueController.text != '') {
               amountOutMin = state.amountOutMin;
             } else {
               amountOutMin = 0;
@@ -225,7 +234,6 @@ class _TradeScreenState extends State<TradeScreen> {
                                                   if (value.isNotEmpty) {
                                                     setState(() {
                                                       onValidValue();
-                                                      isDisabled = false;
                                                       cubit.getAmountOutMin(
                                                           Const
                                                               .tokens[indexFrom]
@@ -241,7 +249,6 @@ class _TradeScreenState extends State<TradeScreen> {
                                                     });
                                                   } else {
                                                     setState(() {
-                                                      isDisabled = true;
                                                       amountOutMin = 0;
                                                     });
                                                   }
@@ -290,7 +297,6 @@ class _TradeScreenState extends State<TradeScreen> {
                                                                       .text
                                                                       .toString())),
                                                         );
-                                                        isDisabled = false;
                                                         error = '';
                                                         setState(() {});
                                                       }),
@@ -390,10 +396,13 @@ class _TradeScreenState extends State<TradeScreen> {
                                     mainAxisAlignment:
                                         MainAxisAlignment.spaceBetween,
                                     children: [
-                                      SizedBox(
-                                        child: SFText(
-                                          keyText: "$amountOutMin",
-                                          style: TextStyles.bold18White,
+                                      Expanded(
+                                        child: SizedBox(
+                                          child: SFText(
+                                            maxLines: 1,
+                                            keyText: "$amountOutMin",
+                                            style: TextStyles.bold18White,
+                                          ),
                                         ),
                                       ),
                                       DropdownSelectToken(
@@ -442,10 +451,12 @@ class _TradeScreenState extends State<TradeScreen> {
                         text: LocaleKeys.trade.reCase(StringCase.titleCase),
                         textStyle: TextStyles.w600WhiteSize16,
                         gradient: AppColors.gradientBlueButton,
-                        disabled: isDisabled,
                         onPressed: () {
                           setState(() {
                             onValidValue();
+                            if (valueController.text == '') {
+                              error = LocaleKeys.field_required;
+                            }
                           });
                           if (error == '') {
                             showCustomAlertDialog(context,

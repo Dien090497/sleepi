@@ -393,7 +393,8 @@
   "reset_passcode_successfully": "Reset passcode successfully",
   "invalid_mnemonic_please_try_again": "Invalid Mnemonic. Please try again",
   "this_field_is_required": "This field is required",
-  "insufficient_balance": "Insufficient balance",
+  "please_enter_email" : "Please enter email",
+  "insufficient_balance": "Insufficient Balance",
   "not_be_zero": "Your input can not be zero",
-  "please_enter_email" : "Please enter email"
+  "field_required": "This field is required"
 }

@@ -16,7 +16,7 @@ class ImportWalletCubit extends Cubit<ImportWalletState> {
   final importWalletUC = getIt<ImportWalletUseCase>();
   final sendOtpUC = getIt<SendOTPMailUseCase>();
   final verifyOtpUC = getIt<VerifyOTPUseCase>();
-  String userEmail = 'duong.nguyen3@sotatek.com';
+  String userEmail = 'thang.bui@sotatek.com';
   String otp = '';
   String mnemonic = '';
 
