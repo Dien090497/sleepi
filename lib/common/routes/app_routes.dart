@@ -21,6 +21,7 @@ import 'package:slee_fi/presentation/screens/info_individual/layout/mint_screen.
 import 'package:slee_fi/presentation/screens/info_individual/layout/recycle_screen.dart';
 import 'package:slee_fi/presentation/screens/item_selection/item_selection_screen.dart';
 import 'package:slee_fi/presentation/screens/login_signup/login_signup_screen.dart';
+import 'package:slee_fi/presentation/screens/nft_detail_screen/nft_detail_screen.dart';
 import 'package:slee_fi/presentation/screens/passcode/confirm_create_passcode_screen.dart';
 import 'package:slee_fi/presentation/screens/passcode/create_passcode_screen.dart';
 import 'package:slee_fi/presentation/screens/passcode/passcode_screen.dart';
@@ -107,6 +108,7 @@ class R {
   static const String probability = '${_}probability';
   static const String tracking = '${_}tracking';
   static const String transactionDetail = '${_}transaction_detail';
+  static const String nftDetail = '${_}nft_detail';
   static const String commingSoon = '${_}comming_soon';
   static const String qrCodeScan = '${_}qr_code_scan';
 }
@@ -165,6 +167,7 @@ class AppRoutes {
     R.probability: (_) => const ProbabilityScreen(),
     R.tracking: (_) => const TrackingScreen(),
     R.transactionDetail: (_) => const TransactionDetail(),
+    R.nftDetail: (_) => const NFTDetailScreen(),
     R.commingSoon: (_) => const CommingSoon(),
     R.qrCodeScan: (_) => const QRCodeScanner(),
     R.forgotPasscode: (_) => const ForgotPasscodeScreen(),

@@ -39,6 +39,9 @@ class WalletDetailList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final cubit = context.read<DetailWalletCubit>();
+    cubit.loadCurrentWallet();
+
     return Container(
       alignment: Alignment.center,
       decoration: const BoxDecoration(
@@ -52,15 +55,11 @@ class WalletDetailList extends StatelessWidget {
           top: false,
           child: BlocBuilder<DetailWalletCubit, DetailWalletState>(
             builder: (context, state) {
-              var cubit = context.read<DetailWalletCubit>();
-              if (state is DetailWalletStateInitial) {
-                cubit.loadCurrentWallet();
-              }
-              final tokenList = state is DetailWalletStateSuccess
-                  ? state.tokenList
-                  : cubit.tokenList;
-              return tokenList.isEmpty
-                  ? ListView.builder(
+              if (state is DetailWalletStateSuccess) {
+                final tokenList = state.tokenList;
+
+                if (tokenList?.isEmpty ?? true) {
+                  return ListView.builder(
                       itemCount: keyList.length,
                       physics: const ClampingScrollPhysics(),
                       shrinkWrap: true,
@@ -69,13 +68,24 @@ class WalletDetailList extends StatelessWidget {
                       itemBuilder: (BuildContext context, int index) {
                         return SFCard(
                           onTap: () {
-                            if (index < 3) {
-                              Navigator.pushNamed(context, R.transactionDetail,
-                                  arguments: TransactionDetailArguments(
-                                    img: icons[index],
-                                    title: keyList[index],
-                                    tokenEntity: tokenList[index],
-                                  ));
+                            if (tokenList != null) {
+                              if (index < 3) {
+                                Navigator.pushNamed(
+                                    context, R.transactionDetail,
+                                    arguments: TransactionDetailArguments(
+                                      img: icons[index],
+                                      title: keyList[index],
+                                      tokenEntity: tokenList[index],
+                                    ));
+                              } else {
+                                Navigator.pushNamed(
+                                    context, R.transactionDetail,
+                                    arguments: TransactionDetailArguments(
+                                      img: icons[index],
+                                      title: keyList[index],
+                                      tokenEntity: tokenList[index],
+                                    ));
+                              }
                             }
                           },
                           child: ListTile(
@@ -92,13 +102,14 @@ class WalletDetailList extends StatelessWidget {
                                 keyText: keyList[index],
                                 style: TextStyles.lightWhite16),
                             trailing: SFText(
-                              keyText: "0.00",
+                              keyText: "-",
                               style: TextStyles.lightWhite16,
                             ),
                           ),
                         );
-                      })
-                  : ListView.builder(
+                      });
+                } else if (tokenList != null) {
+                  return ListView.builder(
                       itemCount: tokenList.length,
                       physics: const ClampingScrollPhysics(),
                       shrinkWrap: true,
@@ -113,8 +124,14 @@ class WalletDetailList extends StatelessWidget {
                                     title: tokenList[index].displayName,
                                     img: tokenList[index].icon,
                                     tokenEntity: tokenList[index],
-                                  )
-                              );
+                                  ));
+                            } else {
+                              Navigator.pushNamed(context, R.transactionDetail,
+                                  arguments: TransactionDetailArguments(
+                                    title: tokenList[index].displayName,
+                                    img: tokenList[index].icon,
+                                    tokenEntity: tokenList[index],
+                                  ));
                             }
                           },
                           child: ListTile(
@@ -144,6 +161,10 @@ class WalletDetailList extends StatelessWidget {
                           ),
                         );
                       });
+                }
+                return const SizedBox();
+              }
+              return const SizedBox();
             },
           )),
     );

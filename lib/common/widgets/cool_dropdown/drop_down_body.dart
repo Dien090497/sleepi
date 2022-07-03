@@ -1,7 +1,7 @@
-import 'package:flutter/foundation.dart';
-import 'package:flutter/material.dart';
 import 'package:cool_dropdown/utils/animation_util.dart';
 import 'package:cool_dropdown/utils/extension_util.dart';
+import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
 
 // ignore: must_be_immutable
 class DropdownBody extends StatefulWidget {

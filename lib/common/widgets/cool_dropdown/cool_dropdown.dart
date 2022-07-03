@@ -4,10 +4,10 @@ library cool_dropdown;
 
 import 'dart:developer';
 
-import 'package:flutter/material.dart';
+import 'package:cool_dropdown/drop_down_body.dart';
 import 'package:cool_dropdown/utils/animation_util.dart';
 import 'package:cool_dropdown/utils/extension_util.dart';
-import 'package:cool_dropdown/drop_down_body.dart';
+import 'package:flutter/material.dart';
 import 'package:slee_fi/common/extensions/string_x.dart';
 
 

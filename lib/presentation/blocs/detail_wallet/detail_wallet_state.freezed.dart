@@ -21,8 +21,8 @@ mixin _$DetailWalletState {
     required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function() empty,
-    required TResult Function(
-            WalletInfoEntity walletInfoEntity, List<TokenEntity> tokenList)
+    required TResult Function(WalletInfoEntity walletInfoEntity,
+            List<TokenEntity>? tokenList, List<NFTEntity>? nftList)
         success,
     required TResult Function(String message) error,
   }) =>
@@ -32,8 +32,8 @@ mixin _$DetailWalletState {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function()? empty,
-    TResult Function(
-            WalletInfoEntity walletInfoEntity, List<TokenEntity> tokenList)?
+    TResult Function(WalletInfoEntity walletInfoEntity,
+            List<TokenEntity>? tokenList, List<NFTEntity>? nftList)?
         success,
     TResult Function(String message)? error,
   }) =>
@@ -43,8 +43,8 @@ mixin _$DetailWalletState {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function()? empty,
-    TResult Function(
-            WalletInfoEntity walletInfoEntity, List<TokenEntity> tokenList)?
+    TResult Function(WalletInfoEntity walletInfoEntity,
+            List<TokenEntity>? tokenList, List<NFTEntity>? nftList)?
         success,
     TResult Function(String message)? error,
     required TResult orElse(),
@@ -143,8 +143,8 @@ class _$DetailWalletStateInitial implements DetailWalletStateInitial {
     required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function() empty,
-    required TResult Function(
-            WalletInfoEntity walletInfoEntity, List<TokenEntity> tokenList)
+    required TResult Function(WalletInfoEntity walletInfoEntity,
+            List<TokenEntity>? tokenList, List<NFTEntity>? nftList)
         success,
     required TResult Function(String message) error,
   }) {
@@ -157,8 +157,8 @@ class _$DetailWalletStateInitial implements DetailWalletStateInitial {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function()? empty,
-    TResult Function(
-            WalletInfoEntity walletInfoEntity, List<TokenEntity> tokenList)?
+    TResult Function(WalletInfoEntity walletInfoEntity,
+            List<TokenEntity>? tokenList, List<NFTEntity>? nftList)?
         success,
     TResult Function(String message)? error,
   }) {
@@ -171,8 +171,8 @@ class _$DetailWalletStateInitial implements DetailWalletStateInitial {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function()? empty,
-    TResult Function(
-            WalletInfoEntity walletInfoEntity, List<TokenEntity> tokenList)?
+    TResult Function(WalletInfoEntity walletInfoEntity,
+            List<TokenEntity>? tokenList, List<NFTEntity>? nftList)?
         success,
     TResult Function(String message)? error,
     required TResult orElse(),
@@ -274,8 +274,8 @@ class _$DetailWalletStateLoading implements DetailWalletStateLoading {
     required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function() empty,
-    required TResult Function(
-            WalletInfoEntity walletInfoEntity, List<TokenEntity> tokenList)
+    required TResult Function(WalletInfoEntity walletInfoEntity,
+            List<TokenEntity>? tokenList, List<NFTEntity>? nftList)
         success,
     required TResult Function(String message) error,
   }) {
@@ -288,8 +288,8 @@ class _$DetailWalletStateLoading implements DetailWalletStateLoading {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function()? empty,
-    TResult Function(
-            WalletInfoEntity walletInfoEntity, List<TokenEntity> tokenList)?
+    TResult Function(WalletInfoEntity walletInfoEntity,
+            List<TokenEntity>? tokenList, List<NFTEntity>? nftList)?
         success,
     TResult Function(String message)? error,
   }) {
@@ -302,8 +302,8 @@ class _$DetailWalletStateLoading implements DetailWalletStateLoading {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function()? empty,
-    TResult Function(
-            WalletInfoEntity walletInfoEntity, List<TokenEntity> tokenList)?
+    TResult Function(WalletInfoEntity walletInfoEntity,
+            List<TokenEntity>? tokenList, List<NFTEntity>? nftList)?
         success,
     TResult Function(String message)? error,
     required TResult orElse(),
@@ -404,8 +404,8 @@ class _$DetailWalletStateEmpty implements DetailWalletStateEmpty {
     required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function() empty,
-    required TResult Function(
-            WalletInfoEntity walletInfoEntity, List<TokenEntity> tokenList)
+    required TResult Function(WalletInfoEntity walletInfoEntity,
+            List<TokenEntity>? tokenList, List<NFTEntity>? nftList)
         success,
     required TResult Function(String message) error,
   }) {
@@ -418,8 +418,8 @@ class _$DetailWalletStateEmpty implements DetailWalletStateEmpty {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function()? empty,
-    TResult Function(
-            WalletInfoEntity walletInfoEntity, List<TokenEntity> tokenList)?
+    TResult Function(WalletInfoEntity walletInfoEntity,
+            List<TokenEntity>? tokenList, List<NFTEntity>? nftList)?
         success,
     TResult Function(String message)? error,
   }) {
@@ -432,8 +432,8 @@ class _$DetailWalletStateEmpty implements DetailWalletStateEmpty {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function()? empty,
-    TResult Function(
-            WalletInfoEntity walletInfoEntity, List<TokenEntity> tokenList)?
+    TResult Function(WalletInfoEntity walletInfoEntity,
+            List<TokenEntity>? tokenList, List<NFTEntity>? nftList)?
         success,
     TResult Function(String message)? error,
     required TResult orElse(),
@@ -494,7 +494,10 @@ abstract class _$$DetailWalletStateSuccessCopyWith<$Res> {
   factory _$$DetailWalletStateSuccessCopyWith(_$DetailWalletStateSuccess value,
           $Res Function(_$DetailWalletStateSuccess) then) =
       __$$DetailWalletStateSuccessCopyWithImpl<$Res>;
-  $Res call({WalletInfoEntity walletInfoEntity, List<TokenEntity> tokenList});
+  $Res call(
+      {WalletInfoEntity walletInfoEntity,
+      List<TokenEntity>? tokenList,
+      List<NFTEntity>? nftList});
 
   $WalletInfoEntityCopyWith<$Res> get walletInfoEntity;
 }
@@ -515,6 +518,7 @@ class __$$DetailWalletStateSuccessCopyWithImpl<$Res>
   $Res call({
     Object? walletInfoEntity = freezed,
     Object? tokenList = freezed,
+    Object? nftList = freezed,
   }) {
     return _then(_$DetailWalletStateSuccess(
       walletInfoEntity: walletInfoEntity == freezed
@@ -524,7 +528,11 @@ class __$$DetailWalletStateSuccessCopyWithImpl<$Res>
       tokenList: tokenList == freezed
           ? _value._tokenList
           : tokenList // ignore: cast_nullable_to_non_nullable
-              as List<TokenEntity>,
+              as List<TokenEntity>?,
+      nftList: nftList == freezed
+          ? _value._nftList
+          : nftList // ignore: cast_nullable_to_non_nullable
+              as List<NFTEntity>?,
     ));
   }
 
@@ -541,21 +549,34 @@ class __$$DetailWalletStateSuccessCopyWithImpl<$Res>
 class _$DetailWalletStateSuccess implements DetailWalletStateSuccess {
   const _$DetailWalletStateSuccess(
       {required this.walletInfoEntity,
-      required final List<TokenEntity> tokenList})
-      : _tokenList = tokenList;
+      final List<TokenEntity>? tokenList,
+      final List<NFTEntity>? nftList})
+      : _tokenList = tokenList,
+        _nftList = nftList;
 
   @override
   final WalletInfoEntity walletInfoEntity;
-  final List<TokenEntity> _tokenList;
+  final List<TokenEntity>? _tokenList;
   @override
-  List<TokenEntity> get tokenList {
+  List<TokenEntity>? get tokenList {
+    final value = _tokenList;
+    if (value == null) return null;
     // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_tokenList);
+    return EqualUnmodifiableListView(value);
+  }
+
+  final List<NFTEntity>? _nftList;
+  @override
+  List<NFTEntity>? get nftList {
+    final value = _nftList;
+    if (value == null) return null;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(value);
   }
 
   @override
   String toString() {
-    return 'DetailWalletState.success(walletInfoEntity: $walletInfoEntity, tokenList: $tokenList)';
+    return 'DetailWalletState.success(walletInfoEntity: $walletInfoEntity, tokenList: $tokenList, nftList: $nftList)';
   }
 
   @override
@@ -566,14 +587,16 @@ class _$DetailWalletStateSuccess implements DetailWalletStateSuccess {
             const DeepCollectionEquality()
                 .equals(other.walletInfoEntity, walletInfoEntity) &&
             const DeepCollectionEquality()
-                .equals(other._tokenList, _tokenList));
+                .equals(other._tokenList, _tokenList) &&
+            const DeepCollectionEquality().equals(other._nftList, _nftList));
   }
 
   @override
   int get hashCode => Object.hash(
       runtimeType,
       const DeepCollectionEquality().hash(walletInfoEntity),
-      const DeepCollectionEquality().hash(_tokenList));
+      const DeepCollectionEquality().hash(_tokenList),
+      const DeepCollectionEquality().hash(_nftList));
 
   @JsonKey(ignore: true)
   @override
@@ -588,12 +611,12 @@ class _$DetailWalletStateSuccess implements DetailWalletStateSuccess {
     required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function() empty,
-    required TResult Function(
-            WalletInfoEntity walletInfoEntity, List<TokenEntity> tokenList)
+    required TResult Function(WalletInfoEntity walletInfoEntity,
+            List<TokenEntity>? tokenList, List<NFTEntity>? nftList)
         success,
     required TResult Function(String message) error,
   }) {
-    return success(walletInfoEntity, tokenList);
+    return success(walletInfoEntity, tokenList, nftList);
   }
 
   @override
@@ -602,12 +625,12 @@ class _$DetailWalletStateSuccess implements DetailWalletStateSuccess {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function()? empty,
-    TResult Function(
-            WalletInfoEntity walletInfoEntity, List<TokenEntity> tokenList)?
+    TResult Function(WalletInfoEntity walletInfoEntity,
+            List<TokenEntity>? tokenList, List<NFTEntity>? nftList)?
         success,
     TResult Function(String message)? error,
   }) {
-    return success?.call(walletInfoEntity, tokenList);
+    return success?.call(walletInfoEntity, tokenList, nftList);
   }
 
   @override
@@ -616,14 +639,14 @@ class _$DetailWalletStateSuccess implements DetailWalletStateSuccess {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function()? empty,
-    TResult Function(
-            WalletInfoEntity walletInfoEntity, List<TokenEntity> tokenList)?
+    TResult Function(WalletInfoEntity walletInfoEntity,
+            List<TokenEntity>? tokenList, List<NFTEntity>? nftList)?
         success,
     TResult Function(String message)? error,
     required TResult orElse(),
   }) {
     if (success != null) {
-      return success(walletInfoEntity, tokenList);
+      return success(walletInfoEntity, tokenList, nftList);
     }
     return orElse();
   }
@@ -672,10 +695,12 @@ class _$DetailWalletStateSuccess implements DetailWalletStateSuccess {
 abstract class DetailWalletStateSuccess implements DetailWalletState {
   const factory DetailWalletStateSuccess(
       {required final WalletInfoEntity walletInfoEntity,
-      required final List<TokenEntity> tokenList}) = _$DetailWalletStateSuccess;
+      final List<TokenEntity>? tokenList,
+      final List<NFTEntity>? nftList}) = _$DetailWalletStateSuccess;
 
   WalletInfoEntity get walletInfoEntity => throw _privateConstructorUsedError;
-  List<TokenEntity> get tokenList => throw _privateConstructorUsedError;
+  List<TokenEntity>? get tokenList => throw _privateConstructorUsedError;
+  List<NFTEntity>? get nftList => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
   _$$DetailWalletStateSuccessCopyWith<_$DetailWalletStateSuccess>
       get copyWith => throw _privateConstructorUsedError;
@@ -751,8 +776,8 @@ class _$DetailWalletStateError implements DetailWalletStateError {
     required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function() empty,
-    required TResult Function(
-            WalletInfoEntity walletInfoEntity, List<TokenEntity> tokenList)
+    required TResult Function(WalletInfoEntity walletInfoEntity,
+            List<TokenEntity>? tokenList, List<NFTEntity>? nftList)
         success,
     required TResult Function(String message) error,
   }) {
@@ -765,8 +790,8 @@ class _$DetailWalletStateError implements DetailWalletStateError {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function()? empty,
-    TResult Function(
-            WalletInfoEntity walletInfoEntity, List<TokenEntity> tokenList)?
+    TResult Function(WalletInfoEntity walletInfoEntity,
+            List<TokenEntity>? tokenList, List<NFTEntity>? nftList)?
         success,
     TResult Function(String message)? error,
   }) {
@@ -779,8 +804,8 @@ class _$DetailWalletStateError implements DetailWalletStateError {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function()? empty,
-    TResult Function(
-            WalletInfoEntity walletInfoEntity, List<TokenEntity> tokenList)?
+    TResult Function(WalletInfoEntity walletInfoEntity,
+            List<TokenEntity>? tokenList, List<NFTEntity>? nftList)?
         success,
     TResult Function(String message)? error,
     required TResult orElse(),
