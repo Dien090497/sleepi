@@ -399,5 +399,8 @@ abstract class  LocaleKeys {
   static const not_be_zero = 'not_be_zero';
   static const please_enter_email = 'please_enter_email';
   static const field_required = 'field_required';
+  static const confirm_approve = 'confirm_approve';
+  static const approve = 'approve';
+  static const successfull = 'successfull';
 
 }

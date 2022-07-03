@@ -108,7 +108,9 @@ class TransactionDetail extends StatelessWidget {
                       ),
                       Expanded(
                         child: BoxButtonWidget(
-                          onTap: () => Navigator.pushNamed(context, R.transfer),
+                          onTap: () {
+                            Navigator.pushNamed(context, R.transfer, arguments: args?.tokenEntity);
+                          },
                           text: LocaleKeys.to_spending,
                           assetImage: Ics.icRefresh,
                         ),
@@ -138,7 +140,9 @@ class TransactionDetail extends StatelessWidget {
                       ),
                       Expanded(
                         child: BoxButtonWidget(
-                          onTap: () => Navigator.pushNamed(context, R.trade),
+                          onTap: () {
+                            Navigator.pushNamed(context, R.trade);
+                          },
                           text: LocaleKeys.trade
                               .tr()
                               .reCase(StringCase.titleCase),
