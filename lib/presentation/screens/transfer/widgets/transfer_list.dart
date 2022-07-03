@@ -6,12 +6,14 @@ import 'package:slee_fi/common/widgets/sf_alert_dialog.dart';
 import 'package:slee_fi/common/widgets/sf_buttons.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
 import 'package:slee_fi/common/widgets/sf_textfield_text_button.dart';
+import 'package:slee_fi/entities/token/token_entity.dart';
 import 'package:slee_fi/l10n/locale_keys.g.dart';
 import 'package:slee_fi/presentation/screens/transfer/widgets/asset_tile.dart';
 import 'package:slee_fi/presentation/screens/transfer/widgets/pop_up_confirm_transfer.dart';
 
 class TransferList extends StatelessWidget {
-  const TransferList({Key? key}) : super(key: key);
+  const TransferList({Key? key, this.tokenEntity}) : super(key: key);
+  final TokenEntity? tokenEntity;
 
   @override
   Widget build(BuildContext context) {
@@ -32,7 +34,7 @@ class TransferList extends StatelessWidget {
                   style: TextStyles.lightGrey14,
                 ),
                 const SizedBox(height: 4.0),
-                const AssetTile(),
+                AssetTile(tokenName: tokenEntity?.name.toUpperCase() ?? '', img: tokenEntity?.icon ?? '',),
                 const SizedBox(height: 24.0),
                 const SFTextFieldTextButton(
                   labelText: LocaleKeys.amount,
@@ -41,7 +43,7 @@ class TransferList extends StatelessWidget {
                 ),
                 const SizedBox(height: 8.0),
                 SFText(
-                  keyText: "${LocaleKeys.available.tr()} : 0 AVAX",
+                  keyText: "${LocaleKeys.available.tr()} : ${tokenEntity?.balance.toStringAsFixed(2)} ${tokenEntity?.name.toUpperCase()}",
                   style: TextStyles.lightGrey14,
                 ),
                 const SizedBox(height: 32.0),

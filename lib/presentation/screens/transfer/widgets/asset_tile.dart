@@ -10,8 +10,9 @@ import 'package:slee_fi/resources/resources.dart';
 import 'modal_transfer_between.dart';
 
 class AssetTile extends StatefulWidget {
-  const AssetTile({Key? key}) : super(key: key);
-
+  const AssetTile({Key? key, required this.tokenName, required this.img}) : super(key: key);
+  final String tokenName;
+  final String img;
   @override
   State<AssetTile> createState() => _AssetTileState();
 }
@@ -36,8 +37,8 @@ class _AssetTileState extends State<AssetTile> {
             },
           )),
       child: SFListTile(
-        leading: SFIcon(image),
-        text: selected,
+        leading: SFIcon(widget.img),
+        text: widget.tokenName,
         textStyle: TextStyles.lightWhite16,
         trailing: const Icon(
           Icons.chevron_right,
