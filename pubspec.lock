@@ -287,7 +287,7 @@ packages:
       name: dropdown_button2
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.6.2"
+    version: "1.6.3"
   easy_localization:
     dependency: "direct main"
     description:
@@ -479,7 +479,7 @@ packages:
       name: flutter_svg
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.1.1"
+    version: "1.1.1+1"
   flutter_web_plugins:
     dependency: transitive
     description: flutter

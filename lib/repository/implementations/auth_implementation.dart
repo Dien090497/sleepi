@@ -6,7 +6,7 @@ import 'package:injectable/injectable.dart';
 import 'package:slee_fi/common/extensions/string_x.dart';
 import 'package:slee_fi/datasources/local/isar/isar_datasource.dart';
 import 'package:slee_fi/datasources/local/secure_storage.dart';
-import 'package:slee_fi/datasources/remote/network/auth_datasource/auth_datasource.dart';
+import 'package:slee_fi/datasources/remote/auth_datasource/auth_datasource.dart';
 import 'package:slee_fi/failures/failure.dart';
 import 'package:slee_fi/models/create_password_reponse/create_password_response.dart';
 import 'package:slee_fi/models/create_password_schema/create_password_schema.dart';
@@ -158,9 +158,9 @@ class AuthImplementation extends IAuthRepository {
     return '$e';
   }
 
-  // @override
-  // Future<Either<Failure, bool>> checkPassCode(String passcode) {
-  //   // TODO: implement checkPassCode
-  //   throw UnimplementedError();
-  // }
+// @override
+// Future<Either<Failure, bool>> checkPassCode(String passcode) {
+//   // TODO: implement checkPassCode
+//   throw UnimplementedError();
+// }
 }

@@ -24,8 +24,7 @@ import '../datasources/local/get_storage_datasource.dart' as _i11;
 import '../datasources/local/isar/isar_datasource.dart' as _i13;
 import '../datasources/local/secure_storage.dart' as _i20;
 import '../datasources/local/shared_preference_datasource.dart' as _i21;
-import '../datasources/remote/network/auth_datasource/auth_datasource.dart'
-    as _i18;
+import '../datasources/remote/auth_datasource/auth_datasource.dart' as _i18;
 import '../datasources/remote/network/spending_datasource.dart' as _i22;
 import '../datasources/remote/network/web3_datasource.dart' as _i23;
 import '../datasources/remote/network/web3_provider.dart' as _i17;
