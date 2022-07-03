@@ -9,6 +9,6 @@ class ValidateMnemonicUseCase extends UseCaseSync<bool, String> {
   ValidateMnemonicUseCase(this._iWalletRepository);
 
   @override
-  Either<Failure, bool> call(params) =>
+  Either<FailureMessage, bool> call(params) =>
       _iWalletRepository.validateMnemonic(params);
 }

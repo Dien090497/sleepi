@@ -43,7 +43,9 @@ class ImportWalletCubit extends Cubit<ImportWalletState> {
           LocaleKeys.this_field_is_required.tr()));
       return;
     }
-    _validateMnemonicUC.call(mnemonic).foldRight(bool, (r, previous) {
+    _validateMnemonicUC.call(mnemonic).fold(
+        (l) => emit(ImportWalletState.errorMnemonic(
+            LocaleKeys.invalid_mnemonic_please_try_again.tr())), (r) {
       if (!r) {
         emit(ImportWalletState.errorMnemonic(
             LocaleKeys.invalid_mnemonic_please_try_again.tr()));

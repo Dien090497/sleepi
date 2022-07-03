@@ -32,6 +32,6 @@ abstract class IWalletRepository {
 
   Future<Either<FailureMessage, NetworkIsarModel>> switchNetWork();
 
- Either<Failure, bool> validateMnemonic(String mnemonic);
+ Either<FailureMessage, bool> validateMnemonic(String mnemonic);
 
 }
