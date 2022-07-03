@@ -39,7 +39,6 @@ class _WalletTabBarState extends State<WalletTabBar> {
 
   @override
   Widget build(BuildContext context) {
-    'build tabbar'.log;
     return Container(
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(100),
