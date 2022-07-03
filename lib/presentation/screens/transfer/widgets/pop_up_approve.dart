@@ -7,20 +7,16 @@ import 'package:slee_fi/common/widgets/sf_text.dart';
 import 'package:slee_fi/l10n/locale_keys.g.dart';
 import 'package:slee_fi/presentation/blocs/transfer_spending/transfer_spending.dart';
 
-class PopUpConfirmTransfer extends StatelessWidget {
-  const PopUpConfirmTransfer(
+class PopUpConfirmApprove extends StatelessWidget {
+  const PopUpConfirmApprove(
       {Key? key,
-        required this.fee,
         required this.cubit,
-        required this.amount,
         required this.tokenName,
         required this.contractAddress,
       })
       : super(key: key);
 
-  final double fee;
   final TransferSpendingCubit cubit;
-  final double amount;
   final String tokenName;
   final String contractAddress;
 
@@ -31,7 +27,7 @@ class PopUpConfirmTransfer extends StatelessWidget {
       child: Column(
         children: [
           SFText(
-            keyText: LocaleKeys.confirm_transfer,
+            keyText: LocaleKeys.confirm_approve,
             style: TextStyles.bold18LightWhite,
           ),
           const SizedBox(
@@ -87,32 +83,14 @@ class PopUpConfirmTransfer extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               SFText(
-                keyText: LocaleKeys.fee,
+                keyText: LocaleKeys.approve,
                 style: TextStyles.lightGrey14,
               ),
               Expanded(
                   child: SFText(
-                      keyText: "$fee AVAX",
+                      keyText: tokenName.toUpperCase(),
                       style: TextStyles.lightWhite16,
                       textAlign: TextAlign.end)),
-            ],
-          ),
-          const SizedBox(
-            height: 8.0,
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              SFText(
-                keyText: LocaleKeys.you_will_transfer,
-                style: TextStyles.lightGrey14,
-              ),
-              Expanded(
-                  child: SFText(
-                keyText: "$amount ${tokenName.toUpperCase()}",
-                style: TextStyles.lightWhite16,
-                textAlign: TextAlign.end,
-              )),
             ],
           ),
           const SizedBox(
@@ -140,9 +118,8 @@ class PopUpConfirmTransfer extends StatelessWidget {
                   width: double.infinity,
                   gradient: AppColors.gradientBlueButton,
                   onPressed: () {
+                    cubit.approve(amount: 0, addressContract: contractAddress);
                     Navigator.pop(context);
-                    //showSuccessfulDialog(context, null);
-                    cubit.transferSpending(amount: amount, addressContract: contractAddress);
                   },
                 ),
               ),

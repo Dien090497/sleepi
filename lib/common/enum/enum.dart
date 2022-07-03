@@ -47,4 +47,4 @@ enum OTPType {
   String toJson() => name;
 }
 
-enum  TokentoSpending { slft, slgt, wavax, bed, jewels, bedBoxes, items }
+enum TokenToSpending { approve, spending}

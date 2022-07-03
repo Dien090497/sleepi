@@ -1,6 +1,5 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:slee_fi/common/enum/enum.dart';
 import 'package:slee_fi/common/extensions/string_x.dart';
 import 'package:slee_fi/common/routes/app_routes.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
@@ -160,11 +159,4 @@ class TransactionDetail extends StatelessWidget {
           ),
         ));
   }
-}
-
-class ParamsTokenToSpending {
-  final TokentoSpending token;
-  final double balance;
-
-  ParamsTokenToSpending({required this.token, required this.balance});
 }

@@ -7,7 +7,6 @@ import 'package:slee_fi/entities/token/token_entity.dart';
 import 'package:slee_fi/l10n/locale_keys.g.dart';
 import 'package:slee_fi/presentation/screens/transfer/widgets/transfer_list.dart';
 import 'package:slee_fi/presentation/screens/transfer/widgets/transfer_widget.dart';
-import 'package:slee_fi/presentation/screens/wallet/layouts/transaction_detail_screen.dart';
 
 class TransferScreen extends StatelessWidget {
   const TransferScreen({Key? key}) : super(key: key);
