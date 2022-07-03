@@ -1,4 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:slee_fi/models/user/user_info_model.dart';
 
 part 'sign_up_state.freezed.dart';
 
@@ -12,7 +13,7 @@ class SignInSignUpState with _$SignInSignUpState {
 
   const factory SignInSignUpState.errorEmail(String message) = SignInSignUpStateErrorEmail;
 
-  const factory SignInSignUpState.signUpSuccess(bool enableActiveCode) = SignInSignUpStateSignUpSuccess;
+  const factory SignInSignUpState.signUpSuccess(bool enableActiveCode, UserInfoModel userInfoModel) = SignInSignUpStateSignUpSuccess;
 
   const factory SignInSignUpState.signInSuccess() = SignInSignUpStateSignInSuccess;
 

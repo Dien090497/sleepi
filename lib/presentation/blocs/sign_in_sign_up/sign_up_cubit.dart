@@ -7,6 +7,7 @@ import 'package:slee_fi/models/sign_in_schema/sign_in_schema.dart';
 import 'package:slee_fi/models/sign_up_schema/sign_up_schema.dart';
 import 'package:slee_fi/presentation/blocs/sign_in_sign_up/sign_up_state.dart';
 import 'package:slee_fi/usecase/login_usecase.dart';
+import 'package:slee_fi/usecase/save_user_local_usecase.dart';
 import 'package:slee_fi/usecase/send_otp_mail_usecase.dart';
 import 'package:slee_fi/usecase/setting_active_code_usecase.dart';
 import 'package:slee_fi/usecase/sign_up_usecase.dart';
@@ -18,6 +19,9 @@ class SigInSignUpCubit extends Cubit<SignInSignUpState> {
   final SendOTPMailUseCase _sendOtpUC = getIt<SendOTPMailUseCase>();
   final SignUpUseCase _signUpUseCase = getIt<SignUpUseCase>();
   final LogInUseCase _logInUseCase = getIt<LogInUseCase>();
+
+
+  final _saveUserUC = getIt<SaveUserLocalUseCase>();
 
   final fetchSettingActiveCode = getIt<SettingActiveCodeUseCase>();
   String email = '';
@@ -45,10 +49,13 @@ class SigInSignUpCubit extends Cubit<SignInSignUpState> {
   _signUp() async {
     var result =
         await _signUpUseCase.call(SignUpSchema(int.parse(otp), email.trim()));
-    result.fold((l) => emit(SignInSignUpState.error(l.msg)), (r) async {
+    result.fold((l) => emit(SignInSignUpState.error(l.msg)),
+        (userResponse) async {
       var setting = await fetchSettingActiveCode.call(NoParams());
-      setting.fold((l) => emit(SignInSignUpState.error(l.msg)),
-          (r) => emit(SignInSignUpState.signUpSuccess(r.data.isEnable)));
+      setting.fold(
+          (l) => emit(SignInSignUpState.error(l.msg)),
+          (r) => emit(SignInSignUpState.signUpSuccess(
+              r.data.isEnable, userResponse.data)));
     });
   }
 
@@ -59,8 +66,10 @@ class SigInSignUpCubit extends Cubit<SignInSignUpState> {
     emit(const SignInSignUpState.process());
     var result = await _logInUseCase.call(SignInSchema(email.trim(), password));
 
-    result.fold((l) => emit(SignInSignUpState.error(l.msg)),
-        (r) => emit(const SignInSignUpState.signInSuccess()));
+    result.fold((l) => emit(SignInSignUpState.error(l.msg)), (r) async {
+      await _saveUserUC.call(r.data.user);
+      emit(const SignInSignUpState.signInSuccess());
+    });
   }
 
   signUp() {

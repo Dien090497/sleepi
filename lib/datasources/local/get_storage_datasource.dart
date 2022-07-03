@@ -39,4 +39,6 @@ class StorageKeys {
   static const String passCodeKey = 'pass_code';
   static const String firstInstall = 'first_install';
   static const String currentWalletIdKey = 'current_wallet_id';
+  static const String userKey = 'current_user';
+
 }

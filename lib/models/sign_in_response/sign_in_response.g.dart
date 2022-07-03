@@ -19,9 +19,11 @@ Map<String, dynamic> _$SignInResponseToJson(SignInResponse instance) =>
 Content _$ContentFromJson(Map<String, dynamic> json) => Content(
       json['accessToken'] as String,
       json['refreshToken'] as String,
+      UserInfoModel.fromJson(json['user'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$ContentToJson(Content instance) => <String, dynamic>{
       'accessToken': instance.accessToken,
       'refreshToken': instance.refreshToken,
+      'user': instance.user.toJson(),
     };

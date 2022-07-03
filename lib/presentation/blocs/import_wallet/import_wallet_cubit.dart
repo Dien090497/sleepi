@@ -1,12 +1,13 @@
 import 'package:easy_localization/easy_localization.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:slee_fi/common/enum/enum.dart';
 import 'package:slee_fi/common/extensions/string_x.dart';
 import 'package:slee_fi/di/injector.dart';
 import 'package:slee_fi/l10n/locale_keys.g.dart';
 import 'package:slee_fi/models/verify_schema/verify_schema.dart';
+import 'package:slee_fi/usecase/current_user_usecase.dart';
 import 'package:slee_fi/usecase/send_otp_mail_usecase.dart';
+import 'package:slee_fi/usecase/usecase.dart';
 import 'package:slee_fi/usecase/validate_mnemonic.dart';
 import 'package:slee_fi/usecase/verify_otp_usecase.dart';
 import 'package:slee_fi/usecase/wallet/import_wallet_usecase.dart';
@@ -20,16 +21,16 @@ class ImportWalletCubit extends Cubit<ImportWalletState> {
   final sendOtpUC = getIt<SendOTPMailUseCase>();
   final verifyOtpUC = getIt<VerifyOTPUseCase>();
   final _validateMnemonicUC = getIt<ValidateMnemonicUseCase>();
-  late String userEmail;
+  final _currentUserUC = getIt<CurrentUserUseCase>();
 
-  //todo: remove value
-  bool? verifyOtpSuccess = kReleaseMode;
+  late String userEmail;
+  bool? verifyOtpSuccess;
 
   String otp = '';
   String mnemonic = '';
 
   init() {
-    userEmail = _getUserEmail;
+    _getUserEmail();
   }
 
   Future process() async {
@@ -94,7 +95,12 @@ class ImportWalletCubit extends Cubit<ImportWalletState> {
     });
   }
 
-  String get _getUserEmail {
-    return 'duong.nguyen3@sotatek.com';
+  Future _getUserEmail() async {
+    var result = await _currentUserUC.call(NoParams());
+    result.fold((l) {
+      'error get local email $l'.log;
+    }, (r) {
+      userEmail = r.email;
+    });
   }
 }

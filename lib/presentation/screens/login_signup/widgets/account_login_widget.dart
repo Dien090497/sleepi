@@ -47,14 +47,13 @@ class _AccountLoginState extends State<AccountLoginWidget> {
           if (state.enableActiveCode) {
             Navigator.pushNamed(context, R.enterActivationCode,
                 arguments: EnterActiveCodeArg(
-                    cubit.email.trim(), int.parse(cubit.otp)));
+                  int.parse(cubit.otp),
+                  state.userInfoModel,
+                ));
           } else {
             Navigator.pushNamed(context, R.createPassword,
                 arguments: CreatePasswordArg(
-                  cubit.email.trim(),
-                  '',
-                  int.parse(cubit.otp),
-                ));
+                    '', int.parse(cubit.otp), state.userInfoModel));
           }
         } else if (state is SignInSignUpStateSignInSuccess) {
           Navigator.pushNamedAndRemoveUntil(
