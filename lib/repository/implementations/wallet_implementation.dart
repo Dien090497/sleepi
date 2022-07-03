@@ -161,10 +161,10 @@ class WalletImplementation extends IWalletRepository {
       for (int i = 0; i < params.addressContract.length; i++) {
         if (i < 3) {
           if (params.addressContract[i] == Const.tokens[0]['address']) {
-            var balance =
-            BigInt.from(await _web3DataSource.getBalance(params.walletInfoEntity.address));
+            var balance = BigInt.from(await _web3DataSource
+                .getBalance(params.walletInfoEntity.address));
             values.add(balance / BigInt.from(pow(10, 18)));
-          }else {
+          } else {
             final erc20 = _web3DataSource.tokenFrom(params.addressContract[i]);
             final value = await erc20.balanceOf(
                 EthereumAddress.fromHex(params.walletInfoEntity.address));
@@ -240,8 +240,8 @@ class WalletImplementation extends IWalletRepository {
             BigInt.from(await _web3DataSource.getBalance(wallet!.address));
         return Right(balance / BigInt.from(pow(10, 18)));
       } else {
-        balance =
-            await _web3DataSource.getBalanceOf(wallet!.address, contractAddress);
+        balance = await _web3DataSource.getBalanceOf(
+            wallet!.address, contractAddress);
         var decimals = await _web3DataSource.getDecimals(contractAddress);
         return Right(balance / BigInt.from(pow(10, decimals.toInt())));
       }
@@ -327,4 +327,8 @@ class WalletImplementation extends IWalletRepository {
       return Left(FailureMessage('$e'));
     }
   }
+
+  @override
+ Either<Failure, bool> validateMnemonic(String mnemonic)  => Right(_web3DataSource.validateMnemonic(mnemonic));
+
 }
