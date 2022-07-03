@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:slee_fi/common/extensions/string_x.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/l10n/locale_keys.g.dart';
 import 'package:slee_fi/presentation/screens/wallet/widgets/tab_bar_icon.dart';
@@ -39,7 +38,6 @@ class _WalletTabBarState extends State<WalletTabBar> {
 
   @override
   Widget build(BuildContext context) {
-    'build tabbar'.log;
     return Container(
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(100),
