@@ -60,9 +60,9 @@ class DetailWalletCubit extends Cubit<DetailWalletState> {
             message: 'Error when get balance token'));
       }, (values) {
         List keyList = [
-          "SLFT",
-          "SLGT",
-          "AVAX",
+          "slft",
+          "slgt",
+          "wavax",
           LocaleKeys.beds.tr(),
           LocaleKeys.jewels.tr(),
           LocaleKeys.bed_box.tr(),

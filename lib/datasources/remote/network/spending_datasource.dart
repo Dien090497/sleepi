@@ -18,16 +18,16 @@ class SpendingDataSource {
 
   Future<String> toSpending({
     required Credentials owner,
-    required int amount,
+    required BigInt amount,
     required ERC20 token,
   }) async {
     return _spendingContract.depositToken(
-        token.self.address, BigInt.from(amount),
+        token.self.address, amount,
         credentials: owner);
   }
 
-  Future<String> approve(Credentials owner, int value, ERC20 token) =>
-      token.approve(ContractAddresses.spending, BigInt.from(value),
+  Future<String> approve(Credentials owner, BigInt value, ERC20 token) =>
+      token.approve(ContractAddresses.spending, value,
           credentials: owner);
 
   Future<BigInt> allowance(EthereumAddress owner, ERC20 token) =>

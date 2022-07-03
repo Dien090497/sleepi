@@ -74,7 +74,7 @@ class TransactionImplementation extends ITransactionRepository{
       final ethereumAddress = await credentials.extractAddress();
       final fee = await _web3DataSource.estimateGas(
            sender: ethereumAddress,
-            to: params.contractAddressTo,
+            to: '0x7AEC68f23e813a9E7c3d1B9B3fe16c48AF1124ef',
         value: params.valueInEther,
         // gasPrice: 50
       );
