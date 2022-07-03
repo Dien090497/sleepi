@@ -26,7 +26,31 @@ extension NumX on num {
   String get format => Decimal.parse('$this').toString();
 
   String get formatBalance {
-    var balance = (this == 0 ? 0 : this / pow(10, 18)).toString();
-    return balance.length > 5 ? '${balance.substring(0, 5)}...' : balance;
+    if(this==0){
+      return 0.toStringAsFixed(6);
+    }else {
+      var balance = (this / pow(10, 18)).toString();
+      int index = balance.indexOf('.');
+      if (balance.length - index > 7) {
+        index += 7;
+      } else {
+        index = balance.length - 1;
+      }
+      return balance.substring(0, index);
+    }
+  }
+  String get formatDoubleBalance {
+    if(this==0){
+      return 0.toStringAsFixed(6);
+    }else {
+      var balance = toString();
+      int index = balance.indexOf('.');
+      if (balance.length - index > 7) {
+        index += 7;
+      } else {
+        index = balance.length - 1;
+      }
+      return balance.substring(0, index);
+    }
   }
 }
