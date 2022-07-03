@@ -27,7 +27,8 @@ Future<T?> showCustomDialog<T>(
       });
 }
 
-Future<T?> showSuccessfulDialog<T>(BuildContext context, String? message) async {
+Future<T?> showSuccessfulDialog<T>(
+    BuildContext context, String? message) async {
   return showDialog(
       context: context,
       barrierColor: AppColors.backgroundDialog,
@@ -45,33 +46,9 @@ Future<T?> showSuccessfulDialog<T>(BuildContext context, String? message) async 
             ),
             const SFIcon(Ics.successful),
             const SizedBox(height: 36),
-            SFText(keyText: message ?? LocaleKeys.success, style: TextStyles.bold18White),
-            const SizedBox(height: 40),
-          ],
-        );
-      });
-}
-
-Future<T?> showSwapSuccessfulDialog<T>(BuildContext context, VoidCallback onSwap) async {
-  return showDialog(
-      context: context,
-      barrierColor: AppColors.backgroundDialog,
-      builder: (context) {
-        return SFDialog(
-          children: [
-            Align(
-              alignment: Alignment.centerRight,
-              child: IconButton(
-                onPressed: () {
-                  onSwap();
-                  Navigator.pop(context);
-                },
-                icon: const Icon(Icons.close, color: AppColors.white),
-              ),
-            ),
-            const SFIcon(Ics.successful),
-            const SizedBox(height: 36),
-            SFText(keyText: LocaleKeys.success, style: TextStyles.bold18White),
+            SFText(
+                keyText: message ?? LocaleKeys.success,
+                style: TextStyles.bold18White),
             const SizedBox(height: 40),
           ],
         );

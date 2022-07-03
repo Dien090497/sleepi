@@ -397,5 +397,6 @@ abstract class  LocaleKeys {
   static const this_field_is_required = 'this_field_is_required';
   static const insufficient_balance = 'insufficient_balance';
   static const not_be_zero = 'not_be_zero';
+  static const field_required = 'field_required';
 
 }

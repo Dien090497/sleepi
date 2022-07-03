@@ -1,4 +1,3 @@
-import 'dart:developer';
 import 'dart:math' as math;
 import 'dart:math';
 
@@ -227,17 +226,18 @@ class WalletImplementation extends IWalletRepository {
   Future<Either<Failure, double>> getBalanceToken(
       String contractAddress) async {
     try {
-      int balance = 0;
+      BigInt balance = BigInt.from(0);
       var walletId = _getStorageDataSource.getCurrentWalletId();
       var wallet = await _isarDataSource.getWalletAt(walletId);
       if (contractAddress == Const.tokens[0]['address']) {
-        balance = await _web3DataSource.getBalance(wallet!.address);
-        return Right(balance / (pow(10, 18)));
+        balance =
+            BigInt.from(await _web3DataSource.getBalance(wallet!.address));
+        return Right(balance / BigInt.from(pow(10, 18)));
       } else {
-        balance = await _web3DataSource.getBalanceOf(
-            wallet!.address, contractAddress);
+        balance =
+            await _web3DataSource.getBalanceOf(wallet!.address, contractAddress);
         var decimals = await _web3DataSource.getDecimals(contractAddress);
-        return Right(balance / (pow(10, decimals.toInt())));
+        return Right(balance / BigInt.from(pow(10, decimals.toInt())));
       }
     } catch (e) {
       return Left(FailureMessage('$e'));
@@ -252,7 +252,7 @@ class WalletImplementation extends IWalletRepository {
     } else {
       if (contractAddressTo == Const.tokens[0]['address']) {
         return swapTokenAvax(value, contractAddressFrom);
-      }else {
+      } else {
         return swapTokenForToken(value, contractAddressFrom, contractAddressTo);
       }
     }

@@ -65,7 +65,7 @@ class Const {
       "icon": Ics.icSlft,
     },
     {
-      "address": "0x41Dd35f9e440ADecB9A04fA839D0be2b19722Ade",
+      "address": "0x41dd35f9e440adecb9a04fa839d0be2b19722ade",
       "symbol": "SLGT",
       "decimal": 18,
       "icon": Ics.icSlgt,
