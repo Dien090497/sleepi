@@ -57,7 +57,7 @@ class SigInSignUpCubit extends Cubit<SignInSignUpState> {
       return;
     }
     emit(const SignInSignUpState.process());
-    var result = await _logInUseCase.call(SignInSchema(email, password));
+    var result = await _logInUseCase.call(SignInSchema(email.trim(), password));
 
     result.fold((l) => emit(SignInSignUpState.error(l.msg)),
         (r) => emit(const SignInSignUpState.signInSuccess()));

@@ -324,4 +324,13 @@ class WalletImplementation extends IWalletRepository {
       return Left(FailureMessage('$e'));
     }
   }
+
+  @override
+  Either<FailureMessage, bool> validateMnemonic(String mnemonic) {
+    try {
+      return Right(_web3DataSource.validateMnemonic(mnemonic));
+    } catch (e) {
+      return Left(FailureMessage('$e'));
+    }
+  }
 }

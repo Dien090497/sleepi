@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -70,12 +71,15 @@ class PasscodeScreen extends StatelessWidget {
                   ),
                   const SizedBox(height: 24),
                   PinCodeWidget(controller: passCodeController),
-                  if (state is checkPassCodeInValid)
-                    Center(
-                      child: SFText(
-                          keyText: LocaleKeys.incorrect_passcode,
-                          style: TextStyles.red14),
-                    ),
+                  Container(
+                    alignment: Alignment.topCenter,
+                    height: 15,
+                    child: state is checkPassCodeInValid
+                        ? SFText(
+                            keyText: LocaleKeys.incorrect_passcode,
+                            style: TextStyles.red14)
+                        : const SizedBox(),
+                  ),
                   SizedBox(height: 15.h),
                   PasscodeNumPad(
                     passcodeController: passCodeController,
@@ -85,7 +89,7 @@ class PasscodeScreen extends StatelessWidget {
                   ),
                   SizedBox(height: 32.h),
                   SFTextButton(
-                    text: "${LocaleKeys.forgot_passcode}?",
+                    text: "${LocaleKeys.forgot_passcode.tr()}?",
                     textStyle: TextStyles.white12Underline,
                     onPressed: () {
                       Navigator.pushNamed(context, R.forgotPasscode);
