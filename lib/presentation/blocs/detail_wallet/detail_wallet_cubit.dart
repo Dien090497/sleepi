@@ -36,7 +36,7 @@ class DetailWalletCubit extends Cubit<DetailWalletState> {
         params = ParamsBalanceOfToken(addressContract: [
           '0x2bB8Bc1C29F34f3795661452Bf806cB5D65DF8DC',
           '0x41Dd35f9e440ADecB9A04fA839D0be2b19722Ade',
-          '0xD9D01A9F7C810EC035C0e42cB9E80Ef44D7f8692',
+          '0xd00ae08403B9bbb9124bB305C09058E32C39A48c',
           '0xdB051670fc5610Ffe2ec8A4471086AAa9c5529c1',
           '0xdB051670fc5610Ffe2ec8A4471086AAa9c5529c1',
           '0xdB051670fc5610Ffe2ec8A4471086AAa9c5529c1',
@@ -47,7 +47,7 @@ class DetailWalletCubit extends Cubit<DetailWalletState> {
         params = ParamsBalanceOfToken(addressContract: [
           '0xB97EF9Ef8734C71904D8002F8b6Bc66Dd9c48a6E',
           '0xB97EF9Ef8734C71904D8002F8b6Bc66Dd9c48a6E',
-          '0xB97EF9Ef8734C71904D8002F8b6Bc66Dd9c48a6E',
+          '0xB31f66AA3C1e785363F0875A1B74E27b85FD66c7',
           '0xA90Cded6dad06dF521f22643B2cA98c068CEe866',
           '0xA90Cded6dad06dF521f22643B2cA98c068CEe866',
           '0xA90Cded6dad06dF521f22643B2cA98c068CEe866',

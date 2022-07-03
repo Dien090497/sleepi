@@ -160,12 +160,18 @@ class WalletImplementation extends IWalletRepository {
       List<double> values = [];
       for (int i = 0; i < params.addressContract.length; i++) {
         if (i < 3) {
-          final erc20 = _web3DataSource.tokenFrom(params.addressContract[i]);
-          final value = await erc20.balanceOf(
-              EthereumAddress.fromHex(params.walletInfoEntity.address));
-          final decimals = await erc20.decimals();
-          final result = value / BigInt.from(math.pow(10, decimals.toInt()));
-          values.add(result);
+          if (params.addressContract[i] == Const.tokens[0]['address']) {
+            var balance =
+            BigInt.from(await _web3DataSource.getBalance(params.walletInfoEntity.address));
+            values.add(balance / BigInt.from(pow(10, 18)));
+          }else {
+            final erc20 = _web3DataSource.tokenFrom(params.addressContract[i]);
+            final value = await erc20.balanceOf(
+                EthereumAddress.fromHex(params.walletInfoEntity.address));
+            final decimals = await erc20.decimals();
+            final result = value / BigInt.from(math.pow(10, decimals.toInt()));
+            values.add(result);
+          }
         } else {
           final erc721 = _web3DataSource.nftFrom(params.addressContract[i]);
           final value = await erc721.balanceOf(
