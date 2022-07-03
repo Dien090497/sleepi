@@ -17,6 +17,9 @@ class NFTImplementation extends INFTRepository {
     try {
       final List<NFTEntity> result = [];
       for (final addr in addresses) {
+        if (addr.isEmpty) {
+          break;
+        }
         result.add(NFTEntity(
             address: addr,
             name: await _nftDataSource.name(addr),

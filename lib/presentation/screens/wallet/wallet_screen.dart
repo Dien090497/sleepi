@@ -7,10 +7,8 @@ import 'package:slee_fi/common/widgets/background_widget.dart';
 import 'package:slee_fi/common/widgets/sf_alert_dialog.dart';
 import 'package:slee_fi/common/widgets/sf_back_button.dart';
 import 'package:slee_fi/common/widgets/sf_icon.dart';
-import 'package:slee_fi/di/injector.dart';
 import 'package:slee_fi/entities/wallet_info/wallet_info_entity.dart';
 import 'package:slee_fi/models/pop_with_result.dart';
-import 'package:slee_fi/presentation/blocs/detail_wallet/detail_wallet_cubit.dart';
 import 'package:slee_fi/presentation/blocs/wallet/wallet_cubit.dart';
 import 'package:slee_fi/presentation/blocs/wallet/wallet_state.dart';
 import 'package:slee_fi/presentation/screens/passcode/passcode_screen.dart';
@@ -20,8 +18,6 @@ import 'package:slee_fi/presentation/screens/wallet/widgets/tab_wallet_detail.da
 import 'package:slee_fi/presentation/screens/wallet_creation_warning/widgets/pop_up_avalanche_wallet.dart';
 import 'package:slee_fi/presentation/screens/wallet_creation_warning/widgets/pop_up_wallet_warning.dart';
 import 'package:slee_fi/resources/resources.dart';
-import 'package:slee_fi/usecase/logout_usecase.dart';
-import 'package:slee_fi/usecase/usecase.dart';
 
 class WalletScreen extends StatefulWidget {
   const WalletScreen({Key? key}) : super(key: key);
@@ -33,8 +29,6 @@ class WalletScreen extends StatefulWidget {
 class _WalletScreenState extends State<WalletScreen>
     with SingleTickerProviderStateMixin {
   late int indexTap = 0;
-  final walletCubit = WalletCubit()..init();
-  final detailWalletCubit = DetailWalletCubit();
   late final TabController controller = TabController(
     vsync: this,
     length: 2,
@@ -52,8 +46,7 @@ class _WalletScreenState extends State<WalletScreen>
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
-        BlocProvider<WalletCubit>(create: (context) => walletCubit),
-        BlocProvider<DetailWalletCubit>(create: (context) => detailWalletCubit),
+        BlocProvider<WalletCubit>(create: (context) => WalletCubit()..init()),
       ],
       child: Stack(
         children: [
@@ -86,12 +79,6 @@ class _WalletScreenState extends State<WalletScreen>
                     ),
                   ),
                 ),
-                if (kDebugMode)
-                  IconButton(
-                      onPressed: () {
-                        getIt<LogOutUseCase>().call(NoParams());
-                      },
-                      icon: const Icon(Icons.delete_outline))
               ],
               automaticallyImplyLeading: false,
               backgroundColor: AppColors.transparent,
@@ -103,58 +90,55 @@ class _WalletScreenState extends State<WalletScreen>
                 buildWhen: (previous, current) => current is WalletStateLoaded,
                 builder: (context, state) {
                   return WalletTabBar(
-                      controller: controller,
-                      checkMoveNewTab: (currentIndex, i) {
-                        if (i == 1 ||
-                            (state is WalletStateLoaded &&
-                                (state.walletInfoEntity == null ||
-                                    state.firstOpenWallet))) {
-                          controller.animateTo(0);
-                        }
+                    controller: controller,
+                    checkMoveNewTab: (currentIndex, i) {
+                      print('### ${i} ${state}');
+                      if (i == 1 ||
+                          (state is WalletStateLoaded &&
+                              (state.walletInfoEntity == null ||
+                                  state.firstOpenWallet))) {
+                        controller.animateTo(0);
+                      }
 
-                        if (state is WalletStateLoaded &&
-                            state.walletInfoEntity == null &&
-                            i == 1) {
-                          _showCreateOrImportWallet().then((value) {
-                            _showWarningDialog(value, context);
-                            if (value == true) {
-                              controller.animateTo(1);
-                            }
-                          });
-                          return false;
-                        }
+                      if (state is WalletStateLoaded &&
+                          state.walletInfoEntity == null &&
+                          i == 1) {
+                        _showCreateOrImportWallet().then((value) {
+                          _showWarningDialog(value, context);
+                          if (value == true) {
+                            controller.animateTo(1);
+                          }
+                        });
+                        return false;
+                      }
 
-                        if (state is WalletStateLoaded &&
-                            state.firstOpenWallet &&
-                            i == 1) {
-                          Navigator.of(context)
-                              .pushNamed(R.passcode)
-                              .then((value) {
-                            if (value == true) {
-                              controller.animateTo(1);
-                            }
-                          });
-                          return false;
-                        }
-                        return true;
-                      });
+                      if (state is WalletStateLoaded &&
+                          state.firstOpenWallet &&
+                          i == 1) {
+                        Navigator.of(context)
+                            .pushNamed(R.passcode)
+                            .then((value) {
+                          if (value == true) {
+                            controller.animateTo(1);
+                          }
+                        });
+                        return false;
+                      }
+                      return true;
+                    },
+                  );
                 },
               ),
             ),
             child: TabBarView(
               controller: controller,
               physics: const NeverScrollableScrollPhysics(),
-              children: [
-                const TabSpendingDetail(),
-                TabWalletDetail(walletCubit: walletCubit)
+              children: const [
+                TabSpendingDetail(),
+                TabWalletDetail(),
               ],
             ),
           ),
-          // BlocBuilder<WalletCubit, WalletState>(
-          //   builder: (context, state) => (state is WalletStateLoading)
-          //       ? const LoadingScreen()
-          //       : const SizedBox(),
-          // )
         ],
       ),
     );
@@ -168,7 +152,7 @@ class _WalletScreenState extends State<WalletScreen>
     );
   }
 
-  _showWarningDialog(dynamic value, BuildContext context) {
+  void _showWarningDialog(dynamic value, BuildContext context) {
     if (value is PopWithResults) {
       context.read<WalletCubit>().init();
       controller.animateTo(1);

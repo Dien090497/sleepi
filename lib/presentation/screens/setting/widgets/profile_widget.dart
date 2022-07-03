@@ -7,8 +7,11 @@ import 'package:slee_fi/common/widgets/sf_button_outlined.dart';
 import 'package:slee_fi/common/widgets/sf_card.dart';
 import 'package:slee_fi/common/widgets/sf_list_tile.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
+import 'package:slee_fi/di/injector.dart';
 import 'package:slee_fi/l10n/locale_keys.g.dart';
 import 'package:slee_fi/presentation/screens/setting/widgets/gender_tile.dart';
+import 'package:slee_fi/usecase/logout_usecase.dart';
+import 'package:slee_fi/usecase/usecase.dart';
 
 import 'modal_pop_up_birth_year.dart';
 
@@ -71,7 +74,9 @@ class ProfileWidget extends StatelessWidget {
             textStyle: TextStyles.bold16Blue,
             borderColor: AppColors.blue,
             onPressed: () {
-              Navigator.pushNamedAndRemoveUntil(context, R.loginSignUp, (route) => false);
+              getIt<LogOutUseCase>().call(NoParams());
+              Navigator.pushNamedAndRemoveUntil(
+                  context, R.loginSignUp, (r) => false);
             },
           ),
         ),

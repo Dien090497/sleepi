@@ -14,7 +14,6 @@ class WalletState with _$WalletState {
     required WalletInfoEntity? walletInfoEntity,
     required bool firstOpenWallet,
     required List<TokenEntity> tokenList,
-    @Default('') String mnemonic,
   }) = WalletStateLoaded;
 
   const factory WalletState.empty() = WalletStateEmpty;

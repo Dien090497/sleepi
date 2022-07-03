@@ -16,8 +16,10 @@ class Const {
   static const String avascanUrl = 'https://avascan.info/';
   static const String binanceUrl = 'https://www.binance.com/';
   static const String okCoinUrl = 'https://www.okcoin.jp/';
-  static const String contractRouterTestNet = '0xd7f655E3376cE2D7A2b08fF01Eb3B1023191A901';
-  static const String contractRouterMainNet = '0x60aE616a2155Ee3d9A68541Ba4544862310933d4';
+  static const String contractRouterTestNet =
+      '0xd7f655E3376cE2D7A2b08fF01Eb3B1023191A901';
+  static const String contractRouterMainNet =
+      '0x60aE616a2155Ee3d9A68541Ba4544862310933d4';
   static const baseApi = '';
   static const baseApiDev = 'https://dev.sleefi.com/api/v1';
 
@@ -53,7 +55,7 @@ class Const {
   static const tokens = [
     {
       // "address": "0xB31f66AA3C1e785363F0875A1B74E27b85FD66c7",//mainnet
-      "address": "0xd00ae08403B9bbb9124bB305C09058E32C39A48c",//testnet
+      "address": "0xd00ae08403B9bbb9124bB305C09058E32C39A48c", //testnet
       "symbol": "AVAX",
       "decimal": 18,
       "icon": Ics.icAvax,
@@ -72,31 +74,37 @@ class Const {
     },
     {
       // "address": "0xB97EF9Ef8734C71904D8002F8b6Bc66Dd9c48a6E",//mainnet
-      "address": "0x950C6F4F97DD62bd3cA76f084663224FD2E6b555",//testnet
+      "address": "0x950C6F4F97DD62bd3cA76f084663224FD2E6b555", //testnet
       "symbol": "USDC",
       "decimal": 6,
       "icon": Ics.icUsdc,
     },
   ];
 
-  static const listContractAddressTestNet=[
+  static const listTokenAddressTestNet = [
     '0x2bB8Bc1C29F34f3795661452Bf806cB5D65DF8DC',
     '0x41Dd35f9e440ADecB9A04fA839D0be2b19722Ade',
     '0xd00ae08403B9bbb9124bB305C09058E32C39A48c',
-    '0xdB051670fc5610Ffe2ec8A4471086AAa9c5529c1',
-    '0xdB051670fc5610Ffe2ec8A4471086AAa9c5529c1',
-    '0xdB051670fc5610Ffe2ec8A4471086AAa9c5529c1',
-    '0xdB051670fc5610Ffe2ec8A4471086AAa9c5529c1',
   ];
 
-  static const listContractAddressMainNet=[
+  static const listTokenAddressesMainNet = [
     '0xB97EF9Ef8734C71904D8002F8b6Bc66Dd9c48a6E',
     '0xB97EF9Ef8734C71904D8002F8b6Bc66Dd9c48a6E',
     '0xB31f66AA3C1e785363F0875A1B74E27b85FD66c7',
-    '0xA90Cded6dad06dF521f22643B2cA98c068CEe866',
-    '0xA90Cded6dad06dF521f22643B2cA98c068CEe866',
-    '0xA90Cded6dad06dF521f22643B2cA98c068CEe866',
-    '0xA90Cded6dad06dF521f22643B2cA98c068CEe866',
+  ];
+
+  static const listNFTAddressTestNet = [
+    '0x29285b806CF63b5C595BAf6FfAb27b6b70d2E01F',
+    '0x198a7b705B833eB24f6A27F1ee96b385A49B8a4b',
+    '0x21AD1AE2f45e72cC92E1f3B74c184F8De2e2DBa6',
+    '',
+  ];
+
+  static const listNFTAddressesMainNet = [
+    '',
+    '',
+    '',
+    '',
   ];
 
   static const isoLangs = {
