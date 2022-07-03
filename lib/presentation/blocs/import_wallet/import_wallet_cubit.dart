@@ -31,7 +31,7 @@ class ImportWalletCubit extends Cubit<ImportWalletState> {
       return;
     }
 
-    verifyOtp();
+    _importWallet();
   }
 
   sendOtp() async {
