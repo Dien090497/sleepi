@@ -1,5 +1,6 @@
 
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:slee_fi/models/user/user_info_model.dart';
 part 'sign_in_response.g.dart';
 @JsonSerializable()
 class SignInResponse {
@@ -16,8 +17,8 @@ class SignInResponse {
 class Content {
   final String accessToken;
   final String refreshToken;
-
-  Content(this.accessToken, this.refreshToken);
+  final UserInfoModel user;
+  Content(this.accessToken, this.refreshToken, this.user);
 
   factory Content.fromJson(Map<String, dynamic> json) =>
       _$ContentFromJson(json);

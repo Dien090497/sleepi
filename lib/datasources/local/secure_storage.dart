@@ -1,7 +1,10 @@
+import 'dart:convert';
+
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:injectable/injectable.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:slee_fi/datasources/local/get_storage_datasource.dart';
+import 'package:slee_fi/models/user/user_info_model.dart';
 
 @Injectable()
 class SecureStorage {
@@ -30,5 +33,19 @@ class SecureStorage {
       _secureStorage.deleteAll(),
       _sharedPreferences.clear(),
     ]);
+  }
+
+  Future<void> writeUser(UserInfoModel userInfoModel) async {
+    _secureStorage.write(
+        key: StorageKeys.userKey, value: json.encode(userInfoModel.toJson()));
+  }
+
+  Future<UserInfoModel?> readCurrentUser() async {
+    final contains = await _secureStorage.containsKey(key: StorageKeys.userKey);
+    if (!contains) {
+      return null;
+    }
+    final value = await _secureStorage.read(key: StorageKeys.userKey) as String;
+    return UserInfoModel.fromJson(json.decode(value));
   }
 }

@@ -12,16 +12,17 @@ import 'package:slee_fi/common/widgets/sf_buttons.dart';
 import 'package:slee_fi/common/widgets/sf_card.dart';
 import 'package:slee_fi/common/widgets/sf_textfield_password.dart';
 import 'package:slee_fi/l10n/locale_keys.g.dart';
+import 'package:slee_fi/models/user/user_info_model.dart';
 import 'package:slee_fi/presentation/blocs/create_password/create_password_cubit.dart';
 import 'package:slee_fi/presentation/blocs/create_password/create_password_state.dart';
 import 'package:slee_fi/presentation/screens/setting_permission/widgets/healthcare_screen.dart';
 
 class CreatePasswordArg {
-  final String email;
   final String activeCode;
   final int otp;
+  final UserInfoModel userInfoModel;
 
-  CreatePasswordArg(this.email, this.activeCode, this.otp);
+  CreatePasswordArg(this.activeCode, this.otp, this.userInfoModel);
 }
 
 class CreatePasswordScreen extends StatefulWidget {
@@ -38,13 +39,15 @@ class _CreatePasswordScreenState extends State<CreatePasswordScreen> {
   Widget build(BuildContext context) {
     final arg = ModalRoute.of(context)?.settings.arguments as CreatePasswordArg;
     return BlocProvider<CreatePasswordCubit>(
-      create: (context) =>
-          CreatePasswordCubit()..init(arg.email, arg.activeCode, arg.otp),
+      create: (context) => CreatePasswordCubit()
+        ..init(arg.userInfoModel, arg.activeCode, arg.otp),
       child: BlocConsumer<CreatePasswordCubit, CreatePasswordState>(
         listener: (context, state) {
-          Navigator.pushNamedAndRemoveUntil(
-              context, R.healthcarePermission, (_) => false,
-          arguments: HealthcareArg(true));
+          if (state is CreatePasswordStateSuccess) {
+            Navigator.pushNamedAndRemoveUntil(
+                context, R.healthcarePermission, (_) => false,
+                arguments: HealthcareArg(true));
+          }
         },
         builder: (context, state) {
           'rebuild   $state'.log;

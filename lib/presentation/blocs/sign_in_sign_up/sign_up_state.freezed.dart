@@ -22,7 +22,7 @@ mixin _$SignInSignUpState {
     required TResult Function() process,
     required TResult Function(String message) error,
     required TResult Function(String message) errorEmail,
-    required TResult Function(bool enableActiveCode) signUpSuccess,
+    required TResult Function(UserInfoModel userInfoModel) signUpSuccess,
     required TResult Function() signInSuccess,
   }) =>
       throw _privateConstructorUsedError;
@@ -32,7 +32,7 @@ mixin _$SignInSignUpState {
     TResult Function()? process,
     TResult Function(String message)? error,
     TResult Function(String message)? errorEmail,
-    TResult Function(bool enableActiveCode)? signUpSuccess,
+    TResult Function(UserInfoModel userInfoModel)? signUpSuccess,
     TResult Function()? signInSuccess,
   }) =>
       throw _privateConstructorUsedError;
@@ -42,7 +42,7 @@ mixin _$SignInSignUpState {
     TResult Function()? process,
     TResult Function(String message)? error,
     TResult Function(String message)? errorEmail,
-    TResult Function(bool enableActiveCode)? signUpSuccess,
+    TResult Function(UserInfoModel userInfoModel)? signUpSuccess,
     TResult Function()? signInSuccess,
     required TResult orElse(),
   }) =>
@@ -144,7 +144,7 @@ class _$SignInSignUpStateInit implements SignInSignUpStateInit {
     required TResult Function() process,
     required TResult Function(String message) error,
     required TResult Function(String message) errorEmail,
-    required TResult Function(bool enableActiveCode) signUpSuccess,
+    required TResult Function(UserInfoModel userInfoModel) signUpSuccess,
     required TResult Function() signInSuccess,
   }) {
     return initial();
@@ -157,7 +157,7 @@ class _$SignInSignUpStateInit implements SignInSignUpStateInit {
     TResult Function()? process,
     TResult Function(String message)? error,
     TResult Function(String message)? errorEmail,
-    TResult Function(bool enableActiveCode)? signUpSuccess,
+    TResult Function(UserInfoModel userInfoModel)? signUpSuccess,
     TResult Function()? signInSuccess,
   }) {
     return initial?.call();
@@ -170,7 +170,7 @@ class _$SignInSignUpStateInit implements SignInSignUpStateInit {
     TResult Function()? process,
     TResult Function(String message)? error,
     TResult Function(String message)? errorEmail,
-    TResult Function(bool enableActiveCode)? signUpSuccess,
+    TResult Function(UserInfoModel userInfoModel)? signUpSuccess,
     TResult Function()? signInSuccess,
     required TResult orElse(),
   }) {
@@ -277,7 +277,7 @@ class _$SignInSignUpStateProcess implements SignInSignUpStateProcess {
     required TResult Function() process,
     required TResult Function(String message) error,
     required TResult Function(String message) errorEmail,
-    required TResult Function(bool enableActiveCode) signUpSuccess,
+    required TResult Function(UserInfoModel userInfoModel) signUpSuccess,
     required TResult Function() signInSuccess,
   }) {
     return process();
@@ -290,7 +290,7 @@ class _$SignInSignUpStateProcess implements SignInSignUpStateProcess {
     TResult Function()? process,
     TResult Function(String message)? error,
     TResult Function(String message)? errorEmail,
-    TResult Function(bool enableActiveCode)? signUpSuccess,
+    TResult Function(UserInfoModel userInfoModel)? signUpSuccess,
     TResult Function()? signInSuccess,
   }) {
     return process?.call();
@@ -303,7 +303,7 @@ class _$SignInSignUpStateProcess implements SignInSignUpStateProcess {
     TResult Function()? process,
     TResult Function(String message)? error,
     TResult Function(String message)? errorEmail,
-    TResult Function(bool enableActiveCode)? signUpSuccess,
+    TResult Function(UserInfoModel userInfoModel)? signUpSuccess,
     TResult Function()? signInSuccess,
     required TResult orElse(),
   }) {
@@ -434,7 +434,7 @@ class _$SignInSignUpStateError implements SignInSignUpStateError {
     required TResult Function() process,
     required TResult Function(String message) error,
     required TResult Function(String message) errorEmail,
-    required TResult Function(bool enableActiveCode) signUpSuccess,
+    required TResult Function(UserInfoModel userInfoModel) signUpSuccess,
     required TResult Function() signInSuccess,
   }) {
     return error(message);
@@ -447,7 +447,7 @@ class _$SignInSignUpStateError implements SignInSignUpStateError {
     TResult Function()? process,
     TResult Function(String message)? error,
     TResult Function(String message)? errorEmail,
-    TResult Function(bool enableActiveCode)? signUpSuccess,
+    TResult Function(UserInfoModel userInfoModel)? signUpSuccess,
     TResult Function()? signInSuccess,
   }) {
     return error?.call(message);
@@ -460,7 +460,7 @@ class _$SignInSignUpStateError implements SignInSignUpStateError {
     TResult Function()? process,
     TResult Function(String message)? error,
     TResult Function(String message)? errorEmail,
-    TResult Function(bool enableActiveCode)? signUpSuccess,
+    TResult Function(UserInfoModel userInfoModel)? signUpSuccess,
     TResult Function()? signInSuccess,
     required TResult orElse(),
   }) {
@@ -599,7 +599,7 @@ class _$SignInSignUpStateErrorEmail implements SignInSignUpStateErrorEmail {
     required TResult Function() process,
     required TResult Function(String message) error,
     required TResult Function(String message) errorEmail,
-    required TResult Function(bool enableActiveCode) signUpSuccess,
+    required TResult Function(UserInfoModel userInfoModel) signUpSuccess,
     required TResult Function() signInSuccess,
   }) {
     return errorEmail(message);
@@ -612,7 +612,7 @@ class _$SignInSignUpStateErrorEmail implements SignInSignUpStateErrorEmail {
     TResult Function()? process,
     TResult Function(String message)? error,
     TResult Function(String message)? errorEmail,
-    TResult Function(bool enableActiveCode)? signUpSuccess,
+    TResult Function(UserInfoModel userInfoModel)? signUpSuccess,
     TResult Function()? signInSuccess,
   }) {
     return errorEmail?.call(message);
@@ -625,7 +625,7 @@ class _$SignInSignUpStateErrorEmail implements SignInSignUpStateErrorEmail {
     TResult Function()? process,
     TResult Function(String message)? error,
     TResult Function(String message)? errorEmail,
-    TResult Function(bool enableActiveCode)? signUpSuccess,
+    TResult Function(UserInfoModel userInfoModel)? signUpSuccess,
     TResult Function()? signInSuccess,
     required TResult orElse(),
   }) {
@@ -697,7 +697,7 @@ abstract class _$$SignInSignUpStateSignUpSuccessCopyWith<$Res> {
           _$SignInSignUpStateSignUpSuccess value,
           $Res Function(_$SignInSignUpStateSignUpSuccess) then) =
       __$$SignInSignUpStateSignUpSuccessCopyWithImpl<$Res>;
-  $Res call({bool enableActiveCode});
+  $Res call({UserInfoModel userInfoModel});
 }
 
 /// @nodoc
@@ -715,13 +715,13 @@ class __$$SignInSignUpStateSignUpSuccessCopyWithImpl<$Res>
 
   @override
   $Res call({
-    Object? enableActiveCode = freezed,
+    Object? userInfoModel = freezed,
   }) {
     return _then(_$SignInSignUpStateSignUpSuccess(
-      enableActiveCode == freezed
-          ? _value.enableActiveCode
-          : enableActiveCode // ignore: cast_nullable_to_non_nullable
-              as bool,
+      userInfoModel == freezed
+          ? _value.userInfoModel
+          : userInfoModel // ignore: cast_nullable_to_non_nullable
+              as UserInfoModel,
     ));
   }
 }
@@ -730,14 +730,14 @@ class __$$SignInSignUpStateSignUpSuccessCopyWithImpl<$Res>
 
 class _$SignInSignUpStateSignUpSuccess
     implements SignInSignUpStateSignUpSuccess {
-  const _$SignInSignUpStateSignUpSuccess(this.enableActiveCode);
+  const _$SignInSignUpStateSignUpSuccess(this.userInfoModel);
 
   @override
-  final bool enableActiveCode;
+  final UserInfoModel userInfoModel;
 
   @override
   String toString() {
-    return 'SignInSignUpState.signUpSuccess(enableActiveCode: $enableActiveCode)';
+    return 'SignInSignUpState.signUpSuccess(userInfoModel: $userInfoModel)';
   }
 
   @override
@@ -746,12 +746,12 @@ class _$SignInSignUpStateSignUpSuccess
         (other.runtimeType == runtimeType &&
             other is _$SignInSignUpStateSignUpSuccess &&
             const DeepCollectionEquality()
-                .equals(other.enableActiveCode, enableActiveCode));
+                .equals(other.userInfoModel, userInfoModel));
   }
 
   @override
   int get hashCode => Object.hash(
-      runtimeType, const DeepCollectionEquality().hash(enableActiveCode));
+      runtimeType, const DeepCollectionEquality().hash(userInfoModel));
 
   @JsonKey(ignore: true)
   @override
@@ -766,10 +766,10 @@ class _$SignInSignUpStateSignUpSuccess
     required TResult Function() process,
     required TResult Function(String message) error,
     required TResult Function(String message) errorEmail,
-    required TResult Function(bool enableActiveCode) signUpSuccess,
+    required TResult Function(UserInfoModel userInfoModel) signUpSuccess,
     required TResult Function() signInSuccess,
   }) {
-    return signUpSuccess(enableActiveCode);
+    return signUpSuccess(userInfoModel);
   }
 
   @override
@@ -779,10 +779,10 @@ class _$SignInSignUpStateSignUpSuccess
     TResult Function()? process,
     TResult Function(String message)? error,
     TResult Function(String message)? errorEmail,
-    TResult Function(bool enableActiveCode)? signUpSuccess,
+    TResult Function(UserInfoModel userInfoModel)? signUpSuccess,
     TResult Function()? signInSuccess,
   }) {
-    return signUpSuccess?.call(enableActiveCode);
+    return signUpSuccess?.call(userInfoModel);
   }
 
   @override
@@ -792,12 +792,12 @@ class _$SignInSignUpStateSignUpSuccess
     TResult Function()? process,
     TResult Function(String message)? error,
     TResult Function(String message)? errorEmail,
-    TResult Function(bool enableActiveCode)? signUpSuccess,
+    TResult Function(UserInfoModel userInfoModel)? signUpSuccess,
     TResult Function()? signInSuccess,
     required TResult orElse(),
   }) {
     if (signUpSuccess != null) {
-      return signUpSuccess(enableActiveCode);
+      return signUpSuccess(userInfoModel);
     }
     return orElse();
   }
@@ -849,10 +849,10 @@ class _$SignInSignUpStateSignUpSuccess
 }
 
 abstract class SignInSignUpStateSignUpSuccess implements SignInSignUpState {
-  const factory SignInSignUpStateSignUpSuccess(final bool enableActiveCode) =
-      _$SignInSignUpStateSignUpSuccess;
+  const factory SignInSignUpStateSignUpSuccess(
+      final UserInfoModel userInfoModel) = _$SignInSignUpStateSignUpSuccess;
 
-  bool get enableActiveCode => throw _privateConstructorUsedError;
+  UserInfoModel get userInfoModel => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
   _$$SignInSignUpStateSignUpSuccessCopyWith<_$SignInSignUpStateSignUpSuccess>
       get copyWith => throw _privateConstructorUsedError;
@@ -908,7 +908,7 @@ class _$SignInSignUpStateSignInSuccess
     required TResult Function() process,
     required TResult Function(String message) error,
     required TResult Function(String message) errorEmail,
-    required TResult Function(bool enableActiveCode) signUpSuccess,
+    required TResult Function(UserInfoModel userInfoModel) signUpSuccess,
     required TResult Function() signInSuccess,
   }) {
     return signInSuccess();
@@ -921,7 +921,7 @@ class _$SignInSignUpStateSignInSuccess
     TResult Function()? process,
     TResult Function(String message)? error,
     TResult Function(String message)? errorEmail,
-    TResult Function(bool enableActiveCode)? signUpSuccess,
+    TResult Function(UserInfoModel userInfoModel)? signUpSuccess,
     TResult Function()? signInSuccess,
   }) {
     return signInSuccess?.call();
@@ -934,7 +934,7 @@ class _$SignInSignUpStateSignInSuccess
     TResult Function()? process,
     TResult Function(String message)? error,
     TResult Function(String message)? errorEmail,
-    TResult Function(bool enableActiveCode)? signUpSuccess,
+    TResult Function(UserInfoModel userInfoModel)? signUpSuccess,
     TResult Function()? signInSuccess,
     required TResult orElse(),
   }) {

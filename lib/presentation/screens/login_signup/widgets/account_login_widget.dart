@@ -17,7 +17,6 @@ import 'package:slee_fi/di/injector.dart';
 import 'package:slee_fi/l10n/locale_keys.g.dart';
 import 'package:slee_fi/presentation/blocs/sign_in_sign_up/sign_up_cubit.dart';
 import 'package:slee_fi/presentation/blocs/sign_in_sign_up/sign_up_state.dart';
-import 'package:slee_fi/presentation/screens/create_password/create_password_screen.dart';
 import 'package:slee_fi/presentation/screens/enter_activation_code/enter_activation_code_screen.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -43,19 +42,11 @@ class _AccountLoginState extends State<AccountLoginWidget> {
       listener: (context, state) {
         if (state is SignInSignUpStateSignUpSuccess) {
           final cubit = context.read<SigInSignUpCubit>();
-          'setting active code is  ${state.enableActiveCode}'.log;
-          if (state.enableActiveCode) {
-            Navigator.pushNamed(context, R.enterActivationCode,
-                arguments: EnterActiveCodeArg(
-                    cubit.email.trim(), int.parse(cubit.otp)));
-          } else {
-            Navigator.pushNamed(context, R.createPassword,
-                arguments: CreatePasswordArg(
-                  cubit.email.trim(),
-                  '',
-                  int.parse(cubit.otp),
-                ));
-          }
+          Navigator.pushNamed(context, R.enterActivationCode,
+              arguments: EnterActiveCodeArg(
+                int.parse(cubit.otp),
+                state.userInfoModel,
+              ));
         } else if (state is SignInSignUpStateSignInSuccess) {
           Navigator.pushNamedAndRemoveUntil(
               context, R.bottomNavigation, (_) => false);

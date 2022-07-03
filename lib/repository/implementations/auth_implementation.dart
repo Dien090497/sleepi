@@ -8,6 +8,7 @@ import 'package:slee_fi/datasources/local/get_storage_datasource.dart';
 import 'package:slee_fi/datasources/local/isar/isar_datasource.dart';
 import 'package:slee_fi/datasources/local/secure_storage.dart';
 import 'package:slee_fi/datasources/remote/auth_datasource/auth_datasource.dart';
+import 'package:slee_fi/entities/user/user_info_entity.dart';
 import 'package:slee_fi/failures/failure.dart';
 import 'package:slee_fi/models/create_password_reponse/create_password_response.dart';
 import 'package:slee_fi/models/create_password_schema/create_password_schema.dart';
@@ -15,6 +16,7 @@ import 'package:slee_fi/models/send_email_response/send_email_response.dart';
 import 'package:slee_fi/models/setting_active_code_response/setting_active_code_response.dart';
 import 'package:slee_fi/models/sign_in_response/sign_in_response.dart';
 import 'package:slee_fi/models/sign_up_schema/sign_up_schema.dart';
+import 'package:slee_fi/models/user/user_info_model.dart';
 import 'package:slee_fi/models/user_response/user_response.dart';
 import 'package:slee_fi/models/verify_schema/verify_schema.dart';
 import 'package:slee_fi/repository/auth_repository.dart';
@@ -48,6 +50,8 @@ class AuthImplementation extends IAuthRepository {
       SignInSchema signInSchema) async {
     try {
       var result = await _authDataSource.signIn(signInSchema);
+      // _saveLocalUser(UserInfoModel(id, name, username, roles, email,
+      //     isAccountDisabled, createdAt, updatedAt));
       'sign success $result'.log;
       return Right(result);
     } on Exception catch (e) {
@@ -151,14 +155,44 @@ class AuthImplementation extends IAuthRepository {
   }
 
   String _catchErrorDio(Exception e) {
-    if (e is DioError) {
-      'error is ${e.response?.data['error']['message']}'.log;
-      ' errror  ${e.response}'.log;
-      return e.response?.data['error']['message'] ??
-          'Error! An error occurred. Please try again later';
-    }
+    try {
+      if (e is DioError) {
+        'error is ${e.response?.data['error']['message']}'.log;
+        ' errror  ${e.response}'.log;
+        return e.response?.data['error']['details']['message'].first ??
+            'Error! An error occurred. Please try again later';
+      }
+    } catch (_) {}
 
     return '$e';
   }
 
+  @override
+  Future<Either<FailureMessage, UserInfoEntity>> currentUser() async {
+    // try {
+      final user = await _secureStorage.readCurrentUser();
+      if (user == null) {
+        return const Left(FailureMessage('msg'));
+      } else {
+        return Right(user.toEntity());
+      }
+    // } catch (e) {
+    //   'error get current user $e'.log;
+    //   return const Left(FailureMessage('empty user'));
+    // }
+  }
+
+  @override
+  Future<Either<FailureMessage, bool>> saveUser(
+      UserInfoModel userInfoModel) async {
+    try {
+      _secureStorage.writeUser(userInfoModel);
+      'write user is  success '.log;
+
+      return const Right(true);
+    } catch (e) {
+      'write user is $e'.log;
+      return Left(FailureMessage('$e'));
+    }
+  }
 }
