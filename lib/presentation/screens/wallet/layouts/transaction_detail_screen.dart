@@ -1,5 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:slee_fi/common/extensions/num_ext.dart';
 import 'package:slee_fi/common/extensions/string_x.dart';
 import 'package:slee_fi/common/routes/app_routes.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
@@ -23,7 +24,8 @@ class TransactionDetailArguments {
   final String img;
   final TokenEntity tokenEntity;
 
-  TransactionDetailArguments({required this.title, required this.img, required this.tokenEntity});
+  TransactionDetailArguments(
+      {required this.title, required this.img, required this.tokenEntity});
 }
 
 class TransactionDetail extends StatelessWidget {
@@ -75,8 +77,10 @@ class TransactionDetail extends StatelessWidget {
                   : const SizedBox(),
               const SizedBox(height: 16.0),
               SFText(
-                  keyText: "${args?.tokenEntity.balance} ${args != null ? args.title : 'AVAX'}",
+                  keyText:
+                      "${args?.tokenEntity.balance.toStringAsFixed(6)} ${args != null ? args.title : 'AVAX'}",
                   style: TextStyles.bold30White,
+                  textAlign: TextAlign.center,
                   stringCase: StringCase.upperCase),
               const SizedBox(height: 36.0),
               ConstrainedBox(
@@ -116,7 +120,9 @@ class TransactionDetail extends StatelessWidget {
                       Expanded(
                         child: BoxButtonWidget(
                           onTap: () {
-                            Navigator.pushNamed(context, R.sendToExternal,
+                            Navigator.pushNamed(
+                              context,
+                              R.sendToExternal,
                               arguments: SendToExternalArguments(
                                 tokenEntity: args?.tokenEntity,
                                 symbol: args?.title ?? '',
@@ -124,7 +130,7 @@ class TransactionDetail extends StatelessWidget {
                               ),
                             );
                           },
-                              text: LocaleKeys.to_external,
+                          text: LocaleKeys.to_external,
                           assetImage: Ics.icArrowUpRight,
                         ),
                       ),
