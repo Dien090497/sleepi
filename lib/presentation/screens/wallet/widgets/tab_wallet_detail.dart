@@ -23,11 +23,16 @@ import 'package:slee_fi/presentation/screens/wallet/widgets/wallet_detail_list.d
 import 'package:slee_fi/resources/resources.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-class TabWalletDetail extends StatelessWidget {
+class TabWalletDetail extends StatefulWidget {
   const TabWalletDetail({Key? key, required this.walletCubit})
       : super(key: key);
   final WalletCubit walletCubit;
 
+  @override
+  State<TabWalletDetail> createState() => _TabWalletDetailState();
+}
+
+class _TabWalletDetailState extends State<TabWalletDetail> {
   void _onRefresh(RefreshController refreshController, cubit) async {
     await cubit.init();
     refreshController.refreshCompleted();
@@ -43,21 +48,25 @@ class TabWalletDetail extends StatelessWidget {
     final RefreshController refreshController = RefreshController();
     var isJapanese = Localizations.localeOf(context).toLanguageTag().isJapanese;
     return BlocProvider(
-      create: (context) => walletCubit,
+      create: (context) => widget.walletCubit,
       child: BlocBuilder<WalletCubit, WalletState>(
-        bloc: walletCubit,
+        bloc: widget.walletCubit,
         builder: (context, state) {
           final cubit = context.read<WalletCubit>();
           if (state is WalletStateLoaded && state.walletInfoEntity != null) {
-            balance = state.walletInfoEntity!.nativeCurrency.balance;
-            addressWallet = state.walletInfoEntity!.address;
-            currencySymbol = state.walletInfoEntity!.nativeCurrency.symbol;
-            networkName = state.walletInfoEntity!.networkName;
-            tokenList = state.tokenList;
+            if(state.walletInfoEntity !=null) {
+              balance = state.walletInfoEntity!.nativeCurrency.balance;
+              addressWallet = state.walletInfoEntity!.address;
+              currencySymbol = state.walletInfoEntity!.nativeCurrency.symbol;
+              networkName = state.walletInfoEntity!.networkName;
+              tokenList = state.tokenList;
+            }
           }
           return FocusDetector(
             onFocusGained: () {
-              cubit.init();
+              if(!cubit.isClosed) {
+                cubit.init();
+              }
             },
             child: SmartRefresher(
               controller: refreshController,

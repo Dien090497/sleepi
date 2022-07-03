@@ -2,6 +2,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:slee_fi/common/const/const.dart';
+import 'package:slee_fi/common/extensions/num_ext.dart';
 import 'package:slee_fi/common/extensions/string_x.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
@@ -22,12 +23,13 @@ import 'package:slee_fi/presentation/screens/send_to_external/widgets/address_sc
 import 'package:slee_fi/presentation/screens/send_to_external/widgets/pop_up_confirm_send.dart';
 import 'package:slee_fi/resources/resources.dart';
 
-class SendToExternalArguments{
+class SendToExternalArguments {
   final String symbol;
   final String icon;
   final TokenEntity? tokenEntity;
 
-  SendToExternalArguments({required this.symbol, required this.icon, this.tokenEntity});
+  SendToExternalArguments(
+      {required this.symbol, required this.icon, this.tokenEntity});
 }
 
 class SendToExternalScreen extends StatefulWidget {
@@ -46,7 +48,7 @@ class _SendToExternalScreenState extends State<SendToExternalScreen> {
   @override
   Widget build(BuildContext context) {
     final args =
-    ModalRoute.of(context)?.settings.arguments as SendToExternalArguments?;
+        ModalRoute.of(context)?.settings.arguments as SendToExternalArguments?;
 
     return BlocProvider(
       create: (context) => SendToExternalCubit()..init(),
@@ -58,13 +60,12 @@ class _SendToExternalScreenState extends State<SendToExternalScreen> {
           }
           if (state is SendToExternalCheckedValidator) {
             showCustomAlertDialog(context,
-                children:  PopUpConfirmSend(
+                children: PopUpConfirmSend(
                   toAddress: contractAddressTo,
                   valueInEther: valueInEther,
                   transferToken: args != null ? true : false,
                   arg: args,
-                )
-            );
+                ));
           }
         },
         builder: (context, state) {
@@ -72,7 +73,6 @@ class _SendToExternalScreenState extends State<SendToExternalScreen> {
           if (state is sendToExternalStateInitial) {
             cubit.getTokenBalance();
           }
-
 
           return DismissKeyboardWidget(
             child: BackgroundWidget(
@@ -90,8 +90,16 @@ class _SendToExternalScreenState extends State<SendToExternalScreen> {
                       Expanded(
                         child: ListView(
                           children: [
-                          args != null ?  SFIcon(args.icon, width: 60, height: 60,) : Image.asset(Imgs.sendToExternal),
-                             SizedBox(height: args != null ? 32 : 0,),
+                            args != null
+                                ? SFIcon(
+                                    args.icon,
+                                    width: 60,
+                                    height: 60,
+                                  )
+                                : Image.asset(Imgs.sendToExternal),
+                            SizedBox(
+                              height: args != null ? 32 : 0,
+                            ),
                             SFCard(
                               margin: EdgeInsets.zero,
                               padding: const EdgeInsets.symmetric(
@@ -100,40 +108,45 @@ class _SendToExternalScreenState extends State<SendToExternalScreen> {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   AddressScan(
-                                    errorText: state is SendToExternalErrorToAddress
-                                        ? state.msg
-                                        : null,
-                                    onChangedAddress: (address){
+                                    errorText:
+                                        state is SendToExternalErrorToAddress
+                                            ? state.msg
+                                            : null,
+                                    onChangedAddress: (address) {
                                       cubit.contractAddressTo = address;
                                       contractAddressTo = address;
                                     },
                                   ),
                                   const SizedBox(height: 24),
                                   SFTextField(
-                                    labelText: LocaleKeys.amount,
-                                      inputFormatters: [DecimalTextInputFormatter(decimalRange: 6)],
-                                    textInputType: const TextInputType.numberWithOptions(decimal: true),
-                                    errorText:state is SendToExternalErrorValueInEther
-                                        ? state.msg
-                                        : null,
-                                    suffixIcon:  Padding(
-                                      padding: const EdgeInsets.all(8.0),
-                                      child: SFIcon(
-                                        args != null ? args.icon : Ics.icAvax
-                                      )
-                                    ),
-                                    onChanged: (v) {
-                                      if (v.isNotEmpty) {
-                                        cubit.valueInEther = double.parse(v);
-                                        valueInEther = double.parse(v);
-                                      }
-
-                                    }
-                                  ),
+                                      labelText: LocaleKeys.amount,
+                                      inputFormatters: [
+                                        DecimalTextInputFormatter(
+                                            decimalRange: 6)
+                                      ],
+                                      textInputType:
+                                          const TextInputType.numberWithOptions(
+                                              decimal: true),
+                                      errorText: state
+                                              is SendToExternalErrorValueInEther
+                                          ? state.msg
+                                          : null,
+                                      suffixIcon: Padding(
+                                          padding: const EdgeInsets.all(8.0),
+                                          child: SFIcon(args != null
+                                              ? args.icon
+                                              : Ics.icAvax)),
+                                      onChanged: (v) {
+                                        if (v.isNotEmpty) {
+                                          cubit.valueInEther = double.parse(v);
+                                          valueInEther = double.parse(v);
+                                        }
+                                      }),
                                   SFText(
                                       keyText: LocaleKeys.balance,
                                       style: TextStyles.w400lightGrey12,
-                                      suffix: ': ${args != null ? args.tokenEntity?.balance : balance} ${args != null ? args.symbol : "AVAX"}'),
+                                      suffix:
+                                          ': ${args != null ? args.tokenEntity?.balance.formatBalance : balance.formatBalance} ${args != null ? args.symbol : "AVAX"}'),
                                 ],
                               ),
                             ),
@@ -142,7 +155,8 @@ class _SendToExternalScreenState extends State<SendToExternalScreen> {
                             ),
                             Text.rich(
                               TextSpan(
-                                text: LocaleKeys.the_network_you_have_selected_1.tr(),
+                                text: LocaleKeys.the_network_you_have_selected_1
+                                    .tr(),
                                 style: TextStyles.w400lightGrey12,
                                 children: [
                                   const TextSpan(text: ' '),
@@ -151,10 +165,12 @@ class _SendToExternalScreenState extends State<SendToExternalScreen> {
                                       style: TextStyles.w400Red12),
                                   const TextSpan(text: ' '),
                                   TextSpan(
-                                      text: LocaleKeys.the_network_you_have_selected_2
+                                      text: LocaleKeys
+                                          .the_network_you_have_selected_2
                                           .tr()),
                                   TextSpan(
-                                      text: LocaleKeys.the_network_you_have_selected_3
+                                      text: LocaleKeys
+                                          .the_network_you_have_selected_3
                                           .tr()),
                                   const TextSpan(text: ' '),
                                   TextSpan(
@@ -162,21 +178,24 @@ class _SendToExternalScreenState extends State<SendToExternalScreen> {
                                       style: TextStyles.w400Red12),
                                   const TextSpan(text: ' '),
                                   TextSpan(
-                                      text: LocaleKeys.the_network_you_have_selected_4
+                                      text: LocaleKeys
+                                          .the_network_you_have_selected_4
                                           .tr()),
                                   TextSpan(
-                                      text: LocaleKeys.the_network_you_have_selected_5
+                                      text: LocaleKeys
+                                          .the_network_you_have_selected_5
                                           .tr(),
                                       style: context.locale.languageCode ==
-                                          Const.localeJA.languageCode
+                                              Const.localeJA.languageCode
                                           ? null
                                           : TextStyles.w400Red12),
                                   const TextSpan(text: ' '),
                                   TextSpan(
-                                      text: LocaleKeys.the_network_you_have_selected_6
+                                      text: LocaleKeys
+                                          .the_network_you_have_selected_6
                                           .tr(),
                                       style: context.locale.languageCode ==
-                                          Const.localeJA.languageCode
+                                              Const.localeJA.languageCode
                                           ? TextStyles.w400Red12
                                           : null),
                                 ],
