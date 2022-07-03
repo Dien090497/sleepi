@@ -105,12 +105,12 @@ class _WalletScreenState extends State<WalletScreen>
                   return WalletTabBar(
                       controller: controller,
                       checkMoveNewTab: (currentIndex, i) {
-                        // if (i == 1 ||
-                        //     (state is WalletStateLoaded &&
-                        //         (state.walletInfoEntity == null ||
-                        //             state.firstOpenWallet))) {
-                        //   controller.animateTo(0);
-                        // }
+                        if (i == 1 ||
+                            (state is WalletStateLoaded &&
+                                (state.walletInfoEntity == null ||
+                                    state.firstOpenWallet))) {
+                          controller.animateTo(0);
+                        }
 
                         if (state is WalletStateLoaded &&
                             state.walletInfoEntity == null &&

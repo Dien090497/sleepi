@@ -45,12 +45,15 @@ class ConfirmCreatePasscodeScreen extends StatelessWidget {
             StatefulBuilder(builder: (context, setState) {
               return Column(
                 children: [
-                  if (wrongPassword)
-                    Center(
-                      child: SFText(
-                          keyText: LocaleKeys.incorrect_passcode,
-                          style: TextStyles.red14),
-                    ),
+                  Container(
+                    alignment: Alignment.topCenter,
+                    height: 15,
+                    child: wrongPassword
+                        ? SFText(
+                            keyText: LocaleKeys.incorrect_passcode,
+                            style: TextStyles.red14)
+                        : const SizedBox(),
+                  ),
                   SizedBox(height: 15.h),
                   PasscodeNumPad(
                     passcodeController: passcodeController,

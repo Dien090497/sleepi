@@ -158,9 +158,4 @@ class AuthImplementation extends IAuthRepository {
     return '$e';
   }
 
-// @override
-// Future<Either<Failure, bool>> checkPassCode(String passcode) {
-//   // TODO: implement checkPassCode
-//   throw UnimplementedError();
-// }
 }

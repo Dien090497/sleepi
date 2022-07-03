@@ -23,22 +23,33 @@ class ImportWalletScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final cubit = ImportWalletCubit()..init();
     return BlocProvider(
-      create: (context) => ImportWalletCubit(),
+      create: (context) => cubit,
       child: BlocConsumer<ImportWalletCubit, ImportWalletState>(
         listener: (context, state) {
+          if (state is ImportWalletVerifyOtpSuccess) {
+            Navigator.pushNamed(context, R.createPasscode).then((value) {
+              if (value == true) {
+                cubit.importWallet();
+              }
+            });
+          }
+
           if (state is ImportWalletDone) {
-            Navigator.pop(
-                context,
-                PopWithResults(
-                  fromPage: R.importWallet,
-                  toPage: R.wallet,
-                  results: {"data": state.entity},
-                ));
+            Future.delayed(
+              const Duration(milliseconds: 200),
+              () => Navigator.pop(
+                  context,
+                  PopWithResults(
+                    fromPage: R.importWallet,
+                    toPage: R.wallet,
+                    results: {"data": state.entity},
+                  )),
+            );
           }
         },
         builder: (context, state) {
-          final cubit = context.read<ImportWalletCubit>();
           return Stack(
             children: [
               DismissKeyboardWidget(
@@ -104,7 +115,10 @@ class ImportWalletScreen extends StatelessWidget {
                             height: 48,
                             width: double.infinity,
                             color: AppColors.blue,
-                            onPressed: () => cubit.process(),
+                            onPressed: () {
+                              FocusScope.of(context).unfocus();
+                              cubit.process();
+                            },
                           ),
                           const SizedBox(height: 24)
                         ],

@@ -9,8 +9,8 @@ class ImportWalletState with _$ImportWalletState {
     @Default(false) bool isLoading,
   }) = ImportWalletInitial;
 
-  const factory ImportWalletState.success(WalletInfoEntity entity) =
-      ImportWalletDone;
+  const factory ImportWalletState.success(WalletInfoEntity entity) =ImportWalletDone;
+  const factory ImportWalletState.verifyOtpSuccess() =ImportWalletVerifyOtpSuccess;
 
   const factory ImportWalletState.errorOtp(String msg) = ImportWalletErrorOtp;
 

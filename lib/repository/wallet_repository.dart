@@ -31,4 +31,7 @@ abstract class IWalletRepository {
       NetWorkEnum? params);
 
   Future<Either<FailureMessage, NetworkIsarModel>> switchNetWork();
+
+ Either<FailureMessage, bool> validateMnemonic(String mnemonic);
+
 }
