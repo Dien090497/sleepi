@@ -44,6 +44,7 @@ class _TradeScreenState extends State<TradeScreen> {
   final GlobalKey<CoolDropdownState> firstToken = GlobalKey();
   final GlobalKey<CoolDropdownState> secondToken = GlobalKey();
   TextEditingController valueController = TextEditingController();
+  FocusNode focusNode = FocusNode();
   double amountOutMin = 0;
   Timer? _debounce;
 
@@ -77,6 +78,7 @@ class _TradeScreenState extends State<TradeScreen> {
       indexFrom = 0;
       indexTo = Const.tokens.length - 1;
     });
+    focusNode.unfocus();
     Future.delayed(const Duration(milliseconds: 100), () {
       firstToken.currentState?.changeSelectedItem();
       secondToken.currentState?.changeSelectedItem();
@@ -93,6 +95,8 @@ class _TradeScreenState extends State<TradeScreen> {
       indexTo = indexFrom;
       indexFrom = swap;
     });
+    focusNode.unfocus();
+
     Future.delayed(const Duration(milliseconds: 100), () {
       firstToken.currentState?.changeSelectedItem();
       secondToken.currentState?.changeSelectedItem();
@@ -116,7 +120,6 @@ class _TradeScreenState extends State<TradeScreen> {
           if (state is swapTokenBalance) {
             setState(() {
               balance = state.balance;
-              valueController.text = '';
             });
           }
           if (state is swapTokenSuccess) {
@@ -219,6 +222,7 @@ class _TradeScreenState extends State<TradeScreen> {
                                               alignment: Alignment.centerLeft,
                                               child: SFTextField(
                                                 controller: valueController,
+                                                focusNode: focusNode,
                                                 showLabel: false,
                                                 noBorder: true,
                                                 inputFormatters: [
@@ -348,17 +352,18 @@ class _TradeScreenState extends State<TradeScreen> {
                                                         .currentState
                                                         ?.changeSelectedItem(),
                                                   );
+                                                  FocusScope.of(context)
+                                                      .requestFocus(focusNode);
                                                 },
                                               ),
                                             ),
                                           ),
                                         ],
                                       ),
-                                      if (error != '')
-                                        SFText(
-                                          keyText: error,
-                                          style: TextStyles.red12W700,
-                                        ),
+                                      SFText(
+                                        keyText: error,
+                                        style: TextStyles.red12W700,
+                                      ),
                                     ],
                                   ),
                                 ],
@@ -438,6 +443,8 @@ class _TradeScreenState extends State<TradeScreen> {
                                             () => firstToken.currentState
                                                 ?.changeSelectedItem(),
                                           );
+                                          FocusScope.of(context)
+                                              .requestFocus(focusNode);
                                         },
                                       ),
                                     ],
