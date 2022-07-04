@@ -1,4 +1,3 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:slee_fi/common/routes/app_routes.dart';
@@ -92,7 +91,6 @@ class _WalletScreenState extends State<WalletScreen>
                   return WalletTabBar(
                     controller: controller,
                     checkMoveNewTab: (currentIndex, i) {
-                      print('### ${i} ${state}');
                       if (i == 1 ||
                           (state is WalletStateLoaded &&
                               (state.walletInfoEntity == null ||
