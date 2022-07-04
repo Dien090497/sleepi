@@ -206,7 +206,7 @@ class _TradeScreenState extends State<TradeScreen> {
                                           style: TextStyles.lightGrey12),
                                       SFText(
                                         keyText:
-                                            ': ${balance.formatDoubleBalance}',
+                                            ': ${balance.formatBalanceToken}',
                                         style: TextStyles.lightGrey12,
                                       ),
                                     ],

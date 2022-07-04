@@ -129,7 +129,7 @@ class WalletDetailList extends StatelessWidget {
                               : tokenList[index].displayName,
                           style: TextStyles.lightWhite16),
                       trailing: SFText(
-                        keyText: tokenList[index].balance.formatBalance,
+                        keyText: tokenList[index].balance.formatBalanceToken,
                         style: TextStyles.lightWhite16,
                       ),
                     ),
