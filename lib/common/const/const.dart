@@ -67,7 +67,7 @@ class Const {
       "icon": Ics.icSlft,
     },
     {
-      "address": "0x41dd35f9e440adecb9a04fa839d0be2b19722ade",
+      "address": "0x41Dd35f9e440ADecB9A04fA839D0be2b19722Ade",
       "symbol": "SLGT",
       "decimal": 18,
       "icon": Ics.icSlgt,
@@ -85,12 +85,14 @@ class Const {
     '0x2bB8Bc1C29F34f3795661452Bf806cB5D65DF8DC',
     '0x41Dd35f9e440ADecB9A04fA839D0be2b19722Ade',
     '0xd00ae08403B9bbb9124bB305C09058E32C39A48c',
+    '0x950C6F4F97DD62bd3cA76f084663224FD2E6b555'
   ];
 
   static const listTokenAddressesMainNet = [
     '0xB97EF9Ef8734C71904D8002F8b6Bc66Dd9c48a6E',
     '0xB97EF9Ef8734C71904D8002F8b6Bc66Dd9c48a6E',
     '0xB31f66AA3C1e785363F0875A1B74E27b85FD66c7',
+    '0xB97EF9Ef8734C71904D8002F8b6Bc66Dd9c48a6E'
   ];
 
   static const listNFTAddressTestNet = [

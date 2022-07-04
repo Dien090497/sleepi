@@ -201,7 +201,7 @@ class Web3DataSource {
           ((DateTime.now().millisecond / 1000).floor() + 60 * 20) * 1000000000);
       Credentials credentials = EthPrivateKey.fromHex(privateKey);
 
-      approveToken(contractAddress, credentials);
+      // approveToken(contractAddress, credentials);
       final tx = await contract.swapExactTokensForAVAX(
         amountsOut[0],
         amountOutMin,
@@ -257,8 +257,8 @@ class Web3DataSource {
           ((DateTime.now().millisecond / 1000).floor() + 60 * 20) * 1000000000);
 
       Credentials credentials = EthPrivateKey.fromHex(privateKey);
-      approveToken(contractAddressFrom, credentials);
-      approveToken(avaxContractAddress, credentials);
+      // approveToken(contractAddressFrom, credentials);
+      // approveToken(avaxContractAddress, credentials);
       final tx = await contract.swapExactTokensForTokens(
         amounts[0],
         amountOutMin,

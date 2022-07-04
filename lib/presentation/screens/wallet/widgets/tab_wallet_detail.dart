@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -16,6 +18,7 @@ import 'package:slee_fi/entities/token/token_entity.dart';
 import 'package:slee_fi/l10n/locale_keys.g.dart';
 import 'package:slee_fi/presentation/blocs/wallet/wallet_cubit.dart';
 import 'package:slee_fi/presentation/blocs/wallet/wallet_state.dart';
+import 'package:slee_fi/presentation/screens/trade/trade_screen.dart';
 import 'package:slee_fi/presentation/screens/wallet/widgets/box_button_widget.dart';
 import 'package:slee_fi/presentation/screens/wallet/widgets/modal_receive_wallet.dart';
 import 'package:slee_fi/presentation/screens/wallet/widgets/pop_up_info_wallet.dart';
@@ -23,8 +26,22 @@ import 'package:slee_fi/presentation/screens/wallet/widgets/wallet_detail_list.d
 import 'package:slee_fi/resources/resources.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-class TabWalletDetail extends StatelessWidget {
+class TabWalletDetail extends StatefulWidget {
   const TabWalletDetail({Key? key}) : super(key: key);
+
+  @override
+  State<TabWalletDetail> createState() => _TabWalletDetailState();
+}
+
+class _TabWalletDetailState extends State<TabWalletDetail> {
+  late Timer timer;
+  int balance = 0;
+  String networkName = '';
+  String currencySymbol = '';
+  String addressWallet = '';
+  List<TokenEntity> tokenList = [];
+  late RefreshController refreshController =
+      RefreshController(initialRefresh: true);
 
   void _onRefresh(
       RefreshController refreshController, WalletCubit walletCubit) async {
@@ -33,31 +50,52 @@ class TabWalletDetail extends StatelessWidget {
   }
 
   @override
+  void dispose() {
+    timer.cancel();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     final walletCubit = context.read<WalletCubit>();
-    int balance = 0;
-    String networkName = '';
-    String currencySymbol = '';
-    String addressWallet = '';
-    List<TokenEntity> tokenList = [];
-    final RefreshController refreshController = RefreshController();
+    timer = Timer.periodic(
+      const Duration(seconds: 10),
+      (Timer timer) async {
+        if (!walletCubit.isClosed) {
+          await walletCubit.init();
+        } else {
+          timer.cancel();
+        }
+      },
+    );
     var isJapanese = Localizations.localeOf(context).toLanguageTag().isJapanese;
     return BlocBuilder<WalletCubit, WalletState>(
       builder: (context, state) {
+        if (state is! WalletStateLoading) {
+          refreshController.refreshCompleted();
+        }
         if (state is WalletStateLoaded && state.walletInfoEntity != null) {
           if (state.walletInfoEntity != null) {
+            refreshController = RefreshController(initialRefresh: false);
             balance = state.walletInfoEntity!.nativeCurrency.balance;
             addressWallet = state.walletInfoEntity!.address;
             currencySymbol = state.walletInfoEntity!.nativeCurrency.symbol;
             networkName = state.walletInfoEntity!.networkName;
             tokenList = state.tokenList;
+          } else {
+            refreshController = RefreshController(initialRefresh: true);
           }
         }
         return FocusDetector(
-          onFocusGained: () {
+          onFocusGained: () async {
             if (!walletCubit.isClosed) {
-              walletCubit.init();
+              await walletCubit.init();
+            } else {
+              timer.cancel();
             }
+          },
+          onFocusLost: () {
+            timer.cancel();
           },
           child: SmartRefresher(
             controller: refreshController,
@@ -133,7 +171,13 @@ class TabWalletDetail extends StatelessWidget {
                           Expanded(
                             child: BoxButtonWidget(
                               onTap: () {
-                                Navigator.pushNamed(context, R.trade);
+                                Navigator.pushNamed(
+                                  context,
+                                  R.trade,
+                                  arguments: TradeArguments(
+                                    Const.tokens[0]['address'].toString(),
+                                  ),
+                                );
                               },
                               text: LocaleKeys.trade
                                   .tr()
@@ -165,7 +209,8 @@ class TabWalletDetail extends StatelessWidget {
                                 }
                               },
                               style: ElevatedButton.styleFrom(
-                                padding: const EdgeInsets.fromLTRB(12, 8, 16, 8),
+                                padding:
+                                    const EdgeInsets.fromLTRB(12, 8, 16, 8),
                                 primary: AppColors.yellow.withOpacity(0.1),
                                 shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(100.0),
