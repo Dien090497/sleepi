@@ -17,17 +17,13 @@ class PasscodeCubit extends Cubit<PasscodeState> {
   }
 
   Future<void> checkPassCode(String pass) async {
-    'on check pass '.log;
     final result = await _validatePasscode.call(pass);
-    'on result $result'.log;
     result.fold(
       (l) {
-        'run to passcode error '.log;
         emit(PasscodeState.error(l is FailureMessage ? l.msg : '$l'));
         // emit(currentState.copyWith(isLoading: false));
       },
       (success) {
-        'on success $success'.log;
         if (success) {
           emit(const PasscodeState.valid());
         } else {
