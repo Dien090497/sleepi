@@ -47,7 +47,8 @@ import '../usecase/get_amount_out_min_usecase.dart' as _i57;
 import '../usecase/get_balance_for_tokens_usecase.dart' as _i58;
 import '../usecase/get_balance_token_usecase.dart' as _i59;
 import '../usecase/get_current_network_usecase.dart' as _i61;
-import '../usecase/get_nfts_usecase.dart' as _i62;
+import '../usecase/get_nfts_balance_usecase.dart' as _i62;
+import '../usecase/get_nfts_ids_usecase.dart' as _i63;
 import '../usecase/is_passcode_created_usecase.dart' as _i36;
 import '../usecase/login_usecase.dart' as _i37;
 import '../usecase/logout_usecase.dart' as _i38;
@@ -68,7 +69,7 @@ import '../usecase/wallet/current_wallet_usecase.dart' as _i56;
 import '../usecase/wallet/first_open_wallet_session_usecase.dart' as _i51;
 import '../usecase/wallet/get_current_mnemonic_usecasse.dart' as _i60;
 import '../usecase/wallet/import_wallet_usecase.dart' as _i35;
-import 'register_module.dart' as _i63; // ignore_for_file: unnecessary_lambdas
+import 'register_module.dart' as _i64; // ignore_for_file: unnecessary_lambdas
 
 // ignore_for_file: lines_longer_than_80_chars
 /// initializes the registration of provided dependencies inside of [GetIt]
@@ -187,11 +188,13 @@ Future<_i1.GetIt> $initGetIt(_i1.GetIt get,
       () => _i60.GetCurrentMnemonicUsecase(get<_i33.IWalletRepository>()));
   gh.factory<_i61.GetCurrentNetworkUseCase>(
       () => _i61.GetCurrentNetworkUseCase(get<_i33.IWalletRepository>()));
-  gh.factory<_i62.GetNFTsUseCase>(
-      () => _i62.GetNFTsUseCase(get<_i27.INFTRepository>()));
+  gh.factory<_i62.GetNFTsBalanceUseCase>(
+      () => _i62.GetNFTsBalanceUseCase(get<_i27.INFTRepository>()));
+  gh.factory<_i63.GetNFTsIDsUseCase>(
+      () => _i63.GetNFTsIDsUseCase(get<_i27.INFTRepository>()));
   return get;
 }
 
 class _$RPCModule extends _i24.RPCModule {}
 
-class _$RegisterModule extends _i63.RegisterModule {}
+class _$RegisterModule extends _i64.RegisterModule {}

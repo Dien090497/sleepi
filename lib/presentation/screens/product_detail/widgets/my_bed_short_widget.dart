@@ -1,19 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:slee_fi/common/enum/enum.dart';
 import 'package:slee_fi/common/extensions/enum_x.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
+import 'package:slee_fi/common/widgets/sf_icon.dart';
 import 'package:slee_fi/common/widgets/sf_percent_border.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
 import 'package:slee_fi/presentation/screens/product_detail/widgets/top_left_banner.dart';
 
 class MyBedShortWidget extends StatelessWidget {
-  const MyBedShortWidget({Key? key, required this.bedType}) : super(key: key);
+  const MyBedShortWidget({Key? key, required this.bedType, required this.bedId})
+      : super(key: key);
 
   // final int index;
   final BedType bedType;
+  final BigInt bedId;
 
   @override
   Widget build(BuildContext context) {
@@ -27,10 +29,10 @@ class MyBedShortWidget extends StatelessWidget {
         clipBehavior: Clip.hardEdge,
         children: [
           Positioned(
-            top: 14,
+            top: 18,
             left: -30,
             child: TopLeftBanner(
-              text: bedType.name,
+              text: bedType.type,
               textColor: bedType.color,
             ),
           ),
@@ -39,7 +41,7 @@ class MyBedShortWidget extends StatelessWidget {
             child: Column(
               children: [
                 const Spacer(),
-                SvgPicture.asset(bedType.image, color: AppColors.blue),
+                SFIcon(bedType.image),
                 SizedBox(height: 24.h),
                 Container(
                   decoration: BoxDecoration(
@@ -49,7 +51,7 @@ class MyBedShortWidget extends StatelessWidget {
                   padding:
                       const EdgeInsets.symmetric(vertical: 5, horizontal: 16),
                   child: SFText(
-                    keyText: "A2342",
+                    keyText: "$bedId",
                     style: TextStyles.white1w700size12,
                   ),
                 ),

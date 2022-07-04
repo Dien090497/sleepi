@@ -4,14 +4,14 @@ import 'package:slee_fi/failures/failure.dart';
 import 'package:slee_fi/repository/nft_repository.dart';
 import 'package:slee_fi/usecase/usecase.dart';
 
-class GetNFTsUseCase extends UseCase<List<NFTEntity>, GetNFTsParams> {
+class GetNFTsBalanceUseCase extends UseCase<List<NFTEntity>, GetNFTsParams> {
   final INFTRepository _nftRepo;
 
-  GetNFTsUseCase(this._nftRepo);
+  GetNFTsBalanceUseCase(this._nftRepo);
 
   @override
   Future<Either<Failure, List<NFTEntity>>> call(GetNFTsParams params) {
-    return _nftRepo.getNFTs(params.addresses, params.ownerAddress);
+    return _nftRepo.balanceOf(params.addresses, params.ownerAddress);
   }
 }
 

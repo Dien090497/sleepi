@@ -10,7 +10,7 @@ import 'package:slee_fi/failures/failure.dart';
 import 'package:slee_fi/l10n/locale_keys.g.dart';
 import 'package:slee_fi/resources/resources.dart';
 import 'package:slee_fi/usecase/get_balance_for_tokens_usecase.dart';
-import 'package:slee_fi/usecase/get_nfts_usecase.dart';
+import 'package:slee_fi/usecase/get_nfts_balance_usecase.dart';
 import 'package:slee_fi/usecase/usecase.dart';
 import 'package:slee_fi/usecase/wallet/current_wallet_usecase.dart';
 import 'package:slee_fi/usecase/wallet/first_open_wallet_session_usecase.dart';
@@ -24,7 +24,7 @@ class WalletCubit extends Cubit<WalletState> {
   final _currentWalletUC = getIt<CurrentWalletUseCase>();
 
   final _getBalanceForTokensUseCase = getIt<GetBalanceForTokensUseCase>();
-  final _getNFTsUC = getIt<GetNFTsUseCase>();
+  final _getNFTsBalanceUC = getIt<GetNFTsBalanceUseCase>();
 
   Future<void> init() async {
     emit(const WalletState.loading());
@@ -77,7 +77,7 @@ class WalletCubit extends Cubit<WalletState> {
       }
       final results = await Future.wait([
         _getBalanceForTokensUseCase.call(params),
-        _getNFTsUC.call(nfTsParams),
+        _getNFTsBalanceUC.call(nfTsParams),
       ]);
       final Either<Failure, List<double>> tokenBalanceRes = cast(results.first);
       final Either<Failure, List<NFTEntity>> nftBalanceRes = cast(results.last);
