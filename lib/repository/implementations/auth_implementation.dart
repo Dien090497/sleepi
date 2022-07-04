@@ -4,6 +4,7 @@ import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
 import 'package:slee_fi/common/extensions/string_x.dart';
+import 'package:slee_fi/datasources/local/get_storage_datasource.dart';
 import 'package:slee_fi/datasources/local/isar/isar_datasource.dart';
 import 'package:slee_fi/datasources/local/secure_storage.dart';
 import 'package:slee_fi/datasources/remote/auth_datasource/auth_datasource.dart';
@@ -14,12 +15,12 @@ import 'package:slee_fi/models/create_password_schema/create_password_schema.dar
 import 'package:slee_fi/models/send_email_response/send_email_response.dart';
 import 'package:slee_fi/models/setting_active_code_response/setting_active_code_response.dart';
 import 'package:slee_fi/models/sign_in_response/sign_in_response.dart';
-import 'package:slee_fi/models/sign_in_schema/sign_in_schema.dart';
 import 'package:slee_fi/models/sign_up_schema/sign_up_schema.dart';
 import 'package:slee_fi/models/user/user_info_model.dart';
 import 'package:slee_fi/models/user_response/user_response.dart';
 import 'package:slee_fi/models/verify_schema/verify_schema.dart';
 import 'package:slee_fi/repository/auth_repository.dart';
+import 'package:slee_fi/schema/sign_in_schema/sign_in_schema.dart';
 import 'package:slee_fi/usecase/send_otp_mail_usecase.dart';
 
 @Injectable(as: IAuthRepository)
@@ -27,9 +28,10 @@ class AuthImplementation extends IAuthRepository {
   final SecureStorage _secureStorage;
   final AuthDataSource _authDataSource;
   final IsarDataSource _isarDataSource;
+  final GetStorageDataSource _getStorageDataSource;
 
-  AuthImplementation(
-      this._secureStorage, this._authDataSource, this._isarDataSource);
+  AuthImplementation(this._secureStorage, this._authDataSource,
+      this._isarDataSource, this._getStorageDataSource);
 
   @override
   Future<Either<Failure, bool>> createPassCode(String passcode) async {
@@ -110,6 +112,7 @@ class AuthImplementation extends IAuthRepository {
       await Future.wait([
         _secureStorage.clearStorage(),
         _isarDataSource.clearWallet(),
+        _getStorageDataSource.clearAll(),
       ]);
       return const Right(true);
     } catch (e) {

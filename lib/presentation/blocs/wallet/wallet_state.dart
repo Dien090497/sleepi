@@ -10,11 +10,11 @@ class WalletState with _$WalletState {
 
   const factory WalletState.loading() = WalletStateLoading;
 
-  const factory WalletState.loaded(
-      {required WalletInfoEntity? walletInfoEntity,
-      required bool firstOpenWallet,
-      required List<TokenEntity> tokenList,
-      @Default('') String mnemonic}) = WalletStateLoaded;
+  const factory WalletState.loaded({
+    required WalletInfoEntity? walletInfoEntity,
+    required bool firstOpenWallet,
+    required List<TokenEntity> tokenList,
+  }) = WalletStateLoaded;
 
   const factory WalletState.empty() = WalletStateEmpty;
 

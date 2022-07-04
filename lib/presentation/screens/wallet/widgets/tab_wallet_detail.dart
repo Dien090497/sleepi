@@ -23,23 +23,18 @@ import 'package:slee_fi/presentation/screens/wallet/widgets/wallet_detail_list.d
 import 'package:slee_fi/resources/resources.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-class TabWalletDetail extends StatefulWidget {
-  const TabWalletDetail({Key? key, required this.walletCubit})
-      : super(key: key);
-  final WalletCubit walletCubit;
+class TabWalletDetail extends StatelessWidget {
+  const TabWalletDetail({Key? key}) : super(key: key);
 
-  @override
-  State<TabWalletDetail> createState() => _TabWalletDetailState();
-}
-
-class _TabWalletDetailState extends State<TabWalletDetail> {
-  void _onRefresh(RefreshController refreshController, cubit) async {
-    await cubit.init();
+  void _onRefresh(
+      RefreshController refreshController, WalletCubit walletCubit) async {
+    await walletCubit.init();
     refreshController.refreshCompleted();
   }
 
   @override
   Widget build(BuildContext context) {
+    final walletCubit = context.read<WalletCubit>();
     int balance = 0;
     String networkName = '';
     String currencySymbol = '';
@@ -47,170 +42,159 @@ class _TabWalletDetailState extends State<TabWalletDetail> {
     List<TokenEntity> tokenList = [];
     final RefreshController refreshController = RefreshController();
     var isJapanese = Localizations.localeOf(context).toLanguageTag().isJapanese;
-    return BlocProvider(
-      create: (context) => widget.walletCubit,
-      child: BlocBuilder<WalletCubit, WalletState>(
-        bloc: widget.walletCubit,
-        builder: (context, state) {
-          final cubit = context.read<WalletCubit>();
-          if (state is WalletStateLoaded && state.walletInfoEntity != null) {
-            if(state.walletInfoEntity !=null) {
-              balance = state.walletInfoEntity!.nativeCurrency.balance;
-              addressWallet = state.walletInfoEntity!.address;
-              currencySymbol = state.walletInfoEntity!.nativeCurrency.symbol;
-              networkName = state.walletInfoEntity!.networkName;
-              tokenList = state.tokenList;
-            }
+    return BlocBuilder<WalletCubit, WalletState>(
+      builder: (context, state) {
+        if (state is WalletStateLoaded && state.walletInfoEntity != null) {
+          if (state.walletInfoEntity != null) {
+            balance = state.walletInfoEntity!.nativeCurrency.balance;
+            addressWallet = state.walletInfoEntity!.address;
+            currencySymbol = state.walletInfoEntity!.nativeCurrency.symbol;
+            networkName = state.walletInfoEntity!.networkName;
+            tokenList = state.tokenList;
           }
-          return FocusDetector(
-            onFocusGained: () {
-              if(!cubit.isClosed) {
-                cubit.init();
-              }
+        }
+        return FocusDetector(
+          onFocusGained: () {
+            if (!walletCubit.isClosed) {
+              walletCubit.init();
+            }
+          },
+          child: SmartRefresher(
+            controller: refreshController,
+            enablePullDown: true,
+            header: const WaterDropHeader(),
+            onRefresh: () {
+              _onRefresh(refreshController, walletCubit);
             },
-            child: SmartRefresher(
-              controller: refreshController,
-              enablePullDown: true,
-              header: const WaterDropHeader(),
-              onRefresh: () {
-                _onRefresh(refreshController, cubit);
-              },
-              child: SingleChildScrollView(
-                child: Column(
-                  children: [
-                    const SizedBox(height: 32),
-                    Column(
-                      children: [
-                        SFText(
-                            keyText: networkName, style: TextStyles.bold12Blue),
-                        const SizedBox(height: 4.0),
-                        SFText(
-                            keyText: '${balance.formatBalance} $currencySymbol',
-                            style: TextStyles.bold30White),
-                        const SizedBox(height: 20.0),
-                        Container(
-                          padding: const EdgeInsets.symmetric(
-                              vertical: 6.0, horizontal: 16.0),
-                          margin: const EdgeInsets.symmetric(horizontal: 16),
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(20.0),
-                            color: AppColors.lightWhite.withOpacity(0.05),
-                          ),
-                          child: SFText(
-                              keyText: addressWallet.formatAddress,
-                              style: TextStyles.lightWhite14),
-                        ),
-                        const SizedBox(height: 16.0),
-                        ConstrainedBox(
-                          constraints: const BoxConstraints(maxHeight: 130),
-                          child: Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 23),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                              children: [
-                                Expanded(
-                                  child: BoxButtonWidget(
-                                    onTap: () => SFModalBottomSheet.show(
-                                        context,
-                                        0.7,
-                                        ModalReceiveWallet(
-                                          networkName: networkName,
-                                          address: addressWallet,
-                                        )),
-                                    text: LocaleKeys.receive,
-                                    assetImage: Ics.icDownload,
-                                  ),
-                                ),
-                                const SizedBox(width: 10),
-                                Expanded(
-                                  child: BoxButtonWidget(
-                                    onTap: () => Navigator.pushNamed(
-                                        context, R.transfer),
-                                    text: LocaleKeys.to_spending,
-                                    assetImage: Ics.icRefresh,
-                                  ),
-                                ),
-                                const SizedBox(width: 10),
-                                Expanded(
-                                  child: BoxButtonWidget(
-                                    onTap: () => Navigator.pushNamed(
-                                        context, R.sendToExternal),
-                                    text: LocaleKeys.to_external,
-                                    assetImage: Ics.icArrowUpRight,
-                                  ),
-                                ),
-                                const SizedBox(width: 10),
-                                Expanded(
-                                  child: BoxButtonWidget(
-                                    onTap: () {
-                                      Navigator.pushNamed(context, R.trade);
-                                    },
-                                    text: LocaleKeys.trade
-                                        .tr()
-                                        .reCase(StringCase.titleCase),
-                                    assetImage: Ics.icTransfer,
-                                  ),
-                                ),
-                              ],
+            child: SingleChildScrollView(
+              child: Column(
+                children: [
+                  const SizedBox(height: 32),
+                  SFText(keyText: networkName, style: TextStyles.bold12Blue),
+                  const SizedBox(height: 4.0),
+                  SFText(
+                      keyText: '${balance.formatBalance} $currencySymbol',
+                      style: TextStyles.bold30White),
+                  const SizedBox(height: 20.0),
+                  Container(
+                    padding: const EdgeInsets.symmetric(
+                        vertical: 6.0, horizontal: 16.0),
+                    margin: const EdgeInsets.symmetric(horizontal: 16),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(20.0),
+                      color: AppColors.lightWhite.withOpacity(0.05),
+                    ),
+                    child: SFText(
+                        keyText: addressWallet.formatAddress,
+                        style: TextStyles.lightWhite14),
+                  ),
+                  const SizedBox(height: 16.0),
+                  ConstrainedBox(
+                    constraints: const BoxConstraints(maxHeight: 130),
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 23),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          Expanded(
+                            child: BoxButtonWidget(
+                              onTap: () => SFModalBottomSheet.show(
+                                  context,
+                                  0.7,
+                                  ModalReceiveWallet(
+                                    networkName: networkName,
+                                    address: addressWallet,
+                                  )),
+                              text: LocaleKeys.receive,
+                              assetImage: Ics.icDownload,
                             ),
                           ),
-                        ),
-                      ],
-                    ),
-                    const SizedBox(height: 20.0),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 12.0),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          const PopupInfoWallet(),
-                          ElevatedButton(
-                              onPressed: () async {
-                                var url = isJapanese
-                                    ? Const.okCoinUrl
-                                    : Const.binanceUrl;
-                                final uri = Uri.parse(url);
-                                if (await canLaunchUrl(uri)) {
-                                  launchUrl(uri);
-                                }
+                          const SizedBox(width: 10),
+                          Expanded(
+                            child: BoxButtonWidget(
+                              onTap: () =>
+                                  Navigator.pushNamed(context, R.transfer),
+                              text: LocaleKeys.to_spending,
+                              assetImage: Ics.icRefresh,
+                            ),
+                          ),
+                          const SizedBox(width: 10),
+                          Expanded(
+                            child: BoxButtonWidget(
+                              onTap: () => Navigator.pushNamed(
+                                  context, R.sendToExternal),
+                              text: LocaleKeys.to_external,
+                              assetImage: Ics.icArrowUpRight,
+                            ),
+                          ),
+                          const SizedBox(width: 10),
+                          Expanded(
+                            child: BoxButtonWidget(
+                              onTap: () {
+                                Navigator.pushNamed(context, R.trade);
                               },
-                              style: ElevatedButton.styleFrom(
-                                padding:
-                                    const EdgeInsets.fromLTRB(12, 8, 16, 8),
-                                primary: AppColors.yellow.withOpacity(0.1),
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(100.0),
-                                ),
-                              ),
-                              child: Row(
-                                children: [
-                                  SFIcon(
-                                    isJapanese ? Ics.okcoin : Imgs.binance,
-                                    width: 24,
-                                  ),
-                                  const SizedBox(width: 8.0),
-                                  SFText(
-                                    keyText: LocaleKeys.buy,
-                                    style: isJapanese
-                                        ? TextStyles.bold14Blue
-                                        : TextStyles.bold14Yellow,
-                                  )
-                                ],
-                              )),
+                              text: LocaleKeys.trade
+                                  .tr()
+                                  .reCase(StringCase.titleCase),
+                              assetImage: Ics.icTransfer,
+                            ),
+                          ),
                         ],
                       ),
                     ),
-                    const SizedBox(height: 12.0),
-                    WalletDetailList(
-                      tokenList: tokenList,
-                    )
-                  ],
-                ),
+                  ),
+                  const SizedBox(height: 20.0),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 12.0),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        const PopupInfoWallet(),
+                        ElevatedButton(
+                            onPressed: () async {
+                              var url = isJapanese
+                                  ? Const.okCoinUrl
+                                  : Const.binanceUrl;
+                              final uri = Uri.parse(url);
+                              if (await canLaunchUrl(uri)) {
+                                launchUrl(uri);
+                              }
+                            },
+                            style: ElevatedButton.styleFrom(
+                              padding: const EdgeInsets.fromLTRB(12, 8, 16, 8),
+                              primary: AppColors.yellow.withOpacity(0.1),
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(100.0),
+                              ),
+                            ),
+                            child: Row(
+                              children: [
+                                SFIcon(
+                                  isJapanese ? Ics.okcoin : Imgs.binance,
+                                  width: 24,
+                                ),
+                                const SizedBox(width: 8.0),
+                                SFText(
+                                  keyText: LocaleKeys.buy,
+                                  style: isJapanese
+                                      ? TextStyles.bold14Blue
+                                      : TextStyles.bold14Yellow,
+                                )
+                              ],
+                            )),
+                      ],
+                    ),
+                  ),
+                  const SizedBox(height: 12.0),
+                  WalletDetailList(
+                    tokenList: tokenList,
+                  )
+                ],
               ),
             ),
-          );
-        },
-      ),
+          ),
+        );
+      },
     );
   }
 }
