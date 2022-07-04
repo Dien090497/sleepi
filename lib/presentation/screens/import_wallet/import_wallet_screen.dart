@@ -1,4 +1,3 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:slee_fi/common/extensions/string_x.dart';
@@ -88,11 +87,7 @@ class ImportWalletScreen extends StatelessWidget {
                                                   : ''),
                                       const SizedBox(height: 20),
                                       SFTextField(
-                                        ///todo: remove example
-                                        controller: TextEditingController(
-                                            text: kDebugMode
-                                                ? 'blind later more near guide door mystery cheap gap clip address appear'
-                                                : ''), labelText: LocaleKeys.seed_phrase,
+                                        labelText: LocaleKeys.seed_phrase,
                                         hintText: LocaleKeys
                                             .enter_the_seed_phrase_word,
                                         hintStyle: TextStyles.w400lightGrey12,

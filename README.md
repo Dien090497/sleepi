@@ -200,4 +200,12 @@ flutter pub run easy_localization:generate -S assets/translations -s en-US.json 
 
 ```terminal
 xcrun simctl erase all
+
+flutter pub run dart_code_metrics:metrics analyze lib
+
+flutter pub run dart_code_metrics:metrics check-unused-files lib
+
+flutter pub run dart_code_metrics:metrics check-unused-l10n lib
+
+flutter pub run dart_code_metrics:metrics check-unused-code lib
 ```

@@ -138,15 +138,16 @@ class _SendToExternalScreenState extends State<SendToExternalScreen> {
                                               : Ics.icAvax)),
                                       onChanged: (v) {
                                         if (v.isNotEmpty) {
-                                          cubit.valueInEther = double.parse(v);
-                                          valueInEther = double.parse(v);
+                                          final result = v.toString().replaceAll(',', '.');
+                                          cubit.valueInEther = double.parse(result);
+                                          valueInEther = double.parse(result);
                                         }
                                       }),
                                   SFText(
                                       keyText: LocaleKeys.balance,
                                       style: TextStyles.w400lightGrey12,
                                       suffix:
-                                          ': ${args != null ? args.tokenEntity?.balance.formatBalance : balance.formatBalance} ${args != null ? args.symbol : "AVAX"}'),
+                                          ': ${args != null ? args.tokenEntity?.balance.formatBalanceToken : balance.toStringAsFixed(6)} ${args != null ? args.symbol : "AVAX"}'),
                                 ],
                               ),
                             ),

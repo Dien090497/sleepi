@@ -81,23 +81,27 @@ class WalletCubit extends Cubit<WalletState> {
       ]);
       final Either<Failure, List<double>> tokenBalanceRes = cast(results.first);
       final Either<Failure, List<NFTEntity>> nftBalanceRes = cast(results.last);
-      List keyList = [
+      final List keyList = [
         "SLFT",
         "SLGT",
         "AVAX",
+      ];
+      final List nftNames = [
         LocaleKeys.beds.tr(),
         LocaleKeys.jewels.tr(),
         LocaleKeys.bed_box.tr(),
         LocaleKeys.item.tr(),
       ];
-      List icons = [
+      final List icons = [
         Ics.icSlft,
         Ics.icSlgt,
         Ics.icAvax,
-        Ics.icBeds,
-        Ics.icJewels,
+      ];
+      final List nftIcons = [
+        Ics.bed,
+        Ics.jewel,
         Ics.icBedBoxes,
-        Imgs.icItems
+        Ics.item,
       ];
       final tokenList = <TokenEntity>[];
       final values = tokenBalanceRes.getOrElse(() => []);
@@ -116,10 +120,10 @@ class WalletCubit extends Cubit<WalletState> {
       for (int i = 0; i < nfts.length; i++) {
         final tokenEntity = TokenEntity(
           address: nfTsParams.addresses[i],
-          displayName: keyList[i],
-          name: keyList[i],
-          symbol: keyList[i],
-          icon: icons[i],
+          displayName: nftNames[i],
+          name: nftNames[i],
+          symbol: nftNames[i],
+          icon: nftIcons[i],
           balance: nfts[i].balance.toDouble(),
         );
         tokenList.add(tokenEntity);
