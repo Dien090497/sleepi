@@ -57,7 +57,7 @@ extension StringX on String {
       return LocaleKeys.this_field_is_required.tr();
     }
     if (length < 6) {
-      return LocaleKeys.password_must_be_at_least_6;
+      return LocaleKeys.password_must_be_at_least_6.tr();
     }
     return '';
   }
@@ -82,6 +82,11 @@ extension StringX on String {
       return LocaleKeys.this_field_is_required.tr();
     }
     if (length < 6) {
+      return LocaleKeys.invalid_code.tr();
+    }
+    try {
+      int.parse(this);
+    } catch (_) {
       return LocaleKeys.invalid_code.tr();
     }
     return '';

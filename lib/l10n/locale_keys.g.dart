@@ -393,6 +393,7 @@ abstract class  LocaleKeys {
   static const warning_create_wallet = 'warning_create_wallet';
   static const incorrect_passcode = 'incorrect_passcode';
   static const reset_passcode_successfully = 'reset_passcode_successfully';
+  static const reset_password_successfully = 'reset_password_successfully';
   static const invalid_mnemonic_please_try_again = 'invalid_mnemonic_please_try_again';
   static const this_field_is_required = 'this_field_is_required';
   static const please_enter_email = 'please_enter_email';

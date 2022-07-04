@@ -16,8 +16,6 @@ class CreatePasswordState with _$CreatePasswordState{
 
   const factory CreatePasswordState.success(bool isFirstOpenApp) = CreatePasswordStateSuccess;
 
-
-
-
+  const factory CreatePasswordState.changePasswordSuccess() = CreatePasswordStateChangePasswrodSuccess;
 
 }

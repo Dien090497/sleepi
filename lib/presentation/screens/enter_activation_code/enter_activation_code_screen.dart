@@ -72,7 +72,7 @@ class EnterActivationCodeScreen extends StatelessWidget {
                                 _nexStep(
                                     context,
                                     CreatePasswordArg(state.activationCode,
-                                        arg.otp, arg.userInfoModel));
+                                        arg.otp, arg.userInfoModel, true));
                               }
                             },
                             builder: (context, state) {
@@ -139,7 +139,11 @@ class EnterActivationCodeScreen extends StatelessWidget {
                                     _nexStep(
                                         context,
                                         CreatePasswordArg(
-                                            '', arg.otp, arg.userInfoModel));
+                                          '',
+                                          arg.otp,
+                                          arg.userInfoModel,
+                                          true,
+                                        ));
                                   }
                                 },
                                 width: MediaQuery.of(context).size.width,

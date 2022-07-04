@@ -84,7 +84,7 @@ class _SFTextFieldPasswordState extends State<SFTextFieldPassword> {
                 });
               },
               child: Padding(
-                padding: const EdgeInsets.all(10),
+                padding: const EdgeInsets.all(8),
                 child: obscureText
                     ? const SFIcon(
                         Ics.icEye,
@@ -100,6 +100,7 @@ class _SFTextFieldPasswordState extends State<SFTextFieldPassword> {
             ),
             border: border,
             focusedBorder: border,
+
             disabledBorder: border,
             enabledBorder: border,
             errorBorder: border,
@@ -108,9 +109,11 @@ class _SFTextFieldPasswordState extends State<SFTextFieldPassword> {
           maxLines: widget.maxLine ?? 1,
           maxLength: widget.maxLength,
         ),
-        const SizedBox(height: 8),
-        if (widget.errorText != '')
-          Text(widget.errorText, style: TextStyles.w400Red12),
+         const SizedBox(height: 4),
+         SizedBox(
+           height: 30,
+           child:   Text(widget.errorText, style: TextStyles.w400Red12,maxLines: 2,),
+         ),
       ],
     );
   }

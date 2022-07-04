@@ -17,6 +17,8 @@ class SignInSignUpState with _$SignInSignUpState {
 
   const factory SignInSignUpState.signInSuccess(bool isFirstOpenApp) = SignInSignUpStateSignInSuccess;
 
+  const factory SignInSignUpState.verifyOTPSuccess(int otp, String email) = SignInSignUpStateVerifySuccess;
+
 
 
 }
