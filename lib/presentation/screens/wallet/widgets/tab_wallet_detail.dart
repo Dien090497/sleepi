@@ -113,7 +113,8 @@ class TabWalletDetail extends StatelessWidget {
                           Expanded(
                             child: BoxButtonWidget(
                               onTap: () {
-                                Navigator.pushNamed(context, R.transfer, arguments: tokenList[2]);
+                                Navigator.pushNamed(context, R.transfer,
+                                    arguments: tokenList[2]);
                               },
                               text: LocaleKeys.to_spending,
                               assetImage: Ics.icRefresh,
@@ -187,9 +188,7 @@ class TabWalletDetail extends StatelessWidget {
                     ),
                   ),
                   const SizedBox(height: 12.0),
-                  WalletDetailList(
-                    tokenList: tokenList,
-                  )
+                  WalletDetailList(tokenList: tokenList)
                 ],
               ),
             ),
