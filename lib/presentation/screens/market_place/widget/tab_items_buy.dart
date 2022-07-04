@@ -1,5 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:slee_fi/common/enum/enum.dart';
 import 'package:slee_fi/common/utils/random_utils.dart';
@@ -10,6 +11,8 @@ import 'package:slee_fi/common/widgets/sf_gridview.dart';
 import 'package:slee_fi/common/widgets/sf_icon.dart';
 import 'package:slee_fi/di/injector.dart';
 import 'package:slee_fi/l10n/locale_keys.g.dart';
+import 'package:slee_fi/presentation/blocs/market_place/market_place_cubit.dart';
+import 'package:slee_fi/presentation/blocs/market_place/market_place_state.dart';
 import 'package:slee_fi/presentation/screens/market_place/widget/filter_sheet.dart';
 import 'package:slee_fi/presentation/screens/market_place/widget/item_bed_buy_widget.dart';
 import 'package:slee_fi/presentation/screens/market_place/widget/pop_up_item_market_place.dart';
@@ -43,7 +46,14 @@ class TabItemsBuy extends StatelessWidget {
 
     return DefaultTabController(
       length: 2,
-      child: Column(
+      child: BlocProvider(
+  create: (context) =>  MarketPlaceCubit()..getMarketPlace(),
+  child: BlocConsumer<MarketPlaceCubit, MarketPlaceState>(
+  listener: (context, state) {
+    // TODO: implement listener
+  },
+  builder: (context, state) {
+    return Column(
         children: [
           TabBarFilter(
             tabTexts: const [LocaleKeys.buy, LocaleKeys.rent],
@@ -111,7 +121,10 @@ class TabItemsBuy extends StatelessWidget {
             ),
           ),
         ],
-      ),
+      );
+  },
+),
+),
     );
   }
 }
