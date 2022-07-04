@@ -98,6 +98,11 @@ class _TransferListState extends State<TransferList> {
                         textInputType: const TextInputType.numberWithOptions(decimal: true),
                         controller: controller,
                       ),
+                      if(state is TransferSpendingStateError)
+                        SFText(
+                        keyText: state.message,
+                        style: TextStyles.red14,
+                      ),
                       const SizedBox(height: 8.0),
                       SFText(
                         keyText: "${LocaleKeys.available.tr()} : ${widget.tokenEntity?.balance.toStringAsFixed(2)} ${widget.tokenEntity?.name.toUpperCase()}",

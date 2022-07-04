@@ -39,6 +39,7 @@ extension NumX on num {
       return balance.substring(0, index);
     }
   }
+
   String get formatDoubleBalance {
     if(this==0){
       return 0.toStringAsFixed(6);
@@ -51,6 +52,48 @@ extension NumX on num {
         index = balance.length - 1;
       }
       return balance.substring(0, index);
+    }
+  }
+
+  String get formatBalanceWallet {
+    if(this==0){
+      return 0.toStringAsFixed(2);
+    }else {
+      var balance = toDouble();
+
+      balance = (this / pow(10, 18));
+      if (balance % 1 == 0) {
+        return balance.toStringAsFixed(0);
+      } else {
+        int index = balance.toString().indexOf('.');
+        if (balance.toString().length - index > 7) {
+          index += 7;
+        } else {
+          index = balance.toString().length - 1;
+        }
+        return balance.toString().substring(0, index);
+      }
+
+    }
+  }
+
+  String get formatBalanceToken {
+    if(this==0){
+      return 0.toStringAsFixed(2);
+    }else {
+      var balance = toDouble();
+      if (balance % 1 == 0) {
+        return balance.toStringAsFixed(0);
+      } else {
+        int index = balance.toString().indexOf('.');
+        if (balance.toString().length - index > 7) {
+          index += 7;
+        } else {
+          index = balance.toString().length - 1;
+        }
+        return balance.toString().substring(0, index);
+      }
+
     }
   }
 }
