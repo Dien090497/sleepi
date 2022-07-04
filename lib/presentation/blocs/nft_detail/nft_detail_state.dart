@@ -16,6 +16,7 @@ class NftDetailState with _$NftDetailState {
     required WalletInfoEntity walletInfoEntity,
     required TokenEntity tokenEntity,
     required List<BigInt> nftIds,
+    required bool hasMore,
   }) = NftDetailLoaded;
 
   const factory NftDetailState.error(String msg) = NftDetailError;

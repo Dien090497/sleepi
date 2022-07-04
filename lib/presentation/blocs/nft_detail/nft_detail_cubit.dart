@@ -11,13 +11,13 @@ class NftDetailCubit extends Cubit<NftDetailState> {
 
   final _getNFTsIDsUC = getIt<GetNFTsIDsUseCase>();
 
-  void init() async {
+  Future<void> init() async {
     final currentState = state;
     if (currentState is NftDetailInitial) {
       final result = await _getNFTsIDsUC.call(GetNFTsIDsParams(
         nftAddress: currentState.tokenEntity.address,
         ownerAddress: currentState.walletInfoEntity.address,
-        count: currentState.tokenEntity.balance.toInt(),
+        count: 30,
       ));
       result.fold(
         (l) {
@@ -26,9 +26,61 @@ class NftDetailCubit extends Cubit<NftDetailState> {
         },
         (r) {
           emit(NftDetailState.loaded(
-              walletInfoEntity: currentState.walletInfoEntity,
-              tokenEntity: currentState.tokenEntity,
-              nftIds: r));
+            walletInfoEntity: currentState.walletInfoEntity,
+            tokenEntity: currentState.tokenEntity,
+            nftIds: r,
+            hasMore: currentState.tokenEntity.balance > r.length,
+          ));
+        },
+      );
+    }
+  }
+
+  Future<void> refresh() async {
+    final currentState = state;
+    if (currentState is NftDetailLoaded) {
+      final result = await _getNFTsIDsUC.call(GetNFTsIDsParams(
+        nftAddress: currentState.tokenEntity.address,
+        ownerAddress: currentState.walletInfoEntity.address,
+        count: 30,
+      ));
+      result.fold(
+        (l) {
+          emit(NftDetailState.error('$l'));
+          emit(currentState);
+        },
+        (r) {
+          emit(NftDetailState.loaded(
+            walletInfoEntity: currentState.walletInfoEntity,
+            tokenEntity: currentState.tokenEntity,
+            nftIds: r,
+            hasMore: currentState.tokenEntity.balance > r.length,
+          ));
+        },
+      );
+    }
+  }
+
+  Future<void> loadMore() async {
+    final currentState = state;
+    if (currentState is NftDetailLoaded) {
+      final result = await _getNFTsIDsUC.call(GetNFTsIDsParams(
+        nftAddress: currentState.tokenEntity.address,
+        ownerAddress: currentState.walletInfoEntity.address,
+        count: 30,
+        start: currentState.nftIds.length,
+      ));
+      result.fold(
+        (l) {
+          emit(NftDetailState.error('$l'));
+          emit(currentState);
+        },
+        (r) {
+          final newList = List<BigInt>.from(currentState.nftIds)..addAll(r);
+          emit(currentState.copyWith(
+            nftIds: newList,
+            hasMore: newList.length < currentState.tokenEntity.balance,
+          ));
         },
       );
     }

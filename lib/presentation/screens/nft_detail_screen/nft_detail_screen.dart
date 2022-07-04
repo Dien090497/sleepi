@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:slee_fi/common/enum/enum.dart';
 import 'package:slee_fi/common/extensions/string_x.dart';
 import 'package:slee_fi/common/routes/app_routes.dart';
@@ -26,8 +27,9 @@ import 'package:slee_fi/resources/resources.dart';
 
 class NFTDetailArguments {
   final TokenEntity tokenEntity;
+  final WalletCubit walletCubit;
 
-  NFTDetailArguments(this.tokenEntity);
+  NFTDetailArguments(this.tokenEntity, this.walletCubit);
 }
 
 class NFTDetailScreen extends StatelessWidget {
@@ -38,10 +40,10 @@ class NFTDetailScreen extends StatelessWidget {
     final args =
         ModalRoute.of(context)?.settings.arguments as NFTDetailArguments;
     final token = args.tokenEntity;
-
-    final walletState = context.read<WalletCubit>().state as WalletStateLoaded;
+    final refreshController = RefreshController();
 
     return BlocBuilder<WalletCubit, WalletState>(
+      bloc: args.walletCubit,
       builder: (context, walletState) {
         if (walletState is WalletStateLoaded &&
             walletState.walletInfoEntity != null) {
@@ -77,6 +79,7 @@ class NFTDetailScreen extends StatelessWidget {
                     stringCase: StringCase.titleCase,
                   )),
               child: BlocBuilder<NftDetailCubit, NftDetailState>(
+                buildWhen: (prev, cur) => cur is! NftDetailError,
                 builder: (context, state) {
                   final List<Widget> children = [
                     const SizedBox(width: 16),
@@ -156,12 +159,29 @@ class NFTDetailScreen extends StatelessWidget {
                       ),
                   ];
 
-                  return ListView.builder(
-                    itemCount: children.length,
-                    shrinkWrap: true,
-                    itemBuilder: (context, i) {
-                      return children[i];
+                  final nftCubit = context.read<NftDetailCubit>();
+
+                  return SmartRefresher(
+                    controller: refreshController,
+                    enablePullUp: state is NftDetailLoaded && state.hasMore,
+                    enablePullDown: state is NftDetailLoaded,
+                    onRefresh: () {
+                      nftCubit.refresh().then((_) {
+                        refreshController.refreshCompleted();
+                      });
                     },
+                    onLoading: () {
+                      nftCubit.loadMore().then((_) {
+                        refreshController.loadComplete();
+                      });
+                    },
+                    child: ListView.builder(
+                      itemCount: children.length,
+                      shrinkWrap: true,
+                      itemBuilder: (context, i) {
+                        return children[i];
+                      },
+                    ),
                   );
                 },
               ),
