@@ -41,7 +41,7 @@ class GlobalWalletCubit extends Cubit<GlobalWalletState> {
       //     message: 'Error when get balance token'));
     }, (values) {
       List keyList = ["SLFT", "SLGT", "AVAX"];
-      List icons = [Ics.icSlft, Ics.icSlgt, Ics.icAvax];
+      List icons = [Ics.icSlft, Ics.icSlgt, Ics.icSolana];
       for (int i = 0; i < values.length; i++) {
         TokenEntity tokenEntity = TokenEntity(
           address: params.addressContract[i],
