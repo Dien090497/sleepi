@@ -99,7 +99,7 @@ class PopUpConfirmTrade extends StatelessWidget {
               ),
               Expanded(
                   child: SFText(
-                      keyText: "${amountOutMin.formatDoubleBalance} $symbolTo",
+                      keyText: "${amountOutMin.formatBalanceToken} $symbolTo",
                       style: TextStyles.lightWhite16,
                       textAlign: TextAlign.end)),
             ],
