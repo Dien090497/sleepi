@@ -458,12 +458,6 @@ class _TradeScreenState extends State<TradeScreen> {
                                             }
                                             indexTo = getIndexAddress(
                                                 selectItem['value'].toString());
-                                            cubit.getBalanceToken(Const
-                                                .tokens[indexFrom]['address']
-                                                .toString());
-                                            valueController.text = '';
-                                            amountOutMin = 0;
-                                            error = '';
                                             log("message $indexFrom $indexTo");
                                           });
                                           Future.delayed(
@@ -471,6 +465,18 @@ class _TradeScreenState extends State<TradeScreen> {
                                             () => firstToken.currentState
                                                 ?.changeSelectedItem(),
                                           );
+                                          cubit.getAmountOutMin(
+                                              Const
+                                                  .tokens[indexFrom]
+                                              ['address']
+                                                  .toString(),
+                                              Const.tokens[indexTo]
+                                              ['address']
+                                                  .toString(),
+                                              double.parse(
+                                                  valueController
+                                                      .text
+                                                      .toString()));
                                           FocusScope.of(context)
                                               .requestFocus(focusNode);
                                         },
