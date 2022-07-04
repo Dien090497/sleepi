@@ -7,13 +7,16 @@ import 'package:slee_fi/models/create_password_schema/create_password_schema.dar
 import 'package:slee_fi/models/user/user_info_model.dart';
 import 'package:slee_fi/presentation/blocs/create_password/create_password_state.dart';
 import 'package:slee_fi/usecase/create_password_usecase.dart';
+import 'package:slee_fi/usecase/is_first_open_app_usecase.dart';
 import 'package:slee_fi/usecase/save_user_local_usecase.dart';
+import 'package:slee_fi/usecase/usecase.dart';
 
 class CreatePasswordCubit extends Cubit<CreatePasswordState> {
   CreatePasswordCubit() : super(const CreatePasswordState.initial());
 
   final _createPassCodeUC = getIt<CreatePasswordUseCase>();
   final _saveUserUC = getIt<SaveUserLocalUseCase>();
+  final _isFirstOpenApp = getIt<IsFirstOpenAppUseCase>();
 
   late UserInfoModel userInfoModel;
   late int otp;
@@ -21,11 +24,14 @@ class CreatePasswordCubit extends Cubit<CreatePasswordState> {
 
   String password = '';
   String confirmPassword = '';
+  bool isFistOpenApp = false;
 
-  init(UserInfoModel userInfoModel, String activeCode, int otp) {
+  init(UserInfoModel userInfoModel, String activeCode, int otp) async {
     this.userInfoModel = userInfoModel;
     this.otp = otp;
     this.activeCode = activeCode;
+    var result = await _isFirstOpenApp.call(NoParams());
+    result.fold((l) => null, (r) => isFistOpenApp = r);
   }
 
   createPassword() async {
@@ -39,7 +45,7 @@ class CreatePasswordCubit extends Cubit<CreatePasswordState> {
 
     result.fold((l) => emit(CreatePasswordState.errorCreate(l.msg)), (r) async {
       await _saveUserUC.call(userInfoModel);
-      emit(const CreatePasswordState.success());
+      emit(CreatePasswordState.success(isFistOpenApp));
     });
   }
 

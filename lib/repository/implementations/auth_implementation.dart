@@ -50,9 +50,6 @@ class AuthImplementation extends IAuthRepository {
       SignInSchema signInSchema) async {
     try {
       var result = await _authDataSource.signIn(signInSchema);
-      // _saveLocalUser(UserInfoModel(id, name, username, roles, email,
-      //     isAccountDisabled, createdAt, updatedAt));
-      'sign success $result'.log;
       return Right(result);
     } on Exception catch (e) {
       return Left(FailureMessage(_catchErrorDio(e)));
@@ -208,6 +205,26 @@ class AuthImplementation extends IAuthRepository {
       return const Right(true);
     } on Exception catch (e) {
       return Left(FailureMessage(_catchErrorDio(e)));
+    }
+  }
+
+  @override
+  Future<Either<FailureMessage, bool>> makeFirstOpenApp() async {
+    try {
+      await _secureStorage.makeFirstOpen();
+      return const Right(true);
+    } catch (e) {
+      return Left(FailureMessage('$e'));
+    }
+  }
+
+  @override
+  Future<Either<FailureMessage, bool>> isFirstOpenApp() async {
+    try {
+      var result = await _secureStorage.isFirstOpenApp();
+      return Right(result);
+    } catch (e) {
+      return Left(FailureMessage('$e'));
     }
   }
 }

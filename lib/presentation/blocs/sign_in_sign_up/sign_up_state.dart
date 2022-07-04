@@ -15,7 +15,7 @@ class SignInSignUpState with _$SignInSignUpState {
 
   const factory SignInSignUpState.signUpSuccess(bool enableActiveCode , UserInfoModel userInfoModel) = SignInSignUpStateSignUpSuccess;
 
-  const factory SignInSignUpState.signInSuccess() = SignInSignUpStateSignInSuccess;
+  const factory SignInSignUpState.signInSuccess(bool isFirstOpenApp) = SignInSignUpStateSignInSuccess;
 
 
 

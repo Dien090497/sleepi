@@ -42,8 +42,9 @@ abstract class IAuthRepository {
 
   Future<Either<FailureMessage, bool>> checkActivationCode(String activationCode);
 
+  Future<Either<FailureMessage, bool>> isFirstOpenApp();
 
-
+  Future<Either<FailureMessage, bool>> makeFirstOpenApp();
 
 
 }

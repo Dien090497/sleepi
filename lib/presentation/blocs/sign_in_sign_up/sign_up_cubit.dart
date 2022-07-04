@@ -5,6 +5,7 @@ import 'package:slee_fi/di/injector.dart';
 import 'package:slee_fi/models/sign_up_schema/sign_up_schema.dart';
 import 'package:slee_fi/presentation/blocs/sign_in_sign_up/sign_up_state.dart';
 import 'package:slee_fi/schema/sign_in_schema/sign_in_schema.dart';
+import 'package:slee_fi/usecase/is_first_open_app_usecase.dart';
 import 'package:slee_fi/usecase/login_usecase.dart';
 import 'package:slee_fi/usecase/save_user_local_usecase.dart';
 import 'package:slee_fi/usecase/send_otp_mail_usecase.dart';
@@ -18,6 +19,7 @@ class SigInSignUpCubit extends Cubit<SignInSignUpState> {
   final SendOTPMailUseCase _sendOtpUC = getIt<SendOTPMailUseCase>();
   final SignUpUseCase _signUpUseCase = getIt<SignUpUseCase>();
   final LogInUseCase _logInUseCase = getIt<LogInUseCase>();
+  final _isFirstOpenApp = getIt<IsFirstOpenAppUseCase>();
 
   final _saveUserUC = getIt<SaveUserLocalUseCase>();
 
@@ -25,9 +27,12 @@ class SigInSignUpCubit extends Cubit<SignInSignUpState> {
   String email = '';
   String password = '';
   String otp = '';
+  bool isFistOpenApp = false;
 
-  init() {
+  init() async {
     emit(const SignInSignUpState.initial());
+    var result = await _isFirstOpenApp.call(NoParams());
+    result.fold((l) => null, (r) => isFistOpenApp = r);
   }
 
   senOtp() async {
@@ -52,7 +57,8 @@ class SigInSignUpCubit extends Cubit<SignInSignUpState> {
       var setting = await fetchSettingActiveCode.call(NoParams());
       setting.fold(
         (l) => emit(SignInSignUpState.error(l.msg)),
-        (r) => emit(SignInSignUpState.signUpSuccess(r.data.isEnable, userResponse.data)),
+        (r) => emit(SignInSignUpState.signUpSuccess(
+            r.data.isEnable, userResponse.data)),
       );
     });
   }
@@ -66,7 +72,7 @@ class SigInSignUpCubit extends Cubit<SignInSignUpState> {
 
     result.fold((l) => emit(SignInSignUpState.error(l.msg)), (r) async {
       await _saveUserUC.call(r.data.user);
-      emit(const SignInSignUpState.signInSuccess());
+      emit(SignInSignUpState.signInSuccess(isFistOpenApp));
     });
   }
 
@@ -86,8 +92,6 @@ class SigInSignUpCubit extends Cubit<SignInSignUpState> {
       emit(SignInSignUpState.error(message));
       return false;
     }
-
-
     return true;
   }
 

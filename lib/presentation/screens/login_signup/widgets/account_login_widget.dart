@@ -18,6 +18,7 @@ import 'package:slee_fi/l10n/locale_keys.g.dart';
 import 'package:slee_fi/presentation/blocs/sign_in_sign_up/sign_up_cubit.dart';
 import 'package:slee_fi/presentation/blocs/sign_in_sign_up/sign_up_state.dart';
 import 'package:slee_fi/presentation/screens/enter_activation_code/enter_activation_code_screen.dart';
+import 'package:slee_fi/presentation/screens/setting_permission/widgets/healthcare_screen.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class AccountLoginWidget extends StatefulWidget {
@@ -49,8 +50,16 @@ class _AccountLoginState extends State<AccountLoginWidget> {
                 state.enableActiveCode,
               ));
         } else if (state is SignInSignUpStateSignInSuccess) {
-          Navigator.pushNamedAndRemoveUntil(
-              context, R.bottomNavigation, (_) => false);
+
+          'sign success ${state.isFirstOpenApp}'.log;
+          if (!state.isFirstOpenApp) {
+            Navigator.pushNamedAndRemoveUntil(
+                context, R.bottomNavigation, (_) => false);
+          } else {
+            Navigator.pushNamedAndRemoveUntil(
+                context, R.healthcarePermission, (_) => false,
+                arguments: HealthcareArg(true));
+          }
         }
       },
       builder: (context, state) {

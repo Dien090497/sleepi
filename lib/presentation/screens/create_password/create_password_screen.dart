@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:slee_fi/common/extensions/string_x.dart';
 import 'package:slee_fi/common/routes/app_routes.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
@@ -44,9 +43,14 @@ class _CreatePasswordScreenState extends State<CreatePasswordScreen> {
       child: BlocConsumer<CreatePasswordCubit, CreatePasswordState>(
         listener: (context, state) {
           if (state is CreatePasswordStateSuccess) {
-            Navigator.pushNamedAndRemoveUntil(
-                context, R.healthcarePermission, (_) => false,
-                arguments: HealthcareArg(true));
+            if (state.isFirstOpenApp) {
+              Navigator.pushNamedAndRemoveUntil(
+                  context, R.healthcarePermission, (_) => false,
+                  arguments: HealthcareArg(true));
+            } else {
+              Navigator.pushNamedAndRemoveUntil(
+                  context, R.bottomNavigation, (_) => false);
+            }
           }
         },
         builder: (context, state) {
