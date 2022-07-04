@@ -73,7 +73,7 @@ class TabWalletDetail extends StatelessWidget {
                   SFText(keyText: networkName, style: TextStyles.bold12Blue),
                   const SizedBox(height: 4.0),
                   SFText(
-                      keyText: '${balance.formatBalance} $currencySymbol',
+                      keyText: '${balance.formatBalanceWallet} $currencySymbol',
                       style: TextStyles.bold30White),
                   const SizedBox(height: 20.0),
                   Container(
