@@ -34,6 +34,8 @@ class TransferSpendingCubit extends Cubit<TransferSpendingState> {
       emit(const TransferSpendingState.error(message: 'Invalid amount', typeError: 'invalid_amount'));
     } else if (double.parse(amount) > balance) {
       emit(const TransferSpendingState.error(message: 'Balance not enough', typeError: 'invalid_amount'));
+    } else if (amount == '0') {
+      emit(const TransferSpendingState.error(message: 'Amount input can not be zero ', typeError: 'amount_zero'));
     } else {
       final result = await _sendToExternalUC.calculatorFee(SendToExternalParams(
           contractAddressTo : ContractAddresses.spending.hex, valueInEther : valueInEther));

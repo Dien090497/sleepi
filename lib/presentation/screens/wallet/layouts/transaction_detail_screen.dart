@@ -1,5 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:slee_fi/common/extensions/num_ext.dart';
 import 'package:slee_fi/common/extensions/string_x.dart';
 import 'package:slee_fi/common/routes/app_routes.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
@@ -77,7 +78,7 @@ class TransactionDetail extends StatelessWidget {
               const SizedBox(height: 16.0),
               SFText(
                   keyText:
-                      "${args?.tokenEntity.balance.toStringAsFixed(6)} ${args != null ? args.title : 'AVAX'}",
+                      "${args?.tokenEntity.balance.formatBalanceToken} ${args != null ? args.title : 'AVAX'}",
                   style: TextStyles.bold30White,
                   textAlign: TextAlign.center,
                   stringCase: StringCase.upperCase),
