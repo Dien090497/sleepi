@@ -26,6 +26,19 @@ class SpendingDataSource {
         credentials: owner);
   }
 
+  Future<String> toSpendingAvax({
+    required Credentials owner,
+    required BigInt amount,
+    required EthereumAddress avax,
+    Transaction? transaction,
+  }) async {
+    return _spendingContract.depositToken(
+        avax, amount,
+        credentials: owner,
+      transaction: transaction
+    );
+  }
+
   Future<String> approve(Credentials owner, BigInt value, ERC20 token) =>
       token.approve(ContractAddresses.spending, value,
           credentials: owner);
