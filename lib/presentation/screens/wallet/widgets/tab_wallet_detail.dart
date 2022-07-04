@@ -151,38 +151,41 @@ class TabWalletDetail extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         const PopupInfoWallet(),
-                        ElevatedButton(
-                            onPressed: () async {
-                              var url = isJapanese
-                                  ? Const.okCoinUrl
-                                  : Const.binanceUrl;
-                              final uri = Uri.parse(url);
-                              if (await canLaunchUrl(uri)) {
-                                launchUrl(uri);
-                              }
-                            },
-                            style: ElevatedButton.styleFrom(
-                              padding: const EdgeInsets.fromLTRB(12, 8, 16, 8),
-                              primary: AppColors.yellow.withOpacity(0.1),
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(100.0),
-                              ),
-                            ),
-                            child: Row(
-                              children: [
-                                SFIcon(
-                                  isJapanese ? Ics.okcoin : Imgs.binance,
-                                  width: 24,
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 12.0),
+                          child: ElevatedButton(
+                              onPressed: () async {
+                                var url = isJapanese
+                                    ? Const.okCoinUrl
+                                    : Const.binanceUrl;
+                                final uri = Uri.parse(url);
+                                if (await canLaunchUrl(uri)) {
+                                  launchUrl(uri);
+                                }
+                              },
+                              style: ElevatedButton.styleFrom(
+                                padding: const EdgeInsets.fromLTRB(12, 8, 16, 8),
+                                primary: AppColors.yellow.withOpacity(0.1),
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(100.0),
                                 ),
-                                const SizedBox(width: 8.0),
-                                SFText(
-                                  keyText: LocaleKeys.buy,
-                                  style: isJapanese
-                                      ? TextStyles.bold14Blue
-                                      : TextStyles.bold14Yellow,
-                                )
-                              ],
-                            )),
+                              ),
+                              child: Row(
+                                children: [
+                                  SFIcon(
+                                    isJapanese ? Ics.okcoin : Imgs.binance,
+                                    width: 24,
+                                  ),
+                                  const SizedBox(width: 8.0),
+                                  SFText(
+                                    keyText: LocaleKeys.buy,
+                                    style: isJapanese
+                                        ? TextStyles.bold14Blue
+                                        : TextStyles.bold14Yellow,
+                                  )
+                                ],
+                              )),
+                        ),
                       ],
                     ),
                   ),

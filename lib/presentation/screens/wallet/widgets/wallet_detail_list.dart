@@ -1,5 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:slee_fi/common/extensions/num_ext.dart';
 import 'package:slee_fi/common/routes/app_routes.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
@@ -128,7 +129,7 @@ class WalletDetailList extends StatelessWidget {
                               : tokenList[index].displayName,
                           style: TextStyles.lightWhite16),
                       trailing: SFText(
-                        keyText: tokenList[index].balance.toStringAsFixed(6),
+                        keyText: tokenList[index].balance.formatBalance,
                         style: TextStyles.lightWhite16,
                       ),
                     ),
