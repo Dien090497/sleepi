@@ -1,5 +1,4 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:slee_fi/common/extensions/string_x.dart';
 import 'package:slee_fi/di/injector.dart';
 import 'package:slee_fi/failures/failure.dart';
 import 'package:slee_fi/presentation/blocs/passcode/passcode_state.dart';
