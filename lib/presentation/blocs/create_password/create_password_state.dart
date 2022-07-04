@@ -14,7 +14,7 @@ class CreatePasswordState with _$CreatePasswordState{
 
   const factory CreatePasswordState.errorCreate(String message) = CreatePasswordStateErrorCreate;
 
-  const factory CreatePasswordState.success() = CreatePasswordStateSuccess;
+  const factory CreatePasswordState.success(bool isFirstOpenApp) = CreatePasswordStateSuccess;
 
 
 

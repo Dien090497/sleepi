@@ -45,7 +45,7 @@ class PasscodeScreen extends StatelessWidget {
           } else {
             passCodeController.text = '';
             Future.delayed(
-              const Duration(milliseconds: 1000),
+              const Duration(milliseconds: 2000),
               () => cubit.init(),
             );
           }
@@ -70,10 +70,13 @@ class PasscodeScreen extends StatelessWidget {
                         style: TextStyles.white12),
                   ),
                   const SizedBox(height: 24),
-                  PinCodeWidget(controller: passCodeController),
+                  SizedBox(
+                    height: 40,
+                    child: PinCodeWidget(controller: passCodeController),
+                  ),
                   Container(
-                    alignment: Alignment.topCenter,
-                    height: 15,
+                    alignment: Alignment.center,
+                    height: 30,
                     child: state is checkPassCodeInValid
                         ? SFText(
                             keyText: LocaleKeys.incorrect_passcode,

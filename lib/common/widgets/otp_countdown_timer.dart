@@ -5,17 +5,18 @@ import 'package:slee_fi/common/style/text_styles.dart';
 import 'package:slee_fi/common/widgets/sf_buttons.dart';
 import 'package:slee_fi/l10n/locale_keys.g.dart';
 
-
 class OtpCountdownTimer extends StatefulWidget {
   const OtpCountdownTimer({
     Key? key,
     required this.duration,
     required this.onSendEmail,
+    required this.validate,
   }) : super(key: key);
 
   /// seconds
   final int duration;
   final VoidCallback onSendEmail;
+  final bool Function()? validate;
 
   @override
   State<OtpCountdownTimer> createState() => _OtpCountdownTimerState();
@@ -37,6 +38,9 @@ class _OtpCountdownTimerState extends State<OtpCountdownTimer> {
 
   _startTimer() {
     if (timer?.isActive == true) {
+      return;
+    }
+    if (widget.validate != null && !widget.validate!()) {
       return;
     }
     widget.onSendEmail();

@@ -18,6 +18,7 @@ import 'package:slee_fi/l10n/locale_keys.g.dart';
 import 'package:slee_fi/presentation/blocs/sign_in_sign_up/sign_up_cubit.dart';
 import 'package:slee_fi/presentation/blocs/sign_in_sign_up/sign_up_state.dart';
 import 'package:slee_fi/presentation/screens/enter_activation_code/enter_activation_code_screen.dart';
+import 'package:slee_fi/presentation/screens/setting_permission/widgets/healthcare_screen.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class AccountLoginWidget extends StatefulWidget {
@@ -46,10 +47,19 @@ class _AccountLoginState extends State<AccountLoginWidget> {
               arguments: EnterActiveCodeArg(
                 int.parse(cubit.otp),
                 state.userInfoModel,
+                state.enableActiveCode,
               ));
         } else if (state is SignInSignUpStateSignInSuccess) {
-          Navigator.pushNamedAndRemoveUntil(
-              context, R.bottomNavigation, (_) => false);
+
+          'sign success ${state.isFirstOpenApp}'.log;
+          if (!state.isFirstOpenApp) {
+            Navigator.pushNamedAndRemoveUntil(
+                context, R.bottomNavigation, (_) => false);
+          } else {
+            Navigator.pushNamedAndRemoveUntil(
+                context, R.healthcarePermission, (_) => false,
+                arguments: HealthcareArg(true));
+          }
         }
       },
       builder: (context, state) {
@@ -68,15 +78,18 @@ class _AccountLoginState extends State<AccountLoginWidget> {
                 labelText: LocaleKeys.email_address,
                 onChanged: (email) => cubit.email = email),
             const SizedBox(height: 5),
-            if (state is SignInSignUpStateErrorEmail)
-              Align(
-                  alignment: Alignment.centerLeft,
-                  child: SFText(
-                      keyText: state.message, style: TextStyles.w400Red12)),
-            const SizedBox(height: 12),
+            Container(
+                alignment: Alignment.centerLeft,
+                height: 15,
+                child: state is SignInSignUpStateErrorEmail
+                    ? SFText(
+                        keyText: state.message, style: TextStyles.w400Red12)
+                    : const SizedBox()),
+            const SizedBox(height: 5),
             isLoginSignup
                 ? TextfieldVerificationEmail(
                     maxLength: 6,
+                    validate: () => cubit.validateEmail(),
                     onPressed: () => cubit.senOtp(),
                     valueChanged: (otp) => cubit.otp = otp)
                 : SFTextFieldPassword(
@@ -84,14 +97,16 @@ class _AccountLoginState extends State<AccountLoginWidget> {
                     valueChanged: (password) => cubit.password = password,
                   ),
             const SizedBox(height: 5),
-            if (state is SignInSignUpStateError)
-              Align(
-                  alignment: Alignment.centerLeft,
-                  child: SFText(
-                    keyText: state.message,
-                    style: TextStyles.w400Red12,
-                    maxLines: 1,
-                  )),
+            Container(
+                height: 15,
+                alignment: Alignment.centerLeft,
+                child: state is SignInSignUpStateError
+                    ? SFText(
+                        keyText: state.message,
+                        style: TextStyles.w400Red12,
+                        maxLines: 1,
+                      )
+                    : const SizedBox()),
             isLoginSignup
                 ? const SizedBox()
                 : Align(

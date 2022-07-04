@@ -40,14 +40,16 @@ class ConfirmCreatePasscodeScreen extends StatelessWidget {
                     keyText: LocaleKeys.confirm_your_passcode,
                     style: TextStyles.white12)),
             const SizedBox(height: 12),
-            PinCodeWidget(controller: passcodeController),
-
+            SizedBox(
+              height: 40,
+              child: PinCodeWidget(controller: passcodeController),
+            ),
             StatefulBuilder(builder: (context, setState) {
               return Column(
                 children: [
                   Container(
-                    alignment: Alignment.topCenter,
-                    height: 15,
+                    alignment: Alignment.center,
+                    height: 30,
                     child: wrongPassword
                         ? SFText(
                             keyText: LocaleKeys.incorrect_passcode,

@@ -4,6 +4,7 @@ import 'package:flutter/foundation.dart';
 import 'package:path/path.dart';
 import 'package:recase/recase.dart';
 import 'package:slee_fi/common/enum/enum.dart';
+import 'package:slee_fi/l10n/locale_keys.g.dart';
 import 'package:slee_fi/resources/resources.dart';
 import 'dart:developer' as d;
 
@@ -49,6 +50,41 @@ extension StringX on String {
       default:
         return BedType.short;
     }
+  }
+
+  String get validatePassword {
+    if (isEmpty) {
+      return LocaleKeys.this_field_is_required.tr();
+    }
+    if (length < 6) {
+      return LocaleKeys.password_must_be_at_least_6;
+    }
+    return '';
+  }
+
+  String get validateEmail {
+    if (isEmpty) {
+      return LocaleKeys.this_field_is_required.tr();
+    }
+
+    bool result = RegExp(
+            r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
+        .hasMatch(this);
+    'result match email  $result'.log;
+    if (!result) {
+      return LocaleKeys.invalid_email.tr();
+    }
+    return '';
+  }
+
+  String get validateOTP {
+    if (isEmpty) {
+      return LocaleKeys.this_field_is_required.tr();
+    }
+    if (length < 6) {
+      return LocaleKeys.invalid_code.tr();
+    }
+    return '';
   }
 
   String reCase(StringCase? stringCase) {
