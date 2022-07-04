@@ -50,7 +50,6 @@ class _CreatePasswordScreenState extends State<CreatePasswordScreen> {
           }
         },
         builder: (context, state) {
-          'rebuild   $state'.log;
           final cubit = context.read<CreatePasswordCubit>();
           return Stack(
             children: [

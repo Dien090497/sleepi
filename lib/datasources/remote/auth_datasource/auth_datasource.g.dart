@@ -220,17 +220,18 @@ class _AuthDataSource implements AuthDataSource {
   }
 
   @override
-  Future<dynamic> verifyActiveCode(activeCode) async {
+  Future<ActivationCodeResponse> verifyActiveCode(activeCode) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{r'activeCode': activeCode};
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
-    final _result = await _dio.fetch(_setStreamType<dynamic>(
-        Options(method: 'GET', headers: _headers, extra: _extra)
-            .compose(_dio.options, '/auth/verify-active-code',
-                queryParameters: queryParameters, data: _data)
-            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = _result.data;
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<ActivationCodeResponse>(
+            Options(method: 'GET', headers: _headers, extra: _extra)
+                .compose(_dio.options, '/auth/verify-active-code',
+                    queryParameters: queryParameters, data: _data)
+                .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = ActivationCodeResponse.fromJson(_result.data!);
     return value;
   }
 

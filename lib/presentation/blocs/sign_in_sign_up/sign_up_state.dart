@@ -13,7 +13,7 @@ class SignInSignUpState with _$SignInSignUpState {
 
   const factory SignInSignUpState.errorEmail(String message) = SignInSignUpStateErrorEmail;
 
-  const factory SignInSignUpState.signUpSuccess(UserInfoModel userInfoModel) = SignInSignUpStateSignUpSuccess;
+  const factory SignInSignUpState.signUpSuccess(bool enableActiveCode , UserInfoModel userInfoModel) = SignInSignUpStateSignUpSuccess;
 
   const factory SignInSignUpState.signInSuccess() = SignInSignUpStateSignInSuccess;
 

@@ -157,9 +157,13 @@ class AuthImplementation extends IAuthRepository {
   String _catchErrorDio(Exception e) {
     try {
       if (e is DioError) {
-        'error is ${e.response?.data['error']['message']}'.log;
-        ' errror  ${e.response}'.log;
-        return e.response?.data['error']['details']['message'].first ??
+        var error = e.response?.data['error']['details']['message'];
+        if (error is String) {
+          return error;
+        } else if (error is List<String>) {
+          return error.first;
+        }
+        return e.response?.data['error']['details']['message'] ??
             'Error! An error occurred. Please try again later';
       }
     } catch (_) {}
@@ -170,12 +174,12 @@ class AuthImplementation extends IAuthRepository {
   @override
   Future<Either<FailureMessage, UserInfoEntity>> currentUser() async {
     // try {
-      final user = await _secureStorage.readCurrentUser();
-      if (user == null) {
-        return const Left(FailureMessage('msg'));
-      } else {
-        return Right(user.toEntity());
-      }
+    final user = await _secureStorage.readCurrentUser();
+    if (user == null) {
+      return const Left(FailureMessage('msg'));
+    } else {
+      return Right(user.toEntity());
+    }
     // } catch (e) {
     //   'error get current user $e'.log;
     //   return const Left(FailureMessage('empty user'));
@@ -193,6 +197,17 @@ class AuthImplementation extends IAuthRepository {
     } catch (e) {
       'write user is $e'.log;
       return Left(FailureMessage('$e'));
+    }
+  }
+
+  @override
+  Future<Either<FailureMessage, bool>> checkActivationCode(
+      String activationCode) async {
+    try {
+      await _authDataSource.verifyActiveCode(activationCode);
+      return const Right(true);
+    } on Exception catch (e) {
+      return Left(FailureMessage(_catchErrorDio(e)));
     }
   }
 }

@@ -27,6 +27,7 @@ class TextfieldVerificationEmail extends StatelessWidget {
     this.stringCase,
     this.errorText = '',
     this.duration = 60,
+    this.validate,
   }) : super(key: key);
 
   /// [duration]  seconds
@@ -47,6 +48,7 @@ class TextfieldVerificationEmail extends StatelessWidget {
   final TextInputType? textInputType;
   final StringCase? stringCase;
   final String? errorText;
+  final bool Function()? validate;
 
   @override
   Widget build(BuildContext context) {
@@ -62,9 +64,7 @@ class TextfieldVerificationEmail extends StatelessWidget {
                 ),
               )
             : const SizedBox(),
-        const SizedBox(
-          height: 4,
-        ),
+        const SizedBox(height: 4),
         Container(
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(8),
@@ -90,13 +90,15 @@ class TextfieldVerificationEmail extends StatelessWidget {
                   noBorder: true,
                 ),
               ),
-              OtpCountdownTimer(duration: duration, onSendEmail: onPressed),
+              OtpCountdownTimer(
+                duration: duration,
+                onSendEmail: onPressed,
+                validate: validate,
+              ),
             ],
           ),
         ),
-        const SizedBox(
-          height: 8,
-        ),
+        const SizedBox(height: 8),
         if (errorText != '')
           Text(
             errorText!,

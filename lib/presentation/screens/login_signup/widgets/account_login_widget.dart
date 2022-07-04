@@ -46,6 +46,7 @@ class _AccountLoginState extends State<AccountLoginWidget> {
               arguments: EnterActiveCodeArg(
                 int.parse(cubit.otp),
                 state.userInfoModel,
+                state.enableActiveCode,
               ));
         } else if (state is SignInSignUpStateSignInSuccess) {
           Navigator.pushNamedAndRemoveUntil(
@@ -68,15 +69,18 @@ class _AccountLoginState extends State<AccountLoginWidget> {
                 labelText: LocaleKeys.email_address,
                 onChanged: (email) => cubit.email = email),
             const SizedBox(height: 5),
-            if (state is SignInSignUpStateErrorEmail)
-              Align(
-                  alignment: Alignment.centerLeft,
-                  child: SFText(
-                      keyText: state.message, style: TextStyles.w400Red12)),
-            const SizedBox(height: 12),
+            Container(
+                alignment: Alignment.centerLeft,
+                height: 15,
+                child: state is SignInSignUpStateErrorEmail
+                    ? SFText(
+                        keyText: state.message, style: TextStyles.w400Red12)
+                    : const SizedBox()),
+            const SizedBox(height: 5),
             isLoginSignup
                 ? TextfieldVerificationEmail(
                     maxLength: 6,
+                    validate: () => cubit.validateEmail(),
                     onPressed: () => cubit.senOtp(),
                     valueChanged: (otp) => cubit.otp = otp)
                 : SFTextFieldPassword(
@@ -84,14 +88,16 @@ class _AccountLoginState extends State<AccountLoginWidget> {
                     valueChanged: (password) => cubit.password = password,
                   ),
             const SizedBox(height: 5),
-            if (state is SignInSignUpStateError)
-              Align(
-                  alignment: Alignment.centerLeft,
-                  child: SFText(
-                    keyText: state.message,
-                    style: TextStyles.w400Red12,
-                    maxLines: 1,
-                  )),
+            Container(
+                height: 15,
+                alignment: Alignment.centerLeft,
+                child: state is SignInSignUpStateError
+                    ? SFText(
+                        keyText: state.message,
+                        style: TextStyles.w400Red12,
+                        maxLines: 1,
+                      )
+                    : const SizedBox()),
             isLoginSignup
                 ? const SizedBox()
                 : Align(

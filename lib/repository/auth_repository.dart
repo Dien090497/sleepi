@@ -38,8 +38,11 @@ abstract class IAuthRepository {
 
   Future<Either<FailureMessage, UserInfoEntity>> currentUser();
 
-
   Future<Either<FailureMessage, bool>> saveUser(UserInfoModel userInfoModel);
+
+  Future<Either<FailureMessage, bool>> checkActivationCode(String activationCode);
+
+
 
 
 
