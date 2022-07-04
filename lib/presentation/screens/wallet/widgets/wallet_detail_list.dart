@@ -8,6 +8,7 @@ import 'package:slee_fi/common/widgets/sf_icon.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
 import 'package:slee_fi/entities/token/token_entity.dart';
 import 'package:slee_fi/l10n/locale_keys.g.dart';
+import 'package:slee_fi/presentation/screens/nft_detail_screen/nft_detail_screen.dart';
 import 'package:slee_fi/presentation/screens/wallet/layouts/transaction_detail_screen.dart';
 import 'package:slee_fi/resources/resources.dart';
 
@@ -32,10 +33,10 @@ class WalletDetailList extends StatelessWidget {
     Ics.icSlft,
     Ics.icSlgt,
     Ics.icAvax,
-    Ics.icBeds,
-    Ics.icJewels,
+    Ics.bed,
+    Ics.jewel,
     Ics.icBedBoxes,
-    Imgs.icItems
+    Ics.item
   ];
 
   @override
@@ -106,6 +107,9 @@ class WalletDetailList extends StatelessWidget {
                               img: tokenList[index].icon,
                               tokenEntity: tokenList[index],
                             ));
+                      } else {
+                        Navigator.pushNamed(context, R.nftDetail,
+                            arguments: NFTDetailArguments(tokenList[index]));
                       }
                     },
                     child: ListTile(

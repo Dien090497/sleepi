@@ -27,8 +27,8 @@ class TransactionDetailList extends StatelessWidget {
       Ics.icSolanaCircle,
       Ics.icSlgt,
       Ics.icSlgt,
-      Ics.icBeds,
-      Ics.icJewels,
+      Ics.bed,
+      Ics.jewel,
       Ics.icBedBoxes
     ];
     return Container(
