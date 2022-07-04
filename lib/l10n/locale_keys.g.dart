@@ -390,7 +390,7 @@ abstract class  LocaleKeys {
   static const start_sleep_tracking = 'start_sleep_tracking';
   static const forgot_password = 'forgot_password';
   static const warning = 'warning';
-  static const warning_bind_wallet = 'warning_bind_wallet';
+  static const warning_create_wallet = 'warning_create_wallet';
   static const incorrect_passcode = 'incorrect_passcode';
   static const reset_passcode_successfully = 'reset_passcode_successfully';
   static const invalid_mnemonic_please_try_again = 'invalid_mnemonic_please_try_again';
@@ -406,5 +406,6 @@ abstract class  LocaleKeys {
   static const invalid_email = 'invalid_email';
   static const password_must_be_at_least_6 = 'password_must_be_at_least_6';
   static const password_dose_not_match = 'password_dose_not_match';
+  static const warning_bind_wallet = 'warning_bind_wallet';
 
 }

@@ -6,8 +6,9 @@ import 'package:slee_fi/common/widgets/sf_text.dart';
 import 'package:slee_fi/l10n/locale_keys.g.dart';
 
 class PopUpWarningBindWallet extends StatelessWidget {
-  const PopUpWarningBindWallet({this.onPressed, Key? key}) : super(key: key);
+  const PopUpWarningBindWallet({this.onPressed, Key? key,  this.content}) : super(key: key);
   final VoidCallback? onPressed;
+  final String? content ;
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +23,7 @@ class PopUpWarningBindWallet extends StatelessWidget {
           ),
           const SizedBox(height: 28),
           SFText(
-            keyText: LocaleKeys.warning_bind_wallet,
+            keyText: content??LocaleKeys.warning_bind_wallet,
             style: TextStyles.lightGrey16.copyWith(height: 1.5),
             textAlign: TextAlign.center,
           ),
