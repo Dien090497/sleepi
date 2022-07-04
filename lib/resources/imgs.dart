@@ -22,7 +22,6 @@ class Imgs {
   static const String health = 'assets/images/health.png';
   static const String healthcare = 'assets/images/healthcare.png';
   static const String homePage = 'assets/images/home_page.png';
-  static const String icItems = 'assets/images/ic_items.png';
   static const String iconApp = 'assets/images/icon_app.png';
   static const String jewelGreen = 'assets/images/jewel_green.png';
   static const String jewelPurple = 'assets/images/jewel_purple.png';
@@ -81,7 +80,6 @@ class Imgs {
     health,
     healthcare,
     homePage,
-    icItems,
     iconApp,
     jewelGreen,
     jewelPurple,

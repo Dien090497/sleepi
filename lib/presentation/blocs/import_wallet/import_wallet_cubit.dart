@@ -36,7 +36,7 @@ class ImportWalletCubit extends Cubit<ImportWalletState> {
   Future process() async {
     emit(const ImportWalletState.initial());
     if (otp.isEmpty) {
-      emit(const ImportWalletState.errorOtp('Verification Code required'));
+      emit(ImportWalletState.errorOtp(LocaleKeys.this_field_is_required.tr()));
       return;
     }
     if (mnemonic.isEmpty) {

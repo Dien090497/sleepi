@@ -4,6 +4,7 @@ import 'package:injectable/injectable.dart';
 import 'package:retrofit/retrofit.dart';
 import 'package:slee_fi/common/const/const.dart';
 import 'package:slee_fi/common/enum/enum.dart';
+import 'package:slee_fi/models/activation_code_response/activation_code_response.dart';
 import 'package:slee_fi/models/buy_nft_schema/buy_nft_schema.dart';
 import 'package:slee_fi/models/create_password_reponse/create_password_response.dart';
 import 'package:slee_fi/models/create_password_schema/create_password_schema.dart';
@@ -82,7 +83,7 @@ abstract class AuthDataSource {
   Future<SettingActiveCodeResponse> getSettingActiveCode();
 
   @GET('/auth/verify-active-code')
-  Future<dynamic> verifyActiveCode(@Query('activeCode') String activeCode);
+  Future<ActivationCodeResponse> verifyActiveCode(@Query('activeCode') String activeCode);
 
   ///stacking
   @POST('/stacking')

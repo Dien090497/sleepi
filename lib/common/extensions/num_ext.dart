@@ -25,32 +25,46 @@ extension NumX on num {
 
   String get format => Decimal.parse('$this').toString();
 
-  String get formatBalance {
+
+  String get formatBalanceWallet {
     if(this==0){
-      return 0.toStringAsFixed(6);
+      return 0.toStringAsFixed(2);
     }else {
-      var balance = (this / pow(10, 18)).toString();
-      int index = balance.indexOf('.');
-      if (balance.length - index > 7) {
-        index += 7;
+      var balance = toDouble();
+
+      balance = (this / pow(10, 18));
+      if (balance % 1 == 0) {
+        return balance.toStringAsFixed(0);
       } else {
-        index = balance.length - 1;
+        int index = balance.toString().indexOf('.');
+        if (balance.toString().length - index > 7) {
+          index += 7;
+        } else {
+          index = balance.toString().length - 1;
+        }
+        return balance.toString().substring(0, index);
       }
-      return balance.substring(0, index);
+
     }
   }
-  String get formatDoubleBalance {
+
+  String get formatBalanceToken {
     if(this==0){
-      return 0.toStringAsFixed(6);
+      return 0.toStringAsFixed(2);
     }else {
-      var balance = toString();
-      int index = balance.indexOf('.');
-      if (balance.length - index > 7) {
-        index += 7;
+      var balance = toDouble();
+      if (balance % 1 == 0) {
+        return balance.toStringAsFixed(0);
       } else {
-        index = balance.length - 1;
+        int index = balance.toString().indexOf('.');
+        if (balance.toString().length - index > 7) {
+          index += 7;
+        } else {
+          index = balance.toString().length - 1;
+        }
+        return balance.toString().substring(0, index);
       }
-      return balance.substring(0, index);
+
     }
   }
 }

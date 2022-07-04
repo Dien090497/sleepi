@@ -12,7 +12,7 @@ class NFTImplementation extends INFTRepository {
   NFTImplementation(this._nftDataSource);
 
   @override
-  Future<Either<Failure, List<NFTEntity>>> getNFTs(
+  Future<Either<Failure, List<NFTEntity>>> balanceOf(
       List<String> addresses, String ownerAddress) async {
     try {
       final List<NFTEntity> result = [];
@@ -27,6 +27,21 @@ class NFTImplementation extends INFTRepository {
             balance: await _nftDataSource.balanceOf(addr, ownerAddress)));
       }
       return Right(result);
+    } catch (e) {
+      return Left(FailureMessage('$e'));
+    }
+  }
+
+  @override
+  Future<Either<Failure, List<BigInt>>> tokensOf({
+    required String nftAddress,
+    required String ownerAddress,
+    required int count,
+    required int start,
+  }) async {
+    try {
+      return Right(await _nftDataSource.tokensOf(
+          nftAddress, ownerAddress, count, start));
     } catch (e) {
       return Left(FailureMessage('$e'));
     }

@@ -50,9 +50,6 @@ class AuthImplementation extends IAuthRepository {
       SignInSchema signInSchema) async {
     try {
       var result = await _authDataSource.signIn(signInSchema);
-      // _saveLocalUser(UserInfoModel(id, name, username, roles, email,
-      //     isAccountDisabled, createdAt, updatedAt));
-      'sign success $result'.log;
       return Right(result);
     } on Exception catch (e) {
       return Left(FailureMessage(_catchErrorDio(e)));
@@ -82,6 +79,7 @@ class AuthImplementation extends IAuthRepository {
           sendOTPParam.email, sendOTPParam.otpType);
       return Right(result);
     } on Exception catch (e) {
+
       return Left(FailureMessage(_catchErrorDio(e)));
     }
   }
@@ -157,9 +155,16 @@ class AuthImplementation extends IAuthRepository {
   String _catchErrorDio(Exception e) {
     try {
       if (e is DioError) {
-        'error is ${e.response?.data['error']['message']}'.log;
-        ' errror  ${e.response}'.log;
-        return e.response?.data['error']['details']['message'].first ??
+       if(e.response?.statusCode == 502){
+         return 'Some thing wrong';
+       }
+        var error = e.response?.data['error']['details']['message'];
+        if (error is String) {
+          return error;
+        } else if (error is List<String>) {
+          return error.first;
+        }
+        return e.response?.data['error']['details']['message'] ??
             'Error! An error occurred. Please try again later';
       }
     } catch (_) {}
@@ -170,12 +175,12 @@ class AuthImplementation extends IAuthRepository {
   @override
   Future<Either<FailureMessage, UserInfoEntity>> currentUser() async {
     // try {
-      final user = await _secureStorage.readCurrentUser();
-      if (user == null) {
-        return const Left(FailureMessage('msg'));
-      } else {
-        return Right(user.toEntity());
-      }
+    final user = await _secureStorage.readCurrentUser();
+    if (user == null) {
+      return const Left(FailureMessage('msg'));
+    } else {
+      return Right(user.toEntity());
+    }
     // } catch (e) {
     //   'error get current user $e'.log;
     //   return const Left(FailureMessage('empty user'));
@@ -192,6 +197,37 @@ class AuthImplementation extends IAuthRepository {
       return const Right(true);
     } catch (e) {
       'write user is $e'.log;
+      return Left(FailureMessage('$e'));
+    }
+  }
+
+  @override
+  Future<Either<FailureMessage, bool>> checkActivationCode(
+      String activationCode) async {
+    try {
+      await _authDataSource.verifyActiveCode(activationCode);
+      return const Right(true);
+    } on Exception catch (e) {
+      return Left(FailureMessage(_catchErrorDio(e)));
+    }
+  }
+
+  @override
+  Future<Either<FailureMessage, bool>> makeFirstOpenApp() async {
+    try {
+      await _secureStorage.makeFirstOpen();
+      return const Right(true);
+    } catch (e) {
+      return Left(FailureMessage('$e'));
+    }
+  }
+
+  @override
+  Future<Either<FailureMessage, bool>> isFirstOpenApp() async {
+    try {
+      var result = await _secureStorage.isFirstOpenApp();
+      return Right(result);
+    } catch (e) {
       return Left(FailureMessage('$e'));
     }
   }

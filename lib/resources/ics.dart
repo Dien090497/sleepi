@@ -5,6 +5,7 @@ class Ics {
 
   static const String addBed = 'assets/icons/add_bed.svg';
   static const String arrowLeft = 'assets/icons/arrow_left.svg';
+  static const String bed = 'assets/icons/bed.svg';
   static const String bed3d = 'assets/icons/bed_3d.svg';
   static const String bonus = 'assets/icons/bonus.svg';
   static const String chart = 'assets/icons/chart.svg';
@@ -23,7 +24,6 @@ class Ics {
   static const String icArrowUpRight = 'assets/icons/ic_arrow_up_right.svg';
   static const String icAvax = 'assets/icons/ic_avax.svg';
   static const String icBedBoxes = 'assets/icons/ic_bed_boxes.svg';
-  static const String icBeds = 'assets/icons/ic_beds.svg';
   static const String icBedsNew = 'assets/icons/ic_beds_new.svg';
   static const String icBedsProbability =
       'assets/icons/ic_beds_probability.svg';
@@ -38,8 +38,6 @@ class Ics {
   static const String icEye = 'assets/icons/ic_eye.svg';
   static const String icGacha = 'assets/icons/ic_gacha.svg';
   static const String icHomeNew = 'assets/icons/ic_home_new.svg';
-  static const String icItemsEmpty = 'assets/icons/ic_items_empty.svg';
-  static const String icJewels = 'assets/icons/ic_jewels.svg';
   static const String icLock = 'assets/icons/ic_lock.svg';
   static const String icMarketNew = 'assets/icons/ic_market_new.svg';
   static const String icMicrophone = 'assets/icons/ic_microphone.svg';
@@ -60,6 +58,8 @@ class Ics {
   static const String icTwoEyes = 'assets/icons/ic_two_eyes.svg';
   static const String icUsdc = 'assets/icons/ic_usdc.svg';
   static const String icWallet = 'assets/icons/ic_wallet.svg';
+  static const String item = 'assets/icons/item.svg';
+  static const String jewel = 'assets/icons/jewel.svg';
   static const String levelUp = 'assets/icons/level_up.svg';
   static const String lock = 'assets/icons/lock.svg';
   static const String okcoin = 'assets/icons/okcoin.svg';
@@ -83,6 +83,7 @@ class Ics {
   static const List<String> values = [
     addBed,
     arrowLeft,
+    bed,
     bed3d,
     bonus,
     chart,
@@ -101,7 +102,6 @@ class Ics {
     icArrowUpRight,
     icAvax,
     icBedBoxes,
-    icBeds,
     icBedsNew,
     icBedsProbability,
     icCalculator,
@@ -115,8 +115,6 @@ class Ics {
     icEye,
     icGacha,
     icHomeNew,
-    icItemsEmpty,
-    icJewels,
     icLock,
     icMarketNew,
     icMicrophone,
@@ -137,6 +135,8 @@ class Ics {
     icTwoEyes,
     icUsdc,
     icWallet,
+    item,
+    jewel,
     levelUp,
     lock,
     okcoin,

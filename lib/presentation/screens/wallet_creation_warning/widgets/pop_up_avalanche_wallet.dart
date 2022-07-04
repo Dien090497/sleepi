@@ -63,6 +63,7 @@ class PopUpAvalancheWallet extends StatelessWidget {
                       onPressed: () {
                         showCustomAlertDialog(context,
                             children:  PopUpWarningBindWallet(
+                              content: LocaleKeys.warning_create_wallet,
                               onPressed: () {
                                 Navigator.pop(context);
                                 Navigator.pushNamed(context, R.createPasscode)
@@ -97,12 +98,6 @@ class PopUpAvalancheWallet extends StatelessWidget {
                             });
                           }
                         ));
-                    // _showWarningDialog(context).then((value) =>
-                    //     Navigator.pushNamed(context, R.importWallet).then((value) {
-                    //       if (value is PopWithResults) {
-                    //         Navigator.pop(context, value);
-                    //       }
-                    //     }));
                   },
                 ),
               ],
@@ -113,12 +108,4 @@ class PopUpAvalancheWallet extends StatelessWidget {
       ),
     );
   }
-
-  // _showWarningDialog(BuildContext context) async {
-  //   await showCustomAlertDialog(
-  //     context,
-  //     showClosed: false,
-  //     children: const PopUpWarningBindWallet(),
-  //   );
-  // }
 }

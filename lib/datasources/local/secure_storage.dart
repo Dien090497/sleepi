@@ -48,4 +48,11 @@ class SecureStorage {
     final value = await _secureStorage.read(key: StorageKeys.userKey) as String;
     return UserInfoModel.fromJson(json.decode(value));
   }
+
+  Future<bool> isFirstOpenApp() async =>
+      await _secureStorage.read(key: StorageKeys.firstOpenKey) == null;
+
+  Future<void> makeFirstOpen() async {
+    await _secureStorage.write(key: StorageKeys.firstOpenKey, value: 'first');
+  }
 }

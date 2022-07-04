@@ -27,8 +27,8 @@ class TransactionDetailList extends StatelessWidget {
       Ics.icSolanaCircle,
       Ics.icSlgt,
       Ics.icSlgt,
-      Ics.icBeds,
-      Ics.icJewels,
+      Ics.bed,
+      Ics.jewel,
       Ics.icBedBoxes
     ];
     return Container(
@@ -52,10 +52,7 @@ class TransactionDetailList extends StatelessWidget {
                   itemBuilder: (BuildContext context, int index) {
                     return SFCard(
                       child: ListTile(
-                        leading: SFIcon(
-                          icons[index],
-                          width: 32,
-                        ),
+                        leading: SFIcon(icons[index], width: 32),
                         title: SFText(
                             keyText: keyList[index],
                             style: TextStyles.lightWhite16),

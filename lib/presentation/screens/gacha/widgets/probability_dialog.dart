@@ -77,7 +77,7 @@ class ProbabilityDialog extends StatelessWidget {
                 ),
                 const SizedBox(height: 12),
                 ItemsProbability(
-                  iconPath: Imgs.icItems,
+                  iconPath: Ics.item,
                   fakeListData: fakeListItems,
                   title: LocaleKeys.item,
                   colorBgIcon: [

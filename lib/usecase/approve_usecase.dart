@@ -38,5 +38,6 @@ class SendTokenExternalParams {
   final String toAddress;
   final TokenEntity? tokenEntity;
 
-  const SendTokenExternalParams({required this.toAddress, required this.valueInEther, this.tokenEntity});
+  const SendTokenExternalParams(
+      {required this.toAddress, required this.valueInEther, this.tokenEntity});
 }

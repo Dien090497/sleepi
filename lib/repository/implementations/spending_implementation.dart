@@ -2,6 +2,7 @@ import 'dart:math';
 
 import 'package:dartz/dartz.dart';
 import 'package:injectable/injectable.dart';
+import 'package:slee_fi/common/const/const.dart';
 import 'package:slee_fi/common/enum/enum.dart';
 import 'package:slee_fi/datasources/remote/network/spending_datasource.dart';
 import 'package:slee_fi/datasources/remote/network/web3_datasource.dart';
@@ -32,8 +33,24 @@ class SpendingImplementation extends ISpendingRepository {
         final entites = TransferSpendingEntity(type: TokenToSpending.approve, txHash: '');
         return Right(entites);
       }
+      if (addressContract == Const.listTokenAddressTestNet[2]) {
+        final hash = await _spendingDataSource.toSpendingAvax(
+            owner: owner,
+            amount: result,
+            avax: EthereumAddress.fromHex(
+                "0x0000000000000000000000000000000000000000"),
+            transaction: Transaction(
+              value: EtherAmount.inWei(result),
+            )
+        );
+        final entites = TransferSpendingEntity(type: TokenToSpending.spending, txHash: hash);
+        return Right(entites);
+      }
       final hash = await _spendingDataSource.toSpending(
-          owner: owner, amount: result, token: token);
+          owner: owner,
+          amount: result,
+          token: token
+      );
       final entites = TransferSpendingEntity(type: TokenToSpending.spending, txHash: hash);
       return Right(entites);
     } catch (e) {

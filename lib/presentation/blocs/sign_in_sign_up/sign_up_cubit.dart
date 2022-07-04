@@ -1,11 +1,11 @@
-import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:slee_fi/common/enum/enum.dart';
+import 'package:slee_fi/common/extensions/string_x.dart';
 import 'package:slee_fi/di/injector.dart';
-import 'package:slee_fi/l10n/locale_keys.g.dart';
 import 'package:slee_fi/models/sign_up_schema/sign_up_schema.dart';
 import 'package:slee_fi/presentation/blocs/sign_in_sign_up/sign_up_state.dart';
 import 'package:slee_fi/schema/sign_in_schema/sign_in_schema.dart';
+import 'package:slee_fi/usecase/is_first_open_app_usecase.dart';
 import 'package:slee_fi/usecase/login_usecase.dart';
 import 'package:slee_fi/usecase/save_user_local_usecase.dart';
 import 'package:slee_fi/usecase/send_otp_mail_usecase.dart';
@@ -19,6 +19,7 @@ class SigInSignUpCubit extends Cubit<SignInSignUpState> {
   final SendOTPMailUseCase _sendOtpUC = getIt<SendOTPMailUseCase>();
   final SignUpUseCase _signUpUseCase = getIt<SignUpUseCase>();
   final LogInUseCase _logInUseCase = getIt<LogInUseCase>();
+  final _isFirstOpenApp = getIt<IsFirstOpenAppUseCase>();
 
   final _saveUserUC = getIt<SaveUserLocalUseCase>();
 
@@ -26,13 +27,16 @@ class SigInSignUpCubit extends Cubit<SignInSignUpState> {
   String email = '';
   String password = '';
   String otp = '';
+  bool isFistOpenApp = false;
 
-  init() {
+  init() async {
     emit(const SignInSignUpState.initial());
+    var result = await _isFirstOpenApp.call(NoParams());
+    result.fold((l) => null, (r) => isFistOpenApp = r);
   }
 
   senOtp() async {
-    if (!_validateEmail()) {
+    if (!validateEmail()) {
       return;
     }
     emit(const SignInSignUpState.process());
@@ -40,7 +44,7 @@ class SigInSignUpCubit extends Cubit<SignInSignUpState> {
     var result =
         await _sendOtpUC.call(SendOTPParam(email.trim(), OTPType.signUp));
     result.fold(
-      (l) => emit(SignInSignUpState.error(l.msg)),
+      (l) => emit(SignInSignUpState.errorEmail(l.msg)),
       (r) => emit(const SignInSignUpState.initial()),
     );
   }
@@ -51,13 +55,16 @@ class SigInSignUpCubit extends Cubit<SignInSignUpState> {
     result.fold((l) => emit(SignInSignUpState.error(l.msg)),
         (userResponse) async {
       var setting = await fetchSettingActiveCode.call(NoParams());
-      setting.fold((l) => emit(SignInSignUpState.error(l.msg)),
-          (r) => emit(SignInSignUpState.signUpSuccess(userResponse.data)));
+      setting.fold(
+        (l) => emit(SignInSignUpState.error(l.msg)),
+        (r) => emit(SignInSignUpState.signUpSuccess(
+            r.data.isEnable, userResponse.data)),
+      );
     });
   }
 
   signIn() async {
-    if (!_validateEmail() || !_validatePassword()) {
+    if (!validateEmail() || !_validatePassword()) {
       return;
     }
     emit(const SignInSignUpState.process());
@@ -65,35 +72,43 @@ class SigInSignUpCubit extends Cubit<SignInSignUpState> {
 
     result.fold((l) => emit(SignInSignUpState.error(l.msg)), (r) async {
       await _saveUserUC.call(r.data.user);
-      emit(const SignInSignUpState.signInSuccess());
+      emit(SignInSignUpState.signInSuccess(isFistOpenApp));
     });
   }
 
   signUp() {
-    if (!_validateEmail()) {
+    if (!validateEmail() || validateOTP()) {
       return;
     }
 
-    if (otp.isEmpty || otp.length < 6) {
-      emit(const SignInSignUpState.error('Verification Code required'));
-      return;
-    }
     emit(const SignInSignUpState.process());
     _signUp();
   }
 
   bool _validatePassword() {
-    if (password.isEmpty) {
-      emit(const SignInSignUpState.error('Password required'));
+    var message = password.validatePassword;
+
+    if (message.isNotEmpty) {
+      emit(SignInSignUpState.error(message));
       return false;
     }
-
     return true;
   }
 
-  bool _validateEmail() {
-    if (email.isEmpty) {
-      emit(SignInSignUpState.errorEmail(LocaleKeys.please_enter_email.tr()));
+  bool validateOTP() {
+    var message = otp.validateOTP;
+    if (message.isNotEmpty) {
+      emit(SignInSignUpState.error(message));
+    }
+    'message is $message'.log;
+    return message.isNotEmpty;
+  }
+
+  bool validateEmail() {
+    var message = email.validateEmail;
+
+    if (message.isNotEmpty) {
+      emit(SignInSignUpState.errorEmail(message));
       return false;
     }
     return true;

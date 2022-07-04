@@ -13,6 +13,12 @@ class NFTDataSource {
     return _nft(address).balanceOf(EthereumAddress.fromHex(ownerAddress));
   }
 
+  Future<List<BigInt>> tokensOf(
+      String address, String owner, int count, int start) {
+    return _nft(address).getTokensOfOwner(
+        EthereumAddress.fromHex(owner), BigInt.from(count), BigInt.from(start));
+  }
+
   Future<String> name(String address) => _nft(address).name();
 
   Future<String> symbol(String address) => _nft(address).symbol();

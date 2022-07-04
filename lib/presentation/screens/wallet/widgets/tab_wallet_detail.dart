@@ -73,7 +73,7 @@ class TabWalletDetail extends StatelessWidget {
                   SFText(keyText: networkName, style: TextStyles.bold12Blue),
                   const SizedBox(height: 4.0),
                   SFText(
-                      keyText: '${balance.formatBalance} $currencySymbol',
+                      keyText: '${balance.formatBalanceWallet} $currencySymbol',
                       style: TextStyles.bold30White),
                   const SizedBox(height: 20.0),
                   Container(
@@ -112,8 +112,10 @@ class TabWalletDetail extends StatelessWidget {
                           const SizedBox(width: 10),
                           Expanded(
                             child: BoxButtonWidget(
-                              onTap: () =>
-                                  Navigator.pushNamed(context, R.transfer),
+                              onTap: () {
+                                Navigator.pushNamed(context, R.transfer,
+                                    arguments: tokenList[2]);
+                              },
                               text: LocaleKeys.to_spending,
                               assetImage: Ics.icRefresh,
                             ),
@@ -150,45 +152,46 @@ class TabWalletDetail extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         const PopupInfoWallet(),
-                        ElevatedButton(
-                            onPressed: () async {
-                              var url = isJapanese
-                                  ? Const.okCoinUrl
-                                  : Const.binanceUrl;
-                              final uri = Uri.parse(url);
-                              if (await canLaunchUrl(uri)) {
-                                launchUrl(uri);
-                              }
-                            },
-                            style: ElevatedButton.styleFrom(
-                              padding: const EdgeInsets.fromLTRB(12, 8, 16, 8),
-                              primary: AppColors.yellow.withOpacity(0.1),
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(100.0),
-                              ),
-                            ),
-                            child: Row(
-                              children: [
-                                SFIcon(
-                                  isJapanese ? Ics.okcoin : Imgs.binance,
-                                  width: 24,
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 12.0),
+                          child: ElevatedButton(
+                              onPressed: () async {
+                                var url = isJapanese
+                                    ? Const.okCoinUrl
+                                    : Const.binanceUrl;
+                                final uri = Uri.parse(url);
+                                if (await canLaunchUrl(uri)) {
+                                  launchUrl(uri);
+                                }
+                              },
+                              style: ElevatedButton.styleFrom(
+                                padding: const EdgeInsets.fromLTRB(12, 8, 16, 8),
+                                primary: AppColors.yellow.withOpacity(0.1),
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(100.0),
                                 ),
-                                const SizedBox(width: 8.0),
-                                SFText(
-                                  keyText: LocaleKeys.buy,
-                                  style: isJapanese
-                                      ? TextStyles.bold14Blue
-                                      : TextStyles.bold14Yellow,
-                                )
-                              ],
-                            )),
+                              ),
+                              child: Row(
+                                children: [
+                                  SFIcon(
+                                    isJapanese ? Ics.okcoin : Imgs.binance,
+                                    width: 24,
+                                  ),
+                                  const SizedBox(width: 8.0),
+                                  SFText(
+                                    keyText: LocaleKeys.buy,
+                                    style: isJapanese
+                                        ? TextStyles.bold14Blue
+                                        : TextStyles.bold14Yellow,
+                                  )
+                                ],
+                              )),
+                        ),
                       ],
                     ),
                   ),
                   const SizedBox(height: 12.0),
-                  WalletDetailList(
-                    tokenList: tokenList,
-                  )
+                  WalletDetailList(tokenList: tokenList)
                 ],
               ),
             ),

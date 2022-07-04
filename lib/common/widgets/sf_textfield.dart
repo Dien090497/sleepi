@@ -26,6 +26,7 @@ class SFTextField extends StatelessWidget {
     this.textInputType,
     this.textStyle,
     this.inputFormatters,
+    this.focusNode,
   }) : super(key: key);
 
   final String? labelText;
@@ -44,6 +45,7 @@ class SFTextField extends StatelessWidget {
   final ValueChanged<String>? onChanged;
   final TextInputType? textInputType;
   final List<TextInputFormatter>? inputFormatters;
+  final FocusNode? focusNode;
 
   @override
   Widget build(BuildContext context) {
@@ -72,27 +74,27 @@ class SFTextField extends StatelessWidget {
         TextField(
           style: textStyle ?? TextStyles.w400White16,
           controller: controller,
+          focusNode: focusNode,
           onChanged: onChanged,
           keyboardType: textInputType,
           inputFormatters: inputFormatters,
           readOnly: readonly,
           decoration: InputDecoration(
-            isDense: true,
-            // hintText: hintText != null ? translate(hintText!) : null,
-            hintText: hintText?.tr(),
-            hintStyle: hintStyle ?? TextStyles.lightGrey14,
-            suffix: suffix,
-            suffixIcon: suffixIcon,
-            border: border,
-            focusedBorder: border,
-            disabledBorder: border,
-            enabledBorder: border,
-            errorBorder: border,
-            focusedErrorBorder: border,
-            counterText: "",
-            errorText: errorText,
-            errorMaxLines: 10
-          ),
+              isDense: true,
+              // hintText: hintText != null ? translate(hintText!) : null,
+              hintText: hintText?.tr(),
+              hintStyle: hintStyle ?? TextStyles.lightGrey14,
+              suffix: suffix,
+              suffixIcon: suffixIcon,
+              border: border,
+              focusedBorder: border,
+              disabledBorder: border,
+              enabledBorder: border,
+              errorBorder: border,
+              focusedErrorBorder: border,
+              counterText: "",
+              errorText: errorText,
+              errorMaxLines: 10),
           maxLines: maxLine ?? 1,
           maxLength: maxLength,
         ),
@@ -109,9 +111,9 @@ class DecimalTextInputFormatter extends TextInputFormatter {
 
   @override
   TextEditingValue formatEditUpdate(
-      TextEditingValue oldValue, // unused.
-      TextEditingValue newValue,
-      ) {
+    TextEditingValue oldValue, // unused.
+    TextEditingValue newValue,
+  ) {
     TextSelection newSelection = newValue.selection;
     String truncated = newValue.text;
 
