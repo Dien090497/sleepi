@@ -79,6 +79,7 @@ class AuthImplementation extends IAuthRepository {
           sendOTPParam.email, sendOTPParam.otpType);
       return Right(result);
     } on Exception catch (e) {
+
       return Left(FailureMessage(_catchErrorDio(e)));
     }
   }
@@ -154,6 +155,9 @@ class AuthImplementation extends IAuthRepository {
   String _catchErrorDio(Exception e) {
     try {
       if (e is DioError) {
+       if(e.response?.statusCode == 502){
+         return 'Some thing wrong';
+       }
         var error = e.response?.data['error']['details']['message'];
         if (error is String) {
           return error;
