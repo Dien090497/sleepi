@@ -138,8 +138,9 @@ class _SendToExternalScreenState extends State<SendToExternalScreen> {
                                               : Ics.icAvax)),
                                       onChanged: (v) {
                                         if (v.isNotEmpty) {
-                                          cubit.valueInEther = double.parse(v);
-                                          valueInEther = double.parse(v);
+                                          final result = v.toString().replaceAll(',', '.');
+                                          cubit.valueInEther = double.parse(result);
+                                          valueInEther = double.parse(result);
                                         }
                                       }),
                                   SFText(
