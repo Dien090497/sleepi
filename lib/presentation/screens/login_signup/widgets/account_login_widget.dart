@@ -7,19 +7,22 @@ import 'package:slee_fi/common/extensions/string_x.dart';
 import 'package:slee_fi/common/routes/app_routes.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
-import 'package:slee_fi/common/utils/appsflyer_custom.dart';
 import 'package:slee_fi/common/widgets/sf_buttons.dart';
+import 'package:slee_fi/common/widgets/sf_dialog.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
 import 'package:slee_fi/common/widgets/sf_textfield.dart';
 import 'package:slee_fi/common/widgets/sf_textfield_password.dart';
 import 'package:slee_fi/common/widgets/textfield_verification.dart';
-import 'package:slee_fi/di/injector.dart';
 import 'package:slee_fi/l10n/locale_keys.g.dart';
+import 'package:slee_fi/models/user/user_info_model.dart';
 import 'package:slee_fi/presentation/blocs/sign_in_sign_up/sign_up_cubit.dart';
 import 'package:slee_fi/presentation/blocs/sign_in_sign_up/sign_up_state.dart';
+import 'package:slee_fi/presentation/screens/create_password/create_password_screen.dart';
 import 'package:slee_fi/presentation/screens/enter_activation_code/enter_activation_code_screen.dart';
 import 'package:slee_fi/presentation/screens/setting_permission/widgets/healthcare_screen.dart';
 import 'package:url_launcher/url_launcher.dart';
+
+enum Action { signUp, signIn, forgotPassword }
 
 class AccountLoginWidget extends StatefulWidget {
   const AccountLoginWidget({Key? key}) : super(key: key);
@@ -29,16 +32,37 @@ class AccountLoginWidget extends StatefulWidget {
 }
 
 class _AccountLoginState extends State<AccountLoginWidget> {
-  bool isLoginSignup = true;
+  Action action = Action.signUp;
 
-  void changeStatus() {
-    setState(() {
-      isLoginSignup = !isLoginSignup;
-    });
+  _changeState(Action action) {
+    setState(() => this.action = action);
+  }
+
+  String get _title {
+    if (action == Action.forgotPassword) {
+      return LocaleKeys.forgot_password;
+    }
+
+    if (action == Action.signIn) return LocaleKeys.account_login;
+
+    return LocaleKeys.signup;
+  }
+
+  bool get _isActiveCode {
+    return action == Action.signUp || action == Action.forgotPassword;
+  }
+
+  String get _textButton {
+    if (action == Action.forgotPassword) return LocaleKeys.send;
+
+    if (action == Action.signIn) return LocaleKeys.login;
+
+    return LocaleKeys.signup;
   }
 
   @override
   Widget build(BuildContext context) {
+
     return BlocConsumer<SigInSignUpCubit, SignInSignUpState>(
       listener: (context, state) {
         if (state is SignInSignUpStateSignUpSuccess) {
@@ -50,7 +74,6 @@ class _AccountLoginState extends State<AccountLoginWidget> {
                 state.enableActiveCode,
               ));
         } else if (state is SignInSignUpStateSignInSuccess) {
-
           'sign success ${state.isFirstOpenApp}'.log;
           if (!state.isFirstOpenApp) {
             Navigator.pushNamedAndRemoveUntil(
@@ -60,6 +83,14 @@ class _AccountLoginState extends State<AccountLoginWidget> {
                 context, R.healthcarePermission, (_) => false,
                 arguments: HealthcareArg(true));
           }
+        } else if (state is SignInSignUpStateVerifySuccess) {
+          Navigator.pushNamed(context, R.createPassword,
+              arguments: CreatePasswordArg(
+                '',
+                state.otp,
+                UserInfoModel.emptyUser(state.email),
+                false,
+              )).then((value) => _checkChangePasswordSuccess(value));
         }
       },
       builder: (context, state) {
@@ -67,9 +98,7 @@ class _AccountLoginState extends State<AccountLoginWidget> {
         return Column(
           children: [
             SFText(
-              keyText: isLoginSignup
-                  ? LocaleKeys.signup.tr()
-                  : LocaleKeys.account_login.tr(),
+              keyText: _title.tr(),
               style: TextStyles.bold18LightWhite,
               stringCase: StringCase.upperCase,
             ),
@@ -86,62 +115,53 @@ class _AccountLoginState extends State<AccountLoginWidget> {
                         keyText: state.message, style: TextStyles.w400Red12)
                     : const SizedBox()),
             const SizedBox(height: 5),
-            isLoginSignup
+            _isActiveCode
                 ? TextfieldVerificationEmail(
                     maxLength: 6,
                     validate: () => cubit.validateEmail(),
-                    onPressed: () => cubit.senOtp(),
+                    onPressed: () => cubit.senOtp(action),
+                    errorText:
+                        state is SignInSignUpStateError ? state.message : '',
                     valueChanged: (otp) => cubit.otp = otp)
                 : SFTextFieldPassword(
                     labelText: LocaleKeys.password,
                     valueChanged: (password) => cubit.password = password,
+                    errorText:
+                        state is SignInSignUpStateError ? state.message : '',
                   ),
             const SizedBox(height: 5),
+
             Container(
-                height: 15,
-                alignment: Alignment.centerLeft,
-                child: state is SignInSignUpStateError
-                    ? SFText(
-                        keyText: state.message,
-                        style: TextStyles.w400Red12,
-                        maxLines: 1,
-                      )
-                    : const SizedBox()),
-            isLoginSignup
-                ? const SizedBox()
-                : Align(
-                    alignment: Alignment.centerRight,
-                    child: SFTextButton(
-                      text: LocaleKeys.forgot_password,
-                      textStyle: TextStyles.w400lightGrey12,
-                      onPressed: () {},
+              alignment: Alignment.centerRight,
+              height: 50,
+              child: _isActiveCode
+                  ? const SizedBox()
+                  : SFTextButton(
+                      text: "${LocaleKeys.forgot_password.tr()}?",
+                      textStyle: TextStyles.white1w400size12,
+                      onPressed: () => _changeState(Action.forgotPassword),
                     ),
-                  ),
-            SizedBox(height: isLoginSignup ? 24 : 8),
+            ),
+            // SizedBox(height: isLoginSignup ? 24 : 8),
             SFButton(
-              text: isLoginSignup ? LocaleKeys.signup.tr() : LocaleKeys.login,
+              text: _textButton.tr(),
               color: AppColors.blue,
               textStyle: TextStyles.w600WhiteSize16,
               onPressed: () {
-                getIt<AppFlyerCustom>().signIn();
+                cubit.process(action);
                 FocusScope.of(context).unfocus();
-                if (isLoginSignup) {
-                  cubit.signUp();
-                } else {
-                  cubit.signIn();
-                }
               },
               width: MediaQuery.of(context).size.width,
             ),
             const SizedBox(height: 16),
             SFTextButton(
-              text: isLoginSignup
+              text: _isActiveCode
                   ? LocaleKeys.account_login
                   : LocaleKeys.verification_login,
               textStyle: TextStyles.blue14,
               onPressed: () {
                 cubit.init();
-                changeStatus();
+                _changeState(_isActiveCode ? Action.signIn : Action.signUp);
               },
             ),
             const SizedBox(height: 16),
@@ -182,5 +202,12 @@ class _AccountLoginState extends State<AccountLoginWidget> {
         );
       },
     );
+  }
+
+  _checkChangePasswordSuccess(dynamic value) {
+    if(value == true){
+      _changeState(Action.signIn);
+      showSuccessfulDialog(context, LocaleKeys.reset_password_successfully,padding: const EdgeInsets.all(10));
+    }
   }
 }

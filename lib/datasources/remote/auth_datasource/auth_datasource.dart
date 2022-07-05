@@ -20,6 +20,7 @@ import 'package:slee_fi/models/verify_schema/verify_schema.dart';
 import 'package:slee_fi/models/verify_user_schema/verify_user_schema.dart';
 import 'package:slee_fi/models/white_draw_nft_schema/whit_draw_nft_schema.dart';
 import 'package:slee_fi/models/white_draw_token_schema/whit_draw_token_schema.dart';
+import 'package:slee_fi/schema/change_password_schema/change_password_schema.dart';
 import 'package:slee_fi/schema/sign_in_schema/sign_in_schema.dart';
 
 part 'auth_datasource.g.dart';
@@ -60,6 +61,10 @@ abstract class AuthDataSource {
   @Header('Content-Type: application/json')
   Future<UserResponse> verifyUser(@Body() VerifyUserSchema verifyUserSchema);
 
+  @POST('/users/change-password')
+  @Header('Content-Type: application/json')
+  Future<dynamic> changePassword(@Body() ChangePasswordSchema changePasswordSchema);
+
   /// auth
 
   @POST('/auth/login')
@@ -77,13 +82,15 @@ abstract class AuthDataSource {
 
   @POST('/auth/create-password-step')
   @Header('Content-Type: application/json')
-  Future<CreatePasswordResponse> createPassword(@Body() CreatePasswordSchema createPasswordSchema);
+  Future<CreatePasswordResponse> createPassword(
+      @Body() CreatePasswordSchema createPasswordSchema);
 
   @GET('/auth/setting-active-code')
   Future<SettingActiveCodeResponse> getSettingActiveCode();
 
   @GET('/auth/verify-active-code')
-  Future<ActivationCodeResponse> verifyActiveCode(@Query('activeCode') String activeCode);
+  Future<ActivationCodeResponse> verifyActiveCode(
+      @Query('activeCode') String activeCode);
 
   ///stacking
   @POST('/stacking')
@@ -93,7 +100,8 @@ abstract class AuthDataSource {
   ///white draw
   @POST('/withdraw/token')
   @Header('Content-Type: application/json')
-  Future<dynamic> whitedrawToken(@Body() WhitDrawTokenSchema whitDrawTokenSchema);
+  Future<dynamic> whitedrawToken(
+      @Body() WhitDrawTokenSchema whitDrawTokenSchema);
 
   @POST('/withdraw/nft')
   @Header('Content-Type: application/json')
@@ -103,6 +111,4 @@ abstract class AuthDataSource {
   @POST('/market-place/buy-nft')
   @Header('Content-Type: application/json')
   Future<dynamic> buyNFT(@Body() BuyNFTSchema buyNFTSchema);
-
-
 }
