@@ -78,7 +78,6 @@ class AuthImplementation extends IAuthRepository {
           sendOTPParam.email, sendOTPParam.otpType);
       return Right(result);
     } on Exception catch (e) {
-
       return Left(FailureMessage.fromException(e));
     }
   }
@@ -106,11 +105,18 @@ class AuthImplementation extends IAuthRepository {
   @override
   Future<Either<Failure, bool>> logOut() async {
     try {
+      var isFirstOpen = false;
+      var result = await isFirstOpenApp();
+      result.fold((l) => null, (r) => isFirstOpen = r);
       await Future.wait([
         _secureStorage.clearStorage(),
         _isarDataSource.clearWallet(),
         _getStorageDataSource.clearAll(),
       ]);
+      if (isFirstOpen) {
+        _secureStorage.makeFirstOpen();
+      }
+
       return const Right(true);
     } catch (e) {
       return Left(FailureMessage('$e'));
@@ -151,17 +157,15 @@ class AuthImplementation extends IAuthRepository {
     }
   }
 
-
-
   @override
   Future<Either<FailureMessage, UserInfoEntity>> currentUser() async {
     try {
-    final user = await _secureStorage.readCurrentUser();
-    if (user == null) {
-      return const Left(FailureMessage('msg'));
-    } else {
-      return Right(user.toEntity());
-    }
+      final user = await _secureStorage.readCurrentUser();
+      if (user == null) {
+        return const Left(FailureMessage('msg'));
+      } else {
+        return Right(user.toEntity());
+      }
     } catch (e) {
       'error get current user $e'.log;
       return const Left(FailureMessage('empty user'));

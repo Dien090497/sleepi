@@ -149,9 +149,6 @@ class _WalletScreenState extends State<WalletScreen>
       controller.animateTo(1);
       var cubit = context.read<WalletCubit>();
       cubit.importWallet(value.results['data'] as WalletInfoEntity);
-      if (value.fromPage == R.createWallet) {
-        showCustomAlertDialog(context, children: const PopUpWalletWarning());
-      }
     }
   }
 }
