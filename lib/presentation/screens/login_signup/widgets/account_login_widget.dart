@@ -123,7 +123,8 @@ class _AccountLoginState extends State<AccountLoginWidget> {
                     valueChanged: (otp) => cubit.otp = otp)
                 : SFTextFieldPassword(
                     labelText: LocaleKeys.password,
-                    valueChanged: (password) => cubit.onPasswordChange(password),
+                    valueChanged: (password) =>
+                        cubit.onPasswordChange(password),
                     errorText:
                         state is SignInSignUpStateError ? state.message : '',
                   ),
