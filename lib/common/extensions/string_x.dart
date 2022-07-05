@@ -59,6 +59,14 @@ extension StringX on String {
     if (length < 6) {
       return LocaleKeys.password_must_be_at_least_6.tr();
     }
+
+    String  pattern = r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~]).{8,}$';
+    RegExp regExp =  RegExp(pattern);
+    var result =  regExp.hasMatch(this);
+    if(contains(' ') ||!result){
+      ///todo:: add message
+      return ' ';
+    }
     return '';
   }
 
