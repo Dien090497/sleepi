@@ -17,6 +17,8 @@ abstract class IWalletRepository {
   Future<Either<Failure, double>> getAmountOutMin(
       double value, String contractAddressFrom, String contractAddressTo);
 
+  Future<Either<Failure, bool>> checkApproveToken(double value, String contractAddress);
+
   Future<Either<Failure, bool>> swapToken(
       double value, String contractAddressFrom, String contractAddressTo);
 

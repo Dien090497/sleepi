@@ -25,6 +25,7 @@ import 'package:slee_fi/l10n/locale_keys.g.dart';
 import 'package:slee_fi/presentation/blocs/trade/trade_cubit.dart';
 import 'package:slee_fi/presentation/blocs/trade/trade_state.dart';
 import 'package:slee_fi/presentation/screens/send_to_external/widgets/dropdown_select_token.dart';
+import 'package:slee_fi/presentation/screens/trade/widgets/pop_up_approve_trade.dart';
 import 'package:slee_fi/presentation/screens/trade/widgets/pop_up_confirm_trade.dart';
 
 class TradeArguments {
@@ -66,7 +67,9 @@ class _TradeScreenState extends State<TradeScreen> {
 
   onValidValue() {
     if (valueController.text != '') {
-      final result = valueController.toString().replaceAll(',', '.');
+      final result = valueController.text.toString().contains(',')
+          ? valueController.text.toString().replaceAll(',', '.')
+          : valueController.text.toString();
       if (double.parse(result) > balance) {
         error = LocaleKeys.insufficient_balance;
       } else if (double.parse(result) == 0) {
@@ -160,6 +163,14 @@ class _TradeScreenState extends State<TradeScreen> {
                       Const.tokens[indexFrom]['address'].toString());
                 });
               });
+            } else {
+              showCustomAlertDialog(context,
+                  children: PopUpConfirmApproveTrade(
+                    tokenName: Const.tokens[indexFrom]['symbol'].toString(),
+                    cubit: cubit,
+                    contractAddress:
+                        Const.tokens[indexFrom]['address'].toString(),
+                  ));
             }
           }
           if (state is TradeStateInitial) {
@@ -258,8 +269,9 @@ class _TradeScreenState extends State<TradeScreen> {
                                                       decimalRange: 6)
                                                 ],
                                                 textInputType:
-                                                const TextInputType.numberWithOptions(
-                                                    decimal: true),
+                                                    const TextInputType
+                                                            .numberWithOptions(
+                                                        decimal: true),
                                                 hintText: "0.00",
                                                 hintStyle:
                                                     TextStyles.bold16LightWhite,
@@ -267,7 +279,9 @@ class _TradeScreenState extends State<TradeScreen> {
                                                   if (value.isNotEmpty) {
                                                     setState(() {
                                                       onValidValue();
-                                                      final result = valueController.toString().replaceAll(',', '.');
+                                                      final result = valueController.text.toString().contains(',')
+                                                          ? valueController.text.toString().replaceAll(',', '.')
+                                                          : valueController.text.toString();
                                                       cubit.getAmountOutMin(
                                                           Const
                                                               .tokens[indexFrom]
@@ -311,25 +325,27 @@ class _TradeScreenState extends State<TradeScreen> {
                                                                     : balance)
                                                                 .toString();
                                                         Future.delayed(
-                                                          const Duration(
-                                                              milliseconds:
-                                                                  100),
-                                                          () {
-                                                            final result = valueController.toString().replaceAll(',', '.');
-                                                            cubit
-                                                                .getAmountOutMin(
-                                                                Const.tokens[
-                                                                indexFrom]
-                                                                [
-                                                                'address']
-                                                                    .toString(),
-                                                                Const.tokens[
-                                                                indexTo][
-                                                                'address']
-                                                                    .toString(),
-                                                                double.parse(result));
-                                                          }
-                                                        );
+                                                            const Duration(
+                                                                milliseconds:
+                                                                    100), () {
+                                                          final result =
+                                                              valueController
+                                                                  .toString()
+                                                                  .replaceAll(
+                                                                      ',', '.');
+                                                          cubit.getAmountOutMin(
+                                                              Const.tokens[
+                                                                      indexFrom]
+                                                                      [
+                                                                      'address']
+                                                                  .toString(),
+                                                              Const.tokens[
+                                                                      indexTo][
+                                                                      'address']
+                                                                  .toString(),
+                                                              double.parse(
+                                                                  result));
+                                                        });
                                                         error = '';
                                                         setState(() {});
                                                       }),
@@ -449,7 +465,6 @@ class _TradeScreenState extends State<TradeScreen> {
                                         isResultLabel: true,
                                         tokens: Const.tokens,
                                         onChange: (selectItem) {
-
                                           setState(() {
                                             if (selectItem['value'] ==
                                                 Const.tokens[indexFrom]
@@ -465,15 +480,14 @@ class _TradeScreenState extends State<TradeScreen> {
                                             () => firstToken.currentState
                                                 ?.changeSelectedItem(),
                                           );
-                                          final result = valueController.toString().replaceAll(',', '.');
+                                          final result = valueController
+                                              .toString()
+                                              .replaceAll(',', '.');
 
                                           cubit.getAmountOutMin(
-                                              Const
-                                                  .tokens[indexFrom]
-                                              ['address']
+                                              Const.tokens[indexFrom]['address']
                                                   .toString(),
-                                              Const.tokens[indexTo]
-                                              ['address']
+                                              Const.tokens[indexTo]['address']
                                                   .toString(),
                                               double.parse(result));
                                           FocusScope.of(context)
@@ -501,7 +515,9 @@ class _TradeScreenState extends State<TradeScreen> {
                             }
                           });
                           if (error == '') {
-                            final result = valueController.toString().replaceAll(',', '.');
+                            final result = valueController.text.toString().contains(',')
+                                ? valueController.text.toString().replaceAll(',', '.')
+                                : valueController.text.toString();
                             showCustomAlertDialog(context,
                                 children: PopUpConfirmTrade(
                                   value: double.parse(result),
@@ -515,7 +531,6 @@ class _TradeScreenState extends State<TradeScreen> {
                                   addressTo: Const.tokens[indexTo]['address']
                                       .toString(),
                                   onSwap: () {
-
                                     cubit.swapToken(
                                         double.parse(result),
                                         Const.tokens[indexFrom]['address']

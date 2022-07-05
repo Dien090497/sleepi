@@ -101,19 +101,17 @@ class _WalletScreenState extends State<WalletScreen>
                               controller.animateTo(1);
                             }
                           });
-                        } else {
-                          if (firstOpenWallet) {
-                            setState(() {
-                              firstOpenWallet = false;
-                            });
-                            Navigator.of(context)
-                                .pushNamed(R.passcode)
-                                .then((value) {
-                              if (value == true) {
-                                controller.animateTo(1);
-                              }
-                            });
-                          }
+                        } else if (firstOpenWallet) {
+                          setState(() {
+                            firstOpenWallet = false;
+                          });
+                          Navigator.of(context)
+                              .pushNamed(R.passcode)
+                              .then((value) {
+                            if (value == true) {
+                              controller.animateTo(1);
+                            }
+                          });
                         }
                       }
                       return true;

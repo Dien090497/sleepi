@@ -184,6 +184,24 @@ class WalletImplementation extends IWalletRepository {
     }
   }
 
+  @override
+  Future<Either<Failure, bool>> checkApproveToken(
+      double value, String contractAddress) async {
+    try {
+      var walletId = _getStorageDataSource.getCurrentWalletId();
+      var wallet = await _isarDataSource.getWalletAt(walletId);
+      Credentials credentials = EthPrivateKey.fromHex(wallet!.privateKey);
+      BigInt allow = await _web3DataSource.allowance(
+          EthereumAddress.fromHex(wallet.address), contractAddress);
+      if (value > allow.toDouble()) {
+        _web3DataSource.approveToken(contractAddress, credentials);
+      }
+      return const Right(true);
+    } catch (e) {
+      return Left(FailureMessage('$e'));
+    }
+  }
+
   Future<Either<Failure, bool>> swapAvaxToken(
       double value, String contractAddress) async {
     try {

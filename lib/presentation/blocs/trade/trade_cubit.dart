@@ -2,6 +2,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:slee_fi/di/injector.dart';
 import 'package:slee_fi/failures/failure.dart';
 import 'package:slee_fi/presentation/blocs/trade/trade_state.dart';
+import 'package:slee_fi/usecase/check_approve_usecase.dart';
 import 'package:slee_fi/usecase/get_amount_out_min_usecase.dart';
 import 'package:slee_fi/usecase/get_balance_token_usecase.dart';
 import 'package:slee_fi/usecase/swap_token_usecase.dart';
@@ -10,6 +11,7 @@ class TradeCubit extends Cubit<TradeState> {
   TradeCubit() : super(const TradeStateInitial());
 
   final _swapToken = getIt<SwapTokenUseCase>();
+  final _checkApproveToken = getIt<CheckApproveUseCase>();
 
   final _getBalanceToken = getIt<GetBalanceTokenUseCase>();
   final _getAmountOutMin = getIt<GetAmountOutMinUseCase>();
@@ -31,6 +33,19 @@ class TradeCubit extends Cubit<TradeState> {
       },
       (success) {
         emit(TradeState.success(success));
+      },
+    );
+  }
+
+  Future<void> checkApproveToken(double value, String contractAddress) async {
+    final result = await _checkApproveToken.call(CheckApproveTokenParams(
+        value: value, contractAddress: contractAddress));
+    result.fold(
+      (l) {
+        emit(TradeState.fail(l is FailureMessage ? l.msg : '$l'));
+      },
+      (success) {
+        emit(TradeState.approveSuccess(success));
       },
     );
   }
