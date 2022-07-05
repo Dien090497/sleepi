@@ -5,7 +5,7 @@ part 'send_email_response.g.dart';
 @JsonSerializable()
 class SendEmailResponse {
   final Content data;
-  final dynamic meta;
+  final Object meta;
 
   SendEmailResponse(this.data, this.meta);
 

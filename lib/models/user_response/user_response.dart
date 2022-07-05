@@ -5,7 +5,7 @@ part 'user_response.g.dart';
 
 @JsonSerializable()
 class UserResponse {
-  final dynamic meta;
+  final Object meta;
   final UserInfoModel data;
 
   UserResponse(this.meta, this.data);

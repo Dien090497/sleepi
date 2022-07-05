@@ -9,7 +9,7 @@ part of 'refresh_token_response.dart';
 RefreshTokenResponse _$RefreshTokenResponseFromJson(
         Map<String, dynamic> json) =>
     RefreshTokenResponse(
-      json['meta'],
+      json['meta'] as Object,
       RefreshTokenModel.fromJson(json['data'] as Map<String, dynamic>),
     );
 

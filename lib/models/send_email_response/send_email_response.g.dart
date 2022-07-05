@@ -9,7 +9,7 @@ part of 'send_email_response.dart';
 SendEmailResponse _$SendEmailResponseFromJson(Map<String, dynamic> json) =>
     SendEmailResponse(
       Content.fromJson(json['data'] as Map<String, dynamic>),
-      json['meta'],
+      json['meta'] as Object,
     );
 
 Map<String, dynamic> _$SendEmailResponseToJson(SendEmailResponse instance) =>

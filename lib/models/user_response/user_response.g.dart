@@ -7,7 +7,7 @@ part of 'user_response.dart';
 // **************************************************************************
 
 UserResponse _$UserResponseFromJson(Map<String, dynamic> json) => UserResponse(
-      json['meta'],
+      json['meta'] as Object,
       UserInfoModel.fromJson(json['data'] as Map<String, dynamic>),
     );
 
