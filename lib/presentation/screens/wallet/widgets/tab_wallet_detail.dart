@@ -40,19 +40,12 @@ class _TabWalletDetailState extends State<TabWalletDetail> {
   String currencySymbol = '';
   String addressWallet = '';
   List<TokenEntity> tokenList = [];
-  late RefreshController refreshController =
-      RefreshController(initialRefresh: true);
+  late RefreshController refreshController = RefreshController();
 
   void _onRefresh(
       RefreshController refreshController, WalletCubit walletCubit) async {
     await walletCubit.init();
     refreshController.refreshCompleted();
-  }
-
-  @override
-  void dispose() {
-    timer.cancel();
-    super.dispose();
   }
 
   @override
@@ -71,20 +64,12 @@ class _TabWalletDetailState extends State<TabWalletDetail> {
     var isJapanese = Localizations.localeOf(context).toLanguageTag().isJapanese;
     return BlocBuilder<WalletCubit, WalletState>(
       builder: (context, state) {
-        if (state is! WalletStateLoading) {
-          refreshController.refreshCompleted();
-        }
         if (state is WalletStateLoaded && state.walletInfoEntity != null) {
-          if (state.walletInfoEntity != null) {
-            refreshController = RefreshController(initialRefresh: false);
-            balance = state.walletInfoEntity!.nativeCurrency.balance;
-            addressWallet = state.walletInfoEntity!.address;
-            currencySymbol = state.walletInfoEntity!.nativeCurrency.symbol;
-            networkName = state.walletInfoEntity!.networkName;
-            tokenList = state.tokenList;
-          } else {
-            refreshController = RefreshController(initialRefresh: true);
-          }
+          balance = state.walletInfoEntity!.nativeCurrency.balance;
+          addressWallet = state.walletInfoEntity!.address;
+          currencySymbol = state.walletInfoEntity!.nativeCurrency.symbol;
+          networkName = state.walletInfoEntity!.networkName;
+          tokenList = state.tokenList;
         }
         return FocusDetector(
           onFocusGained: () async {

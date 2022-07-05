@@ -8,7 +8,7 @@ part of 'users_response.dart';
 
 UsersResponse _$UsersResponseFromJson(Map<String, dynamic> json) =>
     UsersResponse(
-      json['meta'],
+      json['meta'] as Object,
       (json['data'] as List<dynamic>)
           .map((e) => UserInfoModel.fromJson(e as Map<String, dynamic>))
           .toList(),

@@ -1,9 +1,11 @@
 import 'dart:developer';
 import 'dart:math' as math;
+import 'dart:typed_data';
 
 import 'package:bip32/bip32.dart' as bip32;
 import 'package:bip39/bip39.dart' as bip39;
 import 'package:erc20/erc20.dart';
+import 'package:eth_sig_util/eth_sig_util.dart';
 import 'package:hex/hex.dart';
 import 'package:http/http.dart';
 import 'package:injectable/injectable.dart';
@@ -302,6 +304,12 @@ class Web3DataSource {
 
   Future<TransactionInformation> getTxnByHash(String hash) =>
       _web3provider.web3client.getTransactionByHash(hash);
+
+  String generateSignature({required String privateKey, required String message}) {
+    final messageHex = Uint8List.fromList(message.codeUnits);
+    String signature = EthSigUtil.signPersonalMessage(message: messageHex, privateKey: privateKey);
+    return signature;
+  }
 }
 
 @module

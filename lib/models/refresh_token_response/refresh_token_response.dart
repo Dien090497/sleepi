@@ -3,7 +3,7 @@ import 'package:json_annotation/json_annotation.dart';
 part 'refresh_token_response.g.dart';
 @JsonSerializable()
 class RefreshTokenResponse{
-  final dynamic meta;
+  final Object meta;
   final RefreshTokenModel data;
 
   RefreshTokenResponse(this.meta, this.data);

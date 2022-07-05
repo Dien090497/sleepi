@@ -4,7 +4,7 @@ part 'create_password_response.g.dart';
 
 @JsonSerializable()
 class CreatePasswordResponse {
-  final dynamic meta;
+  final Object  meta;
   final Content data;
 
   CreatePasswordResponse(this.meta, this.data);

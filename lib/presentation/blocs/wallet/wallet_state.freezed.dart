@@ -20,8 +20,8 @@ mixin _$WalletState {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(WalletInfoEntity? walletInfoEntity,
-            bool firstOpenWallet, List<TokenEntity> tokenList)
+    required TResult Function(
+            WalletInfoEntity? walletInfoEntity, List<TokenEntity> tokenList)
         loaded,
     required TResult Function() empty,
     required TResult Function(String message) error,
@@ -31,8 +31,8 @@ mixin _$WalletState {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(WalletInfoEntity? walletInfoEntity, bool firstOpenWallet,
-            List<TokenEntity> tokenList)?
+    TResult Function(
+            WalletInfoEntity? walletInfoEntity, List<TokenEntity> tokenList)?
         loaded,
     TResult Function()? empty,
     TResult Function(String message)? error,
@@ -42,8 +42,8 @@ mixin _$WalletState {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(WalletInfoEntity? walletInfoEntity, bool firstOpenWallet,
-            List<TokenEntity> tokenList)?
+    TResult Function(
+            WalletInfoEntity? walletInfoEntity, List<TokenEntity> tokenList)?
         loaded,
     TResult Function()? empty,
     TResult Function(String message)? error,
@@ -139,8 +139,8 @@ class _$WalletStateInitial implements WalletStateInitial {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(WalletInfoEntity? walletInfoEntity,
-            bool firstOpenWallet, List<TokenEntity> tokenList)
+    required TResult Function(
+            WalletInfoEntity? walletInfoEntity, List<TokenEntity> tokenList)
         loaded,
     required TResult Function() empty,
     required TResult Function(String message) error,
@@ -153,8 +153,8 @@ class _$WalletStateInitial implements WalletStateInitial {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(WalletInfoEntity? walletInfoEntity, bool firstOpenWallet,
-            List<TokenEntity> tokenList)?
+    TResult Function(
+            WalletInfoEntity? walletInfoEntity, List<TokenEntity> tokenList)?
         loaded,
     TResult Function()? empty,
     TResult Function(String message)? error,
@@ -167,8 +167,8 @@ class _$WalletStateInitial implements WalletStateInitial {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(WalletInfoEntity? walletInfoEntity, bool firstOpenWallet,
-            List<TokenEntity> tokenList)?
+    TResult Function(
+            WalletInfoEntity? walletInfoEntity, List<TokenEntity> tokenList)?
         loaded,
     TResult Function()? empty,
     TResult Function(String message)? error,
@@ -268,8 +268,8 @@ class _$WalletStateLoading implements WalletStateLoading {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(WalletInfoEntity? walletInfoEntity,
-            bool firstOpenWallet, List<TokenEntity> tokenList)
+    required TResult Function(
+            WalletInfoEntity? walletInfoEntity, List<TokenEntity> tokenList)
         loaded,
     required TResult Function() empty,
     required TResult Function(String message) error,
@@ -282,8 +282,8 @@ class _$WalletStateLoading implements WalletStateLoading {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(WalletInfoEntity? walletInfoEntity, bool firstOpenWallet,
-            List<TokenEntity> tokenList)?
+    TResult Function(
+            WalletInfoEntity? walletInfoEntity, List<TokenEntity> tokenList)?
         loaded,
     TResult Function()? empty,
     TResult Function(String message)? error,
@@ -296,8 +296,8 @@ class _$WalletStateLoading implements WalletStateLoading {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(WalletInfoEntity? walletInfoEntity, bool firstOpenWallet,
-            List<TokenEntity> tokenList)?
+    TResult Function(
+            WalletInfoEntity? walletInfoEntity, List<TokenEntity> tokenList)?
         loaded,
     TResult Function()? empty,
     TResult Function(String message)? error,
@@ -359,10 +359,7 @@ abstract class _$$WalletStateLoadedCopyWith<$Res> {
   factory _$$WalletStateLoadedCopyWith(
           _$WalletStateLoaded value, $Res Function(_$WalletStateLoaded) then) =
       __$$WalletStateLoadedCopyWithImpl<$Res>;
-  $Res call(
-      {WalletInfoEntity? walletInfoEntity,
-      bool firstOpenWallet,
-      List<TokenEntity> tokenList});
+  $Res call({WalletInfoEntity? walletInfoEntity, List<TokenEntity> tokenList});
 
   $WalletInfoEntityCopyWith<$Res>? get walletInfoEntity;
 }
@@ -381,7 +378,6 @@ class __$$WalletStateLoadedCopyWithImpl<$Res>
   @override
   $Res call({
     Object? walletInfoEntity = freezed,
-    Object? firstOpenWallet = freezed,
     Object? tokenList = freezed,
   }) {
     return _then(_$WalletStateLoaded(
@@ -389,10 +385,6 @@ class __$$WalletStateLoadedCopyWithImpl<$Res>
           ? _value.walletInfoEntity
           : walletInfoEntity // ignore: cast_nullable_to_non_nullable
               as WalletInfoEntity?,
-      firstOpenWallet: firstOpenWallet == freezed
-          ? _value.firstOpenWallet
-          : firstOpenWallet // ignore: cast_nullable_to_non_nullable
-              as bool,
       tokenList: tokenList == freezed
           ? _value._tokenList
           : tokenList // ignore: cast_nullable_to_non_nullable
@@ -417,14 +409,11 @@ class __$$WalletStateLoadedCopyWithImpl<$Res>
 class _$WalletStateLoaded implements WalletStateLoaded {
   const _$WalletStateLoaded(
       {required this.walletInfoEntity,
-      required this.firstOpenWallet,
       required final List<TokenEntity> tokenList})
       : _tokenList = tokenList;
 
   @override
   final WalletInfoEntity? walletInfoEntity;
-  @override
-  final bool firstOpenWallet;
   final List<TokenEntity> _tokenList;
   @override
   List<TokenEntity> get tokenList {
@@ -434,7 +423,7 @@ class _$WalletStateLoaded implements WalletStateLoaded {
 
   @override
   String toString() {
-    return 'WalletState.loaded(walletInfoEntity: $walletInfoEntity, firstOpenWallet: $firstOpenWallet, tokenList: $tokenList)';
+    return 'WalletState.loaded(walletInfoEntity: $walletInfoEntity, tokenList: $tokenList)';
   }
 
   @override
@@ -445,8 +434,6 @@ class _$WalletStateLoaded implements WalletStateLoaded {
             const DeepCollectionEquality()
                 .equals(other.walletInfoEntity, walletInfoEntity) &&
             const DeepCollectionEquality()
-                .equals(other.firstOpenWallet, firstOpenWallet) &&
-            const DeepCollectionEquality()
                 .equals(other._tokenList, _tokenList));
   }
 
@@ -454,7 +441,6 @@ class _$WalletStateLoaded implements WalletStateLoaded {
   int get hashCode => Object.hash(
       runtimeType,
       const DeepCollectionEquality().hash(walletInfoEntity),
-      const DeepCollectionEquality().hash(firstOpenWallet),
       const DeepCollectionEquality().hash(_tokenList));
 
   @JsonKey(ignore: true)
@@ -467,13 +453,13 @@ class _$WalletStateLoaded implements WalletStateLoaded {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(WalletInfoEntity? walletInfoEntity,
-            bool firstOpenWallet, List<TokenEntity> tokenList)
+    required TResult Function(
+            WalletInfoEntity? walletInfoEntity, List<TokenEntity> tokenList)
         loaded,
     required TResult Function() empty,
     required TResult Function(String message) error,
   }) {
-    return loaded(walletInfoEntity, firstOpenWallet, tokenList);
+    return loaded(walletInfoEntity, tokenList);
   }
 
   @override
@@ -481,13 +467,13 @@ class _$WalletStateLoaded implements WalletStateLoaded {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(WalletInfoEntity? walletInfoEntity, bool firstOpenWallet,
-            List<TokenEntity> tokenList)?
+    TResult Function(
+            WalletInfoEntity? walletInfoEntity, List<TokenEntity> tokenList)?
         loaded,
     TResult Function()? empty,
     TResult Function(String message)? error,
   }) {
-    return loaded?.call(walletInfoEntity, firstOpenWallet, tokenList);
+    return loaded?.call(walletInfoEntity, tokenList);
   }
 
   @override
@@ -495,15 +481,15 @@ class _$WalletStateLoaded implements WalletStateLoaded {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(WalletInfoEntity? walletInfoEntity, bool firstOpenWallet,
-            List<TokenEntity> tokenList)?
+    TResult Function(
+            WalletInfoEntity? walletInfoEntity, List<TokenEntity> tokenList)?
         loaded,
     TResult Function()? empty,
     TResult Function(String message)? error,
     required TResult orElse(),
   }) {
     if (loaded != null) {
-      return loaded(walletInfoEntity, firstOpenWallet, tokenList);
+      return loaded(walletInfoEntity, tokenList);
     }
     return orElse();
   }
@@ -552,11 +538,9 @@ class _$WalletStateLoaded implements WalletStateLoaded {
 abstract class WalletStateLoaded implements WalletState {
   const factory WalletStateLoaded(
       {required final WalletInfoEntity? walletInfoEntity,
-      required final bool firstOpenWallet,
       required final List<TokenEntity> tokenList}) = _$WalletStateLoaded;
 
   WalletInfoEntity? get walletInfoEntity => throw _privateConstructorUsedError;
-  bool get firstOpenWallet => throw _privateConstructorUsedError;
   List<TokenEntity> get tokenList => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
   _$$WalletStateLoadedCopyWith<_$WalletStateLoaded> get copyWith =>
@@ -606,8 +590,8 @@ class _$WalletStateEmpty implements WalletStateEmpty {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(WalletInfoEntity? walletInfoEntity,
-            bool firstOpenWallet, List<TokenEntity> tokenList)
+    required TResult Function(
+            WalletInfoEntity? walletInfoEntity, List<TokenEntity> tokenList)
         loaded,
     required TResult Function() empty,
     required TResult Function(String message) error,
@@ -620,8 +604,8 @@ class _$WalletStateEmpty implements WalletStateEmpty {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(WalletInfoEntity? walletInfoEntity, bool firstOpenWallet,
-            List<TokenEntity> tokenList)?
+    TResult Function(
+            WalletInfoEntity? walletInfoEntity, List<TokenEntity> tokenList)?
         loaded,
     TResult Function()? empty,
     TResult Function(String message)? error,
@@ -634,8 +618,8 @@ class _$WalletStateEmpty implements WalletStateEmpty {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(WalletInfoEntity? walletInfoEntity, bool firstOpenWallet,
-            List<TokenEntity> tokenList)?
+    TResult Function(
+            WalletInfoEntity? walletInfoEntity, List<TokenEntity> tokenList)?
         loaded,
     TResult Function()? empty,
     TResult Function(String message)? error,
@@ -759,8 +743,8 @@ class _$WalletStateError implements WalletStateError {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(WalletInfoEntity? walletInfoEntity,
-            bool firstOpenWallet, List<TokenEntity> tokenList)
+    required TResult Function(
+            WalletInfoEntity? walletInfoEntity, List<TokenEntity> tokenList)
         loaded,
     required TResult Function() empty,
     required TResult Function(String message) error,
@@ -773,8 +757,8 @@ class _$WalletStateError implements WalletStateError {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(WalletInfoEntity? walletInfoEntity, bool firstOpenWallet,
-            List<TokenEntity> tokenList)?
+    TResult Function(
+            WalletInfoEntity? walletInfoEntity, List<TokenEntity> tokenList)?
         loaded,
     TResult Function()? empty,
     TResult Function(String message)? error,
@@ -787,8 +771,8 @@ class _$WalletStateError implements WalletStateError {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(WalletInfoEntity? walletInfoEntity, bool firstOpenWallet,
-            List<TokenEntity> tokenList)?
+    TResult Function(
+            WalletInfoEntity? walletInfoEntity, List<TokenEntity> tokenList)?
         loaded,
     TResult Function()? empty,
     TResult Function(String message)? error,
