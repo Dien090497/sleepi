@@ -50,7 +50,7 @@ Future<T?> showSuccessfulDialog<T>(BuildContext context, String? message,
             SFText(
                 keyText: message ?? LocaleKeys.success,
                 maxLines: 1,
-                style: style ?? TextStyles.bold16White),
+                style: style ?? TextStyles.bold18White),
             const SizedBox(height: 40),
           ],
         );
