@@ -35,7 +35,7 @@ class TabWalletDetail extends StatefulWidget {
 
 class _TabWalletDetailState extends State<TabWalletDetail> {
   late Timer timer;
-  int balance = 0;
+  double balance = 0;
   String networkName = '';
   String currencySymbol = '';
   String addressWallet = '';
@@ -96,7 +96,7 @@ class _TabWalletDetailState extends State<TabWalletDetail> {
                   SFText(keyText: networkName, style: TextStyles.bold12Blue),
                   const SizedBox(height: 4.0),
                   SFText(
-                      keyText: '${balance.formatBalanceWallet} $currencySymbol',
+                      keyText: '${balance.formatBalanceToken} $currencySymbol',
                       style: TextStyles.bold30White),
                   const SizedBox(height: 20.0),
                   Container(

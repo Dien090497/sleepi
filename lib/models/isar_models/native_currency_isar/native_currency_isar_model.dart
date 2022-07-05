@@ -17,7 +17,7 @@ class NativeCurrencyIsarModel {
 
   late int decimals;
 
-  late int balance;
+  late double balance;
 
   @Backlink(to: 'nativeCurrency')
   final network = IsarLink<NetworkIsarModel>();
@@ -45,7 +45,7 @@ class NativeCurrencyIsarModel {
   factory NativeCurrencyIsarModel.fromNativeCurrency(
     NativeCurrency e, {
     required String icon,
-    required int balance,
+    required double balance,
   }) {
     return NativeCurrencyIsarModel(
       name: e.name,
@@ -56,7 +56,7 @@ class NativeCurrencyIsarModel {
     );
   }
 
-  NativeCurrencyEntity toEntity({required int balance}) =>
+  NativeCurrencyEntity toEntity({required double balance}) =>
       NativeCurrencyEntity(id!, name, symbol, decimals,
           icon: icon, balance: balance, balanceUpdated: true);
 }

@@ -21,7 +21,7 @@ mixin _$NativeCurrencyEntity {
   String get symbol => throw _privateConstructorUsedError;
   int get decimals => throw _privateConstructorUsedError;
   String get icon => throw _privateConstructorUsedError;
-  int get balance => throw _privateConstructorUsedError;
+  double get balance => throw _privateConstructorUsedError;
   bool get balanceUpdated => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -40,7 +40,7 @@ abstract class $NativeCurrencyEntityCopyWith<$Res> {
       String symbol,
       int decimals,
       String icon,
-      int balance,
+      double balance,
       bool balanceUpdated});
 }
 
@@ -87,7 +87,7 @@ class _$NativeCurrencyEntityCopyWithImpl<$Res>
       balance: balance == freezed
           ? _value.balance
           : balance // ignore: cast_nullable_to_non_nullable
-              as int,
+              as double,
       balanceUpdated: balanceUpdated == freezed
           ? _value.balanceUpdated
           : balanceUpdated // ignore: cast_nullable_to_non_nullable
@@ -109,7 +109,7 @@ abstract class _$$_NativeCurrencyEntityCopyWith<$Res>
       String symbol,
       int decimals,
       String icon,
-      int balance,
+      double balance,
       bool balanceUpdated});
 }
 
@@ -158,7 +158,7 @@ class __$$_NativeCurrencyEntityCopyWithImpl<$Res>
       balance: balance == freezed
           ? _value.balance
           : balance // ignore: cast_nullable_to_non_nullable
-              as int,
+              as double,
       balanceUpdated: balanceUpdated == freezed
           ? _value.balanceUpdated
           : balanceUpdated // ignore: cast_nullable_to_non_nullable
@@ -186,7 +186,7 @@ class _$_NativeCurrencyEntity
   @override
   final String icon;
   @override
-  final int balance;
+  final double balance;
   @override
   @JsonKey()
   final bool balanceUpdated;
@@ -247,7 +247,7 @@ abstract class _NativeCurrencyEntity implements NativeCurrencyEntity {
   const factory _NativeCurrencyEntity(
       final int id, final String name, final String symbol, final int decimals,
       {required final String icon,
-      required final int balance,
+      required final double balance,
       final bool balanceUpdated}) = _$_NativeCurrencyEntity;
 
   @override
@@ -261,7 +261,7 @@ abstract class _NativeCurrencyEntity implements NativeCurrencyEntity {
   @override
   String get icon => throw _privateConstructorUsedError;
   @override
-  int get balance => throw _privateConstructorUsedError;
+  double get balance => throw _privateConstructorUsedError;
   @override
   bool get balanceUpdated => throw _privateConstructorUsedError;
   @override

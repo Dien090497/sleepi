@@ -32,11 +32,11 @@ class Web3DataSource {
     return HEX.encode(keyChild.privateKey!);
   }
 
-  Future<int> getBalance(String address) async =>
-      (await _web3provider.web3client
-              .getBalance(EthereumAddress.fromHex(address)))
-          .getInWei
-          .toInt();
+  Future<BigInt> getBalance(String address) async {
+    return (await _web3provider.web3client.getBalance(EthereumAddress.fromHex(address))).getInWei;
+
+  }
+
 
   Future<BigInt> getBalanceOf(String address, String contractAddress) async {
     var contract = tokenFrom(contractAddress);
