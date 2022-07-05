@@ -1,7 +1,18 @@
-class UserInfoEntity {
-  final String email;
-  final String sex;
-  final String birthday;
+import 'package:flutter/foundation.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
 
-  UserInfoEntity(this.email, this.sex, this.birthday);
+part 'user_info_entity.freezed.dart';
+
+@freezed
+class UserInfoEntity with _$UserInfoEntity {
+  const factory UserInfoEntity({
+ required   int id,
+   String? name,
+   String? username,
+ required   List<String> roles,
+ required   String email,
+ required   bool isAccountDisabled,
+ required   String createdAt,
+ required   String updatedAt,
+}) = _UserInfoEntity;
 }

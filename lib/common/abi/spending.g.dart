@@ -3,7 +3,7 @@
 import 'package:web3dart/web3dart.dart' as _i1;
 
 final _contractAbi = _i1.ContractAbi.fromJson(
-    '[{"anonymous":false,"inputs":[{"indexed":false,"internalType":"uint8","name":"version","type":"uint8"}],"name":"Initialized","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","name":"user","type":"address"},{"indexed":true,"internalType":"address","name":"collection","type":"address"},{"indexed":false,"internalType":"uint256","name":"tokenId","type":"uint256"}],"name":"LogLockNft","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","name":"user","type":"address"},{"indexed":true,"internalType":"address","name":"token","type":"address"},{"indexed":false,"internalType":"uint256","name":"amount","type":"uint256"}],"name":"LogLockToken","type":"event"},{"inputs":[{"internalType":"address","name":"collection","type":"address"},{"internalType":"uint256","name":"tokenId","type":"uint256"}],"name":"depositNft","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"token","type":"address"},{"internalType":"uint256","name":"amount","type":"uint256"}],"name":"depositToken","outputs":[],"stateMutability":"payable","type":"function"},{"inputs":[{"internalType":"address","name":"_admin","type":"address"}],"name":"initialize","outputs":[],"stateMutability":"nonpayable","type":"function"},{"stateMutability":"payable","type":"receive"}]',
+    '[{"anonymous":false,"inputs":[{"indexed":false,"internalType":"uint8","name":"version","type":"uint8"}],"name":"Initialized","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","name":"user","type":"address"},{"indexed":false,"internalType":"uint256","name":"userId","type":"uint256"},{"indexed":true,"internalType":"address","name":"collection","type":"address"},{"indexed":false,"internalType":"uint256","name":"tokenId","type":"uint256"}],"name":"LogLockNft","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","name":"user","type":"address"},{"indexed":false,"internalType":"uint256","name":"userId","type":"uint256"},{"indexed":true,"internalType":"address","name":"token","type":"address"},{"indexed":false,"internalType":"uint256","name":"amount","type":"uint256"}],"name":"LogLockToken","type":"event"},{"inputs":[{"internalType":"address","name":"collection","type":"address"},{"internalType":"uint256","name":"tokenId","type":"uint256"},{"internalType":"uint256","name":"userId","type":"uint256"}],"name":"depositNft","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"token","type":"address"},{"internalType":"uint256","name":"amount","type":"uint256"},{"internalType":"uint256","name":"userId","type":"uint256"}],"name":"depositToken","outputs":[],"stateMutability":"payable","type":"function"},{"inputs":[{"internalType":"address","name":"_admin","type":"address"}],"name":"initialize","outputs":[],"stateMutability":"nonpayable","type":"function"},{"stateMutability":"payable","type":"receive"}]',
     'Spending');
 
 class Spending extends _i1.GeneratedContract {
@@ -16,24 +16,26 @@ class Spending extends _i1.GeneratedContract {
   /// The optional [transaction] parameter can be used to override parameters
   /// like the gas price, nonce and max gas. The `data` and `to` fields will be
   /// set by the contract.
-  Future<String> depositNft(_i1.EthereumAddress collection, BigInt tokenId,
+  Future<String> depositNft(
+      _i1.EthereumAddress collection, BigInt tokenId, BigInt userId,
       {required _i1.Credentials credentials,
       _i1.Transaction? transaction}) async {
     final function = self.abi.functions[0];
-    assert(checkSignature(function, 'a72e2cd6'));
-    final params = [collection, tokenId];
+    assert(checkSignature(function, 'e09a3cb4'));
+    final params = [collection, tokenId, userId];
     return write(credentials, transaction, function, params);
   }
 
   /// The optional [transaction] parameter can be used to override parameters
   /// like the gas price, nonce and max gas. The `data` and `to` fields will be
   /// set by the contract.
-  Future<String> depositToken(_i1.EthereumAddress token, BigInt amount,
+  Future<String> depositToken(
+      _i1.EthereumAddress token, BigInt amount, BigInt userId,
       {required _i1.Credentials credentials,
       _i1.Transaction? transaction}) async {
     final function = self.abi.functions[1];
-    assert(checkSignature(function, '338b5dea'));
-    final params = [token, amount];
+    assert(checkSignature(function, '99c6d2de'));
+    final params = [token, amount, userId];
     return write(credentials, transaction, function, params);
   }
 
@@ -95,10 +97,13 @@ class Initialized {
 class LogLockNft {
   LogLockNft(List<dynamic> response)
       : user = (response[0] as _i1.EthereumAddress),
-        collection = (response[1] as _i1.EthereumAddress),
-        tokenId = (response[2] as BigInt);
+        userId = (response[1] as BigInt),
+        collection = (response[2] as _i1.EthereumAddress),
+        tokenId = (response[3] as BigInt);
 
   final _i1.EthereumAddress user;
+
+  final BigInt userId;
 
   final _i1.EthereumAddress collection;
 
@@ -108,10 +113,13 @@ class LogLockNft {
 class LogLockToken {
   LogLockToken(List<dynamic> response)
       : user = (response[0] as _i1.EthereumAddress),
-        token = (response[1] as _i1.EthereumAddress),
-        amount = (response[2] as BigInt);
+        userId = (response[1] as BigInt),
+        token = (response[2] as _i1.EthereumAddress),
+        amount = (response[3] as BigInt);
 
   final _i1.EthereumAddress user;
+
+  final BigInt userId;
 
   final _i1.EthereumAddress token;
 

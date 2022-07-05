@@ -29,18 +29,18 @@ abstract class RegisterModule {
 
   @preResolve
   Future<Isar> isar(Directory isarDir) => Isar.open(
-    schemas: [
-      NetworkIsarModelSchema,
-      WalletIsarModelSchema,
-      NativeCurrencyIsarModelSchema,
-      TokenIsarModelSchema,
-      EnsIsarModelSchema,
-      ExplorersIsarModelSchema,
-      TokenDefaultModelSchema,
-    ],
-    directory: isarDir.path,
-    // inspector: true,
-  );
+        schemas: [
+          NetworkIsarModelSchema,
+          WalletIsarModelSchema,
+          NativeCurrencyIsarModelSchema,
+          TokenIsarModelSchema,
+          EnsIsarModelSchema,
+          ExplorersIsarModelSchema,
+          TokenDefaultModelSchema,
+        ],
+        directory: isarDir.path,
+        // inspector: true,
+      );
 
   GetStorage get getStorage => GetStorage();
 

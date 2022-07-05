@@ -17,14 +17,19 @@ class UserInfoModel {
   factory UserInfoModel.fromJson(Map<String, dynamic> json) =>
       _$UserInfoModelFromJson(json);
 
-  UserInfoModel(this.id, this.name, this.username, this.roles, this.email,
+  const UserInfoModel(this.id, this.name, this.username, this.roles, this.email,
       this.isAccountDisabled, this.createdAt, this.updatedAt);
 
   Map<String, dynamic> toJson() => _$UserInfoModelToJson(this);
 
-  UserInfoEntity toEntity() {
-    return UserInfoEntity(email, 'sex', 'birthday');
-  }
+  UserInfoEntity toEntity() => UserInfoEntity(
+        id: id,
+        roles: roles,
+        email: email,
+        isAccountDisabled: isAccountDisabled,
+        createdAt: createdAt,
+        updatedAt: updatedAt,
+      );
 
   factory UserInfoModel.emptyUser(String email) =>
       UserInfoModel(0, '', '', [], email, false, '', '');

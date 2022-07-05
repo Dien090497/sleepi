@@ -624,6 +624,8 @@ abstract class _$$SettingStateLoadUserSuccessCopyWith<$Res> {
           $Res Function(_$SettingStateLoadUserSuccess) then) =
       __$$SettingStateLoadUserSuccessCopyWithImpl<$Res>;
   $Res call({UserInfoEntity userInfoModel});
+
+  $UserInfoEntityCopyWith<$Res> get userInfoModel;
 }
 
 /// @nodoc
@@ -649,6 +651,13 @@ class __$$SettingStateLoadUserSuccessCopyWithImpl<$Res>
           : userInfoModel // ignore: cast_nullable_to_non_nullable
               as UserInfoEntity,
     ));
+  }
+
+  @override
+  $UserInfoEntityCopyWith<$Res> get userInfoModel {
+    return $UserInfoEntityCopyWith<$Res>(_value.userInfoModel, (value) {
+      return _then(_value.copyWith(userInfoModel: value));
+    });
   }
 }
 

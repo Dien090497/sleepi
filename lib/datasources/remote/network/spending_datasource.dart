@@ -19,29 +19,26 @@ class SpendingDataSource {
   Future<String> toSpending({
     required Credentials owner,
     required BigInt amount,
+    required BigInt userId,
     required ERC20 token,
   }) async {
-    return _spendingContract.depositToken(
-        token.self.address, amount,
+    return _spendingContract.depositToken(token.self.address, amount, userId,
         credentials: owner);
   }
 
   Future<String> toSpendingAvax({
     required Credentials owner,
     required BigInt amount,
+    required BigInt userId,
     required EthereumAddress avax,
     Transaction? transaction,
   }) async {
-    return _spendingContract.depositToken(
-        avax, amount,
-        credentials: owner,
-      transaction: transaction
-    );
+    return _spendingContract.depositToken(avax, amount, userId,
+        credentials: owner, transaction: transaction);
   }
 
   Future<String> approve(Credentials owner, BigInt value, ERC20 token) =>
-      token.approve(ContractAddresses.spending, value,
-          credentials: owner);
+      token.approve(ContractAddresses.spending, value, credentials: owner);
 
   Future<BigInt> allowance(EthereumAddress owner, ERC20 token) =>
       token.allowance(owner, _spendingContract.self.address);

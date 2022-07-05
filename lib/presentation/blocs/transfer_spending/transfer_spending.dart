@@ -15,35 +15,44 @@ class TransferSpendingCubit extends Cubit<TransferSpendingState> {
   final _toSpendingUseCase = getIt<ToSpendingUseCase>();
   final _approveUseCase = getIt<ApproveUseCase>();
 
-  Future<void> transferSpending({required double amount, required String addressContract}) async {
-    final params = ToSpendingParams(amount: amount, addressContract: addressContract);
+  Future<void> transferSpending(
+      {required double amount, required String addressContract}) async {
+    final params = ToSpendingParams(
+        amount: amount, addressContract: addressContract, userId: 0);
     final result = await _toSpendingUseCase.call(params);
     result.fold(
-          (l) {
+      (l) {
         emit(TransferSpendingState.error(message: '$l'));
       },
-          (result) {
+      (result) {
         emit(TransferSpendingState.loaded(transferSpendingEntity: result));
       },
     );
   }
 
-  Future<void> estimateGas(String contractAddressTo , {double? valueInEther, required String amount, required double balance}) async {
+  Future<void> estimateGas(String contractAddressTo,
+      {double? valueInEther,
+      required String amount,
+      required double balance}) async {
     emit(const TransferSpendingState.loading());
     if (amount.isEmpty) {
-      emit(const TransferSpendingState.error(message: 'Invalid amount', typeError: 'invalid_amount'));
+      emit(const TransferSpendingState.error(
+          message: 'Invalid amount', typeError: 'invalid_amount'));
     } else if (double.parse(amount) > balance) {
-      emit(const TransferSpendingState.error(message: 'Balance not enough', typeError: 'invalid_amount'));
+      emit(const TransferSpendingState.error(
+          message: 'Balance not enough', typeError: 'invalid_amount'));
     } else if (amount == '0') {
-      emit(const TransferSpendingState.error(message: 'Amount input can not be zero ', typeError: 'amount_zero'));
+      emit(const TransferSpendingState.error(
+          message: 'Amount input can not be zero ', typeError: 'amount_zero'));
     } else {
       final result = await _sendToExternalUC.calculatorFee(SendToExternalParams(
-          contractAddressTo : ContractAddresses.spending.hex, valueInEther : valueInEther));
+          contractAddressTo: ContractAddresses.spending.hex,
+          valueInEther: valueInEther));
       result.fold(
-            (l) {
+        (l) {
           emit(TransferSpendingState.error(message: '$l'));
         },
-            (limitGas) {
+        (limitGas) {
           final fee = ((limitGas * 50000000000) / pow(10, 18));
           emit(TransferSpendingState.loaded(fee: fee));
         },
@@ -51,14 +60,16 @@ class TransferSpendingCubit extends Cubit<TransferSpendingState> {
     }
   }
 
-  Future<void> approve({required double amount, required String addressContract}) async {
-    final params = ToSpendingParams(amount: amount, addressContract: addressContract);
+  Future<void> approve(
+      {required double amount, required String addressContract}) async {
+    final params = ToSpendingParams(
+        amount: amount, addressContract: addressContract, userId: 0);
     final result = await _approveUseCase.call(params);
     result.fold(
-          (l) {
+      (l) {
         emit(TransferSpendingState.error(message: '$l'));
       },
-          (result) {
+      (result) {
         emit(const TransferSpendingState.loaded());
       },
     );
