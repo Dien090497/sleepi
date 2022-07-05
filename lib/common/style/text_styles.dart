@@ -159,6 +159,8 @@ class TextStyles {
       fontSize: 30, color: AppColors.white, fontWeight: FontWeight.w700);
   static const bold18White = TextStyle(
       fontSize: 18, color: AppColors.white, fontWeight: FontWeight.w700);
+  static const bold14White = TextStyle(
+      fontSize: 14, color: AppColors.white, fontWeight: FontWeight.w700);
   static const bold24LightWhite = TextStyle(
       fontSize: 24, color: AppColors.lightWhite, fontWeight: FontWeight.w700);
   static const bold18LightWhite = TextStyle(
