@@ -20,7 +20,7 @@ class ForgotPasscodeCubit extends Cubit<ForgotPasscodeState> {
   String _email = '';
   String otp = '';
 
-  bool verifySuccess = true;
+  bool verifySuccess = false;
 
   init() async {
     var result = await _currentUserUC.call(NoParams());
