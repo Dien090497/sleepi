@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:slee_fi/common/extensions/string_x.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
@@ -27,6 +28,7 @@ class SFTextFieldTextButton extends StatelessWidget {
     this.textInputType,
     this.stringCase,
     this.errorText = '',
+    this.inputFormatters,
   }) : super(key: key);
 
   final String? labelText;
@@ -46,6 +48,7 @@ class SFTextFieldTextButton extends StatelessWidget {
   final TextInputType? textInputType;
   final StringCase? stringCase;
   final String? errorText;
+  final List<TextInputFormatter>? inputFormatters;
 
   @override
   Widget build(BuildContext context) {
@@ -81,6 +84,7 @@ class SFTextFieldTextButton extends StatelessWidget {
                   controller: controller,
                   onChanged: valueChanged,
                   textInputType: textInputType,
+                  inputFormatters: inputFormatters,
                   hintStyle: hintStyle ?? TextStyles.lightGrey14,
                   suffix: suffix,
                   suffixIcon: suffixIcon,
@@ -98,7 +102,9 @@ class SFTextFieldTextButton extends StatelessWidget {
             ],
           ),
         ),
-        const SizedBox(height: 8,),
+        const SizedBox(
+          height: 8,
+        ),
         if (errorText != '')
           Text(
             errorText!,
