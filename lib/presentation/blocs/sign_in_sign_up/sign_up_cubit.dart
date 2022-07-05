@@ -27,7 +27,7 @@ class SigInSignUpCubit extends Cubit<SignInSignUpState> {
   final _fetchSettingActiveCode = getIt<SettingActiveCodeUseCase>();
 
   String email = '';
-  String password = '';
+  String _password = '';
   String otp = '';
   bool isFistOpenApp = false;
 
@@ -88,7 +88,8 @@ class SigInSignUpCubit extends Cubit<SignInSignUpState> {
       return;
     }
     emit(const SignInSignUpState.process());
-    var result = await _logInUseCase.call(SignInSchema(email.trim(), password));
+    var result =
+        await _logInUseCase.call(SignInSchema(email.trim(), _password));
 
     result.fold((l) => emit(SignInSignUpState.error(l.msg)), (r) async {
       emit(SignInSignUpState.signInSuccess(isFistOpenApp));
@@ -105,7 +106,7 @@ class SigInSignUpCubit extends Cubit<SignInSignUpState> {
   }
 
   bool _validatePassword() {
-    var message = password.validatePassword;
+    var message = _password.validatePassword;
 
     if (message.isNotEmpty) {
       emit(SignInSignUpState.error(message));
@@ -131,6 +132,13 @@ class SigInSignUpCubit extends Cubit<SignInSignUpState> {
       return false;
     }
     return true;
+  }
+
+  onPasswordChange(String password) {
+    _password = password;
+    if (password.isEmpty && state is SignInSignUpStateError) {
+      emit(const SignInSignUpState.initial());
+    }
   }
 
   void _verifyOTP() async {
