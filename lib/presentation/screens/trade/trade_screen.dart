@@ -259,7 +259,8 @@ class _TradeScreenState extends State<TradeScreen> {
                                                           r'^\d{1,}\.?\d{0,6}')),
                                                 ],
                                                 textInputType:
-                                                    TextInputType.number,
+                                                const TextInputType.numberWithOptions(
+                                                    decimal: true),
                                                 hintText: "0.00",
                                                 hintStyle:
                                                     TextStyles.bold16LightWhite,
