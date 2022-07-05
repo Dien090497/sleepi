@@ -3,7 +3,6 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:slee_fi/common/const/const.dart';
 import 'package:slee_fi/di/injector.dart';
-import 'package:slee_fi/entities/nft_entity/nft_entity.dart';
 import 'package:slee_fi/entities/token/token_entity.dart';
 import 'package:slee_fi/entities/wallet_info/wallet_info_entity.dart';
 import 'package:slee_fi/failures/failure.dart';
@@ -74,7 +73,7 @@ class WalletCubit extends Cubit<WalletState> {
         _getNFTsBalanceUC.call(nfTsParams),
       ]);
       final Either<Failure, List<double>> tokenBalanceRes = cast(results.first);
-      final Either<Failure, List<NFTEntity>> nftBalanceRes = cast(results.last);
+      final Either<Failure, List<BigInt>> nftBalanceRes = cast(results.last);
       final List keyList = [
         "SLFT",
         "SLGT",
@@ -120,7 +119,7 @@ class WalletCubit extends Cubit<WalletState> {
           name: nftNames[i],
           symbol: nftNames[i],
           icon: nftIcons[i],
-          balance: nfts[i].balance.toDouble(),
+          balance: nfts[i].toDouble(),
         );
         tokenList.add(tokenEntity);
       }

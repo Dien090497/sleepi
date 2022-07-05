@@ -22,7 +22,7 @@ mixin _$NftDetailState {
             WalletInfoEntity walletInfoEntity, TokenEntity tokenEntity)
         initial,
     required TResult Function(WalletInfoEntity walletInfoEntity,
-            TokenEntity tokenEntity, List<BigInt> nftIds, bool hasMore)
+            TokenEntity tokenEntity, List<NFTEntity> nftEntities, bool hasMore)
         loaded,
     required TResult Function(String msg) error,
   }) =>
@@ -33,7 +33,7 @@ mixin _$NftDetailState {
             WalletInfoEntity walletInfoEntity, TokenEntity tokenEntity)?
         initial,
     TResult Function(WalletInfoEntity walletInfoEntity, TokenEntity tokenEntity,
-            List<BigInt> nftIds, bool hasMore)?
+            List<NFTEntity> nftEntities, bool hasMore)?
         loaded,
     TResult Function(String msg)? error,
   }) =>
@@ -44,7 +44,7 @@ mixin _$NftDetailState {
             WalletInfoEntity walletInfoEntity, TokenEntity tokenEntity)?
         initial,
     TResult Function(WalletInfoEntity walletInfoEntity, TokenEntity tokenEntity,
-            List<BigInt> nftIds, bool hasMore)?
+            List<NFTEntity> nftEntities, bool hasMore)?
         loaded,
     TResult Function(String msg)? error,
     required TResult orElse(),
@@ -200,7 +200,7 @@ class _$NftDetailInitial
             WalletInfoEntity walletInfoEntity, TokenEntity tokenEntity)
         initial,
     required TResult Function(WalletInfoEntity walletInfoEntity,
-            TokenEntity tokenEntity, List<BigInt> nftIds, bool hasMore)
+            TokenEntity tokenEntity, List<NFTEntity> nftEntities, bool hasMore)
         loaded,
     required TResult Function(String msg) error,
   }) {
@@ -214,7 +214,7 @@ class _$NftDetailInitial
             WalletInfoEntity walletInfoEntity, TokenEntity tokenEntity)?
         initial,
     TResult Function(WalletInfoEntity walletInfoEntity, TokenEntity tokenEntity,
-            List<BigInt> nftIds, bool hasMore)?
+            List<NFTEntity> nftEntities, bool hasMore)?
         loaded,
     TResult Function(String msg)? error,
   }) {
@@ -228,7 +228,7 @@ class _$NftDetailInitial
             WalletInfoEntity walletInfoEntity, TokenEntity tokenEntity)?
         initial,
     TResult Function(WalletInfoEntity walletInfoEntity, TokenEntity tokenEntity,
-            List<BigInt> nftIds, bool hasMore)?
+            List<NFTEntity> nftEntities, bool hasMore)?
         loaded,
     TResult Function(String msg)? error,
     required TResult orElse(),
@@ -293,7 +293,7 @@ abstract class _$$NftDetailLoadedCopyWith<$Res> {
   $Res call(
       {WalletInfoEntity walletInfoEntity,
       TokenEntity tokenEntity,
-      List<BigInt> nftIds,
+      List<NFTEntity> nftEntities,
       bool hasMore});
 
   $WalletInfoEntityCopyWith<$Res> get walletInfoEntity;
@@ -315,7 +315,7 @@ class __$$NftDetailLoadedCopyWithImpl<$Res>
   $Res call({
     Object? walletInfoEntity = freezed,
     Object? tokenEntity = freezed,
-    Object? nftIds = freezed,
+    Object? nftEntities = freezed,
     Object? hasMore = freezed,
   }) {
     return _then(_$NftDetailLoaded(
@@ -327,10 +327,10 @@ class __$$NftDetailLoadedCopyWithImpl<$Res>
           ? _value.tokenEntity
           : tokenEntity // ignore: cast_nullable_to_non_nullable
               as TokenEntity,
-      nftIds: nftIds == freezed
-          ? _value._nftIds
-          : nftIds // ignore: cast_nullable_to_non_nullable
-              as List<BigInt>,
+      nftEntities: nftEntities == freezed
+          ? _value._nftEntities
+          : nftEntities // ignore: cast_nullable_to_non_nullable
+              as List<NFTEntity>,
       hasMore: hasMore == freezed
           ? _value.hasMore
           : hasMore // ignore: cast_nullable_to_non_nullable
@@ -361,19 +361,19 @@ class _$NftDetailLoaded
   const _$NftDetailLoaded(
       {required this.walletInfoEntity,
       required this.tokenEntity,
-      required final List<BigInt> nftIds,
+      required final List<NFTEntity> nftEntities,
       required this.hasMore})
-      : _nftIds = nftIds;
+      : _nftEntities = nftEntities;
 
   @override
   final WalletInfoEntity walletInfoEntity;
   @override
   final TokenEntity tokenEntity;
-  final List<BigInt> _nftIds;
+  final List<NFTEntity> _nftEntities;
   @override
-  List<BigInt> get nftIds {
+  List<NFTEntity> get nftEntities {
     // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_nftIds);
+    return EqualUnmodifiableListView(_nftEntities);
   }
 
   @override
@@ -381,7 +381,7 @@ class _$NftDetailLoaded
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'NftDetailState.loaded(walletInfoEntity: $walletInfoEntity, tokenEntity: $tokenEntity, nftIds: $nftIds, hasMore: $hasMore)';
+    return 'NftDetailState.loaded(walletInfoEntity: $walletInfoEntity, tokenEntity: $tokenEntity, nftEntities: $nftEntities, hasMore: $hasMore)';
   }
 
   @override
@@ -391,7 +391,7 @@ class _$NftDetailLoaded
       ..add(DiagnosticsProperty('type', 'NftDetailState.loaded'))
       ..add(DiagnosticsProperty('walletInfoEntity', walletInfoEntity))
       ..add(DiagnosticsProperty('tokenEntity', tokenEntity))
-      ..add(DiagnosticsProperty('nftIds', nftIds))
+      ..add(DiagnosticsProperty('nftEntities', nftEntities))
       ..add(DiagnosticsProperty('hasMore', hasMore));
   }
 
@@ -404,7 +404,8 @@ class _$NftDetailLoaded
                 .equals(other.walletInfoEntity, walletInfoEntity) &&
             const DeepCollectionEquality()
                 .equals(other.tokenEntity, tokenEntity) &&
-            const DeepCollectionEquality().equals(other._nftIds, _nftIds) &&
+            const DeepCollectionEquality()
+                .equals(other._nftEntities, _nftEntities) &&
             const DeepCollectionEquality().equals(other.hasMore, hasMore));
   }
 
@@ -413,7 +414,7 @@ class _$NftDetailLoaded
       runtimeType,
       const DeepCollectionEquality().hash(walletInfoEntity),
       const DeepCollectionEquality().hash(tokenEntity),
-      const DeepCollectionEquality().hash(_nftIds),
+      const DeepCollectionEquality().hash(_nftEntities),
       const DeepCollectionEquality().hash(hasMore));
 
   @JsonKey(ignore: true)
@@ -428,11 +429,11 @@ class _$NftDetailLoaded
             WalletInfoEntity walletInfoEntity, TokenEntity tokenEntity)
         initial,
     required TResult Function(WalletInfoEntity walletInfoEntity,
-            TokenEntity tokenEntity, List<BigInt> nftIds, bool hasMore)
+            TokenEntity tokenEntity, List<NFTEntity> nftEntities, bool hasMore)
         loaded,
     required TResult Function(String msg) error,
   }) {
-    return loaded(walletInfoEntity, tokenEntity, nftIds, hasMore);
+    return loaded(walletInfoEntity, tokenEntity, nftEntities, hasMore);
   }
 
   @override
@@ -442,11 +443,11 @@ class _$NftDetailLoaded
             WalletInfoEntity walletInfoEntity, TokenEntity tokenEntity)?
         initial,
     TResult Function(WalletInfoEntity walletInfoEntity, TokenEntity tokenEntity,
-            List<BigInt> nftIds, bool hasMore)?
+            List<NFTEntity> nftEntities, bool hasMore)?
         loaded,
     TResult Function(String msg)? error,
   }) {
-    return loaded?.call(walletInfoEntity, tokenEntity, nftIds, hasMore);
+    return loaded?.call(walletInfoEntity, tokenEntity, nftEntities, hasMore);
   }
 
   @override
@@ -456,13 +457,13 @@ class _$NftDetailLoaded
             WalletInfoEntity walletInfoEntity, TokenEntity tokenEntity)?
         initial,
     TResult Function(WalletInfoEntity walletInfoEntity, TokenEntity tokenEntity,
-            List<BigInt> nftIds, bool hasMore)?
+            List<NFTEntity> nftEntities, bool hasMore)?
         loaded,
     TResult Function(String msg)? error,
     required TResult orElse(),
   }) {
     if (loaded != null) {
-      return loaded(walletInfoEntity, tokenEntity, nftIds, hasMore);
+      return loaded(walletInfoEntity, tokenEntity, nftEntities, hasMore);
     }
     return orElse();
   }
@@ -506,12 +507,12 @@ abstract class NftDetailLoaded implements NftDetailState {
   const factory NftDetailLoaded(
       {required final WalletInfoEntity walletInfoEntity,
       required final TokenEntity tokenEntity,
-      required final List<BigInt> nftIds,
+      required final List<NFTEntity> nftEntities,
       required final bool hasMore}) = _$NftDetailLoaded;
 
   WalletInfoEntity get walletInfoEntity => throw _privateConstructorUsedError;
   TokenEntity get tokenEntity => throw _privateConstructorUsedError;
-  List<BigInt> get nftIds => throw _privateConstructorUsedError;
+  List<NFTEntity> get nftEntities => throw _privateConstructorUsedError;
   bool get hasMore => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
   _$$NftDetailLoadedCopyWith<_$NftDetailLoaded> get copyWith =>
@@ -595,7 +596,7 @@ class _$NftDetailError with DiagnosticableTreeMixin implements NftDetailError {
             WalletInfoEntity walletInfoEntity, TokenEntity tokenEntity)
         initial,
     required TResult Function(WalletInfoEntity walletInfoEntity,
-            TokenEntity tokenEntity, List<BigInt> nftIds, bool hasMore)
+            TokenEntity tokenEntity, List<NFTEntity> nftEntities, bool hasMore)
         loaded,
     required TResult Function(String msg) error,
   }) {
@@ -609,7 +610,7 @@ class _$NftDetailError with DiagnosticableTreeMixin implements NftDetailError {
             WalletInfoEntity walletInfoEntity, TokenEntity tokenEntity)?
         initial,
     TResult Function(WalletInfoEntity walletInfoEntity, TokenEntity tokenEntity,
-            List<BigInt> nftIds, bool hasMore)?
+            List<NFTEntity> nftEntities, bool hasMore)?
         loaded,
     TResult Function(String msg)? error,
   }) {
@@ -623,7 +624,7 @@ class _$NftDetailError with DiagnosticableTreeMixin implements NftDetailError {
             WalletInfoEntity walletInfoEntity, TokenEntity tokenEntity)?
         initial,
     TResult Function(WalletInfoEntity walletInfoEntity, TokenEntity tokenEntity,
-            List<BigInt> nftIds, bool hasMore)?
+            List<NFTEntity> nftEntities, bool hasMore)?
         loaded,
     TResult Function(String msg)? error,
     required TResult orElse(),

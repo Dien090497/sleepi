@@ -16,10 +16,11 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$NFTEntity {
-  String get address => throw _privateConstructorUsedError;
-  String get name => throw _privateConstructorUsedError;
-  String get symbol => throw _privateConstructorUsedError;
-  BigInt get balance => throw _privateConstructorUsedError;
+  BigInt get id => throw _privateConstructorUsedError;
+  int get categoryId => throw _privateConstructorUsedError;
+  int get isLock => throw _privateConstructorUsedError;
+  String get status => throw _privateConstructorUsedError;
+  NftAttributeEntity get attribute => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $NFTEntityCopyWith<NFTEntity> get copyWith =>
@@ -30,7 +31,14 @@ mixin _$NFTEntity {
 abstract class $NFTEntityCopyWith<$Res> {
   factory $NFTEntityCopyWith(NFTEntity value, $Res Function(NFTEntity) then) =
       _$NFTEntityCopyWithImpl<$Res>;
-  $Res call({String address, String name, String symbol, BigInt balance});
+  $Res call(
+      {BigInt id,
+      int categoryId,
+      int isLock,
+      String status,
+      NftAttributeEntity attribute});
+
+  $NftAttributeEntityCopyWith<$Res> get attribute;
 }
 
 /// @nodoc
@@ -43,29 +51,41 @@ class _$NFTEntityCopyWithImpl<$Res> implements $NFTEntityCopyWith<$Res> {
 
   @override
   $Res call({
-    Object? address = freezed,
-    Object? name = freezed,
-    Object? symbol = freezed,
-    Object? balance = freezed,
+    Object? id = freezed,
+    Object? categoryId = freezed,
+    Object? isLock = freezed,
+    Object? status = freezed,
+    Object? attribute = freezed,
   }) {
     return _then(_value.copyWith(
-      address: address == freezed
-          ? _value.address
-          : address // ignore: cast_nullable_to_non_nullable
-              as String,
-      name: name == freezed
-          ? _value.name
-          : name // ignore: cast_nullable_to_non_nullable
-              as String,
-      symbol: symbol == freezed
-          ? _value.symbol
-          : symbol // ignore: cast_nullable_to_non_nullable
-              as String,
-      balance: balance == freezed
-          ? _value.balance
-          : balance // ignore: cast_nullable_to_non_nullable
+      id: id == freezed
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
               as BigInt,
+      categoryId: categoryId == freezed
+          ? _value.categoryId
+          : categoryId // ignore: cast_nullable_to_non_nullable
+              as int,
+      isLock: isLock == freezed
+          ? _value.isLock
+          : isLock // ignore: cast_nullable_to_non_nullable
+              as int,
+      status: status == freezed
+          ? _value.status
+          : status // ignore: cast_nullable_to_non_nullable
+              as String,
+      attribute: attribute == freezed
+          ? _value.attribute
+          : attribute // ignore: cast_nullable_to_non_nullable
+              as NftAttributeEntity,
     ));
+  }
+
+  @override
+  $NftAttributeEntityCopyWith<$Res> get attribute {
+    return $NftAttributeEntityCopyWith<$Res>(_value.attribute, (value) {
+      return _then(_value.copyWith(attribute: value));
+    });
   }
 }
 
@@ -75,7 +95,15 @@ abstract class _$$_NFTEntityCopyWith<$Res> implements $NFTEntityCopyWith<$Res> {
           _$_NFTEntity value, $Res Function(_$_NFTEntity) then) =
       __$$_NFTEntityCopyWithImpl<$Res>;
   @override
-  $Res call({String address, String name, String symbol, BigInt balance});
+  $Res call(
+      {BigInt id,
+      int categoryId,
+      int isLock,
+      String status,
+      NftAttributeEntity attribute});
+
+  @override
+  $NftAttributeEntityCopyWith<$Res> get attribute;
 }
 
 /// @nodoc
@@ -90,28 +118,33 @@ class __$$_NFTEntityCopyWithImpl<$Res> extends _$NFTEntityCopyWithImpl<$Res>
 
   @override
   $Res call({
-    Object? address = freezed,
-    Object? name = freezed,
-    Object? symbol = freezed,
-    Object? balance = freezed,
+    Object? id = freezed,
+    Object? categoryId = freezed,
+    Object? isLock = freezed,
+    Object? status = freezed,
+    Object? attribute = freezed,
   }) {
     return _then(_$_NFTEntity(
-      address: address == freezed
-          ? _value.address
-          : address // ignore: cast_nullable_to_non_nullable
-              as String,
-      name: name == freezed
-          ? _value.name
-          : name // ignore: cast_nullable_to_non_nullable
-              as String,
-      symbol: symbol == freezed
-          ? _value.symbol
-          : symbol // ignore: cast_nullable_to_non_nullable
-              as String,
-      balance: balance == freezed
-          ? _value.balance
-          : balance // ignore: cast_nullable_to_non_nullable
+      id: id == freezed
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
               as BigInt,
+      categoryId: categoryId == freezed
+          ? _value.categoryId
+          : categoryId // ignore: cast_nullable_to_non_nullable
+              as int,
+      isLock: isLock == freezed
+          ? _value.isLock
+          : isLock // ignore: cast_nullable_to_non_nullable
+              as int,
+      status: status == freezed
+          ? _value.status
+          : status // ignore: cast_nullable_to_non_nullable
+              as String,
+      attribute: attribute == freezed
+          ? _value.attribute
+          : attribute // ignore: cast_nullable_to_non_nullable
+              as NftAttributeEntity,
     ));
   }
 }
@@ -120,23 +153,26 @@ class __$$_NFTEntityCopyWithImpl<$Res> extends _$NFTEntityCopyWithImpl<$Res>
 
 class _$_NFTEntity with DiagnosticableTreeMixin implements _NFTEntity {
   const _$_NFTEntity(
-      {required this.address,
-      required this.name,
-      required this.symbol,
-      required this.balance});
+      {required this.id,
+      required this.categoryId,
+      required this.isLock,
+      required this.status,
+      required this.attribute});
 
   @override
-  final String address;
+  final BigInt id;
   @override
-  final String name;
+  final int categoryId;
   @override
-  final String symbol;
+  final int isLock;
   @override
-  final BigInt balance;
+  final String status;
+  @override
+  final NftAttributeEntity attribute;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'NFTEntity(address: $address, name: $name, symbol: $symbol, balance: $balance)';
+    return 'NFTEntity(id: $id, categoryId: $categoryId, isLock: $isLock, status: $status, attribute: $attribute)';
   }
 
   @override
@@ -144,10 +180,11 @@ class _$_NFTEntity with DiagnosticableTreeMixin implements _NFTEntity {
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty('type', 'NFTEntity'))
-      ..add(DiagnosticsProperty('address', address))
-      ..add(DiagnosticsProperty('name', name))
-      ..add(DiagnosticsProperty('symbol', symbol))
-      ..add(DiagnosticsProperty('balance', balance));
+      ..add(DiagnosticsProperty('id', id))
+      ..add(DiagnosticsProperty('categoryId', categoryId))
+      ..add(DiagnosticsProperty('isLock', isLock))
+      ..add(DiagnosticsProperty('status', status))
+      ..add(DiagnosticsProperty('attribute', attribute));
   }
 
   @override
@@ -155,19 +192,22 @@ class _$_NFTEntity with DiagnosticableTreeMixin implements _NFTEntity {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_NFTEntity &&
-            const DeepCollectionEquality().equals(other.address, address) &&
-            const DeepCollectionEquality().equals(other.name, name) &&
-            const DeepCollectionEquality().equals(other.symbol, symbol) &&
-            const DeepCollectionEquality().equals(other.balance, balance));
+            const DeepCollectionEquality().equals(other.id, id) &&
+            const DeepCollectionEquality()
+                .equals(other.categoryId, categoryId) &&
+            const DeepCollectionEquality().equals(other.isLock, isLock) &&
+            const DeepCollectionEquality().equals(other.status, status) &&
+            const DeepCollectionEquality().equals(other.attribute, attribute));
   }
 
   @override
   int get hashCode => Object.hash(
       runtimeType,
-      const DeepCollectionEquality().hash(address),
-      const DeepCollectionEquality().hash(name),
-      const DeepCollectionEquality().hash(symbol),
-      const DeepCollectionEquality().hash(balance));
+      const DeepCollectionEquality().hash(id),
+      const DeepCollectionEquality().hash(categoryId),
+      const DeepCollectionEquality().hash(isLock),
+      const DeepCollectionEquality().hash(status),
+      const DeepCollectionEquality().hash(attribute));
 
   @JsonKey(ignore: true)
   @override
@@ -177,19 +217,22 @@ class _$_NFTEntity with DiagnosticableTreeMixin implements _NFTEntity {
 
 abstract class _NFTEntity implements NFTEntity {
   const factory _NFTEntity(
-      {required final String address,
-      required final String name,
-      required final String symbol,
-      required final BigInt balance}) = _$_NFTEntity;
+      {required final BigInt id,
+      required final int categoryId,
+      required final int isLock,
+      required final String status,
+      required final NftAttributeEntity attribute}) = _$_NFTEntity;
 
   @override
-  String get address => throw _privateConstructorUsedError;
+  BigInt get id => throw _privateConstructorUsedError;
   @override
-  String get name => throw _privateConstructorUsedError;
+  int get categoryId => throw _privateConstructorUsedError;
   @override
-  String get symbol => throw _privateConstructorUsedError;
+  int get isLock => throw _privateConstructorUsedError;
   @override
-  BigInt get balance => throw _privateConstructorUsedError;
+  String get status => throw _privateConstructorUsedError;
+  @override
+  NftAttributeEntity get attribute => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
   _$$_NFTEntityCopyWith<_$_NFTEntity> get copyWith =>

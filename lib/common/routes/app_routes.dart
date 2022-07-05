@@ -1,4 +1,3 @@
-import 'package:slee_fi/common/widgets/route_aware_widget.dart';
 import 'package:slee_fi/presentation/screens/alarm/alarm_screen.dart';
 import 'package:slee_fi/presentation/screens/alarm/widgets/sound_effect_screen.dart';
 import 'package:slee_fi/presentation/screens/bottom_navigation/bottom_navigation_screen.dart';
@@ -118,8 +117,7 @@ class AppRoutes {
     R.loginSignUp: (_) => const LoginSignUpScreen(),
     R.splash: (_) => const LoginSignUpScreen(),
     R.enterActivationCode: (_) => const EnterActivationCodeScreen(),
-    R.bottomNavigation: (_) =>
-        const RouteAwareWidget(child: BottomNavigationScreen()),
+    R.bottomNavigation: (_) => const BottomNavigationScreen(),
     R.recycle: (_) => const RecycleScreen(),
     R.feedback: (_) => const FeedBackScreen(),
     R.gacha500TimesChance: (_) => const GachaChance500Screen(),
@@ -127,7 +125,7 @@ class AppRoutes {
     R.gachaResultOverview: (_) => const GachaResultOverview(),
     R.nftInfo: (_) => const InfoIndividualScreen(),
     R.mint: (_) => const MintScreen(),
-    R.wallet: (_) => const RouteAwareWidget(child: WalletScreen()),
+    R.wallet: (_) => const WalletScreen(),
     R.staking: (_) => const StakingScreen(),
     R.setting: (_) => const SettingScreen(),
     R.alarm: (_) => const AlarmScreen(),
