@@ -12,12 +12,3 @@ class UpdateUser extends UserEvent {
   @override
   List<Object?> get props => [userInfoEntity];
 }
-
-class UpdateUser extends UserEvent {
-  final UserInfoEntity userInfoEntity;
-
-  const UpdateUser(this.userInfoEntity);
-
-  @override
-  List<Object?> get props => [userInfoEntity];
-}

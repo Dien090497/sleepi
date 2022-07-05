@@ -14,7 +14,6 @@ import 'package:slee_fi/common/widgets/sf_textfield.dart';
 import 'package:slee_fi/common/widgets/sf_textfield_password.dart';
 import 'package:slee_fi/common/widgets/textfield_verification.dart';
 import 'package:slee_fi/l10n/locale_keys.g.dart';
-import 'package:slee_fi/models/user/user_info_model.dart';
 import 'package:slee_fi/presentation/blocs/sign_in_sign_up/sign_up_cubit.dart';
 import 'package:slee_fi/presentation/blocs/sign_in_sign_up/sign_up_state.dart';
 import 'package:slee_fi/presentation/screens/create_password/create_password_screen.dart';
@@ -62,7 +61,6 @@ class _AccountLoginState extends State<AccountLoginWidget> {
 
   @override
   Widget build(BuildContext context) {
-
     return BlocConsumer<SigInSignUpCubit, SignInSignUpState>(
       listener: (context, state) {
         if (state is SignInSignUpStateSignUpSuccess) {
@@ -70,7 +68,7 @@ class _AccountLoginState extends State<AccountLoginWidget> {
           Navigator.pushNamed(context, R.enterActivationCode,
               arguments: EnterActiveCodeArg(
                 int.parse(cubit.otp),
-                state.userInfoModel,
+                state.userInfoEntity,
                 state.enableActiveCode,
               ));
         } else if (state is SignInSignUpStateSignInSuccess) {
@@ -88,7 +86,7 @@ class _AccountLoginState extends State<AccountLoginWidget> {
               arguments: CreatePasswordArg(
                 '',
                 state.otp,
-                UserInfoModel.emptyUser(state.email),
+                state.email,
                 false,
               )).then((value) => _checkChangePasswordSuccess(value));
         }
@@ -205,9 +203,10 @@ class _AccountLoginState extends State<AccountLoginWidget> {
   }
 
   _checkChangePasswordSuccess(dynamic value) {
-    if(value == true){
+    if (value == true) {
       _changeState(Action.signIn);
-      showSuccessfulDialog(context, LocaleKeys.reset_password_successfully,padding: const EdgeInsets.all(10));
+      showSuccessfulDialog(context, LocaleKeys.reset_password_successfully,
+          padding: const EdgeInsets.all(10));
     }
   }
 }

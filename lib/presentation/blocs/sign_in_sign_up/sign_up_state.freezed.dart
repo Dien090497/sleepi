@@ -23,7 +23,7 @@ mixin _$SignInSignUpState {
     required TResult Function(String message) error,
     required TResult Function(String message) errorEmail,
     required TResult Function(
-            bool enableActiveCode, UserInfoModel userInfoModel)
+            bool enableActiveCode, UserInfoEntity userInfoEntity)
         signUpSuccess,
     required TResult Function(bool isFirstOpenApp) signInSuccess,
     required TResult Function(int otp, String email) verifyOTPSuccess,
@@ -35,7 +35,7 @@ mixin _$SignInSignUpState {
     TResult Function()? process,
     TResult Function(String message)? error,
     TResult Function(String message)? errorEmail,
-    TResult Function(bool enableActiveCode, UserInfoModel userInfoModel)?
+    TResult Function(bool enableActiveCode, UserInfoEntity userInfoEntity)?
         signUpSuccess,
     TResult Function(bool isFirstOpenApp)? signInSuccess,
     TResult Function(int otp, String email)? verifyOTPSuccess,
@@ -47,7 +47,7 @@ mixin _$SignInSignUpState {
     TResult Function()? process,
     TResult Function(String message)? error,
     TResult Function(String message)? errorEmail,
-    TResult Function(bool enableActiveCode, UserInfoModel userInfoModel)?
+    TResult Function(bool enableActiveCode, UserInfoEntity userInfoEntity)?
         signUpSuccess,
     TResult Function(bool isFirstOpenApp)? signInSuccess,
     TResult Function(int otp, String email)? verifyOTPSuccess,
@@ -156,7 +156,7 @@ class _$SignInSignUpStateInit implements SignInSignUpStateInit {
     required TResult Function(String message) error,
     required TResult Function(String message) errorEmail,
     required TResult Function(
-            bool enableActiveCode, UserInfoModel userInfoModel)
+            bool enableActiveCode, UserInfoEntity userInfoEntity)
         signUpSuccess,
     required TResult Function(bool isFirstOpenApp) signInSuccess,
     required TResult Function(int otp, String email) verifyOTPSuccess,
@@ -171,7 +171,7 @@ class _$SignInSignUpStateInit implements SignInSignUpStateInit {
     TResult Function()? process,
     TResult Function(String message)? error,
     TResult Function(String message)? errorEmail,
-    TResult Function(bool enableActiveCode, UserInfoModel userInfoModel)?
+    TResult Function(bool enableActiveCode, UserInfoEntity userInfoEntity)?
         signUpSuccess,
     TResult Function(bool isFirstOpenApp)? signInSuccess,
     TResult Function(int otp, String email)? verifyOTPSuccess,
@@ -186,7 +186,7 @@ class _$SignInSignUpStateInit implements SignInSignUpStateInit {
     TResult Function()? process,
     TResult Function(String message)? error,
     TResult Function(String message)? errorEmail,
-    TResult Function(bool enableActiveCode, UserInfoModel userInfoModel)?
+    TResult Function(bool enableActiveCode, UserInfoEntity userInfoEntity)?
         signUpSuccess,
     TResult Function(bool isFirstOpenApp)? signInSuccess,
     TResult Function(int otp, String email)? verifyOTPSuccess,
@@ -300,7 +300,7 @@ class _$SignInSignUpStateProcess implements SignInSignUpStateProcess {
     required TResult Function(String message) error,
     required TResult Function(String message) errorEmail,
     required TResult Function(
-            bool enableActiveCode, UserInfoModel userInfoModel)
+            bool enableActiveCode, UserInfoEntity userInfoEntity)
         signUpSuccess,
     required TResult Function(bool isFirstOpenApp) signInSuccess,
     required TResult Function(int otp, String email) verifyOTPSuccess,
@@ -315,7 +315,7 @@ class _$SignInSignUpStateProcess implements SignInSignUpStateProcess {
     TResult Function()? process,
     TResult Function(String message)? error,
     TResult Function(String message)? errorEmail,
-    TResult Function(bool enableActiveCode, UserInfoModel userInfoModel)?
+    TResult Function(bool enableActiveCode, UserInfoEntity userInfoEntity)?
         signUpSuccess,
     TResult Function(bool isFirstOpenApp)? signInSuccess,
     TResult Function(int otp, String email)? verifyOTPSuccess,
@@ -330,7 +330,7 @@ class _$SignInSignUpStateProcess implements SignInSignUpStateProcess {
     TResult Function()? process,
     TResult Function(String message)? error,
     TResult Function(String message)? errorEmail,
-    TResult Function(bool enableActiveCode, UserInfoModel userInfoModel)?
+    TResult Function(bool enableActiveCode, UserInfoEntity userInfoEntity)?
         signUpSuccess,
     TResult Function(bool isFirstOpenApp)? signInSuccess,
     TResult Function(int otp, String email)? verifyOTPSuccess,
@@ -468,7 +468,7 @@ class _$SignInSignUpStateError implements SignInSignUpStateError {
     required TResult Function(String message) error,
     required TResult Function(String message) errorEmail,
     required TResult Function(
-            bool enableActiveCode, UserInfoModel userInfoModel)
+            bool enableActiveCode, UserInfoEntity userInfoEntity)
         signUpSuccess,
     required TResult Function(bool isFirstOpenApp) signInSuccess,
     required TResult Function(int otp, String email) verifyOTPSuccess,
@@ -483,7 +483,7 @@ class _$SignInSignUpStateError implements SignInSignUpStateError {
     TResult Function()? process,
     TResult Function(String message)? error,
     TResult Function(String message)? errorEmail,
-    TResult Function(bool enableActiveCode, UserInfoModel userInfoModel)?
+    TResult Function(bool enableActiveCode, UserInfoEntity userInfoEntity)?
         signUpSuccess,
     TResult Function(bool isFirstOpenApp)? signInSuccess,
     TResult Function(int otp, String email)? verifyOTPSuccess,
@@ -498,7 +498,7 @@ class _$SignInSignUpStateError implements SignInSignUpStateError {
     TResult Function()? process,
     TResult Function(String message)? error,
     TResult Function(String message)? errorEmail,
-    TResult Function(bool enableActiveCode, UserInfoModel userInfoModel)?
+    TResult Function(bool enableActiveCode, UserInfoEntity userInfoEntity)?
         signUpSuccess,
     TResult Function(bool isFirstOpenApp)? signInSuccess,
     TResult Function(int otp, String email)? verifyOTPSuccess,
@@ -644,7 +644,7 @@ class _$SignInSignUpStateErrorEmail implements SignInSignUpStateErrorEmail {
     required TResult Function(String message) error,
     required TResult Function(String message) errorEmail,
     required TResult Function(
-            bool enableActiveCode, UserInfoModel userInfoModel)
+            bool enableActiveCode, UserInfoEntity userInfoEntity)
         signUpSuccess,
     required TResult Function(bool isFirstOpenApp) signInSuccess,
     required TResult Function(int otp, String email) verifyOTPSuccess,
@@ -659,7 +659,7 @@ class _$SignInSignUpStateErrorEmail implements SignInSignUpStateErrorEmail {
     TResult Function()? process,
     TResult Function(String message)? error,
     TResult Function(String message)? errorEmail,
-    TResult Function(bool enableActiveCode, UserInfoModel userInfoModel)?
+    TResult Function(bool enableActiveCode, UserInfoEntity userInfoEntity)?
         signUpSuccess,
     TResult Function(bool isFirstOpenApp)? signInSuccess,
     TResult Function(int otp, String email)? verifyOTPSuccess,
@@ -674,7 +674,7 @@ class _$SignInSignUpStateErrorEmail implements SignInSignUpStateErrorEmail {
     TResult Function()? process,
     TResult Function(String message)? error,
     TResult Function(String message)? errorEmail,
-    TResult Function(bool enableActiveCode, UserInfoModel userInfoModel)?
+    TResult Function(bool enableActiveCode, UserInfoEntity userInfoEntity)?
         signUpSuccess,
     TResult Function(bool isFirstOpenApp)? signInSuccess,
     TResult Function(int otp, String email)? verifyOTPSuccess,
@@ -752,7 +752,9 @@ abstract class _$$SignInSignUpStateSignUpSuccessCopyWith<$Res> {
           _$SignInSignUpStateSignUpSuccess value,
           $Res Function(_$SignInSignUpStateSignUpSuccess) then) =
       __$$SignInSignUpStateSignUpSuccessCopyWithImpl<$Res>;
-  $Res call({bool enableActiveCode, UserInfoModel userInfoModel});
+  $Res call({bool enableActiveCode, UserInfoEntity userInfoEntity});
+
+  $UserInfoEntityCopyWith<$Res> get userInfoEntity;
 }
 
 /// @nodoc
@@ -771,18 +773,25 @@ class __$$SignInSignUpStateSignUpSuccessCopyWithImpl<$Res>
   @override
   $Res call({
     Object? enableActiveCode = freezed,
-    Object? userInfoModel = freezed,
+    Object? userInfoEntity = freezed,
   }) {
     return _then(_$SignInSignUpStateSignUpSuccess(
       enableActiveCode == freezed
           ? _value.enableActiveCode
           : enableActiveCode // ignore: cast_nullable_to_non_nullable
               as bool,
-      userInfoModel == freezed
-          ? _value.userInfoModel
-          : userInfoModel // ignore: cast_nullable_to_non_nullable
-              as UserInfoModel,
+      userInfoEntity == freezed
+          ? _value.userInfoEntity
+          : userInfoEntity // ignore: cast_nullable_to_non_nullable
+              as UserInfoEntity,
     ));
+  }
+
+  @override
+  $UserInfoEntityCopyWith<$Res> get userInfoEntity {
+    return $UserInfoEntityCopyWith<$Res>(_value.userInfoEntity, (value) {
+      return _then(_value.copyWith(userInfoEntity: value));
+    });
   }
 }
 
@@ -791,16 +800,16 @@ class __$$SignInSignUpStateSignUpSuccessCopyWithImpl<$Res>
 class _$SignInSignUpStateSignUpSuccess
     implements SignInSignUpStateSignUpSuccess {
   const _$SignInSignUpStateSignUpSuccess(
-      this.enableActiveCode, this.userInfoModel);
+      this.enableActiveCode, this.userInfoEntity);
 
   @override
   final bool enableActiveCode;
   @override
-  final UserInfoModel userInfoModel;
+  final UserInfoEntity userInfoEntity;
 
   @override
   String toString() {
-    return 'SignInSignUpState.signUpSuccess(enableActiveCode: $enableActiveCode, userInfoModel: $userInfoModel)';
+    return 'SignInSignUpState.signUpSuccess(enableActiveCode: $enableActiveCode, userInfoEntity: $userInfoEntity)';
   }
 
   @override
@@ -811,14 +820,14 @@ class _$SignInSignUpStateSignUpSuccess
             const DeepCollectionEquality()
                 .equals(other.enableActiveCode, enableActiveCode) &&
             const DeepCollectionEquality()
-                .equals(other.userInfoModel, userInfoModel));
+                .equals(other.userInfoEntity, userInfoEntity));
   }
 
   @override
   int get hashCode => Object.hash(
       runtimeType,
       const DeepCollectionEquality().hash(enableActiveCode),
-      const DeepCollectionEquality().hash(userInfoModel));
+      const DeepCollectionEquality().hash(userInfoEntity));
 
   @JsonKey(ignore: true)
   @override
@@ -834,12 +843,12 @@ class _$SignInSignUpStateSignUpSuccess
     required TResult Function(String message) error,
     required TResult Function(String message) errorEmail,
     required TResult Function(
-            bool enableActiveCode, UserInfoModel userInfoModel)
+            bool enableActiveCode, UserInfoEntity userInfoEntity)
         signUpSuccess,
     required TResult Function(bool isFirstOpenApp) signInSuccess,
     required TResult Function(int otp, String email) verifyOTPSuccess,
   }) {
-    return signUpSuccess(enableActiveCode, userInfoModel);
+    return signUpSuccess(enableActiveCode, userInfoEntity);
   }
 
   @override
@@ -849,12 +858,12 @@ class _$SignInSignUpStateSignUpSuccess
     TResult Function()? process,
     TResult Function(String message)? error,
     TResult Function(String message)? errorEmail,
-    TResult Function(bool enableActiveCode, UserInfoModel userInfoModel)?
+    TResult Function(bool enableActiveCode, UserInfoEntity userInfoEntity)?
         signUpSuccess,
     TResult Function(bool isFirstOpenApp)? signInSuccess,
     TResult Function(int otp, String email)? verifyOTPSuccess,
   }) {
-    return signUpSuccess?.call(enableActiveCode, userInfoModel);
+    return signUpSuccess?.call(enableActiveCode, userInfoEntity);
   }
 
   @override
@@ -864,14 +873,14 @@ class _$SignInSignUpStateSignUpSuccess
     TResult Function()? process,
     TResult Function(String message)? error,
     TResult Function(String message)? errorEmail,
-    TResult Function(bool enableActiveCode, UserInfoModel userInfoModel)?
+    TResult Function(bool enableActiveCode, UserInfoEntity userInfoEntity)?
         signUpSuccess,
     TResult Function(bool isFirstOpenApp)? signInSuccess,
     TResult Function(int otp, String email)? verifyOTPSuccess,
     required TResult orElse(),
   }) {
     if (signUpSuccess != null) {
-      return signUpSuccess(enableActiveCode, userInfoModel);
+      return signUpSuccess(enableActiveCode, userInfoEntity);
     }
     return orElse();
   }
@@ -928,11 +937,11 @@ class _$SignInSignUpStateSignUpSuccess
 
 abstract class SignInSignUpStateSignUpSuccess implements SignInSignUpState {
   const factory SignInSignUpStateSignUpSuccess(
-          final bool enableActiveCode, final UserInfoModel userInfoModel) =
+          final bool enableActiveCode, final UserInfoEntity userInfoEntity) =
       _$SignInSignUpStateSignUpSuccess;
 
   bool get enableActiveCode => throw _privateConstructorUsedError;
-  UserInfoModel get userInfoModel => throw _privateConstructorUsedError;
+  UserInfoEntity get userInfoEntity => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
   _$$SignInSignUpStateSignUpSuccessCopyWith<_$SignInSignUpStateSignUpSuccess>
       get copyWith => throw _privateConstructorUsedError;
@@ -1014,7 +1023,7 @@ class _$SignInSignUpStateSignInSuccess
     required TResult Function(String message) error,
     required TResult Function(String message) errorEmail,
     required TResult Function(
-            bool enableActiveCode, UserInfoModel userInfoModel)
+            bool enableActiveCode, UserInfoEntity userInfoEntity)
         signUpSuccess,
     required TResult Function(bool isFirstOpenApp) signInSuccess,
     required TResult Function(int otp, String email) verifyOTPSuccess,
@@ -1029,7 +1038,7 @@ class _$SignInSignUpStateSignInSuccess
     TResult Function()? process,
     TResult Function(String message)? error,
     TResult Function(String message)? errorEmail,
-    TResult Function(bool enableActiveCode, UserInfoModel userInfoModel)?
+    TResult Function(bool enableActiveCode, UserInfoEntity userInfoEntity)?
         signUpSuccess,
     TResult Function(bool isFirstOpenApp)? signInSuccess,
     TResult Function(int otp, String email)? verifyOTPSuccess,
@@ -1044,7 +1053,7 @@ class _$SignInSignUpStateSignInSuccess
     TResult Function()? process,
     TResult Function(String message)? error,
     TResult Function(String message)? errorEmail,
-    TResult Function(bool enableActiveCode, UserInfoModel userInfoModel)?
+    TResult Function(bool enableActiveCode, UserInfoEntity userInfoEntity)?
         signUpSuccess,
     TResult Function(bool isFirstOpenApp)? signInSuccess,
     TResult Function(int otp, String email)? verifyOTPSuccess,
@@ -1201,7 +1210,7 @@ class _$SignInSignUpStateVerifySuccess
     required TResult Function(String message) error,
     required TResult Function(String message) errorEmail,
     required TResult Function(
-            bool enableActiveCode, UserInfoModel userInfoModel)
+            bool enableActiveCode, UserInfoEntity userInfoEntity)
         signUpSuccess,
     required TResult Function(bool isFirstOpenApp) signInSuccess,
     required TResult Function(int otp, String email) verifyOTPSuccess,
@@ -1216,7 +1225,7 @@ class _$SignInSignUpStateVerifySuccess
     TResult Function()? process,
     TResult Function(String message)? error,
     TResult Function(String message)? errorEmail,
-    TResult Function(bool enableActiveCode, UserInfoModel userInfoModel)?
+    TResult Function(bool enableActiveCode, UserInfoEntity userInfoEntity)?
         signUpSuccess,
     TResult Function(bool isFirstOpenApp)? signInSuccess,
     TResult Function(int otp, String email)? verifyOTPSuccess,
@@ -1231,7 +1240,7 @@ class _$SignInSignUpStateVerifySuccess
     TResult Function()? process,
     TResult Function(String message)? error,
     TResult Function(String message)? errorEmail,
-    TResult Function(bool enableActiveCode, UserInfoModel userInfoModel)?
+    TResult Function(bool enableActiveCode, UserInfoEntity userInfoEntity)?
         signUpSuccess,
     TResult Function(bool isFirstOpenApp)? signInSuccess,
     TResult Function(int otp, String email)? verifyOTPSuccess,

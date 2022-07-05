@@ -47,6 +47,7 @@ class AuthImplementation extends IAuthRepository {
       SignInSchema signInSchema) async {
     try {
       var result = await _authDataSource.signIn(signInSchema);
+      _secureStorage.writeUser(result.data.user);
       return Right(result.data.user.toEntity());
     } on Exception catch (e) {
       return Left(FailureMessage.fromException(e));
@@ -76,7 +77,6 @@ class AuthImplementation extends IAuthRepository {
           sendOTPParam.email, sendOTPParam.otpType);
       return Right(result);
     } on Exception catch (e) {
-
       return Left(FailureMessage.fromException(e));
     }
   }
@@ -131,6 +131,7 @@ class AuthImplementation extends IAuthRepository {
       SignUpSchema signUpSchema) async {
     try {
       var result = await _authDataSource.signUp(signUpSchema);
+      _secureStorage.writeUser(result.data);
       return Right(result.data.toEntity());
     } on Exception catch (e) {
       return Left(FailureMessage.fromException(e));
@@ -149,17 +150,15 @@ class AuthImplementation extends IAuthRepository {
     }
   }
 
-
-
   @override
   Future<Either<FailureMessage, UserInfoEntity>> currentUser() async {
     try {
-    final user = await _secureStorage.readCurrentUser();
-    if (user == null) {
-      return const Left(FailureMessage('msg'));
-    } else {
-      return Right(user.toEntity());
-    }
+      final user = await _secureStorage.readCurrentUser();
+      if (user == null) {
+        return const Left(FailureMessage('msg'));
+      } else {
+        return Right(user.toEntity());
+      }
     } catch (e) {
       'error get current user $e'.log;
       return const Left(FailureMessage('empty user'));
