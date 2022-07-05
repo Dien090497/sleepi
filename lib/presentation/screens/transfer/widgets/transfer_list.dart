@@ -11,6 +11,7 @@ import 'package:slee_fi/common/widgets/sf_buttons.dart';
 import 'package:slee_fi/common/widgets/sf_dialog.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
 import 'package:slee_fi/common/widgets/sf_textfield_text_button.dart';
+import 'package:slee_fi/common/widgets/snack_bar.dart';
 import 'package:slee_fi/entities/token/token_entity.dart';
 import 'package:slee_fi/l10n/locale_keys.g.dart';
 import 'package:slee_fi/presentation/blocs/transfer_spending/transfer_spending.dart';
@@ -75,6 +76,9 @@ class _TransferListState extends State<TransferList> {
               }
             }
           }
+          if (state is TransferSpendingStateError) {
+            _showError(context: context, message: state.message, messageType: MessageType.error);
+          }
         },
         builder: (context, state) {
           return Container(
@@ -109,6 +113,9 @@ class _TransferListState extends State<TransferList> {
                               RegExp(r'^\d{1,}\.?\d{0,6}')),
                         ],
                         controller: controller,
+                        onPressed: () {
+                          controller.text = widget.tokenEntity?.balance.formatBalanceToken ?? '';
+                        },
                       ),
                       if (state is TransferSpendingStateError)
                         SFText(
@@ -144,4 +151,11 @@ class _TransferListState extends State<TransferList> {
       ),
     );
   }
+}
+
+void _showError(
+    {required BuildContext context,
+      required String message,
+      required MessageType messageType}) {
+  showCustomSnackBar(context: context, msg: message);
 }
