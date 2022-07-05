@@ -54,34 +54,28 @@ abstract class AuthDataSource {
   Future<UserResponse> getUserByID(@Path('id') String userID);
 
   @POST('/user-otp/verify-otp')
-  @Header('Content-Type: application/json')
   Future<dynamic> verifyOTP(@Body() VerifyOTPSchema verifySchema);
 
   @POST('/users/verify')
-  @Header('Content-Type: application/json')
   Future<UserResponse> verifyUser(@Body() VerifyUserSchema verifyUserSchema);
 
   @POST('/users/change-password')
-  @Header('Content-Type: application/json')
-  Future<dynamic> changePassword(@Body() ChangePasswordSchema changePasswordSchema);
+  Future<dynamic> changePassword(
+      @Body() ChangePasswordSchema changePasswordSchema);
 
   /// auth
 
   @POST('/auth/login')
-  @Header('Content-Type: application/json')
   Future<SignInResponse> signIn(@Body() SignInSchema signInSchema);
 
   @POST('/auth/signup')
-  @Header('Content-Type: application/json')
   Future<UserResponse> signUp(@Body() SignUpSchema signUpSchema);
 
   @POST('/auth/refresh-token')
-  @Header('Content-Type: application/json')
   Future<UserResponse> refreshToken(
       @Body() RefreshTokenSchema refreshTokenSchema);
 
   @POST('/auth/create-password-step')
-  @Header('Content-Type: application/json')
   Future<CreatePasswordResponse> createPassword(
       @Body() CreatePasswordSchema createPasswordSchema);
 
@@ -94,21 +88,17 @@ abstract class AuthDataSource {
 
   ///stacking
   @POST('/stacking')
-  @Header('Content-Type: application/json')
   Future<dynamic> stacking(@Body() CreatePasswordSchema refreshTokenSchema);
 
   ///white draw
   @POST('/withdraw/token')
-  @Header('Content-Type: application/json')
   Future<dynamic> whitedrawToken(
       @Body() WhitDrawTokenSchema whitDrawTokenSchema);
 
   @POST('/withdraw/nft')
-  @Header('Content-Type: application/json')
   Future<dynamic> whitedrawNFT(@Body() WhitDrawNFTSchema whitDrawNFTSchema);
 
   /// market
   @POST('/market-place/buy-nft')
-  @Header('Content-Type: application/json')
   Future<dynamic> buyNFT(@Body() BuyNFTSchema buyNFTSchema);
 }
