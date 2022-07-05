@@ -12,9 +12,7 @@ import 'package:slee_fi/failures/failure.dart';
 import 'package:slee_fi/models/create_password_reponse/create_password_response.dart';
 import 'package:slee_fi/models/send_email_response/send_email_response.dart';
 import 'package:slee_fi/models/setting_active_code_response/setting_active_code_response.dart';
-import 'package:slee_fi/models/sign_in_response/sign_in_response.dart';
 import 'package:slee_fi/models/user/user_info_model.dart';
-import 'package:slee_fi/models/user_response/user_response.dart';
 import 'package:slee_fi/repository/auth_repository.dart';
 import 'package:slee_fi/schema/create_password_schema/create_password_schema.dart';
 import 'package:slee_fi/schema/sign_in_schema/sign_in_schema.dart';
@@ -45,11 +43,11 @@ class AuthImplementation extends IAuthRepository {
   }
 
   @override
-  Future<Either<FailureMessage, SignInResponse>> logIn(
+  Future<Either<FailureMessage, UserInfoEntity>> logIn(
       SignInSchema signInSchema) async {
     try {
       var result = await _authDataSource.signIn(signInSchema);
-      return Right(result);
+      return Right(result.data.user.toEntity());
     } on Exception catch (e) {
       return Left(FailureMessage.fromException(e));
     }
@@ -129,11 +127,11 @@ class AuthImplementation extends IAuthRepository {
   }
 
   @override
-  Future<Either<FailureMessage, UserResponse>> signUp(
+  Future<Either<FailureMessage, UserInfoEntity>> signUp(
       SignUpSchema signUpSchema) async {
     try {
       var result = await _authDataSource.signUp(signUpSchema);
-      return Right(result);
+      return Right(result.data.toEntity());
     } on Exception catch (e) {
       return Left(FailureMessage.fromException(e));
     }

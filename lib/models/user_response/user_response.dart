@@ -8,7 +8,7 @@ class UserResponse {
   final Object meta;
   final UserInfoModel data;
 
-  UserResponse(this.meta, this.data);
+  const UserResponse(this.meta, this.data);
 
   factory UserResponse.fromJson(Map<String, dynamic> json) =>
       _$UserResponseFromJson(json);

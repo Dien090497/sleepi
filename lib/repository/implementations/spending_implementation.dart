@@ -23,35 +23,39 @@ class SpendingImplementation extends ISpendingRepository {
     required double amount,
     required Credentials owner,
     required String addressContract,
+    required int userId,
   }) async {
     try {
       final token = _web3DataSource.tokenFrom(addressContract);
-      final result = BigInt.from(amount * pow(10, 18)) ;
+      final result = BigInt.from(amount * pow(10, 18));
       final allowance = await _spendingDataSource.allowance(
           await owner.extractAddress(), token);
       if (allowance < result) {
-        final entites = TransferSpendingEntity(type: TokenToSpending.approve, txHash: '');
+        final entites =
+            TransferSpendingEntity(type: TokenToSpending.approve, txHash: '');
         return Right(entites);
       }
       if (addressContract == Const.listTokenAddressTestNet[2]) {
         final hash = await _spendingDataSource.toSpendingAvax(
             owner: owner,
             amount: result,
+            userId: BigInt.from(userId),
             avax: EthereumAddress.fromHex(
                 "0x0000000000000000000000000000000000000000"),
             transaction: Transaction(
               value: EtherAmount.inWei(result),
-            )
-        );
-        final entites = TransferSpendingEntity(type: TokenToSpending.spending, txHash: hash);
+            ));
+        final entites = TransferSpendingEntity(
+            type: TokenToSpending.spending, txHash: hash);
         return Right(entites);
       }
       final hash = await _spendingDataSource.toSpending(
           owner: owner,
           amount: result,
-          token: token
-      );
-      final entites = TransferSpendingEntity(type: TokenToSpending.spending, txHash: hash);
+          token: token,
+          userId: BigInt.from(userId));
+      final entites =
+          TransferSpendingEntity(type: TokenToSpending.spending, txHash: hash);
       return Right(entites);
     } catch (e) {
       return Left(FailureMessage('$e'));
@@ -59,13 +63,14 @@ class SpendingImplementation extends ISpendingRepository {
   }
 
   @override
-  Future<Either<Failure, String>> approve({required Credentials owner, required String addressContract}) async {
+  Future<Either<Failure, String>> approve(
+      {required Credentials owner, required String addressContract}) async {
     try {
       final token = _web3DataSource.tokenFrom(addressContract);
-      final result = BigInt.parse("100000000000000000000000000000000000000000000000000");
-    final txHash = await _spendingDataSource.approve(
-            owner, result, token);
-    return Right(txHash);
+      final result =
+          BigInt.parse("100000000000000000000000000000000000000000000000000");
+      final txHash = await _spendingDataSource.approve(owner, result, token);
+      return Right(txHash);
     } catch (e) {
       return Left(FailureMessage('$e'));
     }
