@@ -68,3 +68,5 @@ enum NftType {
 
   String toJson() => name;
 }
+
+enum MessageType { error, success }

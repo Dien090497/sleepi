@@ -21,8 +21,8 @@ class TransferSpendingCubit extends Cubit<TransferSpendingState> {
         amount: amount, addressContract: addressContract, userId: 0);
     final result = await _toSpendingUseCase.call(params);
     result.fold(
-      (l) {
-        emit(TransferSpendingState.error(message: '$l'));
+          (l) {
+        emit(const TransferSpendingState.error(message: 'Cannot Transfer'));
       },
       (result) {
         emit(TransferSpendingState.loaded(transferSpendingEntity: result));

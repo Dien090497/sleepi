@@ -94,24 +94,26 @@ class _WalletScreenState extends State<WalletScreen>
                       if (i == 1) {
                         if (state is WalletStateLoaded &&
                             state.walletInfoEntity == null) {
+                          controller.index = 0;
                           _showCreateOrImportWallet().then((value) {
                             _showWarningDialog(value, context);
                             if (value == true) {
                               controller.animateTo(1);
                             }
                           });
-                        }
-                        if (firstOpenWallet) {
-                          setState(() {
-                            firstOpenWallet = false;
-                          });
-                          Navigator.of(context)
-                              .pushNamed(R.passcode)
-                              .then((value) {
-                            if (value == true) {
-                              controller.animateTo(1);
-                            }
-                          });
+                        } else {
+                          if (firstOpenWallet) {
+                            setState(() {
+                              firstOpenWallet = false;
+                            });
+                            Navigator.of(context)
+                                .pushNamed(R.passcode)
+                                .then((value) {
+                              if (value == true) {
+                                controller.animateTo(1);
+                              }
+                            });
+                          }
                         }
                       }
                       return true;
