@@ -33,6 +33,7 @@ class PasscodeCubit extends Cubit<PasscodeState> {
   }
 
   void createPassCode(String pass) async {
+    emit(const PasscodeState.initial());
     final currentState = state;
     if (currentState is PasscodeStateInitial) {
       final result = await _createPassCodeUC.call(pass);
