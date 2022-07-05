@@ -28,7 +28,7 @@ Future<T?> showCustomDialog<T>(
 }
 
 Future<T?> showSuccessfulDialog<T>(BuildContext context, String? message,
-    {EdgeInsets? padding}) async {
+    {EdgeInsets? padding, TextStyle? style}) async {
   return showDialog(
       context: context,
       barrierColor: AppColors.backgroundDialog,
@@ -49,7 +49,8 @@ Future<T?> showSuccessfulDialog<T>(BuildContext context, String? message,
             const SizedBox(height: 36),
             SFText(
                 keyText: message ?? LocaleKeys.success,
-                style: TextStyles.bold18White),
+                maxLines: 1,
+                style: style ?? TextStyles.bold18White),
             const SizedBox(height: 40),
           ],
         );
@@ -132,6 +133,7 @@ class SFDialog extends StatelessWidget {
         ),
         padding: padding ?? const EdgeInsets.all(24),
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisSize: MainAxisSize.min,
           children: children,
         ),

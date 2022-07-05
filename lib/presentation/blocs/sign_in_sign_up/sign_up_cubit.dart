@@ -24,10 +24,10 @@ class SigInSignUpCubit extends Cubit<SignInSignUpState> {
   final _logInUseCase = getIt<LogInUseCase>();
   final _isFirstOpenAppUC = getIt<IsFirstOpenAppUseCase>();
   final _verifyOTPUC = getIt<VerifyOTPUseCase>();
+  final _fetchSettingActiveCode = getIt<SettingActiveCodeUseCase>();
 
-  final fetchSettingActiveCode = getIt<SettingActiveCodeUseCase>();
   String email = '';
-  String password = '';
+  String _password = '';
   String otp = '';
   bool isFistOpenApp = false;
 
@@ -47,7 +47,7 @@ class SigInSignUpCubit extends Cubit<SignInSignUpState> {
         signUp();
         break;
       case Action.signIn:
-        signIn();
+        _signIn();
         break;
     }
   }
@@ -72,7 +72,7 @@ class SigInSignUpCubit extends Cubit<SignInSignUpState> {
         await _signUpUseCase.call(SignUpSchema(int.parse(otp), email.trim()));
     result.fold((l) => emit(SignInSignUpState.error(l.msg)),
         (userResponse) async {
-      var setting = await fetchSettingActiveCode.call(NoParams());
+      var setting = await _fetchSettingActiveCode.call(NoParams());
       setting.fold(
         (l) => emit(SignInSignUpState.error(l.msg)),
         (r) => emit(SignInSignUpState.signUpSuccess(
@@ -83,12 +83,13 @@ class SigInSignUpCubit extends Cubit<SignInSignUpState> {
     });
   }
 
-  signIn() async {
-    if (!validateEmail() || !_validatePassword()) {
+  _signIn() async {
+    if (!validateEmail()) {
       return;
     }
     emit(const SignInSignUpState.process());
-    var result = await _logInUseCase.call(SignInSchema(email.trim(), password));
+    var result =
+        await _logInUseCase.call(SignInSchema(email.trim(), _password));
 
     result.fold((l) => emit(SignInSignUpState.error(l.msg)), (r) async {
       emit(SignInSignUpState.signInSuccess(isFistOpenApp));
@@ -98,21 +99,22 @@ class SigInSignUpCubit extends Cubit<SignInSignUpState> {
   signUp() {
     if (!validateEmail() || _validateOTP()) {
       return;
+
     }
 
     emit(const SignInSignUpState.process());
     _signUp();
   }
 
-  bool _validatePassword() {
-    var message = password.validatePassword;
-
-    if (message.isNotEmpty) {
-      emit(SignInSignUpState.error(message));
-      return false;
-    }
-    return true;
-  }
+  // bool _validatePassword() {
+  //   var message = _password.validatePassword;
+  //
+  //   if (message.isNotEmpty) {
+  //     emit(SignInSignUpState.error(message));
+  //     return false;
+  //   }
+  //   return true;
+  // }
 
   bool _validateOTP() {
     var message = otp.validateOTP;
@@ -133,7 +135,18 @@ class SigInSignUpCubit extends Cubit<SignInSignUpState> {
     return true;
   }
 
+  onPasswordChange(String password) {
+    _password = password;
+    if (password.isEmpty && state is SignInSignUpStateError) {
+      emit(const SignInSignUpState.initial());
+    }
+  }
+
   void _verifyOTP() async {
+    if (!validateEmail() || _validateOTP()) {
+      return;
+    }
+
     emit(const SignInSignUpState.process());
     int otp = int.parse(this.otp);
     var result = await _verifyOTPUC
