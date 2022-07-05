@@ -5,14 +5,16 @@ import 'package:slee_fi/repository/spending_repository.dart';
 import 'package:slee_fi/repository/wallet_repository.dart';
 import 'package:slee_fi/usecase/usecase.dart';
 
-class ToSpendingUseCase extends UseCase<TransferSpendingEntity, ToSpendingParams> {
+class ToSpendingUseCase
+    extends UseCase<TransferSpendingEntity, ToSpendingParams> {
   final ISpendingRepository _iSpendingRepository;
   final IWalletRepository _iWalletRepository;
 
   ToSpendingUseCase(this._iSpendingRepository, this._iWalletRepository);
 
   @override
-  Future<Either<Failure, TransferSpendingEntity>> call(ToSpendingParams params) async {
+  Future<Either<Failure, TransferSpendingEntity>> call(
+      ToSpendingParams params) async {
     final currentWalletRes = await _iWalletRepository.currentWallet();
     return currentWalletRes.fold(
       Left.new,
@@ -21,6 +23,7 @@ class ToSpendingUseCase extends UseCase<TransferSpendingEntity, ToSpendingParams
           amount: params.amount,
           owner: r.credentials,
           addressContract: params.addressContract,
+          userId: params.userId,
         );
         return result;
       },
@@ -31,6 +34,11 @@ class ToSpendingUseCase extends UseCase<TransferSpendingEntity, ToSpendingParams
 class ToSpendingParams {
   final double amount;
   final String addressContract;
+  final int userId;
 
-  ToSpendingParams({required this.amount, required this.addressContract});
+  ToSpendingParams({
+    required this.amount,
+    required this.addressContract,
+    required this.userId,
+  });
 }

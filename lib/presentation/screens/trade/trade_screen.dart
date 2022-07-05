@@ -28,6 +28,12 @@ import 'package:slee_fi/presentation/blocs/trade/trade_state.dart';
 import 'package:slee_fi/presentation/screens/send_to_external/widgets/dropdown_select_token.dart';
 import 'package:slee_fi/presentation/screens/trade/widgets/pop_up_confirm_trade.dart';
 
+class TradeArguments {
+  final String? contractAddress;
+
+  TradeArguments(this.contractAddress);
+}
+
 class TradeScreen extends StatefulWidget {
   const TradeScreen({Key? key}) : super(key: key);
 
@@ -37,8 +43,8 @@ class TradeScreen extends StatefulWidget {
 
 class _TradeScreenState extends State<TradeScreen> {
   late double balance = 0;
-  int indexFrom = 0;
-  int indexTo = Const.tokens.length - 1;
+  late int indexFrom;
+  late int indexTo;
   String error = '';
 
   final GlobalKey<CoolDropdownState> firstToken = GlobalKey();
@@ -51,7 +57,8 @@ class _TradeScreenState extends State<TradeScreen> {
   int getIndexAddress(String address) {
     int index = -1;
     for (int i = 0; i < Const.tokens.length; i++) {
-      if (address == Const.tokens[i]['address'].toString()) {
+      if (address.toLowerCase() ==
+          Const.tokens[i]['address'].toString().toLowerCase()) {
         index = i;
       }
     }
@@ -107,7 +114,28 @@ class _TradeScreenState extends State<TradeScreen> {
   @override
   void dispose() {
     if (_debounce != null) _debounce!.cancel();
+    valueController.dispose();
     super.dispose();
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    Future.delayed(Duration.zero, () {
+      final args = ModalRoute.of(context)?.settings.arguments as TradeArguments;
+      setState(() {
+        indexFrom = getIndexAddress(args.contractAddress!);
+        if (indexFrom != 0) {
+          indexTo = 0;
+        } else {
+          indexTo = Const.tokens.length - 1;
+        }
+      });
+    });
+    Future.delayed(const Duration(milliseconds: 100), () {
+      firstToken.currentState?.changeSelectedItem();
+      secondToken.currentState?.changeSelectedItem();
+    });
   }
 
   @override
@@ -231,7 +259,8 @@ class _TradeScreenState extends State<TradeScreen> {
                                                           r'^\d{1,}\.?\d{0,6}')),
                                                 ],
                                                 textInputType:
-                                                    TextInputType.number,
+                                                const TextInputType.numberWithOptions(
+                                                    decimal: true),
                                                 hintText: "0.00",
                                                 hintStyle:
                                                     TextStyles.bold16LightWhite,
@@ -430,12 +459,6 @@ class _TradeScreenState extends State<TradeScreen> {
                                             }
                                             indexTo = getIndexAddress(
                                                 selectItem['value'].toString());
-                                            cubit.getBalanceToken(Const
-                                                .tokens[indexFrom]['address']
-                                                .toString());
-                                            valueController.text = '';
-                                            amountOutMin = 0;
-                                            error = '';
                                             log("message $indexFrom $indexTo");
                                           });
                                           Future.delayed(
@@ -443,6 +466,18 @@ class _TradeScreenState extends State<TradeScreen> {
                                             () => firstToken.currentState
                                                 ?.changeSelectedItem(),
                                           );
+                                          cubit.getAmountOutMin(
+                                              Const
+                                                  .tokens[indexFrom]
+                                              ['address']
+                                                  .toString(),
+                                              Const.tokens[indexTo]
+                                              ['address']
+                                                  .toString(),
+                                              double.parse(
+                                                  valueController
+                                                      .text
+                                                      .toString()));
                                           FocusScope.of(context)
                                               .requestFocus(focusNode);
                                         },

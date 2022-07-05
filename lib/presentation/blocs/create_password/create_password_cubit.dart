@@ -3,48 +3,67 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:slee_fi/common/extensions/string_x.dart';
 import 'package:slee_fi/di/injector.dart';
 import 'package:slee_fi/l10n/locale_keys.g.dart';
-import 'package:slee_fi/models/create_password_schema/create_password_schema.dart';
-import 'package:slee_fi/models/user/user_info_model.dart';
 import 'package:slee_fi/presentation/blocs/create_password/create_password_state.dart';
+import 'package:slee_fi/schema/change_password_schema/change_password_schema.dart';
+import 'package:slee_fi/schema/create_password_schema/create_password_schema.dart';
+import 'package:slee_fi/usecase/change_password_usecase.dart';
 import 'package:slee_fi/usecase/create_password_usecase.dart';
 import 'package:slee_fi/usecase/is_first_open_app_usecase.dart';
-import 'package:slee_fi/usecase/save_user_local_usecase.dart';
 import 'package:slee_fi/usecase/usecase.dart';
 
 class CreatePasswordCubit extends Cubit<CreatePasswordState> {
   CreatePasswordCubit() : super(const CreatePasswordState.initial());
 
   final _createPassCodeUC = getIt<CreatePasswordUseCase>();
-  final _saveUserUC = getIt<SaveUserLocalUseCase>();
   final _isFirstOpenApp = getIt<IsFirstOpenAppUseCase>();
+  final _changePasswordUC = getIt<ChangePasswordUseCase>();
 
-  late UserInfoModel userInfoModel;
+  late String email;
   late int otp;
   late String activeCode;
 
   String password = '';
   String confirmPassword = '';
   bool isFistOpenApp = false;
+  late bool isCreate;
 
-  init(UserInfoModel userInfoModel, String activeCode, int otp) async {
-    this.userInfoModel = userInfoModel;
+  init(String email, String activeCode, int otp, bool isCreate) async {
+    this.email = email;
     this.otp = otp;
     this.activeCode = activeCode;
-    var result = await _isFirstOpenApp.call(NoParams());
-    result.fold((l) => null, (r) => isFistOpenApp = r);
+    this.isCreate = isCreate;
+
+    if (isCreate) {
+      var result = await _isFirstOpenApp.call(NoParams());
+      result.fold((l) => null, (r) => isFistOpenApp = r);
+    }
   }
 
-  createPassword() async {
-    'create passcode'.log;
+  process() async {
     if (!_validatePassword()) {
       return;
     }
     emit(const CreatePasswordState.process());
-    var result = await _createPassCodeUC.call(
-        CreatePasswordSchema(userInfoModel.email, password, activeCode, otp));
+    if (isCreate) {
+      _createPassCode();
+    } else {
+      _changePassword();
+    }
+  }
+
+  _changePassword() async {
+    var result = await _changePasswordUC
+        .call(ChangePasswordSchema(email, otp, password, confirmPassword));
+
+    result.fold((l) => emit(CreatePasswordState.errorCreate(l.msg)),
+        (r) => emit(const CreatePasswordState.changePasswordSuccess()));
+  }
+
+  _createPassCode() async {
+    var result = await _createPassCodeUC
+        .call(CreatePasswordSchema(email, password, activeCode, otp));
 
     result.fold((l) => emit(CreatePasswordState.errorCreate(l.msg)), (r) async {
-      await _saveUserUC.call(userInfoModel);
       emit(CreatePasswordState.success(isFistOpenApp));
     });
   }

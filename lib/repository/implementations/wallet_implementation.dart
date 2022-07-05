@@ -52,7 +52,8 @@ class WalletImplementation extends IWalletRepository {
       model.id = walletId;
       await _getStorageDataSource.setCurrentWalletId(walletId);
       final nativeCurrency = await _getNativeCurrency();
-      final balance = await _web3DataSource.getBalance(ethereumAddress.hex);
+      final result = await _web3DataSource.getBalance(ethereumAddress.hex);
+      final balance = result / BigInt.from(pow(10, 18));
       return Right(model.toEntity(
         credentials,
         derivedIndex: derivedIndex,
@@ -104,7 +105,8 @@ class WalletImplementation extends IWalletRepository {
         model.id = walletId;
         await _getStorageDataSource.setCurrentWalletId(walletId);
         final nativeCurrency = await _getNativeCurrency();
-        final balance = await _web3DataSource.getBalance(ethereumAddress.hex);
+        final result = await _web3DataSource.getBalance(ethereumAddress.hex);
+        final balance = result / BigInt.from(pow(10, 18));
         return Right(model.toEntity(
           credentials,
           derivedIndex: derivedIndex,
@@ -139,8 +141,8 @@ class WalletImplementation extends IWalletRepository {
       final privateKey = _web3DataSource.mnemonicToPrivateKey(
           wallet.mnemonic, wallet.derivedIndex!, network.slip44);
       final credentials = _web3DataSource.credentialsFromPrivateKey(privateKey);
-      int balance = await _web3DataSource.getBalance(wallet.address);
-
+      final result = await _web3DataSource.getBalance(wallet.address);
+      final balance = result / BigInt.from(pow(10, 18));
       var nativeCurrency = await _getNativeCurrency();
       return Right(
         wallet.toEntity(credentials,
@@ -164,8 +166,8 @@ class WalletImplementation extends IWalletRepository {
           break;
         }
         if (params.addressContract[i] == Const.tokens[0]['address']) {
-          var balance = BigInt.from(await _web3DataSource
-              .getBalance(params.walletInfoEntity.address));
+          var balance = await _web3DataSource
+              .getBalance(params.walletInfoEntity.address);
           values.add(balance / BigInt.from(pow(10, 18)));
         } else {
           final erc20 = _web3DataSource.tokenFrom(params.addressContract[i]);
@@ -233,8 +235,7 @@ class WalletImplementation extends IWalletRepository {
       var walletId = _getStorageDataSource.getCurrentWalletId();
       var wallet = await _isarDataSource.getWalletAt(walletId);
       if (contractAddress == Const.tokens[0]['address']) {
-        balance =
-            BigInt.from(await _web3DataSource.getBalance(wallet!.address));
+        balance =await _web3DataSource.getBalance(wallet!.address);
         return Right(balance / BigInt.from(pow(10, 18)));
       } else {
         balance = await _web3DataSource.getBalanceOf(

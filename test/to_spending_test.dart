@@ -21,12 +21,6 @@ void main() {
 
   final value = BigInt.from(1 * pow(10, 18));
 
-  test('Without approve', () async {
-    final result =
-        await spending.depositToken(slft.self.address, value, credentials: cre);
-    result.log;
-  });
-
   test('Approve', () async {
     final str =
         await slft.approve(spending.self.address, value, credentials: cre);

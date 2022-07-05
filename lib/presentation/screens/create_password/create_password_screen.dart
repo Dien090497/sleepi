@@ -11,16 +11,16 @@ import 'package:slee_fi/common/widgets/sf_buttons.dart';
 import 'package:slee_fi/common/widgets/sf_card.dart';
 import 'package:slee_fi/common/widgets/sf_textfield_password.dart';
 import 'package:slee_fi/l10n/locale_keys.g.dart';
-import 'package:slee_fi/models/user/user_info_model.dart';
 import 'package:slee_fi/presentation/blocs/create_password/create_password_cubit.dart';
 import 'package:slee_fi/presentation/blocs/create_password/create_password_state.dart';
 
 class CreatePasswordArg {
+  final bool isCreate;
   final String activeCode;
   final int otp;
-  final UserInfoModel userInfoModel;
+  final String email;
 
-  CreatePasswordArg(this.activeCode, this.otp, this.userInfoModel);
+  CreatePasswordArg(this.activeCode, this.otp, this.email, this.isCreate);
 }
 
 class CreatePasswordScreen extends StatefulWidget {
@@ -38,7 +38,7 @@ class _CreatePasswordScreenState extends State<CreatePasswordScreen> {
     final arg = ModalRoute.of(context)?.settings.arguments as CreatePasswordArg;
     return BlocProvider<CreatePasswordCubit>(
       create: (context) => CreatePasswordCubit()
-        ..init(arg.userInfoModel, arg.activeCode, arg.otp),
+        ..init(arg.email, arg.activeCode, arg.otp, arg.isCreate),
       child: BlocConsumer<CreatePasswordCubit, CreatePasswordState>(
         listener: (context, state) {
           if (state is CreatePasswordStateSuccess) {
@@ -51,6 +51,8 @@ class _CreatePasswordScreenState extends State<CreatePasswordScreen> {
               Navigator.pushNamedAndRemoveUntil(
                   context, R.bottomNavigation, (_) => false);
             }
+          } else if (state is CreatePasswordStateChangePasswrodSuccess) {
+            Navigator.pop(context, true);
           }
         },
         builder: (context, state) {
@@ -80,7 +82,7 @@ class _CreatePasswordScreenState extends State<CreatePasswordScreen> {
                                       horizontal: 16, vertical: 24),
                                   child: Column(
                                     children: [
-                                      const SizedBox(height: 20),
+                                      const SizedBox(height: 10),
                                       SFTextFieldPassword(
                                         labelText: LocaleKeys.new_password,
                                         valueChanged: (value) {
@@ -91,7 +93,7 @@ class _CreatePasswordScreenState extends State<CreatePasswordScreen> {
                                             ? state.message
                                             : "",
                                       ),
-                                      const SizedBox(height: 20),
+                                      const SizedBox(height: 10),
                                       SFTextFieldPassword(
                                         labelText: LocaleKeys.confirm_password,
                                         valueChanged: (value) {
@@ -123,7 +125,7 @@ class _CreatePasswordScreenState extends State<CreatePasswordScreen> {
                             width: double.infinity,
                             // disabled: isDisabled,
                             onPressed: () {
-                              cubit.createPassword();
+                              cubit.process();
                               // Navigator.pushNamedAndRemoveUntil(
                               //     context, R.bottomNavigation, (_) => false);
                             },

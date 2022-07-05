@@ -147,7 +147,7 @@ class _SendToExternalScreenState extends State<SendToExternalScreen> {
                                       keyText: LocaleKeys.balance,
                                       style: TextStyles.w400lightGrey12,
                                       suffix:
-                                          ': ${args != null ? args.tokenEntity?.balance.formatBalanceToken : balance.toStringAsFixed(6)} ${args != null ? args.symbol : "AVAX"}'),
+                                          ': ${args != null ? args.tokenEntity?.balance.formatBalanceToken : balance.formatBalanceToken} ${args != null ? args.symbol : "AVAX"}'),
                                 ],
                               ),
                             ),

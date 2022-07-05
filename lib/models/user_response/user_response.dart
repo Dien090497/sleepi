@@ -5,10 +5,10 @@ part 'user_response.g.dart';
 
 @JsonSerializable()
 class UserResponse {
-  final dynamic meta;
+  final Object meta;
   final UserInfoModel data;
 
-  UserResponse(this.meta, this.data);
+  const UserResponse(this.meta, this.data);
 
   factory UserResponse.fromJson(Map<String, dynamic> json) =>
       _$UserResponseFromJson(json);

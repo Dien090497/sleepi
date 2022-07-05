@@ -3,7 +3,6 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:slee_fi/common/const/const.dart';
 import 'package:slee_fi/di/injector.dart';
-import 'package:slee_fi/entities/nft_entity/nft_entity.dart';
 import 'package:slee_fi/entities/token/token_entity.dart';
 import 'package:slee_fi/entities/wallet_info/wallet_info_entity.dart';
 import 'package:slee_fi/failures/failure.dart';
@@ -13,14 +12,12 @@ import 'package:slee_fi/usecase/get_balance_for_tokens_usecase.dart';
 import 'package:slee_fi/usecase/get_nfts_balance_usecase.dart';
 import 'package:slee_fi/usecase/usecase.dart';
 import 'package:slee_fi/usecase/wallet/current_wallet_usecase.dart';
-import 'package:slee_fi/usecase/wallet/first_open_wallet_session_usecase.dart';
 
 import 'wallet_state.dart';
 
 class WalletCubit extends Cubit<WalletState> {
   WalletCubit() : super(const WalletState.initial());
 
-  final _firstOpenWalletUC = getIt<CheckFirstOpenWallet>();
   final _currentWalletUC = getIt<CurrentWalletUseCase>();
 
   final _getBalanceForTokensUseCase = getIt<GetBalanceForTokensUseCase>();
@@ -28,12 +25,10 @@ class WalletCubit extends Cubit<WalletState> {
 
   Future<void> init() async {
     emit(const WalletState.loading());
-    final openWallet = await _firstOpenWalletUC.call(NoParams());
     final walletCall = await _currentWalletUC.call(NoParams());
     walletCall.fold(
-      (l) => emit(WalletState.loaded(
+      (l) => emit(const WalletState.loaded(
         walletInfoEntity: null,
-        firstOpenWallet: openWallet.getOrElse(() => false),
         tokenList: [],
       )),
       (r) => loadCurrentWallet(r),
@@ -51,8 +46,6 @@ class WalletCubit extends Cubit<WalletState> {
 
   void loadCurrentWallet(WalletInfoEntity? wallet) async {
     final currentState = state;
-    final openWallet = await _firstOpenWalletUC.call(NoParams());
-
     if (wallet != null) {
       final ParamsBalanceOfToken params;
       final GetNFTsParams nfTsParams;
@@ -80,11 +73,12 @@ class WalletCubit extends Cubit<WalletState> {
         _getNFTsBalanceUC.call(nfTsParams),
       ]);
       final Either<Failure, List<double>> tokenBalanceRes = cast(results.first);
-      final Either<Failure, List<NFTEntity>> nftBalanceRes = cast(results.last);
+      final Either<Failure, List<BigInt>> nftBalanceRes = cast(results.last);
       final List keyList = [
         "SLFT",
         "SLGT",
         "AVAX",
+        "USDC",
       ];
       final List nftNames = [
         LocaleKeys.beds.tr(),
@@ -96,6 +90,7 @@ class WalletCubit extends Cubit<WalletState> {
         Ics.icSlft,
         Ics.icSlgt,
         Ics.icAvax,
+        Ics.icUsdc,
       ];
       final List nftIcons = [
         Ics.bed,
@@ -124,27 +119,24 @@ class WalletCubit extends Cubit<WalletState> {
           name: nftNames[i],
           symbol: nftNames[i],
           icon: nftIcons[i],
-          balance: nfts[i].balance.toDouble(),
+          balance: nfts[i].toDouble(),
         );
         tokenList.add(tokenEntity);
       }
       if (currentState is WalletStateLoaded) {
         emit(currentState.copyWith(
           walletInfoEntity: wallet,
-          firstOpenWallet: openWallet.getOrElse(() => false),
           tokenList: tokenList,
         ));
       } else {
         emit(WalletState.loaded(
           walletInfoEntity: wallet,
-          firstOpenWallet: openWallet.getOrElse(() => false),
           tokenList: tokenList,
         ));
       }
     } else {
-      emit(WalletState.loaded(
+      emit(const WalletState.loaded(
         walletInfoEntity: null,
-        firstOpenWallet: openWallet.getOrElse(() => false),
         tokenList: [],
       ));
     }

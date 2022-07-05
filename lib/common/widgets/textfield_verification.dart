@@ -103,6 +103,7 @@ class TextfieldVerificationEmail extends StatelessWidget {
           Text(
             errorText!,
             style: TextStyles.w400Red12,
+            maxLines: 1,
           ),
       ],
     );

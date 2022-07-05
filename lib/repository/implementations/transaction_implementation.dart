@@ -98,11 +98,12 @@ class TransactionImplementation extends ITransactionRepository{
   @override
   Future<Either<Failure, double>> getTokenBalance() async{
     try {
-      int balance = 0;
+      double balance = 0;
       var walletId = _getStorageDataSource.getCurrentWalletId();
       var wallet = await _isarDataSource.getWalletAt(walletId);
-       balance = await _web3DataSource.getBalance(wallet!.address);
-      return Right(balance/(pow(10, 18)));
+      final result = await _web3DataSource.getBalance(wallet!.address);
+      balance = result / BigInt.from(pow(10, 18));
+      return Right(balance);
     } catch (e) {
       return Left(FailureMessage('$e'));
     }

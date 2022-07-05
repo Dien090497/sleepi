@@ -27,6 +27,7 @@ class WalletDetailList extends StatelessWidget {
     "SLFT",
     "SLGT",
     "AVAX",
+    "USDC",
     LocaleKeys.beds.tr(),
     LocaleKeys.jewels.tr(),
     LocaleKeys.bed_box.tr(),
@@ -36,6 +37,7 @@ class WalletDetailList extends StatelessWidget {
     Ics.icSlft,
     Ics.icSlgt,
     Ics.icAvax,
+    Ics.icUsdc,
     Ics.bed,
     Ics.jewel,
     Ics.icBedBoxes,
@@ -103,7 +105,7 @@ class WalletDetailList extends StatelessWidget {
                 itemBuilder: (BuildContext context, int index) {
                   return SFCard(
                     onTap: () {
-                      if (index < 3) {
+                      if (index < 4) {
                         Navigator.pushNamed(context, R.transactionDetail,
                             arguments: TransactionDetailArguments(
                               title: tokenList[index].displayName,
@@ -119,15 +121,24 @@ class WalletDetailList extends StatelessWidget {
                     child: ListTile(
                       leading: Padding(
                         padding: EdgeInsets.only(
-                            left: tokenList[index].icon == Ics.icAvax ? 4 : 0),
+                            left: tokenList[index].icon == Ics.icAvax ||
+                                    tokenList[index].icon == Ics.icUsdc
+                                ? 4
+                                : 0),
                         child: SFIcon(
                           tokenList[index].icon,
-                          width: tokenList[index].icon == Ics.icAvax ? 32 : 40,
-                          height: tokenList[index].icon == Ics.icAvax ? 32 : 40,
+                          width: tokenList[index].icon == Ics.icAvax ||
+                                  tokenList[index].icon == Ics.icUsdc
+                              ? 32
+                              : 40,
+                          height: tokenList[index].icon == Ics.icAvax ||
+                                  tokenList[index].icon == Ics.icUsdc
+                              ? 32
+                              : 40,
                         ),
                       ),
                       title: SFText(
-                          keyText: index < 3
+                          keyText: index < 4
                               ? tokenList[index].displayName.toUpperCase()
                               : tokenList[index].displayName,
                           style: TextStyles.lightWhite16),

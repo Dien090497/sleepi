@@ -15,7 +15,6 @@ import 'package:slee_fi/presentation/screens/wallet/widgets/tab_bar.dart';
 import 'package:slee_fi/presentation/screens/wallet/widgets/tab_spending_detail.dart';
 import 'package:slee_fi/presentation/screens/wallet/widgets/tab_wallet_detail.dart';
 import 'package:slee_fi/presentation/screens/wallet_creation_warning/widgets/pop_up_avalanche_wallet.dart';
-import 'package:slee_fi/presentation/screens/wallet_creation_warning/widgets/pop_up_wallet_warning.dart';
 import 'package:slee_fi/resources/resources.dart';
 
 class WalletScreen extends StatefulWidget {
@@ -28,11 +27,12 @@ class WalletScreen extends StatefulWidget {
 class _WalletScreenState extends State<WalletScreen>
     with SingleTickerProviderStateMixin {
   late int indexTap = 0;
+  bool firstOpenWallet = true;
   late final TabController controller = TabController(
     vsync: this,
     length: 2,
     initialIndex: 0,
-    animationDuration: const Duration(milliseconds: 500),
+    animationDuration: const Duration(milliseconds: 800),
   );
 
   @override
@@ -91,36 +91,28 @@ class _WalletScreenState extends State<WalletScreen>
                   return WalletTabBar(
                     controller: controller,
                     checkMoveNewTab: (currentIndex, i) {
-                      if (i == 1 ||
-                          (state is WalletStateLoaded &&
-                              (state.walletInfoEntity == null ||
-                                  state.firstOpenWallet))) {
-                        controller.animateTo(0);
-                      }
-
-                      if (state is WalletStateLoaded &&
-                          state.walletInfoEntity == null &&
-                          i == 1) {
-                        _showCreateOrImportWallet().then((value) {
-                          _showWarningDialog(value, context);
-                          if (value == true) {
-                            controller.animateTo(1);
-                          }
-                        });
-                        return false;
-                      }
-
-                      if (state is WalletStateLoaded &&
-                          state.firstOpenWallet &&
-                          i == 1) {
-                        Navigator.of(context)
-                            .pushNamed(R.passcode)
-                            .then((value) {
-                          if (value == true) {
-                            controller.animateTo(1);
-                          }
-                        });
-                        return false;
+                      if (i == 1) {
+                        if (state is WalletStateLoaded &&
+                            state.walletInfoEntity == null) {
+                          _showCreateOrImportWallet().then((value) {
+                            _showWarningDialog(value, context);
+                            if (value == true) {
+                              controller.animateTo(1);
+                            }
+                          });
+                        }
+                        if (firstOpenWallet) {
+                          setState(() {
+                            firstOpenWallet = false;
+                          });
+                          Navigator.of(context)
+                              .pushNamed(R.passcode)
+                              .then((value) {
+                            if (value == true) {
+                              controller.animateTo(1);
+                            }
+                          });
+                        }
                       }
                       return true;
                     },
@@ -156,9 +148,6 @@ class _WalletScreenState extends State<WalletScreen>
       controller.animateTo(1);
       var cubit = context.read<WalletCubit>();
       cubit.importWallet(value.results['data'] as WalletInfoEntity);
-      if (value.fromPage == R.createWallet) {
-        showCustomAlertDialog(context, children: const PopUpWalletWarning());
-      }
     }
   }
 }

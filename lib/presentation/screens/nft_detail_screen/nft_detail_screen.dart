@@ -152,10 +152,10 @@ class NFTDetailScreen extends StatelessWidget {
                         itemBuilder: (context, i) {
                           return MyBedShortWidget(
                             bedType: BedType.flexible,
-                            bedId: state.nftIds[i],
+                            bedId: state.nftEntities[i].id,
                           );
                         },
-                        count: state.nftIds.length,
+                        count: state.nftEntities.length,
                       ),
                   ];
 

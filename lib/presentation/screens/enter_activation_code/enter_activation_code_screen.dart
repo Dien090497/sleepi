@@ -16,8 +16,8 @@ import 'package:slee_fi/common/widgets/sf_dropdown_rotation.dart';
 import 'package:slee_fi/common/widgets/sf_logo.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
 import 'package:slee_fi/common/widgets/sf_textfield.dart';
+import 'package:slee_fi/entities/user/user_info_entity.dart';
 import 'package:slee_fi/l10n/locale_keys.g.dart';
-import 'package:slee_fi/models/user/user_info_model.dart';
 import 'package:slee_fi/presentation/blocs/activation_code/activation_code_cubit.dart';
 import 'package:slee_fi/presentation/blocs/activation_code/activation_code_state.dart';
 import 'package:slee_fi/presentation/screens/create_password/create_password_screen.dart';
@@ -27,10 +27,10 @@ import 'package:url_launcher/url_launcher.dart';
 
 class EnterActiveCodeArg {
   final int otp;
-  final UserInfoModel userInfoModel;
+  final UserInfoEntity userInfoEntity;
   final bool isEnable;
 
-  EnterActiveCodeArg(this.otp, this.userInfoModel, this.isEnable);
+  EnterActiveCodeArg(this.otp, this.userInfoEntity, this.isEnable);
 }
 
 class EnterActivationCodeScreen extends StatelessWidget {
@@ -71,8 +71,11 @@ class EnterActivationCodeScreen extends StatelessWidget {
                               if (state is ActivationCodeStateActiveSuccess) {
                                 _nexStep(
                                     context,
-                                    CreatePasswordArg(state.activationCode,
-                                        arg.otp, arg.userInfoModel));
+                                    CreatePasswordArg(
+                                        state.activationCode,
+                                        arg.otp,
+                                        arg.userInfoEntity.email,
+                                        true));
                               }
                             },
                             builder: (context, state) {
@@ -139,7 +142,11 @@ class EnterActivationCodeScreen extends StatelessWidget {
                                     _nexStep(
                                         context,
                                         CreatePasswordArg(
-                                            '', arg.otp, arg.userInfoModel));
+                                          '',
+                                          arg.otp,
+                                          arg.userInfoEntity.email,
+                                          true,
+                                        ));
                                   }
                                 },
                                 width: MediaQuery.of(context).size.width,

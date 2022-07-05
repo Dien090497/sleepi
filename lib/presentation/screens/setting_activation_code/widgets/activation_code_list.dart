@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
 import 'package:slee_fi/l10n/locale_keys.g.dart';
+import 'package:slee_fi/presentation/blocs/activation_code_setting_cubit/activation_code_setting.dart';
 
 class ActivationCodeList extends StatelessWidget {
   const ActivationCodeList({Key? key}) : super(key: key);
@@ -18,7 +20,10 @@ class ActivationCodeList extends StatelessWidget {
       ),
       width: double.infinity,
       padding: const EdgeInsets.only(top: 20),
-      child: ListView.builder(
+      child:
+          BlocBuilder<ActivationCodeSettingCubit, ActivationCodeSettingState>(
+        builder: (context, state) => ListView.builder(
+          physics: const BouncingScrollPhysics(),
           itemCount: 10,
           shrinkWrap: true,
           padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 12.0),
@@ -51,7 +56,9 @@ class ActivationCodeList extends StatelessWidget {
                 ),
               ),
             );
-          }),
+          },
+        ),
+      ),
     );
   }
 }

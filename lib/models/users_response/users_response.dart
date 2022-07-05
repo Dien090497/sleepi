@@ -5,7 +5,7 @@ part 'users_response.g.dart';
 
 @JsonSerializable()
 class UsersResponse {
-  final dynamic meta;
+  final Object meta;
   final List<UserInfoModel> data;
 
   factory UsersResponse.fromJson(Map<String, dynamic> json) =>

@@ -24,6 +24,7 @@ mixin _$CreatePasswordState {
     required TResult Function(String message) errorPassword,
     required TResult Function(String message) errorCreate,
     required TResult Function(bool isFirstOpenApp) success,
+    required TResult Function() changePasswordSuccess,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -34,6 +35,7 @@ mixin _$CreatePasswordState {
     TResult Function(String message)? errorPassword,
     TResult Function(String message)? errorCreate,
     TResult Function(bool isFirstOpenApp)? success,
+    TResult Function()? changePasswordSuccess,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -44,6 +46,7 @@ mixin _$CreatePasswordState {
     TResult Function(String message)? errorPassword,
     TResult Function(String message)? errorCreate,
     TResult Function(bool isFirstOpenApp)? success,
+    TResult Function()? changePasswordSuccess,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -57,6 +60,8 @@ mixin _$CreatePasswordState {
         errorPassword,
     required TResult Function(CreatePasswordStateErrorCreate value) errorCreate,
     required TResult Function(CreatePasswordStateSuccess value) success,
+    required TResult Function(CreatePasswordStateChangePasswrodSuccess value)
+        changePasswordSuccess,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -68,6 +73,8 @@ mixin _$CreatePasswordState {
     TResult Function(CreatePasswordStateErrorPassword value)? errorPassword,
     TResult Function(CreatePasswordStateErrorCreate value)? errorCreate,
     TResult Function(CreatePasswordStateSuccess value)? success,
+    TResult Function(CreatePasswordStateChangePasswrodSuccess value)?
+        changePasswordSuccess,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -79,6 +86,8 @@ mixin _$CreatePasswordState {
     TResult Function(CreatePasswordStateErrorPassword value)? errorPassword,
     TResult Function(CreatePasswordStateErrorCreate value)? errorCreate,
     TResult Function(CreatePasswordStateSuccess value)? success,
+    TResult Function(CreatePasswordStateChangePasswrodSuccess value)?
+        changePasswordSuccess,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -150,6 +159,7 @@ class _$CreatePasswordStateInit implements CreatePasswordStateInit {
     required TResult Function(String message) errorPassword,
     required TResult Function(String message) errorCreate,
     required TResult Function(bool isFirstOpenApp) success,
+    required TResult Function() changePasswordSuccess,
   }) {
     return initial();
   }
@@ -163,6 +173,7 @@ class _$CreatePasswordStateInit implements CreatePasswordStateInit {
     TResult Function(String message)? errorPassword,
     TResult Function(String message)? errorCreate,
     TResult Function(bool isFirstOpenApp)? success,
+    TResult Function()? changePasswordSuccess,
   }) {
     return initial?.call();
   }
@@ -176,6 +187,7 @@ class _$CreatePasswordStateInit implements CreatePasswordStateInit {
     TResult Function(String message)? errorPassword,
     TResult Function(String message)? errorCreate,
     TResult Function(bool isFirstOpenApp)? success,
+    TResult Function()? changePasswordSuccess,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -195,6 +207,8 @@ class _$CreatePasswordStateInit implements CreatePasswordStateInit {
         errorPassword,
     required TResult Function(CreatePasswordStateErrorCreate value) errorCreate,
     required TResult Function(CreatePasswordStateSuccess value) success,
+    required TResult Function(CreatePasswordStateChangePasswrodSuccess value)
+        changePasswordSuccess,
   }) {
     return initial(this);
   }
@@ -209,6 +223,8 @@ class _$CreatePasswordStateInit implements CreatePasswordStateInit {
     TResult Function(CreatePasswordStateErrorPassword value)? errorPassword,
     TResult Function(CreatePasswordStateErrorCreate value)? errorCreate,
     TResult Function(CreatePasswordStateSuccess value)? success,
+    TResult Function(CreatePasswordStateChangePasswrodSuccess value)?
+        changePasswordSuccess,
   }) {
     return initial?.call(this);
   }
@@ -223,6 +239,8 @@ class _$CreatePasswordStateInit implements CreatePasswordStateInit {
     TResult Function(CreatePasswordStateErrorPassword value)? errorPassword,
     TResult Function(CreatePasswordStateErrorCreate value)? errorCreate,
     TResult Function(CreatePasswordStateSuccess value)? success,
+    TResult Function(CreatePasswordStateChangePasswrodSuccess value)?
+        changePasswordSuccess,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -287,6 +305,7 @@ class _$CreatePasswordStateProcess implements CreatePasswordStateProcess {
     required TResult Function(String message) errorPassword,
     required TResult Function(String message) errorCreate,
     required TResult Function(bool isFirstOpenApp) success,
+    required TResult Function() changePasswordSuccess,
   }) {
     return process();
   }
@@ -300,6 +319,7 @@ class _$CreatePasswordStateProcess implements CreatePasswordStateProcess {
     TResult Function(String message)? errorPassword,
     TResult Function(String message)? errorCreate,
     TResult Function(bool isFirstOpenApp)? success,
+    TResult Function()? changePasswordSuccess,
   }) {
     return process?.call();
   }
@@ -313,6 +333,7 @@ class _$CreatePasswordStateProcess implements CreatePasswordStateProcess {
     TResult Function(String message)? errorPassword,
     TResult Function(String message)? errorCreate,
     TResult Function(bool isFirstOpenApp)? success,
+    TResult Function()? changePasswordSuccess,
     required TResult orElse(),
   }) {
     if (process != null) {
@@ -332,6 +353,8 @@ class _$CreatePasswordStateProcess implements CreatePasswordStateProcess {
         errorPassword,
     required TResult Function(CreatePasswordStateErrorCreate value) errorCreate,
     required TResult Function(CreatePasswordStateSuccess value) success,
+    required TResult Function(CreatePasswordStateChangePasswrodSuccess value)
+        changePasswordSuccess,
   }) {
     return process(this);
   }
@@ -346,6 +369,8 @@ class _$CreatePasswordStateProcess implements CreatePasswordStateProcess {
     TResult Function(CreatePasswordStateErrorPassword value)? errorPassword,
     TResult Function(CreatePasswordStateErrorCreate value)? errorCreate,
     TResult Function(CreatePasswordStateSuccess value)? success,
+    TResult Function(CreatePasswordStateChangePasswrodSuccess value)?
+        changePasswordSuccess,
   }) {
     return process?.call(this);
   }
@@ -360,6 +385,8 @@ class _$CreatePasswordStateProcess implements CreatePasswordStateProcess {
     TResult Function(CreatePasswordStateErrorPassword value)? errorPassword,
     TResult Function(CreatePasswordStateErrorCreate value)? errorCreate,
     TResult Function(CreatePasswordStateSuccess value)? success,
+    TResult Function(CreatePasswordStateChangePasswrodSuccess value)?
+        changePasswordSuccess,
     required TResult orElse(),
   }) {
     if (process != null) {
@@ -451,6 +478,7 @@ class _$CreatePasswordStateErrorConfirmPassword
     required TResult Function(String message) errorPassword,
     required TResult Function(String message) errorCreate,
     required TResult Function(bool isFirstOpenApp) success,
+    required TResult Function() changePasswordSuccess,
   }) {
     return errorConfirmPassword(message);
   }
@@ -464,6 +492,7 @@ class _$CreatePasswordStateErrorConfirmPassword
     TResult Function(String message)? errorPassword,
     TResult Function(String message)? errorCreate,
     TResult Function(bool isFirstOpenApp)? success,
+    TResult Function()? changePasswordSuccess,
   }) {
     return errorConfirmPassword?.call(message);
   }
@@ -477,6 +506,7 @@ class _$CreatePasswordStateErrorConfirmPassword
     TResult Function(String message)? errorPassword,
     TResult Function(String message)? errorCreate,
     TResult Function(bool isFirstOpenApp)? success,
+    TResult Function()? changePasswordSuccess,
     required TResult orElse(),
   }) {
     if (errorConfirmPassword != null) {
@@ -496,6 +526,8 @@ class _$CreatePasswordStateErrorConfirmPassword
         errorPassword,
     required TResult Function(CreatePasswordStateErrorCreate value) errorCreate,
     required TResult Function(CreatePasswordStateSuccess value) success,
+    required TResult Function(CreatePasswordStateChangePasswrodSuccess value)
+        changePasswordSuccess,
   }) {
     return errorConfirmPassword(this);
   }
@@ -510,6 +542,8 @@ class _$CreatePasswordStateErrorConfirmPassword
     TResult Function(CreatePasswordStateErrorPassword value)? errorPassword,
     TResult Function(CreatePasswordStateErrorCreate value)? errorCreate,
     TResult Function(CreatePasswordStateSuccess value)? success,
+    TResult Function(CreatePasswordStateChangePasswrodSuccess value)?
+        changePasswordSuccess,
   }) {
     return errorConfirmPassword?.call(this);
   }
@@ -524,6 +558,8 @@ class _$CreatePasswordStateErrorConfirmPassword
     TResult Function(CreatePasswordStateErrorPassword value)? errorPassword,
     TResult Function(CreatePasswordStateErrorCreate value)? errorCreate,
     TResult Function(CreatePasswordStateSuccess value)? success,
+    TResult Function(CreatePasswordStateChangePasswrodSuccess value)?
+        changePasswordSuccess,
     required TResult orElse(),
   }) {
     if (errorConfirmPassword != null) {
@@ -622,6 +658,7 @@ class _$CreatePasswordStateErrorPassword
     required TResult Function(String message) errorPassword,
     required TResult Function(String message) errorCreate,
     required TResult Function(bool isFirstOpenApp) success,
+    required TResult Function() changePasswordSuccess,
   }) {
     return errorPassword(message);
   }
@@ -635,6 +672,7 @@ class _$CreatePasswordStateErrorPassword
     TResult Function(String message)? errorPassword,
     TResult Function(String message)? errorCreate,
     TResult Function(bool isFirstOpenApp)? success,
+    TResult Function()? changePasswordSuccess,
   }) {
     return errorPassword?.call(message);
   }
@@ -648,6 +686,7 @@ class _$CreatePasswordStateErrorPassword
     TResult Function(String message)? errorPassword,
     TResult Function(String message)? errorCreate,
     TResult Function(bool isFirstOpenApp)? success,
+    TResult Function()? changePasswordSuccess,
     required TResult orElse(),
   }) {
     if (errorPassword != null) {
@@ -667,6 +706,8 @@ class _$CreatePasswordStateErrorPassword
         errorPassword,
     required TResult Function(CreatePasswordStateErrorCreate value) errorCreate,
     required TResult Function(CreatePasswordStateSuccess value) success,
+    required TResult Function(CreatePasswordStateChangePasswrodSuccess value)
+        changePasswordSuccess,
   }) {
     return errorPassword(this);
   }
@@ -681,6 +722,8 @@ class _$CreatePasswordStateErrorPassword
     TResult Function(CreatePasswordStateErrorPassword value)? errorPassword,
     TResult Function(CreatePasswordStateErrorCreate value)? errorCreate,
     TResult Function(CreatePasswordStateSuccess value)? success,
+    TResult Function(CreatePasswordStateChangePasswrodSuccess value)?
+        changePasswordSuccess,
   }) {
     return errorPassword?.call(this);
   }
@@ -695,6 +738,8 @@ class _$CreatePasswordStateErrorPassword
     TResult Function(CreatePasswordStateErrorPassword value)? errorPassword,
     TResult Function(CreatePasswordStateErrorCreate value)? errorCreate,
     TResult Function(CreatePasswordStateSuccess value)? success,
+    TResult Function(CreatePasswordStateChangePasswrodSuccess value)?
+        changePasswordSuccess,
     required TResult orElse(),
   }) {
     if (errorPassword != null) {
@@ -791,6 +836,7 @@ class _$CreatePasswordStateErrorCreate
     required TResult Function(String message) errorPassword,
     required TResult Function(String message) errorCreate,
     required TResult Function(bool isFirstOpenApp) success,
+    required TResult Function() changePasswordSuccess,
   }) {
     return errorCreate(message);
   }
@@ -804,6 +850,7 @@ class _$CreatePasswordStateErrorCreate
     TResult Function(String message)? errorPassword,
     TResult Function(String message)? errorCreate,
     TResult Function(bool isFirstOpenApp)? success,
+    TResult Function()? changePasswordSuccess,
   }) {
     return errorCreate?.call(message);
   }
@@ -817,6 +864,7 @@ class _$CreatePasswordStateErrorCreate
     TResult Function(String message)? errorPassword,
     TResult Function(String message)? errorCreate,
     TResult Function(bool isFirstOpenApp)? success,
+    TResult Function()? changePasswordSuccess,
     required TResult orElse(),
   }) {
     if (errorCreate != null) {
@@ -836,6 +884,8 @@ class _$CreatePasswordStateErrorCreate
         errorPassword,
     required TResult Function(CreatePasswordStateErrorCreate value) errorCreate,
     required TResult Function(CreatePasswordStateSuccess value) success,
+    required TResult Function(CreatePasswordStateChangePasswrodSuccess value)
+        changePasswordSuccess,
   }) {
     return errorCreate(this);
   }
@@ -850,6 +900,8 @@ class _$CreatePasswordStateErrorCreate
     TResult Function(CreatePasswordStateErrorPassword value)? errorPassword,
     TResult Function(CreatePasswordStateErrorCreate value)? errorCreate,
     TResult Function(CreatePasswordStateSuccess value)? success,
+    TResult Function(CreatePasswordStateChangePasswrodSuccess value)?
+        changePasswordSuccess,
   }) {
     return errorCreate?.call(this);
   }
@@ -864,6 +916,8 @@ class _$CreatePasswordStateErrorCreate
     TResult Function(CreatePasswordStateErrorPassword value)? errorPassword,
     TResult Function(CreatePasswordStateErrorCreate value)? errorCreate,
     TResult Function(CreatePasswordStateSuccess value)? success,
+    TResult Function(CreatePasswordStateChangePasswrodSuccess value)?
+        changePasswordSuccess,
     required TResult orElse(),
   }) {
     if (errorCreate != null) {
@@ -959,6 +1013,7 @@ class _$CreatePasswordStateSuccess implements CreatePasswordStateSuccess {
     required TResult Function(String message) errorPassword,
     required TResult Function(String message) errorCreate,
     required TResult Function(bool isFirstOpenApp) success,
+    required TResult Function() changePasswordSuccess,
   }) {
     return success(isFirstOpenApp);
   }
@@ -972,6 +1027,7 @@ class _$CreatePasswordStateSuccess implements CreatePasswordStateSuccess {
     TResult Function(String message)? errorPassword,
     TResult Function(String message)? errorCreate,
     TResult Function(bool isFirstOpenApp)? success,
+    TResult Function()? changePasswordSuccess,
   }) {
     return success?.call(isFirstOpenApp);
   }
@@ -985,6 +1041,7 @@ class _$CreatePasswordStateSuccess implements CreatePasswordStateSuccess {
     TResult Function(String message)? errorPassword,
     TResult Function(String message)? errorCreate,
     TResult Function(bool isFirstOpenApp)? success,
+    TResult Function()? changePasswordSuccess,
     required TResult orElse(),
   }) {
     if (success != null) {
@@ -1004,6 +1061,8 @@ class _$CreatePasswordStateSuccess implements CreatePasswordStateSuccess {
         errorPassword,
     required TResult Function(CreatePasswordStateErrorCreate value) errorCreate,
     required TResult Function(CreatePasswordStateSuccess value) success,
+    required TResult Function(CreatePasswordStateChangePasswrodSuccess value)
+        changePasswordSuccess,
   }) {
     return success(this);
   }
@@ -1018,6 +1077,8 @@ class _$CreatePasswordStateSuccess implements CreatePasswordStateSuccess {
     TResult Function(CreatePasswordStateErrorPassword value)? errorPassword,
     TResult Function(CreatePasswordStateErrorCreate value)? errorCreate,
     TResult Function(CreatePasswordStateSuccess value)? success,
+    TResult Function(CreatePasswordStateChangePasswrodSuccess value)?
+        changePasswordSuccess,
   }) {
     return success?.call(this);
   }
@@ -1032,6 +1093,8 @@ class _$CreatePasswordStateSuccess implements CreatePasswordStateSuccess {
     TResult Function(CreatePasswordStateErrorPassword value)? errorPassword,
     TResult Function(CreatePasswordStateErrorCreate value)? errorCreate,
     TResult Function(CreatePasswordStateSuccess value)? success,
+    TResult Function(CreatePasswordStateChangePasswrodSuccess value)?
+        changePasswordSuccess,
     required TResult orElse(),
   }) {
     if (success != null) {
@@ -1049,4 +1112,154 @@ abstract class CreatePasswordStateSuccess implements CreatePasswordState {
   @JsonKey(ignore: true)
   _$$CreatePasswordStateSuccessCopyWith<_$CreatePasswordStateSuccess>
       get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$CreatePasswordStateChangePasswrodSuccessCopyWith<$Res> {
+  factory _$$CreatePasswordStateChangePasswrodSuccessCopyWith(
+          _$CreatePasswordStateChangePasswrodSuccess value,
+          $Res Function(_$CreatePasswordStateChangePasswrodSuccess) then) =
+      __$$CreatePasswordStateChangePasswrodSuccessCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$CreatePasswordStateChangePasswrodSuccessCopyWithImpl<$Res>
+    extends _$CreatePasswordStateCopyWithImpl<$Res>
+    implements _$$CreatePasswordStateChangePasswrodSuccessCopyWith<$Res> {
+  __$$CreatePasswordStateChangePasswrodSuccessCopyWithImpl(
+      _$CreatePasswordStateChangePasswrodSuccess _value,
+      $Res Function(_$CreatePasswordStateChangePasswrodSuccess) _then)
+      : super(_value,
+            (v) => _then(v as _$CreatePasswordStateChangePasswrodSuccess));
+
+  @override
+  _$CreatePasswordStateChangePasswrodSuccess get _value =>
+      super._value as _$CreatePasswordStateChangePasswrodSuccess;
+}
+
+/// @nodoc
+
+class _$CreatePasswordStateChangePasswrodSuccess
+    implements CreatePasswordStateChangePasswrodSuccess {
+  const _$CreatePasswordStateChangePasswrodSuccess();
+
+  @override
+  String toString() {
+    return 'CreatePasswordState.changePasswordSuccess()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$CreatePasswordStateChangePasswrodSuccess);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function() process,
+    required TResult Function(String message) errorConfirmPassword,
+    required TResult Function(String message) errorPassword,
+    required TResult Function(String message) errorCreate,
+    required TResult Function(bool isFirstOpenApp) success,
+    required TResult Function() changePasswordSuccess,
+  }) {
+    return changePasswordSuccess();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function()? process,
+    TResult Function(String message)? errorConfirmPassword,
+    TResult Function(String message)? errorPassword,
+    TResult Function(String message)? errorCreate,
+    TResult Function(bool isFirstOpenApp)? success,
+    TResult Function()? changePasswordSuccess,
+  }) {
+    return changePasswordSuccess?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function()? process,
+    TResult Function(String message)? errorConfirmPassword,
+    TResult Function(String message)? errorPassword,
+    TResult Function(String message)? errorCreate,
+    TResult Function(bool isFirstOpenApp)? success,
+    TResult Function()? changePasswordSuccess,
+    required TResult orElse(),
+  }) {
+    if (changePasswordSuccess != null) {
+      return changePasswordSuccess();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(CreatePasswordStateInit value) initial,
+    required TResult Function(CreatePasswordStateProcess value) process,
+    required TResult Function(CreatePasswordStateErrorConfirmPassword value)
+        errorConfirmPassword,
+    required TResult Function(CreatePasswordStateErrorPassword value)
+        errorPassword,
+    required TResult Function(CreatePasswordStateErrorCreate value) errorCreate,
+    required TResult Function(CreatePasswordStateSuccess value) success,
+    required TResult Function(CreatePasswordStateChangePasswrodSuccess value)
+        changePasswordSuccess,
+  }) {
+    return changePasswordSuccess(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(CreatePasswordStateInit value)? initial,
+    TResult Function(CreatePasswordStateProcess value)? process,
+    TResult Function(CreatePasswordStateErrorConfirmPassword value)?
+        errorConfirmPassword,
+    TResult Function(CreatePasswordStateErrorPassword value)? errorPassword,
+    TResult Function(CreatePasswordStateErrorCreate value)? errorCreate,
+    TResult Function(CreatePasswordStateSuccess value)? success,
+    TResult Function(CreatePasswordStateChangePasswrodSuccess value)?
+        changePasswordSuccess,
+  }) {
+    return changePasswordSuccess?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(CreatePasswordStateInit value)? initial,
+    TResult Function(CreatePasswordStateProcess value)? process,
+    TResult Function(CreatePasswordStateErrorConfirmPassword value)?
+        errorConfirmPassword,
+    TResult Function(CreatePasswordStateErrorPassword value)? errorPassword,
+    TResult Function(CreatePasswordStateErrorCreate value)? errorCreate,
+    TResult Function(CreatePasswordStateSuccess value)? success,
+    TResult Function(CreatePasswordStateChangePasswrodSuccess value)?
+        changePasswordSuccess,
+    required TResult orElse(),
+  }) {
+    if (changePasswordSuccess != null) {
+      return changePasswordSuccess(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class CreatePasswordStateChangePasswrodSuccess
+    implements CreatePasswordState {
+  const factory CreatePasswordStateChangePasswrodSuccess() =
+      _$CreatePasswordStateChangePasswrodSuccess;
 }

@@ -11,7 +11,7 @@ class NativeCurrencyEntity with _$NativeCurrencyEntity {
     String symbol,
     int decimals, {
     required String icon,
-    required int balance,
+    required double balance,
     @Default(false) bool balanceUpdated,
   }) = _NativeCurrencyEntity;
 }

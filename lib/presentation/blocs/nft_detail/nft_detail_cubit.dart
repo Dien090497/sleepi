@@ -1,23 +1,26 @@
 import 'package:bloc/bloc.dart';
+import 'package:slee_fi/common/enum/enum.dart';
 import 'package:slee_fi/di/injector.dart';
+import 'package:slee_fi/entities/nft_entity/nft_entity.dart';
 import 'package:slee_fi/entities/token/token_entity.dart';
 import 'package:slee_fi/entities/wallet_info/wallet_info_entity.dart';
 import 'package:slee_fi/presentation/blocs/nft_detail/nft_detail_state.dart';
-import 'package:slee_fi/usecase/get_nfts_ids_usecase.dart';
+import 'package:slee_fi/usecase/get_list_nft_detail_usecase.dart';
 
 class NftDetailCubit extends Cubit<NftDetailState> {
   NftDetailCubit(WalletInfoEntity walletInfoEntity, TokenEntity token)
       : super(NftDetailState.initial(walletInfoEntity, tokenEntity: token));
 
-  final _getNFTsIDsUC = getIt<GetNFTsIDsUseCase>();
+  final _getListNftDetailUC = getIt<GetListNftDetailUseCase>();
 
   Future<void> init() async {
     final currentState = state;
     if (currentState is NftDetailInitial) {
-      final result = await _getNFTsIDsUC.call(GetNFTsIDsParams(
-        nftAddress: currentState.tokenEntity.address,
+      final result = await _getListNftDetailUC.call(GetListNftDetailParams(
+        address: currentState.tokenEntity.address,
         ownerAddress: currentState.walletInfoEntity.address,
         count: 30,
+        nftType: NftType.beds,
       ));
       result.fold(
         (l) {
@@ -28,7 +31,7 @@ class NftDetailCubit extends Cubit<NftDetailState> {
           emit(NftDetailState.loaded(
             walletInfoEntity: currentState.walletInfoEntity,
             tokenEntity: currentState.tokenEntity,
-            nftIds: r,
+            nftEntities: r,
             hasMore: currentState.tokenEntity.balance > r.length,
           ));
         },
@@ -39,10 +42,11 @@ class NftDetailCubit extends Cubit<NftDetailState> {
   Future<void> refresh() async {
     final currentState = state;
     if (currentState is NftDetailLoaded) {
-      final result = await _getNFTsIDsUC.call(GetNFTsIDsParams(
-        nftAddress: currentState.tokenEntity.address,
+      final result = await _getListNftDetailUC.call(GetListNftDetailParams(
+        address: currentState.tokenEntity.address,
         ownerAddress: currentState.walletInfoEntity.address,
         count: 30,
+        nftType: NftType.beds,
       ));
       result.fold(
         (l) {
@@ -53,7 +57,7 @@ class NftDetailCubit extends Cubit<NftDetailState> {
           emit(NftDetailState.loaded(
             walletInfoEntity: currentState.walletInfoEntity,
             tokenEntity: currentState.tokenEntity,
-            nftIds: r,
+            nftEntities: r,
             hasMore: currentState.tokenEntity.balance > r.length,
           ));
         },
@@ -64,11 +68,12 @@ class NftDetailCubit extends Cubit<NftDetailState> {
   Future<void> loadMore() async {
     final currentState = state;
     if (currentState is NftDetailLoaded) {
-      final result = await _getNFTsIDsUC.call(GetNFTsIDsParams(
-        nftAddress: currentState.tokenEntity.address,
+      final result = await _getListNftDetailUC.call(GetListNftDetailParams(
+        address: currentState.tokenEntity.address,
         ownerAddress: currentState.walletInfoEntity.address,
         count: 30,
-        start: currentState.nftIds.length,
+        nftType: NftType.beds,
+        start: currentState.nftEntities.length,
       ));
       result.fold(
         (l) {
@@ -76,9 +81,10 @@ class NftDetailCubit extends Cubit<NftDetailState> {
           emit(currentState);
         },
         (r) {
-          final newList = List<BigInt>.from(currentState.nftIds)..addAll(r);
+          final newList = List<NFTEntity>.from(currentState.nftEntities)
+            ..addAll(r);
           emit(currentState.copyWith(
-            nftIds: newList,
+            nftEntities: newList,
             hasMore: newList.length < currentState.tokenEntity.balance,
           ));
         },

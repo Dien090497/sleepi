@@ -1,5 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:slee_fi/common/enum/enum.dart';
 import 'package:slee_fi/common/extensions/num_ext.dart';
@@ -27,7 +28,6 @@ class TransferList extends StatefulWidget {
 }
 
 class _TransferListState extends State<TransferList> {
-
   final TextEditingController controller = TextEditingController();
 
   @override
@@ -51,12 +51,14 @@ class _TransferListState extends State<TransferList> {
                   fee: state.fee ?? 0.0025,
                   cubit: cubit,
                   amount: double.parse(controller.text),
-                  tokenName: widget.tokenEntity?.symbol ?? '', contractAddress: widget.tokenEntity?.address ?? '',
+                  tokenName: widget.tokenEntity?.symbol ?? '',
+                  contractAddress: widget.tokenEntity?.address ?? '',
                 ),
               );
             }
             if (state.transferSpendingEntity != null) {
-              if (state.transferSpendingEntity?.type == TokenToSpending.approve) {
+              if (state.transferSpendingEntity?.type ==
+                  TokenToSpending.approve) {
                 showCustomAlertDialog(
                   context,
                   showClosed: false,
@@ -67,7 +69,8 @@ class _TransferListState extends State<TransferList> {
                   ),
                 );
               }
-              if (state.transferSpendingEntity?.type == TokenToSpending.spending) {
+              if (state.transferSpendingEntity?.type ==
+                  TokenToSpending.spending) {
                 showSuccessfulDialog(context, LocaleKeys.successfull);
               }
             }
@@ -91,22 +94,31 @@ class _TransferListState extends State<TransferList> {
                         style: TextStyles.lightGrey14,
                       ),
                       const SizedBox(height: 4.0),
-                      AssetTile(tokenName: widget.tokenEntity?.name.toUpperCase() ?? '', img: widget.tokenEntity?.icon ?? '',),
+                      AssetTile(
+                        tokenName: widget.tokenEntity?.name.toUpperCase() ?? '',
+                        img: widget.tokenEntity?.icon ?? '',
+                      ),
                       const SizedBox(height: 24.0),
                       SFTextFieldTextButton(
                         labelText: LocaleKeys.amount,
                         textButton: LocaleKeys.all,
-                        textInputType: const TextInputType.numberWithOptions(decimal: true),
+                        textInputType: const TextInputType.numberWithOptions(
+                            decimal: true),
+                        inputFormatters: [
+                          FilteringTextInputFormatter.allow(
+                              RegExp(r'^\d{1,}\.?\d{0,6}')),
+                        ],
                         controller: controller,
                       ),
-                      if(state is TransferSpendingStateError)
+                      if (state is TransferSpendingStateError)
                         SFText(
-                        keyText: state.message,
-                        style: TextStyles.red14,
-                      ),
+                          keyText: state.message,
+                          style: TextStyles.red14,
+                        ),
                       const SizedBox(height: 8.0),
                       SFText(
-                        keyText: "${LocaleKeys.available.tr()} : ${widget.tokenEntity?.balance.formatBalanceToken} ${widget.tokenEntity?.name.toUpperCase()}",
+                        keyText:
+                            "${LocaleKeys.available.tr()} : ${widget.tokenEntity?.balance.formatBalanceToken} ${widget.tokenEntity?.name.toUpperCase()}",
                         style: TextStyles.lightGrey14,
                       ),
                       const SizedBox(height: 32.0),
@@ -120,7 +132,9 @@ class _TransferListState extends State<TransferList> {
                   gradient: AppColors.gradientBlueButton,
                   onPressed: () {
                     final cubit = context.read<TransferSpendingCubit>();
-                    cubit.estimateGas(widget.tokenEntity?.address ?? '', amount: controller.text, balance: widget.tokenEntity?.balance ?? 0);
+                    cubit.estimateGas(widget.tokenEntity?.address ?? '',
+                        amount: controller.text,
+                        balance: widget.tokenEntity?.balance ?? 0);
                   },
                 ),
               ],

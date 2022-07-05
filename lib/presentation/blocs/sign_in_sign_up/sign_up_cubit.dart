@@ -1,27 +1,29 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:slee_fi/common/enum/enum.dart';
 import 'package:slee_fi/common/extensions/string_x.dart';
+import 'package:slee_fi/common/utils/appsflyer_custom.dart';
 import 'package:slee_fi/di/injector.dart';
-import 'package:slee_fi/models/sign_up_schema/sign_up_schema.dart';
 import 'package:slee_fi/presentation/blocs/sign_in_sign_up/sign_up_state.dart';
+import 'package:slee_fi/presentation/screens/login_signup/widgets/account_login_widget.dart';
 import 'package:slee_fi/schema/sign_in_schema/sign_in_schema.dart';
+import 'package:slee_fi/schema/sign_up_schema/sign_up_schema.dart';
+import 'package:slee_fi/schema/verify_schema/verify_schema.dart';
 import 'package:slee_fi/usecase/is_first_open_app_usecase.dart';
 import 'package:slee_fi/usecase/login_usecase.dart';
-import 'package:slee_fi/usecase/save_user_local_usecase.dart';
 import 'package:slee_fi/usecase/send_otp_mail_usecase.dart';
 import 'package:slee_fi/usecase/setting_active_code_usecase.dart';
 import 'package:slee_fi/usecase/sign_up_usecase.dart';
 import 'package:slee_fi/usecase/usecase.dart';
+import 'package:slee_fi/usecase/verify_otp_usecase.dart';
 
 class SigInSignUpCubit extends Cubit<SignInSignUpState> {
   SigInSignUpCubit() : super(const SignInSignUpState.initial());
 
-  final SendOTPMailUseCase _sendOtpUC = getIt<SendOTPMailUseCase>();
-  final SignUpUseCase _signUpUseCase = getIt<SignUpUseCase>();
-  final LogInUseCase _logInUseCase = getIt<LogInUseCase>();
-  final _isFirstOpenApp = getIt<IsFirstOpenAppUseCase>();
-
-  final _saveUserUC = getIt<SaveUserLocalUseCase>();
+  final _sendOtpUC = getIt<SendOTPMailUseCase>();
+  final _signUpUseCase = getIt<SignUpUseCase>();
+  final _logInUseCase = getIt<LogInUseCase>();
+  final _isFirstOpenAppUC = getIt<IsFirstOpenAppUseCase>();
+  final _verifyOTPUC = getIt<VerifyOTPUseCase>();
 
   final fetchSettingActiveCode = getIt<SettingActiveCodeUseCase>();
   String email = '';
@@ -31,18 +33,34 @@ class SigInSignUpCubit extends Cubit<SignInSignUpState> {
 
   init() async {
     emit(const SignInSignUpState.initial());
-    var result = await _isFirstOpenApp.call(NoParams());
+    var result = await _isFirstOpenAppUC.call(NoParams());
     result.fold((l) => null, (r) => isFistOpenApp = r);
   }
 
-  senOtp() async {
+  process(Action action) {
+    getIt<AppFlyerCustom>().signIn();
+    switch (action) {
+      case Action.forgotPassword:
+        _verifyOTP();
+        break;
+      case Action.signUp:
+        signUp();
+        break;
+      case Action.signIn:
+        signIn();
+        break;
+    }
+  }
+
+  senOtp(Action action) async {
     if (!validateEmail()) {
       return;
     }
     emit(const SignInSignUpState.process());
 
-    var result =
-        await _sendOtpUC.call(SendOTPParam(email.trim(), OTPType.signUp));
+    final type = action == Action.signUp ? OTPType.signUp : OTPType.changePass;
+
+    var result = await _sendOtpUC.call(SendOTPParam(email.trim(), type));
     result.fold(
       (l) => emit(SignInSignUpState.errorEmail(l.msg)),
       (r) => emit(const SignInSignUpState.initial()),
@@ -58,7 +76,9 @@ class SigInSignUpCubit extends Cubit<SignInSignUpState> {
       setting.fold(
         (l) => emit(SignInSignUpState.error(l.msg)),
         (r) => emit(SignInSignUpState.signUpSuccess(
-            r.data.isEnable, userResponse.data)),
+          r.data.isEnable,
+          userResponse,
+        )),
       );
     });
   }
@@ -71,13 +91,12 @@ class SigInSignUpCubit extends Cubit<SignInSignUpState> {
     var result = await _logInUseCase.call(SignInSchema(email.trim(), password));
 
     result.fold((l) => emit(SignInSignUpState.error(l.msg)), (r) async {
-      await _saveUserUC.call(r.data.user);
       emit(SignInSignUpState.signInSuccess(isFistOpenApp));
     });
   }
 
   signUp() {
-    if (!validateEmail() || validateOTP()) {
+    if (!validateEmail() || _validateOTP()) {
       return;
     }
 
@@ -95,7 +114,7 @@ class SigInSignUpCubit extends Cubit<SignInSignUpState> {
     return true;
   }
 
-  bool validateOTP() {
+  bool _validateOTP() {
     var message = otp.validateOTP;
     if (message.isNotEmpty) {
       emit(SignInSignUpState.error(message));
@@ -112,5 +131,17 @@ class SigInSignUpCubit extends Cubit<SignInSignUpState> {
       return false;
     }
     return true;
+  }
+
+  void _verifyOTP() async {
+    emit(const SignInSignUpState.process());
+    int otp = int.parse(this.otp);
+    var result = await _verifyOTPUC
+        .call(VerifyOTPSchema(otp, email, OTPType.changePass));
+
+    result.fold(
+      (l) => emit(SignInSignUpState.error(l.msg)),
+      (r) => emit(SignInSignUpState.verifyOTPSuccess(otp, email.trim())),
+    );
   }
 }

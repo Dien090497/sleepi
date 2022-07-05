@@ -14,6 +14,7 @@ import 'package:slee_fi/entities/token/token_entity.dart';
 import 'package:slee_fi/l10n/locale_keys.g.dart';
 import 'package:slee_fi/presentation/screens/passcode/passcode_screen.dart';
 import 'package:slee_fi/presentation/screens/send_to_external/send_to_external_screen.dart';
+import 'package:slee_fi/presentation/screens/trade/trade_screen.dart';
 import 'package:slee_fi/presentation/screens/wallet/widgets/box_button_widget.dart';
 import 'package:slee_fi/presentation/screens/wallet/widgets/modal_receive_wallet.dart';
 import 'package:slee_fi/presentation/screens/wallet/widgets/transaction_detail_list.dart';
@@ -110,7 +111,8 @@ class TransactionDetail extends StatelessWidget {
                       Expanded(
                         child: BoxButtonWidget(
                           onTap: () {
-                            Navigator.pushNamed(context, R.transfer, arguments: args?.tokenEntity);
+                            Navigator.pushNamed(context, R.transfer,
+                                arguments: args?.tokenEntity);
                           },
                           text: LocaleKeys.to_spending,
                           assetImage: Ics.icRefresh,
@@ -142,7 +144,13 @@ class TransactionDetail extends StatelessWidget {
                       Expanded(
                         child: BoxButtonWidget(
                           onTap: () {
-                            Navigator.pushNamed(context, R.trade);
+                            Navigator.pushNamed(
+                              context,
+                              R.trade,
+                              arguments: TradeArguments(
+                                args?.tokenEntity.address,
+                              ),
+                            );
                           },
                           text: LocaleKeys.trade
                               .tr()

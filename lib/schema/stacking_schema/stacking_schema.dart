@@ -1,4 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
+
 part 'stacking_schema.g.dart';
 @JsonSerializable()
 class StackingSchema {

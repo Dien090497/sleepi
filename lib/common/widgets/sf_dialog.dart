@@ -27,13 +27,14 @@ Future<T?> showCustomDialog<T>(
       });
 }
 
-Future<T?> showSuccessfulDialog<T>(
-    BuildContext context, String? message) async {
+Future<T?> showSuccessfulDialog<T>(BuildContext context, String? message,
+    {EdgeInsets? padding}) async {
   return showDialog(
       context: context,
       barrierColor: AppColors.backgroundDialog,
       builder: (context) {
         return SFDialog(
+          padding: padding,
           children: [
             Align(
               alignment: Alignment.centerRight,
