@@ -31,7 +31,6 @@ extension NumX on num {
       return 0.toStringAsFixed(2);
     }else {
       var balance = toDouble();
-
       balance = (this / pow(10, 18));
       if (balance % 1 == 0) {
         return balance.toStringAsFixed(0);
@@ -40,7 +39,7 @@ extension NumX on num {
         if (balance.toString().length - index > 7) {
           index += 7;
         } else {
-          index = balance.toString().length - 1;
+          index = balance.toString().length;
         }
         return balance.toString().substring(0, index);
       }
@@ -60,7 +59,7 @@ extension NumX on num {
         if (balance.toString().length - index > 7) {
           index += 7;
         } else {
-          index = balance.toString().length - 1;
+          index = balance.toString().length;
         }
         return balance.toString().substring(0, index);
       }
