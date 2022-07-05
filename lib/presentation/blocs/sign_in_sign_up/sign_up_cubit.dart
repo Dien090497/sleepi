@@ -84,7 +84,7 @@ class SigInSignUpCubit extends Cubit<SignInSignUpState> {
   }
 
   _signIn() async {
-    if (!validateEmail() || !_validatePassword()) {
+    if (!validateEmail()) {
       return;
     }
     emit(const SignInSignUpState.process());
@@ -99,21 +99,22 @@ class SigInSignUpCubit extends Cubit<SignInSignUpState> {
   signUp() {
     if (!validateEmail() || _validateOTP()) {
       return;
+
     }
 
     emit(const SignInSignUpState.process());
     _signUp();
   }
 
-  bool _validatePassword() {
-    var message = _password.validatePassword;
-
-    if (message.isNotEmpty) {
-      emit(SignInSignUpState.error(message));
-      return false;
-    }
-    return true;
-  }
+  // bool _validatePassword() {
+  //   var message = _password.validatePassword;
+  //
+  //   if (message.isNotEmpty) {
+  //     emit(SignInSignUpState.error(message));
+  //     return false;
+  //   }
+  //   return true;
+  // }
 
   bool _validateOTP() {
     var message = otp.validateOTP;
