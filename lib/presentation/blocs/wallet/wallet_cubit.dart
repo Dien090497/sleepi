@@ -85,6 +85,7 @@ class WalletCubit extends Cubit<WalletState> {
         "SLFT",
         "SLGT",
         "AVAX",
+        "USDC",
       ];
       final List nftNames = [
         LocaleKeys.beds.tr(),
@@ -96,6 +97,7 @@ class WalletCubit extends Cubit<WalletState> {
         Ics.icSlft,
         Ics.icSlgt,
         Ics.icAvax,
+        Ics.icUsdc,
       ];
       final List nftIcons = [
         Ics.bed,
