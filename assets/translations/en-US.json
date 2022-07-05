@@ -405,5 +405,5 @@
   "invalid_email": "Invalid email. Please try again!",
   "password_must_be_at_least_6": "Password must contain at least 6 characters. Please try again!",
   "password_dose_not_match": "Password does not match",
-  "warning_bind_wallet": "Your account will be linked to this wallet forever, please save the seed phase for later use"
+  "warning_bind_wallet": "Your account will be linked to this wallet forever, please save the seed phrase for later use"
 }
