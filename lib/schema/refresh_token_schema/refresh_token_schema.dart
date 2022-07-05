@@ -1,5 +1,6 @@
 
 import 'package:json_annotation/json_annotation.dart';
+
 part 'refresh_token_schema.g.dart';
 @JsonSerializable()
 class RefreshTokenSchema{

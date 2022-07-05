@@ -4,7 +4,7 @@ import 'package:slee_fi/common/enum/enum.dart';
 import 'package:slee_fi/common/extensions/string_x.dart';
 import 'package:slee_fi/di/injector.dart';
 import 'package:slee_fi/l10n/locale_keys.g.dart';
-import 'package:slee_fi/models/verify_schema/verify_schema.dart';
+import 'package:slee_fi/schema/verify_schema/verify_schema.dart';
 import 'package:slee_fi/usecase/current_user_usecase.dart';
 import 'package:slee_fi/usecase/send_otp_mail_usecase.dart';
 import 'package:slee_fi/usecase/usecase.dart';
