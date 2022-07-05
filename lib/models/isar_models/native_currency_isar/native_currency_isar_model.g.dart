@@ -16,7 +16,7 @@ extension GetNativeCurrencyIsarModelCollection on Isar {
 const NativeCurrencyIsarModelSchema = CollectionSchema(
   name: 'NativeCurrencyIsarModel',
   schema:
-      '{"name":"NativeCurrencyIsarModel","idName":"id","properties":[{"name":"balance","type":"Long"},{"name":"decimals","type":"Long"},{"name":"icon","type":"String"},{"name":"name","type":"String"},{"name":"symbol","type":"String"}],"indexes":[],"links":[]}',
+      '{"name":"NativeCurrencyIsarModel","idName":"id","properties":[{"name":"balance","type":"Double"},{"name":"decimals","type":"Long"},{"name":"icon","type":"String"},{"name":"name","type":"String"},{"name":"symbol","type":"String"}],"indexes":[],"links":[]}',
   idName: 'id',
   propertyIds: {'balance': 0, 'decimals': 1, 'icon': 2, 'name': 3, 'symbol': 4},
   listProperties: {},
@@ -81,7 +81,7 @@ void _nativeCurrencyIsarModelSerializeNative(
   rawObj.buffer_length = size;
   final buffer = IsarNative.bufAsBytes(rawObj.buffer, size);
   final writer = IsarBinaryWriter(buffer, staticSize);
-  writer.writeLong(offsets[0], _balance);
+  writer.writeDouble(offsets[0], _balance);
   writer.writeLong(offsets[1], _decimals);
   writer.writeBytes(offsets[2], _icon);
   writer.writeBytes(offsets[3], _name);
@@ -94,7 +94,7 @@ NativeCurrencyIsarModel _nativeCurrencyIsarModelDeserializeNative(
     IsarBinaryReader reader,
     List<int> offsets) {
   final object = NativeCurrencyIsarModel(
-    balance: reader.readLong(offsets[0]),
+    balance: reader.readDouble(offsets[0]),
     decimals: reader.readLong(offsets[1]),
     icon: reader.readString(offsets[2]),
     id: id,
@@ -111,7 +111,7 @@ P _nativeCurrencyIsarModelDeserializePropNative<P>(
     case -1:
       return id as P;
     case 0:
-      return (reader.readLong(offset)) as P;
+      return (reader.readDouble(offset)) as P;
     case 1:
       return (reader.readLong(offset)) as P;
     case 2:
@@ -252,53 +252,33 @@ extension NativeCurrencyIsarModelQueryWhere on QueryBuilder<
 extension NativeCurrencyIsarModelQueryFilter on QueryBuilder<
     NativeCurrencyIsarModel, NativeCurrencyIsarModel, QFilterCondition> {
   QueryBuilder<NativeCurrencyIsarModel, NativeCurrencyIsarModel,
-      QAfterFilterCondition> balanceEqualTo(int value) {
-    return addFilterConditionInternal(FilterCondition(
-      type: ConditionType.eq,
-      property: 'balance',
-      value: value,
-    ));
-  }
-
-  QueryBuilder<NativeCurrencyIsarModel, NativeCurrencyIsarModel,
-      QAfterFilterCondition> balanceGreaterThan(
-    int value, {
-    bool include = false,
-  }) {
+      QAfterFilterCondition> balanceGreaterThan(double value) {
     return addFilterConditionInternal(FilterCondition(
       type: ConditionType.gt,
-      include: include,
+      include: false,
       property: 'balance',
       value: value,
     ));
   }
 
   QueryBuilder<NativeCurrencyIsarModel, NativeCurrencyIsarModel,
-      QAfterFilterCondition> balanceLessThan(
-    int value, {
-    bool include = false,
-  }) {
+      QAfterFilterCondition> balanceLessThan(double value) {
     return addFilterConditionInternal(FilterCondition(
       type: ConditionType.lt,
-      include: include,
+      include: false,
       property: 'balance',
       value: value,
     ));
   }
 
   QueryBuilder<NativeCurrencyIsarModel, NativeCurrencyIsarModel,
-      QAfterFilterCondition> balanceBetween(
-    int lower,
-    int upper, {
-    bool includeLower = true,
-    bool includeUpper = true,
-  }) {
+      QAfterFilterCondition> balanceBetween(double lower, double upper) {
     return addFilterConditionInternal(FilterCondition.between(
       property: 'balance',
       lower: lower,
-      includeLower: includeLower,
+      includeLower: false,
       upper: upper,
-      includeUpper: includeUpper,
+      includeUpper: false,
     ));
   }
 
@@ -914,7 +894,7 @@ extension NativeCurrencyIsarModelQueryWhereDistinct on QueryBuilder<
 
 extension NativeCurrencyIsarModelQueryProperty on QueryBuilder<
     NativeCurrencyIsarModel, NativeCurrencyIsarModel, QQueryProperty> {
-  QueryBuilder<NativeCurrencyIsarModel, int, QQueryOperations>
+  QueryBuilder<NativeCurrencyIsarModel, double, QQueryOperations>
       balanceProperty() {
     return addPropertyNameInternal('balance');
   }
