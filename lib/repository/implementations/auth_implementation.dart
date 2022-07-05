@@ -107,7 +107,9 @@ class AuthImplementation extends IAuthRepository {
     try {
       var isFirstOpen = false;
       var result = await isFirstOpenApp();
-      result.fold((l) => null, (r) => isFirstOpen = r);
+      result.fold((l) => null, (r) {
+       isFirstOpen = !r;
+      });
       await Future.wait([
         _secureStorage.clearStorage(),
         _isarDataSource.clearWallet(),
