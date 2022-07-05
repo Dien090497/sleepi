@@ -1,7 +1,6 @@
 import 'dart:developer';
 
 import 'package:dartz/dartz.dart';
-import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
 import 'package:slee_fi/common/extensions/string_x.dart';
 import 'package:slee_fi/datasources/local/get_storage_datasource.dart';
@@ -50,7 +49,7 @@ class AuthImplementation extends IAuthRepository {
       var result = await _authDataSource.signIn(signInSchema);
       return Right(result.data.user.toEntity());
     } on Exception catch (e) {
-      return Left(FailureMessage(_catchErrorDio(e)));
+      return Left(FailureMessage.fromException(e));
     }
   }
 
@@ -77,7 +76,8 @@ class AuthImplementation extends IAuthRepository {
           sendOTPParam.email, sendOTPParam.otpType);
       return Right(result);
     } on Exception catch (e) {
-      return Left(FailureMessage(_catchErrorDio(e)));
+
+      return Left(FailureMessage.fromException(e));
     }
   }
 
@@ -88,7 +88,7 @@ class AuthImplementation extends IAuthRepository {
       var result = await _authDataSource.verifyOTP(verifySchema);
       return Right(result);
     } on Exception catch (e) {
-      return Left(FailureMessage(_catchErrorDio(e)));
+      return Left(FailureMessage.fromException(e));
     }
   }
 
@@ -122,7 +122,7 @@ class AuthImplementation extends IAuthRepository {
       var result = await _authDataSource.getSettingActiveCode();
       return Right(result);
     } on Exception catch (e) {
-      return Left(FailureMessage(_catchErrorDio(e)));
+      return Left(FailureMessage.fromException(e));
     }
   }
 
@@ -133,7 +133,7 @@ class AuthImplementation extends IAuthRepository {
       var result = await _authDataSource.signUp(signUpSchema);
       return Right(result.data.toEntity());
     } on Exception catch (e) {
-      return Left(FailureMessage(_catchErrorDio(e)));
+      return Left(FailureMessage.fromException(e));
     }
   }
 
@@ -145,43 +145,25 @@ class AuthImplementation extends IAuthRepository {
       'create success $result'.log;
       return Right(result);
     } on Exception catch (e) {
-      return Left(FailureMessage(_catchErrorDio(e)));
+      return Left(FailureMessage.fromException(e));
     }
   }
 
-  String _catchErrorDio(Exception e) {
-    try {
-      if (e is DioError) {
-        if (e.response?.statusCode == 502) {
-          return 'Some thing wrong';
-        }
-        var error = e.response?.data['error']['details']['message'];
-        if (error is String) {
-          return error;
-        } else if (error is List<String>) {
-          return error.first;
-        }
-        return e.response?.data['error']['details']['message'] ??
-            'Error! An error occurred. Please try again later';
-      }
-    } catch (_) {}
 
-    return '$e';
-  }
 
   @override
   Future<Either<FailureMessage, UserInfoEntity>> currentUser() async {
-    // try {
+    try {
     final user = await _secureStorage.readCurrentUser();
     if (user == null) {
       return const Left(FailureMessage('msg'));
     } else {
       return Right(user.toEntity());
     }
-    // } catch (e) {
-    //   'error get current user $e'.log;
-    //   return const Left(FailureMessage('empty user'));
-    // }
+    } catch (e) {
+      'error get current user $e'.log;
+      return const Left(FailureMessage('empty user'));
+    }
   }
 
   @override
@@ -205,7 +187,7 @@ class AuthImplementation extends IAuthRepository {
       await _authDataSource.verifyActiveCode(activationCode);
       return const Right(true);
     } on Exception catch (e) {
-      return Left(FailureMessage(_catchErrorDio(e)));
+      return Left(FailureMessage.fromException(e));
     }
   }
 

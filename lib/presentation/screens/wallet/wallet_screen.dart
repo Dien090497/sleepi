@@ -28,11 +28,12 @@ class WalletScreen extends StatefulWidget {
 class _WalletScreenState extends State<WalletScreen>
     with SingleTickerProviderStateMixin {
   late int indexTap = 0;
+  bool firstOpenWallet = true;
   late final TabController controller = TabController(
     vsync: this,
     length: 2,
     initialIndex: 0,
-    animationDuration: const Duration(milliseconds: 500),
+    animationDuration: const Duration(milliseconds: 800),
   );
 
   @override
@@ -91,30 +92,28 @@ class _WalletScreenState extends State<WalletScreen>
                   return WalletTabBar(
                     controller: controller,
                     checkMoveNewTab: (currentIndex, i) {
-
-                      if (state is WalletStateLoaded &&
-                          state.walletInfoEntity == null &&
-                          i == 1) {
-                        _showCreateOrImportWallet().then((value) {
-                          _showWarningDialog(value, context);
-                          if (value == true) {
-                            controller.animateTo(1);
-                          }
-                        });
-                        return false;
-                      }
-
-                      if (state is WalletStateLoaded &&
-                          state.firstOpenWallet &&
-                          i == 1) {
-                        Navigator.of(context)
-                            .pushNamed(R.passcode)
-                            .then((value) {
-                          if (value == true) {
-                            controller.animateTo(1);
-                          }
-                        });
-                        return false;
+                      if (i == 1) {
+                        if (state is WalletStateLoaded &&
+                            state.walletInfoEntity == null) {
+                          _showCreateOrImportWallet().then((value) {
+                            _showWarningDialog(value, context);
+                            if (value == true) {
+                              controller.animateTo(1);
+                            }
+                          });
+                        }
+                        if (firstOpenWallet) {
+                          setState(() {
+                            firstOpenWallet = false;
+                          });
+                          Navigator.of(context)
+                              .pushNamed(R.passcode)
+                              .then((value) {
+                            if (value == true) {
+                              controller.animateTo(1);
+                            }
+                          });
+                        }
                       }
                       return true;
                     },

@@ -9,7 +9,7 @@ part of 'create_password_response.dart';
 CreatePasswordResponse _$CreatePasswordResponseFromJson(
         Map<String, dynamic> json) =>
     CreatePasswordResponse(
-      json['meta'],
+      json['meta'] as Object,
       Content.fromJson(json['data'] as Map<String, dynamic>),
     );
 

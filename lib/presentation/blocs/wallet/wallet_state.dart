@@ -12,7 +12,6 @@ class WalletState with _$WalletState {
 
   const factory WalletState.loaded({
     required WalletInfoEntity? walletInfoEntity,
-    required bool firstOpenWallet,
     required List<TokenEntity> tokenList,
   }) = WalletStateLoaded;
 

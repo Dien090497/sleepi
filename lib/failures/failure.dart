@@ -1,3 +1,4 @@
+import 'package:dio/dio.dart';
 import 'package:equatable/equatable.dart';
 
 abstract class Failure extends Equatable {
@@ -8,6 +9,25 @@ class FailureMessage extends Failure {
   final String msg;
 
   const FailureMessage(this.msg);
+
+  factory FailureMessage.fromException(Exception e) {
+    try {
+      if (e is DioError) {
+        if (e.response?.statusCode == 502) {
+          return const FailureMessage('Some thing wrong');
+        }
+        var error = e.response?.data['error']['details']['message'];
+        if (error is String) {
+          return FailureMessage(error);
+        } else if (error is List<String>) {
+          return FailureMessage(error.first);
+        }
+      }
+    } catch (_) {}
+
+    return const FailureMessage(
+        'Error! An error occurred. Please try again later');
+  }
 
   @override
   List<Object?> get props => [msg];
