@@ -15,7 +15,6 @@ import 'package:slee_fi/presentation/screens/wallet/widgets/tab_bar.dart';
 import 'package:slee_fi/presentation/screens/wallet/widgets/tab_spending_detail.dart';
 import 'package:slee_fi/presentation/screens/wallet/widgets/tab_wallet_detail.dart';
 import 'package:slee_fi/presentation/screens/wallet_creation_warning/widgets/pop_up_avalanche_wallet.dart';
-import 'package:slee_fi/presentation/screens/wallet_creation_warning/widgets/pop_up_wallet_warning.dart';
 import 'package:slee_fi/resources/resources.dart';
 
 class WalletScreen extends StatefulWidget {
