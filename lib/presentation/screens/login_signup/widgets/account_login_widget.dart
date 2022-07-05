@@ -123,7 +123,8 @@ class _AccountLoginState extends State<AccountLoginWidget> {
                     valueChanged: (otp) => cubit.otp = otp)
                 : SFTextFieldPassword(
                     labelText: LocaleKeys.password,
-                    valueChanged: (password) => cubit.onPasswordChange(password),
+                    valueChanged: (password) =>
+                        cubit.onPasswordChange(password),
                     errorText:
                         state is SignInSignUpStateError ? state.message : '',
                   ),
@@ -206,7 +207,7 @@ class _AccountLoginState extends State<AccountLoginWidget> {
     if (value == true) {
       _changeState(Action.signIn);
       showSuccessfulDialog(context, LocaleKeys.reset_password_successfully,
-          padding: const EdgeInsets.all(10));
+          style: TextStyles.bold14White, padding: const EdgeInsets.all(10));
     }
   }
 }

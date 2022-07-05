@@ -83,8 +83,12 @@ class ForgotPasscodeScreen extends StatelessWidget {
                               if (value == true) {
                                 Navigator.pop(context);
                                 Navigator.pop(context);
-                                showSuccessfulDialog(context,
-                                    LocaleKeys.reset_passcode_successfully);
+                                showSuccessfulDialog(
+                                  context,
+                                  style: TextStyles.bold14White,
+                                  padding: const EdgeInsets.all(10),
+                                  LocaleKeys.reset_passcode_successfully,
+                                );
                               }
                             });
                           }
