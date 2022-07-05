@@ -29,7 +29,7 @@ class SettingWalletScreen extends StatelessWidget {
               info: LocaleKeys.your_12_word_seed_phrase,
               onTap: () {
                 Navigator.pushNamed(context, R.passcode,
-                    arguments: PasscodeArguments(R.showSeedPhrase));
+                    arguments: PasscodeArguments(route: R.showSeedPhrase));
               },
             ),
             BoxInfoWidget(
@@ -38,7 +38,7 @@ class SettingWalletScreen extends StatelessWidget {
               info: LocaleKeys.keep_your_assets_safe,
               onTap: () {
                 Navigator.pushNamed(context, R.passcode,
-                    arguments: PasscodeArguments(R.createPasscode));
+                    arguments: PasscodeArguments(route: R.createPasscode, isShowSuccessDialog: true));
               },
             ),
           ],
