@@ -24,8 +24,8 @@ class SigInSignUpCubit extends Cubit<SignInSignUpState> {
   final _logInUseCase = getIt<LogInUseCase>();
   final _isFirstOpenAppUC = getIt<IsFirstOpenAppUseCase>();
   final _verifyOTPUC = getIt<VerifyOTPUseCase>();
+  final _fetchSettingActiveCode = getIt<SettingActiveCodeUseCase>();
 
-  final fetchSettingActiveCode = getIt<SettingActiveCodeUseCase>();
   String email = '';
   String password = '';
   String otp = '';
@@ -47,7 +47,7 @@ class SigInSignUpCubit extends Cubit<SignInSignUpState> {
         signUp();
         break;
       case Action.signIn:
-        signIn();
+        _signIn();
         break;
     }
   }
@@ -72,7 +72,7 @@ class SigInSignUpCubit extends Cubit<SignInSignUpState> {
         await _signUpUseCase.call(SignUpSchema(int.parse(otp), email.trim()));
     result.fold((l) => emit(SignInSignUpState.error(l.msg)),
         (userResponse) async {
-      var setting = await fetchSettingActiveCode.call(NoParams());
+      var setting = await _fetchSettingActiveCode.call(NoParams());
       setting.fold(
         (l) => emit(SignInSignUpState.error(l.msg)),
         (r) => emit(SignInSignUpState.signUpSuccess(
@@ -83,7 +83,7 @@ class SigInSignUpCubit extends Cubit<SignInSignUpState> {
     });
   }
 
-  signIn() async {
+  _signIn() async {
     if (!validateEmail() || !_validatePassword()) {
       return;
     }
@@ -134,6 +134,10 @@ class SigInSignUpCubit extends Cubit<SignInSignUpState> {
   }
 
   void _verifyOTP() async {
+    if (!validateEmail() || _validateOTP()) {
+      return;
+    }
+
     emit(const SignInSignUpState.process());
     int otp = int.parse(this.otp);
     var result = await _verifyOTPUC
