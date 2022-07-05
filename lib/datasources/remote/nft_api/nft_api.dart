@@ -3,6 +3,8 @@ import 'package:flutter/foundation.dart';
 import 'package:injectable/injectable.dart';
 import 'package:retrofit/retrofit.dart';
 import 'package:slee_fi/common/const/const.dart';
+import 'package:slee_fi/common/enum/enum.dart';
+import 'package:slee_fi/models/list_nft_data_model/list_nft_data_model.dart';
 
 part 'nft_api.g.dart';
 
@@ -15,8 +17,12 @@ abstract class NftApi {
     // dio.interceptors.add(getIt<RefreshTokenInterceptor>(param1: dio));
     return _NftApi(dio);
   }
-// @GET('/nft')
-// Future<SendEmailResponse> sendOTP(
-//     @Query('email') String email, @Query('otpType') OTPType otpType);
 
+  @GET('/nft')
+  Future<ListNftDataModel> getListNft({
+  @Query('page')  int? page,
+  @Query('limit')  int? limit,
+  @Query('tokenIds')  required String tokenIds,
+  @Query('nftType')  required NftType nftType,
+  });
 }

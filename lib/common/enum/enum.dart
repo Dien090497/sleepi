@@ -48,4 +48,23 @@ enum OTPType {
   String toJson() => name;
 }
 
-enum TokenToSpending { approve, spending}
+enum TokenToSpending { approve, spending }
+
+enum NftType {
+  beds('Beds'),
+  bedbox('Bedbox'),
+  efficiency('Efficiency'),
+  luck('Luck'),
+  resilience('Resilience'),
+  special('Special'),
+  bonus('Bonus');
+
+  const NftType(this.name);
+
+  final String name;
+
+  @override
+  String toString() => name;
+
+  String toJson() => name;
+}
