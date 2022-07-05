@@ -111,7 +111,7 @@ class _SFTextFieldPasswordState extends State<SFTextFieldPassword> {
         ),
          const SizedBox(height: 4),
          SizedBox(
-           height: 30,
+           height: 35,
            child:   Text(widget.errorText, style: TextStyles.w400Red12,maxLines: 2,),
          ),
       ],
