@@ -69,7 +69,7 @@ class _WalletScreenState extends State<WalletScreen>
                           return;
                         }
                         Navigator.pushNamed(context, R.passcode,
-                            arguments: PasscodeArguments(R.settingWallet));
+                            arguments: PasscodeArguments(route: R.settingWallet));
                       }
                     },
                     child: const Padding(

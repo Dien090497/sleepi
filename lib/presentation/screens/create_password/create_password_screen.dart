@@ -14,7 +14,6 @@ import 'package:slee_fi/l10n/locale_keys.g.dart';
 import 'package:slee_fi/models/user/user_info_model.dart';
 import 'package:slee_fi/presentation/blocs/create_password/create_password_cubit.dart';
 import 'package:slee_fi/presentation/blocs/create_password/create_password_state.dart';
-import 'package:slee_fi/presentation/screens/setting_permission/widgets/healthcare_screen.dart';
 
 class CreatePasswordArg {
   final String activeCode;
@@ -45,8 +44,9 @@ class _CreatePasswordScreenState extends State<CreatePasswordScreen> {
           if (state is CreatePasswordStateSuccess) {
             if (state.isFirstOpenApp) {
               Navigator.pushNamedAndRemoveUntil(
-                  context, R.healthcarePermission, (_) => false,
-                  arguments: HealthcareArg(true));
+                  context, R.micPermission, (_) => false,
+                  // arguments: HealthcareArg(true)
+              );
             } else {
               Navigator.pushNamedAndRemoveUntil(
                   context, R.bottomNavigation, (_) => false);

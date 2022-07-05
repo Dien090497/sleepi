@@ -73,7 +73,7 @@ class ConfirmCreatePasscodeScreen extends StatelessWidget {
               );
             }),
 
-            SizedBox(height: 32.h),
+        SizedBox(height: 32.h),
             // SFTextButton(
             //   text: LocaleKeys.forgotPasscode,
             //   textStyle: TextStyles.white12Underline,

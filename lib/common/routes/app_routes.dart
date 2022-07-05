@@ -40,6 +40,7 @@ import 'package:slee_fi/presentation/screens/setting/setting_screen.dart';
 import 'package:slee_fi/presentation/screens/setting_activation_code/activation_code_screen.dart';
 import 'package:slee_fi/presentation/screens/setting_permission/setting_permission_screen.dart';
 import 'package:slee_fi/presentation/screens/setting_permission/widgets/healthcare_screen.dart';
+import 'package:slee_fi/presentation/screens/setting_permission/widgets/mic_screen.dart';
 import 'package:slee_fi/presentation/screens/setting_permission/widgets/motion_data_screen.dart';
 import 'package:slee_fi/presentation/screens/setting_permission/widgets/notification_screen.dart';
 import 'package:slee_fi/presentation/screens/setting_wallet/setting_wallet_screen.dart';
@@ -74,6 +75,7 @@ class R {
   static const String alarmSoundEffect = '${_}alarm_sound_effect';
   static const String activationCode = '${_}activation_code';
   static const String permission = '${_}permission';
+  static const String micPermission = '${_}mic_permission';
   static const String healthcarePermission = '${_}healthcare_permission';
   static const String motionDataPermission = '${_}motion_data_permission';
   static const String notificationPermission = '${_}notification_permission';
@@ -137,6 +139,7 @@ class AppRoutes {
     R.motionDataPermission: (_) => const MotionDataPermissionScreen(),
     R.notificationPermission: (_) => const NotificationPermissionScreen(),
     R.healthcarePermission: (_) => const HealthcarePermissionScreen(),
+    R.micPermission: (_) => const MicPermissionScreen(),
     R.passcode: (_) => const PasscodeScreen(),
     R.createWallet: (_) => const CreateWalletScreen(),
     R.importWallet: (_) => const ImportWalletScreen(),

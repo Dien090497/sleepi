@@ -58,6 +58,8 @@ class Web3DataSource {
 
   String createMnemonic() => bip39.generateMnemonic();
 
+  Future<TransactionInformation> getDetailTransaction(String transactionHash) => _web3provider.web3client.getTransactionByHash(transactionHash);
+
   Future<int> getGasPrice() async =>
       (await _web3provider.web3client.getGasPrice()).getInWei.toInt();
 

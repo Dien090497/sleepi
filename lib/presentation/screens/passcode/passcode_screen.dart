@@ -12,13 +12,15 @@ import 'package:slee_fi/common/widgets/sf_text.dart';
 import 'package:slee_fi/l10n/locale_keys.g.dart';
 import 'package:slee_fi/presentation/blocs/passcode/passcode_cubit.dart';
 import 'package:slee_fi/presentation/blocs/passcode/passcode_state.dart';
+import 'package:slee_fi/presentation/screens/passcode/create_passcode_screen.dart';
 import 'package:slee_fi/presentation/screens/passcode/widgets/passcode_numpad.dart';
 import 'package:slee_fi/presentation/screens/passcode/widgets/pin_code_widget.dart';
 
 class PasscodeArguments {
-  final String route;
+  final String? route;
+  final bool? isShowSuccessDialog;
 
-  PasscodeArguments(this.route);
+  PasscodeArguments({this.route, this.isShowSuccessDialog});
 }
 
 class PasscodeScreen extends StatelessWidget {
@@ -37,7 +39,7 @@ class PasscodeScreen extends StatelessWidget {
           final cubit = context.read<PasscodeCubit>();
           if (state is checkPassCodeValid) {
             if (args != null) {
-              Navigator.pushReplacementNamed(context, args.route);
+              Navigator.pushReplacementNamed(context, args.route! ,arguments: CreatePasscodeArguments(isShowSuccessDialog: args.isShowSuccessDialog ?? false) );
             } else {
               // _createWalletDialog(context);
               Navigator.pop(context, true);

@@ -9,6 +9,8 @@ import 'package:slee_fi/common/widgets/sf_text.dart';
 import 'package:slee_fi/l10n/locale_keys.g.dart';
 import 'package:slee_fi/resources/resources.dart';
 
+import 'notification_screen.dart';
+
 class MotionDataPermissionScreen extends StatelessWidget {
   const MotionDataPermissionScreen({Key? key}) : super(key: key);
 
@@ -54,8 +56,9 @@ class MotionDataPermissionScreen extends StatelessWidget {
                 text: LocaleKeys.allow,
                 textStyle: TextStyles.w600WhiteSize16,
                 color: AppColors.blue,
-                onPressed: () =>
-                    Navigator.pushNamed(context, R.notificationPermission),
+                onPressed: () => Navigator.pushNamedAndRemoveUntil(
+                  context, R.notificationPermission, (_) => false,
+                    arguments: NotificationPermissionArg(true)),
               ),
             ),
           ),

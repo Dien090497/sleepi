@@ -5,6 +5,7 @@ import 'package:slee_fi/common/routes/app_routes.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
 import 'package:slee_fi/common/widgets/background_widget.dart';
 import 'package:slee_fi/common/widgets/sf_app_bar.dart';
+import 'package:slee_fi/common/widgets/sf_dialog.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
 import 'package:slee_fi/l10n/locale_keys.g.dart';
 import 'package:slee_fi/presentation/blocs/passcode/passcode_cubit.dart';
@@ -14,9 +15,10 @@ import 'package:slee_fi/presentation/screens/passcode/widgets/passcode_numpad.da
 import 'package:slee_fi/presentation/screens/passcode/widgets/pin_code_widget.dart';
 
 class CreatePasscodeArguments {
-  final String route;
+  final String? route;
+  final bool? isShowSuccessDialog;
 
-  CreatePasscodeArguments(this.route);
+  CreatePasscodeArguments({this.route, this.isShowSuccessDialog});
 }
 
 class CreatePasscodeScreen extends StatelessWidget {
@@ -33,8 +35,8 @@ class CreatePasscodeScreen extends StatelessWidget {
       child: BlocConsumer<PasscodeCubit, PasscodeState>(
         listener: (context, state) {
           if (state is createPassCodeDone) {
-            if (args != null) {
-              Navigator.pushNamed(context, args.route).then((results) {
+            if (args != null  && args.route != null) {
+              Navigator.pushNamed(context, args.route!).then((results) {
                 Navigator.pop(context, results);
               });
             } else {
@@ -42,6 +44,7 @@ class CreatePasscodeScreen extends StatelessWidget {
                       arguments: ConfirmCreatePasscodeArguments(state.passcode))
                   .then((confirmSuccess) {
                 Navigator.pop(context, confirmSuccess);
+                args?.isShowSuccessDialog == true ? showSuccessfulDialog(context, LocaleKeys.reset_passcode_successfully) : null;
               });
             }
           }

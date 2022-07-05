@@ -48,6 +48,7 @@ Future<T?> showSuccessfulDialog<T>(
             const SizedBox(height: 36),
             SFText(
                 keyText: message ?? LocaleKeys.success,
+                textAlign: TextAlign.center,
                 style: TextStyles.bold18White),
             const SizedBox(height: 40),
           ],

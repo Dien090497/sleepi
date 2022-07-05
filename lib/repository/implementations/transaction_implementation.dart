@@ -25,8 +25,12 @@ class TransactionImplementation extends ITransactionRepository{
     return (await _isarDataSource.getNetworkAt(chainId!))!;
   }
 
+  Future<TransactionInformation> _getDetailTransaction(String transactionHash) async {
+    return await _web3DataSource.getDetailTransaction(transactionHash);
+  }
+
   @override
-  Future<Either<Failure, bool>> sendToExternal(SendToExternalParams params) async{
+  Future<Either<Failure, String>> sendToExternal(SendToExternalParams params) async{
     try {
       final chainId = _getStorageDataSource.getCurrentChainId();
       var walletId = _getStorageDataSource.getCurrentWalletId();
@@ -41,17 +45,24 @@ class TransactionImplementation extends ITransactionRepository{
           wallet.mnemonic, wallet.derivedIndex!, network.slip44);
       final credentials = _web3DataSource.credentialsFromPrivateKey(privateKey);
 
-      _web3DataSource.sendCoinTxn(
+     String result = await _web3DataSource.sendCoinTxn(
           credentials: credentials,
           to: params.contractAddressTo,
           valueInEther: params.valueInEther ?? 0.0,
           chainId: chainId);
 
+      print('---------------------');
+      print(result);
+      print('---------------------');
+
+      var detail = await _getDetailTransaction("0xfafa1011bbe16f103daba35bfa291ab11dec89085f406d13a877a934d5c06c7d");
+      print('+++++++++++++++++++++');
+      print( detail);
       // final model = TransactionIsarModel(
       //   toAddress: params.toAddress,
       //   valueInEther: params.valueInEther,
       // );
-      return const Right(true);
+      return Right(result);
     } catch (e) {
       return Left(FailureMessage('$e'));
     }

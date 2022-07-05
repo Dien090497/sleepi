@@ -130,7 +130,7 @@ class TabSpendingDetail extends StatelessWidget {
                 width: double.infinity,
                 onPressed: () {
                   Navigator.pushNamed(context, R.passcode,
-                      arguments: PasscodeArguments(R.transfer));
+                      arguments: PasscodeArguments(route:  R.transfer));
                 }),
           ),
         ],
