@@ -10,7 +10,6 @@ import 'package:slee_fi/schema/sign_up_schema/sign_up_schema.dart';
 import 'package:slee_fi/schema/verify_schema/verify_schema.dart';
 import 'package:slee_fi/usecase/is_first_open_app_usecase.dart';
 import 'package:slee_fi/usecase/login_usecase.dart';
-import 'package:slee_fi/usecase/save_user_local_usecase.dart';
 import 'package:slee_fi/usecase/send_otp_mail_usecase.dart';
 import 'package:slee_fi/usecase/setting_active_code_usecase.dart';
 import 'package:slee_fi/usecase/sign_up_usecase.dart';
@@ -25,8 +24,6 @@ class SigInSignUpCubit extends Cubit<SignInSignUpState> {
   final _logInUseCase = getIt<LogInUseCase>();
   final _isFirstOpenAppUC = getIt<IsFirstOpenAppUseCase>();
   final _verifyOTPUC = getIt<VerifyOTPUseCase>();
-
-  final _saveUserUC = getIt<SaveUserLocalUseCase>();
 
   final fetchSettingActiveCode = getIt<SettingActiveCodeUseCase>();
   String email = '';
@@ -79,7 +76,9 @@ class SigInSignUpCubit extends Cubit<SignInSignUpState> {
       setting.fold(
         (l) => emit(SignInSignUpState.error(l.msg)),
         (r) => emit(SignInSignUpState.signUpSuccess(
-            r.data.isEnable, userResponse.data)),
+          r.data.isEnable,
+          userResponse,
+        )),
       );
     });
   }
@@ -92,7 +91,6 @@ class SigInSignUpCubit extends Cubit<SignInSignUpState> {
     var result = await _logInUseCase.call(SignInSchema(email.trim(), password));
 
     result.fold((l) => emit(SignInSignUpState.error(l.msg)), (r) async {
-      await _saveUserUC.call(r.data.user);
       emit(SignInSignUpState.signInSuccess(isFistOpenApp));
     });
   }

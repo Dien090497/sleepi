@@ -5,6 +5,7 @@ import 'package:web3dart/web3dart.dart';
 
 abstract class ISpendingRepository {
   Future<Either<Failure, TransferSpendingEntity>> depositToken({
+    required int userId,
     required double amount,
     required Credentials owner,
     required String addressContract,

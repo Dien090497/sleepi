@@ -23,6 +23,9 @@ class NFTDataSource {
 
   Future<String> symbol(String address) => _nft(address).symbol();
 
+  // Future<String> transferFrom(String address) =>
+  //     _nft(address).transferFrom(from, to, tokenId, credentials: credentials);
+
   Nft _nft(String address) => Nft(
       address: EthereumAddress.fromHex(address),
       client: _web3provider.web3client);

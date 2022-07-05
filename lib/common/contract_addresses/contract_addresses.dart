@@ -6,7 +6,7 @@ class ContractAddresses {
   static EthereumAddress get spending {
     // testnet
     return EthereumAddress.fromHex(
-        '0x7AEC68f23e813a9E7c3d1B9B3fe16c48AF1124ef');
+        '0x5c11e3517657B2b2731fd19d2F738f61b62a82CF');
   }
 
   static EthereumAddress get slft {
