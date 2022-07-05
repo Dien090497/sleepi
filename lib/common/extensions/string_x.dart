@@ -59,6 +59,19 @@ extension StringX on String {
     if (length < 6) {
       return LocaleKeys.password_must_be_at_least_6.tr();
     }
+
+    String pattern =
+        r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~]).{8,}$';
+    RegExp regExp = RegExp(pattern);
+    var result = regExp.hasMatch(this);
+    if (!result) {
+      return 'Contains a capital letter, a special character and a number';
+    }
+    if (contains(' ')) {
+      return "Don't allow user typing space in password";
+
+    }
+
     return '';
   }
 

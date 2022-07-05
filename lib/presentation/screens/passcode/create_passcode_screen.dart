@@ -43,8 +43,11 @@ class CreatePasscodeScreen extends StatelessWidget {
               Navigator.pushNamed(context, R.confirmPasscode,
                       arguments: ConfirmCreatePasscodeArguments(state.passcode))
                   .then((confirmSuccess) {
-                Navigator.pop(context, confirmSuccess);
-                args?.isShowSuccessDialog == true ? showSuccessfulDialog(context, LocaleKeys.reset_passcode_successfully) : null;
+                    if (confirmSuccess == true) {
+                      Navigator.pop(context, confirmSuccess);
+					   args?.isShowSuccessDialog == true ? showSuccessfulDialog(context, LocaleKeys.reset_passcode_successfully) : null;
+                    }
+                //Navigator.pop(context, confirmSuccess);
               });
             }
           }
@@ -72,6 +75,7 @@ class CreatePasscodeScreen extends StatelessWidget {
                     passcodeController: passCodeController,
                     onCompleted: (String passcode) {
                       cubit.createPassCode(passCodeController.text);
+                      passCodeController.clear();
                     },
                   ),
                   SizedBox(height: 32.h),

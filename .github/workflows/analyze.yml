@@ -2,7 +2,7 @@ name: Reusable Build APK and Upload Diawi
 
 on:
   pull_request:
-    branches: [ develop ]
+    branches: [ ]
 
 jobs:
   analyze:

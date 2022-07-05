@@ -1,6 +1,5 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:slee_fi/common/enum/enum.dart';
 import 'package:slee_fi/common/extensions/num_ext.dart';
@@ -10,7 +9,9 @@ import 'package:slee_fi/common/widgets/sf_alert_dialog.dart';
 import 'package:slee_fi/common/widgets/sf_buttons.dart';
 import 'package:slee_fi/common/widgets/sf_dialog.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
+import 'package:slee_fi/common/widgets/sf_textfield.dart';
 import 'package:slee_fi/common/widgets/sf_textfield_text_button.dart';
+import 'package:slee_fi/common/widgets/snack_bar.dart';
 import 'package:slee_fi/entities/token/token_entity.dart';
 import 'package:slee_fi/l10n/locale_keys.g.dart';
 import 'package:slee_fi/presentation/blocs/transfer_spending/transfer_spending.dart';
@@ -44,13 +45,14 @@ class _TransferListState extends State<TransferList> {
           if (state is TransferSpendingStateLoaded) {
             final cubit = context.read<TransferSpendingCubit>();
             if (state.fee != null) {
+              final result = controller.text.toString().replaceAll(',', '.');
               showCustomAlertDialog(
                 context,
                 showClosed: false,
                 children: PopUpConfirmTransfer(
                   fee: state.fee ?? 0.0025,
                   cubit: cubit,
-                  amount: double.parse(controller.text),
+                  amount: double.parse(result),
                   tokenName: widget.tokenEntity?.symbol ?? '',
                   contractAddress: widget.tokenEntity?.address ?? '',
                 ),
@@ -74,6 +76,9 @@ class _TransferListState extends State<TransferList> {
                 showSuccessfulDialog(context, LocaleKeys.successfull);
               }
             }
+          }
+          if (state is TransferSpendingStateError) {
+            _showError(context: context, message: state.message, messageType: MessageType.error);
           }
         },
         builder: (context, state) {
@@ -105,10 +110,13 @@ class _TransferListState extends State<TransferList> {
                         textInputType: const TextInputType.numberWithOptions(
                             decimal: true),
                         inputFormatters: [
-                          FilteringTextInputFormatter.allow(
-                              RegExp(r'^\d{1,}\.?\d{0,6}')),
+                          DecimalTextInputFormatter(
+                              decimalRange: 6)
                         ],
                         controller: controller,
+                        onPressed: () {
+                          controller.text = widget.tokenEntity?.balance.formatBalanceToken ?? '';
+                        },
                       ),
                       if (state is TransferSpendingStateError)
                         SFText(
@@ -131,9 +139,10 @@ class _TransferListState extends State<TransferList> {
                   width: double.infinity,
                   gradient: AppColors.gradientBlueButton,
                   onPressed: () {
+                    final result = controller.text.toString().replaceAll(',', '.');
                     final cubit = context.read<TransferSpendingCubit>();
                     cubit.estimateGas(widget.tokenEntity?.address ?? '',
-                        amount: controller.text,
+                        amount: result,
                         balance: widget.tokenEntity?.balance ?? 0);
                   },
                 ),
@@ -144,4 +153,11 @@ class _TransferListState extends State<TransferList> {
       ),
     );
   }
+}
+
+void _showError(
+    {required BuildContext context,
+      required String message,
+      required MessageType messageType}) {
+  showCustomSnackBar(context: context, msg: message);
 }
