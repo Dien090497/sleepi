@@ -15,14 +15,14 @@ class MarketPlaceCubit extends Cubit<MarketPlaceState> {
     emit(const MarketPlaceState.initial());
   }
 
-  getMarketPlace() async {
+  Future<void> getMarketPlace() async {
     final result = await _marketPlaceUseCase.call(1);
-    debugPrint("RESULT : $result");
 
     result.fold((l) {
       emit(MarketPlaceState.fail(l is FailureMessage ? l.msg : '$l'));
     }, (success)  {
-      emit(const MarketPlaceState.success());
+      debugPrint("success : ${success.list[1].special}");
+      emit(MarketPlaceState.success(success));
     });
   }
 }

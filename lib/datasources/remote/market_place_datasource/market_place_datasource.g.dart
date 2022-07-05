@@ -18,15 +18,31 @@ class _MarketPlaceDataSource implements MarketPlaceDataSource {
   String? baseUrl;
 
   @override
-  Future<MarketPlaceModel> getMarketPlace(categoryId) async {
+  Future<ListMarketPlaceModel> getMarketPlace(categoryId) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{r'categoryId': categoryId};
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
     final _result = await _dio.fetch<Map<String, dynamic>>(
-        _setStreamType<MarketPlaceModel>(
+        _setStreamType<ListMarketPlaceModel>(
             Options(method: 'GET', headers: _headers, extra: _extra)
                 .compose(_dio.options, '/market-place',
+                    queryParameters: queryParameters, data: _data)
+                .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = ListMarketPlaceModel.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<MarketPlaceModel> getCategory() async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<MarketPlaceModel>(
+            Options(method: 'GET', headers: _headers, extra: _extra)
+                .compose(_dio.options, '/category',
                     queryParameters: queryParameters, data: _data)
                 .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
     final value = MarketPlaceModel.fromJson(_result.data!);

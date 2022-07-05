@@ -10,7 +10,7 @@ class HistoryIsarModel {
 
   final String transactionHash;
 
-  final String addressToken;
+  final String addressTo;
 
   final int chainId;
 
@@ -19,7 +19,7 @@ class HistoryIsarModel {
   HistoryIsarModel({
     required this.transactionHash,
     required this.chainId,
-    required this.addressToken,
+    required this.addressTo,
     this.transactionInformation,
   });
 
@@ -28,7 +28,7 @@ class HistoryIsarModel {
     return HistoryEntity(
       transactionHash: transactionHash,
       chainId: chainId,
-      addressToken: addressToken,
+      addressToken: addressTo,
       transactionInformation: transactionInformation!
     );
   }

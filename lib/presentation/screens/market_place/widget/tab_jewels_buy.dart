@@ -60,7 +60,7 @@ class TabJewelsBuy extends StatelessWidget {
         child: BlocConsumer<MarketPlaceCubit, MarketPlaceState>(
           listener: (context, state) {
             if(state is MarketPlaceStateSuccess){
-              debugPrint("$state");
+              debugPrint("${state.list.list[0].special}");
             }
           },
           builder: (context, state) {

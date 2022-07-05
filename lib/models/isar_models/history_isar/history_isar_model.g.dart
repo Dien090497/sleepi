@@ -15,9 +15,9 @@ extension GetHistoryIsarModelCollection on Isar {
 const HistoryIsarModelSchema = CollectionSchema(
   name: 'HistoryIsarModel',
   schema:
-      '{"name":"HistoryIsarModel","idName":"id","properties":[{"name":"addressToken","type":"String"},{"name":"chainId","type":"Long"},{"name":"transactionHash","type":"String"}],"indexes":[],"links":[]}',
+      '{"name":"HistoryIsarModel","idName":"id","properties":[{"name":"addressTo","type":"String"},{"name":"chainId","type":"Long"},{"name":"transactionHash","type":"String"}],"indexes":[],"links":[]}',
   idName: 'id',
-  propertyIds: {'addressToken': 0, 'chainId': 1, 'transactionHash': 2},
+  propertyIds: {'addressTo': 0, 'chainId': 1, 'transactionHash': 2},
   listProperties: {},
   indexIds: {},
   indexValueTypes: {},
@@ -60,9 +60,9 @@ void _historyIsarModelSerializeNative(
     List<int> offsets,
     AdapterAlloc alloc) {
   var dynamicSize = 0;
-  final value0 = object.addressToken;
-  final _addressToken = IsarBinaryWriter.utf8Encoder.convert(value0);
-  dynamicSize += (_addressToken.length) as int;
+  final value0 = object.addressTo;
+  final _addressTo = IsarBinaryWriter.utf8Encoder.convert(value0);
+  dynamicSize += (_addressTo.length) as int;
   final value1 = object.chainId;
   final _chainId = value1;
   final value2 = object.transactionHash;
@@ -74,7 +74,7 @@ void _historyIsarModelSerializeNative(
   rawObj.buffer_length = size;
   final buffer = IsarNative.bufAsBytes(rawObj.buffer, size);
   final writer = IsarBinaryWriter(buffer, staticSize);
-  writer.writeBytes(offsets[0], _addressToken);
+  writer.writeBytes(offsets[0], _addressTo);
   writer.writeLong(offsets[1], _chainId);
   writer.writeBytes(offsets[2], _transactionHash);
 }
@@ -85,7 +85,7 @@ HistoryIsarModel _historyIsarModelDeserializeNative(
     IsarBinaryReader reader,
     List<int> offsets) {
   final object = HistoryIsarModel(
-    addressToken: reader.readString(offsets[0]),
+    addressTo: reader.readString(offsets[0]),
     chainId: reader.readLong(offsets[1]),
     transactionHash: reader.readString(offsets[2]),
   );
@@ -112,7 +112,7 @@ P _historyIsarModelDeserializePropNative<P>(
 dynamic _historyIsarModelSerializeWeb(
     IsarCollection<HistoryIsarModel> collection, HistoryIsarModel object) {
   final jsObj = IsarNative.newJsObject();
-  IsarNative.jsObjectSet(jsObj, 'addressToken', object.addressToken);
+  IsarNative.jsObjectSet(jsObj, 'addressTo', object.addressTo);
   IsarNative.jsObjectSet(jsObj, 'chainId', object.chainId);
   IsarNative.jsObjectSet(jsObj, 'id', object.id);
   IsarNative.jsObjectSet(jsObj, 'transactionHash', object.transactionHash);
@@ -122,7 +122,7 @@ dynamic _historyIsarModelSerializeWeb(
 HistoryIsarModel _historyIsarModelDeserializeWeb(
     IsarCollection<HistoryIsarModel> collection, dynamic jsObj) {
   final object = HistoryIsarModel(
-    addressToken: IsarNative.jsObjectGet(jsObj, 'addressToken') ?? '',
+    addressTo: IsarNative.jsObjectGet(jsObj, 'addressTo') ?? '',
     chainId:
         IsarNative.jsObjectGet(jsObj, 'chainId') ?? double.negativeInfinity,
     transactionHash: IsarNative.jsObjectGet(jsObj, 'transactionHash') ?? '',
@@ -133,8 +133,8 @@ HistoryIsarModel _historyIsarModelDeserializeWeb(
 
 P _historyIsarModelDeserializePropWeb<P>(Object jsObj, String propertyName) {
   switch (propertyName) {
-    case 'addressToken':
-      return (IsarNative.jsObjectGet(jsObj, 'addressToken') ?? '') as P;
+    case 'addressTo':
+      return (IsarNative.jsObjectGet(jsObj, 'addressTo') ?? '') as P;
     case 'chainId':
       return (IsarNative.jsObjectGet(jsObj, 'chainId') ??
           double.negativeInfinity) as P;
@@ -218,20 +218,20 @@ extension HistoryIsarModelQueryWhere
 extension HistoryIsarModelQueryFilter
     on QueryBuilder<HistoryIsarModel, HistoryIsarModel, QFilterCondition> {
   QueryBuilder<HistoryIsarModel, HistoryIsarModel, QAfterFilterCondition>
-      addressTokenEqualTo(
+      addressToEqualTo(
     String value, {
     bool caseSensitive = true,
   }) {
     return addFilterConditionInternal(FilterCondition(
       type: ConditionType.eq,
-      property: 'addressToken',
+      property: 'addressTo',
       value: value,
       caseSensitive: caseSensitive,
     ));
   }
 
   QueryBuilder<HistoryIsarModel, HistoryIsarModel, QAfterFilterCondition>
-      addressTokenGreaterThan(
+      addressToGreaterThan(
     String value, {
     bool caseSensitive = true,
     bool include = false,
@@ -239,14 +239,14 @@ extension HistoryIsarModelQueryFilter
     return addFilterConditionInternal(FilterCondition(
       type: ConditionType.gt,
       include: include,
-      property: 'addressToken',
+      property: 'addressTo',
       value: value,
       caseSensitive: caseSensitive,
     ));
   }
 
   QueryBuilder<HistoryIsarModel, HistoryIsarModel, QAfterFilterCondition>
-      addressTokenLessThan(
+      addressToLessThan(
     String value, {
     bool caseSensitive = true,
     bool include = false,
@@ -254,14 +254,14 @@ extension HistoryIsarModelQueryFilter
     return addFilterConditionInternal(FilterCondition(
       type: ConditionType.lt,
       include: include,
-      property: 'addressToken',
+      property: 'addressTo',
       value: value,
       caseSensitive: caseSensitive,
     ));
   }
 
   QueryBuilder<HistoryIsarModel, HistoryIsarModel, QAfterFilterCondition>
-      addressTokenBetween(
+      addressToBetween(
     String lower,
     String upper, {
     bool caseSensitive = true,
@@ -269,7 +269,7 @@ extension HistoryIsarModelQueryFilter
     bool includeUpper = true,
   }) {
     return addFilterConditionInternal(FilterCondition.between(
-      property: 'addressToken',
+      property: 'addressTo',
       lower: lower,
       includeLower: includeLower,
       upper: upper,
@@ -279,46 +279,46 @@ extension HistoryIsarModelQueryFilter
   }
 
   QueryBuilder<HistoryIsarModel, HistoryIsarModel, QAfterFilterCondition>
-      addressTokenStartsWith(
+      addressToStartsWith(
     String value, {
     bool caseSensitive = true,
   }) {
     return addFilterConditionInternal(FilterCondition(
       type: ConditionType.startsWith,
-      property: 'addressToken',
+      property: 'addressTo',
       value: value,
       caseSensitive: caseSensitive,
     ));
   }
 
   QueryBuilder<HistoryIsarModel, HistoryIsarModel, QAfterFilterCondition>
-      addressTokenEndsWith(
+      addressToEndsWith(
     String value, {
     bool caseSensitive = true,
   }) {
     return addFilterConditionInternal(FilterCondition(
       type: ConditionType.endsWith,
-      property: 'addressToken',
+      property: 'addressTo',
       value: value,
       caseSensitive: caseSensitive,
     ));
   }
 
   QueryBuilder<HistoryIsarModel, HistoryIsarModel, QAfterFilterCondition>
-      addressTokenContains(String value, {bool caseSensitive = true}) {
+      addressToContains(String value, {bool caseSensitive = true}) {
     return addFilterConditionInternal(FilterCondition(
       type: ConditionType.contains,
-      property: 'addressToken',
+      property: 'addressTo',
       value: value,
       caseSensitive: caseSensitive,
     ));
   }
 
   QueryBuilder<HistoryIsarModel, HistoryIsarModel, QAfterFilterCondition>
-      addressTokenMatches(String pattern, {bool caseSensitive = true}) {
+      addressToMatches(String pattern, {bool caseSensitive = true}) {
     return addFilterConditionInternal(FilterCondition(
       type: ConditionType.matches,
-      property: 'addressToken',
+      property: 'addressTo',
       value: pattern,
       caseSensitive: caseSensitive,
     ));
@@ -549,13 +549,13 @@ extension HistoryIsarModelQueryLinks
 extension HistoryIsarModelQueryWhereSortBy
     on QueryBuilder<HistoryIsarModel, HistoryIsarModel, QSortBy> {
   QueryBuilder<HistoryIsarModel, HistoryIsarModel, QAfterSortBy>
-      sortByAddressToken() {
-    return addSortByInternal('addressToken', Sort.asc);
+      sortByAddressTo() {
+    return addSortByInternal('addressTo', Sort.asc);
   }
 
   QueryBuilder<HistoryIsarModel, HistoryIsarModel, QAfterSortBy>
-      sortByAddressTokenDesc() {
-    return addSortByInternal('addressToken', Sort.desc);
+      sortByAddressToDesc() {
+    return addSortByInternal('addressTo', Sort.desc);
   }
 
   QueryBuilder<HistoryIsarModel, HistoryIsarModel, QAfterSortBy>
@@ -591,13 +591,13 @@ extension HistoryIsarModelQueryWhereSortBy
 extension HistoryIsarModelQueryWhereSortThenBy
     on QueryBuilder<HistoryIsarModel, HistoryIsarModel, QSortThenBy> {
   QueryBuilder<HistoryIsarModel, HistoryIsarModel, QAfterSortBy>
-      thenByAddressToken() {
-    return addSortByInternal('addressToken', Sort.asc);
+      thenByAddressTo() {
+    return addSortByInternal('addressTo', Sort.asc);
   }
 
   QueryBuilder<HistoryIsarModel, HistoryIsarModel, QAfterSortBy>
-      thenByAddressTokenDesc() {
-    return addSortByInternal('addressToken', Sort.desc);
+      thenByAddressToDesc() {
+    return addSortByInternal('addressTo', Sort.desc);
   }
 
   QueryBuilder<HistoryIsarModel, HistoryIsarModel, QAfterSortBy>
@@ -633,8 +633,8 @@ extension HistoryIsarModelQueryWhereSortThenBy
 extension HistoryIsarModelQueryWhereDistinct
     on QueryBuilder<HistoryIsarModel, HistoryIsarModel, QDistinct> {
   QueryBuilder<HistoryIsarModel, HistoryIsarModel, QDistinct>
-      distinctByAddressToken({bool caseSensitive = true}) {
-    return addDistinctByInternal('addressToken', caseSensitive: caseSensitive);
+      distinctByAddressTo({bool caseSensitive = true}) {
+    return addDistinctByInternal('addressTo', caseSensitive: caseSensitive);
   }
 
   QueryBuilder<HistoryIsarModel, HistoryIsarModel, QDistinct>
@@ -655,9 +655,8 @@ extension HistoryIsarModelQueryWhereDistinct
 
 extension HistoryIsarModelQueryProperty
     on QueryBuilder<HistoryIsarModel, HistoryIsarModel, QQueryProperty> {
-  QueryBuilder<HistoryIsarModel, String, QQueryOperations>
-      addressTokenProperty() {
-    return addPropertyNameInternal('addressToken');
+  QueryBuilder<HistoryIsarModel, String, QQueryOperations> addressToProperty() {
+    return addPropertyNameInternal('addressTo');
   }
 
   QueryBuilder<HistoryIsarModel, int, QQueryOperations> chainIdProperty() {
