@@ -13,14 +13,12 @@ import 'package:slee_fi/usecase/get_balance_for_tokens_usecase.dart';
 import 'package:slee_fi/usecase/get_nfts_balance_usecase.dart';
 import 'package:slee_fi/usecase/usecase.dart';
 import 'package:slee_fi/usecase/wallet/current_wallet_usecase.dart';
-import 'package:slee_fi/usecase/wallet/first_open_wallet_session_usecase.dart';
 
 import 'wallet_state.dart';
 
 class WalletCubit extends Cubit<WalletState> {
   WalletCubit() : super(const WalletState.initial());
 
-  final _firstOpenWalletUC = getIt<CheckFirstOpenWallet>();
   final _currentWalletUC = getIt<CurrentWalletUseCase>();
 
   final _getBalanceForTokensUseCase = getIt<GetBalanceForTokensUseCase>();
@@ -28,12 +26,10 @@ class WalletCubit extends Cubit<WalletState> {
 
   Future<void> init() async {
     emit(const WalletState.loading());
-    final openWallet = await _firstOpenWalletUC.call(NoParams());
     final walletCall = await _currentWalletUC.call(NoParams());
     walletCall.fold(
-      (l) => emit(WalletState.loaded(
+      (l) => emit(const WalletState.loaded(
         walletInfoEntity: null,
-        firstOpenWallet: openWallet.getOrElse(() => false),
         tokenList: [],
       )),
       (r) => loadCurrentWallet(r),
@@ -51,8 +47,6 @@ class WalletCubit extends Cubit<WalletState> {
 
   void loadCurrentWallet(WalletInfoEntity? wallet) async {
     final currentState = state;
-    final openWallet = await _firstOpenWalletUC.call(NoParams());
-
     if (wallet != null) {
       final ParamsBalanceOfToken params;
       final GetNFTsParams nfTsParams;
@@ -133,20 +127,17 @@ class WalletCubit extends Cubit<WalletState> {
       if (currentState is WalletStateLoaded) {
         emit(currentState.copyWith(
           walletInfoEntity: wallet,
-          firstOpenWallet: openWallet.getOrElse(() => false),
           tokenList: tokenList,
         ));
       } else {
         emit(WalletState.loaded(
           walletInfoEntity: wallet,
-          firstOpenWallet: openWallet.getOrElse(() => false),
           tokenList: tokenList,
         ));
       }
     } else {
-      emit(WalletState.loaded(
+      emit(const WalletState.loaded(
         walletInfoEntity: null,
-        firstOpenWallet: openWallet.getOrElse(() => false),
         tokenList: [],
       ));
     }
