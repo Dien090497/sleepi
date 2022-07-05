@@ -3,6 +3,7 @@ import 'package:flutter/foundation.dart';
 import 'package:injectable/injectable.dart';
 import 'package:retrofit/retrofit.dart';
 import 'package:slee_fi/common/const/const.dart';
+import 'package:slee_fi/models/list_market_place/list_market_place_model.dart';
 import 'package:slee_fi/models/market_place/market_place_model.dart';
 
 part 'market_place_datasource.g.dart';
@@ -18,6 +19,9 @@ abstract class MarketPlaceDataSource {
   }
 
   @GET('/market-place')
-  Future<MarketPlaceModel> getMarketPlace(@Query('categoryId') int categoryId);
+  Future<ListMarketPlaceModel> getMarketPlace(@Query('categoryId') int categoryId);
+
+  @GET('/category')
+  Future<MarketPlaceModel> getCategory();
 
 }

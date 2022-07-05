@@ -19,21 +19,21 @@ mixin _$MarketPlaceState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function() success,
+    required TResult Function(ListMarketPlaceModel list) success,
     required TResult Function(String msg) fail,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function()? success,
+    TResult Function(ListMarketPlaceModel list)? success,
     TResult Function(String msg)? fail,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function()? success,
+    TResult Function(ListMarketPlaceModel list)? success,
     TResult Function(String msg)? fail,
     required TResult orElse(),
   }) =>
@@ -121,7 +121,7 @@ class _$MarketPlaceStateInit implements MarketPlaceStateInit {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function() success,
+    required TResult Function(ListMarketPlaceModel list) success,
     required TResult Function(String msg) fail,
   }) {
     return initial();
@@ -131,7 +131,7 @@ class _$MarketPlaceStateInit implements MarketPlaceStateInit {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function()? success,
+    TResult Function(ListMarketPlaceModel list)? success,
     TResult Function(String msg)? fail,
   }) {
     return initial?.call();
@@ -141,7 +141,7 @@ class _$MarketPlaceStateInit implements MarketPlaceStateInit {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function()? success,
+    TResult Function(ListMarketPlaceModel list)? success,
     TResult Function(String msg)? fail,
     required TResult orElse(),
   }) {
@@ -195,6 +195,7 @@ abstract class _$$MarketPlaceStateSuccessCopyWith<$Res> {
   factory _$$MarketPlaceStateSuccessCopyWith(_$MarketPlaceStateSuccess value,
           $Res Function(_$MarketPlaceStateSuccess) then) =
       __$$MarketPlaceStateSuccessCopyWithImpl<$Res>;
+  $Res call({ListMarketPlaceModel list});
 }
 
 /// @nodoc
@@ -208,58 +209,81 @@ class __$$MarketPlaceStateSuccessCopyWithImpl<$Res>
   @override
   _$MarketPlaceStateSuccess get _value =>
       super._value as _$MarketPlaceStateSuccess;
+
+  @override
+  $Res call({
+    Object? list = freezed,
+  }) {
+    return _then(_$MarketPlaceStateSuccess(
+      list == freezed
+          ? _value.list
+          : list // ignore: cast_nullable_to_non_nullable
+              as ListMarketPlaceModel,
+    ));
+  }
 }
 
 /// @nodoc
 
 class _$MarketPlaceStateSuccess implements MarketPlaceStateSuccess {
-  const _$MarketPlaceStateSuccess();
+  const _$MarketPlaceStateSuccess(this.list);
+
+  @override
+  final ListMarketPlaceModel list;
 
   @override
   String toString() {
-    return 'MarketPlaceState.success()';
+    return 'MarketPlaceState.success(list: $list)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$MarketPlaceStateSuccess);
+            other is _$MarketPlaceStateSuccess &&
+            const DeepCollectionEquality().equals(other.list, list));
   }
 
   @override
-  int get hashCode => runtimeType.hashCode;
+  int get hashCode =>
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(list));
+
+  @JsonKey(ignore: true)
+  @override
+  _$$MarketPlaceStateSuccessCopyWith<_$MarketPlaceStateSuccess> get copyWith =>
+      __$$MarketPlaceStateSuccessCopyWithImpl<_$MarketPlaceStateSuccess>(
+          this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function() success,
+    required TResult Function(ListMarketPlaceModel list) success,
     required TResult Function(String msg) fail,
   }) {
-    return success();
+    return success(list);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function()? success,
+    TResult Function(ListMarketPlaceModel list)? success,
     TResult Function(String msg)? fail,
   }) {
-    return success?.call();
+    return success?.call(list);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function()? success,
+    TResult Function(ListMarketPlaceModel list)? success,
     TResult Function(String msg)? fail,
     required TResult orElse(),
   }) {
     if (success != null) {
-      return success();
+      return success(list);
     }
     return orElse();
   }
@@ -300,7 +324,13 @@ class _$MarketPlaceStateSuccess implements MarketPlaceStateSuccess {
 }
 
 abstract class MarketPlaceStateSuccess implements MarketPlaceState {
-  const factory MarketPlaceStateSuccess() = _$MarketPlaceStateSuccess;
+  const factory MarketPlaceStateSuccess(final ListMarketPlaceModel list) =
+      _$MarketPlaceStateSuccess;
+
+  ListMarketPlaceModel get list => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  _$$MarketPlaceStateSuccessCopyWith<_$MarketPlaceStateSuccess> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -371,7 +401,7 @@ class _$MarketPlaceStateFailed implements MarketPlaceStateFailed {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function() success,
+    required TResult Function(ListMarketPlaceModel list) success,
     required TResult Function(String msg) fail,
   }) {
     return fail(msg);
@@ -381,7 +411,7 @@ class _$MarketPlaceStateFailed implements MarketPlaceStateFailed {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function()? success,
+    TResult Function(ListMarketPlaceModel list)? success,
     TResult Function(String msg)? fail,
   }) {
     return fail?.call(msg);
@@ -391,7 +421,7 @@ class _$MarketPlaceStateFailed implements MarketPlaceStateFailed {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function()? success,
+    TResult Function(ListMarketPlaceModel list)? success,
     TResult Function(String msg)? fail,
     required TResult orElse(),
   }) {
