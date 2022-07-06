@@ -41,7 +41,7 @@ class TabItemsBuy extends StatelessWidget {
     return DefaultTabController(
       length: 2,
       child: BlocProvider(
-        create: (context) => MarketPlaceCubit()..init(2),
+        create: (context) => MarketPlaceCubit()..init(3),
         child: BlocConsumer<MarketPlaceCubit, MarketPlaceState>(
           listener: (context, state) {
             if (state is MarketPlaceStateSuccess) {
