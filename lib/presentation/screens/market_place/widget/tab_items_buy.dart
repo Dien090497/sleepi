@@ -37,7 +37,6 @@ class TabItemsBuy extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     List<MarketPlaceModel> listItems = [];
-
     return DefaultTabController(
       length: 2,
       child: BlocProvider(
@@ -53,9 +52,11 @@ class TabItemsBuy extends StatelessWidget {
             return Column(
               children: [
                 TabBarFilter(
+                  cubit: cubit,
                   tabTexts: const [LocaleKeys.buy, LocaleKeys.rent],
                   onFilterTap: () {
                     showFilterModalBottomSheet(
+                      cubit: cubit,
                       context,
                       sections: {
                         LocaleKeys.type: [
@@ -90,7 +91,7 @@ class TabItemsBuy extends StatelessWidget {
                                       count: listItems.length,
                                       isScroll: true,
                                       onRefresh: (){
-                                        cubit.refresh(3);
+                                        cubit.refresh();
                                       },
                                       childAspectRatio: 8 / 10,
                                       itemBuilder: (context, i) {

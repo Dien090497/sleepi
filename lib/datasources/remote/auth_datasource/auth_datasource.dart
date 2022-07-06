@@ -111,7 +111,12 @@ abstract class AuthDataSource {
 
   @GET('/market-place')
   Future<ListMarketPlaceModel> getMarketPlace(
-      @Query('categoryId') int categoryId);
+      @Query('categoryId') int categoryId,
+      @Query('sortPrice') String? sortPrice,
+      @Query('type') String? type,
+      @Query('level') int? level,
+      @Query('classNft') String? classNft,
+      @Query('quality') String? quality);
 
   @GET('/category')
   Future<MarketPlaceModel> getCategory();

@@ -15,9 +15,6 @@ class MarketPlaceModel {
   @JsonKey(name: 'is_lock')
   final int isLock;
 
-  @JsonKey(name: 'token_id')
-  final int tokenId;
-
   final int time;
   final int level;
 
@@ -47,10 +44,10 @@ class MarketPlaceModel {
 
   final String type;
   // final String class;
-  final String quality;
+  final String? quality;
   final String owner;
 
-  MarketPlaceModel(this.id, this.nftId, this.categoryId, this.isLock, this.tokenId, this.time, this.level, this.bedMint,
+  MarketPlaceModel(this.id, this.nftId, this.categoryId, this.isLock, this.time, this.level, this.bedMint,
       this.efficiency, this.luck, this.bonus, this.special, this.resilience, this.price, this.status, this.createdAt,
       this.updatedAt, this.nftName, this.image, this.contractAddress, this.type, this.quality, this.owner, this.symbol);
 
