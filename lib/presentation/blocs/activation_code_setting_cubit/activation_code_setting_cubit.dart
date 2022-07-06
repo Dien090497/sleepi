@@ -12,14 +12,17 @@ class ActivationCodeSettingCubit extends Cubit<ActivationCodeSettingState> {
   init() async {
     emit(const ActivationCodeSettingState.process());
     _fetch();
-    await Future.delayed(
-      const Duration(milliseconds: 1000),
-      () => emit(const ActivationCodeSettingState.successful()),
-    );
+    // await Future.delayed(
+    //   const Duration(milliseconds: 1000),
+    //   () => emit(const ActivationCodeSettingState.successful()),
+    // );
   }
 
-  _fetch()async {
-    var result = await  _activationCodeUC.call(NoParams());
-    result.fold((l) => null, (r) => null);
+  _fetch() async {
+    var result = await _activationCodeUC.call(NoParams());
+    result.fold(
+      (l) => emit(ActivationCodeSettingState.error(l.msg)),
+      (r) => emit(ActivationCodeSettingState.successful(r)),
+    );
   }
 }

@@ -71,21 +71,25 @@ class CreatePasswordCubit extends Cubit<CreatePasswordState> {
       emit(CreatePasswordState.errorPassword(message));
       return false;
     }
-
+    if (messageConfirm.isNotEmpty) {
+      emit(CreatePasswordState.errorConfirmPassword(messageConfirm));
+      return false;
+    }
+    if (confirmPassword.isEmpty) {
+      emit(CreatePasswordState.errorConfirmPassword(
+          LocaleKeys.this_field_is_required.tr()));
+      return false;
+    }
     if (password != confirmPassword) {
       emit(CreatePasswordState.errorConfirmPassword(
           LocaleKeys.password_dose_not_match.tr()));
       return false;
     }
-    if (messageConfirm.isNotEmpty) {
-      emit(CreatePasswordState.errorConfirmPassword(messageConfirm));
-      return false;
-    }
+
     return true;
   }
 
   onChangePassword(String value) {
-
     if ((state is CreatePasswordStateErrorPassword ||
             state is CreatePasswordStateErrorCreate) &&
         (password.isEmpty || value.isEmpty)) {
@@ -96,11 +100,11 @@ class CreatePasswordCubit extends Cubit<CreatePasswordState> {
 
   onChangeConfirmPassword(String value) {
     if ((state is CreatePasswordStateErrorPassword ||
-            state is CreatePasswordStateErrorCreate) &&
-        confirmPassword.isEmpty ||  value.isEmpty) {
+                state is CreatePasswordStateErrorCreate) &&
+            confirmPassword.isEmpty ||
+        value.isEmpty) {
       emit(const CreatePasswordState.initial());
     }
     confirmPassword = value;
-
   }
 }

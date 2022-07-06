@@ -157,28 +157,28 @@ class IsarDataSource {
 
   Future<List<HistoryIsarModel>> getAllHistory() async {
     final result = await _isar.history.where().findAll();
-    for (final e in result) {
-      await Future.wait([
-        // e.addressToken.save(),
-        // e.chainId.save(),
-        // e.transactionInformation.save(),
-        // e.transactionHash.save(),
-      ]);
-    }
+    // for (final e in result) {
+    //   await Future.wait([
+    //     // e.addressToken.save(),
+    //     // e.chainId.save(),
+    //     // e.transactionInformation.save(),
+    //     // e.transactionHash.save(),
+    //   ]);
+    // }
     return result;
   }
 
   Future<List<int>> putAllHistory(List<HistoryIsarModel> history) =>
       _isar.writeTxn((isar) async {
         final ids = await isar.history.putAll(history);
-        for (final e in history) {
-          await Future.wait([
-            // e.chainId.save(),
-            // e.ens.save(),
-            // e.explorers.save(),
-            // e.tokenDefault.save()
-          ]);
-        }
+        // for (final e in history) {
+        //   await Future.wait([
+        //     // e.chainId.save(),
+        //     // e.ens.save(),
+        //     // e.explorers.save(),
+        //     // e.tokenDefault.save()
+        //   ]);
+        // }
         return ids;
       });
 

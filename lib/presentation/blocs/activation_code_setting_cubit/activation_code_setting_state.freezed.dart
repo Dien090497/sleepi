@@ -20,7 +20,7 @@ mixin _$ActivationCodeSettingState {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() process,
-    required TResult Function() successful,
+    required TResult Function(List<ActiveCodeEntity> list) successful,
     required TResult Function(String message) error,
   }) =>
       throw _privateConstructorUsedError;
@@ -28,7 +28,7 @@ mixin _$ActivationCodeSettingState {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? process,
-    TResult Function()? successful,
+    TResult Function(List<ActiveCodeEntity> list)? successful,
     TResult Function(String message)? error,
   }) =>
       throw _privateConstructorUsedError;
@@ -36,7 +36,7 @@ mixin _$ActivationCodeSettingState {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? process,
-    TResult Function()? successful,
+    TResult Function(List<ActiveCodeEntity> list)? successful,
     TResult Function(String message)? error,
     required TResult orElse(),
   }) =>
@@ -134,7 +134,7 @@ class _$ActivationCodeSettingStateInit
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() process,
-    required TResult Function() successful,
+    required TResult Function(List<ActiveCodeEntity> list) successful,
     required TResult Function(String message) error,
   }) {
     return initial();
@@ -145,7 +145,7 @@ class _$ActivationCodeSettingStateInit
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? process,
-    TResult Function()? successful,
+    TResult Function(List<ActiveCodeEntity> list)? successful,
     TResult Function(String message)? error,
   }) {
     return initial?.call();
@@ -156,7 +156,7 @@ class _$ActivationCodeSettingStateInit
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? process,
-    TResult Function()? successful,
+    TResult Function(List<ActiveCodeEntity> list)? successful,
     TResult Function(String message)? error,
     required TResult orElse(),
   }) {
@@ -259,7 +259,7 @@ class _$ActivationCodeSettingStateProcess
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() process,
-    required TResult Function() successful,
+    required TResult Function(List<ActiveCodeEntity> list) successful,
     required TResult Function(String message) error,
   }) {
     return process();
@@ -270,7 +270,7 @@ class _$ActivationCodeSettingStateProcess
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? process,
-    TResult Function()? successful,
+    TResult Function(List<ActiveCodeEntity> list)? successful,
     TResult Function(String message)? error,
   }) {
     return process?.call();
@@ -281,7 +281,7 @@ class _$ActivationCodeSettingStateProcess
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? process,
-    TResult Function()? successful,
+    TResult Function(List<ActiveCodeEntity> list)? successful,
     TResult Function(String message)? error,
     required TResult orElse(),
   }) {
@@ -342,6 +342,7 @@ abstract class _$$ActivationCodeSettingStateSuccessCopyWith<$Res> {
           _$ActivationCodeSettingStateSuccess value,
           $Res Function(_$ActivationCodeSettingStateSuccess) then) =
       __$$ActivationCodeSettingStateSuccessCopyWithImpl<$Res>;
+  $Res call({List<ActiveCodeEntity> list});
 }
 
 /// @nodoc
@@ -356,38 +357,67 @@ class __$$ActivationCodeSettingStateSuccessCopyWithImpl<$Res>
   @override
   _$ActivationCodeSettingStateSuccess get _value =>
       super._value as _$ActivationCodeSettingStateSuccess;
+
+  @override
+  $Res call({
+    Object? list = freezed,
+  }) {
+    return _then(_$ActivationCodeSettingStateSuccess(
+      list == freezed
+          ? _value._list
+          : list // ignore: cast_nullable_to_non_nullable
+              as List<ActiveCodeEntity>,
+    ));
+  }
 }
 
 /// @nodoc
 
 class _$ActivationCodeSettingStateSuccess
     implements ActivationCodeSettingStateSuccess {
-  const _$ActivationCodeSettingStateSuccess();
+  const _$ActivationCodeSettingStateSuccess(final List<ActiveCodeEntity> list)
+      : _list = list;
+
+  final List<ActiveCodeEntity> _list;
+  @override
+  List<ActiveCodeEntity> get list {
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_list);
+  }
 
   @override
   String toString() {
-    return 'ActivationCodeSettingState.successful()';
+    return 'ActivationCodeSettingState.successful(list: $list)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$ActivationCodeSettingStateSuccess);
+            other is _$ActivationCodeSettingStateSuccess &&
+            const DeepCollectionEquality().equals(other._list, _list));
   }
 
   @override
-  int get hashCode => runtimeType.hashCode;
+  int get hashCode =>
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(_list));
+
+  @JsonKey(ignore: true)
+  @override
+  _$$ActivationCodeSettingStateSuccessCopyWith<
+          _$ActivationCodeSettingStateSuccess>
+      get copyWith => __$$ActivationCodeSettingStateSuccessCopyWithImpl<
+          _$ActivationCodeSettingStateSuccess>(this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() process,
-    required TResult Function() successful,
+    required TResult Function(List<ActiveCodeEntity> list) successful,
     required TResult Function(String message) error,
   }) {
-    return successful();
+    return successful(list);
   }
 
   @override
@@ -395,10 +425,10 @@ class _$ActivationCodeSettingStateSuccess
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? process,
-    TResult Function()? successful,
+    TResult Function(List<ActiveCodeEntity> list)? successful,
     TResult Function(String message)? error,
   }) {
-    return successful?.call();
+    return successful?.call(list);
   }
 
   @override
@@ -406,12 +436,12 @@ class _$ActivationCodeSettingStateSuccess
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? process,
-    TResult Function()? successful,
+    TResult Function(List<ActiveCodeEntity> list)? successful,
     TResult Function(String message)? error,
     required TResult orElse(),
   }) {
     if (successful != null) {
-      return successful();
+      return successful(list);
     }
     return orElse();
   }
@@ -457,8 +487,14 @@ class _$ActivationCodeSettingStateSuccess
 
 abstract class ActivationCodeSettingStateSuccess
     implements ActivationCodeSettingState {
-  const factory ActivationCodeSettingStateSuccess() =
-      _$ActivationCodeSettingStateSuccess;
+  const factory ActivationCodeSettingStateSuccess(
+      final List<ActiveCodeEntity> list) = _$ActivationCodeSettingStateSuccess;
+
+  List<ActiveCodeEntity> get list => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  _$$ActivationCodeSettingStateSuccessCopyWith<
+          _$ActivationCodeSettingStateSuccess>
+      get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -533,7 +569,7 @@ class _$ActivationCodeSettingStateError
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() process,
-    required TResult Function() successful,
+    required TResult Function(List<ActiveCodeEntity> list) successful,
     required TResult Function(String message) error,
   }) {
     return error(message);
@@ -544,7 +580,7 @@ class _$ActivationCodeSettingStateError
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? process,
-    TResult Function()? successful,
+    TResult Function(List<ActiveCodeEntity> list)? successful,
     TResult Function(String message)? error,
   }) {
     return error?.call(message);
@@ -555,7 +591,7 @@ class _$ActivationCodeSettingStateError
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? process,
-    TResult Function()? successful,
+    TResult Function(List<ActiveCodeEntity> list)? successful,
     TResult Function(String message)? error,
     required TResult orElse(),
   }) {
