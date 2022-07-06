@@ -162,7 +162,7 @@ class _AccountLoginState extends State<AccountLoginWidget> {
             SFTextButton(
               text: _isActiveCode
                   ? LocaleKeys.account_login
-                  : LocaleKeys.verification_login,
+                  : LocaleKeys.signup,
               textStyle: TextStyles.blue14,
               onPressed: () {
                 cubit.init();
