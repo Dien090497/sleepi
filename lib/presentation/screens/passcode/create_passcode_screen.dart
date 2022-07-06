@@ -35,7 +35,7 @@ class CreatePasscodeScreen extends StatelessWidget {
       child: BlocConsumer<PasscodeCubit, PasscodeState>(
         listener: (context, state) {
           if (state is createPassCodeDone) {
-            if (args != null  && args.route != null) {
+            if (args != null && args.route != null) {
               Navigator.pushNamed(context, args.route!).then((results) {
                 Navigator.pop(context, results);
               });
@@ -43,10 +43,15 @@ class CreatePasscodeScreen extends StatelessWidget {
               Navigator.pushNamed(context, R.confirmPasscode,
                       arguments: ConfirmCreatePasscodeArguments(state.passcode))
                   .then((confirmSuccess) {
-                    if (confirmSuccess == true) {
-                      Navigator.pop(context, confirmSuccess);
-                      args?.isShowSuccessDialog == true ? showSuccessfulDialog(context, LocaleKeys.reset_passcode_successfully) : null;
-                    }
+                if (confirmSuccess == true) {
+                  Navigator.pop(context, confirmSuccess);
+                  args?.isShowSuccessDialog == true
+                      ? showSuccessfulDialog(
+                          context, LocaleKeys.reset_passcode_successfully,
+                          padding: const EdgeInsets.all(10),
+                          style: TextStyles.bold14White)
+                      : null;
+                }
               });
             }
           }
