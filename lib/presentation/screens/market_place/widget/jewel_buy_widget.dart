@@ -56,7 +56,7 @@ class JewelsBuyWidget extends StatelessWidget {
                     const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
                     alignment: Alignment.center,
                     child: SFText(
-                      keyText: jewel.tokenId.toString(),
+                      keyText: jewel.nftId.toString(),
                       style: TextStyles.white1w700size12,
                     ),
                   ),

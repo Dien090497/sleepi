@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
+import 'package:slee_fi/presentation/blocs/market_place/market_place_cubit.dart';
 import 'package:slee_fi/presentation/screens/market_place/widget/filter_sheet.dart';
 
 Future<T?> showFilterModalBottomSheet<T>(BuildContext context,
     {required Map<String, FilterSliderValues> sliders,
-    required Map<String, List<String>> sections}) {
+    required Map<String, List<String>> sections, MarketPlaceCubit? cubit}) {
   return showModalBottomSheet(
     context: context,
     backgroundColor: AppColors.lightDark,
@@ -13,7 +14,7 @@ Future<T?> showFilterModalBottomSheet<T>(BuildContext context,
     isScrollControlled: true,
     shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.vertical(top: Radius.circular(40))),
-    builder: (_) => FilterSheet(sections: sections, sliders: sliders),
+    builder: (_) => FilterSheet(sections: sections, sliders: sliders, cubit:cubit!,),
     barrierColor: AppColors.dark.withOpacity(0.8),
   );
 }

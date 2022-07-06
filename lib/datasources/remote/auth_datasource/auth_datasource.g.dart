@@ -119,6 +119,22 @@ class _AuthDataSource implements AuthDataSource {
   }
 
   @override
+  Future<ActiveCodeResponse> fetchActivationCodes() async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<ActiveCodeResponse>(
+            Options(method: 'GET', headers: _headers, extra: _extra)
+                .compose(_dio.options, '/users/active-code',
+                    queryParameters: queryParameters, data: _data)
+                .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = ActiveCodeResponse.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
   Future<UserResponse> verifyUser(verifyUserSchema) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
@@ -316,9 +332,18 @@ class _AuthDataSource implements AuthDataSource {
   }
 
   @override
-  Future<ListMarketPlaceModel> getMarketPlace(categoryId) async {
+  Future<ListMarketPlaceModel> getMarketPlace(
+      categoryId, sortPrice, type, level, classNft, quality) async {
     const _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{r'categoryId': categoryId};
+    final queryParameters = <String, dynamic>{
+      r'categoryId': categoryId,
+      r'sortPrice': sortPrice,
+      r'type': type,
+      r'level': level,
+      r'classNft': classNft,
+      r'quality': quality
+    };
+    queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
     final _result = await _dio.fetch<Map<String, dynamic>>(

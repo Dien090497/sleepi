@@ -66,16 +66,7 @@ class WalletDetailList extends StatelessWidget {
                     horizontal: 24.0, vertical: 12.0),
                 itemBuilder: (BuildContext context, int index) {
                   return SFCard(
-                    onTap: () {
-                      if (index < 3) {
-                        Navigator.pushNamed(context, R.transactionDetail,
-                            arguments: TransactionDetailArguments(
-                              img: icons[index],
-                              title: keyList[index],
-                              tokenEntity: tokenList[index],
-                            ));
-                      }
-                    },
+                    onTap: () {},
                     child: ListTile(
                       leading: Padding(
                         padding: EdgeInsets.only(

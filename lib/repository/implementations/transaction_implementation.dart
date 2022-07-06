@@ -25,9 +25,9 @@ class TransactionImplementation extends ITransactionRepository{
     return (await _isarDataSource.getNetworkAt(chainId!))!;
   }
 
-  Future<TransactionInformation> _getDetailTransaction(String transactionHash) async {
-    return await _web3DataSource.getDetailTransaction(transactionHash);
-  }
+  // Future<TransactionInformation> _getDetailTransaction(String transactionHash) async {
+  //   return await _web3DataSource.getDetailTransaction(transactionHash);
+  // }
 
   @override
   Future<Either<Failure, String>> sendToExternal(SendToExternalParams params) async{
@@ -51,13 +51,13 @@ class TransactionImplementation extends ITransactionRepository{
           valueInEther: params.valueInEther ?? 0.0,
           chainId: chainId);
 
-      print('---------------------');
-      print(result);
-      print('---------------------');
+      // print('---------------------');
+      // print(result);
+      // print('---------------------');
 
-      var detail = await _getDetailTransaction("0xfafa1011bbe16f103daba35bfa291ab11dec89085f406d13a877a934d5c06c7d");
-      print('+++++++++++++++++++++');
-      print( detail);
+      // var detail = await _getDetailTransaction("0xfafa1011bbe16f103daba35bfa291ab11dec89085f406d13a877a934d5c06c7d");
+      // print('+++++++++++++++++++++');
+      // print( detail);
       // final model = TransactionIsarModel(
       //   toAddress: params.toAddress,
       //   valueInEther: params.valueInEther,

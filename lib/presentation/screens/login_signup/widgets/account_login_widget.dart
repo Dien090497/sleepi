@@ -18,6 +18,7 @@ import 'package:slee_fi/presentation/blocs/sign_in_sign_up/sign_up_cubit.dart';
 import 'package:slee_fi/presentation/blocs/sign_in_sign_up/sign_up_state.dart';
 import 'package:slee_fi/presentation/screens/create_password/create_password_screen.dart';
 import 'package:slee_fi/presentation/screens/enter_activation_code/enter_activation_code_screen.dart';
+import 'package:slee_fi/presentation/screens/setting_permission/widgets/healthcare_screen.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 enum Action { signUp, signIn, forgotPassword }
@@ -88,7 +89,8 @@ class _AccountLoginState extends State<AccountLoginWidget> {
                 context, R.bottomNavigation, (_) => false);
           } else {
             Navigator.pushNamedAndRemoveUntil(
-                context, R.micPermission, (_) => false,);
+                context, R.healthcarePermission, (_) => false,
+                arguments: HealthcareArg(true));
           }
         } else if (state is SignInSignUpStateVerifySuccess) {
           Navigator.pushNamed(context, R.createPassword,
@@ -144,7 +146,10 @@ class _AccountLoginState extends State<AccountLoginWidget> {
                   : SFTextButton(
                       text: "${LocaleKeys.forgot_password.tr()}?",
                       textStyle: TextStyles.white1w400size12,
-                      onPressed: () => _changeState(Action.forgotPassword),
+                      onPressed: () {
+                        _changeState(Action.forgotPassword);
+                        cubit.init();
+                      },
                     ),
             ),
             // SizedBox(height: isLoginSignup ? 24 : 8),
@@ -160,13 +165,13 @@ class _AccountLoginState extends State<AccountLoginWidget> {
             ),
             const SizedBox(height: 16),
             SFTextButton(
-              text: _isActiveCode
-                  ? LocaleKeys.account_login
-                  : LocaleKeys.verification_login,
+              text:
+                  _isActiveCode ? LocaleKeys.account_login : LocaleKeys.signup,
               textStyle: TextStyles.blue14,
               onPressed: () {
-                cubit.init();
-                _changeState(_isActiveCode ? Action.signIn : Action.signUp);
+                _checkChangePasswordSuccess(true);
+                // cubit.init();
+                // _changeState(_isActiveCode ? Action.signIn : Action.signUp);
               },
             ),
             const SizedBox(height: 16),

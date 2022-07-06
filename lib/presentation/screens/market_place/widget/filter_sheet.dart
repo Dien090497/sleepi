@@ -5,54 +5,23 @@ import 'package:slee_fi/common/style/text_styles.dart';
 import 'package:slee_fi/common/widgets/sf_buttons.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
 import 'package:slee_fi/l10n/locale_keys.g.dart';
+import 'package:slee_fi/presentation/blocs/market_place/market_place_cubit.dart';
 import 'package:syncfusion_flutter_core/theme.dart';
 import 'package:syncfusion_flutter_sliders/sliders.dart';
 
 class FilterSheet extends StatefulWidget {
-  const FilterSheet({Key? key, required this.sections, required this.sliders})
+  const FilterSheet({Key? key, required this.sections, required this.sliders, required this.cubit})
       : super(key: key);
 
   final Map<String, FilterSliderValues> sliders;
   final Map<String, List<String>> sections;
+  final MarketPlaceCubit cubit;
 
   @override
   State<FilterSheet> createState() => _FilterSheetState();
 }
 
 class _FilterSheetState extends State<FilterSheet> {
-  double level = 5;
-  double mint = 5;
-  final List<String> filterJewels = [
-    LocaleKeys.efficiency,
-    LocaleKeys.luck,
-    LocaleKeys.resilience,
-    LocaleKeys.special,
-    LocaleKeys.bonus,
-  ];
-  final List<String> filterItems = [
-    LocaleKeys.efficiency,
-    LocaleKeys.luck,
-    LocaleKeys.resilience,
-    LocaleKeys.special,
-  ];
-  final List<String> filterBedType = [
-    LocaleKeys.beds,
-    LocaleKeys.bed_box,
-  ];
-
-  final List<String> filterBedClass = [
-    LocaleKeys.short_bed,
-    LocaleKeys.middle_bed,
-    LocaleKeys.long_bed,
-    LocaleKeys.flexible_bed,
-  ];
-  final List<String> filterBedQuality = [
-    LocaleKeys.common_bed,
-    LocaleKeys.uncommon_bed,
-    LocaleKeys.rare_bed,
-    LocaleKeys.epic_bed,
-    LocaleKeys.legendary_bed,
-  ];
 
   List<String> listSelected = [];
 
@@ -121,6 +90,7 @@ class _FilterSheetState extends State<FilterSheet> {
             gradient: AppColors.gradientBlueButton,
             onPressed: () {
               Navigator.pop(context);
+              // widget.cubit.selectPrice(price);
             },
           ),
         ),

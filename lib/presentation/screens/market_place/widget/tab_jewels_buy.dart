@@ -38,11 +38,10 @@ class TabJewelsBuy extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     List<MarketPlaceModel> listJewels = [];
-
     return DefaultTabController(
       length: 2,
       child: BlocProvider(
-        create: (context) => MarketPlaceCubit()..init(3),
+        create: (context) => MarketPlaceCubit()..init(2),
         child: BlocConsumer<MarketPlaceCubit, MarketPlaceState>(
           listener: (context, state) {
             if (state is MarketPlaceStateSuccess) {
@@ -54,9 +53,11 @@ class TabJewelsBuy extends StatelessWidget {
             return Column(
               children: [
                 TabBarFilter(
+                  cubit: cubit,
                   tabTexts: const [LocaleKeys.buy, LocaleKeys.rent],
                   onFilterTap: () {
                     showFilterModalBottomSheet(
+                      cubit: cubit,
                       context,
                       sections: {
                         LocaleKeys.type: [
@@ -92,7 +93,7 @@ class TabJewelsBuy extends StatelessWidget {
                                       count: listJewels.length,
                                       childAspectRatio: 8 / 10,
                                       onRefresh: (){
-                                        cubit.refresh(2);
+                                        cubit.refresh();
                                       },
                                       itemBuilder: (context, i) {
                                         return GestureDetector(

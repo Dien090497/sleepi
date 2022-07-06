@@ -20,10 +20,10 @@ class MicPermissionScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final arg = ModalRoute
-        .of(context)
-        ?.settings
-        .arguments as MicArg?;
+    // final arg = ModalRoute
+    //     .of(context)
+    //     ?.settings
+    //     .arguments as MicArg?;
     return BackgroundWidget(
         child: SafeArea(
             child: Stack(children: [
