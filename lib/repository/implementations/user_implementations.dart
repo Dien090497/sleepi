@@ -1,7 +1,7 @@
 import 'package:dartz/dartz.dart';
 import 'package:injectable/injectable.dart';
-import 'package:slee_fi/common/extensions/string_x.dart';
 import 'package:slee_fi/datasources/remote/auth_datasource/auth_datasource.dart';
+import 'package:slee_fi/entities/active_code/active_code_entity.dart';
 import 'package:slee_fi/failures/failure.dart';
 import 'package:slee_fi/repository/user_repository.dart';
 import 'package:slee_fi/schema/change_password_schema/change_password_schema.dart';
@@ -24,13 +24,12 @@ class UserImplementation extends IUserRepository {
   }
 
   @override
-  Future<Either<FailureMessage, dynamic>> fetchActivationCodes() async {
+  Future<Either<FailureMessage, List<ActiveCodeEntity>>>
+      fetchActivationCodes() async {
     try {
       var result = await _authDataSource.fetchActivationCodes();
-      'on  fetchActivationCodes $result'.log;
-      return Right(result);
+      return Right(result.data.map((e) => e.toEntity()).toList());
     } on Exception catch (e) {
-      'on  fetchActivationCodes $e'.log;
       return Left(FailureMessage.fromException(e));
     }
   }

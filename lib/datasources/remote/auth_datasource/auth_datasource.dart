@@ -6,6 +6,7 @@ import 'package:slee_fi/common/const/const.dart';
 import 'package:slee_fi/common/enum/enum.dart';
 import 'package:slee_fi/datasources/remote/auth_datasource/auth_interceptor.dart';
 import 'package:slee_fi/models/activation_code_response/activation_code_response.dart';
+import 'package:slee_fi/models/active_code_response/active_code_response.dart';
 import 'package:slee_fi/models/create_password_reponse/create_password_response.dart';
 import 'package:slee_fi/models/global_config_response/global_config_response.dart';
 import 'package:slee_fi/models/list_market_place/list_market_place_model.dart';
@@ -60,7 +61,7 @@ abstract class AuthDataSource {
   Future<dynamic> verifyOTP(@Body() VerifyOTPSchema verifySchema);
 
   @GET('/users/active-code')
-  Future<dynamic> fetchActivationCodes();
+  Future<ActiveCodeResponse> fetchActivationCodes();
 
   @POST('/users/verify')
   Future<UserResponse> verifyUser(@Body() VerifyUserSchema verifyUserSchema);

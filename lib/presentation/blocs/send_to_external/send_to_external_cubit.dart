@@ -31,7 +31,7 @@ class SendToExternalCubit extends Cubit<SendToExternalState> {
     result.fold((l) {
       emit(SendToExternalState.fail(l is FailureMessage ? l.msg : '$l'));
     }, (success)  {
-      print(success);
+      // print(success);
       emit(const SendToExternalState.success());
     });
   }
