@@ -4,6 +4,7 @@ import 'package:injectable/injectable.dart';
 import 'package:retrofit/retrofit.dart';
 import 'package:slee_fi/common/const/const.dart';
 import 'package:slee_fi/common/enum/enum.dart';
+import 'package:slee_fi/datasources/remote/auth_datasource/auth_interceptor.dart';
 import 'package:slee_fi/models/activation_code_response/activation_code_response.dart';
 import 'package:slee_fi/models/create_password_reponse/create_password_response.dart';
 import 'package:slee_fi/models/global_config_response/global_config_response.dart';
@@ -31,8 +32,8 @@ part 'auth_datasource.g.dart';
 @RestApi(baseUrl: kDebugMode ? Const.baseApiDev : Const.baseApiDev)
 abstract class AuthDataSource {
   @factoryMethod
-  factory AuthDataSource(Dio dio) {
-    // dio.interceptors.add(authInterceptor);
+  factory AuthDataSource(Dio dio, AuthInterceptor authInterceptor) {
+    dio.interceptors.add(authInterceptor);
     // dio.interceptors.add(getIt<RefreshTokenInterceptor>(param1: dio));
     return _AuthDataSource(dio);
   }
