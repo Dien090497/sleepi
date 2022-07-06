@@ -20,9 +20,7 @@ abstract class NftApi {
 
   @GET('/nft')
   Future<ListNftDataModel> getListNft({
-  @Query('page')  int? page,
-  @Query('limit')  int? limit,
-  @Query('tokenIds')  required String tokenIds,
-  @Query('nftType')  required NftType nftType,
+    @Query('tokenIds') required String tokenIds,
+    @Query('nftType') required NftType nftType,
   });
 }

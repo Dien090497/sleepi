@@ -20,10 +20,11 @@ class NftDetailCubit extends Cubit<NftDetailState> {
         address: currentState.tokenEntity.address,
         ownerAddress: currentState.walletInfoEntity.address,
         count: 30,
-        nftType: NftType.beds,
+        nftType: NftType.bed,
       ));
       result.fold(
         (l) {
+          print('### $l');
           emit(NftDetailState.error('$l'));
           emit(currentState);
         },
@@ -46,7 +47,7 @@ class NftDetailCubit extends Cubit<NftDetailState> {
         address: currentState.tokenEntity.address,
         ownerAddress: currentState.walletInfoEntity.address,
         count: 30,
-        nftType: NftType.beds,
+        nftType: NftType.bed,
       ));
       result.fold(
         (l) {
@@ -72,7 +73,7 @@ class NftDetailCubit extends Cubit<NftDetailState> {
         address: currentState.tokenEntity.address,
         ownerAddress: currentState.walletInfoEntity.address,
         count: 30,
-        nftType: NftType.beds,
+        nftType: NftType.bed,
         start: currentState.nftEntities.length,
       ));
       result.fold(

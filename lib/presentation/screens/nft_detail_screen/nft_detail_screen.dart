@@ -7,8 +7,10 @@ import 'package:slee_fi/common/routes/app_routes.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
 import 'package:slee_fi/common/widgets/background_widget.dart';
+import 'package:slee_fi/common/widgets/loading_screen.dart';
 import 'package:slee_fi/common/widgets/sf_back_button.dart';
 import 'package:slee_fi/common/widgets/sf_bottom_sheet.dart';
+import 'package:slee_fi/common/widgets/sf_dialog.dart';
 import 'package:slee_fi/common/widgets/sf_gridview.dart';
 import 'package:slee_fi/common/widgets/sf_icon.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
@@ -18,6 +20,7 @@ import 'package:slee_fi/presentation/blocs/nft_detail/nft_detail_cubit.dart';
 import 'package:slee_fi/presentation/blocs/nft_detail/nft_detail_state.dart';
 import 'package:slee_fi/presentation/blocs/wallet/wallet_cubit.dart';
 import 'package:slee_fi/presentation/blocs/wallet/wallet_state.dart';
+import 'package:slee_fi/presentation/screens/home/widgets/pop_up_transfer.dart';
 import 'package:slee_fi/presentation/screens/passcode/passcode_screen.dart';
 import 'package:slee_fi/presentation/screens/product_detail/widgets/my_bed_short_widget.dart';
 import 'package:slee_fi/presentation/screens/send_to_external/send_to_external_screen.dart';
@@ -34,6 +37,22 @@ class NFTDetailArguments {
 
 class NFTDetailScreen extends StatelessWidget {
   const NFTDetailScreen({Key? key}) : super(key: key);
+
+  void _showTransferDialog(BuildContext context) {
+    showCustomDialog(
+      context,
+      children: [
+        PopUpTransfer(
+          onConfirm: () {},
+          onCancel: () {
+            Navigator.pop(context);
+          },
+          valueTransfer: 1,
+          fee: 1,
+        )
+      ],
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -116,17 +135,6 @@ class NFTDetailScreen extends StatelessWidget {
                           Expanded(
                             child: BoxButtonWidget(
                               onTap: () {
-                                Navigator.pushNamed(context, R.transfer,
-                                    arguments: token);
-                              },
-                              text: LocaleKeys.to_spending,
-                              assetImage: Ics.icRefresh,
-                            ),
-                          ),
-                          const SizedBox(width: 10),
-                          Expanded(
-                            child: BoxButtonWidget(
-                              onTap: () {
                                 Navigator.pushNamed(
                                   context,
                                   R.sendToExternal,
@@ -137,8 +145,19 @@ class NFTDetailScreen extends StatelessWidget {
                                   ),
                                 );
                               },
-                              text: LocaleKeys.to_external,
+                              text: LocaleKeys.transfer,
                               assetImage: Ics.icArrowUpRight,
+                            ),
+                          ),
+                          const SizedBox(width: 10),
+                          Expanded(
+                            child: BoxButtonWidget(
+                              onTap: () {
+                                Navigator.pushNamed(context, R.transfer,
+                                    arguments: token);
+                              },
+                              text: LocaleKeys.to_spending,
+                              assetImage: Ics.icRefresh,
                             ),
                           ),
                         ],
@@ -146,16 +165,19 @@ class NFTDetailScreen extends StatelessWidget {
                     ),
                     const SizedBox(height: 32.0),
                     if (state is NftDetailLoaded)
-                      SFGridView(
-                        isScroll: false,
-                        physics: const NeverScrollableScrollPhysics(),
-                        itemBuilder: (context, i) {
-                          return MyBedShortWidget(
-                            bedType: BedType.flexible,
-                            bedId: state.nftEntities[i].id,
-                          );
-                        },
-                        count: state.nftEntities.length,
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 8),
+                        child: SFGridView(
+                          isScroll: false,
+                          physics: const NeverScrollableScrollPhysics(),
+                          itemBuilder: (context, i) {
+                            return MyBedShortWidget(
+                              bedType: BedType.flexible,
+                              bedId: state.nftEntities[i].id,
+                            );
+                          },
+                          count: state.nftEntities.length,
+                        ),
                       ),
                   ];
 
@@ -188,7 +210,7 @@ class NFTDetailScreen extends StatelessWidget {
             ),
           );
         }
-        return const SizedBox();
+        return const LoadingScreen();
       },
     );
   }

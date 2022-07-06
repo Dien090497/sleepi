@@ -18,6 +18,6 @@ void main() {
   test('NFT api', () async {
     final NftApi nftApi = NftApi(Dio(BaseOptions(baseUrl: Const.baseApiDev)));
     final res =
-        await nftApi.getListNft(tokenIds: '11,12,13', nftType: NftType.beds);
+        await nftApi.getListNft(tokenIds: '11,12,13', nftType: NftType.bed);
   });
 }

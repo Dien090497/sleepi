@@ -1,5 +1,6 @@
 import 'package:injectable/injectable.dart';
 import 'package:slee_fi/common/abi/nft.g.dart';
+import 'package:slee_fi/common/abi/spending.g.dart';
 import 'package:slee_fi/datasources/remote/network/web3_provider.dart';
 import 'package:web3dart/web3dart.dart';
 
@@ -53,5 +54,21 @@ class NFTDataSource {
 
   Nft _nft(String address) => Nft(
       address: EthereumAddress.fromHex(address),
+      client: _web3provider.web3client);
+
+  Future<String> deposit({
+    required String spendingAddress,
+    required String nftAddress,
+    required BigInt amount,
+    required BigInt userId,
+    required Credentials credentials,
+  }) {
+    return _spending(spendingAddress).depositToken(
+        EthereumAddress.fromHex(nftAddress), amount, userId,
+        credentials: credentials);
+  }
+
+  Spending _spending(String spendingAddress) => Spending(
+      address: EthereumAddress.fromHex(spendingAddress),
       client: _web3provider.web3client);
 }

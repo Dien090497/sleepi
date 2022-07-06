@@ -44,13 +44,9 @@ class NFTImplementation extends INFTRepository {
   Future<Either<Failure, List<NFTEntity>>> getListNftData({
     required List<BigInt> tokenIds,
     required NftType nftType,
-    int? page,
-    int? limit,
   }) async {
     try {
       final listModel = await _nftApi.getListNft(
-        page: page,
-        limit: limit,
         nftType: nftType,
         tokenIds: List.generate(5, (i) => i)
             .join(','), // TODO: Remove when real data is ready
@@ -106,6 +102,27 @@ class NFTImplementation extends INFTRepository {
         from: ownerAddress,
         to: toAddress,
         tokenId: tokenId,
+        credentials: credentials,
+      ));
+    } catch (e) {
+      return Left(FailureMessage('$e'));
+    }
+  }
+
+  @override
+  Future<Either<Failure, String>> deposit({
+    required String spendingAddress,
+    required String nftAddress,
+    required BigInt amount,
+    required int userId,
+    required Credentials credentials,
+  }) async {
+    try {
+      return Right(await _nftDataSource.deposit(
+        userId: BigInt.from(userId),
+        amount: amount,
+        nftAddress: nftAddress,
+        spendingAddress: spendingAddress,
         credentials: credentials,
       ));
     } catch (e) {
