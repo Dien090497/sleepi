@@ -30,6 +30,7 @@ class MarketPlaceModel {
   final int special;
   final int resilience;
   final String price;
+  final String symbol;
   final String status;
   @JsonKey(name: 'created_at')
   final String createdAt;
@@ -51,7 +52,7 @@ class MarketPlaceModel {
 
   MarketPlaceModel(this.id, this.nftId, this.categoryId, this.isLock, this.tokenId, this.time, this.level, this.bedMint,
       this.efficiency, this.luck, this.bonus, this.special, this.resilience, this.price, this.status, this.createdAt,
-      this.updatedAt, this.nftName, this.image, this.contractAddress, this.type, this.quality, this.owner);
+      this.updatedAt, this.nftName, this.image, this.contractAddress, this.type, this.quality, this.owner, this.symbol);
 
   factory MarketPlaceModel.fromJson(Map<String, dynamic> json) =>
       _$MarketPlaceModelFromJson(json);

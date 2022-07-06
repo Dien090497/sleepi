@@ -7,6 +7,8 @@ part 'market_place_state.freezed.dart';
 class MarketPlaceState with _$MarketPlaceState {
   const factory MarketPlaceState.initial() = MarketPlaceStateInit;
 
+  const factory MarketPlaceState.loading() = MarketPlaceStateLoading;
+
   const factory MarketPlaceState.success(ListMarketPlaceModel list) = MarketPlaceStateSuccess;
 
   const factory MarketPlaceState.fail(String msg) = MarketPlaceStateFailed;

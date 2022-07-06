@@ -31,6 +31,7 @@ MarketPlaceModel _$MarketPlaceModelFromJson(Map<String, dynamic> json) =>
       json['type'] as String,
       json['quality'] as String,
       json['owner'] as String,
+      json['symbol'] as String,
     );
 
 Map<String, dynamic> _$MarketPlaceModelToJson(MarketPlaceModel instance) =>
@@ -49,6 +50,7 @@ Map<String, dynamic> _$MarketPlaceModelToJson(MarketPlaceModel instance) =>
       'special': instance.special,
       'resilience': instance.resilience,
       'price': instance.price,
+      'symbol': instance.symbol,
       'status': instance.status,
       'created_at': instance.createdAt,
       'updated_at': instance.updatedAt,

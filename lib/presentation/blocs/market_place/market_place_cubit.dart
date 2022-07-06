@@ -5,22 +5,24 @@ import 'package:slee_fi/failures/failure.dart';
 import 'package:slee_fi/usecase/get_market_place_usecase.dart';
 import 'market_place_state.dart';
 
-
 class MarketPlaceCubit extends Cubit<MarketPlaceState> {
   MarketPlaceCubit() : super(const MarketPlaceState.initial());
 
   final MarketPlaceUseCase _marketPlaceUseCase = getIt<MarketPlaceUseCase>();
 
-  init() {
-    emit(const MarketPlaceState.initial());
+  init(int idCategory) {
+    emit(const MarketPlaceState.loading());
+    getMarketPlace(idCategory);
+  }
+  refresh(int idCategory){
+    getMarketPlace(idCategory);
   }
 
-  Future<void> getMarketPlace() async {
-    final result = await _marketPlaceUseCase.call(1);
-
+  Future<void> getMarketPlace(int idCategory) async {
+    final result = await _marketPlaceUseCase.call(idCategory);
     result.fold((l) {
       emit(MarketPlaceState.fail(l is FailureMessage ? l.msg : '$l'));
-    }, (success)  {
+    }, (success) {
       debugPrint("success : ${success.list[1].special}");
       emit(MarketPlaceState.success(success));
     });

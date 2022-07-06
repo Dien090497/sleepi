@@ -1,5 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:slee_fi/common/enum/enum.dart';
 import 'package:slee_fi/common/extensions/num_ext.dart';
@@ -9,7 +10,6 @@ import 'package:slee_fi/common/widgets/sf_alert_dialog.dart';
 import 'package:slee_fi/common/widgets/sf_buttons.dart';
 import 'package:slee_fi/common/widgets/sf_dialog.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
-import 'package:slee_fi/common/widgets/sf_textfield.dart';
 import 'package:slee_fi/common/widgets/sf_textfield_text_button.dart';
 import 'package:slee_fi/common/widgets/snack_bar.dart';
 import 'package:slee_fi/entities/token/token_entity.dart';
@@ -110,8 +110,9 @@ class _TransferListState extends State<TransferList> {
                         textInputType: const TextInputType.numberWithOptions(
                             decimal: true),
                         inputFormatters: [
-                          DecimalTextInputFormatter(
-                              decimalRange: 6)
+                          FilteringTextInputFormatter
+                              .allow(RegExp(
+                              r'^\d{1,}[.,]?\d{0,6}')),
                         ],
                         controller: controller,
                         onPressed: () {

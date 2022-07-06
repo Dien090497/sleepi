@@ -4,28 +4,18 @@ import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
 import 'package:slee_fi/common/widgets/sf_buttons.dart';
 import 'package:slee_fi/common/widgets/sf_card.dart';
-import 'package:slee_fi/common/widgets/sf_icon.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
 import 'package:slee_fi/l10n/locale_keys.g.dart';
+import 'package:slee_fi/models/market_place/market_place_model.dart';
 
 class PopUpJewelMarketPlace extends StatelessWidget {
   const PopUpJewelMarketPlace(
       {Key? key,
-      required this.icon,
-      required this.name,
-      required this.level,
-      required this.id,
-      required this.attribute,
-      required this.effect,
+      required this.jewel,
       required this.onConfirmTap})
       : super(key: key);
 
-  final String icon;
-  final String name;
-  final String level;
-  final String id;
-  final String attribute;
-  final String effect;
+  final MarketPlaceModel jewel;
   final VoidCallback onConfirmTap;
 
   @override
@@ -45,14 +35,16 @@ class PopUpJewelMarketPlace extends StatelessWidget {
           ),
           alignment: Alignment.center,
           padding: const EdgeInsets.all(8),
-          child: SFIcon(
-            icon,
-            height: 80,
+          child: Image.network(
+            jewel.image,
+            width: 60,
+            height: 60,
+            fit: BoxFit.cover,
           ),
         ),
         const SizedBox(height: 20),
         SFText(
-          keyText: '${LocaleKeys.luck_jewel.tr()} ($level)',
+          keyText: '${LocaleKeys.luck_jewel.tr()} (${jewel.luck})',
           style: TextStyles.white1w700size16,
         ),
         const SizedBox(height: 24),
@@ -63,7 +55,7 @@ class PopUpJewelMarketPlace extends StatelessWidget {
           ),
           padding: const EdgeInsets.all(8),
           child: SFText(
-            keyText: id,
+            keyText: jewel.tokenId.toString(),
             style: TextStyles.blue14,
           ),
         ),
@@ -81,7 +73,7 @@ class PopUpJewelMarketPlace extends StatelessWidget {
               const SizedBox(width: 4),
               Expanded(
                 child: SFText(
-                  keyText: '+2 Luck',
+                  keyText: '+${jewel.luck} ${LocaleKeys.luck.tr()}',
                   style: TextStyles.blue16,
                   textAlign: TextAlign.right,
                 ),
@@ -103,7 +95,7 @@ class PopUpJewelMarketPlace extends StatelessWidget {
               const SizedBox(width: 4),
               Expanded(
                 child: SFText(
-                  keyText: '+5% Base Luck',
+                  keyText: '+${jewel.efficiency}% ${LocaleKeys.base.tr()} ${LocaleKeys.luck.tr()}'.tr(),
                   style: TextStyles.blue16,
                   textAlign: TextAlign.right,
                 ),
@@ -125,7 +117,7 @@ class PopUpJewelMarketPlace extends StatelessWidget {
               const SizedBox(width: 4),
               Expanded(
                 child: SFText(
-                  keyText: '0.14 AVAX',
+                  keyText: '${jewel.price} ${jewel.symbol}',
                   style: TextStyles.bold16LightWhite,
                   textAlign: TextAlign.right,
                 ),

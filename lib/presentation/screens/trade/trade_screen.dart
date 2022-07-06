@@ -3,6 +3,7 @@ import 'dart:developer';
 
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:slee_fi/common/const/const.dart';
 import 'package:slee_fi/common/extensions/num_ext.dart';
@@ -265,8 +266,9 @@ class _TradeScreenState extends State<TradeScreen> {
                                                 showLabel: false,
                                                 noBorder: true,
                                                 inputFormatters: [
-                                                  DecimalTextInputFormatter(
-                                                      decimalRange: 6)
+                                                  FilteringTextInputFormatter
+                                                      .allow(RegExp(
+                                                      r'^\d{1,}[.,]?\d{0,6}')),
                                                 ],
                                                 textInputType:
                                                     const TextInputType
@@ -480,9 +482,9 @@ class _TradeScreenState extends State<TradeScreen> {
                                             () => firstToken.currentState
                                                 ?.changeSelectedItem(),
                                           );
-                                          final result = valueController
-                                              .toString()
-                                              .replaceAll(',', '.');
+                                          final result = valueController.text.toString().contains(',')
+                                              ? valueController.text.toString().replaceAll(',', '.')
+                                              : valueController.text.toString();
 
                                           cubit.getAmountOutMin(
                                               Const.tokens[indexFrom]['address']

@@ -33,7 +33,7 @@ class SFSubTabBar extends TabBar {
           ),
           // indicatorWeight: 5,
           // indicatorColor: AppColors.blue,
-          padding: padding ?? EdgeInsets.zero,
+          padding: padding ?? const EdgeInsets.symmetric(horizontal: 8),
           labelPadding: labelPadding ?? EdgeInsets.zero,
           key: key,
         );
