@@ -83,4 +83,24 @@ class CreatePasswordCubit extends Cubit<CreatePasswordState> {
     }
     return true;
   }
+
+  onChangePassword(String value) {
+
+    if ((state is CreatePasswordStateErrorPassword ||
+            state is CreatePasswordStateErrorCreate) &&
+        (password.isEmpty || value.isEmpty)) {
+      emit(const CreatePasswordState.initial());
+    }
+    password = value;
+  }
+
+  onChangeConfirmPassword(String value) {
+    if ((state is CreatePasswordStateErrorPassword ||
+            state is CreatePasswordStateErrorCreate) &&
+        confirmPassword.isEmpty ||  value.isEmpty) {
+      emit(const CreatePasswordState.initial());
+    }
+    confirmPassword = value;
+
+  }
 }

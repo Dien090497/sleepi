@@ -99,7 +99,6 @@ class SigInSignUpCubit extends Cubit<SignInSignUpState> {
   signUp() {
     if (!validateEmail() || _validateOTP()) {
       return;
-
     }
 
     emit(const SignInSignUpState.process());
@@ -135,13 +134,6 @@ class SigInSignUpCubit extends Cubit<SignInSignUpState> {
     return true;
   }
 
-  onPasswordChange(String password) {
-    _password = password;
-    if (password.isEmpty && state is SignInSignUpStateError) {
-      emit(const SignInSignUpState.initial());
-    }
-  }
-
   void _verifyOTP() async {
     if (!validateEmail() || _validateOTP()) {
       return;
@@ -156,5 +148,27 @@ class SigInSignUpCubit extends Cubit<SignInSignUpState> {
       (l) => emit(SignInSignUpState.error(l.msg)),
       (r) => emit(SignInSignUpState.verifyOTPSuccess(otp, email.trim())),
     );
+  }
+
+  onChangeOTP(String value) {
+    if (state is SignInSignUpStateError && (value.isEmpty || otp.isEmpty)) {
+      emit(const SignInSignUpState.initial());
+    }
+    otp = value;
+  }
+
+  onChangeEmail(String value) {
+    if (state is SignInSignUpStateErrorEmail &&
+        (value.isEmpty || email.isEmpty)) {
+      emit(const SignInSignUpState.initial());
+    }
+    email = value;
+  }
+
+  onPasswordChange(String value) {
+    if ((value.isEmpty || value.isEmpty) && state is SignInSignUpStateError) {
+      emit(const SignInSignUpState.initial());
+    }
+    _password = value;
   }
 }

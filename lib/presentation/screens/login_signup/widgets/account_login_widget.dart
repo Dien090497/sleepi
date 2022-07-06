@@ -111,7 +111,7 @@ class _AccountLoginState extends State<AccountLoginWidget> {
             const SizedBox(height: 25),
             SFTextField(
                 labelText: LocaleKeys.email_address,
-                onChanged: (email) => cubit.email = email),
+                onChanged: (email) => cubit.onChangeEmail(email)),
             const SizedBox(height: 5),
             Container(
                 alignment: Alignment.centerLeft,
@@ -128,7 +128,7 @@ class _AccountLoginState extends State<AccountLoginWidget> {
                     onPressed: () => cubit.senOtp(action),
                     errorText:
                         state is SignInSignUpStateError ? state.message : '',
-                    valueChanged: (otp) => cubit.otp = otp)
+                    valueChanged: (otp) => cubit.onChangeOTP(otp))
                 : SFTextFieldPassword(
                     labelText: LocaleKeys.password,
                     valueChanged: (password) =>

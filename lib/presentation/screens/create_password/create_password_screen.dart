@@ -84,9 +84,7 @@ class _CreatePasswordScreenState extends State<CreatePasswordScreen> {
                                       const SizedBox(height: 10),
                                       SFTextFieldPassword(
                                         labelText: LocaleKeys.new_password,
-                                        valueChanged: (value) {
-                                          cubit.password = value;
-                                        },
+                                        valueChanged: (value) => cubit.onChangePassword(value),
                                         errorText: state
                                                 is CreatePasswordStateErrorPassword
                                             ? state.message
@@ -95,9 +93,7 @@ class _CreatePasswordScreenState extends State<CreatePasswordScreen> {
                                       const SizedBox(height: 10),
                                       SFTextFieldPassword(
                                         labelText: LocaleKeys.confirm_password,
-                                        valueChanged: (value) {
-                                          cubit.confirmPassword = value;
-                                        },
+                                        valueChanged: (value)=>cubit.onChangeConfirmPassword(value),
                                         errorText: state
                                                 is CreatePasswordStateErrorConfirmPassword
                                             ? state.message
