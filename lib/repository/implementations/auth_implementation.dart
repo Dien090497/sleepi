@@ -174,7 +174,7 @@ class AuthImplementation extends IAuthRepository {
     }
   }
 
-  @override
+
   Future<Either<FailureMessage, bool>> saveUser(
       UserInfoModel userInfoModel) async {
     try {
