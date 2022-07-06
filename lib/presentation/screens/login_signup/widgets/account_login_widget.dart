@@ -172,7 +172,6 @@ class _AccountLoginState extends State<AccountLoginWidget> {
                   _isActiveCode ? LocaleKeys.account_login : LocaleKeys.signup,
               textStyle: TextStyles.blue14,
               onPressed: () {
-                // _checkChangePasswordSuccess(true);
                 cubit.init();
                 _changeState(_isActiveCode ? Action.signIn : Action.signUp);
               },
