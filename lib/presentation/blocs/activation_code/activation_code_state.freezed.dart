@@ -21,7 +21,8 @@ mixin _$ActivationCodeState {
     required TResult Function() initial,
     required TResult Function(String message) error,
     required TResult Function() process,
-    required TResult Function(String activationCode) activeSuccess,
+    required TResult Function(String activationCode, Locale localeSelected)
+        activeSuccess,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -29,7 +30,8 @@ mixin _$ActivationCodeState {
     TResult Function()? initial,
     TResult Function(String message)? error,
     TResult Function()? process,
-    TResult Function(String activationCode)? activeSuccess,
+    TResult Function(String activationCode, Locale localeSelected)?
+        activeSuccess,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -37,7 +39,8 @@ mixin _$ActivationCodeState {
     TResult Function()? initial,
     TResult Function(String message)? error,
     TResult Function()? process,
-    TResult Function(String activationCode)? activeSuccess,
+    TResult Function(String activationCode, Locale localeSelected)?
+        activeSuccess,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -132,7 +135,8 @@ class _$ActivationCodeStateInit implements ActivationCodeStateInit {
     required TResult Function() initial,
     required TResult Function(String message) error,
     required TResult Function() process,
-    required TResult Function(String activationCode) activeSuccess,
+    required TResult Function(String activationCode, Locale localeSelected)
+        activeSuccess,
   }) {
     return initial();
   }
@@ -143,7 +147,8 @@ class _$ActivationCodeStateInit implements ActivationCodeStateInit {
     TResult Function()? initial,
     TResult Function(String message)? error,
     TResult Function()? process,
-    TResult Function(String activationCode)? activeSuccess,
+    TResult Function(String activationCode, Locale localeSelected)?
+        activeSuccess,
   }) {
     return initial?.call();
   }
@@ -154,7 +159,8 @@ class _$ActivationCodeStateInit implements ActivationCodeStateInit {
     TResult Function()? initial,
     TResult Function(String message)? error,
     TResult Function()? process,
-    TResult Function(String activationCode)? activeSuccess,
+    TResult Function(String activationCode, Locale localeSelected)?
+        activeSuccess,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -277,7 +283,8 @@ class _$ActivationCodeStateError implements ActivationCodeStateError {
     required TResult Function() initial,
     required TResult Function(String message) error,
     required TResult Function() process,
-    required TResult Function(String activationCode) activeSuccess,
+    required TResult Function(String activationCode, Locale localeSelected)
+        activeSuccess,
   }) {
     return error(message);
   }
@@ -288,7 +295,8 @@ class _$ActivationCodeStateError implements ActivationCodeStateError {
     TResult Function()? initial,
     TResult Function(String message)? error,
     TResult Function()? process,
-    TResult Function(String activationCode)? activeSuccess,
+    TResult Function(String activationCode, Locale localeSelected)?
+        activeSuccess,
   }) {
     return error?.call(message);
   }
@@ -299,7 +307,8 @@ class _$ActivationCodeStateError implements ActivationCodeStateError {
     TResult Function()? initial,
     TResult Function(String message)? error,
     TResult Function()? process,
-    TResult Function(String activationCode)? activeSuccess,
+    TResult Function(String activationCode, Locale localeSelected)?
+        activeSuccess,
     required TResult orElse(),
   }) {
     if (error != null) {
@@ -405,7 +414,8 @@ class _$ActivationCodeStateProcess implements ActivationCodeStateProcess {
     required TResult Function() initial,
     required TResult Function(String message) error,
     required TResult Function() process,
-    required TResult Function(String activationCode) activeSuccess,
+    required TResult Function(String activationCode, Locale localeSelected)
+        activeSuccess,
   }) {
     return process();
   }
@@ -416,7 +426,8 @@ class _$ActivationCodeStateProcess implements ActivationCodeStateProcess {
     TResult Function()? initial,
     TResult Function(String message)? error,
     TResult Function()? process,
-    TResult Function(String activationCode)? activeSuccess,
+    TResult Function(String activationCode, Locale localeSelected)?
+        activeSuccess,
   }) {
     return process?.call();
   }
@@ -427,7 +438,8 @@ class _$ActivationCodeStateProcess implements ActivationCodeStateProcess {
     TResult Function()? initial,
     TResult Function(String message)? error,
     TResult Function()? process,
-    TResult Function(String activationCode)? activeSuccess,
+    TResult Function(String activationCode, Locale localeSelected)?
+        activeSuccess,
     required TResult orElse(),
   }) {
     if (process != null) {
@@ -485,7 +497,7 @@ abstract class _$$ActivationCodeStateActiveSuccessCopyWith<$Res> {
           _$ActivationCodeStateActiveSuccess value,
           $Res Function(_$ActivationCodeStateActiveSuccess) then) =
       __$$ActivationCodeStateActiveSuccessCopyWithImpl<$Res>;
-  $Res call({String activationCode});
+  $Res call({String activationCode, Locale localeSelected});
 }
 
 /// @nodoc
@@ -504,12 +516,17 @@ class __$$ActivationCodeStateActiveSuccessCopyWithImpl<$Res>
   @override
   $Res call({
     Object? activationCode = freezed,
+    Object? localeSelected = freezed,
   }) {
     return _then(_$ActivationCodeStateActiveSuccess(
       activationCode == freezed
           ? _value.activationCode
           : activationCode // ignore: cast_nullable_to_non_nullable
               as String,
+      localeSelected == freezed
+          ? _value.localeSelected
+          : localeSelected // ignore: cast_nullable_to_non_nullable
+              as Locale,
     ));
   }
 }
@@ -518,14 +535,17 @@ class __$$ActivationCodeStateActiveSuccessCopyWithImpl<$Res>
 
 class _$ActivationCodeStateActiveSuccess
     implements ActivationCodeStateActiveSuccess {
-  const _$ActivationCodeStateActiveSuccess(this.activationCode);
+  const _$ActivationCodeStateActiveSuccess(
+      this.activationCode, this.localeSelected);
 
   @override
   final String activationCode;
+  @override
+  final Locale localeSelected;
 
   @override
   String toString() {
-    return 'ActivationCodeState.activeSuccess(activationCode: $activationCode)';
+    return 'ActivationCodeState.activeSuccess(activationCode: $activationCode, localeSelected: $localeSelected)';
   }
 
   @override
@@ -534,12 +554,16 @@ class _$ActivationCodeStateActiveSuccess
         (other.runtimeType == runtimeType &&
             other is _$ActivationCodeStateActiveSuccess &&
             const DeepCollectionEquality()
-                .equals(other.activationCode, activationCode));
+                .equals(other.activationCode, activationCode) &&
+            const DeepCollectionEquality()
+                .equals(other.localeSelected, localeSelected));
   }
 
   @override
   int get hashCode => Object.hash(
-      runtimeType, const DeepCollectionEquality().hash(activationCode));
+      runtimeType,
+      const DeepCollectionEquality().hash(activationCode),
+      const DeepCollectionEquality().hash(localeSelected));
 
   @JsonKey(ignore: true)
   @override
@@ -554,9 +578,10 @@ class _$ActivationCodeStateActiveSuccess
     required TResult Function() initial,
     required TResult Function(String message) error,
     required TResult Function() process,
-    required TResult Function(String activationCode) activeSuccess,
+    required TResult Function(String activationCode, Locale localeSelected)
+        activeSuccess,
   }) {
-    return activeSuccess(activationCode);
+    return activeSuccess(activationCode, localeSelected);
   }
 
   @override
@@ -565,9 +590,10 @@ class _$ActivationCodeStateActiveSuccess
     TResult Function()? initial,
     TResult Function(String message)? error,
     TResult Function()? process,
-    TResult Function(String activationCode)? activeSuccess,
+    TResult Function(String activationCode, Locale localeSelected)?
+        activeSuccess,
   }) {
-    return activeSuccess?.call(activationCode);
+    return activeSuccess?.call(activationCode, localeSelected);
   }
 
   @override
@@ -576,11 +602,12 @@ class _$ActivationCodeStateActiveSuccess
     TResult Function()? initial,
     TResult Function(String message)? error,
     TResult Function()? process,
-    TResult Function(String activationCode)? activeSuccess,
+    TResult Function(String activationCode, Locale localeSelected)?
+        activeSuccess,
     required TResult orElse(),
   }) {
     if (activeSuccess != null) {
-      return activeSuccess(activationCode);
+      return activeSuccess(activationCode, localeSelected);
     }
     return orElse();
   }
@@ -625,10 +652,12 @@ class _$ActivationCodeStateActiveSuccess
 }
 
 abstract class ActivationCodeStateActiveSuccess implements ActivationCodeState {
-  const factory ActivationCodeStateActiveSuccess(final String activationCode) =
+  const factory ActivationCodeStateActiveSuccess(
+          final String activationCode, final Locale localeSelected) =
       _$ActivationCodeStateActiveSuccess;
 
   String get activationCode => throw _privateConstructorUsedError;
+  Locale get localeSelected => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
   _$$ActivationCodeStateActiveSuccessCopyWith<
           _$ActivationCodeStateActiveSuccess>

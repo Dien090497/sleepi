@@ -11,7 +11,6 @@ import 'package:slee_fi/common/widgets/dismiss_keyboard_widget.dart';
 import 'package:slee_fi/common/widgets/loading_screen.dart';
 import 'package:slee_fi/common/widgets/sf_app_bar.dart';
 import 'package:slee_fi/common/widgets/sf_buttons.dart';
-import 'package:slee_fi/common/widgets/sf_dialog.dart';
 import 'package:slee_fi/common/widgets/sf_dropdown_rotation.dart';
 import 'package:slee_fi/common/widgets/sf_logo.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
@@ -40,9 +39,9 @@ class EnterActivationCodeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final arg =
         ModalRoute.of(context)?.settings.arguments as EnterActiveCodeArg;
-    'rebuild widget'.log;
+    final locale = context.locale;
     return BlocProvider(
-      create: (context) => ActivationCodeCubit()..init(arg),
+      create: (context) => ActivationCodeCubit()..init(arg, locale),
       child: Stack(
         children: [
           DismissKeyboardWidget(
@@ -60,28 +59,29 @@ class EnterActivationCodeScreen extends StatelessWidget {
                     SizedBox(height: MediaQuery.of(context).size.height * 0.15),
                     LoginBox(
                       padding: const EdgeInsets.fromLTRB(28, 24, 28, 0),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          const SFLogo(),
-                          const SizedBox(height: 40),
-                          BlocConsumer<ActivationCodeCubit,
-                              ActivationCodeState>(
-                            listener: (context, state) {
-                              if (state is ActivationCodeStateActiveSuccess) {
-                                _nexStep(
-                                    context,
-                                    CreatePasswordArg(
-                                        state.activationCode,
-                                        arg.otp,
-                                        arg.userInfoEntity.email,
-                                        true));
-                              }
-                            },
-                            builder: (context, state) {
-                              'on state change '.log;
-                              final cubit = context.read<ActivationCodeCubit>();
-                              return SFTextField(
+                      child: BlocConsumer<ActivationCodeCubit,
+                          ActivationCodeState>(
+                        listener: (context, state) {
+                          if (state is ActivationCodeStateActiveSuccess) {
+                            _nexStep(
+                                context,
+                                CreatePasswordArg(
+                                    state.activationCode,
+                                    arg.otp,
+                                    arg.userInfoEntity.email,
+                                    true,
+                                    state.localeSelected));
+                          }
+                        },
+                        builder: (context, state) {
+                          'on state change ${context.locale}'.log;
+                          final cubit = context.read<ActivationCodeCubit>();
+                          return Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              const SFLogo(),
+                              const SizedBox(height: 40),
+                              SFTextField(
                                 onChanged: (value) {
                                   cubit.activationCode = value;
                                 },
@@ -91,47 +91,38 @@ class EnterActivationCodeScreen extends StatelessWidget {
                                 errorText: state is ActivationCodeStateError
                                     ? state.message
                                     : '',
-                              );
-                            },
-                          ),
-                          const SizedBox(height: 20),
-                          SFText(
-                              keyText: LocaleKeys.please_select_your_language,
-                              style: TextStyles.lightGrey14),
-                          const SizedBox(height: 4),
-                          SizedBox(
-                              width: double.infinity,
-                              height: 48,
-                              child: SFDropDownRotation<String>(
-                                value: context.locale.displayName,
-                                dropdownWidth:
-                                    MediaQuery.of(context).size.width * 0.8,
-                                dropdownHeight: 48,
-                                selectedItemHighlightColor: AppColors.lightDark,
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                spinnerItems: List.generate(
-                                  Const.locales.length,
-                                  (i) => Const.locales[i].displayName,
-                                ),
-                                onChange: (int value, int index) {
-                                  final locale = Const.locales[index];
-                                  if (locale.languageCode !=
-                                      context.locale.languageCode) {
-                                    showChangeLanguageDialog(context,
-                                        locale: locale);
-                                  }
-                                },
-                              )),
-                          const SizedBox(height: 12),
-                          const CheckBoxLetterWidget(),
-                          const SizedBox(height: 12),
-                          BlocBuilder<ActivationCodeCubit, ActivationCodeState>(
-                            buildWhen: (previous, current) =>
-                                current is ActivationCodeStateInit,
-                            builder: (context, state) {
-                              final cubit = context.read<ActivationCodeCubit>();
-                              return SFButton(
+                              ),
+                              const SizedBox(height: 20),
+                              SFText(
+                                  keyText:
+                                      LocaleKeys.please_select_your_language,
+                                  style: TextStyles.lightGrey14),
+                              const SizedBox(height: 4),
+                              SizedBox(
+                                  width: double.infinity,
+                                  height: 48,
+                                  child: SFDropDownRotation<String>(
+                                    value: context.locale.displayName,
+                                    dropdownWidth:
+                                        MediaQuery.of(context).size.width * 0.8,
+                                    dropdownHeight: 48,
+                                    selectedItemHighlightColor:
+                                        AppColors.lightDark,
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    spinnerItems: List.generate(
+                                      Const.locales.length,
+                                      (i) => Const.locales[i].displayName,
+                                    ),
+                                    onChange: (int value, int index) {
+                                      cubit.localeSelected =
+                                          Const.locales[index];
+                                    },
+                                  )),
+                              const SizedBox(height: 12),
+                              const CheckBoxLetterWidget(),
+                              const SizedBox(height: 12),
+                              SFButton(
                                 text: LocaleKeys.start,
                                 color: AppColors.blue,
                                 textStyle: TextStyles.white1w700size16,
@@ -142,31 +133,31 @@ class EnterActivationCodeScreen extends StatelessWidget {
                                     _nexStep(
                                         context,
                                         CreatePasswordArg(
-                                          '',
-                                          arg.otp,
-                                          arg.userInfoEntity.email,
-                                          true,
-                                        ));
+                                            '',
+                                            arg.otp,
+                                            arg.userInfoEntity.email,
+                                            true,
+                                            cubit.localeSelected));
                                   }
                                 },
                                 width: MediaQuery.of(context).size.width,
-                              );
-                            },
-                          ),
-                          const SizedBox(height: 16),
-                          Center(
-                            child: SFTextButton(
-                              text: LocaleKeys.get_activation_code,
-                              textStyle: TextStyles.blue14,
-                              onPressed: () async {
-                                final url = Uri.parse(Const.linkTreeUrl);
-                                if (await canLaunchUrl(url)) {
-                                  launchUrl(url);
-                                }
-                              },
-                            ),
-                          ),
-                        ],
+                              ),
+                              const SizedBox(height: 16),
+                              Center(
+                                child: SFTextButton(
+                                  text: LocaleKeys.get_activation_code,
+                                  textStyle: TextStyles.blue14,
+                                  onPressed: () async {
+                                    final url = Uri.parse(Const.linkTreeUrl);
+                                    if (await canLaunchUrl(url)) {
+                                      launchUrl(url);
+                                    }
+                                  },
+                                ),
+                              ),
+                            ],
+                          );
+                        },
                       ),
                     ),
                     const SizedBox(height: 40),
