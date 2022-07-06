@@ -70,7 +70,18 @@ class _AccountLoginState extends State<AccountLoginWidget> {
                 int.parse(cubit.otp),
                 state.userInfoEntity,
                 state.enableActiveCode,
-              ));
+              )).then((value) async {
+            if (value is Locale) {
+              var currentLocale = context.locale;
+              if (currentLocale != value) {
+                await context
+                    .setLocale(value)
+                    .then((value) => _changeState(Action.signIn));
+              } else {
+                _changeState(Action.signIn);
+              }
+            }
+          });
         } else if (state is SignInSignUpStateSignInSuccess) {
           'sign success ${state.isFirstOpenApp}'.log;
           if (!state.isFirstOpenApp) {
@@ -83,12 +94,9 @@ class _AccountLoginState extends State<AccountLoginWidget> {
           }
         } else if (state is SignInSignUpStateVerifySuccess) {
           Navigator.pushNamed(context, R.createPassword,
-              arguments: CreatePasswordArg(
-                '',
-                state.otp,
-                state.email,
-                false,
-              )).then((value) => _checkChangePasswordSuccess(value));
+                  arguments: CreatePasswordArg(
+                      '', state.otp, state.email, false, context.locale))
+              .then((value) => _checkChangePasswordSuccess(value));
         }
       },
       builder: (context, state) {
@@ -103,7 +111,7 @@ class _AccountLoginState extends State<AccountLoginWidget> {
             const SizedBox(height: 25),
             SFTextField(
                 labelText: LocaleKeys.email_address,
-                onChanged: (email) => cubit.email = email),
+                onChanged: (email) => cubit.onChangeEmail(email)),
             const SizedBox(height: 5),
             Container(
                 alignment: Alignment.centerLeft,
@@ -120,7 +128,7 @@ class _AccountLoginState extends State<AccountLoginWidget> {
                     onPressed: () => cubit.senOtp(action),
                     errorText:
                         state is SignInSignUpStateError ? state.message : '',
-                    valueChanged: (otp) => cubit.otp = otp)
+                    valueChanged: (otp) => cubit.onChangeOTP(otp))
                 : SFTextFieldPassword(
                     labelText: LocaleKeys.password,
                     valueChanged: (password) =>

@@ -1,4 +1,5 @@
 import 'package:easy_localization/easy_localization.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:slee_fi/common/extensions/string_x.dart';
 import 'package:slee_fi/di/injector.dart';
@@ -12,18 +13,20 @@ class ActivationCodeCubit extends Cubit<ActivationCodeState> {
 
   final _checkActivationCodeUC = getIt<CheckActivationCodeUseCase>();
   String activationCode = '';
+  late Locale localeSelected;
 
   late EnterActiveCodeArg activeCodeArg;
 
-  init(EnterActiveCodeArg enterActiveCodeArg) {
+  init(EnterActiveCodeArg enterActiveCodeArg, Locale locale) {
     'run to init'.log;
     activeCodeArg = enterActiveCodeArg;
+    localeSelected = locale;
   }
 
   checkActiveCode() async {
     'active code is $activationCode'.log;
     emit(const ActivationCodeState.process());
-    if (activeCodeArg.isEnable ) {
+    if (activeCodeArg.isEnable) {
       if (activationCode.isEmpty) {
         emit(ActivationCodeState.error(LocaleKeys.this_field_is_required.tr()));
         return;
@@ -37,7 +40,7 @@ class ActivationCodeCubit extends Cubit<ActivationCodeState> {
     result.fold((l) {
       emit(ActivationCodeState.error(LocaleKeys.invalid_code.tr()));
     }, (r) {
-      emit(ActivationCodeState.activeSuccess(activationCode));
+      emit(ActivationCodeState.activeSuccess(activationCode, localeSelected));
     });
   }
 }

@@ -1,4 +1,5 @@
 import 'package:easy_localization/easy_localization.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:slee_fi/common/extensions/string_x.dart';
 import 'package:slee_fi/di/injector.dart';
@@ -8,35 +9,29 @@ import 'package:slee_fi/schema/change_password_schema/change_password_schema.dar
 import 'package:slee_fi/schema/create_password_schema/create_password_schema.dart';
 import 'package:slee_fi/usecase/change_password_usecase.dart';
 import 'package:slee_fi/usecase/create_password_usecase.dart';
-import 'package:slee_fi/usecase/is_first_open_app_usecase.dart';
-import 'package:slee_fi/usecase/usecase.dart';
 
 class CreatePasswordCubit extends Cubit<CreatePasswordState> {
   CreatePasswordCubit() : super(const CreatePasswordState.initial());
 
   final _createPassCodeUC = getIt<CreatePasswordUseCase>();
-  final _isFirstOpenApp = getIt<IsFirstOpenAppUseCase>();
   final _changePasswordUC = getIt<ChangePasswordUseCase>();
 
   late String email;
   late int otp;
   late String activeCode;
+  late Locale locale;
 
   String password = '';
   String confirmPassword = '';
-  bool isFistOpenApp = false;
   late bool isCreate;
 
-  init(String email, String activeCode, int otp, bool isCreate) async {
+  init(String email, String activeCode, int otp, bool isCreate,
+      Locale locale) async {
     this.email = email;
     this.otp = otp;
     this.activeCode = activeCode;
     this.isCreate = isCreate;
-
-    if (isCreate) {
-      var result = await _isFirstOpenApp.call(NoParams());
-      result.fold((l) => null, (r) => isFistOpenApp = r);
-    }
+    this.locale = locale;
   }
 
   process() async {
@@ -64,7 +59,7 @@ class CreatePasswordCubit extends Cubit<CreatePasswordState> {
         .call(CreatePasswordSchema(email, password, activeCode, otp));
 
     result.fold((l) => emit(CreatePasswordState.errorCreate(l.msg)), (r) async {
-      emit(CreatePasswordState.success(isFistOpenApp));
+      emit(CreatePasswordState.success(locale));
     });
   }
 
@@ -87,5 +82,25 @@ class CreatePasswordCubit extends Cubit<CreatePasswordState> {
       return false;
     }
     return true;
+  }
+
+  onChangePassword(String value) {
+
+    if ((state is CreatePasswordStateErrorPassword ||
+            state is CreatePasswordStateErrorCreate) &&
+        (password.isEmpty || value.isEmpty)) {
+      emit(const CreatePasswordState.initial());
+    }
+    password = value;
+  }
+
+  onChangeConfirmPassword(String value) {
+    if ((state is CreatePasswordStateErrorPassword ||
+            state is CreatePasswordStateErrorCreate) &&
+        confirmPassword.isEmpty ||  value.isEmpty) {
+      emit(const CreatePasswordState.initial());
+    }
+    confirmPassword = value;
+
   }
 }
