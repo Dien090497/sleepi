@@ -36,6 +36,8 @@ class SigInSignUpCubit extends Cubit<SignInSignUpState> {
   init() async {
     emit(const SignInSignUpState.initial());
     var result = await _isFirstOpenAppUC.call(NoParams());
+    _password = '';
+    otp = '';
     result.fold((l) => null, (r) => isFistOpenApp = r);
   }
 
