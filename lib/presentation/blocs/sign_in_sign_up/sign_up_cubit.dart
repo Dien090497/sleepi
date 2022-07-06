@@ -150,7 +150,7 @@ class SigInSignUpCubit extends Cubit<SignInSignUpState> {
     emit(const SignInSignUpState.process());
     int otp = int.parse(this.otp);
     var result = await _verifyOTPUC
-        .call(VerifyOTPSchema(otp, email, OTPType.changePass));
+        .call(VerifyOTPSchema(otp, email.trim(), OTPType.changePass));
 
     result.fold(
       (l) => emit(SignInSignUpState.error(l.msg)),
