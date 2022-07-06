@@ -8,36 +8,33 @@ import 'package:slee_fi/presentation/blocs/nft_detail/nft_detail_state.dart';
 import 'package:slee_fi/usecase/get_list_nft_detail_usecase.dart';
 
 class NftDetailCubit extends Cubit<NftDetailState> {
-  NftDetailCubit(WalletInfoEntity walletInfoEntity, TokenEntity token)
-      : super(NftDetailState.initial(walletInfoEntity, tokenEntity: token));
+  NftDetailCubit() : super(const NftDetailState.initial());
 
   final _getListNftDetailUC = getIt<GetListNftDetailUseCase>();
 
-  Future<void> init() async {
+  Future<void> init(
+      WalletInfoEntity walletInfoEntity, TokenEntity token) async {
     final currentState = state;
-    if (currentState is NftDetailInitial) {
-      final result = await _getListNftDetailUC.call(GetListNftDetailParams(
-        address: currentState.tokenEntity.address,
-        ownerAddress: currentState.walletInfoEntity.address,
-        count: 30,
-        nftType: NftType.bed,
-      ));
-      result.fold(
-        (l) {
-          print('### $l');
-          emit(NftDetailState.error('$l'));
-          emit(currentState);
-        },
-        (r) {
-          emit(NftDetailState.loaded(
-            walletInfoEntity: currentState.walletInfoEntity,
-            tokenEntity: currentState.tokenEntity,
-            nftEntities: r,
-            hasMore: currentState.tokenEntity.balance > r.length,
-          ));
-        },
-      );
-    }
+    final result = await _getListNftDetailUC.call(GetListNftDetailParams(
+      address: token.address,
+      ownerAddress: walletInfoEntity.address,
+      count: 30,
+      nftType: NftType.bed,
+    ));
+    result.fold(
+      (l) {
+        emit(NftDetailState.error('$l'));
+        emit(currentState);
+      },
+      (r) {
+        emit(NftDetailState.loaded(
+          walletInfoEntity: walletInfoEntity,
+          tokenEntity: token,
+          nftEntities: r,
+          hasMore: token.balance > r.length,
+        ));
+      },
+    );
   }
 
   Future<void> refresh() async {
@@ -68,7 +65,7 @@ class NftDetailCubit extends Cubit<NftDetailState> {
 
   Future<void> loadMore() async {
     final currentState = state;
-    if (currentState is NftDetailLoaded) {
+    if (currentState is NftDetailLoaded && currentState.hasMore) {
       final result = await _getListNftDetailUC.call(GetListNftDetailParams(
         address: currentState.tokenEntity.address,
         ownerAddress: currentState.walletInfoEntity.address,
@@ -79,7 +76,7 @@ class NftDetailCubit extends Cubit<NftDetailState> {
       result.fold(
         (l) {
           emit(NftDetailState.error('$l'));
-          emit(currentState);
+          emit(currentState.copyWith(hasMore: false));
         },
         (r) {
           final newList = List<NFTEntity>.from(currentState.nftEntities)

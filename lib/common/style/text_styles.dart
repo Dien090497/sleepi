@@ -10,6 +10,8 @@ class TextStyles {
 
   static const w600WhiteSize16 = TextStyle(
       fontSize: 16, color: AppColors.white, fontWeight: FontWeight.w600);
+  static const w700WhiteSize18 = TextStyle(
+      fontSize: 18, color: AppColors.white, fontWeight: FontWeight.w700);
 
   static const w400LightWhite12 = TextStyle(
     fontSize: 12, color: AppColors.lightWhite, fontWeight: FontWeight.w400, height: 18/12,);

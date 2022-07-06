@@ -48,7 +48,7 @@ class NFTImplementation extends INFTRepository {
     try {
       final listModel = await _nftApi.getListNft(
         nftType: nftType,
-        tokenIds: List.generate(5, (i) => i)
+        tokenIds: List.generate(tokenIds.length, (i) => i % 5 + 1)
             .join(','), // TODO: Remove when real data is ready
       );
       return Right(listModel.data.map((e) => e.toEntity()).toList());

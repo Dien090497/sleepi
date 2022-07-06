@@ -8,10 +8,7 @@ part 'nft_detail_state.freezed.dart';
 
 @freezed
 class NftDetailState with _$NftDetailState {
-  const factory NftDetailState.initial(
-    WalletInfoEntity walletInfoEntity, {
-    required TokenEntity tokenEntity,
-  }) = NftDetailInitial;
+  const factory NftDetailState.initial() = NftDetailInitial;
 
   const factory NftDetailState.loaded({
     required WalletInfoEntity walletInfoEntity,

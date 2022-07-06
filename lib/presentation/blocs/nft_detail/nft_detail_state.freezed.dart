@@ -18,9 +18,7 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$NftDetailState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(
-            WalletInfoEntity walletInfoEntity, TokenEntity tokenEntity)
-        initial,
+    required TResult Function() initial,
     required TResult Function(WalletInfoEntity walletInfoEntity,
             TokenEntity tokenEntity, List<NFTEntity> nftEntities, bool hasMore)
         loaded,
@@ -29,9 +27,7 @@ mixin _$NftDetailState {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(
-            WalletInfoEntity walletInfoEntity, TokenEntity tokenEntity)?
-        initial,
+    TResult Function()? initial,
     TResult Function(WalletInfoEntity walletInfoEntity, TokenEntity tokenEntity,
             List<NFTEntity> nftEntities, bool hasMore)?
         loaded,
@@ -40,9 +36,7 @@ mixin _$NftDetailState {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(
-            WalletInfoEntity walletInfoEntity, TokenEntity tokenEntity)?
-        initial,
+    TResult Function()? initial,
     TResult Function(WalletInfoEntity walletInfoEntity, TokenEntity tokenEntity,
             List<NFTEntity> nftEntities, bool hasMore)?
         loaded,
@@ -96,10 +90,6 @@ abstract class _$$NftDetailInitialCopyWith<$Res> {
   factory _$$NftDetailInitialCopyWith(
           _$NftDetailInitial value, $Res Function(_$NftDetailInitial) then) =
       __$$NftDetailInitialCopyWithImpl<$Res>;
-  $Res call({WalletInfoEntity walletInfoEntity, TokenEntity tokenEntity});
-
-  $WalletInfoEntityCopyWith<$Res> get walletInfoEntity;
-  $TokenEntityCopyWith<$Res> get tokenEntity;
 }
 
 /// @nodoc
@@ -112,37 +102,6 @@ class __$$NftDetailInitialCopyWithImpl<$Res>
 
   @override
   _$NftDetailInitial get _value => super._value as _$NftDetailInitial;
-
-  @override
-  $Res call({
-    Object? walletInfoEntity = freezed,
-    Object? tokenEntity = freezed,
-  }) {
-    return _then(_$NftDetailInitial(
-      walletInfoEntity == freezed
-          ? _value.walletInfoEntity
-          : walletInfoEntity // ignore: cast_nullable_to_non_nullable
-              as WalletInfoEntity,
-      tokenEntity: tokenEntity == freezed
-          ? _value.tokenEntity
-          : tokenEntity // ignore: cast_nullable_to_non_nullable
-              as TokenEntity,
-    ));
-  }
-
-  @override
-  $WalletInfoEntityCopyWith<$Res> get walletInfoEntity {
-    return $WalletInfoEntityCopyWith<$Res>(_value.walletInfoEntity, (value) {
-      return _then(_value.copyWith(walletInfoEntity: value));
-    });
-  }
-
-  @override
-  $TokenEntityCopyWith<$Res> get tokenEntity {
-    return $TokenEntityCopyWith<$Res>(_value.tokenEntity, (value) {
-      return _then(_value.copyWith(tokenEntity: value));
-    });
-  }
 }
 
 /// @nodoc
@@ -150,83 +109,56 @@ class __$$NftDetailInitialCopyWithImpl<$Res>
 class _$NftDetailInitial
     with DiagnosticableTreeMixin
     implements NftDetailInitial {
-  const _$NftDetailInitial(this.walletInfoEntity, {required this.tokenEntity});
-
-  @override
-  final WalletInfoEntity walletInfoEntity;
-  @override
-  final TokenEntity tokenEntity;
+  const _$NftDetailInitial();
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'NftDetailState.initial(walletInfoEntity: $walletInfoEntity, tokenEntity: $tokenEntity)';
+    return 'NftDetailState.initial()';
   }
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
-    properties
-      ..add(DiagnosticsProperty('type', 'NftDetailState.initial'))
-      ..add(DiagnosticsProperty('walletInfoEntity', walletInfoEntity))
-      ..add(DiagnosticsProperty('tokenEntity', tokenEntity));
+    properties.add(DiagnosticsProperty('type', 'NftDetailState.initial'));
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$NftDetailInitial &&
-            const DeepCollectionEquality()
-                .equals(other.walletInfoEntity, walletInfoEntity) &&
-            const DeepCollectionEquality()
-                .equals(other.tokenEntity, tokenEntity));
+        (other.runtimeType == runtimeType && other is _$NftDetailInitial);
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(walletInfoEntity),
-      const DeepCollectionEquality().hash(tokenEntity));
-
-  @JsonKey(ignore: true)
-  @override
-  _$$NftDetailInitialCopyWith<_$NftDetailInitial> get copyWith =>
-      __$$NftDetailInitialCopyWithImpl<_$NftDetailInitial>(this, _$identity);
+  int get hashCode => runtimeType.hashCode;
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(
-            WalletInfoEntity walletInfoEntity, TokenEntity tokenEntity)
-        initial,
+    required TResult Function() initial,
     required TResult Function(WalletInfoEntity walletInfoEntity,
             TokenEntity tokenEntity, List<NFTEntity> nftEntities, bool hasMore)
         loaded,
     required TResult Function(String msg) error,
   }) {
-    return initial(walletInfoEntity, tokenEntity);
+    return initial();
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(
-            WalletInfoEntity walletInfoEntity, TokenEntity tokenEntity)?
-        initial,
+    TResult Function()? initial,
     TResult Function(WalletInfoEntity walletInfoEntity, TokenEntity tokenEntity,
             List<NFTEntity> nftEntities, bool hasMore)?
         loaded,
     TResult Function(String msg)? error,
   }) {
-    return initial?.call(walletInfoEntity, tokenEntity);
+    return initial?.call();
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(
-            WalletInfoEntity walletInfoEntity, TokenEntity tokenEntity)?
-        initial,
+    TResult Function()? initial,
     TResult Function(WalletInfoEntity walletInfoEntity, TokenEntity tokenEntity,
             List<NFTEntity> nftEntities, bool hasMore)?
         loaded,
@@ -234,7 +166,7 @@ class _$NftDetailInitial
     required TResult orElse(),
   }) {
     if (initial != null) {
-      return initial(walletInfoEntity, tokenEntity);
+      return initial();
     }
     return orElse();
   }
@@ -275,14 +207,7 @@ class _$NftDetailInitial
 }
 
 abstract class NftDetailInitial implements NftDetailState {
-  const factory NftDetailInitial(final WalletInfoEntity walletInfoEntity,
-      {required final TokenEntity tokenEntity}) = _$NftDetailInitial;
-
-  WalletInfoEntity get walletInfoEntity => throw _privateConstructorUsedError;
-  TokenEntity get tokenEntity => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
-  _$$NftDetailInitialCopyWith<_$NftDetailInitial> get copyWith =>
-      throw _privateConstructorUsedError;
+  const factory NftDetailInitial() = _$NftDetailInitial;
 }
 
 /// @nodoc
@@ -425,9 +350,7 @@ class _$NftDetailLoaded
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(
-            WalletInfoEntity walletInfoEntity, TokenEntity tokenEntity)
-        initial,
+    required TResult Function() initial,
     required TResult Function(WalletInfoEntity walletInfoEntity,
             TokenEntity tokenEntity, List<NFTEntity> nftEntities, bool hasMore)
         loaded,
@@ -439,9 +362,7 @@ class _$NftDetailLoaded
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(
-            WalletInfoEntity walletInfoEntity, TokenEntity tokenEntity)?
-        initial,
+    TResult Function()? initial,
     TResult Function(WalletInfoEntity walletInfoEntity, TokenEntity tokenEntity,
             List<NFTEntity> nftEntities, bool hasMore)?
         loaded,
@@ -453,9 +374,7 @@ class _$NftDetailLoaded
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(
-            WalletInfoEntity walletInfoEntity, TokenEntity tokenEntity)?
-        initial,
+    TResult Function()? initial,
     TResult Function(WalletInfoEntity walletInfoEntity, TokenEntity tokenEntity,
             List<NFTEntity> nftEntities, bool hasMore)?
         loaded,
@@ -592,9 +511,7 @@ class _$NftDetailError with DiagnosticableTreeMixin implements NftDetailError {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(
-            WalletInfoEntity walletInfoEntity, TokenEntity tokenEntity)
-        initial,
+    required TResult Function() initial,
     required TResult Function(WalletInfoEntity walletInfoEntity,
             TokenEntity tokenEntity, List<NFTEntity> nftEntities, bool hasMore)
         loaded,
@@ -606,9 +523,7 @@ class _$NftDetailError with DiagnosticableTreeMixin implements NftDetailError {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(
-            WalletInfoEntity walletInfoEntity, TokenEntity tokenEntity)?
-        initial,
+    TResult Function()? initial,
     TResult Function(WalletInfoEntity walletInfoEntity, TokenEntity tokenEntity,
             List<NFTEntity> nftEntities, bool hasMore)?
         loaded,
@@ -620,9 +535,7 @@ class _$NftDetailError with DiagnosticableTreeMixin implements NftDetailError {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(
-            WalletInfoEntity walletInfoEntity, TokenEntity tokenEntity)?
-        initial,
+    TResult Function()? initial,
     TResult Function(WalletInfoEntity walletInfoEntity, TokenEntity tokenEntity,
             List<NFTEntity> nftEntities, bool hasMore)?
         loaded,
