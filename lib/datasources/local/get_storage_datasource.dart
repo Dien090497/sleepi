@@ -13,7 +13,7 @@ class GetStorageDataSource {
 
   int getDerivedIndexAndIncrease() {
     final index = _getStorage.read<int?>(StorageKeys.derivedIndexKey)!;
-    _getStorage.write(StorageKeys.derivedIndexKey, index  + 1);
+    _getStorage.write(StorageKeys.derivedIndexKey, index + 1);
     return index;
   }
 
@@ -41,5 +41,5 @@ class StorageKeys {
   static const String currentWalletIdKey = 'current_wallet_id';
   static const String userKey = 'current_user';
   static const String firstOpenKey = 'first_open_key';
-
+  static const accessTokenKey = 'access_token_key';
 }
