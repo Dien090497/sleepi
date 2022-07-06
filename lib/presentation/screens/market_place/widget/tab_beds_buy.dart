@@ -104,7 +104,7 @@ class TabBedsBuy extends StatelessWidget {
                                   children: [
                                     GridViewBedItem(
                                       beds: listBeds,
-                                      onRefresh: (){
+                                      onRefresh: () {
                                         cubit.refresh(1);
                                       },
                                       onBuyTap: (bed) {
