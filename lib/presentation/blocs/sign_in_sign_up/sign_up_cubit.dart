@@ -1,8 +1,10 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:slee_fi/common/enum/enum.dart';
 import 'package:slee_fi/common/extensions/string_x.dart';
 import 'package:slee_fi/common/utils/appsflyer_custom.dart';
 import 'package:slee_fi/di/injector.dart';
+import 'package:slee_fi/l10n/locale_keys.g.dart';
 import 'package:slee_fi/presentation/blocs/sign_in_sign_up/sign_up_state.dart';
 import 'package:slee_fi/presentation/screens/login_signup/widgets/account_login_widget.dart';
 import 'package:slee_fi/schema/sign_in_schema/sign_in_schema.dart';
@@ -87,6 +89,10 @@ class SigInSignUpCubit extends Cubit<SignInSignUpState> {
     if (!validateEmail()) {
       return;
     }
+    if (_password.isEmpty) {
+      return emit(
+          SignInSignUpState.error(LocaleKeys.this_field_is_required.tr()));
+    }
     emit(const SignInSignUpState.process());
     var result =
         await _logInUseCase.call(SignInSchema(email.trim(), _password));
@@ -166,7 +172,7 @@ class SigInSignUpCubit extends Cubit<SignInSignUpState> {
   }
 
   onPasswordChange(String value) {
-    if ((value.isEmpty || value.isEmpty) && state is SignInSignUpStateError) {
+    if ((value.isEmpty || _password.isEmpty) && state is SignInSignUpStateError) {
       emit(const SignInSignUpState.initial());
     }
     _password = value;
