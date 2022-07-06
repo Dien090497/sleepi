@@ -58,6 +58,9 @@ abstract class AuthDataSource {
   @POST('/user-otp/verify-otp')
   Future<dynamic> verifyOTP(@Body() VerifyOTPSchema verifySchema);
 
+  @GET('/users/active-code')
+  Future<dynamic> fetchActivationCodes();
+
   @POST('/users/verify')
   Future<UserResponse> verifyUser(@Body() VerifyUserSchema verifyUserSchema);
 
@@ -105,7 +108,8 @@ abstract class AuthDataSource {
   Future<dynamic> buyNFT(@Body() BuyNFTSchema buyNFTSchema);
 
   @GET('/market-place')
-  Future<ListMarketPlaceModel> getMarketPlace(@Query('categoryId') int categoryId);
+  Future<ListMarketPlaceModel> getMarketPlace(
+      @Query('categoryId') int categoryId);
 
   @GET('/category')
   Future<MarketPlaceModel> getCategory();

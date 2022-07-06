@@ -48,14 +48,13 @@ class PopUpAvalancheWallet extends StatelessWidget {
               : Padding(
                   padding: const EdgeInsets.fromLTRB(16, 0, 16, 16),
                   child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       SFText(
                         keyText: LocaleKeys.avalanche_wallet,
                         style: TextStyles.bold18LightWhite,
                       ),
-                      const SizedBox(
-                        height: 32,
-                      ),
+                      const SizedBox(height: 32),
                       SizedBox(
                           height: 48,
                           child: SFButtonOutLined(
@@ -63,29 +62,26 @@ class PopUpAvalancheWallet extends StatelessWidget {
                             textStyle: TextStyles.bold16Blue,
                             borderColor: AppColors.blue,
                             onPressed: () {
-                              showCustomAlertDialog(context,
-                                  children: PopUpWarningBindWallet(
-                                      content: LocaleKeys.warning_create_wallet,
-                                      onPressed: () {
-                                        Navigator.pop(context);
-                                      })).then((value) {
+                              showCustomAlertDialog(context, showClosed: false,
+                                  children:
+                                      PopUpWarningBindWallet(onPressed: () {
+                                Navigator.pop(context);
                                 showCustomAlertDialog(context,
                                         children: const PopUpWalletWarning())
                                     .then((value) => {
-                                  Navigator.pushNamed(context, R.createPasscode)
-                                      .then((value) {
-                                    if (value == true) {
-                                      cubit.createWallet();
-                                      isLoadingCreateWallet = true;
-                                    }
-                                  })
-                                });
-                              });
+                                          Navigator.pushNamed(
+                                                  context, R.createPasscode)
+                                              .then((value) {
+                                            if (value == true) {
+                                              cubit.createWallet();
+                                              isLoadingCreateWallet = true;
+                                            }
+                                          })
+                                        });
+                              }));
                             },
                           )),
-                      const SizedBox(
-                        height: 17,
-                      ),
+                      const SizedBox(height: 17),
                       SFButton(
                         text: LocaleKeys.import_a_wallet_using_seed_phrase,
                         textStyle: TextStyles.w600WhiteSize16,
@@ -93,7 +89,7 @@ class PopUpAvalancheWallet extends StatelessWidget {
                         width: double.infinity,
                         color: AppColors.blue,
                         onPressed: () async {
-                          showCustomAlertDialog(context,
+                          showCustomAlertDialog(context, showClosed: false,
                               children: PopUpWarningBindWallet(onPressed: () {
                             Navigator.pop(context);
                             Navigator.pushNamed(context, R.importWallet)

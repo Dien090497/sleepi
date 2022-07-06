@@ -144,7 +144,10 @@ class _AccountLoginState extends State<AccountLoginWidget> {
                   : SFTextButton(
                       text: "${LocaleKeys.forgot_password.tr()}?",
                       textStyle: TextStyles.white1w400size12,
-                      onPressed: () => _changeState(Action.forgotPassword),
+                      onPressed: () {
+                        _changeState(Action.forgotPassword);
+                        cubit.init();
+                      },
                     ),
             ),
             // SizedBox(height: isLoginSignup ? 24 : 8),
@@ -162,7 +165,7 @@ class _AccountLoginState extends State<AccountLoginWidget> {
             SFTextButton(
               text: _isActiveCode
                   ? LocaleKeys.account_login
-                  : LocaleKeys.verification_login,
+                  : LocaleKeys.signup,
               textStyle: TextStyles.blue14,
               onPressed: () {
                 cubit.init();
