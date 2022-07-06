@@ -9,6 +9,7 @@ class SFGridView extends StatefulWidget {
     this.isScroll = true,
     this.physics,
     Key? key,
+    this.onRefresh,
   }) : super(key: key);
 
   final IndexedWidgetBuilder itemBuilder;
@@ -16,6 +17,7 @@ class SFGridView extends StatefulWidget {
   final double childAspectRatio;
   final bool isScroll;
   final ScrollPhysics? physics;
+  final Function? onRefresh;
 
   @override
   State<SFGridView> createState() => _SFGridViewState();
@@ -26,7 +28,7 @@ class _SFGridViewState extends State<SFGridView> {
       RefreshController(initialRefresh: false);
 
   void _onRefresh() async {
-    await Future.delayed(const Duration(milliseconds: 1000));
+    widget.onRefresh!();
     _refreshController.refreshCompleted();
   }
 

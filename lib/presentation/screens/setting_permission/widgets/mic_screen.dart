@@ -9,11 +9,21 @@ import 'package:slee_fi/common/widgets/sf_text.dart';
 import 'package:slee_fi/l10n/locale_keys.g.dart';
 import 'package:slee_fi/resources/resources.dart';
 
+class MicArg {
+  final bool isSignUp;
+
+  MicArg(this.isSignUp);
+}
+
 class MicPermissionScreen extends StatelessWidget {
   const MicPermissionScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    final arg = ModalRoute
+        .of(context)
+        ?.settings
+        .arguments as MicArg?;
     return BackgroundWidget(
         child: SafeArea(
             child: Stack(children: [
