@@ -79,7 +79,7 @@ class NFTDetailScreen extends StatelessWidget {
                   actions: [
                     GestureDetector(
                       onTap: () => Navigator.pushNamed(context, R.passcode,
-                          arguments: PasscodeArguments(R.settingWallet)),
+                          arguments: PasscodeArguments(route: R.settingWallet)),
                       child: const Padding(
                         padding: EdgeInsets.only(right: 16.0, left: 12),
                         child: SFIcon(Ics.icSetting),

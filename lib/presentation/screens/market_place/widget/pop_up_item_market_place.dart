@@ -1,24 +1,21 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
 import 'package:slee_fi/common/widgets/sf_buttons.dart';
 import 'package:slee_fi/common/widgets/sf_card.dart';
-import 'package:slee_fi/common/widgets/sf_icon.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
 import 'package:slee_fi/l10n/locale_keys.g.dart';
+import 'package:slee_fi/models/market_place/market_place_model.dart';
 
 class PopUpItemMarketPlace extends StatelessWidget {
   const PopUpItemMarketPlace(
       {Key? key,
-        required this.icon,
-        required this.level,
-        required this.id,
+        required this.item,
         required this.onConfirmTap})
       : super(key: key);
 
-  final String icon;
-  final String level;
-  final String id;
+  final MarketPlaceModel item;
   final VoidCallback onConfirmTap;
 
   @override
@@ -38,14 +35,16 @@ class PopUpItemMarketPlace extends StatelessWidget {
           ),
           alignment: Alignment.center,
           padding: const EdgeInsets.all(8),
-          child: SFIcon(
-            icon,
-            height: 80,
+          child: Image.network(
+            item.image,
+            width: 60,
+            height: 60,
+            fit: BoxFit.cover,
           ),
         ),
         const SizedBox(height: 20),
         SFText(
-          keyText: 'Luck Item ($level)',
+          keyText: '${LocaleKeys.luck_jewel.tr()} (${item.luck})',
           style: TextStyles.white1w700size16,
         ),
         const SizedBox(height: 24),
@@ -56,7 +55,7 @@ class PopUpItemMarketPlace extends StatelessWidget {
           ),
           padding: const EdgeInsets.all(8),
           child: SFText(
-            keyText: id,
+            keyText: item.id.toString(),
             style: TextStyles.blue14,
           ),
         ),
@@ -74,7 +73,7 @@ class PopUpItemMarketPlace extends StatelessWidget {
               const SizedBox(width: 4),
               Expanded(
                 child: SFText(
-                  keyText: '+2 Luck',
+                  keyText:  '+${item.luck} ${LocaleKeys.luck.tr()}',
                   style: TextStyles.blue16,
                   textAlign: TextAlign.right,
                 ),
@@ -96,7 +95,7 @@ class PopUpItemMarketPlace extends StatelessWidget {
               const SizedBox(width: 4),
               Expanded(
                 child: SFText(
-                  keyText: '+5% Base Luck',
+                  keyText: '+${item.efficiency}% ${LocaleKeys.base.tr()} ${LocaleKeys.luck.tr()}',
                   style: TextStyles.blue16,
                   textAlign: TextAlign.right,
                 ),
@@ -118,7 +117,7 @@ class PopUpItemMarketPlace extends StatelessWidget {
               const SizedBox(width: 4),
               Expanded(
                 child: SFText(
-                  keyText: '0.14 AVAX',
+                  keyText:  '${item.price} ${item.symbol}',
                   style: TextStyles.bold16LightWhite,
                   textAlign: TextAlign.right,
                 ),

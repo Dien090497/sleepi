@@ -67,7 +67,8 @@ class HealthcarePermissionScreen extends StatelessWidget {
                     arguments: NotificationPermissionArg(true));
                     return;
                   }
-                  Navigator.pushNamed(context, R.motionDataPermission);
+                  Navigator.pushNamedAndRemoveUntil(
+                    context, R.motionDataPermission, (_) => false,);
                 },
               ),
             ),

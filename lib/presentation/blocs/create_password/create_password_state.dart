@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'create_password_state.freezed.dart';
@@ -17,7 +19,7 @@ class CreatePasswordState with _$CreatePasswordState {
   const factory CreatePasswordState.errorCreate(String message) =
       CreatePasswordStateErrorCreate;
 
-  const factory CreatePasswordState.success(bool isFirstOpenApp) =
+  const factory CreatePasswordState.success(Locale locale) =
       CreatePasswordStateSuccess;
 
   const factory CreatePasswordState.changePasswordSuccess() =
