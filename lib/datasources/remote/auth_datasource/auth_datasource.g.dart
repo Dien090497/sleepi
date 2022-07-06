@@ -332,9 +332,18 @@ class _AuthDataSource implements AuthDataSource {
   }
 
   @override
-  Future<ListMarketPlaceModel> getMarketPlace(categoryId) async {
+  Future<ListMarketPlaceModel> getMarketPlace(
+      categoryId, sortPrice, type, level, classNft, quality) async {
     const _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{r'categoryId': categoryId};
+    final queryParameters = <String, dynamic>{
+      r'categoryId': categoryId,
+      r'sortPrice': sortPrice,
+      r'type': type,
+      r'level': level,
+      r'classNft': classNft,
+      r'quality': quality
+    };
+    queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
     final _result = await _dio.fetch<Map<String, dynamic>>(

@@ -43,7 +43,8 @@ class TabBedsBuy extends StatelessWidget {
     return DefaultTabController(
       length: 2,
       child: BlocProvider(
-        create: (context) => MarketPlaceCubit()..init(1),
+        create: (context) => MarketPlaceCubit()
+          ..init(1),
         child: BlocConsumer<MarketPlaceCubit, MarketPlaceState>(
           listener: (context, state) {
             if (state is MarketPlaceStateSuccess) {
@@ -55,9 +56,11 @@ class TabBedsBuy extends StatelessWidget {
             return Column(
               children: [
                 TabBarFilter(
+                  cubit: cubit,
                   tabTexts: const [LocaleKeys.buy, LocaleKeys.rent],
                   onFilterTap: () {
                     showFilterModalBottomSheet(
+                      cubit: cubit,
                       context,
                       sections: {
                         LocaleKeys.type.tr(): [
@@ -105,7 +108,7 @@ class TabBedsBuy extends StatelessWidget {
                                     GridViewBedItem(
                                       beds: listBeds,
                                       onRefresh: () {
-                                        cubit.refresh(1);
+                                        cubit.refresh();
                                       },
                                       onBuyTap: (bed) {
                                         Navigator.pushNamed(context, R.nftInfo,
