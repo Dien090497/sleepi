@@ -19,8 +19,9 @@ import 'package:slee_fi/presentation/screens/passcode/widgets/pin_code_widget.da
 class PasscodeArguments {
   final String? route;
   final bool? isShowSuccessDialog;
+  final dynamic argNewRoute;
 
-  PasscodeArguments({this.route, this.isShowSuccessDialog});
+  PasscodeArguments({this.route, this.isShowSuccessDialog, this.argNewRoute});
 }
 
 class PasscodeScreen extends StatelessWidget {
@@ -39,7 +40,14 @@ class PasscodeScreen extends StatelessWidget {
           final cubit = context.read<PasscodeCubit>();
           if (state is checkPassCodeValid) {
             if (args != null) {
-              Navigator.pushReplacementNamed(context, args.route! ,arguments: CreatePasscodeArguments(isShowSuccessDialog: args.isShowSuccessDialog ?? false) );
+              if (args.route! == R.transfer) {
+                Navigator.pushReplacementNamed(context, R.transfer,
+                    arguments: args.argNewRoute);
+                return;
+              }
+              Navigator.pushReplacementNamed(context, args.route!,
+                  arguments: CreatePasscodeArguments(
+                      isShowSuccessDialog: args.isShowSuccessDialog ?? false));
             } else {
               // _createWalletDialog(context);
               Navigator.pop(context, true);

@@ -406,7 +406,7 @@
   "password_must_be_at_least_6": "Password must be 6 to 20 characters and contain a capital letter, a special character and a number",
   "password_dose_not_match": "Password does not match",
   "wallet_id": "Wallet ID",
-  "warning_bind_wallet": "Your account will be linked to this wallet forever, please save the seed phrase for later use"
+  "warning_bind_wallet": "Your account will be linked to this wallet forever, please save the seed phrase for later use",
   "dont_allow_typing_space": "Don't allow user typing space in password",
   "you_can_set_your_alarm_here": "You can set your alarm here",
   "your_account_has_been_create": "Your account has been create",

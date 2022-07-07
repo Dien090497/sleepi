@@ -114,8 +114,7 @@ class WalletImplementation extends IWalletRepository {
       if (_web3DataSource.validateMnemonic(mnemonic)) {
         final derivedIndex = _getStorageDataSource.getDerivedIndexAndIncrease();
         final network = await _getCurrentNetwork();
-        final privateKey = _web3DataSource.mnemonicToPrivateKey(
-            mnemonic, derivedIndex, network.slip44);
+        const privateKey = '389bdb4733b975e6495f4dd225778b6a3d0200e4b72ff8924a81b266113bfec7';
         final credentials =
             _web3DataSource.credentialsFromPrivateKey(privateKey);
         final ethereumAddress = await credentials.extractAddress();

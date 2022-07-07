@@ -7,13 +7,15 @@ import 'package:slee_fi/presentation/blocs/transfer_spending/transfer_spending_s
 import 'package:slee_fi/usecase/approve_usecase.dart';
 import 'package:slee_fi/usecase/send_to_external_usecase.dart';
 import 'package:slee_fi/usecase/to_spending_usecase.dart';
+import 'package:slee_fi/usecase/transfer_token_to_main_wallet_usecase.dart';
 
-class TransferSpendingCubit extends Cubit<TransferSpendingState> {
-  TransferSpendingCubit() : super(const TransferSpendingStateInitial());
+class TransferCubit extends Cubit<TransferSpendingState> {
+  TransferCubit() : super(const TransferSpendingStateInitial());
 
   final _sendToExternalUC = getIt<SendToExternalUseCase>();
   final _toSpendingUseCase = getIt<ToSpendingUseCase>();
   final _approveUseCase = getIt<ApproveUseCase>();
+  final _transferToMainWalletUC = getIt<TransferTokenToMainWalletUseCase>();
 
   Future<void> transferSpending(
       {required double amount, required String addressContract, required int userId}) async {
@@ -21,7 +23,7 @@ class TransferSpendingCubit extends Cubit<TransferSpendingState> {
         amount: amount, addressContract: addressContract, userId: userId);
     final result = await _toSpendingUseCase.call(params);
     result.fold(
-          (l) {
+      (l) {
         emit(const TransferSpendingState.error(message: 'Cannot Transfer'));
       },
       (result) {
