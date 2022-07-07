@@ -42,7 +42,7 @@ class StorageKeys {
   static const String userKey = 'current_user';
   static const String firstOpenKey = 'first_open_key';
   static const String accessTokenKey = 'access_token_key';
-  static const String addressContract = 'address_contract';
+  static const String addressContractSpending = 'address_contract_spending';
   static const String saveMessage = 'save_message';
   static const String refreshToken = 'refresh_token';
 }

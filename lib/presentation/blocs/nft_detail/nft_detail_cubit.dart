@@ -15,7 +15,6 @@ class NftDetailCubit extends Cubit<NftDetailState> {
 
   Future<void> init(
       WalletInfoEntity walletInfoEntity, TokenEntity token) async {
-    final currentState = state;
     final result = await _getListNftDetailUC.call(GetListNftDetailParams(
       nftAddress: token.address,
       ownerAddress: walletInfoEntity.address,
