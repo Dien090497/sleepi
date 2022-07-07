@@ -252,7 +252,7 @@ packages:
       name: coverage
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.4.0"
+    version: "1.5.0"
   crypto:
     dependency: transitive
     description:
@@ -364,7 +364,7 @@ packages:
       name: eth_sig_util
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.0.8"
+    version: "0.0.9"
   ethereum_addresses:
     dependency: "direct main"
     description:
@@ -981,7 +981,7 @@ packages:
       name: pie_chart
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "5.3.1"
+    version: "5.3.2"
   pin_code_fields:
     dependency: "direct main"
     description:
@@ -1252,7 +1252,7 @@ packages:
       name: sqflite
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "2.0.2+1"
+    version: "2.0.3"
   sqflite_common:
     dependency: transitive
     description:
@@ -1336,21 +1336,21 @@ packages:
       name: test
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.21.3"
+    version: "1.21.4"
   test_api:
     dependency: transitive
     description:
       name: test_api
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.4.11"
+    version: "0.4.12"
   test_core:
     dependency: transitive
     description:
       name: test_core
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.4.15"
+    version: "0.4.16"
   time:
     dependency: transitive
     description:
