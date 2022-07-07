@@ -37,7 +37,7 @@ class _AuthDataSource implements AuthDataSource {
   }
 
   @override
-  Future<dynamic> getBalance(userId) async {
+  Future<dynamic> fetchBalanceSpending(userId) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{r'userId': userId};
     final _headers = <String, dynamic>{};

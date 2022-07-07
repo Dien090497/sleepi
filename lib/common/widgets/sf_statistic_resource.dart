@@ -22,11 +22,15 @@ class SFStatisticResource extends StatelessWidget {
       ),
       child: BlocBuilder<GlobalWalletCubit, GlobalWalletState>(
         builder: (context, state) {
+          if (state is GlobalWalletStateInitial) {
+            context.read<GlobalWalletCubit>().init();
+          }
           double valueSliver = 0;
           double valueGold = 0;
           double valueSolana = 0;
           final tokenList = <TokenEntity>[];
           'state in builder   $state'.log;
+
           if (state is GlobalWalletStateLoaded) {
             tokenList.addAll(state.tokenList);
           }
@@ -37,21 +41,15 @@ class SFStatisticResource extends StatelessWidget {
               const SizedBox(width: 4),
               ItemResource(
                   value: tokenList.isNotEmpty ? tokenList[0].balance : 0,
-                  url: tokenList.isNotEmpty
-                      ? tokenList[0].icon
-                      : Ics.icSlgt),
+                  url: tokenList.isNotEmpty ? tokenList[0].icon : Ics.icSlgt),
               const SizedBox(width: 16),
               ItemResource(
                   value: tokenList.isNotEmpty ? tokenList[1].balance : 0,
-                  url: tokenList.isNotEmpty
-                      ? tokenList[1].icon
-                      : Ics.icSlft),
+                  url: tokenList.isNotEmpty ? tokenList[1].icon : Ics.icSlft),
               const SizedBox(width: 16),
               ItemResource(
                   value: tokenList.isNotEmpty ? tokenList[2].balance : 0,
-                  url: tokenList.isNotEmpty
-                      ? tokenList[2].icon
-                      : Ics.icSolana),
+                  url: tokenList.isNotEmpty ? tokenList[2].icon : Ics.icSolana),
               const SizedBox(width: 12),
               const SFIcon(Ics.icSolanaCircle),
             ],

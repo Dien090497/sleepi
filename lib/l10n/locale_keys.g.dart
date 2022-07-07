@@ -408,5 +408,6 @@ abstract class  LocaleKeys {
   static const password_must_be_at_least_6 = 'password_must_be_at_least_6';
   static const password_dose_not_match = 'password_dose_not_match';
   static const warning_bind_wallet = 'warning_bind_wallet';
+  static const dont_allow_typing_space = 'dont_allow_typing_space';
 
 }

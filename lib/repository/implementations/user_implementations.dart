@@ -1,5 +1,6 @@
 import 'package:dartz/dartz.dart';
 import 'package:injectable/injectable.dart';
+import 'package:slee_fi/common/extensions/string_x.dart';
 import 'package:slee_fi/datasources/remote/auth_datasource/auth_datasource.dart';
 import 'package:slee_fi/entities/active_code/active_code_entity.dart';
 import 'package:slee_fi/failures/failure.dart';
@@ -29,6 +30,18 @@ class UserImplementation extends IUserRepository {
     try {
       var result = await _authDataSource.fetchActivationCodes();
       return Right(result.data.map((e) => e.toEntity()).toList());
+    } on Exception catch (e) {
+      return Left(FailureMessage.fromException(e));
+    }
+  }
+
+  @override
+  Future<Either<FailureMessage, dynamic>> fetchBalanceSpending(
+      String userID) async {
+    try {
+      var result = await _authDataSource.fetchBalanceSpending(userID);
+      'get balance spending $result'.log;
+      return Right(result);
     } on Exception catch (e) {
       return Left(FailureMessage.fromException(e));
     }

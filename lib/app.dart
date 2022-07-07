@@ -21,7 +21,7 @@ class MyApp extends StatelessWidget {
       providers: [
         BlocProvider(create: (_) => BottomNavigationBloc()),
         BlocProvider(create: (_) => SplashCubit()..init()),
-        BlocProvider(create: (_) => GlobalWalletCubit()..init()),
+        BlocProvider(create: (_) => GlobalWalletCubit()),
         BlocProvider(create: (_) => UserBloc()),
       ],
       child: ScreenUtilInit(

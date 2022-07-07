@@ -7,4 +7,8 @@ abstract class IUserRepository {
   Future<Either<FailureMessage, dynamic>> changePassword(ChangePasswordSchema changePasswordSchema);
 
   Future<Either<FailureMessage, List<ActiveCodeEntity>>> fetchActivationCodes();
+
+  Future<Either<FailureMessage, dynamic>> fetchBalanceSpending(String userID);
+
+
 }
