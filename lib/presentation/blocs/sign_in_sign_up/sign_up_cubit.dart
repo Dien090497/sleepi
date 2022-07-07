@@ -79,10 +79,8 @@ class SigInSignUpCubit extends Cubit<SignInSignUpState> {
       var setting = await _fetchSettingActiveCode.call(NoParams());
       setting.fold(
         (l) => emit(SignInSignUpState.error(l.msg)),
-        (r) => emit(SignInSignUpState.signUpSuccess(
-          r.data.isEnable,
-          userResponse,
-        )),
+        (r) => emit(
+            SignInSignUpState.signUpSuccess(r.data.isEnable, userResponse)),
       );
     });
   }
@@ -100,7 +98,7 @@ class SigInSignUpCubit extends Cubit<SignInSignUpState> {
         await _logInUseCase.call(SignInSchema(email.trim(), _password));
 
     result.fold((l) => emit(SignInSignUpState.error(l.msg)), (r) async {
-      emit(SignInSignUpState.signInSuccess(isFistOpenApp));
+      emit(SignInSignUpState.signInSuccess(isFistOpenApp, r));
     });
   }
 
@@ -174,7 +172,8 @@ class SigInSignUpCubit extends Cubit<SignInSignUpState> {
   }
 
   onPasswordChange(String value) {
-    if ((value.isEmpty || _password.isEmpty) && state is SignInSignUpStateError) {
+    if ((value.isEmpty || _password.isEmpty) &&
+        state is SignInSignUpStateError) {
       emit(const SignInSignUpState.initial());
     }
     _password = value;

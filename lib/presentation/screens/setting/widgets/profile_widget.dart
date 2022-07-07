@@ -7,8 +7,8 @@ import 'package:slee_fi/common/widgets/sf_button_outlined.dart';
 import 'package:slee_fi/common/widgets/sf_card.dart';
 import 'package:slee_fi/common/widgets/sf_list_tile.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
-import 'package:slee_fi/entities/user/user_info_entity.dart';
 import 'package:slee_fi/di/injector.dart';
+import 'package:slee_fi/entities/user/user_info_entity.dart';
 import 'package:slee_fi/l10n/locale_keys.g.dart';
 import 'package:slee_fi/presentation/screens/setting/widgets/gender_tile.dart';
 import 'package:slee_fi/usecase/logout_usecase.dart';
@@ -17,8 +17,9 @@ import 'package:slee_fi/usecase/usecase.dart';
 import 'modal_pop_up_birth_year.dart';
 
 class ProfileWidget extends StatelessWidget {
-  const ProfileWidget({Key? key, required this.userInfoModel}) : super(key: key);
-  final UserInfoEntity? userInfoModel;
+  const ProfileWidget({Key? key, required this.userInfo}) : super(key: key);
+
+  final UserInfoEntity userInfo;
 
   @override
   Widget build(BuildContext context) {
@@ -49,7 +50,7 @@ class ProfileWidget extends StatelessWidget {
                   mainAxisSize: MainAxisSize.min,
                   children: [
                     SFText(
-                      keyText: userInfoModel?.email ??"sample@aaa.com",
+                      keyText: userInfo.email,
                       style: TextStyles.lightWhite14,
                     ),
                     icon,
@@ -77,7 +78,8 @@ class ProfileWidget extends StatelessWidget {
             borderColor: AppColors.blue,
             onPressed: () {
               getIt<LogOutUseCase>().call(NoParams());
-              Navigator.pushNamedAndRemoveUntil(context, R.loginSignUp, (route) => false);
+              Navigator.pushNamedAndRemoveUntil(
+                  context, R.loginSignUp, (route) => false);
             },
           ),
         ),

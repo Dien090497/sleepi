@@ -187,8 +187,8 @@ class _$_UserInfoEntity
     implements _UserInfoEntity {
   const _$_UserInfoEntity(
       {required this.id,
-      this.name,
-      this.username,
+      required this.name,
+      required this.username,
       required final List<String> roles,
       required this.email,
       required this.isAccountDisabled,
@@ -275,8 +275,8 @@ class _$_UserInfoEntity
 abstract class _UserInfoEntity implements UserInfoEntity {
   const factory _UserInfoEntity(
       {required final int id,
-      final String? name,
-      final String? username,
+      required final String? name,
+      required final String? username,
       required final List<String> roles,
       required final String email,
       required final bool isAccountDisabled,
