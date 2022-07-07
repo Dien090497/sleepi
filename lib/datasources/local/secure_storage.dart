@@ -63,13 +63,13 @@ class SecureStorage {
       _secureStorage.write(key: StorageKeys.accessTokenKey, value: accessToken);
 
   Future<void> saveAddressContract({required String addressContract}) =>
-      _secureStorage.write(key: StorageKeys.addressContract, value: addressContract);
+      _secureStorage.write(key: StorageKeys.addressContractSpending, value: addressContract);
 
   Future<void> saveMessage({required String saveMessage}) =>
       _secureStorage.write(key: StorageKeys.saveMessage, value: saveMessage);
 
   Future<String?> readAddressContract() =>
-      _secureStorage.read(key: StorageKeys.addressContract);
+      _secureStorage.read(key: StorageKeys.addressContractSpending);
 
   Future<String?> readMessage() =>
       _secureStorage.read(key: StorageKeys.saveMessage);

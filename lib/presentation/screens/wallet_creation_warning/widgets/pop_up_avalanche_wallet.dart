@@ -36,6 +36,9 @@ class PopUpAvalancheWallet extends StatelessWidget {
                   results: {"data": state.entity},
                 ));
           }
+          if (state is createWalletError) {
+            Navigator.pop(context);
+          }
         },
         builder: (context, state) {
           final cubit = context.read<CreateWalletCubit>();
