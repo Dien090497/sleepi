@@ -377,5 +377,6 @@
   "this_field_is_required": "This field is required",
   "confirm_approve": "Confirm Approve",
   "approve" : "Approve",
+  "wallet_id": "Wallet ID",
   "successfull" : "Successfull!"
 }

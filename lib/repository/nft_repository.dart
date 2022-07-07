@@ -47,4 +47,13 @@ abstract class INFTRepository {
     required int userId,
     required Credentials credentials,
   });
+
+  Future<Either<Failure, double>> estimateGasFee({
+    required String nftAddress,
+    required String ownerAddress,
+    required String toAddress,
+    required BigInt nftId,
+    required EtherAmount gasPrice,
+    required String functionName,
+  });
 }

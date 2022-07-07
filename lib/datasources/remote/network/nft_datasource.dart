@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:injectable/injectable.dart';
 import 'package:slee_fi/common/abi/nft.g.dart';
 import 'package:slee_fi/common/abi/spending.g.dart';
@@ -71,4 +73,29 @@ class NFTDataSource {
   Spending _spending(String spendingAddress) => Spending(
       address: EthereumAddress.fromHex(spendingAddress),
       client: _web3provider.web3client);
+
+  Future<double> estimateGasFee({
+    required String nftAddress,
+    required EthereumAddress ownerAddress,
+    required EthereumAddress toAddress,
+    required BigInt nftId,
+    required EtherAmount gasPrice,
+    required String functionName,
+  }) async {
+    final Nft nft = _nft(nftAddress);
+    final transferFromFunc = nft.self.function(functionName);
+    final gasFee = await _web3provider.web3client.estimateGas(
+      sender: ownerAddress,
+      to: nft.self.address,
+      gasPrice: gasPrice,
+      data: transferFromFunc.encodeCall(
+        [
+          ownerAddress,
+          toAddress,
+          BigInt.from(12),
+        ],
+      ),
+    );
+    return gasFee * gasPrice.getInWei / BigInt.from(pow(10, 18));
+  }
 }

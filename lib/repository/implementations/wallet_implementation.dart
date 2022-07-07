@@ -170,7 +170,7 @@ class WalletImplementation extends IWalletRepository {
               .getBalance(params.walletInfoEntity.address);
           values.add(balance / BigInt.from(pow(10, 18)));
         } else {
-          final erc20 = _web3DataSource.tokenFrom(params.addressContract[i]);
+          final erc20 = _web3DataSource.token(params.addressContract[i]);
           final value = await erc20.balanceOf(
               EthereumAddress.fromHex(params.walletInfoEntity.address));
           final decimals = await erc20.decimals();

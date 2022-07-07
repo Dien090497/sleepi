@@ -129,4 +129,25 @@ class NFTImplementation extends INFTRepository {
       return Left(FailureMessage('$e'));
     }
   }
+
+  @override
+  Future<Either<Failure, double>> estimateGasFee(
+      {required String nftAddress,
+      required String ownerAddress,
+      required String toAddress,
+      required BigInt nftId,
+      required EtherAmount gasPrice,
+      required String functionName}) async {
+    try {
+      return Right(await _nftDataSource.estimateGasFee(
+          nftAddress: nftAddress,
+          ownerAddress: EthereumAddress.fromHex(ownerAddress),
+          toAddress: EthereumAddress.fromHex(toAddress),
+          nftId: nftId,
+          gasPrice: gasPrice,
+          functionName: functionName));
+    } catch (e) {
+      return Left(FailureMessage('$e'));
+    }
+  }
 }

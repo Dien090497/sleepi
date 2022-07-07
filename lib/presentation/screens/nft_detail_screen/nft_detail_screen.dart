@@ -37,12 +37,13 @@ class NFTDetailArguments {
 class NFTDetailScreen extends StatelessWidget {
   const NFTDetailScreen({Key? key}) : super(key: key);
 
-  void _showTransferDialog(BuildContext context) {
+  void _showTransferDialog(BuildContext context, [bool? isToSpending]) {
     showCustomDialog(
       context,
       children: [
         NftPopUpTransfer(
           onConfirm: () {},
+          isToSpending: isToSpending,
           onCancel: () {
             Navigator.pop(context);
           },
@@ -174,7 +175,7 @@ class NFTDetailScreen extends StatelessWidget {
                             onTap: () {
                               if (state is NftDetailLoaded) {
                                 _showListNft(context, state, () {
-                                  _showTransferDialog(context);
+                                  _showTransferDialog(context, false);
                                 });
                               }
                             },

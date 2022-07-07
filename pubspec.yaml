@@ -41,7 +41,7 @@ dependencies:
   url_launcher: ^6.1.4
   syncfusion_flutter_sliders: ^20.2.36
   syncfusion_flutter_datepicker: ^20.2.36
-  pie_chart: ^5.3.1
+  pie_chart: ^5.3.2
   pull_to_refresh: ^2.0.0
   recase: ^4.0.0
   jiffy: ^5.0.0
@@ -69,20 +69,20 @@ dependencies:
   ethereum_addresses: ^1.0.2
   permission_handler: 9.2.0
   focus_detector: ^2.0.1
-  eth_sig_util: ^0.0.8
+  eth_sig_util: ^0.0.9
   top_snackbar_flutter: ^2.1.0
 
 dev_dependencies:
   flutter_lints: ^2.0.1
-  build_runner: ^2.1.11
-  freezed: ^2.0.3+1
-  injectable_generator: ^1.5.3
+  freezed: 2.0.3+1
   json_serializable: ^6.2.0
+  build_runner: ^2.1.11
+  injectable_generator: ^1.5.3
   retrofit_generator: ^4.0.1
   flutter_launcher_icons: ^0.9.3
   isar_generator: ^2.5.0
   copy_with_extension_gen: ^4.0.2
-  test: ^1.21.3
+  test: ^1.21.4
   dart_code_metrics: ^4.16.0
 
 flutter_icons:
