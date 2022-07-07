@@ -37,7 +37,7 @@ class MyBedShortWidget extends StatelessWidget {
             ),
           ),
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16.0),
+            padding: const EdgeInsets.symmetric(horizontal: 16),
             child: Column(
               children: [
                 const Spacer(),
@@ -65,7 +65,7 @@ class MyBedShortWidget extends StatelessWidget {
                 ),
                 SizedBox(height: 4.h),
                 const SFPercentBorderGradient(valueActive: 70, totalValue: 100),
-                const SizedBox(height: 24),
+                const Spacer(),
               ],
             ),
           ),

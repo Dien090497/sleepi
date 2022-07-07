@@ -36,7 +36,7 @@ abstract class IWalletRepository {
 
   Future<Either<FailureMessage, NetworkIsarModel>> switchNetWork();
 
- Either<FailureMessage, bool> validateMnemonic(String mnemonic);
+  Future<Either<FailureMessage, bool>> validateMnemonic(String mnemonic);
 
   Future<Either<Failure, List<TransactionIsarModel>>> getHistoryTransaction(HistoryTransactionParams params);
 

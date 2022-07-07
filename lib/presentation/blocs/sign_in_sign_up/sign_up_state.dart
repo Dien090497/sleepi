@@ -19,7 +19,8 @@ class SignInSignUpState with _$SignInSignUpState {
           bool enableActiveCode, UserInfoEntity userInfoEntity) =
       SignInSignUpStateSignUpSuccess;
 
-  const factory SignInSignUpState.signInSuccess(bool isFirstOpenApp) =
+  const factory SignInSignUpState.signInSuccess(
+          bool isFirstOpenApp, UserInfoEntity userInfoEntity) =
       SignInSignUpStateSignInSuccess;
 
   const factory SignInSignUpState.verifyOTPSuccess(int otp, String email) =

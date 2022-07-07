@@ -56,7 +56,7 @@ extension StringX on String {
     if (isEmpty) {
       return LocaleKeys.this_field_is_required.tr();
     }
-    if (length < 6) {
+    if (length < 6 || length > 20) {
       return LocaleKeys.password_must_be_at_least_6.tr();
     }
 
@@ -65,11 +65,10 @@ extension StringX on String {
     RegExp regExp = RegExp(pattern);
     var result = regExp.hasMatch(this);
     if (!result) {
-      return 'Contains a capital letter, a special character and a number';
+      return LocaleKeys.password_must_be_at_least_6.tr();
     }
     if (contains(' ')) {
-      return "Don't allow user typing space in password";
-
+      return LocaleKeys.dont_allow_typing_space.tr();
     }
 
     return '';

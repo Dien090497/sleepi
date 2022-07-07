@@ -50,7 +50,6 @@ class TransactionImplementation extends ITransactionRepository{
           valueInEther: params.valueInEther ?? 0.0,
           chainId: chainId);
 
-
       if(result.isNotEmpty){
         final model = HistoryIsarModel(
           transactionHash: result,

@@ -16,10 +16,9 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$NftAttributeEntity {
-  int get id => throw _privateConstructorUsedError;
-  int get nftId => throw _privateConstructorUsedError;
-  String get contractAddress => throw _privateConstructorUsedError;
+  int get id => throw _privateConstructorUsedError; // required int nftId,
   int get tokenId => throw _privateConstructorUsedError;
+  String get contractAddress => throw _privateConstructorUsedError;
   String get owner => throw _privateConstructorUsedError;
   String get type => throw _privateConstructorUsedError;
   String get classNft => throw _privateConstructorUsedError;
@@ -45,9 +44,8 @@ abstract class $NftAttributeEntityCopyWith<$Res> {
       _$NftAttributeEntityCopyWithImpl<$Res>;
   $Res call(
       {int id,
-      int nftId,
-      String contractAddress,
       int tokenId,
+      String contractAddress,
       String owner,
       String type,
       String classNft,
@@ -74,9 +72,8 @@ class _$NftAttributeEntityCopyWithImpl<$Res>
   @override
   $Res call({
     Object? id = freezed,
-    Object? nftId = freezed,
-    Object? contractAddress = freezed,
     Object? tokenId = freezed,
+    Object? contractAddress = freezed,
     Object? owner = freezed,
     Object? type = freezed,
     Object? classNft = freezed,
@@ -95,18 +92,14 @@ class _$NftAttributeEntityCopyWithImpl<$Res>
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as int,
-      nftId: nftId == freezed
-          ? _value.nftId
-          : nftId // ignore: cast_nullable_to_non_nullable
+      tokenId: tokenId == freezed
+          ? _value.tokenId
+          : tokenId // ignore: cast_nullable_to_non_nullable
               as int,
       contractAddress: contractAddress == freezed
           ? _value.contractAddress
           : contractAddress // ignore: cast_nullable_to_non_nullable
               as String,
-      tokenId: tokenId == freezed
-          ? _value.tokenId
-          : tokenId // ignore: cast_nullable_to_non_nullable
-              as int,
       owner: owner == freezed
           ? _value.owner
           : owner // ignore: cast_nullable_to_non_nullable
@@ -168,9 +161,8 @@ abstract class _$$_NftAttributeEntityCopyWith<$Res>
   @override
   $Res call(
       {int id,
-      int nftId,
-      String contractAddress,
       int tokenId,
+      String contractAddress,
       String owner,
       String type,
       String classNft,
@@ -199,9 +191,8 @@ class __$$_NftAttributeEntityCopyWithImpl<$Res>
   @override
   $Res call({
     Object? id = freezed,
-    Object? nftId = freezed,
-    Object? contractAddress = freezed,
     Object? tokenId = freezed,
+    Object? contractAddress = freezed,
     Object? owner = freezed,
     Object? type = freezed,
     Object? classNft = freezed,
@@ -220,18 +211,14 @@ class __$$_NftAttributeEntityCopyWithImpl<$Res>
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as int,
-      nftId: nftId == freezed
-          ? _value.nftId
-          : nftId // ignore: cast_nullable_to_non_nullable
+      tokenId: tokenId == freezed
+          ? _value.tokenId
+          : tokenId // ignore: cast_nullable_to_non_nullable
               as int,
       contractAddress: contractAddress == freezed
           ? _value.contractAddress
           : contractAddress // ignore: cast_nullable_to_non_nullable
               as String,
-      tokenId: tokenId == freezed
-          ? _value.tokenId
-          : tokenId // ignore: cast_nullable_to_non_nullable
-              as int,
       owner: owner == freezed
           ? _value.owner
           : owner // ignore: cast_nullable_to_non_nullable
@@ -291,9 +278,8 @@ class _$_NftAttributeEntity
     implements _NftAttributeEntity {
   const _$_NftAttributeEntity(
       {required this.id,
-      required this.nftId,
-      required this.contractAddress,
       required this.tokenId,
+      required this.contractAddress,
       required this.owner,
       required this.type,
       required this.classNft,
@@ -309,12 +295,11 @@ class _$_NftAttributeEntity
 
   @override
   final int id;
-  @override
-  final int nftId;
-  @override
-  final String contractAddress;
+// required int nftId,
   @override
   final int tokenId;
+  @override
+  final String contractAddress;
   @override
   final String owner;
   @override
@@ -342,7 +327,7 @@ class _$_NftAttributeEntity
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'NftAttributeEntity(id: $id, nftId: $nftId, contractAddress: $contractAddress, tokenId: $tokenId, owner: $owner, type: $type, classNft: $classNft, quality: $quality, time: $time, level: $level, bedMint: $bedMint, efficiency: $efficiency, luck: $luck, bonus: $bonus, special: $special, resilience: $resilience)';
+    return 'NftAttributeEntity(id: $id, tokenId: $tokenId, contractAddress: $contractAddress, owner: $owner, type: $type, classNft: $classNft, quality: $quality, time: $time, level: $level, bedMint: $bedMint, efficiency: $efficiency, luck: $luck, bonus: $bonus, special: $special, resilience: $resilience)';
   }
 
   @override
@@ -351,9 +336,8 @@ class _$_NftAttributeEntity
     properties
       ..add(DiagnosticsProperty('type', 'NftAttributeEntity'))
       ..add(DiagnosticsProperty('id', id))
-      ..add(DiagnosticsProperty('nftId', nftId))
-      ..add(DiagnosticsProperty('contractAddress', contractAddress))
       ..add(DiagnosticsProperty('tokenId', tokenId))
+      ..add(DiagnosticsProperty('contractAddress', contractAddress))
       ..add(DiagnosticsProperty('owner', owner))
       ..add(DiagnosticsProperty('type', type))
       ..add(DiagnosticsProperty('classNft', classNft))
@@ -374,10 +358,9 @@ class _$_NftAttributeEntity
         (other.runtimeType == runtimeType &&
             other is _$_NftAttributeEntity &&
             const DeepCollectionEquality().equals(other.id, id) &&
-            const DeepCollectionEquality().equals(other.nftId, nftId) &&
+            const DeepCollectionEquality().equals(other.tokenId, tokenId) &&
             const DeepCollectionEquality()
                 .equals(other.contractAddress, contractAddress) &&
-            const DeepCollectionEquality().equals(other.tokenId, tokenId) &&
             const DeepCollectionEquality().equals(other.owner, owner) &&
             const DeepCollectionEquality().equals(other.type, type) &&
             const DeepCollectionEquality().equals(other.classNft, classNft) &&
@@ -398,9 +381,8 @@ class _$_NftAttributeEntity
   int get hashCode => Object.hash(
       runtimeType,
       const DeepCollectionEquality().hash(id),
-      const DeepCollectionEquality().hash(nftId),
-      const DeepCollectionEquality().hash(contractAddress),
       const DeepCollectionEquality().hash(tokenId),
+      const DeepCollectionEquality().hash(contractAddress),
       const DeepCollectionEquality().hash(owner),
       const DeepCollectionEquality().hash(type),
       const DeepCollectionEquality().hash(classNft),
@@ -424,9 +406,8 @@ class _$_NftAttributeEntity
 abstract class _NftAttributeEntity implements NftAttributeEntity {
   const factory _NftAttributeEntity(
       {required final int id,
-      required final int nftId,
-      required final String contractAddress,
       required final int tokenId,
+      required final String contractAddress,
       required final String owner,
       required final String type,
       required final String classNft,
@@ -442,12 +423,10 @@ abstract class _NftAttributeEntity implements NftAttributeEntity {
 
   @override
   int get id => throw _privateConstructorUsedError;
-  @override
-  int get nftId => throw _privateConstructorUsedError;
+  @override // required int nftId,
+  int get tokenId => throw _privateConstructorUsedError;
   @override
   String get contractAddress => throw _privateConstructorUsedError;
-  @override
-  int get tokenId => throw _privateConstructorUsedError;
   @override
   String get owner => throw _privateConstructorUsedError;
   @override

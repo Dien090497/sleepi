@@ -1,5 +1,6 @@
 
 
+import 'package:flutter/material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 part 'activation_code_state.freezed.dart';
 @freezed
@@ -11,7 +12,7 @@ class ActivationCodeState with _$ActivationCodeState{
 
   const factory ActivationCodeState.process() = ActivationCodeStateProcess;
 
-  const factory ActivationCodeState.activeSuccess(String activationCode) = ActivationCodeStateActiveSuccess;
+  const factory ActivationCodeState.activeSuccess(String activationCode, Locale localeSelected) = ActivationCodeStateActiveSuccess;
 
 
 }

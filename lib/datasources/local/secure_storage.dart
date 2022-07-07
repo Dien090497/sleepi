@@ -55,4 +55,22 @@ class SecureStorage {
   Future<void> makeFirstOpen() async {
     await _secureStorage.write(key: StorageKeys.firstOpenKey, value: 'first');
   }
+
+  Future<String?> getAccessToken() =>
+      _secureStorage.read(key: StorageKeys.accessTokenKey);
+
+  Future<void> saveAccessToken(String accessToken) =>
+      _secureStorage.write(key: StorageKeys.accessTokenKey, value: accessToken);
+
+  Future<void> saveAddressContract({required String addressContract}) =>
+      _secureStorage.write(key: StorageKeys.addressContract, value: addressContract);
+
+  Future<void> saveMessage({required String saveMessage}) =>
+      _secureStorage.write(key: StorageKeys.saveMessage, value: saveMessage);
+
+  Future<String?> readAddressContract() =>
+      _secureStorage.read(key: StorageKeys.addressContract);
+
+  Future<String?> readMessage() =>
+      _secureStorage.read(key: StorageKeys.saveMessage);
 }

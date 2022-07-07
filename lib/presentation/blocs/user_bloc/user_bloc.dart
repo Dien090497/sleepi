@@ -7,8 +7,15 @@ part 'user_event.dart';
 
 class UserBloc extends Bloc<UserEvent, UserState> {
   UserBloc() : super(const UserState.initial()) {
-    on<UserEvent>((event, emit) {
-      // TODO: implement event handler
-    });
+    on<UpdateUser>(_onUpdateUser);
+  }
+
+  void _onUpdateUser(UpdateUser event, emit) {
+    final currentState = state;
+    if (currentState is UserLoaded) {
+      emit(currentState.copyWith(userInfoEntity: event.userInfoEntity));
+    } else {
+      emit(UserState.loaded(event.userInfoEntity));
+    }
   }
 }

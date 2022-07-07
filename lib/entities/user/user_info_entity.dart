@@ -6,13 +6,13 @@ part 'user_info_entity.freezed.dart';
 @freezed
 class UserInfoEntity with _$UserInfoEntity {
   const factory UserInfoEntity({
- required   int id,
-   String? name,
-   String? username,
- required   List<String> roles,
- required   String email,
- required   bool isAccountDisabled,
- required   String createdAt,
- required   String updatedAt,
-}) = _UserInfoEntity;
+    required int id,
+    required String? name,
+    required String? username,
+    required List<String> roles,
+    required String email,
+    required bool isAccountDisabled,
+    required String createdAt,
+    required String updatedAt,
+  }) = _UserInfoEntity;
 }

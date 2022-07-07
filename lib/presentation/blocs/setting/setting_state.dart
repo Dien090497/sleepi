@@ -1,5 +1,4 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:slee_fi/entities/user/user_info_entity.dart';
 import 'package:slee_fi/models/isar_models/network_isar/network_isar_model.dart';
 
 part 'setting_state.freezed.dart';
@@ -14,5 +13,5 @@ class SettingState with _$SettingState {
 
   const factory SettingState.error() = SettingError;
 
-  const factory SettingState.loadUserSuccess(UserInfoEntity userInfoModel) = SettingStateLoadUserSuccess;
+  const factory SettingState.loadUserSuccess() = SettingStateLoadUserSuccess;
 }

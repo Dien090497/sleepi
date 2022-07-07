@@ -5,21 +5,26 @@ import 'package:dartz/dartz.dart';
 import 'package:injectable/injectable.dart';
 import 'package:slee_fi/common/const/const.dart';
 import 'package:slee_fi/common/enum/enum.dart';
+import 'package:slee_fi/common/extensions/string_x.dart';
 import 'package:slee_fi/datasources/local/get_storage_datasource.dart';
 import 'package:slee_fi/datasources/local/history_datasource.dart';
 import 'package:slee_fi/datasources/local/isar/isar_datasource.dart';
+import 'package:slee_fi/datasources/local/secure_storage.dart';
+import 'package:slee_fi/datasources/remote/auth_datasource/auth_datasource.dart';
 import 'package:slee_fi/datasources/remote/network/web3_datasource.dart';
 import 'package:slee_fi/datasources/remote/network/web3_provider.dart';
 import 'package:slee_fi/datasources/remote/transaction_datasource/transaction_remote_datasource.dart';
 import 'package:slee_fi/entities/wallet_info/wallet_info_entity.dart';
 import 'package:slee_fi/failures/failure.dart';
 import 'package:slee_fi/models/isar_models/history_isar/history_isar_model.dart';
+import 'package:slee_fi/l10n/locale_keys.g.dart';
 import 'package:slee_fi/models/isar_models/native_currency_isar/native_currency_isar_model.dart';
 import 'package:slee_fi/models/isar_models/network_isar/network_isar_model.dart';
 import 'package:slee_fi/models/isar_models/transaction_isar/transaction_isar_model.dart';
 import 'package:slee_fi/models/isar_models/wallet_isar/wallet_isar_model.dart';
 import 'package:slee_fi/models/transaction_history/transaction_history_model.dart';
 import 'package:slee_fi/repository/wallet_repository.dart';
+import 'package:slee_fi/schema/verify_user_schema/verify_user_schema.dart';
 import 'package:slee_fi/usecase/get_balance_for_tokens_usecase.dart';
 import 'package:slee_fi/usecase/get_history_transaction_usecase.dart';
 import 'package:web3dart/web3dart.dart';
@@ -32,9 +37,11 @@ class WalletImplementation extends IWalletRepository {
   final IsarDataSource _isarDataSource;
   final HistoryDataSource _historyDataSource;
   final TransactionRemoteDataSource _transactionRemoteDataSource;
+  final SecureStorage _secureStorage;
+  final AuthDataSource _authDataSource;
 
   WalletImplementation(this._web3DataSource, this._getStorageDataSource,
-     this._transactionRemoteDataSource, this._isarDataSource, this._historyDataSource, this._web3provider);
+      this._isarDataSource, this._web3provider, this._secureStorage, this._authDataSource);
 
   @override
   Future<Either<Failure, WalletInfoEntity>> createWallet() async {
@@ -56,6 +63,8 @@ class WalletImplementation extends IWalletRepository {
         address: ethereumAddress.hex,
         derivedIndex: derivedIndex,
       );
+
+      'private key  $privateKey  \n seed phrase  ${model.address}'.log;
       final int walletId = await _isarDataSource.putWallet(model);
       model.id = walletId;
       await _getStorageDataSource.setCurrentWalletId(walletId);
@@ -174,8 +183,8 @@ class WalletImplementation extends IWalletRepository {
           break;
         }
         if (params.addressContract[i] == Const.tokens[0]['address']) {
-          var balance = await _web3DataSource
-              .getBalance(params.walletInfoEntity.address);
+          var balance =
+              await _web3DataSource.getBalance(params.walletInfoEntity.address);
           values.add(balance / BigInt.from(pow(10, 18)));
         } else {
           final erc20 = _web3DataSource.tokenFrom(params.addressContract[i]);
@@ -261,7 +270,7 @@ class WalletImplementation extends IWalletRepository {
       var walletId = _getStorageDataSource.getCurrentWalletId();
       var wallet = await _isarDataSource.getWalletAt(walletId);
       if (contractAddress == Const.tokens[0]['address']) {
-        balance =await _web3DataSource.getBalance(wallet!.address);
+        balance = await _web3DataSource.getBalance(wallet!.address);
         return Right(balance / BigInt.from(pow(10, 18)));
       } else {
         balance = await _web3DataSource.getBalanceOf(
@@ -353,9 +362,32 @@ class WalletImplementation extends IWalletRepository {
   }
 
   @override
-  Either<FailureMessage, bool> validateMnemonic(String mnemonic) {
+  Future<Either<FailureMessage, bool>> validateMnemonic(String mnemonic) async {
     try {
-      return Right(_web3DataSource.validateMnemonic(mnemonic));
+      if (_web3DataSource.validateMnemonic(mnemonic)) {
+        final network = await _getCurrentNetwork();
+        final privateKey = _web3DataSource.mnemonicToPrivateKey(
+            mnemonic, 0, network.slip44);
+        final credentials = _web3DataSource.credentialsFromPrivateKey(privateKey);
+        final message = await _secureStorage.readMessage();
+        final ethereumAddress = await credentials.extractAddress();
+        final signature = _web3DataSource.generateSignature(privateKey: privateKey, message: message ?? '');
+        final user = await _secureStorage.readCurrentUser();
+        VerifyUserSchema schema = VerifyUserSchema(
+          signedMessage: signature,
+          signer: ethereumAddress.hexEip55,
+          email: user?.email ?? '',
+          message: message ?? '',
+        );
+        final result = await _authDataSource.verifyUser(schema);
+        if (result.status) {
+          return Right(result.status);
+        } else {
+          return const Left(FailureMessage(LocaleKeys.password));
+        }
+      } else {
+        return const Left(FailureMessage(LocaleKeys.password));
+      }
     } catch (e) {
       return Left(FailureMessage('$e'));
     }

@@ -109,11 +109,12 @@ class _SFTextFieldPasswordState extends State<SFTextFieldPassword> {
           maxLines: widget.maxLine ?? 1,
           maxLength: widget.maxLength,
         ),
-         const SizedBox(height: 4),
-         SizedBox(
-           height: 35,
-           child:   Text(widget.errorText, style: TextStyles.w400Red12,maxLines: 2,),
-         ),
+        const SizedBox(height: 4),
+        Text(
+          widget.errorText,
+          style: TextStyles.w400Red12,
+          maxLines: 3,
+        ),
       ],
     );
   }

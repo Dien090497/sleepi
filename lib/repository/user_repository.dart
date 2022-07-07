@@ -1,9 +1,16 @@
 import 'package:dartz/dartz.dart';
+import 'package:slee_fi/entities/active_code/active_code_entity.dart';
 import 'package:slee_fi/failures/failure.dart';
+import 'package:slee_fi/models/global_config_response/global_config_response.dart';
 import 'package:slee_fi/schema/change_password_schema/change_password_schema.dart';
 
 abstract class IUserRepository {
-  Future<Either<FailureMessage, Object>> changePassword(ChangePasswordSchema changePasswordSchema);
+  Future<Either<FailureMessage, dynamic>> changePassword(ChangePasswordSchema changePasswordSchema);
 
-  Future<Either<FailureMessage, Object>> fetchActivationCodes();
+  Future<Either<FailureMessage, List<ActiveCodeEntity>>> fetchActivationCodes();
+
+  Future<Either<FailureMessage, dynamic>> fetchBalanceSpending(String userID);
+
+  Future<Either<FailureMessage, GlobalConfigResponse>> getGlobalConfig();
+
 }

@@ -8,7 +8,9 @@ class SFGridView extends StatefulWidget {
     this.childAspectRatio = 9 / 10,
     this.isScroll = true,
     this.physics,
+    this.padding,
     Key? key,
+    this.onRefresh,
   }) : super(key: key);
 
   final IndexedWidgetBuilder itemBuilder;
@@ -16,6 +18,8 @@ class SFGridView extends StatefulWidget {
   final double childAspectRatio;
   final bool isScroll;
   final ScrollPhysics? physics;
+  final EdgeInsets? padding;
+  final Function? onRefresh;
 
   @override
   State<SFGridView> createState() => _SFGridViewState();
@@ -26,7 +30,7 @@ class _SFGridViewState extends State<SFGridView> {
       RefreshController(initialRefresh: false);
 
   void _onRefresh() async {
-    await Future.delayed(const Duration(milliseconds: 1000));
+    widget.onRefresh!();
     _refreshController.refreshCompleted();
   }
 
@@ -48,7 +52,7 @@ class _SFGridViewState extends State<SFGridView> {
           itemCount: widget.count,
           shrinkWrap: true,
           physics: widget.physics,
-          padding: const EdgeInsets.symmetric(vertical: 16),
+          padding: widget.padding ?? const EdgeInsets.symmetric(vertical: 16),
           keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
           gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisCount: 2,

@@ -22,7 +22,7 @@ mixin _$SettingState {
     required TResult Function() loading,
     required TResult Function(NetworkIsarModel network) loaded,
     required TResult Function() error,
-    required TResult Function(UserInfoEntity userInfoModel) loadUserSuccess,
+    required TResult Function() loadUserSuccess,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -31,7 +31,7 @@ mixin _$SettingState {
     TResult Function()? loading,
     TResult Function(NetworkIsarModel network)? loaded,
     TResult Function()? error,
-    TResult Function(UserInfoEntity userInfoModel)? loadUserSuccess,
+    TResult Function()? loadUserSuccess,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -40,7 +40,7 @@ mixin _$SettingState {
     TResult Function()? loading,
     TResult Function(NetworkIsarModel network)? loaded,
     TResult Function()? error,
-    TResult Function(UserInfoEntity userInfoModel)? loadUserSuccess,
+    TResult Function()? loadUserSuccess,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -136,7 +136,7 @@ class _$SettingInitial implements SettingInitial {
     required TResult Function() loading,
     required TResult Function(NetworkIsarModel network) loaded,
     required TResult Function() error,
-    required TResult Function(UserInfoEntity userInfoModel) loadUserSuccess,
+    required TResult Function() loadUserSuccess,
   }) {
     return initial();
   }
@@ -148,7 +148,7 @@ class _$SettingInitial implements SettingInitial {
     TResult Function()? loading,
     TResult Function(NetworkIsarModel network)? loaded,
     TResult Function()? error,
-    TResult Function(UserInfoEntity userInfoModel)? loadUserSuccess,
+    TResult Function()? loadUserSuccess,
   }) {
     return initial?.call();
   }
@@ -160,7 +160,7 @@ class _$SettingInitial implements SettingInitial {
     TResult Function()? loading,
     TResult Function(NetworkIsarModel network)? loaded,
     TResult Function()? error,
-    TResult Function(UserInfoEntity userInfoModel)? loadUserSuccess,
+    TResult Function()? loadUserSuccess,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -260,7 +260,7 @@ class _$SettingLoading implements SettingLoading {
     required TResult Function() loading,
     required TResult Function(NetworkIsarModel network) loaded,
     required TResult Function() error,
-    required TResult Function(UserInfoEntity userInfoModel) loadUserSuccess,
+    required TResult Function() loadUserSuccess,
   }) {
     return loading();
   }
@@ -272,7 +272,7 @@ class _$SettingLoading implements SettingLoading {
     TResult Function()? loading,
     TResult Function(NetworkIsarModel network)? loaded,
     TResult Function()? error,
-    TResult Function(UserInfoEntity userInfoModel)? loadUserSuccess,
+    TResult Function()? loadUserSuccess,
   }) {
     return loading?.call();
   }
@@ -284,7 +284,7 @@ class _$SettingLoading implements SettingLoading {
     TResult Function()? loading,
     TResult Function(NetworkIsarModel network)? loaded,
     TResult Function()? error,
-    TResult Function(UserInfoEntity userInfoModel)? loadUserSuccess,
+    TResult Function()? loadUserSuccess,
     required TResult orElse(),
   }) {
     if (loading != null) {
@@ -408,7 +408,7 @@ class _$SettingLoaded implements SettingLoaded {
     required TResult Function() loading,
     required TResult Function(NetworkIsarModel network) loaded,
     required TResult Function() error,
-    required TResult Function(UserInfoEntity userInfoModel) loadUserSuccess,
+    required TResult Function() loadUserSuccess,
   }) {
     return loaded(network);
   }
@@ -420,7 +420,7 @@ class _$SettingLoaded implements SettingLoaded {
     TResult Function()? loading,
     TResult Function(NetworkIsarModel network)? loaded,
     TResult Function()? error,
-    TResult Function(UserInfoEntity userInfoModel)? loadUserSuccess,
+    TResult Function()? loadUserSuccess,
   }) {
     return loaded?.call(network);
   }
@@ -432,7 +432,7 @@ class _$SettingLoaded implements SettingLoaded {
     TResult Function()? loading,
     TResult Function(NetworkIsarModel network)? loaded,
     TResult Function()? error,
-    TResult Function(UserInfoEntity userInfoModel)? loadUserSuccess,
+    TResult Function()? loadUserSuccess,
     required TResult orElse(),
   }) {
     if (loaded != null) {
@@ -538,7 +538,7 @@ class _$SettingError implements SettingError {
     required TResult Function() loading,
     required TResult Function(NetworkIsarModel network) loaded,
     required TResult Function() error,
-    required TResult Function(UserInfoEntity userInfoModel) loadUserSuccess,
+    required TResult Function() loadUserSuccess,
   }) {
     return error();
   }
@@ -550,7 +550,7 @@ class _$SettingError implements SettingError {
     TResult Function()? loading,
     TResult Function(NetworkIsarModel network)? loaded,
     TResult Function()? error,
-    TResult Function(UserInfoEntity userInfoModel)? loadUserSuccess,
+    TResult Function()? loadUserSuccess,
   }) {
     return error?.call();
   }
@@ -562,7 +562,7 @@ class _$SettingError implements SettingError {
     TResult Function()? loading,
     TResult Function(NetworkIsarModel network)? loaded,
     TResult Function()? error,
-    TResult Function(UserInfoEntity userInfoModel)? loadUserSuccess,
+    TResult Function()? loadUserSuccess,
     required TResult orElse(),
   }) {
     if (error != null) {
@@ -623,9 +623,6 @@ abstract class _$$SettingStateLoadUserSuccessCopyWith<$Res> {
           _$SettingStateLoadUserSuccess value,
           $Res Function(_$SettingStateLoadUserSuccess) then) =
       __$$SettingStateLoadUserSuccessCopyWithImpl<$Res>;
-  $Res call({UserInfoEntity userInfoModel});
-
-  $UserInfoEntityCopyWith<$Res> get userInfoModel;
 }
 
 /// @nodoc
@@ -640,58 +637,27 @@ class __$$SettingStateLoadUserSuccessCopyWithImpl<$Res>
   @override
   _$SettingStateLoadUserSuccess get _value =>
       super._value as _$SettingStateLoadUserSuccess;
-
-  @override
-  $Res call({
-    Object? userInfoModel = freezed,
-  }) {
-    return _then(_$SettingStateLoadUserSuccess(
-      userInfoModel == freezed
-          ? _value.userInfoModel
-          : userInfoModel // ignore: cast_nullable_to_non_nullable
-              as UserInfoEntity,
-    ));
-  }
-
-  @override
-  $UserInfoEntityCopyWith<$Res> get userInfoModel {
-    return $UserInfoEntityCopyWith<$Res>(_value.userInfoModel, (value) {
-      return _then(_value.copyWith(userInfoModel: value));
-    });
-  }
 }
 
 /// @nodoc
 
 class _$SettingStateLoadUserSuccess implements SettingStateLoadUserSuccess {
-  const _$SettingStateLoadUserSuccess(this.userInfoModel);
-
-  @override
-  final UserInfoEntity userInfoModel;
+  const _$SettingStateLoadUserSuccess();
 
   @override
   String toString() {
-    return 'SettingState.loadUserSuccess(userInfoModel: $userInfoModel)';
+    return 'SettingState.loadUserSuccess()';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$SettingStateLoadUserSuccess &&
-            const DeepCollectionEquality()
-                .equals(other.userInfoModel, userInfoModel));
+            other is _$SettingStateLoadUserSuccess);
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType, const DeepCollectionEquality().hash(userInfoModel));
-
-  @JsonKey(ignore: true)
-  @override
-  _$$SettingStateLoadUserSuccessCopyWith<_$SettingStateLoadUserSuccess>
-      get copyWith => __$$SettingStateLoadUserSuccessCopyWithImpl<
-          _$SettingStateLoadUserSuccess>(this, _$identity);
+  int get hashCode => runtimeType.hashCode;
 
   @override
   @optionalTypeArgs
@@ -700,9 +666,9 @@ class _$SettingStateLoadUserSuccess implements SettingStateLoadUserSuccess {
     required TResult Function() loading,
     required TResult Function(NetworkIsarModel network) loaded,
     required TResult Function() error,
-    required TResult Function(UserInfoEntity userInfoModel) loadUserSuccess,
+    required TResult Function() loadUserSuccess,
   }) {
-    return loadUserSuccess(userInfoModel);
+    return loadUserSuccess();
   }
 
   @override
@@ -712,9 +678,9 @@ class _$SettingStateLoadUserSuccess implements SettingStateLoadUserSuccess {
     TResult Function()? loading,
     TResult Function(NetworkIsarModel network)? loaded,
     TResult Function()? error,
-    TResult Function(UserInfoEntity userInfoModel)? loadUserSuccess,
+    TResult Function()? loadUserSuccess,
   }) {
-    return loadUserSuccess?.call(userInfoModel);
+    return loadUserSuccess?.call();
   }
 
   @override
@@ -724,11 +690,11 @@ class _$SettingStateLoadUserSuccess implements SettingStateLoadUserSuccess {
     TResult Function()? loading,
     TResult Function(NetworkIsarModel network)? loaded,
     TResult Function()? error,
-    TResult Function(UserInfoEntity userInfoModel)? loadUserSuccess,
+    TResult Function()? loadUserSuccess,
     required TResult orElse(),
   }) {
     if (loadUserSuccess != null) {
-      return loadUserSuccess(userInfoModel);
+      return loadUserSuccess();
     }
     return orElse();
   }
@@ -776,11 +742,5 @@ class _$SettingStateLoadUserSuccess implements SettingStateLoadUserSuccess {
 }
 
 abstract class SettingStateLoadUserSuccess implements SettingState {
-  const factory SettingStateLoadUserSuccess(
-      final UserInfoEntity userInfoModel) = _$SettingStateLoadUserSuccess;
-
-  UserInfoEntity get userInfoModel => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
-  _$$SettingStateLoadUserSuccessCopyWith<_$SettingStateLoadUserSuccess>
-      get copyWith => throw _privateConstructorUsedError;
+  const factory SettingStateLoadUserSuccess() = _$SettingStateLoadUserSuccess;
 }

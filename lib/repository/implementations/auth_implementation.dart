@@ -48,6 +48,7 @@ class AuthImplementation extends IAuthRepository {
     try {
       var result = await _authDataSource.signIn(signInSchema);
       _secureStorage.writeUser(result.data.user);
+      _secureStorage.saveAccessToken(result.data.accessToken);
       return Right(result.data.user.toEntity());
     } on Exception catch (e) {
       return Left(FailureMessage.fromException(e));
@@ -174,7 +175,7 @@ class AuthImplementation extends IAuthRepository {
     }
   }
 
-  @override
+
   Future<Either<FailureMessage, bool>> saveUser(
       UserInfoModel userInfoModel) async {
     try {

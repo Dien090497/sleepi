@@ -298,7 +298,7 @@ P _networkIsarModelDeserializePropWeb<P>(Object jsObj, String propertyName) {
 void _networkIsarModelAttachLinks(
     IsarCollection col, int id, NetworkIsarModel object) {
   object.ens.attach(col, col.isar.ensIsarModels, 'ens', id);
-  object.explorers.attach(col, col.isar.explorersIsarModels, 'explorers', id);
+  object.explorers.attach(col, col.isar.explorers, 'explorers', id);
   object.nativeCurrency
       .attach(col, col.isar.nativeCurrencies, 'nativeCurrency', id);
   object.tokenDefault.attach(col, col.isar.tokenDefault, 'tokenDefault', id);
@@ -1539,7 +1539,7 @@ extension NetworkIsarModelQueryLinks
   QueryBuilder<NetworkIsarModel, NetworkIsarModel, QAfterFilterCondition>
       explorers(FilterQuery<ExplorersIsarModel> q) {
     return linkInternal(
-      isar.explorersIsarModels,
+      isar.explorers,
       q,
       'explorers',
     );

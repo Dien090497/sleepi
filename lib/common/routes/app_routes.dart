@@ -43,6 +43,7 @@ import 'package:slee_fi/presentation/screens/setting_permission/widgets/mic_scre
 import 'package:slee_fi/presentation/screens/setting_permission/widgets/motion_data_screen.dart';
 import 'package:slee_fi/presentation/screens/setting_permission/widgets/notification_screen.dart';
 import 'package:slee_fi/presentation/screens/setting_wallet/setting_wallet_screen.dart';
+import 'package:slee_fi/presentation/screens/splash/splash_screen.dart';
 import 'package:slee_fi/presentation/screens/staking/layout/deposit_slft_screen.dart';
 import 'package:slee_fi/presentation/screens/staking/layout/withdraw_slft_screen.dart';
 import 'package:slee_fi/presentation/screens/staking/staking_screen.dart';
@@ -117,7 +118,7 @@ class R {
 class AppRoutes {
   static final routes = {
     R.loginSignUp: (_) => const LoginSignUpScreen(),
-    R.splash: (_) => const LoginSignUpScreen(),
+    R.splash: (_) => const SplashScreen(),
     R.enterActivationCode: (_) => const EnterActivationCodeScreen(),
     R.bottomNavigation: (_) => const BottomNavigationScreen(),
     R.recycle: (_) => const RecycleScreen(),

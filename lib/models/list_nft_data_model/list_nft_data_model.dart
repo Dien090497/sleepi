@@ -7,9 +7,9 @@ part 'list_nft_data_model.g.dart';
 @JsonSerializable()
 class ListNftDataModel {
   final List<NftDataModel> data;
-  final _Meta meta;
+  // final _Meta meta;
 
-  ListNftDataModel(this.data, this.meta);
+  ListNftDataModel(this.data);
 
   factory ListNftDataModel.fromJson(Map<String, dynamic> json) =>
       _$ListNftDataModelFromJson(json);
@@ -19,14 +19,9 @@ class ListNftDataModel {
 
 @JsonSerializable()
 class _Meta {
-  final int itemCount;
-  final int totalItem;
-  final int itemsPerPage;
-  final int totalPages;
-  final int currentPage;
+  final int count;
 
-  _Meta(this.itemCount, this.totalItem, this.itemsPerPage, this.totalPages,
-      this.currentPage);
+  _Meta(this.count);
 
   factory _Meta.fromJson(Map<String, dynamic> json) => _$MetaFromJson(json);
 

@@ -51,13 +51,10 @@ enum OTPType {
 enum TokenToSpending { approve, spending }
 
 enum NftType {
-  beds('Beds'),
+  bed('Bed'),
   bedbox('Bedbox'),
-  efficiency('Efficiency'),
-  luck('Luck'),
-  resilience('Resilience'),
-  special('Special'),
-  bonus('Bonus');
+  jewel('Jewel'),
+  item('Item');
 
   const NftType(this.name);
 

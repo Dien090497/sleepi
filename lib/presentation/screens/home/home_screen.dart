@@ -103,6 +103,11 @@ class HomeScreen extends StatelessWidget {
                                       ],
                                     ),
                                   ),
+                                  const SizedBox(height: 24),
+                                  SFText(
+                                    keyText: 'You can set your alarm here',
+                                    style: TextStyles.lightGrey12,
+                                  )
                                 ],
                               ),
                             ),

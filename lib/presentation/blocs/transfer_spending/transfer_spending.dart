@@ -16,9 +16,9 @@ class TransferSpendingCubit extends Cubit<TransferSpendingState> {
   final _approveUseCase = getIt<ApproveUseCase>();
 
   Future<void> transferSpending(
-      {required double amount, required String addressContract}) async {
+      {required double amount, required String addressContract, required int userId}) async {
     final params = ToSpendingParams(
-        amount: amount, addressContract: addressContract, userId: 0);
+        amount: amount, addressContract: addressContract, userId: userId);
     final result = await _toSpendingUseCase.call(params);
     result.fold(
           (l) {

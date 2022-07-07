@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
 import 'package:slee_fi/common/widgets/sf_buttons.dart';
@@ -6,6 +7,8 @@ import 'package:slee_fi/common/widgets/sf_card.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
 import 'package:slee_fi/l10n/locale_keys.g.dart';
 import 'package:slee_fi/presentation/blocs/transfer_spending/transfer_spending.dart';
+import 'package:slee_fi/presentation/blocs/user_bloc/user_bloc.dart';
+import 'package:slee_fi/presentation/blocs/user_bloc/user_state.dart';
 
 class PopUpConfirmTransfer extends StatelessWidget {
   const PopUpConfirmTransfer(
@@ -133,7 +136,28 @@ class PopUpConfirmTransfer extends StatelessWidget {
               const SizedBox(
                 width: 16.0,
               ),
-              Expanded(
+              BlocBuilder<UserBloc, UserState>(
+                builder: (context, userState) {
+                  if (userState is UserLoaded) {
+                    return Expanded(
+                      child: SFButton(
+                        text: LocaleKeys.confirm,
+                        textStyle: TextStyles.bold14LightWhite,
+                        width: double.infinity,
+                        gradient: AppColors.gradientBlueButton,
+                        onPressed: () {
+                          Navigator.pop(context);
+                          //showSuccessfulDialog(context, null);
+                          cubit.transferSpending(amount: amount, addressContract: contractAddress, userId: userState.userInfoEntity.id);
+                        },
+                      ),
+                    );
+                    //return ProfileWidget(userInfo: userState.userInfoEntity);
+                  }
+                  return const SizedBox();
+                },
+              ),
+              /*Expanded(
                 child: SFButton(
                   text: LocaleKeys.confirm,
                   textStyle: TextStyles.bold14LightWhite,
@@ -145,7 +169,7 @@ class PopUpConfirmTransfer extends StatelessWidget {
                     cubit.transferSpending(amount: amount, addressContract: contractAddress);
                   },
                 ),
-              ),
+              ),*/
             ],
           )
         ],

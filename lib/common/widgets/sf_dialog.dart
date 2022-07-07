@@ -48,10 +48,51 @@ Future<T?> showSuccessfulDialog<T>(BuildContext context, String? message,
             const SFIcon(Ics.successful),
             const SizedBox(height: 36),
             SFText(
+                textAlign: TextAlign.center,
                 keyText: message ?? LocaleKeys.success,
-                maxLines: 1,
                 style: style ?? TextStyles.bold18White),
             const SizedBox(height: 40),
+          ],
+        );
+      });
+}
+
+Future<T?> showSignUpSuccess<T>(BuildContext context,) async {
+  return showDialog(
+      context: context,
+      barrierColor: AppColors.backgroundDialog,
+      builder: (context) {
+        return SFDialog(
+          children: [
+            Align(
+              alignment: Alignment.centerRight,
+              child: IconButton(
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+                icon: const Icon(Icons.close, color: AppColors.white),
+              ),
+            ),
+            SFText(
+                keyText: LocaleKeys.successfull,
+                maxLines: 1,
+                style: TextStyles.bold18White),
+            const SizedBox(height: 12),
+            SFText(
+                keyText: LocaleKeys.your_account_has_been_create,
+                maxLines: 1,
+                style: TextStyles.lightGrey14),
+            const SizedBox(height: 44),
+            const SFIcon(Ics.successful),
+            const SizedBox(height: 50),
+            SFButton(
+              width: 180,
+              height: 48,
+              text: LocaleKeys.continue_,
+              onPressed: () => Navigator.of(context).pop(),
+              color: AppColors.blue,
+            ),
+            const SizedBox(height: 32),
           ],
         );
       });

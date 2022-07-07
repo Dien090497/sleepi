@@ -103,8 +103,14 @@ class IsarDataSource {
     return _isar.writeTxn((isar) => isar.networks.put(model));
   }
 
-  Future<NetworkIsarModel?> getNetworkAt(int chainId) =>
-      _isar.networks.get(chainId);
+  Future<NetworkIsarModel?> getNetworkAt(int chainId) async {
+    final network = await _isar.networks.get(chainId);
+    if (network == null) return null;
+    await Future.wait([
+      network.explorers.load(),
+    ]);
+    return network;
+  }
 
   Future<int?> networksCount() => _isar.networks.count();
 
@@ -142,7 +148,6 @@ class IsarDataSource {
     });
   }
 
-  ///
   /// For Native Currency
   ///
   Future<NativeCurrencyIsarModel?> getNativeCurrency(int chainId) async {

@@ -17,8 +17,6 @@ abstract class INFTRepository {
   Future<Either<Failure, List<NFTEntity>>> getListNftData({
     required List<BigInt> tokenIds,
     required NftType nftType,
-    int? page,
-    int? limit,
   });
 
   Future<Either<Failure, bool>> isApprovedForAll({
@@ -39,6 +37,14 @@ abstract class INFTRepository {
     required String ownerAddress,
     required String toAddress,
     required BigInt tokenId,
+    required Credentials credentials,
+  });
+
+  Future<Either<Failure, String>> deposit({
+    required String spendingAddress,
+    required String nftAddress,
+    required BigInt amount,
+    required int userId,
     required Credentials credentials,
   });
 }

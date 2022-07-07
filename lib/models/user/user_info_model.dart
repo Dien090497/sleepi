@@ -24,13 +24,12 @@ class UserInfoModel {
 
   UserInfoEntity toEntity() => UserInfoEntity(
         id: id,
+        name: name,
+        username: username,
         roles: roles,
         email: email,
         isAccountDisabled: isAccountDisabled,
         createdAt: createdAt,
         updatedAt: updatedAt,
       );
-
-  factory UserInfoModel.emptyUser(String email) =>
-      UserInfoModel(0, '', '', [], email, false, '', '');
 }

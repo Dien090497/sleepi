@@ -2,7 +2,6 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:slee_fi/common/const/const.dart';
 import 'package:slee_fi/common/extensions/string_x.dart';
 import 'package:slee_fi/common/routes/app_routes.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
@@ -16,9 +15,10 @@ import 'package:slee_fi/common/widgets/textfield_verification.dart';
 import 'package:slee_fi/l10n/locale_keys.g.dart';
 import 'package:slee_fi/presentation/blocs/sign_in_sign_up/sign_up_cubit.dart';
 import 'package:slee_fi/presentation/blocs/sign_in_sign_up/sign_up_state.dart';
+import 'package:slee_fi/presentation/blocs/user_bloc/user_bloc.dart';
 import 'package:slee_fi/presentation/screens/create_password/create_password_screen.dart';
 import 'package:slee_fi/presentation/screens/enter_activation_code/enter_activation_code_screen.dart';
-import 'package:url_launcher/url_launcher.dart';
+import 'package:slee_fi/presentation/screens/setting_permission/widgets/healthcare_screen.dart';
 
 enum Action { signUp, signIn, forgotPassword }
 
@@ -63,30 +63,45 @@ class _AccountLoginState extends State<AccountLoginWidget> {
     return BlocConsumer<SigInSignUpCubit, SignInSignUpState>(
       listener: (context, state) {
         if (state is SignInSignUpStateSignUpSuccess) {
+          BlocProvider.of<UserBloc>(context)
+              .add(UpdateUser(state.userInfoEntity));
           final cubit = context.read<SigInSignUpCubit>();
           Navigator.pushNamed(context, R.enterActivationCode,
               arguments: EnterActiveCodeArg(
                 int.parse(cubit.otp),
                 state.userInfoEntity,
                 state.enableActiveCode,
-              ));
+              )).then((locale) {
+            if (locale is Locale) {
+              var currentLocale = context.locale;
+              if (currentLocale != locale) {
+                action = Action.signIn;
+                _showPopUpSignUpSuccess().then((_) {
+                  context.setLocale(locale);
+                });
+              } else {
+                _changeState(Action.signIn);
+                _showPopUpSignUpSuccess();
+              }
+            }
+          });
         } else if (state is SignInSignUpStateSignInSuccess) {
           'sign success ${state.isFirstOpenApp}'.log;
+          BlocProvider.of<UserBloc>(context)
+              .add(UpdateUser(state.userInfoEntity));
           if (!state.isFirstOpenApp) {
             Navigator.pushNamedAndRemoveUntil(
                 context, R.bottomNavigation, (_) => false);
           } else {
             Navigator.pushNamedAndRemoveUntil(
-                context, R.micPermission, (_) => false,);
+                context, R.healthcarePermission, (_) => false,
+                arguments: HealthcareArg(true));
           }
         } else if (state is SignInSignUpStateVerifySuccess) {
           Navigator.pushNamed(context, R.createPassword,
-              arguments: CreatePasswordArg(
-                '',
-                state.otp,
-                state.email,
-                false,
-              )).then((value) => _checkChangePasswordSuccess(value));
+                  arguments: CreatePasswordArg(
+                      '', state.otp, state.email, false, context.locale))
+              .then((value) => _checkChangePasswordSuccess(value));
         }
       },
       builder: (context, state) {
@@ -101,7 +116,7 @@ class _AccountLoginState extends State<AccountLoginWidget> {
             const SizedBox(height: 25),
             SFTextField(
                 labelText: LocaleKeys.email_address,
-                onChanged: (email) => cubit.email = email),
+                onChanged: (email) => cubit.onChangeEmail(email)),
             const SizedBox(height: 5),
             Container(
                 alignment: Alignment.centerLeft,
@@ -118,7 +133,7 @@ class _AccountLoginState extends State<AccountLoginWidget> {
                     onPressed: () => cubit.senOtp(action),
                     errorText:
                         state is SignInSignUpStateError ? state.message : '',
-                    valueChanged: (otp) => cubit.otp = otp)
+                    valueChanged: (otp) => cubit.onChangeOTP(otp))
                 : SFTextFieldPassword(
                     labelText: LocaleKeys.password,
                     valueChanged: (password) =>
@@ -136,7 +151,10 @@ class _AccountLoginState extends State<AccountLoginWidget> {
                   : SFTextButton(
                       text: "${LocaleKeys.forgot_password.tr()}?",
                       textStyle: TextStyles.white1w400size12,
-                      onPressed: () => _changeState(Action.forgotPassword),
+                      onPressed: () {
+                        _changeState(Action.forgotPassword);
+                        cubit.init();
+                      },
                     ),
             ),
             // SizedBox(height: isLoginSignup ? 24 : 8),
@@ -152,9 +170,8 @@ class _AccountLoginState extends State<AccountLoginWidget> {
             ),
             const SizedBox(height: 16),
             SFTextButton(
-              text: _isActiveCode
-                  ? LocaleKeys.account_login
-                  : LocaleKeys.verification_login,
+              text:
+                  _isActiveCode ? LocaleKeys.account_login : LocaleKeys.signup,
               textStyle: TextStyles.blue14,
               onPressed: () {
                 cubit.init();
@@ -167,30 +184,23 @@ class _AccountLoginState extends State<AccountLoginWidget> {
               TextSpan(
                 text: LocaleKeys.registration_means_that_you_agree_to.tr(),
                 style: TextStyles.w400lightGrey12,
+                recognizer: TapGestureRecognizer()
+                  ..onTap = () async {
+                    // final url = Uri.parse(Const.sleeFiUrl);
+                    // if (await canLaunchUrl(url)) {
+                    //   launchUrl(url);
+                    // }
+                  },
                 children: [
                   const TextSpan(text: ' '),
                   TextSpan(
                     text: LocaleKeys.user_agreement.tr(),
                     style: TextStyles.w400Red12,
-                    recognizer: TapGestureRecognizer()
-                      ..onTap = () async {
-                        final url = Uri.parse(Const.sleeFiUrl);
-                        if (await canLaunchUrl(url)) {
-                          launchUrl(url);
-                        }
-                      },
                   ),
                   TextSpan(text: ' ${"&".tr()} '),
                   TextSpan(
                     text: LocaleKeys.user_privacy.tr(),
                     style: TextStyles.w400Red12,
-                    recognizer: TapGestureRecognizer()
-                      ..onTap = () async {
-                        final url = Uri.parse(Const.sleeFiUrl);
-                        if (await canLaunchUrl(url)) {
-                          launchUrl(url);
-                        }
-                      },
                   ),
                 ],
               ),
@@ -201,7 +211,11 @@ class _AccountLoginState extends State<AccountLoginWidget> {
     );
   }
 
-  _checkChangePasswordSuccess(dynamic value) {
+  _showPopUpSignUpSuccess() async {
+    await showSignUpSuccess(context);
+  }
+
+  void _checkChangePasswordSuccess(dynamic value) {
     if (value == true) {
       _changeState(Action.signIn);
       showSuccessfulDialog(context, LocaleKeys.reset_password_successfully,

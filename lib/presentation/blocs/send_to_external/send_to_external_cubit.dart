@@ -31,6 +31,7 @@ class SendToExternalCubit extends Cubit<SendToExternalState> {
     result.fold((l) {
       emit(SendToExternalState.fail(l is FailureMessage ? l.msg : '$l'));
     }, (success)  {
+      // print(success);
       emit(const SendToExternalState.success());
     });
   }
@@ -72,11 +73,11 @@ class SendToExternalCubit extends Cubit<SendToExternalState> {
       return;
     }
     if (valueInEther == 0) {
-      emit(const SendToExternalState.errorValueInEther('Please enter amount'));
+      emit(const SendToExternalState.errorValueInEther('Amount input can not be zero'));
       return;
     }
     if (valueInEther > balance) {
-      emit(const SendToExternalState.errorValueInEther('Please enter amount smaller balance'));
+      emit(const SendToExternalState.errorValueInEther('Insufficient balance'));
       return;
     }
     emit(const SendToExternalState.validatorSuccess());

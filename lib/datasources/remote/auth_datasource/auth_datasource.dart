@@ -4,17 +4,23 @@ import 'package:injectable/injectable.dart';
 import 'package:retrofit/retrofit.dart';
 import 'package:slee_fi/common/const/const.dart';
 import 'package:slee_fi/common/enum/enum.dart';
+import 'package:slee_fi/datasources/remote/auth_datasource/auth_interceptor.dart';
 import 'package:slee_fi/models/activation_code_response/activation_code_response.dart';
+import 'package:slee_fi/models/active_code_response/active_code_response.dart';
 import 'package:slee_fi/models/create_password_reponse/create_password_response.dart';
 import 'package:slee_fi/models/global_config_response/global_config_response.dart';
+import 'package:slee_fi/models/list_market_place/list_market_place_model.dart';
+import 'package:slee_fi/models/market_place/market_place_model.dart';
 import 'package:slee_fi/models/send_email_response/send_email_response.dart';
 import 'package:slee_fi/models/setting_active_code_response/setting_active_code_response.dart';
 import 'package:slee_fi/models/sign_in_response/sign_in_response.dart';
 import 'package:slee_fi/models/user_response/user_response.dart';
 import 'package:slee_fi/models/users_response/users_response.dart';
+import 'package:slee_fi/models/verify_response/verify_response.dart';
 import 'package:slee_fi/schema/buy_nft_schema/buy_nft_schema.dart';
 import 'package:slee_fi/schema/change_password_schema/change_password_schema.dart';
 import 'package:slee_fi/schema/create_password_schema/create_password_schema.dart';
+import 'package:slee_fi/schema/market/market_schema.dart';
 import 'package:slee_fi/schema/refresh_token_schema/refresh_token_schema.dart';
 import 'package:slee_fi/schema/sign_in_schema/sign_in_schema.dart';
 import 'package:slee_fi/schema/sign_up_schema/sign_up_schema.dart';
@@ -29,8 +35,8 @@ part 'auth_datasource.g.dart';
 @RestApi(baseUrl: kDebugMode ? Const.baseApiDev : Const.baseApiDev)
 abstract class AuthDataSource {
   @factoryMethod
-  factory AuthDataSource(Dio dio) {
-    // dio.interceptors.add(authInterceptor);
+  factory AuthDataSource(Dio dio, AuthInterceptor authInterceptor) {
+    dio.interceptors.add(authInterceptor);
     // dio.interceptors.add(getIt<RefreshTokenInterceptor>(param1: dio));
     return _AuthDataSource(dio);
   }
@@ -41,7 +47,7 @@ abstract class AuthDataSource {
       @Query('email') String email, @Query('otpType') OTPType otpType);
 
   @GET('/users/balances')
-  Future<dynamic> getBalance(@Query('userId') String userId);
+  Future<dynamic> fetchBalanceSpending(@Query('userId') String userId);
 
   @GET('/users/get-global-config')
   Future<GlobalConfigResponse> getGlobalConfig();
@@ -56,8 +62,11 @@ abstract class AuthDataSource {
   @POST('/user-otp/verify-otp')
   Future<dynamic> verifyOTP(@Body() VerifyOTPSchema verifySchema);
 
+  @GET('/users/active-code')
+  Future<ActiveCodeResponse> fetchActivationCodes();
+
   @POST('/users/verify')
-  Future<UserResponse> verifyUser(@Body() VerifyUserSchema verifyUserSchema);
+  Future<VerifyResponse> verifyUser(@Body() VerifyUserSchema verifyUserSchema);
 
   @POST('/users/change-password')
   Future<dynamic> changePassword(
@@ -101,4 +110,10 @@ abstract class AuthDataSource {
   /// market
   @POST('/market-place/buy-nft')
   Future<dynamic> buyNFT(@Body() BuyNFTSchema buyNFTSchema);
+
+  @POST('/market-place')
+  Future<ListMarketPlaceModel> getMarketPlace(@Body() MarketSchema entity);
+
+  @GET('/market-place/buy-nft')
+  Future<MarketPlaceModel> getCategory();
 }

@@ -13,8 +13,8 @@ class GetStorageDataSource {
 
   int getDerivedIndexAndIncrease() {
     final index = _getStorage.read<int?>(StorageKeys.derivedIndexKey)!;
-    _getStorage.write(StorageKeys.derivedIndexKey, index  + 1);
-    return index;
+    _getStorage.write(StorageKeys.derivedIndexKey, index + 1);
+    return 0;
   }
 
   Future<void> setCurrentWalletId(int id) =>
@@ -41,5 +41,7 @@ class StorageKeys {
   static const String currentWalletIdKey = 'current_wallet_id';
   static const String userKey = 'current_user';
   static const String firstOpenKey = 'first_open_key';
-
+  static const accessTokenKey = 'access_token_key';
+  static const String addressContract = 'address_contract';
+  static const String saveMessage = 'save_message';
 }

@@ -14,14 +14,9 @@ class GetCurrentNetWork extends SettingEvent {
 
 class SwitchNetWork extends SettingEvent {
   final NetWorkEnum netWorkEnum;
+
   const SwitchNetWork(this.netWorkEnum);
 
   @override
   List<Object?> get props => [netWorkEnum];
-}
-
-class InitSetting extends SettingEvent{
-
-  @override
-  List<Object?> get props => [];
 }

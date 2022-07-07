@@ -1,8 +1,10 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:slee_fi/common/enum/enum.dart';
 import 'package:slee_fi/common/extensions/string_x.dart';
 import 'package:slee_fi/common/utils/appsflyer_custom.dart';
 import 'package:slee_fi/di/injector.dart';
+import 'package:slee_fi/l10n/locale_keys.g.dart';
 import 'package:slee_fi/presentation/blocs/sign_in_sign_up/sign_up_state.dart';
 import 'package:slee_fi/presentation/screens/login_signup/widgets/account_login_widget.dart';
 import 'package:slee_fi/schema/sign_in_schema/sign_in_schema.dart';
@@ -34,6 +36,8 @@ class SigInSignUpCubit extends Cubit<SignInSignUpState> {
   init() async {
     emit(const SignInSignUpState.initial());
     var result = await _isFirstOpenAppUC.call(NoParams());
+    _password = '';
+    otp = '';
     result.fold((l) => null, (r) => isFistOpenApp = r);
   }
 
@@ -75,10 +79,8 @@ class SigInSignUpCubit extends Cubit<SignInSignUpState> {
       var setting = await _fetchSettingActiveCode.call(NoParams());
       setting.fold(
         (l) => emit(SignInSignUpState.error(l.msg)),
-        (r) => emit(SignInSignUpState.signUpSuccess(
-          r.data.isEnable,
-          userResponse,
-        )),
+        (r) => emit(
+            SignInSignUpState.signUpSuccess(r.data.isEnable, userResponse)),
       );
     });
   }
@@ -87,19 +89,22 @@ class SigInSignUpCubit extends Cubit<SignInSignUpState> {
     if (!validateEmail()) {
       return;
     }
+    if (_password.isEmpty) {
+      return emit(
+          SignInSignUpState.error(LocaleKeys.this_field_is_required.tr()));
+    }
     emit(const SignInSignUpState.process());
     var result =
         await _logInUseCase.call(SignInSchema(email.trim(), _password));
 
     result.fold((l) => emit(SignInSignUpState.error(l.msg)), (r) async {
-      emit(SignInSignUpState.signInSuccess(isFistOpenApp));
+      emit(SignInSignUpState.signInSuccess(isFistOpenApp, r));
     });
   }
 
   signUp() {
     if (!validateEmail() || _validateOTP()) {
       return;
-
     }
 
     emit(const SignInSignUpState.process());
@@ -135,13 +140,6 @@ class SigInSignUpCubit extends Cubit<SignInSignUpState> {
     return true;
   }
 
-  onPasswordChange(String password) {
-    _password = password;
-    if (password.isEmpty && state is SignInSignUpStateError) {
-      emit(const SignInSignUpState.initial());
-    }
-  }
-
   void _verifyOTP() async {
     if (!validateEmail() || _validateOTP()) {
       return;
@@ -150,11 +148,34 @@ class SigInSignUpCubit extends Cubit<SignInSignUpState> {
     emit(const SignInSignUpState.process());
     int otp = int.parse(this.otp);
     var result = await _verifyOTPUC
-        .call(VerifyOTPSchema(otp, email, OTPType.changePass));
+        .call(VerifyOTPSchema(otp, email.trim(), OTPType.changePass));
 
     result.fold(
       (l) => emit(SignInSignUpState.error(l.msg)),
       (r) => emit(SignInSignUpState.verifyOTPSuccess(otp, email.trim())),
     );
+  }
+
+  onChangeOTP(String value) {
+    if (state is SignInSignUpStateError && (value.isEmpty || otp.isEmpty)) {
+      emit(const SignInSignUpState.initial());
+    }
+    otp = value;
+  }
+
+  onChangeEmail(String value) {
+    if (state is SignInSignUpStateErrorEmail &&
+        (value.isEmpty || email.isEmpty)) {
+      emit(const SignInSignUpState.initial());
+    }
+    email = value;
+  }
+
+  onPasswordChange(String value) {
+    if ((value.isEmpty || _password.isEmpty) &&
+        state is SignInSignUpStateError) {
+      emit(const SignInSignUpState.initial());
+    }
+    _password = value;
   }
 }

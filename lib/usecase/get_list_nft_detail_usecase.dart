@@ -37,8 +37,6 @@ class GetListNftDetailParams {
   final String address;
   final int count;
   final int start;
-  final int? page;
-  final int? limit;
 
   GetListNftDetailParams({
     required this.ownerAddress,
@@ -46,7 +44,5 @@ class GetListNftDetailParams {
     required this.nftType,
     required this.count,
     this.start = 0,
-    this.page,
-    this.limit,
   });
 }

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:slee_fi/common/routes/app_routes.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
 import 'package:slee_fi/common/widgets/background_widget.dart';
@@ -19,8 +18,15 @@ class CreatePasswordArg {
   final String activeCode;
   final int otp;
   final String email;
+  final Locale locale;
 
-  CreatePasswordArg(this.activeCode, this.otp, this.email, this.isCreate);
+  CreatePasswordArg(
+    this.activeCode,
+    this.otp,
+    this.email,
+    this.isCreate,
+    this.locale,
+  );
 }
 
 class CreatePasswordScreen extends StatefulWidget {
@@ -38,19 +44,12 @@ class _CreatePasswordScreenState extends State<CreatePasswordScreen> {
     final arg = ModalRoute.of(context)?.settings.arguments as CreatePasswordArg;
     return BlocProvider<CreatePasswordCubit>(
       create: (context) => CreatePasswordCubit()
-        ..init(arg.email, arg.activeCode, arg.otp, arg.isCreate),
+        ..init(arg.email, arg.activeCode, arg.otp, arg.isCreate, arg.locale),
       child: BlocConsumer<CreatePasswordCubit, CreatePasswordState>(
         listener: (context, state) {
           if (state is CreatePasswordStateSuccess) {
-            if (state.isFirstOpenApp) {
-              Navigator.pushNamedAndRemoveUntil(
-                  context, R.micPermission, (_) => false,
-                  // arguments: HealthcareArg(true)
-              );
-            } else {
-              Navigator.pushNamedAndRemoveUntil(
-                  context, R.bottomNavigation, (_) => false);
-            }
+            Navigator.pop(context);
+            Navigator.pop(context, state.locale);
           } else if (state is CreatePasswordStateChangePasswrodSuccess) {
             Navigator.pop(context, true);
           }
@@ -85,9 +84,7 @@ class _CreatePasswordScreenState extends State<CreatePasswordScreen> {
                                       const SizedBox(height: 10),
                                       SFTextFieldPassword(
                                         labelText: LocaleKeys.new_password,
-                                        valueChanged: (value) {
-                                          cubit.password = value;
-                                        },
+                                        valueChanged: (value) => cubit.onChangePassword(value),
                                         errorText: state
                                                 is CreatePasswordStateErrorPassword
                                             ? state.message
@@ -96,9 +93,7 @@ class _CreatePasswordScreenState extends State<CreatePasswordScreen> {
                                       const SizedBox(height: 10),
                                       SFTextFieldPassword(
                                         labelText: LocaleKeys.confirm_password,
-                                        valueChanged: (value) {
-                                          cubit.confirmPassword = value;
-                                        },
+                                        valueChanged: (value)=>cubit.onChangeConfirmPassword(value),
                                         errorText: state
                                                 is CreatePasswordStateErrorConfirmPassword
                                             ? state.message
