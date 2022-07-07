@@ -16,9 +16,11 @@ import 'package:slee_fi/models/setting_active_code_response/setting_active_code_
 import 'package:slee_fi/models/sign_in_response/sign_in_response.dart';
 import 'package:slee_fi/models/user_response/user_response.dart';
 import 'package:slee_fi/models/users_response/users_response.dart';
+import 'package:slee_fi/models/verify_response/verify_response.dart';
 import 'package:slee_fi/schema/buy_nft_schema/buy_nft_schema.dart';
 import 'package:slee_fi/schema/change_password_schema/change_password_schema.dart';
 import 'package:slee_fi/schema/create_password_schema/create_password_schema.dart';
+import 'package:slee_fi/schema/market/market_schema.dart';
 import 'package:slee_fi/schema/refresh_token_schema/refresh_token_schema.dart';
 import 'package:slee_fi/schema/sign_in_schema/sign_in_schema.dart';
 import 'package:slee_fi/schema/sign_up_schema/sign_up_schema.dart';
@@ -45,7 +47,7 @@ abstract class AuthDataSource {
       @Query('email') String email, @Query('otpType') OTPType otpType);
 
   @GET('/users/balances')
-  Future<dynamic> getBalance(@Query('userId') String userId);
+  Future<dynamic> fetchBalanceSpending(@Query('userId') String userId);
 
   @GET('/users/get-global-config')
   Future<GlobalConfigResponse> getGlobalConfig();
@@ -64,7 +66,7 @@ abstract class AuthDataSource {
   Future<ActiveCodeResponse> fetchActivationCodes();
 
   @POST('/users/verify')
-  Future<UserResponse> verifyUser(@Body() VerifyUserSchema verifyUserSchema);
+  Future<VerifyResponse> verifyUser(@Body() VerifyUserSchema verifyUserSchema);
 
   @POST('/users/change-password')
   Future<dynamic> changePassword(
@@ -109,15 +111,9 @@ abstract class AuthDataSource {
   @POST('/market-place/buy-nft')
   Future<dynamic> buyNFT(@Body() BuyNFTSchema buyNFTSchema);
 
-  @GET('/market-place')
-  Future<ListMarketPlaceModel> getMarketPlace(
-      @Query('categoryId') int categoryId,
-      @Query('sortPrice') String? sortPrice,
-      @Query('type') String? type,
-      @Query('level') int? level,
-      @Query('classNft') String? classNft,
-      @Query('quality') String? quality);
+  @POST('/market-place')
+  Future<ListMarketPlaceModel> getMarketPlace(@Body() MarketSchema entity);
 
-  @GET('/category')
+  @GET('/market-place/buy-nft')
   Future<MarketPlaceModel> getCategory();
 }

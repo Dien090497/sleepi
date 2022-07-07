@@ -16,12 +16,15 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$MarketEntity {
+  int? get page => throw _privateConstructorUsedError;
+  int? get limit => throw _privateConstructorUsedError;
   int get categoryId => throw _privateConstructorUsedError;
   String? get sortPrice => throw _privateConstructorUsedError;
-  String? get type => throw _privateConstructorUsedError;
+  List<String>? get type => throw _privateConstructorUsedError;
   int? get level => throw _privateConstructorUsedError;
-  String? get classNft => throw _privateConstructorUsedError;
-  String? get quality => throw _privateConstructorUsedError;
+  int? get bedMint => throw _privateConstructorUsedError;
+  List<String>? get classNft => throw _privateConstructorUsedError;
+  List<String>? get quality => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $MarketEntityCopyWith<MarketEntity> get copyWith =>
@@ -34,12 +37,15 @@ abstract class $MarketEntityCopyWith<$Res> {
           MarketEntity value, $Res Function(MarketEntity) then) =
       _$MarketEntityCopyWithImpl<$Res>;
   $Res call(
-      {int categoryId,
+      {int? page,
+      int? limit,
+      int categoryId,
       String? sortPrice,
-      String? type,
+      List<String>? type,
       int? level,
-      String? classNft,
-      String? quality});
+      int? bedMint,
+      List<String>? classNft,
+      List<String>? quality});
 }
 
 /// @nodoc
@@ -52,14 +58,25 @@ class _$MarketEntityCopyWithImpl<$Res> implements $MarketEntityCopyWith<$Res> {
 
   @override
   $Res call({
+    Object? page = freezed,
+    Object? limit = freezed,
     Object? categoryId = freezed,
     Object? sortPrice = freezed,
     Object? type = freezed,
     Object? level = freezed,
+    Object? bedMint = freezed,
     Object? classNft = freezed,
     Object? quality = freezed,
   }) {
     return _then(_value.copyWith(
+      page: page == freezed
+          ? _value.page
+          : page // ignore: cast_nullable_to_non_nullable
+              as int?,
+      limit: limit == freezed
+          ? _value.limit
+          : limit // ignore: cast_nullable_to_non_nullable
+              as int?,
       categoryId: categoryId == freezed
           ? _value.categoryId
           : categoryId // ignore: cast_nullable_to_non_nullable
@@ -71,19 +88,23 @@ class _$MarketEntityCopyWithImpl<$Res> implements $MarketEntityCopyWith<$Res> {
       type: type == freezed
           ? _value.type
           : type // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as List<String>?,
       level: level == freezed
           ? _value.level
           : level // ignore: cast_nullable_to_non_nullable
               as int?,
+      bedMint: bedMint == freezed
+          ? _value.bedMint
+          : bedMint // ignore: cast_nullable_to_non_nullable
+              as int?,
       classNft: classNft == freezed
           ? _value.classNft
           : classNft // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as List<String>?,
       quality: quality == freezed
           ? _value.quality
           : quality // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as List<String>?,
     ));
   }
 }
@@ -96,12 +117,15 @@ abstract class _$$_MarketEntityCopyWith<$Res>
       __$$_MarketEntityCopyWithImpl<$Res>;
   @override
   $Res call(
-      {int categoryId,
+      {int? page,
+      int? limit,
+      int categoryId,
       String? sortPrice,
-      String? type,
+      List<String>? type,
       int? level,
-      String? classNft,
-      String? quality});
+      int? bedMint,
+      List<String>? classNft,
+      List<String>? quality});
 }
 
 /// @nodoc
@@ -117,14 +141,25 @@ class __$$_MarketEntityCopyWithImpl<$Res>
 
   @override
   $Res call({
+    Object? page = freezed,
+    Object? limit = freezed,
     Object? categoryId = freezed,
     Object? sortPrice = freezed,
     Object? type = freezed,
     Object? level = freezed,
+    Object? bedMint = freezed,
     Object? classNft = freezed,
     Object? quality = freezed,
   }) {
     return _then(_$_MarketEntity(
+      page: page == freezed
+          ? _value.page
+          : page // ignore: cast_nullable_to_non_nullable
+              as int?,
+      limit: limit == freezed
+          ? _value.limit
+          : limit // ignore: cast_nullable_to_non_nullable
+              as int?,
       categoryId: categoryId == freezed
           ? _value.categoryId
           : categoryId // ignore: cast_nullable_to_non_nullable
@@ -134,21 +169,25 @@ class __$$_MarketEntityCopyWithImpl<$Res>
           : sortPrice // ignore: cast_nullable_to_non_nullable
               as String?,
       type: type == freezed
-          ? _value.type
+          ? _value._type
           : type // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as List<String>?,
       level: level == freezed
           ? _value.level
           : level // ignore: cast_nullable_to_non_nullable
               as int?,
+      bedMint: bedMint == freezed
+          ? _value.bedMint
+          : bedMint // ignore: cast_nullable_to_non_nullable
+              as int?,
       classNft: classNft == freezed
-          ? _value.classNft
+          ? _value._classNft
           : classNft // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as List<String>?,
       quality: quality == freezed
-          ? _value.quality
+          ? _value._quality
           : quality // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as List<String>?,
     ));
   }
 }
@@ -157,29 +196,61 @@ class __$$_MarketEntityCopyWithImpl<$Res>
 
 class _$_MarketEntity implements _MarketEntity {
   const _$_MarketEntity(
-      {required this.categoryId,
+      {this.page,
+      this.limit,
+      required this.categoryId,
       this.sortPrice,
-      this.type,
+      final List<String>? type,
       this.level,
-      this.classNft,
-      this.quality});
+      this.bedMint,
+      final List<String>? classNft,
+      final List<String>? quality})
+      : _type = type,
+        _classNft = classNft,
+        _quality = quality;
 
+  @override
+  final int? page;
+  @override
+  final int? limit;
   @override
   final int categoryId;
   @override
   final String? sortPrice;
+  final List<String>? _type;
   @override
-  final String? type;
+  List<String>? get type {
+    final value = _type;
+    if (value == null) return null;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(value);
+  }
+
   @override
   final int? level;
   @override
-  final String? classNft;
+  final int? bedMint;
+  final List<String>? _classNft;
   @override
-  final String? quality;
+  List<String>? get classNft {
+    final value = _classNft;
+    if (value == null) return null;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(value);
+  }
+
+  final List<String>? _quality;
+  @override
+  List<String>? get quality {
+    final value = _quality;
+    if (value == null) return null;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(value);
+  }
 
   @override
   String toString() {
-    return 'MarketEntity(categoryId: $categoryId, sortPrice: $sortPrice, type: $type, level: $level, classNft: $classNft, quality: $quality)';
+    return 'MarketEntity(page: $page, limit: $limit, categoryId: $categoryId, sortPrice: $sortPrice, type: $type, level: $level, bedMint: $bedMint, classNft: $classNft, quality: $quality)';
   }
 
   @override
@@ -187,24 +258,30 @@ class _$_MarketEntity implements _MarketEntity {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_MarketEntity &&
+            const DeepCollectionEquality().equals(other.page, page) &&
+            const DeepCollectionEquality().equals(other.limit, limit) &&
             const DeepCollectionEquality()
                 .equals(other.categoryId, categoryId) &&
             const DeepCollectionEquality().equals(other.sortPrice, sortPrice) &&
-            const DeepCollectionEquality().equals(other.type, type) &&
+            const DeepCollectionEquality().equals(other._type, _type) &&
             const DeepCollectionEquality().equals(other.level, level) &&
-            const DeepCollectionEquality().equals(other.classNft, classNft) &&
-            const DeepCollectionEquality().equals(other.quality, quality));
+            const DeepCollectionEquality().equals(other.bedMint, bedMint) &&
+            const DeepCollectionEquality().equals(other._classNft, _classNft) &&
+            const DeepCollectionEquality().equals(other._quality, _quality));
   }
 
   @override
   int get hashCode => Object.hash(
       runtimeType,
+      const DeepCollectionEquality().hash(page),
+      const DeepCollectionEquality().hash(limit),
       const DeepCollectionEquality().hash(categoryId),
       const DeepCollectionEquality().hash(sortPrice),
-      const DeepCollectionEquality().hash(type),
+      const DeepCollectionEquality().hash(_type),
       const DeepCollectionEquality().hash(level),
-      const DeepCollectionEquality().hash(classNft),
-      const DeepCollectionEquality().hash(quality));
+      const DeepCollectionEquality().hash(bedMint),
+      const DeepCollectionEquality().hash(_classNft),
+      const DeepCollectionEquality().hash(_quality));
 
   @JsonKey(ignore: true)
   @override
@@ -214,25 +291,34 @@ class _$_MarketEntity implements _MarketEntity {
 
 abstract class _MarketEntity implements MarketEntity {
   const factory _MarketEntity(
-      {required final int categoryId,
+      {final int? page,
+      final int? limit,
+      required final int categoryId,
       final String? sortPrice,
-      final String? type,
+      final List<String>? type,
       final int? level,
-      final String? classNft,
-      final String? quality}) = _$_MarketEntity;
+      final int? bedMint,
+      final List<String>? classNft,
+      final List<String>? quality}) = _$_MarketEntity;
 
+  @override
+  int? get page => throw _privateConstructorUsedError;
+  @override
+  int? get limit => throw _privateConstructorUsedError;
   @override
   int get categoryId => throw _privateConstructorUsedError;
   @override
   String? get sortPrice => throw _privateConstructorUsedError;
   @override
-  String? get type => throw _privateConstructorUsedError;
+  List<String>? get type => throw _privateConstructorUsedError;
   @override
   int? get level => throw _privateConstructorUsedError;
   @override
-  String? get classNft => throw _privateConstructorUsedError;
+  int? get bedMint => throw _privateConstructorUsedError;
   @override
-  String? get quality => throw _privateConstructorUsedError;
+  List<String>? get classNft => throw _privateConstructorUsedError;
+  @override
+  List<String>? get quality => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
   _$$_MarketEntityCopyWith<_$_MarketEntity> get copyWith =>

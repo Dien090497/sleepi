@@ -11,7 +11,12 @@ class VerifyUserSchema {
   final String signer;
   final String email;
 
-  VerifyUserSchema(this.message, this.signedMessage, this.signer, this.email);
+  VerifyUserSchema({
+    required this.message,
+    required this.signedMessage,
+    required this.signer,
+    required this.email,
+  });
 
   factory VerifyUserSchema.fromJson(Map<String, dynamic> json) =>
       _$VerifyUserSchemaFromJson(json);

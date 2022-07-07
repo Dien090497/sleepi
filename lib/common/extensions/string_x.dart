@@ -68,7 +68,7 @@ extension StringX on String {
       return LocaleKeys.password_must_be_at_least_6.tr();
     }
     if (contains(' ')) {
-      return "Don't allow user typing space in password";
+      return LocaleKeys.dont_allow_typing_space.tr();
     }
 
     return '';

@@ -20,33 +20,40 @@ mixin _$WalletState {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
+    required TResult Function() loadingHistory,
     required TResult Function(
             WalletInfoEntity? walletInfoEntity, List<TokenEntity> tokenList)
         loaded,
     required TResult Function() empty,
     required TResult Function(String message) error,
+    required TResult Function(List<TransactionIsarModel> list)
+        getHistorySuccess,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
+    TResult Function()? loadingHistory,
     TResult Function(
             WalletInfoEntity? walletInfoEntity, List<TokenEntity> tokenList)?
         loaded,
     TResult Function()? empty,
     TResult Function(String message)? error,
+    TResult Function(List<TransactionIsarModel> list)? getHistorySuccess,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
+    TResult Function()? loadingHistory,
     TResult Function(
             WalletInfoEntity? walletInfoEntity, List<TokenEntity> tokenList)?
         loaded,
     TResult Function()? empty,
     TResult Function(String message)? error,
+    TResult Function(List<TransactionIsarModel> list)? getHistorySuccess,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -54,27 +61,34 @@ mixin _$WalletState {
   TResult map<TResult extends Object?>({
     required TResult Function(WalletStateInitial value) initial,
     required TResult Function(WalletStateLoading value) loading,
+    required TResult Function(WalletStateLoadingHistory value) loadingHistory,
     required TResult Function(WalletStateLoaded value) loaded,
     required TResult Function(WalletStateEmpty value) empty,
     required TResult Function(WalletStateError value) error,
+    required TResult Function(WalletStateGetHistorySuccess value)
+        getHistorySuccess,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult Function(WalletStateInitial value)? initial,
     TResult Function(WalletStateLoading value)? loading,
+    TResult Function(WalletStateLoadingHistory value)? loadingHistory,
     TResult Function(WalletStateLoaded value)? loaded,
     TResult Function(WalletStateEmpty value)? empty,
     TResult Function(WalletStateError value)? error,
+    TResult Function(WalletStateGetHistorySuccess value)? getHistorySuccess,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(WalletStateInitial value)? initial,
     TResult Function(WalletStateLoading value)? loading,
+    TResult Function(WalletStateLoadingHistory value)? loadingHistory,
     TResult Function(WalletStateLoaded value)? loaded,
     TResult Function(WalletStateEmpty value)? empty,
     TResult Function(WalletStateError value)? error,
+    TResult Function(WalletStateGetHistorySuccess value)? getHistorySuccess,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -139,11 +153,14 @@ class _$WalletStateInitial implements WalletStateInitial {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
+    required TResult Function() loadingHistory,
     required TResult Function(
             WalletInfoEntity? walletInfoEntity, List<TokenEntity> tokenList)
         loaded,
     required TResult Function() empty,
     required TResult Function(String message) error,
+    required TResult Function(List<TransactionIsarModel> list)
+        getHistorySuccess,
   }) {
     return initial();
   }
@@ -153,11 +170,13 @@ class _$WalletStateInitial implements WalletStateInitial {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
+    TResult Function()? loadingHistory,
     TResult Function(
             WalletInfoEntity? walletInfoEntity, List<TokenEntity> tokenList)?
         loaded,
     TResult Function()? empty,
     TResult Function(String message)? error,
+    TResult Function(List<TransactionIsarModel> list)? getHistorySuccess,
   }) {
     return initial?.call();
   }
@@ -167,11 +186,13 @@ class _$WalletStateInitial implements WalletStateInitial {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
+    TResult Function()? loadingHistory,
     TResult Function(
             WalletInfoEntity? walletInfoEntity, List<TokenEntity> tokenList)?
         loaded,
     TResult Function()? empty,
     TResult Function(String message)? error,
+    TResult Function(List<TransactionIsarModel> list)? getHistorySuccess,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -185,9 +206,12 @@ class _$WalletStateInitial implements WalletStateInitial {
   TResult map<TResult extends Object?>({
     required TResult Function(WalletStateInitial value) initial,
     required TResult Function(WalletStateLoading value) loading,
+    required TResult Function(WalletStateLoadingHistory value) loadingHistory,
     required TResult Function(WalletStateLoaded value) loaded,
     required TResult Function(WalletStateEmpty value) empty,
     required TResult Function(WalletStateError value) error,
+    required TResult Function(WalletStateGetHistorySuccess value)
+        getHistorySuccess,
   }) {
     return initial(this);
   }
@@ -197,9 +221,11 @@ class _$WalletStateInitial implements WalletStateInitial {
   TResult? mapOrNull<TResult extends Object?>({
     TResult Function(WalletStateInitial value)? initial,
     TResult Function(WalletStateLoading value)? loading,
+    TResult Function(WalletStateLoadingHistory value)? loadingHistory,
     TResult Function(WalletStateLoaded value)? loaded,
     TResult Function(WalletStateEmpty value)? empty,
     TResult Function(WalletStateError value)? error,
+    TResult Function(WalletStateGetHistorySuccess value)? getHistorySuccess,
   }) {
     return initial?.call(this);
   }
@@ -209,9 +235,11 @@ class _$WalletStateInitial implements WalletStateInitial {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(WalletStateInitial value)? initial,
     TResult Function(WalletStateLoading value)? loading,
+    TResult Function(WalletStateLoadingHistory value)? loadingHistory,
     TResult Function(WalletStateLoaded value)? loaded,
     TResult Function(WalletStateEmpty value)? empty,
     TResult Function(WalletStateError value)? error,
+    TResult Function(WalletStateGetHistorySuccess value)? getHistorySuccess,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -268,11 +296,14 @@ class _$WalletStateLoading implements WalletStateLoading {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
+    required TResult Function() loadingHistory,
     required TResult Function(
             WalletInfoEntity? walletInfoEntity, List<TokenEntity> tokenList)
         loaded,
     required TResult Function() empty,
     required TResult Function(String message) error,
+    required TResult Function(List<TransactionIsarModel> list)
+        getHistorySuccess,
   }) {
     return loading();
   }
@@ -282,11 +313,13 @@ class _$WalletStateLoading implements WalletStateLoading {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
+    TResult Function()? loadingHistory,
     TResult Function(
             WalletInfoEntity? walletInfoEntity, List<TokenEntity> tokenList)?
         loaded,
     TResult Function()? empty,
     TResult Function(String message)? error,
+    TResult Function(List<TransactionIsarModel> list)? getHistorySuccess,
   }) {
     return loading?.call();
   }
@@ -296,11 +329,13 @@ class _$WalletStateLoading implements WalletStateLoading {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
+    TResult Function()? loadingHistory,
     TResult Function(
             WalletInfoEntity? walletInfoEntity, List<TokenEntity> tokenList)?
         loaded,
     TResult Function()? empty,
     TResult Function(String message)? error,
+    TResult Function(List<TransactionIsarModel> list)? getHistorySuccess,
     required TResult orElse(),
   }) {
     if (loading != null) {
@@ -314,9 +349,12 @@ class _$WalletStateLoading implements WalletStateLoading {
   TResult map<TResult extends Object?>({
     required TResult Function(WalletStateInitial value) initial,
     required TResult Function(WalletStateLoading value) loading,
+    required TResult Function(WalletStateLoadingHistory value) loadingHistory,
     required TResult Function(WalletStateLoaded value) loaded,
     required TResult Function(WalletStateEmpty value) empty,
     required TResult Function(WalletStateError value) error,
+    required TResult Function(WalletStateGetHistorySuccess value)
+        getHistorySuccess,
   }) {
     return loading(this);
   }
@@ -326,9 +364,11 @@ class _$WalletStateLoading implements WalletStateLoading {
   TResult? mapOrNull<TResult extends Object?>({
     TResult Function(WalletStateInitial value)? initial,
     TResult Function(WalletStateLoading value)? loading,
+    TResult Function(WalletStateLoadingHistory value)? loadingHistory,
     TResult Function(WalletStateLoaded value)? loaded,
     TResult Function(WalletStateEmpty value)? empty,
     TResult Function(WalletStateError value)? error,
+    TResult Function(WalletStateGetHistorySuccess value)? getHistorySuccess,
   }) {
     return loading?.call(this);
   }
@@ -338,9 +378,11 @@ class _$WalletStateLoading implements WalletStateLoading {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(WalletStateInitial value)? initial,
     TResult Function(WalletStateLoading value)? loading,
+    TResult Function(WalletStateLoadingHistory value)? loadingHistory,
     TResult Function(WalletStateLoaded value)? loaded,
     TResult Function(WalletStateEmpty value)? empty,
     TResult Function(WalletStateError value)? error,
+    TResult Function(WalletStateGetHistorySuccess value)? getHistorySuccess,
     required TResult orElse(),
   }) {
     if (loading != null) {
@@ -352,6 +394,152 @@ class _$WalletStateLoading implements WalletStateLoading {
 
 abstract class WalletStateLoading implements WalletState {
   const factory WalletStateLoading() = _$WalletStateLoading;
+}
+
+/// @nodoc
+abstract class _$$WalletStateLoadingHistoryCopyWith<$Res> {
+  factory _$$WalletStateLoadingHistoryCopyWith(
+          _$WalletStateLoadingHistory value,
+          $Res Function(_$WalletStateLoadingHistory) then) =
+      __$$WalletStateLoadingHistoryCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$WalletStateLoadingHistoryCopyWithImpl<$Res>
+    extends _$WalletStateCopyWithImpl<$Res>
+    implements _$$WalletStateLoadingHistoryCopyWith<$Res> {
+  __$$WalletStateLoadingHistoryCopyWithImpl(_$WalletStateLoadingHistory _value,
+      $Res Function(_$WalletStateLoadingHistory) _then)
+      : super(_value, (v) => _then(v as _$WalletStateLoadingHistory));
+
+  @override
+  _$WalletStateLoadingHistory get _value =>
+      super._value as _$WalletStateLoadingHistory;
+}
+
+/// @nodoc
+
+class _$WalletStateLoadingHistory implements WalletStateLoadingHistory {
+  const _$WalletStateLoadingHistory();
+
+  @override
+  String toString() {
+    return 'WalletState.loadingHistory()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$WalletStateLoadingHistory);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function() loading,
+    required TResult Function() loadingHistory,
+    required TResult Function(
+            WalletInfoEntity? walletInfoEntity, List<TokenEntity> tokenList)
+        loaded,
+    required TResult Function() empty,
+    required TResult Function(String message) error,
+    required TResult Function(List<TransactionIsarModel> list)
+        getHistorySuccess,
+  }) {
+    return loadingHistory();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function()? loading,
+    TResult Function()? loadingHistory,
+    TResult Function(
+            WalletInfoEntity? walletInfoEntity, List<TokenEntity> tokenList)?
+        loaded,
+    TResult Function()? empty,
+    TResult Function(String message)? error,
+    TResult Function(List<TransactionIsarModel> list)? getHistorySuccess,
+  }) {
+    return loadingHistory?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function()? loading,
+    TResult Function()? loadingHistory,
+    TResult Function(
+            WalletInfoEntity? walletInfoEntity, List<TokenEntity> tokenList)?
+        loaded,
+    TResult Function()? empty,
+    TResult Function(String message)? error,
+    TResult Function(List<TransactionIsarModel> list)? getHistorySuccess,
+    required TResult orElse(),
+  }) {
+    if (loadingHistory != null) {
+      return loadingHistory();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(WalletStateInitial value) initial,
+    required TResult Function(WalletStateLoading value) loading,
+    required TResult Function(WalletStateLoadingHistory value) loadingHistory,
+    required TResult Function(WalletStateLoaded value) loaded,
+    required TResult Function(WalletStateEmpty value) empty,
+    required TResult Function(WalletStateError value) error,
+    required TResult Function(WalletStateGetHistorySuccess value)
+        getHistorySuccess,
+  }) {
+    return loadingHistory(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(WalletStateInitial value)? initial,
+    TResult Function(WalletStateLoading value)? loading,
+    TResult Function(WalletStateLoadingHistory value)? loadingHistory,
+    TResult Function(WalletStateLoaded value)? loaded,
+    TResult Function(WalletStateEmpty value)? empty,
+    TResult Function(WalletStateError value)? error,
+    TResult Function(WalletStateGetHistorySuccess value)? getHistorySuccess,
+  }) {
+    return loadingHistory?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(WalletStateInitial value)? initial,
+    TResult Function(WalletStateLoading value)? loading,
+    TResult Function(WalletStateLoadingHistory value)? loadingHistory,
+    TResult Function(WalletStateLoaded value)? loaded,
+    TResult Function(WalletStateEmpty value)? empty,
+    TResult Function(WalletStateError value)? error,
+    TResult Function(WalletStateGetHistorySuccess value)? getHistorySuccess,
+    required TResult orElse(),
+  }) {
+    if (loadingHistory != null) {
+      return loadingHistory(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class WalletStateLoadingHistory implements WalletState {
+  const factory WalletStateLoadingHistory() = _$WalletStateLoadingHistory;
 }
 
 /// @nodoc
@@ -453,11 +641,14 @@ class _$WalletStateLoaded implements WalletStateLoaded {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
+    required TResult Function() loadingHistory,
     required TResult Function(
             WalletInfoEntity? walletInfoEntity, List<TokenEntity> tokenList)
         loaded,
     required TResult Function() empty,
     required TResult Function(String message) error,
+    required TResult Function(List<TransactionIsarModel> list)
+        getHistorySuccess,
   }) {
     return loaded(walletInfoEntity, tokenList);
   }
@@ -467,11 +658,13 @@ class _$WalletStateLoaded implements WalletStateLoaded {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
+    TResult Function()? loadingHistory,
     TResult Function(
             WalletInfoEntity? walletInfoEntity, List<TokenEntity> tokenList)?
         loaded,
     TResult Function()? empty,
     TResult Function(String message)? error,
+    TResult Function(List<TransactionIsarModel> list)? getHistorySuccess,
   }) {
     return loaded?.call(walletInfoEntity, tokenList);
   }
@@ -481,11 +674,13 @@ class _$WalletStateLoaded implements WalletStateLoaded {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
+    TResult Function()? loadingHistory,
     TResult Function(
             WalletInfoEntity? walletInfoEntity, List<TokenEntity> tokenList)?
         loaded,
     TResult Function()? empty,
     TResult Function(String message)? error,
+    TResult Function(List<TransactionIsarModel> list)? getHistorySuccess,
     required TResult orElse(),
   }) {
     if (loaded != null) {
@@ -499,9 +694,12 @@ class _$WalletStateLoaded implements WalletStateLoaded {
   TResult map<TResult extends Object?>({
     required TResult Function(WalletStateInitial value) initial,
     required TResult Function(WalletStateLoading value) loading,
+    required TResult Function(WalletStateLoadingHistory value) loadingHistory,
     required TResult Function(WalletStateLoaded value) loaded,
     required TResult Function(WalletStateEmpty value) empty,
     required TResult Function(WalletStateError value) error,
+    required TResult Function(WalletStateGetHistorySuccess value)
+        getHistorySuccess,
   }) {
     return loaded(this);
   }
@@ -511,9 +709,11 @@ class _$WalletStateLoaded implements WalletStateLoaded {
   TResult? mapOrNull<TResult extends Object?>({
     TResult Function(WalletStateInitial value)? initial,
     TResult Function(WalletStateLoading value)? loading,
+    TResult Function(WalletStateLoadingHistory value)? loadingHistory,
     TResult Function(WalletStateLoaded value)? loaded,
     TResult Function(WalletStateEmpty value)? empty,
     TResult Function(WalletStateError value)? error,
+    TResult Function(WalletStateGetHistorySuccess value)? getHistorySuccess,
   }) {
     return loaded?.call(this);
   }
@@ -523,9 +723,11 @@ class _$WalletStateLoaded implements WalletStateLoaded {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(WalletStateInitial value)? initial,
     TResult Function(WalletStateLoading value)? loading,
+    TResult Function(WalletStateLoadingHistory value)? loadingHistory,
     TResult Function(WalletStateLoaded value)? loaded,
     TResult Function(WalletStateEmpty value)? empty,
     TResult Function(WalletStateError value)? error,
+    TResult Function(WalletStateGetHistorySuccess value)? getHistorySuccess,
     required TResult orElse(),
   }) {
     if (loaded != null) {
@@ -590,11 +792,14 @@ class _$WalletStateEmpty implements WalletStateEmpty {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
+    required TResult Function() loadingHistory,
     required TResult Function(
             WalletInfoEntity? walletInfoEntity, List<TokenEntity> tokenList)
         loaded,
     required TResult Function() empty,
     required TResult Function(String message) error,
+    required TResult Function(List<TransactionIsarModel> list)
+        getHistorySuccess,
   }) {
     return empty();
   }
@@ -604,11 +809,13 @@ class _$WalletStateEmpty implements WalletStateEmpty {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
+    TResult Function()? loadingHistory,
     TResult Function(
             WalletInfoEntity? walletInfoEntity, List<TokenEntity> tokenList)?
         loaded,
     TResult Function()? empty,
     TResult Function(String message)? error,
+    TResult Function(List<TransactionIsarModel> list)? getHistorySuccess,
   }) {
     return empty?.call();
   }
@@ -618,11 +825,13 @@ class _$WalletStateEmpty implements WalletStateEmpty {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
+    TResult Function()? loadingHistory,
     TResult Function(
             WalletInfoEntity? walletInfoEntity, List<TokenEntity> tokenList)?
         loaded,
     TResult Function()? empty,
     TResult Function(String message)? error,
+    TResult Function(List<TransactionIsarModel> list)? getHistorySuccess,
     required TResult orElse(),
   }) {
     if (empty != null) {
@@ -636,9 +845,12 @@ class _$WalletStateEmpty implements WalletStateEmpty {
   TResult map<TResult extends Object?>({
     required TResult Function(WalletStateInitial value) initial,
     required TResult Function(WalletStateLoading value) loading,
+    required TResult Function(WalletStateLoadingHistory value) loadingHistory,
     required TResult Function(WalletStateLoaded value) loaded,
     required TResult Function(WalletStateEmpty value) empty,
     required TResult Function(WalletStateError value) error,
+    required TResult Function(WalletStateGetHistorySuccess value)
+        getHistorySuccess,
   }) {
     return empty(this);
   }
@@ -648,9 +860,11 @@ class _$WalletStateEmpty implements WalletStateEmpty {
   TResult? mapOrNull<TResult extends Object?>({
     TResult Function(WalletStateInitial value)? initial,
     TResult Function(WalletStateLoading value)? loading,
+    TResult Function(WalletStateLoadingHistory value)? loadingHistory,
     TResult Function(WalletStateLoaded value)? loaded,
     TResult Function(WalletStateEmpty value)? empty,
     TResult Function(WalletStateError value)? error,
+    TResult Function(WalletStateGetHistorySuccess value)? getHistorySuccess,
   }) {
     return empty?.call(this);
   }
@@ -660,9 +874,11 @@ class _$WalletStateEmpty implements WalletStateEmpty {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(WalletStateInitial value)? initial,
     TResult Function(WalletStateLoading value)? loading,
+    TResult Function(WalletStateLoadingHistory value)? loadingHistory,
     TResult Function(WalletStateLoaded value)? loaded,
     TResult Function(WalletStateEmpty value)? empty,
     TResult Function(WalletStateError value)? error,
+    TResult Function(WalletStateGetHistorySuccess value)? getHistorySuccess,
     required TResult orElse(),
   }) {
     if (empty != null) {
@@ -743,11 +959,14 @@ class _$WalletStateError implements WalletStateError {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
+    required TResult Function() loadingHistory,
     required TResult Function(
             WalletInfoEntity? walletInfoEntity, List<TokenEntity> tokenList)
         loaded,
     required TResult Function() empty,
     required TResult Function(String message) error,
+    required TResult Function(List<TransactionIsarModel> list)
+        getHistorySuccess,
   }) {
     return error(message);
   }
@@ -757,11 +976,13 @@ class _$WalletStateError implements WalletStateError {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
+    TResult Function()? loadingHistory,
     TResult Function(
             WalletInfoEntity? walletInfoEntity, List<TokenEntity> tokenList)?
         loaded,
     TResult Function()? empty,
     TResult Function(String message)? error,
+    TResult Function(List<TransactionIsarModel> list)? getHistorySuccess,
   }) {
     return error?.call(message);
   }
@@ -771,11 +992,13 @@ class _$WalletStateError implements WalletStateError {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
+    TResult Function()? loadingHistory,
     TResult Function(
             WalletInfoEntity? walletInfoEntity, List<TokenEntity> tokenList)?
         loaded,
     TResult Function()? empty,
     TResult Function(String message)? error,
+    TResult Function(List<TransactionIsarModel> list)? getHistorySuccess,
     required TResult orElse(),
   }) {
     if (error != null) {
@@ -789,9 +1012,12 @@ class _$WalletStateError implements WalletStateError {
   TResult map<TResult extends Object?>({
     required TResult Function(WalletStateInitial value) initial,
     required TResult Function(WalletStateLoading value) loading,
+    required TResult Function(WalletStateLoadingHistory value) loadingHistory,
     required TResult Function(WalletStateLoaded value) loaded,
     required TResult Function(WalletStateEmpty value) empty,
     required TResult Function(WalletStateError value) error,
+    required TResult Function(WalletStateGetHistorySuccess value)
+        getHistorySuccess,
   }) {
     return error(this);
   }
@@ -801,9 +1027,11 @@ class _$WalletStateError implements WalletStateError {
   TResult? mapOrNull<TResult extends Object?>({
     TResult Function(WalletStateInitial value)? initial,
     TResult Function(WalletStateLoading value)? loading,
+    TResult Function(WalletStateLoadingHistory value)? loadingHistory,
     TResult Function(WalletStateLoaded value)? loaded,
     TResult Function(WalletStateEmpty value)? empty,
     TResult Function(WalletStateError value)? error,
+    TResult Function(WalletStateGetHistorySuccess value)? getHistorySuccess,
   }) {
     return error?.call(this);
   }
@@ -813,9 +1041,11 @@ class _$WalletStateError implements WalletStateError {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(WalletStateInitial value)? initial,
     TResult Function(WalletStateLoading value)? loading,
+    TResult Function(WalletStateLoadingHistory value)? loadingHistory,
     TResult Function(WalletStateLoaded value)? loaded,
     TResult Function(WalletStateEmpty value)? empty,
     TResult Function(WalletStateError value)? error,
+    TResult Function(WalletStateGetHistorySuccess value)? getHistorySuccess,
     required TResult orElse(),
   }) {
     if (error != null) {
@@ -833,4 +1063,186 @@ abstract class WalletStateError implements WalletState {
   @JsonKey(ignore: true)
   _$$WalletStateErrorCopyWith<_$WalletStateError> get copyWith =>
       throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$WalletStateGetHistorySuccessCopyWith<$Res> {
+  factory _$$WalletStateGetHistorySuccessCopyWith(
+          _$WalletStateGetHistorySuccess value,
+          $Res Function(_$WalletStateGetHistorySuccess) then) =
+      __$$WalletStateGetHistorySuccessCopyWithImpl<$Res>;
+  $Res call({List<TransactionIsarModel> list});
+}
+
+/// @nodoc
+class __$$WalletStateGetHistorySuccessCopyWithImpl<$Res>
+    extends _$WalletStateCopyWithImpl<$Res>
+    implements _$$WalletStateGetHistorySuccessCopyWith<$Res> {
+  __$$WalletStateGetHistorySuccessCopyWithImpl(
+      _$WalletStateGetHistorySuccess _value,
+      $Res Function(_$WalletStateGetHistorySuccess) _then)
+      : super(_value, (v) => _then(v as _$WalletStateGetHistorySuccess));
+
+  @override
+  _$WalletStateGetHistorySuccess get _value =>
+      super._value as _$WalletStateGetHistorySuccess;
+
+  @override
+  $Res call({
+    Object? list = freezed,
+  }) {
+    return _then(_$WalletStateGetHistorySuccess(
+      list == freezed
+          ? _value._list
+          : list // ignore: cast_nullable_to_non_nullable
+              as List<TransactionIsarModel>,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$WalletStateGetHistorySuccess implements WalletStateGetHistorySuccess {
+  const _$WalletStateGetHistorySuccess(final List<TransactionIsarModel> list)
+      : _list = list;
+
+  final List<TransactionIsarModel> _list;
+  @override
+  List<TransactionIsarModel> get list {
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_list);
+  }
+
+  @override
+  String toString() {
+    return 'WalletState.getHistorySuccess(list: $list)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$WalletStateGetHistorySuccess &&
+            const DeepCollectionEquality().equals(other._list, _list));
+  }
+
+  @override
+  int get hashCode =>
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(_list));
+
+  @JsonKey(ignore: true)
+  @override
+  _$$WalletStateGetHistorySuccessCopyWith<_$WalletStateGetHistorySuccess>
+      get copyWith => __$$WalletStateGetHistorySuccessCopyWithImpl<
+          _$WalletStateGetHistorySuccess>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function() loading,
+    required TResult Function() loadingHistory,
+    required TResult Function(
+            WalletInfoEntity? walletInfoEntity, List<TokenEntity> tokenList)
+        loaded,
+    required TResult Function() empty,
+    required TResult Function(String message) error,
+    required TResult Function(List<TransactionIsarModel> list)
+        getHistorySuccess,
+  }) {
+    return getHistorySuccess(list);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function()? loading,
+    TResult Function()? loadingHistory,
+    TResult Function(
+            WalletInfoEntity? walletInfoEntity, List<TokenEntity> tokenList)?
+        loaded,
+    TResult Function()? empty,
+    TResult Function(String message)? error,
+    TResult Function(List<TransactionIsarModel> list)? getHistorySuccess,
+  }) {
+    return getHistorySuccess?.call(list);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function()? loading,
+    TResult Function()? loadingHistory,
+    TResult Function(
+            WalletInfoEntity? walletInfoEntity, List<TokenEntity> tokenList)?
+        loaded,
+    TResult Function()? empty,
+    TResult Function(String message)? error,
+    TResult Function(List<TransactionIsarModel> list)? getHistorySuccess,
+    required TResult orElse(),
+  }) {
+    if (getHistorySuccess != null) {
+      return getHistorySuccess(list);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(WalletStateInitial value) initial,
+    required TResult Function(WalletStateLoading value) loading,
+    required TResult Function(WalletStateLoadingHistory value) loadingHistory,
+    required TResult Function(WalletStateLoaded value) loaded,
+    required TResult Function(WalletStateEmpty value) empty,
+    required TResult Function(WalletStateError value) error,
+    required TResult Function(WalletStateGetHistorySuccess value)
+        getHistorySuccess,
+  }) {
+    return getHistorySuccess(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(WalletStateInitial value)? initial,
+    TResult Function(WalletStateLoading value)? loading,
+    TResult Function(WalletStateLoadingHistory value)? loadingHistory,
+    TResult Function(WalletStateLoaded value)? loaded,
+    TResult Function(WalletStateEmpty value)? empty,
+    TResult Function(WalletStateError value)? error,
+    TResult Function(WalletStateGetHistorySuccess value)? getHistorySuccess,
+  }) {
+    return getHistorySuccess?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(WalletStateInitial value)? initial,
+    TResult Function(WalletStateLoading value)? loading,
+    TResult Function(WalletStateLoadingHistory value)? loadingHistory,
+    TResult Function(WalletStateLoaded value)? loaded,
+    TResult Function(WalletStateEmpty value)? empty,
+    TResult Function(WalletStateError value)? error,
+    TResult Function(WalletStateGetHistorySuccess value)? getHistorySuccess,
+    required TResult orElse(),
+  }) {
+    if (getHistorySuccess != null) {
+      return getHistorySuccess(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class WalletStateGetHistorySuccess implements WalletState {
+  const factory WalletStateGetHistorySuccess(
+      final List<TransactionIsarModel> list) = _$WalletStateGetHistorySuccess;
+
+  List<TransactionIsarModel> get list => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  _$$WalletStateGetHistorySuccessCopyWith<_$WalletStateGetHistorySuccess>
+      get copyWith => throw _privateConstructorUsedError;
 }

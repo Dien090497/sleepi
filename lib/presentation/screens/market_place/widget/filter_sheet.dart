@@ -1,3 +1,6 @@
+import 'dart:developer';
+
+import 'package:easy_localization/easy_localization.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
@@ -10,7 +13,11 @@ import 'package:syncfusion_flutter_core/theme.dart';
 import 'package:syncfusion_flutter_sliders/sliders.dart';
 
 class FilterSheet extends StatefulWidget {
-  const FilterSheet({Key? key, required this.sections, required this.sliders, required this.cubit})
+  const FilterSheet(
+      {Key? key,
+      required this.sections,
+      required this.sliders,
+      required this.cubit})
       : super(key: key);
 
   final Map<String, FilterSliderValues> sliders;
@@ -22,8 +29,45 @@ class FilterSheet extends StatefulWidget {
 }
 
 class _FilterSheetState extends State<FilterSheet> {
+  late Map<String, List<String>> selectedSections = {};
+  late Map<String, double> selectedSliders = {};
 
-  List<String> listSelected = [];
+  @override
+  void initState() {
+    init();
+    super.initState();
+  }
+
+  void init() {
+    widget.sections.forEach((key, value) {
+      if (key == LocaleKeys.type.tr()) {
+        selectedSections[key] = widget.cubit.params.type!;
+      }
+      if (key == LocaleKeys.class_.tr()) {
+        selectedSections[key] = widget.cubit.params.classNft!;
+      }
+      if (key == LocaleKeys.quality.tr()) {
+        selectedSections[key] = widget.cubit.params.quality!;
+      }
+    });
+    widget.sliders.forEach((key, value) {
+      if (key == LocaleKeys.level.tr()) {
+        selectedSliders[key] = widget.cubit.params.level!.toDouble();
+      }
+      if (key == LocaleKeys.mint.tr()) {
+        selectedSliders[key] = widget.cubit.params.bedMint!.toDouble();
+      }
+    });
+  }
+
+  clear(){
+    widget.sections.forEach((key, value) {
+        selectedSections[key] = [];
+    });
+    widget.sliders.forEach((key, value) {
+        selectedSliders[key] = 0;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -37,13 +81,17 @@ class _FilterSheetState extends State<FilterSheet> {
             children: [
               SFText(
                 keyText: LocaleKeys.filter,
-                suffix: ' (${listSelected.length})',
+                suffix:
+                    ' (${selectedSections.values.reduce((value, element) => value + element).length})',
                 style: TextStyles.white18W700,
               ),
               const Spacer(),
               TextButton(
                   onPressed: () {
-                    listSelected.clear();
+                    selectedSections.clear();
+                    selectedSliders.clear();
+                    clear();
+                    widget.cubit.filter(selectedSections, selectedSliders);
                     setState(() {});
                   },
                   child: SFText(
@@ -64,17 +112,28 @@ class _FilterSheetState extends State<FilterSheet> {
                   (i) => TypeSelectionWidget(
                     name: widget.sections.keys.elementAt(i),
                     types: widget.sections.values.elementAt(i),
-                    listSelected: listSelected,
+                    listSelected:
+                        selectedSections[widget.sections.keys.elementAt(i)] ??
+                            [],
                     onSelect: (List<String> value) {
-                      listSelected = value;
+                      selectedSections[widget.sections.keys.elementAt(i)] =
+                          value;
                       setState(() {});
                     },
                   ),
                 ),
                 ...List<Widget>.generate(
                   widget.sliders.length,
-                  (i) => _Slider(widget.sliders.keys.elementAt(i),
-                      widget.sliders.values.elementAt(i)),
+                  (i) => _Slider(
+                    label: widget.sliders.keys.elementAt(i),
+                    sliders: widget.sliders.values.elementAt(i),
+                    value:
+                        selectedSliders[widget.sliders.keys.elementAt(i)] ?? 0,
+                    onSelect: (double v) {
+                      selectedSliders[widget.sliders.keys.elementAt(i)] = v;
+                      setState(() {});
+                    },
+                  ),
                 ),
                 const SizedBox(height: 26),
               ],
@@ -89,8 +148,10 @@ class _FilterSheetState extends State<FilterSheet> {
             width: size.width,
             gradient: AppColors.gradientBlueButton,
             onPressed: () {
+              log('=-=--=-=${selectedSections.toString()}');
+              log('=-=--=-=${selectedSliders.toString()}');
               Navigator.pop(context);
-              // widget.cubit.selectPrice(price);
+              widget.cubit.filter(selectedSections, selectedSliders);
             },
           ),
         ),
@@ -100,19 +161,27 @@ class _FilterSheetState extends State<FilterSheet> {
 }
 
 class _Slider extends StatefulWidget {
-  const _Slider(this.label, this.values, {Key? key}) : super(key: key);
+  const _Slider({
+    Key? key,
+    required this.value,
+    required this.onSelect,
+    required this.label,
+    required this.sliders,
+  }) : super(key: key);
 
   final String label;
-  final FilterSliderValues values;
+  final FilterSliderValues sliders;
+  final double value;
+  final ValueChanged<double> onSelect;
 
   @override
   State<_Slider> createState() => _SliderState();
 }
 
 class _SliderState extends State<_Slider> {
-  late FilterSliderValues slider = widget.values;
-  late double _value =
-      (slider.value ?? (slider.min + slider.max) / 2).floorToDouble();
+  late FilterSliderValues slider = widget.sliders;
+  late double _value = widget.value;
+
 
   @override
   Widget build(BuildContext context) {
@@ -151,10 +220,11 @@ class _SliderState extends State<_Slider> {
             ),
             // minorTicksPerInterval: 1,
             onChanged: (dynamic v) {
-              if (widget.values.onChanged != null) {
-                widget.values.onChanged!(v);
+              if (widget.sliders.onChanged != null) {
+                widget.sliders.onChanged!(v);
               }
               _value = v;
+              widget.onSelect(_value);
               setState(() {});
             },
           ),
@@ -208,9 +278,10 @@ class TypeSelectionWidget extends StatelessWidget {
                     Expanded(
                         child: _Container(
                       text: types[firstIdx],
-                      isSelected: listSelected.contains(types[firstIdx]),
+                      isSelected:
+                          listSelected.contains(types[firstIdx].split(' ')[0]),
                       onTap: () {
-                        _onTap(types[firstIdx]);
+                        _onTap(types[firstIdx].split(' ')[0]);
                       },
                     )),
                     const SizedBox(width: 16),
@@ -218,10 +289,10 @@ class TypeSelectionWidget extends StatelessWidget {
                       child: (secondIdx < types.length)
                           ? _Container(
                               text: types[secondIdx],
-                              isSelected:
-                                  listSelected.contains(types[secondIdx]),
+                              isSelected: listSelected
+                                  .contains(types[secondIdx].split(' ')[0]),
                               onTap: () {
-                                _onTap(types[secondIdx]);
+                                _onTap(types[secondIdx].split(' ')[0]);
                               },
                             )
                           : const SizedBox.shrink(),

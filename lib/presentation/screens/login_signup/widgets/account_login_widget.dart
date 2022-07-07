@@ -71,15 +71,17 @@ class _AccountLoginState extends State<AccountLoginWidget> {
                 int.parse(cubit.otp),
                 state.userInfoEntity,
                 state.enableActiveCode,
-              )).then((value) async {
-            if (value is Locale) {
+              )).then((locale) {
+            if (locale is Locale) {
               var currentLocale = context.locale;
-              if (currentLocale != value) {
-                await context
-                    .setLocale(value)
-                    .then((value) => _changeState(Action.signIn));
+              if (currentLocale != locale) {
+                action = Action.signIn;
+                _showPopUpSignUpSuccess().then((_) {
+                  context.setLocale(locale);
+                });
               } else {
                 _changeState(Action.signIn);
+                _showPopUpSignUpSuccess();
               }
             }
           });
@@ -172,7 +174,6 @@ class _AccountLoginState extends State<AccountLoginWidget> {
                   _isActiveCode ? LocaleKeys.account_login : LocaleKeys.signup,
               textStyle: TextStyles.blue14,
               onPressed: () {
-                // _checkChangePasswordSuccess(true);
                 cubit.init();
                 _changeState(_isActiveCode ? Action.signIn : Action.signUp);
               },
@@ -208,6 +209,10 @@ class _AccountLoginState extends State<AccountLoginWidget> {
         );
       },
     );
+  }
+
+  _showPopUpSignUpSuccess() async {
+    await showSignUpSuccess(context);
   }
 
   void _checkChangePasswordSuccess(dynamic value) {

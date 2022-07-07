@@ -16,6 +16,7 @@ UserInfoModel _$UserInfoModelFromJson(Map<String, dynamic> json) =>
       json['isAccountDisabled'] as bool,
       json['createdAt'] as String,
       json['updatedAt'] as String,
+      json['wallet'] as String?,
     );
 
 Map<String, dynamic> _$UserInfoModelToJson(UserInfoModel instance) =>
@@ -28,4 +29,5 @@ Map<String, dynamic> _$UserInfoModelToJson(UserInfoModel instance) =>
       'isAccountDisabled': instance.isAccountDisabled,
       'createdAt': instance.createdAt,
       'updatedAt': instance.updatedAt,
+      'wallet': instance.wallet,
     };

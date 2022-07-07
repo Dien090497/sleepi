@@ -60,8 +60,11 @@ class Web3DataSource {
 
   String createMnemonic() => bip39.generateMnemonic();
 
-  Future<TransactionInformation> getDetailTransaction(String transactionHash) =>
-      _web3provider.web3client.getTransactionByHash(transactionHash);
+  Future<TransactionInformation> getDetailTransaction(String? transactionHash)  => _web3provider.web3client.getTransactionByHash(transactionHash!);
+
+  Future<TransactionReceipt?> getTransactionReceipt(String transactionHash)  => _web3provider.web3client.getTransactionReceipt(transactionHash);
+
+  Future<BlockInformation> getDetailBlock(String blockNumber)  => _web3provider.web3client.getBlockInformation(blockNumber: blockNumber);
 
   Future<EtherAmount> getGasPrice() => _web3provider.web3client.getGasPrice();
 

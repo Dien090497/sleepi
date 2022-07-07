@@ -1,9 +1,11 @@
 import 'dart:math';
 
 import 'package:bloc/bloc.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:ethereum_addresses/ethereum_addresses.dart';
 import 'package:slee_fi/di/injector.dart';
 import 'package:slee_fi/failures/failure.dart';
+import 'package:slee_fi/l10n/locale_keys.g.dart';
 import 'package:slee_fi/presentation/blocs/send_to_external/send_to_external_state.dart';
 import 'package:slee_fi/presentation/screens/send_to_external/send_to_external_screen.dart';
 import 'package:slee_fi/usecase/send_to_external_usecase.dart';
@@ -65,19 +67,19 @@ class SendToExternalCubit extends Cubit<SendToExternalState> {
 
   Future<void> validator(double balance) async {
     if (contractAddressTo.isEmpty) {
-      emit(const SendToExternalState.errorToAddress('Please enter contract address'));
+      emit(SendToExternalState.errorToAddress(LocaleKeys.pleas_enter_contact_address.tr()));
       return;
     }
     if (isValidEthereumAddress(contractAddressTo) == false) {
-      emit(const SendToExternalState.errorToAddress('Invalid address'));
+      emit(SendToExternalState.errorToAddress(LocaleKeys.invalid_address.tr()));
       return;
     }
     if (valueInEther == 0) {
-      emit(const SendToExternalState.errorValueInEther('Amount input can not be zero'));
+      emit(SendToExternalState.errorValueInEther(LocaleKeys.amount_input_can_not_be_zero.tr()));
       return;
     }
     if (valueInEther > balance) {
-      emit(const SendToExternalState.errorValueInEther('Insufficient balance'));
+      emit(SendToExternalState.errorValueInEther(LocaleKeys.insufficient_balance.tr()));
       return;
     }
     emit(const SendToExternalState.validatorSuccess());

@@ -9,6 +9,8 @@ class MarketPlaceState with _$MarketPlaceState {
 
   const factory MarketPlaceState.loading() = MarketPlaceStateLoading;
 
+  const factory MarketPlaceState.loadingMore() = MarketPlaceStateLoadingMore;
+
   const factory MarketPlaceState.success(ListMarketPlaceModel list) = MarketPlaceStateSuccess;
 
   const factory MarketPlaceState.fail(String msg) = MarketPlaceStateFailed;

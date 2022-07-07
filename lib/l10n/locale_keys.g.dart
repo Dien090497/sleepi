@@ -409,5 +409,18 @@ abstract class  LocaleKeys {
   static const password_dose_not_match = 'password_dose_not_match';
   static const wallet_id = 'wallet_id';
   static const warning_bind_wallet = 'warning_bind_wallet';
+  static const dont_allow_typing_space = 'dont_allow_typing_space';
+  static const you_can_set_your_alarm_here = 'you_can_set_your_alarm_here';
+  static const your_account_has_been_create = 'your_account_has_been_create';
+  static const continue_ = 'continue_';
+  static const incorrect_email = 'incorrect_email';
+  static const email_does_not_exist = 'email_does_not_exist';
+  static const incorrect_email_password = 'incorrect_email_password';
+  static const email_already_exist = 'email_already_exist';
+  static const otp_expired = 'otp_expired';
+  static const pleas_enter_contact_address = 'pleas_enter_contact_address';
+  static const invalid_address = 'invalid_address';
+  static const amount_input_can_not_be_zero = 'amount_input_can_not_be_zero';
+  static const wallet_already = 'wallet_already';
 
 }

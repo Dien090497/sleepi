@@ -5,17 +5,28 @@ import 'package:dartz/dartz.dart';
 import 'package:injectable/injectable.dart';
 import 'package:slee_fi/common/const/const.dart';
 import 'package:slee_fi/common/enum/enum.dart';
+import 'package:slee_fi/common/extensions/string_x.dart';
 import 'package:slee_fi/datasources/local/get_storage_datasource.dart';
+import 'package:slee_fi/datasources/local/history_datasource.dart';
 import 'package:slee_fi/datasources/local/isar/isar_datasource.dart';
+import 'package:slee_fi/datasources/local/secure_storage.dart';
+import 'package:slee_fi/datasources/remote/auth_datasource/auth_datasource.dart';
 import 'package:slee_fi/datasources/remote/network/web3_datasource.dart';
 import 'package:slee_fi/datasources/remote/network/web3_provider.dart';
+import 'package:slee_fi/datasources/remote/transaction_datasource/transaction_remote_datasource.dart';
 import 'package:slee_fi/entities/wallet_info/wallet_info_entity.dart';
 import 'package:slee_fi/failures/failure.dart';
+import 'package:slee_fi/models/isar_models/history_isar/history_isar_model.dart';
+import 'package:slee_fi/l10n/locale_keys.g.dart';
 import 'package:slee_fi/models/isar_models/native_currency_isar/native_currency_isar_model.dart';
 import 'package:slee_fi/models/isar_models/network_isar/network_isar_model.dart';
+import 'package:slee_fi/models/isar_models/transaction_isar/transaction_isar_model.dart';
 import 'package:slee_fi/models/isar_models/wallet_isar/wallet_isar_model.dart';
+import 'package:slee_fi/models/transaction_history/transaction_history_model.dart';
 import 'package:slee_fi/repository/wallet_repository.dart';
+import 'package:slee_fi/schema/verify_user_schema/verify_user_schema.dart';
 import 'package:slee_fi/usecase/get_balance_for_tokens_usecase.dart';
+import 'package:slee_fi/usecase/get_history_transaction_usecase.dart';
 import 'package:web3dart/web3dart.dart';
 
 @Injectable(as: IWalletRepository)
@@ -24,9 +35,13 @@ class WalletImplementation extends IWalletRepository {
   final Web3DataSource _web3DataSource;
   final GetStorageDataSource _getStorageDataSource;
   final IsarDataSource _isarDataSource;
+  final HistoryDataSource _historyDataSource;
+  final TransactionRemoteDataSource _transactionRemoteDataSource;
+  final SecureStorage _secureStorage;
+  final AuthDataSource _authDataSource;
 
-  WalletImplementation(this._web3DataSource, this._getStorageDataSource,
-      this._isarDataSource, this._web3provider);
+  WalletImplementation(this._web3DataSource, this._getStorageDataSource, this._historyDataSource,
+      this._transactionRemoteDataSource, this._isarDataSource, this._web3provider, this._secureStorage, this._authDataSource);
 
   @override
   Future<Either<Failure, WalletInfoEntity>> createWallet() async {
@@ -34,33 +49,46 @@ class WalletImplementation extends IWalletRepository {
       final String mnemonic = _web3DataSource.createMnemonic();
       final derivedIndex = _getStorageDataSource.getDerivedIndexAndIncrease();
       final network = await _getCurrentNetwork();
-      final privateKey = _web3DataSource.mnemonicToPrivateKey(
-          mnemonic, derivedIndex, network.slip44);
+      final privateKey = _web3DataSource.mnemonicToPrivateKey(mnemonic, 0, network.slip44);
       final credentials = _web3DataSource.credentialsFromPrivateKey(privateKey);
       final ethereumAddress = await credentials.extractAddress();
-
-      /// Store Wallet
-
-      final model = WalletIsarModel(
-        mnemonic: mnemonic,
-        privateKey: privateKey,
-        name: 'Account $derivedIndex',
-        address: ethereumAddress.hex,
-        derivedIndex: derivedIndex,
+      final message = await _secureStorage.readMessage();
+      final signature = _web3DataSource.generateSignature(privateKey: privateKey, message: message ?? '');
+      final user = await _secureStorage.readCurrentUser();
+      VerifyUserSchema schema = VerifyUserSchema(
+        signedMessage: signature,
+        signer: ethereumAddress.hexEip55,
+        email: user?.email ?? '',
+        message: message ?? '',
       );
-      final int walletId = await _isarDataSource.putWallet(model);
-      model.id = walletId;
-      await _getStorageDataSource.setCurrentWalletId(walletId);
-      final nativeCurrency = await _getNativeCurrency();
-      final result = await _web3DataSource.getBalance(ethereumAddress.hex);
-      final balance = result / BigInt.from(pow(10, 18));
-      return Right(model.toEntity(
-        credentials,
-        derivedIndex: derivedIndex,
-        networkName: network.name,
-        nativeCurrency: nativeCurrency!.toEntity(balance: balance),
-        chainId: network.chainId,
-      ));
+      final result = await _authDataSource.verifyUser(schema);
+      if (result.status) {
+        /// Store Wallet
+
+        final model = WalletIsarModel(
+          mnemonic: mnemonic,
+          privateKey: privateKey,
+          name: 'Account $derivedIndex',
+          address: ethereumAddress.hex,
+          derivedIndex: derivedIndex,
+        );
+        'private key  $privateKey  \n seed phrase  ${model.address}'.log;
+        final int walletId = await _isarDataSource.putWallet(model);
+        model.id = walletId;
+        await _getStorageDataSource.setCurrentWalletId(walletId);
+        final nativeCurrency = await _getNativeCurrency();
+        final result = await _web3DataSource.getBalance(ethereumAddress.hex);
+        final balance = result / BigInt.from(pow(10, 18));
+        return Right(model.toEntity(
+          credentials,
+          derivedIndex: derivedIndex,
+          networkName: network.name,
+          nativeCurrency: nativeCurrency!.toEntity(balance: balance),
+          chainId: network.chainId,
+        ));
+      } else {
+        return const Left(FailureMessage(LocaleKeys.wallet_already));
+      }
     } catch (e) {
       return Left(FailureMessage('$e'));
     }
@@ -166,8 +194,8 @@ class WalletImplementation extends IWalletRepository {
           break;
         }
         if (params.addressContract[i] == Const.tokens[0]['address']) {
-          var balance = await _web3DataSource
-              .getBalance(params.walletInfoEntity.address);
+          var balance =
+              await _web3DataSource.getBalance(params.walletInfoEntity.address);
           values.add(balance / BigInt.from(pow(10, 18)));
         } else {
           final erc20 = _web3DataSource.token(params.addressContract[i]);
@@ -253,7 +281,7 @@ class WalletImplementation extends IWalletRepository {
       var walletId = _getStorageDataSource.getCurrentWalletId();
       var wallet = await _isarDataSource.getWalletAt(walletId);
       if (contractAddress == Const.tokens[0]['address']) {
-        balance =await _web3DataSource.getBalance(wallet!.address);
+        balance = await _web3DataSource.getBalance(wallet!.address);
         return Right(balance / BigInt.from(pow(10, 18)));
       } else {
         balance = await _web3DataSource.getBalanceOf(
@@ -345,9 +373,69 @@ class WalletImplementation extends IWalletRepository {
   }
 
   @override
-  Either<FailureMessage, bool> validateMnemonic(String mnemonic) {
+  Future<Either<FailureMessage, bool>> validateMnemonic(String mnemonic) async {
     try {
-      return Right(_web3DataSource.validateMnemonic(mnemonic));
+      if (_web3DataSource.validateMnemonic(mnemonic)) {
+        final network = await _getCurrentNetwork();
+        final privateKey = _web3DataSource.mnemonicToPrivateKey(
+            mnemonic, 0, network.slip44);
+        final credentials = _web3DataSource.credentialsFromPrivateKey(privateKey);
+        final message = await _secureStorage.readMessage();
+        final ethereumAddress = await credentials.extractAddress();
+        final signature = _web3DataSource.generateSignature(privateKey: privateKey, message: message ?? '');
+        final user = await _secureStorage.readCurrentUser();
+        VerifyUserSchema schema = VerifyUserSchema(
+          signedMessage: signature,
+          signer: ethereumAddress.hexEip55,
+          email: user?.email ?? '',
+          message: message ?? '',
+        );
+        final result = await _authDataSource.verifyUser(schema);
+        if (result.status) {
+          return Right(result.status);
+        } else {
+          return const Left(FailureMessage(LocaleKeys.password));
+        }
+      } else {
+        return const Left(FailureMessage(LocaleKeys.password));
+      }
+    } catch (e) {
+      return Left(FailureMessage('$e'));
+    }
+  }
+
+  @override
+  Future<Either<Failure, List<TransactionIsarModel>>> getHistoryTransaction(HistoryTransactionParams params) async{
+      try {
+        // List<HistoryIsarModel> historyList = await _historyDataSource.getAllHistory();
+        List<TransactionHistoryModel> transactionHistoryList = [];
+        final result = await _transactionRemoteDataSource.getHistoryTransaction(params);
+        result.fold(
+              (l) { },
+              (history) {
+            if(params.tokenSymbol == "AVAX"){
+              transactionHistoryList = history.result;
+            }else if(params.tokenSymbol != null) {
+              transactionHistoryList = history.result.where((i) => i.tokenSymbol == params.tokenSymbol).toList();
+            }else {transactionHistoryList = history.result;}
+          },
+        );
+        List<TransactionIsarModel> transactionList = [];
+        for(int i = 0 ; i < transactionHistoryList.length; i++){
+          // var transactionInfo = await _web3DataSource.getDetailTransaction(historyList.elementAt(i).transactionHash);
+          // var transactionReceipt = await _web3DataSource.getTransactionReceipt(historyList.elementAt(i).transactionHash);
+          // var getTimeStamp = await _web3DataSource.getDetailBlock(transactionInfo.blockNumber.toBlockParam());
+          final model = TransactionIsarModel(
+              valueInEther: BigInt.parse(transactionHistoryList.elementAt(i).value) / BigInt.from(pow(10, 18)),
+              timeStamp: DateTime.fromMillisecondsSinceEpoch(int.parse(transactionHistoryList.elementAt(i).timeStamp) * 1000),
+              gasPrice: BigInt.parse(transactionHistoryList.elementAt(i).gasPrice) / BigInt.from(pow(10, 18)),
+              addressFrom: transactionHistoryList.elementAt(i).from,
+              addressTo: transactionHistoryList.elementAt(i).to,
+              status: transactionHistoryList.elementAt(i).txReceiptStatus != null ? int.parse(transactionHistoryList.elementAt(i).txReceiptStatus!) : 0
+          );
+          transactionList.add(model);
+        }
+        return Right(transactionList);
     } catch (e) {
       return Left(FailureMessage('$e'));
     }
