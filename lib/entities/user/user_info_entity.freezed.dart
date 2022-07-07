@@ -24,6 +24,7 @@ mixin _$UserInfoEntity {
   bool get isAccountDisabled => throw _privateConstructorUsedError;
   String get createdAt => throw _privateConstructorUsedError;
   String get updatedAt => throw _privateConstructorUsedError;
+  String? get wallet => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $UserInfoEntityCopyWith<UserInfoEntity> get copyWith =>
@@ -43,7 +44,8 @@ abstract class $UserInfoEntityCopyWith<$Res> {
       String email,
       bool isAccountDisabled,
       String createdAt,
-      String updatedAt});
+      String updatedAt,
+      String? wallet});
 }
 
 /// @nodoc
@@ -65,6 +67,7 @@ class _$UserInfoEntityCopyWithImpl<$Res>
     Object? isAccountDisabled = freezed,
     Object? createdAt = freezed,
     Object? updatedAt = freezed,
+    Object? wallet = freezed,
   }) {
     return _then(_value.copyWith(
       id: id == freezed
@@ -99,6 +102,10 @@ class _$UserInfoEntityCopyWithImpl<$Res>
           ? _value.updatedAt
           : updatedAt // ignore: cast_nullable_to_non_nullable
               as String,
+      wallet: wallet == freezed
+          ? _value.wallet
+          : wallet // ignore: cast_nullable_to_non_nullable
+              as String?,
     ));
   }
 }
@@ -118,7 +125,8 @@ abstract class _$$_UserInfoEntityCopyWith<$Res>
       String email,
       bool isAccountDisabled,
       String createdAt,
-      String updatedAt});
+      String updatedAt,
+      String? wallet});
 }
 
 /// @nodoc
@@ -142,6 +150,7 @@ class __$$_UserInfoEntityCopyWithImpl<$Res>
     Object? isAccountDisabled = freezed,
     Object? createdAt = freezed,
     Object? updatedAt = freezed,
+    Object? wallet = freezed,
   }) {
     return _then(_$_UserInfoEntity(
       id: id == freezed
@@ -176,6 +185,10 @@ class __$$_UserInfoEntityCopyWithImpl<$Res>
           ? _value.updatedAt
           : updatedAt // ignore: cast_nullable_to_non_nullable
               as String,
+      wallet: wallet == freezed
+          ? _value.wallet
+          : wallet // ignore: cast_nullable_to_non_nullable
+              as String?,
     ));
   }
 }
@@ -193,7 +206,8 @@ class _$_UserInfoEntity
       required this.email,
       required this.isAccountDisabled,
       required this.createdAt,
-      required this.updatedAt})
+      required this.updatedAt,
+      this.wallet})
       : _roles = roles;
 
   @override
@@ -217,10 +231,12 @@ class _$_UserInfoEntity
   final String createdAt;
   @override
   final String updatedAt;
+  @override
+  final String? wallet;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'UserInfoEntity(id: $id, name: $name, username: $username, roles: $roles, email: $email, isAccountDisabled: $isAccountDisabled, createdAt: $createdAt, updatedAt: $updatedAt)';
+    return 'UserInfoEntity(id: $id, name: $name, username: $username, roles: $roles, email: $email, isAccountDisabled: $isAccountDisabled, createdAt: $createdAt, updatedAt: $updatedAt, wallet: $wallet)';
   }
 
   @override
@@ -235,7 +251,8 @@ class _$_UserInfoEntity
       ..add(DiagnosticsProperty('email', email))
       ..add(DiagnosticsProperty('isAccountDisabled', isAccountDisabled))
       ..add(DiagnosticsProperty('createdAt', createdAt))
-      ..add(DiagnosticsProperty('updatedAt', updatedAt));
+      ..add(DiagnosticsProperty('updatedAt', updatedAt))
+      ..add(DiagnosticsProperty('wallet', wallet));
   }
 
   @override
@@ -251,7 +268,8 @@ class _$_UserInfoEntity
             const DeepCollectionEquality()
                 .equals(other.isAccountDisabled, isAccountDisabled) &&
             const DeepCollectionEquality().equals(other.createdAt, createdAt) &&
-            const DeepCollectionEquality().equals(other.updatedAt, updatedAt));
+            const DeepCollectionEquality().equals(other.updatedAt, updatedAt) &&
+            const DeepCollectionEquality().equals(other.wallet, wallet));
   }
 
   @override
@@ -264,7 +282,8 @@ class _$_UserInfoEntity
       const DeepCollectionEquality().hash(email),
       const DeepCollectionEquality().hash(isAccountDisabled),
       const DeepCollectionEquality().hash(createdAt),
-      const DeepCollectionEquality().hash(updatedAt));
+      const DeepCollectionEquality().hash(updatedAt),
+      const DeepCollectionEquality().hash(wallet));
 
   @JsonKey(ignore: true)
   @override
@@ -281,7 +300,8 @@ abstract class _UserInfoEntity implements UserInfoEntity {
       required final String email,
       required final bool isAccountDisabled,
       required final String createdAt,
-      required final String updatedAt}) = _$_UserInfoEntity;
+      required final String updatedAt,
+      final String? wallet}) = _$_UserInfoEntity;
 
   @override
   int get id => throw _privateConstructorUsedError;
@@ -299,6 +319,8 @@ abstract class _UserInfoEntity implements UserInfoEntity {
   String get createdAt => throw _privateConstructorUsedError;
   @override
   String get updatedAt => throw _privateConstructorUsedError;
+  @override
+  String? get wallet => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
   _$$_UserInfoEntityCopyWith<_$_UserInfoEntity> get copyWith =>

@@ -412,5 +412,11 @@ abstract class  LocaleKeys {
   static const you_can_set_your_alarm_here = 'you_can_set_your_alarm_here';
   static const your_account_has_been_create = 'your_account_has_been_create';
   static const continue_ = 'continue_';
+  static const incorrect_email = 'incorrect_email';
+  static const email_does_not_exist = 'email_does_not_exist';
+  static const incorrect_email_password = 'incorrect_email_password';
+  static const email_already_exist = 'email_already_exist';
+  static const otp_expired = 'otp_expired';
+  static const wallet_already = 'wallet_already';
 
 }

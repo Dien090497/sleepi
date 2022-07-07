@@ -414,5 +414,7 @@
   "email_does_not_exist" : "Your email doesn't exist. Please signup first.",
   "incorrect_email_password" : "Incorrect email/password. Please try again",
   "email_already_exist" : "Email is already exists",
-  "otp_expired" : "OTP has expired. Please try again"
+  "otp_expired" : "OTP has expired. Please try again",
+  "wallet_already" : "Your account already has a wallet."
+
 }

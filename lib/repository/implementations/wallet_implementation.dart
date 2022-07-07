@@ -41,35 +41,46 @@ class WalletImplementation extends IWalletRepository {
       final String mnemonic = _web3DataSource.createMnemonic();
       final derivedIndex = _getStorageDataSource.getDerivedIndexAndIncrease();
       final network = await _getCurrentNetwork();
-      final privateKey = _web3DataSource.mnemonicToPrivateKey(
-          mnemonic, derivedIndex, network.slip44);
+      final privateKey = _web3DataSource.mnemonicToPrivateKey(mnemonic, 0, network.slip44);
       final credentials = _web3DataSource.credentialsFromPrivateKey(privateKey);
       final ethereumAddress = await credentials.extractAddress();
-
-      /// Store Wallet
-
-      final model = WalletIsarModel(
-        mnemonic: mnemonic,
-        privateKey: privateKey,
-        name: 'Account $derivedIndex',
-        address: ethereumAddress.hex,
-        derivedIndex: derivedIndex,
+      final message = await _secureStorage.readMessage();
+      final signature = _web3DataSource.generateSignature(privateKey: privateKey, message: message ?? '');
+      final user = await _secureStorage.readCurrentUser();
+      VerifyUserSchema schema = VerifyUserSchema(
+        signedMessage: signature,
+        signer: ethereumAddress.hexEip55,
+        email: user?.email ?? '',
+        message: message ?? '',
       );
+      final result = await _authDataSource.verifyUser(schema);
+      if (result.status) {
+        /// Store Wallet
 
-      'private key  $privateKey  \n seed phrase  ${model.address}'.log;
-      final int walletId = await _isarDataSource.putWallet(model);
-      model.id = walletId;
-      await _getStorageDataSource.setCurrentWalletId(walletId);
-      final nativeCurrency = await _getNativeCurrency();
-      final result = await _web3DataSource.getBalance(ethereumAddress.hex);
-      final balance = result / BigInt.from(pow(10, 18));
-      return Right(model.toEntity(
-        credentials,
-        derivedIndex: derivedIndex,
-        networkName: network.name,
-        nativeCurrency: nativeCurrency!.toEntity(balance: balance),
-        chainId: network.chainId,
-      ));
+        final model = WalletIsarModel(
+          mnemonic: mnemonic,
+          privateKey: privateKey,
+          name: 'Account $derivedIndex',
+          address: ethereumAddress.hex,
+          derivedIndex: derivedIndex,
+        );
+        'private key  $privateKey  \n seed phrase  ${model.address}'.log;
+        final int walletId = await _isarDataSource.putWallet(model);
+        model.id = walletId;
+        await _getStorageDataSource.setCurrentWalletId(walletId);
+        final nativeCurrency = await _getNativeCurrency();
+        final result = await _web3DataSource.getBalance(ethereumAddress.hex);
+        final balance = result / BigInt.from(pow(10, 18));
+        return Right(model.toEntity(
+          credentials,
+          derivedIndex: derivedIndex,
+          networkName: network.name,
+          nativeCurrency: nativeCurrency!.toEntity(balance: balance),
+          chainId: network.chainId,
+        ));
+      } else {
+        return const Left(FailureMessage(LocaleKeys.wallet_already));
+      }
     } catch (e) {
       return Left(FailureMessage('$e'));
     }
