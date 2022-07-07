@@ -81,6 +81,7 @@ class _AccountLoginState extends State<AccountLoginWidget> {
                 });
               } else {
                 _changeState(Action.signIn);
+                _showPopUpSignUpSuccess();
               }
             }
           });
