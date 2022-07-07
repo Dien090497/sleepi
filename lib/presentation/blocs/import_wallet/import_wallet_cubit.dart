@@ -26,14 +26,11 @@ class ImportWalletCubit extends Cubit<ImportWalletState> {
   late String userEmail;
   bool? verifyOtpSuccess;
 
-  String otp = '';
-  String mnemonic = '';
-
   init() {
     _getUserEmail();
   }
 
-  Future process() async {
+  Future process({required String otp, required String mnemonic}) async {
     emit(const ImportWalletState.initial());
     if (otp.isEmpty) {
       emit(ImportWalletState.errorOtp(LocaleKeys.this_field_is_required.tr()));
@@ -46,13 +43,14 @@ class ImportWalletCubit extends Cubit<ImportWalletState> {
     }
     final result = await _validateMnemonicUC.call(mnemonic);
     result.fold(
-        (l) => emit(ImportWalletState.errorMnemonic(
-            LocaleKeys.invalid_mnemonic_please_try_again.tr())), (r) {
+        (l) {
+          emit(ImportWalletState.errorMnemonic('$l'));
+          }, (r) {
       if (!r) {
         emit(ImportWalletState.errorMnemonic(
             LocaleKeys.invalid_mnemonic_please_try_again.tr()));
       } else {
-        verifyOtp();
+        verifyOtp(otp: otp);
       }
     });
   }
@@ -65,7 +63,7 @@ class ImportWalletCubit extends Cubit<ImportWalletState> {
     }, (r) {});
   }
 
-  verifyOtp() async {
+  verifyOtp({required String otp}) async {
     'run to verify otp'.log;
     if (verifyOtpSuccess == true) {
       emit(const ImportWalletState.verifyOtpSuccess());
@@ -84,7 +82,7 @@ class ImportWalletCubit extends Cubit<ImportWalletState> {
     });
   }
 
-  importWallet() async {
+  importWallet({required String mnemonic}) async {
     emit(const ImportWalletState.initial(isLoading: true));
     await Future.delayed(const Duration(milliseconds: 1000));
     var result = await importWalletUC.call(mnemonic);

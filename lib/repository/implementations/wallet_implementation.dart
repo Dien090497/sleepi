@@ -5,7 +5,6 @@ import 'package:dartz/dartz.dart';
 import 'package:injectable/injectable.dart';
 import 'package:slee_fi/common/const/const.dart';
 import 'package:slee_fi/common/enum/enum.dart';
-import 'package:slee_fi/common/extensions/string_x.dart';
 import 'package:slee_fi/datasources/local/get_storage_datasource.dart';
 import 'package:slee_fi/datasources/local/history_datasource.dart';
 import 'package:slee_fi/datasources/local/isar/isar_datasource.dart';
@@ -61,8 +60,8 @@ class WalletImplementation extends IWalletRepository {
         email: user?.email ?? '',
         message: message ?? '',
       );
-      final result = await _authDataSource.verifyUser(schema);
-      if (result.status) {
+      final resultResponse = await _authDataSource.verifyUser(schema);
+      if (resultResponse.status) {
         /// Store Wallet
 
         final model = WalletIsarModel(
@@ -72,7 +71,6 @@ class WalletImplementation extends IWalletRepository {
           address: ethereumAddress.hex,
           derivedIndex: derivedIndex,
         );
-        'private key  $privateKey  \n seed phrase  ${model.address}'.log;
         final int walletId = await _isarDataSource.putWallet(model);
         model.id = walletId;
         await _getStorageDataSource.setCurrentWalletId(walletId);
@@ -394,7 +392,7 @@ class WalletImplementation extends IWalletRepository {
         if (result.status) {
           return Right(result.status);
         } else {
-          return const Left(FailureMessage(LocaleKeys.password));
+          return const Left(FailureMessage(LocaleKeys.wallet_already));
         }
       } else {
         return const Left(FailureMessage(LocaleKeys.password));
