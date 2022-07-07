@@ -44,13 +44,13 @@ class GlobalWalletCubit extends Cubit<GlobalWalletState> {
     'init global wallet'.log;
     this.uid = uid;
     emit(GlobalWalletState.loaded(tokenList: _defaultTokens, loading: false));
-    fetch();
-    final time = Timer.periodic(const Duration(seconds: 10), (timer) => fetch());
+    _fetch();
+    final time = Timer.periodic(const Duration(seconds: 10), (timer) => _fetch());
     _timer = time;
   }
 
   //todo: logout and sign in again do not run to this function
-  fetch() async {
+  _fetch() async {
     'run to fetch '.log;
     var currentState = state;
     if (currentState is GlobalWalletStateLoaded) {
