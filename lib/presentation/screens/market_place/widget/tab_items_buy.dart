@@ -17,8 +17,22 @@ import 'package:slee_fi/presentation/screens/market_place/widget/pop_up_item_mar
 import 'package:slee_fi/presentation/screens/market_place/widget/tab_bar_filter.dart';
 import 'package:slee_fi/resources/resources.dart';
 
-class TabItemsBuy extends StatelessWidget {
+class TabItemsBuy extends StatefulWidget {
   const TabItemsBuy({Key? key}) : super(key: key);
+
+  @override
+  State<TabItemsBuy> createState() => _TabItemsBuyState();
+}
+
+class _TabItemsBuyState extends State<TabItemsBuy> {
+  List<MarketPlaceModel> listItems = [];
+  ScrollController scrollController = ScrollController();
+
+  @override
+  void dispose() {
+    scrollController.dispose();
+    super.dispose();
+  }
 
   void _showItemDialog(BuildContext context, MarketPlaceModel item) {
     showCustomAlertDialog(
@@ -36,15 +50,24 @@ class TabItemsBuy extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    List<MarketPlaceModel> listItems = [];
     return DefaultTabController(
       length: 2,
       child: BlocProvider(
         create: (context) => MarketPlaceCubit()..init(3),
         child: BlocConsumer<MarketPlaceCubit, MarketPlaceState>(
           listener: (context, state) {
+            // final cubit = context.read<MarketPlaceCubit>();
             if (state is MarketPlaceStateSuccess) {
               listItems = state.list.list;
+            }
+            if (state is MarketPlaceStateInit) {
+              // scrollController.addListener(() {
+              //   if (scrollController.position.maxScrollExtent ==
+              //           scrollController.offset &&
+              //       cubit.loadMore) {
+              //     cubit.loadMoreMarketPlace();
+              //   }
+              // });
             }
           },
           builder: (context, state) {
@@ -68,7 +91,7 @@ class TabItemsBuy extends StatelessWidget {
                       },
                       sliders: {
                         LocaleKeys.level.tr(): const FilterSliderValues(
-                            max: 5, min: 1, interval: 2),
+                            max: 5, min: 0, interval: 5),
                       },
                     );
                   },
@@ -90,7 +113,7 @@ class TabItemsBuy extends StatelessWidget {
                                     SFGridView(
                                       count: listItems.length,
                                       isScroll: true,
-                                      onRefresh: (){
+                                      onRefresh: () {
                                         cubit.refresh();
                                       },
                                       childAspectRatio: 8 / 10,

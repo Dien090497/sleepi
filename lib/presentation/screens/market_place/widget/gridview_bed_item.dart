@@ -55,9 +55,9 @@ class GridViewBedItem extends StatelessWidget {
               children: [
                 Positioned(
                   top: 20,
-                  left: -40,
+                  left: -30,
                   child: TopLeftBanner(
-                    text: bed.nftName,
+                    text: bed.classNft == null ? bed.type.reCase(StringCase.titleCase) : bed.classNft!.reCase(StringCase.camelCase),
                     textColor: AppColors.white,
                   ),
                 ),

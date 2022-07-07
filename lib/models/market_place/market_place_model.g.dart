@@ -31,6 +31,7 @@ MarketPlaceModel _$MarketPlaceModelFromJson(Map<String, dynamic> json) =>
       json['quality'] as String?,
       json['owner'] as String,
       json['symbol'] as String,
+      json['class'] as String?,
     );
 
 Map<String, dynamic> _$MarketPlaceModelToJson(MarketPlaceModel instance) =>
@@ -56,6 +57,7 @@ Map<String, dynamic> _$MarketPlaceModelToJson(MarketPlaceModel instance) =>
       'image': instance.image,
       'contract_address': instance.contractAddress,
       'type': instance.type,
+      'class': instance.classNft,
       'quality': instance.quality,
       'owner': instance.owner,
     };
