@@ -60,6 +60,15 @@ class _FilterSheetState extends State<FilterSheet> {
     });
   }
 
+  clear(){
+    widget.sections.forEach((key, value) {
+        selectedSections[key] = [];
+    });
+    widget.sliders.forEach((key, value) {
+        selectedSliders[key] = 0;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     final Size size = MediaQuery.of(context).size;
@@ -81,7 +90,7 @@ class _FilterSheetState extends State<FilterSheet> {
                   onPressed: () {
                     selectedSections.clear();
                     selectedSliders.clear();
-                    init();
+                    clear();
                     widget.cubit.filter(selectedSections, selectedSliders);
                     setState(() {});
                   },
