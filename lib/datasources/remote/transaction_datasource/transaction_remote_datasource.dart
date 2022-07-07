@@ -38,7 +38,7 @@ class TransactionRemoteDataSource{
           wallet.mnemonic, wallet.derivedIndex!, network.slip44);
       final credentials = _web3dataSource.credentialsFromPrivateKey(privateKey);
       final ethereumAddress = await credentials.extractAddress();
-      String url = 'https://testnet.snowtrace.io/api?module=account&action=${params.typeHistory}&address=$ethereumAddress&startblock=00000000&endblock=99999999&sort=desc&apikey=$apiKey"';
+      String url = 'https://testnet.snowtrace.io/api?module=account&action=${params.typeHistory}&address=$ethereumAddress&startblock=0&endblock=99999999&sort=desc&apikey=$apiKey"';
       var dataResponse = await dio.get(url);
       var history = HistoryModel.fromJson(dataResponse.data as Map<String, dynamic>);
       return Right(history);

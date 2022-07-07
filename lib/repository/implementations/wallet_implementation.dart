@@ -40,8 +40,8 @@ class WalletImplementation extends IWalletRepository {
   final SecureStorage _secureStorage;
   final AuthDataSource _authDataSource;
 
-  WalletImplementation(this._web3DataSource, this._getStorageDataSource,
-      this._isarDataSource, this._web3provider, this._secureStorage, this._authDataSource);
+  WalletImplementation(this._web3DataSource, this._getStorageDataSource, this._historyDataSource,
+      this._transactionRemoteDataSource, this._isarDataSource, this._web3provider, this._secureStorage, this._authDataSource);
 
   @override
   Future<Either<Failure, WalletInfoEntity>> createWallet() async {
@@ -396,7 +396,7 @@ class WalletImplementation extends IWalletRepository {
   @override
   Future<Either<Failure, List<TransactionIsarModel>>> getHistoryTransaction(HistoryTransactionParams params) async{
       try {
-        List<HistoryIsarModel> historyList = await _historyDataSource.getAllHistory();
+        // List<HistoryIsarModel> historyList = await _historyDataSource.getAllHistory();
         List<TransactionHistoryModel> transactionHistoryList = [];
         final result = await _transactionRemoteDataSource.getHistoryTransaction(params);
         result.fold(
