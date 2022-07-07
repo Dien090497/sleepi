@@ -3,10 +3,10 @@ import 'dart:developer';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:slee_fi/di/injector.dart';
-import 'package:slee_fi/failures/failure.dart';
 import 'package:slee_fi/l10n/locale_keys.g.dart';
 import 'package:slee_fi/schema/market/market_schema.dart';
 import 'package:slee_fi/usecase/get_market_place_usecase.dart';
+
 import 'market_place_state.dart';
 
 class MarketPlaceCubit extends Cubit<MarketPlaceState> {
@@ -49,9 +49,9 @@ class MarketPlaceCubit extends Cubit<MarketPlaceState> {
   Future<void> getMarketPlace(MarketSchema params) async {
     final result = await _marketPlaceUseCase.call(params);
     result.fold((l) {
-      log("fail : ${l is FailureMessage ? l.msg : '$l'}");
+      log("fail : ${'$l'}");
       error = true;
-      emit(MarketPlaceState.fail(l is FailureMessage ? l.msg : '$l'));
+      emit(MarketPlaceState.fail('$l'));
     }, (success) {
       error = false;
       log("result : ${success.toString()}");
@@ -68,8 +68,8 @@ class MarketPlaceCubit extends Cubit<MarketPlaceState> {
     final result = await _marketPlaceUseCase.call(params);
     result.fold((l) {
       error = true;
-      log("fail : ${l is FailureMessage ? l.msg : '$l'}");
-      emit(MarketPlaceState.fail(l is FailureMessage ? l.msg : '$l'));
+      log("fail : ${'$l'}");
+      emit(MarketPlaceState.fail('$l'));
     }, (success) {
       error = false;
       log("result : ${success.toString()}");

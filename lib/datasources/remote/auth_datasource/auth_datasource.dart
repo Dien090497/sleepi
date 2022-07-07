@@ -46,6 +46,10 @@ abstract class AuthDataSource {
   }
 
   ///user
+
+  @GET('/users/me')
+  Future<UserResponse> getMe();
+
   @GET('/user-otp')
   Future<SendEmailResponse> sendOTP(
       @Query('email') String email, @Query('otpType') OTPType otpType);

@@ -148,7 +148,7 @@ class WalletCubit extends Cubit<WalletState> {
 
     result.fold(
           (l) {
-        emit(WalletState.error(message : l is FailureMessage ? l.msg : '$l'));
+        emit(WalletState.error(message : '$l'));
       },
           (history) {
         emit(WalletState.getHistorySuccess(history));

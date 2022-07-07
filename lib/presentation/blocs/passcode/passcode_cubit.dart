@@ -1,6 +1,5 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:slee_fi/di/injector.dart';
-import 'package:slee_fi/failures/failure.dart';
 import 'package:slee_fi/presentation/blocs/passcode/passcode_state.dart';
 import 'package:slee_fi/usecase/create_pass_code_usecase.dart';
 import 'package:slee_fi/usecase/validate_passcode_usecase.dart';
@@ -19,7 +18,7 @@ class PasscodeCubit extends Cubit<PasscodeState> {
     final result = await _validatePasscode.call(pass);
     result.fold(
       (l) {
-        emit(PasscodeState.error(l is FailureMessage ? l.msg : '$l'));
+        emit(PasscodeState.error('$l'));
         // emit(currentState.copyWith(isLoading: false));
       },
       (success) {
@@ -40,7 +39,7 @@ class PasscodeCubit extends Cubit<PasscodeState> {
 
       result.fold(
         (l) {
-          emit(PasscodeState.error(l is FailureMessage ? l.msg : '$l'));
+          emit(PasscodeState.error('$l'));
           emit(currentState.copyWith(isLoading: false));
         },
         (success) {

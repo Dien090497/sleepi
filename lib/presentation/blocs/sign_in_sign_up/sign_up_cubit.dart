@@ -66,7 +66,7 @@ class SigInSignUpCubit extends Cubit<SignInSignUpState> {
 
     var result = await _sendOtpUC.call(SendOTPParam(email.trim(), type));
     result.fold(
-      (l) => emit(SignInSignUpState.errorEmail(l.msg)),
+      (l) => emit(SignInSignUpState.errorEmail('$l')),
       (r) => emit(const SignInSignUpState.initial()),
     );
   }
@@ -74,11 +74,11 @@ class SigInSignUpCubit extends Cubit<SignInSignUpState> {
   _signUp() async {
     var result =
         await _signUpUseCase.call(SignUpSchema(int.parse(otp), email.trim()));
-    result.fold((l) => emit(SignInSignUpState.error(l.msg)),
+    result.fold((l) => emit(SignInSignUpState.error('$l')),
         (userResponse) async {
       var setting = await _fetchSettingActiveCode.call(NoParams());
       setting.fold(
-        (l) => emit(SignInSignUpState.error(l.msg)),
+        (l) => emit(SignInSignUpState.error('$l')),
         (r) => emit(
             SignInSignUpState.signUpSuccess(r.data.isEnable, userResponse)),
       );
@@ -97,7 +97,7 @@ class SigInSignUpCubit extends Cubit<SignInSignUpState> {
     var result =
         await _logInUseCase.call(SignInSchema(email.trim(), _password));
 
-    result.fold((l) => emit(SignInSignUpState.error(l.msg)), (r) async {
+    result.fold((l) => emit(SignInSignUpState.error('$l')), (r) async {
       emit(SignInSignUpState.signInSuccess(isFistOpenApp, r));
     });
   }
@@ -151,7 +151,7 @@ class SigInSignUpCubit extends Cubit<SignInSignUpState> {
         .call(VerifyOTPSchema(otp, email.trim(), OTPType.changePass));
 
     result.fold(
-      (l) => emit(SignInSignUpState.error(l.msg)),
+      (l) => emit(SignInSignUpState.error('$l')),
       (r) => emit(SignInSignUpState.verifyOTPSuccess(otp, email.trim())),
     );
   }

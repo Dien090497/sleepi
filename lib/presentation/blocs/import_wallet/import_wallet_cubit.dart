@@ -61,7 +61,7 @@ class ImportWalletCubit extends Cubit<ImportWalletState> {
     var result =
         await sendOtpUC.call(SendOTPParam(userEmail, OTPType.importWallet));
     result.fold((l) {
-      emit(ImportWalletState.errorOtp(l.msg));
+      emit(ImportWalletState.errorOtp('$l'));
     }, (r) {});
   }
 
@@ -77,7 +77,7 @@ class ImportWalletCubit extends Cubit<ImportWalletState> {
         .call(VerifyOTPSchema(int.parse(otp), userEmail, OTPType.importWallet));
 
     result.fold((l) {
-      emit(ImportWalletState.errorOtp(l.msg));
+      emit(ImportWalletState.errorOtp('$l'));
     }, (r) {
       verifyOtpSuccess = true;
       emit(const ImportWalletState.verifyOtpSuccess());

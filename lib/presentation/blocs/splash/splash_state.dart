@@ -1,5 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:slee_fi/entities/user/user_info_entity.dart';
 
 part 'splash_state.freezed.dart';
 
@@ -7,7 +8,10 @@ part 'splash_state.freezed.dart';
 class SplashState with _$SplashState {
   const factory SplashState.initial() = SplashInitial;
 
-  const factory SplashState.done({required bool isSafeDevice}) = SplashDone;
+  const factory SplashState.done({
+    required bool isSafeDevice,
+    required UserInfoEntity? userInfoEntity,
+  }) = SplashDone;
 
   const factory SplashState.error(String msg) = SplashError;
 }
