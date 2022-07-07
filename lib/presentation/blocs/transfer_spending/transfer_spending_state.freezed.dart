@@ -20,6 +20,7 @@ mixin _$TransferSpendingState {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
+    required TResult Function() toWalletSuccess,
     required TResult Function(String message, String? typeError) error,
     required TResult Function(
             double? fee, TransferSpendingEntity? transferSpendingEntity)
@@ -30,6 +31,7 @@ mixin _$TransferSpendingState {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
+    TResult Function()? toWalletSuccess,
     TResult Function(String message, String? typeError)? error,
     TResult Function(
             double? fee, TransferSpendingEntity? transferSpendingEntity)?
@@ -40,6 +42,7 @@ mixin _$TransferSpendingState {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
+    TResult Function()? toWalletSuccess,
     TResult Function(String message, String? typeError)? error,
     TResult Function(
             double? fee, TransferSpendingEntity? transferSpendingEntity)?
@@ -51,6 +54,8 @@ mixin _$TransferSpendingState {
   TResult map<TResult extends Object?>({
     required TResult Function(TransferSpendingStateInitial value) initial,
     required TResult Function(TransferSpendingStateLoading value) loading,
+    required TResult Function(TransferSpendingStateToWalletSuccess value)
+        toWalletSuccess,
     required TResult Function(TransferSpendingStateError value) error,
     required TResult Function(TransferSpendingStateLoaded value) loaded,
   }) =>
@@ -59,6 +64,8 @@ mixin _$TransferSpendingState {
   TResult? mapOrNull<TResult extends Object?>({
     TResult Function(TransferSpendingStateInitial value)? initial,
     TResult Function(TransferSpendingStateLoading value)? loading,
+    TResult Function(TransferSpendingStateToWalletSuccess value)?
+        toWalletSuccess,
     TResult Function(TransferSpendingStateError value)? error,
     TResult Function(TransferSpendingStateLoaded value)? loaded,
   }) =>
@@ -67,6 +74,8 @@ mixin _$TransferSpendingState {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(TransferSpendingStateInitial value)? initial,
     TResult Function(TransferSpendingStateLoading value)? loading,
+    TResult Function(TransferSpendingStateToWalletSuccess value)?
+        toWalletSuccess,
     TResult Function(TransferSpendingStateError value)? error,
     TResult Function(TransferSpendingStateLoaded value)? loaded,
     required TResult orElse(),
@@ -138,6 +147,7 @@ class _$TransferSpendingStateInitial implements TransferSpendingStateInitial {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
+    required TResult Function() toWalletSuccess,
     required TResult Function(String message, String? typeError) error,
     required TResult Function(
             double? fee, TransferSpendingEntity? transferSpendingEntity)
@@ -151,6 +161,7 @@ class _$TransferSpendingStateInitial implements TransferSpendingStateInitial {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
+    TResult Function()? toWalletSuccess,
     TResult Function(String message, String? typeError)? error,
     TResult Function(
             double? fee, TransferSpendingEntity? transferSpendingEntity)?
@@ -164,6 +175,7 @@ class _$TransferSpendingStateInitial implements TransferSpendingStateInitial {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
+    TResult Function()? toWalletSuccess,
     TResult Function(String message, String? typeError)? error,
     TResult Function(
             double? fee, TransferSpendingEntity? transferSpendingEntity)?
@@ -181,6 +193,8 @@ class _$TransferSpendingStateInitial implements TransferSpendingStateInitial {
   TResult map<TResult extends Object?>({
     required TResult Function(TransferSpendingStateInitial value) initial,
     required TResult Function(TransferSpendingStateLoading value) loading,
+    required TResult Function(TransferSpendingStateToWalletSuccess value)
+        toWalletSuccess,
     required TResult Function(TransferSpendingStateError value) error,
     required TResult Function(TransferSpendingStateLoaded value) loaded,
   }) {
@@ -192,6 +206,8 @@ class _$TransferSpendingStateInitial implements TransferSpendingStateInitial {
   TResult? mapOrNull<TResult extends Object?>({
     TResult Function(TransferSpendingStateInitial value)? initial,
     TResult Function(TransferSpendingStateLoading value)? loading,
+    TResult Function(TransferSpendingStateToWalletSuccess value)?
+        toWalletSuccess,
     TResult Function(TransferSpendingStateError value)? error,
     TResult Function(TransferSpendingStateLoaded value)? loaded,
   }) {
@@ -203,6 +219,8 @@ class _$TransferSpendingStateInitial implements TransferSpendingStateInitial {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(TransferSpendingStateInitial value)? initial,
     TResult Function(TransferSpendingStateLoading value)? loading,
+    TResult Function(TransferSpendingStateToWalletSuccess value)?
+        toWalletSuccess,
     TResult Function(TransferSpendingStateError value)? error,
     TResult Function(TransferSpendingStateLoaded value)? loaded,
     required TResult orElse(),
@@ -265,6 +283,7 @@ class _$TransferSpendingStateLoading implements TransferSpendingStateLoading {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
+    required TResult Function() toWalletSuccess,
     required TResult Function(String message, String? typeError) error,
     required TResult Function(
             double? fee, TransferSpendingEntity? transferSpendingEntity)
@@ -278,6 +297,7 @@ class _$TransferSpendingStateLoading implements TransferSpendingStateLoading {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
+    TResult Function()? toWalletSuccess,
     TResult Function(String message, String? typeError)? error,
     TResult Function(
             double? fee, TransferSpendingEntity? transferSpendingEntity)?
@@ -291,6 +311,7 @@ class _$TransferSpendingStateLoading implements TransferSpendingStateLoading {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
+    TResult Function()? toWalletSuccess,
     TResult Function(String message, String? typeError)? error,
     TResult Function(
             double? fee, TransferSpendingEntity? transferSpendingEntity)?
@@ -308,6 +329,8 @@ class _$TransferSpendingStateLoading implements TransferSpendingStateLoading {
   TResult map<TResult extends Object?>({
     required TResult Function(TransferSpendingStateInitial value) initial,
     required TResult Function(TransferSpendingStateLoading value) loading,
+    required TResult Function(TransferSpendingStateToWalletSuccess value)
+        toWalletSuccess,
     required TResult Function(TransferSpendingStateError value) error,
     required TResult Function(TransferSpendingStateLoaded value) loaded,
   }) {
@@ -319,6 +342,8 @@ class _$TransferSpendingStateLoading implements TransferSpendingStateLoading {
   TResult? mapOrNull<TResult extends Object?>({
     TResult Function(TransferSpendingStateInitial value)? initial,
     TResult Function(TransferSpendingStateLoading value)? loading,
+    TResult Function(TransferSpendingStateToWalletSuccess value)?
+        toWalletSuccess,
     TResult Function(TransferSpendingStateError value)? error,
     TResult Function(TransferSpendingStateLoaded value)? loaded,
   }) {
@@ -330,6 +355,8 @@ class _$TransferSpendingStateLoading implements TransferSpendingStateLoading {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(TransferSpendingStateInitial value)? initial,
     TResult Function(TransferSpendingStateLoading value)? loading,
+    TResult Function(TransferSpendingStateToWalletSuccess value)?
+        toWalletSuccess,
     TResult Function(TransferSpendingStateError value)? error,
     TResult Function(TransferSpendingStateLoaded value)? loaded,
     required TResult orElse(),
@@ -343,6 +370,146 @@ class _$TransferSpendingStateLoading implements TransferSpendingStateLoading {
 
 abstract class TransferSpendingStateLoading implements TransferSpendingState {
   const factory TransferSpendingStateLoading() = _$TransferSpendingStateLoading;
+}
+
+/// @nodoc
+abstract class _$$TransferSpendingStateToWalletSuccessCopyWith<$Res> {
+  factory _$$TransferSpendingStateToWalletSuccessCopyWith(
+          _$TransferSpendingStateToWalletSuccess value,
+          $Res Function(_$TransferSpendingStateToWalletSuccess) then) =
+      __$$TransferSpendingStateToWalletSuccessCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$TransferSpendingStateToWalletSuccessCopyWithImpl<$Res>
+    extends _$TransferSpendingStateCopyWithImpl<$Res>
+    implements _$$TransferSpendingStateToWalletSuccessCopyWith<$Res> {
+  __$$TransferSpendingStateToWalletSuccessCopyWithImpl(
+      _$TransferSpendingStateToWalletSuccess _value,
+      $Res Function(_$TransferSpendingStateToWalletSuccess) _then)
+      : super(
+            _value, (v) => _then(v as _$TransferSpendingStateToWalletSuccess));
+
+  @override
+  _$TransferSpendingStateToWalletSuccess get _value =>
+      super._value as _$TransferSpendingStateToWalletSuccess;
+}
+
+/// @nodoc
+
+class _$TransferSpendingStateToWalletSuccess
+    implements TransferSpendingStateToWalletSuccess {
+  const _$TransferSpendingStateToWalletSuccess();
+
+  @override
+  String toString() {
+    return 'TransferSpendingState.toWalletSuccess()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$TransferSpendingStateToWalletSuccess);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function() loading,
+    required TResult Function() toWalletSuccess,
+    required TResult Function(String message, String? typeError) error,
+    required TResult Function(
+            double? fee, TransferSpendingEntity? transferSpendingEntity)
+        loaded,
+  }) {
+    return toWalletSuccess();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function()? loading,
+    TResult Function()? toWalletSuccess,
+    TResult Function(String message, String? typeError)? error,
+    TResult Function(
+            double? fee, TransferSpendingEntity? transferSpendingEntity)?
+        loaded,
+  }) {
+    return toWalletSuccess?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function()? loading,
+    TResult Function()? toWalletSuccess,
+    TResult Function(String message, String? typeError)? error,
+    TResult Function(
+            double? fee, TransferSpendingEntity? transferSpendingEntity)?
+        loaded,
+    required TResult orElse(),
+  }) {
+    if (toWalletSuccess != null) {
+      return toWalletSuccess();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(TransferSpendingStateInitial value) initial,
+    required TResult Function(TransferSpendingStateLoading value) loading,
+    required TResult Function(TransferSpendingStateToWalletSuccess value)
+        toWalletSuccess,
+    required TResult Function(TransferSpendingStateError value) error,
+    required TResult Function(TransferSpendingStateLoaded value) loaded,
+  }) {
+    return toWalletSuccess(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(TransferSpendingStateInitial value)? initial,
+    TResult Function(TransferSpendingStateLoading value)? loading,
+    TResult Function(TransferSpendingStateToWalletSuccess value)?
+        toWalletSuccess,
+    TResult Function(TransferSpendingStateError value)? error,
+    TResult Function(TransferSpendingStateLoaded value)? loaded,
+  }) {
+    return toWalletSuccess?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(TransferSpendingStateInitial value)? initial,
+    TResult Function(TransferSpendingStateLoading value)? loading,
+    TResult Function(TransferSpendingStateToWalletSuccess value)?
+        toWalletSuccess,
+    TResult Function(TransferSpendingStateError value)? error,
+    TResult Function(TransferSpendingStateLoaded value)? loaded,
+    required TResult orElse(),
+  }) {
+    if (toWalletSuccess != null) {
+      return toWalletSuccess(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class TransferSpendingStateToWalletSuccess
+    implements TransferSpendingState {
+  const factory TransferSpendingStateToWalletSuccess() =
+      _$TransferSpendingStateToWalletSuccess;
 }
 
 /// @nodoc
@@ -426,6 +593,7 @@ class _$TransferSpendingStateError implements TransferSpendingStateError {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
+    required TResult Function() toWalletSuccess,
     required TResult Function(String message, String? typeError) error,
     required TResult Function(
             double? fee, TransferSpendingEntity? transferSpendingEntity)
@@ -439,6 +607,7 @@ class _$TransferSpendingStateError implements TransferSpendingStateError {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
+    TResult Function()? toWalletSuccess,
     TResult Function(String message, String? typeError)? error,
     TResult Function(
             double? fee, TransferSpendingEntity? transferSpendingEntity)?
@@ -452,6 +621,7 @@ class _$TransferSpendingStateError implements TransferSpendingStateError {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
+    TResult Function()? toWalletSuccess,
     TResult Function(String message, String? typeError)? error,
     TResult Function(
             double? fee, TransferSpendingEntity? transferSpendingEntity)?
@@ -469,6 +639,8 @@ class _$TransferSpendingStateError implements TransferSpendingStateError {
   TResult map<TResult extends Object?>({
     required TResult Function(TransferSpendingStateInitial value) initial,
     required TResult Function(TransferSpendingStateLoading value) loading,
+    required TResult Function(TransferSpendingStateToWalletSuccess value)
+        toWalletSuccess,
     required TResult Function(TransferSpendingStateError value) error,
     required TResult Function(TransferSpendingStateLoaded value) loaded,
   }) {
@@ -480,6 +652,8 @@ class _$TransferSpendingStateError implements TransferSpendingStateError {
   TResult? mapOrNull<TResult extends Object?>({
     TResult Function(TransferSpendingStateInitial value)? initial,
     TResult Function(TransferSpendingStateLoading value)? loading,
+    TResult Function(TransferSpendingStateToWalletSuccess value)?
+        toWalletSuccess,
     TResult Function(TransferSpendingStateError value)? error,
     TResult Function(TransferSpendingStateLoaded value)? loaded,
   }) {
@@ -491,6 +665,8 @@ class _$TransferSpendingStateError implements TransferSpendingStateError {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(TransferSpendingStateInitial value)? initial,
     TResult Function(TransferSpendingStateLoading value)? loading,
+    TResult Function(TransferSpendingStateToWalletSuccess value)?
+        toWalletSuccess,
     TResult Function(TransferSpendingStateError value)? error,
     TResult Function(TransferSpendingStateLoaded value)? loaded,
     required TResult orElse(),
@@ -596,6 +772,7 @@ class _$TransferSpendingStateLoaded implements TransferSpendingStateLoaded {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
+    required TResult Function() toWalletSuccess,
     required TResult Function(String message, String? typeError) error,
     required TResult Function(
             double? fee, TransferSpendingEntity? transferSpendingEntity)
@@ -609,6 +786,7 @@ class _$TransferSpendingStateLoaded implements TransferSpendingStateLoaded {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
+    TResult Function()? toWalletSuccess,
     TResult Function(String message, String? typeError)? error,
     TResult Function(
             double? fee, TransferSpendingEntity? transferSpendingEntity)?
@@ -622,6 +800,7 @@ class _$TransferSpendingStateLoaded implements TransferSpendingStateLoaded {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
+    TResult Function()? toWalletSuccess,
     TResult Function(String message, String? typeError)? error,
     TResult Function(
             double? fee, TransferSpendingEntity? transferSpendingEntity)?
@@ -639,6 +818,8 @@ class _$TransferSpendingStateLoaded implements TransferSpendingStateLoaded {
   TResult map<TResult extends Object?>({
     required TResult Function(TransferSpendingStateInitial value) initial,
     required TResult Function(TransferSpendingStateLoading value) loading,
+    required TResult Function(TransferSpendingStateToWalletSuccess value)
+        toWalletSuccess,
     required TResult Function(TransferSpendingStateError value) error,
     required TResult Function(TransferSpendingStateLoaded value) loaded,
   }) {
@@ -650,6 +831,8 @@ class _$TransferSpendingStateLoaded implements TransferSpendingStateLoaded {
   TResult? mapOrNull<TResult extends Object?>({
     TResult Function(TransferSpendingStateInitial value)? initial,
     TResult Function(TransferSpendingStateLoading value)? loading,
+    TResult Function(TransferSpendingStateToWalletSuccess value)?
+        toWalletSuccess,
     TResult Function(TransferSpendingStateError value)? error,
     TResult Function(TransferSpendingStateLoaded value)? loaded,
   }) {
@@ -661,6 +844,8 @@ class _$TransferSpendingStateLoaded implements TransferSpendingStateLoaded {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(TransferSpendingStateInitial value)? initial,
     TResult Function(TransferSpendingStateLoading value)? loading,
+    TResult Function(TransferSpendingStateToWalletSuccess value)?
+        toWalletSuccess,
     TResult Function(TransferSpendingStateError value)? error,
     TResult Function(TransferSpendingStateLoaded value)? loaded,
     required TResult orElse(),

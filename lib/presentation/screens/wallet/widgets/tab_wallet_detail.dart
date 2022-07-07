@@ -19,6 +19,7 @@ import 'package:slee_fi/l10n/locale_keys.g.dart';
 import 'package:slee_fi/presentation/blocs/wallet/wallet_cubit.dart';
 import 'package:slee_fi/presentation/blocs/wallet/wallet_state.dart';
 import 'package:slee_fi/presentation/screens/trade/trade_screen.dart';
+import 'package:slee_fi/presentation/screens/transfer/transfer_screen.dart';
 import 'package:slee_fi/presentation/screens/wallet/widgets/box_button_widget.dart';
 import 'package:slee_fi/presentation/screens/wallet/widgets/modal_receive_wallet.dart';
 import 'package:slee_fi/presentation/screens/wallet/widgets/pop_up_info_wallet.dart';
@@ -136,8 +137,12 @@ class _TabWalletDetailState extends State<TabWalletDetail> {
                           Expanded(
                             child: BoxButtonWidget(
                               onTap: () {
-                                Navigator.pushNamed(context, R.transfer,
-                                    arguments: tokenList[2]);
+                                Navigator.pushNamed(
+                                  context,
+                                  R.transfer,
+                                  arguments:
+                                      TransferScreenArg(tokenList[2], false),
+                                );
                               },
                               text: LocaleKeys.to_spending,
                               assetImage: Ics.icRefresh,

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:slee_fi/common/extensions/string_x.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
 import 'package:slee_fi/common/widgets/sf_icon.dart';
 import 'package:slee_fi/entities/token/token_entity.dart';
@@ -22,34 +21,21 @@ class SFStatisticResource extends StatelessWidget {
       ),
       child: BlocBuilder<GlobalWalletCubit, GlobalWalletState>(
         builder: (context, state) {
-          if (state is GlobalWalletStateInitial) {
-            context.read<GlobalWalletCubit>().init();
-          }
-          double valueSliver = 0;
-          double valueGold = 0;
-          double valueSolana = 0;
           final tokenList = <TokenEntity>[];
-          'state in builder   $state'.log;
 
           if (state is GlobalWalletStateLoaded) {
             tokenList.addAll(state.tokenList);
           }
-          'state in builder   $valueSliver    $valueGold   $valueSolana '.log;
+
           return Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               const SizedBox(width: 4),
-              ItemResource(
-                  value: tokenList.isNotEmpty ? tokenList[0].balance : 0,
-                  url: tokenList.isNotEmpty ? tokenList[0].icon : Ics.icSlgt),
+              ItemResource(value: tokenList[0].balance, url: tokenList[0].icon),
               const SizedBox(width: 16),
-              ItemResource(
-                  value: tokenList.isNotEmpty ? tokenList[1].balance : 0,
-                  url: tokenList.isNotEmpty ? tokenList[1].icon : Ics.icSlft),
+              ItemResource(value: tokenList[1].balance, url: tokenList[1].icon),
               const SizedBox(width: 16),
-              ItemResource(
-                  value: tokenList.isNotEmpty ? tokenList[2].balance : 0,
-                  url: tokenList.isNotEmpty ? tokenList[2].icon : Ics.icSolana),
+              ItemResource(value: tokenList[2].balance, url: tokenList[2].icon),
               const SizedBox(width: 12),
               const SFIcon(Ics.icSolanaCircle),
             ],
@@ -74,9 +60,10 @@ class ItemResource extends StatelessWidget {
         SvgPicture.asset(url),
         const SizedBox(width: 4),
         Text(
-            value == 0
-                ? value.toStringAsFixed(2)
-                : (value / 100000000).toStringAsFixed(0),
+            // value == 0?
+            value.toStringAsFixed(2)
+            // : (value / 100000000).toStringAsFixed(0)
+            ,
             style: TextStyles.white14),
       ],
     );

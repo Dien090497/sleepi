@@ -5,7 +5,7 @@ import 'package:slee_fi/common/widgets/sf_buttons.dart';
 import 'package:slee_fi/common/widgets/sf_card.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
 import 'package:slee_fi/l10n/locale_keys.g.dart';
-import 'package:slee_fi/presentation/blocs/transfer_spending/transfer_spending.dart';
+import 'package:slee_fi/presentation/blocs/transfer_spending/transfer_cubit.dart';
 
 class PopUpConfirmApprove extends StatelessWidget {
   const PopUpConfirmApprove(
@@ -16,7 +16,7 @@ class PopUpConfirmApprove extends StatelessWidget {
       })
       : super(key: key);
 
-  final TransferSpendingCubit cubit;
+  final TransferCubit cubit;
   final String tokenName;
   final String contractAddress;
 

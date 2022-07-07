@@ -5,11 +5,10 @@ part 'whit_draw_token_schema.g.dart';
 @JsonSerializable()
 class WhitDrawTokenSchema {
   final String type;
-  final String symbol;
+  final String tokenAddress;
   final String amount;
-  final String mainWallet;
 
-  WhitDrawTokenSchema(this.type, this.symbol, this.amount, this.mainWallet);
+  WhitDrawTokenSchema(this.type, this.tokenAddress, this.amount);
 
   factory WhitDrawTokenSchema.fromJson(Map<String, dynamic> json) =>
       _$WhitDrawTokenSchemaFromJson(json);

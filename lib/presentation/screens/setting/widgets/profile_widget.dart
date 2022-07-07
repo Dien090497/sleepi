@@ -1,5 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:slee_fi/common/routes/app_routes.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
@@ -10,6 +11,7 @@ import 'package:slee_fi/common/widgets/sf_text.dart';
 import 'package:slee_fi/di/injector.dart';
 import 'package:slee_fi/entities/user/user_info_entity.dart';
 import 'package:slee_fi/l10n/locale_keys.g.dart';
+import 'package:slee_fi/presentation/blocs/global_wallet/global_wallet_cubit.dart';
 import 'package:slee_fi/presentation/screens/setting/widgets/gender_tile.dart';
 import 'package:slee_fi/usecase/logout_usecase.dart';
 import 'package:slee_fi/usecase/usecase.dart';
@@ -78,6 +80,7 @@ class ProfileWidget extends StatelessWidget {
             borderColor: AppColors.blue,
             onPressed: () {
               getIt<LogOutUseCase>().call(NoParams());
+              BlocProvider.of<GlobalWalletCubit>(context).cancelInterval();
               Navigator.pushNamedAndRemoveUntil(
                   context, R.loginSignUp, (route) => false);
             },
