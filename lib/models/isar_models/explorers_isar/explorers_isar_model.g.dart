@@ -9,7 +9,7 @@ part of 'explorers_isar_model.dart';
 // ignore_for_file: duplicate_ignore, non_constant_identifier_names, constant_identifier_names, invalid_use_of_protected_member, unnecessary_cast, unused_local_variable
 
 extension GetExplorersIsarModelCollection on Isar {
-  IsarCollection<ExplorersIsarModel> get explorersIsarModels => getCollection();
+  IsarCollection<ExplorersIsarModel> get explorers => getCollection();
 }
 
 const ExplorersIsarModelSchema = CollectionSchema(
@@ -21,8 +21,8 @@ const ExplorersIsarModelSchema = CollectionSchema(
   listProperties: {},
   indexIds: {},
   indexValueTypes: {},
-  linkIds: {},
-  backlinkLinkNames: {},
+  linkIds: {'network': 0},
+  backlinkLinkNames: {'network': 'explorers'},
   getId: _explorersIsarModelGetId,
   setId: _explorersIsarModelSetId,
   getLinks: _explorersIsarModelGetLinks,
@@ -49,7 +49,7 @@ void _explorersIsarModelSetId(ExplorersIsarModel object, int id) {
 }
 
 List<IsarLinkBase> _explorersIsarModelGetLinks(ExplorersIsarModel object) {
-  return [];
+  return [object.network];
 }
 
 void _explorersIsarModelSerializeNative(
@@ -91,6 +91,7 @@ ExplorersIsarModel _explorersIsarModelDeserializeNative(
     reader.readString(offsets[1]),
     id: id,
   );
+  _explorersIsarModelAttachLinks(collection, id, object);
   return object;
 }
 
@@ -128,6 +129,8 @@ ExplorersIsarModel _explorersIsarModelDeserializeWeb(
     IsarNative.jsObjectGet(jsObj, 'standard') ?? '',
     id: IsarNative.jsObjectGet(jsObj, 'id'),
   );
+  _explorersIsarModelAttachLinks(
+      collection, IsarNative.jsObjectGet(jsObj, 'id'), object);
   return object;
 }
 
@@ -147,7 +150,9 @@ P _explorersIsarModelDeserializePropWeb<P>(Object jsObj, String propertyName) {
 }
 
 void _explorersIsarModelAttachLinks(
-    IsarCollection col, int id, ExplorersIsarModel object) {}
+    IsarCollection col, int id, ExplorersIsarModel object) {
+  object.network.attach(col, col.isar.networks, 'network', id);
+}
 
 extension ExplorersIsarModelQueryWhereSort
     on QueryBuilder<ExplorersIsarModel, ExplorersIsarModel, QWhere> {
@@ -600,7 +605,16 @@ extension ExplorersIsarModelQueryFilter
 }
 
 extension ExplorersIsarModelQueryLinks
-    on QueryBuilder<ExplorersIsarModel, ExplorersIsarModel, QFilterCondition> {}
+    on QueryBuilder<ExplorersIsarModel, ExplorersIsarModel, QFilterCondition> {
+  QueryBuilder<ExplorersIsarModel, ExplorersIsarModel, QAfterFilterCondition>
+      network(FilterQuery<NetworkIsarModel> q) {
+    return linkInternal(
+      isar.networks,
+      q,
+      'network',
+    );
+  }
+}
 
 extension ExplorersIsarModelQueryWhereSortBy
     on QueryBuilder<ExplorersIsarModel, ExplorersIsarModel, QSortBy> {
