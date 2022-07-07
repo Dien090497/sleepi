@@ -29,7 +29,6 @@ class TabSpendingDetail extends StatefulWidget {
 class _TabSpendingDetailState extends State<TabSpendingDetail> {
   final RefreshController refreshController = RefreshController();
 
-
   @override
   void dispose() {
     refreshController.dispose();
@@ -46,8 +45,8 @@ class _TabSpendingDetailState extends State<TabSpendingDetail> {
               enablePullDown: true,
               header: const WaterDropHeader(),
               onRefresh: () async {
-               await context.read<GlobalWalletCubit>().fetch();
-               refreshController.refreshCompleted();
+                await context.read<GlobalWalletCubit>().fetch();
+                refreshController.refreshCompleted();
               },
               child: SingleChildScrollView(
                 child: Column(

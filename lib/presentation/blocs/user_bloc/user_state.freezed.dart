@@ -19,21 +19,27 @@ mixin _$UserState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function(UserInfoEntity userInfoEntity) loaded,
+    required TResult Function(UserInfoEntity userInfoEntity,
+            List<TokenEntity> listTokens, bool loading)
+        loaded,
     required TResult Function(String msg) error,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function(UserInfoEntity userInfoEntity)? loaded,
+    TResult Function(UserInfoEntity userInfoEntity,
+            List<TokenEntity> listTokens, bool loading)?
+        loaded,
     TResult Function(String msg)? error,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function(UserInfoEntity userInfoEntity)? loaded,
+    TResult Function(UserInfoEntity userInfoEntity,
+            List<TokenEntity> listTokens, bool loading)?
+        loaded,
     TResult Function(String msg)? error,
     required TResult orElse(),
   }) =>
@@ -97,18 +103,12 @@ class __$$UserInitialCopyWithImpl<$Res> extends _$UserStateCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$UserInitial with DiagnosticableTreeMixin implements UserInitial {
+class _$UserInitial implements UserInitial {
   const _$UserInitial();
 
   @override
-  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+  String toString() {
     return 'UserState.initial()';
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty('type', 'UserState.initial'));
   }
 
   @override
@@ -124,7 +124,9 @@ class _$UserInitial with DiagnosticableTreeMixin implements UserInitial {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function(UserInfoEntity userInfoEntity) loaded,
+    required TResult Function(UserInfoEntity userInfoEntity,
+            List<TokenEntity> listTokens, bool loading)
+        loaded,
     required TResult Function(String msg) error,
   }) {
     return initial();
@@ -134,7 +136,9 @@ class _$UserInitial with DiagnosticableTreeMixin implements UserInitial {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function(UserInfoEntity userInfoEntity)? loaded,
+    TResult Function(UserInfoEntity userInfoEntity,
+            List<TokenEntity> listTokens, bool loading)?
+        loaded,
     TResult Function(String msg)? error,
   }) {
     return initial?.call();
@@ -144,7 +148,9 @@ class _$UserInitial with DiagnosticableTreeMixin implements UserInitial {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function(UserInfoEntity userInfoEntity)? loaded,
+    TResult Function(UserInfoEntity userInfoEntity,
+            List<TokenEntity> listTokens, bool loading)?
+        loaded,
     TResult Function(String msg)? error,
     required TResult orElse(),
   }) {
@@ -198,7 +204,10 @@ abstract class _$$UserLoadedCopyWith<$Res> {
   factory _$$UserLoadedCopyWith(
           _$UserLoaded value, $Res Function(_$UserLoaded) then) =
       __$$UserLoadedCopyWithImpl<$Res>;
-  $Res call({UserInfoEntity userInfoEntity});
+  $Res call(
+      {UserInfoEntity userInfoEntity,
+      List<TokenEntity> listTokens,
+      bool loading});
 
   $UserInfoEntityCopyWith<$Res> get userInfoEntity;
 }
@@ -216,12 +225,22 @@ class __$$UserLoadedCopyWithImpl<$Res> extends _$UserStateCopyWithImpl<$Res>
   @override
   $Res call({
     Object? userInfoEntity = freezed,
+    Object? listTokens = freezed,
+    Object? loading = freezed,
   }) {
     return _then(_$UserLoaded(
       userInfoEntity == freezed
           ? _value.userInfoEntity
           : userInfoEntity // ignore: cast_nullable_to_non_nullable
               as UserInfoEntity,
+      listTokens == freezed
+          ? _value._listTokens
+          : listTokens // ignore: cast_nullable_to_non_nullable
+              as List<TokenEntity>,
+      loading: loading == freezed
+          ? _value.loading
+          : loading // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 
@@ -235,23 +254,27 @@ class __$$UserLoadedCopyWithImpl<$Res> extends _$UserStateCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$UserLoaded with DiagnosticableTreeMixin implements UserLoaded {
-  const _$UserLoaded(this.userInfoEntity);
+class _$UserLoaded implements UserLoaded {
+  const _$UserLoaded(this.userInfoEntity, final List<TokenEntity> listTokens,
+      {this.loading = false})
+      : _listTokens = listTokens;
 
   @override
   final UserInfoEntity userInfoEntity;
-
+  final List<TokenEntity> _listTokens;
   @override
-  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'UserState.loaded(userInfoEntity: $userInfoEntity)';
+  List<TokenEntity> get listTokens {
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_listTokens);
   }
 
   @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties
-      ..add(DiagnosticsProperty('type', 'UserState.loaded'))
-      ..add(DiagnosticsProperty('userInfoEntity', userInfoEntity));
+  @JsonKey()
+  final bool loading;
+
+  @override
+  String toString() {
+    return 'UserState.loaded(userInfoEntity: $userInfoEntity, listTokens: $listTokens, loading: $loading)';
   }
 
   @override
@@ -260,12 +283,18 @@ class _$UserLoaded with DiagnosticableTreeMixin implements UserLoaded {
         (other.runtimeType == runtimeType &&
             other is _$UserLoaded &&
             const DeepCollectionEquality()
-                .equals(other.userInfoEntity, userInfoEntity));
+                .equals(other.userInfoEntity, userInfoEntity) &&
+            const DeepCollectionEquality()
+                .equals(other._listTokens, _listTokens) &&
+            const DeepCollectionEquality().equals(other.loading, loading));
   }
 
   @override
   int get hashCode => Object.hash(
-      runtimeType, const DeepCollectionEquality().hash(userInfoEntity));
+      runtimeType,
+      const DeepCollectionEquality().hash(userInfoEntity),
+      const DeepCollectionEquality().hash(_listTokens),
+      const DeepCollectionEquality().hash(loading));
 
   @JsonKey(ignore: true)
   @override
@@ -276,32 +305,38 @@ class _$UserLoaded with DiagnosticableTreeMixin implements UserLoaded {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function(UserInfoEntity userInfoEntity) loaded,
+    required TResult Function(UserInfoEntity userInfoEntity,
+            List<TokenEntity> listTokens, bool loading)
+        loaded,
     required TResult Function(String msg) error,
   }) {
-    return loaded(userInfoEntity);
+    return loaded(userInfoEntity, listTokens, loading);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function(UserInfoEntity userInfoEntity)? loaded,
+    TResult Function(UserInfoEntity userInfoEntity,
+            List<TokenEntity> listTokens, bool loading)?
+        loaded,
     TResult Function(String msg)? error,
   }) {
-    return loaded?.call(userInfoEntity);
+    return loaded?.call(userInfoEntity, listTokens, loading);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function(UserInfoEntity userInfoEntity)? loaded,
+    TResult Function(UserInfoEntity userInfoEntity,
+            List<TokenEntity> listTokens, bool loading)?
+        loaded,
     TResult Function(String msg)? error,
     required TResult orElse(),
   }) {
     if (loaded != null) {
-      return loaded(userInfoEntity);
+      return loaded(userInfoEntity, listTokens, loading);
     }
     return orElse();
   }
@@ -342,9 +377,13 @@ class _$UserLoaded with DiagnosticableTreeMixin implements UserLoaded {
 }
 
 abstract class UserLoaded implements UserState {
-  const factory UserLoaded(final UserInfoEntity userInfoEntity) = _$UserLoaded;
+  const factory UserLoaded(
+      final UserInfoEntity userInfoEntity, final List<TokenEntity> listTokens,
+      {final bool loading}) = _$UserLoaded;
 
   UserInfoEntity get userInfoEntity => throw _privateConstructorUsedError;
+  List<TokenEntity> get listTokens => throw _privateConstructorUsedError;
+  bool get loading => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
   _$$UserLoadedCopyWith<_$UserLoaded> get copyWith =>
       throw _privateConstructorUsedError;
@@ -383,23 +422,15 @@ class __$$UserErrorCopyWithImpl<$Res> extends _$UserStateCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$UserError with DiagnosticableTreeMixin implements UserError {
+class _$UserError implements UserError {
   const _$UserError(this.msg);
 
   @override
   final String msg;
 
   @override
-  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+  String toString() {
     return 'UserState.error(msg: $msg)';
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties
-      ..add(DiagnosticsProperty('type', 'UserState.error'))
-      ..add(DiagnosticsProperty('msg', msg));
   }
 
   @override
@@ -423,7 +454,9 @@ class _$UserError with DiagnosticableTreeMixin implements UserError {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function(UserInfoEntity userInfoEntity) loaded,
+    required TResult Function(UserInfoEntity userInfoEntity,
+            List<TokenEntity> listTokens, bool loading)
+        loaded,
     required TResult Function(String msg) error,
   }) {
     return error(msg);
@@ -433,7 +466,9 @@ class _$UserError with DiagnosticableTreeMixin implements UserError {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function(UserInfoEntity userInfoEntity)? loaded,
+    TResult Function(UserInfoEntity userInfoEntity,
+            List<TokenEntity> listTokens, bool loading)?
+        loaded,
     TResult Function(String msg)? error,
   }) {
     return error?.call(msg);
@@ -443,7 +478,9 @@ class _$UserError with DiagnosticableTreeMixin implements UserError {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function(UserInfoEntity userInfoEntity)? loaded,
+    TResult Function(UserInfoEntity userInfoEntity,
+            List<TokenEntity> listTokens, bool loading)?
+        loaded,
     TResult Function(String msg)? error,
     required TResult orElse(),
   }) {

@@ -3,9 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
 import 'package:slee_fi/common/widgets/sf_icon.dart';
-import 'package:slee_fi/entities/token/token_entity.dart';
-import 'package:slee_fi/presentation/blocs/global_wallet/global_wallet_cubit.dart';
-import 'package:slee_fi/presentation/blocs/global_wallet/global_wallet_state.dart';
+import 'package:slee_fi/presentation/blocs/user_bloc/user_bloc.dart';
+import 'package:slee_fi/presentation/blocs/user_bloc/user_state.dart';
 import 'package:slee_fi/resources/resources.dart';
 
 class SFStatisticResource extends StatelessWidget {
@@ -19,27 +18,28 @@ class SFStatisticResource extends StatelessWidget {
         border: Border.all(width: 1, color: Colors.white.withOpacity(0.15)),
         borderRadius: BorderRadius.circular(100),
       ),
-      child: BlocBuilder<GlobalWalletCubit, GlobalWalletState>(
-        builder: (context, state) {
-          final tokenList = <TokenEntity>[];
-
-          if (state is GlobalWalletStateLoaded) {
-            tokenList.addAll(state.tokenList);
+      child: BlocBuilder<UserBloc, UserState>(
+        builder: (context, userState) {
+          if (userState is UserLoaded) {
+            final listTokens = userState.listTokens;
+            return Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                const SizedBox(width: 4),
+                ItemResource(
+                    value: listTokens[0].balance, url: listTokens[0].icon),
+                const SizedBox(width: 16),
+                ItemResource(
+                    value: listTokens[1].balance, url: listTokens[1].icon),
+                const SizedBox(width: 16),
+                ItemResource(
+                    value: listTokens[2].balance, url: listTokens[2].icon),
+                const SizedBox(width: 12),
+                const SFIcon(Ics.icSolanaCircle),
+              ],
+            );
           }
-
-          return Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              const SizedBox(width: 4),
-              ItemResource(value: tokenList[0].balance, url: tokenList[0].icon),
-              const SizedBox(width: 16),
-              ItemResource(value: tokenList[1].balance, url: tokenList[1].icon),
-              const SizedBox(width: 16),
-              ItemResource(value: tokenList[2].balance, url: tokenList[2].icon),
-              const SizedBox(width: 12),
-              const SFIcon(Ics.icSolanaCircle),
-            ],
-          );
+          return const SizedBox();
         },
       ),
     );

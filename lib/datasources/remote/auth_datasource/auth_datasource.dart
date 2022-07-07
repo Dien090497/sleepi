@@ -58,7 +58,8 @@ abstract class AuthDataSource {
       @Query('email') String email, @Query('otpType') OTPType otpType);
 
   @GET('/users/balances')
-  Future<List<TokenSpending>> fetchBalanceSpending(@Query('userId') String userId);
+  Future<List<TokenSpending>> fetchBalanceSpending(
+      @Query('userId') String userId);
 
   @GET('/users/get-global-config')
   Future<GlobalConfigResponse> getGlobalConfig();

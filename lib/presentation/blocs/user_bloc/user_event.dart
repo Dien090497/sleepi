@@ -6,9 +6,13 @@ abstract class UserEvent extends Equatable {
 
 class UpdateUser extends UserEvent {
   final UserInfoEntity userInfoEntity;
+  final List<TokenSpending>? listTokens;
 
-  const UpdateUser(this.userInfoEntity);
+  const UpdateUser(
+    this.userInfoEntity, {
+    this.listTokens,
+  });
 
   @override
-  List<Object?> get props => [userInfoEntity];
+  List<Object?> get props => [userInfoEntity, listTokens];
 }

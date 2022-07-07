@@ -17,7 +17,8 @@ class SplashScreen extends StatelessWidget {
         if (state is SplashDone) {
           if (state.isSafeDevice) {
             if (state.userInfoEntity != null) {
-              context.read<UserBloc>().add(UpdateUser(state.userInfoEntity!));
+              context.read<UserBloc>().add(UpdateUser(state.userInfoEntity!,
+                  listTokens: state.listTokens));
               Navigator.pushReplacementNamed(context, R.bottomNavigation);
             } else {
               Navigator.pushReplacementNamed(context, R.loginSignUp);

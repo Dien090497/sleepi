@@ -11,6 +11,8 @@ class GlobalWalletState with _$GlobalWalletState {
 
   const factory GlobalWalletState.empty() = GlobalWalletStateEmpty;
 
-  const factory GlobalWalletState.loaded(
-      {required List<TokenEntity> tokenList, required bool loading}) = GlobalWalletStateLoaded;
+  const factory GlobalWalletState.loaded({
+    required List<TokenEntity> tokenList,
+    required bool loading,
+  }) = GlobalWalletStateLoaded;
 }

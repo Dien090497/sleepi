@@ -3,6 +3,7 @@ import 'package:flutter/foundation.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:slee_fi/di/injector.dart';
 import 'package:slee_fi/presentation/blocs/splash/splash_state.dart';
+import 'package:slee_fi/usecase/fetch_balance_spending_usecase.dart';
 import 'package:slee_fi/usecase/get_global_config.dart';
 import 'package:slee_fi/usecase/get_user_usecase.dart';
 import 'package:slee_fi/usecase/usecase.dart';
@@ -12,6 +13,7 @@ class SplashCubit extends Cubit<SplashState> {
 
   final _getGlobalConfigUseCase = getIt<GetGlobalConfigUseCase>();
   final _getUserUC = getIt<GetUserUseCase>();
+  final _fetchBalanceSpendingUC = getIt<FetchBalanceSpendingUseCase>();
 
   void init() async {
     await Permission.location.request();
@@ -21,18 +23,26 @@ class SplashCubit extends Cubit<SplashState> {
       emit(SplashState.error('$l'));
     }, (r) async {
       final userRes = await _getUserUC.call(NoParams());
-      userRes.fold(
-        (l) {
+      await userRes.fold(
+        (l) async {
           emit(const SplashState.done(
             isSafeDevice: kDebugMode ? true : true,
             userInfoEntity: null,
+            listTokens: [],
           ));
         },
-        (userInfo) {
-          emit(SplashState.done(
-            isSafeDevice: kDebugMode ? true : true,
-            userInfoEntity: userInfo,
-          ));
+        (userInfo) async {
+          final balanceRes =
+              await _fetchBalanceSpendingUC.call('${userInfo.id}');
+          balanceRes.fold((l) {
+            emit(SplashState.error('$l'));
+          }, (tokensSpending) {
+            emit(SplashState.done(
+              isSafeDevice: kDebugMode ? true : true,
+              userInfoEntity: userInfo,
+              listTokens: tokensSpending,
+            ));
+          });
         },
       );
     });
