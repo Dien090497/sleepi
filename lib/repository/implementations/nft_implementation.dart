@@ -1,6 +1,7 @@
 import 'package:dartz/dartz.dart';
 import 'package:injectable/injectable.dart';
 import 'package:slee_fi/common/enum/enum.dart';
+import 'package:slee_fi/datasources/local/secure_storage.dart';
 import 'package:slee_fi/datasources/remote/network/nft_datasource.dart';
 import 'package:slee_fi/datasources/remote/nft_api/nft_api.dart';
 import 'package:slee_fi/entities/nft_attribute_entity/nft_attribute_entity.dart';
@@ -13,8 +14,9 @@ import 'package:web3dart/web3dart.dart';
 class NFTImplementation extends INFTRepository {
   final NFTDataSource _nftDataSource;
   final NftApi _nftApi;
+  final SecureStorage _secureStorage;
 
-  NFTImplementation(this._nftDataSource, this._nftApi);
+  NFTImplementation(this._nftDataSource, this._nftApi, this._secureStorage);
 
   @override
   Future<Either<Failure, BigInt>> balanceOf(
@@ -131,14 +133,14 @@ class NFTImplementation extends INFTRepository {
       {required String nftAddress,
       required String ownerAddress,
       required String toAddress,
-      required BigInt tokenId,
+      required BigInt nftId,
       required Credentials credentials}) async {
     try {
       return Right(await _nftDataSource.transferFrom(
         address: nftAddress,
         from: ownerAddress,
         to: toAddress,
-        tokenId: tokenId,
+        tokenId: nftId,
         credentials: credentials,
       ));
     } catch (e) {
@@ -147,19 +149,20 @@ class NFTImplementation extends INFTRepository {
   }
 
   @override
-  Future<Either<Failure, String>> deposit({
-    required String spendingAddress,
+  Future<Either<Failure, String>> depositSpending({
+    String? spendingAddress,
     required String nftAddress,
-    required BigInt amount,
+    required BigInt nftId,
     required int userId,
     required Credentials credentials,
   }) async {
     try {
-      return Right(await _nftDataSource.deposit(
+      return Right(await _nftDataSource.depositNft(
         userId: BigInt.from(userId),
-        amount: amount,
+        nftId: nftId,
         nftAddress: nftAddress,
-        spendingAddress: spendingAddress,
+        spendingAddress:
+            spendingAddress ?? await _secureStorage.readAddressContract() ?? '',
         credentials: credentials,
       ));
     } catch (e) {

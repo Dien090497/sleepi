@@ -146,8 +146,10 @@ Future<_i1.GetIt> $initGetIt(_i1.GetIt get,
       () => _i25.Web3DataSource(get<_i18.Web3Provider>()));
   gh.factory<_i26.AuthInterceptor>(
       () => _i26.AuthInterceptor(get<_i22.SecureStorage>(), get<_i7.Dio>()));
-  gh.factory<_i27.INFTRepository>(() =>
-      _i28.NFTImplementation(get<_i20.NFTDataSource>(), get<_i14.NftApi>()));
+  gh.factory<_i27.INFTRepository>(() => _i28.NFTImplementation(
+      get<_i20.NFTDataSource>(),
+      get<_i14.NftApi>(),
+      get<_i22.SecureStorage>()));
   gh.factory<_i29.ISpendingRepository>(() => _i30.SpendingImplementation(
       get<_i24.SpendingDataSource>(), get<_i25.Web3DataSource>()));
   gh.factory<_i31.ITransactionRepository>(() => _i32.TransactionImplementation(

@@ -23,7 +23,7 @@ class NftPopUpTransfer extends StatelessWidget {
   }) : super(key: key);
 
   final bool? isToSpending;
-  final VoidCallback onConfirm;
+  final Function(String address) onConfirm;
   final VoidCallback? onCancel;
   final NFTEntity nft;
   final String ownerAddress;
@@ -41,6 +41,7 @@ class NftPopUpTransfer extends StatelessWidget {
               if (onCancel != null) {
                 onCancel!();
               }
+              Navigator.pop(context);
             },
             child: const Icon(
               Icons.close,
@@ -82,13 +83,13 @@ class NftPopUpTransfer extends StatelessWidget {
                     Row(
                       children: [
                         SFText(
-                          keyText: LocaleKeys.inventory,
+                          keyText: LocaleKeys.wallet,
                           style: TextStyles.bold16LightWhite,
                         ),
                         const SizedBox(width: 4),
                         Expanded(
                           child: SFText(
-                            keyText: LocaleKeys.wallet,
+                            keyText: LocaleKeys.spending,
                             style: TextStyles.bold16LightWhite,
                             textAlign: TextAlign.right,
                           ),
@@ -181,7 +182,7 @@ class NftPopUpTransfer extends StatelessWidget {
                   child: SFButton(
                     text: LocaleKeys.confirm,
                     onPressed: () {
-                      onConfirm();
+                      onConfirm(toAddress);
                       // Navigator.pop(context);
                       // showSuccessfulDialog(context, null);
                     },

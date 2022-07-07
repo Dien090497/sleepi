@@ -12,6 +12,7 @@ class NftDetailCubit extends Cubit<NftDetailState> {
 
   final _getListNftDetailUC = getIt<GetListNftDetailUseCase>();
 
+
   Future<void> init(
       WalletInfoEntity walletInfoEntity, TokenEntity token) async {
     final currentState = state;

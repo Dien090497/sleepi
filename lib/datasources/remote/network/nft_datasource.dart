@@ -58,15 +58,27 @@ class NFTDataSource {
       address: EthereumAddress.fromHex(address),
       client: _web3provider.web3client);
 
-  Future<String> deposit({
+  Future<String> depositToken({
     required String spendingAddress,
     required String nftAddress,
-    required BigInt amount,
+    required BigInt nftId,
     required BigInt userId,
     required Credentials credentials,
   }) {
     return _spending(spendingAddress).depositToken(
-        EthereumAddress.fromHex(nftAddress), amount, userId,
+        EthereumAddress.fromHex(nftAddress), nftId, userId,
+        credentials: credentials);
+  }
+
+  Future<String> depositNft({
+    required String spendingAddress,
+    required String nftAddress,
+    required BigInt nftId,
+    required BigInt userId,
+    required Credentials credentials,
+  }) {
+    return _spending(spendingAddress).depositNft(
+        EthereumAddress.fromHex(nftAddress), nftId, userId,
         credentials: credentials);
   }
 
