@@ -52,7 +52,7 @@ class NftAttributeModel {
         id: id,
         contractAddress: contractAddress,
         // nftId: nftId,
-        tokenId: tokenId,
+        tokenId: BigInt.from(tokenId),
         owner: owner,
         type: type,
         classNft: classNft,

@@ -3,6 +3,7 @@ import 'package:injectable/injectable.dart';
 import 'package:slee_fi/common/enum/enum.dart';
 import 'package:slee_fi/datasources/remote/network/nft_datasource.dart';
 import 'package:slee_fi/datasources/remote/nft_api/nft_api.dart';
+import 'package:slee_fi/entities/nft_attribute_entity/nft_attribute_entity.dart';
 import 'package:slee_fi/entities/nft_entity/nft_entity.dart';
 import 'package:slee_fi/failures/failure.dart';
 import 'package:slee_fi/repository/nft_repository.dart';
@@ -42,6 +43,7 @@ class NFTImplementation extends INFTRepository {
 
   @override
   Future<Either<Failure, List<NFTEntity>>> getListNftData({
+    String? nftAddress,
     required List<BigInt> tokenIds,
     required NftType nftType,
   }) async {
@@ -51,6 +53,41 @@ class NFTImplementation extends INFTRepository {
         tokenIds: List.generate(tokenIds.length, (i) => i % 5 + 1)
             .join(','), // TODO: Remove when real data is ready
       );
+      // TODO: remove this when data is ready
+      if (listModel.data.isEmpty && nftAddress != null) {
+        final res = await Future.wait([
+          _nftDataSource.symbol(nftAddress),
+          _nftDataSource.name(nftAddress),
+        ]);
+        return Right(
+          tokenIds
+              .map(
+                (nftId) => NFTEntity(
+                    id: 0,
+                    categoryId: 1,
+                    isLock: 1,
+                    status: '',
+                    attribute: NftAttributeEntity(
+                      id: 1,
+                      tokenId: nftId,
+                      contractAddress: nftAddress,
+                      owner: 'owner',
+                      type: 'type',
+                      classNft: 'classNft',
+                      quality: '',
+                      time: 1,
+                      level: 1,
+                      bedMint: 1,
+                      efficiency: 1,
+                      luck: 1,
+                      bonus: 1,
+                      special: 1,
+                      resilience: 1,
+                    )),
+              )
+              .toList(),
+        );
+      }
       return Right(listModel.data.map((e) => e.toEntity()).toList());
     } catch (e) {
       return Left(FailureMessage('$e'));
@@ -131,20 +168,24 @@ class NFTImplementation extends INFTRepository {
   }
 
   @override
-  Future<Either<Failure, double>> estimateGasFee(
-      {required String nftAddress,
-      required String ownerAddress,
-      required String toAddress,
-      required BigInt nftId,
-      required EtherAmount gasPrice,
-      required String functionName}) async {
+  Future<Either<Failure, double>> estimateGasFee({
+    required String nftAddress,
+    required String ownerAddress,
+    required String toAddress,
+    required BigInt nftId,
+    required String functionName,
+    EtherAmount? gasPrice,
+  }) async {
     try {
+      final price = gasPrice ?? await _nftDataSource.getGasPrice();
       return Right(await _nftDataSource.estimateGasFee(
           nftAddress: nftAddress,
           ownerAddress: EthereumAddress.fromHex(ownerAddress),
-          toAddress: EthereumAddress.fromHex(toAddress),
+          toAddress: EthereumAddress.fromHex(toAddress.isNotEmpty
+              ? toAddress
+              : '0x52839a88e9fdd2b137e32c65fec8e7b3f1f1ccc6'),
           nftId: nftId,
-          gasPrice: gasPrice,
+          gasPrice: price,
           functionName: functionName));
     } catch (e) {
       return Left(FailureMessage('$e'));

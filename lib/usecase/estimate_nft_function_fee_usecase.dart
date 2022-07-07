@@ -27,7 +27,7 @@ class EstimateGasParams {
   final String ownerAddress;
   final String toAddress;
   final BigInt nftId;
-  final EtherAmount gasPrice;
+  final EtherAmount? gasPrice;
   final String functionName;
 
   EstimateGasParams({
@@ -35,7 +35,7 @@ class EstimateGasParams {
     required this.ownerAddress,
     required this.toAddress,
     required this.nftId,
-    required this.gasPrice,
+    this.gasPrice,
     required this.functionName,
   });
 }

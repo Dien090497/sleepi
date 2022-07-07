@@ -16,7 +16,7 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$NFTEntity {
-  BigInt get id => throw _privateConstructorUsedError;
+  int get id => throw _privateConstructorUsedError;
   int get categoryId => throw _privateConstructorUsedError;
   int get isLock => throw _privateConstructorUsedError;
   String get status => throw _privateConstructorUsedError;
@@ -32,7 +32,7 @@ abstract class $NFTEntityCopyWith<$Res> {
   factory $NFTEntityCopyWith(NFTEntity value, $Res Function(NFTEntity) then) =
       _$NFTEntityCopyWithImpl<$Res>;
   $Res call(
-      {BigInt id,
+      {int id,
       int categoryId,
       int isLock,
       String status,
@@ -61,7 +61,7 @@ class _$NFTEntityCopyWithImpl<$Res> implements $NFTEntityCopyWith<$Res> {
       id: id == freezed
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
-              as BigInt,
+              as int,
       categoryId: categoryId == freezed
           ? _value.categoryId
           : categoryId // ignore: cast_nullable_to_non_nullable
@@ -96,7 +96,7 @@ abstract class _$$_NFTEntityCopyWith<$Res> implements $NFTEntityCopyWith<$Res> {
       __$$_NFTEntityCopyWithImpl<$Res>;
   @override
   $Res call(
-      {BigInt id,
+      {int id,
       int categoryId,
       int isLock,
       String status,
@@ -128,7 +128,7 @@ class __$$_NFTEntityCopyWithImpl<$Res> extends _$NFTEntityCopyWithImpl<$Res>
       id: id == freezed
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
-              as BigInt,
+              as int,
       categoryId: categoryId == freezed
           ? _value.categoryId
           : categoryId // ignore: cast_nullable_to_non_nullable
@@ -160,7 +160,7 @@ class _$_NFTEntity with DiagnosticableTreeMixin implements _NFTEntity {
       required this.attribute});
 
   @override
-  final BigInt id;
+  final int id;
   @override
   final int categoryId;
   @override
@@ -217,14 +217,14 @@ class _$_NFTEntity with DiagnosticableTreeMixin implements _NFTEntity {
 
 abstract class _NFTEntity implements NFTEntity {
   const factory _NFTEntity(
-      {required final BigInt id,
+      {required final int id,
       required final int categoryId,
       required final int isLock,
       required final String status,
       required final NftAttributeEntity attribute}) = _$_NFTEntity;
 
   @override
-  BigInt get id => throw _privateConstructorUsedError;
+  int get id => throw _privateConstructorUsedError;
   @override
   int get categoryId => throw _privateConstructorUsedError;
   @override

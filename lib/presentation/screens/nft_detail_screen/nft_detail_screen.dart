@@ -13,6 +13,7 @@ import 'package:slee_fi/common/widgets/sf_dialog.dart';
 import 'package:slee_fi/common/widgets/sf_gridview.dart';
 import 'package:slee_fi/common/widgets/sf_icon.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
+import 'package:slee_fi/entities/nft_entity/nft_entity.dart';
 import 'package:slee_fi/entities/token/token_entity.dart';
 import 'package:slee_fi/l10n/locale_keys.g.dart';
 import 'package:slee_fi/presentation/blocs/nft_detail/nft_detail_cubit.dart';
@@ -37,7 +38,12 @@ class NFTDetailArguments {
 class NFTDetailScreen extends StatelessWidget {
   const NFTDetailScreen({Key? key}) : super(key: key);
 
-  void _showTransferDialog(BuildContext context, [bool? isToSpending]) {
+  void _showTransferDialog(
+    BuildContext context, {
+    bool? isToSpending,
+    required NFTEntity nft,
+    required String ownerAddress,
+  }) {
     showCustomDialog(
       context,
       children: [
@@ -47,8 +53,8 @@ class NFTDetailScreen extends StatelessWidget {
           onCancel: () {
             Navigator.pop(context);
           },
-          valueTransfer: 1,
-          fee: 1,
+          nft: nft,
+          ownerAddress: ownerAddress,
         )
       ],
     );
@@ -57,7 +63,7 @@ class NFTDetailScreen extends StatelessWidget {
   void _showListNft(
     BuildContext context,
     NftDetailLoaded state,
-    VoidCallback onTap,
+    Function(NFTEntity) onTap,
   ) {
     SFModalBottomSheet.show(
       context,
@@ -124,8 +130,7 @@ class NFTDetailScreen extends StatelessWidget {
                   SFIcon(token.icon),
                   const SizedBox(height: 16.0),
                   SFText(
-                    keyText:
-                        "${token.balance.toStringAsFixed(6)} ${token.displayName}",
+                    keyText: "${token.balance} ${token.displayName}",
                     style: TextStyles.bold30White,
                     textAlign: TextAlign.center,
                   ),
@@ -160,9 +165,23 @@ class NFTDetailScreen extends StatelessWidget {
                           child: BoxButtonWidget(
                             onTap: () {
                               if (state is NftDetailLoaded) {
-                                _showListNft(context, state, () {
-                                  _showTransferDialog(context);
-                                });
+                                _showListNft(
+                                  context,
+                                  state,
+                                  (nft) {
+                                    _showTransferDialog(
+                                      context,
+                                      nft: nft,
+                                      ownerAddress: walletState
+                                                  is WalletStateLoaded &&
+                                              walletState.walletInfoEntity !=
+                                                  null
+                                          ? walletState
+                                              .walletInfoEntity!.address
+                                          : '',
+                                    );
+                                  },
+                                );
                               }
                             },
                             text: LocaleKeys.transfer,
@@ -174,9 +193,24 @@ class NFTDetailScreen extends StatelessWidget {
                           child: BoxButtonWidget(
                             onTap: () {
                               if (state is NftDetailLoaded) {
-                                _showListNft(context, state, () {
-                                  _showTransferDialog(context, false);
-                                });
+                                _showListNft(
+                                  context,
+                                  state,
+                                  (nft) {
+                                    _showTransferDialog(
+                                      context,
+                                      isToSpending: false,
+                                      nft: nft,
+                                      ownerAddress: walletState
+                                                  is WalletStateLoaded &&
+                                              walletState.walletInfoEntity !=
+                                                  null
+                                          ? walletState
+                                              .walletInfoEntity!.address
+                                          : '',
+                                    );
+                                  },
+                                );
                               }
                             },
                             text: LocaleKeys.to_spending,
@@ -196,7 +230,7 @@ class NFTDetailScreen extends StatelessWidget {
                         itemBuilder: (context, i) {
                           return MyBedShortWidget(
                             bedType: BedType.flexible,
-                            bedId: state.nftEntities[i].id,
+                            bedId: state.nftEntities[i].attribute.tokenId,
                           );
                         },
                         count: state.nftEntities.length,

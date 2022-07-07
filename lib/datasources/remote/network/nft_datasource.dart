@@ -98,4 +98,6 @@ class NFTDataSource {
     );
     return gasFee * gasPrice.getInWei / BigInt.from(pow(10, 18));
   }
+
+  Future<EtherAmount> getGasPrice() => _web3provider.web3client.getGasPrice();
 }

@@ -22,7 +22,7 @@ class NftDataModel {
   Map<String, dynamic> toJson() => _$NftDataModelToJson(this);
 
   NFTEntity toEntity() => NFTEntity(
-      id: BigInt.from(id),
+      id: id,
       categoryId: categoryId,
       isLock: isLock,
       status: status,
