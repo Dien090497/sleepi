@@ -7,20 +7,26 @@ import 'package:slee_fi/common/const/const.dart';
 import 'package:slee_fi/common/enum/enum.dart';
 import 'package:slee_fi/common/extensions/string_x.dart';
 import 'package:slee_fi/datasources/local/get_storage_datasource.dart';
+import 'package:slee_fi/datasources/local/history_datasource.dart';
 import 'package:slee_fi/datasources/local/isar/isar_datasource.dart';
 import 'package:slee_fi/datasources/local/secure_storage.dart';
 import 'package:slee_fi/datasources/remote/auth_datasource/auth_datasource.dart';
 import 'package:slee_fi/datasources/remote/network/web3_datasource.dart';
 import 'package:slee_fi/datasources/remote/network/web3_provider.dart';
+import 'package:slee_fi/datasources/remote/transaction_datasource/transaction_remote_datasource.dart';
 import 'package:slee_fi/entities/wallet_info/wallet_info_entity.dart';
 import 'package:slee_fi/failures/failure.dart';
+import 'package:slee_fi/models/isar_models/history_isar/history_isar_model.dart';
 import 'package:slee_fi/l10n/locale_keys.g.dart';
 import 'package:slee_fi/models/isar_models/native_currency_isar/native_currency_isar_model.dart';
 import 'package:slee_fi/models/isar_models/network_isar/network_isar_model.dart';
+import 'package:slee_fi/models/isar_models/transaction_isar/transaction_isar_model.dart';
 import 'package:slee_fi/models/isar_models/wallet_isar/wallet_isar_model.dart';
+import 'package:slee_fi/models/transaction_history/transaction_history_model.dart';
 import 'package:slee_fi/repository/wallet_repository.dart';
 import 'package:slee_fi/schema/verify_user_schema/verify_user_schema.dart';
 import 'package:slee_fi/usecase/get_balance_for_tokens_usecase.dart';
+import 'package:slee_fi/usecase/get_history_transaction_usecase.dart';
 import 'package:web3dart/web3dart.dart';
 
 @Injectable(as: IWalletRepository)
@@ -29,11 +35,13 @@ class WalletImplementation extends IWalletRepository {
   final Web3DataSource _web3DataSource;
   final GetStorageDataSource _getStorageDataSource;
   final IsarDataSource _isarDataSource;
+  final HistoryDataSource _historyDataSource;
+  final TransactionRemoteDataSource _transactionRemoteDataSource;
   final SecureStorage _secureStorage;
   final AuthDataSource _authDataSource;
 
-  WalletImplementation(this._web3DataSource, this._getStorageDataSource,
-      this._isarDataSource, this._web3provider, this._secureStorage, this._authDataSource);
+  WalletImplementation(this._web3DataSource, this._getStorageDataSource, this._historyDataSource,
+      this._transactionRemoteDataSource, this._isarDataSource, this._web3provider, this._secureStorage, this._authDataSource);
 
   @override
   Future<Either<Failure, WalletInfoEntity>> createWallet() async {
@@ -391,6 +399,43 @@ class WalletImplementation extends IWalletRepository {
       } else {
         return const Left(FailureMessage(LocaleKeys.password));
       }
+    } catch (e) {
+      return Left(FailureMessage('$e'));
+    }
+  }
+
+  @override
+  Future<Either<Failure, List<TransactionIsarModel>>> getHistoryTransaction(HistoryTransactionParams params) async{
+      try {
+        // List<HistoryIsarModel> historyList = await _historyDataSource.getAllHistory();
+        List<TransactionHistoryModel> transactionHistoryList = [];
+        final result = await _transactionRemoteDataSource.getHistoryTransaction(params);
+        result.fold(
+              (l) { },
+              (history) {
+            if(params.tokenSymbol == "AVAX"){
+              transactionHistoryList = history.result;
+            }else if(params.tokenSymbol != null) {
+              transactionHistoryList = history.result.where((i) => i.tokenSymbol == params.tokenSymbol).toList();
+            }else {transactionHistoryList = history.result;}
+          },
+        );
+        List<TransactionIsarModel> transactionList = [];
+        for(int i = 0 ; i < transactionHistoryList.length; i++){
+          // var transactionInfo = await _web3DataSource.getDetailTransaction(historyList.elementAt(i).transactionHash);
+          // var transactionReceipt = await _web3DataSource.getTransactionReceipt(historyList.elementAt(i).transactionHash);
+          // var getTimeStamp = await _web3DataSource.getDetailBlock(transactionInfo.blockNumber.toBlockParam());
+          final model = TransactionIsarModel(
+              valueInEther: BigInt.parse(transactionHistoryList.elementAt(i).value) / BigInt.from(pow(10, 18)),
+              timeStamp: DateTime.fromMillisecondsSinceEpoch(int.parse(transactionHistoryList.elementAt(i).timeStamp) * 1000),
+              gasPrice: BigInt.parse(transactionHistoryList.elementAt(i).gasPrice) / BigInt.from(pow(10, 18)),
+              addressFrom: transactionHistoryList.elementAt(i).from,
+              addressTo: transactionHistoryList.elementAt(i).to,
+              status: transactionHistoryList.elementAt(i).txReceiptStatus != null ? int.parse(transactionHistoryList.elementAt(i).txReceiptStatus!) : 0
+          );
+          transactionList.add(model);
+        }
+        return Right(transactionList);
     } catch (e) {
       return Left(FailureMessage('$e'));
     }

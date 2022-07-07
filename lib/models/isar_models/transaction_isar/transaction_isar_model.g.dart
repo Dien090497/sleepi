@@ -7,15 +7,21 @@ part of 'transaction_isar_model.dart';
 // **************************************************************************
 
 abstract class _$TransactionIsarModelCWProxy {
+  TransactionIsarModel addressFrom(String? addressFrom);
+
+  TransactionIsarModel addressTo(String? addressTo);
+
   TransactionIsarModel gasPrice(double? gasPrice);
 
   TransactionIsarModel maxGas(int? maxGas);
 
-  TransactionIsarModel toAddress(String toAddress);
+  TransactionIsarModel status(int? status);
+
+  TransactionIsarModel timeStamp(DateTime timeStamp);
 
   TransactionIsarModel transactionHash(String? transactionHash);
 
-  TransactionIsarModel valueInEther(double valueInEther);
+  TransactionIsarModel valueInEther(double? valueInEther);
 
   /// This function **does support** nullification of nullable fields. All `null` values passed to `non-nullable` fields will be ignored. You can also use `TransactionIsarModel(...).copyWith.fieldName(...)` to override fields one at a time with nullification support.
   ///
@@ -24,9 +30,12 @@ abstract class _$TransactionIsarModelCWProxy {
   /// TransactionIsarModel(...).copyWith(id: 12, name: "My name")
   /// ````
   TransactionIsarModel call({
+    String? addressFrom,
+    String? addressTo,
     double? gasPrice,
     int? maxGas,
-    String? toAddress,
+    int? status,
+    DateTime? timeStamp,
     String? transactionHash,
     double? valueInEther,
   });
@@ -40,21 +49,32 @@ class _$TransactionIsarModelCWProxyImpl
   const _$TransactionIsarModelCWProxyImpl(this._value);
 
   @override
+  TransactionIsarModel addressFrom(String? addressFrom) =>
+      this(addressFrom: addressFrom);
+
+  @override
+  TransactionIsarModel addressTo(String? addressTo) =>
+      this(addressTo: addressTo);
+
+  @override
   TransactionIsarModel gasPrice(double? gasPrice) => this(gasPrice: gasPrice);
 
   @override
   TransactionIsarModel maxGas(int? maxGas) => this(maxGas: maxGas);
 
   @override
-  TransactionIsarModel toAddress(String toAddress) =>
-      this(toAddress: toAddress);
+  TransactionIsarModel status(int? status) => this(status: status);
+
+  @override
+  TransactionIsarModel timeStamp(DateTime timeStamp) =>
+      this(timeStamp: timeStamp);
 
   @override
   TransactionIsarModel transactionHash(String? transactionHash) =>
       this(transactionHash: transactionHash);
 
   @override
-  TransactionIsarModel valueInEther(double valueInEther) =>
+  TransactionIsarModel valueInEther(double? valueInEther) =>
       this(valueInEther: valueInEther);
 
   @override
@@ -66,13 +86,24 @@ class _$TransactionIsarModelCWProxyImpl
   /// TransactionIsarModel(...).copyWith(id: 12, name: "My name")
   /// ````
   TransactionIsarModel call({
+    Object? addressFrom = const $CopyWithPlaceholder(),
+    Object? addressTo = const $CopyWithPlaceholder(),
     Object? gasPrice = const $CopyWithPlaceholder(),
     Object? maxGas = const $CopyWithPlaceholder(),
-    Object? toAddress = const $CopyWithPlaceholder(),
+    Object? status = const $CopyWithPlaceholder(),
+    Object? timeStamp = const $CopyWithPlaceholder(),
     Object? transactionHash = const $CopyWithPlaceholder(),
     Object? valueInEther = const $CopyWithPlaceholder(),
   }) {
     return TransactionIsarModel(
+      addressFrom: addressFrom == const $CopyWithPlaceholder()
+          ? _value.addressFrom
+          // ignore: cast_nullable_to_non_nullable
+          : addressFrom as String?,
+      addressTo: addressTo == const $CopyWithPlaceholder()
+          ? _value.addressTo
+          // ignore: cast_nullable_to_non_nullable
+          : addressTo as String?,
       gasPrice: gasPrice == const $CopyWithPlaceholder()
           ? _value.gasPrice
           // ignore: cast_nullable_to_non_nullable
@@ -81,19 +112,22 @@ class _$TransactionIsarModelCWProxyImpl
           ? _value.maxGas
           // ignore: cast_nullable_to_non_nullable
           : maxGas as int?,
-      toAddress: toAddress == const $CopyWithPlaceholder() || toAddress == null
-          ? _value.toAddress
+      status: status == const $CopyWithPlaceholder()
+          ? _value.status
           // ignore: cast_nullable_to_non_nullable
-          : toAddress as String,
+          : status as int?,
+      timeStamp: timeStamp == const $CopyWithPlaceholder() || timeStamp == null
+          ? _value.timeStamp
+          // ignore: cast_nullable_to_non_nullable
+          : timeStamp as DateTime,
       transactionHash: transactionHash == const $CopyWithPlaceholder()
           ? _value.transactionHash
           // ignore: cast_nullable_to_non_nullable
           : transactionHash as String?,
-      valueInEther:
-          valueInEther == const $CopyWithPlaceholder() || valueInEther == null
-              ? _value.valueInEther
-              // ignore: cast_nullable_to_non_nullable
-              : valueInEther as double,
+      valueInEther: valueInEther == const $CopyWithPlaceholder()
+          ? _value.valueInEther
+          // ignore: cast_nullable_to_non_nullable
+          : valueInEther as double?,
     );
   }
 }
@@ -117,14 +151,17 @@ extension GetTransactionIsarModelCollection on Isar {
 const TransactionIsarModelSchema = CollectionSchema(
   name: 'TransactionIsarModel',
   schema:
-      '{"name":"TransactionIsarModel","idName":"id","properties":[{"name":"gasPrice","type":"Double"},{"name":"maxGas","type":"Long"},{"name":"toAddress","type":"String"},{"name":"transactionHash","type":"String"},{"name":"valueInEther","type":"Double"}],"indexes":[],"links":[]}',
+      '{"name":"TransactionIsarModel","idName":"id","properties":[{"name":"addressFrom","type":"String"},{"name":"addressTo","type":"String"},{"name":"gasPrice","type":"Double"},{"name":"maxGas","type":"Long"},{"name":"status","type":"Long"},{"name":"timeStamp","type":"Long"},{"name":"transactionHash","type":"String"},{"name":"valueInEther","type":"Double"}],"indexes":[],"links":[]}',
   idName: 'id',
   propertyIds: {
-    'gasPrice': 0,
-    'maxGas': 1,
-    'toAddress': 2,
-    'transactionHash': 3,
-    'valueInEther': 4
+    'addressFrom': 0,
+    'addressTo': 1,
+    'gasPrice': 2,
+    'maxGas': 3,
+    'status': 4,
+    'timeStamp': 5,
+    'transactionHash': 6,
+    'valueInEther': 7
   },
   listProperties: {},
   indexIds: {},
@@ -168,32 +205,48 @@ void _transactionIsarModelSerializeNative(
     List<int> offsets,
     AdapterAlloc alloc) {
   var dynamicSize = 0;
-  final value0 = object.gasPrice;
-  final _gasPrice = value0;
-  final value1 = object.maxGas;
-  final _maxGas = value1;
-  final value2 = object.toAddress;
-  final _toAddress = IsarBinaryWriter.utf8Encoder.convert(value2);
-  dynamicSize += (_toAddress.length) as int;
-  final value3 = object.transactionHash;
+  final value0 = object.addressFrom;
+  IsarUint8List? _addressFrom;
+  if (value0 != null) {
+    _addressFrom = IsarBinaryWriter.utf8Encoder.convert(value0);
+  }
+  dynamicSize += (_addressFrom?.length ?? 0) as int;
+  final value1 = object.addressTo;
+  IsarUint8List? _addressTo;
+  if (value1 != null) {
+    _addressTo = IsarBinaryWriter.utf8Encoder.convert(value1);
+  }
+  dynamicSize += (_addressTo?.length ?? 0) as int;
+  final value2 = object.gasPrice;
+  final _gasPrice = value2;
+  final value3 = object.maxGas;
+  final _maxGas = value3;
+  final value4 = object.status;
+  final _status = value4;
+  final value5 = object.timeStamp;
+  final _timeStamp = value5;
+  final value6 = object.transactionHash;
   IsarUint8List? _transactionHash;
-  if (value3 != null) {
-    _transactionHash = IsarBinaryWriter.utf8Encoder.convert(value3);
+  if (value6 != null) {
+    _transactionHash = IsarBinaryWriter.utf8Encoder.convert(value6);
   }
   dynamicSize += (_transactionHash?.length ?? 0) as int;
-  final value4 = object.valueInEther;
-  final _valueInEther = value4;
+  final value7 = object.valueInEther;
+  final _valueInEther = value7;
   final size = staticSize + dynamicSize;
 
   rawObj.buffer = alloc(size);
   rawObj.buffer_length = size;
   final buffer = IsarNative.bufAsBytes(rawObj.buffer, size);
   final writer = IsarBinaryWriter(buffer, staticSize);
-  writer.writeDouble(offsets[0], _gasPrice);
-  writer.writeLong(offsets[1], _maxGas);
-  writer.writeBytes(offsets[2], _toAddress);
-  writer.writeBytes(offsets[3], _transactionHash);
-  writer.writeDouble(offsets[4], _valueInEther);
+  writer.writeBytes(offsets[0], _addressFrom);
+  writer.writeBytes(offsets[1], _addressTo);
+  writer.writeDouble(offsets[2], _gasPrice);
+  writer.writeLong(offsets[3], _maxGas);
+  writer.writeLong(offsets[4], _status);
+  writer.writeDateTime(offsets[5], _timeStamp);
+  writer.writeBytes(offsets[6], _transactionHash);
+  writer.writeDouble(offsets[7], _valueInEther);
 }
 
 TransactionIsarModel _transactionIsarModelDeserializeNative(
@@ -202,11 +255,14 @@ TransactionIsarModel _transactionIsarModelDeserializeNative(
     IsarBinaryReader reader,
     List<int> offsets) {
   final object = TransactionIsarModel(
-    gasPrice: reader.readDoubleOrNull(offsets[0]),
-    maxGas: reader.readLongOrNull(offsets[1]),
-    toAddress: reader.readString(offsets[2]),
-    transactionHash: reader.readStringOrNull(offsets[3]),
-    valueInEther: reader.readDouble(offsets[4]),
+    addressFrom: reader.readStringOrNull(offsets[0]),
+    addressTo: reader.readStringOrNull(offsets[1]),
+    gasPrice: reader.readDoubleOrNull(offsets[2]),
+    maxGas: reader.readLongOrNull(offsets[3]),
+    status: reader.readLongOrNull(offsets[4]),
+    timeStamp: reader.readDateTime(offsets[5]),
+    transactionHash: reader.readStringOrNull(offsets[6]),
+    valueInEther: reader.readDoubleOrNull(offsets[7]),
   );
   object.id = id;
   return object;
@@ -218,15 +274,21 @@ P _transactionIsarModelDeserializePropNative<P>(
     case -1:
       return id as P;
     case 0:
-      return (reader.readDoubleOrNull(offset)) as P;
-    case 1:
-      return (reader.readLongOrNull(offset)) as P;
-    case 2:
-      return (reader.readString(offset)) as P;
-    case 3:
       return (reader.readStringOrNull(offset)) as P;
+    case 1:
+      return (reader.readStringOrNull(offset)) as P;
+    case 2:
+      return (reader.readDoubleOrNull(offset)) as P;
+    case 3:
+      return (reader.readLongOrNull(offset)) as P;
     case 4:
-      return (reader.readDouble(offset)) as P;
+      return (reader.readLongOrNull(offset)) as P;
+    case 5:
+      return (reader.readDateTime(offset)) as P;
+    case 6:
+      return (reader.readStringOrNull(offset)) as P;
+    case 7:
+      return (reader.readDoubleOrNull(offset)) as P;
     default:
       throw 'Illegal propertyIndex';
   }
@@ -236,10 +298,14 @@ dynamic _transactionIsarModelSerializeWeb(
     IsarCollection<TransactionIsarModel> collection,
     TransactionIsarModel object) {
   final jsObj = IsarNative.newJsObject();
+  IsarNative.jsObjectSet(jsObj, 'addressFrom', object.addressFrom);
+  IsarNative.jsObjectSet(jsObj, 'addressTo', object.addressTo);
   IsarNative.jsObjectSet(jsObj, 'gasPrice', object.gasPrice);
   IsarNative.jsObjectSet(jsObj, 'id', object.id);
   IsarNative.jsObjectSet(jsObj, 'maxGas', object.maxGas);
-  IsarNative.jsObjectSet(jsObj, 'toAddress', object.toAddress);
+  IsarNative.jsObjectSet(jsObj, 'status', object.status);
+  IsarNative.jsObjectSet(
+      jsObj, 'timeStamp', object.timeStamp.toUtc().millisecondsSinceEpoch);
   IsarNative.jsObjectSet(jsObj, 'transactionHash', object.transactionHash);
   IsarNative.jsObjectSet(jsObj, 'valueInEther', object.valueInEther);
   return jsObj;
@@ -248,12 +314,19 @@ dynamic _transactionIsarModelSerializeWeb(
 TransactionIsarModel _transactionIsarModelDeserializeWeb(
     IsarCollection<TransactionIsarModel> collection, dynamic jsObj) {
   final object = TransactionIsarModel(
+    addressFrom: IsarNative.jsObjectGet(jsObj, 'addressFrom'),
+    addressTo: IsarNative.jsObjectGet(jsObj, 'addressTo'),
     gasPrice: IsarNative.jsObjectGet(jsObj, 'gasPrice'),
     maxGas: IsarNative.jsObjectGet(jsObj, 'maxGas'),
-    toAddress: IsarNative.jsObjectGet(jsObj, 'toAddress') ?? '',
+    status: IsarNative.jsObjectGet(jsObj, 'status'),
+    timeStamp: IsarNative.jsObjectGet(jsObj, 'timeStamp') != null
+        ? DateTime.fromMillisecondsSinceEpoch(
+                IsarNative.jsObjectGet(jsObj, 'timeStamp'),
+                isUtc: true)
+            .toLocal()
+        : DateTime.fromMillisecondsSinceEpoch(0),
     transactionHash: IsarNative.jsObjectGet(jsObj, 'transactionHash'),
-    valueInEther: IsarNative.jsObjectGet(jsObj, 'valueInEther') ??
-        double.negativeInfinity,
+    valueInEther: IsarNative.jsObjectGet(jsObj, 'valueInEther'),
   );
   object.id = IsarNative.jsObjectGet(jsObj, 'id');
   return object;
@@ -262,19 +335,29 @@ TransactionIsarModel _transactionIsarModelDeserializeWeb(
 P _transactionIsarModelDeserializePropWeb<P>(
     Object jsObj, String propertyName) {
   switch (propertyName) {
+    case 'addressFrom':
+      return (IsarNative.jsObjectGet(jsObj, 'addressFrom')) as P;
+    case 'addressTo':
+      return (IsarNative.jsObjectGet(jsObj, 'addressTo')) as P;
     case 'gasPrice':
       return (IsarNative.jsObjectGet(jsObj, 'gasPrice')) as P;
     case 'id':
       return (IsarNative.jsObjectGet(jsObj, 'id')) as P;
     case 'maxGas':
       return (IsarNative.jsObjectGet(jsObj, 'maxGas')) as P;
-    case 'toAddress':
-      return (IsarNative.jsObjectGet(jsObj, 'toAddress') ?? '') as P;
+    case 'status':
+      return (IsarNative.jsObjectGet(jsObj, 'status')) as P;
+    case 'timeStamp':
+      return (IsarNative.jsObjectGet(jsObj, 'timeStamp') != null
+          ? DateTime.fromMillisecondsSinceEpoch(
+                  IsarNative.jsObjectGet(jsObj, 'timeStamp'),
+                  isUtc: true)
+              .toLocal()
+          : DateTime.fromMillisecondsSinceEpoch(0)) as P;
     case 'transactionHash':
       return (IsarNative.jsObjectGet(jsObj, 'transactionHash')) as P;
     case 'valueInEther':
-      return (IsarNative.jsObjectGet(jsObj, 'valueInEther') ??
-          double.negativeInfinity) as P;
+      return (IsarNative.jsObjectGet(jsObj, 'valueInEther')) as P;
     default:
       throw 'Illegal propertyName';
   }
@@ -352,6 +435,242 @@ extension TransactionIsarModelQueryWhere
 
 extension TransactionIsarModelQueryFilter on QueryBuilder<TransactionIsarModel,
     TransactionIsarModel, QFilterCondition> {
+  QueryBuilder<TransactionIsarModel, TransactionIsarModel,
+      QAfterFilterCondition> addressFromIsNull() {
+    return addFilterConditionInternal(FilterCondition(
+      type: ConditionType.isNull,
+      property: 'addressFrom',
+      value: null,
+    ));
+  }
+
+  QueryBuilder<TransactionIsarModel, TransactionIsarModel,
+      QAfterFilterCondition> addressFromEqualTo(
+    String? value, {
+    bool caseSensitive = true,
+  }) {
+    return addFilterConditionInternal(FilterCondition(
+      type: ConditionType.eq,
+      property: 'addressFrom',
+      value: value,
+      caseSensitive: caseSensitive,
+    ));
+  }
+
+  QueryBuilder<TransactionIsarModel, TransactionIsarModel,
+      QAfterFilterCondition> addressFromGreaterThan(
+    String? value, {
+    bool caseSensitive = true,
+    bool include = false,
+  }) {
+    return addFilterConditionInternal(FilterCondition(
+      type: ConditionType.gt,
+      include: include,
+      property: 'addressFrom',
+      value: value,
+      caseSensitive: caseSensitive,
+    ));
+  }
+
+  QueryBuilder<TransactionIsarModel, TransactionIsarModel,
+      QAfterFilterCondition> addressFromLessThan(
+    String? value, {
+    bool caseSensitive = true,
+    bool include = false,
+  }) {
+    return addFilterConditionInternal(FilterCondition(
+      type: ConditionType.lt,
+      include: include,
+      property: 'addressFrom',
+      value: value,
+      caseSensitive: caseSensitive,
+    ));
+  }
+
+  QueryBuilder<TransactionIsarModel, TransactionIsarModel,
+      QAfterFilterCondition> addressFromBetween(
+    String? lower,
+    String? upper, {
+    bool caseSensitive = true,
+    bool includeLower = true,
+    bool includeUpper = true,
+  }) {
+    return addFilterConditionInternal(FilterCondition.between(
+      property: 'addressFrom',
+      lower: lower,
+      includeLower: includeLower,
+      upper: upper,
+      includeUpper: includeUpper,
+      caseSensitive: caseSensitive,
+    ));
+  }
+
+  QueryBuilder<TransactionIsarModel, TransactionIsarModel,
+      QAfterFilterCondition> addressFromStartsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return addFilterConditionInternal(FilterCondition(
+      type: ConditionType.startsWith,
+      property: 'addressFrom',
+      value: value,
+      caseSensitive: caseSensitive,
+    ));
+  }
+
+  QueryBuilder<TransactionIsarModel, TransactionIsarModel,
+      QAfterFilterCondition> addressFromEndsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return addFilterConditionInternal(FilterCondition(
+      type: ConditionType.endsWith,
+      property: 'addressFrom',
+      value: value,
+      caseSensitive: caseSensitive,
+    ));
+  }
+
+  QueryBuilder<TransactionIsarModel, TransactionIsarModel,
+          QAfterFilterCondition>
+      addressFromContains(String value, {bool caseSensitive = true}) {
+    return addFilterConditionInternal(FilterCondition(
+      type: ConditionType.contains,
+      property: 'addressFrom',
+      value: value,
+      caseSensitive: caseSensitive,
+    ));
+  }
+
+  QueryBuilder<TransactionIsarModel, TransactionIsarModel,
+          QAfterFilterCondition>
+      addressFromMatches(String pattern, {bool caseSensitive = true}) {
+    return addFilterConditionInternal(FilterCondition(
+      type: ConditionType.matches,
+      property: 'addressFrom',
+      value: pattern,
+      caseSensitive: caseSensitive,
+    ));
+  }
+
+  QueryBuilder<TransactionIsarModel, TransactionIsarModel,
+      QAfterFilterCondition> addressToIsNull() {
+    return addFilterConditionInternal(FilterCondition(
+      type: ConditionType.isNull,
+      property: 'addressTo',
+      value: null,
+    ));
+  }
+
+  QueryBuilder<TransactionIsarModel, TransactionIsarModel,
+      QAfterFilterCondition> addressToEqualTo(
+    String? value, {
+    bool caseSensitive = true,
+  }) {
+    return addFilterConditionInternal(FilterCondition(
+      type: ConditionType.eq,
+      property: 'addressTo',
+      value: value,
+      caseSensitive: caseSensitive,
+    ));
+  }
+
+  QueryBuilder<TransactionIsarModel, TransactionIsarModel,
+      QAfterFilterCondition> addressToGreaterThan(
+    String? value, {
+    bool caseSensitive = true,
+    bool include = false,
+  }) {
+    return addFilterConditionInternal(FilterCondition(
+      type: ConditionType.gt,
+      include: include,
+      property: 'addressTo',
+      value: value,
+      caseSensitive: caseSensitive,
+    ));
+  }
+
+  QueryBuilder<TransactionIsarModel, TransactionIsarModel,
+      QAfterFilterCondition> addressToLessThan(
+    String? value, {
+    bool caseSensitive = true,
+    bool include = false,
+  }) {
+    return addFilterConditionInternal(FilterCondition(
+      type: ConditionType.lt,
+      include: include,
+      property: 'addressTo',
+      value: value,
+      caseSensitive: caseSensitive,
+    ));
+  }
+
+  QueryBuilder<TransactionIsarModel, TransactionIsarModel,
+      QAfterFilterCondition> addressToBetween(
+    String? lower,
+    String? upper, {
+    bool caseSensitive = true,
+    bool includeLower = true,
+    bool includeUpper = true,
+  }) {
+    return addFilterConditionInternal(FilterCondition.between(
+      property: 'addressTo',
+      lower: lower,
+      includeLower: includeLower,
+      upper: upper,
+      includeUpper: includeUpper,
+      caseSensitive: caseSensitive,
+    ));
+  }
+
+  QueryBuilder<TransactionIsarModel, TransactionIsarModel,
+      QAfterFilterCondition> addressToStartsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return addFilterConditionInternal(FilterCondition(
+      type: ConditionType.startsWith,
+      property: 'addressTo',
+      value: value,
+      caseSensitive: caseSensitive,
+    ));
+  }
+
+  QueryBuilder<TransactionIsarModel, TransactionIsarModel,
+      QAfterFilterCondition> addressToEndsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return addFilterConditionInternal(FilterCondition(
+      type: ConditionType.endsWith,
+      property: 'addressTo',
+      value: value,
+      caseSensitive: caseSensitive,
+    ));
+  }
+
+  QueryBuilder<TransactionIsarModel, TransactionIsarModel,
+          QAfterFilterCondition>
+      addressToContains(String value, {bool caseSensitive = true}) {
+    return addFilterConditionInternal(FilterCondition(
+      type: ConditionType.contains,
+      property: 'addressTo',
+      value: value,
+      caseSensitive: caseSensitive,
+    ));
+  }
+
+  QueryBuilder<TransactionIsarModel, TransactionIsarModel,
+          QAfterFilterCondition>
+      addressToMatches(String pattern, {bool caseSensitive = true}) {
+    return addFilterConditionInternal(FilterCondition(
+      type: ConditionType.matches,
+      property: 'addressTo',
+      value: pattern,
+      caseSensitive: caseSensitive,
+    ));
+  }
+
   QueryBuilder<TransactionIsarModel, TransactionIsarModel,
       QAfterFilterCondition> gasPriceIsNull() {
     return addFilterConditionInternal(FilterCondition(
@@ -513,111 +832,113 @@ extension TransactionIsarModelQueryFilter on QueryBuilder<TransactionIsarModel,
   }
 
   QueryBuilder<TransactionIsarModel, TransactionIsarModel,
-      QAfterFilterCondition> toAddressEqualTo(
-    String value, {
-    bool caseSensitive = true,
-  }) {
+      QAfterFilterCondition> statusIsNull() {
     return addFilterConditionInternal(FilterCondition(
-      type: ConditionType.eq,
-      property: 'toAddress',
-      value: value,
-      caseSensitive: caseSensitive,
+      type: ConditionType.isNull,
+      property: 'status',
+      value: null,
     ));
   }
 
   QueryBuilder<TransactionIsarModel, TransactionIsarModel,
-      QAfterFilterCondition> toAddressGreaterThan(
-    String value, {
-    bool caseSensitive = true,
+      QAfterFilterCondition> statusEqualTo(int? value) {
+    return addFilterConditionInternal(FilterCondition(
+      type: ConditionType.eq,
+      property: 'status',
+      value: value,
+    ));
+  }
+
+  QueryBuilder<TransactionIsarModel, TransactionIsarModel,
+      QAfterFilterCondition> statusGreaterThan(
+    int? value, {
     bool include = false,
   }) {
     return addFilterConditionInternal(FilterCondition(
       type: ConditionType.gt,
       include: include,
-      property: 'toAddress',
+      property: 'status',
       value: value,
-      caseSensitive: caseSensitive,
     ));
   }
 
   QueryBuilder<TransactionIsarModel, TransactionIsarModel,
-      QAfterFilterCondition> toAddressLessThan(
-    String value, {
-    bool caseSensitive = true,
+      QAfterFilterCondition> statusLessThan(
+    int? value, {
     bool include = false,
   }) {
     return addFilterConditionInternal(FilterCondition(
       type: ConditionType.lt,
       include: include,
-      property: 'toAddress',
+      property: 'status',
       value: value,
-      caseSensitive: caseSensitive,
     ));
   }
 
   QueryBuilder<TransactionIsarModel, TransactionIsarModel,
-      QAfterFilterCondition> toAddressBetween(
-    String lower,
-    String upper, {
-    bool caseSensitive = true,
+      QAfterFilterCondition> statusBetween(
+    int? lower,
+    int? upper, {
     bool includeLower = true,
     bool includeUpper = true,
   }) {
     return addFilterConditionInternal(FilterCondition.between(
-      property: 'toAddress',
+      property: 'status',
       lower: lower,
       includeLower: includeLower,
       upper: upper,
       includeUpper: includeUpper,
-      caseSensitive: caseSensitive,
     ));
   }
 
   QueryBuilder<TransactionIsarModel, TransactionIsarModel,
-      QAfterFilterCondition> toAddressStartsWith(
-    String value, {
-    bool caseSensitive = true,
+      QAfterFilterCondition> timeStampEqualTo(DateTime value) {
+    return addFilterConditionInternal(FilterCondition(
+      type: ConditionType.eq,
+      property: 'timeStamp',
+      value: value,
+    ));
+  }
+
+  QueryBuilder<TransactionIsarModel, TransactionIsarModel,
+      QAfterFilterCondition> timeStampGreaterThan(
+    DateTime value, {
+    bool include = false,
   }) {
     return addFilterConditionInternal(FilterCondition(
-      type: ConditionType.startsWith,
-      property: 'toAddress',
+      type: ConditionType.gt,
+      include: include,
+      property: 'timeStamp',
       value: value,
-      caseSensitive: caseSensitive,
     ));
   }
 
   QueryBuilder<TransactionIsarModel, TransactionIsarModel,
-      QAfterFilterCondition> toAddressEndsWith(
-    String value, {
-    bool caseSensitive = true,
+      QAfterFilterCondition> timeStampLessThan(
+    DateTime value, {
+    bool include = false,
   }) {
     return addFilterConditionInternal(FilterCondition(
-      type: ConditionType.endsWith,
-      property: 'toAddress',
+      type: ConditionType.lt,
+      include: include,
+      property: 'timeStamp',
       value: value,
-      caseSensitive: caseSensitive,
     ));
   }
 
   QueryBuilder<TransactionIsarModel, TransactionIsarModel,
-          QAfterFilterCondition>
-      toAddressContains(String value, {bool caseSensitive = true}) {
-    return addFilterConditionInternal(FilterCondition(
-      type: ConditionType.contains,
-      property: 'toAddress',
-      value: value,
-      caseSensitive: caseSensitive,
-    ));
-  }
-
-  QueryBuilder<TransactionIsarModel, TransactionIsarModel,
-          QAfterFilterCondition>
-      toAddressMatches(String pattern, {bool caseSensitive = true}) {
-    return addFilterConditionInternal(FilterCondition(
-      type: ConditionType.matches,
-      property: 'toAddress',
-      value: pattern,
-      caseSensitive: caseSensitive,
+      QAfterFilterCondition> timeStampBetween(
+    DateTime lower,
+    DateTime upper, {
+    bool includeLower = true,
+    bool includeUpper = true,
+  }) {
+    return addFilterConditionInternal(FilterCondition.between(
+      property: 'timeStamp',
+      lower: lower,
+      includeLower: includeLower,
+      upper: upper,
+      includeUpper: includeUpper,
     ));
   }
 
@@ -740,7 +1061,16 @@ extension TransactionIsarModelQueryFilter on QueryBuilder<TransactionIsarModel,
   }
 
   QueryBuilder<TransactionIsarModel, TransactionIsarModel,
-      QAfterFilterCondition> valueInEtherGreaterThan(double value) {
+      QAfterFilterCondition> valueInEtherIsNull() {
+    return addFilterConditionInternal(FilterCondition(
+      type: ConditionType.isNull,
+      property: 'valueInEther',
+      value: null,
+    ));
+  }
+
+  QueryBuilder<TransactionIsarModel, TransactionIsarModel,
+      QAfterFilterCondition> valueInEtherGreaterThan(double? value) {
     return addFilterConditionInternal(FilterCondition(
       type: ConditionType.gt,
       include: false,
@@ -750,7 +1080,7 @@ extension TransactionIsarModelQueryFilter on QueryBuilder<TransactionIsarModel,
   }
 
   QueryBuilder<TransactionIsarModel, TransactionIsarModel,
-      QAfterFilterCondition> valueInEtherLessThan(double value) {
+      QAfterFilterCondition> valueInEtherLessThan(double? value) {
     return addFilterConditionInternal(FilterCondition(
       type: ConditionType.lt,
       include: false,
@@ -760,7 +1090,7 @@ extension TransactionIsarModelQueryFilter on QueryBuilder<TransactionIsarModel,
   }
 
   QueryBuilder<TransactionIsarModel, TransactionIsarModel,
-      QAfterFilterCondition> valueInEtherBetween(double lower, double upper) {
+      QAfterFilterCondition> valueInEtherBetween(double? lower, double? upper) {
     return addFilterConditionInternal(FilterCondition.between(
       property: 'valueInEther',
       lower: lower,
@@ -776,6 +1106,26 @@ extension TransactionIsarModelQueryLinks on QueryBuilder<TransactionIsarModel,
 
 extension TransactionIsarModelQueryWhereSortBy
     on QueryBuilder<TransactionIsarModel, TransactionIsarModel, QSortBy> {
+  QueryBuilder<TransactionIsarModel, TransactionIsarModel, QAfterSortBy>
+      sortByAddressFrom() {
+    return addSortByInternal('addressFrom', Sort.asc);
+  }
+
+  QueryBuilder<TransactionIsarModel, TransactionIsarModel, QAfterSortBy>
+      sortByAddressFromDesc() {
+    return addSortByInternal('addressFrom', Sort.desc);
+  }
+
+  QueryBuilder<TransactionIsarModel, TransactionIsarModel, QAfterSortBy>
+      sortByAddressTo() {
+    return addSortByInternal('addressTo', Sort.asc);
+  }
+
+  QueryBuilder<TransactionIsarModel, TransactionIsarModel, QAfterSortBy>
+      sortByAddressToDesc() {
+    return addSortByInternal('addressTo', Sort.desc);
+  }
+
   QueryBuilder<TransactionIsarModel, TransactionIsarModel, QAfterSortBy>
       sortByGasPrice() {
     return addSortByInternal('gasPrice', Sort.asc);
@@ -807,13 +1157,23 @@ extension TransactionIsarModelQueryWhereSortBy
   }
 
   QueryBuilder<TransactionIsarModel, TransactionIsarModel, QAfterSortBy>
-      sortByToAddress() {
-    return addSortByInternal('toAddress', Sort.asc);
+      sortByStatus() {
+    return addSortByInternal('status', Sort.asc);
   }
 
   QueryBuilder<TransactionIsarModel, TransactionIsarModel, QAfterSortBy>
-      sortByToAddressDesc() {
-    return addSortByInternal('toAddress', Sort.desc);
+      sortByStatusDesc() {
+    return addSortByInternal('status', Sort.desc);
+  }
+
+  QueryBuilder<TransactionIsarModel, TransactionIsarModel, QAfterSortBy>
+      sortByTimeStamp() {
+    return addSortByInternal('timeStamp', Sort.asc);
+  }
+
+  QueryBuilder<TransactionIsarModel, TransactionIsarModel, QAfterSortBy>
+      sortByTimeStampDesc() {
+    return addSortByInternal('timeStamp', Sort.desc);
   }
 
   QueryBuilder<TransactionIsarModel, TransactionIsarModel, QAfterSortBy>
@@ -839,6 +1199,26 @@ extension TransactionIsarModelQueryWhereSortBy
 
 extension TransactionIsarModelQueryWhereSortThenBy
     on QueryBuilder<TransactionIsarModel, TransactionIsarModel, QSortThenBy> {
+  QueryBuilder<TransactionIsarModel, TransactionIsarModel, QAfterSortBy>
+      thenByAddressFrom() {
+    return addSortByInternal('addressFrom', Sort.asc);
+  }
+
+  QueryBuilder<TransactionIsarModel, TransactionIsarModel, QAfterSortBy>
+      thenByAddressFromDesc() {
+    return addSortByInternal('addressFrom', Sort.desc);
+  }
+
+  QueryBuilder<TransactionIsarModel, TransactionIsarModel, QAfterSortBy>
+      thenByAddressTo() {
+    return addSortByInternal('addressTo', Sort.asc);
+  }
+
+  QueryBuilder<TransactionIsarModel, TransactionIsarModel, QAfterSortBy>
+      thenByAddressToDesc() {
+    return addSortByInternal('addressTo', Sort.desc);
+  }
+
   QueryBuilder<TransactionIsarModel, TransactionIsarModel, QAfterSortBy>
       thenByGasPrice() {
     return addSortByInternal('gasPrice', Sort.asc);
@@ -870,13 +1250,23 @@ extension TransactionIsarModelQueryWhereSortThenBy
   }
 
   QueryBuilder<TransactionIsarModel, TransactionIsarModel, QAfterSortBy>
-      thenByToAddress() {
-    return addSortByInternal('toAddress', Sort.asc);
+      thenByStatus() {
+    return addSortByInternal('status', Sort.asc);
   }
 
   QueryBuilder<TransactionIsarModel, TransactionIsarModel, QAfterSortBy>
-      thenByToAddressDesc() {
-    return addSortByInternal('toAddress', Sort.desc);
+      thenByStatusDesc() {
+    return addSortByInternal('status', Sort.desc);
+  }
+
+  QueryBuilder<TransactionIsarModel, TransactionIsarModel, QAfterSortBy>
+      thenByTimeStamp() {
+    return addSortByInternal('timeStamp', Sort.asc);
+  }
+
+  QueryBuilder<TransactionIsarModel, TransactionIsarModel, QAfterSortBy>
+      thenByTimeStampDesc() {
+    return addSortByInternal('timeStamp', Sort.desc);
   }
 
   QueryBuilder<TransactionIsarModel, TransactionIsarModel, QAfterSortBy>
@@ -903,6 +1293,16 @@ extension TransactionIsarModelQueryWhereSortThenBy
 extension TransactionIsarModelQueryWhereDistinct
     on QueryBuilder<TransactionIsarModel, TransactionIsarModel, QDistinct> {
   QueryBuilder<TransactionIsarModel, TransactionIsarModel, QDistinct>
+      distinctByAddressFrom({bool caseSensitive = true}) {
+    return addDistinctByInternal('addressFrom', caseSensitive: caseSensitive);
+  }
+
+  QueryBuilder<TransactionIsarModel, TransactionIsarModel, QDistinct>
+      distinctByAddressTo({bool caseSensitive = true}) {
+    return addDistinctByInternal('addressTo', caseSensitive: caseSensitive);
+  }
+
+  QueryBuilder<TransactionIsarModel, TransactionIsarModel, QDistinct>
       distinctByGasPrice() {
     return addDistinctByInternal('gasPrice');
   }
@@ -918,8 +1318,13 @@ extension TransactionIsarModelQueryWhereDistinct
   }
 
   QueryBuilder<TransactionIsarModel, TransactionIsarModel, QDistinct>
-      distinctByToAddress({bool caseSensitive = true}) {
-    return addDistinctByInternal('toAddress', caseSensitive: caseSensitive);
+      distinctByStatus() {
+    return addDistinctByInternal('status');
+  }
+
+  QueryBuilder<TransactionIsarModel, TransactionIsarModel, QDistinct>
+      distinctByTimeStamp() {
+    return addDistinctByInternal('timeStamp');
   }
 
   QueryBuilder<TransactionIsarModel, TransactionIsarModel, QDistinct>
@@ -936,6 +1341,16 @@ extension TransactionIsarModelQueryWhereDistinct
 
 extension TransactionIsarModelQueryProperty on QueryBuilder<
     TransactionIsarModel, TransactionIsarModel, QQueryProperty> {
+  QueryBuilder<TransactionIsarModel, String?, QQueryOperations>
+      addressFromProperty() {
+    return addPropertyNameInternal('addressFrom');
+  }
+
+  QueryBuilder<TransactionIsarModel, String?, QQueryOperations>
+      addressToProperty() {
+    return addPropertyNameInternal('addressTo');
+  }
+
   QueryBuilder<TransactionIsarModel, double?, QQueryOperations>
       gasPriceProperty() {
     return addPropertyNameInternal('gasPrice');
@@ -949,9 +1364,13 @@ extension TransactionIsarModelQueryProperty on QueryBuilder<
     return addPropertyNameInternal('maxGas');
   }
 
-  QueryBuilder<TransactionIsarModel, String, QQueryOperations>
-      toAddressProperty() {
-    return addPropertyNameInternal('toAddress');
+  QueryBuilder<TransactionIsarModel, int?, QQueryOperations> statusProperty() {
+    return addPropertyNameInternal('status');
+  }
+
+  QueryBuilder<TransactionIsarModel, DateTime, QQueryOperations>
+      timeStampProperty() {
+    return addPropertyNameInternal('timeStamp');
   }
 
   QueryBuilder<TransactionIsarModel, String?, QQueryOperations>
@@ -959,7 +1378,7 @@ extension TransactionIsarModelQueryProperty on QueryBuilder<
     return addPropertyNameInternal('transactionHash');
   }
 
-  QueryBuilder<TransactionIsarModel, double, QQueryOperations>
+  QueryBuilder<TransactionIsarModel, double?, QQueryOperations>
       valueInEtherProperty() {
     return addPropertyNameInternal('valueInEther');
   }

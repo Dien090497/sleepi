@@ -19,14 +19,16 @@ import 'package:slee_fi/presentation/screens/wallet/widgets/box_button_widget.da
 import 'package:slee_fi/presentation/screens/wallet/widgets/modal_receive_wallet.dart';
 import 'package:slee_fi/presentation/screens/wallet/widgets/transaction_detail_list.dart';
 import 'package:slee_fi/resources/resources.dart';
+import 'package:slee_fi/usecase/get_history_transaction_usecase.dart';
 
 class TransactionDetailArguments {
   final String title;
   final String img;
+  final HistoryTransactionParams? typeHistory;
   final TokenEntity tokenEntity;
 
   TransactionDetailArguments(
-      {required this.title, required this.img, required this.tokenEntity});
+      {required this.title, required this.img, this.typeHistory, required this.tokenEntity});
 }
 
 class TransactionDetail extends StatelessWidget {
@@ -163,7 +165,7 @@ class TransactionDetail extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 32.0),
-              const TransactionDetailList()
+              TransactionDetailList(typeHistory: args?.typeHistory,)
             ],
           ),
         ));

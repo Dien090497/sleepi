@@ -417,6 +417,9 @@ abstract class  LocaleKeys {
   static const incorrect_email_password = 'incorrect_email_password';
   static const email_already_exist = 'email_already_exist';
   static const otp_expired = 'otp_expired';
+  static const pleas_enter_contact_address = 'pleas_enter_contact_address';
+  static const invalid_address = 'invalid_address';
+  static const amount_input_can_not_be_zero = 'amount_input_can_not_be_zero';
   static const wallet_already = 'wallet_already';
 
 }

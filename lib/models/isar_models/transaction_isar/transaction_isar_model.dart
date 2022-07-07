@@ -1,7 +1,6 @@
 import 'package:copy_with_extension/copy_with_extension.dart';
 import 'package:isar/isar.dart';
 import 'package:slee_fi/entities/send_to_external/send_to_external_entity.dart';
-import 'package:web3dart/web3dart.dart';
 
 part 'transaction_isar_model.g.dart';
 
@@ -10,35 +9,42 @@ part 'transaction_isar_model.g.dart';
 class TransactionIsarModel {
   int? id = Isar.autoIncrement;
 
-  late final String? transactionHash;
+  final String? transactionHash;
 
-  late final String toAddress;
+  final DateTime timeStamp;
 
-  late final double valueInEther;
+  final String? addressFrom;
 
-  late final double? gasPrice;
+  final String? addressTo;
 
-  late final int? maxGas;
+  final double? valueInEther;
+
+  final double? gasPrice;
+
+  final int? maxGas;
+
+  final int? status;
 
   TransactionIsarModel({
-    required this.toAddress,
-    required this.valueInEther,
     this.transactionHash,
+    required this.timeStamp,
+    this.addressFrom,
+    this.addressTo,
+    this.valueInEther,
     this.gasPrice,
     this.maxGas,
+    this.status,
   });
 
-  SendToExternalEntity toEntity(
-      Credentials credentials, {
-        int? chainId,
-      }) {
+  SendToExternalEntity toEntity() {
     // assert(id != null, "Id must be assigned");
     return SendToExternalEntity(
-      chainId: chainId!,
-      toAddress: toAddress,
-      credentials: credentials,
+      timeStamp: timeStamp,
+      addressFrom: addressFrom,
+      addressTo: addressTo,
+      status: status,
       transactionHash: transactionHash!,
-      valueInEther: valueInEther,
+      value: valueInEther!,
       gasPrice: gasPrice,
       maxGas: maxGas,
     );

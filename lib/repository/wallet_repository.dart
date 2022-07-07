@@ -3,7 +3,9 @@ import 'package:slee_fi/common/enum/enum.dart';
 import 'package:slee_fi/entities/wallet_info/wallet_info_entity.dart';
 import 'package:slee_fi/failures/failure.dart';
 import 'package:slee_fi/models/isar_models/network_isar/network_isar_model.dart';
+import 'package:slee_fi/models/isar_models/transaction_isar/transaction_isar_model.dart';
 import 'package:slee_fi/usecase/get_balance_for_tokens_usecase.dart';
+import 'package:slee_fi/usecase/get_history_transaction_usecase.dart';
 
 abstract class IWalletRepository {
   Future<Either<Failure, WalletInfoEntity>> createWallet();
@@ -35,5 +37,7 @@ abstract class IWalletRepository {
   Future<Either<FailureMessage, NetworkIsarModel>> switchNetWork();
 
   Future<Either<FailureMessage, bool>> validateMnemonic(String mnemonic);
+
+  Future<Either<Failure, List<TransactionIsarModel>>> getHistoryTransaction(HistoryTransactionParams params);
 
 }

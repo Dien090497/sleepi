@@ -16,13 +16,14 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$SendToExternalEntity {
-  int? get chainId => throw _privateConstructorUsedError;
-  String get transactionHash => throw _privateConstructorUsedError;
-  String get toAddress => throw _privateConstructorUsedError;
-  double get valueInEther => throw _privateConstructorUsedError;
-  Credentials get credentials => throw _privateConstructorUsedError;
+  String? get transactionHash => throw _privateConstructorUsedError;
+  DateTime get timeStamp => throw _privateConstructorUsedError;
+  String? get addressFrom => throw _privateConstructorUsedError;
+  String? get addressTo => throw _privateConstructorUsedError;
+  double get value => throw _privateConstructorUsedError;
   double? get gasPrice => throw _privateConstructorUsedError;
   int? get maxGas => throw _privateConstructorUsedError;
+  int? get status => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $SendToExternalEntityCopyWith<SendToExternalEntity> get copyWith =>
@@ -35,13 +36,14 @@ abstract class $SendToExternalEntityCopyWith<$Res> {
           $Res Function(SendToExternalEntity) then) =
       _$SendToExternalEntityCopyWithImpl<$Res>;
   $Res call(
-      {int? chainId,
-      String transactionHash,
-      String toAddress,
-      double valueInEther,
-      Credentials credentials,
+      {String? transactionHash,
+      DateTime timeStamp,
+      String? addressFrom,
+      String? addressTo,
+      double value,
       double? gasPrice,
-      int? maxGas});
+      int? maxGas,
+      int? status});
 }
 
 /// @nodoc
@@ -55,35 +57,36 @@ class _$SendToExternalEntityCopyWithImpl<$Res>
 
   @override
   $Res call({
-    Object? chainId = freezed,
     Object? transactionHash = freezed,
-    Object? toAddress = freezed,
-    Object? valueInEther = freezed,
-    Object? credentials = freezed,
+    Object? timeStamp = freezed,
+    Object? addressFrom = freezed,
+    Object? addressTo = freezed,
+    Object? value = freezed,
     Object? gasPrice = freezed,
     Object? maxGas = freezed,
+    Object? status = freezed,
   }) {
     return _then(_value.copyWith(
-      chainId: chainId == freezed
-          ? _value.chainId
-          : chainId // ignore: cast_nullable_to_non_nullable
-              as int?,
       transactionHash: transactionHash == freezed
           ? _value.transactionHash
           : transactionHash // ignore: cast_nullable_to_non_nullable
-              as String,
-      toAddress: toAddress == freezed
-          ? _value.toAddress
-          : toAddress // ignore: cast_nullable_to_non_nullable
-              as String,
-      valueInEther: valueInEther == freezed
-          ? _value.valueInEther
-          : valueInEther // ignore: cast_nullable_to_non_nullable
+              as String?,
+      timeStamp: timeStamp == freezed
+          ? _value.timeStamp
+          : timeStamp // ignore: cast_nullable_to_non_nullable
+              as DateTime,
+      addressFrom: addressFrom == freezed
+          ? _value.addressFrom
+          : addressFrom // ignore: cast_nullable_to_non_nullable
+              as String?,
+      addressTo: addressTo == freezed
+          ? _value.addressTo
+          : addressTo // ignore: cast_nullable_to_non_nullable
+              as String?,
+      value: value == freezed
+          ? _value.value
+          : value // ignore: cast_nullable_to_non_nullable
               as double,
-      credentials: credentials == freezed
-          ? _value.credentials
-          : credentials // ignore: cast_nullable_to_non_nullable
-              as Credentials,
       gasPrice: gasPrice == freezed
           ? _value.gasPrice
           : gasPrice // ignore: cast_nullable_to_non_nullable
@@ -91,6 +94,10 @@ class _$SendToExternalEntityCopyWithImpl<$Res>
       maxGas: maxGas == freezed
           ? _value.maxGas
           : maxGas // ignore: cast_nullable_to_non_nullable
+              as int?,
+      status: status == freezed
+          ? _value.status
+          : status // ignore: cast_nullable_to_non_nullable
               as int?,
     ));
   }
@@ -104,13 +111,14 @@ abstract class _$$_SendToExternalEntityCopyWith<$Res>
       __$$_SendToExternalEntityCopyWithImpl<$Res>;
   @override
   $Res call(
-      {int? chainId,
-      String transactionHash,
-      String toAddress,
-      double valueInEther,
-      Credentials credentials,
+      {String? transactionHash,
+      DateTime timeStamp,
+      String? addressFrom,
+      String? addressTo,
+      double value,
       double? gasPrice,
-      int? maxGas});
+      int? maxGas,
+      int? status});
 }
 
 /// @nodoc
@@ -126,35 +134,36 @@ class __$$_SendToExternalEntityCopyWithImpl<$Res>
 
   @override
   $Res call({
-    Object? chainId = freezed,
     Object? transactionHash = freezed,
-    Object? toAddress = freezed,
-    Object? valueInEther = freezed,
-    Object? credentials = freezed,
+    Object? timeStamp = freezed,
+    Object? addressFrom = freezed,
+    Object? addressTo = freezed,
+    Object? value = freezed,
     Object? gasPrice = freezed,
     Object? maxGas = freezed,
+    Object? status = freezed,
   }) {
     return _then(_$_SendToExternalEntity(
-      chainId: chainId == freezed
-          ? _value.chainId
-          : chainId // ignore: cast_nullable_to_non_nullable
-              as int?,
       transactionHash: transactionHash == freezed
           ? _value.transactionHash
           : transactionHash // ignore: cast_nullable_to_non_nullable
-              as String,
-      toAddress: toAddress == freezed
-          ? _value.toAddress
-          : toAddress // ignore: cast_nullable_to_non_nullable
-              as String,
-      valueInEther: valueInEther == freezed
-          ? _value.valueInEther
-          : valueInEther // ignore: cast_nullable_to_non_nullable
+              as String?,
+      timeStamp: timeStamp == freezed
+          ? _value.timeStamp
+          : timeStamp // ignore: cast_nullable_to_non_nullable
+              as DateTime,
+      addressFrom: addressFrom == freezed
+          ? _value.addressFrom
+          : addressFrom // ignore: cast_nullable_to_non_nullable
+              as String?,
+      addressTo: addressTo == freezed
+          ? _value.addressTo
+          : addressTo // ignore: cast_nullable_to_non_nullable
+              as String?,
+      value: value == freezed
+          ? _value.value
+          : value // ignore: cast_nullable_to_non_nullable
               as double,
-      credentials: credentials == freezed
-          ? _value.credentials
-          : credentials // ignore: cast_nullable_to_non_nullable
-              as Credentials,
       gasPrice: gasPrice == freezed
           ? _value.gasPrice
           : gasPrice // ignore: cast_nullable_to_non_nullable
@@ -163,56 +172,47 @@ class __$$_SendToExternalEntityCopyWithImpl<$Res>
           ? _value.maxGas
           : maxGas // ignore: cast_nullable_to_non_nullable
               as int?,
+      status: status == freezed
+          ? _value.status
+          : status // ignore: cast_nullable_to_non_nullable
+              as int?,
     ));
   }
 }
 
 /// @nodoc
 
-class _$_SendToExternalEntity
-    with DiagnosticableTreeMixin
-    implements _SendToExternalEntity {
+class _$_SendToExternalEntity implements _SendToExternalEntity {
   const _$_SendToExternalEntity(
-      {this.chainId,
-      required this.transactionHash,
-      required this.toAddress,
-      required this.valueInEther,
-      required this.credentials,
+      {this.transactionHash,
+      required this.timeStamp,
+      this.addressFrom,
+      this.addressTo,
+      required this.value,
       this.gasPrice,
-      this.maxGas});
+      this.maxGas,
+      this.status});
 
   @override
-  final int? chainId;
+  final String? transactionHash;
   @override
-  final String transactionHash;
+  final DateTime timeStamp;
   @override
-  final String toAddress;
+  final String? addressFrom;
   @override
-  final double valueInEther;
+  final String? addressTo;
   @override
-  final Credentials credentials;
+  final double value;
   @override
   final double? gasPrice;
   @override
   final int? maxGas;
+  @override
+  final int? status;
 
   @override
-  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'SendToExternalEntity(chainId: $chainId, transactionHash: $transactionHash, toAddress: $toAddress, valueInEther: $valueInEther, credentials: $credentials, gasPrice: $gasPrice, maxGas: $maxGas)';
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties
-      ..add(DiagnosticsProperty('type', 'SendToExternalEntity'))
-      ..add(DiagnosticsProperty('chainId', chainId))
-      ..add(DiagnosticsProperty('transactionHash', transactionHash))
-      ..add(DiagnosticsProperty('toAddress', toAddress))
-      ..add(DiagnosticsProperty('valueInEther', valueInEther))
-      ..add(DiagnosticsProperty('credentials', credentials))
-      ..add(DiagnosticsProperty('gasPrice', gasPrice))
-      ..add(DiagnosticsProperty('maxGas', maxGas));
+  String toString() {
+    return 'SendToExternalEntity(transactionHash: $transactionHash, timeStamp: $timeStamp, addressFrom: $addressFrom, addressTo: $addressTo, value: $value, gasPrice: $gasPrice, maxGas: $maxGas, status: $status)';
   }
 
   @override
@@ -220,28 +220,29 @@ class _$_SendToExternalEntity
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_SendToExternalEntity &&
-            const DeepCollectionEquality().equals(other.chainId, chainId) &&
             const DeepCollectionEquality()
                 .equals(other.transactionHash, transactionHash) &&
-            const DeepCollectionEquality().equals(other.toAddress, toAddress) &&
+            const DeepCollectionEquality().equals(other.timeStamp, timeStamp) &&
             const DeepCollectionEquality()
-                .equals(other.valueInEther, valueInEther) &&
-            const DeepCollectionEquality()
-                .equals(other.credentials, credentials) &&
+                .equals(other.addressFrom, addressFrom) &&
+            const DeepCollectionEquality().equals(other.addressTo, addressTo) &&
+            const DeepCollectionEquality().equals(other.value, value) &&
             const DeepCollectionEquality().equals(other.gasPrice, gasPrice) &&
-            const DeepCollectionEquality().equals(other.maxGas, maxGas));
+            const DeepCollectionEquality().equals(other.maxGas, maxGas) &&
+            const DeepCollectionEquality().equals(other.status, status));
   }
 
   @override
   int get hashCode => Object.hash(
       runtimeType,
-      const DeepCollectionEquality().hash(chainId),
       const DeepCollectionEquality().hash(transactionHash),
-      const DeepCollectionEquality().hash(toAddress),
-      const DeepCollectionEquality().hash(valueInEther),
-      const DeepCollectionEquality().hash(credentials),
+      const DeepCollectionEquality().hash(timeStamp),
+      const DeepCollectionEquality().hash(addressFrom),
+      const DeepCollectionEquality().hash(addressTo),
+      const DeepCollectionEquality().hash(value),
       const DeepCollectionEquality().hash(gasPrice),
-      const DeepCollectionEquality().hash(maxGas));
+      const DeepCollectionEquality().hash(maxGas),
+      const DeepCollectionEquality().hash(status));
 
   @JsonKey(ignore: true)
   @override
@@ -252,28 +253,31 @@ class _$_SendToExternalEntity
 
 abstract class _SendToExternalEntity implements SendToExternalEntity {
   const factory _SendToExternalEntity(
-      {final int? chainId,
-      required final String transactionHash,
-      required final String toAddress,
-      required final double valueInEther,
-      required final Credentials credentials,
+      {final String? transactionHash,
+      required final DateTime timeStamp,
+      final String? addressFrom,
+      final String? addressTo,
+      required final double value,
       final double? gasPrice,
-      final int? maxGas}) = _$_SendToExternalEntity;
+      final int? maxGas,
+      final int? status}) = _$_SendToExternalEntity;
 
   @override
-  int? get chainId => throw _privateConstructorUsedError;
+  String? get transactionHash => throw _privateConstructorUsedError;
   @override
-  String get transactionHash => throw _privateConstructorUsedError;
+  DateTime get timeStamp => throw _privateConstructorUsedError;
   @override
-  String get toAddress => throw _privateConstructorUsedError;
+  String? get addressFrom => throw _privateConstructorUsedError;
   @override
-  double get valueInEther => throw _privateConstructorUsedError;
+  String? get addressTo => throw _privateConstructorUsedError;
   @override
-  Credentials get credentials => throw _privateConstructorUsedError;
+  double get value => throw _privateConstructorUsedError;
   @override
   double? get gasPrice => throw _privateConstructorUsedError;
   @override
   int? get maxGas => throw _privateConstructorUsedError;
+  @override
+  int? get status => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
   _$$_SendToExternalEntityCopyWith<_$_SendToExternalEntity> get copyWith =>
