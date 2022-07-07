@@ -36,7 +36,7 @@ class MyApp extends StatelessWidget {
             locale: context.locale,
             theme: lightTheme,
             routes: AppRoutes.routes,
-            initialRoute: R.loginSignUp,
+            initialRoute: R.splash,
             debugShowCheckedModeBanner: false,
             navigatorObservers: [routeObserver],
           );

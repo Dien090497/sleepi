@@ -9,11 +9,15 @@ part of 'global_config_response.dart';
 GlobalConfigResponse _$GlobalConfigResponseFromJson(
         Map<String, dynamic> json) =>
     GlobalConfigResponse(
-      json['contract'] as String,
+      contract: json['contract'] as String,
+      isEnableActiveCode: json['isEnableActiveCode'] as bool,
+      messageSign: json['message_sign'] as String,
     );
 
 Map<String, dynamic> _$GlobalConfigResponseToJson(
         GlobalConfigResponse instance) =>
     <String, dynamic>{
       'contract': instance.contract,
+      'isEnableActiveCode': instance.isEnableActiveCode,
+      'message_sign': instance.messageSign,
     };
