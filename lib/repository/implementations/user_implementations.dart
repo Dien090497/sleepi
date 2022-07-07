@@ -39,11 +39,10 @@ class UserImplementation extends IUserRepository {
   }
 
   @override
-  Future<Either<FailureMessage, dynamic>> fetchBalanceSpending(
+  Future<Either<FailureMessage, List<TokenSpending>>> fetchBalanceSpending(
       String userID) async {
     try {
       var result = await _authDataSource.fetchBalanceSpending(userID);
-      'get balance spending $result'.log;
       return Right(result);
     } on Exception catch (e) {
       return Left(FailureMessage.fromException(e));

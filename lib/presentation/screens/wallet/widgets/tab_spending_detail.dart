@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:slee_fi/common/extensions/string_x.dart';
 import 'package:slee_fi/common/routes/app_routes.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
@@ -8,11 +9,13 @@ import 'package:slee_fi/common/widgets/sf_buttons.dart';
 import 'package:slee_fi/common/widgets/sf_card.dart';
 import 'package:slee_fi/common/widgets/sf_icon.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
+import 'package:slee_fi/entities/token/token_entity.dart';
 import 'package:slee_fi/l10n/locale_keys.g.dart';
+import 'package:slee_fi/presentation/blocs/global_wallet/global_wallet_cubit.dart';
+import 'package:slee_fi/presentation/blocs/global_wallet/global_wallet_state.dart';
 import 'package:slee_fi/presentation/screens/passcode/passcode_screen.dart';
 import 'package:slee_fi/presentation/screens/wallet/widgets/pop_up_info_spending.dart';
 import 'package:slee_fi/presentation/screens/wallet/widgets/spending_detail_list.dart';
-import 'package:slee_fi/resources/resources.dart';
 
 class TabSpendingDetail extends StatelessWidget {
   const TabSpendingDetail({Key? key}) : super(key: key);
@@ -32,71 +35,38 @@ class TabSpendingDetail extends StatelessWidget {
                 const SizedBox(height: 12.0),
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 24.0),
-                  child: Column(
-                    children: [
-                      SFCard(
-                        // onTap: () => Navigator.pushNamed(context, R.staking),
-                        margin: const EdgeInsets.only(top: 8),
-                        child: ListTile(
-                          leading: const SFIcon(
-                            Ics.icSlft,
-                            width: 40,
-                            height: 40,
-                          ),
-                          minLeadingWidth: 12,
-                          title: SFText(
-                              keyText: "SLFT",
-                              style: TextStyles.lightWhite16,
-                              stringCase: StringCase.upperCase),
-                          trailing: SFText(
-                            keyText: "0",
-                            style: TextStyles.lightWhite16,
-                          ),
-                        ),
-                      ),
-                      SFCard(
-                        margin: const EdgeInsets.only(top: 8),
-                        child: ListTile(
-                          leading: const SFIcon(
-                            Ics.icSlgt,
-                            width: 40,
-                            height: 40,
-                          ),
-                          minLeadingWidth: 12,
-                          title: SFText(
-                              keyText: "SLGT",
-                              style: TextStyles.lightWhite16,
-                              stringCase: StringCase.upperCase),
-                          trailing: SFText(
-                            keyText: "0",
-                            style: TextStyles.lightWhite16,
-                          ),
-                        ),
-                      ),
-                      SFCard(
-                        margin: const EdgeInsets.only(top: 8),
-                        child: ListTile(
-                          leading: const Padding(
-                            padding: EdgeInsets.only(left: 4.0),
-                            child: SFIcon(
-                              Ics.icAvax,
-                              width: 32,
-                              height: 32,
-                            ),
-                          ),
-                          minLeadingWidth: 12,
-                          title: SFText(
-                            keyText: "AVAX",
-                            style: TextStyles.lightWhite16,
-                            stringCase: StringCase.upperCase,
-                          ),
-                          trailing: SFText(
-                            keyText: "0",
-                            style: TextStyles.lightWhite16,
-                          ),
-                        ),
-                      ),
-                    ],
+                  child: BlocBuilder<GlobalWalletCubit, GlobalWalletState>(
+                    builder: (context, state) {
+                      final tokenList = <TokenEntity>[];
+
+                      if (state is GlobalWalletStateLoaded) {
+                        tokenList.addAll(state.tokenList);
+                      }
+                      return Column(
+                        children: tokenList
+                            .map((e) => SFCard(
+                                  // onTap: () => Navigator.pushNamed(context, R.staking),
+                                  margin: const EdgeInsets.only(top: 8),
+                                  child: ListTile(
+                                    leading:  SFIcon(
+                                      e.icon,
+                                      width: 40,
+                                      height: 40,
+                                    ),
+                                    minLeadingWidth: 12,
+                                    title: SFText(
+                                        keyText: e.symbol.toUpperCase(),
+                                        style: TextStyles.lightWhite16,
+                                        stringCase: StringCase.upperCase),
+                                    trailing: SFText(
+                                      keyText: '${e.balance}',
+                                      style: TextStyles.lightWhite16,
+                                    ),
+                                  ),
+                                ))
+                            .toList(),
+                      );
+                    },
                   ),
                 ),
                 const SizedBox(height: 18.0),
@@ -130,7 +100,7 @@ class TabSpendingDetail extends StatelessWidget {
                 width: double.infinity,
                 onPressed: () {
                   Navigator.pushNamed(context, R.passcode,
-                      arguments: PasscodeArguments(route:  R.transfer));
+                      arguments: PasscodeArguments(route: R.transfer));
                 }),
           ),
         ],

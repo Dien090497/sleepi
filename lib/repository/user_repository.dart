@@ -9,7 +9,7 @@ abstract class IUserRepository {
 
   Future<Either<FailureMessage, List<ActiveCodeEntity>>> fetchActivationCodes();
 
-  Future<Either<FailureMessage, dynamic>> fetchBalanceSpending(String userID);
+  Future<Either<FailureMessage, List<TokenSpending>>> fetchBalanceSpending(String userID);
 
   Future<Either<FailureMessage, GlobalConfigResponse>> getGlobalConfig();
 
