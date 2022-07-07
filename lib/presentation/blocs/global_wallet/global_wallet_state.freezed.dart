@@ -21,9 +21,7 @@ mixin _$GlobalWalletState {
     required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function() empty,
-    required TResult Function(
-            WalletInfoEntity? walletInfoEntity, List<TokenEntity> tokenList)
-        loaded,
+    required TResult Function(List<TokenEntity> tokenList, bool loading) loaded,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -31,9 +29,7 @@ mixin _$GlobalWalletState {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function()? empty,
-    TResult Function(
-            WalletInfoEntity? walletInfoEntity, List<TokenEntity> tokenList)?
-        loaded,
+    TResult Function(List<TokenEntity> tokenList, bool loading)? loaded,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -41,9 +37,7 @@ mixin _$GlobalWalletState {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function()? empty,
-    TResult Function(
-            WalletInfoEntity? walletInfoEntity, List<TokenEntity> tokenList)?
-        loaded,
+    TResult Function(List<TokenEntity> tokenList, bool loading)? loaded,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -137,9 +131,7 @@ class _$GlobalWalletStateInitial implements GlobalWalletStateInitial {
     required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function() empty,
-    required TResult Function(
-            WalletInfoEntity? walletInfoEntity, List<TokenEntity> tokenList)
-        loaded,
+    required TResult Function(List<TokenEntity> tokenList, bool loading) loaded,
   }) {
     return initial();
   }
@@ -150,9 +142,7 @@ class _$GlobalWalletStateInitial implements GlobalWalletStateInitial {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function()? empty,
-    TResult Function(
-            WalletInfoEntity? walletInfoEntity, List<TokenEntity> tokenList)?
-        loaded,
+    TResult Function(List<TokenEntity> tokenList, bool loading)? loaded,
   }) {
     return initial?.call();
   }
@@ -163,9 +153,7 @@ class _$GlobalWalletStateInitial implements GlobalWalletStateInitial {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function()? empty,
-    TResult Function(
-            WalletInfoEntity? walletInfoEntity, List<TokenEntity> tokenList)?
-        loaded,
+    TResult Function(List<TokenEntity> tokenList, bool loading)? loaded,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -262,9 +250,7 @@ class _$GlobalWalletStateLoading implements GlobalWalletStateLoading {
     required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function() empty,
-    required TResult Function(
-            WalletInfoEntity? walletInfoEntity, List<TokenEntity> tokenList)
-        loaded,
+    required TResult Function(List<TokenEntity> tokenList, bool loading) loaded,
   }) {
     return loading();
   }
@@ -275,9 +261,7 @@ class _$GlobalWalletStateLoading implements GlobalWalletStateLoading {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function()? empty,
-    TResult Function(
-            WalletInfoEntity? walletInfoEntity, List<TokenEntity> tokenList)?
-        loaded,
+    TResult Function(List<TokenEntity> tokenList, bool loading)? loaded,
   }) {
     return loading?.call();
   }
@@ -288,9 +272,7 @@ class _$GlobalWalletStateLoading implements GlobalWalletStateLoading {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function()? empty,
-    TResult Function(
-            WalletInfoEntity? walletInfoEntity, List<TokenEntity> tokenList)?
-        loaded,
+    TResult Function(List<TokenEntity> tokenList, bool loading)? loaded,
     required TResult orElse(),
   }) {
     if (loading != null) {
@@ -386,9 +368,7 @@ class _$GlobalWalletStateEmpty implements GlobalWalletStateEmpty {
     required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function() empty,
-    required TResult Function(
-            WalletInfoEntity? walletInfoEntity, List<TokenEntity> tokenList)
-        loaded,
+    required TResult Function(List<TokenEntity> tokenList, bool loading) loaded,
   }) {
     return empty();
   }
@@ -399,9 +379,7 @@ class _$GlobalWalletStateEmpty implements GlobalWalletStateEmpty {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function()? empty,
-    TResult Function(
-            WalletInfoEntity? walletInfoEntity, List<TokenEntity> tokenList)?
-        loaded,
+    TResult Function(List<TokenEntity> tokenList, bool loading)? loaded,
   }) {
     return empty?.call();
   }
@@ -412,9 +390,7 @@ class _$GlobalWalletStateEmpty implements GlobalWalletStateEmpty {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function()? empty,
-    TResult Function(
-            WalletInfoEntity? walletInfoEntity, List<TokenEntity> tokenList)?
-        loaded,
+    TResult Function(List<TokenEntity> tokenList, bool loading)? loaded,
     required TResult orElse(),
   }) {
     if (empty != null) {
@@ -470,9 +446,7 @@ abstract class _$$GlobalWalletStateLoadedCopyWith<$Res> {
   factory _$$GlobalWalletStateLoadedCopyWith(_$GlobalWalletStateLoaded value,
           $Res Function(_$GlobalWalletStateLoaded) then) =
       __$$GlobalWalletStateLoadedCopyWithImpl<$Res>;
-  $Res call({WalletInfoEntity? walletInfoEntity, List<TokenEntity> tokenList});
-
-  $WalletInfoEntityCopyWith<$Res>? get walletInfoEntity;
+  $Res call({List<TokenEntity> tokenList, bool loading});
 }
 
 /// @nodoc
@@ -489,30 +463,19 @@ class __$$GlobalWalletStateLoadedCopyWithImpl<$Res>
 
   @override
   $Res call({
-    Object? walletInfoEntity = freezed,
     Object? tokenList = freezed,
+    Object? loading = freezed,
   }) {
     return _then(_$GlobalWalletStateLoaded(
-      walletInfoEntity: walletInfoEntity == freezed
-          ? _value.walletInfoEntity
-          : walletInfoEntity // ignore: cast_nullable_to_non_nullable
-              as WalletInfoEntity?,
       tokenList: tokenList == freezed
           ? _value._tokenList
           : tokenList // ignore: cast_nullable_to_non_nullable
               as List<TokenEntity>,
+      loading: loading == freezed
+          ? _value.loading
+          : loading // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
-  }
-
-  @override
-  $WalletInfoEntityCopyWith<$Res>? get walletInfoEntity {
-    if (_value.walletInfoEntity == null) {
-      return null;
-    }
-
-    return $WalletInfoEntityCopyWith<$Res>(_value.walletInfoEntity!, (value) {
-      return _then(_value.copyWith(walletInfoEntity: value));
-    });
   }
 }
 
@@ -520,12 +483,9 @@ class __$$GlobalWalletStateLoadedCopyWithImpl<$Res>
 
 class _$GlobalWalletStateLoaded implements GlobalWalletStateLoaded {
   const _$GlobalWalletStateLoaded(
-      {required this.walletInfoEntity,
-      required final List<TokenEntity> tokenList})
+      {required final List<TokenEntity> tokenList, required this.loading})
       : _tokenList = tokenList;
 
-  @override
-  final WalletInfoEntity? walletInfoEntity;
   final List<TokenEntity> _tokenList;
   @override
   List<TokenEntity> get tokenList {
@@ -534,8 +494,11 @@ class _$GlobalWalletStateLoaded implements GlobalWalletStateLoaded {
   }
 
   @override
+  final bool loading;
+
+  @override
   String toString() {
-    return 'GlobalWalletState.loaded(walletInfoEntity: $walletInfoEntity, tokenList: $tokenList)';
+    return 'GlobalWalletState.loaded(tokenList: $tokenList, loading: $loading)';
   }
 
   @override
@@ -544,16 +507,15 @@ class _$GlobalWalletStateLoaded implements GlobalWalletStateLoaded {
         (other.runtimeType == runtimeType &&
             other is _$GlobalWalletStateLoaded &&
             const DeepCollectionEquality()
-                .equals(other.walletInfoEntity, walletInfoEntity) &&
-            const DeepCollectionEquality()
-                .equals(other._tokenList, _tokenList));
+                .equals(other._tokenList, _tokenList) &&
+            const DeepCollectionEquality().equals(other.loading, loading));
   }
 
   @override
   int get hashCode => Object.hash(
       runtimeType,
-      const DeepCollectionEquality().hash(walletInfoEntity),
-      const DeepCollectionEquality().hash(_tokenList));
+      const DeepCollectionEquality().hash(_tokenList),
+      const DeepCollectionEquality().hash(loading));
 
   @JsonKey(ignore: true)
   @override
@@ -567,11 +529,9 @@ class _$GlobalWalletStateLoaded implements GlobalWalletStateLoaded {
     required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function() empty,
-    required TResult Function(
-            WalletInfoEntity? walletInfoEntity, List<TokenEntity> tokenList)
-        loaded,
+    required TResult Function(List<TokenEntity> tokenList, bool loading) loaded,
   }) {
-    return loaded(walletInfoEntity, tokenList);
+    return loaded(tokenList, this.loading);
   }
 
   @override
@@ -580,11 +540,9 @@ class _$GlobalWalletStateLoaded implements GlobalWalletStateLoaded {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function()? empty,
-    TResult Function(
-            WalletInfoEntity? walletInfoEntity, List<TokenEntity> tokenList)?
-        loaded,
+    TResult Function(List<TokenEntity> tokenList, bool loading)? loaded,
   }) {
-    return loaded?.call(walletInfoEntity, tokenList);
+    return loaded?.call(tokenList, this.loading);
   }
 
   @override
@@ -593,13 +551,11 @@ class _$GlobalWalletStateLoaded implements GlobalWalletStateLoaded {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function()? empty,
-    TResult Function(
-            WalletInfoEntity? walletInfoEntity, List<TokenEntity> tokenList)?
-        loaded,
+    TResult Function(List<TokenEntity> tokenList, bool loading)? loaded,
     required TResult orElse(),
   }) {
     if (loaded != null) {
-      return loaded(walletInfoEntity, tokenList);
+      return loaded(tokenList, this.loading);
     }
     return orElse();
   }
@@ -644,11 +600,11 @@ class _$GlobalWalletStateLoaded implements GlobalWalletStateLoaded {
 
 abstract class GlobalWalletStateLoaded implements GlobalWalletState {
   const factory GlobalWalletStateLoaded(
-      {required final WalletInfoEntity? walletInfoEntity,
-      required final List<TokenEntity> tokenList}) = _$GlobalWalletStateLoaded;
+      {required final List<TokenEntity> tokenList,
+      required final bool loading}) = _$GlobalWalletStateLoaded;
 
-  WalletInfoEntity? get walletInfoEntity => throw _privateConstructorUsedError;
   List<TokenEntity> get tokenList => throw _privateConstructorUsedError;
+  bool get loading => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
   _$$GlobalWalletStateLoadedCopyWith<_$GlobalWalletStateLoaded> get copyWith =>
       throw _privateConstructorUsedError;
