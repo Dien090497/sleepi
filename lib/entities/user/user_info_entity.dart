@@ -14,5 +14,6 @@ class UserInfoEntity with _$UserInfoEntity {
     required bool isAccountDisabled,
     required String createdAt,
     required String updatedAt,
+    String? wallet,
   }) = _UserInfoEntity;
 }
