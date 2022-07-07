@@ -422,5 +422,7 @@ abstract class  LocaleKeys {
   static const invalid_address = 'invalid_address';
   static const amount_input_can_not_be_zero = 'amount_input_can_not_be_zero';
   static const wallet_already = 'wallet_already';
+  static const insufficient_avax = 'insufficient_avax';
+  static const don_worry_transfer = 'don_worry_transfer';
 
 }
