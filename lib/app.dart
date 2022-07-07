@@ -21,14 +21,14 @@ class MyApp extends StatelessWidget {
       providers: [
         BlocProvider(create: (_) => BottomNavigationBloc()),
         BlocProvider(create: (_) => SplashCubit()..init()),
-        BlocProvider(create: (_) => GlobalWalletCubit()..init()),
+        BlocProvider(create: (_) => GlobalWalletCubit()),
         BlocProvider(create: (_) => UserBloc()),
       ],
       child: ScreenUtilInit(
         designSize: const Size(375, 812),
         builder: (_, child) {
           return MaterialApp(
-            key: Key(context.locale.languageCode),
+            // key: Key(context.locale.languageCode),
             title: 'SleeFi',
             home: child,
             localizationsDelegates: context.localizationDelegates,

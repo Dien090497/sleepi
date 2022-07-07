@@ -1,10 +1,8 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-// import 'package:flutter_translate/flutter_translate.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
-import 'package:slee_fi/presentation/blocs/market_place/market_place_cubit.dart';
 import 'package:tab_indicator_styler/tab_indicator_styler.dart';
 
 class SFSubTabBar extends TabBar {

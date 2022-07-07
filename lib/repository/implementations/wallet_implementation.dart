@@ -5,6 +5,7 @@ import 'package:dartz/dartz.dart';
 import 'package:injectable/injectable.dart';
 import 'package:slee_fi/common/const/const.dart';
 import 'package:slee_fi/common/enum/enum.dart';
+import 'package:slee_fi/common/extensions/string_x.dart';
 import 'package:slee_fi/datasources/local/get_storage_datasource.dart';
 import 'package:slee_fi/datasources/local/isar/isar_datasource.dart';
 import 'package:slee_fi/datasources/remote/network/web3_datasource.dart';
@@ -48,6 +49,8 @@ class WalletImplementation extends IWalletRepository {
         address: ethereumAddress.hex,
         derivedIndex: derivedIndex,
       );
+
+      'private key  $privateKey  \n seed phrase  ${model.address}'.log;
       final int walletId = await _isarDataSource.putWallet(model);
       model.id = walletId;
       await _getStorageDataSource.setCurrentWalletId(walletId);
@@ -166,8 +169,8 @@ class WalletImplementation extends IWalletRepository {
           break;
         }
         if (params.addressContract[i] == Const.tokens[0]['address']) {
-          var balance = await _web3DataSource
-              .getBalance(params.walletInfoEntity.address);
+          var balance =
+              await _web3DataSource.getBalance(params.walletInfoEntity.address);
           values.add(balance / BigInt.from(pow(10, 18)));
         } else {
           final erc20 = _web3DataSource.tokenFrom(params.addressContract[i]);
@@ -253,7 +256,7 @@ class WalletImplementation extends IWalletRepository {
       var walletId = _getStorageDataSource.getCurrentWalletId();
       var wallet = await _isarDataSource.getWalletAt(walletId);
       if (contractAddress == Const.tokens[0]['address']) {
-        balance =await _web3DataSource.getBalance(wallet!.address);
+        balance = await _web3DataSource.getBalance(wallet!.address);
         return Right(balance / BigInt.from(pow(10, 18)));
       } else {
         balance = await _web3DataSource.getBalanceOf(

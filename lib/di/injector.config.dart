@@ -53,6 +53,7 @@ import '../usecase/check_approve_usecase.dart' as _i46;
 import '../usecase/create_pass_code_usecase.dart' as _i78;
 import '../usecase/create_password_usecase.dart' as _i79;
 import '../usecase/current_user_usecase.dart' as _i80;
+import '../usecase/fetch_balance_spending_usecase.dart' as _i81;
 import '../usecase/get_amount_out_min_usecase.dart' as _i50;
 import '../usecase/get_balance_for_tokens_usecase.dart' as _i51;
 import '../usecase/get_balance_token_usecase.dart' as _i52;
@@ -86,7 +87,7 @@ import '../usecase/wallet/current_wallet_usecase.dart' as _i49;
 import '../usecase/wallet/first_open_wallet_session_usecase.dart' as _i47;
 import '../usecase/wallet/get_current_mnemonic_usecasse.dart' as _i53;
 import '../usecase/wallet/import_wallet_usecase.dart' as _i34;
-import 'register_module.dart' as _i81; // ignore_for_file: unnecessary_lambdas
+import 'register_module.dart' as _i82; // ignore_for_file: unnecessary_lambdas
 
 // ignore_for_file: lines_longer_than_80_chars
 /// initializes the registration of provided dependencies inside of [GetIt]
@@ -239,9 +240,11 @@ Future<_i1.GetIt> $initGetIt(_i1.GetIt get,
       () => _i79.CreatePasswordUseCase(get<_i58.IAuthRepository>()));
   gh.factory<_i80.CurrentUserUseCase>(
       () => _i80.CurrentUserUseCase(get<_i58.IAuthRepository>()));
+  gh.factory<_i81.FetchBalanceSpendingUseCase>(
+      () => _i81.FetchBalanceSpendingUseCase(get<_i62.IUserRepository>()));
   return get;
 }
 
 class _$RPCModule extends _i24.RPCModule {}
 
-class _$RegisterModule extends _i81.RegisterModule {}
+class _$RegisterModule extends _i82.RegisterModule {}
