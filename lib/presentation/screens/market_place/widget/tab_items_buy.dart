@@ -59,7 +59,7 @@ class TabItemsBuy extends StatelessWidget {
                       cubit: cubit,
                       context,
                       sections: {
-                        LocaleKeys.type: [
+                        LocaleKeys.type.tr(): [
                           LocaleKeys.efficiency.tr(),
                           LocaleKeys.luck.tr(),
                           LocaleKeys.resilience.tr(),
@@ -67,7 +67,7 @@ class TabItemsBuy extends StatelessWidget {
                         ],
                       },
                       sliders: {
-                        LocaleKeys.level: const FilterSliderValues(
+                        LocaleKeys.level.tr(): const FilterSliderValues(
                             max: 5, min: 1, interval: 2),
                       },
                     );

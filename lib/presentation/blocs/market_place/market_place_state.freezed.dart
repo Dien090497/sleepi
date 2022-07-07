@@ -20,6 +20,7 @@ mixin _$MarketPlaceState {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
+    required TResult Function() loadingMore,
     required TResult Function(ListMarketPlaceModel list) success,
     required TResult Function(String msg) fail,
   }) =>
@@ -28,6 +29,7 @@ mixin _$MarketPlaceState {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
+    TResult Function()? loadingMore,
     TResult Function(ListMarketPlaceModel list)? success,
     TResult Function(String msg)? fail,
   }) =>
@@ -36,6 +38,7 @@ mixin _$MarketPlaceState {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
+    TResult Function()? loadingMore,
     TResult Function(ListMarketPlaceModel list)? success,
     TResult Function(String msg)? fail,
     required TResult orElse(),
@@ -45,6 +48,7 @@ mixin _$MarketPlaceState {
   TResult map<TResult extends Object?>({
     required TResult Function(MarketPlaceStateInit value) initial,
     required TResult Function(MarketPlaceStateLoading value) loading,
+    required TResult Function(MarketPlaceStateLoadingMore value) loadingMore,
     required TResult Function(MarketPlaceStateSuccess value) success,
     required TResult Function(MarketPlaceStateFailed value) fail,
   }) =>
@@ -53,6 +57,7 @@ mixin _$MarketPlaceState {
   TResult? mapOrNull<TResult extends Object?>({
     TResult Function(MarketPlaceStateInit value)? initial,
     TResult Function(MarketPlaceStateLoading value)? loading,
+    TResult Function(MarketPlaceStateLoadingMore value)? loadingMore,
     TResult Function(MarketPlaceStateSuccess value)? success,
     TResult Function(MarketPlaceStateFailed value)? fail,
   }) =>
@@ -61,6 +66,7 @@ mixin _$MarketPlaceState {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(MarketPlaceStateInit value)? initial,
     TResult Function(MarketPlaceStateLoading value)? loading,
+    TResult Function(MarketPlaceStateLoadingMore value)? loadingMore,
     TResult Function(MarketPlaceStateSuccess value)? success,
     TResult Function(MarketPlaceStateFailed value)? fail,
     required TResult orElse(),
@@ -128,6 +134,7 @@ class _$MarketPlaceStateInit implements MarketPlaceStateInit {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
+    required TResult Function() loadingMore,
     required TResult Function(ListMarketPlaceModel list) success,
     required TResult Function(String msg) fail,
   }) {
@@ -139,6 +146,7 @@ class _$MarketPlaceStateInit implements MarketPlaceStateInit {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
+    TResult Function()? loadingMore,
     TResult Function(ListMarketPlaceModel list)? success,
     TResult Function(String msg)? fail,
   }) {
@@ -150,6 +158,7 @@ class _$MarketPlaceStateInit implements MarketPlaceStateInit {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
+    TResult Function()? loadingMore,
     TResult Function(ListMarketPlaceModel list)? success,
     TResult Function(String msg)? fail,
     required TResult orElse(),
@@ -165,6 +174,7 @@ class _$MarketPlaceStateInit implements MarketPlaceStateInit {
   TResult map<TResult extends Object?>({
     required TResult Function(MarketPlaceStateInit value) initial,
     required TResult Function(MarketPlaceStateLoading value) loading,
+    required TResult Function(MarketPlaceStateLoadingMore value) loadingMore,
     required TResult Function(MarketPlaceStateSuccess value) success,
     required TResult Function(MarketPlaceStateFailed value) fail,
   }) {
@@ -176,6 +186,7 @@ class _$MarketPlaceStateInit implements MarketPlaceStateInit {
   TResult? mapOrNull<TResult extends Object?>({
     TResult Function(MarketPlaceStateInit value)? initial,
     TResult Function(MarketPlaceStateLoading value)? loading,
+    TResult Function(MarketPlaceStateLoadingMore value)? loadingMore,
     TResult Function(MarketPlaceStateSuccess value)? success,
     TResult Function(MarketPlaceStateFailed value)? fail,
   }) {
@@ -187,6 +198,7 @@ class _$MarketPlaceStateInit implements MarketPlaceStateInit {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(MarketPlaceStateInit value)? initial,
     TResult Function(MarketPlaceStateLoading value)? loading,
+    TResult Function(MarketPlaceStateLoadingMore value)? loadingMore,
     TResult Function(MarketPlaceStateSuccess value)? success,
     TResult Function(MarketPlaceStateFailed value)? fail,
     required TResult orElse(),
@@ -247,6 +259,7 @@ class _$MarketPlaceStateLoading implements MarketPlaceStateLoading {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
+    required TResult Function() loadingMore,
     required TResult Function(ListMarketPlaceModel list) success,
     required TResult Function(String msg) fail,
   }) {
@@ -258,6 +271,7 @@ class _$MarketPlaceStateLoading implements MarketPlaceStateLoading {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
+    TResult Function()? loadingMore,
     TResult Function(ListMarketPlaceModel list)? success,
     TResult Function(String msg)? fail,
   }) {
@@ -269,6 +283,7 @@ class _$MarketPlaceStateLoading implements MarketPlaceStateLoading {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
+    TResult Function()? loadingMore,
     TResult Function(ListMarketPlaceModel list)? success,
     TResult Function(String msg)? fail,
     required TResult orElse(),
@@ -284,6 +299,7 @@ class _$MarketPlaceStateLoading implements MarketPlaceStateLoading {
   TResult map<TResult extends Object?>({
     required TResult Function(MarketPlaceStateInit value) initial,
     required TResult Function(MarketPlaceStateLoading value) loading,
+    required TResult Function(MarketPlaceStateLoadingMore value) loadingMore,
     required TResult Function(MarketPlaceStateSuccess value) success,
     required TResult Function(MarketPlaceStateFailed value) fail,
   }) {
@@ -295,6 +311,7 @@ class _$MarketPlaceStateLoading implements MarketPlaceStateLoading {
   TResult? mapOrNull<TResult extends Object?>({
     TResult Function(MarketPlaceStateInit value)? initial,
     TResult Function(MarketPlaceStateLoading value)? loading,
+    TResult Function(MarketPlaceStateLoadingMore value)? loadingMore,
     TResult Function(MarketPlaceStateSuccess value)? success,
     TResult Function(MarketPlaceStateFailed value)? fail,
   }) {
@@ -306,6 +323,7 @@ class _$MarketPlaceStateLoading implements MarketPlaceStateLoading {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(MarketPlaceStateInit value)? initial,
     TResult Function(MarketPlaceStateLoading value)? loading,
+    TResult Function(MarketPlaceStateLoadingMore value)? loadingMore,
     TResult Function(MarketPlaceStateSuccess value)? success,
     TResult Function(MarketPlaceStateFailed value)? fail,
     required TResult orElse(),
@@ -319,6 +337,133 @@ class _$MarketPlaceStateLoading implements MarketPlaceStateLoading {
 
 abstract class MarketPlaceStateLoading implements MarketPlaceState {
   const factory MarketPlaceStateLoading() = _$MarketPlaceStateLoading;
+}
+
+/// @nodoc
+abstract class _$$MarketPlaceStateLoadingMoreCopyWith<$Res> {
+  factory _$$MarketPlaceStateLoadingMoreCopyWith(
+          _$MarketPlaceStateLoadingMore value,
+          $Res Function(_$MarketPlaceStateLoadingMore) then) =
+      __$$MarketPlaceStateLoadingMoreCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$MarketPlaceStateLoadingMoreCopyWithImpl<$Res>
+    extends _$MarketPlaceStateCopyWithImpl<$Res>
+    implements _$$MarketPlaceStateLoadingMoreCopyWith<$Res> {
+  __$$MarketPlaceStateLoadingMoreCopyWithImpl(
+      _$MarketPlaceStateLoadingMore _value,
+      $Res Function(_$MarketPlaceStateLoadingMore) _then)
+      : super(_value, (v) => _then(v as _$MarketPlaceStateLoadingMore));
+
+  @override
+  _$MarketPlaceStateLoadingMore get _value =>
+      super._value as _$MarketPlaceStateLoadingMore;
+}
+
+/// @nodoc
+
+class _$MarketPlaceStateLoadingMore implements MarketPlaceStateLoadingMore {
+  const _$MarketPlaceStateLoadingMore();
+
+  @override
+  String toString() {
+    return 'MarketPlaceState.loadingMore()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$MarketPlaceStateLoadingMore);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function() loading,
+    required TResult Function() loadingMore,
+    required TResult Function(ListMarketPlaceModel list) success,
+    required TResult Function(String msg) fail,
+  }) {
+    return loadingMore();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function()? loading,
+    TResult Function()? loadingMore,
+    TResult Function(ListMarketPlaceModel list)? success,
+    TResult Function(String msg)? fail,
+  }) {
+    return loadingMore?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function()? loading,
+    TResult Function()? loadingMore,
+    TResult Function(ListMarketPlaceModel list)? success,
+    TResult Function(String msg)? fail,
+    required TResult orElse(),
+  }) {
+    if (loadingMore != null) {
+      return loadingMore();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(MarketPlaceStateInit value) initial,
+    required TResult Function(MarketPlaceStateLoading value) loading,
+    required TResult Function(MarketPlaceStateLoadingMore value) loadingMore,
+    required TResult Function(MarketPlaceStateSuccess value) success,
+    required TResult Function(MarketPlaceStateFailed value) fail,
+  }) {
+    return loadingMore(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(MarketPlaceStateInit value)? initial,
+    TResult Function(MarketPlaceStateLoading value)? loading,
+    TResult Function(MarketPlaceStateLoadingMore value)? loadingMore,
+    TResult Function(MarketPlaceStateSuccess value)? success,
+    TResult Function(MarketPlaceStateFailed value)? fail,
+  }) {
+    return loadingMore?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(MarketPlaceStateInit value)? initial,
+    TResult Function(MarketPlaceStateLoading value)? loading,
+    TResult Function(MarketPlaceStateLoadingMore value)? loadingMore,
+    TResult Function(MarketPlaceStateSuccess value)? success,
+    TResult Function(MarketPlaceStateFailed value)? fail,
+    required TResult orElse(),
+  }) {
+    if (loadingMore != null) {
+      return loadingMore(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class MarketPlaceStateLoadingMore implements MarketPlaceState {
+  const factory MarketPlaceStateLoadingMore() = _$MarketPlaceStateLoadingMore;
 }
 
 /// @nodoc
@@ -390,6 +535,7 @@ class _$MarketPlaceStateSuccess implements MarketPlaceStateSuccess {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
+    required TResult Function() loadingMore,
     required TResult Function(ListMarketPlaceModel list) success,
     required TResult Function(String msg) fail,
   }) {
@@ -401,6 +547,7 @@ class _$MarketPlaceStateSuccess implements MarketPlaceStateSuccess {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
+    TResult Function()? loadingMore,
     TResult Function(ListMarketPlaceModel list)? success,
     TResult Function(String msg)? fail,
   }) {
@@ -412,6 +559,7 @@ class _$MarketPlaceStateSuccess implements MarketPlaceStateSuccess {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
+    TResult Function()? loadingMore,
     TResult Function(ListMarketPlaceModel list)? success,
     TResult Function(String msg)? fail,
     required TResult orElse(),
@@ -427,6 +575,7 @@ class _$MarketPlaceStateSuccess implements MarketPlaceStateSuccess {
   TResult map<TResult extends Object?>({
     required TResult Function(MarketPlaceStateInit value) initial,
     required TResult Function(MarketPlaceStateLoading value) loading,
+    required TResult Function(MarketPlaceStateLoadingMore value) loadingMore,
     required TResult Function(MarketPlaceStateSuccess value) success,
     required TResult Function(MarketPlaceStateFailed value) fail,
   }) {
@@ -438,6 +587,7 @@ class _$MarketPlaceStateSuccess implements MarketPlaceStateSuccess {
   TResult? mapOrNull<TResult extends Object?>({
     TResult Function(MarketPlaceStateInit value)? initial,
     TResult Function(MarketPlaceStateLoading value)? loading,
+    TResult Function(MarketPlaceStateLoadingMore value)? loadingMore,
     TResult Function(MarketPlaceStateSuccess value)? success,
     TResult Function(MarketPlaceStateFailed value)? fail,
   }) {
@@ -449,6 +599,7 @@ class _$MarketPlaceStateSuccess implements MarketPlaceStateSuccess {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(MarketPlaceStateInit value)? initial,
     TResult Function(MarketPlaceStateLoading value)? loading,
+    TResult Function(MarketPlaceStateLoadingMore value)? loadingMore,
     TResult Function(MarketPlaceStateSuccess value)? success,
     TResult Function(MarketPlaceStateFailed value)? fail,
     required TResult orElse(),
@@ -539,6 +690,7 @@ class _$MarketPlaceStateFailed implements MarketPlaceStateFailed {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
+    required TResult Function() loadingMore,
     required TResult Function(ListMarketPlaceModel list) success,
     required TResult Function(String msg) fail,
   }) {
@@ -550,6 +702,7 @@ class _$MarketPlaceStateFailed implements MarketPlaceStateFailed {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
+    TResult Function()? loadingMore,
     TResult Function(ListMarketPlaceModel list)? success,
     TResult Function(String msg)? fail,
   }) {
@@ -561,6 +714,7 @@ class _$MarketPlaceStateFailed implements MarketPlaceStateFailed {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
+    TResult Function()? loadingMore,
     TResult Function(ListMarketPlaceModel list)? success,
     TResult Function(String msg)? fail,
     required TResult orElse(),
@@ -576,6 +730,7 @@ class _$MarketPlaceStateFailed implements MarketPlaceStateFailed {
   TResult map<TResult extends Object?>({
     required TResult Function(MarketPlaceStateInit value) initial,
     required TResult Function(MarketPlaceStateLoading value) loading,
+    required TResult Function(MarketPlaceStateLoadingMore value) loadingMore,
     required TResult Function(MarketPlaceStateSuccess value) success,
     required TResult Function(MarketPlaceStateFailed value) fail,
   }) {
@@ -587,6 +742,7 @@ class _$MarketPlaceStateFailed implements MarketPlaceStateFailed {
   TResult? mapOrNull<TResult extends Object?>({
     TResult Function(MarketPlaceStateInit value)? initial,
     TResult Function(MarketPlaceStateLoading value)? loading,
+    TResult Function(MarketPlaceStateLoadingMore value)? loadingMore,
     TResult Function(MarketPlaceStateSuccess value)? success,
     TResult Function(MarketPlaceStateFailed value)? fail,
   }) {
@@ -598,6 +754,7 @@ class _$MarketPlaceStateFailed implements MarketPlaceStateFailed {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(MarketPlaceStateInit value)? initial,
     TResult Function(MarketPlaceStateLoading value)? loading,
+    TResult Function(MarketPlaceStateLoadingMore value)? loadingMore,
     TResult Function(MarketPlaceStateSuccess value)? success,
     TResult Function(MarketPlaceStateFailed value)? fail,
     required TResult orElse(),

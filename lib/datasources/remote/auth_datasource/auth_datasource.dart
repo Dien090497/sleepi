@@ -19,6 +19,7 @@ import 'package:slee_fi/models/users_response/users_response.dart';
 import 'package:slee_fi/schema/buy_nft_schema/buy_nft_schema.dart';
 import 'package:slee_fi/schema/change_password_schema/change_password_schema.dart';
 import 'package:slee_fi/schema/create_password_schema/create_password_schema.dart';
+import 'package:slee_fi/schema/market/market_schema.dart';
 import 'package:slee_fi/schema/refresh_token_schema/refresh_token_schema.dart';
 import 'package:slee_fi/schema/sign_in_schema/sign_in_schema.dart';
 import 'package:slee_fi/schema/sign_up_schema/sign_up_schema.dart';
@@ -109,15 +110,9 @@ abstract class AuthDataSource {
   @POST('/market-place/buy-nft')
   Future<dynamic> buyNFT(@Body() BuyNFTSchema buyNFTSchema);
 
-  @GET('/market-place')
-  Future<ListMarketPlaceModel> getMarketPlace(
-      @Query('categoryId') int categoryId,
-      @Query('sortPrice') String? sortPrice,
-      @Query('type') String? type,
-      @Query('level') int? level,
-      @Query('classNft') String? classNft,
-      @Query('quality') String? quality);
+  @POST('/market-place')
+  Future<ListMarketPlaceModel> getMarketPlace(@Body() MarketSchema entity);
 
-  @GET('/category')
+  @GET('/market-place/buy-nft')
   Future<MarketPlaceModel> getCategory();
 }

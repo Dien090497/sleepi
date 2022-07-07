@@ -2,13 +2,17 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'market_entity.freezed.dart';
 
+
 @freezed
 class MarketEntity with _$MarketEntity {
   const factory MarketEntity(
-      {required int categoryId,
+      { int? page,
+      int? limit,
+      required int categoryId,
       String? sortPrice,
-      String? type,
+      List<String>? type,
       int? level,
-      String? classNft,
-      String? quality}) = _MarketEntity;
+      int? bedMint,
+      List<String>? classNft,
+      List<String>? quality,}) = _MarketEntity;
 }

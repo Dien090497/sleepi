@@ -332,23 +332,15 @@ class _AuthDataSource implements AuthDataSource {
   }
 
   @override
-  Future<ListMarketPlaceModel> getMarketPlace(
-      categoryId, sortPrice, type, level, classNft, quality) async {
+  Future<ListMarketPlaceModel> getMarketPlace(entity) async {
     const _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{
-      r'categoryId': categoryId,
-      r'sortPrice': sortPrice,
-      r'type': type,
-      r'level': level,
-      r'classNft': classNft,
-      r'quality': quality
-    };
-    queryParameters.removeWhere((k, v) => v == null);
+    final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
+    _data.addAll(entity.toJson());
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<ListMarketPlaceModel>(
-            Options(method: 'GET', headers: _headers, extra: _extra)
+            Options(method: 'POST', headers: _headers, extra: _extra)
                 .compose(_dio.options, '/market-place',
                     queryParameters: queryParameters, data: _data)
                 .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
@@ -365,7 +357,7 @@ class _AuthDataSource implements AuthDataSource {
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<MarketPlaceModel>(
             Options(method: 'GET', headers: _headers, extra: _extra)
-                .compose(_dio.options, '/category',
+                .compose(_dio.options, '/market-place/buy-nft',
                     queryParameters: queryParameters, data: _data)
                 .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
     final value = MarketPlaceModel.fromJson(_result.data!);

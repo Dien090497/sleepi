@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -83,9 +85,9 @@ class TabBedsBuy extends StatelessWidget {
                         ],
                       },
                       sliders: {
-                        LocaleKeys.level: const FilterSliderValues(
+                        LocaleKeys.level.tr(): const FilterSliderValues(
                             max: 50, min: 1, interval: 49),
-                        LocaleKeys.mint:
+                        LocaleKeys.mint.tr():
                             const FilterSliderValues(max: 7, min: 0),
                       },
                     );
