@@ -4,6 +4,10 @@ import 'package:jiffy/jiffy.dart';
 // ignore_for_file: non_constant_identifier_names
 @Injectable()
 class DateTimeUtils {
+  String ddMMyyyyHHmm(DateTime time) {
+    return Jiffy(time).format("dd/MM/yyyy HH:mm");
+  }
+
   String MMMdyyyy(DateTime time) {
     return Jiffy(time).format("MMM do, yyyy");
   }

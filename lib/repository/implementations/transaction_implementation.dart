@@ -3,9 +3,11 @@ import 'dart:math';
 import 'package:dartz/dartz.dart';
 import 'package:injectable/injectable.dart';
 import 'package:slee_fi/datasources/local/get_storage_datasource.dart';
+import 'package:slee_fi/datasources/local/history_datasource.dart';
 import 'package:slee_fi/datasources/local/isar/isar_datasource.dart';
 import 'package:slee_fi/datasources/remote/network/web3_datasource.dart';
 import 'package:slee_fi/failures/failure.dart';
+import 'package:slee_fi/models/isar_models/history_isar/history_isar_model.dart';
 import 'package:slee_fi/models/isar_models/network_isar/network_isar_model.dart';
 import 'package:slee_fi/repository/transaction_repository.dart';
 import 'package:slee_fi/usecase/send_to_external_usecase.dart';
@@ -17,21 +19,18 @@ class TransactionImplementation extends ITransactionRepository{
   final Web3DataSource _web3DataSource;
   final GetStorageDataSource _getStorageDataSource;
   final IsarDataSource _isarDataSource;
+  final HistoryDataSource _historyDataSource;
 
-  TransactionImplementation(this._web3DataSource, this._getStorageDataSource, this._isarDataSource);
+  TransactionImplementation(this._web3DataSource, this._getStorageDataSource, this._isarDataSource, this._historyDataSource);
 
   Future<NetworkIsarModel> _getCurrentNetwork() async {
     final chainId = _getStorageDataSource.getCurrentChainId();
     return (await _isarDataSource.getNetworkAt(chainId!))!;
   }
 
-  Future<TransactionInformation> _getDetailTransaction(String transactionHash) async {
-    return await _web3DataSource.getDetailTransaction(transactionHash);
-  }
-
   @override
-  Future<Either<Failure, String>> sendToExternal(SendToExternalParams params) async{
-    try {
+  Future<Either<Failure, bool>> sendToExternal(SendToExternalParams params) async{
+    try{
       final chainId = _getStorageDataSource.getCurrentChainId();
       var walletId = _getStorageDataSource.getCurrentWalletId();
       var wallet = await _isarDataSource.getWalletAt(walletId);
@@ -45,24 +44,22 @@ class TransactionImplementation extends ITransactionRepository{
           wallet.mnemonic, wallet.derivedIndex!, network.slip44);
       final credentials = _web3DataSource.credentialsFromPrivateKey(privateKey);
 
-     String result = await _web3DataSource.sendCoinTxn(
+      final result = await _web3DataSource.sendCoinTxn(
           credentials: credentials,
           to: params.contractAddressTo,
           valueInEther: params.valueInEther ?? 0.0,
           chainId: chainId);
 
-      print('---------------------');
-      print(result);
-      print('---------------------');
 
-      var detail = await _getDetailTransaction("0xfafa1011bbe16f103daba35bfa291ab11dec89085f406d13a877a934d5c06c7d");
-      print('+++++++++++++++++++++');
-      print( detail);
-      // final model = TransactionIsarModel(
-      //   toAddress: params.toAddress,
-      //   valueInEther: params.valueInEther,
-      // );
-      return Right(result);
+      if(result.isNotEmpty){
+        final model = HistoryIsarModel(
+          transactionHash: result,
+          chainId: chainId!,
+          addressTo: params.contractAddressTo,
+        );
+        await _historyDataSource.putHistory(model);
+      }
+      return const Right(true);
     } catch (e) {
       return Left(FailureMessage('$e'));
     }

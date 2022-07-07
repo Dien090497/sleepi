@@ -1,6 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:slee_fi/common/const/const.dart';
 import 'package:slee_fi/common/extensions/num_ext.dart';
 import 'package:slee_fi/common/routes/app_routes.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
@@ -14,6 +15,7 @@ import 'package:slee_fi/presentation/blocs/wallet/wallet_cubit.dart';
 import 'package:slee_fi/presentation/screens/nft_detail_screen/nft_detail_screen.dart';
 import 'package:slee_fi/presentation/screens/wallet/layouts/transaction_detail_screen.dart';
 import 'package:slee_fi/resources/resources.dart';
+import 'package:slee_fi/usecase/get_history_transaction_usecase.dart';
 
 class WalletDetailList extends StatelessWidget {
   WalletDetailList({
@@ -73,6 +75,7 @@ class WalletDetailList extends StatelessWidget {
                               img: icons[index],
                               title: keyList[index],
                               tokenEntity: tokenList[index],
+                              typeHistory: HistoryTransactionParams(typeHistory: index == 2 ? Const.listTypeHistory.elementAt(0) : Const.listTypeHistory.elementAt(1), tokenSymbol: tokenList[index].symbol)
                             ));
                       }
                     },
@@ -108,9 +111,10 @@ class WalletDetailList extends StatelessWidget {
                       if (index < 4) {
                         Navigator.pushNamed(context, R.transactionDetail,
                             arguments: TransactionDetailArguments(
-                              title: tokenList[index].displayName,
-                              img: tokenList[index].icon,
-                              tokenEntity: tokenList[index],
+                                title: tokenList[index].displayName,
+                                img: tokenList[index].icon,
+                                tokenEntity: tokenList[index],
+                                typeHistory: HistoryTransactionParams(typeHistory: index == 2 ? Const.listTypeHistory.elementAt(0) : Const.listTypeHistory.elementAt(1), tokenSymbol: tokenList[index].symbol)
                             ));
                       } else {
                         Navigator.pushNamed(context, R.nftDetail,

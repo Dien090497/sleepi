@@ -1,6 +1,5 @@
 import 'package:isar/isar.dart';
 import 'package:slee_fi/entities/history/history_entity.dart';
-import 'package:web3dart/web3dart.dart';
 
 part 'history_isar_model.g.dart';
 
@@ -14,13 +13,28 @@ class HistoryIsarModel {
 
   final int chainId;
 
-  final TransactionInformation? transactionInformation;
+  // final BlockNum? blockNumber;
+  //
+  // final EthereumAddress? from;
+  //
+  // final int gas;
+  //
+  // final EtherAmount? gasPrice;
+  //
+  // final String hash;
+  //
+  // final int nonce;
+  //
+  // final EthereumAddress? to;
+  //
+  // int? transactionIndex;
+  //
+  // final EtherAmount? value;
 
   HistoryIsarModel({
     required this.transactionHash,
     required this.chainId,
     required this.addressTo,
-    this.transactionInformation,
   });
 
   HistoryEntity toEntity() {
@@ -29,7 +43,15 @@ class HistoryIsarModel {
       transactionHash: transactionHash,
       chainId: chainId,
       addressToken: addressTo,
-      transactionInformation: transactionInformation!
+      // gas: gas,
+      // gasPrice: gasPrice,
+      // value: value,
+      // blockNumber: blockNumber,
+      // from: from,
+      // hash: hash,
+      // nonce: nonce,
+      // to: to,
+      // transactionIndex: transactionIndex
     );
   }
 }

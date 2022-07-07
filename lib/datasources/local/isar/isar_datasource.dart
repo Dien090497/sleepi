@@ -4,7 +4,6 @@ import 'package:dartz/dartz.dart';
 import 'package:flutter/services.dart';
 import 'package:injectable/injectable.dart';
 import 'package:isar/isar.dart';
-import 'package:slee_fi/models/isar_models/history_isar/history_isar_model.dart';
 import 'package:slee_fi/models/isar_models/native_currency_isar/native_currency_isar_model.dart';
 import 'package:slee_fi/models/isar_models/network_isar/network_isar_model.dart';
 import 'package:slee_fi/models/isar_models/token_default_isar/token_default_model.dart';
@@ -142,46 +141,6 @@ class IsarDataSource {
           .map((e) => cast(e.load())));
     });
   }
-
-  ///
-  /// For History
-  ///
-  Future<int> putHistory(HistoryIsarModel model) {
-    return _isar.writeTxn((isar) => isar.history.put(model));
-  }
-
-  Future<HistoryIsarModel?> getHistoryAt(int chainId) =>
-      _isar.history.get(chainId);
-
-  Future<int?> historyCount() => _isar.history.count();
-
-  Future<List<HistoryIsarModel>> getAllHistory() async {
-    final result = await _isar.history.where().findAll();
-    for (final e in result) {
-      await Future.wait([
-        // e.addressToken.save(),
-        // e.chainId.save(),
-        // e.transactionInformation.save(),
-        // e.transactionHash.save(),
-      ]);
-    }
-    return result;
-  }
-
-  Future<List<int>> putAllHistory(List<HistoryIsarModel> history) =>
-      _isar.writeTxn((isar) async {
-        final ids = await isar.history.putAll(history);
-        for (final e in history) {
-          await Future.wait([
-            // e.chainId.save(),
-            // e.ens.save(),
-            // e.explorers.save(),
-            // e.tokenDefault.save()
-          ]);
-        }
-        return ids;
-      });
-
 
   ///
   /// For Native Currency

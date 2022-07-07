@@ -12,13 +12,13 @@ class SendToExternalParams {
 }
 
 
-class SendToExternalUseCase extends UseCase<String, SendToExternalParams> {
+class SendToExternalUseCase extends UseCase<bool, SendToExternalParams> {
   final ITransactionRepository _iTransactionRepository;
 
   SendToExternalUseCase(this._iTransactionRepository);
 
   @override
-  Future<Either<Failure, String>> call(SendToExternalParams params) {
+  Future<Either<Failure, bool>> call(SendToExternalParams params) {
     return _iTransactionRepository.sendToExternal(params);
   }
 

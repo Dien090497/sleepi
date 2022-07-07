@@ -20,4 +20,11 @@ void main() {
     final res =
         await nftApi.getListNft(tokenIds: '11,12,13', nftType: NftType.beds);
   });
+
+  // test('History Avax', () async {
+  //   final TransactionRemoteDataSource historyDataSource = TransactionRemoteDataSource(Dio());
+  //
+  //   final res =
+  //   await historyDataSource.getHistoryAvax();
+  // });
 }

@@ -1,5 +1,4 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:web3dart/web3dart.dart';
 
 part 'history_entity.freezed.dart';
 
@@ -9,6 +8,14 @@ class HistoryEntity with _$HistoryEntity {
     required String? transactionHash,
     required int chainId,
     required String addressToken,
-    required TransactionInformation transactionInformation,
+    //  EtherAmount? value,
+    //  BlockNum? blockNumber,
+    //  EthereumAddress? from,
+    // required int gas,
+    //  EtherAmount? gasPrice,
+    // required String hash,
+    // required int nonce,
+    // EthereumAddress? to,
+    // int? transactionIndex,
   }) = _HistoryEntity;
 }

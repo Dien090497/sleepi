@@ -9,6 +9,8 @@ class Const {
   /// GWei
   static const double gasPrice = 1.5;
 
+  static const String snowTraceMainNetUrl = 'https://snowtrace.io/';
+  static const String snowTraceTestNetUrl = 'https://testnet.snowtrace.io/';
   static const String sleeFiUrl = 'https://sleefi.com';
   static const String howToPlayUrl = 'https://sleefi.com/how-to-play';
   static const String linkTreeUrl = 'https://linktr.ee/sleefi';
@@ -104,6 +106,12 @@ class Const {
     '0x198a7b705B833eB24f6A27F1ee96b385A49B8a4b',
     '0x21AD1AE2f45e72cC92E1f3B74c184F8De2e2DBa6',
     '',
+  ];
+
+  static const listTypeHistory = [
+    'txlist',
+    'tokentx',
+    'tokennfttx',
   ];
 
   static const listNFTAddressesMainNet = [
