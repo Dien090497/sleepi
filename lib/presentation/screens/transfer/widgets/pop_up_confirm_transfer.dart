@@ -6,26 +6,29 @@ import 'package:slee_fi/common/widgets/sf_buttons.dart';
 import 'package:slee_fi/common/widgets/sf_card.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
 import 'package:slee_fi/l10n/locale_keys.g.dart';
-import 'package:slee_fi/presentation/blocs/transfer_spending/transfer_spending.dart';
+import 'package:slee_fi/presentation/blocs/transfer_spending/transfer_cubit.dart';
 import 'package:slee_fi/presentation/blocs/user_bloc/user_bloc.dart';
 import 'package:slee_fi/presentation/blocs/user_bloc/user_state.dart';
 
 class PopUpConfirmTransfer extends StatelessWidget {
-  const PopUpConfirmTransfer(
-      {Key? key,
-        required this.fee,
-        required this.cubit,
-        required this.amount,
-        required this.tokenName,
-        required this.contractAddress,
-      })
-      : super(key: key);
+  const PopUpConfirmTransfer({
+    Key? key,
+    required this.fee,
+    required this.cubit,
+    required this.amount,
+    required this.tokenName,
+    required this.contractAddress,
+    required this.spendingToWallet,
+    required this.onTranferToMainWallet,
+  }) : super(key: key);
 
   final double fee;
-  final TransferSpendingCubit cubit;
+  final TransferCubit cubit;
   final double amount;
   final String tokenName;
   final String contractAddress;
+  final bool spendingToWallet;
+  final Function() onTranferToMainWallet;
 
   @override
   Widget build(BuildContext context) {
@@ -37,9 +40,7 @@ class PopUpConfirmTransfer extends StatelessWidget {
             keyText: LocaleKeys.confirm_transfer,
             style: TextStyles.bold18LightWhite,
           ),
-          const SizedBox(
-            height: 24,
-          ),
+          const SizedBox(height: 24),
           SFCard(
             padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 18),
             child: Row(
@@ -52,11 +53,11 @@ class PopUpConfirmTransfer extends StatelessWidget {
                         keyText: LocaleKeys.from,
                         style: TextStyles.lightGrey12,
                       ),
-                      const SizedBox(
-                        height: 12.0,
-                      ),
+                      const SizedBox(height: 12.0),
                       SFText(
-                        keyText: LocaleKeys.wallet,
+                        keyText: spendingToWallet
+                            ? LocaleKeys.spending
+                            : LocaleKeys.wallet,
                         style: TextStyles.bold18White,
                       ),
                     ],
@@ -70,11 +71,11 @@ class PopUpConfirmTransfer extends StatelessWidget {
                         keyText: LocaleKeys.to,
                         style: TextStyles.lightGrey12,
                       ),
-                      const SizedBox(
-                        height: 12.0,
-                      ),
+                      const SizedBox(height: 12.0),
                       SFText(
-                        keyText: LocaleKeys.spending,
+                        keyText: spendingToWallet
+                            ? LocaleKeys.wallet
+                            : LocaleKeys.spending,
                         style: TextStyles.bold18White,
                       ),
                     ],
@@ -95,7 +96,7 @@ class PopUpConfirmTransfer extends StatelessWidget {
               ),
               Expanded(
                   child: SFText(
-                      keyText: "$fee AVAX",
+                      keyText: "$fee ${tokenName.toUpperCase()}",
                       style: TextStyles.lightWhite16,
                       textAlign: TextAlign.end)),
             ],
@@ -147,8 +148,15 @@ class PopUpConfirmTransfer extends StatelessWidget {
                         gradient: AppColors.gradientBlueButton,
                         onPressed: () {
                           Navigator.pop(context);
+                          if (spendingToWallet) {
+                            onTranferToMainWallet();
+                            return;
+                          }
                           //showSuccessfulDialog(context, null);
-                          cubit.transferSpending(amount: amount, addressContract: contractAddress, userId: userState.userInfoEntity.id);
+                          cubit.transferSpending(
+                              amount: amount,
+                              addressContract: contractAddress,
+                              userId: userState.userInfoEntity.id);
                         },
                       ),
                     );

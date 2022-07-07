@@ -15,6 +15,8 @@ import 'package:slee_fi/models/market_place/market_place_model.dart';
 import 'package:slee_fi/models/send_email_response/send_email_response.dart';
 import 'package:slee_fi/models/setting_active_code_response/setting_active_code_response.dart';
 import 'package:slee_fi/models/sign_in_response/sign_in_response.dart';
+import 'package:slee_fi/models/swap_token_to_wallet_response/swap_token_to_wallet_response.dart';
+import 'package:slee_fi/models/token_spending/token_spending.dart';
 import 'package:slee_fi/models/user_response/user_response.dart';
 import 'package:slee_fi/models/users_response/users_response.dart';
 import 'package:slee_fi/models/verify_response/verify_response.dart';
@@ -55,7 +57,7 @@ abstract class AuthDataSource {
       @Query('email') String email, @Query('otpType') OTPType otpType);
 
   @GET('/users/balances')
-  Future<dynamic> fetchBalanceSpending(@Query('userId') String userId);
+  Future<List<TokenSpending>> fetchBalanceSpending(@Query('userId') String userId);
 
   @GET('/users/get-global-config')
   Future<GlobalConfigResponse> getGlobalConfig();
@@ -109,7 +111,7 @@ abstract class AuthDataSource {
 
   ///white draw
   @POST('/withdraw/token')
-  Future<dynamic> whitedrawToken(
+  Future<SwapTokenToWalletResponse> transferTokenToWallet(
       @Body() WhitDrawTokenSchema whitDrawTokenSchema);
 
   @POST('/withdraw/nft')
