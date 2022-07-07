@@ -69,22 +69,22 @@ class TabBedsBuy extends StatelessWidget {
                           LocaleKeys.genesis_beds.tr(),
                         ],
                         LocaleKeys.class_.tr(): [
-                          LocaleKeys.short_bed.tr(),
-                          LocaleKeys.middle_bed.tr(),
-                          LocaleKeys.long_bed.tr(),
-                          LocaleKeys.flexible_bed.tr(),
+                          LocaleKeys.short.tr(),
+                          LocaleKeys.middle.tr(),
+                          LocaleKeys.long.tr(),
+                          LocaleKeys.flexible.tr(),
                         ],
                         LocaleKeys.quality.tr(): [
-                          LocaleKeys.common_bed.tr(),
-                          LocaleKeys.uncommon_bed.tr(),
-                          LocaleKeys.rare_bed.tr(),
-                          LocaleKeys.epic_bed.tr(),
-                          LocaleKeys.legendary_bed.tr(),
+                          LocaleKeys.common.tr(),
+                          LocaleKeys.uncommon.tr(),
+                          LocaleKeys.rare.tr(),
+                          LocaleKeys.epic.tr(),
+                          LocaleKeys.legendary.tr(),
                         ],
                       },
                       sliders: {
                         LocaleKeys.level.tr(): const FilterSliderValues(
-                            max: 50, min: 1, interval: 49),
+                            max: 30, min: 0, interval: 30),
                         LocaleKeys.mint.tr():
                             const FilterSliderValues(max: 7, min: 0),
                       },

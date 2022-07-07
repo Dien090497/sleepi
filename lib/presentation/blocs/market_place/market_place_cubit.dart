@@ -13,12 +13,26 @@ class MarketPlaceCubit extends Cubit<MarketPlaceState> {
   MarketPlaceCubit() : super(const MarketPlaceState.initial());
   late int page = 1;
   late int limit = 10;
-  late MarketSchema params =
-  MarketSchema(page: page, limit: limit, categoryId: 1, sortPrice: "LowPrice", level: 0, bedMint: 0, type: [], classNft: [], quality: []);
+  late bool loadMore = false;
+  late bool error = false;
+  late MarketSchema params = MarketSchema(
+      page: page,
+      limit: limit,
+      categoryId: 1,
+      sortPrice: "LowPrice",
+      level: 0,
+      bedMint: 0,
+      type: [],
+      classNft: [],
+      quality: []);
   final MarketPlaceUseCase _marketPlaceUseCase = getIt<MarketPlaceUseCase>();
 
   init(int idCategory) {
-    params = params.copyWith(page: page, limit: limit, categoryId: idCategory, sortPrice: "LowPrice");
+    params = params.copyWith(
+        page: page,
+        limit: limit,
+        categoryId: idCategory,
+        sortPrice: "LowPrice");
     log("params : ${params.toJson()}");
     emit(const MarketPlaceState.loading());
     getMarketPlace(params);
@@ -36,21 +50,33 @@ class MarketPlaceCubit extends Cubit<MarketPlaceState> {
     final result = await _marketPlaceUseCase.call(params);
     result.fold((l) {
       log("fail : ${l is FailureMessage ? l.msg : '$l'}");
+      error = true;
       emit(MarketPlaceState.fail(l is FailureMessage ? l.msg : '$l'));
     }, (success) {
+      error = false;
       log("result : ${success.toString()}");
+      if (success.count < limit) {
+        page += 1;
+        loadMore = true;
+      }
       emit(MarketPlaceState.success(success));
     });
   }
 
-  Future<void> loadMoreMarketPlace(MarketSchema params) async {
+  Future<void> loadMoreMarketPlace() async {
     emit(const MarketPlaceState.loadingMore());
     final result = await _marketPlaceUseCase.call(params);
     result.fold((l) {
+      error = true;
       log("fail : ${l is FailureMessage ? l.msg : '$l'}");
       emit(MarketPlaceState.fail(l is FailureMessage ? l.msg : '$l'));
     }, (success) {
+      error = false;
       log("result : ${success.toString()}");
+      if (success.count < limit) {
+        page += 1;
+        loadMore = true;
+      }
       emit(MarketPlaceState.success(success));
     });
   }
@@ -58,7 +84,10 @@ class MarketPlaceCubit extends Cubit<MarketPlaceState> {
   Future<void> selectPrice(int price) async {
     int page = 1;
     int limit = 10;
-    params = params.copyWith(page: page, limit: limit, sortPrice: price == 0 ? "LowPrice" : "HighPrice");
+    params = params.copyWith(
+        page: page,
+        limit: limit,
+        sortPrice: price == 0 ? "LowPrice" : "HighPrice");
     log("params :$price ${params.toJson()}");
     getMarketPlace(params);
   }

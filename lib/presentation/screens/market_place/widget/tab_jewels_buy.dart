@@ -70,7 +70,7 @@ class TabJewelsBuy extends StatelessWidget {
                       },
                       sliders: {
                         LocaleKeys.level.tr(): const FilterSliderValues(
-                            max: 5, min: 1, interval: 2),
+                            max: 5, min: 0, interval: 5),
                       },
                     );
                   },

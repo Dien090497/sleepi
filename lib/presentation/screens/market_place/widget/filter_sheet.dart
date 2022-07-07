@@ -31,6 +31,7 @@ class FilterSheet extends StatefulWidget {
 class _FilterSheetState extends State<FilterSheet> {
   late Map<String, List<String>> selectedSections = {};
   late Map<String, double> selectedSliders = {};
+  final Map<String, GlobalKey<_SliderState>> _key = {};
 
   @override
   void initState() {
@@ -57,15 +58,19 @@ class _FilterSheetState extends State<FilterSheet> {
       if (key == LocaleKeys.mint.tr()) {
         selectedSliders[key] = widget.cubit.params.bedMint!.toDouble();
       }
+      _key[key] = GlobalKey();
     });
   }
 
-  clear(){
+  clear() {
     widget.sections.forEach((key, value) {
-        selectedSections[key] = [];
+      selectedSections[key] = [];
     });
     widget.sliders.forEach((key, value) {
-        selectedSliders[key] = 0;
+      selectedSliders[key] = 0;
+    });
+    _key.forEach((key, value) {
+      _key[key]?.currentState?._value = selectedSliders[key]!;
     });
   }
 
@@ -88,11 +93,12 @@ class _FilterSheetState extends State<FilterSheet> {
               const Spacer(),
               TextButton(
                   onPressed: () {
-                    selectedSections.clear();
-                    selectedSliders.clear();
-                    clear();
+                    setState(() {
+                      selectedSections.clear();
+                      selectedSliders.clear();
+                      clear();
+                    });
                     widget.cubit.filter(selectedSections, selectedSliders);
-                    setState(() {});
                   },
                   child: SFText(
                     keyText: LocaleKeys.clear_filter,
@@ -125,6 +131,7 @@ class _FilterSheetState extends State<FilterSheet> {
                 ...List<Widget>.generate(
                   widget.sliders.length,
                   (i) => _Slider(
+                    key: _key[widget.sliders.keys.elementAt(i)],
                     label: widget.sliders.keys.elementAt(i),
                     sliders: widget.sliders.values.elementAt(i),
                     value:
@@ -182,6 +189,13 @@ class _SliderState extends State<_Slider> {
   late FilterSliderValues slider = widget.sliders;
   late double _value = widget.value;
 
+  @override
+  void initState() {
+    if (widget.sliders.onChanged != null) {
+      widget.sliders.onChanged!(_value);
+    }
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
