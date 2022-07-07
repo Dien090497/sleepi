@@ -7,7 +7,6 @@ import 'package:slee_fi/datasources/local/isar/isar_datasource.dart';
 import 'package:slee_fi/datasources/remote/network/web3_datasource.dart';
 import 'package:slee_fi/failures/failure.dart';
 import 'package:slee_fi/models/history/history_model.dart';
-import 'package:slee_fi/models/isar_models/history_isar/history_isar_model.dart';
 import 'package:slee_fi/models/isar_models/network_isar/network_isar_model.dart';
 import 'package:slee_fi/secret.dart';
 import 'package:slee_fi/usecase/get_history_transaction_usecase.dart';

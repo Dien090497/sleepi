@@ -1,4 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:slee_fi/common/extensions/string_x.dart';
 
 part 'swap_token_to_wallet_response.g.dart';
 
@@ -25,8 +26,10 @@ class SwapTokenToWalletResponse {
       this.updatedAt,
       this.id);
 
-  factory SwapTokenToWalletResponse.fromJson(Map<String, dynamic> json) =>
-      _$SwapTokenToWalletResponseFromJson(json);
+  factory SwapTokenToWalletResponse.fromJson(Map<String, dynamic> json) {
+    'json in is   $json'.log;
+    return _$SwapTokenToWalletResponseFromJson(json);
+  }
 
   Map<String, dynamic> toJson() => _$SwapTokenToWalletResponseToJson(this);
 }
