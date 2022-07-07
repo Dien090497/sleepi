@@ -420,5 +420,6 @@ abstract class  LocaleKeys {
   static const pleas_enter_contact_address = 'pleas_enter_contact_address';
   static const invalid_address = 'invalid_address';
   static const amount_input_can_not_be_zero = 'amount_input_can_not_be_zero';
+  static const wallet_already = 'wallet_already';
 
 }

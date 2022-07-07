@@ -13,12 +13,13 @@ class UserInfoModel {
   final bool isAccountDisabled;
   final String createdAt;
   final String updatedAt;
+  final String? wallet;
 
   factory UserInfoModel.fromJson(Map<String, dynamic> json) =>
       _$UserInfoModelFromJson(json);
 
   const UserInfoModel(this.id, this.name, this.username, this.roles, this.email,
-      this.isAccountDisabled, this.createdAt, this.updatedAt);
+      this.isAccountDisabled, this.createdAt, this.updatedAt, this.wallet);
 
   Map<String, dynamic> toJson() => _$UserInfoModelToJson(this);
 
@@ -31,5 +32,6 @@ class UserInfoModel {
         isAccountDisabled: isAccountDisabled,
         createdAt: createdAt,
         updatedAt: updatedAt,
+        wallet: wallet
       );
 }
