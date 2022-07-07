@@ -414,5 +414,8 @@
   "email_does_not_exist" : "Your email doesn't exist. Please signup first.",
   "incorrect_email_password" : "Incorrect email/password. Please try again",
   "email_already_exist" : "Email is already exists",
-  "otp_expired" : "OTP has expired. Please try again"
+  "otp_expired" : "OTP has expired. Please try again",
+  "pleas_enter_contact_address": "Please enter contract address",
+  "invalid_address": "Invalid address",
+  "amount_input_can_not_be_zero": "Amount input can not be zero"
 }

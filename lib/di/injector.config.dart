@@ -164,6 +164,7 @@ Future<_i1.GetIt> $initGetIt(_i1.GetIt get,
       () => _i37.SetNftApprovalForAllUseCase(get<_i27.INFTRepository>()));
   gh.factory<_i38.TransactionRemoteDataSource>(() =>
       _i38.TransactionRemoteDataSource(
+          get<_i19.HistoryDataSource>(),
           get<_i25.Web3DataSource>(),
           get<_i11.GetStorageDataSource>(),
           get<_i13.IsarDataSource>(),
