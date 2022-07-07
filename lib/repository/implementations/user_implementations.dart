@@ -1,13 +1,17 @@
 import 'package:dartz/dartz.dart';
 import 'package:injectable/injectable.dart';
 import 'package:slee_fi/common/extensions/string_x.dart';
+import 'package:slee_fi/common/extensions/string_x.dart';
 import 'package:slee_fi/datasources/local/secure_storage.dart';
 import 'package:slee_fi/datasources/remote/auth_datasource/auth_datasource.dart';
 import 'package:slee_fi/entities/active_code/active_code_entity.dart';
 import 'package:slee_fi/failures/failure.dart';
 import 'package:slee_fi/models/global_config_response/global_config_response.dart';
+import 'package:slee_fi/models/swap_token_to_wallet_response/swap_token_to_wallet_response.dart';
+import 'package:slee_fi/models/token_spending/token_spending.dart';
 import 'package:slee_fi/repository/user_repository.dart';
 import 'package:slee_fi/schema/change_password_schema/change_password_schema.dart';
+import 'package:slee_fi/schema/white_draw_token_schema/whit_draw_token_schema.dart';
 
 @Injectable(as: IUserRepository)
 class UserImplementation extends IUserRepository {
@@ -43,6 +47,21 @@ class UserImplementation extends IUserRepository {
       String userID) async {
     try {
       var result = await _authDataSource.fetchBalanceSpending(userID);
+      return Right(result);
+    } on Exception catch (e) {
+      return Left(FailureMessage.fromException(e));
+    }
+  }
+
+  @override
+  Future<Either<FailureMessage, SwapTokenToWalletResponse>> transferTokenToMainWallet(
+      WhitDrawTokenSchema whitDrawTokenSchema) async {
+    try {
+      var result =
+          await _authDataSource.transferTokenToWallet(whitDrawTokenSchema);
+
+      'on transfer success $result'.log;
+
       return Right(result);
     } on Exception catch (e) {
       return Left(FailureMessage.fromException(e));

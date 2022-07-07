@@ -6,23 +6,23 @@ import 'package:slee_fi/common/widgets/sf_buttons.dart';
 import 'package:slee_fi/common/widgets/sf_card.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
 import 'package:slee_fi/l10n/locale_keys.g.dart';
-import 'package:slee_fi/presentation/blocs/transfer_spending/transfer_spending.dart';
+import 'package:slee_fi/presentation/blocs/transfer_spending/transfer_cubit.dart';
 import 'package:slee_fi/presentation/blocs/user_bloc/user_bloc.dart';
 import 'package:slee_fi/presentation/blocs/user_bloc/user_state.dart';
 
 class PopUpConfirmTransfer extends StatelessWidget {
-  const PopUpConfirmTransfer(
-      {Key? key,
-        required this.fee,
-        required this.cubit,
-        required this.amount,
-        required this.tokenName,
-        required this.contractAddress,
-      })
-      : super(key: key);
+  const PopUpConfirmTransfer({
+    Key? key,
+    required this.fee,
+    required this.cubit,
+    required this.amount,
+    required this.tokenName,
+    required this.contractAddress,
+
+  }) : super(key: key);
 
   final double fee;
-  final TransferSpendingCubit cubit;
+  final TransferCubit cubit;
   final double amount;
   final String tokenName;
   final String contractAddress;
@@ -37,9 +37,7 @@ class PopUpConfirmTransfer extends StatelessWidget {
             keyText: LocaleKeys.confirm_transfer,
             style: TextStyles.bold18LightWhite,
           ),
-          const SizedBox(
-            height: 24,
-          ),
+          const SizedBox(height: 24),
           SFCard(
             padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 18),
             child: Row(
@@ -52,9 +50,7 @@ class PopUpConfirmTransfer extends StatelessWidget {
                         keyText: LocaleKeys.from,
                         style: TextStyles.lightGrey12,
                       ),
-                      const SizedBox(
-                        height: 12.0,
-                      ),
+                      const SizedBox(height: 12.0),
                       SFText(
                         keyText: LocaleKeys.wallet,
                         style: TextStyles.bold18White,

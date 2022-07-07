@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:slee_fi/common/extensions/num_ext.dart';
 import 'package:slee_fi/common/extensions/string_x.dart';
 import 'package:slee_fi/common/routes/app_routes.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
 import 'package:slee_fi/common/widgets/sf_button_outlined.dart';
-import 'package:slee_fi/common/widgets/sf_buttons.dart';
 import 'package:slee_fi/common/widgets/sf_card.dart';
 import 'package:slee_fi/common/widgets/sf_icon.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
@@ -14,6 +14,7 @@ import 'package:slee_fi/l10n/locale_keys.g.dart';
 import 'package:slee_fi/presentation/blocs/global_wallet/global_wallet_cubit.dart';
 import 'package:slee_fi/presentation/blocs/global_wallet/global_wallet_state.dart';
 import 'package:slee_fi/presentation/screens/passcode/passcode_screen.dart';
+import 'package:slee_fi/presentation/screens/transfer/transfer_screen.dart';
 import 'package:slee_fi/presentation/screens/wallet/widgets/pop_up_info_spending.dart';
 import 'package:slee_fi/presentation/screens/wallet/widgets/spending_detail_list.dart';
 
@@ -45,10 +46,16 @@ class TabSpendingDetail extends StatelessWidget {
                       return Column(
                         children: tokenList
                             .map((e) => SFCard(
-                                  // onTap: () => Navigator.pushNamed(context, R.staking),
+                                  onTap: () {
+                                    Navigator.pushNamed(context, R.passcode,
+                                        arguments: PasscodeArguments(
+                                            route: R.transfer,
+                                            argNewRoute:
+                                                TransferScreenArg(e, true)));
+                                  },
                                   margin: const EdgeInsets.only(top: 8),
                                   child: ListTile(
-                                    leading:  SFIcon(
+                                    leading: SFIcon(
                                       e.icon,
                                       width: 40,
                                       height: 40,
@@ -59,7 +66,7 @@ class TabSpendingDetail extends StatelessWidget {
                                         style: TextStyles.lightWhite16,
                                         stringCase: StringCase.upperCase),
                                     trailing: SFText(
-                                      keyText: '${e.balance}',
+                                      keyText: e.balance.formatBalanceToken,
                                       style: TextStyles.lightWhite16,
                                     ),
                                   ),
@@ -88,21 +95,21 @@ class TabSpendingDetail extends StatelessWidget {
               ],
             ),
           ),
-          Positioned(
-            bottom: 24,
-            left: 24,
-            right: 24,
-            child: SFButton(
-                text: LocaleKeys.transfer,
-                textStyle: TextStyles.w600WhiteSize16,
-                gradient: AppColors.gradientBlueButton,
-                height: 48,
-                width: double.infinity,
-                onPressed: () {
-                  Navigator.pushNamed(context, R.passcode,
-                      arguments: PasscodeArguments(route: R.transfer));
-                }),
-          ),
+          // Positioned(
+          //   bottom: 24,
+          //   left: 24,
+          //   right: 24,
+          //   child: SFButton(
+          //       text: LocaleKeys.transfer,
+          //       textStyle: TextStyles.w600WhiteSize16,
+          //       gradient: AppColors.gradientBlueButton,
+          //       height: 48,
+          //       width: double.infinity,
+          //       onPressed: () {
+          //         Navigator.pushNamed(context, R.passcode,
+          //             arguments: PasscodeArguments(route: R.transfer,argNewRoute:TokenEntity(address: address, displayName: displayName, name: name, symbol: symbol, icon: icon, balance: balance) ));
+          // //       }),
+          // ),
         ],
       ),
     );
