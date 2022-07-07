@@ -16,6 +16,7 @@ import 'package:slee_fi/models/setting_active_code_response/setting_active_code_
 import 'package:slee_fi/models/sign_in_response/sign_in_response.dart';
 import 'package:slee_fi/models/swap_token_to_wallet_response/swap_token_to_wallet_response.dart';
 import 'package:slee_fi/models/token_spending/token_spending.dart';
+import 'package:slee_fi/models/token_spending/token_spending.dart';
 import 'package:slee_fi/models/user_response/user_response.dart';
 import 'package:slee_fi/models/users_response/users_response.dart';
 import 'package:slee_fi/models/verify_response/verify_response.dart';
