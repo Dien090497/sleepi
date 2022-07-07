@@ -63,8 +63,9 @@ class _AccountLoginState extends State<AccountLoginWidget> {
     return BlocConsumer<SigInSignUpCubit, SignInSignUpState>(
       listener: (context, state) {
         if (state is SignInSignUpStateSignUpSuccess) {
-          BlocProvider.of<UserBloc>(context).add(
-              UpdateUser(state.userInfoEntity, listTokens: state.listToken));
+          BlocProvider.of<UserBloc>(context).add(UpdateUserOrListToken(
+              userInfoEntity: state.userInfoEntity,
+              listTokens: state.listToken));
           final cubit = context.read<SigInSignUpCubit>();
           Navigator.pushNamed(context, R.enterActivationCode,
               arguments: EnterActiveCodeArg(
@@ -87,8 +88,9 @@ class _AccountLoginState extends State<AccountLoginWidget> {
           });
         } else if (state is SignInSignUpStateSignInSuccess) {
           'sign success ${state.isFirstOpenApp}'.log;
-          BlocProvider.of<UserBloc>(context).add(
-              UpdateUser(state.userInfoEntity, listTokens: state.listToken));
+          BlocProvider.of<UserBloc>(context).add(UpdateUserOrListToken(
+              userInfoEntity: state.userInfoEntity,
+              listTokens: state.listToken));
           if (!state.isFirstOpenApp) {
             Navigator.pushNamedAndRemoveUntil(
                 context, R.bottomNavigation, (_) => false);

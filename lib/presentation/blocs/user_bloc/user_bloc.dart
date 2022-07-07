@@ -10,10 +10,10 @@ part 'user_event.dart';
 
 class UserBloc extends Bloc<UserEvent, UserState> {
   UserBloc() : super(const UserState.initial()) {
-    on<UpdateUser>(_onUpdateUser);
+    on<UpdateUserOrListToken>(_onUpdateUser);
   }
 
-  void _onUpdateUser(UpdateUser event, emit) {
+  void _onUpdateUser(UpdateUserOrListToken event, emit) {
     final List<TokenEntity> listTokens;
     if (event.listTokens != null) {
       listTokens = event.listTokens!
@@ -35,9 +35,14 @@ class UserBloc extends Bloc<UserEvent, UserState> {
     final currentState = state;
     if (currentState is UserLoaded) {
       emit(currentState.copyWith(
-          userInfoEntity: event.userInfoEntity, listTokens: listTokens));
+          userInfoEntity: event.userInfoEntity ?? currentState.userInfoEntity,
+          listTokens: listTokens));
     } else {
-      emit(UserState.loaded(event.userInfoEntity, listTokens));
+      if (event.userInfoEntity != null) {
+        emit(UserState.loaded(event.userInfoEntity!, listTokens));
+      } else {
+        emit(const UserState.error('No User'));
+      }
     }
   }
 
