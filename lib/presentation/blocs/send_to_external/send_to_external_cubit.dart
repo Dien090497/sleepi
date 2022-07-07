@@ -73,11 +73,11 @@ class SendToExternalCubit extends Cubit<SendToExternalState> {
       return;
     }
     if (valueInEther == 0) {
-      emit(const SendToExternalState.errorValueInEther('Please enter amount'));
+      emit(const SendToExternalState.errorValueInEther('Amount input can not be zero'));
       return;
     }
     if (valueInEther > balance) {
-      emit(const SendToExternalState.errorValueInEther('Please enter amount smaller balance'));
+      emit(const SendToExternalState.errorValueInEther('Insufficient balance'));
       return;
     }
     emit(const SendToExternalState.validatorSuccess());

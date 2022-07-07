@@ -71,7 +71,7 @@ class _ListTransferNftWidgetState extends State<ListTransferNftWidget> {
                         onTap: widget.onTap,
                         child: TransferNftWidget(
                           bedType: bedType,
-                          bedId: nft.attribute.nftId,
+                          bedId: nft.attribute.tokenId,
                         ),
                       );
                     },

@@ -23,6 +23,7 @@ class NftDetailCubit extends Cubit<NftDetailState> {
     ));
     result.fold(
       (l) {
+        print('### $l');
         emit(NftDetailState.error('$l'));
         emit(currentState);
       },
