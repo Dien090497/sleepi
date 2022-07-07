@@ -8,10 +8,10 @@ part of 'verify_user_schema.dart';
 
 VerifyUserSchema _$VerifyUserSchemaFromJson(Map<String, dynamic> json) =>
     VerifyUserSchema(
-      json['message'] as String,
-      json['signedMessage'] as String,
-      json['signer'] as String,
-      json['email'] as String,
+      message: json['message'] as String,
+      signedMessage: json['signedMessage'] as String,
+      signer: json['signer'] as String,
+      email: json['email'] as String,
     );
 
 Map<String, dynamic> _$VerifyUserSchemaToJson(VerifyUserSchema instance) =>

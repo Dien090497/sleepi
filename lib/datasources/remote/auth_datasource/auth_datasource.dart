@@ -16,6 +16,7 @@ import 'package:slee_fi/models/setting_active_code_response/setting_active_code_
 import 'package:slee_fi/models/sign_in_response/sign_in_response.dart';
 import 'package:slee_fi/models/user_response/user_response.dart';
 import 'package:slee_fi/models/users_response/users_response.dart';
+import 'package:slee_fi/models/verify_response/verify_response.dart';
 import 'package:slee_fi/schema/buy_nft_schema/buy_nft_schema.dart';
 import 'package:slee_fi/schema/change_password_schema/change_password_schema.dart';
 import 'package:slee_fi/schema/create_password_schema/create_password_schema.dart';
@@ -65,7 +66,7 @@ abstract class AuthDataSource {
   Future<ActiveCodeResponse> fetchActivationCodes();
 
   @POST('/users/verify')
-  Future<UserResponse> verifyUser(@Body() VerifyUserSchema verifyUserSchema);
+  Future<VerifyResponse> verifyUser(@Body() VerifyUserSchema verifyUserSchema);
 
   @POST('/users/change-password')
   Future<dynamic> changePassword(

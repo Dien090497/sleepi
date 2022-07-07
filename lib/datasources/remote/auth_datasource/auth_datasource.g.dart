@@ -135,19 +135,19 @@ class _AuthDataSource implements AuthDataSource {
   }
 
   @override
-  Future<UserResponse> verifyUser(verifyUserSchema) async {
+  Future<VerifyResponse> verifyUser(verifyUserSchema) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
     _data.addAll(verifyUserSchema.toJson());
     final _result = await _dio.fetch<Map<String, dynamic>>(
-        _setStreamType<UserResponse>(
+        _setStreamType<VerifyResponse>(
             Options(method: 'POST', headers: _headers, extra: _extra)
                 .compose(_dio.options, '/users/verify',
                     queryParameters: queryParameters, data: _data)
                 .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = UserResponse.fromJson(_result.data!);
+    final value = VerifyResponse.fromJson(_result.data!);
     return value;
   }
 

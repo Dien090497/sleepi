@@ -1,17 +1,20 @@
 import 'package:dartz/dartz.dart';
 import 'package:injectable/injectable.dart';
 import 'package:slee_fi/common/extensions/string_x.dart';
+import 'package:slee_fi/datasources/local/secure_storage.dart';
 import 'package:slee_fi/datasources/remote/auth_datasource/auth_datasource.dart';
 import 'package:slee_fi/entities/active_code/active_code_entity.dart';
 import 'package:slee_fi/failures/failure.dart';
+import 'package:slee_fi/models/global_config_response/global_config_response.dart';
 import 'package:slee_fi/repository/user_repository.dart';
 import 'package:slee_fi/schema/change_password_schema/change_password_schema.dart';
 
 @Injectable(as: IUserRepository)
 class UserImplementation extends IUserRepository {
   final AuthDataSource _authDataSource;
+  final SecureStorage _secureStorage;
 
-  UserImplementation(this._authDataSource);
+  UserImplementation(this._authDataSource, this._secureStorage);
 
   @override
   Future<Either<FailureMessage, dynamic>> changePassword(
@@ -44,6 +47,18 @@ class UserImplementation extends IUserRepository {
       return Right(result);
     } on Exception catch (e) {
       return Left(FailureMessage.fromException(e));
+    }
+  }
+
+  @override
+  Future<Either<FailureMessage, GlobalConfigResponse>> getGlobalConfig() async {
+    try {
+      final result = await _authDataSource.getGlobalConfig();
+      await _secureStorage.saveAddressContract(addressContract: result.contract);
+      await _secureStorage.saveMessage(saveMessage: result.messageSign);
+      return Right(result);
+    } catch (e) {
+      return Left(FailureMessage('$e'));
     }
   }
 }
