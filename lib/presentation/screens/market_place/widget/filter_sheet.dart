@@ -293,9 +293,9 @@ class TypeSelectionWidget extends StatelessWidget {
                         child: _Container(
                       text: types[firstIdx],
                       isSelected:
-                          listSelected.contains(types[firstIdx].split(' ')[0]),
+                          listSelected.contains(types[firstIdx].toLowerCase()),
                       onTap: () {
-                        _onTap(types[firstIdx].split(' ')[0]);
+                        _onTap(types[firstIdx].toLowerCase());
                       },
                     )),
                     const SizedBox(width: 16),
@@ -304,9 +304,9 @@ class TypeSelectionWidget extends StatelessWidget {
                           ? _Container(
                               text: types[secondIdx],
                               isSelected: listSelected
-                                  .contains(types[secondIdx].split(' ')[0]),
+                                  .contains(types[secondIdx].toLowerCase()),
                               onTap: () {
-                                _onTap(types[secondIdx].split(' ')[0]);
+                                _onTap(types[secondIdx].toLowerCase());
                               },
                             )
                           : const SizedBox.shrink(),
