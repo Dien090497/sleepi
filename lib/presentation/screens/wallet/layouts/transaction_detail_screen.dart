@@ -15,6 +15,7 @@ import 'package:slee_fi/l10n/locale_keys.g.dart';
 import 'package:slee_fi/presentation/screens/passcode/passcode_screen.dart';
 import 'package:slee_fi/presentation/screens/send_to_external/send_to_external_screen.dart';
 import 'package:slee_fi/presentation/screens/trade/trade_screen.dart';
+import 'package:slee_fi/presentation/screens/transfer/transfer_screen.dart';
 import 'package:slee_fi/presentation/screens/wallet/widgets/box_button_widget.dart';
 import 'package:slee_fi/presentation/screens/wallet/widgets/modal_receive_wallet.dart';
 import 'package:slee_fi/presentation/screens/wallet/widgets/transaction_detail_list.dart';
@@ -28,7 +29,10 @@ class TransactionDetailArguments {
   final TokenEntity tokenEntity;
 
   TransactionDetailArguments(
-      {required this.title, required this.img, this.typeHistory, required this.tokenEntity});
+      {required this.title,
+      required this.img,
+      this.typeHistory,
+      required this.tokenEntity});
 }
 
 class TransactionDetail extends StatelessWidget {
@@ -37,7 +41,7 @@ class TransactionDetail extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final args = ModalRoute.of(context)?.settings.arguments
-        as TransactionDetailArguments?;
+        as TransactionDetailArguments;
 
     return BackgroundWidget(
         appBar: AppBar(
@@ -63,7 +67,7 @@ class TransactionDetail extends StatelessWidget {
             centerTitle: true,
             titleSpacing: 14,
             title: SFText(
-              keyText: args != null ? args.title : "",
+              keyText: args.title,
               style: TextStyles.bold14Blue,
               stringCase: StringCase.upperCase,
             )),
@@ -71,17 +75,15 @@ class TransactionDetail extends StatelessWidget {
           physics: const ClampingScrollPhysics(),
           child: Column(
             children: [
-              args != null
-                  ? SFIcon(
-                      args.img,
-                      width: args.img == Ics.icAvax ? 32 : 40,
-                      height: args.img == Ics.icAvax ? 32 : 40,
-                    )
-                  : const SizedBox(),
+              SFIcon(
+                args.img,
+                width: args.img == Ics.icAvax ? 32 : 40,
+                height: args.img == Ics.icAvax ? 32 : 40,
+              ),
               const SizedBox(height: 16.0),
               SFText(
                   keyText:
-                      "${args?.tokenEntity.balance.formatBalanceToken} ${args != null ? args.title : 'AVAX'}",
+                      "${args.tokenEntity.balance.formatBalanceToken} ${args.title}",
                   style: TextStyles.bold30White,
                   textAlign: TextAlign.center,
                   stringCase: StringCase.upperCase),
@@ -114,7 +116,8 @@ class TransactionDetail extends StatelessWidget {
                         child: BoxButtonWidget(
                           onTap: () {
                             Navigator.pushNamed(context, R.transfer,
-                                arguments: args?.tokenEntity);
+                                arguments:
+                                    TransferScreenArg(args.tokenEntity, false));
                           },
                           text: LocaleKeys.to_spending,
                           assetImage: Ics.icRefresh,
@@ -130,9 +133,9 @@ class TransactionDetail extends StatelessWidget {
                               context,
                               R.sendToExternal,
                               arguments: SendToExternalArguments(
-                                tokenEntity: args?.tokenEntity,
-                                symbol: args?.title ?? '',
-                                icon: args?.img ?? '',
+                                tokenEntity: args.tokenEntity,
+                                symbol: args.title,
+                                icon: args.img,
                               ),
                             );
                           },
@@ -149,9 +152,8 @@ class TransactionDetail extends StatelessWidget {
                             Navigator.pushNamed(
                               context,
                               R.trade,
-                              arguments: TradeArguments(
-                                args?.tokenEntity.address,
-                              ),
+                              arguments:
+                                  TradeArguments(args.tokenEntity.address),
                             );
                           },
                           text: LocaleKeys.trade
@@ -165,7 +167,7 @@ class TransactionDetail extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 32.0),
-              TransactionDetailList(typeHistory: args?.typeHistory,)
+              TransactionDetailList(typeHistory: args.typeHistory)
             ],
           ),
         ));
