@@ -128,4 +128,10 @@ abstract class AuthDataSource {
 
   @GET('/market-place/buy-nft')
   Future<MarketPlaceModel> getCategory();
+
+  @GET('/nft-attributes/nft-by-owner')
+  Future<MarketPlaceModel> getNftByOwner();
+
+  @POST('/stacking/unstacking')
+  Future<MarketPlaceModel> unstacking();
 }

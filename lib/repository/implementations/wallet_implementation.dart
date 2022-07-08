@@ -39,7 +39,6 @@ class WalletImplementation extends IWalletRepository {
   WalletImplementation(
       this._web3DataSource,
       this._getStorageDataSource,
-      this._historyDataSource,
       this._transactionRemoteDataSource,
       this._isarDataSource,
       this._web3provider,
@@ -451,7 +450,7 @@ class WalletImplementation extends IWalletRepository {
             status: transactionHistoryList.elementAt(i).txReceiptStatus != null
                 ? int.parse(
                     transactionHistoryList.elementAt(i).txReceiptStatus!)
-                : 0);
+                : 1);
         transactionList.add(model);
       }
       return Right(transactionList);
