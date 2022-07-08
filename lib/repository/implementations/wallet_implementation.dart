@@ -456,7 +456,7 @@ class WalletImplementation extends IWalletRepository {
             status: transactionHistoryList.elementAt(i).txReceiptStatus != null
                 ? int.parse(
                     transactionHistoryList.elementAt(i).txReceiptStatus!)
-                : 0);
+                : 1);
         transactionList.add(model);
       }
       return Right(transactionList);

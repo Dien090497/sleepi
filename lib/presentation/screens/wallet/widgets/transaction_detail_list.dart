@@ -30,6 +30,8 @@ class TransactionDetailList extends StatefulWidget {
 class _TransactionDetailListState extends State<TransactionDetailList> {
   List<TransactionIsarModel> transactionList = [];
   final dateUtils = getIt<DateTimeUtils>();
+  int totalDisplay = 0;
+  int pageSize = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -44,7 +46,7 @@ class _TransactionDetailListState extends State<TransactionDetailList> {
         },
         builder:  (context, state){
           return Container(
-            alignment: Alignment.center,
+            // alignment: Alignment.center,
             decoration: const BoxDecoration(
               color: AppColors.dark,
               borderRadius: BorderRadius.only(

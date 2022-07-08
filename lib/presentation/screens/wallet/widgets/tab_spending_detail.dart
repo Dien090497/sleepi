@@ -77,10 +77,13 @@ class _TabSpendingDetailState extends State<TabSpendingDetail> {
                                       },
                                       margin: const EdgeInsets.only(top: 8),
                                       child: ListTile(
-                                        leading: SFIcon(
-                                          e.icon,
-                                          width: 40,
-                                          height: 40,
+                                        leading: Padding(
+                                          padding: EdgeInsets.only(left: e.symbol == "AVAX" ? 6 : 0),
+                                          child: SFIcon(
+                                            e.icon,
+                                            width: e.symbol == "AVAX" ? 30 : 40,
+                                            height: e.symbol == "AVAX" ? 30 : 40,
+                                          ),
                                         ),
                                         minLeadingWidth: 12,
                                         title: SFText(

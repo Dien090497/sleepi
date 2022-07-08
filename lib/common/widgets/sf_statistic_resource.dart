@@ -3,9 +3,11 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
 import 'package:slee_fi/common/widgets/sf_icon.dart';
+import 'package:slee_fi/common/widgets/sf_text.dart';
 import 'package:slee_fi/presentation/blocs/user_bloc/user_bloc.dart';
 import 'package:slee_fi/presentation/blocs/user_bloc/user_state.dart';
 import 'package:slee_fi/resources/resources.dart';
+import 'package:numeral/numeral.dart';
 
 class SFStatisticResource extends StatelessWidget {
   const SFStatisticResource({Key? key}) : super(key: key);
@@ -27,13 +29,13 @@ class SFStatisticResource extends StatelessWidget {
               children: [
                 const SizedBox(width: 4),
                 ItemResource(
-                    value: listTokens[0].balance, url: listTokens[0].icon),
+                    value: formatToken(listTokens[0].balance), url: listTokens[0].icon),
                 const SizedBox(width: 16),
                 ItemResource(
-                    value: listTokens[1].balance, url: listTokens[1].icon),
+                    value: formatToken(listTokens[1].balance), url: listTokens[1].icon),
                 const SizedBox(width: 16),
                 ItemResource(
-                    value: listTokens[2].balance, url: listTokens[2].icon),
+                    value: formatToken(listTokens[2].balance), url: listTokens[2].icon),
                 const SizedBox(width: 12),
                 const SFIcon(Ics.icSolanaCircle),
               ],
@@ -46,10 +48,14 @@ class SFStatisticResource extends StatelessWidget {
   }
 }
 
+  String formatToken(num quantity){
+    return  Numeral(quantity).format(fractionDigits: 2);
+  }
+
 class ItemResource extends StatelessWidget {
   const ItemResource({Key? key, required this.value, required this.url})
       : super(key: key);
-  final double value;
+  final String value;
   final String url;
 
   @override
@@ -59,12 +65,7 @@ class ItemResource extends StatelessWidget {
       children: [
         SvgPicture.asset(url),
         const SizedBox(width: 4),
-        Text(
-            // value == 0?
-            value.toStringAsFixed(2)
-            // : (value / 100000000).toStringAsFixed(0)
-            ,
-            style: TextStyles.white14),
+        SFText(keyText: value,style: TextStyles.white14),
       ],
     );
   }
