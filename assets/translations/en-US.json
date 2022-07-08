@@ -419,5 +419,7 @@
   "pleas_enter_contact_address": "Please enter contract address",
   "invalid_address": "Invalid address",
   "amount_input_can_not_be_zero": "Amount input can not be zero",
-  "wallet_already" : "Your account already has a wallet."
+  "wallet_already" : "Your account already has a wallet.",
+  "insufficient_avax": "Insufficient Avax in ",
+  "don_worry_transfer": "Don’t worry! Just transfer enough AVAX from your wallet to the spending account and you are good to go"
 }

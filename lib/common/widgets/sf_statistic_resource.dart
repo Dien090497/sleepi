@@ -3,7 +3,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
 import 'package:slee_fi/common/widgets/sf_icon.dart';
-import 'package:slee_fi/entities/token/token_entity.dart';
 import 'package:slee_fi/presentation/blocs/user_bloc/user_bloc.dart';
 import 'package:slee_fi/presentation/blocs/user_bloc/user_state.dart';
 import 'package:slee_fi/resources/resources.dart';
@@ -20,26 +19,27 @@ class SFStatisticResource extends StatelessWidget {
         borderRadius: BorderRadius.circular(100),
       ),
       child: BlocBuilder<UserBloc, UserState>(
-        builder: (context, state) {
-          final tokenList = <TokenEntity>[];
-
-          if (state is UserLoaded) {
-            tokenList.addAll(state.tokens);
+        builder: (context, userState) {
+          if (userState is UserLoaded) {
+            final listTokens = userState.listTokens;
+            return Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                const SizedBox(width: 4),
+                ItemResource(
+                    value: listTokens[0].balance, url: listTokens[0].icon),
+                const SizedBox(width: 16),
+                ItemResource(
+                    value: listTokens[1].balance, url: listTokens[1].icon),
+                const SizedBox(width: 16),
+                ItemResource(
+                    value: listTokens[2].balance, url: listTokens[2].icon),
+                const SizedBox(width: 12),
+                const SFIcon(Ics.icSolanaCircle),
+              ],
+            );
           }
-
-          return Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              const SizedBox(width: 4),
-              ItemResource(value: tokenList[0].balance, url: tokenList[0].icon),
-              const SizedBox(width: 16),
-              ItemResource(value: tokenList[1].balance, url: tokenList[1].icon),
-              const SizedBox(width: 16),
-              ItemResource(value: tokenList[2].balance, url: tokenList[2].icon),
-              const SizedBox(width: 12),
-              const SFIcon(Ics.icSolanaCircle),
-            ],
-          );
+          return const SizedBox();
         },
       ),
     );
@@ -59,7 +59,12 @@ class ItemResource extends StatelessWidget {
       children: [
         SvgPicture.asset(url),
         const SizedBox(width: 4),
-        Text(value.toStringAsFixed(2), style: TextStyles.white14),
+        Text(
+            // value == 0?
+            value.toStringAsFixed(2)
+            // : (value / 100000000).toStringAsFixed(0)
+            ,
+            style: TextStyles.white14),
       ],
     );
   }

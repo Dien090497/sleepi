@@ -11,26 +11,24 @@ import 'package:slee_fi/schema/verify_schema/verify_schema.dart';
 import 'package:slee_fi/usecase/send_otp_mail_usecase.dart';
 
 abstract class IAuthRepository {
-  Future<Either<FailureMessage, UserInfoEntity>> logIn(
-      SignInSchema signInSchema);
+  Future<Either<Failure, UserInfoEntity>> getMe();
+
+  Future<Either<Failure, UserInfoEntity>> logIn(SignInSchema signInSchema);
 
   Future<Either<Failure, bool>> createPassCode(String passcode);
 
   // Future<Either<Failure, bool>> checkPassCode(String passcode);
 
-  Future<Either<FailureMessage, SendEmailResponse>> sendOTPEmail(
+  Future<Either<Failure, SendEmailResponse>> sendOTPEmail(
       SendOTPParam sendOTPParam);
 
-  Future<Either<FailureMessage, dynamic>> verifyOTP(
-      VerifyOTPSchema verifySchema);
+  Future<Either<Failure, dynamic>> verifyOTP(VerifyOTPSchema verifySchema);
 
-  Future<Either<FailureMessage, SettingActiveCodeResponse>>
-      fetchSettingActiveCode();
+  Future<Either<Failure, SettingActiveCodeResponse>> fetchSettingActiveCode();
 
-  Future<Either<FailureMessage, UserInfoEntity>> signUp(
-      SignUpSchema signUpSchema);
+  Future<Either<Failure, UserInfoEntity>> signUp(SignUpSchema signUpSchema);
 
-  Future<Either<FailureMessage, CreatePasswordResponse>> createPassword(
+  Future<Either<Failure, CreatePasswordResponse>> createPassword(
       CreatePasswordSchema createPasswordSchema);
 
   Future<Either<Failure, bool>> validatePassCode(String passcode);
@@ -39,12 +37,11 @@ abstract class IAuthRepository {
 
   Future<Either<Failure, bool>> isPassCodeCreated();
 
-  Future<Either<FailureMessage, UserInfoEntity>> currentUser();
+  Future<Either<Failure, UserInfoEntity>> currentUser();
 
-  Future<Either<FailureMessage, bool>> checkActivationCode(
-      String activationCode);
+  Future<Either<Failure, bool>> checkActivationCode(String activationCode);
 
-  Future<Either<FailureMessage, bool>> isFirstOpenApp();
+  Future<Either<Failure, bool>> isFirstOpenApp();
 
-  Future<Either<FailureMessage, bool>> makeFirstOpenApp();
+  Future<Either<Failure, bool>> makeFirstOpenApp();
 }

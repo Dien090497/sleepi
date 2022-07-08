@@ -108,7 +108,7 @@ class AuthImplementation extends IAuthRepository {
       var isFirstOpen = false;
       var result = await isFirstOpenApp();
       result.fold((l) => null, (r) {
-       isFirstOpen = !r;
+        isFirstOpen = !r;
       });
       await Future.wait([
         _secureStorage.clearStorage(),
@@ -175,7 +175,6 @@ class AuthImplementation extends IAuthRepository {
     }
   }
 
-
   Future<Either<FailureMessage, bool>> saveUser(
       UserInfoModel userInfoModel) async {
     try {
@@ -215,6 +214,16 @@ class AuthImplementation extends IAuthRepository {
     try {
       var result = await _secureStorage.isFirstOpenApp();
       return Right(result);
+    } catch (e) {
+      return Left(FailureMessage('$e'));
+    }
+  }
+
+  @override
+  Future<Either<Failure, UserInfoEntity>> getMe() async {
+    try {
+      final result = await _authDataSource.getMe();
+      return Right(result.data.toEntity());
     } catch (e) {
       return Left(FailureMessage('$e'));
     }

@@ -69,7 +69,8 @@ class _WalletScreenState extends State<WalletScreen>
                           return;
                         }
                         Navigator.pushNamed(context, R.passcode,
-                            arguments: PasscodeArguments(route: R.settingWallet));
+                            arguments:
+                                PasscodeArguments(route: R.settingWallet));
                       }
                     },
                     child: const Padding(
@@ -102,19 +103,24 @@ class _WalletScreenState extends State<WalletScreen>
                             }
                           });
                         } else if (firstOpenWallet) {
-                          setState(() {
-                            firstOpenWallet = false;
-                          });
+                          controller.animateTo(0);
                           Navigator.of(context)
                               .pushNamed(R.passcode)
                               .then((value) {
                             if (value == true) {
+                              setState(() {
+                                firstOpenWallet = false;
+                              });
                               controller.animateTo(1);
+                            } else {
+                              controller.animateTo(0);
                             }
                           });
                         }
+                        return false;
+                      } else {
+                        return true;
                       }
-                      return true;
                     },
                   );
                 },

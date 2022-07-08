@@ -10,6 +10,7 @@ import 'package:slee_fi/presentation/screens/login_signup/widgets/account_login_
 import 'package:slee_fi/schema/sign_in_schema/sign_in_schema.dart';
 import 'package:slee_fi/schema/sign_up_schema/sign_up_schema.dart';
 import 'package:slee_fi/schema/verify_schema/verify_schema.dart';
+import 'package:slee_fi/usecase/fetch_balance_spending_usecase.dart';
 import 'package:slee_fi/usecase/is_first_open_app_usecase.dart';
 import 'package:slee_fi/usecase/login_usecase.dart';
 import 'package:slee_fi/usecase/send_otp_mail_usecase.dart';
@@ -27,6 +28,7 @@ class SigInSignUpCubit extends Cubit<SignInSignUpState> {
   final _isFirstOpenAppUC = getIt<IsFirstOpenAppUseCase>();
   final _verifyOTPUC = getIt<VerifyOTPUseCase>();
   final _fetchSettingActiveCode = getIt<SettingActiveCodeUseCase>();
+  final _fetchBalanceSpendingUC = getIt<FetchBalanceSpendingUseCase>();
 
   String email = '';
   String _password = '';
@@ -66,7 +68,7 @@ class SigInSignUpCubit extends Cubit<SignInSignUpState> {
 
     var result = await _sendOtpUC.call(SendOTPParam(email.trim(), type));
     result.fold(
-      (l) => emit(SignInSignUpState.errorEmail(l.msg)),
+      (l) => emit(SignInSignUpState.errorEmail('$l')),
       (r) => emit(const SignInSignUpState.initial()),
     );
   }
@@ -74,13 +76,25 @@ class SigInSignUpCubit extends Cubit<SignInSignUpState> {
   _signUp() async {
     var result =
         await _signUpUseCase.call(SignUpSchema(int.parse(otp), email.trim()));
-    result.fold((l) => emit(SignInSignUpState.error(l.msg)),
+    result.fold((l) => emit(SignInSignUpState.error('$l')),
         (userResponse) async {
-      var setting = await _fetchSettingActiveCode.call(NoParams());
-      setting.fold(
-        (l) => emit(SignInSignUpState.error(l.msg)),
-        (r) => emit(
-            SignInSignUpState.signUpSuccess(r.data.isEnable, userResponse)),
+      final setting = await _fetchSettingActiveCode.call(NoParams());
+      await setting.fold(
+        (l) async => emit(SignInSignUpState.error('$l')),
+        (r) async {
+          final balanceRes =
+              await _fetchBalanceSpendingUC.call('${userResponse.id}');
+          balanceRes.fold(
+            (l) => emit(SignInSignUpState.error('$l')),
+            (tokensSpending) {
+              emit(SignInSignUpState.signUpSuccess(
+                r.data.isEnable,
+                userResponse,
+                tokensSpending,
+              ));
+            },
+          );
+        },
       );
     });
   }
@@ -97,9 +111,19 @@ class SigInSignUpCubit extends Cubit<SignInSignUpState> {
     var result =
         await _logInUseCase.call(SignInSchema(email.trim(), _password));
 
-    result.fold((l) => emit(SignInSignUpState.error(l.msg)), (r) async {
-      emit(SignInSignUpState.signInSuccess(isFistOpenApp, r));
-    });
+    await result.fold(
+      (l) async => emit(SignInSignUpState.error('$l')),
+      (r) async {
+        final balanceRes = await _fetchBalanceSpendingUC.call('${r.id}');
+        balanceRes.fold(
+          (l) => emit(SignInSignUpState.error('$l')),
+          (tokensSpending) {
+            emit(SignInSignUpState.signInSuccess(
+                isFistOpenApp, r, tokensSpending));
+          },
+        );
+      },
+    );
   }
 
   signUp() {
@@ -151,7 +175,7 @@ class SigInSignUpCubit extends Cubit<SignInSignUpState> {
         .call(VerifyOTPSchema(otp, email.trim(), OTPType.changePass));
 
     result.fold(
-      (l) => emit(SignInSignUpState.error(l.msg)),
+      (l) => emit(SignInSignUpState.error('$l')),
       (r) => emit(SignInSignUpState.verifyOTPSuccess(otp, email.trim())),
     );
   }

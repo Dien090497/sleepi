@@ -33,7 +33,5 @@ class FailureMessage extends Failure {
   List<Object?> get props => [msg];
 
   @override
-  String toString() {
-    return msg;
-  }
+  String toString() => msg;
 }

@@ -1,3 +1,4 @@
+import 'package:dartz/dartz.dart';
 import 'package:flutter/material.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
@@ -5,28 +6,32 @@ import 'package:slee_fi/common/widgets/sf_buttons.dart';
 import 'package:slee_fi/common/widgets/sf_card.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
 import 'package:slee_fi/common/widgets/sf_textfield.dart';
+import 'package:slee_fi/di/injector.dart';
+import 'package:slee_fi/entities/nft_entity/nft_entity.dart';
+import 'package:slee_fi/failures/failure.dart';
 import 'package:slee_fi/l10n/locale_keys.g.dart';
+import 'package:slee_fi/usecase/estimate_nft_function_fee_usecase.dart';
 
 class NftPopUpTransfer extends StatelessWidget {
   const NftPopUpTransfer({
     Key? key,
     required this.onConfirm,
+    required this.nft,
+    required this.ownerAddress,
     this.onCancel,
-    required this.fee,
-    required this.valueTransfer,
     this.isToSpending,
-    this.onChanged,
   }) : super(key: key);
 
   final bool? isToSpending;
-  final int fee;
-  final int valueTransfer;
-  final VoidCallback onConfirm;
+  final Function(String address) onConfirm;
   final VoidCallback? onCancel;
-  final ValueChanged<String>? onChanged;
+  final NFTEntity nft;
+  final String ownerAddress;
 
   @override
   Widget build(BuildContext context) {
+    String toAddress = '';
+
     return Stack(
       children: [
         Positioned(
@@ -78,13 +83,13 @@ class NftPopUpTransfer extends StatelessWidget {
                     Row(
                       children: [
                         SFText(
-                          keyText: LocaleKeys.inventory,
+                          keyText: LocaleKeys.wallet,
                           style: TextStyles.bold16LightWhite,
                         ),
                         const SizedBox(width: 4),
                         Expanded(
                           child: SFText(
-                            keyText: LocaleKeys.wallet,
+                            keyText: LocaleKeys.spending,
                             style: TextStyles.bold16LightWhite,
                             textAlign: TextAlign.right,
                           ),
@@ -103,7 +108,9 @@ class NftPopUpTransfer extends StatelessWidget {
                       style: TextStyles.lightGrey14),
                   const SizedBox(height: 8),
                   SFTextField(
-                    onChanged: onChanged,
+                    onChanged: (addr) {
+                      toAddress = addr;
+                    },
                     showLabel: false,
                   ),
                 ],
@@ -117,11 +124,24 @@ class NftPopUpTransfer extends StatelessWidget {
                 ),
                 const SizedBox(width: 4),
                 Expanded(
-                    child: SFText(
-                  keyText: '$fee SLFT',
-                  textAlign: TextAlign.right,
-                  style: TextStyles.white12,
-                )),
+                    child: FutureBuilder<Either<Failure, double>>(
+                        future: getIt<EstimateNftFunctionFeeUseCase>()
+                            .call(EstimateGasParams(
+                          nftAddress: nft.attribute.contractAddress,
+                          ownerAddress: ownerAddress,
+                          toAddress: toAddress,
+                          nftId: nft.attribute.tokenId,
+                          functionName: 'transferFrom',
+                        )),
+                        builder: (context, snapshot) {
+                          return Text(
+                            snapshot.hasData
+                                ? '${snapshot.data!.getOrElse(() => 0)} AVAX'
+                                : '--.--',
+                            textAlign: TextAlign.right,
+                            style: TextStyles.white12,
+                          );
+                        })),
               ],
             ),
             const SizedBox(height: 8),
@@ -134,7 +154,7 @@ class NftPopUpTransfer extends StatelessWidget {
                 const SizedBox(width: 4),
                 Expanded(
                     child: SFText(
-                  keyText: '$valueTransfer NFT',
+                  keyText: '#${nft.attribute.tokenId}',
                   textAlign: TextAlign.right,
                   style: TextStyles.white12,
                 )),
@@ -162,7 +182,7 @@ class NftPopUpTransfer extends StatelessWidget {
                   child: SFButton(
                     text: LocaleKeys.confirm,
                     onPressed: () {
-                      onConfirm();
+                      onConfirm(toAddress);
                       // Navigator.pop(context);
                       // showSuccessfulDialog(context, null);
                     },

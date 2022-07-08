@@ -15,6 +15,7 @@ abstract class INFTRepository {
       required int start});
 
   Future<Either<Failure, List<NFTEntity>>> getListNftData({
+    String? nftAddress,
     required List<BigInt> tokenIds,
     required NftType nftType,
   });
@@ -36,14 +37,14 @@ abstract class INFTRepository {
     required String nftAddress,
     required String ownerAddress,
     required String toAddress,
-    required BigInt tokenId,
+    required BigInt nftId,
     required Credentials credentials,
   });
 
-  Future<Either<Failure, String>> deposit({
-    required String spendingAddress,
+  Future<Either<Failure, String>> depositSpending({
+    String? spendingAddress,
     required String nftAddress,
-    required BigInt amount,
+    required BigInt nftId,
     required int userId,
     required Credentials credentials,
   });
@@ -53,7 +54,7 @@ abstract class INFTRepository {
     required String ownerAddress,
     required String toAddress,
     required BigInt nftId,
-    required EtherAmount gasPrice,
+    EtherAmount? gasPrice,
     required String functionName,
   });
 }

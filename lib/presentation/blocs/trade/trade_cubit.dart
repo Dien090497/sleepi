@@ -1,6 +1,5 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:slee_fi/di/injector.dart';
-import 'package:slee_fi/failures/failure.dart';
 import 'package:slee_fi/presentation/blocs/trade/trade_state.dart';
 import 'package:slee_fi/usecase/check_approve_usecase.dart';
 import 'package:slee_fi/usecase/get_amount_out_min_usecase.dart';
@@ -29,7 +28,7 @@ class TradeCubit extends Cubit<TradeState> {
 
     result.fold(
       (l) {
-        emit(TradeState.fail(l is FailureMessage ? l.msg : '$l'));
+        emit(TradeState.fail('$l'));
       },
       (success) {
         emit(TradeState.success(success));
@@ -42,7 +41,7 @@ class TradeCubit extends Cubit<TradeState> {
         value: value, contractAddress: contractAddress));
     result.fold(
       (l) {
-        emit(TradeState.fail(l is FailureMessage ? l.msg : '$l'));
+        emit(TradeState.fail('$l'));
       },
       (success) {
         emit(TradeState.approveSuccess(success));
@@ -54,7 +53,7 @@ class TradeCubit extends Cubit<TradeState> {
     final result = await _getBalanceToken.call(contractAddress);
     result.fold(
       (l) {
-        emit(TradeState.fail(l is FailureMessage ? l.msg : '$l'));
+        emit(TradeState.fail('$l'));
       },
       (success) {
         emit(TradeState.getBalance(success));
@@ -70,7 +69,7 @@ class TradeCubit extends Cubit<TradeState> {
         contractAddressTo: contractAddressTo));
     result.fold(
       (l) {
-        emit(TradeState.fail(l is FailureMessage ? l.msg : '$l'));
+        emit(TradeState.fail('$l'));
       },
       (success) {
         emit(TradeState.getAmountOutMin(success));

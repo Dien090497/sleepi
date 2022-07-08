@@ -2,7 +2,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:slee_fi/common/routes/app_routes.dart';
+import 'package:slee_fi/common/widgets/sf_alert_dialog.dart';
 import 'package:slee_fi/common/widgets/sf_bottom_sheets.dart';
 import 'package:slee_fi/common/widgets/sf_icon.dart';
 import 'package:slee_fi/l10n/locale_keys.g.dart';
@@ -11,30 +11,37 @@ import 'package:slee_fi/presentation/blocs/market_place/market_place_cubit.dart'
 import 'package:slee_fi/presentation/blocs/market_place/market_place_state.dart';
 import 'package:slee_fi/presentation/screens/market_place/widget/filter_sheet.dart';
 import 'package:slee_fi/presentation/screens/market_place/widget/gridview_bed_item.dart';
+import 'package:slee_fi/presentation/screens/market_place/widget/pop_up_bed_market_place.dart';
+import 'package:slee_fi/presentation/screens/market_place/widget/pop_up_insufficient.dart';
 import 'package:slee_fi/presentation/screens/market_place/widget/tab_bar_filter.dart';
 import 'package:slee_fi/resources/resources.dart';
 
 class TabBedsBuy extends StatelessWidget {
   const TabBedsBuy({Key? key}) : super(key: key);
 
-  // void _showBedDialog(BuildContext context) {
-  //   showCustomDialog(
-  //     context,
-  //     padding: const EdgeInsets.all(24),
-  //     children: [
-  //       JewelDialogBody(
-  //         icon: Imgs.jewelGreen,
-  //         name: 'name',
-  //         level: 'level',
-  //         id: 'id',
-  //         attribute: 'attribute',
-  //         effect: 'effect',
-  //         onSellTap: () {},
-  //         onTransferTap: () {},
-  //       ),
-  //     ],
-  //   );
-  // }
+  void _showBedDialog(BuildContext context, MarketPlaceModel bed) {
+    showCustomAlertDialog(
+      context,
+      padding: const EdgeInsets.all(24),
+      children: PopUpBedMarketPlace(
+        bed: bed,
+        onConfirmTap: () {
+          Navigator.pop(context);
+          // showSuccessfulDialog(context, null);
+          _showDonWorryDialog(context, bed);
+        },
+      ),
+    );
+  }
+  void _showDonWorryDialog(BuildContext context, MarketPlaceModel nft) {
+    showCustomAlertDialog(
+      context,
+      padding: const EdgeInsets.all(24),
+      children: PopupInsufficient(
+        nft: nft,
+      ),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -43,8 +50,7 @@ class TabBedsBuy extends StatelessWidget {
     return DefaultTabController(
       length: 2,
       child: BlocProvider(
-        create: (context) => MarketPlaceCubit()
-          ..init(1),
+        create: (context) => MarketPlaceCubit()..init(1),
         child: BlocConsumer<MarketPlaceCubit, MarketPlaceState>(
           listener: (context, state) {
             if (state is MarketPlaceStateSuccess) {
@@ -69,22 +75,22 @@ class TabBedsBuy extends StatelessWidget {
                           LocaleKeys.genesis_beds.tr(),
                         ],
                         LocaleKeys.class_.tr(): [
-                          LocaleKeys.short_bed.tr(),
-                          LocaleKeys.middle_bed.tr(),
-                          LocaleKeys.long_bed.tr(),
-                          LocaleKeys.flexible_bed.tr(),
+                          LocaleKeys.short.tr(),
+                          LocaleKeys.middle.tr(),
+                          LocaleKeys.long.tr(),
+                          LocaleKeys.flexible.tr(),
                         ],
                         LocaleKeys.quality.tr(): [
-                          LocaleKeys.common_bed.tr(),
-                          LocaleKeys.uncommon_bed.tr(),
-                          LocaleKeys.rare_bed.tr(),
-                          LocaleKeys.epic_bed.tr(),
-                          LocaleKeys.legendary_bed.tr(),
+                          LocaleKeys.common.tr(),
+                          LocaleKeys.uncommon.tr(),
+                          LocaleKeys.rare.tr(),
+                          LocaleKeys.epic.tr(),
+                          LocaleKeys.legendary.tr(),
                         ],
                       },
                       sliders: {
                         LocaleKeys.level.tr(): const FilterSliderValues(
-                            max: 50, min: 1, interval: 49),
+                            max: 30, min: 0, interval: 30),
                         LocaleKeys.mint.tr():
                             const FilterSliderValues(max: 7, min: 0),
                       },
@@ -111,8 +117,7 @@ class TabBedsBuy extends StatelessWidget {
                                         cubit.refresh();
                                       },
                                       onBuyTap: (bed) {
-                                        Navigator.pushNamed(context, R.nftInfo,
-                                            arguments: true);
+                                        _showBedDialog(context, bed);
                                       },
                                     ),
                                     Padding(

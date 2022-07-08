@@ -18,7 +18,8 @@ class PopUpConfirmTransfer extends StatelessWidget {
     required this.amount,
     required this.tokenName,
     required this.contractAddress,
-
+    required this.spendingToWallet,
+    required this.onTranferToMainWallet,
   }) : super(key: key);
 
   final double fee;
@@ -26,6 +27,8 @@ class PopUpConfirmTransfer extends StatelessWidget {
   final double amount;
   final String tokenName;
   final String contractAddress;
+  final bool spendingToWallet;
+  final Function() onTranferToMainWallet;
 
   @override
   Widget build(BuildContext context) {
@@ -52,7 +55,9 @@ class PopUpConfirmTransfer extends StatelessWidget {
                       ),
                       const SizedBox(height: 12.0),
                       SFText(
-                        keyText: LocaleKeys.wallet,
+                        keyText: spendingToWallet
+                            ? LocaleKeys.spending
+                            : LocaleKeys.wallet,
                         style: TextStyles.bold18White,
                       ),
                     ],
@@ -66,11 +71,11 @@ class PopUpConfirmTransfer extends StatelessWidget {
                         keyText: LocaleKeys.to,
                         style: TextStyles.lightGrey12,
                       ),
-                      const SizedBox(
-                        height: 12.0,
-                      ),
+                      const SizedBox(height: 12.0),
                       SFText(
-                        keyText: LocaleKeys.spending,
+                        keyText: spendingToWallet
+                            ? LocaleKeys.wallet
+                            : LocaleKeys.spending,
                         style: TextStyles.bold18White,
                       ),
                     ],
@@ -91,7 +96,7 @@ class PopUpConfirmTransfer extends StatelessWidget {
               ),
               Expanded(
                   child: SFText(
-                      keyText: "$fee AVAX",
+                      keyText: "$fee ${tokenName.toUpperCase()}",
                       style: TextStyles.lightWhite16,
                       textAlign: TextAlign.end)),
             ],
@@ -143,8 +148,15 @@ class PopUpConfirmTransfer extends StatelessWidget {
                         gradient: AppColors.gradientBlueButton,
                         onPressed: () {
                           Navigator.pop(context);
+                          if (spendingToWallet) {
+                            onTranferToMainWallet();
+                            return;
+                          }
                           //showSuccessfulDialog(context, null);
-                          cubit.transferSpending(amount: amount, addressContract: contractAddress, userId: userState.userInfoEntity.id);
+                          cubit.transferSpending(
+                              amount: amount,
+                              addressContract: contractAddress,
+                              userId: userState.userInfoEntity.id);
                         },
                       ),
                     );

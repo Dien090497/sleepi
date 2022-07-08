@@ -5,12 +5,14 @@ import 'package:retrofit/retrofit.dart';
 import 'package:slee_fi/common/const/const.dart';
 import 'package:slee_fi/common/enum/enum.dart';
 import 'package:slee_fi/datasources/remote/auth_datasource/auth_interceptor.dart';
+import 'package:slee_fi/datasources/remote/auth_datasource/refresh_token_interceptor.dart';
 import 'package:slee_fi/models/activation_code_response/activation_code_response.dart';
 import 'package:slee_fi/models/active_code_response/active_code_response.dart';
 import 'package:slee_fi/models/create_password_reponse/create_password_response.dart';
 import 'package:slee_fi/models/global_config_response/global_config_response.dart';
 import 'package:slee_fi/models/list_market_place/list_market_place_model.dart';
 import 'package:slee_fi/models/market_place/market_place_model.dart';
+import 'package:slee_fi/models/refresh_token_model/refresh_token_model.dart';
 import 'package:slee_fi/models/send_email_response/send_email_response.dart';
 import 'package:slee_fi/models/setting_active_code_response/setting_active_code_response.dart';
 import 'package:slee_fi/models/sign_in_response/sign_in_response.dart';
@@ -37,19 +39,27 @@ part 'auth_datasource.g.dart';
 @RestApi(baseUrl: kDebugMode ? Const.baseApiDev : Const.baseApiDev)
 abstract class AuthDataSource {
   @factoryMethod
-  factory AuthDataSource(Dio dio, AuthInterceptor authInterceptor) {
-    dio.interceptors.add(authInterceptor);
-    // dio.interceptors.add(getIt<RefreshTokenInterceptor>(param1: dio));
+  factory AuthDataSource(Dio dio, AuthInterceptor authInterceptor,
+      RefreshTokenInterceptor refreshInterceptor) {
+    dio.interceptors.addAll([
+      authInterceptor,
+      refreshInterceptor,
+    ]);
     return _AuthDataSource(dio);
   }
 
   ///user
+
+  @GET('/users/me')
+  Future<UserResponse> getMe();
+
   @GET('/user-otp')
   Future<SendEmailResponse> sendOTP(
       @Query('email') String email, @Query('otpType') OTPType otpType);
 
   @GET('/users/balances')
-  Future<List<TokenSpending>> fetchBalanceSpending(@Query('userId') String userId);
+  Future<List<TokenSpending>> fetchBalanceSpending(
+      @Query('userId') String userId);
 
   @GET('/users/get-global-config')
   Future<GlobalConfigResponse> getGlobalConfig();
@@ -83,7 +93,7 @@ abstract class AuthDataSource {
   Future<UserResponse> signUp(@Body() SignUpSchema signUpSchema);
 
   @POST('/auth/refresh-token')
-  Future<UserResponse> refreshToken(
+  Future<RefreshTokenModel> refreshToken(
       @Body() RefreshTokenSchema refreshTokenSchema);
 
   @POST('/auth/create-password-step')

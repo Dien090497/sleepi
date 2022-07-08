@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:slee_fi/common/contract_addresses/contract_addresses.dart';
 import 'package:slee_fi/di/injector.dart';
 import 'package:slee_fi/presentation/blocs/transfer_spending/transfer_spending_state.dart';
+import 'package:slee_fi/schema/white_draw_token_schema/whit_draw_token_schema.dart';
 import 'package:slee_fi/usecase/approve_usecase.dart';
 import 'package:slee_fi/usecase/send_to_external_usecase.dart';
 import 'package:slee_fi/usecase/to_spending_usecase.dart';
@@ -18,7 +19,9 @@ class TransferCubit extends Cubit<TransferSpendingState> {
   final _transferToMainWalletUC = getIt<TransferTokenToMainWalletUseCase>();
 
   Future<void> transferSpending(
-      {required double amount, required String addressContract, required int userId}) async {
+      {required double amount,
+      required String addressContract,
+      required int userId}) async {
     final params = ToSpendingParams(
         amount: amount, addressContract: addressContract, userId: userId);
     final result = await _toSpendingUseCase.call(params);
@@ -35,7 +38,8 @@ class TransferCubit extends Cubit<TransferSpendingState> {
   Future<void> estimateGas(String contractAddressTo,
       {double? valueInEther,
       required String amount,
-      required double balance}) async {
+      required double balance,
+      bool spendingToWallet = false}) async {
     emit(const TransferSpendingState.loading());
     if (amount.isEmpty) {
       emit(const TransferSpendingState.error(
@@ -47,19 +51,27 @@ class TransferCubit extends Cubit<TransferSpendingState> {
       emit(const TransferSpendingState.error(
           message: 'Amount input can not be zero ', typeError: 'amount_zero'));
     } else {
-      final result = await _sendToExternalUC.calculatorFee(SendToExternalParams(
-          contractAddressTo: ContractAddresses.spending.hex,
-          valueInEther: valueInEther));
-      result.fold(
-        (l) {
-          emit(TransferSpendingState.error(message: '$l'));
-        },
-        (limitGas) {
-          final fee = ((limitGas * 50000000000) / pow(10, 18));
-          emit(TransferSpendingState.loaded(fee: fee));
-        },
-      );
+      if (spendingToWallet) {
+        emit(const TransferSpendingState.loaded(fee: 0));
+        return;
+      }
+      _estimateGas(valueInEther);
     }
+  }
+
+  _estimateGas(double? valueInEther) async {
+    final result = await _sendToExternalUC.calculatorFee(SendToExternalParams(
+        contractAddressTo: ContractAddresses.spending.hex,
+        valueInEther: valueInEther));
+    result.fold(
+      (l) {
+        emit(TransferSpendingState.error(message: '$l'));
+      },
+      (limitGas) {
+        final fee = ((limitGas * 50000000000) / pow(10, 18));
+        emit(TransferSpendingState.loaded(fee: fee));
+      },
+    );
   }
 
   Future<void> approve(
@@ -74,6 +86,17 @@ class TransferCubit extends Cubit<TransferSpendingState> {
       (result) {
         emit(const TransferSpendingState.loaded());
       },
+    );
+  }
+
+  void transferToMainWallet(
+      String amount, String symbol, String address) async {
+    emit(const TransferSpendingState.loading());
+    var result = await _transferToMainWalletUC
+        .call(WhitDrawTokenSchema(symbol, address, amount));
+    result.fold(
+      (l) => emit(TransferSpendingState.error(message: l.msg)),
+      (r) => emit(const TransferSpendingState.toWalletSuccess()),
     );
   }
 }

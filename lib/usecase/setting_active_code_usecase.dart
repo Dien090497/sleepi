@@ -11,6 +11,6 @@ class SettingActiveCodeUseCase
   SettingActiveCodeUseCase(this._authRepository);
 
   @override
-  Future<Either<FailureMessage, SettingActiveCodeResponse>> call(params) =>
+  Future<Either<Failure, SettingActiveCodeResponse>> call(params) =>
       _authRepository.fetchSettingActiveCode();
 }

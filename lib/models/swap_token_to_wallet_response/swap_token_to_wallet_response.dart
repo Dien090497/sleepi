@@ -25,8 +25,9 @@ class SwapTokenToWalletResponse {
       this.updatedAt,
       this.id);
 
-  factory SwapTokenToWalletResponse.fromJson(Map<String, dynamic> json) =>
-      _$SwapTokenToWalletResponseFromJson(json);
+  factory SwapTokenToWalletResponse.fromJson(Map<String, dynamic> json) {
+    return _$SwapTokenToWalletResponseFromJson(json);
+  }
 
   Map<String, dynamic> toJson() => _$SwapTokenToWalletResponseToJson(this);
 }

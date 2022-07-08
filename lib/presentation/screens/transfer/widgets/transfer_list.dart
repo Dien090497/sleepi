@@ -22,9 +22,9 @@ import 'package:slee_fi/presentation/screens/transfer/widgets/pop_up_confirm_tra
 
 class TransferList extends StatefulWidget {
   const TransferList(
-      {Key? key, this.tokenEntity, required this.spendingToWallet})
+      {Key? key, required this.tokenEntity, required this.spendingToWallet})
       : super(key: key);
-  final TokenEntity? tokenEntity;
+  final TokenEntity tokenEntity;
   final bool spendingToWallet;
 
   @override
@@ -51,11 +51,19 @@ class _TransferListState extends State<TransferList> {
               context,
               showClosed: false,
               children: PopUpConfirmTransfer(
+                onTranferToMainWallet: () {
+                  cubit.transferToMainWallet(
+                    result,
+                    widget.tokenEntity.symbol,
+                    widget.tokenEntity.address,
+                  );
+                },
+                spendingToWallet: widget.spendingToWallet,
                 fee: state.fee ?? 0.0025,
                 cubit: cubit,
                 amount: double.parse(result),
-                tokenName: widget.tokenEntity?.symbol ?? '',
-                contractAddress: widget.tokenEntity?.address ?? '',
+                tokenName: widget.tokenEntity.symbol,
+                contractAddress: widget.tokenEntity.address,
               ),
             );
           }
@@ -66,8 +74,8 @@ class _TransferListState extends State<TransferList> {
                 showClosed: false,
                 children: PopUpConfirmApprove(
                   cubit: cubit,
-                  tokenName: widget.tokenEntity?.symbol ?? '',
-                  contractAddress: widget.tokenEntity?.address ?? '',
+                  tokenName: widget.tokenEntity.symbol,
+                  contractAddress: widget.tokenEntity.address,
                 ),
               );
             }
@@ -82,6 +90,11 @@ class _TransferListState extends State<TransferList> {
               context: context,
               message: state.message,
               messageType: MessageType.error);
+        }
+
+        if (state is TransferSpendingStateToWalletSuccess) {
+          //todo: show popup transfer success
+          Navigator.of(context).pop();
         }
       },
       builder: (context, state) {
@@ -103,8 +116,8 @@ class _TransferListState extends State<TransferList> {
                     ),
                     const SizedBox(height: 4.0),
                     AssetTile(
-                      tokenName: widget.tokenEntity?.name.toUpperCase() ?? '',
-                      img: widget.tokenEntity?.icon ?? '',
+                      tokenName: widget.tokenEntity.name.toUpperCase(),
+                      img: widget.tokenEntity.icon,
                     ),
                     const SizedBox(height: 24.0),
                     SFTextFieldTextButton(
@@ -119,8 +132,7 @@ class _TransferListState extends State<TransferList> {
                       controller: controller,
                       onPressed: () {
                         controller.text =
-                            widget.tokenEntity?.balance.formatBalanceToken ??
-                                '';
+                            widget.tokenEntity.balance.formatBalanceToken;
                       },
                     ),
                     if (state is TransferSpendingStateError)
@@ -131,7 +143,7 @@ class _TransferListState extends State<TransferList> {
                     const SizedBox(height: 8.0),
                     SFText(
                       keyText:
-                          "${LocaleKeys.available.tr()} : ${widget.tokenEntity?.balance.formatBalanceToken} ${widget.tokenEntity?.name.toUpperCase()}",
+                          "${LocaleKeys.available.tr()} : ${widget.tokenEntity.balance.formatBalanceToken} ${widget.tokenEntity.name.toUpperCase()}",
                       style: TextStyles.lightGrey14,
                     ),
                     const SizedBox(height: 32.0),
@@ -147,9 +159,10 @@ class _TransferListState extends State<TransferList> {
                   final amount =
                       controller.text.toString().replaceAll(',', '.');
                   final cubit = context.read<TransferCubit>();
-                  cubit.estimateGas(widget.tokenEntity?.address ?? '',
+                  cubit.estimateGas(widget.tokenEntity.address,
                       amount: amount,
-                      balance: widget.tokenEntity?.balance ?? 0);
+                      balance: widget.tokenEntity.balance,
+                      spendingToWallet: widget.spendingToWallet);
                 },
               ),
             ],

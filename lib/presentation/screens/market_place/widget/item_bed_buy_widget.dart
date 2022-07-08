@@ -29,9 +29,9 @@ class ItemBedBuyWidget extends StatelessWidget {
         children: [
           Positioned(
             top: 20,
-            left: -40,
+            left: -30,
             child: TopLeftBanner(
-              text: item.nftName,
+              text: item.classNft == null ? item.type.reCase(StringCase.titleCase) : item.classNft!.reCase(StringCase.camelCase),
               textColor: AppColors.white,
             ),
           ),

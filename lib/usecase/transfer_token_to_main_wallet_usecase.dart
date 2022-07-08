@@ -12,7 +12,7 @@ class TransferTokenToMainWalletUseCase
   TransferTokenToMainWalletUseCase(this._iUserRepository);
 
   @override
-  Future<Either<Failure, SwapTokenToWalletResponse>> call(params) {
+  Future<Either<FailureMessage, SwapTokenToWalletResponse>> call(params) {
     return _iUserRepository.transferTokenToMainWallet(params);
   }
 }

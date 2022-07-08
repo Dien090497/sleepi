@@ -5,13 +5,14 @@ import 'package:slee_fi/repository/auth_repository.dart';
 import 'package:slee_fi/schema/create_password_schema/create_password_schema.dart';
 import 'package:slee_fi/usecase/usecase.dart';
 
-class CreatePasswordUseCase extends UseCase<CreatePasswordResponse, CreatePasswordSchema> {
+class CreatePasswordUseCase
+    extends UseCase<CreatePasswordResponse, CreatePasswordSchema> {
   final IAuthRepository _iAuthRepository;
 
   CreatePasswordUseCase(this._iAuthRepository);
 
   @override
-  Future<Either<FailureMessage, CreatePasswordResponse>> call(params) {
+  Future<Either<Failure, CreatePasswordResponse>> call(params) {
     return _iAuthRepository.createPassword(params);
   }
 }
