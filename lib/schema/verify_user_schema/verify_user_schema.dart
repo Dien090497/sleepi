@@ -6,13 +6,11 @@ part 'verify_user_schema.g.dart';
 
 @JsonSerializable()
 class VerifyUserSchema {
-  final String message;
   final String signedMessage;
   final String signer;
   final String email;
 
   VerifyUserSchema({
-    required this.message,
     required this.signedMessage,
     required this.signer,
     required this.email,
