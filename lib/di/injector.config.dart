@@ -191,7 +191,6 @@ Future<_i1.GetIt> $initGetIt(_i1.GetIt get,
   gh.factory<_i50.IWalletRepository>(() => _i51.WalletImplementation(
       get<_i25.Web3DataSource>(),
       get<_i11.GetStorageDataSource>(),
-      get<_i19.HistoryDataSource>(),
       get<_i38.TransactionRemoteDataSource>(),
       get<_i13.IsarDataSource>(),
       get<_i18.Web3Provider>(),

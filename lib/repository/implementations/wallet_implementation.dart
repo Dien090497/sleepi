@@ -7,7 +7,6 @@ import 'package:slee_fi/common/const/const.dart';
 import 'package:slee_fi/common/enum/enum.dart';
 import 'package:slee_fi/common/extensions/string_x.dart';
 import 'package:slee_fi/datasources/local/get_storage_datasource.dart';
-import 'package:slee_fi/datasources/local/history_datasource.dart';
 import 'package:slee_fi/datasources/local/isar/isar_datasource.dart';
 import 'package:slee_fi/datasources/local/secure_storage.dart';
 import 'package:slee_fi/datasources/remote/auth_datasource/auth_datasource.dart';
@@ -16,7 +15,6 @@ import 'package:slee_fi/datasources/remote/network/web3_provider.dart';
 import 'package:slee_fi/datasources/remote/transaction_datasource/transaction_remote_datasource.dart';
 import 'package:slee_fi/entities/wallet_info/wallet_info_entity.dart';
 import 'package:slee_fi/failures/failure.dart';
-import 'package:slee_fi/models/isar_models/history_isar/history_isar_model.dart';
 import 'package:slee_fi/l10n/locale_keys.g.dart';
 import 'package:slee_fi/models/isar_models/native_currency_isar/native_currency_isar_model.dart';
 import 'package:slee_fi/models/isar_models/network_isar/network_isar_model.dart';
@@ -35,12 +33,11 @@ class WalletImplementation extends IWalletRepository {
   final Web3DataSource _web3DataSource;
   final GetStorageDataSource _getStorageDataSource;
   final IsarDataSource _isarDataSource;
-  final HistoryDataSource _historyDataSource;
   final TransactionRemoteDataSource _transactionRemoteDataSource;
   final SecureStorage _secureStorage;
   final AuthDataSource _authDataSource;
 
-  WalletImplementation(this._web3DataSource, this._getStorageDataSource, this._historyDataSource,
+  WalletImplementation(this._web3DataSource, this._getStorageDataSource,
       this._transactionRemoteDataSource, this._isarDataSource, this._web3provider, this._secureStorage, this._authDataSource);
 
   @override
