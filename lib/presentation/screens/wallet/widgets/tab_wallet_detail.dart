@@ -137,6 +137,22 @@ class _TabWalletDetailState extends State<TabWalletDetail> {
                           Expanded(
                             child: BoxButtonWidget(
                               onTap: () {
+                                if (tokenList.length < 2) {
+                                  Navigator.pushNamed(
+                                    context,
+                                    R.transfer,
+                                    arguments: TransferScreenArg(
+                                        const TokenEntity(
+                                            address: '',
+                                            displayName: 'avax',
+                                            name: '',
+                                            symbol: 'avax',
+                                            icon: Ics.icAvax,
+                                            balance: 0),
+                                        false),
+                                  );
+                                  return;
+                                }
                                 Navigator.pushNamed(
                                   context,
                                   R.transfer,
