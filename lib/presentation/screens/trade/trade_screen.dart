@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:developer';
 
+import 'package:decimal/decimal.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -452,7 +453,7 @@ class _TradeScreenState extends State<TradeScreen> {
                                         child: SizedBox(
                                           child: SFText(
                                             maxLines: 1,
-                                            keyText: "$amountOutMin",
+                                            keyText: "${Decimal.parse(amountOutMin.toString())}",
                                             style: TextStyles.bold18White,
                                           ),
                                         ),
