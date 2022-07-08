@@ -50,7 +50,7 @@ class CreatePasswordCubit extends Cubit<CreatePasswordState> {
     var result = await _changePasswordUC
         .call(ChangePasswordSchema(email, otp, password, confirmPassword));
 
-    result.fold((l) => emit(CreatePasswordState.errorCreate(l.msg)),
+    result.fold((l) => emit(CreatePasswordState.errorCreate('$l')),
         (r) => emit(const CreatePasswordState.changePasswordSuccess()));
   }
 
@@ -58,7 +58,7 @@ class CreatePasswordCubit extends Cubit<CreatePasswordState> {
     var result = await _createPassCodeUC
         .call(CreatePasswordSchema(email, password, activeCode, otp));
 
-    result.fold((l) => emit(CreatePasswordState.errorCreate(l.msg)), (r) async {
+    result.fold((l) => emit(CreatePasswordState.errorCreate('$l')), (r) async {
       emit(CreatePasswordState.success(locale));
     });
   }

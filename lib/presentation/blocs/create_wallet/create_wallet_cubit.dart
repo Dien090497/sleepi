@@ -1,7 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:slee_fi/common/enum/enum.dart';
 import 'package:slee_fi/di/injector.dart';
-import 'package:slee_fi/failures/failure.dart';
 import 'package:slee_fi/presentation/blocs/create_wallet/create_wallet_state.dart';
 import 'package:slee_fi/schema/verify_schema/verify_schema.dart';
 import 'package:slee_fi/usecase/send_otp_mail_usecase.dart';
@@ -36,7 +35,7 @@ class CreateWalletCubit extends Cubit<CreateWalletState> {
       final result = await _createWalletUC.call(NoParams());
       result.fold(
         (l) {
-          emit(CreateWalletState.error(l is FailureMessage ? l.msg : '$l'));
+          emit(CreateWalletState.error('$l'));
           emit(currentState.copyWith(isLoading: false));
         },
         (success) {
@@ -53,7 +52,7 @@ class CreateWalletCubit extends Cubit<CreateWalletState> {
         .call(VerifyOTPSchema(int.parse(otp), userEmail, OTPType.addWallet));
 
     result.fold((l) {
-      emit(CreateWalletState.error(l.msg));
+      emit(CreateWalletState.error('$l'));
     }, (r) => createWallet());
   }
 
@@ -61,7 +60,7 @@ class CreateWalletCubit extends Cubit<CreateWalletState> {
     var result =
         await _sendOtpUC.call(SendOTPParam(userEmail, OTPType.addWallet));
     result.fold((l) {
-      emit(CreateWalletState.error(l.msg));
+      emit(CreateWalletState.error('$l'));
     }, (r) {});
   }
 }

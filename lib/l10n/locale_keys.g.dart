@@ -407,6 +407,7 @@ abstract class  LocaleKeys {
   static const invalid_email = 'invalid_email';
   static const password_must_be_at_least_6 = 'password_must_be_at_least_6';
   static const password_dose_not_match = 'password_dose_not_match';
+  static const wallet_id = 'wallet_id';
   static const warning_bind_wallet = 'warning_bind_wallet';
   static const dont_allow_typing_space = 'dont_allow_typing_space';
   static const you_can_set_your_alarm_here = 'you_can_set_your_alarm_here';
@@ -421,5 +422,7 @@ abstract class  LocaleKeys {
   static const invalid_address = 'invalid_address';
   static const amount_input_can_not_be_zero = 'amount_input_can_not_be_zero';
   static const wallet_already = 'wallet_already';
+  static const insufficient_avax = 'insufficient_avax';
+  static const don_worry_transfer = 'don_worry_transfer';
 
 }

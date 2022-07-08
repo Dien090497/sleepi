@@ -39,13 +39,13 @@ class Web3DataSource {
   }
 
   Future<BigInt> getBalanceOf(String address, String contractAddress) async {
-    var contract = tokenFrom(contractAddress);
+    var contract = token(contractAddress);
     var balance = await contract.balanceOf(EthereumAddress.fromHex(address));
     return balance;
   }
 
   Future<BigInt> getDecimals(String address) async {
-    var contract = tokenFrom(address);
+    var contract = token(address);
     return await contract.decimals();
   }
 
@@ -66,21 +66,20 @@ class Web3DataSource {
 
   Future<BlockInformation> getDetailBlock(String blockNumber)  => _web3provider.web3client.getBlockInformation(blockNumber: blockNumber);
 
-  Future<int> getGasPrice() async =>
-      (await _web3provider.web3client.getGasPrice()).getInWei.toInt();
+  Future<EtherAmount> getGasPrice() => _web3provider.web3client.getGasPrice();
 
-  Future<int> estimateGas({
+  Future<BigInt> estimateGas({
     EthereumAddress? sender,
     String? to,
     double? value,
     double? gasPrice,
   }) async =>
       (await _web3provider.web3client.estimateGas(
-              sender: sender,
-              to: to != null ? EthereumAddress.fromHex(to) : null,
-              value: value?.etherToWei.toWeiEtherAmount,
-              gasPrice: gasPrice?.toWeiEtherAmount))
-          .toInt();
+        sender: sender,
+        to: to != null ? EthereumAddress.fromHex(to) : null,
+        value: value?.etherToWei.toWeiEtherAmount,
+        gasPrice: gasPrice?.toWeiEtherAmount,
+      ));
 
   Future<String> sendCoinTxn({
     required Credentials credentials,
@@ -179,7 +178,7 @@ class Web3DataSource {
 
   Future<void> approveToken(
       String contractAddress, Credentials credentials) async {
-    final contract = tokenFrom(contractAddress);
+    final contract = token(contractAddress);
     double amount = 0;
     for (var element in Const.tokens) {
       if (element['address'].toString().toLowerCase() ==
@@ -195,7 +194,7 @@ class Web3DataSource {
 
   Future<BigInt> allowance(
       EthereumAddress owner, String contractAddress) async {
-    final contract = tokenFrom(contractAddress);
+    final contract = token(contractAddress);
     return await contract.allowance(
         owner, EthereumAddress.fromHex(Const.contractRouterTestNet));
   }
@@ -315,11 +314,11 @@ class Web3DataSource {
     }
   }
 
-  ERC20 tokenFrom(String address) => ERC20(
+  ERC20 token(String address) => ERC20(
       address: EthereumAddress.fromHex(address),
       client: _web3provider.web3client);
 
-  Erc721 nftFrom(String address) => Erc721(
+  Erc721 nft(String address) => Erc721(
       address: EthereumAddress.fromHex(address),
       client: _web3provider.web3client);
 

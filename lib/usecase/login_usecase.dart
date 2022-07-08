@@ -11,7 +11,7 @@ class LogInUseCase extends UseCase<UserInfoEntity, SignInSchema> {
   LogInUseCase(this._iAuthRepository);
 
   @override
-  Future<Either<FailureMessage, UserInfoEntity>> call(params) {
+  Future<Either<Failure, UserInfoEntity>> call(params) {
     return _iAuthRepository.logIn(params);
   }
 }

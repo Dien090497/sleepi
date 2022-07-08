@@ -1,5 +1,6 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:slee_fi/entities/user/user_info_entity.dart';
+import 'package:slee_fi/models/token_spending/token_spending.dart';
 
 part 'sign_up_state.freezed.dart';
 
@@ -16,12 +17,16 @@ class SignInSignUpState with _$SignInSignUpState {
       SignInSignUpStateErrorEmail;
 
   const factory SignInSignUpState.signUpSuccess(
-          bool enableActiveCode, UserInfoEntity userInfoEntity) =
-      SignInSignUpStateSignUpSuccess;
+    bool enableActiveCode,
+    UserInfoEntity userInfoEntity,
+      List<TokenSpending> listToken,
+  ) = SignInSignUpStateSignUpSuccess;
 
   const factory SignInSignUpState.signInSuccess(
-          bool isFirstOpenApp, UserInfoEntity userInfoEntity) =
-      SignInSignUpStateSignInSuccess;
+    bool isFirstOpenApp,
+    UserInfoEntity userInfoEntity,
+      List<TokenSpending> listToken,
+  ) = SignInSignUpStateSignInSuccess;
 
   const factory SignInSignUpState.verifyOTPSuccess(int otp, String email) =
       SignInSignUpStateVerifySuccess;

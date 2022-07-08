@@ -12,26 +12,26 @@ class SendNftToSpendingUseCase
 
   @override
   Future<Either<Failure, String>> call(SendNftToSpendingParams params) async {
-    return _inftRepository.deposit(
+    return _inftRepository.depositSpending(
         spendingAddress: params.spendingAddress,
         nftAddress: params.nftAddress,
-        amount: params.amount,
+        nftId: params.nftId,
         userId: params.userId,
         credentials: params.credentials);
   }
 }
 
 class SendNftToSpendingParams {
-  final String spendingAddress;
+  final String? spendingAddress;
   final String nftAddress;
-  final BigInt amount;
+  final BigInt nftId;
   final int userId;
   final Credentials credentials;
 
   SendNftToSpendingParams({
-    required this.spendingAddress,
+    this.spendingAddress,
     required this.nftAddress,
-    required this.amount,
+    required this.nftId,
     required this.userId,
     required this.credentials,
   });

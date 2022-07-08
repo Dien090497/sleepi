@@ -17,7 +17,7 @@ final _privateConstructorUsedError = UnsupportedError(
 /// @nodoc
 mixin _$NftAttributeEntity {
   int get id => throw _privateConstructorUsedError; // required int nftId,
-  int get tokenId => throw _privateConstructorUsedError;
+  BigInt get tokenId => throw _privateConstructorUsedError;
   String get contractAddress => throw _privateConstructorUsedError;
   String get owner => throw _privateConstructorUsedError;
   String get type => throw _privateConstructorUsedError;
@@ -44,7 +44,7 @@ abstract class $NftAttributeEntityCopyWith<$Res> {
       _$NftAttributeEntityCopyWithImpl<$Res>;
   $Res call(
       {int id,
-      int tokenId,
+      BigInt tokenId,
       String contractAddress,
       String owner,
       String type,
@@ -95,7 +95,7 @@ class _$NftAttributeEntityCopyWithImpl<$Res>
       tokenId: tokenId == freezed
           ? _value.tokenId
           : tokenId // ignore: cast_nullable_to_non_nullable
-              as int,
+              as BigInt,
       contractAddress: contractAddress == freezed
           ? _value.contractAddress
           : contractAddress // ignore: cast_nullable_to_non_nullable
@@ -161,7 +161,7 @@ abstract class _$$_NftAttributeEntityCopyWith<$Res>
   @override
   $Res call(
       {int id,
-      int tokenId,
+      BigInt tokenId,
       String contractAddress,
       String owner,
       String type,
@@ -214,7 +214,7 @@ class __$$_NftAttributeEntityCopyWithImpl<$Res>
       tokenId: tokenId == freezed
           ? _value.tokenId
           : tokenId // ignore: cast_nullable_to_non_nullable
-              as int,
+              as BigInt,
       contractAddress: contractAddress == freezed
           ? _value.contractAddress
           : contractAddress // ignore: cast_nullable_to_non_nullable
@@ -297,7 +297,7 @@ class _$_NftAttributeEntity
   final int id;
 // required int nftId,
   @override
-  final int tokenId;
+  final BigInt tokenId;
   @override
   final String contractAddress;
   @override
@@ -406,7 +406,7 @@ class _$_NftAttributeEntity
 abstract class _NftAttributeEntity implements NftAttributeEntity {
   const factory _NftAttributeEntity(
       {required final int id,
-      required final int tokenId,
+      required final BigInt tokenId,
       required final String contractAddress,
       required final String owner,
       required final String type,
@@ -424,7 +424,7 @@ abstract class _NftAttributeEntity implements NftAttributeEntity {
   @override
   int get id => throw _privateConstructorUsedError;
   @override // required int nftId,
-  int get tokenId => throw _privateConstructorUsedError;
+  BigInt get tokenId => throw _privateConstructorUsedError;
   @override
   String get contractAddress => throw _privateConstructorUsedError;
   @override

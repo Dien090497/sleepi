@@ -32,7 +32,7 @@ class ForgotPasscodeCubit extends Cubit<ForgotPasscodeState> {
     var result =
         await _sendOTPUC.call(SendOTPParam(_email, OTPType.changePass));
     result.fold(
-      (l) => emit(ForgotPasscodeState.error(l.msg)),
+      (l) => emit(ForgotPasscodeState.error('$l')),
       (r) => emit(const ForgotPasscodeState.initial()),
     );
   }
@@ -51,7 +51,7 @@ class ForgotPasscodeCubit extends Cubit<ForgotPasscodeState> {
         .call(VerifyOTPSchema(otp, _email, OTPType.changePass));
 
     result.fold(
-      (l) => emit(ForgotPasscodeState.error(l.msg)),
+      (l) => emit(ForgotPasscodeState.error('$l')),
       (r) {
         emit(const ForgotPasscodeState.success());
         verifySuccess = true;

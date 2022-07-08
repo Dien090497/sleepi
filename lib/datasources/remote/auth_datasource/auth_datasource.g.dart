@@ -18,6 +18,22 @@ class _AuthDataSource implements AuthDataSource {
   String? baseUrl;
 
   @override
+  Future<UserResponse> getMe() async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<UserResponse>(
+            Options(method: 'GET', headers: _headers, extra: _extra)
+                .compose(_dio.options, '/users/me',
+                    queryParameters: queryParameters, data: _data)
+                .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = UserResponse.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
   Future<SendEmailResponse> sendOTP(email, otpType) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{
@@ -37,17 +53,20 @@ class _AuthDataSource implements AuthDataSource {
   }
 
   @override
-  Future<dynamic> fetchBalanceSpending(userId) async {
+  Future<List<TokenSpending>> fetchBalanceSpending(userId) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{r'userId': userId};
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
-    final _result = await _dio.fetch(_setStreamType<dynamic>(
-        Options(method: 'GET', headers: _headers, extra: _extra)
-            .compose(_dio.options, '/users/balances',
-                queryParameters: queryParameters, data: _data)
-            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = _result.data;
+    final _result = await _dio.fetch<List<dynamic>>(
+        _setStreamType<List<TokenSpending>>(
+            Options(method: 'GET', headers: _headers, extra: _extra)
+                .compose(_dio.options, '/users/balances',
+                    queryParameters: queryParameters, data: _data)
+                .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    var value = _result.data!
+        .map((dynamic i) => TokenSpending.fromJson(i as Map<String, dynamic>))
+        .toList();
     return value;
   }
 
@@ -202,19 +221,19 @@ class _AuthDataSource implements AuthDataSource {
   }
 
   @override
-  Future<UserResponse> refreshToken(refreshTokenSchema) async {
+  Future<RefreshTokenModel> refreshToken(refreshTokenSchema) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
     _data.addAll(refreshTokenSchema.toJson());
     final _result = await _dio.fetch<Map<String, dynamic>>(
-        _setStreamType<UserResponse>(
+        _setStreamType<RefreshTokenModel>(
             Options(method: 'POST', headers: _headers, extra: _extra)
                 .compose(_dio.options, '/auth/refresh-token',
                     queryParameters: queryParameters, data: _data)
                 .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = UserResponse.fromJson(_result.data!);
+    final value = RefreshTokenModel.fromJson(_result.data!);
     return value;
   }
 
@@ -284,18 +303,20 @@ class _AuthDataSource implements AuthDataSource {
   }
 
   @override
-  Future<dynamic> whitedrawToken(whitDrawTokenSchema) async {
+  Future<SwapTokenToWalletResponse> transferTokenToWallet(
+      whitDrawTokenSchema) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
     _data.addAll(whitDrawTokenSchema.toJson());
-    final _result = await _dio.fetch(_setStreamType<dynamic>(
-        Options(method: 'POST', headers: _headers, extra: _extra)
-            .compose(_dio.options, '/withdraw/token',
-                queryParameters: queryParameters, data: _data)
-            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = _result.data;
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<SwapTokenToWalletResponse>(
+            Options(method: 'POST', headers: _headers, extra: _extra)
+                .compose(_dio.options, '/withdraw/token',
+                    queryParameters: queryParameters, data: _data)
+                .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = SwapTokenToWalletResponse.fromJson(_result.data!);
     return value;
   }
 

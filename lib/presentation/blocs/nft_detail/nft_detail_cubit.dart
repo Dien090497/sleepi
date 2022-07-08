@@ -16,7 +16,7 @@ class NftDetailCubit extends Cubit<NftDetailState> {
       WalletInfoEntity walletInfoEntity, TokenEntity token) async {
     final currentState = state;
     final result = await _getListNftDetailUC.call(GetListNftDetailParams(
-      address: token.address,
+      nftAddress: token.address,
       ownerAddress: walletInfoEntity.address,
       count: 30,
       nftType: NftType.bed,
@@ -41,7 +41,7 @@ class NftDetailCubit extends Cubit<NftDetailState> {
     final currentState = state;
     if (currentState is NftDetailLoaded) {
       final result = await _getListNftDetailUC.call(GetListNftDetailParams(
-        address: currentState.tokenEntity.address,
+        nftAddress: currentState.tokenEntity.address,
         ownerAddress: currentState.walletInfoEntity.address,
         count: 30,
         nftType: NftType.bed,
@@ -67,7 +67,7 @@ class NftDetailCubit extends Cubit<NftDetailState> {
     final currentState = state;
     if (currentState is NftDetailLoaded && currentState.hasMore) {
       final result = await _getListNftDetailUC.call(GetListNftDetailParams(
-        address: currentState.tokenEntity.address,
+        nftAddress: currentState.tokenEntity.address,
         ownerAddress: currentState.walletInfoEntity.address,
         count: 30,
         nftType: NftType.bed,

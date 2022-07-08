@@ -18,8 +18,25 @@ import 'package:slee_fi/models/pop_with_result.dart';
 import 'package:slee_fi/presentation/blocs/import_wallet/import_wallet_cubit.dart';
 import 'package:slee_fi/presentation/blocs/import_wallet/import_wallet_state.dart';
 
-class ImportWalletScreen extends StatelessWidget {
+class ImportWalletScreen extends StatefulWidget {
   const ImportWalletScreen({Key? key}) : super(key: key);
+
+  @override
+  State<ImportWalletScreen> createState() => _ImportWalletScreenState();
+}
+
+class _ImportWalletScreenState extends State<ImportWalletScreen> {
+
+  TextEditingController controllerMnemonic = TextEditingController();
+  TextEditingController controllerOTP = TextEditingController();
+
+
+  @override
+  void dispose() {
+    controllerMnemonic.dispose();
+    controllerOTP.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -31,11 +48,10 @@ class ImportWalletScreen extends StatelessWidget {
           if (state is ImportWalletVerifyOtpSuccess) {
             Navigator.pushNamed(context, R.createPasscode).then((value) {
               if (value == true) {
-                cubit.importWallet();
+                cubit.importWallet(mnemonic: controllerMnemonic.text);
               }
             });
           }
-
           if (state is ImportWalletDone) {
             Future.delayed(
               const Duration(milliseconds: 200),
@@ -79,25 +95,24 @@ class ImportWalletScreen extends StatelessWidget {
                                       TextfieldVerificationEmail(
                                           maxLength: 6,
                                           onPressed: () => cubit.sendOtp(),
-                                          valueChanged: (otp) =>
-                                              cubit.otp = otp,
                                           errorText:
                                               state is ImportWalletErrorOtp
                                                   ? state.msg
-                                                  : ''),
+                                                  : '',
+                                        controller: controllerOTP,
+                                      ),
                                       const SizedBox(height: 20),
                                       SFTextField(
                                         labelText: LocaleKeys.seed_phrase,
                                         hintText: LocaleKeys
                                             .enter_the_seed_phrase_word,
                                         hintStyle: TextStyles.w400lightGrey12,
-                                        onChanged: (mnemonic) =>
-                                            cubit.mnemonic = mnemonic,
                                         maxLine: 10,
                                         maxLength: 256,
+                                        controller: controllerMnemonic,
                                       ),
                                       const SizedBox(height: 5),
-                                      if (state is ImportWalletErrorMnemonic)
+                                      if (state is ImportWalletErrorMnemonic )
                                         SFText(
                                           keyText: state.msg,
                                           style: TextStyles.w400Red12,
@@ -117,7 +132,7 @@ class ImportWalletScreen extends StatelessWidget {
                             color: AppColors.blue,
                             onPressed: () {
                               FocusScope.of(context).unfocus();
-                              cubit.process();
+                              cubit.process(otp: controllerOTP.text, mnemonic: controllerMnemonic.text);
                             },
                           ),
                           const SizedBox(height: 24)

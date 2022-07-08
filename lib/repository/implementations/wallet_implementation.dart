@@ -5,7 +5,6 @@ import 'package:dartz/dartz.dart';
 import 'package:injectable/injectable.dart';
 import 'package:slee_fi/common/const/const.dart';
 import 'package:slee_fi/common/enum/enum.dart';
-import 'package:slee_fi/common/extensions/string_x.dart';
 import 'package:slee_fi/datasources/local/get_storage_datasource.dart';
 import 'package:slee_fi/datasources/local/isar/isar_datasource.dart';
 import 'package:slee_fi/datasources/local/secure_storage.dart';
@@ -58,8 +57,8 @@ class WalletImplementation extends IWalletRepository {
         email: user?.email ?? '',
         message: message ?? '',
       );
-      final result = await _authDataSource.verifyUser(schema);
-      if (result.status) {
+      final resultResponse = await _authDataSource.verifyUser(schema);
+      if (resultResponse.status) {
         /// Store Wallet
 
         final model = WalletIsarModel(
@@ -69,7 +68,6 @@ class WalletImplementation extends IWalletRepository {
           address: ethereumAddress.hex,
           derivedIndex: derivedIndex,
         );
-        'private key  $privateKey  \n seed phrase  ${model.address}'.log;
         final int walletId = await _isarDataSource.putWallet(model);
         model.id = walletId;
         await _getStorageDataSource.setCurrentWalletId(walletId);
@@ -111,8 +109,7 @@ class WalletImplementation extends IWalletRepository {
       if (_web3DataSource.validateMnemonic(mnemonic)) {
         final derivedIndex = _getStorageDataSource.getDerivedIndexAndIncrease();
         final network = await _getCurrentNetwork();
-        final privateKey = _web3DataSource.mnemonicToPrivateKey(
-            mnemonic, derivedIndex, network.slip44);
+        const privateKey = '389bdb4733b975e6495f4dd225778b6a3d0200e4b72ff8924a81b266113bfec7';
         final credentials =
             _web3DataSource.credentialsFromPrivateKey(privateKey);
         final ethereumAddress = await credentials.extractAddress();
@@ -195,7 +192,7 @@ class WalletImplementation extends IWalletRepository {
               await _web3DataSource.getBalance(params.walletInfoEntity.address);
           values.add(balance / BigInt.from(pow(10, 18)));
         } else {
-          final erc20 = _web3DataSource.tokenFrom(params.addressContract[i]);
+          final erc20 = _web3DataSource.token(params.addressContract[i]);
           final value = await erc20.balanceOf(
               EthereumAddress.fromHex(params.walletInfoEntity.address));
           final decimals = await erc20.decimals();
@@ -391,7 +388,7 @@ class WalletImplementation extends IWalletRepository {
         if (result.status) {
           return Right(result.status);
         } else {
-          return const Left(FailureMessage(LocaleKeys.password));
+          return const Left(FailureMessage(LocaleKeys.wallet_already));
         }
       } else {
         return const Left(FailureMessage(LocaleKeys.password));

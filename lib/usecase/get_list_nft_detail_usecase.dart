@@ -15,14 +15,16 @@ class GetListNftDetailUseCase
   Future<Either<Failure, List<NFTEntity>>> call(
       GetListNftDetailParams params) async {
     final listIds = await _nftRepository.tokensOf(
-        nftAddress: params.address,
-        ownerAddress: params.ownerAddress,
-        count: params.count,
-        start: params.start);
+      nftAddress: params.nftAddress,
+      ownerAddress: params.ownerAddress,
+      count: params.count,
+      start: params.start,
+    );
     return listIds.fold(
       Left.new,
       (ids) {
         return _nftRepository.getListNftData(
+          nftAddress: params.nftAddress,
           tokenIds: ids,
           nftType: params.nftType,
         );
@@ -34,13 +36,13 @@ class GetListNftDetailUseCase
 class GetListNftDetailParams {
   final NftType nftType;
   final String ownerAddress;
-  final String address;
+  final String nftAddress;
   final int count;
   final int start;
 
   GetListNftDetailParams({
     required this.ownerAddress,
-    required this.address,
+    required this.nftAddress,
     required this.nftType,
     required this.count,
     this.start = 0,

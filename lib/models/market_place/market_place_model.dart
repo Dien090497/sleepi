@@ -1,3 +1,4 @@
+import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'market_place_model.g.dart';
@@ -43,13 +44,36 @@ class MarketPlaceModel {
   final String contractAddress;
 
   final String type;
-  // final String class;
+  @JsonKey(name: 'class')
+  final String? classNft;
   final String? quality;
   final String owner;
 
-  MarketPlaceModel(this.id, this.nftId, this.categoryId, this.isLock, this.time, this.level, this.bedMint,
-      this.efficiency, this.luck, this.bonus, this.special, this.resilience, this.price, this.status, this.createdAt,
-      this.updatedAt, this.nftName, this.image, this.contractAddress, this.type, this.quality, this.owner, this.symbol);
+  MarketPlaceModel(
+      this.id,
+      this.nftId,
+      this.categoryId,
+      this.isLock,
+      this.time,
+      this.level,
+      this.bedMint,
+      this.efficiency,
+      this.luck,
+      this.bonus,
+      this.special,
+      this.resilience,
+      this.price,
+      this.status,
+      this.createdAt,
+      this.updatedAt,
+      this.nftName,
+      this.image,
+      this.contractAddress,
+      this.type,
+      this.quality,
+      this.owner,
+      this.symbol,
+      this.classNft);
 
   factory MarketPlaceModel.fromJson(Map<String, dynamic> json) =>
       _$MarketPlaceModelFromJson(json);

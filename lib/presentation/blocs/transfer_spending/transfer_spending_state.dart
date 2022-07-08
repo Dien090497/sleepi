@@ -9,11 +9,16 @@ class TransferSpendingState with _$TransferSpendingState {
 
   const factory TransferSpendingState.loading() = TransferSpendingStateLoading;
 
+  const factory TransferSpendingState.toWalletSuccess() = TransferSpendingStateToWalletSuccess;
+
   const factory TransferSpendingState.error({required String message, String? typeError}) = TransferSpendingStateError;
+
+
 
   const factory TransferSpendingState.loaded({
     double? fee,
     TransferSpendingEntity? transferSpendingEntity,
 }) = TransferSpendingStateLoaded;
+
 
 }

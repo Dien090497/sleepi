@@ -1,48 +1,45 @@
+import 'package:dartz/dartz.dart';
 import 'package:flutter/material.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
 import 'package:slee_fi/common/widgets/sf_buttons.dart';
 import 'package:slee_fi/common/widgets/sf_card.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
+import 'package:slee_fi/common/widgets/sf_textfield.dart';
+import 'package:slee_fi/di/injector.dart';
+import 'package:slee_fi/entities/nft_entity/nft_entity.dart';
+import 'package:slee_fi/failures/failure.dart';
 import 'package:slee_fi/l10n/locale_keys.g.dart';
+import 'package:slee_fi/usecase/estimate_nft_function_fee_usecase.dart';
 
-class NftPopUpTransfer extends StatefulWidget {
+class NftPopUpTransfer extends StatelessWidget {
   const NftPopUpTransfer({
     Key? key,
     required this.onConfirm,
+    required this.nft,
+    required this.ownerAddress,
     this.onCancel,
-    required this.fee,
-    required this.valueTransfer,
+    this.isToSpending,
   }) : super(key: key);
 
-  final int fee;
-  final int valueTransfer;
-  final VoidCallback onConfirm;
+  final bool? isToSpending;
+  final Function(String address) onConfirm;
   final VoidCallback? onCancel;
-
-  @override
-  State<NftPopUpTransfer> createState() => _NftPopUpTransferState();
-}
-
-class _NftPopUpTransferState extends State<NftPopUpTransfer> {
-  final walletAddressController = TextEditingController();
-
-  @override
-  void dispose() {
-    super.dispose();
-    walletAddressController.dispose();
-  }
+  final NFTEntity nft;
+  final String ownerAddress;
 
   @override
   Widget build(BuildContext context) {
+    String toAddress = '';
+
     return Stack(
       children: [
         Positioned(
           right: 0,
           child: GestureDetector(
             onTap: () {
-              if (widget.onCancel != null) {
-                widget.onCancel!();
+              if (onCancel != null) {
+                onCancel!();
               }
               Navigator.pop(context);
             },
@@ -59,47 +56,65 @@ class _NftPopUpTransferState extends State<NftPopUpTransfer> {
               style: TextStyles.white1w700size16,
             ),
             const SizedBox(height: 20),
-            SFCard(
-              margin: EdgeInsets.zero,
-              padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 18),
-              child: Column(
-                children: [
-                  Row(
-                    children: [
-                      SFText(
-                        keyText: LocaleKeys.from,
-                        style: TextStyles.lightGrey12,
-                      ),
-                      const SizedBox(width: 4),
-                      Expanded(
-                        child: SFText(
-                          keyText: LocaleKeys.to,
+            if (isToSpending ?? false)
+              SFCard(
+                margin: EdgeInsets.zero,
+                padding:
+                    const EdgeInsets.symmetric(vertical: 12, horizontal: 18),
+                child: Column(
+                  children: [
+                    Row(
+                      children: [
+                        SFText(
+                          keyText: LocaleKeys.from,
                           style: TextStyles.lightGrey12,
-                          textAlign: TextAlign.right,
                         ),
-                      ),
-                    ],
-                  ),
-                  const SizedBox(height: 12),
-                  Row(
-                    children: [
-                      SFText(
-                        keyText: LocaleKeys.inventory,
-                        style: TextStyles.bold16LightWhite,
-                      ),
-                      const SizedBox(width: 4),
-                      Expanded(
-                        child: SFText(
+                        const SizedBox(width: 4),
+                        Expanded(
+                          child: SFText(
+                            keyText: LocaleKeys.to,
+                            style: TextStyles.lightGrey12,
+                            textAlign: TextAlign.right,
+                          ),
+                        ),
+                      ],
+                    ),
+                    const SizedBox(height: 12),
+                    Row(
+                      children: [
+                        SFText(
                           keyText: LocaleKeys.wallet,
                           style: TextStyles.bold16LightWhite,
-                          textAlign: TextAlign.right,
                         ),
-                      ),
-                    ],
+                        const SizedBox(width: 4),
+                        Expanded(
+                          child: SFText(
+                            keyText: LocaleKeys.spending,
+                            style: TextStyles.bold16LightWhite,
+                            textAlign: TextAlign.right,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+              )
+            else
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  SFText(
+                      keyText: LocaleKeys.wallet_id,
+                      style: TextStyles.lightGrey14),
+                  const SizedBox(height: 8),
+                  SFTextField(
+                    onChanged: (addr) {
+                      toAddress = addr;
+                    },
+                    showLabel: false,
                   ),
                 ],
               ),
-            ),
             const SizedBox(height: 24),
             Row(
               children: [
@@ -109,11 +124,24 @@ class _NftPopUpTransferState extends State<NftPopUpTransfer> {
                 ),
                 const SizedBox(width: 4),
                 Expanded(
-                    child: SFText(
-                  keyText: '${widget.fee} SLFT',
-                  textAlign: TextAlign.right,
-                  style: TextStyles.white12,
-                )),
+                    child: FutureBuilder<Either<Failure, double>>(
+                        future: getIt<EstimateNftFunctionFeeUseCase>()
+                            .call(EstimateGasParams(
+                          nftAddress: nft.attribute.contractAddress,
+                          ownerAddress: ownerAddress,
+                          toAddress: toAddress,
+                          nftId: nft.attribute.tokenId,
+                          functionName: 'transferFrom',
+                        )),
+                        builder: (context, snapshot) {
+                          return Text(
+                            snapshot.hasData
+                                ? '${snapshot.data!.getOrElse(() => 0)} AVAX'
+                                : '--.--',
+                            textAlign: TextAlign.right,
+                            style: TextStyles.white12,
+                          );
+                        })),
               ],
             ),
             const SizedBox(height: 8),
@@ -126,7 +154,7 @@ class _NftPopUpTransferState extends State<NftPopUpTransfer> {
                 const SizedBox(width: 4),
                 Expanded(
                     child: SFText(
-                  keyText: '${widget.valueTransfer} NFT',
+                  keyText: '#${nft.attribute.tokenId}',
                   textAlign: TextAlign.right,
                   style: TextStyles.white12,
                 )),
@@ -139,8 +167,8 @@ class _NftPopUpTransferState extends State<NftPopUpTransfer> {
                   child: SFButton(
                     text: LocaleKeys.cancel,
                     onPressed: () {
-                      if (widget.onCancel != null) {
-                        widget.onCancel!();
+                      if (onCancel != null) {
+                        onCancel!();
                       }
                       Navigator.pop(context);
                     },
@@ -154,7 +182,7 @@ class _NftPopUpTransferState extends State<NftPopUpTransfer> {
                   child: SFButton(
                     text: LocaleKeys.confirm,
                     onPressed: () {
-                      widget.onConfirm();
+                      onConfirm(toAddress);
                       // Navigator.pop(context);
                       // showSuccessfulDialog(context, null);
                     },

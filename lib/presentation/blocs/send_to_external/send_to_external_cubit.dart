@@ -4,7 +4,6 @@ import 'package:bloc/bloc.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ethereum_addresses/ethereum_addresses.dart';
 import 'package:slee_fi/di/injector.dart';
-import 'package:slee_fi/failures/failure.dart';
 import 'package:slee_fi/l10n/locale_keys.g.dart';
 import 'package:slee_fi/presentation/blocs/send_to_external/send_to_external_state.dart';
 import 'package:slee_fi/presentation/screens/send_to_external/send_to_external_screen.dart';
@@ -31,7 +30,7 @@ class SendToExternalCubit extends Cubit<SendToExternalState> {
         contractAddressTo : contractAddressTo, valueInEther : valueInEther, fee: fee));
 
     result.fold((l) {
-      emit(SendToExternalState.fail(l is FailureMessage ? l.msg : '$l'));
+      emit(SendToExternalState.fail('$l'));
     }, (success)  {
       // print(success);
       emit(const SendToExternalState.success());
@@ -42,7 +41,7 @@ class SendToExternalCubit extends Cubit<SendToExternalState> {
     final result = await _sendToExternalUC.getTokenBalance(NoParams());
     result.fold(
           (l) {
-        emit(SendToExternalState.fail(l is FailureMessage ? l.msg : '$l'));
+        emit(SendToExternalState.fail('$l'));
       },
           (success) {
         emit(SendToExternalState.getBalance(success));
@@ -55,7 +54,7 @@ class SendToExternalCubit extends Cubit<SendToExternalState> {
         contractAddressTo : contractAddressTo, valueInEther : valueInEther));
     result.fold(
           (l) {
-        emit(SendToExternalState.fail(l is FailureMessage ? l.msg : '$l'));
+        emit(SendToExternalState.fail('$l'));
       },
           (limitGas) {
             fee = ((limitGas * 50000000000) / pow(10, 18));
@@ -91,7 +90,7 @@ class SendToExternalCubit extends Cubit<SendToExternalState> {
         valueInEther : valueInEther, tokenEntity: arg?.tokenEntity, toAddress: toAddress);
     final result = await _sendTokenToExternalUseCase.call(params);
     result.fold((l) {
-      emit(SendToExternalState.fail(l.msg));
+      emit(SendToExternalState.fail('$l'));
     }, (success) {
       emit(const SendToExternalState.success());
     });

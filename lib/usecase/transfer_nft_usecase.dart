@@ -15,7 +15,7 @@ class TransferNftUseCase extends UseCase<String, TransferNftParams> {
         nftAddress: params.nftAddress,
         ownerAddress: params.ownerAddress,
         toAddress: params.toAddress,
-        tokenId: params.tokenId,
+        nftId: params.nftId,
         credentials: params.credentials);
   }
 }
@@ -24,14 +24,14 @@ class TransferNftParams {
   final String nftAddress;
   final String ownerAddress;
   final String toAddress;
-  final BigInt tokenId;
+  final BigInt nftId;
   final Credentials credentials;
 
   TransferNftParams({
     required this.nftAddress,
     required this.ownerAddress,
     required this.toAddress,
-    required this.tokenId,
+    required this.nftId,
     required this.credentials,
   });
 }

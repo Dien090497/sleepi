@@ -7,7 +7,7 @@ part 'nft_entity.freezed.dart';
 @freezed
 class NFTEntity with _$NFTEntity {
   const factory NFTEntity({
-    required BigInt id,
+    required int id,
     required int categoryId,
     required int isLock,
     required String status,

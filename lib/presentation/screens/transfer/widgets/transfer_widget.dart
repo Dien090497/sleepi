@@ -8,15 +8,9 @@ import 'package:slee_fi/l10n/locale_keys.g.dart';
 import 'package:slee_fi/presentation/screens/setting_activation_code/widgets/container_box_widget.dart';
 import 'package:slee_fi/resources/resources.dart';
 
-class TransferWidget extends StatefulWidget {
-  const TransferWidget({Key? key}) : super(key: key);
-
-  @override
-  State<TransferWidget> createState() => _TransferWidgetState();
-}
-
-class _TransferWidgetState extends State<TransferWidget> {
-  bool swapText = false;
+class TransferWidget extends StatelessWidget {
+  const TransferWidget({Key? key, required this.swapText}) : super(key: key);
+  final bool swapText;
 
   @override
   Widget build(BuildContext context) {
@@ -55,26 +49,7 @@ class _TransferWidgetState extends State<TransferWidget> {
               )
             ],
           ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.end,
-            children: [
-              GestureDetector(
-                onTap: () {
-                  setState(() {
-                    swapText = !swapText;
-                  });
-                },
-                child: const CircleAvatar(
-                  backgroundColor: AppColors.blue,
-                  child: Icon(
-                    Icons.swap_vert,
-                    size: 30,
-                    color: AppColors.white,
-                  ),
-                ),
-              ),
-            ],
-          ),
+          const SizedBox(height: 30),
           Row(
             children: [
               Expanded(

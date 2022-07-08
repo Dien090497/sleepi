@@ -85,7 +85,7 @@ class TransactionImplementation extends ITransactionRepository{
         value: params.valueInEther,
         // gasPrice: 50
       );
-      return Right(fee);
+      return Right(fee.toInt());
     } catch (e) {
       return Left(FailureMessage('$e'));
     }
@@ -119,7 +119,7 @@ class TransactionImplementation extends ITransactionRepository{
       final privateKey = _web3DataSource.mnemonicToPrivateKey(
           wallet.mnemonic, wallet.derivedIndex!, network.slip44);
       final credentials = _web3DataSource.credentialsFromPrivateKey(privateKey);
-      final erc20 = _web3DataSource.tokenFrom(params.tokenEntity?.address ?? '');
+      final erc20 = _web3DataSource.token(params.tokenEntity?.address ?? '');
       final recipient = EthereumAddress.fromHex(params.toAddress);
       final amount = EtherAmount.fromUnitAndValue(EtherUnit.wei, BigInt.from(params.valueInEther * pow(10, 18))).getValueInUnitBI(EtherUnit.wei);
       erc20.transfer(
@@ -133,4 +133,19 @@ class TransactionImplementation extends ITransactionRepository{
     }
   }
 
+  @override
+  Future<Either<Failure, BigInt>> estimateGasFee(
+      {String? sender, String? to, double? value, double? gasPrice}) async {
+    try {
+      final price = await _web3DataSource.estimateGas(
+        value: value,
+        gasPrice: gasPrice,
+        sender: sender != null ? EthereumAddress.fromHex(sender) : null,
+        to: to,
+      );
+      return Right(price * BigInt.from(50) + BigInt.from(15));
+    } catch (e) {
+      return Left(FailureMessage('$e'));
+    }
+  }
 }

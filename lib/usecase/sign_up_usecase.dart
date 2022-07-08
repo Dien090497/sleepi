@@ -11,7 +11,7 @@ class SignUpUseCase extends UseCase<UserInfoEntity, SignUpSchema> {
   SignUpUseCase(this._authRepository);
 
   @override
-  Future<Either<FailureMessage, UserInfoEntity>> call(params) {
+  Future<Either<Failure, UserInfoEntity>> call(params) {
     return _authRepository.signUp(params);
   }
 }

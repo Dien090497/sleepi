@@ -7,6 +7,7 @@ import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
 import 'package:slee_fi/common/widgets/sf_icon.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
+import 'package:slee_fi/entities/nft_entity/nft_entity.dart';
 import 'package:slee_fi/l10n/locale_keys.g.dart';
 import 'package:slee_fi/presentation/blocs/nft_detail/nft_detail_cubit.dart';
 import 'package:slee_fi/presentation/blocs/nft_detail/nft_detail_state.dart';
@@ -16,7 +17,7 @@ class ListTransferNftWidget extends StatefulWidget {
       {Key? key, required this.onTap, required this.nftDetailCubit})
       : super(key: key);
 
-  final VoidCallback onTap;
+  final Function(NFTEntity) onTap;
   final NftDetailCubit nftDetailCubit;
 
   @override
@@ -68,7 +69,9 @@ class _ListTransferNftWidgetState extends State<ListTransferNftWidget> {
                           BedType.values[index % BedType.values.length];
 
                       return GestureDetector(
-                        onTap: widget.onTap,
+                        onTap: () {
+                          widget.onTap(nft);
+                        },
                         child: TransferNftWidget(
                           bedType: bedType,
                           bedId: nft.attribute.tokenId,
@@ -96,7 +99,7 @@ class TransferNftWidget extends StatelessWidget {
   }) : super(key: key);
 
   final BedType bedType;
-  final int bedId;
+  final BigInt bedId;
 
   @override
   Widget build(BuildContext context) {

@@ -26,7 +26,7 @@ class SpendingImplementation extends ISpendingRepository {
     required int userId,
   }) async {
     try {
-      final token = _web3DataSource.tokenFrom(addressContract);
+      final token = _web3DataSource.token(addressContract);
       final result = BigInt.from(amount * pow(10, 18));
       final allowance = await _spendingDataSource.allowance(
           await owner.extractAddress(), token);
@@ -66,7 +66,7 @@ class SpendingImplementation extends ISpendingRepository {
   Future<Either<Failure, String>> approve(
       {required Credentials owner, required String addressContract}) async {
     try {
-      final token = _web3DataSource.tokenFrom(addressContract);
+      final token = _web3DataSource.token(addressContract);
       final result =
           BigInt.parse("100000000000000000000000000000000000000000000000000");
       final txHash = await _spendingDataSource.approve(owner, result, token);
