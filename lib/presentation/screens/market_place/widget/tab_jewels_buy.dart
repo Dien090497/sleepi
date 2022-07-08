@@ -12,6 +12,7 @@ import 'package:slee_fi/models/market_place/market_place_model.dart';
 import 'package:slee_fi/presentation/blocs/market_place/market_place_cubit.dart';
 import 'package:slee_fi/presentation/blocs/market_place/market_place_state.dart';
 import 'package:slee_fi/presentation/screens/market_place/widget/filter_sheet.dart';
+import 'package:slee_fi/presentation/screens/market_place/widget/pop_up_insufficient.dart';
 import 'package:slee_fi/presentation/screens/market_place/widget/pop_up_jewel_market_place.dart';
 import 'package:slee_fi/presentation/screens/market_place/widget/tab_bar_filter.dart';
 import 'package:slee_fi/resources/resources.dart';
@@ -21,7 +22,8 @@ import 'jewel_buy_widget.dart';
 class TabJewelsBuy extends StatelessWidget {
   const TabJewelsBuy({Key? key}) : super(key: key);
 
-  void _showJewelDialog(BuildContext context, MarketPlaceModel jewel) {
+  void _showJewelDialog(
+      BuildContext context, MarketPlaceModel jewel, MarketPlaceCubit cubit) {
     showCustomAlertDialog(
       context,
       padding: const EdgeInsets.all(24),
@@ -29,8 +31,18 @@ class TabJewelsBuy extends StatelessWidget {
         jewel: jewel,
         onConfirmTap: () {
           Navigator.pop(context);
-          showSuccessfulDialog(context, null);
+          cubit.buyNFT(jewel);
         },
+      ),
+    );
+  }
+
+  void _showDonWorryDialog(BuildContext context, MarketPlaceModel nft) {
+    showCustomAlertDialog(
+      context,
+      padding: const EdgeInsets.all(24),
+      children: PopupInsufficient(
+        nft: nft,
       ),
     );
   }
@@ -46,6 +58,14 @@ class TabJewelsBuy extends StatelessWidget {
           listener: (context, state) {
             if (state is MarketPlaceStateSuccess) {
               listJewels = state.list.list;
+            }
+
+            if (state is MarketPlaceStateBuySuccess) {
+              showSuccessfulDialog(context, null);
+            }
+
+            if (state is MarketPlaceStateBuyNotEnoughAVAX) {
+              _showDonWorryDialog(context, state.nft);
             }
           },
           builder: (context, state) {
@@ -92,20 +112,20 @@ class TabJewelsBuy extends StatelessWidget {
                                     SFGridView(
                                       count: listJewels.length,
                                       childAspectRatio: 8 / 10,
-                                      onRefresh: (){
+                                      onRefresh: () {
                                         cubit.refresh();
                                       },
                                       itemBuilder: (context, i) {
                                         return GestureDetector(
                                           onTap: () {
                                             _showJewelDialog(
-                                                context, listJewels[i]);
+                                                context, listJewels[i], cubit);
                                           },
                                           child: JewelsBuyWidget(
                                             jewel: listJewels[i],
                                             onPressedButton: () {
-                                              _showJewelDialog(
-                                                  context, listJewels[i]);
+                                              _showJewelDialog(context,
+                                                  listJewels[i], cubit);
                                             },
                                           ),
                                         );

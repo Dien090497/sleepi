@@ -172,7 +172,7 @@ class NFTDetailScreen extends StatelessWidget {
                     style: TextStyles.bold30White,
                     textAlign: TextAlign.center,
                   ),
-                  // const SizedBox(height: 36.0),
+                  const SizedBox(height: 18.0),
                   Container(
                     constraints: const BoxConstraints(maxHeight: 130),
                     padding: const EdgeInsets.symmetric(horizontal: 23),
@@ -238,7 +238,7 @@ class NFTDetailScreen extends StatelessWidget {
                       ],
                     ),
                   ),
-                  // const SizedBox(height: 32.0),
+                  const SizedBox(height: 16.0),
                   if (state is NftDetailLoaded)
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 8),
