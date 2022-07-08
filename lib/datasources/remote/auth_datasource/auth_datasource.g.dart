@@ -370,54 +370,6 @@ class _AuthDataSource implements AuthDataSource {
     return value;
   }
 
-  @override
-  Future<MarketPlaceModel> getCategory() async {
-    const _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{};
-    final _headers = <String, dynamic>{};
-    final _data = <String, dynamic>{};
-    final _result = await _dio.fetch<Map<String, dynamic>>(
-        _setStreamType<MarketPlaceModel>(
-            Options(method: 'GET', headers: _headers, extra: _extra)
-                .compose(_dio.options, '/market-place/buy-nft',
-                    queryParameters: queryParameters, data: _data)
-                .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = MarketPlaceModel.fromJson(_result.data!);
-    return value;
-  }
-
-  @override
-  Future<MarketPlaceModel> getNftByOwner() async {
-    const _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{};
-    final _headers = <String, dynamic>{};
-    final _data = <String, dynamic>{};
-    final _result = await _dio.fetch<Map<String, dynamic>>(
-        _setStreamType<MarketPlaceModel>(
-            Options(method: 'GET', headers: _headers, extra: _extra)
-                .compose(_dio.options, '/nft-attributes/nft-by-owner',
-                    queryParameters: queryParameters, data: _data)
-                .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = MarketPlaceModel.fromJson(_result.data!);
-    return value;
-  }
-
-  @override
-  Future<MarketPlaceModel> unstacking() async {
-    const _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{};
-    final _headers = <String, dynamic>{};
-    final _data = <String, dynamic>{};
-    final _result = await _dio.fetch<Map<String, dynamic>>(
-        _setStreamType<MarketPlaceModel>(
-            Options(method: 'POST', headers: _headers, extra: _extra)
-                .compose(_dio.options, '/stacking/unstacking',
-                    queryParameters: queryParameters, data: _data)
-                .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = MarketPlaceModel.fromJson(_result.data!);
-    return value;
-  }
-
   RequestOptions _setStreamType<T>(RequestOptions requestOptions) {
     if (T != dynamic &&
         !(requestOptions.responseType == ResponseType.bytes ||
