@@ -1,5 +1,5 @@
+import 'package:decimal/decimal.dart';
 import 'package:flutter/material.dart';
-import 'package:slee_fi/common/extensions/num_ext.dart';
 import 'package:slee_fi/common/extensions/string_x.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
@@ -99,7 +99,7 @@ class PopUpConfirmTrade extends StatelessWidget {
               ),
               Expanded(
                   child: SFText(
-                      keyText: "${amountOutMin.formatBalanceToken} $symbolTo",
+                      keyText: "${Decimal.parse(amountOutMin.toString())} $symbolTo",
                       style: TextStyles.lightWhite16,
                       textAlign: TextAlign.end)),
             ],

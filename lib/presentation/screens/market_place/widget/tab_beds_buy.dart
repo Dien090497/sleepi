@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:slee_fi/common/widgets/sf_alert_dialog.dart';
 import 'package:slee_fi/common/widgets/sf_bottom_sheets.dart';
+import 'package:slee_fi/common/widgets/sf_dialog.dart';
 import 'package:slee_fi/common/widgets/sf_icon.dart';
 import 'package:slee_fi/l10n/locale_keys.g.dart';
 import 'package:slee_fi/models/market_place/market_place_model.dart';
@@ -19,7 +20,7 @@ import 'package:slee_fi/resources/resources.dart';
 class TabBedsBuy extends StatelessWidget {
   const TabBedsBuy({Key? key}) : super(key: key);
 
-  void _showBedDialog(BuildContext context, MarketPlaceModel bed) {
+  void _showBedDialog(BuildContext context, MarketPlaceModel bed, MarketPlaceCubit cubit) {
     showCustomAlertDialog(
       context,
       padding: const EdgeInsets.all(24),
@@ -27,8 +28,7 @@ class TabBedsBuy extends StatelessWidget {
         bed: bed,
         onConfirmTap: () {
           Navigator.pop(context);
-          // showSuccessfulDialog(context, null);
-          _showDonWorryDialog(context, bed);
+          cubit.buyNFT(bed);
         },
       ),
     );
@@ -53,8 +53,18 @@ class TabBedsBuy extends StatelessWidget {
         create: (context) => MarketPlaceCubit()..init(1),
         child: BlocConsumer<MarketPlaceCubit, MarketPlaceState>(
           listener: (context, state) {
+            final cubit = context.read<MarketPlaceCubit>();
             if (state is MarketPlaceStateSuccess) {
               listBeds = state.list.list;
+            }
+
+            if (state is MarketPlaceStateBuySuccess) {
+              cubit.refresh();
+              showSuccessfulDialog(context, null);
+            }
+
+            if (state is MarketPlaceStateBuyNotEnoughAVAX) {
+              _showDonWorryDialog(context, state.nft);
             }
           },
           builder: (context, state) {
@@ -117,7 +127,7 @@ class TabBedsBuy extends StatelessWidget {
                                         cubit.refresh();
                                       },
                                       onBuyTap: (bed) {
-                                        _showBedDialog(context, bed);
+                                        _showBedDialog(context, bed, cubit);
                                       },
                                     ),
                                     Padding(

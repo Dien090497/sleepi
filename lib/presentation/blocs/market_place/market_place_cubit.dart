@@ -4,7 +4,9 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:slee_fi/di/injector.dart';
 import 'package:slee_fi/l10n/locale_keys.g.dart';
+import 'package:slee_fi/models/market_place/market_place_model.dart';
 import 'package:slee_fi/schema/market/market_schema.dart';
+import 'package:slee_fi/usecase/buy_nft_usecase.dart';
 import 'package:slee_fi/usecase/get_market_place_usecase.dart';
 
 import 'market_place_state.dart';
@@ -26,6 +28,7 @@ class MarketPlaceCubit extends Cubit<MarketPlaceState> {
       classNft: [],
       quality: []);
   final MarketPlaceUseCase _marketPlaceUseCase = getIt<MarketPlaceUseCase>();
+  final BuyNFTUseCase _buyNFTUseCase = getIt<BuyNFTUseCase>();
 
   init(int idCategory) {
     params = params.copyWith(
@@ -128,5 +131,21 @@ class MarketPlaceCubit extends Cubit<MarketPlaceState> {
     params = params.copyWith(page: page, limit: limit);
     log("params : ${params.toJson()}");
     getMarketPlace(params);
+  }
+
+
+  Future<void> buyNFT(MarketPlaceModel nft) async {
+    final result = await _buyNFTUseCase.call(nft.nftId);
+    result.fold((l) {
+      emit(MarketPlaceState.buyFail('$l'));
+    }, (success) {
+      if(success.status) {
+        emit(const MarketPlaceState.buySuccess());
+      }else{
+        if(success.message == 'Not enough to buy'){
+          emit(MarketPlaceState.notEnoughAVAX(nft));
+        }
+      }
+    });
   }
 }
