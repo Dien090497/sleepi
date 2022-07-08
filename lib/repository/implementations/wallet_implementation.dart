@@ -6,7 +6,6 @@ import 'package:injectable/injectable.dart';
 import 'package:slee_fi/common/const/const.dart';
 import 'package:slee_fi/common/enum/enum.dart';
 import 'package:slee_fi/datasources/local/get_storage_datasource.dart';
-import 'package:slee_fi/datasources/local/history_datasource.dart';
 import 'package:slee_fi/datasources/local/isar/isar_datasource.dart';
 import 'package:slee_fi/datasources/local/secure_storage.dart';
 import 'package:slee_fi/datasources/remote/auth_datasource/auth_datasource.dart';
@@ -33,7 +32,6 @@ class WalletImplementation extends IWalletRepository {
   final Web3DataSource _web3DataSource;
   final GetStorageDataSource _getStorageDataSource;
   final IsarDataSource _isarDataSource;
-  final HistoryDataSource _historyDataSource;
   final TransactionRemoteDataSource _transactionRemoteDataSource;
   final SecureStorage _secureStorage;
   final AuthDataSource _authDataSource;
@@ -41,7 +39,6 @@ class WalletImplementation extends IWalletRepository {
   WalletImplementation(
       this._web3DataSource,
       this._getStorageDataSource,
-      this._historyDataSource,
       this._transactionRemoteDataSource,
       this._isarDataSource,
       this._web3provider,

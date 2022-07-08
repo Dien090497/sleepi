@@ -8,12 +8,10 @@ part of 'stacking_schema.dart';
 
 StackingSchema _$StackingSchemaFromJson(Map<String, dynamic> json) =>
     StackingSchema(
-      json['amount'] as int,
-      json['symbol'] as String,
+      amount: json['amount'] as String,
     );
 
 Map<String, dynamic> _$StackingSchemaToJson(StackingSchema instance) =>
     <String, dynamic>{
       'amount': instance.amount,
-      'symbol': instance.symbol,
     };

@@ -4,12 +4,14 @@ import 'package:slee_fi/common/extensions/string_x.dart';
 import 'package:slee_fi/datasources/local/secure_storage.dart';
 import 'package:slee_fi/datasources/remote/auth_datasource/auth_datasource.dart';
 import 'package:slee_fi/entities/active_code/active_code_entity.dart';
+import 'package:slee_fi/entities/staking/staking_entity.dart';
 import 'package:slee_fi/failures/failure.dart';
 import 'package:slee_fi/models/global_config_response/global_config_response.dart';
 import 'package:slee_fi/models/swap_token_to_wallet_response/swap_token_to_wallet_response.dart';
 import 'package:slee_fi/models/token_spending/token_spending.dart';
 import 'package:slee_fi/repository/user_repository.dart';
 import 'package:slee_fi/schema/change_password_schema/change_password_schema.dart';
+import 'package:slee_fi/schema/stacking_schema/stacking_schema.dart';
 import 'package:slee_fi/schema/white_draw_token_schema/whit_draw_token_schema.dart';
 
 @Injectable(as: IUserRepository)
@@ -74,6 +76,17 @@ class UserImplementation extends IUserRepository {
       await _secureStorage.saveAddressContract(addressContract: result.contract);
       await _secureStorage.saveMessage(saveMessage: result.messageSign);
       return Right(result);
+    } catch (e) {
+      return Left(FailureMessage('$e'));
+    }
+  }
+
+  @override
+  Future<Either<FailureMessage, StakingEntity>> stakingSlft({required double amount}) async {
+    try {
+      StackingSchema schema = StackingSchema(amount: amount.toString());
+      final result = await _authDataSource.stacking(schema);
+      return Right(result.toEntity());
     } catch (e) {
       return Left(FailureMessage('$e'));
     }
