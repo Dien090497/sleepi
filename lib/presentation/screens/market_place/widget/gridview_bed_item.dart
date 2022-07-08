@@ -39,11 +39,7 @@ class GridViewBedItem extends StatelessWidget {
         final bed = beds[i];
         return GestureDetector(
           onTap: () {
-            if (onBuyTap != null) {
-              onBuyTap!(bed);
-            } else if (onBedTap != null) {
               onBedTap!(bed);
-            }
           },
           child: Container(
             decoration: BoxDecoration(
@@ -67,11 +63,12 @@ class GridViewBedItem extends StatelessWidget {
                     children: [
                       Expanded(
                         child: Container(
+                          padding: const EdgeInsets.symmetric(vertical: 24.0),
                           alignment: Alignment.center,
                           child: Image.network(
                             bed.image,
-                            width: 60,
-                            height: 60,
+                            width: 80,
+                            height: 80,
                             fit: BoxFit.cover,
                           ),
                         ),

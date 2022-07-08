@@ -93,8 +93,8 @@ class _TransferListState extends State<TransferList> {
         }
 
         if (state is TransferSpendingStateToWalletSuccess) {
-          //todo: show popup transfer success
-          Navigator.of(context).pop();
+          Navigator.pop(context, true);
+          showSuccessfulDialog(context, null);
         }
       },
       builder: (context, state) {

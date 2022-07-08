@@ -63,7 +63,8 @@ class ItemResource extends StatelessWidget {
     return Row(
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        SvgPicture.asset(url),
+        SvgPicture.asset(url, width: url.contains('avax')? 20: null),
+
         const SizedBox(width: 4),
         SFText(keyText: value,style: TextStyles.white14),
       ],
