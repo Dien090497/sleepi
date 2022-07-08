@@ -21,10 +21,16 @@ class NftDataModel {
 
   Map<String, dynamic> toJson() => _$NftDataModelToJson(this);
 
-  NFTEntity toEntity() => NFTEntity(
-      id: id,
-      categoryId: categoryId,
-      isLock: isLock,
-      status: status,
-      attribute: attribute.toEntity());
+  NFTEntity toEntity({
+    required String name,
+    required String symbol,
+  }) =>
+      NFTEntity(
+          id: id,
+          name: name,
+          symbol: symbol,
+          categoryId: categoryId,
+          isLock: isLock,
+          status: status,
+          attribute: attribute.toEntity());
 }

@@ -1,21 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:slee_fi/common/enum/enum.dart';
-import 'package:slee_fi/common/extensions/enum_x.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
 import 'package:slee_fi/common/widgets/sf_icon.dart';
 import 'package:slee_fi/common/widgets/sf_percent_border.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
 import 'package:slee_fi/presentation/screens/product_detail/widgets/top_left_banner.dart';
+import 'package:slee_fi/resources/resources.dart';
 
 class MyBedShortWidget extends StatelessWidget {
-  const MyBedShortWidget({Key? key, required this.bedType, required this.bedId})
-      : super(key: key);
+  const MyBedShortWidget({
+    Key? key,
+    // required this.bedType,
+    required this.bedId,
+    required this.type,
+  }) : super(key: key);
 
-  // final int index;
-  final BedType bedType;
+  // final BedType bedType;
   final BigInt bedId;
+  final String type;
 
   @override
   Widget build(BuildContext context) {
@@ -32,8 +35,8 @@ class MyBedShortWidget extends StatelessWidget {
             top: 18,
             left: -30,
             child: TopLeftBanner(
-              text: bedType.type,
-              textColor: bedType.color,
+              text: type,
+              textColor: AppColors.green,
             ),
           ),
           Padding(
@@ -41,7 +44,7 @@ class MyBedShortWidget extends StatelessWidget {
             child: Column(
               children: [
                 const Spacer(),
-                SFIcon(bedType.image),
+                const SFIcon(Imgs.shortBed),
                 SizedBox(height: 24.h),
                 Container(
                   decoration: BoxDecoration(
