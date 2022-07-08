@@ -135,10 +135,13 @@ class MarketPlaceCubit extends Cubit<MarketPlaceState> {
 
 
   Future<void> buyNFT(MarketPlaceModel nft) async {
+    print('=--=-==--${nft.nftId}');
     final result = await _buyNFTUseCase.call(nft.nftId);
     result.fold((l) {
+      print('=--=-==--$l');
       emit(MarketPlaceState.buyFail('$l'));
     }, (success) {
+      print('=--=-==--${success.toJson()}');
       if(success.status) {
         emit(const MarketPlaceState.buySuccess());
       }else{
