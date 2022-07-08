@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
+import 'package:slee_fi/common/widgets/sf_alert_dialog.dart';
 import 'package:slee_fi/common/widgets/sf_buttons.dart';
 import 'package:slee_fi/common/widgets/sf_icon.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
@@ -57,7 +58,24 @@ Future<T?> showSuccessfulDialog<T>(BuildContext context, String? message,
       });
 }
 
-Future<T?> showSignUpSuccess<T>(BuildContext context,) async {
+Future<T?> showMessageDialog<T>(BuildContext context, String message,
+    {EdgeInsets? padding, TextStyle? style}) async {
+  return showCustomAlertDialog(
+    context,
+    padding: const EdgeInsets.all(24),
+    children: Padding(
+      padding: const EdgeInsets.symmetric(vertical: 32, horizontal: 24),
+      child: SFText(
+          textAlign: TextAlign.center,
+          keyText: message,
+          style: style ?? TextStyles.bold18White),
+    ),
+  );
+}
+
+Future<T?> showSignUpSuccess<T>(
+  BuildContext context,
+) async {
   return showDialog(
       context: context,
       barrierColor: AppColors.backgroundDialog,

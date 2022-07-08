@@ -19,8 +19,15 @@ import 'package:slee_fi/resources/resources.dart';
 
 import 'jewel_buy_widget.dart';
 
-class TabJewelsBuy extends StatelessWidget {
+class TabJewelsBuy extends StatefulWidget {
   const TabJewelsBuy({Key? key}) : super(key: key);
+
+  @override
+  State<TabJewelsBuy> createState() => _TabJewelsBuyState();
+}
+
+class _TabJewelsBuyState extends State<TabJewelsBuy> {
+  late List<MarketPlaceModel> listJewels = [];
 
   void _showJewelDialog(
       BuildContext context, MarketPlaceModel jewel, MarketPlaceCubit cubit) {
@@ -49,7 +56,6 @@ class TabJewelsBuy extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    List<MarketPlaceModel> listJewels = [];
     return DefaultTabController(
       length: 2,
       child: BlocProvider(

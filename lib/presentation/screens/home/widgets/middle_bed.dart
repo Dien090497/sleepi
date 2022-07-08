@@ -8,6 +8,7 @@ import 'package:slee_fi/common/widgets/sf_buttons.dart';
 import 'package:slee_fi/common/widgets/sf_icon.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
 import 'package:slee_fi/l10n/locale_keys.g.dart';
+import 'package:slee_fi/presentation/screens/info_individual/info_individual_screen.dart';
 
 class MiddleBed extends StatefulWidget {
   const MiddleBed({Key? key}) : super(key: key);
@@ -55,7 +56,7 @@ class _MiddleBedState extends State<MiddleBed> {
                         GestureDetector(
                           onTap: () {
                             Navigator.pushNamed(context, R.nftInfo,
-                                arguments: false);
+                                arguments: InfoIndividualParams(buy: true));
                           },
                           child: SFIcon(
                             beds[index].image,
