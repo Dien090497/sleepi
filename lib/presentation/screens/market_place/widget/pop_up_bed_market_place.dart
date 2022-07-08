@@ -61,7 +61,7 @@ class PopUpBedMarketPlace extends StatelessWidget {
           ),
           padding: const EdgeInsets.all(8),
           child: SFText(
-            keyText: bed.id.toString(),
+            keyText: bed.level.toString(),
             style: TextStyles.blue14,
           ),
         ),
@@ -151,7 +151,7 @@ class _Detail extends StatelessWidget {
               SFText(keyText: LocaleKeys.level, style: TextStyles.lightGrey14),
               SizedBox(height: 8.h),
               SFText(
-                  keyText: bed.level.toString(),
+                  keyText: bed.nftId.toString(),
                   namedArgs: const {'num': ''},
                   style: TextStyles.lightWhite16W700),
               SizedBox(height: 24.h),
