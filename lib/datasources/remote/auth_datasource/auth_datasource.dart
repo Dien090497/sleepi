@@ -29,7 +29,6 @@ import 'package:slee_fi/schema/market/market_schema.dart';
 import 'package:slee_fi/schema/refresh_token_schema/refresh_token_schema.dart';
 import 'package:slee_fi/schema/sign_in_schema/sign_in_schema.dart';
 import 'package:slee_fi/schema/sign_up_schema/sign_up_schema.dart';
-import 'package:slee_fi/schema/unstacking_schema/unstacking_schema.dart';
 import 'package:slee_fi/schema/stacking_schema/stacking_schema.dart';
 import 'package:slee_fi/schema/verify_schema/verify_schema.dart';
 import 'package:slee_fi/schema/verify_user_schema/verify_user_schema.dart';
@@ -133,5 +132,8 @@ abstract class AuthDataSource {
   Future<ListMarketPlaceModel> getNftByOwner();
 
   @POST('/stacking/unstacking')
-  Future<ListMarketPlaceModel> unstacking(@Body() UnStackingSchema unStaking);
+  Future<dynamic> unstacking();
+
+  @POST('/stacking/compound')
+  Future<dynamic> compound();
 }

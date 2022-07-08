@@ -16,4 +16,8 @@ abstract class ISpendingRepository {
     required String addressContract,
   });
 
+  Future<Either<Failure, dynamic>> unStaking();
+
+  Future<Either<Failure, dynamic>> compound();
+
 }

@@ -4,6 +4,7 @@ import 'package:dartz/dartz.dart';
 import 'package:injectable/injectable.dart';
 import 'package:slee_fi/common/const/const.dart';
 import 'package:slee_fi/common/enum/enum.dart';
+import 'package:slee_fi/datasources/remote/auth_datasource/auth_datasource.dart';
 import 'package:slee_fi/datasources/remote/network/spending_datasource.dart';
 import 'package:slee_fi/datasources/remote/network/web3_datasource.dart';
 import 'package:slee_fi/entities/transfer_spending_entity/transfer_spending_entity.dart';
@@ -15,8 +16,9 @@ import 'package:web3dart/web3dart.dart';
 class SpendingImplementation extends ISpendingRepository {
   final SpendingDataSource _spendingDataSource;
   final Web3DataSource _web3DataSource;
+  final AuthDataSource _authDataSource;
 
-  SpendingImplementation(this._spendingDataSource, this._web3DataSource);
+  SpendingImplementation(this._spendingDataSource, this._web3DataSource, this._authDataSource);
 
   @override
   Future<Either<Failure, TransferSpendingEntity>> depositToken({
@@ -71,6 +73,26 @@ class SpendingImplementation extends ISpendingRepository {
           BigInt.parse("100000000000000000000000000000000000000000000000000");
       final txHash = await _spendingDataSource.approve(owner, result, token);
       return Right(txHash);
+    } catch (e) {
+      return Left(FailureMessage('$e'));
+    }
+  }
+
+  @override
+  Future<Either<Failure, dynamic>> compound() async{
+    try {
+      var result = await _authDataSource.compound();
+      return Right(result);
+    } catch (e) {
+      return Left(FailureMessage('$e'));
+    }
+  }
+
+  @override
+  Future<Either<Failure, dynamic>> unStaking() async{
+    try {
+      var result = await _authDataSource.unstacking();
+      return Right(result);
     } catch (e) {
       return Left(FailureMessage('$e'));
     }
