@@ -58,14 +58,16 @@ class NFTImplementation extends INFTRepository {
       // TODO: remove this when data is ready
       if (listModel.data.isEmpty && nftAddress != null) {
         final res = await Future.wait([
-          _nftDataSource.symbol(nftAddress),
           _nftDataSource.name(nftAddress),
+          _nftDataSource.symbol(nftAddress),
         ]);
         return Right(
           tokenIds
               .map(
                 (nftId) => NFTEntity(
                     id: 0,
+                    name: res.first,
+                    symbol: res.last,
                     categoryId: 1,
                     isLock: 1,
                     status: '',
@@ -90,7 +92,8 @@ class NFTImplementation extends INFTRepository {
               .toList(),
         );
       }
-      return Right(listModel.data.map((e) => e.toEntity()).toList());
+      return Right(
+          listModel.data.map((e) => e.toEntity(name: '', symbol: '')).toList());
     } catch (e) {
       return Left(FailureMessage('$e'));
     }

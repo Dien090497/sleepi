@@ -17,6 +17,8 @@ final _privateConstructorUsedError = UnsupportedError(
 /// @nodoc
 mixin _$NFTEntity {
   int get id => throw _privateConstructorUsedError;
+  String get name => throw _privateConstructorUsedError;
+  String get symbol => throw _privateConstructorUsedError;
   int get categoryId => throw _privateConstructorUsedError;
   int get isLock => throw _privateConstructorUsedError;
   String get status => throw _privateConstructorUsedError;
@@ -33,6 +35,8 @@ abstract class $NFTEntityCopyWith<$Res> {
       _$NFTEntityCopyWithImpl<$Res>;
   $Res call(
       {int id,
+      String name,
+      String symbol,
       int categoryId,
       int isLock,
       String status,
@@ -52,6 +56,8 @@ class _$NFTEntityCopyWithImpl<$Res> implements $NFTEntityCopyWith<$Res> {
   @override
   $Res call({
     Object? id = freezed,
+    Object? name = freezed,
+    Object? symbol = freezed,
     Object? categoryId = freezed,
     Object? isLock = freezed,
     Object? status = freezed,
@@ -62,6 +68,14 @@ class _$NFTEntityCopyWithImpl<$Res> implements $NFTEntityCopyWith<$Res> {
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as int,
+      name: name == freezed
+          ? _value.name
+          : name // ignore: cast_nullable_to_non_nullable
+              as String,
+      symbol: symbol == freezed
+          ? _value.symbol
+          : symbol // ignore: cast_nullable_to_non_nullable
+              as String,
       categoryId: categoryId == freezed
           ? _value.categoryId
           : categoryId // ignore: cast_nullable_to_non_nullable
@@ -97,6 +111,8 @@ abstract class _$$_NFTEntityCopyWith<$Res> implements $NFTEntityCopyWith<$Res> {
   @override
   $Res call(
       {int id,
+      String name,
+      String symbol,
       int categoryId,
       int isLock,
       String status,
@@ -119,6 +135,8 @@ class __$$_NFTEntityCopyWithImpl<$Res> extends _$NFTEntityCopyWithImpl<$Res>
   @override
   $Res call({
     Object? id = freezed,
+    Object? name = freezed,
+    Object? symbol = freezed,
     Object? categoryId = freezed,
     Object? isLock = freezed,
     Object? status = freezed,
@@ -129,6 +147,14 @@ class __$$_NFTEntityCopyWithImpl<$Res> extends _$NFTEntityCopyWithImpl<$Res>
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as int,
+      name: name == freezed
+          ? _value.name
+          : name // ignore: cast_nullable_to_non_nullable
+              as String,
+      symbol: symbol == freezed
+          ? _value.symbol
+          : symbol // ignore: cast_nullable_to_non_nullable
+              as String,
       categoryId: categoryId == freezed
           ? _value.categoryId
           : categoryId // ignore: cast_nullable_to_non_nullable
@@ -154,6 +180,8 @@ class __$$_NFTEntityCopyWithImpl<$Res> extends _$NFTEntityCopyWithImpl<$Res>
 class _$_NFTEntity with DiagnosticableTreeMixin implements _NFTEntity {
   const _$_NFTEntity(
       {required this.id,
+      required this.name,
+      required this.symbol,
       required this.categoryId,
       required this.isLock,
       required this.status,
@@ -161,6 +189,10 @@ class _$_NFTEntity with DiagnosticableTreeMixin implements _NFTEntity {
 
   @override
   final int id;
+  @override
+  final String name;
+  @override
+  final String symbol;
   @override
   final int categoryId;
   @override
@@ -172,7 +204,7 @@ class _$_NFTEntity with DiagnosticableTreeMixin implements _NFTEntity {
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'NFTEntity(id: $id, categoryId: $categoryId, isLock: $isLock, status: $status, attribute: $attribute)';
+    return 'NFTEntity(id: $id, name: $name, symbol: $symbol, categoryId: $categoryId, isLock: $isLock, status: $status, attribute: $attribute)';
   }
 
   @override
@@ -181,6 +213,8 @@ class _$_NFTEntity with DiagnosticableTreeMixin implements _NFTEntity {
     properties
       ..add(DiagnosticsProperty('type', 'NFTEntity'))
       ..add(DiagnosticsProperty('id', id))
+      ..add(DiagnosticsProperty('name', name))
+      ..add(DiagnosticsProperty('symbol', symbol))
       ..add(DiagnosticsProperty('categoryId', categoryId))
       ..add(DiagnosticsProperty('isLock', isLock))
       ..add(DiagnosticsProperty('status', status))
@@ -193,6 +227,8 @@ class _$_NFTEntity with DiagnosticableTreeMixin implements _NFTEntity {
         (other.runtimeType == runtimeType &&
             other is _$_NFTEntity &&
             const DeepCollectionEquality().equals(other.id, id) &&
+            const DeepCollectionEquality().equals(other.name, name) &&
+            const DeepCollectionEquality().equals(other.symbol, symbol) &&
             const DeepCollectionEquality()
                 .equals(other.categoryId, categoryId) &&
             const DeepCollectionEquality().equals(other.isLock, isLock) &&
@@ -204,6 +240,8 @@ class _$_NFTEntity with DiagnosticableTreeMixin implements _NFTEntity {
   int get hashCode => Object.hash(
       runtimeType,
       const DeepCollectionEquality().hash(id),
+      const DeepCollectionEquality().hash(name),
+      const DeepCollectionEquality().hash(symbol),
       const DeepCollectionEquality().hash(categoryId),
       const DeepCollectionEquality().hash(isLock),
       const DeepCollectionEquality().hash(status),
@@ -218,6 +256,8 @@ class _$_NFTEntity with DiagnosticableTreeMixin implements _NFTEntity {
 abstract class _NFTEntity implements NFTEntity {
   const factory _NFTEntity(
       {required final int id,
+      required final String name,
+      required final String symbol,
       required final int categoryId,
       required final int isLock,
       required final String status,
@@ -225,6 +265,10 @@ abstract class _NFTEntity implements NFTEntity {
 
   @override
   int get id => throw _privateConstructorUsedError;
+  @override
+  String get name => throw _privateConstructorUsedError;
+  @override
+  String get symbol => throw _privateConstructorUsedError;
   @override
   int get categoryId => throw _privateConstructorUsedError;
   @override

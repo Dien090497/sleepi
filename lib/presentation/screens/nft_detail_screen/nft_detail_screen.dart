@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
-import 'package:slee_fi/common/enum/enum.dart';
 import 'package:slee_fi/common/extensions/string_x.dart';
 import 'package:slee_fi/common/routes/app_routes.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
@@ -173,7 +172,7 @@ class NFTDetailScreen extends StatelessWidget {
                     style: TextStyles.bold30White,
                     textAlign: TextAlign.center,
                   ),
-                  const SizedBox(height: 36.0),
+                  // const SizedBox(height: 36.0),
                   Container(
                     constraints: const BoxConstraints(maxHeight: 130),
                     padding: const EdgeInsets.symmetric(horizontal: 23),
@@ -239,7 +238,7 @@ class NFTDetailScreen extends StatelessWidget {
                       ],
                     ),
                   ),
-                  const SizedBox(height: 32.0),
+                  // const SizedBox(height: 32.0),
                   if (state is NftDetailLoaded)
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 8),
@@ -247,9 +246,10 @@ class NFTDetailScreen extends StatelessWidget {
                         isScroll: false,
                         physics: const NeverScrollableScrollPhysics(),
                         itemBuilder: (context, i) {
+                          final nft = state.nftEntities[i];
                           return MyBedShortWidget(
-                            bedType: BedType.flexible,
-                            bedId: state.nftEntities[i].attribute.tokenId,
+                            bedId: nft.attribute.tokenId,
+                            type: nft.attribute.type,
                           );
                         },
                         count: state.nftEntities.length,
