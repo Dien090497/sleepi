@@ -66,7 +66,7 @@ class WalletCubit extends Cubit<WalletState> {
             walletInfoEntity: wallet);
         nfTsParams = GetNFTsParams(
           wallet.address,
-          Const.listNFTAddressesMainNet,
+          Const.listNFTAddressMainNet,
         );
       }
       final results = await Future.wait([
@@ -142,15 +142,16 @@ class WalletCubit extends Cubit<WalletState> {
       ));
     }
   }
+
   Future<void> getHistoryTransaction(HistoryTransactionParams params) async {
     emit(const WalletState.loadingHistory());
     final result = await _getHistoryTransactionUC.call(params);
 
     result.fold(
-          (l) {
-        emit(WalletState.error(message : '$l'));
+      (l) {
+        emit(WalletState.error(message: '$l'));
       },
-          (history) {
+      (history) {
         emit(WalletState.getHistorySuccess(history));
       },
     );
