@@ -15,7 +15,6 @@ import 'package:slee_fi/presentation/screens/info_individual/info_individual_scr
 import 'package:slee_fi/presentation/screens/market_place/widget/filter_sheet.dart';
 import 'package:slee_fi/presentation/screens/market_place/widget/gridview_bed_item.dart';
 import 'package:slee_fi/presentation/screens/market_place/widget/pop_up_bed_market_place.dart';
-import 'package:slee_fi/presentation/screens/market_place/widget/pop_up_insufficient.dart';
 import 'package:slee_fi/presentation/screens/market_place/widget/tab_bar_filter.dart';
 import 'package:slee_fi/resources/resources.dart';
 
@@ -44,16 +43,6 @@ class _TabBedsBuyState extends State<TabBedsBuy> {
     );
   }
 
-  void _showDonWorryDialog(BuildContext context, MarketPlaceModel nft) {
-    showCustomAlertDialog(
-      context,
-      padding: const EdgeInsets.all(24),
-      children: PopupInsufficient(
-        nft: nft,
-      ),
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
@@ -70,10 +59,6 @@ class _TabBedsBuyState extends State<TabBedsBuy> {
             if (state is MarketPlaceStateBuySuccess) {
               cubit.refresh();
               showSuccessfulDialog(context, null);
-            }
-
-            if (state is MarketPlaceStateBuyNotEnoughAVAX) {
-              _showDonWorryDialog(context, state.nft);
             }
 
             if (state is MarketPlaceStateBuyFailed) {

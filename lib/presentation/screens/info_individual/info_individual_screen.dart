@@ -178,7 +178,7 @@ class InfoIndividualScreen extends StatelessWidget {
                 left: 0,
                 right: 0,
                 child: args.buy ?? false
-                    ? const BottomBarMarketPlaceWidget()
+                    ? BottomBarMarketPlaceWidget(bed: args.bed!,)
                     : const BottomBarWidget(),
               )
             ],
@@ -319,13 +319,11 @@ class InfoIndividualScreen extends StatelessWidget {
                   ),
                 ),
               ),
-              Positioned(
+              const Positioned(
                 bottom: 0,
                 left: 0,
                 right: 0,
-                child: args.buy ?? false
-                    ? const BottomBarMarketPlaceWidget()
-                    : const BottomBarWidget(),
+                child: BottomBarWidget(),
               )
             ],
           );

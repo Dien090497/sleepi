@@ -1,5 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:slee_fi/common/extensions/string_x.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
@@ -7,9 +8,16 @@ import 'package:slee_fi/common/widgets/sf_alert_dialog.dart';
 import 'package:slee_fi/common/widgets/sf_buttons.dart';
 import 'package:slee_fi/common/widgets/sf_card.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
+import 'package:slee_fi/entities/wallet_info/wallet_info_entity.dart';
 import 'package:slee_fi/l10n/locale_keys.g.dart';
 import 'package:slee_fi/models/market_place/market_place_model.dart';
+import 'package:slee_fi/models/pop_with_result.dart';
+import 'package:slee_fi/presentation/blocs/user_bloc/user_bloc.dart';
+import 'package:slee_fi/presentation/blocs/user_bloc/user_state.dart';
+import 'package:slee_fi/presentation/blocs/wallet/wallet_cubit.dart';
 import 'package:slee_fi/presentation/screens/market_place/widget/pop_up_confirm.dart';
+import 'package:slee_fi/presentation/screens/market_place/widget/pop_up_insufficient.dart';
+import 'package:slee_fi/presentation/screens/wallet_creation_warning/widgets/pop_up_avalanche_wallet.dart';
 
 class PopUpJewelMarketPlace extends StatelessWidget {
   const PopUpJewelMarketPlace(
@@ -28,6 +36,32 @@ class PopUpJewelMarketPlace extends StatelessWidget {
         nft: jewel,
         onConfirmTap: onConfirmTap,
       ),
+    );
+  }
+
+  void _showDonWorryDialog(BuildContext context, MarketPlaceModel nft) {
+    showCustomAlertDialog(
+      context,
+      padding: const EdgeInsets.all(24),
+      children: PopupInsufficient(
+        nft: nft,
+      ),
+    );
+  }
+
+  void _showWarningDialog(dynamic value, BuildContext context) {
+    if (value is PopWithResults) {
+      context.read<WalletCubit>().init();
+      var cubit = context.read<WalletCubit>();
+      cubit.importWallet(value.results['data'] as WalletInfoEntity);
+    }
+  }
+
+  _showCreateOrImportWallet(BuildContext context) async {
+    return showCustomAlertDialog(
+      context,
+      barrierDismissible: false,
+      children: const PopUpAvalancheWallet(),
     );
   }
 
@@ -138,15 +172,36 @@ class PopUpJewelMarketPlace extends StatelessWidget {
             )),
             const SizedBox(width: 12),
             Expanded(
-                child: SFButton(
-              text: LocaleKeys.confirm,
-              onPressed: (){
-                _showConfirmDialog(context, jewel);
-              },
-              textStyle: TextStyles.white16,
-              gradient: AppColors.blueGradient,
-              width: double.infinity,
-            )),
+              child: BlocProvider(
+                create: (context) => WalletCubit(),
+                child: BlocBuilder<UserBloc, UserState>(
+                    builder: (context, userState) {
+                  return SFButton(
+                    text: LocaleKeys.confirm,
+                    onPressed: () {
+                      Navigator.pop(context);
+                      if (userState is UserLoaded) {
+                        if (userState.userInfoEntity.wallet != null) {
+                          if (userState.listTokens[2].balance <
+                              double.parse(jewel.price)) {
+                            _showDonWorryDialog(context, jewel);
+                          } else {
+                            _showConfirmDialog(context, jewel);
+                          }
+                        } else {
+                          _showCreateOrImportWallet(context).then((value) {
+                            _showWarningDialog(value, context);
+                          });
+                        }
+                      }
+                    },
+                    textStyle: TextStyles.white16,
+                    gradient: AppColors.blueGradient,
+                    width: double.infinity,
+                  );
+                }),
+              ),
+            ),
           ],
         ),
       ],

@@ -12,7 +12,6 @@ import 'package:slee_fi/models/market_place/market_place_model.dart';
 import 'package:slee_fi/presentation/blocs/market_place/market_place_cubit.dart';
 import 'package:slee_fi/presentation/blocs/market_place/market_place_state.dart';
 import 'package:slee_fi/presentation/screens/market_place/widget/filter_sheet.dart';
-import 'package:slee_fi/presentation/screens/market_place/widget/pop_up_insufficient.dart';
 import 'package:slee_fi/presentation/screens/market_place/widget/pop_up_jewel_market_place.dart';
 import 'package:slee_fi/presentation/screens/market_place/widget/tab_bar_filter.dart';
 import 'package:slee_fi/resources/resources.dart';
@@ -44,16 +43,6 @@ class _TabJewelsBuyState extends State<TabJewelsBuy> {
     );
   }
 
-  void _showDonWorryDialog(BuildContext context, MarketPlaceModel nft) {
-    showCustomAlertDialog(
-      context,
-      padding: const EdgeInsets.all(24),
-      children: PopupInsufficient(
-        nft: nft,
-      ),
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
@@ -66,14 +55,13 @@ class _TabJewelsBuyState extends State<TabJewelsBuy> {
             if (state is MarketPlaceStateSuccess) {
               listJewels = state.list.list;
             }
-
             if (state is MarketPlaceStateBuySuccess) {
               cubit.refresh();
               showSuccessfulDialog(context, null);
             }
 
-            if (state is MarketPlaceStateBuyNotEnoughAVAX) {
-              _showDonWorryDialog(context, state.nft);
+            if (state is MarketPlaceStateBuyFailed) {
+              showMessageDialog(context, state.msg);
             }
           },
           builder: (context, state) {
