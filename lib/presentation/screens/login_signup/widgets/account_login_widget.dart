@@ -13,7 +13,6 @@ import 'package:slee_fi/common/widgets/sf_textfield.dart';
 import 'package:slee_fi/common/widgets/sf_textfield_password.dart';
 import 'package:slee_fi/common/widgets/textfield_verification.dart';
 import 'package:slee_fi/l10n/locale_keys.g.dart';
-import 'package:slee_fi/presentation/blocs/global_wallet/global_wallet_cubit.dart';
 import 'package:slee_fi/presentation/blocs/sign_in_sign_up/sign_up_cubit.dart';
 import 'package:slee_fi/presentation/blocs/sign_in_sign_up/sign_up_state.dart';
 import 'package:slee_fi/presentation/blocs/user_bloc/user_bloc.dart';
@@ -90,8 +89,6 @@ class _AccountLoginState extends State<AccountLoginWidget> {
           'sign success ${state.isFirstOpenApp}'.log;
           BlocProvider.of<UserBloc>(context)
               .add(UpdateUser(state.userInfoEntity));
-          BlocProvider.of<GlobalWalletCubit>(context)
-              .init(state.userInfoEntity.id);
           if (!state.isFirstOpenApp) {
             Navigator.pushNamedAndRemoveUntil(
                 context, R.bottomNavigation, (_) => false);

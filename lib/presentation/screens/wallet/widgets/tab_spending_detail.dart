@@ -11,8 +11,8 @@ import 'package:slee_fi/common/widgets/sf_icon.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
 import 'package:slee_fi/entities/token/token_entity.dart';
 import 'package:slee_fi/l10n/locale_keys.g.dart';
-import 'package:slee_fi/presentation/blocs/global_wallet/global_wallet_cubit.dart';
-import 'package:slee_fi/presentation/blocs/global_wallet/global_wallet_state.dart';
+import 'package:slee_fi/presentation/blocs/user_bloc/user_bloc.dart';
+import 'package:slee_fi/presentation/blocs/user_bloc/user_state.dart';
 import 'package:slee_fi/presentation/screens/passcode/passcode_screen.dart';
 import 'package:slee_fi/presentation/screens/transfer/transfer_screen.dart';
 import 'package:slee_fi/presentation/screens/wallet/widgets/pop_up_info_spending.dart';
@@ -36,12 +36,12 @@ class TabSpendingDetail extends StatelessWidget {
                 const SizedBox(height: 12.0),
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 24.0),
-                  child: BlocBuilder<GlobalWalletCubit, GlobalWalletState>(
+                  child: BlocBuilder<UserBloc, UserState>(
                     builder: (context, state) {
                       final tokenList = <TokenEntity>[];
 
-                      if (state is GlobalWalletStateLoaded) {
-                        tokenList.addAll(state.tokenList);
+                      if (state is UserLoaded) {
+                        tokenList.addAll(state.tokens);
                       }
                       return Column(
                         children: tokenList

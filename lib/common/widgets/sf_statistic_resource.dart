@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:slee_fi/common/extensions/string_x.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
 import 'package:slee_fi/common/widgets/sf_icon.dart';
 import 'package:slee_fi/entities/token/token_entity.dart';
-import 'package:slee_fi/presentation/blocs/global_wallet/global_wallet_cubit.dart';
-import 'package:slee_fi/presentation/blocs/global_wallet/global_wallet_state.dart';
+import 'package:slee_fi/presentation/blocs/user_bloc/user_bloc.dart';
+import 'package:slee_fi/presentation/blocs/user_bloc/user_state.dart';
 import 'package:slee_fi/resources/resources.dart';
 
 class SFStatisticResource extends StatelessWidget {
@@ -20,12 +19,12 @@ class SFStatisticResource extends StatelessWidget {
         border: Border.all(width: 1, color: Colors.white.withOpacity(0.15)),
         borderRadius: BorderRadius.circular(100),
       ),
-      child: BlocBuilder<GlobalWalletCubit, GlobalWalletState>(
+      child: BlocBuilder<UserBloc, UserState>(
         builder: (context, state) {
           final tokenList = <TokenEntity>[];
 
-          if (state is GlobalWalletStateLoaded) {
-            tokenList.addAll(state.tokenList);
+          if (state is UserLoaded) {
+            tokenList.addAll(state.tokens);
           }
 
           return Row(
@@ -60,12 +59,7 @@ class ItemResource extends StatelessWidget {
       children: [
         SvgPicture.asset(url),
         const SizedBox(width: 4),
-        Text(
-            // value == 0?
-            value.toStringAsFixed(2)
-            // : (value / 100000000).toStringAsFixed(0)
-            ,
-            style: TextStyles.white14),
+        Text(value.toStringAsFixed(2), style: TextStyles.white14),
       ],
     );
   }
