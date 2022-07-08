@@ -159,6 +159,7 @@ class _TabWalletDetailState extends State<TabWalletDetail> {
                                   arguments:
                                       TransferScreenArg(tokenList[2], false),
                                 );
+
                               },
                               text: LocaleKeys.to_spending,
                               assetImage: Ics.icRefresh,
