@@ -67,7 +67,7 @@ class _TabItemsBuyState extends State<TabItemsBuy> {
         create: (context) => MarketPlaceCubit()..init(3),
         child: BlocConsumer<MarketPlaceCubit, MarketPlaceState>(
           listener: (context, state) {
-            // final cubit = context.read<MarketPlaceCubit>();
+            final cubit = context.read<MarketPlaceCubit>();
             if (state is MarketPlaceStateSuccess) {
               listItems = state.list.list;
             }
@@ -81,6 +81,7 @@ class _TabItemsBuyState extends State<TabItemsBuy> {
               // });
             }
             if (state is MarketPlaceStateBuySuccess) {
+              cubit.refresh();
               showSuccessfulDialog(context, null);
             }
 
