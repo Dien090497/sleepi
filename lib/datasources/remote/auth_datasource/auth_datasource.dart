@@ -114,6 +114,19 @@ abstract class AuthDataSource {
   @POST('/stacking')
   Future<StakingResponse> stacking(@Body() StackingSchema stackingSchema);
 
+  @GET('/tx-history/pending')
+  Future<dynamic> fetchSpendingPending(
+    @Query('userId') int userId,
+    @Query('limit') int limit,
+    @Query('page') int page,
+  );
+  @GET('/tx-history/history')
+  Future<dynamic> fetchSpendingHistory(
+    @Query('userId') int userId,
+    @Query('limit') int limit,
+    @Query('page') int page,
+  );
+
   ///white draw
   @POST('/withdraw/token')
   Future<SwapTokenToWalletResponse> transferTokenToWallet(

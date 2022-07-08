@@ -5,10 +5,14 @@ import 'package:slee_fi/common/style/text_styles.dart';
 import 'package:slee_fi/common/widgets/sf_card.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
 import 'package:slee_fi/l10n/locale_keys.g.dart';
+import 'package:slee_fi/presentation/blocs/pending/pending_bloc.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class TabHistoryDetail extends StatelessWidget {
-  const TabHistoryDetail({Key? key}) : super(key: key);
+  const TabHistoryDetail({Key? key, required this.historyBloc})
+      : super(key: key);
+
+  final PendingBloc historyBloc;
 
   @override
   Widget build(BuildContext context) {
@@ -18,9 +22,10 @@ class TabHistoryDetail extends StatelessWidget {
           child: ListView.builder(
               itemCount: 3,
               shrinkWrap: true,
-              padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 12.0),
+              padding:
+                  const EdgeInsets.symmetric(horizontal: 24.0, vertical: 12.0),
               itemBuilder: (BuildContext context, int index) {
-                return  GestureDetector(
+                return GestureDetector(
                   onTap: () async {
                     final url = Uri.parse(Const.avascanUrl);
                     if (await canLaunchUrl(url)) {
@@ -28,7 +33,8 @@ class TabHistoryDetail extends StatelessWidget {
                     }
                   },
                   child: SFCard(
-                    padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
+                    padding: const EdgeInsets.symmetric(
+                        vertical: 8.0, horizontal: 16.0),
                     child: Row(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
@@ -59,28 +65,30 @@ class TabHistoryDetail extends StatelessWidget {
                         ),
                         Expanded(
                             child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.end,
-                              children: [
-                                SFText(
-                                  keyText: "+1 NFT",
-                                  style: TextStyles.bold16Blue,
-                                ),
-                                const SizedBox(
-                                  height: 4.0,
-                                ),
-                                SFText(
-                                  keyText: "53LqDpU...wihRe3",
-                                  style: TextStyles.lightGrey14,
-                                ),
-                              ],
-                            )),
+                          crossAxisAlignment: CrossAxisAlignment.end,
+                          children: [
+                            SFText(
+                              keyText: "+1 NFT",
+                              style: TextStyles.bold16Blue,
+                            ),
+                            const SizedBox(
+                              height: 4.0,
+                            ),
+                            SFText(
+                              keyText: "53LqDpU...wihRe3",
+                              style: TextStyles.lightGrey14,
+                            ),
+                          ],
+                        )),
                       ],
                     ),
                   ),
                 );
               }),
         ),
-        const SizedBox(height: 75,)
+        const SizedBox(
+          height: 75,
+        )
       ],
     );
   }
