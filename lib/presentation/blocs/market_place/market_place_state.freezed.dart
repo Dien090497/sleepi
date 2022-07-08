@@ -22,7 +22,10 @@ mixin _$MarketPlaceState {
     required TResult Function() loading,
     required TResult Function() loadingMore,
     required TResult Function(ListMarketPlaceModel list) success,
+    required TResult Function() buySuccess,
+    required TResult Function(MarketPlaceModel nft) notEnoughAVAX,
     required TResult Function(String msg) fail,
+    required TResult Function(String msg) buyFail,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -31,7 +34,10 @@ mixin _$MarketPlaceState {
     TResult Function()? loading,
     TResult Function()? loadingMore,
     TResult Function(ListMarketPlaceModel list)? success,
+    TResult Function()? buySuccess,
+    TResult Function(MarketPlaceModel nft)? notEnoughAVAX,
     TResult Function(String msg)? fail,
+    TResult Function(String msg)? buyFail,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -40,7 +46,10 @@ mixin _$MarketPlaceState {
     TResult Function()? loading,
     TResult Function()? loadingMore,
     TResult Function(ListMarketPlaceModel list)? success,
+    TResult Function()? buySuccess,
+    TResult Function(MarketPlaceModel nft)? notEnoughAVAX,
     TResult Function(String msg)? fail,
+    TResult Function(String msg)? buyFail,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -50,7 +59,11 @@ mixin _$MarketPlaceState {
     required TResult Function(MarketPlaceStateLoading value) loading,
     required TResult Function(MarketPlaceStateLoadingMore value) loadingMore,
     required TResult Function(MarketPlaceStateSuccess value) success,
+    required TResult Function(MarketPlaceStateBuySuccess value) buySuccess,
+    required TResult Function(MarketPlaceStateBuyNotEnoughAVAX value)
+        notEnoughAVAX,
     required TResult Function(MarketPlaceStateFailed value) fail,
+    required TResult Function(MarketPlaceStateBuyFailed value) buyFail,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -59,7 +72,10 @@ mixin _$MarketPlaceState {
     TResult Function(MarketPlaceStateLoading value)? loading,
     TResult Function(MarketPlaceStateLoadingMore value)? loadingMore,
     TResult Function(MarketPlaceStateSuccess value)? success,
+    TResult Function(MarketPlaceStateBuySuccess value)? buySuccess,
+    TResult Function(MarketPlaceStateBuyNotEnoughAVAX value)? notEnoughAVAX,
     TResult Function(MarketPlaceStateFailed value)? fail,
+    TResult Function(MarketPlaceStateBuyFailed value)? buyFail,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -68,7 +84,10 @@ mixin _$MarketPlaceState {
     TResult Function(MarketPlaceStateLoading value)? loading,
     TResult Function(MarketPlaceStateLoadingMore value)? loadingMore,
     TResult Function(MarketPlaceStateSuccess value)? success,
+    TResult Function(MarketPlaceStateBuySuccess value)? buySuccess,
+    TResult Function(MarketPlaceStateBuyNotEnoughAVAX value)? notEnoughAVAX,
     TResult Function(MarketPlaceStateFailed value)? fail,
+    TResult Function(MarketPlaceStateBuyFailed value)? buyFail,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -136,7 +155,10 @@ class _$MarketPlaceStateInit implements MarketPlaceStateInit {
     required TResult Function() loading,
     required TResult Function() loadingMore,
     required TResult Function(ListMarketPlaceModel list) success,
+    required TResult Function() buySuccess,
+    required TResult Function(MarketPlaceModel nft) notEnoughAVAX,
     required TResult Function(String msg) fail,
+    required TResult Function(String msg) buyFail,
   }) {
     return initial();
   }
@@ -148,7 +170,10 @@ class _$MarketPlaceStateInit implements MarketPlaceStateInit {
     TResult Function()? loading,
     TResult Function()? loadingMore,
     TResult Function(ListMarketPlaceModel list)? success,
+    TResult Function()? buySuccess,
+    TResult Function(MarketPlaceModel nft)? notEnoughAVAX,
     TResult Function(String msg)? fail,
+    TResult Function(String msg)? buyFail,
   }) {
     return initial?.call();
   }
@@ -160,7 +185,10 @@ class _$MarketPlaceStateInit implements MarketPlaceStateInit {
     TResult Function()? loading,
     TResult Function()? loadingMore,
     TResult Function(ListMarketPlaceModel list)? success,
+    TResult Function()? buySuccess,
+    TResult Function(MarketPlaceModel nft)? notEnoughAVAX,
     TResult Function(String msg)? fail,
+    TResult Function(String msg)? buyFail,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -176,7 +204,11 @@ class _$MarketPlaceStateInit implements MarketPlaceStateInit {
     required TResult Function(MarketPlaceStateLoading value) loading,
     required TResult Function(MarketPlaceStateLoadingMore value) loadingMore,
     required TResult Function(MarketPlaceStateSuccess value) success,
+    required TResult Function(MarketPlaceStateBuySuccess value) buySuccess,
+    required TResult Function(MarketPlaceStateBuyNotEnoughAVAX value)
+        notEnoughAVAX,
     required TResult Function(MarketPlaceStateFailed value) fail,
+    required TResult Function(MarketPlaceStateBuyFailed value) buyFail,
   }) {
     return initial(this);
   }
@@ -188,7 +220,10 @@ class _$MarketPlaceStateInit implements MarketPlaceStateInit {
     TResult Function(MarketPlaceStateLoading value)? loading,
     TResult Function(MarketPlaceStateLoadingMore value)? loadingMore,
     TResult Function(MarketPlaceStateSuccess value)? success,
+    TResult Function(MarketPlaceStateBuySuccess value)? buySuccess,
+    TResult Function(MarketPlaceStateBuyNotEnoughAVAX value)? notEnoughAVAX,
     TResult Function(MarketPlaceStateFailed value)? fail,
+    TResult Function(MarketPlaceStateBuyFailed value)? buyFail,
   }) {
     return initial?.call(this);
   }
@@ -200,7 +235,10 @@ class _$MarketPlaceStateInit implements MarketPlaceStateInit {
     TResult Function(MarketPlaceStateLoading value)? loading,
     TResult Function(MarketPlaceStateLoadingMore value)? loadingMore,
     TResult Function(MarketPlaceStateSuccess value)? success,
+    TResult Function(MarketPlaceStateBuySuccess value)? buySuccess,
+    TResult Function(MarketPlaceStateBuyNotEnoughAVAX value)? notEnoughAVAX,
     TResult Function(MarketPlaceStateFailed value)? fail,
+    TResult Function(MarketPlaceStateBuyFailed value)? buyFail,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -261,7 +299,10 @@ class _$MarketPlaceStateLoading implements MarketPlaceStateLoading {
     required TResult Function() loading,
     required TResult Function() loadingMore,
     required TResult Function(ListMarketPlaceModel list) success,
+    required TResult Function() buySuccess,
+    required TResult Function(MarketPlaceModel nft) notEnoughAVAX,
     required TResult Function(String msg) fail,
+    required TResult Function(String msg) buyFail,
   }) {
     return loading();
   }
@@ -273,7 +314,10 @@ class _$MarketPlaceStateLoading implements MarketPlaceStateLoading {
     TResult Function()? loading,
     TResult Function()? loadingMore,
     TResult Function(ListMarketPlaceModel list)? success,
+    TResult Function()? buySuccess,
+    TResult Function(MarketPlaceModel nft)? notEnoughAVAX,
     TResult Function(String msg)? fail,
+    TResult Function(String msg)? buyFail,
   }) {
     return loading?.call();
   }
@@ -285,7 +329,10 @@ class _$MarketPlaceStateLoading implements MarketPlaceStateLoading {
     TResult Function()? loading,
     TResult Function()? loadingMore,
     TResult Function(ListMarketPlaceModel list)? success,
+    TResult Function()? buySuccess,
+    TResult Function(MarketPlaceModel nft)? notEnoughAVAX,
     TResult Function(String msg)? fail,
+    TResult Function(String msg)? buyFail,
     required TResult orElse(),
   }) {
     if (loading != null) {
@@ -301,7 +348,11 @@ class _$MarketPlaceStateLoading implements MarketPlaceStateLoading {
     required TResult Function(MarketPlaceStateLoading value) loading,
     required TResult Function(MarketPlaceStateLoadingMore value) loadingMore,
     required TResult Function(MarketPlaceStateSuccess value) success,
+    required TResult Function(MarketPlaceStateBuySuccess value) buySuccess,
+    required TResult Function(MarketPlaceStateBuyNotEnoughAVAX value)
+        notEnoughAVAX,
     required TResult Function(MarketPlaceStateFailed value) fail,
+    required TResult Function(MarketPlaceStateBuyFailed value) buyFail,
   }) {
     return loading(this);
   }
@@ -313,7 +364,10 @@ class _$MarketPlaceStateLoading implements MarketPlaceStateLoading {
     TResult Function(MarketPlaceStateLoading value)? loading,
     TResult Function(MarketPlaceStateLoadingMore value)? loadingMore,
     TResult Function(MarketPlaceStateSuccess value)? success,
+    TResult Function(MarketPlaceStateBuySuccess value)? buySuccess,
+    TResult Function(MarketPlaceStateBuyNotEnoughAVAX value)? notEnoughAVAX,
     TResult Function(MarketPlaceStateFailed value)? fail,
+    TResult Function(MarketPlaceStateBuyFailed value)? buyFail,
   }) {
     return loading?.call(this);
   }
@@ -325,7 +379,10 @@ class _$MarketPlaceStateLoading implements MarketPlaceStateLoading {
     TResult Function(MarketPlaceStateLoading value)? loading,
     TResult Function(MarketPlaceStateLoadingMore value)? loadingMore,
     TResult Function(MarketPlaceStateSuccess value)? success,
+    TResult Function(MarketPlaceStateBuySuccess value)? buySuccess,
+    TResult Function(MarketPlaceStateBuyNotEnoughAVAX value)? notEnoughAVAX,
     TResult Function(MarketPlaceStateFailed value)? fail,
+    TResult Function(MarketPlaceStateBuyFailed value)? buyFail,
     required TResult orElse(),
   }) {
     if (loading != null) {
@@ -388,7 +445,10 @@ class _$MarketPlaceStateLoadingMore implements MarketPlaceStateLoadingMore {
     required TResult Function() loading,
     required TResult Function() loadingMore,
     required TResult Function(ListMarketPlaceModel list) success,
+    required TResult Function() buySuccess,
+    required TResult Function(MarketPlaceModel nft) notEnoughAVAX,
     required TResult Function(String msg) fail,
+    required TResult Function(String msg) buyFail,
   }) {
     return loadingMore();
   }
@@ -400,7 +460,10 @@ class _$MarketPlaceStateLoadingMore implements MarketPlaceStateLoadingMore {
     TResult Function()? loading,
     TResult Function()? loadingMore,
     TResult Function(ListMarketPlaceModel list)? success,
+    TResult Function()? buySuccess,
+    TResult Function(MarketPlaceModel nft)? notEnoughAVAX,
     TResult Function(String msg)? fail,
+    TResult Function(String msg)? buyFail,
   }) {
     return loadingMore?.call();
   }
@@ -412,7 +475,10 @@ class _$MarketPlaceStateLoadingMore implements MarketPlaceStateLoadingMore {
     TResult Function()? loading,
     TResult Function()? loadingMore,
     TResult Function(ListMarketPlaceModel list)? success,
+    TResult Function()? buySuccess,
+    TResult Function(MarketPlaceModel nft)? notEnoughAVAX,
     TResult Function(String msg)? fail,
+    TResult Function(String msg)? buyFail,
     required TResult orElse(),
   }) {
     if (loadingMore != null) {
@@ -428,7 +494,11 @@ class _$MarketPlaceStateLoadingMore implements MarketPlaceStateLoadingMore {
     required TResult Function(MarketPlaceStateLoading value) loading,
     required TResult Function(MarketPlaceStateLoadingMore value) loadingMore,
     required TResult Function(MarketPlaceStateSuccess value) success,
+    required TResult Function(MarketPlaceStateBuySuccess value) buySuccess,
+    required TResult Function(MarketPlaceStateBuyNotEnoughAVAX value)
+        notEnoughAVAX,
     required TResult Function(MarketPlaceStateFailed value) fail,
+    required TResult Function(MarketPlaceStateBuyFailed value) buyFail,
   }) {
     return loadingMore(this);
   }
@@ -440,7 +510,10 @@ class _$MarketPlaceStateLoadingMore implements MarketPlaceStateLoadingMore {
     TResult Function(MarketPlaceStateLoading value)? loading,
     TResult Function(MarketPlaceStateLoadingMore value)? loadingMore,
     TResult Function(MarketPlaceStateSuccess value)? success,
+    TResult Function(MarketPlaceStateBuySuccess value)? buySuccess,
+    TResult Function(MarketPlaceStateBuyNotEnoughAVAX value)? notEnoughAVAX,
     TResult Function(MarketPlaceStateFailed value)? fail,
+    TResult Function(MarketPlaceStateBuyFailed value)? buyFail,
   }) {
     return loadingMore?.call(this);
   }
@@ -452,7 +525,10 @@ class _$MarketPlaceStateLoadingMore implements MarketPlaceStateLoadingMore {
     TResult Function(MarketPlaceStateLoading value)? loading,
     TResult Function(MarketPlaceStateLoadingMore value)? loadingMore,
     TResult Function(MarketPlaceStateSuccess value)? success,
+    TResult Function(MarketPlaceStateBuySuccess value)? buySuccess,
+    TResult Function(MarketPlaceStateBuyNotEnoughAVAX value)? notEnoughAVAX,
     TResult Function(MarketPlaceStateFailed value)? fail,
+    TResult Function(MarketPlaceStateBuyFailed value)? buyFail,
     required TResult orElse(),
   }) {
     if (loadingMore != null) {
@@ -537,7 +613,10 @@ class _$MarketPlaceStateSuccess implements MarketPlaceStateSuccess {
     required TResult Function() loading,
     required TResult Function() loadingMore,
     required TResult Function(ListMarketPlaceModel list) success,
+    required TResult Function() buySuccess,
+    required TResult Function(MarketPlaceModel nft) notEnoughAVAX,
     required TResult Function(String msg) fail,
+    required TResult Function(String msg) buyFail,
   }) {
     return success(list);
   }
@@ -549,7 +628,10 @@ class _$MarketPlaceStateSuccess implements MarketPlaceStateSuccess {
     TResult Function()? loading,
     TResult Function()? loadingMore,
     TResult Function(ListMarketPlaceModel list)? success,
+    TResult Function()? buySuccess,
+    TResult Function(MarketPlaceModel nft)? notEnoughAVAX,
     TResult Function(String msg)? fail,
+    TResult Function(String msg)? buyFail,
   }) {
     return success?.call(list);
   }
@@ -561,7 +643,10 @@ class _$MarketPlaceStateSuccess implements MarketPlaceStateSuccess {
     TResult Function()? loading,
     TResult Function()? loadingMore,
     TResult Function(ListMarketPlaceModel list)? success,
+    TResult Function()? buySuccess,
+    TResult Function(MarketPlaceModel nft)? notEnoughAVAX,
     TResult Function(String msg)? fail,
+    TResult Function(String msg)? buyFail,
     required TResult orElse(),
   }) {
     if (success != null) {
@@ -577,7 +662,11 @@ class _$MarketPlaceStateSuccess implements MarketPlaceStateSuccess {
     required TResult Function(MarketPlaceStateLoading value) loading,
     required TResult Function(MarketPlaceStateLoadingMore value) loadingMore,
     required TResult Function(MarketPlaceStateSuccess value) success,
+    required TResult Function(MarketPlaceStateBuySuccess value) buySuccess,
+    required TResult Function(MarketPlaceStateBuyNotEnoughAVAX value)
+        notEnoughAVAX,
     required TResult Function(MarketPlaceStateFailed value) fail,
+    required TResult Function(MarketPlaceStateBuyFailed value) buyFail,
   }) {
     return success(this);
   }
@@ -589,7 +678,10 @@ class _$MarketPlaceStateSuccess implements MarketPlaceStateSuccess {
     TResult Function(MarketPlaceStateLoading value)? loading,
     TResult Function(MarketPlaceStateLoadingMore value)? loadingMore,
     TResult Function(MarketPlaceStateSuccess value)? success,
+    TResult Function(MarketPlaceStateBuySuccess value)? buySuccess,
+    TResult Function(MarketPlaceStateBuyNotEnoughAVAX value)? notEnoughAVAX,
     TResult Function(MarketPlaceStateFailed value)? fail,
+    TResult Function(MarketPlaceStateBuyFailed value)? buyFail,
   }) {
     return success?.call(this);
   }
@@ -601,7 +693,10 @@ class _$MarketPlaceStateSuccess implements MarketPlaceStateSuccess {
     TResult Function(MarketPlaceStateLoading value)? loading,
     TResult Function(MarketPlaceStateLoadingMore value)? loadingMore,
     TResult Function(MarketPlaceStateSuccess value)? success,
+    TResult Function(MarketPlaceStateBuySuccess value)? buySuccess,
+    TResult Function(MarketPlaceStateBuyNotEnoughAVAX value)? notEnoughAVAX,
     TResult Function(MarketPlaceStateFailed value)? fail,
+    TResult Function(MarketPlaceStateBuyFailed value)? buyFail,
     required TResult orElse(),
   }) {
     if (success != null) {
@@ -619,6 +714,331 @@ abstract class MarketPlaceStateSuccess implements MarketPlaceState {
   @JsonKey(ignore: true)
   _$$MarketPlaceStateSuccessCopyWith<_$MarketPlaceStateSuccess> get copyWith =>
       throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$MarketPlaceStateBuySuccessCopyWith<$Res> {
+  factory _$$MarketPlaceStateBuySuccessCopyWith(
+          _$MarketPlaceStateBuySuccess value,
+          $Res Function(_$MarketPlaceStateBuySuccess) then) =
+      __$$MarketPlaceStateBuySuccessCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$MarketPlaceStateBuySuccessCopyWithImpl<$Res>
+    extends _$MarketPlaceStateCopyWithImpl<$Res>
+    implements _$$MarketPlaceStateBuySuccessCopyWith<$Res> {
+  __$$MarketPlaceStateBuySuccessCopyWithImpl(
+      _$MarketPlaceStateBuySuccess _value,
+      $Res Function(_$MarketPlaceStateBuySuccess) _then)
+      : super(_value, (v) => _then(v as _$MarketPlaceStateBuySuccess));
+
+  @override
+  _$MarketPlaceStateBuySuccess get _value =>
+      super._value as _$MarketPlaceStateBuySuccess;
+}
+
+/// @nodoc
+
+class _$MarketPlaceStateBuySuccess implements MarketPlaceStateBuySuccess {
+  const _$MarketPlaceStateBuySuccess();
+
+  @override
+  String toString() {
+    return 'MarketPlaceState.buySuccess()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$MarketPlaceStateBuySuccess);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function() loading,
+    required TResult Function() loadingMore,
+    required TResult Function(ListMarketPlaceModel list) success,
+    required TResult Function() buySuccess,
+    required TResult Function(MarketPlaceModel nft) notEnoughAVAX,
+    required TResult Function(String msg) fail,
+    required TResult Function(String msg) buyFail,
+  }) {
+    return buySuccess();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function()? loading,
+    TResult Function()? loadingMore,
+    TResult Function(ListMarketPlaceModel list)? success,
+    TResult Function()? buySuccess,
+    TResult Function(MarketPlaceModel nft)? notEnoughAVAX,
+    TResult Function(String msg)? fail,
+    TResult Function(String msg)? buyFail,
+  }) {
+    return buySuccess?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function()? loading,
+    TResult Function()? loadingMore,
+    TResult Function(ListMarketPlaceModel list)? success,
+    TResult Function()? buySuccess,
+    TResult Function(MarketPlaceModel nft)? notEnoughAVAX,
+    TResult Function(String msg)? fail,
+    TResult Function(String msg)? buyFail,
+    required TResult orElse(),
+  }) {
+    if (buySuccess != null) {
+      return buySuccess();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(MarketPlaceStateInit value) initial,
+    required TResult Function(MarketPlaceStateLoading value) loading,
+    required TResult Function(MarketPlaceStateLoadingMore value) loadingMore,
+    required TResult Function(MarketPlaceStateSuccess value) success,
+    required TResult Function(MarketPlaceStateBuySuccess value) buySuccess,
+    required TResult Function(MarketPlaceStateBuyNotEnoughAVAX value)
+        notEnoughAVAX,
+    required TResult Function(MarketPlaceStateFailed value) fail,
+    required TResult Function(MarketPlaceStateBuyFailed value) buyFail,
+  }) {
+    return buySuccess(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(MarketPlaceStateInit value)? initial,
+    TResult Function(MarketPlaceStateLoading value)? loading,
+    TResult Function(MarketPlaceStateLoadingMore value)? loadingMore,
+    TResult Function(MarketPlaceStateSuccess value)? success,
+    TResult Function(MarketPlaceStateBuySuccess value)? buySuccess,
+    TResult Function(MarketPlaceStateBuyNotEnoughAVAX value)? notEnoughAVAX,
+    TResult Function(MarketPlaceStateFailed value)? fail,
+    TResult Function(MarketPlaceStateBuyFailed value)? buyFail,
+  }) {
+    return buySuccess?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(MarketPlaceStateInit value)? initial,
+    TResult Function(MarketPlaceStateLoading value)? loading,
+    TResult Function(MarketPlaceStateLoadingMore value)? loadingMore,
+    TResult Function(MarketPlaceStateSuccess value)? success,
+    TResult Function(MarketPlaceStateBuySuccess value)? buySuccess,
+    TResult Function(MarketPlaceStateBuyNotEnoughAVAX value)? notEnoughAVAX,
+    TResult Function(MarketPlaceStateFailed value)? fail,
+    TResult Function(MarketPlaceStateBuyFailed value)? buyFail,
+    required TResult orElse(),
+  }) {
+    if (buySuccess != null) {
+      return buySuccess(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class MarketPlaceStateBuySuccess implements MarketPlaceState {
+  const factory MarketPlaceStateBuySuccess() = _$MarketPlaceStateBuySuccess;
+}
+
+/// @nodoc
+abstract class _$$MarketPlaceStateBuyNotEnoughAVAXCopyWith<$Res> {
+  factory _$$MarketPlaceStateBuyNotEnoughAVAXCopyWith(
+          _$MarketPlaceStateBuyNotEnoughAVAX value,
+          $Res Function(_$MarketPlaceStateBuyNotEnoughAVAX) then) =
+      __$$MarketPlaceStateBuyNotEnoughAVAXCopyWithImpl<$Res>;
+  $Res call({MarketPlaceModel nft});
+}
+
+/// @nodoc
+class __$$MarketPlaceStateBuyNotEnoughAVAXCopyWithImpl<$Res>
+    extends _$MarketPlaceStateCopyWithImpl<$Res>
+    implements _$$MarketPlaceStateBuyNotEnoughAVAXCopyWith<$Res> {
+  __$$MarketPlaceStateBuyNotEnoughAVAXCopyWithImpl(
+      _$MarketPlaceStateBuyNotEnoughAVAX _value,
+      $Res Function(_$MarketPlaceStateBuyNotEnoughAVAX) _then)
+      : super(_value, (v) => _then(v as _$MarketPlaceStateBuyNotEnoughAVAX));
+
+  @override
+  _$MarketPlaceStateBuyNotEnoughAVAX get _value =>
+      super._value as _$MarketPlaceStateBuyNotEnoughAVAX;
+
+  @override
+  $Res call({
+    Object? nft = freezed,
+  }) {
+    return _then(_$MarketPlaceStateBuyNotEnoughAVAX(
+      nft == freezed
+          ? _value.nft
+          : nft // ignore: cast_nullable_to_non_nullable
+              as MarketPlaceModel,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$MarketPlaceStateBuyNotEnoughAVAX
+    implements MarketPlaceStateBuyNotEnoughAVAX {
+  const _$MarketPlaceStateBuyNotEnoughAVAX(this.nft);
+
+  @override
+  final MarketPlaceModel nft;
+
+  @override
+  String toString() {
+    return 'MarketPlaceState.notEnoughAVAX(nft: $nft)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$MarketPlaceStateBuyNotEnoughAVAX &&
+            const DeepCollectionEquality().equals(other.nft, nft));
+  }
+
+  @override
+  int get hashCode =>
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(nft));
+
+  @JsonKey(ignore: true)
+  @override
+  _$$MarketPlaceStateBuyNotEnoughAVAXCopyWith<
+          _$MarketPlaceStateBuyNotEnoughAVAX>
+      get copyWith => __$$MarketPlaceStateBuyNotEnoughAVAXCopyWithImpl<
+          _$MarketPlaceStateBuyNotEnoughAVAX>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function() loading,
+    required TResult Function() loadingMore,
+    required TResult Function(ListMarketPlaceModel list) success,
+    required TResult Function() buySuccess,
+    required TResult Function(MarketPlaceModel nft) notEnoughAVAX,
+    required TResult Function(String msg) fail,
+    required TResult Function(String msg) buyFail,
+  }) {
+    return notEnoughAVAX(nft);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function()? loading,
+    TResult Function()? loadingMore,
+    TResult Function(ListMarketPlaceModel list)? success,
+    TResult Function()? buySuccess,
+    TResult Function(MarketPlaceModel nft)? notEnoughAVAX,
+    TResult Function(String msg)? fail,
+    TResult Function(String msg)? buyFail,
+  }) {
+    return notEnoughAVAX?.call(nft);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function()? loading,
+    TResult Function()? loadingMore,
+    TResult Function(ListMarketPlaceModel list)? success,
+    TResult Function()? buySuccess,
+    TResult Function(MarketPlaceModel nft)? notEnoughAVAX,
+    TResult Function(String msg)? fail,
+    TResult Function(String msg)? buyFail,
+    required TResult orElse(),
+  }) {
+    if (notEnoughAVAX != null) {
+      return notEnoughAVAX(nft);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(MarketPlaceStateInit value) initial,
+    required TResult Function(MarketPlaceStateLoading value) loading,
+    required TResult Function(MarketPlaceStateLoadingMore value) loadingMore,
+    required TResult Function(MarketPlaceStateSuccess value) success,
+    required TResult Function(MarketPlaceStateBuySuccess value) buySuccess,
+    required TResult Function(MarketPlaceStateBuyNotEnoughAVAX value)
+        notEnoughAVAX,
+    required TResult Function(MarketPlaceStateFailed value) fail,
+    required TResult Function(MarketPlaceStateBuyFailed value) buyFail,
+  }) {
+    return notEnoughAVAX(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(MarketPlaceStateInit value)? initial,
+    TResult Function(MarketPlaceStateLoading value)? loading,
+    TResult Function(MarketPlaceStateLoadingMore value)? loadingMore,
+    TResult Function(MarketPlaceStateSuccess value)? success,
+    TResult Function(MarketPlaceStateBuySuccess value)? buySuccess,
+    TResult Function(MarketPlaceStateBuyNotEnoughAVAX value)? notEnoughAVAX,
+    TResult Function(MarketPlaceStateFailed value)? fail,
+    TResult Function(MarketPlaceStateBuyFailed value)? buyFail,
+  }) {
+    return notEnoughAVAX?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(MarketPlaceStateInit value)? initial,
+    TResult Function(MarketPlaceStateLoading value)? loading,
+    TResult Function(MarketPlaceStateLoadingMore value)? loadingMore,
+    TResult Function(MarketPlaceStateSuccess value)? success,
+    TResult Function(MarketPlaceStateBuySuccess value)? buySuccess,
+    TResult Function(MarketPlaceStateBuyNotEnoughAVAX value)? notEnoughAVAX,
+    TResult Function(MarketPlaceStateFailed value)? fail,
+    TResult Function(MarketPlaceStateBuyFailed value)? buyFail,
+    required TResult orElse(),
+  }) {
+    if (notEnoughAVAX != null) {
+      return notEnoughAVAX(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class MarketPlaceStateBuyNotEnoughAVAX implements MarketPlaceState {
+  const factory MarketPlaceStateBuyNotEnoughAVAX(final MarketPlaceModel nft) =
+      _$MarketPlaceStateBuyNotEnoughAVAX;
+
+  MarketPlaceModel get nft => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  _$$MarketPlaceStateBuyNotEnoughAVAXCopyWith<
+          _$MarketPlaceStateBuyNotEnoughAVAX>
+      get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -692,7 +1112,10 @@ class _$MarketPlaceStateFailed implements MarketPlaceStateFailed {
     required TResult Function() loading,
     required TResult Function() loadingMore,
     required TResult Function(ListMarketPlaceModel list) success,
+    required TResult Function() buySuccess,
+    required TResult Function(MarketPlaceModel nft) notEnoughAVAX,
     required TResult Function(String msg) fail,
+    required TResult Function(String msg) buyFail,
   }) {
     return fail(msg);
   }
@@ -704,7 +1127,10 @@ class _$MarketPlaceStateFailed implements MarketPlaceStateFailed {
     TResult Function()? loading,
     TResult Function()? loadingMore,
     TResult Function(ListMarketPlaceModel list)? success,
+    TResult Function()? buySuccess,
+    TResult Function(MarketPlaceModel nft)? notEnoughAVAX,
     TResult Function(String msg)? fail,
+    TResult Function(String msg)? buyFail,
   }) {
     return fail?.call(msg);
   }
@@ -716,7 +1142,10 @@ class _$MarketPlaceStateFailed implements MarketPlaceStateFailed {
     TResult Function()? loading,
     TResult Function()? loadingMore,
     TResult Function(ListMarketPlaceModel list)? success,
+    TResult Function()? buySuccess,
+    TResult Function(MarketPlaceModel nft)? notEnoughAVAX,
     TResult Function(String msg)? fail,
+    TResult Function(String msg)? buyFail,
     required TResult orElse(),
   }) {
     if (fail != null) {
@@ -732,7 +1161,11 @@ class _$MarketPlaceStateFailed implements MarketPlaceStateFailed {
     required TResult Function(MarketPlaceStateLoading value) loading,
     required TResult Function(MarketPlaceStateLoadingMore value) loadingMore,
     required TResult Function(MarketPlaceStateSuccess value) success,
+    required TResult Function(MarketPlaceStateBuySuccess value) buySuccess,
+    required TResult Function(MarketPlaceStateBuyNotEnoughAVAX value)
+        notEnoughAVAX,
     required TResult Function(MarketPlaceStateFailed value) fail,
+    required TResult Function(MarketPlaceStateBuyFailed value) buyFail,
   }) {
     return fail(this);
   }
@@ -744,7 +1177,10 @@ class _$MarketPlaceStateFailed implements MarketPlaceStateFailed {
     TResult Function(MarketPlaceStateLoading value)? loading,
     TResult Function(MarketPlaceStateLoadingMore value)? loadingMore,
     TResult Function(MarketPlaceStateSuccess value)? success,
+    TResult Function(MarketPlaceStateBuySuccess value)? buySuccess,
+    TResult Function(MarketPlaceStateBuyNotEnoughAVAX value)? notEnoughAVAX,
     TResult Function(MarketPlaceStateFailed value)? fail,
+    TResult Function(MarketPlaceStateBuyFailed value)? buyFail,
   }) {
     return fail?.call(this);
   }
@@ -756,7 +1192,10 @@ class _$MarketPlaceStateFailed implements MarketPlaceStateFailed {
     TResult Function(MarketPlaceStateLoading value)? loading,
     TResult Function(MarketPlaceStateLoadingMore value)? loadingMore,
     TResult Function(MarketPlaceStateSuccess value)? success,
+    TResult Function(MarketPlaceStateBuySuccess value)? buySuccess,
+    TResult Function(MarketPlaceStateBuyNotEnoughAVAX value)? notEnoughAVAX,
     TResult Function(MarketPlaceStateFailed value)? fail,
+    TResult Function(MarketPlaceStateBuyFailed value)? buyFail,
     required TResult orElse(),
   }) {
     if (fail != null) {
@@ -774,4 +1213,179 @@ abstract class MarketPlaceStateFailed implements MarketPlaceState {
   @JsonKey(ignore: true)
   _$$MarketPlaceStateFailedCopyWith<_$MarketPlaceStateFailed> get copyWith =>
       throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$MarketPlaceStateBuyFailedCopyWith<$Res> {
+  factory _$$MarketPlaceStateBuyFailedCopyWith(
+          _$MarketPlaceStateBuyFailed value,
+          $Res Function(_$MarketPlaceStateBuyFailed) then) =
+      __$$MarketPlaceStateBuyFailedCopyWithImpl<$Res>;
+  $Res call({String msg});
+}
+
+/// @nodoc
+class __$$MarketPlaceStateBuyFailedCopyWithImpl<$Res>
+    extends _$MarketPlaceStateCopyWithImpl<$Res>
+    implements _$$MarketPlaceStateBuyFailedCopyWith<$Res> {
+  __$$MarketPlaceStateBuyFailedCopyWithImpl(_$MarketPlaceStateBuyFailed _value,
+      $Res Function(_$MarketPlaceStateBuyFailed) _then)
+      : super(_value, (v) => _then(v as _$MarketPlaceStateBuyFailed));
+
+  @override
+  _$MarketPlaceStateBuyFailed get _value =>
+      super._value as _$MarketPlaceStateBuyFailed;
+
+  @override
+  $Res call({
+    Object? msg = freezed,
+  }) {
+    return _then(_$MarketPlaceStateBuyFailed(
+      msg == freezed
+          ? _value.msg
+          : msg // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$MarketPlaceStateBuyFailed implements MarketPlaceStateBuyFailed {
+  const _$MarketPlaceStateBuyFailed(this.msg);
+
+  @override
+  final String msg;
+
+  @override
+  String toString() {
+    return 'MarketPlaceState.buyFail(msg: $msg)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$MarketPlaceStateBuyFailed &&
+            const DeepCollectionEquality().equals(other.msg, msg));
+  }
+
+  @override
+  int get hashCode =>
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(msg));
+
+  @JsonKey(ignore: true)
+  @override
+  _$$MarketPlaceStateBuyFailedCopyWith<_$MarketPlaceStateBuyFailed>
+      get copyWith => __$$MarketPlaceStateBuyFailedCopyWithImpl<
+          _$MarketPlaceStateBuyFailed>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function() loading,
+    required TResult Function() loadingMore,
+    required TResult Function(ListMarketPlaceModel list) success,
+    required TResult Function() buySuccess,
+    required TResult Function(MarketPlaceModel nft) notEnoughAVAX,
+    required TResult Function(String msg) fail,
+    required TResult Function(String msg) buyFail,
+  }) {
+    return buyFail(msg);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function()? loading,
+    TResult Function()? loadingMore,
+    TResult Function(ListMarketPlaceModel list)? success,
+    TResult Function()? buySuccess,
+    TResult Function(MarketPlaceModel nft)? notEnoughAVAX,
+    TResult Function(String msg)? fail,
+    TResult Function(String msg)? buyFail,
+  }) {
+    return buyFail?.call(msg);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function()? loading,
+    TResult Function()? loadingMore,
+    TResult Function(ListMarketPlaceModel list)? success,
+    TResult Function()? buySuccess,
+    TResult Function(MarketPlaceModel nft)? notEnoughAVAX,
+    TResult Function(String msg)? fail,
+    TResult Function(String msg)? buyFail,
+    required TResult orElse(),
+  }) {
+    if (buyFail != null) {
+      return buyFail(msg);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(MarketPlaceStateInit value) initial,
+    required TResult Function(MarketPlaceStateLoading value) loading,
+    required TResult Function(MarketPlaceStateLoadingMore value) loadingMore,
+    required TResult Function(MarketPlaceStateSuccess value) success,
+    required TResult Function(MarketPlaceStateBuySuccess value) buySuccess,
+    required TResult Function(MarketPlaceStateBuyNotEnoughAVAX value)
+        notEnoughAVAX,
+    required TResult Function(MarketPlaceStateFailed value) fail,
+    required TResult Function(MarketPlaceStateBuyFailed value) buyFail,
+  }) {
+    return buyFail(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(MarketPlaceStateInit value)? initial,
+    TResult Function(MarketPlaceStateLoading value)? loading,
+    TResult Function(MarketPlaceStateLoadingMore value)? loadingMore,
+    TResult Function(MarketPlaceStateSuccess value)? success,
+    TResult Function(MarketPlaceStateBuySuccess value)? buySuccess,
+    TResult Function(MarketPlaceStateBuyNotEnoughAVAX value)? notEnoughAVAX,
+    TResult Function(MarketPlaceStateFailed value)? fail,
+    TResult Function(MarketPlaceStateBuyFailed value)? buyFail,
+  }) {
+    return buyFail?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(MarketPlaceStateInit value)? initial,
+    TResult Function(MarketPlaceStateLoading value)? loading,
+    TResult Function(MarketPlaceStateLoadingMore value)? loadingMore,
+    TResult Function(MarketPlaceStateSuccess value)? success,
+    TResult Function(MarketPlaceStateBuySuccess value)? buySuccess,
+    TResult Function(MarketPlaceStateBuyNotEnoughAVAX value)? notEnoughAVAX,
+    TResult Function(MarketPlaceStateFailed value)? fail,
+    TResult Function(MarketPlaceStateBuyFailed value)? buyFail,
+    required TResult orElse(),
+  }) {
+    if (buyFail != null) {
+      return buyFail(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class MarketPlaceStateBuyFailed implements MarketPlaceState {
+  const factory MarketPlaceStateBuyFailed(final String msg) =
+      _$MarketPlaceStateBuyFailed;
+
+  String get msg => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  _$$MarketPlaceStateBuyFailedCopyWith<_$MarketPlaceStateBuyFailed>
+      get copyWith => throw _privateConstructorUsedError;
 }
