@@ -1,6 +1,5 @@
 import 'package:dartz/dartz.dart';
 import 'package:injectable/injectable.dart';
-import 'package:slee_fi/common/extensions/string_x.dart';
 import 'package:slee_fi/datasources/local/secure_storage.dart';
 import 'package:slee_fi/datasources/remote/auth_datasource/auth_datasource.dart';
 import 'package:slee_fi/entities/active_code/active_code_entity.dart';
@@ -57,10 +56,7 @@ class UserImplementation extends IUserRepository {
       WhitDrawTokenSchema whitDrawTokenSchema) async {
     try {
       var result =
-          await _authDataSource.transferTokenToWallet(whitDrawTokenSchema);
-
-      'on transfer success $result'.log;
-
+      await _authDataSource.transferTokenToWallet(whitDrawTokenSchema);
       return Right(result);
     } on Exception catch (e) {
       return Left(FailureMessage.fromException(e));

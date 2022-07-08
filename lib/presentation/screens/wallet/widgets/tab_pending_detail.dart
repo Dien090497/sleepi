@@ -24,7 +24,7 @@ class TabPendingDetail extends StatelessWidget {
                 onTap: () async {
                   final url = Uri.parse(Const.avascanUrl);
                   if (await canLaunchUrl(url)) {
-                  launchUrl(url);
+                    launchUrl(url);
                   }
                 },
                 radius: 8,
@@ -63,9 +63,7 @@ class TabPendingDetail extends StatelessWidget {
                           keyText: "+1 NFT",
                           style: TextStyles.bold16Blue,
                         ),
-                        const SizedBox(
-                          height: 4.0,
-                        ),
+                        const SizedBox(height: 4.0),
                         SFText(
                           keyText: "53LqDpU...wihRe3",
                           style: TextStyles.lightGrey14,

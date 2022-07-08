@@ -107,9 +107,26 @@ abstract class AuthDataSource {
   Future<ActivationCodeResponse> verifyActiveCode(
       @Query('activeCode') String activeCode);
 
+  ///history
+  @POST('/tx-history/tx-history')
+  Future<dynamic> stacking(@Body() CreatePasswordSchema refreshTokenSchema);
+
   ///stacking
   @POST('/stacking')
-  Future<dynamic> stacking(@Body() CreatePasswordSchema refreshTokenSchema);
+  Future<dynamic> addNewRecordTo(@Body() CreatePasswordSchema refreshTokenSchema);
+
+  @GET('/tx-history/pending')
+  Future<dynamic> fetchSpendingPending(
+    @Query('userId') String userId,
+    @Query('limit') String limit,
+    @Query('page') String page,
+  );
+  @GET('/tx-history/history')
+  Future<dynamic> fetchSpendingHistory(
+    @Query('userId') String userId,
+    @Query('limit') String limit,
+    @Query('page') String page,
+  );
 
   ///white draw
   @POST('/withdraw/token')
@@ -125,5 +142,4 @@ abstract class AuthDataSource {
 
   @POST('/market-place')
   Future<ListMarketPlaceModel> getMarketPlace(@Body() MarketSchema entity);
-
 }

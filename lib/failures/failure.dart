@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:equatable/equatable.dart';
+import 'package:slee_fi/common/extensions/string_x.dart';
 
 abstract class Failure extends Equatable {
   const Failure();
@@ -24,6 +25,7 @@ class FailureMessage extends Failure {
         }
       }
     } catch (_) {}
+    'error is $e'.log;
 
     return const FailureMessage(
         'Error! An error occurred. Please try again later');
