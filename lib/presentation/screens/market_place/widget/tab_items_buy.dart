@@ -13,6 +13,7 @@ import 'package:slee_fi/presentation/blocs/market_place/market_place_cubit.dart'
 import 'package:slee_fi/presentation/blocs/market_place/market_place_state.dart';
 import 'package:slee_fi/presentation/screens/market_place/widget/filter_sheet.dart';
 import 'package:slee_fi/presentation/screens/market_place/widget/item_bed_buy_widget.dart';
+import 'package:slee_fi/presentation/screens/market_place/widget/pop_up_insufficient.dart';
 import 'package:slee_fi/presentation/screens/market_place/widget/pop_up_item_market_place.dart';
 import 'package:slee_fi/presentation/screens/market_place/widget/tab_bar_filter.dart';
 import 'package:slee_fi/resources/resources.dart';
@@ -34,7 +35,7 @@ class _TabItemsBuyState extends State<TabItemsBuy> {
     super.dispose();
   }
 
-  void _showItemDialog(BuildContext context, MarketPlaceModel item) {
+  void _showItemDialog(BuildContext context, MarketPlaceModel item, MarketPlaceCubit cubit) {
     showCustomAlertDialog(
       context,
       padding: const EdgeInsets.all(24),
@@ -42,8 +43,18 @@ class _TabItemsBuyState extends State<TabItemsBuy> {
         item: item,
         onConfirmTap: () {
           Navigator.pop(context);
-          showSuccessfulDialog(context, null);
+          cubit.buyNFT(item);
         },
+      ),
+    );
+  }
+
+  void _showDonWorryDialog(BuildContext context, MarketPlaceModel nft) {
+    showCustomAlertDialog(
+      context,
+      padding: const EdgeInsets.all(24),
+      children: PopupInsufficient(
+        nft: nft,
       ),
     );
   }
@@ -68,6 +79,13 @@ class _TabItemsBuyState extends State<TabItemsBuy> {
               //     cubit.loadMoreMarketPlace();
               //   }
               // });
+            }
+            if (state is MarketPlaceStateBuySuccess) {
+              showSuccessfulDialog(context, null);
+            }
+
+            if (state is MarketPlaceStateBuyNotEnoughAVAX) {
+              _showDonWorryDialog(context, state.nft);
             }
           },
           builder: (context, state) {
@@ -121,7 +139,7 @@ class _TabItemsBuyState extends State<TabItemsBuy> {
                                         return GestureDetector(
                                           onTap: () {
                                             _showItemDialog(
-                                                context, listItems[i]);
+                                                context, listItems[i], cubit);
                                           },
                                           child: ItemBedBuyWidget(
                                             item: listItems[i],
@@ -129,6 +147,7 @@ class _TabItemsBuyState extends State<TabItemsBuy> {
                                               _showItemDialog(
                                                 context,
                                                 listItems[i],
+                                                cubit
                                               );
                                             },
                                           ),
