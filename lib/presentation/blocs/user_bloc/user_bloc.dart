@@ -107,8 +107,8 @@ class UserBloc extends Bloc<UserEvent, UserState> {
   }
 
   String _catchIcon(String symbol) {
-    if (symbol == 'slgt') return Ics.icSlgt;
-    if (symbol == 'slft') return Ics.icSlft;
+    if (symbol == 'slgt' || symbol == 'SLGT') return Ics.icSlgt;
+    if (symbol == 'slft' || symbol == 'SLFT') return Ics.icSlft;
     return Ics.icAvax;
   }
 }
