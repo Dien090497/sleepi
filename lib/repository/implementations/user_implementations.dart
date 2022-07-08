@@ -52,11 +52,11 @@ class UserImplementation extends IUserRepository {
   }
 
   @override
-  Future<Either<FailureMessage, SwapTokenToWalletResponse>> transferTokenToMainWallet(
-      WhitDrawTokenSchema whitDrawTokenSchema) async {
+  Future<Either<FailureMessage, SwapTokenToWalletResponse>>
+      transferTokenToMainWallet(WhitDrawTokenSchema whitDrawTokenSchema) async {
     try {
       var result =
-      await _authDataSource.transferTokenToWallet(whitDrawTokenSchema);
+          await _authDataSource.transferTokenToWallet(whitDrawTokenSchema);
       return Right(result);
     } on Exception catch (e) {
       return Left(FailureMessage.fromException(e));
@@ -67,11 +67,24 @@ class UserImplementation extends IUserRepository {
   Future<Either<FailureMessage, GlobalConfigResponse>> getGlobalConfig() async {
     try {
       final result = await _authDataSource.getGlobalConfig();
-      await _secureStorage.saveAddressContract(addressContract: result.contract);
+      await _secureStorage.saveAddressContract(
+          addressContract: result.contract);
       await _secureStorage.saveMessage(saveMessage: result.messageSign);
       return Right(result);
     } catch (e) {
       return Left(FailureMessage('$e'));
     }
+  }
+
+  @override
+  Future<Either<FailureMessage, dynamic>> fetchHistoryList() {
+    // TODO: implement fetchHistoryList
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<Either<FailureMessage, dynamic>> fetchPendingList() {
+    // TODO: implement fetchPendingList
+    throw UnimplementedError();
   }
 }

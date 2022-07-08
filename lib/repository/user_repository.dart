@@ -19,6 +19,10 @@ abstract class IUserRepository {
 
   Future<Either<FailureMessage, SwapTokenToWalletResponse>>
       transferTokenToMainWallet(WhitDrawTokenSchema whitDrawTokenSchema);
+
   Future<Either<FailureMessage, GlobalConfigResponse>> getGlobalConfig();
 
+  Future<Either<FailureMessage, dynamic>> fetchPendingList();
+
+  Future<Either<FailureMessage, dynamic>> fetchHistoryList();
 }

@@ -8,6 +8,8 @@ import 'package:slee_fi/common/widgets/sf_back_button.dart';
 import 'package:slee_fi/common/widgets/sf_icon.dart';
 import 'package:slee_fi/entities/wallet_info/wallet_info_entity.dart';
 import 'package:slee_fi/models/pop_with_result.dart';
+import 'package:slee_fi/presentation/blocs/pending/pending_bloc.dart';
+import 'package:slee_fi/presentation/blocs/pending/pending_event.dart';
 import 'package:slee_fi/presentation/blocs/wallet/wallet_cubit.dart';
 import 'package:slee_fi/presentation/blocs/wallet/wallet_state.dart';
 import 'package:slee_fi/presentation/screens/passcode/passcode_screen.dart';
@@ -46,6 +48,8 @@ class _WalletScreenState extends State<WalletScreen>
     return MultiBlocProvider(
       providers: [
         BlocProvider<WalletCubit>(create: (context) => WalletCubit()..init()),
+        BlocProvider<PendingBloc>(
+            create: (context) => PendingBloc()..add(PendingFetched())),
       ],
       child: Stack(
         children: [
