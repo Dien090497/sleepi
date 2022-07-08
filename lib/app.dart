@@ -5,7 +5,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:slee_fi/common/routes/app_routes.dart';
 import 'package:slee_fi/common/style/theme.dart';
 import 'package:slee_fi/presentation/blocs/bottom_navigation/bottom_navigation_bloc.dart';
-import 'package:slee_fi/presentation/blocs/global_wallet/global_wallet_cubit.dart';
 import 'package:slee_fi/presentation/blocs/splash/splash_cubit.dart';
 import 'package:slee_fi/presentation/blocs/user_bloc/user_bloc.dart';
 
@@ -21,7 +20,6 @@ class MyApp extends StatelessWidget {
       providers: [
         BlocProvider(create: (_) => BottomNavigationBloc()),
         BlocProvider(create: (_) => SplashCubit()..init()),
-        BlocProvider(create: (_) => GlobalWalletCubit()),
         BlocProvider(create: (_) => UserBloc()),
       ],
       child: ScreenUtilInit(

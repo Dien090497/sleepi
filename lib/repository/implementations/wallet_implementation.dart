@@ -36,8 +36,15 @@ class WalletImplementation extends IWalletRepository {
   final SecureStorage _secureStorage;
   final AuthDataSource _authDataSource;
 
-  WalletImplementation(this._web3DataSource, this._getStorageDataSource,
-      this._transactionRemoteDataSource, this._isarDataSource, this._web3provider, this._secureStorage, this._authDataSource);
+  WalletImplementation(
+      this._web3DataSource,
+      this._getStorageDataSource,
+      this._historyDataSource,
+      this._transactionRemoteDataSource,
+      this._isarDataSource,
+      this._web3provider,
+      this._secureStorage,
+      this._authDataSource);
 
   @override
   Future<Either<Failure, WalletInfoEntity>> createWallet() async {
@@ -45,11 +52,13 @@ class WalletImplementation extends IWalletRepository {
       final String mnemonic = _web3DataSource.createMnemonic();
       final derivedIndex = _getStorageDataSource.getDerivedIndexAndIncrease();
       final network = await _getCurrentNetwork();
-      final privateKey = _web3DataSource.mnemonicToPrivateKey(mnemonic, 0, network.slip44);
+      final privateKey =
+          _web3DataSource.mnemonicToPrivateKey(mnemonic, 0, network.slip44);
       final credentials = _web3DataSource.credentialsFromPrivateKey(privateKey);
       final ethereumAddress = await credentials.extractAddress();
       final message = await _secureStorage.readMessage();
-      final signature = _web3DataSource.generateSignature(privateKey: privateKey, message: message ?? '');
+      final signature = _web3DataSource.generateSignature(
+          privateKey: privateKey, message: message ?? '');
       final user = await _secureStorage.readCurrentUser();
       VerifyUserSchema schema = VerifyUserSchema(
         signedMessage: signature,
@@ -106,10 +115,10 @@ class WalletImplementation extends IWalletRepository {
       // var testNetwork = (await _isarDataSource.getAllNetwork()).last;
       // _web3DataSource.setCurrentNetwork(testNetwork);
       // _getStorageDataSource.setCurrentChainId(testNetwork.chainId);
+      final privateKey = _web3DataSource.mnemonicToPrivateKey(mnemonic, 0);
       if (_web3DataSource.validateMnemonic(mnemonic)) {
         final derivedIndex = _getStorageDataSource.getDerivedIndexAndIncrease();
         final network = await _getCurrentNetwork();
-        const privateKey = '389bdb4733b975e6495f4dd225778b6a3d0200e4b72ff8924a81b266113bfec7';
         final credentials =
             _web3DataSource.credentialsFromPrivateKey(privateKey);
         final ethereumAddress = await credentials.extractAddress();
@@ -371,12 +380,14 @@ class WalletImplementation extends IWalletRepository {
     try {
       if (_web3DataSource.validateMnemonic(mnemonic)) {
         final network = await _getCurrentNetwork();
-        final privateKey = _web3DataSource.mnemonicToPrivateKey(
-            mnemonic, 0, network.slip44);
-        final credentials = _web3DataSource.credentialsFromPrivateKey(privateKey);
+        final privateKey =
+            _web3DataSource.mnemonicToPrivateKey(mnemonic, 0, network.slip44);
+        final credentials =
+            _web3DataSource.credentialsFromPrivateKey(privateKey);
         final message = await _secureStorage.readMessage();
         final ethereumAddress = await credentials.extractAddress();
-        final signature = _web3DataSource.generateSignature(privateKey: privateKey, message: message ?? '');
+        final signature = _web3DataSource.generateSignature(
+            privateKey: privateKey, message: message ?? '');
         final user = await _secureStorage.readCurrentUser();
         VerifyUserSchema schema = VerifyUserSchema(
           signedMessage: signature,
@@ -399,37 +410,51 @@ class WalletImplementation extends IWalletRepository {
   }
 
   @override
-  Future<Either<Failure, List<TransactionIsarModel>>> getHistoryTransaction(HistoryTransactionParams params) async{
-      try {
-        // List<HistoryIsarModel> historyList = await _historyDataSource.getAllHistory();
-        List<TransactionHistoryModel> transactionHistoryList = [];
-        final result = await _transactionRemoteDataSource.getHistoryTransaction(params);
-        result.fold(
-              (l) { },
-              (history) {
-            if(params.tokenSymbol == "AVAX"){
-              transactionHistoryList = history.result;
-            }else if(params.tokenSymbol != null) {
-              transactionHistoryList = history.result.where((i) => i.tokenSymbol == params.tokenSymbol).toList();
-            }else {transactionHistoryList = history.result;}
-          },
-        );
-        List<TransactionIsarModel> transactionList = [];
-        for(int i = 0 ; i < transactionHistoryList.length; i++){
-          // var transactionInfo = await _web3DataSource.getDetailTransaction(historyList.elementAt(i).transactionHash);
-          // var transactionReceipt = await _web3DataSource.getTransactionReceipt(historyList.elementAt(i).transactionHash);
-          // var getTimeStamp = await _web3DataSource.getDetailBlock(transactionInfo.blockNumber.toBlockParam());
-          final model = TransactionIsarModel(
-              valueInEther: BigInt.parse(transactionHistoryList.elementAt(i).value) / BigInt.from(pow(10, 18)),
-              timeStamp: DateTime.fromMillisecondsSinceEpoch(int.parse(transactionHistoryList.elementAt(i).timeStamp) * 1000),
-              gasPrice: BigInt.parse(transactionHistoryList.elementAt(i).gasPrice) / BigInt.from(pow(10, 18)),
-              addressFrom: transactionHistoryList.elementAt(i).from,
-              addressTo: transactionHistoryList.elementAt(i).to,
-              status: transactionHistoryList.elementAt(i).txReceiptStatus != null ? int.parse(transactionHistoryList.elementAt(i).txReceiptStatus!) : 0
-          );
-          transactionList.add(model);
-        }
-        return Right(transactionList);
+  Future<Either<Failure, List<TransactionIsarModel>>> getHistoryTransaction(
+      HistoryTransactionParams params) async {
+    try {
+      // List<HistoryIsarModel> historyList = await _historyDataSource.getAllHistory();
+      List<TransactionHistoryModel> transactionHistoryList = [];
+      final result =
+          await _transactionRemoteDataSource.getHistoryTransaction(params);
+      result.fold(
+        (l) {},
+        (history) {
+          if (params.tokenSymbol == "AVAX") {
+            transactionHistoryList = history.result;
+          } else if (params.tokenSymbol != null) {
+            transactionHistoryList = history.result
+                .where((i) => i.tokenSymbol == params.tokenSymbol)
+                .toList();
+          } else {
+            transactionHistoryList = history.result;
+          }
+        },
+      );
+      List<TransactionIsarModel> transactionList = [];
+      for (int i = 0; i < transactionHistoryList.length; i++) {
+        // var transactionInfo = await _web3DataSource.getDetailTransaction(historyList.elementAt(i).transactionHash);
+        // var transactionReceipt = await _web3DataSource.getTransactionReceipt(historyList.elementAt(i).transactionHash);
+        // var getTimeStamp = await _web3DataSource.getDetailBlock(transactionInfo.blockNumber.toBlockParam());
+        final model = TransactionIsarModel(
+            valueInEther:
+                BigInt.parse(transactionHistoryList.elementAt(i).value) /
+                    BigInt.from(pow(10, 18)),
+            timeStamp: DateTime.fromMillisecondsSinceEpoch(
+                int.parse(transactionHistoryList.elementAt(i).timeStamp) *
+                    1000),
+            gasPrice:
+                BigInt.parse(transactionHistoryList.elementAt(i).gasPrice) /
+                    BigInt.from(pow(10, 18)),
+            addressFrom: transactionHistoryList.elementAt(i).from,
+            addressTo: transactionHistoryList.elementAt(i).to,
+            status: transactionHistoryList.elementAt(i).txReceiptStatus != null
+                ? int.parse(
+                    transactionHistoryList.elementAt(i).txReceiptStatus!)
+                : 0);
+        transactionList.add(model);
+      }
+      return Right(transactionList);
     } catch (e) {
       return Left(FailureMessage('$e'));
     }

@@ -16,3 +16,20 @@ class UpdateUserOrListToken extends UserEvent {
   @override
   List<Object?> get props => [userInfoEntity, listTokens];
 }
+
+class InitialUser extends UserEvent {
+  @override
+  List<Object?> get props => [];
+}
+class StartInterval extends UserEvent {
+  @override
+  List<Object?> get props => [];
+}
+
+class RefreshBalanceToken extends UserEvent {
+  @override
+  List<Object?> get props => [];
+}
+
+
+
