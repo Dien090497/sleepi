@@ -14,7 +14,7 @@ class FailureMessage extends Failure {
   factory FailureMessage.fromException(Exception e) {
     try {
       if (e is DioError) {
-        if (e.response?.statusCode == 502) {
+        if (e.response?.statusCode == 502 || e.response?.statusCode == 500) {
           return const FailureMessage('Some thing wrong');
         }
         var error = e.response?.data['error']['details']['message'];
