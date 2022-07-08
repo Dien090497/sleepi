@@ -49,7 +49,7 @@ class PopupInsufficient extends StatelessWidget {
           ),
           padding: const EdgeInsets.all(8),
           child: SFText(
-            keyText: nft.id.toString(),
+            keyText: nft.nftId.toString(),
             style: TextStyles.blue14,
           ),
         ),
@@ -117,6 +117,7 @@ class PopupInsufficient extends StatelessWidget {
                     return SFButton(
                       text: LocaleKeys.confirm,
                       onPressed: () {
+                        Navigator.pop(context);
                         Navigator.pushNamed(context, R.passcode,
                             arguments: PasscodeArguments(
                                 route: R.transfer,

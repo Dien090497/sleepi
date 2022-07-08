@@ -2,6 +2,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:slee_fi/common/routes/app_routes.dart';
 import 'package:slee_fi/common/widgets/sf_alert_dialog.dart';
 import 'package:slee_fi/common/widgets/sf_bottom_sheets.dart';
 import 'package:slee_fi/common/widgets/sf_dialog.dart';
@@ -10,17 +11,25 @@ import 'package:slee_fi/l10n/locale_keys.g.dart';
 import 'package:slee_fi/models/market_place/market_place_model.dart';
 import 'package:slee_fi/presentation/blocs/market_place/market_place_cubit.dart';
 import 'package:slee_fi/presentation/blocs/market_place/market_place_state.dart';
+import 'package:slee_fi/presentation/screens/info_individual/info_individual_screen.dart';
 import 'package:slee_fi/presentation/screens/market_place/widget/filter_sheet.dart';
 import 'package:slee_fi/presentation/screens/market_place/widget/gridview_bed_item.dart';
 import 'package:slee_fi/presentation/screens/market_place/widget/pop_up_bed_market_place.dart';
-import 'package:slee_fi/presentation/screens/market_place/widget/pop_up_insufficient.dart';
 import 'package:slee_fi/presentation/screens/market_place/widget/tab_bar_filter.dart';
 import 'package:slee_fi/resources/resources.dart';
 
-class TabBedsBuy extends StatelessWidget {
+class TabBedsBuy extends StatefulWidget {
   const TabBedsBuy({Key? key}) : super(key: key);
 
-  void _showBedDialog(BuildContext context, MarketPlaceModel bed, MarketPlaceCubit cubit) {
+  @override
+  State<TabBedsBuy> createState() => _TabBedsBuyState();
+}
+
+class _TabBedsBuyState extends State<TabBedsBuy> {
+  late List<MarketPlaceModel> listBeds = [];
+
+  void _showBedDialog(
+      BuildContext context, MarketPlaceModel bed, MarketPlaceCubit cubit) {
     showCustomAlertDialog(
       context,
       padding: const EdgeInsets.all(24),
@@ -33,20 +42,9 @@ class TabBedsBuy extends StatelessWidget {
       ),
     );
   }
-  void _showDonWorryDialog(BuildContext context, MarketPlaceModel nft) {
-    showCustomAlertDialog(
-      context,
-      padding: const EdgeInsets.all(24),
-      children: PopupInsufficient(
-        nft: nft,
-      ),
-    );
-  }
 
   @override
   Widget build(BuildContext context) {
-    List<MarketPlaceModel> listBeds = [];
-
     return DefaultTabController(
       length: 2,
       child: BlocProvider(
@@ -63,8 +61,8 @@ class TabBedsBuy extends StatelessWidget {
               showSuccessfulDialog(context, null);
             }
 
-            if (state is MarketPlaceStateBuyNotEnoughAVAX) {
-              _showDonWorryDialog(context, state.nft);
+            if (state is MarketPlaceStateBuyFailed) {
+              showMessageDialog(context, state.msg);
             }
           },
           builder: (context, state) {
@@ -128,6 +126,11 @@ class TabBedsBuy extends StatelessWidget {
                                       },
                                       onBuyTap: (bed) {
                                         _showBedDialog(context, bed, cubit);
+                                      },
+                                      onBedTap: (bed) {
+                                        Navigator.pushNamed(context, R.nftInfo,
+                                            arguments: InfoIndividualParams(
+                                                bed: bed, buy: true));
                                       },
                                     ),
                                     Padding(

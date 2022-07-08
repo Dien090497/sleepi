@@ -426,11 +426,12 @@ class _AuthDataSource implements AuthDataSource {
   }
 
   @override
-  Future<ListMarketPlaceModel> unstacking() async {
+  Future<ListMarketPlaceModel> unstacking(unStaking) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
+    _data.addAll(unStaking.toJson());
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<ListMarketPlaceModel>(
             Options(method: 'POST', headers: _headers, extra: _extra)
