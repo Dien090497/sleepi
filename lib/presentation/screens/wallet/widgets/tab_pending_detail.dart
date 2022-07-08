@@ -9,31 +9,85 @@ import 'package:slee_fi/common/widgets/sf_icon.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
 import 'package:slee_fi/l10n/locale_keys.g.dart';
 import 'package:slee_fi/presentation/blocs/pending/pending_bloc.dart';
+import 'package:slee_fi/presentation/blocs/pending/pending_event.dart';
 import 'package:slee_fi/presentation/blocs/pending/pending_state.dart';
+import 'package:slee_fi/presentation/blocs/user_bloc/user_bloc.dart';
+import 'package:slee_fi/presentation/blocs/user_bloc/user_state.dart';
 import 'package:slee_fi/resources/resources.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-class TabPendingDetail extends StatelessWidget {
-  const TabPendingDetail({Key? key}) : super(key: key);
+class TabPendingDetail extends StatefulWidget {
+  const TabPendingDetail({Key? key, required this.pendingBloc})
+      : super(key: key);
+
+  final PendingBloc pendingBloc;
+
+  @override
+  State<TabPendingDetail> createState() => _TabPendingDetailState();
+}
+
+class _TabPendingDetailState extends State<TabPendingDetail> {
+  final _scrollController = ScrollController();
+
+  @override
+  void initState() {
+    super.initState();
+    _scrollController.addListener(_onScroll);
+  }
+
+  void _onScroll() {
+    if (_isBottom) widget.pendingBloc.add(PendingFetched());
+  }
+
+  bool get _isBottom {
+    if (!_scrollController.hasClients) return false;
+    final maxScroll = _scrollController.position.maxScrollExtent;
+    final currentScroll = _scrollController.offset;
+    return currentScroll >= (maxScroll * 0.9);
+  }
 
   @override
   Widget build(BuildContext context) {
+    final userState = context.read<UserBloc>().state;
     return Column(
       children: [
         Expanded(
           child: BlocBuilder<PendingBloc, PendingState>(
+            bloc: widget.pendingBloc
+              ..add(PendingInit(
+                  userState is UserLoaded ? userState.userInfoEntity.id : 0)),
             builder: (context, state) {
               if (state.status == PendingStatus.initial) {
                 return const Center(child: CircularProgressIndicator());
               }
               if (state.list.isEmpty) {
-                return const Center(child: SFIcon(Ics.emptyBox));
+                return Center(
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      const SFIcon(Ics.emptyBox),
+                      const SizedBox(height: 28),
+                      SFText(
+                        keyText: LocaleKeys.there_is_no_item,
+                        style: TextStyles.lightGrey14,
+                      )
+                    ],
+                  ),
+                );
               }
               return ListView.builder(
-                itemCount: state.list.length,
+                itemCount: state.list.length + 1,
                 shrinkWrap: true,
                 padding: const EdgeInsets.symmetric(horizontal: 24.0),
-                itemBuilder: (BuildContext context, int index) => _buildItem(),
+                itemBuilder: (BuildContext context, int index) =>
+                    index < state.list.length
+                        ? _buildItem()
+                        : Container(
+                            height: 60,
+                            alignment: Alignment.center,
+                            child: state.hasReachedMax
+                                ? const SizedBox()
+                                : const CircularProgressIndicator()),
               );
             },
           ),
@@ -41,6 +95,14 @@ class TabPendingDetail extends StatelessWidget {
         const SizedBox(height: 75)
       ],
     );
+  }
+
+  @override
+  void dispose() {
+    _scrollController
+      ..removeListener(_onScroll)
+      ..dispose();
+    super.dispose();
   }
 
   Widget _buildItem() {

@@ -13,6 +13,7 @@ import 'package:slee_fi/common/widgets/sf_icon.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
 import 'package:slee_fi/entities/token/token_entity.dart';
 import 'package:slee_fi/l10n/locale_keys.g.dart';
+import 'package:slee_fi/presentation/blocs/pending/pending_bloc.dart';
 import 'package:slee_fi/presentation/blocs/user_bloc/user_bloc.dart';
 import 'package:slee_fi/presentation/blocs/user_bloc/user_state.dart';
 import 'package:slee_fi/presentation/screens/passcode/passcode_screen.dart';
@@ -21,7 +22,11 @@ import 'package:slee_fi/presentation/screens/wallet/widgets/pop_up_info_spending
 import 'package:slee_fi/presentation/screens/wallet/widgets/spending_detail_list.dart';
 
 class TabSpendingDetail extends StatefulWidget {
-  const TabSpendingDetail({Key? key}) : super(key: key);
+  const TabSpendingDetail(
+      {Key? key, required this.pendingBloc, required this.historyBloc})
+      : super(key: key);
+  final PendingBloc pendingBloc;
+  final PendingBloc historyBloc;
 
   @override
   State<TabSpendingDetail> createState() => _TabSpendingDetailState();
@@ -129,7 +134,10 @@ class _TabSpendingDetailState extends State<TabSpendingDetail> {
                             )),
                       ),
                       const SizedBox(height: 25),
-                      const SpendingDetailList(),
+                      SpendingDetailList(
+                        historyBloc: widget.historyBloc,
+                        pendingBloc: widget.pendingBloc,
+                      ),
                     ],
                   ),
                 )),

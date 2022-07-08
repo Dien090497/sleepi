@@ -10,6 +10,7 @@ import 'package:slee_fi/models/token_spending/token_spending.dart';
 import 'package:slee_fi/repository/user_repository.dart';
 import 'package:slee_fi/schema/change_password_schema/change_password_schema.dart';
 import 'package:slee_fi/schema/white_draw_token_schema/whit_draw_token_schema.dart';
+import 'package:slee_fi/usecase/spending_load_pending_usecase.dart';
 
 @Injectable(as: IUserRepository)
 class UserImplementation extends IUserRepository {
@@ -77,14 +78,26 @@ class UserImplementation extends IUserRepository {
   }
 
   @override
-  Future<Either<FailureMessage, dynamic>> fetchHistoryList() {
-    // TODO: implement fetchHistoryList
-    throw UnimplementedError();
+  Future<Either<FailureMessage, dynamic>> fetchHistoryList(
+      LoadMoreParams loadMoreParams) async {
+    try {
+      var result = await _authDataSource.fetchSpendingHistory(
+          loadMoreParams.userId, loadMoreParams.limit, loadMoreParams.page);
+      return Right(result);
+    } on Exception catch (e) {
+      return Left(FailureMessage.fromException(e));
+    }
   }
 
   @override
-  Future<Either<FailureMessage, dynamic>> fetchPendingList() {
-    // TODO: implement fetchPendingList
-    throw UnimplementedError();
+  Future<Either<FailureMessage, dynamic>> fetchPendingList(
+      LoadMoreParams loadMoreParams) async {
+    try {
+      var result = await _authDataSource.fetchSpendingHistory(
+          loadMoreParams.userId, loadMoreParams.limit, loadMoreParams.page);
+      return Right(result);
+    } on Exception catch (e) {
+      return Left(FailureMessage.fromException(e));
+    }
   }
 }

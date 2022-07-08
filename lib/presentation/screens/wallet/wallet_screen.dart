@@ -9,7 +9,6 @@ import 'package:slee_fi/common/widgets/sf_icon.dart';
 import 'package:slee_fi/entities/wallet_info/wallet_info_entity.dart';
 import 'package:slee_fi/models/pop_with_result.dart';
 import 'package:slee_fi/presentation/blocs/pending/pending_bloc.dart';
-import 'package:slee_fi/presentation/blocs/pending/pending_event.dart';
 import 'package:slee_fi/presentation/blocs/wallet/wallet_cubit.dart';
 import 'package:slee_fi/presentation/blocs/wallet/wallet_state.dart';
 import 'package:slee_fi/presentation/screens/passcode/passcode_screen.dart';
@@ -30,6 +29,8 @@ class _WalletScreenState extends State<WalletScreen>
     with SingleTickerProviderStateMixin {
   late int indexTap = 0;
   bool firstOpenWallet = true;
+  final _pendingBloc = PendingBloc();
+  final _historyBloc = PendingBloc();
   late final TabController controller = TabController(
     vsync: this,
     length: 2,
@@ -48,8 +49,8 @@ class _WalletScreenState extends State<WalletScreen>
     return MultiBlocProvider(
       providers: [
         BlocProvider<WalletCubit>(create: (context) => WalletCubit()..init()),
-        BlocProvider<PendingBloc>(
-            create: (context) => PendingBloc()..add(PendingFetched())),
+        BlocProvider<PendingBloc>(create: (context) => _pendingBloc),
+        BlocProvider<PendingBloc>(create: (context) => _historyBloc),
       ],
       child: Stack(
         children: [
@@ -133,9 +134,12 @@ class _WalletScreenState extends State<WalletScreen>
             child: TabBarView(
               controller: controller,
               physics: const NeverScrollableScrollPhysics(),
-              children: const [
-                TabSpendingDetail(),
-                TabWalletDetail(),
+              children: [
+                TabSpendingDetail(
+                  historyBloc: _historyBloc,
+                  pendingBloc: _pendingBloc,
+                ),
+                const TabWalletDetail(),
               ],
             ),
           ),

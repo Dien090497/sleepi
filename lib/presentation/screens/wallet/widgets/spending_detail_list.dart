@@ -2,11 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/widgets/sf_sub_tab_bar.dart';
 import 'package:slee_fi/l10n/locale_keys.g.dart';
-import 'package:slee_fi/presentation/screens/wallet/widgets/tab_history_detail.dart';
+import 'package:slee_fi/presentation/blocs/pending/pending_bloc.dart';
 import 'package:slee_fi/presentation/screens/wallet/widgets/tab_pending_detail.dart';
 
 class SpendingDetailList extends StatelessWidget {
-  const SpendingDetailList({Key? key}) : super(key: key);
+  const SpendingDetailList(
+      {Key? key, required this.pendingBloc, required this.historyBloc})
+      : super(key: key);
+
+  final PendingBloc pendingBloc;
+  final PendingBloc historyBloc;
 
   @override
   Widget build(BuildContext context) {
@@ -32,10 +37,16 @@ class SpendingDetailList extends StatelessWidget {
                 texts: const [LocaleKeys.pending, LocaleKeys.history],
               ),
             ),
-            const SizedBox(height: 20,),
-            const Expanded(
-              child:  TabBarView(
-                children: [TabPendingDetail(), TabHistoryDetail()],
+            const SizedBox(
+              height: 20,
+            ),
+            Expanded(
+              child: TabBarView(
+                children: [
+                  TabPendingDetail(pendingBloc: pendingBloc),
+                  TabPendingDetail(pendingBloc: historyBloc),
+                  // TabHistoryDetail(historyBloc: historyBloc)
+                ],
               ),
             ),
           ],

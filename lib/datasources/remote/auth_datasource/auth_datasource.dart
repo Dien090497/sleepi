@@ -117,15 +117,15 @@ abstract class AuthDataSource {
 
   @GET('/tx-history/pending')
   Future<dynamic> fetchSpendingPending(
-    @Query('userId') String userId,
-    @Query('limit') String limit,
-    @Query('page') String page,
+    @Query('userId') int userId,
+    @Query('limit') int limit,
+    @Query('page') int page,
   );
   @GET('/tx-history/history')
   Future<dynamic> fetchSpendingHistory(
-    @Query('userId') String userId,
-    @Query('limit') String limit,
-    @Query('page') String page,
+    @Query('userId') int userId,
+    @Query('limit') int limit,
+    @Query('page') int page,
   );
 
   ///white draw
