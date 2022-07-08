@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:slee_fi/common/const/const.dart';
 import 'package:slee_fi/common/routes/app_routes.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
@@ -8,6 +10,8 @@ import 'package:slee_fi/common/widgets/sf_text.dart';
 import 'package:slee_fi/entities/token/token_entity.dart';
 import 'package:slee_fi/l10n/locale_keys.g.dart';
 import 'package:slee_fi/models/market_place/market_place_model.dart';
+import 'package:slee_fi/presentation/blocs/user_bloc/user_bloc.dart';
+import 'package:slee_fi/presentation/blocs/user_bloc/user_state.dart';
 import 'package:slee_fi/presentation/screens/passcode/passcode_screen.dart';
 import 'package:slee_fi/presentation/screens/transfer/transfer_screen.dart';
 import 'package:slee_fi/resources/resources.dart';
@@ -19,6 +23,7 @@ class PopupInsufficient extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    context.read<UserBloc>().add(RefreshBalanceToken());
     return Column(
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
@@ -91,26 +96,38 @@ class PopupInsufficient extends StatelessWidget {
             )),
             const SizedBox(width: 12),
             Expanded(
-                child: SFButton(
-              text: LocaleKeys.confirm,
-              onPressed: () {
-                Navigator.pushNamed(context, R.passcode,
-                    arguments: PasscodeArguments(
-                        route: R.transfer,
-                        argNewRoute: TransferScreenArg(
-                            const TokenEntity(
-                                address: '',
-                                displayName: '',
-                                name: '',
-                                symbol: 'AVAX',
-                                icon: Ics.icAvax,
-                                balance: 0),
-                            true)));
-              },
-              textStyle: TextStyles.white16,
-              gradient: AppColors.blueGradient,
-              width: double.infinity,
-            )),
+              child: BlocBuilder<UserBloc, UserState>(
+                builder: (context, state) {
+                  TokenEntity tokenAvax = const TokenEntity(
+                      address: '',
+                      displayName: '',
+                      name: '',
+                      symbol: 'AVAX',
+                      icon: Ics.icAvax,
+                      balance: 0);
+                  if (state is UserLoaded) {
+                    for (var element in state.listTokens) {
+                      if (element.symbol.toLowerCase() ==
+                          Const.tokens[0]['symbol'].toString().toLowerCase()) {
+                        tokenAvax = element;
+                      }
+                    }
+                  }
+                  return SFButton(
+                    text: LocaleKeys.confirm,
+                    onPressed: () {
+                      Navigator.pushNamed(context, R.passcode,
+                          arguments: PasscodeArguments(
+                              route: R.transfer,
+                              argNewRoute: TransferScreenArg(tokenAvax, true)));
+                    },
+                    textStyle: TextStyles.white16,
+                    gradient: AppColors.blueGradient,
+                    width: double.infinity,
+                  );
+                },
+              ),
+            ),
           ],
         ),
       ],
