@@ -22,6 +22,31 @@ class UserBloc extends Bloc<UserEvent, UserState> {
     );
   }
 
+  //TODO: remove default data
+  final _defaultTokens = [
+    const TokenEntity(
+        address: '',
+        displayName: '',
+        name: '',
+        symbol: 'SLFT',
+        icon: Ics.icSlft,
+        balance: 0),
+    const TokenEntity(
+        address: '',
+        displayName: '',
+        name: '',
+        symbol: 'SLGT',
+        icon: Ics.icSlgt,
+        balance: 0),
+    const TokenEntity(
+        address: '',
+        displayName: '',
+        name: '',
+        symbol: 'AVAX',
+        icon: Ics.icAvax,
+        balance: 0),
+  ];
+
   _onRefreshBalance(RefreshBalanceToken event, emit) async {
     var currentState = state;
 
@@ -65,6 +90,7 @@ class UserBloc extends Bloc<UserEvent, UserState> {
   }
 
   List<TokenEntity> _convertSpendingToEntity(List<TokenSpending> list) {
+    if (list.isEmpty) return _defaultTokens;
     return list
         .map((e) {
           return TokenEntity(
