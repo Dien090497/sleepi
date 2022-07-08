@@ -67,7 +67,6 @@ class WalletImplementation extends IWalletRepository {
         signedMessage: signature,
         signer: ethereumAddress.hexEip55,
         email: user?.email ?? '',
-        message: message ?? '',
       );
       final resultResponse = await _authDataSource.verifyUser(schema);
       if (resultResponse.status) {
@@ -396,7 +395,6 @@ class WalletImplementation extends IWalletRepository {
           signedMessage: signature,
           signer: ethereumAddress.hexEip55,
           email: user?.email ?? '',
-          message: message ?? '',
         );
         try {
           final result = await _authDataSource.verifyUser(schema);

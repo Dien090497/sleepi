@@ -53,11 +53,13 @@ class TabBedsBuy extends StatelessWidget {
         create: (context) => MarketPlaceCubit()..init(1),
         child: BlocConsumer<MarketPlaceCubit, MarketPlaceState>(
           listener: (context, state) {
+            final cubit = context.read<MarketPlaceCubit>();
             if (state is MarketPlaceStateSuccess) {
               listBeds = state.list.list;
             }
 
             if (state is MarketPlaceStateBuySuccess) {
+              cubit.refresh();
               showSuccessfulDialog(context, null);
             }
 

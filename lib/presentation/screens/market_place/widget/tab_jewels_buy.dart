@@ -56,11 +56,13 @@ class TabJewelsBuy extends StatelessWidget {
         create: (context) => MarketPlaceCubit()..init(2),
         child: BlocConsumer<MarketPlaceCubit, MarketPlaceState>(
           listener: (context, state) {
+            final cubit = context.read<MarketPlaceCubit>();
             if (state is MarketPlaceStateSuccess) {
               listJewels = state.list.list;
             }
 
             if (state is MarketPlaceStateBuySuccess) {
+              cubit.refresh();
               showSuccessfulDialog(context, null);
             }
 
