@@ -101,15 +101,4 @@ class UserImplementation extends IUserRepository {
       return Left(FailureMessage.fromException(e));
     }
   }
-
-  @override
-  Future<Either<FailureMessage, StakingEntity>> stakingSlft({required double amount}) async {
-    try {
-      StackingSchema schema = StackingSchema(amount: amount.toString());
-      final result = await _authDataSource.stacking(schema);
-      return Right(result.toEntity());
-    } catch (e) {
-      return Left(FailureMessage('$e'));
-    }
-  }
 }

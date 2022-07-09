@@ -304,6 +304,22 @@ class _AuthDataSource implements AuthDataSource {
   }
 
   @override
+  Future<StakingInfoResponse> getStakingInfo() async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<StakingInfoResponse>(
+            Options(method: 'GET', headers: _headers, extra: _extra)
+                .compose(_dio.options, '/stacking',
+                    queryParameters: queryParameters, data: _data)
+                .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = StakingInfoResponse.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
   Future<dynamic> fetchSpendingPending(userId, limit, page) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{
@@ -426,7 +442,7 @@ class _AuthDataSource implements AuthDataSource {
   }
 
   @override
-  Future<dynamic> unstacking() async {
+  Future<dynamic> unStacking() async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
@@ -452,14 +468,6 @@ class _AuthDataSource implements AuthDataSource {
                 queryParameters: queryParameters, data: _data)
             .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
     final value = _result.data;
-    _data.addAll(unStaking.toJson());
-    final _result = await _dio.fetch<Map<String, dynamic>>(
-        _setStreamType<ListMarketPlaceModel>(
-            Options(method: 'POST', headers: _headers, extra: _extra)
-                .compose(_dio.options, '/stacking/unstacking',
-                    queryParameters: queryParameters, data: _data)
-                .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = ListMarketPlaceModel.fromJson(_result.data!);
     return value;
   }
 

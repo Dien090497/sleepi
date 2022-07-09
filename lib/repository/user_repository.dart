@@ -23,8 +23,6 @@ abstract class IUserRepository {
 
   Future<Either<FailureMessage, GlobalConfigResponse>> getGlobalConfig();
 
-  Future<Either<FailureMessage, StakingEntity>> stakingSlft({required double amount});
-
   Future<Either<FailureMessage, dynamic>> fetchPendingList(LoadMoreParams loadMoreParams);
 
   Future<Either<FailureMessage, dynamic>> fetchHistoryList(LoadMoreParams loadMoreParams);

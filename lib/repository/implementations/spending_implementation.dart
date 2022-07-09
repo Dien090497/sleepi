@@ -7,9 +7,12 @@ import 'package:slee_fi/common/enum/enum.dart';
 import 'package:slee_fi/datasources/remote/auth_datasource/auth_datasource.dart';
 import 'package:slee_fi/datasources/remote/network/spending_datasource.dart';
 import 'package:slee_fi/datasources/remote/network/web3_datasource.dart';
+import 'package:slee_fi/entities/staking/staking_entity.dart';
 import 'package:slee_fi/entities/transfer_spending_entity/transfer_spending_entity.dart';
 import 'package:slee_fi/failures/failure.dart';
+import 'package:slee_fi/models/staking_info_response/staking_info_response.dart';
 import 'package:slee_fi/repository/spending_repository.dart';
+import 'package:slee_fi/schema/stacking_schema/stacking_schema.dart';
 import 'package:web3dart/web3dart.dart';
 
 @Injectable(as: ISpendingRepository)
@@ -91,10 +94,32 @@ class SpendingImplementation extends ISpendingRepository {
   @override
   Future<Either<Failure, dynamic>> unStaking() async{
     try {
-      var result = await _authDataSource.unstacking();
+      var result = await _authDataSource.unStacking();
       return Right(result);
-    } catch (e) {
-      return Left(FailureMessage('$e'));
+    } on Exception catch (e) {
+      return Left(FailureMessage.fromException(e));
     }
   }
+
+  @override
+  Future<Either<FailureMessage, StakingEntity>> stakingSlft({required double amount}) async {
+    try {
+      StackingSchema schema = StackingSchema(amount: amount.toString());
+      final result = await _authDataSource.stacking(schema);
+      return Right(result.toEntity());
+    } on Exception catch (e) {
+      return Left(FailureMessage.fromException(e));
+    }
+  }
+
+  @override
+  Future<Either<FailureMessage, StakingInfoResponse>> getStakingInfo() async{
+    try {
+      var result = await _authDataSource.getStakingInfo();
+      return Right(result);
+    } on Exception catch (e)  {
+      return Left(FailureMessage.fromException(e));
+    }
+  }
+
 }
