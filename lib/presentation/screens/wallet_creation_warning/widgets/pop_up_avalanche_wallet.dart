@@ -28,7 +28,9 @@ class PopUpAvalancheWallet extends StatelessWidget {
       child: BlocConsumer<CreateWalletCubit, CreateWalletState>(
         listener: (context, state) {
           if (state is createWalletDone) {
-            BlocProvider.of<UserBloc>(context).add(RefreshBalanceToken());
+            context.read<UserBloc>().add(UpdateUserOrListToken(
+                userInfoEntity: state.userInfoEntity!,
+                listTokens: state.listTokens));
             Navigator.pop(
                 context,
                 PopWithResults(

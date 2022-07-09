@@ -57,7 +57,7 @@ class _TabItemsBuyState extends State<TabItemsBuy> {
         child: BlocConsumer<MarketPlaceCubit, MarketPlaceState>(
           listener: (context, state) {
             final cubit = context.read<MarketPlaceCubit>();
-            if (state is MarketPlaceStateSuccess) {
+            if (state is MarketPlaceStateLoaded) {
               listItems = state.list.list;
             }
             if (state is MarketPlaceStateInit) {

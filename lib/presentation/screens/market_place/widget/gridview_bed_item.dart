@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -19,7 +20,8 @@ class GridViewBedItem extends StatelessWidget {
       required this.beds,
       this.onBedTap,
       this.onBuyTap,
-      this.isScroll = true, this.onRefresh})
+      this.isScroll = true,
+      this.onRefresh})
       : super(key: key);
 
   final List<MarketPlaceModel> beds;
@@ -39,7 +41,7 @@ class GridViewBedItem extends StatelessWidget {
         final bed = beds[i];
         return GestureDetector(
           onTap: () {
-              onBedTap!(bed);
+            onBedTap!(bed);
           },
           child: Container(
             decoration: BoxDecoration(
@@ -53,7 +55,9 @@ class GridViewBedItem extends StatelessWidget {
                   top: 20,
                   left: -30,
                   child: TopLeftBanner(
-                    text: bed.classNft == null ? bed.type.reCase(StringCase.titleCase) : bed.classNft!.reCase(StringCase.camelCase),
+                    text: bed.classNft == null
+                        ? bed.type.reCase(StringCase.titleCase)
+                        : bed.classNft!.reCase(StringCase.camelCase),
                     textColor: AppColors.white,
                   ),
                 ),
@@ -65,11 +69,30 @@ class GridViewBedItem extends StatelessWidget {
                         child: Container(
                           padding: const EdgeInsets.symmetric(vertical: 24.0),
                           alignment: Alignment.center,
-                          child: Image.network(
-                            bed.image,
+                          child: CachedNetworkImage(
+                            imageUrl: bed.image,
+                            placeholder: (context, url) => const Center(
+                              child: SizedBox(
+                                width: 40.0,
+                                height: 40.0,
+                                child: CircularProgressIndicator(),
+                              ),
+                            ),
+                            errorWidget: (context, url, error) => Container(
+                                decoration: const BoxDecoration(
+                                  color: AppColors.red,
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(10)),
+                                ),
+                                child: const Icon(Icons.error)),
+                            imageBuilder: (context, imageProvider) => Container(
+                              decoration: BoxDecoration(
+                                image: DecorationImage(
+                                    image: imageProvider, fit: BoxFit.cover),
+                              ),
+                            ),
                             width: 80,
                             height: 80,
-                            fit: BoxFit.cover,
                           ),
                         ),
                       ),
@@ -107,16 +130,16 @@ class GridViewBedItem extends StatelessWidget {
                             children: [
                               Expanded(
                                   child: SFText(
-                                    keyText: '${bed.price} ${bed.symbol}',
-                                    style: TextStyles.white14W700,
-                                    stringCase: StringCase.upperCase,
-                                  )),
+                                keyText: '${bed.price} ${bed.symbol}',
+                                style: TextStyles.white14W700,
+                                stringCase: StringCase.upperCase,
+                              )),
                               SFIconButton(
                                 text: LocaleKeys.buy,
                                 textStyle: TextStyles.white12,
                                 stringCase: StringCase.upperCase,
                                 icon: Ics.icCart,
-                                onPressed: (){
+                                onPressed: () {
                                   onBuyTap!(bed);
                                 },
                               ),

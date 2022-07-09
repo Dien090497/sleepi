@@ -52,7 +52,7 @@ class _TabJewelsBuyState extends State<TabJewelsBuy> {
         child: BlocConsumer<MarketPlaceCubit, MarketPlaceState>(
           listener: (context, state) {
             final cubit = context.read<MarketPlaceCubit>();
-            if (state is MarketPlaceStateSuccess) {
+            if (state is MarketPlaceStateLoaded) {
               listJewels = state.list.list;
             }
             if (state is MarketPlaceStateBuySuccess) {

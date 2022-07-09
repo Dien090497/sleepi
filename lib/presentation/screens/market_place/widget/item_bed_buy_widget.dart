@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:slee_fi/common/extensions/string_x.dart';
@@ -39,8 +40,31 @@ class ItemBedBuyWidget extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               SizedBox(height: 20.h),
-              Image.network(item.image, width: 60,
-                height: 60, fit: BoxFit.cover,),
+              CachedNetworkImage(
+                imageUrl: item.image,
+                placeholder: (context, url) => const Center(
+                  child: SizedBox(
+                    width: 40.0,
+                    height: 40.0,
+                    child: CircularProgressIndicator(),
+                  ),
+                ),
+                errorWidget: (context, url, error) => Container(
+                    decoration: const BoxDecoration(
+                      color: AppColors.transparent,
+                      borderRadius:
+                      BorderRadius.all(Radius.circular(10)),
+                    ),
+                    child: const Icon(Icons.error)),
+                imageBuilder: (context, imageProvider) => Container(
+                  decoration: BoxDecoration(
+                    image: DecorationImage(
+                        image: imageProvider, fit: BoxFit.cover),
+                  ),
+                ),
+                width: 60,
+                height: 60,
+              ),
               SizedBox(height: 22.h),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,

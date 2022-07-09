@@ -17,6 +17,7 @@ import 'package:slee_fi/l10n/locale_keys.g.dart';
 import 'package:slee_fi/models/pop_with_result.dart';
 import 'package:slee_fi/presentation/blocs/import_wallet/import_wallet_cubit.dart';
 import 'package:slee_fi/presentation/blocs/import_wallet/import_wallet_state.dart';
+import 'package:slee_fi/presentation/blocs/user_bloc/user_bloc.dart';
 
 class ImportWalletScreen extends StatefulWidget {
   const ImportWalletScreen({Key? key}) : super(key: key);
@@ -51,6 +52,9 @@ class _ImportWalletScreenState extends State<ImportWalletScreen> {
             });
           }
           if (state is ImportWalletDone) {
+            context.read<UserBloc>().add(UpdateUserOrListToken(
+                userInfoEntity: state.userInfoEntity!,
+                listTokens: state.listTokens));
             Future.delayed(
               const Duration(milliseconds: 200),
               () => Navigator.pop(

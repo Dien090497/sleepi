@@ -3,6 +3,8 @@ import 'package:slee_fi/common/enum/enum.dart';
 import 'package:slee_fi/di/injector.dart';
 import 'package:slee_fi/presentation/blocs/create_wallet/create_wallet_state.dart';
 import 'package:slee_fi/schema/verify_schema/verify_schema.dart';
+import 'package:slee_fi/usecase/fetch_balance_spending_usecase.dart';
+import 'package:slee_fi/usecase/get_user_usecase.dart';
 import 'package:slee_fi/usecase/send_otp_mail_usecase.dart';
 import 'package:slee_fi/usecase/usecase.dart';
 import 'package:slee_fi/usecase/verify_otp_usecase.dart';
@@ -17,6 +19,8 @@ class CreateWalletCubit extends Cubit<CreateWalletState> {
   final _createWalletUC = getIt<CreateWalletUseCase>();
   final _sendOtpUC = getIt<SendOTPMailUseCase>();
   final _verifyOtpUC = getIt<VerifyOTPUseCase>();
+  final _getUserUC = getIt<GetUserUseCase>();
+  final _fetchBalanceSpendingUC = getIt<FetchBalanceSpendingUseCase>();
 
   void init() {}
 
@@ -38,8 +42,19 @@ class CreateWalletCubit extends Cubit<CreateWalletState> {
           emit(CreateWalletState.error('$l'));
           emit(currentState.copyWith(isLoading: false));
         },
-        (success) {
-          emit(CreateWalletState.done(success));
+        (success) async {
+          final userRes = await _getUserUC.call(NoParams());
+          userRes.fold((l){
+            emit(CreateWalletState.done(success, null, []));
+          }, (userInfo) async {
+            final balanceRes =
+                await _fetchBalanceSpendingUC.call('${userInfo.id}');
+            balanceRes.fold((l) {
+              emit(CreateWalletState.done(success, userInfo, []));
+            }, (tokensSpending) {
+              emit(CreateWalletState.done(success, userInfo, tokensSpending));
+            });
+          });
           emit(currentState.copyWith(isLoading: false));
         },
       );
