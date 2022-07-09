@@ -152,6 +152,7 @@ abstract class AuthDataSource {
   @POST('/market-place')
   Future<ListMarketPlaceModel> getMarketPlace(@Body() MarketSchema entity);
 
+  ///nft-attributes
   @GET('/nft-attributes/nft-by-owner')
   Future<ListMarketPlaceModel> getNftByOwner(
     @Query('limit') int limit,
@@ -165,6 +166,12 @@ abstract class AuthDataSource {
 
   @GET('/nft-attributes/bed-detail')
   Future<MarketPlaceModel> bedDetail(@Query('bedId') int bedId);
+
+  @GET('/nft-attributes/add-item-for-bed')
+  Future<dynamic> addItemForBed(
+    @Query('bedId') int bedId,
+    @Query('itemId') int itemId,
+  );
 
   @POST('/stacking/unstacking')
   Future<ListMarketPlaceModel> unstacking(@Body() UnStackingSchema unStaking);
