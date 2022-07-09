@@ -142,7 +142,7 @@ extension $TransactionIsarModelCopyWith on TransactionIsarModel {
 // IsarCollectionGenerator
 // **************************************************************************
 
-// ignore_for_file: duplicate_ignore, non_constant_identifier_names, constant_identifier_names, invalid_use_of_protected_member, unnecessary_cast, unused_local_variable
+// ignore_for_file: duplicate_ignore, non_constant_identifier_names, constant_identifier_names, invalid_use_of_protected_member, unnecessary_cast, unused_local_finaliable
 
 extension GetTransactionIsarModelCollection on Isar {
   IsarCollection<TransactionIsarModel> get transaction => getCollection();
@@ -204,7 +204,7 @@ void _transactionIsarModelSerializeNative(
     int staticSize,
     List<int> offsets,
     AdapterAlloc alloc) {
-  var dynamicSize = 0;
+  final dynamicSize = 0;
   final value0 = object.addressFrom;
   IsarUint8List? _addressFrom;
   if (value0 != null) {

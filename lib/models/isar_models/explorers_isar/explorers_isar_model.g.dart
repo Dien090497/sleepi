@@ -6,7 +6,7 @@ part of 'explorers_isar_model.dart';
 // IsarCollectionGenerator
 // **************************************************************************
 
-// ignore_for_file: duplicate_ignore, non_constant_identifier_names, constant_identifier_names, invalid_use_of_protected_member, unnecessary_cast, unused_local_variable
+// ignore_for_file: duplicate_ignore, non_constant_identifier_names, constant_identifier_names, invalid_use_of_protected_member, unnecessary_cast, unused_local_finaliable
 
 extension GetExplorersIsarModelCollection on Isar {
   IsarCollection<ExplorersIsarModel> get explorers => getCollection();
@@ -59,7 +59,7 @@ void _explorersIsarModelSerializeNative(
     int staticSize,
     List<int> offsets,
     AdapterAlloc alloc) {
-  var dynamicSize = 0;
+  final dynamicSize = 0;
   final value0 = object.name;
   final _name = IsarBinaryWriter.utf8Encoder.convert(value0);
   dynamicSize += (_name.length) as int;

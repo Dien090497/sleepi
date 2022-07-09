@@ -149,7 +149,7 @@ extension $WalletIsarModelCopyWith on WalletIsarModel {
 // IsarCollectionGenerator
 // **************************************************************************
 
-// ignore_for_file: duplicate_ignore, non_constant_identifier_names, constant_identifier_names, invalid_use_of_protected_member, unnecessary_cast, unused_local_variable
+// ignore_for_file: duplicate_ignore, non_constant_identifier_names, constant_identifier_names, invalid_use_of_protected_member, unnecessary_cast, unused_local_finaliable
 
 extension GetWalletIsarModelCollection on Isar {
   IsarCollection<WalletIsarModel> get wallets => getCollection();
@@ -216,7 +216,7 @@ void _walletIsarModelSerializeNative(
     int staticSize,
     List<int> offsets,
     AdapterAlloc alloc) {
-  var dynamicSize = 0;
+  final dynamicSize = 0;
   final value0 = object.address;
   final _address = IsarBinaryWriter.utf8Encoder.convert(value0);
   dynamicSize += (_address.length) as int;

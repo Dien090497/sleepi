@@ -74,7 +74,7 @@ class _AccountLoginState extends State<AccountLoginWidget> {
                 state.enableActiveCode,
               )).then((locale) {
             if (locale is Locale) {
-              var currentLocale = context.locale;
+              final currentLocale = context.locale;
               if (currentLocale != locale) {
                 action = Action.signIn;
                 _showPopUpSignUpSuccess().then((_) {

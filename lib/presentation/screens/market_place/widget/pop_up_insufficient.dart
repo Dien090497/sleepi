@@ -107,7 +107,7 @@ class PopupInsufficient extends StatelessWidget {
                         icon: Ics.icAvax,
                         balance: 0);
                     if (state is WalletStateLoaded && state.walletInfoEntity != null) {
-                      for (var element in state.tokenList) {
+                      for (final element in state.tokenList) {
                         if (element.symbol.toLowerCase() ==
                             Const.tokens[0]['symbol'].toString().toLowerCase()) {
                           tokenAvax = element;

@@ -25,7 +25,7 @@ class UserImplementation extends IUserRepository {
   Future<Either<FailureMessage, dynamic>> changePassword(
       ChangePasswordSchema changePasswordSchema) async {
     try {
-      var result = await _authDataSource.changePassword(changePasswordSchema);
+      final result = await _authDataSource.changePassword(changePasswordSchema);
       return Right(result);
     } on Exception catch (e) {
       return Left(FailureMessage.fromException(e));
@@ -36,7 +36,7 @@ class UserImplementation extends IUserRepository {
   Future<Either<FailureMessage, List<ActiveCodeEntity>>>
       fetchActivationCodes() async {
     try {
-      var result = await _authDataSource.fetchActivationCodes();
+      final result = await _authDataSource.fetchActivationCodes();
       return Right(result.data.map((e) => e.toEntity()).toList());
     } on Exception catch (e) {
       return Left(FailureMessage.fromException(e));
@@ -47,7 +47,7 @@ class UserImplementation extends IUserRepository {
   Future<Either<FailureMessage, List<TokenSpending>>> fetchBalanceSpending(
       String userID) async {
     try {
-      var result = await _authDataSource.fetchBalanceSpending(userID);
+      final result = await _authDataSource.fetchBalanceSpending(userID);
       return Right(result);
     } on Exception catch (e) {
       return Left(FailureMessage.fromException(e));
@@ -58,7 +58,7 @@ class UserImplementation extends IUserRepository {
   Future<Either<FailureMessage, SwapTokenToWalletResponse>>
       transferTokenToMainWallet(WhitDrawTokenSchema whitDrawTokenSchema) async {
     try {
-      var result =
+      final result =
           await _authDataSource.transferTokenToWallet(whitDrawTokenSchema);
       return Right(result);
     } on Exception catch (e) {
@@ -82,7 +82,7 @@ class UserImplementation extends IUserRepository {
   Future<Either<FailureMessage, dynamic>> fetchHistoryList(
       LoadMoreParams loadMoreParams) async {
     try {
-      var result = await _authDataSource.fetchSpendingHistory(
+      final result = await _authDataSource.fetchSpendingHistory(
           loadMoreParams.userId, loadMoreParams.limit, loadMoreParams.page);
       return Right(result);
     } on Exception catch (e) {
@@ -94,7 +94,7 @@ class UserImplementation extends IUserRepository {
   Future<Either<FailureMessage, dynamic>> fetchPendingList(
       LoadMoreParams loadMoreParams) async {
     try {
-      var result = await _authDataSource.fetchSpendingHistory(
+      final result = await _authDataSource.fetchSpendingHistory(
           loadMoreParams.userId, loadMoreParams.limit, loadMoreParams.page);
       return Right(result);
     } on Exception catch (e) {

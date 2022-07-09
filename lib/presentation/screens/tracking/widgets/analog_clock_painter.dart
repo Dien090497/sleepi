@@ -1,5 +1,6 @@
-import 'package:flutter/material.dart';
 import 'dart:math';
+
+import 'package:flutter/material.dart';
 
 class AnalogClockPainter extends CustomPainter {
   DateTime datetime;
@@ -85,7 +86,7 @@ class AnalogClockPainter extends CustomPainter {
     double r = size.shortestSide / 2;
     double longHandLength = r - (p * scaleFactor);
 
-    for (var h = 1; h <= 12; h++) {
+    for (int h = 1; h <= 12; h++) {
       if (!showAllNumbers && h % 3 != 0) continue;
       double angle = (h * pi / 6) - pi / 2; //+ pi / 2;
       Offset offset =

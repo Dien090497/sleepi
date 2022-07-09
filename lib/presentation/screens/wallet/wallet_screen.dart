@@ -27,7 +27,6 @@ class WalletScreen extends StatefulWidget {
 
 class _WalletScreenState extends State<WalletScreen>
     with SingleTickerProviderStateMixin {
-  late int indexTap = 0;
   bool firstOpenWallet = true;
   final _pendingBloc = PendingBloc();
   final _historyBloc = PendingBloc();
@@ -113,9 +112,7 @@ class _WalletScreenState extends State<WalletScreen>
                               .pushNamed(R.passcode)
                               .then((value) {
                             if (value == true) {
-                              setState(() {
-                                firstOpenWallet = false;
-                              });
+                              firstOpenWallet = false;
                               controller.animateTo(1);
                             } else {
                               controller.animateTo(0);
@@ -160,7 +157,7 @@ class _WalletScreenState extends State<WalletScreen>
     if (value is PopWithResults) {
       context.read<WalletCubit>().init();
       controller.animateTo(1);
-      var cubit = context.read<WalletCubit>();
+      final cubit = context.read<WalletCubit>();
       cubit.importWallet(value.results['data'] as WalletInfoEntity);
     }
   }

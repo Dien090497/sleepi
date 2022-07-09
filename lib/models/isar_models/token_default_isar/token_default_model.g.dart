@@ -6,7 +6,7 @@ part of 'token_default_model.dart';
 // IsarCollectionGenerator
 // **************************************************************************
 
-// ignore_for_file: duplicate_ignore, non_constant_identifier_names, constant_identifier_names, invalid_use_of_protected_member, unnecessary_cast, unused_local_variable
+// ignore_for_file: duplicate_ignore, non_constant_identifier_names, constant_identifier_names, invalid_use_of_protected_member, unnecessary_cast, unused_local_finaliable
 
 extension GetTokenDefaultModelCollection on Isar {
   IsarCollection<TokenDefaultModel> get tokenDefault => getCollection();
@@ -67,7 +67,7 @@ void _tokenDefaultModelSerializeNative(
     int staticSize,
     List<int> offsets,
     AdapterAlloc alloc) {
-  var dynamicSize = 0;
+  final dynamicSize = 0;
   final value0 = object.bed;
   final _bed = IsarBinaryWriter.utf8Encoder.convert(value0);
   dynamicSize += (_bed.length) as int;

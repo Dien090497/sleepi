@@ -56,7 +56,7 @@ class ImportWalletCubit extends Cubit<ImportWalletState> {
   }
 
   sendOtp() async {
-    var result =
+    final result =
         await sendOtpUC.call(SendOTPParam(userEmail, OTPType.importWallet));
     result.fold((l) {
       emit(ImportWalletState.errorOtp('$l'));
@@ -71,7 +71,7 @@ class ImportWalletCubit extends Cubit<ImportWalletState> {
     }
 
     emit(const ImportWalletState.initial(isLoading: true));
-    var result = await verifyOtpUC
+    final result = await verifyOtpUC
         .call(VerifyOTPSchema(int.parse(otp), userEmail, OTPType.importWallet));
 
     result.fold((l) {
@@ -85,7 +85,7 @@ class ImportWalletCubit extends Cubit<ImportWalletState> {
   importWallet({required String mnemonic}) async {
     emit(const ImportWalletState.initial(isLoading: true));
     await Future.delayed(const Duration(milliseconds: 1000));
-    var result = await importWalletUC.call(mnemonic);
+    final result = await importWalletUC.call(mnemonic);
     result.fold((l) {
       emit(ImportWalletState.errorMnemonic(
           LocaleKeys.invalid_mnemonic_please_try_again.tr()));
@@ -95,7 +95,7 @@ class ImportWalletCubit extends Cubit<ImportWalletState> {
   }
 
   Future _getUserEmail() async {
-    var result = await _currentUserUC.call(NoParams());
+    final result = await _currentUserUC.call(NoParams());
     result.fold((l) {
       'error get local email $l'.log;
     }, (r) {

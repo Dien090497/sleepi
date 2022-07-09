@@ -139,7 +139,7 @@ class ChartDayPicker extends StatelessWidget {
       ),
       selectionMode: DateRangePickerSelectionMode.single,
       onSelectionChanged: (DateRangePickerSelectionChangedArgs value) {
-        var selectedDate = value.value;
+        final selectedDate = value.value;
         if (selectedDate is DateTime) {
           onNewSelected(selectedDate);
         }

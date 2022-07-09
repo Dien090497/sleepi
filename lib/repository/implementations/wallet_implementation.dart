@@ -114,7 +114,7 @@ class WalletImplementation extends IWalletRepository {
   Future<Either<Failure, WalletInfoEntity>> importWallet(
       String mnemonic) async {
     try {
-      // var testNetwork = (await _isarDataSource.getAllNetwork()).last;
+      // final testNetwork = (await _isarDataSource.getAllNetwork()).last;
       // _web3DataSource.setCurrentNetwork(testNetwork);
       // _getStorageDataSource.setCurrentChainId(testNetwork.chainId);
       final privateKey = _web3DataSource.mnemonicToPrivateKey(mnemonic, 0);
@@ -157,14 +157,14 @@ class WalletImplementation extends IWalletRepository {
   @override
   Future<Either<Failure, WalletInfoEntity>> currentWallet() async {
     try {
-      // var testNetwork = (await _isarDataSource.getAllNetwork()).first;
+      // final testNetwork = (await _isarDataSource.getAllNetwork()).first;
       // _web3provider.setCurrentNetwork(testNetwork);
       // _getStorageDataSource.setCurrentChainId(testNetwork.chainId);
-      // var testNetwork = (await _isarDataSource.getAllNetwork()).last;
+      // final testNetwork = (await _isarDataSource.getAllNetwork()).last;
       // _web3DataSource.setCurrentNetwork(testNetwork);
       // _getStorageDataSource.setCurrentChainId(testNetwork.chainId);
-      var walletId = _getStorageDataSource.getCurrentWalletId();
-      var wallet = await _isarDataSource.getWalletAt(walletId);
+      final walletId = _getStorageDataSource.getCurrentWalletId();
+      final wallet = await _isarDataSource.getWalletAt(walletId);
 
       if (wallet == null) {
         return const Left(FailureMessage('Invalid Wallet'));
@@ -176,7 +176,7 @@ class WalletImplementation extends IWalletRepository {
       final credentials = _web3DataSource.credentialsFromPrivateKey(privateKey);
       final result = await _web3DataSource.getBalance(wallet.address);
       final balance = result / BigInt.from(pow(10, 18));
-      var nativeCurrency = await _getNativeCurrency();
+      final nativeCurrency = await _getNativeCurrency();
       return Right(
         wallet.toEntity(credentials,
             networkName: network.name,
@@ -199,7 +199,7 @@ class WalletImplementation extends IWalletRepository {
           break;
         }
         if (params.addressContract[i] == Const.tokens[0]['address']) {
-          var balance =
+          final balance =
               await _web3DataSource.getBalance(params.walletInfoEntity.address);
           values.add(balance / BigInt.from(pow(10, 18)));
         } else {
@@ -221,8 +221,8 @@ class WalletImplementation extends IWalletRepository {
   Future<Either<Failure, bool>> checkApproveToken(
       double value, String contractAddress) async {
     try {
-      var walletId = _getStorageDataSource.getCurrentWalletId();
-      var wallet = await _isarDataSource.getWalletAt(walletId);
+      final walletId = _getStorageDataSource.getCurrentWalletId();
+      final wallet = await _isarDataSource.getWalletAt(walletId);
       Credentials credentials = EthPrivateKey.fromHex(wallet!.privateKey);
       BigInt allow = await _web3DataSource.allowance(
           EthereumAddress.fromHex(wallet.address), contractAddress);
@@ -238,8 +238,8 @@ class WalletImplementation extends IWalletRepository {
   Future<Either<Failure, bool>> swapAvaxToken(
       double value, String contractAddress) async {
     try {
-      var walletId = _getStorageDataSource.getCurrentWalletId();
-      var wallet = await _isarDataSource.getWalletAt(walletId);
+      final walletId = _getStorageDataSource.getCurrentWalletId();
+      final wallet = await _isarDataSource.getWalletAt(walletId);
       bool success = await _web3DataSource.swapExactAVAXForTokens(
           wallet!.privateKey, wallet.address, contractAddress, value);
       return Right(success);
@@ -251,8 +251,8 @@ class WalletImplementation extends IWalletRepository {
   Future<Either<Failure, bool>> swapTokenAvax(
       double value, String contractAddress) async {
     try {
-      var walletId = _getStorageDataSource.getCurrentWalletId();
-      var wallet = await _isarDataSource.getWalletAt(walletId);
+      final walletId = _getStorageDataSource.getCurrentWalletId();
+      final wallet = await _isarDataSource.getWalletAt(walletId);
       bool success = await _web3DataSource.swapExactTokensForAvax(
           wallet!.privateKey, wallet.address, contractAddress, value);
       return Right(success);
@@ -264,8 +264,8 @@ class WalletImplementation extends IWalletRepository {
   Future<Either<Failure, bool>> swapTokenForToken(double value,
       String contractAddressFrom, String contractAddressTo) async {
     try {
-      var walletId = _getStorageDataSource.getCurrentWalletId();
-      var wallet = await _isarDataSource.getWalletAt(walletId);
+      final walletId = _getStorageDataSource.getCurrentWalletId();
+      final wallet = await _isarDataSource.getWalletAt(walletId);
       bool success = await _web3DataSource.swapExactTokensForTokens(
           wallet!.privateKey,
           wallet.address,
@@ -283,15 +283,15 @@ class WalletImplementation extends IWalletRepository {
       String contractAddress) async {
     try {
       BigInt balance = BigInt.from(0);
-      var walletId = _getStorageDataSource.getCurrentWalletId();
-      var wallet = await _isarDataSource.getWalletAt(walletId);
+      final walletId = _getStorageDataSource.getCurrentWalletId();
+      final wallet = await _isarDataSource.getWalletAt(walletId);
       if (contractAddress == Const.tokens[0]['address']) {
         balance = await _web3DataSource.getBalance(wallet!.address);
         return Right(balance / BigInt.from(pow(10, 18)));
       } else {
         balance = await _web3DataSource.getBalanceOf(
             wallet!.address, contractAddress);
-        var decimals = await _web3DataSource.getDecimals(contractAddress);
+        final decimals = await _web3DataSource.getDecimals(contractAddress);
         return Right(balance / BigInt.from(pow(10, decimals.toInt())));
       }
     } catch (e) {
@@ -320,8 +320,8 @@ class WalletImplementation extends IWalletRepository {
 
   @override
   Future<Either<FailureMessage, String>> getCurrentMnemonic() async {
-    var walletId = _getStorageDataSource.getCurrentWalletId();
-    var wallet = await _isarDataSource.getWalletAt(walletId);
+    final walletId = _getStorageDataSource.getCurrentWalletId();
+    final wallet = await _isarDataSource.getWalletAt(walletId);
 
     if (wallet == null) {
       return const Left(FailureMessage('Invalid Wallet'));
@@ -333,8 +333,8 @@ class WalletImplementation extends IWalletRepository {
   @override
   Future<Either<Failure, double>> getAmountOutMin(double value,
       String contractAddressFrom, String contractAddressTo) async {
-    var walletId = _getStorageDataSource.getCurrentWalletId();
-    var wallet = await _isarDataSource.getWalletAt(walletId);
+    final walletId = _getStorageDataSource.getCurrentWalletId();
+    final wallet = await _isarDataSource.getWalletAt(walletId);
     double amount = await _web3DataSource.getAmountOutMin(
         wallet!.address, contractAddressFrom, contractAddressTo, value);
     return Right(amount);
@@ -349,13 +349,13 @@ class WalletImplementation extends IWalletRepository {
         return Right(network);
       } else {
         if (params == NetWorkEnum.mainNet) {
-          var network = (await _isarDataSource.getAllNetwork())[1];
+          final network = (await _isarDataSource.getAllNetwork())[1];
           _web3provider.setCurrentNetwork(network);
           _getStorageDataSource.setCurrentChainId(network.chainId);
           final networkCurrent = await _getCurrentNetwork();
           return Right(networkCurrent);
         } else {
-          var testnet = (await _isarDataSource.getAllNetwork()).first;
+          final testnet = (await _isarDataSource.getAllNetwork()).first;
           _web3provider.setCurrentNetwork(testnet);
           _getStorageDataSource.setCurrentChainId(testnet.chainId);
           final networkCurrent = await _getCurrentNetwork();
@@ -438,9 +438,9 @@ class WalletImplementation extends IWalletRepository {
       );
       List<TransactionIsarModel> transactionList = [];
       for (int i = 0; i < transactionHistoryList.length; i++) {
-        // var transactionInfo = await _web3DataSource.getDetailTransaction(historyList.elementAt(i).transactionHash);
-        // var transactionReceipt = await _web3DataSource.getTransactionReceipt(historyList.elementAt(i).transactionHash);
-        // var getTimeStamp = await _web3DataSource.getDetailBlock(transactionInfo.blockNumber.toBlockParam());
+        // final transactionInfo = await _web3DataSource.getDetailTransaction(historyList.elementAt(i).transactionHash);
+        // final transactionReceipt = await _web3DataSource.getTransactionReceipt(historyList.elementAt(i).transactionHash);
+        // final getTimeStamp = await _web3DataSource.getDetailBlock(transactionInfo.blockNumber.toBlockParam());
         final model = TransactionIsarModel(
             valueInEther:
                 BigInt.parse(transactionHistoryList.elementAt(i).value) /

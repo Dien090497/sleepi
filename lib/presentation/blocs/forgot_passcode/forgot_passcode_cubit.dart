@@ -23,13 +23,13 @@ class ForgotPasscodeCubit extends Cubit<ForgotPasscodeState> {
   bool verifySuccess = false;
 
   init() async {
-    var result = await _currentUserUC.call(NoParams());
+    final result = await _currentUserUC.call(NoParams());
     result.fold((l) => null, (r) => _email = r.email);
   }
 
   void sendOTP() async {
     emit(const ForgotPasscodeState.process());
-    var result =
+    final result =
         await _sendOTPUC.call(SendOTPParam(_email, OTPType.changePass));
     result.fold(
       (l) => emit(ForgotPasscodeState.error('$l')),
@@ -47,7 +47,7 @@ class ForgotPasscodeCubit extends Cubit<ForgotPasscodeState> {
     }
     emit(const ForgotPasscodeState.process());
     int otp = int.parse(this.otp);
-    var result = await _verifyOTPUC
+    final result = await _verifyOTPUC
         .call(VerifyOTPSchema(otp, _email, OTPType.changePass));
 
     result.fold(
@@ -60,7 +60,7 @@ class ForgotPasscodeCubit extends Cubit<ForgotPasscodeState> {
   }
 
   bool _validateOTP() {
-    var message = otp.validateOTP;
+    final message = otp.validateOTP;
     if (message.isNotEmpty) {
       emit(ForgotPasscodeState.error(message));
     }
