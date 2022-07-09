@@ -6,6 +6,7 @@ import 'package:slee_fi/common/widgets/sf_icon.dart';
 import 'package:slee_fi/common/widgets/sf_sub_tab_bar.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
 import 'package:slee_fi/l10n/locale_keys.g.dart';
+import 'package:slee_fi/presentation/screens/info_individual/info_individual_screen.dart';
 import 'package:slee_fi/presentation/screens/product_detail/widgets/gridview_bed_item.dart';
 import 'package:slee_fi/resources/resources.dart';
 
@@ -53,7 +54,9 @@ class TabBedsDetail extends StatelessWidget {
                   GridViewBedItem(
                       beds: beds,
                       onBedTap: (bed) {
-                        Navigator.pushNamed(context, R.nftInfo);
+                        Navigator.pushNamed(context, R.nftInfo,
+                            arguments:
+                                InfoIndividualParams(bed: null, buy: true));
                       }),
                   Center(
                     child: Column(

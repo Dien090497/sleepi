@@ -67,3 +67,20 @@ enum NftType {
 }
 
 enum MessageType { error, success }
+
+enum ItemNFT {
+  efficiency('efficiency'),
+  luck('luck'),
+  bonus('luck'),
+  special('special'),
+  resilience('resilience');
+
+  const ItemNFT(this.name);
+
+  final String name;
+
+  @override
+  String toString() => name;
+
+  String toJson() => name;
+}
