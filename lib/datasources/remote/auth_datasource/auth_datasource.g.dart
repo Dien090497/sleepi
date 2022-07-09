@@ -304,44 +304,6 @@ class _AuthDataSource implements AuthDataSource {
   }
 
   @override
-  Future<dynamic> fetchSpendingPending(userId, limit, page) async {
-    const _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{
-      r'userId': userId,
-      r'limit': limit,
-      r'page': page
-    };
-    final _headers = <String, dynamic>{};
-    final _data = <String, dynamic>{};
-    final _result = await _dio.fetch(_setStreamType<dynamic>(
-        Options(method: 'GET', headers: _headers, extra: _extra)
-            .compose(_dio.options, '/tx-history/pending',
-                queryParameters: queryParameters, data: _data)
-            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = _result.data;
-    return value;
-  }
-
-  @override
-  Future<dynamic> fetchSpendingHistory(userId, limit, page) async {
-    const _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{
-      r'userId': userId,
-      r'limit': limit,
-      r'page': page
-    };
-    final _headers = <String, dynamic>{};
-    final _data = <String, dynamic>{};
-    final _result = await _dio.fetch(_setStreamType<dynamic>(
-        Options(method: 'GET', headers: _headers, extra: _extra)
-            .compose(_dio.options, '/tx-history/history',
-                queryParameters: queryParameters, data: _data)
-            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = _result.data;
-    return value;
-  }
-
-  @override
   Future<SwapTokenToWalletResponse> transferTokenToWallet(
       whitDrawTokenSchema) async {
     const _extra = <String, dynamic>{};
@@ -360,7 +322,28 @@ class _AuthDataSource implements AuthDataSource {
   }
 
   @override
-  Future<dynamic> whitedrawNFT(whitDrawNFTSchema) async {
+  Future<WithdrawHistoryResponse> withdraw(
+      attributeWithdraw, limit, page) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{
+      r'status': attributeWithdraw.toJson(),
+      r'limit': limit,
+      r'page': page
+    };
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<WithdrawHistoryResponse>(
+            Options(method: 'GET', headers: _headers, extra: _extra)
+                .compose(_dio.options, '/withdraw',
+                    queryParameters: queryParameters, data: _data)
+                .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = WithdrawHistoryResponse.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<dynamic> withdrawNFT(whitDrawNFTSchema) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};

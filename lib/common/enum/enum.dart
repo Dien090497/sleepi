@@ -85,3 +85,17 @@ enum AttributeNFT {
 
   String toJson() => name;
 }
+
+enum AttributeWithdraw {
+  pending('pending'),
+  history('history');
+
+  const AttributeWithdraw(this.name);
+
+  final String name;
+
+  @override
+  String toString() => name;
+
+  String toJson() => name;
+}

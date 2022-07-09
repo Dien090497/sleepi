@@ -23,6 +23,7 @@ import 'package:slee_fi/models/token_spending/token_spending.dart';
 import 'package:slee_fi/models/user_response/user_response.dart';
 import 'package:slee_fi/models/users_response/users_response.dart';
 import 'package:slee_fi/models/verify_response/verify_response.dart';
+import 'package:slee_fi/models/withdraw_history_response/withdraw_history_response.dart';
 import 'package:slee_fi/schema/buy_nft_schema/buy_nft_schema.dart';
 import 'package:slee_fi/schema/change_password_schema/change_password_schema.dart';
 import 'package:slee_fi/schema/create_password_schema/create_password_schema.dart';
@@ -115,27 +116,34 @@ abstract class AuthDataSource {
   @POST('/stacking')
   Future<StakingResponse> stacking(@Body() StackingSchema stackingSchema);
 
-  @GET('/tx-history/pending')
-  Future<dynamic> fetchSpendingPending(
-    @Query('userId') int userId,
-    @Query('limit') int limit,
-    @Query('page') int page,
-  );
-
-  @GET('/tx-history/history')
-  Future<dynamic> fetchSpendingHistory(
-    @Query('userId') int userId,
-    @Query('limit') int limit,
-    @Query('page') int page,
-  );
+  // @GET('/tx-history/pending')
+  // Future<dynamic> fetchSpendingPending(
+  //   @Query('userId') int userId,
+  //   @Query('limit') int limit,
+  //   @Query('page') int page,
+  // );
+  //
+  // @GET('/tx-history/history')
+  // Future<dynamic> fetchSpendingHistory(
+  //   @Query('userId') int userId,
+  //   @Query('limit') int limit,
+  //   @Query('page') int page,
+  // );
 
   ///white draw
   @POST('/withdraw/token')
   Future<SwapTokenToWalletResponse> transferTokenToWallet(
       @Body() WhitDrawTokenSchema whitDrawTokenSchema);
 
+  @GET('/withdraw')
+  Future<WithdrawHistoryResponse> withdraw(
+    @Query('status') AttributeWithdraw attributeWithdraw,
+    @Query('limit') int limit,
+    @Query('page') int page,
+  );
+
   @POST('/withdraw/nft')
-  Future<dynamic> whitedrawNFT(@Body() WhitDrawNFTSchema whitDrawNFTSchema);
+  Future<dynamic> withdrawNFT(@Body() WhitDrawNFTSchema whitDrawNFTSchema);
 
   /// market
   @POST('/market-place/buy-nft')

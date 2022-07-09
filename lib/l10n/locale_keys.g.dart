@@ -424,5 +424,6 @@ abstract class  LocaleKeys {
   static const wallet_already = 'wallet_already';
   static const insufficient_avax = 'insufficient_avax';
   static const don_worry_transfer = 'don_worry_transfer';
+  static const some_thing_wrong = 'some_thing_wrong';
 
 }

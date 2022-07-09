@@ -1,5 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:slee_fi/common/extensions/string_x.dart';
+import 'package:slee_fi/entities/withdraw/withdraw_entity.dart';
 
 part 'swap_token_to_wallet_response.g.dart';
 
@@ -13,6 +13,7 @@ class SwapTokenToWalletResponse {
   final int userId;
   final String createdAt;
   final String updatedAt;
+  final String? txHash;
   final int id;
 
   SwapTokenToWalletResponse(
@@ -24,12 +25,20 @@ class SwapTokenToWalletResponse {
       this.userId,
       this.createdAt,
       this.updatedAt,
-      this.id);
+      this.id,
+      this.txHash);
 
   factory SwapTokenToWalletResponse.fromJson(Map<String, dynamic> json) {
-    'data is $json'.log;
     return _$SwapTokenToWalletResponseFromJson(json);
   }
 
   Map<String, dynamic> toJson() => _$SwapTokenToWalletResponseToJson(this);
+
+  WithdrawEntity toEntity() {
+    return WithdrawEntity(
+      txHash: txHash ?? '',
+      amount: amount,
+      time: createdAt,
+    );
+  }
 }
