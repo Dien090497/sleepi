@@ -34,7 +34,7 @@ class PopUpAvalancheWallet extends StatelessWidget {
                 PopWithResults(
                   fromPage: R.createWallet,
                   toPage: R.wallet,
-                  results: {"data": state.entity},
+                  results: state.entity,
                 ));
           }
           if (state is createWalletError) {

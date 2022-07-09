@@ -55,7 +55,7 @@ class PopUpBedMarketPlace extends StatelessWidget {
     if (value is PopWithResults) {
       context.read<WalletCubit>().init();
       final cubit = context.read<WalletCubit>();
-      cubit.importWallet(value.results['data'] as WalletInfoEntity);
+      cubit.importWallet(value.results);
     }
   }
 

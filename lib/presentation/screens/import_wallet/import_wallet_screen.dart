@@ -58,7 +58,7 @@ class _ImportWalletScreenState extends State<ImportWalletScreen> {
                   PopWithResults(
                     fromPage: R.importWallet,
                     toPage: R.wallet,
-                    results: {"data": state.entity},
+                    results: state.entity,
                   )),
             );
           }
