@@ -25,8 +25,6 @@ abstract class IUserRepository {
 
   Future<Either<FailureMessage, GlobalConfigResponse>> getGlobalConfig();
 
-  Future<Either<FailureMessage, StakingEntity>> stakingSlft({required double amount});
-
   Future<Either<FailureMessage, WithdrawHistoryResponse>> withdrawHistory(WithdrawParam withdrawParam);
 
   Future<Either<FailureMessage, double>> estimateGasWithdraw(EstimateGasWithdrawParam estimateParam);
