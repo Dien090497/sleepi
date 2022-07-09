@@ -212,7 +212,7 @@ class _Detail extends StatelessWidget {
                   style: TextStyles.lightGrey14),
               SizedBox(height: 8.h),
               SFText(
-                  keyText: '${bed.time}/100',
+                  keyText: '${bed.durability}/100',
                   style: TextStyles.lightWhite16W700),
             ],
           ),
@@ -231,7 +231,7 @@ class _Detail extends StatelessWidget {
                   keyText: LocaleKeys.bed_mint, style: TextStyles.lightGrey14),
               SizedBox(height: 8.h),
               SFText(
-                  keyText: '${bed.bedMint}/7',
+                  keyText: '${bed.isMint}/${bed.bedMint}',
                   style: TextStyles.lightWhite16W700),
             ],
           ),
