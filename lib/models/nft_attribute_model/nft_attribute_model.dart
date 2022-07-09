@@ -6,25 +6,26 @@ part 'nft_attribute_model.g.dart';
 
 @JsonSerializable()
 class NftAttributeModel {
-  // final int nftId;
-  final int tokenId;
-  final String contractAddress;
-  final String owner;
-  final String type;
-  final String classNft;
-  final String quality;
-  final int time;
-  final int level;
-  final int bedMint;
-  final int efficiency;
-  final int durability;
-  final int luck;
-  final int bonus;
-  final int special;
-  final int resilience;
+  final BigInt? nftId;
+  final BigInt? tokenId;
+  final String? contractAddress;
+  final String? owner;
+  final String? type;
+  final String? classNft;
+  final String? quality;
+  final int? time;
+  final int? level;
+  final int? bedMint;
+  final int? isMint;
+  final int? efficiency;
+  final int? durability;
+  final int? luck;
+  final int? bonus;
+  final int? special;
+  final int? resilience;
 
   NftAttributeModel(
-    // this.nftId,
+    this.nftId,
     this.contractAddress,
     this.owner,
     this.type,
@@ -40,6 +41,7 @@ class NftAttributeModel {
     this.special,
     this.resilience,
     this.tokenId,
+    this.isMint,
   );
 
   factory NftAttributeModel.fromJson(Map<String, dynamic> json) =>
@@ -49,8 +51,8 @@ class NftAttributeModel {
 
   NftAttributeEntity toEntity() => NftAttributeEntity(
         contractAddress: contractAddress,
-        // nftId: nftId,
-        tokenId: BigInt.from(tokenId),
+        nftId: nftId,
+        tokenId: tokenId,
         owner: owner,
         type: type,
         classNft: classNft,

@@ -123,25 +123,29 @@ class NftPopUpTransfer extends StatelessWidget {
                   style: TextStyles.lightGrey12,
                 ),
                 const SizedBox(width: 4),
-                Expanded(
+                if ((nft.attribute?.contractAddress?.isNotEmpty ?? false) &&
+                    nft.attribute?.tokenId != null)
+                  Expanded(
                     child: FutureBuilder<Either<Failure, double>>(
-                        future: getIt<EstimateNftFunctionFeeUseCase>()
-                            .call(EstimateGasParams(
-                          nftAddress: nft.attribute.contractAddress,
-                          ownerAddress: ownerAddress,
-                          toAddress: toAddress,
-                          nftId: nft.attribute.tokenId,
-                          functionName: 'transferFrom',
-                        )),
-                        builder: (context, snapshot) {
-                          return Text(
-                            snapshot.hasData
-                                ? '${snapshot.data!.getOrElse(() => 0)} AVAX'
-                                : '--.--',
-                            textAlign: TextAlign.right,
-                            style: TextStyles.white12,
-                          );
-                        })),
+                      future: getIt<EstimateNftFunctionFeeUseCase>()
+                          .call(EstimateGasParams(
+                        nftAddress: nft.attribute!.contractAddress!,
+                        ownerAddress: ownerAddress,
+                        toAddress: toAddress,
+                        nftId: nft.attribute!.tokenId!,
+                        functionName: 'transferFrom',
+                      )),
+                      builder: (context, snapshot) {
+                        return Text(
+                          snapshot.hasData
+                              ? '${snapshot.data!.getOrElse(() => 0)} AVAX'
+                              : '--.--',
+                          textAlign: TextAlign.right,
+                          style: TextStyles.white12,
+                        );
+                      },
+                    ),
+                  ),
               ],
             ),
             const SizedBox(height: 8),
@@ -154,7 +158,7 @@ class NftPopUpTransfer extends StatelessWidget {
                 const SizedBox(width: 4),
                 Expanded(
                     child: SFText(
-                  keyText: '#${nft.attribute.tokenId}',
+                  keyText: '#${nft.attribute?.tokenId}',
                   textAlign: TextAlign.right,
                   style: TextStyles.white12,
                 )),

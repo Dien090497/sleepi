@@ -7,11 +7,11 @@ part 'nft_data_model.g.dart';
 
 @JsonSerializable()
 class NftDataModel {
-  final int id;
-  final int categoryId;
-  final int isLock;
-  final String status;
-  final NftAttributeModel attribute;
+  final int? id;
+  final int? categoryId;
+  final int? isLock;
+  final String? status;
+  final NftAttributeModel? attribute;
 
   NftDataModel(
       this.id, this.categoryId, this.isLock, this.status, this.attribute);
@@ -32,5 +32,5 @@ class NftDataModel {
           categoryId: categoryId,
           isLock: isLock,
           status: status,
-          attribute: attribute.toEntity());
+          attribute: attribute?.toEntity());
 }

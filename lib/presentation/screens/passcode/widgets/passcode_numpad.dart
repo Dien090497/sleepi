@@ -6,24 +6,13 @@ import 'package:slee_fi/common/style/text_styles.dart';
 import 'package:slee_fi/common/widgets/sf_icon.dart';
 import 'package:slee_fi/resources/resources.dart';
 
-class PasscodeNumPad extends StatefulWidget {
+class PasscodeNumPad extends StatelessWidget {
   const PasscodeNumPad(
       {Key? key, required this.onCompleted, required this.passcodeController})
       : super(key: key);
 
   final TextEditingController passcodeController;
   final Function(String passcode) onCompleted;
-
-  @override
-  State<PasscodeNumPad> createState() => _PasscodeNumPadState();
-}
-
-class _PasscodeNumPadState extends State<PasscodeNumPad> {
-  @override
-  void dispose() {
-    widget.passcodeController.dispose();
-    super.dispose();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -49,21 +38,20 @@ class _PasscodeNumPadState extends State<PasscodeNumPad> {
                       return;
                     }
                     if (num == '12') {
-                      if (widget.passcodeController.text.isEmpty) {
+                      if (passcodeController.text.isEmpty) {
                         return;
                       }
-                      widget.passcodeController.text =
-                          widget.passcodeController.text.substring(
-                              0, widget.passcodeController.text.length - 1);
+                      passcodeController.text = passcodeController.text
+                          .substring(0, passcodeController.text.length - 1);
                     } else {
-                      if (widget.passcodeController.text.length >=
+                      if (passcodeController.text.length >=
                           Const.passcodeLength) {
                         return;
                       }
-                      final passcode = widget.passcodeController.text + num;
-                      widget.passcodeController.text = passcode;
+                      final passcode = passcodeController.text + num;
+                      passcodeController.text = passcode;
                       if (passcode.length == Const.passcodeLength) {
-                        widget.onCompleted(passcode);
+                        onCompleted(passcode);
                       }
                     }
                   },

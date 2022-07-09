@@ -67,33 +67,34 @@ class _NFTDetailScreenState extends State<NFTDetailScreen> {
         NftPopUpTransfer(
           onConfirm: (toAddress) async {
             if (isLoading) return;
+            if (nft.attribute?.contractAddress?.isEmpty ?? true) return;
+            if (nft.attribute?.tokenId == null) return;
             isLoading = true;
             final res = toAddress.isEmpty
                 ? await getIt<SendNftToSpendingUseCase>()
                     .call(SendNftToSpendingParams(
-                    nftAddress: nft.attribute.contractAddress,
-                    nftId: nft.attribute.tokenId,
+                    nftAddress: nft.attribute!.contractAddress!,
+                    nftId: nft.attribute!.tokenId!,
                     userId: walletInfo.id,
                     credentials: walletInfo.credentials,
                   ))
                 : await getIt<TransferNftUseCase>().call(TransferNftParams(
-                    nftAddress: nft.attribute.contractAddress,
+                    nftAddress: nft.attribute!.contractAddress!,
                     ownerAddress: walletInfo.address,
                     toAddress: toAddress,
-                    nftId: nft.attribute.tokenId,
+                    nftId: nft.attribute!.tokenId!,
                     credentials: walletInfo.credentials,
                   ));
             res.fold(
               (l) {
-                isLoading = false;
                 debugPrint('### L $l');
               },
               (r) {
                 Navigator.popUntil(
                     context, (r) => r.settings.name == R.nftDetail);
-                isLoading = false;
               },
             );
+            isLoading = false;
           },
           isToSpending: isToSpending,
           nft: nft,
@@ -260,9 +261,10 @@ class _NFTDetailScreenState extends State<NFTDetailScreen> {
                         physics: const NeverScrollableScrollPhysics(),
                         itemBuilder: (context, i) {
                           final nft = state.nftEntities[i];
+
                           return MyBedShortWidget(
-                            bedId: nft.attribute.tokenId,
-                            type: nft.attribute.type,
+                            bedId: nft.attribute?.tokenId,
+                            type: nft.attribute?.type,
                           );
                         },
                         count: state.nftEntities.length,

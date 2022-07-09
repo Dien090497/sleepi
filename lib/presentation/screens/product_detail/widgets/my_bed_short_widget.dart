@@ -17,8 +17,8 @@ class MyBedShortWidget extends StatelessWidget {
   }) : super(key: key);
 
   // final BedType bedType;
-  final BigInt bedId;
-  final String type;
+  final BigInt? bedId;
+  final String? type;
 
   @override
   Widget build(BuildContext context) {
@@ -35,7 +35,7 @@ class MyBedShortWidget extends StatelessWidget {
             top: 18,
             left: -30,
             child: TopLeftBanner(
-              text: type,
+              text: '$type',
               textColor: AppColors.green,
             ),
           ),
