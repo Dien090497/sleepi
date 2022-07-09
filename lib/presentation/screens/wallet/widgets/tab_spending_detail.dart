@@ -56,6 +56,7 @@ class _TabSpendingDetailState extends State<TabSpendingDetail> {
                 header: const WaterDropHeader(),
                 onRefresh: () async {
                   context.read<UserBloc>().add(RefreshBalanceToken());
+                  await Future.delayed(const Duration(milliseconds: 1000));
                   refreshController.refreshCompleted();
                 },
                 child: SingleChildScrollView(

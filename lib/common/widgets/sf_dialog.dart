@@ -108,6 +108,7 @@ Future<T?> showSignUpSuccess<T>(
               width: 180,
               height: 48,
               text: LocaleKeys.continue_,
+              textStyle: TextStyles.w600WhiteSize16,
               onPressed: () => Navigator.of(context).pop(),
               color: AppColors.blue,
             ),

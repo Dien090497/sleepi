@@ -29,11 +29,18 @@ class AvailableWidget extends StatelessWidget {
             )),
             const SizedBox(height: 8.0),
             BlocBuilder<ActivationCodeSettingCubit, ActivationCodeSettingState>(
-              builder: (context, state) => Center(
-                  child: SFText(
-                keyText: "0/3",
-                style: TextStyles.bold30White,
-              )),
+              builder: (context, state) {
+                int active = 0;
+                if (state is ActivationCodeSettingStateSuccess) {
+                  active = state.list.where((element) => !element.isUsed).length;
+                }
+
+                return Center(
+                    child: SFText(
+                  keyText: "$active/3",
+                  style: TextStyles.bold30White,
+                ));
+              },
             )
           ],
         ),
