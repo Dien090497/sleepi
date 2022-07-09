@@ -6,7 +6,6 @@ part 'nft_attribute_entity.freezed.dart';
 @freezed
 class NftAttributeEntity with _$NftAttributeEntity {
   const factory NftAttributeEntity({
-    required int id,
     // required int nftId,
     required BigInt tokenId,
     required String contractAddress,
@@ -18,6 +17,7 @@ class NftAttributeEntity with _$NftAttributeEntity {
     required int level,
     required int bedMint,
     required int efficiency,
+    required int durability,
     required int luck,
     required int bonus,
     required int special,

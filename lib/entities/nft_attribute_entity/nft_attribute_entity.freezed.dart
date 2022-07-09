@@ -16,7 +16,7 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$NftAttributeEntity {
-  int get id => throw _privateConstructorUsedError; // required int nftId,
+// required int nftId,
   BigInt get tokenId => throw _privateConstructorUsedError;
   String get contractAddress => throw _privateConstructorUsedError;
   String get owner => throw _privateConstructorUsedError;
@@ -27,6 +27,7 @@ mixin _$NftAttributeEntity {
   int get level => throw _privateConstructorUsedError;
   int get bedMint => throw _privateConstructorUsedError;
   int get efficiency => throw _privateConstructorUsedError;
+  int get durability => throw _privateConstructorUsedError;
   int get luck => throw _privateConstructorUsedError;
   int get bonus => throw _privateConstructorUsedError;
   int get special => throw _privateConstructorUsedError;
@@ -43,8 +44,7 @@ abstract class $NftAttributeEntityCopyWith<$Res> {
           NftAttributeEntity value, $Res Function(NftAttributeEntity) then) =
       _$NftAttributeEntityCopyWithImpl<$Res>;
   $Res call(
-      {int id,
-      BigInt tokenId,
+      {BigInt tokenId,
       String contractAddress,
       String owner,
       String type,
@@ -54,6 +54,7 @@ abstract class $NftAttributeEntityCopyWith<$Res> {
       int level,
       int bedMint,
       int efficiency,
+      int durability,
       int luck,
       int bonus,
       int special,
@@ -71,7 +72,6 @@ class _$NftAttributeEntityCopyWithImpl<$Res>
 
   @override
   $Res call({
-    Object? id = freezed,
     Object? tokenId = freezed,
     Object? contractAddress = freezed,
     Object? owner = freezed,
@@ -82,16 +82,13 @@ class _$NftAttributeEntityCopyWithImpl<$Res>
     Object? level = freezed,
     Object? bedMint = freezed,
     Object? efficiency = freezed,
+    Object? durability = freezed,
     Object? luck = freezed,
     Object? bonus = freezed,
     Object? special = freezed,
     Object? resilience = freezed,
   }) {
     return _then(_value.copyWith(
-      id: id == freezed
-          ? _value.id
-          : id // ignore: cast_nullable_to_non_nullable
-              as int,
       tokenId: tokenId == freezed
           ? _value.tokenId
           : tokenId // ignore: cast_nullable_to_non_nullable
@@ -131,6 +128,10 @@ class _$NftAttributeEntityCopyWithImpl<$Res>
       efficiency: efficiency == freezed
           ? _value.efficiency
           : efficiency // ignore: cast_nullable_to_non_nullable
+              as int,
+      durability: durability == freezed
+          ? _value.durability
+          : durability // ignore: cast_nullable_to_non_nullable
               as int,
       luck: luck == freezed
           ? _value.luck
@@ -160,8 +161,7 @@ abstract class _$$_NftAttributeEntityCopyWith<$Res>
       __$$_NftAttributeEntityCopyWithImpl<$Res>;
   @override
   $Res call(
-      {int id,
-      BigInt tokenId,
+      {BigInt tokenId,
       String contractAddress,
       String owner,
       String type,
@@ -171,6 +171,7 @@ abstract class _$$_NftAttributeEntityCopyWith<$Res>
       int level,
       int bedMint,
       int efficiency,
+      int durability,
       int luck,
       int bonus,
       int special,
@@ -190,7 +191,6 @@ class __$$_NftAttributeEntityCopyWithImpl<$Res>
 
   @override
   $Res call({
-    Object? id = freezed,
     Object? tokenId = freezed,
     Object? contractAddress = freezed,
     Object? owner = freezed,
@@ -201,16 +201,13 @@ class __$$_NftAttributeEntityCopyWithImpl<$Res>
     Object? level = freezed,
     Object? bedMint = freezed,
     Object? efficiency = freezed,
+    Object? durability = freezed,
     Object? luck = freezed,
     Object? bonus = freezed,
     Object? special = freezed,
     Object? resilience = freezed,
   }) {
     return _then(_$_NftAttributeEntity(
-      id: id == freezed
-          ? _value.id
-          : id // ignore: cast_nullable_to_non_nullable
-              as int,
       tokenId: tokenId == freezed
           ? _value.tokenId
           : tokenId // ignore: cast_nullable_to_non_nullable
@@ -251,6 +248,10 @@ class __$$_NftAttributeEntityCopyWithImpl<$Res>
           ? _value.efficiency
           : efficiency // ignore: cast_nullable_to_non_nullable
               as int,
+      durability: durability == freezed
+          ? _value.durability
+          : durability // ignore: cast_nullable_to_non_nullable
+              as int,
       luck: luck == freezed
           ? _value.luck
           : luck // ignore: cast_nullable_to_non_nullable
@@ -277,8 +278,7 @@ class _$_NftAttributeEntity
     with DiagnosticableTreeMixin
     implements _NftAttributeEntity {
   const _$_NftAttributeEntity(
-      {required this.id,
-      required this.tokenId,
+      {required this.tokenId,
       required this.contractAddress,
       required this.owner,
       required this.type,
@@ -288,13 +288,12 @@ class _$_NftAttributeEntity
       required this.level,
       required this.bedMint,
       required this.efficiency,
+      required this.durability,
       required this.luck,
       required this.bonus,
       required this.special,
       required this.resilience});
 
-  @override
-  final int id;
 // required int nftId,
   @override
   final BigInt tokenId;
@@ -317,6 +316,8 @@ class _$_NftAttributeEntity
   @override
   final int efficiency;
   @override
+  final int durability;
+  @override
   final int luck;
   @override
   final int bonus;
@@ -327,7 +328,7 @@ class _$_NftAttributeEntity
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'NftAttributeEntity(id: $id, tokenId: $tokenId, contractAddress: $contractAddress, owner: $owner, type: $type, classNft: $classNft, quality: $quality, time: $time, level: $level, bedMint: $bedMint, efficiency: $efficiency, luck: $luck, bonus: $bonus, special: $special, resilience: $resilience)';
+    return 'NftAttributeEntity(tokenId: $tokenId, contractAddress: $contractAddress, owner: $owner, type: $type, classNft: $classNft, quality: $quality, time: $time, level: $level, bedMint: $bedMint, efficiency: $efficiency, durability: $durability, luck: $luck, bonus: $bonus, special: $special, resilience: $resilience)';
   }
 
   @override
@@ -335,7 +336,6 @@ class _$_NftAttributeEntity
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty('type', 'NftAttributeEntity'))
-      ..add(DiagnosticsProperty('id', id))
       ..add(DiagnosticsProperty('tokenId', tokenId))
       ..add(DiagnosticsProperty('contractAddress', contractAddress))
       ..add(DiagnosticsProperty('owner', owner))
@@ -346,6 +346,7 @@ class _$_NftAttributeEntity
       ..add(DiagnosticsProperty('level', level))
       ..add(DiagnosticsProperty('bedMint', bedMint))
       ..add(DiagnosticsProperty('efficiency', efficiency))
+      ..add(DiagnosticsProperty('durability', durability))
       ..add(DiagnosticsProperty('luck', luck))
       ..add(DiagnosticsProperty('bonus', bonus))
       ..add(DiagnosticsProperty('special', special))
@@ -357,7 +358,6 @@ class _$_NftAttributeEntity
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_NftAttributeEntity &&
-            const DeepCollectionEquality().equals(other.id, id) &&
             const DeepCollectionEquality().equals(other.tokenId, tokenId) &&
             const DeepCollectionEquality()
                 .equals(other.contractAddress, contractAddress) &&
@@ -370,6 +370,8 @@ class _$_NftAttributeEntity
             const DeepCollectionEquality().equals(other.bedMint, bedMint) &&
             const DeepCollectionEquality()
                 .equals(other.efficiency, efficiency) &&
+            const DeepCollectionEquality()
+                .equals(other.durability, durability) &&
             const DeepCollectionEquality().equals(other.luck, luck) &&
             const DeepCollectionEquality().equals(other.bonus, bonus) &&
             const DeepCollectionEquality().equals(other.special, special) &&
@@ -380,7 +382,6 @@ class _$_NftAttributeEntity
   @override
   int get hashCode => Object.hash(
       runtimeType,
-      const DeepCollectionEquality().hash(id),
       const DeepCollectionEquality().hash(tokenId),
       const DeepCollectionEquality().hash(contractAddress),
       const DeepCollectionEquality().hash(owner),
@@ -391,6 +392,7 @@ class _$_NftAttributeEntity
       const DeepCollectionEquality().hash(level),
       const DeepCollectionEquality().hash(bedMint),
       const DeepCollectionEquality().hash(efficiency),
+      const DeepCollectionEquality().hash(durability),
       const DeepCollectionEquality().hash(luck),
       const DeepCollectionEquality().hash(bonus),
       const DeepCollectionEquality().hash(special),
@@ -405,8 +407,7 @@ class _$_NftAttributeEntity
 
 abstract class _NftAttributeEntity implements NftAttributeEntity {
   const factory _NftAttributeEntity(
-      {required final int id,
-      required final BigInt tokenId,
+      {required final BigInt tokenId,
       required final String contractAddress,
       required final String owner,
       required final String type,
@@ -416,13 +417,12 @@ abstract class _NftAttributeEntity implements NftAttributeEntity {
       required final int level,
       required final int bedMint,
       required final int efficiency,
+      required final int durability,
       required final int luck,
       required final int bonus,
       required final int special,
       required final int resilience}) = _$_NftAttributeEntity;
 
-  @override
-  int get id => throw _privateConstructorUsedError;
   @override // required int nftId,
   BigInt get tokenId => throw _privateConstructorUsedError;
   @override
@@ -443,6 +443,8 @@ abstract class _NftAttributeEntity implements NftAttributeEntity {
   int get bedMint => throw _privateConstructorUsedError;
   @override
   int get efficiency => throw _privateConstructorUsedError;
+  @override
+  int get durability => throw _privateConstructorUsedError;
   @override
   int get luck => throw _privateConstructorUsedError;
   @override

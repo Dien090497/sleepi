@@ -8,7 +8,6 @@ part of 'nft_attribute_model.dart';
 
 NftAttributeModel _$NftAttributeModelFromJson(Map<String, dynamic> json) =>
     NftAttributeModel(
-      json['id'] as int,
       json['contractAddress'] as String,
       json['owner'] as String,
       json['type'] as String,
@@ -18,6 +17,7 @@ NftAttributeModel _$NftAttributeModelFromJson(Map<String, dynamic> json) =>
       json['level'] as int,
       json['bedMint'] as int,
       json['efficiency'] as int,
+      json['durability'] as int,
       json['luck'] as int,
       json['bonus'] as int,
       json['special'] as int,
@@ -27,7 +27,6 @@ NftAttributeModel _$NftAttributeModelFromJson(Map<String, dynamic> json) =>
 
 Map<String, dynamic> _$NftAttributeModelToJson(NftAttributeModel instance) =>
     <String, dynamic>{
-      'id': instance.id,
       'tokenId': instance.tokenId,
       'contractAddress': instance.contractAddress,
       'owner': instance.owner,
@@ -38,6 +37,7 @@ Map<String, dynamic> _$NftAttributeModelToJson(NftAttributeModel instance) =>
       'level': instance.level,
       'bedMint': instance.bedMint,
       'efficiency': instance.efficiency,
+      'durability': instance.durability,
       'luck': instance.luck,
       'bonus': instance.bonus,
       'special': instance.special,
