@@ -14,7 +14,7 @@ class ActivationCodeList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      alignment: Alignment.center,
+      alignment: Alignment.topCenter,
       decoration: const BoxDecoration(
         color: AppColors.dark,
         borderRadius: BorderRadius.only(

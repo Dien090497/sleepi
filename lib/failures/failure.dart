@@ -17,6 +17,7 @@ class FailureMessage extends Failure {
         if (e.response?.statusCode == 502 || e.response?.statusCode == 500) {
           return const FailureMessage('Some thing wrong');
         }
+        'error is   ${e.response?.data}'.log;
         final error = e.response?.data['error']['details']['message'];
         if (error is String) {
           return FailureMessage(error);

@@ -71,10 +71,7 @@ class CreatePasswordCubit extends Cubit<CreatePasswordState> {
       emit(CreatePasswordState.errorPassword(message));
       return false;
     }
-    if (messageConfirm.isNotEmpty) {
-      emit(CreatePasswordState.errorConfirmPassword(messageConfirm));
-      return false;
-    }
+
     if (confirmPassword.isEmpty) {
       emit(CreatePasswordState.errorConfirmPassword(
           LocaleKeys.this_field_is_required.tr()));
@@ -86,6 +83,10 @@ class CreatePasswordCubit extends Cubit<CreatePasswordState> {
       return false;
     }
 
+    if (messageConfirm.isNotEmpty) {
+      emit(CreatePasswordState.errorConfirmPassword(messageConfirm));
+      return false;
+    }
     return true;
   }
 

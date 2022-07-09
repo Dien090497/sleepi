@@ -304,44 +304,6 @@ class _AuthDataSource implements AuthDataSource {
   }
 
   @override
-  Future<dynamic> fetchSpendingPending(userId, limit, page) async {
-    const _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{
-      r'userId': userId,
-      r'limit': limit,
-      r'page': page
-    };
-    final _headers = <String, dynamic>{};
-    final _data = <String, dynamic>{};
-    final _result = await _dio.fetch(_setStreamType<dynamic>(
-        Options(method: 'GET', headers: _headers, extra: _extra)
-            .compose(_dio.options, '/tx-history/pending',
-                queryParameters: queryParameters, data: _data)
-            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = _result.data;
-    return value;
-  }
-
-  @override
-  Future<dynamic> fetchSpendingHistory(userId, limit, page) async {
-    const _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{
-      r'userId': userId,
-      r'limit': limit,
-      r'page': page
-    };
-    final _headers = <String, dynamic>{};
-    final _data = <String, dynamic>{};
-    final _result = await _dio.fetch(_setStreamType<dynamic>(
-        Options(method: 'GET', headers: _headers, extra: _extra)
-            .compose(_dio.options, '/tx-history/history',
-                queryParameters: queryParameters, data: _data)
-            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = _result.data;
-    return value;
-  }
-
-  @override
   Future<SwapTokenToWalletResponse> transferTokenToWallet(
       whitDrawTokenSchema) async {
     const _extra = <String, dynamic>{};
@@ -360,7 +322,28 @@ class _AuthDataSource implements AuthDataSource {
   }
 
   @override
-  Future<dynamic> whitedrawNFT(whitDrawNFTSchema) async {
+  Future<WithdrawHistoryResponse> withdraw(
+      attributeWithdraw, limit, page) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{
+      r'status': attributeWithdraw.toJson(),
+      r'limit': limit,
+      r'page': page
+    };
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<WithdrawHistoryResponse>(
+            Options(method: 'GET', headers: _headers, extra: _extra)
+                .compose(_dio.options, '/withdraw',
+                    queryParameters: queryParameters, data: _data)
+                .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = WithdrawHistoryResponse.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<dynamic> withdrawNFT(whitDrawNFTSchema) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
@@ -410,9 +393,15 @@ class _AuthDataSource implements AuthDataSource {
   }
 
   @override
-  Future<ListMarketPlaceModel> getNftByOwner() async {
+  Future<ListMarketPlaceModel> getNftByOwner(
+      limit, page, categoryId, itemNFT) async {
     const _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{
+      r'limit': limit,
+      r'page': page,
+      r'categoryId': categoryId,
+      r'item': itemNFT.toJson()
+    };
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
     final _result = await _dio.fetch<Map<String, dynamic>>(
@@ -422,6 +411,38 @@ class _AuthDataSource implements AuthDataSource {
                     queryParameters: queryParameters, data: _data)
                 .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
     final value = ListMarketPlaceModel.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<ListMarketPlaceModel> getListJewel() async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<ListMarketPlaceModel>(
+            Options(method: 'GET', headers: _headers, extra: _extra)
+                .compose(_dio.options, '/nft-attributes/list-jewels',
+                    queryParameters: queryParameters, data: _data)
+                .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = ListMarketPlaceModel.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<MarketPlaceModel> bedDetail(bedId) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{r'bedId': bedId};
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<MarketPlaceModel>(
+            Options(method: 'GET', headers: _headers, extra: _extra)
+                .compose(_dio.options, '/nft-attributes/bed-detail',
+                    queryParameters: queryParameters, data: _data)
+                .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = MarketPlaceModel.fromJson(_result.data!);
     return value;
   }
 

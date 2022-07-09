@@ -17,25 +17,25 @@ final _privateConstructorUsedError = UnsupportedError(
 /// @nodoc
 mixin _$PendingState {
   PendingStatus get status => throw _privateConstructorUsedError;
-  List<TransactionEntity> get list => throw _privateConstructorUsedError;
+  List<WithdrawEntity> get list => throw _privateConstructorUsedError;
   bool get hasReachedMax => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(PendingStatus status,
-            List<TransactionEntity> list, bool hasReachedMax)
+    required TResult Function(
+            PendingStatus status, List<WithdrawEntity> list, bool hasReachedMax)
         loaded,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(PendingStatus status, List<TransactionEntity> list,
+    TResult Function(PendingStatus status, List<WithdrawEntity> list,
             bool hasReachedMax)?
         loaded,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(PendingStatus status, List<TransactionEntity> list,
+    TResult Function(PendingStatus status, List<WithdrawEntity> list,
             bool hasReachedMax)?
         loaded,
     required TResult orElse(),
@@ -69,7 +69,7 @@ abstract class $PendingStateCopyWith<$Res> {
           PendingState value, $Res Function(PendingState) then) =
       _$PendingStateCopyWithImpl<$Res>;
   $Res call(
-      {PendingStatus status, List<TransactionEntity> list, bool hasReachedMax});
+      {PendingStatus status, List<WithdrawEntity> list, bool hasReachedMax});
 }
 
 /// @nodoc
@@ -94,7 +94,7 @@ class _$PendingStateCopyWithImpl<$Res> implements $PendingStateCopyWith<$Res> {
       list: list == freezed
           ? _value.list
           : list // ignore: cast_nullable_to_non_nullable
-              as List<TransactionEntity>,
+              as List<WithdrawEntity>,
       hasReachedMax: hasReachedMax == freezed
           ? _value.hasReachedMax
           : hasReachedMax // ignore: cast_nullable_to_non_nullable
@@ -111,7 +111,7 @@ abstract class _$$PendingStateLoadedCopyWith<$Res>
       __$$PendingStateLoadedCopyWithImpl<$Res>;
   @override
   $Res call(
-      {PendingStatus status, List<TransactionEntity> list, bool hasReachedMax});
+      {PendingStatus status, List<WithdrawEntity> list, bool hasReachedMax});
 }
 
 /// @nodoc
@@ -139,7 +139,7 @@ class __$$PendingStateLoadedCopyWithImpl<$Res>
       list == freezed
           ? _value._list
           : list // ignore: cast_nullable_to_non_nullable
-              as List<TransactionEntity>,
+              as List<WithdrawEntity>,
       hasReachedMax == freezed
           ? _value.hasReachedMax
           : hasReachedMax // ignore: cast_nullable_to_non_nullable
@@ -152,14 +152,14 @@ class __$$PendingStateLoadedCopyWithImpl<$Res>
 
 class _$PendingStateLoaded implements PendingStateLoaded {
   const _$PendingStateLoaded(
-      this.status, final List<TransactionEntity> list, this.hasReachedMax)
+      this.status, final List<WithdrawEntity> list, this.hasReachedMax)
       : _list = list;
 
   @override
   final PendingStatus status;
-  final List<TransactionEntity> _list;
+  final List<WithdrawEntity> _list;
   @override
-  List<TransactionEntity> get list {
+  List<WithdrawEntity> get list {
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_list);
   }
@@ -199,8 +199,8 @@ class _$PendingStateLoaded implements PendingStateLoaded {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(PendingStatus status,
-            List<TransactionEntity> list, bool hasReachedMax)
+    required TResult Function(
+            PendingStatus status, List<WithdrawEntity> list, bool hasReachedMax)
         loaded,
   }) {
     return loaded(status, list, hasReachedMax);
@@ -209,7 +209,7 @@ class _$PendingStateLoaded implements PendingStateLoaded {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(PendingStatus status, List<TransactionEntity> list,
+    TResult Function(PendingStatus status, List<WithdrawEntity> list,
             bool hasReachedMax)?
         loaded,
   }) {
@@ -219,7 +219,7 @@ class _$PendingStateLoaded implements PendingStateLoaded {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(PendingStatus status, List<TransactionEntity> list,
+    TResult Function(PendingStatus status, List<WithdrawEntity> list,
             bool hasReachedMax)?
         loaded,
     required TResult orElse(),
@@ -262,13 +262,13 @@ class _$PendingStateLoaded implements PendingStateLoaded {
 abstract class PendingStateLoaded implements PendingState {
   const factory PendingStateLoaded(
       final PendingStatus status,
-      final List<TransactionEntity> list,
+      final List<WithdrawEntity> list,
       final bool hasReachedMax) = _$PendingStateLoaded;
 
   @override
   PendingStatus get status => throw _privateConstructorUsedError;
   @override
-  List<TransactionEntity> get list => throw _privateConstructorUsedError;
+  List<WithdrawEntity> get list => throw _privateConstructorUsedError;
   @override
   bool get hasReachedMax => throw _privateConstructorUsedError;
   @override

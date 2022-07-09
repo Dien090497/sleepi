@@ -67,3 +67,35 @@ enum NftType {
 }
 
 enum MessageType { error, success }
+
+enum AttributeNFT {
+  efficiency('efficiency'),
+  luck('luck'),
+  bonus('luck'),
+  special('special'),
+  resilience('resilience'),
+  none('');
+
+  const AttributeNFT(this.name);
+
+  final String name;
+
+  @override
+  String toString() => name;
+
+  String toJson() => name;
+}
+
+enum AttributeWithdraw {
+  pending('pending'),
+  history('history');
+
+  const AttributeWithdraw(this.name);
+
+  final String name;
+
+  @override
+  String toString() => name;
+
+  String toJson() => name;
+}

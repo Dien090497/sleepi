@@ -11,6 +11,7 @@ import 'package:slee_fi/models/active_code_response/active_code_response.dart';
 import 'package:slee_fi/models/create_password_reponse/create_password_response.dart';
 import 'package:slee_fi/models/global_config_response/global_config_response.dart';
 import 'package:slee_fi/models/list_market_place/list_market_place_model.dart';
+import 'package:slee_fi/models/market_place/market_place_model.dart';
 import 'package:slee_fi/models/market_place/result_buy_model.dart';
 import 'package:slee_fi/models/refresh_token_model/refresh_token_model.dart';
 import 'package:slee_fi/models/send_email_response/send_email_response.dart';
@@ -22,6 +23,7 @@ import 'package:slee_fi/models/token_spending/token_spending.dart';
 import 'package:slee_fi/models/user_response/user_response.dart';
 import 'package:slee_fi/models/users_response/users_response.dart';
 import 'package:slee_fi/models/verify_response/verify_response.dart';
+import 'package:slee_fi/models/withdraw_history_response/withdraw_history_response.dart';
 import 'package:slee_fi/schema/buy_nft_schema/buy_nft_schema.dart';
 import 'package:slee_fi/schema/change_password_schema/change_password_schema.dart';
 import 'package:slee_fi/schema/create_password_schema/create_password_schema.dart';
@@ -114,26 +116,34 @@ abstract class AuthDataSource {
   @POST('/stacking')
   Future<StakingResponse> stacking(@Body() StackingSchema stackingSchema);
 
-  @GET('/tx-history/pending')
-  Future<dynamic> fetchSpendingPending(
-    @Query('userId') int userId,
-    @Query('limit') int limit,
-    @Query('page') int page,
-  );
-  @GET('/tx-history/history')
-  Future<dynamic> fetchSpendingHistory(
-    @Query('userId') int userId,
-    @Query('limit') int limit,
-    @Query('page') int page,
-  );
+  // @GET('/tx-history/pending')
+  // Future<dynamic> fetchSpendingPending(
+  //   @Query('userId') int userId,
+  //   @Query('limit') int limit,
+  //   @Query('page') int page,
+  // );
+  //
+  // @GET('/tx-history/history')
+  // Future<dynamic> fetchSpendingHistory(
+  //   @Query('userId') int userId,
+  //   @Query('limit') int limit,
+  //   @Query('page') int page,
+  // );
 
   ///white draw
   @POST('/withdraw/token')
   Future<SwapTokenToWalletResponse> transferTokenToWallet(
       @Body() WhitDrawTokenSchema whitDrawTokenSchema);
 
+  @GET('/withdraw')
+  Future<WithdrawHistoryResponse> withdraw(
+    @Query('status') AttributeWithdraw attributeWithdraw,
+    @Query('limit') int limit,
+    @Query('page') int page,
+  );
+
   @POST('/withdraw/nft')
-  Future<dynamic> whitedrawNFT(@Body() WhitDrawNFTSchema whitDrawNFTSchema);
+  Future<dynamic> withdrawNFT(@Body() WhitDrawNFTSchema whitDrawNFTSchema);
 
   /// market
   @POST('/market-place/buy-nft')
@@ -143,7 +153,18 @@ abstract class AuthDataSource {
   Future<ListMarketPlaceModel> getMarketPlace(@Body() MarketSchema entity);
 
   @GET('/nft-attributes/nft-by-owner')
-  Future<ListMarketPlaceModel> getNftByOwner();
+  Future<ListMarketPlaceModel> getNftByOwner(
+    @Query('limit') int limit,
+    @Query('page') int page,
+    @Query('categoryId') int categoryId,
+    @Query('item') AttributeNFT itemNFT,
+  );
+
+  @GET('/nft-attributes/list-jewels')
+  Future<ListMarketPlaceModel> getListJewel();
+
+  @GET('/nft-attributes/bed-detail')
+  Future<MarketPlaceModel> bedDetail(@Query('bedId') int bedId);
 
   @POST('/stacking/unstacking')
   Future<ListMarketPlaceModel> unstacking(@Body() UnStackingSchema unStaking);

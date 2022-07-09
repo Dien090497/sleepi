@@ -31,7 +31,7 @@ class CreateWalletScreen extends StatelessWidget {
                 PopWithResults(
                   fromPage: R.createWallet,
                   toPage: R.wallet,
-                  results: {"data": state.entity},
+                  results: state.entity,
                 ));
           }
         },
