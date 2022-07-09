@@ -13,6 +13,7 @@ import 'package:slee_fi/repository/user_repository.dart';
 import 'package:slee_fi/schema/change_password_schema/change_password_schema.dart';
 import 'package:slee_fi/schema/stacking_schema/stacking_schema.dart';
 import 'package:slee_fi/schema/white_draw_token_schema/whit_draw_token_schema.dart';
+import 'package:slee_fi/usecase/estimate_gas_withdraw.dart';
 import 'package:slee_fi/usecase/withdraw_history_usecase.dart';
 
 @Injectable(as: IUserRepository)
@@ -127,6 +128,21 @@ class UserImplementation extends IUserRepository {
       return Right(result);
     } on Exception catch (e) {
       // 'on load withdraw error $e'.log;
+      return Left(FailureMessage.fromException(e));
+    }
+  }
+
+  @override
+  Future<Either<FailureMessage, double>> estimateGasWithdraw(
+      EstimateGasWithdrawParam estimateParam) async {
+    try {
+      var result = await _authDataSource.estimateGasWithdraw(
+          estimateParam.type,
+          estimateParam.contractAddress,
+          estimateParam.tokenId,
+          estimateParam.amount);
+      return Right(result);
+    } on Exception catch (e) {
       return Left(FailureMessage.fromException(e));
     }
   }
