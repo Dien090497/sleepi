@@ -34,7 +34,7 @@ class PendingBloc extends Bloc<PendingEvent, PendingState> {
     if (state.status == PendingStatus.initial ||
         state.status == PendingStatus.success) {
       emit(state.copyWith(status: PendingStatus.loading));
-      var result =
+      final result =
           await _fetchPendingUC.call(LoadMoreParams(userId, _currentPage, 10));
       result.fold(
         (l) => emit(state.copyWith(status: PendingStatus.failure)),

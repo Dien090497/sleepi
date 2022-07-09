@@ -8,8 +8,9 @@ import 'package:slee_fi/common/extensions/string_x.dart';
 @Singleton()
 class AppFlyerCustom {
   final AppsFlyerOptions _appsFlyerOptions = AppsFlyerOptions(
-    afDevKey: Platform.isAndroid ?  'qCWYnmVaZy4cwWWjm3RB5P' : 'Be7KEPxvVdSNz26dG7f79B',
-
+    afDevKey: Platform.isAndroid
+        ? 'qCWYnmVaZy4cwWWjm3RB5P'
+        : 'Be7KEPxvVdSNz26dG7f79B',
     appId: '1623163183',
     showDebug: true,
   );
@@ -47,7 +48,7 @@ class AppFlyerCustom {
   }
 
   homeAction(int index) {
-    var event = '';
+    String event = '';
     switch (index) {
       case 0:
         event = 'home';
@@ -75,7 +76,7 @@ class AppFlyerCustom {
     }
 
     try {
-      var result = await _appsflyerSdk.logEvent(eventName, map);
+      final result = await _appsflyerSdk.logEvent(eventName, map);
       ' result log   $result $eventName'.log;
     } on Exception catch (e) {
       '$e'.log;

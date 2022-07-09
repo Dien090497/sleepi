@@ -19,7 +19,7 @@ class ActivationCodeSettingCubit extends Cubit<ActivationCodeSettingState> {
   }
 
   _fetch() async {
-    var result = await _activationCodeUC.call(NoParams());
+    final result = await _activationCodeUC.call(NoParams());
     result.fold(
       (l) => emit(ActivationCodeSettingState.error('$l')),
       (r) => emit(ActivationCodeSettingState.successful(r)),

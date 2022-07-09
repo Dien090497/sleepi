@@ -49,7 +49,7 @@ class SFAlertDialog extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var sizeWidth = MediaQuery.of(context).size.width;
+    final sizeWidth = MediaQuery.of(context).size.width;
 
     return DismissKeyboardWidget(
       child: AlertDialog(

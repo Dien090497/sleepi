@@ -3,7 +3,7 @@ import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/widgets/sf_dialog.dart';
 
-class ChartTabBody extends StatelessWidget {
+class ChartTabBody extends StatefulWidget {
   ChartTabBody({
     Key? key,
     required this.picker,
@@ -22,8 +22,20 @@ class ChartTabBody extends StatelessWidget {
   final bool nextEnable;
   final bool prevEnable;
   final List<Widget> children;
+
+  @override
+  State<ChartTabBody> createState() => _ChartTabBodyState();
+}
+
+class _ChartTabBodyState extends State<ChartTabBody> {
   final RefreshController _refreshController =
       RefreshController(initialRefresh: false);
+
+  @override
+  void dispose() {
+    _refreshController.dispose();
+    super.dispose();
+  }
 
   void _onRefresh() async {
     await Future.delayed(const Duration(milliseconds: 1000));
@@ -44,40 +56,40 @@ class ChartTabBody extends StatelessWidget {
             onTap: () {
               showCustomDialog(
                 context,
-                children: [picker],
+                children: [widget.picker],
               );
             },
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 IconButton(
-                  onPressed: onPreviousTap,
+                  onPressed: widget.onPreviousTap,
                   padding: EdgeInsets.zero,
                   iconSize: 20,
                   splashRadius: 18,
                   alignment: Alignment.center,
                   icon: Icon(
                     Icons.arrow_back_ios,
-                    color: prevEnable ? AppColors.light1 : AppColors.lightGrey,
+                    color: widget.prevEnable ? AppColors.light1 : AppColors.lightGrey,
                   ),
                 ),
-                Text(text),
+                Text(widget.text),
                 IconButton(
-                  onPressed: onNextTap,
+                  onPressed: widget.onNextTap,
                   padding: EdgeInsets.zero,
                   iconSize: 20,
                   splashRadius: 18,
                   alignment: Alignment.center,
                   icon: Icon(
                     Icons.arrow_forward_ios,
-                    color: nextEnable ? AppColors.light1 : AppColors.lightGrey,
+                    color: widget.nextEnable ? AppColors.light1 : AppColors.lightGrey,
                   ),
                 ),
               ],
             ),
           ),
           const SizedBox(height: 8),
-          ...children,
+          ...widget.children,
         ],
       ),
     );

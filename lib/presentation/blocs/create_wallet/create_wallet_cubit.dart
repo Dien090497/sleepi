@@ -48,7 +48,7 @@ class CreateWalletCubit extends Cubit<CreateWalletState> {
 
   verifyOtp() async {
     emit(const CreateWalletState.initial('', mnemonic: '', isLoading: true));
-    var result = await _verifyOtpUC
+    final result = await _verifyOtpUC
         .call(VerifyOTPSchema(int.parse(otp), userEmail, OTPType.addWallet));
 
     result.fold((l) {
@@ -57,7 +57,7 @@ class CreateWalletCubit extends Cubit<CreateWalletState> {
   }
 
   sendOtp() async {
-    var result =
+    final result =
         await _sendOtpUC.call(SendOTPParam(userEmail, OTPType.addWallet));
     result.fold((l) {
       emit(CreateWalletState.error('$l'));

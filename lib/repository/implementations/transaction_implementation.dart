@@ -32,8 +32,8 @@ class TransactionImplementation extends ITransactionRepository{
   Future<Either<Failure, bool>> sendToExternal(SendToExternalParams params) async{
     try{
       final chainId = _getStorageDataSource.getCurrentChainId();
-      var walletId = _getStorageDataSource.getCurrentWalletId();
-      var wallet = await _isarDataSource.getWalletAt(walletId);
+      final walletId = _getStorageDataSource.getCurrentWalletId();
+      final wallet = await _isarDataSource.getWalletAt(walletId);
 
       if (wallet == null) {
         return const Left(FailureMessage('Invalid Wallet'));
@@ -67,8 +67,8 @@ class TransactionImplementation extends ITransactionRepository{
   @override
   Future<Either<Failure, int>> calculatorFee(SendToExternalParams params) async{
     try {
-      var walletId = _getStorageDataSource.getCurrentWalletId();
-      var wallet = await _isarDataSource.getWalletAt(walletId);
+      final walletId = _getStorageDataSource.getCurrentWalletId();
+      final wallet = await _isarDataSource.getWalletAt(walletId);
 
       if (wallet == null) {
         return const Left(FailureMessage('Invalid Wallet'));
@@ -95,8 +95,8 @@ class TransactionImplementation extends ITransactionRepository{
   Future<Either<Failure, double>> getTokenBalance() async{
     try {
       double balance = 0;
-      var walletId = _getStorageDataSource.getCurrentWalletId();
-      var wallet = await _isarDataSource.getWalletAt(walletId);
+      final walletId = _getStorageDataSource.getCurrentWalletId();
+      final wallet = await _isarDataSource.getWalletAt(walletId);
       final result = await _web3DataSource.getBalance(wallet!.address);
       balance = result / BigInt.from(pow(10, 18));
       return Right(balance);
@@ -109,8 +109,8 @@ class TransactionImplementation extends ITransactionRepository{
   Future<Either<FailureMessage, bool>> transferTokenErc20(SendTokenExternalParams params) async {
     try {
       _getStorageDataSource.getCurrentChainId();
-      var walletId = _getStorageDataSource.getCurrentWalletId();
-      var wallet = await _isarDataSource.getWalletAt(walletId);
+      final walletId = _getStorageDataSource.getCurrentWalletId();
+      final wallet = await _isarDataSource.getWalletAt(walletId);
 
       if (wallet == null) {
         return const Left(FailureMessage('Invalid Wallet'));

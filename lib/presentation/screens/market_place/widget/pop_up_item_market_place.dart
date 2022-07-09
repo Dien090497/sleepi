@@ -51,7 +51,7 @@ class PopUpItemMarketPlace extends StatelessWidget {
   void _showWarningDialog(dynamic value, BuildContext context) {
     if (value is PopWithResults) {
       context.read<WalletCubit>().init();
-      var cubit = context.read<WalletCubit>();
+      final cubit = context.read<WalletCubit>();
       cubit.importWallet(value.results['data'] as WalletInfoEntity);
     }
   }

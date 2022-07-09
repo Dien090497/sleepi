@@ -51,7 +51,7 @@ class _TradeScreenState extends State<TradeScreen> {
 
   final GlobalKey<CoolDropdownState> firstToken = GlobalKey();
   final GlobalKey<CoolDropdownState> secondToken = GlobalKey();
-  TextEditingController valueController = TextEditingController();
+  final TextEditingController valueController = TextEditingController();
   FocusNode focusNode = FocusNode();
   double amountOutMin = 0;
   Timer? _debounce;

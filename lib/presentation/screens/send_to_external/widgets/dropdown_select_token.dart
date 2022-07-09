@@ -36,13 +36,13 @@ class DropdownSelectToken extends StatefulWidget {
 }
 
 class _DropdownSelectTokenState extends State<DropdownSelectToken> {
-  var selectedValue = '';
+  String selectedValue = '';
 
   List dropdownItemList = [];
 
   @override
   void initState() {
-    for (var i = 0; i < widget.tokens.length; i++) {
+    for (int i = 0; i < widget.tokens.length; i++) {
       selectedValue = widget.tokens[i]["symbol"].toString();
       dropdownItemList.add(
         {

@@ -37,7 +37,7 @@ class ChartWeekCubit extends Cubit<ChartWeekState> {
       if (nextWeekFirstDate.isAfter(DateTime.now())) {
         return;
       }
-      var nextWeekLastDate = dateTimeUtils.endOfWeek(nextWeekFirstDate);
+      DateTime nextWeekLastDate = dateTimeUtils.endOfWeek(nextWeekFirstDate);
       if (nextWeekLastDate.isAfter(DateTime.now())) {
         nextWeekLastDate = DateTime(
             DateTime.now().year, DateTime.now().month, DateTime.now().day);

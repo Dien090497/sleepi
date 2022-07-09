@@ -42,7 +42,7 @@ class _AddressScanState extends State<AddressScan> {
             final result = await Navigator.pushNamed(context, R.qrCodeScan);
             if(result != null ){
               int idx = result.toString().indexOf(":");
-              var contractAddress = result.toString().substring(idx+1).trim(); // date: "'2019:04:01'"
+              final contractAddress = result.toString().substring(idx+1).trim(); // date: "'2019:04:01'"
               _editingController.text = contractAddress;
             }
 

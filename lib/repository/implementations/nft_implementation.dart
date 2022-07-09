@@ -72,7 +72,6 @@ class NFTImplementation extends INFTRepository {
                     isLock: 1,
                     status: '',
                     attribute: NftAttributeEntity(
-                      id: 1,
                       tokenId: nftId,
                       contractAddress: nftAddress,
                       owner: 'owner',
@@ -87,6 +86,7 @@ class NFTImplementation extends INFTRepository {
                       bonus: 1,
                       special: 1,
                       resilience: 1,
+                      durability: 100,
                     )),
               )
               .toList(),

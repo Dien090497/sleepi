@@ -180,7 +180,7 @@ class _CustomDropdownState<T> extends State<CustomDropdown<T>>
 
   @override
   Widget build(BuildContext context) {
-    var style = widget.dropdownButtonStyle;
+    final style = widget.dropdownButtonStyle;
     // link the overlay to the button
     return CompositedTransformTarget(
       link: _layerLink,
@@ -220,10 +220,10 @@ class _CustomDropdownState<T> extends State<CustomDropdown<T>>
   OverlayEntry _createOverlayEntry() {
     // find the size and position of the current widget
     RenderBox? renderBox = context.findRenderObject() as RenderBox?;
-    var size = renderBox!.size;
+    final size = renderBox!.size;
 
-    var offset = renderBox.localToGlobal(Offset.zero);
-    var topOffset = offset.dy + size.height + 5;
+    final offset = renderBox.localToGlobal(Offset.zero);
+    final topOffset = offset.dy + size.height + 5;
     return OverlayEntry(
       // full screen GestureDetector to register when a
       // user has clicked away from the dropdown

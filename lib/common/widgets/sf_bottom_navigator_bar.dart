@@ -18,7 +18,7 @@ class SFBottomNavigatorBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     List<BottomNavigationBarItem> itemBottoms = <BottomNavigationBarItem>[];
-    for (var element in items) {
+    for (final element in items) {
       itemBottoms.add(BottomNavigationBarItem(
           icon: Container(
             decoration: const BoxDecoration(

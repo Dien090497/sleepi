@@ -20,12 +20,15 @@ class SplashScreen extends StatelessWidget {
               context.read<UserBloc>().add(UpdateUserOrListToken(
                   userInfoEntity: state.userInfoEntity!,
                   listTokens: state.listTokens));
-              Navigator.pushReplacementNamed(context, R.bottomNavigation);
+              Navigator.pushNamedAndRemoveUntil(
+                  context, R.bottomNavigation, (r) => false);
             } else {
-              Navigator.pushReplacementNamed(context, R.loginSignUp);
+              Navigator.pushNamedAndRemoveUntil(
+                  context, R.loginSignUp, (r) => false);
             }
           } else {
-            Navigator.pushReplacementNamed(context, R.commingSoon);
+            Navigator.pushNamedAndRemoveUntil(
+                context, R.commingSoon, (r) => false);
           }
         }
       },

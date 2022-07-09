@@ -26,10 +26,8 @@ class ImportWalletScreen extends StatefulWidget {
 }
 
 class _ImportWalletScreenState extends State<ImportWalletScreen> {
-
-  TextEditingController controllerMnemonic = TextEditingController();
-  TextEditingController controllerOTP = TextEditingController();
-
+  final TextEditingController controllerMnemonic = TextEditingController();
+  final TextEditingController controllerOTP = TextEditingController();
 
   @override
   void dispose() {
@@ -93,12 +91,11 @@ class _ImportWalletScreenState extends State<ImportWalletScreen> {
                                         CrossAxisAlignment.start,
                                     children: [
                                       TextfieldVerificationEmail(
-                                          maxLength: 6,
-                                          onPressed: () => cubit.sendOtp(),
-                                          errorText:
-                                              state is ImportWalletErrorOtp
-                                                  ? state.msg
-                                                  : '',
+                                        maxLength: 6,
+                                        onPressed: () => cubit.sendOtp(),
+                                        errorText: state is ImportWalletErrorOtp
+                                            ? state.msg
+                                            : '',
                                         controller: controllerOTP,
                                       ),
                                       const SizedBox(height: 20),
@@ -112,7 +109,7 @@ class _ImportWalletScreenState extends State<ImportWalletScreen> {
                                         controller: controllerMnemonic,
                                       ),
                                       const SizedBox(height: 5),
-                                      if (state is ImportWalletErrorMnemonic )
+                                      if (state is ImportWalletErrorMnemonic)
                                         SFText(
                                           keyText: state.msg,
                                           style: TextStyles.w400Red12,
@@ -132,7 +129,9 @@ class _ImportWalletScreenState extends State<ImportWalletScreen> {
                             color: AppColors.blue,
                             onPressed: () {
                               FocusScope.of(context).unfocus();
-                              cubit.process(otp: controllerOTP.text, mnemonic: controllerMnemonic.text);
+                              cubit.process(
+                                  otp: controllerOTP.text,
+                                  mnemonic: controllerMnemonic.text);
                             },
                           ),
                           const SizedBox(height: 24)
