@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:slee_fi/common/enum/enum.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/widgets/sf_sub_tab_bar.dart';
 import 'package:slee_fi/l10n/locale_keys.g.dart';
@@ -43,8 +44,14 @@ class SpendingDetailList extends StatelessWidget {
             Expanded(
               child: TabBarView(
                 children: [
-                  TabPendingDetail(pendingBloc: pendingBloc),
-                  TabPendingDetail(pendingBloc: historyBloc),
+                  TabPendingDetail(
+                    pendingBloc: pendingBloc,
+                    attributeWithdraw: AttributeWithdraw.pending,
+                  ),
+                  TabPendingDetail(
+                    pendingBloc: historyBloc,
+                    attributeWithdraw: AttributeWithdraw.history,
+                  ),
                   // TabHistoryDetail(historyBloc: historyBloc)
                 ],
               ),

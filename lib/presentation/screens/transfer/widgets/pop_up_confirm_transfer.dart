@@ -96,7 +96,7 @@ class PopUpConfirmTransfer extends StatelessWidget {
               ),
               Expanded(
                   child: SFText(
-                      keyText: "$fee ${tokenName.toUpperCase()}",
+                      keyText: "$fee AVAX",
                       style: TextStyles.lightWhite16,
                       textAlign: TextAlign.end)),
             ],

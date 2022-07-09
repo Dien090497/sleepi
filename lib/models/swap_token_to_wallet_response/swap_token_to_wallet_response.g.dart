@@ -18,6 +18,7 @@ SwapTokenToWalletResponse _$SwapTokenToWalletResponseFromJson(
       json['createdAt'] as String,
       json['updatedAt'] as String,
       json['id'] as int,
+      json['txHash'] as String?,
     );
 
 Map<String, dynamic> _$SwapTokenToWalletResponseToJson(
@@ -31,5 +32,6 @@ Map<String, dynamic> _$SwapTokenToWalletResponseToJson(
       'userId': instance.userId,
       'createdAt': instance.createdAt,
       'updatedAt': instance.updatedAt,
+      'txHash': instance.txHash,
       'id': instance.id,
     };

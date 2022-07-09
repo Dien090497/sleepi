@@ -10,15 +10,8 @@ import 'package:slee_fi/common/widgets/sf_text.dart';
 import 'package:slee_fi/l10n/locale_keys.g.dart';
 import 'package:slee_fi/presentation/screens/info_individual/info_individual_screen.dart';
 
-class MiddleBed extends StatefulWidget {
+class MiddleBed extends StatelessWidget {
   const MiddleBed({Key? key}) : super(key: key);
-
-  @override
-  State<MiddleBed> createState() => _MiddleBedState();
-}
-
-class _MiddleBedState extends State<MiddleBed> {
-  late int i = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -50,9 +43,11 @@ class _MiddleBedState extends State<MiddleBed> {
                 height: 200,
                 child: Swiper(
                   itemBuilder: (BuildContext context, int index) {
-                    return   Column(
+                    return Column(
                       children: [
-                        SFText(keyText: beds[index].name, style: TextStyles.blue14),
+                        SFText(
+                            keyText: beds[index].name,
+                            style: TextStyles.blue14),
                         GestureDetector(
                           onTap: () {
                             Navigator.pushNamed(context, R.nftInfo,
@@ -72,10 +67,12 @@ class _MiddleBedState extends State<MiddleBed> {
                   // autoplay: true,
                   itemCount: beds.length,
                   // pagination:  const SwiperPagination(),
-                  control:  const SwiperControl(),
+                  control: const SwiperControl(),
                 ),
               ),
-              const SizedBox(height: 20,),
+              const SizedBox(
+                height: 20,
+              ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [

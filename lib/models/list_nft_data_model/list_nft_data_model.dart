@@ -6,8 +6,9 @@ part 'list_nft_data_model.g.dart';
 
 @JsonSerializable()
 class ListNftDataModel {
-  final List<NftDataModel> data;
-  // final _Meta meta;
+  final List<NftDataModel>? data;
+
+  // final _Meta? meta;
 
   ListNftDataModel(this.data);
 

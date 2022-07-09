@@ -92,7 +92,7 @@ class TransferCubit extends Cubit<TransferSpendingState> {
   void transferToMainWallet(
       String amount, String symbol, String address) async {
     emit(const TransferSpendingState.loading());
-    var result = await _transferToMainWalletUC
+    final result = await _transferToMainWalletUC
         .call(WhitDrawTokenSchema(symbol, address, amount));
     result.fold(
       (l) => emit(TransferSpendingState.error(message: l.msg)),

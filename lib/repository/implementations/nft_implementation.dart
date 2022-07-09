@@ -36,8 +36,11 @@ class NFTImplementation extends INFTRepository {
     required int start,
   }) async {
     try {
+      final balance = await _nftDataSource.balanceOf(nftAddress, ownerAddress);
+      final countBI = BigInt.from(count);
+      final c = countBI <= balance ? countBI : balance;
       return Right(await _nftDataSource.tokensOf(
-          nftAddress, ownerAddress, count, start));
+          nftAddress, ownerAddress, c, BigInt.from(start)));
     } catch (e) {
       return Left(FailureMessage('$e'));
     }
@@ -56,7 +59,7 @@ class NFTImplementation extends INFTRepository {
             .join(','), // TODO: Remove when real data is ready
       );
       // TODO: remove this when data is ready
-      if (listModel.data.isEmpty && nftAddress != null) {
+      if ((listModel.data?.isEmpty ?? true) && nftAddress != null) {
         final res = await Future.wait([
           _nftDataSource.name(nftAddress),
           _nftDataSource.symbol(nftAddress),
@@ -87,13 +90,16 @@ class NFTImplementation extends INFTRepository {
                       special: 1,
                       resilience: 1,
                       durability: 100,
+                      nftId: nftId,
                     )),
               )
               .toList(),
         );
       }
-      return Right(
-          listModel.data.map((e) => e.toEntity(name: '', symbol: '')).toList());
+      return Right(listModel.data
+              ?.map((e) => e.toEntity(name: '', symbol: ''))
+              .toList() ??
+          []);
     } catch (e) {
       return Left(FailureMessage('$e'));
     }

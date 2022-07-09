@@ -24,7 +24,7 @@ class _AssetTileState extends State<AssetTile> {
           ModalTransferBetween(
             selected: selected,
             onSelect: (Object object) {
-              var value = object as Map<String, dynamic>;
+              final value = object as Map<String, dynamic>;
               selected = value['text'];
               image = value['urlImage'];
               setState(() {});

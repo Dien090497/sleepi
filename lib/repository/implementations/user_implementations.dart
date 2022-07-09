@@ -8,11 +8,12 @@ import 'package:slee_fi/failures/failure.dart';
 import 'package:slee_fi/models/global_config_response/global_config_response.dart';
 import 'package:slee_fi/models/swap_token_to_wallet_response/swap_token_to_wallet_response.dart';
 import 'package:slee_fi/models/token_spending/token_spending.dart';
+import 'package:slee_fi/models/withdraw_history_response/withdraw_history_response.dart';
 import 'package:slee_fi/repository/user_repository.dart';
 import 'package:slee_fi/schema/change_password_schema/change_password_schema.dart';
 import 'package:slee_fi/schema/stacking_schema/stacking_schema.dart';
 import 'package:slee_fi/schema/white_draw_token_schema/whit_draw_token_schema.dart';
-import 'package:slee_fi/usecase/spending_load_pending_usecase.dart';
+import 'package:slee_fi/usecase/withdraw_history_usecase.dart';
 
 @Injectable(as: IUserRepository)
 class UserImplementation extends IUserRepository {
@@ -25,7 +26,7 @@ class UserImplementation extends IUserRepository {
   Future<Either<FailureMessage, dynamic>> changePassword(
       ChangePasswordSchema changePasswordSchema) async {
     try {
-      var result = await _authDataSource.changePassword(changePasswordSchema);
+      final result = await _authDataSource.changePassword(changePasswordSchema);
       return Right(result);
     } on Exception catch (e) {
       return Left(FailureMessage.fromException(e));
@@ -36,7 +37,7 @@ class UserImplementation extends IUserRepository {
   Future<Either<FailureMessage, List<ActiveCodeEntity>>>
       fetchActivationCodes() async {
     try {
-      var result = await _authDataSource.fetchActivationCodes();
+      final result = await _authDataSource.fetchActivationCodes();
       return Right(result.data.map((e) => e.toEntity()).toList());
     } on Exception catch (e) {
       return Left(FailureMessage.fromException(e));
@@ -47,7 +48,7 @@ class UserImplementation extends IUserRepository {
   Future<Either<FailureMessage, List<TokenSpending>>> fetchBalanceSpending(
       String userID) async {
     try {
-      var result = await _authDataSource.fetchBalanceSpending(userID);
+      final result = await _authDataSource.fetchBalanceSpending(userID);
       return Right(result);
     } on Exception catch (e) {
       return Left(FailureMessage.fromException(e));
@@ -58,7 +59,7 @@ class UserImplementation extends IUserRepository {
   Future<Either<FailureMessage, SwapTokenToWalletResponse>>
       transferTokenToMainWallet(WhitDrawTokenSchema whitDrawTokenSchema) async {
     try {
-      var result =
+      final result =
           await _authDataSource.transferTokenToWallet(whitDrawTokenSchema);
       return Right(result);
     } on Exception catch (e) {
@@ -70,7 +71,8 @@ class UserImplementation extends IUserRepository {
   Future<Either<FailureMessage, GlobalConfigResponse>> getGlobalConfig() async {
     try {
       final result = await _authDataSource.getGlobalConfig();
-      await _secureStorage.saveAddressContract(addressContract: result.contract);
+      await _secureStorage.saveAddressContract(
+          addressContract: result.contract);
       await _secureStorage.saveMessage(saveMessage: result.messageSign);
       return Right(result);
     } catch (e) {
@@ -78,26 +80,41 @@ class UserImplementation extends IUserRepository {
     }
   }
 
-  @override
-  Future<Either<FailureMessage, dynamic>> fetchHistoryList(
-      LoadMoreParams loadMoreParams) async {
-    try {
-      var result = await _authDataSource.fetchSpendingHistory(
-          loadMoreParams.userId, loadMoreParams.limit, loadMoreParams.page);
-      return Right(result);
-    } on Exception catch (e) {
-      return Left(FailureMessage.fromException(e));
-    }
-  }
+  // @override
+  // Future<Either<FailureMessage, dynamic>> fetchHistoryList(
+  //     LoadMoreParams loadMoreParams) async {
+  //   try {
+  //     final result = await _authDataSource.fetchSpendingHistory(
+  //         loadMoreParams.userId, loadMoreParams.limit, loadMoreParams.page);
+  //     return Right(result);
+  //   } on Exception catch (e) {
+  //     return Left(FailureMessage.fromException(e));
+  //   }
+  // }
+  //
+  // @override
+  // Future<Either<FailureMessage, dynamic>> fetchPendingList(
+  //     LoadMoreParams loadMoreParams) async {
+  //   try {
+  //     final result = await _authDataSource.fetchSpendingHistory(
+  //         loadMoreParams.userId, loadMoreParams.limit, loadMoreParams.page);
+  //     return Right(result);
+  //   } on Exception catch (e) {
+  //     return Left(FailureMessage.fromException(e));
+  //   }
+  // }
 
   @override
-  Future<Either<FailureMessage, dynamic>> fetchPendingList(
-      LoadMoreParams loadMoreParams) async {
+  Future<Either<FailureMessage, WithdrawHistoryResponse>> withdrawHistory(
+      WithdrawParam withdrawParam) async {
     try {
-      var result = await _authDataSource.fetchSpendingHistory(
-          loadMoreParams.userId, loadMoreParams.limit, loadMoreParams.page);
+      var result = await _authDataSource.withdraw(
+          withdrawParam.attributeWithdraw,
+          withdrawParam.limit,
+          withdrawParam.page);
       return Right(result);
     } on Exception catch (e) {
+      // 'on load withdraw error $e'.log;
       return Left(FailureMessage.fromException(e));
     }
   }

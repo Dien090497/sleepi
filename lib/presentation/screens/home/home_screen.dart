@@ -17,8 +17,21 @@ import 'package:slee_fi/presentation/screens/home/widgets/middle_bed.dart';
 import 'package:slee_fi/presentation/screens/home/widgets/use_item.dart';
 import 'package:slee_fi/resources/resources.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
+
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  final RefreshController refreshController = RefreshController();
+
+  @override
+  void dispose() {
+    super.dispose();
+    refreshController.dispose();
+  }
 
   void _onRefresh(RefreshController refreshController) async {
     await Future.delayed(const Duration(milliseconds: 1000));
@@ -27,8 +40,6 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final RefreshController refreshController = RefreshController();
-
     return BlocProvider(
       create: (_) => HomeBloc()..add(const FetchData()),
       child: BlocBuilder<HomeBloc, HomeState>(
@@ -47,7 +58,6 @@ class HomeScreen extends StatelessWidget {
                       child: SmartRefresher(
                         controller: refreshController,
                         enablePullDown: true,
-                        header: const WaterDropHeader(),
                         onRefresh: () {
                           _onRefresh(refreshController);
                         },
@@ -96,9 +106,7 @@ class HomeScreen extends StatelessWidget {
                                           keyText: LocaleKeys.what_is_insurance,
                                           style: TextStyles.lightGrey12,
                                         ),
-                                        const SizedBox(
-                                          width: 8,
-                                        ),
+                                        const SizedBox(width: 8),
                                         const SFIcon(Ics.icCircleQuestion),
                                       ],
                                     ),

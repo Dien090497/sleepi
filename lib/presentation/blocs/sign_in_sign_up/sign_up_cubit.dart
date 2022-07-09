@@ -37,7 +37,7 @@ class SigInSignUpCubit extends Cubit<SignInSignUpState> {
 
   init() async {
     emit(const SignInSignUpState.initial());
-    var result = await _isFirstOpenAppUC.call(NoParams());
+    final result = await _isFirstOpenAppUC.call(NoParams());
     _password = '';
     otp = '';
     result.fold((l) => null, (r) => isFistOpenApp = r);
@@ -66,7 +66,7 @@ class SigInSignUpCubit extends Cubit<SignInSignUpState> {
 
     final type = action == Action.signUp ? OTPType.signUp : OTPType.changePass;
 
-    var result = await _sendOtpUC.call(SendOTPParam(email.trim(), type));
+    final result = await _sendOtpUC.call(SendOTPParam(email.trim(), type));
     result.fold(
       (l) => emit(SignInSignUpState.errorEmail('$l')),
       (r) => emit(const SignInSignUpState.initial()),
@@ -74,7 +74,7 @@ class SigInSignUpCubit extends Cubit<SignInSignUpState> {
   }
 
   _signUp() async {
-    var result =
+    final result =
         await _signUpUseCase.call(SignUpSchema(int.parse(otp), email.trim()));
     result.fold((l) => emit(SignInSignUpState.error('$l')),
         (userResponse) async {
@@ -108,7 +108,7 @@ class SigInSignUpCubit extends Cubit<SignInSignUpState> {
           SignInSignUpState.error(LocaleKeys.this_field_is_required.tr()));
     }
     emit(const SignInSignUpState.process());
-    var result =
+    final result =
         await _logInUseCase.call(SignInSchema(email.trim(), _password));
 
     await result.fold(
@@ -136,7 +136,7 @@ class SigInSignUpCubit extends Cubit<SignInSignUpState> {
   }
 
   // bool _validatePassword() {
-  //   var message = _password.validatePassword;
+  //   final message = _password.validatePassword;
   //
   //   if (message.isNotEmpty) {
   //     emit(SignInSignUpState.error(message));
@@ -146,7 +146,7 @@ class SigInSignUpCubit extends Cubit<SignInSignUpState> {
   // }
 
   bool _validateOTP() {
-    var message = otp.validateOTP;
+    final message = otp.validateOTP;
     if (message.isNotEmpty) {
       emit(SignInSignUpState.error(message));
     }
@@ -155,7 +155,7 @@ class SigInSignUpCubit extends Cubit<SignInSignUpState> {
   }
 
   bool validateEmail() {
-    var message = email.validateEmail;
+    final message = email.validateEmail;
 
     if (message.isNotEmpty) {
       emit(SignInSignUpState.errorEmail(message));
@@ -171,7 +171,7 @@ class SigInSignUpCubit extends Cubit<SignInSignUpState> {
 
     emit(const SignInSignUpState.process());
     int otp = int.parse(this.otp);
-    var result = await _verifyOTPUC
+    final result = await _verifyOTPUC
         .call(VerifyOTPSchema(otp, email.trim(), OTPType.changePass));
 
     result.fold(

@@ -130,14 +130,14 @@ class InfoIndividualScreen extends StatelessWidget {
                                           onPressed: () {},
                                         ),
                                         const SizedBox(width: 8),
-                                        SFButton(
-                                          height: 38,
-                                          text: "+ ${LocaleKeys.point.tr()}",
-                                          textStyle: TextStyles.boldWhite14,
-                                          gradient:
-                                              AppColors.gradientBlueButton,
-                                          onPressed: () {},
-                                        ),
+                                        // SFButton(
+                                        //   height: 38,
+                                        //   text: "+ ${LocaleKeys.point.tr()}",
+                                        //   textStyle: TextStyles.boldWhite14,
+                                        //   gradient:
+                                        //       AppColors.gradientBlueButton,
+                                        //   onPressed: () {},
+                                        // ),
                                       ],
                                     ),
                                   ],

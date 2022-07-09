@@ -16,22 +16,22 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$NftAttributeEntity {
-// required int nftId,
-  BigInt get tokenId => throw _privateConstructorUsedError;
-  String get contractAddress => throw _privateConstructorUsedError;
-  String get owner => throw _privateConstructorUsedError;
-  String get type => throw _privateConstructorUsedError;
-  String get classNft => throw _privateConstructorUsedError;
-  String get quality => throw _privateConstructorUsedError;
-  int get time => throw _privateConstructorUsedError;
-  int get level => throw _privateConstructorUsedError;
-  int get bedMint => throw _privateConstructorUsedError;
-  int get efficiency => throw _privateConstructorUsedError;
-  int get durability => throw _privateConstructorUsedError;
-  int get luck => throw _privateConstructorUsedError;
-  int get bonus => throw _privateConstructorUsedError;
-  int get special => throw _privateConstructorUsedError;
-  int get resilience => throw _privateConstructorUsedError;
+  BigInt? get nftId => throw _privateConstructorUsedError;
+  BigInt? get tokenId => throw _privateConstructorUsedError;
+  String? get contractAddress => throw _privateConstructorUsedError;
+  String? get owner => throw _privateConstructorUsedError;
+  String? get type => throw _privateConstructorUsedError;
+  String? get classNft => throw _privateConstructorUsedError;
+  String? get quality => throw _privateConstructorUsedError;
+  int? get time => throw _privateConstructorUsedError;
+  int? get level => throw _privateConstructorUsedError;
+  int? get bedMint => throw _privateConstructorUsedError;
+  int? get efficiency => throw _privateConstructorUsedError;
+  int? get durability => throw _privateConstructorUsedError;
+  int? get luck => throw _privateConstructorUsedError;
+  int? get bonus => throw _privateConstructorUsedError;
+  int? get special => throw _privateConstructorUsedError;
+  int? get resilience => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $NftAttributeEntityCopyWith<NftAttributeEntity> get copyWith =>
@@ -44,21 +44,22 @@ abstract class $NftAttributeEntityCopyWith<$Res> {
           NftAttributeEntity value, $Res Function(NftAttributeEntity) then) =
       _$NftAttributeEntityCopyWithImpl<$Res>;
   $Res call(
-      {BigInt tokenId,
-      String contractAddress,
-      String owner,
-      String type,
-      String classNft,
-      String quality,
-      int time,
-      int level,
-      int bedMint,
-      int efficiency,
-      int durability,
-      int luck,
-      int bonus,
-      int special,
-      int resilience});
+      {BigInt? nftId,
+      BigInt? tokenId,
+      String? contractAddress,
+      String? owner,
+      String? type,
+      String? classNft,
+      String? quality,
+      int? time,
+      int? level,
+      int? bedMint,
+      int? efficiency,
+      int? durability,
+      int? luck,
+      int? bonus,
+      int? special,
+      int? resilience});
 }
 
 /// @nodoc
@@ -72,6 +73,7 @@ class _$NftAttributeEntityCopyWithImpl<$Res>
 
   @override
   $Res call({
+    Object? nftId = freezed,
     Object? tokenId = freezed,
     Object? contractAddress = freezed,
     Object? owner = freezed,
@@ -89,66 +91,70 @@ class _$NftAttributeEntityCopyWithImpl<$Res>
     Object? resilience = freezed,
   }) {
     return _then(_value.copyWith(
+      nftId: nftId == freezed
+          ? _value.nftId
+          : nftId // ignore: cast_nullable_to_non_nullable
+              as BigInt?,
       tokenId: tokenId == freezed
           ? _value.tokenId
           : tokenId // ignore: cast_nullable_to_non_nullable
-              as BigInt,
+              as BigInt?,
       contractAddress: contractAddress == freezed
           ? _value.contractAddress
           : contractAddress // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       owner: owner == freezed
           ? _value.owner
           : owner // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       type: type == freezed
           ? _value.type
           : type // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       classNft: classNft == freezed
           ? _value.classNft
           : classNft // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       quality: quality == freezed
           ? _value.quality
           : quality // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       time: time == freezed
           ? _value.time
           : time // ignore: cast_nullable_to_non_nullable
-              as int,
+              as int?,
       level: level == freezed
           ? _value.level
           : level // ignore: cast_nullable_to_non_nullable
-              as int,
+              as int?,
       bedMint: bedMint == freezed
           ? _value.bedMint
           : bedMint // ignore: cast_nullable_to_non_nullable
-              as int,
+              as int?,
       efficiency: efficiency == freezed
           ? _value.efficiency
           : efficiency // ignore: cast_nullable_to_non_nullable
-              as int,
+              as int?,
       durability: durability == freezed
           ? _value.durability
           : durability // ignore: cast_nullable_to_non_nullable
-              as int,
+              as int?,
       luck: luck == freezed
           ? _value.luck
           : luck // ignore: cast_nullable_to_non_nullable
-              as int,
+              as int?,
       bonus: bonus == freezed
           ? _value.bonus
           : bonus // ignore: cast_nullable_to_non_nullable
-              as int,
+              as int?,
       special: special == freezed
           ? _value.special
           : special // ignore: cast_nullable_to_non_nullable
-              as int,
+              as int?,
       resilience: resilience == freezed
           ? _value.resilience
           : resilience // ignore: cast_nullable_to_non_nullable
-              as int,
+              as int?,
     ));
   }
 }
@@ -161,21 +167,22 @@ abstract class _$$_NftAttributeEntityCopyWith<$Res>
       __$$_NftAttributeEntityCopyWithImpl<$Res>;
   @override
   $Res call(
-      {BigInt tokenId,
-      String contractAddress,
-      String owner,
-      String type,
-      String classNft,
-      String quality,
-      int time,
-      int level,
-      int bedMint,
-      int efficiency,
-      int durability,
-      int luck,
-      int bonus,
-      int special,
-      int resilience});
+      {BigInt? nftId,
+      BigInt? tokenId,
+      String? contractAddress,
+      String? owner,
+      String? type,
+      String? classNft,
+      String? quality,
+      int? time,
+      int? level,
+      int? bedMint,
+      int? efficiency,
+      int? durability,
+      int? luck,
+      int? bonus,
+      int? special,
+      int? resilience});
 }
 
 /// @nodoc
@@ -191,6 +198,7 @@ class __$$_NftAttributeEntityCopyWithImpl<$Res>
 
   @override
   $Res call({
+    Object? nftId = freezed,
     Object? tokenId = freezed,
     Object? contractAddress = freezed,
     Object? owner = freezed,
@@ -208,66 +216,70 @@ class __$$_NftAttributeEntityCopyWithImpl<$Res>
     Object? resilience = freezed,
   }) {
     return _then(_$_NftAttributeEntity(
+      nftId: nftId == freezed
+          ? _value.nftId
+          : nftId // ignore: cast_nullable_to_non_nullable
+              as BigInt?,
       tokenId: tokenId == freezed
           ? _value.tokenId
           : tokenId // ignore: cast_nullable_to_non_nullable
-              as BigInt,
+              as BigInt?,
       contractAddress: contractAddress == freezed
           ? _value.contractAddress
           : contractAddress // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       owner: owner == freezed
           ? _value.owner
           : owner // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       type: type == freezed
           ? _value.type
           : type // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       classNft: classNft == freezed
           ? _value.classNft
           : classNft // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       quality: quality == freezed
           ? _value.quality
           : quality // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       time: time == freezed
           ? _value.time
           : time // ignore: cast_nullable_to_non_nullable
-              as int,
+              as int?,
       level: level == freezed
           ? _value.level
           : level // ignore: cast_nullable_to_non_nullable
-              as int,
+              as int?,
       bedMint: bedMint == freezed
           ? _value.bedMint
           : bedMint // ignore: cast_nullable_to_non_nullable
-              as int,
+              as int?,
       efficiency: efficiency == freezed
           ? _value.efficiency
           : efficiency // ignore: cast_nullable_to_non_nullable
-              as int,
+              as int?,
       durability: durability == freezed
           ? _value.durability
           : durability // ignore: cast_nullable_to_non_nullable
-              as int,
+              as int?,
       luck: luck == freezed
           ? _value.luck
           : luck // ignore: cast_nullable_to_non_nullable
-              as int,
+              as int?,
       bonus: bonus == freezed
           ? _value.bonus
           : bonus // ignore: cast_nullable_to_non_nullable
-              as int,
+              as int?,
       special: special == freezed
           ? _value.special
           : special // ignore: cast_nullable_to_non_nullable
-              as int,
+              as int?,
       resilience: resilience == freezed
           ? _value.resilience
           : resilience // ignore: cast_nullable_to_non_nullable
-              as int,
+              as int?,
     ));
   }
 }
@@ -278,7 +290,8 @@ class _$_NftAttributeEntity
     with DiagnosticableTreeMixin
     implements _NftAttributeEntity {
   const _$_NftAttributeEntity(
-      {required this.tokenId,
+      {required this.nftId,
+      required this.tokenId,
       required this.contractAddress,
       required this.owner,
       required this.type,
@@ -294,41 +307,42 @@ class _$_NftAttributeEntity
       required this.special,
       required this.resilience});
 
-// required int nftId,
   @override
-  final BigInt tokenId;
+  final BigInt? nftId;
   @override
-  final String contractAddress;
+  final BigInt? tokenId;
   @override
-  final String owner;
+  final String? contractAddress;
   @override
-  final String type;
+  final String? owner;
   @override
-  final String classNft;
+  final String? type;
   @override
-  final String quality;
+  final String? classNft;
   @override
-  final int time;
+  final String? quality;
   @override
-  final int level;
+  final int? time;
   @override
-  final int bedMint;
+  final int? level;
   @override
-  final int efficiency;
+  final int? bedMint;
   @override
-  final int durability;
+  final int? efficiency;
   @override
-  final int luck;
+  final int? durability;
   @override
-  final int bonus;
+  final int? luck;
   @override
-  final int special;
+  final int? bonus;
   @override
-  final int resilience;
+  final int? special;
+  @override
+  final int? resilience;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'NftAttributeEntity(tokenId: $tokenId, contractAddress: $contractAddress, owner: $owner, type: $type, classNft: $classNft, quality: $quality, time: $time, level: $level, bedMint: $bedMint, efficiency: $efficiency, durability: $durability, luck: $luck, bonus: $bonus, special: $special, resilience: $resilience)';
+    return 'NftAttributeEntity(nftId: $nftId, tokenId: $tokenId, contractAddress: $contractAddress, owner: $owner, type: $type, classNft: $classNft, quality: $quality, time: $time, level: $level, bedMint: $bedMint, efficiency: $efficiency, durability: $durability, luck: $luck, bonus: $bonus, special: $special, resilience: $resilience)';
   }
 
   @override
@@ -336,6 +350,7 @@ class _$_NftAttributeEntity
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty('type', 'NftAttributeEntity'))
+      ..add(DiagnosticsProperty('nftId', nftId))
       ..add(DiagnosticsProperty('tokenId', tokenId))
       ..add(DiagnosticsProperty('contractAddress', contractAddress))
       ..add(DiagnosticsProperty('owner', owner))
@@ -358,6 +373,7 @@ class _$_NftAttributeEntity
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_NftAttributeEntity &&
+            const DeepCollectionEquality().equals(other.nftId, nftId) &&
             const DeepCollectionEquality().equals(other.tokenId, tokenId) &&
             const DeepCollectionEquality()
                 .equals(other.contractAddress, contractAddress) &&
@@ -382,6 +398,7 @@ class _$_NftAttributeEntity
   @override
   int get hashCode => Object.hash(
       runtimeType,
+      const DeepCollectionEquality().hash(nftId),
       const DeepCollectionEquality().hash(tokenId),
       const DeepCollectionEquality().hash(contractAddress),
       const DeepCollectionEquality().hash(owner),
@@ -407,52 +424,55 @@ class _$_NftAttributeEntity
 
 abstract class _NftAttributeEntity implements NftAttributeEntity {
   const factory _NftAttributeEntity(
-      {required final BigInt tokenId,
-      required final String contractAddress,
-      required final String owner,
-      required final String type,
-      required final String classNft,
-      required final String quality,
-      required final int time,
-      required final int level,
-      required final int bedMint,
-      required final int efficiency,
-      required final int durability,
-      required final int luck,
-      required final int bonus,
-      required final int special,
-      required final int resilience}) = _$_NftAttributeEntity;
+      {required final BigInt? nftId,
+      required final BigInt? tokenId,
+      required final String? contractAddress,
+      required final String? owner,
+      required final String? type,
+      required final String? classNft,
+      required final String? quality,
+      required final int? time,
+      required final int? level,
+      required final int? bedMint,
+      required final int? efficiency,
+      required final int? durability,
+      required final int? luck,
+      required final int? bonus,
+      required final int? special,
+      required final int? resilience}) = _$_NftAttributeEntity;
 
-  @override // required int nftId,
-  BigInt get tokenId => throw _privateConstructorUsedError;
   @override
-  String get contractAddress => throw _privateConstructorUsedError;
+  BigInt? get nftId => throw _privateConstructorUsedError;
   @override
-  String get owner => throw _privateConstructorUsedError;
+  BigInt? get tokenId => throw _privateConstructorUsedError;
   @override
-  String get type => throw _privateConstructorUsedError;
+  String? get contractAddress => throw _privateConstructorUsedError;
   @override
-  String get classNft => throw _privateConstructorUsedError;
+  String? get owner => throw _privateConstructorUsedError;
   @override
-  String get quality => throw _privateConstructorUsedError;
+  String? get type => throw _privateConstructorUsedError;
   @override
-  int get time => throw _privateConstructorUsedError;
+  String? get classNft => throw _privateConstructorUsedError;
   @override
-  int get level => throw _privateConstructorUsedError;
+  String? get quality => throw _privateConstructorUsedError;
   @override
-  int get bedMint => throw _privateConstructorUsedError;
+  int? get time => throw _privateConstructorUsedError;
   @override
-  int get efficiency => throw _privateConstructorUsedError;
+  int? get level => throw _privateConstructorUsedError;
   @override
-  int get durability => throw _privateConstructorUsedError;
+  int? get bedMint => throw _privateConstructorUsedError;
   @override
-  int get luck => throw _privateConstructorUsedError;
+  int? get efficiency => throw _privateConstructorUsedError;
   @override
-  int get bonus => throw _privateConstructorUsedError;
+  int? get durability => throw _privateConstructorUsedError;
   @override
-  int get special => throw _privateConstructorUsedError;
+  int? get luck => throw _privateConstructorUsedError;
   @override
-  int get resilience => throw _privateConstructorUsedError;
+  int? get bonus => throw _privateConstructorUsedError;
+  @override
+  int? get special => throw _privateConstructorUsedError;
+  @override
+  int? get resilience => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
   _$$_NftAttributeEntityCopyWith<_$_NftAttributeEntity> get copyWith =>

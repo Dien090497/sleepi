@@ -1,4 +1,5 @@
 import 'package:equatable/equatable.dart';
+import 'package:slee_fi/common/enum/enum.dart';
 
 class PendingEvent extends Equatable {
   @override
@@ -14,9 +15,15 @@ class PendingFetched extends PendingEvent {
 
 class PendingInit extends PendingEvent {
   final int userId;
+  final AttributeWithdraw attributeWithdraw;
 
-  PendingInit(this.userId);
+  PendingInit(this.userId, this.attributeWithdraw);
 
   @override
-  List<Object> get props => [userId];
+  List<Object> get props => [userId, attributeWithdraw];
+}
+
+class PendingRefresh extends PendingEvent {
+  @override
+  List<Object> get props => [];
 }

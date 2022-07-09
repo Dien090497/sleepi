@@ -46,7 +46,7 @@ class AuthImplementation extends IAuthRepository {
   Future<Either<FailureMessage, UserInfoEntity>> logIn(
       SignInSchema signInSchema) async {
     try {
-      var result = await _authDataSource.signIn(signInSchema);
+      final result = await _authDataSource.signIn(signInSchema);
       _secureStorage.writeUser(result.data.user);
       _secureStorage.saveAccessToken(result.data.accessToken);
       return Right(result.data.user.toEntity());
@@ -74,7 +74,7 @@ class AuthImplementation extends IAuthRepository {
   Future<Either<FailureMessage, SendEmailResponse>> sendOTPEmail(
       SendOTPParam sendOTPParam) async {
     try {
-      var result = await _authDataSource.sendOTP(
+      final result = await _authDataSource.sendOTP(
           sendOTPParam.email, sendOTPParam.otpType);
       return Right(result);
     } on Exception catch (e) {
@@ -86,7 +86,7 @@ class AuthImplementation extends IAuthRepository {
   Future<Either<FailureMessage, dynamic>> verifyOTP(
       VerifyOTPSchema verifySchema) async {
     try {
-      var result = await _authDataSource.verifyOTP(verifySchema);
+      final result = await _authDataSource.verifyOTP(verifySchema);
       return Right(result);
     } on Exception catch (e) {
       return Left(FailureMessage.fromException(e));
@@ -105,8 +105,8 @@ class AuthImplementation extends IAuthRepository {
   @override
   Future<Either<Failure, bool>> logOut() async {
     try {
-      var isFirstOpen = false;
-      var result = await isFirstOpenApp();
+      bool isFirstOpen = false;
+      final result = await isFirstOpenApp();
       result.fold((l) => null, (r) {
         isFirstOpen = !r;
       });
@@ -129,7 +129,7 @@ class AuthImplementation extends IAuthRepository {
   Future<Either<FailureMessage, SettingActiveCodeResponse>>
       fetchSettingActiveCode() async {
     try {
-      var result = await _authDataSource.getSettingActiveCode();
+      final result = await _authDataSource.getSettingActiveCode();
       return Right(result);
     } on Exception catch (e) {
       return Left(FailureMessage.fromException(e));
@@ -140,7 +140,7 @@ class AuthImplementation extends IAuthRepository {
   Future<Either<FailureMessage, UserInfoEntity>> signUp(
       SignUpSchema signUpSchema) async {
     try {
-      var result = await _authDataSource.signUp(signUpSchema);
+      final result = await _authDataSource.signUp(signUpSchema);
       _secureStorage.writeUser(result.data);
       return Right(result.data.toEntity());
     } on Exception catch (e) {
@@ -152,7 +152,7 @@ class AuthImplementation extends IAuthRepository {
   Future<Either<FailureMessage, CreatePasswordResponse>> createPassword(
       CreatePasswordSchema createPasswordSchema) async {
     try {
-      var result = await _authDataSource.createPassword(createPasswordSchema);
+      final result = await _authDataSource.createPassword(createPasswordSchema);
       'create success $result'.log;
       return Right(result);
     } on Exception catch (e) {
@@ -212,7 +212,7 @@ class AuthImplementation extends IAuthRepository {
   @override
   Future<Either<FailureMessage, bool>> isFirstOpenApp() async {
     try {
-      var result = await _secureStorage.isFirstOpenApp();
+      final result = await _secureStorage.isFirstOpenApp();
       return Right(result);
     } catch (e) {
       return Left(FailureMessage('$e'));

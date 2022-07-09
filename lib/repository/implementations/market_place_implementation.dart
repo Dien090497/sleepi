@@ -18,7 +18,7 @@ class TransactionImplementation extends IMarketPlaceRepository {
   Future<Either<Failure, ListMarketPlaceModel>> getListMarketPlace(
       MarketSchema params) async {
     try {
-      var result = await _authDataSource.getMarketPlace(params);
+      final result = await _authDataSource.getMarketPlace(params);
       return Right(result);
     } catch (e) {
       return Left(FailureMessage('$e'));
@@ -28,7 +28,7 @@ class TransactionImplementation extends IMarketPlaceRepository {
   Future<Either<Failure, ResultBuyModel>> postBuyNFT(
       int idNFT) async {
     try {
-      var result = await _authDataSource.buyNFT(BuyNFTSchema(idNFT));
+      final result = await _authDataSource.buyNFT(BuyNFTSchema(idNFT));
       return Right(result);
     } catch (e) {
       return Left(FailureMessage('$e'));

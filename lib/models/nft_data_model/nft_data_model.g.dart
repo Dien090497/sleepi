@@ -7,11 +7,14 @@ part of 'nft_data_model.dart';
 // **************************************************************************
 
 NftDataModel _$NftDataModelFromJson(Map<String, dynamic> json) => NftDataModel(
-      json['id'] as int,
-      json['categoryId'] as int,
-      json['isLock'] as int,
-      json['status'] as String,
-      NftAttributeModel.fromJson(json['attribute'] as Map<String, dynamic>),
+      json['id'] as int?,
+      json['categoryId'] as int?,
+      json['isLock'] as int?,
+      json['status'] as String?,
+      json['attribute'] == null
+          ? null
+          : NftAttributeModel.fromJson(
+              json['attribute'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$NftDataModelToJson(NftDataModel instance) =>
@@ -20,5 +23,5 @@ Map<String, dynamic> _$NftDataModelToJson(NftDataModel instance) =>
       'categoryId': instance.categoryId,
       'isLock': instance.isLock,
       'status': instance.status,
-      'attribute': instance.attribute.toJson(),
+      'attribute': instance.attribute?.toJson(),
     };

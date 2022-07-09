@@ -22,7 +22,7 @@ class ShowSeedPhraseScreen extends StatefulWidget {
 }
 
 class _ShowSeedPhraseScreenState extends State<ShowSeedPhraseScreen> {
-  var hide = true;
+  bool hide = true;
 
   List<String> seedPhrase = [];
 
@@ -67,7 +67,7 @@ class _ShowSeedPhraseScreenState extends State<ShowSeedPhraseScreen> {
                                 ),
                               ));
                     } else if (snapshot.hasData && snapshot.data!.isRight()) {
-                      var messages = '';
+                      String messages = '';
                       snapshot.data!.foldLeft(
                           FailureMessage, (previous, r) => messages = r);
                       return Center(

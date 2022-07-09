@@ -48,10 +48,10 @@ class UserBloc extends Bloc<UserEvent, UserState> {
   ];
 
   _onRefreshBalance(RefreshBalanceToken event, emit) async {
-    var currentState = state;
+    final currentState = state;
 
     if (currentState is UserLoaded) {
-      var balanceUC = await _fetchBalanceSpendingUC
+      final balanceUC = await _fetchBalanceSpendingUC
           .call('${currentState.userInfoEntity.id}');
 
       balanceUC.fold((l) {}, (r) {

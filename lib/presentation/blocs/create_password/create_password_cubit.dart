@@ -47,7 +47,7 @@ class CreatePasswordCubit extends Cubit<CreatePasswordState> {
   }
 
   _changePassword() async {
-    var result = await _changePasswordUC
+    final result = await _changePasswordUC
         .call(ChangePasswordSchema(email, otp, password, confirmPassword));
 
     result.fold((l) => emit(CreatePasswordState.errorCreate('$l')),
@@ -55,7 +55,7 @@ class CreatePasswordCubit extends Cubit<CreatePasswordState> {
   }
 
   _createPassCode() async {
-    var result = await _createPassCodeUC
+    final result = await _createPassCodeUC
         .call(CreatePasswordSchema(email, password, activeCode, otp));
 
     result.fold((l) => emit(CreatePasswordState.errorCreate('$l')), (r) async {
@@ -64,17 +64,14 @@ class CreatePasswordCubit extends Cubit<CreatePasswordState> {
   }
 
   bool _validatePassword() {
-    var message = password.validatePassword;
-    var messageConfirm = confirmPassword.validatePassword;
+    final message = password.validatePassword;
+    final messageConfirm = confirmPassword.validatePassword;
 
     if (message.isNotEmpty) {
       emit(CreatePasswordState.errorPassword(message));
       return false;
     }
-    if (messageConfirm.isNotEmpty) {
-      emit(CreatePasswordState.errorConfirmPassword(messageConfirm));
-      return false;
-    }
+
     if (confirmPassword.isEmpty) {
       emit(CreatePasswordState.errorConfirmPassword(
           LocaleKeys.this_field_is_required.tr()));
@@ -86,6 +83,10 @@ class CreatePasswordCubit extends Cubit<CreatePasswordState> {
       return false;
     }
 
+    if (messageConfirm.isNotEmpty) {
+      emit(CreatePasswordState.errorConfirmPassword(messageConfirm));
+      return false;
+    }
     return true;
   }
 

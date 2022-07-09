@@ -36,6 +36,7 @@ class _TransferListState extends State<TransferList> {
 
   @override
   void dispose() {
+    controller.dispose();
     super.dispose();
   }
 

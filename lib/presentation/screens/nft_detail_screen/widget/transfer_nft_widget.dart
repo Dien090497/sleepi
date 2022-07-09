@@ -74,7 +74,7 @@ class _ListTransferNftWidgetState extends State<ListTransferNftWidget> {
                         },
                         child: TransferNftWidget(
                           bedType: bedType,
-                          bedId: nft.attribute.tokenId,
+                          bedId: nft.attribute?.tokenId,
                         ),
                       );
                     },
@@ -99,7 +99,7 @@ class TransferNftWidget extends StatelessWidget {
   }) : super(key: key);
 
   final BedType bedType;
-  final BigInt bedId;
+  final BigInt? bedId;
 
   @override
   Widget build(BuildContext context) {

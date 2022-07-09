@@ -6,7 +6,6 @@ import 'package:slee_fi/common/widgets/background_widget.dart';
 import 'package:slee_fi/common/widgets/sf_alert_dialog.dart';
 import 'package:slee_fi/common/widgets/sf_back_button.dart';
 import 'package:slee_fi/common/widgets/sf_icon.dart';
-import 'package:slee_fi/entities/wallet_info/wallet_info_entity.dart';
 import 'package:slee_fi/models/pop_with_result.dart';
 import 'package:slee_fi/presentation/blocs/pending/pending_bloc.dart';
 import 'package:slee_fi/presentation/blocs/wallet/wallet_cubit.dart';
@@ -27,7 +26,6 @@ class WalletScreen extends StatefulWidget {
 
 class _WalletScreenState extends State<WalletScreen>
     with SingleTickerProviderStateMixin {
-  late int indexTap = 0;
   bool firstOpenWallet = true;
   final _pendingBloc = PendingBloc();
   final _historyBloc = PendingBloc();
@@ -113,9 +111,7 @@ class _WalletScreenState extends State<WalletScreen>
                               .pushNamed(R.passcode)
                               .then((value) {
                             if (value == true) {
-                              setState(() {
-                                firstOpenWallet = false;
-                              });
+                              firstOpenWallet = false;
                               controller.animateTo(1);
                             } else {
                               controller.animateTo(0);
@@ -160,8 +156,8 @@ class _WalletScreenState extends State<WalletScreen>
     if (value is PopWithResults) {
       context.read<WalletCubit>().init();
       controller.animateTo(1);
-      var cubit = context.read<WalletCubit>();
-      cubit.importWallet(value.results['data'] as WalletInfoEntity);
+      final cubit = context.read<WalletCubit>();
+      cubit.importWallet(value.results);
     }
   }
 }
