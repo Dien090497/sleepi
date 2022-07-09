@@ -81,6 +81,7 @@ Future<T?> showSignUpSuccess<T>(
       barrierColor: AppColors.backgroundDialog,
       builder: (context) {
         return SFDialog(
+          padding: EdgeInsets.zero,
           children: [
             Align(
               alignment: Alignment.centerRight,

@@ -87,13 +87,6 @@ class Const {
     },
   ];
 
-  static const listTokenAddressTestNet = [
-    '0x2bB8Bc1C29F34f3795661452Bf806cB5D65DF8DC',
-    '0x41Dd35f9e440ADecB9A04fA839D0be2b19722Ade',
-    '0xd00ae08403B9bbb9124bB305C09058E32C39A48c',
-    '0x950C6F4F97DD62bd3cA76f084663224FD2E6b555'
-  ];
-
   static const listTokenAddressesMainNet = [
     '0xB97EF9Ef8734C71904D8002F8b6Bc66Dd9c48a6E',
     '0xB97EF9Ef8734C71904D8002F8b6Bc66Dd9c48a6E',
@@ -101,10 +94,24 @@ class Const {
     '0xB97EF9Ef8734C71904D8002F8b6Bc66Dd9c48a6E'
   ];
 
+  static const listTokenAddressTestNet = [
+    '0x2bB8Bc1C29F34f3795661452Bf806cB5D65DF8DC',
+    '0x41Dd35f9e440ADecB9A04fA839D0be2b19722Ade',
+    '0xd00ae08403B9bbb9124bB305C09058E32C39A48c',
+    '0x950C6F4F97DD62bd3cA76f084663224FD2E6b555'
+  ];
+
   static const listNFTAddressTestNet = [
-    '0x29285b806CF63b5C595BAf6FfAb27b6b70d2E01F',
-    '0x198a7b705B833eB24f6A27F1ee96b385A49B8a4b',
-    '0x21AD1AE2f45e72cC92E1f3B74c184F8De2e2DBa6',
+    '0xec2341eCA6100178D356666892852e96D07c67D2',
+    '0x04a4339CD0BBB87869E7eAdDAc758586be079b9E',
+    '0x263856B798C6De9fC49480b3687a7B625CAC585E',
+    '0xe019864178C81547aA099cE5b612766eBC126929',
+  ];
+
+  static const listNFTAddressMainNet = [
+    '',
+    '',
+    '',
     '',
   ];
 
@@ -112,13 +119,6 @@ class Const {
     'txlist',
     'tokentx',
     'tokennfttx',
-  ];
-
-  static const listNFTAddressesMainNet = [
-    '',
-    '',
-    '',
-    '',
   ];
 
   static const isoLangs = {
