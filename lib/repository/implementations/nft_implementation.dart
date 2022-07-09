@@ -36,8 +36,11 @@ class NFTImplementation extends INFTRepository {
     required int start,
   }) async {
     try {
+      final balance = await _nftDataSource.balanceOf(nftAddress, ownerAddress);
+      final countBI = BigInt.from(count);
+      final c = countBI <= balance ? countBI : balance;
       return Right(await _nftDataSource.tokensOf(
-          nftAddress, ownerAddress, count, start));
+          nftAddress, ownerAddress, c, BigInt.from(start)));
     } catch (e) {
       return Left(FailureMessage('$e'));
     }
