@@ -68,14 +68,15 @@ enum NftType {
 
 enum MessageType { error, success }
 
-enum ItemNFT {
+enum AttributeNFT {
   efficiency('efficiency'),
   luck('luck'),
   bonus('luck'),
   special('special'),
-  resilience('resilience');
+  resilience('resilience'),
+  none('');
 
-  const ItemNFT(this.name);
+  const AttributeNFT(this.name);
 
   final String name;
 

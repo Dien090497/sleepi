@@ -149,7 +149,7 @@ abstract class AuthDataSource {
     @Query('limit') int limit,
     @Query('page') int page,
     @Query('categoryId') int categoryId,
-    @Query('item') ItemNFT itemNFT,
+    @Query('item') AttributeNFT itemNFT,
   );
 
   @GET('/nft-attributes/list-jewels')
