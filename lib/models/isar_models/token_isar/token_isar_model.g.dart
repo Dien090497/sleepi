@@ -6,7 +6,7 @@ part of 'token_isar_model.dart';
 // IsarCollectionGenerator
 // **************************************************************************
 
-// ignore_for_file: duplicate_ignore, non_constant_identifier_names, constant_identifier_names, invalid_use_of_protected_member, unnecessary_cast, unused_local_finaliable
+// ignore_for_file: duplicate_ignore, non_constant_identifier_names, constant_identifier_names, invalid_use_of_protected_member, unnecessary_cast, unused_local_variable
 
 extension GetTokenIsarModelCollection on Isar {
   IsarCollection<TokenIsarModel> get tokens => getCollection();
@@ -69,7 +69,7 @@ void _tokenIsarModelSerializeNative(
     int staticSize,
     List<int> offsets,
     AdapterAlloc alloc) {
-  final dynamicSize = 0;
+  var dynamicSize = 0;
   final value0 = object.address;
   final _address = IsarBinaryWriter.utf8Encoder.convert(value0);
   dynamicSize += (_address.length) as int;
@@ -92,7 +92,7 @@ void _tokenIsarModelSerializeNative(
   final value7 = object.txns;
   dynamicSize += (value7.length) * 8;
   final bytesList7 = <IsarUint8List>[];
-  for (final str in value7) {
+  for (var str in value7) {
     final bytes = IsarBinaryWriter.utf8Encoder.convert(str);
     bytesList7.add(bytes);
     dynamicSize += bytes.length as int;

@@ -6,7 +6,7 @@ part of 'network_isar_model.dart';
 // IsarCollectionGenerator
 // **************************************************************************
 
-// ignore_for_file: duplicate_ignore, non_constant_identifier_names, constant_identifier_names, invalid_use_of_protected_member, unnecessary_cast, unused_local_finaliable
+// ignore_for_file: duplicate_ignore, non_constant_identifier_names, constant_identifier_names, invalid_use_of_protected_member, unnecessary_cast, unused_local_variable
 
 extension GetNetworkIsarModelCollection on Isar {
   IsarCollection<NetworkIsarModel> get networks => getCollection();
@@ -76,14 +76,14 @@ void _networkIsarModelSerializeNative(
     int staticSize,
     List<int> offsets,
     AdapterAlloc alloc) {
-  final dynamicSize = 0;
+  var dynamicSize = 0;
   final value0 = object.chain;
   final _chain = IsarBinaryWriter.utf8Encoder.convert(value0);
   dynamicSize += (_chain.length) as int;
   final value1 = object.faucets;
   dynamicSize += (value1.length) * 8;
   final bytesList1 = <IsarUint8List>[];
-  for (final str in value1) {
+  for (var str in value1) {
     final bytes = IsarBinaryWriter.utf8Encoder.convert(str);
     bytesList1.add(bytes);
     dynamicSize += bytes.length as int;
@@ -112,7 +112,7 @@ void _networkIsarModelSerializeNative(
   final value7 = object.rpc;
   dynamicSize += (value7.length) * 8;
   final bytesList7 = <IsarUint8List>[];
-  for (final str in value7) {
+  for (var str in value7) {
     final bytes = IsarBinaryWriter.utf8Encoder.convert(str);
     bytesList7.add(bytes);
     dynamicSize += bytes.length as int;

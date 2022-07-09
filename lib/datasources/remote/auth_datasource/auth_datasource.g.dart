@@ -64,7 +64,7 @@ class _AuthDataSource implements AuthDataSource {
                 .compose(_dio.options, '/users/balances',
                     queryParameters: queryParameters, data: _data)
                 .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = _result.data!
+    var value = _result.data!
         .map((dynamic i) => TokenSpending.fromJson(i as Map<String, dynamic>))
         .toList();
     return value;

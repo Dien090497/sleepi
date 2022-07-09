@@ -6,7 +6,7 @@ part of 'history_isar_model.dart';
 // IsarCollectionGenerator
 // **************************************************************************
 
-// ignore_for_file: duplicate_ignore, non_constant_identifier_names, constant_identifier_names, invalid_use_of_protected_member, unnecessary_cast, unused_local_finaliable
+// ignore_for_file: duplicate_ignore, non_constant_identifier_names, constant_identifier_names, invalid_use_of_protected_member, unnecessary_cast, unused_local_variable
 
 extension GetHistoryIsarModelCollection on Isar {
   IsarCollection<HistoryIsarModel> get history => getCollection();
@@ -59,7 +59,7 @@ void _historyIsarModelSerializeNative(
     int staticSize,
     List<int> offsets,
     AdapterAlloc alloc) {
-  final dynamicSize = 0;
+  var dynamicSize = 0;
   final value0 = object.addressTo;
   final _addressTo = IsarBinaryWriter.utf8Encoder.convert(value0);
   dynamicSize += (_addressTo.length) as int;
