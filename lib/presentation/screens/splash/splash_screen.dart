@@ -12,28 +12,31 @@ class SplashScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocListener<SplashCubit, SplashState>(
-      listener: (context, state) {
-        if (state is SplashDone) {
-          if (state.isSafeDevice) {
-            if (state.userInfoEntity != null) {
-              context.read<UserBloc>().add(UpdateUserOrListToken(
-                  userInfoEntity: state.userInfoEntity!,
-                  listTokens: state.listTokens));
-              Navigator.pushNamedAndRemoveUntil(
-                  context, R.bottomNavigation, (r) => false);
+    return BlocProvider(
+      create: (context) => SplashCubit()..init(),
+      child: BlocListener<SplashCubit, SplashState>(
+        listener: (context, state) {
+          if (state is SplashDone) {
+            if (state.isSafeDevice) {
+              if (state.userInfoEntity != null) {
+                context.read<UserBloc>().add(UpdateUserOrListToken(
+                    userInfoEntity: state.userInfoEntity!,
+                    listTokens: state.listTokens));
+                Navigator.pushNamedAndRemoveUntil(
+                    context, R.bottomNavigation, (r) => false);
+              } else {
+                Navigator.pushNamedAndRemoveUntil(
+                    context, R.loginSignUp, (r) => false);
+              }
             } else {
               Navigator.pushNamedAndRemoveUntil(
-                  context, R.loginSignUp, (r) => false);
+                  context, R.commingSoon, (r) => false);
             }
-          } else {
-            Navigator.pushNamedAndRemoveUntil(
-                context, R.commingSoon, (r) => false);
           }
-        }
-      },
-      child: const BackgroundWidget(
-        child: Center(child: SFLogo()),
+        },
+        child: const BackgroundWidget(
+          child: Center(child: SFLogo()),
+        ),
       ),
     );
   }
