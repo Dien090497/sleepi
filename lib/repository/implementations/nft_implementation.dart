@@ -146,7 +146,7 @@ class NFTImplementation extends INFTRepository {
       required Credentials credentials}) async {
     try {
       return Right(await _nftDataSource.transferFrom(
-        address: nftAddress,
+        nftAddress: nftAddress,
         from: ownerAddress,
         to: toAddress,
         tokenId: nftId,

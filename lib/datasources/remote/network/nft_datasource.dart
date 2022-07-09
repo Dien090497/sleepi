@@ -27,14 +27,14 @@ class NFTDataSource {
   Future<String> symbol(String address) => _nft(address).symbol();
 
   Future<String> transferFrom({
-    required String address,
+    required String nftAddress,
     required String from,
     required String to,
     required BigInt tokenId,
     required Credentials credentials,
   }) =>
-      _nft(address).transferFrom(
-          EthereumAddress.fromHex(from), EthereumAddress.fromHex(from), tokenId,
+      _nft(nftAddress).transferFrom(
+          EthereumAddress.fromHex(from), EthereumAddress.fromHex(to), tokenId,
           credentials: credentials);
 
   Future<String> setApprovalForAll({
@@ -104,7 +104,7 @@ class NFTDataSource {
         [
           ownerAddress,
           toAddress,
-          BigInt.from(12),
+          nftId,
         ],
       ),
     );
