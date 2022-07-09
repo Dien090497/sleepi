@@ -30,9 +30,9 @@ class TransactionRemoteDataSource{
 
     try {
       final transactionHash = await _historyDataSource.getHistoryFirst();
-      // var transactionInfo = await _web3dataSource.getDetailTransaction(transactionHash?.transactionHash);
-      var walletId = _getStorageDataSource.getCurrentWalletId();
-      var wallet = await _isarDataSource.getWalletAt(walletId);
+      // final transactionInfo = await _web3dataSource.getDetailTransaction(transactionHash?.transactionHash);
+      final walletId = _getStorageDataSource.getCurrentWalletId();
+      final wallet = await _isarDataSource.getWalletAt(walletId);
 
       if (wallet == null) {
         return const Left(FailureMessage('Invalid Wallet'));

@@ -30,8 +30,7 @@ extension NumX on num {
     if(this==0){
       return 0.toStringAsFixed(2);
     }else {
-      var balance = toDouble();
-      balance = (this / pow(10, 18));
+      final balance = (this / pow(10, 18));
       if (balance % 1 == 0) {
         return balance.toStringAsFixed(0);
       } else {
@@ -51,7 +50,7 @@ extension NumX on num {
     if(this==0){
       return 0.toStringAsFixed(2);
     }else {
-      var balance = toDouble();
+      final balance = toDouble();
       if (balance % 1 == 0) {
         return balance.toStringAsFixed(0);
       } else {

@@ -10,7 +10,6 @@ import 'package:cool_dropdown/utils/extension_util.dart';
 import 'package:flutter/material.dart';
 import 'package:slee_fi/common/extensions/string_x.dart';
 
-
 class CoolDropdown extends StatefulWidget {
   final List dropdownList;
   final Function onChange;
@@ -130,7 +129,7 @@ class CoolDropdown extends StatefulWidget {
       this.defaultValue = {};
     }
     // label unique 체크
-    for (var i = 0; i < dropdownList.length; i++) {
+    for (int i = 0; i < dropdownList.length; i++) {
       if (dropdownList[i]['label'] == null) {
         throw '"label" must be initialized.';
       }
@@ -175,12 +174,13 @@ class CoolDropdown extends StatefulWidget {
           borderRadius: BorderRadius.circular(10),
         );
     // text style 셋팅
-    this.selectedItemTS =
-        selectedItemTS ?? const TextStyle(color: Color(0xFF6FCC76), fontSize: 20);
-    this.unselectedItemTS = unselectedItemTS ?? const TextStyle(
-            fontSize: 20,
-            color: Colors.black,
-          );
+    this.selectedItemTS = selectedItemTS ??
+        const TextStyle(color: Color(0xFF6FCC76), fontSize: 20);
+    this.unselectedItemTS = unselectedItemTS ??
+        const TextStyle(
+          fontSize: 20,
+          color: Colors.black,
+        );
     this.resultTS = resultTS ??
         const TextStyle(
           fontSize: 20,
@@ -194,8 +194,7 @@ class CoolDropdown extends StatefulWidget {
           width: iconSize,
           height: iconSize,
           child: CustomPaint(
-            size: Size(
-                iconSize * 0.01, (iconSize * 0.01 * 1).toDouble()),
+            size: Size(iconSize * 0.01, (iconSize * 0.01 * 1).toDouble()),
             painter: DropdownArrow(),
           ),
         );
@@ -312,12 +311,14 @@ class CoolDropdownState extends State<CoolDropdown>
   void initState() {
     rotationController = AnimationController(
         duration: au.isAnimation(
-            status: widget.isAnimation, duration: const Duration(milliseconds: 150)),
+            status: widget.isAnimation,
+            duration: const Duration(milliseconds: 150)),
         vsync: this);
     sizeController = AnimationController(
         vsync: this,
         duration: au.isAnimation(
-            status: widget.isAnimation, duration: const Duration(milliseconds: 150)));
+            status: widget.isAnimation,
+            duration: const Duration(milliseconds: 150)));
     textWidth = CurvedAnimation(
       parent: sizeController,
       curve: Curves.fastOutSlowIn,

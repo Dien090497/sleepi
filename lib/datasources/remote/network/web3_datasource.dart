@@ -39,13 +39,13 @@ class Web3DataSource {
   }
 
   Future<BigInt> getBalanceOf(String address, String contractAddress) async {
-    var contract = token(contractAddress);
-    var balance = await contract.balanceOf(EthereumAddress.fromHex(address));
+    final contract = token(contractAddress);
+    final balance = await contract.balanceOf(EthereumAddress.fromHex(address));
     return balance;
   }
 
   Future<BigInt> getDecimals(String address) async {
-    var contract = token(address);
+    final contract = token(address);
     return await contract.decimals();
   }
 
@@ -120,11 +120,11 @@ class Web3DataSource {
                   contractAddressFrom != avaxContractAddress)
               ? [from, EthereumAddress.fromHex(avaxContractAddress), to]
               : [from, to];
-      var decimalFrom = await getDecimals(contractAddressFrom);
+      final decimalFrom = await getDecimals(contractAddressFrom);
       final List<BigInt> amounts = await contract.getAmountsOut(
           BigInt.from(value * math.pow(10, decimalFrom.toInt())), pairAddress);
 
-      var decimalTo = await getDecimals(contractAddressTo);
+      final decimalTo = await getDecimals(contractAddressTo);
       return (amounts[amounts.length - 1] -
               BigInt.from((amounts[amounts.length - 1].toInt() * 0.01) / 100)) /
           BigInt.from(math.pow(10, decimalTo.toInt()));
@@ -180,13 +180,13 @@ class Web3DataSource {
       String contractAddress, Credentials credentials) async {
     final contract = token(contractAddress);
     double amount = 0;
-    for (var element in Const.tokens) {
+    for (final element in Const.tokens) {
       if (element['address'].toString().toLowerCase() ==
           contractAddress.toLowerCase()) {
         amount = double.parse(element['totalSupply'].toString());
       }
     }
-    var decimal = await contract.decimals();
+    final decimal = await contract.decimals();
     await contract.approve(EthereumAddress.fromHex(Const.contractRouterTestNet),
         BigInt.from(amount) * BigInt.from(math.pow(10, decimal.toInt())),
         credentials: credentials);
@@ -207,7 +207,7 @@ class Web3DataSource {
       EthereumAddress fromToken = EthereumAddress.fromHex(contractAddress);
 
       final List<EthereumAddress> pairAddress = [fromToken, toToken];
-      var decimalFrom = await getDecimals(contractAddress);
+      final decimalFrom = await getDecimals(contractAddress);
       final List<BigInt> amountsOut = await contract.getAmountsOut(
           BigInt.from(
               value * BigInt.from(math.pow(10, decimalFrom.toInt())).toInt()),
@@ -267,7 +267,7 @@ class Web3DataSource {
         EthereumAddress.fromHex(avaxContractAddress),
         toToken
       ];
-      var decimalFrom = await getDecimals(contractAddressFrom);
+      final decimalFrom = await getDecimals(contractAddressFrom);
       final List<BigInt> amounts = await contract.getAmountsOut(
           BigInt.from(
               value * BigInt.from(math.pow(10, decimalFrom.toInt())).toInt()),

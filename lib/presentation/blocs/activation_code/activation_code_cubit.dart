@@ -36,7 +36,7 @@ class ActivationCodeCubit extends Cubit<ActivationCodeState> {
       }
     }
 
-    var result = await _checkActivationCodeUC.call(activationCode);
+    final result = await _checkActivationCodeUC.call(activationCode);
     result.fold((l) {
       emit(ActivationCodeState.error(LocaleKeys.invalid_code.tr()));
     }, (r) {

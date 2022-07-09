@@ -16,7 +16,7 @@ TransferSpendingEntity _$TransferSpendingEntityFromJson(
 Map<String, dynamic> _$TransferSpendingEntityToJson(
         TransferSpendingEntity instance) =>
     <String, dynamic>{
-      'type': _$TokenToSpendingEnumMap[instance.type],
+      'type': _$TokenToSpendingEnumMap[instance.type]!,
       'txHash': instance.txHash,
     };
 

@@ -1,3 +1,5 @@
+import 'dart:developer' as d;
+
 import 'package:easy_localization/easy_localization.dart';
 import 'package:eip55/eip55.dart';
 import 'package:flutter/foundation.dart';
@@ -6,7 +8,6 @@ import 'package:recase/recase.dart';
 import 'package:slee_fi/common/enum/enum.dart';
 import 'package:slee_fi/l10n/locale_keys.g.dart';
 import 'package:slee_fi/resources/resources.dart';
-import 'dart:developer' as d;
 
 extension StringX on String {
   String get cryptoIcon => CryptoIcons.values.firstWhere(
@@ -63,7 +64,7 @@ extension StringX on String {
     String pattern =
         r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~]).{8,}$';
     RegExp regExp = RegExp(pattern);
-    var result = regExp.hasMatch(this);
+    final result = regExp.hasMatch(this);
     if (!result) {
       return LocaleKeys.password_must_be_at_least_6.tr();
     }

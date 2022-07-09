@@ -28,7 +28,7 @@ class CreatePasscodeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final args =
         ModalRoute.of(context)?.settings.arguments as CreatePasscodeArguments?;
-    TextEditingController passCodeController = TextEditingController();
+    final TextEditingController passCodeController = TextEditingController();
 
     return BlocProvider(
       create: (BuildContext context) => PasscodeCubit(),

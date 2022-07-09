@@ -73,7 +73,7 @@ class _TransactionDetailListState extends State<TransactionDetailList> {
                   padding: const EdgeInsets.symmetric(
                       horizontal: 24.0, vertical: 12.0),
                   itemBuilder: (BuildContext context, int index) {
-                    // var value = transactionList[index].valueInEther;
+                    // final value = transactionList[index].valueInEther;
                     // double? valueInEther;
                     // if(value != null) {
                     //   valueInEther = (value.getInWei / BigInt.from(pow(10, 18)));
