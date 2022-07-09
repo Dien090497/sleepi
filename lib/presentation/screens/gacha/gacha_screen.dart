@@ -16,6 +16,12 @@ class _GachaScreenState extends State<GachaScreen> {
   final RefreshController _refreshController =
       RefreshController(initialRefresh: false);
 
+  @override
+  void dispose() {
+    _refreshController.dispose();
+    super.dispose();
+  }
+
   void _onRefresh() async {
     await Future.delayed(const Duration(milliseconds: 1000));
     _refreshController.refreshCompleted();
@@ -33,7 +39,6 @@ class _GachaScreenState extends State<GachaScreen> {
             child: SmartRefresher(
               controller: _refreshController,
               enablePullDown: true,
-              header: const WaterDropHeader(),
               onRefresh: _onRefresh,
               child: ListView(
                 physics: const ScrollPhysics(),

@@ -38,8 +38,21 @@ class NFTDetailArguments {
   NFTDetailArguments(this.tokenEntity, this.walletCubit);
 }
 
-class NFTDetailScreen extends StatelessWidget {
+class NFTDetailScreen extends StatefulWidget {
   const NFTDetailScreen({Key? key}) : super(key: key);
+
+  @override
+  State<NFTDetailScreen> createState() => _NFTDetailScreenState();
+}
+
+class _NFTDetailScreenState extends State<NFTDetailScreen> {
+  final refreshController = RefreshController();
+
+  @override
+  void dispose() {
+    refreshController.dispose();
+    super.dispose();
+  }
 
   void _showTransferDialog(
     BuildContext context, {
@@ -119,7 +132,7 @@ class NFTDetailScreen extends StatelessWidget {
     final args =
         ModalRoute.of(context)?.settings.arguments as NFTDetailArguments;
     final token = args.tokenEntity;
-    final refreshController = RefreshController();
+
     final nftDetailCubit = NftDetailCubit();
 
     return BlocBuilder<WalletCubit, WalletState>(

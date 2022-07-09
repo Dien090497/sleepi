@@ -41,10 +41,15 @@ class _TabWalletDetailState extends State<TabWalletDetail> {
   String currencySymbol = '';
   String addressWallet = '';
   List<TokenEntity> tokenList = [];
-  late RefreshController refreshController = RefreshController();
+  final RefreshController refreshController = RefreshController();
 
-  void _onRefresh(
-      RefreshController refreshController, WalletCubit walletCubit) async {
+  @override
+  void dispose() {
+    refreshController.dispose();
+    super.dispose();
+  }
+
+  void _onRefresh(WalletCubit walletCubit) async {
     await walletCubit.init();
     refreshController.refreshCompleted();
   }
@@ -88,7 +93,7 @@ class _TabWalletDetailState extends State<TabWalletDetail> {
             enablePullDown: true,
             header: const WaterDropHeader(),
             onRefresh: () {
-              _onRefresh(refreshController, walletCubit);
+              _onRefresh(walletCubit);
             },
             child: SingleChildScrollView(
               child: Column(
@@ -159,7 +164,6 @@ class _TabWalletDetailState extends State<TabWalletDetail> {
                                   arguments:
                                       TransferScreenArg(tokenList[2], false),
                                 );
-
                               },
                               text: LocaleKeys.to_spending,
                               assetImage: Ics.icRefresh,
