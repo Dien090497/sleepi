@@ -17,6 +17,7 @@ import 'package:slee_fi/models/refresh_token_model/refresh_token_model.dart';
 import 'package:slee_fi/models/send_email_response/send_email_response.dart';
 import 'package:slee_fi/models/setting_active_code_response/setting_active_code_response.dart';
 import 'package:slee_fi/models/sign_in_response/sign_in_response.dart';
+import 'package:slee_fi/models/staking_info_response/staking_info_response.dart';
 import 'package:slee_fi/models/staking_response/staking_response.dart';
 import 'package:slee_fi/models/swap_token_to_wallet_response/swap_token_to_wallet_response.dart';
 import 'package:slee_fi/models/token_spending/token_spending.dart';
@@ -31,7 +32,6 @@ import 'package:slee_fi/schema/market/market_schema.dart';
 import 'package:slee_fi/schema/refresh_token_schema/refresh_token_schema.dart';
 import 'package:slee_fi/schema/sign_in_schema/sign_in_schema.dart';
 import 'package:slee_fi/schema/sign_up_schema/sign_up_schema.dart';
-import 'package:slee_fi/schema/unstacking_schema/unstacking_schema.dart';
 import 'package:slee_fi/schema/stacking_schema/stacking_schema.dart';
 import 'package:slee_fi/schema/verify_schema/verify_schema.dart';
 import 'package:slee_fi/schema/verify_user_schema/verify_user_schema.dart';
@@ -116,6 +116,9 @@ abstract class AuthDataSource {
   @POST('/stacking')
   Future<StakingResponse> stacking(@Body() StackingSchema stackingSchema);
 
+  @GET('/stacking')
+  Future<StakingInfoResponse> getStakingInfo();
+  
   // @GET('/tx-history/pending')
   // Future<dynamic> fetchSpendingPending(
   //   @Query('userId') int userId,
@@ -174,5 +177,8 @@ abstract class AuthDataSource {
   );
 
   @POST('/stacking/unstacking')
-  Future<ListMarketPlaceModel> unstacking(@Body() UnStackingSchema unStaking);
+  Future<dynamic> unStacking();
+
+  @POST('/stacking/compound')
+  Future<dynamic> compound();
 }
