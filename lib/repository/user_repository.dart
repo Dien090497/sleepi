@@ -8,6 +8,7 @@ import 'package:slee_fi/models/global_config_response/global_config_response.dar
 import 'package:slee_fi/models/withdraw_history_response/withdraw_history_response.dart';
 import 'package:slee_fi/schema/change_password_schema/change_password_schema.dart';
 import 'package:slee_fi/schema/white_draw_token_schema/whit_draw_token_schema.dart';
+import 'package:slee_fi/usecase/estimate_gas_withdraw.dart';
 import 'package:slee_fi/usecase/withdraw_history_usecase.dart';
 
 abstract class IUserRepository {
@@ -25,4 +26,6 @@ abstract class IUserRepository {
   Future<Either<FailureMessage, GlobalConfigResponse>> getGlobalConfig();
 
   Future<Either<FailureMessage, WithdrawHistoryResponse>> withdrawHistory(WithdrawParam withdrawParam);
+
+  Future<Either<FailureMessage, double>> estimateGasWithdraw(EstimateGasWithdrawParam estimateParam);
 }
