@@ -9,7 +9,7 @@ class PendingBloc extends Bloc<PendingEvent, PendingState> {
   PendingBloc()
       : super(const PendingState.loaded(PendingStatus.initial, [], false)) {
     on<PendingFetched>(_fetch);
-
+    on<PendingRefresh>(_refresh);
     on<PendingInit>(_onInit);
   }
 
@@ -24,6 +24,13 @@ class PendingBloc extends Bloc<PendingEvent, PendingState> {
   _onInit(PendingInit event, Emitter<PendingState> emit) {
     userId = event.userId;
     attributeWithdraw = event.attributeWithdraw;
+    add(PendingFetched());
+  }
+
+  _refresh(PendingRefresh event, Emitter<PendingState> emit) {
+    emit(state.copyWith(
+        status: PendingStatus.initial, list: [], hasReachedMax: false));
+    _currentPage = 1;
     add(PendingFetched());
   }
 
@@ -57,6 +64,4 @@ class PendingBloc extends Bloc<PendingEvent, PendingState> {
       );
     }
   }
-
-
 }

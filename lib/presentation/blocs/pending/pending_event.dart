@@ -22,3 +22,8 @@ class PendingInit extends PendingEvent {
   @override
   List<Object> get props => [userId, attributeWithdraw];
 }
+
+class PendingRefresh extends PendingEvent {
+  @override
+  List<Object> get props => [];
+}

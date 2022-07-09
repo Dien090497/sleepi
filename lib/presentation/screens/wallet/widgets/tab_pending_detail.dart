@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:slee_fi/common/const/const.dart';
 import 'package:slee_fi/common/enum/enum.dart';
 import 'package:slee_fi/common/extensions/string_x.dart';
@@ -36,7 +37,7 @@ class TabPendingDetail extends StatefulWidget {
 class _TabPendingDetailState extends State<TabPendingDetail> {
   final _scrollController = ScrollController();
   final _dateTimeUtils = getIt<DateTimeUtils>();
-
+  final RefreshController refreshController = RefreshController();
 
   @override
   void initState() {
@@ -58,9 +59,7 @@ class _TabPendingDetailState extends State<TabPendingDetail> {
 
   @override
   Widget build(BuildContext context) {
-    final userState = context
-        .read<UserBloc>()
-        .state;
+    final userState = context.read<UserBloc>().state;
     return Column(
       children: [
         Expanded(
@@ -97,21 +96,31 @@ class _TabPendingDetailState extends State<TabPendingDetail> {
                   ),
                 );
               }
-              return ListView.builder(
-                itemCount: state.list.length + 1,
-                controller: _scrollController,
-                physics: const BouncingScrollPhysics(),
-                shrinkWrap: true,
-                padding: const EdgeInsets.symmetric(horizontal: 24.0),
-                itemBuilder: (BuildContext context, int index) =>
-                index < state.list.length
-                    ? _buildItem(state.list[index])
-                    : Container(
-                    height: 60,
-                    alignment: Alignment.center,
-                    child: state.hasReachedMax
-                        ? const SizedBox()
-                        : const CircularProgressIndicator()),
+              return SmartRefresher(
+                controller: refreshController,
+                enablePullDown: true,
+                header: const WaterDropHeader(),
+                onRefresh: () async {
+                  widget.pendingBloc.add(PendingRefresh());
+                  await Future.delayed(const Duration(milliseconds: 1000));
+                  refreshController.loadComplete();
+                },
+                child: ListView.builder(
+                  itemCount: state.list.length + 1,
+                  controller: _scrollController,
+                  physics: const BouncingScrollPhysics(),
+                  shrinkWrap: true,
+                  padding: const EdgeInsets.symmetric(horizontal: 24.0),
+                  itemBuilder: (BuildContext context, int index) =>
+                      index < state.list.length
+                          ? _buildItem(state.list[index])
+                          : Container(
+                              height: 60,
+                              alignment: Alignment.center,
+                              child: state.hasReachedMax
+                                  ? const SizedBox()
+                                  : const CircularProgressIndicator()),
+                ),
               );
             },
           ),
@@ -123,6 +132,7 @@ class _TabPendingDetailState extends State<TabPendingDetail> {
 
   @override
   void dispose() {
+    refreshController.dispose();
     _scrollController
       ..removeListener(_onScroll)
       ..dispose();
@@ -151,35 +161,35 @@ class _TabPendingDetailState extends State<TabPendingDetail> {
           ),
           Expanded(
               child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  SFText(
-                    keyText: LocaleKeys.confirm,
-                    style: TextStyles.bold16Blue,
-                  ),
-                  const SizedBox(height: 4.0),
-                  SFText(
-                    keyText: _dateTimeUtils.ddMMyyyyHHmm(
-                        DateTime.parse(withdrawEntity.time)),
-                    style: TextStyles.lightGrey14,
-                  ),
-                ],
-              )),
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              SFText(
+                keyText: LocaleKeys.confirm,
+                style: TextStyles.bold16Blue,
+              ),
+              const SizedBox(height: 4.0),
+              SFText(
+                keyText: _dateTimeUtils
+                    .ddMMyyyyHHmm(DateTime.parse(withdrawEntity.time)),
+                style: TextStyles.lightGrey14,
+              ),
+            ],
+          )),
           Expanded(
               child: Column(
-                crossAxisAlignment: CrossAxisAlignment.end,
-                children: [
-                  SFText(
-                    keyText: withdrawEntity.amount,
-                    style: TextStyles.bold16Blue,
-                  ),
-                  const SizedBox(height: 4.0),
-                  SFText(
-                    keyText: withdrawEntity.txHash.formatAddress,
-                    style: TextStyles.lightGrey14,
-                  ),
-                ],
-              )),
+            crossAxisAlignment: CrossAxisAlignment.end,
+            children: [
+              SFText(
+                keyText: withdrawEntity.amount,
+                style: TextStyles.bold16Blue,
+              ),
+              const SizedBox(height: 4.0),
+              SFText(
+                keyText: withdrawEntity.txHash.formatAddress,
+                style: TextStyles.lightGrey14,
+              ),
+            ],
+          )),
         ],
       ),
     );

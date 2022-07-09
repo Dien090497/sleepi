@@ -29,7 +29,6 @@ class PopUpBedMarketPlace extends StatelessWidget {
   final VoidCallback onConfirmTap;
 
   void _showConfirmDialog(BuildContext context, MarketPlaceModel bed) {
-    Navigator.pop(context);
     showCustomAlertDialog(
       context,
       padding: const EdgeInsets.all(24),
