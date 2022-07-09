@@ -359,6 +359,27 @@ class _AuthDataSource implements AuthDataSource {
   }
 
   @override
+  Future<double> estimateGasWithdraw(
+      type, contractAddress, tokenId, amountWithdraw) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{
+      r'type': type,
+      r'contractAddress': contractAddress,
+      r'tokenId': tokenId,
+      r'amountWithdraw': amountWithdraw
+    };
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    final _result = await _dio.fetch<double>(_setStreamType<double>(
+        Options(method: 'GET', headers: _headers, extra: _extra)
+            .compose(_dio.options, '/withdraw/estimate-gas',
+                queryParameters: queryParameters, data: _data)
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = _result.data!;
+    return value;
+  }
+
+  @override
   Future<dynamic> withdrawNFT(whitDrawNFTSchema) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
