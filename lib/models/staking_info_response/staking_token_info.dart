@@ -1,10 +1,10 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:json_annotation/json_annotation.dart';
 
-part 'stake_info.g.dart';
+part 'staking_token_info.g.dart';
 
 @JsonSerializable()
-class StakeInfo {
+class StakeTokenInfo {
   final int id;
   final int userId;
   final String totalStake;
@@ -16,7 +16,7 @@ class StakeInfo {
   final String createdAt;
   final String updatedAt;
 
-  StakeInfo({
+  StakeTokenInfo({
     required this.id,
     required this.userId,
     required this.totalStake,
@@ -29,9 +29,9 @@ class StakeInfo {
     required this.updatedAt,
   });
 
-  factory StakeInfo.fromJson(Map<String, dynamic> json) =>
-      _$StakeInfoFromJson(json);
+  factory StakeTokenInfo.fromJson(Map<String, dynamic> json) =>
+      _$StakeTokenInfoFromJson(json);
 
-  Map<String, dynamic> toJson() => _$StakeInfoToJson(this);
+  Map<String, dynamic> toJson() => _$StakeTokenInfoToJson(this);
 
 }

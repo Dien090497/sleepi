@@ -1,9 +1,6 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:json_annotation/json_annotation.dart';
-import 'package:slee_fi/entities/staking/staking_entity.dart';
 import 'package:slee_fi/models/staking_info_response/stake_info.dart';
-import 'package:slee_fi/models/staking_response/stack_campaigns.dart';
-import 'package:slee_fi/models/staking_response/stack_details.dart';
 
 part 'staking_info_response.g.dart';
 
