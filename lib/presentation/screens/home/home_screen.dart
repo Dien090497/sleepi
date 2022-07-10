@@ -4,13 +4,11 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
 import 'package:slee_fi/common/utils/launch_url_utils.dart';
-import 'package:slee_fi/common/widgets/loading_screen.dart';
 import 'package:slee_fi/common/widgets/sf_icon.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
 import 'package:slee_fi/common/widgets/topbar_common.dart';
 import 'package:slee_fi/l10n/locale_keys.g.dart';
 import 'package:slee_fi/presentation/blocs/home/home_bloc.dart';
-import 'package:slee_fi/presentation/blocs/home/home_state.dart';
 import 'package:slee_fi/presentation/screens/home/widgets/alarm_bell.dart';
 import 'package:slee_fi/presentation/screens/home/widgets/home_switch.dart';
 import 'package:slee_fi/presentation/screens/home/widgets/middle_bed.dart';
@@ -26,6 +24,7 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   final RefreshController refreshController = RefreshController();
+  final HomeBloc _homeBloc = HomeBloc();
 
   @override
   void dispose() {
@@ -34,6 +33,7 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   void _onRefresh(RefreshController refreshController) async {
+    _homeBloc.add(RefreshBed());
     await Future.delayed(const Duration(milliseconds: 1000));
     refreshController.refreshCompleted();
   }
@@ -41,7 +41,7 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (_) => HomeBloc()..add(const FetchData()),
+      create: (_) => _homeBloc..add(const FetchData()),
       child: SafeArea(
         bottom: false,
         child: Column(
@@ -66,14 +66,12 @@ class _HomeScreenState extends State<HomeScreen> {
                     const UseItem(),
                     const SizedBox(height: 24),
                     Padding(
-                      padding:
-                      const EdgeInsets.symmetric(horizontal: 16.0),
+                      padding: const EdgeInsets.symmetric(horizontal: 16.0),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Row(
-                            mainAxisAlignment:
-                            MainAxisAlignment.spaceBetween,
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Text(
                                 '${LocaleKeys.insurance.tr()}: 5%',
@@ -93,8 +91,7 @@ class _HomeScreenState extends State<HomeScreen> {
                               launchInsurance(context);
                             },
                             child: Row(
-                              crossAxisAlignment:
-                              CrossAxisAlignment.center,
+                              crossAxisAlignment: CrossAxisAlignment.center,
                               children: [
                                 SFText(
                                   keyText: LocaleKeys.what_is_insurance,

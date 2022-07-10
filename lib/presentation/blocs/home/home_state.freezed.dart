@@ -20,7 +20,9 @@ mixin _$HomeState {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(List<BedEntity> bedList) loaded,
+    required TResult Function(List<BedEntity> bedList, int id, int level,
+            int durability, int time)
+        loaded,
     required TResult Function(String message) error,
   }) =>
       throw _privateConstructorUsedError;
@@ -28,7 +30,9 @@ mixin _$HomeState {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(List<BedEntity> bedList)? loaded,
+    TResult Function(List<BedEntity> bedList, int id, int level, int durability,
+            int time)?
+        loaded,
     TResult Function(String message)? error,
   }) =>
       throw _privateConstructorUsedError;
@@ -36,7 +40,9 @@ mixin _$HomeState {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(List<BedEntity> bedList)? loaded,
+    TResult Function(List<BedEntity> bedList, int id, int level, int durability,
+            int time)?
+        loaded,
     TResult Function(String message)? error,
     required TResult orElse(),
   }) =>
@@ -131,7 +137,9 @@ class _$HomeInitial with DiagnosticableTreeMixin implements HomeInitial {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(List<BedEntity> bedList) loaded,
+    required TResult Function(List<BedEntity> bedList, int id, int level,
+            int durability, int time)
+        loaded,
     required TResult Function(String message) error,
   }) {
     return initial();
@@ -142,7 +150,9 @@ class _$HomeInitial with DiagnosticableTreeMixin implements HomeInitial {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(List<BedEntity> bedList)? loaded,
+    TResult Function(List<BedEntity> bedList, int id, int level, int durability,
+            int time)?
+        loaded,
     TResult Function(String message)? error,
   }) {
     return initial?.call();
@@ -153,7 +163,9 @@ class _$HomeInitial with DiagnosticableTreeMixin implements HomeInitial {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(List<BedEntity> bedList)? loaded,
+    TResult Function(List<BedEntity> bedList, int id, int level, int durability,
+            int time)?
+        loaded,
     TResult Function(String message)? error,
     required TResult orElse(),
   }) {
@@ -253,7 +265,9 @@ class _$HomeLoading with DiagnosticableTreeMixin implements HomeLoading {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(List<BedEntity> bedList) loaded,
+    required TResult Function(List<BedEntity> bedList, int id, int level,
+            int durability, int time)
+        loaded,
     required TResult Function(String message) error,
   }) {
     return loading();
@@ -264,7 +278,9 @@ class _$HomeLoading with DiagnosticableTreeMixin implements HomeLoading {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(List<BedEntity> bedList)? loaded,
+    TResult Function(List<BedEntity> bedList, int id, int level, int durability,
+            int time)?
+        loaded,
     TResult Function(String message)? error,
   }) {
     return loading?.call();
@@ -275,7 +291,9 @@ class _$HomeLoading with DiagnosticableTreeMixin implements HomeLoading {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(List<BedEntity> bedList)? loaded,
+    TResult Function(List<BedEntity> bedList, int id, int level, int durability,
+            int time)?
+        loaded,
     TResult Function(String message)? error,
     required TResult orElse(),
   }) {
@@ -332,7 +350,8 @@ abstract class _$$HomeLoadedCopyWith<$Res> {
   factory _$$HomeLoadedCopyWith(
           _$HomeLoaded value, $Res Function(_$HomeLoaded) then) =
       __$$HomeLoadedCopyWithImpl<$Res>;
-  $Res call({List<BedEntity> bedList});
+  $Res call(
+      {List<BedEntity> bedList, int id, int level, int durability, int time});
 }
 
 /// @nodoc
@@ -348,12 +367,32 @@ class __$$HomeLoadedCopyWithImpl<$Res> extends _$HomeStateCopyWithImpl<$Res>
   @override
   $Res call({
     Object? bedList = freezed,
+    Object? id = freezed,
+    Object? level = freezed,
+    Object? durability = freezed,
+    Object? time = freezed,
   }) {
     return _then(_$HomeLoaded(
       bedList: bedList == freezed
           ? _value._bedList
           : bedList // ignore: cast_nullable_to_non_nullable
               as List<BedEntity>,
+      id: id == freezed
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as int,
+      level: level == freezed
+          ? _value.level
+          : level // ignore: cast_nullable_to_non_nullable
+              as int,
+      durability: durability == freezed
+          ? _value.durability
+          : durability // ignore: cast_nullable_to_non_nullable
+              as int,
+      time: time == freezed
+          ? _value.time
+          : time // ignore: cast_nullable_to_non_nullable
+              as int,
     ));
   }
 }
@@ -361,7 +400,12 @@ class __$$HomeLoadedCopyWithImpl<$Res> extends _$HomeStateCopyWithImpl<$Res>
 /// @nodoc
 
 class _$HomeLoaded with DiagnosticableTreeMixin implements HomeLoaded {
-  const _$HomeLoaded({required final List<BedEntity> bedList})
+  const _$HomeLoaded(
+      {required final List<BedEntity> bedList,
+      required this.id,
+      required this.level,
+      required this.durability,
+      required this.time})
       : _bedList = bedList;
 
   final List<BedEntity> _bedList;
@@ -372,8 +416,17 @@ class _$HomeLoaded with DiagnosticableTreeMixin implements HomeLoaded {
   }
 
   @override
+  final int id;
+  @override
+  final int level;
+  @override
+  final int durability;
+  @override
+  final int time;
+
+  @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'HomeState.loaded(bedList: $bedList)';
+    return 'HomeState.loaded(bedList: $bedList, id: $id, level: $level, durability: $durability, time: $time)';
   }
 
   @override
@@ -381,7 +434,11 @@ class _$HomeLoaded with DiagnosticableTreeMixin implements HomeLoaded {
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty('type', 'HomeState.loaded'))
-      ..add(DiagnosticsProperty('bedList', bedList));
+      ..add(DiagnosticsProperty('bedList', bedList))
+      ..add(DiagnosticsProperty('id', id))
+      ..add(DiagnosticsProperty('level', level))
+      ..add(DiagnosticsProperty('durability', durability))
+      ..add(DiagnosticsProperty('time', time));
   }
 
   @override
@@ -389,12 +446,22 @@ class _$HomeLoaded with DiagnosticableTreeMixin implements HomeLoaded {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$HomeLoaded &&
-            const DeepCollectionEquality().equals(other._bedList, _bedList));
+            const DeepCollectionEquality().equals(other._bedList, _bedList) &&
+            const DeepCollectionEquality().equals(other.id, id) &&
+            const DeepCollectionEquality().equals(other.level, level) &&
+            const DeepCollectionEquality()
+                .equals(other.durability, durability) &&
+            const DeepCollectionEquality().equals(other.time, time));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(_bedList));
+  int get hashCode => Object.hash(
+      runtimeType,
+      const DeepCollectionEquality().hash(_bedList),
+      const DeepCollectionEquality().hash(id),
+      const DeepCollectionEquality().hash(level),
+      const DeepCollectionEquality().hash(durability),
+      const DeepCollectionEquality().hash(time));
 
   @JsonKey(ignore: true)
   @override
@@ -406,10 +473,12 @@ class _$HomeLoaded with DiagnosticableTreeMixin implements HomeLoaded {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(List<BedEntity> bedList) loaded,
+    required TResult Function(List<BedEntity> bedList, int id, int level,
+            int durability, int time)
+        loaded,
     required TResult Function(String message) error,
   }) {
-    return loaded(bedList);
+    return loaded(bedList, id, level, durability, time);
   }
 
   @override
@@ -417,10 +486,12 @@ class _$HomeLoaded with DiagnosticableTreeMixin implements HomeLoaded {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(List<BedEntity> bedList)? loaded,
+    TResult Function(List<BedEntity> bedList, int id, int level, int durability,
+            int time)?
+        loaded,
     TResult Function(String message)? error,
   }) {
-    return loaded?.call(bedList);
+    return loaded?.call(bedList, id, level, durability, time);
   }
 
   @override
@@ -428,12 +499,14 @@ class _$HomeLoaded with DiagnosticableTreeMixin implements HomeLoaded {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(List<BedEntity> bedList)? loaded,
+    TResult Function(List<BedEntity> bedList, int id, int level, int durability,
+            int time)?
+        loaded,
     TResult Function(String message)? error,
     required TResult orElse(),
   }) {
     if (loaded != null) {
-      return loaded(bedList);
+      return loaded(bedList, id, level, durability, time);
     }
     return orElse();
   }
@@ -477,10 +550,18 @@ class _$HomeLoaded with DiagnosticableTreeMixin implements HomeLoaded {
 }
 
 abstract class HomeLoaded implements HomeState {
-  const factory HomeLoaded({required final List<BedEntity> bedList}) =
-      _$HomeLoaded;
+  const factory HomeLoaded(
+      {required final List<BedEntity> bedList,
+      required final int id,
+      required final int level,
+      required final int durability,
+      required final int time}) = _$HomeLoaded;
 
   List<BedEntity> get bedList => throw _privateConstructorUsedError;
+  int get id => throw _privateConstructorUsedError;
+  int get level => throw _privateConstructorUsedError;
+  int get durability => throw _privateConstructorUsedError;
+  int get time => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
   _$$HomeLoadedCopyWith<_$HomeLoaded> get copyWith =>
       throw _privateConstructorUsedError;
@@ -560,7 +641,9 @@ class _$HomeError with DiagnosticableTreeMixin implements HomeError {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(List<BedEntity> bedList) loaded,
+    required TResult Function(List<BedEntity> bedList, int id, int level,
+            int durability, int time)
+        loaded,
     required TResult Function(String message) error,
   }) {
     return error(message);
@@ -571,7 +654,9 @@ class _$HomeError with DiagnosticableTreeMixin implements HomeError {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(List<BedEntity> bedList)? loaded,
+    TResult Function(List<BedEntity> bedList, int id, int level, int durability,
+            int time)?
+        loaded,
     TResult Function(String message)? error,
   }) {
     return error?.call(message);
@@ -582,7 +667,9 @@ class _$HomeError with DiagnosticableTreeMixin implements HomeError {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(List<BedEntity> bedList)? loaded,
+    TResult Function(List<BedEntity> bedList, int id, int level, int durability,
+            int time)?
+        loaded,
     TResult Function(String message)? error,
     required TResult orElse(),
   }) {

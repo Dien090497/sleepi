@@ -18,6 +18,7 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$BedEntity {
   String get name => throw _privateConstructorUsedError;
   int get id => throw _privateConstructorUsedError;
+  int get level => throw _privateConstructorUsedError;
   String get image => throw _privateConstructorUsedError;
   String get contractAddress => throw _privateConstructorUsedError;
   int get durability => throw _privateConstructorUsedError;
@@ -42,6 +43,7 @@ abstract class $BedEntityCopyWith<$Res> {
   $Res call(
       {String name,
       int id,
+      int level,
       String image,
       String contractAddress,
       int durability,
@@ -67,6 +69,7 @@ class _$BedEntityCopyWithImpl<$Res> implements $BedEntityCopyWith<$Res> {
   $Res call({
     Object? name = freezed,
     Object? id = freezed,
+    Object? level = freezed,
     Object? image = freezed,
     Object? contractAddress = freezed,
     Object? durability = freezed,
@@ -87,6 +90,10 @@ class _$BedEntityCopyWithImpl<$Res> implements $BedEntityCopyWith<$Res> {
       id: id == freezed
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
+              as int,
+      level: level == freezed
+          ? _value.level
+          : level // ignore: cast_nullable_to_non_nullable
               as int,
       image: image == freezed
           ? _value.image
@@ -145,6 +152,7 @@ abstract class _$$_BedEntityCopyWith<$Res> implements $BedEntityCopyWith<$Res> {
   $Res call(
       {String name,
       int id,
+      int level,
       String image,
       String contractAddress,
       int durability,
@@ -172,6 +180,7 @@ class __$$_BedEntityCopyWithImpl<$Res> extends _$BedEntityCopyWithImpl<$Res>
   $Res call({
     Object? name = freezed,
     Object? id = freezed,
+    Object? level = freezed,
     Object? image = freezed,
     Object? contractAddress = freezed,
     Object? durability = freezed,
@@ -192,6 +201,10 @@ class __$$_BedEntityCopyWithImpl<$Res> extends _$BedEntityCopyWithImpl<$Res>
       id: id == freezed
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
+              as int,
+      level: level == freezed
+          ? _value.level
+          : level // ignore: cast_nullable_to_non_nullable
               as int,
       image: image == freezed
           ? _value.image
@@ -247,6 +260,7 @@ class _$_BedEntity implements _BedEntity {
   const _$_BedEntity(
       {required this.name,
       required this.id,
+      required this.level,
       required this.image,
       required this.contractAddress,
       required this.durability,
@@ -263,6 +277,8 @@ class _$_BedEntity implements _BedEntity {
   final String name;
   @override
   final int id;
+  @override
+  final int level;
   @override
   final String image;
   @override
@@ -288,7 +304,7 @@ class _$_BedEntity implements _BedEntity {
 
   @override
   String toString() {
-    return 'BedEntity(name: $name, id: $id, image: $image, contractAddress: $contractAddress, durability: $durability, isLock: $isLock, bedMint: $bedMint, efficiency: $efficiency, luck: $luck, bonus: $bonus, special: $special, resilience: $resilience, time: $time)';
+    return 'BedEntity(name: $name, id: $id, level: $level, image: $image, contractAddress: $contractAddress, durability: $durability, isLock: $isLock, bedMint: $bedMint, efficiency: $efficiency, luck: $luck, bonus: $bonus, special: $special, resilience: $resilience, time: $time)';
   }
 
   @override
@@ -298,6 +314,7 @@ class _$_BedEntity implements _BedEntity {
             other is _$_BedEntity &&
             const DeepCollectionEquality().equals(other.name, name) &&
             const DeepCollectionEquality().equals(other.id, id) &&
+            const DeepCollectionEquality().equals(other.level, level) &&
             const DeepCollectionEquality().equals(other.image, image) &&
             const DeepCollectionEquality()
                 .equals(other.contractAddress, contractAddress) &&
@@ -320,6 +337,7 @@ class _$_BedEntity implements _BedEntity {
       runtimeType,
       const DeepCollectionEquality().hash(name),
       const DeepCollectionEquality().hash(id),
+      const DeepCollectionEquality().hash(level),
       const DeepCollectionEquality().hash(image),
       const DeepCollectionEquality().hash(contractAddress),
       const DeepCollectionEquality().hash(durability),
@@ -342,6 +360,7 @@ abstract class _BedEntity implements BedEntity {
   const factory _BedEntity(
       {required final String name,
       required final int id,
+      required final int level,
       required final String image,
       required final String contractAddress,
       required final int durability,
@@ -358,6 +377,8 @@ abstract class _BedEntity implements BedEntity {
   String get name => throw _privateConstructorUsedError;
   @override
   int get id => throw _privateConstructorUsedError;
+  @override
+  int get level => throw _privateConstructorUsedError;
   @override
   String get image => throw _privateConstructorUsedError;
   @override

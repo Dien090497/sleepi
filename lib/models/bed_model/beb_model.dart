@@ -81,6 +81,7 @@ class BedModel {
     return BedEntity(
         name: nftName,
         id: id,
+        level: level,
         image: image,
         contractAddress: contractAddress,
         durability: durability,

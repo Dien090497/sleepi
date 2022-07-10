@@ -10,7 +10,13 @@ class HomeState with _$HomeState {
 
   const factory HomeState.loading() = HomeLoading;
 
-  const factory HomeState.loaded({required List<BedEntity> bedList}) = HomeLoaded;
+  const factory HomeState.loaded({
+    required List<BedEntity> bedList,
+    required int id,
+    required int level,
+    required int durability,
+    required int time,
+  }) = HomeLoaded;
 
   const factory HomeState.error(String message) = HomeError;
 }

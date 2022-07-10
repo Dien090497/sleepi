@@ -7,6 +7,7 @@ class BedEntity with _$BedEntity {
   const factory BedEntity({
     required String name,
     required int id,
+    required int level,
     required String image,
     required String contractAddress,
     required int durability,
