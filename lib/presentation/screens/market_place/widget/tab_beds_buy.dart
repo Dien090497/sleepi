@@ -35,6 +35,7 @@ class _TabBedsBuyState extends State<TabBedsBuy> {
       padding: const EdgeInsets.all(24),
       children: PopUpBedMarketPlace(
         bed: bed,
+        cubit: cubit,
         onConfirmTap: () {
           Navigator.pop(context);
           cubit.buyNFT(bed.id);
@@ -62,6 +63,7 @@ class _TabBedsBuyState extends State<TabBedsBuy> {
             }
 
             if (state is MarketPlaceStateBuyFailed) {
+              cubit.refresh();
               showMessageDialog(context, state.msg);
             }
           },

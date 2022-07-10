@@ -23,6 +23,7 @@ class BottomBarMarketPlaceWidget extends StatelessWidget {
       context,
       padding: const EdgeInsets.all(24),
       children: PopUpBedMarketPlace(
+        cubit: cubit,
         bed: bed,
         onConfirmTap: () {
           Navigator.pop(context);
