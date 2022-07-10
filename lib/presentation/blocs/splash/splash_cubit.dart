@@ -1,6 +1,5 @@
 import 'package:bloc/bloc.dart';
 import 'package:flutter/foundation.dart';
-import 'package:permission_handler/permission_handler.dart';
 import 'package:slee_fi/di/injector.dart';
 import 'package:slee_fi/presentation/blocs/splash/splash_state.dart';
 import 'package:slee_fi/usecase/fetch_balance_spending_usecase.dart';
@@ -16,7 +15,7 @@ class SplashCubit extends Cubit<SplashState> {
   final _fetchBalanceSpendingUC = getIt<FetchBalanceSpendingUseCase>();
 
   void init() async {
-    await Permission.location.request();
+    // await Permission.location.request();
     //final isSafeDevice = await SafeDevice.isSafeDevice;
     final result = await _getGlobalConfigUseCase.call(NoParams());
     await result.fold((l) async {
