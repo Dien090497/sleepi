@@ -1,6 +1,5 @@
 import 'package:dartz/dartz.dart';
 import 'package:slee_fi/entities/active_code/active_code_entity.dart';
-import 'package:slee_fi/entities/staking/staking_entity.dart';
 import 'package:slee_fi/failures/failure.dart';
 import 'package:slee_fi/models/swap_token_to_wallet_response/swap_token_to_wallet_response.dart';
 import 'package:slee_fi/models/token_spending/token_spending.dart';
