@@ -21,12 +21,15 @@ class MarketPlaceModel {
 
   @JsonKey(name: 'bed_mint')
   final int bedMint;
+  @JsonKey(name: 'is_mint')
+  final int isMint;
 
   final int efficiency;
   final int luck;
   final int bonus;
   final int special;
   final int resilience;
+  final int durability;
   final String price;
   final String symbol;
   final String status;
@@ -73,7 +76,7 @@ class MarketPlaceModel {
       this.quality,
       this.owner,
       this.symbol,
-      this.classNft);
+      this.classNft, this.durability, this.isMint);
 
   factory MarketPlaceModel.fromJson(Map<String, dynamic> json) =>
       _$MarketPlaceModelFromJson(json);

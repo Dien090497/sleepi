@@ -6,6 +6,8 @@ import 'package:slee_fi/di/injector.dart';
 import 'package:slee_fi/l10n/locale_keys.g.dart';
 import 'package:slee_fi/schema/verify_schema/verify_schema.dart';
 import 'package:slee_fi/usecase/current_user_usecase.dart';
+import 'package:slee_fi/usecase/fetch_balance_spending_usecase.dart';
+import 'package:slee_fi/usecase/get_user_usecase.dart';
 import 'package:slee_fi/usecase/send_otp_mail_usecase.dart';
 import 'package:slee_fi/usecase/usecase.dart';
 import 'package:slee_fi/usecase/validate_mnemonic.dart';
@@ -22,6 +24,8 @@ class ImportWalletCubit extends Cubit<ImportWalletState> {
   final verifyOtpUC = getIt<VerifyOTPUseCase>();
   final _validateMnemonicUC = getIt<ValidateMnemonicUseCase>();
   final _currentUserUC = getIt<CurrentUserUseCase>();
+  final _getUserUC = getIt<GetUserUseCase>();
+  final _fetchBalanceSpendingUC = getIt<FetchBalanceSpendingUseCase>();
 
   late String userEmail;
   bool? verifyOtpSuccess;
@@ -89,8 +93,19 @@ class ImportWalletCubit extends Cubit<ImportWalletState> {
     result.fold((l) {
       emit(ImportWalletState.errorMnemonic(
           LocaleKeys.invalid_mnemonic_please_try_again.tr()));
-    }, (r) {
-      emit(ImportWalletState.success(r));
+    }, (r) async {
+      final userRes = await _getUserUC.call(NoParams());
+      userRes.fold((l){
+        emit(ImportWalletState.success(r, null, []));
+      }, (userInfo) async {
+        final balanceRes =
+        await _fetchBalanceSpendingUC.call('${userInfo.id}');
+        balanceRes.fold((l) {
+          emit(ImportWalletState.success(r, userInfo, []));
+        }, (tokensSpending) {
+          emit(ImportWalletState.success(r, userInfo, tokensSpending));
+        });
+      });
     });
   }
 

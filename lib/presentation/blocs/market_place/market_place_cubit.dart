@@ -62,7 +62,7 @@ class MarketPlaceCubit extends Cubit<MarketPlaceState> {
         page += 1;
         loadMore = true;
       }
-      emit(MarketPlaceState.success(success));
+      emit(MarketPlaceState.loaded(success));
     });
   }
 
@@ -80,7 +80,7 @@ class MarketPlaceCubit extends Cubit<MarketPlaceState> {
         page += 1;
         loadMore = true;
       }
-      emit(MarketPlaceState.success(success));
+      emit(MarketPlaceState.loaded(success));
     });
   }
 
@@ -133,20 +133,15 @@ class MarketPlaceCubit extends Cubit<MarketPlaceState> {
     getMarketPlace(params);
   }
 
-
   Future<void> buyNFT(MarketPlaceModel nft) async {
     final result = await _buyNFTUseCase.call(nft.nftId);
     result.fold((l) {
       emit(MarketPlaceState.buyFail('$l'));
     }, (success) {
-      if(success.status) {
+      if (success.status) {
         emit(const MarketPlaceState.buySuccess());
-      }else{
-        if(success.message == 'Not enough to buy'){
-          emit(MarketPlaceState.notEnoughAVAX(nft));
-        }else{
-          emit(MarketPlaceState.buyFail(success.message));
-        }
+      } else {
+        emit(MarketPlaceState.buyFail(success.message));
       }
     });
   }
