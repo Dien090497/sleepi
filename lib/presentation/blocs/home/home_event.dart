@@ -10,3 +10,22 @@ class FetchData extends HomeEvent {
   @override
   List<Object?> get props => [];
 }
+
+class AddItem extends HomeEvent {
+  final int itemId;
+  final int bedId;
+
+  const AddItem(this.itemId, this.bedId);
+
+  @override
+  List<Object?> get props => [itemId, bedId];
+}
+
+class RemoveItem extends HomeEvent {
+  final int itemId;
+
+  const RemoveItem(this.itemId);
+
+  @override
+  List<Object?> get props => [itemId];
+}

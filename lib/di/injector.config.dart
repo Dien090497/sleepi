@@ -50,61 +50,64 @@ import '../repository/spending_repository.dart' as _i48;
 import '../repository/transaction_repository.dart' as _i29;
 import '../repository/user_repository.dart' as _i50;
 import '../repository/wallet_repository.dart' as _i52;
-import '../usecase/activation_code_setting_usecase.dart' as _i74;
-import '../usecase/approve_usecase.dart' as _i75;
-import '../usecase/buy_nft_usecase.dart' as _i76;
-import '../usecase/change_password_usecase.dart' as _i77;
-import '../usecase/check_activation_code_usecase.dart' as _i78;
-import '../usecase/check_approve_usecase.dart' as _i79;
-import '../usecase/compound_usecase.dart' as _i81;
-import '../usecase/create_pass_code_usecase.dart' as _i82;
-import '../usecase/create_password_usecase.dart' as _i83;
-import '../usecase/current_user_usecase.dart' as _i85;
-import '../usecase/estimate_gas_withdraw.dart' as _i87;
+import '../usecase/activation_code_setting_usecase.dart' as _i75;
+import '../usecase/add_item_to_bed_usecase.dart' as _i76;
+import '../usecase/approve_usecase.dart' as _i77;
+import '../usecase/buy_nft_usecase.dart' as _i78;
+import '../usecase/change_password_usecase.dart' as _i79;
+import '../usecase/check_activation_code_usecase.dart' as _i80;
+import '../usecase/check_approve_usecase.dart' as _i81;
+import '../usecase/compound_usecase.dart' as _i83;
+import '../usecase/create_pass_code_usecase.dart' as _i84;
+import '../usecase/create_password_usecase.dart' as _i85;
+import '../usecase/current_user_usecase.dart' as _i87;
+import '../usecase/estimate_gas_withdraw.dart' as _i89;
 import '../usecase/estimate_nft_function_fee_usecase.dart' as _i40;
-import '../usecase/fetch_balance_spending_usecase.dart' as _i88;
-import '../usecase/get_amount_out_min_usecase.dart' as _i89;
-import '../usecase/get_balance_for_tokens_usecase.dart' as _i90;
-import '../usecase/get_balance_token_usecase.dart' as _i91;
-import '../usecase/get_current_network_usecase.dart' as _i93;
-import '../usecase/get_global_config.dart' as _i94;
-import '../usecase/get_history_transaction_usecase.dart' as _i95;
+import '../usecase/fetch_balance_spending_usecase.dart' as _i90;
+import '../usecase/fetch_bed_usecase.dart' as _i91;
+import '../usecase/get_amount_out_min_usecase.dart' as _i92;
+import '../usecase/get_balance_for_tokens_usecase.dart' as _i93;
+import '../usecase/get_balance_token_usecase.dart' as _i94;
+import '../usecase/get_current_network_usecase.dart' as _i96;
+import '../usecase/get_global_config.dart' as _i97;
+import '../usecase/get_history_transaction_usecase.dart' as _i98;
 import '../usecase/get_list_nft_detail_usecase.dart' as _i41;
 import '../usecase/get_market_place_usecase.dart' as _i60;
 import '../usecase/get_nfts_balance_usecase.dart' as _i42;
 import '../usecase/get_nfts_ids_usecase.dart' as _i43;
-import '../usecase/get_user_usecase.dart' as _i96;
+import '../usecase/get_user_usecase.dart' as _i99;
 import '../usecase/is_first_open_app_usecase.dart' as _i55;
 import '../usecase/is_nft_approve_for_all_usecase.dart' as _i31;
 import '../usecase/is_passcode_created_usecase.dart' as _i56;
 import '../usecase/login_usecase.dart' as _i57;
 import '../usecase/logout_usecase.dart' as _i58;
 import '../usecase/make_first_open_app_usecase.dart' as _i59;
+import '../usecase/remove_item_in_bed_usecase.dart' as _i61;
 import '../usecase/run_app_init_usecase.dart' as _i21;
 import '../usecase/send_nft_to_spending_usecase.dart' as _i33;
-import '../usecase/send_otp_mail_usecase.dart' as _i61;
+import '../usecase/send_otp_mail_usecase.dart' as _i62;
 import '../usecase/send_to_external_usecase.dart' as _i34;
 import '../usecase/send_token_to_external.dart' as _i35;
 import '../usecase/set_nft_approval_for_all_usecase.dart' as _i36;
-import '../usecase/setting_active_code_usecase.dart' as _i62;
-import '../usecase/sign_up_usecase.dart' as _i63;
-import '../usecase/staking_info_usecase.dart' as _i64;
-import '../usecase/staking_usecase.dart' as _i65;
-import '../usecase/swap_token_usecase.dart' as _i66;
-import '../usecase/to_spending_usecase.dart' as _i67;
+import '../usecase/setting_active_code_usecase.dart' as _i63;
+import '../usecase/sign_up_usecase.dart' as _i64;
+import '../usecase/staking_info_usecase.dart' as _i65;
+import '../usecase/staking_usecase.dart' as _i66;
+import '../usecase/swap_token_usecase.dart' as _i67;
+import '../usecase/to_spending_usecase.dart' as _i68;
 import '../usecase/transfer_nft_usecase.dart' as _i38;
-import '../usecase/transfer_token_to_main_wallet_usecase.dart' as _i68;
-import '../usecase/unstaking_usecase.dart' as _i69;
-import '../usecase/validate_mnemonic.dart' as _i70;
-import '../usecase/validate_passcode_usecase.dart' as _i71;
-import '../usecase/verify_otp_usecase.dart' as _i72;
-import '../usecase/wallet/create_wallet_usecase.dart' as _i84;
-import '../usecase/wallet/current_wallet_usecase.dart' as _i86;
-import '../usecase/wallet/first_open_wallet_session_usecase.dart' as _i80;
-import '../usecase/wallet/get_current_mnemonic_usecasse.dart' as _i92;
+import '../usecase/transfer_token_to_main_wallet_usecase.dart' as _i69;
+import '../usecase/unstaking_usecase.dart' as _i70;
+import '../usecase/validate_mnemonic.dart' as _i71;
+import '../usecase/validate_passcode_usecase.dart' as _i72;
+import '../usecase/verify_otp_usecase.dart' as _i73;
+import '../usecase/wallet/create_wallet_usecase.dart' as _i86;
+import '../usecase/wallet/current_wallet_usecase.dart' as _i88;
+import '../usecase/wallet/first_open_wallet_session_usecase.dart' as _i82;
+import '../usecase/wallet/get_current_mnemonic_usecasse.dart' as _i95;
 import '../usecase/wallet/import_wallet_usecase.dart' as _i54;
-import '../usecase/withdraw_history_usecase.dart' as _i73;
-import 'register_module.dart' as _i97; // ignore_for_file: unnecessary_lambdas
+import '../usecase/withdraw_history_usecase.dart' as _i74;
+import 'register_module.dart' as _i100; // ignore_for_file: unnecessary_lambdas
 
 // ignore_for_file: lines_longer_than_80_chars
 /// initializes the registration of provided dependencies inside of [GetIt]
@@ -230,81 +233,87 @@ Future<_i1.GetIt> $initGetIt(_i1.GetIt get,
       () => _i59.MakeFirstOpenAppUseCase(get<_i44.IAuthRepository>()));
   gh.factory<_i60.MarketPlaceUseCase>(
       () => _i60.MarketPlaceUseCase(get<_i46.IMarketPlaceRepository>()));
-  gh.factory<_i61.SendOTPMailUseCase>(
-      () => _i61.SendOTPMailUseCase(get<_i44.IAuthRepository>()));
-  gh.factory<_i62.SettingActiveCodeUseCase>(
-      () => _i62.SettingActiveCodeUseCase(get<_i44.IAuthRepository>()));
-  gh.factory<_i63.SignUpUseCase>(
-      () => _i63.SignUpUseCase(get<_i44.IAuthRepository>()));
-  gh.factory<_i64.StakingInfoUseCase>(
-      () => _i64.StakingInfoUseCase(get<_i48.ISpendingRepository>()));
-  gh.factory<_i65.StakingUseCase>(
-      () => _i65.StakingUseCase(get<_i48.ISpendingRepository>()));
-  gh.factory<_i66.SwapTokenUseCase>(
-      () => _i66.SwapTokenUseCase(get<_i52.IWalletRepository>()));
-  gh.factory<_i67.ToSpendingUseCase>(() => _i67.ToSpendingUseCase(
+  gh.factory<_i61.RemoveItemInBedUseCase>(
+      () => _i61.RemoveItemInBedUseCase(get<_i50.IUserRepository>()));
+  gh.factory<_i62.SendOTPMailUseCase>(
+      () => _i62.SendOTPMailUseCase(get<_i44.IAuthRepository>()));
+  gh.factory<_i63.SettingActiveCodeUseCase>(
+      () => _i63.SettingActiveCodeUseCase(get<_i44.IAuthRepository>()));
+  gh.factory<_i64.SignUpUseCase>(
+      () => _i64.SignUpUseCase(get<_i44.IAuthRepository>()));
+  gh.factory<_i65.StakingInfoUseCase>(
+      () => _i65.StakingInfoUseCase(get<_i48.ISpendingRepository>()));
+  gh.factory<_i66.StakingUseCase>(
+      () => _i66.StakingUseCase(get<_i48.ISpendingRepository>()));
+  gh.factory<_i67.SwapTokenUseCase>(
+      () => _i67.SwapTokenUseCase(get<_i52.IWalletRepository>()));
+  gh.factory<_i68.ToSpendingUseCase>(() => _i68.ToSpendingUseCase(
       get<_i48.ISpendingRepository>(), get<_i52.IWalletRepository>()));
-  gh.factory<_i68.TransferTokenToMainWalletUseCase>(
-      () => _i68.TransferTokenToMainWalletUseCase(get<_i50.IUserRepository>()));
-  gh.factory<_i69.UnStakingUseCase>(
-      () => _i69.UnStakingUseCase(get<_i48.ISpendingRepository>()));
-  gh.factory<_i70.ValidateMnemonicUseCase>(
-      () => _i70.ValidateMnemonicUseCase(get<_i52.IWalletRepository>()));
-  gh.factory<_i71.ValidatePassCodeUseCase>(
-      () => _i71.ValidatePassCodeUseCase(get<_i44.IAuthRepository>()));
-  gh.factory<_i72.VerifyOTPUseCase>(
-      () => _i72.VerifyOTPUseCase(get<_i44.IAuthRepository>()));
-  gh.factory<_i73.WithdrawHistoryUseCase>(
-      () => _i73.WithdrawHistoryUseCase(get<_i50.IUserRepository>()));
-  gh.factory<_i74.ActivationCodeSettingUseCase>(
-      () => _i74.ActivationCodeSettingUseCase(get<_i50.IUserRepository>()));
-  gh.factory<_i75.ApproveUseCase>(() => _i75.ApproveUseCase(
+  gh.factory<_i69.TransferTokenToMainWalletUseCase>(
+      () => _i69.TransferTokenToMainWalletUseCase(get<_i50.IUserRepository>()));
+  gh.factory<_i70.UnStakingUseCase>(
+      () => _i70.UnStakingUseCase(get<_i48.ISpendingRepository>()));
+  gh.factory<_i71.ValidateMnemonicUseCase>(
+      () => _i71.ValidateMnemonicUseCase(get<_i52.IWalletRepository>()));
+  gh.factory<_i72.ValidatePassCodeUseCase>(
+      () => _i72.ValidatePassCodeUseCase(get<_i44.IAuthRepository>()));
+  gh.factory<_i73.VerifyOTPUseCase>(
+      () => _i73.VerifyOTPUseCase(get<_i44.IAuthRepository>()));
+  gh.factory<_i74.WithdrawHistoryUseCase>(
+      () => _i74.WithdrawHistoryUseCase(get<_i50.IUserRepository>()));
+  gh.factory<_i75.ActivationCodeSettingUseCase>(
+      () => _i75.ActivationCodeSettingUseCase(get<_i50.IUserRepository>()));
+  gh.factory<_i76.AddItemToBedUseCase>(
+      () => _i76.AddItemToBedUseCase(get<_i50.IUserRepository>()));
+  gh.factory<_i77.ApproveUseCase>(() => _i77.ApproveUseCase(
       get<_i48.ISpendingRepository>(), get<_i52.IWalletRepository>()));
-  gh.factory<_i76.BuyNFTUseCase>(
-      () => _i76.BuyNFTUseCase(get<_i46.IMarketPlaceRepository>()));
-  gh.factory<_i77.ChangePasswordUseCase>(
-      () => _i77.ChangePasswordUseCase(get<_i50.IUserRepository>()));
-  gh.factory<_i78.CheckActivationCodeUseCase>(
-      () => _i78.CheckActivationCodeUseCase(get<_i44.IAuthRepository>()));
-  gh.factory<_i79.CheckApproveUseCase>(
-      () => _i79.CheckApproveUseCase(get<_i52.IWalletRepository>()));
-  gh.factory<_i80.CheckFirstOpenWallet>(
-      () => _i80.CheckFirstOpenWallet(get<_i52.IWalletRepository>()));
-  gh.factory<_i81.CompoundUseCase>(
-      () => _i81.CompoundUseCase(get<_i48.ISpendingRepository>()));
-  gh.factory<_i82.CreatePassCodeUseCase>(
-      () => _i82.CreatePassCodeUseCase(get<_i44.IAuthRepository>()));
-  gh.factory<_i83.CreatePasswordUseCase>(
-      () => _i83.CreatePasswordUseCase(get<_i44.IAuthRepository>()));
-  gh.factory<_i84.CreateWalletUseCase>(
-      () => _i84.CreateWalletUseCase(get<_i52.IWalletRepository>()));
-  gh.factory<_i85.CurrentUserUseCase>(
-      () => _i85.CurrentUserUseCase(get<_i44.IAuthRepository>()));
-  gh.factory<_i86.CurrentWalletUseCase>(
-      () => _i86.CurrentWalletUseCase(get<_i52.IWalletRepository>()));
-  gh.factory<_i87.EstimateGasWithdrawUseCase>(
-      () => _i87.EstimateGasWithdrawUseCase(get<_i50.IUserRepository>()));
-  gh.factory<_i88.FetchBalanceSpendingUseCase>(
-      () => _i88.FetchBalanceSpendingUseCase(get<_i50.IUserRepository>()));
-  gh.factory<_i89.GetAmountOutMinUseCase>(
-      () => _i89.GetAmountOutMinUseCase(get<_i52.IWalletRepository>()));
-  gh.factory<_i90.GetBalanceForTokensUseCase>(
-      () => _i90.GetBalanceForTokensUseCase(get<_i52.IWalletRepository>()));
-  gh.factory<_i91.GetBalanceTokenUseCase>(
-      () => _i91.GetBalanceTokenUseCase(get<_i52.IWalletRepository>()));
-  gh.factory<_i92.GetCurrentMnemonicUsecase>(
-      () => _i92.GetCurrentMnemonicUsecase(get<_i52.IWalletRepository>()));
-  gh.factory<_i93.GetCurrentNetworkUseCase>(
-      () => _i93.GetCurrentNetworkUseCase(get<_i52.IWalletRepository>()));
-  gh.factory<_i94.GetGlobalConfigUseCase>(
-      () => _i94.GetGlobalConfigUseCase(get<_i50.IUserRepository>()));
-  gh.factory<_i95.GetHistoryTransactionUseCase>(
-      () => _i95.GetHistoryTransactionUseCase(get<_i52.IWalletRepository>()));
-  gh.factory<_i96.GetUserUseCase>(
-      () => _i96.GetUserUseCase(get<_i44.IAuthRepository>()));
+  gh.factory<_i78.BuyNFTUseCase>(
+      () => _i78.BuyNFTUseCase(get<_i46.IMarketPlaceRepository>()));
+  gh.factory<_i79.ChangePasswordUseCase>(
+      () => _i79.ChangePasswordUseCase(get<_i50.IUserRepository>()));
+  gh.factory<_i80.CheckActivationCodeUseCase>(
+      () => _i80.CheckActivationCodeUseCase(get<_i44.IAuthRepository>()));
+  gh.factory<_i81.CheckApproveUseCase>(
+      () => _i81.CheckApproveUseCase(get<_i52.IWalletRepository>()));
+  gh.factory<_i82.CheckFirstOpenWallet>(
+      () => _i82.CheckFirstOpenWallet(get<_i52.IWalletRepository>()));
+  gh.factory<_i83.CompoundUseCase>(
+      () => _i83.CompoundUseCase(get<_i48.ISpendingRepository>()));
+  gh.factory<_i84.CreatePassCodeUseCase>(
+      () => _i84.CreatePassCodeUseCase(get<_i44.IAuthRepository>()));
+  gh.factory<_i85.CreatePasswordUseCase>(
+      () => _i85.CreatePasswordUseCase(get<_i44.IAuthRepository>()));
+  gh.factory<_i86.CreateWalletUseCase>(
+      () => _i86.CreateWalletUseCase(get<_i52.IWalletRepository>()));
+  gh.factory<_i87.CurrentUserUseCase>(
+      () => _i87.CurrentUserUseCase(get<_i44.IAuthRepository>()));
+  gh.factory<_i88.CurrentWalletUseCase>(
+      () => _i88.CurrentWalletUseCase(get<_i52.IWalletRepository>()));
+  gh.factory<_i89.EstimateGasWithdrawUseCase>(
+      () => _i89.EstimateGasWithdrawUseCase(get<_i50.IUserRepository>()));
+  gh.factory<_i90.FetchBalanceSpendingUseCase>(
+      () => _i90.FetchBalanceSpendingUseCase(get<_i50.IUserRepository>()));
+  gh.factory<_i91.FetchBedUseCase>(
+      () => _i91.FetchBedUseCase(get<_i50.IUserRepository>()));
+  gh.factory<_i92.GetAmountOutMinUseCase>(
+      () => _i92.GetAmountOutMinUseCase(get<_i52.IWalletRepository>()));
+  gh.factory<_i93.GetBalanceForTokensUseCase>(
+      () => _i93.GetBalanceForTokensUseCase(get<_i52.IWalletRepository>()));
+  gh.factory<_i94.GetBalanceTokenUseCase>(
+      () => _i94.GetBalanceTokenUseCase(get<_i52.IWalletRepository>()));
+  gh.factory<_i95.GetCurrentMnemonicUsecase>(
+      () => _i95.GetCurrentMnemonicUsecase(get<_i52.IWalletRepository>()));
+  gh.factory<_i96.GetCurrentNetworkUseCase>(
+      () => _i96.GetCurrentNetworkUseCase(get<_i52.IWalletRepository>()));
+  gh.factory<_i97.GetGlobalConfigUseCase>(
+      () => _i97.GetGlobalConfigUseCase(get<_i50.IUserRepository>()));
+  gh.factory<_i98.GetHistoryTransactionUseCase>(
+      () => _i98.GetHistoryTransactionUseCase(get<_i52.IWalletRepository>()));
+  gh.factory<_i99.GetUserUseCase>(
+      () => _i99.GetUserUseCase(get<_i44.IAuthRepository>()));
   return get;
 }
 
 class _$RPCModule extends _i25.RPCModule {}
 
-class _$RegisterModule extends _i97.RegisterModule {}
+class _$RegisterModule extends _i100.RegisterModule {}
