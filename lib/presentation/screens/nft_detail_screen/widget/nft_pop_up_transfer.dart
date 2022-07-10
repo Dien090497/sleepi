@@ -106,10 +106,13 @@ class NftPopUpTransfer extends StatelessWidget {
               _AddressTextField(
                 errorNotifier: errorNotifier,
                 onChanged: (String value) {
+                  if (errorNotifier.value.isNotEmpty) {
+                    errorNotifier.value = '';
+                  }
                   toAddress = value;
                 },
               ),
-            const SizedBox(height: 24),
+            const SizedBox(height: 4),
             Row(
               children: [
                 SFText(
@@ -180,15 +183,22 @@ class NftPopUpTransfer extends StatelessWidget {
                   child: SFButton(
                     text: LocaleKeys.confirm,
                     onPressed: () {
-                      getIt<IsValidWalletAddressUseCase>().call(toAddress).fold(
-                        (l) {
-                          errorNotifier.value =
-                              LocaleKeys.this_field_is_required.tr();
-                        },
-                        (r) {
-                          onConfirm(toAddress);
-                        },
-                      );
+                      if (toAddress.isEmpty) {
+                        errorNotifier.value =
+                            LocaleKeys.this_field_is_required.tr();
+                      } else {
+                        getIt<IsValidWalletAddressUseCase>()
+                            .call(toAddress)
+                            .fold(
+                          (l) {
+                            errorNotifier.value =
+                                LocaleKeys.invalid_address.tr();
+                          },
+                          (r) {
+                            onConfirm(toAddress);
+                          },
+                        );
+                      }
                     },
                     width: double.infinity,
                     textStyle: TextStyles.white16,
@@ -230,6 +240,7 @@ class _AddressTextFieldState extends State<_AddressTextField> {
                 style: TextStyles.lightGrey14),
             const SizedBox(height: 8),
             child!,
+            const SizedBox(height: 4),
             SFText(keyText: value, style: TextStyles.red12W700),
           ],
         );
