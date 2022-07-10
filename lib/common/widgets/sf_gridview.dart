@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
+import 'package:slee_fi/common/style/text_styles.dart';
+import 'package:slee_fi/common/widgets/sf_text.dart';
+import 'package:slee_fi/l10n/locale_keys.g.dart';
 
 class SFGridView extends StatefulWidget {
   const SFGridView({
@@ -48,20 +51,33 @@ class _SFGridViewState extends State<SFGridView> {
         enablePullDown: widget.isScroll,
         header: const WaterDropHeader(),
         onRefresh: _onRefresh,
-        child: GridView.builder(
-          itemCount: widget.count,
-          shrinkWrap: true,
-          physics: widget.physics,
-          padding: widget.padding ?? const EdgeInsets.symmetric(vertical: 16),
-          keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
-          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: 2,
-            childAspectRatio: widget.childAspectRatio,
-            crossAxisSpacing: 12,
-            mainAxisSpacing: 12,
-          ),
-          itemBuilder: widget.itemBuilder,
-        ),
+        child: widget.count != 0
+            ? GridView.builder(
+                itemCount: widget.count,
+                shrinkWrap: true,
+                physics: widget.physics,
+                padding:
+                    widget.padding ?? const EdgeInsets.symmetric(vertical: 16),
+                keyboardDismissBehavior:
+                    ScrollViewKeyboardDismissBehavior.onDrag,
+                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 2,
+                  childAspectRatio: widget.childAspectRatio,
+                  crossAxisSpacing: 12,
+                  mainAxisSpacing: 12,
+                ),
+                itemBuilder: widget.itemBuilder,
+              )
+            : SingleChildScrollView(
+                child: Container(
+                  alignment: Alignment.center,
+                  padding: const EdgeInsets.symmetric(vertical: 60),
+                  child: SFText(
+                    keyText: LocaleKeys.no_result,
+                    style: TextStyles.lightWhite16,
+                  ),
+                ),
+              ),
       );
     }
     return GridView.builder(

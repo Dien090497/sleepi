@@ -30,6 +30,7 @@ class TabBarFilter extends StatelessWidget {
         children: [
           SFDropDownRotation(
             dropdownHeight: 40,
+            dropdownWidth: 110,
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             value: LocaleKeys.low_price.tr(),
             spinnerItems: [
