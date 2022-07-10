@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:slee_fi/common/enum/enum.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
 import 'package:slee_fi/common/widgets/background_widget.dart';
 import 'package:slee_fi/common/widgets/dismiss_keyboard_widget.dart';
@@ -15,8 +16,10 @@ import 'package:slee_fi/presentation/screens/transfer/widgets/transfer_widget.da
 class TransferScreenArg {
   final TokenEntity tokenEntity;
   final bool fromSpendingToWallet;
+  final TransferType transferType;
 
-  TransferScreenArg(this.tokenEntity, this.fromSpendingToWallet);
+  TransferScreenArg(
+      this.tokenEntity, this.fromSpendingToWallet, this.transferType);
 }
 
 class TransferScreen extends StatelessWidget {
@@ -46,6 +49,7 @@ class TransferScreen extends StatelessWidget {
                     const SizedBox(height: 24),
                     Expanded(
                         child: TransferList(
+                      transferType: args.transferType,
                       tokenEntity: args.tokenEntity,
                       spendingToWallet: args.fromSpendingToWallet,
                     )),

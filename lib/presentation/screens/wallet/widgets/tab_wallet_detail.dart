@@ -6,6 +6,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:focus_detector/focus_detector.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:slee_fi/common/const/const.dart';
+import 'package:slee_fi/common/enum/enum.dart';
 import 'package:slee_fi/common/extensions/num_ext.dart';
 import 'package:slee_fi/common/extensions/string_x.dart';
 import 'package:slee_fi/common/routes/app_routes.dart';
@@ -67,7 +68,8 @@ class _TabWalletDetailState extends State<TabWalletDetail> {
         }
       },
     );
-    final isJapanese = Localizations.localeOf(context).toLanguageTag().isJapanese;
+    final isJapanese =
+        Localizations.localeOf(context).toLanguageTag().isJapanese;
     return BlocBuilder<WalletCubit, WalletState>(
       builder: (context, state) {
         if (state is WalletStateLoaded && state.walletInfoEntity != null) {
@@ -143,26 +145,27 @@ class _TabWalletDetailState extends State<TabWalletDetail> {
                             child: BoxButtonWidget(
                               onTap: () {
                                 if (tokenList.length < 2) {
-                                  Navigator.pushNamed(
-                                    context,
-                                    R.transfer,
-                                    arguments: TransferScreenArg(
-                                        const TokenEntity(
-                                            address: '',
-                                            displayName: 'avax',
-                                            name: '',
-                                            symbol: 'avax',
-                                            icon: Ics.icAvax,
-                                            balance: 0),
-                                        false),
-                                  );
+                                  // Navigator.pushNamed(
+                                  //   context,
+                                  //   R.transfer,
+                                  //   arguments: TransferScreenArg(
+                                  //       const TokenEntity(
+                                  //           address: '',
+                                  //           displayName: 'avax',
+                                  //           name: '',
+                                  //           symbol: 'avax',
+                                  //           icon: Ics.icAvax,
+                                  //           balance: 0),
+                                  //       false,
+                                  //   TransferType.token),
+                                  // );
                                   return;
                                 }
                                 Navigator.pushNamed(
                                   context,
                                   R.transfer,
-                                  arguments:
-                                      TransferScreenArg(tokenList[2], false),
+                                  arguments: TransferScreenArg(
+                                      tokenList[2], false, TransferType.token),
                                 );
                               },
                               text: LocaleKeys.to_spending,
