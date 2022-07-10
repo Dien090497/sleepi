@@ -359,7 +359,7 @@ class _AuthDataSource implements AuthDataSource {
   }
 
   @override
-  Future<double> estimateGasWithdraw(type, contractAddress) async {
+  Future<String> estimateGasWithdraw(type, contractAddress) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{
       r'type': type,
@@ -367,7 +367,7 @@ class _AuthDataSource implements AuthDataSource {
     };
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
-    final _result = await _dio.fetch<double>(_setStreamType<double>(
+    final _result = await _dio.fetch<String>(_setStreamType<String>(
         Options(method: 'GET', headers: _headers, extra: _extra)
             .compose(_dio.options, '/withdraw/estimate-gas',
                 queryParameters: queryParameters, data: _data)

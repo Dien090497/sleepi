@@ -9,7 +9,9 @@ class BedEntity with _$BedEntity {
     required int id,
     required int level,
     required String image,
+    required String type,
     required String contractAddress,
+    required String quality,
     required int durability,
     required int isLock,
     required int bedMint,
@@ -19,5 +21,6 @@ class BedEntity with _$BedEntity {
     required int special,
     required int resilience,
     required int time,
+    required int isMint,
   }) = _BedEntity;
 }

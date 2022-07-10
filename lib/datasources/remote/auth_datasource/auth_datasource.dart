@@ -147,7 +147,7 @@ abstract class AuthDataSource {
   );
 
   @GET('/withdraw/estimate-gas')
-  Future<double> estimateGasWithdraw(@Query('type') String type,
+  Future<String> estimateGasWithdraw(@Query('type') String type,
       @Query('contractAddress') String contractAddress);
 
   @POST('/withdraw/nft')

@@ -4,7 +4,6 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:slee_fi/di/injector.dart';
 import 'package:slee_fi/l10n/locale_keys.g.dart';
-import 'package:slee_fi/models/market_place/market_place_model.dart';
 import 'package:slee_fi/schema/market/market_schema.dart';
 import 'package:slee_fi/usecase/buy_nft_usecase.dart';
 import 'package:slee_fi/usecase/get_market_place_usecase.dart';
@@ -133,8 +132,8 @@ class MarketPlaceCubit extends Cubit<MarketPlaceState> {
     getMarketPlace(params);
   }
 
-  Future<void> buyNFT(MarketPlaceModel nft) async {
-    final result = await _buyNFTUseCase.call(nft.nftId);
+  Future<void> buyNFT(int nftId) async {
+    final result = await _buyNFTUseCase.call(nftId);
     result.fold((l) {
       emit(MarketPlaceState.buyFail('$l'));
     }, (success) {
