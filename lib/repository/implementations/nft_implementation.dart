@@ -4,6 +4,7 @@ import 'package:slee_fi/common/enum/enum.dart';
 import 'package:slee_fi/datasources/local/secure_storage.dart';
 import 'package:slee_fi/datasources/remote/network/nft_datasource.dart';
 import 'package:slee_fi/datasources/remote/nft_api/nft_api.dart';
+import 'package:slee_fi/entities/nft_attribute_entity/nft_attribute_entity.dart';
 import 'package:slee_fi/entities/nft_entity/nft_entity.dart';
 import 'package:slee_fi/failures/failure.dart';
 import 'package:slee_fi/repository/nft_repository.dart';
@@ -56,6 +57,44 @@ class NFTImplementation extends INFTRepository {
         nftType: nftType,
         tokenIds: tokenIds.join(','),
       );
+      // TODO: remove this when data is ready
+      if ((listModel.data?.isEmpty ?? true) && nftAddress != null) {
+        final res = await Future.wait([
+          _nftDataSource.name(nftAddress),
+          _nftDataSource.symbol(nftAddress),
+        ]);
+        return Right(
+          tokenIds
+              .map(
+                (nftId) => NFTEntity(
+                    id: 0,
+                    name: res.first,
+                    symbol: res.last,
+                    categoryId: 1,
+                    isLock: 1,
+                    status: '',
+                    attribute: NftAttributeEntity(
+                      tokenId: nftId,
+                      contractAddress: nftAddress,
+                      owner: 'owner',
+                      type: 'type',
+                      classNft: 'classNft',
+                      quality: '',
+                      time: 1,
+                      level: 1,
+                      bedMint: 1,
+                      efficiency: 1,
+                      luck: 1,
+                      bonus: 1,
+                      special: 1,
+                      resilience: 1,
+                      durability: 100,
+                      nftId: nftId,
+                    )),
+              )
+              .toList(),
+        );
+      }
       return Right(listModel.data
               ?.map((e) => e.toEntity(name: '', symbol: ''))
               .toList() ??
