@@ -11,7 +11,6 @@ import 'package:slee_fi/common/widgets/sf_button_outlined.dart';
 import 'package:slee_fi/common/widgets/sf_buttons.dart';
 import 'package:slee_fi/common/widgets/sf_card.dart';
 import 'package:slee_fi/common/widgets/sf_dialog.dart';
-import 'package:slee_fi/common/widgets/sf_icon.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
 import 'package:slee_fi/common/widgets/sf_textfield.dart';
 import 'package:slee_fi/common/widgets/snack_bar.dart';
@@ -19,7 +18,6 @@ import 'package:slee_fi/l10n/locale_keys.g.dart';
 import 'package:slee_fi/presentation/blocs/staking/staking_cubit.dart';
 import 'package:slee_fi/presentation/blocs/staking/staking_state.dart';
 import 'package:slee_fi/presentation/screens/staking/widgets/popup_staking.dart';
-import 'package:slee_fi/resources/resources.dart';
 
 class DepositSlftArguments {
   final String? balanceSlft;
@@ -118,23 +116,23 @@ class _DepositSlftScreenState extends State<DepositSlftScreen> {
                                           keyText: LocaleKeys.deposit,
                                           style: TextStyles.bold18LightWhite,
                                         ),
-                                        Row(
-                                          crossAxisAlignment: CrossAxisAlignment.center,
-                                          children: [
-                                            const SFIcon(
-                                              Ics.icSlft,
-                                              width: 30,
-                                              height: 30,
-                                            ),
-                                            const SizedBox(
-                                              width: 6,
-                                            ),
-                                            SFText(
-                                              keyText: "XXX",
-                                              style: TextStyles.lightWhite16,
-                                            )
-                                          ],
-                                        ),
+                                        // Row(
+                                        //   crossAxisAlignment: CrossAxisAlignment.center,
+                                        //   children: [
+                                        //     const SFIcon(
+                                        //       Ics.icSlft,
+                                        //       width: 30,
+                                        //       height: 30,
+                                        //     ),
+                                        //     const SizedBox(
+                                        //       width: 6,
+                                        //     ),
+                                        //     SFText(
+                                        //       keyText: "XXX",
+                                        //       style: TextStyles.lightWhite16,
+                                        //     )
+                                        //   ],
+                                        // ),
                                       ],
                                     ),
                                     const SizedBox(

@@ -3,6 +3,11 @@ import 'package:slee_fi/common/widgets/background_widget.dart';
 import 'package:slee_fi/presentation/screens/staking/widgets/staking_list.dart';
 import 'package:slee_fi/presentation/screens/staking/widgets/top_bar_staking.dart';
 
+class StakingArguments {
+  final List tokenList ;
+
+  StakingArguments({required this.tokenList});
+}
 class StakingScreen extends StatelessWidget {
   const StakingScreen({Key? key}) : super(key: key);
 

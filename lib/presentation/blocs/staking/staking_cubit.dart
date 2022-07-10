@@ -25,11 +25,9 @@ class StakingCubit extends Cubit<StakingState> {
     final result = await _stakingInfoUC.call(NoParams());
     result.fold(
           (l) {
-        print(l);
         emit(StakingState.error(message: '$l'));
       },
           (success) {
-        print(success);
         emit(StakingState.stakingInfoSuccess(success));
       },
     );
