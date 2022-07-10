@@ -405,7 +405,7 @@
   "invalid_email": "Invalid email. Please try again!",
   "password_must_be_at_least_6": "Password must be 6 to 20 characters and contain a capital letter, a special character and a number",
   "password_dose_not_match": "Password does not match",
-  "wallet_id": "Wallet ID",
+  "wallet_address": "Wallet address",
   "warning_bind_wallet": "Your account will be linked to this wallet forever, please save the seed phrase for later use",
   "dont_allow_typing_space": "Don't allow user typing space in password",
   "you_can_set_your_alarm_here": "You can set your alarm here",
@@ -422,5 +422,7 @@
   "wallet_already" : "Your account already has a wallet.",
   "insufficient_avax": "Insufficient Avax in ",
   "don_worry_transfer": "Don’t worry! Just transfer enough AVAX from your wallet to the spending account and you are good to go",
-  "some_thing_wrong" : "Something went wrong"
+  "some_thing_wrong" : "Something went wrong",
+  "purchased_successfully": "Purchased Successfully",
+  "no_result": "No Result"
 }

@@ -1,4 +1,5 @@
-import 'package:dartz/dartz.dart';
+import 'package:dartz/dartz.dart' as dartz;
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
@@ -11,6 +12,7 @@ import 'package:slee_fi/entities/nft_entity/nft_entity.dart';
 import 'package:slee_fi/failures/failure.dart';
 import 'package:slee_fi/l10n/locale_keys.g.dart';
 import 'package:slee_fi/usecase/estimate_nft_function_fee_usecase.dart';
+import 'package:slee_fi/usecase/is_valid_wallet_address_usecase.dart';
 
 class NftPopUpTransfer extends StatelessWidget {
   const NftPopUpTransfer({
@@ -31,6 +33,7 @@ class NftPopUpTransfer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     String toAddress = '';
+    final errorNotifier = ValueNotifier<String>('');
 
     return Stack(
       children: [
@@ -100,22 +103,16 @@ class NftPopUpTransfer extends StatelessWidget {
                 ),
               )
             else
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  SFText(
-                      keyText: LocaleKeys.wallet_id,
-                      style: TextStyles.lightGrey14),
-                  const SizedBox(height: 8),
-                  SFTextField(
-                    onChanged: (addr) {
-                      toAddress = addr;
-                    },
-                    showLabel: false,
-                  ),
-                ],
+              _AddressTextField(
+                errorNotifier: errorNotifier,
+                onChanged: (String value) {
+                  if (errorNotifier.value.isNotEmpty) {
+                    errorNotifier.value = '';
+                  }
+                  toAddress = value;
+                },
               ),
-            const SizedBox(height: 24),
+            const SizedBox(height: 4),
             Row(
               children: [
                 SFText(
@@ -126,7 +123,7 @@ class NftPopUpTransfer extends StatelessWidget {
                 if ((nft.attribute?.contractAddress?.isNotEmpty ?? false) &&
                     nft.attribute?.tokenId != null)
                   Expanded(
-                    child: FutureBuilder<Either<Failure, double>>(
+                    child: FutureBuilder<dartz.Either<Failure, double>>(
                       future: getIt<EstimateNftFunctionFeeUseCase>()
                           .call(EstimateGasParams(
                         nftAddress: nft.attribute!.contractAddress!,
@@ -186,9 +183,26 @@ class NftPopUpTransfer extends StatelessWidget {
                   child: SFButton(
                     text: LocaleKeys.confirm,
                     onPressed: () {
-                      onConfirm(toAddress);
-                      // Navigator.pop(context);
-                      // showSuccessfulDialog(context, null);
+                      if (isToSpending ?? false) {
+                        onConfirm(toAddress);
+                      } else {
+                        if (toAddress.isEmpty) {
+                          errorNotifier.value =
+                              LocaleKeys.this_field_is_required.tr();
+                        } else {
+                          getIt<IsValidWalletAddressUseCase>()
+                              .call(toAddress)
+                              .fold(
+                            (l) {
+                              errorNotifier.value =
+                                  LocaleKeys.invalid_address.tr();
+                            },
+                            (r) {
+                              onConfirm(toAddress);
+                            },
+                          );
+                        }
+                      }
                     },
                     width: double.infinity,
                     textStyle: TextStyles.white16,
@@ -200,6 +214,45 @@ class NftPopUpTransfer extends StatelessWidget {
           ],
         ),
       ],
+    );
+  }
+}
+
+class _AddressTextField extends StatefulWidget {
+  const _AddressTextField(
+      {Key? key, required this.errorNotifier, required this.onChanged})
+      : super(key: key);
+
+  final ValueNotifier<String> errorNotifier;
+  final ValueChanged<String> onChanged;
+
+  @override
+  State<_AddressTextField> createState() => _AddressTextFieldState();
+}
+
+class _AddressTextFieldState extends State<_AddressTextField> {
+  @override
+  Widget build(BuildContext context) {
+    return ValueListenableBuilder<String>(
+      valueListenable: widget.errorNotifier,
+      builder: (context, value, child) {
+        return Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            SFText(
+                keyText: LocaleKeys.wallet_address,
+                style: TextStyles.lightGrey14),
+            const SizedBox(height: 8),
+            child!,
+            const SizedBox(height: 4),
+            SFText(keyText: value, style: TextStyles.red12W700),
+          ],
+        );
+      },
+      child: SFTextField(
+        onChanged: widget.onChanged,
+        showLabel: false,
+      ),
     );
   }
 }

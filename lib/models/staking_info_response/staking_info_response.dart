@@ -7,10 +7,11 @@ part 'staking_info_response.g.dart';
 @JsonSerializable()
 class StakingInfoResponse {
   final String tvl;
+  final String apr;
   final bool isCompound;
   final StakeInfo stake;
 
-  StakingInfoResponse({required this.tvl, required this.isCompound, required this.stake});
+  StakingInfoResponse({required this.tvl, required this.apr, required this.isCompound, required this.stake});
 
   factory StakingInfoResponse.fromJson(Map<String, dynamic> json) =>
       _$StakingInfoResponseFromJson(json);

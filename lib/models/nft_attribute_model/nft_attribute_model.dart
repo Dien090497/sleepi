@@ -6,8 +6,8 @@ part 'nft_attribute_model.g.dart';
 
 @JsonSerializable()
 class NftAttributeModel {
-  final BigInt? nftId;
-  final BigInt? tokenId;
+  final int? nftId;
+  final int? tokenId;
   final String? contractAddress;
   final String? owner;
   final String? type;
@@ -51,8 +51,8 @@ class NftAttributeModel {
 
   NftAttributeEntity toEntity() => NftAttributeEntity(
         contractAddress: contractAddress,
-        nftId: nftId,
-        tokenId: tokenId,
+        nftId: nftId != null ? BigInt.from(nftId!) : null,
+        tokenId: tokenId != null ? BigInt.from(tokenId!) : null,
         owner: owner,
         type: type,
         classNft: classNft,

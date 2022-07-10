@@ -44,14 +44,14 @@ class TopBarStaking extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     ItemResource(
-                      value: "${valueSilver ?? 0}",
+                      value: formatToken(valueSilver!),
                       url: Ics.icSlgt,
                     ),
                     const SizedBox(
                       width: 16,
                     ),
                     ItemResource(
-                      value: "${valueGold ?? 0}",
+                      value: formatToken(valueGold!),
                       url: Ics.icSlft,
                     ),
                   ],

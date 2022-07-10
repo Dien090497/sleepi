@@ -42,7 +42,7 @@ abstract class INFTRepository {
   });
 
   Future<Either<Failure, String>> depositSpending({
-    String? spendingAddress,
+    required String spendingAddress,
     required String nftAddress,
     required BigInt nftId,
     required int userId,

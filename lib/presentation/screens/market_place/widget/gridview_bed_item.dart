@@ -113,7 +113,7 @@ class GridViewBedItem extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           SFText(
-                              keyText: '${LocaleKeys.mint.tr()} ${bed.bedMint}',
+                              keyText: '${LocaleKeys.mint.tr()} ${bed.isMint}',
                               style: TextStyles.lightGrey11W500),
                           SFText(
                               keyText: '${LocaleKeys.level.tr()} ${bed.level}',

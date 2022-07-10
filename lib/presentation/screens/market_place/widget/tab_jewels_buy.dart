@@ -57,7 +57,7 @@ class _TabJewelsBuyState extends State<TabJewelsBuy> {
             }
             if (state is MarketPlaceStateBuySuccess) {
               cubit.refresh();
-              showSuccessfulDialog(context, null);
+              showSuccessfulDialog(context, LocaleKeys.purchased_successfully);
             }
 
             if (state is MarketPlaceStateBuyFailed) {
@@ -106,27 +106,27 @@ class _TabJewelsBuyState extends State<TabJewelsBuy> {
                                 child: TabBarView(
                                   children: [
                                     SFGridView(
-                                      count: listJewels.length,
-                                      childAspectRatio: 8 / 10,
-                                      onRefresh: () {
-                                        cubit.refresh();
-                                      },
-                                      itemBuilder: (context, i) {
-                                        return GestureDetector(
-                                          onTap: () {
-                                            _showJewelDialog(
-                                                context, listJewels[i], cubit);
-                                          },
-                                          child: JewelsBuyWidget(
-                                            jewel: listJewels[i],
-                                            onPressedButton: () {
-                                              _showJewelDialog(context,
-                                                  listJewels[i], cubit);
+                                            count: listJewels.length,
+                                            childAspectRatio: 8 / 10,
+                                            onRefresh: () {
+                                              cubit.refresh();
+                                            },
+                                            itemBuilder: (context, i) {
+                                              return GestureDetector(
+                                                onTap: () {
+                                                  _showJewelDialog(context,
+                                                      listJewels[i], cubit);
+                                                },
+                                                child: JewelsBuyWidget(
+                                                  jewel: listJewels[i],
+                                                  onPressedButton: () {
+                                                    _showJewelDialog(context,
+                                                        listJewels[i], cubit);
+                                                  },
+                                                ),
+                                              );
                                             },
                                           ),
-                                        );
-                                      },
-                                    ),
                                     Padding(
                                       padding: EdgeInsets.only(
                                           bottom: MediaQuery.of(context)

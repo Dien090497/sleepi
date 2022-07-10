@@ -2,6 +2,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:slee_fi/common/enum/enum.dart';
+import 'package:slee_fi/common/extensions/num_ext.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
 import 'package:slee_fi/common/widgets/background_widget.dart';
@@ -11,18 +12,17 @@ import 'package:slee_fi/common/widgets/sf_button_outlined.dart';
 import 'package:slee_fi/common/widgets/sf_buttons.dart';
 import 'package:slee_fi/common/widgets/sf_card.dart';
 import 'package:slee_fi/common/widgets/sf_dialog.dart';
-import 'package:slee_fi/common/widgets/sf_icon.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
 import 'package:slee_fi/common/widgets/sf_textfield.dart';
 import 'package:slee_fi/common/widgets/snack_bar.dart';
 import 'package:slee_fi/l10n/locale_keys.g.dart';
 import 'package:slee_fi/presentation/blocs/staking/staking_cubit.dart';
 import 'package:slee_fi/presentation/blocs/staking/staking_state.dart';
+import 'package:slee_fi/presentation/blocs/user_bloc/user_bloc.dart';
 import 'package:slee_fi/presentation/screens/staking/widgets/popup_staking.dart';
-import 'package:slee_fi/resources/resources.dart';
 
 class DepositSlftArguments {
-  final String? balanceSlft;
+  final double? balanceSlft;
 
   DepositSlftArguments({this.balanceSlft});
 }
@@ -56,7 +56,7 @@ class _DepositSlftScreenState extends State<DepositSlftScreen> {
     as DepositSlftArguments?;
 
     return BlocProvider(
-      create: (context) => StakingCubit(),
+      create: (context) => StakingCubit()..init(),
       child: BlocConsumer<StakingCubit, StakingState>(
         listener: (context, state) {
           if (state is StakingStateError) {
@@ -65,8 +65,13 @@ class _DepositSlftScreenState extends State<DepositSlftScreen> {
                 message: state.message,
                 messageType: MessageType.error);
           }
+          if(state is StakingStateLoading){
+            context.read<UserBloc>().add(RefreshBalanceToken());
+          }
           if(state is StakingStateStakingSuccess){
+            Navigator.pop(context);
             showSuccessfulDialog(context, null);
+            context.read<StakingCubit>().getStakingInfo();
           }
         },
         builder: (context, state) {
@@ -103,7 +108,7 @@ class _DepositSlftScreenState extends State<DepositSlftScreen> {
                                               style: TextStyles.lightGrey12,
                                             )),
                                         SFText(
-                                          keyText: "${args?.balanceSlft ?? "xxx"} SLFT",
+                                          keyText: "${args?.balanceSlft!.formatBalanceToken ?? "xxx"} SLFT",
                                           style: TextStyles.lightGrey12,
                                         )
                                       ],
@@ -118,23 +123,23 @@ class _DepositSlftScreenState extends State<DepositSlftScreen> {
                                           keyText: LocaleKeys.deposit,
                                           style: TextStyles.bold18LightWhite,
                                         ),
-                                        Row(
-                                          crossAxisAlignment: CrossAxisAlignment.center,
-                                          children: [
-                                            const SFIcon(
-                                              Ics.icSlft,
-                                              width: 30,
-                                              height: 30,
-                                            ),
-                                            const SizedBox(
-                                              width: 6,
-                                            ),
-                                            SFText(
-                                              keyText: "XXX",
-                                              style: TextStyles.lightWhite16,
-                                            )
-                                          ],
-                                        ),
+                                        // Row(
+                                        //   crossAxisAlignment: CrossAxisAlignment.center,
+                                        //   children: [
+                                        //     const SFIcon(
+                                        //       Ics.icSlft,
+                                        //       width: 30,
+                                        //       height: 30,
+                                        //     ),
+                                        //     const SizedBox(
+                                        //       width: 6,
+                                        //     ),
+                                        //     SFText(
+                                        //       keyText: "XXX",
+                                        //       style: TextStyles.lightWhite16,
+                                        //     )
+                                        //   ],
+                                        // ),
                                       ],
                                     ),
                                     const SizedBox(
@@ -171,7 +176,7 @@ class _DepositSlftScreenState extends State<DepositSlftScreen> {
                                               if(args != null){
                                                 setState((){
                                                   isDisabled = false;
-                                                  _amountEditingController.text = args.balanceSlft!;
+                                                  _amountEditingController.text = args.balanceSlft!.formatBalanceToken.toString();
                                                 });
                                               }
                                             }),

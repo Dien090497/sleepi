@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:slee_fi/common/const/const.dart';
+import 'package:slee_fi/common/extensions/num_ext.dart';
 import 'package:slee_fi/common/extensions/string_x.dart';
 import 'package:slee_fi/common/routes/app_routes.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
@@ -22,10 +24,13 @@ import 'package:slee_fi/presentation/screens/staking/layout/deposit_slft_screen.
 import 'package:slee_fi/presentation/screens/staking/widgets/pop_up_calculator.dart';
 import 'package:slee_fi/presentation/screens/staking/widgets/pop_up_info_staking.dart';
 import 'package:slee_fi/presentation/screens/staking/widgets/popup_staking.dart';
+import 'package:slee_fi/presentation/screens/trade/trade_screen.dart';
 import 'package:slee_fi/resources/resources.dart';
 
 class StakingList extends StatelessWidget {
-  const StakingList({Key? key}) : super(key: key);
+  final double balanceSlft;
+
+  const StakingList({required this.balanceSlft, Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -68,16 +73,17 @@ class StakingList extends StatelessWidget {
                     Row(
                       children: [
                         Expanded(
-                            child: SFText(
-                              keyText: "${stakingInfo?.tvl ?? "0"} SLFT",
-                              style: TextStyles.w700WhiteSize24,
+                            child: LimitedBox(
+                              child: SFText(
+                                keyText: "${stakingInfo?.tvl ?? "0"} SLFT",
+                                style: TextStyles.w700WhiteSize24,
+                              ),
                             )),
-                        Expanded(
-                            child: SFText(
-                              keyText: "(=xxxxxx USD)",
-                              style: TextStyles.w400White14,
-                              textAlign: TextAlign.end,
-                            ))
+                        SFText(
+                          keyText: "(=xxxxxx USD)",
+                          style: TextStyles.w400White14,
+                          textAlign: TextAlign.end,
+                        )
                       ],
                     ),
                   ],
@@ -206,7 +212,7 @@ class StakingList extends StatelessWidget {
                               width: 6,
                             ),
                             SFText(
-                              keyText: "${stakingInfo?.stake.totalStake ?? 0}",
+                              keyText: "${stakingInfo != null ? double.parse(stakingInfo!.stake.totalStake).formatBalanceToken : 0}",
                               style: TextStyles.lightWhite16,
                             )
                           ],
@@ -237,7 +243,7 @@ class StakingList extends StatelessWidget {
                               width: 6,
                             ),
                             SFText(
-                              keyText: "${stakingInfo?.stake.totalReward ?? 0}",
+                              keyText: "${stakingInfo != null ? double.parse(stakingInfo!.stake.totalReward).formatBalanceToken : 0}",
                               style: TextStyles.lightWhite16,
                             )
                           ],
@@ -257,7 +263,7 @@ class StakingList extends StatelessWidget {
                               stringCase: StringCase.upperCase,
                             )),
                         SFText(
-                          keyText: "X%",
+                          keyText: "${stakingInfo != null ? double.parse(stakingInfo!.apr).formatBalanceToken : 0}%",
                           style: TextStyles.lightWhite16,
                         ),
                       ],
@@ -282,7 +288,7 @@ class StakingList extends StatelessWidget {
                           width: 95,
                           height: 36,
                           onPressed: () =>
-                              Navigator.pushNamed(context, R.depositSLFT, arguments: DepositSlftArguments(balanceSlft: stakingInfo?.stake.totalStake)),
+                              Navigator.pushNamed(context, R.depositSLFT, arguments: DepositSlftArguments(balanceSlft: balanceSlft)),
                         ),
                         SFButtonOutLined(
                             fixedSize: Size(102.w, 32.h),
@@ -305,16 +311,22 @@ class StakingList extends StatelessWidget {
                         ),
                         GestureDetector(
                           onTap: () {
-                            showCustomDialog(context, children: [
-                              PopUpStaking(
-                                message: LocaleKeys.do_you_really_want_to_compound
-                                    .tr(namedArgs: {
-                                  'amount': 'xxx',
-                                  'token': 'SLFT',
-                                }),
-                                onPressed: () => cubit.compound(),
-                              )
-                            ]);
+                            if(stakingInfo?.isCompound == true){
+                              showCustomDialog(context,
+                                  children: [
+                                    PopUpStaking(
+                                      message: LocaleKeys.do_you_really_want_to_compound
+                                          .tr(namedArgs: {
+                                        'amount': 'xxx',
+                                        'token': 'SLFT',
+                                      }),
+                                      onPressed: () => cubit.compound(),
+                                    )
+                                  ]);
+                            }else {
+                              null;
+                            }
+
                           },
                           child: SFText(
                             keyText: LocaleKeys.compound,
@@ -334,7 +346,15 @@ class StakingList extends StatelessWidget {
                 textStyle: TextStyles.boldWhite14,
                 color: AppColors.blue,
                 width: double.infinity,
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.pushNamed(
+                    context,
+                    R.trade,
+                    arguments: TradeArguments(
+                      Const.tokens[0]['address'].toString(),
+                    ),
+                  );
+                },
               ),
               const SizedBox(
                 height: 16.0,

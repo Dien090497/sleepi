@@ -34,7 +34,8 @@ class _TabItemsBuyState extends State<TabItemsBuy> {
     super.dispose();
   }
 
-  void _showItemDialog(BuildContext context, MarketPlaceModel item, MarketPlaceCubit cubit) {
+  void _showItemDialog(
+      BuildContext context, MarketPlaceModel item, MarketPlaceCubit cubit) {
     showCustomAlertDialog(
       context,
       padding: const EdgeInsets.all(24),
@@ -71,7 +72,7 @@ class _TabItemsBuyState extends State<TabItemsBuy> {
             }
             if (state is MarketPlaceStateBuySuccess) {
               cubit.refresh();
-              showSuccessfulDialog(context, null);
+              showSuccessfulDialog(context, LocaleKeys.purchased_successfully);
             }
 
             if (state is MarketPlaceStateBuyFailed) {
@@ -135,10 +136,7 @@ class _TabItemsBuyState extends State<TabItemsBuy> {
                                             item: listItems[i],
                                             onPressedButton: () {
                                               _showItemDialog(
-                                                context,
-                                                listItems[i],
-                                                cubit
-                                              );
+                                                  context, listItems[i], cubit);
                                             },
                                           ),
                                         );
