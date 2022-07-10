@@ -183,21 +183,25 @@ class NftPopUpTransfer extends StatelessWidget {
                   child: SFButton(
                     text: LocaleKeys.confirm,
                     onPressed: () {
-                      if (toAddress.isEmpty) {
-                        errorNotifier.value =
-                            LocaleKeys.this_field_is_required.tr();
+                      if (isToSpending ?? false) {
+                        onConfirm(toAddress);
                       } else {
-                        getIt<IsValidWalletAddressUseCase>()
-                            .call(toAddress)
-                            .fold(
-                          (l) {
-                            errorNotifier.value =
-                                LocaleKeys.invalid_address.tr();
-                          },
-                          (r) {
-                            onConfirm(toAddress);
-                          },
-                        );
+                        if (toAddress.isEmpty) {
+                          errorNotifier.value =
+                              LocaleKeys.this_field_is_required.tr();
+                        } else {
+                          getIt<IsValidWalletAddressUseCase>()
+                              .call(toAddress)
+                              .fold(
+                            (l) {
+                              errorNotifier.value =
+                                  LocaleKeys.invalid_address.tr();
+                            },
+                            (r) {
+                              onConfirm(toAddress);
+                            },
+                          );
+                        }
                       }
                     },
                     width: double.infinity,
