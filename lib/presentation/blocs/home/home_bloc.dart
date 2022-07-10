@@ -22,7 +22,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
   final _addItemToBedUC = getIt<AddItemToBedUseCase>();
   final _removeItemInUC = getIt<RemoveItemInBedUseCase>();
 
-  _fetchBed(FetchData fetchData ,Emitter<HomeState> emit) async {
+  _fetchBed(FetchData fetchData, Emitter<HomeState> emit) async {
     var result =
         await _fetchListBedUC.call(FetchBedParam(1, 10, 1, AttributeNFT.none));
     result.fold(
@@ -31,8 +31,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
         'load error ${l.msg}'.log;
       },
       (r) {
-        'load success ${r.length}'.log;
-        emit(const HomeState.loaded());
+        emit(HomeState.loaded(bedList: r.map((e) => e.toEntity()).toList()));
       },
     );
   }

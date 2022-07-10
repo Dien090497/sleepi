@@ -1,13 +1,13 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:card_swiper/card_swiper.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:slee_fi/common/enum/enum.dart';
 import 'package:slee_fi/common/routes/app_routes.dart';
+import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
 import 'package:slee_fi/common/widgets/loading_screen.dart';
 import 'package:slee_fi/common/widgets/sf_buttons.dart';
-import 'package:slee_fi/common/widgets/sf_icon.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
 import 'package:slee_fi/l10n/locale_keys.g.dart';
 import 'package:slee_fi/presentation/blocs/home/home_bloc.dart';
@@ -20,8 +20,8 @@ class MiddleBed extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final Size size = MediaQuery.of(context).size;
-    final beds = List.generate(BedType.values.length * 5,
-        (i) => BedType.values[i % BedType.values.length]);
+    // final beds = List.generate(BedType.values.length * 5,
+    //     (i) => BedType.values[i % BedType.values.length]);
     return Column(
       children: [
         SFText(
@@ -45,7 +45,7 @@ class MiddleBed extends StatelessWidget {
                 error: (message) => const SizedBox.shrink(),
                 initial: () => const SizedBox.shrink(),
                 loading: () => const LoadingIcon(),
-                loaded: () => Column(
+                loaded: (listBed) => Column(
                       children: [
                         SizedBox(
                           width: size.width,
@@ -55,7 +55,7 @@ class MiddleBed extends StatelessWidget {
                               return Column(
                                 children: [
                                   SFText(
-                                      keyText: beds[index].name,
+                                      keyText: listBed[index].name,
                                       style: TextStyles.blue14),
                                   GestureDetector(
                                     onTap: () {
@@ -63,10 +63,33 @@ class MiddleBed extends StatelessWidget {
                                           arguments:
                                               InfoIndividualParams(buy: true));
                                     },
-                                    child: SFIcon(
-                                      beds[index].image,
+                                    child: CachedNetworkImage(
+                                      imageUrl: listBed[index].image,
+                                      placeholder: (context, url) =>
+                                          const Center(
+                                        child: SizedBox(
+                                          width: 40.0,
+                                          height: 40.0,
+                                          child: CircularProgressIndicator(),
+                                        ),
+                                      ),
+                                      errorWidget: (context, url, error) =>
+                                          Container(
+                                              decoration: const BoxDecoration(
+                                                color: AppColors.transparent,
+                                                borderRadius: BorderRadius.all(
+                                                    Radius.circular(10)),
+                                              ),
+                                              child: const Icon(Icons.error)),
+                                      imageBuilder: (context, imageProvider) =>
+                                          Container(
+                                        decoration: BoxDecoration(
+                                          image: DecorationImage(
+                                              image: imageProvider,
+                                              fit: BoxFit.fitHeight),
+                                        ),
+                                      ),
                                       height: 180,
-                                      fit: BoxFit.fitHeight,
                                     ),
                                   ),
                                 ],
@@ -75,7 +98,7 @@ class MiddleBed extends StatelessWidget {
 
                             // indicatorLayout: PageIndicatorLayout.COLOR,
                             // autoplay: true,
-                            itemCount: beds.length,
+                            itemCount: listBed.length,
                             // pagination:  const SwiperPagination(),
                             control: const SwiperControl(),
                           ),
