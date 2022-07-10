@@ -359,14 +359,11 @@ class _AuthDataSource implements AuthDataSource {
   }
 
   @override
-  Future<double> estimateGasWithdraw(
-      type, contractAddress, tokenId, amountWithdraw) async {
+  Future<double> estimateGasWithdraw(type, contractAddress) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{
       r'type': type,
-      r'contractAddress': contractAddress,
-      r'tokenId': tokenId,
-      r'amountWithdraw': amountWithdraw
+      r'contractAddress': contractAddress
     };
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
