@@ -87,7 +87,7 @@ class _NFTDetailScreenState extends State<NFTDetailScreen> {
                   ));
             res.fold(
               (l) {
-                debugPrint('### L $l');
+                showMessageDialog(context, '$l');
               },
               (r) {
                 showSuccessfulDialog(context, null, onPop: () {

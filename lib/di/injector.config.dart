@@ -171,8 +171,8 @@ Future<_i1.GetIt> $initGetIt(_i1.GetIt get,
       () => _i31.IsNftApproveForAllUseCase(get<_i27.INFTRepository>()));
   gh.factory<_i32.RefreshTokenInterceptor>(() =>
       _i32.RefreshTokenInterceptor(get<_i22.SecureStorage>(), get<_i7.Dio>()));
-  gh.factory<_i33.SendNftToSpendingUseCase>(
-      () => _i33.SendNftToSpendingUseCase(get<_i27.INFTRepository>()));
+  gh.factory<_i33.SendNftToSpendingUseCase>(() => _i33.SendNftToSpendingUseCase(
+      get<_i27.INFTRepository>(), get<_i22.SecureStorage>()));
   gh.factory<_i34.SendToExternalUseCase>(
       () => _i34.SendToExternalUseCase(get<_i29.ITransactionRepository>()));
   gh.factory<_i35.SendTokenToExternalUseCase>(() =>
