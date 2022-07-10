@@ -9,6 +9,7 @@ part of 'staking_info_response.dart';
 StakingInfoResponse _$StakingInfoResponseFromJson(Map<String, dynamic> json) =>
     StakingInfoResponse(
       tvl: json['tvl'] as String,
+      apr: json['apr'] as String,
       isCompound: json['isCompound'] as bool,
       stake: StakeInfo.fromJson(json['stake'] as Map<String, dynamic>),
     );
@@ -17,6 +18,7 @@ Map<String, dynamic> _$StakingInfoResponseToJson(
         StakingInfoResponse instance) =>
     <String, dynamic>{
       'tvl': instance.tvl,
+      'apr': instance.apr,
       'isCompound': instance.isCompound,
       'stake': instance.stake.toJson(),
     };

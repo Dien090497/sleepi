@@ -75,7 +75,7 @@ class _TradeScreenState extends State<TradeScreen> {
       if (double.parse(result) > balance) {
         error = LocaleKeys.insufficient_balance;
       } else if (double.parse(result) == 0) {
-        error = LocaleKeys.not_be_zero;
+        error = LocaleKeys.amount_input_can_not_be_zero;
       } else {
         error = '';
       }

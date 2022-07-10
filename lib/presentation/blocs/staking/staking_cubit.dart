@@ -17,11 +17,10 @@ class StakingCubit extends Cubit<StakingState> {
   final _compoundUC = getIt<CompoundUseCase>();
 
   Future<void> init() async {
-    emit(const StakingState.loading());
+    emit(const StakingState.initial());
   }
 
   Future<void> getStakingInfo() async {
-    emit(const StakingState.loading());
     final result = await _stakingInfoUC.call(NoParams());
     result.fold(
           (l) {
@@ -41,7 +40,8 @@ class StakingCubit extends Cubit<StakingState> {
       },
           (success) {
         emit(const StakingState.stakingSuccess());
-      },
+        emit(const StakingState.loading());
+          },
     );
   }
 

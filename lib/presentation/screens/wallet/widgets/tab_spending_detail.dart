@@ -17,7 +17,6 @@ import 'package:slee_fi/presentation/blocs/pending/pending_bloc.dart';
 import 'package:slee_fi/presentation/blocs/user_bloc/user_bloc.dart';
 import 'package:slee_fi/presentation/blocs/user_bloc/user_state.dart';
 import 'package:slee_fi/presentation/screens/passcode/passcode_screen.dart';
-import 'package:slee_fi/presentation/screens/staking/staking_screen.dart';
 import 'package:slee_fi/presentation/screens/transfer/transfer_screen.dart';
 import 'package:slee_fi/presentation/screens/wallet/widgets/pop_up_info_spending.dart';
 import 'package:slee_fi/presentation/screens/wallet/widgets/spending_detail_list.dart';
@@ -35,7 +34,7 @@ class TabSpendingDetail extends StatefulWidget {
 
 class _TabSpendingDetailState extends State<TabSpendingDetail> {
   final RefreshController refreshController = RefreshController();
-  late List<TokenEntity> tokenList = <TokenEntity>[];
+
   @override
   void dispose() {
     refreshController.dispose();
@@ -70,7 +69,7 @@ class _TabSpendingDetailState extends State<TabSpendingDetail> {
                         padding: const EdgeInsets.symmetric(horizontal: 24.0),
                         child: BlocBuilder<UserBloc, UserState>(
                           builder: (context, state) {
-                            tokenList = <TokenEntity>[];
+                            final tokenList = <TokenEntity>[];
 
                             if (state is UserLoaded) {
                               tokenList.addAll(state.listTokens);
@@ -131,7 +130,7 @@ class _TabSpendingDetailState extends State<TabSpendingDetail> {
                               textStyle: TextStyles.bold16Blue,
                               borderColor: AppColors.blue,
                               onPressed: () {
-                                Navigator.pushNamed(context, R.staking, arguments: StakingArguments(tokenList: tokenList));
+                                Navigator.pushNamed(context, R.staking);
                               },
                             )),
                       ),
