@@ -99,3 +99,17 @@ enum AttributeWithdraw {
 
   String toJson() => name;
 }
+
+enum TransferType {
+  token('token'),
+  nft('nft');
+
+  const TransferType(this.name);
+
+  final String name;
+
+  @override
+  String toString() => name;
+
+  String toJson() => name;
+}

@@ -42,7 +42,7 @@ class _TabItemsBuyState extends State<TabItemsBuy> {
         item: item,
         onConfirmTap: () {
           Navigator.pop(context);
-          cubit.buyNFT(item);
+          cubit.buyNFT(item.id);
         },
       ),
     );

@@ -13,9 +13,9 @@ import 'package:slee_fi/presentation/blocs/market_place/market_place_state.dart'
 import 'package:slee_fi/presentation/screens/market_place/widget/pop_up_bed_market_place.dart';
 
 class BottomBarMarketPlaceWidget extends StatelessWidget {
-  const BottomBarMarketPlaceWidget({Key? key, required this.bed})
+  const BottomBarMarketPlaceWidget({Key? key, required this.marketPlaceModel})
       : super(key: key);
-  final MarketPlaceModel bed;
+  final MarketPlaceModel marketPlaceModel;
 
   void _showBedDialog(
       BuildContext context, MarketPlaceModel bed, MarketPlaceCubit cubit) {
@@ -26,7 +26,7 @@ class BottomBarMarketPlaceWidget extends StatelessWidget {
         bed: bed,
         onConfirmTap: () {
           Navigator.pop(context);
-          cubit.buyNFT(bed);
+          cubit.buyNFT(bed.id);
         },
       ),
     );
@@ -95,7 +95,7 @@ class BottomBarMarketPlaceWidget extends StatelessWidget {
                               textStyle: TextStyles.white14W700,
                               gradient: AppColors.gradientBlueButton,
                               onPressed: () {
-                                _showBedDialog(context, bed, cubit);
+                                _showBedDialog(context, marketPlaceModel, cubit);
                               },
                             ),
                           ],

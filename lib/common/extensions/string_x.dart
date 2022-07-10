@@ -28,8 +28,8 @@ extension StringX on String {
   }
 
   String get formatAddress {
-    if (isEmpty) {
-      return '';
+    if (isEmpty || length < 10) {
+      return this;
     }
     return '${substring(0, 5)}...${substring(length - 5, length)}';
   }

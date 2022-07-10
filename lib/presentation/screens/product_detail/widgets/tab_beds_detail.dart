@@ -5,6 +5,7 @@ import 'package:slee_fi/common/style/text_styles.dart';
 import 'package:slee_fi/common/widgets/sf_icon.dart';
 import 'package:slee_fi/common/widgets/sf_sub_tab_bar.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
+import 'package:slee_fi/entities/bed_entity/bed_entity.dart';
 import 'package:slee_fi/l10n/locale_keys.g.dart';
 import 'package:slee_fi/presentation/screens/info_individual/info_individual_screen.dart';
 import 'package:slee_fi/presentation/screens/product_detail/widgets/gridview_bed_item.dart';
@@ -55,8 +56,29 @@ class TabBedsDetail extends StatelessWidget {
                       beds: beds,
                       onBedTap: (bed) {
                         Navigator.pushNamed(context, R.nftInfo,
-                            arguments:
-                                InfoIndividualParams(bed: null, buy: true));
+                            arguments: InfoIndividualParams(
+
+                                /// TODO: remove example code
+                                bed: BedEntity(
+                                    name: 'no name',
+                                    id: 1,
+                                    level: 0,
+                                    image: bed.image,
+                                    type: 'common',
+                                    contractAddress:
+                                        '0x52839a88e9fdd2b137e32c65fec8e7b3f1f1ccc6',
+                                    quality: 'no ',
+                                    durability: 0,
+                                    isLock: 0,
+                                    bedMint: 5,
+                                    efficiency: 5,
+                                    luck: 5,
+                                    bonus: 5,
+                                    special: 5,
+                                    resilience: 0,
+                                    time: 2,
+                                    isMint: 0),
+                                buy: true));
                       }),
                   Center(
                     child: Column(

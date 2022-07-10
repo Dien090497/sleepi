@@ -37,7 +37,7 @@ class _TabJewelsBuyState extends State<TabJewelsBuy> {
         jewel: jewel,
         onConfirmTap: () {
           Navigator.pop(context);
-          cubit.buyNFT(jewel);
+          cubit.buyNFT(jewel.id);
         },
       ),
     );

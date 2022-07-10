@@ -37,7 +37,7 @@ class _TabBedsBuyState extends State<TabBedsBuy> {
         bed: bed,
         onConfirmTap: () {
           Navigator.pop(context);
-          cubit.buyNFT(bed);
+          cubit.buyNFT(bed.id);
         },
       ),
     );
@@ -130,7 +130,9 @@ class _TabBedsBuyState extends State<TabBedsBuy> {
                                       onBedTap: (bed) {
                                         Navigator.pushNamed(context, R.nftInfo,
                                             arguments: InfoIndividualParams(
-                                                bed: bed, buy: true));
+                                                bed: bed.toBedEntity(),
+                                                marketPlaceModel: bed,
+                                                buy: true));
                                       },
                                     ),
                                     Padding(

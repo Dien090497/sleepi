@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:slee_fi/common/const/const.dart';
+import 'package:slee_fi/common/enum/enum.dart';
 import 'package:slee_fi/common/routes/app_routes.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
@@ -106,10 +107,13 @@ class PopupInsufficient extends StatelessWidget {
                         symbol: 'AVAX',
                         icon: Ics.icAvax,
                         balance: 0);
-                    if (state is WalletStateLoaded && state.walletInfoEntity != null) {
+                    if (state is WalletStateLoaded &&
+                        state.walletInfoEntity != null) {
                       for (final element in state.tokenList) {
                         if (element.symbol.toLowerCase() ==
-                            Const.tokens[0]['symbol'].toString().toLowerCase()) {
+                            Const.tokens[0]['symbol']
+                                .toString()
+                                .toLowerCase()) {
                           tokenAvax = element;
                         }
                       }
@@ -121,7 +125,8 @@ class PopupInsufficient extends StatelessWidget {
                         Navigator.pushNamed(context, R.passcode,
                             arguments: PasscodeArguments(
                                 route: R.transfer,
-                                argNewRoute: TransferScreenArg(tokenAvax, false)));
+                                argNewRoute: TransferScreenArg(
+                                    tokenAvax, false, TransferType.nft)));
                       },
                       textStyle: TextStyles.white16,
                       gradient: AppColors.blueGradient,

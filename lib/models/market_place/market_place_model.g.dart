@@ -28,7 +28,7 @@ MarketPlaceModel _$MarketPlaceModelFromJson(Map<String, dynamic> json) =>
       json['image'] as String,
       json['contract_address'] as String,
       json['type'] as String,
-      json['quality'] as String?,
+      json['quality'] as String,
       json['owner'] as String,
       json['symbol'] as String,
       json['class'] as String?,

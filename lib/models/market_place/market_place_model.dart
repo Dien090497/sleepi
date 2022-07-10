@@ -1,5 +1,6 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:json_annotation/json_annotation.dart';
+import 'package:slee_fi/entities/bed_entity/bed_entity.dart';
 
 part 'market_place_model.g.dart';
 
@@ -49,7 +50,7 @@ class MarketPlaceModel {
   final String type;
   @JsonKey(name: 'class')
   final String? classNft;
-  final String? quality;
+  final String quality;
   final String owner;
 
   MarketPlaceModel(
@@ -76,10 +77,33 @@ class MarketPlaceModel {
       this.quality,
       this.owner,
       this.symbol,
-      this.classNft, this.durability, this.isMint);
+      this.classNft,
+      this.durability,
+      this.isMint);
 
   factory MarketPlaceModel.fromJson(Map<String, dynamic> json) =>
       _$MarketPlaceModelFromJson(json);
 
   Map<String, dynamic> toJson() => _$MarketPlaceModelToJson(this);
+
+  BedEntity toBedEntity() {
+    return BedEntity(
+        name: nftName,
+        id: id,
+        level: level,
+        image: image,
+        type: type,
+        contractAddress: contractAddress,
+        quality: quality,
+        durability: durability,
+        isLock: isLock,
+        bedMint: bedMint,
+        efficiency: efficiency,
+        luck: luck,
+        bonus: bonus,
+        special: special,
+        resilience: resilience,
+        time: time,
+        isMint: isMint);
+  }
 }
