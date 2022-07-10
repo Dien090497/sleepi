@@ -21,6 +21,7 @@ mixin _$HomeState {
     required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function() loaded,
+    required TResult Function(String message) error,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -28,6 +29,7 @@ mixin _$HomeState {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function()? loaded,
+    TResult Function(String message)? error,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -35,6 +37,7 @@ mixin _$HomeState {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function()? loaded,
+    TResult Function(String message)? error,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -43,6 +46,7 @@ mixin _$HomeState {
     required TResult Function(HomeInitial value) initial,
     required TResult Function(HomeLoading value) loading,
     required TResult Function(HomeLoaded value) loaded,
+    required TResult Function(HomeError value) error,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -50,6 +54,7 @@ mixin _$HomeState {
     TResult Function(HomeInitial value)? initial,
     TResult Function(HomeLoading value)? loading,
     TResult Function(HomeLoaded value)? loaded,
+    TResult Function(HomeError value)? error,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -57,6 +62,7 @@ mixin _$HomeState {
     TResult Function(HomeInitial value)? initial,
     TResult Function(HomeLoading value)? loading,
     TResult Function(HomeLoaded value)? loaded,
+    TResult Function(HomeError value)? error,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -126,6 +132,7 @@ class _$HomeInitial with DiagnosticableTreeMixin implements HomeInitial {
     required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function() loaded,
+    required TResult Function(String message) error,
   }) {
     return initial();
   }
@@ -136,6 +143,7 @@ class _$HomeInitial with DiagnosticableTreeMixin implements HomeInitial {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function()? loaded,
+    TResult Function(String message)? error,
   }) {
     return initial?.call();
   }
@@ -146,6 +154,7 @@ class _$HomeInitial with DiagnosticableTreeMixin implements HomeInitial {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function()? loaded,
+    TResult Function(String message)? error,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -160,6 +169,7 @@ class _$HomeInitial with DiagnosticableTreeMixin implements HomeInitial {
     required TResult Function(HomeInitial value) initial,
     required TResult Function(HomeLoading value) loading,
     required TResult Function(HomeLoaded value) loaded,
+    required TResult Function(HomeError value) error,
   }) {
     return initial(this);
   }
@@ -170,6 +180,7 @@ class _$HomeInitial with DiagnosticableTreeMixin implements HomeInitial {
     TResult Function(HomeInitial value)? initial,
     TResult Function(HomeLoading value)? loading,
     TResult Function(HomeLoaded value)? loaded,
+    TResult Function(HomeError value)? error,
   }) {
     return initial?.call(this);
   }
@@ -180,6 +191,7 @@ class _$HomeInitial with DiagnosticableTreeMixin implements HomeInitial {
     TResult Function(HomeInitial value)? initial,
     TResult Function(HomeLoading value)? loading,
     TResult Function(HomeLoaded value)? loaded,
+    TResult Function(HomeError value)? error,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -242,6 +254,7 @@ class _$HomeLoading with DiagnosticableTreeMixin implements HomeLoading {
     required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function() loaded,
+    required TResult Function(String message) error,
   }) {
     return loading();
   }
@@ -252,6 +265,7 @@ class _$HomeLoading with DiagnosticableTreeMixin implements HomeLoading {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function()? loaded,
+    TResult Function(String message)? error,
   }) {
     return loading?.call();
   }
@@ -262,6 +276,7 @@ class _$HomeLoading with DiagnosticableTreeMixin implements HomeLoading {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function()? loaded,
+    TResult Function(String message)? error,
     required TResult orElse(),
   }) {
     if (loading != null) {
@@ -276,6 +291,7 @@ class _$HomeLoading with DiagnosticableTreeMixin implements HomeLoading {
     required TResult Function(HomeInitial value) initial,
     required TResult Function(HomeLoading value) loading,
     required TResult Function(HomeLoaded value) loaded,
+    required TResult Function(HomeError value) error,
   }) {
     return loading(this);
   }
@@ -286,6 +302,7 @@ class _$HomeLoading with DiagnosticableTreeMixin implements HomeLoading {
     TResult Function(HomeInitial value)? initial,
     TResult Function(HomeLoading value)? loading,
     TResult Function(HomeLoaded value)? loaded,
+    TResult Function(HomeError value)? error,
   }) {
     return loading?.call(this);
   }
@@ -296,6 +313,7 @@ class _$HomeLoading with DiagnosticableTreeMixin implements HomeLoading {
     TResult Function(HomeInitial value)? initial,
     TResult Function(HomeLoading value)? loading,
     TResult Function(HomeLoaded value)? loaded,
+    TResult Function(HomeError value)? error,
     required TResult orElse(),
   }) {
     if (loading != null) {
@@ -358,6 +376,7 @@ class _$HomeLoaded with DiagnosticableTreeMixin implements HomeLoaded {
     required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function() loaded,
+    required TResult Function(String message) error,
   }) {
     return loaded();
   }
@@ -368,6 +387,7 @@ class _$HomeLoaded with DiagnosticableTreeMixin implements HomeLoaded {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function()? loaded,
+    TResult Function(String message)? error,
   }) {
     return loaded?.call();
   }
@@ -378,6 +398,7 @@ class _$HomeLoaded with DiagnosticableTreeMixin implements HomeLoaded {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function()? loaded,
+    TResult Function(String message)? error,
     required TResult orElse(),
   }) {
     if (loaded != null) {
@@ -392,6 +413,7 @@ class _$HomeLoaded with DiagnosticableTreeMixin implements HomeLoaded {
     required TResult Function(HomeInitial value) initial,
     required TResult Function(HomeLoading value) loading,
     required TResult Function(HomeLoaded value) loaded,
+    required TResult Function(HomeError value) error,
   }) {
     return loaded(this);
   }
@@ -402,6 +424,7 @@ class _$HomeLoaded with DiagnosticableTreeMixin implements HomeLoaded {
     TResult Function(HomeInitial value)? initial,
     TResult Function(HomeLoading value)? loading,
     TResult Function(HomeLoaded value)? loaded,
+    TResult Function(HomeError value)? error,
   }) {
     return loaded?.call(this);
   }
@@ -412,6 +435,7 @@ class _$HomeLoaded with DiagnosticableTreeMixin implements HomeLoaded {
     TResult Function(HomeInitial value)? initial,
     TResult Function(HomeLoading value)? loading,
     TResult Function(HomeLoaded value)? loaded,
+    TResult Function(HomeError value)? error,
     required TResult orElse(),
   }) {
     if (loaded != null) {
@@ -423,4 +447,157 @@ class _$HomeLoaded with DiagnosticableTreeMixin implements HomeLoaded {
 
 abstract class HomeLoaded implements HomeState {
   const factory HomeLoaded() = _$HomeLoaded;
+}
+
+/// @nodoc
+abstract class _$$HomeErrorCopyWith<$Res> {
+  factory _$$HomeErrorCopyWith(
+          _$HomeError value, $Res Function(_$HomeError) then) =
+      __$$HomeErrorCopyWithImpl<$Res>;
+  $Res call({String message});
+}
+
+/// @nodoc
+class __$$HomeErrorCopyWithImpl<$Res> extends _$HomeStateCopyWithImpl<$Res>
+    implements _$$HomeErrorCopyWith<$Res> {
+  __$$HomeErrorCopyWithImpl(
+      _$HomeError _value, $Res Function(_$HomeError) _then)
+      : super(_value, (v) => _then(v as _$HomeError));
+
+  @override
+  _$HomeError get _value => super._value as _$HomeError;
+
+  @override
+  $Res call({
+    Object? message = freezed,
+  }) {
+    return _then(_$HomeError(
+      message == freezed
+          ? _value.message
+          : message // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$HomeError with DiagnosticableTreeMixin implements HomeError {
+  const _$HomeError(this.message);
+
+  @override
+  final String message;
+
+  @override
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+    return 'HomeState.error(message: $message)';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('type', 'HomeState.error'))
+      ..add(DiagnosticsProperty('message', message));
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$HomeError &&
+            const DeepCollectionEquality().equals(other.message, message));
+  }
+
+  @override
+  int get hashCode =>
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(message));
+
+  @JsonKey(ignore: true)
+  @override
+  _$$HomeErrorCopyWith<_$HomeError> get copyWith =>
+      __$$HomeErrorCopyWithImpl<_$HomeError>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function() loading,
+    required TResult Function() loaded,
+    required TResult Function(String message) error,
+  }) {
+    return error(message);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function()? loading,
+    TResult Function()? loaded,
+    TResult Function(String message)? error,
+  }) {
+    return error?.call(message);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function()? loading,
+    TResult Function()? loaded,
+    TResult Function(String message)? error,
+    required TResult orElse(),
+  }) {
+    if (error != null) {
+      return error(message);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(HomeInitial value) initial,
+    required TResult Function(HomeLoading value) loading,
+    required TResult Function(HomeLoaded value) loaded,
+    required TResult Function(HomeError value) error,
+  }) {
+    return error(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(HomeInitial value)? initial,
+    TResult Function(HomeLoading value)? loading,
+    TResult Function(HomeLoaded value)? loaded,
+    TResult Function(HomeError value)? error,
+  }) {
+    return error?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(HomeInitial value)? initial,
+    TResult Function(HomeLoading value)? loading,
+    TResult Function(HomeLoaded value)? loaded,
+    TResult Function(HomeError value)? error,
+    required TResult orElse(),
+  }) {
+    if (error != null) {
+      return error(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class HomeError implements HomeState {
+  const factory HomeError(final String message) = _$HomeError;
+
+  String get message => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  _$$HomeErrorCopyWith<_$HomeError> get copyWith =>
+      throw _privateConstructorUsedError;
 }

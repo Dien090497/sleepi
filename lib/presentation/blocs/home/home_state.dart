@@ -10,4 +10,6 @@ class HomeState with _$HomeState {
   const factory HomeState.loading() = HomeLoading;
 
   const factory HomeState.loaded() = HomeLoaded;
+
+  const factory HomeState.error(String message) = HomeError;
 }

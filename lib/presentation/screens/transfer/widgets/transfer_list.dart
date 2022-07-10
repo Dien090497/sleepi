@@ -162,6 +162,7 @@ class _TransferListState extends State<TransferList> {
                   final cubit = context.read<TransferCubit>();
                   cubit.estimateGas(widget.tokenEntity.address,
                       amount: amount,
+                      symbol: widget.tokenEntity.symbol,
                       balance: widget.tokenEntity.balance,
                       spendingToWallet: widget.spendingToWallet);
                 },

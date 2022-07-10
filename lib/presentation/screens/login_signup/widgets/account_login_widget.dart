@@ -30,7 +30,7 @@ class AccountLoginWidget extends StatefulWidget {
 }
 
 class _AccountLoginState extends State<AccountLoginWidget> {
-  Action action = Action.signUp;
+  Action action = Action.signIn;
 
   _changeState(Action action) {
     setState(() => this.action = action);
