@@ -3,6 +3,7 @@ import 'dart:core';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'beb_model.g.dart';
+
 @JsonSerializable()
 class BedModel {
   final int id;
@@ -13,9 +14,11 @@ class BedModel {
   final String image;
   @JsonKey(name: 'contract_address')
   final String contractAddress;
-  @JsonKey(name: 'jewel_type')
   final String type;
+  @JsonKey(name: 'jewel_type')
   dynamic jewelType;
+  @JsonKey(name: 'class')
+  dynamic classBed;
   @JsonKey(name: "is_mint")
   final int isMint;
   final String quality;
