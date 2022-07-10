@@ -182,7 +182,7 @@ class InfoIndividualScreen extends StatelessWidget {
           right: 0,
           child: args.marketPlaceModel != null && (args.buy ?? false)
               ? BottomBarMarketPlaceWidget(
-                  marketPlaceModel: args.marketPlaceModel!)
+                  bed: args.marketPlaceModel!)
               : const BottomBarWidget(),
         )
       ],

@@ -13,9 +13,9 @@ import 'package:slee_fi/presentation/blocs/market_place/market_place_state.dart'
 import 'package:slee_fi/presentation/screens/market_place/widget/pop_up_bed_market_place.dart';
 
 class BottomBarMarketPlaceWidget extends StatelessWidget {
-  const BottomBarMarketPlaceWidget({Key? key, required this.marketPlaceModel})
+  const BottomBarMarketPlaceWidget({Key? key, required this.bed})
       : super(key: key);
-  final MarketPlaceModel marketPlaceModel;
+  final MarketPlaceModel bed;
 
   void _showBedDialog(
       BuildContext context, MarketPlaceModel bed, MarketPlaceCubit cubit) {
@@ -95,7 +95,7 @@ class BottomBarMarketPlaceWidget extends StatelessWidget {
                               textStyle: TextStyles.white14W700,
                               gradient: AppColors.gradientBlueButton,
                               onPressed: () {
-                                _showBedDialog(context, marketPlaceModel, cubit);
+                                _showBedDialog(context, bed, cubit);
                               },
                             ),
                           ],
