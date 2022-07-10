@@ -192,11 +192,14 @@ class PopUpJewelMarketPlace extends StatelessWidget {
                     Navigator.pop(context);
                     if (userState is UserLoaded) {
                       if (userState.userInfoEntity.wallet != null) {
-                        if (userState.listTokens[2].balance <
-                            double.parse(jewel.price)) {
-                          _showDonWorryDialog(context, jewel);
-                        } else {
-                          _showConfirmDialog(context, jewel);
+                        for (var element in userState.listTokens) {
+                          if (element.symbol.toLowerCase() == 'avax') {
+                            if (element.balance < double.parse(jewel.price)) {
+                              _showDonWorryDialog(context, jewel);
+                            } else {
+                              _showConfirmDialog(context, jewel);
+                            }
+                          }
                         }
                       } else {
                         _showCreateOrImportWallet(context);

@@ -31,7 +31,9 @@ BedModel _$BedModelFromJson(Map<String, dynamic> json) => BedModel(
       json['categoryId'] as int,
       json['isLock'] as int,
       json['status'] as String,
-    )..jewelType = json['jewel_type'];
+    )
+      ..jewelType = json['jewel_type']
+      ..classBed = json['class'];
 
 Map<String, dynamic> _$BedModelToJson(BedModel instance) => <String, dynamic>{
       'id': instance.id,
@@ -41,6 +43,7 @@ Map<String, dynamic> _$BedModelToJson(BedModel instance) => <String, dynamic>{
       'contract_address': instance.contractAddress,
       'type': instance.type,
       'jewel_type': instance.jewelType,
+      'class': instance.classBed,
       'is_mint': instance.isMint,
       'quality': instance.quality,
       'owner': instance.owner,
