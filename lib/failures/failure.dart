@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:equatable/equatable.dart';
 import 'package:slee_fi/common/extensions/string_x.dart';
+import 'package:slee_fi/l10n/locale_keys.g.dart';
 
 abstract class Failure extends Equatable {
   const Failure();
@@ -15,7 +16,7 @@ class FailureMessage extends Failure {
     try {
       if (e is DioError) {
         if (e.response?.statusCode == 502 || e.response?.statusCode == 500) {
-          return const FailureMessage('Some thing wrong');
+          return const FailureMessage(LocaleKeys.some_thing_wrong);
         }
         'error is   ${e.response?.data}'.log;
         final error = e.response?.data['error']['details']['message'];

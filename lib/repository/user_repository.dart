@@ -3,7 +3,6 @@ import 'package:slee_fi/entities/active_code/active_code_entity.dart';
 import 'package:slee_fi/failures/failure.dart';
 import 'package:slee_fi/models/bed_model/beb_model.dart';
 import 'package:slee_fi/models/global_config_response/global_config_response.dart';
-import 'package:slee_fi/models/market_place/market_place_model.dart';
 import 'package:slee_fi/models/swap_token_to_wallet_response/swap_token_to_wallet_response.dart';
 import 'package:slee_fi/models/token_spending/token_spending.dart';
 import 'package:slee_fi/models/withdraw_history_response/withdraw_history_response.dart';

@@ -422,7 +422,7 @@
   "wallet_already" : "Your account already has a wallet.",
   "insufficient_avax": "Insufficient Avax in ",
   "don_worry_transfer": "Don’t worry! Just transfer enough AVAX from your wallet to the spending account and you are good to go",
-  "some_thing_wrong" : "Some thing wrong",
+  "some_thing_wrong" : "Something went wrong"
   "purchased_successfully": "Purchased Successfully",
   "no_result": "No Result"
 }

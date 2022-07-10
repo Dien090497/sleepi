@@ -99,11 +99,11 @@ class TextfieldVerificationEmail extends StatelessWidget {
           ),
         ),
         const SizedBox(height: 8),
-        if (errorText != '')
-          Text(
-            errorText!,
+        if (errorText != null && errorText != '')
+          SFText(
             style: TextStyles.w400Red12,
             maxLines: 3,
+            keyText: errorText!,
           ),
       ],
     );
