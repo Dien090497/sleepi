@@ -58,7 +58,7 @@ class _TabBedsBuyState extends State<TabBedsBuy> {
 
             if (state is MarketPlaceStateBuySuccess) {
               cubit.refresh();
-              showSuccessfulDialog(context, null);
+              showSuccessfulDialog(context, LocaleKeys.purchased_successfully);
             }
 
             if (state is MarketPlaceStateBuyFailed) {

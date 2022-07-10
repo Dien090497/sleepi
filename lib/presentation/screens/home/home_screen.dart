@@ -42,95 +42,85 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (_) => HomeBloc()..add(const FetchData()),
-      child: BlocBuilder<HomeBloc, HomeState>(
-        builder: (context, state) {
-          return state.when(
-            initial: () => const SizedBox.shrink(),
-            loading: () => const LoadingIcon(),
-            loaded: () {
-              return SafeArea(
-                bottom: false,
-                child: Column(
+      child: SafeArea(
+        bottom: false,
+        child: Column(
+          children: [
+            const TopBarCommon(),
+            const SizedBox(height: 27),
+            Expanded(
+              child: SmartRefresher(
+                controller: refreshController,
+                enablePullDown: true,
+                onRefresh: () {
+                  _onRefresh(refreshController);
+                },
+                child: ListView(
+                  shrinkWrap: true,
                   children: [
-                    const TopBarCommon(),
-                    const SizedBox(height: 27),
-                    Expanded(
-                      child: SmartRefresher(
-                        controller: refreshController,
-                        enablePullDown: true,
-                        onRefresh: () {
-                          _onRefresh(refreshController);
-                        },
-                        child: ListView(
-                          shrinkWrap: true,
-                          children: [
-                            const Padding(
-                              padding: EdgeInsets.symmetric(horizontal: 16.0),
-                              child: MiddleBed(),
-                            ),
-                            const SizedBox(height: 10),
-                            const UseItem(),
-                            const SizedBox(height: 24),
-                            Padding(
-                              padding:
-                                  const EdgeInsets.symmetric(horizontal: 16.0),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      Text(
-                                        '${LocaleKeys.insurance.tr()}: 5%',
-                                        style: TextStyles.bold16LightWhite,
-                                      ),
-                                      SizedBox(
-                                        height: 24,
-                                        child: HomeSwitch(
-                                          onChanged: (bool value) {},
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                  const SizedBox(height: 2),
-                                  GestureDetector(
-                                    onTap: () {
-                                      launchInsurance(context);
-                                    },
-                                    child: Row(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.center,
-                                      children: [
-                                        SFText(
-                                          keyText: LocaleKeys.what_is_insurance,
-                                          style: TextStyles.lightGrey12,
-                                        ),
-                                        const SizedBox(width: 8),
-                                        const SFIcon(Ics.icCircleQuestion),
-                                      ],
-                                    ),
-                                  ),
-                                  const SizedBox(height: 24),
-                                  SFText(
-                                    keyText: 'You can set your alarm here',
-                                    style: TextStyles.lightGrey12,
-                                  )
-                                ],
+                    const Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 16.0),
+                      child: MiddleBed(),
+                    ),
+                    const SizedBox(height: 10),
+                    const UseItem(),
+                    const SizedBox(height: 24),
+                    Padding(
+                      padding:
+                      const EdgeInsets.symmetric(horizontal: 16.0),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Row(
+                            mainAxisAlignment:
+                            MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text(
+                                '${LocaleKeys.insurance.tr()}: 5%',
+                                style: TextStyles.bold16LightWhite,
                               ),
+                              SizedBox(
+                                height: 24,
+                                child: HomeSwitch(
+                                  onChanged: (bool value) {},
+                                ),
+                              ),
+                            ],
+                          ),
+                          const SizedBox(height: 2),
+                          GestureDetector(
+                            onTap: () {
+                              launchInsurance(context);
+                            },
+                            child: Row(
+                              crossAxisAlignment:
+                              CrossAxisAlignment.center,
+                              children: [
+                                SFText(
+                                  keyText: LocaleKeys.what_is_insurance,
+                                  style: TextStyles.lightGrey12,
+                                ),
+                                const SizedBox(width: 8),
+                                const SFIcon(Ics.icCircleQuestion),
+                              ],
                             ),
-                            const SizedBox(height: 16),
-                            const AlarmBell(),
-                          ],
-                        ),
+                          ),
+                          const SizedBox(height: 24),
+                          SFText(
+                            keyText: 'You can set your alarm here',
+                            style: TextStyles.lightGrey12,
+                          )
+                        ],
                       ),
                     ),
+                    const SizedBox(height: 16),
+                    const AlarmBell(),
                   ],
                 ),
-              );
-            },
-          );
-        },
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

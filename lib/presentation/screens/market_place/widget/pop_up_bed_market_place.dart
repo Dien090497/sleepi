@@ -77,14 +77,12 @@ class PopUpBedMarketPlace extends StatelessWidget {
           errorWidget: (context, url, error) => Container(
               decoration: const BoxDecoration(
                 color: AppColors.red,
-                borderRadius:
-                BorderRadius.all(Radius.circular(10)),
+                borderRadius: BorderRadius.all(Radius.circular(10)),
               ),
               child: const Icon(Icons.error)),
           imageBuilder: (context, imageProvider) => Container(
             decoration: BoxDecoration(
-              image: DecorationImage(
-                  image: imageProvider, fit: BoxFit.cover),
+              image: DecorationImage(image: imageProvider, fit: BoxFit.cover),
             ),
           ),
           width: 80,
@@ -149,11 +147,14 @@ class PopUpBedMarketPlace extends StatelessWidget {
                     Navigator.pop(context);
                     if (userState is UserLoaded) {
                       if (userState.userInfoEntity.wallet != null) {
-                        if (userState.listTokens[2].balance <
-                            double.parse(bed.price)) {
-                          _showDonWorryDialog(context, bed);
-                        } else {
-                          _showConfirmDialog(context, bed);
+                        for (var element in userState.listTokens) {
+                          if (element.symbol.toLowerCase() == 'avax') {
+                            if (element.balance < double.parse(bed.price)) {
+                              _showDonWorryDialog(context, bed);
+                            } else {
+                              _showConfirmDialog(context, bed);
+                            }
+                          }
                         }
                       } else {
                         _showCreateOrImportWallet(context);
