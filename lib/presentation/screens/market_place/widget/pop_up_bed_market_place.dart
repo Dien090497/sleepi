@@ -160,9 +160,7 @@ class PopUpBedMarketPlace extends StatelessWidget {
                               } else {
                                 _showCreateOrImportWallet(context)
                                     .then((value) {
-                                  if (value == true) {
-                                    cubit.init(1);
-                                  }
+                                  cubit.refreshStatusWallet();
                                 });
                               }
                             } else {
@@ -171,11 +169,8 @@ class PopUpBedMarketPlace extends StatelessWidget {
                           }
                         }
                       } else {
-                        _showCreateOrImportWallet(context)
-                            .then((value) {
-                          if (value == true) {
-                            cubit.init(1);
-                          }
+                        _showCreateOrImportWallet(context).then((value) {
+                          cubit.refreshStatusWallet();
                         });
                       }
                     }

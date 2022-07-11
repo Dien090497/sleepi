@@ -199,9 +199,7 @@ class PopUpJewelMarketPlace extends StatelessWidget {
                               } else {
                                 _showCreateOrImportWallet(context)
                                     .then((value) {
-                                  if (value == true) {
-                                    cubit.init(2);
-                                  }
+                                  cubit.refreshStatusWallet();
                                 });
                               }
                             } else {
@@ -210,11 +208,8 @@ class PopUpJewelMarketPlace extends StatelessWidget {
                           }
                         }
                       } else {
-                        _showCreateOrImportWallet(context)
-                            .then((value) {
-                          if (value == true) {
-                            cubit.init(2);
-                          }
+                        _showCreateOrImportWallet(context).then((value) {
+                          cubit.refreshStatusWallet();
                         });
                       }
                     }
