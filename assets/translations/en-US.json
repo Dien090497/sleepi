@@ -435,5 +435,6 @@
   "green": "Green",
   "pink": "Pink",
   "purple": "Purple",
-  "incorrect_address": "Incorrect Address"
+  "incorrect_address": "Incorrect Address",
+  "insufficient_amount": "Insufficient amount"
 }

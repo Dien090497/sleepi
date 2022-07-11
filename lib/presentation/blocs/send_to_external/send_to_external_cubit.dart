@@ -66,7 +66,7 @@ class SendToExternalCubit extends Cubit<SendToExternalState> {
 
   Future<void> validator(double balance) async {
     if (contractAddressTo.isEmpty) {
-      emit(SendToExternalState.errorToAddress(LocaleKeys.pleas_enter_contact_address.tr()));
+      emit(SendToExternalState.errorToAddress(LocaleKeys.this_field_is_required.tr()));
       return;
     }
     if (isValidEthereumAddress(contractAddressTo) == false) {
@@ -78,7 +78,7 @@ class SendToExternalCubit extends Cubit<SendToExternalState> {
       return;
     }
     if (valueInEther > balance) {
-      emit(SendToExternalState.errorValueInEther(LocaleKeys.insufficient_balance.tr()));
+      emit(SendToExternalState.errorValueInEther(LocaleKeys.insufficient_amount.tr()));
       return;
     }
     emit(const SendToExternalState.validatorSuccess());
