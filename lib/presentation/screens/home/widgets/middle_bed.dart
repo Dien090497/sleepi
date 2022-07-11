@@ -6,6 +6,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:slee_fi/common/routes/app_routes.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
+import 'package:slee_fi/common/widgets/cached_image.dart';
 import 'package:slee_fi/common/widgets/loading_screen.dart';
 import 'package:slee_fi/common/widgets/sf_buttons.dart';
 import 'package:slee_fi/common/widgets/sf_icon.dart';
@@ -140,29 +141,7 @@ class MiddleBed extends StatelessWidget {
                     buy: true,
                     bed: bedEntity));
           },
-          child: CachedNetworkImage(
-            imageUrl: bedEntity.image,
-            placeholder: (context, url) => const Center(
-              child: SizedBox(
-                width: 40.0,
-                height: 40.0,
-                child: CircularProgressIndicator(),
-              ),
-            ),
-            errorWidget: (context, url, error) => Container(
-                decoration: const BoxDecoration(
-                  color: AppColors.transparent,
-                  borderRadius: BorderRadius.all(Radius.circular(10)),
-                ),
-                child: const Icon(Icons.error)),
-            imageBuilder: (context, imageProvider) => Container(
-              decoration: BoxDecoration(
-                image: DecorationImage(
-                    image: imageProvider, fit: BoxFit.fitHeight),
-              ),
-            ),
-            height: 180,
-          ),
+          child: CachedImage(image: bedEntity.image,height: 180),
         ),
       ],
     );

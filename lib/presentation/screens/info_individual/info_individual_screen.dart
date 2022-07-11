@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
 import 'package:slee_fi/common/widgets/background_widget.dart';
+import 'package:slee_fi/common/widgets/cached_image.dart';
 import 'package:slee_fi/common/widgets/sf_button_outlined.dart';
 import 'package:slee_fi/common/widgets/sf_icon.dart';
 import 'package:slee_fi/common/widgets/sf_image_border.dart';
@@ -50,17 +51,16 @@ class InfoIndividualScreen extends StatelessWidget {
                     child: Column(
                       children: [
                         Container(
-                          height: 180,
+                          height: 180, width: 180,
                           margin: const EdgeInsets.symmetric(vertical: 24),
                           decoration: const BoxDecoration(
                             image: DecorationImage(
                                 image: AssetImage(Imgs.borderBed),
                                 fit: BoxFit.cover),
                           ),
-                          child: args.bed.image.contains('http?')
-                              ? Image.network(
-                                  args.bed.image,
-                                  fit: BoxFit.cover,
+                          child: args.bed.image.contains('http')
+                              ? CachedImage(
+                                  image: args.bed.image,
                                 )
                               : SFIcon(args.bed.image),
                         ),
@@ -181,8 +181,7 @@ class InfoIndividualScreen extends StatelessWidget {
           left: 0,
           right: 0,
           child: args.marketPlaceModel != null && (args.buy ?? false)
-              ? BottomBarMarketPlaceWidget(
-                  bed: args.marketPlaceModel!)
+              ? BottomBarMarketPlaceWidget(bed: args.marketPlaceModel!)
               : const BottomBarWidget(),
         )
       ],
