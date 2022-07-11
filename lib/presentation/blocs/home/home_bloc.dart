@@ -43,7 +43,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
 
   _fetchBed(FetchData fetchData, Emitter<HomeState> emit) async {
     var result =
-        await _fetchListBedUC.call(FetchBedParam(1, 10, 1, AttributeNFT.none));
+        await _fetchListBedUC.call(FetchBedParam(1, 10, CategoryType.bed, AttributeNFT.none));
     result.fold(
       (l) {
         emit(HomeState.error(l.msg));
@@ -70,6 +70,10 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
         ));
       },
     );
+  }
+
+  _fetchItems(){
+    _fetchListBedUC.call(FetchBedParam(1, 10, CategoryType.item, AttributeNFT.none));
   }
 
   _addItemToBed(AddItem event, Emitter<HomeState> emit) {}

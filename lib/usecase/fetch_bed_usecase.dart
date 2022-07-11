@@ -16,10 +16,20 @@ class FetchBedUseCase extends UseCase<List<BedModel>, FetchBedParam> {
   }
 }
 
+enum CategoryType {
+  item(3),
+  bed(1),
+  jewel(2);
+
+  final int type;
+
+  const CategoryType(this.type);
+}
+
 class FetchBedParam {
   final int page;
   final int limit;
-  final int categoryId;
+  final CategoryType categoryId;
   final AttributeNFT attributeNFT;
 
   FetchBedParam(this.page, this.limit, this.categoryId, this.attributeNFT);

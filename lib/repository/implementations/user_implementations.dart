@@ -137,8 +137,11 @@ class UserImplementation extends IUserRepository {
   Future<Either<FailureMessage, List<BedModel>>> fetchListBed(
       FetchBedParam fetchBedParam) async {
     try {
-      var result = await _authDataSource.getNftByOwner(fetchBedParam.limit,
-          fetchBedParam.page, fetchBedParam.categoryId, fetchBedParam.attributeNFT);
+      var result = await _authDataSource.getNftByOwner(
+          fetchBedParam.limit,
+          fetchBedParam.page,
+          fetchBedParam.categoryId.type,
+          fetchBedParam.attributeNFT);
       return Right(result.list);
     } on Exception catch (e) {
       return Left(FailureMessage.fromException(e));

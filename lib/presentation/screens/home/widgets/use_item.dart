@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:slee_fi/common/enum/enum.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
@@ -7,6 +8,8 @@ import 'package:slee_fi/common/widgets/sf_button_outlined.dart';
 import 'package:slee_fi/common/widgets/sf_icon.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
 import 'package:slee_fi/l10n/locale_keys.g.dart';
+import 'package:slee_fi/presentation/blocs/home/home_bloc.dart';
+import 'package:slee_fi/presentation/blocs/home/home_state.dart';
 import 'package:slee_fi/resources/resources.dart';
 import 'modal_item_list.dart';
 
@@ -25,9 +28,9 @@ class _UseItemState extends State<UseItem> {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16),
-      child: Column(
-        children: [
-          id != ''
+      child: BlocBuilder<HomeBloc, HomeState>(
+        builder: (context, state) {
+          return id != ''
               ? Container(
                   padding: const EdgeInsets.symmetric(
                     horizontal: 16,
@@ -122,8 +125,8 @@ class _UseItemState extends State<UseItem> {
                   icon: Icons.add_circle_outline,
                   borderColor: Colors.white.withOpacity(0.1),
                   withBorder: 1,
-                ),
-        ],
+                );
+        },
       ),
     );
   }

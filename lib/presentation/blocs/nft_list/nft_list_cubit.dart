@@ -10,17 +10,18 @@ class NFTListCubit extends Cubit<NftListState> {
   NFTListCubit() : super(const NftListState.initial());
   final _fetchListBedUC = getIt<FetchBedUseCase>();
 
-  init(int idCategory) async {
+  init(CategoryType idCategory) async {
     emit(const NftListState.loading());
     getNFTList(idCategory);
   }
 
-  refresh(int idCategory) {
+  refresh(CategoryType idCategory) {
     getNFTList(idCategory);
   }
 
-  Future<void> getNFTList(int idCategory) async {
-    final result = await _fetchListBedUC.call(FetchBedParam(1,100,idCategory,AttributeNFT.none));
+  Future<void> getNFTList(CategoryType idCategory) async {
+    final result = await _fetchListBedUC
+        .call(FetchBedParam(1, 100, idCategory, AttributeNFT.none));
     result.fold((l) {
       emit(NftListState.error('$l'));
     }, (success) {
