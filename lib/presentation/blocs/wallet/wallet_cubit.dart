@@ -36,6 +36,24 @@ class WalletCubit extends Cubit<WalletState> {
     );
   }
 
+  Future<void> refresh() async {
+    final currentState = state;
+    if (currentState is WalletStateLoaded) {
+      if (currentState.isLoading) return;
+      emit(currentState.copyWith(isLoading: true));
+      final walletCall = await _currentWalletUC.call(NoParams());
+      walletCall.fold(
+        (l) => emit(
+          const WalletState.loaded(
+            walletInfoEntity: null,
+            tokenList: [],
+          ),
+        ),
+        (r) => loadCurrentWallet(r),
+      );
+    }
+  }
+
   void importWallet(WalletInfoEntity walletInfoEntity) {
     final currentState = state;
     if (currentState is WalletStateLoaded) {
@@ -128,6 +146,7 @@ class WalletCubit extends Cubit<WalletState> {
         emit(currentState.copyWith(
           walletInfoEntity: wallet,
           tokenList: tokenList,
+          isLoading: false,
         ));
       } else {
         emit(WalletState.loaded(

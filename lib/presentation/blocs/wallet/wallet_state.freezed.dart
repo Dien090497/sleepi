@@ -21,7 +21,7 @@ mixin _$WalletState {
     required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function() loadingHistory,
-    required TResult Function(
+    required TResult Function(bool isLoading,
             WalletInfoEntity? walletInfoEntity, List<TokenEntity> tokenList)
         loaded,
     required TResult Function() empty,
@@ -35,8 +35,8 @@ mixin _$WalletState {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function()? loadingHistory,
-    TResult Function(
-            WalletInfoEntity? walletInfoEntity, List<TokenEntity> tokenList)?
+    TResult Function(bool isLoading, WalletInfoEntity? walletInfoEntity,
+            List<TokenEntity> tokenList)?
         loaded,
     TResult Function()? empty,
     TResult Function(String message)? error,
@@ -48,8 +48,8 @@ mixin _$WalletState {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function()? loadingHistory,
-    TResult Function(
-            WalletInfoEntity? walletInfoEntity, List<TokenEntity> tokenList)?
+    TResult Function(bool isLoading, WalletInfoEntity? walletInfoEntity,
+            List<TokenEntity> tokenList)?
         loaded,
     TResult Function()? empty,
     TResult Function(String message)? error,
@@ -154,7 +154,7 @@ class _$WalletStateInitial implements WalletStateInitial {
     required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function() loadingHistory,
-    required TResult Function(
+    required TResult Function(bool isLoading,
             WalletInfoEntity? walletInfoEntity, List<TokenEntity> tokenList)
         loaded,
     required TResult Function() empty,
@@ -171,8 +171,8 @@ class _$WalletStateInitial implements WalletStateInitial {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function()? loadingHistory,
-    TResult Function(
-            WalletInfoEntity? walletInfoEntity, List<TokenEntity> tokenList)?
+    TResult Function(bool isLoading, WalletInfoEntity? walletInfoEntity,
+            List<TokenEntity> tokenList)?
         loaded,
     TResult Function()? empty,
     TResult Function(String message)? error,
@@ -187,8 +187,8 @@ class _$WalletStateInitial implements WalletStateInitial {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function()? loadingHistory,
-    TResult Function(
-            WalletInfoEntity? walletInfoEntity, List<TokenEntity> tokenList)?
+    TResult Function(bool isLoading, WalletInfoEntity? walletInfoEntity,
+            List<TokenEntity> tokenList)?
         loaded,
     TResult Function()? empty,
     TResult Function(String message)? error,
@@ -297,7 +297,7 @@ class _$WalletStateLoading implements WalletStateLoading {
     required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function() loadingHistory,
-    required TResult Function(
+    required TResult Function(bool isLoading,
             WalletInfoEntity? walletInfoEntity, List<TokenEntity> tokenList)
         loaded,
     required TResult Function() empty,
@@ -314,8 +314,8 @@ class _$WalletStateLoading implements WalletStateLoading {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function()? loadingHistory,
-    TResult Function(
-            WalletInfoEntity? walletInfoEntity, List<TokenEntity> tokenList)?
+    TResult Function(bool isLoading, WalletInfoEntity? walletInfoEntity,
+            List<TokenEntity> tokenList)?
         loaded,
     TResult Function()? empty,
     TResult Function(String message)? error,
@@ -330,8 +330,8 @@ class _$WalletStateLoading implements WalletStateLoading {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function()? loadingHistory,
-    TResult Function(
-            WalletInfoEntity? walletInfoEntity, List<TokenEntity> tokenList)?
+    TResult Function(bool isLoading, WalletInfoEntity? walletInfoEntity,
+            List<TokenEntity> tokenList)?
         loaded,
     TResult Function()? empty,
     TResult Function(String message)? error,
@@ -443,7 +443,7 @@ class _$WalletStateLoadingHistory implements WalletStateLoadingHistory {
     required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function() loadingHistory,
-    required TResult Function(
+    required TResult Function(bool isLoading,
             WalletInfoEntity? walletInfoEntity, List<TokenEntity> tokenList)
         loaded,
     required TResult Function() empty,
@@ -460,8 +460,8 @@ class _$WalletStateLoadingHistory implements WalletStateLoadingHistory {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function()? loadingHistory,
-    TResult Function(
-            WalletInfoEntity? walletInfoEntity, List<TokenEntity> tokenList)?
+    TResult Function(bool isLoading, WalletInfoEntity? walletInfoEntity,
+            List<TokenEntity> tokenList)?
         loaded,
     TResult Function()? empty,
     TResult Function(String message)? error,
@@ -476,8 +476,8 @@ class _$WalletStateLoadingHistory implements WalletStateLoadingHistory {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function()? loadingHistory,
-    TResult Function(
-            WalletInfoEntity? walletInfoEntity, List<TokenEntity> tokenList)?
+    TResult Function(bool isLoading, WalletInfoEntity? walletInfoEntity,
+            List<TokenEntity> tokenList)?
         loaded,
     TResult Function()? empty,
     TResult Function(String message)? error,
@@ -547,7 +547,10 @@ abstract class _$$WalletStateLoadedCopyWith<$Res> {
   factory _$$WalletStateLoadedCopyWith(
           _$WalletStateLoaded value, $Res Function(_$WalletStateLoaded) then) =
       __$$WalletStateLoadedCopyWithImpl<$Res>;
-  $Res call({WalletInfoEntity? walletInfoEntity, List<TokenEntity> tokenList});
+  $Res call(
+      {bool isLoading,
+      WalletInfoEntity? walletInfoEntity,
+      List<TokenEntity> tokenList});
 
   $WalletInfoEntityCopyWith<$Res>? get walletInfoEntity;
 }
@@ -565,10 +568,15 @@ class __$$WalletStateLoadedCopyWithImpl<$Res>
 
   @override
   $Res call({
+    Object? isLoading = freezed,
     Object? walletInfoEntity = freezed,
     Object? tokenList = freezed,
   }) {
     return _then(_$WalletStateLoaded(
+      isLoading: isLoading == freezed
+          ? _value.isLoading
+          : isLoading // ignore: cast_nullable_to_non_nullable
+              as bool,
       walletInfoEntity: walletInfoEntity == freezed
           ? _value.walletInfoEntity
           : walletInfoEntity // ignore: cast_nullable_to_non_nullable
@@ -596,10 +604,14 @@ class __$$WalletStateLoadedCopyWithImpl<$Res>
 
 class _$WalletStateLoaded implements WalletStateLoaded {
   const _$WalletStateLoaded(
-      {required this.walletInfoEntity,
+      {this.isLoading = false,
+      required this.walletInfoEntity,
       required final List<TokenEntity> tokenList})
       : _tokenList = tokenList;
 
+  @override
+  @JsonKey()
+  final bool isLoading;
   @override
   final WalletInfoEntity? walletInfoEntity;
   final List<TokenEntity> _tokenList;
@@ -611,7 +623,7 @@ class _$WalletStateLoaded implements WalletStateLoaded {
 
   @override
   String toString() {
-    return 'WalletState.loaded(walletInfoEntity: $walletInfoEntity, tokenList: $tokenList)';
+    return 'WalletState.loaded(isLoading: $isLoading, walletInfoEntity: $walletInfoEntity, tokenList: $tokenList)';
   }
 
   @override
@@ -619,6 +631,7 @@ class _$WalletStateLoaded implements WalletStateLoaded {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$WalletStateLoaded &&
+            const DeepCollectionEquality().equals(other.isLoading, isLoading) &&
             const DeepCollectionEquality()
                 .equals(other.walletInfoEntity, walletInfoEntity) &&
             const DeepCollectionEquality()
@@ -628,6 +641,7 @@ class _$WalletStateLoaded implements WalletStateLoaded {
   @override
   int get hashCode => Object.hash(
       runtimeType,
+      const DeepCollectionEquality().hash(isLoading),
       const DeepCollectionEquality().hash(walletInfoEntity),
       const DeepCollectionEquality().hash(_tokenList));
 
@@ -642,7 +656,7 @@ class _$WalletStateLoaded implements WalletStateLoaded {
     required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function() loadingHistory,
-    required TResult Function(
+    required TResult Function(bool isLoading,
             WalletInfoEntity? walletInfoEntity, List<TokenEntity> tokenList)
         loaded,
     required TResult Function() empty,
@@ -650,7 +664,7 @@ class _$WalletStateLoaded implements WalletStateLoaded {
     required TResult Function(List<TransactionIsarModel> list)
         getHistorySuccess,
   }) {
-    return loaded(walletInfoEntity, tokenList);
+    return loaded(isLoading, walletInfoEntity, tokenList);
   }
 
   @override
@@ -659,14 +673,14 @@ class _$WalletStateLoaded implements WalletStateLoaded {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function()? loadingHistory,
-    TResult Function(
-            WalletInfoEntity? walletInfoEntity, List<TokenEntity> tokenList)?
+    TResult Function(bool isLoading, WalletInfoEntity? walletInfoEntity,
+            List<TokenEntity> tokenList)?
         loaded,
     TResult Function()? empty,
     TResult Function(String message)? error,
     TResult Function(List<TransactionIsarModel> list)? getHistorySuccess,
   }) {
-    return loaded?.call(walletInfoEntity, tokenList);
+    return loaded?.call(isLoading, walletInfoEntity, tokenList);
   }
 
   @override
@@ -675,8 +689,8 @@ class _$WalletStateLoaded implements WalletStateLoaded {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function()? loadingHistory,
-    TResult Function(
-            WalletInfoEntity? walletInfoEntity, List<TokenEntity> tokenList)?
+    TResult Function(bool isLoading, WalletInfoEntity? walletInfoEntity,
+            List<TokenEntity> tokenList)?
         loaded,
     TResult Function()? empty,
     TResult Function(String message)? error,
@@ -684,7 +698,7 @@ class _$WalletStateLoaded implements WalletStateLoaded {
     required TResult orElse(),
   }) {
     if (loaded != null) {
-      return loaded(walletInfoEntity, tokenList);
+      return loaded(isLoading, walletInfoEntity, tokenList);
     }
     return orElse();
   }
@@ -739,9 +753,11 @@ class _$WalletStateLoaded implements WalletStateLoaded {
 
 abstract class WalletStateLoaded implements WalletState {
   const factory WalletStateLoaded(
-      {required final WalletInfoEntity? walletInfoEntity,
+      {final bool isLoading,
+      required final WalletInfoEntity? walletInfoEntity,
       required final List<TokenEntity> tokenList}) = _$WalletStateLoaded;
 
+  bool get isLoading => throw _privateConstructorUsedError;
   WalletInfoEntity? get walletInfoEntity => throw _privateConstructorUsedError;
   List<TokenEntity> get tokenList => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -793,7 +809,7 @@ class _$WalletStateEmpty implements WalletStateEmpty {
     required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function() loadingHistory,
-    required TResult Function(
+    required TResult Function(bool isLoading,
             WalletInfoEntity? walletInfoEntity, List<TokenEntity> tokenList)
         loaded,
     required TResult Function() empty,
@@ -810,8 +826,8 @@ class _$WalletStateEmpty implements WalletStateEmpty {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function()? loadingHistory,
-    TResult Function(
-            WalletInfoEntity? walletInfoEntity, List<TokenEntity> tokenList)?
+    TResult Function(bool isLoading, WalletInfoEntity? walletInfoEntity,
+            List<TokenEntity> tokenList)?
         loaded,
     TResult Function()? empty,
     TResult Function(String message)? error,
@@ -826,8 +842,8 @@ class _$WalletStateEmpty implements WalletStateEmpty {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function()? loadingHistory,
-    TResult Function(
-            WalletInfoEntity? walletInfoEntity, List<TokenEntity> tokenList)?
+    TResult Function(bool isLoading, WalletInfoEntity? walletInfoEntity,
+            List<TokenEntity> tokenList)?
         loaded,
     TResult Function()? empty,
     TResult Function(String message)? error,
@@ -960,7 +976,7 @@ class _$WalletStateError implements WalletStateError {
     required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function() loadingHistory,
-    required TResult Function(
+    required TResult Function(bool isLoading,
             WalletInfoEntity? walletInfoEntity, List<TokenEntity> tokenList)
         loaded,
     required TResult Function() empty,
@@ -977,8 +993,8 @@ class _$WalletStateError implements WalletStateError {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function()? loadingHistory,
-    TResult Function(
-            WalletInfoEntity? walletInfoEntity, List<TokenEntity> tokenList)?
+    TResult Function(bool isLoading, WalletInfoEntity? walletInfoEntity,
+            List<TokenEntity> tokenList)?
         loaded,
     TResult Function()? empty,
     TResult Function(String message)? error,
@@ -993,8 +1009,8 @@ class _$WalletStateError implements WalletStateError {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function()? loadingHistory,
-    TResult Function(
-            WalletInfoEntity? walletInfoEntity, List<TokenEntity> tokenList)?
+    TResult Function(bool isLoading, WalletInfoEntity? walletInfoEntity,
+            List<TokenEntity> tokenList)?
         loaded,
     TResult Function()? empty,
     TResult Function(String message)? error,
@@ -1142,7 +1158,7 @@ class _$WalletStateGetHistorySuccess implements WalletStateGetHistorySuccess {
     required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function() loadingHistory,
-    required TResult Function(
+    required TResult Function(bool isLoading,
             WalletInfoEntity? walletInfoEntity, List<TokenEntity> tokenList)
         loaded,
     required TResult Function() empty,
@@ -1159,8 +1175,8 @@ class _$WalletStateGetHistorySuccess implements WalletStateGetHistorySuccess {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function()? loadingHistory,
-    TResult Function(
-            WalletInfoEntity? walletInfoEntity, List<TokenEntity> tokenList)?
+    TResult Function(bool isLoading, WalletInfoEntity? walletInfoEntity,
+            List<TokenEntity> tokenList)?
         loaded,
     TResult Function()? empty,
     TResult Function(String message)? error,
@@ -1175,8 +1191,8 @@ class _$WalletStateGetHistorySuccess implements WalletStateGetHistorySuccess {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function()? loadingHistory,
-    TResult Function(
-            WalletInfoEntity? walletInfoEntity, List<TokenEntity> tokenList)?
+    TResult Function(bool isLoading, WalletInfoEntity? walletInfoEntity,
+            List<TokenEntity> tokenList)?
         loaded,
     TResult Function()? empty,
     TResult Function(String message)? error,

@@ -46,7 +46,6 @@ class _WalletScreenState extends State<WalletScreen>
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
-        BlocProvider<WalletCubit>(create: (context) => WalletCubit()..init()),
         BlocProvider<PendingBloc>(create: (context) => _pendingBloc),
         BlocProvider<PendingBloc>(create: (context) => _historyBloc),
       ],

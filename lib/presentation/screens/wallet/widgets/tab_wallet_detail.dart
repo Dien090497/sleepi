@@ -52,7 +52,7 @@ class _TabWalletDetailState extends State<TabWalletDetail> {
   }
 
   void _onRefresh(WalletCubit walletCubit) async {
-    await walletCubit.init();
+    await walletCubit.refresh();
     refreshController.refreshCompleted();
   }
 
@@ -63,7 +63,7 @@ class _TabWalletDetailState extends State<TabWalletDetail> {
       const Duration(seconds: 10),
       (Timer timer) async {
         if (!walletCubit.isClosed) {
-          await walletCubit.init();
+          await walletCubit.refresh();
         } else {
           timer.cancel();
         }
@@ -83,7 +83,7 @@ class _TabWalletDetailState extends State<TabWalletDetail> {
         return FocusDetector(
           onFocusGained: () async {
             if (!walletCubit.isClosed) {
-              await walletCubit.init();
+              await walletCubit.refresh();
             } else {
               timer.cancel();
             }
