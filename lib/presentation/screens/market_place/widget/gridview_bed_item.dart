@@ -38,7 +38,7 @@ class GridViewBedItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SFGridView(
-      cubit: cubit,
+      onLoadMore: cubit?.loadMoreMarketPlace(),
       isLoadMore: isLoadMore,
       count: beds.length,
       isScroll: isScroll,

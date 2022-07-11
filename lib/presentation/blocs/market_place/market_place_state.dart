@@ -1,5 +1,4 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:slee_fi/entities/wallet_info/wallet_info_entity.dart';
 import 'package:slee_fi/models/list_market_place/list_market_place_model.dart';
 
 part 'market_place_state.freezed.dart';

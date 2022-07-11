@@ -15,10 +15,10 @@ class FailureMessage extends Failure {
   factory FailureMessage.fromException(Exception e) {
     try {
       if (e is DioError) {
+        'error from server   ${e.response?.data}'.log;
         if (e.response?.statusCode == 502 || e.response?.statusCode == 500) {
           return const FailureMessage(LocaleKeys.some_thing_wrong);
         }
-        'error is   ${e.response?.data}'.log;
         final error = e.response?.data['error']['details']['message'];
         if (error is String) {
           return FailureMessage(error);

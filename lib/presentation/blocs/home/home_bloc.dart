@@ -19,9 +19,33 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     on<ChangeBed>(_changeBed);
     on<RefreshBed>(_onRefresh);
     on<FetchItem>(_fetchItems);
+    on<FilterItemEvent>(_onFilterItem);
+    on<LoadMoreBed>(_onLoadMoreBed);
   }
 
   int currentBedId = -1;
+  List<String> itemFilter = [];
+  int level = 0;
+
+  loadMoreItem() {}
+
+  _onFilterItem(FilterItemEvent event, Emitter<HomeState> emit) {
+    level = event.level;
+    itemFilter = event.selected;
+  }
+
+  _onLoadMoreBed(LoadMoreBed event, Emitter<HomeState> emit) async {
+    var result = await _fetchListBedUC
+        .call(FetchBedParam(1, 10, CategoryType.bed, AttributeNFT.none));
+    result.fold((l) => null, (r) {
+      final currentState = state;
+      if (currentState is HomeLoaded) {
+        final newList =
+            currentState.bedList + r.map((e) => e.toEntity()).toList();
+        emit(currentState.copyWith(bedList: newList));
+      }
+    });
+  }
 
   _onRefresh(RefreshBed event, Emitter<HomeState> emit) {
     'run to refresh bed'.log;
@@ -66,6 +90,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
               id: r.isEmpty ? 0 : r.first.id,
               level: r.isEmpty ? 0 : r.first.level,
               time: r.isEmpty ? 0 : r.first.time,
+              loadMoreBed: false,
               selectedItem: null));
           return;
         }
@@ -77,6 +102,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
             id: r.isEmpty ? 0 : r.first.id,
             level: r.isEmpty ? 0 : r.first.level,
             selectedItem: null,
+            loadMoreBed: false,
             time: r.isEmpty ? 0 : r.first.time));
       },
     );

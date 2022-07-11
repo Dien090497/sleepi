@@ -2,7 +2,6 @@ import 'package:card_swiper/card_swiper.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:slee_fi/common/extensions/string_x.dart';
 import 'package:slee_fi/common/routes/app_routes.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
@@ -21,7 +20,8 @@ import 'package:slee_fi/presentation/screens/info_individual/info_individual_scr
 import 'package:slee_fi/resources/resources.dart';
 
 class MiddleBed extends StatelessWidget {
-  const MiddleBed({Key? key}) : super(key: key);
+  const MiddleBed({Key? key, required this.homeBloc}) : super(key: key);
+  final HomeBloc homeBloc;
 
   @override
   Widget build(BuildContext context) {
@@ -53,34 +53,44 @@ class MiddleBed extends StatelessWidget {
                   child: state is HomeLoaded
                       ? Swiper(
                           itemBuilder: (BuildContext context, int index) {
-                            return state.bedList.isNotEmpty
+                            return state.bedList.isNotEmpty &&
+                                    index < state.bedList.length
                                 ? _buildBedItem(state.bedList[index], context)
-                                : GestureDetector(
-                                    child: const SFIcon(Ics.addBed,
-                                        fit: BoxFit.none),
-                                    onTap: () {
-                                      BlocProvider.of<BottomNavigationBloc>(
-                                              context)
-                                          .add(const SelectTab(4));
-                                    },
-                                  );
+                                : state.bedList.isNotEmpty &&
+                                        index >= state.bedList.length
+                                    ? const LoadingIcon()
+                                    : GestureDetector(
+                                        child: const SFIcon(Ics.addBed,
+                                            fit: BoxFit.none),
+                                        onTap: () {
+                                          BlocProvider.of<BottomNavigationBloc>(
+                                                  context)
+                                              .add(const SelectTab(4));
+                                        },
+                                      );
                           },
 
                           onIndexChanged: (index) {
                             if (state.bedList.isEmpty) {
                               return;
                             }
+                            if (index >= state.bedList.length) {
+                              homeBloc.add(LoadMoreBed());
+                              return;
+                            }
                             var bed = state.bedList[index];
-                            context.read<HomeBloc>().add(ChangeBed(
+                            homeBloc.add(ChangeBed(
                                 level: bed.level,
                                 durability: bed.durability,
                                 time: bed.time,
                                 id: bed.id));
                           },
                           loop: state.bedList.isNotEmpty,
-                          itemCount:
-                              state.bedList.isEmpty ? 1 : state.bedList.length,
-                          control: const SwiperControl(disableColor: AppColors.grey),
+                          itemCount: state.bedList.isEmpty
+                              ? 1
+                              : state.bedList.length + 1,
+                          control:
+                              const SwiperControl(disableColor: AppColors.grey),
                           // loop: state.bedList.isNotEmpty,
                         )
                       : state is HomeLoading
