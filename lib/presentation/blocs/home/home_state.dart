@@ -16,6 +16,13 @@ class HomeState with _$HomeState {
     required int level,
     required int durability,
     required int time,
+    BedEntity? item,
+    List<BedEntity>? itemList,
+    BedEntity? selectedItem,
+    @Default('')
+    required String errorMessage,
+    @Default(false)
+    required  bool loading
   }) = HomeLoaded;
 
   const factory HomeState.error(String message) = HomeError;

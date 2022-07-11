@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:slee_fi/common/enum/enum.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
+import 'package:slee_fi/common/widgets/cached_image.dart';
 import 'package:slee_fi/common/widgets/sf_bottom_sheet.dart';
 import 'package:slee_fi/common/widgets/sf_button_outlined.dart';
 import 'package:slee_fi/common/widgets/sf_icon.dart';
@@ -11,6 +11,7 @@ import 'package:slee_fi/l10n/locale_keys.g.dart';
 import 'package:slee_fi/presentation/blocs/home/home_bloc.dart';
 import 'package:slee_fi/presentation/blocs/home/home_state.dart';
 import 'package:slee_fi/resources/resources.dart';
+
 import 'modal_item_list.dart';
 
 class UseItem extends StatefulWidget {
@@ -21,20 +22,18 @@ class UseItem extends StatefulWidget {
 }
 
 class _UseItemState extends State<UseItem> {
-  late ItemType item;
-  String id = '';
-
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16),
       child: BlocBuilder<HomeBloc, HomeState>(
         builder: (context, state) {
-          return id != ''
+          if (state is! HomeLoaded || state.bedList.isEmpty) {
+            return const SizedBox();
+          }
+          return (state.selectedItem != null)
               ? Container(
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 16,
-                  ),
+                  padding: const EdgeInsets.symmetric(horizontal: 16),
                   decoration: BoxDecoration(
                     color: Colors.white.withOpacity(0.05),
                     borderRadius: BorderRadius.circular(8),
@@ -43,23 +42,18 @@ class _UseItemState extends State<UseItem> {
                     // crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       GestureDetector(
-                        onTap: () {
-                          SFModalBottomSheet.show(context, 0.8, ModalItemList(
-                            onSelected: (i, ids) {
-                              setState(() {
-                                item = i;
-                                id = ids;
-                              });
-                            },
-                          ));
-                        },
-                        child: SFIcon(
-                          item.image,
-                          width: 70,
-                          height: 70,
-                          fit: BoxFit.contain,
-                        ),
-                      ),
+                          onTap: () {
+                            SFModalBottomSheet.show(
+                                context,
+                                0.8,
+                                ModalItemList(
+                                    homeBloc: context.read<HomeBloc>()));
+                          },
+                          child: CachedImage(
+                            image: state.selectedItem!.image,
+                            width: 70,
+                            height: 70,
+                          )),
                       const SizedBox(width: 16),
                       Expanded(
                         child: Padding(
@@ -73,7 +67,7 @@ class _UseItemState extends State<UseItem> {
                                     MainAxisAlignment.spaceBetween,
                                 children: [
                                   SFText(
-                                    keyText: item.name!,
+                                    keyText: state.selectedItem!.name,
                                     style: TextStyles.lightWhite16W700,
                                   ),
                                   GestureDetector(
@@ -86,18 +80,23 @@ class _UseItemState extends State<UseItem> {
                                       ),
                                       child: const SFIcon(Ics.trash),
                                     ),
-                                    onTap: () => setState(() => id = ''),
+                                    onTap: () {
+                                      context
+                                          .read<HomeBloc>()
+                                          .add(RemoveItem());
+                                    },
                                   )
                                 ],
                               ),
                               const SizedBox(height: 2),
                               SFText(
-                                keyText: id,
+                                keyText: '${state.selectedItem!.id}',
                                 style: TextStyles.blue14W700,
                               ),
                               const SizedBox(height: 12),
                               SFText(
-                                keyText: item.effect,
+                                /// TODO: add effect
+                                keyText: 'example effect',
                                 style: TextStyles.lightGrey14,
                                 maxLines: 1,
                               ),
@@ -111,14 +110,12 @@ class _UseItemState extends State<UseItem> {
               : SFButtonOutLined(
                   title: LocaleKeys.use_item,
                   onPressed: () {
-                    SFModalBottomSheet.show(context, 0.8, ModalItemList(
-                      onSelected: (i, ids) {
-                        setState(() {
-                          item = i;
-                          id = ids;
-                        });
-                      },
-                    ));
+                    SFModalBottomSheet.show(
+                        context,
+                        0.8,
+                        ModalItemList(
+                          homeBloc: context.read<HomeBloc>(),
+                        ));
                   },
                   fixedSize: const Size.fromHeight(40),
                   textStyle: TextStyles.lightGrey16500,

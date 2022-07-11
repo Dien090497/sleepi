@@ -1,5 +1,6 @@
 import 'package:dartz/dartz.dart';
 import 'package:injectable/injectable.dart';
+import 'package:slee_fi/common/extensions/string_x.dart';
 import 'package:slee_fi/datasources/local/secure_storage.dart';
 import 'package:slee_fi/datasources/remote/auth_datasource/auth_datasource.dart';
 import 'package:slee_fi/entities/active_code/active_code_entity.dart';
@@ -137,11 +138,14 @@ class UserImplementation extends IUserRepository {
   Future<Either<FailureMessage, List<BedModel>>> fetchListBed(
       FetchBedParam fetchBedParam) async {
     try {
+      'fetch nft ${fetchBedParam.categoryId.type}'.log;
       var result = await _authDataSource.getNftByOwner(
           fetchBedParam.limit,
           fetchBedParam.page,
           fetchBedParam.categoryId.type,
           fetchBedParam.attributeNFT);
+
+      's ${result.toJson()}    '.log;
       return Right(result.list);
     } on Exception catch (e) {
       return Left(FailureMessage.fromException(e));
@@ -163,8 +167,14 @@ class UserImplementation extends IUserRepository {
 
   @override
   Future<Either<FailureMessage, dynamic>> removeItemInBed(
-      AddItemToBedParam addItemToBedParam) {
-    // TODO: implement removeItemInBed
-    throw UnimplementedError();
+      AddItemToBedParam addItemToBedParam) async {
+    try {
+      var result = await _authDataSource.removeItemFromBed(
+          addItemToBedParam.bedId, addItemToBedParam.itemId);
+
+      return Right(result);
+    } on Exception catch (e) {
+      return Left(FailureMessage.fromException(e));
+    }
   }
 }

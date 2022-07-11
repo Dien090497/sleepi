@@ -22,7 +22,7 @@ class BedModel {
   dynamic classBed;
   @JsonKey(name: "is_mint")
   final int isMint;
-  final String quality;
+  final String? quality;
   final String owner;
   final int time;
   final int level;

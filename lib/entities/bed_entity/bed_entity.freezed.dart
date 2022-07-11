@@ -22,7 +22,7 @@ mixin _$BedEntity {
   String get image => throw _privateConstructorUsedError;
   String get type => throw _privateConstructorUsedError;
   String get contractAddress => throw _privateConstructorUsedError;
-  String get quality => throw _privateConstructorUsedError;
+  String? get quality => throw _privateConstructorUsedError;
   int get durability => throw _privateConstructorUsedError;
   int get isLock => throw _privateConstructorUsedError;
   int get bedMint => throw _privateConstructorUsedError;
@@ -50,7 +50,7 @@ abstract class $BedEntityCopyWith<$Res> {
       String image,
       String type,
       String contractAddress,
-      String quality,
+      String? quality,
       int durability,
       int isLock,
       int bedMint,
@@ -119,7 +119,7 @@ class _$BedEntityCopyWithImpl<$Res> implements $BedEntityCopyWith<$Res> {
       quality: quality == freezed
           ? _value.quality
           : quality // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       durability: durability == freezed
           ? _value.durability
           : durability // ignore: cast_nullable_to_non_nullable
@@ -177,7 +177,7 @@ abstract class _$$_BedEntityCopyWith<$Res> implements $BedEntityCopyWith<$Res> {
       String image,
       String type,
       String contractAddress,
-      String quality,
+      String? quality,
       int durability,
       int isLock,
       int bedMint,
@@ -248,7 +248,7 @@ class __$$_BedEntityCopyWithImpl<$Res> extends _$BedEntityCopyWithImpl<$Res>
       quality: quality == freezed
           ? _value.quality
           : quality // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       durability: durability == freezed
           ? _value.durability
           : durability // ignore: cast_nullable_to_non_nullable
@@ -328,7 +328,7 @@ class _$_BedEntity implements _BedEntity {
   @override
   final String contractAddress;
   @override
-  final String quality;
+  final String? quality;
   @override
   final int durability;
   @override
@@ -418,7 +418,7 @@ abstract class _BedEntity implements BedEntity {
       required final String image,
       required final String type,
       required final String contractAddress,
-      required final String quality,
+      required final String? quality,
       required final int durability,
       required final int isLock,
       required final int bedMint,
@@ -443,7 +443,7 @@ abstract class _BedEntity implements BedEntity {
   @override
   String get contractAddress => throw _privateConstructorUsedError;
   @override
-  String get quality => throw _privateConstructorUsedError;
+  String? get quality => throw _privateConstructorUsedError;
   @override
   int get durability => throw _privateConstructorUsedError;
   @override

@@ -1,32 +1,28 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:slee_fi/common/enum/enum.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
-import 'package:slee_fi/common/utils/random_utils.dart';
+import 'package:slee_fi/common/widgets/loading_screen.dart';
 import 'package:slee_fi/common/widgets/sf_alert_dialog.dart';
 import 'package:slee_fi/common/widgets/sf_bottom_sheets.dart';
 import 'package:slee_fi/common/widgets/sf_buttons.dart';
 import 'package:slee_fi/common/widgets/sf_gridview.dart';
 import 'package:slee_fi/common/widgets/sf_icon.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
-import 'package:slee_fi/di/injector.dart';
 import 'package:slee_fi/l10n/locale_keys.g.dart';
+import 'package:slee_fi/presentation/blocs/home/home_bloc.dart';
+import 'package:slee_fi/presentation/blocs/home/home_state.dart';
 import 'package:slee_fi/presentation/screens/home/widgets/my_jewel_short_widget.dart';
 import 'package:slee_fi/presentation/screens/home/widgets/pop_up_item.dart';
 import 'package:slee_fi/resources/resources.dart';
 
 class ModalItemList extends StatelessWidget {
-  const ModalItemList({this.onSelected, Key? key}) : super(key: key);
-
-  final Function(ItemType item, String id)? onSelected;
+  const ModalItemList({Key? key, required this.homeBloc}) : super(key: key);
+  final HomeBloc homeBloc;
 
   @override
   Widget build(BuildContext context) {
-    final items = List.generate(
-        12, (i) => ItemType.values[i % ItemType.values.length]);
-    final randomUtils = getIt<RandomUtils>();
-
     return SafeArea(
       child: Column(
         children: [
@@ -73,36 +69,49 @@ class ModalItemList extends StatelessWidget {
           Expanded(
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 8),
-              child: SFGridView(
-                count: items.length,
-                childAspectRatio: 1,
-                itemBuilder: (context, i) {
-                  String id = randomUtils.randomId();
-                  return GestureDetector(
-                    onTap: () {
-                      showCustomAlertDialog(context,
-                          children: PopUpItem(
-                            id: id,
-                            icon: items[i],
-                            onConfirm: () {
-                              onSelected!(items[i], id);
-                            },
-                          ));
-                    },
-                    child: MyJewelsShortWidget(
-                      id: id,
-                      increase: i == 2 ? false : true,
-                      color: AppColors.light4,
-                      icon: items[i].image,
-                    ),
-                  );
+              child: BlocBuilder<HomeBloc, HomeState>(
+                bloc: homeBloc,
+                builder: (context, state) {
+                  if ((state is HomeLoaded && state.itemList == null) ||
+                      (state is! HomeLoaded)) {
+                    homeBloc.add(FetchItem());
+                  }
+
+                  if (state is HomeLoaded && state.itemList != null) {
+                    return SFGridView(
+                      count: state.itemList!.length,
+                      childAspectRatio: 1,
+                      onRefresh: () => homeBloc.add(FetchItem()),
+                      itemBuilder: (context, i) {
+                        final item = state.itemList![i];
+                        return GestureDetector(
+                          onTap: () {
+                            showCustomAlertDialog(context,
+                                children: PopUpItem(
+                                  effect: 'example effect',
+                                  id: '${item.id}',
+                                  icon: item.image,
+                                  onConfirm: () {
+                                    homeBloc.add(AddItem(item));
+                                  },
+                                ));
+                          },
+                          child: MyJewelsShortWidget(
+                            id: '${item.id}',
+                            increase: i == 2 ? false : true,
+                            color: AppColors.light4,
+                            icon: item.image,
+                          ),
+                        );
+                      },
+                    );
+                  }
+                  return const LoadingIcon();
                 },
               ),
             ),
           ),
-          const SizedBox(
-            height: 16,
-          ),
+          const SizedBox(height: 16),
           SFButton(
               text: LocaleKeys.cancel,
               width: MediaQuery.of(context).size.width * 0.9,

@@ -83,7 +83,7 @@ import '../usecase/is_valid_wallet_address_usecase.dart' as _i12;
 import '../usecase/login_usecase.dart' as _i58;
 import '../usecase/logout_usecase.dart' as _i59;
 import '../usecase/make_first_open_app_usecase.dart' as _i60;
-import '../usecase/remove_item_in_bed_usecase.dart' as _i62;
+import '../usecase/remove_item_from_bed_usecase.dart' as _i62;
 import '../usecase/run_app_init_usecase.dart' as _i22;
 import '../usecase/send_nft_to_spending_usecase.dart' as _i34;
 import '../usecase/send_otp_mail_usecase.dart' as _i63;
@@ -236,8 +236,8 @@ Future<_i1.GetIt> $initGetIt(_i1.GetIt get,
       () => _i60.MakeFirstOpenAppUseCase(get<_i45.IAuthRepository>()));
   gh.factory<_i61.MarketPlaceUseCase>(
       () => _i61.MarketPlaceUseCase(get<_i47.IMarketPlaceRepository>()));
-  gh.factory<_i62.RemoveItemInBedUseCase>(
-      () => _i62.RemoveItemInBedUseCase(get<_i51.IUserRepository>()));
+  gh.factory<_i62.RemoveItemFromBedUseCase>(
+      () => _i62.RemoveItemFromBedUseCase(get<_i51.IUserRepository>()));
   gh.factory<_i63.SendOTPMailUseCase>(
       () => _i63.SendOTPMailUseCase(get<_i45.IAuthRepository>()));
   gh.factory<_i64.SettingActiveCodeUseCase>(

@@ -499,6 +499,24 @@ class _AuthDataSource implements AuthDataSource {
   }
 
   @override
+  Future<dynamic> removeItemFromBed(bedId, itemId) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{
+      r'bedId': bedId,
+      r'itemId': itemId
+    };
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    final _result = await _dio.fetch(_setStreamType<dynamic>(
+        Options(method: 'PUT', headers: _headers, extra: _extra)
+            .compose(_dio.options, '/nft-attributes/remove-item-from-bed',
+                queryParameters: queryParameters, data: _data)
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = _result.data;
+    return value;
+  }
+
+  @override
   Future<dynamic> unStacking() async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};

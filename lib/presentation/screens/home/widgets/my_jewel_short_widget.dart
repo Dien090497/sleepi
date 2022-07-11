@@ -3,12 +3,18 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
+import 'package:slee_fi/common/widgets/cached_image.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
 import 'package:slee_fi/l10n/locale_keys.g.dart';
 import 'package:slee_fi/presentation/screens/product_detail/widgets/top_left_banner.dart';
 
 class MyJewelsShortWidget extends StatelessWidget {
-  const MyJewelsShortWidget({required this.id, required this.icon, this.color, this.increase = true, Key? key})
+  const MyJewelsShortWidget(
+      {required this.id,
+      required this.icon,
+      this.color,
+      this.increase = true,
+      Key? key})
       : super(key: key);
 
   final String icon;
@@ -38,10 +44,7 @@ class MyJewelsShortWidget extends StatelessWidget {
           Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Image.asset(
-                icon,
-                width: 80,
-              ),
+              CachedImage(image: icon, width: 80,height: 80),
               SizedBox(height: 20.h),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -52,7 +55,7 @@ class MyJewelsShortWidget extends StatelessWidget {
                       border: Border.all(color: AppColors.light4),
                     ),
                     padding:
-                    const EdgeInsets.symmetric(vertical: 5, horizontal: 16),
+                        const EdgeInsets.symmetric(vertical: 5, horizontal: 16),
                     alignment: Alignment.center,
                     child: SFText(
                       keyText: id,
@@ -64,13 +67,17 @@ class MyJewelsShortWidget extends StatelessWidget {
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(50),
                         // border: Border.all(color: AppColors.light4),
-                        color: increase ? AppColors.green.withOpacity(0.15) : AppColors.red.withOpacity(0.15)),
+                        color: increase
+                            ? AppColors.green.withOpacity(0.15)
+                            : AppColors.red.withOpacity(0.15)),
                     padding:
-                    const EdgeInsets.symmetric(vertical: 5, horizontal: 8),
+                        const EdgeInsets.symmetric(vertical: 5, horizontal: 8),
                     alignment: Alignment.center,
                     child: SFText(
                       keyText: increase ? '+ 25%' : '- 25%',
-                      style: increase ? TextStyles.greenW700size12: TextStyles.red12W700,
+                      style: increase
+                          ? TextStyles.greenW700size12
+                          : TextStyles.red12W700,
                     ),
                   ),
                 ],
