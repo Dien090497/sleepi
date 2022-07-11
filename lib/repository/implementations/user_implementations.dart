@@ -123,12 +123,12 @@ class UserImplementation extends IUserRepository {
   }
 
   @override
-  Future<Either<FailureMessage, double>> estimateGasWithdraw(
+  Future<Either<FailureMessage, String>> estimateGasWithdraw(
       EstimateGasWithdrawParam estimateParam) async {
     try {
       var result = await _authDataSource.estimateGasWithdraw(
           estimateParam.type, estimateParam.contractAddress);
-      return Right(double.parse(result));
+      return Right(result);
     } on Exception catch (e) {
       return Left(FailureMessage.fromException(e));
     }

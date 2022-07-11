@@ -16,7 +16,7 @@ class TransferSpendingState with _$TransferSpendingState {
 
 
   const factory TransferSpendingState.loaded({
-    double? fee,
+    String? fee,
     TransferSpendingEntity? transferSpendingEntity,
 }) = TransferSpendingStateLoaded;
 

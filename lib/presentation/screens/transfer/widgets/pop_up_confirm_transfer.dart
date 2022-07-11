@@ -22,7 +22,7 @@ class PopUpConfirmTransfer extends StatelessWidget {
     required this.onTranferToMainWallet,
   }) : super(key: key);
 
-  final double fee;
+  final String fee;
   final TransferCubit cubit;
   final double amount;
   final String tokenName;
@@ -94,11 +94,14 @@ class PopUpConfirmTransfer extends StatelessWidget {
                 keyText: LocaleKeys.fee,
                 style: TextStyles.lightGrey14,
               ),
+              const SizedBox(width: 10),
               Expanded(
-                  child: SFText(
-                      keyText: "$fee AVAX",
-                      style: TextStyles.lightWhite16,
-                      textAlign: TextAlign.end)),
+                  child: FittedBox(
+                child: SFText(
+                    keyText: "$fee AVAX",
+                    style: TextStyles.lightWhite16,
+                    textAlign: TextAlign.end),
+              )),
             ],
           ),
           const SizedBox(

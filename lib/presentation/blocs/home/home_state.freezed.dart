@@ -549,8 +549,8 @@ class _$HomeLoaded with DiagnosticableTreeMixin implements HomeLoaded {
       this.item,
       final List<BedEntity>? itemList,
       this.selectedItem,
-      required this.errorMessage = '',
-      required this.loading = false})
+      this.errorMessage = '',
+      this.loading = false})
       : _bedList = bedList,
         _itemList = itemList;
 
@@ -771,8 +771,8 @@ abstract class HomeLoaded implements HomeState {
       final BedEntity? item,
       final List<BedEntity>? itemList,
       final BedEntity? selectedItem,
-      required final String errorMessage,
-      required final bool loading}) = _$HomeLoaded;
+      final String errorMessage,
+      final bool loading}) = _$HomeLoaded;
 
   List<BedEntity> get bedList => throw _privateConstructorUsedError;
   int get id => throw _privateConstructorUsedError;

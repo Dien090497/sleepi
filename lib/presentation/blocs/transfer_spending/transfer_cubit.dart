@@ -69,11 +69,7 @@ class TransferCubit extends Cubit<TransferSpendingState> {
     result.fold(
       (l) => emit(TransferSpendingState.error(message: l.msg)),
       (r) {
-        var fee = r;
-        if (fee < 0.00000000001) {
-          fee = 0.0;
-        }
-        emit(TransferSpendingState.loaded(fee: fee));
+        emit(TransferSpendingState.loaded(fee: r));
       },
     );
   }
@@ -88,7 +84,7 @@ class TransferCubit extends Cubit<TransferSpendingState> {
       },
       (limitGas) {
         final fee = ((limitGas * 50000000000) / pow(10, 18));
-        emit(TransferSpendingState.loaded(fee: fee));
+        emit(TransferSpendingState.loaded(fee: fee.toString()));
       },
     );
   }
