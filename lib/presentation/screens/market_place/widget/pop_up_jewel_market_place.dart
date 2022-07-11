@@ -197,8 +197,11 @@ class PopUpJewelMarketPlace extends StatelessWidget {
                               if (cubit.statusWallet) {
                                 _showDonWorryDialog(context, jewel);
                               } else {
-                                _showCreateOrImportWallet(context).then((){
-                                  cubit.init(2);
+                                _showCreateOrImportWallet(context)
+                                    .then((value) {
+                                  if (value == true) {
+                                    cubit.init(2);
+                                  }
                                 });
                               }
                             } else {
@@ -207,8 +210,11 @@ class PopUpJewelMarketPlace extends StatelessWidget {
                           }
                         }
                       } else {
-                        _showCreateOrImportWallet(context).then((){
-                          cubit.init(2);
+                        _showCreateOrImportWallet(context)
+                            .then((value) {
+                          if (value == true) {
+                            cubit.init(2);
+                          }
                         });
                       }
                     }
