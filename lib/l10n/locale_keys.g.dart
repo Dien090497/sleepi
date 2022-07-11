@@ -438,5 +438,6 @@ abstract class  LocaleKeys {
   static const pink = 'pink';
   static const purple = 'purple';
   static const incorrect_address = 'incorrect_address';
+  static const insufficient_amount = 'insufficient_amount';
 
 }

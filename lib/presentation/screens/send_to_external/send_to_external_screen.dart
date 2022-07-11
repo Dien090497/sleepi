@@ -109,15 +109,20 @@ class _SendToExternalScreenState extends State<SendToExternalScreen> {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   AddressScan(
-                                    errorText:
+                                    /*errorText:
                                         state is SendToExternalErrorToAddress
                                             ? state.msg
-                                            : null,
+                                            : null,*/
                                     onChangedAddress: (address) {
                                       cubit.contractAddressTo = address;
                                       contractAddressTo = address;
                                     },
                                   ),
+                                  if (state is SendToExternalErrorToAddress)
+                                    SFText(
+                                      keyText: state.msg,
+                                      style: TextStyles.w400Red12,
+                                    ),
                                   const SizedBox(height: 24),
                                   SFTextField(
                                       labelText: LocaleKeys.amount,
@@ -129,10 +134,6 @@ class _SendToExternalScreenState extends State<SendToExternalScreen> {
                                       textInputType:
                                           const TextInputType.numberWithOptions(
                                               decimal: true),
-                                      errorText: state
-                                              is SendToExternalErrorValueInEther
-                                          ? state.msg
-                                          : null,
                                       suffixIcon: Padding(
                                           padding: const EdgeInsets.all(8.0),
                                           child: SFIcon(args != null
@@ -145,6 +146,11 @@ class _SendToExternalScreenState extends State<SendToExternalScreen> {
                                           valueInEther = double.parse(result);
                                         }
                                       }),
+                                  if (state is SendToExternalErrorValueInEther)
+                                    SFText(
+                                      keyText: state.msg,
+                                      style: TextStyles.w400Red12,
+                                    ),
                                   SFText(
                                       keyText: LocaleKeys.balance,
                                       style: TextStyles.w400lightGrey12,

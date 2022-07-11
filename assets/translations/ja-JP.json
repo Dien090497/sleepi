@@ -385,5 +385,6 @@
   "email_already_exist" : "Email is already exists",
   "otp_expired" : "OTP has expired. Please try again",
   "invalid_code": "Invalid code. Please try again!",
-  "incorrect_address": "Incorrect Address"
+  "incorrect_address": "Incorrect Address",
+  "insufficient_amount": "Insufficient amount"
 }
