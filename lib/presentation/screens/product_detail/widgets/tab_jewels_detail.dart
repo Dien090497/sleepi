@@ -10,6 +10,7 @@ import 'package:slee_fi/presentation/blocs/nft_list/nft_list_state.dart';
 import 'package:slee_fi/presentation/screens/product_detail/widgets/jewel_dialog_body.dart';
 import 'package:slee_fi/presentation/screens/product_detail/widgets/my_jewel_short_widget.dart';
 import 'package:slee_fi/presentation/screens/product_detail/widgets/upgrade_tab.dart';
+import 'package:slee_fi/usecase/fetch_bed_usecase.dart';
 
 class TabJewelsDetail extends StatefulWidget {
   const TabJewelsDetail({Key? key}) : super(key: key);
@@ -20,6 +21,7 @@ class TabJewelsDetail extends StatefulWidget {
 
 class _TabJewelsDetailState extends State<TabJewelsDetail> {
   late List<BedModel> listJewels = [];
+  final CategoryType categoryType = CategoryType.jewel;
 
   void _showJewelDialog(BuildContext context, BedModel jewel) {
     showCustomDialog(
@@ -40,7 +42,7 @@ class _TabJewelsDetailState extends State<TabJewelsDetail> {
     return DefaultTabController(
         length: 2,
         child: BlocProvider(
-          create: (context) => NFTListCubit()..init(2),
+          create: (context) => NFTListCubit()..init(categoryType),
           child: BlocConsumer<NFTListCubit, NftListState>(
             listener: (context, state) {
               if (state is NftListLoaded) {
@@ -69,7 +71,7 @@ class _TabJewelsDetailState extends State<TabJewelsDetail> {
                                   count: listJewels.length,
                                   childAspectRatio: 1,
                                   onRefresh: () {
-                                    cubit.refresh(2);
+                                    cubit.refresh(categoryType);
                                   },
                                   itemBuilder: (context, i) {
                                     return GestureDetector(

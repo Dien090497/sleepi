@@ -61,7 +61,6 @@ dependencies:
   decimal: ^2.2.0
   path_provider: ^2.0.11
   fluttertoast: ^8.0.9
-  flutter_phoenix: ^1.0.0
   mobile_scanner: ^2.0.0
   appsflyer_sdk: ^6.5.2+2
   card_swiper: ^2.0.4

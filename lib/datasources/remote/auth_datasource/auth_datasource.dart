@@ -182,6 +182,11 @@ abstract class AuthDataSource {
     @Query('bedId') int bedId,
     @Query('itemId') int itemId,
   );
+  @PUT('/nft-attributes/remove-item-from-bed')
+  Future<dynamic> removeItemFromBed(
+    @Query('bedId') int bedId,
+    @Query('itemId') int itemId,
+  );
 
   @POST('/stacking/unstacking')
   Future<dynamic> unStacking();

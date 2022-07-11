@@ -113,13 +113,12 @@ class AuthImplementation extends IAuthRepository {
       });
       await Future.wait([
         _secureStorage.clearStorage(),
-        _isarDataSource.clearWallet(),
+        _isarDataSource.clearAll(),
         _getStorageDataSource.clearAll(),
       ]);
       if (isFirstOpen) {
         _secureStorage.makeFirstOpen();
       }
-
       return const Right(true);
     } catch (e) {
       return Left(FailureMessage('$e'));

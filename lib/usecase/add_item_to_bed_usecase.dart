@@ -9,7 +9,7 @@ class AddItemToBedUseCase extends UseCase<dynamic, AddItemToBedParam> {
   AddItemToBedUseCase(this._iUserRepository);
 
   @override
-  Future<Either<Failure, dynamic>> call(params) {
+  Future<Either<FailureMessage, dynamic>> call(params) {
     return _iUserRepository.addItemToBed(params);
   }
 }

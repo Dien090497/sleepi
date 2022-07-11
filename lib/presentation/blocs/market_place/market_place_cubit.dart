@@ -54,11 +54,29 @@ class MarketPlaceCubit extends Cubit<MarketPlaceState> {
     getMarketPlace(params);
   }
 
+  refreshStatusWallet() async {
+    final walletCall = await _currentWalletUC.call(NoParams());
+    walletCall.fold(
+          (l) {
+        statusWallet = false;
+      },
+          (r) {
+        statusWallet = true;
+      },
+    );
+  }
+
   refresh() {
     page = 1;
     loadMore = false;
     params = params.copyWith(page: page);
     log("params : ${params.toJson()}");
+    getMarketPlace(params);
+  }
+
+  clearFilter() {
+    page = 1;
+    params = params.copyWith(page: page, level: 0, bedMint: 0, type: [], classNft: [], quality: []);
     getMarketPlace(params);
   }
 
@@ -73,10 +91,10 @@ class MarketPlaceCubit extends Cubit<MarketPlaceState> {
       error = false;
       log("result : ${success.toString()}");
       if (success.list.length == limit) {
-        page ++;
+        page++;
         params = params.copyWith(page: page);
         loadMore = true;
-      }else{
+      } else {
         loadMore = false;
       }
       emit(MarketPlaceState.loaded(success));
@@ -95,10 +113,10 @@ class MarketPlaceCubit extends Cubit<MarketPlaceState> {
       error = false;
       log("result : ${success.toString()}");
       if (success.list.length == limit) {
-        page ++;
+        page++;
         params = params.copyWith(page: page);
         loadMore = true;
-      }else{
+      } else {
         loadMore = false;
       }
       emit(MarketPlaceState.loadedMore(success));

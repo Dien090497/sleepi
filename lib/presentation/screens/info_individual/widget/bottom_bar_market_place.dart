@@ -27,7 +27,7 @@ class BottomBarMarketPlaceWidget extends StatelessWidget {
         bed: bed,
         onConfirmTap: () {
           Navigator.pop(context);
-          cubit.buyNFT(bed.id);
+          cubit.buyNFT(bed.nftId);
         },
       ),
     );
@@ -36,7 +36,7 @@ class BottomBarMarketPlaceWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => MarketPlaceCubit(),
+      create: (context) => MarketPlaceCubit()..refreshStatusWallet(),
       child: BlocConsumer<MarketPlaceCubit, MarketPlaceState>(
         listener: (context, state) {
           final cubit = context.read<MarketPlaceCubit>();

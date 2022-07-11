@@ -23,7 +23,7 @@ mixin _$TransferSpendingState {
     required TResult Function() toWalletSuccess,
     required TResult Function(String message, String? typeError) error,
     required TResult Function(
-            double? fee, TransferSpendingEntity? transferSpendingEntity)
+            String? fee, TransferSpendingEntity? transferSpendingEntity)
         loaded,
   }) =>
       throw _privateConstructorUsedError;
@@ -34,7 +34,7 @@ mixin _$TransferSpendingState {
     TResult Function()? toWalletSuccess,
     TResult Function(String message, String? typeError)? error,
     TResult Function(
-            double? fee, TransferSpendingEntity? transferSpendingEntity)?
+            String? fee, TransferSpendingEntity? transferSpendingEntity)?
         loaded,
   }) =>
       throw _privateConstructorUsedError;
@@ -45,7 +45,7 @@ mixin _$TransferSpendingState {
     TResult Function()? toWalletSuccess,
     TResult Function(String message, String? typeError)? error,
     TResult Function(
-            double? fee, TransferSpendingEntity? transferSpendingEntity)?
+            String? fee, TransferSpendingEntity? transferSpendingEntity)?
         loaded,
     required TResult orElse(),
   }) =>
@@ -150,7 +150,7 @@ class _$TransferSpendingStateInitial implements TransferSpendingStateInitial {
     required TResult Function() toWalletSuccess,
     required TResult Function(String message, String? typeError) error,
     required TResult Function(
-            double? fee, TransferSpendingEntity? transferSpendingEntity)
+            String? fee, TransferSpendingEntity? transferSpendingEntity)
         loaded,
   }) {
     return initial();
@@ -164,7 +164,7 @@ class _$TransferSpendingStateInitial implements TransferSpendingStateInitial {
     TResult Function()? toWalletSuccess,
     TResult Function(String message, String? typeError)? error,
     TResult Function(
-            double? fee, TransferSpendingEntity? transferSpendingEntity)?
+            String? fee, TransferSpendingEntity? transferSpendingEntity)?
         loaded,
   }) {
     return initial?.call();
@@ -178,7 +178,7 @@ class _$TransferSpendingStateInitial implements TransferSpendingStateInitial {
     TResult Function()? toWalletSuccess,
     TResult Function(String message, String? typeError)? error,
     TResult Function(
-            double? fee, TransferSpendingEntity? transferSpendingEntity)?
+            String? fee, TransferSpendingEntity? transferSpendingEntity)?
         loaded,
     required TResult orElse(),
   }) {
@@ -286,7 +286,7 @@ class _$TransferSpendingStateLoading implements TransferSpendingStateLoading {
     required TResult Function() toWalletSuccess,
     required TResult Function(String message, String? typeError) error,
     required TResult Function(
-            double? fee, TransferSpendingEntity? transferSpendingEntity)
+            String? fee, TransferSpendingEntity? transferSpendingEntity)
         loaded,
   }) {
     return loading();
@@ -300,7 +300,7 @@ class _$TransferSpendingStateLoading implements TransferSpendingStateLoading {
     TResult Function()? toWalletSuccess,
     TResult Function(String message, String? typeError)? error,
     TResult Function(
-            double? fee, TransferSpendingEntity? transferSpendingEntity)?
+            String? fee, TransferSpendingEntity? transferSpendingEntity)?
         loaded,
   }) {
     return loading?.call();
@@ -314,7 +314,7 @@ class _$TransferSpendingStateLoading implements TransferSpendingStateLoading {
     TResult Function()? toWalletSuccess,
     TResult Function(String message, String? typeError)? error,
     TResult Function(
-            double? fee, TransferSpendingEntity? transferSpendingEntity)?
+            String? fee, TransferSpendingEntity? transferSpendingEntity)?
         loaded,
     required TResult orElse(),
   }) {
@@ -424,7 +424,7 @@ class _$TransferSpendingStateToWalletSuccess
     required TResult Function() toWalletSuccess,
     required TResult Function(String message, String? typeError) error,
     required TResult Function(
-            double? fee, TransferSpendingEntity? transferSpendingEntity)
+            String? fee, TransferSpendingEntity? transferSpendingEntity)
         loaded,
   }) {
     return toWalletSuccess();
@@ -438,7 +438,7 @@ class _$TransferSpendingStateToWalletSuccess
     TResult Function()? toWalletSuccess,
     TResult Function(String message, String? typeError)? error,
     TResult Function(
-            double? fee, TransferSpendingEntity? transferSpendingEntity)?
+            String? fee, TransferSpendingEntity? transferSpendingEntity)?
         loaded,
   }) {
     return toWalletSuccess?.call();
@@ -452,7 +452,7 @@ class _$TransferSpendingStateToWalletSuccess
     TResult Function()? toWalletSuccess,
     TResult Function(String message, String? typeError)? error,
     TResult Function(
-            double? fee, TransferSpendingEntity? transferSpendingEntity)?
+            String? fee, TransferSpendingEntity? transferSpendingEntity)?
         loaded,
     required TResult orElse(),
   }) {
@@ -596,7 +596,7 @@ class _$TransferSpendingStateError implements TransferSpendingStateError {
     required TResult Function() toWalletSuccess,
     required TResult Function(String message, String? typeError) error,
     required TResult Function(
-            double? fee, TransferSpendingEntity? transferSpendingEntity)
+            String? fee, TransferSpendingEntity? transferSpendingEntity)
         loaded,
   }) {
     return error(message, typeError);
@@ -610,7 +610,7 @@ class _$TransferSpendingStateError implements TransferSpendingStateError {
     TResult Function()? toWalletSuccess,
     TResult Function(String message, String? typeError)? error,
     TResult Function(
-            double? fee, TransferSpendingEntity? transferSpendingEntity)?
+            String? fee, TransferSpendingEntity? transferSpendingEntity)?
         loaded,
   }) {
     return error?.call(message, typeError);
@@ -624,7 +624,7 @@ class _$TransferSpendingStateError implements TransferSpendingStateError {
     TResult Function()? toWalletSuccess,
     TResult Function(String message, String? typeError)? error,
     TResult Function(
-            double? fee, TransferSpendingEntity? transferSpendingEntity)?
+            String? fee, TransferSpendingEntity? transferSpendingEntity)?
         loaded,
     required TResult orElse(),
   }) {
@@ -696,7 +696,7 @@ abstract class _$$TransferSpendingStateLoadedCopyWith<$Res> {
           _$TransferSpendingStateLoaded value,
           $Res Function(_$TransferSpendingStateLoaded) then) =
       __$$TransferSpendingStateLoadedCopyWithImpl<$Res>;
-  $Res call({double? fee, TransferSpendingEntity? transferSpendingEntity});
+  $Res call({String? fee, TransferSpendingEntity? transferSpendingEntity});
 }
 
 /// @nodoc
@@ -721,7 +721,7 @@ class __$$TransferSpendingStateLoadedCopyWithImpl<$Res>
       fee: fee == freezed
           ? _value.fee
           : fee // ignore: cast_nullable_to_non_nullable
-              as double?,
+              as String?,
       transferSpendingEntity: transferSpendingEntity == freezed
           ? _value.transferSpendingEntity
           : transferSpendingEntity // ignore: cast_nullable_to_non_nullable
@@ -736,7 +736,7 @@ class _$TransferSpendingStateLoaded implements TransferSpendingStateLoaded {
   const _$TransferSpendingStateLoaded({this.fee, this.transferSpendingEntity});
 
   @override
-  final double? fee;
+  final String? fee;
   @override
   final TransferSpendingEntity? transferSpendingEntity;
 
@@ -775,7 +775,7 @@ class _$TransferSpendingStateLoaded implements TransferSpendingStateLoaded {
     required TResult Function() toWalletSuccess,
     required TResult Function(String message, String? typeError) error,
     required TResult Function(
-            double? fee, TransferSpendingEntity? transferSpendingEntity)
+            String? fee, TransferSpendingEntity? transferSpendingEntity)
         loaded,
   }) {
     return loaded(fee, transferSpendingEntity);
@@ -789,7 +789,7 @@ class _$TransferSpendingStateLoaded implements TransferSpendingStateLoaded {
     TResult Function()? toWalletSuccess,
     TResult Function(String message, String? typeError)? error,
     TResult Function(
-            double? fee, TransferSpendingEntity? transferSpendingEntity)?
+            String? fee, TransferSpendingEntity? transferSpendingEntity)?
         loaded,
   }) {
     return loaded?.call(fee, transferSpendingEntity);
@@ -803,7 +803,7 @@ class _$TransferSpendingStateLoaded implements TransferSpendingStateLoaded {
     TResult Function()? toWalletSuccess,
     TResult Function(String message, String? typeError)? error,
     TResult Function(
-            double? fee, TransferSpendingEntity? transferSpendingEntity)?
+            String? fee, TransferSpendingEntity? transferSpendingEntity)?
         loaded,
     required TResult orElse(),
   }) {
@@ -859,11 +859,11 @@ class _$TransferSpendingStateLoaded implements TransferSpendingStateLoaded {
 
 abstract class TransferSpendingStateLoaded implements TransferSpendingState {
   const factory TransferSpendingStateLoaded(
-          {final double? fee,
+          {final String? fee,
           final TransferSpendingEntity? transferSpendingEntity}) =
       _$TransferSpendingStateLoaded;
 
-  double? get fee => throw _privateConstructorUsedError;
+  String? get fee => throw _privateConstructorUsedError;
   TransferSpendingEntity? get transferSpendingEntity =>
       throw _privateConstructorUsedError;
   @JsonKey(ignore: true)

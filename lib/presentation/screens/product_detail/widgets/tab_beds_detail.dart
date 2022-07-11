@@ -13,6 +13,7 @@ import 'package:slee_fi/presentation/blocs/nft_list/nft_list_state.dart';
 import 'package:slee_fi/presentation/screens/info_individual/info_individual_screen.dart';
 import 'package:slee_fi/presentation/screens/product_detail/widgets/gridview_bed_item.dart';
 import 'package:slee_fi/resources/resources.dart';
+import 'package:slee_fi/usecase/fetch_bed_usecase.dart';
 
 class TabBedsDetail extends StatefulWidget {
   const TabBedsDetail({Key? key}) : super(key: key);
@@ -23,6 +24,7 @@ class TabBedsDetail extends StatefulWidget {
 
 class _TabBedsDetailState extends State<TabBedsDetail> {
   late List<BedModel> listBeds = [];
+  final CategoryType categoryType = CategoryType.bed;
 
   // void _showBedDialog(BuildContext context) {
   @override
@@ -30,7 +32,7 @@ class _TabBedsDetailState extends State<TabBedsDetail> {
     return DefaultTabController(
         length: 2,
         child: BlocProvider(
-          create: (context) => NFTListCubit()..init(1),
+          create: (context) => NFTListCubit()..init(categoryType),
           child: BlocConsumer<NFTListCubit, NftListState>(
             listener: (context, state) {
               if (state is NftListLoaded) {
@@ -58,7 +60,7 @@ class _TabBedsDetailState extends State<TabBedsDetail> {
                               : GridViewBedItem(
                                   beds: listBeds,
                                   onRefresh: () {
-                                    cubit.refresh(1);
+                                    cubit.refresh(categoryType);
                                   },
                                   onBedTap: (bed) {
                                     Navigator.pushNamed(context, R.nftInfo,

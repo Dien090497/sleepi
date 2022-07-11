@@ -1,4 +1,5 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:slee_fi/common/extensions/string_x.dart';
 import 'package:slee_fi/di/injector.dart';
 import 'package:slee_fi/presentation/blocs/bottom_navigation/bottom_navigation_event.dart';
 import 'package:slee_fi/presentation/blocs/bottom_navigation/bottom_navigation_state.dart';
@@ -9,6 +10,7 @@ class BottomNavigationBloc
     extends Bloc<BottomNavigationEvent, BottomNavigationState> {
   BottomNavigationBloc() : super(const BottomNavigationState()) {
     on<SelectTab>((event, emit) {
+      'on new even   ${event.index}'.log;
       emit(state.copyWith(tabIndex: event.index));
     });
     _makeFirstOpenApp();

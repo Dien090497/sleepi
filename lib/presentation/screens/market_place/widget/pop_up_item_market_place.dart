@@ -20,7 +20,10 @@ import 'package:slee_fi/presentation/screens/wallet_creation_warning/widgets/pop
 
 class PopUpItemMarketPlace extends StatelessWidget {
   const PopUpItemMarketPlace(
-      {Key? key, required this.item, required this.onConfirmTap, required this.cubit})
+      {Key? key,
+      required this.item,
+      required this.onConfirmTap,
+      required this.cubit})
       : super(key: key);
 
   final MarketPlaceModel item;
@@ -48,7 +51,7 @@ class PopUpItemMarketPlace extends StatelessWidget {
     );
   }
 
-  void _showCreateOrImportWallet(BuildContext context) async {
+  _showCreateOrImportWallet(BuildContext context) async {
     return showCustomAlertDialog(
       context,
       barrierDismissible: false,
@@ -191,10 +194,13 @@ class PopUpItemMarketPlace extends StatelessWidget {
                         for (var element in userState.listTokens) {
                           if (element.symbol.toLowerCase() == 'avax') {
                             if (element.balance < double.parse(item.price)) {
-                              if(cubit.statusWallet) {
+                              if (cubit.statusWallet) {
                                 _showDonWorryDialog(context, item);
-                              }else{
-                                _showCreateOrImportWallet(context);
+                              } else {
+                                _showCreateOrImportWallet(context)
+                                    .then((value) {
+                                  cubit.refreshStatusWallet();
+                                });
                               }
                             } else {
                               _showConfirmDialog(context, item);
@@ -202,7 +208,9 @@ class PopUpItemMarketPlace extends StatelessWidget {
                           }
                         }
                       } else {
-                        _showCreateOrImportWallet(context);
+                        _showCreateOrImportWallet(context).then((value) {
+                          cubit.refreshStatusWallet();
+                        });
                       }
                     }
                   },
