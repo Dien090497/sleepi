@@ -90,12 +90,6 @@ class _TransferListState extends State<TransferList> {
             }
           }
         }
-        if (state is TransferSpendingStateError) {
-          _showError(
-              context: context,
-              message: state.message,
-              messageType: MessageType.error);
-        }
 
         if (state is TransferSpendingStateToWalletSuccess) {
           Navigator.pop(context, true);
@@ -177,11 +171,4 @@ class _TransferListState extends State<TransferList> {
       },
     );
   }
-}
-
-void _showError(
-    {required BuildContext context,
-    required String message,
-    required MessageType messageType}) {
-  showCustomSnackBar(context: context, msg: message);
 }
