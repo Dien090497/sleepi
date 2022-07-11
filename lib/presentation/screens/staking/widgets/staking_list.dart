@@ -41,8 +41,6 @@ class StakingList extends StatelessWidget {
         listener: (context, state) {
           if(state is StakingStateStakingInfoSuccess){
             stakingInfo = state.stakingInfoResponse;
-            print("---------------------------------");
-            print(stakingInfo);
           }
           if(state is StakingStateUnStakingSuccess){
             showSuccessfulDialog(context, null);
@@ -307,7 +305,7 @@ class StakingList extends StatelessWidget {
                                     PopUpStaking(
                                       message: LocaleKeys.do_you_really_want_to_withdraw
                                           .tr(namedArgs: {
-                                        'amount': stakingInfo!= null ? stakingInfo!.stake.totalStake! : "0",
+                                        'amount': stakingInfo != null ? double.parse(stakingInfo!.stake.totalStake != null ? stakingInfo!.stake.totalStake! : "0").formatBalanceToken : "0",
                                         'token': 'SLFT',
                                       }),
                                       onPressed: () => cubit.unStaking(),
@@ -323,7 +321,7 @@ class StakingList extends StatelessWidget {
                                     PopUpStaking(
                                       message: LocaleKeys.do_you_really_want_to_compound
                                           .tr(namedArgs: {
-                                        'amount': stakingInfo!= null ? stakingInfo!.stake.totalReward! : "0",
+                                        'amount': stakingInfo!= null ? double.parse(stakingInfo!.stake.totalStake != null ? stakingInfo!.stake.totalStake! : "0").formatBalanceToken : "0",
                                         'token': 'SLFT',
                                       }),
                                       onPressed: () => cubit.compound(),
