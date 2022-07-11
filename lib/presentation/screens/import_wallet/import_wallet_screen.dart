@@ -39,12 +39,12 @@ class _ImportWalletScreenState extends State<ImportWalletScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final cubit = ImportWalletCubit()..init();
     return BlocProvider(
-      create: (context) => cubit,
+      create: (context) => ImportWalletCubit()..init(),
       child: BlocConsumer<ImportWalletCubit, ImportWalletState>(
         listener: (context, state) {
           if (state is ImportWalletVerifyOtpSuccess) {
+            final cubit = context.read<ImportWalletCubit>();
             Navigator.pushNamed(context, R.createPasscode).then((value) {
               if (value == true) {
                 cubit.importWallet(mnemonic: controllerMnemonic.text);
@@ -68,6 +68,7 @@ class _ImportWalletScreenState extends State<ImportWalletScreen> {
           }
         },
         builder: (context, state) {
+          final cubit = context.read<ImportWalletCubit>();
           return Stack(
             children: [
               DismissKeyboardWidget(
