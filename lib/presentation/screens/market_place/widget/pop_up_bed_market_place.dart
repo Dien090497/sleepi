@@ -22,7 +22,10 @@ import 'package:slee_fi/resources/resources.dart';
 
 class PopUpBedMarketPlace extends StatelessWidget {
   const PopUpBedMarketPlace(
-      {Key? key, required this.bed, required this.onConfirmTap, required this.cubit})
+      {Key? key,
+      required this.bed,
+      required this.onConfirmTap,
+      required this.cubit})
       : super(key: key);
 
   final MarketPlaceModel bed;
@@ -152,10 +155,15 @@ class PopUpBedMarketPlace extends StatelessWidget {
                         for (var element in userState.listTokens) {
                           if (element.symbol.toLowerCase() == 'avax') {
                             if (element.balance < double.parse(bed.price)) {
-                              if(cubit.statusWallet) {
+                              if (cubit.statusWallet) {
                                 _showDonWorryDialog(context, bed);
-                              }else{
-                                _showCreateOrImportWallet(context);
+                              } else {
+                                _showCreateOrImportWallet(context)
+                                    .then((value) {
+                                  if (value == true) {
+                                    cubit.init(1);
+                                  }
+                                });
                               }
                             } else {
                               _showConfirmDialog(context, bed);
@@ -163,7 +171,12 @@ class PopUpBedMarketPlace extends StatelessWidget {
                           }
                         }
                       } else {
-                        _showCreateOrImportWallet(context);
+                        _showCreateOrImportWallet(context)
+                            .then((value) {
+                          if (value == true) {
+                            cubit.init(1);
+                          }
+                        });
                       }
                     }
                   },

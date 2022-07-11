@@ -48,7 +48,7 @@ class PopUpItemMarketPlace extends StatelessWidget {
     );
   }
 
-  void _showCreateOrImportWallet(BuildContext context) async {
+  _showCreateOrImportWallet(BuildContext context) async {
     return showCustomAlertDialog(
       context,
       barrierDismissible: false,
@@ -194,7 +194,12 @@ class PopUpItemMarketPlace extends StatelessWidget {
                               if(cubit.statusWallet) {
                                 _showDonWorryDialog(context, item);
                               }else{
-                                _showCreateOrImportWallet(context);
+                                _showCreateOrImportWallet(context)
+                                    .then((value) {
+                                  if (value == true) {
+                                    cubit.init(3);
+                                  }
+                                });
                               }
                             } else {
                               _showConfirmDialog(context, item);
@@ -202,7 +207,12 @@ class PopUpItemMarketPlace extends StatelessWidget {
                           }
                         }
                       } else {
-                        _showCreateOrImportWallet(context);
+                        _showCreateOrImportWallet(context)
+                            .then((value) {
+                          if (value == true) {
+                            cubit.init(3);
+                          }
+                        });
                       }
                     }
                   },
