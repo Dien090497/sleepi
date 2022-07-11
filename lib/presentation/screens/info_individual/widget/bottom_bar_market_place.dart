@@ -42,7 +42,7 @@ class BottomBarMarketPlaceWidget extends StatelessWidget {
           final cubit = context.read<MarketPlaceCubit>();
           if (state is MarketPlaceStateBuySuccess) {
             cubit.refresh();
-            showSuccessfulDialog(context, null);
+            showSuccessfulDialog(context, LocaleKeys.purchased_successfully);
           }
 
           if (state is MarketPlaceStateBuyFailed) {
