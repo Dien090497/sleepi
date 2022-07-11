@@ -27,7 +27,7 @@ class BottomBarMarketPlaceWidget extends StatelessWidget {
         bed: bed,
         onConfirmTap: () {
           Navigator.pop(context);
-          cubit.buyNFT(bed.id);
+          cubit.buyNFT(bed.nftId);
         },
       ),
     );
