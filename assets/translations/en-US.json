@@ -425,5 +425,14 @@
   "some_thing_wrong" : "Something went wrong",
   "purchased_successfully": "Purchased Successfully",
   "no_result": "No Result",
+  "ruby": "Ruby",
+  "sapphire": "Sapphire",
+  "emerald": "Emerald",
+  "diamond": "Diamond",
+  "amethyst": "Amethyst",
+  "blue": "Blue",
+  "green": "Green",
+  "pink": "Pink",
+  "purple": "Purple",
   "incorrect_address": "Incorrect Address"
 }

@@ -87,7 +87,7 @@ class MyJewelsShortWidget extends StatelessWidget {
                     const EdgeInsets.symmetric(vertical: 5, horizontal: 8),
                     alignment: Alignment.center,
                     child: SFText(
-                        keyText: '+ ${jewel.durability}%',
+                        keyText: '+ ${jewel.efficiency}%',
                         style: TextStyles.greenW700size12
                     ),
                   ),

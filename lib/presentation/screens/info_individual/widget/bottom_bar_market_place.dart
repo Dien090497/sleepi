@@ -46,6 +46,7 @@ class BottomBarMarketPlaceWidget extends StatelessWidget {
           }
 
           if (state is MarketPlaceStateBuyFailed) {
+            cubit.refresh();
             showMessageDialog(context, state.msg);
           }
         },

@@ -34,6 +34,7 @@ class MarketPlaceCubit extends Cubit<MarketPlaceState> {
   late bool statusWallet = false;
 
   init(int idCategory) async {
+    page = 1;
     params = params.copyWith(
         page: page,
         limit: limit,
@@ -54,51 +55,58 @@ class MarketPlaceCubit extends Cubit<MarketPlaceState> {
   }
 
   refresh() {
+    page = 1;
+    loadMore = false;
+    params = params.copyWith(page: page);
     log("params : ${params.toJson()}");
-    int page = 1;
-    int limit = 10;
-    params = params.copyWith(page: page, limit: limit);
     getMarketPlace(params);
   }
 
-  Future<void> getMarketPlace(MarketSchema params) async {
-    final result = await _marketPlaceUseCase.call(params);
+  Future<void> getMarketPlace(MarketSchema param) async {
+    final result = await _marketPlaceUseCase.call(param);
     result.fold((l) {
       log("fail : ${'$l'}");
       error = true;
+      loadMore = false;
       emit(MarketPlaceState.fail('$l'));
     }, (success) {
       error = false;
       log("result : ${success.toString()}");
-      if (success.count < limit) {
-        page += 1;
+      if (success.list.length == limit) {
+        page ++;
+        params = params.copyWith(page: page);
         loadMore = true;
+      }else{
+        loadMore = false;
       }
       emit(MarketPlaceState.loaded(success));
     });
   }
 
   Future<void> loadMoreMarketPlace() async {
-    emit(const MarketPlaceState.loadingMore());
+    log("params : ${params.toJson()}");
     final result = await _marketPlaceUseCase.call(params);
     result.fold((l) {
       error = true;
+      loadMore = false;
       log("fail : ${'$l'}");
       emit(MarketPlaceState.fail('$l'));
     }, (success) {
       error = false;
       log("result : ${success.toString()}");
-      if (success.count < limit) {
-        page += 1;
+      if (success.list.length == limit) {
+        page ++;
+        params = params.copyWith(page: page);
         loadMore = true;
+      }else{
+        loadMore = false;
       }
-      emit(MarketPlaceState.loaded(success));
+      emit(MarketPlaceState.loadedMore(success));
     });
   }
 
   Future<void> selectPrice(int price) async {
-    int page = 1;
-    int limit = 10;
+    page = 1;
     params = params.copyWith(
         page: page,
         limit: limit,
@@ -138,8 +146,7 @@ class MarketPlaceCubit extends Cubit<MarketPlaceState> {
         );
       }
     });
-    int page = 1;
-    int limit = 10;
+    page = 1;
     params = params.copyWith(page: page, limit: limit);
     log("params : ${params.toJson()}");
     getMarketPlace(params);
