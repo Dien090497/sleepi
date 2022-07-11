@@ -112,4 +112,15 @@ class NFTDataSource {
   }
 
   Future<EtherAmount> getGasPrice() => _web3provider.web3client.getGasPrice();
+
+  Future<TransactionReceipt?> streamTxHash({
+    required String txHash,
+  }) {
+    final web3 = _web3provider.web3client;
+    return web3
+        .addedBlocks()
+        .asyncMap((event) => web3.getTransactionReceipt(txHash))
+        .where((tx) => tx != null)
+        .first;
+  }
 }

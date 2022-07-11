@@ -66,11 +66,12 @@ class NFTImplementation extends INFTRepository {
   }
 
   @override
-  Future<Either<Failure, bool>> isApprovedForAll(
-      {required String nftAddress,
-      required String ownerAddress,
-      required String operatorAddress,
-      required Credentials credentials}) async {
+  Future<Either<Failure, bool>> isApprovedForAll({
+    required String nftAddress,
+    required String ownerAddress,
+    required String operatorAddress,
+    required Credentials credentials,
+  }) async {
     try {
       return Right(await _nftDataSource.isApprovedForAll(
           address: nftAddress,
@@ -83,10 +84,11 @@ class NFTImplementation extends INFTRepository {
   }
 
   @override
-  Future<Either<Failure, String>> setApprovalForAll(
-      {required String nftAddress,
-      required String operatorAddress,
-      required Credentials credentials}) async {
+  Future<Either<Failure, String>> setApprovalForAll({
+    required String nftAddress,
+    required String operatorAddress,
+    required Credentials credentials,
+  }) async {
     try {
       return Right(await _nftDataSource.setApprovalForAll(
           address: nftAddress,
@@ -162,5 +164,10 @@ class NFTImplementation extends INFTRepository {
     } catch (e) {
       return Left(FailureMessage('$e'));
     }
+  }
+
+  @override
+  Future<TransactionReceipt?> listenTxHash(String txHash) {
+    return _nftDataSource.streamTxHash(txHash: txHash);
   }
 }

@@ -39,7 +39,9 @@ class SendNftToSpendingUseCase
               nftAddress: params.nftAddress,
               operatorAddress: spendingAddr,
               credentials: params.credentials);
-          return approveRes.fold(Left.new, (r) {
+          return approveRes.fold(Left.new, (r) async{
+            final txHashRes = await _inftRepository.listenTxHash(r);
+            print('### ${txHashRes}');
             return _inftRepository.depositSpending(
                 spendingAddress: spendingAddr,
                 nftAddress: params.nftAddress,
