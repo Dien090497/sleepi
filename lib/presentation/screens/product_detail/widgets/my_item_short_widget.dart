@@ -89,7 +89,7 @@ class MyItemShortWidget extends StatelessWidget {
                         const EdgeInsets.symmetric(vertical: 4, horizontal: 12),
                     alignment: Alignment.center,
                     child: SFText(
-                      keyText: '+ ${item.quality}%',
+                      keyText: '+ ${item.durability}%',
                       style: TextStyles.greenW700size12,
                     ),
                   ),
