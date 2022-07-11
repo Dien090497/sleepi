@@ -6,6 +6,7 @@ import 'package:slee_fi/common/style/text_styles.dart';
 import 'package:slee_fi/common/widgets/sf_alert_dialog.dart';
 import 'package:slee_fi/common/widgets/sf_button_outlined.dart';
 import 'package:slee_fi/common/widgets/sf_buttons.dart';
+import 'package:slee_fi/common/widgets/sf_dialog.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
 import 'package:slee_fi/l10n/locale_keys.g.dart';
 import 'package:slee_fi/models/pop_with_result.dart';
@@ -38,6 +39,7 @@ class PopUpAvalancheWallet extends StatelessWidget {
                   toPage: R.wallet,
                   results: state.entity,
                 ));
+            showSignUpSuccess(context, LocaleKeys.wallet_created_successfully);
           }
           if (state is createWalletError) {
             Navigator.pop(context);
@@ -118,6 +120,7 @@ class PopUpAvalancheWallet extends StatelessWidget {
                                 .then((value) {
                               if (value is PopWithResults) {
                                 Navigator.pop(context, value);
+                                showSignUpSuccess(context, LocaleKeys.wallet_import_successfully);
                               }
                             });
                           }));

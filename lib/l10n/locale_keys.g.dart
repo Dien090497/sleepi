@@ -438,5 +438,7 @@ abstract class  LocaleKeys {
   static const pink = 'pink';
   static const purple = 'purple';
   static const incorrect_address = 'incorrect_address';
+  static const wallet_created_successfully = 'wallet_created_successfully';
+  static const wallet_import_successfully = 'wallet_import_successfully';
 
 }
