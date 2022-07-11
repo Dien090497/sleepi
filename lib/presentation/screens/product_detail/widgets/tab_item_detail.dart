@@ -8,6 +8,7 @@ import 'package:slee_fi/presentation/blocs/nft_list/nft_list_cubit.dart';
 import 'package:slee_fi/presentation/blocs/nft_list/nft_list_state.dart';
 import 'package:slee_fi/presentation/screens/product_detail/widgets/my_item_short_widget.dart';
 import 'package:slee_fi/presentation/screens/product_detail/widgets/upgrade_tab.dart';
+import 'package:slee_fi/usecase/fetch_bed_usecase.dart';
 
 class TabItemDetail extends StatefulWidget {
   const TabItemDetail({Key? key}) : super(key: key);
@@ -18,6 +19,7 @@ class TabItemDetail extends StatefulWidget {
 
 class _TabItemDetailState extends State<TabItemDetail> {
   List<BedModel> listItems = [];
+  final CategoryType categoryType = CategoryType.item;
 
   // void _showItemDialog(BuildContext context, String img, String id) {
   @override
@@ -25,7 +27,7 @@ class _TabItemDetailState extends State<TabItemDetail> {
     return DefaultTabController(
         length: 2,
         child: BlocProvider(
-          create: (context) => NFTListCubit()..init(3),
+          create: (context) => NFTListCubit()..init(categoryType),
           child: BlocConsumer<NFTListCubit, NftListState>(
             listener: (context, state) {
               if (state is NftListLoaded) {
@@ -55,7 +57,7 @@ class _TabItemDetailState extends State<TabItemDetail> {
                                   count: listItems.length,
                                   childAspectRatio: 1,
                                   onRefresh: () {
-                                    cubit.refresh(3);
+                                    cubit.refresh(categoryType);
                                   },
                                   itemBuilder: (context, i) {
                                     return GestureDetector(

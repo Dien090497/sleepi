@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:slee_fi/common/enum/enum.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
+import 'package:slee_fi/common/widgets/cached_image.dart';
 import 'package:slee_fi/common/widgets/sf_buttons.dart';
 import 'package:slee_fi/common/widgets/sf_card.dart';
 import 'package:slee_fi/common/widgets/sf_dialog.dart';
@@ -15,10 +16,12 @@ class PopUpItem extends StatelessWidget {
       required this.id,
       required this.icon,
       required this.onConfirm,
-      this.onCancel})
+      this.onCancel,
+      required this.effect})
       : super(key: key);
 
-  final ItemType icon;
+  final String icon;
+  final String effect;
   final String id;
   final VoidCallback onConfirm;
   final VoidCallback? onCancel;
@@ -33,10 +36,7 @@ class PopUpItem extends StatelessWidget {
             keyText: id,
             style: TextStyles.white1w700size16,
           ),
-          SFIcon(
-            icon.image,
-            width: 160,
-          ),
+          CachedImage(image: icon, height: 160),
           SFText(keyText: 'Level 5', style: TextStyles.lightGrey14),
           const SizedBox(height: 32),
           SFCard(
@@ -52,7 +52,7 @@ class PopUpItem extends StatelessWidget {
                 ),
                 const SizedBox(height: 4),
                 SFText(
-                  keyText: icon.effect,
+                  keyText: effect,
                   style: TextStyles.lightGrey14,
                 ),
               ],

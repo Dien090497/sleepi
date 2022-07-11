@@ -14,7 +14,7 @@ BedModel _$BedModelFromJson(Map<String, dynamic> json) => BedModel(
       json['contract_address'] as String,
       json['type'] as String,
       json['is_mint'] as int,
-      json['quality'] as String,
+      json['quality'] as String?,
       json['owner'] as String,
       json['time'] as int,
       json['level'] as int,

@@ -1,17 +1,20 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:card_swiper/card_swiper.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:slee_fi/common/extensions/string_x.dart';
 import 'package:slee_fi/common/routes/app_routes.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
+import 'package:slee_fi/common/widgets/cached_image.dart';
 import 'package:slee_fi/common/widgets/loading_screen.dart';
 import 'package:slee_fi/common/widgets/sf_buttons.dart';
 import 'package:slee_fi/common/widgets/sf_icon.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
 import 'package:slee_fi/entities/bed_entity/bed_entity.dart';
 import 'package:slee_fi/l10n/locale_keys.g.dart';
+import 'package:slee_fi/presentation/blocs/bottom_navigation/bottom_navigation_bloc.dart';
+import 'package:slee_fi/presentation/blocs/bottom_navigation/bottom_navigation_event.dart';
 import 'package:slee_fi/presentation/blocs/home/home_bloc.dart';
 import 'package:slee_fi/presentation/blocs/home/home_state.dart';
 import 'package:slee_fi/presentation/screens/info_individual/info_individual_screen.dart';
@@ -23,8 +26,6 @@ class MiddleBed extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final Size size = MediaQuery.of(context).size;
-    // final beds = List.generate(BedType.values.length * 5,
-    //     (i) => BedType.values[i % BedType.values.length]);
     return Column(
       children: [
         SFText(
@@ -54,8 +55,17 @@ class MiddleBed extends StatelessWidget {
                           itemBuilder: (BuildContext context, int index) {
                             return state.bedList.isNotEmpty
                                 ? _buildBedItem(state.bedList[index], context)
-                                : const SFIcon(Ics.addBed, fit: BoxFit.none);
+                                : GestureDetector(
+                                    child: const SFIcon(Ics.addBed,
+                                        fit: BoxFit.none),
+                                    onTap: () {
+                                      BlocProvider.of<BottomNavigationBloc>(
+                                              context)
+                                          .add(const SelectTab(4));
+                                    },
+                                  );
                           },
+
                           onIndexChanged: (index) {
                             if (state.bedList.isEmpty) {
                               return;
@@ -67,10 +77,10 @@ class MiddleBed extends StatelessWidget {
                                 time: bed.time,
                                 id: bed.id));
                           },
-
+                          loop: state.bedList.isNotEmpty,
                           itemCount:
                               state.bedList.isEmpty ? 1 : state.bedList.length,
-                          control: const SwiperControl(),
+                          control: const SwiperControl(disableColor: AppColors.grey),
                           // loop: state.bedList.isNotEmpty,
                         )
                       : state is HomeLoading
@@ -136,33 +146,9 @@ class MiddleBed extends StatelessWidget {
         GestureDetector(
           onTap: () {
             Navigator.pushNamed(context, R.nftInfo,
-                arguments: InfoIndividualParams(
-                    buy: true,
-                    bed: bedEntity));
+                arguments: InfoIndividualParams(buy: true, bed: bedEntity));
           },
-          child: CachedNetworkImage(
-            imageUrl: bedEntity.image,
-            placeholder: (context, url) => const Center(
-              child: SizedBox(
-                width: 40.0,
-                height: 40.0,
-                child: CircularProgressIndicator(),
-              ),
-            ),
-            errorWidget: (context, url, error) => Container(
-                decoration: const BoxDecoration(
-                  color: AppColors.transparent,
-                  borderRadius: BorderRadius.all(Radius.circular(10)),
-                ),
-                child: const Icon(Icons.error)),
-            imageBuilder: (context, imageProvider) => Container(
-              decoration: BoxDecoration(
-                image: DecorationImage(
-                    image: imageProvider, fit: BoxFit.fitHeight),
-              ),
-            ),
-            height: 180,
-          ),
+          child: CachedImage(image: bedEntity.image, height: 180),
         ),
       ],
     );

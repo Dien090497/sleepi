@@ -44,12 +44,13 @@ class BoxInfoWidget extends StatelessWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              SFButton(
-                text: bed.quality.reCase(StringCase.titleCase),
-                textStyle: TextStyles.blue14,
-                color: Colors.blue.withOpacity(0.05),
-                radius: 50.h,
-              ),
+              if (bed.quality != null)
+                SFButton(
+                  text: bed.quality!.reCase(StringCase.titleCase),
+                  textStyle: TextStyles.blue14,
+                  color: Colors.blue.withOpacity(0.05),
+                  radius: 50.h,
+                ),
               SizedBox(width: 8.w),
               SFButton(
                 text: bed.type.reCase(StringCase.titleCase),
@@ -84,7 +85,6 @@ class BoxInfoWidget extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 16.0),
                   child: SFText(
-
                     keyText: '${LocaleKeys.level.tr()} ${bed.level}',
                     style: TextStyles.white10,
                   ),

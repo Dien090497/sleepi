@@ -4,13 +4,13 @@ import 'package:slee_fi/repository/user_repository.dart';
 import 'package:slee_fi/usecase/usecase.dart';
 
 class EstimateGasWithdrawUseCase
-    extends UseCase<double, EstimateGasWithdrawParam> {
+    extends UseCase<String, EstimateGasWithdrawParam> {
   final IUserRepository _iUserRepository;
 
   EstimateGasWithdrawUseCase(this._iUserRepository);
 
   @override
-  Future<Either<FailureMessage, double>> call(params) {
+  Future<Either<FailureMessage, String>> call(params) {
     return _iUserRepository.estimateGasWithdraw(params);
   }
 }

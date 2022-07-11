@@ -11,7 +11,7 @@ class BedEntity with _$BedEntity {
     required String image,
     required String type,
     required String contractAddress,
-    required String quality,
+    required String? quality,
     required int durability,
     required int isLock,
     required int bedMint,
