@@ -38,7 +38,7 @@ class _TabBedsBuyState extends State<TabBedsBuy> {
         cubit: cubit,
         onConfirmTap: () {
           Navigator.pop(context);
-          cubit.buyNFT(bed.id);
+          cubit.buyNFT(bed.nftId);
         },
       ),
     );
@@ -55,6 +55,11 @@ class _TabBedsBuyState extends State<TabBedsBuy> {
             final cubit = context.read<MarketPlaceCubit>();
             if (state is MarketPlaceStateLoaded) {
               listBeds = state.list.list;
+            }
+
+            if (state is MarketPlaceStateLoadedMore) {
+              listBeds.addAll(state.list.list);
+              setState(() {});
             }
 
             if (state is MarketPlaceStateBuySuccess) {
@@ -122,6 +127,8 @@ class _TabBedsBuyState extends State<TabBedsBuy> {
                                 child: TabBarView(
                                   children: [
                                     GridViewBedItem(
+                                      cubit: cubit,
+                                      isLoadMore: cubit.loadMore,
                                       beds: listBeds,
                                       onRefresh: () {
                                         cubit.refresh();

@@ -44,7 +44,7 @@ class _TabItemsBuyState extends State<TabItemsBuy> {
         cubit: cubit,
         onConfirmTap: () {
           Navigator.pop(context);
-          cubit.buyNFT(item.id);
+          cubit.buyNFT(item.nftId);
         },
       ),
     );
@@ -62,15 +62,12 @@ class _TabItemsBuyState extends State<TabItemsBuy> {
             if (state is MarketPlaceStateLoaded) {
               listItems = state.list.list;
             }
-            if (state is MarketPlaceStateInit) {
-              // scrollController.addListener(() {
-              //   if (scrollController.position.maxScrollExtent ==
-              //           scrollController.offset &&
-              //       cubit.loadMore) {
-              //     cubit.loadMoreMarketPlace();
-              //   }
-              // });
+
+            if (state is MarketPlaceStateLoadedMore) {
+              listItems.addAll(state.list.list);
+              setState(() {});
             }
+
             if (state is MarketPlaceStateBuySuccess) {
               cubit.refresh();
               showSuccessfulDialog(context, LocaleKeys.purchased_successfully);
@@ -94,10 +91,10 @@ class _TabItemsBuyState extends State<TabItemsBuy> {
                       context,
                       sections: {
                         LocaleKeys.type.tr(): [
-                          LocaleKeys.efficiency.tr(),
-                          LocaleKeys.luck.tr(),
-                          LocaleKeys.resilience.tr(),
-                          LocaleKeys.special.tr(),
+                          LocaleKeys.blue.tr(),
+                          LocaleKeys.green.tr(),
+                          LocaleKeys.pink.tr(),
+                          LocaleKeys.purple.tr(),
                         ],
                       },
                       sliders: {
@@ -122,6 +119,8 @@ class _TabItemsBuyState extends State<TabItemsBuy> {
                                 child: TabBarView(
                                   children: [
                                     SFGridView(
+                                      cubit: cubit,
+                                      isLoadMore: cubit.loadMore,
                                       count: listItems.length,
                                       isScroll: true,
                                       onRefresh: () {
