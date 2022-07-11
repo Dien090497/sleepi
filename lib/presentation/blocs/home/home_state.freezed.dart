@@ -24,7 +24,7 @@ mixin _$HomeState {
             List<BedEntity> bedList,
             int id,
             int level,
-            int durability,
+            double durability,
             int time,
             BedEntity? item,
             List<BedEntity>? itemList,
@@ -44,7 +44,7 @@ mixin _$HomeState {
             List<BedEntity> bedList,
             int id,
             int level,
-            int durability,
+            double durability,
             int time,
             BedEntity? item,
             List<BedEntity>? itemList,
@@ -64,7 +64,7 @@ mixin _$HomeState {
             List<BedEntity> bedList,
             int id,
             int level,
-            int durability,
+            double durability,
             int time,
             BedEntity? item,
             List<BedEntity>? itemList,
@@ -171,7 +171,7 @@ class _$HomeInitial with DiagnosticableTreeMixin implements HomeInitial {
             List<BedEntity> bedList,
             int id,
             int level,
-            int durability,
+            double durability,
             int time,
             BedEntity? item,
             List<BedEntity>? itemList,
@@ -194,7 +194,7 @@ class _$HomeInitial with DiagnosticableTreeMixin implements HomeInitial {
             List<BedEntity> bedList,
             int id,
             int level,
-            int durability,
+            double durability,
             int time,
             BedEntity? item,
             List<BedEntity>? itemList,
@@ -217,7 +217,7 @@ class _$HomeInitial with DiagnosticableTreeMixin implements HomeInitial {
             List<BedEntity> bedList,
             int id,
             int level,
-            int durability,
+            double durability,
             int time,
             BedEntity? item,
             List<BedEntity>? itemList,
@@ -329,7 +329,7 @@ class _$HomeLoading with DiagnosticableTreeMixin implements HomeLoading {
             List<BedEntity> bedList,
             int id,
             int level,
-            int durability,
+            double durability,
             int time,
             BedEntity? item,
             List<BedEntity>? itemList,
@@ -352,7 +352,7 @@ class _$HomeLoading with DiagnosticableTreeMixin implements HomeLoading {
             List<BedEntity> bedList,
             int id,
             int level,
-            int durability,
+            double durability,
             int time,
             BedEntity? item,
             List<BedEntity>? itemList,
@@ -375,7 +375,7 @@ class _$HomeLoading with DiagnosticableTreeMixin implements HomeLoading {
             List<BedEntity> bedList,
             int id,
             int level,
-            int durability,
+            double durability,
             int time,
             BedEntity? item,
             List<BedEntity>? itemList,
@@ -444,7 +444,7 @@ abstract class _$$HomeLoadedCopyWith<$Res> {
       {List<BedEntity> bedList,
       int id,
       int level,
-      int durability,
+      double durability,
       int time,
       BedEntity? item,
       List<BedEntity>? itemList,
@@ -497,7 +497,7 @@ class __$$HomeLoadedCopyWithImpl<$Res> extends _$HomeStateCopyWithImpl<$Res>
       durability: durability == freezed
           ? _value.durability
           : durability // ignore: cast_nullable_to_non_nullable
-              as int,
+              as double,
       time: time == freezed
           ? _value.time
           : time // ignore: cast_nullable_to_non_nullable
@@ -582,7 +582,7 @@ class _$HomeLoaded with DiagnosticableTreeMixin implements HomeLoaded {
   @override
   final int level;
   @override
-  final int durability;
+  final double durability;
   @override
   final int time;
   @override
@@ -682,7 +682,7 @@ class _$HomeLoaded with DiagnosticableTreeMixin implements HomeLoaded {
             List<BedEntity> bedList,
             int id,
             int level,
-            int durability,
+            double durability,
             int time,
             BedEntity? item,
             List<BedEntity>? itemList,
@@ -706,7 +706,7 @@ class _$HomeLoaded with DiagnosticableTreeMixin implements HomeLoaded {
             List<BedEntity> bedList,
             int id,
             int level,
-            int durability,
+            double durability,
             int time,
             BedEntity? item,
             List<BedEntity>? itemList,
@@ -730,7 +730,7 @@ class _$HomeLoaded with DiagnosticableTreeMixin implements HomeLoaded {
             List<BedEntity> bedList,
             int id,
             int level,
-            int durability,
+            double durability,
             int time,
             BedEntity? item,
             List<BedEntity>? itemList,
@@ -792,7 +792,7 @@ abstract class HomeLoaded implements HomeState {
       {required final List<BedEntity> bedList,
       required final int id,
       required final int level,
-      required final int durability,
+      required final double durability,
       required final int time,
       final BedEntity? item,
       final List<BedEntity>? itemList,
@@ -804,7 +804,7 @@ abstract class HomeLoaded implements HomeState {
   List<BedEntity> get bedList => throw _privateConstructorUsedError;
   int get id => throw _privateConstructorUsedError;
   int get level => throw _privateConstructorUsedError;
-  int get durability => throw _privateConstructorUsedError;
+  double get durability => throw _privateConstructorUsedError;
   int get time => throw _privateConstructorUsedError;
   BedEntity? get item => throw _privateConstructorUsedError;
   List<BedEntity>? get itemList => throw _privateConstructorUsedError;
@@ -895,7 +895,7 @@ class _$HomeError with DiagnosticableTreeMixin implements HomeError {
             List<BedEntity> bedList,
             int id,
             int level,
-            int durability,
+            double durability,
             int time,
             BedEntity? item,
             List<BedEntity>? itemList,
@@ -918,7 +918,7 @@ class _$HomeError with DiagnosticableTreeMixin implements HomeError {
             List<BedEntity> bedList,
             int id,
             int level,
-            int durability,
+            double durability,
             int time,
             BedEntity? item,
             List<BedEntity>? itemList,
@@ -941,7 +941,7 @@ class _$HomeError with DiagnosticableTreeMixin implements HomeError {
             List<BedEntity> bedList,
             int id,
             int level,
-            int durability,
+            double durability,
             int time,
             BedEntity? item,
             List<BedEntity>? itemList,

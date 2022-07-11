@@ -25,12 +25,12 @@ class MarketPlaceModel {
   @JsonKey(name: 'is_mint')
   final int isMint;
 
-  final int efficiency;
-  final int luck;
-  final int bonus;
-  final int special;
-  final int resilience;
-  final int durability;
+  final double efficiency;
+  final double luck;
+  final double bonus;
+  final double special;
+  final double resilience;
+  final double durability;
   final String price;
   final String symbol;
   final String status;

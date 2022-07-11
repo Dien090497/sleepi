@@ -23,14 +23,14 @@ mixin _$BedEntity {
   String get type => throw _privateConstructorUsedError;
   String get contractAddress => throw _privateConstructorUsedError;
   String? get quality => throw _privateConstructorUsedError;
-  int get durability => throw _privateConstructorUsedError;
+  double get durability => throw _privateConstructorUsedError;
   int get isLock => throw _privateConstructorUsedError;
   int get bedMint => throw _privateConstructorUsedError;
-  int get efficiency => throw _privateConstructorUsedError;
-  int get luck => throw _privateConstructorUsedError;
-  int get bonus => throw _privateConstructorUsedError;
-  int get special => throw _privateConstructorUsedError;
-  int get resilience => throw _privateConstructorUsedError;
+  double get efficiency => throw _privateConstructorUsedError;
+  double get luck => throw _privateConstructorUsedError;
+  double get bonus => throw _privateConstructorUsedError;
+  double get special => throw _privateConstructorUsedError;
+  double get resilience => throw _privateConstructorUsedError;
   int get time => throw _privateConstructorUsedError;
   int get isMint => throw _privateConstructorUsedError;
 
@@ -51,14 +51,14 @@ abstract class $BedEntityCopyWith<$Res> {
       String type,
       String contractAddress,
       String? quality,
-      int durability,
+      double durability,
       int isLock,
       int bedMint,
-      int efficiency,
-      int luck,
-      int bonus,
-      int special,
-      int resilience,
+      double efficiency,
+      double luck,
+      double bonus,
+      double special,
+      double resilience,
       int time,
       int isMint});
 }
@@ -123,7 +123,7 @@ class _$BedEntityCopyWithImpl<$Res> implements $BedEntityCopyWith<$Res> {
       durability: durability == freezed
           ? _value.durability
           : durability // ignore: cast_nullable_to_non_nullable
-              as int,
+              as double,
       isLock: isLock == freezed
           ? _value.isLock
           : isLock // ignore: cast_nullable_to_non_nullable
@@ -135,23 +135,23 @@ class _$BedEntityCopyWithImpl<$Res> implements $BedEntityCopyWith<$Res> {
       efficiency: efficiency == freezed
           ? _value.efficiency
           : efficiency // ignore: cast_nullable_to_non_nullable
-              as int,
+              as double,
       luck: luck == freezed
           ? _value.luck
           : luck // ignore: cast_nullable_to_non_nullable
-              as int,
+              as double,
       bonus: bonus == freezed
           ? _value.bonus
           : bonus // ignore: cast_nullable_to_non_nullable
-              as int,
+              as double,
       special: special == freezed
           ? _value.special
           : special // ignore: cast_nullable_to_non_nullable
-              as int,
+              as double,
       resilience: resilience == freezed
           ? _value.resilience
           : resilience // ignore: cast_nullable_to_non_nullable
-              as int,
+              as double,
       time: time == freezed
           ? _value.time
           : time // ignore: cast_nullable_to_non_nullable
@@ -178,14 +178,14 @@ abstract class _$$_BedEntityCopyWith<$Res> implements $BedEntityCopyWith<$Res> {
       String type,
       String contractAddress,
       String? quality,
-      int durability,
+      double durability,
       int isLock,
       int bedMint,
-      int efficiency,
-      int luck,
-      int bonus,
-      int special,
-      int resilience,
+      double efficiency,
+      double luck,
+      double bonus,
+      double special,
+      double resilience,
       int time,
       int isMint});
 }
@@ -252,7 +252,7 @@ class __$$_BedEntityCopyWithImpl<$Res> extends _$BedEntityCopyWithImpl<$Res>
       durability: durability == freezed
           ? _value.durability
           : durability // ignore: cast_nullable_to_non_nullable
-              as int,
+              as double,
       isLock: isLock == freezed
           ? _value.isLock
           : isLock // ignore: cast_nullable_to_non_nullable
@@ -264,23 +264,23 @@ class __$$_BedEntityCopyWithImpl<$Res> extends _$BedEntityCopyWithImpl<$Res>
       efficiency: efficiency == freezed
           ? _value.efficiency
           : efficiency // ignore: cast_nullable_to_non_nullable
-              as int,
+              as double,
       luck: luck == freezed
           ? _value.luck
           : luck // ignore: cast_nullable_to_non_nullable
-              as int,
+              as double,
       bonus: bonus == freezed
           ? _value.bonus
           : bonus // ignore: cast_nullable_to_non_nullable
-              as int,
+              as double,
       special: special == freezed
           ? _value.special
           : special // ignore: cast_nullable_to_non_nullable
-              as int,
+              as double,
       resilience: resilience == freezed
           ? _value.resilience
           : resilience // ignore: cast_nullable_to_non_nullable
-              as int,
+              as double,
       time: time == freezed
           ? _value.time
           : time // ignore: cast_nullable_to_non_nullable
@@ -330,21 +330,21 @@ class _$_BedEntity implements _BedEntity {
   @override
   final String? quality;
   @override
-  final int durability;
+  final double durability;
   @override
   final int isLock;
   @override
   final int bedMint;
   @override
-  final int efficiency;
+  final double efficiency;
   @override
-  final int luck;
+  final double luck;
   @override
-  final int bonus;
+  final double bonus;
   @override
-  final int special;
+  final double special;
   @override
-  final int resilience;
+  final double resilience;
   @override
   final int time;
   @override
@@ -419,14 +419,14 @@ abstract class _BedEntity implements BedEntity {
       required final String type,
       required final String contractAddress,
       required final String? quality,
-      required final int durability,
+      required final double durability,
       required final int isLock,
       required final int bedMint,
-      required final int efficiency,
-      required final int luck,
-      required final int bonus,
-      required final int special,
-      required final int resilience,
+      required final double efficiency,
+      required final double luck,
+      required final double bonus,
+      required final double special,
+      required final double resilience,
       required final int time,
       required final int isMint}) = _$_BedEntity;
 
@@ -445,21 +445,21 @@ abstract class _BedEntity implements BedEntity {
   @override
   String? get quality => throw _privateConstructorUsedError;
   @override
-  int get durability => throw _privateConstructorUsedError;
+  double get durability => throw _privateConstructorUsedError;
   @override
   int get isLock => throw _privateConstructorUsedError;
   @override
   int get bedMint => throw _privateConstructorUsedError;
   @override
-  int get efficiency => throw _privateConstructorUsedError;
+  double get efficiency => throw _privateConstructorUsedError;
   @override
-  int get luck => throw _privateConstructorUsedError;
+  double get luck => throw _privateConstructorUsedError;
   @override
-  int get bonus => throw _privateConstructorUsedError;
+  double get bonus => throw _privateConstructorUsedError;
   @override
-  int get special => throw _privateConstructorUsedError;
+  double get special => throw _privateConstructorUsedError;
   @override
-  int get resilience => throw _privateConstructorUsedError;
+  double get resilience => throw _privateConstructorUsedError;
   @override
   int get time => throw _privateConstructorUsedError;
   @override
