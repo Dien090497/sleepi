@@ -62,6 +62,12 @@ class MarketPlaceCubit extends Cubit<MarketPlaceState> {
     getMarketPlace(params);
   }
 
+  clearFilter() {
+    page = 1;
+    params = params.copyWith(page: page, level: 0, bedMint: 0, type: [], classNft: [], quality: []);
+    getMarketPlace(params);
+  }
+
   Future<void> getMarketPlace(MarketSchema param) async {
     final result = await _marketPlaceUseCase.call(param);
     result.fold((l) {
@@ -73,10 +79,10 @@ class MarketPlaceCubit extends Cubit<MarketPlaceState> {
       error = false;
       log("result : ${success.toString()}");
       if (success.list.length == limit) {
-        page ++;
+        page++;
         params = params.copyWith(page: page);
         loadMore = true;
-      }else{
+      } else {
         loadMore = false;
       }
       emit(MarketPlaceState.loaded(success));
@@ -95,10 +101,10 @@ class MarketPlaceCubit extends Cubit<MarketPlaceState> {
       error = false;
       log("result : ${success.toString()}");
       if (success.list.length == limit) {
-        page ++;
+        page++;
         params = params.copyWith(page: page);
         loadMore = true;
-      }else{
+      } else {
         loadMore = false;
       }
       emit(MarketPlaceState.loadedMore(success));
