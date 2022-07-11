@@ -20,7 +20,10 @@ import 'package:slee_fi/presentation/screens/wallet_creation_warning/widgets/pop
 
 class PopUpItemMarketPlace extends StatelessWidget {
   const PopUpItemMarketPlace(
-      {Key? key, required this.item, required this.onConfirmTap, required this.cubit})
+      {Key? key,
+      required this.item,
+      required this.onConfirmTap,
+      required this.cubit})
       : super(key: key);
 
   final MarketPlaceModel item;
@@ -191,14 +194,12 @@ class PopUpItemMarketPlace extends StatelessWidget {
                         for (var element in userState.listTokens) {
                           if (element.symbol.toLowerCase() == 'avax') {
                             if (element.balance < double.parse(item.price)) {
-                              if(cubit.statusWallet) {
+                              if (cubit.statusWallet) {
                                 _showDonWorryDialog(context, item);
-                              }else{
+                              } else {
                                 _showCreateOrImportWallet(context)
                                     .then((value) {
-                                  if (value == true) {
-                                    cubit.init(3);
-                                  }
+                                  cubit.refreshStatusWallet();
                                 });
                               }
                             } else {
@@ -207,11 +208,8 @@ class PopUpItemMarketPlace extends StatelessWidget {
                           }
                         }
                       } else {
-                        _showCreateOrImportWallet(context)
-                            .then((value) {
-                          if (value == true) {
-                            cubit.init(3);
-                          }
+                        _showCreateOrImportWallet(context).then((value) {
+                          cubit.refreshStatusWallet();
                         });
                       }
                     }

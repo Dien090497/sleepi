@@ -54,6 +54,18 @@ class MarketPlaceCubit extends Cubit<MarketPlaceState> {
     getMarketPlace(params);
   }
 
+  refreshStatusWallet() async {
+    final walletCall = await _currentWalletUC.call(NoParams());
+    walletCall.fold(
+          (l) {
+        statusWallet = false;
+      },
+          (r) {
+        statusWallet = true;
+      },
+    );
+  }
+
   refresh() {
     page = 1;
     loadMore = false;
