@@ -36,13 +36,13 @@ class BottomBarMarketPlaceWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => MarketPlaceCubit(),
+      create: (context) => MarketPlaceCubit()..refreshStatusWallet(),
       child: BlocConsumer<MarketPlaceCubit, MarketPlaceState>(
         listener: (context, state) {
           final cubit = context.read<MarketPlaceCubit>();
           if (state is MarketPlaceStateBuySuccess) {
             cubit.refresh();
-            showSuccessfulDialog(context, null);
+            showSuccessfulDialog(context, LocaleKeys.purchased_successfully);
           }
 
           if (state is MarketPlaceStateBuyFailed) {

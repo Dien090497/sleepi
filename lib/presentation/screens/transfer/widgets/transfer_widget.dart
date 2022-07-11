@@ -49,7 +49,19 @@ class TransferWidget extends StatelessWidget {
               )
             ],
           ),
-          const SizedBox(height: 30),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: const [
+                CircleAvatar(
+                  backgroundColor: AppColors.blue,
+                  child: Icon(
+                    Icons.swap_vert,
+                    size: 30,
+                    color: AppColors.white,
+                  ),
+                ),
+            ],
+          ),
           Row(
             children: [
               Expanded(
