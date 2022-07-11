@@ -19,7 +19,7 @@ class RefreshTokenInterceptor extends QueuedInterceptor {
       final model = AccessTokenExpireModel.fromJson(err.response!.data);
       if (model.error.errorName?.toLowerCase() ==
           'UnauthorizedException'.toLowerCase()) {
-        return await _refreshToken(err, handler);
+        return _refreshToken(err, handler);
       }
     }
     return handler.next(err);
@@ -31,7 +31,7 @@ class RefreshTokenInterceptor extends QueuedInterceptor {
     if (refreshToken != null) {
       try {
         final result = await dio.post(
-          '${Const.baseApiDev}/api/v1/auth/refresh-token',
+          '${Const.baseApiDev}/auth/refresh-token',
           data: RefreshTokenSchema(refreshToken).toJson(),
         );
         final RefreshTokenModel res = RefreshTokenModel.fromJson(result.data!);
@@ -42,7 +42,7 @@ class RefreshTokenInterceptor extends QueuedInterceptor {
         return _retry(err, handler, res.data.accessToken);
       } catch (e) {
         if (e is DioError) {
-          _refreshTokenExpire(e, handler);
+          return _refreshTokenExpire(e, handler);
         }
       }
     }

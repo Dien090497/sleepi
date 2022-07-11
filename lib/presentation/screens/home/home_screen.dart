@@ -32,7 +32,7 @@ class _HomeScreenState extends State<HomeScreen> {
     refreshController.dispose();
   }
 
-  void _onRefresh(RefreshController refreshController) async {
+  void _onRefresh() async {
     _homeBloc.add(RefreshBed());
     await Future.delayed(const Duration(milliseconds: 1000));
     refreshController.refreshCompleted();
@@ -53,7 +53,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 controller: refreshController,
                 enablePullDown: true,
                 onRefresh: () {
-                  _onRefresh(refreshController);
+                  _onRefresh();
                 },
                 child: ListView(
                   shrinkWrap: true,
