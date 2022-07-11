@@ -39,15 +39,17 @@ class SendNftToSpendingUseCase
               nftAddress: params.nftAddress,
               operatorAddress: spendingAddr,
               credentials: params.credentials);
-          return approveRes.fold(Left.new, (r) async{
-            final txHashRes = await _inftRepository.listenTxHash(r);
-            print('### ${txHashRes}');
-            return _inftRepository.depositSpending(
-                spendingAddress: spendingAddr,
-                nftAddress: params.nftAddress,
-                nftId: params.nftId,
-                userId: params.userId,
-                credentials: params.credentials);
+          return approveRes.fold(Left.new, (r) async {
+            final txReceipt = await _inftRepository.listenTxHash(r);
+            if (txReceipt != null && txReceipt.status == true) {
+              return _inftRepository.depositSpending(
+                  spendingAddress: spendingAddr,
+                  nftAddress: params.nftAddress,
+                  nftId: params.nftId,
+                  userId: params.userId,
+                  credentials: params.credentials);
+            }
+            return Left(FailureMessage('txReceipt: $txReceipt'));
           });
         }
       },

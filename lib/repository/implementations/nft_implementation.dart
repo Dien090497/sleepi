@@ -56,8 +56,12 @@ class NFTImplementation extends INFTRepository {
         nftType: nftType,
         tokenIds: tokenIds.join(','),
       );
+      final res = await Future.wait([
+        _nftDataSource.name(nftAddress!),
+        _nftDataSource.symbol(nftAddress),
+      ]);
       return Right(listModel.data
-              ?.map((e) => e.toEntity(name: '', symbol: ''))
+              ?.map((e) => e.toEntity(name: res.first, symbol: res.last))
               .toList() ??
           []);
     } catch (e) {
@@ -167,7 +171,7 @@ class NFTImplementation extends INFTRepository {
   }
 
   @override
-  Future<TransactionReceipt?> listenTxHash(String txHash) {
+  Future<TransactionReceipt?> listenTxHash(String txHash) async {
     return _nftDataSource.streamTxHash(txHash: txHash);
   }
 }

@@ -20,6 +20,7 @@ class NftPopUpTransfer extends StatelessWidget {
     required this.onConfirm,
     required this.nft,
     required this.ownerAddress,
+    required this.isLoadingNotifier,
     this.onCancel,
     this.isToSpending,
   }) : super(key: key);
@@ -29,6 +30,7 @@ class NftPopUpTransfer extends StatelessWidget {
   final VoidCallback? onCancel;
   final NFTEntity nft;
   final String ownerAddress;
+  final ValueNotifier<bool> isLoadingNotifier;
 
   @override
   Widget build(BuildContext context) {
@@ -180,33 +182,43 @@ class NftPopUpTransfer extends StatelessWidget {
                 ),
                 const SizedBox(width: 12),
                 Expanded(
-                  child: SFButton(
-                    text: LocaleKeys.confirm,
-                    onPressed: () {
-                      if (isToSpending ?? false) {
-                        onConfirm(toAddress);
+                  child: ValueListenableBuilder<bool>(
+                    valueListenable: isLoadingNotifier,
+                    builder: (context, isLoading, child) {
+                      if (isLoading) {
+                        return const Center(child: CircularProgressIndicator());
                       } else {
-                        if (toAddress.isEmpty) {
-                          errorNotifier.value =
-                              LocaleKeys.this_field_is_required.tr();
-                        } else {
-                          getIt<IsValidWalletAddressUseCase>()
-                              .call(toAddress)
-                              .fold(
-                            (l) {
-                              errorNotifier.value =
-                                  LocaleKeys.invalid_address.tr();
-                            },
-                            (r) {
-                              onConfirm(toAddress);
-                            },
-                          );
-                        }
+                        return child!;
                       }
                     },
-                    width: double.infinity,
-                    textStyle: TextStyles.white16,
-                    gradient: AppColors.gradientBlueButton,
+                    child: SFButton(
+                      text: LocaleKeys.confirm,
+                      onPressed: () {
+                        if (isToSpending ?? false) {
+                          onConfirm(toAddress);
+                        } else {
+                          if (toAddress.isEmpty) {
+                            errorNotifier.value =
+                                LocaleKeys.this_field_is_required.tr();
+                          } else {
+                            getIt<IsValidWalletAddressUseCase>()
+                                .call(toAddress)
+                                .fold(
+                              (l) {
+                                errorNotifier.value =
+                                    LocaleKeys.invalid_address.tr();
+                              },
+                              (r) {
+                                onConfirm(toAddress);
+                              },
+                            );
+                          }
+                        }
+                      },
+                      width: double.infinity,
+                      textStyle: TextStyles.white16,
+                      gradient: AppColors.gradientBlueButton,
+                    ),
                   ),
                 ),
               ],

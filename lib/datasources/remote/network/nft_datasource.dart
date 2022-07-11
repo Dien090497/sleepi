@@ -119,7 +119,7 @@ class NFTDataSource {
     final web3 = _web3provider.web3client;
     return web3
         .addedBlocks()
-        .asyncMap((event) => web3.getTransactionReceipt(txHash))
+        .asyncMap((_) => web3.getTransactionReceipt(txHash))
         .where((tx) => tx != null)
         .first;
   }
