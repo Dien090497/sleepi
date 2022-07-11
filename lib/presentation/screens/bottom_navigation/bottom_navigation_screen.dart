@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:slee_fi/common/extensions/string_x.dart';
 import 'package:slee_fi/common/utils/appsflyer_custom.dart';
 import 'package:slee_fi/common/widgets/background_widget.dart';
 import 'package:slee_fi/common/widgets/keep_alive_wrapper.dart';
@@ -36,7 +37,10 @@ class BottomNavigationScreen extends StatelessWidget {
     //   });
     // });
 
-    return BlocBuilder<BottomNavigationBloc, BottomNavigationState>(
+    return BlocConsumer<BottomNavigationBloc, BottomNavigationState>(
+      listener: (context, state) {
+        pageController.jumpToPage(state.tabIndex);
+      },
       builder: (context, navState) {
         return BackgroundWidget(
           extendBody: false,
