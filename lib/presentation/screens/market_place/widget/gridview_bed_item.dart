@@ -11,6 +11,7 @@ import 'package:slee_fi/common/widgets/sf_percent_border.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
 import 'package:slee_fi/l10n/locale_keys.g.dart';
 import 'package:slee_fi/models/market_place/market_place_model.dart';
+import 'package:slee_fi/presentation/blocs/market_place/market_place_cubit.dart';
 import 'package:slee_fi/presentation/screens/product_detail/widgets/top_left_banner.dart';
 import 'package:slee_fi/resources/resources.dart';
 
@@ -21,7 +22,9 @@ class GridViewBedItem extends StatelessWidget {
       this.onBedTap,
       this.onBuyTap,
       this.isScroll = true,
-      this.onRefresh})
+      this.onRefresh,
+      this.cubit,
+      this.isLoadMore = false})
       : super(key: key);
 
   final List<MarketPlaceModel> beds;
@@ -29,10 +32,14 @@ class GridViewBedItem extends StatelessWidget {
   final ValueChanged<MarketPlaceModel>? onBuyTap;
   final bool isScroll;
   final Function? onRefresh;
+  final MarketPlaceCubit? cubit;
+  final bool isLoadMore;
 
   @override
   Widget build(BuildContext context) {
     return SFGridView(
+      cubit: cubit,
+      isLoadMore: isLoadMore,
       count: beds.length,
       isScroll: isScroll,
       onRefresh: onRefresh,

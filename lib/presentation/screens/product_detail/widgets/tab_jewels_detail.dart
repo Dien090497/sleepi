@@ -1,30 +1,33 @@
 import 'package:flutter/material.dart';
-import 'package:slee_fi/common/utils/random_utils.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:slee_fi/common/widgets/sf_dialog.dart';
 import 'package:slee_fi/common/widgets/sf_gridview.dart';
 import 'package:slee_fi/common/widgets/sf_sub_tab_bar.dart';
-import 'package:slee_fi/di/injector.dart';
 import 'package:slee_fi/l10n/locale_keys.g.dart';
+import 'package:slee_fi/models/bed_model/beb_model.dart';
+import 'package:slee_fi/presentation/blocs/nft_list/nft_list_cubit.dart';
+import 'package:slee_fi/presentation/blocs/nft_list/nft_list_state.dart';
 import 'package:slee_fi/presentation/screens/product_detail/widgets/jewel_dialog_body.dart';
 import 'package:slee_fi/presentation/screens/product_detail/widgets/my_jewel_short_widget.dart';
 import 'package:slee_fi/presentation/screens/product_detail/widgets/upgrade_tab.dart';
-import 'package:slee_fi/resources/resources.dart';
 
-class TabJewelsDetail extends StatelessWidget {
+class TabJewelsDetail extends StatefulWidget {
   const TabJewelsDetail({Key? key}) : super(key: key);
 
-  void _showJewelDialog(BuildContext context, String img, String id) {
+  @override
+  State<TabJewelsDetail> createState() => _TabJewelsDetailState();
+}
+
+class _TabJewelsDetailState extends State<TabJewelsDetail> {
+  late List<BedModel> listJewels = [];
+
+  void _showJewelDialog(BuildContext context, BedModel jewel) {
     showCustomDialog(
       context,
       padding: const EdgeInsets.all(24),
       children: [
         JewelDialogBody(
-          icon: img,
-          name: 'name',
-          level: 'Lv.1',
-          id: id,
-          attribute: 'attribute',
-          effect: 'effect',
+          jewel: jewel,
           onSellTap: () {},
           onTransferTap: () {},
         ),
@@ -34,51 +37,61 @@ class TabJewelsDetail extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final jewels = [
-      Imgs.jewelSliver,
-      Imgs.jewelPurple,
-      Imgs.jewelGreen,
-      Imgs.jewelRed
-    ];
-    final randomUtils = getIt<RandomUtils>();
-
     return DefaultTabController(
-      length: 2,
-      child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 12.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            SFSubTabBar(
-                labelPadding: const EdgeInsets.symmetric(horizontal: 8),
-                texts: const [LocaleKeys.jewels, LocaleKeys.upgrade]),
-            const SizedBox(height: 12),
-            Expanded(
-              child: TabBarView(
-                children: [
-                  SFGridView(
-                    count: jewels.length * 3,
-                    childAspectRatio: 1,
-                    itemBuilder: (context, i) {
-                      String randomId = randomUtils.randomId();
-                      return GestureDetector(
-                        onTap: () {
-                          _showJewelDialog(context, jewels[i], randomId);
-                        },
-                        child: MyJewelsShortWidget(
-                          id: randomId,
-                          icon: jewels[i % jewels.length],
-                        ),
-                      );
-                    },
-                  ),
-                  const UpGradeTab(),
-                ],
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
+        length: 2,
+        child: BlocProvider(
+          create: (context) => NFTListCubit()..init(2),
+          child: BlocConsumer<NFTListCubit, NftListState>(
+            listener: (context, state) {
+              if (state is NftListLoaded) {
+                listJewels = state.listBed;
+              }
+            },
+            builder: (context, state) {
+              final cubit = context.read<NFTListCubit>();
+              return Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 12.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    SFSubTabBar(
+                        labelPadding: const EdgeInsets.symmetric(horizontal: 8),
+                        texts: const [LocaleKeys.jewels, LocaleKeys.upgrade]),
+                    const SizedBox(height: 12),
+                    Expanded(
+                      child: TabBarView(
+                        children: [
+                          (state is NftListLoading)
+                              ? const Center(
+                                  child: CircularProgressIndicator(),
+                                )
+                              : SFGridView(
+                                  count: listJewels.length,
+                                  childAspectRatio: 1,
+                                  onRefresh: () {
+                                    cubit.refresh(2);
+                                  },
+                                  itemBuilder: (context, i) {
+                                    return GestureDetector(
+                                      onTap: () {
+                                        _showJewelDialog(
+                                            context, listJewels[i]);
+                                      },
+                                      child: MyJewelsShortWidget(
+                                        jewel: listJewels[i],
+                                      ),
+                                    );
+                                  },
+                                ),
+                          const UpGradeTab(),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+              );
+            },
+          ),
+        ));
   }
 }

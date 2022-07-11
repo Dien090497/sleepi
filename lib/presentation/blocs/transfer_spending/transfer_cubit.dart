@@ -2,6 +2,7 @@ import 'dart:math';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:slee_fi/common/contract_addresses/contract_addresses.dart';
+import 'package:slee_fi/common/enum/enum.dart';
 import 'package:slee_fi/di/injector.dart';
 import 'package:slee_fi/presentation/blocs/transfer_spending/transfer_spending_state.dart';
 import 'package:slee_fi/schema/white_draw_token_schema/whit_draw_token_schema.dart';
@@ -40,7 +41,7 @@ class TransferCubit extends Cubit<TransferSpendingState> {
   Future<void> estimateGas(String contractAddressTo,
       {double? valueInEther,
       required String amount,
-      required String symbol,
+      required TransferType transferType,
       required double balance,
       bool spendingToWallet = false}) async {
     emit(const TransferSpendingState.loading());
@@ -55,7 +56,7 @@ class TransferCubit extends Cubit<TransferSpendingState> {
           message: 'Amount input can not be zero ', typeError: 'amount_zero'));
     } else {
       if (spendingToWallet) {
-        _estimateGasWithdraw(contractAddressTo, symbol);
+        _estimateGasWithdraw(contractAddressTo, transferType.name);
         return;
       }
       _estimateGas(valueInEther);
@@ -67,7 +68,13 @@ class TransferCubit extends Cubit<TransferSpendingState> {
         type: symbol, contractAddress: contractAddress));
     result.fold(
       (l) => emit(TransferSpendingState.error(message: l.msg)),
-      (r) => emit(TransferSpendingState.loaded(fee: r)),
+      (r) {
+        var fee = r;
+        if (fee < 0.00000000001) {
+          fee = 0.0;
+        }
+        emit(TransferSpendingState.loaded(fee: fee));
+      },
     );
   }
 

@@ -1,28 +1,27 @@
-import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
 import 'package:slee_fi/common/widgets/background_widget.dart';
 import 'package:slee_fi/common/widgets/sf_button_outlined.dart';
-import 'package:slee_fi/common/widgets/sf_buttons.dart';
 import 'package:slee_fi/common/widgets/sf_icon.dart';
 import 'package:slee_fi/common/widgets/sf_image_border.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
 import 'package:slee_fi/common/widgets/topbar_common.dart';
+import 'package:slee_fi/entities/bed_entity/bed_entity.dart';
 import 'package:slee_fi/l10n/locale_keys.g.dart';
 import 'package:slee_fi/models/market_place/market_place_model.dart';
 import 'package:slee_fi/presentation/screens/gacha/widgets/attributes_widget.dart';
 import 'package:slee_fi/presentation/screens/info_individual/widget/bottom_bar.dart';
 import 'package:slee_fi/presentation/screens/info_individual/widget/bottom_bar_market_place.dart';
 import 'package:slee_fi/presentation/screens/info_individual/widget/box_info_widget.dart';
-import 'package:slee_fi/presentation/screens/info_individual/widget/mint_from_widget.dart';
 import 'package:slee_fi/resources/resources.dart';
 
 class InfoIndividualParams {
   final bool? buy;
-  final MarketPlaceModel? bed;
+  final BedEntity bed;
+  final MarketPlaceModel? marketPlaceModel;
 
-  InfoIndividualParams({this.buy, this.bed});
+  InfoIndividualParams({this.buy, required this.bed, this.marketPlaceModel});
 }
 
 class InfoIndividualScreen extends StatelessWidget {
@@ -31,301 +30,162 @@ class InfoIndividualScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final args =
-        ModalRoute.of(context)?.settings.arguments as InfoIndividualParams?;
+        ModalRoute.of(context)?.settings.arguments as InfoIndividualParams;
 
-    return args!.bed != null
-        ? Stack(
-            children: [
-              BackgroundWidget(
-                child: SafeArea(
-                  top: false,
-                  child: Column(
-                    children: [
-                      SizedBox(
-                        height: MediaQuery.of(context).padding.top,
-                      ),
-                      const TopBarCommon(iconBack: true),
-                      const SizedBox(height: 10),
-                      Expanded(
-                        child: SingleChildScrollView(
-                          physics: const ScrollPhysics(),
-                          child: Column(
-                            children: [
-                              Container(
-                                height: 180,
-                                margin:
-                                    const EdgeInsets.symmetric(vertical: 24),
-                                decoration: const BoxDecoration(
-                                  image: DecorationImage(
-                                      image: AssetImage(Imgs.borderBed),
-                                      fit: BoxFit.cover),
-                                ),
-                                child: Image.network(
-                                  args.bed!.image,
+    return Stack(
+      children: [
+        BackgroundWidget(
+          child: SafeArea(
+            top: false,
+            child: Column(
+              children: [
+                SizedBox(
+                  height: MediaQuery.of(context).padding.top,
+                ),
+                const TopBarCommon(iconBack: true),
+                const SizedBox(height: 10),
+                Expanded(
+                  child: SingleChildScrollView(
+                    physics: const ScrollPhysics(),
+                    child: Column(
+                      children: [
+                        Container(
+                          height: 180,
+                          margin: const EdgeInsets.symmetric(vertical: 24),
+                          decoration: const BoxDecoration(
+                            image: DecorationImage(
+                                image: AssetImage(Imgs.borderBed),
+                                fit: BoxFit.cover),
+                          ),
+                          child: args.bed.image.contains('http?')
+                              ? Image.network(
+                                  args.bed.image,
                                   fit: BoxFit.cover,
-                                ),
-                              ),
-                              Wrap(
-                                  spacing: 8.0,
-                                  runSpacing: 8.0,
-                                  alignment: WrapAlignment.center,
-                                  children: [
-                                    SFImageBorder(
-                                        icon: Imgs.jewelPurple,
-                                        onTap: () {},
-                                        radius: 16,
-                                        size: const Size(65, 65),
-                                        padding: 8),
-                                    SFImageBorder(
-                                      icon: Imgs.jewelGreen,
-                                      onTap: () {},
-                                      radius: 16,
-                                      size: const Size(65, 65),
-                                      padding: 8,
-                                    ),
-                                    SFImageBorder(
-                                        icon: Imgs.jewelSliver,
-                                        onTap: () {},
-                                        radius: 16,
-                                        size: const Size(65, 65),
-                                        padding: 8),
-                                    SFImageBorder(
-                                      icon: Imgs.jewelRed,
-                                      onTap: () {},
-                                      radius: 16,
-                                      size: const Size(65, 65),
-                                      padding: 8,
-                                    ),
-                                    SFImageBorder(
-                                      icon: Imgs.jewelRed,
-                                      onTap: () {},
-                                      radius: 16,
-                                      size: const Size(65, 65),
-                                      padding: 8,
-                                    ),
-                                  ]),
-                              const SizedBox(height: 16),
-                              BoxInfoWidget(bed: args.bed),
-                              const SizedBox(height: 24),
-                              Padding(
-                                padding:
-                                    const EdgeInsets.symmetric(horizontal: 24),
-                                child: Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Expanded(
-                                      child: SFText(
-                                        keyText: LocaleKeys.attributes,
-                                        style: TextStyles.bold18LightWhite,
-                                      ),
-                                    ),
-                                    Row(
-                                      mainAxisAlignment: MainAxisAlignment.end,
-                                      children: [
-                                        SFButtonOutLined(
-                                          title: LocaleKeys.base,
-                                          textStyle: TextStyles.bold14Blue,
-                                          borderColor: AppColors.blue,
-                                          onPressed: () {},
-                                        ),
-                                        const SizedBox(width: 8),
-                                        // SFButton(
-                                        //   height: 38,
-                                        //   text: "+ ${LocaleKeys.point.tr()}",
-                                        //   textStyle: TextStyles.boldWhite14,
-                                        //   gradient:
-                                        //       AppColors.gradientBlueButton,
-                                        //   onPressed: () {},
-                                        // ),
-                                      ],
-                                    ),
-                                  ],
-                                ),
-                              ),
-                              const SizedBox(height: 15),
-                              AttributesWidget(bed: args.bed,),
-                              const SizedBox(height: 33),
-                              // Container(
-                              //   decoration: const BoxDecoration(
-                              //     color: AppColors.dark,
-                              //     borderRadius: BorderRadius.only(
-                              //       topLeft: Radius.circular(40),
-                              //       topRight: Radius.circular(40),
-                              //     ),
-                              //   ),
-                              //   child: Column(
-                              //     children: const [
-                              //       MintFromWidget(
-                              //           title: LocaleKeys.minted_from,
-                              //           numbers: 2),
-                              //       MintFromWidget(
-                              //           title: LocaleKeys.mint, numbers: 7),
-                              //     ],
-                              //   ),
-                              // ),
-                              const SizedBox(height: 80),
-                            ],
-                          ),
+                                )
+                              : SFIcon(args.bed.image),
                         ),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-              Positioned(
-                bottom: 0,
-                left: 0,
-                right: 0,
-                child: args.buy ?? false
-                    ? BottomBarMarketPlaceWidget(bed: args.bed!,)
-                    : const BottomBarWidget(),
-              )
-            ],
-          )
-        : Stack(
-            children: [
-              BackgroundWidget(
-                child: SafeArea(
-                  top: false,
-                  child: Column(
-                    children: [
-                      SizedBox(
-                        height: MediaQuery.of(context).padding.top,
-                      ),
-                      const TopBarCommon(iconBack: true),
-                      const SizedBox(height: 10),
-                      Expanded(
-                        child: SingleChildScrollView(
-                          physics: const ScrollPhysics(),
-                          child: Column(
+                        Wrap(
+                            spacing: 8.0,
+                            runSpacing: 8.0,
+                            alignment: WrapAlignment.center,
                             children: [
-                              Container(
-                                height: 180,
-                                margin:
-                                    const EdgeInsets.symmetric(vertical: 24),
-                                decoration: const BoxDecoration(
-                                  image: DecorationImage(
-                                      image: AssetImage(Imgs.borderBed),
-                                      fit: BoxFit.cover),
-                                ),
-                                child: const SFIcon(Imgs.shortBed),
+                              SFImageBorder(
+                                  icon: Imgs.jewelPurple,
+                                  onTap: () {},
+                                  radius: 16,
+                                  size: const Size(65, 65),
+                                  padding: 8),
+                              SFImageBorder(
+                                icon: Imgs.jewelGreen,
+                                onTap: () {},
+                                radius: 16,
+                                size: const Size(65, 65),
+                                padding: 8,
                               ),
-                              Wrap(
-                                  spacing: 8.0,
-                                  runSpacing: 8.0,
-                                  alignment: WrapAlignment.center,
-                                  children: [
-                                    SFImageBorder(
-                                        icon: Imgs.jewelPurple,
-                                        onTap: () {},
-                                        radius: 16,
-                                        size: const Size(65, 65),
-                                        padding: 8),
-                                    SFImageBorder(
-                                      icon: Imgs.jewelGreen,
-                                      onTap: () {},
-                                      radius: 16,
-                                      size: const Size(65, 65),
-                                      padding: 8,
-                                    ),
-                                    SFImageBorder(
-                                        icon: Imgs.jewelSliver,
-                                        onTap: () {},
-                                        radius: 16,
-                                        size: const Size(65, 65),
-                                        padding: 8),
-                                    SFImageBorder(
-                                      icon: Imgs.jewelRed,
-                                      onTap: () {},
-                                      radius: 16,
-                                      size: const Size(65, 65),
-                                      padding: 8,
-                                    ),
-                                    SFImageBorder(
-                                      icon: Imgs.jewelRed,
-                                      onTap: () {},
-                                      radius: 16,
-                                      size: const Size(65, 65),
-                                      padding: 8,
-                                    ),
-                                  ]),
-                              const SizedBox(height: 16),
-                              const BoxInfoWidget(),
-                              const SizedBox(height: 24),
-                              Padding(
-                                padding:
-                                    const EdgeInsets.symmetric(horizontal: 24),
-                                child: Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Expanded(
-                                      child: SFText(
-                                        keyText: LocaleKeys.attributes,
-                                        style: TextStyles.bold18LightWhite,
-                                      ),
-                                    ),
-                                    Row(
-                                      mainAxisAlignment: MainAxisAlignment.end,
-                                      children: [
-                                        SFButtonOutLined(
-                                          title: LocaleKeys.base,
-                                          textStyle: TextStyles.bold14Blue,
-                                          borderColor: AppColors.blue,
-                                          onPressed: () {},
-                                        ),
-                                        const SizedBox(width: 8),
-                                        SFButton(
-                                          height: 38,
-                                          text: "+ ${LocaleKeys.point.tr()}",
-                                          textStyle: TextStyles.boldWhite14,
-                                          gradient:
-                                              AppColors.gradientBlueButton,
-                                          onPressed: () {},
-                                        ),
-                                      ],
-                                    ),
-                                  ],
+                              SFImageBorder(
+                                  icon: Imgs.jewelSliver,
+                                  onTap: () {},
+                                  radius: 16,
+                                  size: const Size(65, 65),
+                                  padding: 8),
+                              SFImageBorder(
+                                icon: Imgs.jewelRed,
+                                onTap: () {},
+                                radius: 16,
+                                size: const Size(65, 65),
+                                padding: 8,
+                              ),
+                              SFImageBorder(
+                                icon: Imgs.jewelRed,
+                                onTap: () {},
+                                radius: 16,
+                                size: const Size(65, 65),
+                                padding: 8,
+                              ),
+                            ]),
+                        const SizedBox(height: 16),
+                        BoxInfoWidget(bed: args.bed),
+                        const SizedBox(height: 24),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 24),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Expanded(
+                                child: SFText(
+                                  keyText: LocaleKeys.attributes,
+                                  style: TextStyles.bold18LightWhite,
                                 ),
                               ),
-                              const SizedBox(height: 15),
-                              const AttributesWidget(),
-                              const SizedBox(height: 33),
-                              Container(
-                                decoration: const BoxDecoration(
-                                  color: AppColors.dark,
-                                  borderRadius: BorderRadius.only(
-                                    topLeft: Radius.circular(40),
-                                    topRight: Radius.circular(40),
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.end,
+                                children: [
+                                  SFButtonOutLined(
+                                    title: LocaleKeys.base,
+                                    textStyle: TextStyles.bold14Blue,
+                                    borderColor: AppColors.blue,
+                                    onPressed: () {},
                                   ),
-                                ),
-                                child: Column(
-                                  children: const [
-                                    MintFromWidget(
-                                        title: LocaleKeys.minted_from,
-                                        numbers: 2),
-                                    MintFromWidget(
-                                        title: LocaleKeys.mint, numbers: 7),
-                                  ],
-                                ),
+                                  const SizedBox(width: 8),
+                                  // SFButton(
+                                  //   height: 38,
+                                  //   text: "+ ${LocaleKeys.point.tr()}",
+                                  //   textStyle: TextStyles.boldWhite14,
+                                  //   gradient:
+                                  //       AppColors.gradientBlueButton,
+                                  //   onPressed: () {},
+                                  // ),
+                                ],
                               ),
-                              const SizedBox(height: 80),
                             ],
                           ),
                         ),
-                      ),
-                    ],
+                        const SizedBox(height: 15),
+                        AttributesWidget(
+                          bonus: args.bed.bonus,
+                          efficiency: args.bed.efficiency,
+                          luck: args.bed.luck,
+                          resilience: args.bed.resilience,
+                          special: args.bed.special,
+                        ),
+                        const SizedBox(height: 33),
+                        // Container(
+                        //   decoration: const BoxDecoration(
+                        //     color: AppColors.dark,
+                        //     borderRadius: BorderRadius.only(
+                        //       topLeft: Radius.circular(40),
+                        //       topRight: Radius.circular(40),
+                        //     ),
+                        //   ),
+                        //   child: Column(
+                        //     children: const [
+                        //       MintFromWidget(
+                        //           title: LocaleKeys.minted_from,
+                        //           numbers: 2),
+                        //       MintFromWidget(
+                        //           title: LocaleKeys.mint, numbers: 7),
+                        //     ],
+                        //   ),
+                        // ),
+                        const SizedBox(height: 80),
+                      ],
+                    ),
                   ),
                 ),
-              ),
-              const Positioned(
-                bottom: 0,
-                left: 0,
-                right: 0,
-                child: BottomBarWidget(),
-              )
-            ],
-          );
+              ],
+            ),
+          ),
+        ),
+        Positioned(
+          bottom: 0,
+          left: 0,
+          right: 0,
+          child: args.marketPlaceModel != null && (args.buy ?? false)
+              ? BottomBarMarketPlaceWidget(
+                  bed: args.marketPlaceModel!)
+              : const BottomBarWidget(),
+        )
+      ],
+    );
   }
 }

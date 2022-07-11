@@ -23,10 +23,11 @@ class BottomBarMarketPlaceWidget extends StatelessWidget {
       context,
       padding: const EdgeInsets.all(24),
       children: PopUpBedMarketPlace(
+        cubit: cubit,
         bed: bed,
         onConfirmTap: () {
           Navigator.pop(context);
-          cubit.buyNFT(bed);
+          cubit.buyNFT(bed.id);
         },
       ),
     );
@@ -45,6 +46,7 @@ class BottomBarMarketPlaceWidget extends StatelessWidget {
           }
 
           if (state is MarketPlaceStateBuyFailed) {
+            cubit.refresh();
             showMessageDialog(context, state.msg);
           }
         },

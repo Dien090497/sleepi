@@ -60,16 +60,17 @@ class _NFTDetailScreenState extends State<NFTDetailScreen> {
     required NFTEntity nft,
     required WalletInfoEntity walletInfo,
   }) async {
-    bool isLoading = false;
+    final isLoadingNotifier = ValueNotifier<bool>(false);
+
     showCustomDialog(
       context,
       children: [
         NftPopUpTransfer(
           onConfirm: (toAddress) async {
-            if (isLoading) return;
+            if (isLoadingNotifier.value) return;
             if (nft.attribute?.contractAddress?.isEmpty ?? true) return;
             if (nft.attribute?.tokenId == null) return;
-            isLoading = true;
+            isLoadingNotifier.value = true;
             final res = toAddress.isEmpty
                 ? await getIt<SendNftToSpendingUseCase>()
                     .call(SendNftToSpendingParams(
@@ -96,11 +97,12 @@ class _NFTDetailScreenState extends State<NFTDetailScreen> {
                 });
               },
             );
-            isLoading = false;
+            isLoadingNotifier.value = false;
           },
           isToSpending: isToSpending,
           nft: nft,
           ownerAddress: walletInfo.address,
+          isLoadingNotifier: isLoadingNotifier,
         )
       ],
     );

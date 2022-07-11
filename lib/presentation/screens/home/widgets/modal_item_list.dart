@@ -12,8 +12,8 @@ import 'package:slee_fi/common/widgets/sf_icon.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
 import 'package:slee_fi/di/injector.dart';
 import 'package:slee_fi/l10n/locale_keys.g.dart';
+import 'package:slee_fi/presentation/screens/home/widgets/my_jewel_short_widget.dart';
 import 'package:slee_fi/presentation/screens/home/widgets/pop_up_item.dart';
-import 'package:slee_fi/presentation/screens/product_detail/widgets/my_jewel_short_widget.dart';
 import 'package:slee_fi/resources/resources.dart';
 
 class ModalItemList extends StatelessWidget {

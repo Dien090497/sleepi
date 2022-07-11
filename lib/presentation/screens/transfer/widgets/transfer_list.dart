@@ -22,10 +22,14 @@ import 'package:slee_fi/presentation/screens/transfer/widgets/pop_up_confirm_tra
 
 class TransferList extends StatefulWidget {
   const TransferList(
-      {Key? key, required this.tokenEntity, required this.spendingToWallet})
+      {Key? key,
+      required this.tokenEntity,
+      required this.spendingToWallet,
+      required this.transferType})
       : super(key: key);
   final TokenEntity tokenEntity;
   final bool spendingToWallet;
+  final TransferType transferType;
 
   @override
   State<TransferList> createState() => _TransferListState();
@@ -85,12 +89,6 @@ class _TransferListState extends State<TransferList> {
               showSuccessfulDialog(context, LocaleKeys.successfull);
             }
           }
-        }
-        if (state is TransferSpendingStateError) {
-          _showError(
-              context: context,
-              message: state.message,
-              messageType: MessageType.error);
         }
 
         if (state is TransferSpendingStateToWalletSuccess) {
@@ -162,7 +160,7 @@ class _TransferListState extends State<TransferList> {
                   final cubit = context.read<TransferCubit>();
                   cubit.estimateGas(widget.tokenEntity.address,
                       amount: amount,
-                      symbol: widget.tokenEntity.symbol,
+                      transferType: widget.transferType,
                       balance: widget.tokenEntity.balance,
                       spendingToWallet: widget.spendingToWallet);
                 },
@@ -173,11 +171,4 @@ class _TransferListState extends State<TransferList> {
       },
     );
   }
-}
-
-void _showError(
-    {required BuildContext context,
-    required String message,
-    required MessageType messageType}) {
-  showCustomSnackBar(context: context, msg: message);
 }

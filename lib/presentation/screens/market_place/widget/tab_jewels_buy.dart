@@ -35,9 +35,10 @@ class _TabJewelsBuyState extends State<TabJewelsBuy> {
       padding: const EdgeInsets.all(24),
       children: PopUpJewelMarketPlace(
         jewel: jewel,
+        cubit: cubit,
         onConfirmTap: () {
           Navigator.pop(context);
-          cubit.buyNFT(jewel);
+          cubit.buyNFT(jewel.nftId);
         },
       ),
     );
@@ -55,12 +56,19 @@ class _TabJewelsBuyState extends State<TabJewelsBuy> {
             if (state is MarketPlaceStateLoaded) {
               listJewels = state.list.list;
             }
+
+            if (state is MarketPlaceStateLoadedMore) {
+              listJewels.addAll(state.list.list);
+              setState(() {});
+            }
+
             if (state is MarketPlaceStateBuySuccess) {
               cubit.refresh();
               showSuccessfulDialog(context, LocaleKeys.purchased_successfully);
             }
 
             if (state is MarketPlaceStateBuyFailed) {
+              cubit.refresh();
               showMessageDialog(context, state.msg);
             }
           },
@@ -77,11 +85,11 @@ class _TabJewelsBuyState extends State<TabJewelsBuy> {
                       context,
                       sections: {
                         LocaleKeys.type.tr(): [
-                          LocaleKeys.efficiency.tr(),
-                          LocaleKeys.luck.tr(),
-                          LocaleKeys.resilience.tr(),
-                          LocaleKeys.special.tr(),
-                          LocaleKeys.bonus.tr(),
+                          LocaleKeys.ruby.tr(),
+                          LocaleKeys.sapphire.tr(),
+                          LocaleKeys.emerald.tr(),
+                          LocaleKeys.diamond.tr(),
+                          LocaleKeys.amethyst.tr(),
                         ],
                       },
                       sliders: {
@@ -106,27 +114,29 @@ class _TabJewelsBuyState extends State<TabJewelsBuy> {
                                 child: TabBarView(
                                   children: [
                                     SFGridView(
-                                            count: listJewels.length,
-                                            childAspectRatio: 8 / 10,
-                                            onRefresh: () {
-                                              cubit.refresh();
-                                            },
-                                            itemBuilder: (context, i) {
-                                              return GestureDetector(
-                                                onTap: () {
-                                                  _showJewelDialog(context,
-                                                      listJewels[i], cubit);
-                                                },
-                                                child: JewelsBuyWidget(
-                                                  jewel: listJewels[i],
-                                                  onPressedButton: () {
-                                                    _showJewelDialog(context,
-                                                        listJewels[i], cubit);
-                                                  },
-                                                ),
-                                              );
+                                      count: listJewels.length,
+                                      childAspectRatio: 8 / 10,
+                                      onRefresh: () {
+                                        cubit.refresh();
+                                      },
+                                      cubit: cubit,
+                                      isLoadMore: cubit.loadMore,
+                                      itemBuilder: (context, i) {
+                                        return GestureDetector(
+                                          onTap: () {
+                                            _showJewelDialog(
+                                                context, listJewels[i], cubit);
+                                          },
+                                          child: JewelsBuyWidget(
+                                            jewel: listJewels[i],
+                                            onPressedButton: () {
+                                              _showJewelDialog(context,
+                                                  listJewels[i], cubit);
                                             },
                                           ),
+                                        );
+                                      },
+                                    ),
                                     Padding(
                                       padding: EdgeInsets.only(
                                           bottom: MediaQuery.of(context)

@@ -87,9 +87,12 @@ class BedModel {
         durability: durability,
         isLock: isLock,
         bedMint: bedMint,
+        quality: quality,
+        type: type,
         efficiency: efficiency,
         luck: luck,
         bonus: bonus,
+        isMint: isMint,
         special: special,
         resilience: resilience,
         time: time);

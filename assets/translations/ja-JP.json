@@ -377,12 +377,13 @@
   "this_field_is_required": "This field is required",
   "confirm_approve": "Confirm Approve",
   "approve" : "Approve",
-  "wallet_id": "Wallet ID",
+  "wallet_address": "Wallet address",
   "successfull" : "Successfull!",
   "incorrect_email" : "Incorrect email. Please try again",
   "email_does_not_exist" : "Your email doesn't exist. Please signup first.",
   "incorrect_email_password" : "Incorrect email/password. Please try again",
   "email_already_exist" : "Email is already exists",
   "otp_expired" : "OTP has expired. Please try again",
-  "invalid_code": "Invalid code. Please try again!"
+  "invalid_code": "Invalid code. Please try again!",
+  "incorrect_address": "Incorrect Address"
 }

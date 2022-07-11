@@ -28,13 +28,12 @@ class ImportWalletCubit extends Cubit<ImportWalletState> {
   final _fetchBalanceSpendingUC = getIt<FetchBalanceSpendingUseCase>();
 
   late String userEmail;
-  bool? verifyOtpSuccess;
 
   init() {
     _getUserEmail();
   }
 
-  Future process({required String otp, required String mnemonic}) async {
+  Future<void> process({required String otp, required String mnemonic}) async {
     emit(const ImportWalletState.initial());
     if (otp.isEmpty) {
       emit(ImportWalletState.errorOtp(LocaleKeys.this_field_is_required.tr()));
@@ -69,10 +68,6 @@ class ImportWalletCubit extends Cubit<ImportWalletState> {
 
   verifyOtp({required String otp}) async {
     'run to verify otp'.log;
-    if (verifyOtpSuccess == true) {
-      emit(const ImportWalletState.verifyOtpSuccess());
-      return;
-    }
 
     emit(const ImportWalletState.initial(isLoading: true));
     final result = await verifyOtpUC
@@ -81,7 +76,6 @@ class ImportWalletCubit extends Cubit<ImportWalletState> {
     result.fold((l) {
       emit(ImportWalletState.errorOtp('$l'));
     }, (r) {
-      verifyOtpSuccess = true;
       emit(const ImportWalletState.verifyOtpSuccess());
     });
   }

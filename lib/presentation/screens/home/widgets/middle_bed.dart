@@ -10,6 +10,7 @@ import 'package:slee_fi/common/widgets/loading_screen.dart';
 import 'package:slee_fi/common/widgets/sf_buttons.dart';
 import 'package:slee_fi/common/widgets/sf_icon.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
+import 'package:slee_fi/entities/bed_entity/bed_entity.dart';
 import 'package:slee_fi/l10n/locale_keys.g.dart';
 import 'package:slee_fi/presentation/blocs/home/home_bloc.dart';
 import 'package:slee_fi/presentation/blocs/home/home_state.dart';
@@ -52,56 +53,7 @@ class MiddleBed extends StatelessWidget {
                       ? Swiper(
                           itemBuilder: (BuildContext context, int index) {
                             return state.bedList.isNotEmpty
-                                ? Column(
-                                    children: [
-                                      SFText(
-                                          keyText: state.bedList[index].name,
-                                          style: TextStyles.blue14),
-                                      GestureDetector(
-                                        onTap: () {
-                                          Navigator.pushNamed(
-                                              context, R.nftInfo,
-                                              arguments: InfoIndividualParams(
-                                                  buy: true));
-                                        },
-                                        child: CachedNetworkImage(
-                                          imageUrl: state.bedList[index].image,
-                                          placeholder: (context, url) =>
-                                              const Center(
-                                            child: SizedBox(
-                                              width: 40.0,
-                                              height: 40.0,
-                                              child:
-                                                  CircularProgressIndicator(),
-                                            ),
-                                          ),
-                                          errorWidget: (context, url, error) =>
-                                              Container(
-                                                  decoration:
-                                                      const BoxDecoration(
-                                                    color:
-                                                        AppColors.transparent,
-                                                    borderRadius:
-                                                        BorderRadius.all(
-                                                            Radius.circular(
-                                                                10)),
-                                                  ),
-                                                  child:
-                                                      const Icon(Icons.error)),
-                                          imageBuilder:
-                                              (context, imageProvider) =>
-                                                  Container(
-                                            decoration: BoxDecoration(
-                                              image: DecorationImage(
-                                                  image: imageProvider,
-                                                  fit: BoxFit.fitHeight),
-                                            ),
-                                          ),
-                                          height: 180,
-                                        ),
-                                      ),
-                                    ],
-                                  )
+                                ? _buildBedItem(state.bedList[index], context)
                                 : const SFIcon(Ics.addBed, fit: BoxFit.none);
                           },
                           onIndexChanged: (index) {
@@ -115,9 +67,11 @@ class MiddleBed extends StatelessWidget {
                                 time: bed.time,
                                 id: bed.id));
                           },
+
                           itemCount:
                               state.bedList.isEmpty ? 1 : state.bedList.length,
                           control: const SwiperControl(),
+                          // loop: state.bedList.isNotEmpty,
                         )
                       : state is HomeLoading
                           ? const LoadingIcon()
@@ -170,6 +124,45 @@ class MiddleBed extends StatelessWidget {
               //     loading: () => const LoadingIcon(),
               //     loaded: (listBed, id, level, durability, time) =>),
               ),
+        ),
+      ],
+    );
+  }
+
+  _buildBedItem(BedEntity bedEntity, BuildContext context) {
+    return Column(
+      children: [
+        SFText(keyText: bedEntity.name, style: TextStyles.blue14),
+        GestureDetector(
+          onTap: () {
+            Navigator.pushNamed(context, R.nftInfo,
+                arguments: InfoIndividualParams(
+                    buy: true,
+                    bed: bedEntity));
+          },
+          child: CachedNetworkImage(
+            imageUrl: bedEntity.image,
+            placeholder: (context, url) => const Center(
+              child: SizedBox(
+                width: 40.0,
+                height: 40.0,
+                child: CircularProgressIndicator(),
+              ),
+            ),
+            errorWidget: (context, url, error) => Container(
+                decoration: const BoxDecoration(
+                  color: AppColors.transparent,
+                  borderRadius: BorderRadius.all(Radius.circular(10)),
+                ),
+                child: const Icon(Icons.error)),
+            imageBuilder: (context, imageProvider) => Container(
+              decoration: BoxDecoration(
+                image: DecorationImage(
+                    image: imageProvider, fit: BoxFit.fitHeight),
+              ),
+            ),
+            height: 180,
+          ),
         ),
       ],
     );

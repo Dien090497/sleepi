@@ -24,26 +24,36 @@ class SendNftToSpendingUseCase
         ownerAddress: (await params.credentials.extractAddress()).hex,
         operatorAddress: spendingAddr,
         credentials: params.credentials);
-    return isApproveRes.fold((l) async {
-      final approveRes = await _inftRepository.setApprovalForAll(
-          nftAddress: params.nftAddress,
-          operatorAddress: spendingAddr,
-          credentials: params.credentials);
-      return approveRes.fold(
-          Left.new,
-          (r) => _inftRepository.depositSpending(
+    return isApproveRes.fold(
+      Left.new,
+      (isApproved) async {
+        if (isApproved) {
+          return _inftRepository.depositSpending(
               spendingAddress: spendingAddr,
               nftAddress: params.nftAddress,
               nftId: params.nftId,
               userId: params.userId,
-              credentials: params.credentials));
-    },
-        (r) => _inftRepository.depositSpending(
-            spendingAddress: spendingAddr,
-            nftAddress: params.nftAddress,
-            nftId: params.nftId,
-            userId: params.userId,
-            credentials: params.credentials));
+              credentials: params.credentials);
+        } else {
+          final approveRes = await _inftRepository.setApprovalForAll(
+              nftAddress: params.nftAddress,
+              operatorAddress: spendingAddr,
+              credentials: params.credentials);
+          return approveRes.fold(Left.new, (r) async {
+            final txReceipt = await _inftRepository.listenTxHash(r);
+            if (txReceipt != null && txReceipt.status == true) {
+              return _inftRepository.depositSpending(
+                  spendingAddress: spendingAddr,
+                  nftAddress: params.nftAddress,
+                  nftId: params.nftId,
+                  userId: params.userId,
+                  credentials: params.credentials);
+            }
+            return Left(FailureMessage('txReceipt: $txReceipt'));
+          });
+        }
+      },
+    );
   }
 }
 

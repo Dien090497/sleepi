@@ -4,10 +4,11 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:slee_fi/di/injector.dart';
 import 'package:slee_fi/l10n/locale_keys.g.dart';
-import 'package:slee_fi/models/market_place/market_place_model.dart';
 import 'package:slee_fi/schema/market/market_schema.dart';
 import 'package:slee_fi/usecase/buy_nft_usecase.dart';
 import 'package:slee_fi/usecase/get_market_place_usecase.dart';
+import 'package:slee_fi/usecase/usecase.dart';
+import 'package:slee_fi/usecase/wallet/current_wallet_usecase.dart';
 
 import 'market_place_state.dart';
 
@@ -29,8 +30,11 @@ class MarketPlaceCubit extends Cubit<MarketPlaceState> {
       quality: []);
   final MarketPlaceUseCase _marketPlaceUseCase = getIt<MarketPlaceUseCase>();
   final BuyNFTUseCase _buyNFTUseCase = getIt<BuyNFTUseCase>();
+  final _currentWalletUC = getIt<CurrentWalletUseCase>();
+  late bool statusWallet = false;
 
-  init(int idCategory) {
+  init(int idCategory) async {
+    page = 1;
     params = params.copyWith(
         page: page,
         limit: limit,
@@ -38,55 +42,71 @@ class MarketPlaceCubit extends Cubit<MarketPlaceState> {
         sortPrice: "LowPrice");
     log("params : ${params.toJson()}");
     emit(const MarketPlaceState.loading());
+    final walletCall = await _currentWalletUC.call(NoParams());
+    walletCall.fold(
+      (l) {
+        statusWallet = false;
+      },
+      (r) {
+        statusWallet = true;
+      },
+    );
     getMarketPlace(params);
   }
 
   refresh() {
+    page = 1;
+    loadMore = false;
+    params = params.copyWith(page: page);
     log("params : ${params.toJson()}");
-    int page = 1;
-    int limit = 10;
-    params = params.copyWith(page: page, limit: limit);
     getMarketPlace(params);
   }
 
-  Future<void> getMarketPlace(MarketSchema params) async {
-    final result = await _marketPlaceUseCase.call(params);
+  Future<void> getMarketPlace(MarketSchema param) async {
+    final result = await _marketPlaceUseCase.call(param);
     result.fold((l) {
       log("fail : ${'$l'}");
       error = true;
+      loadMore = false;
       emit(MarketPlaceState.fail('$l'));
     }, (success) {
       error = false;
       log("result : ${success.toString()}");
-      if (success.count < limit) {
-        page += 1;
+      if (success.list.length == limit) {
+        page ++;
+        params = params.copyWith(page: page);
         loadMore = true;
+      }else{
+        loadMore = false;
       }
       emit(MarketPlaceState.loaded(success));
     });
   }
 
   Future<void> loadMoreMarketPlace() async {
-    emit(const MarketPlaceState.loadingMore());
+    log("params : ${params.toJson()}");
     final result = await _marketPlaceUseCase.call(params);
     result.fold((l) {
       error = true;
+      loadMore = false;
       log("fail : ${'$l'}");
       emit(MarketPlaceState.fail('$l'));
     }, (success) {
       error = false;
       log("result : ${success.toString()}");
-      if (success.count < limit) {
-        page += 1;
+      if (success.list.length == limit) {
+        page ++;
+        params = params.copyWith(page: page);
         loadMore = true;
+      }else{
+        loadMore = false;
       }
-      emit(MarketPlaceState.loaded(success));
+      emit(MarketPlaceState.loadedMore(success));
     });
   }
 
   Future<void> selectPrice(int price) async {
-    int page = 1;
-    int limit = 10;
+    page = 1;
     params = params.copyWith(
         page: page,
         limit: limit,
@@ -126,15 +146,14 @@ class MarketPlaceCubit extends Cubit<MarketPlaceState> {
         );
       }
     });
-    int page = 1;
-    int limit = 10;
+    page = 1;
     params = params.copyWith(page: page, limit: limit);
     log("params : ${params.toJson()}");
     getMarketPlace(params);
   }
 
-  Future<void> buyNFT(MarketPlaceModel nft) async {
-    final result = await _buyNFTUseCase.call(nft.nftId);
+  Future<void> buyNFT(int nftId) async {
+    final result = await _buyNFTUseCase.call(nftId);
     result.fold((l) {
       emit(MarketPlaceState.buyFail('$l'));
     }, (success) {

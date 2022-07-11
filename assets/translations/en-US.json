@@ -405,7 +405,7 @@
   "invalid_email": "Invalid email. Please try again!",
   "password_must_be_at_least_6": "Password must be 6 to 20 characters and contain a capital letter, a special character and a number",
   "password_dose_not_match": "Password does not match",
-  "wallet_id": "Wallet ID",
+  "wallet_address": "Wallet address",
   "warning_bind_wallet": "Your account will be linked to this wallet forever, please save the seed phrase for later use",
   "dont_allow_typing_space": "Don't allow user typing space in password",
   "you_can_set_your_alarm_here": "You can set your alarm here",
@@ -425,5 +425,15 @@
   "some_thing_wrong" : "Something went wrong",
   "purchased_successfully": "Purchased Successfully",
   "no_result": "No Result",
-  "compound_will_be_activated_after": "Compound will be activated after 14 days."
+  "compound_will_be_activated_after": "Compound will be activated after 14 days.",
+  "ruby": "Ruby",
+  "sapphire": "Sapphire",
+  "emerald": "Emerald",
+  "diamond": "Diamond",
+  "amethyst": "Amethyst",
+  "blue": "Blue",
+  "green": "Green",
+  "pink": "Pink",
+  "purple": "Purple",
+  "incorrect_address": "Incorrect Address"
 }

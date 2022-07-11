@@ -57,4 +57,6 @@ abstract class INFTRepository {
     EtherAmount? gasPrice,
     required String functionName,
   });
+
+  Future<TransactionReceipt?> listenTxHash(String txHash);
 }

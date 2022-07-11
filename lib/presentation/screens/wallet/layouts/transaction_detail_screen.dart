@@ -1,5 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:slee_fi/common/enum/enum.dart';
 import 'package:slee_fi/common/extensions/num_ext.dart';
 import 'package:slee_fi/common/extensions/string_x.dart';
 import 'package:slee_fi/common/routes/app_routes.dart';
@@ -116,8 +117,8 @@ class TransactionDetail extends StatelessWidget {
                         child: BoxButtonWidget(
                           onTap: () {
                             Navigator.pushNamed(context, R.transfer,
-                                arguments:
-                                    TransferScreenArg(args.tokenEntity, false));
+                                arguments: TransferScreenArg(args.tokenEntity,
+                                    false, TransferType.token));
                           },
                           text: LocaleKeys.to_spending,
                           assetImage: Ics.icRefresh,

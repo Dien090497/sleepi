@@ -11,6 +11,7 @@ import 'package:slee_fi/common/widgets/sf_card.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
 import 'package:slee_fi/l10n/locale_keys.g.dart';
 import 'package:slee_fi/models/market_place/market_place_model.dart';
+import 'package:slee_fi/presentation/blocs/market_place/market_place_cubit.dart';
 import 'package:slee_fi/presentation/blocs/user_bloc/user_bloc.dart';
 import 'package:slee_fi/presentation/blocs/user_bloc/user_state.dart';
 import 'package:slee_fi/presentation/screens/market_place/widget/pop_up_confirm.dart';
@@ -19,10 +20,14 @@ import 'package:slee_fi/presentation/screens/wallet_creation_warning/widgets/pop
 
 class PopUpJewelMarketPlace extends StatelessWidget {
   const PopUpJewelMarketPlace(
-      {Key? key, required this.jewel, required this.onConfirmTap})
+      {Key? key,
+      required this.jewel,
+      required this.onConfirmTap,
+      required this.cubit})
       : super(key: key);
 
   final MarketPlaceModel jewel;
+  final MarketPlaceCubit cubit;
   final VoidCallback onConfirmTap;
 
   void _showConfirmDialog(BuildContext context, MarketPlaceModel jewel) {
@@ -180,12 +185,6 @@ class PopUpJewelMarketPlace extends StatelessWidget {
             Expanded(
               child: BlocBuilder<UserBloc, UserState>(
                   builder: (context, userState) {
-                if (userState is UserError) {
-                  print('UserError');
-                }
-                if (userState is UserLoaded) {
-                  print('UserLoaded');
-                }
                 return SFButton(
                   text: LocaleKeys.confirm,
                   onPressed: () {
@@ -195,7 +194,11 @@ class PopUpJewelMarketPlace extends StatelessWidget {
                         for (var element in userState.listTokens) {
                           if (element.symbol.toLowerCase() == 'avax') {
                             if (element.balance < double.parse(jewel.price)) {
-                              _showDonWorryDialog(context, jewel);
+                              if (cubit.statusWallet) {
+                                _showDonWorryDialog(context, jewel);
+                              } else {
+                                _showCreateOrImportWallet(context);
+                              }
                             } else {
                               _showConfirmDialog(context, jewel);
                             }

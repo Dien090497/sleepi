@@ -35,9 +35,10 @@ class _TabBedsBuyState extends State<TabBedsBuy> {
       padding: const EdgeInsets.all(24),
       children: PopUpBedMarketPlace(
         bed: bed,
+        cubit: cubit,
         onConfirmTap: () {
           Navigator.pop(context);
-          cubit.buyNFT(bed);
+          cubit.buyNFT(bed.nftId);
         },
       ),
     );
@@ -56,12 +57,18 @@ class _TabBedsBuyState extends State<TabBedsBuy> {
               listBeds = state.list.list;
             }
 
+            if (state is MarketPlaceStateLoadedMore) {
+              listBeds.addAll(state.list.list);
+              setState(() {});
+            }
+
             if (state is MarketPlaceStateBuySuccess) {
               cubit.refresh();
               showSuccessfulDialog(context, LocaleKeys.purchased_successfully);
             }
 
             if (state is MarketPlaceStateBuyFailed) {
+              cubit.refresh();
               showMessageDialog(context, state.msg);
             }
           },
@@ -120,6 +127,8 @@ class _TabBedsBuyState extends State<TabBedsBuy> {
                                 child: TabBarView(
                                   children: [
                                     GridViewBedItem(
+                                      cubit: cubit,
+                                      isLoadMore: cubit.loadMore,
                                       beds: listBeds,
                                       onRefresh: () {
                                         cubit.refresh();
@@ -130,7 +139,9 @@ class _TabBedsBuyState extends State<TabBedsBuy> {
                                       onBedTap: (bed) {
                                         Navigator.pushNamed(context, R.nftInfo,
                                             arguments: InfoIndividualParams(
-                                                bed: bed, buy: true));
+                                                bed: bed.toBedEntity(),
+                                                marketPlaceModel: bed,
+                                                buy: true));
                                       },
                                     ),
                                     Padding(
