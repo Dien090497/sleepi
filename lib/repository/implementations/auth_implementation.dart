@@ -49,6 +49,7 @@ class AuthImplementation extends IAuthRepository {
       final result = await _authDataSource.signIn(signInSchema);
       _secureStorage.writeUser(result.data.user);
       _secureStorage.saveAccessToken(result.data.accessToken);
+      _secureStorage.setRefreshToken(result.data.refreshToken);
       return Right(result.data.user.toEntity());
     } on Exception catch (e) {
       return Left(FailureMessage.fromException(e));
