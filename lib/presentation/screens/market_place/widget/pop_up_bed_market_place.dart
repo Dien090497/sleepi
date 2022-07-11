@@ -12,6 +12,7 @@ import 'package:slee_fi/common/widgets/sf_icon.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
 import 'package:slee_fi/l10n/locale_keys.g.dart';
 import 'package:slee_fi/models/market_place/market_place_model.dart';
+import 'package:slee_fi/presentation/blocs/market_place/market_place_cubit.dart';
 import 'package:slee_fi/presentation/blocs/user_bloc/user_bloc.dart';
 import 'package:slee_fi/presentation/blocs/user_bloc/user_state.dart';
 import 'package:slee_fi/presentation/screens/market_place/widget/pop_up_confirm.dart';
@@ -21,10 +22,11 @@ import 'package:slee_fi/resources/resources.dart';
 
 class PopUpBedMarketPlace extends StatelessWidget {
   const PopUpBedMarketPlace(
-      {Key? key, required this.bed, required this.onConfirmTap})
+      {Key? key, required this.bed, required this.onConfirmTap, required this.cubit})
       : super(key: key);
 
   final MarketPlaceModel bed;
+  final MarketPlaceCubit cubit;
   final VoidCallback onConfirmTap;
 
   void _showConfirmDialog(BuildContext context, MarketPlaceModel bed) {
@@ -150,7 +152,11 @@ class PopUpBedMarketPlace extends StatelessWidget {
                         for (var element in userState.listTokens) {
                           if (element.symbol.toLowerCase() == 'avax') {
                             if (element.balance < double.parse(bed.price)) {
-                              _showDonWorryDialog(context, bed);
+                              if(cubit.statusWallet) {
+                                _showDonWorryDialog(context, bed);
+                              }else{
+                                _showCreateOrImportWallet(context);
+                              }
                             } else {
                               _showConfirmDialog(context, bed);
                             }

@@ -1,32 +1,23 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
 import 'package:slee_fi/common/widgets/sf_buttons.dart';
 import 'package:slee_fi/common/widgets/sf_card.dart';
-import 'package:slee_fi/common/widgets/sf_icon.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
 import 'package:slee_fi/l10n/locale_keys.g.dart';
+import 'package:slee_fi/models/bed_model/beb_model.dart';
 
 class JewelDialogBody extends StatelessWidget {
   const JewelDialogBody(
       {Key? key,
-      required this.icon,
-      required this.name,
-      required this.level,
-      required this.id,
-      required this.attribute,
-      required this.effect,
       required this.onSellTap,
-      required this.onTransferTap})
+      required this.onTransferTap,
+      required this.jewel})
       : super(key: key);
 
-  final String icon;
-  final String name;
-  final String level;
-  final String id;
-  final String attribute;
-  final String effect;
+  final BedModel jewel;
   final VoidCallback onSellTap;
   final VoidCallback onTransferTap;
 
@@ -55,14 +46,34 @@ class JewelDialogBody extends StatelessWidget {
               ),
               alignment: Alignment.center,
               padding: const EdgeInsets.all(10),
-              child: SFIcon(
-                icon,
-                width: 80,
+              child: CachedNetworkImage(
+                imageUrl: jewel.image,
+                placeholder: (context, url) => const Center(
+                  child: SizedBox(
+                    width: 40.0,
+                    height: 40.0,
+                    child: CircularProgressIndicator(),
+                  ),
+                ),
+                errorWidget: (context, url, error) => Container(
+                    decoration: const BoxDecoration(
+                      color: AppColors.transparent,
+                      borderRadius: BorderRadius.all(Radius.circular(10)),
+                    ),
+                    child: const Icon(Icons.error)),
+                imageBuilder: (context, imageProvider) => Container(
+                  decoration: BoxDecoration(
+                    image: DecorationImage(
+                        image: imageProvider, fit: BoxFit.cover),
+                  ),
+                ),
+                width: 60,
+                height: 60,
               ),
             ),
             const SizedBox(height: 20),
             SFText(
-              keyText: '${LocaleKeys.luck_jewel.tr()} ($level)',
+              keyText: '${LocaleKeys.luck_jewel.tr()} (${jewel.level})',
               style: TextStyles.white1w700size16,
             ),
             const SizedBox(height: 24),
@@ -73,7 +84,7 @@ class JewelDialogBody extends StatelessWidget {
               ),
               padding: const EdgeInsets.all(8),
               child: SFText(
-                keyText: id,
+                keyText: jewel.nftId.toString(),
                 style: TextStyles.blue14,
               ),
             ),
@@ -90,7 +101,7 @@ class JewelDialogBody extends StatelessWidget {
                   const SizedBox(width: 4),
                   Expanded(
                     child: SFText(
-                      keyText: '+2 ${LocaleKeys.luck.tr()}',
+                      keyText: '+${jewel.luck} ${LocaleKeys.luck.tr()}',
                       style: TextStyles.blue16,
                       textAlign: TextAlign.right,
                     ),
@@ -111,7 +122,7 @@ class JewelDialogBody extends StatelessWidget {
                   const SizedBox(width: 4),
                   Expanded(
                     child: SFText(
-                      keyText: '+5% ${LocaleKeys.base.tr()} Res.',
+                      keyText: '+${jewel.resilience}% ${LocaleKeys.base.tr()} Res.',
                       style: TextStyles.blue16,
                       textAlign: TextAlign.right,
                     ),

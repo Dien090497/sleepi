@@ -7,6 +7,8 @@ import 'package:slee_fi/l10n/locale_keys.g.dart';
 import 'package:slee_fi/schema/market/market_schema.dart';
 import 'package:slee_fi/usecase/buy_nft_usecase.dart';
 import 'package:slee_fi/usecase/get_market_place_usecase.dart';
+import 'package:slee_fi/usecase/usecase.dart';
+import 'package:slee_fi/usecase/wallet/current_wallet_usecase.dart';
 
 import 'market_place_state.dart';
 
@@ -28,8 +30,10 @@ class MarketPlaceCubit extends Cubit<MarketPlaceState> {
       quality: []);
   final MarketPlaceUseCase _marketPlaceUseCase = getIt<MarketPlaceUseCase>();
   final BuyNFTUseCase _buyNFTUseCase = getIt<BuyNFTUseCase>();
+  final _currentWalletUC = getIt<CurrentWalletUseCase>();
+  late bool statusWallet = false;
 
-  init(int idCategory) {
+  init(int idCategory) async {
     params = params.copyWith(
         page: page,
         limit: limit,
@@ -37,6 +41,15 @@ class MarketPlaceCubit extends Cubit<MarketPlaceState> {
         sortPrice: "LowPrice");
     log("params : ${params.toJson()}");
     emit(const MarketPlaceState.loading());
+    final walletCall = await _currentWalletUC.call(NoParams());
+    walletCall.fold(
+      (l) {
+        statusWallet = false;
+      },
+      (r) {
+        statusWallet = true;
+      },
+    );
     getMarketPlace(params);
   }
 

@@ -35,6 +35,7 @@ class _TabJewelsBuyState extends State<TabJewelsBuy> {
       padding: const EdgeInsets.all(24),
       children: PopUpJewelMarketPlace(
         jewel: jewel,
+        cubit: cubit,
         onConfirmTap: () {
           Navigator.pop(context);
           cubit.buyNFT(jewel.id);
@@ -61,6 +62,7 @@ class _TabJewelsBuyState extends State<TabJewelsBuy> {
             }
 
             if (state is MarketPlaceStateBuyFailed) {
+              cubit.refresh();
               showMessageDialog(context, state.msg);
             }
           },
