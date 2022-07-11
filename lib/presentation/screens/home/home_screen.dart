@@ -58,9 +58,9 @@ class _HomeScreenState extends State<HomeScreen> {
                 child: ListView(
                   shrinkWrap: true,
                   children: [
-                    const Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 16.0),
-                      child: MiddleBed(),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                      child: MiddleBed(homeBloc: _homeBloc),
                     ),
                     const SizedBox(height: 10),
                     const UseItem(),

@@ -96,44 +96,39 @@ class PopupInsufficient extends StatelessWidget {
             )),
             const SizedBox(width: 12),
             Expanded(
-              child: BlocProvider(
-                create: (BuildContext context) => WalletCubit()..init(),
-                child: BlocBuilder<WalletCubit, WalletState>(
-                  builder: (context, state) {
-                    TokenEntity tokenAvax = const TokenEntity(
-                        address: '',
-                        displayName: '',
-                        name: '',
-                        symbol: 'AVAX',
-                        icon: Ics.icAvax,
-                        balance: 0);
-                    if (state is WalletStateLoaded &&
-                        state.walletInfoEntity != null) {
-                      for (final element in state.tokenList) {
-                        if (element.symbol.toLowerCase() ==
-                            Const.tokens[0]['symbol']
-                                .toString()
-                                .toLowerCase()) {
-                          tokenAvax = element;
-                        }
+              child: BlocBuilder<WalletCubit, WalletState>(
+                builder: (context, state) {
+                  TokenEntity tokenAvax = const TokenEntity(
+                      address: '',
+                      displayName: '',
+                      name: '',
+                      symbol: 'AVAX',
+                      icon: Ics.icAvax,
+                      balance: 0);
+                  if (state is WalletStateLoaded &&
+                      state.walletInfoEntity != null) {
+                    for (final element in state.tokenList) {
+                      if (element.symbol.toLowerCase() ==
+                          Const.tokens[0]['symbol'].toString().toLowerCase()) {
+                        tokenAvax = element;
                       }
                     }
-                    return SFButton(
-                      text: LocaleKeys.confirm,
-                      onPressed: () {
-                        Navigator.pop(context);
-                        Navigator.pushNamed(context, R.passcode,
-                            arguments: PasscodeArguments(
-                                route: R.transfer,
-                                argNewRoute: TransferScreenArg(
-                                    tokenAvax, false, TransferType.nft)));
-                      },
-                      textStyle: TextStyles.white16,
-                      gradient: AppColors.blueGradient,
-                      width: double.infinity,
-                    );
-                  },
-                ),
+                  }
+                  return SFButton(
+                    text: LocaleKeys.confirm,
+                    onPressed: () {
+                      // Navigator.pop(context);
+                      Navigator.pushReplacementNamed(context, R.passcode,
+                          arguments: PasscodeArguments(
+                              route: R.transfer,
+                              argNewRoute: TransferScreenArg(
+                                  tokenAvax, false, TransferType.nft)));
+                    },
+                    textStyle: TextStyles.white16,
+                    gradient: AppColors.blueGradient,
+                    width: double.infinity,
+                  );
+                },
               ),
             ),
           ],

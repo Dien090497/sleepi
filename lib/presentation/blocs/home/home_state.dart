@@ -20,6 +20,7 @@ class HomeState with _$HomeState {
       List<BedEntity>? itemList,
       BedEntity? selectedItem,
       @Default('') String errorMessage,
+      @Default(false) bool loadMoreBed,
       @Default(false) bool loading}) = HomeLoaded;
 
   const factory HomeState.error(String message) = HomeError;

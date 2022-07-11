@@ -50,3 +50,18 @@ class FetchItem extends HomeEvent {
   @override
   List<Object?> get props => [];
 }
+
+class FilterItemEvent extends HomeEvent {
+  final List<String> selected;
+  final int level;
+
+  const FilterItemEvent(this.selected, this.level);
+
+  @override
+  List<Object?> get props => [selected, level];
+}
+
+class LoadMoreBed extends HomeEvent {
+  @override
+  List<Object?> get props => [];
+}

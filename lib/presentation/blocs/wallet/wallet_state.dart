@@ -14,6 +14,7 @@ class WalletState with _$WalletState {
   const factory WalletState.loadingHistory() = WalletStateLoadingHistory;
 
   const factory WalletState.loaded({
+    @Default(false) bool isLoading,
     required WalletInfoEntity? walletInfoEntity,
     required List<TokenEntity> tokenList,
   }) = WalletStateLoaded;
@@ -22,5 +23,6 @@ class WalletState with _$WalletState {
 
   const factory WalletState.error({required String message}) = WalletStateError;
 
-  const factory WalletState.getHistorySuccess(List<TransactionIsarModel> list) = WalletStateGetHistorySuccess;
+  const factory WalletState.getHistorySuccess(List<TransactionIsarModel> list) =
+      WalletStateGetHistorySuccess;
 }
