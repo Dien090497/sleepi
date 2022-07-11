@@ -2,6 +2,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:focus_detector/focus_detector.dart';
 import 'package:slee_fi/common/routes/app_routes.dart';
 import 'package:slee_fi/common/widgets/sf_alert_dialog.dart';
 import 'package:slee_fi/common/widgets/sf_bottom_sheets.dart';
@@ -38,7 +39,7 @@ class _TabBedsBuyState extends State<TabBedsBuy> {
         cubit: cubit,
         onConfirmTap: () {
           Navigator.pop(context);
-          cubit.buyNFT(bed.id);
+          cubit.buyNFT(bed.nftId);
         },
       ),
     );
@@ -57,6 +58,11 @@ class _TabBedsBuyState extends State<TabBedsBuy> {
               listBeds = state.list.list;
             }
 
+            if (state is MarketPlaceStateLoadedMore) {
+              listBeds.addAll(state.list.list);
+              setState(() {});
+            }
+
             if (state is MarketPlaceStateBuySuccess) {
               cubit.refresh();
               showSuccessfulDialog(context, LocaleKeys.purchased_successfully);
@@ -69,92 +75,99 @@ class _TabBedsBuyState extends State<TabBedsBuy> {
           },
           builder: (context, state) {
             final cubit = context.read<MarketPlaceCubit>();
-            return Column(
-              children: [
-                TabBarFilter(
-                  cubit: cubit,
-                  tabTexts: const [LocaleKeys.buy, LocaleKeys.rent],
-                  onFilterTap: () {
-                    showFilterModalBottomSheet(
-                      cubit: cubit,
-                      context,
-                      sections: {
-                        LocaleKeys.type.tr(): [
-                          LocaleKeys.beds.tr(),
-                          LocaleKeys.bed_box.tr(),
-                          LocaleKeys.genesis_beds.tr(),
-                        ],
-                        LocaleKeys.class_.tr(): [
-                          LocaleKeys.short.tr(),
-                          LocaleKeys.middle.tr(),
-                          LocaleKeys.long.tr(),
-                          LocaleKeys.flexible.tr(),
-                        ],
-                        LocaleKeys.quality.tr(): [
-                          LocaleKeys.common.tr(),
-                          LocaleKeys.uncommon.tr(),
-                          LocaleKeys.rare.tr(),
-                          LocaleKeys.epic.tr(),
-                          LocaleKeys.legendary.tr(),
-                        ],
-                      },
-                      sliders: {
-                        LocaleKeys.level.tr(): const FilterSliderValues(
-                            max: 30, min: 0, interval: 30),
-                        LocaleKeys.mint.tr():
-                            const FilterSliderValues(max: 7, min: 0),
-                      },
-                    );
-                  },
-                ),
-                Expanded(
-                  child: Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 12.w),
-                    child: (state is MarketPlaceStateLoading)
-                        ? const Center(
-                            child: CircularProgressIndicator(),
-                          )
-                        : Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              const SizedBox(height: 12),
-                              Expanded(
-                                child: TabBarView(
-                                  children: [
-                                    GridViewBedItem(
-                                      beds: listBeds,
-                                      onRefresh: () {
-                                        cubit.refresh();
-                                      },
-                                      onBuyTap: (bed) {
-                                        _showBedDialog(context, bed, cubit);
-                                      },
-                                      onBedTap: (bed) {
-                                        Navigator.pushNamed(context, R.nftInfo,
-                                            arguments: InfoIndividualParams(
-                                                bed: bed.toBedEntity(),
-                                                marketPlaceModel: bed,
-                                                buy: true));
-                                      },
-                                    ),
-                                    Padding(
-                                      padding: EdgeInsets.only(
-                                          bottom: MediaQuery.of(context)
-                                                  .size
-                                                  .height *
-                                              0.3),
-                                      child: const Center(
-                                        child: SFIcon(Ics.commingSoon),
-                                      ),
-                                    )
-                                  ],
-                                ),
-                              ),
-                            ],
-                          ),
+            return FocusDetector(
+              onFocusGained: (){
+                cubit.clearFilter();
+              },
+              child: Column(
+                children: [
+                  TabBarFilter(
+                    cubit: cubit,
+                    tabTexts: const [LocaleKeys.buy, LocaleKeys.rent],
+                    onFilterTap: () {
+                      showFilterModalBottomSheet(
+                        cubit: cubit,
+                        context,
+                        sections: {
+                          LocaleKeys.type.tr(): [
+                            LocaleKeys.beds.tr(),
+                            LocaleKeys.bed_box.tr(),
+                            LocaleKeys.genesis_beds.tr(),
+                          ],
+                          LocaleKeys.class_.tr(): [
+                            LocaleKeys.short.tr(),
+                            LocaleKeys.middle.tr(),
+                            LocaleKeys.long.tr(),
+                            LocaleKeys.flexible.tr(),
+                          ],
+                          LocaleKeys.quality.tr(): [
+                            LocaleKeys.common.tr(),
+                            LocaleKeys.uncommon.tr(),
+                            LocaleKeys.rare.tr(),
+                            LocaleKeys.epic.tr(),
+                            LocaleKeys.legendary.tr(),
+                          ],
+                        },
+                        sliders: {
+                          LocaleKeys.level.tr(): const FilterSliderValues(
+                              max: 30, min: 0, interval: 30),
+                          LocaleKeys.mint.tr():
+                              const FilterSliderValues(max: 7, min: 0),
+                        },
+                      );
+                    },
                   ),
-                ),
-              ],
+                  Expanded(
+                    child: Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 12.w),
+                      child: (state is MarketPlaceStateLoading)
+                          ? const Center(
+                              child: CircularProgressIndicator(),
+                            )
+                          : Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                const SizedBox(height: 12),
+                                Expanded(
+                                  child: TabBarView(
+                                    children: [
+                                      GridViewBedItem(
+                                        cubit: cubit,
+                                        isLoadMore: cubit.loadMore,
+                                        beds: listBeds,
+                                        onRefresh: () {
+                                          cubit.refresh();
+                                        },
+                                        onBuyTap: (bed) {
+                                          _showBedDialog(context, bed, cubit);
+                                        },
+                                        onBedTap: (bed) {
+                                          Navigator.pushNamed(context, R.nftInfo,
+                                              arguments: InfoIndividualParams(
+                                                  bed: bed.toBedEntity(),
+                                                  marketPlaceModel: bed,
+                                                  buy: true));
+                                        },
+                                      ),
+                                      Padding(
+                                        padding: EdgeInsets.only(
+                                            bottom: MediaQuery.of(context)
+                                                    .size
+                                                    .height *
+                                                0.3),
+                                        child: const Center(
+                                          child: SFIcon(Ics.commingSoon),
+                                        ),
+                                      )
+                                    ],
+                                  ),
+                                ),
+                              ],
+                            ),
+                    ),
+                  ),
+                ],
+              ),
             );
           },
         ),

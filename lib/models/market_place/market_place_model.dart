@@ -50,7 +50,7 @@ class MarketPlaceModel {
   final String type;
   @JsonKey(name: 'class')
   final String? classNft;
-  final String quality;
+  final String? quality;
   final String owner;
 
   MarketPlaceModel(
@@ -94,7 +94,7 @@ class MarketPlaceModel {
         image: image,
         type: type,
         contractAddress: contractAddress,
-        quality: quality,
+        quality: quality!,
         durability: durability,
         isLock: isLock,
         bedMint: bedMint,

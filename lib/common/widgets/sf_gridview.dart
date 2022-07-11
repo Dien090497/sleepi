@@ -3,6 +3,7 @@ import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
 import 'package:slee_fi/l10n/locale_keys.g.dart';
+import 'package:slee_fi/presentation/blocs/market_place/market_place_cubit.dart';
 
 class SFGridView extends StatefulWidget {
   const SFGridView({
@@ -13,16 +14,18 @@ class SFGridView extends StatefulWidget {
     this.physics,
     this.padding,
     Key? key,
-    this.onRefresh,
+    this.onRefresh, this.cubit, this.isLoadMore= false,
   }) : super(key: key);
 
   final IndexedWidgetBuilder itemBuilder;
   final int count;
   final double childAspectRatio;
   final bool isScroll;
+  final bool isLoadMore;
   final ScrollPhysics? physics;
   final EdgeInsets? padding;
   final Function? onRefresh;
+  final MarketPlaceCubit? cubit;
 
   @override
   State<SFGridView> createState() => _SFGridViewState();
@@ -32,9 +35,16 @@ class _SFGridViewState extends State<SFGridView> {
   final RefreshController _refreshController =
       RefreshController(initialRefresh: false);
 
-  void _onRefresh() async {
+  void _onRefresh() {
     widget.onRefresh!();
     _refreshController.refreshCompleted();
+  }
+
+  void _onLoadMore() {
+    widget.cubit!.loadMoreMarketPlace().then((_) {
+      _refreshController.loadComplete();
+    });
+
   }
 
   @override
@@ -49,8 +59,10 @@ class _SFGridViewState extends State<SFGridView> {
       return SmartRefresher(
         controller: _refreshController,
         enablePullDown: widget.isScroll,
+        enablePullUp: widget.isLoadMore,
         header: const WaterDropHeader(),
         onRefresh: _onRefresh,
+        onLoading: _onLoadMore,
         child: widget.count != 0
             ? GridView.builder(
                 itemCount: widget.count,

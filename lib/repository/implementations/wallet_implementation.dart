@@ -407,7 +407,7 @@ class WalletImplementation extends IWalletRepository {
           return Left(FailureMessage.fromException(e));
         }
       } else {
-        return const Left(FailureMessage(LocaleKeys.password));
+        return const Left(FailureMessage(LocaleKeys.invalid_mnemonic_please_try_again));
       }
     } catch (e) {
       return Left(FailureMessage('$e'));

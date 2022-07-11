@@ -424,5 +424,16 @@
   "don_worry_transfer": "Don’t worry! Just transfer enough AVAX from your wallet to the spending account and you are good to go",
   "some_thing_wrong" : "Something went wrong",
   "purchased_successfully": "Purchased Successfully",
-  "no_result": "No Result"
+  "no_result": "No Result",
+  "compound_will_be_activated_after": "Compound will be activated after 14 days.",
+  "ruby": "Ruby",
+  "sapphire": "Sapphire",
+  "emerald": "Emerald",
+  "diamond": "Diamond",
+  "amethyst": "Amethyst",
+  "blue": "Blue",
+  "green": "Green",
+  "pink": "Pink",
+  "purple": "Purple",
+  "incorrect_address": "Incorrect Address"
 }

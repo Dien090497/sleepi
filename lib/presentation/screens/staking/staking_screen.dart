@@ -23,8 +23,8 @@ class StakingScreen extends StatelessWidget {
               return Column(
                   children: [
                     TopBarStaking(
-                      valueGold: tokenList.first.balance,
-                      valueSilver: tokenList.elementAt(1).balance,
+                      valueGold: tokenList.elementAt(1).balance,
+                      valueSilver: tokenList.first.balance,
                     ),
                     Expanded(child: StakingList(balanceSlft: tokenList.isNotEmpty ? tokenList.first.balance : 0,)),
                   ]);

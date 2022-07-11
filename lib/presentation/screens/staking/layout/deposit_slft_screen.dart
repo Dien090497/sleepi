@@ -65,13 +65,10 @@ class _DepositSlftScreenState extends State<DepositSlftScreen> {
                 message: state.message,
                 messageType: MessageType.error);
           }
-          if(state is StakingStateLoading){
-            context.read<UserBloc>().add(RefreshBalanceToken());
-          }
           if(state is StakingStateStakingSuccess){
-            Navigator.pop(context);
+            Navigator.pop(context, true);
             showSuccessfulDialog(context, null);
-            context.read<StakingCubit>().getStakingInfo();
+            context.read<UserBloc>().add(RefreshBalanceToken());
           }
         },
         builder: (context, state) {
