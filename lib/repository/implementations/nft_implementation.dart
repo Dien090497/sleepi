@@ -52,6 +52,7 @@ class NFTImplementation extends INFTRepository {
     required NftType nftType,
   }) async {
     try {
+      if (tokenIds.isEmpty) return const Right([]);
       final listModel = await _nftApi.getListNft(
         nftType: nftType,
         tokenIds: tokenIds.join(','),

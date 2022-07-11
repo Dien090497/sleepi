@@ -96,12 +96,15 @@ class PopUpConfirmTransfer extends StatelessWidget {
               ),
               const SizedBox(width: 10),
               Expanded(
-                  child: FittedBox(
-                child: SFText(
-                    keyText: "$fee AVAX",
-                    style: TextStyles.lightWhite16,
-                    textAlign: TextAlign.end),
-              )),
+                child: FittedBox(
+                  fit: BoxFit.scaleDown,
+                  alignment: Alignment.centerRight,
+                  child: SFText(
+                      keyText: "$fee AVAX",
+                      style: TextStyles.lightWhite16,
+                      textAlign: TextAlign.end),
+                ),
+              ),
             ],
           ),
           const SizedBox(

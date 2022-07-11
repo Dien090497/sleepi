@@ -47,6 +47,7 @@ class _TabWalletDetailState extends State<TabWalletDetail> {
   @override
   void dispose() {
     refreshController.dispose();
+    timer.cancel();
     super.dispose();
   }
 

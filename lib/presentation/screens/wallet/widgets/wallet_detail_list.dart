@@ -72,11 +72,14 @@ class WalletDetailList extends StatelessWidget {
                       if (index < 3) {
                         Navigator.pushNamed(context, R.transactionDetail,
                             arguments: TransactionDetailArguments(
-                              img: icons[index],
-                              title: keyList[index],
-                              tokenEntity: tokenList[index],
-                              typeHistory: HistoryTransactionParams(typeHistory: index == 2 ? Const.listTypeHistory.elementAt(0) : Const.listTypeHistory.elementAt(1), tokenSymbol: tokenList[index].symbol)
-                            ));
+                                img: icons[index],
+                                title: keyList[index],
+                                tokenEntity: tokenList[index],
+                                typeHistory: HistoryTransactionParams(
+                                    typeHistory: index == 2
+                                        ? Const.listTypeHistory.elementAt(0)
+                                        : Const.listTypeHistory.elementAt(1),
+                                    tokenSymbol: tokenList[index].symbol)));
                       }
                     },
                     child: ListTile(
@@ -107,6 +110,7 @@ class WalletDetailList extends StatelessWidget {
                     horizontal: 24.0, vertical: 12.0),
                 itemBuilder: (BuildContext context, int index) {
                   return SFCard(
+                    padding: EdgeInsets.zero,
                     onTap: () {
                       if (index < 4) {
                         Navigator.pushNamed(context, R.transactionDetail,
@@ -114,8 +118,11 @@ class WalletDetailList extends StatelessWidget {
                                 title: tokenList[index].displayName,
                                 img: tokenList[index].icon,
                                 tokenEntity: tokenList[index],
-                                typeHistory: HistoryTransactionParams(typeHistory: index == 2 ? Const.listTypeHistory.elementAt(0) : Const.listTypeHistory.elementAt(1), tokenSymbol: tokenList[index].symbol)
-                            ));
+                                typeHistory: HistoryTransactionParams(
+                                    typeHistory: index == 2
+                                        ? Const.listTypeHistory.elementAt(0)
+                                        : Const.listTypeHistory.elementAt(1),
+                                    tokenSymbol: tokenList[index].symbol)));
                       } else {
                         Navigator.pushNamed(context, R.nftDetail,
                             arguments: NFTDetailArguments(
@@ -141,15 +148,31 @@ class WalletDetailList extends StatelessWidget {
                               : 40,
                         ),
                       ),
-                      title: SFText(
-                          keyText: index < 4
-                              ? tokenList[index].displayName.toUpperCase()
-                              : tokenList[index].displayName,
-                          style: TextStyles.lightWhite16),
-                      trailing: SFText(
-                        keyText: tokenList[index].balance.formatBalanceToken,
-                        style: TextStyles.lightWhite16,
+                      horizontalTitleGap: 6,
+                      title: Row(
+                        children: [
+                          SFText(
+                              keyText: index < 4
+                                  ? tokenList[index].displayName.toUpperCase()
+                                  : tokenList[index].displayName,
+                              style: TextStyles.lightWhite16),
+                          Expanded(
+                            child: FittedBox(
+                              fit: BoxFit.scaleDown,
+                              alignment: Alignment.centerRight,
+                              child: Text(
+                                tokenList[index].balance.formatBalanceToken,
+                                style: TextStyles.lightWhite16,
+                                textAlign: TextAlign.end,
+                              ),
+                            ),
+                          )
+                        ],
                       ),
+                      // trailing: SFText(
+                      //   keyText: tokenList[index].balance.formatBalanceToken,
+                      //   style: TextStyles.lightWhite16,
+                      // ),
                     ),
                   );
                 },

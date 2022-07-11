@@ -15,9 +15,9 @@ analyzer:
     - lib/**.freezed.dart
     - lib/**.g.dart
     - lib/di/injector.config.dart
-    - test/**.mocks.dart
     - lib/generated_plugin_registrant.dart
     - lib/resources/**
+    - test/**
 
   errors:
     library_private_types_in_public_api: ignore
