@@ -9,6 +9,7 @@ import 'package:slee_fi/datasources/remote/auth_datasource/refresh_token_interce
 import 'package:slee_fi/models/activation_code_response/activation_code_response.dart';
 import 'package:slee_fi/models/active_code_response/active_code_response.dart';
 import 'package:slee_fi/models/create_password_reponse/create_password_response.dart';
+import 'package:slee_fi/models/fetch_bed_response/fetch_bed_response.dart';
 import 'package:slee_fi/models/global_config_response/global_config_response.dart';
 import 'package:slee_fi/models/list_market_place/list_market_place_model.dart';
 import 'package:slee_fi/models/market_place/market_place_model.dart';
@@ -118,7 +119,7 @@ abstract class AuthDataSource {
 
   @GET('/stacking')
   Future<StakingInfoResponse> getStakingInfo();
-  
+
   // @GET('/tx-history/pending')
   // Future<dynamic> fetchSpendingPending(
   //   @Query('userId') int userId,
@@ -145,6 +146,10 @@ abstract class AuthDataSource {
     @Query('page') int page,
   );
 
+  @GET('/withdraw/estimate-gas')
+  Future<double> estimateGasWithdraw(@Query('type') String type,
+      @Query('contractAddress') String contractAddress);
+
   @POST('/withdraw/nft')
   Future<dynamic> withdrawNFT(@Body() WhitDrawNFTSchema whitDrawNFTSchema);
 
@@ -157,9 +162,11 @@ abstract class AuthDataSource {
 
   ///nft-attributes
   @GET('/nft-attributes/nft-by-owner')
-  Future<ListMarketPlaceModel> getNftByOwner(
+  Future<OwnerNFTResponse> getNftByOwner(
     @Query('limit') int limit,
     @Query('page') int page,
+    /***[categoryId] == 1 bed
+          [categoryId] == 3 item */
     @Query('categoryId') int categoryId,
     @Query('item') AttributeNFT itemNFT,
   );
@@ -170,7 +177,7 @@ abstract class AuthDataSource {
   @GET('/nft-attributes/bed-detail')
   Future<MarketPlaceModel> bedDetail(@Query('bedId') int bedId);
 
-  @GET('/nft-attributes/add-item-for-bed')
+  @PUT('/nft-attributes/add-item-for-bed')
   Future<dynamic> addItemForBed(
     @Query('bedId') int bedId,
     @Query('itemId') int itemId,

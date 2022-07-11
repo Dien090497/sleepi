@@ -105,7 +105,7 @@ class InfoIndividualScreen extends StatelessWidget {
                                     ),
                                   ]),
                               const SizedBox(height: 16),
-                              const BoxInfoWidget(),
+                              BoxInfoWidget(bed: args.bed),
                               const SizedBox(height: 24),
                               Padding(
                                 padding:
@@ -144,26 +144,26 @@ class InfoIndividualScreen extends StatelessWidget {
                                 ),
                               ),
                               const SizedBox(height: 15),
-                              const AttributesWidget(),
+                              AttributesWidget(bed: args.bed,),
                               const SizedBox(height: 33),
-                              Container(
-                                decoration: const BoxDecoration(
-                                  color: AppColors.dark,
-                                  borderRadius: BorderRadius.only(
-                                    topLeft: Radius.circular(40),
-                                    topRight: Radius.circular(40),
-                                  ),
-                                ),
-                                child: Column(
-                                  children: const [
-                                    MintFromWidget(
-                                        title: LocaleKeys.minted_from,
-                                        numbers: 2),
-                                    MintFromWidget(
-                                        title: LocaleKeys.mint, numbers: 7),
-                                  ],
-                                ),
-                              ),
+                              // Container(
+                              //   decoration: const BoxDecoration(
+                              //     color: AppColors.dark,
+                              //     borderRadius: BorderRadius.only(
+                              //       topLeft: Radius.circular(40),
+                              //       topRight: Radius.circular(40),
+                              //     ),
+                              //   ),
+                              //   child: Column(
+                              //     children: const [
+                              //       MintFromWidget(
+                              //           title: LocaleKeys.minted_from,
+                              //           numbers: 2),
+                              //       MintFromWidget(
+                              //           title: LocaleKeys.mint, numbers: 7),
+                              //     ],
+                              //   ),
+                              // ),
                               const SizedBox(height: 80),
                             ],
                           ),

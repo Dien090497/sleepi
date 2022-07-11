@@ -52,13 +52,13 @@ class _TabBedsBuyState extends State<TabBedsBuy> {
         child: BlocConsumer<MarketPlaceCubit, MarketPlaceState>(
           listener: (context, state) {
             final cubit = context.read<MarketPlaceCubit>();
-            if (state is MarketPlaceStateSuccess) {
+            if (state is MarketPlaceStateLoaded) {
               listBeds = state.list.list;
             }
 
             if (state is MarketPlaceStateBuySuccess) {
               cubit.refresh();
-              showSuccessfulDialog(context, null);
+              showSuccessfulDialog(context, LocaleKeys.purchased_successfully);
             }
 
             if (state is MarketPlaceStateBuyFailed) {

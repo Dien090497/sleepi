@@ -29,7 +29,7 @@ Future<T?> showCustomDialog<T>(
 }
 
 Future<T?> showSuccessfulDialog<T>(BuildContext context, String? message,
-    {EdgeInsets? padding, TextStyle? style}) async {
+    {EdgeInsets? padding, TextStyle? style, VoidCallback? onPop}) async {
   return showDialog(
       context: context,
       barrierColor: AppColors.backgroundDialog,
@@ -41,6 +41,9 @@ Future<T?> showSuccessfulDialog<T>(BuildContext context, String? message,
               alignment: Alignment.centerRight,
               child: IconButton(
                 onPressed: () {
+                  if (onPop != null) {
+                    onPop();
+                  }
                   Navigator.pop(context);
                 },
                 icon: const Icon(Icons.close, color: AppColors.white),

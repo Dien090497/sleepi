@@ -359,6 +359,24 @@ class _AuthDataSource implements AuthDataSource {
   }
 
   @override
+  Future<double> estimateGasWithdraw(type, contractAddress) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{
+      r'type': type,
+      r'contractAddress': contractAddress
+    };
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    final _result = await _dio.fetch<double>(_setStreamType<double>(
+        Options(method: 'GET', headers: _headers, extra: _extra)
+            .compose(_dio.options, '/withdraw/estimate-gas',
+                queryParameters: queryParameters, data: _data)
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = _result.data!;
+    return value;
+  }
+
+  @override
   Future<dynamic> withdrawNFT(whitDrawNFTSchema) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
@@ -409,7 +427,7 @@ class _AuthDataSource implements AuthDataSource {
   }
 
   @override
-  Future<ListMarketPlaceModel> getNftByOwner(
+  Future<OwnerNFTResponse> getNftByOwner(
       limit, page, categoryId, itemNFT) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{
@@ -421,12 +439,12 @@ class _AuthDataSource implements AuthDataSource {
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
     final _result = await _dio.fetch<Map<String, dynamic>>(
-        _setStreamType<ListMarketPlaceModel>(
+        _setStreamType<OwnerNFTResponse>(
             Options(method: 'GET', headers: _headers, extra: _extra)
                 .compose(_dio.options, '/nft-attributes/nft-by-owner',
                     queryParameters: queryParameters, data: _data)
                 .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = ListMarketPlaceModel.fromJson(_result.data!);
+    final value = OwnerNFTResponse.fromJson(_result.data!);
     return value;
   }
 
@@ -472,7 +490,7 @@ class _AuthDataSource implements AuthDataSource {
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
     final _result = await _dio.fetch(_setStreamType<dynamic>(
-        Options(method: 'GET', headers: _headers, extra: _extra)
+        Options(method: 'PUT', headers: _headers, extra: _extra)
             .compose(_dio.options, '/nft-attributes/add-item-for-bed',
                 queryParameters: queryParameters, data: _data)
             .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));

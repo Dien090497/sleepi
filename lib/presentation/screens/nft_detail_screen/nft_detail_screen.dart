@@ -87,11 +87,13 @@ class _NFTDetailScreenState extends State<NFTDetailScreen> {
                   ));
             res.fold(
               (l) {
-                debugPrint('### L $l');
+                showMessageDialog(context, '$l');
               },
               (r) {
-                Navigator.popUntil(
-                    context, (r) => r.settings.name == R.nftDetail);
+                showSuccessfulDialog(context, null, onPop: () {
+                  Navigator.popUntil(
+                      context, (r) => r.settings.name == R.nftDetail);
+                });
               },
             );
             isLoading = false;

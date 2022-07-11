@@ -425,5 +425,7 @@ abstract class  LocaleKeys {
   static const insufficient_avax = 'insufficient_avax';
   static const don_worry_transfer = 'don_worry_transfer';
   static const some_thing_wrong = 'some_thing_wrong';
+  static const purchased_successfully = 'purchased_successfully';
+  static const no_result = 'no_result';
 
 }

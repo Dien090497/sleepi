@@ -19,7 +19,9 @@ mixin _$ImportWalletState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(bool isLoading) initial,
-    required TResult Function(WalletInfoEntity entity) success,
+    required TResult Function(WalletInfoEntity entity,
+            UserInfoEntity? userInfoEntity, List<TokenSpending> listTokens)
+        success,
     required TResult Function() verifyOtpSuccess,
     required TResult Function(String msg) errorOtp,
     required TResult Function(String msg) errorMnemonic,
@@ -28,7 +30,9 @@ mixin _$ImportWalletState {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function(bool isLoading)? initial,
-    TResult Function(WalletInfoEntity entity)? success,
+    TResult Function(WalletInfoEntity entity, UserInfoEntity? userInfoEntity,
+            List<TokenSpending> listTokens)?
+        success,
     TResult Function()? verifyOtpSuccess,
     TResult Function(String msg)? errorOtp,
     TResult Function(String msg)? errorMnemonic,
@@ -37,7 +41,9 @@ mixin _$ImportWalletState {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(bool isLoading)? initial,
-    TResult Function(WalletInfoEntity entity)? success,
+    TResult Function(WalletInfoEntity entity, UserInfoEntity? userInfoEntity,
+            List<TokenSpending> listTokens)?
+        success,
     TResult Function()? verifyOtpSuccess,
     TResult Function(String msg)? errorOtp,
     TResult Function(String msg)? errorMnemonic,
@@ -160,7 +166,9 @@ class _$ImportWalletInitial implements ImportWalletInitial {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(bool isLoading) initial,
-    required TResult Function(WalletInfoEntity entity) success,
+    required TResult Function(WalletInfoEntity entity,
+            UserInfoEntity? userInfoEntity, List<TokenSpending> listTokens)
+        success,
     required TResult Function() verifyOtpSuccess,
     required TResult Function(String msg) errorOtp,
     required TResult Function(String msg) errorMnemonic,
@@ -172,7 +180,9 @@ class _$ImportWalletInitial implements ImportWalletInitial {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function(bool isLoading)? initial,
-    TResult Function(WalletInfoEntity entity)? success,
+    TResult Function(WalletInfoEntity entity, UserInfoEntity? userInfoEntity,
+            List<TokenSpending> listTokens)?
+        success,
     TResult Function()? verifyOtpSuccess,
     TResult Function(String msg)? errorOtp,
     TResult Function(String msg)? errorMnemonic,
@@ -184,7 +194,9 @@ class _$ImportWalletInitial implements ImportWalletInitial {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(bool isLoading)? initial,
-    TResult Function(WalletInfoEntity entity)? success,
+    TResult Function(WalletInfoEntity entity, UserInfoEntity? userInfoEntity,
+            List<TokenSpending> listTokens)?
+        success,
     TResult Function()? verifyOtpSuccess,
     TResult Function(String msg)? errorOtp,
     TResult Function(String msg)? errorMnemonic,
@@ -253,9 +265,13 @@ abstract class _$$ImportWalletDoneCopyWith<$Res> {
   factory _$$ImportWalletDoneCopyWith(
           _$ImportWalletDone value, $Res Function(_$ImportWalletDone) then) =
       __$$ImportWalletDoneCopyWithImpl<$Res>;
-  $Res call({WalletInfoEntity entity});
+  $Res call(
+      {WalletInfoEntity entity,
+      UserInfoEntity? userInfoEntity,
+      List<TokenSpending> listTokens});
 
   $WalletInfoEntityCopyWith<$Res> get entity;
+  $UserInfoEntityCopyWith<$Res>? get userInfoEntity;
 }
 
 /// @nodoc
@@ -272,12 +288,22 @@ class __$$ImportWalletDoneCopyWithImpl<$Res>
   @override
   $Res call({
     Object? entity = freezed,
+    Object? userInfoEntity = freezed,
+    Object? listTokens = freezed,
   }) {
     return _then(_$ImportWalletDone(
       entity == freezed
           ? _value.entity
           : entity // ignore: cast_nullable_to_non_nullable
               as WalletInfoEntity,
+      userInfoEntity == freezed
+          ? _value.userInfoEntity
+          : userInfoEntity // ignore: cast_nullable_to_non_nullable
+              as UserInfoEntity?,
+      listTokens == freezed
+          ? _value._listTokens
+          : listTokens // ignore: cast_nullable_to_non_nullable
+              as List<TokenSpending>,
     ));
   }
 
@@ -287,19 +313,40 @@ class __$$ImportWalletDoneCopyWithImpl<$Res>
       return _then(_value.copyWith(entity: value));
     });
   }
+
+  @override
+  $UserInfoEntityCopyWith<$Res>? get userInfoEntity {
+    if (_value.userInfoEntity == null) {
+      return null;
+    }
+
+    return $UserInfoEntityCopyWith<$Res>(_value.userInfoEntity!, (value) {
+      return _then(_value.copyWith(userInfoEntity: value));
+    });
+  }
 }
 
 /// @nodoc
 
 class _$ImportWalletDone implements ImportWalletDone {
-  const _$ImportWalletDone(this.entity);
+  const _$ImportWalletDone(
+      this.entity, this.userInfoEntity, final List<TokenSpending> listTokens)
+      : _listTokens = listTokens;
 
   @override
   final WalletInfoEntity entity;
+  @override
+  final UserInfoEntity? userInfoEntity;
+  final List<TokenSpending> _listTokens;
+  @override
+  List<TokenSpending> get listTokens {
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_listTokens);
+  }
 
   @override
   String toString() {
-    return 'ImportWalletState.success(entity: $entity)';
+    return 'ImportWalletState.success(entity: $entity, userInfoEntity: $userInfoEntity, listTokens: $listTokens)';
   }
 
   @override
@@ -307,12 +354,19 @@ class _$ImportWalletDone implements ImportWalletDone {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$ImportWalletDone &&
-            const DeepCollectionEquality().equals(other.entity, entity));
+            const DeepCollectionEquality().equals(other.entity, entity) &&
+            const DeepCollectionEquality()
+                .equals(other.userInfoEntity, userInfoEntity) &&
+            const DeepCollectionEquality()
+                .equals(other._listTokens, _listTokens));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(entity));
+  int get hashCode => Object.hash(
+      runtimeType,
+      const DeepCollectionEquality().hash(entity),
+      const DeepCollectionEquality().hash(userInfoEntity),
+      const DeepCollectionEquality().hash(_listTokens));
 
   @JsonKey(ignore: true)
   @override
@@ -323,38 +377,44 @@ class _$ImportWalletDone implements ImportWalletDone {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(bool isLoading) initial,
-    required TResult Function(WalletInfoEntity entity) success,
+    required TResult Function(WalletInfoEntity entity,
+            UserInfoEntity? userInfoEntity, List<TokenSpending> listTokens)
+        success,
     required TResult Function() verifyOtpSuccess,
     required TResult Function(String msg) errorOtp,
     required TResult Function(String msg) errorMnemonic,
   }) {
-    return success(entity);
+    return success(entity, userInfoEntity, listTokens);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function(bool isLoading)? initial,
-    TResult Function(WalletInfoEntity entity)? success,
+    TResult Function(WalletInfoEntity entity, UserInfoEntity? userInfoEntity,
+            List<TokenSpending> listTokens)?
+        success,
     TResult Function()? verifyOtpSuccess,
     TResult Function(String msg)? errorOtp,
     TResult Function(String msg)? errorMnemonic,
   }) {
-    return success?.call(entity);
+    return success?.call(entity, userInfoEntity, listTokens);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(bool isLoading)? initial,
-    TResult Function(WalletInfoEntity entity)? success,
+    TResult Function(WalletInfoEntity entity, UserInfoEntity? userInfoEntity,
+            List<TokenSpending> listTokens)?
+        success,
     TResult Function()? verifyOtpSuccess,
     TResult Function(String msg)? errorOtp,
     TResult Function(String msg)? errorMnemonic,
     required TResult orElse(),
   }) {
     if (success != null) {
-      return success(entity);
+      return success(entity, userInfoEntity, listTokens);
     }
     return orElse();
   }
@@ -402,10 +462,14 @@ class _$ImportWalletDone implements ImportWalletDone {
 }
 
 abstract class ImportWalletDone implements ImportWalletState {
-  const factory ImportWalletDone(final WalletInfoEntity entity) =
-      _$ImportWalletDone;
+  const factory ImportWalletDone(
+      final WalletInfoEntity entity,
+      final UserInfoEntity? userInfoEntity,
+      final List<TokenSpending> listTokens) = _$ImportWalletDone;
 
   WalletInfoEntity get entity => throw _privateConstructorUsedError;
+  UserInfoEntity? get userInfoEntity => throw _privateConstructorUsedError;
+  List<TokenSpending> get listTokens => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
   _$$ImportWalletDoneCopyWith<_$ImportWalletDone> get copyWith =>
       throw _privateConstructorUsedError;
@@ -457,7 +521,9 @@ class _$ImportWalletVerifyOtpSuccess implements ImportWalletVerifyOtpSuccess {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(bool isLoading) initial,
-    required TResult Function(WalletInfoEntity entity) success,
+    required TResult Function(WalletInfoEntity entity,
+            UserInfoEntity? userInfoEntity, List<TokenSpending> listTokens)
+        success,
     required TResult Function() verifyOtpSuccess,
     required TResult Function(String msg) errorOtp,
     required TResult Function(String msg) errorMnemonic,
@@ -469,7 +535,9 @@ class _$ImportWalletVerifyOtpSuccess implements ImportWalletVerifyOtpSuccess {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function(bool isLoading)? initial,
-    TResult Function(WalletInfoEntity entity)? success,
+    TResult Function(WalletInfoEntity entity, UserInfoEntity? userInfoEntity,
+            List<TokenSpending> listTokens)?
+        success,
     TResult Function()? verifyOtpSuccess,
     TResult Function(String msg)? errorOtp,
     TResult Function(String msg)? errorMnemonic,
@@ -481,7 +549,9 @@ class _$ImportWalletVerifyOtpSuccess implements ImportWalletVerifyOtpSuccess {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(bool isLoading)? initial,
-    TResult Function(WalletInfoEntity entity)? success,
+    TResult Function(WalletInfoEntity entity, UserInfoEntity? userInfoEntity,
+            List<TokenSpending> listTokens)?
+        success,
     TResult Function()? verifyOtpSuccess,
     TResult Function(String msg)? errorOtp,
     TResult Function(String msg)? errorMnemonic,
@@ -606,7 +676,9 @@ class _$ImportWalletErrorOtp implements ImportWalletErrorOtp {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(bool isLoading) initial,
-    required TResult Function(WalletInfoEntity entity) success,
+    required TResult Function(WalletInfoEntity entity,
+            UserInfoEntity? userInfoEntity, List<TokenSpending> listTokens)
+        success,
     required TResult Function() verifyOtpSuccess,
     required TResult Function(String msg) errorOtp,
     required TResult Function(String msg) errorMnemonic,
@@ -618,7 +690,9 @@ class _$ImportWalletErrorOtp implements ImportWalletErrorOtp {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function(bool isLoading)? initial,
-    TResult Function(WalletInfoEntity entity)? success,
+    TResult Function(WalletInfoEntity entity, UserInfoEntity? userInfoEntity,
+            List<TokenSpending> listTokens)?
+        success,
     TResult Function()? verifyOtpSuccess,
     TResult Function(String msg)? errorOtp,
     TResult Function(String msg)? errorMnemonic,
@@ -630,7 +704,9 @@ class _$ImportWalletErrorOtp implements ImportWalletErrorOtp {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(bool isLoading)? initial,
-    TResult Function(WalletInfoEntity entity)? success,
+    TResult Function(WalletInfoEntity entity, UserInfoEntity? userInfoEntity,
+            List<TokenSpending> listTokens)?
+        success,
     TResult Function()? verifyOtpSuccess,
     TResult Function(String msg)? errorOtp,
     TResult Function(String msg)? errorMnemonic,
@@ -762,7 +838,9 @@ class _$ImportWalletErrorMnemonic implements ImportWalletErrorMnemonic {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(bool isLoading) initial,
-    required TResult Function(WalletInfoEntity entity) success,
+    required TResult Function(WalletInfoEntity entity,
+            UserInfoEntity? userInfoEntity, List<TokenSpending> listTokens)
+        success,
     required TResult Function() verifyOtpSuccess,
     required TResult Function(String msg) errorOtp,
     required TResult Function(String msg) errorMnemonic,
@@ -774,7 +852,9 @@ class _$ImportWalletErrorMnemonic implements ImportWalletErrorMnemonic {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function(bool isLoading)? initial,
-    TResult Function(WalletInfoEntity entity)? success,
+    TResult Function(WalletInfoEntity entity, UserInfoEntity? userInfoEntity,
+            List<TokenSpending> listTokens)?
+        success,
     TResult Function()? verifyOtpSuccess,
     TResult Function(String msg)? errorOtp,
     TResult Function(String msg)? errorMnemonic,
@@ -786,7 +866,9 @@ class _$ImportWalletErrorMnemonic implements ImportWalletErrorMnemonic {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(bool isLoading)? initial,
-    TResult Function(WalletInfoEntity entity)? success,
+    TResult Function(WalletInfoEntity entity, UserInfoEntity? userInfoEntity,
+            List<TokenSpending> listTokens)?
+        success,
     TResult Function()? verifyOtpSuccess,
     TResult Function(String msg)? errorOtp,
     TResult Function(String msg)? errorMnemonic,

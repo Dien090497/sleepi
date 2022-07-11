@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -10,10 +11,8 @@ import 'package:slee_fi/common/widgets/sf_card.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
 import 'package:slee_fi/l10n/locale_keys.g.dart';
 import 'package:slee_fi/models/market_place/market_place_model.dart';
-import 'package:slee_fi/models/pop_with_result.dart';
 import 'package:slee_fi/presentation/blocs/user_bloc/user_bloc.dart';
 import 'package:slee_fi/presentation/blocs/user_bloc/user_state.dart';
-import 'package:slee_fi/presentation/blocs/wallet/wallet_cubit.dart';
 import 'package:slee_fi/presentation/screens/market_place/widget/pop_up_confirm.dart';
 import 'package:slee_fi/presentation/screens/market_place/widget/pop_up_insufficient.dart';
 import 'package:slee_fi/presentation/screens/wallet_creation_warning/widgets/pop_up_avalanche_wallet.dart';
@@ -27,7 +26,6 @@ class PopUpItemMarketPlace extends StatelessWidget {
   final VoidCallback onConfirmTap;
 
   void _showConfirmDialog(BuildContext context, MarketPlaceModel item) {
-    Navigator.pop(context);
     showCustomAlertDialog(
       context,
       padding: const EdgeInsets.all(24),
@@ -47,15 +45,8 @@ class PopUpItemMarketPlace extends StatelessWidget {
       ),
     );
   }
-  void _showWarningDialog(dynamic value, BuildContext context) {
-    if (value is PopWithResults) {
-      context.read<WalletCubit>().init();
-      final cubit = context.read<WalletCubit>();
-      cubit.importWallet(value.results);
-    }
-  }
 
-  _showCreateOrImportWallet(BuildContext context) async {
+  void _showCreateOrImportWallet(BuildContext context) async {
     return showCustomAlertDialog(
       context,
       barrierDismissible: false,
@@ -72,11 +63,28 @@ class PopUpItemMarketPlace extends StatelessWidget {
           style: TextStyles.white1w700size16,
         ),
         const SizedBox(height: 24),
-        Image.network(
-          item.image,
+        CachedNetworkImage(
+          imageUrl: item.image,
+          placeholder: (context, url) => const Center(
+            child: SizedBox(
+              width: 40.0,
+              height: 40.0,
+              child: CircularProgressIndicator(),
+            ),
+          ),
+          errorWidget: (context, url, error) => Container(
+              decoration: const BoxDecoration(
+                color: AppColors.transparent,
+                borderRadius: BorderRadius.all(Radius.circular(10)),
+              ),
+              child: const Icon(Icons.error)),
+          imageBuilder: (context, imageProvider) => Container(
+            decoration: BoxDecoration(
+              image: DecorationImage(image: imageProvider, fit: BoxFit.cover),
+            ),
+          ),
           width: 60,
           height: 60,
-          fit: BoxFit.cover,
         ),
         const SizedBox(height: 30),
         // SFText(
@@ -170,35 +178,33 @@ class PopUpItemMarketPlace extends StatelessWidget {
             )),
             const SizedBox(width: 12),
             Expanded(
-              child: BlocProvider(
-                create: (context) => WalletCubit(),
-                child: BlocBuilder<UserBloc, UserState>(
-                    builder: (context, userState) {
-                  return SFButton(
-                    text: LocaleKeys.confirm,
-                    onPressed: () {
-                      Navigator.pop(context);
-                      if (userState is UserLoaded) {
-                        if (userState.userInfoEntity.wallet != null) {
-                          if (userState.listTokens[2].balance <
-                              double.parse(item.price)) {
-                            _showDonWorryDialog(context, item);
-                          } else {
-                            _showConfirmDialog(context, item);
+              child: BlocBuilder<UserBloc, UserState>(
+                  builder: (context, userState) {
+                return SFButton(
+                  text: LocaleKeys.confirm,
+                  onPressed: () {
+                    Navigator.pop(context);
+                    if (userState is UserLoaded) {
+                      if (userState.userInfoEntity.wallet != null) {
+                        for (var element in userState.listTokens) {
+                          if (element.symbol.toLowerCase() == 'avax') {
+                            if (element.balance < double.parse(item.price)) {
+                              _showDonWorryDialog(context, item);
+                            } else {
+                              _showConfirmDialog(context, item);
+                            }
                           }
-                        } else {
-                          _showCreateOrImportWallet(context).then((value) {
-                            _showWarningDialog(value, context);
-                          });
                         }
+                      } else {
+                        _showCreateOrImportWallet(context);
                       }
-                    },
-                    textStyle: TextStyles.white16,
-                    gradient: AppColors.blueGradient,
-                    width: double.infinity,
-                  );
-                }),
-              ),
+                    }
+                  },
+                  textStyle: TextStyles.white16,
+                  gradient: AppColors.blueGradient,
+                  width: double.infinity,
+                );
+              }),
             ),
           ],
         ),
