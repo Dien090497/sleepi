@@ -29,7 +29,6 @@ class TransactionRemoteDataSource{
   Future<Either<Failure, HistoryModel>> getHistoryTransaction(HistoryTransactionParams params) async {
     try {
       final historyTransaction = await _historyDataSource.getHistoryFirst();
-      List listBlockNumber = [];
       // if(historyTransaction.isNotEmpty){
       //   for(var transaction in historyTransaction){
       //     final transactionInfo = await _web3dataSource.getDetailTransaction(transaction.transactionHash);

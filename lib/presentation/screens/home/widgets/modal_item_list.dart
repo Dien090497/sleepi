@@ -1,4 +1,3 @@
-import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
@@ -36,19 +35,8 @@ class ModalItemList extends StatelessWidget {
                 ),
                 const Spacer(),
                 GestureDetector(
-                  onTap: () {
-                    showFilterModalBottomSheet(
-                      context,
-                      sections: {
-                        LocaleKeys.item: [
-                          LocaleKeys.efficiency.tr(),
-                          LocaleKeys.luck.tr(),
-                          LocaleKeys.resilience.tr(),
-                          LocaleKeys.special.tr(),
-                        ]
-                      },
-                      sliders: {},
-                    );
+                  onTap: () async {
+                    showFilterItemBottomSheet(context, homeBloc: homeBloc);
                   },
                   child: Padding(
                     padding: const EdgeInsets.only(left: 8),
@@ -79,8 +67,11 @@ class ModalItemList extends StatelessWidget {
 
                   if (state is HomeLoaded && state.itemList != null) {
                     return SFGridView(
+                      isLoadMore: true,
+                      isScroll: true,
                       count: state.itemList!.length,
                       childAspectRatio: 1,
+                      onLoadMore: _onLoadMore(),
                       onRefresh: () => homeBloc.add(FetchItem()),
                       itemBuilder: (context, i) {
                         final item = state.itemList![i];
@@ -125,5 +116,9 @@ class ModalItemList extends StatelessWidget {
         ],
       ),
     );
+  }
+
+  Future<void> _onLoadMore() async {
+
   }
 }

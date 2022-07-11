@@ -76,7 +76,7 @@ class _TabJewelsBuyState extends State<TabJewelsBuy> {
           builder: (context, state) {
             final cubit = context.read<MarketPlaceCubit>();
             return FocusDetector(
-              onFocusGained: (){
+              onFocusGained: () {
                 cubit.clearFilter();
               },
               child: Column(
@@ -124,13 +124,13 @@ class _TabJewelsBuyState extends State<TabJewelsBuy> {
                                         onRefresh: () {
                                           cubit.refresh();
                                         },
-                                        cubit: cubit,
+                                        onLoadMore: cubit.loadMoreMarketPlace(),
                                         isLoadMore: cubit.loadMore,
                                         itemBuilder: (context, i) {
                                           return GestureDetector(
                                             onTap: () {
-                                              _showJewelDialog(
-                                                  context, listJewels[i], cubit);
+                                              _showJewelDialog(context,
+                                                  listJewels[i], cubit);
                                             },
                                             child: JewelsBuyWidget(
                                               jewel: listJewels[i],

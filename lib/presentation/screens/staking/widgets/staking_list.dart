@@ -41,8 +41,6 @@ class StakingList extends StatelessWidget {
         listener: (context, state) {
           if(state is StakingStateStakingInfoSuccess){
             stakingInfo = state.stakingInfoResponse;
-            print("---------------------------------");
-            print(stakingInfo);
           }
           if(state is StakingStateUnStakingSuccess){
             showSuccessfulDialog(context, null);
