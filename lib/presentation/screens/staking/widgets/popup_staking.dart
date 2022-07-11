@@ -6,10 +6,11 @@ import 'package:slee_fi/common/widgets/sf_text.dart';
 import 'package:slee_fi/l10n/locale_keys.g.dart';
 
 class PopUpStaking extends StatelessWidget {
-  const PopUpStaking({this.message, this.onPressed, Key? key})
+  const PopUpStaking({this.message, this.isShowButton = true, this.onPressed, Key? key})
       : super(key: key);
 
   final String? message;
+  final bool isShowButton;
   final VoidCallback? onPressed;
 
   @override
@@ -24,8 +25,8 @@ class PopUpStaking extends StatelessWidget {
             textAlign: TextAlign.center,
           ),
         ),
-        const SizedBox(height: 32.0),
-        Row(
+         const SizedBox(height:16.0),
+        isShowButton ? Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
             Expanded(
@@ -53,7 +54,7 @@ class PopUpStaking extends StatelessWidget {
               ),
             ),
           ],
-        )
+        ) : const SizedBox()
       ],
     );
   }

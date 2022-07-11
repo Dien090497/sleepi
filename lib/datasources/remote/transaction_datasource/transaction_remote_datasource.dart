@@ -27,9 +27,15 @@ class TransactionRemoteDataSource{
   }
 
   Future<Either<Failure, HistoryModel>> getHistoryTransaction(HistoryTransactionParams params) async {
-
     try {
-      final transactionHash = await _historyDataSource.getHistoryFirst();
+      final historyTransaction = await _historyDataSource.getHistoryFirst();
+      List listBlockNumber = [];
+      // if(historyTransaction.isNotEmpty){
+      //   for(var transaction in historyTransaction){
+      //     final transactionInfo = await _web3dataSource.getDetailTransaction(transaction.transactionHash);
+      //     listBlockNumber.add(transactionInfo.blockNumber.blockNum);
+      //   }
+      // }
       // final transactionInfo = await _web3dataSource.getDetailTransaction(transactionHash?.transactionHash);
       final walletId = _getStorageDataSource.getCurrentWalletId();
       final wallet = await _isarDataSource.getWalletAt(walletId);
@@ -43,7 +49,7 @@ class TransactionRemoteDataSource{
           wallet.mnemonic, wallet.derivedIndex!, network.slip44);
       final credentials = _web3dataSource.credentialsFromPrivateKey(privateKey);
       final ethereumAddress = await credentials.extractAddress();
-      final String url = '${network.explorers.first.url}/api?module=account&action=${params.typeHistory}&address=$ethereumAddress&startblock=${transactionHash?.transactionHash}&endblock=999999999&sort=desc&apikey=$apiKey"';
+      final String url = '${network.explorers.first.url}/api?module=account&action=${params.typeHistory}&address=$ethereumAddress&startblock=${historyTransaction?.transactionHash}&endblock=999999999&sort=desc&apikey=$apiKey"';
       final dataResponse = await dio.get(url);
       final history = HistoryModel.fromJson(dataResponse.data as Map<String, dynamic>);
       return Right(history);

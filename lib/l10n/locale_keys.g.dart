@@ -427,6 +427,7 @@ abstract class  LocaleKeys {
   static const some_thing_wrong = 'some_thing_wrong';
   static const purchased_successfully = 'purchased_successfully';
   static const no_result = 'no_result';
+  static const compound_will_be_activated_after = 'compound_will_be_activated_after';
   static const ruby = 'ruby';
   static const sapphire = 'sapphire';
   static const emerald = 'emerald';
@@ -436,5 +437,6 @@ abstract class  LocaleKeys {
   static const green = 'green';
   static const pink = 'pink';
   static const purple = 'purple';
+  static const incorrect_address = 'incorrect_address';
 
 }
