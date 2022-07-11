@@ -155,7 +155,9 @@ class PopUpBedMarketPlace extends StatelessWidget {
                               if(cubit.statusWallet) {
                                 _showDonWorryDialog(context, bed);
                               }else{
-                                _showCreateOrImportWallet(context);
+                                _showCreateOrImportWallet(context).then((){
+                                  cubit.init(1);
+                                });
                               }
                             } else {
                               _showConfirmDialog(context, bed);
@@ -163,7 +165,9 @@ class PopUpBedMarketPlace extends StatelessWidget {
                           }
                         }
                       } else {
-                        _showCreateOrImportWallet(context);
+                        _showCreateOrImportWallet(context).then((){
+                          cubit.init(1);
+                        });
                       }
                     }
                   },
