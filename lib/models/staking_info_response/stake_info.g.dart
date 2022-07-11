@@ -7,16 +7,16 @@ part of 'stake_info.dart';
 // **************************************************************************
 
 StakeInfo _$StakeInfoFromJson(Map<String, dynamic> json) => StakeInfo(
-      id: json['id'] as int,
-      userId: json['userId'] as int,
-      totalStake: json['totalStake'] as String,
-      totalReward: json['totalReward'] as String,
-      mintingDiscount: json['mintingDiscount'] as String,
-      levelUpDiscount: json['levelUpDiscount'] as String,
-      earningToken: json['earningToken'] as String,
+      id: json['id'] as int?,
+      userId: json['userId'] as int?,
+      totalStake: json['totalStake'] as String?,
+      totalReward: json['totalReward'] as String?,
+      mintingDiscount: json['mintingDiscount'] as String?,
+      levelUpDiscount: json['levelUpDiscount'] as String?,
+      earningToken: json['earningToken'] as String?,
       symbol: json['symbol'] as String?,
-      createdAt: json['createdAt'] as String,
-      updatedAt: json['updatedAt'] as String,
+      createdAt: json['createdAt'] as String?,
+      updatedAt: json['updatedAt'] as String?,
     );
 
 Map<String, dynamic> _$StakeInfoToJson(StakeInfo instance) => <String, dynamic>{

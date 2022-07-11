@@ -427,5 +427,6 @@ abstract class  LocaleKeys {
   static const some_thing_wrong = 'some_thing_wrong';
   static const purchased_successfully = 'purchased_successfully';
   static const no_result = 'no_result';
+  static const compound_will_be_activated_after = 'compound_will_be_activated_after';
 
 }

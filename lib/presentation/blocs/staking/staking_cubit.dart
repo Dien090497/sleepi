@@ -27,7 +27,7 @@ class StakingCubit extends Cubit<StakingState> {
         emit(StakingState.error(message: '$l'));
       },
           (success) {
-        emit(StakingState.stakingInfoSuccess(success));
+            emit(StakingState.stakingInfoSuccess(success));
       },
     );
   }
@@ -40,7 +40,6 @@ class StakingCubit extends Cubit<StakingState> {
       },
           (success) {
         emit(const StakingState.stakingSuccess());
-        emit(const StakingState.loading());
           },
     );
   }
@@ -53,6 +52,7 @@ class StakingCubit extends Cubit<StakingState> {
       },
           (success) {
         emit(const StakingState.unStakingSuccess());
+        getStakingInfo();
       },
     );
   }
@@ -65,6 +65,7 @@ class StakingCubit extends Cubit<StakingState> {
       },
           (success) {
         emit(const StakingState.compoundSuccess());
+        getStakingInfo();
       },
     );
   }

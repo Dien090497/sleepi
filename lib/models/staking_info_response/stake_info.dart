@@ -5,16 +5,16 @@ part 'stake_info.g.dart';
 
 @JsonSerializable()
 class StakeInfo {
-  final int id;
-  final int userId;
-  final String totalStake;
-  final String totalReward;
-  final String mintingDiscount;
-  final String levelUpDiscount;
-  final String earningToken;
+  final int? id;
+  final int? userId;
+  final String? totalStake;
+  final String? totalReward;
+  final String? mintingDiscount;
+  final String? levelUpDiscount;
+  final String? earningToken;
   final String? symbol;
-  final String createdAt;
-  final String updatedAt;
+  final String? createdAt;
+  final String? updatedAt;
 
   StakeInfo({
     required this.id,
