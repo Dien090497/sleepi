@@ -14,7 +14,7 @@ class HomeState with _$HomeState {
       {required List<BedEntity> bedList,
       required int id,
       required int level,
-      required int durability,
+      required double durability,
       required int time,
       BedEntity? item,
       List<BedEntity>? itemList,
