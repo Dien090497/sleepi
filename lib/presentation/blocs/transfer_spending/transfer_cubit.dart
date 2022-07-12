@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:slee_fi/common/contract_addresses/contract_addresses.dart';
 import 'package:slee_fi/common/enum/enum.dart';
 import 'package:slee_fi/di/injector.dart';
+import 'package:slee_fi/l10n/locale_keys.g.dart';
 import 'package:slee_fi/presentation/blocs/transfer_spending/transfer_spending_state.dart';
 import 'package:slee_fi/schema/white_draw_token_schema/whit_draw_token_schema.dart';
 import 'package:slee_fi/usecase/approve_usecase.dart';
@@ -47,13 +48,13 @@ class TransferCubit extends Cubit<TransferSpendingState> {
     emit(const TransferSpendingState.loading());
     if (amount.isEmpty) {
       emit(const TransferSpendingState.error(
-          message: 'Invalid amount', typeError: 'invalid_amount'));
+          message: LocaleKeys.this_field_is_required, typeError: 'invalid_amount'));
     } else if (double.parse(amount) > balance) {
       emit(const TransferSpendingState.error(
-          message: 'Balance not enough', typeError: 'invalid_amount'));
+          message: LocaleKeys.insufficient_balance, typeError: 'invalid_amount'));
     } else if (amount == '0') {
       emit(const TransferSpendingState.error(
-          message: 'Amount input can not be zero ', typeError: 'amount_zero'));
+          message: LocaleKeys.amount_input_can_not_be_zero, typeError: 'amount_zero'));
     } else {
       if (spendingToWallet) {
         _estimateGasWithdraw(contractAddressTo, transferType.name);

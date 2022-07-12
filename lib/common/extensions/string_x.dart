@@ -85,7 +85,7 @@ extension StringX on String {
         .hasMatch(this);
     'result match email  $result'.log;
     if (!result) {
-      return LocaleKeys.invalid_email.tr();
+      return LocaleKeys.incorrect_email.tr();
     }
     return '';
   }
