@@ -74,11 +74,11 @@ class SendToExternalCubit extends Cubit<SendToExternalState> {
       return;
     }
     if (valueInEther == 0) {
-      emit(SendToExternalState.errorValueInEther(LocaleKeys.amount_input_can_not_be_zero.tr()));
+      emit(SendToExternalState.errorValueInEther(LocaleKeys.this_field_is_required.tr()));
       return;
     }
     if (valueInEther > balance) {
-      emit(SendToExternalState.errorValueInEther(LocaleKeys.insufficient_amount.tr()));
+      emit(SendToExternalState.errorValueInEther(LocaleKeys.insufficient_balance.tr()));
       return;
     }
     emit(const SendToExternalState.validatorSuccess());

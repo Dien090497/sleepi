@@ -65,9 +65,6 @@ class ModalItemList extends StatelessWidget {
                       (state is! HomeLoaded)) {
                     homeBloc.add(FetchItem());
                   }
-                  if(state is HomeLoaded){
-                    'data is  ${state.loadMoreItem}'.log;
-                  }
 
                   if (state is HomeLoaded && state.itemList != null) {
                     return SFGridView(

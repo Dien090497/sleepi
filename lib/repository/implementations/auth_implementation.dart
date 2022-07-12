@@ -51,7 +51,7 @@ class AuthImplementation extends IAuthRepository {
       _secureStorage.saveAccessToken(result.data.accessToken);
       _secureStorage.setRefreshToken(result.data.refreshToken);
       return Right(result.data.user.toEntity());
-    } on Exception catch (e) {
+    } catch (e) {
       return Left(FailureMessage.fromException(e));
     }
   }
@@ -78,7 +78,7 @@ class AuthImplementation extends IAuthRepository {
       final result = await _authDataSource.sendOTP(
           sendOTPParam.email, sendOTPParam.otpType);
       return Right(result);
-    } on Exception catch (e) {
+    } catch (e) {
       return Left(FailureMessage.fromException(e));
     }
   }
@@ -89,7 +89,7 @@ class AuthImplementation extends IAuthRepository {
     try {
       final result = await _authDataSource.verifyOTP(verifySchema);
       return Right(result);
-    } on Exception catch (e) {
+    } catch (e) {
       return Left(FailureMessage.fromException(e));
     }
   }
@@ -127,7 +127,7 @@ class AuthImplementation extends IAuthRepository {
     try {
       final result = await _authDataSource.getSettingActiveCode();
       return Right(result);
-    } on Exception catch (e) {
+    } catch (e) {
       return Left(FailureMessage.fromException(e));
     }
   }
@@ -139,7 +139,7 @@ class AuthImplementation extends IAuthRepository {
       final result = await _authDataSource.signUp(signUpSchema);
       _secureStorage.writeUser(result.data);
       return Right(result.data.toEntity());
-    } on Exception catch (e) {
+    } catch (e) {
       return Left(FailureMessage.fromException(e));
     }
   }
@@ -151,7 +151,7 @@ class AuthImplementation extends IAuthRepository {
       final result = await _authDataSource.createPassword(createPasswordSchema);
       'create success $result'.log;
       return Right(result);
-    } on Exception catch (e) {
+    } catch (e) {
       return Left(FailureMessage.fromException(e));
     }
   }
@@ -190,7 +190,7 @@ class AuthImplementation extends IAuthRepository {
     try {
       await _authDataSource.verifyActiveCode(activationCode);
       return const Right(true);
-    } on Exception catch (e) {
+    } catch (e) {
       return Left(FailureMessage.fromException(e));
     }
   }
@@ -224,4 +224,5 @@ class AuthImplementation extends IAuthRepository {
       return Left(FailureMessage('$e'));
     }
   }
+
 }
