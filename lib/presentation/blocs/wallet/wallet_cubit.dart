@@ -2,6 +2,7 @@ import 'package:dartz/dartz.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:slee_fi/common/const/const.dart';
+import 'package:slee_fi/common/extensions/string_x.dart';
 import 'package:slee_fi/di/injector.dart';
 import 'package:slee_fi/entities/token/token_entity.dart';
 import 'package:slee_fi/entities/wallet_info/wallet_info_entity.dart';
@@ -27,6 +28,7 @@ class WalletCubit extends Cubit<WalletState> {
   final _hasWalletUC = getIt<HasWalletUseCase>();
 
   Future<void> init() async {
+    'run to init'.log;
     final hasWalletRes = await _hasWalletUC.call(NoParams());
     final hasWallet = hasWalletRes.getOrElse(() => false);
     if (hasWallet) {

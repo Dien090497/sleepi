@@ -41,7 +41,7 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (_) => _homeBloc..add(const FetchData()),
+      create: (_) => _homeBloc..add(RefreshBed()),
       child: SafeArea(
         bottom: false,
         child: Column(
