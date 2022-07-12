@@ -122,7 +122,7 @@ class _NFTDetailScreenState extends State<NFTDetailScreen> {
           _showTransferDialog(
             context,
             nft: nft,
-            walletInfo: walletState.walletInfoEntity!,
+            walletInfo: walletState.walletInfoEntity,
             isToSpending: isToSpending,
           );
         },
@@ -143,9 +143,8 @@ class _NFTDetailScreenState extends State<NFTDetailScreen> {
     return BlocBuilder<WalletCubit, WalletState>(
       bloc: args.walletCubit,
       builder: (context, walletState) {
-        if (walletState is WalletStateLoaded &&
-            walletState.walletInfoEntity != null) {
-          nftDetailCubit.init(walletState.walletInfoEntity!, token);
+        if (walletState is WalletStateLoaded) {
+          nftDetailCubit.init(walletState.walletInfoEntity, token);
         }
 
         return BlocProvider(
@@ -199,14 +198,13 @@ class _NFTDetailScreenState extends State<NFTDetailScreen> {
                       children: [
                         Expanded(
                           child: BoxButtonWidget(
-                            onTap: walletState is WalletStateLoaded &&
-                                    walletState.walletInfoEntity != null
+                            onTap: walletState is WalletStateLoaded
                                 ? () => SFModalBottomSheet.show(
                                       context,
                                       0.7,
                                       ModalReceiveWallet(
                                         address: walletState
-                                            .walletInfoEntity!.address,
+                                            .walletInfoEntity.address,
                                         networkName:
                                             LocaleKeys.avalanche_wallet,
                                       ),
@@ -221,8 +219,7 @@ class _NFTDetailScreenState extends State<NFTDetailScreen> {
                           child: BoxButtonWidget(
                             onTap: () {
                               if (state is NftDetailLoaded &&
-                                  walletState is WalletStateLoaded &&
-                                  walletState.walletInfoEntity != null) {
+                                  walletState is WalletStateLoaded) {
                                 _showListNft(
                                   context,
                                   state,
@@ -239,8 +236,7 @@ class _NFTDetailScreenState extends State<NFTDetailScreen> {
                           child: BoxButtonWidget(
                             onTap: () {
                               if (state is NftDetailLoaded &&
-                                  walletState is WalletStateLoaded &&
-                                  walletState.walletInfoEntity != null) {
+                                  walletState is WalletStateLoaded) {
                                 _showListNft(
                                   context,
                                   state,

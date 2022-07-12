@@ -95,8 +95,7 @@ class _WalletScreenState extends State<WalletScreen>
                     controller: controller,
                     checkMoveNewTab: (currentIndex, i) {
                       if (i == 1) {
-                        if (state is WalletStateLoaded &&
-                            state.walletInfoEntity == null) {
+                        if (state is WalletStateLoaded) {
                           controller.index = 0;
                           _showCreateOrImportWallet().then((value) {
                             _showWarningDialog(value, context);
