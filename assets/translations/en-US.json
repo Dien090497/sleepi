@@ -417,7 +417,7 @@
   "email_already_exist" : "Email is already exists. Please try again",
   "otp_expired" : "OTP has expired. Please try again",
   "pleas_enter_contact_address": "Please enter contract address",
-  "invalid_address": "Invalid address",
+  "invalid_address": "Invalid address. Please try again",
   "amount_input_can_not_be_zero": "Amount input can not be zero",
   "wallet_already" : "Your account already has a wallet.",
   "insufficient_avax": "Insufficient Avax in ",
@@ -437,6 +437,6 @@
   "purple": "Purple",
   "incorrect_address": "Incorrect Address",
   "wallet_created_successfully": "Wallet created successfully",
-  "wallet_import_successfully": "Wallet import successfully",
+  "wallet_imported_successfully": "Wallet imported successfully",
   "insufficient_amount": "Insufficient amount"
 }

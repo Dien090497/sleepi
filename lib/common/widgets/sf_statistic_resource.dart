@@ -2,18 +2,19 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
+import 'package:slee_fi/common/utils/numberal_utils/numeral.dart';
 import 'package:slee_fi/common/widgets/sf_icon.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
 import 'package:slee_fi/presentation/blocs/user_bloc/user_bloc.dart';
 import 'package:slee_fi/presentation/blocs/user_bloc/user_state.dart';
 import 'package:slee_fi/resources/resources.dart';
-import 'package:numeral/numeral.dart';
 
 class SFStatisticResource extends StatelessWidget {
   const SFStatisticResource({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    var sizeWidth = MediaQuery.of(context).size.width;
     return Container(
       padding: const EdgeInsets.all(4),
       decoration: BoxDecoration(
@@ -27,13 +28,13 @@ class SFStatisticResource extends StatelessWidget {
             return Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                const SizedBox(width: 4),
+                 SizedBox(width: sizeWidth * 0.02),
                 ItemResource(
                     value: formatToken(listTokens[0].balance), url: listTokens[0].icon),
-                const SizedBox(width: 16),
+                 SizedBox(width: sizeWidth * 0.02),
                 ItemResource(
                     value: formatToken(listTokens[1].balance), url: listTokens[1].icon),
-                const SizedBox(width: 16),
+                 SizedBox(width: sizeWidth * 0.02),
                 ItemResource(
                     value: formatToken(listTokens[2].balance), url: listTokens[2].icon),
                 const SizedBox(width: 12),
@@ -49,7 +50,7 @@ class SFStatisticResource extends StatelessWidget {
 }
 
   String formatToken(num quantity){
-    return  Numeral(quantity).format(fractionDigits: 2);
+    return  Numeral(quantity).format();
   }
 
 class ItemResource extends StatelessWidget {

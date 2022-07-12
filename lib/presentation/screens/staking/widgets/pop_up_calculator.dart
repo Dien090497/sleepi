@@ -28,14 +28,14 @@ class PopUpCalculator extends StatelessWidget {
         const SizedBox(
           height: 24,
         ),
-        SFText(
-          keyText: LocaleKeys.flexible,
-          style: TextStyles.bold16Blue,
-          textAlign: TextAlign.start,
-        ),
-        const SizedBox(
-          height: 12.0,
-        ),
+        // SFText(
+        //   keyText: LocaleKeys.flexible,
+        //   style: TextStyles.bold16Blue,
+        //   textAlign: TextAlign.start,
+        // ),
+        // const SizedBox(
+        //   height: 12.0,
+        // ),
         SFText(
           keyText:
               "SLFT ${Localizations.localeOf(context).toLanguageTag().isJapanese ? '' : LocaleKeys.staked.tr()}",
@@ -140,7 +140,7 @@ class _AddDurationState extends State<AddDuration> {
   TextEditingController dayEditingController = TextEditingController();
   int? selectedIndex;
 
-  List<String> days = ["1", "7", "30", "60", "180"];
+  List<String> days = ["1", "7", "15", "30"];
 
   @override
   void dispose() {

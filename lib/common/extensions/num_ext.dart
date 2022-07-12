@@ -46,6 +46,26 @@ extension NumX on num {
     }
   }
 
+  String get formatBalanceTokenHeader {
+    if(this==0){
+      return 0.toStringAsFixed(2);
+    }else {
+      final balance = toDouble();
+      if (balance % 1 == 0) {
+        return balance.toStringAsFixed(0);
+      } else {
+        int index = balance.toString().indexOf('.');
+        if (balance.toString().length - index > 2) {
+          index += 2;
+        } else {
+          index = balance.toString().length;
+        }
+        return balance.toString().substring(0, index);
+      }
+
+    }
+  }
+
   String get formatBalanceToken {
     if(this==0){
       return 0.toStringAsFixed(2);
