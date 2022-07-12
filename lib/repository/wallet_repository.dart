@@ -10,6 +10,8 @@ import 'package:slee_fi/usecase/get_history_transaction_usecase.dart';
 abstract class IWalletRepository {
   Future<Either<Failure, WalletInfoEntity>> createWallet();
 
+  Future<Either<Failure, bool>> hasWallet();
+
   Future<Either<Failure, WalletInfoEntity>> currentWallet();
 
   Future<Either<Failure, WalletInfoEntity>> importWallet(String mnemonic);

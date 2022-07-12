@@ -65,28 +65,7 @@ class _TabBedsDetailState extends State<TabBedsDetail> {
                                   onBedTap: (bed) {
                                     Navigator.pushNamed(context, R.nftInfo,
                                         arguments: InfoIndividualParams(
-
-                                            /// TODO: remove example code
-                                            bed: BedEntity(
-                                                name: 'no name',
-                                                id: 1,
-                                                level: 0,
-                                                image: bed.image,
-                                                type: 'common',
-                                                contractAddress:
-                                                    '0x52839a88e9fdd2b137e32c65fec8e7b3f1f1ccc6',
-                                                quality: 'no ',
-                                                durability: 0,
-                                                isLock: 0,
-                                                bedMint: 5,
-                                                efficiency: 5,
-                                                luck: 5,
-                                                bonus: 5,
-                                                special: 5,
-                                                resilience: 0,
-                                                time: 2,
-                                                isMint: 0),
-                                            buy: true));
+                                            bed: bed.toEntity(), buy: true));
                                   }),
                           Center(
                             child: Column(

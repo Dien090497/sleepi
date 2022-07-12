@@ -11,9 +11,12 @@ import 'package:slee_fi/common/widgets/sf_card.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
 import 'package:slee_fi/l10n/locale_keys.g.dart';
 import 'package:slee_fi/models/market_place/market_place_model.dart';
+import 'package:slee_fi/models/pop_with_result.dart';
 import 'package:slee_fi/presentation/blocs/market_place/market_place_cubit.dart';
 import 'package:slee_fi/presentation/blocs/user_bloc/user_bloc.dart';
 import 'package:slee_fi/presentation/blocs/user_bloc/user_state.dart';
+import 'package:slee_fi/presentation/blocs/wallet/wallet_cubit.dart';
+import 'package:slee_fi/presentation/blocs/wallet/wallet_state.dart';
 import 'package:slee_fi/presentation/screens/market_place/widget/pop_up_confirm.dart';
 import 'package:slee_fi/presentation/screens/market_place/widget/pop_up_insufficient.dart';
 import 'package:slee_fi/presentation/screens/wallet_creation_warning/widgets/pop_up_avalanche_wallet.dart';
@@ -188,29 +191,26 @@ class PopUpItemMarketPlace extends StatelessWidget {
                 return SFButton(
                   text: LocaleKeys.confirm,
                   onPressed: () {
+                    final walletCubit = context.read<WalletCubit>();
+                    final walletState = walletCubit.state;
                     Navigator.pop(context);
                     if (userState is UserLoaded) {
-                      if (userState.userInfoEntity.wallet != null) {
-                        for (var element in userState.listTokens) {
-                          if (element.symbol.toLowerCase() == 'avax') {
-                            if (element.balance < double.parse(item.price)) {
-                              if (cubit.statusWallet) {
-                                _showDonWorryDialog(context, item);
-                              } else {
-                                _showCreateOrImportWallet(context)
-                                    .then((value) {
-                                  cubit.refreshStatusWallet();
-                                });
-                              }
+                      for (var element in userState.listTokens) {
+                        if (element.symbol.toLowerCase() == 'avax') {
+                          if (element.balance < double.parse(item.price)) {
+                            if (walletState is WalletNotExisted) {
+                              _showCreateOrImportWallet(context).then((value) {
+                                if (value is PopWithResults) {
+                                  walletCubit.importWallet(value.results);
+                                }
+                              });
                             } else {
-                              _showConfirmDialog(context, item);
+                              _showDonWorryDialog(context, item);
                             }
+                          } else {
+                            _showConfirmDialog(context, item);
                           }
                         }
-                      } else {
-                        _showCreateOrImportWallet(context).then((value) {
-                          cubit.refreshStatusWallet();
-                        });
                       }
                     }
                   },

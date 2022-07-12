@@ -16,11 +16,11 @@ class NftAttributeEntity with _$NftAttributeEntity {
     required int? time,
     required int? level,
     required int? bedMint,
-    required int? efficiency,
-    required int? durability,
-    required int? luck,
-    required int? bonus,
-    required int? special,
-    required int? resilience,
+    required double? efficiency,
+    required double? durability,
+    required double? luck,
+    required double? bonus,
+    required double? special,
+    required double? resilience,
   }) = _NftAttributeEntity;
 }

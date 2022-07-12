@@ -407,7 +407,8 @@ class WalletImplementation extends IWalletRepository {
           return Left(FailureMessage.fromException(e));
         }
       } else {
-        return const Left(FailureMessage(LocaleKeys.invalid_mnemonic_please_try_again));
+        return const Left(
+            FailureMessage(LocaleKeys.invalid_mnemonic_please_try_again));
       }
     } catch (e) {
       return Left(FailureMessage('$e'));
@@ -460,6 +461,15 @@ class WalletImplementation extends IWalletRepository {
         transactionList.add(model);
       }
       return Right(transactionList);
+    } catch (e) {
+      return Left(FailureMessage('$e'));
+    }
+  }
+
+  @override
+  Future<Either<Failure, bool>> hasWallet() async {
+    try {
+      return Right((await _isarDataSource.countWallet()) > 0);
     } catch (e) {
       return Left(FailureMessage('$e'));
     }

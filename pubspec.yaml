@@ -70,6 +70,8 @@ dependencies:
   focus_detector: ^2.0.1
   eth_sig_util: ^0.0.9
   top_snackbar_flutter: ^2.1.1
+  connectivity_plus: ^2.3.5
+  flutter_native_splash: ^2.2.4
 
 
 dev_dependencies:
@@ -84,6 +86,7 @@ dev_dependencies:
   copy_with_extension_gen: ^4.0.2
   test: ^1.21.4
   dart_code_metrics: ^4.16.0
+
 
 flutter_icons:
   android: "launcher_icon"

@@ -26,7 +26,6 @@ class WalletScreen extends StatefulWidget {
 
 class _WalletScreenState extends State<WalletScreen>
     with SingleTickerProviderStateMixin {
-  bool firstOpenWallet = true;
   final _pendingBloc = PendingBloc();
   final _historyBloc = PendingBloc();
   late final TabController controller = TabController(
@@ -59,26 +58,22 @@ class _WalletScreenState extends State<WalletScreen>
                 child: SFBackButton(),
               ),
               actions: [
-                BlocBuilder<WalletCubit, WalletState>(
-                  buildWhen: (previous, current) =>
-                      current is WalletStateLoaded,
-                  builder: (context, state) => GestureDetector(
-                    onTap: () async {
-                      if (state is WalletStateLoaded) {
-                        if (state.walletInfoEntity == null) {
-                          _showCreateOrImportWallet().then(
-                              (value) => _showWarningDialog(value, context));
-                          return;
-                        }
-                        Navigator.pushNamed(context, R.passcode,
-                            arguments:
-                                PasscodeArguments(route: R.settingWallet));
-                      }
-                    },
-                    child: const Padding(
-                      padding: EdgeInsets.only(right: 16.0, left: 12),
-                      child: SFIcon(Ics.icSetting),
-                    ),
+                GestureDetector(
+                  onTap: () async {
+                    var state = context.read<WalletCubit>().state;
+                    if (state is WalletNotExisted) {
+                      _showCreateOrImportWallet()
+                          .then((value) => _showWarningDialog(value, context));
+                      return;
+                    } else if (state is WalletNotOpen ||
+                        state is WalletStateLoaded) {
+                      Navigator.pushNamed(context, R.passcode,
+                          arguments: PasscodeArguments(route: R.settingWallet));
+                    }
+                  },
+                  child: const Padding(
+                    padding: EdgeInsets.only(right: 16.0, left: 12),
+                    child: SFIcon(Ics.icSetting),
                   ),
                 ),
               ],
@@ -91,12 +86,14 @@ class _WalletScreenState extends State<WalletScreen>
               title: BlocBuilder<WalletCubit, WalletState>(
                 buildWhen: (previous, current) => current is WalletStateLoaded,
                 builder: (context, state) {
+                  if (state is WalletStateInitial) {
+                    context.read<WalletCubit>().checkWallet();
+                  }
                   return WalletTabBar(
                     controller: controller,
                     checkMoveNewTab: (currentIndex, i) {
                       if (i == 1) {
-                        if (state is WalletStateLoaded &&
-                            state.walletInfoEntity == null) {
+                        if (state is WalletNotExisted) {
                           controller.index = 0;
                           _showCreateOrImportWallet().then((value) {
                             _showWarningDialog(value, context);
@@ -104,13 +101,13 @@ class _WalletScreenState extends State<WalletScreen>
                               controller.animateTo(1);
                             }
                           });
-                        } else if (firstOpenWallet) {
+                        } else if (state is WalletNotOpen) {
                           controller.animateTo(0);
                           Navigator.of(context)
                               .pushNamed(R.passcode)
                               .then((value) {
                             if (value == true) {
-                              firstOpenWallet = false;
+                              context.read<WalletCubit>().refresh();
                               controller.animateTo(1);
                             } else {
                               controller.animateTo(0);
@@ -153,7 +150,6 @@ class _WalletScreenState extends State<WalletScreen>
 
   void _showWarningDialog(dynamic value, BuildContext context) {
     if (value is PopWithResults) {
-      context.read<WalletCubit>().init();
       controller.animateTo(1);
       final cubit = context.read<WalletCubit>();
       cubit.importWallet(value.results);

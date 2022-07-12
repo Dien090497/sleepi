@@ -3,6 +3,7 @@ import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
 import 'package:slee_fi/l10n/locale_keys.g.dart';
+import 'package:slee_fi/presentation/blocs/market_place/market_place_cubit.dart';
 
 class SFGridView extends StatefulWidget {
   const SFGridView({
@@ -15,7 +16,7 @@ class SFGridView extends StatefulWidget {
     Key? key,
     this.onRefresh,
     this.isLoadMore = false,
-    this.onLoadMore,
+    this.onLoadMore, this.cubit,
   }) : super(key: key);
 
   final IndexedWidgetBuilder itemBuilder;
@@ -27,6 +28,7 @@ class SFGridView extends StatefulWidget {
   final EdgeInsets? padding;
   final Function? onRefresh;
   final Future<void>? onLoadMore;
+  final MarketPlaceCubit? cubit;
 
   @override
   State<SFGridView> createState() => _SFGridViewState();
@@ -42,10 +44,16 @@ class _SFGridViewState extends State<SFGridView> {
   }
 
   void _onLoadMore() {
-    if (widget.onLoadMore != null) {
-      widget.onLoadMore!.then((value) {
+    if(widget.cubit!=null){
+      widget.cubit!.loadMoreMarketPlace().then((value) {
         _refreshController.loadComplete();
       });
+    }else {
+      if (widget.onLoadMore != null) {
+        widget.onLoadMore!.then((value) {
+          _refreshController.loadComplete();
+        });
+      }
     }
   }
 

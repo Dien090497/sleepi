@@ -15,11 +15,11 @@ class AttributesWidget extends StatelessWidget {
     this.resilience = 0,
   }) : super(key: key);
 
-  final int efficiency;
-  final int luck;
-  final int bonus;
-  final int special;
-  final int resilience;
+  final double efficiency;
+  final double luck;
+  final double bonus;
+  final double special;
+  final double resilience;
 
   @override
   Widget build(BuildContext context) {

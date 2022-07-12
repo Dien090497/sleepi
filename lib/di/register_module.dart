@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:io';
 
+import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get_storage/get_storage.dart';
@@ -49,4 +50,6 @@ abstract class RegisterModule {
   GetStorage get getStorage => GetStorage();
 
   FlutterSecureStorage get flutterSecureStorage => const FlutterSecureStorage();
+
+  Connectivity get connectivity => Connectivity();
 }

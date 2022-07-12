@@ -17,12 +17,12 @@ class NftAttributeModel {
   final int? level;
   final int? bedMint;
   final int? isMint;
-  final int? efficiency;
-  final int? durability;
-  final int? luck;
-  final int? bonus;
-  final int? special;
-  final int? resilience;
+  final double? efficiency;
+  final double? durability;
+  final double? luck;
+  final double? bonus;
+  final double? special;
+  final double? resilience;
 
   NftAttributeModel(
     this.nftId,

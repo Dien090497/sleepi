@@ -1,8 +1,6 @@
-import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:jiffy/jiffy.dart';
 import 'package:slee_fi/common/widgets/background_widget.dart';
 import 'package:slee_fi/common/widgets/dismiss_keyboard_widget.dart';
 import 'package:slee_fi/common/widgets/loading_screen.dart';
@@ -15,13 +13,8 @@ import 'package:slee_fi/presentation/screens/login_signup/widgets/login_box.dart
 class LoginSignUpScreen extends StatelessWidget {
   const LoginSignUpScreen({Key? key}) : super(key: key);
 
-  void _initJiffy(BuildContext context) async {
-    await Jiffy.locale(context.locale.languageCode);
-  }
-
   @override
   Widget build(BuildContext context) {
-    _initJiffy(context);
     return BackgroundWidget(
       child: BlocProvider(
         create: (context) => SigInSignUpCubit(),

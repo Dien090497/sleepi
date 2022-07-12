@@ -11,6 +11,7 @@ import 'package:slee_fi/resources/resources.dart';
 import 'package:slee_fi/usecase/get_balance_for_tokens_usecase.dart';
 import 'package:slee_fi/usecase/get_history_transaction_usecase.dart';
 import 'package:slee_fi/usecase/get_nfts_balance_usecase.dart';
+import 'package:slee_fi/usecase/has_wallet_usecase.dart';
 import 'package:slee_fi/usecase/usecase.dart';
 import 'package:slee_fi/usecase/wallet/current_wallet_usecase.dart';
 
@@ -23,15 +24,26 @@ class WalletCubit extends Cubit<WalletState> {
   final _getHistoryTransactionUC = getIt<GetHistoryTransactionUseCase>();
   final _getBalanceForTokensUseCase = getIt<GetBalanceForTokensUseCase>();
   final _getNFTsBalanceUC = getIt<GetNFTsBalanceUseCase>();
+  final _hasWalletUC = getIt<HasWalletUseCase>();
 
-  Future<void> init() async {
+  Future<void> checkWallet() async {
+    final currentState = state;
+    if (currentState is! WalletStateLoaded) {
+      final hasWalletRes = await _hasWalletUC.call(NoParams());
+      final hasWallet = hasWalletRes.getOrElse(() => false);
+      if (hasWallet) {
+        emit(const WalletState.notOpen());
+      } else {
+        emit(const WalletState.notExisted());
+      }
+    }
+  }
+
+  Future<void> getWallet() async {
     emit(const WalletState.loading());
     final walletCall = await _currentWalletUC.call(NoParams());
     walletCall.fold(
-      (l) => emit(const WalletState.loaded(
-        walletInfoEntity: null,
-        tokenList: [],
-      )),
+      (l) => emit(WalletState.error('$l')),
       (r) => loadCurrentWallet(r),
     );
   }
@@ -43,12 +55,14 @@ class WalletCubit extends Cubit<WalletState> {
       emit(currentState.copyWith(isLoading: true));
       final walletCall = await _currentWalletUC.call(NoParams());
       walletCall.fold(
-        (l) => emit(
-          const WalletState.loaded(
-            walletInfoEntity: null,
-            tokenList: [],
-          ),
-        ),
+        (l) => emit(currentState.copyWith(isLoading: false)),
+        (r) => loadCurrentWallet(r),
+      );
+    } else {
+      emit(const WalletState.loading());
+      final walletCall = await _currentWalletUC.call(NoParams());
+      walletCall.fold(
+        (l) => emit(WalletState.error('$l')),
         (r) => loadCurrentWallet(r),
       );
     }
@@ -63,101 +77,86 @@ class WalletCubit extends Cubit<WalletState> {
     }
   }
 
-  void loadCurrentWallet(WalletInfoEntity? wallet) async {
+  void loadCurrentWallet(WalletInfoEntity wallet) async {
     final currentState = state;
-    if (wallet != null) {
-      final ParamsBalanceOfToken params;
-      final GetNFTsParams nfTsParams;
-      if (wallet.chainID == 43113) {
-        //TODO: Mock address for test net
-        params = ParamsBalanceOfToken(
-            addressContract: Const.listTokenAddressTestNet,
-            walletInfoEntity: wallet);
-        nfTsParams = GetNFTsParams(
-          wallet.address,
-          Const.listNFTAddressTestNet,
-        );
-      } else {
-        //TODO: Mock address for Main net
-        params = ParamsBalanceOfToken(
-            addressContract: Const.listTokenAddressesMainNet,
-            walletInfoEntity: wallet);
-        nfTsParams = GetNFTsParams(
-          wallet.address,
-          Const.listNFTAddressMainNet,
-        );
-      }
-      final results = await Future.wait([
-        _getBalanceForTokensUseCase.call(params),
-        _getNFTsBalanceUC.call(nfTsParams),
-      ]);
-      final Either<Failure, List<double>> tokenBalanceRes = cast(results.first);
-      final Either<Failure, List<BigInt>> nftBalanceRes = cast(results.last);
-      final List keyList = [
-        "SLFT",
-        "SLGT",
-        "AVAX",
-        "USDC",
-      ];
-      final List nftNames = [
-        LocaleKeys.beds.tr(),
-        LocaleKeys.jewels.tr(),
-        LocaleKeys.bed_box.tr(),
-        LocaleKeys.item.tr(),
-      ];
-      final List icons = [
-        Ics.icSlft,
-        Ics.icSlgt,
-        Ics.icAvax,
-        Ics.icUsdc,
-      ];
-      final List nftIcons = [
-        Ics.bed,
-        Ics.jewel,
-        Ics.icBedBoxes,
-        Ics.item,
-      ];
-      final tokenList = <TokenEntity>[];
-      final values = tokenBalanceRes.getOrElse(() => []);
-      final nfts = nftBalanceRes.getOrElse(() => []);
-      for (int i = 0; i < values.length; i++) {
-        final tokenEntity = TokenEntity(
-          address: params.addressContract[i],
-          displayName: keyList[i],
-          name: keyList[i],
-          symbol: keyList[i],
-          icon: icons[i],
-          balance: values[i],
-        );
-        tokenList.add(tokenEntity);
-      }
-      for (int i = 0; i < nfts.length; i++) {
-        final tokenEntity = TokenEntity(
-          address: nfTsParams.addresses[i],
-          displayName: nftNames[i],
-          name: nftNames[i],
-          symbol: nftNames[i],
-          icon: nftIcons[i],
-          balance: nfts[i].toDouble(),
-        );
-        tokenList.add(tokenEntity);
-      }
-      if (currentState is WalletStateLoaded) {
-        emit(currentState.copyWith(
-          walletInfoEntity: wallet,
-          tokenList: tokenList,
-          isLoading: false,
-        ));
-      } else {
-        emit(WalletState.loaded(
-          walletInfoEntity: wallet,
-          tokenList: tokenList,
-        ));
-      }
+    final ParamsBalanceOfToken params;
+    final GetNFTsParams nfTsParams;
+    final isAvaTestnet = wallet.chainID == 43113;
+    //TODO: Mock address for test net
+    params = ParamsBalanceOfToken(
+        addressContract: isAvaTestnet
+            ? Const.listTokenAddressTestNet
+            : Const.listTokenAddressMainNet,
+        walletInfoEntity: wallet);
+    nfTsParams = GetNFTsParams(
+      wallet.address,
+      isAvaTestnet ? Const.listNFTAddressTestNet : Const.listNFTAddressMainNet,
+    );
+    final results = await Future.wait([
+      _getBalanceForTokensUseCase.call(params),
+      _getNFTsBalanceUC.call(nfTsParams),
+    ]);
+    final Either<Failure, List<double>> tokenBalanceRes = cast(results.first);
+    final Either<Failure, List<BigInt>> nftBalanceRes = cast(results.last);
+    final List keyList = [
+      "SLFT",
+      "SLGT",
+      "AVAX",
+      "USDC",
+    ];
+    final List nftNames = [
+      LocaleKeys.beds.tr(),
+      LocaleKeys.jewels.tr(),
+      LocaleKeys.bed_box.tr(),
+      LocaleKeys.item.tr(),
+    ];
+    final List icons = [
+      Ics.icSlft,
+      Ics.icSlgt,
+      Ics.icAvax,
+      Ics.icUsdc,
+    ];
+    final List nftIcons = [
+      Ics.bed,
+      Ics.jewel,
+      Ics.icBedBoxes,
+      Ics.item,
+    ];
+    final tokenList = <TokenEntity>[];
+    final values = tokenBalanceRes.getOrElse(() => []);
+    final nfts = nftBalanceRes.getOrElse(() => []);
+    for (int i = 0; i < values.length; i++) {
+      final tokenEntity = TokenEntity(
+        address: params.addressContract[i],
+        displayName: keyList[i],
+        name: keyList[i],
+        symbol: keyList[i],
+        icon: icons[i],
+        balance: values[i],
+      );
+      tokenList.add(tokenEntity);
+    }
+    for (int i = 0; i < nfts.length; i++) {
+      final tokenEntity = TokenEntity(
+        address: nfTsParams.addresses[i],
+        displayName: nftNames[i],
+        name: nftNames[i],
+        symbol: nftNames[i],
+        icon: nftIcons[i],
+        balance: nfts[i].toDouble(),
+      );
+      tokenList.add(tokenEntity);
+    }
+    if (currentState is WalletStateLoaded) {
+      emit(currentState.copyWith(
+        walletInfoEntity: wallet,
+        tokenList: tokenList,
+        isLoading: false,
+      ));
     } else {
-      emit(const WalletState.loaded(
-        walletInfoEntity: null,
-        tokenList: [],
+      emit(WalletState.loaded(
+        walletInfoEntity: wallet,
+        tokenList: tokenList,
       ));
     }
   }
@@ -168,7 +167,7 @@ class WalletCubit extends Cubit<WalletState> {
 
     result.fold(
       (l) {
-        emit(WalletState.error(message: '$l'));
+        emit(WalletState.error('$l'));
       },
       (history) {
         emit(WalletState.getHistorySuccess(history));

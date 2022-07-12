@@ -27,7 +27,7 @@ class RemoveItem extends HomeEvent {
 
 class ChangeBed extends HomeEvent {
   final int level;
-  final int durability;
+  final double durability;
   final int time;
   final int id;
 
@@ -59,6 +59,11 @@ class FilterItemEvent extends HomeEvent {
 
   @override
   List<Object?> get props => [selected, level];
+}
+
+class LoadMoreItem extends HomeEvent {
+  @override
+  List<Object?> get props => [];
 }
 
 class LoadMoreBed extends HomeEvent {
