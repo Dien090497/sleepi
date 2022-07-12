@@ -119,7 +119,7 @@ class MiddleBed extends StatelessWidget {
                     const SizedBox(width: 8),
                     SFButton(
                       text:
-                          '${state is HomeLoaded ? state.durability : '100'}/100',
+                          '${state is HomeLoaded ? state.durability % 1 == 0 ? state.durability.toInt() : state.durability : '100'}/100',
                       textStyle: TextStyles.green14,
                       color: Colors.white.withOpacity(0.05),
                       radius: 50,

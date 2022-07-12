@@ -60,7 +60,8 @@ class BoxInfoWidget extends StatelessWidget {
               ),
               SizedBox(width: 8.w),
               SFButton(
-                text: '${bed.durability}/100',
+                text:
+                    '${bed.durability % 1 == 0 ? bed.durability.toInt() : bed.durability}/100',
                 textStyle: TextStyles.yellow14,
                 color: Colors.yellow.withOpacity(0.05),
                 radius: 50,

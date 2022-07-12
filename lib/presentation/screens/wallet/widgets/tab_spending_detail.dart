@@ -8,19 +8,23 @@ import 'package:slee_fi/common/extensions/string_x.dart';
 import 'package:slee_fi/common/routes/app_routes.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
+import 'package:slee_fi/common/widgets/sf_alert_dialog.dart';
 import 'package:slee_fi/common/widgets/sf_button_outlined.dart';
 import 'package:slee_fi/common/widgets/sf_card.dart';
 import 'package:slee_fi/common/widgets/sf_icon.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
 import 'package:slee_fi/entities/token/token_entity.dart';
 import 'package:slee_fi/l10n/locale_keys.g.dart';
+import 'package:slee_fi/models/pop_with_result.dart';
 import 'package:slee_fi/presentation/blocs/pending/pending_bloc.dart';
 import 'package:slee_fi/presentation/blocs/user_bloc/user_bloc.dart';
 import 'package:slee_fi/presentation/blocs/user_bloc/user_state.dart';
-import 'package:slee_fi/presentation/screens/passcode/passcode_screen.dart';
+import 'package:slee_fi/presentation/blocs/wallet/wallet_cubit.dart';
+import 'package:slee_fi/presentation/blocs/wallet/wallet_state.dart';
 import 'package:slee_fi/presentation/screens/transfer/transfer_screen.dart';
 import 'package:slee_fi/presentation/screens/wallet/widgets/pop_up_info_spending.dart';
 import 'package:slee_fi/presentation/screens/wallet/widgets/spending_detail_list.dart';
+import 'package:slee_fi/presentation/screens/wallet_creation_warning/widgets/pop_up_avalanche_wallet.dart';
 
 class TabSpendingDetail extends StatefulWidget {
   const TabSpendingDetail(
@@ -78,20 +82,7 @@ class _TabSpendingDetailState extends State<TabSpendingDetail> {
                             return Column(
                               children: tokenList
                                   .map((e) => SFCard(
-                                        onTap: () {
-                                          Navigator.pushNamed(
-                                            context,
-                                            R.passcode,
-                                            arguments: PasscodeArguments(
-                                              route: R.transfer,
-                                              argNewRoute: TransferScreenArg(
-                                                e,
-                                                true,
-                                                TransferType.token,
-                                              ),
-                                            ),
-                                          );
-                                        },
+                                        onTap: () => openTransfer(e),
                                         margin: const EdgeInsets.only(top: 8),
                                         child: ListTile(
                                           leading: Padding(
@@ -167,6 +158,44 @@ class _TabSpendingDetailState extends State<TabSpendingDetail> {
           // ),
         ],
       ),
+    );
+  }
+
+  openTransfer(TokenEntity e) {
+    final walletCubit = context.read<WalletCubit>();
+    final walletState = walletCubit.state;
+    if (walletState is WalletNotExisted) {
+      _showCreateOrImportWallet(context).then((value) {
+        if (value is PopWithResults) {
+          walletCubit.importWallet(value.results);
+        }
+      });
+    } else if (walletState is WalletNotOpen) {
+      Navigator.pushNamed(context, R.passcode).then((value) {
+        if (value == true) {
+          Navigator.pushNamed(context, R.transfer,
+              arguments: TransferScreenArg(
+                e,
+                true,
+                TransferType.token,
+              ));
+        }
+      });
+    } else if (walletState is WalletStateLoaded) {
+      Navigator.pushNamed(context, R.transfer,
+          arguments: TransferScreenArg(
+            e,
+            true,
+            TransferType.token,
+          ));
+    }
+  }
+
+  _showCreateOrImportWallet(BuildContext context) async {
+    return showCustomAlertDialog(
+      context,
+      barrierDismissible: false,
+      children: const PopUpAvalancheWallet(),
     );
   }
 }
