@@ -3,10 +3,12 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:slee_fi/common/enum/enum.dart';
 import 'package:slee_fi/common/extensions/string_x.dart';
 import 'package:slee_fi/di/injector.dart';
-import 'package:slee_fi/entities/bed_entity/bed_entity.dart';
+import 'package:slee_fi/entities/item_entity/item_entity.dart';
 import 'package:slee_fi/presentation/blocs/home/home_state.dart';
+import 'package:slee_fi/schema/param_filler_item_fetch/filter_item_chema.dart';
 import 'package:slee_fi/usecase/add_item_to_bed_usecase.dart';
 import 'package:slee_fi/usecase/fetch_bed_usecase.dart';
+import 'package:slee_fi/usecase/fetch_item_owner_usecase.dart';
 import 'package:slee_fi/usecase/remove_item_from_bed_usecase.dart';
 
 part 'home_event.dart';
@@ -19,54 +21,38 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     on<ChangeBed>(_changeBed);
     on<RefreshBed>(_onRefresh);
     on<FetchItem>(_fetchItems);
+    on<RefreshItem>(_refreshItems);
     on<FilterItemEvent>(_onFilterItem);
     on<LoadMoreBed>(_onLoadMoreBed);
     on<LoadMoreItem>(_loadMoreItem);
   }
 
+  final _fetchListBedUC = getIt<FetchBedUseCase>();
+  final _addItemToBedUC = getIt<AddItemToBedUseCase>();
+  final _removeItemFromBedUC = getIt<RemoveItemFromBedUseCase>();
+  final _fetchItemUC = getIt<FetchItemOwnerUseCase>();
+
   int currentBedId = -1;
-  List<String> itemFilter = [];
-  int level = 0;
   int _currentPageBed = 1;
-  int _currentPageItem = 1;
   final _limitItemPage = 10;
-
-  _loadMoreItem(LoadMoreItem event, Emitter<HomeState> emit) async {
-    final currentState = state;
-    if (currentState is HomeLoaded) {
-      'run to load more in bloc  ${currentState.loadMoreItem}'.log;
-    }
-    if (currentState is HomeLoaded &&
-        currentState.loadMoreItem &&
-        currentState.itemList?.isNotEmpty == true) {
-      var item = await _fetchListBedUC.call(FetchBedParam(
-          _currentPageItem, _limitItemPage, CategoryType.item, AttributeNFT.none));
-      item.fold(
-        (l) {
-          'on load more error  '.log;
-          emit(currentState.copyWith(loadMoreItem: false));
-        },
-        (r) {
-          'on load more success  ${r.length}  $_currentPageItem'.log;
-
-          _currentPageItem++;
-          var newList =
-              currentState.itemList! + r.map((e) => e.toEntity()).toList();
-          emit(currentState.copyWith(
-              itemList: newList, loadMoreItem: r.isNotEmpty));
-        },
-      );
-    }
-  }
+  late final FilterItemSchema filterItemParam = FilterItemSchema(
+    level: 0,
+    page: 1,
+    limit: _limitItemPage,
+    type: [],
+  );
 
   _onFilterItem(FilterItemEvent event, Emitter<HomeState> emit) {
-    level = event.level;
-    itemFilter = event.selected;
+    filterItemParam.page = 1;
+    filterItemParam.level = event.level;
+    filterItemParam.type = event.selected;
+    add(FetchItem());
+    'filter value is   ${filterItemParam.level}    ${filterItemParam.type}'.log;
   }
 
   _onLoadMoreBed(LoadMoreBed event, Emitter<HomeState> emit) async {
-    var result = await _fetchListBedUC.call(
-        FetchBedParam(_currentPageBed, _limitItemPage, CategoryType.bed, AttributeNFT.none));
+    var result = await _fetchListBedUC.call(FetchBedParam(
+        _currentPageBed, _limitItemPage, CategoryType.bed, AttributeNFT.none));
     result.fold((l) {
       final currentState = state;
       if (currentState is HomeLoaded) {
@@ -113,10 +99,6 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     add(const FetchData());
   }
 
-  final _fetchListBedUC = getIt<FetchBedUseCase>();
-  final _addItemToBedUC = getIt<AddItemToBedUseCase>();
-  final _removeItemFromBedUC = getIt<RemoveItemFromBedUseCase>();
-
   _changeBed(ChangeBed event, Emitter<HomeState> emit) {
     var currentState = state;
     if (currentState is HomeLoaded) {
@@ -131,8 +113,8 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
   }
 
   _fetchBed(FetchData fetchData, Emitter<HomeState> emit) async {
-    var result = await _fetchListBedUC.call(
-        FetchBedParam(_currentPageBed, _limitItemPage, CategoryType.bed, AttributeNFT.none));
+    var result = await _fetchListBedUC.call(FetchBedParam(
+        _currentPageBed, _limitItemPage, CategoryType.bed, AttributeNFT.none));
     result.fold(
       (l) {
         emit(const HomeState.loaded(
@@ -147,7 +129,6 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
       },
       (r) {
         _currentPageBed++;
-        'bed size is ${r.length}'.log;
         final currentState = state;
         if (r.isNotEmpty) {
           currentBedId = r.first.id;
@@ -177,21 +158,52 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     );
   }
 
+  _refreshItems(RefreshItem fetchItem, Emitter<HomeState> emit) async {
+    filterItemParam.page = 1;
+    'on refresh item   ${filterItemParam.page}'.log;
+    add(FetchItem());
+  }
+
   _fetchItems(FetchItem fetchItem, Emitter<HomeState> emit) async {
-    _currentPageItem = 1;
     final currentState = state;
     if (currentState is HomeLoaded) {
-      var item = await _fetchListBedUC.call(FetchBedParam(
-          _currentPageItem, _limitItemPage, CategoryType.item, AttributeNFT.none));
+      'page in fetch item  ${filterItemParam.page}'.log;
+      var item = await _fetchItemUC.call(filterItemParam);
       item.fold(
         (l) {
           emit(currentState.copyWith(itemList: [], loadMoreItem: false));
         },
         (r) {
-          _currentPageItem++;
+          filterItemParam.page++;
+          'new page is   ${filterItemParam.page}  ${r.length}'.log;
           emit(currentState.copyWith(
-              itemList: r.map((e) => e.toEntity()).toList(),
-              loadMoreBed: true));
+              itemList: r, loadMoreBed: true && r.length >= _limitItemPage));
+        },
+      );
+    }
+  }
+
+  _loadMoreItem(LoadMoreItem event, Emitter<HomeState> emit) async {
+    final currentState = state;
+
+    'page is load more ${filterItemParam.page}'.log;
+    if (currentState is HomeLoaded &&
+        currentState.loadMoreItem &&
+        currentState.itemList?.isNotEmpty == true) {
+      var item = await _fetchItemUC.call(filterItemParam);
+      item.fold(
+        (l) {
+          'on load more error  '.log;
+          emit(currentState.copyWith(loadMoreItem: false));
+        },
+        (r) {
+          'on load more item  ${r.length}'.log;
+
+          filterItemParam.page++;
+          var newList = currentState.itemList! + r;
+          emit(currentState.copyWith(
+              itemList: newList,
+              loadMoreItem: r.isNotEmpty && r.length >= filterItemParam.limit));
         },
       );
     }

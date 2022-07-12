@@ -27,8 +27,8 @@ mixin _$HomeState {
             double durability,
             int time,
             BedEntity? item,
-            List<BedEntity>? itemList,
-            BedEntity? selectedItem,
+            List<ItemEntity>? itemList,
+            ItemEntity? selectedItem,
             String errorMessage,
             ErrorType errorType,
             bool loadMoreBed,
@@ -49,8 +49,8 @@ mixin _$HomeState {
             double durability,
             int time,
             BedEntity? item,
-            List<BedEntity>? itemList,
-            BedEntity? selectedItem,
+            List<ItemEntity>? itemList,
+            ItemEntity? selectedItem,
             String errorMessage,
             ErrorType errorType,
             bool loadMoreBed,
@@ -71,8 +71,8 @@ mixin _$HomeState {
             double durability,
             int time,
             BedEntity? item,
-            List<BedEntity>? itemList,
-            BedEntity? selectedItem,
+            List<ItemEntity>? itemList,
+            ItemEntity? selectedItem,
             String errorMessage,
             ErrorType errorType,
             bool loadMoreBed,
@@ -180,8 +180,8 @@ class _$HomeInitial with DiagnosticableTreeMixin implements HomeInitial {
             double durability,
             int time,
             BedEntity? item,
-            List<BedEntity>? itemList,
-            BedEntity? selectedItem,
+            List<ItemEntity>? itemList,
+            ItemEntity? selectedItem,
             String errorMessage,
             ErrorType errorType,
             bool loadMoreBed,
@@ -205,8 +205,8 @@ class _$HomeInitial with DiagnosticableTreeMixin implements HomeInitial {
             double durability,
             int time,
             BedEntity? item,
-            List<BedEntity>? itemList,
-            BedEntity? selectedItem,
+            List<ItemEntity>? itemList,
+            ItemEntity? selectedItem,
             String errorMessage,
             ErrorType errorType,
             bool loadMoreBed,
@@ -230,8 +230,8 @@ class _$HomeInitial with DiagnosticableTreeMixin implements HomeInitial {
             double durability,
             int time,
             BedEntity? item,
-            List<BedEntity>? itemList,
-            BedEntity? selectedItem,
+            List<ItemEntity>? itemList,
+            ItemEntity? selectedItem,
             String errorMessage,
             ErrorType errorType,
             bool loadMoreBed,
@@ -344,8 +344,8 @@ class _$HomeLoading with DiagnosticableTreeMixin implements HomeLoading {
             double durability,
             int time,
             BedEntity? item,
-            List<BedEntity>? itemList,
-            BedEntity? selectedItem,
+            List<ItemEntity>? itemList,
+            ItemEntity? selectedItem,
             String errorMessage,
             ErrorType errorType,
             bool loadMoreBed,
@@ -369,8 +369,8 @@ class _$HomeLoading with DiagnosticableTreeMixin implements HomeLoading {
             double durability,
             int time,
             BedEntity? item,
-            List<BedEntity>? itemList,
-            BedEntity? selectedItem,
+            List<ItemEntity>? itemList,
+            ItemEntity? selectedItem,
             String errorMessage,
             ErrorType errorType,
             bool loadMoreBed,
@@ -394,8 +394,8 @@ class _$HomeLoading with DiagnosticableTreeMixin implements HomeLoading {
             double durability,
             int time,
             BedEntity? item,
-            List<BedEntity>? itemList,
-            BedEntity? selectedItem,
+            List<ItemEntity>? itemList,
+            ItemEntity? selectedItem,
             String errorMessage,
             ErrorType errorType,
             bool loadMoreBed,
@@ -465,8 +465,8 @@ abstract class _$$HomeLoadedCopyWith<$Res> {
       double durability,
       int time,
       BedEntity? item,
-      List<BedEntity>? itemList,
-      BedEntity? selectedItem,
+      List<ItemEntity>? itemList,
+      ItemEntity? selectedItem,
       String errorMessage,
       ErrorType errorType,
       bool loadMoreBed,
@@ -474,7 +474,7 @@ abstract class _$$HomeLoadedCopyWith<$Res> {
       bool loading});
 
   $BedEntityCopyWith<$Res>? get item;
-  $BedEntityCopyWith<$Res>? get selectedItem;
+  $ItemEntityCopyWith<$Res>? get selectedItem;
 }
 
 /// @nodoc
@@ -531,11 +531,11 @@ class __$$HomeLoadedCopyWithImpl<$Res> extends _$HomeStateCopyWithImpl<$Res>
       itemList: itemList == freezed
           ? _value._itemList
           : itemList // ignore: cast_nullable_to_non_nullable
-              as List<BedEntity>?,
+              as List<ItemEntity>?,
       selectedItem: selectedItem == freezed
           ? _value.selectedItem
           : selectedItem // ignore: cast_nullable_to_non_nullable
-              as BedEntity?,
+              as ItemEntity?,
       errorMessage: errorMessage == freezed
           ? _value.errorMessage
           : errorMessage // ignore: cast_nullable_to_non_nullable
@@ -571,12 +571,12 @@ class __$$HomeLoadedCopyWithImpl<$Res> extends _$HomeStateCopyWithImpl<$Res>
   }
 
   @override
-  $BedEntityCopyWith<$Res>? get selectedItem {
+  $ItemEntityCopyWith<$Res>? get selectedItem {
     if (_value.selectedItem == null) {
       return null;
     }
 
-    return $BedEntityCopyWith<$Res>(_value.selectedItem!, (value) {
+    return $ItemEntityCopyWith<$Res>(_value.selectedItem!, (value) {
       return _then(_value.copyWith(selectedItem: value));
     });
   }
@@ -592,7 +592,7 @@ class _$HomeLoaded with DiagnosticableTreeMixin implements HomeLoaded {
       required this.durability,
       required this.time,
       this.item,
-      final List<BedEntity>? itemList,
+      final List<ItemEntity>? itemList,
       this.selectedItem,
       this.errorMessage = '',
       this.errorType = ErrorType.none,
@@ -619,9 +619,9 @@ class _$HomeLoaded with DiagnosticableTreeMixin implements HomeLoaded {
   final int time;
   @override
   final BedEntity? item;
-  final List<BedEntity>? _itemList;
+  final List<ItemEntity>? _itemList;
   @override
-  List<BedEntity>? get itemList {
+  List<ItemEntity>? get itemList {
     final value = _itemList;
     if (value == null) return null;
     // ignore: implicit_dynamic_type
@@ -629,7 +629,7 @@ class _$HomeLoaded with DiagnosticableTreeMixin implements HomeLoaded {
   }
 
   @override
-  final BedEntity? selectedItem;
+  final ItemEntity? selectedItem;
   @override
   @JsonKey()
   final String errorMessage;
@@ -730,8 +730,8 @@ class _$HomeLoaded with DiagnosticableTreeMixin implements HomeLoaded {
             double durability,
             int time,
             BedEntity? item,
-            List<BedEntity>? itemList,
-            BedEntity? selectedItem,
+            List<ItemEntity>? itemList,
+            ItemEntity? selectedItem,
             String errorMessage,
             ErrorType errorType,
             bool loadMoreBed,
@@ -768,8 +768,8 @@ class _$HomeLoaded with DiagnosticableTreeMixin implements HomeLoaded {
             double durability,
             int time,
             BedEntity? item,
-            List<BedEntity>? itemList,
-            BedEntity? selectedItem,
+            List<ItemEntity>? itemList,
+            ItemEntity? selectedItem,
             String errorMessage,
             ErrorType errorType,
             bool loadMoreBed,
@@ -806,8 +806,8 @@ class _$HomeLoaded with DiagnosticableTreeMixin implements HomeLoaded {
             double durability,
             int time,
             BedEntity? item,
-            List<BedEntity>? itemList,
-            BedEntity? selectedItem,
+            List<ItemEntity>? itemList,
+            ItemEntity? selectedItem,
             String errorMessage,
             ErrorType errorType,
             bool loadMoreBed,
@@ -882,8 +882,8 @@ abstract class HomeLoaded implements HomeState {
       required final double durability,
       required final int time,
       final BedEntity? item,
-      final List<BedEntity>? itemList,
-      final BedEntity? selectedItem,
+      final List<ItemEntity>? itemList,
+      final ItemEntity? selectedItem,
       final String errorMessage,
       final ErrorType errorType,
       final bool loadMoreBed,
@@ -896,8 +896,8 @@ abstract class HomeLoaded implements HomeState {
   double get durability => throw _privateConstructorUsedError;
   int get time => throw _privateConstructorUsedError;
   BedEntity? get item => throw _privateConstructorUsedError;
-  List<BedEntity>? get itemList => throw _privateConstructorUsedError;
-  BedEntity? get selectedItem => throw _privateConstructorUsedError;
+  List<ItemEntity>? get itemList => throw _privateConstructorUsedError;
+  ItemEntity? get selectedItem => throw _privateConstructorUsedError;
   String get errorMessage => throw _privateConstructorUsedError;
   ErrorType get errorType => throw _privateConstructorUsedError;
   bool get loadMoreBed => throw _privateConstructorUsedError;
@@ -989,8 +989,8 @@ class _$HomeError with DiagnosticableTreeMixin implements HomeError {
             double durability,
             int time,
             BedEntity? item,
-            List<BedEntity>? itemList,
-            BedEntity? selectedItem,
+            List<ItemEntity>? itemList,
+            ItemEntity? selectedItem,
             String errorMessage,
             ErrorType errorType,
             bool loadMoreBed,
@@ -1014,8 +1014,8 @@ class _$HomeError with DiagnosticableTreeMixin implements HomeError {
             double durability,
             int time,
             BedEntity? item,
-            List<BedEntity>? itemList,
-            BedEntity? selectedItem,
+            List<ItemEntity>? itemList,
+            ItemEntity? selectedItem,
             String errorMessage,
             ErrorType errorType,
             bool loadMoreBed,
@@ -1039,8 +1039,8 @@ class _$HomeError with DiagnosticableTreeMixin implements HomeError {
             double durability,
             int time,
             BedEntity? item,
-            List<BedEntity>? itemList,
-            BedEntity? selectedItem,
+            List<ItemEntity>? itemList,
+            ItemEntity? selectedItem,
             String errorMessage,
             ErrorType errorType,
             bool loadMoreBed,

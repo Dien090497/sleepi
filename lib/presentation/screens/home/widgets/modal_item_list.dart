@@ -73,7 +73,7 @@ class ModalItemList extends StatelessWidget {
                       count: state.itemList!.length,
                       childAspectRatio: 1,
                       onLoadMore: _onLoadMore(),
-                      onRefresh: () => homeBloc.add(FetchItem()),
+                      onRefresh: () => homeBloc.add(RefreshItem()),
                       itemBuilder: (context, i) {
                         final item = state.itemList![i];
                         return GestureDetector(

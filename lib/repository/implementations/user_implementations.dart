@@ -4,6 +4,7 @@ import 'package:slee_fi/common/extensions/string_x.dart';
 import 'package:slee_fi/datasources/local/secure_storage.dart';
 import 'package:slee_fi/datasources/remote/auth_datasource/auth_datasource.dart';
 import 'package:slee_fi/entities/active_code/active_code_entity.dart';
+import 'package:slee_fi/entities/item_entity/item_entity.dart';
 import 'package:slee_fi/failures/failure.dart';
 import 'package:slee_fi/models/bed_model/beb_model.dart';
 import 'package:slee_fi/models/global_config_response/global_config_response.dart';
@@ -115,17 +116,14 @@ class UserImplementation extends IUserRepository {
   Future<Either<FailureMessage, List<BedModel>>> fetchListBed(
       FetchBedParam fetchBedParam) async {
     try {
-      'fetch nft ${fetchBedParam.categoryId.type}'.log;
       var result = await _authDataSource.getNftByOwner(
           fetchBedParam.limit,
           fetchBedParam.page,
           fetchBedParam.categoryId.type,
           fetchBedParam.attributeNFT);
 
-      's ${result.toJson()}    '.log;
       return Right(result.list);
     } catch (e) {
-      'on catch eception '.log;
       return Left(FailureMessage.fromException(e));
     }
   }
@@ -157,13 +155,13 @@ class UserImplementation extends IUserRepository {
   }
 
   @override
-  Future<Either<FailureMessage, dynamic>> fetchItemOwner(
+  Future<Either<FailureMessage, List<ItemEntity>>> fetchItemOwner(
       FilterItemSchema filterItemSchema) async {
-    try {
+    // try {
       var result = await _authDataSource.fetchItemOwner(filterItemSchema);
-      return Right(result);
-    } catch (e) {
-      return Left(FailureMessage.fromException(e));
-    }
+      return Right(result.list.map((e) => e.toEntity()).toList());
+    // } catch (e) {
+    //   return Left(FailureMessage.fromException(e));
+    // }
   }
 }
