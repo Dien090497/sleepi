@@ -1,22 +1,34 @@
 
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-import 'data_health.dart';
-
 part 'data_health_schema.g.dart';
 @JsonSerializable()
 class DataHealthSchema {
   
-  List<DataHealth>? listData;
+  int? trackingId;
+  String? dataType;
+  String? value;
+  String? platformType;
+  String? unit;
+  String? dateFrom;
+  String? dateTo;
+  String? sourceName;
+  String? sourceId;
   
   DataHealthSchema({
-    this.listData,
+    this.trackingId,
+    this.dataType,
+    this.value,
+    this.platformType,
+    this.unit,
+    this.dateFrom,
+    this.dateTo,
+    this.sourceName,
+    this.sourceId,
   });
 
   factory DataHealthSchema.fromJson(Map<String, dynamic> json) =>
       _$DataHealthSchemaFromJson(json);
 
   Map<String, dynamic> toJson() => _$DataHealthSchemaToJson(this);
-
 }
-
