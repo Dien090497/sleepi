@@ -386,5 +386,7 @@
   "otp_expired" : "OTP has expired. Please try again",
   "invalid_code": "Invalid code. Please try again!",
   "incorrect_address": "Incorrect Address",
-  "insufficient_amount": "Insufficient amount"
+  "insufficient_amount": "Insufficient amount",
+  "invalid_address": "Invalid address. Please try again"
+
 }
