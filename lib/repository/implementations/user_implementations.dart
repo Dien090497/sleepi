@@ -12,6 +12,7 @@ import 'package:slee_fi/models/token_spending/token_spending.dart';
 import 'package:slee_fi/models/withdraw_history_response/withdraw_history_response.dart';
 import 'package:slee_fi/repository/user_repository.dart';
 import 'package:slee_fi/schema/change_password_schema/change_password_schema.dart';
+import 'package:slee_fi/schema/param_filler_item_fetch/filter_item_chema.dart';
 import 'package:slee_fi/schema/white_draw_token_schema/whit_draw_token_schema.dart';
 import 'package:slee_fi/usecase/add_item_to_bed_usecase.dart';
 import 'package:slee_fi/usecase/estimate_gas_withdraw.dart';
@@ -31,7 +32,7 @@ class UserImplementation extends IUserRepository {
     try {
       final result = await _authDataSource.changePassword(changePasswordSchema);
       return Right(result);
-    } on Exception catch (e) {
+    } catch (e) {
       return Left(FailureMessage.fromException(e));
     }
   }
@@ -42,7 +43,7 @@ class UserImplementation extends IUserRepository {
     try {
       final result = await _authDataSource.fetchActivationCodes();
       return Right(result.data.map((e) => e.toEntity()).toList());
-    } on Exception catch (e) {
+    } catch (e) {
       return Left(FailureMessage.fromException(e));
     }
   }
@@ -53,7 +54,7 @@ class UserImplementation extends IUserRepository {
     try {
       final result = await _authDataSource.fetchBalanceSpending(userID);
       return Right(result);
-    } on Exception catch (e) {
+    } catch (e) {
       return Left(FailureMessage.fromException(e));
     }
   }
@@ -65,7 +66,7 @@ class UserImplementation extends IUserRepository {
       final result =
           await _authDataSource.transferTokenToWallet(whitDrawTokenSchema);
       return Right(result);
-    } on Exception catch (e) {
+    } catch (e) {
       return Left(FailureMessage.fromException(e));
     }
   }
@@ -82,30 +83,6 @@ class UserImplementation extends IUserRepository {
       return Left(FailureMessage('$e'));
     }
   }
-
-  // @override
-  // Future<Either<FailureMessage, dynamic>> fetchHistoryList(
-  //     LoadMoreParams loadMoreParams) async {
-  //   try {
-  //     final result = await _authDataSource.fetchSpendingHistory(
-  //         loadMoreParams.userId, loadMoreParams.limit, loadMoreParams.page);
-  //     return Right(result);
-  //   } on Exception catch (e) {
-  //     return Left(FailureMessage.fromException(e));
-  //   }
-  // }
-  //
-  // @override
-  // Future<Either<FailureMessage, dynamic>> fetchPendingList(
-  //     LoadMoreParams loadMoreParams) async {
-  //   try {
-  //     final result = await _authDataSource.fetchSpendingHistory(
-  //         loadMoreParams.userId, loadMoreParams.limit, loadMoreParams.page);
-  //     return Right(result);
-  //   } on Exception catch (e) {
-  //     return Left(FailureMessage.fromException(e));
-  //   }
-  // }
 
   @override
   Future<Either<FailureMessage, WithdrawHistoryResponse>> withdrawHistory(
@@ -147,7 +124,8 @@ class UserImplementation extends IUserRepository {
 
       's ${result.toJson()}    '.log;
       return Right(result.list);
-    } on Exception catch (e) {
+    } catch (e) {
+      'on catch eception '.log;
       return Left(FailureMessage.fromException(e));
     }
   }
@@ -160,7 +138,7 @@ class UserImplementation extends IUserRepository {
           addItemToBedParam.bedId, addItemToBedParam.itemId);
 
       return Right(result);
-    } on Exception catch (e) {
+    } catch (e) {
       return Left(FailureMessage.fromException(e));
     }
   }
@@ -173,7 +151,18 @@ class UserImplementation extends IUserRepository {
           addItemToBedParam.bedId, addItemToBedParam.itemId);
 
       return Right(result);
-    } on Exception catch (e) {
+    } catch (e) {
+      return Left(FailureMessage.fromException(e));
+    }
+  }
+
+  @override
+  Future<Either<FailureMessage, dynamic>> fetchItemOwner(
+      FilterItemSchema filterItemSchema) async {
+    try {
+      var result = await _authDataSource.fetchItemOwner(filterItemSchema);
+      return Right(result);
+    } catch (e) {
       return Left(FailureMessage.fromException(e));
     }
   }

@@ -30,6 +30,7 @@ import 'package:slee_fi/schema/buy_nft_schema/buy_nft_schema.dart';
 import 'package:slee_fi/schema/change_password_schema/change_password_schema.dart';
 import 'package:slee_fi/schema/create_password_schema/create_password_schema.dart';
 import 'package:slee_fi/schema/market/market_schema.dart';
+import 'package:slee_fi/schema/param_filler_item_fetch/filter_item_chema.dart';
 import 'package:slee_fi/schema/refresh_token_schema/refresh_token_schema.dart';
 import 'package:slee_fi/schema/sign_in_schema/sign_in_schema.dart';
 import 'package:slee_fi/schema/sign_up_schema/sign_up_schema.dart';
@@ -187,6 +188,9 @@ abstract class AuthDataSource {
     @Query('bedId') int bedId,
     @Query('itemId') int itemId,
   );
+
+  @POST('/nft-attributes/item-by-owner')
+  Future<dynamic> fetchItemOwner(@Body() FilterItemSchema filterItemSchema);
 
   @POST('/stacking/unstacking')
   Future<dynamic> unStacking();

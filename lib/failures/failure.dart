@@ -12,7 +12,7 @@ class FailureMessage extends Failure {
 
   const FailureMessage(this.msg);
 
-  factory FailureMessage.fromException(Exception e) {
+  factory FailureMessage.fromException(e) {
     try {
       if (e is DioError) {
         'error from server   ${e.response?.data}'.log;
@@ -27,7 +27,6 @@ class FailureMessage extends Failure {
         }
       }
     } catch (_) {}
-    'error is $e'.log;
 
     return const FailureMessage(
         'Error! An error occurred. Please try again later');
