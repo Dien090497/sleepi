@@ -19,6 +19,8 @@ class PendingBloc extends Bloc<PendingEvent, PendingState> {
   late AttributeWithdraw attributeWithdraw;
   late int userId;
 
+  final _limit = 10;
+
   bool _loading = false;
 
   _onInit(PendingInit event, Emitter<PendingState> emit) {
@@ -45,7 +47,7 @@ class PendingBloc extends Bloc<PendingEvent, PendingState> {
       final result = await _fetchPendingUC.call(WithdrawParam(
         attributeWithdraw: attributeWithdraw,
         page: _currentPage,
-        limit: 10,
+        limit: _limit,
       ));
       result.fold(
         (l) {
@@ -58,7 +60,7 @@ class PendingBloc extends Bloc<PendingEvent, PendingState> {
           emit(state.copyWith(
               status: PendingStatus.success,
               list: state.list + newList,
-              hasReachedMax: newList.isEmpty));
+              hasReachedMax: newList.isEmpty || r.data.length < _limit));
           _loading = false;
         },
       );
