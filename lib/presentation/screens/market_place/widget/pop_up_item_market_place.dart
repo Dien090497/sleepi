@@ -198,14 +198,14 @@ class PopUpItemMarketPlace extends StatelessWidget {
                       for (var element in userState.listTokens) {
                         if (element.symbol.toLowerCase() == 'avax') {
                           if (element.balance < double.parse(item.price)) {
-                            if (walletState is WalletStateLoaded) {
-                              _showDonWorryDialog(context, item);
-                            } else if (walletState is WalletNotExisted) {
+                            if (walletState is WalletNotExisted) {
                               _showCreateOrImportWallet(context).then((value) {
                                 if (value is PopWithResults) {
                                   walletCubit.importWallet(value.results);
                                 }
                               });
+                            } else {
+                              _showDonWorryDialog(context, item);
                             }
                           } else {
                             _showConfirmDialog(context, item);
