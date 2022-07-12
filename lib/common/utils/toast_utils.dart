@@ -35,4 +35,16 @@ class ToastUtils {
           return child;
         });
   }
+
+  static showToastBottom (String message) {
+    return Fluttertoast.showToast(
+        msg: message,
+        toastLength: Toast.LENGTH_SHORT,
+        gravity: ToastGravity.BOTTOM,
+        timeInSecForIosWeb: 2,
+        // backgroundColor: Colors.red,
+        // textColor: Colors.white,
+        fontSize: 14.0
+    );
+  }
 }

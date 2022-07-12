@@ -120,7 +120,7 @@ class PopUpAvalancheWallet extends StatelessWidget {
                                 .then((value) {
                               if (value is PopWithResults) {
                                 Navigator.pop(context, value);
-                                showSignUpSuccess(context, LocaleKeys.wallet_import_successfully);
+                                showSignUpSuccess(context, LocaleKeys.wallet_imported_successfully);
                               }
                             });
                           }));

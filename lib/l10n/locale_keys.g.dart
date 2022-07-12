@@ -439,7 +439,7 @@ abstract class  LocaleKeys {
   static const purple = 'purple';
   static const incorrect_address = 'incorrect_address';
   static const wallet_created_successfully = 'wallet_created_successfully';
-  static const wallet_import_successfully = 'wallet_import_successfully';
+  static const wallet_imported_successfully = 'wallet_imported_successfully';
   static const insufficient_amount = 'insufficient_amount';
 
 }

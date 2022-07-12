@@ -1,10 +1,11 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:slee_fi/common/enum/enum.dart';
 import 'package:slee_fi/common/extensions/num_ext.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
+import 'package:slee_fi/common/utils/toast_utils.dart';
 import 'package:slee_fi/common/widgets/background_widget.dart';
 import 'package:slee_fi/common/widgets/dismiss_keyboard_widget.dart';
 import 'package:slee_fi/common/widgets/sf_app_bar.dart';
@@ -14,7 +15,6 @@ import 'package:slee_fi/common/widgets/sf_card.dart';
 import 'package:slee_fi/common/widgets/sf_dialog.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
 import 'package:slee_fi/common/widgets/sf_textfield.dart';
-import 'package:slee_fi/common/widgets/snack_bar.dart';
 import 'package:slee_fi/l10n/locale_keys.g.dart';
 import 'package:slee_fi/presentation/blocs/staking/staking_cubit.dart';
 import 'package:slee_fi/presentation/blocs/staking/staking_state.dart';
@@ -60,10 +60,7 @@ class _DepositSlftScreenState extends State<DepositSlftScreen> {
       child: BlocConsumer<StakingCubit, StakingState>(
         listener: (context, state) {
           if (state is StakingStateError) {
-            _showError(
-                context: context,
-                message: state.message,
-                messageType: MessageType.error);
+            ToastUtils.showToastBottom(state.message);
           }
           if(state is StakingStateStakingSuccess){
             Navigator.pop(context, true);
@@ -148,7 +145,14 @@ class _DepositSlftScreenState extends State<DepositSlftScreen> {
                                             child: SFTextField(
                                               controller: _amountEditingController,
                                               showLabel: false,
-                                              textInputType: TextInputType.number,
+                                              inputFormatters: [
+                                                FilteringTextInputFormatter
+                                                    .allow(RegExp(
+                                                    r'^\d{1,}[.,]?\d{0,6}')),
+                                              ],
+                                              textInputType:
+                                              const TextInputType.numberWithOptions(
+                                                  decimal: true),
                                               onChanged: (value) {
                                                 if(value.isNotEmpty) {
                                                  setState((){
@@ -243,9 +247,3 @@ class _DepositSlftScreenState extends State<DepositSlftScreen> {
   }
 }
 
-void _showError(
-    {required BuildContext context,
-      required String message,
-      required MessageType messageType}) {
-  showCustomSnackBar(context: context, msg: message);
-}

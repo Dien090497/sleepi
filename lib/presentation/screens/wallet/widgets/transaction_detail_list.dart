@@ -15,7 +15,7 @@ import 'package:slee_fi/presentation/blocs/wallet/wallet_state.dart';
 import 'package:slee_fi/resources/resources.dart';
 import 'package:slee_fi/usecase/get_history_transaction_usecase.dart';
 
-class TransactionDetailList extends StatelessWidget {
+class TransactionDetailList extends StatefulWidget {
   const TransactionDetailList(
       {this.typeHistory, this.isTransactionRecord = false, Key? key})
       : super(key: key);
@@ -24,11 +24,49 @@ class TransactionDetailList extends StatelessWidget {
   final HistoryTransactionParams? typeHistory;
 
   @override
+  State<TransactionDetailList> createState() => _TransactionDetailListState();
+}
+
+class _TransactionDetailListState extends State<TransactionDetailList> {
+  ScrollController controller = ScrollController();
+  int currentPage = 0;
+  int total = 0;
+  int historyLength = 0;
+  bool isLoading = false;
+  bool isLoadMore = false;
+
+  Future scrollListener() async {
+    if (controller.position.pixels <
+        (controller.position.maxScrollExtent * .90)) {
+      await loadMore();
+    }
+  }
+
+  Future loadMore() async {
+    if (isLoadMore) return;
+    setState(() => isLoadMore = true);
+    WalletCubit().getHistoryTransaction(widget.typeHistory!);
+    setState(() => isLoadMore = false);
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    controller =  ScrollController()..addListener(scrollListener);
+  }
+
+  @override
+  void dispose() {
+    controller.removeListener(scrollListener);
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     final dateUtils = getIt<DateTimeUtils>();
 
     return BlocProvider(
-      create: (_) => WalletCubit()..getHistoryTransaction(typeHistory!),
+      create: (_) => WalletCubit()..getHistoryTransaction(widget.typeHistory!),
       child: BlocBuilder<WalletCubit, WalletState>(
         builder: (context, state) {
           return Container(
@@ -45,6 +83,7 @@ class TransactionDetailList extends StatelessWidget {
                     ? SafeArea(
                         top: false,
                         child: ListView.builder(
+                          controller: controller,
                           itemCount: state.list.length,
                           physics: const ClampingScrollPhysics(),
                           shrinkWrap: true,

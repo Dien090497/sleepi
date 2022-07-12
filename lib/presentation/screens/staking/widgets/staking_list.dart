@@ -9,6 +9,7 @@ import 'package:slee_fi/common/extensions/string_x.dart';
 import 'package:slee_fi/common/routes/app_routes.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
+import 'package:slee_fi/common/utils/toast_utils.dart';
 import 'package:slee_fi/common/widgets/sf_alert_dialog.dart';
 import 'package:slee_fi/common/widgets/sf_button_outlined.dart';
 import 'package:slee_fi/common/widgets/sf_buttons.dart';
@@ -46,11 +47,16 @@ class StakingList extends StatelessWidget {
             showSuccessfulDialog(context, null);
           }
           if(state is StakingStateCompoundSuccess){
+            ToastUtils.showToastBottom("$state");
             showSuccessfulDialog(context, null);
           }
         },
         builder: (context, state) {
           final cubit = context.read<StakingCubit>();
+          num? checkAPR = 0;
+          if(stakingInfo != null){
+            checkAPR = num.tryParse(stakingInfo!.apr);
+          }
           return ListView(
             padding: const EdgeInsets.all(16.0),
             children: [
@@ -263,7 +269,7 @@ class StakingList extends StatelessWidget {
                               stringCase: StringCase.upperCase,
                             )),
                         SFText(
-                          keyText: "${stakingInfo != null ? double.parse(stakingInfo!.apr).formatBalanceToken : 0}%",
+                          keyText: "${stakingInfo != null ? double.parse(checkAPR != null ? stakingInfo!.apr : "0").formatBalanceToken : 0}%",
                           style: TextStyles.lightWhite16,
                         ),
                       ],
