@@ -26,17 +26,21 @@ class WalletCubit extends Cubit<WalletState> {
   final _getNFTsBalanceUC = getIt<GetNFTsBalanceUseCase>();
   final _hasWalletUC = getIt<HasWalletUseCase>();
 
-  Future<void> init() async {
-    final hasWalletRes = await _hasWalletUC.call(NoParams());
-    final hasWallet = hasWalletRes.getOrElse(() => false);
-    if (hasWallet) {
-      emit(const WalletState.notOpen());
-    } else {
-      emit(const WalletState.notExisted());
+  Future<void> checkWallet() async {
+    final currentState = state;
+    if (currentState is! WalletStateLoaded) {
+      final hasWalletRes = await _hasWalletUC.call(NoParams());
+      final hasWallet = hasWalletRes.getOrElse(() => false);
+      if (hasWallet) {
+        emit(const WalletState.notOpen());
+      } else {
+        emit(const WalletState.notExisted());
+      }
     }
   }
 
   Future<void> getWallet() async {
+    emit(const WalletState.loading());
     final walletCall = await _currentWalletUC.call(NoParams());
     walletCall.fold(
       (l) => emit(WalletState.error('$l')),
@@ -55,6 +59,7 @@ class WalletCubit extends Cubit<WalletState> {
         (r) => loadCurrentWallet(r),
       );
     } else {
+      emit(const WalletState.loading());
       final walletCall = await _currentWalletUC.call(NoParams());
       walletCall.fold(
         (l) => emit(WalletState.error('$l')),

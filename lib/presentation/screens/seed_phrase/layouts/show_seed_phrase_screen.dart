@@ -47,6 +47,7 @@ class _ShowSeedPhraseScreenState extends State<ShowSeedPhraseScreen> {
                   future: _currentMnemonic.call(NoParams()),
                   builder: (context, snapshot) {
                     if (snapshot.hasData && snapshot.data!.isRight()) {
+                      print('### ${snapshot.data!.getOrElse(() => '')}');
                       snapshot.data!.foldRight(
                           String, (r, previous) => seedPhrase = r.split(' '));
                       return ListView.separated(

@@ -7,8 +7,6 @@ import 'package:slee_fi/l10n/locale_keys.g.dart';
 import 'package:slee_fi/schema/market/market_schema.dart';
 import 'package:slee_fi/usecase/buy_nft_usecase.dart';
 import 'package:slee_fi/usecase/get_market_place_usecase.dart';
-import 'package:slee_fi/usecase/usecase.dart';
-import 'package:slee_fi/usecase/wallet/current_wallet_usecase.dart';
 
 import 'market_place_state.dart';
 
@@ -30,8 +28,6 @@ class MarketPlaceCubit extends Cubit<MarketPlaceState> {
       quality: []);
   final MarketPlaceUseCase _marketPlaceUseCase = getIt<MarketPlaceUseCase>();
   final BuyNFTUseCase _buyNFTUseCase = getIt<BuyNFTUseCase>();
-  final _currentWalletUC = getIt<CurrentWalletUseCase>();
-  late bool statusWallet = false;
 
   init(int idCategory) async {
     page = 1;
@@ -42,28 +38,7 @@ class MarketPlaceCubit extends Cubit<MarketPlaceState> {
         sortPrice: "LowPrice");
     log("params : ${params.toJson()}");
     emit(const MarketPlaceState.loading());
-    final walletCall = await _currentWalletUC.call(NoParams());
-    walletCall.fold(
-      (l) {
-        statusWallet = false;
-      },
-      (r) {
-        statusWallet = true;
-      },
-    );
     getMarketPlace(params);
-  }
-
-  refreshStatusWallet() async {
-    final walletCall = await _currentWalletUC.call(NoParams());
-    walletCall.fold(
-          (l) {
-        statusWallet = false;
-      },
-          (r) {
-        statusWallet = true;
-      },
-    );
   }
 
   refresh() {
@@ -76,7 +51,8 @@ class MarketPlaceCubit extends Cubit<MarketPlaceState> {
 
   clearFilter() {
     page = 1;
-    params = params.copyWith(page: page, level: 0, bedMint: 0, type: [], classNft: [], quality: []);
+    params = params.copyWith(
+        page: page, level: 0, bedMint: 0, type: [], classNft: [], quality: []);
     getMarketPlace(params);
   }
 

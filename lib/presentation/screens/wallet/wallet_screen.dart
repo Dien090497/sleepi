@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:slee_fi/common/extensions/string_x.dart';
 import 'package:slee_fi/common/routes/app_routes.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/widgets/background_widget.dart';
@@ -66,9 +65,11 @@ class _WalletScreenState extends State<WalletScreen>
                       _showCreateOrImportWallet()
                           .then((value) => _showWarningDialog(value, context));
                       return;
+                    } else if (state is WalletNotOpen ||
+                        state is WalletStateLoaded) {
+                      Navigator.pushNamed(context, R.passcode,
+                          arguments: PasscodeArguments(route: R.settingWallet));
                     }
-                    Navigator.pushNamed(context, R.passcode,
-                        arguments: PasscodeArguments(route: R.settingWallet));
                   },
                   child: const Padding(
                     padding: EdgeInsets.only(right: 16.0, left: 12),
@@ -85,12 +86,13 @@ class _WalletScreenState extends State<WalletScreen>
               title: BlocBuilder<WalletCubit, WalletState>(
                 buildWhen: (previous, current) => current is WalletStateLoaded,
                 builder: (context, state) {
+                  if (state is WalletStateInitial) {
+                    context.read<WalletCubit>().checkWallet();
+                  }
                   return WalletTabBar(
                     controller: controller,
                     checkMoveNewTab: (currentIndex, i) {
                       if (i == 1) {
-
-                        'state is  $state'.log;
                         if (state is WalletNotExisted) {
                           controller.index = 0;
                           _showCreateOrImportWallet().then((value) {
@@ -105,7 +107,7 @@ class _WalletScreenState extends State<WalletScreen>
                               .pushNamed(R.passcode)
                               .then((value) {
                             if (value == true) {
-                              context.read<WalletCubit>().getWallet();
+                              context.read<WalletCubit>().refresh();
                               controller.animateTo(1);
                             } else {
                               controller.animateTo(0);

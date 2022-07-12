@@ -105,8 +105,7 @@ class PopupInsufficient extends StatelessWidget {
                       symbol: 'AVAX',
                       icon: Ics.icAvax,
                       balance: 0);
-                  if (state is WalletStateLoaded &&
-                      state.walletInfoEntity != null) {
+                  if (state is WalletStateLoaded) {
                     for (final element in state.tokenList) {
                       if (element.symbol.toLowerCase() ==
                           Const.tokens[0]['symbol'].toString().toLowerCase()) {
@@ -117,12 +116,18 @@ class PopupInsufficient extends StatelessWidget {
                   return SFButton(
                     text: LocaleKeys.confirm,
                     onPressed: () {
-                      // Navigator.pop(context);
-                      Navigator.pushReplacementNamed(context, R.passcode,
-                          arguments: PasscodeArguments(
-                              route: R.transfer,
-                              argNewRoute: TransferScreenArg(
-                                  tokenAvax, false, TransferType.nft)));
+                      final walletState = context.read<WalletCubit>().state;
+                      if (walletState is WalletNotOpen) {
+                        Navigator.pushReplacementNamed(context, R.passcode,
+                            arguments: PasscodeArguments(
+                                route: R.transfer,
+                                argNewRoute: TransferScreenArg(
+                                    tokenAvax, false, TransferType.nft)));
+                      } else {
+                        Navigator.pushReplacementNamed(context, R.transfer,
+                            arguments: TransferScreenArg(
+                                tokenAvax, false, TransferType.nft));
+                      }
                     },
                     textStyle: TextStyles.white16,
                     gradient: AppColors.blueGradient,

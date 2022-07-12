@@ -7,6 +7,7 @@ import 'package:slee_fi/common/widgets/sf_bottom_navigator_home.dart';
 import 'package:slee_fi/di/injector.dart';
 import 'package:slee_fi/presentation/blocs/bottom_navigation/bottom_navigation_bloc.dart';
 import 'package:slee_fi/presentation/blocs/bottom_navigation/bottom_navigation_state.dart';
+import 'package:slee_fi/presentation/blocs/wallet/wallet_cubit.dart';
 import 'package:slee_fi/presentation/screens/chart/chart_screen.dart';
 import 'package:slee_fi/presentation/screens/gacha/gacha_screen.dart';
 import 'package:slee_fi/presentation/screens/home/home_screen.dart';
@@ -18,6 +19,7 @@ class BottomNavigationScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    context.read<WalletCubit>().checkWallet();
     final app = getIt<AppFlyerCustom>();
 
     final PageController pageController = PageController();
