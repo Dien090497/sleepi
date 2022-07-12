@@ -14,13 +14,13 @@ class GetListNftDetailUseCase
   @override
   Future<Either<Failure, List<NFTEntity>>> call(
       GetListNftDetailParams params) async {
-    final listIds = await _nftRepository.tokensOf(
+    final listIdsRes = await _nftRepository.tokensOf(
       nftAddress: params.nftAddress,
       ownerAddress: params.ownerAddress,
       count: params.count,
       start: params.start,
     );
-    return listIds.fold(
+    return listIdsRes.fold(
       Left.new,
       (ids) {
         return _nftRepository.getListNftData(

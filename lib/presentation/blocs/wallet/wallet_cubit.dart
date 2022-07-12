@@ -54,6 +54,12 @@ class WalletCubit extends Cubit<WalletState> {
         (l) => emit(currentState.copyWith(isLoading: false)),
         (r) => loadCurrentWallet(r),
       );
+    } else {
+      final walletCall = await _currentWalletUC.call(NoParams());
+      walletCall.fold(
+        (l) => emit(WalletState.error('$l')),
+        (r) => loadCurrentWallet(r),
+      );
     }
   }
 
