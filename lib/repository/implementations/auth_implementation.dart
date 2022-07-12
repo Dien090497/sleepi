@@ -106,11 +106,7 @@ class AuthImplementation extends IAuthRepository {
   @override
   Future<Either<Failure, bool>> logOut() async {
     try {
-      bool isFirstOpen = false;
-      final result = await isFirstOpenApp();
-      result.fold((l) => null, (r) {
-        isFirstOpen = !r;
-      });
+      final bool isFirstOpen = await _secureStorage.isFirstOpenApp();
       await Future.wait([
         _secureStorage.clearStorage(),
         _isarDataSource.clearAll(),

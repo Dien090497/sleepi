@@ -26,12 +26,12 @@ mixin _$NftAttributeEntity {
   int? get time => throw _privateConstructorUsedError;
   int? get level => throw _privateConstructorUsedError;
   int? get bedMint => throw _privateConstructorUsedError;
-  int? get efficiency => throw _privateConstructorUsedError;
-  int? get durability => throw _privateConstructorUsedError;
-  int? get luck => throw _privateConstructorUsedError;
-  int? get bonus => throw _privateConstructorUsedError;
-  int? get special => throw _privateConstructorUsedError;
-  int? get resilience => throw _privateConstructorUsedError;
+  double? get efficiency => throw _privateConstructorUsedError;
+  double? get durability => throw _privateConstructorUsedError;
+  double? get luck => throw _privateConstructorUsedError;
+  double? get bonus => throw _privateConstructorUsedError;
+  double? get special => throw _privateConstructorUsedError;
+  double? get resilience => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $NftAttributeEntityCopyWith<NftAttributeEntity> get copyWith =>
@@ -54,12 +54,12 @@ abstract class $NftAttributeEntityCopyWith<$Res> {
       int? time,
       int? level,
       int? bedMint,
-      int? efficiency,
-      int? durability,
-      int? luck,
-      int? bonus,
-      int? special,
-      int? resilience});
+      double? efficiency,
+      double? durability,
+      double? luck,
+      double? bonus,
+      double? special,
+      double? resilience});
 }
 
 /// @nodoc
@@ -134,27 +134,27 @@ class _$NftAttributeEntityCopyWithImpl<$Res>
       efficiency: efficiency == freezed
           ? _value.efficiency
           : efficiency // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as double?,
       durability: durability == freezed
           ? _value.durability
           : durability // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as double?,
       luck: luck == freezed
           ? _value.luck
           : luck // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as double?,
       bonus: bonus == freezed
           ? _value.bonus
           : bonus // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as double?,
       special: special == freezed
           ? _value.special
           : special // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as double?,
       resilience: resilience == freezed
           ? _value.resilience
           : resilience // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as double?,
     ));
   }
 }
@@ -177,12 +177,12 @@ abstract class _$$_NftAttributeEntityCopyWith<$Res>
       int? time,
       int? level,
       int? bedMint,
-      int? efficiency,
-      int? durability,
-      int? luck,
-      int? bonus,
-      int? special,
-      int? resilience});
+      double? efficiency,
+      double? durability,
+      double? luck,
+      double? bonus,
+      double? special,
+      double? resilience});
 }
 
 /// @nodoc
@@ -259,27 +259,27 @@ class __$$_NftAttributeEntityCopyWithImpl<$Res>
       efficiency: efficiency == freezed
           ? _value.efficiency
           : efficiency // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as double?,
       durability: durability == freezed
           ? _value.durability
           : durability // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as double?,
       luck: luck == freezed
           ? _value.luck
           : luck // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as double?,
       bonus: bonus == freezed
           ? _value.bonus
           : bonus // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as double?,
       special: special == freezed
           ? _value.special
           : special // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as double?,
       resilience: resilience == freezed
           ? _value.resilience
           : resilience // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as double?,
     ));
   }
 }
@@ -328,17 +328,17 @@ class _$_NftAttributeEntity
   @override
   final int? bedMint;
   @override
-  final int? efficiency;
+  final double? efficiency;
   @override
-  final int? durability;
+  final double? durability;
   @override
-  final int? luck;
+  final double? luck;
   @override
-  final int? bonus;
+  final double? bonus;
   @override
-  final int? special;
+  final double? special;
   @override
-  final int? resilience;
+  final double? resilience;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
@@ -434,12 +434,12 @@ abstract class _NftAttributeEntity implements NftAttributeEntity {
       required final int? time,
       required final int? level,
       required final int? bedMint,
-      required final int? efficiency,
-      required final int? durability,
-      required final int? luck,
-      required final int? bonus,
-      required final int? special,
-      required final int? resilience}) = _$_NftAttributeEntity;
+      required final double? efficiency,
+      required final double? durability,
+      required final double? luck,
+      required final double? bonus,
+      required final double? special,
+      required final double? resilience}) = _$_NftAttributeEntity;
 
   @override
   BigInt? get nftId => throw _privateConstructorUsedError;
@@ -462,17 +462,17 @@ abstract class _NftAttributeEntity implements NftAttributeEntity {
   @override
   int? get bedMint => throw _privateConstructorUsedError;
   @override
-  int? get efficiency => throw _privateConstructorUsedError;
+  double? get efficiency => throw _privateConstructorUsedError;
   @override
-  int? get durability => throw _privateConstructorUsedError;
+  double? get durability => throw _privateConstructorUsedError;
   @override
-  int? get luck => throw _privateConstructorUsedError;
+  double? get luck => throw _privateConstructorUsedError;
   @override
-  int? get bonus => throw _privateConstructorUsedError;
+  double? get bonus => throw _privateConstructorUsedError;
   @override
-  int? get special => throw _privateConstructorUsedError;
+  double? get special => throw _privateConstructorUsedError;
   @override
-  int? get resilience => throw _privateConstructorUsedError;
+  double? get resilience => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
   _$$_NftAttributeEntityCopyWith<_$_NftAttributeEntity> get copyWith =>
