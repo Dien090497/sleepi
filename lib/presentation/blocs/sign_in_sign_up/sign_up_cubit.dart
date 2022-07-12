@@ -192,7 +192,7 @@ class SigInSignUpCubit extends Cubit<SignInSignUpState> {
         (value.isEmpty || email.isEmpty)) {
       emit(const SignInSignUpState.initial());
     }
-    email = value.lowerCaseName;
+    email = value.toLowerCase();
   }
 
   onPasswordChange(String value) {
