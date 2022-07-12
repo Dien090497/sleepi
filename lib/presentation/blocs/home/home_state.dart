@@ -23,6 +23,7 @@ class HomeState with _$HomeState {
       @Default('') String errorMessage,
       @Default(ErrorType.none) ErrorType errorType,
       @Default(true) bool loadMoreBed,
+      @Default(true) bool loadMoreItem,
       @Default(false) bool loading}) = HomeLoaded;
 
   const factory HomeState.error(String message) = HomeError;
