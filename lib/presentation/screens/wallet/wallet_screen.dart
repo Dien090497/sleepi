@@ -87,7 +87,7 @@ class _WalletScreenState extends State<WalletScreen>
                 buildWhen: (previous, current) => current is WalletStateLoaded,
                 builder: (context, state) {
                   if (state is WalletStateInitial) {
-                    context.read<WalletCubit>().init();
+                    context.read<WalletCubit>().checkWallet();
                   }
                   return WalletTabBar(
                     controller: controller,

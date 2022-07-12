@@ -19,7 +19,7 @@ class BottomNavigationScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    context.read<WalletCubit>().init();
+    context.read<WalletCubit>().checkWallet();
     final app = getIt<AppFlyerCustom>();
 
     final PageController pageController = PageController();
