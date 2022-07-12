@@ -61,6 +61,11 @@ class FilterItemEvent extends HomeEvent {
   List<Object?> get props => [selected, level];
 }
 
+class LoadMoreItem extends HomeEvent {
+  @override
+  List<Object?> get props => [];
+}
+
 class LoadMoreBed extends HomeEvent {
   @override
   List<Object?> get props => [];

@@ -113,3 +113,5 @@ enum TransferType {
 
   String toJson() => name;
 }
+
+enum ErrorType { addItemToBed, removeItemFromBed, none }
