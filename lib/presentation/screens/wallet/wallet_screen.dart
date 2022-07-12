@@ -153,7 +153,6 @@ class _WalletScreenState extends State<WalletScreen>
 
   void _showWarningDialog(dynamic value, BuildContext context) {
     if (value is PopWithResults) {
-      context.read<WalletCubit>().init();
       controller.animateTo(1);
       final cubit = context.read<WalletCubit>();
       cubit.importWallet(value.results);
