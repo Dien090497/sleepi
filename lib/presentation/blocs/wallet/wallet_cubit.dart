@@ -39,6 +39,7 @@ class WalletCubit extends Cubit<WalletState> {
   }
 
   Future<void> getWallet() async {
+    emit(const WalletState.loading());
     final walletCall = await _currentWalletUC.call(NoParams());
     walletCall.fold(
       (l) => emit(WalletState.error('$l')),
@@ -57,6 +58,7 @@ class WalletCubit extends Cubit<WalletState> {
         (r) => loadCurrentWallet(r),
       );
     } else {
+      emit(const WalletState.loading());
       final walletCall = await _currentWalletUC.call(NoParams());
       walletCall.fold(
         (l) => emit(WalletState.error('$l')),

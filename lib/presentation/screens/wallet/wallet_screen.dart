@@ -107,7 +107,7 @@ class _WalletScreenState extends State<WalletScreen>
                               .pushNamed(R.passcode)
                               .then((value) {
                             if (value == true) {
-                              context.read<WalletCubit>().getWallet();
+                              context.read<WalletCubit>().refresh();
                               controller.animateTo(1);
                             } else {
                               controller.animateTo(0);

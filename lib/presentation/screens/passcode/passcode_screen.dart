@@ -5,6 +5,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:slee_fi/common/routes/app_routes.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
 import 'package:slee_fi/common/widgets/background_widget.dart';
+import 'package:slee_fi/common/widgets/loading_screen.dart';
 import 'package:slee_fi/common/widgets/sf_back_button.dart';
 import 'package:slee_fi/common/widgets/sf_buttons.dart';
 import 'package:slee_fi/common/widgets/sf_logo.dart';
@@ -12,9 +13,12 @@ import 'package:slee_fi/common/widgets/sf_text.dart';
 import 'package:slee_fi/l10n/locale_keys.g.dart';
 import 'package:slee_fi/presentation/blocs/passcode/passcode_cubit.dart';
 import 'package:slee_fi/presentation/blocs/passcode/passcode_state.dart';
+import 'package:slee_fi/presentation/blocs/wallet/wallet_cubit.dart';
+import 'package:slee_fi/presentation/blocs/wallet/wallet_state.dart';
 import 'package:slee_fi/presentation/screens/passcode/create_passcode_screen.dart';
 import 'package:slee_fi/presentation/screens/passcode/widgets/passcode_numpad.dart';
 import 'package:slee_fi/presentation/screens/passcode/widgets/pin_code_widget.dart';
+import 'package:slee_fi/presentation/screens/transfer/transfer_screen.dart';
 
 class PasscodeArguments {
   final String? route;
@@ -35,82 +39,109 @@ class PasscodeScreen extends StatelessWidget {
 
     return BlocProvider(
       create: (BuildContext context) => PasscodeCubit(),
-      child: BlocConsumer<PasscodeCubit, PasscodeState>(
+      child: BlocConsumer<WalletCubit, WalletState>(
         listener: (context, state) {
-          final cubit = context.read<PasscodeCubit>();
-          if (state is checkPassCodeValid) {
-            if (args != null) {
-              if (args.route! == R.transfer) {
-                Navigator.pushReplacementNamed(context, R.transfer,
-                    arguments: args.argNewRoute);
-                return;
-              }
-              Navigator.pushReplacementNamed(context, args.route!,
-                  arguments: CreatePasscodeArguments(
-                      isShowSuccessDialog: args.isShowSuccessDialog ?? false));
-            } else {
-              // _createWalletDialog(context);
-              Navigator.pop(context, true);
+          if (args != null && state is WalletStateLoaded) {
+            if (args.route! == R.transfer) {
+              final transferArgs = args.argNewRoute as TransferScreenArg;
+              Navigator.pushReplacementNamed(context, R.transfer,
+                  arguments: TransferScreenArg(
+                      transferArgs.tokenEntity.copyWith(
+                        balance: state.walletInfoEntity.nativeCurrency.balance,
+                      ),
+                      transferArgs.fromSpendingToWallet,
+                      transferArgs.transferType));
             }
-          } else {
-            passCodeController.text = '';
-            Future.delayed(
-              const Duration(milliseconds: 2000),
-              () => cubit.init(),
-            );
           }
         },
-        builder: (context, state) {
-          final cubit = context.read<PasscodeCubit>();
-          return BackgroundWidget(
-            child: SafeArea(
-              child: ListView(
+        builder: (context, walletState) {
+          return BlocConsumer<PasscodeCubit, PasscodeState>(
+            listener: (context, state) {
+              final cubit = context.read<PasscodeCubit>();
+              if (state is checkPassCodeValid) {
+                if (args != null) {
+                  final walletCubit = context.read<WalletCubit>();
+                  if (args.route! == R.transfer) {
+                    walletCubit.refresh();
+                  } else {
+                    Navigator.pushReplacementNamed(context, args.route!,
+                        arguments: CreatePasscodeArguments(
+                            isShowSuccessDialog:
+                                args.isShowSuccessDialog ?? false));
+                  }
+                } else {
+                  // _createWalletDialog(context);
+                  Navigator.pop(context, true);
+                }
+              } else {
+                passCodeController.text = '';
+                Future.delayed(
+                  const Duration(milliseconds: 2000),
+                  () => cubit.init(),
+                );
+              }
+            },
+            builder: (context, state) {
+              final cubit = context.read<PasscodeCubit>();
+              return Stack(
                 children: [
-                  const SizedBox(height: 12.0),
-                  Stack(
-                    children: const [
-                      Positioned(left: 10, top: 0, child: SFBackButton()),
-                      Align(alignment: Alignment.center, child: SFLogo()),
-                    ],
+                  BackgroundWidget(
+                    child: SafeArea(
+                      child: ListView(
+                        children: [
+                          const SizedBox(height: 12.0),
+                          Stack(
+                            children: const [
+                              Positioned(
+                                  left: 10, top: 0, child: SFBackButton()),
+                              Align(
+                                  alignment: Alignment.center, child: SFLogo()),
+                            ],
+                          ),
+                          const SizedBox(height: 60),
+                          Center(
+                            child: SFText(
+                                keyText: LocaleKeys.enter_your_passcode,
+                                style: TextStyles.white12),
+                          ),
+                          const SizedBox(height: 24),
+                          SizedBox(
+                            height: 40,
+                            child:
+                                PinCodeWidget(controller: passCodeController),
+                          ),
+                          Container(
+                            alignment: Alignment.center,
+                            height: 30,
+                            child: state is checkPassCodeInValid
+                                ? SFText(
+                                    keyText: LocaleKeys.incorrect_passcode,
+                                    style: TextStyles.red14)
+                                : const SizedBox(),
+                          ),
+                          SizedBox(height: 15.h),
+                          PasscodeNumPad(
+                            passcodeController: passCodeController,
+                            onCompleted: (String passcode) {
+                              cubit.checkPassCode(passCodeController.text);
+                            },
+                          ),
+                          SizedBox(height: 32.h),
+                          SFTextButton(
+                            text: "${LocaleKeys.forgot_passcode.tr()}?",
+                            textStyle: TextStyles.white12Underline,
+                            onPressed: () {
+                              Navigator.pushNamed(context, R.forgotPasscode);
+                            },
+                          )
+                        ],
+                      ),
+                    ),
                   ),
-                  const SizedBox(height: 60),
-                  Center(
-                    child: SFText(
-                        keyText: LocaleKeys.enter_your_passcode,
-                        style: TextStyles.white12),
-                  ),
-                  const SizedBox(height: 24),
-                  SizedBox(
-                    height: 40,
-                    child: PinCodeWidget(controller: passCodeController),
-                  ),
-                  Container(
-                    alignment: Alignment.center,
-                    height: 30,
-                    child: state is checkPassCodeInValid
-                        ? SFText(
-                            keyText: LocaleKeys.incorrect_passcode,
-                            style: TextStyles.red14)
-                        : const SizedBox(),
-                  ),
-                  SizedBox(height: 15.h),
-                  PasscodeNumPad(
-                    passcodeController: passCodeController,
-                    onCompleted: (String passcode) {
-                      cubit.checkPassCode(passCodeController.text);
-                    },
-                  ),
-                  SizedBox(height: 32.h),
-                  SFTextButton(
-                    text: "${LocaleKeys.forgot_passcode.tr()}?",
-                    textStyle: TextStyles.white12Underline,
-                    onPressed: () {
-                      Navigator.pushNamed(context, R.forgotPasscode);
-                    },
-                  )
+                  if (walletState is WalletStateLoading) const LoadingScreen(),
                 ],
-              ),
-            ),
+              );
+            },
           );
         },
       ),

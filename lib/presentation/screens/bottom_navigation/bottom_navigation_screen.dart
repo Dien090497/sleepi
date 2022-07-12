@@ -8,7 +8,6 @@ import 'package:slee_fi/di/injector.dart';
 import 'package:slee_fi/presentation/blocs/bottom_navigation/bottom_navigation_bloc.dart';
 import 'package:slee_fi/presentation/blocs/bottom_navigation/bottom_navigation_state.dart';
 import 'package:slee_fi/presentation/blocs/wallet/wallet_cubit.dart';
-import 'package:slee_fi/presentation/blocs/wallet/wallet_state.dart';
 import 'package:slee_fi/presentation/screens/chart/chart_screen.dart';
 import 'package:slee_fi/presentation/screens/gacha/gacha_screen.dart';
 import 'package:slee_fi/presentation/screens/home/home_screen.dart';
@@ -20,6 +19,7 @@ class BottomNavigationScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    context.read<WalletCubit>().init();
     final app = getIt<AppFlyerCustom>();
 
     final PageController pageController = PageController();
@@ -38,33 +38,29 @@ class BottomNavigationScreen extends StatelessWidget {
     //   });
     // });
 
-    return BlocListener<WalletCubit, WalletState>(
-      listener: (context, state) {},
-      bloc: context.read<WalletCubit>()..init(),
-      child: BlocConsumer<BottomNavigationBloc, BottomNavigationState>(
-        listener: (context, state) {
-          pageController.jumpToPage(state.tabIndex);
-        },
-        builder: (context, navState) {
-          return BackgroundWidget(
-            extendBody: false,
-            bottomNavigationBar: SFBottomNavigatorHome(
-              onTap: (i) {
-                pageController.jumpToPage(i);
-                app.homeAction(i);
-              },
-              pageController: pageController,
-            ),
-            child: PageView.builder(
-              controller: pageController,
-              allowImplicitScrolling: true,
-              physics: const NeverScrollableScrollPhysics(),
-              itemCount: screens.length,
-              itemBuilder: (_, i) => screens[i],
-            ),
-          );
-        },
-      ),
+    return BlocConsumer<BottomNavigationBloc, BottomNavigationState>(
+      listener: (context, state) {
+        pageController.jumpToPage(state.tabIndex);
+      },
+      builder: (context, navState) {
+        return BackgroundWidget(
+          extendBody: false,
+          bottomNavigationBar: SFBottomNavigatorHome(
+            onTap: (i) {
+              pageController.jumpToPage(i);
+              app.homeAction(i);
+            },
+            pageController: pageController,
+          ),
+          child: PageView.builder(
+            controller: pageController,
+            allowImplicitScrolling: true,
+            physics: const NeverScrollableScrollPhysics(),
+            itemCount: screens.length,
+            itemBuilder: (_, i) => screens[i],
+          ),
+        );
+      },
     );
   }
 }
