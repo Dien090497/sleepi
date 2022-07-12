@@ -214,7 +214,7 @@ class _AccountLoginState extends State<AccountLoginWidget> {
   }
 
   _showPopUpSignUpSuccess() async {
-    await showSignUpSuccess(context);
+    await showSignUpSuccess(context, null);
   }
 
   void _checkChangePasswordSuccess(dynamic value) {

@@ -4,7 +4,7 @@ import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/widgets/sf_dialog.dart';
 
 class ChartTabBody extends StatefulWidget {
-  ChartTabBody({
+  const ChartTabBody({
     Key? key,
     required this.picker,
     required this.onPreviousTap,

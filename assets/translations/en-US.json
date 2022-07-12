@@ -436,5 +436,7 @@
   "pink": "Pink",
   "purple": "Purple",
   "incorrect_address": "Incorrect Address",
+  "wallet_created_successfully": "Wallet created successfully",
+  "wallet_import_successfully": "Wallet import successfully",
   "insufficient_amount": "Insufficient amount"
 }

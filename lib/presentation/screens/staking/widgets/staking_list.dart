@@ -305,7 +305,7 @@ class StakingList extends StatelessWidget {
                                     PopUpStaking(
                                       message: LocaleKeys.do_you_really_want_to_withdraw
                                           .tr(namedArgs: {
-                                        'amount': stakingInfo!= null ? stakingInfo!.stake.totalStake! : "0",
+                                        'amount': stakingInfo != null ? double.parse(stakingInfo!.stake.totalStake != null ? stakingInfo!.stake.totalStake! : "0").formatBalanceToken : "0",
                                         'token': 'SLFT',
                                       }),
                                       onPressed: () => cubit.unStaking(),
@@ -321,7 +321,7 @@ class StakingList extends StatelessWidget {
                                     PopUpStaking(
                                       message: LocaleKeys.do_you_really_want_to_compound
                                           .tr(namedArgs: {
-                                        'amount': stakingInfo!= null ? stakingInfo!.stake.totalReward! : "0",
+                                        'amount': stakingInfo!= null ? double.parse(stakingInfo!.stake.totalStake != null ? stakingInfo!.stake.totalStake! : "0").formatBalanceToken : "0",
                                         'token': 'SLFT',
                                       }),
                                       onPressed: () => cubit.compound(),

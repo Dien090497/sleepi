@@ -73,11 +73,11 @@ class _TabWalletDetailState extends State<TabWalletDetail> {
         Localizations.localeOf(context).toLanguageTag().isJapanese;
     return BlocBuilder<WalletCubit, WalletState>(
       builder: (context, state) {
-        if (state is WalletStateLoaded && state.walletInfoEntity != null) {
-          balance = state.walletInfoEntity!.nativeCurrency.balance;
-          addressWallet = state.walletInfoEntity!.address;
-          currencySymbol = state.walletInfoEntity!.nativeCurrency.symbol;
-          networkName = state.walletInfoEntity!.networkName;
+        if (state is WalletStateLoaded) {
+          balance = state.walletInfoEntity.nativeCurrency.balance;
+          addressWallet = state.walletInfoEntity.address;
+          currencySymbol = state.walletInfoEntity.nativeCurrency.symbol;
+          networkName = state.walletInfoEntity.networkName;
           tokenList = state.tokenList;
         }
         return FocusDetector(

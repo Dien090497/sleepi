@@ -9,19 +9,21 @@ part 'wallet_state.freezed.dart';
 class WalletState with _$WalletState {
   const factory WalletState.initial() = WalletStateInitial;
 
-  const factory WalletState.loading() = WalletStateLoading;
+  const factory WalletState.notExisted() = WalletNotExisted;
 
-  const factory WalletState.loadingHistory() = WalletStateLoadingHistory;
+  const factory WalletState.notOpen() = WalletNotOpen;
+
+  const factory WalletState.loading() = WalletStateLoading;
 
   const factory WalletState.loaded({
     @Default(false) bool isLoading,
-    required WalletInfoEntity? walletInfoEntity,
+    required WalletInfoEntity walletInfoEntity,
     required List<TokenEntity> tokenList,
   }) = WalletStateLoaded;
 
-  const factory WalletState.empty() = WalletStateEmpty;
+  const factory WalletState.error(String message) = WalletStateError;
 
-  const factory WalletState.error({required String message}) = WalletStateError;
+  const factory WalletState.loadingHistory() = WalletStateLoadingHistory;
 
   const factory WalletState.getHistorySuccess(List<TransactionIsarModel> list) =
       WalletStateGetHistorySuccess;

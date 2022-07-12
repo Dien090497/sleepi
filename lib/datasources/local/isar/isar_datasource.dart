@@ -56,6 +56,8 @@ class IsarDataSource {
 
   Future<WalletIsarModel?> getWalletAt(int id) => _isar.wallets.get(id);
 
+  Future<int> countWallet() => _isar.wallets.count();
+
   Future<bool> walletExisted(String address) async =>
       (await _isar.wallets.filter().addressEqualTo(address).count()) > 0;
 

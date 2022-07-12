@@ -28,18 +28,18 @@ class BedModel {
   final int level;
   @JsonKey(name: 'bed_mint')
   final int bedMint;
-  final int efficiency;
-  final int luck;
-  final int bonus;
-  final int special;
-  final int resilience;
+  final double efficiency;
+  final double luck;
+  final double bonus;
+  final double special;
+  final double resilience;
   @JsonKey(name: 'created_at')
   final String createdAt;
   @JsonKey(name: 'updated_at')
   final String updatedAt;
   @JsonKey(name: 'token_id')
   final int tokenId;
-  final int durability;
+  final double durability;
   @JsonKey(name: 'category_id')
   final int categoryId;
   @JsonKey(name: 'is_lock')

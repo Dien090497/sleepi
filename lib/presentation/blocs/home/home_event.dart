@@ -27,7 +27,7 @@ class RemoveItem extends HomeEvent {
 
 class ChangeBed extends HomeEvent {
   final int level;
-  final int durability;
+  final double durability;
   final int time;
   final int id;
 

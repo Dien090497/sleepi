@@ -77,7 +77,7 @@ Future<T?> showMessageDialog<T>(BuildContext context, String message,
 }
 
 Future<T?> showSignUpSuccess<T>(
-  BuildContext context,
+  BuildContext context,String? message
 ) async {
   return showDialog(
       context: context,
@@ -101,7 +101,7 @@ Future<T?> showSignUpSuccess<T>(
                 style: TextStyles.bold18White),
             const SizedBox(height: 12),
             SFText(
-                keyText: LocaleKeys.your_account_has_been_create,
+                keyText: message ?? LocaleKeys.your_account_has_been_create,
                 maxLines: 1,
                 style: TextStyles.lightGrey14),
             const SizedBox(height: 44),

@@ -26,7 +26,7 @@ class StakingScreen extends StatelessWidget {
                       valueGold: tokenList.elementAt(1).balance,
                       valueSilver: tokenList.first.balance,
                     ),
-                    Expanded(child: StakingList(balanceSlft: tokenList.isNotEmpty ? tokenList.first.balance : 0,)),
+                    Expanded(child: StakingList(balanceSlft: tokenList.isNotEmpty ? tokenList.elementAt(1).balance : 0,)),
                   ]);
             },
           )),
