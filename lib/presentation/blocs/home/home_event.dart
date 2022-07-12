@@ -12,7 +12,7 @@ class FetchData extends HomeEvent {
 }
 
 class AddItem extends HomeEvent {
-  final BedEntity item;
+  final ItemEntity item;
 
   const AddItem(this.item);
 
@@ -47,6 +47,11 @@ class RefreshBed extends HomeEvent {
 }
 
 class FetchItem extends HomeEvent {
+  @override
+  List<Object?> get props => [];
+}
+
+class RefreshItem extends HomeEvent {
   @override
   List<Object?> get props => [];
 }

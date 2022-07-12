@@ -1,12 +1,10 @@
-
-
 import 'package:json_annotation/json_annotation.dart';
-
+import 'package:slee_fi/entities/item_entity/item_entity.dart';
 
 part 'item_model.g.dart';
-@JsonSerializable()
-class ItemModel{
 
+@JsonSerializable()
+class ItemModel {
   final int id;
   @JsonKey(name: 'nft_id')
   final int nftId;
@@ -16,6 +14,8 @@ class ItemModel{
   @JsonKey(name: 'contract_address')
   final String contractAddress;
   final String type;
+  @JsonKey(name: 'item_type')
+  final String? itemType;
   @JsonKey(name: 'jewel_type')
   dynamic jewelType;
   @JsonKey(name: 'class')
@@ -33,6 +33,7 @@ class ItemModel{
   final double bonus;
   final double special;
   final double resilience;
+  final String? effect;
   @JsonKey(name: 'created_at')
   final String createdAt;
   @JsonKey(name: 'updated_at')
@@ -40,11 +41,6 @@ class ItemModel{
   @JsonKey(name: 'token_id')
   final int tokenId;
   final double durability;
-  @JsonKey(name: 'category_id')
-  final int categoryId;
-  @JsonKey(name: 'is_lock')
-  final int isLock;
-  final String status;
 
   ItemModel(
       this.id,
@@ -68,12 +64,21 @@ class ItemModel{
       this.updatedAt,
       this.tokenId,
       this.durability,
-      this.categoryId,
-      this.isLock,
-      this.status);
+      this.itemType,
+      this.effect);
 
   factory ItemModel.fromJson(Map<String, dynamic> json) =>
       _$ItemModelFromJson(json);
 
   Map<String, dynamic> toJson() => _$ItemModelToJson(this);
+
+  ItemEntity toEntity() {
+    return ItemEntity(
+      name: nftName,
+      id: id,
+      effect: effect ?? '',
+      level: level,
+      image: image,
+    );
+  }
 }

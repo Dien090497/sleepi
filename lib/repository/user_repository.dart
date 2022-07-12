@@ -1,5 +1,6 @@
 import 'package:dartz/dartz.dart';
 import 'package:slee_fi/entities/active_code/active_code_entity.dart';
+import 'package:slee_fi/entities/item_entity/item_entity.dart';
 import 'package:slee_fi/failures/failure.dart';
 import 'package:slee_fi/models/bed_model/beb_model.dart';
 import 'package:slee_fi/models/global_config_response/global_config_response.dart';
@@ -35,5 +36,5 @@ abstract class IUserRepository {
 
   Future<Either<FailureMessage, dynamic>> removeItemInBed(AddItemToBedParam addItemToBedParam);
 
-  Future<Either<FailureMessage, dynamic>> fetchItemOwner(FilterItemSchema filterItemSchema);
+  Future<Either<FailureMessage, List<ItemEntity>>> fetchItemOwner(FilterItemSchema filterItemSchema);
 }

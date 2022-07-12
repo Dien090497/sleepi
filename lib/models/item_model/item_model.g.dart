@@ -28,9 +28,8 @@ ItemModel _$ItemModelFromJson(Map<String, dynamic> json) => ItemModel(
       json['updated_at'] as String,
       json['token_id'] as int,
       (json['durability'] as num).toDouble(),
-      json['category_id'] as int,
-      json['is_lock'] as int,
-      json['status'] as String,
+      json['item_type'] as String?,
+      json['effect'] as String?,
     )
       ..jewelType = json['jewel_type']
       ..classBed = json['class'];
@@ -42,6 +41,7 @@ Map<String, dynamic> _$ItemModelToJson(ItemModel instance) => <String, dynamic>{
       'image': instance.image,
       'contract_address': instance.contractAddress,
       'type': instance.type,
+      'item_type': instance.itemType,
       'jewel_type': instance.jewelType,
       'class': instance.classBed,
       'is_mint': instance.isMint,
@@ -55,11 +55,9 @@ Map<String, dynamic> _$ItemModelToJson(ItemModel instance) => <String, dynamic>{
       'bonus': instance.bonus,
       'special': instance.special,
       'resilience': instance.resilience,
+      'effect': instance.effect,
       'created_at': instance.createdAt,
       'updated_at': instance.updatedAt,
       'token_id': instance.tokenId,
       'durability': instance.durability,
-      'category_id': instance.categoryId,
-      'is_lock': instance.isLock,
-      'status': instance.status,
     };

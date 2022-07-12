@@ -26,8 +26,8 @@ class _FilterItemState extends State<FilterItem> {
   @override
   void initState() {
     //init value
-    selectedList.addAll(widget.homeBloc.itemFilter);
-    sliderValue = widget.homeBloc.level;
+    selectedList.addAll(widget.homeBloc.filterItemParam.type);
+    sliderValue = widget.homeBloc.filterItemParam.level;
     super.initState();
   }
 

@@ -2,6 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:slee_fi/common/enum/enum.dart';
 import 'package:slee_fi/entities/bed_entity/bed_entity.dart';
+import 'package:slee_fi/entities/item_entity/item_entity.dart';
 
 part 'home_state.freezed.dart';
 
@@ -18,8 +19,8 @@ class HomeState with _$HomeState {
       required double durability,
       required int time,
       BedEntity? item,
-      List<BedEntity>? itemList,
-      BedEntity? selectedItem,
+      List<ItemEntity>? itemList,
+        ItemEntity? selectedItem,
       @Default('') String errorMessage,
       @Default(ErrorType.none) ErrorType errorType,
       @Default(true) bool loadMoreBed,
