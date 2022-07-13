@@ -234,7 +234,11 @@ Future<_i1.GetIt> $initGetIt(_i1.GetIt get,
       get<_i31.Web3DataSource>(),
       get<_i46.AuthDataSource>()));
   gh.factory<_i57.IUserRepository>(() => _i58.UserImplementation(
-      get<_i46.AuthDataSource>(), get<_i28.SecureStorage>()));
+      get<_i46.AuthDataSource>(),
+      get<_i28.SecureStorage>(),
+      get<_i12.GetStorageDataSource>(),
+      get<_i15.IsarDataSource>(),
+      get<_i31.Web3DataSource>()));
   gh.factory<_i59.IWalletRepository>(() => _i60.WalletImplementation(
       get<_i31.Web3DataSource>(),
       get<_i12.GetStorageDataSource>(),
