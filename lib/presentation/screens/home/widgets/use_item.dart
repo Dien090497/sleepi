@@ -107,7 +107,7 @@ class UseItem extends StatelessWidget {
                               ),
                               const SizedBox(height: 12),
                               SFText(
-                                keyText: 'example effect',
+                                keyText: state.selectedItem!.effect,
                                 style: TextStyles.lightGrey14,
                                 maxLines: 1,
                               ),

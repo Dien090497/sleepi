@@ -8,9 +8,11 @@ part of 'whit_draw_token_schema.dart';
 
 WhitDrawTokenSchema _$WhitDrawTokenSchemaFromJson(Map<String, dynamic> json) =>
     WhitDrawTokenSchema(
-      json['type'] as String,
-      json['tokenAddress'] as String,
-      json['amount'] as String,
+      type: json['type'] as String,
+      tokenAddress: json['tokenAddress'] as String,
+      amount: json['amount'] as String,
+      signedMessage: json['signedMessage'] as String?,
+      signer: json['signer'] as String?,
     );
 
 Map<String, dynamic> _$WhitDrawTokenSchemaToJson(
@@ -19,4 +21,6 @@ Map<String, dynamic> _$WhitDrawTokenSchemaToJson(
       'type': instance.type,
       'tokenAddress': instance.tokenAddress,
       'amount': instance.amount,
+      'signedMessage': instance.signedMessage,
+      'signer': instance.signer,
     };

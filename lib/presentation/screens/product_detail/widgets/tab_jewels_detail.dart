@@ -64,10 +64,12 @@ class _TabJewelsDetailState extends State<TabJewelsDetail> {
                       child: TabBarView(
                         children: [
                           (state is NftListLoading)
-                              ? const Center(
-                                  child: CircularProgressIndicator(),
-                                )
+                              ? const Center(child: CircularProgressIndicator())
                               : SFGridView(
+                                  isLoadMore: state is NftListLoaded
+                                      ? state.isLoadMore
+                                      : false,
+                                  onLoadMore: _onLoadMore(cubit),
                                   count: listJewels.length,
                                   childAspectRatio: 1,
                                   onRefresh: () {
@@ -95,5 +97,10 @@ class _TabJewelsDetailState extends State<TabJewelsDetail> {
             },
           ),
         ));
+  }
+
+  _onLoadMore(NFTListCubit cubit) async {
+    cubit.getNFTList(categoryType);
+    await Future.delayed(const Duration(milliseconds: 1500));
   }
 }

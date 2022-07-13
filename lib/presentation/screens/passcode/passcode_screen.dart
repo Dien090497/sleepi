@@ -75,10 +75,7 @@ class PasscodeScreen extends StatelessWidget {
                 }
               } else {
                 passCodeController.text = '';
-                Future.delayed(
-                  const Duration(milliseconds: 2000),
-                  () => cubit.init(),
-                );
+                cubit.init();
               }
             },
             builder: (context, state) {

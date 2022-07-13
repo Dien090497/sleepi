@@ -85,6 +85,78 @@ class SFButton extends StatelessWidget {
   }
 }
 
+class HomeStartButton extends StatelessWidget {
+  const HomeStartButton({
+    required this.child,
+    this.onPressed,
+    this.width,
+    this.height,
+    this.color,
+    this.disabled = false,
+    this.radius = 100,
+    this.gradient,
+    Key? key,
+  }) : super(key: key);
+
+  final Widget child;
+  final VoidCallback? onPressed;
+  final double? width;
+  final double? height;
+  final Color? color;
+  final double radius;
+  final bool disabled;
+  final LinearGradient? gradient;
+
+  @override
+  Widget build(BuildContext context) {
+    return Stack(
+      children: [
+        Container(
+          width: width,
+          height: height ?? 48,
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(radius),
+            gradient: gradient,
+          ),
+          child: ElevatedButton(
+            onPressed: onPressed,
+            style: gradient == null
+                ? ButtonStyle(
+                    backgroundColor: MaterialStateProperty.all<Color>(
+                        color ?? AppColors.greyBottomNavBar),
+                    shape: MaterialStateProperty.all(
+                      RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(radius),
+                      ),
+                    ),
+                  )
+                : ButtonStyle(
+                    shape: MaterialStateProperty.all(
+                      RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(radius),
+                      ),
+                    ),
+                  ),
+            child: FittedBox(
+              fit: BoxFit.fitWidth,
+              child: child,
+            ),
+          ),
+        ),
+        if (disabled)
+          Container(
+            width: width,
+            height: height ?? 48,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(radius),
+              color: AppColors.dark.withOpacity(0.4),
+            ),
+          ),
+      ],
+    );
+  }
+}
+
 class SFButton2 extends StatelessWidget {
   const SFButton2({
     required this.text,

@@ -12,20 +12,21 @@ class HomeState with _$HomeState {
 
   const factory HomeState.loading() = HomeLoading;
 
-  const factory HomeState.loaded(
-      {required List<BedEntity> bedList,
-      required int id,
-      required int level,
-      required double durability,
-      required int time,
-      BedEntity? item,
-      List<ItemEntity>? itemList,
-        ItemEntity? selectedItem,
-      @Default('') String errorMessage,
-      @Default(ErrorType.none) ErrorType errorType,
-      @Default(true) bool loadMoreBed,
-      @Default(true) bool loadMoreItem,
-      @Default(false) bool loading}) = HomeLoaded;
+  const factory HomeState.loaded({
+    required List<BedEntity> bedList,
+    required int id,
+    required int level,
+    required double durability,
+    required int time,
+    BedEntity? item,
+    List<ItemEntity>? itemList,
+    ItemEntity? selectedItem,
+    @Default('') String errorMessage,
+    @Default(ErrorType.none) ErrorType errorType,
+    @Default(true) bool loadMoreBed,
+    @Default(true) bool loadMoreItem,
+    @Default(false) bool loading,
+  }) = HomeLoaded;
 
   const factory HomeState.error(String message) = HomeError;
 }

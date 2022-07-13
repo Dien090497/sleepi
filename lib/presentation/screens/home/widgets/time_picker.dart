@@ -1,5 +1,4 @@
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
 
@@ -113,23 +112,22 @@ class SFDatePicker extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CupertinoPicker(
-        looping: true,
-        selectionOverlay: const SizedBox(),
-        offAxisFraction: offAxisFraction,
-        squeeze: 1,
-        scrollController: FixedExtentScrollController(
-          initialItem: selectedTime,
-        ),
-        useMagnifier: useMagnifier,
-        itemExtent: 48.0,
-        backgroundColor: AppColors.dark,
-        onSelectedItemChanged: (int index) {
-          // setState(() {
-          //   _time = index;
-          // });
-          timeChanged(index);
-        },
-        children: List<Widget>.generate(24, (int index) {
+      looping: true,
+      selectionOverlay: const SizedBox(),
+      offAxisFraction: offAxisFraction,
+      squeeze: 1,
+      scrollController: FixedExtentScrollController(
+        initialItem: selectedTime,
+      ),
+      useMagnifier: useMagnifier,
+      itemExtent: 48.0,
+      backgroundColor: AppColors.dark,
+      onSelectedItemChanged: (int index) {
+        timeChanged(index);
+      },
+      children: List<Widget>.generate(
+        24,
+        (int index) {
           return Container(
             width: double.infinity,
             height: 46,
@@ -141,6 +139,8 @@ class SFDatePicker extends StatelessWidget {
               style: TextStyles.white1w700size16,
             ),
           );
-        }));
+        },
+      ),
+    );
   }
 }

@@ -9,7 +9,7 @@ class NftListState with _$NftListState {
 
   const factory NftListState.loading() = NftListLoading;
 
-  const factory NftListState.loaded(List<BedModel> listBed) = NftListLoaded;
+  const factory NftListState.loaded(List<BedModel> listBed, bool isLoadMore) = NftListLoaded;
 
   const factory NftListState.error(String msg) = NftListError;
 }

@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:slee_fi/common/routes/app_routes.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/widgets/sf_icon.dart';
-import 'dart:ui' as ui;
 import 'package:slee_fi/common/widgets/sf_statistic_resource.dart';
 import 'package:slee_fi/resources/resources.dart';
 
@@ -13,7 +12,6 @@ class TopBarCommon extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    const size = ui.Size(40, 40);
     return Padding(
       padding: const EdgeInsets.only(top: 20, left: 16, right: 16),
       child: Row(
@@ -35,8 +33,8 @@ class TopBarCommon extends StatelessWidget {
                     Navigator.pushNamed(context, R.setting);
                   },
                   child: Container(
-                    width: size.width,
-                    height: size.height,
+                    width: 40,
+                    height: 40,
                     decoration: BoxDecoration(
                       color: Colors.white.withOpacity(0.05),
                       borderRadius: BorderRadius.circular(100),

@@ -195,7 +195,7 @@ class PopUpItemMarketPlace extends StatelessWidget {
                     final walletState = walletCubit.state;
                     Navigator.pop(context);
                     if (userState is UserLoaded) {
-                      for (var element in userState.listTokens) {
+                      for (final element in userState.listTokens) {
                         if (element.symbol.toLowerCase() == 'avax') {
                           if (element.balance < double.parse(item.price)) {
                             if (walletState is WalletNotExisted) {

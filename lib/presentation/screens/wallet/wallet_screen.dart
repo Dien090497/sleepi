@@ -60,7 +60,7 @@ class _WalletScreenState extends State<WalletScreen>
               actions: [
                 GestureDetector(
                   onTap: () async {
-                    var state = context.read<WalletCubit>().state;
+                    final state = context.read<WalletCubit>().state;
                     if (state is WalletNotExisted) {
                       _showCreateOrImportWallet()
                           .then((value) => _showWarningDialog(value, context));

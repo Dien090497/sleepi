@@ -1,7 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
 import 'package:slee_fi/common/utils/launch_url_utils.dart';
 import 'package:slee_fi/common/widgets/sf_icon.dart';
@@ -10,37 +9,19 @@ import 'package:slee_fi/common/widgets/topbar_common.dart';
 import 'package:slee_fi/l10n/locale_keys.g.dart';
 import 'package:slee_fi/presentation/blocs/home/home_bloc.dart';
 import 'package:slee_fi/presentation/screens/home/widgets/alarm_bell.dart';
+import 'package:slee_fi/presentation/screens/home/widgets/home_list_widget.dart';
 import 'package:slee_fi/presentation/screens/home/widgets/home_switch.dart';
 import 'package:slee_fi/presentation/screens/home/widgets/middle_bed.dart';
 import 'package:slee_fi/presentation/screens/home/widgets/use_item.dart';
 import 'package:slee_fi/resources/resources.dart';
 
-class HomeScreen extends StatefulWidget {
+class HomeScreen extends StatelessWidget {
   const HomeScreen({Key? key}) : super(key: key);
-
-  @override
-  State<HomeScreen> createState() => _HomeScreenState();
-}
-
-class _HomeScreenState extends State<HomeScreen> {
-  final RefreshController refreshController = RefreshController();
-  final HomeBloc _homeBloc = HomeBloc();
-
-  @override
-  void dispose() {
-    super.dispose();
-    refreshController.dispose();
-  }
-
-  void _onRefresh() async {
-    _homeBloc.add(RefreshBed());
-    refreshController.refreshCompleted();
-  }
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (_) => _homeBloc..add(RefreshBed()),
+      create: (_) => HomeBloc()..add(RefreshBed()),
       child: SafeArea(
         bottom: false,
         child: Column(
@@ -48,14 +29,8 @@ class _HomeScreenState extends State<HomeScreen> {
             const TopBarCommon(),
             const SizedBox(height: 27),
             Expanded(
-              child: SmartRefresher(
-                controller: refreshController,
-                enablePullDown: true,
-                onRefresh: () {
-                  _onRefresh();
-                },
+              child: HomeListWidget(
                 child: ListView(
-                  shrinkWrap: true,
                   children: [
                     const Padding(
                       padding: EdgeInsets.symmetric(horizontal: 16.0),

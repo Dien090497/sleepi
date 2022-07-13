@@ -393,7 +393,6 @@ class WalletImplementation extends IWalletRepository {
           signer: ethereumAddress.hexEip55,
         );
         try {
-          print('result12 ${schema.signedMessage} \n ${schema.signer}');
           final result = await _authDataSource.verifyUser(schema);
           if (result.status) {
             return Right(result.status);

@@ -1,8 +1,10 @@
 import 'package:dartz/dartz.dart';
 import 'package:injectable/injectable.dart';
-import 'package:slee_fi/common/extensions/string_x.dart';
+import 'package:slee_fi/datasources/local/get_storage_datasource.dart';
+import 'package:slee_fi/datasources/local/isar/isar_datasource.dart';
 import 'package:slee_fi/datasources/local/secure_storage.dart';
 import 'package:slee_fi/datasources/remote/auth_datasource/auth_datasource.dart';
+import 'package:slee_fi/datasources/remote/network/web3_datasource.dart';
 import 'package:slee_fi/entities/active_code/active_code_entity.dart';
 import 'package:slee_fi/entities/item_entity/item_entity.dart';
 import 'package:slee_fi/failures/failure.dart';
@@ -24,8 +26,12 @@ import 'package:slee_fi/usecase/withdraw_history_usecase.dart';
 class UserImplementation extends IUserRepository {
   final AuthDataSource _authDataSource;
   final SecureStorage _secureStorage;
+  final GetStorageDataSource _getStorageDataSource;
+  final IsarDataSource _isarDataSource;
+  final Web3DataSource _web3DataSource;
 
-  UserImplementation(this._authDataSource, this._secureStorage);
+  UserImplementation(this._authDataSource, this._secureStorage,
+      this._getStorageDataSource, this._isarDataSource, this._web3DataSource);
 
   @override
   Future<Either<FailureMessage, dynamic>> changePassword(
@@ -64,8 +70,22 @@ class UserImplementation extends IUserRepository {
   Future<Either<FailureMessage, SwapTokenToWalletResponse>>
       transferTokenToMainWallet(WhitDrawTokenSchema whitDrawTokenSchema) async {
     try {
-      final result =
-          await _authDataSource.transferTokenToWallet(whitDrawTokenSchema);
+      final walletId = _getStorageDataSource.getCurrentWalletId();
+      final wallet = await _isarDataSource.getWalletAt(walletId);
+      final credentials =
+          _web3DataSource.credentialsFromPrivateKey(wallet!.privateKey);
+      final message = await _secureStorage.readMessage();
+      final ethereumAddress = await credentials.extractAddress();
+      final signature = _web3DataSource.generateSignature(
+          privateKey: wallet.privateKey, message: message ?? '');
+      WhitDrawTokenSchema schema = WhitDrawTokenSchema(
+        amount: whitDrawTokenSchema.amount,
+        tokenAddress: whitDrawTokenSchema.tokenAddress,
+        type: whitDrawTokenSchema.type,
+        signedMessage: signature,
+        signer: ethereumAddress.hexEip55,
+      );
+      final result = await _authDataSource.transferTokenToWallet(schema);
       return Right(result);
     } catch (e) {
       return Left(FailureMessage.fromException(e));
@@ -89,7 +109,7 @@ class UserImplementation extends IUserRepository {
   Future<Either<FailureMessage, WithdrawHistoryResponse>> withdrawHistory(
       WithdrawParam withdrawParam) async {
     try {
-      var result = await _authDataSource.withdraw(
+      final result = await _authDataSource.withdraw(
           withdrawParam.attributeWithdraw,
           withdrawParam.limit,
           withdrawParam.page);
@@ -104,7 +124,7 @@ class UserImplementation extends IUserRepository {
   Future<Either<FailureMessage, String>> estimateGasWithdraw(
       EstimateGasWithdrawParam estimateParam) async {
     try {
-      var result = await _authDataSource.estimateGasWithdraw(
+      final result = await _authDataSource.estimateGasWithdraw(
           estimateParam.type, estimateParam.contractAddress);
       return Right(result);
     } on Exception catch (e) {
@@ -116,12 +136,11 @@ class UserImplementation extends IUserRepository {
   Future<Either<FailureMessage, List<BedModel>>> fetchListBed(
       FetchBedParam fetchBedParam) async {
     try {
-      var result = await _authDataSource.getNftByOwner(
+      final result = await _authDataSource.getNftByOwner(
           fetchBedParam.limit,
           fetchBedParam.page,
           fetchBedParam.categoryId.type,
           fetchBedParam.attributeNFT);
-
       return Right(result.list);
     } catch (e) {
       return Left(FailureMessage.fromException(e));
@@ -132,7 +151,7 @@ class UserImplementation extends IUserRepository {
   Future<Either<FailureMessage, dynamic>> addItemToBed(
       AddItemToBedParam addItemToBedParam) async {
     try {
-      var result = await _authDataSource.addItemForBed(
+      final result = await _authDataSource.addItemForBed(
           addItemToBedParam.bedId, addItemToBedParam.itemId);
 
       return Right(result);
@@ -145,7 +164,7 @@ class UserImplementation extends IUserRepository {
   Future<Either<FailureMessage, dynamic>> removeItemInBed(
       AddItemToBedParam addItemToBedParam) async {
     try {
-      var result = await _authDataSource.removeItemFromBed(
+      final result = await _authDataSource.removeItemFromBed(
           addItemToBedParam.bedId, addItemToBedParam.itemId);
 
       return Right(result);
@@ -158,8 +177,8 @@ class UserImplementation extends IUserRepository {
   Future<Either<FailureMessage, List<ItemEntity>>> fetchItemOwner(
       FilterItemSchema filterItemSchema) async {
     // try {
-      var result = await _authDataSource.fetchItemOwner(filterItemSchema);
-      return Right(result.list.map((e) => e.toEntity()).toList());
+    final result = await _authDataSource.fetchItemOwner(filterItemSchema);
+    return Right(result.list.map((e) => e.toEntity()).toList());
     // } catch (e) {
     //   return Left(FailureMessage.fromException(e));
     // }
