@@ -46,6 +46,8 @@ class _SendToExternalScreenState extends State<SendToExternalScreen> {
   String contractAddressTo = '';
   double valueInEther = 0;
 
+  TextEditingController controllerAmount = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     final args =
@@ -63,7 +65,7 @@ class _SendToExternalScreenState extends State<SendToExternalScreen> {
             showCustomAlertDialog(context,
                 children: PopUpConfirmSend(
                   toAddress: contractAddressTo,
-                  valueInEther: valueInEther,
+                  valueInEther: double.parse(controllerAmount.text.replaceAll(',','.')),
                   transferToken: args != null ? true : false,
                   arg: args,
                 ));
@@ -116,6 +118,7 @@ class _SendToExternalScreenState extends State<SendToExternalScreen> {
                                     onChangedAddress: (address) {
                                       cubit.contractAddressTo = address;
                                       contractAddressTo = address;
+                                      cubit.init();
                                     },
                                   ),
                                   if (state is SendToExternalErrorToAddress)
@@ -139,13 +142,11 @@ class _SendToExternalScreenState extends State<SendToExternalScreen> {
                                           child: SFIcon(args != null
                                               ? args.icon
                                               : Ics.icAvax)),
-                                      onChanged: (v) {
-                                        if (v.isNotEmpty) {
-                                          final result = v.toString().replaceAll(',', '.');
-                                          cubit.valueInEther = double.parse(result);
-                                          valueInEther = double.parse(result);
-                                        }
-                                      }),
+                                      controller: controllerAmount,
+                                    onChanged: (value) {
+                                        cubit.init();
+                                    },
+                                      ),
                                   if (state is SendToExternalErrorValueInEther)
                                     SFText(
                                       keyText: state.msg,
@@ -221,9 +222,17 @@ class _SendToExternalScreenState extends State<SendToExternalScreen> {
                         // disabled: isDisabled,
                         onPressed: () {
                           if (args != null) {
-                            cubit.validator(args.tokenEntity?.balance ?? 0.0);
+                            if (controllerAmount.text.isNotEmpty) {
+                              cubit.validator(balanceCurrent: args.tokenEntity?.balance ?? 0.0, amount: double.parse(controllerAmount.text.replaceAll(',','.')));
+                            } else {
+                              cubit.validator(balanceCurrent: args.tokenEntity?.balance ?? 0.0, amount: -1);
+                            }
                           } else {
-                            cubit.validator(balance);
+                            if (controllerAmount.text.isNotEmpty) {
+                              cubit.validator(balanceCurrent: balance ?? 0.0, amount: double.parse(controllerAmount.text.replaceAll(',','.')));
+                            } else {
+                              cubit.validator(balanceCurrent: balance ?? 0.0, amount: -1);
+                            }
                           }
                         },
                       ),

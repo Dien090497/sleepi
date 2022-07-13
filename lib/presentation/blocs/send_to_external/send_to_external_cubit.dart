@@ -15,7 +15,6 @@ class SendToExternalCubit extends Cubit<SendToExternalState> {
   SendToExternalCubit(): super(const SendToExternalState.initial());
 
   String contractAddressTo = '';
-  double valueInEther = 0;
   double? fee;
 
   final _sendToExternalUC = getIt<SendToExternalUseCase>();
@@ -64,7 +63,7 @@ class SendToExternalCubit extends Cubit<SendToExternalState> {
     );
    }
 
-  Future<void> validator(double balance) async {
+  Future<void> validator({required double balanceCurrent, required double amount}) async {
     if (contractAddressTo.isEmpty) {
       emit(SendToExternalState.errorToAddress(LocaleKeys.this_field_is_required.tr()));
       return;
@@ -73,12 +72,16 @@ class SendToExternalCubit extends Cubit<SendToExternalState> {
       emit(SendToExternalState.errorToAddress(LocaleKeys.invalid_address.tr()));
       return;
     }
-    if (valueInEther == 0) {
-      emit(SendToExternalState.errorValueInEther(LocaleKeys.this_field_is_required.tr()));
+    if (amount == 0) {
+      emit(SendToExternalState.errorValueInEther(LocaleKeys.amount_input_can_not_be_zero.tr()));
       return;
     }
-    if (valueInEther > balance) {
+    if (amount > balanceCurrent) {
       emit(SendToExternalState.errorValueInEther(LocaleKeys.insufficient_balance.tr()));
+      return;
+    }
+    if (amount < 0) {
+      emit(SendToExternalState.errorValueInEther(LocaleKeys.this_field_is_required.tr()));
       return;
     }
     emit(const SendToExternalState.validatorSuccess());
