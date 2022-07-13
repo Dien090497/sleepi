@@ -8,6 +8,7 @@ class WhitDrawTokenSchema {
   final String tokenAddress;
   final String amount;
 
+
   WhitDrawTokenSchema(this.type, this.tokenAddress, this.amount);
 
   factory WhitDrawTokenSchema.fromJson(Map<String, dynamic> json) =>

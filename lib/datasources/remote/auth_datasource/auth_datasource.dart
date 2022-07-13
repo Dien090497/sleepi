@@ -85,7 +85,7 @@ abstract class AuthDataSource {
   @GET('/users/active-code')
   Future<ActiveCodeResponse> fetchActivationCodes();
 
-  @POST('/users/verify')
+  @POST('/users/insert-wallet')
   Future<VerifyResponse> verifyUser(@Body() VerifyUserSchema verifyUserSchema);
 
   @POST('/users/change-password')
