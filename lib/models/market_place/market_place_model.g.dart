@@ -34,6 +34,7 @@ MarketPlaceModel _$MarketPlaceModelFromJson(Map<String, dynamic> json) =>
       json['class'] as String?,
       (json['durability'] as num).toDouble(),
       json['is_mint'] as int,
+      json['token_id'] as int,
     );
 
 Map<String, dynamic> _$MarketPlaceModelToJson(MarketPlaceModel instance) =>
@@ -64,4 +65,5 @@ Map<String, dynamic> _$MarketPlaceModelToJson(MarketPlaceModel instance) =>
       'class': instance.classNft,
       'quality': instance.quality,
       'owner': instance.owner,
+      'token_id': instance.tokenId,
     };

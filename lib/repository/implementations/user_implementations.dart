@@ -121,9 +121,11 @@ class UserImplementation extends IUserRepository {
           fetchBedParam.page,
           fetchBedParam.categoryId.type,
           fetchBedParam.attributeNFT);
-
+      'load bed success  ${result.toJson()}   ${fetchBedParam.page}   ${fetchBedParam.limit}    ${fetchBedParam.categoryId}'
+          .log;
       return Right(result.list);
     } catch (e) {
+      'error in load bed $e'.log;
       return Left(FailureMessage.fromException(e));
     }
   }
@@ -158,8 +160,8 @@ class UserImplementation extends IUserRepository {
   Future<Either<FailureMessage, List<ItemEntity>>> fetchItemOwner(
       FilterItemSchema filterItemSchema) async {
     // try {
-      var result = await _authDataSource.fetchItemOwner(filterItemSchema);
-      return Right(result.list.map((e) => e.toEntity()).toList());
+    var result = await _authDataSource.fetchItemOwner(filterItemSchema);
+    return Right(result.list.map((e) => e.toEntity()).toList());
     // } catch (e) {
     //   return Left(FailureMessage.fromException(e));
     // }

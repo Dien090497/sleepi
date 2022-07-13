@@ -52,6 +52,8 @@ class MarketPlaceModel {
   final String? classNft;
   final String? quality;
   final String owner;
+  @JsonKey(name: 'token_id')
+  final int tokenId;
 
   MarketPlaceModel(
       this.id,
@@ -79,7 +81,8 @@ class MarketPlaceModel {
       this.symbol,
       this.classNft,
       this.durability,
-      this.isMint);
+      this.isMint,
+      this.tokenId);
 
   factory MarketPlaceModel.fromJson(Map<String, dynamic> json) =>
       _$MarketPlaceModelFromJson(json);
