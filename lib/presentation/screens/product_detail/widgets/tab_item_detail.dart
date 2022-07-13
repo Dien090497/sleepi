@@ -52,6 +52,10 @@ class _TabItemDetailState extends State<TabItemDetail> {
                           (state is NftListLoading)
                               ? const Center(child: CircularProgressIndicator())
                               : SFGridView(
+                                  isLoadMore: state is NftListLoaded
+                                      ? state.isLoadMore
+                                      : false,
+                                  onLoadMore: _onLoadMore(cubit),
                                   count: listItems.length,
                                   childAspectRatio: 1,
                                   onRefresh: () {
@@ -87,5 +91,10 @@ class _TabItemDetailState extends State<TabItemDetail> {
             },
           ),
         ));
+  }
+
+  _onLoadMore(NFTListCubit cubit) async {
+    cubit.getNFTList(categoryType);
+    await Future.delayed(const Duration(milliseconds: 1500));
   }
 }

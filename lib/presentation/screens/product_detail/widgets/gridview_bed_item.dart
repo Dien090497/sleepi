@@ -19,7 +19,9 @@ class GridViewBedItem extends StatelessWidget {
       this.onBedTap,
       this.onBuyTap,
       this.isScroll = true,
-      this.onRefresh})
+      this.onRefresh,
+      this.onLoadMore,
+      required this.isLoadMore})
       : super(key: key);
 
   final List<BedModel> beds;
@@ -27,13 +29,17 @@ class GridViewBedItem extends StatelessWidget {
   final ValueChanged<BedModel>? onBuyTap;
   final bool isScroll;
   final Function? onRefresh;
+  final Function? onLoadMore;
+  final bool isLoadMore;
 
   @override
   Widget build(BuildContext context) {
     return SFGridView(
       count: beds.length,
+      isLoadMore: isLoadMore,
       isScroll: isScroll,
       onRefresh: onRefresh,
+      onLoadMore: _onLoadMore(),
       childAspectRatio: 8 / 10,
       itemBuilder: (context, i) {
         final bed = beds[i];
@@ -57,7 +63,7 @@ class GridViewBedItem extends StatelessWidget {
                   top: 20,
                   left: -40,
                   child: TopLeftBanner(
-                    text: bed.type.reCase(StringCase.titleCase),
+                    text: bed.nftClass.reCase(StringCase.camelCase),
                     textColor: AppColors.white,
                   ),
                 ),
@@ -83,7 +89,7 @@ class GridViewBedItem extends StatelessWidget {
                         padding: const EdgeInsets.symmetric(
                             vertical: 5, horizontal: 16),
                         child: SFText(
-                          keyText: bed.tokenId.toString(),
+                          keyText: bed.nftId.toString(),
                           style: TextStyles.white1w700size12,
                         ),
                       ),
@@ -112,5 +118,13 @@ class GridViewBedItem extends StatelessWidget {
         );
       },
     );
+  }
+
+  Future<void> _onLoadMore() async {
+    if (onLoadMore != null) {
+      onLoadMore!();
+    }
+    await Future.delayed(const Duration(milliseconds: 1500));
+    return;
   }
 }

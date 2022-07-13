@@ -1,17 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:slee_fi/common/extensions/string_x.dart';
 import 'package:slee_fi/common/routes/app_routes.dart';
-import 'package:slee_fi/common/style/text_styles.dart';
-import 'package:slee_fi/common/widgets/sf_icon.dart';
 import 'package:slee_fi/common/widgets/sf_sub_tab_bar.dart';
-import 'package:slee_fi/common/widgets/sf_text.dart';
 import 'package:slee_fi/l10n/locale_keys.g.dart';
 import 'package:slee_fi/models/bed_model/beb_model.dart';
 import 'package:slee_fi/presentation/blocs/nft_list/nft_list_cubit.dart';
 import 'package:slee_fi/presentation/blocs/nft_list/nft_list_state.dart';
 import 'package:slee_fi/presentation/screens/info_individual/info_individual_screen.dart';
 import 'package:slee_fi/presentation/screens/product_detail/widgets/gridview_bed_item.dart';
-import 'package:slee_fi/resources/resources.dart';
 import 'package:slee_fi/usecase/fetch_bed_usecase.dart';
 
 class TabBedsDetail extends StatefulWidget {
@@ -36,6 +33,13 @@ class _TabBedsDetailState extends State<TabBedsDetail> {
             listener: (context, state) {
               if (state is NftListLoaded) {
                 listBeds = state.listBed;
+
+                'state is ${listBeds.length}   ${listBeds
+                    .where((element) {
+                      'type is  ${element.type}'.log;
+                      return element.type == 'beds';
+                })
+                    .toList().length}'.log;
               }
             },
             builder: (context, state) {
@@ -55,7 +59,15 @@ class _TabBedsDetailState extends State<TabBedsDetail> {
                           (state is NftListLoading)
                               ? const Center(child: CircularProgressIndicator())
                               : GridViewBedItem(
-                                  beds: listBeds,
+                                  onLoadMore: () {
+                                    cubit.getNFTList(categoryType);
+                                  },
+                                  isLoadMore: state is NftListLoaded
+                                      ? state.isLoadMore
+                                      : false,
+                                  beds: listBeds
+                                      .where((element) => element.type == 'beds')
+                                      .toList(),
                                   onRefresh: () {
                                     cubit.refresh(categoryType);
                                   },
@@ -64,19 +76,27 @@ class _TabBedsDetailState extends State<TabBedsDetail> {
                                         arguments: InfoIndividualParams(
                                             bed: bed.toEntity(), buy: true));
                                   }),
-                          Center(
-                            child: Column(
-                              mainAxisSize: MainAxisSize.min,
-                              children: [
-                                const SFIcon(Ics.emptyBox),
-                                const SizedBox(height: 28),
-                                SFText(
-                                  keyText: LocaleKeys.there_is_no_item,
-                                  style: TextStyles.lightGrey14,
-                                )
-                              ],
-                            ),
-                          ),
+                          (state is NftListLoading)
+                              ? const Center(child: CircularProgressIndicator())
+                              : GridViewBedItem(
+                                  onLoadMore: () {
+                                    cubit.getNFTList(categoryType);
+                                  },
+                                  isLoadMore: state is NftListLoaded
+                                      ? state.isLoadMore
+                                      : false,
+                                  beds: listBeds
+                                      .where(
+                                          (element) => element.type == 'bedbox')
+                                      .toList(),
+                                  onRefresh: () {
+                                    cubit.refresh(categoryType);
+                                  },
+                                  onBedTap: (bed) {
+                                    Navigator.pushNamed(context, R.nftInfo,
+                                        arguments: InfoIndividualParams(
+                                            bed: bed.toEntity(), buy: true));
+                                  }),
                         ],
                       ),
                     ),

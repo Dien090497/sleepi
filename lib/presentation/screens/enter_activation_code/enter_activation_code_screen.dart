@@ -22,7 +22,6 @@ import 'package:slee_fi/presentation/blocs/activation_code/activation_code_state
 import 'package:slee_fi/presentation/screens/create_password/create_password_screen.dart';
 import 'package:slee_fi/presentation/screens/enter_activation_code/widgets/checkbox_letter_widget.dart';
 import 'package:slee_fi/presentation/screens/login_signup/widgets/login_box.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 class EnterActiveCodeArg {
   final int otp;

@@ -20,7 +20,7 @@ mixin _$NftListState {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(List<BedModel> listBed) loaded,
+    required TResult Function(List<BedModel> listBed, bool isLoadMore) loaded,
     required TResult Function(String msg) error,
   }) =>
       throw _privateConstructorUsedError;
@@ -28,7 +28,7 @@ mixin _$NftListState {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(List<BedModel> listBed)? loaded,
+    TResult Function(List<BedModel> listBed, bool isLoadMore)? loaded,
     TResult Function(String msg)? error,
   }) =>
       throw _privateConstructorUsedError;
@@ -36,7 +36,7 @@ mixin _$NftListState {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(List<BedModel> listBed)? loaded,
+    TResult Function(List<BedModel> listBed, bool isLoadMore)? loaded,
     TResult Function(String msg)? error,
     required TResult orElse(),
   }) =>
@@ -127,7 +127,7 @@ class _$NftListInitial implements NftListInitial {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(List<BedModel> listBed) loaded,
+    required TResult Function(List<BedModel> listBed, bool isLoadMore) loaded,
     required TResult Function(String msg) error,
   }) {
     return initial();
@@ -138,7 +138,7 @@ class _$NftListInitial implements NftListInitial {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(List<BedModel> listBed)? loaded,
+    TResult Function(List<BedModel> listBed, bool isLoadMore)? loaded,
     TResult Function(String msg)? error,
   }) {
     return initial?.call();
@@ -149,7 +149,7 @@ class _$NftListInitial implements NftListInitial {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(List<BedModel> listBed)? loaded,
+    TResult Function(List<BedModel> listBed, bool isLoadMore)? loaded,
     TResult Function(String msg)? error,
     required TResult orElse(),
   }) {
@@ -244,7 +244,7 @@ class _$NftListLoading implements NftListLoading {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(List<BedModel> listBed) loaded,
+    required TResult Function(List<BedModel> listBed, bool isLoadMore) loaded,
     required TResult Function(String msg) error,
   }) {
     return loading();
@@ -255,7 +255,7 @@ class _$NftListLoading implements NftListLoading {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(List<BedModel> listBed)? loaded,
+    TResult Function(List<BedModel> listBed, bool isLoadMore)? loaded,
     TResult Function(String msg)? error,
   }) {
     return loading?.call();
@@ -266,7 +266,7 @@ class _$NftListLoading implements NftListLoading {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(List<BedModel> listBed)? loaded,
+    TResult Function(List<BedModel> listBed, bool isLoadMore)? loaded,
     TResult Function(String msg)? error,
     required TResult orElse(),
   }) {
@@ -323,7 +323,7 @@ abstract class _$$NftListLoadedCopyWith<$Res> {
   factory _$$NftListLoadedCopyWith(
           _$NftListLoaded value, $Res Function(_$NftListLoaded) then) =
       __$$NftListLoadedCopyWithImpl<$Res>;
-  $Res call({List<BedModel> listBed});
+  $Res call({List<BedModel> listBed, bool isLoadMore});
 }
 
 /// @nodoc
@@ -340,12 +340,17 @@ class __$$NftListLoadedCopyWithImpl<$Res>
   @override
   $Res call({
     Object? listBed = freezed,
+    Object? isLoadMore = freezed,
   }) {
     return _then(_$NftListLoaded(
       listBed == freezed
           ? _value._listBed
           : listBed // ignore: cast_nullable_to_non_nullable
               as List<BedModel>,
+      isLoadMore == freezed
+          ? _value.isLoadMore
+          : isLoadMore // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -353,7 +358,8 @@ class __$$NftListLoadedCopyWithImpl<$Res>
 /// @nodoc
 
 class _$NftListLoaded implements NftListLoaded {
-  const _$NftListLoaded(final List<BedModel> listBed) : _listBed = listBed;
+  const _$NftListLoaded(final List<BedModel> listBed, this.isLoadMore)
+      : _listBed = listBed;
 
   final List<BedModel> _listBed;
   @override
@@ -363,8 +369,11 @@ class _$NftListLoaded implements NftListLoaded {
   }
 
   @override
+  final bool isLoadMore;
+
+  @override
   String toString() {
-    return 'NftListState.loaded(listBed: $listBed)';
+    return 'NftListState.loaded(listBed: $listBed, isLoadMore: $isLoadMore)';
   }
 
   @override
@@ -372,12 +381,16 @@ class _$NftListLoaded implements NftListLoaded {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$NftListLoaded &&
-            const DeepCollectionEquality().equals(other._listBed, _listBed));
+            const DeepCollectionEquality().equals(other._listBed, _listBed) &&
+            const DeepCollectionEquality()
+                .equals(other.isLoadMore, isLoadMore));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(_listBed));
+  int get hashCode => Object.hash(
+      runtimeType,
+      const DeepCollectionEquality().hash(_listBed),
+      const DeepCollectionEquality().hash(isLoadMore));
 
   @JsonKey(ignore: true)
   @override
@@ -389,10 +402,10 @@ class _$NftListLoaded implements NftListLoaded {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(List<BedModel> listBed) loaded,
+    required TResult Function(List<BedModel> listBed, bool isLoadMore) loaded,
     required TResult Function(String msg) error,
   }) {
-    return loaded(listBed);
+    return loaded(listBed, isLoadMore);
   }
 
   @override
@@ -400,10 +413,10 @@ class _$NftListLoaded implements NftListLoaded {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(List<BedModel> listBed)? loaded,
+    TResult Function(List<BedModel> listBed, bool isLoadMore)? loaded,
     TResult Function(String msg)? error,
   }) {
-    return loaded?.call(listBed);
+    return loaded?.call(listBed, isLoadMore);
   }
 
   @override
@@ -411,12 +424,12 @@ class _$NftListLoaded implements NftListLoaded {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(List<BedModel> listBed)? loaded,
+    TResult Function(List<BedModel> listBed, bool isLoadMore)? loaded,
     TResult Function(String msg)? error,
     required TResult orElse(),
   }) {
     if (loaded != null) {
-      return loaded(listBed);
+      return loaded(listBed, isLoadMore);
     }
     return orElse();
   }
@@ -460,9 +473,11 @@ class _$NftListLoaded implements NftListLoaded {
 }
 
 abstract class NftListLoaded implements NftListState {
-  const factory NftListLoaded(final List<BedModel> listBed) = _$NftListLoaded;
+  const factory NftListLoaded(
+      final List<BedModel> listBed, final bool isLoadMore) = _$NftListLoaded;
 
   List<BedModel> get listBed => throw _privateConstructorUsedError;
+  bool get isLoadMore => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
   _$$NftListLoadedCopyWith<_$NftListLoaded> get copyWith =>
       throw _privateConstructorUsedError;
@@ -535,7 +550,7 @@ class _$NftListError implements NftListError {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(List<BedModel> listBed) loaded,
+    required TResult Function(List<BedModel> listBed, bool isLoadMore) loaded,
     required TResult Function(String msg) error,
   }) {
     return error(msg);
@@ -546,7 +561,7 @@ class _$NftListError implements NftListError {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(List<BedModel> listBed)? loaded,
+    TResult Function(List<BedModel> listBed, bool isLoadMore)? loaded,
     TResult Function(String msg)? error,
   }) {
     return error?.call(msg);
@@ -557,7 +572,7 @@ class _$NftListError implements NftListError {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(List<BedModel> listBed)? loaded,
+    TResult Function(List<BedModel> listBed, bool isLoadMore)? loaded,
     TResult Function(String msg)? error,
     required TResult orElse(),
   }) {

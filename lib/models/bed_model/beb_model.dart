@@ -19,7 +19,7 @@ class BedModel {
   @JsonKey(name: 'jewel_type')
   dynamic jewelType;
   @JsonKey(name: 'class')
-  dynamic classBed;
+  String nftClass;
   @JsonKey(name: "is_mint")
   final int isMint;
   final String? quality;
@@ -64,6 +64,7 @@ class BedModel {
       this.bonus,
       this.special,
       this.resilience,
+      this.nftClass,
       this.createdAt,
       this.updatedAt,
       this.tokenId,
@@ -74,6 +75,8 @@ class BedModel {
 
   factory BedModel.fromJson(Map<String, dynamic> json) =>
       _$BedModelFromJson(json);
+
+
 
   Map<String, dynamic> toJson() => _$BedModelToJson(this);
 
