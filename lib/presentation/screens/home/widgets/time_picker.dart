@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
 
@@ -17,9 +18,7 @@ class TimePicker extends StatelessWidget {
         children: [
           Container(
             height: 320.0,
-            margin: const EdgeInsets.symmetric(
-              horizontal: 50,
-            ),
+            margin: const EdgeInsets.symmetric(horizontal: 50),
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
@@ -56,9 +55,7 @@ class TimePicker extends StatelessWidget {
                           gradient: AppColors.gradientWhiteBorderLeftToRight,
                         ),
                       ),
-                      const SizedBox(
-                        height: 46,
-                      ),
+                      const SizedBox(height: 46),
                       Container(
                         height: 1,
                         decoration: BoxDecoration(
@@ -97,7 +94,7 @@ class TimePicker extends StatelessWidget {
   }
 }
 
-class SFDatePicker extends StatefulWidget {
+class SFDatePicker extends StatelessWidget {
   const SFDatePicker({
     Key? key,
     required this.timeChanged,
@@ -114,37 +111,30 @@ class SFDatePicker extends StatefulWidget {
   final bool useMagnifier;
 
   @override
-  State<SFDatePicker> createState() => _SFDatePickerState();
-}
-
-class _SFDatePickerState extends State<SFDatePicker> {
-  late int _time = widget.selectedTime;
-
-  @override
   Widget build(BuildContext context) {
     return CupertinoPicker(
         looping: true,
-        selectionOverlay: Container(),
-        offAxisFraction: widget.offAxisFraction,
+        selectionOverlay: const SizedBox(),
+        offAxisFraction: offAxisFraction,
         squeeze: 1,
         scrollController: FixedExtentScrollController(
-          initialItem: _time,
+          initialItem: selectedTime,
         ),
-        useMagnifier: widget.useMagnifier,
+        useMagnifier: useMagnifier,
         itemExtent: 48.0,
         backgroundColor: AppColors.dark,
         onSelectedItemChanged: (int index) {
-          setState(() {
-            _time = index;
-          });
-          widget.timeChanged(index);
+          // setState(() {
+          //   _time = index;
+          // });
+          timeChanged(index);
         },
         children: List<Widget>.generate(24, (int index) {
           return Container(
             width: double.infinity,
             height: 46,
             padding: const EdgeInsets.symmetric(horizontal: 12),
-            alignment: widget.alignment,
+            alignment: alignment,
             child: Text(
               index < 10 ? '0$index' : '$index',
               textAlign: TextAlign.right,

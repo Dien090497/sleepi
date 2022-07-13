@@ -34,7 +34,6 @@ class _HomeScreenState extends State<HomeScreen> {
 
   void _onRefresh() async {
     _homeBloc.add(RefreshBed());
-    await Future.delayed(const Duration(milliseconds: 1000));
     refreshController.refreshCompleted();
   }
 
@@ -58,9 +57,9 @@ class _HomeScreenState extends State<HomeScreen> {
                 child: ListView(
                   shrinkWrap: true,
                   children: [
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                      child: MiddleBed(homeBloc: _homeBloc),
+                    const Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 16.0),
+                      child: MiddleBed(),
                     ),
                     const SizedBox(height: 10),
                     const UseItem(),

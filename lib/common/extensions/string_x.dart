@@ -61,8 +61,7 @@ extension StringX on String {
       return LocaleKeys.password_must_be_at_least_6.tr();
     }
 
-    String pattern =
-        r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9]).{8,}$';
+    String pattern = r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9]).{8,}$';
     RegExp regExp = RegExp(pattern);
     final result = regExp.hasMatch(this);
     if (!result) {

@@ -8,10 +8,10 @@ part of 'filter_item_chema.dart';
 
 FilterItemSchema _$FilterItemSchemaFromJson(Map<String, dynamic> json) =>
     FilterItemSchema(
-      json['page'] as int,
-      json['limit'] as int,
-      json['level'] as int,
-      (json['type'] as List<dynamic>).map((e) => e as String).toList(),
+      page: json['page'] as int,
+      limit: json['limit'] as int,
+      level: json['level'] as int,
+      type: (json['type'] as List<dynamic>).map((e) => e as String).toList(),
     );
 
 Map<String, dynamic> _$FilterItemSchemaToJson(FilterItemSchema instance) =>

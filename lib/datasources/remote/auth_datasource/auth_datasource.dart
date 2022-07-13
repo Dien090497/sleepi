@@ -11,6 +11,7 @@ import 'package:slee_fi/models/active_code_response/active_code_response.dart';
 import 'package:slee_fi/models/create_password_reponse/create_password_response.dart';
 import 'package:slee_fi/models/fetch_bed_response/fetch_bed_response.dart';
 import 'package:slee_fi/models/global_config_response/global_config_response.dart';
+import 'package:slee_fi/models/item_owner_response/item_owner_response.dart';
 import 'package:slee_fi/models/list_market_place/list_market_place_model.dart';
 import 'package:slee_fi/models/market_place/market_place_model.dart';
 import 'package:slee_fi/models/market_place/result_buy_model.dart';
@@ -84,7 +85,7 @@ abstract class AuthDataSource {
   @GET('/users/active-code')
   Future<ActiveCodeResponse> fetchActivationCodes();
 
-  @POST('/users/verify')
+  @POST('/users/insert-wallet')
   Future<VerifyResponse> verifyUser(@Body() VerifyUserSchema verifyUserSchema);
 
   @POST('/users/change-password')
@@ -190,7 +191,7 @@ abstract class AuthDataSource {
   );
 
   @POST('/nft-attributes/item-by-owner')
-  Future<dynamic> fetchItemOwner(@Body() FilterItemSchema filterItemSchema);
+  Future<ItemOwnerResponse> fetchItemOwner(@Body() FilterItemSchema filterItemSchema);
 
   @POST('/stacking/unstacking')
   Future<dynamic> unStacking();

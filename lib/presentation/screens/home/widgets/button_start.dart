@@ -75,10 +75,9 @@ class _ButtonStartState extends State<ButtonStart> {
       onPressed: () {
         if (startTime == 0) {
           showCustomAlertDialog(context,
-            children:  PopUpConfirmStartTracking(
-             onPressed: () {},
-            )
-        );
+              children: PopUpConfirmStartTracking(
+                onPressed: () {},
+              ));
         }
       },
     );

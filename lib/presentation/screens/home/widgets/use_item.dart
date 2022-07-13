@@ -17,14 +17,9 @@ import 'package:slee_fi/resources/resources.dart';
 
 import 'modal_item_list.dart';
 
-class UseItem extends StatefulWidget {
+class UseItem extends StatelessWidget {
   const UseItem({Key? key}) : super(key: key);
 
-  @override
-  State<UseItem> createState() => _UseItemState();
-}
-
-class _UseItemState extends State<UseItem> {
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -32,7 +27,9 @@ class _UseItemState extends State<UseItem> {
       child: BlocConsumer<HomeBloc, HomeState>(
         listenWhen: (previous, current) {
           if (previous is HomeLoaded && current is HomeLoaded) {
-            if ((previous.selectedItem == null && current.selectedItem != null) || current.errorType == ErrorType.addItemToBed) {
+            if ((previous.selectedItem == null &&
+                    current.selectedItem != null) ||
+                current.errorType == ErrorType.addItemToBed) {
               return true;
             }
           }

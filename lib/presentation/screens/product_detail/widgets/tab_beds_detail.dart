@@ -53,9 +53,7 @@ class _TabBedsDetailState extends State<TabBedsDetail> {
                       child: TabBarView(
                         children: [
                           (state is NftListLoading)
-                              ? const Center(
-                                  child: CircularProgressIndicator(),
-                                )
+                              ? const Center(child: CircularProgressIndicator())
                               : GridViewBedItem(
                                   beds: listBeds,
                                   onRefresh: () {

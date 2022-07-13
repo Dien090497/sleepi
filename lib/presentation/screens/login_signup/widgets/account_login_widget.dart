@@ -87,7 +87,6 @@ class _AccountLoginState extends State<AccountLoginWidget> {
             }
           });
         } else if (state is SignInSignUpStateSignInSuccess) {
-          'sign success ${state.isFirstOpenApp}'.log;
           BlocProvider.of<UserBloc>(context).add(UpdateUserOrListToken(
               userInfoEntity: state.userInfoEntity,
               listTokens: state.listToken));
@@ -120,13 +119,12 @@ class _AccountLoginState extends State<AccountLoginWidget> {
                 labelText: LocaleKeys.email_address,
                 onChanged: (email) => cubit.onChangeEmail(email)),
             const SizedBox(height: 5),
-            Container(
-                alignment: Alignment.centerLeft,
-                height: 15,
-                child: state is SignInSignUpStateErrorEmail
-                    ? SFText(
-                        keyText: state.message, style: TextStyles.w400Red12)
-                    : const SizedBox()),
+            if (state is SignInSignUpStateErrorEmail)
+              Container(
+                  alignment: Alignment.centerLeft,
+                  height: 15,
+                  child: SFText(
+                      keyText: state.message, style: TextStyles.w400Red12)),
             const SizedBox(height: 5),
             _isActiveCode
                 ? TextfieldVerificationEmail(
@@ -144,22 +142,19 @@ class _AccountLoginState extends State<AccountLoginWidget> {
                         state is SignInSignUpStateError ? state.message : '',
                   ),
             const SizedBox(height: 5),
-
-            Container(
-              alignment: Alignment.centerRight,
-              height: 50,
-              child: _isActiveCode
-                  ? const SizedBox()
-                  : SFTextButton(
-                      text: "${LocaleKeys.forgot_password.tr()}?",
-                      textStyle: TextStyles.white1w400size12,
-                      onPressed: () {
-                        _changeState(Action.forgotPassword);
-                        cubit.init();
-                      },
-                    ),
-            ),
-            // SizedBox(height: isLoginSignup ? 24 : 8),
+            if (_isActiveCode)
+              Container(
+                alignment: Alignment.centerRight,
+                height: 50,
+                child: SFTextButton(
+                  text: "${LocaleKeys.forgot_password.tr()}?",
+                  textStyle: TextStyles.white1w400size12,
+                  onPressed: () {
+                    _changeState(Action.forgotPassword);
+                    cubit.init();
+                  },
+                ),
+              ),
             SFButton(
               text: _textButton.tr(),
               color: AppColors.blue,
@@ -213,7 +208,7 @@ class _AccountLoginState extends State<AccountLoginWidget> {
     );
   }
 
-  _showPopUpSignUpSuccess() async {
+  Future<void> _showPopUpSignUpSuccess() async {
     await showSignUpSuccess(context, null);
   }
 
