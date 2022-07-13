@@ -7,8 +7,9 @@ import 'package:slee_fi/usecase/usecase.dart';
 class HistoryTransactionParams {
   final String? typeHistory;
   final String? tokenSymbol;
+  final int? page;
 
-  const HistoryTransactionParams({this.tokenSymbol, this.typeHistory});
+  const HistoryTransactionParams({this.tokenSymbol, this.typeHistory, this.page});
 }
 
 class GetHistoryTransactionUseCase extends UseCase<List<TransactionIsarModel>, HistoryTransactionParams> {

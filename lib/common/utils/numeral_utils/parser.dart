@@ -26,7 +26,7 @@ class NumeralParsedValue {
   /// To display string.
   @override
   String toString() {
-    return '${this.runtimeType}(String suffix = "${suffix}", num value = ${value});';
+    return '$runtimeType(String suffix = "$suffix", num value = $value);';
   }
 }
 

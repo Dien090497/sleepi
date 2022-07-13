@@ -27,6 +27,7 @@ class SFTextField extends StatelessWidget {
     this.textStyle,
     this.inputFormatters,
     this.focusNode,
+    this.textAlign,
   }) : super(key: key);
 
   final String? labelText;
@@ -42,6 +43,7 @@ class SFTextField extends StatelessWidget {
   final int? maxLength;
   final TextEditingController? controller;
   final bool showLabel;
+  final TextAlign? textAlign;
   final ValueChanged<String>? onChanged;
   final TextInputType? textInputType;
   final List<TextInputFormatter>? inputFormatters;
@@ -79,6 +81,7 @@ class SFTextField extends StatelessWidget {
           keyboardType: textInputType,
           inputFormatters: inputFormatters,
           readOnly: readonly,
+          textAlign: textAlign ?? TextAlign.start,
           decoration: InputDecoration(
               isDense: true,
               // hintText: hintText != null ? translate(hintText!) : null,

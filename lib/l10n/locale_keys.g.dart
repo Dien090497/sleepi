@@ -434,12 +434,13 @@ abstract class  LocaleKeys {
   static const diamond = 'diamond';
   static const amethyst = 'amethyst';
   static const blue = 'blue';
+  static const red = 'red';
   static const green = 'green';
-  static const pink = 'pink';
   static const purple = 'purple';
   static const incorrect_address = 'incorrect_address';
   static const wallet_created_successfully = 'wallet_created_successfully';
   static const wallet_imported_successfully = 'wallet_imported_successfully';
   static const insufficient_amount = 'insufficient_amount';
+  static const you_dont_have_enough_money_to_staking = 'you_dont_have_enough_money_to_staking';
 
 }

@@ -432,11 +432,12 @@
   "diamond": "Diamond",
   "amethyst": "Amethyst",
   "blue": "Blue",
+  "red": "Red",
   "green": "Green",
-  "pink": "Pink",
   "purple": "Purple",
   "incorrect_address": "Incorrect Address",
   "wallet_created_successfully": "Wallet created successfully",
   "wallet_imported_successfully": "Wallet imported successfully",
-  "insufficient_amount": "Insufficient amount"
+  "insufficient_amount": "Insufficient amount",
+  "you_dont_have_enough_money_to_staking": "You don't have enough money to staking."
 }

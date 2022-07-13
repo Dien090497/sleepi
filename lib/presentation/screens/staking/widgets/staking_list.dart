@@ -9,7 +9,6 @@ import 'package:slee_fi/common/extensions/string_x.dart';
 import 'package:slee_fi/common/routes/app_routes.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
-import 'package:slee_fi/common/utils/toast_utils.dart';
 import 'package:slee_fi/common/widgets/sf_alert_dialog.dart';
 import 'package:slee_fi/common/widgets/sf_button_outlined.dart';
 import 'package:slee_fi/common/widgets/sf_buttons.dart';
@@ -47,15 +46,19 @@ class StakingList extends StatelessWidget {
             showSuccessfulDialog(context, null);
           }
           if(state is StakingStateCompoundSuccess){
-            ToastUtils.showToastBottom("$state");
             showSuccessfulDialog(context, null);
           }
         },
         builder: (context, state) {
           final cubit = context.read<StakingCubit>();
-          num? checkAPR = 0;
+          bool checkAPR = false;
+          bool checktvl = false;
+          bool checkEarned = false;
           if(stakingInfo != null){
-            checkAPR = num.tryParse(stakingInfo!.apr);
+            if(double.parse(stakingInfo!.apr).isNaN || double.parse(stakingInfo!.apr).isFinite) checkAPR = true;
+            if(double.parse(stakingInfo!.tvl).isNaN || double.parse(stakingInfo!.tvl).isFinite) checktvl = true;
+            if(stakingInfo!.stake.totalReward != null && double.parse(stakingInfo!.stake.totalReward!).isNaN && double.parse(stakingInfo!.stake.totalReward!).isFinite) checkEarned = true;
+
           }
           return ListView(
             padding: const EdgeInsets.all(16.0),
@@ -79,11 +82,9 @@ class StakingList extends StatelessWidget {
                     Row(
                       children: [
                         Expanded(
-                            child: LimitedBox(
-                              child: SFText(
-                                keyText: "${stakingInfo?.tvl ?? "0"} SLFT",
-                                style: TextStyles.w700WhiteSize24,
-                              ),
+                            child: SFText(
+                              keyText: "${checktvl == false ? stakingInfo?.tvl : "0"} SLFT",
+                              style: TextStyles.w700WhiteSize24,
                             )),
                         SFText(
                           keyText: "(=xxxxxx USD)",
@@ -177,7 +178,7 @@ class StakingList extends StatelessWidget {
                       showCustomAlertDialog(
                         context,
                         padding: const EdgeInsets.all(24),
-                        children: const PopUpCalculator(),
+                        children: PopUpCalculator(aprInDay: stakingInfo?.aprInDay),
                       );
                     },
                     child: Row(
@@ -249,7 +250,7 @@ class StakingList extends StatelessWidget {
                               width: 6,
                             ),
                             SFText(
-                              keyText: "${stakingInfo != null ? double.parse(stakingInfo!.stake.totalStake != null ? stakingInfo!.stake.totalStake! : "0").formatBalanceToken : 0}",
+                              keyText: "${stakingInfo != null ? double.parse(checkEarned == false ? (stakingInfo != null && stakingInfo!.stake.totalStake != null) ? stakingInfo!.stake.totalStake! : "0" : "0").formatBalanceToken : 0}",
                               style: TextStyles.lightWhite16,
                             )
                           ],
@@ -269,7 +270,7 @@ class StakingList extends StatelessWidget {
                               stringCase: StringCase.upperCase,
                             )),
                         SFText(
-                          keyText: "${stakingInfo != null ? double.parse(checkAPR != null ? stakingInfo!.apr : "0").formatBalanceToken : 0}%",
+                          keyText: "${stakingInfo != null ? double.parse(checkAPR == false ? stakingInfo!.apr : "0").formatBalanceToken : 0}%",
                           style: TextStyles.lightWhite16,
                         ),
                       ],
@@ -306,17 +307,23 @@ class StakingList extends StatelessWidget {
                             title: LocaleKeys.withdraw,
                             textStyle: TextStyles.bold14Blue,
                             onPressed: () {
-                              showCustomDialog(context,
-                                  children: [
-                                    PopUpStaking(
-                                      message: LocaleKeys.do_you_really_want_to_withdraw
-                                          .tr(namedArgs: {
-                                        'amount': stakingInfo != null ? double.parse(stakingInfo!.stake.totalStake != null ? stakingInfo!.stake.totalStake! : "0").formatBalanceToken : "0",
-                                        'token': 'SLFT',
-                                      }),
-                                      onPressed: () => cubit.unStaking(),
-                                    )
-                                  ]);
+                              if(stakingInfo != null && stakingInfo!.stake.totalStake != null){
+                                if(double.parse(stakingInfo!.stake.totalStake!) > 0){
+                                  showCustomDialog(context,
+                                      children: [
+                                        PopUpStaking(
+                                          message: LocaleKeys.do_you_really_want_to_withdraw
+                                              .tr(namedArgs: {
+                                            'amount': stakingInfo != null ? double.parse(stakingInfo!.stake.totalStake != null ? stakingInfo!.stake.totalStake! : "0").formatBalanceToken : "0",
+                                            'token': 'SLFT',
+                                          }),
+                                          onPressed: () => cubit.unStaking(),
+                                        )
+                                      ]);
+                                }else {
+                                  null;
+                                }
+                              }
                             }
                         ),
                         GestureDetector(
