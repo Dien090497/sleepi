@@ -81,7 +81,7 @@ class MiddleBed extends StatelessWidget {
                                 homeBloc.add(LoadMoreBed());
                                 return;
                               }
-                              var bed = state.bedList[index];
+                              final bed = state.bedList[index];
                               homeBloc.add(ChangeBed(
                                   level: bed.level,
                                   durability: bed.durability,

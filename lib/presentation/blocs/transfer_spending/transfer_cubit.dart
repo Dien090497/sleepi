@@ -65,7 +65,7 @@ class TransferCubit extends Cubit<TransferSpendingState> {
   }
 
   _estimateGasWithdraw(String contractAddress, String symbol) async {
-    var result = await _estimateGasWithdrawUC.call(EstimateGasWithdrawParam(
+    final result = await _estimateGasWithdrawUC.call(EstimateGasWithdrawParam(
         type: symbol, contractAddress: contractAddress));
     result.fold(
       (l) => emit(TransferSpendingState.error(message: l.msg)),

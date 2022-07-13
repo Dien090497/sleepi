@@ -10,7 +10,7 @@ class NFTListCubit extends Cubit<NftListState> {
   NFTListCubit() : super(const NftListState.initial());
   final _fetchListBedUC = getIt<FetchBedUseCase>();
 
-  var _currentPage = 1;
+  int _currentPage = 1;
   final _limit = 10;
 
   init(CategoryType idCategory) async {

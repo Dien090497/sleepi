@@ -84,7 +84,7 @@ class SpendingImplementation extends ISpendingRepository {
   @override
   Future<Either<Failure, dynamic>> compound() async{
     try {
-      var result = await _authDataSource.compound();
+      final result = await _authDataSource.compound();
       return Right(result);
     } catch (e) {
       return Left(FailureMessage('$e'));
@@ -94,7 +94,7 @@ class SpendingImplementation extends ISpendingRepository {
   @override
   Future<Either<Failure, dynamic>> unStaking() async{
     try {
-      var result = await _authDataSource.unStacking();
+      final result = await _authDataSource.unStacking();
       return Right(result);
     } on Exception catch (e) {
       return Left(FailureMessage.fromException(e));
@@ -115,7 +115,7 @@ class SpendingImplementation extends ISpendingRepository {
   @override
   Future<Either<FailureMessage, StakingInfoResponse>> getStakingInfo() async{
     try {
-      var result = await _authDataSource.getStakingInfo();
+      final result = await _authDataSource.getStakingInfo();
       return Right(result);
     } on Exception catch (e)  {
       return Left(FailureMessage.fromException(e));

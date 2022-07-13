@@ -42,16 +42,15 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     type: [],
   );
 
-  _onFilterItem(FilterItemEvent event, Emitter<HomeState> emit) {
+  void _onFilterItem(FilterItemEvent event, Emitter<HomeState> emit) {
     filterItemParam.page = 1;
     filterItemParam.level = event.level;
     filterItemParam.type = event.selected;
     add(FetchItem());
-    'filter value is   ${filterItemParam.level}    ${filterItemParam.type}'.log;
   }
 
-  _onLoadMoreBed(LoadMoreBed event, Emitter<HomeState> emit) async {
-    var result = await _fetchListBedUC.call(FetchBedParam(
+  void _onLoadMoreBed(LoadMoreBed event, Emitter<HomeState> emit) async {
+    final result = await _fetchListBedUC.call(FetchBedParam(
         _currentPageBed, _limitItemPage, CategoryType.bed, AttributeNFT.none));
     result.fold((l) {
       final currentState = state;
@@ -93,14 +92,14 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     });
   }
 
-  _onRefresh(RefreshBed event, Emitter<HomeState> emit) {
+  void _onRefresh(RefreshBed event, Emitter<HomeState> emit) {
     _currentPageBed = 1;
     emit(const HomeState.loading());
     add(const FetchData());
   }
 
-  _changeBed(ChangeBed event, Emitter<HomeState> emit) {
-    var currentState = state;
+  void _changeBed(ChangeBed event, Emitter<HomeState> emit) {
+    final currentState = state;
     if (currentState is HomeLoaded) {
       currentBedId = event.id;
       emit(currentState.copyWith(
@@ -112,8 +111,8 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     }
   }
 
-  _fetchBed(FetchData fetchData, Emitter<HomeState> emit) async {
-    var result = await _fetchListBedUC.call(FetchBedParam(
+  void _fetchBed(FetchData fetchData, Emitter<HomeState> emit) async {
+    final result = await _fetchListBedUC.call(FetchBedParam(
         _currentPageBed, _limitItemPage, CategoryType.bed, AttributeNFT.none));
     result.fold(
       (l) {
@@ -158,17 +157,17 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     );
   }
 
-  _refreshItems(RefreshItem fetchItem, Emitter<HomeState> emit) async {
+  void _refreshItems(RefreshItem fetchItem, Emitter<HomeState> emit) async {
     filterItemParam.page = 1;
     'on refresh item   ${filterItemParam.page}'.log;
     add(FetchItem());
   }
 
-  _fetchItems(FetchItem fetchItem, Emitter<HomeState> emit) async {
+  void _fetchItems(FetchItem fetchItem, Emitter<HomeState> emit) async {
     final currentState = state;
     if (currentState is HomeLoaded) {
       'page in fetch item  ${filterItemParam.page}'.log;
-      var item = await _fetchItemUC.call(filterItemParam);
+      final item = await _fetchItemUC.call(filterItemParam);
       item.fold(
         (l) {
           emit(currentState.copyWith(itemList: [], loadMoreItem: false));
@@ -183,14 +182,14 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     }
   }
 
-  _loadMoreItem(LoadMoreItem event, Emitter<HomeState> emit) async {
+  void _loadMoreItem(LoadMoreItem event, Emitter<HomeState> emit) async {
     final currentState = state;
 
     'page is load more ${filterItemParam.page}'.log;
     if (currentState is HomeLoaded &&
         currentState.loadMoreItem &&
         currentState.itemList?.isNotEmpty == true) {
-      var item = await _fetchItemUC.call(filterItemParam);
+      final item = await _fetchItemUC.call(filterItemParam);
       item.fold(
         (l) {
           'on load more error  '.log;
@@ -200,7 +199,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
           'on load more item  ${r.length}'.log;
 
           filterItemParam.page++;
-          var newList = currentState.itemList! + r;
+          final newList = currentState.itemList! + r;
           emit(currentState.copyWith(
               itemList: newList,
               loadMoreItem: r.isNotEmpty && r.length >= filterItemParam.limit));
@@ -209,10 +208,10 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     }
   }
 
-  _addItemToBed(AddItem event, Emitter<HomeState> emit) async {
+  void _addItemToBed(AddItem event, Emitter<HomeState> emit) async {
     final currentState = state;
     if (currentState is HomeLoaded) {
-      var result = await _addItemToBedUC
+      final result = await _addItemToBedUC
           .call(AddItemToBedParam(currentBedId, event.item.id));
       result.fold((l) {
         'add item error ${l.msg} '.log;
@@ -227,10 +226,10 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     }
   }
 
-  _removeItem(RemoveItem event, Emitter<HomeState> emit) async {
+  void _removeItem(RemoveItem event, Emitter<HomeState> emit) async {
     final currentState = state;
     if (currentState is HomeLoaded && currentState.selectedItem != null) {
-      var result = await _removeItemFromBedUC
+      final result = await _removeItemFromBedUC
           .call(AddItemToBedParam(currentBedId, currentState.selectedItem!.id));
       result.fold((l) {
         'remove error ${l.msg}'.log;
