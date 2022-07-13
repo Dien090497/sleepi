@@ -1,10 +1,10 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:slee_fi/common/extensions/string_x.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
+import 'package:slee_fi/common/widgets/cached_image.dart';
 import 'package:slee_fi/common/widgets/sf_buttons.dart';
 import 'package:slee_fi/common/widgets/sf_gridview.dart';
 import 'package:slee_fi/common/widgets/sf_percent_border.dart';
@@ -76,28 +76,8 @@ class GridViewBedItem extends StatelessWidget {
                         child: Container(
                           padding: const EdgeInsets.symmetric(vertical: 24.0),
                           alignment: Alignment.center,
-                          child: CachedNetworkImage(
-                            imageUrl: bed.image,
-                            placeholder: (context, url) => const Center(
-                              child: SizedBox(
-                                width: 40.0,
-                                height: 40.0,
-                                child: CircularProgressIndicator(),
-                              ),
-                            ),
-                            errorWidget: (context, url, error) => Container(
-                                decoration: const BoxDecoration(
-                                  color: AppColors.red,
-                                  borderRadius:
-                                      BorderRadius.all(Radius.circular(10)),
-                                ),
-                                child: const Icon(Icons.error)),
-                            imageBuilder: (context, imageProvider) => Container(
-                              decoration: BoxDecoration(
-                                image: DecorationImage(
-                                    image: imageProvider, fit: BoxFit.cover),
-                              ),
-                            ),
+                          child: CachedImage(
+                            image: bed.image,
                             width: 80,
                             height: 80,
                           ),
