@@ -13,7 +13,6 @@ import 'package:slee_fi/models/pop_with_result.dart';
 import 'package:slee_fi/presentation/blocs/create_wallet/create_wallet_cubit.dart';
 import 'package:slee_fi/presentation/blocs/create_wallet/create_wallet_state.dart';
 import 'package:slee_fi/presentation/blocs/user_bloc/user_bloc.dart';
-import 'package:slee_fi/presentation/blocs/user_bloc/user_state.dart';
 import 'package:slee_fi/presentation/screens/wallet_creation_warning/widgets/pop_up_wallet_warning.dart';
 
 import 'pop_up_warning_bind_wallet.dart';
@@ -65,45 +64,39 @@ class PopUpAvalancheWallet extends StatelessWidget {
                         style: TextStyles.bold18LightWhite,
                       ),
                       const SizedBox(height: 32),
-                      BlocBuilder<UserBloc, UserState>(
-                        builder: (context, userState) {
-                          if (userState is UserLoaded) {
-                            if (userState.userInfoEntity.wallet == null) {
-                              return SizedBox(
-                                  height: 48,
-                                  child: SFButtonOutLined(
-                                    title: LocaleKeys.create_a_new_wallet,
-                                    textStyle: TextStyles.bold16Blue,
-                                    borderColor: AppColors.blue,
-                                    onPressed: () {
-                                      showCustomAlertDialog(context,
-                                          showClosed: false, children:
-                                              PopUpWarningBindWallet(
-                                                  onPressed: () {
-                                        Navigator.pop(context);
-                                        showCustomAlertDialog(context,
-                                                children:
-                                                    const PopUpWalletWarning())
-                                            .then((value) => {
-                                                  Navigator.pushNamed(context,
-                                                          R.createPasscode)
-                                                      .then((value) {
-                                                    if (value == true) {
-                                                      cubit.createWallet();
-                                                      isLoadingCreateWallet =
-                                                          true;
-                                                    }
-                                                  })
-                                                });
-                                      }));
+                      SizedBox(
+                        height: 48,
+                        child: SFButtonOutLined(
+                          title: LocaleKeys.create_a_new_wallet,
+                          textStyle: TextStyles.bold16Blue,
+                          borderColor: AppColors.blue,
+                          onPressed: () {
+                            showCustomAlertDialog(
+                              context,
+                              showClosed: false,
+                              children: PopUpWarningBindWallet(
+                                onPressed: () {
+                                  Navigator.pop(context);
+                                  showCustomAlertDialog(
+                                    context,
+                                    children: const PopUpWalletWarning(),
+                                  ).then(
+                                    (value) => {
+                                      Navigator.pushNamed(context, R.createPasscode).then(
+                                        (value) {
+                                          if (value == true) {
+                                            cubit.createWallet();
+                                            isLoadingCreateWallet = true;
+                                          }
+                                        },
+                                      )
                                     },
-                                  ));
-                            } else {
-                              return const SizedBox();
-                            }
-                          }
-                          return const SizedBox();
-                        },
+                                  );
+                                },
+                              ),
+                            );
+                          },
+                        ),
                       ),
                       const SizedBox(height: 17),
                       SFButton(

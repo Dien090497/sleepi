@@ -10,12 +10,10 @@ VerifyUserSchema _$VerifyUserSchemaFromJson(Map<String, dynamic> json) =>
     VerifyUserSchema(
       signedMessage: json['signedMessage'] as String,
       signer: json['signer'] as String,
-      email: json['email'] as String,
     );
 
 Map<String, dynamic> _$VerifyUserSchemaToJson(VerifyUserSchema instance) =>
     <String, dynamic>{
       'signedMessage': instance.signedMessage,
       'signer': instance.signer,
-      'email': instance.email,
     };
