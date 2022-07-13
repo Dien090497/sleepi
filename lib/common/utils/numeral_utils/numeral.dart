@@ -48,7 +48,7 @@ class Numeral {
   ///
   /// return a [String] type.
   String _removeEndsZero(String value) {
-    if (value.indexOf('.') == -1) {
+    if (!value.contains('.')) {
       return value;
     }
 

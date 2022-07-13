@@ -8,10 +8,11 @@ part 'staking_info_response.g.dart';
 class StakingInfoResponse {
   final String tvl;
   final String apr;
+  final String aprInDay;
   final bool isCompound;
   final StakeInfo stake;
 
-  StakingInfoResponse({required this.tvl, required this.apr, required this.isCompound, required this.stake});
+  StakingInfoResponse({required this.tvl, required this.apr, required this.aprInDay, required this.isCompound, required this.stake});
 
   factory StakingInfoResponse.fromJson(Map<String, dynamic> json) =>
       _$StakingInfoResponseFromJson(json);

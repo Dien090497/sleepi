@@ -1,4 +1,5 @@
 import 'package:easy_localization/easy_localization.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:injectable/injectable.dart';
@@ -36,13 +37,13 @@ class ToastUtils {
         });
   }
 
-  static showToastBottom (String message) {
+  static showToastBottom (String message, Color? color) {
     return Fluttertoast.showToast(
         msg: message,
         toastLength: Toast.LENGTH_SHORT,
         gravity: ToastGravity.BOTTOM,
         timeInSecForIosWeb: 2,
-        // backgroundColor: Colors.red,
+        backgroundColor: color ?? AppColors.red,
         // textColor: Colors.white,
         fontSize: 14.0
     );

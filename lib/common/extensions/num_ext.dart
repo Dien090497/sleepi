@@ -55,8 +55,8 @@ extension NumX on num {
         return balance.toStringAsFixed(0);
       } else {
         int index = balance.toString().indexOf('.');
-        if (balance.toString().length - index > 2) {
-          index += 2;
+        if (balance.toString().length - index > 3) {
+          index += 3;
         } else {
           index = balance.toString().length;
         }

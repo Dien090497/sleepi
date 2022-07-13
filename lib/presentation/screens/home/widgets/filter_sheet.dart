@@ -71,9 +71,9 @@ class _FilterItemState extends State<FilterItem> {
                 TypeSelectionWidget(
                   name: LocaleKeys.type.tr(),
                   types: [
+                    LocaleKeys.red.tr(),
                     LocaleKeys.blue.tr(),
                     LocaleKeys.green.tr(),
-                    LocaleKeys.pink.tr(),
                     LocaleKeys.purple.tr(),
                   ],
                   listSelected: selectedList,

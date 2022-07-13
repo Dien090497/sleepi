@@ -35,7 +35,8 @@ class DepositSlftScreen extends StatefulWidget {
 
 class _DepositSlftScreenState extends State<DepositSlftScreen> {
   late TextEditingController _amountEditingController;
-  bool isDisabled = true;
+  String? error;
+
   @override
   void initState() {
     _amountEditingController = TextEditingController()
@@ -50,6 +51,22 @@ class _DepositSlftScreenState extends State<DepositSlftScreen> {
     _amountEditingController.dispose();
     super.dispose();
   }
+
+  onValidValue(balance) {
+    final result = _amountEditingController.text.toString().contains(',')
+        ? _amountEditingController.text.toString().replaceAll(',', '.')
+        : _amountEditingController.text.toString();
+    if (_amountEditingController.text.isEmpty) {
+      error = LocaleKeys.this_field_is_required.tr();
+    }else if (double.parse(result) > balance) {
+        error = LocaleKeys.you_dont_have_enough_money_to_staking.tr();
+      } else if (double.parse(result) == 0) {
+        error = LocaleKeys.amount_input_can_not_be_zero.tr();
+      } else {
+        error = '';
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     final args = ModalRoute.of(context)?.settings.arguments
@@ -60,7 +77,7 @@ class _DepositSlftScreenState extends State<DepositSlftScreen> {
       child: BlocConsumer<StakingCubit, StakingState>(
         listener: (context, state) {
           if (state is StakingStateError) {
-            ToastUtils.showToastBottom(state.message);
+            ToastUtils.showToastBottom(state.message, null);
           }
           if(state is StakingStateStakingSuccess){
             Navigator.pop(context, true);
@@ -153,17 +170,7 @@ class _DepositSlftScreenState extends State<DepositSlftScreen> {
                                               textInputType:
                                               const TextInputType.numberWithOptions(
                                                   decimal: true),
-                                              onChanged: (value) {
-                                                if(value.isNotEmpty) {
-                                                 setState((){
-                                                   isDisabled = false;
-                                                 });
-                                                }else {
-                                                  setState((){
-                                                    isDisabled = true;
-                                                  });
-                                                }
-                                              },
+                                              errorText: error,
                                               // hintText: LocaleKeys.amount,
                                             )),
                                         const SizedBox(
@@ -176,7 +183,6 @@ class _DepositSlftScreenState extends State<DepositSlftScreen> {
                                             onPressed: () {
                                               if(args != null){
                                                 setState((){
-                                                  isDisabled = false;
                                                   _amountEditingController.text = args.balanceSlft!.formatBalanceToken.toString();
                                                 });
                                               }
@@ -199,24 +205,28 @@ class _DepositSlftScreenState extends State<DepositSlftScreen> {
                                 height: 48,
                                 width: double.infinity,
                                 color: AppColors.blue,
-                                disabled: isDisabled,
                                 onPressed: () {
-                                  showCustomDialog(context, children: [
-                                    PopUpStaking(
-                                      message: LocaleKeys.do_you_really_want_to_deposit
-                                          .tr(namedArgs: {
-                                        'amount': _amountEditingController.value.text,
-                                        'token': 'SLFT',
-                                      }),
-                                      onPressed: () {
-                                        double amount = 0;
-                                        if(_amountEditingController.value.text.isNotEmpty){
-                                          amount = double.parse(_amountEditingController.value.text);
-                                          cubit.staking(amount);
-                                        }
-                                      }
-                                    )
-                                  ]);
+                                  setState((){
+                                    onValidValue(args?.balanceSlft!);
+                                    if(error!.isEmpty){
+                                      showCustomDialog(context, children: [
+                                        PopUpStaking(
+                                            message: LocaleKeys.do_you_really_want_to_deposit
+                                                .tr(namedArgs: {
+                                              'amount': _amountEditingController.value.text,
+                                              'token': 'SLFT',
+                                            }),
+                                            onPressed: () {
+                                              final result = _amountEditingController.text.toString().contains(',')
+                                                  ? _amountEditingController.text.toString().replaceAll(',', '.')
+                                                  : _amountEditingController.text.toString();
+                                              double amount = double.parse(result);
+                                              cubit.staking(amount);
+                                            }
+                                        )
+                                      ]);
+                                    }
+                                  });
                                 },
                               ),
                               const SizedBox(

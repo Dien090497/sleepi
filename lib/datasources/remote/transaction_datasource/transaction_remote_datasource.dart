@@ -28,29 +28,30 @@ class TransactionRemoteDataSource{
 
   Future<Either<Failure, HistoryModel>> getHistoryTransaction(HistoryTransactionParams params) async {
     try {
-      final historyTransaction = await _historyDataSource.getHistoryFirst();
-      // if(historyTransaction.isNotEmpty){
-      //   for(var transaction in historyTransaction){
-      //     final transactionInfo = await _web3dataSource.getDetailTransaction(transaction.transactionHash);
-      //     listBlockNumber.add(transactionInfo.blockNumber.blockNum);
-      //   }
-      // }
-      // final transactionInfo = await _web3dataSource.getDetailTransaction(transactionHash?.transactionHash);
-      final walletId = _getStorageDataSource.getCurrentWalletId();
-      final wallet = await _isarDataSource.getWalletAt(walletId);
+      final historyTransaction = await _historyDataSource.getAllHistory();
+      String? blockNumber;
+      dynamic response ;
+      if(historyTransaction.isNotEmpty){
+        blockNumber = historyTransaction.elementAt(params.page!).transactionHash;
 
-      if (wallet == null) {
-        return const Left(FailureMessage('Invalid Wallet'));
+        final walletId = _getStorageDataSource.getCurrentWalletId();
+        final wallet = await _isarDataSource.getWalletAt(walletId);
+
+        if (wallet == null) {
+          return const Left(FailureMessage('Invalid Wallet'));
+        }
+
+        final network = await _getCurrentNetwork();
+        final privateKey = _web3dataSource.mnemonicToPrivateKey(
+            wallet.mnemonic, wallet.derivedIndex!, network.slip44);
+        final credentials = _web3dataSource.credentialsFromPrivateKey(privateKey);
+        final ethereumAddress = await credentials.extractAddress();
+        final String url = '${network.explorers.first.url}/api?module=account&action=${params.typeHistory}&address=$ethereumAddress&startblock=$blockNumber&endblock=999999999&sort=desc&apikey=$apiKey"';
+        final dataResponse = await dio.get(url);
+        response = dataResponse;
       }
 
-      final network = await _getCurrentNetwork();
-      final privateKey = _web3dataSource.mnemonicToPrivateKey(
-          wallet.mnemonic, wallet.derivedIndex!, network.slip44);
-      final credentials = _web3dataSource.credentialsFromPrivateKey(privateKey);
-      final ethereumAddress = await credentials.extractAddress();
-      final String url = '${network.explorers.first.url}/api?module=account&action=${params.typeHistory}&address=$ethereumAddress&startblock=${historyTransaction?.transactionHash}&endblock=999999999&sort=desc&apikey=$apiKey"';
-      final dataResponse = await dio.get(url);
-      final history = HistoryModel.fromJson(dataResponse.data as Map<String, dynamic>);
+      final history = HistoryModel.fromJson(response.data as Map<String, dynamic>);
       return Right(history);
     } catch (e) {
       return Left(FailureMessage('$e'));
