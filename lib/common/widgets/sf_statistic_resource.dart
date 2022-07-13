@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
-import 'package:slee_fi/common/utils/numberal_utils/numeral.dart';
+import 'package:slee_fi/common/utils/numeral_utils/numeral.dart';
 import 'package:slee_fi/common/widgets/sf_icon.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
 import 'package:slee_fi/presentation/blocs/user_bloc/user_bloc.dart';
@@ -28,15 +28,18 @@ class SFStatisticResource extends StatelessWidget {
             return Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                 SizedBox(width: sizeWidth * 0.02),
+                SizedBox(width: sizeWidth * 0.02),
                 ItemResource(
-                    value: formatToken(listTokens[0].balance), url: listTokens[0].icon),
-                 SizedBox(width: sizeWidth * 0.02),
+                    value: formatToken(listTokens[0].balance),
+                    url: listTokens[0].icon),
+                SizedBox(width: sizeWidth * 0.02),
                 ItemResource(
-                    value: formatToken(listTokens[1].balance), url: listTokens[1].icon),
-                 SizedBox(width: sizeWidth * 0.02),
+                    value: formatToken(listTokens[1].balance),
+                    url: listTokens[1].icon),
+                SizedBox(width: sizeWidth * 0.02),
                 ItemResource(
-                    value: formatToken(listTokens[2].balance), url: listTokens[2].icon),
+                    value: formatToken(listTokens[2].balance),
+                    url: listTokens[2].icon),
                 const SizedBox(width: 12),
                 const SFIcon(Ics.icSolanaCircle),
               ],
@@ -49,9 +52,9 @@ class SFStatisticResource extends StatelessWidget {
   }
 }
 
-  String formatToken(num quantity){
-    return  Numeral(quantity).format();
-  }
+String formatToken(num quantity) {
+  return Numeral(quantity).format();
+}
 
 class ItemResource extends StatelessWidget {
   const ItemResource({Key? key, required this.value, required this.url})
@@ -64,10 +67,9 @@ class ItemResource extends StatelessWidget {
     return Row(
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        SvgPicture.asset(url, width: url.contains('avax')? 20: null),
-
+        SvgPicture.asset(url, width: url.contains('avax') ? 20 : null),
         const SizedBox(width: 4),
-        SFText(keyText: value,style: TextStyles.white14),
+        SFText(keyText: value, style: TextStyles.white14),
       ],
     );
   }

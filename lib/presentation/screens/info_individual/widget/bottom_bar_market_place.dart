@@ -39,14 +39,13 @@ class BottomBarMarketPlaceWidget extends StatelessWidget {
       create: (context) => MarketPlaceCubit(),
       child: BlocConsumer<MarketPlaceCubit, MarketPlaceState>(
         listener: (context, state) {
-          final cubit = context.read<MarketPlaceCubit>();
           if (state is MarketPlaceStateBuySuccess) {
-            cubit.refresh();
+            Navigator.pop(context);
             showSuccessfulDialog(context, LocaleKeys.purchased_successfully);
           }
 
           if (state is MarketPlaceStateBuyFailed) {
-            cubit.refresh();
+            Navigator.pop(context);
             showMessageDialog(context, state.msg);
           }
         },

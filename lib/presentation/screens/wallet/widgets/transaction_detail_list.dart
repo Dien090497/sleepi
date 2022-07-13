@@ -29,9 +29,9 @@ class TransactionDetailList extends StatefulWidget {
 
 class _TransactionDetailListState extends State<TransactionDetailList> {
   ScrollController controller = ScrollController();
+
   int currentPage = 0;
   int total = 0;
-  int historyLength = 0;
   bool isLoading = false;
   bool isLoadMore = false;
 
@@ -43,9 +43,16 @@ class _TransactionDetailListState extends State<TransactionDetailList> {
   }
 
   Future loadMore() async {
+    currentPage += 1;
     if (isLoadMore) return;
     setState(() => isLoadMore = true);
-    WalletCubit().getHistoryTransaction(widget.typeHistory!);
+    WalletCubit().getHistoryTransaction(
+        HistoryTransactionParams(
+          typeHistory: widget.typeHistory!.typeHistory,
+          tokenSymbol: widget.typeHistory!.tokenSymbol,
+          page: currentPage
+        )
+    );
     setState(() => isLoadMore = false);
   }
 

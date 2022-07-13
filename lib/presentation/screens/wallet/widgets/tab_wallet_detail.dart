@@ -45,6 +45,12 @@ class _TabWalletDetailState extends State<TabWalletDetail> {
   final RefreshController refreshController = RefreshController();
 
   @override
+  void initState() {
+    _startTimer();
+    super.initState();
+  }
+
+  @override
   void dispose() {
     refreshController.dispose();
     timer.cancel();
@@ -56,8 +62,7 @@ class _TabWalletDetailState extends State<TabWalletDetail> {
     refreshController.refreshCompleted();
   }
 
-  @override
-  Widget build(BuildContext context) {
+  void _startTimer() {
     final walletCubit = context.read<WalletCubit>();
     timer = Timer.periodic(
       const Duration(seconds: 10),
@@ -69,8 +74,14 @@ class _TabWalletDetailState extends State<TabWalletDetail> {
         }
       },
     );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final walletCubit = context.read<WalletCubit>();
     final isJapanese =
         Localizations.localeOf(context).toLanguageTag().isJapanese;
+
     return BlocBuilder<WalletCubit, WalletState>(
       builder: (context, state) {
         if (state is WalletStateLoaded) {

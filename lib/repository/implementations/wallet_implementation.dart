@@ -58,11 +58,9 @@ class WalletImplementation extends IWalletRepository {
       final message = await _secureStorage.readMessage();
       final signature = _web3DataSource.generateSignature(
           privateKey: privateKey, message: message ?? '');
-      final user = await _secureStorage.readCurrentUser();
       VerifyUserSchema schema = VerifyUserSchema(
         signedMessage: signature,
         signer: ethereumAddress.hexEip55,
-        email: user?.email ?? '',
       );
       try {
         final resultResponse = await _authDataSource.verifyUser(schema);
@@ -390,13 +388,12 @@ class WalletImplementation extends IWalletRepository {
         final ethereumAddress = await credentials.extractAddress();
         final signature = _web3DataSource.generateSignature(
             privateKey: privateKey, message: message ?? '');
-        final user = await _secureStorage.readCurrentUser();
         VerifyUserSchema schema = VerifyUserSchema(
           signedMessage: signature,
           signer: ethereumAddress.hexEip55,
-          email: user?.email ?? '',
         );
         try {
+          print('result12 ${schema.signedMessage} \n ${schema.signer}');
           final result = await _authDataSource.verifyUser(schema);
           if (result.status) {
             return Right(result.status);

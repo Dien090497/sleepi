@@ -1,17 +1,15 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:slee_fi/common/extensions/string_x.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
 
 class CachedImage extends StatelessWidget {
   const CachedImage(
       {Key? key, required this.image, this.height, this.width, this.boxFit})
       : super(key: key);
+
   final String image;
   final double? height;
-
   final double? width;
-
   final BoxFit? boxFit;
 
   @override
@@ -26,8 +24,6 @@ class CachedImage extends StatelessWidget {
         ),
       ),
       errorWidget: (context, url, error) {
-
-        'error load image   $url \n $error'.log;
         return Container(
             decoration: const BoxDecoration(
               color: AppColors.transparent,

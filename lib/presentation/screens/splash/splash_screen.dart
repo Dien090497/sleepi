@@ -19,6 +19,7 @@ class SplashScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    FlutterNativeSplash.remove();
     _initJiffy(context);
 
     return BlocProvider(
@@ -26,7 +27,6 @@ class SplashScreen extends StatelessWidget {
       child: BlocListener<SplashCubit, SplashState>(
         listener: (context, state) {
           if (state is SplashDone) {
-            FlutterNativeSplash.remove();
             if (state.isSafeDevice) {
               if (state.userInfoEntity != null) {
                 context.read<UserBloc>().add(UpdateUserOrListToken(

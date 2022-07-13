@@ -96,9 +96,9 @@ class _TabItemsBuyState extends State<TabItemsBuy> {
                         context,
                         sections: {
                           LocaleKeys.type.tr(): [
+                            LocaleKeys.red.tr(),
                             LocaleKeys.blue.tr(),
                             LocaleKeys.green.tr(),
-                            LocaleKeys.pink.tr(),
                             LocaleKeys.purple.tr(),
                           ],
                         },
