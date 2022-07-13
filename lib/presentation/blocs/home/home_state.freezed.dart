@@ -28,12 +28,15 @@ mixin _$HomeState {
             int time,
             BedEntity? item,
             List<ItemEntity>? itemList,
+            List<LuckyBoxEntity> luckyBoxes,
             ItemEntity? selectedItem,
             String errorMessage,
             ErrorType errorType,
             bool loadMoreBed,
             bool loadMoreItem,
-            bool loading)
+            bool loading,
+            bool enableInsurance,
+            double tokenEarn)
         loaded,
     required TResult Function(String message) error,
   }) =>
@@ -50,12 +53,15 @@ mixin _$HomeState {
             int time,
             BedEntity? item,
             List<ItemEntity>? itemList,
+            List<LuckyBoxEntity> luckyBoxes,
             ItemEntity? selectedItem,
             String errorMessage,
             ErrorType errorType,
             bool loadMoreBed,
             bool loadMoreItem,
-            bool loading)?
+            bool loading,
+            bool enableInsurance,
+            double tokenEarn)?
         loaded,
     TResult Function(String message)? error,
   }) =>
@@ -72,12 +78,15 @@ mixin _$HomeState {
             int time,
             BedEntity? item,
             List<ItemEntity>? itemList,
+            List<LuckyBoxEntity> luckyBoxes,
             ItemEntity? selectedItem,
             String errorMessage,
             ErrorType errorType,
             bool loadMoreBed,
             bool loadMoreItem,
-            bool loading)?
+            bool loading,
+            bool enableInsurance,
+            double tokenEarn)?
         loaded,
     TResult Function(String message)? error,
     required TResult orElse(),
@@ -181,12 +190,15 @@ class _$HomeInitial with DiagnosticableTreeMixin implements HomeInitial {
             int time,
             BedEntity? item,
             List<ItemEntity>? itemList,
+            List<LuckyBoxEntity> luckyBoxes,
             ItemEntity? selectedItem,
             String errorMessage,
             ErrorType errorType,
             bool loadMoreBed,
             bool loadMoreItem,
-            bool loading)
+            bool loading,
+            bool enableInsurance,
+            double tokenEarn)
         loaded,
     required TResult Function(String message) error,
   }) {
@@ -206,12 +218,15 @@ class _$HomeInitial with DiagnosticableTreeMixin implements HomeInitial {
             int time,
             BedEntity? item,
             List<ItemEntity>? itemList,
+            List<LuckyBoxEntity> luckyBoxes,
             ItemEntity? selectedItem,
             String errorMessage,
             ErrorType errorType,
             bool loadMoreBed,
             bool loadMoreItem,
-            bool loading)?
+            bool loading,
+            bool enableInsurance,
+            double tokenEarn)?
         loaded,
     TResult Function(String message)? error,
   }) {
@@ -231,12 +246,15 @@ class _$HomeInitial with DiagnosticableTreeMixin implements HomeInitial {
             int time,
             BedEntity? item,
             List<ItemEntity>? itemList,
+            List<LuckyBoxEntity> luckyBoxes,
             ItemEntity? selectedItem,
             String errorMessage,
             ErrorType errorType,
             bool loadMoreBed,
             bool loadMoreItem,
-            bool loading)?
+            bool loading,
+            bool enableInsurance,
+            double tokenEarn)?
         loaded,
     TResult Function(String message)? error,
     required TResult orElse(),
@@ -345,12 +363,15 @@ class _$HomeLoading with DiagnosticableTreeMixin implements HomeLoading {
             int time,
             BedEntity? item,
             List<ItemEntity>? itemList,
+            List<LuckyBoxEntity> luckyBoxes,
             ItemEntity? selectedItem,
             String errorMessage,
             ErrorType errorType,
             bool loadMoreBed,
             bool loadMoreItem,
-            bool loading)
+            bool loading,
+            bool enableInsurance,
+            double tokenEarn)
         loaded,
     required TResult Function(String message) error,
   }) {
@@ -370,12 +391,15 @@ class _$HomeLoading with DiagnosticableTreeMixin implements HomeLoading {
             int time,
             BedEntity? item,
             List<ItemEntity>? itemList,
+            List<LuckyBoxEntity> luckyBoxes,
             ItemEntity? selectedItem,
             String errorMessage,
             ErrorType errorType,
             bool loadMoreBed,
             bool loadMoreItem,
-            bool loading)?
+            bool loading,
+            bool enableInsurance,
+            double tokenEarn)?
         loaded,
     TResult Function(String message)? error,
   }) {
@@ -395,12 +419,15 @@ class _$HomeLoading with DiagnosticableTreeMixin implements HomeLoading {
             int time,
             BedEntity? item,
             List<ItemEntity>? itemList,
+            List<LuckyBoxEntity> luckyBoxes,
             ItemEntity? selectedItem,
             String errorMessage,
             ErrorType errorType,
             bool loadMoreBed,
             bool loadMoreItem,
-            bool loading)?
+            bool loading,
+            bool enableInsurance,
+            double tokenEarn)?
         loaded,
     TResult Function(String message)? error,
     required TResult orElse(),
@@ -466,12 +493,15 @@ abstract class _$$HomeLoadedCopyWith<$Res> {
       int time,
       BedEntity? item,
       List<ItemEntity>? itemList,
+      List<LuckyBoxEntity> luckyBoxes,
       ItemEntity? selectedItem,
       String errorMessage,
       ErrorType errorType,
       bool loadMoreBed,
       bool loadMoreItem,
-      bool loading});
+      bool loading,
+      bool enableInsurance,
+      double tokenEarn});
 
   $BedEntityCopyWith<$Res>? get item;
   $ItemEntityCopyWith<$Res>? get selectedItem;
@@ -496,12 +526,15 @@ class __$$HomeLoadedCopyWithImpl<$Res> extends _$HomeStateCopyWithImpl<$Res>
     Object? time = freezed,
     Object? item = freezed,
     Object? itemList = freezed,
+    Object? luckyBoxes = freezed,
     Object? selectedItem = freezed,
     Object? errorMessage = freezed,
     Object? errorType = freezed,
     Object? loadMoreBed = freezed,
     Object? loadMoreItem = freezed,
     Object? loading = freezed,
+    Object? enableInsurance = freezed,
+    Object? tokenEarn = freezed,
   }) {
     return _then(_$HomeLoaded(
       bedList: bedList == freezed
@@ -532,6 +565,10 @@ class __$$HomeLoadedCopyWithImpl<$Res> extends _$HomeStateCopyWithImpl<$Res>
           ? _value._itemList
           : itemList // ignore: cast_nullable_to_non_nullable
               as List<ItemEntity>?,
+      luckyBoxes: luckyBoxes == freezed
+          ? _value._luckyBoxes
+          : luckyBoxes // ignore: cast_nullable_to_non_nullable
+              as List<LuckyBoxEntity>,
       selectedItem: selectedItem == freezed
           ? _value.selectedItem
           : selectedItem // ignore: cast_nullable_to_non_nullable
@@ -556,6 +593,14 @@ class __$$HomeLoadedCopyWithImpl<$Res> extends _$HomeStateCopyWithImpl<$Res>
           ? _value.loading
           : loading // ignore: cast_nullable_to_non_nullable
               as bool,
+      enableInsurance: enableInsurance == freezed
+          ? _value.enableInsurance
+          : enableInsurance // ignore: cast_nullable_to_non_nullable
+              as bool,
+      tokenEarn: tokenEarn == freezed
+          ? _value.tokenEarn
+          : tokenEarn // ignore: cast_nullable_to_non_nullable
+              as double,
     ));
   }
 
@@ -593,14 +638,18 @@ class _$HomeLoaded with DiagnosticableTreeMixin implements HomeLoaded {
       required this.time,
       this.item,
       final List<ItemEntity>? itemList,
+      final List<LuckyBoxEntity> luckyBoxes = const [],
       this.selectedItem,
       this.errorMessage = '',
       this.errorType = ErrorType.none,
       this.loadMoreBed = true,
       this.loadMoreItem = true,
-      this.loading = false})
+      this.loading = false,
+      this.enableInsurance = true,
+      this.tokenEarn = 0.0})
       : _bedList = bedList,
-        _itemList = itemList;
+        _itemList = itemList,
+        _luckyBoxes = luckyBoxes;
 
   final List<BedEntity> _bedList;
   @override
@@ -628,6 +677,14 @@ class _$HomeLoaded with DiagnosticableTreeMixin implements HomeLoaded {
     return EqualUnmodifiableListView(value);
   }
 
+  final List<LuckyBoxEntity> _luckyBoxes;
+  @override
+  @JsonKey()
+  List<LuckyBoxEntity> get luckyBoxes {
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_luckyBoxes);
+  }
+
   @override
   final ItemEntity? selectedItem;
   @override
@@ -645,10 +702,16 @@ class _$HomeLoaded with DiagnosticableTreeMixin implements HomeLoaded {
   @override
   @JsonKey()
   final bool loading;
+  @override
+  @JsonKey()
+  final bool enableInsurance;
+  @override
+  @JsonKey()
+  final double tokenEarn;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'HomeState.loaded(bedList: $bedList, id: $id, level: $level, durability: $durability, time: $time, item: $item, itemList: $itemList, selectedItem: $selectedItem, errorMessage: $errorMessage, errorType: $errorType, loadMoreBed: $loadMoreBed, loadMoreItem: $loadMoreItem, loading: $loading)';
+    return 'HomeState.loaded(bedList: $bedList, id: $id, level: $level, durability: $durability, time: $time, item: $item, itemList: $itemList, luckyBoxes: $luckyBoxes, selectedItem: $selectedItem, errorMessage: $errorMessage, errorType: $errorType, loadMoreBed: $loadMoreBed, loadMoreItem: $loadMoreItem, loading: $loading, enableInsurance: $enableInsurance, tokenEarn: $tokenEarn)';
   }
 
   @override
@@ -663,12 +726,15 @@ class _$HomeLoaded with DiagnosticableTreeMixin implements HomeLoaded {
       ..add(DiagnosticsProperty('time', time))
       ..add(DiagnosticsProperty('item', item))
       ..add(DiagnosticsProperty('itemList', itemList))
+      ..add(DiagnosticsProperty('luckyBoxes', luckyBoxes))
       ..add(DiagnosticsProperty('selectedItem', selectedItem))
       ..add(DiagnosticsProperty('errorMessage', errorMessage))
       ..add(DiagnosticsProperty('errorType', errorType))
       ..add(DiagnosticsProperty('loadMoreBed', loadMoreBed))
       ..add(DiagnosticsProperty('loadMoreItem', loadMoreItem))
-      ..add(DiagnosticsProperty('loading', loading));
+      ..add(DiagnosticsProperty('loading', loading))
+      ..add(DiagnosticsProperty('enableInsurance', enableInsurance))
+      ..add(DiagnosticsProperty('tokenEarn', tokenEarn));
   }
 
   @override
@@ -685,6 +751,8 @@ class _$HomeLoaded with DiagnosticableTreeMixin implements HomeLoaded {
             const DeepCollectionEquality().equals(other.item, item) &&
             const DeepCollectionEquality().equals(other._itemList, _itemList) &&
             const DeepCollectionEquality()
+                .equals(other._luckyBoxes, _luckyBoxes) &&
+            const DeepCollectionEquality()
                 .equals(other.selectedItem, selectedItem) &&
             const DeepCollectionEquality()
                 .equals(other.errorMessage, errorMessage) &&
@@ -693,7 +761,10 @@ class _$HomeLoaded with DiagnosticableTreeMixin implements HomeLoaded {
                 .equals(other.loadMoreBed, loadMoreBed) &&
             const DeepCollectionEquality()
                 .equals(other.loadMoreItem, loadMoreItem) &&
-            const DeepCollectionEquality().equals(other.loading, loading));
+            const DeepCollectionEquality().equals(other.loading, loading) &&
+            const DeepCollectionEquality()
+                .equals(other.enableInsurance, enableInsurance) &&
+            const DeepCollectionEquality().equals(other.tokenEarn, tokenEarn));
   }
 
   @override
@@ -706,12 +777,15 @@ class _$HomeLoaded with DiagnosticableTreeMixin implements HomeLoaded {
       const DeepCollectionEquality().hash(time),
       const DeepCollectionEquality().hash(item),
       const DeepCollectionEquality().hash(_itemList),
+      const DeepCollectionEquality().hash(_luckyBoxes),
       const DeepCollectionEquality().hash(selectedItem),
       const DeepCollectionEquality().hash(errorMessage),
       const DeepCollectionEquality().hash(errorType),
       const DeepCollectionEquality().hash(loadMoreBed),
       const DeepCollectionEquality().hash(loadMoreItem),
-      const DeepCollectionEquality().hash(loading));
+      const DeepCollectionEquality().hash(loading),
+      const DeepCollectionEquality().hash(enableInsurance),
+      const DeepCollectionEquality().hash(tokenEarn));
 
   @JsonKey(ignore: true)
   @override
@@ -731,12 +805,15 @@ class _$HomeLoaded with DiagnosticableTreeMixin implements HomeLoaded {
             int time,
             BedEntity? item,
             List<ItemEntity>? itemList,
+            List<LuckyBoxEntity> luckyBoxes,
             ItemEntity? selectedItem,
             String errorMessage,
             ErrorType errorType,
             bool loadMoreBed,
             bool loadMoreItem,
-            bool loading)
+            bool loading,
+            bool enableInsurance,
+            double tokenEarn)
         loaded,
     required TResult Function(String message) error,
   }) {
@@ -748,12 +825,15 @@ class _$HomeLoaded with DiagnosticableTreeMixin implements HomeLoaded {
         time,
         item,
         itemList,
+        luckyBoxes,
         selectedItem,
         errorMessage,
         errorType,
         loadMoreBed,
         loadMoreItem,
-        this.loading);
+        this.loading,
+        enableInsurance,
+        tokenEarn);
   }
 
   @override
@@ -769,12 +849,15 @@ class _$HomeLoaded with DiagnosticableTreeMixin implements HomeLoaded {
             int time,
             BedEntity? item,
             List<ItemEntity>? itemList,
+            List<LuckyBoxEntity> luckyBoxes,
             ItemEntity? selectedItem,
             String errorMessage,
             ErrorType errorType,
             bool loadMoreBed,
             bool loadMoreItem,
-            bool loading)?
+            bool loading,
+            bool enableInsurance,
+            double tokenEarn)?
         loaded,
     TResult Function(String message)? error,
   }) {
@@ -786,12 +869,15 @@ class _$HomeLoaded with DiagnosticableTreeMixin implements HomeLoaded {
         time,
         item,
         itemList,
+        luckyBoxes,
         selectedItem,
         errorMessage,
         errorType,
         loadMoreBed,
         loadMoreItem,
-        this.loading);
+        this.loading,
+        enableInsurance,
+        tokenEarn);
   }
 
   @override
@@ -807,12 +893,15 @@ class _$HomeLoaded with DiagnosticableTreeMixin implements HomeLoaded {
             int time,
             BedEntity? item,
             List<ItemEntity>? itemList,
+            List<LuckyBoxEntity> luckyBoxes,
             ItemEntity? selectedItem,
             String errorMessage,
             ErrorType errorType,
             bool loadMoreBed,
             bool loadMoreItem,
-            bool loading)?
+            bool loading,
+            bool enableInsurance,
+            double tokenEarn)?
         loaded,
     TResult Function(String message)? error,
     required TResult orElse(),
@@ -826,12 +915,15 @@ class _$HomeLoaded with DiagnosticableTreeMixin implements HomeLoaded {
           time,
           item,
           itemList,
+          luckyBoxes,
           selectedItem,
           errorMessage,
           errorType,
           loadMoreBed,
           loadMoreItem,
-          this.loading);
+          this.loading,
+          enableInsurance,
+          tokenEarn);
     }
     return orElse();
   }
@@ -883,12 +975,15 @@ abstract class HomeLoaded implements HomeState {
       required final int time,
       final BedEntity? item,
       final List<ItemEntity>? itemList,
+      final List<LuckyBoxEntity> luckyBoxes,
       final ItemEntity? selectedItem,
       final String errorMessage,
       final ErrorType errorType,
       final bool loadMoreBed,
       final bool loadMoreItem,
-      final bool loading}) = _$HomeLoaded;
+      final bool loading,
+      final bool enableInsurance,
+      final double tokenEarn}) = _$HomeLoaded;
 
   List<BedEntity> get bedList => throw _privateConstructorUsedError;
   int get id => throw _privateConstructorUsedError;
@@ -897,12 +992,15 @@ abstract class HomeLoaded implements HomeState {
   int get time => throw _privateConstructorUsedError;
   BedEntity? get item => throw _privateConstructorUsedError;
   List<ItemEntity>? get itemList => throw _privateConstructorUsedError;
+  List<LuckyBoxEntity> get luckyBoxes => throw _privateConstructorUsedError;
   ItemEntity? get selectedItem => throw _privateConstructorUsedError;
   String get errorMessage => throw _privateConstructorUsedError;
   ErrorType get errorType => throw _privateConstructorUsedError;
   bool get loadMoreBed => throw _privateConstructorUsedError;
   bool get loadMoreItem => throw _privateConstructorUsedError;
   bool get loading => throw _privateConstructorUsedError;
+  bool get enableInsurance => throw _privateConstructorUsedError;
+  double get tokenEarn => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
   _$$HomeLoadedCopyWith<_$HomeLoaded> get copyWith =>
       throw _privateConstructorUsedError;
@@ -990,12 +1088,15 @@ class _$HomeError with DiagnosticableTreeMixin implements HomeError {
             int time,
             BedEntity? item,
             List<ItemEntity>? itemList,
+            List<LuckyBoxEntity> luckyBoxes,
             ItemEntity? selectedItem,
             String errorMessage,
             ErrorType errorType,
             bool loadMoreBed,
             bool loadMoreItem,
-            bool loading)
+            bool loading,
+            bool enableInsurance,
+            double tokenEarn)
         loaded,
     required TResult Function(String message) error,
   }) {
@@ -1015,12 +1116,15 @@ class _$HomeError with DiagnosticableTreeMixin implements HomeError {
             int time,
             BedEntity? item,
             List<ItemEntity>? itemList,
+            List<LuckyBoxEntity> luckyBoxes,
             ItemEntity? selectedItem,
             String errorMessage,
             ErrorType errorType,
             bool loadMoreBed,
             bool loadMoreItem,
-            bool loading)?
+            bool loading,
+            bool enableInsurance,
+            double tokenEarn)?
         loaded,
     TResult Function(String message)? error,
   }) {
@@ -1040,12 +1144,15 @@ class _$HomeError with DiagnosticableTreeMixin implements HomeError {
             int time,
             BedEntity? item,
             List<ItemEntity>? itemList,
+            List<LuckyBoxEntity> luckyBoxes,
             ItemEntity? selectedItem,
             String errorMessage,
             ErrorType errorType,
             bool loadMoreBed,
             bool loadMoreItem,
-            bool loading)?
+            bool loading,
+            bool enableInsurance,
+            double tokenEarn)?
         loaded,
     TResult Function(String message)? error,
     required TResult orElse(),

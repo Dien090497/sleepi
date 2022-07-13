@@ -8,6 +8,7 @@ import 'package:slee_fi/common/widgets/sf_text.dart';
 import 'package:slee_fi/common/widgets/topbar_common.dart';
 import 'package:slee_fi/l10n/locale_keys.g.dart';
 import 'package:slee_fi/presentation/blocs/home/home_bloc.dart';
+import 'package:slee_fi/presentation/blocs/home/home_state.dart';
 import 'package:slee_fi/presentation/screens/home/widgets/alarm_bell.dart';
 import 'package:slee_fi/presentation/screens/home/widgets/home_list_widget.dart';
 import 'package:slee_fi/presentation/screens/home/widgets/home_switch.dart';
@@ -20,8 +21,10 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (_) => HomeBloc()..add(RefreshBed()),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(create: (_) => HomeBloc()..add(RefreshBed())),
+      ],
       child: SafeArea(
         bottom: false,
         child: Column(
@@ -54,27 +57,37 @@ class HomeScreen extends StatelessWidget {
                               SizedBox(
                                 height: 24,
                                 child: HomeSwitch(
-                                  onChanged: (bool value) {},
+                                  onChanged: (bool value) {
+                                    context
+                                        .read<HomeBloc>()
+                                        .add(ChangeInsurance(value));
+                                  },
                                 ),
                               ),
                             ],
                           ),
                           const SizedBox(height: 2),
-                          GestureDetector(
-                            onTap: () {
-                              launchInsurance(context);
-                            },
-                            child: Row(
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: [
-                                SFText(
-                                  keyText: LocaleKeys.what_is_insurance,
-                                  style: TextStyles.lightGrey12,
-                                ),
-                                const SizedBox(width: 8),
-                                const SFIcon(Ics.icCircleQuestion),
-                              ],
-                            ),
+                          BlocBuilder<HomeBloc, HomeState>(
+                            builder: (context, state) => state is HomeLoaded &&
+                                    state.bedList.isNotEmpty
+                                ? GestureDetector(
+                                    onTap: () {
+                                      launchInsurance(context);
+                                    },
+                                    child: Row(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.center,
+                                      children: [
+                                        SFText(
+                                          keyText: LocaleKeys.what_is_insurance,
+                                          style: TextStyles.lightGrey12,
+                                        ),
+                                        const SizedBox(width: 8),
+                                        const SFIcon(Ics.icCircleQuestion),
+                                      ],
+                                    ),
+                                  )
+                                : const SizedBox(),
                           ),
                           const SizedBox(height: 24),
                           SFText(
