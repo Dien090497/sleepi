@@ -7,9 +7,11 @@ class WhitDrawTokenSchema {
   final String type;
   final String tokenAddress;
   final String amount;
+  final String? signedMessage;
+  final String? signer;
 
 
-  WhitDrawTokenSchema(this.type, this.tokenAddress, this.amount);
+  WhitDrawTokenSchema({required this.type, required this.tokenAddress, required this.amount, this.signedMessage, this.signer});
 
   factory WhitDrawTokenSchema.fromJson(Map<String, dynamic> json) =>
       _$WhitDrawTokenSchemaFromJson(json);

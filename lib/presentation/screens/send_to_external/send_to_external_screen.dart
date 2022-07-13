@@ -229,9 +229,9 @@ class _SendToExternalScreenState extends State<SendToExternalScreen> {
                             }
                           } else {
                             if (controllerAmount.text.isNotEmpty) {
-                              cubit.validator(balanceCurrent: balance ?? 0.0, amount: double.parse(controllerAmount.text.replaceAll(',','.')));
+                              cubit.validator(balanceCurrent: balance, amount: double.parse(controllerAmount.text.replaceAll(',','.')));
                             } else {
-                              cubit.validator(balanceCurrent: balance ?? 0.0, amount: -1);
+                              cubit.validator(balanceCurrent: balance, amount: -1);
                             }
                           }
                         },

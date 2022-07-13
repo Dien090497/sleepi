@@ -1,8 +1,10 @@
 import 'package:dartz/dartz.dart';
 import 'package:injectable/injectable.dart';
-import 'package:slee_fi/common/extensions/string_x.dart';
+import 'package:slee_fi/datasources/local/get_storage_datasource.dart';
+import 'package:slee_fi/datasources/local/isar/isar_datasource.dart';
 import 'package:slee_fi/datasources/local/secure_storage.dart';
 import 'package:slee_fi/datasources/remote/auth_datasource/auth_datasource.dart';
+import 'package:slee_fi/datasources/remote/network/web3_datasource.dart';
 import 'package:slee_fi/entities/active_code/active_code_entity.dart';
 import 'package:slee_fi/entities/item_entity/item_entity.dart';
 import 'package:slee_fi/failures/failure.dart';
@@ -24,8 +26,11 @@ import 'package:slee_fi/usecase/withdraw_history_usecase.dart';
 class UserImplementation extends IUserRepository {
   final AuthDataSource _authDataSource;
   final SecureStorage _secureStorage;
+  final GetStorageDataSource _getStorageDataSource;
+  final IsarDataSource _isarDataSource;
+  final Web3DataSource _web3DataSource;
 
-  UserImplementation(this._authDataSource, this._secureStorage);
+  UserImplementation(this._authDataSource, this._secureStorage, this._getStorageDataSource, this._isarDataSource, this._web3DataSource);
 
   @override
   Future<Either<FailureMessage, dynamic>> changePassword(
@@ -64,8 +69,23 @@ class UserImplementation extends IUserRepository {
   Future<Either<FailureMessage, SwapTokenToWalletResponse>>
       transferTokenToMainWallet(WhitDrawTokenSchema whitDrawTokenSchema) async {
     try {
+      final walletId = _getStorageDataSource.getCurrentWalletId();
+      final wallet = await _isarDataSource.getWalletAt(walletId);
+      final credentials =
+      _web3DataSource.credentialsFromPrivateKey(wallet!.privateKey);
+      final message = await _secureStorage.readMessage();
+      final ethereumAddress = await credentials.extractAddress();
+      final signature = _web3DataSource.generateSignature(
+          privateKey: wallet.privateKey, message: message ?? '');
+      WhitDrawTokenSchema schema = WhitDrawTokenSchema(
+        amount: whitDrawTokenSchema.amount,
+        tokenAddress: whitDrawTokenSchema.tokenAddress,
+        type: whitDrawTokenSchema.type,
+        signedMessage: signature,
+        signer: ethereumAddress.hexEip55,
+      );
       final result =
-          await _authDataSource.transferTokenToWallet(whitDrawTokenSchema);
+          await _authDataSource.transferTokenToWallet(schema);
       return Right(result);
     } catch (e) {
       return Left(FailureMessage.fromException(e));
