@@ -5,20 +5,28 @@ import 'package:flutter_date_pickers/flutter_date_pickers.dart';
 import 'package:slee_fi/common/utils/date_time_utils.dart';
 import 'package:slee_fi/di/injector.dart';
 import 'package:slee_fi/presentation/blocs/chart/chart_week_state.dart';
+import 'package:slee_fi/usecase/fetch_data_chart_usecase.dart';
 
 class ChartWeekCubit extends Cubit<ChartWeekState> {
   ChartWeekCubit() : super(const ChartWeekState.initial());
 
   final dateTimeUtils = getIt<DateTimeUtils>();
+  final _fetchDataChartUseCase = getIt<FetchDataChartUseCase>();
 
   void init() async {
     final now = DateTime.now();
-    emit(ChartWeekState.loaded(
-      week: DatePeriod(dateTimeUtils.startOfWeek(now),
-          dateTimeUtils.endOfWeek(now, checkNow: true)),
-      firstAllowedDate: DateTime.now().subtract(const Duration(days: 366)),
-      lastAllowedDate: DateTime.now().add(const Duration(days: 366)),
-    ));
+    ParamsGetDataChart params = ParamsGetDataChart(fdate: '', type: '', tdate: '');
+    final result = await  _fetchDataChartUseCase.call(params);
+    result.fold((l) {
+    }, (data) {
+      emit(ChartWeekState.loaded(
+        week: DatePeriod(dateTimeUtils.startOfWeek(now),
+            dateTimeUtils.endOfWeek(now, checkNow: true)),
+        firstAllowedDate: DateTime.now().subtract(const Duration(days: 366)),
+        lastAllowedDate: DateTime.now().add(const Duration(days: 366)),
+        dataChart: data,
+      ));
+    });
   }
 
   void selectWeek(DatePeriod period) async {
@@ -63,5 +71,9 @@ class ChartWeekCubit extends Cubit<ChartWeekState> {
         emit(currentState.copyWith(week: nextWeek));
       } else {}
     }
+  }
+
+  void getDataChart () async {
+
   }
 }

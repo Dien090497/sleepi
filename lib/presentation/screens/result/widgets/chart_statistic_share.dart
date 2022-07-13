@@ -2,9 +2,12 @@ import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
+import 'package:slee_fi/models/tracking_result_chart/data_x_y.dart';
 
 class ChartStatisticShare extends StatelessWidget {
-  ChartStatisticShare({Key? key, this.titleBottom = true}) : super(key: key);
+  ChartStatisticShare({Key? key, this.titleBottom = true, this.data}) : super(key: key);
+
+  final List<DataXY>? data;
 
   final bool titleBottom;
   final List<Color> gradientColors = [
@@ -16,9 +19,19 @@ class ChartStatisticShare extends StatelessWidget {
     AppColors.blue.withOpacity(0.15),
     AppColors.blue.withOpacity(0),
   ];
+  int maxY = 0;
 
   Widget leftTitleWidgets(double value, TitleMeta meta) {
     Widget text;
+    if (data != null) {
+      for (int i =0; i < data!.length; i++) {
+        if (maxY < data![i].v) {
+          maxY = data![i].v;
+        }
+      }
+    }
+
+    print('maxY1223 ${maxY}');
     switch (value.toInt()) {
       case 0:
         text = const Padding(
@@ -50,7 +63,15 @@ class ChartStatisticShare extends StatelessWidget {
   }
 
   Widget bottomTitleWidgets(double value, TitleMeta meta) {
-    Widget text;
+    if (value % 2 == 0 && value != 0) {
+      return Padding(
+        padding: const EdgeInsets.only(top: 8.0),
+        child: Text(data?[value.toInt()].t ?? '', style: TextStyles.lightGrey12),
+      );
+    } else {
+      return const SizedBox();
+    }
+    /*Widget text;
     switch (value.toInt()) {
       case 2:
         text = const Text('2021-01', style: TextStyles.lightGrey12);
@@ -68,7 +89,7 @@ class ChartStatisticShare extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.only(top: 8.0),
       child: text,
-    );
+    );*/
   }
 
   LineChartData mainData() {
@@ -122,9 +143,9 @@ class ChartStatisticShare extends StatelessWidget {
             width: 1,
           ))),
       minX: 0,
-      maxX: 25,
+      maxX: (data?.length.toDouble() ?? 25) - 1,
       minY: 0,
-      maxY: 26,
+      maxY: (data?.length.toDouble() ?? 25) - 1,
       lineBarsData: [
         LineChartBarData(
           spots: const [

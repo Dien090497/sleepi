@@ -14,6 +14,7 @@ import 'package:slee_fi/models/global_config_response/global_config_response.dar
 import 'package:slee_fi/models/lucky_box/lucky_box.dart';
 import 'package:slee_fi/models/swap_token_to_wallet_response/swap_token_to_wallet_response.dart';
 import 'package:slee_fi/models/token_spending/token_spending.dart';
+import 'package:slee_fi/models/tracking_result_chart/tracking_result_chart_data.dart';
 import 'package:slee_fi/models/withdraw_history_response/withdraw_history_response.dart';
 import 'package:slee_fi/repository/user_repository.dart';
 import 'package:slee_fi/schema/change_password_schema/change_password_schema.dart';
@@ -24,6 +25,7 @@ import 'package:slee_fi/usecase/add_item_to_bed_usecase.dart';
 import 'package:slee_fi/usecase/estimate_gas_withdraw.dart';
 import 'package:slee_fi/usecase/estimate_tracking_usecase.dart';
 import 'package:slee_fi/usecase/fetch_bed_usecase.dart';
+import 'package:slee_fi/usecase/fetch_data_chart_usecase.dart';
 import 'package:slee_fi/usecase/withdraw_history_usecase.dart';
 
 @Injectable(as: IUserRepository)
@@ -228,6 +230,16 @@ class UserImplementation extends IUserRepository {
       return Right(result);
     } catch (e) {
       return Left(FailureMessage.fromException(e));
+    }
+  }
+
+  @override
+  Future<Either<FailureMessage, TrackingResultChartData>> fetchDataChart(ParamsGetDataChart filterItemSchema) async {
+    try {
+      final result = await _authDataSource.fetchDataChart('2022-07-12', '2022-07-12', 'week');
+      return Right(result);
+    } catch (e) {
+      return Left(FailureMessage('$e'));
     }
   }
 }
