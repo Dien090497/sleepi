@@ -23,19 +23,19 @@ class WebViewScreenState extends State<WebViewScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return const WebView(
+    return WebView(
       initialUrl: Const.linkTreeUrl,
       javascriptMode: JavascriptMode.unrestricted,
-      // navigationDelegate: (NavigationRequest request) async {
-      //   'url navigate is  ${request.url}'.log;
-      //   if (request.url.startsWith('whatsapp://message/GUAJG5ZYSCENF1')) {
-      //     if (await canLaunchUrl(Uri.parse(request.url))) {
-      //       await launchUrl(Uri.parse(request.url));
-      //     } else {}
-      //     return NavigationDecision.prevent;
-      //   }
-      //   return NavigationDecision.navigate;
-      // },
+      navigationDelegate: (NavigationRequest request) async {
+        //'url navigate is  ${request.url}'.log;
+        if (request.url.startsWith('tg:join?invite=JoUIhyiTgflkYjA1') ||  request.url.startsWith('tg:resolve?domain=sleefi_official_discussion')) {
+          if (await canLaunchUrl(Uri.parse(request.url))) {
+            await launchUrl(Uri.parse(request.url));
+          } else {}
+          return NavigationDecision.prevent;
+        }
+        return NavigationDecision.navigate;
+      },
     );
   }
 }
