@@ -3,29 +3,29 @@ import 'package:flutter/foundation.dart';
 import 'package:injectable/injectable.dart';
 import 'package:retrofit/retrofit.dart';
 import 'package:slee_fi/common/const/const.dart';
-import 'package:slee_fi/common/enum/enum.dart';
 import 'package:slee_fi/datasources/remote/auth_datasource/auth_interceptor.dart';
 import 'package:slee_fi/datasources/remote/auth_datasource/refresh_token_interceptor.dart';
 import 'package:slee_fi/models/list_nft_data_model/list_nft_data_model.dart';
 
-part 'nft_api.g.dart';
+part 'sleep_tracking_api.g.dart';
 
 @Injectable()
 @RestApi(baseUrl: kDebugMode ? Const.baseApiDev : Const.baseApiDev)
-abstract class NftApi {
+abstract class SleepTrackingApi {
   @factoryMethod
-  factory NftApi(Dio dio, AuthInterceptor authInterceptor,
+  factory SleepTrackingApi(Dio dio, AuthInterceptor authInterceptor,
       RefreshTokenInterceptor refreshInterceptor) {
     dio.interceptors.addAll([
       authInterceptor,
       refreshInterceptor,
     ]);
-    return _NftApi(dio);
+    return _SleepTrackingApi(dio);
   }
 
-  @GET('/nft')
-  Future<ListNftDataModel> getListNft({
-    @Query('tokenIds') required String tokenIds,
-    @Query('nftType') required NftType nftType,
-  });
+  @GET('/tracking/estimate-tracking')
+  Future<ListNftDataModel> estimateTracking(
+    @Query('bedUsed') int bedId,
+    @Query('itemUsed') int? itemId,
+    @Query('isEnableInsurance') bool isEnableInsurance,
+  );
 }

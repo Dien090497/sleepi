@@ -184,6 +184,7 @@ abstract class AuthDataSource {
     @Query('bedId') int bedId,
     @Query('itemId') int itemId,
   );
+
   @PUT('/nft-attributes/remove-item-from-bed')
   Future<dynamic> removeItemFromBed(
     @Query('bedId') int bedId,
@@ -191,7 +192,8 @@ abstract class AuthDataSource {
   );
 
   @POST('/nft-attributes/item-by-owner')
-  Future<ItemOwnerResponse> fetchItemOwner(@Body() FilterItemSchema filterItemSchema);
+  Future<ItemOwnerResponse> fetchItemOwner(
+      @Body() FilterItemSchema filterItemSchema);
 
   @POST('/stacking/unstacking')
   Future<dynamic> unStacking();
