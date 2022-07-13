@@ -14,12 +14,14 @@ class PopUpItem extends StatelessWidget {
       required this.icon,
       required this.onConfirm,
       this.onCancel,
-      required this.effect})
+      required this.effect,
+      required this.level})
       : super(key: key);
 
   final String icon;
   final String effect;
   final String id;
+  final int level;
   final VoidCallback onConfirm;
   final VoidCallback? onCancel;
 
@@ -34,7 +36,7 @@ class PopUpItem extends StatelessWidget {
             style: TextStyles.white1w700size16,
           ),
           CachedImage(image: icon, height: 160),
-          SFText(keyText: 'Level 5', style: TextStyles.lightGrey14),
+          SFText(keyText: 'Level $level', style: TextStyles.lightGrey14),
           const SizedBox(height: 32),
           SFCard(
             width: double.infinity,

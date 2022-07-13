@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:slee_fi/common/widgets/sf_alert_dialog.dart';
 import 'package:slee_fi/common/widgets/sf_gridview.dart';
 import 'package:slee_fi/common/widgets/sf_sub_tab_bar.dart';
 import 'package:slee_fi/l10n/locale_keys.g.dart';
 import 'package:slee_fi/models/bed_model/beb_model.dart';
 import 'package:slee_fi/presentation/blocs/nft_list/nft_list_cubit.dart';
 import 'package:slee_fi/presentation/blocs/nft_list/nft_list_state.dart';
+import 'package:slee_fi/presentation/screens/home/widgets/pop_up_item.dart';
 import 'package:slee_fi/presentation/screens/product_detail/widgets/my_item_short_widget.dart';
 import 'package:slee_fi/presentation/screens/product_detail/widgets/upgrade_tab.dart';
 import 'package:slee_fi/usecase/fetch_bed_usecase.dart';
@@ -50,9 +52,7 @@ class _TabItemDetailState extends State<TabItemDetail> {
                       child: TabBarView(
                         children: [
                           (state is NftListLoading)
-                              ? const Center(
-                                  child: CircularProgressIndicator(),
-                                )
+                              ? const Center(child: CircularProgressIndicator())
                               : SFGridView(
                                   count: listItems.length,
                                   childAspectRatio: 1,
@@ -62,7 +62,16 @@ class _TabItemDetailState extends State<TabItemDetail> {
                                   itemBuilder: (context, i) {
                                     return GestureDetector(
                                       onTap: () {
-                                        // _showItemDialog(context, items[i], randomId);
+                                        // showCustomAlertDialog(context,
+                                        //     children: PopUpItem(
+                                        //       level: listItems[i].level,
+                                        //       effect: '',
+                                        //       id: '${listItems[i].id}',
+                                        //       icon: listItems[i].image,
+                                        //       onConfirm: () {
+                                        //         // homeBloc.add(AddItem(item));
+                                        //       },
+                                        //     ));
                                       },
                                       child: MyItemShortWidget(
                                         item: listItems[i],
