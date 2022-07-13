@@ -2,9 +2,12 @@ import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
 import 'package:slee_fi/common/const/const.dart';
 import 'package:slee_fi/datasources/local/secure_storage.dart';
+import 'package:slee_fi/di/injector.dart';
 import 'package:slee_fi/models/access_token_expire_model/access_token_expire_model.dart';
 import 'package:slee_fi/models/refresh_token_model/refresh_token_model.dart';
 import 'package:slee_fi/schema/refresh_token_schema/refresh_token_schema.dart';
+import 'package:slee_fi/usecase/logout_usecase.dart';
+import 'package:slee_fi/usecase/usecase.dart';
 
 @Injectable()
 class RefreshTokenInterceptor extends QueuedInterceptor {
@@ -41,9 +44,7 @@ class RefreshTokenInterceptor extends QueuedInterceptor {
         ]);
         return _retry(err, handler, res.data.accessToken);
       } catch (e) {
-        if (e is DioError) {
-          return _refreshTokenExpire(e, handler);
-        }
+        return _refreshTokenExpire(err, handler);
       }
     }
     return handler.next(err);
@@ -52,7 +53,7 @@ class RefreshTokenInterceptor extends QueuedInterceptor {
   Future<void> _retry(
       DioError err, ErrorInterceptorHandler handler, String accessToken) async {
     final requestOptions = err.requestOptions;
-    requestOptions.headers["Authorization"] = accessToken;
+    requestOptions.headers["Authorization"] = 'Bearer $accessToken';
     final options = Options(
       method: requestOptions.method,
       headers: requestOptions.headers,
@@ -75,6 +76,7 @@ class RefreshTokenInterceptor extends QueuedInterceptor {
 
   Future<void> _refreshTokenExpire(
       DioError e, ErrorInterceptorHandler handler) async {
+    await getIt<LogOutUseCase>().call(NoParams());
     // if (e.response?.data.toString().toLowerCase().contains('refresh') ??
     //     false) {
     // final ctx = navKey.currentContext;
