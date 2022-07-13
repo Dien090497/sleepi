@@ -1,9 +1,11 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
 import 'package:slee_fi/common/widgets/background_widget.dart';
 import 'package:slee_fi/common/widgets/cached_image.dart';
 import 'package:slee_fi/common/widgets/sf_button_outlined.dart';
+import 'package:slee_fi/common/widgets/sf_buttons.dart';
 import 'package:slee_fi/common/widgets/sf_icon.dart';
 import 'package:slee_fi/common/widgets/sf_image_border.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
@@ -51,7 +53,8 @@ class InfoIndividualScreen extends StatelessWidget {
                     child: Column(
                       children: [
                         Container(
-                          height: 180, width: 180,
+                          height: 180,
+                          width: 180,
                           margin: const EdgeInsets.symmetric(vertical: 24),
                           decoration: const BoxDecoration(
                             image: DecorationImage(
@@ -127,14 +130,14 @@ class InfoIndividualScreen extends StatelessWidget {
                                     onPressed: () {},
                                   ),
                                   const SizedBox(width: 8),
-                                  // SFButton(
-                                  //   height: 38,
-                                  //   text: "+ ${LocaleKeys.point.tr()}",
-                                  //   textStyle: TextStyles.boldWhite14,
-                                  //   gradient:
-                                  //       AppColors.gradientBlueButton,
-                                  //   onPressed: () {},
-                                  // ),
+                                  if (args.marketPlaceModel == null)
+                                    SFButton(
+                                      height: 38,
+                                      text: "+ ${LocaleKeys.point.tr()}",
+                                      textStyle: TextStyles.boldWhite14,
+                                      gradient: AppColors.gradientBlueButton,
+                                      onPressed: () {},
+                                    ),
                                 ],
                               ),
                             ],
