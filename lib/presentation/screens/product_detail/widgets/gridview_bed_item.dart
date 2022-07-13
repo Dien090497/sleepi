@@ -1,10 +1,10 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:slee_fi/common/extensions/string_x.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
+import 'package:slee_fi/common/widgets/cached_image.dart';
 import 'package:slee_fi/common/widgets/sf_gridview.dart';
 import 'package:slee_fi/common/widgets/sf_percent_border.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
@@ -18,7 +18,8 @@ class GridViewBedItem extends StatelessWidget {
       required this.beds,
       this.onBedTap,
       this.onBuyTap,
-      this.isScroll = true, this.onRefresh})
+      this.isScroll = true,
+      this.onRefresh})
       : super(key: key);
 
   final List<BedModel> beds;
@@ -67,30 +68,10 @@ class GridViewBedItem extends StatelessWidget {
                       Expanded(
                         child: Container(
                           alignment: Alignment.center,
-                          child: CachedNetworkImage(
-                            imageUrl: bed.image,
-                            placeholder: (context, url) => const Center(
-                              child: SizedBox(
-                                width: 40.0,
-                                height: 40.0,
-                                child: CircularProgressIndicator(),
-                              ),
-                            ),
-                            errorWidget: (context, url, error) => Container(
-                                decoration: const BoxDecoration(
-                                  color: AppColors.red,
-                                  borderRadius:
-                                  BorderRadius.all(Radius.circular(10)),
-                                ),
-                                child: const Icon(Icons.error)),
-                            imageBuilder: (context, imageProvider) => Container(
-                              decoration: BoxDecoration(
-                                image: DecorationImage(
-                                    image: imageProvider, fit: BoxFit.cover),
-                              ),
-                            ),
-                            width: 80,
+                          child: CachedImage(
+                            image: bed.image,
                             height: 80,
+                            width: 80,
                           ),
                         ),
                       ),
@@ -102,7 +83,7 @@ class GridViewBedItem extends StatelessWidget {
                         padding: const EdgeInsets.symmetric(
                             vertical: 5, horizontal: 16),
                         child: SFText(
-                          keyText: bed.nftId.toString(),
+                          keyText: bed.tokenId.toString(),
                           style: TextStyles.white1w700size12,
                         ),
                       ),

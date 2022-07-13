@@ -54,6 +54,7 @@ import 'package:slee_fi/presentation/screens/tutorial/tutorial_screen.dart';
 import 'package:slee_fi/presentation/screens/wallet/layouts/transaction_detail_screen.dart';
 import 'package:slee_fi/presentation/screens/wallet/wallet_screen.dart';
 import 'package:slee_fi/presentation/screens/wallet_creation_warning/wallet_creation_warning_screen.dart';
+import 'package:slee_fi/presentation/screens/web_view/web_view_screen.dart';
 
 class R {
   static const String _ = '/';
@@ -113,6 +114,7 @@ class R {
   static const String nftDetail = '${_}nft_detail';
   static const String commingSoon = '${_}comming_soon';
   static const String qrCodeScan = '${_}qr_code_scan';
+  static const String webView = '${_}web_view';
 }
 
 class AppRoutes {
@@ -173,5 +175,6 @@ class AppRoutes {
     R.commingSoon: (_) => const CommingSoon(),
     R.qrCodeScan: (_) => const QRCodeScanner(),
     R.forgotPasscode: (_) => const ForgotPasscodeScreen(),
+    R.webView: (_) => const WebViewScreen(),
   };
 }

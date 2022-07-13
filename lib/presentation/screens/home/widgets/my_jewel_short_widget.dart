@@ -14,10 +14,11 @@ class MyJewelsShortWidget extends StatelessWidget {
       required this.icon,
       this.color,
       this.increase = true,
-      Key? key})
+      Key? key, required this.level})
       : super(key: key);
 
   final String icon;
+  final int level;
   final Color? color;
   final String id;
   final bool increase;
@@ -33,10 +34,10 @@ class MyJewelsShortWidget extends StatelessWidget {
         clipBehavior: Clip.hardEdge,
         children: [
           Positioned(
-            top: 14,
+            top: 20,
             left: -30,
             child: TopLeftBanner(
-              text: '${LocaleKeys.level.tr()} 3',
+              text: '${LocaleKeys.level.tr()} $level',
               textColor: AppColors.lightGrey,
               backgroundColor: AppColors.lightGrey.withOpacity(0.1),
             ),
