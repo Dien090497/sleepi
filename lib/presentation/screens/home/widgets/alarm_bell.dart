@@ -7,11 +7,13 @@ import 'package:slee_fi/common/extensions/string_x.dart';
 import 'package:slee_fi/common/routes/app_routes.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
+import 'package:slee_fi/common/utils/date_time_utils.dart';
 import 'package:slee_fi/common/widgets/sf_alert_dialog.dart';
 import 'package:slee_fi/common/widgets/sf_button_outlined.dart';
 import 'package:slee_fi/common/widgets/sf_icon.dart';
 import 'package:slee_fi/common/widgets/sf_percent_border.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
+import 'package:slee_fi/di/injector.dart';
 import 'package:slee_fi/entities/lucky_box/lucky_box_entity.dart';
 import 'package:slee_fi/l10n/locale_keys.g.dart';
 import 'package:slee_fi/presentation/blocs/home/home_bloc.dart';
@@ -28,9 +30,15 @@ class AlarmBell extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final dateTimeUtil = getIt<DateTimeUtils>();
     return BlocBuilder<HomeBloc, HomeState>(
       builder: (context, state) {
         final bed = state is HomeLoaded ? state.selectedBed : null;
+        final minTime =
+            DateTime.now().add(Duration(hours: bed?.startTime?.toInt() ?? 0));
+        final maxTime =
+            DateTime.now().add(Duration(hours: bed?.endTime?.toInt() ?? 0));
+
         return Container(
           padding: const EdgeInsets.symmetric(horizontal: 16),
           decoration: const BoxDecoration(
@@ -43,10 +51,17 @@ class AlarmBell extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              const TimePicker(),
+              TimePicker(
+                onHourChange: (hour) {
+                  context.read<HomeBloc>().add(ChangeHour(hour));
+                },
+                onMinuteChange: (minute) {
+                  context.read<HomeBloc>().add(ChangeMinute(minute));
+                },
+              ),
               const SizedBox(height: 16),
               Text(
-                '${LocaleKeys.range.tr()}: ${state is HomeLoaded && bed != null ? '${DateTime.now().hour + bed.startTime!}' : '03:00-06:00'}',
+                '${LocaleKeys.range.tr()}: ${state is HomeLoaded && bed != null ? '${dateTimeUtil.HHmm(minTime)}-${dateTimeUtil.HHmm(maxTime)}' : '03:00-06:00'}',
                 style: TextStyles.white16500,
               ),
               const SizedBox(height: 24),
@@ -73,7 +88,7 @@ class AlarmBell extends StatelessWidget {
                 ],
               ),
               const SizedBox(height: 16),
-              const ButtonStart(),
+              ButtonStart(enableStart: _correctTime(minTime, maxTime, state)),
               const SizedBox(height: 32),
               Row(
                 children: [
@@ -177,6 +192,20 @@ class AlarmBell extends StatelessWidget {
         );
       },
     );
+  }
+
+  bool _correctTime(DateTime minTime, DateTime maxTime, HomeState state) {
+    if (state is! HomeLoaded) return false;
+    var hour = state.hour;
+    var minute = state.minute;
+    var now = DateTime.now();
+    var nextDay = DateTime.now().add(const Duration(days: 1));
+    var wakeUpTimeInNextDay =
+        DateTime(nextDay.year, nextDay.month, nextDay.day, hour, minute);
+    var wakeUpTimeInDay = DateTime(now.year, now.month, now.day, hour, minute);
+    var wakeUpTime = hour <= now.hour ? wakeUpTimeInNextDay : wakeUpTimeInDay;
+
+    return wakeUpTime.isAfter(minTime) && wakeUpTime.isBefore(maxTime);
   }
 
   LuckyBoxEntity? _boxWithIndex(HomeState state, int index) {

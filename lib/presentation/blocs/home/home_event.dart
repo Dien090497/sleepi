@@ -96,3 +96,19 @@ class SpeedUpLuckyBox extends HomeEvent {
   @override
   List<Object?> get props => [id];
 }
+
+class ChangeHour extends HomeEvent {
+  final int hour;
+
+  const ChangeHour(this.hour);
+
+  @override
+  List<Object?> get props => [hour];
+}class ChangeMinute extends HomeEvent {
+  final int minute;
+
+  const ChangeMinute(this.minute);
+
+  @override
+  List<Object?> get props => [minute];
+}

@@ -3,7 +3,11 @@ import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
 
 class TimePicker extends StatelessWidget {
-  const TimePicker({Key? key}) : super(key: key);
+  const TimePicker(
+      {Key? key, required this.onHourChange, required this.onMinuteChange})
+      : super(key: key);
+  final Function(int hour) onHourChange;
+  final Function(int hour) onMinuteChange;
 
   @override
   Widget build(BuildContext context) {
@@ -23,17 +27,19 @@ class TimePicker extends StatelessWidget {
               children: <Widget>[
                 Expanded(
                     child: SFDatePicker(
+                  size: 24,
                   selectedTime: DateTime.now().hour,
                   alignment: Alignment.centerRight,
                   offAxisFraction: -.5,
-                  timeChanged: (time) {},
+                  timeChanged: onHourChange,
                 )),
                 Expanded(
                     child: SFDatePicker(
+                  size: 60,
                   selectedTime: DateTime.now().minute,
                   alignment: Alignment.centerLeft,
                   offAxisFraction: .5,
-                  timeChanged: (time) {},
+                  timeChanged: onMinuteChange,
                   useMagnifier: true,
                 )),
               ],
@@ -101,6 +107,7 @@ class SFDatePicker extends StatelessWidget {
     required this.offAxisFraction,
     required this.alignment,
     this.useMagnifier = false,
+    required this.size,
   }) : super(key: key);
 
   final int selectedTime;
@@ -108,6 +115,7 @@ class SFDatePicker extends StatelessWidget {
   final double offAxisFraction;
   final Alignment alignment;
   final bool useMagnifier;
+  final int size;
 
   @override
   Widget build(BuildContext context) {
@@ -116,9 +124,7 @@ class SFDatePicker extends StatelessWidget {
       selectionOverlay: const SizedBox(),
       offAxisFraction: offAxisFraction,
       squeeze: 1,
-      scrollController: FixedExtentScrollController(
-        initialItem: selectedTime,
-      ),
+      scrollController: FixedExtentScrollController(initialItem: selectedTime),
       useMagnifier: useMagnifier,
       itemExtent: 48.0,
       backgroundColor: AppColors.dark,
@@ -126,7 +132,7 @@ class SFDatePicker extends StatelessWidget {
         timeChanged(index);
       },
       children: List<Widget>.generate(
-        24,
+        size,
         (int index) {
           return Container(
             width: double.infinity,

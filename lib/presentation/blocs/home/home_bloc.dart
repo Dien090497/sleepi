@@ -37,6 +37,8 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     on<ChangeInsurance>(_changeInsurance);
     on<FetchLuckyBox>(_fetchLuckyBox);
     on<SpeedUpLuckyBox>(_speedUpLuckyBox);
+    on<ChangeHour>(_changeHour);
+    on<ChangeMinute>(_changeMinute);
   }
 
   final _fetchListBedUC = getIt<FetchBedUseCase>();
@@ -114,12 +116,13 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
         _currentPageBed, _limitItemPage, CategoryType.bed, AttributeNFT.none));
     result.fold(
       (l) {
-        emit(const HomeState.loaded(
-          bedList: [],
-          selectedBed: null,
-          loadMoreBed: false,
-          errorMessage: '',
-        ));
+        emit(HomeState.loaded(
+            bedList: [],
+            selectedBed: null,
+            loadMoreBed: false,
+            errorMessage: '',
+            minute: DateTime.now().minute,
+            hour: DateTime.now().hour));
       },
       (r) {
         _currentPageBed++;
@@ -138,12 +141,13 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
           return;
         }
         emit(HomeState.loaded(
-          errorMessage: '',
-          loading: false,
-          bedList: r.map((e) => e.toEntity()).toList(),
-          selectedBed: r.isNotEmpty ? r.first.toEntity() : null,
-          loadMoreBed: true,
-        ));
+            errorMessage: '',
+            loading: false,
+            bedList: r.map((e) => e.toEntity()).toList(),
+            selectedBed: r.isNotEmpty ? r.first.toEntity() : null,
+            loadMoreBed: true,
+            hour: DateTime.now().hour,
+            minute: DateTime.now().minute));
         add(FetchLuckyBox());
       },
     );
@@ -275,5 +279,21 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
         emit(currentState.copyWith(luckyBoxes: luckyBoxes));
       }
     });
+  }
+
+  FutureOr<void> _changeHour(ChangeHour event, Emitter<HomeState> emit) {
+    final currentState = state;
+
+    if (currentState is HomeLoaded) {
+      emit(currentState.copyWith(hour: event.hour));
+    }
+  }
+
+  FutureOr<void> _changeMinute(ChangeMinute event, Emitter<HomeState> emit) {
+    final currentState = state;
+
+    if (currentState is HomeLoaded) {
+      emit(currentState.copyWith(minute: event.minute));
+    }
   }
 }
