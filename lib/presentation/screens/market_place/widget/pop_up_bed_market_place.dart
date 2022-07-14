@@ -89,7 +89,7 @@ class PopUpBedMarketPlace extends StatelessWidget {
           ),
           padding: const EdgeInsets.all(8),
           child: SFText(
-            keyText: bed.nftId.toString(),
+            keyText: bed.tokenId.toString(),
             style: TextStyles.blue14,
           ),
         ),
