@@ -1,4 +1,5 @@
 import 'package:json_annotation/json_annotation.dart';
+import 'package:slee_fi/entities/tracking_result_chart_data_entity/tracking_result_chart_data_entity.dart';
 import 'package:slee_fi/models/tracking_result_chart/data_x_y.dart';
 
 part 'tracking_result_chart_data.g.dart';
@@ -36,4 +37,15 @@ class TrackingResultChartData {
         _$TrackingResultChartDataFromJson(json);
 
     Map<String, dynamic> toJson() => _$TrackingResultChartDataToJson(this);
+
+  TrackingResultChartDataEntity toEntity() => TrackingResultChartDataEntity(
+        slftChart: slftChart,
+        timeInBedChart: timeInBedChart,
+        wokeUpChart: wokeUpChart,
+        bedTimeChart: bedTimeChart,
+        nocturalAwakenChart: nocturalAwakenChart,
+        sleepDurationChart: sleepDurationChart,
+        sleepScoreChart: sleepScoreChart,
+        sleepOnsetChart: sleepOnsetChart,
+      );
 }

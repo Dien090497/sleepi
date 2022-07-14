@@ -62,7 +62,7 @@ class TabWeek extends StatelessWidget {
                 padding: EdgeInsets.zero,
               ),
               const SizedBox(height: 12),
-              ChartStatisticShare(data: state.dataChart.slftChart,),
+              ChartStatisticShare(data: state.dataChart.first, dataXY: state.trackingResultChartData.slftChart,),
               const SizedBox(height: 40),
               const ChartTitle(
                   title: LocaleKeys.average_sleep_score,
@@ -71,7 +71,7 @@ class TabWeek extends StatelessWidget {
                   textStyleResult: TextStyles.bold16Blue,
                   padding: EdgeInsets.zero),
               const SizedBox(height: 12),
-              ChartStatisticShare(),
+              ChartStatisticShare(data: state.dataChart[1], dataXY: state.trackingResultChartData.sleepScoreChart,),
               const SizedBox(height: 40),
               const ChartTitle(
                 title: LocaleKeys.bed_time,

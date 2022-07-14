@@ -1,5 +1,4 @@
 import 'package:json_annotation/json_annotation.dart';
-import 'package:slee_fi/models/item_model/item_model.dart';
 
 part 'tracking_result_chart.g.dart';
 @JsonSerializable()

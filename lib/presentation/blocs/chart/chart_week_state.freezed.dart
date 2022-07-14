@@ -19,8 +19,12 @@ mixin _$ChartWeekState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function(DatePeriod week, DateTime firstAllowedDate,
-            DateTime lastAllowedDate, TrackingResultChartData dataChart)
+    required TResult Function(
+            DatePeriod week,
+            DateTime firstAllowedDate,
+            DateTime lastAllowedDate,
+            List<DrawChartEntity> dataChart,
+            TrackingResultChartDataEntity trackingResultChartData)
         loaded,
     required TResult Function(String msg) error,
   }) =>
@@ -28,8 +32,12 @@ mixin _$ChartWeekState {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function(DatePeriod week, DateTime firstAllowedDate,
-            DateTime lastAllowedDate, TrackingResultChartData dataChart)?
+    TResult Function(
+            DatePeriod week,
+            DateTime firstAllowedDate,
+            DateTime lastAllowedDate,
+            List<DrawChartEntity> dataChart,
+            TrackingResultChartDataEntity trackingResultChartData)?
         loaded,
     TResult Function(String msg)? error,
   }) =>
@@ -37,8 +45,12 @@ mixin _$ChartWeekState {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function(DatePeriod week, DateTime firstAllowedDate,
-            DateTime lastAllowedDate, TrackingResultChartData dataChart)?
+    TResult Function(
+            DatePeriod week,
+            DateTime firstAllowedDate,
+            DateTime lastAllowedDate,
+            List<DrawChartEntity> dataChart,
+            TrackingResultChartDataEntity trackingResultChartData)?
         loaded,
     TResult Function(String msg)? error,
     required TResult orElse(),
@@ -135,8 +147,12 @@ class _$ChartWeekInitial
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function(DatePeriod week, DateTime firstAllowedDate,
-            DateTime lastAllowedDate, TrackingResultChartData dataChart)
+    required TResult Function(
+            DatePeriod week,
+            DateTime firstAllowedDate,
+            DateTime lastAllowedDate,
+            List<DrawChartEntity> dataChart,
+            TrackingResultChartDataEntity trackingResultChartData)
         loaded,
     required TResult Function(String msg) error,
   }) {
@@ -147,8 +163,12 @@ class _$ChartWeekInitial
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function(DatePeriod week, DateTime firstAllowedDate,
-            DateTime lastAllowedDate, TrackingResultChartData dataChart)?
+    TResult Function(
+            DatePeriod week,
+            DateTime firstAllowedDate,
+            DateTime lastAllowedDate,
+            List<DrawChartEntity> dataChart,
+            TrackingResultChartDataEntity trackingResultChartData)?
         loaded,
     TResult Function(String msg)? error,
   }) {
@@ -159,8 +179,12 @@ class _$ChartWeekInitial
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function(DatePeriod week, DateTime firstAllowedDate,
-            DateTime lastAllowedDate, TrackingResultChartData dataChart)?
+    TResult Function(
+            DatePeriod week,
+            DateTime firstAllowedDate,
+            DateTime lastAllowedDate,
+            List<DrawChartEntity> dataChart,
+            TrackingResultChartDataEntity trackingResultChartData)?
         loaded,
     TResult Function(String msg)? error,
     required TResult orElse(),
@@ -219,7 +243,10 @@ abstract class _$$ChartWeekLoadedCopyWith<$Res> {
       {DatePeriod week,
       DateTime firstAllowedDate,
       DateTime lastAllowedDate,
-      TrackingResultChartData dataChart});
+      List<DrawChartEntity> dataChart,
+      TrackingResultChartDataEntity trackingResultChartData});
+
+  $TrackingResultChartDataEntityCopyWith<$Res> get trackingResultChartData;
 }
 
 /// @nodoc
@@ -239,6 +266,7 @@ class __$$ChartWeekLoadedCopyWithImpl<$Res>
     Object? firstAllowedDate = freezed,
     Object? lastAllowedDate = freezed,
     Object? dataChart = freezed,
+    Object? trackingResultChartData = freezed,
   }) {
     return _then(_$ChartWeekLoaded(
       week: week == freezed
@@ -254,10 +282,22 @@ class __$$ChartWeekLoadedCopyWithImpl<$Res>
           : lastAllowedDate // ignore: cast_nullable_to_non_nullable
               as DateTime,
       dataChart: dataChart == freezed
-          ? _value.dataChart
+          ? _value._dataChart
           : dataChart // ignore: cast_nullable_to_non_nullable
-              as TrackingResultChartData,
+              as List<DrawChartEntity>,
+      trackingResultChartData: trackingResultChartData == freezed
+          ? _value.trackingResultChartData
+          : trackingResultChartData // ignore: cast_nullable_to_non_nullable
+              as TrackingResultChartDataEntity,
     ));
+  }
+
+  @override
+  $TrackingResultChartDataEntityCopyWith<$Res> get trackingResultChartData {
+    return $TrackingResultChartDataEntityCopyWith<$Res>(
+        _value.trackingResultChartData, (value) {
+      return _then(_value.copyWith(trackingResultChartData: value));
+    });
   }
 }
 
@@ -270,7 +310,9 @@ class _$ChartWeekLoaded
       {required this.week,
       required this.firstAllowedDate,
       required this.lastAllowedDate,
-      required this.dataChart});
+      required final List<DrawChartEntity> dataChart,
+      required this.trackingResultChartData})
+      : _dataChart = dataChart;
 
   @override
   final DatePeriod week;
@@ -278,12 +320,19 @@ class _$ChartWeekLoaded
   final DateTime firstAllowedDate;
   @override
   final DateTime lastAllowedDate;
+  final List<DrawChartEntity> _dataChart;
   @override
-  final TrackingResultChartData dataChart;
+  List<DrawChartEntity> get dataChart {
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_dataChart);
+  }
+
+  @override
+  final TrackingResultChartDataEntity trackingResultChartData;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'ChartWeekState.loaded(week: $week, firstAllowedDate: $firstAllowedDate, lastAllowedDate: $lastAllowedDate, dataChart: $dataChart)';
+    return 'ChartWeekState.loaded(week: $week, firstAllowedDate: $firstAllowedDate, lastAllowedDate: $lastAllowedDate, dataChart: $dataChart, trackingResultChartData: $trackingResultChartData)';
   }
 
   @override
@@ -294,7 +343,9 @@ class _$ChartWeekLoaded
       ..add(DiagnosticsProperty('week', week))
       ..add(DiagnosticsProperty('firstAllowedDate', firstAllowedDate))
       ..add(DiagnosticsProperty('lastAllowedDate', lastAllowedDate))
-      ..add(DiagnosticsProperty('dataChart', dataChart));
+      ..add(DiagnosticsProperty('dataChart', dataChart))
+      ..add(DiagnosticsProperty(
+          'trackingResultChartData', trackingResultChartData));
   }
 
   @override
@@ -307,7 +358,10 @@ class _$ChartWeekLoaded
                 .equals(other.firstAllowedDate, firstAllowedDate) &&
             const DeepCollectionEquality()
                 .equals(other.lastAllowedDate, lastAllowedDate) &&
-            const DeepCollectionEquality().equals(other.dataChart, dataChart));
+            const DeepCollectionEquality()
+                .equals(other._dataChart, _dataChart) &&
+            const DeepCollectionEquality().equals(
+                other.trackingResultChartData, trackingResultChartData));
   }
 
   @override
@@ -316,7 +370,8 @@ class _$ChartWeekLoaded
       const DeepCollectionEquality().hash(week),
       const DeepCollectionEquality().hash(firstAllowedDate),
       const DeepCollectionEquality().hash(lastAllowedDate),
-      const DeepCollectionEquality().hash(dataChart));
+      const DeepCollectionEquality().hash(_dataChart),
+      const DeepCollectionEquality().hash(trackingResultChartData));
 
   @JsonKey(ignore: true)
   @override
@@ -327,38 +382,53 @@ class _$ChartWeekLoaded
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function(DatePeriod week, DateTime firstAllowedDate,
-            DateTime lastAllowedDate, TrackingResultChartData dataChart)
+    required TResult Function(
+            DatePeriod week,
+            DateTime firstAllowedDate,
+            DateTime lastAllowedDate,
+            List<DrawChartEntity> dataChart,
+            TrackingResultChartDataEntity trackingResultChartData)
         loaded,
     required TResult Function(String msg) error,
   }) {
-    return loaded(week, firstAllowedDate, lastAllowedDate, dataChart);
+    return loaded(week, firstAllowedDate, lastAllowedDate, dataChart,
+        trackingResultChartData);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function(DatePeriod week, DateTime firstAllowedDate,
-            DateTime lastAllowedDate, TrackingResultChartData dataChart)?
+    TResult Function(
+            DatePeriod week,
+            DateTime firstAllowedDate,
+            DateTime lastAllowedDate,
+            List<DrawChartEntity> dataChart,
+            TrackingResultChartDataEntity trackingResultChartData)?
         loaded,
     TResult Function(String msg)? error,
   }) {
-    return loaded?.call(week, firstAllowedDate, lastAllowedDate, dataChart);
+    return loaded?.call(week, firstAllowedDate, lastAllowedDate, dataChart,
+        trackingResultChartData);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function(DatePeriod week, DateTime firstAllowedDate,
-            DateTime lastAllowedDate, TrackingResultChartData dataChart)?
+    TResult Function(
+            DatePeriod week,
+            DateTime firstAllowedDate,
+            DateTime lastAllowedDate,
+            List<DrawChartEntity> dataChart,
+            TrackingResultChartDataEntity trackingResultChartData)?
         loaded,
     TResult Function(String msg)? error,
     required TResult orElse(),
   }) {
     if (loaded != null) {
-      return loaded(week, firstAllowedDate, lastAllowedDate, dataChart);
+      return loaded(week, firstAllowedDate, lastAllowedDate, dataChart,
+          trackingResultChartData);
     }
     return orElse();
   }
@@ -403,12 +473,15 @@ abstract class ChartWeekLoaded implements ChartWeekState {
       {required final DatePeriod week,
       required final DateTime firstAllowedDate,
       required final DateTime lastAllowedDate,
-      required final TrackingResultChartData dataChart}) = _$ChartWeekLoaded;
+      required final List<DrawChartEntity> dataChart,
+      required final TrackingResultChartDataEntity
+          trackingResultChartData}) = _$ChartWeekLoaded;
 
   DatePeriod get week;
   DateTime get firstAllowedDate;
   DateTime get lastAllowedDate;
-  TrackingResultChartData get dataChart;
+  List<DrawChartEntity> get dataChart;
+  TrackingResultChartDataEntity get trackingResultChartData;
   @JsonKey(ignore: true)
   _$$ChartWeekLoadedCopyWith<_$ChartWeekLoaded> get copyWith =>
       throw _privateConstructorUsedError;
@@ -488,8 +561,12 @@ class _$ChartWeekError with DiagnosticableTreeMixin implements ChartWeekError {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function(DatePeriod week, DateTime firstAllowedDate,
-            DateTime lastAllowedDate, TrackingResultChartData dataChart)
+    required TResult Function(
+            DatePeriod week,
+            DateTime firstAllowedDate,
+            DateTime lastAllowedDate,
+            List<DrawChartEntity> dataChart,
+            TrackingResultChartDataEntity trackingResultChartData)
         loaded,
     required TResult Function(String msg) error,
   }) {
@@ -500,8 +577,12 @@ class _$ChartWeekError with DiagnosticableTreeMixin implements ChartWeekError {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function(DatePeriod week, DateTime firstAllowedDate,
-            DateTime lastAllowedDate, TrackingResultChartData dataChart)?
+    TResult Function(
+            DatePeriod week,
+            DateTime firstAllowedDate,
+            DateTime lastAllowedDate,
+            List<DrawChartEntity> dataChart,
+            TrackingResultChartDataEntity trackingResultChartData)?
         loaded,
     TResult Function(String msg)? error,
   }) {
@@ -512,8 +593,12 @@ class _$ChartWeekError with DiagnosticableTreeMixin implements ChartWeekError {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function(DatePeriod week, DateTime firstAllowedDate,
-            DateTime lastAllowedDate, TrackingResultChartData dataChart)?
+    TResult Function(
+            DatePeriod week,
+            DateTime firstAllowedDate,
+            DateTime lastAllowedDate,
+            List<DrawChartEntity> dataChart,
+            TrackingResultChartDataEntity trackingResultChartData)?
         loaded,
     TResult Function(String msg)? error,
     required TResult orElse(),
