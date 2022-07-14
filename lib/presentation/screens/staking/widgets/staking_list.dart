@@ -27,14 +27,47 @@ import 'package:slee_fi/presentation/screens/staking/widgets/popup_staking.dart'
 import 'package:slee_fi/presentation/screens/trade/trade_screen.dart';
 import 'package:slee_fi/resources/resources.dart';
 
-class StakingList extends StatelessWidget {
+class StakingList extends StatefulWidget {
   final double balanceSlft;
 
   const StakingList({required this.balanceSlft, Key? key}) : super(key: key);
 
   @override
+  State<StakingList> createState() => _StakingListState();
+}
+
+class _StakingListState extends State<StakingList> {
+  StakingInfoResponse? stakingInfo;
+
+  String get checkValueAPR{
+    if(stakingInfo == null || stakingInfo!.apr == double.infinity.toString() || stakingInfo!.apr == double.nan.toString()){
+      return "0";
+    }
+    return stakingInfo!.apr;
+  }
+
+  String get checkValueTvl{
+    if(stakingInfo == null || stakingInfo!.tvl == double.infinity.toString() || stakingInfo!.tvl == double.nan.toString()){
+      return "0";
+    }
+    return stakingInfo!.apr;
+  }
+
+  String get checkValueTotalReward{
+    if(stakingInfo == null || stakingInfo!.stake.totalReward == double.infinity.toString() || stakingInfo!.stake.totalReward == double.nan.toString()){
+      return "0";
+    }
+    return stakingInfo!.stake.totalReward!;
+  }
+
+  String get checkValueTotalStake{
+    if(stakingInfo == null  || stakingInfo!.stake.totalStake == double.infinity.toString() || stakingInfo!.stake.totalStake == double.nan.toString()){
+      return "0";
+    }
+    return stakingInfo!.stake.totalStake!;
+  }
+  @override
   Widget build(BuildContext context) {
-    StakingInfoResponse? stakingInfo;
     return BlocProvider(
       create: (context) => StakingCubit()..getStakingInfo(),
       child: BlocConsumer<StakingCubit, StakingState>(
@@ -51,15 +84,7 @@ class StakingList extends StatelessWidget {
         },
         builder: (context, state) {
           final cubit = context.read<StakingCubit>();
-          bool checkAPR = false;
-          bool checktvl = false;
-          bool checkEarned = false;
-          if(stakingInfo != null){
-            if(double.parse(stakingInfo!.apr).isNaN && double.parse(stakingInfo!.apr).isFinite) checkAPR = true;
-            if(double.parse(stakingInfo!.tvl).isNaN && double.parse(stakingInfo!.tvl).isFinite) checktvl = true;
-            if(stakingInfo!.stake.totalReward != null && double.parse(stakingInfo!.stake.totalReward!).isNaN && double.parse(stakingInfo!.stake.totalReward!).isFinite) checkEarned = true;
 
-          }
           return ListView(
             padding: const EdgeInsets.all(16.0),
             children: [
@@ -83,7 +108,7 @@ class StakingList extends StatelessWidget {
                       children: [
                         Expanded(
                             child: SFText(
-                              keyText: "${checktvl == false ? stakingInfo?.tvl ?? "0" : "0"} SLFT",
+                              keyText: "$checkValueTvl SLFT",
                               style: TextStyles.w700WhiteSize24,
                             )),
                         SFText(
@@ -219,7 +244,7 @@ class StakingList extends StatelessWidget {
                               width: 6,
                             ),
                             SFText(
-                              keyText: "${stakingInfo != null ? double.parse(stakingInfo!.stake.totalReward != null ? stakingInfo!.stake.totalReward! : "0").formatBalanceToken : 0}",
+                              keyText: double.parse(checkValueTotalReward).formatBalanceToken,
                               style: TextStyles.lightWhite16,
                             )
                           ],
@@ -250,7 +275,7 @@ class StakingList extends StatelessWidget {
                               width: 6,
                             ),
                             SFText(
-                              keyText: "${stakingInfo != null ? double.parse(checkEarned == false ? (stakingInfo != null && stakingInfo!.stake.totalStake != null) ? stakingInfo!.stake.totalStake! : "0" : "0").formatBalanceToken : 0}",
+                              keyText: double.parse(checkValueTotalStake).formatBalanceToken,
                               style: TextStyles.lightWhite16,
                             )
                           ],
@@ -270,7 +295,7 @@ class StakingList extends StatelessWidget {
                               stringCase: StringCase.upperCase,
                             )),
                         SFText(
-                          keyText: "${stakingInfo != null ? double.parse(checkAPR == false ? stakingInfo!.apr : "0").formatBalanceToken : 0}%",
+                          keyText: "${double.parse(checkValueAPR).formatBalanceToken}%",
                           style: TextStyles.lightWhite16,
                         ),
                       ],
@@ -295,9 +320,9 @@ class StakingList extends StatelessWidget {
                           width: 95,
                           height: 36,
                           onPressed: () =>
-                              Navigator.pushNamed(context, R.depositSLFT, arguments: DepositSlftArguments(balanceSlft: balanceSlft)).then((value) => {
+                              Navigator.pushNamed(context, R.depositSLFT, arguments: DepositSlftArguments(balanceSlft: widget.balanceSlft)).then((value) => {
                                 if(value == true){
-                                  cubit.getStakingInfo()
+                                  cubit.getStakingInfo(),
                                 }
                               }),
                         ),
@@ -314,7 +339,7 @@ class StakingList extends StatelessWidget {
                                         PopUpStaking(
                                           message: LocaleKeys.do_you_really_want_to_withdraw
                                               .tr(namedArgs: {
-                                            'amount': stakingInfo != null ? double.parse(stakingInfo!.stake.totalStake != null ? stakingInfo!.stake.totalStake! : "0").formatBalanceToken : "0",
+                                            'amount': double.parse(checkValueTotalStake).formatBalanceToken,
                                             'token': 'SLFT',
                                           }),
                                           onPressed: () => cubit.unStaking(),
@@ -334,7 +359,7 @@ class StakingList extends StatelessWidget {
                                     PopUpStaking(
                                       message: LocaleKeys.do_you_really_want_to_compound
                                           .tr(namedArgs: {
-                                        'amount': stakingInfo!= null ? double.parse(stakingInfo!.stake.totalStake != null ? stakingInfo!.stake.totalStake! : "0").formatBalanceToken : "0",
+                                        'amount': double.parse(checkValueTotalStake).formatBalanceToken,
                                         'token': 'SLFT',
                                       }),
                                       onPressed: () => cubit.compound(),
