@@ -51,5 +51,4 @@ abstract class IUserRepository {
   Future<Either<FailureMessage, List<LuckyBox>>> fetchLuckyBox();
 
   Future<Either<FailureMessage, dynamic>> openLuckyBox(int luckyBoxId);
-
 }

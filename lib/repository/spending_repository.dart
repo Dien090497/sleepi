@@ -22,8 +22,8 @@ abstract class ISpendingRepository {
 
   Future<Either<Failure, dynamic>> compound();
 
-  Future<Either<FailureMessage, StakingEntity>> stakingSlft({required double amount});
+  Future<Either<FailureMessage, StakingEntity>> stakingSlft(
+      {required double amount});
 
   Future<Either<FailureMessage, StakingInfoResponse>> getStakingInfo();
-
 }

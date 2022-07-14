@@ -598,27 +598,6 @@ class _AuthDataSource implements AuthDataSource {
     return value;
   }
 
-  @override
-  Future<EstimateSleepResponse> estimateSleepEarn(
-      bedId, itemId, enableInsurance) async {
-    const _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{
-      r'bedUsed': bedId,
-      r'itemUsed': itemId,
-      r'isEnableInsurance': enableInsurance
-    };
-    final _headers = <String, dynamic>{};
-    final _data = <String, dynamic>{};
-    final _result = await _dio.fetch<Map<String, dynamic>>(
-        _setStreamType<EstimateSleepResponse>(
-            Options(method: 'GET', headers: _headers, extra: _extra)
-                .compose(_dio.options, '/tracking/estimate-tracking',
-                    queryParameters: queryParameters, data: _data)
-                .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = EstimateSleepResponse.fromJson(_result.data!);
-    return value;
-  }
-
   RequestOptions _setStreamType<T>(RequestOptions requestOptions) {
     if (T != dynamic &&
         !(requestOptions.responseType == ResponseType.bytes ||

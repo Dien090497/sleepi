@@ -208,6 +208,4 @@ abstract class AuthDataSource {
 
   @GET('/lucky_box/open')
   Future<dynamic> openLuckyBox(@Query('luckyBoxId') luckyBoxId);
-
-
 }
