@@ -88,6 +88,15 @@ class FetchLuckyBox extends HomeEvent {
   List<Object?> get props => [];
 }
 
+class OpenLuckyBox extends HomeEvent {
+  final int id;
+
+  const OpenLuckyBox(this.id);
+
+  @override
+  List<Object?> get props => [id];
+}
+
 class SpeedUpLuckyBox extends HomeEvent {
   final int id;
 
@@ -104,7 +113,9 @@ class ChangeHour extends HomeEvent {
 
   @override
   List<Object?> get props => [hour];
-}class ChangeMinute extends HomeEvent {
+}
+
+class ChangeMinute extends HomeEvent {
   final int minute;
 
   const ChangeMinute(this.minute);

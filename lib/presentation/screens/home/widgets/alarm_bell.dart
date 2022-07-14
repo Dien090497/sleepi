@@ -10,6 +10,7 @@ import 'package:slee_fi/common/style/text_styles.dart';
 import 'package:slee_fi/common/utils/date_time_utils.dart';
 import 'package:slee_fi/common/widgets/sf_alert_dialog.dart';
 import 'package:slee_fi/common/widgets/sf_button_outlined.dart';
+import 'package:slee_fi/common/widgets/sf_dialog.dart';
 import 'package:slee_fi/common/widgets/sf_icon.dart';
 import 'package:slee_fi/common/widgets/sf_percent_border.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
@@ -23,6 +24,7 @@ import 'package:slee_fi/presentation/screens/home/widgets/home_switch.dart';
 import 'package:slee_fi/presentation/screens/home/widgets/pop_up_confirm_speed_up.dart';
 import 'package:slee_fi/presentation/screens/home/widgets/popup_open_lucky_box.dart';
 import 'package:slee_fi/presentation/screens/home/widgets/time_picker.dart';
+import 'package:slee_fi/presentation/screens/staking/widgets/popup_staking.dart';
 import 'package:slee_fi/resources/resources.dart';
 
 class AlarmBell extends StatelessWidget {
@@ -144,43 +146,44 @@ class AlarmBell extends StatelessWidget {
                       !_theSameList(current.luckyBoxes, previous.luckyBoxes));
                 },
                 builder: (context, state) {
+                  final bloc = context.read<HomeBloc>();
                   return Row(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
                       ViewGif(
                         index: 0,
-                        onTap: () {},
-                        bedEntity: _boxWithIndex(state, 0),
+                        homeBloc: bloc,
+                        entity: _boxWithIndex(state, 0),
                       ),
                       const SizedBox(height: 20),
                       ViewGif(
                         index: 1,
-                        bedEntity: _boxWithIndex(state, 1),
-                        onTap: () {},
+                        entity: _boxWithIndex(state, 1),
+                        homeBloc: bloc,
                       ),
                       const SizedBox(height: 20),
                       ViewGif(
                         index: 2,
-                        bedEntity: _boxWithIndex(state, 2),
-                        onTap: () {},
+                        entity: _boxWithIndex(state, 2),
+                        homeBloc: bloc,
                       ),
                       const SizedBox(height: 20),
                       ViewGif(
                         index: 2,
-                        bedEntity: _boxWithIndex(state, 3),
-                        onTap: () {},
+                        entity: _boxWithIndex(state, 3),
+                        homeBloc: bloc,
                       ),
                       const SizedBox(height: 20),
                       ViewGif(
                         index: 4,
-                        bedEntity: _boxWithIndex(state, 4),
-                        onTap: () {},
+                        entity: _boxWithIndex(state, 4),
+                        homeBloc: bloc,
                       ),
                       const SizedBox(height: 20),
                       ViewGif(
                         index: 5,
-                        bedEntity: _boxWithIndex(state, 5),
-                        onTap: () {},
+                        entity: _boxWithIndex(state, 5),
+                        homeBloc: bloc,
                       ),
                     ],
                   );
@@ -231,42 +234,53 @@ class AlarmBell extends StatelessWidget {
 class ViewGif extends StatelessWidget {
   const ViewGif(
       {Key? key,
-      required this.onTap,
+      required this.homeBloc,
       required this.index,
-      required this.bedEntity})
+      required this.entity})
       : super(key: key);
-  final LuckyBoxEntity? bedEntity;
-  final Function() onTap;
+  final LuckyBoxEntity? entity;
+  final HomeBloc homeBloc;
   final int index;
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        'bed entity is  $bedEntity'.log;
-        if (bedEntity != null) {
-          onTap;
-          _showPopUpInfoLuckyBox(
-            context,
-            Const.luckyBoxes[index % 5],
-            bedEntity!.speedUpCost,
-            bedEntity!.waitingTime,
-            bedEntity!.id,
-          );
+        'bed entity is  $entity'.log;
+        if (entity != null) {
+          homeBloc;
+          if (index % 2 == 0) {
+            showCustomDialog(context, children: [
+              PopUpStaking(
+                  message: LocaleKeys.do_you_want_open_the_lucky_box
+                      .tr(args: [entity!.openCost]),
+                  onPressed: () {
+                    homeBloc.add(OpenLuckyBox(entity!.id));
+                  })
+            ]);
+          } else {
+            _showPopUpInfoLuckyBox(
+              context,
+              Const.luckyBoxes[index % 5],
+              entity!.speedUpCost,
+              entity!.waitingTime,
+              entity!.id,
+            );
+          }
         }
       },
       child: Container(
         width: 48,
         height: 48,
-        padding: EdgeInsets.all(bedEntity != null ? 0 : 12),
+        padding: EdgeInsets.all(entity != null ? 0 : 12),
         decoration: BoxDecoration(
           color: AppColors.darkColor,
           borderRadius: BorderRadius.circular(16),
           border: Border.all(color: AppColors.borderDarkColor, width: 1),
         ),
         child: SFIcon(
-          bedEntity != null ? Const.luckyBoxes[index % 5] : Ics.gift,
-          color: bedEntity != null ? null : AppColors.borderDarkColor,
+          entity != null ? Const.luckyBoxes[index % 5] : Ics.gift,
+          color: entity != null ? null : AppColors.borderDarkColor,
         ),
       ),
     );

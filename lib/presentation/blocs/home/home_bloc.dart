@@ -15,6 +15,7 @@ import 'package:slee_fi/usecase/estimate_tracking_usecase.dart';
 import 'package:slee_fi/usecase/fetch_bed_usecase.dart';
 import 'package:slee_fi/usecase/fetch_item_owner_usecase.dart';
 import 'package:slee_fi/usecase/fetch_lucky_box_usecase.dart';
+import 'package:slee_fi/usecase/open_lucky_box_usecase.dart';
 import 'package:slee_fi/usecase/remove_item_from_bed_usecase.dart';
 import 'package:slee_fi/usecase/speed_up_lucky_box_usecase.dart';
 import 'package:slee_fi/usecase/usecase.dart';
@@ -39,6 +40,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     on<SpeedUpLuckyBox>(_speedUpLuckyBox);
     on<ChangeHour>(_changeHour);
     on<ChangeMinute>(_changeMinute);
+    on<OpenLuckyBox>(_openLuckyBox);
   }
 
   final _fetchListBedUC = getIt<FetchBedUseCase>();
@@ -48,6 +50,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
   final _estimateTrackingUC = getIt<EstimateTrackingUseCase>();
   final _fetchLuckyBoxUC = getIt<FetchLuckyBoxUseCase>();
   final _speedUpLuckyBoxUC = getIt<SpeedUpLuckyBoxUseCase>();
+  final _openLuckyBoxUC = getIt<OpenLuckyBoxUseCase>();
 
   int currentBedId = -1;
   int _currentPageBed = 1;
@@ -295,5 +298,19 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     if (currentState is HomeLoaded) {
       emit(currentState.copyWith(minute: event.minute));
     }
+  }
+
+  FutureOr<void> _openLuckyBox(
+      OpenLuckyBox event, Emitter<HomeState> emit) async {
+    var result = await _openLuckyBoxUC.call(event.id);
+    result.fold((l) => null, (r) {
+      final currentState = state;
+
+      if (currentState is HomeLoaded) {
+        var list = currentState.luckyBoxes;
+        list.removeWhere((element) => element.id == event.id);
+        emit(currentState.copyWith(luckyBoxes: list));
+      }
+    });
   }
 }
