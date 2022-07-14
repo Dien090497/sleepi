@@ -77,7 +77,8 @@ class AlarmBell extends StatelessWidget {
               const SizedBox(height: 32),
               Row(
                 children: [
-                  Stack(
+                  Expanded(
+                      child: Stack(
                     alignment: Alignment.centerLeft,
                     children: [
                       SFPercentBorderGradient(
@@ -97,7 +98,7 @@ class AlarmBell extends StatelessWidget {
                         ),
                       )
                     ],
-                  ),
+                  )),
                   const SizedBox(width: 12),
                   GestureDetector(
                     onTap: () => Navigator.pushNamed(context, R.question),

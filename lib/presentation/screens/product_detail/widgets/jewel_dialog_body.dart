@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:slee_fi/common/extensions/string_x.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
 import 'package:slee_fi/common/widgets/sf_buttons.dart';
@@ -23,6 +24,9 @@ class JewelDialogBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final qualityColor = jewel.quality != null
+        ? jewel.quality!.qualityBedColor
+        : AppColors.commonBed;
     return Stack(
       children: [
         Positioned(
@@ -79,13 +83,13 @@ class JewelDialogBody extends StatelessWidget {
             const SizedBox(height: 24),
             Container(
               decoration: BoxDecoration(
-                color: AppColors.blue.withOpacity(0.1),
+                color: qualityColor.withOpacity(0.1),
                 borderRadius: BorderRadius.circular(100),
               ),
               padding: const EdgeInsets.all(8),
               child: SFText(
                 keyText: jewel.nftId.toString(),
-                style: TextStyles.blue14,
+                style: TextStyles.blue14.copyWith(color: qualityColor),
               ),
             ),
             const SizedBox(height: 32),
@@ -122,7 +126,8 @@ class JewelDialogBody extends StatelessWidget {
                   const SizedBox(width: 4),
                   Expanded(
                     child: SFText(
-                      keyText: '+${jewel.resilience}% ${LocaleKeys.base.tr()} Res.',
+                      keyText:
+                          '+${jewel.resilience}% ${LocaleKeys.base.tr()} Res.',
                       style: TextStyles.blue16,
                       textAlign: TextAlign.right,
                     ),
