@@ -19,32 +19,41 @@ import 'package:slee_fi/usecase/fetch_bed_usecase.dart';
 import 'package:slee_fi/usecase/withdraw_history_usecase.dart';
 
 abstract class IUserRepository {
-  Future<Either<FailureMessage, dynamic>> changePassword(ChangePasswordSchema changePasswordSchema);
+  Future<Either<FailureMessage, dynamic>> changePassword(
+      ChangePasswordSchema changePasswordSchema);
 
   Future<Either<FailureMessage, List<ActiveCodeEntity>>> fetchActivationCodes();
 
-  Future<Either<FailureMessage, List<TokenSpending>>> fetchBalanceSpending(String userID);
+  Future<Either<FailureMessage, List<TokenSpending>>> fetchBalanceSpending(
+      String userID);
 
-  Future<Either<FailureMessage, SwapTokenToWalletResponse>> transferTokenToMainWallet(
-      WhitDrawTokenSchema whitDrawTokenSchema);
+  Future<Either<FailureMessage, SwapTokenToWalletResponse>>
+      transferTokenToMainWallet(WhitDrawTokenSchema whitDrawTokenSchema);
 
   Future<Either<FailureMessage, GlobalConfigResponse>> getGlobalConfig();
 
-  Future<Either<FailureMessage, WithdrawHistoryResponse>> withdrawHistory(WithdrawParam withdrawParam);
+  Future<Either<FailureMessage, WithdrawHistoryResponse>> withdrawHistory(
+      WithdrawParam withdrawParam);
 
-  Future<Either<FailureMessage, String>> estimateGasWithdraw(EstimateGasWithdrawParam estimateParam);
+  Future<Either<FailureMessage, String>> estimateGasWithdraw(
+      EstimateGasWithdrawParam estimateParam);
 
-  Future<Either<FailureMessage, List<BedModel>>> fetchListBed(FetchBedParam fetchBedParam);
+  Future<Either<FailureMessage, List<BedModel>>> fetchListBed(
+      FetchBedParam fetchBedParam);
 
-  Future<Either<FailureMessage, dynamic>> addItemToBed(AddItemToBedParam addItemToBedParam);
+  Future<Either<FailureMessage, dynamic>> addItemToBed(
+      AddItemToBedParam addItemToBedParam);
 
-  Future<Either<FailureMessage, dynamic>> removeItemInBed(AddItemToBedParam addItemToBedParam);
+  Future<Either<FailureMessage, dynamic>> removeItemInBed(
+      AddItemToBedParam addItemToBedParam);
 
-  Future<Either<FailureMessage, List<ItemEntity>>> fetchItemOwner(FilterItemSchema filterItemSchema);
+  Future<Either<FailureMessage, List<ItemEntity>>> fetchItemOwner(
+      FilterItemSchema filterItemSchema);
 
   Future<Either<FailureMessage, List<LuckyBox>>> fetchLuckyBox();
 
   Future<Either<FailureMessage, dynamic>> openLuckyBox(int luckyBoxId);
 
-  Future<Either<FailureMessage, EstimateSleepResponse>> estimateTracking(EstimateTrackingParam estimateTrackingParam);
+  Future<Either<FailureMessage, EstimateSleepResponse>> estimateTracking(
+      EstimateTrackingParam estimateTrackingParam);
 }

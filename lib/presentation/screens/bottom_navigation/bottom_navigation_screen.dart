@@ -25,7 +25,7 @@ class BottomNavigationScreen extends StatelessWidget {
     final PageController pageController = PageController();
 
     const screens = [
-      KeepAliveWrapper(child: HomeScreen()),
+      HomeScreen(),
       KeepAliveWrapper(child: GachaScreen()),
       KeepAliveWrapper(child: ProductDetailScreen()),
       KeepAliveWrapper(child: ChartScreen()),
