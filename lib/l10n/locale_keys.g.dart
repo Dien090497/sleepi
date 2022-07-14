@@ -442,5 +442,6 @@ abstract class  LocaleKeys {
   static const wallet_imported_successfully = 'wallet_imported_successfully';
   static const insufficient_amount = 'insufficient_amount';
   static const you_dont_have_enough_money_to_staking = 'you_dont_have_enough_money_to_staking';
+  static const buy_token = 'buy_token';
 
 }

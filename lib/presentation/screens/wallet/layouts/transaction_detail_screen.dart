@@ -1,5 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:slee_fi/common/enum/enum.dart';
 import 'package:slee_fi/common/extensions/num_ext.dart';
 import 'package:slee_fi/common/extensions/string_x.dart';
@@ -13,6 +14,8 @@ import 'package:slee_fi/common/widgets/sf_icon.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
 import 'package:slee_fi/entities/token/token_entity.dart';
 import 'package:slee_fi/l10n/locale_keys.g.dart';
+import 'package:slee_fi/presentation/blocs/wallet/wallet_cubit.dart';
+import 'package:slee_fi/presentation/blocs/wallet/wallet_state.dart';
 import 'package:slee_fi/presentation/screens/passcode/passcode_screen.dart';
 import 'package:slee_fi/presentation/screens/send_to_external/send_to_external_screen.dart';
 import 'package:slee_fi/presentation/screens/trade/trade_screen.dart';
@@ -43,7 +46,14 @@ class TransactionDetail extends StatelessWidget {
   Widget build(BuildContext context) {
     final args = ModalRoute.of(context)?.settings.arguments
         as TransactionDetailArguments;
-
+    String? addressWallet;
+    String? networkName;
+    return BlocBuilder<WalletCubit, WalletState>(
+      builder: (context, state) {
+        if (state is WalletStateLoaded) {
+          addressWallet = state.walletInfoEntity.address;
+          networkName = state.walletInfoEntity.networkName;
+        }
     return BackgroundWidget(
         appBar: AppBar(
             toolbarHeight: 80,
@@ -101,9 +111,9 @@ class TransactionDetail extends StatelessWidget {
                           onTap: () => SFModalBottomSheet.show(
                             context,
                             0.7,
-                            const ModalReceiveWallet(
-                              address: 'input the address',
-                              networkName: LocaleKeys.avalanche_wallet,
+                             ModalReceiveWallet(
+                              address: addressWallet ?? 'input the address',
+                              networkName: networkName ?? LocaleKeys.avalanche_wallet,
                             ),
                           ),
                           text: LocaleKeys.receive,
@@ -172,5 +182,7 @@ class TransactionDetail extends StatelessWidget {
             ],
           ),
         ));
+  },
+);
   }
 }

@@ -50,7 +50,7 @@ class _StakingListState extends State<StakingList> {
     if(stakingInfo == null || stakingInfo!.tvl == double.infinity.toString() || stakingInfo!.tvl == double.nan.toString()){
       return "0";
     }
-    return stakingInfo!.apr;
+    return stakingInfo!.tvl;
   }
 
   String get checkValueTotalReward{
@@ -107,14 +107,18 @@ class _StakingListState extends State<StakingList> {
                     Row(
                       children: [
                         Expanded(
+                          flex: 5,
                             child: SFText(
                               keyText: "$checkValueTvl SLFT",
                               style: TextStyles.w700WhiteSize24,
                             )),
-                        SFText(
-                          keyText: "(=xxxxxx USD)",
-                          style: TextStyles.w400White14,
-                          textAlign: TextAlign.end,
+                        Expanded(
+                          flex: 3,
+                          child: SFText(
+                            keyText: "(=${double.parse(checkValueTvl)/0.2} USD)",
+                            style: TextStyles.w400White14,
+                            textAlign: TextAlign.end,
+                          ),
                         )
                       ],
                     ),
@@ -389,7 +393,7 @@ class _StakingListState extends State<StakingList> {
                 height: 48.0,
               ),
               SFButton(
-                text: "${LocaleKeys.buy.tr()} SLFT",
+                text: LocaleKeys.buy_token.tr(namedArgs: {'token': 'SLFT'}),
                 textStyle: TextStyles.boldWhite14,
                 color: AppColors.blue,
                 width: double.infinity,
