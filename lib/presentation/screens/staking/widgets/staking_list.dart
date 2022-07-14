@@ -55,8 +55,8 @@ class StakingList extends StatelessWidget {
           bool checktvl = false;
           bool checkEarned = false;
           if(stakingInfo != null){
-            if(double.parse(stakingInfo!.apr).isNaN || double.parse(stakingInfo!.apr).isFinite) checkAPR = true;
-            if(double.parse(stakingInfo!.tvl).isNaN || double.parse(stakingInfo!.tvl).isFinite) checktvl = true;
+            if(double.parse(stakingInfo!.apr).isNaN && double.parse(stakingInfo!.apr).isFinite) checkAPR = true;
+            if(double.parse(stakingInfo!.tvl).isNaN && double.parse(stakingInfo!.tvl).isFinite) checktvl = true;
             if(stakingInfo!.stake.totalReward != null && double.parse(stakingInfo!.stake.totalReward!).isNaN && double.parse(stakingInfo!.stake.totalReward!).isFinite) checkEarned = true;
 
           }
@@ -83,7 +83,7 @@ class StakingList extends StatelessWidget {
                       children: [
                         Expanded(
                             child: SFText(
-                              keyText: "${checktvl == false ? stakingInfo?.tvl : "0"} SLFT",
+                              keyText: "${checktvl == false ? stakingInfo?.tvl ?? "0" : "0"} SLFT",
                               style: TextStyles.w700WhiteSize24,
                             )),
                         SFText(

@@ -18,6 +18,7 @@ import 'package:slee_fi/presentation/blocs/sign_in_sign_up/sign_up_state.dart';
 import 'package:slee_fi/presentation/blocs/user_bloc/user_bloc.dart';
 import 'package:slee_fi/presentation/screens/create_password/create_password_screen.dart';
 import 'package:slee_fi/presentation/screens/enter_activation_code/enter_activation_code_screen.dart';
+import 'package:slee_fi/presentation/screens/enter_activation_code/widgets/checkbox_letter_widget.dart';
 import 'package:slee_fi/presentation/screens/setting_permission/widgets/healthcare_screen.dart';
 
 enum Action { signUp, signIn, forgotPassword }
@@ -47,7 +48,7 @@ class _AccountLoginState extends State<AccountLoginWidget> {
   }
 
   bool get _isActiveCode {
-    return action == Action.signUp || action == Action.forgotPassword;
+    return action == Action.signUp ;
   }
 
   String get _textButton {
@@ -141,8 +142,10 @@ class _AccountLoginState extends State<AccountLoginWidget> {
                     errorText:
                         state is SignInSignUpStateError ? state.message : '',
                   ),
-            const SizedBox(height: 5),
-            if (_isActiveCode)
+            SizedBox(height: _isActiveCode ? 12 : 0),
+            if(_isActiveCode)  const CheckBoxLetterWidget(),
+             SizedBox(height: _isActiveCode ? 12 : 0),
+            if (!_isActiveCode && action == Action.signIn)
               Container(
                 alignment: Alignment.centerRight,
                 height: 50,
@@ -176,6 +179,7 @@ class _AccountLoginState extends State<AccountLoginWidget> {
               },
             ),
             const SizedBox(height: 16),
+            _isActiveCode ?
             Text.rich(
               textAlign: TextAlign.center,
               TextSpan(
@@ -201,7 +205,7 @@ class _AccountLoginState extends State<AccountLoginWidget> {
                   ),
                 ],
               ),
-            ),
+            ) : const SizedBox(),
           ],
         );
       },

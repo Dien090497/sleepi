@@ -19,14 +19,16 @@ class StakedArguments{
 
 class SLFTStaked extends StatefulWidget {
   final Function(StakedArguments) staked;
-  final double? totalUSD;
-  const SLFTStaked({this.totalUSD, required this.staked, Key? key}) : super(key: key);
+  final String? apr;
+  final bool readonly;
+  const SLFTStaked({this.readonly = false, required this.staked, required this.apr, Key? key}) : super(key: key);
+
 
   @override
-  State<SLFTStaked> createState() => _SLFTStakedState();
+  SLFTStakedState createState() => SLFTStakedState();
 }
 
-class _SLFTStakedState extends State<SLFTStaked> {
+class SLFTStakedState extends State<SLFTStaked> {
   final num tokenPrice = 0.2;
   TextEditingController _amountEditingController = TextEditingController();
   TextEditingController dayEditingController = TextEditingController();
@@ -45,9 +47,6 @@ class _SLFTStakedState extends State<SLFTStaked> {
 
       });
     dayEditingController.text = days[selectedDurationIndex!];
-    if(widget.totalUSD! != 0){
-      _amountEditingController.text = widget.totalUSD!.toString();
-    }
     super.initState();
   }
 
@@ -66,6 +65,27 @@ class _SLFTStakedState extends State<SLFTStaked> {
       price = "${double.parse(value)*tokenPrice}";
     }
     return price;
+  }
+
+  void currentRatesCalculator(String quantity){
+    if(quantity.isNotEmpty){
+      if(!swapText){
+        setState((){
+          amountPrice = "${double.parse(quantity)/(double.parse(widget.apr!)*double.parse(dayEditingController.text.isNotEmpty ? dayEditingController.text : "0" ))}";
+          _amountEditingController.text = "${double.parse(amountPrice)/tokenPrice}";
+        });
+      }else{
+        setState((){
+          _amountEditingController.text = "${double.parse(quantity)/(double.parse(widget.apr!)*double.parse(dayEditingController.text.isNotEmpty ? dayEditingController.text : "0" ))}";
+          amountPrice = "${double.parse(_amountEditingController.text)/tokenPrice}";
+        });
+      }
+    }else {
+      setState((){
+        amountPrice = '';
+        _amountEditingController.text  = '';
+      });
+    }
   }
 
   @override
@@ -90,6 +110,7 @@ class _SLFTStakedState extends State<SLFTStaked> {
                               controller: _amountEditingController,
                               showLabel: false,
                               noBorder: true,
+                              readonly: widget.readonly,
                               inputFormatters: [
                                 FilteringTextInputFormatter
                                     .allow(RegExp(
@@ -134,13 +155,15 @@ class _SLFTStakedState extends State<SLFTStaked> {
                 GestureDetector(
                   onTap: () {
                     String temp = '';
-                    FocusManager.instance.primaryFocus?.unfocus();
                     setState(() {
                       swapText = !swapText;
                       temp = amountPrice;
                       amountPrice = _amountEditingController.text;
                       _amountEditingController.text = temp;
-                      widget.staked(StakedArguments(day: int.parse(dayEditingController.text), amount: 0));
+                      widget.staked(StakedArguments(day: int.parse(dayEditingController.text),
+                          amount: (amountPrice.isNotEmpty && _amountEditingController.text.isNotEmpty)
+                              ? double.parse(!swapText ? amountPrice : _amountEditingController.text)
+                              : 0));
                     });
                   },
                   child: const Icon(

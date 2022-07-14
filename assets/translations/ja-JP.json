@@ -101,7 +101,7 @@
   "allow_to_access_motion_data": "\"SleeFi\"にモーションデータへのアクセスを許可する",
   "allow": "許可",
   "setup_microphone_access": "マイクのアクセスを設定する",
-  "would_like_to_send_you notifications": "\"SleeFi\"は通知を送信します。許可しますか。",
+  "would_like_to_send_you_notifications": "SleeFi は通知を送信します。許可しますか。",
   "attributes": "属性",
   "efficiency": "効率性",
   "luck": "運",
