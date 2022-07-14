@@ -247,7 +247,7 @@ class SLFTStakedState extends State<SLFTStaked> {
                     setState(() {
                       selectedDurationIndex = index;
                       dayEditingController.text = days[index];
-                      widget.staked(StakedArguments(day: int.parse(dayEditingController.text), amount: double.parse(amountPrice)));
+                      widget.staked(StakedArguments(day: int.parse(dayEditingController.text), amount: double.parse(amountPrice.isNotEmpty ? amountPrice : "0")));
                     });
                   }
                 },

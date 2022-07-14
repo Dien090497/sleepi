@@ -21,7 +21,8 @@ class SpendingImplementation extends ISpendingRepository {
   final Web3DataSource _web3DataSource;
   final AuthDataSource _authDataSource;
 
-  SpendingImplementation(this._spendingDataSource, this._web3DataSource, this._authDataSource);
+  SpendingImplementation(
+      this._spendingDataSource, this._web3DataSource, this._authDataSource);
 
   @override
   Future<Either<Failure, TransferSpendingEntity>> depositToken({
@@ -31,15 +32,7 @@ class SpendingImplementation extends ISpendingRepository {
     required int userId,
   }) async {
     try {
-      final token = _web3DataSource.token(addressContract);
       final result = BigInt.from(amount * pow(10, 18));
-      final allowance = await _spendingDataSource.allowance(
-          await owner.extractAddress(), token);
-      if (allowance < result) {
-        final entites =
-            TransferSpendingEntity(type: TokenToSpending.approve, txHash: '');
-        return Right(entites);
-      }
       if (addressContract == Const.listTokenAddressTestNet[2]) {
         final hash = await _spendingDataSource.toSpendingAvax(
             owner: owner,
@@ -52,6 +45,14 @@ class SpendingImplementation extends ISpendingRepository {
             ));
         final entites = TransferSpendingEntity(
             type: TokenToSpending.spending, txHash: hash);
+        return Right(entites);
+      }
+      final token = _web3DataSource.token(addressContract);
+      final allowance = await _spendingDataSource.allowance(
+          await owner.extractAddress(), token);
+      if (allowance < result) {
+        final entites =
+            TransferSpendingEntity(type: TokenToSpending.approve, txHash: '');
         return Right(entites);
       }
       final hash = await _spendingDataSource.toSpending(
@@ -82,7 +83,7 @@ class SpendingImplementation extends ISpendingRepository {
   }
 
   @override
-  Future<Either<Failure, dynamic>> compound() async{
+  Future<Either<Failure, dynamic>> compound() async {
     try {
       final result = await _authDataSource.compound();
       return Right(result);
@@ -92,7 +93,7 @@ class SpendingImplementation extends ISpendingRepository {
   }
 
   @override
-  Future<Either<Failure, dynamic>> unStaking() async{
+  Future<Either<Failure, dynamic>> unStaking() async {
     try {
       final result = await _authDataSource.unStacking();
       return Right(result);
@@ -102,7 +103,8 @@ class SpendingImplementation extends ISpendingRepository {
   }
 
   @override
-  Future<Either<FailureMessage, StakingEntity>> stakingSlft({required double amount}) async {
+  Future<Either<FailureMessage, StakingEntity>> stakingSlft(
+      {required double amount}) async {
     try {
       StackingSchema schema = StackingSchema(amount: amount.toString());
       final result = await _authDataSource.stacking(schema);
@@ -113,13 +115,12 @@ class SpendingImplementation extends ISpendingRepository {
   }
 
   @override
-  Future<Either<FailureMessage, StakingInfoResponse>> getStakingInfo() async{
+  Future<Either<FailureMessage, StakingInfoResponse>> getStakingInfo() async {
     try {
       final result = await _authDataSource.getStakingInfo();
       return Right(result);
-    } on Exception catch (e)  {
+    } on Exception catch (e) {
       return Left(FailureMessage.fromException(e));
     }
   }
-
 }

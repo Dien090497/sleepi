@@ -266,11 +266,11 @@ abstract class PendingStateLoaded implements PendingState {
       final bool hasReachedMax) = _$PendingStateLoaded;
 
   @override
-  PendingStatus get status => throw _privateConstructorUsedError;
+  PendingStatus get status;
   @override
-  List<WithdrawEntity> get list => throw _privateConstructorUsedError;
+  List<WithdrawEntity> get list;
   @override
-  bool get hasReachedMax => throw _privateConstructorUsedError;
+  bool get hasReachedMax;
   @override
   @JsonKey(ignore: true)
   _$$PendingStateLoadedCopyWith<_$PendingStateLoaded> get copyWith =>

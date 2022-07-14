@@ -360,31 +360,31 @@ abstract class _StackDetailsEntity implements StackDetailsEntity {
       required final String updatedAt}) = _$_StackDetailsEntity;
 
   @override
-  int get userId => throw _privateConstructorUsedError;
+  int get userId;
   @override
-  int get stackCampaignId => throw _privateConstructorUsedError;
+  int get stackCampaignId;
   @override
-  int get isLock => throw _privateConstructorUsedError;
+  int get isLock;
   @override
-  int get id => throw _privateConstructorUsedError;
+  int get id;
   @override
-  String get stakeToken => throw _privateConstructorUsedError;
+  String get stakeToken;
   @override
-  String get amount => throw _privateConstructorUsedError;
+  String get amount;
   @override
-  String get reward => throw _privateConstructorUsedError;
+  String get reward;
   @override
-  String get statusStacking => throw _privateConstructorUsedError;
+  String get statusStacking;
   @override
-  String get startTime => throw _privateConstructorUsedError;
+  String get startTime;
   @override
-  String get rewardTime => throw _privateConstructorUsedError;
+  String get rewardTime;
   @override
-  String get lockTime => throw _privateConstructorUsedError;
+  String get lockTime;
   @override
-  String get createdAt => throw _privateConstructorUsedError;
+  String get createdAt;
   @override
-  String get updatedAt => throw _privateConstructorUsedError;
+  String get updatedAt;
   @override
   @JsonKey(ignore: true)
   _$$_StackDetailsEntityCopyWith<_$_StackDetailsEntity> get copyWith =>

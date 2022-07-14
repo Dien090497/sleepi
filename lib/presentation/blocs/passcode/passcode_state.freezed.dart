@@ -250,7 +250,7 @@ abstract class PasscodeStateInitial implements PasscodeState {
   const factory PasscodeStateInitial({final bool isLoading}) =
       _$PasscodeStateInitial;
 
-  bool get isLoading => throw _privateConstructorUsedError;
+  bool get isLoading;
   @JsonKey(ignore: true)
   _$$PasscodeStateInitialCopyWith<_$PasscodeStateInitial> get copyWith =>
       throw _privateConstructorUsedError;
@@ -414,7 +414,7 @@ abstract class createPassCodeDone implements PasscodeState {
   const factory createPassCodeDone(final String passcode) =
       _$createPassCodeDone;
 
-  String get passcode => throw _privateConstructorUsedError;
+  String get passcode;
   @JsonKey(ignore: true)
   _$$createPassCodeDoneCopyWith<_$createPassCodeDone> get copyWith =>
       throw _privateConstructorUsedError;
@@ -579,7 +579,7 @@ abstract class createNewPassCodeError implements PasscodeState {
   const factory createNewPassCodeError(final String msg) =
       _$createNewPassCodeError;
 
-  String get msg => throw _privateConstructorUsedError;
+  String get msg;
   @JsonKey(ignore: true)
   _$$createNewPassCodeErrorCopyWith<_$createNewPassCodeError> get copyWith =>
       throw _privateConstructorUsedError;

@@ -254,7 +254,7 @@ abstract class ImportWalletInitial implements ImportWalletState {
   const factory ImportWalletInitial({final bool isLoading}) =
       _$ImportWalletInitial;
 
-  bool get isLoading => throw _privateConstructorUsedError;
+  bool get isLoading;
   @JsonKey(ignore: true)
   _$$ImportWalletInitialCopyWith<_$ImportWalletInitial> get copyWith =>
       throw _privateConstructorUsedError;
@@ -467,9 +467,9 @@ abstract class ImportWalletDone implements ImportWalletState {
       final UserInfoEntity? userInfoEntity,
       final List<TokenSpending> listTokens) = _$ImportWalletDone;
 
-  WalletInfoEntity get entity => throw _privateConstructorUsedError;
-  UserInfoEntity? get userInfoEntity => throw _privateConstructorUsedError;
-  List<TokenSpending> get listTokens => throw _privateConstructorUsedError;
+  WalletInfoEntity get entity;
+  UserInfoEntity? get userInfoEntity;
+  List<TokenSpending> get listTokens;
   @JsonKey(ignore: true)
   _$$ImportWalletDoneCopyWith<_$ImportWalletDone> get copyWith =>
       throw _privateConstructorUsedError;
@@ -763,7 +763,7 @@ class _$ImportWalletErrorOtp implements ImportWalletErrorOtp {
 abstract class ImportWalletErrorOtp implements ImportWalletState {
   const factory ImportWalletErrorOtp(final String msg) = _$ImportWalletErrorOtp;
 
-  String get msg => throw _privateConstructorUsedError;
+  String get msg;
   @JsonKey(ignore: true)
   _$$ImportWalletErrorOtpCopyWith<_$ImportWalletErrorOtp> get copyWith =>
       throw _privateConstructorUsedError;
@@ -926,7 +926,7 @@ abstract class ImportWalletErrorMnemonic implements ImportWalletState {
   const factory ImportWalletErrorMnemonic(final String msg) =
       _$ImportWalletErrorMnemonic;
 
-  String get msg => throw _privateConstructorUsedError;
+  String get msg;
   @JsonKey(ignore: true)
   _$$ImportWalletErrorMnemonicCopyWith<_$ImportWalletErrorMnemonic>
       get copyWith => throw _privateConstructorUsedError;

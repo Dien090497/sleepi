@@ -206,15 +206,15 @@ abstract class _StackCampaignsEntity implements StackCampaignsEntity {
       required final int id}) = _$_StackCampaignsEntity;
 
   @override
-  String get stakeToken => throw _privateConstructorUsedError;
+  String get stakeToken;
   @override
-  String get rewardToken => throw _privateConstructorUsedError;
+  String get rewardToken;
   @override
-  String get createdAt => throw _privateConstructorUsedError;
+  String get createdAt;
   @override
-  String get updatedAt => throw _privateConstructorUsedError;
+  String get updatedAt;
   @override
-  int get id => throw _privateConstructorUsedError;
+  int get id;
   @override
   @JsonKey(ignore: true)
   _$$_StackCampaignsEntityCopyWith<_$_StackCampaignsEntity> get copyWith =>

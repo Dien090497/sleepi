@@ -348,7 +348,7 @@ abstract class ForgotPasscodeStateError implements ForgotPasscodeState {
   const factory ForgotPasscodeStateError(final String message) =
       _$ForgotPasscodeStateError;
 
-  String get message => throw _privateConstructorUsedError;
+  String get message;
   @JsonKey(ignore: true)
   _$$ForgotPasscodeStateErrorCopyWith<_$ForgotPasscodeStateError>
       get copyWith => throw _privateConstructorUsedError;

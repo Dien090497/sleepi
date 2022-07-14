@@ -574,7 +574,7 @@ abstract class CreatePasswordStateErrorConfirmPassword
   const factory CreatePasswordStateErrorConfirmPassword(final String message) =
       _$CreatePasswordStateErrorConfirmPassword;
 
-  String get message => throw _privateConstructorUsedError;
+  String get message;
   @JsonKey(ignore: true)
   _$$CreatePasswordStateErrorConfirmPasswordCopyWith<
           _$CreatePasswordStateErrorConfirmPassword>
@@ -753,7 +753,7 @@ abstract class CreatePasswordStateErrorPassword implements CreatePasswordState {
   const factory CreatePasswordStateErrorPassword(final String message) =
       _$CreatePasswordStateErrorPassword;
 
-  String get message => throw _privateConstructorUsedError;
+  String get message;
   @JsonKey(ignore: true)
   _$$CreatePasswordStateErrorPasswordCopyWith<
           _$CreatePasswordStateErrorPassword>
@@ -931,7 +931,7 @@ abstract class CreatePasswordStateErrorCreate implements CreatePasswordState {
   const factory CreatePasswordStateErrorCreate(final String message) =
       _$CreatePasswordStateErrorCreate;
 
-  String get message => throw _privateConstructorUsedError;
+  String get message;
   @JsonKey(ignore: true)
   _$$CreatePasswordStateErrorCreateCopyWith<_$CreatePasswordStateErrorCreate>
       get copyWith => throw _privateConstructorUsedError;
@@ -1107,7 +1107,7 @@ abstract class CreatePasswordStateSuccess implements CreatePasswordState {
   const factory CreatePasswordStateSuccess(final Locale locale) =
       _$CreatePasswordStateSuccess;
 
-  Locale get locale => throw _privateConstructorUsedError;
+  Locale get locale;
   @JsonKey(ignore: true)
   _$$CreatePasswordStateSuccessCopyWith<_$CreatePasswordStateSuccess>
       get copyWith => throw _privateConstructorUsedError;

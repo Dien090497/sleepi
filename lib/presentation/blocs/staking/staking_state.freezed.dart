@@ -1073,8 +1073,7 @@ abstract class StakingStateStakingInfoSuccess implements StakingState {
           final StakingInfoResponse stakingInfoResponse) =
       _$StakingStateStakingInfoSuccess;
 
-  StakingInfoResponse get stakingInfoResponse =>
-      throw _privateConstructorUsedError;
+  StakingInfoResponse get stakingInfoResponse;
   @JsonKey(ignore: true)
   _$$StakingStateStakingInfoSuccessCopyWith<_$StakingStateStakingInfoSuccess>
       get copyWith => throw _privateConstructorUsedError;
@@ -1571,7 +1570,7 @@ abstract class StakingStateError implements StakingState {
   const factory StakingStateError({required final String message}) =
       _$StakingStateError;
 
-  String get message => throw _privateConstructorUsedError;
+  String get message;
   @JsonKey(ignore: true)
   _$$StakingStateErrorCopyWith<_$StakingStateError> get copyWith =>
       throw _privateConstructorUsedError;

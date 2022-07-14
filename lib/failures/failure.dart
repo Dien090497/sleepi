@@ -5,6 +5,8 @@ import 'package:slee_fi/l10n/locale_keys.g.dart';
 
 abstract class Failure extends Equatable {
   const Failure();
+
+  static const String notApprovalForNft = 'not_approval_for_nft';
 }
 
 class FailureMessage extends Failure {

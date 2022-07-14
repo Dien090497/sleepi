@@ -705,7 +705,7 @@ abstract class MarketPlaceStateLoaded implements MarketPlaceState {
   const factory MarketPlaceStateLoaded(final ListMarketPlaceModel list) =
       _$MarketPlaceStateLoaded;
 
-  ListMarketPlaceModel get list => throw _privateConstructorUsedError;
+  ListMarketPlaceModel get list;
   @JsonKey(ignore: true)
   _$$MarketPlaceStateLoadedCopyWith<_$MarketPlaceStateLoaded> get copyWith =>
       throw _privateConstructorUsedError;
@@ -880,7 +880,7 @@ abstract class MarketPlaceStateLoadedMore implements MarketPlaceState {
   const factory MarketPlaceStateLoadedMore(final ListMarketPlaceModel list) =
       _$MarketPlaceStateLoadedMore;
 
-  ListMarketPlaceModel get list => throw _privateConstructorUsedError;
+  ListMarketPlaceModel get list;
   @JsonKey(ignore: true)
   _$$MarketPlaceStateLoadedMoreCopyWith<_$MarketPlaceStateLoadedMore>
       get copyWith => throw _privateConstructorUsedError;
@@ -1198,7 +1198,7 @@ abstract class MarketPlaceStateFailed implements MarketPlaceState {
   const factory MarketPlaceStateFailed(final String msg) =
       _$MarketPlaceStateFailed;
 
-  String get msg => throw _privateConstructorUsedError;
+  String get msg;
   @JsonKey(ignore: true)
   _$$MarketPlaceStateFailedCopyWith<_$MarketPlaceStateFailed> get copyWith =>
       throw _privateConstructorUsedError;
@@ -1372,7 +1372,7 @@ abstract class MarketPlaceStateBuyFailed implements MarketPlaceState {
   const factory MarketPlaceStateBuyFailed(final String msg) =
       _$MarketPlaceStateBuyFailed;
 
-  String get msg => throw _privateConstructorUsedError;
+  String get msg;
   @JsonKey(ignore: true)
   _$$MarketPlaceStateBuyFailedCopyWith<_$MarketPlaceStateBuyFailed>
       get copyWith => throw _privateConstructorUsedError;

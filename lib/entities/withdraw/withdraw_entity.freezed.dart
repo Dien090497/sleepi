@@ -157,11 +157,11 @@ abstract class _WithdrawEntity implements WithdrawEntity {
       required final String time}) = _$_WithdrawEntity;
 
   @override
-  String get txHash => throw _privateConstructorUsedError;
+  String get txHash;
   @override
-  String get amount => throw _privateConstructorUsedError;
+  String get amount;
   @override
-  String get time => throw _privateConstructorUsedError;
+  String get time;
   @override
   @JsonKey(ignore: true)
   _$$_WithdrawEntityCopyWith<_$_WithdrawEntity> get copyWith =>

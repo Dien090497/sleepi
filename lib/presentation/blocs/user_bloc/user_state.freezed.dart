@@ -381,9 +381,9 @@ abstract class UserLoaded implements UserState {
       final UserInfoEntity userInfoEntity, final List<TokenEntity> listTokens,
       {final bool loading}) = _$UserLoaded;
 
-  UserInfoEntity get userInfoEntity => throw _privateConstructorUsedError;
-  List<TokenEntity> get listTokens => throw _privateConstructorUsedError;
-  bool get loading => throw _privateConstructorUsedError;
+  UserInfoEntity get userInfoEntity;
+  List<TokenEntity> get listTokens;
+  bool get loading;
   @JsonKey(ignore: true)
   _$$UserLoadedCopyWith<_$UserLoaded> get copyWith =>
       throw _privateConstructorUsedError;
@@ -528,7 +528,7 @@ class _$UserError implements UserError {
 abstract class UserError implements UserState {
   const factory UserError(final String msg) = _$UserError;
 
-  String get msg => throw _privateConstructorUsedError;
+  String get msg;
   @JsonKey(ignore: true)
   _$$UserErrorCopyWith<_$UserError> get copyWith =>
       throw _privateConstructorUsedError;

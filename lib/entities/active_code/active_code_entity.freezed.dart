@@ -155,11 +155,11 @@ abstract class _ActiveCodeEntity implements ActiveCodeEntity {
       {final String? codeUsedAt}) = _$_ActiveCodeEntity;
 
   @override
-  String get code => throw _privateConstructorUsedError;
+  String get code;
   @override
-  bool get isUsed => throw _privateConstructorUsedError;
+  bool get isUsed;
   @override
-  String? get codeUsedAt => throw _privateConstructorUsedError;
+  String? get codeUsedAt;
   @override
   @JsonKey(ignore: true)
   _$$_ActiveCodeEntityCopyWith<_$_ActiveCodeEntity> get copyWith =>
