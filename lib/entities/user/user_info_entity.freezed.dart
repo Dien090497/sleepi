@@ -304,23 +304,23 @@ abstract class _UserInfoEntity implements UserInfoEntity {
       final String? wallet}) = _$_UserInfoEntity;
 
   @override
-  int get id => throw _privateConstructorUsedError;
+  int get id;
   @override
-  String? get name => throw _privateConstructorUsedError;
+  String? get name;
   @override
-  String? get username => throw _privateConstructorUsedError;
+  String? get username;
   @override
-  List<String> get roles => throw _privateConstructorUsedError;
+  List<String> get roles;
   @override
-  String get email => throw _privateConstructorUsedError;
+  String get email;
   @override
-  bool get isAccountDisabled => throw _privateConstructorUsedError;
+  bool get isAccountDisabled;
   @override
-  String get createdAt => throw _privateConstructorUsedError;
+  String get createdAt;
   @override
-  String get updatedAt => throw _privateConstructorUsedError;
+  String get updatedAt;
   @override
-  String? get wallet => throw _privateConstructorUsedError;
+  String? get wallet;
   @override
   @JsonKey(ignore: true)
   _$$_UserInfoEntityCopyWith<_$_UserInfoEntity> get copyWith =>

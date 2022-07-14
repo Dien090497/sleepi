@@ -388,7 +388,7 @@ class WalletImplementation extends IWalletRepository {
         final ethereumAddress = await credentials.extractAddress();
         final signature = _web3DataSource.generateSignature(
             privateKey: privateKey, message: message ?? '');
-        VerifyUserSchema schema = VerifyUserSchema(
+        final VerifyUserSchema schema = VerifyUserSchema(
           signedMessage: signature,
           signer: ethereumAddress.hexEip55,
         );

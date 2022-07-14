@@ -18,24 +18,86 @@ class _SleepTrackingApi implements SleepTrackingApi {
   String? baseUrl;
 
   @override
-  Future<ListNftDataModel> estimateTracking(
-      bedId, itemId, isEnableInsurance) async {
+  Future<String> startTracking(schema) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    _data.addAll(schema.toJson());
+    final _result = await _dio.fetch<String>(_setStreamType<String>(
+        Options(method: 'POST', headers: _headers, extra: _extra)
+            .compose(_dio.options, '/tracking',
+                queryParameters: queryParameters, data: _data)
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = _result.data!;
+    return value;
+  }
+
+  @override
+  Future<EstimateSleepResponse> estimateSleepEarn(
+      bedId, itemId, enableInsurance) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{
       r'bedUsed': bedId,
       r'itemUsed': itemId,
-      r'isEnableInsurance': isEnableInsurance
+      r'isEnableInsurance': enableInsurance
     };
-    queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
     final _result = await _dio.fetch<Map<String, dynamic>>(
-        _setStreamType<ListNftDataModel>(
+        _setStreamType<EstimateSleepResponse>(
             Options(method: 'GET', headers: _headers, extra: _extra)
                 .compose(_dio.options, '/tracking/estimate-tracking',
                     queryParameters: queryParameters, data: _data)
                 .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = ListNftDataModel.fromJson(_result.data!);
+    final value = EstimateSleepResponse.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<String> getResult(id) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    final _result = await _dio.fetch<String>(_setStreamType<String>(
+        Options(method: 'GET', headers: _headers, extra: _extra)
+            .compose(_dio.options, '/tracking/tracking-result/${id}',
+                queryParameters: queryParameters, data: _data)
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = _result.data!;
+    return value;
+  }
+
+  @override
+  Future<String> wakeUp(schema) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    _data.addAll(schema.toJson());
+    final _result = await _dio.fetch<String>(_setStreamType<String>(
+        Options(method: 'POST', headers: _headers, extra: _extra)
+            .compose(_dio.options, '/tracking/wake-up',
+                queryParameters: queryParameters, data: _data)
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = _result.data!;
+    return value;
+  }
+
+  @override
+  Future<UserStatusTrackingModel> userStatusTracking() async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<UserStatusTrackingModel>(
+            Options(method: 'GET', headers: _headers, extra: _extra)
+                .compose(_dio.options, '/tracking/user-status-tracking',
+                    queryParameters: queryParameters, data: _data)
+                .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = UserStatusTrackingModel.fromJson(_result.data!);
     return value;
   }
 

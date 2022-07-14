@@ -280,21 +280,21 @@ abstract class _TokenEntity implements TokenEntity {
       final List<String> txns}) = _$_TokenEntity;
 
   @override
-  int? get id => throw _privateConstructorUsedError;
+  int? get id;
   @override
-  String get address => throw _privateConstructorUsedError;
+  String get address;
   @override
-  String get displayName => throw _privateConstructorUsedError;
+  String get displayName;
   @override
-  String get name => throw _privateConstructorUsedError;
+  String get name;
   @override
-  String get symbol => throw _privateConstructorUsedError;
+  String get symbol;
   @override
-  String get icon => throw _privateConstructorUsedError;
+  String get icon;
   @override
-  double get balance => throw _privateConstructorUsedError;
+  double get balance;
   @override
-  List<String> get txns => throw _privateConstructorUsedError;
+  List<String> get txns;
   @override
   @JsonKey(ignore: true)
   _$$_TokenEntityCopyWith<_$_TokenEntity> get copyWith =>

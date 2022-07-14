@@ -405,9 +405,9 @@ abstract class SplashDone implements SplashState {
       required final UserInfoEntity? userInfoEntity,
       required final List<TokenSpending> listTokens}) = _$SplashDone;
 
-  bool get isSafeDevice => throw _privateConstructorUsedError;
-  UserInfoEntity? get userInfoEntity => throw _privateConstructorUsedError;
-  List<TokenSpending> get listTokens => throw _privateConstructorUsedError;
+  bool get isSafeDevice;
+  UserInfoEntity? get userInfoEntity;
+  List<TokenSpending> get listTokens;
   @JsonKey(ignore: true)
   _$$SplashDoneCopyWith<_$SplashDone> get copyWith =>
       throw _privateConstructorUsedError;
@@ -560,7 +560,7 @@ class _$SplashError with DiagnosticableTreeMixin implements SplashError {
 abstract class SplashError implements SplashState {
   const factory SplashError(final String msg) = _$SplashError;
 
-  String get msg => throw _privateConstructorUsedError;
+  String get msg;
   @JsonKey(ignore: true)
   _$$SplashErrorCopyWith<_$SplashError> get copyWith =>
       throw _privateConstructorUsedError;

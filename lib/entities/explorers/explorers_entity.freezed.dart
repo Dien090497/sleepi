@@ -169,13 +169,13 @@ abstract class _ExplorersEntity implements ExplorersEntity {
       final String url, final String standard) = _$_ExplorersEntity;
 
   @override
-  int get id => throw _privateConstructorUsedError;
+  int get id;
   @override
-  String get name => throw _privateConstructorUsedError;
+  String get name;
   @override
-  String get url => throw _privateConstructorUsedError;
+  String get url;
   @override
-  String get standard => throw _privateConstructorUsedError;
+  String get standard;
   @override
   @JsonKey(ignore: true)
   _$$_ExplorersEntityCopyWith<_$_ExplorersEntity> get copyWith =>

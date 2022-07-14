@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:slee_fi/common/utils/appsflyer_custom.dart';
 import 'package:slee_fi/common/widgets/background_widget.dart';
-import 'package:slee_fi/common/widgets/keep_alive_wrapper.dart';
 import 'package:slee_fi/common/widgets/sf_bottom_navigator_home.dart';
 import 'package:slee_fi/common/widgets/sf_tab_bar.dart';
 import 'package:slee_fi/di/injector.dart';
@@ -26,11 +25,11 @@ class BottomNavigationScreen extends StatelessWidget {
     final PageController pageController = PageController();
 
     var screens = [
-      const KeepAliveWrapper(child: HomeScreen()),
-      const KeepAliveWrapper(child: GachaScreen()),
-      const KeepAliveWrapper(child: ProductDetailScreen()),
-      const KeepAliveWrapper(child: ChartScreen()),
-      KeepAliveWrapper(child: MarketPlaceScreen(tabKey: marketTabKey)),
+     const HomeScreen(),
+     const GachaScreen(),
+      const ProductDetailScreen(),
+     const ChartScreen(),
+      MarketPlaceScreen(tabKey: marketTabKey),
     ];
 
     // WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
@@ -59,7 +58,6 @@ class BottomNavigationScreen extends StatelessWidget {
           ),
           child: PageView.builder(
             controller: pageController,
-            allowImplicitScrolling: true,
             physics: const NeverScrollableScrollPhysics(),
             itemCount: screens.length,
             itemBuilder: (_, i) => screens[i],

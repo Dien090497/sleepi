@@ -446,5 +446,6 @@ abstract class  LocaleKeys {
   static const you_can_open_the_luck_box = 'you_can_open_the_luck_box';
   static const speed_luck_box_with_cost = 'speed_luck_box_with_cost';
   static const speed_up = 'speed_up';
+  static const buy_token = 'buy_token';
 
 }

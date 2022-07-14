@@ -268,19 +268,19 @@ abstract class _NFTEntity implements NFTEntity {
       required final NftAttributeEntity? attribute}) = _$_NFTEntity;
 
   @override
-  int? get id => throw _privateConstructorUsedError;
+  int? get id;
   @override
-  String? get name => throw _privateConstructorUsedError;
+  String? get name;
   @override
-  String? get symbol => throw _privateConstructorUsedError;
+  String? get symbol;
   @override
-  int? get categoryId => throw _privateConstructorUsedError;
+  int? get categoryId;
   @override
-  int? get isLock => throw _privateConstructorUsedError;
+  int? get isLock;
   @override
-  String? get status => throw _privateConstructorUsedError;
+  String? get status;
   @override
-  NftAttributeEntity? get attribute => throw _privateConstructorUsedError;
+  NftAttributeEntity? get attribute;
   @override
   @JsonKey(ignore: true)
   _$$_NFTEntityCopyWith<_$_NFTEntity> get copyWith =>

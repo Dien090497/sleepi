@@ -929,9 +929,9 @@ abstract class WalletStateLoaded implements WalletState {
       required final WalletInfoEntity walletInfoEntity,
       required final List<TokenEntity> tokenList}) = _$WalletStateLoaded;
 
-  bool get isLoading => throw _privateConstructorUsedError;
-  WalletInfoEntity get walletInfoEntity => throw _privateConstructorUsedError;
-  List<TokenEntity> get tokenList => throw _privateConstructorUsedError;
+  bool get isLoading;
+  WalletInfoEntity get walletInfoEntity;
+  List<TokenEntity> get tokenList;
   @JsonKey(ignore: true)
   _$$WalletStateLoadedCopyWith<_$WalletStateLoaded> get copyWith =>
       throw _privateConstructorUsedError;
@@ -1109,7 +1109,7 @@ class _$WalletStateError implements WalletStateError {
 abstract class WalletStateError implements WalletState {
   const factory WalletStateError(final String message) = _$WalletStateError;
 
-  String get message => throw _privateConstructorUsedError;
+  String get message;
   @JsonKey(ignore: true)
   _$$WalletStateErrorCopyWith<_$WalletStateError> get copyWith =>
       throw _privateConstructorUsedError;
@@ -1449,7 +1449,7 @@ abstract class WalletStateGetHistorySuccess implements WalletState {
   const factory WalletStateGetHistorySuccess(
       final List<TransactionIsarModel> list) = _$WalletStateGetHistorySuccess;
 
-  List<TransactionIsarModel> get list => throw _privateConstructorUsedError;
+  List<TransactionIsarModel> get list;
   @JsonKey(ignore: true)
   _$$WalletStateGetHistorySuccessCopyWith<_$WalletStateGetHistorySuccess>
       get copyWith => throw _privateConstructorUsedError;

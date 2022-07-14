@@ -263,21 +263,21 @@ abstract class _SendToExternalEntity implements SendToExternalEntity {
       final int? status}) = _$_SendToExternalEntity;
 
   @override
-  String? get transactionHash => throw _privateConstructorUsedError;
+  String? get transactionHash;
   @override
-  DateTime get timeStamp => throw _privateConstructorUsedError;
+  DateTime get timeStamp;
   @override
-  String? get addressFrom => throw _privateConstructorUsedError;
+  String? get addressFrom;
   @override
-  String? get addressTo => throw _privateConstructorUsedError;
+  String? get addressTo;
   @override
-  double get value => throw _privateConstructorUsedError;
+  double get value;
   @override
-  double? get gasPrice => throw _privateConstructorUsedError;
+  double? get gasPrice;
   @override
-  int? get maxGas => throw _privateConstructorUsedError;
+  int? get maxGas;
   @override
-  int? get status => throw _privateConstructorUsedError;
+  int? get status;
   @override
   @JsonKey(ignore: true)
   _$$_SendToExternalEntityCopyWith<_$_SendToExternalEntity> get copyWith =>

@@ -33,6 +33,9 @@ mixin _$BedEntity {
   double get resilience => throw _privateConstructorUsedError;
   int get time => throw _privateConstructorUsedError;
   int get isMint => throw _privateConstructorUsedError;
+  int? get insurancePercent => throw _privateConstructorUsedError;
+  int? get startTime => throw _privateConstructorUsedError;
+  int? get endTime => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $BedEntityCopyWith<BedEntity> get copyWith =>
@@ -60,7 +63,10 @@ abstract class $BedEntityCopyWith<$Res> {
       double special,
       double resilience,
       int time,
-      int isMint});
+      int isMint,
+      int? insurancePercent,
+      int? startTime,
+      int? endTime});
 }
 
 /// @nodoc
@@ -90,6 +96,9 @@ class _$BedEntityCopyWithImpl<$Res> implements $BedEntityCopyWith<$Res> {
     Object? resilience = freezed,
     Object? time = freezed,
     Object? isMint = freezed,
+    Object? insurancePercent = freezed,
+    Object? startTime = freezed,
+    Object? endTime = freezed,
   }) {
     return _then(_value.copyWith(
       name: name == freezed
@@ -160,6 +169,18 @@ class _$BedEntityCopyWithImpl<$Res> implements $BedEntityCopyWith<$Res> {
           ? _value.isMint
           : isMint // ignore: cast_nullable_to_non_nullable
               as int,
+      insurancePercent: insurancePercent == freezed
+          ? _value.insurancePercent
+          : insurancePercent // ignore: cast_nullable_to_non_nullable
+              as int?,
+      startTime: startTime == freezed
+          ? _value.startTime
+          : startTime // ignore: cast_nullable_to_non_nullable
+              as int?,
+      endTime: endTime == freezed
+          ? _value.endTime
+          : endTime // ignore: cast_nullable_to_non_nullable
+              as int?,
     ));
   }
 }
@@ -187,7 +208,10 @@ abstract class _$$_BedEntityCopyWith<$Res> implements $BedEntityCopyWith<$Res> {
       double special,
       double resilience,
       int time,
-      int isMint});
+      int isMint,
+      int? insurancePercent,
+      int? startTime,
+      int? endTime});
 }
 
 /// @nodoc
@@ -219,6 +243,9 @@ class __$$_BedEntityCopyWithImpl<$Res> extends _$BedEntityCopyWithImpl<$Res>
     Object? resilience = freezed,
     Object? time = freezed,
     Object? isMint = freezed,
+    Object? insurancePercent = freezed,
+    Object? startTime = freezed,
+    Object? endTime = freezed,
   }) {
     return _then(_$_BedEntity(
       name: name == freezed
@@ -289,6 +316,18 @@ class __$$_BedEntityCopyWithImpl<$Res> extends _$BedEntityCopyWithImpl<$Res>
           ? _value.isMint
           : isMint // ignore: cast_nullable_to_non_nullable
               as int,
+      insurancePercent: insurancePercent == freezed
+          ? _value.insurancePercent
+          : insurancePercent // ignore: cast_nullable_to_non_nullable
+              as int?,
+      startTime: startTime == freezed
+          ? _value.startTime
+          : startTime // ignore: cast_nullable_to_non_nullable
+              as int?,
+      endTime: endTime == freezed
+          ? _value.endTime
+          : endTime // ignore: cast_nullable_to_non_nullable
+              as int?,
     ));
   }
 }
@@ -313,7 +352,10 @@ class _$_BedEntity implements _BedEntity {
       required this.special,
       required this.resilience,
       required this.time,
-      required this.isMint});
+      required this.isMint,
+      this.insurancePercent,
+      this.startTime,
+      this.endTime});
 
   @override
   final String name;
@@ -349,10 +391,16 @@ class _$_BedEntity implements _BedEntity {
   final int time;
   @override
   final int isMint;
+  @override
+  final int? insurancePercent;
+  @override
+  final int? startTime;
+  @override
+  final int? endTime;
 
   @override
   String toString() {
-    return 'BedEntity(name: $name, id: $id, level: $level, image: $image, type: $type, contractAddress: $contractAddress, quality: $quality, durability: $durability, isLock: $isLock, bedMint: $bedMint, efficiency: $efficiency, luck: $luck, bonus: $bonus, special: $special, resilience: $resilience, time: $time, isMint: $isMint)';
+    return 'BedEntity(name: $name, id: $id, level: $level, image: $image, type: $type, contractAddress: $contractAddress, quality: $quality, durability: $durability, isLock: $isLock, bedMint: $bedMint, efficiency: $efficiency, luck: $luck, bonus: $bonus, special: $special, resilience: $resilience, time: $time, isMint: $isMint, insurancePercent: $insurancePercent, startTime: $startTime, endTime: $endTime)';
   }
 
   @override
@@ -380,29 +428,37 @@ class _$_BedEntity implements _BedEntity {
             const DeepCollectionEquality()
                 .equals(other.resilience, resilience) &&
             const DeepCollectionEquality().equals(other.time, time) &&
-            const DeepCollectionEquality().equals(other.isMint, isMint));
+            const DeepCollectionEquality().equals(other.isMint, isMint) &&
+            const DeepCollectionEquality()
+                .equals(other.insurancePercent, insurancePercent) &&
+            const DeepCollectionEquality().equals(other.startTime, startTime) &&
+            const DeepCollectionEquality().equals(other.endTime, endTime));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(name),
-      const DeepCollectionEquality().hash(id),
-      const DeepCollectionEquality().hash(level),
-      const DeepCollectionEquality().hash(image),
-      const DeepCollectionEquality().hash(type),
-      const DeepCollectionEquality().hash(contractAddress),
-      const DeepCollectionEquality().hash(quality),
-      const DeepCollectionEquality().hash(durability),
-      const DeepCollectionEquality().hash(isLock),
-      const DeepCollectionEquality().hash(bedMint),
-      const DeepCollectionEquality().hash(efficiency),
-      const DeepCollectionEquality().hash(luck),
-      const DeepCollectionEquality().hash(bonus),
-      const DeepCollectionEquality().hash(special),
-      const DeepCollectionEquality().hash(resilience),
-      const DeepCollectionEquality().hash(time),
-      const DeepCollectionEquality().hash(isMint));
+  int get hashCode => Object.hashAll([
+        runtimeType,
+        const DeepCollectionEquality().hash(name),
+        const DeepCollectionEquality().hash(id),
+        const DeepCollectionEquality().hash(level),
+        const DeepCollectionEquality().hash(image),
+        const DeepCollectionEquality().hash(type),
+        const DeepCollectionEquality().hash(contractAddress),
+        const DeepCollectionEquality().hash(quality),
+        const DeepCollectionEquality().hash(durability),
+        const DeepCollectionEquality().hash(isLock),
+        const DeepCollectionEquality().hash(bedMint),
+        const DeepCollectionEquality().hash(efficiency),
+        const DeepCollectionEquality().hash(luck),
+        const DeepCollectionEquality().hash(bonus),
+        const DeepCollectionEquality().hash(special),
+        const DeepCollectionEquality().hash(resilience),
+        const DeepCollectionEquality().hash(time),
+        const DeepCollectionEquality().hash(isMint),
+        const DeepCollectionEquality().hash(insurancePercent),
+        const DeepCollectionEquality().hash(startTime),
+        const DeepCollectionEquality().hash(endTime)
+      ]);
 
   @JsonKey(ignore: true)
   @override
@@ -428,42 +484,51 @@ abstract class _BedEntity implements BedEntity {
       required final double special,
       required final double resilience,
       required final int time,
-      required final int isMint}) = _$_BedEntity;
+      required final int isMint,
+      final int? insurancePercent,
+      final int? startTime,
+      final int? endTime}) = _$_BedEntity;
 
   @override
-  String get name => throw _privateConstructorUsedError;
+  String get name;
   @override
-  int get id => throw _privateConstructorUsedError;
+  int get id;
   @override
-  int get level => throw _privateConstructorUsedError;
+  int get level;
   @override
-  String get image => throw _privateConstructorUsedError;
+  String get image;
   @override
-  String get type => throw _privateConstructorUsedError;
+  String get type;
   @override
-  String get contractAddress => throw _privateConstructorUsedError;
+  String get contractAddress;
   @override
-  String? get quality => throw _privateConstructorUsedError;
+  String? get quality;
   @override
-  double get durability => throw _privateConstructorUsedError;
+  double get durability;
   @override
-  int get isLock => throw _privateConstructorUsedError;
+  int get isLock;
   @override
-  int get bedMint => throw _privateConstructorUsedError;
+  int get bedMint;
   @override
-  double get efficiency => throw _privateConstructorUsedError;
+  double get efficiency;
   @override
-  double get luck => throw _privateConstructorUsedError;
+  double get luck;
   @override
-  double get bonus => throw _privateConstructorUsedError;
+  double get bonus;
   @override
-  double get special => throw _privateConstructorUsedError;
+  double get special;
   @override
-  double get resilience => throw _privateConstructorUsedError;
+  double get resilience;
   @override
-  int get time => throw _privateConstructorUsedError;
+  int get time;
   @override
-  int get isMint => throw _privateConstructorUsedError;
+  int get isMint;
+  @override
+  int? get insurancePercent;
+  @override
+  int? get startTime;
+  @override
+  int? get endTime;
   @override
   @JsonKey(ignore: true)
   _$$_BedEntityCopyWith<_$_BedEntity> get copyWith =>

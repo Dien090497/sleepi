@@ -5,9 +5,10 @@ class LoadingScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.white.withOpacity(0.3),
-      body: const LoadingIcon(),
+    return const Scaffold(
+      // backgroundColor: Colors.white.withOpacity(0.2),
+      backgroundColor: Colors.transparent,
+      body: LoadingIcon(),
     );
   }
 }

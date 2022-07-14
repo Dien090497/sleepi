@@ -144,9 +144,9 @@ abstract class _BottomNavigationState implements BottomNavigationState {
       {final int tabIndex, final int tabIndexChild}) = _$_BottomNavigationState;
 
   @override
-  int get tabIndex => throw _privateConstructorUsedError;
+  int get tabIndex;
   @override
-  int get tabIndexChild => throw _privateConstructorUsedError;
+  int get tabIndexChild;
   @override
   @JsonKey(ignore: true)
   _$$_BottomNavigationStateCopyWith<_$_BottomNavigationState> get copyWith =>

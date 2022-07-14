@@ -183,23 +183,8 @@ class UserImplementation extends IUserRepository {
   Future<Either<FailureMessage, List<ItemEntity>>> fetchItemOwner(
       FilterItemSchema filterItemSchema) async {
     try {
-    final result = await _authDataSource.fetchItemOwner(filterItemSchema);
-    return Right(result.list.map((e) => e.toEntity()).toList());
-    } catch (e) {
-      return Left(FailureMessage.fromException(e));
-    }
-  }
-
-  @override
-  Future<Either<FailureMessage, EstimateSleepResponse>> estimateTracking(
-      EstimateTrackingParam estimateTrackingParam) async {
-    try {
-      var result = await _authDataSource.estimateSleepEarn(
-          estimateTrackingParam.bedId,
-          estimateTrackingParam.itemId,
-          estimateTrackingParam.isEnableInsurance);
-
-      return Right(result);
+      final result = await _authDataSource.fetchItemOwner(filterItemSchema);
+      return Right(result.list.map((e) => e.toEntity()).toList());
     } catch (e) {
       return Left(FailureMessage.fromException(e));
     }
@@ -226,6 +211,20 @@ class UserImplementation extends IUserRepository {
       SpeedUpLuckyBoxSchema speedUpLuckyBoxSchema) async {
     try {
       var result = await _authDataSource.speedUpLuckyBox(speedUpLuckyBoxSchema);
+      return Right(result);
+    } catch (e) {
+      return Left(FailureMessage.fromException(e));
+    }
+  }
+
+  @override
+  Future<Either<FailureMessage, EstimateSleepResponse>> estimateTracking(
+      EstimateTrackingParam estimateTrackingParam) async {
+    try {
+      var result = await _authDataSource.estimateSleepEarn(
+          estimateTrackingParam.bedId,
+          estimateTrackingParam.itemId,
+          estimateTrackingParam.isEnableInsurance);
       return Right(result);
     } catch (e) {
       return Left(FailureMessage.fromException(e));

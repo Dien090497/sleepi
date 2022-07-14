@@ -173,11 +173,9 @@ abstract class _StakingEntity implements StakingEntity {
       required final StackDetailsEntity stackDetailsEntity}) = _$_StakingEntity;
 
   @override
-  StackCampaignsEntity get stackCampaignsEntity =>
-      throw _privateConstructorUsedError;
+  StackCampaignsEntity get stackCampaignsEntity;
   @override
-  StackDetailsEntity get stackDetailsEntity =>
-      throw _privateConstructorUsedError;
+  StackDetailsEntity get stackDetailsEntity;
   @override
   @JsonKey(ignore: true)
   _$$_StakingEntityCopyWith<_$_StakingEntity> get copyWith =>

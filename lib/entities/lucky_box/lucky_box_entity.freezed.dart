@@ -205,15 +205,15 @@ abstract class _LuckyBoxEntity implements LuckyBoxEntity {
       required final int waitingTime}) = _$_LuckyBoxEntity;
 
   @override
-  int get id => throw _privateConstructorUsedError;
+  int get id;
   @override
-  String get openCost => throw _privateConstructorUsedError;
+  String get openCost;
   @override
-  String get speedUpCost => throw _privateConstructorUsedError;
+  String get speedUpCost;
   @override
-  int get isOpen => throw _privateConstructorUsedError;
+  int get isOpen;
   @override
-  int get waitingTime => throw _privateConstructorUsedError;
+  int get waitingTime;
   @override
   @JsonKey(ignore: true)
   _$$_LuckyBoxEntityCopyWith<_$_LuckyBoxEntity> get copyWith =>

@@ -5,20 +5,16 @@ import 'package:slee_fi/common/widgets/sf_buttons.dart';
 import 'package:slee_fi/common/widgets/sf_card.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
 import 'package:slee_fi/l10n/locale_keys.g.dart';
-import 'package:slee_fi/presentation/blocs/transfer_spending/transfer_cubit.dart';
 
 class PopUpConfirmApprove extends StatelessWidget {
-  const PopUpConfirmApprove(
-      {Key? key,
-        required this.cubit,
-        required this.tokenName,
-        required this.contractAddress,
-      })
-      : super(key: key);
+  const PopUpConfirmApprove({
+    Key? key,
+    required this.tokenName,
+    required this.onConfirm,
+  }) : super(key: key);
 
-  final TransferCubit cubit;
+  final VoidCallback onConfirm;
   final String tokenName;
-  final String contractAddress;
 
   @override
   Widget build(BuildContext context) {
@@ -30,9 +26,7 @@ class PopUpConfirmApprove extends StatelessWidget {
             keyText: LocaleKeys.confirm_approve,
             style: TextStyles.bold18LightWhite,
           ),
-          const SizedBox(
-            height: 24,
-          ),
+          const SizedBox(height: 24),
           SFCard(
             padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 18),
             child: Row(
@@ -118,8 +112,7 @@ class PopUpConfirmApprove extends StatelessWidget {
                   width: double.infinity,
                   gradient: AppColors.gradientBlueButton,
                   onPressed: () {
-                    cubit.approve(amount: 0, addressContract: contractAddress);
-                    Navigator.pop(context);
+                    onConfirm();
                   },
                 ),
               ),
