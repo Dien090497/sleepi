@@ -528,16 +528,7 @@ abstract class _BedEntity implements BedEntity {
   @override
   double? get startTime;
   @override
-<<<<<<< HEAD
   double? get endTime;
-=======
-  int? get endTime;
-<<<<<<< HEAD
-=======
->>>>>>> b87d9157 ([Feature] Fill data week chart)
->>>>>>> 241819d2 ([Feature] Fill data week chart)
-=======
->>>>>>> a5767436 ([Featuture)
   @override
   @JsonKey(ignore: true)
   _$$_BedEntityCopyWith<_$_BedEntity> get copyWith =>

@@ -15,7 +15,6 @@ import 'package:slee_fi/models/global_config_response/global_config_response.dar
 import 'package:slee_fi/models/lucky_box/lucky_box.dart';
 import 'package:slee_fi/models/swap_token_to_wallet_response/swap_token_to_wallet_response.dart';
 import 'package:slee_fi/models/token_spending/token_spending.dart';
-import 'package:slee_fi/models/tracking_result_chart/tracking_result_chart_data.dart';
 import 'package:slee_fi/models/withdraw_history_response/withdraw_history_response.dart';
 import 'package:slee_fi/repository/user_repository.dart';
 import 'package:slee_fi/schema/change_password_schema/change_password_schema.dart';
@@ -235,9 +234,9 @@ class UserImplementation extends IUserRepository {
   }
 
   @override
-  Future<Either<FailureMessage, TrackingResultChartDataEntity>> fetchDataChart(ParamsGetDataChart filterItemSchema) async {
+  Future<Either<FailureMessage, TrackingResultChartDataEntity>> fetchDataChart(ParamsGetDataChart paramsGetDataChart) async {
     try {
-      final result = await _authDataSource.fetchDataChart('2022-07-12', '2022-07-12', 'week');
+      final result = await _authDataSource.fetchDataChart('2022-07-7', '2022-07-13', 'week');
       return Right(result.toEntity());
     } catch (e) {
       return Left(FailureMessage('$e'));

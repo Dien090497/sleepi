@@ -565,12 +565,6 @@ class _AuthDataSource implements AuthDataSource {
   }
 
   @override
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-<<<<<<< HEAD
->>>>>>> 86acc260 ([Feature] runner)
   Future<List<LuckyBox>> fetchLuckyBox() async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
@@ -604,15 +598,7 @@ class _AuthDataSource implements AuthDataSource {
   }
 
   @override
-<<<<<<< HEAD
   Future<dynamic> speedUpLuckyBox(speedUpLuckyBoxSchema) async {
-=======
-=======
->>>>>>> 7ef0eee5 ([Feature] runner)
-=======
->>>>>>> a5767436 ([Featuture)
-  Future<List<LuckyBox>> fetchLuckyBox() async {
->>>>>>> 86acc260 ([Feature] runner)
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};

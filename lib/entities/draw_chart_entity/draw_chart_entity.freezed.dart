@@ -20,6 +20,7 @@ mixin _$DrawChartEntity {
   double get maxy => throw _privateConstructorUsedError;
   List<FlSpot> get listFlSpot => throw _privateConstructorUsedError;
   TypeChart get typeChart => throw _privateConstructorUsedError;
+  List<DataXYEntity> get listData => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $DrawChartEntityCopyWith<DrawChartEntity> get copyWith =>
@@ -32,7 +33,11 @@ abstract class $DrawChartEntityCopyWith<$Res> {
           DrawChartEntity value, $Res Function(DrawChartEntity) then) =
       _$DrawChartEntityCopyWithImpl<$Res>;
   $Res call(
-      {double maxX, double maxy, List<FlSpot> listFlSpot, TypeChart typeChart});
+      {double maxX,
+      double maxy,
+      List<FlSpot> listFlSpot,
+      TypeChart typeChart,
+      List<DataXYEntity> listData});
 }
 
 /// @nodoc
@@ -50,6 +55,7 @@ class _$DrawChartEntityCopyWithImpl<$Res>
     Object? maxy = freezed,
     Object? listFlSpot = freezed,
     Object? typeChart = freezed,
+    Object? listData = freezed,
   }) {
     return _then(_value.copyWith(
       maxX: maxX == freezed
@@ -68,6 +74,10 @@ class _$DrawChartEntityCopyWithImpl<$Res>
           ? _value.typeChart
           : typeChart // ignore: cast_nullable_to_non_nullable
               as TypeChart,
+      listData: listData == freezed
+          ? _value.listData
+          : listData // ignore: cast_nullable_to_non_nullable
+              as List<DataXYEntity>,
     ));
   }
 }
@@ -80,7 +90,11 @@ abstract class _$$_DrawChartEntityCopyWith<$Res>
       __$$_DrawChartEntityCopyWithImpl<$Res>;
   @override
   $Res call(
-      {double maxX, double maxy, List<FlSpot> listFlSpot, TypeChart typeChart});
+      {double maxX,
+      double maxy,
+      List<FlSpot> listFlSpot,
+      TypeChart typeChart,
+      List<DataXYEntity> listData});
 }
 
 /// @nodoc
@@ -100,6 +114,7 @@ class __$$_DrawChartEntityCopyWithImpl<$Res>
     Object? maxy = freezed,
     Object? listFlSpot = freezed,
     Object? typeChart = freezed,
+    Object? listData = freezed,
   }) {
     return _then(_$_DrawChartEntity(
       maxX: maxX == freezed
@@ -118,6 +133,10 @@ class __$$_DrawChartEntityCopyWithImpl<$Res>
           ? _value.typeChart
           : typeChart // ignore: cast_nullable_to_non_nullable
               as TypeChart,
+      listData: listData == freezed
+          ? _value._listData
+          : listData // ignore: cast_nullable_to_non_nullable
+              as List<DataXYEntity>,
     ));
   }
 }
@@ -129,8 +148,10 @@ class _$_DrawChartEntity implements _DrawChartEntity {
       {required this.maxX,
       required this.maxy,
       required final List<FlSpot> listFlSpot,
-      required this.typeChart})
-      : _listFlSpot = listFlSpot;
+      required this.typeChart,
+      required final List<DataXYEntity> listData})
+      : _listFlSpot = listFlSpot,
+        _listData = listData;
 
   @override
   final double maxX;
@@ -145,10 +166,16 @@ class _$_DrawChartEntity implements _DrawChartEntity {
 
   @override
   final TypeChart typeChart;
+  final List<DataXYEntity> _listData;
+  @override
+  List<DataXYEntity> get listData {
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_listData);
+  }
 
   @override
   String toString() {
-    return 'DrawChartEntity(maxX: $maxX, maxy: $maxy, listFlSpot: $listFlSpot, typeChart: $typeChart)';
+    return 'DrawChartEntity(maxX: $maxX, maxy: $maxy, listFlSpot: $listFlSpot, typeChart: $typeChart, listData: $listData)';
   }
 
   @override
@@ -160,7 +187,8 @@ class _$_DrawChartEntity implements _DrawChartEntity {
             const DeepCollectionEquality().equals(other.maxy, maxy) &&
             const DeepCollectionEquality()
                 .equals(other._listFlSpot, _listFlSpot) &&
-            const DeepCollectionEquality().equals(other.typeChart, typeChart));
+            const DeepCollectionEquality().equals(other.typeChart, typeChart) &&
+            const DeepCollectionEquality().equals(other._listData, _listData));
   }
 
   @override
@@ -169,7 +197,8 @@ class _$_DrawChartEntity implements _DrawChartEntity {
       const DeepCollectionEquality().hash(maxX),
       const DeepCollectionEquality().hash(maxy),
       const DeepCollectionEquality().hash(_listFlSpot),
-      const DeepCollectionEquality().hash(typeChart));
+      const DeepCollectionEquality().hash(typeChart),
+      const DeepCollectionEquality().hash(_listData));
 
   @JsonKey(ignore: true)
   @override
@@ -182,7 +211,8 @@ abstract class _DrawChartEntity implements DrawChartEntity {
       {required final double maxX,
       required final double maxy,
       required final List<FlSpot> listFlSpot,
-      required final TypeChart typeChart}) = _$_DrawChartEntity;
+      required final TypeChart typeChart,
+      required final List<DataXYEntity> listData}) = _$_DrawChartEntity;
 
   @override
   double get maxX;
@@ -192,6 +222,8 @@ abstract class _DrawChartEntity implements DrawChartEntity {
   List<FlSpot> get listFlSpot;
   @override
   TypeChart get typeChart;
+  @override
+  List<DataXYEntity> get listData;
   @override
   @JsonKey(ignore: true)
   _$$_DrawChartEntityCopyWith<_$_DrawChartEntity> get copyWith =>

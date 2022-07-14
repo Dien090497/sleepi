@@ -3,14 +3,13 @@ import 'package:flutter/material.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
 import 'package:slee_fi/entities/draw_chart_entity/draw_chart_entity.dart';
-import 'package:slee_fi/models/tracking_result_chart/data_x_y.dart';
 
 class ChartStatisticShare extends StatelessWidget {
-  const ChartStatisticShare({Key? key, this.titleBottom = true, this.data, this.dataXY}) : super(key: key);
+  const ChartStatisticShare({Key? key, this.titleBottom = true, this.data, required this.maxValue}) : super(key: key);
 
   final DrawChartEntity? data;
-  final List<DataXY>? dataXY;
   final bool titleBottom;
+  final int maxValue;
 
 
   Widget leftTitleWidgets(double value, TitleMeta meta) {
@@ -21,10 +20,18 @@ class ChartStatisticShare extends StatelessWidget {
             textAlign: TextAlign.right, style: TextStyles.lightGrey12),
       );
     }
-    if (value % 20 == 0 && value != 0) {
-      return Text( value.toString(), style: TextStyles.lightGrey12);
+    if (maxValue <= 100) {
+      if (value % 20 == 0 && value != 0) {
+        return Text( value.toString(), style: TextStyles.lightGrey12);
+      } else {
+        return const SizedBox();
+      }
     } else {
-      return const SizedBox();
+      if (value % 60 == 0 && value != 0) {
+        return Text( value.toString(), style: TextStyles.lightGrey12);
+      } else {
+        return const SizedBox();
+      }
     }
     /*Widget text;
     switch (value.toInt()) {
@@ -58,10 +65,10 @@ class ChartStatisticShare extends StatelessWidget {
   }
 
   Widget bottomTitleWidgets(double value, TitleMeta meta) {
-    if (value % 1 == 0 && value != 0) {
+    if (value % 2 == 0 && value != 0) {
       return Padding(
         padding: const EdgeInsets.only(top: 8.0),
-        child: Text(dataXY?[value.toInt()].t ?? '', style: TextStyles.lightGrey12),
+        child: Text(data?.listData[value.toInt()].x ?? '', style: TextStyles.lightGrey12),
       );
     } else {
       return const SizedBox();
@@ -102,12 +109,6 @@ class ChartStatisticShare extends StatelessWidget {
       gridData: FlGridData(
         show: true,
         drawVerticalLine: false,
-        horizontalInterval: 5,
-        verticalInterval: 1,
-        getDrawingHorizontalLine: (value) {
-          return FlLine(
-              color: AppColors.lightGrey, strokeWidth: 0.5, dashArray: [2]);
-        },
         getDrawingVerticalLine: (value) {
           return FlLine(
             color: Colors.transparent,

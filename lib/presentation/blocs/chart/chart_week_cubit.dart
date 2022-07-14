@@ -6,10 +6,10 @@ import 'package:flutter_date_pickers/flutter_date_pickers.dart';
 import 'package:slee_fi/common/enum/enum.dart';
 import 'package:slee_fi/common/utils/date_time_utils.dart';
 import 'package:slee_fi/di/injector.dart';
+import 'package:slee_fi/entities/draw_chart_entity/data_xy_entity.dart';
 import 'package:slee_fi/entities/draw_chart_entity/draw_chart_entity.dart';
 import 'package:slee_fi/entities/tracking_result_chart_data_entity/tracking_result_chart_data_entity.dart';
 import 'package:slee_fi/models/tracking_result_chart/data_x_y.dart';
-import 'package:slee_fi/models/tracking_result_chart/tracking_result_chart_data.dart';
 import 'package:slee_fi/presentation/blocs/chart/chart_week_state.dart';
 import 'package:slee_fi/usecase/fetch_data_chart_usecase.dart';
 
@@ -21,6 +21,7 @@ class ChartWeekCubit extends Cubit<ChartWeekState> {
 
   int maxY = 0;
   List<DrawChartEntity> listChart = [];
+  List<DataXYEntity> listXY = [];
 
   void init() async {
     final now = DateTime.now();
@@ -28,25 +29,6 @@ class ChartWeekCubit extends Cubit<ChartWeekState> {
     final result = await  _fetchDataChartUseCase.call(params);
     result.fold((l) {
     }, (result) {
-      /*if (data.slftChart != null) {
-        for (int i=0; i < data.slftChart!.length; i++) {
-          if (maxY < data.slftChart![i].v) {
-            maxY = data.slftChart![i].v;
-          }
-          flSpot.add(FlSpot(i.toDouble(), data.slftChart![i].v.toDouble()));
-        }
-        DrawChartEntity drawChartEntity = DrawChartEntity(
-          listFlSpot: flSpot,
-          maxX: (data.slftChart?.length.toDouble() ?? 25) - 1,
-          maxy: maxY.toDouble(),
-          trackingResultChartData: data,
-          typeChart: TypeChart.slftChart,
-        );
-        listChart.add(drawChartEntity);
-
-      } else {
-        maxY = 25;
-      } */
       getDataChart(data: result.slftChart, trackingResultChartData: result, typeChart: TypeChart.slftChart);
       getDataChart(data: result.sleepScoreChart, trackingResultChartData: result, typeChart: TypeChart.sleepScoreChart);
       getDataChart(data: result.bedTimeChart, trackingResultChartData: result, typeChart: TypeChart.bedTimeChart);
@@ -55,13 +37,13 @@ class ChartWeekCubit extends Cubit<ChartWeekState> {
       getDataChart(data: result.sleepDurationChart, trackingResultChartData: result, typeChart: TypeChart.sleepDurationChart);
       getDataChart(data: result.timeInBedChart, trackingResultChartData: result, typeChart: TypeChart.timeInBedChart);
       getDataChart(data: result.nocturalAwakenChart, trackingResultChartData: result, typeChart: TypeChart.nocturalAwakenChart);
+      //final res = dateTimeUtils.convertTime(timeStamp: result.slftChart?.first.t ?? 0);
       emit(ChartWeekState.loaded(
         week: DatePeriod(dateTimeUtils.startOfWeek(now),
             dateTimeUtils.endOfWeek(now, checkNow: true)),
         firstAllowedDate: DateTime.now().subtract(const Duration(days: 366)),
         lastAllowedDate: DateTime.now().add(const Duration(days: 366)),
         dataChart: listChart,
-        trackingResultChartData: result
       ));
     });
   }
@@ -118,12 +100,14 @@ class ChartWeekCubit extends Cubit<ChartWeekState> {
           maxY = data[i].v;
         }
         flSpot.add(FlSpot(i.toDouble(), data[i].v.toDouble()));
+        listXY.add(DataXYEntity(x: dateTimeUtils.convertTime(timeStamp: data[i].t), y: data[i].v.toDouble()));
       }
       DrawChartEntity drawChartEntity = DrawChartEntity(
         listFlSpot: flSpot,
         maxX: (data.length.toDouble()) - 1,
         maxy: maxY.toDouble(),
         typeChart: typeChart,
+        listData: listXY,
       );
       listChart.add(drawChartEntity);
     } else {

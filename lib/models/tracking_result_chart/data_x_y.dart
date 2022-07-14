@@ -4,7 +4,7 @@ part 'data_x_y.g.dart';
 
 @JsonSerializable()
 class DataXY {
-  final String t;
+  final int t;
   final int v;
 
   DataXY({required this.t, required this.v});

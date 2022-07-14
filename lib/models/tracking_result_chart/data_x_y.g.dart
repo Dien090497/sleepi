@@ -7,7 +7,7 @@ part of 'data_x_y.dart';
 // **************************************************************************
 
 DataXY _$DataXYFromJson(Map<String, dynamic> json) => DataXY(
-      t: json['t'] as String,
+      t: json['t'] as int,
       v: json['v'] as int,
     );
 
