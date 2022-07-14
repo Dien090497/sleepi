@@ -46,6 +46,9 @@ class GridViewBedItem extends StatelessWidget {
       childAspectRatio: 8 / 10,
       itemBuilder: (context, i) {
         final bed = beds[i];
+        final qualityColor = bed.quality != null
+            ? bed.quality!.qualityBedColor
+            : AppColors.commonBed;
         return GestureDetector(
           onTap: () {
             onBedTap!(bed);
@@ -65,7 +68,7 @@ class GridViewBedItem extends StatelessWidget {
                     text: bed.classNft == null
                         ? bed.type.reCase(StringCase.titleCase)
                         : bed.classNft!.reCase(StringCase.camelCase),
-                    textColor: AppColors.white,
+                    textColor: qualityColor,
                   ),
                 ),
                 Padding(
@@ -86,13 +89,15 @@ class GridViewBedItem extends StatelessWidget {
                       Container(
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(50),
-                          border: Border.all(color: AppColors.light4),
+                          border:
+                              Border.all(color: qualityColor.withOpacity(0.1)),
                         ),
                         padding: const EdgeInsets.symmetric(
                             vertical: 5, horizontal: 16),
                         child: SFText(
                           keyText: bed.tokenId.toString(),
-                          style: TextStyles.white1w700size12,
+                          style: TextStyles.white1w700size12
+                              .copyWith(color: qualityColor),
                         ),
                       ),
                       const SizedBox(height: 8),

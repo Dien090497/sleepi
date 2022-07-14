@@ -9,6 +9,7 @@ import 'package:slee_fi/datasources/remote/auth_datasource/refresh_token_interce
 import 'package:slee_fi/models/activation_code_response/activation_code_response.dart';
 import 'package:slee_fi/models/active_code_response/active_code_response.dart';
 import 'package:slee_fi/models/create_password_reponse/create_password_response.dart';
+import 'package:slee_fi/models/estimate_sleep_response/estimate_sleep_response.dart';
 import 'package:slee_fi/models/fetch_bed_response/fetch_bed_response.dart';
 import 'package:slee_fi/models/global_config_response/global_config_response.dart';
 import 'package:slee_fi/models/item_owner_response/item_owner_response.dart';
@@ -36,6 +37,7 @@ import 'package:slee_fi/schema/param_filler_item_fetch/filter_item_schema.dart';
 import 'package:slee_fi/schema/refresh_token_schema/refresh_token_schema.dart';
 import 'package:slee_fi/schema/sign_in_schema/sign_in_schema.dart';
 import 'package:slee_fi/schema/sign_up_schema/sign_up_schema.dart';
+import 'package:slee_fi/schema/speed_up_lucky_box_schema/speed_up_lucky_box_schema.dart';
 import 'package:slee_fi/schema/stacking_schema/stacking_schema.dart';
 import 'package:slee_fi/schema/verify_schema/verify_schema.dart';
 import 'package:slee_fi/schema/verify_user_schema/verify_user_schema.dart';
@@ -172,6 +174,7 @@ abstract class AuthDataSource {
           [categoryId] == 3 item */
     @Query('categoryId') int categoryId,
     @Query('item') AttributeNFT itemNFT,
+    @Query('type') String bedType,
   );
 
   @GET('/nft-attributes/list-jewels')
@@ -207,5 +210,17 @@ abstract class AuthDataSource {
   Future<List<LuckyBox>> fetchLuckyBox();
 
   @GET('/lucky_box/open')
-  Future<dynamic> openLuckyBox(@Query('luckyBoxId') luckyBoxId);
+  Future<dynamic> openLuckyBox(@Query('luckyBoxId') int luckyBoxId);
+
+  @POST('/lucky_box')
+  Future<dynamic> speedUpLuckyBox(
+      @Body() SpeedUpLuckyBoxSchema speedUpLuckyBoxSchema);
+
+  // sleep tracking
+  @GET('/tracking/estimate-tracking')
+  Future<EstimateSleepResponse> estimateSleepEarn(
+    @Query('bedUsed') int bedId,
+    @Query('itemUsed') int itemId,
+    @Query('isEnableInsurance') bool enableInsurance,
+  );
 }

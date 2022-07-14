@@ -46,6 +46,7 @@ class AppColors {
   static const darkColor2 = Color(0xFF121212);
 
   static const green = Color(0xFF2ADF9E);
+  static const orange= Color(0xFFF0780A);
 
   static const yellow = Color(0xFFF0B90A);
 
@@ -54,6 +55,8 @@ class AppColors {
   static const blue = Color(0xFF18A0FB);
 
   static const purple = Color(0xFFB800E7);
+
+  static const purpleBed = Color(0xFF9945FF);
 
   static const lightPurple = Color(0xFFAD82F3);
 
@@ -66,15 +69,15 @@ class AppColors {
   static const rank4 = Color(0xFF0092F3);
   static const rank5 = Color(0xFF426BFF);
 
-  static const commonBed = Color(0xFFEEB049);
+  static const commonBed = Color(0xFFCBD5E1);
 
-  static const uncommonBed = Color(0xFFEA7636);
+  static const uncommonBed = Color(0xFF2ADF9E);
 
-  static const rareBed = Color(0xFF337CBF);
+  static const rareBed = Color(0xFF426BFF);
 
-  static const epicBed = Color(0xFF79BFFF);
+  static const epicBed = Color(0xFFF0780A);
 
-  static const legendaryBed = Color(0xFF4A9E45);
+  static const legendaryBed = Color(0xFF9945FF);
 
   static const ruby = Color(0XFFFC476A);
 

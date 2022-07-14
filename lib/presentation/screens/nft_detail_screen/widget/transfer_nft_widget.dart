@@ -11,6 +11,7 @@ import 'package:slee_fi/entities/nft_entity/nft_entity.dart';
 import 'package:slee_fi/l10n/locale_keys.g.dart';
 import 'package:slee_fi/presentation/blocs/nft_detail/nft_detail_cubit.dart';
 import 'package:slee_fi/presentation/blocs/nft_detail/nft_detail_state.dart';
+import 'package:slee_fi/resources/resources.dart';
 
 class ListTransferNftWidget extends StatefulWidget {
   const ListTransferNftWidget(
@@ -111,7 +112,8 @@ class TransferNftWidget extends StatelessWidget {
       padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 8),
       child: Row(
         children: [
-          SFIcon(bedType.image, width: 70, height: 70),
+          // TODO example data
+          const SFIcon(Imgs.shortBed, width: 70, height: 70),
           const SizedBox(width: 8),
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,

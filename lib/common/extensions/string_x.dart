@@ -1,4 +1,5 @@
 import 'dart:developer' as d;
+import 'dart:ui';
 
 import 'package:easy_localization/easy_localization.dart';
 import 'package:eip55/eip55.dart';
@@ -6,6 +7,7 @@ import 'package:flutter/foundation.dart';
 import 'package:path/path.dart';
 import 'package:recase/recase.dart';
 import 'package:slee_fi/common/enum/enum.dart';
+import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/l10n/locale_keys.g.dart';
 import 'package:slee_fi/resources/resources.dart';
 
@@ -122,6 +124,20 @@ extension StringX on String {
       case null:
         return this;
     }
+  }
+
+  Color get qualityBedColor {
+    switch (this) {
+      case 'uncommon':
+        return AppColors.uncommonBed;
+      case 'rare':
+        return AppColors.rareBed;
+      case 'epic':
+        return AppColors.epicBed;
+      case 'legend':
+        return AppColors.legendaryBed;
+    }
+    return AppColors.commonBed;
   }
 }
 
