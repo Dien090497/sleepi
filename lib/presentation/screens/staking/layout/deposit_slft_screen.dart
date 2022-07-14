@@ -87,6 +87,7 @@ class _DepositSlftScreenState extends State<DepositSlftScreen> {
         },
         builder: (context, state) {
           final cubit = context.read<StakingCubit>();
+
           return DismissKeyboardWidget(
             child: BackgroundWidget(
                 resizeToAvoidBottomInset: false,

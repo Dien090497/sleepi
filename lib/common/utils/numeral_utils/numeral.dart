@@ -54,10 +54,9 @@ class Numeral {
 
     if (value.endsWith('.')) {
       return value.substring(0, value.length - 1);
-    } else if (value.endsWith('0')) {
+    } else if (value.startsWith('0') && double.parse(value) == 0) {
       return _removeEndsZero(value.substring(0, value.length - 1));
     }
-
     return value;
   }
 
