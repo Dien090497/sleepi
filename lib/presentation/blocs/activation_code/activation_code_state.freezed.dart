@@ -360,7 +360,7 @@ abstract class ActivationCodeStateError implements ActivationCodeState {
   const factory ActivationCodeStateError(final String message) =
       _$ActivationCodeStateError;
 
-  String get message => throw _privateConstructorUsedError;
+  String get message;
   @JsonKey(ignore: true)
   _$$ActivationCodeStateErrorCopyWith<_$ActivationCodeStateError>
       get copyWith => throw _privateConstructorUsedError;
@@ -656,8 +656,8 @@ abstract class ActivationCodeStateActiveSuccess implements ActivationCodeState {
           final String activationCode, final Locale localeSelected) =
       _$ActivationCodeStateActiveSuccess;
 
-  String get activationCode => throw _privateConstructorUsedError;
-  Locale get localeSelected => throw _privateConstructorUsedError;
+  String get activationCode;
+  Locale get localeSelected;
   @JsonKey(ignore: true)
   _$$ActivationCodeStateActiveSuccessCopyWith<
           _$ActivationCodeStateActiveSuccess>

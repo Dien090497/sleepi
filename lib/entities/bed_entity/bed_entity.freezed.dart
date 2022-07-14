@@ -431,39 +431,39 @@ abstract class _BedEntity implements BedEntity {
       required final int isMint}) = _$_BedEntity;
 
   @override
-  String get name => throw _privateConstructorUsedError;
+  String get name;
   @override
-  int get id => throw _privateConstructorUsedError;
+  int get id;
   @override
-  int get level => throw _privateConstructorUsedError;
+  int get level;
   @override
-  String get image => throw _privateConstructorUsedError;
+  String get image;
   @override
-  String get type => throw _privateConstructorUsedError;
+  String get type;
   @override
-  String get contractAddress => throw _privateConstructorUsedError;
+  String get contractAddress;
   @override
-  String? get quality => throw _privateConstructorUsedError;
+  String? get quality;
   @override
-  double get durability => throw _privateConstructorUsedError;
+  double get durability;
   @override
-  int get isLock => throw _privateConstructorUsedError;
+  int get isLock;
   @override
-  int get bedMint => throw _privateConstructorUsedError;
+  int get bedMint;
   @override
-  double get efficiency => throw _privateConstructorUsedError;
+  double get efficiency;
   @override
-  double get luck => throw _privateConstructorUsedError;
+  double get luck;
   @override
-  double get bonus => throw _privateConstructorUsedError;
+  double get bonus;
   @override
-  double get special => throw _privateConstructorUsedError;
+  double get special;
   @override
-  double get resilience => throw _privateConstructorUsedError;
+  double get resilience;
   @override
-  int get time => throw _privateConstructorUsedError;
+  int get time;
   @override
-  int get isMint => throw _privateConstructorUsedError;
+  int get isMint;
   @override
   @JsonKey(ignore: true)
   _$$_BedEntityCopyWith<_$_BedEntity> get copyWith =>

@@ -683,8 +683,8 @@ abstract class TransferSpendingStateError implements TransferSpendingState {
       {required final String message,
       final String? typeError}) = _$TransferSpendingStateError;
 
-  String get message => throw _privateConstructorUsedError;
-  String? get typeError => throw _privateConstructorUsedError;
+  String get message;
+  String? get typeError;
   @JsonKey(ignore: true)
   _$$TransferSpendingStateErrorCopyWith<_$TransferSpendingStateError>
       get copyWith => throw _privateConstructorUsedError;
@@ -863,9 +863,8 @@ abstract class TransferSpendingStateLoaded implements TransferSpendingState {
           final TransferSpendingEntity? transferSpendingEntity}) =
       _$TransferSpendingStateLoaded;
 
-  String? get fee => throw _privateConstructorUsedError;
-  TransferSpendingEntity? get transferSpendingEntity =>
-      throw _privateConstructorUsedError;
+  String? get fee;
+  TransferSpendingEntity? get transferSpendingEntity;
   @JsonKey(ignore: true)
   _$$TransferSpendingStateLoadedCopyWith<_$TransferSpendingStateLoaded>
       get copyWith => throw _privateConstructorUsedError;

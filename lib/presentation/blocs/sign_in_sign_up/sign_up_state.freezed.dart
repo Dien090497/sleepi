@@ -596,7 +596,7 @@ abstract class SignInSignUpStateError implements SignInSignUpState {
   const factory SignInSignUpStateError(final String message) =
       _$SignInSignUpStateError;
 
-  String get message => throw _privateConstructorUsedError;
+  String get message;
   @JsonKey(ignore: true)
   _$$SignInSignUpStateErrorCopyWith<_$SignInSignUpStateError> get copyWith =>
       throw _privateConstructorUsedError;
@@ -780,7 +780,7 @@ abstract class SignInSignUpStateErrorEmail implements SignInSignUpState {
   const factory SignInSignUpStateErrorEmail(final String message) =
       _$SignInSignUpStateErrorEmail;
 
-  String get message => throw _privateConstructorUsedError;
+  String get message;
   @JsonKey(ignore: true)
   _$$SignInSignUpStateErrorEmailCopyWith<_$SignInSignUpStateErrorEmail>
       get copyWith => throw _privateConstructorUsedError;
@@ -1007,9 +1007,9 @@ abstract class SignInSignUpStateSignUpSuccess implements SignInSignUpState {
       final UserInfoEntity userInfoEntity,
       final List<TokenSpending> listToken) = _$SignInSignUpStateSignUpSuccess;
 
-  bool get enableActiveCode => throw _privateConstructorUsedError;
-  UserInfoEntity get userInfoEntity => throw _privateConstructorUsedError;
-  List<TokenSpending> get listToken => throw _privateConstructorUsedError;
+  bool get enableActiveCode;
+  UserInfoEntity get userInfoEntity;
+  List<TokenSpending> get listToken;
   @JsonKey(ignore: true)
   _$$SignInSignUpStateSignUpSuccessCopyWith<_$SignInSignUpStateSignUpSuccess>
       get copyWith => throw _privateConstructorUsedError;
@@ -1236,9 +1236,9 @@ abstract class SignInSignUpStateSignInSuccess implements SignInSignUpState {
       final UserInfoEntity userInfoEntity,
       final List<TokenSpending> listToken) = _$SignInSignUpStateSignInSuccess;
 
-  bool get isFirstOpenApp => throw _privateConstructorUsedError;
-  UserInfoEntity get userInfoEntity => throw _privateConstructorUsedError;
-  List<TokenSpending> get listToken => throw _privateConstructorUsedError;
+  bool get isFirstOpenApp;
+  UserInfoEntity get userInfoEntity;
+  List<TokenSpending> get listToken;
   @JsonKey(ignore: true)
   _$$SignInSignUpStateSignInSuccessCopyWith<_$SignInSignUpStateSignInSuccess>
       get copyWith => throw _privateConstructorUsedError;
@@ -1433,8 +1433,8 @@ abstract class SignInSignUpStateVerifySuccess implements SignInSignUpState {
   const factory SignInSignUpStateVerifySuccess(
       final int otp, final String email) = _$SignInSignUpStateVerifySuccess;
 
-  int get otp => throw _privateConstructorUsedError;
-  String get email => throw _privateConstructorUsedError;
+  int get otp;
+  String get email;
   @JsonKey(ignore: true)
   _$$SignInSignUpStateVerifySuccessCopyWith<_$SignInSignUpStateVerifySuccess>
       get copyWith => throw _privateConstructorUsedError;

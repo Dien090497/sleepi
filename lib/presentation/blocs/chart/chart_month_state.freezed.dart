@@ -393,9 +393,9 @@ abstract class ChartMonthLoaded implements ChartMonthState {
       required final DateTime firstAllowedDate,
       required final DateTime lastAllowedDate}) = _$ChartMonthLoaded;
 
-  DateTime get selectedDate => throw _privateConstructorUsedError;
-  DateTime get firstAllowedDate => throw _privateConstructorUsedError;
-  DateTime get lastAllowedDate => throw _privateConstructorUsedError;
+  DateTime get selectedDate;
+  DateTime get firstAllowedDate;
+  DateTime get lastAllowedDate;
   @JsonKey(ignore: true)
   _$$ChartMonthLoadedCopyWith<_$ChartMonthLoaded> get copyWith =>
       throw _privateConstructorUsedError;
@@ -551,7 +551,7 @@ class _$ChartMonthError
 abstract class ChartMonthError implements ChartMonthState {
   const factory ChartMonthError(final String msg) = _$ChartMonthError;
 
-  String get msg => throw _privateConstructorUsedError;
+  String get msg;
   @JsonKey(ignore: true)
   _$$ChartMonthErrorCopyWith<_$ChartMonthError> get copyWith =>
       throw _privateConstructorUsedError;

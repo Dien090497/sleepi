@@ -161,11 +161,11 @@ abstract class _HistoryEntity implements HistoryEntity {
       required final String addressToken}) = _$_HistoryEntity;
 
   @override
-  String? get transactionHash => throw _privateConstructorUsedError;
+  String? get transactionHash;
   @override
-  int get chainId => throw _privateConstructorUsedError;
+  int get chainId;
   @override
-  String get addressToken => throw _privateConstructorUsedError;
+  String get addressToken;
   @override
   @JsonKey(ignore: true)
   _$$_HistoryEntityCopyWith<_$_HistoryEntity> get copyWith =>

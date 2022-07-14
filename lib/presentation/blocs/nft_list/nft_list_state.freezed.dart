@@ -476,8 +476,8 @@ abstract class NftListLoaded implements NftListState {
   const factory NftListLoaded(
       final List<BedModel> listBed, final bool isLoadMore) = _$NftListLoaded;
 
-  List<BedModel> get listBed => throw _privateConstructorUsedError;
-  bool get isLoadMore => throw _privateConstructorUsedError;
+  List<BedModel> get listBed;
+  bool get isLoadMore;
   @JsonKey(ignore: true)
   _$$NftListLoadedCopyWith<_$NftListLoaded> get copyWith =>
       throw _privateConstructorUsedError;
@@ -623,7 +623,7 @@ class _$NftListError implements NftListError {
 abstract class NftListError implements NftListState {
   const factory NftListError(final String msg) = _$NftListError;
 
-  String get msg => throw _privateConstructorUsedError;
+  String get msg;
   @JsonKey(ignore: true)
   _$$NftListErrorCopyWith<_$NftListError> get copyWith =>
       throw _privateConstructorUsedError;

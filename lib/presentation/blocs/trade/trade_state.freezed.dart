@@ -249,7 +249,7 @@ class _$TradeStateInitial implements TradeStateInitial {
 abstract class TradeStateInitial implements TradeState {
   const factory TradeStateInitial({final bool isLoading}) = _$TradeStateInitial;
 
-  bool get isLoading => throw _privateConstructorUsedError;
+  bool get isLoading;
   @JsonKey(ignore: true)
   _$$TradeStateInitialCopyWith<_$TradeStateInitial> get copyWith =>
       throw _privateConstructorUsedError;
@@ -407,7 +407,7 @@ class _$swapTokenBalance implements swapTokenBalance {
 abstract class swapTokenBalance implements TradeState {
   const factory swapTokenBalance(final double balance) = _$swapTokenBalance;
 
-  double get balance => throw _privateConstructorUsedError;
+  double get balance;
   @JsonKey(ignore: true)
   _$$swapTokenBalanceCopyWith<_$swapTokenBalance> get copyWith =>
       throw _privateConstructorUsedError;
@@ -568,7 +568,7 @@ abstract class tradeGetAmountOutMin implements TradeState {
   const factory tradeGetAmountOutMin(final double amountOutMin) =
       _$tradeGetAmountOutMin;
 
-  double get amountOutMin => throw _privateConstructorUsedError;
+  double get amountOutMin;
   @JsonKey(ignore: true)
   _$$tradeGetAmountOutMinCopyWith<_$tradeGetAmountOutMin> get copyWith =>
       throw _privateConstructorUsedError;
@@ -726,7 +726,7 @@ class _$swapTokenSuccess implements swapTokenSuccess {
 abstract class swapTokenSuccess implements TradeState {
   const factory swapTokenSuccess(final bool success) = _$swapTokenSuccess;
 
-  bool get success => throw _privateConstructorUsedError;
+  bool get success;
   @JsonKey(ignore: true)
   _$$swapTokenSuccessCopyWith<_$swapTokenSuccess> get copyWith =>
       throw _privateConstructorUsedError;
@@ -885,7 +885,7 @@ class _$approveTokenSuccess implements approveTokenSuccess {
 abstract class approveTokenSuccess implements TradeState {
   const factory approveTokenSuccess(final bool success) = _$approveTokenSuccess;
 
-  bool get success => throw _privateConstructorUsedError;
+  bool get success;
   @JsonKey(ignore: true)
   _$$approveTokenSuccessCopyWith<_$approveTokenSuccess> get copyWith =>
       throw _privateConstructorUsedError;
@@ -1042,7 +1042,7 @@ class _$swapTokenFail implements swapTokenFail {
 abstract class swapTokenFail implements TradeState {
   const factory swapTokenFail(final String msg) = _$swapTokenFail;
 
-  String get msg => throw _privateConstructorUsedError;
+  String get msg;
   @JsonKey(ignore: true)
   _$$swapTokenFailCopyWith<_$swapTokenFail> get copyWith =>
       throw _privateConstructorUsedError;

@@ -324,7 +324,7 @@ abstract class MintStateSelected implements MintState {
   const factory MintStateSelected({required final int indexSelected}) =
       _$MintStateSelected;
 
-  int get indexSelected => throw _privateConstructorUsedError;
+  int get indexSelected;
   @JsonKey(ignore: true)
   _$$MintStateSelectedCopyWith<_$MintStateSelected> get copyWith =>
       throw _privateConstructorUsedError;

@@ -442,37 +442,37 @@ abstract class _NftAttributeEntity implements NftAttributeEntity {
       required final double? resilience}) = _$_NftAttributeEntity;
 
   @override
-  BigInt? get nftId => throw _privateConstructorUsedError;
+  BigInt? get nftId;
   @override
-  BigInt? get tokenId => throw _privateConstructorUsedError;
+  BigInt? get tokenId;
   @override
-  String? get contractAddress => throw _privateConstructorUsedError;
+  String? get contractAddress;
   @override
-  String? get owner => throw _privateConstructorUsedError;
+  String? get owner;
   @override
-  String? get type => throw _privateConstructorUsedError;
+  String? get type;
   @override
-  String? get classNft => throw _privateConstructorUsedError;
+  String? get classNft;
   @override
-  String? get quality => throw _privateConstructorUsedError;
+  String? get quality;
   @override
-  int? get time => throw _privateConstructorUsedError;
+  int? get time;
   @override
-  int? get level => throw _privateConstructorUsedError;
+  int? get level;
   @override
-  int? get bedMint => throw _privateConstructorUsedError;
+  int? get bedMint;
   @override
-  double? get efficiency => throw _privateConstructorUsedError;
+  double? get efficiency;
   @override
-  double? get durability => throw _privateConstructorUsedError;
+  double? get durability;
   @override
-  double? get luck => throw _privateConstructorUsedError;
+  double? get luck;
   @override
-  double? get bonus => throw _privateConstructorUsedError;
+  double? get bonus;
   @override
-  double? get special => throw _privateConstructorUsedError;
+  double? get special;
   @override
-  double? get resilience => throw _privateConstructorUsedError;
+  double? get resilience;
   @override
   @JsonKey(ignore: true)
   _$$_NftAttributeEntityCopyWith<_$_NftAttributeEntity> get copyWith =>

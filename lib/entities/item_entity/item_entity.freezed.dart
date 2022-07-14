@@ -191,15 +191,15 @@ abstract class _ItemEntity implements ItemEntity {
       required final int level}) = _$_ItemEntity;
 
   @override
-  String get name => throw _privateConstructorUsedError;
+  String get name;
   @override
-  String get image => throw _privateConstructorUsedError;
+  String get image;
   @override
-  int get id => throw _privateConstructorUsedError;
+  int get id;
   @override
-  String get effect => throw _privateConstructorUsedError;
+  String get effect;
   @override
-  int get level => throw _privateConstructorUsedError;
+  int get level;
   @override
   @JsonKey(ignore: true)
   _$$_ItemEntityCopyWith<_$_ItemEntity> get copyWith =>

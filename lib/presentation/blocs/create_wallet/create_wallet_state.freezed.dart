@@ -265,9 +265,9 @@ abstract class createWalletStateInitial implements CreateWalletState {
       {required final String mnemonic,
       final bool isLoading}) = _$createWalletStateInitial;
 
-  String get passCode => throw _privateConstructorUsedError;
-  String get mnemonic => throw _privateConstructorUsedError;
-  bool get isLoading => throw _privateConstructorUsedError;
+  String get passCode;
+  String get mnemonic;
+  bool get isLoading;
   @JsonKey(ignore: true)
   _$$createWalletStateInitialCopyWith<_$createWalletStateInitial>
       get copyWith => throw _privateConstructorUsedError;
@@ -480,9 +480,9 @@ abstract class createWalletDone implements CreateWalletState {
       final UserInfoEntity? userInfoEntity,
       final List<TokenSpending> listTokens) = _$createWalletDone;
 
-  WalletInfoEntity get entity => throw _privateConstructorUsedError;
-  UserInfoEntity? get userInfoEntity => throw _privateConstructorUsedError;
-  List<TokenSpending> get listTokens => throw _privateConstructorUsedError;
+  WalletInfoEntity get entity;
+  UserInfoEntity? get userInfoEntity;
+  List<TokenSpending> get listTokens;
   @JsonKey(ignore: true)
   _$$createWalletDoneCopyWith<_$createWalletDone> get copyWith =>
       throw _privateConstructorUsedError;
@@ -639,7 +639,7 @@ class _$createWalletError
 abstract class createWalletError implements CreateWalletState {
   const factory createWalletError(final String msg) = _$createWalletError;
 
-  String get msg => throw _privateConstructorUsedError;
+  String get msg;
   @JsonKey(ignore: true)
   _$$createWalletErrorCopyWith<_$createWalletError> get copyWith =>
       throw _privateConstructorUsedError;

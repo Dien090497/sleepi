@@ -351,7 +351,7 @@ abstract class sendToExternalStateInitial implements SendToExternalState {
   const factory sendToExternalStateInitial({final bool isLoading}) =
       _$sendToExternalStateInitial;
 
-  bool get isLoading => throw _privateConstructorUsedError;
+  bool get isLoading;
   @JsonKey(ignore: true)
   _$$sendToExternalStateInitialCopyWith<_$sendToExternalStateInitial>
       get copyWith => throw _privateConstructorUsedError;
@@ -573,7 +573,7 @@ abstract class sendToExternalDone implements SendToExternalState {
   const factory sendToExternalDone(final SendToExternalEntity entity) =
       _$sendToExternalDone;
 
-  SendToExternalEntity get entity => throw _privateConstructorUsedError;
+  SendToExternalEntity get entity;
   @JsonKey(ignore: true)
   _$$sendToExternalDoneCopyWith<_$sendToExternalDone> get copyWith =>
       throw _privateConstructorUsedError;
@@ -967,7 +967,7 @@ abstract class GetTokenBalanceSuccess implements SendToExternalState {
   const factory GetTokenBalanceSuccess(final double balance) =
       _$GetTokenBalanceSuccess;
 
-  double get balance => throw _privateConstructorUsedError;
+  double get balance;
   @JsonKey(ignore: true)
   _$$GetTokenBalanceSuccessCopyWith<_$GetTokenBalanceSuccess> get copyWith =>
       throw _privateConstructorUsedError;
@@ -1359,7 +1359,7 @@ class _$SendToExternalFailed
 abstract class SendToExternalFailed implements SendToExternalState {
   const factory SendToExternalFailed(final String msg) = _$SendToExternalFailed;
 
-  String get msg => throw _privateConstructorUsedError;
+  String get msg;
   @JsonKey(ignore: true)
   _$$SendToExternalFailedCopyWith<_$SendToExternalFailed> get copyWith =>
       throw _privateConstructorUsedError;
@@ -1575,7 +1575,7 @@ abstract class SendToExternalCalculatorFee implements SendToExternalState {
   const factory SendToExternalCalculatorFee(final double? fee) =
       _$SendToExternalCalculatorFee;
 
-  double? get fee => throw _privateConstructorUsedError;
+  double? get fee;
   @JsonKey(ignore: true)
   _$$SendToExternalCalculatorFeeCopyWith<_$SendToExternalCalculatorFee>
       get copyWith => throw _privateConstructorUsedError;
@@ -1978,7 +1978,7 @@ abstract class SendToExternalErrorToAddress implements SendToExternalState {
   const factory SendToExternalErrorToAddress(final String msg) =
       _$SendToExternalErrorToAddress;
 
-  String get msg => throw _privateConstructorUsedError;
+  String get msg;
   @JsonKey(ignore: true)
   _$$SendToExternalErrorToAddressCopyWith<_$SendToExternalErrorToAddress>
       get copyWith => throw _privateConstructorUsedError;
@@ -2195,7 +2195,7 @@ abstract class SendToExternalErrorValueInEther implements SendToExternalState {
   const factory SendToExternalErrorValueInEther(final String msg) =
       _$SendToExternalErrorValueInEther;
 
-  String get msg => throw _privateConstructorUsedError;
+  String get msg;
   @JsonKey(ignore: true)
   _$$SendToExternalErrorValueInEtherCopyWith<_$SendToExternalErrorValueInEther>
       get copyWith => throw _privateConstructorUsedError;

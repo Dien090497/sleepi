@@ -391,9 +391,9 @@ abstract class ChartDayLoaded implements ChartDayState {
       required final DateTime firstAllowedDate,
       required final DateTime lastAllowedDate}) = _$ChartDayLoaded;
 
-  DateTime get selectedDate => throw _privateConstructorUsedError;
-  DateTime get firstAllowedDate => throw _privateConstructorUsedError;
-  DateTime get lastAllowedDate => throw _privateConstructorUsedError;
+  DateTime get selectedDate;
+  DateTime get firstAllowedDate;
+  DateTime get lastAllowedDate;
   @JsonKey(ignore: true)
   _$$ChartDayLoadedCopyWith<_$ChartDayLoaded> get copyWith =>
       throw _privateConstructorUsedError;
@@ -547,7 +547,7 @@ class _$ChartDayError with DiagnosticableTreeMixin implements ChartDayError {
 abstract class ChartDayError implements ChartDayState {
   const factory ChartDayError(final String msg) = _$ChartDayError;
 
-  String get msg => throw _privateConstructorUsedError;
+  String get msg;
   @JsonKey(ignore: true)
   _$$ChartDayErrorCopyWith<_$ChartDayError> get copyWith =>
       throw _privateConstructorUsedError;

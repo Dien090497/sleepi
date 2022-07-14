@@ -96,7 +96,7 @@ class WalletDetailList extends StatelessWidget {
                           keyText: keyList[index],
                           style: TextStyles.lightWhite16),
                       trailing: SFText(
-                        keyText: "0.00",
+                        keyText: "0",
                         style: TextStyles.lightWhite16,
                       ),
                     ),
