@@ -59,7 +59,7 @@ class _TabBedsDetailState extends State<TabBedsDetail> {
                                       : false,
                                   beds: listBeds
                                       .where(
-                                          (element) => element.type == 'beds')
+                                          (element) => element.type == 'bed')
                                       .toList(),
                                   onRefresh: () {
                                     cubit.refresh(categoryType);
