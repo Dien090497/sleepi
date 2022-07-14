@@ -169,10 +169,6 @@ class WalletDetailList extends StatelessWidget {
                           )
                         ],
                       ),
-                      // trailing: SFText(
-                      //   keyText: tokenList[index].balance.formatBalanceToken,
-                      //   style: TextStyles.lightWhite16,
-                      // ),
                     ),
                   );
                 },
