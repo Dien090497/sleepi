@@ -1,13 +1,19 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:slee_fi/common/extensions/string_x.dart';
 import 'package:slee_fi/common/routes/app_routes.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
 import 'package:slee_fi/common/widgets/sf_button_outlined.dart';
+import 'package:slee_fi/common/widgets/sf_icon.dart';
 import 'package:slee_fi/common/widgets/sf_percent_border.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
+import 'package:slee_fi/entities/lucky_box/lucky_box_entity.dart';
 import 'package:slee_fi/l10n/locale_keys.g.dart';
+import 'package:slee_fi/presentation/blocs/home/home_bloc.dart';
+import 'package:slee_fi/presentation/blocs/home/home_state.dart';
 import 'package:slee_fi/presentation/screens/home/widgets/button_start.dart';
 import 'package:slee_fi/presentation/screens/home/widgets/home_switch.dart';
 import 'package:slee_fi/presentation/screens/home/widgets/time_picker.dart';
@@ -65,25 +71,33 @@ class AlarmBell extends StatelessWidget {
           Row(
             children: [
               Expanded(
-                child: Stack(
-                  alignment: Alignment.centerLeft,
-                  children: [
-                    SFPercentBorderGradient(
-                      valueActive: 70,
-                      totalValue: 100,
-                      linearGradient: AppColors.gradientBluePurple,
-                      lineHeight: 18,
-                      barRadius: 20,
-                      backgroundColor: Colors.white.withOpacity(0.05),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                      child: SFText(
-                        keyText: '100/150 SLFT',
-                        style: TextStyles.white10,
+                child: BlocBuilder<HomeBloc, HomeState>(
+                  buildWhen: (previous, current) =>
+                      (current is HomeLoaded && previous is! HomeLoaded) ||
+                      ((current is HomeLoaded &&
+                          previous is HomeLoaded &&
+                          current.tokenEarn != previous.tokenEarn)),
+                  builder: (context, state) => Stack(
+                    alignment: Alignment.centerLeft,
+                    children: [
+                      SFPercentBorderGradient(
+                        valueActive: state is HomeLoaded ? state.tokenEarn : 0,
+                        totalValue: 150,
+                        linearGradient: AppColors.gradientBluePurple,
+                        lineHeight: 18,
+                        barRadius: 20,
+                        backgroundColor: Colors.white.withOpacity(0.05),
                       ),
-                    )
-                  ],
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                        child: SFText(
+                          keyText:
+                              '${state is HomeLoaded ? state.tokenEarn : 0}/150 SLFT',
+                          style: TextStyles.white10,
+                        ),
+                      )
+                    ],
+                  ),
                 ),
               ),
               const SizedBox(width: 12),
@@ -109,46 +123,84 @@ class AlarmBell extends StatelessWidget {
             ],
           ),
           const SizedBox(height: 29),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: const [
-              ViewGif(),
-              SizedBox(height: 20),
-              ViewGif(),
-              SizedBox(height: 20),
-              ViewGif(),
-              SizedBox(height: 20),
-              ViewGif(),
-              SizedBox(height: 20),
-              ViewGif(),
-              SizedBox(height: 20),
-              ViewGif(),
-            ],
+          BlocBuilder<HomeBloc, HomeState>(
+            buildWhen: (previous, current) {
+              return (previous is HomeLoaded &&
+                  current is HomeLoaded &&
+                  !_theSameList(current.luckyBoxes, previous.luckyBoxes));
+            },
+            builder: (context, state) {
+              'rebuild lucky box  '.log;
+              return Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  ViewGif(
+                      showLuckyBox:
+                          state is HomeLoaded && state.luckyBoxes.isNotEmpty),
+                  const SizedBox(height: 20),
+                  ViewGif(
+                      showLuckyBox:
+                          state is HomeLoaded && state.luckyBoxes.length >= 2),
+                  const SizedBox(height: 20),
+                  ViewGif(
+                      showLuckyBox:
+                          state is HomeLoaded && state.luckyBoxes.length >= 3),
+                  const SizedBox(height: 20),
+                  ViewGif(
+                      showLuckyBox:
+                          state is HomeLoaded && state.luckyBoxes.length >= 4),
+                  const SizedBox(height: 20),
+                  ViewGif(
+                      showLuckyBox:
+                          state is HomeLoaded && state.luckyBoxes.length >= 5),
+                  const SizedBox(height: 20),
+                  ViewGif(
+                      showLuckyBox:
+                          state is HomeLoaded && state.luckyBoxes.length >= 6),
+                ],
+              );
+            },
           ),
           const SizedBox(height: 20),
         ],
       ),
     );
   }
+
+  bool _theSameList(
+      List<LuckyBoxEntity> currentList, List<LuckyBoxEntity> prevList) {
+    'check size is ${prevList.length}   ${currentList.length}'.log;
+    if (currentList.length == prevList.length) {
+      for (int i = 0; i < prevList.length; i++) {
+        var index =
+            currentList.indexWhere((element) => element.id == prevList[i].id);
+        if (index == -1) return false;
+      }
+      return true;
+    }
+    return false;
+  }
 }
 
 class ViewGif extends StatelessWidget {
-  const ViewGif({Key? key}) : super(key: key);
+  const ViewGif({Key? key, required this.showLuckyBox}) : super(key: key);
+  final bool showLuckyBox;
 
   @override
   Widget build(BuildContext context) {
+    'show lucky box $showLuckyBox'.log;
     return Container(
       width: 48,
       height: 48,
-      padding: const EdgeInsets.all(12),
+      padding: EdgeInsets.all(showLuckyBox ? 0 : 12),
       decoration: BoxDecoration(
         color: AppColors.darkColor,
         borderRadius: BorderRadius.circular(16),
         border: Border.all(color: AppColors.borderDarkColor, width: 1),
       ),
-      child: SvgPicture.asset(
-        Ics.gift,
-        color: AppColors.borderDarkColor,
+      child: SFIcon(
+        showLuckyBox ? Imgs.icLuckyBoxGreen : Ics.gift,
+        color: showLuckyBox ? null : AppColors.borderDarkColor,
       ),
     );
   }

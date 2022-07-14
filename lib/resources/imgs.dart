@@ -22,6 +22,13 @@ class Imgs {
   static const String health = 'assets/images/health.png';
   static const String healthcare = 'assets/images/healthcare.png';
   static const String homePage = 'assets/images/home_page.png';
+  static const String icLuckyBoxBlack = 'assets/images/ic_lucky_box_black.png';
+  static const String icLuckyBoxBlue = 'assets/images/ic_lucky_box_blue.png';
+  static const String icLuckyBoxGreen = 'assets/images/ic_lucky_box_green.png';
+  static const String icLuckyBoxOrange =
+      'assets/images/ic_lucky_box_orange.png';
+  static const String icLuckyBoxPurple =
+      'assets/images/ic_lucky_box_purple.png';
   static const String iconApp = 'assets/images/icon_app.png';
   static const String jewelGreen = 'assets/images/jewel_green.png';
   static const String jewelPurple = 'assets/images/jewel_purple.png';
@@ -80,6 +87,11 @@ class Imgs {
     health,
     healthcare,
     homePage,
+    icLuckyBoxBlack,
+    icLuckyBoxBlue,
+    icLuckyBoxGreen,
+    icLuckyBoxOrange,
+    icLuckyBoxPurple,
     iconApp,
     jewelGreen,
     jewelPurple,

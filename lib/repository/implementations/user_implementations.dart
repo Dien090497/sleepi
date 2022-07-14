@@ -10,12 +10,13 @@ import 'package:slee_fi/entities/item_entity/item_entity.dart';
 import 'package:slee_fi/failures/failure.dart';
 import 'package:slee_fi/models/bed_model/beb_model.dart';
 import 'package:slee_fi/models/global_config_response/global_config_response.dart';
+import 'package:slee_fi/models/lucky_box/lucky_box.dart';
 import 'package:slee_fi/models/swap_token_to_wallet_response/swap_token_to_wallet_response.dart';
 import 'package:slee_fi/models/token_spending/token_spending.dart';
 import 'package:slee_fi/models/withdraw_history_response/withdraw_history_response.dart';
 import 'package:slee_fi/repository/user_repository.dart';
 import 'package:slee_fi/schema/change_password_schema/change_password_schema.dart';
-import 'package:slee_fi/schema/param_filler_item_fetch/filter_item_chema.dart';
+import 'package:slee_fi/schema/param_filler_item_fetch/filter_item_schema.dart';
 import 'package:slee_fi/schema/white_draw_token_schema/whit_draw_token_schema.dart';
 import 'package:slee_fi/usecase/add_item_to_bed_usecase.dart';
 import 'package:slee_fi/usecase/estimate_gas_withdraw.dart';
@@ -182,5 +183,21 @@ class UserImplementation extends IUserRepository {
     // } catch (e) {
     //   return Left(FailureMessage.fromException(e));
     // }
+  }
+
+  @override
+  Future<Either<FailureMessage, List<LuckyBox>>> fetchLuckyBox() async {
+    try {
+      var result = await _authDataSource.fetchLuckyBox();
+      return Right(result);
+    } catch (e) {
+      return Left(FailureMessage.fromException(e));
+    }
+  }
+
+  @override
+  Future<Either<FailureMessage, dynamic>> openLuckyBox(int luckyBoxId) {
+    // TODO: implement openLuckyBox
+    throw UnimplementedError();
   }
 }

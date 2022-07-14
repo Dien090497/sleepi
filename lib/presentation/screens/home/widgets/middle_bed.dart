@@ -47,6 +47,11 @@ class MiddleBed extends StatelessWidget {
             borderRadius: BorderRadius.circular(16),
           ),
           child: BlocBuilder<HomeBloc, HomeState>(
+            buildWhen: (previous, current) =>
+                (current is HomeLoaded && previous is! HomeLoaded) ||
+                (current is HomeLoaded &&
+                    previous is HomeLoaded &&
+                    previous.id != current.id),
             builder: (context, state) {
               return Column(
                 children: [

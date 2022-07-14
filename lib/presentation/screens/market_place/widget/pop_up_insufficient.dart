@@ -50,7 +50,7 @@ class PopupInsufficient extends StatelessWidget {
           ),
           padding: const EdgeInsets.all(8),
           child: SFText(
-            keyText: nft.nftId.toString(),
+            keyText: nft.tokenId.toString(),
             style: TextStyles.blue14,
           ),
         ),

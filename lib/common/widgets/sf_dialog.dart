@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
+import 'package:slee_fi/common/widgets/phoenix.dart';
 import 'package:slee_fi/common/widgets/sf_alert_dialog.dart';
 import 'package:slee_fi/common/widgets/sf_buttons.dart';
 import 'package:slee_fi/common/widgets/sf_icon.dart';
@@ -165,6 +166,7 @@ Future<T?> showChangeLanguageDialog<T>(BuildContext context,
                     textStyle: TextStyles.white16,
                     onPressed: () {
                       context.setLocale(locale);
+                      Phoenix.rebirth(context);
                     },
                   ),
                 ),

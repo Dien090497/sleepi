@@ -1,6 +1,6 @@
 import 'package:json_annotation/json_annotation.dart';
 
-part 'filter_item_chema.g.dart';
+part 'filter_item_schema.g.dart';
 
 @JsonSerializable()
 class FilterItemSchema {

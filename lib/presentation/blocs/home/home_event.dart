@@ -4,8 +4,8 @@ abstract class HomeEvent extends Equatable {
   const HomeEvent();
 }
 
-class FetchData extends HomeEvent {
-  const FetchData();
+class FetchBed extends HomeEvent {
+  const FetchBed();
 
   @override
   List<Object?> get props => [];
@@ -72,6 +72,25 @@ class LoadMoreItem extends HomeEvent {
 }
 
 class LoadMoreBed extends HomeEvent {
+  @override
+  List<Object?> get props => [];
+}
+
+class EstimateTracking extends HomeEvent {
+  @override
+  List<Object?> get props => [];
+}
+
+class ChangeInsurance extends HomeEvent {
+  final bool enableInsurance;
+
+  const ChangeInsurance(this.enableInsurance);
+
+  @override
+  List<Object?> get props => [enableInsurance];
+}
+
+class FetchLuckyBox extends HomeEvent {
   @override
   List<Object?> get props => [];
 }
