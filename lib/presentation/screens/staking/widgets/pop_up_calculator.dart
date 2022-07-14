@@ -2,7 +2,6 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:slee_fi/common/extensions/num_ext.dart';
-import 'package:slee_fi/common/extensions/string_x.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
 import 'package:slee_fi/common/widgets/dismiss_keyboard_widget.dart';
@@ -27,8 +26,10 @@ class _PopUpCalculatorState extends State<PopUpCalculator> {
   final FocusNode _focus = FocusNode();
   bool isChangedRates = true;
   double currentRatesChange = 0;
+  double amountStaked = 0;
   double? currentRate;
   double? currentRatesToToken;
+  double? percentCurrentRatesToToken;
 
   @override
   void initState() {
@@ -83,7 +84,7 @@ class _PopUpCalculatorState extends State<PopUpCalculator> {
           // ),
           SFText(
             keyText:
-                "SLFT ${Localizations.localeOf(context).toLanguageTag().isJapanese ? '' : LocaleKeys.staked.tr()}",
+                "SLFT ${LocaleKeys.staked.tr()}",
             style: TextStyles.lightGrey14,
           ),
           SLFTStaked(
@@ -95,6 +96,8 @@ class _PopUpCalculatorState extends State<PopUpCalculator> {
                   setState((){
                     rateEditingController.text = '';
                     currentRatesToToken = null;
+                    percentCurrentRatesToToken = null;
+                    amountStaked = 0;
                   });
                 }
                 if(widget.aprInDay != null){
@@ -102,10 +105,13 @@ class _PopUpCalculatorState extends State<PopUpCalculator> {
                   setState((){
                     rateEditingController.text = currentRate!.formatBalanceToken;
                     currentRatesToToken = (currentRate! / 0.2);
+                    amountStaked = staked.amount;
+                    percentCurrentRatesToToken = (currentRate!/staked.amount*100);
                   });
                 }else {
                   rateEditingController.text = '';
                   currentRatesToToken = null;
+                  percentCurrentRatesToToken = null;
                 }
           }),
           const SizedBox(
@@ -146,10 +152,12 @@ class _PopUpCalculatorState extends State<PopUpCalculator> {
                               if(rateEditingController.text.isNotEmpty){
                                 setState((){
                                   currentRatesToToken = double.parse(rateEditingController.text)/0.2;
+                                  percentCurrentRatesToToken = (currentRate!/amountStaked*100);
                                 });
                               }else {
                                 setState((){
                                   currentRatesToToken = null;
+                                  percentCurrentRatesToToken = null;
                                 });
                               }
                               stakedKey.currentState?.currentRatesCalculator(rates);
@@ -170,7 +178,7 @@ class _PopUpCalculatorState extends State<PopUpCalculator> {
                             height: 4,
                           ),
                           SFText(
-                            keyText: "~ ${currentRatesToToken ?? 0} SLFT (0.00%)",
+                            keyText: "~ ${currentRatesToToken != null ? currentRatesToToken!.formatBalanceToken : 0} SLFT (${(percentCurrentRatesToToken ?? 0.00).toStringAsFixed(2)}%)",
                             style: TextStyles.lightGrey14,
                           ),
                         ],

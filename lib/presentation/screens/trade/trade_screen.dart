@@ -247,7 +247,7 @@ class _TradeScreenState extends State<TradeScreen> {
                                           style: TextStyles.lightGrey12),
                                       SFText(
                                         keyText:
-                                            ': ${balance.formatBalanceToken}',
+                                            ': ${balance > 0 ? balance.formatBalanceToken : 0}',
                                         style: TextStyles.lightGrey12,
                                       ),
                                     ],
@@ -269,7 +269,7 @@ class _TradeScreenState extends State<TradeScreen> {
                                                 inputFormatters: [
                                                   FilteringTextInputFormatter
                                                       .allow(RegExp(
-                                                      r'^\d{1,}[.,]?\d{0,6}')),
+                                                          r'^\d{1,}[.,]?\d{0,6}')),
                                                 ],
                                                 textInputType:
                                                     const TextInputType
@@ -282,9 +282,20 @@ class _TradeScreenState extends State<TradeScreen> {
                                                   if (value.isNotEmpty) {
                                                     setState(() {
                                                       onValidValue();
-                                                      final result = valueController.text.toString().contains(',')
-                                                          ? valueController.text.toString().replaceAll(',', '.')
-                                                          : valueController.text.toString();
+                                                      final result =
+                                                          valueController
+                                                                  .text
+                                                                  .toString()
+                                                                  .contains(',')
+                                                              ? valueController
+                                                                  .text
+                                                                  .toString()
+                                                                  .replaceAll(
+                                                                      ',',
+                                                                      '.')
+                                                              : valueController
+                                                                  .text
+                                                                  .toString();
                                                       cubit.getAmountOutMin(
                                                           Const
                                                               .tokens[indexFrom]
@@ -326,14 +337,14 @@ class _TradeScreenState extends State<TradeScreen> {
                                                                     ? balance -
                                                                         0.01
                                                                     : balance)
-                                                                .toString();
+                                                                .formatBalanceToken;
                                                         Future.delayed(
                                                             const Duration(
                                                                 milliseconds:
                                                                     100), () {
                                                           final result =
                                                               valueController
-                                                                  .toString()
+                                                                  .text
                                                                   .replaceAll(
                                                                       ',', '.');
                                                           cubit.getAmountOutMin(
@@ -453,7 +464,8 @@ class _TradeScreenState extends State<TradeScreen> {
                                         child: SizedBox(
                                           child: SFText(
                                             maxLines: 1,
-                                            keyText: "${Decimal.parse(amountOutMin.toString())}",
+                                            keyText:
+                                                "${Decimal.parse(amountOutMin.toString())}",
                                             style: TextStyles.bold18White,
                                           ),
                                         ),
@@ -483,8 +495,12 @@ class _TradeScreenState extends State<TradeScreen> {
                                             () => firstToken.currentState
                                                 ?.changeSelectedItem(),
                                           );
-                                          final result = valueController.text.toString().contains(',')
-                                              ? valueController.text.toString().replaceAll(',', '.')
+                                          final result = valueController.text
+                                                  .toString()
+                                                  .contains(',')
+                                              ? valueController.text
+                                                  .toString()
+                                                  .replaceAll(',', '.')
                                               : valueController.text.toString();
 
                                           cubit.getAmountOutMin(
@@ -518,9 +534,12 @@ class _TradeScreenState extends State<TradeScreen> {
                             }
                           });
                           if (error == '') {
-                            final result = valueController.text.toString().contains(',')
-                                ? valueController.text.toString().replaceAll(',', '.')
-                                : valueController.text.toString();
+                            final result =
+                                valueController.text.toString().contains(',')
+                                    ? valueController.text
+                                        .toString()
+                                        .replaceAll(',', '.')
+                                    : valueController.text.toString();
                             showCustomAlertDialog(context,
                                 children: PopUpConfirmTrade(
                                   value: double.parse(result),

@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
+import 'package:slee_fi/common/widgets/sf_buttons.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
 import 'package:slee_fi/l10n/locale_keys.g.dart';
 
 class PopUpWalletWarning extends StatelessWidget {
-  const PopUpWalletWarning({Key? key}) : super(key: key);
+  final VoidCallback? onPressed;
+  const PopUpWalletWarning({this.onPressed, Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -28,7 +30,16 @@ class PopUpWalletWarning extends StatelessWidget {
             keyText: LocaleKeys.caution_please_check_your_seed_phrase,
             style: TextStyles.lightGrey16.copyWith(height: 1.5),
             textAlign: TextAlign.center,
-          )
+          ),
+          const SizedBox(height: 24),
+          SFButton(
+            text: LocaleKeys.confirm,
+            textStyle: TextStyles.w600WhiteSize16,
+            height: 48,
+            width: double.infinity,
+            color: AppColors.blue,
+            onPressed: onPressed,
+          ),
         ],
       ),
     );
