@@ -2,10 +2,12 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:slee_fi/common/const/const.dart';
 import 'package:slee_fi/common/extensions/string_x.dart';
 import 'package:slee_fi/common/routes/app_routes.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
+import 'package:slee_fi/common/widgets/sf_alert_dialog.dart';
 import 'package:slee_fi/common/widgets/sf_button_outlined.dart';
 import 'package:slee_fi/common/widgets/sf_icon.dart';
 import 'package:slee_fi/common/widgets/sf_percent_border.dart';
@@ -16,6 +18,8 @@ import 'package:slee_fi/presentation/blocs/home/home_bloc.dart';
 import 'package:slee_fi/presentation/blocs/home/home_state.dart';
 import 'package:slee_fi/presentation/screens/home/widgets/button_start.dart';
 import 'package:slee_fi/presentation/screens/home/widgets/home_switch.dart';
+import 'package:slee_fi/presentation/screens/home/widgets/pop_up_confirm_speed_up.dart';
+import 'package:slee_fi/presentation/screens/home/widgets/popup_open_lucky_box.dart';
 import 'package:slee_fi/presentation/screens/home/widgets/time_picker.dart';
 import 'package:slee_fi/resources/resources.dart';
 
@@ -135,28 +139,40 @@ class AlarmBell extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
                   ViewGif(
-                      showLuckyBox:
-                          state is HomeLoaded && state.luckyBoxes.isNotEmpty),
+                    index: 0,
+                    onTap: () {},
+                    bedEntity: _boxWithIndex(state, 0),
+                  ),
                   const SizedBox(height: 20),
                   ViewGif(
-                      showLuckyBox:
-                          state is HomeLoaded && state.luckyBoxes.length >= 2),
+                    index: 1,
+                    bedEntity: _boxWithIndex(state, 1),
+                    onTap: () {},
+                  ),
                   const SizedBox(height: 20),
                   ViewGif(
-                      showLuckyBox:
-                          state is HomeLoaded && state.luckyBoxes.length >= 3),
+                    index: 2,
+                    bedEntity: _boxWithIndex(state, 2),
+                    onTap: () {},
+                  ),
                   const SizedBox(height: 20),
                   ViewGif(
-                      showLuckyBox:
-                          state is HomeLoaded && state.luckyBoxes.length >= 4),
+                    index: 2,
+                    bedEntity: _boxWithIndex(state, 3),
+                    onTap: () {},
+                  ),
                   const SizedBox(height: 20),
                   ViewGif(
-                      showLuckyBox:
-                          state is HomeLoaded && state.luckyBoxes.length >= 5),
+                    index: 4,
+                    bedEntity: _boxWithIndex(state, 4),
+                    onTap: () {},
+                  ),
                   const SizedBox(height: 20),
                   ViewGif(
-                      showLuckyBox:
-                          state is HomeLoaded && state.luckyBoxes.length >= 6),
+                    index: 5,
+                    bedEntity: _boxWithIndex(state, 5),
+                    onTap: () {},
+                  ),
                 ],
               );
             },
@@ -167,9 +183,14 @@ class AlarmBell extends StatelessWidget {
     );
   }
 
+  LuckyBoxEntity? _boxWithIndex(HomeState state, int index) {
+    return state is HomeLoaded && state.luckyBoxes.length > index
+        ? state.luckyBoxes[index]
+        : null;
+  }
+
   bool _theSameList(
       List<LuckyBoxEntity> currentList, List<LuckyBoxEntity> prevList) {
-    'check size is ${prevList.length}   ${currentList.length}'.log;
     if (currentList.length == prevList.length) {
       for (int i = 0; i < prevList.length; i++) {
         var index =
@@ -183,25 +204,71 @@ class AlarmBell extends StatelessWidget {
 }
 
 class ViewGif extends StatelessWidget {
-  const ViewGif({Key? key, required this.showLuckyBox}) : super(key: key);
-  final bool showLuckyBox;
+  const ViewGif(
+      {Key? key,
+      required this.onTap,
+      required this.index,
+      required this.bedEntity})
+      : super(key: key);
+  final LuckyBoxEntity? bedEntity;
+  final Function() onTap;
+  final int index;
 
   @override
   Widget build(BuildContext context) {
-    'show lucky box $showLuckyBox'.log;
-    return Container(
-      width: 48,
-      height: 48,
-      padding: EdgeInsets.all(showLuckyBox ? 0 : 12),
-      decoration: BoxDecoration(
-        color: AppColors.darkColor,
-        borderRadius: BorderRadius.circular(16),
-        border: Border.all(color: AppColors.borderDarkColor, width: 1),
-      ),
-      child: SFIcon(
-        showLuckyBox ? Imgs.icLuckyBoxGreen : Ics.gift,
-        color: showLuckyBox ? null : AppColors.borderDarkColor,
+    return GestureDetector(
+      onTap: () {
+        'bed entity is  $bedEntity'.log;
+        if (bedEntity != null) {
+          onTap;
+          _showPopUpInfoLuckyBox(
+            context,
+            Const.luckyBoxes[index % 5],
+            bedEntity!.speedUpCost,
+            bedEntity!.waitingTime,
+            bedEntity!.id,
+          );
+        }
+      },
+      child: Container(
+        width: 48,
+        height: 48,
+        padding: EdgeInsets.all(bedEntity != null ? 0 : 12),
+        decoration: BoxDecoration(
+          color: AppColors.darkColor,
+          borderRadius: BorderRadius.circular(16),
+          border: Border.all(color: AppColors.borderDarkColor, width: 1),
+        ),
+        child: SFIcon(
+          bedEntity != null ? Const.luckyBoxes[index % 5] : Ics.gift,
+          color: bedEntity != null ? null : AppColors.borderDarkColor,
+        ),
       ),
     );
+  }
+
+  _showPopUpInfoLuckyBox(BuildContext context, String image, String speedUpCost,
+      int waitingTime, int id) {
+    showCustomAlertDialog(context,
+        padding: const EdgeInsets.all(24),
+        children: PopUpOpenLuckyBox(
+            cost: speedUpCost,
+            image: image,
+            id: id,
+            waitingTime: waitingTime,
+            onConfirm: () {
+              _showConfirmSpeedUp(context, speedUpCost, id);
+            }));
+  }
+
+  _showConfirmSpeedUp(BuildContext context, String amount, int id) {
+    showCustomAlertDialog(context,
+        padding: const EdgeInsets.all(24),
+        children: PupUpConfirmSpeedUp(
+          amount: amount,
+          onConfirm: () {
+            context.read<HomeBloc>().add(SpeedUpLuckyBox(id));
+          },
+        ));
   }
 }

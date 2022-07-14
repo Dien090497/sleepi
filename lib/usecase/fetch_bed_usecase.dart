@@ -32,5 +32,9 @@ class FetchBedParam {
   final CategoryType categoryId;
   final AttributeNFT attributeNFT;
 
-  FetchBedParam(this.page, this.limit, this.categoryId, this.attributeNFT);
+  /// [bedType]   default is  [bedType] = bed,  bedbox  if [bedType] = bedbox**/
+  final String bedType;
+
+  FetchBedParam(this.page, this.limit, this.categoryId, this.attributeNFT,
+      {this.bedType = 'bed'});
 }

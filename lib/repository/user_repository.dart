@@ -11,6 +11,7 @@ import 'package:slee_fi/models/token_spending/token_spending.dart';
 import 'package:slee_fi/models/withdraw_history_response/withdraw_history_response.dart';
 import 'package:slee_fi/schema/change_password_schema/change_password_schema.dart';
 import 'package:slee_fi/schema/param_filler_item_fetch/filter_item_schema.dart';
+import 'package:slee_fi/schema/speed_up_lucky_box_schema/speed_up_lucky_box_schema.dart';
 import 'package:slee_fi/schema/white_draw_token_schema/whit_draw_token_schema.dart';
 import 'package:slee_fi/usecase/add_item_to_bed_usecase.dart';
 import 'package:slee_fi/usecase/estimate_gas_withdraw.dart';
@@ -47,4 +48,6 @@ abstract class IUserRepository {
   Future<Either<FailureMessage, dynamic>> openLuckyBox(int luckyBoxId);
 
   Future<Either<FailureMessage, EstimateSleepResponse>> estimateTracking(EstimateTrackingParam estimateTrackingParam);
+
+  Future<Either<FailureMessage, dynamic>> speedUpLuckyBox(SpeedUpLuckyBoxSchema speedUpLuckyBoxSchema);
 }
