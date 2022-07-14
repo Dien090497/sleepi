@@ -77,26 +77,29 @@ class AlarmBell extends StatelessWidget {
               const SizedBox(height: 32),
               Row(
                 children: [
-                  Stack(
-                    alignment: Alignment.centerLeft,
-                    children: [
-                      SFPercentBorderGradient(
-                        valueActive: state is HomeLoaded ? state.tokenEarn : 0,
-                        totalValue: 150,
-                        linearGradient: AppColors.gradientBluePurple,
-                        lineHeight: 18,
-                        barRadius: 20,
-                        backgroundColor: Colors.white.withOpacity(0.05),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                        child: SFText(
-                          keyText:
-                              '${state is HomeLoaded ? state.tokenEarn : 0}/150 SLFT',
-                          style: TextStyles.white10,
+                  Expanded(
+                    child: Stack(
+                      alignment: Alignment.centerLeft,
+                      children: [
+                        SFPercentBorderGradient(
+                          valueActive:
+                              state is HomeLoaded ? state.tokenEarn : 0,
+                          totalValue: 150,
+                          linearGradient: AppColors.gradientBluePurple,
+                          lineHeight: 18,
+                          barRadius: 20,
+                          backgroundColor: Colors.white.withOpacity(0.05),
                         ),
-                      )
-                    ],
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                          child: SFText(
+                            keyText:
+                                '${state is HomeLoaded ? state.tokenEarn : 0}/150 SLFT',
+                            style: TextStyles.white10,
+                          ),
+                        )
+                      ],
+                    ),
                   ),
                   const SizedBox(width: 12),
                   GestureDetector(
