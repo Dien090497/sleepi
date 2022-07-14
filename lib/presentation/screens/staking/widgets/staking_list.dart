@@ -54,14 +54,14 @@ class _StakingListState extends State<StakingList> {
   }
 
   String get checkValueTotalReward{
-    if(stakingInfo == null || stakingInfo!.stake.totalReward == double.infinity.toString() || stakingInfo!.stake.totalReward == double.nan.toString()){
+    if(stakingInfo == null ||  stakingInfo!.stake.totalReward == null || stakingInfo!.stake.totalReward == double.infinity.toString() || stakingInfo!.stake.totalReward == double.nan.toString()){
       return "0";
     }
     return stakingInfo!.stake.totalReward!;
   }
 
   String get checkValueTotalStake{
-    if(stakingInfo == null  || stakingInfo!.stake.totalStake == double.infinity.toString() || stakingInfo!.stake.totalStake == double.nan.toString()){
+    if(stakingInfo == null  || stakingInfo!.stake.totalStake == null || stakingInfo!.stake.totalStake == double.infinity.toString() || stakingInfo!.stake.totalStake == double.nan.toString()){
       return "0";
     }
     return stakingInfo!.stake.totalStake!;
@@ -363,7 +363,7 @@ class _StakingListState extends State<StakingList> {
                                     PopUpStaking(
                                       message: LocaleKeys.do_you_really_want_to_compound
                                           .tr(namedArgs: {
-                                        'amount': double.parse(checkValueTotalStake).formatBalanceToken,
+                                        'amount': double.parse(checkValueTotalReward).formatBalanceToken,
                                         'token': 'SLFT',
                                       }),
                                       onPressed: () => cubit.compound(),
