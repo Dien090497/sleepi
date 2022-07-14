@@ -393,7 +393,7 @@ class _StakingListState extends State<StakingList> {
                 height: 48.0,
               ),
               SFButton(
-                text: LocaleKeys.buy_token.tr(namedArgs: {'token': 'SLFT'}),
+                text: Localizations.localeOf(context).toLanguageTag().isJapanese ? 'SLFT ${LocaleKeys.buy.tr()}' : '${LocaleKeys.buy.tr()} SLFT',
                 textStyle: TextStyles.boldWhite14,
                 color: AppColors.blue,
                 width: double.infinity,
