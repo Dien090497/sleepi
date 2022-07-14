@@ -4,6 +4,7 @@ import 'package:slee_fi/common/utils/appsflyer_custom.dart';
 import 'package:slee_fi/common/widgets/background_widget.dart';
 import 'package:slee_fi/common/widgets/keep_alive_wrapper.dart';
 import 'package:slee_fi/common/widgets/sf_bottom_navigator_home.dart';
+import 'package:slee_fi/common/widgets/sf_tab_bar.dart';
 import 'package:slee_fi/di/injector.dart';
 import 'package:slee_fi/presentation/blocs/bottom_navigation/bottom_navigation_bloc.dart';
 import 'package:slee_fi/presentation/blocs/bottom_navigation/bottom_navigation_state.dart';
@@ -21,15 +22,15 @@ class BottomNavigationScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     context.read<WalletCubit>().checkWallet();
     final app = getIt<AppFlyerCustom>();
-
+    final GlobalKey<SFTabBarState> marketTabKey = GlobalKey();
     final PageController pageController = PageController();
 
-    const screens = [
-      KeepAliveWrapper(child: HomeScreen()),
-      KeepAliveWrapper(child: GachaScreen()),
-      KeepAliveWrapper(child: ProductDetailScreen()),
-      KeepAliveWrapper(child: ChartScreen()),
-      KeepAliveWrapper(child: MarketPlaceScreen()),
+    var screens = [
+      const KeepAliveWrapper(child: HomeScreen()),
+      const KeepAliveWrapper(child: GachaScreen()),
+      const KeepAliveWrapper(child: ProductDetailScreen()),
+      const KeepAliveWrapper(child: ChartScreen()),
+      KeepAliveWrapper(child: MarketPlaceScreen(tabKey: marketTabKey)),
     ];
 
     // WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
@@ -41,6 +42,10 @@ class BottomNavigationScreen extends StatelessWidget {
     return BlocConsumer<BottomNavigationBloc, BottomNavigationState>(
       listener: (context, state) {
         pageController.jumpToPage(state.tabIndex);
+        if (state.tabIndexChild > 0) {
+          Future.delayed(const Duration(milliseconds: 500),
+              () => marketTabKey.currentState?.moveToTab(state.tabIndexChild));
+        }
       },
       builder: (context, navState) {
         return BackgroundWidget(

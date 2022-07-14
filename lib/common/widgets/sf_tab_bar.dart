@@ -18,10 +18,10 @@ class SFTabBar extends StatefulWidget {
   final bool isScrollable;
 
   @override
-  State<SFTabBar> createState() => _SFTabBarState();
+  State<SFTabBar> createState() => SFTabBarState();
 }
 
-class _SFTabBarState extends State<SFTabBar>
+class SFTabBarState extends State<SFTabBar>
     with SingleTickerProviderStateMixin {
   late final TabController _tabController =
       TabController(length: widget.texts.length, vsync: this);
@@ -40,6 +40,11 @@ class _SFTabBarState extends State<SFTabBar>
   void dispose() {
     super.dispose();
     _tabController.dispose();
+  }
+
+  moveToTab(int index) {
+    if (_tabController.index == index) return;
+    _tabController.animateTo(index);
   }
 
   @override
