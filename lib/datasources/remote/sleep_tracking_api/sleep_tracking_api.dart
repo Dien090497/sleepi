@@ -5,6 +5,7 @@ import 'package:retrofit/retrofit.dart';
 import 'package:slee_fi/common/const/const.dart';
 import 'package:slee_fi/datasources/remote/auth_datasource/auth_interceptor.dart';
 import 'package:slee_fi/datasources/remote/auth_datasource/refresh_token_interceptor.dart';
+import 'package:slee_fi/models/estimate_sleep_response/estimate_sleep_response.dart';
 import 'package:slee_fi/models/list_nft_data_model/list_nft_data_model.dart';
 
 part 'sleep_tracking_api.g.dart';
@@ -27,5 +28,12 @@ abstract class SleepTrackingApi {
     @Query('bedUsed') int bedId,
     @Query('itemUsed') int? itemId,
     @Query('isEnableInsurance') bool isEnableInsurance,
+  );
+
+  @GET('/tracking/estimate-tracking')
+  Future<EstimateSleepResponse> estimateSleepEarn(
+    @Query('bedUsed') int bedId,
+    @Query('itemUsed') int itemId,
+    @Query('isEnableInsurance') bool enableInsurance,
   );
 }

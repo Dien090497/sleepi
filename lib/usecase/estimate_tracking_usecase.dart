@@ -1,18 +1,18 @@
 import 'package:dartz/dartz.dart';
 import 'package:slee_fi/failures/failure.dart';
 import 'package:slee_fi/models/estimate_sleep_response/estimate_sleep_response.dart';
-import 'package:slee_fi/repository/user_repository.dart';
+import 'package:slee_fi/repository/sleep_tracking_repository.dart';
 import 'package:slee_fi/usecase/usecase.dart';
 
 class EstimateTrackingUseCase
     extends UseCase<EstimateSleepResponse, EstimateTrackingParam> {
-  final IUserRepository _iUserRepository;
+  final ISleepTrackingRepository _sleepTrackingRepository;
 
-  EstimateTrackingUseCase(this._iUserRepository);
+  EstimateTrackingUseCase(this._sleepTrackingRepository);
 
   @override
   Future<Either<Failure, EstimateSleepResponse>> call(params) {
-    return _iUserRepository.estimateTracking(params);
+    return _sleepTrackingRepository.estimateTracking(params);
   }
 }
 
