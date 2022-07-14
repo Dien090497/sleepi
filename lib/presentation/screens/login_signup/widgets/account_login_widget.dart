@@ -48,7 +48,10 @@ class _AccountLoginState extends State<AccountLoginWidget> {
   }
 
   bool get _isActiveCode {
-    return action == Action.signUp ;
+    if (action == Action.signUp || action == Action.forgotPassword) {
+      return true;
+    }
+    return false;
   }
 
   String get _textButton {
