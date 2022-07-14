@@ -407,5 +407,6 @@
   "wallet_imported_successfully": "Wallet imported successfully",
   "insufficient_amount": "Insufficient amount",
   "invalid_address": "Invalid address. Please try again",
-  "you_dont_have_enough_money_to_staking": "You don't have enough money to staking."
+  "you_dont_have_enough_money_to_staking": "You don't have enough money to staking.",
+  "buy_token": "{token} 購入"
 }
