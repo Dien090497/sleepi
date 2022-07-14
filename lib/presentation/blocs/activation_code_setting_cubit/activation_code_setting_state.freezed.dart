@@ -490,7 +490,7 @@ abstract class ActivationCodeSettingStateSuccess
   const factory ActivationCodeSettingStateSuccess(
       final List<ActiveCodeEntity> list) = _$ActivationCodeSettingStateSuccess;
 
-  List<ActiveCodeEntity> get list;
+  List<ActiveCodeEntity> get list => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
   _$$ActivationCodeSettingStateSuccessCopyWith<
           _$ActivationCodeSettingStateSuccess>
@@ -645,7 +645,7 @@ abstract class ActivationCodeSettingStateError
   const factory ActivationCodeSettingStateError(final String message) =
       _$ActivationCodeSettingStateError;
 
-  String get message;
+  String get message => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
   _$$ActivationCodeSettingStateErrorCopyWith<_$ActivationCodeSettingStateError>
       get copyWith => throw _privateConstructorUsedError;

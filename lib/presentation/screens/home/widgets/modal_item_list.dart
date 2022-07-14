@@ -11,6 +11,8 @@ import 'package:slee_fi/common/widgets/sf_gridview.dart';
 import 'package:slee_fi/common/widgets/sf_icon.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
 import 'package:slee_fi/l10n/locale_keys.g.dart';
+import 'package:slee_fi/presentation/blocs/bottom_navigation/bottom_navigation_bloc.dart';
+import 'package:slee_fi/presentation/blocs/bottom_navigation/bottom_navigation_event.dart';
 import 'package:slee_fi/presentation/blocs/home/home_bloc.dart';
 import 'package:slee_fi/presentation/blocs/home/home_state.dart';
 import 'package:slee_fi/presentation/screens/home/widgets/my_jewel_short_widget.dart';
@@ -106,13 +108,24 @@ class ModalItemList extends StatelessWidget {
             ),
           ),
           const SizedBox(height: 16),
-          SFButton(
-              text: LocaleKeys.cancel,
-              width: MediaQuery.of(context).size.width * 0.9,
-              color: AppColors.blue,
-              textStyle: TextStyles.w600WhiteSize16,
-              height: 48,
-              onPressed: () => Navigator.pop(context)),
+          BlocBuilder<HomeBloc, HomeState>(
+            bloc: homeBloc,
+            builder: (context, state) => SFButton(
+                text: state is HomeLoaded && state.itemList?.isNotEmpty == true
+                    ? LocaleKeys.cancel
+                    : LocaleKeys.buy,
+                width: MediaQuery.of(context).size.width * 0.9,
+                color: AppColors.blue,
+                textStyle: TextStyles.w600WhiteSize16,
+                height: 48,
+                onPressed: () {
+                  Navigator.pop(context);
+                  if (state is HomeLoaded && state.itemList?.isEmpty == true) {
+                    BlocProvider.of<BottomNavigationBloc>(context)
+                        .add(const SelectTab(4,indexTabChild: 2));
+                  }
+                }),
+          ),
           const SizedBox(
             height: 16,
           )

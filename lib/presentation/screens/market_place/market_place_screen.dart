@@ -9,7 +9,8 @@ import 'package:slee_fi/presentation/screens/market_place/widget/tab_jewels_buy.
 import 'package:slee_fi/presentation/screens/market_place/widget/tab_trophys_buy.dart';
 
 class MarketPlaceScreen extends StatelessWidget {
-  const MarketPlaceScreen({Key? key}) : super(key: key);
+  const MarketPlaceScreen({Key? key, required this.tabKey}) : super(key: key);
+  final GlobalKey<SFTabBarState> tabKey;
 
   @override
   Widget build(BuildContext context) {
@@ -17,19 +18,20 @@ class MarketPlaceScreen extends StatelessWidget {
       child: SafeArea(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
-          children: const [
-            TopBarCommon(),
-            SizedBox(height: 20),
+          children: [
+            const TopBarCommon(),
+            const SizedBox(height: 20),
             Expanded(
               child: SFTabBar(
+                key: tabKey,
                 isScrollable: true,
-                texts: [
+                texts: const [
                   LocaleKeys.beds,
                   LocaleKeys.jewels,
                   LocaleKeys.item,
                   LocaleKeys.trophy
                 ],
-                children: [
+                children: const [
                   TabBedsBuy(),
                   TabJewelsBuy(),
                   TabItemsBuy(),

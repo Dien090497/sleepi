@@ -48,7 +48,8 @@ class ConnectBedWidget extends StatelessWidget {
                       child: Container(
                         alignment: Alignment.center,
                         child: state.indexSelected != -1
-                            ? SFIcon(beds[state.indexSelected].image)
+                            // TODO example data
+                            ? const SFIcon(Imgs.shortBed)
                             : GestureDetector(
                                 onTap: () {
                                   // showCustomDialog(context, children: [

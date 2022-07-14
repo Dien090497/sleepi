@@ -87,3 +87,12 @@ class FetchLuckyBox extends HomeEvent {
   @override
   List<Object?> get props => [];
 }
+
+class SpeedUpLuckyBox extends HomeEvent {
+  final int id;
+
+  const SpeedUpLuckyBox(this.id);
+
+  @override
+  List<Object?> get props => [id];
+}

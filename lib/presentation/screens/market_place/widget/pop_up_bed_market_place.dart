@@ -64,6 +64,9 @@ class PopUpBedMarketPlace extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final qualityColor = bed.quality != null
+        ? bed.quality!.qualityBedColor
+        : AppColors.commonBed;
     return Column(
       children: [
         SFText(
@@ -84,13 +87,14 @@ class PopUpBedMarketPlace extends StatelessWidget {
         // const SizedBox(height: 24),
         Container(
           decoration: BoxDecoration(
-            color: AppColors.blue.withOpacity(0.1),
+            color: qualityColor.withOpacity(0.1),
             borderRadius: BorderRadius.circular(100),
           ),
-          padding: const EdgeInsets.all(8),
+          padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 12),
           child: SFText(
-            keyText: bed.tokenId.toString(),
-            style: TextStyles.blue14,
+            keyText: bed.id.toString(),
+            style: TextStyle(
+                fontSize: 14, color: qualityColor, fontWeight: FontWeight.w500),
           ),
         ),
         const SizedBox(height: 32),

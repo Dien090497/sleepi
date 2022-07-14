@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:slee_fi/common/enum/enum.dart';
@@ -7,12 +9,14 @@ import 'package:slee_fi/entities/bed_entity/bed_entity.dart';
 import 'package:slee_fi/entities/item_entity/item_entity.dart';
 import 'package:slee_fi/presentation/blocs/home/home_state.dart';
 import 'package:slee_fi/schema/param_filler_item_fetch/filter_item_schema.dart';
+import 'package:slee_fi/schema/speed_up_lucky_box_schema/speed_up_lucky_box_schema.dart';
 import 'package:slee_fi/usecase/add_item_to_bed_usecase.dart';
 import 'package:slee_fi/usecase/estimate_tracking_usecase.dart';
 import 'package:slee_fi/usecase/fetch_bed_usecase.dart';
 import 'package:slee_fi/usecase/fetch_item_owner_usecase.dart';
 import 'package:slee_fi/usecase/fetch_lucky_box_usecase.dart';
 import 'package:slee_fi/usecase/remove_item_from_bed_usecase.dart';
+import 'package:slee_fi/usecase/speed_up_lucky_box_usecase.dart';
 import 'package:slee_fi/usecase/usecase.dart';
 
 part 'home_event.dart';
@@ -32,6 +36,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     on<EstimateTracking>(_estimateTracking);
     on<ChangeInsurance>(_changeInsurance);
     on<FetchLuckyBox>(_fetchLuckyBox);
+    on<SpeedUpLuckyBox>(_speedUpLuckyBox);
   }
 
   final _fetchListBedUC = getIt<FetchBedUseCase>();
@@ -40,6 +45,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
   final _fetchItemUC = getIt<FetchItemOwnerUseCase>();
   final _estimateTrackingUC = getIt<EstimateTrackingUseCase>();
   final _fetchLuckyBoxUC = getIt<FetchLuckyBoxUseCase>();
+  final _speedUpLuckyBoxUC = getIt<SpeedUpLuckyBoxUseCase>();
 
   int currentBedId = -1;
   int _currentPageBed = 1;
@@ -255,5 +261,19 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
         add(EstimateTracking());
       });
     }
+  }
+
+  FutureOr<void> _speedUpLuckyBox(
+      SpeedUpLuckyBox event, Emitter<HomeState> emit) async {
+    var result = await _speedUpLuckyBoxUC.call(SpeedUpLuckyBoxSchema(event.id));
+
+    result.fold((l) => null, (r) {
+      final currentState = state;
+      if (currentState is HomeLoaded) {
+        final luckyBoxes = currentState.luckyBoxes;
+        luckyBoxes.removeWhere((element) => element.id == event.id);
+        emit(currentState.copyWith(luckyBoxes: luckyBoxes));
+      }
+    });
   }
 }
