@@ -131,8 +131,7 @@ class _NFTDetailScreenState extends State<NFTDetailScreen> {
                                       ModalReceiveWallet(
                                         address: walletState
                                             .walletInfoEntity.address,
-                                        networkName:
-                                            LocaleKeys.avalanche_wallet,
+                                        networkName: walletState.walletInfoEntity.networkName ,
                                       ),
                                     )
                                 : null,

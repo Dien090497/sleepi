@@ -440,5 +440,6 @@
   "wallet_imported_successfully": "Wallet imported successfully",
   "insufficient_amount": "Insufficient amount",
   "you_dont_have_enough_money_to_staking": "You don't have enough money to staking.",
-  "buy_token": "Buy {token}"
+  "click_here_to_proceed": "Click here to proceed"
+
 }
