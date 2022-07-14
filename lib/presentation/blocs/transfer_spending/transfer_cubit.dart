@@ -65,7 +65,7 @@ class TransferCubit extends Cubit<TransferSpendingState> {
   }
 
   _estimateGasWithdraw(String contractAddress, String symbol) async {
-    var result = await _estimateGasWithdrawUC.call(EstimateGasWithdrawParam(
+    final result = await _estimateGasWithdrawUC.call(EstimateGasWithdrawParam(
         type: symbol, contractAddress: contractAddress));
     result.fold(
       (l) => emit(TransferSpendingState.error(message: l.msg)),
@@ -109,7 +109,7 @@ class TransferCubit extends Cubit<TransferSpendingState> {
       String amount, String symbol, String address) async {
     emit(const TransferSpendingState.loading());
     final result = await _transferToMainWalletUC
-        .call(WhitDrawTokenSchema(symbol, address, amount));
+        .call(WhitDrawTokenSchema(type: symbol, amount: amount, tokenAddress: address));
     result.fold(
       (l) => emit(TransferSpendingState.error(message: l.msg)),
       (r) => emit(const TransferSpendingState.toWalletSuccess()),

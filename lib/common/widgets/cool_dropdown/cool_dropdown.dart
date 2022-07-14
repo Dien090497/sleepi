@@ -133,7 +133,7 @@ class CoolDropdown extends StatefulWidget {
       if (dropdownList[i]['label'] == null) {
         throw '"label" must be initialized.';
       }
-      for (var j = 0; j < dropdownList.length; j++) {
+      for (int j = 0; j < dropdownList.length; j++) {
         if (i != j) {
           if (dropdownList[i]['label'] == dropdownList[j]['label']) {
             throw 'label is duplicated. Labels have to be unique.';

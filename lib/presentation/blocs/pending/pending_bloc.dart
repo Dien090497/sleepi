@@ -56,7 +56,7 @@ class PendingBloc extends Bloc<PendingEvent, PendingState> {
         },
         (r) {
           _currentPage++;
-          var newList = r.data.map((e) => e.toEntity()).toList();
+          final newList = r.data.map((e) => e.toEntity()).toList();
           emit(state.copyWith(
               status: PendingStatus.success,
               list: state.list + newList,

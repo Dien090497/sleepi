@@ -9,10 +9,12 @@ import 'package:slee_fi/datasources/remote/auth_datasource/refresh_token_interce
 import 'package:slee_fi/models/activation_code_response/activation_code_response.dart';
 import 'package:slee_fi/models/active_code_response/active_code_response.dart';
 import 'package:slee_fi/models/create_password_reponse/create_password_response.dart';
+import 'package:slee_fi/models/estimate_sleep_response/estimate_sleep_response.dart';
 import 'package:slee_fi/models/fetch_bed_response/fetch_bed_response.dart';
 import 'package:slee_fi/models/global_config_response/global_config_response.dart';
 import 'package:slee_fi/models/item_owner_response/item_owner_response.dart';
 import 'package:slee_fi/models/list_market_place/list_market_place_model.dart';
+import 'package:slee_fi/models/lucky_box/lucky_box.dart';
 import 'package:slee_fi/models/market_place/market_place_model.dart';
 import 'package:slee_fi/models/market_place/result_buy_model.dart';
 import 'package:slee_fi/models/refresh_token_model/refresh_token_model.dart';
@@ -31,7 +33,7 @@ import 'package:slee_fi/schema/buy_nft_schema/buy_nft_schema.dart';
 import 'package:slee_fi/schema/change_password_schema/change_password_schema.dart';
 import 'package:slee_fi/schema/create_password_schema/create_password_schema.dart';
 import 'package:slee_fi/schema/market/market_schema.dart';
-import 'package:slee_fi/schema/param_filler_item_fetch/filter_item_chema.dart';
+import 'package:slee_fi/schema/param_filler_item_fetch/filter_item_schema.dart';
 import 'package:slee_fi/schema/refresh_token_schema/refresh_token_schema.dart';
 import 'package:slee_fi/schema/sign_in_schema/sign_in_schema.dart';
 import 'package:slee_fi/schema/sign_up_schema/sign_up_schema.dart';
@@ -184,6 +186,7 @@ abstract class AuthDataSource {
     @Query('bedId') int bedId,
     @Query('itemId') int itemId,
   );
+
   @PUT('/nft-attributes/remove-item-from-bed')
   Future<dynamic> removeItemFromBed(
     @Query('bedId') int bedId,
@@ -191,11 +194,27 @@ abstract class AuthDataSource {
   );
 
   @POST('/nft-attributes/item-by-owner')
-  Future<ItemOwnerResponse> fetchItemOwner(@Body() FilterItemSchema filterItemSchema);
+  Future<ItemOwnerResponse> fetchItemOwner(
+      @Body() FilterItemSchema filterItemSchema);
 
   @POST('/stacking/unstacking')
   Future<dynamic> unStacking();
 
   @POST('/stacking/compound')
   Future<dynamic> compound();
+
+  //lucky box
+  @GET('/lucky_box')
+  Future<List<LuckyBox>> fetchLuckyBox();
+
+  @GET('/lucky_box/open')
+  Future<dynamic> openLuckyBox(@Query('luckyBoxId') luckyBoxId);
+
+  // sleep tracking
+  @GET('/tracking/estimate-tracking')
+  Future<EstimateSleepResponse> estimateSleepEarn(
+    @Query('bedUsed') int bedId,
+    @Query('itemUsed') int itemId,
+    @Query('isEnableInsurance') bool enableInsurance,
+  );
 }

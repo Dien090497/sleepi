@@ -17,6 +17,45 @@ class ButtonStart extends StatefulWidget {
 }
 
 class _ButtonStartState extends State<ButtonStart> {
+  bool countDownEnded = false;
+
+  @override
+  Widget build(BuildContext context) {
+    return HomeStartButton(
+      radius: 100,
+      gradient: countDownEnded ? AppColors.gradientBlueButton : null,
+      color: AppColors.lightDark,
+      height: 40,
+      width: double.infinity,
+      onPressed: () {
+        if (countDownEnded) {
+          showCustomAlertDialog(context,
+              children: PopUpConfirmStartTracking(
+                onPressed: () {},
+              ));
+        }
+      },
+      // child: startTime == 0 ? LocaleKeys.start.tr() : convertTimer(),
+      child: _CountDownText(
+        onEnd: () {
+          countDownEnded = true;
+          setState(() {});
+        },
+      ),
+    );
+  }
+}
+
+class _CountDownText extends StatefulWidget {
+  const _CountDownText({Key? key, required this.onEnd}) : super(key: key);
+
+  final VoidCallback onEnd;
+
+  @override
+  State<_CountDownText> createState() => _CountDownTextState();
+}
+
+class _CountDownTextState extends State<_CountDownText> {
   Timer? _timer;
   int startTime = 1 * 60;
 
@@ -37,6 +76,7 @@ class _ButtonStartState extends State<ButtonStart> {
       (Timer timer) {
         if (startTime == 0) {
           _timer?.cancel();
+          widget.onEnd();
         } else {
           setState(() {
             startTime--;
@@ -64,22 +104,9 @@ class _ButtonStartState extends State<ButtonStart> {
 
   @override
   Widget build(BuildContext context) {
-    return SFButton(
-      text: startTime == 0 ? LocaleKeys.start.tr() : convertTimer(),
-      textStyle: startTime == 0 ? TextStyles.white16 : TextStyles.lightGrey16,
-      radius: 100,
-      gradient: startTime == 0 ? AppColors.gradientBlueButton : null,
-      color: AppColors.lightDark,
-      height: 40,
-      width: double.infinity,
-      onPressed: () {
-        if (startTime == 0) {
-          showCustomAlertDialog(context,
-              children: PopUpConfirmStartTracking(
-                onPressed: () {},
-              ));
-        }
-      },
+    return Text(
+      startTime == 0 ? LocaleKeys.start.tr() : convertTimer(),
+      style: startTime == 0 ? TextStyles.white16 : TextStyles.lightGrey16,
     );
   }
 }
