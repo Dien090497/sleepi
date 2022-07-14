@@ -288,7 +288,6 @@ class _NFTDetailScreenState extends State<NFTDetailScreen> {
                             Navigator.pop(context);
                           },
                         );
-
                         isLoadingNotifier.value = false;
                       },
                     ),

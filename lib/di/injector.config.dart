@@ -363,8 +363,9 @@ Future<_i1.GetIt> $initGetIt(_i1.GetIt get,
   gh.factory<_i112.SendNftToSpendingUseCase>(() =>
       _i112.SendNftToSpendingUseCase(
           get<_i109.INFTRepository>(), get<_i27.SecureStorage>()));
-  gh.factory<_i113.SetNftApprovalForAllUseCase>(
-      () => _i113.SetNftApprovalForAllUseCase(get<_i109.INFTRepository>()));
+  gh.factory<_i113.SetNftApprovalForAllUseCase>(() =>
+      _i113.SetNftApprovalForAllUseCase(
+          get<_i109.INFTRepository>(), get<_i27.SecureStorage>()));
   gh.factory<_i114.TransferNftUseCase>(
       () => _i114.TransferNftUseCase(get<_i109.INFTRepository>()));
   gh.factory<_i115.EstimateNftFunctionFeeUseCase>(
