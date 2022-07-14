@@ -65,7 +65,7 @@ class MarketPlaceCubit extends Cubit<MarketPlaceState> {
       emit(MarketPlaceState.fail('$l'));
     }, (success) {
       error = false;
-      log("result : ${success.toString()}");
+      log("result : ${success.list.length}");
       if (success.list.length == limit) {
         page++;
         params = params.copyWith(page: page);
