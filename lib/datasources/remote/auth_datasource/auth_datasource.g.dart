@@ -566,6 +566,7 @@ class _AuthDataSource implements AuthDataSource {
 
   @override
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -608,6 +609,8 @@ class _AuthDataSource implements AuthDataSource {
 =======
 =======
 >>>>>>> 7ef0eee5 ([Feature] runner)
+=======
+>>>>>>> a5767436 ([Featuture)
   Future<List<LuckyBox>> fetchLuckyBox() async {
 >>>>>>> 86acc260 ([Feature] runner)
     const _extra = <String, dynamic>{};

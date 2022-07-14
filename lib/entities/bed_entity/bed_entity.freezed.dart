@@ -523,7 +523,6 @@ abstract class _BedEntity implements BedEntity {
   int get time;
   @override
   int get isMint;
-<<<<<<< HEAD
   @override
   double? get insurancePercent;
   @override
@@ -533,9 +532,12 @@ abstract class _BedEntity implements BedEntity {
   double? get endTime;
 =======
   int? get endTime;
+<<<<<<< HEAD
 =======
 >>>>>>> b87d9157 ([Feature] Fill data week chart)
 >>>>>>> 241819d2 ([Feature] Fill data week chart)
+=======
+>>>>>>> a5767436 ([Featuture)
   @override
   @JsonKey(ignore: true)
   _$$_BedEntityCopyWith<_$_BedEntity> get copyWith =>
