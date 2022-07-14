@@ -8,7 +8,6 @@ part of 'token_spending.dart';
 
 TokenSpending _$TokenSpendingFromJson(Map<String, dynamic> json) =>
     TokenSpending(
-      json['id'] as int,
       json['symbol'] as String,
       json['amount'] as String,
       json['userId'] as int,
@@ -19,7 +18,6 @@ TokenSpending _$TokenSpendingFromJson(Map<String, dynamic> json) =>
 
 Map<String, dynamic> _$TokenSpendingToJson(TokenSpending instance) =>
     <String, dynamic>{
-      'id': instance.id,
       'symbol': instance.symbol,
       'amount': instance.amount,
       'userId': instance.userId,

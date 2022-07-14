@@ -4,7 +4,6 @@ part 'token_spending.g.dart';
 
 @JsonSerializable()
 class TokenSpending {
-  final int id;
   final String symbol;
   final String amount;
   final int userId;
@@ -13,7 +12,6 @@ class TokenSpending {
   final String tokenAddress;
 
   TokenSpending(
-    this.id,
     this.symbol,
     this.amount,
     this.userId,

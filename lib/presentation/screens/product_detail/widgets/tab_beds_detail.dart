@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:slee_fi/common/extensions/string_x.dart';
 import 'package:slee_fi/common/routes/app_routes.dart';
 import 'package:slee_fi/common/widgets/sf_sub_tab_bar.dart';
 import 'package:slee_fi/l10n/locale_keys.g.dart';
@@ -33,13 +32,6 @@ class _TabBedsDetailState extends State<TabBedsDetail> {
             listener: (context, state) {
               if (state is NftListLoaded) {
                 listBeds = state.listBed;
-
-                'state is ${listBeds.length}   ${listBeds
-                    .where((element) {
-                      'type is  ${element.type}'.log;
-                      return element.type == 'beds';
-                })
-                    .toList().length}'.log;
               }
             },
             builder: (context, state) {
@@ -66,7 +58,8 @@ class _TabBedsDetailState extends State<TabBedsDetail> {
                                       ? state.isLoadMore
                                       : false,
                                   beds: listBeds
-                                      .where((element) => element.type == 'beds')
+                                      .where(
+                                          (element) => element.type == 'bed')
                                       .toList(),
                                   onRefresh: () {
                                     cubit.refresh(categoryType);

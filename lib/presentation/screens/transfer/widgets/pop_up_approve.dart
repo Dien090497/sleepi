@@ -82,7 +82,7 @@ class PopUpConfirmApprove extends StatelessWidget {
               ),
               Expanded(
                   child: SFText(
-                      keyText: tokenName.toUpperCase(),
+                      keyText: tokenName,
                       style: TextStyles.lightWhite16,
                       textAlign: TextAlign.end)),
             ],

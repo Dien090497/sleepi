@@ -47,17 +47,12 @@ class MiddleBed extends StatelessWidget {
             borderRadius: BorderRadius.circular(16),
           ),
           child: BlocBuilder<HomeBloc, HomeState>(
-            buildWhen: (previous, current) =>
-                (current is HomeLoaded && previous is! HomeLoaded) ||
-                (current is HomeLoaded &&
-                    previous is HomeLoaded &&
-                    previous.id != current.id),
             builder: (context, state) {
               return Column(
                 children: [
                   SizedBox(
                     width: size.width,
-                    height: 190.h,
+                    height: 200.h,
                     child: state is HomeLoaded
                         ? Swiper(
                             itemBuilder: (BuildContext context, int index) {
@@ -88,11 +83,7 @@ class MiddleBed extends StatelessWidget {
                                 return;
                               }
                               final bed = state.bedList[index];
-                              homeBloc.add(ChangeBed(
-                                  level: bed.level,
-                                  durability: bed.durability,
-                                  time: bed.time,
-                                  id: bed.id));
+                              homeBloc.add(ChangeBed(bed: bed));
                             },
                             loop: state.bedList.isNotEmpty,
                             itemCount: state.bedList.isEmpty
@@ -113,7 +104,9 @@ class MiddleBed extends StatelessWidget {
                     children: [
                       const Spacer(),
                       SFButton(
-                        text: state is HomeLoaded ? '${state.id}' : '00',
+                        text: state is HomeLoaded && state.selectedBed != null
+                            ? '${state.selectedBed!.id}'
+                            : '00',
                         textStyle: TextStyles.blue14,
                         color: Colors.white.withOpacity(0.05),
                         radius: 50,
@@ -122,7 +115,7 @@ class MiddleBed extends StatelessWidget {
                       const SizedBox(width: 8),
                       SFButton(
                         text:
-                            '${state is HomeLoaded ? state.durability % 1 == 0 ? state.durability.toInt() : state.durability : '100'}/100',
+                            '${state is HomeLoaded && state.selectedBed != null ? (state.selectedBed!.durability % 1 == 0 ? state.selectedBed!.durability.toInt() : state.selectedBed!.durability) : '0'}/100',
                         textStyle: TextStyles.green14,
                         color: Colors.white.withOpacity(0.05),
                         radius: 50,
@@ -130,7 +123,8 @@ class MiddleBed extends StatelessWidget {
                       ),
                       const SizedBox(width: 8),
                       SFButton(
-                        text: 'Lv${state is HomeLoaded ? state.level : '0'}',
+                        text:
+                            'Lv${state is HomeLoaded && state.selectedBed != null ? state.selectedBed!.level : '0'}',
                         textStyle: TextStyles.yellow14,
                         color: Colors.white.withOpacity(0.05),
                         radius: 50,
@@ -142,7 +136,7 @@ class MiddleBed extends StatelessWidget {
                   const SizedBox(height: 24),
                   SFText(
                     keyText:
-                        '${LocaleKeys.time.tr()}: ${state is HomeLoaded ? state.time : '0'}h',
+                        '${LocaleKeys.time.tr()}: ${state is HomeLoaded && state.selectedBed != null ? state.selectedBed!.time : '0'}h',
                     style: TextStyles.lightGrey12,
                   ),
                 ],
@@ -169,7 +163,7 @@ class _BuildBedItem extends StatelessWidget {
             Navigator.pushNamed(context, R.nftInfo,
                 arguments: InfoIndividualParams(buy: true, bed: bedEntity));
           },
-          child: CachedImage(image: bedEntity.image, height: 180),
+          child: CachedImage(image: bedEntity.image, height: 180.h),
         ),
       ],
     );

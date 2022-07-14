@@ -17,6 +17,7 @@ final _privateConstructorUsedError = UnsupportedError(
 /// @nodoc
 mixin _$BottomNavigationState {
   int get tabIndex => throw _privateConstructorUsedError;
+  int get tabIndexChild => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $BottomNavigationStateCopyWith<BottomNavigationState> get copyWith =>
@@ -28,7 +29,7 @@ abstract class $BottomNavigationStateCopyWith<$Res> {
   factory $BottomNavigationStateCopyWith(BottomNavigationState value,
           $Res Function(BottomNavigationState) then) =
       _$BottomNavigationStateCopyWithImpl<$Res>;
-  $Res call({int tabIndex});
+  $Res call({int tabIndex, int tabIndexChild});
 }
 
 /// @nodoc
@@ -43,11 +44,16 @@ class _$BottomNavigationStateCopyWithImpl<$Res>
   @override
   $Res call({
     Object? tabIndex = freezed,
+    Object? tabIndexChild = freezed,
   }) {
     return _then(_value.copyWith(
       tabIndex: tabIndex == freezed
           ? _value.tabIndex
           : tabIndex // ignore: cast_nullable_to_non_nullable
+              as int,
+      tabIndexChild: tabIndexChild == freezed
+          ? _value.tabIndexChild
+          : tabIndexChild // ignore: cast_nullable_to_non_nullable
               as int,
     ));
   }
@@ -60,7 +66,7 @@ abstract class _$$_BottomNavigationStateCopyWith<$Res>
           $Res Function(_$_BottomNavigationState) then) =
       __$$_BottomNavigationStateCopyWithImpl<$Res>;
   @override
-  $Res call({int tabIndex});
+  $Res call({int tabIndex, int tabIndexChild});
 }
 
 /// @nodoc
@@ -78,11 +84,16 @@ class __$$_BottomNavigationStateCopyWithImpl<$Res>
   @override
   $Res call({
     Object? tabIndex = freezed,
+    Object? tabIndexChild = freezed,
   }) {
     return _then(_$_BottomNavigationState(
       tabIndex: tabIndex == freezed
           ? _value.tabIndex
           : tabIndex // ignore: cast_nullable_to_non_nullable
+              as int,
+      tabIndexChild: tabIndexChild == freezed
+          ? _value.tabIndexChild
+          : tabIndexChild // ignore: cast_nullable_to_non_nullable
               as int,
     ));
   }
@@ -91,15 +102,18 @@ class __$$_BottomNavigationStateCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_BottomNavigationState implements _BottomNavigationState {
-  const _$_BottomNavigationState({this.tabIndex = 0});
+  const _$_BottomNavigationState({this.tabIndex = 0, this.tabIndexChild = -1});
 
   @override
   @JsonKey()
   final int tabIndex;
+  @override
+  @JsonKey()
+  final int tabIndexChild;
 
   @override
   String toString() {
-    return 'BottomNavigationState(tabIndex: $tabIndex)';
+    return 'BottomNavigationState(tabIndex: $tabIndex, tabIndexChild: $tabIndexChild)';
   }
 
   @override
@@ -107,12 +121,16 @@ class _$_BottomNavigationState implements _BottomNavigationState {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_BottomNavigationState &&
-            const DeepCollectionEquality().equals(other.tabIndex, tabIndex));
+            const DeepCollectionEquality().equals(other.tabIndex, tabIndex) &&
+            const DeepCollectionEquality()
+                .equals(other.tabIndexChild, tabIndexChild));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(tabIndex));
+  int get hashCode => Object.hash(
+      runtimeType,
+      const DeepCollectionEquality().hash(tabIndex),
+      const DeepCollectionEquality().hash(tabIndexChild));
 
   @JsonKey(ignore: true)
   @override
@@ -122,11 +140,13 @@ class _$_BottomNavigationState implements _BottomNavigationState {
 }
 
 abstract class _BottomNavigationState implements BottomNavigationState {
-  const factory _BottomNavigationState({final int tabIndex}) =
-      _$_BottomNavigationState;
+  const factory _BottomNavigationState(
+      {final int tabIndex, final int tabIndexChild}) = _$_BottomNavigationState;
 
   @override
   int get tabIndex;
+  @override
+  int get tabIndexChild;
   @override
   @JsonKey(ignore: true)
   _$$_BottomNavigationStateCopyWith<_$_BottomNavigationState> get copyWith =>

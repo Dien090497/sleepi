@@ -22,8 +22,8 @@ class BedEntity with _$BedEntity {
     required double resilience,
     required int time,
     required int isMint,
-    int? insurancePercent,
-    int? startTime,
-    int? endTime,
+    double? insurancePercent,
+    double? startTime,
+    double? endTime,
   }) = _BedEntity;
 }

@@ -1,13 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:slee_fi/common/routes/app_routes.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
 import 'package:slee_fi/common/widgets/sf_button_outlined.dart';
 import 'package:slee_fi/common/widgets/sf_buttons.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
 import 'package:slee_fi/l10n/locale_keys.g.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:slee_fi/presentation/screens/tracking/tracking_screen.dart';
 
 class PopUpConfirmStartTracking extends StatelessWidget {
   const PopUpConfirmStartTracking({this.onPressed, Key? key}) : super(key: key);
@@ -37,12 +35,6 @@ class PopUpConfirmStartTracking extends StatelessWidget {
                 textStyle: TextStyles.bold14LightWhite,
                 color: AppColors.blue,
                 onPressed: () {
-                  Navigator.pop(context);
-                  Navigator.pushNamed(context, R.tracking,
-                      arguments: TrackingParams(
-                        trackingId: 1,
-                        fromRoute: R.bottomNavigation,
-                      ));
                   if (onPressed != null) {
                     onPressed!();
                   }

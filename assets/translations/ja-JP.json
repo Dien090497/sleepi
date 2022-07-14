@@ -408,5 +408,5 @@
   "insufficient_amount": "Insufficient amount",
   "invalid_address": "Invalid address. Please try again",
   "you_dont_have_enough_money_to_staking": "You don't have enough money to staking.",
-  "buy_token": "{token} 購入"
+  "click_here_to_proceed": "Click here to proceed"
 }

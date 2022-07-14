@@ -42,5 +42,10 @@ class LuckyBox {
 
   Map<String, dynamic> toJson() => _$LuckyBoxToJson(this);
 
-  LuckyBoxEntity toEntity() => LuckyBoxEntity(id: id);
+  LuckyBoxEntity toEntity() => LuckyBoxEntity(
+      id: id,
+      isOpen: isOpen,
+      openCost: openingCost,
+      speedUpCost: speedUpCost,
+      waitingTime: waitingTime);
 }

@@ -84,7 +84,7 @@ class _TransferListState extends State<TransferList> {
                             addressContract: widget.tokenEntity.address)
                         .then((_) => Navigator.pop(context));
                   },
-                  tokenName: widget.tokenEntity.symbol,
+                  tokenName: widget.tokenEntity.symbol.toUpperCase(),
                 ),
               );
             }

@@ -131,8 +131,7 @@ class _NFTDetailScreenState extends State<NFTDetailScreen> {
                                       ModalReceiveWallet(
                                         address: walletState
                                             .walletInfoEntity.address,
-                                        networkName:
-                                            LocaleKeys.avalanche_wallet,
+                                        networkName: walletState.walletInfoEntity.networkName ,
                                       ),
                                     )
                                 : null,
@@ -269,7 +268,7 @@ class _NFTDetailScreenState extends State<NFTDetailScreen> {
                     context,
                     showClosed: false,
                     children: PopUpConfirmApprove(
-                      tokenName: '${nft.name} #${nft.attribute!.tokenId!}',
+                      tokenName: '${nft.symbol} #${nft.attribute!.tokenId!}',
                       onConfirm: () async {
                         isLoadingNotifier.value = true;
                         final approveRes =
