@@ -462,35 +462,35 @@ abstract class _NetworkEntity implements NetworkEntity {
       required final List<ExplorersEntity>? explorers}) = _$_NetworkEntity;
 
   @override
-  int get chainId => throw _privateConstructorUsedError;
+  int get chainId;
   @override
-  String get name => throw _privateConstructorUsedError;
+  String get name;
   @override
-  String? get title => throw _privateConstructorUsedError;
+  String? get title;
   @override
-  String get chain => throw _privateConstructorUsedError;
+  String get chain;
   @override
-  String? get icon => throw _privateConstructorUsedError;
+  String? get icon;
   @override
-  String? get network => throw _privateConstructorUsedError;
+  String? get network;
   @override
-  List<String> get rpc => throw _privateConstructorUsedError;
+  List<String> get rpc;
   @override
-  List<String> get faucets => throw _privateConstructorUsedError;
+  List<String> get faucets;
   @override
-  NativeCurrencyEntity get nativeCurrency => throw _privateConstructorUsedError;
+  NativeCurrencyEntity get nativeCurrency;
   @override
-  String get infoURL => throw _privateConstructorUsedError;
+  String get infoURL;
   @override
-  String get shortName => throw _privateConstructorUsedError;
+  String get shortName;
   @override
-  int get networkId => throw _privateConstructorUsedError;
+  int get networkId;
   @override
-  int? get slip44 => throw _privateConstructorUsedError;
+  int? get slip44;
   @override
-  EnsEntity? get ens => throw _privateConstructorUsedError;
+  EnsEntity? get ens;
   @override
-  List<ExplorersEntity>? get explorers => throw _privateConstructorUsedError;
+  List<ExplorersEntity>? get explorers;
   @override
   @JsonKey(ignore: true)
   _$$_NetworkEntityCopyWith<_$_NetworkEntity> get copyWith =>

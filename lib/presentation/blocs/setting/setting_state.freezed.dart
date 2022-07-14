@@ -487,7 +487,7 @@ abstract class SettingLoaded implements SettingState {
   const factory SettingLoaded({required final NetworkIsarModel network}) =
       _$SettingLoaded;
 
-  NetworkIsarModel get network => throw _privateConstructorUsedError;
+  NetworkIsarModel get network;
   @JsonKey(ignore: true)
   _$$SettingLoadedCopyWith<_$SettingLoaded> get copyWith =>
       throw _privateConstructorUsedError;

@@ -395,30 +395,29 @@ abstract class _WalletInfoEntity implements WalletInfoEntity {
       final String image}) = _$_WalletInfoEntity;
 
   @override
-  int get id => throw _privateConstructorUsedError;
+  int get id;
   @override
-  NativeCurrencyEntity get nativeCurrency => throw _privateConstructorUsedError;
+  NativeCurrencyEntity get nativeCurrency;
   @override
-  String get address => throw _privateConstructorUsedError;
+  String get address;
   @override
-  String get networkName => throw _privateConstructorUsedError;
+  String get networkName;
   @override
-  String get name => throw _privateConstructorUsedError;
+  String get name;
   @override
-  Credentials get credentials => throw _privateConstructorUsedError;
+  Credentials get credentials;
   @override
-  int get chainID => throw _privateConstructorUsedError;
+  int get chainID;
   @override
-  int? get derivedIndex => throw _privateConstructorUsedError;
+  int? get derivedIndex;
   @override
-  bool get isImported => throw _privateConstructorUsedError;
+  bool get isImported;
   @override // @Default([]) List<TokenEntity> tokens,
-  List<String> get nfts => throw _privateConstructorUsedError;
+  List<String> get nfts;
   @override
-  List<TransactionEntity> get transactions =>
-      throw _privateConstructorUsedError;
+  List<TransactionEntity> get transactions;
   @override
-  String get image => throw _privateConstructorUsedError;
+  String get image;
   @override
   @JsonKey(ignore: true)
   _$$_WalletInfoEntityCopyWith<_$_WalletInfoEntity> get copyWith =>

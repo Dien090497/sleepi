@@ -304,23 +304,23 @@ abstract class _TokenDefaultEntity implements TokenDefaultEntity {
       final List<String> txns}) = _$_TokenDefaultEntity;
 
   @override
-  int? get id => throw _privateConstructorUsedError;
+  int? get id;
   @override
-  String get slft => throw _privateConstructorUsedError;
+  String get slft;
   @override
-  String get slgt => throw _privateConstructorUsedError;
+  String get slgt;
   @override
-  String get wavax => throw _privateConstructorUsedError;
+  String get wavax;
   @override
-  String get bed => throw _privateConstructorUsedError;
+  String get bed;
   @override
-  String get jewels => throw _privateConstructorUsedError;
+  String get jewels;
   @override
-  String get bedBoxes => throw _privateConstructorUsedError;
+  String get bedBoxes;
   @override
-  String get items => throw _privateConstructorUsedError;
+  String get items;
   @override
-  List<String> get txns => throw _privateConstructorUsedError;
+  List<String> get txns;
   @override
   @JsonKey(ignore: true)
   _$$_TokenDefaultEntityCopyWith<_$_TokenDefaultEntity> get copyWith =>

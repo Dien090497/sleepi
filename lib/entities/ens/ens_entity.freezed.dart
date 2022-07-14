@@ -143,9 +143,9 @@ abstract class _EnsEntity implements EnsEntity {
   const factory _EnsEntity(final int id, final String registry) = _$_EnsEntity;
 
   @override
-  int get id => throw _privateConstructorUsedError;
+  int get id;
   @override
-  String get registry => throw _privateConstructorUsedError;
+  String get registry;
   @override
   @JsonKey(ignore: true)
   _$$_EnsEntityCopyWith<_$_EnsEntity> get copyWith =>

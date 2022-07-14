@@ -985,22 +985,22 @@ abstract class HomeLoaded implements HomeState {
       final bool enableInsurance,
       final double tokenEarn}) = _$HomeLoaded;
 
-  List<BedEntity> get bedList => throw _privateConstructorUsedError;
-  int get id => throw _privateConstructorUsedError;
-  int get level => throw _privateConstructorUsedError;
-  double get durability => throw _privateConstructorUsedError;
-  int get time => throw _privateConstructorUsedError;
-  BedEntity? get item => throw _privateConstructorUsedError;
-  List<ItemEntity>? get itemList => throw _privateConstructorUsedError;
-  List<LuckyBoxEntity> get luckyBoxes => throw _privateConstructorUsedError;
-  ItemEntity? get selectedItem => throw _privateConstructorUsedError;
-  String get errorMessage => throw _privateConstructorUsedError;
-  ErrorType get errorType => throw _privateConstructorUsedError;
-  bool get loadMoreBed => throw _privateConstructorUsedError;
-  bool get loadMoreItem => throw _privateConstructorUsedError;
-  bool get loading => throw _privateConstructorUsedError;
-  bool get enableInsurance => throw _privateConstructorUsedError;
-  double get tokenEarn => throw _privateConstructorUsedError;
+  List<BedEntity> get bedList;
+  int get id;
+  int get level;
+  double get durability;
+  int get time;
+  BedEntity? get item;
+  List<ItemEntity>? get itemList;
+  List<LuckyBoxEntity> get luckyBoxes;
+  ItemEntity? get selectedItem;
+  String get errorMessage;
+  ErrorType get errorType;
+  bool get loadMoreBed;
+  bool get loadMoreItem;
+  bool get loading;
+  bool get enableInsurance;
+  double get tokenEarn;
   @JsonKey(ignore: true)
   _$$HomeLoadedCopyWith<_$HomeLoaded> get copyWith =>
       throw _privateConstructorUsedError;
@@ -1204,7 +1204,7 @@ class _$HomeError with DiagnosticableTreeMixin implements HomeError {
 abstract class HomeError implements HomeState {
   const factory HomeError(final String message) = _$HomeError;
 
-  String get message => throw _privateConstructorUsedError;
+  String get message;
   @JsonKey(ignore: true)
   _$$HomeErrorCopyWith<_$HomeError> get copyWith =>
       throw _privateConstructorUsedError;

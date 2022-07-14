@@ -251,19 +251,19 @@ abstract class _NativeCurrencyEntity implements NativeCurrencyEntity {
       final bool balanceUpdated}) = _$_NativeCurrencyEntity;
 
   @override
-  int get id => throw _privateConstructorUsedError;
+  int get id;
   @override
-  String get name => throw _privateConstructorUsedError;
+  String get name;
   @override
-  String get symbol => throw _privateConstructorUsedError;
+  String get symbol;
   @override
-  int get decimals => throw _privateConstructorUsedError;
+  int get decimals;
   @override
-  String get icon => throw _privateConstructorUsedError;
+  String get icon;
   @override
-  double get balance => throw _privateConstructorUsedError;
+  double get balance;
   @override
-  bool get balanceUpdated => throw _privateConstructorUsedError;
+  bool get balanceUpdated;
   @override
   @JsonKey(ignore: true)
   _$$_NativeCurrencyEntityCopyWith<_$_NativeCurrencyEntity> get copyWith =>

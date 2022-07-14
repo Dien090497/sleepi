@@ -122,7 +122,7 @@ abstract class _LuckyBoxEntity implements LuckyBoxEntity {
   const factory _LuckyBoxEntity({required final int id}) = _$_LuckyBoxEntity;
 
   @override
-  int get id => throw _privateConstructorUsedError;
+  int get id;
   @override
   @JsonKey(ignore: true)
   _$$_LuckyBoxEntityCopyWith<_$_LuckyBoxEntity> get copyWith =>

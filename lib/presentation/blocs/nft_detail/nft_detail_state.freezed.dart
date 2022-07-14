@@ -429,10 +429,10 @@ abstract class NftDetailLoaded implements NftDetailState {
       required final List<NFTEntity> nftEntities,
       required final bool hasMore}) = _$NftDetailLoaded;
 
-  WalletInfoEntity get walletInfoEntity => throw _privateConstructorUsedError;
-  TokenEntity get tokenEntity => throw _privateConstructorUsedError;
-  List<NFTEntity> get nftEntities => throw _privateConstructorUsedError;
-  bool get hasMore => throw _privateConstructorUsedError;
+  WalletInfoEntity get walletInfoEntity;
+  TokenEntity get tokenEntity;
+  List<NFTEntity> get nftEntities;
+  bool get hasMore;
   @JsonKey(ignore: true)
   _$$NftDetailLoadedCopyWith<_$NftDetailLoaded> get copyWith =>
       throw _privateConstructorUsedError;
@@ -586,7 +586,7 @@ class _$NftDetailError with DiagnosticableTreeMixin implements NftDetailError {
 abstract class NftDetailError implements NftDetailState {
   const factory NftDetailError(final String msg) = _$NftDetailError;
 
-  String get msg => throw _privateConstructorUsedError;
+  String get msg;
   @JsonKey(ignore: true)
   _$$NftDetailErrorCopyWith<_$NftDetailError> get copyWith =>
       throw _privateConstructorUsedError;

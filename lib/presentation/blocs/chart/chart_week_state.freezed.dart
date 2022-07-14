@@ -390,9 +390,9 @@ abstract class ChartWeekLoaded implements ChartWeekState {
       required final DateTime firstAllowedDate,
       required final DateTime lastAllowedDate}) = _$ChartWeekLoaded;
 
-  DatePeriod get week => throw _privateConstructorUsedError;
-  DateTime get firstAllowedDate => throw _privateConstructorUsedError;
-  DateTime get lastAllowedDate => throw _privateConstructorUsedError;
+  DatePeriod get week;
+  DateTime get firstAllowedDate;
+  DateTime get lastAllowedDate;
   @JsonKey(ignore: true)
   _$$ChartWeekLoadedCopyWith<_$ChartWeekLoaded> get copyWith =>
       throw _privateConstructorUsedError;
@@ -546,7 +546,7 @@ class _$ChartWeekError with DiagnosticableTreeMixin implements ChartWeekError {
 abstract class ChartWeekError implements ChartWeekState {
   const factory ChartWeekError(final String msg) = _$ChartWeekError;
 
-  String get msg => throw _privateConstructorUsedError;
+  String get msg;
   @JsonKey(ignore: true)
   _$$ChartWeekErrorCopyWith<_$ChartWeekError> get copyWith =>
       throw _privateConstructorUsedError;
