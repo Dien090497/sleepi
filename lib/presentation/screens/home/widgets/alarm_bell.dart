@@ -28,60 +28,56 @@ class AlarmBell extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 16),
-      decoration: const BoxDecoration(
-        color: AppColors.dark,
-        borderRadius: BorderRadius.only(
-          topRight: Radius.circular(40),
-          topLeft: Radius.circular(40),
-        ),
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          const TimePicker(),
-          const SizedBox(height: 16),
-          Text(
-            '${LocaleKeys.range.tr()}: 03:00-06:00',
-            style: TextStyles.white16500,
+    return BlocBuilder<HomeBloc, HomeState>(
+      builder: (context, state) {
+        final bed = state is HomeLoaded ? state.selectedBed : null;
+        return Container(
+          padding: const EdgeInsets.symmetric(horizontal: 16),
+          decoration: const BoxDecoration(
+            color: AppColors.dark,
+            borderRadius: BorderRadius.only(
+              topRight: Radius.circular(40),
+              topLeft: Radius.circular(40),
+            ),
           ),
-          const SizedBox(height: 24),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              Expanded(
-                child: SFButtonOutLined(
-                  title: LocaleKeys.alarm_bell,
-                  onPressed: () {
-                    Navigator.pushNamed(context, R.alarmSoundEffect);
-                  },
-                  fixedSize: const Size(274, 40),
-                  textStyle: TextStyles.blue16,
-                  borderColor: AppColors.blue,
-                  iconColor: AppColors.blue,
-                  withBorder: 1,
-                ),
+              const TimePicker(),
+              const SizedBox(height: 16),
+              Text(
+                '${LocaleKeys.range.tr()}: ${state is HomeLoaded && bed != null ? '${DateTime.now().hour + bed.startTime!}' : '03:00-06:00'}',
+                style: TextStyles.white16500,
               ),
-              const SizedBox(width: 22),
-              HomeSwitch(
-                onChanged: (bool value) {},
+              const SizedBox(height: 24),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Expanded(
+                    child: SFButtonOutLined(
+                      title: LocaleKeys.alarm_bell,
+                      onPressed: () {
+                        Navigator.pushNamed(context, R.alarmSoundEffect);
+                      },
+                      fixedSize: const Size(274, 40),
+                      textStyle: TextStyles.blue16,
+                      borderColor: AppColors.blue,
+                      iconColor: AppColors.blue,
+                      withBorder: 1,
+                    ),
+                  ),
+                  const SizedBox(width: 22),
+                  HomeSwitch(
+                    onChanged: (bool value) {},
+                  ),
+                ],
               ),
-            ],
-          ),
-          const SizedBox(height: 16),
-          const ButtonStart(),
-          const SizedBox(height: 32),
-          Row(
-            children: [
-              Expanded(
-                child: BlocBuilder<HomeBloc, HomeState>(
-                  buildWhen: (previous, current) =>
-                      (current is HomeLoaded && previous is! HomeLoaded) ||
-                      ((current is HomeLoaded &&
-                          previous is HomeLoaded &&
-                          current.tokenEarn != previous.tokenEarn)),
-                  builder: (context, state) => Stack(
+              const SizedBox(height: 16),
+              const ButtonStart(),
+              const SizedBox(height: 32),
+              Row(
+                children: [
+                  Stack(
                     alignment: Alignment.centerLeft,
                     children: [
                       SFPercentBorderGradient(
@@ -102,84 +98,83 @@ class AlarmBell extends StatelessWidget {
                       )
                     ],
                   ),
-                ),
-              ),
-              const SizedBox(width: 12),
-              GestureDetector(
-                onTap: () => Navigator.pushNamed(context, R.question),
-                child: SvgPicture.asset(
-                  Ics.icCircleQuestion,
-                  width: 20,
-                  height: 20,
-                  color: AppColors.lightGrey,
-                ),
-              ),
-              const SizedBox(width: 12),
-              GestureDetector(
-                onTap: () => Navigator.pushNamed(context, R.feedback),
-                child: SvgPicture.asset(
-                  Ics.starOutlined,
-                  width: 20,
-                  height: 20,
-                  color: AppColors.yellow,
-                ),
-              ),
-            ],
-          ),
-          const SizedBox(height: 29),
-          BlocBuilder<HomeBloc, HomeState>(
-            buildWhen: (previous, current) {
-              return (previous is HomeLoaded &&
-                  current is HomeLoaded &&
-                  !_theSameList(current.luckyBoxes, previous.luckyBoxes));
-            },
-            builder: (context, state) {
-              'rebuild lucky box  '.log;
-              return Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  ViewGif(
-                    index: 0,
-                    onTap: () {},
-                    bedEntity: _boxWithIndex(state, 0),
+                  const SizedBox(width: 12),
+                  GestureDetector(
+                    onTap: () => Navigator.pushNamed(context, R.question),
+                    child: SvgPicture.asset(
+                      Ics.icCircleQuestion,
+                      width: 20,
+                      height: 20,
+                      color: AppColors.lightGrey,
+                    ),
                   ),
-                  const SizedBox(height: 20),
-                  ViewGif(
-                    index: 1,
-                    bedEntity: _boxWithIndex(state, 1),
-                    onTap: () {},
-                  ),
-                  const SizedBox(height: 20),
-                  ViewGif(
-                    index: 2,
-                    bedEntity: _boxWithIndex(state, 2),
-                    onTap: () {},
-                  ),
-                  const SizedBox(height: 20),
-                  ViewGif(
-                    index: 2,
-                    bedEntity: _boxWithIndex(state, 3),
-                    onTap: () {},
-                  ),
-                  const SizedBox(height: 20),
-                  ViewGif(
-                    index: 4,
-                    bedEntity: _boxWithIndex(state, 4),
-                    onTap: () {},
-                  ),
-                  const SizedBox(height: 20),
-                  ViewGif(
-                    index: 5,
-                    bedEntity: _boxWithIndex(state, 5),
-                    onTap: () {},
+                  const SizedBox(width: 12),
+                  GestureDetector(
+                    onTap: () => Navigator.pushNamed(context, R.feedback),
+                    child: SvgPicture.asset(
+                      Ics.starOutlined,
+                      width: 20,
+                      height: 20,
+                      color: AppColors.yellow,
+                    ),
                   ),
                 ],
-              );
-            },
+              ),
+              const SizedBox(height: 29),
+              BlocBuilder<HomeBloc, HomeState>(
+                buildWhen: (previous, current) {
+                  return (previous is HomeLoaded &&
+                      current is HomeLoaded &&
+                      !_theSameList(current.luckyBoxes, previous.luckyBoxes));
+                },
+                builder: (context, state) {
+                  return Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
+                      ViewGif(
+                        index: 0,
+                        onTap: () {},
+                        bedEntity: _boxWithIndex(state, 0),
+                      ),
+                      const SizedBox(height: 20),
+                      ViewGif(
+                        index: 1,
+                        bedEntity: _boxWithIndex(state, 1),
+                        onTap: () {},
+                      ),
+                      const SizedBox(height: 20),
+                      ViewGif(
+                        index: 2,
+                        bedEntity: _boxWithIndex(state, 2),
+                        onTap: () {},
+                      ),
+                      const SizedBox(height: 20),
+                      ViewGif(
+                        index: 2,
+                        bedEntity: _boxWithIndex(state, 3),
+                        onTap: () {},
+                      ),
+                      const SizedBox(height: 20),
+                      ViewGif(
+                        index: 4,
+                        bedEntity: _boxWithIndex(state, 4),
+                        onTap: () {},
+                      ),
+                      const SizedBox(height: 20),
+                      ViewGif(
+                        index: 5,
+                        bedEntity: _boxWithIndex(state, 5),
+                        onTap: () {},
+                      ),
+                    ],
+                  );
+                },
+              ),
+              const SizedBox(height: 20),
+            ],
           ),
-          const SizedBox(height: 20),
-        ],
-      ),
+        );
+      },
     );
   }
 

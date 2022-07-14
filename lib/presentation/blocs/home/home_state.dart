@@ -15,10 +15,7 @@ class HomeState with _$HomeState {
 
   const factory HomeState.loaded({
     required List<BedEntity> bedList,
-    required int id,
-    required int level,
-    required double durability,
-    required int time,
+    required BedEntity? selectedBed,
     BedEntity? item,
     List<ItemEntity>? itemList,
     @Default([]) List<LuckyBoxEntity> luckyBoxes,

@@ -69,7 +69,7 @@ class BedModel {
 
   final String status;
 
-  final int? insurancePercent;
+  final double? insurancePercent;
 
   final double? startTime;
 
@@ -132,8 +132,8 @@ class BedModel {
       special: special,
       resilience: resilience,
       time: time,
-      startTime: (startTime??0.0).toInt(),
-      endTime: (startTime??0.0).toInt(),
+      startTime: startTime??0.0,
+      endTime: startTime??0.0,
       insurancePercent: insurancePercent,
     );
   }

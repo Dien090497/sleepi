@@ -33,9 +33,9 @@ mixin _$BedEntity {
   double get resilience => throw _privateConstructorUsedError;
   int get time => throw _privateConstructorUsedError;
   int get isMint => throw _privateConstructorUsedError;
-  int? get insurancePercent => throw _privateConstructorUsedError;
-  int? get startTime => throw _privateConstructorUsedError;
-  int? get endTime => throw _privateConstructorUsedError;
+  double? get insurancePercent => throw _privateConstructorUsedError;
+  double? get startTime => throw _privateConstructorUsedError;
+  double? get endTime => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $BedEntityCopyWith<BedEntity> get copyWith =>
@@ -64,9 +64,9 @@ abstract class $BedEntityCopyWith<$Res> {
       double resilience,
       int time,
       int isMint,
-      int? insurancePercent,
-      int? startTime,
-      int? endTime});
+      double? insurancePercent,
+      double? startTime,
+      double? endTime});
 }
 
 /// @nodoc
@@ -172,15 +172,15 @@ class _$BedEntityCopyWithImpl<$Res> implements $BedEntityCopyWith<$Res> {
       insurancePercent: insurancePercent == freezed
           ? _value.insurancePercent
           : insurancePercent // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as double?,
       startTime: startTime == freezed
           ? _value.startTime
           : startTime // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as double?,
       endTime: endTime == freezed
           ? _value.endTime
           : endTime // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as double?,
     ));
   }
 }
@@ -209,9 +209,9 @@ abstract class _$$_BedEntityCopyWith<$Res> implements $BedEntityCopyWith<$Res> {
       double resilience,
       int time,
       int isMint,
-      int? insurancePercent,
-      int? startTime,
-      int? endTime});
+      double? insurancePercent,
+      double? startTime,
+      double? endTime});
 }
 
 /// @nodoc
@@ -319,15 +319,15 @@ class __$$_BedEntityCopyWithImpl<$Res> extends _$BedEntityCopyWithImpl<$Res>
       insurancePercent: insurancePercent == freezed
           ? _value.insurancePercent
           : insurancePercent // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as double?,
       startTime: startTime == freezed
           ? _value.startTime
           : startTime // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as double?,
       endTime: endTime == freezed
           ? _value.endTime
           : endTime // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as double?,
     ));
   }
 }
@@ -392,11 +392,11 @@ class _$_BedEntity implements _BedEntity {
   @override
   final int isMint;
   @override
-  final int? insurancePercent;
+  final double? insurancePercent;
   @override
-  final int? startTime;
+  final double? startTime;
   @override
-  final int? endTime;
+  final double? endTime;
 
   @override
   String toString() {
@@ -485,9 +485,9 @@ abstract class _BedEntity implements BedEntity {
       required final double resilience,
       required final int time,
       required final int isMint,
-      final int? insurancePercent,
-      final int? startTime,
-      final int? endTime}) = _$_BedEntity;
+      final double? insurancePercent,
+      final double? startTime,
+      final double? endTime}) = _$_BedEntity;
 
   @override
   String get name;
@@ -524,11 +524,11 @@ abstract class _BedEntity implements BedEntity {
   @override
   int get isMint;
   @override
-  int? get insurancePercent;
+  double? get insurancePercent;
   @override
-  int? get startTime;
+  double? get startTime;
   @override
-  int? get endTime;
+  double? get endTime;
   @override
   @JsonKey(ignore: true)
   _$$_BedEntityCopyWith<_$_BedEntity> get copyWith =>
