@@ -79,18 +79,19 @@ class PopUpAvalancheWallet extends StatelessWidget {
                                   Navigator.pop(context);
                                   showCustomAlertDialog(
                                     context,
-                                    children: const PopUpWalletWarning(),
-                                  ).then(
-                                    (value) => {
-                                      Navigator.pushNamed(context, R.createPasscode).then(
-                                        (value) {
-                                          if (value == true) {
-                                            cubit.createWallet();
-                                            isLoadingCreateWallet = true;
-                                          }
-                                        },
-                                      )
+                                    children:  PopUpWalletWarning(
+                                      onPressed: () {
+                                        Navigator.pop(context);
+                                        Navigator.pushNamed(context, R.createPasscode).then(
+                                              (value) {
+                                            if (value == true) {
+                                              cubit.createWallet();
+                                              isLoadingCreateWallet = true;
+                                            }
+                                          },
+                                        );
                                     },
+                                    ),
                                   );
                                 },
                               ),

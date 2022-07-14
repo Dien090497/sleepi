@@ -117,6 +117,7 @@ class EnterActivationCodeScreen extends StatelessWidget {
                                           Const.locales[index];
                                     },
                                   )),
+                              const SizedBox(height: 12,),
                               SFButton(
                                 text: LocaleKeys.start,
                                 color: AppColors.blue,
