@@ -194,6 +194,7 @@ class TextStyles {
   static const blue12 = TextStyle(fontSize: 14, color: AppColors.blue);
   static const blue12W700 = TextStyle(fontSize: 14, color: AppColors.blue, fontWeight: FontWeight.bold);
   static final blue14 = TextStyle(fontSize: 14.sp, color: AppColors.blue);
+  static final idBed = TextStyle(fontSize: 14.sp,fontWeight: FontWeight.w500);
   static const blue14W700 = TextStyle(
       fontSize: 14, color: AppColors.blue, fontWeight: FontWeight.w700);
   static const blue16 = TextStyle(fontSize: 16, color: AppColors.blue);

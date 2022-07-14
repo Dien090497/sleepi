@@ -4,16 +4,15 @@ import 'package:slee_fi/resources/resources.dart';
 enum UserRole { guest, admin }
 
 enum BedType {
-  short(LocaleKeys.short_bed, Imgs.shortBed, LocaleKeys.short),
-  middle(LocaleKeys.middle_bed, Imgs.middleBed, LocaleKeys.middle),
-  long(LocaleKeys.long_bed, Imgs.longBed, LocaleKeys.long),
-  flexible(LocaleKeys.flexible_bed, Imgs.flexibleBed, LocaleKeys.flexible);
+  short(LocaleKeys.short_bed, LocaleKeys.short),
+  middle(LocaleKeys.middle_bed, LocaleKeys.middle),
+  long(LocaleKeys.long_bed, LocaleKeys.long),
+  flexible(LocaleKeys.flexible_bed, LocaleKeys.flexible);
 
   final String name;
   final String type;
-  final String image;
 
-  const BedType(this.name, this.image, this.type);
+  const BedType(this.name, this.type);
 }
 
 enum ItemType {

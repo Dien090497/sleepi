@@ -57,7 +57,7 @@ class MiddleBed extends StatelessWidget {
                 children: [
                   SizedBox(
                     width: size.width,
-                    height: 190.h,
+                    height: 200.h,
                     child: state is HomeLoaded
                         ? Swiper(
                             itemBuilder: (BuildContext context, int index) {
@@ -169,7 +169,7 @@ class _BuildBedItem extends StatelessWidget {
             Navigator.pushNamed(context, R.nftInfo,
                 arguments: InfoIndividualParams(buy: true, bed: bedEntity));
           },
-          child: CachedImage(image: bedEntity.image, height: 180),
+          child: CachedImage(image: bedEntity.image, height: 180.h),
         ),
       ],
     );
