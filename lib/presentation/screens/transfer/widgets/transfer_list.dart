@@ -77,9 +77,14 @@ class _TransferListState extends State<TransferList> {
                 context,
                 showClosed: false,
                 children: PopUpConfirmApprove(
-                  cubit: cubit,
+                  onConfirm: () {
+                    cubit
+                        .approve(
+                            amount: 0,
+                            addressContract: widget.tokenEntity.address)
+                        .then((_) => Navigator.pop(context));
+                  },
                   tokenName: widget.tokenEntity.symbol,
-                  contractAddress: widget.tokenEntity.address,
                 ),
               );
             }

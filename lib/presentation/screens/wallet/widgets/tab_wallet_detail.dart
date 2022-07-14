@@ -280,7 +280,7 @@ class _TabWalletDetailState extends State<TabWalletDetail> {
     );
   }
 
-  _copyAddress(FToast fToast, BuildContext context, String address) {
+  void _copyAddress(FToast fToast, BuildContext context, String address) {
     Clipboard.setData(ClipboardData(text: address));
     ToastUtils.showToast(
       fToast,
