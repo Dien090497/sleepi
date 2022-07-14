@@ -269,7 +269,7 @@ class _NFTDetailScreenState extends State<NFTDetailScreen> {
                     context,
                     showClosed: false,
                     children: PopUpConfirmApprove(
-                      tokenName: '${nft.name} #${nft.attribute!.tokenId!}',
+                      tokenName: '${nft.symbol} #${nft.attribute!.tokenId!}',
                       onConfirm: () async {
                         isLoadingNotifier.value = true;
                         final approveRes =

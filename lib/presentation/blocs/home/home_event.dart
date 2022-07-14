@@ -26,19 +26,12 @@ class RemoveItem extends HomeEvent {
 }
 
 class ChangeBed extends HomeEvent {
-  final int level;
-  final double durability;
-  final int time;
-  final int id;
+  final BedEntity bed;
 
-  const ChangeBed(
-      {required this.level,
-      required this.durability,
-      required this.time,
-      required this.id});
+  const ChangeBed({required this.bed});
 
   @override
-  List<Object?> get props => [level, durability, time, id];
+  List<Object?> get props => [bed];
 }
 
 class RefreshBed extends HomeEvent {

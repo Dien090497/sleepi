@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:slee_fi/common/enum/enum.dart';
 import 'package:slee_fi/common/extensions/string_x.dart';
 import 'package:slee_fi/di/injector.dart';
+import 'package:slee_fi/entities/bed_entity/bed_entity.dart';
 import 'package:slee_fi/entities/item_entity/item_entity.dart';
 import 'package:slee_fi/presentation/blocs/home/home_state.dart';
 import 'package:slee_fi/schema/param_filler_item_fetch/filter_item_schema.dart';
@@ -65,10 +66,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
       if (currentState is HomeLoaded) {
         emit(currentState.copyWith(
           loadMoreBed: false,
-          durability: currentState.bedList.first.durability,
-          id: currentState.bedList.first.id,
-          level: currentState.bedList.first.level,
-          time: currentState.bedList.first.time,
+          selectedBed: currentState.bedList.first,
         ));
       }
     }, (r) {
@@ -78,24 +76,15 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
         if (r.isEmpty) {
           emit(currentState.copyWith(
             loadMoreBed: false,
-            durability: currentState.bedList.first.durability,
-            id: currentState.bedList.first.id,
-            level: currentState.bedList.first.level,
-            time: currentState.bedList.first.time,
+            selectedBed: currentState.bedList.first,
           ));
           return;
         }
         final newList =
             currentState.bedList + r.map((e) => e.toEntity()).toList();
 
-        emit(currentState.copyWith(
-          bedList: newList,
-          loadMoreBed: r.isNotEmpty,
-          durability: r.isEmpty ? 0 : r.first.durability,
-          id: r.isEmpty ? 0 : r.first.id,
-          level: r.isEmpty ? 0 : r.first.level,
-          time: r.isEmpty ? 0 : r.first.time,
-        ));
+        emit(
+            currentState.copyWith(bedList: newList, loadMoreBed: r.isNotEmpty));
       }
     });
   }
@@ -109,13 +98,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
   void _changeBed(ChangeBed event, Emitter<HomeState> emit) {
     final currentState = state;
     if (currentState is HomeLoaded) {
-      currentBedId = event.id;
-      emit(currentState.copyWith(
-        time: event.time,
-        level: event.level,
-        id: event.id,
-        durability: event.durability,
-      ));
+      emit(currentState.copyWith(selectedBed: event.bed));
     }
     add(EstimateTracking());
   }
@@ -127,10 +110,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
       (l) {
         emit(const HomeState.loaded(
           bedList: [],
-          durability: 0,
-          id: 0,
-          level: 0,
-          time: 0,
+          selectedBed: null,
           loadMoreBed: false,
           errorMessage: '',
         ));
@@ -145,25 +125,19 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
         if (currentState is HomeLoaded) {
           emit(currentState.copyWith(
               bedList: r.map((e) => e.toEntity()).toList(),
-              durability: r.isEmpty ? 0 : r.first.durability,
-              id: r.isEmpty ? 0 : r.first.id,
-              level: r.isEmpty ? 0 : r.first.level,
-              time: r.isEmpty ? 0 : r.first.time,
+              selectedBed: r.first.toEntity(),
               loadMoreBed: true,
               selectedItem: null));
           add(FetchLuckyBox());
           return;
         }
         emit(HomeState.loaded(
-            errorMessage: '',
-            loading: false,
-            bedList: r.map((e) => e.toEntity()).toList(),
-            durability: r.isEmpty ? 0 : r.first.durability,
-            id: r.isEmpty ? 0 : r.first.id,
-            level: r.isEmpty ? 0 : r.first.level,
-            selectedItem: null,
-            loadMoreBed: true,
-            time: r.isEmpty ? 0 : r.first.time));
+          errorMessage: '',
+          loading: false,
+          bedList: r.map((e) => e.toEntity()).toList(),
+          selectedBed: r.isNotEmpty ? r.first.toEntity() : null,
+          loadMoreBed: true,
+        ));
         add(FetchLuckyBox());
       },
     );
@@ -252,7 +226,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     final currentState = state;
     if (currentState is HomeLoaded && currentState.bedList.isNotEmpty) {
       var result = await _estimateTrackingUC.call(EstimateTrackingParam(
-          bedId: currentState.id,
+          bedId: currentState.selectedBed!.id,
           itemId: currentState.selectedItem?.id ?? 0,
           isEnableInsurance: currentState.enableInsurance));
       result.fold((l) => null, (r) {
