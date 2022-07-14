@@ -75,7 +75,10 @@ dependencies:
   webview_flutter: ^3.0.4
   device_info_plus: ^4.0.0
   intl: ^0.17.0
-  health: ^4.1.1
+  fetch_health_data:
+    git:
+      url: https://github.com/Sotatek-ThangBui/fetch_health_data.git
+      ref: master
 
 dependency_overrides:
   analyzer: ^4.2.0

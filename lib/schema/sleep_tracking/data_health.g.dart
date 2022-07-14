@@ -7,7 +7,6 @@ part of 'data_health.dart';
 // **************************************************************************
 
 DataHealth _$DataHealthFromJson(Map<String, dynamic> json) => DataHealth(
-      trackingId: json['trackingId'] as int?,
       dataType: json['dataType'] as String?,
       value: json['value'] as String?,
       platformType: json['platformType'] as String?,
@@ -20,7 +19,6 @@ DataHealth _$DataHealthFromJson(Map<String, dynamic> json) => DataHealth(
 
 Map<String, dynamic> _$DataHealthToJson(DataHealth instance) =>
     <String, dynamic>{
-      'trackingId': instance.trackingId,
       'dataType': instance.dataType,
       'value': instance.value,
       'platformType': instance.platformType,

@@ -8,12 +8,14 @@ part of 'data_health_schema.dart';
 
 DataHealthSchema _$DataHealthSchemaFromJson(Map<String, dynamic> json) =>
     DataHealthSchema(
-      listData: (json['listData'] as List<dynamic>?)
+      trackingId: json['trackingId'] as int?,
+      datas: (json['datas'] as List<dynamic>?)
           ?.map((e) => DataHealth.fromJson(e as Map<String, dynamic>))
           .toList(),
     );
 
 Map<String, dynamic> _$DataHealthSchemaToJson(DataHealthSchema instance) =>
     <String, dynamic>{
-      'listData': instance.listData?.map((e) => e.toJson()).toList(),
+      'trackingId': instance.trackingId,
+      'datas': instance.datas?.map((e) => e.toJson()).toList(),
     };

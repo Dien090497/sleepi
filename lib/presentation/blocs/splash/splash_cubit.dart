@@ -4,6 +4,7 @@ import 'package:slee_fi/di/injector.dart';
 import 'package:slee_fi/presentation/blocs/splash/splash_state.dart';
 import 'package:slee_fi/usecase/fetch_balance_spending_usecase.dart';
 import 'package:slee_fi/usecase/get_global_config.dart';
+import 'package:slee_fi/usecase/get_user_status_tracking_usecase.dart';
 import 'package:slee_fi/usecase/get_user_usecase.dart';
 import 'package:slee_fi/usecase/usecase.dart';
 
@@ -13,6 +14,7 @@ class SplashCubit extends Cubit<SplashState> {
   final _getGlobalConfigUseCase = getIt<GetGlobalConfigUseCase>();
   final _getUserUC = getIt<GetUserUseCase>();
   final _fetchBalanceSpendingUC = getIt<FetchBalanceSpendingUseCase>();
+  final _getUserStatusTrackingUC = getIt<GetUserStatusTrackingUseCase>();
 
   void init() async {
     // await Permission.location.request();
@@ -28,6 +30,8 @@ class SplashCubit extends Cubit<SplashState> {
             isSafeDevice: kDebugMode ? true : true,
             userInfoEntity: null,
             listTokens: [],
+            trackingId: 0,
+            isAvailable: false,
           ));
         },
         (userInfo) async {
@@ -35,12 +39,19 @@ class SplashCubit extends Cubit<SplashState> {
               await _fetchBalanceSpendingUC.call('${userInfo.id}');
           balanceRes.fold((l) {
             emit(SplashState.error('$l'));
-          }, (tokensSpending) {
-            emit(SplashState.done(
-              isSafeDevice: kDebugMode ? true : true,
-              userInfoEntity: userInfo,
-              listTokens: tokensSpending,
-            ));
+          }, (tokensSpending) async {
+            final tracking = await _getUserStatusTrackingUC.call(NoParams());
+            tracking.fold((l) {
+              emit(SplashState.error('$l'));
+            }, (r) {
+              emit(SplashState.done(
+                isSafeDevice: kDebugMode ? true : true,
+                userInfoEntity: userInfo,
+                listTokens: tokensSpending,
+                trackingId: r.tracking,
+                isAvailable: r.isAvailable,
+              ));
+            });
           });
         },
       );

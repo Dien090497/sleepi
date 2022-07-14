@@ -13,6 +13,8 @@ class SplashState with _$SplashState {
     required bool isSafeDevice,
     required UserInfoEntity? userInfoEntity,
     required List<TokenSpending> listTokens,
+    required int trackingId,
+    required bool isAvailable,
   }) = SplashDone;
 
   const factory SplashState.error(String msg) = SplashError;

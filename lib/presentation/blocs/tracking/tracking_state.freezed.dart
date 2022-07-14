@@ -486,7 +486,7 @@ class _$TrackingStatePosted
 abstract class TrackingStatePosted implements TrackingState {
   const factory TrackingStatePosted(final bool success) = _$TrackingStatePosted;
 
-  bool get success => throw _privateConstructorUsedError;
+  bool get success;
   @JsonKey(ignore: true)
   _$$TrackingStatePostedCopyWith<_$TrackingStatePosted> get copyWith =>
       throw _privateConstructorUsedError;
@@ -642,7 +642,7 @@ class _$TrackingStateFail
 abstract class TrackingStateFail implements TrackingState {
   const factory TrackingStateFail(final String msg) = _$TrackingStateFail;
 
-  String get msg => throw _privateConstructorUsedError;
+  String get msg;
   @JsonKey(ignore: true)
   _$$TrackingStateFailCopyWith<_$TrackingStateFail> get copyWith =>
       throw _privateConstructorUsedError;

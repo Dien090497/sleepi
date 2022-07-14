@@ -163,7 +163,7 @@ class _AuthDataSource implements AuthDataSource {
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<VerifyResponse>(
             Options(method: 'POST', headers: _headers, extra: _extra)
-                .compose(_dio.options, '/users/verify',
+                .compose(_dio.options, '/users/insert-wallet',
                     queryParameters: queryParameters, data: _data)
                 .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
     final value = VerifyResponse.fromJson(_result.data!);
@@ -564,15 +564,34 @@ class _AuthDataSource implements AuthDataSource {
   }
 
   @override
-  Future<dynamic> postHealthData(dataHealthSchema) async {
+  Future<List<LuckyBox>> fetchLuckyBox() async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
-    _data.addAll(dataHealthSchema.toJson());
+    final _result = await _dio.fetch<List<dynamic>>(
+        _setStreamType<List<LuckyBox>>(
+            Options(method: 'GET', headers: _headers, extra: _extra)
+                .compose(_dio.options, '/lucky_box',
+                    queryParameters: queryParameters, data: _data)
+                .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    var value = _result.data!
+        .map((dynamic i) => LuckyBox.fromJson(i as Map<String, dynamic>))
+        .toList();
+    return value;
+  }
+
+  @override
+  Future<dynamic> openLuckyBox(luckyBoxId) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{
+      r'luckyBoxId': luckyBoxId.toJson()
+    };
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
     final _result = await _dio.fetch(_setStreamType<dynamic>(
-        Options(method: 'POST', headers: _headers, extra: _extra)
-            .compose(_dio.options, '/health-app',
+        Options(method: 'GET', headers: _headers, extra: _extra)
+            .compose(_dio.options, '/lucky_box/open',
                 queryParameters: queryParameters, data: _data)
             .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
     final value = _result.data;

@@ -6,11 +6,13 @@ import 'data_health.dart';
 part 'data_health_schema.g.dart';
 @JsonSerializable()
 class DataHealthSchema {
-  
-  List<DataHealth>? listData;
+
+  int? trackingId;
+  List<DataHealth>? datas;
 
   DataHealthSchema({
-    this.listData,
+    this.trackingId,
+    this.datas,
   });
 
   factory DataHealthSchema.fromJson(Map<String, dynamic> json) =>

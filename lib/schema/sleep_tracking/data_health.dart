@@ -4,8 +4,6 @@ part 'data_health.g.dart';
 
 @JsonSerializable()
 class DataHealth {
-
-  int? trackingId;
   String? dataType;
   String? value;
   String? platformType;
@@ -16,7 +14,6 @@ class DataHealth {
   String? sourceId;
 
   DataHealth({
-    this.trackingId,
     this.dataType,
     this.value,
     this.platformType,
