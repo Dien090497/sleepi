@@ -43,6 +43,7 @@ class _PopUpCalculatorState extends State<PopUpCalculator> {
   void dispose() {
     rateEditingController.dispose();
     _focus.removeListener(_onFocusChange);
+    _focus.dispose();
     super.dispose();
   }
 
