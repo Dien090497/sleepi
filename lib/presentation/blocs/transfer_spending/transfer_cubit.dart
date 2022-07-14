@@ -64,7 +64,7 @@ class TransferCubit extends Cubit<TransferSpendingState> {
     }
   }
 
-  _estimateGasWithdraw(String contractAddress, String symbol) async {
+  void _estimateGasWithdraw(String contractAddress, String symbol) async {
     final result = await _estimateGasWithdrawUC.call(EstimateGasWithdrawParam(
         type: symbol, contractAddress: contractAddress));
     result.fold(
@@ -75,7 +75,7 @@ class TransferCubit extends Cubit<TransferSpendingState> {
     );
   }
 
-  _estimateGas(double? valueInEther) async {
+  void _estimateGas(double? valueInEther) async {
     final result = await _sendToExternalUC.calculatorFee(SendToExternalParams(
         contractAddressTo: ContractAddresses.spending.hex,
         valueInEther: valueInEther));

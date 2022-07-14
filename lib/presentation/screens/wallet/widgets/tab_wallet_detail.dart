@@ -2,7 +2,9 @@ import 'dart:async';
 
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:focus_detector/focus_detector.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:slee_fi/common/const/const.dart';
@@ -12,6 +14,7 @@ import 'package:slee_fi/common/extensions/string_x.dart';
 import 'package:slee_fi/common/routes/app_routes.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
+import 'package:slee_fi/common/utils/toast_utils.dart';
 import 'package:slee_fi/common/widgets/sf_bottom_sheet.dart';
 import 'package:slee_fi/common/widgets/sf_icon.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
@@ -78,6 +81,8 @@ class _TabWalletDetailState extends State<TabWalletDetail> {
 
   @override
   Widget build(BuildContext context) {
+    final FToast fToast = FToast();
+    fToast.init(context);
     final walletCubit = context.read<WalletCubit>();
     final isJapanese =
         Localizations.localeOf(context).toLanguageTag().isJapanese;
@@ -119,17 +124,20 @@ class _TabWalletDetailState extends State<TabWalletDetail> {
                       keyText: '${balance.formatBalanceToken} $currencySymbol',
                       style: TextStyles.bold30White),
                   const SizedBox(height: 20.0),
-                  Container(
-                    padding: const EdgeInsets.symmetric(
-                        vertical: 6.0, horizontal: 16.0),
-                    margin: const EdgeInsets.symmetric(horizontal: 16),
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(20.0),
-                      color: AppColors.lightWhite.withOpacity(0.05),
+                  GestureDetector(
+                    onTap: () => _copyAddress(fToast, context, addressWallet),
+                    child: Container(
+                      padding: const EdgeInsets.symmetric(
+                          vertical: 6.0, horizontal: 16.0),
+                      margin: const EdgeInsets.symmetric(horizontal: 16),
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(20.0),
+                        color: AppColors.lightWhite.withOpacity(0.05),
+                      ),
+                      child: SFText(
+                          keyText: addressWallet.formatAddress,
+                          style: TextStyles.lightWhite14),
                     ),
-                    child: SFText(
-                        keyText: addressWallet.formatAddress,
-                        style: TextStyles.lightWhite14),
                   ),
                   const SizedBox(height: 16.0),
                   ConstrainedBox(
@@ -269,6 +277,15 @@ class _TabWalletDetailState extends State<TabWalletDetail> {
           ),
         );
       },
+    );
+  }
+
+  _copyAddress(FToast fToast, BuildContext context, String address) {
+    Clipboard.setData(ClipboardData(text: address));
+    ToastUtils.showToast(
+      fToast,
+      AppColors.white.withOpacity(0.55),
+      LocaleKeys.successfully_copied,
     );
   }
 }

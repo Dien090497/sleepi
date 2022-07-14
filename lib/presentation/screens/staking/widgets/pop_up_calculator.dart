@@ -5,6 +5,7 @@ import 'package:slee_fi/common/extensions/num_ext.dart';
 import 'package:slee_fi/common/extensions/string_x.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
+import 'package:slee_fi/common/widgets/dismiss_keyboard_widget.dart';
 import 'package:slee_fi/common/widgets/sf_icon.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
 import 'package:slee_fi/common/widgets/sf_textfield.dart';
@@ -21,156 +22,180 @@ class PopUpCalculator extends StatefulWidget {
 }
 
 class _PopUpCalculatorState extends State<PopUpCalculator> {
-  String currentRate = '';
+  final GlobalKey<SLFTStakedState> stakedKey = GlobalKey();
   TextEditingController rateEditingController = TextEditingController();
+  final FocusNode _focus = FocusNode();
   bool isChangedRates = true;
   double currentRatesChange = 0;
+  double? currentRate;
+  double? currentRatesToToken;
 
   @override
   void initState() {
     rateEditingController = TextEditingController()
       ..addListener(() {
       });
+    _focus.addListener(_onFocusChange);
     super.initState();
   }
 
   @override
   void dispose() {
     rateEditingController.dispose();
+    _focus.removeListener(_onFocusChange);
+    _focus.dispose();
     super.dispose();
   }
 
-  calculatorRates(){
-
+  void _onFocusChange() {
+    if(_focus.hasFocus){
+      setState((){
+        isChangedRates = false;
+      });
+    }else {
+      setState((){
+        isChangedRates = true;
+      });
+    }
   }
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Center(
-            child: SFText(
-          keyText: LocaleKeys.roi_calculator,
-          style: TextStyles.bold18LightWhite,
-        )),
-        const SizedBox(
-          height: 24,
-        ),
-        // SFText(
-        //   keyText: LocaleKeys.flexible,
-        //   style: TextStyles.bold16Blue,
-        //   textAlign: TextAlign.start,
-        // ),
-        // const SizedBox(
-        //   height: 12.0,
-        // ),
-        SFText(
-          keyText:
-              "SLFT ${Localizations.localeOf(context).toLanguageTag().isJapanese ? '' : LocaleKeys.staked.tr()}",
-          style: TextStyles.lightGrey14,
-        ),
-        SLFTStaked(
-          totalUSD: currentRatesChange,
-            staked: (staked) {
-          if(staked.day == 0 && staked.amount == 0){
-            setState((){
-              rateEditingController.text = '';
-            });
-          }
-          currentRate = '${0.66666 * staked.day * staked.amount}';
-          setState((){
-            rateEditingController.text = double.parse(currentRate).formatBalanceToken;
-          });
-          // if(widget.aprInDay != null ){
-          //   currentRate = '${0.66666 * staked.day * staked.amount}';
-          //   setState((){
-          //     rateEditingController.text = currentRate;
-          //   });
-          // }
-        }),
-        const SizedBox(
-          height: 32.0,
-        ),
-        const SizedBox(
-          height: 16,
-        ),
-        Container(
-            padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 18),
-            margin: const EdgeInsets.only(top: 12.0),
-            decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(8.0),
-                border: Border.all(color: AppColors.lightDark),
-                gradient: AppColors.gradientROI),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Expanded(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        SFText(
-                          keyText: LocaleKeys.roi_current_rates,
-                          style: TextStyles.blue14,
-                        ),
-                        const SizedBox(
-                          height: 4,
-                        ),
-                        SFTextField(
-                          controller: rateEditingController,
-                          showLabel: false,
-                          noBorder: true,
-                          readonly: isChangedRates,
-                          onChanged: (rates){
-                            if(rates.isNotEmpty){
-                              setState((){
-                                currentRatesChange = double.parse(rates);
-                              });
-
-                            }
-                          },
-                          inputFormatters: [
-                            FilteringTextInputFormatter
-                                .allow(RegExp(
-                                r'^\d{1,}[.,]?\d{0,6}')),
-                          ],
-                          textInputType:
-                          const TextInputType.numberWithOptions(
-                              decimal: true),
-                          textStyle: TextStyles.bold24LightWhite,
-                          hintText: '0.00',
-                          hintStyle: TextStyles.bold24LightWhite,
-                        ),
-                        const SizedBox(
-                          height: 4,
-                        ),
-                        SFText(
-                          keyText: "~ 0 SLFT (0.00%)",
-                          style: TextStyles.lightGrey14,
-                        ),
-                      ],
-                    )),
-                GestureDetector(
-                  onTap: () {
-                    setState(() {
-                      isChangedRates = !isChangedRates;
-                    });
-                  },
-                  child: isChangedRates
-                      ? const SFIcon(
-                    Ics.icEdit,
-                    width: 28,
-                  )
-                      : const Icon(
-                    Icons.check_circle_rounded,
-                    color: AppColors.lightWhite,
-                    size: 32,
+    return DismissKeyboardWidget(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Center(
+              child: SFText(
+            keyText: LocaleKeys.roi_calculator,
+            style: TextStyles.bold18LightWhite,
+          )),
+          const SizedBox(
+            height: 24,
+          ),
+          // SFText(
+          //   keyText: LocaleKeys.flexible,
+          //   style: TextStyles.bold16Blue,
+          //   textAlign: TextAlign.start,
+          // ),
+          // const SizedBox(
+          //   height: 12.0,
+          // ),
+          SFText(
+            keyText:
+                "SLFT ${Localizations.localeOf(context).toLanguageTag().isJapanese ? '' : LocaleKeys.staked.tr()}",
+            style: TextStyles.lightGrey14,
+          ),
+          SLFTStaked(
+              key: stakedKey,
+              readonly: !isChangedRates,
+              apr: widget.aprInDay,
+              staked: (staked) {
+                if(staked.day == 0 && staked.amount == 0){
+                  setState((){
+                    rateEditingController.text = '';
+                    currentRatesToToken = null;
+                  });
+                }
+                if(widget.aprInDay != null){
+                  currentRate = double.parse(widget.aprInDay!) * staked.day * staked.amount;
+                  setState((){
+                    rateEditingController.text = currentRate!.formatBalanceToken;
+                    currentRatesToToken = (currentRate! / 0.2);
+                  });
+                }else {
+                  rateEditingController.text = '';
+                  currentRatesToToken = null;
+                }
+          }),
+          const SizedBox(
+            height: 32.0,
+          ),
+          const SizedBox(
+            height: 16,
+          ),
+          Container(
+              padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 18),
+              margin: const EdgeInsets.only(top: 12.0),
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(8.0),
+                  border: Border.all(color: AppColors.lightDark),
+                  gradient: AppColors.gradientROI),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          SFText(
+                            keyText: LocaleKeys.roi_current_rates,
+                            style: TextStyles.blue14,
+                          ),
+                          const SizedBox(
+                            height: 4,
+                          ),
+                          SFTextField(
+                            controller: rateEditingController,
+                            focusNode: _focus,
+                            showLabel: false,
+                            noBorder: true,
+                            readonly: isChangedRates,
+                            onChanged: (rates){
+                              if(rateEditingController.text.isNotEmpty){
+                                setState((){
+                                  currentRatesToToken = double.parse(rateEditingController.text)/0.2;
+                                });
+                              }else {
+                                setState((){
+                                  currentRatesToToken = null;
+                                });
+                              }
+                              stakedKey.currentState?.currentRatesCalculator(rates);
+                            },
+                            inputFormatters: [
+                              FilteringTextInputFormatter
+                                  .allow(RegExp(
+                                  r'^\d{1,}[.,]?\d{0,6}')),
+                            ],
+                            textInputType:
+                            const TextInputType.numberWithOptions(
+                                decimal: true),
+                            textStyle: TextStyles.bold24LightWhite,
+                            hintText: '0.00',
+                            hintStyle: TextStyles.bold24LightWhite,
+                          ),
+                          const SizedBox(
+                            height: 4,
+                          ),
+                          SFText(
+                            keyText: "~ ${currentRatesToToken ?? 0} SLFT (0.00%)",
+                            style: TextStyles.lightGrey14,
+                          ),
+                        ],
+                      )),
+                  GestureDetector(
+                    onTap: () {
+                      setState(() {
+                        isChangedRates = !isChangedRates;
+                      });
+                    },
+                    child: isChangedRates
+                        ? const SFIcon(
+                      Ics.icEdit,
+                      width: 28,
+                    )
+                        : const Icon(
+                      Icons.check,
+                      color: AppColors.green,
+                      size: 32,
+                    ),
                   ),
-                ),
-              ],
-            )),
-      ],
+                ],
+              )),
+        ],
+      ),
     );
   }
 }

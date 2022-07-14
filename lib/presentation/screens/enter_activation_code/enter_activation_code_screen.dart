@@ -20,7 +20,6 @@ import 'package:slee_fi/l10n/locale_keys.g.dart';
 import 'package:slee_fi/presentation/blocs/activation_code/activation_code_cubit.dart';
 import 'package:slee_fi/presentation/blocs/activation_code/activation_code_state.dart';
 import 'package:slee_fi/presentation/screens/create_password/create_password_screen.dart';
-import 'package:slee_fi/presentation/screens/enter_activation_code/widgets/checkbox_letter_widget.dart';
 import 'package:slee_fi/presentation/screens/login_signup/widgets/login_box.dart';
 
 class EnterActiveCodeArg {
@@ -118,9 +117,6 @@ class EnterActivationCodeScreen extends StatelessWidget {
                                           Const.locales[index];
                                     },
                                   )),
-                              const SizedBox(height: 12),
-                              const CheckBoxLetterWidget(),
-                              const SizedBox(height: 12),
                               SFButton(
                                 text: LocaleKeys.start,
                                 color: AppColors.blue,
