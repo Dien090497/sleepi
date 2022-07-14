@@ -20,4 +20,6 @@ abstract class ISleepTrackingRepository {
   Future<Either<FailureMessage, String>> wakeUp(WakeUpSchema schema);
 
   Future<Either<FailureMessage, UserStatusTrackingModel>> userStatusTracking();
+
+  Future<Either<Failure, dynamic>> postDataHealth(DataHealthSchema schema);
 }

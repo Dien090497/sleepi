@@ -36,6 +36,7 @@ import 'package:slee_fi/schema/param_filler_item_fetch/filter_item_schema.dart';
 import 'package:slee_fi/schema/refresh_token_schema/refresh_token_schema.dart';
 import 'package:slee_fi/schema/sign_in_schema/sign_in_schema.dart';
 import 'package:slee_fi/schema/sign_up_schema/sign_up_schema.dart';
+import 'package:slee_fi/schema/sleep_tracking/data_health_schema.dart';
 import 'package:slee_fi/schema/stacking_schema/stacking_schema.dart';
 import 'package:slee_fi/schema/verify_schema/verify_schema.dart';
 import 'package:slee_fi/schema/verify_user_schema/verify_user_schema.dart';
@@ -201,6 +202,9 @@ abstract class AuthDataSource {
 
   @POST('/stacking/compound')
   Future<dynamic> compound();
+
+  @POST('/health-app')
+  Future<dynamic> postHealthData(@Body() DataHealthSchema dataHealthSchema);
 
   //lucky box
   @GET('/lucky_box')
