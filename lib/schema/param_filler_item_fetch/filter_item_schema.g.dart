@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'filter_item_chema.dart';
+part of 'filter_item_schema.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
