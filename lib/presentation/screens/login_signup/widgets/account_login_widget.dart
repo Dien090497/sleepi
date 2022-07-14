@@ -48,7 +48,7 @@ class _AccountLoginState extends State<AccountLoginWidget> {
   }
 
   bool get _isActiveCode {
-    return action == Action.signUp;
+    return action == Action.signUp || action == Action.forgotPassword;
   }
 
   String get _textButton {
@@ -144,7 +144,7 @@ class _AccountLoginState extends State<AccountLoginWidget> {
                         state is SignInSignUpStateError ? state.message : '',
                   ),
             SizedBox(height: _isActiveCode ? 12 : 0),
-            if (_isActiveCode) const CheckBoxLetterWidget(),
+            if (action == Action.signUp) const CheckBoxLetterWidget(),
             SizedBox(height: _isActiveCode ? 12 : 0),
             if (!_isActiveCode && action == Action.signIn)
               Container(
@@ -180,35 +180,33 @@ class _AccountLoginState extends State<AccountLoginWidget> {
               },
             ),
             const SizedBox(height: 16),
-            _isActiveCode
-                ? Text.rich(
-                    textAlign: TextAlign.center,
+            if (action == Action.signUp)
+              Text.rich(
+                textAlign: TextAlign.center,
+                TextSpan(
+                  text: LocaleKeys.registration_means_that_you_agree_to.tr(),
+                  style: TextStyles.w400lightGrey12,
+                  recognizer: TapGestureRecognizer()
+                    ..onTap = () async {
+                      // final url = Uri.parse(Const.sleeFiUrl);
+                      // if (await canLaunchUrl(url)) {
+                      //   launchUrl(url);
+                      // }
+                    },
+                  children: [
+                    const TextSpan(text: ' '),
                     TextSpan(
-                      text:
-                          LocaleKeys.registration_means_that_you_agree_to.tr(),
-                      style: TextStyles.w400lightGrey12,
-                      recognizer: TapGestureRecognizer()
-                        ..onTap = () async {
-                          // final url = Uri.parse(Const.sleeFiUrl);
-                          // if (await canLaunchUrl(url)) {
-                          //   launchUrl(url);
-                          // }
-                        },
-                      children: [
-                        const TextSpan(text: ' '),
-                        TextSpan(
-                          text: LocaleKeys.user_agreement.tr(),
-                          style: TextStyles.w400Red12,
-                        ),
-                        TextSpan(text: ' ${"&".tr()} '),
-                        TextSpan(
-                          text: LocaleKeys.user_privacy.tr(),
-                          style: TextStyles.w400Red12,
-                        ),
-                      ],
+                      text: LocaleKeys.user_agreement.tr(),
+                      style: TextStyles.w400Red12,
                     ),
-                  )
-                : const SizedBox(),
+                    TextSpan(text: ' ${"&".tr()} '),
+                    TextSpan(
+                      text: LocaleKeys.user_privacy.tr(),
+                      style: TextStyles.w400Red12,
+                    ),
+                  ],
+                ),
+              )
           ],
         );
       },
