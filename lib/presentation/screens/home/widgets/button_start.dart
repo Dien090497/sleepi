@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:slee_fi/common/routes/app_routes.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
 import 'package:slee_fi/common/widgets/sf_alert_dialog.dart';
@@ -29,13 +30,13 @@ class _ButtonStartState extends State<ButtonStart> {
       width: double.infinity,
       onPressed: () {
         if (countDownEnded) {
-          showCustomAlertDialog(context,
-              children: PopUpConfirmStartTracking(
-                onPressed: () {},
-              ));
+          showCustomAlertDialog(context, children: PopUpConfirmStartTracking(
+            onPressed: () async{
+              Navigator.pushReplacementNamed(context, R.tracking);
+            },
+          ));
         }
       },
-      // child: startTime == 0 ? LocaleKeys.start.tr() : convertTimer(),
       child: _CountDownText(
         onEnd: () {
           countDownEnded = true;

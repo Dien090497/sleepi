@@ -69,11 +69,11 @@ class BedModel {
 
   final String status;
 
-  final int insurancePercent;
+  final double insurancePercent;
 
-  final int startTime;
+  final double startTime;
 
-  final int endTime;
+  final double endTime;
 
   BedModel(
       this.id,
