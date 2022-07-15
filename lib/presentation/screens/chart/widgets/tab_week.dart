@@ -25,97 +25,105 @@ class TabWeek extends StatelessWidget {
       builder: (context, state) {
         if (state is ChartWeekLoaded) {
           final cubit = context.read<ChartWeekCubit>();
-          final start = state.week.start;
-          final end = state.week.end;
-          final startMonth = start.month;
-          final endMonth = end.month;
-          final startYear = start.year;
-          final endYear = end.year;
+          if (state.dataChart != null) {
+            final start = state.week.start;
+            final end = state.week.end;
+            final startMonth = start.month;
+            final endMonth = end.month;
+            final startYear = start.year;
+            final endYear = end.year;
 
-          final startNextWeek =
-              start.add(const Duration(days: DateTime.daysPerWeek));
-          final startPrevWeek =
-              start.subtract(const Duration(days: DateTime.daysPerWeek));
-          return ChartTabBody(
-            nextEnable: startNextWeek.isBefore(DateTime.now()),
-            prevEnable: startPrevWeek.isAfter(state.firstAllowedDate),
-            picker: ChartWeekPicker(
-              datePeriod: state.week,
-              firstAllowedDate: state.firstAllowedDate,
-              lastAllowedDate: state.lastAllowedDate,
-              onNewSelected: (period) {
-                cubit.selectWeek(period);
+            final startNextWeek =
+            start.add(const Duration(days: DateTime.daysPerWeek));
+            final startPrevWeek =
+            start.subtract(const Duration(days: DateTime.daysPerWeek));
+            return ChartTabBody(
+              nextEnable: startNextWeek.isBefore(DateTime.now()),
+              prevEnable: startPrevWeek.isAfter(state.firstAllowedDate),
+              picker: ChartWeekPicker(
+                datePeriod: state.week,
+                firstAllowedDate: state.firstAllowedDate,
+                lastAllowedDate: state.lastAllowedDate,
+                onNewSelected: (period) {
+                  cubit.selectWeek(period);
+                },
+              ),
+              onPreviousTap: () {
+                cubit.previousTap();
               },
-            ),
-            onPreviousTap: () {
-              cubit.previousTap();
-            },
-            onNextTap: () {
-              cubit.nextTap();
-            },
-            text:
-                '${dateTimeUtils.MMMdo(start)} ${startYear == endYear ? '' : '$startYear '}~ ${startMonth != endMonth ? dateTimeUtils.MMMdo(end) : dateTimeUtils.doFormat(end)}, $endYear',
-            children: [
-              const ChartTitle(
-                title: "SLFT",
-                textStyleTitle: TextStyles.bold16LightWhite,
-                padding: EdgeInsets.zero,
-              ),
-              const SizedBox(height: 12),
-              ChartStatisticShare(data: state.dataChart.first, maxValue: 100,),
-              const SizedBox(height: 40),
-              const ChartTitle(
-                  title: LocaleKeys.average_sleep_score,
+              onNextTap: () {
+                cubit.nextTap();
+              },
+              text:
+              '${dateTimeUtils.MMMdo(start)} ${startYear == endYear ? '' : '$startYear '}~ ${startMonth != endMonth ? dateTimeUtils.MMMdo(end) : dateTimeUtils.doFormat(end)}, $endYear',
+              children: [
+                const ChartTitle(
+                  title: "SLFT",
                   textStyleTitle: TextStyles.bold16LightWhite,
-                  result: "80/100",
-                  textStyleResult: TextStyles.bold16Blue,
-                  padding: EdgeInsets.zero),
-              const SizedBox(height: 12),
-              ChartStatisticShare(data: state.dataChart[1], maxValue: 100,),
-              const SizedBox(height: 40),
-              const ChartTitle(
-                title: LocaleKeys.bed_time,
-                textStyleTitle: TextStyles.bold16LightWhite,
-              ),
-              const SizedBox(height: 12),
-              ChartStatisticShare(data: state.dataChart[2], maxValue: 300,),
-              const SizedBox(height: 40),
-              const ChartTitle(
-                  title: LocaleKeys.sleep_onset_time,
+                  padding: EdgeInsets.zero,
+                ),
+                const SizedBox(height: 12),
+                ChartStatisticShare(data: state.dataChart?.first, maxValue: 100,),
+                const SizedBox(height: 40),
+                const ChartTitle(
+                    title: LocaleKeys.average_sleep_score,
+                    textStyleTitle: TextStyles.bold16LightWhite,
+                    result: "80/100",
+                    textStyleResult: TextStyles.bold16Blue,
+                    padding: EdgeInsets.zero),
+                const SizedBox(height: 12),
+                ChartStatisticShare(data: state.dataChart?[1], maxValue: 100,),
+                const SizedBox(height: 40),
+                const ChartTitle(
+                  title: LocaleKeys.bed_time,
                   textStyleTitle: TextStyles.bold16LightWhite,
-                  padding: EdgeInsets.zero),
-              const SizedBox(height: 12),
-              ChartStatisticShare(data: state.dataChart[3], maxValue: 300,),
-              const SizedBox(height: 40),
-              const ChartTitle(
-                  title: LocaleKeys.woke_up,
-                  textStyleTitle: TextStyles.bold16LightWhite,
-                  padding: EdgeInsets.zero),
-              const SizedBox(height: 12),
-              ChartStatisticShare(data: state.dataChart[4], maxValue: 300,),
-              const SizedBox(height: 40),
-              const ChartTitle(
-                  title: LocaleKeys.sleep_duration,
-                  textStyleTitle: TextStyles.bold16LightWhite,
-                  padding: EdgeInsets.zero),
-              const SizedBox(height: 4),
-              ChartStatisticShare(data: state.dataChart[5], maxValue: 300,),
-              const SizedBox(height: 16),
-              const ChartTitle(
-                  title: LocaleKeys.time_in_bed,
-                  textStyleTitle: TextStyles.bold16LightWhite,
-                  padding: EdgeInsets.zero),
-              const SizedBox(height: 12),
-              ChartStatisticShare(data: state.dataChart[6], maxValue: 300,),
-              const SizedBox(height: 40),
-              const ChartTitle(
-                  title: LocaleKeys.nocturnal_awakenings,
-                  textStyleTitle: TextStyles.bold16LightWhite,
-                  padding: EdgeInsets.zero),
-              const SizedBox(height: 12),
-              ChartStatisticShare(data: state.dataChart[7], maxValue: 300,), 
-            ],
-          );
+                ),
+                const SizedBox(height: 12),
+                ChartStatisticShare(data: state.dataChart?[2], maxValue: 300,),
+                const SizedBox(height: 40),
+                const ChartTitle(
+                    title: LocaleKeys.sleep_onset_time,
+                    textStyleTitle: TextStyles.bold16LightWhite,
+                    padding: EdgeInsets.zero),
+                const SizedBox(height: 12),
+                ChartStatisticShare(data: state.dataChart?[3], maxValue: 300,),
+                const SizedBox(height: 40),
+                const ChartTitle(
+                    title: LocaleKeys.woke_up,
+                    textStyleTitle: TextStyles.bold16LightWhite,
+                    padding: EdgeInsets.zero),
+                const SizedBox(height: 12),
+                ChartStatisticShare(data: state.dataChart?[4], maxValue: 300,),
+                const SizedBox(height: 40),
+                const ChartTitle(
+                    title: LocaleKeys.sleep_duration,
+                    textStyleTitle: TextStyles.bold16LightWhite,
+                    padding: EdgeInsets.zero),
+                const SizedBox(height: 4),
+                ChartStatisticShare(data: state.dataChart?[5], maxValue: 300,),
+                const SizedBox(height: 16),
+                const ChartTitle(
+                    title: LocaleKeys.time_in_bed,
+                    textStyleTitle: TextStyles.bold16LightWhite,
+                    padding: EdgeInsets.zero),
+                const SizedBox(height: 12),
+                ChartStatisticShare(data: state.dataChart?[6], maxValue: 300,),
+                const SizedBox(height: 40),
+                const ChartTitle(
+                    title: LocaleKeys.nocturnal_awakenings,
+                    textStyleTitle: TextStyles.bold16LightWhite,
+                    padding: EdgeInsets.zero),
+                const SizedBox(height: 12),
+                ChartStatisticShare(data: state.dataChart?[7], maxValue: 300,),
+              ],
+            );
+          }
+          else {
+            final start = state.week.start;
+            final end = state.week.end;
+            cubit.fetchDataChartWeek(fromDate: start, toDate: end, type: 'week');
+            return const LoadingIcon();
+          }
         }
         return const LoadingIcon();
       },
