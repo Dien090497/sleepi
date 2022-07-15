@@ -6,7 +6,9 @@ part 'bed_entity.freezed.dart';
 class BedEntity with _$BedEntity {
   const factory BedEntity({
     required String name,
+    required String nftClass,
     required int id,
+    required int tokenId,
     required int level,
     required String image,
     required String type,

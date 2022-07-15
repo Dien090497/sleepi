@@ -3,6 +3,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:slee_fi/common/extensions/string_x.dart';
 import 'package:slee_fi/common/routes/app_routes.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
@@ -48,6 +49,9 @@ class MiddleBed extends StatelessWidget {
           ),
           child: BlocBuilder<HomeBloc, HomeState>(
             builder: (context, state) {
+              var selectBed = state is HomeLoaded && state.selectedBed != null
+                  ? state.selectedBed
+                  : null;
               return Column(
                 children: [
                   SizedBox(
@@ -70,7 +74,9 @@ class MiddleBed extends StatelessWidget {
                                             BlocProvider.of<
                                                         BottomNavigationBloc>(
                                                     context)
-                                                .add(const SelectTab(4));
+                                                .add(
+                                              const SelectTab(4),
+                                            );
                                           },
                                         );
                             },
@@ -108,10 +114,15 @@ class MiddleBed extends StatelessWidget {
                       const Spacer(),
                       SFButton(
                         text: state is HomeLoaded && state.selectedBed != null
-                            ? '${state.selectedBed!.id}'
+                            ? '${state.selectedBed!.tokenId}'
                             : '00',
-                        textStyle: TextStyles.blue14,
-                        color: Colors.white.withOpacity(0.05),
+                        textStyle: TextStyles.blue14.copyWith(
+                            color: selectBed != null
+                                ? selectBed.quality!.qualityBedColor
+                                : AppColors.commonBed),
+                        color: (selectBed != null
+                            ? selectBed.quality!.qualityBedColor
+                            : AppColors.commonBed).withOpacity(0.05),
                         radius: 50,
                         height: 36,
                       ),
@@ -160,7 +171,7 @@ class _BuildBedItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        SFText(keyText: bedEntity.name, style: TextStyles.blue14),
+        SFText(keyText: bedEntity.nftClass, style: TextStyles.blue14),
         GestureDetector(
           onTap: () {
             Navigator.pushNamed(context, R.nftInfo,
