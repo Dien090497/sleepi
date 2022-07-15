@@ -1,6 +1,7 @@
 import 'package:dartz/dartz.dart';
 import 'package:slee_fi/entities/active_code/active_code_entity.dart';
 import 'package:slee_fi/entities/item_entity/item_entity.dart';
+import 'package:slee_fi/entities/tracking_result_chart_data_entity/tracking_result_chart_data_entity.dart';
 import 'package:slee_fi/failures/failure.dart';
 import 'package:slee_fi/models/bed_model/beb_model.dart';
 import 'package:slee_fi/models/estimate_sleep_response/estimate_sleep_response.dart';
@@ -17,6 +18,7 @@ import 'package:slee_fi/usecase/add_item_to_bed_usecase.dart';
 import 'package:slee_fi/usecase/estimate_gas_withdraw.dart';
 import 'package:slee_fi/usecase/estimate_tracking_usecase.dart';
 import 'package:slee_fi/usecase/fetch_bed_usecase.dart';
+import 'package:slee_fi/usecase/fetch_data_chart_usecase.dart';
 import 'package:slee_fi/usecase/withdraw_history_usecase.dart';
 
 abstract class IUserRepository {
@@ -50,4 +52,6 @@ abstract class IUserRepository {
   Future<Either<FailureMessage, EstimateSleepResponse>> estimateTracking(EstimateTrackingParam estimateTrackingParam);
 
   Future<Either<FailureMessage, dynamic>> speedUpLuckyBox(SpeedUpLuckyBoxSchema speedUpLuckyBoxSchema);
+
+  Future<Either<FailureMessage, TrackingResultChartDataEntity>> fetchDataChart(ParamsGetDataChart paramsGetDataChart);
 }
