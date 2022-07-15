@@ -141,18 +141,18 @@ class UserImplementation extends IUserRepository {
   @override
   Future<Either<FailureMessage, List<BedModel>>> fetchListBed(
       FetchBedParam fetchBedParam) async {
-    try {
-      final result = await _authDataSource.getNftByOwner(
-        fetchBedParam.limit,
-        fetchBedParam.page,
-        fetchBedParam.categoryId.type,
-        fetchBedParam.attributeNFT,
-        fetchBedParam.bedType,
-      );
-      return Right(result.list);
-    } catch (e) {
-      return Left(FailureMessage.fromException(e));
-    }
+    // try {
+    final result = await _authDataSource.getNftByOwner(
+      fetchBedParam.limit,
+      fetchBedParam.page,
+      fetchBedParam.categoryId.type,
+      fetchBedParam.attributeNFT,
+      fetchBedParam.bedType,
+    );
+    return Right(result.list);
+    // } catch (e) {
+    //   return Left(FailureMessage.fromException(e));
+    // }
   }
 
   @override
@@ -203,9 +203,13 @@ class UserImplementation extends IUserRepository {
   }
 
   @override
-  Future<Either<FailureMessage, dynamic>> openLuckyBox(int luckyBoxId) {
-    // TODO: implement openLuckyBox
-    throw UnimplementedError();
+  Future<Either<FailureMessage, dynamic>> openLuckyBox(int luckyBoxId) async {
+    try {
+      var result = await _authDataSource.openLuckyBox(luckyBoxId);
+      return Right(result);
+    } catch (e) {
+      return Left(FailureMessage.fromException(e));
+    }
   }
 
   @override

@@ -445,5 +445,6 @@
   "you_can_open_the_luck_box": "You can open the lucky box after {} hours",
   "speed_luck_box_with_cost": "Speed up the lucky box with {} AVAX?",
   "speed_up": "Speed up",
-  "buy_token": "Buy {token}"
+  "buy_token": "Buy {token}",
+  "do_you_want_open_the_lucky_box": "Do you want to open the lucky box with {} AVAX"
 }

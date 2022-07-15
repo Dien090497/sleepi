@@ -12,6 +12,9 @@ class DateTimeUtils {
   String MMMdyyyy(DateTime time) {
     return Jiffy(time).format("MMM do, yyyy");
   }
+  String HHmm(DateTime time) {
+    return Jiffy(time).format("HH:mm");
+  }
 
   String MMMdo(DateTime time) {
     return Jiffy(time).format("MMM do");

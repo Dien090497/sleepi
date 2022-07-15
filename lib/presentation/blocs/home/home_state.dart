@@ -27,6 +27,8 @@ class HomeState with _$HomeState {
     @Default(false) bool loading,
     @Default(true) bool enableInsurance,
     @Default(0.0) double tokenEarn,
+    required int hour,
+    required int minute,
   }) = HomeLoaded;
 
   const factory HomeState.error(String message) = HomeError;

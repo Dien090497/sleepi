@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:slee_fi/common/enum/enum.dart';
 import 'package:slee_fi/di/injector.dart';
@@ -29,7 +27,6 @@ class NFTListCubit extends Cubit<NftListState> {
     result.fold((l) {
       emit(NftListState.error('$l'));
     }, (success) {
-      log("result : ${success.toString()}");
       final currentState = state;
       if (currentState is NftListLoaded) {
         emit(currentState.copyWith(
