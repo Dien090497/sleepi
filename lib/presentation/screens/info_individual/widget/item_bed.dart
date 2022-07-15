@@ -6,6 +6,7 @@ import 'package:slee_fi/common/style/text_styles.dart';
 import 'package:slee_fi/common/widgets/sf_icon.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
 import 'package:slee_fi/presentation/screens/product_detail/widgets/top_left_banner.dart';
+import 'package:slee_fi/resources/resources.dart';
 
 class ItemBed extends StatelessWidget {
   const ItemBed(
@@ -52,7 +53,8 @@ class ItemBed extends StatelessWidget {
                   Expanded(
                       child: Container(
                           alignment: Alignment.center,
-                          child: SFIcon(bed.image))),
+                          // TODO example data
+                          child: const SFIcon(Imgs.shortBed))),
                   Container(
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(50),

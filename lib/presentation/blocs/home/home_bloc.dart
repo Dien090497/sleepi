@@ -1,17 +1,23 @@
+import 'dart:async';
+
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:slee_fi/common/enum/enum.dart';
 import 'package:slee_fi/common/extensions/string_x.dart';
 import 'package:slee_fi/di/injector.dart';
+import 'package:slee_fi/entities/bed_entity/bed_entity.dart';
 import 'package:slee_fi/entities/item_entity/item_entity.dart';
 import 'package:slee_fi/presentation/blocs/home/home_state.dart';
 import 'package:slee_fi/schema/param_filler_item_fetch/filter_item_schema.dart';
+import 'package:slee_fi/schema/speed_up_lucky_box_schema/speed_up_lucky_box_schema.dart';
 import 'package:slee_fi/usecase/add_item_to_bed_usecase.dart';
 import 'package:slee_fi/usecase/estimate_tracking_usecase.dart';
 import 'package:slee_fi/usecase/fetch_bed_usecase.dart';
 import 'package:slee_fi/usecase/fetch_item_owner_usecase.dart';
 import 'package:slee_fi/usecase/fetch_lucky_box_usecase.dart';
+import 'package:slee_fi/usecase/open_lucky_box_usecase.dart';
 import 'package:slee_fi/usecase/remove_item_from_bed_usecase.dart';
+import 'package:slee_fi/usecase/speed_up_lucky_box_usecase.dart';
 import 'package:slee_fi/usecase/usecase.dart';
 
 part 'home_event.dart';
@@ -31,6 +37,10 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     on<EstimateTracking>(_estimateTracking);
     on<ChangeInsurance>(_changeInsurance);
     on<FetchLuckyBox>(_fetchLuckyBox);
+    on<SpeedUpLuckyBox>(_speedUpLuckyBox);
+    on<ChangeHour>(_changeHour);
+    on<ChangeMinute>(_changeMinute);
+    on<OpenLuckyBox>(_openLuckyBox);
   }
 
   final _fetchListBedUC = getIt<FetchBedUseCase>();
@@ -39,6 +49,8 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
   final _fetchItemUC = getIt<FetchItemOwnerUseCase>();
   final _estimateTrackingUC = getIt<EstimateTrackingUseCase>();
   final _fetchLuckyBoxUC = getIt<FetchLuckyBoxUseCase>();
+  final _speedUpLuckyBoxUC = getIt<SpeedUpLuckyBoxUseCase>();
+  final _openLuckyBoxUC = getIt<OpenLuckyBoxUseCase>();
 
   int currentBedId = -1;
   int _currentPageBed = 1;
@@ -65,10 +77,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
       if (currentState is HomeLoaded) {
         emit(currentState.copyWith(
           loadMoreBed: false,
-          durability: currentState.bedList.first.durability,
-          id: currentState.bedList.first.id,
-          level: currentState.bedList.first.level,
-          time: currentState.bedList.first.time,
+          selectedBed: currentState.bedList.first,
         ));
       }
     }, (r) {
@@ -78,24 +87,15 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
         if (r.isEmpty) {
           emit(currentState.copyWith(
             loadMoreBed: false,
-            durability: currentState.bedList.first.durability,
-            id: currentState.bedList.first.id,
-            level: currentState.bedList.first.level,
-            time: currentState.bedList.first.time,
+            selectedBed: currentState.bedList.first,
           ));
           return;
         }
         final newList =
             currentState.bedList + r.map((e) => e.toEntity()).toList();
 
-        emit(currentState.copyWith(
-          bedList: newList,
-          loadMoreBed: r.isNotEmpty,
-          durability: r.isEmpty ? 0 : r.first.durability,
-          id: r.isEmpty ? 0 : r.first.id,
-          level: r.isEmpty ? 0 : r.first.level,
-          time: r.isEmpty ? 0 : r.first.time,
-        ));
+        emit(
+            currentState.copyWith(bedList: newList, loadMoreBed: r.isNotEmpty));
       }
     });
   }
@@ -109,13 +109,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
   void _changeBed(ChangeBed event, Emitter<HomeState> emit) {
     final currentState = state;
     if (currentState is HomeLoaded) {
-      currentBedId = event.id;
-      emit(currentState.copyWith(
-        time: event.time,
-        level: event.level,
-        id: event.id,
-        durability: event.durability,
-      ));
+      emit(currentState.copyWith(selectedBed: event.bed));
     }
     add(EstimateTracking());
   }
@@ -125,15 +119,13 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
         _currentPageBed, _limitItemPage, CategoryType.bed, AttributeNFT.none));
     result.fold(
       (l) {
-        emit(const HomeState.loaded(
-          bedList: [],
-          durability: 0,
-          id: 0,
-          level: 0,
-          time: 0,
-          loadMoreBed: false,
-          errorMessage: '',
-        ));
+        emit(HomeState.loaded(
+            bedList: [],
+            selectedBed: null,
+            loadMoreBed: false,
+            errorMessage: '',
+            minute: DateTime.now().minute,
+            hour: DateTime.now().hour));
       },
       (r) {
         _currentPageBed++;
@@ -145,10 +137,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
         if (currentState is HomeLoaded) {
           emit(currentState.copyWith(
               bedList: r.map((e) => e.toEntity()).toList(),
-              durability: r.isEmpty ? 0 : r.first.durability,
-              id: r.isEmpty ? 0 : r.first.id,
-              level: r.isEmpty ? 0 : r.first.level,
-              time: r.isEmpty ? 0 : r.first.time,
+              selectedBed: r.first.toEntity(),
               loadMoreBed: true,
               selectedItem: null));
           add(FetchLuckyBox());
@@ -158,12 +147,10 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
             errorMessage: '',
             loading: false,
             bedList: r.map((e) => e.toEntity()).toList(),
-            durability: r.isEmpty ? 0 : r.first.durability,
-            id: r.isEmpty ? 0 : r.first.id,
-            level: r.isEmpty ? 0 : r.first.level,
-            selectedItem: null,
+            selectedBed: r.isNotEmpty ? r.first.toEntity() : null,
             loadMoreBed: true,
-            time: r.isEmpty ? 0 : r.first.time));
+            hour: DateTime.now().hour,
+            minute: DateTime.now().minute));
         add(FetchLuckyBox());
       },
     );
@@ -252,7 +239,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     final currentState = state;
     if (currentState is HomeLoaded && currentState.bedList.isNotEmpty) {
       var result = await _estimateTrackingUC.call(EstimateTrackingParam(
-          bedId: currentState.id,
+          bedId: currentState.selectedBed!.id,
           itemId: currentState.selectedItem?.id ?? 0,
           isEnableInsurance: currentState.enableInsurance));
       result.fold((l) => null, (r) {
@@ -281,5 +268,49 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
         add(EstimateTracking());
       });
     }
+  }
+
+  FutureOr<void> _speedUpLuckyBox(
+      SpeedUpLuckyBox event, Emitter<HomeState> emit) async {
+    var result = await _speedUpLuckyBoxUC.call(SpeedUpLuckyBoxSchema(event.id));
+
+    result.fold((l) => null, (r) {
+      final currentState = state;
+      if (currentState is HomeLoaded) {
+        final luckyBoxes = currentState.luckyBoxes;
+        luckyBoxes.removeWhere((element) => element.id == event.id);
+        emit(currentState.copyWith(luckyBoxes: luckyBoxes));
+      }
+    });
+  }
+
+  FutureOr<void> _changeHour(ChangeHour event, Emitter<HomeState> emit) {
+    final currentState = state;
+
+    if (currentState is HomeLoaded) {
+      emit(currentState.copyWith(hour: event.hour));
+    }
+  }
+
+  FutureOr<void> _changeMinute(ChangeMinute event, Emitter<HomeState> emit) {
+    final currentState = state;
+
+    if (currentState is HomeLoaded) {
+      emit(currentState.copyWith(minute: event.minute));
+    }
+  }
+
+  FutureOr<void> _openLuckyBox(
+      OpenLuckyBox event, Emitter<HomeState> emit) async {
+    var result = await _openLuckyBoxUC.call(event.id);
+    result.fold((l) => null, (r) {
+      final currentState = state;
+
+      if (currentState is HomeLoaded) {
+        var list = currentState.luckyBoxes;
+        list.removeWhere((element) => element.id == event.id);
+        emit(currentState.copyWith(luckyBoxes: list));
+      }
+    });
   }
 }

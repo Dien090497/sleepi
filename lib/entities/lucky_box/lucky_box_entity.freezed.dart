@@ -17,6 +17,10 @@ final _privateConstructorUsedError = UnsupportedError(
 /// @nodoc
 mixin _$LuckyBoxEntity {
   int get id => throw _privateConstructorUsedError;
+  String get openCost => throw _privateConstructorUsedError;
+  String get speedUpCost => throw _privateConstructorUsedError;
+  int get isOpen => throw _privateConstructorUsedError;
+  int get waitingTime => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $LuckyBoxEntityCopyWith<LuckyBoxEntity> get copyWith =>
@@ -28,7 +32,12 @@ abstract class $LuckyBoxEntityCopyWith<$Res> {
   factory $LuckyBoxEntityCopyWith(
           LuckyBoxEntity value, $Res Function(LuckyBoxEntity) then) =
       _$LuckyBoxEntityCopyWithImpl<$Res>;
-  $Res call({int id});
+  $Res call(
+      {int id,
+      String openCost,
+      String speedUpCost,
+      int isOpen,
+      int waitingTime});
 }
 
 /// @nodoc
@@ -43,11 +52,31 @@ class _$LuckyBoxEntityCopyWithImpl<$Res>
   @override
   $Res call({
     Object? id = freezed,
+    Object? openCost = freezed,
+    Object? speedUpCost = freezed,
+    Object? isOpen = freezed,
+    Object? waitingTime = freezed,
   }) {
     return _then(_value.copyWith(
       id: id == freezed
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
+              as int,
+      openCost: openCost == freezed
+          ? _value.openCost
+          : openCost // ignore: cast_nullable_to_non_nullable
+              as String,
+      speedUpCost: speedUpCost == freezed
+          ? _value.speedUpCost
+          : speedUpCost // ignore: cast_nullable_to_non_nullable
+              as String,
+      isOpen: isOpen == freezed
+          ? _value.isOpen
+          : isOpen // ignore: cast_nullable_to_non_nullable
+              as int,
+      waitingTime: waitingTime == freezed
+          ? _value.waitingTime
+          : waitingTime // ignore: cast_nullable_to_non_nullable
               as int,
     ));
   }
@@ -60,7 +89,12 @@ abstract class _$$_LuckyBoxEntityCopyWith<$Res>
           _$_LuckyBoxEntity value, $Res Function(_$_LuckyBoxEntity) then) =
       __$$_LuckyBoxEntityCopyWithImpl<$Res>;
   @override
-  $Res call({int id});
+  $Res call(
+      {int id,
+      String openCost,
+      String speedUpCost,
+      int isOpen,
+      int waitingTime});
 }
 
 /// @nodoc
@@ -77,11 +111,31 @@ class __$$_LuckyBoxEntityCopyWithImpl<$Res>
   @override
   $Res call({
     Object? id = freezed,
+    Object? openCost = freezed,
+    Object? speedUpCost = freezed,
+    Object? isOpen = freezed,
+    Object? waitingTime = freezed,
   }) {
     return _then(_$_LuckyBoxEntity(
       id: id == freezed
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
+              as int,
+      openCost: openCost == freezed
+          ? _value.openCost
+          : openCost // ignore: cast_nullable_to_non_nullable
+              as String,
+      speedUpCost: speedUpCost == freezed
+          ? _value.speedUpCost
+          : speedUpCost // ignore: cast_nullable_to_non_nullable
+              as String,
+      isOpen: isOpen == freezed
+          ? _value.isOpen
+          : isOpen // ignore: cast_nullable_to_non_nullable
+              as int,
+      waitingTime: waitingTime == freezed
+          ? _value.waitingTime
+          : waitingTime // ignore: cast_nullable_to_non_nullable
               as int,
     ));
   }
@@ -90,14 +144,27 @@ class __$$_LuckyBoxEntityCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_LuckyBoxEntity implements _LuckyBoxEntity {
-  const _$_LuckyBoxEntity({required this.id});
+  const _$_LuckyBoxEntity(
+      {required this.id,
+      required this.openCost,
+      required this.speedUpCost,
+      required this.isOpen,
+      required this.waitingTime});
 
   @override
   final int id;
+  @override
+  final String openCost;
+  @override
+  final String speedUpCost;
+  @override
+  final int isOpen;
+  @override
+  final int waitingTime;
 
   @override
   String toString() {
-    return 'LuckyBoxEntity(id: $id)';
+    return 'LuckyBoxEntity(id: $id, openCost: $openCost, speedUpCost: $speedUpCost, isOpen: $isOpen, waitingTime: $waitingTime)';
   }
 
   @override
@@ -105,12 +172,23 @@ class _$_LuckyBoxEntity implements _LuckyBoxEntity {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_LuckyBoxEntity &&
-            const DeepCollectionEquality().equals(other.id, id));
+            const DeepCollectionEquality().equals(other.id, id) &&
+            const DeepCollectionEquality().equals(other.openCost, openCost) &&
+            const DeepCollectionEquality()
+                .equals(other.speedUpCost, speedUpCost) &&
+            const DeepCollectionEquality().equals(other.isOpen, isOpen) &&
+            const DeepCollectionEquality()
+                .equals(other.waitingTime, waitingTime));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(id));
+  int get hashCode => Object.hash(
+      runtimeType,
+      const DeepCollectionEquality().hash(id),
+      const DeepCollectionEquality().hash(openCost),
+      const DeepCollectionEquality().hash(speedUpCost),
+      const DeepCollectionEquality().hash(isOpen),
+      const DeepCollectionEquality().hash(waitingTime));
 
   @JsonKey(ignore: true)
   @override
@@ -119,10 +197,23 @@ class _$_LuckyBoxEntity implements _LuckyBoxEntity {
 }
 
 abstract class _LuckyBoxEntity implements LuckyBoxEntity {
-  const factory _LuckyBoxEntity({required final int id}) = _$_LuckyBoxEntity;
+  const factory _LuckyBoxEntity(
+      {required final int id,
+      required final String openCost,
+      required final String speedUpCost,
+      required final int isOpen,
+      required final int waitingTime}) = _$_LuckyBoxEntity;
 
   @override
   int get id;
+  @override
+  String get openCost;
+  @override
+  String get speedUpCost;
+  @override
+  int get isOpen;
+  @override
+  int get waitingTime;
   @override
   @JsonKey(ignore: true)
   _$$_LuckyBoxEntityCopyWith<_$_LuckyBoxEntity> get copyWith =>

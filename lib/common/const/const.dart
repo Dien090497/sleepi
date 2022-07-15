@@ -140,6 +140,14 @@ class Const {
     },
   };
 
+  static const luckyBoxes = [
+    Imgs.icLuckyBoxBlack,
+    Imgs.icLuckyBoxBlue,
+    Imgs.icLuckyBoxGreen,
+    Imgs.icLuckyBoxOrange,
+    Imgs.icLuckyBoxPurple,
+  ];
+
   Const._();
 }
 

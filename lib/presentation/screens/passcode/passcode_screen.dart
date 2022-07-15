@@ -57,10 +57,10 @@ class PasscodeScreen extends StatelessWidget {
         builder: (context, walletState) {
           return BlocConsumer<PasscodeCubit, PasscodeState>(
             listener: (context, state) {
+              final walletCubit = context.read<WalletCubit>();
               final cubit = context.read<PasscodeCubit>();
               if (state is checkPassCodeValid) {
                 if (args != null) {
-                  final walletCubit = context.read<WalletCubit>();
                   if (args.route! == R.transfer) {
                     walletCubit.refresh();
                   } else {
@@ -70,7 +70,7 @@ class PasscodeScreen extends StatelessWidget {
                                 args.isShowSuccessDialog ?? false));
                   }
                 } else {
-                  // _createWalletDialog(context);
+                  walletCubit.getWallet();
                   Navigator.pop(context, true);
                 }
               } else {
@@ -119,7 +119,9 @@ class PasscodeScreen extends StatelessWidget {
                           SizedBox(height: 15.h),
                           PasscodeNumPad(
                             passcodeController: passCodeController,
-                            onCompleted: (String passcode) {
+                            onCompleted: (String passcode) async {
+                              await Future.delayed(
+                                  const Duration(milliseconds: 200));
                               cubit.checkPassCode(passCodeController.text);
                             },
                           ),

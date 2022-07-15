@@ -6,5 +6,6 @@ part 'bottom_navigation_state.freezed.dart';
 class BottomNavigationState with _$BottomNavigationState {
   const factory BottomNavigationState({
     @Default(0) int tabIndex,
+    @Default(-1) int tabIndexChild,
   }) = _BottomNavigationState;
 }

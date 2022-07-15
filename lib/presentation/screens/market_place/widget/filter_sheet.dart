@@ -53,10 +53,10 @@ class _FilterSheetState extends State<FilterSheet> {
     });
     widget.sliders.forEach((key, value) {
       if (key == LocaleKeys.level.tr()) {
-        selectedSliders[key] = widget.cubit.params.level!.toDouble();
+        selectedSliders[key] = widget.cubit.params.level?.toDouble() ?? 0;
       }
       if (key == LocaleKeys.mint.tr()) {
-        selectedSliders[key] = widget.cubit.params.bedMint!.toDouble();
+        selectedSliders[key] = widget.cubit.params.bedMint?.toDouble() ?? 0;
       }
       _key[key] = GlobalKey();
     });

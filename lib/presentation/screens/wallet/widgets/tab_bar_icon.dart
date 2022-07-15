@@ -41,20 +41,14 @@ class TabBarIcon extends TabBar {
                       ),
                     ),
                   )),
-
           indicator: BoxDecoration(
               borderRadius: BorderRadius.circular(100),
               gradient: AppColors.gradientBluePurple,
               color: AppColors.blue),
-
           indicatorColor: AppColors.purple,
           labelColor: AppColors.white,
-          // labelStyle: const TextStyle(color: AppColors.white),
           unselectedLabelColor: AppColors.purple,
-          // unselectedLabelStyle: const TextStyle(color: AppColors.purple),
           splashBorderRadius: BorderRadius.circular(100),
-
-          // padding: const EdgeInsets.symmetric(horizontal: 12),
           key: key,
         );
 }

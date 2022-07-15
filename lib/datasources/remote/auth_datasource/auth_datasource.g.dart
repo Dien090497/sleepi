@@ -428,13 +428,14 @@ class _AuthDataSource implements AuthDataSource {
 
   @override
   Future<OwnerNFTResponse> getNftByOwner(
-      limit, page, categoryId, itemNFT) async {
+      limit, page, categoryId, itemNFT, bedType) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{
       r'limit': limit,
       r'page': page,
       r'categoryId': categoryId,
-      r'item': itemNFT.toJson()
+      r'item': itemNFT.toJson(),
+      r'type': bedType
     };
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
@@ -584,9 +585,7 @@ class _AuthDataSource implements AuthDataSource {
   @override
   Future<dynamic> openLuckyBox(luckyBoxId) async {
     const _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{
-      r'luckyBoxId': luckyBoxId.toJson()
-    };
+    final queryParameters = <String, dynamic>{r'luckyBoxId': luckyBoxId};
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
     final _result = await _dio.fetch(_setStreamType<dynamic>(
@@ -595,6 +594,63 @@ class _AuthDataSource implements AuthDataSource {
                 queryParameters: queryParameters, data: _data)
             .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
     final value = _result.data;
+    return value;
+  }
+
+  @override
+  Future<dynamic> speedUpLuckyBox(speedUpLuckyBoxSchema) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    _data.addAll(speedUpLuckyBoxSchema.toJson());
+    final _result = await _dio.fetch(_setStreamType<dynamic>(
+        Options(method: 'POST', headers: _headers, extra: _extra)
+            .compose(_dio.options, '/lucky_box',
+                queryParameters: queryParameters, data: _data)
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = _result.data;
+    return value;
+  }
+
+  @override
+  Future<EstimateSleepResponse> estimateSleepEarn(
+      bedId, itemId, enableInsurance) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{
+      r'bedUsed': bedId,
+      r'itemUsed': itemId,
+      r'isEnableInsurance': enableInsurance
+    };
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<EstimateSleepResponse>(
+            Options(method: 'GET', headers: _headers, extra: _extra)
+                .compose(_dio.options, '/tracking/estimate-tracking',
+                    queryParameters: queryParameters, data: _data)
+                .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = EstimateSleepResponse.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<TrackingResultChartData> fetchDataChart(fdate, tdate, type) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{
+      r'fdate': fdate,
+      r'tdate': tdate,
+      r'type': type
+    };
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<TrackingResultChartData>(
+            Options(method: 'GET', headers: _headers, extra: _extra)
+                .compose(_dio.options, '/tracking-result/chart',
+                    queryParameters: queryParameters, data: _data)
+                .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = TrackingResultChartData.fromJson(_result.data!);
     return value;
   }
 

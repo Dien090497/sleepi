@@ -15,10 +15,7 @@ class HomeState with _$HomeState {
 
   const factory HomeState.loaded({
     required List<BedEntity> bedList,
-    required int id,
-    required int level,
-    required double durability,
-    required int time,
+    required BedEntity? selectedBed,
     BedEntity? item,
     List<ItemEntity>? itemList,
     @Default([]) List<LuckyBoxEntity> luckyBoxes,
@@ -30,6 +27,8 @@ class HomeState with _$HomeState {
     @Default(false) bool loading,
     @Default(true) bool enableInsurance,
     @Default(0.0) double tokenEarn,
+    required int hour,
+    required int minute,
   }) = HomeLoaded;
 
   const factory HomeState.error(String message) = HomeError;

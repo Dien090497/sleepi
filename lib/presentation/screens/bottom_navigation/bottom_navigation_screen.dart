@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:slee_fi/common/utils/appsflyer_custom.dart';
 import 'package:slee_fi/common/widgets/background_widget.dart';
 import 'package:slee_fi/common/widgets/sf_bottom_navigator_home.dart';
+import 'package:slee_fi/common/widgets/sf_tab_bar.dart';
 import 'package:slee_fi/di/injector.dart';
 import 'package:slee_fi/presentation/blocs/bottom_navigation/bottom_navigation_bloc.dart';
 import 'package:slee_fi/presentation/blocs/bottom_navigation/bottom_navigation_state.dart';
@@ -20,15 +21,15 @@ class BottomNavigationScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     context.read<WalletCubit>().checkWallet();
     final app = getIt<AppFlyerCustom>();
-
+    final GlobalKey<SFTabBarState> marketTabKey = GlobalKey();
     final PageController pageController = PageController();
 
-    const screens = [
-      HomeScreen(),
-      GachaScreen(),
-      ProductDetailScreen(),
-      ChartScreen(),
-      MarketPlaceScreen(),
+    var screens = [
+      const HomeScreen(),
+      const GachaScreen(),
+      const ProductDetailScreen(),
+      const ChartScreen(),
+      MarketPlaceScreen(tabKey: marketTabKey),
     ];
 
     // WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
@@ -40,6 +41,10 @@ class BottomNavigationScreen extends StatelessWidget {
     return BlocConsumer<BottomNavigationBloc, BottomNavigationState>(
       listener: (context, state) {
         pageController.jumpToPage(state.tabIndex);
+        if (state.tabIndexChild > 0) {
+          Future.delayed(const Duration(milliseconds: 500),
+              () => marketTabKey.currentState?.moveToTab(state.tabIndexChild));
+        }
       },
       builder: (context, navState) {
         return BackgroundWidget(

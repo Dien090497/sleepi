@@ -82,7 +82,7 @@ class _TabItemsBuyState extends State<TabItemsBuy> {
           builder: (context, state) {
             final cubit = context.read<MarketPlaceCubit>();
             return FocusDetector(
-              onFocusGained: (){
+              onFocusGained: () {
                 cubit.clearFilter();
               },
               child: Column(
@@ -141,8 +141,8 @@ class _TabItemsBuyState extends State<TabItemsBuy> {
                                             child: ItemBedBuyWidget(
                                               item: listItems[i],
                                               onPressedButton: () {
-                                                _showItemDialog(
-                                                    context, listItems[i], cubit);
+                                                _showItemDialog(context,
+                                                    listItems[i], cubit);
                                               },
                                             ),
                                           );
