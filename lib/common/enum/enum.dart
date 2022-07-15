@@ -114,3 +114,5 @@ enum TransferType {
 }
 
 enum ErrorType { addItemToBed, removeItemFromBed, none }
+
+enum TypeChart { slftChart, sleepScoreChart, bedTimeChart, sleepOnsetChart, wokeUpChart, sleepDurationChart, timeInBedChart, nocturalAwakenChart }

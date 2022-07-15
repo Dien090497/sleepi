@@ -634,6 +634,26 @@ class _AuthDataSource implements AuthDataSource {
     return value;
   }
 
+  @override
+  Future<TrackingResultChartData> fetchDataChart(fdate, tdate, type) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{
+      r'fdate': fdate,
+      r'tdate': tdate,
+      r'type': type
+    };
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<TrackingResultChartData>(
+            Options(method: 'GET', headers: _headers, extra: _extra)
+                .compose(_dio.options, '/tracking-result/chart',
+                    queryParameters: queryParameters, data: _data)
+                .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = TrackingResultChartData.fromJson(_result.data!);
+    return value;
+  }
+
   RequestOptions _setStreamType<T>(RequestOptions requestOptions) {
     if (T != dynamic &&
         !(requestOptions.responseType == ResponseType.bytes ||

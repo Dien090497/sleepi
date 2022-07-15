@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:injectable/injectable.dart';
 import 'package:jiffy/jiffy.dart';
 
@@ -57,5 +58,9 @@ class DateTimeUtils {
 
   DateTime subtractMonth(DateTime time, int months) {
     return Jiffy(time).subtract(months: months).dateTime;
+  }
+  String convertTime ({required int timeStamp}) {
+    var date = DateFormat('yyyy-MM-dd').format(DateTime.fromMillisecondsSinceEpoch(timeStamp * 1000));
+    return date.toString();
   }
 }

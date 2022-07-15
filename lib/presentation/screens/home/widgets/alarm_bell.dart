@@ -95,27 +95,29 @@ class AlarmBell extends StatelessWidget {
               Row(
                 children: [
                   Expanded(
-                      child: Stack(
-                    alignment: Alignment.centerLeft,
-                    children: [
-                      SFPercentBorderGradient(
-                        valueActive: state is HomeLoaded ? state.tokenEarn : 0,
-                        totalValue: 150,
-                        linearGradient: AppColors.gradientBluePurple,
-                        lineHeight: 18,
-                        barRadius: 20,
-                        backgroundColor: Colors.white.withOpacity(0.05),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                        child: SFText(
-                          keyText:
-                              '${state is HomeLoaded ? state.tokenEarn : 0}/150 SLFT',
-                          style: TextStyles.white10,
+                    child: Stack(
+                      alignment: Alignment.centerLeft,
+                      children: [
+                        SFPercentBorderGradient(
+                          valueActive:
+                              state is HomeLoaded ? state.tokenEarn : 0,
+                          totalValue: 150,
+                          linearGradient: AppColors.gradientBluePurple,
+                          lineHeight: 18,
+                          barRadius: 20,
+                          backgroundColor: Colors.white.withOpacity(0.05),
                         ),
-                      )
-                    ],
-                  )),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                          child: SFText(
+                            keyText:
+                                '${state is HomeLoaded ? state.tokenEarn : 0}/150 SLFT',
+                            style: TextStyles.white10,
+                          ),
+                        )
+                      ],
+                    ),
+                  ),
                   const SizedBox(width: 12),
                   GestureDetector(
                     onTap: () => Navigator.pushNamed(context, R.question),

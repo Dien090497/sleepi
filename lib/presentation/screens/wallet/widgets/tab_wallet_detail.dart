@@ -39,7 +39,7 @@ class TabWalletDetail extends StatefulWidget {
 }
 
 class _TabWalletDetailState extends State<TabWalletDetail> {
-  late Timer timer;
+  Timer? timer;
   double balance = 0;
   String networkName = '';
   String currencySymbol = '';
@@ -48,15 +48,9 @@ class _TabWalletDetailState extends State<TabWalletDetail> {
   final RefreshController refreshController = RefreshController();
 
   @override
-  void initState() {
-    _startTimer();
-    super.initState();
-  }
-
-  @override
   void dispose() {
     refreshController.dispose();
-    timer.cancel();
+    timer?.cancel();
     super.dispose();
   }
 
@@ -67,14 +61,14 @@ class _TabWalletDetailState extends State<TabWalletDetail> {
 
   void _startTimer() {
     final walletCubit = context.read<WalletCubit>();
+    if (timer != null) {
+      timer?.cancel();
+      timer = null;
+    }
     timer = Timer.periodic(
       const Duration(seconds: 10),
-      (Timer timer) async {
-        if (!walletCubit.isClosed) {
-          await walletCubit.refresh();
-        } else {
-          timer.cancel();
-        }
+      (Timer t) async {
+        await walletCubit.refresh();
       },
     );
   }
@@ -100,17 +94,16 @@ class _TabWalletDetailState extends State<TabWalletDetail> {
           onFocusGained: () async {
             if (!walletCubit.isClosed) {
               await walletCubit.refresh();
+              _startTimer();
             } else {
-              timer.cancel();
+              timer?.cancel();
             }
           },
           onFocusLost: () {
-            timer.cancel();
+            timer?.cancel();
           },
           child: SmartRefresher(
             controller: refreshController,
-            enablePullDown: true,
-            header: const WaterDropHeader(),
             onRefresh: () {
               _onRefresh(walletCubit);
             },
@@ -120,8 +113,7 @@ class _TabWalletDetailState extends State<TabWalletDetail> {
                   const SizedBox(height: 32),
                   SFText(keyText: networkName, style: TextStyles.bold12Blue),
                   const SizedBox(height: 4.0),
-                  SFText(
-                      keyText: '${balance.formatBalanceToken} $currencySymbol',
+                  Text('${balance.formatBalanceToken} $currencySymbol',
                       style: TextStyles.bold30White),
                   const SizedBox(height: 20.0),
                   GestureDetector(
@@ -134,93 +126,76 @@ class _TabWalletDetailState extends State<TabWalletDetail> {
                         borderRadius: BorderRadius.circular(20.0),
                         color: AppColors.lightWhite.withOpacity(0.05),
                       ),
-                      child: SFText(
-                          keyText: addressWallet.formatAddress,
+                      child: Text(addressWallet.formatAddress,
                           style: TextStyles.lightWhite14),
                     ),
                   ),
                   const SizedBox(height: 16.0),
-                  ConstrainedBox(
+                  Container(
                     constraints: const BoxConstraints(maxHeight: 130),
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 23),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          Expanded(
-                            child: BoxButtonWidget(
-                              onTap: () => SFModalBottomSheet.show(
-                                  context,
-                                  0.7,
-                                  ModalReceiveWallet(
-                                    networkName: networkName,
-                                    address: addressWallet,
-                                  )),
-                              text: LocaleKeys.receive,
-                              assetImage: Ics.icDownload,
-                            ),
+                    padding: const EdgeInsets.symmetric(horizontal: 23),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        Expanded(
+                          child: BoxButtonWidget(
+                            onTap: () => SFModalBottomSheet.show(
+                                context,
+                                0.7,
+                                ModalReceiveWallet(
+                                  networkName: networkName,
+                                  address: addressWallet,
+                                )),
+                            text: LocaleKeys.receive,
+                            assetImage: Ics.icDownload,
                           ),
-                          const SizedBox(width: 10),
-                          Expanded(
-                            child: BoxButtonWidget(
-                              onTap: () {
-                                if (tokenList.length < 2) {
-                                  // Navigator.pushNamed(
-                                  //   context,
-                                  //   R.transfer,
-                                  //   arguments: TransferScreenArg(
-                                  //       const TokenEntity(
-                                  //           address: '',
-                                  //           displayName: 'avax',
-                                  //           name: '',
-                                  //           symbol: 'avax',
-                                  //           icon: Ics.icAvax,
-                                  //           balance: 0),
-                                  //       false,
-                                  //   TransferType.token),
-                                  // );
-                                  return;
-                                }
-                                Navigator.pushNamed(
-                                  context,
-                                  R.transfer,
-                                  arguments: TransferScreenArg(
-                                      tokenList[2], false, TransferType.token),
-                                );
-                              },
-                              text: LocaleKeys.to_spending,
-                              assetImage: Ics.icRefresh,
-                            ),
+                        ),
+                        const SizedBox(width: 10),
+                        Expanded(
+                          child: BoxButtonWidget(
+                            onTap: () {
+                              if (tokenList.length < 2) {
+                                return;
+                              }
+                              Navigator.pushNamed(
+                                context,
+                                R.transfer,
+                                arguments: TransferScreenArg(
+                                    tokenList[2], false, TransferType.token),
+                              );
+                            },
+                            text: LocaleKeys.to_spending,
+                            assetImage: Ics.icRefresh,
                           ),
-                          const SizedBox(width: 10),
-                          Expanded(
-                            child: BoxButtonWidget(
-                              onTap: () => Navigator.pushNamed(
-                                  context, R.sendToExternal),
-                              text: LocaleKeys.to_external,
-                              assetImage: Ics.icArrowUpRight,
-                            ),
+                        ),
+                        const SizedBox(width: 10),
+                        Expanded(
+                          child: BoxButtonWidget(
+                            onTap: () =>
+                                Navigator.pushNamed(context, R.sendToExternal),
+                            text: LocaleKeys.to_external,
+                            assetImage: Ics.icArrowUpRight,
                           ),
-                          const SizedBox(width: 10),
-                          Expanded(
-                            child: BoxButtonWidget(
-                              onTap: () {
-                                Navigator.pushNamed(
-                                  context,
-                                  R.trade,
-                                  arguments: TradeArguments(
-                                    Const.tokens[0]['address'].toString(),
-                                  ),
-                                );
-                              },
-                              text: LocaleKeys.trade
-                                  .tr()
-                                  .reCase(StringCase.titleCase),
-                              assetImage: Ics.icTransfer,
-                            ),
+                        ),
+                        const SizedBox(width: 10),
+                        Expanded(
+                          child: BoxButtonWidget(
+                            onTap: () {
+                              Navigator.pushNamed(
+                                context,
+                                R.trade,
+                                arguments: TradeArguments(
+                                  Const.tokens[0]['address'].toString(),
+                                ),
+                              );
+                            },
+                            text: LocaleKeys.trade
+                                .tr()
+                                .reCase(StringCase.titleCase),
+                            assetImage: Ics.icTransfer,
                           ),
-                        ],
-                      ),
+                        ),
+                      ],
                     ),
                   ),
                   const SizedBox(height: 20.0),
