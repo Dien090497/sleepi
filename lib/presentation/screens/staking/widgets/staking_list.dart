@@ -123,7 +123,7 @@ class _StakingListState extends State<StakingList> {
                         Expanded(
                           flex: 3,
                           child: SFText(
-                            keyText: "(=${(double.parse(checkValueTvl)/checkValuePriceUsd).isNaN ? 0 : (double.parse(checkValueTvl)/checkValuePriceUsd)} USD)",
+                            keyText: "(=${(double.parse(checkValueTvl)*checkValuePriceUsd).isNaN ? 0 : (double.parse(checkValueTvl)*checkValuePriceUsd).formatBalanceToken} USD)",
                             style: TextStyles.w400White14,
                             textAlign: TextAlign.end,
                           ),
