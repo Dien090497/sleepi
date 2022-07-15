@@ -409,5 +409,7 @@
   "invalid_address": "Invalid address. Please try again",
   "you_dont_have_enough_money_to_staking": "You don't have enough money to staking.",
   "click_here_to_proceed": "Click here to proceed",
-  "continue_" : "Continue"
+  "continue_" : "Continue",
+  "do_you_really_want_to_change": "言語を変更しますか?",
+  "the_language_setting_has_been_updated": "言語設定が変更されました"
 }
