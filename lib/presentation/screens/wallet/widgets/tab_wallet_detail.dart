@@ -117,7 +117,10 @@ class _TabWalletDetailState extends State<TabWalletDetail> {
                       style: TextStyles.bold30White),
                   const SizedBox(height: 20.0),
                   GestureDetector(
-                    onTap: () => _copyAddress(fToast, context, addressWallet),
+                    onTap: () {
+                      fToast.removeCustomToast();
+                      _copyAddress(fToast, context, addressWallet);
+                    },
                     child: Container(
                       padding: const EdgeInsets.symmetric(
                           vertical: 6.0, horizontal: 16.0),
@@ -255,8 +258,13 @@ class _TabWalletDetailState extends State<TabWalletDetail> {
     );
   }
 
-  void _copyAddress(FToast fToast, BuildContext context, String address) {
-    Clipboard.setData(ClipboardData(text: address));
+  void _copyAddress(FToast fToast, BuildContext context, String address) async{
+    ClipboardData? data = await Clipboard.getData(Clipboard.kTextPlain);
+    if(data != null){
+      // debugPrint(data.text);
+    }else {
+      Clipboard.setData(ClipboardData(text: address));
+    }
     ToastUtils.showToast(
       fToast,
       AppColors.white.withOpacity(0.55),

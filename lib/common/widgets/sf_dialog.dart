@@ -122,6 +122,7 @@ Future<T?> showSignUpSuccess<T>(
       });
 }
 
+
 Future<T?> showChangeLanguageDialog<T>(BuildContext context,
     {required Locale locale}) async {
   return showDialog(
@@ -142,7 +143,7 @@ Future<T?> showChangeLanguageDialog<T>(BuildContext context,
             const SFIcon(Ics.warning),
             const SizedBox(height: 20),
             SFText(
-              keyText: LocaleKeys.do_you_want_to_leave,
+              keyText: LocaleKeys.do_you_really_want_to_change,
               style: TextStyles.white1w700size18,
             ),
             const SizedBox(height: 38),
@@ -165,6 +166,7 @@ Future<T?> showChangeLanguageDialog<T>(BuildContext context,
                     gradient: AppColors.gradientBlue,
                     textStyle: TextStyles.white16,
                     onPressed: () {
+                      showLanguageUpdatedDialog(context);
                       context.setLocale(locale);
                       Phoenix.rebirth(context);
                     },
@@ -176,6 +178,54 @@ Future<T?> showChangeLanguageDialog<T>(BuildContext context,
         );
       });
 }
+
+
+Future<T?> showLanguageUpdatedDialog<T>(
+    BuildContext context
+    ) async {
+  return showDialog(
+      context: context,
+      barrierColor: AppColors.backgroundDialog,
+      builder: (context) {
+        return SFDialog(
+          padding: EdgeInsets.zero,
+          children: [
+            Align(
+              alignment: Alignment.centerRight,
+              child: IconButton(
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+                icon: const Icon(Icons.close, color: AppColors.white),
+              ),
+            ),
+            SFText(
+                keyText: LocaleKeys.successfull,
+                maxLines: 1,
+                style: TextStyles.bold18White),
+            const SizedBox(height: 12),
+            SFText(
+                keyText: LocaleKeys.the_language_setting_has_been_updated,
+                maxLines: 1,
+                style: TextStyles.lightGrey14),
+            const SizedBox(height: 44),
+            const SFIcon(Ics.successful),
+            const SizedBox(height: 50),
+            SFButton(
+              width: 180,
+              height: 48,
+              text: LocaleKeys.ok,
+              textStyle: TextStyles.w600WhiteSize16,
+              onPressed: () => Navigator.of(context).pop(),
+              color: AppColors.blue,
+            ),
+            const SizedBox(height: 32),
+          ],
+        );
+      });
+}
+
+
 
 class SFDialog extends StatelessWidget {
   const SFDialog(

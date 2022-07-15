@@ -30,6 +30,7 @@ class _ShowSeedPhraseScreenState extends State<ShowSeedPhraseScreen> {
 
   @override
   Widget build(BuildContext context) {
+    var sizeHeight = MediaQuery.of(context).size.height;
     return BackgroundWidget(
       appBar: SFAppBar(
         context: context,
@@ -41,45 +42,45 @@ class _ShowSeedPhraseScreenState extends State<ShowSeedPhraseScreen> {
           padding: const EdgeInsets.all(16.0),
           child: Column(
             children: [
-              Expanded(
-                  child: SFCard(
+              SFCard(
+                height: sizeHeight * 0.66,
                 child: FutureBuilder<dartz.Either<FailureMessage, String>>(
-                  future: _currentMnemonic.call(NoParams()),
-                  builder: (context, snapshot) {
-                    if (snapshot.hasData && snapshot.data!.isRight()) {
-                      snapshot.data!.foldRight(
-                          String, (r, previous) => seedPhrase = r.split(' '));
-                      return ListView.separated(
-                          physics: const BouncingScrollPhysics(),
-                          padding: EdgeInsets.zero,
-                          separatorBuilder: (context, index) => Divider(
-                                color: AppColors.lightWhite.withOpacity(0.05),
-                                height: 1,
-                              ),
-                          itemCount: seedPhrase.length,
-                          itemBuilder: (BuildContext context, int index) =>
-                              SFListTile(
-                                text: "${index + 1}",
-                                trailing: SFText(
-                                  keyText: hide ? "-----" : seedPhrase[index],
-                                  stringCase: StringCase.lowerCaseCase,
-                                  style: TextStyles.lightGrey14,
-                                ),
-                              ));
-                    } else if (snapshot.hasData && snapshot.data!.isRight()) {
-                      String messages = '';
-                      snapshot.data!.foldLeft(
-                          FailureMessage, (previous, r) => messages = r);
-                      return Center(
-                          child: SFText(
-                              keyText: messages, style: TextStyles.white12));
-                    }
+              future: _currentMnemonic.call(NoParams()),
+              builder: (context, snapshot) {
+                if (snapshot.hasData && snapshot.data!.isRight()) {
+                  snapshot.data!.foldRight(
+                      String, (r, previous) => seedPhrase = r.split(' '));
+                  return ListView.separated(
+                      physics: const BouncingScrollPhysics(),
+                      padding: EdgeInsets.zero,
+                      separatorBuilder: (context, index) => Divider(
+                            color: AppColors.lightWhite.withOpacity(0.05),
+                            height: 1,
+                          ),
+                      itemCount: seedPhrase.length,
+                      itemBuilder: (BuildContext context, int index) =>
+                          SFListTile(
+                            text: "${index + 1}",
+                            trailing: SFText(
+                              keyText: hide ? "-----" : seedPhrase[index],
+                              stringCase: StringCase.lowerCaseCase,
+                              style: TextStyles.lightGrey14,
+                            ),
+                          ));
+                } else if (snapshot.hasData && snapshot.data!.isRight()) {
+                  String messages = '';
+                  snapshot.data!.foldLeft(
+                      FailureMessage, (previous, r) => messages = r);
+                  return Center(
+                      child: SFText(
+                          keyText: messages, style: TextStyles.white12));
+                }
 
-                    return const Center(child: CircularProgressIndicator());
-                  },
+                return const Center(child: CircularProgressIndicator());
+              },
                 ),
-              )),
-              const SizedBox(height: 12.0),
+              ),
+               SizedBox(height: sizeHeight * 0.03),
               SFText(
                 keyText: LocaleKeys.displays_message_show_seed_phrase,
                 style: TextStyles.lightGrey12,
@@ -97,7 +98,6 @@ class _ShowSeedPhraseScreenState extends State<ShowSeedPhraseScreen> {
                   style: TextStyles.bold18White,
                 ),
               ),
-              const SizedBox(height: 16.0),
             ],
           ),
         ),
