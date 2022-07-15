@@ -150,7 +150,6 @@ class SigInSignUpCubit extends Cubit<SignInSignUpState> {
     if (message.isNotEmpty) {
       emit(SignInSignUpState.error(message));
     }
-    'message is $message'.log;
     return message.isNotEmpty;
   }
 

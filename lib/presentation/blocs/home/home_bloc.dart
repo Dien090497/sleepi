@@ -3,7 +3,6 @@ import 'dart:async';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:slee_fi/common/enum/enum.dart';
-import 'package:slee_fi/common/extensions/string_x.dart';
 import 'package:slee_fi/di/injector.dart';
 import 'package:slee_fi/entities/bed_entity/bed_entity.dart';
 import 'package:slee_fi/entities/item_entity/item_entity.dart';
@@ -261,7 +260,6 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     if (currentState is HomeLoaded) {
       var result = await _fetchLuckyBoxUC.call(NoParams());
       result.fold((l) {
-        'load lucky box error ${l.msg}'.log;
       }, (r) {
         emit(currentState.copyWith(
             luckyBoxes: r.map((e) => e.toEntity()).toList()));

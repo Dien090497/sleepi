@@ -3,7 +3,6 @@ import 'dart:async';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:slee_fi/common/const/const.dart';
 import 'package:slee_fi/common/enum/enum.dart';
-import 'package:slee_fi/common/extensions/string_x.dart';
 import 'package:slee_fi/di/injector.dart';
 import 'package:slee_fi/presentation/blocs/pending/pending_event.dart';
 import 'package:slee_fi/presentation/blocs/pending/pending_state.dart';
@@ -37,7 +36,6 @@ class PendingBloc extends Bloc<PendingEvent, PendingState> {
     var networkUc = await _getCurrentNetworkUseCase.call(null);
     networkUc.fold((l) => explorers = Const.avascanUrl, (r) {
       explorers = r.explorers.first.url;
-      'profile explorer is  ${r.explorers.first.url}'.log;
     });
   }
 

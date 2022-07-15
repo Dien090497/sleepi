@@ -50,7 +50,7 @@ class _TabPendingDetailState extends State<TabPendingDetail> {
   }
 
   void _onScroll() {
-    if (_isBottom) BlocProvider.of<PendingBloc>(context).add(PendingFetched());
+    if (_isBottom) BlocProvider.of<PendingBloc>(context).add(const PendingFetched());
   }
 
   bool get _isBottom {

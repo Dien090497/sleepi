@@ -1,6 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:slee_fi/common/extensions/string_x.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
 import 'package:slee_fi/common/widgets/loading_screen.dart';
@@ -135,7 +134,6 @@ class ModalItemList extends StatelessWidget {
   }
 
   Future<void> _onLoadMore() async {
-    'add new event load more'.log;
     homeBloc.add(LoadMoreItem());
     await Future.delayed(const Duration(milliseconds: 5000));
   }
