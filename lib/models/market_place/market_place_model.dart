@@ -93,6 +93,8 @@ class MarketPlaceModel {
   BedEntity toBedEntity() {
     return BedEntity(
       name: nftName,
+      nftClass: classNft ?? '',
+      tokenId: tokenId,
       id: id,
       level: level,
       image: image,

@@ -1,6 +1,7 @@
 import 'dart:core';
 
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:slee_fi/common/extensions/string_x.dart';
 import 'package:slee_fi/entities/bed_entity/bed_entity.dart';
 
 part 'beb_model.g.dart';
@@ -114,8 +115,11 @@ class BedModel {
   Map<String, dynamic> toJson() => _$BedModelToJson(this);
 
   BedEntity toEntity() {
+    'id nft is  $nftId   $id'.log;
     return BedEntity(
       name: nftName,
+      nftClass: nftClass,
+      tokenId: tokenId,
       id: id,
       level: level,
       image: image,
