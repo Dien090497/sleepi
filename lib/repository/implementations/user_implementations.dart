@@ -141,7 +141,7 @@ class UserImplementation extends IUserRepository {
   @override
   Future<Either<FailureMessage, List<BedModel>>> fetchListBed(
       FetchBedParam fetchBedParam) async {
-    // try {
+    try {
     final result = await _authDataSource.getNftByOwner(
       fetchBedParam.limit,
       fetchBedParam.page,
@@ -150,9 +150,9 @@ class UserImplementation extends IUserRepository {
       fetchBedParam.bedType,
     );
     return Right(result.list);
-    // } catch (e) {
-    //   return Left(FailureMessage.fromException(e));
-    // }
+    } catch (e) {
+      return Left(FailureMessage.fromException(e));
+    }
   }
 
   @override
