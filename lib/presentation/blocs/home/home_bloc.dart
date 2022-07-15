@@ -199,7 +199,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
 
   void _addItemToBed(AddItem event, Emitter<HomeState> emit) async {
     final currentState = state;
-    if (currentState is HomeLoaded) {
+    if (currentState is HomeLoaded && currentState.bedList.isNotEmpty) {
       final result = await _addItemToBedUC
           .call(AddItemToBedParam(currentBedId, event.item.id));
       result.fold((l) {

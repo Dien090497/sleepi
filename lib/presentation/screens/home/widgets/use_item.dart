@@ -40,10 +40,7 @@ class UseItem extends StatelessWidget {
           showSuccessfulDialog(context, null);
         },
         builder: (context, state) {
-          if (state is! HomeLoaded || state.bedList.isEmpty) {
-            return const SizedBox();
-          }
-          return (state.selectedItem != null)
+          return (state is HomeLoaded && state.selectedItem != null)
               ? Container(
                   padding: const EdgeInsets.symmetric(horizontal: 16),
                   decoration: BoxDecoration(
