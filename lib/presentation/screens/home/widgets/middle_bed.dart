@@ -86,12 +86,15 @@ class MiddleBed extends StatelessWidget {
                               homeBloc.add(ChangeBed(bed: bed));
                             },
                             loop: state.bedList.isNotEmpty,
+
                             itemCount: state.bedList.isEmpty
                                 ? 1
                                 : state.bedList.length +
                                     (state.loadMoreBed ? 1 : 0),
+
                             control: const SwiperControl(
-                                disableColor: AppColors.grey),
+                                disableColor: AppColors.transparent),
+
                             // loop: state.bedList.isNotEmpty,
                           )
                         : state is HomeLoading
