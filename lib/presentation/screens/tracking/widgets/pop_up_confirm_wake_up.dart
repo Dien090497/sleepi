@@ -45,7 +45,7 @@ class PopUpConfirmWakeUp extends StatelessWidget {
                 width: double.infinity,
                 textStyle: TextStyles.bold14LightWhite,
                 color: AppColors.blue,
-                onPressed: ()  {
+                onPressed: () {
                   Navigator.pop(context);
                   Navigator.pushNamed(context, R.result);
                   if (onPressed != null) {

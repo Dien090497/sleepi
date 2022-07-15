@@ -17,11 +17,3 @@ Map<String, dynamic> _$ListNftDataModelToJson(ListNftDataModel instance) =>
     <String, dynamic>{
       'data': instance.data?.map((e) => e.toJson()).toList(),
     };
-
-_Meta _$MetaFromJson(Map<String, dynamic> json) => _Meta(
-      json['count'] as int,
-    );
-
-Map<String, dynamic> _$MetaToJson(_Meta instance) => <String, dynamic>{
-      'count': instance.count,
-    };

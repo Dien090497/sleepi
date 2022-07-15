@@ -1,6 +1,5 @@
 import 'package:dartz/dartz.dart';
 import 'package:injectable/injectable.dart';
-import 'package:slee_fi/entities/token/token_entity.dart';
 import 'package:slee_fi/failures/failure.dart';
 import 'package:slee_fi/repository/spending_repository.dart';
 import 'package:slee_fi/repository/wallet_repository.dart';
@@ -31,13 +30,4 @@ class ApproveUseCase extends UseCase<String, ToSpendingParams> {
       });
     });
   }
-}
-
-class SendTokenExternalParams {
-  final double valueInEther;
-  final String toAddress;
-  final TokenEntity? tokenEntity;
-
-  const SendTokenExternalParams(
-      {required this.toAddress, required this.valueInEther, this.tokenEntity});
 }

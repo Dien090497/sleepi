@@ -1,9 +1,0 @@
-<svg enable-background="new 0 0 500 500" viewBox="0 0 500 500" xmlns="http://www.w3.org/2000/svg">
-    <mask height="500.5" id="a" maskUnits="userSpaceOnUse" width="250.2" x="124.9" y="0">
-        <path clip-rule="evenodd" d="m124.9 0h250.2v500.5h-250.2z" fill="#fff"
-            fill-rule="evenodd" />
-    </mask>
-    <path clip-rule="evenodd"
-        d="m143.8 250.2h74.1c10.4 0 18.8 8.4 18.8 18.8v111.8c0 5 2 9.8 5.5 13.3l100.8 100.8c11.9 11.9 32.2 3.5 32.2-13.3v-462.7c0-16.8-20.3-25.2-32.2-13.3l-212.6 212.5c-11.8 11.9-3.4 32.1 13.4 32.1"
-        fill="#c60300" fill-rule="evenodd" mask="url(#a)" />
-</svg>

@@ -30,9 +30,6 @@ class FailureMessage extends Failure {
       }
     } catch (_) {}
     throw Exception(e);
-'error from server $e'.log;
-    return const FailureMessage(
-        'Error! An error occurred. Please try again later');
   }
 
   @override

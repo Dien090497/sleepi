@@ -1,4 +1,3 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:slee_fi/common/extensions/string_x.dart';
@@ -36,8 +35,7 @@ class ItemBedBuyWidget extends StatelessWidget {
             top: 20,
             left: -30,
             child: TopLeftBanner(
-              text:item.type.reCase(StringCase.titleCase)
-                  ,
+              text: item.type.reCase(StringCase.titleCase),
               textColor: qualityColor,
             ),
           ),
