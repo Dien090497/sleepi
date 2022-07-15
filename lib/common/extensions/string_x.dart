@@ -132,6 +132,7 @@ extension StringX on String {
       case 'epic':
         return AppColors.epicBed;
       case 'legend':
+      case 'legendary':
         return AppColors.legendaryBed;
     }
     return AppColors.commonBed;

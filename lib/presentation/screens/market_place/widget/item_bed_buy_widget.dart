@@ -62,7 +62,7 @@ class ItemBedBuyWidget extends StatelessWidget {
                         const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
                     alignment: Alignment.center,
                     child: SFText(
-                      keyText: item.id.toString(),
+                      keyText: item.tokenId.toString(),
                       style: TextStyles.white1w700size12
                           .copyWith(color: qualityColor),
                     ),

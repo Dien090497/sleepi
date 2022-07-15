@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
+import 'package:slee_fi/common/extensions/string_x.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
 import 'package:slee_fi/common/widgets/sf_buttons.dart';
@@ -30,7 +31,7 @@ class FilterSheet extends StatefulWidget {
 
 class _FilterSheetState extends State<FilterSheet> {
   late Map<String, List<String>> selectedSections = {};
-  late Map<String, double> selectedSliders = {};
+  late Map<String, SfRangeValues> selectedSliders = {};
   final Map<String, GlobalKey<_SliderState>> _key = {};
 
   @override
@@ -53,10 +54,12 @@ class _FilterSheetState extends State<FilterSheet> {
     });
     widget.sliders.forEach((key, value) {
       if (key == LocaleKeys.level.tr()) {
-        selectedSliders[key] = widget.cubit.params.level?.toDouble() ?? 0;
+        selectedSliders[key] = SfRangeValues(
+            widget.cubit.params.minLevel, widget.cubit.params.maxLevel);
       }
       if (key == LocaleKeys.mint.tr()) {
-        selectedSliders[key] = widget.cubit.params.bedMint?.toDouble() ?? 0;
+        selectedSliders[key] = SfRangeValues(
+            widget.cubit.params.minBedMint, widget.cubit.params.maxBedMint);
       }
       _key[key] = GlobalKey();
     });
@@ -67,10 +70,10 @@ class _FilterSheetState extends State<FilterSheet> {
       selectedSections[key] = [];
     });
     widget.sliders.forEach((key, value) {
-      selectedSliders[key] = 0;
+      selectedSliders[key] = SfRangeValues(value.min, value.max);
     });
     _key.forEach((key, value) {
-      _key[key]?.currentState?._value = selectedSliders[key]!;
+      _key[key]?.currentState?.sfRangeValues = selectedSliders[key]!;
     });
   }
 
@@ -134,9 +137,9 @@ class _FilterSheetState extends State<FilterSheet> {
                     key: _key[widget.sliders.keys.elementAt(i)],
                     label: widget.sliders.keys.elementAt(i),
                     sliders: widget.sliders.values.elementAt(i),
-                    value:
-                        selectedSliders[widget.sliders.keys.elementAt(i)] ?? 0,
-                    onSelect: (double v) {
+                    // value:
+                    //     selectedSliders[widget.sliders.keys.elementAt(i)] ?? 0,
+                    onSelect: (SfRangeValues v) {
                       selectedSliders[widget.sliders.keys.elementAt(i)] = v;
                       setState(() {});
                     },
@@ -170,7 +173,7 @@ class _FilterSheetState extends State<FilterSheet> {
 class _Slider extends StatefulWidget {
   const _Slider({
     Key? key,
-    required this.value,
+    // required this.value,
     required this.onSelect,
     required this.label,
     required this.sliders,
@@ -178,8 +181,9 @@ class _Slider extends StatefulWidget {
 
   final String label;
   final FilterSliderValues sliders;
-  final double value;
-  final ValueChanged<double> onSelect;
+
+  // final double value;
+  final ValueChanged<SfRangeValues> onSelect;
 
   @override
   State<_Slider> createState() => _SliderState();
@@ -187,12 +191,14 @@ class _Slider extends StatefulWidget {
 
 class _SliderState extends State<_Slider> {
   late FilterSliderValues slider = widget.sliders;
-  late double _value = widget.value;
+
+  // late double _value = widget.value;
+  late SfRangeValues sfRangeValues = widget.sliders.value;
 
   @override
   void initState() {
     if (widget.sliders.onChanged != null) {
-      widget.sliders.onChanged!(_value);
+      // widget.sliders.onChanged!(_value);
     }
     super.initState();
   }
@@ -208,42 +214,43 @@ class _SliderState extends State<_Slider> {
           child: SFText(keyText: widget.label, style: TextStyles.lightGrey14),
         ),
         SfSliderTheme(
-          data: SfSliderThemeData(
-              activeLabelStyle: TextStyles.lightGrey12,
-              inactiveLabelStyle: TextStyles.lightGrey12),
-          child: SfSlider(
-            min: slider.min,
-            max: slider.max,
-            value: _value,
-            interval: slider.interval,
-            showTicks: true,
-            showLabels: true,
-            enableTooltip: true,
-            showDividers: false,
-            stepSize: 1,
-            thumbIcon: Container(
-              width: 16,
-              height: 16,
-              decoration: const BoxDecoration(
-                  color: AppColors.white, shape: BoxShape.circle),
-              padding: const EdgeInsets.all(4),
-              child: const DecoratedBox(
-                decoration: BoxDecoration(
-                    color: AppColors.blue, shape: BoxShape.circle),
-              ),
-            ),
-            // minorTicksPerInterval: 1,
-            onChanged: (dynamic v) {
-              if (widget.sliders.onChanged != null) {
-                widget.sliders.onChanged!(v);
-              }
-              _value = v;
-              widget.onSelect(_value);
-              setState(() {});
-            },
-          ),
+          data: SfRangeSliderThemeData(),
+          child: SfRangeSlider(
+              min: widget.sliders.min,
+              max: widget.sliders.max,
+              showTicks: true,
+              showLabels: true,
+              stepSize: 1,
+              minorTicksPerInterval: 1,
+              endThumbIcon: const ThumbIcon(),
+              startThumbIcon: const ThumbIcon(),
+              enableTooltip: true,
+              values: sfRangeValues,
+              onChanged: (SfRangeValues value) {
+                setState(() => sfRangeValues = value);
+                widget.onSelect(value);
+              }),
         )
       ],
+    );
+  }
+}
+
+class ThumbIcon extends StatelessWidget {
+  const ThumbIcon({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: 16,
+      height: 16,
+      decoration:
+          const BoxDecoration(color: AppColors.white, shape: BoxShape.circle),
+      padding: const EdgeInsets.all(4),
+      child: const DecoratedBox(
+        decoration:
+            BoxDecoration(color: AppColors.blue, shape: BoxShape.circle),
+      ),
     );
   }
 }
@@ -291,6 +298,7 @@ class TypeSelectionWidget extends StatelessWidget {
                   children: [
                     Expanded(
                         child: _Container(
+                      qualitySelect: name == LocaleKeys.quality.tr(),
                       text: types[firstIdx],
                       isSelected:
                           listSelected.contains(types[firstIdx].toLowerCase()),
@@ -302,6 +310,7 @@ class TypeSelectionWidget extends StatelessWidget {
                     Expanded(
                       child: (secondIdx < types.length)
                           ? _Container(
+                              qualitySelect: name == LocaleKeys.quality.tr(),
                               text: types[secondIdx],
                               isSelected: listSelected
                                   .contains(types[secondIdx].toLowerCase()),
@@ -328,12 +337,14 @@ class _Container extends StatelessWidget {
       {Key? key,
       required this.text,
       required this.isSelected,
-      required this.onTap})
+      required this.onTap,
+      required this.qualitySelect})
       : super(key: key);
 
   final String text;
   final bool isSelected;
   final VoidCallback onTap;
+  final bool qualitySelect;
 
   @override
   Widget build(BuildContext context) {
@@ -344,13 +355,25 @@ class _Container extends StatelessWidget {
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(40),
           border: Border.all(
-              color: isSelected ? AppColors.blue : AppColors.transparent),
-          color: isSelected ? AppColors.transparent : AppColors.whiteOpacity5,
+              color: qualitySelect && !isSelected
+                  ? text.toLowerCase().qualityBedColor
+                  : AppColors.transparent),
+          gradient: isSelected ? AppColors.gradientBlue : null,
+          color: isSelected
+              ? null
+              : qualitySelect
+                  ? AppColors.transparent
+                  : AppColors.whiteOpacity5,
         ),
         alignment: Alignment.center,
         child: SFText(
           keyText: text,
-          style: isSelected ? TextStyles.blue16 : TextStyles.lightGrey16,
+          style: isSelected
+              ? TextStyles.w700WhiteSize16
+              : TextStyles.lightGrey16.copyWith(
+                  color: qualitySelect
+                      ? text.toLowerCase().qualityBedColor
+                      : null),
         ),
       ),
     );
@@ -360,18 +383,16 @@ class _Container extends StatelessWidget {
 class FilterSliderValues extends Equatable {
   final double min;
   final double max;
-  final double? value;
-  final double interval;
+  final SfRangeValues value;
   final ValueChanged<dynamic>? onChanged;
 
   const FilterSliderValues({
     required this.min,
     required this.max,
-    this.interval = 1,
-    this.value,
+    required this.value,
     this.onChanged,
   });
 
   @override
-  List<Object?> get props => [min, max, value, onChanged, interval];
+  List<Object?> get props => [min, max, value, onChanged];
 }
