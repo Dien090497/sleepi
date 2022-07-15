@@ -442,10 +442,12 @@ abstract class  LocaleKeys {
   static const wallet_imported_successfully = 'wallet_imported_successfully';
   static const insufficient_amount = 'insufficient_amount';
   static const you_dont_have_enough_money_to_staking = 'you_dont_have_enough_money_to_staking';
+  static const click_here_to_proceed = 'click_here_to_proceed';
   static const lucky_box = 'lucky_box';
   static const you_can_open_the_luck_box = 'you_can_open_the_luck_box';
   static const speed_luck_box_with_cost = 'speed_luck_box_with_cost';
   static const speed_up = 'speed_up';
   static const buy_token = 'buy_token';
+  static const do_you_want_open_the_lucky_box = 'do_you_want_open_the_lucky_box';
 
 }

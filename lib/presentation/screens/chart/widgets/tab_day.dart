@@ -82,7 +82,7 @@ class TabDay extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 32),
-              ChartStatisticShare(),
+              const ChartStatisticShare(maxValue: 100,),
               const SizedBox(height: 24),
               const SleepScore(),
             ],

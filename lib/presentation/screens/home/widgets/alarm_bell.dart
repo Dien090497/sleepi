@@ -7,11 +7,14 @@ import 'package:slee_fi/common/extensions/string_x.dart';
 import 'package:slee_fi/common/routes/app_routes.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
+import 'package:slee_fi/common/utils/date_time_utils.dart';
 import 'package:slee_fi/common/widgets/sf_alert_dialog.dart';
 import 'package:slee_fi/common/widgets/sf_button_outlined.dart';
+import 'package:slee_fi/common/widgets/sf_dialog.dart';
 import 'package:slee_fi/common/widgets/sf_icon.dart';
 import 'package:slee_fi/common/widgets/sf_percent_border.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
+import 'package:slee_fi/di/injector.dart';
 import 'package:slee_fi/entities/lucky_box/lucky_box_entity.dart';
 import 'package:slee_fi/l10n/locale_keys.g.dart';
 import 'package:slee_fi/presentation/blocs/home/home_bloc.dart';
@@ -21,6 +24,7 @@ import 'package:slee_fi/presentation/screens/home/widgets/home_switch.dart';
 import 'package:slee_fi/presentation/screens/home/widgets/pop_up_confirm_speed_up.dart';
 import 'package:slee_fi/presentation/screens/home/widgets/popup_open_lucky_box.dart';
 import 'package:slee_fi/presentation/screens/home/widgets/time_picker.dart';
+import 'package:slee_fi/presentation/screens/staking/widgets/popup_staking.dart';
 import 'package:slee_fi/resources/resources.dart';
 
 class AlarmBell extends StatelessWidget {
@@ -28,9 +32,15 @@ class AlarmBell extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final dateTimeUtil = getIt<DateTimeUtils>();
     return BlocBuilder<HomeBloc, HomeState>(
       builder: (context, state) {
         final bed = state is HomeLoaded ? state.selectedBed : null;
+        final minTime =
+            DateTime.now().add(Duration(hours: bed?.startTime?.toInt() ?? 0));
+        final maxTime =
+            DateTime.now().add(Duration(hours: bed?.endTime?.toInt() ?? 0));
+
         return Container(
           padding: const EdgeInsets.symmetric(horizontal: 16),
           decoration: const BoxDecoration(
@@ -43,10 +53,17 @@ class AlarmBell extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              const TimePicker(),
+              TimePicker(
+                onHourChange: (hour) {
+                  context.read<HomeBloc>().add(ChangeHour(hour));
+                },
+                onMinuteChange: (minute) {
+                  context.read<HomeBloc>().add(ChangeMinute(minute));
+                },
+              ),
               const SizedBox(height: 16),
               Text(
-                '${LocaleKeys.range.tr()}: ${state is HomeLoaded && bed != null ? '${DateTime.now().hour + bed.startTime!}' : '03:00-06:00'}',
+                '${LocaleKeys.range.tr()}: ${state is HomeLoaded && bed != null ? '${dateTimeUtil.HHmm(minTime)}-${dateTimeUtil.HHmm(maxTime)}' : '03:00-06:00'}',
                 style: TextStyles.white16500,
               ),
               const SizedBox(height: 24),
@@ -73,7 +90,7 @@ class AlarmBell extends StatelessWidget {
                 ],
               ),
               const SizedBox(height: 16),
-              const ButtonStart(),
+              ButtonStart(enableStart: _correctTime(minTime, maxTime, state)),
               const SizedBox(height: 32),
               Row(
                 children: [
@@ -131,43 +148,44 @@ class AlarmBell extends StatelessWidget {
                       !_theSameList(current.luckyBoxes, previous.luckyBoxes));
                 },
                 builder: (context, state) {
+                  final bloc = context.read<HomeBloc>();
                   return Row(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
                       ViewGif(
                         index: 0,
-                        onTap: () {},
-                        bedEntity: _boxWithIndex(state, 0),
+                        homeBloc: bloc,
+                        entity: _boxWithIndex(state, 0),
                       ),
                       const SizedBox(height: 20),
                       ViewGif(
                         index: 1,
-                        bedEntity: _boxWithIndex(state, 1),
-                        onTap: () {},
+                        entity: _boxWithIndex(state, 1),
+                        homeBloc: bloc,
                       ),
                       const SizedBox(height: 20),
                       ViewGif(
                         index: 2,
-                        bedEntity: _boxWithIndex(state, 2),
-                        onTap: () {},
+                        entity: _boxWithIndex(state, 2),
+                        homeBloc: bloc,
                       ),
                       const SizedBox(height: 20),
                       ViewGif(
                         index: 2,
-                        bedEntity: _boxWithIndex(state, 3),
-                        onTap: () {},
+                        entity: _boxWithIndex(state, 3),
+                        homeBloc: bloc,
                       ),
                       const SizedBox(height: 20),
                       ViewGif(
                         index: 4,
-                        bedEntity: _boxWithIndex(state, 4),
-                        onTap: () {},
+                        entity: _boxWithIndex(state, 4),
+                        homeBloc: bloc,
                       ),
                       const SizedBox(height: 20),
                       ViewGif(
                         index: 5,
-                        bedEntity: _boxWithIndex(state, 5),
-                        onTap: () {},
+                        entity: _boxWithIndex(state, 5),
+                        homeBloc: bloc,
                       ),
                     ],
                   );
@@ -179,6 +197,20 @@ class AlarmBell extends StatelessWidget {
         );
       },
     );
+  }
+
+  bool _correctTime(DateTime minTime, DateTime maxTime, HomeState state) {
+    if (state is! HomeLoaded) return false;
+    var hour = state.hour;
+    var minute = state.minute;
+    var now = DateTime.now();
+    var nextDay = DateTime.now().add(const Duration(days: 1));
+    var wakeUpTimeInNextDay =
+        DateTime(nextDay.year, nextDay.month, nextDay.day, hour, minute);
+    var wakeUpTimeInDay = DateTime(now.year, now.month, now.day, hour, minute);
+    var wakeUpTime = hour <= now.hour ? wakeUpTimeInNextDay : wakeUpTimeInDay;
+
+    return wakeUpTime.isAfter(minTime) && wakeUpTime.isBefore(maxTime);
   }
 
   LuckyBoxEntity? _boxWithIndex(HomeState state, int index) {
@@ -204,42 +236,53 @@ class AlarmBell extends StatelessWidget {
 class ViewGif extends StatelessWidget {
   const ViewGif(
       {Key? key,
-      required this.onTap,
+      required this.homeBloc,
       required this.index,
-      required this.bedEntity})
+      required this.entity})
       : super(key: key);
-  final LuckyBoxEntity? bedEntity;
-  final Function() onTap;
+  final LuckyBoxEntity? entity;
+  final HomeBloc homeBloc;
   final int index;
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        'bed entity is  $bedEntity'.log;
-        if (bedEntity != null) {
-          onTap;
-          _showPopUpInfoLuckyBox(
-            context,
-            Const.luckyBoxes[index % 5],
-            bedEntity!.speedUpCost,
-            bedEntity!.waitingTime,
-            bedEntity!.id,
-          );
+        'bed entity is  $entity'.log;
+        if (entity != null) {
+          homeBloc;
+          if (index % 2 == 0) {
+            showCustomDialog(context, children: [
+              PopUpStaking(
+                  message: LocaleKeys.do_you_want_open_the_lucky_box
+                      .tr(args: [entity!.openCost]),
+                  onPressed: () {
+                    homeBloc.add(OpenLuckyBox(entity!.id));
+                  })
+            ]);
+          } else {
+            _showPopUpInfoLuckyBox(
+              context,
+              Const.luckyBoxes[index % 5],
+              entity!.speedUpCost,
+              entity!.waitingTime,
+              entity!.id,
+            );
+          }
         }
       },
       child: Container(
         width: 48,
         height: 48,
-        padding: EdgeInsets.all(bedEntity != null ? 0 : 12),
+        padding: EdgeInsets.all(entity != null ? 0 : 12),
         decoration: BoxDecoration(
           color: AppColors.darkColor,
           borderRadius: BorderRadius.circular(16),
           border: Border.all(color: AppColors.borderDarkColor, width: 1),
         ),
         child: SFIcon(
-          bedEntity != null ? Const.luckyBoxes[index % 5] : Ics.gift,
-          color: bedEntity != null ? null : AppColors.borderDarkColor,
+          entity != null ? Const.luckyBoxes[index % 5] : Ics.gift,
+          color: entity != null ? null : AppColors.borderDarkColor,
         ),
       ),
     );

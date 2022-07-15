@@ -2,23 +2,38 @@ import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
+import 'package:slee_fi/entities/draw_chart_entity/draw_chart_entity.dart';
 
 class ChartStatisticShare extends StatelessWidget {
-  ChartStatisticShare({Key? key, this.titleBottom = true}) : super(key: key);
+  const ChartStatisticShare({Key? key, this.titleBottom = true, this.data, required this.maxValue}) : super(key: key);
 
+  final DrawChartEntity? data;
   final bool titleBottom;
-  final List<Color> gradientColors = [
-    AppColors.blue,
-    AppColors.blue,
-  ];
-  final List<Color> gradientColorsArea = [
-    AppColors.blue.withOpacity(0.35),
-    AppColors.blue.withOpacity(0.15),
-    AppColors.blue.withOpacity(0),
-  ];
+  final int maxValue;
+
 
   Widget leftTitleWidgets(double value, TitleMeta meta) {
-    Widget text;
+    if (value == 0) {
+      return const Padding(
+        padding: EdgeInsets.only(right: 10.0),
+        child: Text('0',
+            textAlign: TextAlign.right, style: TextStyles.lightGrey12),
+      );
+    }
+    if (maxValue <= 100) {
+      if (value % 20 == 0 && value != 0) {
+        return Text( value.toString(), style: TextStyles.lightGrey12);
+      } else {
+        return const SizedBox();
+      }
+    } else {
+      if (value % 60 == 0 && value != 0) {
+        return Text( value.toString(), style: TextStyles.lightGrey12);
+      } else {
+        return const SizedBox();
+      }
+    }
+    /*Widget text;
     switch (value.toInt()) {
       case 0:
         text = const Padding(
@@ -46,11 +61,19 @@ class ChartStatisticShare extends StatelessWidget {
         text = const Text('', style: TextStyles.lightGrey12);
         break;
     }
-    return text;
+    return text;*/
   }
 
   Widget bottomTitleWidgets(double value, TitleMeta meta) {
-    Widget text;
+    if (value % 2 == 0 && value != 0) {
+      return Padding(
+        padding: const EdgeInsets.only(top: 8.0),
+        child: Text(data?.listData[value.toInt()].x ?? '', style: TextStyles.lightGrey12),
+      );
+    } else {
+      return const SizedBox();
+    }
+    /*Widget text;
     switch (value.toInt()) {
       case 2:
         text = const Text('2021-01', style: TextStyles.lightGrey12);
@@ -68,20 +91,24 @@ class ChartStatisticShare extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.only(top: 8.0),
       child: text,
-    );
+    );*/
   }
 
   LineChartData mainData() {
+
+    List<Color> gradientColors = [
+      AppColors.blue,
+      AppColors.blue,
+    ];
+    List<Color> gradientColorsArea = [
+      AppColors.blue.withOpacity(0.35),
+      AppColors.blue.withOpacity(0.15),
+      AppColors.blue.withOpacity(0),
+    ];
     return LineChartData(
       gridData: FlGridData(
         show: true,
         drawVerticalLine: false,
-        horizontalInterval: 5,
-        verticalInterval: 1,
-        getDrawingHorizontalLine: (value) {
-          return FlLine(
-              color: AppColors.lightGrey, strokeWidth: 0.5, dashArray: [2]);
-        },
         getDrawingVerticalLine: (value) {
           return FlLine(
             color: Colors.transparent,
@@ -122,19 +149,12 @@ class ChartStatisticShare extends StatelessWidget {
             width: 1,
           ))),
       minX: 0,
-      maxX: 25,
+      maxX: data?.maxX,
       minY: 0,
-      maxY: 26,
+      maxY: data?.maxy,
       lineBarsData: [
         LineChartBarData(
-          spots: const [
-            FlSpot(0, 5),
-            FlSpot(5, 9),
-            FlSpot(10, 9),
-            FlSpot(15, 17),
-            FlSpot(20, 14),
-            FlSpot(25, 25),
-          ],
+          spots: data?.listFlSpot,
           isCurved: false,
           gradient: LinearGradient(
             colors: gradientColors,

@@ -21,6 +21,10 @@ class JewelsBuyWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+   final qualityColor = jewel.quality != null
+        ? jewel.quality!.qualityBedColor
+        : AppColors.commonBed;
+
     return Container(
       decoration: BoxDecoration(
         color: AppColors.lightDark,
@@ -34,8 +38,7 @@ class JewelsBuyWidget extends StatelessWidget {
             left: -30,
             child: TopLeftBanner(
               text: '${LocaleKeys.level.tr()} ${jewel.level}',
-              textColor: AppColors.lightGrey,
-              backgroundColor: AppColors.lightGrey.withOpacity(0.1),
+              textColor: qualityColor,
             ),
           ),
           Column(
@@ -54,8 +57,7 @@ class JewelsBuyWidget extends StatelessWidget {
                 errorWidget: (context, url, error) => Container(
                     decoration: const BoxDecoration(
                       color: AppColors.transparent,
-                      borderRadius:
-                      BorderRadius.all(Radius.circular(10)),
+                      borderRadius: BorderRadius.all(Radius.circular(10)),
                     ),
                     child: const Icon(Icons.error)),
                 imageBuilder: (context, imageProvider) => Container(
@@ -74,14 +76,15 @@ class JewelsBuyWidget extends StatelessWidget {
                   Container(
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(50),
-                      border: Border.all(color: AppColors.light4),
+                      border: Border.all(color: qualityColor.withOpacity(0.1)),
                     ),
                     padding:
-                    const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+                        const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
                     alignment: Alignment.center,
                     child: SFText(
                       keyText: jewel.nftId.toString(),
-                      style: TextStyles.white1w700size12,
+                      style: TextStyles.white1w700size12
+                          .copyWith(color: qualityColor),
                     ),
                   ),
                   const SizedBox(width: 6),
@@ -91,7 +94,7 @@ class JewelsBuyWidget extends StatelessWidget {
                         // border: Border.all(color: AppColors.light4),
                         color: AppColors.green.withOpacity(0.15)),
                     padding:
-                    const EdgeInsets.symmetric(vertical: 8, horizontal: 12),
+                        const EdgeInsets.symmetric(vertical: 8, horizontal: 12),
                     alignment: Alignment.center,
                     child: SFText(
                       keyText: '+ ${jewel.efficiency}%',
@@ -107,9 +110,9 @@ class JewelsBuyWidget extends StatelessWidget {
                   children: [
                     Expanded(
                         child: SFText(
-                          keyText: '${jewel.price} ${jewel.symbol}',
-                          style: TextStyles.white14W700,
-                        )),
+                      keyText: '${jewel.price} ${jewel.symbol}',
+                      style: TextStyles.white14W700,
+                    )),
                     SFIconButton(
                       text: LocaleKeys.buy,
                       textStyle: TextStyles.white12,

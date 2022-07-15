@@ -11,7 +11,8 @@ import 'package:slee_fi/l10n/locale_keys.g.dart';
 import 'package:slee_fi/presentation/screens/home/widgets/pop_up_start_tracking.dart';
 
 class ButtonStart extends StatefulWidget {
-  const ButtonStart({Key? key}) : super(key: key);
+  const ButtonStart({Key? key, required this.enableStart}) : super(key: key);
+  final bool enableStart;
 
   @override
   State<ButtonStart> createState() => _ButtonStartState();
@@ -27,11 +28,12 @@ class _ButtonStartState extends State<ButtonStart> {
       gradient: countDownEnded ? AppColors.gradientBlueButton : null,
       color: AppColors.lightDark,
       height: 40,
+      disabled: !widget.enableStart,
       width: double.infinity,
       onPressed: () {
         if (countDownEnded) {
           showCustomAlertDialog(context, children: PopUpConfirmStartTracking(
-            onPressed: () async{
+            onPressed: () async {
               Navigator.pushReplacementNamed(context, R.tracking);
             },
           ));
