@@ -21,7 +21,7 @@ class MarketPlaceCubit extends Cubit<MarketPlaceState> {
       limit: limit,
       categoryId: 1,
       sortPrice: "LowPrice",
-      level: 0,
+      level: null,
       bedMint: 0,
       type: [],
       classNft: [],
@@ -52,7 +52,12 @@ class MarketPlaceCubit extends Cubit<MarketPlaceState> {
   clearFilter() {
     page = 1;
     params = params.copyWith(
-        page: page, level: 0, bedMint: 0, type: [], classNft: [], quality: []);
+        page: page,
+        level: null,
+        bedMint: 0,
+        type: [],
+        classNft: [],
+        quality: []);
     getMarketPlace(params);
   }
 

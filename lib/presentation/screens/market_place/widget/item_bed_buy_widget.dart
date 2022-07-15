@@ -36,9 +36,8 @@ class ItemBedBuyWidget extends StatelessWidget {
             top: 20,
             left: -30,
             child: TopLeftBanner(
-              text: item.classNft == null
-                  ? item.type.reCase(StringCase.titleCase)
-                  : item.classNft!.reCase(StringCase.camelCase),
+              text:item.type.reCase(StringCase.titleCase)
+                  ,
               textColor: qualityColor,
             ),
           ),
