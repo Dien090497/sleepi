@@ -16,8 +16,6 @@ class PasscodeNumPad extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // bool isLoading = false;
-
     return Column(
       children: [
         ...List.generate(

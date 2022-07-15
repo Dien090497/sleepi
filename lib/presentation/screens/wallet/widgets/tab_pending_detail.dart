@@ -23,11 +23,9 @@ import 'package:slee_fi/resources/resources.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class TabPendingDetail extends StatefulWidget {
-  const TabPendingDetail(
-      {Key? key, required this.pendingBloc, required this.attributeWithdraw})
+  const TabPendingDetail({Key? key, required this.attributeWithdraw})
       : super(key: key);
 
-  final PendingBloc pendingBloc;
   final AttributeWithdraw attributeWithdraw;
 
   @override
@@ -36,7 +34,6 @@ class TabPendingDetail extends StatefulWidget {
 
 class _TabPendingDetailState extends State<TabPendingDetail> {
   final _scrollController = ScrollController();
-  final _dateTimeUtils = getIt<DateTimeUtils>();
   final RefreshController refreshController = RefreshController();
 
   @override
@@ -45,9 +42,17 @@ class _TabPendingDetailState extends State<TabPendingDetail> {
     _scrollController.addListener(_onScroll);
   }
 
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    final userState = context.read<UserBloc>().state;
+    BlocProvider.of<PendingBloc>(context).add(PendingInit(
+        userState is UserLoaded ? userState.userInfoEntity.id : 0,
+        widget.attributeWithdraw));
+  }
+
   void _onScroll() {
-    'on scroll to bottom $_isBottom'.log;
-    if (_isBottom) widget.pendingBloc.add(PendingFetched());
+    if (_isBottom) BlocProvider.of<PendingBloc>(context).add(PendingFetched());
   }
 
   bool get _isBottom {
@@ -59,18 +64,13 @@ class _TabPendingDetailState extends State<TabPendingDetail> {
 
   @override
   Widget build(BuildContext context) {
-    final userState = context.read<UserBloc>().state;
+    final pendingBloc = context.read<PendingBloc>();
+
     return Column(
       children: [
         Expanded(
           child: BlocBuilder<PendingBloc, PendingState>(
-            bloc: widget.pendingBloc
-              ..add(PendingInit(
-                userState is UserLoaded ? userState.userInfoEntity.id : 0,
-                widget.attributeWithdraw,
-              )),
             builder: (context, state) {
-              'state is   $state'.log;
               if (state.status == PendingStatus.initial) {
                 return const Center(child: CircularProgressIndicator());
               }
@@ -99,9 +99,8 @@ class _TabPendingDetailState extends State<TabPendingDetail> {
               return SmartRefresher(
                 controller: refreshController,
                 enablePullDown: true,
-                header: const WaterDropHeader(),
                 onRefresh: () async {
-                  widget.pendingBloc.add(PendingRefresh());
+                  pendingBloc.add(PendingRefresh());
                   await Future.delayed(const Duration(milliseconds: 1000));
                   refreshController.loadComplete();
                 },
@@ -113,7 +112,7 @@ class _TabPendingDetailState extends State<TabPendingDetail> {
                   padding: const EdgeInsets.symmetric(horizontal: 24.0),
                   itemBuilder: (BuildContext context, int index) =>
                       index < state.list.length
-                          ? _buildItem(state.list[index])
+                          ? _BuildItem(withdrawEntity: state.list[index])
                           : Container(
                               height: 60,
                               alignment: Alignment.center,
@@ -125,7 +124,7 @@ class _TabPendingDetailState extends State<TabPendingDetail> {
             },
           ),
         ),
-        const SizedBox(height: 75)
+        const SizedBox(height: 75),
       ],
     );
   }
@@ -138,8 +137,17 @@ class _TabPendingDetailState extends State<TabPendingDetail> {
       ..dispose();
     super.dispose();
   }
+}
 
-  Widget _buildItem(WithdrawEntity withdrawEntity) {
+class _BuildItem extends StatelessWidget {
+  const _BuildItem({Key? key, required this.withdrawEntity}) : super(key: key);
+
+  final WithdrawEntity withdrawEntity;
+
+  @override
+  Widget build(BuildContext context) {
+    final dateTimeUtils = getIt<DateTimeUtils>();
+
     return SFCard(
       onTap: () async {
         final url = Uri.parse(Const.avascanUrl);
@@ -160,36 +168,38 @@ class _TabPendingDetailState extends State<TabPendingDetail> {
             ),
           ),
           Expanded(
-              child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              SFText(
-                keyText: LocaleKeys.confirm,
-                style: TextStyles.bold16Blue,
-              ),
-              const SizedBox(height: 4.0),
-              SFText(
-                keyText: _dateTimeUtils
-                    .ddMMyyyyHHmm(DateTime.parse(withdrawEntity.time)),
-                style: TextStyles.lightGrey14,
-              ),
-            ],
-          )),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                SFText(
+                  keyText: LocaleKeys.confirm,
+                  style: TextStyles.bold16Blue,
+                ),
+                const SizedBox(height: 4.0),
+                Text(
+                  dateTimeUtils
+                      .ddMMyyyyHHmm(DateTime.parse(withdrawEntity.time)),
+                  style: TextStyles.lightGrey14,
+                ),
+              ],
+            ),
+          ),
           Expanded(
-              child: Column(
-            crossAxisAlignment: CrossAxisAlignment.end,
-            children: [
-              SFText(
-                keyText: withdrawEntity.amount,
-                style: TextStyles.bold16Blue,
-              ),
-              const SizedBox(height: 4.0),
-              SFText(
-                keyText: withdrawEntity.txHash.formatAddress,
-                style: TextStyles.lightGrey14,
-              ),
-            ],
-          )),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.end,
+              children: [
+                SFText(
+                  keyText: withdrawEntity.amount,
+                  style: TextStyles.bold16Blue,
+                ),
+                const SizedBox(height: 4.0),
+                Text(
+                  withdrawEntity.txHash.formatAddress,
+                  style: TextStyles.lightGrey14,
+                ),
+              ],
+            ),
+          ),
         ],
       ),
     );

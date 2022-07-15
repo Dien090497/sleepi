@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:slee_fi/common/enum/enum.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/widgets/sf_sub_tab_bar.dart';
@@ -7,12 +8,7 @@ import 'package:slee_fi/presentation/blocs/pending/pending_bloc.dart';
 import 'package:slee_fi/presentation/screens/wallet/widgets/tab_pending_detail.dart';
 
 class SpendingDetailList extends StatelessWidget {
-  const SpendingDetailList(
-      {Key? key, required this.pendingBloc, required this.historyBloc})
-      : super(key: key);
-
-  final PendingBloc pendingBloc;
-  final PendingBloc historyBloc;
+  const SpendingDetailList({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -38,21 +34,22 @@ class SpendingDetailList extends StatelessWidget {
                 texts: const [LocaleKeys.pending, LocaleKeys.history],
               ),
             ),
-            const SizedBox(
-              height: 20,
-            ),
+            const SizedBox(height: 20),
             Expanded(
               child: TabBarView(
                 children: [
-                  TabPendingDetail(
-                    pendingBloc: pendingBloc,
-                    attributeWithdraw: AttributeWithdraw.pending,
+                  BlocProvider(
+                    create: (_) => PendingBloc(),
+                    child: const TabPendingDetail(
+                      attributeWithdraw: AttributeWithdraw.pending,
+                    ),
                   ),
-                  TabPendingDetail(
-                    pendingBloc: historyBloc,
-                    attributeWithdraw: AttributeWithdraw.history,
+                  BlocProvider(
+                    create: (_) => PendingBloc(),
+                    child: const TabPendingDetail(
+                      attributeWithdraw: AttributeWithdraw.history,
+                    ),
                   ),
-                  // TabHistoryDetail(historyBloc: historyBloc)
                 ],
               ),
             ),
