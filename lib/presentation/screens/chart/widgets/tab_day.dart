@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:slee_fi/common/enum/enum.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
 import 'package:slee_fi/common/utils/date_time_utils.dart';
 import 'package:slee_fi/common/widgets/loading_screen.dart';
@@ -82,7 +83,7 @@ class TabDay extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 32),
-              const ChartStatisticShare(maxValue: 100,),
+              const ChartStatisticShare(maxValue: 100, typeTimeChart: TypeTimeChart.chartDay,),
               const SizedBox(height: 24),
               const SleepScore(),
             ],

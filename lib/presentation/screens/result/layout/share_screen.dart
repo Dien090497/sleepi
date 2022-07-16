@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:slee_fi/common/enum/enum.dart';
 import 'package:slee_fi/common/routes/app_routes.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
@@ -97,7 +98,7 @@ class _ShareScreenState extends State<ShareScreen> {
                               const Padding(
                                 padding:
                                     EdgeInsets.symmetric(horizontal: 16.0),
-                                child: ChartStatisticShare(titleBottom: false, maxValue: 100,),
+                                child: ChartStatisticShare(titleBottom: false, maxValue: 100, typeTimeChart: TypeTimeChart.chartDay,),
                               ),
                               const SizedBox(
                                 height: 10,
