@@ -59,107 +59,76 @@ class WalletDetailList extends StatelessWidget {
       padding: const EdgeInsets.only(top: 20),
       child: SafeArea(
         top: false,
-        child: tokenList.isEmpty
-            ? ListView.builder(
-                itemCount: keyList.length,
-                physics: const ClampingScrollPhysics(),
-                shrinkWrap: true,
-                padding: const EdgeInsets.symmetric(
-                    horizontal: 24.0, vertical: 12.0),
-                itemBuilder: (BuildContext context, int index) {
-                  return SFCard(
-                    onTap: () {},
-                    child: ListTile(
-                      leading: Padding(
-                        padding: EdgeInsets.only(
-                            left: icons[index] == Ics.icAvax ? 4 : 0),
-                        child: SFIcon(
-                          icons[index],
-                          width: icons[index] == Ics.icAvax ? 32 : 40,
-                          height: icons[index] == Ics.icAvax ? 32 : 40,
+        child: ListView.builder(
+          itemCount: tokenList.length,
+          physics: const ClampingScrollPhysics(),
+          shrinkWrap: true,
+          padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 12.0),
+          itemBuilder: (BuildContext context, int index) {
+            return SFCard(
+              padding: EdgeInsets.zero,
+              onTap: () {
+                if (index < 4) {
+                  Navigator.pushNamed(context, R.transactionDetail,
+                      arguments: TransactionDetailArguments(
+                          title: tokenList[index].displayName,
+                          img: tokenList[index].icon,
+                          tokenEntity: tokenList[index],
+                          typeHistory: HistoryTransactionParams(
+                              typeHistory: index == 2
+                                  ? Const.listTypeHistory.elementAt(0)
+                                  : Const.listTypeHistory.elementAt(1),
+                              tokenSymbol: tokenList[index].symbol)));
+                } else {
+                  Navigator.pushNamed(context, R.nftDetail,
+                      arguments: NFTDetailArguments(
+                          tokenList[index], context.read<WalletCubit>()));
+                }
+              },
+              child: ListTile(
+                leading: Padding(
+                  padding: EdgeInsets.only(
+                      left: tokenList[index].icon == Ics.icAvax ||
+                              tokenList[index].icon == Ics.icUsdc
+                          ? 4
+                          : 0),
+                  child: SFIcon(
+                    tokenList[index].icon,
+                    width: tokenList[index].icon == Ics.icAvax ||
+                            tokenList[index].icon == Ics.icUsdc
+                        ? 32
+                        : 40,
+                    height: tokenList[index].icon == Ics.icAvax ||
+                            tokenList[index].icon == Ics.icUsdc
+                        ? 32
+                        : 40,
+                  ),
+                ),
+                horizontalTitleGap: 6,
+                title: Row(
+                  children: [
+                    SFText(
+                        keyText: index < 4
+                            ? tokenList[index].displayName.toUpperCase()
+                            : tokenList[index].displayName,
+                        style: TextStyles.lightWhite16),
+                    Expanded(
+                      child: FittedBox(
+                        fit: BoxFit.scaleDown,
+                        alignment: Alignment.centerRight,
+                        child: Text(
+                          tokenList[index].balance.formatBalanceToken,
+                          style: TextStyles.lightWhite16,
+                          textAlign: TextAlign.end,
                         ),
                       ),
-                      title: SFText(
-                          keyText: keyList[index],
-                          style: TextStyles.lightWhite16),
-                      trailing: SFText(
-                        keyText: "0",
-                        style: TextStyles.lightWhite16,
-                      ),
-                    ),
-                  );
-                })
-            : ListView.builder(
-                itemCount: tokenList.length,
-                physics: const ClampingScrollPhysics(),
-                shrinkWrap: true,
-                padding: const EdgeInsets.symmetric(
-                    horizontal: 24.0, vertical: 12.0),
-                itemBuilder: (BuildContext context, int index) {
-                  return SFCard(
-                    padding: EdgeInsets.zero,
-                    onTap: () {
-                      if (index < 4) {
-                        Navigator.pushNamed(context, R.transactionDetail,
-                            arguments: TransactionDetailArguments(
-                                title: tokenList[index].displayName,
-                                img: tokenList[index].icon,
-                                tokenEntity: tokenList[index],
-                                typeHistory: HistoryTransactionParams(
-                                    typeHistory: index == 2
-                                        ? Const.listTypeHistory.elementAt(0)
-                                        : Const.listTypeHistory.elementAt(1),
-                                    tokenSymbol: tokenList[index].symbol)));
-                      } else {
-                        Navigator.pushNamed(context, R.nftDetail,
-                            arguments: NFTDetailArguments(
-                                tokenList[index], context.read<WalletCubit>()));
-                      }
-                    },
-                    child: ListTile(
-                      leading: Padding(
-                        padding: EdgeInsets.only(
-                            left: tokenList[index].icon == Ics.icAvax ||
-                                    tokenList[index].icon == Ics.icUsdc
-                                ? 4
-                                : 0),
-                        child: SFIcon(
-                          tokenList[index].icon,
-                          width: tokenList[index].icon == Ics.icAvax ||
-                                  tokenList[index].icon == Ics.icUsdc
-                              ? 32
-                              : 40,
-                          height: tokenList[index].icon == Ics.icAvax ||
-                                  tokenList[index].icon == Ics.icUsdc
-                              ? 32
-                              : 40,
-                        ),
-                      ),
-                      horizontalTitleGap: 6,
-                      title: Row(
-                        children: [
-                          SFText(
-                              keyText: index < 4
-                                  ? tokenList[index].displayName.toUpperCase()
-                                  : tokenList[index].displayName,
-                              style: TextStyles.lightWhite16),
-                          Expanded(
-                            child: FittedBox(
-                              fit: BoxFit.scaleDown,
-                              alignment: Alignment.centerRight,
-                              child: Text(
-                                tokenList[index].balance.formatBalanceToken,
-                                style: TextStyles.lightWhite16,
-                                textAlign: TextAlign.end,
-                              ),
-                            ),
-                          )
-                        ],
-                      ),
-                    ),
-                  );
-                },
+                    )
+                  ],
+                ),
               ),
+            );
+          },
+        ),
       ),
     );
   }
