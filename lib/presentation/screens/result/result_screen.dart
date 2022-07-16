@@ -144,7 +144,7 @@ class _ResultScreenState extends State<ResultScreen> {
                     width: double.infinity,
                     height: 48,
                     onPressed: () {
-                      Navigator.pushNamed(context, R.share);
+                      Navigator.pushNamed(context, R.share, arguments: fromRoute);
                     },
                   ),
                 ),

@@ -27,6 +27,7 @@ class _ShareScreenState extends State<ShareScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final fromRoute = ModalRoute.of(context)?.settings.arguments as String;
     return BackgroundWidget(
       child: Stack(
         children: [
@@ -124,7 +125,13 @@ class _ShareScreenState extends State<ShareScreen> {
                       gradient: AppColors.gradientBlueButton,
                       width: double.infinity,
                       onPressed: () {
-                        Navigator.popUntil(context, (r) => r.settings.name == R.bottomNavigation);
+                        if (fromRoute == R.splash) {
+                          Navigator.pushNamedAndRemoveUntil(
+                              context, R.bottomNavigation, (r) => false);
+                        } else {
+                          Navigator.popUntil(context,
+                                  (r) => r.settings.name == R.bottomNavigation);
+                        }
                       },),
                     const SizedBox(height: 150,),
                   ],
