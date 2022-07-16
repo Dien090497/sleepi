@@ -79,6 +79,17 @@ class EstimateTracking extends HomeEvent {
   List<Object?> get props => [];
 }
 
+class UserStatusTracking extends HomeEvent {
+  @override
+  List<Object?> get props => [];
+}
+
+class StartTracking extends HomeEvent {
+
+  @override
+  List<Object?> get props => [];
+}
+
 class ChangeInsurance extends HomeEvent {
   final bool enableInsurance;
 

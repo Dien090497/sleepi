@@ -35,8 +35,12 @@ mixin _$HomeState {
             bool enableInsurance,
             double tokenEarn,
             int hour,
-            int minute)
+            int minute,
+            int time,
+            bool startTracking,
+            UserStatusTrackingModel? userStatusTracking)
         loaded,
+    required TResult Function(String message) startError,
     required TResult Function(String message) error,
   }) =>
       throw _privateConstructorUsedError;
@@ -59,8 +63,12 @@ mixin _$HomeState {
             bool enableInsurance,
             double tokenEarn,
             int hour,
-            int minute)?
+            int minute,
+            int time,
+            bool startTracking,
+            UserStatusTrackingModel? userStatusTracking)?
         loaded,
+    TResult Function(String message)? startError,
     TResult Function(String message)? error,
   }) =>
       throw _privateConstructorUsedError;
@@ -83,8 +91,12 @@ mixin _$HomeState {
             bool enableInsurance,
             double tokenEarn,
             int hour,
-            int minute)?
+            int minute,
+            int time,
+            bool startTracking,
+            UserStatusTrackingModel? userStatusTracking)?
         loaded,
+    TResult Function(String message)? startError,
     TResult Function(String message)? error,
     required TResult orElse(),
   }) =>
@@ -94,6 +106,7 @@ mixin _$HomeState {
     required TResult Function(HomeInitial value) initial,
     required TResult Function(HomeLoading value) loading,
     required TResult Function(HomeLoaded value) loaded,
+    required TResult Function(HomeStartError value) startError,
     required TResult Function(HomeError value) error,
   }) =>
       throw _privateConstructorUsedError;
@@ -102,6 +115,7 @@ mixin _$HomeState {
     TResult Function(HomeInitial value)? initial,
     TResult Function(HomeLoading value)? loading,
     TResult Function(HomeLoaded value)? loaded,
+    TResult Function(HomeStartError value)? startError,
     TResult Function(HomeError value)? error,
   }) =>
       throw _privateConstructorUsedError;
@@ -110,6 +124,7 @@ mixin _$HomeState {
     TResult Function(HomeInitial value)? initial,
     TResult Function(HomeLoading value)? loading,
     TResult Function(HomeLoaded value)? loaded,
+    TResult Function(HomeStartError value)? startError,
     TResult Function(HomeError value)? error,
     required TResult orElse(),
   }) =>
@@ -194,8 +209,12 @@ class _$HomeInitial with DiagnosticableTreeMixin implements HomeInitial {
             bool enableInsurance,
             double tokenEarn,
             int hour,
-            int minute)
+            int minute,
+            int time,
+            bool startTracking,
+            UserStatusTrackingModel? userStatusTracking)
         loaded,
+    required TResult Function(String message) startError,
     required TResult Function(String message) error,
   }) {
     return initial();
@@ -221,8 +240,12 @@ class _$HomeInitial with DiagnosticableTreeMixin implements HomeInitial {
             bool enableInsurance,
             double tokenEarn,
             int hour,
-            int minute)?
+            int minute,
+            int time,
+            bool startTracking,
+            UserStatusTrackingModel? userStatusTracking)?
         loaded,
+    TResult Function(String message)? startError,
     TResult Function(String message)? error,
   }) {
     return initial?.call();
@@ -248,8 +271,12 @@ class _$HomeInitial with DiagnosticableTreeMixin implements HomeInitial {
             bool enableInsurance,
             double tokenEarn,
             int hour,
-            int minute)?
+            int minute,
+            int time,
+            bool startTracking,
+            UserStatusTrackingModel? userStatusTracking)?
         loaded,
+    TResult Function(String message)? startError,
     TResult Function(String message)? error,
     required TResult orElse(),
   }) {
@@ -265,6 +292,7 @@ class _$HomeInitial with DiagnosticableTreeMixin implements HomeInitial {
     required TResult Function(HomeInitial value) initial,
     required TResult Function(HomeLoading value) loading,
     required TResult Function(HomeLoaded value) loaded,
+    required TResult Function(HomeStartError value) startError,
     required TResult Function(HomeError value) error,
   }) {
     return initial(this);
@@ -276,6 +304,7 @@ class _$HomeInitial with DiagnosticableTreeMixin implements HomeInitial {
     TResult Function(HomeInitial value)? initial,
     TResult Function(HomeLoading value)? loading,
     TResult Function(HomeLoaded value)? loaded,
+    TResult Function(HomeStartError value)? startError,
     TResult Function(HomeError value)? error,
   }) {
     return initial?.call(this);
@@ -287,6 +316,7 @@ class _$HomeInitial with DiagnosticableTreeMixin implements HomeInitial {
     TResult Function(HomeInitial value)? initial,
     TResult Function(HomeLoading value)? loading,
     TResult Function(HomeLoaded value)? loaded,
+    TResult Function(HomeStartError value)? startError,
     TResult Function(HomeError value)? error,
     required TResult orElse(),
   }) {
@@ -364,8 +394,12 @@ class _$HomeLoading with DiagnosticableTreeMixin implements HomeLoading {
             bool enableInsurance,
             double tokenEarn,
             int hour,
-            int minute)
+            int minute,
+            int time,
+            bool startTracking,
+            UserStatusTrackingModel? userStatusTracking)
         loaded,
+    required TResult Function(String message) startError,
     required TResult Function(String message) error,
   }) {
     return loading();
@@ -391,8 +425,12 @@ class _$HomeLoading with DiagnosticableTreeMixin implements HomeLoading {
             bool enableInsurance,
             double tokenEarn,
             int hour,
-            int minute)?
+            int minute,
+            int time,
+            bool startTracking,
+            UserStatusTrackingModel? userStatusTracking)?
         loaded,
+    TResult Function(String message)? startError,
     TResult Function(String message)? error,
   }) {
     return loading?.call();
@@ -418,8 +456,12 @@ class _$HomeLoading with DiagnosticableTreeMixin implements HomeLoading {
             bool enableInsurance,
             double tokenEarn,
             int hour,
-            int minute)?
+            int minute,
+            int time,
+            bool startTracking,
+            UserStatusTrackingModel? userStatusTracking)?
         loaded,
+    TResult Function(String message)? startError,
     TResult Function(String message)? error,
     required TResult orElse(),
   }) {
@@ -435,6 +477,7 @@ class _$HomeLoading with DiagnosticableTreeMixin implements HomeLoading {
     required TResult Function(HomeInitial value) initial,
     required TResult Function(HomeLoading value) loading,
     required TResult Function(HomeLoaded value) loaded,
+    required TResult Function(HomeStartError value) startError,
     required TResult Function(HomeError value) error,
   }) {
     return loading(this);
@@ -446,6 +489,7 @@ class _$HomeLoading with DiagnosticableTreeMixin implements HomeLoading {
     TResult Function(HomeInitial value)? initial,
     TResult Function(HomeLoading value)? loading,
     TResult Function(HomeLoaded value)? loaded,
+    TResult Function(HomeStartError value)? startError,
     TResult Function(HomeError value)? error,
   }) {
     return loading?.call(this);
@@ -457,6 +501,7 @@ class _$HomeLoading with DiagnosticableTreeMixin implements HomeLoading {
     TResult Function(HomeInitial value)? initial,
     TResult Function(HomeLoading value)? loading,
     TResult Function(HomeLoaded value)? loaded,
+    TResult Function(HomeStartError value)? startError,
     TResult Function(HomeError value)? error,
     required TResult orElse(),
   }) {
@@ -491,7 +536,10 @@ abstract class _$$HomeLoadedCopyWith<$Res> {
       bool enableInsurance,
       double tokenEarn,
       int hour,
-      int minute});
+      int minute,
+      int time,
+      bool startTracking,
+      UserStatusTrackingModel? userStatusTracking});
 
   $BedEntityCopyWith<$Res>? get selectedBed;
   $BedEntityCopyWith<$Res>? get item;
@@ -525,6 +573,9 @@ class __$$HomeLoadedCopyWithImpl<$Res> extends _$HomeStateCopyWithImpl<$Res>
     Object? tokenEarn = freezed,
     Object? hour = freezed,
     Object? minute = freezed,
+    Object? time = freezed,
+    Object? startTracking = freezed,
+    Object? userStatusTracking = freezed,
   }) {
     return _then(_$HomeLoaded(
       bedList: bedList == freezed
@@ -587,6 +638,18 @@ class __$$HomeLoadedCopyWithImpl<$Res> extends _$HomeStateCopyWithImpl<$Res>
           ? _value.minute
           : minute // ignore: cast_nullable_to_non_nullable
               as int,
+      time: time == freezed
+          ? _value.time
+          : time // ignore: cast_nullable_to_non_nullable
+              as int,
+      startTracking: startTracking == freezed
+          ? _value.startTracking
+          : startTracking // ignore: cast_nullable_to_non_nullable
+              as bool,
+      userStatusTracking: userStatusTracking == freezed
+          ? _value.userStatusTracking
+          : userStatusTracking // ignore: cast_nullable_to_non_nullable
+              as UserStatusTrackingModel?,
     ));
   }
 
@@ -642,7 +705,10 @@ class _$HomeLoaded with DiagnosticableTreeMixin implements HomeLoaded {
       this.enableInsurance = true,
       this.tokenEarn = 0.0,
       required this.hour,
-      required this.minute})
+      required this.minute,
+      required this.time,
+      this.startTracking = false,
+      this.userStatusTracking})
       : _bedList = bedList,
         _itemList = itemList,
         _luckyBoxes = luckyBoxes;
@@ -702,10 +768,17 @@ class _$HomeLoaded with DiagnosticableTreeMixin implements HomeLoaded {
   final int hour;
   @override
   final int minute;
+  @override
+  final int time;
+  @override
+  @JsonKey()
+  final bool startTracking;
+  @override
+  final UserStatusTrackingModel? userStatusTracking;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'HomeState.loaded(bedList: $bedList, selectedBed: $selectedBed, item: $item, itemList: $itemList, luckyBoxes: $luckyBoxes, selectedItem: $selectedItem, errorMessage: $errorMessage, errorType: $errorType, loadMoreBed: $loadMoreBed, loadMoreItem: $loadMoreItem, loading: $loading, enableInsurance: $enableInsurance, tokenEarn: $tokenEarn, hour: $hour, minute: $minute)';
+    return 'HomeState.loaded(bedList: $bedList, selectedBed: $selectedBed, item: $item, itemList: $itemList, luckyBoxes: $luckyBoxes, selectedItem: $selectedItem, errorMessage: $errorMessage, errorType: $errorType, loadMoreBed: $loadMoreBed, loadMoreItem: $loadMoreItem, loading: $loading, enableInsurance: $enableInsurance, tokenEarn: $tokenEarn, hour: $hour, minute: $minute, time: $time, startTracking: $startTracking, userStatusTracking: $userStatusTracking)';
   }
 
   @override
@@ -727,7 +800,10 @@ class _$HomeLoaded with DiagnosticableTreeMixin implements HomeLoaded {
       ..add(DiagnosticsProperty('enableInsurance', enableInsurance))
       ..add(DiagnosticsProperty('tokenEarn', tokenEarn))
       ..add(DiagnosticsProperty('hour', hour))
-      ..add(DiagnosticsProperty('minute', minute));
+      ..add(DiagnosticsProperty('minute', minute))
+      ..add(DiagnosticsProperty('time', time))
+      ..add(DiagnosticsProperty('startTracking', startTracking))
+      ..add(DiagnosticsProperty('userStatusTracking', userStatusTracking));
   }
 
   @override
@@ -756,7 +832,12 @@ class _$HomeLoaded with DiagnosticableTreeMixin implements HomeLoaded {
                 .equals(other.enableInsurance, enableInsurance) &&
             const DeepCollectionEquality().equals(other.tokenEarn, tokenEarn) &&
             const DeepCollectionEquality().equals(other.hour, hour) &&
-            const DeepCollectionEquality().equals(other.minute, minute));
+            const DeepCollectionEquality().equals(other.minute, minute) &&
+            const DeepCollectionEquality().equals(other.time, time) &&
+            const DeepCollectionEquality()
+                .equals(other.startTracking, startTracking) &&
+            const DeepCollectionEquality()
+                .equals(other.userStatusTracking, userStatusTracking));
   }
 
   @override
@@ -776,7 +857,10 @@ class _$HomeLoaded with DiagnosticableTreeMixin implements HomeLoaded {
       const DeepCollectionEquality().hash(enableInsurance),
       const DeepCollectionEquality().hash(tokenEarn),
       const DeepCollectionEquality().hash(hour),
-      const DeepCollectionEquality().hash(minute));
+      const DeepCollectionEquality().hash(minute),
+      const DeepCollectionEquality().hash(time),
+      const DeepCollectionEquality().hash(startTracking),
+      const DeepCollectionEquality().hash(userStatusTracking));
 
   @JsonKey(ignore: true)
   @override
@@ -803,8 +887,12 @@ class _$HomeLoaded with DiagnosticableTreeMixin implements HomeLoaded {
             bool enableInsurance,
             double tokenEarn,
             int hour,
-            int minute)
+            int minute,
+            int time,
+            bool startTracking,
+            UserStatusTrackingModel? userStatusTracking)
         loaded,
+    required TResult Function(String message) startError,
     required TResult Function(String message) error,
   }) {
     return loaded(
@@ -822,7 +910,10 @@ class _$HomeLoaded with DiagnosticableTreeMixin implements HomeLoaded {
         enableInsurance,
         tokenEarn,
         hour,
-        minute);
+        minute,
+        time,
+        startTracking,
+        userStatusTracking);
   }
 
   @override
@@ -845,8 +936,12 @@ class _$HomeLoaded with DiagnosticableTreeMixin implements HomeLoaded {
             bool enableInsurance,
             double tokenEarn,
             int hour,
-            int minute)?
+            int minute,
+            int time,
+            bool startTracking,
+            UserStatusTrackingModel? userStatusTracking)?
         loaded,
+    TResult Function(String message)? startError,
     TResult Function(String message)? error,
   }) {
     return loaded?.call(
@@ -864,7 +959,10 @@ class _$HomeLoaded with DiagnosticableTreeMixin implements HomeLoaded {
         enableInsurance,
         tokenEarn,
         hour,
-        minute);
+        minute,
+        time,
+        startTracking,
+        userStatusTracking);
   }
 
   @override
@@ -887,8 +985,12 @@ class _$HomeLoaded with DiagnosticableTreeMixin implements HomeLoaded {
             bool enableInsurance,
             double tokenEarn,
             int hour,
-            int minute)?
+            int minute,
+            int time,
+            bool startTracking,
+            UserStatusTrackingModel? userStatusTracking)?
         loaded,
+    TResult Function(String message)? startError,
     TResult Function(String message)? error,
     required TResult orElse(),
   }) {
@@ -908,7 +1010,10 @@ class _$HomeLoaded with DiagnosticableTreeMixin implements HomeLoaded {
           enableInsurance,
           tokenEarn,
           hour,
-          minute);
+          minute,
+          time,
+          startTracking,
+          userStatusTracking);
     }
     return orElse();
   }
@@ -919,6 +1024,7 @@ class _$HomeLoaded with DiagnosticableTreeMixin implements HomeLoaded {
     required TResult Function(HomeInitial value) initial,
     required TResult Function(HomeLoading value) loading,
     required TResult Function(HomeLoaded value) loaded,
+    required TResult Function(HomeStartError value) startError,
     required TResult Function(HomeError value) error,
   }) {
     return loaded(this);
@@ -930,6 +1036,7 @@ class _$HomeLoaded with DiagnosticableTreeMixin implements HomeLoaded {
     TResult Function(HomeInitial value)? initial,
     TResult Function(HomeLoading value)? loading,
     TResult Function(HomeLoaded value)? loaded,
+    TResult Function(HomeStartError value)? startError,
     TResult Function(HomeError value)? error,
   }) {
     return loaded?.call(this);
@@ -941,6 +1048,7 @@ class _$HomeLoaded with DiagnosticableTreeMixin implements HomeLoaded {
     TResult Function(HomeInitial value)? initial,
     TResult Function(HomeLoading value)? loading,
     TResult Function(HomeLoaded value)? loaded,
+    TResult Function(HomeStartError value)? startError,
     TResult Function(HomeError value)? error,
     required TResult orElse(),
   }) {
@@ -967,7 +1075,10 @@ abstract class HomeLoaded implements HomeState {
       final bool enableInsurance,
       final double tokenEarn,
       required final int hour,
-      required final int minute}) = _$HomeLoaded;
+      required final int minute,
+      required final int time,
+      final bool startTracking,
+      final UserStatusTrackingModel? userStatusTracking}) = _$HomeLoaded;
 
   List<BedEntity> get bedList;
   BedEntity? get selectedBed;
@@ -984,8 +1095,227 @@ abstract class HomeLoaded implements HomeState {
   double get tokenEarn;
   int get hour;
   int get minute;
+  int get time;
+  bool get startTracking;
+  UserStatusTrackingModel? get userStatusTracking;
   @JsonKey(ignore: true)
   _$$HomeLoadedCopyWith<_$HomeLoaded> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$HomeStartErrorCopyWith<$Res> {
+  factory _$$HomeStartErrorCopyWith(
+          _$HomeStartError value, $Res Function(_$HomeStartError) then) =
+      __$$HomeStartErrorCopyWithImpl<$Res>;
+  $Res call({String message});
+}
+
+/// @nodoc
+class __$$HomeStartErrorCopyWithImpl<$Res> extends _$HomeStateCopyWithImpl<$Res>
+    implements _$$HomeStartErrorCopyWith<$Res> {
+  __$$HomeStartErrorCopyWithImpl(
+      _$HomeStartError _value, $Res Function(_$HomeStartError) _then)
+      : super(_value, (v) => _then(v as _$HomeStartError));
+
+  @override
+  _$HomeStartError get _value => super._value as _$HomeStartError;
+
+  @override
+  $Res call({
+    Object? message = freezed,
+  }) {
+    return _then(_$HomeStartError(
+      message == freezed
+          ? _value.message
+          : message // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$HomeStartError with DiagnosticableTreeMixin implements HomeStartError {
+  const _$HomeStartError(this.message);
+
+  @override
+  final String message;
+
+  @override
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+    return 'HomeState.startError(message: $message)';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('type', 'HomeState.startError'))
+      ..add(DiagnosticsProperty('message', message));
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$HomeStartError &&
+            const DeepCollectionEquality().equals(other.message, message));
+  }
+
+  @override
+  int get hashCode =>
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(message));
+
+  @JsonKey(ignore: true)
+  @override
+  _$$HomeStartErrorCopyWith<_$HomeStartError> get copyWith =>
+      __$$HomeStartErrorCopyWithImpl<_$HomeStartError>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function() loading,
+    required TResult Function(
+            List<BedEntity> bedList,
+            BedEntity? selectedBed,
+            BedEntity? item,
+            List<ItemEntity>? itemList,
+            List<LuckyBoxEntity> luckyBoxes,
+            ItemEntity? selectedItem,
+            String errorMessage,
+            ErrorType errorType,
+            bool loadMoreBed,
+            bool loadMoreItem,
+            bool loading,
+            bool enableInsurance,
+            double tokenEarn,
+            int hour,
+            int minute,
+            int time,
+            bool startTracking,
+            UserStatusTrackingModel? userStatusTracking)
+        loaded,
+    required TResult Function(String message) startError,
+    required TResult Function(String message) error,
+  }) {
+    return startError(message);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function()? loading,
+    TResult Function(
+            List<BedEntity> bedList,
+            BedEntity? selectedBed,
+            BedEntity? item,
+            List<ItemEntity>? itemList,
+            List<LuckyBoxEntity> luckyBoxes,
+            ItemEntity? selectedItem,
+            String errorMessage,
+            ErrorType errorType,
+            bool loadMoreBed,
+            bool loadMoreItem,
+            bool loading,
+            bool enableInsurance,
+            double tokenEarn,
+            int hour,
+            int minute,
+            int time,
+            bool startTracking,
+            UserStatusTrackingModel? userStatusTracking)?
+        loaded,
+    TResult Function(String message)? startError,
+    TResult Function(String message)? error,
+  }) {
+    return startError?.call(message);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function()? loading,
+    TResult Function(
+            List<BedEntity> bedList,
+            BedEntity? selectedBed,
+            BedEntity? item,
+            List<ItemEntity>? itemList,
+            List<LuckyBoxEntity> luckyBoxes,
+            ItemEntity? selectedItem,
+            String errorMessage,
+            ErrorType errorType,
+            bool loadMoreBed,
+            bool loadMoreItem,
+            bool loading,
+            bool enableInsurance,
+            double tokenEarn,
+            int hour,
+            int minute,
+            int time,
+            bool startTracking,
+            UserStatusTrackingModel? userStatusTracking)?
+        loaded,
+    TResult Function(String message)? startError,
+    TResult Function(String message)? error,
+    required TResult orElse(),
+  }) {
+    if (startError != null) {
+      return startError(message);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(HomeInitial value) initial,
+    required TResult Function(HomeLoading value) loading,
+    required TResult Function(HomeLoaded value) loaded,
+    required TResult Function(HomeStartError value) startError,
+    required TResult Function(HomeError value) error,
+  }) {
+    return startError(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(HomeInitial value)? initial,
+    TResult Function(HomeLoading value)? loading,
+    TResult Function(HomeLoaded value)? loaded,
+    TResult Function(HomeStartError value)? startError,
+    TResult Function(HomeError value)? error,
+  }) {
+    return startError?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(HomeInitial value)? initial,
+    TResult Function(HomeLoading value)? loading,
+    TResult Function(HomeLoaded value)? loaded,
+    TResult Function(HomeStartError value)? startError,
+    TResult Function(HomeError value)? error,
+    required TResult orElse(),
+  }) {
+    if (startError != null) {
+      return startError(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class HomeStartError implements HomeState {
+  const factory HomeStartError(final String message) = _$HomeStartError;
+
+  String get message;
+  @JsonKey(ignore: true)
+  _$$HomeStartErrorCopyWith<_$HomeStartError> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -1078,8 +1408,12 @@ class _$HomeError with DiagnosticableTreeMixin implements HomeError {
             bool enableInsurance,
             double tokenEarn,
             int hour,
-            int minute)
+            int minute,
+            int time,
+            bool startTracking,
+            UserStatusTrackingModel? userStatusTracking)
         loaded,
+    required TResult Function(String message) startError,
     required TResult Function(String message) error,
   }) {
     return error(message);
@@ -1105,8 +1439,12 @@ class _$HomeError with DiagnosticableTreeMixin implements HomeError {
             bool enableInsurance,
             double tokenEarn,
             int hour,
-            int minute)?
+            int minute,
+            int time,
+            bool startTracking,
+            UserStatusTrackingModel? userStatusTracking)?
         loaded,
+    TResult Function(String message)? startError,
     TResult Function(String message)? error,
   }) {
     return error?.call(message);
@@ -1132,8 +1470,12 @@ class _$HomeError with DiagnosticableTreeMixin implements HomeError {
             bool enableInsurance,
             double tokenEarn,
             int hour,
-            int minute)?
+            int minute,
+            int time,
+            bool startTracking,
+            UserStatusTrackingModel? userStatusTracking)?
         loaded,
+    TResult Function(String message)? startError,
     TResult Function(String message)? error,
     required TResult orElse(),
   }) {
@@ -1149,6 +1491,7 @@ class _$HomeError with DiagnosticableTreeMixin implements HomeError {
     required TResult Function(HomeInitial value) initial,
     required TResult Function(HomeLoading value) loading,
     required TResult Function(HomeLoaded value) loaded,
+    required TResult Function(HomeStartError value) startError,
     required TResult Function(HomeError value) error,
   }) {
     return error(this);
@@ -1160,6 +1503,7 @@ class _$HomeError with DiagnosticableTreeMixin implements HomeError {
     TResult Function(HomeInitial value)? initial,
     TResult Function(HomeLoading value)? loading,
     TResult Function(HomeLoaded value)? loaded,
+    TResult Function(HomeStartError value)? startError,
     TResult Function(HomeError value)? error,
   }) {
     return error?.call(this);
@@ -1171,6 +1515,7 @@ class _$HomeError with DiagnosticableTreeMixin implements HomeError {
     TResult Function(HomeInitial value)? initial,
     TResult Function(HomeLoading value)? loading,
     TResult Function(HomeLoaded value)? loaded,
+    TResult Function(HomeStartError value)? startError,
     TResult Function(HomeError value)? error,
     required TResult orElse(),
   }) {

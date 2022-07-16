@@ -9,6 +9,7 @@ import 'package:slee_fi/common/widgets/sf_logo.dart';
 import 'package:slee_fi/presentation/blocs/splash/splash_cubit.dart';
 import 'package:slee_fi/presentation/blocs/splash/splash_state.dart';
 import 'package:slee_fi/presentation/blocs/user_bloc/user_bloc.dart';
+import 'package:slee_fi/presentation/screens/tracking/tracking_screen.dart';
 
 class SplashScreen extends StatelessWidget {
   const SplashScreen({Key? key}) : super(key: key);
@@ -32,8 +33,27 @@ class SplashScreen extends StatelessWidget {
                 context.read<UserBloc>().add(UpdateUserOrListToken(
                     userInfoEntity: state.userInfoEntity!,
                     listTokens: state.listTokens));
-                Navigator.pushNamedAndRemoveUntil(
-                    context, R.bottomNavigation, (r) => false);
+                if (state.userStatusTrackingModel != null) {
+                  Navigator.pushNamedAndRemoveUntil(
+                    context,
+                    R.tracking,
+                    (r) => false,
+                    arguments: TrackingParams(
+                      timeStart:
+                          state.userStatusTrackingModel!.tracking!.startSleep! *
+                              1000,
+                      timeWakeUp:
+                          state.userStatusTrackingModel!.tracking!.wakeUp! *
+                              1000,
+                      tokenEarn: double.parse(
+                          state.userStatusTrackingModel!.tracking!.estEarn!),
+                      fromRoute: R.splash,
+                    ),
+                  );
+                } else {
+                  Navigator.pushNamedAndRemoveUntil(
+                      context, R.bottomNavigation, (r) => false);
+                }
               } else {
                 Navigator.pushNamedAndRemoveUntil(
                     context, R.loginSignUp, (r) => false);

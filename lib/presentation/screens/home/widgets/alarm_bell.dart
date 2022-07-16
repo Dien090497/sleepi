@@ -21,9 +21,11 @@ import 'package:slee_fi/presentation/blocs/home/home_state.dart';
 import 'package:slee_fi/presentation/screens/home/widgets/button_start.dart';
 import 'package:slee_fi/presentation/screens/home/widgets/home_switch.dart';
 import 'package:slee_fi/presentation/screens/home/widgets/pop_up_confirm_speed_up.dart';
+import 'package:slee_fi/presentation/screens/home/widgets/pop_up_start_tracking.dart';
 import 'package:slee_fi/presentation/screens/home/widgets/popup_open_lucky_box.dart';
 import 'package:slee_fi/presentation/screens/home/widgets/time_picker.dart';
 import 'package:slee_fi/presentation/screens/staking/widgets/popup_staking.dart';
+import 'package:slee_fi/presentation/screens/tracking/tracking_screen.dart';
 import 'package:slee_fi/resources/resources.dart';
 
 class AlarmBell extends StatelessWidget {
@@ -32,17 +34,43 @@ class AlarmBell extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final dateTimeUtil = getIt<DateTimeUtils>();
-    return BlocBuilder<HomeBloc, HomeState>(
+    return BlocConsumer<HomeBloc, HomeState>(
+      listener: (context, state) {
+        if (state is HomeLoaded && state.startTracking) {
+          DateTime wakeUp = DateTime.now()
+              .add(Duration(minutes: state.time));
+          Navigator.pushReplacementNamed(
+            context,
+            R.tracking,
+            arguments: TrackingParams(
+              timeStart: DateTime.now().toUtc().millisecondsSinceEpoch~/1000,
+              timeWakeUp: wakeUp.toUtc().millisecondsSinceEpoch~/1000,
+              tokenEarn: state.tokenEarn,
+              fromRoute: R.bottomNavigation
+            ),
+          );
+        }
+        if(state is HomeStartError){
+          showMessageDialog(context, state.message);
+        }
+      },
       builder: (context, state) {
         final bed = state is HomeLoaded ? state.selectedBed : null;
+        final userStatusTracking =
+            state is HomeLoaded ? state.userStatusTracking : null;
+
         final minTime = DateTime.now().add(Duration(
-            minutes: bed != null && bed.startTime != null
-                ? (bed.startTime! * 60).toInt()
-                : 0));
+            minutes: bed == null
+                ? 0
+                : bed.startTime == null
+                    ? 0
+                    : (bed.startTime! * 60).toInt()));
         final maxTime = DateTime.now().add(Duration(
-            minutes: bed != null && bed.endTime != null
-                ? (bed.endTime! * 60).toInt()
-                : 0));
+            minutes: bed == null
+                ? 0
+                : bed.endTime == null
+                    ? 0
+                    : (bed.endTime! * 60).toInt()));
 
         return Container(
           padding: const EdgeInsets.symmetric(horizontal: 16),
@@ -93,7 +121,33 @@ class AlarmBell extends StatelessWidget {
                 ],
               ),
               const SizedBox(height: 16),
-              ButtonStart(enableStart: _correctTime(minTime, maxTime, state)),
+              ButtonStart(
+                enableStart: _correctTime(minTime, maxTime, state),
+                userStatusTracking: userStatusTracking,
+                onStartTracking: () {
+                  if (state is HomeLoaded) {
+                    if (state.userStatusTracking!.tracking == null) {
+                      showCustomAlertDialog(context,
+                          children: PopUpConfirmStartTracking(
+                        onPressed: () async {
+                          context.read<HomeBloc>().add(StartTracking());
+                        },
+                      ));
+                    }else{
+                      Navigator.pushNamed(
+                        context,
+                        R.tracking,
+                        arguments: TrackingParams(
+                          timeStart: state.userStatusTracking!.tracking!.startSleep!*1000,
+                          timeWakeUp: state.userStatusTracking!.tracking!.wakeUp!*1000,
+                          tokenEarn: double.parse(state.userStatusTracking!.tracking!.estEarn!),
+                          fromRoute: R.bottomNavigation
+                        ),
+                      );
+                    }
+                  }
+                },
+              ),
               const SizedBox(height: 32),
               Row(
                 children: [
@@ -111,7 +165,8 @@ class AlarmBell extends StatelessWidget {
                           backgroundColor: Colors.white.withOpacity(0.05),
                         ),
                         Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                          padding:
+                              const EdgeInsets.symmetric(horizontal: 16.0),
                           child: SFText(
                             keyText:
                                 '${state is HomeLoaded ? state.tokenEarn : 0}/150 SLFT',

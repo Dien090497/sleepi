@@ -29,11 +29,9 @@ class TabItemsBuy extends StatefulWidget {
 
 class _TabItemsBuyState extends State<TabItemsBuy> {
   List<MarketPlaceModel> listItems = [];
-  ScrollController scrollController = ScrollController();
 
   @override
   void dispose() {
-    scrollController.dispose();
     super.dispose();
   }
 

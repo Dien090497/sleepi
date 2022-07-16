@@ -18,12 +18,12 @@ class EstimateTrackingUseCase
 
 class EstimateTrackingParam {
   final int bedId;
-  final int itemId;
+  final int? itemId;
   final bool isEnableInsurance;
 
   EstimateTrackingParam({
     required this.bedId,
-    required this.itemId,
+    this.itemId,
     required this.isEnableInsurance,
   });
 }

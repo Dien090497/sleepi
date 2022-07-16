@@ -9,14 +9,17 @@ import 'package:slee_fi/entities/item_entity/item_entity.dart';
 import 'package:slee_fi/presentation/blocs/home/home_state.dart';
 import 'package:slee_fi/schema/param_filler_item_fetch/filter_item_schema.dart';
 import 'package:slee_fi/schema/speed_up_lucky_box_schema/speed_up_lucky_box_schema.dart';
+import 'package:slee_fi/schema/start_tracking/start_tracking_schema.dart';
 import 'package:slee_fi/usecase/add_item_to_bed_usecase.dart';
 import 'package:slee_fi/usecase/estimate_tracking_usecase.dart';
 import 'package:slee_fi/usecase/fetch_bed_usecase.dart';
 import 'package:slee_fi/usecase/fetch_item_owner_usecase.dart';
 import 'package:slee_fi/usecase/fetch_lucky_box_usecase.dart';
+import 'package:slee_fi/usecase/get_user_status_tracking_usecase.dart';
 import 'package:slee_fi/usecase/open_lucky_box_usecase.dart';
 import 'package:slee_fi/usecase/remove_item_from_bed_usecase.dart';
 import 'package:slee_fi/usecase/speed_up_lucky_box_usecase.dart';
+import 'package:slee_fi/usecase/start_sleep_tracking_usecase.dart';
 import 'package:slee_fi/usecase/usecase.dart';
 
 part 'home_event.dart';
@@ -34,6 +37,8 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     on<LoadMoreBed>(_onLoadMoreBed);
     on<LoadMoreItem>(_loadMoreItem);
     on<EstimateTracking>(_estimateTracking);
+    on<UserStatusTracking>(_userStatusTracking);
+    on<StartTracking>(_startTracking);
     on<ChangeInsurance>(_changeInsurance);
     on<FetchLuckyBox>(_fetchLuckyBox);
     on<SpeedUpLuckyBox>(_speedUpLuckyBox);
@@ -47,9 +52,11 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
   final _removeItemFromBedUC = getIt<RemoveItemFromBedUseCase>();
   final _fetchItemUC = getIt<FetchItemOwnerUseCase>();
   final _estimateTrackingUC = getIt<EstimateTrackingUseCase>();
+  final _userStatusTrackingUC = getIt<GetUserStatusTrackingUseCase>();
   final _fetchLuckyBoxUC = getIt<FetchLuckyBoxUseCase>();
   final _speedUpLuckyBoxUC = getIt<SpeedUpLuckyBoxUseCase>();
   final _openLuckyBoxUC = getIt<OpenLuckyBoxUseCase>();
+  final _startSleepTrackingUC = getIt<StartSleepTrackingUseCase>();
 
   int currentBedId = -1;
   int _currentPageBed = 1;
@@ -129,8 +136,10 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
             selectedBed: null,
             loadMoreBed: false,
             errorMessage: '',
+            startTracking: false,
             minute: DateTime.now().minute,
-            hour: DateTime.now().hour));
+            hour: DateTime.now().hour,
+            time: 0));
       },
       (r) {
         _currentPageBed++;
@@ -149,7 +158,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
               selectedBed: r.first.toEntity(),
               loadMoreBed: true,
               selectedItem: null));
-          add(FetchLuckyBox());
+          add(UserStatusTracking());
           return;
         }
         emit(HomeState.loaded(
@@ -163,9 +172,10 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
                 .toList(),
             selectedBed: r.isNotEmpty ? r.first.toEntity() : null,
             loadMoreBed: true,
+            minute: DateTime.now().minute,
             hour: DateTime.now().hour,
-            minute: DateTime.now().minute));
-        add(FetchLuckyBox());
+            time: 0));
+        add(UserStatusTracking());
       },
     );
   }
@@ -254,10 +264,42 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     if (currentState is HomeLoaded && currentState.bedList.isNotEmpty) {
       var result = await _estimateTrackingUC.call(EstimateTrackingParam(
           bedId: currentState.selectedBed!.id,
-          itemId: currentState.selectedItem?.id ?? 0,
+          itemId: currentState.selectedItem?.id,
           isEnableInsurance: currentState.enableInsurance));
       result.fold((l) => null, (r) {
         emit(currentState.copyWith(tokenEarn: double.parse(r.slftTokenAmount)));
+      });
+    }
+  }
+
+  void _userStatusTracking(
+      UserStatusTracking event, Emitter<HomeState> emit) async {
+    final currentState = state;
+    if (currentState is HomeLoaded) {
+      var result = await _userStatusTrackingUC.call(NoParams());
+      result.fold((l) => null, (r) {
+        emit(
+            currentState.copyWith(userStatusTracking: r, startTracking: false));
+        add(FetchLuckyBox());
+      });
+    }
+  }
+
+  void _startTracking(StartTracking event, Emitter<HomeState> emit) async {
+    final currentState = state;
+    if (currentState is HomeLoaded && currentState.bedList.isNotEmpty) {
+      DateTime wakeUp =
+          DateTime.now().add(Duration(minutes: currentState.time));
+      print('=--==-=-${wakeUp.toUtc().millisecondsSinceEpoch ~/ 1000}');
+      var result = await _startSleepTrackingUC.call(StartTrackingSchema(
+        isEnableInsurance: currentState.enableInsurance,
+        bedUsed: currentState.selectedBed!.id,
+        wakeUp: '${wakeUp.toUtc().millisecondsSinceEpoch ~/ 1000}',
+        alrm: true,
+        itemUsed: currentState.selectedItem?.id ?? 0,
+      ));
+      result.fold((l) => emit(HomeState.startError('$l')), (r) {
+        emit(currentState.copyWith(startTracking: true));
       });
     }
   }
@@ -300,7 +342,8 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     final currentState = state;
 
     if (currentState is HomeLoaded) {
-      emit(currentState.copyWith(hour: event.hour));
+      emit(currentState.copyWith(
+          hour: event.hour, time: _getTimeWithHour(event.hour, currentState)));
     }
   }
 
@@ -308,7 +351,9 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     final currentState = state;
 
     if (currentState is HomeLoaded) {
-      emit(currentState.copyWith(minute: event.minute));
+      emit(currentState.copyWith(
+          minute: event.minute,
+          time: _getTimeWithMinutes(event.minute, currentState)));
     }
   }
 
@@ -324,5 +369,31 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
         emit(currentState.copyWith(luckyBoxes: list));
       }
     });
+  }
+
+  int _getTimeWithHour(int hour, HomeState state) {
+    if (state is! HomeLoaded) return 0;
+    var minute = state.minute;
+    var now = DateTime.now();
+    var nextDay = DateTime.now().add(const Duration(days: 1));
+    var wakeUpTimeInNextDay =
+        DateTime(nextDay.year, nextDay.month, nextDay.day, hour, minute);
+    var wakeUpTimeInDay = DateTime(now.year, now.month, now.day, hour, minute);
+    var wakeUpTime = hour <= now.hour ? wakeUpTimeInNextDay : wakeUpTimeInDay;
+
+    return wakeUpTime.difference(now).inMinutes;
+  }
+
+  int _getTimeWithMinutes(int minute, HomeState state) {
+    if (state is! HomeLoaded) return 0;
+    var hour = state.hour;
+    var now = DateTime.now();
+    var nextDay = DateTime.now().add(const Duration(days: 1));
+    var wakeUpTimeInNextDay =
+        DateTime(nextDay.year, nextDay.month, nextDay.day, hour, minute);
+    var wakeUpTimeInDay = DateTime(now.year, now.month, now.day, hour, minute);
+    var wakeUpTime = hour <= now.hour ? wakeUpTimeInNextDay : wakeUpTimeInDay;
+
+    return wakeUpTime.difference(now).inMinutes;
   }
 }

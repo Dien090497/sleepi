@@ -4,13 +4,13 @@ import 'package:slee_fi/repository/sleep_tracking_repository.dart';
 import 'package:slee_fi/schema/sleep_tracking/data_health_schema.dart';
 import 'package:slee_fi/usecase/usecase.dart';
 
-class WakeUpUseCase extends UseCase<dynamic, DataHealthSchema> {
-  final ISleepTrackingRepository _sleepTrackingRepository;
+class PostHealthDataUseCase extends UseCase<dynamic, DataHealthSchema>{
+  final ISleepTrackingRepository _iSleepTrackingRepository;
 
-  WakeUpUseCase(this._sleepTrackingRepository);
+  PostHealthDataUseCase(this._iSleepTrackingRepository);
 
   @override
   Future<Either<Failure, dynamic>> call(DataHealthSchema params) {
-    return _sleepTrackingRepository.wakeUp(params);
+    return _iSleepTrackingRepository.postDataHealth(params);
   }
 }
