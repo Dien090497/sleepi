@@ -35,7 +35,7 @@ mixin _$BedEntity {
   double get resilience => throw _privateConstructorUsedError;
   int get time => throw _privateConstructorUsedError;
   int get isMint => throw _privateConstructorUsedError;
-  int? get nftId => throw _privateConstructorUsedError;
+  int get nftId => throw _privateConstructorUsedError;
   double? get insurancePercent => throw _privateConstructorUsedError;
   double? get startTime => throw _privateConstructorUsedError;
   double? get endTime => throw _privateConstructorUsedError;
@@ -69,7 +69,7 @@ abstract class $BedEntityCopyWith<$Res> {
       double resilience,
       int time,
       int isMint,
-      int? nftId,
+      int nftId,
       double? insurancePercent,
       double? startTime,
       double? endTime});
@@ -189,7 +189,7 @@ class _$BedEntityCopyWithImpl<$Res> implements $BedEntityCopyWith<$Res> {
       nftId: nftId == freezed
           ? _value.nftId
           : nftId // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as int,
       insurancePercent: insurancePercent == freezed
           ? _value.insurancePercent
           : insurancePercent // ignore: cast_nullable_to_non_nullable
@@ -232,7 +232,7 @@ abstract class _$$_BedEntityCopyWith<$Res> implements $BedEntityCopyWith<$Res> {
       double resilience,
       int time,
       int isMint,
-      int? nftId,
+      int nftId,
       double? insurancePercent,
       double? startTime,
       double? endTime});
@@ -354,7 +354,7 @@ class __$$_BedEntityCopyWithImpl<$Res> extends _$BedEntityCopyWithImpl<$Res>
       nftId: nftId == freezed
           ? _value.nftId
           : nftId // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as int,
       insurancePercent: insurancePercent == freezed
           ? _value.insurancePercent
           : insurancePercent // ignore: cast_nullable_to_non_nullable
@@ -394,7 +394,7 @@ class _$_BedEntity implements _BedEntity {
       required this.resilience,
       required this.time,
       required this.isMint,
-      this.nftId,
+      required this.nftId,
       this.insurancePercent,
       this.startTime,
       this.endTime});
@@ -438,7 +438,7 @@ class _$_BedEntity implements _BedEntity {
   @override
   final int isMint;
   @override
-  final int? nftId;
+  final int nftId;
   @override
   final double? insurancePercent;
   @override
@@ -541,7 +541,7 @@ abstract class _BedEntity implements BedEntity {
       required final double resilience,
       required final int time,
       required final int isMint,
-      final int? nftId,
+      required final int nftId,
       final double? insurancePercent,
       final double? startTime,
       final double? endTime}) = _$_BedEntity;
@@ -585,7 +585,7 @@ abstract class _BedEntity implements BedEntity {
   @override
   int get isMint;
   @override
-  int? get nftId;
+  int get nftId;
   @override
   double? get insurancePercent;
   @override

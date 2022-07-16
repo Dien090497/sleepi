@@ -138,8 +138,7 @@ class MiddleBed extends StatelessWidget {
                       ),
                       const SizedBox(width: 8),
                       SFButton(
-                        text:
-                            'Lv${selectBed != null ? selectBed.level : '0'}',
+                        text: 'Lv${selectBed != null ? selectBed.level : '0'}',
                         textStyle: TextStyles.yellow14,
                         color: Colors.white.withOpacity(0.05),
                         radius: 50,
@@ -166,6 +165,7 @@ class MiddleBed extends StatelessWidget {
 
 class _BuildBedItem extends StatelessWidget {
   const _BuildBedItem({Key? key, required this.bedEntity}) : super(key: key);
+
   final BedEntity bedEntity;
 
   @override
@@ -174,9 +174,12 @@ class _BuildBedItem extends StatelessWidget {
       children: [
         SFText(keyText: bedEntity.nftClass, style: TextStyles.blue14),
         GestureDetector(
-          onTap: () {
-            Navigator.pushNamed(context, R.nftInfo,
+          onTap: () async {
+            final result = await Navigator.pushNamed(context, R.nftInfo,
                 arguments: InfoIndividualParams(buy: true, bed: bedEntity));
+            if (result != null && result is BedEntity) {
+              context.read<HomeBloc>().add(ChangeBed(bed: result));
+            }
           },
           child: CachedImage(image: bedEntity.image, height: 180.h),
         ),

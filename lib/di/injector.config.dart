@@ -85,12 +85,12 @@ import '../usecase/get_balance_token_usecase.dart' as _i103;
 import '../usecase/get_current_network_usecase.dart' as _i105;
 import '../usecase/get_global_config.dart' as _i106;
 import '../usecase/get_history_transaction_usecase.dart' as _i107;
-import '../usecase/get_list_nft_detail_usecase.dart' as _i119;
+import '../usecase/get_individual_detail_usecase.dart' as _i119;
+import '../usecase/get_list_nft_detail_usecase.dart' as _i120;
 import '../usecase/get_market_place_usecase.dart' as _i59;
 import '../usecase/get_network_connection_usecase.dart' as _i32;
-import '../usecase/get_nft_detail_usecase.dart' as _i122;
-import '../usecase/get_nfts_balance_usecase.dart' as _i120;
-import '../usecase/get_nfts_ids_usecase.dart' as _i121;
+import '../usecase/get_nfts_balance_usecase.dart' as _i121;
+import '../usecase/get_nfts_ids_usecase.dart' as _i122;
 import '../usecase/get_sleep_result_usecase.dart' as _i108;
 import '../usecase/get_user_status_tracking_usecase.dart' as _i109;
 import '../usecase/get_user_usecase.dart' as _i110;
@@ -380,14 +380,14 @@ Future<_i1.GetIt> $initGetIt(_i1.GetIt get,
       () => _i117.TransferNftUseCase(get<_i112.INFTRepository>()));
   gh.factory<_i118.EstimateNftFunctionFeeUseCase>(
       () => _i118.EstimateNftFunctionFeeUseCase(get<_i112.INFTRepository>()));
-  gh.factory<_i119.GetListNftDetailUseCase>(
-      () => _i119.GetListNftDetailUseCase(get<_i112.INFTRepository>()));
-  gh.factory<_i120.GetNFTsBalanceUseCase>(
-      () => _i120.GetNFTsBalanceUseCase(get<_i112.INFTRepository>()));
-  gh.factory<_i121.GetNFTsIDsUseCase>(
-      () => _i121.GetNFTsIDsUseCase(get<_i112.INFTRepository>()));
-  gh.factory<_i122.GetNftDetailUseCase>(
-      () => _i122.GetNftDetailUseCase(get<_i112.INFTRepository>()));
+  gh.factory<_i119.GetIndividualDetailUseCase>(
+      () => _i119.GetIndividualDetailUseCase(get<_i112.INFTRepository>()));
+  gh.factory<_i120.GetListNftDetailUseCase>(
+      () => _i120.GetListNftDetailUseCase(get<_i112.INFTRepository>()));
+  gh.factory<_i121.GetNFTsBalanceUseCase>(
+      () => _i121.GetNFTsBalanceUseCase(get<_i112.INFTRepository>()));
+  gh.factory<_i122.GetNFTsIDsUseCase>(
+      () => _i122.GetNFTsIDsUseCase(get<_i112.INFTRepository>()));
   return get;
 }
 

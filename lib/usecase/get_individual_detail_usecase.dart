@@ -4,10 +4,10 @@ import 'package:slee_fi/failures/failure.dart';
 import 'package:slee_fi/repository/nft_repository.dart';
 import 'package:slee_fi/usecase/usecase.dart';
 
-class GetNftDetailUseCase extends UseCase<BedEntity, int> {
+class GetIndividualDetailUseCase extends UseCase<BedEntity, int> {
   final INFTRepository _inftRepository;
 
-  GetNftDetailUseCase(this._inftRepository);
+  GetIndividualDetailUseCase(this._inftRepository);
 
   @override
   Future<Either<Failure, BedEntity>> call(int params) {
