@@ -6,5 +6,8 @@ part 'individual_state.freezed.dart';
 
 @freezed
 class IndividualState with _$IndividualState {
-  const factory IndividualState(BedEntity bed) = _IndividualState;
+  const factory IndividualState(
+    BedEntity bed, {
+    @Default(false) bool isLoading,
+  }) = _IndividualState;
 }

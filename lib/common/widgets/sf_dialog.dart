@@ -30,7 +30,7 @@ Future<T?> showCustomDialog<T>(
 }
 
 Future<T?> showSuccessfulDialog<T>(BuildContext context, String? message,
-    {EdgeInsets? padding, TextStyle? style, VoidCallback? onPop}) async {
+    {EdgeInsets? padding, TextStyle? style, VoidCallback? onBackPress}) async {
   return showDialog(
       context: context,
       barrierColor: AppColors.backgroundDialog,
@@ -42,10 +42,10 @@ Future<T?> showSuccessfulDialog<T>(BuildContext context, String? message,
               alignment: Alignment.centerRight,
               child: IconButton(
                 onPressed: () {
-                  if (onPop != null) {
-                    onPop();
-                  }
                   Navigator.pop(context);
+                  if (onBackPress != null) {
+                    onBackPress();
+                  }
                 },
                 icon: const Icon(Icons.close, color: AppColors.white),
               ),
@@ -77,9 +77,7 @@ Future<T?> showMessageDialog<T>(BuildContext context, String message,
   );
 }
 
-Future<T?> showSignUpSuccess<T>(
-  BuildContext context,String? message
-) async {
+Future<T?> showSignUpSuccess<T>(BuildContext context, String? message) async {
   return showDialog(
       context: context,
       barrierColor: AppColors.backgroundDialog,
@@ -121,7 +119,6 @@ Future<T?> showSignUpSuccess<T>(
         );
       });
 }
-
 
 Future<T?> showChangeLanguageDialog<T>(BuildContext context,
     {required Locale locale}) async {
@@ -179,10 +176,7 @@ Future<T?> showChangeLanguageDialog<T>(BuildContext context,
       });
 }
 
-
-Future<T?> showLanguageUpdatedDialog<T>(
-    BuildContext context
-    ) async {
+Future<T?> showLanguageUpdatedDialog<T>(BuildContext context) async {
   return showDialog(
       context: context,
       barrierColor: AppColors.backgroundDialog,
@@ -224,8 +218,6 @@ Future<T?> showLanguageUpdatedDialog<T>(
         );
       });
 }
-
-
 
 class SFDialog extends StatelessWidget {
   const SFDialog(

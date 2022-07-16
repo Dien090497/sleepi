@@ -18,6 +18,7 @@ import 'package:slee_fi/presentation/blocs/individual/individual_state.dart';
 import 'package:slee_fi/presentation/blocs/socket_bloc/socket_bloc.dart';
 import 'package:slee_fi/presentation/blocs/socket_bloc/socket_event.dart';
 import 'package:slee_fi/presentation/screens/gacha/widgets/attributes_widget.dart';
+import 'package:slee_fi/presentation/screens/home/widgets/middle_bed.dart';
 import 'package:slee_fi/presentation/screens/info_individual/widget/bottom_bar.dart';
 import 'package:slee_fi/presentation/screens/info_individual/widget/bottom_bar_market_place.dart';
 import 'package:slee_fi/presentation/screens/info_individual/widget/box_info_widget.dart';
@@ -51,10 +52,8 @@ class InfoIndividualScreen extends StatelessWidget {
         children: [
           BackgroundWidget(
             child: SafeArea(
-              top: false,
               child: Column(
                 children: [
-                  SizedBox(height: MediaQuery.of(context).padding.top),
                   BlocBuilder<IndividualCubit, IndividualState>(
                     builder: (context, state) {
                       return TopBarCommon(iconBack: true, results: state.bed);
@@ -62,14 +61,14 @@ class InfoIndividualScreen extends StatelessWidget {
                   ),
                   const SizedBox(height: 10),
                   Expanded(
-                    child: IndividualRefresher(
-                      child: BlocBuilder<IndividualCubit, IndividualState>(
-                        builder: (context, state) {
-                          return WillPopScope(
-                            onWillPop: () async {
-                              Navigator.pop(context, state.bed);
-                              return false;
-                            },
+                    child: BlocBuilder<IndividualCubit, IndividualState>(
+                      builder: (context, state) {
+                        return WillPopScope(
+                          onWillPop: () {
+                            Navigator.pop(context, state.bed);
+                            return Future(() => false);
+                          },
+                          child: IndividualRefresher(
                             child: ListView(
                               children: [
                                 Container(
@@ -145,9 +144,9 @@ class InfoIndividualScreen extends StatelessWidget {
                                 const SizedBox(height: 80),
                               ],
                             ),
-                          );
-                        },
-                      ),
+                          ),
+                        );
+                      },
                     ),
                   ),
                 ],

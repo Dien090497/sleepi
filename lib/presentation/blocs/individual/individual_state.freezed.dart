@@ -17,6 +17,7 @@ final _privateConstructorUsedError = UnsupportedError(
 /// @nodoc
 mixin _$IndividualState {
   BedEntity get bed => throw _privateConstructorUsedError;
+  bool get isLoading => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $IndividualStateCopyWith<IndividualState> get copyWith =>
@@ -28,7 +29,7 @@ abstract class $IndividualStateCopyWith<$Res> {
   factory $IndividualStateCopyWith(
           IndividualState value, $Res Function(IndividualState) then) =
       _$IndividualStateCopyWithImpl<$Res>;
-  $Res call({BedEntity bed});
+  $Res call({BedEntity bed, bool isLoading});
 
   $BedEntityCopyWith<$Res> get bed;
 }
@@ -45,12 +46,17 @@ class _$IndividualStateCopyWithImpl<$Res>
   @override
   $Res call({
     Object? bed = freezed,
+    Object? isLoading = freezed,
   }) {
     return _then(_value.copyWith(
       bed: bed == freezed
           ? _value.bed
           : bed // ignore: cast_nullable_to_non_nullable
               as BedEntity,
+      isLoading: isLoading == freezed
+          ? _value.isLoading
+          : isLoading // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 
@@ -69,7 +75,7 @@ abstract class _$$_IndividualStateCopyWith<$Res>
           _$_IndividualState value, $Res Function(_$_IndividualState) then) =
       __$$_IndividualStateCopyWithImpl<$Res>;
   @override
-  $Res call({BedEntity bed});
+  $Res call({BedEntity bed, bool isLoading});
 
   @override
   $BedEntityCopyWith<$Res> get bed;
@@ -89,12 +95,17 @@ class __$$_IndividualStateCopyWithImpl<$Res>
   @override
   $Res call({
     Object? bed = freezed,
+    Object? isLoading = freezed,
   }) {
     return _then(_$_IndividualState(
       bed == freezed
           ? _value.bed
           : bed // ignore: cast_nullable_to_non_nullable
               as BedEntity,
+      isLoading: isLoading == freezed
+          ? _value.isLoading
+          : isLoading // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -104,14 +115,17 @@ class __$$_IndividualStateCopyWithImpl<$Res>
 class _$_IndividualState
     with DiagnosticableTreeMixin
     implements _IndividualState {
-  const _$_IndividualState(this.bed);
+  const _$_IndividualState(this.bed, {this.isLoading = false});
 
   @override
   final BedEntity bed;
+  @override
+  @JsonKey()
+  final bool isLoading;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'IndividualState(bed: $bed)';
+    return 'IndividualState(bed: $bed, isLoading: $isLoading)';
   }
 
   @override
@@ -119,7 +133,8 @@ class _$_IndividualState
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty('type', 'IndividualState'))
-      ..add(DiagnosticsProperty('bed', bed));
+      ..add(DiagnosticsProperty('bed', bed))
+      ..add(DiagnosticsProperty('isLoading', isLoading));
   }
 
   @override
@@ -127,12 +142,15 @@ class _$_IndividualState
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_IndividualState &&
-            const DeepCollectionEquality().equals(other.bed, bed));
+            const DeepCollectionEquality().equals(other.bed, bed) &&
+            const DeepCollectionEquality().equals(other.isLoading, isLoading));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(bed));
+  int get hashCode => Object.hash(
+      runtimeType,
+      const DeepCollectionEquality().hash(bed),
+      const DeepCollectionEquality().hash(isLoading));
 
   @JsonKey(ignore: true)
   @override
@@ -141,10 +159,13 @@ class _$_IndividualState
 }
 
 abstract class _IndividualState implements IndividualState {
-  const factory _IndividualState(final BedEntity bed) = _$_IndividualState;
+  const factory _IndividualState(final BedEntity bed, {final bool isLoading}) =
+      _$_IndividualState;
 
   @override
   BedEntity get bed;
+  @override
+  bool get isLoading;
   @override
   @JsonKey(ignore: true)
   _$$_IndividualStateCopyWith<_$_IndividualState> get copyWith =>

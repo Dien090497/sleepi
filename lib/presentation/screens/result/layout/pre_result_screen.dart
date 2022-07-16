@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:slee_fi/common/extensions/num_ext.dart';
 import 'package:slee_fi/common/routes/app_routes.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
@@ -7,6 +8,14 @@ import 'package:slee_fi/common/widgets/sf_app_bar.dart';
 import 'package:slee_fi/common/widgets/sf_buttons.dart';
 import 'package:slee_fi/common/widgets/sf_label_value.dart';
 import 'package:slee_fi/l10n/locale_keys.g.dart';
+import 'package:slee_fi/models/tracking_result_chart/tracking_result_model.dart';
+
+class PreResultParams {
+  String fromRoute;
+  TrackingResultModel resultModel;
+
+  PreResultParams({required this.fromRoute, required this.resultModel});
+}
 
 class PreResultScreen extends StatefulWidget {
   const PreResultScreen({Key? key}) : super(key: key);
@@ -18,86 +27,108 @@ class PreResultScreen extends StatefulWidget {
 class _PreResultScreenState extends State<PreResultScreen> {
   @override
   Widget build(BuildContext context) {
-    return BackgroundWidget(
-        child: Stack(
-          children: [
-            Scaffold(
-              backgroundColor: AppColors.transparent,
-              appBar: SFAppBar(
+    final args = ModalRoute.of(context)?.settings.arguments as PreResultParams;
+    final TrackingResultModel resultModel = args.resultModel;
+    return WillPopScope(
+      onWillPop: () async {
+        if (args.fromRoute == R.splash) {
+          Navigator.pushNamedAndRemoveUntil(
+              context, R.bottomNavigation, (r) => false);
+        }
+        return true;
+      },
+      child: BackgroundWidget(
+          child: Stack(
+        children: [
+          Scaffold(
+            backgroundColor: AppColors.transparent,
+            appBar: SFAppBar(
                 context: context,
                 title: LocaleKeys.result,
                 textStyle: TextStyles.bold18LightWhite,
+                onBack: () {
+                  if (args.fromRoute == R.splash) {
+                    Navigator.pushNamedAndRemoveUntil(
+                        context, R.bottomNavigation, (r) => false);
+                  } else {
+                    Navigator.pop(context);
+                  }
+                }),
+            body: SafeArea(
+              top: false,
+              child: SingleChildScrollView(
+                physics: const ScrollPhysics(),
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                  child: Column(
+                    children: [
+                      const SizedBox(
+                        height: 20,
+                      ),
+                      SFLabelValue(label: LocaleKeys.sleep, value: '${resultModel.sleepQuality}'),
+                      const SizedBox(
+                        height: 8,
+                      ),
+                      const SFLabelValue(label: LocaleKeys.item, value: '30'),
+                      const SizedBox(
+                        height: 8,
+                      ),
+                      const SFLabelValue(label: LocaleKeys.bonus, value: '10'),
+                      const SizedBox(
+                        height: 8,
+                      ),
+                      const SFLabelValue(
+                          label: LocaleKeys.insurance, value: '5%'),
+                      const SizedBox(
+                        height: 8,
+                      ),
+                      const Divider(
+                        color: AppColors.white,
+                      ),
+                      const SizedBox(
+                        height: 8,
+                      ),
+                      SFLabelValue(
+                          label: LocaleKeys.earning,
+                          value:
+                              '${double.parse(resultModel.actualEarn!).formatBalanceTokenHeader} SLFT'),
+                      const SizedBox(
+                        height: 32,
+                      ),
+                    ],
+                  ),
+                ),
               ),
-              body: SafeArea(
+            ),
+          ),
+          Positioned(
+            bottom: 0,
+            left: 0,
+            right: 0,
+            child: Material(
+              color: AppColors.dark,
+              child: SafeArea(
                 top: false,
-                child: SingleChildScrollView(
-                  physics: const ScrollPhysics(),
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                    child: Column(
-                      children: const [
-                        SizedBox(
-                          height: 20,
-                        ),
-                        SFLabelValue(
-                            label: LocaleKeys.sleep, value: '100'),
-                        SizedBox(
-                          height: 8,
-                        ),
-                        SFLabelValue(
-                            label: LocaleKeys.item, value: '30'),
-                        SizedBox(
-                          height: 8,
-                        ),
-                        SFLabelValue(label: LocaleKeys.bonus, value: '10'),
-                        SizedBox(
-                          height: 8,
-                        ),
-                        SFLabelValue(
-                            label: LocaleKeys.insurance, value: '5%'),
-                        SizedBox(
-                          height: 8,
-                        ),
-                        Divider(color: AppColors.white,),
-                        SizedBox(
-                          height: 8,
-                        ),
-                        SFLabelValue(
-                            label: LocaleKeys.earning, value: '135 SLFT'),
-                        SizedBox(height: 32,),
-
-                      ],
-                    ),
+                child: Container(
+                  padding: const EdgeInsets.only(
+                      bottom: 20, left: 16, right: 16, top: 12),
+                  child: SFButton(
+                    text: LocaleKeys.next,
+                    textStyle: TextStyles.white16,
+                    gradient: AppColors.gradientBlueButton,
+                    width: double.infinity,
+                    height: 48,
+                    onPressed: () {
+                      Navigator.pushNamed(context, R.result,
+                          arguments: args.fromRoute);
+                    },
                   ),
                 ),
               ),
             ),
-            Positioned(
-              bottom: 0,
-              left: 0,
-              right: 0,
-              child: Material(
-                color: AppColors.dark,
-                child: SafeArea(
-                  top: false,
-                  child: Container(
-                    padding: const EdgeInsets.only(
-                        bottom: 20, left: 16, right: 16, top: 12),
-                    child: SFButton(
-                      text: LocaleKeys.next,
-                      textStyle: TextStyles.white16,
-                      gradient: AppColors.gradientBlueButton,
-                      width: double.infinity,
-                      height: 48,
-                      onPressed: () {
-                        Navigator.pushNamed(context, R.result);
-                      },
-                    ),
-                  ),
-                ),
-              ),
-            ),
-          ],
-        ));
+          ),
+        ],
+      )),
+    );
   }
 }

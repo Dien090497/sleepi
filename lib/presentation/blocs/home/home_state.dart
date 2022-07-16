@@ -27,6 +27,7 @@ class HomeState with _$HomeState {
     @Default(true) bool loadMoreItem,
     @Default(false) bool loading,
     @Default(true) bool enableInsurance,
+    @Default(true) bool enableAlarm,
     @Default(0.0) double tokenEarn,
     required int hour,
     required int minute,

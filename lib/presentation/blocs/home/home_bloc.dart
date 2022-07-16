@@ -40,6 +40,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     on<UserStatusTracking>(_userStatusTracking);
     on<StartTracking>(_startTracking);
     on<ChangeInsurance>(_changeInsurance);
+    on<ChangeStatusAlarm>(_changeStatusAlarm);
     on<FetchLuckyBox>(_fetchLuckyBox);
     on<SpeedUpLuckyBox>(_speedUpLuckyBox);
     on<ChangeHour>(_changeHour);
@@ -278,8 +279,12 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     if (currentState is HomeLoaded) {
       var result = await _userStatusTrackingUC.call(NoParams());
       result.fold((l) => null, (r) {
-        emit(
-            currentState.copyWith(userStatusTracking: r, startTracking: false));
+        emit(currentState.copyWith(
+            userStatusTracking: r,
+            startTracking: false,
+            minute: DateTime.now().minute,
+            hour: DateTime.now().hour,
+            time: 0));
         add(FetchLuckyBox());
       });
     }
@@ -290,12 +295,11 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     if (currentState is HomeLoaded && currentState.bedList.isNotEmpty) {
       DateTime wakeUp =
           DateTime.now().add(Duration(minutes: currentState.time));
-      print('=--==-=-${wakeUp.toUtc().millisecondsSinceEpoch ~/ 1000}');
       var result = await _startSleepTrackingUC.call(StartTrackingSchema(
         isEnableInsurance: currentState.enableInsurance,
         bedUsed: currentState.selectedBed!.id,
         wakeUp: '${wakeUp.toUtc().millisecondsSinceEpoch ~/ 1000}',
-        alrm: true,
+        alrm: currentState.enableAlarm,
         itemUsed: currentState.selectedItem?.id ?? 0,
       ));
       result.fold((l) => emit(HomeState.startError('$l')), (r) {
@@ -308,6 +312,15 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     final currentState = state;
     if (currentState is HomeLoaded && currentState.bedList.isNotEmpty) {
       emit(currentState.copyWith(enableInsurance: event.enableInsurance));
+      add(EstimateTracking());
+    }
+  }
+
+  void _changeStatusAlarm(
+      ChangeStatusAlarm event, Emitter<HomeState> emit) async {
+    final currentState = state;
+    if (currentState is HomeLoaded && currentState.bedList.isNotEmpty) {
+      emit(currentState.copyWith(enableAlarm: event.enableAlarm));
       add(EstimateTracking());
     }
   }

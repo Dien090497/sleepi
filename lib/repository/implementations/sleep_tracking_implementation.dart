@@ -3,6 +3,7 @@ import 'package:injectable/injectable.dart';
 import 'package:slee_fi/datasources/remote/sleep_tracking_api/sleep_tracking_api.dart';
 import 'package:slee_fi/failures/failure.dart';
 import 'package:slee_fi/models/estimate_sleep_response/estimate_sleep_response.dart';
+import 'package:slee_fi/models/tracking_result_chart/tracking_result_model.dart';
 import 'package:slee_fi/models/user_status_tracking_model/user_status_tracking_model.dart';
 import 'package:slee_fi/repository/sleep_tracking_repository.dart';
 import 'package:slee_fi/schema/sleep_tracking/data_health_schema.dart';
@@ -66,7 +67,7 @@ class SleepTrackingImplementation extends ISleepTrackingRepository {
   }
 
   @override
-  Future<Either<FailureMessage, dynamic>> wakeUp(DataHealthSchema schema) async {
+  Future<Either<FailureMessage, TrackingResultModel>> wakeUp(DataHealthSchema schema) async {
     try {
       return Right(await _sleepTrackingApi.wakeUp(schema));
     } catch (e) {

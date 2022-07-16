@@ -296,7 +296,7 @@ class _NFTDetailScreenState extends State<NFTDetailScreen> {
                 }
               },
               (r) async {
-                showSuccessfulDialog(context, null, onPop: () {
+                showSuccessfulDialog(context, null, onBackPress: () {
                   Navigator.popUntil(
                       context, (r) => r.settings.name == R.nftDetail);
                 });
