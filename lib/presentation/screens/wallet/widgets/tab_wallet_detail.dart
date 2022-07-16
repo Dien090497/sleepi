@@ -40,12 +40,6 @@ class TabWalletDetail extends StatefulWidget {
 
 class _TabWalletDetailState extends State<TabWalletDetail> {
   Timer? timer;
-
-  // double balance = 0;
-  // String networkName = '';
-  // String currencySymbol = '';
-  // String addressWallet = '';
-  // List<TokenEntity> tokenList = [];
   final RefreshController refreshController = RefreshController();
   final FToast fToast = FToast();
 
