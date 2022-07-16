@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:dio/dio.dart';
 import 'package:equatable/equatable.dart';
 import 'package:slee_fi/l10n/locale_keys.g.dart';
@@ -27,7 +29,7 @@ class FailureMessage extends Failure {
         }
       }
     } catch (_) {
-
+      log("=-------------$_");
     }
     throw Exception(e);
   }

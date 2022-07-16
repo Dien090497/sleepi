@@ -31,6 +31,8 @@ class MarketPlaceModel {
   final double special;
   final double resilience;
   final double durability;
+  final double startTime;
+  final double endTime;
   final String price;
   final String symbol;
   final String status;
@@ -83,6 +85,8 @@ class MarketPlaceModel {
     this.durability,
     this.isMint,
     this.tokenId,
+    this.startTime,
+    this.endTime,
   );
 
   factory MarketPlaceModel.fromJson(Map<String, dynamic> json) =>
@@ -111,6 +115,8 @@ class MarketPlaceModel {
       special: special,
       resilience: resilience,
       time: time,
+      startTime: startTime,
+      endTime: endTime,
       isMint: isMint,
     );
   }

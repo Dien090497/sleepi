@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:slee_fi/common/extensions/num_ext.dart';
 import 'package:slee_fi/common/routes/app_routes.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
@@ -7,6 +8,14 @@ import 'package:slee_fi/common/widgets/sf_app_bar.dart';
 import 'package:slee_fi/common/widgets/sf_buttons.dart';
 import 'package:slee_fi/common/widgets/sf_label_value.dart';
 import 'package:slee_fi/l10n/locale_keys.g.dart';
+import 'package:slee_fi/models/tracking_result_chart/tracking_result_model.dart';
+
+class PreResultParams {
+  String fromRoute;
+  TrackingResultModel resultModel;
+
+  PreResultParams({required this.fromRoute, required this.resultModel});
+}
 
 class PreResultScreen extends StatefulWidget {
   const PreResultScreen({Key? key}) : super(key: key);
@@ -18,10 +27,11 @@ class PreResultScreen extends StatefulWidget {
 class _PreResultScreenState extends State<PreResultScreen> {
   @override
   Widget build(BuildContext context) {
-    final fromRoute = ModalRoute.of(context)?.settings.arguments as String;
+    final args = ModalRoute.of(context)?.settings.arguments as PreResultParams;
+    final TrackingResultModel resultModel = args.resultModel;
     return WillPopScope(
       onWillPop: () async {
-        if (fromRoute == R.splash) {
+        if (args.fromRoute == R.splash) {
           Navigator.pushNamedAndRemoveUntil(
               context, R.bottomNavigation, (r) => false);
         }
@@ -37,7 +47,7 @@ class _PreResultScreenState extends State<PreResultScreen> {
                 title: LocaleKeys.result,
                 textStyle: TextStyles.bold18LightWhite,
                 onBack: () {
-                  if (fromRoute == R.splash) {
+                  if (args.fromRoute == R.splash) {
                     Navigator.pushNamedAndRemoveUntil(
                         context, R.bottomNavigation, (r) => false);
                   } else {
@@ -51,34 +61,38 @@ class _PreResultScreenState extends State<PreResultScreen> {
                 child: Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 16.0),
                   child: Column(
-                    children: const [
-                      SizedBox(
+                    children: [
+                      const SizedBox(
                         height: 20,
                       ),
-                      SFLabelValue(label: LocaleKeys.sleep, value: '100'),
-                      SizedBox(
+                      SFLabelValue(label: LocaleKeys.sleep, value: '${resultModel.sleepQuality}'),
+                      const SizedBox(
                         height: 8,
                       ),
-                      SFLabelValue(label: LocaleKeys.item, value: '30'),
-                      SizedBox(
+                      const SFLabelValue(label: LocaleKeys.item, value: '30'),
+                      const SizedBox(
                         height: 8,
                       ),
-                      SFLabelValue(label: LocaleKeys.bonus, value: '10'),
-                      SizedBox(
+                      const SFLabelValue(label: LocaleKeys.bonus, value: '10'),
+                      const SizedBox(
                         height: 8,
                       ),
-                      SFLabelValue(label: LocaleKeys.insurance, value: '5%'),
-                      SizedBox(
+                      const SFLabelValue(
+                          label: LocaleKeys.insurance, value: '5%'),
+                      const SizedBox(
                         height: 8,
                       ),
-                      Divider(
+                      const Divider(
                         color: AppColors.white,
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 8,
                       ),
-                      SFLabelValue(label: LocaleKeys.earning, value: '135 SLFT'),
-                      SizedBox(
+                      SFLabelValue(
+                          label: LocaleKeys.earning,
+                          value:
+                              '${double.parse(resultModel.actualEarn!).formatBalanceTokenHeader} SLFT'),
+                      const SizedBox(
                         height: 32,
                       ),
                     ],
@@ -105,7 +119,8 @@ class _PreResultScreenState extends State<PreResultScreen> {
                     width: double.infinity,
                     height: 48,
                     onPressed: () {
-                      Navigator.pushNamed(context, R.result, arguments: fromRoute);
+                      Navigator.pushNamed(context, R.result,
+                          arguments: args.fromRoute);
                     },
                   ),
                 ),
