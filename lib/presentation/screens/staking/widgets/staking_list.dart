@@ -66,6 +66,14 @@ class _StakingListState extends State<StakingList> {
     }
     return stakingInfo!.stake.totalStake!;
   }
+
+  double get checkValuePriceUsd{
+    if(stakingInfo == null || stakingInfo!.slftPriceUsd == double.infinity || stakingInfo!.slftPriceUsd == double.nan){
+      return 0;
+    }
+    return stakingInfo!.slftPriceUsd;
+  }
+
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
@@ -115,7 +123,7 @@ class _StakingListState extends State<StakingList> {
                         Expanded(
                           flex: 3,
                           child: SFText(
-                            keyText: "(=${double.parse(checkValueTvl)/0.2} USD)",
+                            keyText: "(=${(double.parse(checkValueTvl)*checkValuePriceUsd).isNaN ? 0 : (double.parse(checkValueTvl)*checkValuePriceUsd).formatBalanceToken} USD)",
                             style: TextStyles.w400White14,
                             textAlign: TextAlign.end,
                           ),
@@ -207,7 +215,7 @@ class _StakingListState extends State<StakingList> {
                       showCustomAlertDialog(
                         context,
                         padding: const EdgeInsets.all(24),
-                        children: PopUpCalculator(aprInDay: stakingInfo?.aprInDay),
+                        children: PopUpCalculator(aprInDay: stakingInfo?.aprInDay, priceUsd: stakingInfo?.slftPriceUsd),
                       );
                     },
                     child: Row(

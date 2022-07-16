@@ -231,5 +231,4 @@ abstract class AuthDataSource {
     @Query('tdate') String tdate,
     @Query('type') String type,
   );
-
 }

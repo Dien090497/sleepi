@@ -127,7 +127,6 @@ class MarketPlaceCubit extends Cubit<MarketPlaceState> {
       }
     });
     listSlider.forEach((key, value) {
-      print('value in filter is  $key ${value.start}   ${value.end}');
       if (key == LocaleKeys.level.tr()) {
         params = params.copyWith(minLevel: value.start, maxLevel: value.end);
       }

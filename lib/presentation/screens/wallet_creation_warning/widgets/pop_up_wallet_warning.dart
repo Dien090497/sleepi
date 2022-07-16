@@ -12,7 +12,7 @@ class PopUpWalletWarning extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 24.0, horizontal: 24),
+      padding: const EdgeInsets.symmetric(vertical: 24.0, horizontal: 16),
       child: Column(
         children: [
           const Icon(
@@ -33,7 +33,7 @@ class PopUpWalletWarning extends StatelessWidget {
           ),
           const SizedBox(height: 24),
           SFButton(
-            text: LocaleKeys.confirm,
+            text: LocaleKeys.click_here_to_proceed,
             textStyle: TextStyles.w600WhiteSize16,
             height: 48,
             width: double.infinity,

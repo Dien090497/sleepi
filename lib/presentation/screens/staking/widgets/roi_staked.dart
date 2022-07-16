@@ -20,8 +20,9 @@ class StakedArguments{
 class SLFTStaked extends StatefulWidget {
   final Function(StakedArguments) staked;
   final String? apr;
+  final double priceUsd;
   final bool readonly;
-  const SLFTStaked({this.readonly = false, required this.staked, required this.apr, Key? key}) : super(key: key);
+  const SLFTStaked({this.readonly = false, required this.priceUsd, required this.staked, required this.apr, Key? key}) : super(key: key);
 
 
   @override
@@ -29,7 +30,6 @@ class SLFTStaked extends StatefulWidget {
 }
 
 class SLFTStakedState extends State<SLFTStaked> {
-  final num tokenPrice = 0.2;
   TextEditingController _amountEditingController = TextEditingController();
   TextEditingController dayEditingController = TextEditingController();
   bool swapText = false;
@@ -60,9 +60,9 @@ class SLFTStakedState extends State<SLFTStaked> {
   String calculatorPrice(String value){
     String price = '';
     if(swapText){
-      price = "${double.parse(value)/tokenPrice}";
+      price = "${double.parse(value)/widget.priceUsd}";
     }else{
-      price = "${double.parse(value)*tokenPrice}";
+      price = "${double.parse(value)*widget.priceUsd}";
     }
     return price;
   }
@@ -72,12 +72,12 @@ class SLFTStakedState extends State<SLFTStaked> {
       if(!swapText){
         setState((){
           amountPrice = "${double.parse(quantity)/(double.parse(widget.apr!)*double.parse(dayEditingController.text.isNotEmpty ? dayEditingController.text : "0" ))}";
-          _amountEditingController.text = "${double.parse(amountPrice)/tokenPrice}";
+          _amountEditingController.text = "${double.parse(amountPrice)/widget.priceUsd}";
         });
       }else{
         setState((){
           _amountEditingController.text = "${double.parse(quantity)/(double.parse(widget.apr!)*double.parse(dayEditingController.text.isNotEmpty ? dayEditingController.text : "0" ))}";
-          amountPrice = "${double.parse(_amountEditingController.text)/tokenPrice}";
+          amountPrice = "${double.parse(_amountEditingController.text)/widget.priceUsd}";
         });
       }
     }else {
@@ -197,7 +197,7 @@ class SLFTStakedState extends State<SLFTStaked> {
                       selectedIndex = index;
                       if(index != 2){
                         amountPrice = balance.elementAt(index);
-                        _amountEditingController.text = "${double.parse(balance.elementAt(index))/tokenPrice}";
+                        _amountEditingController.text = "${double.parse(balance.elementAt(index))/widget.priceUsd}";
                         widget.staked(StakedArguments(day: int.parse(dayEditingController.text), amount: double.parse(amountPrice)));
                       }else {
                         amountPrice = '';

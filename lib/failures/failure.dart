@@ -27,8 +27,7 @@ class FailureMessage extends Failure {
         }
       }
     } catch (_) {}
-    return const FailureMessage(
-        'Error! An error occurred. Please try again later');
+    throw Exception(e);
   }
 
   @override
