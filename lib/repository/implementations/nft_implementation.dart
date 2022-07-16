@@ -2,12 +2,14 @@ import 'package:dartz/dartz.dart';
 import 'package:injectable/injectable.dart';
 import 'package:slee_fi/common/enum/enum.dart';
 import 'package:slee_fi/datasources/local/secure_storage.dart';
+import 'package:slee_fi/datasources/remote/auth_datasource/auth_datasource.dart';
 import 'package:slee_fi/datasources/remote/network/nft_datasource.dart';
 import 'package:slee_fi/datasources/remote/nft_api/nft_api.dart';
 import 'package:slee_fi/entities/bed_entity/bed_entity.dart';
 import 'package:slee_fi/entities/nft_entity/nft_entity.dart';
 import 'package:slee_fi/failures/failure.dart';
 import 'package:slee_fi/repository/nft_repository.dart';
+import 'package:slee_fi/schema/with_draw_nft_schema/with_draw_nft_schema.dart';
 import 'package:web3dart/web3dart.dart';
 
 @Injectable(as: INFTRepository)
@@ -15,8 +17,9 @@ class NFTImplementation extends INFTRepository {
   final NFTDataSource _nftDataSource;
   final NftApi _nftApi;
   final SecureStorage _secureStorage;
+  final AuthDataSource _authDataSource;
 
-  NFTImplementation(this._nftDataSource, this._nftApi, this._secureStorage);
+  NFTImplementation(this._nftDataSource, this._nftApi, this._secureStorage, this._authDataSource);
 
   @override
   Future<Either<Failure, BigInt>> balanceOf(
@@ -181,6 +184,25 @@ class NFTImplementation extends INFTRepository {
   Future<Either<Failure, BedEntity>> nftDetail(int nftId) async {
     try {
       return Right((await _nftApi.detailOf(nftId)).toEntity());
+    } catch (e) {
+      return Left(FailureMessage('$e'));
+    }
+  }
+
+  @override
+  Future<Either<Failure, dynamic>> withDrawNFTtoMainWallet({required WithDrawNFTSchema params}) async {
+    try {
+      final signature = await _secureStorage.readSignatureMessage();
+      final signer = await _secureStorage.readSigner();
+      final schema = WithDrawNFTSchema(
+        contractAddress: params.contractAddress,
+        type: params.type,
+        tokenId: params.tokenId,
+        signedMessage: signature,
+        signer: signer,
+      );
+      final result = await _authDataSource.withdrawNFT(schema);
+      return Right(result);
     } catch (e) {
       return Left(FailureMessage('$e'));
     }

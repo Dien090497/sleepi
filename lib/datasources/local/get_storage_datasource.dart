@@ -45,4 +45,6 @@ class StorageKeys {
   static const String addressContractSpending = 'address_contract_spending';
   static const String saveMessage = 'save_message';
   static const String refreshToken = 'refresh_token';
+  static const String signatureMessage = 'signature_message';
+  static const String signer = 'signer';
 }
