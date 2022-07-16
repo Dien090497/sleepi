@@ -19,10 +19,10 @@ class MarketSchema {
   MarketSchema({
     this.page,
     this.limit,
-    this.minBedMint = 0,
+    this.minBedMint = 1,
     this.maxBedMint = 7,
     this.maxLevel = 30,
-    this.minLevel = 0,
+    this.minLevel = 1,
     required this.categoryId,
     this.sortPrice,
     this.type,

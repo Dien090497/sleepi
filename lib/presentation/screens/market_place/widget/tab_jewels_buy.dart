@@ -102,7 +102,7 @@ class _TabJewelsBuyState extends State<TabJewelsBuy> {
                         sliders: {
                           LocaleKeys.level.tr(): FilterSliderValues(
                               max: 5,
-                              min: 0,
+                              min: 1,
                               value: SfRangeValues(
                                 cubit.params.minLevel,
                                 cubit.params.maxLevel,

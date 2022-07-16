@@ -111,7 +111,7 @@ class _TabItemsBuyState extends State<TabItemsBuy> {
                                 cubit.params.maxLevel,
                               ),
                               max: 5,
-                              min: 0),
+                              min: 1),
                         },
                       );
                     },

@@ -55,7 +55,8 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
   int _currentPageBed = 1;
   final _limitItemPage = 10;
   late final FilterItemSchema filterItemParam = FilterItemSchema(
-    level: 0,
+    minLevel: 1,
+    maxLevel: 5,
     page: 1,
     limit: _limitItemPage,
     type: [],
@@ -63,7 +64,9 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
 
   void _onFilterItem(FilterItemEvent event, Emitter<HomeState> emit) {
     filterItemParam.page = 1;
-    filterItemParam.level = event.level;
+    filterItemParam.minLevel = event.min;
+    filterItemParam.maxLevel = event.max;
+    print('min is  ${event.min}  ${event.max}');
     filterItemParam.type = event.selected;
     add(FetchItem());
   }
@@ -92,7 +95,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
         }
 
         final newList = currentState.bedList +
-            r//TODO remove filter
+            r //TODO remove filter
                 .where((element) => element.type == 'bed')
                 .map((e) => e.toEntity())
                 .toList();
