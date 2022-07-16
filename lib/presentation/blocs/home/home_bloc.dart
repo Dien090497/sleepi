@@ -66,7 +66,6 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     filterItemParam.page = 1;
     filterItemParam.minLevel = event.min;
     filterItemParam.maxLevel = event.max;
-    print('min is  ${event.min}  ${event.max}');
     filterItemParam.type = event.selected;
     add(FetchItem());
   }

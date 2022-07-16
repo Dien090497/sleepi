@@ -240,7 +240,6 @@ class UserImplementation extends IUserRepository {
   @override
   Future<Either<FailureMessage, TrackingResultChartDataEntity>> fetchDataChart(ParamsGetDataChart paramsGetDataChart) async {
     try {
-      print('params123 ${paramsGetDataChart.tdate} \n ${paramsGetDataChart.fdate} - ${paramsGetDataChart.type}');
       final result = await _authDataSource.fetchDataChart(paramsGetDataChart.fdate, paramsGetDataChart.tdate, paramsGetDataChart.type);
       return Right(result.toEntity());
     } catch (e) {
