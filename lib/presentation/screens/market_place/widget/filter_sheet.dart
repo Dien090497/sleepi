@@ -119,6 +119,7 @@ class _FilterSheetState extends State<FilterSheet> {
                   (i) => TypeSelectionWidget(
                     name: widget.sections.keys.elementAt(i),
                     types: widget.sections.values.elementAt(i),
+                    lengthSelect: selectedSections.length,
                     listSelected:
                         selectedSections[widget.sections.keys.elementAt(i)] ??
                             [],
@@ -203,8 +204,7 @@ class _SliderState extends State<_Slider> {
           data: SfRangeSliderThemeData(
               activeLabelStyle: TextStyles.lightGrey12W500,
               inactiveLabelStyle: TextStyles.lightGrey12W500,
-            inactiveTickColor: AppColors.lightGrey
-          ),
+              inactiveTickColor: AppColors.lightGrey),
           child: SfRangeSlider(
               min: widget.sliders.min,
               max: widget.sliders.max,
@@ -251,10 +251,12 @@ class TypeSelectionWidget extends StatelessWidget {
       required this.name,
       required this.types,
       required this.onSelect,
-      required this.listSelected})
+      required this.listSelected,
+      required this.lengthSelect})
       : super(key: key);
 
   final String name;
+  final int lengthSelect;
   final List<String> types;
   final List<String> listSelected;
   final ValueChanged<List<String>> onSelect;
@@ -288,7 +290,8 @@ class TypeSelectionWidget extends StatelessWidget {
                   children: [
                     Expanded(
                         child: _Container(
-                      qualitySelect: name == LocaleKeys.quality.tr(),
+                      qualitySelect:
+                          name == LocaleKeys.quality.tr() || lengthSelect == 1,
                       text: types[firstIdx],
                       isSelected:
                           listSelected.contains(types[firstIdx].toLowerCase()),
@@ -298,18 +301,19 @@ class TypeSelectionWidget extends StatelessWidget {
                     )),
                     const SizedBox(width: 16),
                     Expanded(
-                      child: (secondIdx < types.length)
-                          ? _Container(
-                              qualitySelect: name == LocaleKeys.quality.tr(),
-                              text: types[secondIdx],
-                              isSelected: listSelected
-                                  .contains(types[secondIdx].toLowerCase()),
-                              onTap: () {
-                                _onTap(types[secondIdx].toLowerCase());
-                              },
-                            )
-                          : const SizedBox.shrink(),
-                    ),
+                        child: (secondIdx < types.length)
+                            ? _Container(
+                                qualitySelect:
+                                    name == LocaleKeys.quality.tr() ||
+                                        lengthSelect == 1,
+                                text: types[secondIdx],
+                                isSelected: listSelected
+                                    .contains(types[secondIdx].toLowerCase()),
+                                onTap: () {
+                                  _onTap(types[secondIdx].toLowerCase());
+                                },
+                              )
+                            : const SizedBox.shrink()),
                   ],
                 ),
                 if (i < buildLength - 1) const SizedBox(height: 16),

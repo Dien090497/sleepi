@@ -21,9 +21,7 @@ class JewelsBuyWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-   final qualityColor = jewel.quality != null
-        ? jewel.quality!.qualityBedColor
-        : AppColors.commonBed;
+   final qualityColor = jewel.type.qualityBedColor;
 
     return Container(
       decoration: BoxDecoration(

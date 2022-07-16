@@ -31,8 +31,8 @@ class MarketPlaceModel {
   final double special;
   final double resilience;
   final double durability;
-  final double startTime;
-  final double endTime;
+  final double? startTime;
+  final double? endTime;
   final String price;
   final String symbol;
   final String status;
