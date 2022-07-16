@@ -90,8 +90,12 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
           ));
           return;
         }
-        final newList =
-            currentState.bedList + r.map((e) => e.toEntity()).toList();
+
+        final newList = currentState.bedList +
+            r//TODO remove filter
+                .where((element) => element.type == 'bed')
+                .map((e) => e.toEntity())
+                .toList();
 
         emit(
             currentState.copyWith(bedList: newList, loadMoreBed: r.isNotEmpty));
@@ -135,7 +139,11 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
 
         if (currentState is HomeLoaded) {
           emit(currentState.copyWith(
-              bedList: r.map((e) => e.toEntity()).toList(),
+              //TODO remove filter
+              bedList: r
+                  .where((element) => element.type == 'bed')
+                  .map((e) => e.toEntity())
+                  .toList(),
               selectedBed: r.first.toEntity(),
               loadMoreBed: true,
               selectedItem: null));
@@ -145,7 +153,12 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
         emit(HomeState.loaded(
             errorMessage: '',
             loading: false,
-            bedList: r.map((e) => e.toEntity()).toList(),
+            //TODO remove filter
+
+            bedList: r
+                .where((element) => element.type == 'bed')
+                .map((e) => e.toEntity())
+                .toList(),
             selectedBed: r.isNotEmpty ? r.first.toEntity() : null,
             loadMoreBed: true,
             hour: DateTime.now().hour,
@@ -259,8 +272,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     final currentState = state;
     if (currentState is HomeLoaded) {
       var result = await _fetchLuckyBoxUC.call(NoParams());
-      result.fold((l) {
-      }, (r) {
+      result.fold((l) {}, (r) {
         emit(currentState.copyWith(
             luckyBoxes: r.map((e) => e.toEntity()).toList()));
         add(EstimateTracking());
