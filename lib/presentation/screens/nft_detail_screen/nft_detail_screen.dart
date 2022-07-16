@@ -243,19 +243,19 @@ class _NFTDetailScreenState extends State<NFTDetailScreen> {
         NftPopUpTransfer(
           onConfirm: (toAddress) async {
             if (isLoadingNotifier.value) return;
-            if (nft.attribute?.contractAddress?.isEmpty ?? true) return;
+            if (nft.attribute?.contractAddress.isEmpty ?? true) return;
             if (nft.attribute?.tokenId == null) return;
             isLoadingNotifier.value = true;
             final res = toAddress.isEmpty
                 ? await getIt<SendNftToSpendingUseCase>()
                     .call(SendNftToSpendingParams(
-                    nftAddress: nft.attribute!.contractAddress!,
+                    nftAddress: nft.attribute!.contractAddress,
                     nftId: nft.attribute!.tokenId!,
                     userId: walletInfo.id,
                     credentials: walletInfo.credentials,
                   ))
                 : await getIt<TransferNftUseCase>().call(TransferNftParams(
-                    nftAddress: nft.attribute!.contractAddress!,
+                    nftAddress: nft.attribute!.contractAddress,
                     ownerAddress: walletInfo.address,
                     toAddress: toAddress,
                     nftId: nft.attribute!.tokenId!,
@@ -274,7 +274,7 @@ class _NFTDetailScreenState extends State<NFTDetailScreen> {
                         final approveRes =
                             await getIt<SetNftApprovalForAllUseCase>()
                                 .call(SetNftApprovalForAllParams(
-                          nftAddress: nft.attribute!.contractAddress!,
+                          nftAddress: nft.attribute!.contractAddress,
                           operatorAddress: toAddress,
                           credentials: walletInfo.credentials,
                         ));
