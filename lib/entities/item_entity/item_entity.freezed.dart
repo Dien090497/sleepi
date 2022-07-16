@@ -19,6 +19,7 @@ mixin _$ItemEntity {
   String get name => throw _privateConstructorUsedError;
   String get image => throw _privateConstructorUsedError;
   int get id => throw _privateConstructorUsedError;
+  int get tokenId => throw _privateConstructorUsedError;
   String get effect => throw _privateConstructorUsedError;
   int get level => throw _privateConstructorUsedError;
 
@@ -32,7 +33,13 @@ abstract class $ItemEntityCopyWith<$Res> {
   factory $ItemEntityCopyWith(
           ItemEntity value, $Res Function(ItemEntity) then) =
       _$ItemEntityCopyWithImpl<$Res>;
-  $Res call({String name, String image, int id, String effect, int level});
+  $Res call(
+      {String name,
+      String image,
+      int id,
+      int tokenId,
+      String effect,
+      int level});
 }
 
 /// @nodoc
@@ -48,6 +55,7 @@ class _$ItemEntityCopyWithImpl<$Res> implements $ItemEntityCopyWith<$Res> {
     Object? name = freezed,
     Object? image = freezed,
     Object? id = freezed,
+    Object? tokenId = freezed,
     Object? effect = freezed,
     Object? level = freezed,
   }) {
@@ -63,6 +71,10 @@ class _$ItemEntityCopyWithImpl<$Res> implements $ItemEntityCopyWith<$Res> {
       id: id == freezed
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
+              as int,
+      tokenId: tokenId == freezed
+          ? _value.tokenId
+          : tokenId // ignore: cast_nullable_to_non_nullable
               as int,
       effect: effect == freezed
           ? _value.effect
@@ -83,7 +95,13 @@ abstract class _$$_ItemEntityCopyWith<$Res>
           _$_ItemEntity value, $Res Function(_$_ItemEntity) then) =
       __$$_ItemEntityCopyWithImpl<$Res>;
   @override
-  $Res call({String name, String image, int id, String effect, int level});
+  $Res call(
+      {String name,
+      String image,
+      int id,
+      int tokenId,
+      String effect,
+      int level});
 }
 
 /// @nodoc
@@ -101,6 +119,7 @@ class __$$_ItemEntityCopyWithImpl<$Res> extends _$ItemEntityCopyWithImpl<$Res>
     Object? name = freezed,
     Object? image = freezed,
     Object? id = freezed,
+    Object? tokenId = freezed,
     Object? effect = freezed,
     Object? level = freezed,
   }) {
@@ -116,6 +135,10 @@ class __$$_ItemEntityCopyWithImpl<$Res> extends _$ItemEntityCopyWithImpl<$Res>
       id: id == freezed
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
+              as int,
+      tokenId: tokenId == freezed
+          ? _value.tokenId
+          : tokenId // ignore: cast_nullable_to_non_nullable
               as int,
       effect: effect == freezed
           ? _value.effect
@@ -136,6 +159,7 @@ class _$_ItemEntity implements _ItemEntity {
       {required this.name,
       required this.image,
       required this.id,
+      required this.tokenId,
       required this.effect,
       required this.level});
 
@@ -146,13 +170,15 @@ class _$_ItemEntity implements _ItemEntity {
   @override
   final int id;
   @override
+  final int tokenId;
+  @override
   final String effect;
   @override
   final int level;
 
   @override
   String toString() {
-    return 'ItemEntity(name: $name, image: $image, id: $id, effect: $effect, level: $level)';
+    return 'ItemEntity(name: $name, image: $image, id: $id, tokenId: $tokenId, effect: $effect, level: $level)';
   }
 
   @override
@@ -163,6 +189,7 @@ class _$_ItemEntity implements _ItemEntity {
             const DeepCollectionEquality().equals(other.name, name) &&
             const DeepCollectionEquality().equals(other.image, image) &&
             const DeepCollectionEquality().equals(other.id, id) &&
+            const DeepCollectionEquality().equals(other.tokenId, tokenId) &&
             const DeepCollectionEquality().equals(other.effect, effect) &&
             const DeepCollectionEquality().equals(other.level, level));
   }
@@ -173,6 +200,7 @@ class _$_ItemEntity implements _ItemEntity {
       const DeepCollectionEquality().hash(name),
       const DeepCollectionEquality().hash(image),
       const DeepCollectionEquality().hash(id),
+      const DeepCollectionEquality().hash(tokenId),
       const DeepCollectionEquality().hash(effect),
       const DeepCollectionEquality().hash(level));
 
@@ -187,6 +215,7 @@ abstract class _ItemEntity implements ItemEntity {
       {required final String name,
       required final String image,
       required final int id,
+      required final int tokenId,
       required final String effect,
       required final int level}) = _$_ItemEntity;
 
@@ -196,6 +225,8 @@ abstract class _ItemEntity implements ItemEntity {
   String get image;
   @override
   int get id;
+  @override
+  int get tokenId;
   @override
   String get effect;
   @override

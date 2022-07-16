@@ -35,10 +35,14 @@ class AlarmBell extends StatelessWidget {
     return BlocBuilder<HomeBloc, HomeState>(
       builder: (context, state) {
         final bed = state is HomeLoaded ? state.selectedBed : null;
-        final minTime =
-            DateTime.now().add(Duration(hours: bed?.startTime?.toInt() ?? 0));
-        final maxTime =
-            DateTime.now().add(Duration(hours: bed?.endTime?.toInt() ?? 0));
+        final minTime = DateTime.now().add(Duration(
+            minutes: bed != null && bed.startTime != null
+                ? (bed.startTime! * 60).toInt()
+                : 0));
+        final maxTime = DateTime.now().add(Duration(
+            minutes: bed != null && bed.endTime != null
+                ? (bed.endTime! * 60).toInt()
+                : 0));
 
         return Container(
           padding: const EdgeInsets.symmetric(horizontal: 16),

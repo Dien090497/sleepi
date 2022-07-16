@@ -450,5 +450,6 @@ abstract class  LocaleKeys {
   static const do_you_want_open_the_lucky_box = 'do_you_want_open_the_lucky_box';
   static const do_you_really_want_to_change = 'do_you_really_want_to_change';
   static const the_language_setting_has_been_updated = 'the_language_setting_has_been_updated';
+  static const white = 'white';
 
 }

@@ -10,6 +10,7 @@ class ItemEntity with _$ItemEntity{
     required String name,
     required String image,
     required int id,
+    required int tokenId,
     required String effect,
     required int level
 })= _ItemEntity;
