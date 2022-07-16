@@ -1,16 +1,17 @@
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
+import 'package:slee_fi/common/enum/enum.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
 import 'package:slee_fi/entities/draw_chart_entity/draw_chart_entity.dart';
 
 class ChartStatisticShare extends StatelessWidget {
-  const ChartStatisticShare({Key? key, this.titleBottom = true, this.data, required this.maxValue}) : super(key: key);
+  const ChartStatisticShare({Key? key, this.titleBottom = true, this.data, required this.maxValue, required this.typeTimeChart}) : super(key: key);
 
   final DrawChartEntity? data;
   final bool titleBottom;
   final int maxValue;
-
+  final TypeTimeChart typeTimeChart;
 
   Widget leftTitleWidgets(double value, TitleMeta meta) {
     if (value == 0) {
@@ -65,33 +66,25 @@ class ChartStatisticShare extends StatelessWidget {
   }
 
   Widget bottomTitleWidgets(double value, TitleMeta meta) {
-    if (value % 2 == 0 && value != 0) {
-      return Padding(
-        padding: const EdgeInsets.only(top: 8.0),
-        child: Text(data?.listData[value.toInt()].x ?? '', style: TextStyles.lightGrey12),
-      );
-    } else {
+    if (typeTimeChart != TypeTimeChart.chartMonth) {
+      if (value != 0) {
+        return Padding(
+          padding: const EdgeInsets.only(top: 8.0),
+          child: Text(data?.listData[value.toInt()].x ?? '', style: TextStyles.lightGrey12),
+        );
+      } else {
+        return const SizedBox();
+      }
+    }
+    else {
+      if (value % 2 != 0) {
+        return Padding(
+          padding: const EdgeInsets.only(top: 8.0),
+          child: Text(data?.listData[value.toInt()].x ?? '', style: TextStyles.lightGrey12),
+        );
+      }
       return const SizedBox();
     }
-    /*Widget text;
-    switch (value.toInt()) {
-      case 2:
-        text = const Text('2021-01', style: TextStyles.lightGrey12);
-        break;
-      case 10:
-        text = const Text('2021-06', style: TextStyles.lightGrey12);
-        break;
-      case 20:
-        text = const Text('2021-12', style: TextStyles.lightGrey12);
-        break;
-      default:
-        text = const Text('', style: TextStyles.lightGrey12);
-        break;
-    }
-    return Padding(
-      padding: const EdgeInsets.only(top: 8.0),
-      child: text,
-    );*/
   }
 
   LineChartData mainData() {

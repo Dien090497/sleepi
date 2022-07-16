@@ -3,7 +3,6 @@ import 'dart:io';
 import 'package:appsflyer_sdk/appsflyer_sdk.dart';
 import 'package:flutter/foundation.dart';
 import 'package:injectable/injectable.dart';
-import 'package:slee_fi/common/extensions/string_x.dart';
 
 @Singleton()
 class AppFlyerCustom {
@@ -19,7 +18,6 @@ class AppFlyerCustom {
 
   init() async {
     _appsflyerSdk = AppsflyerSdk(_appsFlyerOptions);
-    'init appsflyer '.log;
     await _appsflyerSdk.initSdk(
         registerConversionDataCallback: true,
         registerOnAppOpenAttributionCallback: true,
@@ -71,15 +69,11 @@ class AppFlyerCustom {
 
   _logEvent(String eventName, {Map? map}) async {
     if (kDebugMode) {
-      'event name  $eventName    data $map'.log;
       return;
     }
 
     try {
-      final result = await _appsflyerSdk.logEvent(eventName, map);
-      ' result log   $result $eventName'.log;
-    } on Exception catch (e) {
-      '$e'.log;
-    }
+      await _appsflyerSdk.logEvent(eventName, map);
+    } on Exception catch (_) {}
   }
 }

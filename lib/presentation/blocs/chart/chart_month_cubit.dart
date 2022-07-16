@@ -22,33 +22,12 @@ class ChartMonthCubit extends Cubit<ChartMonthState> {
 
   void init() async {
     final now = DateTime.now();
-    ParamsGetDataChart params = ParamsGetDataChart(fdate: '', type: '', tdate: '');
-    final result = await  _fetchDataChartUseCase.call(params);
-    result.fold((l) {
-    }, (result) {
-      getDataChart(data: result.slftChart, trackingResultChartData: result, typeChart: TypeChart.slftChart);
-      getDataChart(data: result.sleepScoreChart, trackingResultChartData: result, typeChart: TypeChart.sleepScoreChart);
-      getDataChart(data: result.bedTimeChart, trackingResultChartData: result, typeChart: TypeChart.bedTimeChart);
-      getDataChart(data: result.sleepOnsetChart, trackingResultChartData: result, typeChart: TypeChart.sleepOnsetChart);
-      getDataChart(data: result.wokeUpChart, trackingResultChartData: result, typeChart: TypeChart.wokeUpChart);
-      getDataChart(data: result.sleepDurationChart, trackingResultChartData: result, typeChart: TypeChart.sleepDurationChart);
-      getDataChart(data: result.timeInBedChart, trackingResultChartData: result, typeChart: TypeChart.timeInBedChart);
-      getDataChart(data: result.nocturalAwakenChart, trackingResultChartData: result, typeChart: TypeChart.nocturalAwakenChart);
-      //final res = dateTimeUtils.convertTime(timeStamp: result.slftChart?.first.t ?? 0);
-      emit(ChartMonthState.loaded(
-        selectedDate: now,
-        firstAllowedDate:
-        DateTime.now().subtract(const Duration(days: 365 * 4 + 1)),
-        lastAllowedDate: DateTime.now(),
-        dataChart: listChart,
-      ));
-    });
-    /*emit(ChartMonthState.loaded(
+    emit(ChartMonthState.loaded(
       selectedDate: now,
       firstAllowedDate:
           DateTime.now().subtract(const Duration(days: 365 * 4 + 1)),
       lastAllowedDate: DateTime.now(),
-    ));*/
+    ));
   }
 
   void selectMonth(DateTime month) async {
@@ -58,22 +37,24 @@ class ChartMonthCubit extends Cubit<ChartMonthState> {
     }
   }
 
-  void nextTap() async {
+  void nextTap({required String type}) async {
     final currentState = state;
     if (currentState is ChartMonthLoaded) {
       final nextMonth = _dateUtils.addMonth(currentState.selectedDate, 1);
       if (nextMonth.isBefore(currentState.lastAllowedDate)) {
-        emit(currentState.copyWith(selectedDate: nextMonth));
+        listChart.clear();
+        fetchDataChartMonth(fromDate: _dateUtils.startOfMonth(nextMonth), toDate: _dateUtils.endOfMonth(nextMonth), type: type, prev: false );
       } else {}
     }
   }
 
-  void previousTap() async {
+  void previousTap({required String type}) async {
     final currentState = state;
     if (currentState is ChartMonthLoaded) {
       final prevMonth = _dateUtils.subtractMonth(currentState.selectedDate, 1);
       if (prevMonth.isAfter(currentState.firstAllowedDate)) {
-        emit(currentState.copyWith(selectedDate: prevMonth));
+        listChart.clear();
+        fetchDataChartMonth(fromDate: _dateUtils.startOfMonth(prevMonth), toDate: _dateUtils.endOfMonth(prevMonth), type: type, prev: true );
       } else {}
     }
   }
@@ -86,7 +67,7 @@ class ChartMonthCubit extends Cubit<ChartMonthState> {
           maxY = data[i].v;
         }
         flSpot.add(FlSpot(i.toDouble(), data[i].v.toDouble()));
-        listXY.add(DataXYEntity(x: _dateUtils.convertTime(timeStamp: data[i].t), y: data[i].v.toDouble()));
+        listXY.add(DataXYEntity(x: _dateUtils.convertTimeStamp(timeStamp: data[i].t), y: data[i].v.toDouble()));
       }
       DrawChartEntity drawChartEntity = DrawChartEntity(
         listFlSpot: flSpot,
@@ -98,6 +79,55 @@ class ChartMonthCubit extends Cubit<ChartMonthState> {
       listChart.add(drawChartEntity);
     } else {
       maxY = 25;
+    }
+  }
+
+  Future<void> fetchDataChartMonth ({required DateTime fromDate, required DateTime toDate, required String type, bool fistLoad = false, bool? prev}) async {
+    final currentState = state;
+    if (currentState is ChartMonthLoaded) {
+      ParamsGetDataChart params = ParamsGetDataChart(
+        fdate: _dateUtils.convertDateTimeWithType(
+            dateTime: fromDate, type: 'yyyy-MM-dd'),
+        type: type,
+        tdate: _dateUtils.convertDateTimeWithType(
+            dateTime: toDate, type: 'yyyy-MM-dd'),
+      );
+      final result = await  _fetchDataChartUseCase.call(params);
+      result.fold((l) {
+      }, (result) {
+        getDataChart(data: result.slftChart, trackingResultChartData: result, typeChart: TypeChart.slftChart);
+        getDataChart(data: result.sleepScoreChart, trackingResultChartData: result, typeChart: TypeChart.sleepScoreChart);
+        getDataChart(data: result.bedTimeChart, trackingResultChartData: result, typeChart: TypeChart.bedTimeChart);
+        getDataChart(data: result.sleepOnsetChart, trackingResultChartData: result, typeChart: TypeChart.sleepOnsetChart);
+        getDataChart(data: result.wokeUpChart, trackingResultChartData: result, typeChart: TypeChart.wokeUpChart);
+        getDataChart(data: result.sleepDurationChart, trackingResultChartData: result, typeChart: TypeChart.sleepDurationChart);
+        getDataChart(data: result.timeInBedChart, trackingResultChartData: result, typeChart: TypeChart.timeInBedChart);
+        getDataChart(data: result.nocturalAwakenChart, trackingResultChartData: result, typeChart: TypeChart.nocturalAwakenChart);
+      });
+      if (fistLoad) {
+        final now = DateTime.now();
+        emit(ChartMonthState.loaded(
+          selectedDate: now,
+          firstAllowedDate:
+          DateTime.now().subtract(const Duration(days: 365 * 4 + 1)),
+          lastAllowedDate: DateTime.now(),
+          dataChart: listChart,
+        ));
+      } else {
+        if (prev != null) {
+          if (!prev) {
+            final nextMonth = _dateUtils.addMonth(currentState.selectedDate, 1);
+            if (nextMonth.isBefore(currentState.lastAllowedDate)) {
+              emit(currentState.copyWith(selectedDate: nextMonth, dataChart: listChart));
+            } else {}
+          } else {
+            final prevMonth = _dateUtils.subtractMonth(currentState.selectedDate, 1);
+            if (prevMonth.isAfter(currentState.firstAllowedDate)) {
+              emit(currentState.copyWith(selectedDate: prevMonth, dataChart: listChart));
+            } else {}
+          }
+        }
+      }
     }
   }
 }

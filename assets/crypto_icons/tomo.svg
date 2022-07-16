@@ -1,8 +1,0 @@
-<svg enable-background="new 0 0 500 500" viewBox="0 0 500 500" xmlns="http://www.w3.org/2000/svg">
-    <g clip-rule="evenodd" fill-rule="evenodd">
-        <path d="m166.7 0v166.7l-83.4 83.3v-166.7z" />
-        <path
-            d="m416.7 333.3c0 92-74.6 166.7-166.7 166.7s-166.7-74.6-166.7-166.7v-83.3h83.3v83.3c0 45.9 37.4 83.3 83.3 83.3s83.3-37.4 83.3-83.3z" />
-        <path d="m416.7 166.7-83.4 83.3h-250l83.4-83.3z" fill="#00e8b4" />
-    </g>
-</svg>

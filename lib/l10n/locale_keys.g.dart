@@ -447,7 +447,8 @@ abstract class  LocaleKeys {
   static const you_can_open_the_luck_box = 'you_can_open_the_luck_box';
   static const speed_luck_box_with_cost = 'speed_luck_box_with_cost';
   static const speed_up = 'speed_up';
-  static const buy_token = 'buy_token';
   static const do_you_want_open_the_lucky_box = 'do_you_want_open_the_lucky_box';
+  static const do_you_really_want_to_change = 'do_you_really_want_to_change';
+  static const the_language_setting_has_been_updated = 'the_language_setting_has_been_updated';
 
 }

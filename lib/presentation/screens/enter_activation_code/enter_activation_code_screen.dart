@@ -2,7 +2,6 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:slee_fi/common/const/const.dart';
-import 'package:slee_fi/common/extensions/string_x.dart';
 import 'package:slee_fi/common/routes/app_routes.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
@@ -72,7 +71,6 @@ class EnterActivationCodeScreen extends StatelessWidget {
                           }
                         },
                         builder: (context, state) {
-                          'on state change ${context.locale}'.log;
                           final cubit = context.read<ActivationCodeCubit>();
                           return Column(
                             crossAxisAlignment: CrossAxisAlignment.start,

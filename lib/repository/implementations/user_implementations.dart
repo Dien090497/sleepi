@@ -141,7 +141,7 @@ class UserImplementation extends IUserRepository {
   @override
   Future<Either<FailureMessage, List<BedModel>>> fetchListBed(
       FetchBedParam fetchBedParam) async {
-    // try {
+    try {
     final result = await _authDataSource.getNftByOwner(
       fetchBedParam.limit,
       fetchBedParam.page,
@@ -150,9 +150,9 @@ class UserImplementation extends IUserRepository {
       fetchBedParam.bedType,
     );
     return Right(result.list);
-    // } catch (e) {
-    //   return Left(FailureMessage.fromException(e));
-    // }
+    } catch (e) {
+      return Left(FailureMessage.fromException(e));
+    }
   }
 
   @override
@@ -240,7 +240,8 @@ class UserImplementation extends IUserRepository {
   @override
   Future<Either<FailureMessage, TrackingResultChartDataEntity>> fetchDataChart(ParamsGetDataChart paramsGetDataChart) async {
     try {
-      final result = await _authDataSource.fetchDataChart('2022-07-7', '2022-07-13', 'week');
+      print('params123 ${paramsGetDataChart.tdate} \n ${paramsGetDataChart.fdate} - ${paramsGetDataChart.type}');
+      final result = await _authDataSource.fetchDataChart(paramsGetDataChart.fdate, paramsGetDataChart.tdate, paramsGetDataChart.type);
       return Right(result.toEntity());
     } catch (e) {
       return Left(FailureMessage('$e'));

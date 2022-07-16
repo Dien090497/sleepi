@@ -17,6 +17,7 @@ import 'package:slee_fi/presentation/screens/market_place/widget/item_bed_buy_wi
 import 'package:slee_fi/presentation/screens/market_place/widget/pop_up_item_market_place.dart';
 import 'package:slee_fi/presentation/screens/market_place/widget/tab_bar_filter.dart';
 import 'package:slee_fi/resources/resources.dart';
+import 'package:syncfusion_flutter_sliders/sliders.dart';
 
 class TabItemsBuy extends StatefulWidget {
   const TabItemsBuy({Key? key}) : super(key: key);
@@ -101,8 +102,13 @@ class _TabItemsBuyState extends State<TabItemsBuy> {
                           ],
                         },
                         sliders: {
-                          LocaleKeys.level.tr(): const FilterSliderValues(
-                              max: 5, min: 0, interval: 5),
+                          LocaleKeys.level.tr(): FilterSliderValues(
+                              value: SfRangeValues(
+                                cubit.params.minLevel,
+                                cubit.params.maxLevel,
+                              ),
+                              max: 5,
+                              min: 0),
                         },
                       );
                     },

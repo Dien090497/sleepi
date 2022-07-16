@@ -17,7 +17,9 @@ final _privateConstructorUsedError = UnsupportedError(
 /// @nodoc
 mixin _$BedEntity {
   String get name => throw _privateConstructorUsedError;
+  String get nftClass => throw _privateConstructorUsedError;
   int get id => throw _privateConstructorUsedError;
+  int get tokenId => throw _privateConstructorUsedError;
   int get level => throw _privateConstructorUsedError;
   String get image => throw _privateConstructorUsedError;
   String get type => throw _privateConstructorUsedError;
@@ -48,7 +50,9 @@ abstract class $BedEntityCopyWith<$Res> {
       _$BedEntityCopyWithImpl<$Res>;
   $Res call(
       {String name,
+      String nftClass,
       int id,
+      int tokenId,
       int level,
       String image,
       String type,
@@ -80,7 +84,9 @@ class _$BedEntityCopyWithImpl<$Res> implements $BedEntityCopyWith<$Res> {
   @override
   $Res call({
     Object? name = freezed,
+    Object? nftClass = freezed,
     Object? id = freezed,
+    Object? tokenId = freezed,
     Object? level = freezed,
     Object? image = freezed,
     Object? type = freezed,
@@ -105,9 +111,17 @@ class _$BedEntityCopyWithImpl<$Res> implements $BedEntityCopyWith<$Res> {
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
+      nftClass: nftClass == freezed
+          ? _value.nftClass
+          : nftClass // ignore: cast_nullable_to_non_nullable
+              as String,
       id: id == freezed
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
+              as int,
+      tokenId: tokenId == freezed
+          ? _value.tokenId
+          : tokenId // ignore: cast_nullable_to_non_nullable
               as int,
       level: level == freezed
           ? _value.level
@@ -193,7 +207,9 @@ abstract class _$$_BedEntityCopyWith<$Res> implements $BedEntityCopyWith<$Res> {
   @override
   $Res call(
       {String name,
+      String nftClass,
       int id,
+      int tokenId,
       int level,
       String image,
       String type,
@@ -227,7 +243,9 @@ class __$$_BedEntityCopyWithImpl<$Res> extends _$BedEntityCopyWithImpl<$Res>
   @override
   $Res call({
     Object? name = freezed,
+    Object? nftClass = freezed,
     Object? id = freezed,
+    Object? tokenId = freezed,
     Object? level = freezed,
     Object? image = freezed,
     Object? type = freezed,
@@ -252,9 +270,17 @@ class __$$_BedEntityCopyWithImpl<$Res> extends _$BedEntityCopyWithImpl<$Res>
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
+      nftClass: nftClass == freezed
+          ? _value.nftClass
+          : nftClass // ignore: cast_nullable_to_non_nullable
+              as String,
       id: id == freezed
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
+              as int,
+      tokenId: tokenId == freezed
+          ? _value.tokenId
+          : tokenId // ignore: cast_nullable_to_non_nullable
               as int,
       level: level == freezed
           ? _value.level
@@ -337,7 +363,9 @@ class __$$_BedEntityCopyWithImpl<$Res> extends _$BedEntityCopyWithImpl<$Res>
 class _$_BedEntity implements _BedEntity {
   const _$_BedEntity(
       {required this.name,
+      required this.nftClass,
       required this.id,
+      required this.tokenId,
       required this.level,
       required this.image,
       required this.type,
@@ -360,7 +388,11 @@ class _$_BedEntity implements _BedEntity {
   @override
   final String name;
   @override
+  final String nftClass;
+  @override
   final int id;
+  @override
+  final int tokenId;
   @override
   final int level;
   @override
@@ -400,7 +432,7 @@ class _$_BedEntity implements _BedEntity {
 
   @override
   String toString() {
-    return 'BedEntity(name: $name, id: $id, level: $level, image: $image, type: $type, contractAddress: $contractAddress, quality: $quality, durability: $durability, isLock: $isLock, bedMint: $bedMint, efficiency: $efficiency, luck: $luck, bonus: $bonus, special: $special, resilience: $resilience, time: $time, isMint: $isMint, insurancePercent: $insurancePercent, startTime: $startTime, endTime: $endTime)';
+    return 'BedEntity(name: $name, nftClass: $nftClass, id: $id, tokenId: $tokenId, level: $level, image: $image, type: $type, contractAddress: $contractAddress, quality: $quality, durability: $durability, isLock: $isLock, bedMint: $bedMint, efficiency: $efficiency, luck: $luck, bonus: $bonus, special: $special, resilience: $resilience, time: $time, isMint: $isMint, insurancePercent: $insurancePercent, startTime: $startTime, endTime: $endTime)';
   }
 
   @override
@@ -409,7 +441,9 @@ class _$_BedEntity implements _BedEntity {
         (other.runtimeType == runtimeType &&
             other is _$_BedEntity &&
             const DeepCollectionEquality().equals(other.name, name) &&
+            const DeepCollectionEquality().equals(other.nftClass, nftClass) &&
             const DeepCollectionEquality().equals(other.id, id) &&
+            const DeepCollectionEquality().equals(other.tokenId, tokenId) &&
             const DeepCollectionEquality().equals(other.level, level) &&
             const DeepCollectionEquality().equals(other.image, image) &&
             const DeepCollectionEquality().equals(other.type, type) &&
@@ -439,7 +473,9 @@ class _$_BedEntity implements _BedEntity {
   int get hashCode => Object.hashAll([
         runtimeType,
         const DeepCollectionEquality().hash(name),
+        const DeepCollectionEquality().hash(nftClass),
         const DeepCollectionEquality().hash(id),
+        const DeepCollectionEquality().hash(tokenId),
         const DeepCollectionEquality().hash(level),
         const DeepCollectionEquality().hash(image),
         const DeepCollectionEquality().hash(type),
@@ -469,7 +505,9 @@ class _$_BedEntity implements _BedEntity {
 abstract class _BedEntity implements BedEntity {
   const factory _BedEntity(
       {required final String name,
+      required final String nftClass,
       required final int id,
+      required final int tokenId,
       required final int level,
       required final String image,
       required final String type,
@@ -492,7 +530,11 @@ abstract class _BedEntity implements BedEntity {
   @override
   String get name;
   @override
+  String get nftClass;
+  @override
   int get id;
+  @override
+  int get tokenId;
   @override
   int get level;
   @override

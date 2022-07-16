@@ -33,7 +33,7 @@ class MyItemShortWidget extends StatelessWidget {
             top: 14,
             left: -30,
             child: TopLeftBanner(
-              text: item.nftClass.reCase(StringCase.camelCase),
+              text: item.type.reCase(StringCase.camelCase),
               textColor: qualityColor,
               backgroundColor: qualityColor.withOpacity(0.1),
             ),

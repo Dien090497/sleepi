@@ -64,7 +64,6 @@ class ForgotPasscodeCubit extends Cubit<ForgotPasscodeState> {
     if (message.isNotEmpty) {
       emit(ForgotPasscodeState.error(message));
     }
-    'message is $message'.log;
     return message.isNotEmpty;
   }
 

@@ -20,7 +20,7 @@ mixin _$ChartMonthState {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function(DateTime selectedDate, DateTime firstAllowedDate,
-            DateTime lastAllowedDate, List<DrawChartEntity> dataChart)
+            DateTime lastAllowedDate, List<DrawChartEntity>? dataChart)
         loaded,
     required TResult Function(String msg) error,
   }) =>
@@ -29,7 +29,7 @@ mixin _$ChartMonthState {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function(DateTime selectedDate, DateTime firstAllowedDate,
-            DateTime lastAllowedDate, List<DrawChartEntity> dataChart)?
+            DateTime lastAllowedDate, List<DrawChartEntity>? dataChart)?
         loaded,
     TResult Function(String msg)? error,
   }) =>
@@ -38,7 +38,7 @@ mixin _$ChartMonthState {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function(DateTime selectedDate, DateTime firstAllowedDate,
-            DateTime lastAllowedDate, List<DrawChartEntity> dataChart)?
+            DateTime lastAllowedDate, List<DrawChartEntity>? dataChart)?
         loaded,
     TResult Function(String msg)? error,
     required TResult orElse(),
@@ -136,7 +136,7 @@ class _$ChartMonthInitial
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function(DateTime selectedDate, DateTime firstAllowedDate,
-            DateTime lastAllowedDate, List<DrawChartEntity> dataChart)
+            DateTime lastAllowedDate, List<DrawChartEntity>? dataChart)
         loaded,
     required TResult Function(String msg) error,
   }) {
@@ -148,7 +148,7 @@ class _$ChartMonthInitial
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function(DateTime selectedDate, DateTime firstAllowedDate,
-            DateTime lastAllowedDate, List<DrawChartEntity> dataChart)?
+            DateTime lastAllowedDate, List<DrawChartEntity>? dataChart)?
         loaded,
     TResult Function(String msg)? error,
   }) {
@@ -160,7 +160,7 @@ class _$ChartMonthInitial
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function(DateTime selectedDate, DateTime firstAllowedDate,
-            DateTime lastAllowedDate, List<DrawChartEntity> dataChart)?
+            DateTime lastAllowedDate, List<DrawChartEntity>? dataChart)?
         loaded,
     TResult Function(String msg)? error,
     required TResult orElse(),
@@ -219,7 +219,7 @@ abstract class _$$ChartMonthLoadedCopyWith<$Res> {
       {DateTime selectedDate,
       DateTime firstAllowedDate,
       DateTime lastAllowedDate,
-      List<DrawChartEntity> dataChart});
+      List<DrawChartEntity>? dataChart});
 }
 
 /// @nodoc
@@ -256,7 +256,7 @@ class __$$ChartMonthLoadedCopyWithImpl<$Res>
       dataChart: dataChart == freezed
           ? _value._dataChart
           : dataChart // ignore: cast_nullable_to_non_nullable
-              as List<DrawChartEntity>,
+              as List<DrawChartEntity>?,
     ));
   }
 }
@@ -270,7 +270,7 @@ class _$ChartMonthLoaded
       {required this.selectedDate,
       required this.firstAllowedDate,
       required this.lastAllowedDate,
-      required final List<DrawChartEntity> dataChart})
+      final List<DrawChartEntity>? dataChart})
       : _dataChart = dataChart;
 
   @override
@@ -279,11 +279,13 @@ class _$ChartMonthLoaded
   final DateTime firstAllowedDate;
   @override
   final DateTime lastAllowedDate;
-  final List<DrawChartEntity> _dataChart;
+  final List<DrawChartEntity>? _dataChart;
   @override
-  List<DrawChartEntity> get dataChart {
+  List<DrawChartEntity>? get dataChart {
+    final value = _dataChart;
+    if (value == null) return null;
     // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_dataChart);
+    return EqualUnmodifiableListView(value);
   }
 
   @override
@@ -335,7 +337,7 @@ class _$ChartMonthLoaded
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function(DateTime selectedDate, DateTime firstAllowedDate,
-            DateTime lastAllowedDate, List<DrawChartEntity> dataChart)
+            DateTime lastAllowedDate, List<DrawChartEntity>? dataChart)
         loaded,
     required TResult Function(String msg) error,
   }) {
@@ -347,7 +349,7 @@ class _$ChartMonthLoaded
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function(DateTime selectedDate, DateTime firstAllowedDate,
-            DateTime lastAllowedDate, List<DrawChartEntity> dataChart)?
+            DateTime lastAllowedDate, List<DrawChartEntity>? dataChart)?
         loaded,
     TResult Function(String msg)? error,
   }) {
@@ -360,7 +362,7 @@ class _$ChartMonthLoaded
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function(DateTime selectedDate, DateTime firstAllowedDate,
-            DateTime lastAllowedDate, List<DrawChartEntity> dataChart)?
+            DateTime lastAllowedDate, List<DrawChartEntity>? dataChart)?
         loaded,
     TResult Function(String msg)? error,
     required TResult orElse(),
@@ -411,12 +413,12 @@ abstract class ChartMonthLoaded implements ChartMonthState {
       {required final DateTime selectedDate,
       required final DateTime firstAllowedDate,
       required final DateTime lastAllowedDate,
-      required final List<DrawChartEntity> dataChart}) = _$ChartMonthLoaded;
+      final List<DrawChartEntity>? dataChart}) = _$ChartMonthLoaded;
 
   DateTime get selectedDate;
   DateTime get firstAllowedDate;
   DateTime get lastAllowedDate;
-  List<DrawChartEntity> get dataChart;
+  List<DrawChartEntity>? get dataChart;
   @JsonKey(ignore: true)
   _$$ChartMonthLoadedCopyWith<_$ChartMonthLoaded> get copyWith =>
       throw _privateConstructorUsedError;
@@ -499,7 +501,7 @@ class _$ChartMonthError
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function(DateTime selectedDate, DateTime firstAllowedDate,
-            DateTime lastAllowedDate, List<DrawChartEntity> dataChart)
+            DateTime lastAllowedDate, List<DrawChartEntity>? dataChart)
         loaded,
     required TResult Function(String msg) error,
   }) {
@@ -511,7 +513,7 @@ class _$ChartMonthError
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function(DateTime selectedDate, DateTime firstAllowedDate,
-            DateTime lastAllowedDate, List<DrawChartEntity> dataChart)?
+            DateTime lastAllowedDate, List<DrawChartEntity>? dataChart)?
         loaded,
     TResult Function(String msg)? error,
   }) {
@@ -523,7 +525,7 @@ class _$ChartMonthError
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function(DateTime selectedDate, DateTime firstAllowedDate,
-            DateTime lastAllowedDate, List<DrawChartEntity> dataChart)?
+            DateTime lastAllowedDate, List<DrawChartEntity>? dataChart)?
         loaded,
     TResult Function(String msg)? error,
     required TResult orElse(),

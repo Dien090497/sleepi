@@ -1,7 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:slee_fi/common/extensions/string_x.dart';
 import 'package:slee_fi/di/injector.dart';
 import 'package:slee_fi/l10n/locale_keys.g.dart';
 import 'package:slee_fi/presentation/blocs/activation_code/activation_code_state.dart';
@@ -18,13 +17,11 @@ class ActivationCodeCubit extends Cubit<ActivationCodeState> {
   late EnterActiveCodeArg activeCodeArg;
 
   init(EnterActiveCodeArg enterActiveCodeArg, Locale locale) {
-    'run to init'.log;
     activeCodeArg = enterActiveCodeArg;
     localeSelected = locale;
   }
 
   checkActiveCode() async {
-    'active code is $activationCode'.log;
     emit(const ActivationCodeState.process());
     if (activeCodeArg.isEnable) {
       if (activationCode.isEmpty) {

@@ -1,6 +1,7 @@
 import 'package:json_annotation/json_annotation.dart';
 
 part 'tracking_result_chart.g.dart';
+
 @JsonSerializable()
 class TrackingResultChart {
   @JsonKey(name: 'token_earn')

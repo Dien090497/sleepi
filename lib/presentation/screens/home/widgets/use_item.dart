@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:slee_fi/common/enum/enum.dart';
-import 'package:slee_fi/common/extensions/string_x.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
 import 'package:slee_fi/common/widgets/cached_image.dart';
@@ -36,14 +35,10 @@ class UseItem extends StatelessWidget {
           return false;
         },
         listener: (context, state) {
-          if (state is HomeLoaded) 'error type is ${state.errorType}'.log;
           showSuccessfulDialog(context, null);
         },
         builder: (context, state) {
-          if (state is! HomeLoaded || state.bedList.isEmpty) {
-            return const SizedBox();
-          }
-          return (state.selectedItem != null)
+          return (state is HomeLoaded && state.selectedItem != null)
               ? Container(
                   padding: const EdgeInsets.symmetric(horizontal: 16),
                   decoration: BoxDecoration(

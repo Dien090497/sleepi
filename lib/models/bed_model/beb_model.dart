@@ -116,6 +116,8 @@ class BedModel {
   BedEntity toEntity() {
     return BedEntity(
       name: nftName,
+      nftClass: nftClass,
+      tokenId: tokenId,
       id: id,
       level: level,
       image: image,

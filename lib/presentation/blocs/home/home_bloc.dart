@@ -3,7 +3,6 @@ import 'dart:async';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:slee_fi/common/enum/enum.dart';
-import 'package:slee_fi/common/extensions/string_x.dart';
 import 'package:slee_fi/di/injector.dart';
 import 'package:slee_fi/entities/bed_entity/bed_entity.dart';
 import 'package:slee_fi/entities/item_entity/item_entity.dart';
@@ -91,8 +90,12 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
           ));
           return;
         }
-        final newList =
-            currentState.bedList + r.map((e) => e.toEntity()).toList();
+
+        final newList = currentState.bedList +
+            r//TODO remove filter
+                .where((element) => element.type == 'bed')
+                .map((e) => e.toEntity())
+                .toList();
 
         emit(
             currentState.copyWith(bedList: newList, loadMoreBed: r.isNotEmpty));
@@ -136,7 +139,11 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
 
         if (currentState is HomeLoaded) {
           emit(currentState.copyWith(
-              bedList: r.map((e) => e.toEntity()).toList(),
+              //TODO remove filter
+              bedList: r
+                  .where((element) => element.type == 'bed')
+                  .map((e) => e.toEntity())
+                  .toList(),
               selectedBed: r.first.toEntity(),
               loadMoreBed: true,
               selectedItem: null));
@@ -146,7 +153,12 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
         emit(HomeState.loaded(
             errorMessage: '',
             loading: false,
-            bedList: r.map((e) => e.toEntity()).toList(),
+            //TODO remove filter
+
+            bedList: r
+                .where((element) => element.type == 'bed')
+                .map((e) => e.toEntity())
+                .toList(),
             selectedBed: r.isNotEmpty ? r.first.toEntity() : null,
             loadMoreBed: true,
             hour: DateTime.now().hour,
@@ -199,7 +211,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
 
   void _addItemToBed(AddItem event, Emitter<HomeState> emit) async {
     final currentState = state;
-    if (currentState is HomeLoaded) {
+    if (currentState is HomeLoaded && currentState.bedList.isNotEmpty) {
       final result = await _addItemToBedUC
           .call(AddItemToBedParam(currentBedId, event.item.id));
       result.fold((l) {
@@ -260,9 +272,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     final currentState = state;
     if (currentState is HomeLoaded) {
       var result = await _fetchLuckyBoxUC.call(NoParams());
-      result.fold((l) {
-        'load lucky box error ${l.msg}'.log;
-      }, (r) {
+      result.fold((l) {}, (r) {
         emit(currentState.copyWith(
             luckyBoxes: r.map((e) => e.toEntity()).toList()));
         add(EstimateTracking());

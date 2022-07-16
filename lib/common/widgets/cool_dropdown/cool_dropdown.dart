@@ -8,7 +8,6 @@ import 'package:cool_dropdown/drop_down_body.dart';
 import 'package:cool_dropdown/utils/animation_util.dart';
 import 'package:cool_dropdown/utils/extension_util.dart';
 import 'package:flutter/material.dart';
-import 'package:slee_fi/common/extensions/string_x.dart';
 
 class CoolDropdown extends StatefulWidget {
   final List dropdownList;
@@ -300,8 +299,6 @@ class CoolDropdownState extends State<CoolDropdown>
   }
 
   void changeSelectedItem() {
-    'change selected item ${selectedItem['label']}     ${widget.defaultValue['label']}'
-        .log;
     setState(() {
       selectedItem = widget.defaultValue;
     });

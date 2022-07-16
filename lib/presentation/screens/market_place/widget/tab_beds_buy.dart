@@ -18,6 +18,7 @@ import 'package:slee_fi/presentation/screens/market_place/widget/gridview_bed_it
 import 'package:slee_fi/presentation/screens/market_place/widget/pop_up_bed_market_place.dart';
 import 'package:slee_fi/presentation/screens/market_place/widget/tab_bar_filter.dart';
 import 'package:slee_fi/resources/resources.dart';
+import 'package:syncfusion_flutter_sliders/sliders.dart';
 
 class TabBedsBuy extends StatefulWidget {
   const TabBedsBuy({Key? key}) : super(key: key);
@@ -76,7 +77,7 @@ class _TabBedsBuyState extends State<TabBedsBuy> {
           builder: (context, state) {
             final cubit = context.read<MarketPlaceCubit>();
             return FocusDetector(
-              onFocusGained: (){
+              onFocusGained: () {
                 cubit.clearFilter();
               },
               child: Column(
@@ -109,10 +110,18 @@ class _TabBedsBuyState extends State<TabBedsBuy> {
                           ],
                         },
                         sliders: {
-                          LocaleKeys.level.tr(): const FilterSliderValues(
-                              max: 30, min: 0, interval: 30),
-                          LocaleKeys.mint.tr():
-                              const FilterSliderValues(max: 7, min: 0),
+                          LocaleKeys.level.tr(): FilterSliderValues(
+                              value: SfRangeValues(
+                                cubit.params.minLevel,
+                                cubit.params.maxLevel,
+                              ),
+                              max: 30,
+                              min: 0),
+                          LocaleKeys.mint.tr(): FilterSliderValues(
+                              max: 7.0,
+                              min: 0.0,
+                              value: SfRangeValues(cubit.params.minBedMint,
+                                  cubit.params.maxBedMint)),
                         },
                       );
                     },
@@ -142,7 +151,8 @@ class _TabBedsBuyState extends State<TabBedsBuy> {
                                           _showBedDialog(context, bed, cubit);
                                         },
                                         onBedTap: (bed) {
-                                          Navigator.pushNamed(context, R.nftInfo,
+                                          Navigator.pushNamed(
+                                              context, R.nftInfo,
                                               arguments: InfoIndividualParams(
                                                   bed: bed.toBedEntity(),
                                                   marketPlaceModel: bed,
