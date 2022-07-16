@@ -35,7 +35,7 @@ class MarketPlaceCubit extends Cubit<MarketPlaceState> {
         page: page,
         maxLevel: categoryType == CategoryType.bed ? 30 : 5,
         limit: limit,
-        categoryId: categoryType.index,
+        categoryId: categoryType.type,
         sortPrice: "LowPrice");
     log("params : ${params.toJson()}");
     emit(const MarketPlaceState.loading());
