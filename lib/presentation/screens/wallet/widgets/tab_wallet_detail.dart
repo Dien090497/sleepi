@@ -60,7 +60,7 @@ class _TabWalletDetailState extends State<TabWalletDetail> {
   }
 
   void _startTimer() {
-    final walletCubit = context.read<WalletCubit>();
+    final walletCubit = BlocProvider.of<WalletCubit>(context);
     if (timer != null) {
       timer?.cancel();
       timer = null;
@@ -258,11 +258,11 @@ class _TabWalletDetailState extends State<TabWalletDetail> {
     );
   }
 
-  void _copyAddress(FToast fToast, BuildContext context, String address) async{
+  void _copyAddress(FToast fToast, BuildContext context, String address) async {
     ClipboardData? data = await Clipboard.getData(Clipboard.kTextPlain);
-    if(data != null){
+    if (data != null) {
       // debugPrint(data.text);
-    }else {
+    } else {
       Clipboard.setData(ClipboardData(text: address));
     }
     ToastUtils.showToast(

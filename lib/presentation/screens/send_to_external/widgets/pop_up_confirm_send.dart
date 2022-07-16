@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:slee_fi/common/routes/app_routes.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
 import 'package:slee_fi/common/widgets/sf_buttons.dart';
@@ -39,9 +40,11 @@ class _PopUpConfirmSendState extends State<PopUpConfirmSend> {
       child: BlocConsumer<SendToExternalCubit, SendToExternalState>(
         listener: (context, state) {
           if (state is sendToExternalSuccess) {
-            Navigator.pop(context);
-            Navigator.pop(context);
-            showSuccessfulDialog(context, null);
+            showSuccessfulDialog(context, null, onBackPress: () {
+              Navigator.popUntil(context, (r) {
+                return r.settings.name == R.wallet;
+              });
+            });
           }
           if (state is SendToExternalCalculatorFee) {
             fee = state.fee;
