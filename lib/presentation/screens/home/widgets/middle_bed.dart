@@ -9,7 +9,6 @@ import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
 import 'package:slee_fi/common/widgets/cached_image.dart';
 import 'package:slee_fi/common/widgets/loading_screen.dart';
-import 'package:slee_fi/common/widgets/sf_buttons.dart';
 import 'package:slee_fi/common/widgets/sf_icon.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
 import 'package:slee_fi/entities/bed_entity/bed_entity.dart';
@@ -49,7 +48,7 @@ class MiddleBed extends StatelessWidget {
           ),
           child: BlocBuilder<HomeBloc, HomeState>(
             builder: (context, state) {
-              var selectBed = state is HomeLoaded && state.selectedBed != null
+              final selectBed = state is HomeLoaded && state.selectedBed != null
                   ? state.selectedBed
                   : null;
               return Column(
@@ -108,45 +107,7 @@ class MiddleBed extends StatelessWidget {
                             : const SizedBox(),
                   ),
                   const SizedBox(height: 20),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      const Spacer(),
-                      SFButton(
-                        text: state is HomeLoaded && state.selectedBed != null
-                            ? '${state.selectedBed!.tokenId}'
-                            : '00',
-                        textStyle: TextStyles.blue14.copyWith(
-                            color: selectBed != null
-                                ? selectBed.quality!.qualityBedColor
-                                : AppColors.commonBed),
-                        color: (selectBed != null
-                                ? selectBed.quality!.qualityBedColor
-                                : AppColors.commonBed)
-                            .withOpacity(0.05),
-                        radius: 50,
-                        height: 36,
-                      ),
-                      const SizedBox(width: 8),
-                      SFButton(
-                        text:
-                            '${selectBed != null ? (selectBed.durability % 1 == 0 ? selectBed.durability.toInt() : selectBed.durability) : '0'}/100',
-                        textStyle: TextStyles.green14,
-                        color: Colors.white.withOpacity(0.05),
-                        radius: 50,
-                        height: 36,
-                      ),
-                      const SizedBox(width: 8),
-                      SFButton(
-                        text: 'Lv${selectBed != null ? selectBed.level : '0'}',
-                        textStyle: TextStyles.yellow14,
-                        color: Colors.white.withOpacity(0.05),
-                        radius: 50,
-                        height: 36,
-                      ),
-                      const Spacer(),
-                    ],
-                  ),
+                  BedQualityWidget(bed: selectBed),
                   const SizedBox(height: 24),
                   SFText(
                     keyText:
@@ -183,6 +144,63 @@ class _BuildBedItem extends StatelessWidget {
           },
           child: CachedImage(image: bedEntity.image, height: 180.h),
         ),
+      ],
+    );
+  }
+}
+
+class BedQualityWidget extends StatelessWidget {
+  const BedQualityWidget({Key? key, required this.bed}) : super(key: key);
+
+  final BedEntity? bed;
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      children: [
+        const Spacer(),
+        Container(
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(100),
+            color: (bed != null
+                    ? bed!.quality!.qualityBedColor
+                    : AppColors.commonBed)
+                .withOpacity(0.05),
+          ),
+          padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 18),
+          child: Text(
+            bed != null ? '${bed!.tokenId}' : '00',
+            style: TextStyles.blue14.copyWith(
+                color: bed != null
+                    ? bed!.quality!.qualityBedColor
+                    : AppColors.commonBed),
+          ),
+        ),
+        const SizedBox(width: 8),
+        Container(
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(100),
+            color: AppColors.green.withOpacity(0.05),
+          ),
+          padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 18),
+          child: Text(
+            '${bed != null ? (bed!.durability % 1 == 0 ? bed!.durability.toInt() : bed!.durability) : '0'}/100',
+            style: TextStyles.green14,
+          ),
+        ),
+        const SizedBox(width: 8),
+        Container(
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(100),
+            color: AppColors.yellow.withOpacity(0.05),
+          ),
+          padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 18),
+          child: Text(
+            'Lv ${bed != null ? bed!.level : '0'}',
+            style: TextStyles.yellow14,
+          ),
+        ),
+        const Spacer(),
       ],
     );
   }

@@ -16,6 +16,7 @@ import 'package:slee_fi/models/market_place/market_place_model.dart';
 import 'package:slee_fi/presentation/blocs/individual/individual_cubit.dart';
 import 'package:slee_fi/presentation/blocs/individual/individual_state.dart';
 import 'package:slee_fi/presentation/screens/gacha/widgets/attributes_widget.dart';
+import 'package:slee_fi/presentation/screens/home/widgets/middle_bed.dart';
 import 'package:slee_fi/presentation/screens/info_individual/widget/bottom_bar.dart';
 import 'package:slee_fi/presentation/screens/info_individual/widget/bottom_bar_market_place.dart';
 import 'package:slee_fi/presentation/screens/info_individual/widget/box_info_widget.dart';
@@ -70,6 +71,8 @@ class InfoIndividualScreen extends StatelessWidget {
                                       const EdgeInsets.symmetric(vertical: 24),
                                   child: SFIcon(state.bed.image),
                                 ),
+                                BedQualityWidget(bed: state.bed),
+                                const SizedBox(height: 16),
                                 Wrap(
                                   spacing: 8.0,
                                   runSpacing: 8.0,
