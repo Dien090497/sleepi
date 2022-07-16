@@ -99,6 +99,15 @@ class ChangeInsurance extends HomeEvent {
   List<Object?> get props => [enableInsurance];
 }
 
+class ChangeStatusAlarm extends HomeEvent {
+  final bool enableAlarm;
+
+  const ChangeStatusAlarm(this.enableAlarm);
+
+  @override
+  List<Object?> get props => [enableAlarm];
+}
+
 class FetchLuckyBox extends HomeEvent {
   @override
   List<Object?> get props => [];

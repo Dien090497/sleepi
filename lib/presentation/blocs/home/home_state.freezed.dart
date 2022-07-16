@@ -33,6 +33,7 @@ mixin _$HomeState {
             bool loadMoreItem,
             bool loading,
             bool enableInsurance,
+            bool enableAlarm,
             double tokenEarn,
             int hour,
             int minute,
@@ -61,6 +62,7 @@ mixin _$HomeState {
             bool loadMoreItem,
             bool loading,
             bool enableInsurance,
+            bool enableAlarm,
             double tokenEarn,
             int hour,
             int minute,
@@ -89,6 +91,7 @@ mixin _$HomeState {
             bool loadMoreItem,
             bool loading,
             bool enableInsurance,
+            bool enableAlarm,
             double tokenEarn,
             int hour,
             int minute,
@@ -207,6 +210,7 @@ class _$HomeInitial with DiagnosticableTreeMixin implements HomeInitial {
             bool loadMoreItem,
             bool loading,
             bool enableInsurance,
+            bool enableAlarm,
             double tokenEarn,
             int hour,
             int minute,
@@ -238,6 +242,7 @@ class _$HomeInitial with DiagnosticableTreeMixin implements HomeInitial {
             bool loadMoreItem,
             bool loading,
             bool enableInsurance,
+            bool enableAlarm,
             double tokenEarn,
             int hour,
             int minute,
@@ -269,6 +274,7 @@ class _$HomeInitial with DiagnosticableTreeMixin implements HomeInitial {
             bool loadMoreItem,
             bool loading,
             bool enableInsurance,
+            bool enableAlarm,
             double tokenEarn,
             int hour,
             int minute,
@@ -392,6 +398,7 @@ class _$HomeLoading with DiagnosticableTreeMixin implements HomeLoading {
             bool loadMoreItem,
             bool loading,
             bool enableInsurance,
+            bool enableAlarm,
             double tokenEarn,
             int hour,
             int minute,
@@ -423,6 +430,7 @@ class _$HomeLoading with DiagnosticableTreeMixin implements HomeLoading {
             bool loadMoreItem,
             bool loading,
             bool enableInsurance,
+            bool enableAlarm,
             double tokenEarn,
             int hour,
             int minute,
@@ -454,6 +462,7 @@ class _$HomeLoading with DiagnosticableTreeMixin implements HomeLoading {
             bool loadMoreItem,
             bool loading,
             bool enableInsurance,
+            bool enableAlarm,
             double tokenEarn,
             int hour,
             int minute,
@@ -534,6 +543,7 @@ abstract class _$$HomeLoadedCopyWith<$Res> {
       bool loadMoreItem,
       bool loading,
       bool enableInsurance,
+      bool enableAlarm,
       double tokenEarn,
       int hour,
       int minute,
@@ -570,6 +580,7 @@ class __$$HomeLoadedCopyWithImpl<$Res> extends _$HomeStateCopyWithImpl<$Res>
     Object? loadMoreItem = freezed,
     Object? loading = freezed,
     Object? enableInsurance = freezed,
+    Object? enableAlarm = freezed,
     Object? tokenEarn = freezed,
     Object? hour = freezed,
     Object? minute = freezed,
@@ -625,6 +636,10 @@ class __$$HomeLoadedCopyWithImpl<$Res> extends _$HomeStateCopyWithImpl<$Res>
       enableInsurance: enableInsurance == freezed
           ? _value.enableInsurance
           : enableInsurance // ignore: cast_nullable_to_non_nullable
+              as bool,
+      enableAlarm: enableAlarm == freezed
+          ? _value.enableAlarm
+          : enableAlarm // ignore: cast_nullable_to_non_nullable
               as bool,
       tokenEarn: tokenEarn == freezed
           ? _value.tokenEarn
@@ -703,6 +718,7 @@ class _$HomeLoaded with DiagnosticableTreeMixin implements HomeLoaded {
       this.loadMoreItem = true,
       this.loading = false,
       this.enableInsurance = true,
+      this.enableAlarm = true,
       this.tokenEarn = 0.0,
       required this.hour,
       required this.minute,
@@ -763,6 +779,9 @@ class _$HomeLoaded with DiagnosticableTreeMixin implements HomeLoaded {
   final bool enableInsurance;
   @override
   @JsonKey()
+  final bool enableAlarm;
+  @override
+  @JsonKey()
   final double tokenEarn;
   @override
   final int hour;
@@ -778,7 +797,7 @@ class _$HomeLoaded with DiagnosticableTreeMixin implements HomeLoaded {
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'HomeState.loaded(bedList: $bedList, selectedBed: $selectedBed, item: $item, itemList: $itemList, luckyBoxes: $luckyBoxes, selectedItem: $selectedItem, errorMessage: $errorMessage, errorType: $errorType, loadMoreBed: $loadMoreBed, loadMoreItem: $loadMoreItem, loading: $loading, enableInsurance: $enableInsurance, tokenEarn: $tokenEarn, hour: $hour, minute: $minute, time: $time, startTracking: $startTracking, userStatusTracking: $userStatusTracking)';
+    return 'HomeState.loaded(bedList: $bedList, selectedBed: $selectedBed, item: $item, itemList: $itemList, luckyBoxes: $luckyBoxes, selectedItem: $selectedItem, errorMessage: $errorMessage, errorType: $errorType, loadMoreBed: $loadMoreBed, loadMoreItem: $loadMoreItem, loading: $loading, enableInsurance: $enableInsurance, enableAlarm: $enableAlarm, tokenEarn: $tokenEarn, hour: $hour, minute: $minute, time: $time, startTracking: $startTracking, userStatusTracking: $userStatusTracking)';
   }
 
   @override
@@ -798,6 +817,7 @@ class _$HomeLoaded with DiagnosticableTreeMixin implements HomeLoaded {
       ..add(DiagnosticsProperty('loadMoreItem', loadMoreItem))
       ..add(DiagnosticsProperty('loading', loading))
       ..add(DiagnosticsProperty('enableInsurance', enableInsurance))
+      ..add(DiagnosticsProperty('enableAlarm', enableAlarm))
       ..add(DiagnosticsProperty('tokenEarn', tokenEarn))
       ..add(DiagnosticsProperty('hour', hour))
       ..add(DiagnosticsProperty('minute', minute))
@@ -830,6 +850,8 @@ class _$HomeLoaded with DiagnosticableTreeMixin implements HomeLoaded {
             const DeepCollectionEquality().equals(other.loading, loading) &&
             const DeepCollectionEquality()
                 .equals(other.enableInsurance, enableInsurance) &&
+            const DeepCollectionEquality()
+                .equals(other.enableAlarm, enableAlarm) &&
             const DeepCollectionEquality().equals(other.tokenEarn, tokenEarn) &&
             const DeepCollectionEquality().equals(other.hour, hour) &&
             const DeepCollectionEquality().equals(other.minute, minute) &&
@@ -841,26 +863,28 @@ class _$HomeLoaded with DiagnosticableTreeMixin implements HomeLoaded {
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(_bedList),
-      const DeepCollectionEquality().hash(selectedBed),
-      const DeepCollectionEquality().hash(item),
-      const DeepCollectionEquality().hash(_itemList),
-      const DeepCollectionEquality().hash(_luckyBoxes),
-      const DeepCollectionEquality().hash(selectedItem),
-      const DeepCollectionEquality().hash(errorMessage),
-      const DeepCollectionEquality().hash(errorType),
-      const DeepCollectionEquality().hash(loadMoreBed),
-      const DeepCollectionEquality().hash(loadMoreItem),
-      const DeepCollectionEquality().hash(loading),
-      const DeepCollectionEquality().hash(enableInsurance),
-      const DeepCollectionEquality().hash(tokenEarn),
-      const DeepCollectionEquality().hash(hour),
-      const DeepCollectionEquality().hash(minute),
-      const DeepCollectionEquality().hash(time),
-      const DeepCollectionEquality().hash(startTracking),
-      const DeepCollectionEquality().hash(userStatusTracking));
+  int get hashCode => Object.hashAll([
+        runtimeType,
+        const DeepCollectionEquality().hash(_bedList),
+        const DeepCollectionEquality().hash(selectedBed),
+        const DeepCollectionEquality().hash(item),
+        const DeepCollectionEquality().hash(_itemList),
+        const DeepCollectionEquality().hash(_luckyBoxes),
+        const DeepCollectionEquality().hash(selectedItem),
+        const DeepCollectionEquality().hash(errorMessage),
+        const DeepCollectionEquality().hash(errorType),
+        const DeepCollectionEquality().hash(loadMoreBed),
+        const DeepCollectionEquality().hash(loadMoreItem),
+        const DeepCollectionEquality().hash(loading),
+        const DeepCollectionEquality().hash(enableInsurance),
+        const DeepCollectionEquality().hash(enableAlarm),
+        const DeepCollectionEquality().hash(tokenEarn),
+        const DeepCollectionEquality().hash(hour),
+        const DeepCollectionEquality().hash(minute),
+        const DeepCollectionEquality().hash(time),
+        const DeepCollectionEquality().hash(startTracking),
+        const DeepCollectionEquality().hash(userStatusTracking)
+      ]);
 
   @JsonKey(ignore: true)
   @override
@@ -885,6 +909,7 @@ class _$HomeLoaded with DiagnosticableTreeMixin implements HomeLoaded {
             bool loadMoreItem,
             bool loading,
             bool enableInsurance,
+            bool enableAlarm,
             double tokenEarn,
             int hour,
             int minute,
@@ -908,6 +933,7 @@ class _$HomeLoaded with DiagnosticableTreeMixin implements HomeLoaded {
         loadMoreItem,
         this.loading,
         enableInsurance,
+        enableAlarm,
         tokenEarn,
         hour,
         minute,
@@ -934,6 +960,7 @@ class _$HomeLoaded with DiagnosticableTreeMixin implements HomeLoaded {
             bool loadMoreItem,
             bool loading,
             bool enableInsurance,
+            bool enableAlarm,
             double tokenEarn,
             int hour,
             int minute,
@@ -957,6 +984,7 @@ class _$HomeLoaded with DiagnosticableTreeMixin implements HomeLoaded {
         loadMoreItem,
         this.loading,
         enableInsurance,
+        enableAlarm,
         tokenEarn,
         hour,
         minute,
@@ -983,6 +1011,7 @@ class _$HomeLoaded with DiagnosticableTreeMixin implements HomeLoaded {
             bool loadMoreItem,
             bool loading,
             bool enableInsurance,
+            bool enableAlarm,
             double tokenEarn,
             int hour,
             int minute,
@@ -1008,6 +1037,7 @@ class _$HomeLoaded with DiagnosticableTreeMixin implements HomeLoaded {
           loadMoreItem,
           this.loading,
           enableInsurance,
+          enableAlarm,
           tokenEarn,
           hour,
           minute,
@@ -1073,6 +1103,7 @@ abstract class HomeLoaded implements HomeState {
       final bool loadMoreItem,
       final bool loading,
       final bool enableInsurance,
+      final bool enableAlarm,
       final double tokenEarn,
       required final int hour,
       required final int minute,
@@ -1092,6 +1123,7 @@ abstract class HomeLoaded implements HomeState {
   bool get loadMoreItem;
   bool get loading;
   bool get enableInsurance;
+  bool get enableAlarm;
   double get tokenEarn;
   int get hour;
   int get minute;
@@ -1190,6 +1222,7 @@ class _$HomeStartError with DiagnosticableTreeMixin implements HomeStartError {
             bool loadMoreItem,
             bool loading,
             bool enableInsurance,
+            bool enableAlarm,
             double tokenEarn,
             int hour,
             int minute,
@@ -1221,6 +1254,7 @@ class _$HomeStartError with DiagnosticableTreeMixin implements HomeStartError {
             bool loadMoreItem,
             bool loading,
             bool enableInsurance,
+            bool enableAlarm,
             double tokenEarn,
             int hour,
             int minute,
@@ -1252,6 +1286,7 @@ class _$HomeStartError with DiagnosticableTreeMixin implements HomeStartError {
             bool loadMoreItem,
             bool loading,
             bool enableInsurance,
+            bool enableAlarm,
             double tokenEarn,
             int hour,
             int minute,
@@ -1406,6 +1441,7 @@ class _$HomeError with DiagnosticableTreeMixin implements HomeError {
             bool loadMoreItem,
             bool loading,
             bool enableInsurance,
+            bool enableAlarm,
             double tokenEarn,
             int hour,
             int minute,
@@ -1437,6 +1473,7 @@ class _$HomeError with DiagnosticableTreeMixin implements HomeError {
             bool loadMoreItem,
             bool loading,
             bool enableInsurance,
+            bool enableAlarm,
             double tokenEarn,
             int hour,
             int minute,
@@ -1468,6 +1505,7 @@ class _$HomeError with DiagnosticableTreeMixin implements HomeError {
             bool loadMoreItem,
             bool loading,
             bool enableInsurance,
+            bool enableAlarm,
             double tokenEarn,
             int hour,
             int minute,
