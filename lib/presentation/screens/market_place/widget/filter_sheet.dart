@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:easy_localization/easy_localization.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
@@ -158,8 +156,6 @@ class _FilterSheetState extends State<FilterSheet> {
             width: size.width,
             gradient: AppColors.gradientBlueButton,
             onPressed: () {
-              log('=-=--=-=${selectedSections.toString()}');
-              log('=-=--=-=${selectedSliders.toString()}');
               Navigator.pop(context);
               widget.cubit.filter(selectedSections, selectedSliders);
             },
@@ -173,7 +169,6 @@ class _FilterSheetState extends State<FilterSheet> {
 class _Slider extends StatefulWidget {
   const _Slider({
     Key? key,
-    // required this.value,
     required this.onSelect,
     required this.label,
     required this.sliders,
@@ -192,16 +187,7 @@ class _Slider extends StatefulWidget {
 class _SliderState extends State<_Slider> {
   late FilterSliderValues slider = widget.sliders;
 
-  // late double _value = widget.value;
   late SfRangeValues sfRangeValues = widget.sliders.value;
-
-  @override
-  void initState() {
-    if (widget.sliders.onChanged != null) {
-      // widget.sliders.onChanged!(_value);
-    }
-    super.initState();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -213,8 +199,12 @@ class _SliderState extends State<_Slider> {
           padding: const EdgeInsets.only(left: 28),
           child: SFText(keyText: widget.label, style: TextStyles.lightGrey14),
         ),
-        SfSliderTheme(
-          data: SfRangeSliderThemeData(),
+        SfRangeSliderTheme(
+          data: SfRangeSliderThemeData(
+              activeLabelStyle: TextStyles.lightGrey12W500,
+              inactiveLabelStyle: TextStyles.lightGrey12W500,
+            inactiveTickColor: AppColors.lightGrey
+          ),
           child: SfRangeSlider(
               min: widget.sliders.min,
               max: widget.sliders.max,
@@ -384,15 +374,10 @@ class FilterSliderValues extends Equatable {
   final double min;
   final double max;
   final SfRangeValues value;
-  final ValueChanged<dynamic>? onChanged;
 
-  const FilterSliderValues({
-    required this.min,
-    required this.max,
-    required this.value,
-    this.onChanged,
-  });
+  const FilterSliderValues(
+      {required this.min, required this.max, required this.value});
 
   @override
-  List<Object?> get props => [min, max, value, onChanged];
+  List<Object?> get props => [min, max, value];
 }

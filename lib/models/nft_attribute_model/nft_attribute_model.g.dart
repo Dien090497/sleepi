@@ -9,7 +9,7 @@ part of 'nft_attribute_model.dart';
 NftAttributeModel _$NftAttributeModelFromJson(Map<String, dynamic> json) =>
     NftAttributeModel(
       json['nftId'] as int?,
-      json['contractAddress'] as String?,
+      json['contractAddress'] as String,
       json['owner'] as String?,
       json['type'] as String?,
       json['classNft'] as String?,

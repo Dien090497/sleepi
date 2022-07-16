@@ -135,7 +135,7 @@ class BedModel {
       resilience: resilience,
       time: time,
       startTime: startTime??0.0,
-      endTime: startTime??0.0,
+      endTime: endTime??0.0,
       insurancePercent: insurancePercent,
     );
   }

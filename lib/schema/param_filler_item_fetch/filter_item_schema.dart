@@ -6,13 +6,15 @@ part 'filter_item_schema.g.dart';
 class FilterItemSchema {
   int page;
   final int limit;
-  int level;
+  int minLevel;
+  int maxLevel;
   List<String> type;
 
   FilterItemSchema(
       {required this.page,
       required this.limit,
-      required this.level,
+      required this.maxLevel,
+      required this.minLevel,
       required this.type});
 
   factory FilterItemSchema.fromJson(Map<String, dynamic> json) =>

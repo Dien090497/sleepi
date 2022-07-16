@@ -83,7 +83,7 @@ class ModalItemList extends StatelessWidget {
                                 children: PopUpItem(
                                   level: item.level,
                                   effect: item.effect,
-                                  id: '${item.id}',
+                                  id: '${item.tokenId}',
                                   icon: item.image,
                                   onConfirm: () {
                                     homeBloc.add(AddItem(item));
@@ -92,7 +92,7 @@ class ModalItemList extends StatelessWidget {
                           },
                           child: MyJewelsShortWidget(
                             level: item.level,
-                            id: '${item.id}',
+                            id: '${item.tokenId}',
                             increase: i == 2 ? false : true,
                             color: AppColors.light4,
                             icon: item.image,
