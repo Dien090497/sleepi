@@ -35,8 +35,8 @@ MarketPlaceModel _$MarketPlaceModelFromJson(Map<String, dynamic> json) =>
       (json['durability'] as num).toDouble(),
       json['is_mint'] as int,
       json['token_id'] as int,
-      (json['startTime'] as num).toDouble(),
-      (json['endTime'] as num).toDouble(),
+      (json['startTime'] as num?)?.toDouble(),
+      (json['endTime'] as num?)?.toDouble(),
     );
 
 Map<String, dynamic> _$MarketPlaceModelToJson(MarketPlaceModel instance) =>

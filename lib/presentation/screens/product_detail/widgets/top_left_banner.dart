@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
@@ -19,7 +20,7 @@ class TopLeftBanner extends StatelessWidget {
         color: backgroundColor ?? textColor!.withOpacity(0.1),
         padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 40),
         child: SFText(
-          keyText: text,
+          keyText: text.tr(),
           style: TextStyles.red12W700.copyWith(color: textColor),
         ),
       ),
