@@ -4,6 +4,7 @@ import 'package:slee_fi/common/enum/enum.dart';
 import 'package:slee_fi/datasources/local/secure_storage.dart';
 import 'package:slee_fi/datasources/remote/network/nft_datasource.dart';
 import 'package:slee_fi/datasources/remote/nft_api/nft_api.dart';
+import 'package:slee_fi/entities/nft_detail_entity/nft_detail_entity.dart';
 import 'package:slee_fi/entities/nft_entity/nft_entity.dart';
 import 'package:slee_fi/failures/failure.dart';
 import 'package:slee_fi/repository/nft_repository.dart';
@@ -174,5 +175,14 @@ class NFTImplementation extends INFTRepository {
   @override
   Future<TransactionReceipt?> listenTxHash(String txHash) async {
     return _nftDataSource.streamTxHash(txHash: txHash);
+  }
+
+  @override
+  Future<Either<Failure, NftDetailEntity>> nftDetail(int nftId) async {
+    try {
+      return Right((await _nftApi.detailOf(nftId)).toEntity());
+    } catch (e) {
+      return Left(FailureMessage('$e'));
+    }
   }
 }

@@ -8,7 +8,7 @@ part 'nft_attribute_model.g.dart';
 class NftAttributeModel {
   final int? nftId;
   final int? tokenId;
-  final String? contractAddress;
+  final String contractAddress;
   final String? owner;
   final String? type;
   final String? classNft;

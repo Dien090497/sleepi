@@ -7,11 +7,13 @@ import 'package:slee_fi/common/enum/enum.dart';
 import 'package:slee_fi/datasources/remote/auth_datasource/auth_interceptor.dart';
 import 'package:slee_fi/datasources/remote/auth_datasource/refresh_token_interceptor.dart';
 import 'package:slee_fi/models/list_nft_data_model/list_nft_data_model.dart';
+import 'package:slee_fi/models/nft_detail_model/nft_detail_model.dart';
 
 part 'nft_api.g.dart';
 
 @Injectable()
-@RestApi(baseUrl: kDebugMode ? Const.baseApiDev : Const.baseApiDev)
+@RestApi(
+    baseUrl: kDebugMode ? '${Const.baseApiDev}/nft' : '${Const.baseApiDev}/nft')
 abstract class NftApi {
   @factoryMethod
   factory NftApi(Dio dio, AuthInterceptor authInterceptor,
@@ -23,9 +25,12 @@ abstract class NftApi {
     return _NftApi(dio);
   }
 
-  @GET('/nft')
+  @GET('')
   Future<ListNftDataModel> getListNft({
     @Query('tokenIds') required String tokenIds,
     @Query('nftType') required NftType nftType,
   });
+
+  @GET('/{id}')
+  Future<NftDetailModel> detailOf(@Path('id') int nftId);
 }

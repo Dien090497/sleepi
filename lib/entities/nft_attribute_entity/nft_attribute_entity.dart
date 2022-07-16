@@ -8,7 +8,7 @@ class NftAttributeEntity with _$NftAttributeEntity {
   const factory NftAttributeEntity({
     required BigInt? nftId,
     required BigInt? tokenId,
-    required String? contractAddress,
+    required String contractAddress,
     required String? owner,
     required String? type,
     required String? classNft,
