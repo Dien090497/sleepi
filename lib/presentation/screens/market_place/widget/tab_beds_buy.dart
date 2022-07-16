@@ -18,6 +18,7 @@ import 'package:slee_fi/presentation/screens/market_place/widget/gridview_bed_it
 import 'package:slee_fi/presentation/screens/market_place/widget/pop_up_bed_market_place.dart';
 import 'package:slee_fi/presentation/screens/market_place/widget/tab_bar_filter.dart';
 import 'package:slee_fi/resources/resources.dart';
+import 'package:slee_fi/usecase/fetch_bed_usecase.dart';
 import 'package:syncfusion_flutter_sliders/sliders.dart';
 
 class TabBedsBuy extends StatefulWidget {
@@ -51,7 +52,7 @@ class _TabBedsBuyState extends State<TabBedsBuy> {
     return DefaultTabController(
       length: 2,
       child: BlocProvider(
-        create: (context) => MarketPlaceCubit()..init(1),
+        create: (context) => MarketPlaceCubit()..init(CategoryType.bed),
         child: BlocConsumer<MarketPlaceCubit, MarketPlaceState>(
           listener: (context, state) {
             final cubit = context.read<MarketPlaceCubit>();
@@ -91,22 +92,22 @@ class _TabBedsBuyState extends State<TabBedsBuy> {
                         context,
                         sections: {
                           LocaleKeys.type.tr(): [
-                            LocaleKeys.beds.tr(),
-                            LocaleKeys.bed_box.tr(),
-                            LocaleKeys.genesis_beds.tr(),
+                            LocaleKeys.beds,
+                            LocaleKeys.bed_box,
+                            LocaleKeys.genesis_beds,
                           ],
                           LocaleKeys.class_.tr(): [
-                            LocaleKeys.short.tr(),
-                            LocaleKeys.middle.tr(),
-                            LocaleKeys.long.tr(),
-                            LocaleKeys.flexible.tr(),
+                            LocaleKeys.short,
+                            LocaleKeys.middle,
+                            LocaleKeys.long,
+                            LocaleKeys.flexible,
                           ],
                           LocaleKeys.quality.tr(): [
-                            LocaleKeys.common.tr(),
-                            LocaleKeys.uncommon.tr(),
-                            LocaleKeys.rare.tr(),
-                            LocaleKeys.epic.tr(),
-                            LocaleKeys.legendary.tr(),
+                            LocaleKeys.common,
+                            LocaleKeys.uncommon,
+                            LocaleKeys.rare,
+                            LocaleKeys.epic,
+                            LocaleKeys.legendary,
                           ],
                         },
                         sliders: {

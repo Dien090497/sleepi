@@ -6,6 +6,7 @@ import 'package:slee_fi/di/injector.dart';
 import 'package:slee_fi/l10n/locale_keys.g.dart';
 import 'package:slee_fi/schema/market/market_schema.dart';
 import 'package:slee_fi/usecase/buy_nft_usecase.dart';
+import 'package:slee_fi/usecase/fetch_bed_usecase.dart';
 import 'package:slee_fi/usecase/get_market_place_usecase.dart';
 import 'package:syncfusion_flutter_sliders/sliders.dart';
 
@@ -28,12 +29,13 @@ class MarketPlaceCubit extends Cubit<MarketPlaceState> {
   final MarketPlaceUseCase _marketPlaceUseCase = getIt<MarketPlaceUseCase>();
   final BuyNFTUseCase _buyNFTUseCase = getIt<BuyNFTUseCase>();
 
-  init(int idCategory) async {
+  init(CategoryType categoryType) async {
     page = 1;
     params = params.copyWith(
         page: page,
+        maxLevel: categoryType == CategoryType.bed ? 30 : 5,
         limit: limit,
-        categoryId: idCategory,
+        categoryId: categoryType.index,
         sortPrice: "LowPrice");
     log("params : ${params.toJson()}");
     emit(const MarketPlaceState.loading());

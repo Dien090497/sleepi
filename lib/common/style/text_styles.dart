@@ -72,6 +72,8 @@ class TextStyles {
       fontSize: 16, color: AppColors.lightGrey, fontWeight: FontWeight.w400);
   static const lightGrey11W500 = TextStyle(
       fontSize: 11, color: AppColors.lightGrey, fontWeight: FontWeight.w500);
+  static const lightGrey12W500 = TextStyle(
+      fontSize: 12, color: AppColors.lightGrey, fontWeight: FontWeight.w500);
   static const lightGrey14 =
       TextStyle(fontSize: 14, color: AppColors.lightGrey);
   static const lightGrey16 =

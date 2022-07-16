@@ -16,6 +16,7 @@ import 'package:slee_fi/presentation/screens/market_place/widget/filter_sheet.da
 import 'package:slee_fi/presentation/screens/market_place/widget/pop_up_jewel_market_place.dart';
 import 'package:slee_fi/presentation/screens/market_place/widget/tab_bar_filter.dart';
 import 'package:slee_fi/resources/resources.dart';
+import 'package:slee_fi/usecase/fetch_bed_usecase.dart';
 import 'package:syncfusion_flutter_sliders/sliders.dart';
 
 import 'jewel_buy_widget.dart';
@@ -51,7 +52,7 @@ class _TabJewelsBuyState extends State<TabJewelsBuy> {
     return DefaultTabController(
       length: 2,
       child: BlocProvider(
-        create: (context) => MarketPlaceCubit()..init(2),
+        create: (context) => MarketPlaceCubit()..init(CategoryType.jewel),
         child: BlocConsumer<MarketPlaceCubit, MarketPlaceState>(
           listener: (context, state) {
             final cubit = context.read<MarketPlaceCubit>();

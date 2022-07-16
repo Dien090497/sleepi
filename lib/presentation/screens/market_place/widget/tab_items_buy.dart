@@ -17,6 +17,7 @@ import 'package:slee_fi/presentation/screens/market_place/widget/item_bed_buy_wi
 import 'package:slee_fi/presentation/screens/market_place/widget/pop_up_item_market_place.dart';
 import 'package:slee_fi/presentation/screens/market_place/widget/tab_bar_filter.dart';
 import 'package:slee_fi/resources/resources.dart';
+import 'package:slee_fi/usecase/fetch_bed_usecase.dart';
 import 'package:syncfusion_flutter_sliders/sliders.dart';
 
 class TabItemsBuy extends StatefulWidget {
@@ -57,7 +58,7 @@ class _TabItemsBuyState extends State<TabItemsBuy> {
     return DefaultTabController(
       length: 2,
       child: BlocProvider(
-        create: (context) => MarketPlaceCubit()..init(3),
+        create: (context) => MarketPlaceCubit()..init(CategoryType.item),
         child: BlocConsumer<MarketPlaceCubit, MarketPlaceState>(
           listener: (context, state) {
             final cubit = context.read<MarketPlaceCubit>();
@@ -97,10 +98,10 @@ class _TabItemsBuyState extends State<TabItemsBuy> {
                         context,
                         sections: {
                           LocaleKeys.type.tr(): [
-                            LocaleKeys.red.tr(),
-                            LocaleKeys.blue.tr(),
-                            LocaleKeys.green.tr(),
-                            LocaleKeys.purple.tr(),
+                            LocaleKeys.blue,
+                            LocaleKeys.purple,
+                            LocaleKeys.red,
+                            LocaleKeys.white,
                           ],
                         },
                         sliders: {
