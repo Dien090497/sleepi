@@ -66,8 +66,8 @@ class GridViewBedItem extends StatelessWidget {
                   left: -30,
                   child: TopLeftBanner(
                     text: bed.classNft == null
-                        ? bed.type.tr()
-                        : bed.classNft!.tr(),
+                        ? bed.type
+                        : bed.classNft!,
                     textColor: qualityColor,
                   ),
                 ),
