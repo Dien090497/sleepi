@@ -6,7 +6,7 @@ import 'package:slee_fi/l10n/locale_keys.g.dart';
 import 'package:slee_fi/models/bed_model/beb_model.dart';
 import 'package:slee_fi/presentation/blocs/nft_list/nft_list_cubit.dart';
 import 'package:slee_fi/presentation/blocs/nft_list/nft_list_state.dart';
-import 'package:slee_fi/presentation/screens/product_detail/widgets/my_item_short_widget.dart';
+import 'package:slee_fi/presentation/screens/home/widgets/my_item_short_widget.dart';
 import 'package:slee_fi/presentation/screens/product_detail/widgets/upgrade_tab.dart';
 import 'package:slee_fi/usecase/fetch_bed_usecase.dart';
 
@@ -75,9 +75,13 @@ class _TabItemDetailState extends State<TabItemDetail> {
                                         //       },
                                         //     ));
                                       },
-                                      child: MyItemShortWidget(
-                                        item: listItems[i],
-                                      ),
+                                      child: MyItemsShortWidget(
+                                          tokenId:
+                                              listItems[i].tokenId.toString(),
+                                          image: listItems[i].image,
+                                          quality: listItems[i].quality,
+                                          level: listItems[i].level,
+                                          type: listItems[i].type),
                                     );
                                   },
                                 ),

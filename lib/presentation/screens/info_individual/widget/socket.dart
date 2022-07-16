@@ -23,7 +23,6 @@ class Socket extends StatelessWidget {
       bloc: BlocProvider.of<SocketBloc>(context)..add(SocketInt(bedId, level)),
       builder: (context, state) {
         final listJewel = <SocketEntity>[];
-        print('state is $state');
         var maxSocket = 0;
         if (state is SocketStateLoaded) {
           maxSocket = state.maxSocket;
@@ -51,23 +50,4 @@ class Socket extends StatelessWidget {
       },
     );
   }
-
-  _getImage() {}
-//
-// SocketType socketState(int socketOpened, List<int?> jewelIds, int index,
-//     int maxSocket) {
-//   if (jewelIds.isNotEmpty && jewelIds[index] != null) {
-//     return SocketType.ready;
-//   }
-//   if (jewelIds.isNotEmpty && jewelIds[index] == null &&
-//       index <= socketOpened) {
-//     return SocketType.opened;
-//   }
-//   if (index >= socketOpened && index <= maxSocket) {
-//     return SocketType.waiting;
-//   }
-//
-//   return SocketType.blocked;
-// }
-
 }
