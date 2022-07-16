@@ -121,15 +121,16 @@ class MiddleBed extends StatelessWidget {
                                 ? selectBed.quality!.qualityBedColor
                                 : AppColors.commonBed),
                         color: (selectBed != null
-                            ? selectBed.quality!.qualityBedColor
-                            : AppColors.commonBed).withOpacity(0.05),
+                                ? selectBed.quality!.qualityBedColor
+                                : AppColors.commonBed)
+                            .withOpacity(0.05),
                         radius: 50,
                         height: 36,
                       ),
                       const SizedBox(width: 8),
                       SFButton(
                         text:
-                            '${state is HomeLoaded && state.selectedBed != null ? (state.selectedBed!.durability % 1 == 0 ? state.selectedBed!.durability.toInt() : state.selectedBed!.durability) : '0'}/100',
+                            '${selectBed != null ? (selectBed.durability % 1 == 0 ? selectBed.durability.toInt() : selectBed.durability) : '0'}/100',
                         textStyle: TextStyles.green14,
                         color: Colors.white.withOpacity(0.05),
                         radius: 50,
@@ -138,7 +139,7 @@ class MiddleBed extends StatelessWidget {
                       const SizedBox(width: 8),
                       SFButton(
                         text:
-                            'Lv${state is HomeLoaded && state.selectedBed != null ? state.selectedBed!.level : '0'}',
+                            'Lv${selectBed != null ? selectBed.level : '0'}',
                         textStyle: TextStyles.yellow14,
                         color: Colors.white.withOpacity(0.05),
                         radius: 50,
@@ -150,7 +151,7 @@ class MiddleBed extends StatelessWidget {
                   const SizedBox(height: 24),
                   SFText(
                     keyText:
-                        '${LocaleKeys.time.tr()}: ${state is HomeLoaded && state.selectedBed != null ? state.selectedBed!.time : '0'}h',
+                        '${LocaleKeys.time.tr()}: ${selectBed != null ? selectBed.startTime : '0'}h-${selectBed != null ? selectBed.endTime : '0'}h',
                     style: TextStyles.lightGrey12,
                   ),
                 ],
