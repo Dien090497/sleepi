@@ -20,9 +20,8 @@ class ItemBedBuyWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final qualityColor = item.quality != null
-        ? item.quality!.qualityBedColor
-        : AppColors.commonBed;
+    final qualityColor = item.type.qualityBedColor;
+
     return Container(
       decoration: BoxDecoration(
         color: AppColors.lightDark,

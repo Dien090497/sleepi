@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:slee_fi/common/routes/app_routes.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
@@ -7,14 +8,18 @@ import 'package:slee_fi/common/widgets/pop_up_level_up.dart';
 import 'package:slee_fi/common/widgets/sf_dialog.dart';
 import 'package:slee_fi/common/widgets/sf_icon.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
+import 'package:slee_fi/entities/bed_entity/bed_entity.dart';
 import 'package:slee_fi/l10n/locale_keys.g.dart';
+import 'package:slee_fi/presentation/blocs/bottom_bar_infoIndividual/bottom_bar_infoIndividual_cubit.dart';
+import 'package:slee_fi/presentation/blocs/bottom_bar_infoIndividual/bottom_bar_infoIndividual_state.dart';
 import 'package:slee_fi/presentation/screens/home/widgets/pop_up_repair.dart';
 import 'package:slee_fi/presentation/screens/home/widgets/pop_up_transfer.dart';
 import 'package:slee_fi/presentation/screens/info_individual/widget/pop_up_sell.dart';
 import 'package:slee_fi/resources/resources.dart';
 
 class BottomBarWidget extends StatefulWidget {
-  const BottomBarWidget({Key? key}) : super(key: key);
+  const BottomBarWidget({Key? key, required this.bedEntity}) : super(key: key);
+  final BedEntity bedEntity;
 
   @override
   State<BottomBarWidget> createState() => _BottomBarWidgetState();
@@ -53,6 +58,7 @@ class _BottomBarWidgetState extends State<BottomBarWidget> {
 
   @override
   Widget build(BuildContext context) {
+    final cubit = BottomBarInfoIndividualCubit()..init();
     return Material(
       color: AppColors.dark,
       child: SafeArea(
@@ -68,117 +74,131 @@ class _BottomBarWidgetState extends State<BottomBarWidget> {
           height: 80,
           width: MediaQuery.of(context).size.width,
           padding: EdgeInsets.symmetric(horizontal: 8.w),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              itemBottomBar(0, context, Ics.levelUp, LocaleKeys.level_up, () {
-                setState(() {
-                  index = 0;
-                });
-                showCustomDialog(
-                  context,
+          child: BlocProvider(
+            create: (_) => cubit,
+            child: BlocConsumer<BottomBarInfoIndividualCubit, BottomBarInfoIndividualState>(
+              listener: (context, state) {
+                if (state is BottomBarInfoIndividualLoaded) {
+                  if (state.successTransfer) {
+                    showSuccessfulDialog(context, null);
+                  }
+                }
+              },
+              builder: (context, state) {
+                return Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    PopUpLevelUp(
-                        icon: Imgs.shortBed,
-                        level: 20,
-                        cost: 21,
-                        time: 1260,
-                        onCancel: () {
-                          Navigator.pop(context);
-                        },
-                        onConfirm: () {}),
-                  ],
-                ).then((value) => setState(() {
+                    itemBottomBar(0, context, Ics.levelUp, LocaleKeys.level_up, () {
                       setState(() {
-                        index = -1;
+                        index = 0;
                       });
-                    }));
-              }),
-              itemBottomBar(1, context, Ics.repair, LocaleKeys.repair, () {
-                setState(() {
-                  index = 1;
-                });
-                showCustomDialog(
-                  context,
-                  children: [
-                    PopUpRepair(
-                      icon: Imgs.shortBed,
-                      cost: 120,
-                      level: 20,
-                      time: 122,
-                      onCancel: () {
-                        Navigator.pop(context);
-                      },
-                      onConfirm: () {},
-                    ),
-                  ],
-                ).then((value) => setState(() {
-                      setState(() {
-                        index = -1;
-                      });
-                    }));
-              }),
-              itemBottomBar(2, context, Ics.heart, LocaleKeys.mint, () {
-                setState(() {
-                  index = 2;
-                });
-                Navigator.pushNamed(context, R.mint)
-                    .then((value) => setState(() {
+                      showCustomDialog(
+                        context,
+                        children: [
+                          PopUpLevelUp(
+                              icon: Imgs.shortBed,
+                              level: 20,
+                              cost: 21,
+                              time: 1260,
+                              onCancel: () {
+                                Navigator.pop(context);
+                              },
+                              onConfirm: () {}),
+                        ],
+                      ).then((value) => setState(() {
+                        setState(() {
                           index = -1;
-                        }));
-              }),
-              itemBottomBar(3, context, Ics.shopping, LocaleKeys.sell, () {
-                setState(() {
-                  index = 3;
-                });
-                showCustomDialog(context, children: [
-                  PopUpSell(
-                    time: 1,
-                    cost: 1,
-                    icon: Imgs.shortBed,
-                    level: 2,
-                    onCancel: () {},
-                    onConfirm: () {},
-                    className: LocaleKeys.middle,
-                  ),
-                ]).then((value) => setState(() {
+                        });
+                      }));
+                    }),
+                    itemBottomBar(1, context, Ics.repair, LocaleKeys.repair, () {
                       setState(() {
-                        index = -1;
+                        index = 1;
                       });
-                    }));
-              }),
-              itemBottomBar(4, context, Ics.recycling, LocaleKeys.recycle, () {
-                setState(() {
-                  index = 4;
-                });
-                Navigator.pushNamed(context, R.recycle)
-                    .then((value) => setState(() {
+                      showCustomDialog(
+                        context,
+                        children: [
+                          PopUpRepair(
+                            icon: Imgs.shortBed,
+                            cost: 120,
+                            level: 20,
+                            time: 122,
+                            onCancel: () {
+                              Navigator.pop(context);
+                            },
+                            onConfirm: () {},
+                          ),
+                        ],
+                      ).then((value) => setState(() {
+                        setState(() {
                           index = -1;
-                        }));
-              }),
-              itemBottomBar(5, context, Ics.transfer, LocaleKeys.transfer, () {
-                setState(() {
-                  index = 5;
-                });
-                showCustomDialog(
-                  context,
-                  children: [
-                    PopUpTransfer(
-                      onConfirm: () {},
-                      onCancel: () {
-                        Navigator.pop(context);
-                      },
-                      valueTransfer: 1,
-                      fee: 1,
-                    )
-                  ],
-                ).then((value) => setState(() {
+                        });
+                      }));
+                    }),
+                    itemBottomBar(2, context, Ics.heart, LocaleKeys.mint, () {
                       setState(() {
-                        index = -1;
+                        index = 2;
                       });
-                    }));
-              }),
-            ],
+                      Navigator.pushNamed(context, R.mint)
+                          .then((value) => setState(() {
+                        index = -1;
+                      }));
+                    }),
+                    itemBottomBar(3, context, Ics.shopping, LocaleKeys.sell, () {
+                      setState(() {
+                        index = 3;
+                      });
+                      showCustomDialog(context, children: [
+                        PopUpSell(
+                          time: 1,
+                          cost: 1,
+                          icon: Imgs.shortBed,
+                          level: 2,
+                          onCancel: () {},
+                          onConfirm: () {},
+                          className: LocaleKeys.middle,
+                        ),
+                      ]).then((value) => setState(() {
+                        setState(() {
+                          index = -1;
+                        });
+                      }));
+                    }),
+                    itemBottomBar(4, context, Ics.recycling, LocaleKeys.recycle, () {
+                      setState(() {
+                        index = 4;
+                      });
+                      Navigator.pushNamed(context, R.recycle)
+                          .then((value) => setState(() {
+                        index = -1;
+                      }));
+                    }),
+                    itemBottomBar(5, context, Ics.transfer, LocaleKeys.transfer, () {
+                      setState(() {
+                        index = 5;
+                      });
+                      showCustomDialog(
+                        context,
+                        children: [
+                          PopUpTransfer(
+                            onCancel: () {
+                              Navigator.pop(context);
+                            },
+                            valueTransfer: 1,
+                            bedEntity: widget.bedEntity,
+                            cubit: cubit,
+                          )
+                        ],
+                      ).then((value) => setState(() {
+                        setState(() {
+                          index = -1;
+                        });
+                      }));
+                    }),
+                  ],
+                );
+              },
+            ),
           ),
         ),
       ),

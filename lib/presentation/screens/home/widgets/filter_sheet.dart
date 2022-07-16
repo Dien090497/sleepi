@@ -76,6 +76,7 @@ class _FilterItemState extends State<FilterItem> {
                     LocaleKeys.red,
                     LocaleKeys.white,
                   ],
+                  lengthSelect: 1,
                   listSelected: selectedList,
                   onSelect: (List<String> value) {
                     selectedList = value;

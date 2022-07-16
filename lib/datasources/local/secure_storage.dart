@@ -82,4 +82,16 @@ class SecureStorage {
 
   Future<void> setRefreshToken(String token) =>
       _secureStorage.write(key: StorageKeys.refreshToken, value: token);
+
+  Future<void> saveSignatureMessage({required String signatureMessage}) =>
+      _secureStorage.write(key: StorageKeys.signatureMessage, value: signatureMessage);
+
+  Future<String?> readSignatureMessage() =>
+      _secureStorage.read(key: StorageKeys.signatureMessage);
+
+  Future<void> saveSigner({required String signer}) =>
+      _secureStorage.write(key: StorageKeys.signer, value: signer);
+
+  Future<String?> readSigner() =>
+      _secureStorage.read(key: StorageKeys.signer);
 }

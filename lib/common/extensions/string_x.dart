@@ -134,6 +134,32 @@ extension StringX on String {
       case 'legend':
       case 'legendary':
         return AppColors.legendaryBed;
+      case 'special':
+        return AppColors.white;
+      case 'efficiency':
+        return AppColors.red;
+      case 'luck':
+        return AppColors.blue;
+      case 'resilience':
+        return AppColors.purple;
+      case 'ruby':
+        return AppColors.red;
+      case 'amethyst':
+        return AppColors.purple;
+      case 'sapphire':
+        return AppColors.blue;
+      case 'emerald':
+        return AppColors.green;
+      case 'diamond':
+        return AppColors.white;
+      case 'blue':
+        return AppColors.blue;
+      case 'purple':
+        return AppColors.purple;
+      case 'red':
+        return AppColors.red;
+      case 'white':
+        return AppColors.white;
     }
     return AppColors.commonBed;
   }

@@ -163,9 +163,7 @@ Future<T?> showChangeLanguageDialog<T>(BuildContext context,
                     gradient: AppColors.gradientBlue,
                     textStyle: TextStyles.white16,
                     onPressed: () {
-                      showLanguageUpdatedDialog(context);
-                      context.setLocale(locale);
-                      Phoenix.rebirth(context);
+                      showLanguageUpdatedDialog(context, locale);
                     },
                   ),
                 ),
@@ -176,7 +174,7 @@ Future<T?> showChangeLanguageDialog<T>(BuildContext context,
       });
 }
 
-Future<T?> showLanguageUpdatedDialog<T>(BuildContext context) async {
+Future<T?> showLanguageUpdatedDialog<T>(BuildContext context, Locale locale) {
   return showDialog(
       context: context,
       barrierColor: AppColors.backgroundDialog,
@@ -210,7 +208,11 @@ Future<T?> showLanguageUpdatedDialog<T>(BuildContext context) async {
               height: 48,
               text: LocaleKeys.ok,
               textStyle: TextStyles.w600WhiteSize16,
-              onPressed: () => Navigator.of(context).pop(),
+              onPressed: () {
+                context.setLocale(locale);
+                Phoenix.rebirth(context);
+                Navigator.of(context).pop();
+              },
               color: AppColors.blue,
             ),
             const SizedBox(height: 32),

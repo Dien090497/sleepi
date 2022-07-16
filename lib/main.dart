@@ -7,7 +7,6 @@ import 'package:get_storage/get_storage.dart';
 import 'package:logger/logger.dart';
 import 'package:slee_fi/app.dart';
 import 'package:slee_fi/common/const/const.dart';
-import 'package:slee_fi/common/widgets/phoenix.dart';
 import 'package:slee_fi/di/injector.dart';
 import 'package:slee_fi/usecase/run_app_init_usecase.dart';
 import 'package:slee_fi/usecase/usecase.dart';
@@ -30,13 +29,11 @@ void main() async {
     DeviceOrientation.portraitDown,
   ]).then((_) {
     BlocOverrides.runZoned(
-      () => runApp(Phoenix(
-        child: EasyLocalization(
-          supportedLocales: Const.locales,
-          path: 'assets/translations',
-          fallbackLocale: Const.localeEN,
-          child: const MyApp(),
-        ),
+      () => runApp(EasyLocalization(
+        supportedLocales: Const.locales,
+        path: 'assets/translations',
+        fallbackLocale: Const.localeEN,
+        child: const MyApp(),
       )),
       blocObserver: AppBlocObserver(),
     );
