@@ -1,6 +1,6 @@
 import 'package:dartz/dartz.dart';
 import 'package:slee_fi/common/enum/enum.dart';
-import 'package:slee_fi/entities/nft_detail_entity/nft_detail_entity.dart';
+import 'package:slee_fi/entities/bed_entity/bed_entity.dart';
 import 'package:slee_fi/entities/nft_entity/nft_entity.dart';
 import 'package:slee_fi/failures/failure.dart';
 import 'package:web3dart/web3dart.dart';
@@ -61,5 +61,5 @@ abstract class INFTRepository {
 
   Future<TransactionReceipt?> listenTxHash(String txHash);
 
-  Future<Either<Failure, NftDetailEntity>> nftDetail(int nftId);
+  Future<Either<Failure, BedEntity>> nftDetail(int nftId);
 }

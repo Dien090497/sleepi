@@ -6,9 +6,11 @@ import 'package:slee_fi/common/widgets/sf_statistic_resource.dart';
 import 'package:slee_fi/resources/resources.dart';
 
 class TopBarCommon extends StatelessWidget {
-  const TopBarCommon({Key? key, this.iconBack = false}) : super(key: key);
+  const TopBarCommon({Key? key, this.iconBack = false, this.results})
+      : super(key: key);
 
   final bool iconBack;
+  final dynamic results;
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +22,7 @@ class TopBarCommon extends StatelessWidget {
           iconBack
               ? InkWell(
                   onTap: () {
-                    Navigator.pop(context);
+                    Navigator.pop(context, results);
                   },
                   child: const SFIcon(
                     Ics.arrowLeft,

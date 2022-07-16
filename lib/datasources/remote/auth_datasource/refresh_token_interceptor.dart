@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
 import 'package:slee_fi/common/const/const.dart';
@@ -42,6 +44,7 @@ class RefreshTokenInterceptor extends QueuedInterceptor {
           _secureStorage.setAccessToken(res.data.accessToken),
           _secureStorage.setRefreshToken(res.data.refreshToken),
         ]);
+        log('### new tokens ${res.data.accessToken}\n${res.data.refreshToken}');
         return _retry(err, handler, res.data.accessToken);
       } catch (e) {
         return _refreshTokenExpire(err, handler);

@@ -16,37 +16,10 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$IndividualState {
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() initial,
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult Function()? initial,
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initial,
-    required TResult orElse(),
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(IndividualInitial value) initial,
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(IndividualInitial value)? initial,
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(IndividualInitial value)? initial,
-    required TResult orElse(),
-  }) =>
+  BedEntity get bed => throw _privateConstructorUsedError;
+
+  @JsonKey(ignore: true)
+  $IndividualStateCopyWith<IndividualState> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -55,6 +28,9 @@ abstract class $IndividualStateCopyWith<$Res> {
   factory $IndividualStateCopyWith(
           IndividualState value, $Res Function(IndividualState) then) =
       _$IndividualStateCopyWithImpl<$Res>;
+  $Res call({BedEntity bed});
+
+  $BedEntityCopyWith<$Res> get bed;
 }
 
 /// @nodoc
@@ -65,111 +41,112 @@ class _$IndividualStateCopyWithImpl<$Res>
   final IndividualState _value;
   // ignore: unused_field
   final $Res Function(IndividualState) _then;
-}
-
-/// @nodoc
-abstract class _$$IndividualInitialCopyWith<$Res> {
-  factory _$$IndividualInitialCopyWith(
-          _$IndividualInitial value, $Res Function(_$IndividualInitial) then) =
-      __$$IndividualInitialCopyWithImpl<$Res>;
-}
-
-/// @nodoc
-class __$$IndividualInitialCopyWithImpl<$Res>
-    extends _$IndividualStateCopyWithImpl<$Res>
-    implements _$$IndividualInitialCopyWith<$Res> {
-  __$$IndividualInitialCopyWithImpl(
-      _$IndividualInitial _value, $Res Function(_$IndividualInitial) _then)
-      : super(_value, (v) => _then(v as _$IndividualInitial));
 
   @override
-  _$IndividualInitial get _value => super._value as _$IndividualInitial;
+  $Res call({
+    Object? bed = freezed,
+  }) {
+    return _then(_value.copyWith(
+      bed: bed == freezed
+          ? _value.bed
+          : bed // ignore: cast_nullable_to_non_nullable
+              as BedEntity,
+    ));
+  }
+
+  @override
+  $BedEntityCopyWith<$Res> get bed {
+    return $BedEntityCopyWith<$Res>(_value.bed, (value) {
+      return _then(_value.copyWith(bed: value));
+    });
+  }
+}
+
+/// @nodoc
+abstract class _$$_IndividualStateCopyWith<$Res>
+    implements $IndividualStateCopyWith<$Res> {
+  factory _$$_IndividualStateCopyWith(
+          _$_IndividualState value, $Res Function(_$_IndividualState) then) =
+      __$$_IndividualStateCopyWithImpl<$Res>;
+  @override
+  $Res call({BedEntity bed});
+
+  @override
+  $BedEntityCopyWith<$Res> get bed;
+}
+
+/// @nodoc
+class __$$_IndividualStateCopyWithImpl<$Res>
+    extends _$IndividualStateCopyWithImpl<$Res>
+    implements _$$_IndividualStateCopyWith<$Res> {
+  __$$_IndividualStateCopyWithImpl(
+      _$_IndividualState _value, $Res Function(_$_IndividualState) _then)
+      : super(_value, (v) => _then(v as _$_IndividualState));
+
+  @override
+  _$_IndividualState get _value => super._value as _$_IndividualState;
+
+  @override
+  $Res call({
+    Object? bed = freezed,
+  }) {
+    return _then(_$_IndividualState(
+      bed == freezed
+          ? _value.bed
+          : bed // ignore: cast_nullable_to_non_nullable
+              as BedEntity,
+    ));
+  }
 }
 
 /// @nodoc
 
-class _$IndividualInitial
+class _$_IndividualState
     with DiagnosticableTreeMixin
-    implements IndividualInitial {
-  const _$IndividualInitial();
+    implements _IndividualState {
+  const _$_IndividualState(this.bed);
+
+  @override
+  final BedEntity bed;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'IndividualState.initial()';
+    return 'IndividualState(bed: $bed)';
   }
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty('type', 'IndividualState.initial'));
+    properties
+      ..add(DiagnosticsProperty('type', 'IndividualState'))
+      ..add(DiagnosticsProperty('bed', bed));
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$IndividualInitial);
+        (other.runtimeType == runtimeType &&
+            other is _$_IndividualState &&
+            const DeepCollectionEquality().equals(other.bed, bed));
   }
 
   @override
-  int get hashCode => runtimeType.hashCode;
+  int get hashCode =>
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(bed));
 
+  @JsonKey(ignore: true)
   @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() initial,
-  }) {
-    return initial();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult Function()? initial,
-  }) {
-    return initial?.call();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initial,
-    required TResult orElse(),
-  }) {
-    if (initial != null) {
-      return initial();
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(IndividualInitial value) initial,
-  }) {
-    return initial(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(IndividualInitial value)? initial,
-  }) {
-    return initial?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(IndividualInitial value)? initial,
-    required TResult orElse(),
-  }) {
-    if (initial != null) {
-      return initial(this);
-    }
-    return orElse();
-  }
+  _$$_IndividualStateCopyWith<_$_IndividualState> get copyWith =>
+      __$$_IndividualStateCopyWithImpl<_$_IndividualState>(this, _$identity);
 }
 
-abstract class IndividualInitial implements IndividualState {
-  const factory IndividualInitial() = _$IndividualInitial;
+abstract class _IndividualState implements IndividualState {
+  const factory _IndividualState(final BedEntity bed) = _$_IndividualState;
+
+  @override
+  BedEntity get bed;
+  @override
+  @JsonKey(ignore: true)
+  _$$_IndividualStateCopyWith<_$_IndividualState> get copyWith =>
+      throw _privateConstructorUsedError;
 }

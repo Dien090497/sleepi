@@ -8,9 +8,9 @@ part of 'nft_detail_model.dart';
 
 NftDetailModel _$NftDetailModelFromJson(Map<String, dynamic> json) =>
     NftDetailModel(
-      json['id'] as int?,
+      json['id'] as int,
       json['category_id'] as int?,
-      json['is_lock'] as int?,
+      json['is_lock'] as int,
       json['status'] as String?,
       json['created_at'] == null
           ? null
@@ -23,8 +23,8 @@ NftDetailModel _$NftDetailModelFromJson(Map<String, dynamic> json) =>
       json['image'] as String,
       json['contract_address'] as String,
       json['type'] as String,
-      json['is_mint'] as int?,
-      json['is_burn'] as int?,
+      json['is_mint'] as int,
+      json['is_burn'] as int,
       json['class_'] as String,
       json['quality'] as String,
       json['owner'] as String?,

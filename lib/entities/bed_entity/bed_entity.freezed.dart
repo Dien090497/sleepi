@@ -35,6 +35,7 @@ mixin _$BedEntity {
   double get resilience => throw _privateConstructorUsedError;
   int get time => throw _privateConstructorUsedError;
   int get isMint => throw _privateConstructorUsedError;
+  int? get nftId => throw _privateConstructorUsedError;
   double? get insurancePercent => throw _privateConstructorUsedError;
   double? get startTime => throw _privateConstructorUsedError;
   double? get endTime => throw _privateConstructorUsedError;
@@ -68,6 +69,7 @@ abstract class $BedEntityCopyWith<$Res> {
       double resilience,
       int time,
       int isMint,
+      int? nftId,
       double? insurancePercent,
       double? startTime,
       double? endTime});
@@ -102,6 +104,7 @@ class _$BedEntityCopyWithImpl<$Res> implements $BedEntityCopyWith<$Res> {
     Object? resilience = freezed,
     Object? time = freezed,
     Object? isMint = freezed,
+    Object? nftId = freezed,
     Object? insurancePercent = freezed,
     Object? startTime = freezed,
     Object? endTime = freezed,
@@ -183,6 +186,10 @@ class _$BedEntityCopyWithImpl<$Res> implements $BedEntityCopyWith<$Res> {
           ? _value.isMint
           : isMint // ignore: cast_nullable_to_non_nullable
               as int,
+      nftId: nftId == freezed
+          ? _value.nftId
+          : nftId // ignore: cast_nullable_to_non_nullable
+              as int?,
       insurancePercent: insurancePercent == freezed
           ? _value.insurancePercent
           : insurancePercent // ignore: cast_nullable_to_non_nullable
@@ -225,6 +232,7 @@ abstract class _$$_BedEntityCopyWith<$Res> implements $BedEntityCopyWith<$Res> {
       double resilience,
       int time,
       int isMint,
+      int? nftId,
       double? insurancePercent,
       double? startTime,
       double? endTime});
@@ -261,6 +269,7 @@ class __$$_BedEntityCopyWithImpl<$Res> extends _$BedEntityCopyWithImpl<$Res>
     Object? resilience = freezed,
     Object? time = freezed,
     Object? isMint = freezed,
+    Object? nftId = freezed,
     Object? insurancePercent = freezed,
     Object? startTime = freezed,
     Object? endTime = freezed,
@@ -342,6 +351,10 @@ class __$$_BedEntityCopyWithImpl<$Res> extends _$BedEntityCopyWithImpl<$Res>
           ? _value.isMint
           : isMint // ignore: cast_nullable_to_non_nullable
               as int,
+      nftId: nftId == freezed
+          ? _value.nftId
+          : nftId // ignore: cast_nullable_to_non_nullable
+              as int?,
       insurancePercent: insurancePercent == freezed
           ? _value.insurancePercent
           : insurancePercent // ignore: cast_nullable_to_non_nullable
@@ -381,6 +394,7 @@ class _$_BedEntity implements _BedEntity {
       required this.resilience,
       required this.time,
       required this.isMint,
+      this.nftId,
       this.insurancePercent,
       this.startTime,
       this.endTime});
@@ -424,6 +438,8 @@ class _$_BedEntity implements _BedEntity {
   @override
   final int isMint;
   @override
+  final int? nftId;
+  @override
   final double? insurancePercent;
   @override
   final double? startTime;
@@ -432,7 +448,7 @@ class _$_BedEntity implements _BedEntity {
 
   @override
   String toString() {
-    return 'BedEntity(name: $name, nftClass: $nftClass, id: $id, tokenId: $tokenId, level: $level, image: $image, type: $type, contractAddress: $contractAddress, quality: $quality, durability: $durability, isLock: $isLock, bedMint: $bedMint, efficiency: $efficiency, luck: $luck, bonus: $bonus, special: $special, resilience: $resilience, time: $time, isMint: $isMint, insurancePercent: $insurancePercent, startTime: $startTime, endTime: $endTime)';
+    return 'BedEntity(name: $name, nftClass: $nftClass, id: $id, tokenId: $tokenId, level: $level, image: $image, type: $type, contractAddress: $contractAddress, quality: $quality, durability: $durability, isLock: $isLock, bedMint: $bedMint, efficiency: $efficiency, luck: $luck, bonus: $bonus, special: $special, resilience: $resilience, time: $time, isMint: $isMint, nftId: $nftId, insurancePercent: $insurancePercent, startTime: $startTime, endTime: $endTime)';
   }
 
   @override
@@ -463,6 +479,7 @@ class _$_BedEntity implements _BedEntity {
                 .equals(other.resilience, resilience) &&
             const DeepCollectionEquality().equals(other.time, time) &&
             const DeepCollectionEquality().equals(other.isMint, isMint) &&
+            const DeepCollectionEquality().equals(other.nftId, nftId) &&
             const DeepCollectionEquality()
                 .equals(other.insurancePercent, insurancePercent) &&
             const DeepCollectionEquality().equals(other.startTime, startTime) &&
@@ -491,6 +508,7 @@ class _$_BedEntity implements _BedEntity {
         const DeepCollectionEquality().hash(resilience),
         const DeepCollectionEquality().hash(time),
         const DeepCollectionEquality().hash(isMint),
+        const DeepCollectionEquality().hash(nftId),
         const DeepCollectionEquality().hash(insurancePercent),
         const DeepCollectionEquality().hash(startTime),
         const DeepCollectionEquality().hash(endTime)
@@ -523,6 +541,7 @@ abstract class _BedEntity implements BedEntity {
       required final double resilience,
       required final int time,
       required final int isMint,
+      final int? nftId,
       final double? insurancePercent,
       final double? startTime,
       final double? endTime}) = _$_BedEntity;
@@ -565,6 +584,8 @@ abstract class _BedEntity implements BedEntity {
   int get time;
   @override
   int get isMint;
+  @override
+  int? get nftId;
   @override
   double? get insurancePercent;
   @override

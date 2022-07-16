@@ -122,13 +122,13 @@ class NftPopUpTransfer extends StatelessWidget {
                   style: TextStyles.lightGrey12,
                 ),
                 const SizedBox(width: 4),
-                if ((nft.attribute?.contractAddress?.isNotEmpty ?? false) &&
+                if ((nft.attribute?.contractAddress.isNotEmpty ?? false) &&
                     nft.attribute?.tokenId != null)
                   Expanded(
                     child: FutureBuilder<dartz.Either<Failure, double>>(
                       future: getIt<EstimateNftFunctionFeeUseCase>()
                           .call(EstimateGasParams(
-                        nftAddress: nft.attribute!.contractAddress!,
+                        nftAddress: nft.attribute!.contractAddress,
                         ownerAddress: ownerAddress,
                         toAddress: toAddress,
                         nftId: nft.attribute!.tokenId!,

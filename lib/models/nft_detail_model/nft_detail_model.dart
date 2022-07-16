@@ -1,18 +1,18 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:json_annotation/json_annotation.dart';
-import 'package:slee_fi/entities/nft_detail_entity/nft_detail_entity.dart';
+import 'package:slee_fi/entities/bed_entity/bed_entity.dart';
 
 part 'nft_detail_model.g.dart';
 
 @JsonSerializable()
 class NftDetailModel {
-  final int? id;
+  final int id;
 
   @JsonKey(name: 'category_id')
   final int? categoryId;
 
   @JsonKey(name: 'is_lock')
-  final int? isLock;
+  final int isLock;
 
   final String? status;
 
@@ -35,10 +35,10 @@ class NftDetailModel {
   final String type;
 
   @JsonKey(name: 'is_mint')
-  final int? isMint;
+  final int isMint;
 
   @JsonKey(name: 'is_burn')
-  final int? isBurn;
+  final int isBurn;
   final String class_;
   final String quality;
   final String? owner;
@@ -93,33 +93,26 @@ class NftDetailModel {
 
   Map<String, dynamic> toJson() => _$NftDetailModelToJson(this);
 
-  NftDetailEntity toEntity() => NftDetailEntity(
-        id: id,
-        categoryId: categoryId,
-        isLock: isLock,
-        status: status,
-        createdAtt: createdAtt,
-        updatedAtt: updatedAtt,
+  BedEntity toEntity() => BedEntity(
+        name: nftName,
+        nftClass: class_,
         nftId: nftId,
-        nftName: nftName,
-        image: image,
-        contractAddress: contractAddress,
-        type: type,
-        isMint: isMint,
-        isBurn: isBurn,
-        class_: class_,
-        quality: quality,
-        owner: owner,
-        time: time,
+        id: id,
+        tokenId: tokenId,
         level: level,
+        image: image,
+        type: type,
+        contractAddress: contractAddress,
+        quality: quality,
+        durability: durability,
+        isLock: isLock,
         bedMint: bedMint,
         efficiency: efficiency,
         luck: luck,
         bonus: bonus,
         special: special,
         resilience: resilience,
-        tokenId: tokenId,
-        durability: durability,
-        category: category,
+        time: time,
+        isMint: isMint,
       );
 }

@@ -12,8 +12,7 @@ import 'package:slee_fi/usecase/wake_up_usecase.dart';
 class TrackingCubit extends Cubit<TrackingState> {
   TrackingCubit() : super(const TrackingState.initial());
 
-  final WakeUpUseCase _wakeUpUseCase =
-      getIt<WakeUpUseCase>();
+  final WakeUpUseCase _wakeUpUseCase = getIt<WakeUpUseCase>();
 
   Future<void> wakeUp(DataHealthSchema data) async {
     emit(const TrackingState.loading());
@@ -52,8 +51,12 @@ class TrackingCubit extends Cubit<TrackingState> {
         for (var element in healthData) {
           healthDataList.add(convertDataToSchema(element));
         }
-        log('health data: ${DataHealthSchema(datas: healthDataList,).toJson()}');
-        wakeUp(DataHealthSchema(datas: healthDataList,));
+        log('health data: ${DataHealthSchema(
+          datas: healthDataList,
+        ).toJson()}');
+        wakeUp(DataHealthSchema(
+          datas: healthDataList,
+        ));
       } catch (e) {
         log("Caught exception in getHealthDataFromTypes: $e");
       }
@@ -69,9 +72,9 @@ class TrackingCubit extends Cubit<TrackingState> {
         platformType: data.platform.name,
         unit: data.unit.name,
         dateFrom:
-        '${DateFormat("yyyy-MM-dd'T'HH:mm:ss.sss").format(data.dateFrom)}Z',
+            '${DateFormat("yyyy-MM-dd'T'HH:mm:ss.sss").format(data.dateFrom)}Z',
         dateTo:
-        '${DateFormat("yyyy-MM-dd'T'HH:mm:ss.sss").format(data.dateTo)}Z',
+            '${DateFormat("yyyy-MM-dd'T'HH:mm:ss.sss").format(data.dateTo)}Z',
         sourceId: data.sourceId,
         sourceName: data.sourceName);
   }
