@@ -8,6 +8,7 @@ import 'package:slee_fi/datasources/remote/auth_datasource/auth_interceptor.dart
 import 'package:slee_fi/datasources/remote/auth_datasource/refresh_token_interceptor.dart';
 import 'package:slee_fi/models/activation_code_response/activation_code_response.dart';
 import 'package:slee_fi/models/active_code_response/active_code_response.dart';
+import 'package:slee_fi/models/bed_detail/bed_detail.dart';
 import 'package:slee_fi/models/create_password_reponse/create_password_response.dart';
 import 'package:slee_fi/models/estimate_sleep_response/estimate_sleep_response.dart';
 import 'package:slee_fi/models/fetch_bed_response/fetch_bed_response.dart';
@@ -182,7 +183,7 @@ abstract class AuthDataSource {
   Future<ListMarketPlaceModel> getListJewel();
 
   @GET('/nft-attributes/bed-detail')
-  Future<MarketPlaceModel> bedDetail(@Query('bedId') int bedId);
+  Future<BedDetail> bedDetail(@Query('bedId') int bedId);
 
   @PUT('/nft-attributes/add-item-for-bed')
   Future<dynamic> addItemForBed(

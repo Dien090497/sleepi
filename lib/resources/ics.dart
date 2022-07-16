@@ -49,6 +49,7 @@ class Ics {
   static const String icWallet = 'assets/icons/ic_wallet.svg';
   static const String item = 'assets/icons/item.svg';
   static const String jewel = 'assets/icons/jewel.svg';
+  static const String jewelWatting = 'assets/icons/jewel_watting.svg';
   static const String levelUp = 'assets/icons/level_up.svg';
   static const String lock = 'assets/icons/lock.svg';
   static const String okcoin = 'assets/icons/okcoin.svg';
@@ -114,6 +115,7 @@ class Ics {
     icWallet,
     item,
     jewel,
+    jewelWatting,
     levelUp,
     lock,
     okcoin,

@@ -15,11 +15,14 @@ import 'package:slee_fi/l10n/locale_keys.g.dart';
 import 'package:slee_fi/models/market_place/market_place_model.dart';
 import 'package:slee_fi/presentation/blocs/individual/individual_cubit.dart';
 import 'package:slee_fi/presentation/blocs/individual/individual_state.dart';
+import 'package:slee_fi/presentation/blocs/socket_bloc/socket_bloc.dart';
+import 'package:slee_fi/presentation/blocs/socket_bloc/socket_event.dart';
 import 'package:slee_fi/presentation/screens/gacha/widgets/attributes_widget.dart';
 import 'package:slee_fi/presentation/screens/info_individual/widget/bottom_bar.dart';
 import 'package:slee_fi/presentation/screens/info_individual/widget/bottom_bar_market_place.dart';
 import 'package:slee_fi/presentation/screens/info_individual/widget/box_info_widget.dart';
 import 'package:slee_fi/presentation/screens/info_individual/widget/individual_refresher.dart';
+import 'package:slee_fi/presentation/screens/info_individual/widget/socket.dart';
 import 'package:slee_fi/resources/resources.dart';
 
 class InfoIndividualParams {
@@ -38,8 +41,12 @@ class InfoIndividualScreen extends StatelessWidget {
     final args =
         ModalRoute.of(context)?.settings.arguments as InfoIndividualParams;
 
-    return BlocProvider(
-      create: (_) => IndividualCubit(args.bed),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(create: (context) => IndividualCubit(args.bed)),
+        BlocProvider(
+            create: (context) => SocketBloc()..add(SocketInt(args.bed.id))),
+      ],
       child: Stack(
         children: [
           BackgroundWidget(
@@ -72,46 +79,7 @@ class InfoIndividualScreen extends StatelessWidget {
                                       const EdgeInsets.symmetric(vertical: 24),
                                   child: SFIcon(state.bed.image),
                                 ),
-                                Wrap(
-                                  spacing: 8.0,
-                                  runSpacing: 8.0,
-                                  alignment: WrapAlignment.center,
-                                  children: [
-                                    SFImageBorder(
-                                        icon: Imgs.jewelPurple,
-                                        onTap: () {},
-                                        radius: 16,
-                                        size: const Size(65, 65),
-                                        padding: 8),
-                                    SFImageBorder(
-                                      icon: Imgs.jewelGreen,
-                                      onTap: () {},
-                                      radius: 16,
-                                      size: const Size(65, 65),
-                                      padding: 8,
-                                    ),
-                                    SFImageBorder(
-                                        icon: Imgs.jewelSliver,
-                                        onTap: () {},
-                                        radius: 16,
-                                        size: const Size(65, 65),
-                                        padding: 8),
-                                    SFImageBorder(
-                                      icon: Imgs.jewelRed,
-                                      onTap: () {},
-                                      radius: 16,
-                                      size: const Size(65, 65),
-                                      padding: 8,
-                                    ),
-                                    SFImageBorder(
-                                      icon: Imgs.jewelRed,
-                                      onTap: () {},
-                                      radius: 16,
-                                      size: const Size(65, 65),
-                                      padding: 8,
-                                    ),
-                                  ],
-                                ),
+                                Socket(bedId: state.bed.id),
                                 const SizedBox(height: 16),
                                 BoxInfoWidget(bed: state.bed),
                                 const SizedBox(height: 24),

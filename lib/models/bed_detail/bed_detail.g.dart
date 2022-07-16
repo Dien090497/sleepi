@@ -40,13 +40,13 @@ BedDetail _$BedDetailFromJson(Map<String, dynamic> json) => BedDetail(
       (json['endTime'] as num?)?.toDouble(),
       Category.fromJson(json['category'] as Map<String, dynamic>),
     )
-      ..socket = json['socket']
+      ..socket = json['socket'] as int?
       ..itemId = json['itemId'] as int?
-      ..jewelSlot1 = json['jewelSlot1'] as String?
-      ..jewelSlot2 = json['jewelSlot2'] as String?
-      ..jewelSlot3 = json['jewelSlot3'] as String?
-      ..jewelSlot4 = json['jewelSlot4'] as String?
-      ..jewelSlot5 = json['jewelSlot5'] as String?;
+      ..jewelSlot1 = json['jewelSlot1'] as int?
+      ..jewelSlot2 = json['jewelSlot2'] as int?
+      ..jewelSlot3 = json['jewelSlot3'] as int?
+      ..jewelSlot4 = json['jewelSlot4'] as int?
+      ..jewelSlot5 = json['jewelSlot5'] as int?;
 
 Map<String, dynamic> _$BedDetailToJson(BedDetail instance) => <String, dynamic>{
       'id': instance.id,

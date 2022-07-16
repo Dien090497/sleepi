@@ -136,6 +136,7 @@ class PopUpBedMarketPlace extends StatelessWidget {
                 return SFButton(
                   text: LocaleKeys.confirm,
                   onPressed: () {
+                    print('bed.price  ${bed.price}');
                     final walletCubit = context.read<WalletCubit>();
                     final walletState = walletCubit.state;
                     Navigator.pop(context);

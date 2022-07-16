@@ -3,6 +3,7 @@ import 'package:slee_fi/entities/active_code/active_code_entity.dart';
 import 'package:slee_fi/entities/item_entity/item_entity.dart';
 import 'package:slee_fi/entities/tracking_result_chart_data_entity/tracking_result_chart_data_entity.dart';
 import 'package:slee_fi/failures/failure.dart';
+import 'package:slee_fi/models/bed_detail/bed_detail.dart';
 import 'package:slee_fi/models/bed_model/beb_model.dart';
 import 'package:slee_fi/models/estimate_sleep_response/estimate_sleep_response.dart';
 import 'package:slee_fi/models/global_config_response/global_config_response.dart';
@@ -55,5 +56,5 @@ abstract class IUserRepository {
 
   Future<Either<FailureMessage, TrackingResultChartDataEntity>> fetchDataChart(ParamsGetDataChart paramsGetDataChart);
 
-  Future<Either<FailureMessage, dynamic>> bedDetail(int bedId);
+  Future<Either<FailureMessage, BedDetail>> bedDetail(int bedId);
 }
