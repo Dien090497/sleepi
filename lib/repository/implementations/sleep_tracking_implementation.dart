@@ -19,12 +19,18 @@ class SleepTrackingImplementation extends ISleepTrackingRepository {
   Future<Either<FailureMessage, EstimateSleepResponse>> estimateTracking(
       EstimateTrackingParam estimateTrackingParam) async {
     try {
-      var result = await _sleepTrackingApi.estimateSleepEarn(
-          estimateTrackingParam.bedId,
-          estimateTrackingParam.itemId,
-          estimateTrackingParam.isEnableInsurance);
-
-      return Right(result);
+      if(estimateTrackingParam.itemId !=null) {
+        var result = await _sleepTrackingApi.estimateSleepEarn(
+            estimateTrackingParam.bedId,
+            estimateTrackingParam.itemId,
+            estimateTrackingParam.isEnableInsurance);
+        return Right(result);
+      }else{
+        var result = await _sleepTrackingApi.estimateSleepEarns(
+            estimateTrackingParam.bedId,
+            estimateTrackingParam.isEnableInsurance);
+        return Right(result);
+      }
     } catch (e) {
       return Left(FailureMessage.fromException(e));
     }

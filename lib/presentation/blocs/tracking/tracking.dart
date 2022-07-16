@@ -1,8 +1,8 @@
 import 'dart:developer';
 
 import 'package:easy_localization/easy_localization.dart';
-import 'package:fetch_health_data/health.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:health/health.dart';
 import 'package:slee_fi/di/injector.dart';
 import 'package:slee_fi/presentation/blocs/tracking/tracking_state.dart';
 import 'package:slee_fi/schema/sleep_tracking/data_health.dart';
@@ -28,7 +28,7 @@ class TrackingCubit extends Cubit<TrackingState> {
     );
   }
 
-  Future<void> fetchData(int trackingId) async {
+  Future<void> fetchData() async {
     DateTime now = DateTime.now();
     HealthFactory health = HealthFactory();
 
@@ -52,8 +52,8 @@ class TrackingCubit extends Cubit<TrackingState> {
         for (var element in healthData) {
           healthDataList.add(convertDataToSchema(element));
         }
-        log('health data: ${DataHealthSchema(trackingId: trackingId, datas: healthDataList,).toJson()}');
-        wakeUp(DataHealthSchema(trackingId: trackingId, datas: healthDataList,));
+        log('health data: ${DataHealthSchema(datas: healthDataList,).toJson()}');
+        wakeUp(DataHealthSchema(datas: healthDataList,));
       } catch (e) {
         log("Caught exception in getHealthDataFromTypes: $e");
       }

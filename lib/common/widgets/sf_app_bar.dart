@@ -10,9 +10,10 @@ class SFAppBar extends AppBar {
     TextStyle? textStyle,
     bool disableLeading = false,
     StringCase? stringCase,
-    bool? centerTitle ,
+    bool? centerTitle,
     EdgeInsets? paddingLeading,
     Color? backgroundColor,
+    VoidCallback? onBack,
     required BuildContext context,
     Key? key,
   }) : super(
@@ -22,10 +23,12 @@ class SFAppBar extends AppBar {
           automaticallyImplyLeading: false,
           leadingWidth: 48,
           elevation: 0,
-          leading: disableLeading ? const SizedBox()  : const Padding(
-            padding: EdgeInsets.only(left: 16),
-            child: SFBackButton(),
-          ),
+          leading: disableLeading
+              ? const SizedBox()
+              : Padding(
+                  padding: const EdgeInsets.only(left: 16),
+                  child: SFBackButton(onBack: onBack ?? onBack ?? () => Navigator.pop(context),)
+                ),
           // centerTitle: true,
           title: SFText(
             keyText: title ?? "",

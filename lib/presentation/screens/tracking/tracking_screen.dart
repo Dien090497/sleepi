@@ -11,6 +11,7 @@ import 'package:slee_fi/common/widgets/background_widget.dart';
 import 'package:slee_fi/common/widgets/loading_screen.dart';
 import 'package:slee_fi/common/widgets/sf_app_bar.dart';
 import 'package:slee_fi/common/widgets/sf_buttons.dart';
+import 'package:slee_fi/common/widgets/sf_dialog.dart';
 import 'package:slee_fi/common/widgets/sf_icon.dart';
 import 'package:slee_fi/common/widgets/sf_label_value.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
@@ -21,10 +22,16 @@ import 'package:slee_fi/presentation/screens/tracking/widgets/analog_clock.dart'
 import 'package:slee_fi/resources/resources.dart';
 
 class TrackingParams {
-  int trackingId;
+  int timeStart;
+  int timeWakeUp;
+  double tokenEarn;
   String fromRoute;
 
-  TrackingParams({required this.trackingId, required this.fromRoute});
+  TrackingParams(
+      {required this.timeStart,
+      required this.timeWakeUp,
+      required this.tokenEarn,
+      required this.fromRoute});
 }
 
 class TrackingScreen extends StatefulWidget {
@@ -36,19 +43,31 @@ class TrackingScreen extends StatefulWidget {
 
 class _TrackingScreenState extends State<TrackingScreen> {
   late Timer timer;
-
-  double totalEarn = 200;
-  int time = 360;
-  double earn = 0;
+  late String timeAlarm = '';
+  late double totalEarn = 0;
+  late int time = 0;
+  late double earn = 0;
+  late String fromRoute = R.bottomNavigation;
 
   @override
   void initState() {
-    double x = 200 * 10 / (360 * 60 * 60);
+    Future.delayed(Duration.zero, () {
+      final args = ModalRoute.of(context)?.settings.arguments as TrackingParams;
+      totalEarn = args.tokenEarn;
+      DateTime wakeUp = DateTime.fromMillisecondsSinceEpoch(args.timeWakeUp);
+      DateTime timStart = DateTime.fromMillisecondsSinceEpoch(args.timeStart);
+      time = wakeUp.difference(timStart).inMinutes;
+      earn =
+          (DateTime.now().difference(timStart).inMinutes) * (totalEarn / time);
+      timeAlarm = '${wakeUp.hour}:${wakeUp.minute}';
+      fromRoute = args.fromRoute;
+      setState(() {});
+    });
+    double x = totalEarn / time;
     timer = Timer.periodic(
-      const Duration(seconds: 10),
+      const Duration(seconds: 60),
       (Timer timer) async {
-        if (time > 0) {
-          time -= 10;
+        if (earn < totalEarn) {
           earn += x;
           setState(() {});
         } else {
@@ -67,134 +86,151 @@ class _TrackingScreenState extends State<TrackingScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final args = ModalRoute.of(context)?.settings.arguments as TrackingParams;
+    return WillPopScope(
+      onWillPop: () async {
+        if (fromRoute == R.splash) {
+          Navigator.pushNamedAndRemoveUntil(
+              context, R.bottomNavigation, (r) => false);
+        }
+        return true;
+      },
+      child: BlocProvider(
+        create: (context) => TrackingCubit(),
+        child: BlocConsumer<TrackingCubit, TrackingState>(
+          listener: (context, state) {
+            if (state is TrackingStatePosted) {
+              Navigator.pushNamed(context, R.preResult);
+            }
+            if (state is TrackingStateFail) {
+              showMessageDialog(context, state.msg);
+            }
+          },
+          builder: (context, state) {
+            final cubit = context.read<TrackingCubit>();
 
-    return BlocProvider(
-      create: (context) => TrackingCubit(),
-      child: BlocConsumer<TrackingCubit, TrackingState>(
-        listener: (context, state) {
-          if (state is TrackingStatePosted) {
-            Navigator.pushNamed(context, R.preResult);
-          }
-        },
-        builder: (context, state) {
-          final cubit = context.read<TrackingCubit>();
-
-          return FocusDetector(
-            onFocusGained: () {
-              if (args.fromRoute == R.splash) {
-                cubit.fetchData(args.trackingId);
-              }
-            },
-            onFocusLost: () {
-              timer.cancel();
-            },
-            child: state is TrackingStateLoading
-                ? const LoadingScreen()
-                : BackgroundWidget(
-                    appBar: SFAppBar(
+            return FocusDetector(
+                onFocusGained: () {},
+                onFocusLost: () {
+                  timer.cancel();
+                },
+                child: Stack(
+                  children: [
+                    BackgroundWidget(
+                      appBar: SFAppBar(
                         context: context,
                         title: LocaleKeys.tracking,
-                        textStyle: TextStyles.bold18LightWhite),
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 24.0),
-                      child: Column(
-                        children: [
-                          Stack(
-                            alignment: Alignment.center,
-                            children: [
-                              Container(
-                                width: 318,
-                                height: 318,
-                                decoration: const BoxDecoration(
-                                    image: DecorationImage(
-                                  image: AssetImage(Imgs.borderClock),
-                                )),
-                              ),
-                              Container(
-                                width: 190,
-                                height: 190,
-                                decoration: BoxDecoration(
-                                  shape: BoxShape.circle,
-                                  color: AppColors.white.withOpacity(0.07),
+                        textStyle: TextStyles.bold18LightWhite,
+                        onBack: () {
+                          if (fromRoute == R.splash) {
+                            Navigator.pushNamedAndRemoveUntil(
+                                context, R.bottomNavigation, (r) => false);
+                          } else {
+                            Navigator.pop(context);
+                          }
+                        },
+                      ),
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 24.0),
+                        child: Column(
+                          children: [
+                            Stack(
+                              alignment: Alignment.center,
+                              children: [
+                                Container(
+                                  width: 318,
+                                  height: 318,
+                                  decoration: const BoxDecoration(
+                                      image: DecorationImage(
+                                    image: AssetImage(Imgs.borderClock),
+                                  )),
                                 ),
-                              ),
-                              const SizedBox(
-                                width: 230,
-                                height: 230,
-                                child: AnalogClock(
-                                  isLive: true,
-                                  hourHandColor: Colors.white,
-                                  minuteHandColor: Colors.white,
-                                  showSecondHand: true,
-                                  secondHandColor: AppColors.blue,
-                                  numberColor: AppColors.lightWhite,
-                                  showNumbers: true,
-                                  textScaleFactor: 1.2,
-                                  showTicks: true,
-                                  tickColor: AppColors.tick,
-                                  showDigitalClock: false,
+                                Container(
+                                  width: 190,
+                                  height: 190,
+                                  decoration: BoxDecoration(
+                                    shape: BoxShape.circle,
+                                    color: AppColors.white.withOpacity(0.07),
+                                  ),
                                 ),
-                              ),
-                            ],
-                          ),
-                          const SizedBox(
-                            height: 24,
-                          ),
-                          Column(
-                            children: [
-                              SFText(
-                                keyText: LocaleKeys.amount_earned,
-                                style: TextStyles.w400lightGrey14,
-                              ),
-                              const SizedBox(
-                                height: 12,
-                              ),
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  const SFIcon(
-                                    Ics.icSlft,
-                                    width: 40,
+                                const SizedBox(
+                                  width: 230,
+                                  height: 230,
+                                  child: AnalogClock(
+                                    isLive: true,
+                                    hourHandColor: Colors.white,
+                                    minuteHandColor: Colors.white,
+                                    showSecondHand: true,
+                                    secondHandColor: AppColors.blue,
+                                    numberColor: AppColors.lightWhite,
+                                    showNumbers: true,
+                                    textScaleFactor: 1.2,
+                                    showTicks: true,
+                                    tickColor: AppColors.tick,
+                                    showDigitalClock: false,
                                   ),
-                                  const SizedBox(
-                                    width: 8,
-                                  ),
-                                  SFText(
-                                    keyText:
-                                        "${earn.formatBalanceTokenHeader} SLFT",
-                                    style: TextStyles.bold30White,
-                                  ),
-                                ],
-                              )
-                            ],
-                          ),
-                          const SizedBox(
-                            height: 24,
-                          ),
-                          const SFLabelValue(
-                            label: LocaleKeys.alarm,
-                            value: '10:00',
-                            styleLabel: TextStyles.lightWhite16,
-                            styleValue: TextStyles.lightWhite16,
-                          ),
-                          const Spacer(),
-                          SFButton(
-                            text: LocaleKeys.wake_up,
-                            width: double.infinity,
-                            color: AppColors.blue,
-                            textStyle: TextStyles.w600WhiteSize16,
-                            onPressed: () {
-                              cubit.fetchData(args.trackingId);
-                            },
-                          ),
-                          const SizedBox(height: 26),
-                        ],
+                                ),
+                              ],
+                            ),
+                            const SizedBox(
+                              height: 24,
+                            ),
+                            Column(
+                              children: [
+                                SFText(
+                                  keyText: LocaleKeys.amount_earned,
+                                  style: TextStyles.w400lightGrey14,
+                                ),
+                                const SizedBox(
+                                  height: 12,
+                                ),
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    const SFIcon(
+                                      Ics.icSlft,
+                                      width: 40,
+                                    ),
+                                    const SizedBox(
+                                      width: 8,
+                                    ),
+                                    SFText(
+                                      keyText:
+                                          "${earn.formatBalanceTokenHeader} SLFT",
+                                      style: TextStyles.bold30White,
+                                    ),
+                                  ],
+                                )
+                              ],
+                            ),
+                            const SizedBox(
+                              height: 24,
+                            ),
+                            SFLabelValue(
+                              label: LocaleKeys.alarm,
+                              value: timeAlarm,
+                              styleLabel: TextStyles.lightWhite16,
+                              styleValue: TextStyles.lightWhite16,
+                            ),
+                            const Spacer(),
+                            SFButton(
+                              text: LocaleKeys.wake_up,
+                              width: double.infinity,
+                              color: AppColors.blue,
+                              textStyle: TextStyles.w600WhiteSize16,
+                              onPressed: () {
+                                cubit.fetchData();
+                              },
+                            ),
+                            const SizedBox(height: 26),
+                          ],
+                        ),
                       ),
                     ),
-                  ),
-          );
-        },
+                    if (state is TrackingStateLoading) const LoadingScreen(),
+                  ],
+                ));
+          },
+        ),
       ),
     );
   }

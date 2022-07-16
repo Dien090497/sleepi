@@ -31,7 +31,13 @@ abstract class SleepTrackingApi {
   @GET('/tracking/estimate-tracking')
   Future<EstimateSleepResponse> estimateSleepEarn(
     @Query('bedUsed') int bedId,
-    @Query('itemUsed') int itemId,
+    @Query('itemUsed') int? itemId,
+    @Query('isEnableInsurance') bool enableInsurance,
+  );
+
+  @GET('/tracking/estimate-tracking')
+  Future<EstimateSleepResponse> estimateSleepEarns(
+    @Query('bedUsed') int bedId,
     @Query('isEnableInsurance') bool enableInsurance,
   );
 

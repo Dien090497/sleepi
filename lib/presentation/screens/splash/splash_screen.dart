@@ -33,13 +33,23 @@ class SplashScreen extends StatelessWidget {
                 context.read<UserBloc>().add(UpdateUserOrListToken(
                     userInfoEntity: state.userInfoEntity!,
                     listTokens: state.listTokens));
-                if (!state.isAvailable && state.trackingId != 0) {
+                if (state.userStatusTrackingModel != null) {
                   Navigator.pushNamedAndRemoveUntil(
-                      context, R.tracking, (r) => false,
-                      arguments: TrackingParams(
-                        trackingId: state.trackingId,
-                        fromRoute: R.splash,
-                      ));
+                    context,
+                    R.tracking,
+                    (r) => false,
+                    arguments: TrackingParams(
+                      timeStart:
+                          state.userStatusTrackingModel!.tracking!.startSleep! *
+                              1000,
+                      timeWakeUp:
+                          state.userStatusTrackingModel!.tracking!.wakeUp! *
+                              1000,
+                      tokenEarn: double.parse(
+                          state.userStatusTrackingModel!.tracking!.estEarn!),
+                      fromRoute: R.splash,
+                    ),
+                  );
                 } else {
                   Navigator.pushNamedAndRemoveUntil(
                       context, R.bottomNavigation, (r) => false);

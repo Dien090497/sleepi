@@ -30,8 +30,7 @@ class SplashCubit extends Cubit<SplashState> {
             isSafeDevice: kDebugMode ? true : true,
             userInfoEntity: null,
             listTokens: [],
-            trackingId: 0,
-            isAvailable: false,
+            userStatusTrackingModel: null,
           ));
         },
         (userInfo) async {
@@ -48,8 +47,7 @@ class SplashCubit extends Cubit<SplashState> {
                 isSafeDevice: kDebugMode ? true : true,
                 userInfoEntity: userInfo,
                 listTokens: tokensSpending,
-                trackingId: r.tracking,
-                isAvailable: r.isAvailable,
+                userStatusTrackingModel: r
               ));
             });
           });

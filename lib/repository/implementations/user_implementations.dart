@@ -229,7 +229,7 @@ class UserImplementation extends IUserRepository {
     try {
       var result = await _authDataSource.estimateSleepEarn(
           estimateTrackingParam.bedId,
-          estimateTrackingParam.itemId,
+          estimateTrackingParam.itemId!,
           estimateTrackingParam.isEnableInsurance);
       return Right(result);
     } catch (e) {

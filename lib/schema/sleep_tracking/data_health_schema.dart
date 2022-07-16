@@ -7,11 +7,9 @@ part 'data_health_schema.g.dart';
 @JsonSerializable()
 class DataHealthSchema {
 
-  int? trackingId;
   List<DataHealth>? datas;
 
   DataHealthSchema({
-    this.trackingId,
     this.datas,
   });
 
