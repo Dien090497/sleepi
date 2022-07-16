@@ -16,7 +16,6 @@ import 'package:slee_fi/models/global_config_response/global_config_response.dar
 import 'package:slee_fi/models/item_owner_response/item_owner_response.dart';
 import 'package:slee_fi/models/list_market_place/list_market_place_model.dart';
 import 'package:slee_fi/models/lucky_box/lucky_box.dart';
-import 'package:slee_fi/models/market_place/market_place_model.dart';
 import 'package:slee_fi/models/market_place/result_buy_model.dart';
 import 'package:slee_fi/models/refresh_token_model/refresh_token_model.dart';
 import 'package:slee_fi/models/send_email_response/send_email_response.dart';
@@ -31,6 +30,7 @@ import 'package:slee_fi/models/user_response/user_response.dart';
 import 'package:slee_fi/models/users_response/users_response.dart';
 import 'package:slee_fi/models/verify_response/verify_response.dart';
 import 'package:slee_fi/models/withdraw_history_response/withdraw_history_response.dart';
+import 'package:slee_fi/schema/add_jewel_schema/add_jewel_schema.dart';
 import 'package:slee_fi/schema/buy_nft_schema/buy_nft_schema.dart';
 import 'package:slee_fi/schema/change_password_schema/change_password_schema.dart';
 import 'package:slee_fi/schema/create_password_schema/create_password_schema.dart';
@@ -232,4 +232,14 @@ abstract class AuthDataSource {
     @Query('tdate') String tdate,
     @Query('type') String type,
   );
+
+  // individual
+  @PUT('/nft-attributes/open-socket')
+  Future<dynamic> openSocket(@Query('bedId ') int bedId);
+
+  @POST('/nft-attributes/add-jewels')
+  Future<dynamic> addJewel(@Body() AddJewelSchema addJewelSchema);
+
+  @POST('/nft-attributes/remove-jewels')
+  Future<dynamic> removeJewel(@Body() AddJewelSchema addJewelSchema);
 }

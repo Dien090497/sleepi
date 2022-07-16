@@ -20,21 +20,27 @@ mixin _$SocketState {
   TResult when<TResult extends Object?>({
     required TResult Function() init,
     required TResult Function() loading,
-    required TResult Function(SocketEntity socketEntity) loaded,
+    required TResult Function(
+            List<SocketEntity> socketEntity, int maxSocket, int socketOpened)
+        loaded,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? init,
     TResult Function()? loading,
-    TResult Function(SocketEntity socketEntity)? loaded,
+    TResult Function(
+            List<SocketEntity> socketEntity, int maxSocket, int socketOpened)?
+        loaded,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? init,
     TResult Function()? loading,
-    TResult Function(SocketEntity socketEntity)? loaded,
+    TResult Function(
+            List<SocketEntity> socketEntity, int maxSocket, int socketOpened)?
+        loaded,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -121,7 +127,9 @@ class _$SocketStateInitial implements SocketStateInitial {
   TResult when<TResult extends Object?>({
     required TResult Function() init,
     required TResult Function() loading,
-    required TResult Function(SocketEntity socketEntity) loaded,
+    required TResult Function(
+            List<SocketEntity> socketEntity, int maxSocket, int socketOpened)
+        loaded,
   }) {
     return init();
   }
@@ -131,7 +139,9 @@ class _$SocketStateInitial implements SocketStateInitial {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? init,
     TResult Function()? loading,
-    TResult Function(SocketEntity socketEntity)? loaded,
+    TResult Function(
+            List<SocketEntity> socketEntity, int maxSocket, int socketOpened)?
+        loaded,
   }) {
     return init?.call();
   }
@@ -141,7 +151,9 @@ class _$SocketStateInitial implements SocketStateInitial {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? init,
     TResult Function()? loading,
-    TResult Function(SocketEntity socketEntity)? loaded,
+    TResult Function(
+            List<SocketEntity> socketEntity, int maxSocket, int socketOpened)?
+        loaded,
     required TResult orElse(),
   }) {
     if (init != null) {
@@ -232,7 +244,9 @@ class _$SocketStateLoading implements SocketStateLoading {
   TResult when<TResult extends Object?>({
     required TResult Function() init,
     required TResult Function() loading,
-    required TResult Function(SocketEntity socketEntity) loaded,
+    required TResult Function(
+            List<SocketEntity> socketEntity, int maxSocket, int socketOpened)
+        loaded,
   }) {
     return loading();
   }
@@ -242,7 +256,9 @@ class _$SocketStateLoading implements SocketStateLoading {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? init,
     TResult Function()? loading,
-    TResult Function(SocketEntity socketEntity)? loaded,
+    TResult Function(
+            List<SocketEntity> socketEntity, int maxSocket, int socketOpened)?
+        loaded,
   }) {
     return loading?.call();
   }
@@ -252,7 +268,9 @@ class _$SocketStateLoading implements SocketStateLoading {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? init,
     TResult Function()? loading,
-    TResult Function(SocketEntity socketEntity)? loaded,
+    TResult Function(
+            List<SocketEntity> socketEntity, int maxSocket, int socketOpened)?
+        loaded,
     required TResult orElse(),
   }) {
     if (loading != null) {
@@ -305,9 +323,7 @@ abstract class _$$SocketStateLoadedCopyWith<$Res> {
   factory _$$SocketStateLoadedCopyWith(
           _$SocketStateLoaded value, $Res Function(_$SocketStateLoaded) then) =
       __$$SocketStateLoadedCopyWithImpl<$Res>;
-  $Res call({SocketEntity socketEntity});
-
-  $SocketEntityCopyWith<$Res> get socketEntity;
+  $Res call({List<SocketEntity> socketEntity, int maxSocket, int socketOpened});
 }
 
 /// @nodoc
@@ -324,34 +340,48 @@ class __$$SocketStateLoadedCopyWithImpl<$Res>
   @override
   $Res call({
     Object? socketEntity = freezed,
+    Object? maxSocket = freezed,
+    Object? socketOpened = freezed,
   }) {
     return _then(_$SocketStateLoaded(
       socketEntity == freezed
-          ? _value.socketEntity
+          ? _value._socketEntity
           : socketEntity // ignore: cast_nullable_to_non_nullable
-              as SocketEntity,
+              as List<SocketEntity>,
+      maxSocket == freezed
+          ? _value.maxSocket
+          : maxSocket // ignore: cast_nullable_to_non_nullable
+              as int,
+      socketOpened == freezed
+          ? _value.socketOpened
+          : socketOpened // ignore: cast_nullable_to_non_nullable
+              as int,
     ));
-  }
-
-  @override
-  $SocketEntityCopyWith<$Res> get socketEntity {
-    return $SocketEntityCopyWith<$Res>(_value.socketEntity, (value) {
-      return _then(_value.copyWith(socketEntity: value));
-    });
   }
 }
 
 /// @nodoc
 
 class _$SocketStateLoaded implements SocketStateLoaded {
-  const _$SocketStateLoaded(this.socketEntity);
+  const _$SocketStateLoaded(
+      final List<SocketEntity> socketEntity, this.maxSocket, this.socketOpened)
+      : _socketEntity = socketEntity;
+
+  final List<SocketEntity> _socketEntity;
+  @override
+  List<SocketEntity> get socketEntity {
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_socketEntity);
+  }
 
   @override
-  final SocketEntity socketEntity;
+  final int maxSocket;
+  @override
+  final int socketOpened;
 
   @override
   String toString() {
-    return 'SocketState.loaded(socketEntity: $socketEntity)';
+    return 'SocketState.loaded(socketEntity: $socketEntity, maxSocket: $maxSocket, socketOpened: $socketOpened)';
   }
 
   @override
@@ -360,12 +390,18 @@ class _$SocketStateLoaded implements SocketStateLoaded {
         (other.runtimeType == runtimeType &&
             other is _$SocketStateLoaded &&
             const DeepCollectionEquality()
-                .equals(other.socketEntity, socketEntity));
+                .equals(other._socketEntity, _socketEntity) &&
+            const DeepCollectionEquality().equals(other.maxSocket, maxSocket) &&
+            const DeepCollectionEquality()
+                .equals(other.socketOpened, socketOpened));
   }
 
   @override
   int get hashCode => Object.hash(
-      runtimeType, const DeepCollectionEquality().hash(socketEntity));
+      runtimeType,
+      const DeepCollectionEquality().hash(_socketEntity),
+      const DeepCollectionEquality().hash(maxSocket),
+      const DeepCollectionEquality().hash(socketOpened));
 
   @JsonKey(ignore: true)
   @override
@@ -377,9 +413,11 @@ class _$SocketStateLoaded implements SocketStateLoaded {
   TResult when<TResult extends Object?>({
     required TResult Function() init,
     required TResult Function() loading,
-    required TResult Function(SocketEntity socketEntity) loaded,
+    required TResult Function(
+            List<SocketEntity> socketEntity, int maxSocket, int socketOpened)
+        loaded,
   }) {
-    return loaded(socketEntity);
+    return loaded(socketEntity, maxSocket, socketOpened);
   }
 
   @override
@@ -387,9 +425,11 @@ class _$SocketStateLoaded implements SocketStateLoaded {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? init,
     TResult Function()? loading,
-    TResult Function(SocketEntity socketEntity)? loaded,
+    TResult Function(
+            List<SocketEntity> socketEntity, int maxSocket, int socketOpened)?
+        loaded,
   }) {
-    return loaded?.call(socketEntity);
+    return loaded?.call(socketEntity, maxSocket, socketOpened);
   }
 
   @override
@@ -397,11 +437,13 @@ class _$SocketStateLoaded implements SocketStateLoaded {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? init,
     TResult Function()? loading,
-    TResult Function(SocketEntity socketEntity)? loaded,
+    TResult Function(
+            List<SocketEntity> socketEntity, int maxSocket, int socketOpened)?
+        loaded,
     required TResult orElse(),
   }) {
     if (loaded != null) {
-      return loaded(socketEntity);
+      return loaded(socketEntity, maxSocket, socketOpened);
     }
     return orElse();
   }
@@ -442,10 +484,12 @@ class _$SocketStateLoaded implements SocketStateLoaded {
 }
 
 abstract class SocketStateLoaded implements SocketState {
-  const factory SocketStateLoaded(final SocketEntity socketEntity) =
-      _$SocketStateLoaded;
+  const factory SocketStateLoaded(final List<SocketEntity> socketEntity,
+      final int maxSocket, final int socketOpened) = _$SocketStateLoaded;
 
-  SocketEntity get socketEntity;
+  List<SocketEntity> get socketEntity;
+  int get maxSocket;
+  int get socketOpened;
   @JsonKey(ignore: true)
   _$$SocketStateLoadedCopyWith<_$SocketStateLoaded> get copyWith =>
       throw _privateConstructorUsedError;

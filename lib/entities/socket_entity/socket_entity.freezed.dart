@@ -16,12 +16,9 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$SocketEntity {
-  int? get sockets => throw _privateConstructorUsedError;
-  int? get jewel1 => throw _privateConstructorUsedError;
-  int? get jewel2 => throw _privateConstructorUsedError;
-  int? get jewel3 => throw _privateConstructorUsedError;
-  int? get jewel4 => throw _privateConstructorUsedError;
-  int? get jewel5 => throw _privateConstructorUsedError;
+  SocketType get socketType => throw _privateConstructorUsedError;
+  int get id => throw _privateConstructorUsedError;
+  String get image => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $SocketEntityCopyWith<SocketEntity> get copyWith =>
@@ -33,13 +30,7 @@ abstract class $SocketEntityCopyWith<$Res> {
   factory $SocketEntityCopyWith(
           SocketEntity value, $Res Function(SocketEntity) then) =
       _$SocketEntityCopyWithImpl<$Res>;
-  $Res call(
-      {int? sockets,
-      int? jewel1,
-      int? jewel2,
-      int? jewel3,
-      int? jewel4,
-      int? jewel5});
+  $Res call({SocketType socketType, int id, String image});
 }
 
 /// @nodoc
@@ -52,38 +43,23 @@ class _$SocketEntityCopyWithImpl<$Res> implements $SocketEntityCopyWith<$Res> {
 
   @override
   $Res call({
-    Object? sockets = freezed,
-    Object? jewel1 = freezed,
-    Object? jewel2 = freezed,
-    Object? jewel3 = freezed,
-    Object? jewel4 = freezed,
-    Object? jewel5 = freezed,
+    Object? socketType = freezed,
+    Object? id = freezed,
+    Object? image = freezed,
   }) {
     return _then(_value.copyWith(
-      sockets: sockets == freezed
-          ? _value.sockets
-          : sockets // ignore: cast_nullable_to_non_nullable
-              as int?,
-      jewel1: jewel1 == freezed
-          ? _value.jewel1
-          : jewel1 // ignore: cast_nullable_to_non_nullable
-              as int?,
-      jewel2: jewel2 == freezed
-          ? _value.jewel2
-          : jewel2 // ignore: cast_nullable_to_non_nullable
-              as int?,
-      jewel3: jewel3 == freezed
-          ? _value.jewel3
-          : jewel3 // ignore: cast_nullable_to_non_nullable
-              as int?,
-      jewel4: jewel4 == freezed
-          ? _value.jewel4
-          : jewel4 // ignore: cast_nullable_to_non_nullable
-              as int?,
-      jewel5: jewel5 == freezed
-          ? _value.jewel5
-          : jewel5 // ignore: cast_nullable_to_non_nullable
-              as int?,
+      socketType: socketType == freezed
+          ? _value.socketType
+          : socketType // ignore: cast_nullable_to_non_nullable
+              as SocketType,
+      id: id == freezed
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as int,
+      image: image == freezed
+          ? _value.image
+          : image // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
@@ -95,13 +71,7 @@ abstract class _$$_SocketEntityCopyWith<$Res>
           _$_SocketEntity value, $Res Function(_$_SocketEntity) then) =
       __$$_SocketEntityCopyWithImpl<$Res>;
   @override
-  $Res call(
-      {int? sockets,
-      int? jewel1,
-      int? jewel2,
-      int? jewel3,
-      int? jewel4,
-      int? jewel5});
+  $Res call({SocketType socketType, int id, String image});
 }
 
 /// @nodoc
@@ -117,38 +87,23 @@ class __$$_SocketEntityCopyWithImpl<$Res>
 
   @override
   $Res call({
-    Object? sockets = freezed,
-    Object? jewel1 = freezed,
-    Object? jewel2 = freezed,
-    Object? jewel3 = freezed,
-    Object? jewel4 = freezed,
-    Object? jewel5 = freezed,
+    Object? socketType = freezed,
+    Object? id = freezed,
+    Object? image = freezed,
   }) {
     return _then(_$_SocketEntity(
-      sockets: sockets == freezed
-          ? _value.sockets
-          : sockets // ignore: cast_nullable_to_non_nullable
-              as int?,
-      jewel1: jewel1 == freezed
-          ? _value.jewel1
-          : jewel1 // ignore: cast_nullable_to_non_nullable
-              as int?,
-      jewel2: jewel2 == freezed
-          ? _value.jewel2
-          : jewel2 // ignore: cast_nullable_to_non_nullable
-              as int?,
-      jewel3: jewel3 == freezed
-          ? _value.jewel3
-          : jewel3 // ignore: cast_nullable_to_non_nullable
-              as int?,
-      jewel4: jewel4 == freezed
-          ? _value.jewel4
-          : jewel4 // ignore: cast_nullable_to_non_nullable
-              as int?,
-      jewel5: jewel5 == freezed
-          ? _value.jewel5
-          : jewel5 // ignore: cast_nullable_to_non_nullable
-              as int?,
+      socketType: socketType == freezed
+          ? _value.socketType
+          : socketType // ignore: cast_nullable_to_non_nullable
+              as SocketType,
+      id: id == freezed
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as int,
+      image: image == freezed
+          ? _value.image
+          : image // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
@@ -157,29 +112,18 @@ class __$$_SocketEntityCopyWithImpl<$Res>
 
 class _$_SocketEntity implements _SocketEntity {
   const _$_SocketEntity(
-      {this.sockets,
-      this.jewel1,
-      this.jewel2,
-      this.jewel3,
-      this.jewel4,
-      this.jewel5});
+      {required this.socketType, required this.id, required this.image});
 
   @override
-  final int? sockets;
+  final SocketType socketType;
   @override
-  final int? jewel1;
+  final int id;
   @override
-  final int? jewel2;
-  @override
-  final int? jewel3;
-  @override
-  final int? jewel4;
-  @override
-  final int? jewel5;
+  final String image;
 
   @override
   String toString() {
-    return 'SocketEntity(sockets: $sockets, jewel1: $jewel1, jewel2: $jewel2, jewel3: $jewel3, jewel4: $jewel4, jewel5: $jewel5)';
+    return 'SocketEntity(socketType: $socketType, id: $id, image: $image)';
   }
 
   @override
@@ -187,23 +131,18 @@ class _$_SocketEntity implements _SocketEntity {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_SocketEntity &&
-            const DeepCollectionEquality().equals(other.sockets, sockets) &&
-            const DeepCollectionEquality().equals(other.jewel1, jewel1) &&
-            const DeepCollectionEquality().equals(other.jewel2, jewel2) &&
-            const DeepCollectionEquality().equals(other.jewel3, jewel3) &&
-            const DeepCollectionEquality().equals(other.jewel4, jewel4) &&
-            const DeepCollectionEquality().equals(other.jewel5, jewel5));
+            const DeepCollectionEquality()
+                .equals(other.socketType, socketType) &&
+            const DeepCollectionEquality().equals(other.id, id) &&
+            const DeepCollectionEquality().equals(other.image, image));
   }
 
   @override
   int get hashCode => Object.hash(
       runtimeType,
-      const DeepCollectionEquality().hash(sockets),
-      const DeepCollectionEquality().hash(jewel1),
-      const DeepCollectionEquality().hash(jewel2),
-      const DeepCollectionEquality().hash(jewel3),
-      const DeepCollectionEquality().hash(jewel4),
-      const DeepCollectionEquality().hash(jewel5));
+      const DeepCollectionEquality().hash(socketType),
+      const DeepCollectionEquality().hash(id),
+      const DeepCollectionEquality().hash(image));
 
   @JsonKey(ignore: true)
   @override
@@ -213,25 +152,16 @@ class _$_SocketEntity implements _SocketEntity {
 
 abstract class _SocketEntity implements SocketEntity {
   const factory _SocketEntity(
-      {final int? sockets,
-      final int? jewel1,
-      final int? jewel2,
-      final int? jewel3,
-      final int? jewel4,
-      final int? jewel5}) = _$_SocketEntity;
+      {required final SocketType socketType,
+      required final int id,
+      required final String image}) = _$_SocketEntity;
 
   @override
-  int? get sockets;
+  SocketType get socketType;
   @override
-  int? get jewel1;
+  int get id;
   @override
-  int? get jewel2;
-  @override
-  int? get jewel3;
-  @override
-  int? get jewel4;
-  @override
-  int? get jewel5;
+  String get image;
   @override
   @JsonKey(ignore: true)
   _$$_SocketEntityCopyWith<_$_SocketEntity> get copyWith =>

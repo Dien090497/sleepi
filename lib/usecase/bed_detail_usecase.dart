@@ -10,7 +10,7 @@ class BedDetailUseCase extends UseCase<BedDetail, int> {
   BedDetailUseCase(this._iUserRepository);
 
   @override
-  Future<Either<Failure, BedDetail>> call(params) {
+  Future<Either<FailureMessage, BedDetail>> call(params) {
     return _iUserRepository.bedDetail(params);
   }
 }

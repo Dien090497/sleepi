@@ -11,6 +11,7 @@ import 'package:slee_fi/models/lucky_box/lucky_box.dart';
 import 'package:slee_fi/models/swap_token_to_wallet_response/swap_token_to_wallet_response.dart';
 import 'package:slee_fi/models/token_spending/token_spending.dart';
 import 'package:slee_fi/models/withdraw_history_response/withdraw_history_response.dart';
+import 'package:slee_fi/schema/add_jewel_schema/add_jewel_schema.dart';
 import 'package:slee_fi/schema/change_password_schema/change_password_schema.dart';
 import 'package:slee_fi/schema/param_filler_item_fetch/filter_item_schema.dart';
 import 'package:slee_fi/schema/speed_up_lucky_box_schema/speed_up_lucky_box_schema.dart';
@@ -57,4 +58,12 @@ abstract class IUserRepository {
   Future<Either<FailureMessage, TrackingResultChartDataEntity>> fetchDataChart(ParamsGetDataChart paramsGetDataChart);
 
   Future<Either<FailureMessage, BedDetail>> bedDetail(int bedId);
+
+  Future<Either<FailureMessage, dynamic>> openSocket(int bedId);
+
+  Future<Either<FailureMessage, dynamic>> addJewel(AddJewelSchema addJewelSchema);
+
+  Future<Either<FailureMessage, dynamic>> removeJewel(AddJewelSchema addJewelSchema);
+
+
 }

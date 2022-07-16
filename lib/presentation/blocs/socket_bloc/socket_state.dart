@@ -9,5 +9,9 @@ class SocketState with _$SocketState {
 
   const factory SocketState.loading() = SocketStateLoading;
 
-  const factory SocketState.loaded(SocketEntity socketEntity) = SocketStateLoaded;
+  const factory SocketState.loaded(
+    List<SocketEntity> socketEntity,
+    int maxSocket,
+    int socketOpened,
+  ) = SocketStateLoaded;
 }

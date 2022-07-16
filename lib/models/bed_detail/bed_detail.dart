@@ -1,6 +1,5 @@
 
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:slee_fi/entities/socket_entity/socket_entity.dart';
 
 part 'bed_detail.g.dart';
 
@@ -43,11 +42,11 @@ class BedDetail {
   @JsonKey(name: 'bed_mint')
   final int bedMint;
 
-  final double efficiency;
-  final double luck;
-  final double bonus;
-  final double special;
-  final double resilience;
+  final String efficiency;
+  final String luck;
+  final String bonus;
+  final String special;
+  final String resilience;
 
   @JsonKey(name: 'created_at')
   final String createdAt;
@@ -58,21 +57,11 @@ class BedDetail {
   @JsonKey(name: 'token_id')
   final int tokenId;
 
-  final double durability;
-
-  @JsonKey(name: 'category_id')
-  final int categoryId;
-
+  final String durability;
   @JsonKey(name: 'is_lock')
   final int isLock;
 
   final String status;
-
-  final double? insurancePercent;
-
-  final double? startTime;
-
-  final double? endTime;
 
   int? socket;
 
@@ -109,12 +98,8 @@ class BedDetail {
       this.updatedAt,
       this.tokenId,
       this.durability,
-      this.categoryId,
       this.isLock,
       this.status,
-      this.insurancePercent,
-      this.startTime,
-      this.endTime,
       this.category);
 
   factory BedDetail.fromJson(Map<String, dynamic> json) =>
@@ -122,14 +107,7 @@ class BedDetail {
 
   Map<String, dynamic> toJson() => _$BedDetailToJson(this);
 
-  SocketEntity toSocketEntity() {
-    return SocketEntity(sockets: socket,
-        jewel1: jewelSlot1,
-        jewel2: jewelSlot2,
-        jewel3: jewelSlot3,
-        jewel4: jewelSlot4,
-        jewel5: jewelSlot5);
-  }
+
 }
 
 @JsonSerializable()
