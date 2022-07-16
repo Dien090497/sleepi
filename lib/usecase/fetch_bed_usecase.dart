@@ -17,11 +17,12 @@ class FetchBedUseCase extends UseCase<List<BedModel>, FetchBedParam> {
 }
 
 enum CategoryType {
-  item(3),
   bed(1),
-  jewel(2);
+  jewel(2),
+  item(3);
 
-  final int type;
+
+final int type;
 
   const CategoryType(this.type);
 }
