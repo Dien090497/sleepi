@@ -46,7 +46,7 @@ class _TrackingScreenState extends State<TrackingScreen> {
   late String timeAlarm = '';
   late double totalEarn = 0;
   late int time = 0;
-  late double earn = 0;
+  late double earn = 0.toDouble();
   late String fromRoute = R.bottomNavigation;
 
   @override
@@ -57,24 +57,27 @@ class _TrackingScreenState extends State<TrackingScreen> {
       DateTime wakeUp = DateTime.fromMillisecondsSinceEpoch(args.timeWakeUp);
       DateTime timStart = DateTime.fromMillisecondsSinceEpoch(args.timeStart);
       time = wakeUp.difference(timStart).inMinutes;
+
       earn =
           (DateTime.now().difference(timStart).inMinutes) * (totalEarn / time);
-      timeAlarm = '${wakeUp.hour}:${wakeUp.minute}';
+      timeAlarm =
+          '${wakeUp.hour < 10 ? '0${wakeUp.hour}' : wakeUp.hour}:${wakeUp.minute < 10 ? '0${wakeUp.minute}' : wakeUp.minute}';
       fromRoute = args.fromRoute;
-      setState(() {});
+      double x = totalEarn / time;
+      timer = Timer.periodic(
+        const Duration(seconds: 60),
+        (Timer timer) async {
+          if (earn < totalEarn && x > 0) {
+            earn += x;
+            setState(() {});
+          } else {
+            timer.cancel();
+          }
+        },
+      );
+      setState(() {
+      });
     });
-    double x = totalEarn / time;
-    timer = Timer.periodic(
-      const Duration(seconds: 60),
-      (Timer timer) async {
-        if (earn < totalEarn) {
-          earn += x;
-          setState(() {});
-        } else {
-          timer.cancel();
-        }
-      },
-    );
     super.initState();
   }
 
@@ -90,7 +93,7 @@ class _TrackingScreenState extends State<TrackingScreen> {
       onWillPop: () async {
         if (fromRoute == R.splash) {
           Navigator.pushNamedAndRemoveUntil(
-              context, R.bottomNavigation, (r) => false);
+              context, R.bottomNavigation, (r) => false,);
         }
         return true;
       },
@@ -99,7 +102,11 @@ class _TrackingScreenState extends State<TrackingScreen> {
         child: BlocConsumer<TrackingCubit, TrackingState>(
           listener: (context, state) {
             if (state is TrackingStatePosted) {
-              Navigator.pushNamed(context, R.preResult);
+              Navigator.pushReplacementNamed(
+                context,
+                R.preResult,
+                arguments: fromRoute
+              );
             }
             if (state is TrackingStateFail) {
               showMessageDialog(context, state.msg);

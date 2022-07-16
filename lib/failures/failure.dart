@@ -26,7 +26,9 @@ class FailureMessage extends Failure {
           return FailureMessage(error.first);
         }
       }
-    } catch (_) {}
+    } catch (_) {
+
+    }
     throw Exception(e);
   }
 
