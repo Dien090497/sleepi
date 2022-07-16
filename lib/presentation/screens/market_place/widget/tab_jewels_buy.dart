@@ -16,6 +16,7 @@ import 'package:slee_fi/presentation/screens/market_place/widget/filter_sheet.da
 import 'package:slee_fi/presentation/screens/market_place/widget/pop_up_jewel_market_place.dart';
 import 'package:slee_fi/presentation/screens/market_place/widget/tab_bar_filter.dart';
 import 'package:slee_fi/resources/resources.dart';
+import 'package:syncfusion_flutter_sliders/sliders.dart';
 
 import 'jewel_buy_widget.dart';
 
@@ -98,8 +99,13 @@ class _TabJewelsBuyState extends State<TabJewelsBuy> {
                           ],
                         },
                         sliders: {
-                          LocaleKeys.level.tr(): const FilterSliderValues(
-                              max: 5, min: 0, interval: 5),
+                          LocaleKeys.level.tr(): FilterSliderValues(
+                              max: 5,
+                              min: 0,
+                              value: SfRangeValues(
+                                cubit.params.minLevel,
+                                cubit.params.maxLevel,
+                              )),
                         },
                       );
                     },

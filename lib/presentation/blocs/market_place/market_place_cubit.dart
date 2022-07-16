@@ -7,6 +7,7 @@ import 'package:slee_fi/l10n/locale_keys.g.dart';
 import 'package:slee_fi/schema/market/market_schema.dart';
 import 'package:slee_fi/usecase/buy_nft_usecase.dart';
 import 'package:slee_fi/usecase/get_market_place_usecase.dart';
+import 'package:syncfusion_flutter_sliders/sliders.dart';
 
 import 'market_place_state.dart';
 
@@ -21,8 +22,6 @@ class MarketPlaceCubit extends Cubit<MarketPlaceState> {
       limit: limit,
       categoryId: 1,
       sortPrice: "LowPrice",
-      level: null,
-      bedMint: 0,
       type: [],
       classNft: [],
       quality: []);
@@ -51,13 +50,7 @@ class MarketPlaceCubit extends Cubit<MarketPlaceState> {
 
   clearFilter() {
     page = 1;
-    params = params.copyWith(
-        page: page,
-        level: null,
-        bedMint: 0,
-        type: [],
-        classNft: [],
-        quality: []);
+    params = params.copyWith(page: page, type: [], classNft: [], quality: []);
     getMarketPlace(params);
   }
 
@@ -115,7 +108,7 @@ class MarketPlaceCubit extends Cubit<MarketPlaceState> {
   }
 
   Future<void> filter(Map<String, List<String>> listSelected,
-      Map<String, double> listSlider) async {
+      Map<String, SfRangeValues> listSlider) async {
     listSelected.forEach((key, value) {
       if (key == LocaleKeys.type.tr()) {
         params = params.copyWith(
@@ -135,14 +128,11 @@ class MarketPlaceCubit extends Cubit<MarketPlaceState> {
     });
     listSlider.forEach((key, value) {
       if (key == LocaleKeys.level.tr()) {
-        params = params.copyWith(
-          level: value > 0 ? value.toInt() : 0,
-        );
+        params = params.copyWith(minLevel: value.start, maxLevel: value.end);
       }
       if (key == LocaleKeys.mint.tr()) {
-        params = params.copyWith(
-          bedMint: value > 0 ? value.toInt() : 0,
-        );
+        params =
+            params.copyWith(minBedMint: value.start, maxBedMint: value.end);
       }
     });
     page = 1;

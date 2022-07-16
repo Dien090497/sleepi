@@ -383,8 +383,6 @@ class _TradeScreenState extends State<TradeScreen> {
                                                 tokens: Const.tokens,
                                                 onChange: (selectItem) {
                                                   setState(() {
-                                                    'run to set default value start'
-                                                        .log;
                                                     if (selectItem["value"] ==
                                                         Const.tokens[indexTo]
                                                             ['address']) {

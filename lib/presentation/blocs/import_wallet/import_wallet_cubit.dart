@@ -1,7 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:slee_fi/common/enum/enum.dart';
-import 'package:slee_fi/common/extensions/string_x.dart';
 import 'package:slee_fi/di/injector.dart';
 import 'package:slee_fi/l10n/locale_keys.g.dart';
 import 'package:slee_fi/schema/verify_schema/verify_schema.dart';
@@ -104,7 +103,6 @@ class ImportWalletCubit extends Cubit<ImportWalletState> {
   Future _getUserEmail() async {
     final result = await _currentUserUC.call(NoParams());
     result.fold((l) {
-      'error get local email $l'.log;
     }, (r) {
       userEmail = r.email;
     });
