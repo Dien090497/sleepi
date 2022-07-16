@@ -42,8 +42,8 @@ import 'package:slee_fi/schema/speed_up_lucky_box_schema/speed_up_lucky_box_sche
 import 'package:slee_fi/schema/stacking_schema/stacking_schema.dart';
 import 'package:slee_fi/schema/verify_schema/verify_schema.dart';
 import 'package:slee_fi/schema/verify_user_schema/verify_user_schema.dart';
-import 'package:slee_fi/schema/white_draw_nft_schema/whit_draw_nft_schema.dart';
 import 'package:slee_fi/schema/white_draw_token_schema/whit_draw_token_schema.dart';
+import 'package:slee_fi/schema/with_draw_nft_schema/with_draw_nft_schema.dart';
 
 part 'auth_datasource.g.dart';
 
@@ -157,7 +157,7 @@ abstract class AuthDataSource {
       @Query('contractAddress') String contractAddress);
 
   @POST('/withdraw/nft')
-  Future<dynamic> withdrawNFT(@Body() WhitDrawNFTSchema whitDrawNFTSchema);
+  Future<dynamic> withdrawNFT(@Body() WithDrawNFTSchema whitDrawNFTSchema);
 
   /// market
   @POST('/market-place/buy-nft')

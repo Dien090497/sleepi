@@ -66,7 +66,8 @@ class WalletImplementation extends IWalletRepository {
         final resultResponse = await _authDataSource.verifyUser(schema);
         if (resultResponse.status) {
           /// Store Wallet
-
+          await _secureStorage.saveSignatureMessage(signatureMessage: signature);
+          await _secureStorage.saveSigner(signer: ethereumAddress.hexEip55);
           final model = WalletIsarModel(
             mnemonic: mnemonic,
             privateKey: privateKey,
@@ -395,6 +396,8 @@ class WalletImplementation extends IWalletRepository {
         try {
           final result = await _authDataSource.verifyUser(schema);
           if (result.status) {
+           await _secureStorage.saveSignatureMessage(signatureMessage: signature);
+           await _secureStorage.saveSigner(signer: ethereumAddress.hexEip55);
             return Right(result.status);
           } else {
             return const Left(FailureMessage(LocaleKeys.wallet_already));
