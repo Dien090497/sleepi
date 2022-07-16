@@ -32,6 +32,7 @@ class BoxInfoWidget extends StatelessWidget {
               textStyle: TextStyles.lightWhite14,
             ),
             const SizedBox(height: 16),
+            if(bed.startTime!=null)
             Text(
               '${LocaleKeys.time.tr()}: ${bed.startTime!.removeTrailingZeros}h - ${bed.endTime!.removeTrailingZeros}h',
               style: TextStyles.lightGrey14,
