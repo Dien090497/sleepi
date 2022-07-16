@@ -54,4 +54,6 @@ abstract class IUserRepository {
   Future<Either<FailureMessage, dynamic>> speedUpLuckyBox(SpeedUpLuckyBoxSchema speedUpLuckyBoxSchema);
 
   Future<Either<FailureMessage, TrackingResultChartDataEntity>> fetchDataChart(ParamsGetDataChart paramsGetDataChart);
+
+  Future<Either<FailureMessage, dynamic>> bedDetail(int bedId);
 }
