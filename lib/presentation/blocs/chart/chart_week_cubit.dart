@@ -84,11 +84,31 @@ class ChartWeekCubit extends Cubit<ChartWeekState> {
         nextWeekLastDate = DateTime(
             DateTime.now().year, DateTime.now().month, DateTime.now().day);
       }
-      if (nextWeekFirstDate.isBefore(currentState.lastAllowedDate) &&
-          nextWeekLastDate.isBefore(currentState.lastAllowedDate)) {
-        final nextWeek = DatePeriod(nextWeekFirstDate, nextWeekLastDate);
-        emit(currentState.copyWith(week: nextWeek));
-      } else {}
+      ParamsGetDataChart params = ParamsGetDataChart(
+        fdate: dateTimeUtils.convertDateTimeWithType(
+            dateTime: nextWeekFirstDate, type: 'yyyy-MM-dd'),
+        type: 'week',
+        tdate: dateTimeUtils.convertDateTimeWithType(
+            dateTime: nextWeekLastDate, type: 'yyyy-MM-dd'),
+      );
+      final result = await  _fetchDataChartUseCase.call(params);
+      result.fold((l) {
+      }, (result) {
+        listChart.clear();
+        getDataChart(data: result.slftChart, trackingResultChartData: result, typeChart: TypeChart.slftChart);
+        getDataChart(data: result.sleepScoreChart, trackingResultChartData: result, typeChart: TypeChart.sleepScoreChart);
+        getDataChart(data: result.bedTimeChart, trackingResultChartData: result, typeChart: TypeChart.bedTimeChart);
+        getDataChart(data: result.sleepOnsetChart, trackingResultChartData: result, typeChart: TypeChart.sleepOnsetChart);
+        getDataChart(data: result.wokeUpChart, trackingResultChartData: result, typeChart: TypeChart.wokeUpChart);
+        getDataChart(data: result.sleepDurationChart, trackingResultChartData: result, typeChart: TypeChart.sleepDurationChart);
+        getDataChart(data: result.timeInBedChart, trackingResultChartData: result, typeChart: TypeChart.timeInBedChart);
+        getDataChart(data: result.nocturalAwakenChart, trackingResultChartData: result, typeChart: TypeChart.nocturalAwakenChart);
+        if (nextWeekFirstDate.isBefore(currentState.lastAllowedDate) &&
+            nextWeekLastDate.isBefore(currentState.lastAllowedDate)) {
+          final nextWeek = DatePeriod(nextWeekFirstDate, nextWeekLastDate);
+          emit(currentState.copyWith(week: nextWeek, dataChart: listChart));
+        } else {}
+      });
     }
   }
 
@@ -109,7 +129,6 @@ class ChartWeekCubit extends Cubit<ChartWeekState> {
       final result = await  _fetchDataChartUseCase.call(params);
       result.fold((l) {
       }, (result) {
-
         listChart.clear();
         getDataChart(data: result.slftChart, trackingResultChartData: result, typeChart: TypeChart.slftChart);
         getDataChart(data: result.sleepScoreChart, trackingResultChartData: result, typeChart: TypeChart.sleepScoreChart);
@@ -119,8 +138,6 @@ class ChartWeekCubit extends Cubit<ChartWeekState> {
         getDataChart(data: result.sleepDurationChart, trackingResultChartData: result, typeChart: TypeChart.sleepDurationChart);
         getDataChart(data: result.timeInBedChart, trackingResultChartData: result, typeChart: TypeChart.timeInBedChart);
         getDataChart(data: result.nocturalAwakenChart, trackingResultChartData: result, typeChart: TypeChart.nocturalAwakenChart);
-        //final res = dateTimeUtils.convertTime(timeStamp: result.slftChart?.first.t ?? 0);
-        print('ok123');
         if (prevWeekFirstDate.isAfter(currentState.firstAllowedDate) &&
             prevWeekLastDate.isAfter(currentState.firstAllowedDate)) {
           final nextWeek = DatePeriod(prevWeekFirstDate, prevWeekLastDate);

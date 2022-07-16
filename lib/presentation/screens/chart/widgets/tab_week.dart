@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_date_pickers/flutter_date_pickers.dart';
+import 'package:slee_fi/common/enum/enum.dart';
 import 'package:slee_fi/common/extensions/date_time_x.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
 import 'package:slee_fi/common/utils/date_time_utils.dart';
@@ -63,7 +64,7 @@ class TabWeek extends StatelessWidget {
                   padding: EdgeInsets.zero,
                 ),
                 const SizedBox(height: 12),
-                ChartStatisticShare(data: state.dataChart?.first, maxValue: 100,),
+                ChartStatisticShare(data: state.dataChart?.first, maxValue: 100, typeTimeChart: TypeTimeChart.chartWeek,),
                 const SizedBox(height: 40),
                 const ChartTitle(
                     title: LocaleKeys.average_sleep_score,
@@ -72,49 +73,49 @@ class TabWeek extends StatelessWidget {
                     textStyleResult: TextStyles.bold16Blue,
                     padding: EdgeInsets.zero),
                 const SizedBox(height: 12),
-                ChartStatisticShare(data: state.dataChart?[1], maxValue: 100,),
+                ChartStatisticShare(data: state.dataChart?[1], maxValue: 100, typeTimeChart: TypeTimeChart.chartWeek,),
                 const SizedBox(height: 40),
                 const ChartTitle(
                   title: LocaleKeys.bed_time,
                   textStyleTitle: TextStyles.bold16LightWhite,
                 ),
                 const SizedBox(height: 12),
-                ChartStatisticShare(data: state.dataChart?[2], maxValue: 300,),
+                ChartStatisticShare(data: state.dataChart?[2], maxValue: 300, typeTimeChart: TypeTimeChart.chartWeek,),
                 const SizedBox(height: 40),
                 const ChartTitle(
                     title: LocaleKeys.sleep_onset_time,
                     textStyleTitle: TextStyles.bold16LightWhite,
                     padding: EdgeInsets.zero),
                 const SizedBox(height: 12),
-                ChartStatisticShare(data: state.dataChart?[3], maxValue: 300,),
+                ChartStatisticShare(data: state.dataChart?[3], maxValue: 300, typeTimeChart: TypeTimeChart.chartWeek,),
                 const SizedBox(height: 40),
                 const ChartTitle(
                     title: LocaleKeys.woke_up,
                     textStyleTitle: TextStyles.bold16LightWhite,
                     padding: EdgeInsets.zero),
                 const SizedBox(height: 12),
-                ChartStatisticShare(data: state.dataChart?[4], maxValue: 300,),
+                ChartStatisticShare(data: state.dataChart?[4], maxValue: 300, typeTimeChart: TypeTimeChart.chartWeek,),
                 const SizedBox(height: 40),
                 const ChartTitle(
                     title: LocaleKeys.sleep_duration,
                     textStyleTitle: TextStyles.bold16LightWhite,
                     padding: EdgeInsets.zero),
                 const SizedBox(height: 4),
-                ChartStatisticShare(data: state.dataChart?[5], maxValue: 300,),
+                ChartStatisticShare(data: state.dataChart?[5], maxValue: 300, typeTimeChart: TypeTimeChart.chartWeek,),
                 const SizedBox(height: 16),
                 const ChartTitle(
                     title: LocaleKeys.time_in_bed,
                     textStyleTitle: TextStyles.bold16LightWhite,
                     padding: EdgeInsets.zero),
                 const SizedBox(height: 12),
-                ChartStatisticShare(data: state.dataChart?[6], maxValue: 300,),
+                ChartStatisticShare(data: state.dataChart?[6], maxValue: 300, typeTimeChart: TypeTimeChart.chartWeek,),
                 const SizedBox(height: 40),
                 const ChartTitle(
                     title: LocaleKeys.nocturnal_awakenings,
                     textStyleTitle: TextStyles.bold16LightWhite,
                     padding: EdgeInsets.zero),
                 const SizedBox(height: 12),
-                ChartStatisticShare(data: state.dataChart?[7], maxValue: 300,),
+                ChartStatisticShare(data: state.dataChart?[7], maxValue: 300, typeTimeChart: TypeTimeChart.chartWeek,),
               ],
             );
           }
