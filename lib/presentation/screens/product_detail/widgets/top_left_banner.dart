@@ -20,7 +20,7 @@ class TopLeftBanner extends StatelessWidget {
         color: backgroundColor ?? textColor!.withOpacity(0.1),
         padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 40),
         child: SFText(
-          keyText: text.tr(),
+          keyText: text,
           style: TextStyles.red12W700.copyWith(color: textColor),
         ),
       ),
