@@ -13,7 +13,7 @@ class ChartWeekState with _$ChartWeekState {
     required DatePeriod week,
     required DateTime firstAllowedDate,
     required DateTime lastAllowedDate,
-    required List<DrawChartEntity> dataChart,
+    List<DrawChartEntity>? dataChart,
   }) = ChartWeekLoaded;
 
   const factory ChartWeekState.error(String msg) = ChartWeekError;
