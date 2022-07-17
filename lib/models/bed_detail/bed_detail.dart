@@ -1,5 +1,5 @@
-
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:slee_fi/entities/jewel_entity/jewel_entity.dart';
 
 part 'bed_detail.g.dart';
 
@@ -64,16 +64,12 @@ class BedDetail {
   final String status;
 
   int? socket;
-
-  int? itemId;
-  int? jewelSlot1;
-  int? jewelSlot2;
-  int? jewelSlot3;
-  int? jewelSlot4;
-  int? jewelSlot5;
+  final List<JewelEntity> jewels;
+  dynamic itemId;
   final Category category;
 
-  BedDetail(this.id,
+  BedDetail(
+      this.id,
       this.nftId,
       this.nftName,
       this.image,
@@ -100,14 +96,14 @@ class BedDetail {
       this.durability,
       this.isLock,
       this.status,
-      this.category);
+      this.category, this.jewels);
 
-  factory BedDetail.fromJson(Map<String, dynamic> json) =>
-      _$BedDetailFromJson(json);
+  factory BedDetail.fromJson(Map<String, dynamic> json) {
+    print('json is   $json');
+    return _$BedDetailFromJson(json);
+  }
 
   Map<String, dynamic> toJson() => _$BedDetailToJson(this);
-
-
 }
 
 @JsonSerializable()
@@ -121,5 +117,4 @@ class Category {
       _$CategoryFromJson(json);
 
   Map<String, dynamic> toJson() => _$CategoryToJson(this);
-
 }

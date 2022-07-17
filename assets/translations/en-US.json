@@ -448,5 +448,8 @@
   "do_you_want_open_the_lucky_box": "Do you want to open the lucky box with {} AVAX",
   "do_you_really_want_to_change": "Do you really want to change?",
   "the_language_setting_has_been_updated": "The language setting has been updated",
-  "white": "White"
+  "white": "White",
+  "do_you_want_open_the_socket": "Do you want to open the socket with 100 SLFT",
+  "remove": "Remove",
+  "add_jewel": "Add Jewel"
 }

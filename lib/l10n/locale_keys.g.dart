@@ -92,8 +92,11 @@ abstract class  LocaleKeys {
   static const rent = 'rent';
   static const filter = 'filter';
   static const short_bed = 'short_bed';
+  static const short = 'short';
   static const long_bed = 'long_bed';
+  static const long = 'long';
   static const middle_bed = 'middle_bed';
+  static const middle = 'middle';
   static const flexible = 'flexible';
   static const mint = 'mint';
   static const level = 'level';
@@ -346,7 +349,6 @@ abstract class  LocaleKeys {
   static const my_balance = 'my_balance';
   static const high_price = 'high_price';
   static const level_up_to = 'level_up_to';
-  static const middle = 'middle';
   static const base = 'base';
   static const german = 'german';
   static const french = 'french';
@@ -359,8 +361,6 @@ abstract class  LocaleKeys {
   static const rare = 'rare';
   static const epic = 'epic';
   static const legendary = 'legendary';
-  static const short = 'short';
-  static const long = 'long';
   static const jewel = 'jewel';
   static const withdraw_token = 'withdraw_token';
   static const deposit_token = 'deposit_token';
@@ -451,5 +451,8 @@ abstract class  LocaleKeys {
   static const do_you_really_want_to_change = 'do_you_really_want_to_change';
   static const the_language_setting_has_been_updated = 'the_language_setting_has_been_updated';
   static const white = 'white';
+  static const do_you_want_open_the_socket = 'do_you_want_open_the_socket';
+  static const remove = 'remove';
+  static const add_jewel = 'add_jewel';
 
 }

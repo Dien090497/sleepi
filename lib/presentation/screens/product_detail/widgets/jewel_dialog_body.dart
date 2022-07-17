@@ -7,6 +7,7 @@ import 'package:slee_fi/common/style/text_styles.dart';
 import 'package:slee_fi/common/widgets/sf_buttons.dart';
 import 'package:slee_fi/common/widgets/sf_card.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
+import 'package:slee_fi/entities/jewel_entity/jewel_entity.dart';
 import 'package:slee_fi/l10n/locale_keys.g.dart';
 import 'package:slee_fi/models/bed_model/beb_model.dart';
 
@@ -15,12 +16,16 @@ class JewelDialogBody extends StatelessWidget {
       {Key? key,
       required this.onSellTap,
       required this.onTransferTap,
-      required this.jewel})
+      required this.jewel,
+      this.textOnTransfer,
+      this.textOnSell})
       : super(key: key);
 
-  final BedModel jewel;
+  final JewelEntity jewel;
   final VoidCallback onSellTap;
   final VoidCallback onTransferTap;
+  final String? textOnTransfer;
+  final String? textOnSell;
 
   @override
   Widget build(BuildContext context) {
@@ -140,7 +145,7 @@ class JewelDialogBody extends StatelessWidget {
               children: [
                 Expanded(
                     child: SFButton(
-                  text: LocaleKeys.sell,
+                  text: textOnSell ?? LocaleKeys.sell,
                   onPressed: onSellTap,
                   textStyle: TextStyles.lightGrey16,
                   color: AppColors.whiteOpacity5,
@@ -149,7 +154,7 @@ class JewelDialogBody extends StatelessWidget {
                 const SizedBox(width: 12),
                 Expanded(
                     child: SFButton(
-                  text: LocaleKeys.transfer,
+                  text: textOnTransfer ?? LocaleKeys.transfer,
                   onPressed: onTransferTap,
                   textStyle: TextStyles.white16,
                   gradient: AppColors.blueGradient,

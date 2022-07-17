@@ -34,13 +34,15 @@ class SFImageBorder extends StatelessWidget {
           color: Colors.white.withOpacity(0.05),
           borderRadius: BorderRadius.circular(radius),
         ),
-        child: icon.startsWith('http')
-            ? CachedImage(image: icon, boxFit: BoxFit.contain)
-            : SFIcon(
-                icon,
-                color: iconColor,
-                fit: BoxFit.contain,
-              ),
+        child: icon.isEmpty
+            ? const SizedBox()
+            : icon.startsWith('http')
+                ? CachedImage(image: icon, boxFit: BoxFit.contain)
+                : SFIcon(
+                    icon,
+                    color: iconColor,
+                    fit: BoxFit.contain,
+                  ),
       ),
     );
   }

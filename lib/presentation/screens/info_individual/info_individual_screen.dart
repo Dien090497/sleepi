@@ -6,6 +6,7 @@ import 'package:slee_fi/common/style/text_styles.dart';
 import 'package:slee_fi/common/widgets/background_widget.dart';
 import 'package:slee_fi/common/widgets/sf_button_outlined.dart';
 import 'package:slee_fi/common/widgets/sf_buttons.dart';
+import 'package:slee_fi/common/widgets/sf_dialog.dart';
 import 'package:slee_fi/common/widgets/sf_icon.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
 import 'package:slee_fi/common/widgets/topbar_common.dart';
@@ -20,7 +21,7 @@ import 'package:slee_fi/presentation/screens/info_individual/widget/bottom_bar.d
 import 'package:slee_fi/presentation/screens/info_individual/widget/bottom_bar_market_place.dart';
 import 'package:slee_fi/presentation/screens/info_individual/widget/box_info_widget.dart';
 import 'package:slee_fi/presentation/screens/info_individual/widget/individual_refresher.dart';
-import 'package:slee_fi/presentation/screens/info_individual/widget/socket.dart';
+import 'package:slee_fi/presentation/screens/info_individual/widget/socket_component.dart';
 
 class InfoIndividualParams {
   final bool? buy;
@@ -73,7 +74,7 @@ class InfoIndividualScreen extends StatelessWidget {
                                       const EdgeInsets.symmetric(vertical: 24),
                                   child: SFIcon(state.bed.image),
                                 ),
-                                Socket(
+                                SocketComponent(
                                   bedId: state.bed.id,
                                   level: state.bed.level,
                                 ),
@@ -164,5 +165,9 @@ class InfoIndividualScreen extends StatelessWidget {
         ],
       ),
     );
+  }
+
+  _showDialogOpenSocket(BuildContext context) {
+    showCustomDialog(context, children: []);
   }
 }

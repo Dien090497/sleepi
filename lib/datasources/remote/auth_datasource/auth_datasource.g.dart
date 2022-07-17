@@ -657,7 +657,7 @@ class _AuthDataSource implements AuthDataSource {
   @override
   Future<dynamic> openSocket(bedId) async {
     const _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{r'bedId ': bedId};
+    final queryParameters = <String, dynamic>{r'bedId': bedId};
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
     final _result = await _dio.fetch(_setStreamType<dynamic>(
@@ -677,7 +677,7 @@ class _AuthDataSource implements AuthDataSource {
     final _data = <String, dynamic>{};
     _data.addAll(addJewelSchema.toJson());
     final _result = await _dio.fetch(_setStreamType<dynamic>(
-        Options(method: 'POST', headers: _headers, extra: _extra)
+        Options(method: 'PUT', headers: _headers, extra: _extra)
             .compose(_dio.options, '/nft-attributes/add-jewels',
                 queryParameters: queryParameters, data: _data)
             .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
@@ -693,7 +693,7 @@ class _AuthDataSource implements AuthDataSource {
     final _data = <String, dynamic>{};
     _data.addAll(addJewelSchema.toJson());
     final _result = await _dio.fetch(_setStreamType<dynamic>(
-        Options(method: 'POST', headers: _headers, extra: _extra)
+        Options(method: 'PUT', headers: _headers, extra: _extra)
             .compose(_dio.options, '/nft-attributes/remove-jewels',
                 queryParameters: queryParameters, data: _data)
             .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
