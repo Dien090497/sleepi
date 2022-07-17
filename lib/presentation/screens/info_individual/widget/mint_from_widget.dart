@@ -46,6 +46,7 @@ class MintFromWidget extends StatelessWidget {
             count: numbers,
             isScroll: false,
             childAspectRatio: 9 / 10,
+            physics: const NeverScrollableScrollPhysics(),
             itemBuilder: (context, i) {
               return ItemBed(
                   id: randomUtils.randomId(),
