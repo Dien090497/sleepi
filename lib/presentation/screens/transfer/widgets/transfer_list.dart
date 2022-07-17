@@ -4,6 +4,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:slee_fi/common/enum/enum.dart';
 import 'package:slee_fi/common/extensions/num_ext.dart';
+import 'package:slee_fi/common/routes/app_routes.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
 import 'package:slee_fi/common/widgets/sf_alert_dialog.dart';
@@ -14,18 +15,23 @@ import 'package:slee_fi/common/widgets/sf_textfield_text_button.dart';
 import 'package:slee_fi/entities/token/token_entity.dart';
 import 'package:slee_fi/l10n/locale_keys.g.dart';
 import 'package:slee_fi/presentation/blocs/transfer_spending/transfer_cubit.dart';
-import 'package:slee_fi/presentation/blocs/transfer_spending/transfer_spending_state.dart';
+import 'package:slee_fi/presentation/blocs/transfer_spending/transfer_state.dart';
+import 'package:slee_fi/presentation/blocs/user_bloc/user_bloc.dart';
+import 'package:slee_fi/presentation/blocs/user_bloc/user_state.dart';
+import 'package:slee_fi/presentation/blocs/wallet/wallet_cubit.dart';
+import 'package:slee_fi/presentation/blocs/wallet/wallet_state.dart';
 import 'package:slee_fi/presentation/screens/transfer/widgets/asset_tile.dart';
 import 'package:slee_fi/presentation/screens/transfer/widgets/pop_up_approve.dart';
 import 'package:slee_fi/presentation/screens/transfer/widgets/pop_up_confirm_transfer.dart';
 
 class TransferList extends StatefulWidget {
-  const TransferList(
-      {Key? key,
-      required this.tokenEntity,
-      required this.spendingToWallet,
-      required this.transferType})
-      : super(key: key);
+  const TransferList({
+    Key? key,
+    required this.tokenEntity,
+    required this.spendingToWallet,
+    required this.transferType,
+  }) : super(key: key);
+
   final TokenEntity tokenEntity;
   final bool spendingToWallet;
   final TransferType transferType;
@@ -45,59 +51,55 @@ class _TransferListState extends State<TransferList> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<TransferCubit, TransferSpendingState>(
+    return BlocConsumer<TransferCubit, TransferState>(
+      buildWhen: (prev, cur) => cur is TransferLoaded,
       listener: (context, state) {
-        if (state is TransferSpendingStateLoaded) {
+        if (state is TransferLoaded) {
           final cubit = context.read<TransferCubit>();
-          if (state.fee != null) {
-            final result = controller.text.toString().replaceAll(',', '.');
+          if (state.needApprove ?? false) {
+            showCustomAlertDialog(
+              context,
+              showClosed: false,
+              children: PopUpConfirmApprove(
+                onConfirm: () {
+                  cubit
+                      .approve(
+                          amount: 0,
+                          addressContract: widget.tokenEntity.address)
+                      .then((_) => Navigator.pop(context));
+                },
+                tokenName: widget.tokenEntity.symbol.toUpperCase(),
+              ),
+            );
+          } else if (!(state.needApprove ?? true)) {
+            final amount = double.parse(controller.text);
+            final userState = context.read<UserBloc>().state;
+
             showCustomAlertDialog(
               context,
               showClosed: false,
               children: PopUpConfirmTransfer(
-                onTranferToMainWallet: () {
-                  cubit.transferToMainWallet(
-                    result,
-                    widget.tokenEntity.symbol,
-                    widget.tokenEntity.address,
+                onConfirm: () {
+                  cubit.transfer(
+                    amount: amount,
+                    contractAddress: widget.tokenEntity.address,
+                    userId: (userState as UserLoaded).userInfoEntity.id,
+                    symbol: widget.tokenEntity.symbol,
                   );
                 },
                 spendingToWallet: widget.spendingToWallet,
-                fee: state.fee ?? '0.0025',
                 cubit: cubit,
-                amount: double.parse(result),
-                tokenName: widget.tokenEntity.symbol,
-                contractAddress: widget.tokenEntity.address,
+                amount: amount,
+                symbol: widget.tokenEntity.symbol,
+                tokenAddress: widget.tokenEntity.address,
               ),
             );
           }
-          if (state.transferSpendingEntity != null) {
-            if (state.transferSpendingEntity?.type == TokenToSpending.approve) {
-              showCustomAlertDialog(
-                context,
-                showClosed: false,
-                children: PopUpConfirmApprove(
-                  onConfirm: () {
-                    cubit
-                        .approve(
-                            amount: 0,
-                            addressContract: widget.tokenEntity.address)
-                        .then((_) => Navigator.pop(context));
-                  },
-                  tokenName: widget.tokenEntity.symbol.toUpperCase(),
-                ),
-              );
-            }
-            if (state.transferSpendingEntity?.type ==
-                TokenToSpending.spending) {
-              showSuccessfulDialog(context, LocaleKeys.successfull);
-            }
-          }
         }
-
-        if (state is TransferSpendingStateToWalletSuccess) {
-          Navigator.pop(context, true);
-          showSuccessfulDialog(context, null);
+        if (state is TransferSuccess) {
+          showSuccessfulDialog(context, null, onBackPress: () {
+            Navigator.popUntil(context, (r) => r.settings.name == R.wallet);
+          });
         }
       },
       builder: (context, state) {
@@ -138,7 +140,7 @@ class _TransferListState extends State<TransferList> {
                             widget.tokenEntity.balance.formatBalanceToken;
                       },
                     ),
-                    if (state is TransferSpendingStateError)
+                    if (state is TransferError)
                       SFText(
                         keyText: state.message,
                         style: TextStyles.red14,
@@ -159,14 +161,17 @@ class _TransferListState extends State<TransferList> {
                 width: double.infinity,
                 gradient: AppColors.gradientBlueButton,
                 onPressed: () {
-                  final amount =
-                      controller.text.toString().replaceAll(',', '.');
                   final cubit = context.read<TransferCubit>();
-                  cubit.estimateGas(widget.tokenEntity.address,
-                      amount: amount,
-                      transferType: widget.transferType,
-                      balance: widget.tokenEntity.balance,
-                      spendingToWallet: widget.spendingToWallet);
+
+                  final walletState = context.read<WalletCubit>().state;
+                  cubit.checkAllowance(
+                    amount: double.parse(controller.text),
+                    contractAddress: widget.tokenEntity.address,
+                    ownerAddress: (walletState as WalletStateLoaded)
+                        .walletInfoEntity
+                        .address,
+                    balance: widget.tokenEntity.balance,
+                  );
                 },
               ),
             ],

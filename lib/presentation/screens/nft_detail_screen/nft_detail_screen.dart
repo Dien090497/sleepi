@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:pull_to_refresh/pull_to_refresh.dart';
+import 'package:slee_fi/common/extensions/num_ext.dart';
 import 'package:slee_fi/common/extensions/string_x.dart';
 import 'package:slee_fi/common/routes/app_routes.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
@@ -26,6 +26,7 @@ import 'package:slee_fi/presentation/blocs/user_bloc/user_bloc.dart';
 import 'package:slee_fi/presentation/blocs/user_bloc/user_state.dart';
 import 'package:slee_fi/presentation/blocs/wallet/wallet_cubit.dart';
 import 'package:slee_fi/presentation/blocs/wallet/wallet_state.dart';
+import 'package:slee_fi/presentation/screens/nft_detail_screen/widget/nft_detail_refresher.dart';
 import 'package:slee_fi/presentation/screens/nft_detail_screen/widget/nft_pop_up_transfer.dart';
 import 'package:slee_fi/presentation/screens/nft_detail_screen/widget/transfer_nft_widget.dart';
 import 'package:slee_fi/presentation/screens/passcode/passcode_screen.dart';
@@ -45,21 +46,8 @@ class NFTDetailArguments {
   NFTDetailArguments(this.tokenEntity, this.walletCubit);
 }
 
-class NFTDetailScreen extends StatefulWidget {
+class NFTDetailScreen extends StatelessWidget {
   const NFTDetailScreen({Key? key}) : super(key: key);
-
-  @override
-  State<NFTDetailScreen> createState() => _NFTDetailScreenState();
-}
-
-class _NFTDetailScreenState extends State<NFTDetailScreen> {
-  final refreshController = RefreshController();
-
-  @override
-  void dispose() {
-    refreshController.dispose();
-    super.dispose();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -117,7 +105,8 @@ class _NFTDetailScreenState extends State<NFTDetailScreen> {
                       SFIcon(token.icon),
                       const SizedBox(height: 16.0),
                       SFText(
-                        keyText: "${token.balance} ${token.displayName}",
+                        keyText:
+                            "${token.balance.removeTrailingZeros} ${token.displayName}",
                         style: TextStyles.bold30White,
                         textAlign: TextAlign.center,
                       ),
@@ -208,22 +197,7 @@ class _NFTDetailScreenState extends State<NFTDetailScreen> {
                         ),
                     ];
 
-                    final nftCubit = context.read<NftDetailCubit>();
-
-                    return SmartRefresher(
-                      controller: refreshController,
-                      enablePullUp: state is NftDetailLoaded && state.hasMore,
-                      enablePullDown: state is NftDetailLoaded,
-                      onRefresh: () {
-                        nftCubit.refresh().then((_) {
-                          refreshController.refreshCompleted();
-                        });
-                      },
-                      onLoading: () {
-                        nftCubit.loadMore().then((_) {
-                          refreshController.loadComplete();
-                        });
-                      },
+                    return NftDetailRefresher(
                       child: ListView.builder(
                         itemCount: children.length,
                         shrinkWrap: true,

@@ -9,7 +9,7 @@ import 'package:slee_fi/common/widgets/sf_app_bar.dart';
 import 'package:slee_fi/entities/token/token_entity.dart';
 import 'package:slee_fi/l10n/locale_keys.g.dart';
 import 'package:slee_fi/presentation/blocs/transfer_spending/transfer_cubit.dart';
-import 'package:slee_fi/presentation/blocs/transfer_spending/transfer_spending_state.dart';
+import 'package:slee_fi/presentation/blocs/transfer_spending/transfer_state.dart';
 import 'package:slee_fi/presentation/screens/transfer/widgets/transfer_list.dart';
 import 'package:slee_fi/presentation/screens/transfer/widgets/transfer_widget.dart';
 
@@ -31,7 +31,7 @@ class TransferScreen extends StatelessWidget {
         ModalRoute.of(context)?.settings.arguments as TransferScreenArg;
 
     return BlocProvider(
-      create: (_) => TransferCubit(),
+      create: (_) => TransferCubit(!args.fromSpendingToWallet),
       child: Stack(
         children: [
           BackgroundWidget(
@@ -45,7 +45,7 @@ class TransferScreen extends StatelessWidget {
               child: SafeArea(
                 child: Column(
                   children: [
-                    TransferWidget(swapText: args.fromSpendingToWallet),
+                    const TransferWidget(),
                     const SizedBox(height: 24),
                     Expanded(
                         child: TransferList(
@@ -58,10 +58,11 @@ class TransferScreen extends StatelessWidget {
               ),
             ),
           ),
-          BlocBuilder<TransferCubit, TransferSpendingState>(
-            builder: (context, state) => state is TransferSpendingStateLoading
-                ? const LoadingScreen()
-                : const SizedBox(),
+          BlocBuilder<TransferCubit, TransferState>(
+            builder: (context, state) =>
+                state is TransferLoaded && state.isLoading
+                    ? const LoadingScreen()
+                    : const SizedBox(),
           )
         ],
       ),

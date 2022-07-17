@@ -62,6 +62,7 @@ class _TabWalletDetailState extends State<TabWalletDetail> {
   }
 
   void _startTimer() {
+    if(!mounted) return;
     final walletCubit = BlocProvider.of<WalletCubit>(context);
     if (timer != null) {
       timer?.cancel();
