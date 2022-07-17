@@ -701,6 +701,38 @@ class _AuthDataSource implements AuthDataSource {
     return value;
   }
 
+  @override
+  Future<NftSell> nftSell(nftSellSchema) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    _data.addAll(nftSellSchema.toJson());
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<NftSell>(
+            Options(method: 'POST', headers: _headers, extra: _extra)
+                .compose(_dio.options, '/nft/sell',
+                    queryParameters: queryParameters, data: _data)
+                .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = NftSell.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<String> getTransactionFee() async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    final _result = await _dio.fetch<String>(_setStreamType<String>(
+        Options(method: 'GET', headers: _headers, extra: _extra)
+            .compose(_dio.options, '/nft/transaction-fee',
+                queryParameters: queryParameters, data: _data)
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = _result.data!;
+    return value;
+  }
+
   RequestOptions _setStreamType<T>(RequestOptions requestOptions) {
     if (T != dynamic &&
         !(requestOptions.responseType == ResponseType.bytes ||
