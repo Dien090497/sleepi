@@ -10,8 +10,8 @@ import 'package:slee_fi/common/widgets/sf_icon.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
 import 'package:slee_fi/entities/bed_entity/bed_entity.dart';
 import 'package:slee_fi/l10n/locale_keys.g.dart';
-import 'package:slee_fi/presentation/blocs/bottom_bar_infoIndividual/bottom_bar_infoIndividual_cubit.dart';
-import 'package:slee_fi/presentation/blocs/bottom_bar_infoIndividual/bottom_bar_infoIndividual_state.dart';
+import 'package:slee_fi/presentation/blocs/bottom_bar_infoIndividual/bottom_bar_infoindividual_state.dart';
+import 'package:slee_fi/presentation/blocs/bottom_bar_infoindividual/bottom_bar_infoindividual_cubit.dart';
 import 'package:slee_fi/presentation/screens/home/widgets/pop_up_repair.dart';
 import 'package:slee_fi/presentation/screens/home/widgets/pop_up_transfer.dart';
 import 'package:slee_fi/presentation/screens/info_individual/widget/pop_up_sell.dart';
@@ -80,7 +80,10 @@ class _BottomBarWidgetState extends State<BottomBarWidget> {
               listener: (context, state) {
                 if (state is BottomBarInfoIndividualLoaded) {
                   if (state.successTransfer) {
-                    showSuccessfulDialog(context, null);
+                    showSuccessfulDialog(context, null, onBackPress: () {
+                      Navigator.pushNamedAndRemoveUntil(
+                        context, R.bottomNavigation, (r) => false,);
+                    });
                   }
                 }
               },
@@ -150,13 +153,8 @@ class _BottomBarWidgetState extends State<BottomBarWidget> {
                       });
                       showCustomDialog(context, children: [
                         PopUpSell(
-                          time: 1,
-                          cost: 1,
-                          icon: Imgs.shortBed,
-                          level: 2,
-                          onCancel: () {},
-                          onConfirm: () {},
-                          className: LocaleKeys.middle,
+                          bedEntity: widget.bedEntity,
+                          cubit: cubit,
                         ),
                       ]).then((value) => setState(() {
                         setState(() {
