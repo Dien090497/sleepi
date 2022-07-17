@@ -42,10 +42,12 @@ class TransferList extends StatefulWidget {
 
 class _TransferListState extends State<TransferList> {
   final TextEditingController controller = TextEditingController();
+  final ValueNotifier<bool> isLoadingNotifier = ValueNotifier(false);
 
   @override
   void dispose() {
     controller.dispose();
+    isLoadingNotifier.dispose();
     super.dispose();
   }
 
@@ -62,18 +64,24 @@ class _TransferListState extends State<TransferList> {
               showClosed: false,
               children: PopUpConfirmApprove(
                 onConfirm: () {
+                  isLoadingNotifier.value = true;
                   cubit
                       .approve(
                           amount: 0,
                           addressContract: widget.tokenEntity.address)
-                      .then((_) => Navigator.pop(context));
+                      .then((_) {
+                    isLoadingNotifier.value = false;
+                    Navigator.pop(context);
+                  });
                 },
                 tokenName: widget.tokenEntity.symbol.toUpperCase(),
+                isLoadingNotifier: isLoadingNotifier,
               ),
             );
           } else if (!(state.needApprove ?? true)) {
             final amount = double.parse(controller.text);
             final userState = context.read<UserBloc>().state;
+            isLoadingNotifier.value = true;
 
             showCustomAlertDialog(
               context,
@@ -92,14 +100,19 @@ class _TransferListState extends State<TransferList> {
                 amount: amount,
                 symbol: widget.tokenEntity.symbol,
                 tokenAddress: widget.tokenEntity.address,
+                isLoadingNotifier: isLoadingNotifier,
               ),
             );
           }
         }
         if (state is TransferSuccess) {
           showSuccessfulDialog(context, null, onBackPress: () {
+            isLoadingNotifier.value = false;
             Navigator.popUntil(context, (r) => r.settings.name == R.wallet);
           });
+        }
+        if (state is TransferError) {
+          isLoadingNotifier.value = false;
         }
       },
       builder: (context, state) {
@@ -165,7 +178,7 @@ class _TransferListState extends State<TransferList> {
 
                   final walletState = context.read<WalletCubit>().state;
                   cubit.checkAllowance(
-                    amount: double.parse(controller.text),
+                    amountStr: controller.text,
                     contractAddress: widget.tokenEntity.address,
                     ownerAddress: (walletState as WalletStateLoaded)
                         .walletInfoEntity

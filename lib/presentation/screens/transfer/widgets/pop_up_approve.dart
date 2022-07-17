@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
+import 'package:slee_fi/common/widgets/loading_screen.dart';
 import 'package:slee_fi/common/widgets/sf_buttons.dart';
 import 'package:slee_fi/common/widgets/sf_card.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
@@ -11,10 +12,12 @@ class PopUpConfirmApprove extends StatelessWidget {
     Key? key,
     required this.tokenName,
     required this.onConfirm,
+    required this.isLoadingNotifier,
   }) : super(key: key);
 
   final VoidCallback onConfirm;
   final String tokenName;
+  final ValueNotifier<bool> isLoadingNotifier;
 
   @override
   Widget build(BuildContext context) {
@@ -102,19 +105,22 @@ class PopUpConfirmApprove extends StatelessWidget {
                   onPressed: () => Navigator.maybePop(context),
                 ),
               ),
-              const SizedBox(
-                width: 16.0,
-              ),
+              const SizedBox(width: 16.0),
               Expanded(
-                child: SFButton(
-                  text: LocaleKeys.confirm,
-                  textStyle: TextStyles.bold14LightWhite,
-                  width: double.infinity,
-                  gradient: AppColors.gradientBlueButton,
-                  onPressed: () {
-                    onConfirm();
-                  },
-                ),
+                child: ValueListenableBuilder<bool>(
+                    valueListenable: isLoadingNotifier,
+                    child: SFButton(
+                      text: LocaleKeys.confirm,
+                      textStyle: TextStyles.bold14LightWhite,
+                      width: double.infinity,
+                      gradient: AppColors.gradientBlueButton,
+                      onPressed: () {
+                        onConfirm();
+                      },
+                    ),
+                    builder: (context, isLoading, child) {
+                      return isLoading ? const LoadingIcon() : child!;
+                    }),
               ),
             ],
           )

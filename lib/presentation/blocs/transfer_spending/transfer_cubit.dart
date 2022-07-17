@@ -18,13 +18,21 @@ class TransferCubit extends Cubit<TransferState> {
   final _isTokenApprovedEnoughUC = getIt<IsTokenApprovedEnoughUseCase>();
 
   Future<void> checkAllowance({
-    required double amount,
+    required String amountStr,
     required String contractAddress,
     required String ownerAddress,
     required double balance,
   }) async {
     final currentState = state;
+
     if (currentState is TransferLoaded) {
+      if (amountStr.isEmpty) {
+        emit(const TransferState.error(LocaleKeys.this_field_is_required,
+            typeError: 'invalid_amount'));
+        emit(currentState);
+        return;
+      }
+      final amount = double.parse(amountStr);
       if (amount <= 0) {
         emit(const TransferState.error(LocaleKeys.amount_input_can_not_be_zero,
             typeError: 'amount_zero'));

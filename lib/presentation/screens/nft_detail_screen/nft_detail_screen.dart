@@ -257,6 +257,7 @@ class NFTDetailScreen extends StatelessWidget {
                     showClosed: false,
                     children: PopUpConfirmApprove(
                       tokenName: '${nft.symbol} #${nft.attribute!.tokenId!}',
+                      isLoadingNotifier: isLoadingNotifier,
                       onConfirm: () async {
                         isLoadingNotifier.value = true;
                         final approveRes =

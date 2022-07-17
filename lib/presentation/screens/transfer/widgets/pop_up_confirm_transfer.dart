@@ -1,9 +1,9 @@
 import 'package:dartz/dartz.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:slee_fi/common/contract_addresses/contract_addresses.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
+import 'package:slee_fi/common/widgets/loading_screen.dart';
 import 'package:slee_fi/common/widgets/sf_buttons.dart';
 import 'package:slee_fi/common/widgets/sf_card.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
@@ -11,8 +11,6 @@ import 'package:slee_fi/di/injector.dart';
 import 'package:slee_fi/l10n/locale_keys.g.dart';
 import 'package:slee_fi/presentation/blocs/transfer_spending/transfer_cubit.dart';
 import 'package:slee_fi/presentation/blocs/transfer_spending/transfer_state.dart';
-import 'package:slee_fi/presentation/blocs/user_bloc/user_bloc.dart';
-import 'package:slee_fi/presentation/blocs/user_bloc/user_state.dart';
 import 'package:slee_fi/usecase/estimate_gas_withdraw.dart';
 import 'package:slee_fi/usecase/send_to_external_usecase.dart';
 
@@ -25,6 +23,7 @@ class PopUpConfirmTransfer extends StatelessWidget {
     required this.tokenAddress,
     required this.spendingToWallet,
     required this.onConfirm,
+    required this.isLoadingNotifier,
   }) : super(key: key);
 
   final TransferCubit cubit;
@@ -33,6 +32,7 @@ class PopUpConfirmTransfer extends StatelessWidget {
   final String tokenAddress;
   final bool spendingToWallet;
   final VoidCallback onConfirm;
+  final ValueNotifier<bool> isLoadingNotifier;
 
   @override
   Widget build(BuildContext context) {
@@ -156,29 +156,20 @@ class PopUpConfirmTransfer extends StatelessWidget {
                   onPressed: () => Navigator.maybePop(context),
                 ),
               ),
-              const SizedBox(
-                width: 16.0,
-              ),
-              BlocBuilder<UserBloc, UserState>(
-                builder: (context, userState) {
-                  if (userState is UserLoaded) {
-                    return Expanded(
-                      child: SFButton(
-                        text: LocaleKeys.confirm,
-                        textStyle: TextStyles.bold14LightWhite,
-                        width: double.infinity,
-                        gradient: AppColors.gradientBlueButton,
-                        onPressed: () {
-                          Navigator.pop(context);
-                          if (spendingToWallet) {
-                            onConfirm();
-                          }
-                        },
-                      ),
-                    );
-                  }
-                  return const SizedBox();
-                },
+              const SizedBox(width: 16.0),
+              Expanded(
+                child: ValueListenableBuilder<bool>(
+                    valueListenable: isLoadingNotifier,
+                    child: SFButton(
+                      text: LocaleKeys.confirm,
+                      textStyle: TextStyles.bold14LightWhite,
+                      width: double.infinity,
+                      gradient: AppColors.gradientBlueButton,
+                      onPressed: onConfirm,
+                    ),
+                    builder: (context, isLoading, child) {
+                      return isLoading ? const LoadingIcon() : child!;
+                    }),
               ),
             ],
           )
