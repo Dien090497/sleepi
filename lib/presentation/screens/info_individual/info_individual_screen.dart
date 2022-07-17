@@ -20,6 +20,7 @@ import 'package:slee_fi/presentation/screens/info_individual/widget/bottom_bar.d
 import 'package:slee_fi/presentation/screens/info_individual/widget/bottom_bar_market_place.dart';
 import 'package:slee_fi/presentation/screens/info_individual/widget/box_info_widget.dart';
 import 'package:slee_fi/presentation/screens/info_individual/widget/individual_refresher.dart';
+import 'package:slee_fi/presentation/screens/info_individual/widget/mint_from_widget.dart';
 import 'package:slee_fi/presentation/screens/info_individual/widget/socket.dart';
 
 class InfoIndividualParams {
@@ -121,24 +122,24 @@ class InfoIndividualScreen extends StatelessWidget {
                                   special: state.bed.special,
                                 ),
                                 const SizedBox(height: 33),
-                                // Container(
-                                //   decoration: const BoxDecoration(
-                                //     color: AppColors.dark,
-                                //     borderRadius: BorderRadius.only(
-                                //       topLeft: Radius.circular(40),
-                                //       topRight: Radius.circular(40),
-                                //     ),
-                                //   ),
-                                //   child: Column(
-                                //     children: const [
-                                //       MintFromWidget(
-                                //           title: LocaleKeys.minted_from,
-                                //           numbers: 2),
-                                //       MintFromWidget(
-                                //           title: LocaleKeys.mint, numbers: 7),
-                                //     ],
-                                //   ),
-                                // ),
+                                Container(
+                                  decoration: const BoxDecoration(
+                                    color: AppColors.dark,
+                                    borderRadius: BorderRadius.only(
+                                      topLeft: Radius.circular(40),
+                                      topRight: Radius.circular(40),
+                                    ),
+                                  ),
+                                  child: Column(
+                                    children: const [
+                                      MintFromWidget(
+                                          title: LocaleKeys.minted_from,
+                                          numbers: 2),
+                                      MintFromWidget(
+                                          title: LocaleKeys.mint, numbers: 7),
+                                    ],
+                                  ),
+                                ),
                                 const SizedBox(height: 80),
                               ],
                             ),

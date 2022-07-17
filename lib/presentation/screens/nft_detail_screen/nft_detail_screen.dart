@@ -16,11 +16,14 @@ import 'package:slee_fi/common/widgets/sf_text.dart';
 import 'package:slee_fi/di/injector.dart';
 import 'package:slee_fi/entities/nft_entity/nft_entity.dart';
 import 'package:slee_fi/entities/token/token_entity.dart';
+import 'package:slee_fi/entities/user/user_info_entity.dart';
 import 'package:slee_fi/entities/wallet_info/wallet_info_entity.dart';
 import 'package:slee_fi/failures/failure.dart';
 import 'package:slee_fi/l10n/locale_keys.g.dart';
 import 'package:slee_fi/presentation/blocs/nft_detail/nft_detail_cubit.dart';
 import 'package:slee_fi/presentation/blocs/nft_detail/nft_detail_state.dart';
+import 'package:slee_fi/presentation/blocs/user_bloc/user_bloc.dart';
+import 'package:slee_fi/presentation/blocs/user_bloc/user_state.dart';
 import 'package:slee_fi/presentation/blocs/wallet/wallet_cubit.dart';
 import 'package:slee_fi/presentation/blocs/wallet/wallet_state.dart';
 import 'package:slee_fi/presentation/screens/nft_detail_screen/widget/nft_pop_up_transfer.dart';
@@ -66,164 +69,174 @@ class _NFTDetailScreenState extends State<NFTDetailScreen> {
 
     final nftDetailCubit = NftDetailCubit();
 
-    return BlocBuilder<WalletCubit, WalletState>(
-      bloc: args.walletCubit,
-      builder: (context, walletState) {
-        if (walletState is WalletStateLoaded) {
-          nftDetailCubit.init(walletState.walletInfoEntity, token);
-        }
+    return BlocBuilder<UserBloc, UserState>(
+      builder: (context, userState) {
+        return BlocBuilder<WalletCubit, WalletState>(
+          bloc: args.walletCubit,
+          builder: (context, walletState) {
+            if (walletState is WalletStateLoaded) {
+              nftDetailCubit.init(walletState.walletInfoEntity, token);
+            }
 
-        return BlocProvider(
-          create: (_) => nftDetailCubit,
-          child: BackgroundWidget(
-            appBar: AppBar(
-                toolbarHeight: 80,
-                leading: const Padding(
-                  padding: EdgeInsets.only(left: 16),
-                  child: SFBackButton(),
-                ),
-                actions: [
-                  GestureDetector(
-                    onTap: () => Navigator.pushNamed(context, R.passcode,
-                        arguments: PasscodeArguments(route: R.settingWallet)),
-                    child: const Padding(
-                      padding: EdgeInsets.only(right: 16.0, left: 12),
-                      child: SFIcon(Ics.icSetting),
+            return BlocProvider(
+              create: (_) => nftDetailCubit,
+              child: BackgroundWidget(
+                appBar: AppBar(
+                    toolbarHeight: 80,
+                    leading: const Padding(
+                      padding: EdgeInsets.only(left: 16),
+                      child: SFBackButton(),
                     ),
-                  )
-                ],
-                automaticallyImplyLeading: false,
-                backgroundColor: AppColors.transparent,
-                leadingWidth: 48,
-                elevation: 0,
-                centerTitle: true,
-                titleSpacing: 14,
-                title: SFText(
-                  keyText: token.displayName,
-                  style: TextStyles.bold14Blue,
-                  stringCase: StringCase.titleCase,
-                )),
-            child: BlocBuilder<NftDetailCubit, NftDetailState>(
-              buildWhen: (prev, cur) => cur is! NftDetailError,
-              builder: (context, state) {
-                final List<Widget> children = [
-                  const SizedBox(width: 16),
-                  SFIcon(token.icon),
-                  const SizedBox(height: 16.0),
-                  SFText(
-                    keyText: "${token.balance} ${token.displayName}",
-                    style: TextStyles.bold30White,
-                    textAlign: TextAlign.center,
-                  ),
-                  const SizedBox(height: 18.0),
-                  Container(
-                    constraints: const BoxConstraints(maxHeight: 130),
-                    padding: const EdgeInsets.symmetric(horizontal: 23),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                        Expanded(
-                          child: BoxButtonWidget(
-                            onTap: walletState is WalletStateLoaded
-                                ? () => SFModalBottomSheet.show(
-                                      context,
-                                      0.7,
-                                      ModalReceiveWallet(
-                                        address: walletState
-                                            .walletInfoEntity.address,
-                                        networkName: walletState.walletInfoEntity.networkName ,
-                                      ),
-                                    )
-                                : null,
-                            text: LocaleKeys.receive,
-                            assetImage: Ics.icDownload,
-                          ),
+                    actions: [
+                      GestureDetector(
+                        onTap: () => Navigator.pushNamed(context, R.passcode,
+                            arguments:
+                                PasscodeArguments(route: R.settingWallet)),
+                        child: const Padding(
+                          padding: EdgeInsets.only(right: 16.0, left: 12),
+                          child: SFIcon(Ics.icSetting),
                         ),
-                        const SizedBox(width: 10),
-                        Expanded(
-                          child: BoxButtonWidget(
-                            onTap: () {
-                              if (state is NftDetailLoaded &&
-                                  walletState is WalletStateLoaded) {
-                                _showListNft(
-                                  context,
-                                  state,
-                                  walletState: walletState,
-                                );
-                              }
-                            },
-                            text: LocaleKeys.transfer,
-                            assetImage: Ics.icArrowUpRight,
-                          ),
-                        ),
-                        const SizedBox(width: 10),
-                        Expanded(
-                          child: BoxButtonWidget(
-                            onTap: () {
-                              if (state is NftDetailLoaded &&
-                                  walletState is WalletStateLoaded) {
-                                _showListNft(
-                                  context,
-                                  state,
-                                  isToSpending: true,
-                                  walletState: walletState,
-                                );
-                              }
-                            },
-                            text: LocaleKeys.to_spending,
-                            assetImage: Ics.icRefresh,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                  const SizedBox(height: 16.0),
-                  if (state is NftDetailLoaded)
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 8),
-                      child: SFGridView(
-                        isScroll: false,
-                        physics: const NeverScrollableScrollPhysics(),
-                        itemBuilder: (context, i) {
-                          final nft = state.nftEntities[i];
-
-                          return MyBedShortWidget(
-                            bedId: nft.attribute?.tokenId,
-                            type: nft.attribute?.type,
-                          );
-                        },
-                        count: state.nftEntities.length,
+                      )
+                    ],
+                    automaticallyImplyLeading: false,
+                    backgroundColor: AppColors.transparent,
+                    leadingWidth: 48,
+                    elevation: 0,
+                    centerTitle: true,
+                    titleSpacing: 14,
+                    title: SFText(
+                      keyText: token.displayName,
+                      style: TextStyles.bold14Blue,
+                      stringCase: StringCase.titleCase,
+                    )),
+                child: BlocBuilder<NftDetailCubit, NftDetailState>(
+                  buildWhen: (prev, cur) => cur is! NftDetailError,
+                  builder: (context, state) {
+                    final List<Widget> children = [
+                      const SizedBox(width: 16),
+                      SFIcon(token.icon),
+                      const SizedBox(height: 16.0),
+                      SFText(
+                        keyText: "${token.balance} ${token.displayName}",
+                        style: TextStyles.bold30White,
+                        textAlign: TextAlign.center,
                       ),
-                    ),
-                ];
+                      const SizedBox(height: 18.0),
+                      Container(
+                        constraints: const BoxConstraints(maxHeight: 130),
+                        padding: const EdgeInsets.symmetric(horizontal: 23),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            Expanded(
+                              child: BoxButtonWidget(
+                                onTap: walletState is WalletStateLoaded
+                                    ? () => SFModalBottomSheet.show(
+                                          context,
+                                          0.7,
+                                          ModalReceiveWallet(
+                                            address: walletState
+                                                .walletInfoEntity.address,
+                                            networkName: walletState
+                                                .walletInfoEntity.networkName,
+                                          ),
+                                        )
+                                    : null,
+                                text: LocaleKeys.receive,
+                                assetImage: Ics.icDownload,
+                              ),
+                            ),
+                            const SizedBox(width: 10),
+                            Expanded(
+                              child: BoxButtonWidget(
+                                onTap: () {
+                                  if (state is NftDetailLoaded &&
+                                      userState is UserLoaded &&
+                                      walletState is WalletStateLoaded) {
+                                    _showListNft(
+                                      context,
+                                      state,
+                                      userState: userState,
+                                      walletInfo: walletState.walletInfoEntity,
+                                    );
+                                  }
+                                },
+                                text: LocaleKeys.transfer,
+                                assetImage: Ics.icArrowUpRight,
+                              ),
+                            ),
+                            const SizedBox(width: 10),
+                            Expanded(
+                              child: BoxButtonWidget(
+                                onTap: () {
+                                  if (state is NftDetailLoaded &&
+                                      userState is UserLoaded &&
+                                      walletState is WalletStateLoaded) {
+                                    _showListNft(
+                                      context,
+                                      state,
+                                      isToSpending: true,
+                                      userState: userState,
+                                      walletInfo: walletState.walletInfoEntity,
+                                    );
+                                  }
+                                },
+                                text: LocaleKeys.to_spending,
+                                assetImage: Ics.icRefresh,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      const SizedBox(height: 16.0),
+                      if (state is NftDetailLoaded)
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 8),
+                          child: SFGridView(
+                            isScroll: false,
+                            physics: const NeverScrollableScrollPhysics(),
+                            itemBuilder: (context, i) {
+                              final nft = state.nftEntities[i];
 
-                final nftCubit = context.read<NftDetailCubit>();
+                              return MyBedShortWidget(
+                                bedId: nft.attribute?.tokenId,
+                                type: nft.attribute?.type,
+                              );
+                            },
+                            count: state.nftEntities.length,
+                          ),
+                        ),
+                    ];
 
-                return SmartRefresher(
-                  controller: refreshController,
-                  enablePullUp: state is NftDetailLoaded && state.hasMore,
-                  enablePullDown: state is NftDetailLoaded,
-                  onRefresh: () {
-                    nftCubit.refresh().then((_) {
-                      refreshController.refreshCompleted();
-                    });
+                    final nftCubit = context.read<NftDetailCubit>();
+
+                    return SmartRefresher(
+                      controller: refreshController,
+                      enablePullUp: state is NftDetailLoaded && state.hasMore,
+                      enablePullDown: state is NftDetailLoaded,
+                      onRefresh: () {
+                        nftCubit.refresh().then((_) {
+                          refreshController.refreshCompleted();
+                        });
+                      },
+                      onLoading: () {
+                        nftCubit.loadMore().then((_) {
+                          refreshController.loadComplete();
+                        });
+                      },
+                      child: ListView.builder(
+                        itemCount: children.length,
+                        shrinkWrap: true,
+                        itemBuilder: (context, i) {
+                          return children[i];
+                        },
+                      ),
+                    );
                   },
-                  onLoading: () {
-                    nftCubit.loadMore().then((_) {
-                      refreshController.loadComplete();
-                    });
-                  },
-                  child: ListView.builder(
-                    itemCount: children.length,
-                    shrinkWrap: true,
-                    itemBuilder: (context, i) {
-                      return children[i];
-                    },
-                  ),
-                );
-              },
-            ),
-          ),
+                ),
+              ),
+            );
+          },
         );
       },
     );
@@ -233,6 +246,7 @@ class _NFTDetailScreenState extends State<NFTDetailScreen> {
     BuildContext context, {
     bool? isToSpending,
     required NFTEntity nft,
+    required UserInfoEntity userInfo,
     required WalletInfoEntity walletInfo,
   }) async {
     final isLoadingNotifier = ValueNotifier<bool>(false);
@@ -251,7 +265,7 @@ class _NFTDetailScreenState extends State<NFTDetailScreen> {
                     .call(SendNftToSpendingParams(
                     nftAddress: nft.attribute!.contractAddress,
                     nftId: nft.attribute!.tokenId!,
-                    userId: walletInfo.id,
+                    userId: userInfo.id,
                     credentials: walletInfo.credentials,
                   ))
                 : await getIt<TransferNftUseCase>().call(TransferNftParams(
@@ -317,7 +331,8 @@ class _NFTDetailScreenState extends State<NFTDetailScreen> {
     BuildContext context,
     NftDetailLoaded state, {
     bool? isToSpending,
-    required WalletStateLoaded walletState,
+    required UserLoaded userState,
+    required WalletInfoEntity walletInfo,
   }) {
     SFModalBottomSheet.show(
       context,
@@ -327,8 +342,9 @@ class _NFTDetailScreenState extends State<NFTDetailScreen> {
           _showTransferDialog(
             context,
             nft: nft,
-            walletInfo: walletState.walletInfoEntity,
+            walletInfo: walletInfo,
             isToSpending: isToSpending,
+            userInfo: userState.userInfoEntity,
           );
         },
         nftDetailCubit: BlocProvider.of<NftDetailCubit>(context),
