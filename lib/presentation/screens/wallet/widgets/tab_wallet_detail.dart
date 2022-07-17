@@ -263,11 +263,12 @@ class _TabWalletDetailState extends State<TabWalletDetail> {
 
   void _copyAddress(FToast fToast, BuildContext context, String address) async {
     ClipboardData? data = await Clipboard.getData(Clipboard.kTextPlain);
-    if (data != null) {
-      // debugPrint(data.text);
-    } else {
+    if(data?.text == address){
+      debugPrint(address);
+    }else{
       Clipboard.setData(ClipboardData(text: address));
     }
+
     ToastUtils.showToast(
       fToast,
       AppColors.white.withOpacity(0.55),

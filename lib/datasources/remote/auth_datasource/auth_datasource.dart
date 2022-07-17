@@ -12,6 +12,7 @@ import 'package:slee_fi/models/bed_detail/bed_detail.dart';
 import 'package:slee_fi/models/create_password_reponse/create_password_response.dart';
 import 'package:slee_fi/models/estimate_sleep_response/estimate_sleep_response.dart';
 import 'package:slee_fi/models/fetch_bed_response/fetch_bed_response.dart';
+import 'package:slee_fi/models/gacha_spin_response/gacha_spin_response.dart';
 import 'package:slee_fi/models/get_repair_response/get_repair_response.dart';
 import 'package:slee_fi/models/global_config_response/global_config_response.dart';
 import 'package:slee_fi/models/item_owner_response/item_owner_response.dart';
@@ -36,6 +37,7 @@ import 'package:slee_fi/schema/add_jewel_schema/add_jewel_schema.dart';
 import 'package:slee_fi/schema/buy_nft_schema/buy_nft_schema.dart';
 import 'package:slee_fi/schema/change_password_schema/change_password_schema.dart';
 import 'package:slee_fi/schema/create_password_schema/create_password_schema.dart';
+import 'package:slee_fi/schema/gacha/gacha_spin_schema.dart';
 import 'package:slee_fi/schema/market/market_schema.dart';
 import 'package:slee_fi/schema/nft_sell_schema/nft_sell_schema.dart';
 import 'package:slee_fi/schema/param_filler_item_fetch/filter_item_schema.dart';
@@ -236,6 +238,12 @@ abstract class AuthDataSource {
     @Query('tdate') String tdate,
     @Query('type') String type,
   );
+
+  @POST('/gacha/spin')
+  Future<GachaSpinResponse> gachaSpinBonus(@Body() GachaSpinSchema gachaSpinSchema);
+
+  @GET('/gacha/history')
+  Future<dynamic> gachaHistory();
 
   // individual
   @PUT('/nft-attributes/open-socket')

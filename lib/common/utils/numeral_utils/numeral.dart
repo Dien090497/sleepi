@@ -35,7 +35,7 @@ class Numeral {
   String format() {
     final NumeralParsedValue parsed = numeralParser(numeral);
 
-    return _removeEndsZero(parsed.value.formatBalanceTokenHeader) +
+    return _removeEndsZero(parsed.value.formatBalance2Digits) +
         parsed.suffix;
   }
 

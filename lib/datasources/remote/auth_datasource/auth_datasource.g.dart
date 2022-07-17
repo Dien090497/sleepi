@@ -655,6 +655,38 @@ class _AuthDataSource implements AuthDataSource {
   }
 
   @override
+  Future<GachaSpinResponse> gachaSpinBonus(gachaSpinSchema) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    _data.addAll(gachaSpinSchema.toJson());
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<GachaSpinResponse>(
+            Options(method: 'POST', headers: _headers, extra: _extra)
+                .compose(_dio.options, '/gacha/spin',
+                    queryParameters: queryParameters, data: _data)
+                .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = GachaSpinResponse.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<dynamic> gachaHistory() async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    final _result = await _dio.fetch(_setStreamType<dynamic>(
+        Options(method: 'GET', headers: _headers, extra: _extra)
+            .compose(_dio.options, '/gacha/history',
+                queryParameters: queryParameters, data: _data)
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = _result.data;
+    return value;
+  }
+
+  @override
   Future<dynamic> openSocket(bedId) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{r'bedId ': bedId};

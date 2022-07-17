@@ -203,7 +203,7 @@ class _TrackingScreenState extends State<TrackingScreen> {
                                     ),
                                     SFText(
                                       keyText:
-                                          "${earn.formatBalanceTokenHeader} SLFT",
+                                          "${earn.formatBalance2Digits} SLFT",
                                       style: TextStyles.bold30White,
                                     ),
                                   ],

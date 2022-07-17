@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:injectable/injectable.dart';
+import 'package:slee_fi/resources/resources.dart';
 
 @Injectable()
 class RandomUtils {
@@ -21,5 +22,14 @@ class RandomUtils {
     final rnd = Random();
     final l = List.generate(6, (_) => rnd.nextInt(10));
     return l.join('');
+  }
+
+  String gachaItem() {
+    List items = [Imgs.shortBed, Imgs.middleBed, Imgs.longBed, Imgs.flexibleBed,
+      Imgs.jewelGreen, Imgs.jewelRed, Imgs.candyGreen, Imgs.candyPink, Ics.icSlft];
+
+    final rnd = Random();
+    int number = rnd.nextInt(items.length);
+    return items.elementAt(number - 1);
   }
 }

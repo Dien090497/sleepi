@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
+import 'package:slee_fi/common/const/const.dart';
 import 'package:slee_fi/common/widgets/topbar_common.dart';
 import 'package:slee_fi/l10n/locale_keys.g.dart';
 import 'package:slee_fi/presentation/screens/gacha/widgets/items_gacha.dart';
@@ -48,15 +49,21 @@ class _GachaScreenState extends State<GachaScreen> {
                     title: LocaleKeys.normal_gacha,
                     singleGacha: 12,
                     timesGacha: 100,
+                    singleProbability: Const.one,
+                    timesProbability: Const.two,
                     typeReward: LocaleKeys.uncommon_beds_chance,
                     imagePath: Imgs.normalGacha,
+                    normalGacha: true,
                   ),
                   ItemsGacha(
                     title: LocaleKeys.special_gacha,
                     singleGacha: 120,
                     timesGacha: 1000,
+                    singleProbability: Const.three,
+                    timesProbability: Const.four,
                     typeReward: LocaleKeys.rare_beds_chance,
                     imagePath: Imgs.specialGacha,
+                    normalGacha: false,
                   ),
                 ],
               ),
