@@ -6,6 +6,7 @@ import 'package:slee_fi/datasources/remote/auth_datasource/auth_datasource.dart'
 import 'package:slee_fi/datasources/remote/network/nft_datasource.dart';
 import 'package:slee_fi/datasources/remote/nft_api/nft_api.dart';
 import 'package:slee_fi/entities/bed_entity/bed_entity.dart';
+import 'package:slee_fi/entities/get_repair_entity/get_repair_entity.dart';
 import 'package:slee_fi/entities/nft_entity/nft_entity.dart';
 import 'package:slee_fi/entities/nft_sell_response_entity/nft_sell_response_entity.dart';
 import 'package:slee_fi/failures/failure.dart';
@@ -214,12 +215,9 @@ class NFTImplementation extends INFTRepository {
   @override
   Future<Either<Failure, NftSellResponseEntity>> sellNFT({required NFTSellSchema params}) async {
     try {
-      print('schema123 ${params.nftId} - ${params.amount}');
       final result = await _authDataSource.nftSell(params);
-      print('success123');
       return Right(result.toEntity());
     } catch (e) {
-      print('nope ${e}');
       return Left(FailureMessage('$e'));
     }
   }
@@ -235,10 +233,10 @@ class NFTImplementation extends INFTRepository {
   }
 
   @override
-  Future<Either<Failure, dynamic>> getRepair({required num bedId}) async {
+  Future<Either<Failure, GetRepairtEntity>> getRepair({required num bedId}) async {
     try {
-      final result = await _authDataSource.getRepair(bedId);
-      return Right(result);
+      final result = await _authDataSource.getRepair(bedId.toString());
+      return Right(result.toEntity());
     } catch (e) {
       return Left(FailureMessage('$e'));
     }

@@ -1,6 +1,7 @@
 import 'package:dartz/dartz.dart';
 import 'package:slee_fi/common/enum/enum.dart';
 import 'package:slee_fi/entities/bed_entity/bed_entity.dart';
+import 'package:slee_fi/entities/get_repair_entity/get_repair_entity.dart';
 import 'package:slee_fi/entities/nft_entity/nft_entity.dart';
 import 'package:slee_fi/entities/nft_sell_response_entity/nft_sell_response_entity.dart';
 import 'package:slee_fi/failures/failure.dart';
@@ -73,7 +74,7 @@ abstract class INFTRepository {
 
   Future<Either<Failure, String>> getTransactionFee();
 
-  Future<Either<Failure, dynamic>> getRepair({required num bedId});
+  Future<Either<Failure, GetRepairtEntity>> getRepair({required num bedId});
 
   Future<Either<Failure, dynamic>> nftRepair({required RepairSchema repairSchema});
 }

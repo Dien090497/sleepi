@@ -734,27 +734,28 @@ class _AuthDataSource implements AuthDataSource {
   }
 
   @override
-  Future<dynamic> getRepair(bedId) async {
+  Future<GetRepairResponse> getRepair(bedId) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{r'bedId': bedId};
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
-    final _result = await _dio.fetch(_setStreamType<dynamic>(
-        Options(method: 'GET', headers: _headers, extra: _extra)
-            .compose(_dio.options, '/nft/repair',
-                queryParameters: queryParameters, data: _data)
-            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = _result.data;
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<GetRepairResponse>(
+            Options(method: 'GET', headers: _headers, extra: _extra)
+                .compose(_dio.options, '/nft/repair',
+                    queryParameters: queryParameters, data: _data)
+                .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = GetRepairResponse.fromJson(_result.data!);
     return value;
   }
 
   @override
-  Future<dynamic> nftRepair(nftSellSchema) async {
+  Future<dynamic> nftRepair(repairSchema) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
-    _data.addAll(nftSellSchema.toJson());
+    _data.addAll(repairSchema.toJson());
     final _result = await _dio.fetch(_setStreamType<dynamic>(
         Options(method: 'POST', headers: _headers, extra: _extra)
             .compose(_dio.options, '/nft/repair',

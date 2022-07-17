@@ -12,6 +12,7 @@ import 'package:slee_fi/models/bed_detail/bed_detail.dart';
 import 'package:slee_fi/models/create_password_reponse/create_password_response.dart';
 import 'package:slee_fi/models/estimate_sleep_response/estimate_sleep_response.dart';
 import 'package:slee_fi/models/fetch_bed_response/fetch_bed_response.dart';
+import 'package:slee_fi/models/get_repair_response/get_repair_response.dart';
 import 'package:slee_fi/models/global_config_response/global_config_response.dart';
 import 'package:slee_fi/models/item_owner_response/item_owner_response.dart';
 import 'package:slee_fi/models/list_market_place/list_market_place_model.dart';
@@ -254,7 +255,7 @@ abstract class AuthDataSource {
   Future<String> getTransactionFee();
 
   @GET('/nft/repair')
-  Future<dynamic> getRepair(@Query('bedId') num bedId,);
+  Future<GetRepairResponse> getRepair(@Query('bedId') String bedId);
 
   @POST('/nft/repair')
   Future<dynamic> nftRepair (@Body() RepairSchema repairSchema);
