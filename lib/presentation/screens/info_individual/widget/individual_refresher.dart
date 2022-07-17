@@ -26,7 +26,6 @@ class _IndividualRefresherState extends State<IndividualRefresher> {
   Widget build(BuildContext context) {
     return BlocListener<IndividualCubit, IndividualState>(
       listener: (context, state) {
-        print('### ${state.isLoading}');
         if (!state.isLoading) {
           _controller.refreshCompleted();
         } else {
