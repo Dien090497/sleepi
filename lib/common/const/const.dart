@@ -4,6 +4,11 @@ import 'package:slee_fi/l10n/locale_keys.g.dart';
 import 'package:slee_fi/resources/resources.dart';
 
 class Const {
+  static const int one = 1;
+  static const int two = 2;
+  static const int three = 3;
+  static const int four = 4;
+
   static const int passcodeLength = 6;
 
   /// GWei
@@ -33,6 +38,11 @@ class Const {
   static const String whitePaperInsuranceEn = '${whitePaperEn}insurance';
 
   static const String whitePaperInsuranceJa = '${whitePaperJa}insurance';
+
+  static const String normalGachaAudio = 'sounds/gacha.mp3';
+  static const String normalGachaAnimation = 'assets/json/gacha.json';
+  static const String specialGachaAudio = 'sounds/special_gacha.mp3';
+  static const String specialGachaAnimation = 'assets/json/special_gacha.json';
 
   static const localeDE = Locale('de', 'DE');
   static const localeEN = Locale('en', 'US');
@@ -150,6 +160,7 @@ class Const {
 
   Const._();
 }
+
 
 extension LocaleX on Locale {
   String get displayName {

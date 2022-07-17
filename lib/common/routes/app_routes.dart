@@ -7,6 +7,7 @@ import 'package:slee_fi/presentation/screens/create_wallet/create_wallet_screen.
 import 'package:slee_fi/presentation/screens/email/email_screen.dart';
 import 'package:slee_fi/presentation/screens/enter_activation_code/enter_activation_code_screen.dart';
 import 'package:slee_fi/presentation/screens/forgot_passcode/forgot_passcode_screen.dart';
+import 'package:slee_fi/presentation/screens/gacha/layout/gacha_animation_screen.dart';
 import 'package:slee_fi/presentation/screens/gacha/layout/gacha_chane_500_screen.dart';
 import 'package:slee_fi/presentation/screens/gacha/layout/gacha_result_bed_screen.dart';
 import 'package:slee_fi/presentation/screens/gacha/layout/gacha_result_overview.dart';
@@ -67,6 +68,7 @@ class R {
   static const String gacha500TimesChance = '${_}gacha_500_times_chance';
   static const String gachaResultBed = '${_}gacha_result_bed';
   static const String gachaResultOverview = '${_}gacha_result_overview';
+  static const String gachaAnimation = '${_}gacha_animation';
   static const String nftInfo = '${_}nft_info';
   static const String mint = '${_}mint';
   static const String staking = '${_}staking';
@@ -176,5 +178,6 @@ class AppRoutes {
     R.qrCodeScan: (_) => const QRCodeScanner(),
     R.forgotPasscode: (_) => const ForgotPasscodeScreen(),
     R.webView: (_) => const WebViewScreen(),
+    R.gachaAnimation: (_) => const GachaAnimationScreen(),
   };
 }

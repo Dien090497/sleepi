@@ -46,7 +46,7 @@ extension NumX on num {
     }
   }
 
-  String get formatBalanceTokenHeader {
+  String get formatBalance2Digits {
     if(this==0){
       return 0.toStringAsFixed(2);
     }else {
