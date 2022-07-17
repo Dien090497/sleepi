@@ -122,14 +122,8 @@ class _BottomBarWidgetState extends State<BottomBarWidget> {
                         context,
                         children: [
                           PopUpRepair(
-                            icon: Imgs.shortBed,
-                            cost: 120,
-                            level: 20,
-                            time: 122,
-                            onCancel: () {
-                              Navigator.pop(context);
-                            },
-                            onConfirm: () {},
+                            bedEntity: widget.bedEntity,
+                            cubit: cubit,
                           ),
                         ],
                       ).then((value) => setState(() {
