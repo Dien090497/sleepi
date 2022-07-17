@@ -27,7 +27,13 @@ class SocketComponent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<SocketBloc, SocketState>(
+    return BlocConsumer<SocketBloc, SocketState>(
+      listener: (context, state) {
+        if (state is SocketStateLoaded &&
+            state.errorMessage?.isNotEmpty == true) {
+          showMessageDialog(context, state.errorMessage!);
+        }
+      },
       bloc: BlocProvider.of<SocketBloc>(context)..add(SocketInit(bedId, level)),
       builder: (context, state) {
         final listJewel = <SocketEntity>[];
@@ -35,9 +41,6 @@ class SocketComponent extends StatelessWidget {
         if (state is SocketStateLoaded) {
           maxSocket = state.maxSocket;
           listJewel.addAll(state.socketEntity);
-          listJewel.forEach((element) {
-            print('type socket is   ${element.socketType}');
-          });
         }
         return Wrap(
             spacing: 8.0,
@@ -48,7 +51,11 @@ class SocketComponent extends StatelessWidget {
                 (index) => SFImageBorder(
                     icon: index + 1 > maxSocket
                         ? Ics.gift
-                        : listJewel[index].image,
+                        : listJewel[index].socketType == SocketType.ready
+                            ? listJewel[index].jewelEntity!.image
+                            : listJewel[index].socketType == SocketType.block
+                                ? Ics.jewelWatting
+                                : '',
                     onTap: () {
                       // _showModalJewelList(context, index);
                       // _showDialogConfirmOpenSocket(context, index);
@@ -79,7 +86,6 @@ class SocketComponent extends StatelessWidget {
       PopUpStaking(
           message: LocaleKeys.do_you_want_open_the_socket,
           onPressed: () {
-            print('on confirm open socket');
             context.read<SocketBloc>().add(OpenSocket(index));
           })
     ]);

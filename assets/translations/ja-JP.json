@@ -418,5 +418,6 @@
   "the_language_setting_has_been_updated": "言語設定が変更されました",
   "do_you_want_open_the_socket": "Do you want to open the socket with 100 SLFT",
   "remove": "Remove",
-  "add_jewel": "Add Jewel"
+  "add_jewel": "Add Jewel",
+  "jewel_list": "Jewel List"
 }

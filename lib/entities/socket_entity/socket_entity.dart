@@ -8,8 +8,5 @@ part 'socket_entity.freezed.dart';
 class SocketEntity with _$SocketEntity {
   const factory SocketEntity(
       {required SocketType socketType,
-      required int id,
-      required String image,
-      JewelEntity? jewelEntity
-      }) = _SocketEntity;
+      JewelEntity? jewelEntity}) = _SocketEntity;
 }

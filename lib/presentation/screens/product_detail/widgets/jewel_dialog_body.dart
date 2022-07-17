@@ -9,7 +9,6 @@ import 'package:slee_fi/common/widgets/sf_card.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
 import 'package:slee_fi/entities/jewel_entity/jewel_entity.dart';
 import 'package:slee_fi/l10n/locale_keys.g.dart';
-import 'package:slee_fi/models/bed_model/beb_model.dart';
 
 class JewelDialogBody extends StatelessWidget {
   const JewelDialogBody(
@@ -29,9 +28,7 @@ class JewelDialogBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final qualityColor = jewel.quality != null
-        ? jewel.quality!.qualityBedColor
-        : AppColors.commonBed;
+    final qualityColor =  jewel.quality.qualityBedColor;
     return Stack(
       children: [
         Positioned(

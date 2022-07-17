@@ -96,12 +96,11 @@ class BedDetail {
       this.durability,
       this.isLock,
       this.status,
-      this.category, this.jewels);
+      this.category,
+      this.jewels);
 
-  factory BedDetail.fromJson(Map<String, dynamic> json) {
-    print('json is   $json');
-    return _$BedDetailFromJson(json);
-  }
+  factory BedDetail.fromJson(Map<String, dynamic> json) =>
+      _$BedDetailFromJson(json);
 
   Map<String, dynamic> toJson() => _$BedDetailToJson(this);
 }

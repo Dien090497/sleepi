@@ -15,6 +15,7 @@ class SocketState with _$SocketState {
     required int maxSocket,
     required int socketOpened,
     List<JewelEntity>? jewels,
+    String? errorMessage,
     @Default(true)
     bool loadMoreJewel
   }) = SocketStateLoaded;

@@ -20,8 +20,13 @@ mixin _$SocketState {
   TResult when<TResult extends Object?>({
     required TResult Function() init,
     required TResult Function() loading,
-    required TResult Function(List<SocketEntity> socketEntity, int maxSocket,
-            int socketOpened, List<JewelEntity>? jewels, bool loadMoreJewel)
+    required TResult Function(
+            List<SocketEntity> socketEntity,
+            int maxSocket,
+            int socketOpened,
+            List<JewelEntity>? jewels,
+            String? errorMessage,
+            bool loadMoreJewel)
         loaded,
   }) =>
       throw _privateConstructorUsedError;
@@ -29,8 +34,13 @@ mixin _$SocketState {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? init,
     TResult Function()? loading,
-    TResult Function(List<SocketEntity> socketEntity, int maxSocket,
-            int socketOpened, List<JewelEntity>? jewels, bool loadMoreJewel)?
+    TResult Function(
+            List<SocketEntity> socketEntity,
+            int maxSocket,
+            int socketOpened,
+            List<JewelEntity>? jewels,
+            String? errorMessage,
+            bool loadMoreJewel)?
         loaded,
   }) =>
       throw _privateConstructorUsedError;
@@ -38,8 +48,13 @@ mixin _$SocketState {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? init,
     TResult Function()? loading,
-    TResult Function(List<SocketEntity> socketEntity, int maxSocket,
-            int socketOpened, List<JewelEntity>? jewels, bool loadMoreJewel)?
+    TResult Function(
+            List<SocketEntity> socketEntity,
+            int maxSocket,
+            int socketOpened,
+            List<JewelEntity>? jewels,
+            String? errorMessage,
+            bool loadMoreJewel)?
         loaded,
     required TResult orElse(),
   }) =>
@@ -127,8 +142,13 @@ class _$SocketStateInitial implements SocketStateInitial {
   TResult when<TResult extends Object?>({
     required TResult Function() init,
     required TResult Function() loading,
-    required TResult Function(List<SocketEntity> socketEntity, int maxSocket,
-            int socketOpened, List<JewelEntity>? jewels, bool loadMoreJewel)
+    required TResult Function(
+            List<SocketEntity> socketEntity,
+            int maxSocket,
+            int socketOpened,
+            List<JewelEntity>? jewels,
+            String? errorMessage,
+            bool loadMoreJewel)
         loaded,
   }) {
     return init();
@@ -139,8 +159,13 @@ class _$SocketStateInitial implements SocketStateInitial {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? init,
     TResult Function()? loading,
-    TResult Function(List<SocketEntity> socketEntity, int maxSocket,
-            int socketOpened, List<JewelEntity>? jewels, bool loadMoreJewel)?
+    TResult Function(
+            List<SocketEntity> socketEntity,
+            int maxSocket,
+            int socketOpened,
+            List<JewelEntity>? jewels,
+            String? errorMessage,
+            bool loadMoreJewel)?
         loaded,
   }) {
     return init?.call();
@@ -151,8 +176,13 @@ class _$SocketStateInitial implements SocketStateInitial {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? init,
     TResult Function()? loading,
-    TResult Function(List<SocketEntity> socketEntity, int maxSocket,
-            int socketOpened, List<JewelEntity>? jewels, bool loadMoreJewel)?
+    TResult Function(
+            List<SocketEntity> socketEntity,
+            int maxSocket,
+            int socketOpened,
+            List<JewelEntity>? jewels,
+            String? errorMessage,
+            bool loadMoreJewel)?
         loaded,
     required TResult orElse(),
   }) {
@@ -244,8 +274,13 @@ class _$SocketStateLoading implements SocketStateLoading {
   TResult when<TResult extends Object?>({
     required TResult Function() init,
     required TResult Function() loading,
-    required TResult Function(List<SocketEntity> socketEntity, int maxSocket,
-            int socketOpened, List<JewelEntity>? jewels, bool loadMoreJewel)
+    required TResult Function(
+            List<SocketEntity> socketEntity,
+            int maxSocket,
+            int socketOpened,
+            List<JewelEntity>? jewels,
+            String? errorMessage,
+            bool loadMoreJewel)
         loaded,
   }) {
     return loading();
@@ -256,8 +291,13 @@ class _$SocketStateLoading implements SocketStateLoading {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? init,
     TResult Function()? loading,
-    TResult Function(List<SocketEntity> socketEntity, int maxSocket,
-            int socketOpened, List<JewelEntity>? jewels, bool loadMoreJewel)?
+    TResult Function(
+            List<SocketEntity> socketEntity,
+            int maxSocket,
+            int socketOpened,
+            List<JewelEntity>? jewels,
+            String? errorMessage,
+            bool loadMoreJewel)?
         loaded,
   }) {
     return loading?.call();
@@ -268,8 +308,13 @@ class _$SocketStateLoading implements SocketStateLoading {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? init,
     TResult Function()? loading,
-    TResult Function(List<SocketEntity> socketEntity, int maxSocket,
-            int socketOpened, List<JewelEntity>? jewels, bool loadMoreJewel)?
+    TResult Function(
+            List<SocketEntity> socketEntity,
+            int maxSocket,
+            int socketOpened,
+            List<JewelEntity>? jewels,
+            String? errorMessage,
+            bool loadMoreJewel)?
         loaded,
     required TResult orElse(),
   }) {
@@ -328,6 +373,7 @@ abstract class _$$SocketStateLoadedCopyWith<$Res> {
       int maxSocket,
       int socketOpened,
       List<JewelEntity>? jewels,
+      String? errorMessage,
       bool loadMoreJewel});
 }
 
@@ -348,6 +394,7 @@ class __$$SocketStateLoadedCopyWithImpl<$Res>
     Object? maxSocket = freezed,
     Object? socketOpened = freezed,
     Object? jewels = freezed,
+    Object? errorMessage = freezed,
     Object? loadMoreJewel = freezed,
   }) {
     return _then(_$SocketStateLoaded(
@@ -367,6 +414,10 @@ class __$$SocketStateLoadedCopyWithImpl<$Res>
           ? _value._jewels
           : jewels // ignore: cast_nullable_to_non_nullable
               as List<JewelEntity>?,
+      errorMessage: errorMessage == freezed
+          ? _value.errorMessage
+          : errorMessage // ignore: cast_nullable_to_non_nullable
+              as String?,
       loadMoreJewel: loadMoreJewel == freezed
           ? _value.loadMoreJewel
           : loadMoreJewel // ignore: cast_nullable_to_non_nullable
@@ -383,6 +434,7 @@ class _$SocketStateLoaded implements SocketStateLoaded {
       required this.maxSocket,
       required this.socketOpened,
       final List<JewelEntity>? jewels,
+      this.errorMessage,
       this.loadMoreJewel = true})
       : _socketEntity = socketEntity,
         _jewels = jewels;
@@ -408,12 +460,14 @@ class _$SocketStateLoaded implements SocketStateLoaded {
   }
 
   @override
+  final String? errorMessage;
+  @override
   @JsonKey()
   final bool loadMoreJewel;
 
   @override
   String toString() {
-    return 'SocketState.loaded(socketEntity: $socketEntity, maxSocket: $maxSocket, socketOpened: $socketOpened, jewels: $jewels, loadMoreJewel: $loadMoreJewel)';
+    return 'SocketState.loaded(socketEntity: $socketEntity, maxSocket: $maxSocket, socketOpened: $socketOpened, jewels: $jewels, errorMessage: $errorMessage, loadMoreJewel: $loadMoreJewel)';
   }
 
   @override
@@ -428,6 +482,8 @@ class _$SocketStateLoaded implements SocketStateLoaded {
                 .equals(other.socketOpened, socketOpened) &&
             const DeepCollectionEquality().equals(other._jewels, _jewels) &&
             const DeepCollectionEquality()
+                .equals(other.errorMessage, errorMessage) &&
+            const DeepCollectionEquality()
                 .equals(other.loadMoreJewel, loadMoreJewel));
   }
 
@@ -438,6 +494,7 @@ class _$SocketStateLoaded implements SocketStateLoaded {
       const DeepCollectionEquality().hash(maxSocket),
       const DeepCollectionEquality().hash(socketOpened),
       const DeepCollectionEquality().hash(_jewels),
+      const DeepCollectionEquality().hash(errorMessage),
       const DeepCollectionEquality().hash(loadMoreJewel));
 
   @JsonKey(ignore: true)
@@ -450,11 +507,17 @@ class _$SocketStateLoaded implements SocketStateLoaded {
   TResult when<TResult extends Object?>({
     required TResult Function() init,
     required TResult Function() loading,
-    required TResult Function(List<SocketEntity> socketEntity, int maxSocket,
-            int socketOpened, List<JewelEntity>? jewels, bool loadMoreJewel)
+    required TResult Function(
+            List<SocketEntity> socketEntity,
+            int maxSocket,
+            int socketOpened,
+            List<JewelEntity>? jewels,
+            String? errorMessage,
+            bool loadMoreJewel)
         loaded,
   }) {
-    return loaded(socketEntity, maxSocket, socketOpened, jewels, loadMoreJewel);
+    return loaded(socketEntity, maxSocket, socketOpened, jewels, errorMessage,
+        loadMoreJewel);
   }
 
   @override
@@ -462,12 +525,17 @@ class _$SocketStateLoaded implements SocketStateLoaded {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? init,
     TResult Function()? loading,
-    TResult Function(List<SocketEntity> socketEntity, int maxSocket,
-            int socketOpened, List<JewelEntity>? jewels, bool loadMoreJewel)?
+    TResult Function(
+            List<SocketEntity> socketEntity,
+            int maxSocket,
+            int socketOpened,
+            List<JewelEntity>? jewels,
+            String? errorMessage,
+            bool loadMoreJewel)?
         loaded,
   }) {
-    return loaded?.call(
-        socketEntity, maxSocket, socketOpened, jewels, loadMoreJewel);
+    return loaded?.call(socketEntity, maxSocket, socketOpened, jewels,
+        errorMessage, loadMoreJewel);
   }
 
   @override
@@ -475,14 +543,19 @@ class _$SocketStateLoaded implements SocketStateLoaded {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? init,
     TResult Function()? loading,
-    TResult Function(List<SocketEntity> socketEntity, int maxSocket,
-            int socketOpened, List<JewelEntity>? jewels, bool loadMoreJewel)?
+    TResult Function(
+            List<SocketEntity> socketEntity,
+            int maxSocket,
+            int socketOpened,
+            List<JewelEntity>? jewels,
+            String? errorMessage,
+            bool loadMoreJewel)?
         loaded,
     required TResult orElse(),
   }) {
     if (loaded != null) {
-      return loaded(
-          socketEntity, maxSocket, socketOpened, jewels, loadMoreJewel);
+      return loaded(socketEntity, maxSocket, socketOpened, jewels, errorMessage,
+          loadMoreJewel);
     }
     return orElse();
   }
@@ -528,12 +601,14 @@ abstract class SocketStateLoaded implements SocketState {
       required final int maxSocket,
       required final int socketOpened,
       final List<JewelEntity>? jewels,
+      final String? errorMessage,
       final bool loadMoreJewel}) = _$SocketStateLoaded;
 
   List<SocketEntity> get socketEntity;
   int get maxSocket;
   int get socketOpened;
   List<JewelEntity>? get jewels;
+  String? get errorMessage;
   bool get loadMoreJewel;
   @JsonKey(ignore: true)
   _$$SocketStateLoadedCopyWith<_$SocketStateLoaded> get copyWith =>

@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
@@ -29,7 +30,7 @@ class ModalJewelList extends StatelessWidget {
             child: Row(
               children: [
                 SFText(
-                  keyText: LocaleKeys.item_list,
+                  keyText: LocaleKeys.jewel_list,
                   style: TextStyles.bold18White,
                 ),
                 const Spacer(),
@@ -59,12 +60,8 @@ class ModalJewelList extends StatelessWidget {
               child: BlocBuilder<SocketBloc, SocketState>(
                 bloc: socketBloc,
                 builder: (context, state) {
-                  if (state is SocketStateLoaded) {
-                    print('state is    ${state.jewels?.length}');
-                  }
                   if ((state is SocketStateLoaded && state.jewels == null) ||
                       (state is! SocketStateLoaded)) {
-                    print('run to fetch ');
                     socketBloc.add(const FetchJewels());
                   }
 
@@ -131,7 +128,6 @@ class ModalJewelList extends StatelessWidget {
   _showDialogJewelDetail(
       BuildContext context, JewelEntity jewelEntity, SocketBloc bloc) {
     showCustomDialog(
-
       context,
       padding: const EdgeInsets.all(24),
       children: [
@@ -146,7 +142,7 @@ class ModalJewelList extends StatelessWidget {
             Navigator.pop(context);
           },
           textOnSell: LocaleKeys.cancel,
-          textOnTransfer: LocaleKeys.add_jewel,
+          textOnTransfer: LocaleKeys.add_jewel.tr(),
         ),
       ],
     );
