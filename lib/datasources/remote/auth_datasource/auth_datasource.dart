@@ -39,6 +39,7 @@ import 'package:slee_fi/schema/market/market_schema.dart';
 import 'package:slee_fi/schema/nft_sell_schema/nft_sell_schema.dart';
 import 'package:slee_fi/schema/param_filler_item_fetch/filter_item_schema.dart';
 import 'package:slee_fi/schema/refresh_token_schema/refresh_token_schema.dart';
+import 'package:slee_fi/schema/repair_schema/repair_schema.dart';
 import 'package:slee_fi/schema/sign_in_schema/sign_in_schema.dart';
 import 'package:slee_fi/schema/sign_up_schema/sign_up_schema.dart';
 import 'package:slee_fi/schema/speed_up_lucky_box_schema/speed_up_lucky_box_schema.dart';
@@ -251,4 +252,10 @@ abstract class AuthDataSource {
 
   @GET('/nft/transaction-fee')
   Future<String> getTransactionFee();
+
+  @GET('/nft/repair')
+  Future<dynamic> getRepair(@Query('bedId') num bedId,);
+
+  @POST('/nft/repair')
+  Future<dynamic> nftRepair (@Body() RepairSchema repairSchema);
 }
