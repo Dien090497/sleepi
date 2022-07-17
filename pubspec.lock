@@ -21,7 +21,7 @@ packages:
       name: analyzer_plugin
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.9.0"
+    version: "0.10.0"
   ansicolor:
     dependency: transitive
     description:
@@ -203,7 +203,7 @@ packages:
       name: built_value
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "8.3.3"
+    version: "8.4.0"
   cached_network_image:
     dependency: "direct main"
     description:
@@ -407,6 +407,48 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.2.0"
+  device_info_plus:
+    dependency: "direct main"
+    description:
+      name: device_info_plus
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "4.0.0"
+  device_info_plus_linux:
+    dependency: transitive
+    description:
+      name: device_info_plus_linux
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "2.1.1"
+  device_info_plus_macos:
+    dependency: transitive
+    description:
+      name: device_info_plus_macos
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "2.2.3"
+  device_info_plus_platform_interface:
+    dependency: transitive
+    description:
+      name: device_info_plus_platform_interface
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "2.3.0+1"
+  device_info_plus_web:
+    dependency: transitive
+    description:
+      name: device_info_plus_web
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "2.1.0"
+  device_info_plus_windows:
+    dependency: transitive
+    description:
+      name: device_info_plus_windows
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "2.1.1"
   dio:
     dependency: "direct main"
     description:
@@ -470,6 +512,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.0.2"
+  external_app_launcher:
+    dependency: "direct main"
+    description:
+      name: external_app_launcher
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "3.0.0"
   ffi:
     dependency: transitive
     description:
@@ -563,7 +612,7 @@ packages:
       name: flutter_plugin_android_lifecycle
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "2.0.6"
+    version: "2.0.7"
   flutter_screenutil:
     dependency: "direct main"
     description:
@@ -645,14 +694,14 @@ packages:
       name: freezed
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "2.0.5"
+    version: "2.1.0+1"
   freezed_annotation:
     dependency: "direct main"
     description:
       name: freezed_annotation
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "2.0.3"
+    version: "2.1.0"
   frontend_server_client:
     dependency: transitive
     description:
@@ -695,6 +744,15 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.1.0"
+  health:
+    dependency: "direct main"
+    description:
+      path: "."
+      ref: master
+      resolved-ref: e94531a7be177d2a2f17cc1a681946bc606c3671
+      url: "https://github.com/Sotatek-ThangBui/health.git"
+    source: git
+    version: "1.0.0"
   hex:
     dependency: "direct main"
     description:
@@ -750,9 +808,9 @@ packages:
       name: injectable_generator
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.5.3"
+    version: "1.5.4"
   intl:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: intl
       url: "https://pub.dartlang.org"
@@ -848,7 +906,7 @@ packages:
       name: local_auth_android
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.0.5"
+    version: "1.0.6"
   local_auth_ios:
     dependency: transitive
     description:
@@ -951,6 +1009,13 @@ packages:
     dependency: transitive
     description:
       name: node_preamble
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "2.0.1"
+  numeral:
+    dependency: "direct dev"
+    description:
+      name: numeral
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.0.1"
@@ -1658,7 +1723,7 @@ packages:
       name: webview_flutter_wkwebview
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "2.9.0"
+    version: "2.9.1"
   win32:
     dependency: transitive
     description:

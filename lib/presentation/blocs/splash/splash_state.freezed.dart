@@ -19,8 +19,11 @@ mixin _$SplashState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function(bool isSafeDevice, UserInfoEntity? userInfoEntity,
-            List<TokenSpending> listTokens)
+    required TResult Function(
+            bool isSafeDevice,
+            UserInfoEntity? userInfoEntity,
+            List<TokenSpending> listTokens,
+            UserStatusTrackingModel? userStatusTrackingModel)
         done,
     required TResult Function(String msg) error,
   }) =>
@@ -28,8 +31,11 @@ mixin _$SplashState {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function(bool isSafeDevice, UserInfoEntity? userInfoEntity,
-            List<TokenSpending> listTokens)?
+    TResult Function(
+            bool isSafeDevice,
+            UserInfoEntity? userInfoEntity,
+            List<TokenSpending> listTokens,
+            UserStatusTrackingModel? userStatusTrackingModel)?
         done,
     TResult Function(String msg)? error,
   }) =>
@@ -37,8 +43,11 @@ mixin _$SplashState {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function(bool isSafeDevice, UserInfoEntity? userInfoEntity,
-            List<TokenSpending> listTokens)?
+    TResult Function(
+            bool isSafeDevice,
+            UserInfoEntity? userInfoEntity,
+            List<TokenSpending> listTokens,
+            UserStatusTrackingModel? userStatusTrackingModel)?
         done,
     TResult Function(String msg)? error,
     required TResult orElse(),
@@ -132,8 +141,11 @@ class _$SplashInitial with DiagnosticableTreeMixin implements SplashInitial {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function(bool isSafeDevice, UserInfoEntity? userInfoEntity,
-            List<TokenSpending> listTokens)
+    required TResult Function(
+            bool isSafeDevice,
+            UserInfoEntity? userInfoEntity,
+            List<TokenSpending> listTokens,
+            UserStatusTrackingModel? userStatusTrackingModel)
         done,
     required TResult Function(String msg) error,
   }) {
@@ -144,8 +156,11 @@ class _$SplashInitial with DiagnosticableTreeMixin implements SplashInitial {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function(bool isSafeDevice, UserInfoEntity? userInfoEntity,
-            List<TokenSpending> listTokens)?
+    TResult Function(
+            bool isSafeDevice,
+            UserInfoEntity? userInfoEntity,
+            List<TokenSpending> listTokens,
+            UserStatusTrackingModel? userStatusTrackingModel)?
         done,
     TResult Function(String msg)? error,
   }) {
@@ -156,8 +171,11 @@ class _$SplashInitial with DiagnosticableTreeMixin implements SplashInitial {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function(bool isSafeDevice, UserInfoEntity? userInfoEntity,
-            List<TokenSpending> listTokens)?
+    TResult Function(
+            bool isSafeDevice,
+            UserInfoEntity? userInfoEntity,
+            List<TokenSpending> listTokens,
+            UserStatusTrackingModel? userStatusTrackingModel)?
         done,
     TResult Function(String msg)? error,
     required TResult orElse(),
@@ -215,7 +233,8 @@ abstract class _$$SplashDoneCopyWith<$Res> {
   $Res call(
       {bool isSafeDevice,
       UserInfoEntity? userInfoEntity,
-      List<TokenSpending> listTokens});
+      List<TokenSpending> listTokens,
+      UserStatusTrackingModel? userStatusTrackingModel});
 
   $UserInfoEntityCopyWith<$Res>? get userInfoEntity;
 }
@@ -235,6 +254,7 @@ class __$$SplashDoneCopyWithImpl<$Res> extends _$SplashStateCopyWithImpl<$Res>
     Object? isSafeDevice = freezed,
     Object? userInfoEntity = freezed,
     Object? listTokens = freezed,
+    Object? userStatusTrackingModel = freezed,
   }) {
     return _then(_$SplashDone(
       isSafeDevice: isSafeDevice == freezed
@@ -249,6 +269,10 @@ class __$$SplashDoneCopyWithImpl<$Res> extends _$SplashStateCopyWithImpl<$Res>
           ? _value._listTokens
           : listTokens // ignore: cast_nullable_to_non_nullable
               as List<TokenSpending>,
+      userStatusTrackingModel: userStatusTrackingModel == freezed
+          ? _value.userStatusTrackingModel
+          : userStatusTrackingModel // ignore: cast_nullable_to_non_nullable
+              as UserStatusTrackingModel?,
     ));
   }
 
@@ -270,7 +294,8 @@ class _$SplashDone with DiagnosticableTreeMixin implements SplashDone {
   const _$SplashDone(
       {required this.isSafeDevice,
       required this.userInfoEntity,
-      required final List<TokenSpending> listTokens})
+      required final List<TokenSpending> listTokens,
+      required this.userStatusTrackingModel})
       : _listTokens = listTokens;
 
   @override
@@ -285,8 +310,11 @@ class _$SplashDone with DiagnosticableTreeMixin implements SplashDone {
   }
 
   @override
+  final UserStatusTrackingModel? userStatusTrackingModel;
+
+  @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'SplashState.done(isSafeDevice: $isSafeDevice, userInfoEntity: $userInfoEntity, listTokens: $listTokens)';
+    return 'SplashState.done(isSafeDevice: $isSafeDevice, userInfoEntity: $userInfoEntity, listTokens: $listTokens, userStatusTrackingModel: $userStatusTrackingModel)';
   }
 
   @override
@@ -296,7 +324,9 @@ class _$SplashDone with DiagnosticableTreeMixin implements SplashDone {
       ..add(DiagnosticsProperty('type', 'SplashState.done'))
       ..add(DiagnosticsProperty('isSafeDevice', isSafeDevice))
       ..add(DiagnosticsProperty('userInfoEntity', userInfoEntity))
-      ..add(DiagnosticsProperty('listTokens', listTokens));
+      ..add(DiagnosticsProperty('listTokens', listTokens))
+      ..add(DiagnosticsProperty(
+          'userStatusTrackingModel', userStatusTrackingModel));
   }
 
   @override
@@ -309,7 +339,9 @@ class _$SplashDone with DiagnosticableTreeMixin implements SplashDone {
             const DeepCollectionEquality()
                 .equals(other.userInfoEntity, userInfoEntity) &&
             const DeepCollectionEquality()
-                .equals(other._listTokens, _listTokens));
+                .equals(other._listTokens, _listTokens) &&
+            const DeepCollectionEquality().equals(
+                other.userStatusTrackingModel, userStatusTrackingModel));
   }
 
   @override
@@ -317,7 +349,8 @@ class _$SplashDone with DiagnosticableTreeMixin implements SplashDone {
       runtimeType,
       const DeepCollectionEquality().hash(isSafeDevice),
       const DeepCollectionEquality().hash(userInfoEntity),
-      const DeepCollectionEquality().hash(_listTokens));
+      const DeepCollectionEquality().hash(_listTokens),
+      const DeepCollectionEquality().hash(userStatusTrackingModel));
 
   @JsonKey(ignore: true)
   @override
@@ -328,38 +361,50 @@ class _$SplashDone with DiagnosticableTreeMixin implements SplashDone {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function(bool isSafeDevice, UserInfoEntity? userInfoEntity,
-            List<TokenSpending> listTokens)
+    required TResult Function(
+            bool isSafeDevice,
+            UserInfoEntity? userInfoEntity,
+            List<TokenSpending> listTokens,
+            UserStatusTrackingModel? userStatusTrackingModel)
         done,
     required TResult Function(String msg) error,
   }) {
-    return done(isSafeDevice, userInfoEntity, listTokens);
+    return done(
+        isSafeDevice, userInfoEntity, listTokens, userStatusTrackingModel);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function(bool isSafeDevice, UserInfoEntity? userInfoEntity,
-            List<TokenSpending> listTokens)?
+    TResult Function(
+            bool isSafeDevice,
+            UserInfoEntity? userInfoEntity,
+            List<TokenSpending> listTokens,
+            UserStatusTrackingModel? userStatusTrackingModel)?
         done,
     TResult Function(String msg)? error,
   }) {
-    return done?.call(isSafeDevice, userInfoEntity, listTokens);
+    return done?.call(
+        isSafeDevice, userInfoEntity, listTokens, userStatusTrackingModel);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function(bool isSafeDevice, UserInfoEntity? userInfoEntity,
-            List<TokenSpending> listTokens)?
+    TResult Function(
+            bool isSafeDevice,
+            UserInfoEntity? userInfoEntity,
+            List<TokenSpending> listTokens,
+            UserStatusTrackingModel? userStatusTrackingModel)?
         done,
     TResult Function(String msg)? error,
     required TResult orElse(),
   }) {
     if (done != null) {
-      return done(isSafeDevice, userInfoEntity, listTokens);
+      return done(
+          isSafeDevice, userInfoEntity, listTokens, userStatusTrackingModel);
     }
     return orElse();
   }
@@ -401,13 +446,16 @@ class _$SplashDone with DiagnosticableTreeMixin implements SplashDone {
 
 abstract class SplashDone implements SplashState {
   const factory SplashDone(
-      {required final bool isSafeDevice,
-      required final UserInfoEntity? userInfoEntity,
-      required final List<TokenSpending> listTokens}) = _$SplashDone;
+          {required final bool isSafeDevice,
+          required final UserInfoEntity? userInfoEntity,
+          required final List<TokenSpending> listTokens,
+          required final UserStatusTrackingModel? userStatusTrackingModel}) =
+      _$SplashDone;
 
   bool get isSafeDevice;
   UserInfoEntity? get userInfoEntity;
   List<TokenSpending> get listTokens;
+  UserStatusTrackingModel? get userStatusTrackingModel;
   @JsonKey(ignore: true)
   _$$SplashDoneCopyWith<_$SplashDone> get copyWith =>
       throw _privateConstructorUsedError;
@@ -486,8 +534,11 @@ class _$SplashError with DiagnosticableTreeMixin implements SplashError {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function(bool isSafeDevice, UserInfoEntity? userInfoEntity,
-            List<TokenSpending> listTokens)
+    required TResult Function(
+            bool isSafeDevice,
+            UserInfoEntity? userInfoEntity,
+            List<TokenSpending> listTokens,
+            UserStatusTrackingModel? userStatusTrackingModel)
         done,
     required TResult Function(String msg) error,
   }) {
@@ -498,8 +549,11 @@ class _$SplashError with DiagnosticableTreeMixin implements SplashError {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function(bool isSafeDevice, UserInfoEntity? userInfoEntity,
-            List<TokenSpending> listTokens)?
+    TResult Function(
+            bool isSafeDevice,
+            UserInfoEntity? userInfoEntity,
+            List<TokenSpending> listTokens,
+            UserStatusTrackingModel? userStatusTrackingModel)?
         done,
     TResult Function(String msg)? error,
   }) {
@@ -510,8 +564,11 @@ class _$SplashError with DiagnosticableTreeMixin implements SplashError {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function(bool isSafeDevice, UserInfoEntity? userInfoEntity,
-            List<TokenSpending> listTokens)?
+    TResult Function(
+            bool isSafeDevice,
+            UserInfoEntity? userInfoEntity,
+            List<TokenSpending> listTokens,
+            UserStatusTrackingModel? userStatusTrackingModel)?
         done,
     TResult Function(String msg)? error,
     required TResult orElse(),

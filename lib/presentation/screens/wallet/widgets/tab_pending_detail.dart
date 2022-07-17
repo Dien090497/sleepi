@@ -2,7 +2,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
-import 'package:slee_fi/common/const/const.dart';
 import 'package:slee_fi/common/enum/enum.dart';
 import 'package:slee_fi/common/extensions/string_x.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
@@ -20,7 +19,6 @@ import 'package:slee_fi/presentation/blocs/pending/pending_state.dart';
 import 'package:slee_fi/presentation/blocs/user_bloc/user_bloc.dart';
 import 'package:slee_fi/presentation/blocs/user_bloc/user_state.dart';
 import 'package:slee_fi/resources/resources.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 class TabPendingDetail extends StatefulWidget {
   const TabPendingDetail({Key? key, required this.attributeWithdraw})
@@ -52,7 +50,7 @@ class _TabPendingDetailState extends State<TabPendingDetail> {
   }
 
   void _onScroll() {
-    if (_isBottom) BlocProvider.of<PendingBloc>(context).add(PendingFetched());
+    if (_isBottom) BlocProvider.of<PendingBloc>(context).add(const PendingFetched());
   }
 
   bool get _isBottom {
@@ -150,10 +148,9 @@ class _BuildItem extends StatelessWidget {
 
     return SFCard(
       onTap: () async {
-        final url = Uri.parse(Const.avascanUrl);
-        if (await canLaunchUrl(url)) {
-          launchUrl(url);
-        }
+        context
+            .read<PendingBloc>()
+            .add(OpenDetailTransaction(withdrawEntity.txHash));
       },
       radius: 8,
       padding: const EdgeInsets.symmetric(vertical: 12.0, horizontal: 16.0),

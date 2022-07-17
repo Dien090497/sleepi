@@ -2,8 +2,8 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:focus_detector/focus_detector.dart';
 import 'package:slee_fi/common/const/const.dart';
-import 'package:slee_fi/common/extensions/string_x.dart';
 import 'package:slee_fi/common/routes/app_routes.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
@@ -22,177 +22,257 @@ import 'package:slee_fi/presentation/blocs/home/home_state.dart';
 import 'package:slee_fi/presentation/screens/home/widgets/button_start.dart';
 import 'package:slee_fi/presentation/screens/home/widgets/home_switch.dart';
 import 'package:slee_fi/presentation/screens/home/widgets/pop_up_confirm_speed_up.dart';
+import 'package:slee_fi/presentation/screens/home/widgets/pop_up_start_tracking.dart';
 import 'package:slee_fi/presentation/screens/home/widgets/popup_open_lucky_box.dart';
 import 'package:slee_fi/presentation/screens/home/widgets/time_picker.dart';
 import 'package:slee_fi/presentation/screens/staking/widgets/popup_staking.dart';
+import 'package:slee_fi/presentation/screens/tracking/tracking_screen.dart';
 import 'package:slee_fi/resources/resources.dart';
 
-class AlarmBell extends StatelessWidget {
+class AlarmBell extends StatefulWidget {
   const AlarmBell({Key? key}) : super(key: key);
 
   @override
+  State<AlarmBell> createState() => _AlarmBellState();
+}
+
+class _AlarmBellState extends State<AlarmBell> {
+  @override
   Widget build(BuildContext context) {
     final dateTimeUtil = getIt<DateTimeUtils>();
-    return BlocBuilder<HomeBloc, HomeState>(
+    return BlocConsumer<HomeBloc, HomeState>(
+      listener: (context, state) {
+        if (state is HomeLoaded && state.startTracking) {
+          DateTime wakeUp = DateTime.now().add(Duration(minutes: state.time));
+          Navigator.pushReplacementNamed(
+            context,
+            R.tracking,
+            arguments: TrackingParams(
+                timeStart: DateTime.now().millisecondsSinceEpoch,
+                timeWakeUp: wakeUp.millisecondsSinceEpoch,
+                tokenEarn: state.tokenEarn,
+                fromRoute: R.bottomNavigation),
+          );
+        }
+        if (state is HomeStartError) {
+          showMessageDialog(context, state.message);
+        }
+      },
       builder: (context, state) {
         final bed = state is HomeLoaded ? state.selectedBed : null;
-        final minTime =
-            DateTime.now().add(Duration(hours: bed?.startTime?.toInt() ?? 0));
-        final maxTime =
-            DateTime.now().add(Duration(hours: bed?.endTime?.toInt() ?? 0));
+        final minTime = DateTime.now().add(Duration(
+            minutes: bed == null
+                ? 0
+                : bed.startTime == null
+                    ? 0
+                    : (bed.startTime! * 60).toInt()));
+        final maxTime = DateTime.now().add(Duration(
+            minutes: bed == null
+                ? 0
+                : bed.endTime == null
+                    ? 0
+                    : (bed.endTime! * 60).toInt()));
 
-        return Container(
-          padding: const EdgeInsets.symmetric(horizontal: 16),
-          decoration: const BoxDecoration(
-            color: AppColors.dark,
-            borderRadius: BorderRadius.only(
-              topRight: Radius.circular(40),
-              topLeft: Radius.circular(40),
+        return FocusDetector(
+          onFocusGained: () {
+            context.read<HomeBloc>().add(UserStatusTracking());
+            setState(() {
+
+            });
+          },
+          child: Container(
+            padding: const EdgeInsets.symmetric(horizontal: 16),
+            decoration: const BoxDecoration(
+              color: AppColors.dark,
+              borderRadius: BorderRadius.only(
+                topRight: Radius.circular(40),
+                topLeft: Radius.circular(40),
+              ),
             ),
-          ),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              TimePicker(
-                onHourChange: (hour) {
-                  context.read<HomeBloc>().add(ChangeHour(hour));
-                },
-                onMinuteChange: (minute) {
-                  context.read<HomeBloc>().add(ChangeMinute(minute));
-                },
-              ),
-              const SizedBox(height: 16),
-              Text(
-                '${LocaleKeys.range.tr()}: ${state is HomeLoaded && bed != null ? '${dateTimeUtil.HHmm(minTime)}-${dateTimeUtil.HHmm(maxTime)}' : '03:00-06:00'}',
-                style: TextStyles.white16500,
-              ),
-              const SizedBox(height: 24),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Expanded(
-                    child: SFButtonOutLined(
-                      title: LocaleKeys.alarm_bell,
-                      onPressed: () {
-                        Navigator.pushNamed(context, R.alarmSoundEffect);
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                TimePicker(
+                  onHourChange: (hour) {
+                    context.read<HomeBloc>().add(ChangeHour(hour));
+                  },
+                  onMinuteChange: (minute) {
+                    context.read<HomeBloc>().add(ChangeMinute(minute));
+                  },
+                ),
+                const SizedBox(height: 16),
+                Text(
+                  '${LocaleKeys.range.tr()}: ${state is HomeLoaded && bed != null ? '${dateTimeUtil.HHmm(minTime)}-${dateTimeUtil.HHmm(maxTime)}' : '03:00-06:00'}',
+                  style: TextStyles.white16500,
+                ),
+                const SizedBox(height: 24),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Expanded(
+                      child: SFButtonOutLined(
+                        title: LocaleKeys.alarm_bell,
+                        onPressed: () {
+                          Navigator.pushNamed(context, R.alarmSoundEffect);
+                        },
+                        fixedSize: const Size(274, 40),
+                        textStyle: TextStyles.blue16,
+                        borderColor: AppColors.blue,
+                        iconColor: AppColors.blue,
+                        withBorder: 1,
+                      ),
+                    ),
+                    const SizedBox(width: 22),
+                    HomeSwitch(
+                      onChanged: (bool value) {
+                        context.read<HomeBloc>().add(ChangeStatusAlarm(value));
                       },
-                      fixedSize: const Size(274, 40),
-                      textStyle: TextStyles.blue16,
-                      borderColor: AppColors.blue,
-                      iconColor: AppColors.blue,
-                      withBorder: 1,
                     ),
-                  ),
-                  const SizedBox(width: 22),
-                  HomeSwitch(
-                    onChanged: (bool value) {},
-                  ),
-                ],
-              ),
-              const SizedBox(height: 16),
-              ButtonStart(enableStart: _correctTime(minTime, maxTime, state)),
-              const SizedBox(height: 32),
-              Row(
-                children: [
-                  Expanded(
-                    child: Stack(
-                      alignment: Alignment.centerLeft,
-                      children: [
-                        SFPercentBorderGradient(
-                          valueActive:
-                              state is HomeLoaded ? state.tokenEarn : 0,
-                          totalValue: 150,
-                          linearGradient: AppColors.gradientBluePurple,
-                          lineHeight: 18,
-                          barRadius: 20,
-                          backgroundColor: Colors.white.withOpacity(0.05),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                          child: SFText(
-                            keyText:
-                                '${state is HomeLoaded ? state.tokenEarn : 0}/150 SLFT',
-                            style: TextStyles.white10,
+                  ],
+                ),
+                const SizedBox(height: 16),
+                BlocBuilder<HomeBloc, HomeState>(
+                  builder: (context, state) {
+                    final userStatusTracking =
+                    state is HomeLoaded ? state.userStatusTracking : null;
+
+                    return ButtonStart(
+                      enableStart: _correctTime(minTime, maxTime, state),
+                      userStatusTracking: userStatusTracking,
+                      onStartTracking: () {
+                        if (state is HomeLoaded) {
+                          if (state.userStatusTracking!.tracking == null) {
+                            showCustomAlertDialog(context,
+                                children: PopUpConfirmStartTracking(
+                              onPressed: () async {
+                                context.read<HomeBloc>().add(StartTracking());
+                              },
+                            ));
+                          } else {
+                            Navigator.pushNamed(
+                              context,
+                              R.tracking,
+                              arguments: TrackingParams(
+                                  timeStart: state.userStatusTracking!.tracking!
+                                          .startSleep! *
+                                      1000,
+                                  timeWakeUp: state.userStatusTracking!
+                                          .tracking!.wakeUp! *
+                                      1000,
+                                  tokenEarn: double.parse(state
+                                      .userStatusTracking!.tracking!.estEarn!),
+                                  fromRoute: R.bottomNavigation),
+                            );
+                          }
+                        }
+                      },
+                    );
+                  },
+                ),
+                const SizedBox(height: 32),
+                Row(
+                  children: [
+                    Expanded(
+                      child: Stack(
+                        alignment: Alignment.centerLeft,
+                        children: [
+                          SFPercentBorderGradient(
+                            valueActive:
+                                state is HomeLoaded ? state.tokenEarn : 0,
+                            totalValue: 150,
+                            linearGradient: AppColors.gradientBluePurple,
+                            lineHeight: 18,
+                            barRadius: 20,
+                            backgroundColor: Colors.white.withOpacity(0.05),
                           ),
-                        )
+                          Padding(
+                            padding:
+                                const EdgeInsets.symmetric(horizontal: 16.0),
+                            child: SFText(
+                              keyText:
+                                  '${state is HomeLoaded ? state.tokenEarn : 0}/150 SLFT',
+                              style: TextStyles.white10,
+                            ),
+                          )
+                        ],
+                      ),
+                    ),
+                    const SizedBox(width: 12),
+                    GestureDetector(
+                      onTap: () => Navigator.pushNamed(context, R.question),
+                      child: SvgPicture.asset(
+                        Ics.icCircleQuestion,
+                        width: 20,
+                        height: 20,
+                        color: AppColors.lightGrey,
+                      ),
+                    ),
+                    const SizedBox(width: 12),
+                    GestureDetector(
+                      onTap: () => Navigator.pushNamed(context, R.feedback),
+                      child: SvgPicture.asset(
+                        Ics.starOutlined,
+                        width: 20,
+                        height: 20,
+                        color: AppColors.yellow,
+                      ),
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 29),
+                BlocBuilder<HomeBloc, HomeState>(
+                  buildWhen: (previous, current) {
+                    return (previous is HomeLoaded &&
+                        current is HomeLoaded &&
+                        !_theSameList(current.luckyBoxes, previous.luckyBoxes));
+                  },
+                  builder: (context, state) {
+                    final bloc = context.read<HomeBloc>();
+                    return Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+                        ViewGif(
+                          index: 0,
+                          homeBloc: bloc,
+                          entity: _boxWithIndex(state, 0),
+                        ),
+                        const SizedBox(height: 20),
+                        ViewGif(
+                          index: 1,
+                          entity: _boxWithIndex(state, 1),
+                          homeBloc: bloc,
+                        ),
+                        const SizedBox(height: 20),
+                        ViewGif(
+                          index: 2,
+                          entity: _boxWithIndex(state, 2),
+                          homeBloc: bloc,
+                        ),
+                        const SizedBox(height: 20),
+                        ViewGif(
+                          index: 2,
+                          entity: _boxWithIndex(state, 3),
+                          homeBloc: bloc,
+                        ),
+                        const SizedBox(height: 20),
+                        ViewGif(
+                          index: 4,
+                          entity: _boxWithIndex(state, 4),
+                          homeBloc: bloc,
+                        ),
+                        const SizedBox(height: 20),
+                        ViewGif(
+                          index: 5,
+                          entity: _boxWithIndex(state, 5),
+                          homeBloc: bloc,
+                        ),
                       ],
-                    ),
-                  ),
-                  const SizedBox(width: 12),
-                  GestureDetector(
-                    onTap: () => Navigator.pushNamed(context, R.question),
-                    child: SvgPicture.asset(
-                      Ics.icCircleQuestion,
-                      width: 20,
-                      height: 20,
-                      color: AppColors.lightGrey,
-                    ),
-                  ),
-                  const SizedBox(width: 12),
-                  GestureDetector(
-                    onTap: () => Navigator.pushNamed(context, R.feedback),
-                    child: SvgPicture.asset(
-                      Ics.starOutlined,
-                      width: 20,
-                      height: 20,
-                      color: AppColors.yellow,
-                    ),
-                  ),
-                ],
-              ),
-              const SizedBox(height: 29),
-              BlocBuilder<HomeBloc, HomeState>(
-                buildWhen: (previous, current) {
-                  return (previous is HomeLoaded &&
-                      current is HomeLoaded &&
-                      !_theSameList(current.luckyBoxes, previous.luckyBoxes));
-                },
-                builder: (context, state) {
-                  final bloc = context.read<HomeBloc>();
-                  return Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: [
-                      ViewGif(
-                        index: 0,
-                        homeBloc: bloc,
-                        entity: _boxWithIndex(state, 0),
-                      ),
-                      const SizedBox(height: 20),
-                      ViewGif(
-                        index: 1,
-                        entity: _boxWithIndex(state, 1),
-                        homeBloc: bloc,
-                      ),
-                      const SizedBox(height: 20),
-                      ViewGif(
-                        index: 2,
-                        entity: _boxWithIndex(state, 2),
-                        homeBloc: bloc,
-                      ),
-                      const SizedBox(height: 20),
-                      ViewGif(
-                        index: 2,
-                        entity: _boxWithIndex(state, 3),
-                        homeBloc: bloc,
-                      ),
-                      const SizedBox(height: 20),
-                      ViewGif(
-                        index: 4,
-                        entity: _boxWithIndex(state, 4),
-                        homeBloc: bloc,
-                      ),
-                      const SizedBox(height: 20),
-                      ViewGif(
-                        index: 5,
-                        entity: _boxWithIndex(state, 5),
-                        homeBloc: bloc,
-                      ),
-                    ],
-                  );
-                },
-              ),
-              const SizedBox(height: 20),
-            ],
+                    );
+                  },
+                ),
+                const SizedBox(height: 20),
+              ],
+            ),
           ),
         );
       },
@@ -248,7 +328,6 @@ class ViewGif extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        'bed entity is  $entity'.log;
         if (entity != null) {
           homeBloc;
           if (index % 2 == 0) {

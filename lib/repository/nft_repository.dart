@@ -1,7 +1,13 @@
 import 'package:dartz/dartz.dart';
 import 'package:slee_fi/common/enum/enum.dart';
+import 'package:slee_fi/entities/bed_entity/bed_entity.dart';
+import 'package:slee_fi/entities/get_repair_entity/get_repair_entity.dart';
 import 'package:slee_fi/entities/nft_entity/nft_entity.dart';
+import 'package:slee_fi/entities/nft_sell_response_entity/nft_sell_response_entity.dart';
 import 'package:slee_fi/failures/failure.dart';
+import 'package:slee_fi/schema/nft_sell_schema/nft_sell_schema.dart';
+import 'package:slee_fi/schema/repair_schema/repair_schema.dart';
+import 'package:slee_fi/schema/with_draw_nft_schema/with_draw_nft_schema.dart';
 import 'package:web3dart/web3dart.dart';
 
 abstract class INFTRepository {
@@ -59,4 +65,16 @@ abstract class INFTRepository {
   });
 
   Future<TransactionReceipt?> listenTxHash(String txHash);
+
+  Future<Either<Failure, BedEntity>> nftDetail(int nftId);
+
+  Future<Either<Failure, dynamic>> withDrawNFTtoMainWallet({required WithDrawNFTSchema params});
+
+  Future<Either<Failure, NftSellResponseEntity>> sellNFT({required NFTSellSchema params});
+
+  Future<Either<Failure, String>> getTransactionFee();
+
+  Future<Either<Failure, GetRepairtEntity>> getRepair({required num bedId});
+
+  Future<Either<Failure, dynamic>> nftRepair({required RepairSchema repairSchema});
 }

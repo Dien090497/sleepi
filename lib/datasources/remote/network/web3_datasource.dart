@@ -60,11 +60,15 @@ class Web3DataSource {
 
   String createMnemonic() => bip39.generateMnemonic();
 
-  Future<TransactionInformation> getDetailTransaction(String? transactionHash)  => _web3provider.web3client.getTransactionByHash(transactionHash!);
+  Future<TransactionInformation> getDetailTransaction(
+          String? transactionHash) =>
+      _web3provider.web3client.getTransactionByHash(transactionHash!);
 
-  Future<TransactionReceipt?> getTransactionReceipt(String transactionHash)  => _web3provider.web3client.getTransactionReceipt(transactionHash);
+  Future<TransactionReceipt?> getTransactionReceipt(String transactionHash) =>
+      _web3provider.web3client.getTransactionReceipt(transactionHash);
 
-  Future<BlockInformation> getDetailBlock(String blockNumber)  => _web3provider.web3client.getBlockInformation(blockNumber: blockNumber);
+  Future<BlockInformation> getDetailBlock(String blockNumber) =>
+      _web3provider.web3client.getBlockInformation(blockNumber: blockNumber);
 
   Future<EtherAmount> getGasPrice() => _web3provider.web3client.getGasPrice();
 
@@ -192,10 +196,9 @@ class Web3DataSource {
         credentials: credentials);
   }
 
-  Future<BigInt> allowance(
-      EthereumAddress owner, String contractAddress) async {
+  Future<BigInt> allowance(EthereumAddress owner, String contractAddress) {
     final contract = token(contractAddress);
-    return await contract.allowance(
+    return contract.allowance(
         owner, EthereumAddress.fromHex(Const.contractRouterTestNet));
   }
 

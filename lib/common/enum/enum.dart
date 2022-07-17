@@ -1,8 +1,6 @@
 import 'package:slee_fi/l10n/locale_keys.g.dart';
 import 'package:slee_fi/resources/resources.dart';
 
-enum UserRole { guest, admin }
-
 enum BedType {
   short(LocaleKeys.short_bed, LocaleKeys.short),
   middle(LocaleKeys.middle_bed, LocaleKeys.middle),
@@ -115,4 +113,17 @@ enum TransferType {
 
 enum ErrorType { addItemToBed, removeItemFromBed, none }
 
-enum TypeChart { slftChart, sleepScoreChart, bedTimeChart, sleepOnsetChart, wokeUpChart, sleepDurationChart, timeInBedChart, nocturalAwakenChart }
+enum TypeChart {
+  slftChart,
+  sleepScoreChart,
+  bedTimeChart,
+  sleepOnsetChart,
+  wokeUpChart,
+  sleepDurationChart,
+  timeInBedChart,
+  nocturalAwakenChart
+}
+
+enum TypeTimeChart { chartDay, chartWeek, chartMonth }
+
+enum SocketType { ready, empty, block }

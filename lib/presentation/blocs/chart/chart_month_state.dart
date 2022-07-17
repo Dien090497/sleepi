@@ -12,7 +12,7 @@ class ChartMonthState with _$ChartMonthState {
     required DateTime selectedDate,
     required DateTime firstAllowedDate,
     required DateTime lastAllowedDate,
-    required List<DrawChartEntity> dataChart,
+    List<DrawChartEntity>? dataChart,
   }) = ChartMonthLoaded;
 
   const factory ChartMonthState.error(String msg) = ChartMonthError;

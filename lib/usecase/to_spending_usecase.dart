@@ -1,20 +1,17 @@
 import 'package:dartz/dartz.dart';
-import 'package:slee_fi/entities/transfer_spending_entity/transfer_spending_entity.dart';
 import 'package:slee_fi/failures/failure.dart';
 import 'package:slee_fi/repository/spending_repository.dart';
 import 'package:slee_fi/repository/wallet_repository.dart';
 import 'package:slee_fi/usecase/usecase.dart';
 
-class ToSpendingUseCase
-    extends UseCase<TransferSpendingEntity, ToSpendingParams> {
+class ToSpendingUseCase extends UseCase<String, ToSpendingParams> {
   final ISpendingRepository _iSpendingRepository;
   final IWalletRepository _iWalletRepository;
 
   ToSpendingUseCase(this._iSpendingRepository, this._iWalletRepository);
 
   @override
-  Future<Either<Failure, TransferSpendingEntity>> call(
-      ToSpendingParams params) async {
+  Future<Either<Failure, String>> call(ToSpendingParams params) async {
     final currentWalletRes = await _iWalletRepository.currentWallet();
     return currentWalletRes.fold(
       Left.new,

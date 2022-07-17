@@ -107,7 +107,7 @@ class PopUpItemMarketPlace extends StatelessWidget {
           ),
           padding: const EdgeInsets.all(8),
           child: SFText(
-            keyText: item.id.toString(),
+            keyText: item.tokenId.toString(),
             style: TextStyles.blue14,
           ),
         ),

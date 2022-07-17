@@ -17,18 +17,3 @@ extension BedTypeX on BedType {
     }
   }
 }
-
-extension ItemTypeX on ItemType {
-  Color get color {
-    switch (this) {
-      case ItemType.short:
-        return AppColors.red;
-      case ItemType.middle:
-        return AppColors.yellow;
-      case ItemType.long:
-        return AppColors.lightPurple;
-      case ItemType.flexible:
-        return AppColors.green;
-    }
-  }
-}

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:slee_fi/common/widgets/cached_image.dart';
 
 class SFIcon extends StatelessWidget {
   const SFIcon(this.icon,
@@ -15,6 +16,9 @@ class SFIcon extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final tail = icon.split('.').last;
+    if (icon.startsWith('http')) {
+      return CachedImage(image: icon, width: width, height: height,);
+    }
     if (tail.contains('svg')) {
       return SvgPicture.asset(
         icon,

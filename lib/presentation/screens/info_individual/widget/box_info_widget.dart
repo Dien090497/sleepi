@@ -1,9 +1,8 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:slee_fi/common/extensions/num_ext.dart';
 import 'package:slee_fi/common/extensions/string_x.dart';
-
-// import 'package:flutter_translate/flutter_translate.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
 import 'package:slee_fi/common/widgets/sf_buttons.dart';
@@ -17,6 +16,7 @@ class BoxInfoWidget extends StatelessWidget {
     Key? key,
     required this.bed,
   }) : super(key: key);
+
   final BedEntity bed;
 
   @override
@@ -33,7 +33,7 @@ class BoxInfoWidget extends StatelessWidget {
             ),
             const SizedBox(height: 16),
             Text(
-              '${LocaleKeys.time.tr()}: 6h -8h',
+              '${LocaleKeys.time.tr()}: ${bed.startTime!.removeTrailingZeros}h - ${bed.endTime!.removeTrailingZeros}h',
               style: TextStyles.lightGrey14,
             ),
             const SizedBox(height: 24),
@@ -45,26 +45,43 @@ class BoxInfoWidget extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               if (bed.quality != null)
-                SFButton(
-                  text: bed.quality!.reCase(StringCase.titleCase),
-                  textStyle: TextStyles.blue14,
-                  color: Colors.blue.withOpacity(0.05),
-                  radius: 50.h,
+                Container(
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(100),
+                    color: (bed.quality!.qualityBedColor).withOpacity(0.05),
+                  ),
+                  padding:
+                      const EdgeInsets.symmetric(vertical: 8, horizontal: 18),
+                  child: Text(
+                    '${bed.quality}'.reCase(StringCase.titleCase),
+                    style: TextStyles.blue14,
+                  ),
                 ),
               SizedBox(width: 8.w),
-              SFButton(
-                text: bed.type.reCase(StringCase.titleCase),
-                textStyle: TextStyles.green14,
-                color: Colors.green.withOpacity(0.05),
-                radius: 50.h,
+              Container(
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(100),
+                  color: AppColors.green.withOpacity(0.05),
+                ),
+                padding:
+                    const EdgeInsets.symmetric(vertical: 8, horizontal: 18),
+                child: Text(
+                  bed.type.reCase(StringCase.titleCase),
+                  style: TextStyles.green14,
+                ),
               ),
               SizedBox(width: 8.w),
-              SFButton(
-                text:
-                    '${bed.durability % 1 == 0 ? bed.durability.toInt() : bed.durability}/100',
-                textStyle: TextStyles.yellow14,
-                color: Colors.yellow.withOpacity(0.05),
-                radius: 50,
+              Container(
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(100),
+                  color: Colors.yellow.withOpacity(0.05),
+                ),
+                padding:
+                    const EdgeInsets.symmetric(vertical: 8, horizontal: 18),
+                child: Text(
+                  '${bed.durability.removeTrailingZeros}/100',
+                  style: TextStyles.yellow14,
+                ),
               ),
             ],
           ),
@@ -97,8 +114,8 @@ class BoxInfoWidget extends StatelessWidget {
               alignment: Alignment.centerLeft,
               children: [
                 SFPercentBorderGradient(
-                  valueActive: 30,
-                  totalValue: 100,
+                  valueActive: bed.isMint.toDouble(),
+                  totalValue: bed.bedMint.toDouble(),
                   linearGradient: AppColors.gradientBluePurple,
                   lineHeight: 18,
                   barRadius: 20,

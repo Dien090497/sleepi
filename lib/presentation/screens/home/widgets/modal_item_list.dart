@@ -1,6 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:slee_fi/common/extensions/string_x.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
 import 'package:slee_fi/common/widgets/loading_screen.dart';
@@ -15,7 +14,7 @@ import 'package:slee_fi/presentation/blocs/bottom_navigation/bottom_navigation_b
 import 'package:slee_fi/presentation/blocs/bottom_navigation/bottom_navigation_event.dart';
 import 'package:slee_fi/presentation/blocs/home/home_bloc.dart';
 import 'package:slee_fi/presentation/blocs/home/home_state.dart';
-import 'package:slee_fi/presentation/screens/home/widgets/my_jewel_short_widget.dart';
+import 'package:slee_fi/presentation/screens/home/widgets/my_item_short_widget.dart';
 import 'package:slee_fi/presentation/screens/home/widgets/pop_up_item.dart';
 import 'package:slee_fi/resources/resources.dart';
 
@@ -84,19 +83,20 @@ class ModalItemList extends StatelessWidget {
                                 children: PopUpItem(
                                   level: item.level,
                                   effect: item.effect,
-                                  id: '${item.id}',
+                                  id: '${item.tokenId}',
                                   icon: item.image,
                                   onConfirm: () {
                                     homeBloc.add(AddItem(item));
                                   },
                                 ));
                           },
-                          child: MyJewelsShortWidget(
+                          child: MyItemsShortWidget(
                             level: item.level,
-                            id: '${item.id}',
-                            increase: i == 2 ? false : true,
+                            quality: item.quality,
+                            tokenId: '${item.tokenId}',
                             color: AppColors.light4,
-                            icon: item.image,
+                            image: item.image,
+                            type: item.type,
                           ),
                         );
                       },
@@ -122,7 +122,7 @@ class ModalItemList extends StatelessWidget {
                   Navigator.pop(context);
                   if (state is HomeLoaded && state.itemList?.isEmpty == true) {
                     BlocProvider.of<BottomNavigationBloc>(context)
-                        .add(const SelectTab(4,indexTabChild: 2));
+                        .add(const SelectTab(4, indexTabChild: 2));
                   }
                 }),
           ),
@@ -135,7 +135,6 @@ class ModalItemList extends StatelessWidget {
   }
 
   Future<void> _onLoadMore() async {
-    'add new event load more'.log;
     homeBloc.add(LoadMoreItem());
     await Future.delayed(const Duration(milliseconds: 5000));
   }

@@ -8,8 +8,7 @@ import 'package:slee_fi/common/widgets/sf_text.dart';
 import 'package:slee_fi/l10n/locale_keys.g.dart';
 
 class PopUpConfirmStartTracking extends StatelessWidget {
-  const PopUpConfirmStartTracking({this.onPressed, Key? key})
-      : super(key: key);
+  const PopUpConfirmStartTracking({this.onPressed, Key? key}) : super(key: key);
 
   final VoidCallback? onPressed;
 
@@ -35,7 +34,7 @@ class PopUpConfirmStartTracking extends StatelessWidget {
                 width: double.infinity,
                 textStyle: TextStyles.bold14LightWhite,
                 color: AppColors.blue,
-                onPressed: ()  {
+                onPressed: () {
                   if (onPressed != null) {
                     onPressed!();
                   }

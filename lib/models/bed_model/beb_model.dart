@@ -116,7 +116,10 @@ class BedModel {
   BedEntity toEntity() {
     return BedEntity(
       name: nftName,
-      id: id,
+      nftId: nftId,
+      nftClass: nftClass,
+      tokenId: tokenId,
+      id: nftId,
       level: level,
       image: image,
       contractAddress: contractAddress,
@@ -132,8 +135,8 @@ class BedModel {
       special: special,
       resilience: resilience,
       time: time,
-      startTime: startTime??0.0,
-      endTime: startTime??0.0,
+      startTime: startTime,
+      endTime: endTime,
       insurancePercent: insurancePercent,
     );
   }

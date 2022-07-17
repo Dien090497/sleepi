@@ -2,7 +2,6 @@ import 'dart:developer';
 
 import 'package:dartz/dartz.dart';
 import 'package:injectable/injectable.dart';
-import 'package:slee_fi/common/extensions/string_x.dart';
 import 'package:slee_fi/datasources/local/get_storage_datasource.dart';
 import 'package:slee_fi/datasources/local/isar/isar_datasource.dart';
 import 'package:slee_fi/datasources/local/secure_storage.dart';
@@ -149,7 +148,6 @@ class AuthImplementation extends IAuthRepository {
       CreatePasswordSchema createPasswordSchema) async {
     try {
       final result = await _authDataSource.createPassword(createPasswordSchema);
-      'create success $result'.log;
       return Right(result);
     } catch (e) {
       return Left(FailureMessage.fromException(e));
@@ -166,7 +164,6 @@ class AuthImplementation extends IAuthRepository {
         return Right(user.toEntity());
       }
     } catch (e) {
-      'error get current user $e'.log;
       return const Left(FailureMessage('empty user'));
     }
   }
@@ -175,11 +172,9 @@ class AuthImplementation extends IAuthRepository {
       UserInfoModel userInfoModel) async {
     try {
       _secureStorage.writeUser(userInfoModel);
-      'write user is  success '.log;
 
       return const Right(true);
     } catch (e) {
-      'write user is $e'.log;
       return Left(FailureMessage('$e'));
     }
   }

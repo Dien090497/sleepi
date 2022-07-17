@@ -26,6 +26,23 @@ class _WalletTabBarState extends State<WalletTabBar>
   late final TabController controller = widget.controller;
 
   @override
+  void initState() {
+    super.initState();
+    controller.addListener(_tabListener);
+  }
+
+  @override
+  void dispose() {
+    controller.removeListener(_tabListener);
+    super.dispose();
+  }
+
+  void _tabListener() {
+    indexTap = controller.index;
+    setState(() {});
+  }
+
+  @override
   Widget build(BuildContext context) {
     return BlocBuilder<WalletCubit, WalletState>(
       builder: (context, state) {
@@ -42,34 +59,22 @@ class _WalletTabBarState extends State<WalletTabBar>
               if (i == 1) {
                 if (state is WalletNotExisted) {
                   controller.index = 0;
-                  indexTap = 0;
                   setState(() {});
                   _showCreateOrImportWallet().then((value) {
                     _showWarningDialog(value, context);
                     if (value == true) {
                       controller.animateTo(1);
-                      indexTap = 1;
-                      setState(() {});
                     }
                   });
                 } else if (state is WalletNotOpen) {
                   controller.index = 0;
-                  indexTap = 0;
                   setState(() {});
                   Navigator.of(context).pushNamed(R.passcode).then((value) {
                     if (value == true) {
                       controller.animateTo(1);
-                      indexTap = 1;
-                      setState(() {});
                     }
                   });
-                } else {
-                  indexTap = 1;
-                  setState(() {});
                 }
-              } else {
-                indexTap = i;
-                setState(() {});
               }
             },
             index: indexTap,

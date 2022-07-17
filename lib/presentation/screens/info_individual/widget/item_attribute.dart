@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:slee_fi/common/extensions/num_ext.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
 import 'package:slee_fi/common/widgets/sf_icon.dart';
@@ -98,7 +99,7 @@ class ItemAttribute extends StatelessWidget {
           Expanded(
             flex: 1,
             child: Text(
-              '$valueActive',
+              valueActive.removeTrailingZeros,
               style: TextStyles.w700TextColorSize14,
               textAlign: TextAlign.right,
             ),

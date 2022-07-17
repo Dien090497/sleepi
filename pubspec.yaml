@@ -18,7 +18,7 @@ dependencies:
   equatable: ^2.0.3
   easy_localization: ^3.0.1
   flutter_svg: ^1.1.1+1
-  freezed_annotation: ^2.0.3
+  freezed_annotation: ^2.1.0
   json_annotation: ^4.6.0
   get_it: ^7.2.0
   injectable: ^1.5.3
@@ -75,23 +75,30 @@ dependencies:
   webview_flutter: ^3.0.4
   lottie: ^1.3.0
   audioplayers: ^1.0.1
+  device_info_plus: ^4.0.0
+  intl: ^0.17.0
+  external_app_launcher: ^3.0.0
+  health:
+    git:
+      url: https://github.com/Sotatek-ThangBui/health.git
+      ref: master
 
 dependency_overrides:
   analyzer: ^4.2.0
 
 dev_dependencies:
   flutter_lints: ^2.0.1
-  freezed: ^2.0.5
+  freezed: ^2.1.0+1
   json_serializable: ^6.3.1
   build_runner: ^2.2.0
-  injectable_generator: ^1.5.3
+  injectable_generator: ^1.5.4
   retrofit_generator: ^4.0.2
   flutter_launcher_icons: ^0.9.3
   isar_generator: ^2.5.0
   copy_with_extension_gen: ^4.0.2
   test: ^1.21.4
   dart_code_metrics: ^4.16.0
-
+  numeral: ^2.0.1
 
 flutter_icons:
   android: "launcher_icon"

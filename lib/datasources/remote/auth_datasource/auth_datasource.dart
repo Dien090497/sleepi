@@ -8,16 +8,18 @@ import 'package:slee_fi/datasources/remote/auth_datasource/auth_interceptor.dart
 import 'package:slee_fi/datasources/remote/auth_datasource/refresh_token_interceptor.dart';
 import 'package:slee_fi/models/activation_code_response/activation_code_response.dart';
 import 'package:slee_fi/models/active_code_response/active_code_response.dart';
+import 'package:slee_fi/models/bed_detail/bed_detail.dart';
 import 'package:slee_fi/models/create_password_reponse/create_password_response.dart';
 import 'package:slee_fi/models/estimate_sleep_response/estimate_sleep_response.dart';
 import 'package:slee_fi/models/fetch_bed_response/fetch_bed_response.dart';
 import 'package:slee_fi/models/gacha_spin_response/gacha_spin_response.dart';
+import 'package:slee_fi/models/get_repair_response/get_repair_response.dart';
 import 'package:slee_fi/models/global_config_response/global_config_response.dart';
 import 'package:slee_fi/models/item_owner_response/item_owner_response.dart';
 import 'package:slee_fi/models/list_market_place/list_market_place_model.dart';
 import 'package:slee_fi/models/lucky_box/lucky_box.dart';
-import 'package:slee_fi/models/market_place/market_place_model.dart';
 import 'package:slee_fi/models/market_place/result_buy_model.dart';
+import 'package:slee_fi/models/nft_sell_response/nft_sell_response.dart';
 import 'package:slee_fi/models/refresh_token_model/refresh_token_model.dart';
 import 'package:slee_fi/models/send_email_response/send_email_response.dart';
 import 'package:slee_fi/models/setting_active_code_response/setting_active_code_response.dart';
@@ -31,21 +33,24 @@ import 'package:slee_fi/models/user_response/user_response.dart';
 import 'package:slee_fi/models/users_response/users_response.dart';
 import 'package:slee_fi/models/verify_response/verify_response.dart';
 import 'package:slee_fi/models/withdraw_history_response/withdraw_history_response.dart';
+import 'package:slee_fi/schema/add_jewel_schema/add_jewel_schema.dart';
 import 'package:slee_fi/schema/buy_nft_schema/buy_nft_schema.dart';
 import 'package:slee_fi/schema/change_password_schema/change_password_schema.dart';
 import 'package:slee_fi/schema/create_password_schema/create_password_schema.dart';
 import 'package:slee_fi/schema/gacha/gacha_spin_schema.dart';
 import 'package:slee_fi/schema/market/market_schema.dart';
+import 'package:slee_fi/schema/nft_sell_schema/nft_sell_schema.dart';
 import 'package:slee_fi/schema/param_filler_item_fetch/filter_item_schema.dart';
 import 'package:slee_fi/schema/refresh_token_schema/refresh_token_schema.dart';
+import 'package:slee_fi/schema/repair_schema/repair_schema.dart';
 import 'package:slee_fi/schema/sign_in_schema/sign_in_schema.dart';
 import 'package:slee_fi/schema/sign_up_schema/sign_up_schema.dart';
 import 'package:slee_fi/schema/speed_up_lucky_box_schema/speed_up_lucky_box_schema.dart';
 import 'package:slee_fi/schema/stacking_schema/stacking_schema.dart';
 import 'package:slee_fi/schema/verify_schema/verify_schema.dart';
 import 'package:slee_fi/schema/verify_user_schema/verify_user_schema.dart';
-import 'package:slee_fi/schema/white_draw_nft_schema/whit_draw_nft_schema.dart';
 import 'package:slee_fi/schema/white_draw_token_schema/whit_draw_token_schema.dart';
+import 'package:slee_fi/schema/with_draw_nft_schema/with_draw_nft_schema.dart';
 
 part 'auth_datasource.g.dart';
 
@@ -159,7 +164,7 @@ abstract class AuthDataSource {
       @Query('contractAddress') String contractAddress);
 
   @POST('/withdraw/nft')
-  Future<dynamic> withdrawNFT(@Body() WhitDrawNFTSchema whitDrawNFTSchema);
+  Future<dynamic> withdrawNFT(@Body() WithDrawNFTSchema whitDrawNFTSchema);
 
   /// market
   @POST('/market-place/buy-nft')
@@ -184,7 +189,7 @@ abstract class AuthDataSource {
   Future<ListMarketPlaceModel> getListJewel();
 
   @GET('/nft-attributes/bed-detail')
-  Future<MarketPlaceModel> bedDetail(@Query('bedId') int bedId);
+  Future<BedDetail> bedDetail(@Query('bedId') int bedId);
 
   @PUT('/nft-attributes/add-item-for-bed')
   Future<dynamic> addItemForBed(
@@ -240,4 +245,26 @@ abstract class AuthDataSource {
   @GET('/gacha/history')
   Future<dynamic> gachaHistory();
 
+  // individual
+  @PUT('/nft-attributes/open-socket')
+  Future<dynamic> openSocket(@Query('bedId ') int bedId);
+
+  @POST('/nft-attributes/add-jewels')
+  Future<dynamic> addJewel(@Body() AddJewelSchema addJewelSchema);
+
+  @POST('/nft-attributes/remove-jewels')
+  Future<dynamic> removeJewel(@Body() AddJewelSchema addJewelSchema);
+
+  @POST('/nft/sell')
+  Future<NftSell> nftSell(
+      @Body() NFTSellSchema nftSellSchema);
+
+  @GET('/nft/transaction-fee')
+  Future<String> getTransactionFee();
+
+  @GET('/nft/repair')
+  Future<GetRepairResponse> getRepair(@Query('bedId') String bedId);
+
+  @POST('/nft/repair')
+  Future<dynamic> nftRepair (@Body() RepairSchema repairSchema);
 }

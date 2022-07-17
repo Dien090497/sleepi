@@ -1,4 +1,3 @@
-import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
@@ -21,13 +20,15 @@ class FilterItem extends StatefulWidget {
 
 class _FilterItemState extends State<FilterItem> {
   List<String> selectedList = [];
-  int sliderValue = 0;
+  late SfRangeValues sfRangeValues = SfRangeValues(
+    widget.homeBloc.filterItemParam.minLevel.toDouble(),
+    widget.homeBloc.filterItemParam.maxLevel.toDouble(),
+  );
 
   @override
   void initState() {
-    //init value
     selectedList.addAll(widget.homeBloc.filterItemParam.type);
-    sliderValue = widget.homeBloc.filterItemParam.level;
+
     super.initState();
   }
 
@@ -51,9 +52,8 @@ class _FilterItemState extends State<FilterItem> {
                   onPressed: () {
                     setState(() {
                       selectedList.clear();
-                      sliderValue = 0;
+                      sfRangeValues = const SfRangeValues(1.0, 5.0);
                     });
-                    // widget.cubit.filter(selectedSections, selectedSliders);
                   },
                   child: SFText(
                     keyText: LocaleKeys.clear_filter,
@@ -69,13 +69,14 @@ class _FilterItemState extends State<FilterItem> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 TypeSelectionWidget(
-                  name: LocaleKeys.type.tr(),
-                  types: [
-                    LocaleKeys.red.tr(),
-                    LocaleKeys.blue.tr(),
-                    LocaleKeys.green.tr(),
-                    LocaleKeys.purple.tr(),
+                  name: LocaleKeys.type,
+                  types: const [
+                    LocaleKeys.blue,
+                    LocaleKeys.purple,
+                    LocaleKeys.red,
+                    LocaleKeys.white,
                   ],
+                  lengthSelect: 1,
                   listSelected: selectedList,
                   onSelect: (List<String> value) {
                     selectedList = value;
@@ -86,39 +87,28 @@ class _FilterItemState extends State<FilterItem> {
                 Padding(
                   padding: const EdgeInsets.only(left: 28),
                   child: SFText(
-                      keyText: LocaleKeys.type, style: TextStyles.lightGrey14),
+                      keyText: LocaleKeys.level, style: TextStyles.lightGrey14),
                 ),
-                SfSliderTheme(
-                  data: SfSliderThemeData(
-                      activeLabelStyle: TextStyles.lightGrey12,
-                      inactiveLabelStyle: TextStyles.lightGrey12),
-                  child: SfSlider(
-                    min: 0,
-                    max: 30,
-                    value: sliderValue,
-                    interval: 5,
-                    showTicks: true,
-                    showLabels: true,
-                    enableTooltip: true,
-                    showDividers: false,
-                    stepSize: 1,
-                    thumbIcon: Container(
-                      width: 16,
-                      height: 16,
-                      decoration: const BoxDecoration(
-                          color: AppColors.white, shape: BoxShape.circle),
-                      padding: const EdgeInsets.all(4),
-                      child: const DecoratedBox(
-                        decoration: BoxDecoration(
-                            color: AppColors.blue, shape: BoxShape.circle),
-                      ),
-                    ),
-                    // minorTicksPerInterval: 1,
-                    onChanged: (dynamic v) {
-                      sliderValue = v.toInt();
-                      setState(() {});
-                    },
-                  ),
+                SfRangeSliderTheme(
+                  data: SfRangeSliderThemeData(
+                      activeLabelStyle: TextStyles.lightGrey12W500,
+                      inactiveLabelStyle: TextStyles.lightGrey12W500,
+                      inactiveTickColor: AppColors.lightGrey),
+                  child: SfRangeSlider(
+                      min: 1.0,
+                      max: 5.0,
+                      showTicks: true,
+                      showLabels: true,
+                      stepSize: 1,
+                      minorTicksPerInterval: 1,
+                      endThumbIcon: const ThumbIcon(),
+                      startThumbIcon: const ThumbIcon(),
+                      enableTooltip: true,
+                      values: sfRangeValues,
+                      onChanged: (SfRangeValues value) {
+                        setState(() => sfRangeValues = value);
+                        // widget.onSelect(value);
+                      }),
                 ),
                 const SizedBox(height: 26),
               ],
@@ -133,7 +123,11 @@ class _FilterItemState extends State<FilterItem> {
             width: size.width,
             gradient: AppColors.gradientBlueButton,
             onPressed: () {
-              widget.homeBloc.add(FilterItemEvent(selectedList, sliderValue));
+              widget.homeBloc.add(FilterItemEvent(
+                selectedList,
+                sfRangeValues.start.toInt(),
+                sfRangeValues.end.toInt(),
+              ));
               Navigator.pop(context);
             },
           ),

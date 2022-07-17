@@ -1,9 +1,7 @@
-import 'dart:developer' as d;
 import 'dart:ui';
 
 import 'package:easy_localization/easy_localization.dart';
 import 'package:eip55/eip55.dart';
-import 'package:flutter/foundation.dart';
 import 'package:path/path.dart';
 import 'package:recase/recase.dart';
 import 'package:slee_fi/common/enum/enum.dart';
@@ -23,11 +21,11 @@ extension StringX on String {
     return this == 'ja-JP';
   }
 
-  get log {
-    if (kDebugMode) {
-      d.log(this);
-    }
-  }
+  // get log {
+  //   if (kDebugMode) {
+  //     d.log(this);
+  //   }
+  // }
 
   String get formatAddress {
     if (isEmpty || length < 10) {
@@ -84,7 +82,6 @@ extension StringX on String {
     bool result = RegExp(
             r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
         .hasMatch(this);
-    'result match email  $result'.log;
     if (!result) {
       return LocaleKeys.incorrect_email.tr();
     }
@@ -135,7 +132,34 @@ extension StringX on String {
       case 'epic':
         return AppColors.epicBed;
       case 'legend':
+      case 'legendary':
         return AppColors.legendaryBed;
+      case 'special':
+        return AppColors.white;
+      case 'efficiency':
+        return AppColors.red;
+      case 'luck':
+        return AppColors.blue;
+      case 'resilience':
+        return AppColors.purple;
+      case 'ruby':
+        return AppColors.red;
+      case 'amethyst':
+        return AppColors.purple;
+      case 'sapphire':
+        return AppColors.blue;
+      case 'emerald':
+        return AppColors.green;
+      case 'diamond':
+        return AppColors.white;
+      case 'blue':
+        return AppColors.blue;
+      case 'purple':
+        return AppColors.purple;
+      case 'red':
+        return AppColors.red;
+      case 'white':
+        return AppColors.white;
     }
     return AppColors.commonBed;
   }

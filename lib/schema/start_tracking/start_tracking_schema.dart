@@ -7,7 +7,6 @@ part 'start_tracking_schema.g.dart';
 class StartTrackingSchema {
   final bool isEnableInsurance;
   final bool alrm;
-  final String startSleep;
   final String wakeUp;
   final int itemUsed;
   final int bedUsed;
@@ -15,7 +14,7 @@ class StartTrackingSchema {
   StartTrackingSchema({
     required this.isEnableInsurance,
     required this.alrm,
-    required this.startSleep,
+    // required this.startSleep,
     required this.wakeUp,
     required this.itemUsed,
     required this.bedUsed,

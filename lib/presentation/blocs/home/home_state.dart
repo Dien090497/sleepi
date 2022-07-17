@@ -4,6 +4,7 @@ import 'package:slee_fi/common/enum/enum.dart';
 import 'package:slee_fi/entities/bed_entity/bed_entity.dart';
 import 'package:slee_fi/entities/item_entity/item_entity.dart';
 import 'package:slee_fi/entities/lucky_box/lucky_box_entity.dart';
+import 'package:slee_fi/models/user_status_tracking_model/user_status_tracking_model.dart';
 
 part 'home_state.freezed.dart';
 
@@ -26,10 +27,16 @@ class HomeState with _$HomeState {
     @Default(true) bool loadMoreItem,
     @Default(false) bool loading,
     @Default(true) bool enableInsurance,
+    @Default(true) bool enableAlarm,
     @Default(0.0) double tokenEarn,
     required int hour,
     required int minute,
+    required int time,
+    @Default(false) bool startTracking,
+    UserStatusTrackingModel? userStatusTracking,
   }) = HomeLoaded;
+
+  const factory HomeState.startError(String message) = HomeStartError;
 
   const factory HomeState.error(String message) = HomeError;
 }

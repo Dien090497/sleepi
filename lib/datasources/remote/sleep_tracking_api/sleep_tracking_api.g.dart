@@ -42,6 +42,27 @@ class _SleepTrackingApi implements SleepTrackingApi {
       r'itemUsed': itemId,
       r'isEnableInsurance': enableInsurance
     };
+    queryParameters.removeWhere((k, v) => v == null);
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<EstimateSleepResponse>(
+            Options(method: 'GET', headers: _headers, extra: _extra)
+                .compose(_dio.options, '/tracking/estimate-tracking',
+                    queryParameters: queryParameters, data: _data)
+                .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = EstimateSleepResponse.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<EstimateSleepResponse> estimateSleepEarns(
+      bedId, enableInsurance) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{
+      r'bedUsed': bedId,
+      r'isEnableInsurance': enableInsurance
+    };
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
     final _result = await _dio.fetch<Map<String, dynamic>>(
@@ -70,18 +91,19 @@ class _SleepTrackingApi implements SleepTrackingApi {
   }
 
   @override
-  Future<String> wakeUp(schema) async {
+  Future<TrackingResultModel> wakeUp(dataHealthSchema) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
-    _data.addAll(schema.toJson());
-    final _result = await _dio.fetch<String>(_setStreamType<String>(
-        Options(method: 'POST', headers: _headers, extra: _extra)
-            .compose(_dio.options, '/tracking/wake-up',
-                queryParameters: queryParameters, data: _data)
-            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = _result.data!;
+    _data.addAll(dataHealthSchema.toJson());
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<TrackingResultModel>(
+            Options(method: 'POST', headers: _headers, extra: _extra)
+                .compose(_dio.options, '/tracking/wake-up',
+                    queryParameters: queryParameters, data: _data)
+                .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = TrackingResultModel.fromJson(_result.data!);
     return value;
   }
 
@@ -98,6 +120,22 @@ class _SleepTrackingApi implements SleepTrackingApi {
                     queryParameters: queryParameters, data: _data)
                 .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
     final value = UserStatusTrackingModel.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<dynamic> postHealthData(dataHealthSchema) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    _data.addAll(dataHealthSchema.toJson());
+    final _result = await _dio.fetch(_setStreamType<dynamic>(
+        Options(method: 'POST', headers: _headers, extra: _extra)
+            .compose(_dio.options, '/health-app',
+                queryParameters: queryParameters, data: _data)
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = _result.data;
     return value;
   }
 

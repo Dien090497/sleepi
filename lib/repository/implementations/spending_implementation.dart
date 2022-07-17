@@ -3,12 +3,10 @@ import 'dart:math';
 import 'package:dartz/dartz.dart';
 import 'package:injectable/injectable.dart';
 import 'package:slee_fi/common/const/const.dart';
-import 'package:slee_fi/common/enum/enum.dart';
+import 'package:slee_fi/common/extensions/num_ext.dart';
 import 'package:slee_fi/datasources/remote/auth_datasource/auth_datasource.dart';
 import 'package:slee_fi/datasources/remote/network/spending_datasource.dart';
-import 'package:slee_fi/datasources/remote/network/web3_datasource.dart';
 import 'package:slee_fi/entities/staking/staking_entity.dart';
-import 'package:slee_fi/entities/transfer_spending_entity/transfer_spending_entity.dart';
 import 'package:slee_fi/failures/failure.dart';
 import 'package:slee_fi/models/staking_info_response/staking_info_response.dart';
 import 'package:slee_fi/repository/spending_repository.dart';
@@ -18,51 +16,36 @@ import 'package:web3dart/web3dart.dart';
 @Injectable(as: ISpendingRepository)
 class SpendingImplementation extends ISpendingRepository {
   final SpendingDataSource _spendingDataSource;
-  final Web3DataSource _web3DataSource;
   final AuthDataSource _authDataSource;
 
-  SpendingImplementation(
-      this._spendingDataSource, this._web3DataSource, this._authDataSource);
+  SpendingImplementation(this._spendingDataSource, this._authDataSource);
 
   @override
-  Future<Either<Failure, TransferSpendingEntity>> depositToken({
+  Future<Either<Failure, String>> depositToken({
     required double amount,
     required Credentials owner,
     required String addressContract,
     required int userId,
   }) async {
     try {
-      final result = BigInt.from(amount * pow(10, 18));
+      final amountWei = BigInt.from(amount * pow(10, 18));
       if (addressContract == Const.listTokenAddressTestNet[2]) {
         final hash = await _spendingDataSource.toSpendingAvax(
             owner: owner,
-            amount: result,
+            amount: amountWei,
             userId: BigInt.from(userId),
             avax: EthereumAddress.fromHex(
                 "0x0000000000000000000000000000000000000000"),
-            transaction: Transaction(
-              value: EtherAmount.inWei(result),
-            ));
-        final entites = TransferSpendingEntity(
-            type: TokenToSpending.spending, txHash: hash);
-        return Right(entites);
+            transaction: Transaction(value: EtherAmount.inWei(amountWei)));
+        return Right(hash);
       }
-      final token = _web3DataSource.token(addressContract);
-      final allowance = await _spendingDataSource.allowance(
-          await owner.extractAddress(), token);
-      if (allowance < result) {
-        final entites =
-            TransferSpendingEntity(type: TokenToSpending.approve, txHash: '');
-        return Right(entites);
-      }
+      final token = _spendingDataSource.token(addressContract);
       final hash = await _spendingDataSource.toSpending(
           owner: owner,
-          amount: result,
+          amount: amountWei,
           token: token,
           userId: BigInt.from(userId));
-      final entites =
-          TransferSpendingEntity(type: TokenToSpending.spending, txHash: hash);
-      return Right(entites);
+      return Right(hash);
     } catch (e) {
       return Left(FailureMessage('$e'));
     }
@@ -72,9 +55,9 @@ class SpendingImplementation extends ISpendingRepository {
   Future<Either<Failure, String>> approve(
       {required Credentials owner, required String addressContract}) async {
     try {
-      final token = _web3DataSource.token(addressContract);
-      final result =
-          BigInt.parse("100000000000000000000000000000000000000000000000000");
+      final token = _spendingDataSource.token(addressContract);
+      final result = BigInt.parse(
+          "9999999999999999999999999999999999999999999999999999999");
       final txHash = await _spendingDataSource.approve(owner, result, token);
       return Right(txHash);
     } catch (e) {
@@ -119,6 +102,22 @@ class SpendingImplementation extends ISpendingRepository {
     try {
       final result = await _authDataSource.getStakingInfo();
       return Right(result);
+    } on Exception catch (e) {
+      return Left(FailureMessage.fromException(e));
+    }
+  }
+
+  @override
+  Future<Either<Failure, bool>> isAllowanceEnough({
+    required String ownerAddress,
+    required String tokenAddress,
+    required double amount,
+  }) async {
+    try {
+      final token = _spendingDataSource.token(tokenAddress);
+      final result = await _spendingDataSource.allowance(
+          EthereumAddress.fromHex(ownerAddress), token);
+      return Right(result > BigInt.from(amount.etherToWei));
     } on Exception catch (e) {
       return Left(FailureMessage.fromException(e));
     }

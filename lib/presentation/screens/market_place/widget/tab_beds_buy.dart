@@ -18,6 +18,8 @@ import 'package:slee_fi/presentation/screens/market_place/widget/gridview_bed_it
 import 'package:slee_fi/presentation/screens/market_place/widget/pop_up_bed_market_place.dart';
 import 'package:slee_fi/presentation/screens/market_place/widget/tab_bar_filter.dart';
 import 'package:slee_fi/resources/resources.dart';
+import 'package:slee_fi/usecase/fetch_bed_usecase.dart';
+import 'package:syncfusion_flutter_sliders/sliders.dart';
 
 class TabBedsBuy extends StatefulWidget {
   const TabBedsBuy({Key? key}) : super(key: key);
@@ -50,7 +52,7 @@ class _TabBedsBuyState extends State<TabBedsBuy> {
     return DefaultTabController(
       length: 2,
       child: BlocProvider(
-        create: (context) => MarketPlaceCubit()..init(1),
+        create: (context) => MarketPlaceCubit()..init(CategoryType.bed),
         child: BlocConsumer<MarketPlaceCubit, MarketPlaceState>(
           listener: (context, state) {
             final cubit = context.read<MarketPlaceCubit>();
@@ -76,7 +78,7 @@ class _TabBedsBuyState extends State<TabBedsBuy> {
           builder: (context, state) {
             final cubit = context.read<MarketPlaceCubit>();
             return FocusDetector(
-              onFocusGained: (){
+              onFocusGained: () {
                 cubit.clearFilter();
               },
               child: Column(
@@ -90,29 +92,37 @@ class _TabBedsBuyState extends State<TabBedsBuy> {
                         context,
                         sections: {
                           LocaleKeys.type.tr(): [
-                            LocaleKeys.beds.tr(),
-                            LocaleKeys.bed_box.tr(),
-                            LocaleKeys.genesis_beds.tr(),
+                            LocaleKeys.beds,
+                            LocaleKeys.bed_box,
+                            LocaleKeys.genesis_beds,
                           ],
                           LocaleKeys.class_.tr(): [
-                            LocaleKeys.short.tr(),
-                            LocaleKeys.middle.tr(),
-                            LocaleKeys.long.tr(),
-                            LocaleKeys.flexible.tr(),
+                            LocaleKeys.short,
+                            LocaleKeys.middle,
+                            LocaleKeys.long,
+                            LocaleKeys.flexible,
                           ],
                           LocaleKeys.quality.tr(): [
-                            LocaleKeys.common.tr(),
-                            LocaleKeys.uncommon.tr(),
-                            LocaleKeys.rare.tr(),
-                            LocaleKeys.epic.tr(),
-                            LocaleKeys.legendary.tr(),
+                            LocaleKeys.common,
+                            LocaleKeys.uncommon,
+                            LocaleKeys.rare,
+                            LocaleKeys.epic,
+                            LocaleKeys.legendary,
                           ],
                         },
                         sliders: {
-                          LocaleKeys.level.tr(): const FilterSliderValues(
-                              max: 30, min: 0, interval: 30),
-                          LocaleKeys.mint.tr():
-                              const FilterSliderValues(max: 7, min: 0),
+                          LocaleKeys.level.tr(): FilterSliderValues(
+                              value: SfRangeValues(
+                                cubit.params.minLevel,
+                                cubit.params.maxLevel,
+                              ),
+                              max: 30,
+                              min: 1.0),
+                          LocaleKeys.mint.tr(): FilterSliderValues(
+                              max: 7.0,
+                              min: 1.0,
+                              value: SfRangeValues(cubit.params.minBedMint,
+                                  cubit.params.maxBedMint)),
                         },
                       );
                     },
@@ -142,7 +152,8 @@ class _TabBedsBuyState extends State<TabBedsBuy> {
                                           _showBedDialog(context, bed, cubit);
                                         },
                                         onBedTap: (bed) {
-                                          Navigator.pushNamed(context, R.nftInfo,
+                                          Navigator.pushNamed(
+                                              context, R.nftInfo,
                                               arguments: InfoIndividualParams(
                                                   bed: bed.toBedEntity(),
                                                   marketPlaceModel: bed,

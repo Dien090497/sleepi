@@ -75,7 +75,10 @@ class ItemModel {
   ItemEntity toEntity() {
     return ItemEntity(
       name: nftName,
-      id: id,
+      quality: quality,
+      type: type,
+      tokenId: tokenId,
+      id: nftId,
       effect: effect ?? '',
       level: level,
       image: image,

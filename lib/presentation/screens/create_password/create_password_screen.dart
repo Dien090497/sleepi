@@ -5,6 +5,7 @@ import 'package:slee_fi/common/style/text_styles.dart';
 import 'package:slee_fi/common/widgets/background_widget.dart';
 import 'package:slee_fi/common/widgets/dismiss_keyboard_widget.dart';
 import 'package:slee_fi/common/widgets/loading_screen.dart';
+import 'package:slee_fi/common/widgets/phoenix.dart';
 import 'package:slee_fi/common/widgets/sf_app_bar.dart';
 import 'package:slee_fi/common/widgets/sf_buttons.dart';
 import 'package:slee_fi/common/widgets/sf_card.dart';
@@ -48,8 +49,7 @@ class _CreatePasswordScreenState extends State<CreatePasswordScreen> {
       child: BlocConsumer<CreatePasswordCubit, CreatePasswordState>(
         listener: (context, state) {
           if (state is CreatePasswordStateSuccess) {
-            Navigator.pop(context);
-            Navigator.pop(context, state.locale);
+            Phoenix.rebirth(context);
           } else if (state is CreatePasswordStateChangePasswrodSuccess) {
             Navigator.pop(context, true);
           }
@@ -84,7 +84,8 @@ class _CreatePasswordScreenState extends State<CreatePasswordScreen> {
                                       const SizedBox(height: 10),
                                       SFTextFieldPassword(
                                         labelText: LocaleKeys.new_password,
-                                        valueChanged: (value) => cubit.onChangePassword(value),
+                                        valueChanged: (value) =>
+                                            cubit.onChangePassword(value),
                                         errorText: state
                                                 is CreatePasswordStateErrorPassword
                                             ? state.message
@@ -93,7 +94,8 @@ class _CreatePasswordScreenState extends State<CreatePasswordScreen> {
                                       const SizedBox(height: 10),
                                       SFTextFieldPassword(
                                         labelText: LocaleKeys.confirm_password,
-                                        valueChanged: (value)=>cubit.onChangeConfirmPassword(value),
+                                        valueChanged: (value) => cubit
+                                            .onChangeConfirmPassword(value),
                                         errorText: state
                                                 is CreatePasswordStateErrorConfirmPassword
                                             ? state.message

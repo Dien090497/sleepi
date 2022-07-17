@@ -51,12 +51,17 @@ class RefreshItem extends HomeEvent {
 
 class FilterItemEvent extends HomeEvent {
   final List<String> selected;
-  final int level;
+  final int min;
+  final int max;
 
-  const FilterItemEvent(this.selected, this.level);
+  const FilterItemEvent(
+    this.selected,
+    this.min,
+    this.max,
+  );
 
   @override
-  List<Object?> get props => [selected, level];
+  List<Object?> get props => [selected, min, max];
 }
 
 class LoadMoreItem extends HomeEvent {
@@ -74,6 +79,17 @@ class EstimateTracking extends HomeEvent {
   List<Object?> get props => [];
 }
 
+class UserStatusTracking extends HomeEvent {
+  @override
+  List<Object?> get props => [];
+}
+
+class StartTracking extends HomeEvent {
+
+  @override
+  List<Object?> get props => [];
+}
+
 class ChangeInsurance extends HomeEvent {
   final bool enableInsurance;
 
@@ -81,6 +97,15 @@ class ChangeInsurance extends HomeEvent {
 
   @override
   List<Object?> get props => [enableInsurance];
+}
+
+class ChangeStatusAlarm extends HomeEvent {
+  final bool enableAlarm;
+
+  const ChangeStatusAlarm(this.enableAlarm);
+
+  @override
+  List<Object?> get props => [enableAlarm];
 }
 
 class FetchLuckyBox extends HomeEvent {

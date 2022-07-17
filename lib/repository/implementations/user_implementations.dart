@@ -9,6 +9,7 @@ import 'package:slee_fi/entities/active_code/active_code_entity.dart';
 import 'package:slee_fi/entities/item_entity/item_entity.dart';
 import 'package:slee_fi/entities/tracking_result_chart_data_entity/tracking_result_chart_data_entity.dart';
 import 'package:slee_fi/failures/failure.dart';
+import 'package:slee_fi/models/bed_detail/bed_detail.dart';
 import 'package:slee_fi/models/bed_model/beb_model.dart';
 import 'package:slee_fi/models/estimate_sleep_response/estimate_sleep_response.dart';
 import 'package:slee_fi/models/global_config_response/global_config_response.dart';
@@ -17,6 +18,7 @@ import 'package:slee_fi/models/swap_token_to_wallet_response/swap_token_to_walle
 import 'package:slee_fi/models/token_spending/token_spending.dart';
 import 'package:slee_fi/models/withdraw_history_response/withdraw_history_response.dart';
 import 'package:slee_fi/repository/user_repository.dart';
+import 'package:slee_fi/schema/add_jewel_schema/add_jewel_schema.dart';
 import 'package:slee_fi/schema/change_password_schema/change_password_schema.dart';
 import 'package:slee_fi/schema/param_filler_item_fetch/filter_item_schema.dart';
 import 'package:slee_fi/schema/speed_up_lucky_box_schema/speed_up_lucky_box_schema.dart';
@@ -130,8 +132,11 @@ class UserImplementation extends IUserRepository {
   Future<Either<FailureMessage, String>> estimateGasWithdraw(
       EstimateGasWithdrawParam estimateParam) async {
     try {
+      final contractAddr = estimateParam.type.toLowerCase() != 'avax'
+          ? estimateParam.contractAddress
+          : '0x0000000000000000000000000000000000000000';
       final result = await _authDataSource.estimateGasWithdraw(
-          estimateParam.type, estimateParam.contractAddress);
+          estimateParam.type, contractAddr);
       return Right(result);
     } on Exception catch (e) {
       return Left(FailureMessage.fromException(e));
@@ -141,18 +146,18 @@ class UserImplementation extends IUserRepository {
   @override
   Future<Either<FailureMessage, List<BedModel>>> fetchListBed(
       FetchBedParam fetchBedParam) async {
-    // try {
-    final result = await _authDataSource.getNftByOwner(
-      fetchBedParam.limit,
-      fetchBedParam.page,
-      fetchBedParam.categoryId.type,
-      fetchBedParam.attributeNFT,
-      fetchBedParam.bedType,
-    );
-    return Right(result.list);
-    // } catch (e) {
-    //   return Left(FailureMessage.fromException(e));
-    // }
+    try {
+      final result = await _authDataSource.getNftByOwner(
+        fetchBedParam.limit,
+        fetchBedParam.page,
+        fetchBedParam.categoryId.type,
+        fetchBedParam.attributeNFT,
+        fetchBedParam.bedType,
+      );
+      return Right(result.list);
+    } catch (e) {
+      return Left(FailureMessage.fromException(e));
+    }
   }
 
   @override
@@ -229,7 +234,7 @@ class UserImplementation extends IUserRepository {
     try {
       var result = await _authDataSource.estimateSleepEarn(
           estimateTrackingParam.bedId,
-          estimateTrackingParam.itemId,
+          estimateTrackingParam.itemId!,
           estimateTrackingParam.isEnableInsurance);
       return Right(result);
     } catch (e) {
@@ -238,10 +243,56 @@ class UserImplementation extends IUserRepository {
   }
 
   @override
-  Future<Either<FailureMessage, TrackingResultChartDataEntity>> fetchDataChart(ParamsGetDataChart paramsGetDataChart) async {
+  Future<Either<FailureMessage, TrackingResultChartDataEntity>> fetchDataChart(
+      ParamsGetDataChart paramsGetDataChart) async {
     try {
-      final result = await _authDataSource.fetchDataChart('2022-07-7', '2022-07-13', 'week');
+      final result = await _authDataSource.fetchDataChart(
+          paramsGetDataChart.fdate,
+          paramsGetDataChart.tdate,
+          paramsGetDataChart.type);
       return Right(result.toEntity());
+    } catch (e) {
+      return Left(FailureMessage('$e'));
+    }
+  }
+
+  @override
+  Future<Either<FailureMessage, BedDetail>> bedDetail(int bedId) async {
+    try {
+      final result = await _authDataSource.bedDetail(bedId);
+      return Right(result);
+    } catch (e) {
+      return Left(FailureMessage('$e'));
+    }
+  }
+
+  @override
+  Future<Either<FailureMessage, dynamic>> addJewel(
+      AddJewelSchema addJewelSchema) async {
+    try {
+      final result = await _authDataSource.addJewel(addJewelSchema);
+      return Right(result);
+    } catch (e) {
+      return Left(FailureMessage('$e'));
+    }
+  }
+
+  @override
+  Future<Either<FailureMessage, dynamic>> openSocket(int bedId) async {
+    try {
+      final result = await _authDataSource.openSocket(bedId);
+      return Right(result);
+    } catch (e) {
+      return Left(FailureMessage('$e'));
+    }
+  }
+
+  @override
+  Future<Either<FailureMessage, dynamic>> removeJewel(
+      AddJewelSchema addJewelSchema) async {
+    try {
+      final result = await _authDataSource.removeJewel(addJewelSchema);
+      return Right(result);
     } catch (e) {
       return Left(FailureMessage('$e'));
     }

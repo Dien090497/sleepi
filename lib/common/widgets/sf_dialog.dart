@@ -30,7 +30,7 @@ Future<T?> showCustomDialog<T>(
 }
 
 Future<T?> showSuccessfulDialog<T>(BuildContext context, String? message,
-    {EdgeInsets? padding, TextStyle? style, VoidCallback? onPop}) async {
+    {EdgeInsets? padding, TextStyle? style, VoidCallback? onBackPress}) async {
   return showDialog(
       context: context,
       barrierColor: AppColors.backgroundDialog,
@@ -42,10 +42,11 @@ Future<T?> showSuccessfulDialog<T>(BuildContext context, String? message,
               alignment: Alignment.centerRight,
               child: IconButton(
                 onPressed: () {
-                  if (onPop != null) {
-                    onPop();
+                  if (onBackPress != null) {
+                    onBackPress();
+                  } else {
+                    Navigator.pop(context);
                   }
-                  Navigator.pop(context);
                 },
                 icon: const Icon(Icons.close, color: AppColors.white),
               ),
@@ -77,9 +78,7 @@ Future<T?> showMessageDialog<T>(BuildContext context, String message,
   );
 }
 
-Future<T?> showSignUpSuccess<T>(
-  BuildContext context,String? message
-) async {
+Future<T?> showSignUpSuccess<T>(BuildContext context, String? message) async {
   return showDialog(
       context: context,
       barrierColor: AppColors.backgroundDialog,
@@ -121,7 +120,6 @@ Future<T?> showSignUpSuccess<T>(
         );
       });
 }
-
 
 Future<T?> showChangeLanguageDialog<T>(BuildContext context,
     {required Locale locale}) async {
@@ -166,9 +164,7 @@ Future<T?> showChangeLanguageDialog<T>(BuildContext context,
                     gradient: AppColors.gradientBlue,
                     textStyle: TextStyles.white16,
                     onPressed: () {
-                      showLanguageUpdatedDialog(context);
-                      context.setLocale(locale);
-                      Phoenix.rebirth(context);
+                      showLanguageUpdatedDialog(context, locale);
                     },
                   ),
                 ),
@@ -179,10 +175,7 @@ Future<T?> showChangeLanguageDialog<T>(BuildContext context,
       });
 }
 
-
-Future<T?> showLanguageUpdatedDialog<T>(
-    BuildContext context
-    ) async {
+Future<T?> showLanguageUpdatedDialog<T>(BuildContext context, Locale locale) {
   return showDialog(
       context: context,
       barrierColor: AppColors.backgroundDialog,
@@ -216,7 +209,11 @@ Future<T?> showLanguageUpdatedDialog<T>(
               height: 48,
               text: LocaleKeys.ok,
               textStyle: TextStyles.w600WhiteSize16,
-              onPressed: () => Navigator.of(context).pop(),
+              onPressed: () {
+                context.setLocale(locale);
+                Phoenix.rebirth(context);
+                Navigator.of(context).pop();
+              },
               color: AppColors.blue,
             ),
             const SizedBox(height: 32),
@@ -224,8 +221,6 @@ Future<T?> showLanguageUpdatedDialog<T>(
         );
       });
 }
-
-
 
 class SFDialog extends StatelessWidget {
   const SFDialog(
