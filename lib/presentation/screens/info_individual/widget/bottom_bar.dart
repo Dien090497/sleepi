@@ -80,7 +80,10 @@ class _BottomBarWidgetState extends State<BottomBarWidget> {
               listener: (context, state) {
                 if (state is BottomBarInfoIndividualLoaded) {
                   if (state.successTransfer) {
-                    showSuccessfulDialog(context, null);
+                    showSuccessfulDialog(context, null, onBackPress: () {
+                      Navigator.pushNamedAndRemoveUntil(
+                        context, R.bottomNavigation, (r) => false,);
+                    });
                   }
                 }
               },
@@ -119,14 +122,8 @@ class _BottomBarWidgetState extends State<BottomBarWidget> {
                         context,
                         children: [
                           PopUpRepair(
-                            icon: Imgs.shortBed,
-                            cost: 120,
-                            level: 20,
-                            time: 122,
-                            onCancel: () {
-                              Navigator.pop(context);
-                            },
-                            onConfirm: () {},
+                            bedEntity: widget.bedEntity,
+                            cubit: cubit,
                           ),
                         ],
                       ).then((value) => setState(() {
@@ -150,13 +147,8 @@ class _BottomBarWidgetState extends State<BottomBarWidget> {
                       });
                       showCustomDialog(context, children: [
                         PopUpSell(
-                          time: 1,
-                          cost: 1,
-                          icon: Imgs.shortBed,
-                          level: 2,
-                          onCancel: () {},
-                          onConfirm: () {},
-                          className: LocaleKeys.middle,
+                          bedEntity: widget.bedEntity,
+                          cubit: cubit,
                         ),
                       ]).then((value) => setState(() {
                         setState(() {

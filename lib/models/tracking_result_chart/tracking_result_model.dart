@@ -34,7 +34,7 @@ class TrackingResultModel {
   String? wokeUpTime;
   String? bedTime;
   int? sleepQuality;
-  String? startSleepTime;
+  int? startSleepTime;
   DateTime? createdAt;
   DateTime? updatedAt;
   int? id;

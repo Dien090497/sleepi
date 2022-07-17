@@ -45,25 +45,43 @@ class BoxInfoWidget extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               if (bed.quality != null)
-                SFButton(
-                  text: bed.quality!.reCase(StringCase.titleCase),
-                  textStyle: TextStyles.blue14,
-                  color: Colors.blue.withOpacity(0.05),
-                  radius: 50.h,
+                Container(
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(100),
+                    color: (bed.quality!.qualityBedColor).withOpacity(0.05),
+                  ),
+                  padding:
+                      const EdgeInsets.symmetric(vertical: 8, horizontal: 18),
+                  child: Text(
+                    '${bed.quality}'.reCase(StringCase.titleCase),
+                    style: TextStyles.blue14,
+                  ),
                 ),
               SizedBox(width: 8.w),
-              SFButton(
-                text: bed.type.reCase(StringCase.titleCase),
-                textStyle: TextStyles.green14,
-                color: Colors.green.withOpacity(0.05),
-                radius: 50.h,
+              Container(
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(100),
+                  color: AppColors.green.withOpacity(0.05),
+                ),
+                padding:
+                    const EdgeInsets.symmetric(vertical: 8, horizontal: 18),
+                child: Text(
+                  bed.type.reCase(StringCase.titleCase),
+                  style: TextStyles.green14,
+                ),
               ),
               SizedBox(width: 8.w),
-              SFButton(
-                text: '${bed.durability.removeTrailingZeros}/100',
-                textStyle: TextStyles.yellow14,
-                color: Colors.yellow.withOpacity(0.05),
-                radius: 50,
+              Container(
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(100),
+                  color: Colors.yellow.withOpacity(0.05),
+                ),
+                padding:
+                    const EdgeInsets.symmetric(vertical: 8, horizontal: 18),
+                child: Text(
+                  '${bed.durability.removeTrailingZeros}/100',
+                  style: TextStyles.yellow14,
+                ),
               ),
             ],
           ),

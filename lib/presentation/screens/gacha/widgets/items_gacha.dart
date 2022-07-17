@@ -12,11 +12,14 @@ import 'package:slee_fi/presentation/screens/gacha/widgets/probability_widget.da
 class ItemsGacha extends StatelessWidget {
   const ItemsGacha(
       {Key? key,
-      required this.title,
-      required this.singleGacha,
-      required this.timesGacha,
-      required this.typeReward,
-      required this.imagePath,
+        required this.title,
+        required this.singleGacha,
+        required this.timesGacha,
+        required this.singleProbability,
+        required this.timesProbability,
+        required this.typeReward,
+        required this.imagePath,
+        this.normalGacha = true,
       })
       : super(key: key);
 
@@ -24,7 +27,10 @@ class ItemsGacha extends StatelessWidget {
   final String typeReward;
   final int singleGacha;
   final int timesGacha;
+  final int singleProbability;
+  final int timesProbability;
   final String imagePath;
+  final bool normalGacha;
 
   @override
   Widget build(BuildContext context) {
@@ -58,7 +64,13 @@ class ItemsGacha extends StatelessWidget {
         const SizedBox(height: 17),
         ProbabilityWidget(imagePath: imagePath,),
         const SizedBox(height: 20),
-        GachaRollSelections(singleGacha: singleGacha, timesGacha: timesGacha),
+        GachaRollSelections(
+            singleGacha: singleGacha,
+            timesGacha: timesGacha,
+            singleProbability: singleProbability,
+            timesProbability: timesProbability,
+            normalGacha: normalGacha,
+        ),
         const SizedBox(height: 13),
         SFText(
             keyText: typeReward,

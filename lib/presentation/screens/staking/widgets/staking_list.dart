@@ -117,13 +117,13 @@ class _StakingListState extends State<StakingList> {
                         Expanded(
                           flex: 5,
                             child: SFText(
-                              keyText: "$checkValueTvl SLFT",
+                              keyText: "${double.parse(checkValueTvl).formatBalance2Digits} SLFT",
                               style: TextStyles.w700WhiteSize24,
                             )),
                         Expanded(
                           flex: 3,
                           child: SFText(
-                            keyText: "(=${(double.parse(checkValueTvl)*checkValuePriceUsd).isNaN ? 0 : (double.parse(checkValueTvl)*checkValuePriceUsd).formatBalanceToken} USD)",
+                            keyText: "(=${(double.parse(checkValueTvl)*checkValuePriceUsd).isNaN ? 0 : (double.parse(checkValueTvl)*checkValuePriceUsd).formatBalance2Digits} USD)",
                             style: TextStyles.w400White14,
                             textAlign: TextAlign.end,
                           ),

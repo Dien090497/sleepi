@@ -29,6 +29,9 @@ class TransactionRemoteDataSource{
   Future<Either<Failure, HistoryModel>> getHistoryTransaction(HistoryTransactionParams params) async {
     try {
       final historyTransaction = await _historyDataSource.getAllHistory();
+      // print('----------------historyTransaction-----------------');
+      // print(historyTransaction);
+      // int quantityBlock = 5;
       String? blockNumber;
       dynamic response ;
       if(historyTransaction.isNotEmpty){

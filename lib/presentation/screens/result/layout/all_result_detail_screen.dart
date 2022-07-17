@@ -8,13 +8,15 @@ import 'package:slee_fi/common/widgets/sf_buttons.dart';
 import 'package:slee_fi/common/widgets/sf_icon.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
 import 'package:slee_fi/l10n/locale_keys.g.dart';
+import 'package:slee_fi/models/gacha_spin_response/gacha_gift.dart';
 import 'package:slee_fi/presentation/screens/gacha/widgets/attributes_widget.dart';
 import 'package:slee_fi/resources/resources.dart';
 
 class AllResultDetailArguments {
   final String image;
+  final GachaGift? gift;
 
-  AllResultDetailArguments(this.image);
+  AllResultDetailArguments({required this.image, required this.gift});
 }
 
 class AllResultDetailScreen extends StatelessWidget {
@@ -116,9 +118,15 @@ class AllResultDetailScreen extends StatelessWidget {
                           ),
                           const SizedBox(height: 13),
                           Column(
-                            children: const [
-                              AttributesWidget(),
-                              SizedBox(height: 76),
+                            children:  [
+                              AttributesWidget(
+                                bonus: args?.gift?.attributes.bonus ?? 0,
+                                efficiency: args?.gift?.attributes.efficiency ?? 0,
+                                luck: args?.gift?.attributes.luck ?? 0,
+                                resilience: args?.gift?.attributes.resilience ?? 0,
+                                special: args?.gift?.attributes.special ?? 0,
+                              ),
+                             const SizedBox(height: 76),
                             ],
                           )
                         ],

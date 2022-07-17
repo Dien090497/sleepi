@@ -8,17 +8,26 @@ import 'package:slee_fi/common/widgets/sf_button_outlined.dart';
 import 'package:slee_fi/common/widgets/sf_card.dart';
 import 'package:slee_fi/common/widgets/sf_icon.dart';
 import 'package:slee_fi/l10n/locale_keys.g.dart';
+import 'package:slee_fi/models/gacha_spin_response/gacha_spin_response.dart';
 import 'package:slee_fi/presentation/screens/result/layout/all_result_detail_screen.dart';
 import 'package:slee_fi/resources/resources.dart';
+
+class GachaAllResultBedArguments {
+  final GachaSpinResponse? gachaSpinInfo;
+  final List<String> images;
+
+  GachaAllResultBedArguments({this.gachaSpinInfo, required this.images});
+}
 
 class AllResultScreen extends StatelessWidget {
   const AllResultScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    List<String> beds1 = [Imgs.flexibleBed, Imgs.middleBed, Imgs.longBed];
-    List<String> beds2 = [Imgs.longBed, Imgs.middleBed,Imgs.flexibleBed, Imgs.longBed];
-    List<String> beds3 = [Imgs.middleBed,Imgs.shortBed,  Imgs.longBed];
+    final args = ModalRoute.of(context)?.settings.arguments as GachaAllResultBedArguments?;
+    List<String> beds1 = [Imgs.flexibleBed, Imgs.candyGreen, Imgs.longBed];
+    List<String> beds2 = [Imgs.longBed, Imgs.jewelRed,Imgs.flexibleBed, Imgs.jewelGreen];
+    List<String> beds3 = [Imgs.candyPink,Imgs.jewelGreen,  Imgs.longBed];
     return BackgroundWidget(
       appBar: SFAppBar(
         context: context,
@@ -46,7 +55,8 @@ class AllResultScreen extends StatelessWidget {
                               radius: 8,
                               border: Border.all(color: AppColors.white.withOpacity(0.1)),
                               child: SFIcon(beds1[index]),
-                              onTap: () => Navigator.pushNamed(context, R.allResultDetail, arguments:  AllResultDetailArguments(beds1[index])),
+                              onTap: () => Navigator.pushNamed(context, R.allResultDetail,
+                                  arguments:  AllResultDetailArguments(image: beds1[index], gift: args?.gachaSpinInfo?.gift.first.elementAt(index))),
                             );
                           }
                       ),
@@ -62,7 +72,8 @@ class AllResultScreen extends StatelessWidget {
                               radius: 8,
                               border: Border.all(color: AppColors.white.withOpacity(0.1)),
                               child: SFIcon(beds2[index]),
-                              onTap: () => Navigator.pushNamed(context, R.allResultDetail,arguments:  AllResultDetailArguments(beds2[index])),
+                              onTap: () => Navigator.pushNamed(context, R.allResultDetail,
+                                  arguments:  AllResultDetailArguments(image: beds2[index] , gift: args?.gachaSpinInfo?.gift.first.elementAt(index))),
                             );
                           }
                       ),
@@ -79,7 +90,8 @@ class AllResultScreen extends StatelessWidget {
                                 radius: 8,
                                 border: Border.all(color: AppColors.white.withOpacity(0.1)),
                                 child: SFIcon(beds3[index]),
-                                onTap: () => Navigator.pushNamed(context, R.allResultDetail, arguments:  AllResultDetailArguments(beds3[index])),
+                                onTap: () => Navigator.pushNamed(context, R.allResultDetail,
+                                    arguments:  AllResultDetailArguments(image: beds3[index], gift: args?.gachaSpinInfo?.gift.first.elementAt(index))),
                               );
                             }
                         ),

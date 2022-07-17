@@ -91,7 +91,7 @@ class _PreResultScreenState extends State<PreResultScreen> {
                       SFLabelValue(
                           label: LocaleKeys.earning,
                           value:
-                              '${double.parse(resultModel.actualEarn!).formatBalanceTokenHeader} SLFT'),
+                              '${double.parse(resultModel.actualEarn!).formatBalance2Digits} SLFT'),
                       const SizedBox(
                         height: 32,
                       ),

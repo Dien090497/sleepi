@@ -15,11 +15,11 @@ class AttributesWidget extends StatelessWidget {
     this.resilience = 0,
   }) : super(key: key);
 
-  final double efficiency;
-  final double luck;
-  final double bonus;
-  final double special;
-  final double resilience;
+  final double? efficiency;
+  final double? luck;
+  final double? bonus;
+  final double? special;
+  final double? resilience;
 
   @override
   Widget build(BuildContext context) {
@@ -37,25 +37,25 @@ class AttributesWidget extends StatelessWidget {
               linkImage: Ics.efficiency,
               colorIcon: AppColors.ruby,
               title: LocaleKeys.efficiency.tr(),
-              valueActive: efficiency.toDouble()),
+              valueActive: efficiency ?? 0),
           ItemAttribute(
               linkImage: Ics.gift,
               colorIcon: AppColors.blue,
               title: LocaleKeys.luck.tr(),
-              valueActive: luck.toDouble()),
+              valueActive: luck ?? 0),
           ItemAttribute(
               linkImage: Ics.bonus,
               colorIcon: AppColors.green,
               title: LocaleKeys.bonus.tr(),
-              valueActive: bonus.toDouble()),
+              valueActive: bonus ?? 0),
           ItemAttribute(
               linkImage: Ics.special,
               title: LocaleKeys.special.tr(),
-              valueActive: special.toDouble()),
+              valueActive: special ?? 0),
           ItemAttribute(
               linkImage: Ics.resilience,
               title: LocaleKeys.resilience.tr(),
-              valueActive: resilience.toDouble()),
+              valueActive: resilience ?? 0),
         ],
       ),
     );
