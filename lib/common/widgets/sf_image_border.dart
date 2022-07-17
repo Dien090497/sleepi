@@ -1,6 +1,7 @@
 import 'dart:ui' as ui;
 
 import 'package:flutter/material.dart';
+import 'package:slee_fi/common/widgets/cached_image.dart';
 import 'package:slee_fi/common/widgets/sf_icon.dart';
 
 class SFImageBorder extends StatelessWidget {
@@ -33,11 +34,13 @@ class SFImageBorder extends StatelessWidget {
           color: Colors.white.withOpacity(0.05),
           borderRadius: BorderRadius.circular(radius),
         ),
-        child: SFIcon(
-          icon,
-          color: iconColor,
-          fit: BoxFit.contain,
-        ),
+        child: icon.startsWith('http')
+            ? CachedImage(image: icon, boxFit: BoxFit.contain)
+            : SFIcon(
+                icon,
+                color: iconColor,
+                fit: BoxFit.contain,
+              ),
       ),
     );
   }

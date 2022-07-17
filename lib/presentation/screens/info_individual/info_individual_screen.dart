@@ -7,7 +7,6 @@ import 'package:slee_fi/common/widgets/background_widget.dart';
 import 'package:slee_fi/common/widgets/sf_button_outlined.dart';
 import 'package:slee_fi/common/widgets/sf_buttons.dart';
 import 'package:slee_fi/common/widgets/sf_icon.dart';
-import 'package:slee_fi/common/widgets/sf_image_border.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
 import 'package:slee_fi/common/widgets/topbar_common.dart';
 import 'package:slee_fi/entities/bed_entity/bed_entity.dart';
@@ -15,13 +14,13 @@ import 'package:slee_fi/l10n/locale_keys.g.dart';
 import 'package:slee_fi/models/market_place/market_place_model.dart';
 import 'package:slee_fi/presentation/blocs/individual/individual_cubit.dart';
 import 'package:slee_fi/presentation/blocs/individual/individual_state.dart';
+import 'package:slee_fi/presentation/blocs/socket_bloc/socket_bloc.dart';
 import 'package:slee_fi/presentation/screens/gacha/widgets/attributes_widget.dart';
-import 'package:slee_fi/presentation/screens/home/widgets/middle_bed.dart';
 import 'package:slee_fi/presentation/screens/info_individual/widget/bottom_bar.dart';
 import 'package:slee_fi/presentation/screens/info_individual/widget/bottom_bar_market_place.dart';
 import 'package:slee_fi/presentation/screens/info_individual/widget/box_info_widget.dart';
 import 'package:slee_fi/presentation/screens/info_individual/widget/individual_refresher.dart';
-import 'package:slee_fi/resources/resources.dart';
+import 'package:slee_fi/presentation/screens/info_individual/widget/socket.dart';
 
 class InfoIndividualParams {
   final bool? buy;
@@ -39,8 +38,11 @@ class InfoIndividualScreen extends StatelessWidget {
     final args =
         ModalRoute.of(context)?.settings.arguments as InfoIndividualParams;
 
-    return BlocProvider(
-      create: (_) => IndividualCubit(args.bed),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(create: (context) => IndividualCubit(args.bed)),
+        BlocProvider(create: (context) => SocketBloc()),
+      ],
       child: Stack(
         children: [
           BackgroundWidget(
@@ -71,47 +73,9 @@ class InfoIndividualScreen extends StatelessWidget {
                                       const EdgeInsets.symmetric(vertical: 24),
                                   child: SFIcon(state.bed.image),
                                 ),
-                                BedQualityWidget(bed: state.bed),
-                                const SizedBox(height: 16),
-                                Wrap(
-                                  spacing: 8.0,
-                                  runSpacing: 8.0,
-                                  alignment: WrapAlignment.center,
-                                  children: [
-                                    SFImageBorder(
-                                        icon: Imgs.jewelPurple,
-                                        onTap: () {},
-                                        radius: 16,
-                                        size: const Size(65, 65),
-                                        padding: 8),
-                                    SFImageBorder(
-                                      icon: Imgs.jewelGreen,
-                                      onTap: () {},
-                                      radius: 16,
-                                      size: const Size(65, 65),
-                                      padding: 8,
-                                    ),
-                                    SFImageBorder(
-                                        icon: Imgs.jewelSliver,
-                                        onTap: () {},
-                                        radius: 16,
-                                        size: const Size(65, 65),
-                                        padding: 8),
-                                    SFImageBorder(
-                                      icon: Imgs.jewelRed,
-                                      onTap: () {},
-                                      radius: 16,
-                                      size: const Size(65, 65),
-                                      padding: 8,
-                                    ),
-                                    SFImageBorder(
-                                      icon: Imgs.jewelRed,
-                                      onTap: () {},
-                                      radius: 16,
-                                      size: const Size(65, 65),
-                                      padding: 8,
-                                    ),
-                                  ],
+                                Socket(
+                                  bedId: state.bed.id,
+                                  level: state.bed.level,
                                 ),
                                 const SizedBox(height: 16),
                                 BoxInfoWidget(bed: state.bed),
@@ -193,7 +157,9 @@ class InfoIndividualScreen extends StatelessWidget {
             right: 0,
             child: args.marketPlaceModel != null && (args.buy ?? false)
                 ? BottomBarMarketPlaceWidget(bed: args.marketPlaceModel!)
-                : BottomBarWidget(bedEntity: args.bed,),
+                : BottomBarWidget(
+                    bedEntity: args.bed,
+                  ),
           )
         ],
       ),
