@@ -132,8 +132,11 @@ class UserImplementation extends IUserRepository {
   Future<Either<FailureMessage, String>> estimateGasWithdraw(
       EstimateGasWithdrawParam estimateParam) async {
     try {
+      final contractAddr = estimateParam.type.toLowerCase() != 'avax'
+          ? estimateParam.contractAddress
+          : '0x0000000000000000000000000000000000000000';
       final result = await _authDataSource.estimateGasWithdraw(
-          estimateParam.type, estimateParam.contractAddress);
+          estimateParam.type, contractAddr);
       return Right(result);
     } on Exception catch (e) {
       return Left(FailureMessage.fromException(e));

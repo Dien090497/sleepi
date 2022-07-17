@@ -24,14 +24,14 @@ class SendToExternalUseCase extends UseCase<bool, SendToExternalParams> {
     return _iTransactionRepository.sendToExternal(params);
   }
 
-  Future<Either<Failure, double>> calculatorFee(
+  Future<Either<Failure, String>> calculatorFee(
       SendToExternalParams params) async {
     final result = await _iTransactionRepository.calculatorFee(params);
     return result.fold(
       Left.new,
       (gasLimit) {
         final fee = (gasLimit * 50000000000) / pow(10, 18);
-        return Right(fee);
+        return Right('$fee');
       },
     );
   }
