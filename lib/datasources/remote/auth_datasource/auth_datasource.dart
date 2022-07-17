@@ -17,6 +17,7 @@ import 'package:slee_fi/models/item_owner_response/item_owner_response.dart';
 import 'package:slee_fi/models/list_market_place/list_market_place_model.dart';
 import 'package:slee_fi/models/lucky_box/lucky_box.dart';
 import 'package:slee_fi/models/market_place/result_buy_model.dart';
+import 'package:slee_fi/models/nft_sell_response/nft_sell_response.dart';
 import 'package:slee_fi/models/refresh_token_model/refresh_token_model.dart';
 import 'package:slee_fi/models/send_email_response/send_email_response.dart';
 import 'package:slee_fi/models/setting_active_code_response/setting_active_code_response.dart';
@@ -35,6 +36,7 @@ import 'package:slee_fi/schema/buy_nft_schema/buy_nft_schema.dart';
 import 'package:slee_fi/schema/change_password_schema/change_password_schema.dart';
 import 'package:slee_fi/schema/create_password_schema/create_password_schema.dart';
 import 'package:slee_fi/schema/market/market_schema.dart';
+import 'package:slee_fi/schema/nft_sell_schema/nft_sell_schema.dart';
 import 'package:slee_fi/schema/param_filler_item_fetch/filter_item_schema.dart';
 import 'package:slee_fi/schema/refresh_token_schema/refresh_token_schema.dart';
 import 'package:slee_fi/schema/sign_in_schema/sign_in_schema.dart';
@@ -242,4 +244,11 @@ abstract class AuthDataSource {
 
   @POST('/nft-attributes/remove-jewels')
   Future<dynamic> removeJewel(@Body() AddJewelSchema addJewelSchema);
+
+  @POST('/nft/sell')
+  Future<NftSell> nftSell(
+      @Body() NFTSellSchema nftSellSchema);
+
+  @GET('/nft/transaction-fee')
+  Future<String> getTransactionFee();
 }

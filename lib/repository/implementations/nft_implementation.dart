@@ -7,8 +7,10 @@ import 'package:slee_fi/datasources/remote/network/nft_datasource.dart';
 import 'package:slee_fi/datasources/remote/nft_api/nft_api.dart';
 import 'package:slee_fi/entities/bed_entity/bed_entity.dart';
 import 'package:slee_fi/entities/nft_entity/nft_entity.dart';
+import 'package:slee_fi/entities/nft_sell_response_entity/nft_sell_response_entity.dart';
 import 'package:slee_fi/failures/failure.dart';
 import 'package:slee_fi/repository/nft_repository.dart';
+import 'package:slee_fi/schema/nft_sell_schema/nft_sell_schema.dart';
 import 'package:slee_fi/schema/with_draw_nft_schema/with_draw_nft_schema.dart';
 import 'package:web3dart/web3dart.dart';
 
@@ -202,6 +204,29 @@ class NFTImplementation extends INFTRepository {
         signer: signer,
       );
       final result = await _authDataSource.withdrawNFT(schema);
+      return Right(result);
+    } catch (e) {
+      return Left(FailureMessage('$e'));
+    }
+  }
+
+  @override
+  Future<Either<Failure, NftSellResponseEntity>> sellNFT({required NFTSellSchema params}) async {
+    try {
+      print('schema123 ${params.nftId} - ${params.amount}');
+      final result = await _authDataSource.nftSell(params);
+      print('success123');
+      return Right(result.toEntity());
+    } catch (e) {
+      print('nope ${e}');
+      return Left(FailureMessage('$e'));
+    }
+  }
+
+  @override
+  Future<Either<Failure, String>> getTransactionFee() async {
+    try {
+      final result = await _authDataSource.getTransactionFee();
       return Right(result);
     } catch (e) {
       return Left(FailureMessage('$e'));
