@@ -18,6 +18,7 @@ import 'package:slee_fi/common/widgets/sf_text.dart';
 import 'package:slee_fi/l10n/locale_keys.g.dart';
 import 'package:slee_fi/presentation/blocs/tracking/tracking.dart';
 import 'package:slee_fi/presentation/blocs/tracking/tracking_state.dart';
+import 'package:slee_fi/presentation/screens/result/layout/pre_result_screen.dart';
 import 'package:slee_fi/presentation/screens/tracking/widgets/analog_clock.dart';
 import 'package:slee_fi/resources/resources.dart';
 
@@ -75,8 +76,7 @@ class _TrackingScreenState extends State<TrackingScreen> {
           }
         },
       );
-      setState(() {
-      });
+      setState(() {});
     });
     super.initState();
   }
@@ -93,7 +93,10 @@ class _TrackingScreenState extends State<TrackingScreen> {
       onWillPop: () async {
         if (fromRoute == R.splash) {
           Navigator.pushNamedAndRemoveUntil(
-              context, R.bottomNavigation, (r) => false,);
+            context,
+            R.bottomNavigation,
+            (r) => false,
+          );
         }
         return true;
       },
@@ -102,11 +105,9 @@ class _TrackingScreenState extends State<TrackingScreen> {
         child: BlocConsumer<TrackingCubit, TrackingState>(
           listener: (context, state) {
             if (state is TrackingStatePosted) {
-              Navigator.pushReplacementNamed(
-                context,
-                R.preResult,
-                arguments: fromRoute
-              );
+              Navigator.pushReplacementNamed(context, R.preResult,
+                  arguments: PreResultParams(
+                      fromRoute: fromRoute, resultModel: state.resultModel));
             }
             if (state is TrackingStateFail) {
               showMessageDialog(context, state.msg);

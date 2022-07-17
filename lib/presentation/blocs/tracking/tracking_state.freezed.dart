@@ -20,7 +20,7 @@ mixin _$TrackingState {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(bool success) posted,
+    required TResult Function(TrackingResultModel resultModel) posted,
     required TResult Function(String msg) error,
   }) =>
       throw _privateConstructorUsedError;
@@ -28,7 +28,7 @@ mixin _$TrackingState {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(bool success)? posted,
+    TResult Function(TrackingResultModel resultModel)? posted,
     TResult Function(String msg)? error,
   }) =>
       throw _privateConstructorUsedError;
@@ -36,7 +36,7 @@ mixin _$TrackingState {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(bool success)? posted,
+    TResult Function(TrackingResultModel resultModel)? posted,
     TResult Function(String msg)? error,
     required TResult orElse(),
   }) =>
@@ -136,7 +136,7 @@ class _$TrackingStateInitial
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(bool success) posted,
+    required TResult Function(TrackingResultModel resultModel) posted,
     required TResult Function(String msg) error,
   }) {
     return initial();
@@ -147,7 +147,7 @@ class _$TrackingStateInitial
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(bool success)? posted,
+    TResult Function(TrackingResultModel resultModel)? posted,
     TResult Function(String msg)? error,
   }) {
     return initial?.call();
@@ -158,7 +158,7 @@ class _$TrackingStateInitial
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(bool success)? posted,
+    TResult Function(TrackingResultModel resultModel)? posted,
     TResult Function(String msg)? error,
     required TResult orElse(),
   }) {
@@ -261,7 +261,7 @@ class _$TrackingStateLoading
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(bool success) posted,
+    required TResult Function(TrackingResultModel resultModel) posted,
     required TResult Function(String msg) error,
   }) {
     return loading();
@@ -272,7 +272,7 @@ class _$TrackingStateLoading
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(bool success)? posted,
+    TResult Function(TrackingResultModel resultModel)? posted,
     TResult Function(String msg)? error,
   }) {
     return loading?.call();
@@ -283,7 +283,7 @@ class _$TrackingStateLoading
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(bool success)? posted,
+    TResult Function(TrackingResultModel resultModel)? posted,
     TResult Function(String msg)? error,
     required TResult orElse(),
   }) {
@@ -340,7 +340,7 @@ abstract class _$$TrackingStatePostedCopyWith<$Res> {
   factory _$$TrackingStatePostedCopyWith(_$TrackingStatePosted value,
           $Res Function(_$TrackingStatePosted) then) =
       __$$TrackingStatePostedCopyWithImpl<$Res>;
-  $Res call({bool success});
+  $Res call({TrackingResultModel resultModel});
 }
 
 /// @nodoc
@@ -356,13 +356,13 @@ class __$$TrackingStatePostedCopyWithImpl<$Res>
 
   @override
   $Res call({
-    Object? success = freezed,
+    Object? resultModel = freezed,
   }) {
     return _then(_$TrackingStatePosted(
-      success == freezed
-          ? _value.success
-          : success // ignore: cast_nullable_to_non_nullable
-              as bool,
+      resultModel == freezed
+          ? _value.resultModel
+          : resultModel // ignore: cast_nullable_to_non_nullable
+              as TrackingResultModel,
     ));
   }
 }
@@ -372,14 +372,14 @@ class __$$TrackingStatePostedCopyWithImpl<$Res>
 class _$TrackingStatePosted
     with DiagnosticableTreeMixin
     implements TrackingStatePosted {
-  const _$TrackingStatePosted(this.success);
+  const _$TrackingStatePosted(this.resultModel);
 
   @override
-  final bool success;
+  final TrackingResultModel resultModel;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'TrackingState.posted(success: $success)';
+    return 'TrackingState.posted(resultModel: $resultModel)';
   }
 
   @override
@@ -387,7 +387,7 @@ class _$TrackingStatePosted
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty('type', 'TrackingState.posted'))
-      ..add(DiagnosticsProperty('success', success));
+      ..add(DiagnosticsProperty('resultModel', resultModel));
   }
 
   @override
@@ -395,12 +395,13 @@ class _$TrackingStatePosted
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$TrackingStatePosted &&
-            const DeepCollectionEquality().equals(other.success, success));
+            const DeepCollectionEquality()
+                .equals(other.resultModel, resultModel));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(success));
+  int get hashCode => Object.hash(
+      runtimeType, const DeepCollectionEquality().hash(resultModel));
 
   @JsonKey(ignore: true)
   @override
@@ -413,10 +414,10 @@ class _$TrackingStatePosted
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(bool success) posted,
+    required TResult Function(TrackingResultModel resultModel) posted,
     required TResult Function(String msg) error,
   }) {
-    return posted(success);
+    return posted(resultModel);
   }
 
   @override
@@ -424,10 +425,10 @@ class _$TrackingStatePosted
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(bool success)? posted,
+    TResult Function(TrackingResultModel resultModel)? posted,
     TResult Function(String msg)? error,
   }) {
-    return posted?.call(success);
+    return posted?.call(resultModel);
   }
 
   @override
@@ -435,12 +436,12 @@ class _$TrackingStatePosted
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(bool success)? posted,
+    TResult Function(TrackingResultModel resultModel)? posted,
     TResult Function(String msg)? error,
     required TResult orElse(),
   }) {
     if (posted != null) {
-      return posted(success);
+      return posted(resultModel);
     }
     return orElse();
   }
@@ -484,9 +485,10 @@ class _$TrackingStatePosted
 }
 
 abstract class TrackingStatePosted implements TrackingState {
-  const factory TrackingStatePosted(final bool success) = _$TrackingStatePosted;
+  const factory TrackingStatePosted(final TrackingResultModel resultModel) =
+      _$TrackingStatePosted;
 
-  bool get success;
+  TrackingResultModel get resultModel;
   @JsonKey(ignore: true)
   _$$TrackingStatePostedCopyWith<_$TrackingStatePosted> get copyWith =>
       throw _privateConstructorUsedError;
@@ -569,7 +571,7 @@ class _$TrackingStateFail
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(bool success) posted,
+    required TResult Function(TrackingResultModel resultModel) posted,
     required TResult Function(String msg) error,
   }) {
     return error(msg);
@@ -580,7 +582,7 @@ class _$TrackingStateFail
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(bool success)? posted,
+    TResult Function(TrackingResultModel resultModel)? posted,
     TResult Function(String msg)? error,
   }) {
     return error?.call(msg);
@@ -591,7 +593,7 @@ class _$TrackingStateFail
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(bool success)? posted,
+    TResult Function(TrackingResultModel resultModel)? posted,
     TResult Function(String msg)? error,
     required TResult orElse(),
   }) {

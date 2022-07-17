@@ -22,7 +22,7 @@ class TrackingCubit extends Cubit<TrackingState> {
         emit(TrackingState.error('$l'));
       },
       (success) {
-        emit(const TrackingState.posted(true));
+        emit(TrackingState.posted(success));
       },
     );
   }
