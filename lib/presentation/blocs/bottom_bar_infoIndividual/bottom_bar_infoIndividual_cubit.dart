@@ -1,7 +1,7 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:slee_fi/common/enum/enum.dart';
 import 'package:slee_fi/di/injector.dart';
-import 'package:slee_fi/presentation/blocs/bottom_bar_infoIndividual/bottom_bar_infoindividual_state.dart';
+import 'package:slee_fi/presentation/blocs/bottom_bar_infoIndividual/bottom_bar_infoIndividual_state.dart';
 import 'package:slee_fi/schema/nft_sell_schema/nft_sell_schema.dart';
 import 'package:slee_fi/schema/with_draw_nft_schema/with_draw_nft_schema.dart';
 import 'package:slee_fi/usecase/estimate_gas_withdraw.dart';
