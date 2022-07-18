@@ -244,7 +244,8 @@ class SFDialog extends StatelessWidget {
     return Dialog(
       backgroundColor: AppColors.transparent,
       elevation: 0,
-      insetPadding: insetPadding,
+      insetPadding: insetPadding ??
+          const EdgeInsets.symmetric(horizontal: 40.0, vertical: 24.0),
       child: Container(
         width: 1000,
         decoration: BoxDecoration(
