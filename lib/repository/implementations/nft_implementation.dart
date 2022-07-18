@@ -8,6 +8,7 @@ import 'package:slee_fi/datasources/remote/nft_api/nft_api.dart';
 import 'package:slee_fi/entities/bed_entity/bed_entity.dart';
 import 'package:slee_fi/entities/get_repair_entity/get_repair_entity.dart';
 import 'package:slee_fi/entities/nft_entity/nft_entity.dart';
+import 'package:slee_fi/entities/nft_family/nft_family.dart';
 import 'package:slee_fi/entities/nft_sell_response_entity/nft_sell_response_entity.dart';
 import 'package:slee_fi/failures/failure.dart';
 import 'package:slee_fi/repository/nft_repository.dart';
@@ -23,7 +24,8 @@ class NFTImplementation extends INFTRepository {
   final SecureStorage _secureStorage;
   final AuthDataSource _authDataSource;
 
-  NFTImplementation(this._nftDataSource, this._nftApi, this._secureStorage, this._authDataSource);
+  NFTImplementation(this._nftDataSource, this._nftApi, this._secureStorage,
+      this._authDataSource);
 
   @override
   Future<Either<Failure, BigInt>> balanceOf(
@@ -194,7 +196,8 @@ class NFTImplementation extends INFTRepository {
   }
 
   @override
-  Future<Either<Failure, dynamic>> withDrawNFTtoMainWallet({required WithDrawNFTSchema params}) async {
+  Future<Either<Failure, dynamic>> withDrawNFTtoMainWallet(
+      {required WithDrawNFTSchema params}) async {
     try {
       final signature = await _secureStorage.readSignatureMessage();
       final signer = await _secureStorage.readSigner();
@@ -213,7 +216,8 @@ class NFTImplementation extends INFTRepository {
   }
 
   @override
-  Future<Either<Failure, NftSellResponseEntity>> sellNFT({required NFTSellSchema params}) async {
+  Future<Either<Failure, NftSellResponseEntity>> sellNFT(
+      {required NFTSellSchema params}) async {
     try {
       final result = await _authDataSource.nftSell(params);
       return Right(result.toEntity());
@@ -233,7 +237,8 @@ class NFTImplementation extends INFTRepository {
   }
 
   @override
-  Future<Either<Failure, GetRepairtEntity>> getRepair({required num bedId}) async {
+  Future<Either<Failure, GetRepairtEntity>> getRepair(
+      {required num bedId}) async {
     try {
       final result = await _authDataSource.getRepair(bedId.toString());
       return Right(result.toEntity());
@@ -243,10 +248,20 @@ class NFTImplementation extends INFTRepository {
   }
 
   @override
-  Future<Either<Failure, dynamic>> nftRepair({required RepairSchema repairSchema}) async {
+  Future<Either<Failure, dynamic>> nftRepair(
+      {required RepairSchema repairSchema}) async {
     try {
       final result = await _authDataSource.nftRepair(repairSchema);
       return Right(result);
+    } catch (e) {
+      return Left(FailureMessage('$e'));
+    }
+  }
+
+  @override
+  Future<Either<Failure, NftFamilyEntity>> fetchFamily(int bedId) async {
+    try {
+      return Right((await _nftApi.family(bedId)).toEntity());
     } catch (e) {
       return Left(FailureMessage('$e'));
     }

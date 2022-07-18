@@ -6,7 +6,6 @@ import 'package:slee_fi/common/style/text_styles.dart';
 import 'package:slee_fi/common/widgets/background_widget.dart';
 import 'package:slee_fi/common/widgets/sf_button_outlined.dart';
 import 'package:slee_fi/common/widgets/sf_buttons.dart';
-import 'package:slee_fi/common/widgets/sf_dialog.dart';
 import 'package:slee_fi/common/widgets/sf_icon.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
 import 'package:slee_fi/common/widgets/topbar_common.dart';
@@ -21,8 +20,8 @@ import 'package:slee_fi/presentation/screens/info_individual/widget/bottom_bar.d
 import 'package:slee_fi/presentation/screens/info_individual/widget/bottom_bar_market_place.dart';
 import 'package:slee_fi/presentation/screens/info_individual/widget/box_info_widget.dart';
 import 'package:slee_fi/presentation/screens/info_individual/widget/individual_refresher.dart';
-import 'package:slee_fi/presentation/screens/info_individual/widget/socket_component.dart';
 import 'package:slee_fi/presentation/screens/info_individual/widget/mint_from_widget.dart';
+import 'package:slee_fi/presentation/screens/info_individual/widget/socket_component.dart';
 
 class InfoIndividualParams {
   final bool? buy;
@@ -132,12 +131,15 @@ class InfoIndividualScreen extends StatelessWidget {
                                     ),
                                   ),
                                   child: Column(
-                                    children: const [
+                                    children: [
                                       MintFromWidget(
-                                          title: LocaleKeys.minted_from,
-                                          numbers: 2),
+                                        title: LocaleKeys.minted_from,
+                                        familyData: state.nftFamily?.parent,
+                                      ),
                                       MintFromWidget(
-                                          title: LocaleKeys.mint, numbers: 7),
+                                        title: LocaleKeys.mint,
+                                        familyData: state.nftFamily?.children,
+                                      ),
                                     ],
                                   ),
                                 ),

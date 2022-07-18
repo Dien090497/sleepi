@@ -8,6 +8,7 @@ import 'package:slee_fi/datasources/remote/auth_datasource/auth_interceptor.dart
 import 'package:slee_fi/datasources/remote/auth_datasource/refresh_token_interceptor.dart';
 import 'package:slee_fi/models/list_nft_data_model/list_nft_data_model.dart';
 import 'package:slee_fi/models/nft_detail_model/nft_detail_model.dart';
+import 'package:slee_fi/models/nft_family/nft_family_model.dart';
 
 part 'nft_api.g.dart';
 
@@ -33,4 +34,7 @@ abstract class NftApi {
 
   @GET('/{id}')
   Future<NftDetailModel> detailOf(@Path('id') int nftId);
+
+  @GET('/family-nft')
+  Future<NftFamilyModel> family(@Query('id') int bedId);
 }

@@ -8,24 +8,28 @@ import 'package:slee_fi/common/utils/toast_utils.dart';
 import 'package:slee_fi/common/widgets/sf_gridview.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
 import 'package:slee_fi/di/injector.dart';
+import 'package:slee_fi/entities/nft_family/nft_family.dart';
 import 'package:slee_fi/l10n/locale_keys.g.dart';
 import 'package:slee_fi/presentation/screens/info_individual/widget/item_bed.dart';
 
-
 class MintFromWidget extends StatelessWidget {
-  const MintFromWidget({Key? key, required this.title, required this.numbers})
-      : super(key: key);
+  const MintFromWidget({
+    Key? key,
+    required this.title,
+    this.familyData,
+  }) : super(key: key);
 
   final String title;
-  final int numbers;
+  final List<FamilyDataEntity>? familyData;
 
   @override
   Widget build(BuildContext context) {
     FToast fToast = FToast();
     fToast.init(context);
-    final beds = List.generate(
-        numbers, (i) => BedType.values[i % BedType.values.length]);
-    final randomUtils = getIt<RandomUtils>();
+
+    if (familyData == null) {
+      return const SizedBox();
+    }
 
     return Column(
       children: [
@@ -43,21 +47,22 @@ class MintFromWidget extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 12.0),
           child: SFGridView(
-            count: numbers,
+            count: familyData!.length,
             isScroll: false,
             childAspectRatio: 9 / 10,
             physics: const NeverScrollableScrollPhysics(),
             itemBuilder: (context, i) {
               return ItemBed(
-                  id: randomUtils.randomId(),
-                  bed: beds[i],
-                  selected: false,
-                  onTap: () {
-                    ToastUtils.showToast(
-                        fToast,
-                        AppColors.white.withOpacity(0.55),
-                        LocaleKeys.this_bed_is_not_yours);
-                  });
+                id: randomUtils.randomId(),
+                bed: beds[i],
+                selected: false,
+                onTap: () {
+                  ToastUtils.showToast(
+                      fToast,
+                      AppColors.white.withOpacity(0.55),
+                      LocaleKeys.this_bed_is_not_yours);
+                },
+              );
             },
           ),
         ),
