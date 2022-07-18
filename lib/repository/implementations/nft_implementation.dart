@@ -159,22 +159,19 @@ class NFTImplementation extends INFTRepository {
   Future<Either<Failure, double>> estimateGasFee({
     required String nftAddress,
     required String ownerAddress,
-    required String toAddress,
-    required BigInt nftId,
     required String functionName,
+    required List<dynamic> data,
     EtherAmount? gasPrice,
   }) async {
     try {
       final price = gasPrice ?? await _nftDataSource.getGasPrice();
       return Right(await _nftDataSource.estimateGasFee(
-          nftAddress: nftAddress,
-          ownerAddress: EthereumAddress.fromHex(ownerAddress),
-          toAddress: EthereumAddress.fromHex(toAddress.isNotEmpty
-              ? toAddress
-              : '0x52839a88e9fdd2b137e32c65fec8e7b3f1f1ccc6'),
-          nftId: nftId,
-          gasPrice: price,
-          functionName: functionName));
+        nftAddress: nftAddress,
+        ownerAddress: EthereumAddress.fromHex(ownerAddress),
+        gasPrice: price,
+        functionName: functionName,
+        data: data,
+      ));
     } catch (e) {
       return Left(FailureMessage('$e'));
     }

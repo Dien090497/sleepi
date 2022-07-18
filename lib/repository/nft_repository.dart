@@ -58,10 +58,9 @@ abstract class INFTRepository {
   Future<Either<Failure, double>> estimateGasFee({
     required String nftAddress,
     required String ownerAddress,
-    required String toAddress,
-    required BigInt nftId,
     EtherAmount? gasPrice,
     required String functionName,
+    required List<dynamic> data,
   });
 
   Future<TransactionReceipt?> listenTxHash(String txHash);

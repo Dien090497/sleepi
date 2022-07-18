@@ -13,6 +13,7 @@ import 'package:slee_fi/failures/failure.dart';
 import 'package:slee_fi/l10n/locale_keys.g.dart';
 import 'package:slee_fi/usecase/estimate_nft_function_fee_usecase.dart';
 import 'package:slee_fi/usecase/is_valid_wallet_address_usecase.dart';
+import 'package:web3dart/web3dart.dart';
 
 class NftPopUpTransfer extends StatefulWidget {
   const NftPopUpTransfer({
@@ -145,6 +146,13 @@ class _NftPopUpTransferState extends State<NftPopUpTransfer> {
                         toAddress: toAddress,
                         nftId: widget.nft.attribute!.tokenId!,
                         functionName: 'transferFrom',
+                        data: [
+                          widget.ownerAddress,
+                          EthereumAddress.fromHex(toAddress.isNotEmpty
+                              ? toAddress
+                              : '0x52839a88e9fdd2b137e32c65fec8e7b3f1f1ccc6'),
+                          widget.nft.attribute!.tokenId!,
+                        ],
                       )),
                       builder: (context, snapshot) {
                         return Text(
