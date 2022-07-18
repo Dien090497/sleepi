@@ -660,6 +660,26 @@ class _AuthDataSource implements AuthDataSource {
   }
 
   @override
+  Future<TrackingResultDaysChart> fetchDataDaysChart(fdate, tdate, type) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{
+      r'fdate': fdate,
+      r'tdate': tdate,
+      r'type': type
+    };
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<TrackingResultDaysChart>(
+            Options(method: 'GET', headers: _headers, extra: _extra)
+                .compose(_dio.options, '/tracking-result/chart',
+                    queryParameters: queryParameters, data: _data)
+                .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = TrackingResultDaysChart.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
   Future<GachaSpinResponse> gachaSpinBonus(gachaSpinSchema) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};

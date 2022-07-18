@@ -1,9 +1,11 @@
 import 'package:json_annotation/json_annotation.dart';
+import 'package:slee_fi/entities/tracking_result_chart_days_entity/tracking_result_chart_days_entity.dart';
+import 'package:slee_fi/models/chart_draw_days/chart_draw_days.dart';
 
 part 'tracking_result_chart.g.dart';
 
 @JsonSerializable()
-class TrackingResultChart {
+class TrackingResultDaysChart {
   @JsonKey(name: 'token_earn')
   final String tokenEarn;
   @JsonKey(name: 'token_earn_symbol')
@@ -22,11 +24,11 @@ class TrackingResultChart {
   @JsonKey(name: 'sleep_duration')
   final int sleepDuration;
   @JsonKey(name: 'noctural_awaken')
-  final String? nocturalAwaken;
+  final int? nocturalAwaken;
   @JsonKey(name: 'chart_data')
-  final List<dynamic> chartData;
+  final List<ChartDrawDays> chartData;
 
-  TrackingResultChart({
+  TrackingResultDaysChart({
     required this.tokenEarn,
     required this.tokenEarnSymbol,
     required this.scorePercent,
@@ -40,8 +42,22 @@ class TrackingResultChart {
     required this.chartData,
   });
 
-  factory TrackingResultChart.fromJson(Map<String, dynamic> json) =>
-      _$TrackingResultChartFromJson(json);
+  factory TrackingResultDaysChart.fromJson(Map<String, dynamic> json) =>
+      _$TrackingResultDaysChartFromJson(json);
 
-  Map<String, dynamic> toJson() => _$TrackingResultChartToJson(this);
+  Map<String, dynamic> toJson() => _$TrackingResultDaysChartToJson(this);
+
+  TrackingResultChartDaysEntity toEntity() => TrackingResultChartDaysEntity(
+        sleepDuration: sleepDuration,
+        wokeUp: wokeUp,
+        onsetTime: onsetTime,
+        betTime: betTime,
+        timeInBed: timeInBed,
+        chartData: chartData,
+        tokenEarn: tokenEarn,
+        tokenEarnSymbol: tokenEarn,
+        scorePercent: scorePercent,
+        score: score,
+        nocturalAwaken: nocturalAwaken,
+      );
 }

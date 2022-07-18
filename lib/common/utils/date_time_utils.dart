@@ -59,8 +59,8 @@ class DateTimeUtils {
   DateTime subtractMonth(DateTime time, int months) {
     return Jiffy(time).subtract(months: months).dateTime;
   }
-  String convertTimeStamp ({required int timeStamp}) {
-    var date = DateFormat('dd').format(DateTime.fromMillisecondsSinceEpoch(timeStamp * 1000));
+  String convertTimeStamp ({required int timeStamp, required String type}) {
+    var date = DateFormat(type).format(DateTime.fromMillisecondsSinceEpoch(timeStamp * 1000));
     return date.toString();
   }
   String convertDateTimeWithType ({required DateTime dateTime, required String type}) {

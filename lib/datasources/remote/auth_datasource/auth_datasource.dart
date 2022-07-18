@@ -30,6 +30,7 @@ import 'package:slee_fi/models/staking_info_response/staking_info_response.dart'
 import 'package:slee_fi/models/staking_response/staking_response.dart';
 import 'package:slee_fi/models/swap_token_to_wallet_response/swap_token_to_wallet_response.dart';
 import 'package:slee_fi/models/token_spending/token_spending.dart';
+import 'package:slee_fi/models/tracking_result_chart/tracking_result_chart.dart';
 import 'package:slee_fi/models/tracking_result_chart/tracking_result_chart_data.dart';
 import 'package:slee_fi/models/user_response/user_response.dart';
 import 'package:slee_fi/models/users_response/users_response.dart';
@@ -244,6 +245,15 @@ abstract class AuthDataSource {
     @Query('tdate') String tdate,
     @Query('type') String type,
   );
+
+  @GET('/tracking-result/chart')
+  Future<TrackingResultDaysChart> fetchDataDaysChart(
+    @Query('fdate') String fdate,
+    @Query('tdate') String tdate,
+    @Query('type') String type,
+  );
+
+  //TrackingResultDaysChart
 
   @POST('/gacha/spin')
   Future<GachaSpinResponse> gachaSpinBonus(

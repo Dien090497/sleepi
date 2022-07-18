@@ -155,7 +155,7 @@ class ChartWeekCubit extends Cubit<ChartWeekState> {
           maxY = data[i].v;
         }
         flSpot.add(FlSpot(i.toDouble(), data[i].v.toDouble()));
-        listXY.add(DataXYEntity(x: dateTimeUtils.convertTimeStamp(timeStamp: data[i].t), y: data[i].v.toDouble()));
+        listXY.add(DataXYEntity(x: dateTimeUtils.convertTimeStamp(timeStamp: data[i].t, type: 'dd'), y: data[i].v.toDouble()));
       }
       DrawChartEntity drawChartEntity = DrawChartEntity(
         listFlSpot: flSpot,
