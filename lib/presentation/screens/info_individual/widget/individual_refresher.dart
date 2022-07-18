@@ -3,6 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:slee_fi/presentation/blocs/individual/individual_cubit.dart';
 import 'package:slee_fi/presentation/blocs/individual/individual_state.dart';
+import 'package:slee_fi/presentation/blocs/socket_bloc/socket_bloc.dart';
+import 'package:slee_fi/presentation/blocs/socket_bloc/socket_event.dart';
 
 class IndividualRefresher extends StatefulWidget {
   const IndividualRefresher({Key? key, required this.child}) : super(key: key);
@@ -26,7 +28,7 @@ class _IndividualRefresherState extends State<IndividualRefresher> {
   Widget build(BuildContext context) {
     return BlocListener<IndividualCubit, IndividualState>(
       listener: (context, state) {
-        if (!state.isLoading) {
+        if (!state.isRefresh) {
           _controller.refreshCompleted();
         } else {
           _controller.requestRefresh();
@@ -37,6 +39,7 @@ class _IndividualRefresherState extends State<IndividualRefresher> {
         child: widget.child,
         onRefresh: () {
           context.read<IndividualCubit>().refresh();
+          context.read<SocketBloc>().add(const RefreshSocket());
         },
       ),
     );

@@ -18,6 +18,13 @@ class SocketInit extends SocketEvent {
   List<Object?> get props => [bedId, level];
 }
 
+class RefreshSocket extends SocketEvent {
+  const RefreshSocket();
+
+  @override
+  List<Object?> get props => [];
+}
+
 class OpenSocket extends SocketEvent {
   final int socketIndex;
 
@@ -66,6 +73,26 @@ class SocketError extends SocketEvent {
 
   @override
   List<Object?> get props => [message];
+}
+
+class StartLoading extends SocketEvent {
+  const StartLoading();
+
+  @override
+  List<Object?> get props => [];
+}
+
+class StopLoading extends SocketEvent {
+  const StopLoading();
+
+  @override
+  List<Object?> get props => [];
+}
+class LevelUp extends SocketEvent {
+  const LevelUp();
+
+  @override
+  List<Object?> get props => [];
 }
 
 // class LoadMoreJewel extends SocketEvent {

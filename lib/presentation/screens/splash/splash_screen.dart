@@ -34,6 +34,7 @@ class SplashScreen extends StatelessWidget {
                     userInfoEntity: state.userInfoEntity!,
                     listTokens: state.listTokens));
                 if (state.userStatusTrackingModel!.tracking != null) {
+
                   Navigator.pushNamedAndRemoveUntil(
                     context,
                     R.tracking,

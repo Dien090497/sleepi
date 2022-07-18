@@ -23,9 +23,14 @@ class SocketBloc extends Bloc<SocketEvent, SocketState> {
     on<FetchJewels>(_fetchJewels);
     on<RefreshJewels>(_refreshJewels);
     on<SocketError>(_onError);
+    on<StartLoading>(_startLoading);
+    on<StopLoading>(_stopLoading);
+    on<RefreshSocket>(_refreshSocket);
+    on<LevelUp>(_onLevelUp);
   }
 
   int bedId = -1;
+  int levelBed = -1;
   final int _limit = 10;
   int _currentPage = 1;
 
@@ -36,12 +41,17 @@ class SocketBloc extends Bloc<SocketEvent, SocketState> {
   final _fetchListBedUC = getIt<FetchBedUseCase>();
 
   void _fetchSocket(SocketInit event, Emitter<SocketState> emit) async {
+    if (state is SocketStateLoaded) {
+      return;
+    }
     var maxSocket = _maxSocketOpened(event.level);
     bedId = event.bedId;
+    levelBed = event.level;
     _currentPage = 1;
     var result = await _detailBedUseCase.call(event.bedId);
     result.fold(
       (l) {
+        print('_fetchSocket error ');
         var list = List.generate(
             maxSocket,
             (index) => const SocketEntity(
@@ -51,18 +61,17 @@ class SocketBloc extends Bloc<SocketEvent, SocketState> {
       },
       (r) {
         final List<SocketEntity> list = [];
-        for (int i = 0; i < maxSocket; i++) {
+        for (int i = 0; i <= maxSocket; i++) {
           if (i < r.jewels.length) {
             list.add(SocketEntity(
                 socketType: SocketType.ready, jewelEntity: r.jewels[i]));
           } else if (i >= r.jewels.length && i < (r.socket ?? 0)) {
             list.add(const SocketEntity(socketType: SocketType.empty));
-          } else if (i > (r.socket ?? 0) && i < maxSocket) {
+          } else if (i > (r.socket ?? 0) && i <= maxSocket) {
             list.add(const SocketEntity(socketType: SocketType.block));
           }
         }
         emit(SocketState.loaded(
-            errorMessage: null,
             socketEntity: list,
             maxSocket: maxSocket,
             socketOpened: r.socket ?? 0));
@@ -71,11 +80,12 @@ class SocketBloc extends Bloc<SocketEvent, SocketState> {
   }
 
   void _openSocket(OpenSocket event, Emitter<SocketState> emit) async {
+    add(const StartLoading());
     var result = await _openSocketUseCase.call(bedId);
+    add(const StopLoading());
     result.fold((l) {
       add(SocketError(l.msg));
     }, (r) {
-
       final currentState = state;
       if (currentState is SocketStateLoaded) {
         final List<SocketEntity> list = List.from(currentState.socketEntity);
@@ -88,16 +98,16 @@ class SocketBloc extends Bloc<SocketEvent, SocketState> {
         list.insert(
             firstBlock, const SocketEntity(socketType: SocketType.empty));
         emit(currentState.copyWith(
-            errorMessage: null,
-            socketEntity: list,
-            socketOpened: currentState.socketOpened + 1));
+            socketEntity: list, socketOpened: currentState.socketOpened + 1));
       }
     });
   }
 
   void _addJewel(AddJewel event, Emitter<SocketState> emit) async {
+    add(const StartLoading());
     var result = await _addJewelUseCase
         .call(AddJewelSchema(bedId, event.jewelEntity.id));
+    add(const StopLoading());
     result.fold((l) {
       add(SocketError(l.msg));
     }, (r) {
@@ -116,10 +126,13 @@ class SocketBloc extends Bloc<SocketEvent, SocketState> {
               socketType: SocketType.ready,
               jewelEntity: event.jewelEntity,
             ));
-        emit(currentState.copyWith(
-          socketEntity: list,
-          errorMessage: null,
-        ));
+        List<JewelEntity> jewelTemp = [];
+        if (currentState.jewels != null) {
+          jewelTemp.addAll(List.from(currentState.jewels!));
+          jewelTemp
+              .removeWhere((element) => element.id == event.jewelEntity.id);
+        }
+        emit(currentState.copyWith(socketEntity: list, jewels: jewelTemp));
       }
       return;
     });
@@ -134,18 +147,22 @@ class SocketBloc extends Bloc<SocketEvent, SocketState> {
       }
 
       final List<SocketEntity> list = List.from(currentState.socketEntity);
-
+      add(const StartLoading());
       var result = await _removeUseCase
           .call(AddJewelSchema(bedId, list[event.index].jewelEntity!.id));
+      add(const StopLoading());
       result.fold((l) => add(SocketError(l.msg)), (r) {
-        list.removeAt(event.index);
+        final socketEntity = list.removeAt(event.index);
         list.insert(
             event.index, const SocketEntity(socketType: SocketType.empty));
         list.sort((a, b) => a.socketType.index.compareTo(b.socketType.index));
-        emit(currentState.copyWith(
-          socketEntity: list,
-          errorMessage: null,
-        ));
+        List<JewelEntity> jewelTemp = [];
+        if (currentState.jewels != null && socketEntity.jewelEntity != null) {
+          jewelTemp.addAll(List.from(currentState.jewels!));
+          jewelTemp.add(socketEntity.jewelEntity!);
+        }
+
+        emit(currentState.copyWith(socketEntity: list, jewels: jewelTemp));
       });
     }
   }
@@ -194,35 +211,32 @@ class SocketBloc extends Bloc<SocketEvent, SocketState> {
     return -1;
   }
 
-// _checkSocket(int maxSocket, int socketOpened, int? id,
-//     List<SocketEntity> list, int index) {
-//   print(
-//       'run to add socket blocked    $maxSocket $socketOpened   $id    $index');
-//
-//   if (id != null && index < socketOpened) {
-//     list.add(const SocketEntity(
-//         socketType: SocketType.ready, id: 0, image: Ics.jewel));
-//     return;
-//   }
-//
-//   if (index >= socketOpened && index <= maxSocket) {
-//     print('run to add socket blocked ');
-//     list.add(const SocketEntity(
-//         socketType: SocketType.block, id: -1, image: Ics.jewelWatting));
-//     return;
-//   }
-//
-//   if (id == null && index < socketOpened) {
-//     list.add(
-//         const SocketEntity(socketType: SocketType.empty, id: -1, image: ''));
-//     return;
-//   }
-// }
-
   void _onError(SocketError event, Emitter<SocketState> emit) {
     final currentState = state;
     if (currentState is SocketStateLoaded) {
       emit(currentState.copyWith(errorMessage: event.message));
     }
   }
+
+  FutureOr<void> _startLoading(StartLoading event, Emitter<SocketState> emit) {
+    final currentState = state;
+    if (currentState is SocketStateLoaded) {
+      emit(currentState.copyWith(isLoading: true, errorMessage: ''));
+    }
+  }
+
+  FutureOr<void> _stopLoading(StopLoading event, Emitter<SocketState> emit) {
+    final currentState = state;
+    if (currentState is SocketStateLoaded) {
+      emit(currentState.copyWith(isLoading: false));
+    }
+  }
+
+  FutureOr<void> _refreshSocket(
+      RefreshSocket event, Emitter<SocketState> emit) {
+    emit(const SocketState.init());
+    add(SocketInit(bedId, levelBed));
+  }
+
+  FutureOr<void> _onLevelUp(LevelUp event, Emitter<SocketState> emit) {}
 }

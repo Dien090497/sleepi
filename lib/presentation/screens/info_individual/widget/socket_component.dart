@@ -8,6 +8,7 @@ import 'package:slee_fi/common/widgets/sf_image_border.dart';
 import 'package:slee_fi/entities/jewel_entity/jewel_entity.dart';
 import 'package:slee_fi/entities/socket_entity/socket_entity.dart';
 import 'package:slee_fi/l10n/locale_keys.g.dart';
+import 'package:slee_fi/presentation/blocs/individual/individual_cubit.dart';
 import 'package:slee_fi/presentation/blocs/socket_bloc/socket_bloc.dart';
 import 'package:slee_fi/presentation/blocs/socket_bloc/socket_event.dart';
 import 'package:slee_fi/presentation/blocs/socket_bloc/socket_state.dart';
@@ -29,18 +30,23 @@ class SocketComponent extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocConsumer<SocketBloc, SocketState>(
       listener: (context, state) {
+        if (state is SocketStateLoaded) {
+          context.read<IndividualCubit>().loading(state.isLoading);
+          if (state.bedEntity != null) {
+            context.read<IndividualCubit>().updateBed(state.bedEntity!);
+          }
+        }
         if (state is SocketStateLoaded &&
             state.errorMessage?.isNotEmpty == true) {
           showMessageDialog(context, state.errorMessage!);
         }
       },
-      bloc: BlocProvider.of<SocketBloc>(context)..add(SocketInit(bedId, level)),
       builder: (context, state) {
-        final listJewel = <SocketEntity>[];
+        final sockets = <SocketEntity>[];
         var maxSocket = 0;
         if (state is SocketStateLoaded) {
           maxSocket = state.maxSocket;
-          listJewel.addAll(state.socketEntity);
+          sockets.addAll(state.socketEntity);
         }
         return Wrap(
             spacing: 8.0,
@@ -48,35 +54,37 @@ class SocketComponent extends StatelessWidget {
             alignment: WrapAlignment.center,
             children: List.generate(
                 5,
-                (index) => SFImageBorder(
-                    icon: index + 1 > maxSocket
-                        ? Ics.gift
-                        : listJewel[index].socketType == SocketType.ready
-                            ? listJewel[index].jewelEntity!.image
-                            : listJewel[index].socketType == SocketType.block
-                                ? Ics.jewelWatting
-                                : '',
-                    onTap: () {
-                      // _showModalJewelList(context, index);
-                      // _showDialogConfirmOpenSocket(context, index);
-                      if (index + 1 > maxSocket) return;
-                      if (listJewel[index].socketType == SocketType.block) {
-                        _showDialogConfirmOpenSocket(context, index);
-                      } else if (listJewel[index].socketType ==
-                          SocketType.ready) {
-                        _showDialogJewelDetail(
-                            context, listJewel[index].jewelEntity!, index);
-                      } else if (listJewel[index].socketType ==
-                          SocketType.empty) {
-                        _showModalJewelList(context, index);
-                      }
-                    },
-                    iconColor: index + 1 > maxSocket
-                        ? AppColors.borderDarkColor
-                        : null,
-                    radius: 16,
-                    size: const Size(65, 65),
-                    padding: 15)));
+                (index) => index >= maxSocket
+                    ? const SizedBox(width: 65, height: 65)
+                    : SFImageBorder(
+                        icon: index + 1 > maxSocket
+                            ? Ics.gift
+                            : sockets[index].socketType == SocketType.ready
+                                ? sockets[index].jewelEntity!.image
+                                : sockets[index].socketType == SocketType.block
+                                    ? Ics.jewelWatting
+                                    : '',
+                        onTap: () {
+                          // _showModalJewelList(context, index);
+                          // _showDialogConfirmOpenSocket(context, index);
+                          if (index + 1 > maxSocket) return;
+                          if (sockets[index].socketType == SocketType.block) {
+                            _showDialogConfirmOpenSocket(context, index);
+                          } else if (sockets[index].socketType ==
+                              SocketType.ready) {
+                            _showDialogJewelDetail(
+                                context, sockets[index].jewelEntity!, index);
+                          } else if (sockets[index].socketType ==
+                              SocketType.empty) {
+                            _showModalJewelList(context, index);
+                          }
+                        },
+                        iconColor: index + 1 > maxSocket
+                            ? AppColors.borderDarkColor
+                            : null,
+                        radius: 16,
+                        size: const Size(65, 65),
+                        padding: 15)));
       },
     );
   }

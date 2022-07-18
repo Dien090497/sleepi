@@ -36,7 +36,7 @@ class BedModel {
   final int isMint;
 
   @JsonKey(name: 'class')
-  final String nftClass;
+  final String? nftClass;
   final String? quality;
   final String owner;
   final int time;
@@ -130,7 +130,7 @@ class BedModel {
     return BedEntity(
       name: nftName,
       nftId: nftId,
-      nftClass: nftClass,
+      nftClass: nftClass??'',
       tokenId: tokenId,
       id: nftId,
       level: level,

@@ -22,16 +22,24 @@ class IndividualCubit extends Cubit<IndividualState> {
   }
 
   void refresh() async {
-    if (state.isLoading) return;
-    emit(state.copyWith(isLoading: true));
+    if (state.isRefresh) return;
+    emit(state.copyWith(isRefresh: true));
     final res = await _getIndividualDetailUC.call(state.bed.nftId);
     res.fold(
       (l) {
-        emit(state.copyWith(isLoading: false));
+        emit(state.copyWith(isRefresh: false));
       },
       (r) {
-        emit(state.copyWith(isLoading: false, bed: r));
+        emit(state.copyWith(isRefresh: false, bed: r));
       },
     );
+  }
+
+  loading(bool isLoading) {
+    emit(state.copyWith(isLoading: isLoading));
+  }
+
+  updateBed(BedEntity bed) {
+    emit(state.copyWith(bed: bed));
   }
 }
