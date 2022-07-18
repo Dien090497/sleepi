@@ -17,6 +17,7 @@ final _privateConstructorUsedError = UnsupportedError(
 /// @nodoc
 mixin _$IndividualState {
   BedEntity get bed => throw _privateConstructorUsedError;
+  bool get isRefresh => throw _privateConstructorUsedError;
   NftFamilyEntity? get nftFamily => throw _privateConstructorUsedError;
   bool get isLoading => throw _privateConstructorUsedError;
 
@@ -30,7 +31,11 @@ abstract class $IndividualStateCopyWith<$Res> {
   factory $IndividualStateCopyWith(
           IndividualState value, $Res Function(IndividualState) then) =
       _$IndividualStateCopyWithImpl<$Res>;
-  $Res call({BedEntity bed, NftFamilyEntity? nftFamily, bool isLoading});
+  $Res call(
+      {BedEntity bed,
+      bool isRefresh,
+      NftFamilyEntity? nftFamily,
+      bool isLoading});
 
   $BedEntityCopyWith<$Res> get bed;
   $NftFamilyEntityCopyWith<$Res>? get nftFamily;
@@ -48,6 +53,7 @@ class _$IndividualStateCopyWithImpl<$Res>
   @override
   $Res call({
     Object? bed = freezed,
+    Object? isRefresh = freezed,
     Object? nftFamily = freezed,
     Object? isLoading = freezed,
   }) {
@@ -56,6 +62,10 @@ class _$IndividualStateCopyWithImpl<$Res>
           ? _value.bed
           : bed // ignore: cast_nullable_to_non_nullable
               as BedEntity,
+      isRefresh: isRefresh == freezed
+          ? _value.isRefresh
+          : isRefresh // ignore: cast_nullable_to_non_nullable
+              as bool,
       nftFamily: nftFamily == freezed
           ? _value.nftFamily
           : nftFamily // ignore: cast_nullable_to_non_nullable
@@ -93,7 +103,11 @@ abstract class _$$_IndividualStateCopyWith<$Res>
           _$_IndividualState value, $Res Function(_$_IndividualState) then) =
       __$$_IndividualStateCopyWithImpl<$Res>;
   @override
-  $Res call({BedEntity bed, NftFamilyEntity? nftFamily, bool isLoading});
+  $Res call(
+      {BedEntity bed,
+      bool isRefresh,
+      NftFamilyEntity? nftFamily,
+      bool isLoading});
 
   @override
   $BedEntityCopyWith<$Res> get bed;
@@ -115,6 +129,7 @@ class __$$_IndividualStateCopyWithImpl<$Res>
   @override
   $Res call({
     Object? bed = freezed,
+    Object? isRefresh = freezed,
     Object? nftFamily = freezed,
     Object? isLoading = freezed,
   }) {
@@ -123,6 +138,10 @@ class __$$_IndividualStateCopyWithImpl<$Res>
           ? _value.bed
           : bed // ignore: cast_nullable_to_non_nullable
               as BedEntity,
+      isRefresh: isRefresh == freezed
+          ? _value.isRefresh
+          : isRefresh // ignore: cast_nullable_to_non_nullable
+              as bool,
       nftFamily: nftFamily == freezed
           ? _value.nftFamily
           : nftFamily // ignore: cast_nullable_to_non_nullable
@@ -140,10 +159,14 @@ class __$$_IndividualStateCopyWithImpl<$Res>
 class _$_IndividualState
     with DiagnosticableTreeMixin
     implements _IndividualState {
-  const _$_IndividualState(this.bed, {this.nftFamily, this.isLoading = false});
+  const _$_IndividualState(this.bed,
+      {this.isRefresh = false, this.nftFamily, this.isLoading = false});
 
   @override
   final BedEntity bed;
+  @override
+  @JsonKey()
+  final bool isRefresh;
   @override
   final NftFamilyEntity? nftFamily;
   @override
@@ -152,7 +175,7 @@ class _$_IndividualState
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'IndividualState(bed: $bed, nftFamily: $nftFamily, isLoading: $isLoading)';
+    return 'IndividualState(bed: $bed, isRefresh: $isRefresh, nftFamily: $nftFamily, isLoading: $isLoading)';
   }
 
   @override
@@ -161,6 +184,7 @@ class _$_IndividualState
     properties
       ..add(DiagnosticsProperty('type', 'IndividualState'))
       ..add(DiagnosticsProperty('bed', bed))
+      ..add(DiagnosticsProperty('isRefresh', isRefresh))
       ..add(DiagnosticsProperty('nftFamily', nftFamily))
       ..add(DiagnosticsProperty('isLoading', isLoading));
   }
@@ -171,6 +195,7 @@ class _$_IndividualState
         (other.runtimeType == runtimeType &&
             other is _$_IndividualState &&
             const DeepCollectionEquality().equals(other.bed, bed) &&
+            const DeepCollectionEquality().equals(other.isRefresh, isRefresh) &&
             const DeepCollectionEquality().equals(other.nftFamily, nftFamily) &&
             const DeepCollectionEquality().equals(other.isLoading, isLoading));
   }
@@ -179,6 +204,7 @@ class _$_IndividualState
   int get hashCode => Object.hash(
       runtimeType,
       const DeepCollectionEquality().hash(bed),
+      const DeepCollectionEquality().hash(isRefresh),
       const DeepCollectionEquality().hash(nftFamily),
       const DeepCollectionEquality().hash(isLoading));
 
@@ -190,11 +216,14 @@ class _$_IndividualState
 
 abstract class _IndividualState implements IndividualState {
   const factory _IndividualState(final BedEntity bed,
-      {final NftFamilyEntity? nftFamily,
+      {final bool isRefresh,
+      final NftFamilyEntity? nftFamily,
       final bool isLoading}) = _$_IndividualState;
 
   @override
   BedEntity get bed;
+  @override
+  bool get isRefresh;
   @override
   NftFamilyEntity? get nftFamily;
   @override
