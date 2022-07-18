@@ -46,7 +46,6 @@ class _TransferListState extends State<TransferList> {
 
   @override
   void dispose() {
-    controller.dispose();
     isLoadingNotifier.dispose();
     super.dispose();
   }
@@ -79,7 +78,7 @@ class _TransferListState extends State<TransferList> {
               ),
             );
           } else if (!(state.needApprove ?? true)) {
-            final amount = double.parse(controller.text.replaceAll(',','.'));
+            final amount = double.parse(controller.text.replaceAll(',', '.'));
             final userState = context.read<UserBloc>().state;
 
             showCustomAlertDialog(
@@ -174,17 +173,16 @@ class _TransferListState extends State<TransferList> {
                 width: double.infinity,
                 gradient: AppColors.gradientBlueButton,
                 onPressed: () {
-                  final cubit = context.read<TransferCubit>();
-
                   final walletState = context.read<WalletCubit>().state;
-                  cubit.checkAllowance(
-                    amountStr: controller.text,
-                    contractAddress: widget.tokenEntity.address,
-                    ownerAddress: (walletState as WalletStateLoaded)
-                        .walletInfoEntity
-                        .address,
-                    balance: widget.tokenEntity.balance,
-                  );
+                  if (walletState is WalletStateLoaded) {
+                    final cubit = context.read<TransferCubit>();
+                    cubit.checkAllowance(
+                      amountStr: controller.text,
+                      contractAddress: widget.tokenEntity.address,
+                      ownerAddress: walletState.walletInfoEntity.address,
+                      balance: widget.tokenEntity.balance,
+                    );
+                  }
                 },
               ),
             ],
