@@ -10,6 +10,8 @@ import 'package:slee_fi/common/widgets/sf_gridview.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
 import 'package:slee_fi/entities/jewel_entity/jewel_entity.dart';
 import 'package:slee_fi/l10n/locale_keys.g.dart';
+import 'package:slee_fi/presentation/blocs/bottom_navigation/bottom_navigation_bloc.dart';
+import 'package:slee_fi/presentation/blocs/bottom_navigation/bottom_navigation_event.dart';
 import 'package:slee_fi/presentation/blocs/socket_bloc/socket_bloc.dart';
 import 'package:slee_fi/presentation/blocs/socket_bloc/socket_event.dart';
 import 'package:slee_fi/presentation/blocs/socket_bloc/socket_state.dart';
@@ -97,21 +99,22 @@ class ModalJewelList extends StatelessWidget {
           BlocBuilder<SocketBloc, SocketState>(
             bloc: socketBloc,
             builder: (context, state) => SFButton(
-                text:
-                    // state is HomeLoaded && state.itemList?.isNotEmpty == true ?
-                    LocaleKeys.cancel
-                // : LocaleKeys.buy
-                ,
+                text: state is SocketStateLoaded &&
+                        state.jewels?.isNotEmpty == true
+                    ? LocaleKeys.cancel
+                    : LocaleKeys.buy,
                 width: MediaQuery.of(context).size.width * 0.9,
                 color: AppColors.blue,
                 textStyle: TextStyles.w600WhiteSize16,
                 height: 48,
                 onPressed: () {
                   Navigator.pop(context);
-                  // if (state is HomeLoaded && state.itemList?.isEmpty == true) {
-                  //   BlocProvider.of<BottomNavigationBloc>(context)
-                  //       .add(const SelectTab(4, indexTabChild: 2));
-                  // }
+                  Navigator.pop(context);
+                  if (state is SocketStateLoaded &&
+                      state.jewels?.isEmpty == true) {
+                    BlocProvider.of<BottomNavigationBloc>(context)
+                        .add(const SelectTab(4, indexTabChild: 1));
+                  }
                 }),
           ),
           const SizedBox(height: 16)
