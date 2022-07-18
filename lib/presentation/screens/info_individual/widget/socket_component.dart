@@ -54,37 +54,37 @@ class SocketComponent extends StatelessWidget {
             alignment: WrapAlignment.center,
             children: List.generate(
                 5,
-                (index) => index >= maxSocket
-                    ? const SizedBox(width: 65, height: 65)
-                    : SFImageBorder(
-                        icon: index + 1 > maxSocket
-                            ? Ics.gift
-                            : sockets[index].socketType == SocketType.ready
-                                ? sockets[index].jewelEntity!.image
-                                : sockets[index].socketType == SocketType.block
-                                    ? Ics.jewelWatting
-                                    : '',
-                        onTap: () {
-                          // _showModalJewelList(context, index);
-                          // _showDialogConfirmOpenSocket(context, index);
-                          if (index + 1 > maxSocket) return;
-                          if (sockets[index].socketType == SocketType.block) {
-                            _showDialogConfirmOpenSocket(context, index);
-                          } else if (sockets[index].socketType ==
-                              SocketType.ready) {
-                            _showDialogJewelDetail(
-                                context, sockets[index].jewelEntity!, index);
-                          } else if (sockets[index].socketType ==
-                              SocketType.empty) {
-                            _showModalJewelList(context, index);
-                          }
-                        },
-                        iconColor: index + 1 > maxSocket
-                            ? AppColors.borderDarkColor
-                            : null,
-                        radius: 16,
-                        size: const Size(65, 65),
-                        padding: 15)));
+                (index) => SFImageBorder(
+                    icon: index + 1 > maxSocket
+                        ? Ics.icSocketLocked
+                        : sockets[index].socketType == SocketType.ready
+                            ? sockets[index].jewelEntity!.image
+                            : sockets[index].socketType == SocketType.block
+                                ? Ics.icSocketWaitingToPay
+                                : Ics.icSocketEmpty,
+                    onTap: () {
+                      if (index + 1 > maxSocket) return;
+                      if (sockets[index].socketType == SocketType.block) {
+                        _showDialogConfirmOpenSocket(context, index);
+                      } else if (sockets[index].socketType ==
+                          SocketType.ready) {
+                        _showDialogJewelDetail(
+                            context, sockets[index].jewelEntity!, index);
+                      } else if (sockets[index].socketType ==
+                          SocketType.empty) {
+                        _showModalJewelList(context, index);
+                      }
+                    },
+                    iconColor: index + 1 > maxSocket
+                        ? AppColors.borderDarkColor
+                        : sockets[index].socketType == SocketType.ready
+                            ? null
+                            : sockets[index].socketType == SocketType.block
+                                ? AppColors.blue
+                                : AppColors.borderDarkColor,
+                    radius: 16,
+                    size: const Size(65, 65),
+                    padding: 15)));
       },
     );
   }
