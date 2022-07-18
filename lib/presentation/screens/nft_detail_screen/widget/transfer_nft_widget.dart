@@ -3,22 +3,41 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:slee_fi/common/enum/enum.dart';
 import 'package:slee_fi/common/extensions/string_x.dart';
+import 'package:slee_fi/common/routes/app_routes.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
+import 'package:slee_fi/common/widgets/sf_alert_dialog.dart';
+import 'package:slee_fi/common/widgets/sf_dialog.dart';
 import 'package:slee_fi/common/widgets/sf_icon.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
+import 'package:slee_fi/di/injector.dart';
 import 'package:slee_fi/entities/nft_entity/nft_entity.dart';
+import 'package:slee_fi/entities/user/user_info_entity.dart';
+import 'package:slee_fi/entities/wallet_info/wallet_info_entity.dart';
+import 'package:slee_fi/failures/failure.dart';
 import 'package:slee_fi/l10n/locale_keys.g.dart';
 import 'package:slee_fi/presentation/blocs/nft_detail/nft_detail_cubit.dart';
 import 'package:slee_fi/presentation/blocs/nft_detail/nft_detail_state.dart';
+import 'package:slee_fi/presentation/blocs/user_bloc/user_bloc.dart';
+import 'package:slee_fi/presentation/blocs/user_bloc/user_state.dart';
+import 'package:slee_fi/presentation/blocs/wallet/wallet_cubit.dart';
+import 'package:slee_fi/presentation/blocs/wallet/wallet_state.dart';
+import 'package:slee_fi/presentation/screens/nft_detail_screen/widget/nft_pop_up_transfer.dart';
+import 'package:slee_fi/presentation/screens/transfer/widgets/pop_up_approve.dart';
 import 'package:slee_fi/resources/resources.dart';
+import 'package:slee_fi/usecase/is_nft_approve_for_all_usecase.dart';
+import 'package:slee_fi/usecase/send_nft_to_spending_usecase.dart';
+import 'package:slee_fi/usecase/set_nft_approval_for_all_usecase.dart';
+import 'package:slee_fi/usecase/transfer_nft_usecase.dart';
 
 class ListTransferNftWidget extends StatefulWidget {
-  const ListTransferNftWidget(
-      {Key? key, required this.onTap, required this.nftDetailCubit})
-      : super(key: key);
+  const ListTransferNftWidget({
+    Key? key,
+    required this.nftDetailCubit,
+    required this.isToSpending,
+  }) : super(key: key);
 
-  final Function(NFTEntity) onTap;
+  final bool isToSpending;
   final NftDetailCubit nftDetailCubit;
 
   @override
@@ -27,10 +46,12 @@ class ListTransferNftWidget extends StatefulWidget {
 
 class _ListTransferNftWidgetState extends State<ListTransferNftWidget> {
   final refreshController = RefreshController();
+  final isLoadingNotifier = ValueNotifier(false);
 
   @override
   void dispose() {
     refreshController.dispose();
+    isLoadingNotifier.dispose();
     super.dispose();
   }
 
@@ -68,10 +89,79 @@ class _ListTransferNftWidgetState extends State<ListTransferNftWidget> {
                       final nft = state.nftEntities[index];
                       final bedType =
                           BedType.values[index % BedType.values.length];
+                      final userState = context.read<UserBloc>() as UserLoaded;
+                      final walletState =
+                          context.read<WalletCubit>() as WalletStateLoaded;
 
                       return GestureDetector(
-                        onTap: () {
-                          widget.onTap(nft);
+                        onTap: () async {
+                          if (widget.isToSpending) {
+                            final isApproveNftRes =
+                                await getIt<IsNftApproveForAllUseCase>()
+                                    .call(IsNftApproveForAllParams(
+                              nftAddress: nft.attribute!.contractAddress,
+                              ownerAddress:
+                                  walletState.walletInfoEntity.address,
+                              operatorAddress: null,
+                              credentials:
+                                  walletState.walletInfoEntity.credentials,
+                            ));
+                            isApproveNftRes.fold(
+                              (l) {},
+                              (isApproved) {
+                                if (isApproved) {
+                                  _showTransferDialog(
+                                    context,
+                                    nft: nft,
+                                    walletInfo: walletState.walletInfoEntity,
+                                    isToSpending: widget.isToSpending,
+                                    userInfo: userState.userInfoEntity,
+                                  );
+                                } else {
+                                  showCustomAlertDialog(
+                                    context,
+                                    showClosed: false,
+                                    children: PopUpConfirmApprove(
+                                      tokenName:
+                                          '${nft.symbol} #${nft.attribute!.tokenId!}',
+                                      isLoadingNotifier: isLoadingNotifier,
+                                      onConfirm: () async {
+                                        isLoadingNotifier.value = true;
+                                        final approveRes = await getIt<
+                                                SetNftApprovalForAllUseCase>()
+                                            .call(SetNftApprovalForAllParams(
+                                          nftAddress:
+                                              nft.attribute!.contractAddress,
+                                          operatorAddress: walletState
+                                              .walletInfoEntity.address,
+                                          credentials: walletState
+                                              .walletInfoEntity.credentials,
+                                        ));
+                                        approveRes.fold(
+                                          (l) {
+                                            showMessageDialog(context, '$l');
+                                            Navigator.pop(context);
+                                          },
+                                          (r) {
+                                            Navigator.pop(context);
+                                          },
+                                        );
+                                        isLoadingNotifier.value = false;
+                                      },
+                                    ),
+                                  );
+                                }
+                              },
+                            );
+                          } else {
+                            _showTransferDialog(
+                              context,
+                              nft: nft,
+                              walletInfo: walletState.walletInfoEntity,
+                              isToSpending: widget.isToSpending,
+                              userInfo: userState.userInfoEntity,
+                            );
+                          }
                         },
                         child: TransferNftWidget(
                           bedType: bedType,
@@ -88,6 +178,92 @@ class _ListTransferNftWidgetState extends State<ListTransferNftWidget> {
         }
         return const SizedBox();
       },
+    );
+  }
+
+  void _showTransferDialog(
+    BuildContext context, {
+    bool? isToSpending,
+    required NFTEntity nft,
+    required UserInfoEntity userInfo,
+    required WalletInfoEntity walletInfo,
+  }) async {
+    final isLoadingNotifier = ValueNotifier<bool>(false);
+
+    showCustomDialog(
+      context,
+      children: [
+        NftPopUpTransfer(
+          onConfirm: (toAddress) async {
+            if (isLoadingNotifier.value) return;
+            if (nft.attribute?.contractAddress.isEmpty ?? true) return;
+            if (nft.attribute?.tokenId == null) return;
+            isLoadingNotifier.value = true;
+            final res = toAddress.isEmpty
+                ? await getIt<SendNftToSpendingUseCase>()
+                    .call(SendNftToSpendingParams(
+                    nftAddress: nft.attribute!.contractAddress,
+                    nftId: nft.attribute!.tokenId!,
+                    userId: userInfo.id,
+                    credentials: walletInfo.credentials,
+                  ))
+                : await getIt<TransferNftUseCase>().call(TransferNftParams(
+                    nftAddress: nft.attribute!.contractAddress,
+                    ownerAddress: walletInfo.address,
+                    toAddress: toAddress,
+                    nftId: nft.attribute!.tokenId!,
+                    credentials: walletInfo.credentials,
+                  ));
+            await res.fold(
+              (l) async {
+                if ('$l' == Failure.notApprovalForNft) {
+                  showCustomAlertDialog(
+                    context,
+                    showClosed: false,
+                    children: PopUpConfirmApprove(
+                      tokenName: '${nft.symbol} #${nft.attribute!.tokenId!}',
+                      isLoadingNotifier: isLoadingNotifier,
+                      onConfirm: () async {
+                        isLoadingNotifier.value = true;
+                        final approveRes =
+                            await getIt<SetNftApprovalForAllUseCase>()
+                                .call(SetNftApprovalForAllParams(
+                          nftAddress: nft.attribute!.contractAddress,
+                          operatorAddress: toAddress,
+                          credentials: walletInfo.credentials,
+                        ));
+                        approveRes.fold(
+                          (l) {
+                            Navigator.pop(context);
+                            showMessageDialog(context, '$l');
+                          },
+                          (r) {
+                            Navigator.pop(context);
+                          },
+                        );
+                        isLoadingNotifier.value = false;
+                      },
+                    ),
+                  );
+                } else {
+                  showMessageDialog(context, '$l');
+                }
+              },
+              (r) async {
+                showSuccessfulDialog(context, null, onBackPress: () {
+                  Navigator.popUntil(
+                      context, (r) => r.settings.name == R.nftDetail);
+                });
+              },
+            );
+            isLoadingNotifier.value = false;
+          },
+          isToSpending: isToSpending,
+          nft: nft,
+          ownerAddress: walletInfo.address,
+          isLoadingNotifier: isLoadingNotifier,
+        )
+      ],
     );
   }
 }

@@ -145,8 +145,8 @@ import '../usecase/wallet/current_wallet_usecase.dart' as _i101;
 import '../usecase/wallet/first_open_wallet_session_usecase.dart' as _i95;
 import '../usecase/wallet/get_current_mnemonic_usecasse.dart' as _i113;
 import '../usecase/wallet/import_wallet_usecase.dart' as _i56;
-import '../usecase/withdraw_history_usecase.dart' as _i85;
 import '../usecase/withdrawNFT_usecase.dart' as _i129;
+import '../usecase/withdraw_history_usecase.dart' as _i85;
 import 'register_module.dart' as _i137; // ignore_for_file: unnecessary_lambdas
 
 // ignore_for_file: lines_longer_than_80_chars
@@ -396,8 +396,9 @@ Future<_i1.GetIt> $initGetIt(_i1.GetIt get,
       get<_i64.NftApi>(),
       get<_i28.SecureStorage>(),
       get<_i41.AuthDataSource>()));
-  gh.factory<_i123.IsNftApproveForAllUseCase>(
-      () => _i123.IsNftApproveForAllUseCase(get<_i121.INFTRepository>()));
+  gh.factory<_i123.IsNftApproveForAllUseCase>(() =>
+      _i123.IsNftApproveForAllUseCase(
+          get<_i121.INFTRepository>(), get<_i28.SecureStorage>()));
   gh.factory<_i124.NFTRepairUseCase>(
       () => _i124.NFTRepairUseCase(get<_i121.INFTRepository>()));
   gh.factory<_i125.NFTSellUseCase>(
