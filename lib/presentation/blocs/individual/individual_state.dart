@@ -9,6 +9,7 @@ part 'individual_state.freezed.dart';
 class IndividualState with _$IndividualState {
   const factory IndividualState(
     BedEntity bed, {
+    @Default(false) bool isRefresh,
     NftFamilyEntity? nftFamily,
     @Default(false) bool isLoading,
   }) = _IndividualState;

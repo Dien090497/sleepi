@@ -24,7 +24,7 @@ BedModel _$BedModelFromJson(Map<String, dynamic> json) => BedModel(
       (json['bonus'] as num).toDouble(),
       (json['special'] as num).toDouble(),
       (json['resilience'] as num).toDouble(),
-      json['class'] as String,
+      json['class'] as String?,
       json['created_at'] as String,
       json['updated_at'] as String,
       json['token_id'] as int,
