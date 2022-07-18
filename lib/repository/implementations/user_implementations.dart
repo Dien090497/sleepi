@@ -6,10 +6,10 @@ import 'package:slee_fi/datasources/local/secure_storage.dart';
 import 'package:slee_fi/datasources/remote/auth_datasource/auth_datasource.dart';
 import 'package:slee_fi/datasources/remote/network/web3_datasource.dart';
 import 'package:slee_fi/entities/active_code/active_code_entity.dart';
+import 'package:slee_fi/entities/bed_entity/bed_entity.dart';
 import 'package:slee_fi/entities/item_entity/item_entity.dart';
 import 'package:slee_fi/entities/tracking_result_chart_data_entity/tracking_result_chart_data_entity.dart';
 import 'package:slee_fi/failures/failure.dart';
-import 'package:slee_fi/models/bed_detail/bed_detail.dart';
 import 'package:slee_fi/models/bed_model/beb_model.dart';
 import 'package:slee_fi/models/estimate_sleep_response/estimate_sleep_response.dart';
 import 'package:slee_fi/models/global_config_response/global_config_response.dart';
@@ -257,10 +257,11 @@ class UserImplementation extends IUserRepository {
   }
 
   @override
-  Future<Either<FailureMessage, BedDetail>> bedDetail(int bedId) async {
+  Future<Either<FailureMessage, BedEntity>> bedDetail(
+      int bedId, bool isBase) async {
     try {
-      final result = await _authDataSource.bedDetail(bedId);
-      return Right(result);
+      final result = await _authDataSource.bedDetail(bedId, isBase);
+      return Right(result.toEntity());
     } catch (e) {
       return Left(FailureMessage.fromException(e));
     }

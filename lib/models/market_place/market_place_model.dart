@@ -118,6 +118,11 @@ class MarketPlaceModel {
       startTime: startTime,
       endTime: endTime,
       isMint: isMint,
+      status: status,
+      owner: owner,
+      jewels: [],
+      insurancePercent: 0,
+      socket: null,
     );
   }
 }

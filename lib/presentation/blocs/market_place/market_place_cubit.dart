@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:slee_fi/di/injector.dart';
@@ -37,7 +35,6 @@ class MarketPlaceCubit extends Cubit<MarketPlaceState> {
         limit: limit,
         categoryId: categoryType.type,
         sortPrice: "LowPrice");
-    log("params : ${params.toJson()}");
     emit(const MarketPlaceState.loading());
     getMarketPlace(params);
   }
@@ -46,7 +43,6 @@ class MarketPlaceCubit extends Cubit<MarketPlaceState> {
     page = 1;
     loadMore = false;
     params = params.copyWith(page: page);
-    log("params : ${params.toJson()}");
     getMarketPlace(params);
   }
 
@@ -59,13 +55,11 @@ class MarketPlaceCubit extends Cubit<MarketPlaceState> {
   Future<void> getMarketPlace(MarketSchema param) async {
     final result = await _marketPlaceUseCase.call(param);
     result.fold((l) {
-      log("fail : ${'$l'}");
       error = true;
       loadMore = false;
       emit(MarketPlaceState.fail('$l'));
     }, (success) {
       error = false;
-      log("result : ${success.list.length}");
       if (success.list.length == limit) {
         page++;
         params = params.copyWith(page: page);
@@ -78,16 +72,13 @@ class MarketPlaceCubit extends Cubit<MarketPlaceState> {
   }
 
   Future<void> loadMoreMarketPlace() async {
-    log("params : ${params.toJson()}");
     final result = await _marketPlaceUseCase.call(params);
     result.fold((l) {
       error = true;
       loadMore = false;
-      log("fail : ${'$l'}");
       emit(MarketPlaceState.fail('$l'));
     }, (success) {
       error = false;
-      log("result : ${success.toString()}");
       if (success.list.length == limit) {
         page++;
         params = params.copyWith(page: page);
@@ -105,7 +96,6 @@ class MarketPlaceCubit extends Cubit<MarketPlaceState> {
         page: page,
         limit: limit,
         sortPrice: price == 0 ? "LowPrice" : "HighPrice");
-    log("params :$price ${params.toJson()}");
     getMarketPlace(params);
   }
 
@@ -139,7 +129,6 @@ class MarketPlaceCubit extends Cubit<MarketPlaceState> {
     });
     page = 1;
     params = params.copyWith(page: page, limit: limit);
-    log("params : ${params.toJson()}");
     getMarketPlace(params);
   }
 

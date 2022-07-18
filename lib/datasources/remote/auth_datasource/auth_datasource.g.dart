@@ -466,9 +466,12 @@ class _AuthDataSource implements AuthDataSource {
   }
 
   @override
-  Future<BedDetail> bedDetail(bedId) async {
+  Future<BedDetail> bedDetail(bedId, isBase) async {
     const _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{r'bedId': bedId};
+    final queryParameters = <String, dynamic>{
+      r'bedId': bedId,
+      r'isBase': isBase
+    };
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
     final _result = await _dio.fetch<Map<String, dynamic>>(

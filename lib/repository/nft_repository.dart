@@ -1,6 +1,5 @@
 import 'package:dartz/dartz.dart';
 import 'package:slee_fi/common/enum/enum.dart';
-import 'package:slee_fi/entities/bed_entity/bed_entity.dart';
 import 'package:slee_fi/entities/get_repair_entity/get_repair_entity.dart';
 import 'package:slee_fi/entities/nft_entity/nft_entity.dart';
 import 'package:slee_fi/entities/nft_family/nft_family.dart';
@@ -67,8 +66,6 @@ abstract class INFTRepository {
 
   Future<TransactionReceipt?> listenTxHash(String txHash);
 
-  Future<Either<Failure, BedEntity>> nftDetail(int nftId);
-
   Future<Either<Failure, dynamic>> withDrawNFTtoMainWallet(
       {required WithDrawNFTSchema params});
 
@@ -82,6 +79,5 @@ abstract class INFTRepository {
   Future<Either<Failure, dynamic>> nftRepair(
       {required RepairSchema repairSchema});
 
-  Future<Either<Failure, NftFamilyEntity>> fetchFamily(
-      int bedId);
+  Future<Either<Failure, NftFamilyEntity>> fetchFamily(int bedId);
 }

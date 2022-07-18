@@ -5,7 +5,8 @@ import 'package:slee_fi/models/market_place/result_buy_model.dart';
 import 'package:slee_fi/schema/market/market_schema.dart';
 
 abstract class IMarketPlaceRepository {
-  Future<Either<Failure, ListMarketPlaceModel>> getListMarketPlace(MarketSchema params);
-  Future<Either<Failure, ResultBuyModel>> postBuyNFT(int idNFT);
+  Future<Either<Failure, ListMarketPlaceModel>> getListMarketPlace(
+      MarketSchema params);
 
+  Future<Either<Failure, ResultBuyModel>> postBuyNFT(int idNFT);
 }

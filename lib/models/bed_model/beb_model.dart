@@ -130,7 +130,7 @@ class BedModel {
     return BedEntity(
       name: nftName,
       nftId: nftId,
-      nftClass: nftClass??'',
+      nftClass: nftClass ?? '',
       tokenId: tokenId,
       id: nftId,
       level: level,
@@ -151,6 +151,10 @@ class BedModel {
       startTime: startTime,
       endTime: endTime,
       insurancePercent: insurancePercent,
+      socket: null,
+      jewels: [],
+      owner: owner,
+      status: status,
     );
   }
 }

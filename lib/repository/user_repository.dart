@@ -1,9 +1,9 @@
 import 'package:dartz/dartz.dart';
 import 'package:slee_fi/entities/active_code/active_code_entity.dart';
+import 'package:slee_fi/entities/bed_entity/bed_entity.dart';
 import 'package:slee_fi/entities/item_entity/item_entity.dart';
 import 'package:slee_fi/entities/tracking_result_chart_data_entity/tracking_result_chart_data_entity.dart';
 import 'package:slee_fi/failures/failure.dart';
-import 'package:slee_fi/models/bed_detail/bed_detail.dart';
 import 'package:slee_fi/models/bed_model/beb_model.dart';
 import 'package:slee_fi/models/estimate_sleep_response/estimate_sleep_response.dart';
 import 'package:slee_fi/models/global_config_response/global_config_response.dart';
@@ -24,46 +24,57 @@ import 'package:slee_fi/usecase/fetch_data_chart_usecase.dart';
 import 'package:slee_fi/usecase/withdraw_history_usecase.dart';
 
 abstract class IUserRepository {
-  Future<Either<FailureMessage, dynamic>> changePassword(ChangePasswordSchema changePasswordSchema);
+  Future<Either<FailureMessage, dynamic>> changePassword(
+      ChangePasswordSchema changePasswordSchema);
 
   Future<Either<FailureMessage, List<ActiveCodeEntity>>> fetchActivationCodes();
 
-  Future<Either<FailureMessage, List<TokenSpending>>> fetchBalanceSpending(String userID);
+  Future<Either<FailureMessage, List<TokenSpending>>> fetchBalanceSpending(
+      String userID);
 
-  Future<Either<FailureMessage, SwapTokenToWalletResponse>> transferTokenToMainWallet(
-      WhitDrawTokenSchema whitDrawTokenSchema);
+  Future<Either<FailureMessage, SwapTokenToWalletResponse>>
+      transferTokenToMainWallet(WhitDrawTokenSchema whitDrawTokenSchema);
 
   Future<Either<FailureMessage, GlobalConfigResponse>> getGlobalConfig();
 
-  Future<Either<FailureMessage, WithdrawHistoryResponse>> withdrawHistory(WithdrawParam withdrawParam);
+  Future<Either<FailureMessage, WithdrawHistoryResponse>> withdrawHistory(
+      WithdrawParam withdrawParam);
 
-  Future<Either<FailureMessage, String>> estimateGasWithdraw(EstimateGasWithdrawParam estimateParam);
+  Future<Either<FailureMessage, String>> estimateGasWithdraw(
+      EstimateGasWithdrawParam estimateParam);
 
-  Future<Either<FailureMessage, List<BedModel>>> fetchListBed(FetchBedParam fetchBedParam);
+  Future<Either<FailureMessage, List<BedModel>>> fetchListBed(
+      FetchBedParam fetchBedParam);
 
-  Future<Either<FailureMessage, dynamic>> addItemToBed(AddItemToBedParam addItemToBedParam);
+  Future<Either<FailureMessage, dynamic>> addItemToBed(
+      AddItemToBedParam addItemToBedParam);
 
-  Future<Either<FailureMessage, dynamic>> removeItemInBed(AddItemToBedParam addItemToBedParam);
+  Future<Either<FailureMessage, dynamic>> removeItemInBed(
+      AddItemToBedParam addItemToBedParam);
 
-  Future<Either<FailureMessage, List<ItemEntity>>> fetchItemOwner(FilterItemSchema filterItemSchema);
+  Future<Either<FailureMessage, List<ItemEntity>>> fetchItemOwner(
+      FilterItemSchema filterItemSchema);
 
   Future<Either<FailureMessage, List<LuckyBox>>> fetchLuckyBox();
 
   Future<Either<FailureMessage, dynamic>> openLuckyBox(int luckyBoxId);
 
-  Future<Either<FailureMessage, EstimateSleepResponse>> estimateTracking(EstimateTrackingParam estimateTrackingParam);
+  Future<Either<FailureMessage, EstimateSleepResponse>> estimateTracking(
+      EstimateTrackingParam estimateTrackingParam);
 
-  Future<Either<FailureMessage, dynamic>> speedUpLuckyBox(SpeedUpLuckyBoxSchema speedUpLuckyBoxSchema);
+  Future<Either<FailureMessage, dynamic>> speedUpLuckyBox(
+      SpeedUpLuckyBoxSchema speedUpLuckyBoxSchema);
 
-  Future<Either<FailureMessage, TrackingResultChartDataEntity>> fetchDataChart(ParamsGetDataChart paramsGetDataChart);
+  Future<Either<FailureMessage, TrackingResultChartDataEntity>> fetchDataChart(
+      ParamsGetDataChart paramsGetDataChart);
 
-  Future<Either<FailureMessage, BedDetail>> bedDetail(int bedId);
+  Future<Either<FailureMessage, BedEntity>> bedDetail(int bedId, bool isBase);
 
   Future<Either<FailureMessage, dynamic>> openSocket(int bedId);
 
-  Future<Either<FailureMessage, dynamic>> addJewel(AddJewelSchema addJewelSchema);
+  Future<Either<FailureMessage, dynamic>> addJewel(
+      AddJewelSchema addJewelSchema);
 
-  Future<Either<FailureMessage, dynamic>> removeJewel(AddJewelSchema addJewelSchema);
-
-
+  Future<Either<FailureMessage, dynamic>> removeJewel(
+      AddJewelSchema addJewelSchema);
 }

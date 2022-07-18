@@ -95,7 +95,7 @@ class NFTDataSource {
     required String functionName,
   }) async {
     final Nft nft = _nft(nftAddress);
-    final transferFromFunc = nft.self.function(functionName);
+    final transferFromFunc = nft.self.function('transfer');
     final gasFee = await _web3provider.web3client.estimateGas(
       sender: ownerAddress,
       to: nft.self.address,

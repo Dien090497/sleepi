@@ -44,14 +44,15 @@ class SocketBloc extends Bloc<SocketEvent, SocketState> {
     if (state is SocketStateLoaded) {
       return;
     }
-    var maxSocket = _maxSocketOpened(event.level);
+    final maxSocket = _maxSocketOpened(event.level);
     bedId = event.bedId;
     levelBed = event.level;
     _currentPage = 1;
-    var result = await _detailBedUseCase.call(event.bedId);
+    final result =
+        await _detailBedUseCase.call(BedDetailParams(bedId: event.bedId));
     result.fold(
       (l) {
-        var list = List.generate(
+        final list = List.generate(
             maxSocket,
             (index) => const SocketEntity(
                 socketType: SocketType.block, jewelEntity: null));
@@ -80,7 +81,7 @@ class SocketBloc extends Bloc<SocketEvent, SocketState> {
 
   void _openSocket(OpenSocket event, Emitter<SocketState> emit) async {
     add(const StartLoading());
-    var result = await _openSocketUseCase.call(bedId);
+    final result = await _openSocketUseCase.call(bedId);
     add(const StopLoading());
     result.fold((l) {
       add(SocketError(l.msg));
@@ -89,7 +90,7 @@ class SocketBloc extends Bloc<SocketEvent, SocketState> {
       if (currentState is SocketStateLoaded) {
         final List<SocketEntity> list = List.from(currentState.socketEntity);
 
-        var firstBlock = _firstSocket(list, SocketType.block);
+        final firstBlock = _firstSocket(list, SocketType.block);
         if (firstBlock == -1) {
           return;
         }
@@ -104,7 +105,7 @@ class SocketBloc extends Bloc<SocketEvent, SocketState> {
 
   void _addJewel(AddJewel event, Emitter<SocketState> emit) async {
     add(const StartLoading());
-    var result = await _addJewelUseCase
+    final result = await _addJewelUseCase
         .call(AddJewelSchema(bedId, event.jewelEntity.id));
     add(const StopLoading());
     result.fold((l) {
@@ -112,7 +113,7 @@ class SocketBloc extends Bloc<SocketEvent, SocketState> {
     }, (r) {
       final currentState = state;
       if (currentState is SocketStateLoaded) {
-        var emptySocket =
+        final emptySocket =
             _firstSocket(currentState.socketEntity, SocketType.empty);
         if (emptySocket == -1) {
           return;
@@ -147,7 +148,7 @@ class SocketBloc extends Bloc<SocketEvent, SocketState> {
 
       final List<SocketEntity> list = List.from(currentState.socketEntity);
       add(const StartLoading());
-      var result = await _removeUseCase
+      final result = await _removeUseCase
           .call(AddJewelSchema(bedId, list[event.index].jewelEntity!.id));
       add(const StopLoading());
       result.fold((l) => add(SocketError(l.msg)), (r) {
@@ -175,7 +176,7 @@ class SocketBloc extends Bloc<SocketEvent, SocketState> {
     }, (success) {
       final currentState = state;
       if (currentState is SocketStateLoaded) {
-        var list = currentState.jewels ??
+        final list = currentState.jewels ??
             <JewelEntity>[] + success.map((e) => e.toJewelEntity()).toList();
         emit(currentState.copyWith(
             errorMessage: null,

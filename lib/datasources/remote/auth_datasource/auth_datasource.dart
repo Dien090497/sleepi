@@ -189,7 +189,10 @@ abstract class AuthDataSource {
   Future<ListMarketPlaceModel> getListJewel();
 
   @GET('/nft-attributes/bed-detail')
-  Future<BedDetail> bedDetail(@Query('bedId') int bedId);
+  Future<BedDetail> bedDetail(
+    @Query('bedId') int bedId,
+    @Query('isBase') bool isBase,
+  );
 
   @PUT('/nft-attributes/add-item-for-bed')
   Future<dynamic> addItemForBed(
@@ -240,7 +243,8 @@ abstract class AuthDataSource {
   );
 
   @POST('/gacha/spin')
-  Future<GachaSpinResponse> gachaSpinBonus(@Body() GachaSpinSchema gachaSpinSchema);
+  Future<GachaSpinResponse> gachaSpinBonus(
+      @Body() GachaSpinSchema gachaSpinSchema);
 
   @GET('/gacha/history')
   Future<dynamic> gachaHistory();
@@ -256,8 +260,7 @@ abstract class AuthDataSource {
   Future<dynamic> removeJewel(@Body() AddJewelSchema addJewelSchema);
 
   @POST('/nft/sell')
-  Future<NftSell> nftSell(
-      @Body() NFTSellSchema nftSellSchema);
+  Future<NftSell> nftSell(@Body() NFTSellSchema nftSellSchema);
 
   @GET('/nft/transaction-fee')
   Future<String> getTransactionFee();
@@ -266,5 +269,5 @@ abstract class AuthDataSource {
   Future<GetRepairResponse> getRepair(@Query('bedId') String bedId);
 
   @POST('/nft/repair')
-  Future<dynamic> nftRepair (@Body() RepairSchema repairSchema);
+  Future<dynamic> nftRepair(@Body() RepairSchema repairSchema);
 }

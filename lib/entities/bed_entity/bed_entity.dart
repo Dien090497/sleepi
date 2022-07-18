@@ -1,19 +1,23 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:slee_fi/entities/jewel_entity/jewel_entity.dart';
 
 part 'bed_entity.freezed.dart';
 
 @freezed
 class BedEntity with _$BedEntity {
   const factory BedEntity({
+    required int id,
+    required int nftId,
     required String name,
     required String nftClass,
-    required int id,
     required int tokenId,
     required int level,
     required String image,
     required String type,
     required String contractAddress,
     required String? quality,
+    required String owner,
+    required String status,
     required double durability,
     required int isLock,
     required int bedMint,
@@ -24,9 +28,10 @@ class BedEntity with _$BedEntity {
     required double resilience,
     required int time,
     required int isMint,
-    required int nftId,
-    double? insurancePercent,
-    double? startTime,
-    double? endTime,
+    required int? socket,
+    required double? insurancePercent,
+    required double? startTime,
+    required double? endTime,
+    required List<JewelEntity> jewels,
   }) = _BedEntity;
 }
