@@ -121,9 +121,9 @@ class _CountDownTextState extends State<_CountDownText> {
         widget.userStatusTracking!.availableAt != 0) {
       if(DateTime.now().isBefore(DateTime.fromMillisecondsSinceEpoch(
           widget.userStatusTracking!.availableAt * 1000))) {
-        startTime = DateTime.now()
-          .difference(DateTime.fromMillisecondsSinceEpoch(
-              widget.userStatusTracking!.availableAt * 1000))
+        startTime = DateTime.fromMillisecondsSinceEpoch(
+            widget.userStatusTracking!.availableAt * 1000)
+          .difference(DateTime.now())
           .inSeconds;
       }else{
         startTime = 0;
