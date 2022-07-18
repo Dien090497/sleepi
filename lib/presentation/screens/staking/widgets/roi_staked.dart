@@ -21,8 +21,9 @@ class SLFTStaked extends StatefulWidget {
   final Function(StakedArguments) staked;
   final String? apr;
   final double priceUsd;
+  final double myBalance;
   final bool readonly;
-  const SLFTStaked({this.readonly = false, required this.priceUsd, required this.staked, required this.apr, Key? key}) : super(key: key);
+  const SLFTStaked({required this.myBalance, this.readonly = false, required this.priceUsd, required this.staked, required this.apr, Key? key}) : super(key: key);
 
 
   @override
@@ -185,6 +186,7 @@ class SLFTStakedState extends State<SLFTStaked> {
               balance.length,
                   (index) => GestureDetector(
                 onTap: () {
+                  double? checkMyBalance = double.tryParse(balance.elementAt(index));
                   if (selectedIndex == index) {
                     setState(() {
                       selectedIndex = null;
@@ -195,14 +197,14 @@ class SLFTStakedState extends State<SLFTStaked> {
                   } else {
                     setState(() {
                       selectedIndex = index;
-                      if(index != 2){
-                        amountPrice = balance.elementAt(index);
-                        _amountEditingController.text = "${double.parse(balance.elementAt(index))/widget.priceUsd}";
+                      if(!swapText){
+                        amountPrice = checkMyBalance != null ? balance.elementAt(index) : widget.myBalance.toString();
+                        _amountEditingController.text = "${double.parse(amountPrice)/widget.priceUsd}";
                         widget.staked(StakedArguments(day: int.parse(dayEditingController.text), amount: double.parse(amountPrice)));
-                      }else {
-                        amountPrice = '';
-                        _amountEditingController.text = '';
-                        widget.staked(StakedArguments(day: int.parse(dayEditingController.text), amount: 0));
+                      }else{
+                        _amountEditingController.text = checkMyBalance != null ? balance.elementAt(index) : widget.myBalance.toString();
+                        amountPrice = "${double.parse(_amountEditingController.text)/widget.priceUsd}";
+                        widget.staked(StakedArguments(day: int.parse(dayEditingController.text), amount: double.parse(_amountEditingController.text)));
                       }
                     });
                   }

@@ -161,7 +161,7 @@ class _PopUpConfirmSendState extends State<PopUpConfirmSend> {
                                         widget.valueInEther, widget.arg);
                                   } else {
                                     cubit.sendToExternal(widget.toAddress,
-                                        widget.valueInEther, fee!);
+                                        widget.valueInEther, fee!, "AVAX");
                                   }
                                 }),
                           ),

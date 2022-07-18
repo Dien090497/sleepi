@@ -15,7 +15,8 @@ import 'package:slee_fi/resources/resources.dart';
 class PopUpCalculator extends StatefulWidget {
   final String? aprInDay;
   final double? priceUsd;
-  const PopUpCalculator({required this.priceUsd, required this.aprInDay, Key? key}) : super(key: key);
+  final double myBalance;
+  const PopUpCalculator({required this.myBalance, required this.priceUsd, required this.aprInDay, Key? key}) : super(key: key);
 
   @override
   State<PopUpCalculator> createState() => _PopUpCalculatorState();
@@ -92,6 +93,7 @@ class _PopUpCalculatorState extends State<PopUpCalculator> {
               key: stakedKey,
               readonly: !isChangedRates,
               apr: widget.aprInDay,
+              myBalance: widget.myBalance,
               priceUsd: widget.priceUsd ?? 0,
               staked: (staked) {
                 if(staked.day == 0 && staked.amount == 0){

@@ -8,6 +8,7 @@ class HistoryEntity with _$HistoryEntity {
     required String? transactionHash,
     required int chainId,
     required String addressToken,
+    required String tokenSymbol,
     //  EtherAmount? value,
     //  BlockNum? blockNumber,
     //  EthereumAddress? from,

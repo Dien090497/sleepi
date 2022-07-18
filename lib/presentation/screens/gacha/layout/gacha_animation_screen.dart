@@ -36,7 +36,7 @@ class _GachaAnimationScreenState extends State<GachaAnimationScreen> with Ticker
    Future setAudio() async{
      final args = ModalRoute.of(context)?.settings.arguments as GachaAnimationArguments?;
      audioPlayer.setReleaseMode(ReleaseMode.loop);
-     audioPlayer.play(AssetSource(args?.audio ?? Const.normalGachaAudio));
+     audioPlayer.play(AssetSource(args?.audio ?? Const.normalGachaAudio), );
    }
 
   @override
@@ -64,10 +64,10 @@ class _GachaAnimationScreenState extends State<GachaAnimationScreen> with Ticker
             });
           }else {
             List<String> images = [];
+            Navigator.pop(context);
             for(var i = 0; i > args.spinInfo.gift.first.length; i++){
               images.add(randomUtils.gachaItem());
             }
-            Navigator.pop(context);
             Navigator.pushNamed(context, R.allResult,
                 arguments: GachaAllResultBedArguments(gachaSpinInfo: args.spinInfo , images: images));
           }

@@ -11,6 +11,8 @@ class HistoryIsarModel {
 
   final String addressTo;
 
+  final String tokenSymbol;
+
   final int chainId;
 
   // final BlockNum? blockNumber;
@@ -20,8 +22,6 @@ class HistoryIsarModel {
   // final int gas;
   //
   // final EtherAmount? gasPrice;
-  //
-  // final String hash;
   //
   // final int nonce;
   //
@@ -35,6 +35,7 @@ class HistoryIsarModel {
     required this.transactionHash,
     required this.chainId,
     required this.addressTo,
+    required this.tokenSymbol,
   });
 
   HistoryEntity toEntity() {
@@ -43,6 +44,7 @@ class HistoryIsarModel {
       transactionHash: transactionHash,
       chainId: chainId,
       addressToken: addressTo,
+      tokenSymbol: tokenSymbol
       // gas: gas,
       // gasPrice: gasPrice,
       // value: value,

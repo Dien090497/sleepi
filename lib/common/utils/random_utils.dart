@@ -30,6 +30,6 @@ class RandomUtils {
 
     final rnd = Random();
     int number = rnd.nextInt(items.length);
-    return items.elementAt(number - 1);
+    return items.elementAt(number);
   }
 }

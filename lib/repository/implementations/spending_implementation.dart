@@ -4,10 +4,13 @@ import 'package:dartz/dartz.dart';
 import 'package:injectable/injectable.dart';
 import 'package:slee_fi/common/const/const.dart';
 import 'package:slee_fi/common/extensions/num_ext.dart';
+import 'package:slee_fi/datasources/local/get_storage_datasource.dart';
+import 'package:slee_fi/datasources/local/history_datasource.dart';
 import 'package:slee_fi/datasources/remote/auth_datasource/auth_datasource.dart';
 import 'package:slee_fi/datasources/remote/network/spending_datasource.dart';
 import 'package:slee_fi/entities/staking/staking_entity.dart';
 import 'package:slee_fi/failures/failure.dart';
+import 'package:slee_fi/models/isar_models/history_isar/history_isar_model.dart';
 import 'package:slee_fi/models/staking_info_response/staking_info_response.dart';
 import 'package:slee_fi/repository/spending_repository.dart';
 import 'package:slee_fi/schema/stacking_schema/stacking_schema.dart';
@@ -17,8 +20,10 @@ import 'package:web3dart/web3dart.dart';
 class SpendingImplementation extends ISpendingRepository {
   final SpendingDataSource _spendingDataSource;
   final AuthDataSource _authDataSource;
+  final HistoryDataSource _historyDataSource;
+  final GetStorageDataSource _getStorageDataSource;
 
-  SpendingImplementation(this._spendingDataSource, this._authDataSource);
+  SpendingImplementation(this._spendingDataSource, this._authDataSource, this._historyDataSource, this._getStorageDataSource);
 
   @override
   Future<Either<Failure, String>> depositToken({
@@ -28,6 +33,7 @@ class SpendingImplementation extends ISpendingRepository {
     required int userId,
   }) async {
     try {
+      final chainId = _getStorageDataSource.getCurrentChainId();
       final amountWei = BigInt.from(amount * pow(10, 18));
       if (addressContract == Const.listTokenAddressTestNet[2]) {
         final hash = await _spendingDataSource.toSpendingAvax(
@@ -37,6 +43,15 @@ class SpendingImplementation extends ISpendingRepository {
             avax: EthereumAddress.fromHex(
                 "0x0000000000000000000000000000000000000000"),
             transaction: Transaction(value: EtherAmount.inWei(amountWei)));
+        if(hash.isNotEmpty){
+          final model = HistoryIsarModel(
+              transactionHash: hash,
+              chainId: chainId!,
+              addressTo: "0x0000000000000000000000000000000000000000",
+              tokenSymbol: "AVAX"
+          );
+          await _historyDataSource.putHistory(model);
+        }
         return Right(hash);
       }
       final token = _spendingDataSource.token(addressContract);

@@ -9,9 +9,10 @@ class SendToExternalParams {
   final double? valueInEther;
   final double? fee;
   final String contractAddressTo;
+  final String? tokenSymbol;
 
   const SendToExternalParams(
-      {required this.contractAddressTo, this.valueInEther, this.fee});
+      {required this.contractAddressTo, this.tokenSymbol,this.valueInEther, this.fee});
 }
 
 class SendToExternalUseCase extends UseCase<bool, SendToExternalParams> {

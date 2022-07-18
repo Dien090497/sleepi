@@ -426,13 +426,13 @@ class WalletImplementation extends IWalletRepository {
         (l) {},
         (history) {
           if (params.tokenSymbol == "AVAX") {
-            transactionHistoryList = history.result;
+            transactionHistoryList = history;
           } else if (params.tokenSymbol != null) {
-            transactionHistoryList = history.result
+            transactionHistoryList = history
                 .where((i) => i.tokenSymbol == params.tokenSymbol)
                 .toList();
           } else {
-            transactionHistoryList = history.result;
+            transactionHistoryList = history;
           }
         },
       );

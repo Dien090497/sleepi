@@ -19,6 +19,7 @@ mixin _$HistoryEntity {
   String? get transactionHash => throw _privateConstructorUsedError;
   int get chainId => throw _privateConstructorUsedError;
   String get addressToken => throw _privateConstructorUsedError;
+  String get tokenSymbol => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $HistoryEntityCopyWith<HistoryEntity> get copyWith =>
@@ -30,7 +31,11 @@ abstract class $HistoryEntityCopyWith<$Res> {
   factory $HistoryEntityCopyWith(
           HistoryEntity value, $Res Function(HistoryEntity) then) =
       _$HistoryEntityCopyWithImpl<$Res>;
-  $Res call({String? transactionHash, int chainId, String addressToken});
+  $Res call(
+      {String? transactionHash,
+      int chainId,
+      String addressToken,
+      String tokenSymbol});
 }
 
 /// @nodoc
@@ -47,6 +52,7 @@ class _$HistoryEntityCopyWithImpl<$Res>
     Object? transactionHash = freezed,
     Object? chainId = freezed,
     Object? addressToken = freezed,
+    Object? tokenSymbol = freezed,
   }) {
     return _then(_value.copyWith(
       transactionHash: transactionHash == freezed
@@ -61,6 +67,10 @@ class _$HistoryEntityCopyWithImpl<$Res>
           ? _value.addressToken
           : addressToken // ignore: cast_nullable_to_non_nullable
               as String,
+      tokenSymbol: tokenSymbol == freezed
+          ? _value.tokenSymbol
+          : tokenSymbol // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
@@ -72,7 +82,11 @@ abstract class _$$_HistoryEntityCopyWith<$Res>
           _$_HistoryEntity value, $Res Function(_$_HistoryEntity) then) =
       __$$_HistoryEntityCopyWithImpl<$Res>;
   @override
-  $Res call({String? transactionHash, int chainId, String addressToken});
+  $Res call(
+      {String? transactionHash,
+      int chainId,
+      String addressToken,
+      String tokenSymbol});
 }
 
 /// @nodoc
@@ -91,6 +105,7 @@ class __$$_HistoryEntityCopyWithImpl<$Res>
     Object? transactionHash = freezed,
     Object? chainId = freezed,
     Object? addressToken = freezed,
+    Object? tokenSymbol = freezed,
   }) {
     return _then(_$_HistoryEntity(
       transactionHash: transactionHash == freezed
@@ -105,6 +120,10 @@ class __$$_HistoryEntityCopyWithImpl<$Res>
           ? _value.addressToken
           : addressToken // ignore: cast_nullable_to_non_nullable
               as String,
+      tokenSymbol: tokenSymbol == freezed
+          ? _value.tokenSymbol
+          : tokenSymbol // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
@@ -115,7 +134,8 @@ class _$_HistoryEntity implements _HistoryEntity {
   const _$_HistoryEntity(
       {required this.transactionHash,
       required this.chainId,
-      required this.addressToken});
+      required this.addressToken,
+      required this.tokenSymbol});
 
   @override
   final String? transactionHash;
@@ -123,10 +143,12 @@ class _$_HistoryEntity implements _HistoryEntity {
   final int chainId;
   @override
   final String addressToken;
+  @override
+  final String tokenSymbol;
 
   @override
   String toString() {
-    return 'HistoryEntity(transactionHash: $transactionHash, chainId: $chainId, addressToken: $addressToken)';
+    return 'HistoryEntity(transactionHash: $transactionHash, chainId: $chainId, addressToken: $addressToken, tokenSymbol: $tokenSymbol)';
   }
 
   @override
@@ -138,7 +160,9 @@ class _$_HistoryEntity implements _HistoryEntity {
                 .equals(other.transactionHash, transactionHash) &&
             const DeepCollectionEquality().equals(other.chainId, chainId) &&
             const DeepCollectionEquality()
-                .equals(other.addressToken, addressToken));
+                .equals(other.addressToken, addressToken) &&
+            const DeepCollectionEquality()
+                .equals(other.tokenSymbol, tokenSymbol));
   }
 
   @override
@@ -146,7 +170,8 @@ class _$_HistoryEntity implements _HistoryEntity {
       runtimeType,
       const DeepCollectionEquality().hash(transactionHash),
       const DeepCollectionEquality().hash(chainId),
-      const DeepCollectionEquality().hash(addressToken));
+      const DeepCollectionEquality().hash(addressToken),
+      const DeepCollectionEquality().hash(tokenSymbol));
 
   @JsonKey(ignore: true)
   @override
@@ -158,7 +183,8 @@ abstract class _HistoryEntity implements HistoryEntity {
   const factory _HistoryEntity(
       {required final String? transactionHash,
       required final int chainId,
-      required final String addressToken}) = _$_HistoryEntity;
+      required final String addressToken,
+      required final String tokenSymbol}) = _$_HistoryEntity;
 
   @override
   String? get transactionHash;
@@ -166,6 +192,8 @@ abstract class _HistoryEntity implements HistoryEntity {
   int get chainId;
   @override
   String get addressToken;
+  @override
+  String get tokenSymbol;
   @override
   @JsonKey(ignore: true)
   _$$_HistoryEntityCopyWith<_$_HistoryEntity> get copyWith =>

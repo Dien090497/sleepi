@@ -96,7 +96,7 @@ class PopUpConfirmTransfer extends StatelessWidget {
                     ? getIt<SendToExternalUseCase>().calculatorFee(
                         SendToExternalParams(
                             contractAddressTo: ContractAddresses.spending.hex,
-                            valueInEther: amount))
+                            valueInEther: amount, tokenSymbol: symbol))
                     : getIt<EstimateGasWithdrawUseCase>().call(
                         EstimateGasWithdrawParam(
                             type: symbol, contractAddress: tokenAddress)),

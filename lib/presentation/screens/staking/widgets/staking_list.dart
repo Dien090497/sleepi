@@ -215,7 +215,7 @@ class _StakingListState extends State<StakingList> {
                       showCustomAlertDialog(
                         context,
                         padding: const EdgeInsets.all(24),
-                        children: PopUpCalculator(aprInDay: stakingInfo?.aprInDay, priceUsd: stakingInfo?.slftPriceUsd),
+                        children: PopUpCalculator(myBalance : widget.balanceSlft, aprInDay: stakingInfo?.aprInDay, priceUsd: stakingInfo?.slftPriceUsd),
                       );
                     },
                     child: Row(
