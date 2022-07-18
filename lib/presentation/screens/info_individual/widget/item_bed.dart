@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:slee_fi/common/enum/enum.dart';
-import 'package:slee_fi/common/extensions/enum_x.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
 import 'package:slee_fi/common/widgets/sf_icon.dart';
@@ -11,13 +9,13 @@ import 'package:slee_fi/resources/resources.dart';
 class ItemBed extends StatelessWidget {
   const ItemBed(
       {Key? key,
-      required this.bed,
+      // required this.bed,
       required this.selected,
       required this.id,
       required this.onTap})
       : super(key: key);
 
-  final BedType bed;
+  // final BedType bed;
   final bool selected;
   final String id;
   final VoidCallback onTap;
@@ -42,7 +40,11 @@ class ItemBed extends StatelessWidget {
             Positioned(
               top: 20,
               left: -40,
-              child: TopLeftBanner(text: bed.name, textColor: bed.color),
+              // child: TopLeftBanner(text: bed.name, textColor: bed.color),
+              child: TopLeftBanner(
+                text: 'bed.name',
+                textColor: AppColors.borderDarkColor,
+              ),
             ),
             Container(
               alignment: Alignment.center,

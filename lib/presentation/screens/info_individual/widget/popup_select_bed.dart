@@ -63,7 +63,7 @@ class _PopUpSelectBedState extends State<PopUpSelectBed> {
                           itemBuilder: (context, i) {
                             return ItemBed(
                               id: listID[i],
-                              bed: widget.beds[i],
+                              // bed: widget.beds[i],
                               selected: state.indexSelected == i,
                               onTap: () {
                                 cubit.selectBed(i);
