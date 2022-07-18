@@ -81,13 +81,13 @@ class _TransferListState extends State<TransferList> {
           } else if (!(state.needApprove ?? true)) {
             final amount = double.parse(controller.text);
             final userState = context.read<UserBloc>().state;
-            isLoadingNotifier.value = true;
 
             showCustomAlertDialog(
               context,
               showClosed: false,
               children: PopUpConfirmTransfer(
                 onConfirm: () {
+                  isLoadingNotifier.value = true;
                   cubit.transfer(
                     amount: amount,
                     contractAddress: widget.tokenEntity.address,
