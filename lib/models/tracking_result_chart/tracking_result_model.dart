@@ -33,6 +33,10 @@ class TrackingResultModel {
   String? sleepDurationTime;
   String? wokeUpTime;
   String? bedTime;
+  String? bedNFTHoldingBonus;
+  String? stakingBonus;
+  String? basePointEff;
+  String? insurance;
   int? sleepQuality;
   int? startSleepTime;
   DateTime? createdAt;

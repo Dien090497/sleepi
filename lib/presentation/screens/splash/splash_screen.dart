@@ -46,8 +46,10 @@ class SplashScreen extends StatelessWidget {
                       timeWakeUp:
                           state.userStatusTrackingModel!.tracking!.wakeUp! *
                               1000,
-                      tokenEarn: double.parse(
-                          state.userStatusTrackingModel!.tracking!.estEarn!),
+                      tokenEarn:
+                          state.userStatusTrackingModel!.tracking!.estEarn == null
+                              ? 0
+                              : double.parse(state.userStatusTrackingModel!.tracking!.estEarn!),
                       fromRoute: R.splash,
                     ),
                   );

@@ -15,7 +15,7 @@ class CategoryHeader extends StatelessWidget {
       required this.score})
       : super(key: key);
 
-  final num earning;
+  final String earning;
   final String sleepDuration;
   final int score;
 
