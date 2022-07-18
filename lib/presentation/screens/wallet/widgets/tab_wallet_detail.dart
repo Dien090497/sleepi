@@ -62,7 +62,7 @@ class _TabWalletDetailState extends State<TabWalletDetail> {
   }
 
   void _startTimer() {
-    if(!mounted) return;
+    if (!mounted) return;
     final walletCubit = BlocProvider.of<WalletCubit>(context);
     if (timer != null) {
       timer?.cancel();
@@ -79,8 +79,6 @@ class _TabWalletDetailState extends State<TabWalletDetail> {
   @override
   Widget build(BuildContext context) {
     final walletCubit = context.read<WalletCubit>();
-    final isJapanese =
-        Localizations.localeOf(context).toLanguageTag().isJapanese;
 
     return BlocBuilder<WalletCubit, WalletState>(
       builder: (context, state) {
@@ -213,10 +211,7 @@ class _TabWalletDetailState extends State<TabWalletDetail> {
                                 const EdgeInsets.symmetric(horizontal: 12.0),
                             child: ElevatedButton(
                                 onPressed: () async {
-                                  final url = isJapanese
-                                      ? Const.okCoinUrl
-                                      : Const.binanceUrl;
-                                  final uri = Uri.parse(url);
+                                  final uri = Uri.parse(Const.binanceUrl);
                                   if (await canLaunchUrl(uri)) {
                                     launchUrl(uri);
                                   }
@@ -231,16 +226,11 @@ class _TabWalletDetailState extends State<TabWalletDetail> {
                                 ),
                                 child: Row(
                                   children: [
-                                    SFIcon(
-                                      isJapanese ? Ics.okcoin : Imgs.binance,
-                                      width: 24,
-                                    ),
+                                    const SFIcon(Imgs.binance, width: 24),
                                     const SizedBox(width: 8.0),
                                     SFText(
                                       keyText: LocaleKeys.buy,
-                                      style: isJapanese
-                                          ? TextStyles.bold14Blue
-                                          : TextStyles.bold14Yellow,
+                                      style: TextStyles.bold14Yellow,
                                     )
                                   ],
                                 )),
@@ -263,9 +253,9 @@ class _TabWalletDetailState extends State<TabWalletDetail> {
 
   void _copyAddress(FToast fToast, BuildContext context, String address) async {
     ClipboardData? data = await Clipboard.getData(Clipboard.kTextPlain);
-    if(data?.text == address){
+    if (data?.text == address) {
       debugPrint(address);
-    }else{
+    } else {
       Clipboard.setData(ClipboardData(text: address));
     }
 
