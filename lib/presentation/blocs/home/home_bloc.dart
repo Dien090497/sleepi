@@ -268,7 +268,8 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
           itemId: currentState.selectedItem?.id,
           isEnableInsurance: currentState.enableInsurance));
       result.fold((l) => null, (r) {
-        emit(currentState.copyWith(tokenEarn: double.parse(r.slftTokenAmount)));
+        emit(
+            currentState.copyWith(tokenEarn: double.parse(r.estimateSlftEarn)));
       });
     }
   }
