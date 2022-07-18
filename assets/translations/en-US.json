@@ -453,5 +453,6 @@
   "remove": "Remove",
   "add_jewel": "Add Jewel",
   "jewel_list" : "Jewel List",
-  "select_bed" : "Select Bed"
+  "select_bed" : "Select Bed",
+  "wallet_already_mapping" : "This wallet address has already existed in the system. Please import another address."
 }
