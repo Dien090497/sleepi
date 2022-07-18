@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
@@ -49,6 +50,7 @@ class _CreatePasswordScreenState extends State<CreatePasswordScreen> {
       child: BlocConsumer<CreatePasswordCubit, CreatePasswordState>(
         listener: (context, state) {
           if (state is CreatePasswordStateSuccess) {
+            context.setLocale(arg.locale);
             Phoenix.rebirth(context);
           } else if (state is CreatePasswordStateChangePasswrodSuccess) {
             Navigator.pop(context, true);
