@@ -39,7 +39,6 @@ class InfoIndividualScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final args =
         ModalRoute.of(context)?.settings.arguments as InfoIndividualParams;
-
     return MultiBlocProvider(
       providers: [
         BlocProvider(create: (context) => IndividualCubit(args.bed)),

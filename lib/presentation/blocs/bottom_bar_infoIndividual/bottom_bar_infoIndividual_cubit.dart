@@ -3,10 +3,14 @@ import 'package:slee_fi/common/const/const.dart';
 import 'package:slee_fi/common/enum/enum.dart';
 import 'package:slee_fi/di/injector.dart';
 import 'package:slee_fi/presentation/blocs/bottom_bar_infoIndividual/bottom_bar_infoIndividual_state.dart';
+import 'package:slee_fi/schema/level_up/get_level_up_schema.dart';
+import 'package:slee_fi/schema/level_up/level_up_schema.dart';
 import 'package:slee_fi/schema/nft_sell_schema/nft_sell_schema.dart';
 import 'package:slee_fi/schema/repair_schema/repair_schema.dart';
 import 'package:slee_fi/schema/with_draw_nft_schema/with_draw_nft_schema.dart';
 import 'package:slee_fi/usecase/estimate_gas_withdraw.dart';
+import 'package:slee_fi/usecase/get_level_up_usecase.dart';
+import 'package:slee_fi/usecase/post_level_up_usecase.dart';
 import 'package:slee_fi/usecase/get_repair_usecase.dart';
 import 'package:slee_fi/usecase/get_transaction_fee_usecase.dart';
 import 'package:slee_fi/usecase/nft_repair_usecase.dart';
@@ -15,10 +19,13 @@ import 'package:slee_fi/usecase/usecase.dart';
 import 'package:slee_fi/usecase/withdrawNFT_usecase.dart';
 
 class BottomBarInfoIndividualCubit extends Cubit<BottomBarInfoIndividualState> {
-  BottomBarInfoIndividualCubit() : super(const BottomBarInfoIndividualState.initial());
+  BottomBarInfoIndividualCubit()
+      : super(const BottomBarInfoIndividualState.initial());
 
   final _estimateGasWithdrawUC = getIt<EstimateGasWithdrawUseCase>();
   final _withdrawNFTUseCase = getIt<WithdrawNFTUseCase>();
+  final _getLevelUpUC = getIt<GetLevelUpUseCase>();
+  final _postLevelUpUC = getIt<PostLevelUpUseCase>();
   final _getTransactionFeeUseCase = getIt<GetTransactionFeeUseCase>();
   final _nftSellUseCase = getIt<NFTSellUseCase>();
   final _getRepairUseCase = getIt<GetRepairUseCase>();
@@ -98,5 +105,19 @@ class BottomBarInfoIndividualCubit extends Cubit<BottomBarInfoIndividualState> {
         emit(currentState.copyWith(successTransfer: true));
       }
     });
+  }
+
+  Future<void> getLevelUp(GetLevelUpSchema param) async {
+    final result = await _getLevelUpUC.call(param);
+    result.fold((l) => emit(BottomBarInfoIndividualState.error(message: '$l')),
+        (r) {
+      emit(BottomBarInfoIndividualState.getLevel(r));
+    });
+  }
+
+  Future<void> postLevelUp(LevelUpSchema param) async {
+    final result = await _postLevelUpUC.call(param);
+    result.fold((l) => emit(BottomBarInfoIndividualState.error(message: '$l')),
+        (r) => emit(const BottomBarInfoIndividualState.upLevel()));
   }
 }
