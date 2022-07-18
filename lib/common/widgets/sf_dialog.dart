@@ -31,11 +31,18 @@ Future<T?> showCustomDialog<T>(
       });
 }
 
-Future<T?> showSuccessfulDialog<T>(BuildContext context, String? message,
-    {EdgeInsets? padding, TextStyle? style, VoidCallback? onBackPress}) async {
+Future<T?> showSuccessfulDialog<T>(
+  BuildContext context,
+  String? message, {
+  EdgeInsets? padding,
+  TextStyle? style,
+  VoidCallback? onBackPress,
+  bool barrierDismissible = true,
+}) async {
   return showDialog(
       context: context,
       barrierColor: AppColors.backgroundDialog,
+      barrierDismissible: barrierDismissible,
       builder: (context) {
         return SFDialog(
           padding: padding,

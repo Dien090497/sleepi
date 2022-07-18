@@ -103,9 +103,10 @@ import '../usecase/get_network_connection_usecase.dart' as _i33;
 import '../usecase/get_nft_family_usecase.dart' as _i142;
 import '../usecase/get_nfts_balance_usecase.dart' as _i140;
 import '../usecase/get_nfts_ids_usecase.dart' as _i141;
-import '../usecase/get_repair_usecase.dart' as _i143;
+import '../usecase/get_point_of_owner_usecase.dart' as _i143;
+import '../usecase/get_repair_usecase.dart' as _i144;
 import '../usecase/get_sleep_result_usecase.dart' as _i117;
-import '../usecase/get_transaction_fee_usecase.dart' as _i144;
+import '../usecase/get_transaction_fee_usecase.dart' as _i145;
 import '../usecase/get_user_status_tracking_usecase.dart' as _i118;
 import '../usecase/get_user_usecase.dart' as _i119;
 import '../usecase/has_wallet_usecase.dart' as _i120;
@@ -155,7 +156,7 @@ import '../usecase/wallet/get_current_mnemonic_usecasse.dart' as _i113;
 import '../usecase/wallet/import_wallet_usecase.dart' as _i56;
 import '../usecase/withdrawNFT_usecase.dart' as _i135;
 import '../usecase/withdraw_history_usecase.dart' as _i85;
-import 'register_module.dart' as _i145; // ignore_for_file: unnecessary_lambdas
+import 'register_module.dart' as _i146; // ignore_for_file: unnecessary_lambdas
 
 // ignore_for_file: lines_longer_than_80_chars
 /// initializes the registration of provided dependencies inside of [GetIt]
@@ -443,13 +444,15 @@ Future<_i1.GetIt> $initGetIt(_i1.GetIt get,
       () => _i141.GetNFTsIDsUseCase(get<_i121.INFTRepository>()));
   gh.factory<_i142.GetNftFamilyUseCase>(
       () => _i142.GetNftFamilyUseCase(get<_i121.INFTRepository>()));
-  gh.factory<_i143.GetRepairUseCase>(
-      () => _i143.GetRepairUseCase(get<_i121.INFTRepository>()));
-  gh.factory<_i144.GetTransactionFeeUseCase>(
-      () => _i144.GetTransactionFeeUseCase(get<_i121.INFTRepository>()));
+  gh.factory<_i143.GetPointOfOwnerUseCase>(
+      () => _i143.GetPointOfOwnerUseCase(get<_i121.INFTRepository>()));
+  gh.factory<_i144.GetRepairUseCase>(
+      () => _i144.GetRepairUseCase(get<_i121.INFTRepository>()));
+  gh.factory<_i145.GetTransactionFeeUseCase>(
+      () => _i145.GetTransactionFeeUseCase(get<_i121.INFTRepository>()));
   return get;
 }
 
 class _$RPCModule extends _i31.RPCModule {}
 
-class _$RegisterModule extends _i145.RegisterModule {}
+class _$RegisterModule extends _i146.RegisterModule {}

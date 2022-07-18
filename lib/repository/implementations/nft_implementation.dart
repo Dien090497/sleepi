@@ -9,10 +9,12 @@ import 'package:slee_fi/entities/get_repair_entity/get_repair_entity.dart';
 import 'package:slee_fi/entities/nft_entity/nft_entity.dart';
 import 'package:slee_fi/entities/nft_family/nft_family.dart';
 import 'package:slee_fi/entities/nft_sell_response_entity/nft_sell_response_entity.dart';
+import 'package:slee_fi/entities/point_of_owner/point_of_owner_entity.dart';
 import 'package:slee_fi/failures/failure.dart';
 import 'package:slee_fi/repository/nft_repository.dart';
 import 'package:slee_fi/schema/nft_sell_schema/nft_sell_schema.dart';
 import 'package:slee_fi/schema/repair_schema/repair_schema.dart';
+import 'package:slee_fi/schema/update_point/update_point_schema.dart';
 import 'package:slee_fi/schema/with_draw_nft_schema/with_draw_nft_schema.dart';
 import 'package:web3dart/web3dart.dart';
 
@@ -249,6 +251,24 @@ class NFTImplementation extends INFTRepository {
   Future<Either<Failure, NftFamilyEntity>> fetchFamily(int bedId) async {
     try {
       return Right((await _nftApi.family(bedId)).toEntity());
+    } catch (e) {
+      return Left(FailureMessage('$e'));
+    }
+  }
+
+  @override
+  Future<Either<Failure, PointOfOwnerEntity>> pointOf(int bedId) async {
+    try {
+      return Right((await _authDataSource.pointOf(bedId)).toEntity());
+    } catch (e) {
+      return Left(FailureMessage('$e'));
+    }
+  }
+
+  @override
+  Future<Either<Failure, String>> updatePoint(UpdatePointSchema schema) async {
+    try {
+      return Right((await _authDataSource.updatePoints(schema)).message);
     } catch (e) {
       return Left(FailureMessage('$e'));
     }

@@ -114,7 +114,7 @@ class WalletDetailList extends StatelessWidget {
                         fit: BoxFit.scaleDown,
                         alignment: Alignment.centerRight,
                         child: Text(
-                          tokenList[index].balance.formatBalanceToken,
+                          tokenList[index].balance.removeTrailingZeros,
                           style: TextStyles.lightWhite16,
                           textAlign: TextAlign.end,
                         ),

@@ -4,9 +4,11 @@ import 'package:slee_fi/entities/get_repair_entity/get_repair_entity.dart';
 import 'package:slee_fi/entities/nft_entity/nft_entity.dart';
 import 'package:slee_fi/entities/nft_family/nft_family.dart';
 import 'package:slee_fi/entities/nft_sell_response_entity/nft_sell_response_entity.dart';
+import 'package:slee_fi/entities/point_of_owner/point_of_owner_entity.dart';
 import 'package:slee_fi/failures/failure.dart';
 import 'package:slee_fi/schema/nft_sell_schema/nft_sell_schema.dart';
 import 'package:slee_fi/schema/repair_schema/repair_schema.dart';
+import 'package:slee_fi/schema/update_point/update_point_schema.dart';
 import 'package:slee_fi/schema/with_draw_nft_schema/with_draw_nft_schema.dart';
 import 'package:web3dart/web3dart.dart';
 
@@ -79,4 +81,8 @@ abstract class INFTRepository {
       {required RepairSchema repairSchema});
 
   Future<Either<Failure, NftFamilyEntity>> fetchFamily(int bedId);
+
+  Future<Either<Failure, PointOfOwnerEntity>> pointOf(int bedId);
+
+  Future<Either<Failure, String>> updatePoint(UpdatePointSchema schema);
 }

@@ -71,6 +71,7 @@ class _TransferListState extends State<TransferList> {
                       .then((_) {
                     isLoadingNotifier.value = false;
                     Navigator.pop(context);
+                    showSuccessfulDialog(context, null);
                   });
                 },
                 tokenName: widget.tokenEntity.symbol.toUpperCase(),
@@ -105,10 +106,15 @@ class _TransferListState extends State<TransferList> {
           }
         }
         if (state is TransferSuccess) {
-          showSuccessfulDialog(context, null, onBackPress: () {
-            isLoadingNotifier.value = false;
-            Navigator.popUntil(context, (r) => r.settings.name == R.wallet);
-          });
+          showSuccessfulDialog(
+            context,
+            null,
+            barrierDismissible: false,
+            onBackPress: () {
+              isLoadingNotifier.value = false;
+              Navigator.popUntil(context, (r) => r.settings.name == R.wallet);
+            },
+          );
         }
         if (state is TransferError) {
           isLoadingNotifier.value = false;

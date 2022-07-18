@@ -20,7 +20,9 @@ import 'package:slee_fi/models/list_market_place/list_market_place_model.dart';
 import 'package:slee_fi/models/lucky_box/lucky_box.dart';
 import 'package:slee_fi/models/market_place/result_buy_model.dart';
 import 'package:slee_fi/models/nft_sell_response/nft_sell_response.dart';
+import 'package:slee_fi/models/point_of_owner/point_of_owner_model.dart';
 import 'package:slee_fi/models/refresh_token_model/refresh_token_model.dart';
+import 'package:slee_fi/models/response_model/response_model.dart';
 import 'package:slee_fi/models/send_email_response/send_email_response.dart';
 import 'package:slee_fi/models/setting_active_code_response/setting_active_code_response.dart';
 import 'package:slee_fi/models/sign_in_response/sign_in_response.dart';
@@ -47,6 +49,7 @@ import 'package:slee_fi/schema/sign_in_schema/sign_in_schema.dart';
 import 'package:slee_fi/schema/sign_up_schema/sign_up_schema.dart';
 import 'package:slee_fi/schema/speed_up_lucky_box_schema/speed_up_lucky_box_schema.dart';
 import 'package:slee_fi/schema/stacking_schema/stacking_schema.dart';
+import 'package:slee_fi/schema/update_point/update_point_schema.dart';
 import 'package:slee_fi/schema/verify_schema/verify_schema.dart';
 import 'package:slee_fi/schema/verify_user_schema/verify_user_schema.dart';
 import 'package:slee_fi/schema/white_draw_token_schema/whit_draw_token_schema.dart';
@@ -195,13 +198,13 @@ abstract class AuthDataSource {
   );
 
   @PUT('/nft-attributes/add-item-for-bed')
-  Future<dynamic> addItemForBed(
+  Future<ResponseModel> addItemForBed(
     @Query('bedId') int bedId,
     @Query('itemId') int itemId,
   );
 
   @PUT('/nft-attributes/remove-item-from-bed')
-  Future<dynamic> removeItemFromBed(
+  Future<ResponseModel> removeItemFromBed(
     @Query('bedId') int bedId,
     @Query('itemId') int itemId,
   );
@@ -251,13 +254,13 @@ abstract class AuthDataSource {
 
   // individual
   @PUT('/nft-attributes/open-socket')
-  Future<dynamic> openSocket(@Query('bedId') int bedId);
+  Future<ResponseModel> openSocket(@Query('bedId') int bedId);
 
   @PUT('/nft-attributes/add-jewels')
-  Future<dynamic> addJewel(@Body() AddJewelSchema addJewelSchema);
+  Future<ResponseModel> addJewel(@Body() AddJewelSchema addJewelSchema);
 
   @PUT('/nft-attributes/remove-jewels')
-  Future<dynamic> removeJewel(@Body() AddJewelSchema addJewelSchema);
+  Future<ResponseModel> removeJewel(@Body() AddJewelSchema addJewelSchema);
 
   @POST('/nft/sell')
   Future<NftSell> nftSell(@Body() NFTSellSchema nftSellSchema);
@@ -270,4 +273,10 @@ abstract class AuthDataSource {
 
   @POST('/nft/repair')
   Future<dynamic> nftRepair(@Body() RepairSchema repairSchema);
+
+  @GET('/poins/poins-of-owner')
+  Future<PointOfOwnerModel> pointOf(@Query('bedId') int bedId);
+
+  @PUT('/poins/add-poin-for-bed')
+  Future<ResponseModel> updatePoints(@Body() UpdatePointSchema schema);
 }
