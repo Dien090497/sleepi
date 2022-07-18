@@ -9,7 +9,7 @@ class OpenSocketUseCase extends UseCase<dynamic, int> {
   OpenSocketUseCase(this._iUserRepository);
 
   @override
-  Future<Either<Failure, dynamic>> call(params) {
+  Future<Either<FailureMessage, dynamic>> call(params) {
     return _iUserRepository.openSocket(params);
   }
 }

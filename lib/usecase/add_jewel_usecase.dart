@@ -10,7 +10,7 @@ class AddJewelUseCase extends UseCase<dynamic, AddJewelSchema> {
   AddJewelUseCase(this._iUserRepository);
 
   @override
-  Future<Either<Failure, dynamic>> call(params) {
+  Future<Either<FailureMessage, dynamic>> call(params) {
     return _iUserRepository.addJewel(params);
   }
 }
