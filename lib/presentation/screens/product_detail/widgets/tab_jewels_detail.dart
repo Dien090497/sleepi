@@ -29,7 +29,7 @@ class _TabJewelsDetailState extends State<TabJewelsDetail> {
       padding: const EdgeInsets.all(24),
       children: [
         JewelDialogBody(
-          jewel: jewel,
+          jewel: jewel.toJewelEntity(),
           onSellTap: () {},
           onTransferTap: () {},
         ),
@@ -82,7 +82,7 @@ class _TabJewelsDetailState extends State<TabJewelsDetail> {
                                             context, listJewels[i]);
                                       },
                                       child: MyJewelsShortWidget(
-                                        jewel: listJewels[i],
+                                        jewel: listJewels[i].toJewelEntity(),
                                       ),
                                     );
                                   },

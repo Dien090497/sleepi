@@ -247,12 +247,12 @@ abstract class AuthDataSource {
 
   // individual
   @PUT('/nft-attributes/open-socket')
-  Future<dynamic> openSocket(@Query('bedId ') int bedId);
+  Future<dynamic> openSocket(@Query('bedId') int bedId);
 
-  @POST('/nft-attributes/add-jewels')
+  @PUT('/nft-attributes/add-jewels')
   Future<dynamic> addJewel(@Body() AddJewelSchema addJewelSchema);
 
-  @POST('/nft-attributes/remove-jewels')
+  @PUT('/nft-attributes/remove-jewels')
   Future<dynamic> removeJewel(@Body() AddJewelSchema addJewelSchema);
 
   @POST('/nft/sell')

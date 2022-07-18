@@ -262,7 +262,7 @@ class UserImplementation extends IUserRepository {
       final result = await _authDataSource.bedDetail(bedId);
       return Right(result);
     } catch (e) {
-      return Left(FailureMessage('$e'));
+      return Left(FailureMessage.fromException(e));
     }
   }
 
@@ -273,7 +273,7 @@ class UserImplementation extends IUserRepository {
       final result = await _authDataSource.addJewel(addJewelSchema);
       return Right(result);
     } catch (e) {
-      return Left(FailureMessage('$e'));
+      return Left(FailureMessage.fromException(e));
     }
   }
 
@@ -283,7 +283,7 @@ class UserImplementation extends IUserRepository {
       final result = await _authDataSource.openSocket(bedId);
       return Right(result);
     } catch (e) {
-      return Left(FailureMessage('$e'));
+      return Left(FailureMessage.fromException(e));
     }
   }
 
@@ -294,7 +294,7 @@ class UserImplementation extends IUserRepository {
       final result = await _authDataSource.removeJewel(addJewelSchema);
       return Right(result);
     } catch (e) {
-      return Left(FailureMessage('$e'));
+      return Left(FailureMessage.fromException(e));
     }
   }
 }
