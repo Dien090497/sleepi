@@ -85,7 +85,8 @@ class ModalJewelList extends StatelessWidget {
                               socketBloc,
                             );
                           },
-                          child: MyJewelsShortWidget(jewel: item),
+                          child: MyJewelsShortWidget(
+                              jewel: item, color: AppColors.light4),
                         );
                       },
                     );

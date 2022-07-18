@@ -11,16 +11,18 @@ import 'package:slee_fi/l10n/locale_keys.g.dart';
 import 'package:slee_fi/presentation/screens/product_detail/widgets/top_left_banner.dart';
 
 class MyJewelsShortWidget extends StatelessWidget {
-  const MyJewelsShortWidget({Key? key, required this.jewel}) : super(key: key);
+  const MyJewelsShortWidget({Key? key, required this.jewel, this.color})
+      : super(key: key);
 
   final JewelEntity jewel;
+  final Color? color;
 
   @override
   Widget build(BuildContext context) {
     final qualityColor = jewel.quality.qualityBedColor;
     return Container(
       decoration: BoxDecoration(
-        color: AppColors.lightDark,
+        color: color ?? AppColors.lightDark,
         borderRadius: BorderRadius.circular(16),
       ),
       child: Stack(
