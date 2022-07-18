@@ -80,8 +80,8 @@ Future<T?> showMessageDialog<T>(BuildContext context, String message,
     children: Padding(
       padding: const EdgeInsets.symmetric(vertical: 32, horizontal: 24),
       child: SFText(
-          textAlign: TextAlign.center,
           keyText: message,
+          textAlign: TextAlign.center,
           style: style ?? TextStyles.bold18White),
     ),
   );

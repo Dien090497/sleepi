@@ -5,7 +5,7 @@ part 'update_point_schema.g.dart';
 
 @JsonSerializable()
 class UpdatePointSchema {
-  final double bedId;
+  final int bedId;
   final double efficiency;
   final double luck;
   final double bonus;

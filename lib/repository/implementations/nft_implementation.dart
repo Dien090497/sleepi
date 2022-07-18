@@ -261,7 +261,7 @@ class NFTImplementation extends INFTRepository {
     try {
       return Right((await _authDataSource.pointOf(bedId)).toEntity());
     } catch (e) {
-      return Left(FailureMessage('$e'));
+      return Left(FailureMessage.fromException(e));
     }
   }
 
@@ -270,7 +270,7 @@ class NFTImplementation extends INFTRepository {
     try {
       return Right((await _authDataSource.updatePoints(schema)).message);
     } catch (e) {
-      return Left(FailureMessage('$e'));
+      return Left(FailureMessage.fromException(e));
     }
   }
 }

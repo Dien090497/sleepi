@@ -18,26 +18,44 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$IndividualPointState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(double point, List<double> startAttributes,
-            List<double> attributesChanged, List<String> attributesNames)
+    required TResult Function(
+            double? point,
+            BedEntity bed,
+            List<double> startAttributes,
+            List<double> attributesChanged,
+            List<String> attributesNames,
+            bool isLoading)
         initial,
     required TResult Function() done,
+    required TResult Function(String msg) error,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(double point, List<double> startAttributes,
-            List<double> attributesChanged, List<String> attributesNames)?
+    TResult Function(
+            double? point,
+            BedEntity bed,
+            List<double> startAttributes,
+            List<double> attributesChanged,
+            List<String> attributesNames,
+            bool isLoading)?
         initial,
     TResult Function()? done,
+    TResult Function(String msg)? error,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(double point, List<double> startAttributes,
-            List<double> attributesChanged, List<String> attributesNames)?
+    TResult Function(
+            double? point,
+            BedEntity bed,
+            List<double> startAttributes,
+            List<double> attributesChanged,
+            List<String> attributesNames,
+            bool isLoading)?
         initial,
     TResult Function()? done,
+    TResult Function(String msg)? error,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -45,18 +63,21 @@ mixin _$IndividualPointState {
   TResult map<TResult extends Object?>({
     required TResult Function(IndividualPointInitial value) initial,
     required TResult Function(IndividualPointDone value) done,
+    required TResult Function(IndividualPointError value) error,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult Function(IndividualPointInitial value)? initial,
     TResult Function(IndividualPointDone value)? done,
+    TResult Function(IndividualPointError value)? error,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(IndividualPointInitial value)? initial,
     TResult Function(IndividualPointDone value)? done,
+    TResult Function(IndividualPointError value)? error,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -85,10 +106,14 @@ abstract class _$$IndividualPointInitialCopyWith<$Res> {
           $Res Function(_$IndividualPointInitial) then) =
       __$$IndividualPointInitialCopyWithImpl<$Res>;
   $Res call(
-      {double point,
+      {double? point,
+      BedEntity bed,
       List<double> startAttributes,
       List<double> attributesChanged,
-      List<String> attributesNames});
+      List<String> attributesNames,
+      bool isLoading});
+
+  $BedEntityCopyWith<$Res> get bed;
 }
 
 /// @nodoc
@@ -106,15 +131,21 @@ class __$$IndividualPointInitialCopyWithImpl<$Res>
   @override
   $Res call({
     Object? point = freezed,
+    Object? bed = freezed,
     Object? startAttributes = freezed,
     Object? attributesChanged = freezed,
     Object? attributesNames = freezed,
+    Object? isLoading = freezed,
   }) {
     return _then(_$IndividualPointInitial(
       point: point == freezed
           ? _value.point
           : point // ignore: cast_nullable_to_non_nullable
-              as double,
+              as double?,
+      bed: bed == freezed
+          ? _value.bed
+          : bed // ignore: cast_nullable_to_non_nullable
+              as BedEntity,
       startAttributes: startAttributes == freezed
           ? _value._startAttributes
           : startAttributes // ignore: cast_nullable_to_non_nullable
@@ -127,7 +158,18 @@ class __$$IndividualPointInitialCopyWithImpl<$Res>
           ? _value._attributesNames
           : attributesNames // ignore: cast_nullable_to_non_nullable
               as List<String>,
+      isLoading: isLoading == freezed
+          ? _value.isLoading
+          : isLoading // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
+  }
+
+  @override
+  $BedEntityCopyWith<$Res> get bed {
+    return $BedEntityCopyWith<$Res>(_value.bed, (value) {
+      return _then(_value.copyWith(bed: value));
+    });
   }
 }
 
@@ -137,16 +179,20 @@ class _$IndividualPointInitial
     with DiagnosticableTreeMixin
     implements IndividualPointInitial {
   const _$IndividualPointInitial(
-      {required this.point,
+      {this.point,
+      required this.bed,
       required final List<double> startAttributes,
       required final List<double> attributesChanged,
-      required final List<String> attributesNames})
+      required final List<String> attributesNames,
+      this.isLoading = false})
       : _startAttributes = startAttributes,
         _attributesChanged = attributesChanged,
         _attributesNames = attributesNames;
 
   @override
-  final double point;
+  final double? point;
+  @override
+  final BedEntity bed;
   final List<double> _startAttributes;
   @override
   List<double> get startAttributes {
@@ -169,8 +215,12 @@ class _$IndividualPointInitial
   }
 
   @override
+  @JsonKey()
+  final bool isLoading;
+
+  @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'IndividualPointState.initial(point: $point, startAttributes: $startAttributes, attributesChanged: $attributesChanged, attributesNames: $attributesNames)';
+    return 'IndividualPointState.initial(point: $point, bed: $bed, startAttributes: $startAttributes, attributesChanged: $attributesChanged, attributesNames: $attributesNames, isLoading: $isLoading)';
   }
 
   @override
@@ -179,9 +229,11 @@ class _$IndividualPointInitial
     properties
       ..add(DiagnosticsProperty('type', 'IndividualPointState.initial'))
       ..add(DiagnosticsProperty('point', point))
+      ..add(DiagnosticsProperty('bed', bed))
       ..add(DiagnosticsProperty('startAttributes', startAttributes))
       ..add(DiagnosticsProperty('attributesChanged', attributesChanged))
-      ..add(DiagnosticsProperty('attributesNames', attributesNames));
+      ..add(DiagnosticsProperty('attributesNames', attributesNames))
+      ..add(DiagnosticsProperty('isLoading', isLoading));
   }
 
   @override
@@ -190,21 +242,25 @@ class _$IndividualPointInitial
         (other.runtimeType == runtimeType &&
             other is _$IndividualPointInitial &&
             const DeepCollectionEquality().equals(other.point, point) &&
+            const DeepCollectionEquality().equals(other.bed, bed) &&
             const DeepCollectionEquality()
                 .equals(other._startAttributes, _startAttributes) &&
             const DeepCollectionEquality()
                 .equals(other._attributesChanged, _attributesChanged) &&
             const DeepCollectionEquality()
-                .equals(other._attributesNames, _attributesNames));
+                .equals(other._attributesNames, _attributesNames) &&
+            const DeepCollectionEquality().equals(other.isLoading, isLoading));
   }
 
   @override
   int get hashCode => Object.hash(
       runtimeType,
       const DeepCollectionEquality().hash(point),
+      const DeepCollectionEquality().hash(bed),
       const DeepCollectionEquality().hash(_startAttributes),
       const DeepCollectionEquality().hash(_attributesChanged),
-      const DeepCollectionEquality().hash(_attributesNames));
+      const DeepCollectionEquality().hash(_attributesNames),
+      const DeepCollectionEquality().hash(isLoading));
 
   @JsonKey(ignore: true)
   @override
@@ -215,38 +271,57 @@ class _$IndividualPointInitial
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(double point, List<double> startAttributes,
-            List<double> attributesChanged, List<String> attributesNames)
+    required TResult Function(
+            double? point,
+            BedEntity bed,
+            List<double> startAttributes,
+            List<double> attributesChanged,
+            List<String> attributesNames,
+            bool isLoading)
         initial,
     required TResult Function() done,
+    required TResult Function(String msg) error,
   }) {
-    return initial(point, startAttributes, attributesChanged, attributesNames);
+    return initial(point, bed, startAttributes, attributesChanged,
+        attributesNames, isLoading);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(double point, List<double> startAttributes,
-            List<double> attributesChanged, List<String> attributesNames)?
+    TResult Function(
+            double? point,
+            BedEntity bed,
+            List<double> startAttributes,
+            List<double> attributesChanged,
+            List<String> attributesNames,
+            bool isLoading)?
         initial,
     TResult Function()? done,
+    TResult Function(String msg)? error,
   }) {
-    return initial?.call(
-        point, startAttributes, attributesChanged, attributesNames);
+    return initial?.call(point, bed, startAttributes, attributesChanged,
+        attributesNames, isLoading);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(double point, List<double> startAttributes,
-            List<double> attributesChanged, List<String> attributesNames)?
+    TResult Function(
+            double? point,
+            BedEntity bed,
+            List<double> startAttributes,
+            List<double> attributesChanged,
+            List<String> attributesNames,
+            bool isLoading)?
         initial,
     TResult Function()? done,
+    TResult Function(String msg)? error,
     required TResult orElse(),
   }) {
     if (initial != null) {
-      return initial(
-          point, startAttributes, attributesChanged, attributesNames);
+      return initial(point, bed, startAttributes, attributesChanged,
+          attributesNames, isLoading);
     }
     return orElse();
   }
@@ -256,6 +331,7 @@ class _$IndividualPointInitial
   TResult map<TResult extends Object?>({
     required TResult Function(IndividualPointInitial value) initial,
     required TResult Function(IndividualPointDone value) done,
+    required TResult Function(IndividualPointError value) error,
   }) {
     return initial(this);
   }
@@ -265,6 +341,7 @@ class _$IndividualPointInitial
   TResult? mapOrNull<TResult extends Object?>({
     TResult Function(IndividualPointInitial value)? initial,
     TResult Function(IndividualPointDone value)? done,
+    TResult Function(IndividualPointError value)? error,
   }) {
     return initial?.call(this);
   }
@@ -274,6 +351,7 @@ class _$IndividualPointInitial
   TResult maybeMap<TResult extends Object?>({
     TResult Function(IndividualPointInitial value)? initial,
     TResult Function(IndividualPointDone value)? done,
+    TResult Function(IndividualPointError value)? error,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -285,15 +363,19 @@ class _$IndividualPointInitial
 
 abstract class IndividualPointInitial implements IndividualPointState {
   const factory IndividualPointInitial(
-      {required final double point,
+      {final double? point,
+      required final BedEntity bed,
       required final List<double> startAttributes,
       required final List<double> attributesChanged,
-      required final List<String> attributesNames}) = _$IndividualPointInitial;
+      required final List<String> attributesNames,
+      final bool isLoading}) = _$IndividualPointInitial;
 
-  double get point;
+  double? get point;
+  BedEntity get bed;
   List<double> get startAttributes;
   List<double> get attributesChanged;
   List<String> get attributesNames;
+  bool get isLoading;
   @JsonKey(ignore: true)
   _$$IndividualPointInitialCopyWith<_$IndividualPointInitial> get copyWith =>
       throw _privateConstructorUsedError;
@@ -348,10 +430,16 @@ class _$IndividualPointDone
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(double point, List<double> startAttributes,
-            List<double> attributesChanged, List<String> attributesNames)
+    required TResult Function(
+            double? point,
+            BedEntity bed,
+            List<double> startAttributes,
+            List<double> attributesChanged,
+            List<String> attributesNames,
+            bool isLoading)
         initial,
     required TResult Function() done,
+    required TResult Function(String msg) error,
   }) {
     return done();
   }
@@ -359,10 +447,16 @@ class _$IndividualPointDone
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(double point, List<double> startAttributes,
-            List<double> attributesChanged, List<String> attributesNames)?
+    TResult Function(
+            double? point,
+            BedEntity bed,
+            List<double> startAttributes,
+            List<double> attributesChanged,
+            List<String> attributesNames,
+            bool isLoading)?
         initial,
     TResult Function()? done,
+    TResult Function(String msg)? error,
   }) {
     return done?.call();
   }
@@ -370,10 +464,16 @@ class _$IndividualPointDone
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(double point, List<double> startAttributes,
-            List<double> attributesChanged, List<String> attributesNames)?
+    TResult Function(
+            double? point,
+            BedEntity bed,
+            List<double> startAttributes,
+            List<double> attributesChanged,
+            List<String> attributesNames,
+            bool isLoading)?
         initial,
     TResult Function()? done,
+    TResult Function(String msg)? error,
     required TResult orElse(),
   }) {
     if (done != null) {
@@ -387,6 +487,7 @@ class _$IndividualPointDone
   TResult map<TResult extends Object?>({
     required TResult Function(IndividualPointInitial value) initial,
     required TResult Function(IndividualPointDone value) done,
+    required TResult Function(IndividualPointError value) error,
   }) {
     return done(this);
   }
@@ -396,6 +497,7 @@ class _$IndividualPointDone
   TResult? mapOrNull<TResult extends Object?>({
     TResult Function(IndividualPointInitial value)? initial,
     TResult Function(IndividualPointDone value)? done,
+    TResult Function(IndividualPointError value)? error,
   }) {
     return done?.call(this);
   }
@@ -405,6 +507,7 @@ class _$IndividualPointDone
   TResult maybeMap<TResult extends Object?>({
     TResult Function(IndividualPointInitial value)? initial,
     TResult Function(IndividualPointDone value)? done,
+    TResult Function(IndividualPointError value)? error,
     required TResult orElse(),
   }) {
     if (done != null) {
@@ -416,4 +519,176 @@ class _$IndividualPointDone
 
 abstract class IndividualPointDone implements IndividualPointState {
   const factory IndividualPointDone() = _$IndividualPointDone;
+}
+
+/// @nodoc
+abstract class _$$IndividualPointErrorCopyWith<$Res> {
+  factory _$$IndividualPointErrorCopyWith(_$IndividualPointError value,
+          $Res Function(_$IndividualPointError) then) =
+      __$$IndividualPointErrorCopyWithImpl<$Res>;
+  $Res call({String msg});
+}
+
+/// @nodoc
+class __$$IndividualPointErrorCopyWithImpl<$Res>
+    extends _$IndividualPointStateCopyWithImpl<$Res>
+    implements _$$IndividualPointErrorCopyWith<$Res> {
+  __$$IndividualPointErrorCopyWithImpl(_$IndividualPointError _value,
+      $Res Function(_$IndividualPointError) _then)
+      : super(_value, (v) => _then(v as _$IndividualPointError));
+
+  @override
+  _$IndividualPointError get _value => super._value as _$IndividualPointError;
+
+  @override
+  $Res call({
+    Object? msg = freezed,
+  }) {
+    return _then(_$IndividualPointError(
+      msg == freezed
+          ? _value.msg
+          : msg // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$IndividualPointError
+    with DiagnosticableTreeMixin
+    implements IndividualPointError {
+  const _$IndividualPointError(this.msg);
+
+  @override
+  final String msg;
+
+  @override
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+    return 'IndividualPointState.error(msg: $msg)';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('type', 'IndividualPointState.error'))
+      ..add(DiagnosticsProperty('msg', msg));
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$IndividualPointError &&
+            const DeepCollectionEquality().equals(other.msg, msg));
+  }
+
+  @override
+  int get hashCode =>
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(msg));
+
+  @JsonKey(ignore: true)
+  @override
+  _$$IndividualPointErrorCopyWith<_$IndividualPointError> get copyWith =>
+      __$$IndividualPointErrorCopyWithImpl<_$IndividualPointError>(
+          this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(
+            double? point,
+            BedEntity bed,
+            List<double> startAttributes,
+            List<double> attributesChanged,
+            List<String> attributesNames,
+            bool isLoading)
+        initial,
+    required TResult Function() done,
+    required TResult Function(String msg) error,
+  }) {
+    return error(msg);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult Function(
+            double? point,
+            BedEntity bed,
+            List<double> startAttributes,
+            List<double> attributesChanged,
+            List<String> attributesNames,
+            bool isLoading)?
+        initial,
+    TResult Function()? done,
+    TResult Function(String msg)? error,
+  }) {
+    return error?.call(msg);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(
+            double? point,
+            BedEntity bed,
+            List<double> startAttributes,
+            List<double> attributesChanged,
+            List<String> attributesNames,
+            bool isLoading)?
+        initial,
+    TResult Function()? done,
+    TResult Function(String msg)? error,
+    required TResult orElse(),
+  }) {
+    if (error != null) {
+      return error(msg);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(IndividualPointInitial value) initial,
+    required TResult Function(IndividualPointDone value) done,
+    required TResult Function(IndividualPointError value) error,
+  }) {
+    return error(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(IndividualPointInitial value)? initial,
+    TResult Function(IndividualPointDone value)? done,
+    TResult Function(IndividualPointError value)? error,
+  }) {
+    return error?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(IndividualPointInitial value)? initial,
+    TResult Function(IndividualPointDone value)? done,
+    TResult Function(IndividualPointError value)? error,
+    required TResult orElse(),
+  }) {
+    if (error != null) {
+      return error(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class IndividualPointError implements IndividualPointState {
+  const factory IndividualPointError(final String msg) = _$IndividualPointError;
+
+  String get msg;
+  @JsonKey(ignore: true)
+  _$$IndividualPointErrorCopyWith<_$IndividualPointError> get copyWith =>
+      throw _privateConstructorUsedError;
 }

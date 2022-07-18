@@ -8,7 +8,7 @@ part of 'update_point_schema.dart';
 
 UpdatePointSchema _$UpdatePointSchemaFromJson(Map<String, dynamic> json) =>
     UpdatePointSchema(
-      bedId: (json['bedId'] as num).toDouble(),
+      bedId: json['bedId'] as int,
       efficiency: (json['efficiency'] as num).toDouble(),
       luck: (json['luck'] as num).toDouble(),
       bonus: (json['bonus'] as num).toDouble(),

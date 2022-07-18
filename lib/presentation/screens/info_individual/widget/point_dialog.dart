@@ -2,27 +2,43 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:slee_fi/common/extensions/num_ext.dart';
+import 'package:slee_fi/common/routes/app_routes.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
+import 'package:slee_fi/common/widgets/loading_screen.dart';
 import 'package:slee_fi/common/widgets/sf_buttons.dart';
+import 'package:slee_fi/common/widgets/sf_dialog.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
 import 'package:slee_fi/common/widgets/sf_textfield.dart';
+import 'package:slee_fi/entities/bed_entity/bed_entity.dart';
 import 'package:slee_fi/l10n/locale_keys.g.dart';
 import 'package:slee_fi/presentation/blocs/individual_point/individual_point_cubit.dart';
 import 'package:slee_fi/presentation/blocs/individual_point/individual_point_state.dart';
 
 class PointDialog extends StatelessWidget {
-  const PointDialog({Key? key}) : super(key: key);
+  const PointDialog({Key? key, required this.bed}) : super(key: key);
+
+  final BedEntity bed;
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => IndividualPointCubit(),
+      create: (context) => IndividualPointCubit(bed)..getPoint(),
       child: BlocConsumer<IndividualPointCubit, IndividualPointState>(
-        listener: (context, state) {},
+        listener: (context, state) {
+          if (state is IndividualPointError) {
+            showMessageDialog(context, state.msg);
+          }
+          if (state is IndividualPointDone) {
+            Navigator.popUntil(context, (r) => r.settings.name == R.nftInfo);
+          }
+        },
         buildWhen: (prev, cur) => cur is IndividualPointInitial,
         builder: (context, state) {
           final cubit = context.read<IndividualPointCubit>();
+          final point = state is IndividualPointInitial
+              ? state.point?.removeTrailingZeros ?? '-'
+              : '-';
 
           return Column(
             children: [
@@ -42,14 +58,10 @@ class PointDialog extends StatelessWidget {
                 ),
               ),
               SFTextField(
-                key: Key(state is IndividualPointInitial
-                    ? state.point.removeTrailingZeros
-                    : '-'),
+                key: Key(point),
                 labelText: LocaleKeys.point,
                 enabled: false,
-                initialText: state is IndividualPointInitial
-                    ? state.point.removeTrailingZeros
-                    : '-',
+                initialText: point,
               ),
               const SizedBox(height: 16),
               if (state is IndividualPointInitial)
@@ -88,15 +100,20 @@ class PointDialog extends StatelessWidget {
                     ),
                   ),
                   const SizedBox(width: 16),
-                  Expanded(
-                    child: SFButton(
-                      width: double.infinity,
-                      textStyle: TextStyles.white16,
-                      gradient: AppColors.gradientBlue,
-                      text: LocaleKeys.confirm,
-                      onPressed: () {},
+                  if (state is IndividualPointInitial)
+                    Expanded(
+                      child: state.isLoading
+                          ? const LoadingIcon()
+                          : SFButton(
+                              width: double.infinity,
+                              textStyle: TextStyles.white16,
+                              gradient: AppColors.gradientBlue,
+                              text: LocaleKeys.confirm,
+                              onPressed: () {
+                                cubit.updateAttribute();
+                              },
+                            ),
                     ),
-                  ),
                 ],
               ),
             ],
