@@ -42,7 +42,8 @@ class InfoIndividualScreen extends StatelessWidget {
         ModalRoute.of(context)?.settings.arguments as InfoIndividualParams;
     return MultiBlocProvider(
       providers: [
-        BlocProvider(create: (context) => IndividualCubit(args.bed)),
+        BlocProvider(
+            create: (context) => IndividualCubit(args.bed)..fetchFamily()),
         BlocProvider(create: (context) => SocketBloc()),
       ],
       child: Stack(
@@ -176,9 +177,9 @@ class InfoIndividualScreen extends StatelessWidget {
   Future _showPointDialog(BuildContext context) {
     return showCustomDialog(
       context,
-      children: [
-        const PointDialog(),
-      ],
+      padding: const EdgeInsets.fromLTRB(24, 12, 24, 24),
+      insetPadding: const EdgeInsets.symmetric(horizontal: 12),
+      children: [const PointDialog()],
     );
   }
 }

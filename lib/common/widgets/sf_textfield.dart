@@ -5,11 +5,12 @@ import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
 
-class SFTextField extends StatelessWidget {
+class SFTextField extends StatefulWidget {
   const SFTextField({
     this.labelText,
     this.hintText,
     this.errorText,
+    this.initialText,
     this.hintStyle,
     this.suffix,
     this.suffixIcon,
@@ -26,16 +27,19 @@ class SFTextField extends StatelessWidget {
     this.inputFormatters,
     this.focusNode,
     this.textAlign,
+    this.enabled,
   }) : super(key: key);
 
   final String? labelText;
   final String? hintText;
   final String? errorText;
+  final String? initialText;
   final TextStyle? textStyle;
   final TextStyle? hintStyle;
   final Widget? suffix;
   final Widget? suffixIcon;
   final bool noBorder;
+  final bool? enabled;
   final bool readonly;
   final int? maxLine;
   final int? maxLength;
@@ -48,8 +52,27 @@ class SFTextField extends StatelessWidget {
   final FocusNode? focusNode;
 
   @override
+  State<SFTextField> createState() => _SFTextFieldState();
+}
+
+class _SFTextFieldState extends State<SFTextField> {
+  late final controller = widget.controller ?? TextEditingController();
+
+  @override
+  void initState() {
+    controller.text = widget.initialText ?? controller.text;
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    controller.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    final border = noBorder
+    final border = widget.noBorder
         ? InputBorder.none
         : OutlineInputBorder(
             borderRadius: BorderRadius.circular(8),
@@ -62,31 +85,32 @@ class SFTextField extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.start,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        showLabel
+        widget.showLabel
             ? Padding(
                 padding: const EdgeInsets.only(bottom: 4),
                 child: SFText(
-                  keyText: labelText ?? "",
+                  keyText: widget.labelText ?? "",
                   style: TextStyles.lightGrey14,
                 ),
               )
             : const SizedBox(),
         TextField(
-          style: textStyle ?? TextStyles.w400White16,
+          style: widget.textStyle ?? TextStyles.w400White16,
           controller: controller,
-          focusNode: focusNode,
-          onChanged: onChanged,
-          keyboardType: textInputType,
-          inputFormatters: inputFormatters,
-          readOnly: readonly,
-          textAlign: textAlign ?? TextAlign.start,
+          focusNode: widget.focusNode,
+          onChanged: widget.onChanged,
+          keyboardType: widget.textInputType,
+          inputFormatters: widget.inputFormatters,
+          readOnly: widget.readonly,
+          textAlign: widget.textAlign ?? TextAlign.start,
+          enabled: widget.enabled,
           decoration: InputDecoration(
               isDense: true,
               // hintText: hintText != null ? translate(hintText!) : null,
-              hintText: hintText?.tr(),
-              hintStyle: hintStyle ?? TextStyles.lightGrey14,
-              suffix: suffix,
-              suffixIcon: suffixIcon,
+              hintText: widget.hintText?.tr(),
+              hintStyle: widget.hintStyle ?? TextStyles.lightGrey14,
+              suffix: widget.suffix,
+              suffixIcon: widget.suffixIcon,
               border: border,
               focusedBorder: border,
               disabledBorder: border,
@@ -94,10 +118,10 @@ class SFTextField extends StatelessWidget {
               errorBorder: border,
               focusedErrorBorder: border,
               counterText: "",
-              errorText: errorText,
+              errorText: widget.errorText,
               errorMaxLines: 10),
-          maxLines: maxLine ?? 1,
-          maxLength: maxLength,
+          maxLines: widget.maxLine ?? 1,
+          maxLength: widget.maxLength,
         ),
       ],
     );
