@@ -60,16 +60,14 @@ class SocketBloc extends Bloc<SocketEvent, SocketState> {
             socketEntity: list, maxSocket: maxSocket, socketOpened: 0));
       },
       (r) {
-        print('_fetchSocket success ');
-
         final List<SocketEntity> list = [];
-        for (int i = 0; i < maxSocket; i++) {
+        for (int i = 0; i <= maxSocket; i++) {
           if (i < r.jewels.length) {
             list.add(SocketEntity(
                 socketType: SocketType.ready, jewelEntity: r.jewels[i]));
           } else if (i >= r.jewels.length && i < (r.socket ?? 0)) {
             list.add(const SocketEntity(socketType: SocketType.empty));
-          } else if (i > (r.socket ?? 0) && i < maxSocket) {
+          } else if (i > (r.socket ?? 0) && i <= maxSocket) {
             list.add(const SocketEntity(socketType: SocketType.block));
           }
         }
@@ -128,10 +126,13 @@ class SocketBloc extends Bloc<SocketEvent, SocketState> {
               socketType: SocketType.ready,
               jewelEntity: event.jewelEntity,
             ));
-        currentState.jewels?.remove(event.jewelEntity);
-        emit(currentState.copyWith(
-          socketEntity: list,
-        ));
+        List<JewelEntity> jewelTemp = [];
+        if (currentState.jewels != null) {
+          jewelTemp.addAll(List.from(currentState.jewels!));
+          jewelTemp
+              .removeWhere((element) => element.id == event.jewelEntity.id);
+        }
+        emit(currentState.copyWith(socketEntity: list, jewels: jewelTemp));
       }
       return;
     });
@@ -155,10 +156,13 @@ class SocketBloc extends Bloc<SocketEvent, SocketState> {
         list.insert(
             event.index, const SocketEntity(socketType: SocketType.empty));
         list.sort((a, b) => a.socketType.index.compareTo(b.socketType.index));
-        if (socketEntity.jewelEntity != null) {
-          currentState.jewels?.add(socketEntity.jewelEntity!);
+        List<JewelEntity> jewelTemp = [];
+        if (currentState.jewels != null && socketEntity.jewelEntity != null) {
+          jewelTemp.addAll(List.from(currentState.jewels!));
+          jewelTemp.add(socketEntity.jewelEntity!);
         }
-        emit(currentState.copyWith(socketEntity: list));
+
+        emit(currentState.copyWith(socketEntity: list, jewels: jewelTemp));
       });
     }
   }
@@ -234,6 +238,5 @@ class SocketBloc extends Bloc<SocketEvent, SocketState> {
     add(SocketInit(bedId, levelBed));
   }
 
-  FutureOr<void> _onLevelUp(LevelUp event, Emitter<SocketState> emit) {
-  }
+  FutureOr<void> _onLevelUp(LevelUp event, Emitter<SocketState> emit) {}
 }

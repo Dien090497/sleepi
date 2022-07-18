@@ -32,6 +32,9 @@ class SocketComponent extends StatelessWidget {
       listener: (context, state) {
         if (state is SocketStateLoaded) {
           context.read<IndividualCubit>().loading(state.isLoading);
+          if (state.bedEntity != null) {
+            context.read<IndividualCubit>().updateBed(state.bedEntity!);
+          }
         }
         if (state is SocketStateLoaded &&
             state.errorMessage?.isNotEmpty == true) {
@@ -39,11 +42,11 @@ class SocketComponent extends StatelessWidget {
         }
       },
       builder: (context, state) {
-        final listJewel = <SocketEntity>[];
+        final sockets = <SocketEntity>[];
         var maxSocket = 0;
         if (state is SocketStateLoaded) {
           maxSocket = state.maxSocket;
-          listJewel.addAll(state.socketEntity);
+          sockets.addAll(state.socketEntity);
         }
         return Wrap(
             spacing: 8.0,
@@ -56,23 +59,22 @@ class SocketComponent extends StatelessWidget {
                     : SFImageBorder(
                         icon: index + 1 > maxSocket
                             ? Ics.gift
-                            : listJewel[index].socketType == SocketType.ready
-                                ? listJewel[index].jewelEntity!.image
-                                : listJewel[index].socketType ==
-                                        SocketType.block
+                            : sockets[index].socketType == SocketType.ready
+                                ? sockets[index].jewelEntity!.image
+                                : sockets[index].socketType == SocketType.block
                                     ? Ics.jewelWatting
                                     : '',
                         onTap: () {
                           // _showModalJewelList(context, index);
                           // _showDialogConfirmOpenSocket(context, index);
                           if (index + 1 > maxSocket) return;
-                          if (listJewel[index].socketType == SocketType.block) {
+                          if (sockets[index].socketType == SocketType.block) {
                             _showDialogConfirmOpenSocket(context, index);
-                          } else if (listJewel[index].socketType ==
+                          } else if (sockets[index].socketType ==
                               SocketType.ready) {
                             _showDialogJewelDetail(
-                                context, listJewel[index].jewelEntity!, index);
-                          } else if (listJewel[index].socketType ==
+                                context, sockets[index].jewelEntity!, index);
+                          } else if (sockets[index].socketType ==
                               SocketType.empty) {
                             _showModalJewelList(context, index);
                           }
