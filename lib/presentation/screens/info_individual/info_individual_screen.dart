@@ -6,6 +6,7 @@ import 'package:slee_fi/common/style/text_styles.dart';
 import 'package:slee_fi/common/widgets/background_widget.dart';
 import 'package:slee_fi/common/widgets/sf_button_outlined.dart';
 import 'package:slee_fi/common/widgets/sf_buttons.dart';
+import 'package:slee_fi/common/widgets/sf_dialog.dart';
 import 'package:slee_fi/common/widgets/sf_icon.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
 import 'package:slee_fi/common/widgets/topbar_common.dart';
@@ -107,7 +108,9 @@ class InfoIndividualScreen extends StatelessWidget {
                                           textStyle: TextStyles.boldWhite14,
                                           gradient:
                                               AppColors.gradientBlueButton,
-                                          onPressed: () {},
+                                          onPressed: () {
+                                            _showPointDialog(context);
+                                          },
                                         ),
                                     ],
                                   ),
@@ -166,6 +169,24 @@ class InfoIndividualScreen extends StatelessWidget {
           )
         ],
       ),
+    );
+  }
+
+  Future _showPointDialog(BuildContext context) {
+    return showCustomDialog(
+      context,
+      children: [
+        Align(
+          alignment: Alignment.topRight,
+          child: IconButton(
+            onPressed: () {},
+            icon: const Icon(
+              Icons.close,
+              color: AppColors.lightGrey,
+            ),
+          ),
+        ),
+      ],
     );
   }
 }

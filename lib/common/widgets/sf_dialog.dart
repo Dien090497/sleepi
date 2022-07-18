@@ -179,19 +179,21 @@ Future<T?> showLanguageUpdatedDialog<T>(BuildContext context, Locale locale) {
   return showDialog(
       context: context,
       barrierColor: AppColors.backgroundDialog,
+      barrierDismissible: false,
       builder: (context) {
         return SFDialog(
           padding: EdgeInsets.zero,
           children: [
-            Align(
-              alignment: Alignment.centerRight,
-              child: IconButton(
-                onPressed: () {
-                  Navigator.pop(context);
-                },
-                icon: const Icon(Icons.close, color: AppColors.white),
-              ),
-            ),
+            // Align(
+            //   alignment: Alignment.centerRight,
+            //   child: IconButton(
+            //     onPressed: () {
+            //       Navigator.pop(context);
+            //     },
+            //     icon: const Icon(Icons.close, color: AppColors.white),
+            //   ),
+            // ),
+            const SizedBox(height: 12),
             SFText(
                 keyText: LocaleKeys.successfull,
                 maxLines: 1,
@@ -212,7 +214,6 @@ Future<T?> showLanguageUpdatedDialog<T>(BuildContext context, Locale locale) {
               onPressed: () {
                 context.setLocale(locale);
                 Phoenix.rebirth(context);
-                Navigator.of(context).pop();
               },
               color: AppColors.blue,
             ),
