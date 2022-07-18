@@ -12,7 +12,7 @@ import 'package:slee_fi/usecase/send_token_to_external.dart';
 import 'package:slee_fi/usecase/usecase.dart';
 
 class SendToExternalCubit extends Cubit<SendToExternalState> {
-  SendToExternalCubit(): super(const SendToExternalState.initial());
+  SendToExternalCubit() : super(const SendToExternalState.initial());
 
   String contractAddressTo = '';
   double? fee;
@@ -24,13 +24,16 @@ class SendToExternalCubit extends Cubit<SendToExternalState> {
     emit(const SendToExternalState.initial());
   }
 
-  Future<void> sendToExternal(String contractAddressTo , double valueInEther, double fee) async {
+  Future<void> sendToExternal(
+      String contractAddressTo, double valueInEther, double fee) async {
     final result = await _sendToExternalUC.call(SendToExternalParams(
-        contractAddressTo : contractAddressTo, valueInEther : valueInEther, fee: fee));
+        contractAddressTo: contractAddressTo,
+        valueInEther: valueInEther,
+        fee: fee));
 
     result.fold((l) {
       emit(SendToExternalState.fail('$l'));
-    }, (success)  {
+    }, (success) {
       // print(success);
       emit(const SendToExternalState.success());
     });
@@ -39,33 +42,36 @@ class SendToExternalCubit extends Cubit<SendToExternalState> {
   Future<void> getTokenBalance() async {
     final result = await _sendToExternalUC.getTokenBalance(NoParams());
     result.fold(
-          (l) {
+      (l) {
         emit(SendToExternalState.fail('$l'));
       },
-          (success) {
+      (success) {
         emit(SendToExternalState.getBalance(success));
       },
     );
   }
 
-  Future<void> estimateGas(String contractAddressTo , {double? valueInEther}) async {
+  Future<void> estimateGas(String contractAddressTo,
+      {double? valueInEther}) async {
     final result = await _sendToExternalUC.calculatorFee(SendToExternalParams(
-        contractAddressTo : contractAddressTo, valueInEther : valueInEther));
+        contractAddressTo: contractAddressTo, valueInEther: valueInEther));
     result.fold(
-          (l) {
+      (l) {
         emit(SendToExternalState.fail('$l'));
       },
-          (limitGas) {
-            fee = ((limitGas * 50000000000) / pow(10, 18));
+      (gasLimit) {
+        fee = ((double.parse(gasLimit) * 50000000000) / pow(10, 18));
         emit(SendToExternalState.calculatorFee(fee));
         emit(const SendToExternalState.calculatorFeeSuccess());
-          },
+      },
     );
-   }
+  }
 
-  Future<void> validator({required double balanceCurrent, required double amount}) async {
+  Future<void> validator(
+      {required double balanceCurrent, required double amount}) async {
     if (contractAddressTo.isEmpty) {
-      emit(SendToExternalState.errorToAddress(LocaleKeys.this_field_is_required.tr()));
+      emit(SendToExternalState.errorToAddress(
+          LocaleKeys.this_field_is_required.tr()));
       return;
     }
     if (isValidEthereumAddress(contractAddressTo) == false) {
@@ -73,24 +79,30 @@ class SendToExternalCubit extends Cubit<SendToExternalState> {
       return;
     }
     if (amount == 0) {
-      emit(SendToExternalState.errorValueInEther(LocaleKeys.amount_input_can_not_be_zero.tr()));
+      emit(SendToExternalState.errorValueInEther(
+          LocaleKeys.amount_input_can_not_be_zero.tr()));
       return;
     }
     if (amount > balanceCurrent) {
-      emit(SendToExternalState.errorValueInEther(LocaleKeys.insufficient_balance.tr()));
+      emit(SendToExternalState.errorValueInEther(
+          LocaleKeys.insufficient_balance.tr()));
       return;
     }
     if (amount < 0) {
-      emit(SendToExternalState.errorValueInEther(LocaleKeys.this_field_is_required.tr()));
+      emit(SendToExternalState.errorValueInEther(
+          LocaleKeys.this_field_is_required.tr()));
       return;
     }
     emit(const SendToExternalState.validatorSuccess());
     emit(const SendToExternalState.checkedValidator());
   }
 
-  Future<void> sendTokenExternal(String toAddress, double valueInEther, SendToExternalArguments? arg) async {
+  Future<void> sendTokenExternal(String toAddress, double valueInEther,
+      SendToExternalArguments? arg) async {
     final params = SendTokenExternalParams(
-        valueInEther : valueInEther, tokenEntity: arg?.tokenEntity, toAddress: toAddress);
+        valueInEther: valueInEther,
+        tokenEntity: arg?.tokenEntity,
+        toAddress: toAddress);
     final result = await _sendTokenToExternalUseCase.call(params);
     result.fold((l) {
       emit(SendToExternalState.fail('$l'));

@@ -17,7 +17,7 @@ class SFIcon extends StatelessWidget {
   Widget build(BuildContext context) {
     final tail = icon.split('.').last;
     if (icon.startsWith('http')) {
-      return CachedImage(image: icon);
+      return CachedImage(image: icon, width: width, height: height,);
     }
     if (tail.contains('svg')) {
       return SvgPicture.asset(

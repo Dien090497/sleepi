@@ -454,5 +454,6 @@ abstract class  LocaleKeys {
   static const do_you_want_open_the_socket = 'do_you_want_open_the_socket';
   static const remove = 'remove';
   static const add_jewel = 'add_jewel';
+  static const jewel_list = 'jewel_list';
 
 }

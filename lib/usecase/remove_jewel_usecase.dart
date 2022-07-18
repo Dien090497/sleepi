@@ -10,7 +10,7 @@ class RemoveJewelUseCase extends UseCase<dynamic, AddJewelSchema> {
   RemoveJewelUseCase(this._iUserRepository);
 
   @override
-  Future<Either<Failure, dynamic>> call(params) {
+  Future<Either<FailureMessage, dynamic>> call(params) {
     return _iUserRepository.removeJewel(params);
   }
 }

@@ -45,7 +45,6 @@ class _TabSpendingDetailState extends State<TabSpendingDetail> {
     return SafeArea(
       child: FocusDetector(
         onFocusGained: () async {
-          await Future.delayed(const Duration(milliseconds: 300));
           BlocProvider.of<UserBloc>(context).add(RefreshBalanceToken());
         },
         child: SmartRefresher(
@@ -53,7 +52,6 @@ class _TabSpendingDetailState extends State<TabSpendingDetail> {
             enablePullDown: true,
             onRefresh: () async {
               context.read<UserBloc>().add(RefreshBalanceToken());
-              await Future.delayed(const Duration(milliseconds: 1000));
               refreshController.refreshCompleted();
             },
             child: SingleChildScrollView(

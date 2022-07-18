@@ -43,6 +43,7 @@ class SpendingDataSource {
   Future<BigInt> allowance(EthereumAddress owner, ERC20 token) =>
       token.allowance(owner, _spendingContract.self.address);
 
-// ERC20 get _slft =>
-//     ERC20(address: ContractAddresses.slft, client: _web3provider.web3client);
+  ERC20 token(String address) => ERC20(
+      address: EthereumAddress.fromHex(address),
+      client: _web3provider.web3client);
 }

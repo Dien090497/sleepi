@@ -19,7 +19,7 @@ TrackingResultModel _$TrackingResultModelFromJson(Map<String, dynamic> json) =>
       wokeUpTime: json['wokeUpTime'] as String?,
       bedTime: json['bedTime'] as String?,
       sleepQuality: json['sleepQuality'] as int?,
-      startSleepTime: json['startSleepTime'] as String?,
+      startSleepTime: json['startSleepTime'] as int?,
       createdAt: json['createdAt'] == null
           ? null
           : DateTime.parse(json['createdAt'] as String),

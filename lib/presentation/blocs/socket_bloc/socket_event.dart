@@ -27,8 +27,6 @@ class OpenSocket extends SocketEvent {
   List<Object?> get props => [socketIndex];
 }
 
-
-
 class AddJewel extends SocketEvent {
   final JewelEntity jewelEntity;
 
@@ -60,6 +58,16 @@ class RefreshJewels extends SocketEvent {
   @override
   List<Object?> get props => [];
 }
+
+class SocketError extends SocketEvent {
+  final String message;
+
+  const SocketError(this.message);
+
+  @override
+  List<Object?> get props => [message];
+}
+
 // class LoadMoreJewel extends SocketEvent {
 //   const RefreshJewels();
 //

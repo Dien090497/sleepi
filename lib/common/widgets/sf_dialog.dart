@@ -42,9 +42,10 @@ Future<T?> showSuccessfulDialog<T>(BuildContext context, String? message,
               alignment: Alignment.centerRight,
               child: IconButton(
                 onPressed: () {
-                  Navigator.pop(context);
                   if (onBackPress != null) {
                     onBackPress();
+                  } else {
+                    Navigator.pop(context);
                   }
                 },
                 icon: const Icon(Icons.close, color: AppColors.white),

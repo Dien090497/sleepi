@@ -9,15 +9,23 @@ import 'package:slee_fi/common/widgets/sf_icon.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
 import 'package:slee_fi/common/widgets/topbar_common.dart';
 import 'package:slee_fi/l10n/locale_keys.g.dart';
+import 'package:slee_fi/models/gacha_spin_response/gacha_spin_response.dart';
 import 'package:slee_fi/presentation/screens/gacha/widgets/attributes_widget.dart';
 import 'package:slee_fi/resources/resources.dart';
+
+class GachaResultBedArguments {
+  final GachaSpinResponse? gachaSpinInfo;
+  final String image;
+
+  GachaResultBedArguments({this.gachaSpinInfo, required this.image});
+}
 
 class GachaResultBedScreen extends StatelessWidget {
   const GachaResultBedScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    // final Size size = MediaQuery.of(context).size;
+    final args = ModalRoute.of(context)?.settings.arguments as GachaResultBedArguments?;
     return BackgroundWidget(
       child: SafeArea(
         child: Stack(
@@ -36,7 +44,7 @@ class GachaResultBedScreen extends StatelessWidget {
                       physics: const BouncingScrollPhysics(),
                       child: Column(
                         children: [
-                          Container(
+                        Container(
                             padding: const EdgeInsets.symmetric(vertical: 12),
                             child: SFText(
                               keyText: LocaleKeys.result,
@@ -65,8 +73,8 @@ class GachaResultBedScreen extends StatelessWidget {
                                       BorderRadius.circular(20)),
                               width: 180,
                               height: 180,
-                              child: const SizedBox(
-                                child: SFIcon(Imgs.shortBed),
+                              child:  SizedBox(
+                                child: SFIcon(args != null ? args.image : ''),
                               )),
                           const SizedBox(height: 12),
                           Row(
@@ -100,13 +108,20 @@ class GachaResultBedScreen extends StatelessWidget {
                             padding: const EdgeInsets.symmetric(
                                 horizontal: 24, vertical: 15),
                             child: Column(
-                              children: const [
-                                AttributesWidget(),
-                                SizedBox(height: 76),
+                              children: [
+                                AttributesWidget(
+                                  bonus: args?.gachaSpinInfo?.gift.first.first.attributes.bonus,
+                                  efficiency: args?.gachaSpinInfo?.gift.first.first.attributes.efficiency,
+                                  luck: args?.gachaSpinInfo?.gift.first.first.attributes.luck,
+                                  resilience: args?.gachaSpinInfo?.gift.first.first.attributes.resilience,
+                                  special: args?.gachaSpinInfo?.gift.first.first.attributes.special,
+                                ),
+                               const SizedBox(height: 76),
                               ],
                             ),
-                          )
-                        ],
+                          ),
+
+                    ],
                       ),
                     ),
                   ),

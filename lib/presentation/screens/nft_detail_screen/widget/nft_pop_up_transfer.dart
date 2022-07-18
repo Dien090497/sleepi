@@ -14,7 +14,7 @@ import 'package:slee_fi/l10n/locale_keys.g.dart';
 import 'package:slee_fi/usecase/estimate_nft_function_fee_usecase.dart';
 import 'package:slee_fi/usecase/is_valid_wallet_address_usecase.dart';
 
-class NftPopUpTransfer extends StatelessWidget {
+class NftPopUpTransfer extends StatefulWidget {
   const NftPopUpTransfer({
     Key? key,
     required this.onConfirm,
@@ -33,6 +33,17 @@ class NftPopUpTransfer extends StatelessWidget {
   final ValueNotifier<bool> isLoadingNotifier;
 
   @override
+  State<NftPopUpTransfer> createState() => _NftPopUpTransferState();
+}
+
+class _NftPopUpTransferState extends State<NftPopUpTransfer> {
+  @override
+  void dispose() {
+    widget.isLoadingNotifier.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     String toAddress = '';
     final errorNotifier = ValueNotifier<String>('');
@@ -43,8 +54,8 @@ class NftPopUpTransfer extends StatelessWidget {
           right: 0,
           child: GestureDetector(
             onTap: () {
-              if (onCancel != null) {
-                onCancel!();
+              if (widget.onCancel != null) {
+                widget.onCancel!();
               }
               Navigator.pop(context);
             },
@@ -61,7 +72,7 @@ class NftPopUpTransfer extends StatelessWidget {
               style: TextStyles.white1w700size16,
             ),
             const SizedBox(height: 20),
-            if (isToSpending ?? false)
+            if (widget.isToSpending ?? false)
               SFCard(
                 margin: EdgeInsets.zero,
                 padding:
@@ -122,16 +133,17 @@ class NftPopUpTransfer extends StatelessWidget {
                   style: TextStyles.lightGrey12,
                 ),
                 const SizedBox(width: 4),
-                if ((nft.attribute?.contractAddress.isNotEmpty ?? false) &&
-                    nft.attribute?.tokenId != null)
+                if ((widget.nft.attribute?.contractAddress.isNotEmpty ??
+                        false) &&
+                    widget.nft.attribute?.tokenId != null)
                   Expanded(
                     child: FutureBuilder<dartz.Either<Failure, double>>(
                       future: getIt<EstimateNftFunctionFeeUseCase>()
                           .call(EstimateGasParams(
-                        nftAddress: nft.attribute!.contractAddress,
-                        ownerAddress: ownerAddress,
+                        nftAddress: widget.nft.attribute!.contractAddress,
+                        ownerAddress: widget.ownerAddress,
                         toAddress: toAddress,
-                        nftId: nft.attribute!.tokenId!,
+                        nftId: widget.nft.attribute!.tokenId!,
                         functionName: 'transferFrom',
                       )),
                       builder: (context, snapshot) {
@@ -157,7 +169,7 @@ class NftPopUpTransfer extends StatelessWidget {
                 const SizedBox(width: 4),
                 Expanded(
                     child: SFText(
-                  keyText: '#${nft.attribute?.tokenId}',
+                  keyText: '#${widget.nft.attribute?.tokenId}',
                   textAlign: TextAlign.right,
                   style: TextStyles.white12,
                 )),
@@ -170,8 +182,8 @@ class NftPopUpTransfer extends StatelessWidget {
                   child: SFButton(
                     text: LocaleKeys.cancel,
                     onPressed: () {
-                      if (onCancel != null) {
-                        onCancel!();
+                      if (widget.onCancel != null) {
+                        widget.onCancel!();
                       }
                       Navigator.pop(context);
                     },
@@ -183,7 +195,7 @@ class NftPopUpTransfer extends StatelessWidget {
                 const SizedBox(width: 12),
                 Expanded(
                   child: ValueListenableBuilder<bool>(
-                    valueListenable: isLoadingNotifier,
+                    valueListenable: widget.isLoadingNotifier,
                     builder: (context, isLoading, child) {
                       if (isLoading) {
                         return const Center(child: CircularProgressIndicator());
@@ -194,8 +206,8 @@ class NftPopUpTransfer extends StatelessWidget {
                     child: SFButton(
                       text: LocaleKeys.confirm,
                       onPressed: () {
-                        if (isToSpending ?? false) {
-                          onConfirm(toAddress);
+                        if (widget.isToSpending ?? false) {
+                          widget.onConfirm(toAddress);
                         } else {
                           if (toAddress.isEmpty) {
                             errorNotifier.value =
@@ -209,7 +221,7 @@ class NftPopUpTransfer extends StatelessWidget {
                                     LocaleKeys.invalid_address.tr();
                               },
                               (r) {
-                                onConfirm(toAddress);
+                                widget.onConfirm(toAddress);
                               },
                             );
                           }
@@ -231,9 +243,11 @@ class NftPopUpTransfer extends StatelessWidget {
 }
 
 class _AddressTextField extends StatefulWidget {
-  const _AddressTextField(
-      {Key? key, required this.errorNotifier, required this.onChanged})
-      : super(key: key);
+  const _AddressTextField({
+    Key? key,
+    required this.errorNotifier,
+    required this.onChanged,
+  }) : super(key: key);
 
   final ValueNotifier<String> errorNotifier;
   final ValueChanged<String> onChanged;
@@ -243,6 +257,12 @@ class _AddressTextField extends StatefulWidget {
 }
 
 class _AddressTextFieldState extends State<_AddressTextField> {
+  @override
+  void dispose() {
+    widget.errorNotifier.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return ValueListenableBuilder<String>(

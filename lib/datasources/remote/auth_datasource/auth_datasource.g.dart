@@ -655,6 +655,38 @@ class _AuthDataSource implements AuthDataSource {
   }
 
   @override
+  Future<GachaSpinResponse> gachaSpinBonus(gachaSpinSchema) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    _data.addAll(gachaSpinSchema.toJson());
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<GachaSpinResponse>(
+            Options(method: 'POST', headers: _headers, extra: _extra)
+                .compose(_dio.options, '/gacha/spin',
+                    queryParameters: queryParameters, data: _data)
+                .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = GachaSpinResponse.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<dynamic> gachaHistory() async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    final _result = await _dio.fetch(_setStreamType<dynamic>(
+        Options(method: 'GET', headers: _headers, extra: _extra)
+            .compose(_dio.options, '/gacha/history',
+                queryParameters: queryParameters, data: _data)
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = _result.data;
+    return value;
+  }
+
+  @override
   Future<dynamic> openSocket(bedId) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{r'bedId': bedId};
@@ -695,6 +727,70 @@ class _AuthDataSource implements AuthDataSource {
     final _result = await _dio.fetch(_setStreamType<dynamic>(
         Options(method: 'PUT', headers: _headers, extra: _extra)
             .compose(_dio.options, '/nft-attributes/remove-jewels',
+                queryParameters: queryParameters, data: _data)
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = _result.data;
+    return value;
+  }
+
+  @override
+  Future<NftSell> nftSell(nftSellSchema) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    _data.addAll(nftSellSchema.toJson());
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<NftSell>(
+            Options(method: 'POST', headers: _headers, extra: _extra)
+                .compose(_dio.options, '/nft/sell',
+                    queryParameters: queryParameters, data: _data)
+                .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = NftSell.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<String> getTransactionFee() async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    final _result = await _dio.fetch<String>(_setStreamType<String>(
+        Options(method: 'GET', headers: _headers, extra: _extra)
+            .compose(_dio.options, '/nft/transaction-fee',
+                queryParameters: queryParameters, data: _data)
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = _result.data!;
+    return value;
+  }
+
+  @override
+  Future<GetRepairResponse> getRepair(bedId) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{r'bedId': bedId};
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<GetRepairResponse>(
+            Options(method: 'GET', headers: _headers, extra: _extra)
+                .compose(_dio.options, '/nft/repair',
+                    queryParameters: queryParameters, data: _data)
+                .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = GetRepairResponse.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<dynamic> nftRepair(repairSchema) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    _data.addAll(repairSchema.toJson());
+    final _result = await _dio.fetch(_setStreamType<dynamic>(
+        Options(method: 'POST', headers: _headers, extra: _extra)
+            .compose(_dio.options, '/nft/repair',
                 queryParameters: queryParameters, data: _data)
             .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
     final value = _result.data;
