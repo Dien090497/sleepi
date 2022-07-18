@@ -22,6 +22,7 @@ class FailureMessage extends Failure {
           return const FailureMessage(LocaleKeys.some_thing_wrong);
         }
         final error = e.response?.data['error']['details']['message'];
+        log("=-------------${e.response.toString()}");
         if (error is String) {
           return FailureMessage(error);
         } else if (error is List<String>) {
