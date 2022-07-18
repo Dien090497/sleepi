@@ -155,7 +155,7 @@ import '../usecase/wallet/first_open_wallet_session_usecase.dart' as _i95;
 import '../usecase/wallet/get_current_mnemonic_usecasse.dart' as _i113;
 import '../usecase/wallet/import_wallet_usecase.dart' as _i56;
 import '../usecase/withdraw_history_usecase.dart' as _i85;
-import '../usecase/withdrawNFT_usecase.dart' as _i135;
+import '../usecase/withdraw_nft_usecase.dart' as _i135;
 import 'register_module.dart' as _i146; // ignore_for_file: unnecessary_lambdas
 
 // ignore_for_file: lines_longer_than_80_chars

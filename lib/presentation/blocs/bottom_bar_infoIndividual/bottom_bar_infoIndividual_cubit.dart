@@ -16,7 +16,7 @@ import 'package:slee_fi/usecase/get_transaction_fee_usecase.dart';
 import 'package:slee_fi/usecase/nft_repair_usecase.dart';
 import 'package:slee_fi/usecase/nft_sell_usecase.dart';
 import 'package:slee_fi/usecase/usecase.dart';
-import 'package:slee_fi/usecase/withdrawNFT_usecase.dart';
+import 'package:slee_fi/usecase/withdraw_nft_usecase.dart';
 
 class BottomBarInfoIndividualCubit extends Cubit<BottomBarInfoIndividualState> {
   BottomBarInfoIndividualCubit()

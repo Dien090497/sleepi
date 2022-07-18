@@ -22,7 +22,6 @@ class AuthInterceptor extends Interceptor {
     final token = await _secureStorage.getAccessToken();
     if (token != null) {
       options.headers['Authorization'] = 'Bearer $token';
-      print('access token is   $token');
     }
     if (deviceInfo is AndroidDeviceInfo) {
       options.headers['Device-Id'] = '${deviceInfo.id}';

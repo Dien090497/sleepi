@@ -2,6 +2,7 @@ import 'dart:developer';
 
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:slee_fi/common/const/const.dart';
 import 'package:slee_fi/di/injector.dart';
 import 'package:slee_fi/l10n/locale_keys.g.dart';
 import 'package:slee_fi/schema/market/market_schema.dart';
@@ -22,7 +23,7 @@ class MarketPlaceCubit extends Cubit<MarketPlaceState> {
       page: page,
       limit: limit,
       categoryId: 1,
-      sortPrice: "LowPrice",
+      sortPrice: Const.sortCondition[0],
       type: [],
       classNft: [],
       quality: []);
@@ -36,7 +37,7 @@ class MarketPlaceCubit extends Cubit<MarketPlaceState> {
         maxLevel: categoryType == CategoryType.bed ? 30 : 5,
         limit: limit,
         categoryId: categoryType.type,
-        sortPrice: "LowPrice");
+        sortPrice: Const.sortCondition[0]);
     log("params : ${params.toJson()}");
     emit(const MarketPlaceState.loading());
     getMarketPlace(params);
@@ -99,13 +100,13 @@ class MarketPlaceCubit extends Cubit<MarketPlaceState> {
     });
   }
 
-  Future<void> selectPrice(int price) async {
+  Future<void> selectPrice(int index) async {
     page = 1;
     params = params.copyWith(
         page: page,
         limit: limit,
-        sortPrice: price == 0 ? "LowPrice" : "HighPrice");
-    log("params :$price ${params.toJson()}");
+        sortPrice: Const.sortCondition[index]);
+    log("params :$index ${params.toJson()}");
     getMarketPlace(params);
   }
 
