@@ -51,7 +51,6 @@ class SocketBloc extends Bloc<SocketEvent, SocketState> {
     var result = await _detailBedUseCase.call(event.bedId);
     result.fold(
       (l) {
-        print('_fetchSocket error ');
         var list = List.generate(
             maxSocket,
             (index) => const SocketEntity(

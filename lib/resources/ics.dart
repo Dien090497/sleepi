@@ -42,6 +42,10 @@ class Ics {
   static const String icShieldLock = 'assets/icons/ic_shield_lock.svg';
   static const String icSlft = 'assets/icons/ic_slft.svg';
   static const String icSlgt = 'assets/icons/ic_slgt.svg';
+  static const String icSocketEmpty = 'assets/icons/ic_socket_empty.svg';
+  static const String icSocketLocked = 'assets/icons/ic_socket_locked.svg';
+  static const String icSocketWaitingToPay =
+      'assets/icons/ic_socket_waiting_to_pay.svg';
   static const String icSolanaCircle = 'assets/icons/ic_solana_circle.svg';
   static const String icTransfer = 'assets/icons/ic_transfer.svg';
   static const String icTwoEyes = 'assets/icons/ic_two_eyes.svg';
@@ -108,6 +112,9 @@ class Ics {
     icShieldLock,
     icSlft,
     icSlgt,
+    icSocketEmpty,
+    icSocketLocked,
+    icSocketWaitingToPay,
     icSolanaCircle,
     icTransfer,
     icTwoEyes,
