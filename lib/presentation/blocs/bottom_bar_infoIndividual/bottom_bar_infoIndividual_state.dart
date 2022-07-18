@@ -14,6 +14,10 @@ class BottomBarInfoIndividualState with _$BottomBarInfoIndividualState {
     GetRepairtEntity? feeRepair,
   }) = BottomBarInfoIndividualLoaded;
 
+  const factory BottomBarInfoIndividualState.getLevel(dynamic levelUp) = GetLevelSuccess;
+
+  const factory BottomBarInfoIndividualState.upLevel() = UpLevelSuccess;
+
   const factory BottomBarInfoIndividualState.error({required String message}) = BottomBarInfoIndividualError;
 
   const factory BottomBarInfoIndividualState.loading() = BottomBarInfoIndividualLoading;

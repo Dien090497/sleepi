@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
 import 'package:slee_fi/common/widgets/sf_buttons.dart';
-import 'package:slee_fi/common/widgets/sf_dialog.dart';
 import 'package:slee_fi/common/widgets/sf_icon.dart';
 import 'package:slee_fi/common/widgets/sf_label_value.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
@@ -69,19 +68,6 @@ class PopUpLevelUp extends StatelessWidget {
                   style: TextStyles.bold14Blue)
               ],
             ),
-            // Align(
-            //   alignment: Alignment.centerLeft,
-            //   child: RichText(
-            //     text: TextSpan(
-            //         text: 'Level up to ',
-            //         style: TextStyles.lightGrey14,
-            //         children: [
-            //           TextSpan(
-            //               text: 'Lv ${level + 1}',
-            //               style: TextStyles.bold14Blue),
-            //         ]),
-            //   ),
-            // ),
             const SizedBox(height: 8),
             SFLabelValue(
               label: LocaleKeys.cost,
@@ -114,7 +100,6 @@ class PopUpLevelUp extends StatelessWidget {
                     onPressed: () {
                       onConfirm();
                       Navigator.pop(context);
-                      showSuccessfulDialog(context, null);
                     },
                     textStyle: TextStyles.white16,
                     gradient: AppColors.gradientBlueButton,
