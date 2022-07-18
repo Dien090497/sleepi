@@ -124,14 +124,13 @@ extension StringX on String {
   }
 
   Color get qualityBedColor {
-    switch (this) {
+    switch (toLowerCase()) {
       case 'uncommon':
         return AppColors.uncommonBed;
       case 'rare':
         return AppColors.rareBed;
       case 'epic':
         return AppColors.epicBed;
-      case 'legend':
       case 'legendary':
         return AppColors.legendaryBed;
       case 'special':

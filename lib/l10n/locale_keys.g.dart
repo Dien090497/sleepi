@@ -455,5 +455,6 @@ abstract class  LocaleKeys {
   static const remove = 'remove';
   static const add_jewel = 'add_jewel';
   static const jewel_list = 'jewel_list';
+  static const select_bed = 'select_bed';
 
 }

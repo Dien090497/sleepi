@@ -50,8 +50,9 @@ class MintFromWidget extends StatelessWidget {
             physics: const NeverScrollableScrollPhysics(),
             itemBuilder: (context, i) {
               return ItemBed(
-                id: 'randomUtils.randomId()',
-                // bed: beds[i],
+                id: '${familyData![i].id}',
+                bedType: familyData![i].type,
+                image: familyData![i].image,
                 selected: false,
                 onTap: () {
                   ToastUtils.showToast(

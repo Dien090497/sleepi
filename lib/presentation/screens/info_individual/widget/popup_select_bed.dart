@@ -9,11 +9,11 @@ import 'package:slee_fi/common/widgets/sf_dialog.dart';
 import 'package:slee_fi/common/widgets/sf_gridview.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
 import 'package:slee_fi/di/injector.dart';
+import 'package:slee_fi/l10n/locale_keys.g.dart';
 import 'package:slee_fi/presentation/blocs/mint/mint_cubit.dart';
 import 'package:slee_fi/presentation/blocs/mint/mint_state.dart';
 import 'package:slee_fi/presentation/screens/info_individual/widget/item_bed.dart';
 import 'package:slee_fi/presentation/screens/info_individual/widget/popup_no_shoes.dart';
-
 
 class PopUpSelectBed extends StatefulWidget {
   const PopUpSelectBed({Key? key, required this.beds, required this.callBack})
@@ -49,7 +49,7 @@ class _PopUpSelectBedState extends State<PopUpSelectBed> {
                       padding: const EdgeInsets.only(
                           top: 32.0, left: 32, bottom: 24),
                       child: SFText(
-                        keyText: 'Select Bed',
+                        keyText: LocaleKeys.select_bed,
                         style: TextStyles.bold18White,
                       ),
                     ),
@@ -59,11 +59,12 @@ class _PopUpSelectBedState extends State<PopUpSelectBed> {
                         child: SFGridView(
                           count: widget.beds.length,
                           isScroll: true,
-                          childAspectRatio: 9/10,
+                          childAspectRatio: 9 / 10,
                           itemBuilder: (context, i) {
                             return ItemBed(
                               id: listID[i],
-                              // bed: widget.beds[i],
+                              image: widget.beds[i].name,
+                              bedType: widget.beds[i].type,
                               selected: state.indexSelected == i,
                               onTap: () {
                                 cubit.selectBed(i);
@@ -82,17 +83,17 @@ class _PopUpSelectBedState extends State<PopUpSelectBed> {
                 Positioned(
                   bottom: 20,
                   child: SFButton(
-                    text: 'Continue',
+                    text: LocaleKeys.continue_,
                     width: MediaQuery.of(context).size.width * 0.9,
                     color: AppColors.blue,
                     textStyle: TextStyles.w600WhiteSize16,
                     height: 48,
                     onPressed: () {
-                      if(state.indexSelected % 3 == 0){
+                      if (state.indexSelected % 3 == 0) {
                         showCustomDialog(context, children: [
                           const PopupNoShoes(),
                         ]);
-                      }else{
+                      } else {
                         Navigator.pop(context);
                         widget.callBack(state.indexSelected);
                       }
