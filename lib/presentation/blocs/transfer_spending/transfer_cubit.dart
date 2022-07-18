@@ -32,7 +32,7 @@ class TransferCubit extends Cubit<TransferState> {
         emit(currentState);
         return;
       }
-      final amount = double.parse(amountStr);
+      final amount = double.parse(amountStr.replaceAll(',','.'));
       if (amount <= 0) {
         emit(const TransferState.error(LocaleKeys.amount_input_can_not_be_zero,
             typeError: 'amount_zero'));

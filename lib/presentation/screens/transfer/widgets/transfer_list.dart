@@ -79,7 +79,7 @@ class _TransferListState extends State<TransferList> {
               ),
             );
           } else if (!(state.needApprove ?? true)) {
-            final amount = double.parse(controller.text);
+            final amount = double.parse(controller.text.replaceAll(',','.'));
             final userState = context.read<UserBloc>().state;
 
             showCustomAlertDialog(

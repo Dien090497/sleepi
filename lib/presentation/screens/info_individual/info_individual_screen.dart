@@ -22,6 +22,7 @@ import 'package:slee_fi/presentation/screens/info_individual/widget/bottom_bar_m
 import 'package:slee_fi/presentation/screens/info_individual/widget/box_info_widget.dart';
 import 'package:slee_fi/presentation/screens/info_individual/widget/individual_refresher.dart';
 import 'package:slee_fi/presentation/screens/info_individual/widget/mint_from_widget.dart';
+import 'package:slee_fi/presentation/screens/info_individual/widget/point_dialog.dart';
 import 'package:slee_fi/presentation/screens/info_individual/widget/socket_component.dart';
 
 class InfoIndividualParams {
@@ -176,16 +177,7 @@ class InfoIndividualScreen extends StatelessWidget {
     return showCustomDialog(
       context,
       children: [
-        Align(
-          alignment: Alignment.topRight,
-          child: IconButton(
-            onPressed: () {},
-            icon: const Icon(
-              Icons.close,
-              color: AppColors.lightGrey,
-            ),
-          ),
-        ),
+        const PointDialog(),
       ],
     );
   }
