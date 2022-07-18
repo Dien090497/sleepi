@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:slee_fi/common/routes/app_routes.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
+import 'package:slee_fi/common/widgets/sf_alert_dialog.dart';
 import 'package:slee_fi/common/widgets/sf_button_outlined.dart';
 import 'package:slee_fi/common/widgets/sf_buttons.dart';
 import 'package:slee_fi/common/widgets/sf_dialog.dart';
@@ -12,6 +13,7 @@ import 'package:slee_fi/models/pop_with_result.dart';
 import 'package:slee_fi/presentation/blocs/create_wallet/create_wallet_cubit.dart';
 import 'package:slee_fi/presentation/blocs/create_wallet/create_wallet_state.dart';
 import 'package:slee_fi/presentation/blocs/user_bloc/user_bloc.dart';
+import 'package:slee_fi/presentation/screens/wallet_creation_warning/widgets/pop_up_wallet_warning.dart';
 
 class PopUpAvalancheWallet extends StatelessWidget {
   const PopUpAvalancheWallet({Key? key}) : super(key: key);
@@ -67,13 +69,21 @@ class PopUpAvalancheWallet extends StatelessWidget {
                           textStyle: TextStyles.bold16Blue,
                           borderColor: AppColors.blue,
                           onPressed: () {
-                            Navigator.pushNamed(context, R.createPasscode).then(
-                                  (value) {
-                                if (value == true) {
-                                  cubit.createWallet();
-                                  isLoadingCreateWallet = true;
-                                }
-                              },
+                            showCustomAlertDialog(
+                              context,
+                              children:  PopUpWalletWarning(
+                                onPressed: () {
+                                  Navigator.pushNamed(context, R.createPasscode).then(
+                                        (value) {
+                                          Navigator.pop(context);
+                                      if (value == true) {
+                                        cubit.createWallet();
+                                        isLoadingCreateWallet = true;
+                                      }
+                                    },
+                                  );
+                                },
+                              ),
                             );
                           },
                         ),
