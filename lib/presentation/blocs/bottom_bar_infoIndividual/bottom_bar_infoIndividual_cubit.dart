@@ -71,7 +71,7 @@ class BottomBarInfoIndividualCubit extends Cubit<BottomBarInfoIndividualState> {
   }
 
   void sellNFT({required String amount, required int nftId }) async {
-    final params = NFTSellSchema(amount: amount, nftId: nftId);
+    final params = NFTSellSchema(amount: amount.replaceAll(',', '.'), nftId: nftId);
     final result = await _nftSellUseCase.call(params);
     result.fold((l) {
       emit(BottomBarInfoIndividualState.error(message: '$l'));
