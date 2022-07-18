@@ -12,6 +12,7 @@ import 'package:slee_fi/common/widgets/sf_dialog.dart';
 import 'package:slee_fi/common/widgets/sf_icon.dart';
 import 'package:slee_fi/common/widgets/sf_label_value.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
+import 'package:slee_fi/entities/bed_entity/bed_entity.dart';
 import 'package:slee_fi/l10n/locale_keys.g.dart';
 import 'package:slee_fi/presentation/blocs/mint/mint_cubit.dart';
 import 'package:slee_fi/presentation/blocs/mint/mint_state.dart';
@@ -30,6 +31,7 @@ class _MintScreenState extends State<MintScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final args = ModalRoute.of(context)?.settings.arguments as BedEntity;
     final Size size = MediaQuery.of(context).size;
     return BlocProvider(
       create: (_) => MintCubit()..init(),
@@ -64,7 +66,7 @@ class _MintScreenState extends State<MintScreen> {
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,
                                     children: [
-                                      const ConnectBedWidget(),
+                                      ConnectBedWidget(bedParent1: args,),
                                       const SizedBox(
                                         height: 60,
                                       ),

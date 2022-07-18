@@ -1,21 +1,29 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:slee_fi/common/enum/enum.dart';
+import 'package:slee_fi/common/widgets/cached_image.dart';
 import 'package:slee_fi/common/widgets/sf_bottom_sheet.dart';
 import 'package:slee_fi/common/widgets/sf_icon.dart';
+import 'package:slee_fi/entities/bed_entity/bed_entity.dart';
 import 'package:slee_fi/presentation/blocs/mint/mint_cubit.dart';
 import 'package:slee_fi/presentation/blocs/mint/mint_state.dart';
 import 'package:slee_fi/presentation/screens/info_individual/widget/popup_select_bed.dart';
 import 'package:slee_fi/resources/resources.dart';
 
 class ConnectBedWidget extends StatelessWidget {
-  const ConnectBedWidget({Key? key}) : super(key: key);
+  const ConnectBedWidget({Key? key, required this.bedParent1})
+      : super(key: key);
+
+  final BedEntity bedParent1;
 
   @override
   Widget build(BuildContext context) {
     final List<BedType> beds = List.generate(BedType.values.length * 5,
         (i) => BedType.values[i % BedType.values.length]);
-    return BlocBuilder<MintCubit, MintState>(
+    return BlocConsumer<MintCubit, MintState>(
+      listener: (context, state) {
+
+      },
       builder: (context, state) {
         if (state is MintStateSelected) {
           final cubit = context.read<MintCubit>();
@@ -30,17 +38,12 @@ class ConnectBedWidget extends StatelessWidget {
                       child: Container(
                         alignment: Alignment.center,
                         child: GestureDetector(
-                          child: const SFIcon(Imgs.shortBed),
-                          onTap: () {
-                            // SFModalBottomSheet.show(
-                            //   context,
-                            //   0.8,
-                            //   PopUpSelectBed(
-                            //     beds: beds,
-                            //     callback: callback,
-                            //   ),
-                            // );
-                          },
+                          child: CachedImage(
+                            image: bedParent1.image,
+                            height: 80,
+                            width: 80,
+                          ),
+                          onTap: () {},
                         ),
                       ),
                     ),
