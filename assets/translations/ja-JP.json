@@ -407,6 +407,7 @@
   "red": "Red",
   "green": "Green",
   "purple": "Purple",
+  "white": "White",
   "incorrect_address": "Incorrect Address",
   "wallet_created_successfully": "ウォレット作成完了",
   "wallet_imported_successfully": "ウォレットインポート完了",

@@ -157,7 +157,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
                   .map((e) => e.toEntity())
                   .toList(),
               selectedBed: r.first.toEntity(),
-              loadMoreBed: true,
+              loadMoreBed: r.length >= _limitItemPage,
               selectedItem: null));
           add(UserStatusTracking());
           return;
@@ -172,7 +172,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
                 .map((e) => e.toEntity())
                 .toList(),
             selectedBed: r.isNotEmpty ? r.first.toEntity() : null,
-            loadMoreBed: true,
+            loadMoreBed: r.length >= _limitItemPage,
             minute: DateTime.now().minute,
             hour: DateTime.now().hour,
             time: 0));
