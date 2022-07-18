@@ -81,7 +81,6 @@ class _BottomBarWidgetState extends State<BottomBarWidget> {
             child: BlocConsumer<BottomBarInfoIndividualCubit,
                 BottomBarInfoIndividualState>(
               listener: (context, state) {
-                print('=-==-=$state}');
                 if (state is BottomBarInfoIndividualError) {
                   showMessageDialog(context, state.message);
                 }
@@ -90,7 +89,10 @@ class _BottomBarWidgetState extends State<BottomBarWidget> {
                   if (state.successTransfer) {
                     showSuccessfulDialog(context, null, onBackPress: () {
                       Navigator.pushNamedAndRemoveUntil(
-                        context, R.bottomNavigation, (r) => false,);
+                        context,
+                        R.bottomNavigation,
+                        (r) => false,
+                      );
                     });
                   }
                 }
@@ -100,9 +102,7 @@ class _BottomBarWidgetState extends State<BottomBarWidget> {
                 }
 
                 if (state is GetLevelSuccess) {
-                  setState(() {
-                    index = 0;
-                  });
+                  index = 0;
                   showCustomDialog(
                     context,
                     children: [
@@ -113,7 +113,7 @@ class _BottomBarWidgetState extends State<BottomBarWidget> {
                           time: int.parse(
                               state.levelUp['require_time'].toString()),
                           onCancel: () {
-                            Navigator.pop(context);
+                            Navigator.pop(context,true);
                           },
                           onConfirm: () {
                             cubit.postLevelUp(
@@ -127,9 +127,7 @@ class _BottomBarWidgetState extends State<BottomBarWidget> {
                     ],
                   ).then((value) {
                     cubit.init();
-                    setState(() {
-                      index = -1;
-                    });
+                    index = -1;
                   });
                 }
               },
@@ -168,7 +166,8 @@ class _BottomBarWidgetState extends State<BottomBarWidget> {
                       setState(() {
                         index = 2;
                       });
-                      Navigator.pushNamed(context, R.mint)
+                      Navigator.pushNamed(context, R.mint,
+                              arguments: widget.bedEntity)
                           .then((value) => setState(() {
                                 index = -1;
                               }));
