@@ -27,7 +27,11 @@ TrackingResultModel _$TrackingResultModelFromJson(Map<String, dynamic> json) =>
           ? null
           : DateTime.parse(json['updatedAt'] as String),
       id: json['id'] as int?,
-    );
+    )
+      ..bedNFTHoldingBonus = json['bedNFTHoldingBonus'] as String?
+      ..stakingBonus = json['stakingBonus'] as String?
+      ..basePointEff = json['basePointEff'] as String?
+      ..insurance = json['insurance'] as String?;
 
 Map<String, dynamic> _$TrackingResultModelToJson(
         TrackingResultModel instance) =>
@@ -42,6 +46,10 @@ Map<String, dynamic> _$TrackingResultModelToJson(
       'sleepDurationTime': instance.sleepDurationTime,
       'wokeUpTime': instance.wokeUpTime,
       'bedTime': instance.bedTime,
+      'bedNFTHoldingBonus': instance.bedNFTHoldingBonus,
+      'stakingBonus': instance.stakingBonus,
+      'basePointEff': instance.basePointEff,
+      'insurance': instance.insurance,
       'sleepQuality': instance.sleepQuality,
       'startSleepTime': instance.startSleepTime,
       'createdAt': instance.createdAt?.toIso8601String(),

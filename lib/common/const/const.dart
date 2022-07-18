@@ -43,6 +43,10 @@ class Const {
   static const String normalGachaAnimation = 'assets/json/gacha.json';
   static const String specialGachaAudio = 'sounds/special_gacha.mp3';
   static const String specialGachaAnimation = 'assets/json/special_gacha.json';
+  static const String time = 'time';
+  static const String setAsForeground = 'setAsForeground';
+  static const String setAsBackground = 'setAsBackground';
+  static const String stopService = 'stopService';
 
   static const localeDE = Locale('de', 'DE');
   static const localeEN = Locale('en', 'US');

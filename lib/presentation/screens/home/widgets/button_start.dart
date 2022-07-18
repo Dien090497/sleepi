@@ -119,10 +119,15 @@ class _CountDownTextState extends State<_CountDownText> {
   void initState() {
     if (widget.userStatusTracking != null &&
         widget.userStatusTracking!.availableAt != 0) {
-      startTime = DateTime.now()
+      if(DateTime.now().isBefore(DateTime.fromMillisecondsSinceEpoch(
+          widget.userStatusTracking!.availableAt * 1000))) {
+        startTime = DateTime.now()
           .difference(DateTime.fromMillisecondsSinceEpoch(
               widget.userStatusTracking!.availableAt * 1000))
           .inSeconds;
+      }else{
+        startTime = 0;
+      }
     }
     startTimer();
     super.initState();
@@ -157,6 +162,7 @@ class _CountDownTextState extends State<_CountDownText> {
 
   @override
   void dispose() {
+    _timer.cancel();
     super.dispose();
   }
 

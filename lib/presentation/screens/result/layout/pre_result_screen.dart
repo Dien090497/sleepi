@@ -65,20 +65,33 @@ class _PreResultScreenState extends State<PreResultScreen> {
                       const SizedBox(
                         height: 20,
                       ),
-                      SFLabelValue(label: LocaleKeys.sleep, value: '${resultModel.sleepQuality}'),
+                      SFLabelValue(
+                          label: LocaleKeys.sleep_score,
+                          value: '${resultModel.sleepQuality}'),
                       const SizedBox(
                         height: 8,
                       ),
-                      const SFLabelValue(label: LocaleKeys.item, value: '30'),
+                      SFLabelValue(
+                          label: LocaleKeys.base_point,
+                          value: '${resultModel.basePointEff}'),
                       const SizedBox(
                         height: 8,
                       ),
-                      const SFLabelValue(label: LocaleKeys.bonus, value: '10'),
+                      SFLabelValue(
+                          label: LocaleKeys.holding_bonus,
+                          value: '${resultModel.bedNFTHoldingBonus}'),
                       const SizedBox(
                         height: 8,
                       ),
-                      const SFLabelValue(
-                          label: LocaleKeys.insurance, value: '5%'),
+                      SFLabelValue(
+                          label: LocaleKeys.stacking_bonus,
+                          value: '${resultModel.stakingBonus}'),
+                      const SizedBox(
+                        height: 8,
+                      ),
+                      SFLabelValue(
+                          label: LocaleKeys.insurance,
+                          value: '${resultModel.insurance}%'),
                       const SizedBox(
                         height: 8,
                       ),
@@ -120,7 +133,10 @@ class _PreResultScreenState extends State<PreResultScreen> {
                     height: 48,
                     onPressed: () {
                       Navigator.pushNamed(context, R.result,
-                          arguments: args.fromRoute);
+                          arguments: PreResultParams(
+                            fromRoute: args.fromRoute,
+                            resultModel: args.resultModel,
+                          ));
                     },
                   ),
                 ),

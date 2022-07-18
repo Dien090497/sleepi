@@ -454,5 +454,8 @@
   "add_jewel": "Add Jewel",
   "jewel_list" : "Jewel List",
   "select_bed" : "Select Bed",
-  "wallet_already_mapping" : "This wallet address has already existed in the system. Please import another address."
+  "wallet_already_mapping" : "This wallet address has already existed in the system. Please import another address.",
+  "base_point": "Base Points",
+  "holding_bonus": "Bed NFT Holding Bonus",
+  "stacking_bonus": "Stacking Bonus"
 }
