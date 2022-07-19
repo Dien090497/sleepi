@@ -160,20 +160,15 @@ class TransactionImplementation extends ITransactionRepository{
       }
   }
 
-  // @override
-  // Future<Either<Failure, BigInt>> estimateGasFee(
-  //     {String? sender, String? to, double? value, double? gasPrice}) async {
-  //   try {
-  //     final price = await _web3DataSource.estimateGas(
-  //       value: value,
-  //       gasPrice: gasPrice,
-  //       sender: sender != null ? EthereumAddress.fromHex(sender) : null,
-  //       to: to,
-  //     );
-  //     return Right(price * BigInt.from(50) + BigInt.from(15));
-  //   } catch (e) {
-  //     return Left(FailureMessage('$e'));
-  //   }
-  // }
+  @override
+  Future<Either<Failure, String>> getCurrentNetworkExplorer(String hash) async{
+    try {
+      final network = await _getCurrentNetwork();
+      String urlDetail = '${network.explorers.first.url}/tx/$hash';
+    return Right(urlDetail);
+    } catch (e) {
+    return Left(FailureMessage('$e'));
+    }
+  }
 }
 

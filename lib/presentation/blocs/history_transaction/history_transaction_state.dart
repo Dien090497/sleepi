@@ -13,6 +13,9 @@ class HistoryTransactionState with _$HistoryTransactionState {
     @Default(false) bool isLoading,
   }) = HistoryTransactionStateLoaded;
 
+  const factory HistoryTransactionState.getUrlDetailTransactionSuccess(String url) = GetUrlDetailTransactionSuccess;
+
+
   const factory HistoryTransactionState.error(String message) = HistoryTransactionStateError;
 
   const factory HistoryTransactionState.loadingHistory() = HistoryTransactionStateLoadingHistory;

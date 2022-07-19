@@ -38,10 +38,10 @@ class SendToExternalCubit extends Cubit<SendToExternalState> {
   Future<void> getTokenBalance() async {
     final result = await _sendToExternalUC.getTokenBalance(NoParams());
     result.fold(
-      (l) {
+          (l) {
         emit(SendToExternalState.fail('$l'));
       },
-      (success) {
+          (success) {
         emit(SendToExternalState.getBalance(success));
       },
     );

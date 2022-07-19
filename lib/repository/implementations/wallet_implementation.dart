@@ -442,6 +442,7 @@ class WalletImplementation extends IWalletRepository {
         // final transactionReceipt = await _web3DataSource.getTransactionReceipt(historyList.elementAt(i).transactionHash);
         // final getTimeStamp = await _web3DataSource.getDetailBlock(transactionInfo.blockNumber.toBlockParam());
         final model = TransactionIsarModel(
+          transactionHash: transactionHistoryList.elementAt(i).hash,
             valueInEther:
                 BigInt.parse(transactionHistoryList.elementAt(i).value) /
                     BigInt.from(pow(10, 18)),

@@ -8,6 +8,8 @@ abstract class ITransactionRepository {
 
   Future<Either<Failure, double>> getTokenBalance();
 
+  Future<Either<Failure, String>> getCurrentNetworkExplorer(String hash);
+
   Future<Either<Failure, double>> estimateGasFee({
     String? sender,
     String? to,

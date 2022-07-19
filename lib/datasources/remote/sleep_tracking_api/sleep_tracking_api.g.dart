@@ -18,18 +18,18 @@ class _SleepTrackingApi implements SleepTrackingApi {
   String? baseUrl;
 
   @override
-  Future<String> startTracking(schema) async {
+  Future<dynamic> startTracking(schema) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
     _data.addAll(schema.toJson());
-    final _result = await _dio.fetch<String>(_setStreamType<String>(
+    final _result = await _dio.fetch(_setStreamType<dynamic>(
         Options(method: 'POST', headers: _headers, extra: _extra)
             .compose(_dio.options, '/tracking',
                 queryParameters: queryParameters, data: _data)
             .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = _result.data!;
+    final value = _result.data;
     return value;
   }
 

@@ -21,6 +21,7 @@ mixin _$HistoryTransactionState {
     required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function(bool isLoading) loaded,
+    required TResult Function(String url) getUrlDetailTransactionSuccess,
     required TResult Function(String message) error,
     required TResult Function() loadingHistory,
     required TResult Function() refreshHistory,
@@ -33,6 +34,7 @@ mixin _$HistoryTransactionState {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function(bool isLoading)? loaded,
+    TResult Function(String url)? getUrlDetailTransactionSuccess,
     TResult Function(String message)? error,
     TResult Function()? loadingHistory,
     TResult Function()? refreshHistory,
@@ -44,6 +46,7 @@ mixin _$HistoryTransactionState {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function(bool isLoading)? loaded,
+    TResult Function(String url)? getUrlDetailTransactionSuccess,
     TResult Function(String message)? error,
     TResult Function()? loadingHistory,
     TResult Function()? refreshHistory,
@@ -56,6 +59,8 @@ mixin _$HistoryTransactionState {
     required TResult Function(HistoryTransactionStateInitial value) initial,
     required TResult Function(HistoryTransactionStateLoading value) loading,
     required TResult Function(HistoryTransactionStateLoaded value) loaded,
+    required TResult Function(GetUrlDetailTransactionSuccess value)
+        getUrlDetailTransactionSuccess,
     required TResult Function(HistoryTransactionStateError value) error,
     required TResult Function(HistoryTransactionStateLoadingHistory value)
         loadingHistory,
@@ -70,6 +75,8 @@ mixin _$HistoryTransactionState {
     TResult Function(HistoryTransactionStateInitial value)? initial,
     TResult Function(HistoryTransactionStateLoading value)? loading,
     TResult Function(HistoryTransactionStateLoaded value)? loaded,
+    TResult Function(GetUrlDetailTransactionSuccess value)?
+        getUrlDetailTransactionSuccess,
     TResult Function(HistoryTransactionStateError value)? error,
     TResult Function(HistoryTransactionStateLoadingHistory value)?
         loadingHistory,
@@ -83,6 +90,8 @@ mixin _$HistoryTransactionState {
     TResult Function(HistoryTransactionStateInitial value)? initial,
     TResult Function(HistoryTransactionStateLoading value)? loading,
     TResult Function(HistoryTransactionStateLoaded value)? loaded,
+    TResult Function(GetUrlDetailTransactionSuccess value)?
+        getUrlDetailTransactionSuccess,
     TResult Function(HistoryTransactionStateError value)? error,
     TResult Function(HistoryTransactionStateLoadingHistory value)?
         loadingHistory,
@@ -160,6 +169,7 @@ class _$HistoryTransactionStateInitial
     required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function(bool isLoading) loaded,
+    required TResult Function(String url) getUrlDetailTransactionSuccess,
     required TResult Function(String message) error,
     required TResult Function() loadingHistory,
     required TResult Function() refreshHistory,
@@ -175,6 +185,7 @@ class _$HistoryTransactionStateInitial
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function(bool isLoading)? loaded,
+    TResult Function(String url)? getUrlDetailTransactionSuccess,
     TResult Function(String message)? error,
     TResult Function()? loadingHistory,
     TResult Function()? refreshHistory,
@@ -189,6 +200,7 @@ class _$HistoryTransactionStateInitial
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function(bool isLoading)? loaded,
+    TResult Function(String url)? getUrlDetailTransactionSuccess,
     TResult Function(String message)? error,
     TResult Function()? loadingHistory,
     TResult Function()? refreshHistory,
@@ -207,6 +219,8 @@ class _$HistoryTransactionStateInitial
     required TResult Function(HistoryTransactionStateInitial value) initial,
     required TResult Function(HistoryTransactionStateLoading value) loading,
     required TResult Function(HistoryTransactionStateLoaded value) loaded,
+    required TResult Function(GetUrlDetailTransactionSuccess value)
+        getUrlDetailTransactionSuccess,
     required TResult Function(HistoryTransactionStateError value) error,
     required TResult Function(HistoryTransactionStateLoadingHistory value)
         loadingHistory,
@@ -224,6 +238,8 @@ class _$HistoryTransactionStateInitial
     TResult Function(HistoryTransactionStateInitial value)? initial,
     TResult Function(HistoryTransactionStateLoading value)? loading,
     TResult Function(HistoryTransactionStateLoaded value)? loaded,
+    TResult Function(GetUrlDetailTransactionSuccess value)?
+        getUrlDetailTransactionSuccess,
     TResult Function(HistoryTransactionStateError value)? error,
     TResult Function(HistoryTransactionStateLoadingHistory value)?
         loadingHistory,
@@ -240,6 +256,8 @@ class _$HistoryTransactionStateInitial
     TResult Function(HistoryTransactionStateInitial value)? initial,
     TResult Function(HistoryTransactionStateLoading value)? loading,
     TResult Function(HistoryTransactionStateLoaded value)? loaded,
+    TResult Function(GetUrlDetailTransactionSuccess value)?
+        getUrlDetailTransactionSuccess,
     TResult Function(HistoryTransactionStateError value)? error,
     TResult Function(HistoryTransactionStateLoadingHistory value)?
         loadingHistory,
@@ -310,6 +328,7 @@ class _$HistoryTransactionStateLoading
     required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function(bool isLoading) loaded,
+    required TResult Function(String url) getUrlDetailTransactionSuccess,
     required TResult Function(String message) error,
     required TResult Function() loadingHistory,
     required TResult Function() refreshHistory,
@@ -325,6 +344,7 @@ class _$HistoryTransactionStateLoading
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function(bool isLoading)? loaded,
+    TResult Function(String url)? getUrlDetailTransactionSuccess,
     TResult Function(String message)? error,
     TResult Function()? loadingHistory,
     TResult Function()? refreshHistory,
@@ -339,6 +359,7 @@ class _$HistoryTransactionStateLoading
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function(bool isLoading)? loaded,
+    TResult Function(String url)? getUrlDetailTransactionSuccess,
     TResult Function(String message)? error,
     TResult Function()? loadingHistory,
     TResult Function()? refreshHistory,
@@ -357,6 +378,8 @@ class _$HistoryTransactionStateLoading
     required TResult Function(HistoryTransactionStateInitial value) initial,
     required TResult Function(HistoryTransactionStateLoading value) loading,
     required TResult Function(HistoryTransactionStateLoaded value) loaded,
+    required TResult Function(GetUrlDetailTransactionSuccess value)
+        getUrlDetailTransactionSuccess,
     required TResult Function(HistoryTransactionStateError value) error,
     required TResult Function(HistoryTransactionStateLoadingHistory value)
         loadingHistory,
@@ -374,6 +397,8 @@ class _$HistoryTransactionStateLoading
     TResult Function(HistoryTransactionStateInitial value)? initial,
     TResult Function(HistoryTransactionStateLoading value)? loading,
     TResult Function(HistoryTransactionStateLoaded value)? loaded,
+    TResult Function(GetUrlDetailTransactionSuccess value)?
+        getUrlDetailTransactionSuccess,
     TResult Function(HistoryTransactionStateError value)? error,
     TResult Function(HistoryTransactionStateLoadingHistory value)?
         loadingHistory,
@@ -390,6 +415,8 @@ class _$HistoryTransactionStateLoading
     TResult Function(HistoryTransactionStateInitial value)? initial,
     TResult Function(HistoryTransactionStateLoading value)? loading,
     TResult Function(HistoryTransactionStateLoaded value)? loaded,
+    TResult Function(GetUrlDetailTransactionSuccess value)?
+        getUrlDetailTransactionSuccess,
     TResult Function(HistoryTransactionStateError value)? error,
     TResult Function(HistoryTransactionStateLoadingHistory value)?
         loadingHistory,
@@ -484,6 +511,7 @@ class _$HistoryTransactionStateLoaded implements HistoryTransactionStateLoaded {
     required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function(bool isLoading) loaded,
+    required TResult Function(String url) getUrlDetailTransactionSuccess,
     required TResult Function(String message) error,
     required TResult Function() loadingHistory,
     required TResult Function() refreshHistory,
@@ -499,6 +527,7 @@ class _$HistoryTransactionStateLoaded implements HistoryTransactionStateLoaded {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function(bool isLoading)? loaded,
+    TResult Function(String url)? getUrlDetailTransactionSuccess,
     TResult Function(String message)? error,
     TResult Function()? loadingHistory,
     TResult Function()? refreshHistory,
@@ -513,6 +542,7 @@ class _$HistoryTransactionStateLoaded implements HistoryTransactionStateLoaded {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function(bool isLoading)? loaded,
+    TResult Function(String url)? getUrlDetailTransactionSuccess,
     TResult Function(String message)? error,
     TResult Function()? loadingHistory,
     TResult Function()? refreshHistory,
@@ -531,6 +561,8 @@ class _$HistoryTransactionStateLoaded implements HistoryTransactionStateLoaded {
     required TResult Function(HistoryTransactionStateInitial value) initial,
     required TResult Function(HistoryTransactionStateLoading value) loading,
     required TResult Function(HistoryTransactionStateLoaded value) loaded,
+    required TResult Function(GetUrlDetailTransactionSuccess value)
+        getUrlDetailTransactionSuccess,
     required TResult Function(HistoryTransactionStateError value) error,
     required TResult Function(HistoryTransactionStateLoadingHistory value)
         loadingHistory,
@@ -548,6 +580,8 @@ class _$HistoryTransactionStateLoaded implements HistoryTransactionStateLoaded {
     TResult Function(HistoryTransactionStateInitial value)? initial,
     TResult Function(HistoryTransactionStateLoading value)? loading,
     TResult Function(HistoryTransactionStateLoaded value)? loaded,
+    TResult Function(GetUrlDetailTransactionSuccess value)?
+        getUrlDetailTransactionSuccess,
     TResult Function(HistoryTransactionStateError value)? error,
     TResult Function(HistoryTransactionStateLoadingHistory value)?
         loadingHistory,
@@ -564,6 +598,8 @@ class _$HistoryTransactionStateLoaded implements HistoryTransactionStateLoaded {
     TResult Function(HistoryTransactionStateInitial value)? initial,
     TResult Function(HistoryTransactionStateLoading value)? loading,
     TResult Function(HistoryTransactionStateLoaded value)? loaded,
+    TResult Function(GetUrlDetailTransactionSuccess value)?
+        getUrlDetailTransactionSuccess,
     TResult Function(HistoryTransactionStateError value)? error,
     TResult Function(HistoryTransactionStateLoadingHistory value)?
         loadingHistory,
@@ -587,6 +623,194 @@ abstract class HistoryTransactionStateLoaded
   bool get isLoading;
   @JsonKey(ignore: true)
   _$$HistoryTransactionStateLoadedCopyWith<_$HistoryTransactionStateLoaded>
+      get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$GetUrlDetailTransactionSuccessCopyWith<$Res> {
+  factory _$$GetUrlDetailTransactionSuccessCopyWith(
+          _$GetUrlDetailTransactionSuccess value,
+          $Res Function(_$GetUrlDetailTransactionSuccess) then) =
+      __$$GetUrlDetailTransactionSuccessCopyWithImpl<$Res>;
+  $Res call({String url});
+}
+
+/// @nodoc
+class __$$GetUrlDetailTransactionSuccessCopyWithImpl<$Res>
+    extends _$HistoryTransactionStateCopyWithImpl<$Res>
+    implements _$$GetUrlDetailTransactionSuccessCopyWith<$Res> {
+  __$$GetUrlDetailTransactionSuccessCopyWithImpl(
+      _$GetUrlDetailTransactionSuccess _value,
+      $Res Function(_$GetUrlDetailTransactionSuccess) _then)
+      : super(_value, (v) => _then(v as _$GetUrlDetailTransactionSuccess));
+
+  @override
+  _$GetUrlDetailTransactionSuccess get _value =>
+      super._value as _$GetUrlDetailTransactionSuccess;
+
+  @override
+  $Res call({
+    Object? url = freezed,
+  }) {
+    return _then(_$GetUrlDetailTransactionSuccess(
+      url == freezed
+          ? _value.url
+          : url // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$GetUrlDetailTransactionSuccess
+    implements GetUrlDetailTransactionSuccess {
+  const _$GetUrlDetailTransactionSuccess(this.url);
+
+  @override
+  final String url;
+
+  @override
+  String toString() {
+    return 'HistoryTransactionState.getUrlDetailTransactionSuccess(url: $url)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$GetUrlDetailTransactionSuccess &&
+            const DeepCollectionEquality().equals(other.url, url));
+  }
+
+  @override
+  int get hashCode =>
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(url));
+
+  @JsonKey(ignore: true)
+  @override
+  _$$GetUrlDetailTransactionSuccessCopyWith<_$GetUrlDetailTransactionSuccess>
+      get copyWith => __$$GetUrlDetailTransactionSuccessCopyWithImpl<
+          _$GetUrlDetailTransactionSuccess>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function() loading,
+    required TResult Function(bool isLoading) loaded,
+    required TResult Function(String url) getUrlDetailTransactionSuccess,
+    required TResult Function(String message) error,
+    required TResult Function() loadingHistory,
+    required TResult Function() refreshHistory,
+    required TResult Function(List<TransactionIsarModel> list)
+        getHistorySuccess,
+  }) {
+    return getUrlDetailTransactionSuccess(url);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function()? loading,
+    TResult Function(bool isLoading)? loaded,
+    TResult Function(String url)? getUrlDetailTransactionSuccess,
+    TResult Function(String message)? error,
+    TResult Function()? loadingHistory,
+    TResult Function()? refreshHistory,
+    TResult Function(List<TransactionIsarModel> list)? getHistorySuccess,
+  }) {
+    return getUrlDetailTransactionSuccess?.call(url);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function()? loading,
+    TResult Function(bool isLoading)? loaded,
+    TResult Function(String url)? getUrlDetailTransactionSuccess,
+    TResult Function(String message)? error,
+    TResult Function()? loadingHistory,
+    TResult Function()? refreshHistory,
+    TResult Function(List<TransactionIsarModel> list)? getHistorySuccess,
+    required TResult orElse(),
+  }) {
+    if (getUrlDetailTransactionSuccess != null) {
+      return getUrlDetailTransactionSuccess(url);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(HistoryTransactionStateInitial value) initial,
+    required TResult Function(HistoryTransactionStateLoading value) loading,
+    required TResult Function(HistoryTransactionStateLoaded value) loaded,
+    required TResult Function(GetUrlDetailTransactionSuccess value)
+        getUrlDetailTransactionSuccess,
+    required TResult Function(HistoryTransactionStateError value) error,
+    required TResult Function(HistoryTransactionStateLoadingHistory value)
+        loadingHistory,
+    required TResult Function(HistoryTransactionStateRefreshHistory value)
+        refreshHistory,
+    required TResult Function(HistoryTransactionStateSuccess value)
+        getHistorySuccess,
+  }) {
+    return getUrlDetailTransactionSuccess(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(HistoryTransactionStateInitial value)? initial,
+    TResult Function(HistoryTransactionStateLoading value)? loading,
+    TResult Function(HistoryTransactionStateLoaded value)? loaded,
+    TResult Function(GetUrlDetailTransactionSuccess value)?
+        getUrlDetailTransactionSuccess,
+    TResult Function(HistoryTransactionStateError value)? error,
+    TResult Function(HistoryTransactionStateLoadingHistory value)?
+        loadingHistory,
+    TResult Function(HistoryTransactionStateRefreshHistory value)?
+        refreshHistory,
+    TResult Function(HistoryTransactionStateSuccess value)? getHistorySuccess,
+  }) {
+    return getUrlDetailTransactionSuccess?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(HistoryTransactionStateInitial value)? initial,
+    TResult Function(HistoryTransactionStateLoading value)? loading,
+    TResult Function(HistoryTransactionStateLoaded value)? loaded,
+    TResult Function(GetUrlDetailTransactionSuccess value)?
+        getUrlDetailTransactionSuccess,
+    TResult Function(HistoryTransactionStateError value)? error,
+    TResult Function(HistoryTransactionStateLoadingHistory value)?
+        loadingHistory,
+    TResult Function(HistoryTransactionStateRefreshHistory value)?
+        refreshHistory,
+    TResult Function(HistoryTransactionStateSuccess value)? getHistorySuccess,
+    required TResult orElse(),
+  }) {
+    if (getUrlDetailTransactionSuccess != null) {
+      return getUrlDetailTransactionSuccess(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class GetUrlDetailTransactionSuccess
+    implements HistoryTransactionState {
+  const factory GetUrlDetailTransactionSuccess(final String url) =
+      _$GetUrlDetailTransactionSuccess;
+
+  String get url;
+  @JsonKey(ignore: true)
+  _$$GetUrlDetailTransactionSuccessCopyWith<_$GetUrlDetailTransactionSuccess>
       get copyWith => throw _privateConstructorUsedError;
 }
 
@@ -662,6 +886,7 @@ class _$HistoryTransactionStateError implements HistoryTransactionStateError {
     required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function(bool isLoading) loaded,
+    required TResult Function(String url) getUrlDetailTransactionSuccess,
     required TResult Function(String message) error,
     required TResult Function() loadingHistory,
     required TResult Function() refreshHistory,
@@ -677,6 +902,7 @@ class _$HistoryTransactionStateError implements HistoryTransactionStateError {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function(bool isLoading)? loaded,
+    TResult Function(String url)? getUrlDetailTransactionSuccess,
     TResult Function(String message)? error,
     TResult Function()? loadingHistory,
     TResult Function()? refreshHistory,
@@ -691,6 +917,7 @@ class _$HistoryTransactionStateError implements HistoryTransactionStateError {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function(bool isLoading)? loaded,
+    TResult Function(String url)? getUrlDetailTransactionSuccess,
     TResult Function(String message)? error,
     TResult Function()? loadingHistory,
     TResult Function()? refreshHistory,
@@ -709,6 +936,8 @@ class _$HistoryTransactionStateError implements HistoryTransactionStateError {
     required TResult Function(HistoryTransactionStateInitial value) initial,
     required TResult Function(HistoryTransactionStateLoading value) loading,
     required TResult Function(HistoryTransactionStateLoaded value) loaded,
+    required TResult Function(GetUrlDetailTransactionSuccess value)
+        getUrlDetailTransactionSuccess,
     required TResult Function(HistoryTransactionStateError value) error,
     required TResult Function(HistoryTransactionStateLoadingHistory value)
         loadingHistory,
@@ -726,6 +955,8 @@ class _$HistoryTransactionStateError implements HistoryTransactionStateError {
     TResult Function(HistoryTransactionStateInitial value)? initial,
     TResult Function(HistoryTransactionStateLoading value)? loading,
     TResult Function(HistoryTransactionStateLoaded value)? loaded,
+    TResult Function(GetUrlDetailTransactionSuccess value)?
+        getUrlDetailTransactionSuccess,
     TResult Function(HistoryTransactionStateError value)? error,
     TResult Function(HistoryTransactionStateLoadingHistory value)?
         loadingHistory,
@@ -742,6 +973,8 @@ class _$HistoryTransactionStateError implements HistoryTransactionStateError {
     TResult Function(HistoryTransactionStateInitial value)? initial,
     TResult Function(HistoryTransactionStateLoading value)? loading,
     TResult Function(HistoryTransactionStateLoaded value)? loaded,
+    TResult Function(GetUrlDetailTransactionSuccess value)?
+        getUrlDetailTransactionSuccess,
     TResult Function(HistoryTransactionStateError value)? error,
     TResult Function(HistoryTransactionStateLoadingHistory value)?
         loadingHistory,
@@ -817,6 +1050,7 @@ class _$HistoryTransactionStateLoadingHistory
     required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function(bool isLoading) loaded,
+    required TResult Function(String url) getUrlDetailTransactionSuccess,
     required TResult Function(String message) error,
     required TResult Function() loadingHistory,
     required TResult Function() refreshHistory,
@@ -832,6 +1066,7 @@ class _$HistoryTransactionStateLoadingHistory
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function(bool isLoading)? loaded,
+    TResult Function(String url)? getUrlDetailTransactionSuccess,
     TResult Function(String message)? error,
     TResult Function()? loadingHistory,
     TResult Function()? refreshHistory,
@@ -846,6 +1081,7 @@ class _$HistoryTransactionStateLoadingHistory
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function(bool isLoading)? loaded,
+    TResult Function(String url)? getUrlDetailTransactionSuccess,
     TResult Function(String message)? error,
     TResult Function()? loadingHistory,
     TResult Function()? refreshHistory,
@@ -864,6 +1100,8 @@ class _$HistoryTransactionStateLoadingHistory
     required TResult Function(HistoryTransactionStateInitial value) initial,
     required TResult Function(HistoryTransactionStateLoading value) loading,
     required TResult Function(HistoryTransactionStateLoaded value) loaded,
+    required TResult Function(GetUrlDetailTransactionSuccess value)
+        getUrlDetailTransactionSuccess,
     required TResult Function(HistoryTransactionStateError value) error,
     required TResult Function(HistoryTransactionStateLoadingHistory value)
         loadingHistory,
@@ -881,6 +1119,8 @@ class _$HistoryTransactionStateLoadingHistory
     TResult Function(HistoryTransactionStateInitial value)? initial,
     TResult Function(HistoryTransactionStateLoading value)? loading,
     TResult Function(HistoryTransactionStateLoaded value)? loaded,
+    TResult Function(GetUrlDetailTransactionSuccess value)?
+        getUrlDetailTransactionSuccess,
     TResult Function(HistoryTransactionStateError value)? error,
     TResult Function(HistoryTransactionStateLoadingHistory value)?
         loadingHistory,
@@ -897,6 +1137,8 @@ class _$HistoryTransactionStateLoadingHistory
     TResult Function(HistoryTransactionStateInitial value)? initial,
     TResult Function(HistoryTransactionStateLoading value)? loading,
     TResult Function(HistoryTransactionStateLoaded value)? loaded,
+    TResult Function(GetUrlDetailTransactionSuccess value)?
+        getUrlDetailTransactionSuccess,
     TResult Function(HistoryTransactionStateError value)? error,
     TResult Function(HistoryTransactionStateLoadingHistory value)?
         loadingHistory,
@@ -968,6 +1210,7 @@ class _$HistoryTransactionStateRefreshHistory
     required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function(bool isLoading) loaded,
+    required TResult Function(String url) getUrlDetailTransactionSuccess,
     required TResult Function(String message) error,
     required TResult Function() loadingHistory,
     required TResult Function() refreshHistory,
@@ -983,6 +1226,7 @@ class _$HistoryTransactionStateRefreshHistory
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function(bool isLoading)? loaded,
+    TResult Function(String url)? getUrlDetailTransactionSuccess,
     TResult Function(String message)? error,
     TResult Function()? loadingHistory,
     TResult Function()? refreshHistory,
@@ -997,6 +1241,7 @@ class _$HistoryTransactionStateRefreshHistory
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function(bool isLoading)? loaded,
+    TResult Function(String url)? getUrlDetailTransactionSuccess,
     TResult Function(String message)? error,
     TResult Function()? loadingHistory,
     TResult Function()? refreshHistory,
@@ -1015,6 +1260,8 @@ class _$HistoryTransactionStateRefreshHistory
     required TResult Function(HistoryTransactionStateInitial value) initial,
     required TResult Function(HistoryTransactionStateLoading value) loading,
     required TResult Function(HistoryTransactionStateLoaded value) loaded,
+    required TResult Function(GetUrlDetailTransactionSuccess value)
+        getUrlDetailTransactionSuccess,
     required TResult Function(HistoryTransactionStateError value) error,
     required TResult Function(HistoryTransactionStateLoadingHistory value)
         loadingHistory,
@@ -1032,6 +1279,8 @@ class _$HistoryTransactionStateRefreshHistory
     TResult Function(HistoryTransactionStateInitial value)? initial,
     TResult Function(HistoryTransactionStateLoading value)? loading,
     TResult Function(HistoryTransactionStateLoaded value)? loaded,
+    TResult Function(GetUrlDetailTransactionSuccess value)?
+        getUrlDetailTransactionSuccess,
     TResult Function(HistoryTransactionStateError value)? error,
     TResult Function(HistoryTransactionStateLoadingHistory value)?
         loadingHistory,
@@ -1048,6 +1297,8 @@ class _$HistoryTransactionStateRefreshHistory
     TResult Function(HistoryTransactionStateInitial value)? initial,
     TResult Function(HistoryTransactionStateLoading value)? loading,
     TResult Function(HistoryTransactionStateLoaded value)? loaded,
+    TResult Function(GetUrlDetailTransactionSuccess value)?
+        getUrlDetailTransactionSuccess,
     TResult Function(HistoryTransactionStateError value)? error,
     TResult Function(HistoryTransactionStateLoadingHistory value)?
         loadingHistory,
@@ -1147,6 +1398,7 @@ class _$HistoryTransactionStateSuccess
     required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function(bool isLoading) loaded,
+    required TResult Function(String url) getUrlDetailTransactionSuccess,
     required TResult Function(String message) error,
     required TResult Function() loadingHistory,
     required TResult Function() refreshHistory,
@@ -1162,6 +1414,7 @@ class _$HistoryTransactionStateSuccess
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function(bool isLoading)? loaded,
+    TResult Function(String url)? getUrlDetailTransactionSuccess,
     TResult Function(String message)? error,
     TResult Function()? loadingHistory,
     TResult Function()? refreshHistory,
@@ -1176,6 +1429,7 @@ class _$HistoryTransactionStateSuccess
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function(bool isLoading)? loaded,
+    TResult Function(String url)? getUrlDetailTransactionSuccess,
     TResult Function(String message)? error,
     TResult Function()? loadingHistory,
     TResult Function()? refreshHistory,
@@ -1194,6 +1448,8 @@ class _$HistoryTransactionStateSuccess
     required TResult Function(HistoryTransactionStateInitial value) initial,
     required TResult Function(HistoryTransactionStateLoading value) loading,
     required TResult Function(HistoryTransactionStateLoaded value) loaded,
+    required TResult Function(GetUrlDetailTransactionSuccess value)
+        getUrlDetailTransactionSuccess,
     required TResult Function(HistoryTransactionStateError value) error,
     required TResult Function(HistoryTransactionStateLoadingHistory value)
         loadingHistory,
@@ -1211,6 +1467,8 @@ class _$HistoryTransactionStateSuccess
     TResult Function(HistoryTransactionStateInitial value)? initial,
     TResult Function(HistoryTransactionStateLoading value)? loading,
     TResult Function(HistoryTransactionStateLoaded value)? loaded,
+    TResult Function(GetUrlDetailTransactionSuccess value)?
+        getUrlDetailTransactionSuccess,
     TResult Function(HistoryTransactionStateError value)? error,
     TResult Function(HistoryTransactionStateLoadingHistory value)?
         loadingHistory,
@@ -1227,6 +1485,8 @@ class _$HistoryTransactionStateSuccess
     TResult Function(HistoryTransactionStateInitial value)? initial,
     TResult Function(HistoryTransactionStateLoading value)? loading,
     TResult Function(HistoryTransactionStateLoaded value)? loaded,
+    TResult Function(GetUrlDetailTransactionSuccess value)?
+        getUrlDetailTransactionSuccess,
     TResult Function(HistoryTransactionStateError value)? error,
     TResult Function(HistoryTransactionStateLoadingHistory value)?
         loadingHistory,

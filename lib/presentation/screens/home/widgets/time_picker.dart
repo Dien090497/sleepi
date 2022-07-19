@@ -133,13 +133,11 @@ class _SFDatePickerState extends State<SFDatePicker> {
 
   @override
   Widget build(BuildContext context) {
-    _controller = FixedExtentScrollController(initialItem: widget.selectedTime);
     return CupertinoPicker(
       looping: true,
       selectionOverlay: const SizedBox(),
       offAxisFraction: widget.offAxisFraction,
       squeeze: 1,
-	  Controller: _controller,
       scrollController: controller,
       useMagnifier: widget.useMagnifier,
       itemExtent: 48.0,

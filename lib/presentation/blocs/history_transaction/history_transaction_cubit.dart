@@ -1,5 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:slee_fi/di/injector.dart';
+import 'package:slee_fi/usecase/current_network_explorer_usecase.dart';
 import 'package:slee_fi/usecase/get_history_transaction_usecase.dart';
 
 import 'history_transaction_state.dart';
@@ -11,6 +12,7 @@ class HistoryTransactionCubit extends Cubit<HistoryTransactionState> {
   late bool loadMore = false;
   late bool error = false;
 
+  final _networkExplorerUC = getIt<CurrentNetworkExplorerUseCase>();
   final _getHistoryTransactionUC = getIt<GetHistoryTransactionUseCase>();
 
 
@@ -26,9 +28,6 @@ class HistoryTransactionCubit extends Cubit<HistoryTransactionState> {
   }
 
   Future<void> loadMoreHistoryTransaction(HistoryTransactionParams params) async {
-    print('-------------PAGE-----------------');
-    print(params.page);
-    print(page);
     getHistoryTransaction(HistoryTransactionParams(
         tokenSymbol: params.tokenSymbol,
         typeHistory: params.typeHistory,
@@ -49,4 +48,18 @@ class HistoryTransactionCubit extends Cubit<HistoryTransactionState> {
       },
     );
   }
+
+
+  Future<void> getCurrentNetworkExplorer(String hash) async {
+    final result = await _networkExplorerUC.call(hash);
+    result.fold(
+          (l) {
+        emit(HistoryTransactionState.error('$l'));
+      },
+          (success) {
+        emit(HistoryTransactionState.getUrlDetailTransactionSuccess(success));
+      },
+    );
+  }
+
 }

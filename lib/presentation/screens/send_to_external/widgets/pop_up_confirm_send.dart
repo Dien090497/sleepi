@@ -1,6 +1,5 @@
 import 'package:dartz/dartz.dart' as dartz;
 import 'package:flutter/material.dart';
-import 'package:flutter/scheduler.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:slee_fi/common/routes/app_routes.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
@@ -37,7 +36,6 @@ class PopUpConfirmSend extends StatefulWidget {
 }
 
 class _PopUpConfirmSendState extends State<PopUpConfirmSend> {
-  bool isDisabled = true;
   String ownerAddress = '';
   @override
   Widget build(BuildContext context) {
@@ -90,12 +88,6 @@ class _PopUpConfirmSendState extends State<PopUpConfirmSend> {
                                   value: widget.valueInEther,
                                 )),
                                 builder: (context, snapshot) {
-                                  if(snapshot.hasData){
-                                    SchedulerBinding.instance
-                                        .addPostFrameCallback((_) => setState(() {
-                                      isDisabled = false;
-                                    }));
-                                  }
                                   return Text(
                                     snapshot.hasData
                                         ? '${snapshot.data!.getOrElse(() => 0)} ${widget.transferToken ? widget.arg?.symbol : 'AVAX'}'
@@ -169,7 +161,6 @@ class _PopUpConfirmSendState extends State<PopUpConfirmSend> {
                                 textStyle: TextStyles.bold14LightWhite,
                                 color: AppColors.blue,
                                 width: double.infinity,
-                                disabled: isDisabled,
                                 onPressed: () {
                                   if (widget.transferToken) {
                                     cubit.sendTokenExternal(widget.toAddress,

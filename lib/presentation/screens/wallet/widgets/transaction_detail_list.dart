@@ -16,6 +16,7 @@ import 'package:slee_fi/presentation/blocs/history_transaction/history_transacti
 import 'package:slee_fi/presentation/blocs/history_transaction/history_transaction_state.dart';
 import 'package:slee_fi/resources/resources.dart';
 import 'package:slee_fi/usecase/get_history_transaction_usecase.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class TransactionDetailList extends StatefulWidget {
   const TransactionDetailList(
@@ -30,41 +31,21 @@ class TransactionDetailList extends StatefulWidget {
 }
 
 class _TransactionDetailListState extends State<TransactionDetailList> {
-  ScrollController controller = ScrollController();
   final RefreshController _refreshController =
   RefreshController(initialRefresh: false);
   List<TransactionIsarModel> transactionList = [];
   bool loadMore = false;
   bool isLoading = false;
+  String urlDetailTransaction = '';
 
-  Future scrollListener() async {
-    if (controller.position.pixels <
-        (controller.position.maxScrollExtent * .90)) {
-      await loadMore();
-    }
-  }
-
-  Future loadMore() async {
-    currentPage += 1;
-    if (isLoadMore) return;
-    setState(() => isLoadMore = true);
-    WalletCubit().getHistoryTransaction(HistoryTransactionParams(
-        typeHistory: widget.typeHistory!.typeHistory,
-        tokenSymbol: widget.typeHistory!.tokenSymbol,
-        page: currentPage));
-    setState(() => isLoadMore = false);
-  }
 
   @override
   void initState() {
     super.initState();
-    controller.addListener(scrollListener);
   }
 
   @override
   void dispose() {
-    controller.removeListener(scrollListener);
-    controller.dispose();
     super.dispose();
   }
 
@@ -94,6 +75,12 @@ class _TransactionDetailListState extends State<TransactionDetailList> {
               loadMore = false;
             });
           }
+          if(state is GetUrlDetailTransactionSuccess){
+            urlDetailTransaction = state.url;
+            print(urlDetailTransaction);
+            final url = Uri.parse(urlDetailTransaction);
+            launchUrl(url);
+          }
         },
         builder: (context, state) {
           final cubit = context.read<HistoryTransactionCubit>();
@@ -121,7 +108,6 @@ class _TransactionDetailListState extends State<TransactionDetailList> {
                   cubit.loadMoreHistoryTransaction(widget.typeHistory!);
                 },
                 child: ListView.builder(
-                  controller: controller,
                   itemCount: transactionList.length,
                   physics: const ClampingScrollPhysics(),
                   shrinkWrap: true,
@@ -134,12 +120,9 @@ class _TransactionDetailListState extends State<TransactionDetailList> {
                     //   valueInEther = (value.getInWei / BigInt.from(pow(10, 18)));
                     // }
                     return SFCard(
-                      // onTap: () async {
-                      //   final url = Uri.parse(Const.avascanUrl);
-                      //   if (await canLaunchUrl(url)) {
-                      //     launchUrl(url);
-                      //   }
-                      // },
+                      onTap: () async {
+                       cubit.getCurrentNetworkExplorer(transactionList[index].transactionHash ?? '');
+                      },
                       radius: 8,
                       margin: EdgeInsets.only(
                           bottom: transactionList.length == index + 1

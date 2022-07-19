@@ -33,8 +33,6 @@ class TransactionRemoteDataSource{
       final historyTransaction = await _historyDataSource.getAllHistory();
       int start = 5*(params.page! - 1);
       int end = 5*params.page! > historyTransaction.length ? historyTransaction.length : 5*params.page!;
-      print('-------------PAGE-DATASOURCE-----------------');
-      print(params.page);
       if(historyTransaction.isNotEmpty){
         final walletId = _getStorageDataSource.getCurrentWalletId();
         final wallet = await _isarDataSource.getWalletAt(walletId);
@@ -53,12 +51,8 @@ class TransactionRemoteDataSource{
           var block = await _web3dataSource.getDetailTransaction(transactionByToken[i].transactionHash);
           final String url = '${network.explorers.first.url}/api?module=account&action=${params.typeHistory}&address=$ethereumAddress&startblock=${block.blockNumber}&endblock=${block.blockNumber}&sort=desc&apikey=$apiKey"';
           final dataResponse = await dio.get(url);
-          final historytx = HistoryModel.fromJson(dataResponse.data as Map<String, dynamic>);
-          transactionsHistory.addAll(historytx.result);
-          print('----------------historyTransaction-----------------');
-          print("RESULT :${historytx.result}");
-          print(transactionsHistory.first.blockNumber);
-          print(url);
+          final historyTx = HistoryModel.fromJson(dataResponse.data as Map<String, dynamic>);
+          transactionsHistory.addAll(historyTx.result);
         }
       }
 
