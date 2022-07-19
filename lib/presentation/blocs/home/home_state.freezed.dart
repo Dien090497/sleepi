@@ -25,7 +25,6 @@ mixin _$HomeState {
             BedEntity? selectedBed,
             BedEntity? item,
             List<ItemEntity>? itemList,
-            List<LuckyBoxEntity> luckyBoxes,
             ItemEntity? selectedItem,
             String errorMessage,
             ErrorType errorType,
@@ -54,7 +53,6 @@ mixin _$HomeState {
             BedEntity? selectedBed,
             BedEntity? item,
             List<ItemEntity>? itemList,
-            List<LuckyBoxEntity> luckyBoxes,
             ItemEntity? selectedItem,
             String errorMessage,
             ErrorType errorType,
@@ -83,7 +81,6 @@ mixin _$HomeState {
             BedEntity? selectedBed,
             BedEntity? item,
             List<ItemEntity>? itemList,
-            List<LuckyBoxEntity> luckyBoxes,
             ItemEntity? selectedItem,
             String errorMessage,
             ErrorType errorType,
@@ -202,7 +199,6 @@ class _$HomeInitial with DiagnosticableTreeMixin implements HomeInitial {
             BedEntity? selectedBed,
             BedEntity? item,
             List<ItemEntity>? itemList,
-            List<LuckyBoxEntity> luckyBoxes,
             ItemEntity? selectedItem,
             String errorMessage,
             ErrorType errorType,
@@ -234,7 +230,6 @@ class _$HomeInitial with DiagnosticableTreeMixin implements HomeInitial {
             BedEntity? selectedBed,
             BedEntity? item,
             List<ItemEntity>? itemList,
-            List<LuckyBoxEntity> luckyBoxes,
             ItemEntity? selectedItem,
             String errorMessage,
             ErrorType errorType,
@@ -266,7 +261,6 @@ class _$HomeInitial with DiagnosticableTreeMixin implements HomeInitial {
             BedEntity? selectedBed,
             BedEntity? item,
             List<ItemEntity>? itemList,
-            List<LuckyBoxEntity> luckyBoxes,
             ItemEntity? selectedItem,
             String errorMessage,
             ErrorType errorType,
@@ -390,7 +384,6 @@ class _$HomeLoading with DiagnosticableTreeMixin implements HomeLoading {
             BedEntity? selectedBed,
             BedEntity? item,
             List<ItemEntity>? itemList,
-            List<LuckyBoxEntity> luckyBoxes,
             ItemEntity? selectedItem,
             String errorMessage,
             ErrorType errorType,
@@ -422,7 +415,6 @@ class _$HomeLoading with DiagnosticableTreeMixin implements HomeLoading {
             BedEntity? selectedBed,
             BedEntity? item,
             List<ItemEntity>? itemList,
-            List<LuckyBoxEntity> luckyBoxes,
             ItemEntity? selectedItem,
             String errorMessage,
             ErrorType errorType,
@@ -454,7 +446,6 @@ class _$HomeLoading with DiagnosticableTreeMixin implements HomeLoading {
             BedEntity? selectedBed,
             BedEntity? item,
             List<ItemEntity>? itemList,
-            List<LuckyBoxEntity> luckyBoxes,
             ItemEntity? selectedItem,
             String errorMessage,
             ErrorType errorType,
@@ -535,7 +526,6 @@ abstract class _$$HomeLoadedCopyWith<$Res> {
       BedEntity? selectedBed,
       BedEntity? item,
       List<ItemEntity>? itemList,
-      List<LuckyBoxEntity> luckyBoxes,
       ItemEntity? selectedItem,
       String errorMessage,
       ErrorType errorType,
@@ -572,7 +562,6 @@ class __$$HomeLoadedCopyWithImpl<$Res> extends _$HomeStateCopyWithImpl<$Res>
     Object? selectedBed = freezed,
     Object? item = freezed,
     Object? itemList = freezed,
-    Object? luckyBoxes = freezed,
     Object? selectedItem = freezed,
     Object? errorMessage = freezed,
     Object? errorType = freezed,
@@ -605,10 +594,6 @@ class __$$HomeLoadedCopyWithImpl<$Res> extends _$HomeStateCopyWithImpl<$Res>
           ? _value._itemList
           : itemList // ignore: cast_nullable_to_non_nullable
               as List<ItemEntity>?,
-      luckyBoxes: luckyBoxes == freezed
-          ? _value._luckyBoxes
-          : luckyBoxes // ignore: cast_nullable_to_non_nullable
-              as List<LuckyBoxEntity>,
       selectedItem: selectedItem == freezed
           ? _value.selectedItem
           : selectedItem // ignore: cast_nullable_to_non_nullable
@@ -710,7 +695,6 @@ class _$HomeLoaded with DiagnosticableTreeMixin implements HomeLoaded {
       required this.selectedBed,
       this.item,
       final List<ItemEntity>? itemList,
-      final List<LuckyBoxEntity> luckyBoxes = const [],
       this.selectedItem,
       this.errorMessage = '',
       this.errorType = ErrorType.none,
@@ -726,8 +710,7 @@ class _$HomeLoaded with DiagnosticableTreeMixin implements HomeLoaded {
       this.startTracking = false,
       this.userStatusTracking})
       : _bedList = bedList,
-        _itemList = itemList,
-        _luckyBoxes = luckyBoxes;
+        _itemList = itemList;
 
   final List<BedEntity> _bedList;
   @override
@@ -747,14 +730,6 @@ class _$HomeLoaded with DiagnosticableTreeMixin implements HomeLoaded {
     if (value == null) return null;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(value);
-  }
-
-  final List<LuckyBoxEntity> _luckyBoxes;
-  @override
-  @JsonKey()
-  List<LuckyBoxEntity> get luckyBoxes {
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_luckyBoxes);
   }
 
   @override
@@ -797,7 +772,7 @@ class _$HomeLoaded with DiagnosticableTreeMixin implements HomeLoaded {
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'HomeState.loaded(bedList: $bedList, selectedBed: $selectedBed, item: $item, itemList: $itemList, luckyBoxes: $luckyBoxes, selectedItem: $selectedItem, errorMessage: $errorMessage, errorType: $errorType, loadMoreBed: $loadMoreBed, loadMoreItem: $loadMoreItem, loading: $loading, enableInsurance: $enableInsurance, enableAlarm: $enableAlarm, tokenEarn: $tokenEarn, hour: $hour, minute: $minute, time: $time, startTracking: $startTracking, userStatusTracking: $userStatusTracking)';
+    return 'HomeState.loaded(bedList: $bedList, selectedBed: $selectedBed, item: $item, itemList: $itemList, selectedItem: $selectedItem, errorMessage: $errorMessage, errorType: $errorType, loadMoreBed: $loadMoreBed, loadMoreItem: $loadMoreItem, loading: $loading, enableInsurance: $enableInsurance, enableAlarm: $enableAlarm, tokenEarn: $tokenEarn, hour: $hour, minute: $minute, time: $time, startTracking: $startTracking, userStatusTracking: $userStatusTracking)';
   }
 
   @override
@@ -809,7 +784,6 @@ class _$HomeLoaded with DiagnosticableTreeMixin implements HomeLoaded {
       ..add(DiagnosticsProperty('selectedBed', selectedBed))
       ..add(DiagnosticsProperty('item', item))
       ..add(DiagnosticsProperty('itemList', itemList))
-      ..add(DiagnosticsProperty('luckyBoxes', luckyBoxes))
       ..add(DiagnosticsProperty('selectedItem', selectedItem))
       ..add(DiagnosticsProperty('errorMessage', errorMessage))
       ..add(DiagnosticsProperty('errorType', errorType))
@@ -837,8 +811,6 @@ class _$HomeLoaded with DiagnosticableTreeMixin implements HomeLoaded {
             const DeepCollectionEquality().equals(other.item, item) &&
             const DeepCollectionEquality().equals(other._itemList, _itemList) &&
             const DeepCollectionEquality()
-                .equals(other._luckyBoxes, _luckyBoxes) &&
-            const DeepCollectionEquality()
                 .equals(other.selectedItem, selectedItem) &&
             const DeepCollectionEquality()
                 .equals(other.errorMessage, errorMessage) &&
@@ -863,28 +835,26 @@ class _$HomeLoaded with DiagnosticableTreeMixin implements HomeLoaded {
   }
 
   @override
-  int get hashCode => Object.hashAll([
-        runtimeType,
-        const DeepCollectionEquality().hash(_bedList),
-        const DeepCollectionEquality().hash(selectedBed),
-        const DeepCollectionEquality().hash(item),
-        const DeepCollectionEquality().hash(_itemList),
-        const DeepCollectionEquality().hash(_luckyBoxes),
-        const DeepCollectionEquality().hash(selectedItem),
-        const DeepCollectionEquality().hash(errorMessage),
-        const DeepCollectionEquality().hash(errorType),
-        const DeepCollectionEquality().hash(loadMoreBed),
-        const DeepCollectionEquality().hash(loadMoreItem),
-        const DeepCollectionEquality().hash(loading),
-        const DeepCollectionEquality().hash(enableInsurance),
-        const DeepCollectionEquality().hash(enableAlarm),
-        const DeepCollectionEquality().hash(tokenEarn),
-        const DeepCollectionEquality().hash(hour),
-        const DeepCollectionEquality().hash(minute),
-        const DeepCollectionEquality().hash(time),
-        const DeepCollectionEquality().hash(startTracking),
-        const DeepCollectionEquality().hash(userStatusTracking)
-      ]);
+  int get hashCode => Object.hash(
+      runtimeType,
+      const DeepCollectionEquality().hash(_bedList),
+      const DeepCollectionEquality().hash(selectedBed),
+      const DeepCollectionEquality().hash(item),
+      const DeepCollectionEquality().hash(_itemList),
+      const DeepCollectionEquality().hash(selectedItem),
+      const DeepCollectionEquality().hash(errorMessage),
+      const DeepCollectionEquality().hash(errorType),
+      const DeepCollectionEquality().hash(loadMoreBed),
+      const DeepCollectionEquality().hash(loadMoreItem),
+      const DeepCollectionEquality().hash(loading),
+      const DeepCollectionEquality().hash(enableInsurance),
+      const DeepCollectionEquality().hash(enableAlarm),
+      const DeepCollectionEquality().hash(tokenEarn),
+      const DeepCollectionEquality().hash(hour),
+      const DeepCollectionEquality().hash(minute),
+      const DeepCollectionEquality().hash(time),
+      const DeepCollectionEquality().hash(startTracking),
+      const DeepCollectionEquality().hash(userStatusTracking));
 
   @JsonKey(ignore: true)
   @override
@@ -901,7 +871,6 @@ class _$HomeLoaded with DiagnosticableTreeMixin implements HomeLoaded {
             BedEntity? selectedBed,
             BedEntity? item,
             List<ItemEntity>? itemList,
-            List<LuckyBoxEntity> luckyBoxes,
             ItemEntity? selectedItem,
             String errorMessage,
             ErrorType errorType,
@@ -925,7 +894,6 @@ class _$HomeLoaded with DiagnosticableTreeMixin implements HomeLoaded {
         selectedBed,
         item,
         itemList,
-        luckyBoxes,
         selectedItem,
         errorMessage,
         errorType,
@@ -952,7 +920,6 @@ class _$HomeLoaded with DiagnosticableTreeMixin implements HomeLoaded {
             BedEntity? selectedBed,
             BedEntity? item,
             List<ItemEntity>? itemList,
-            List<LuckyBoxEntity> luckyBoxes,
             ItemEntity? selectedItem,
             String errorMessage,
             ErrorType errorType,
@@ -976,7 +943,6 @@ class _$HomeLoaded with DiagnosticableTreeMixin implements HomeLoaded {
         selectedBed,
         item,
         itemList,
-        luckyBoxes,
         selectedItem,
         errorMessage,
         errorType,
@@ -1003,7 +969,6 @@ class _$HomeLoaded with DiagnosticableTreeMixin implements HomeLoaded {
             BedEntity? selectedBed,
             BedEntity? item,
             List<ItemEntity>? itemList,
-            List<LuckyBoxEntity> luckyBoxes,
             ItemEntity? selectedItem,
             String errorMessage,
             ErrorType errorType,
@@ -1029,7 +994,6 @@ class _$HomeLoaded with DiagnosticableTreeMixin implements HomeLoaded {
           selectedBed,
           item,
           itemList,
-          luckyBoxes,
           selectedItem,
           errorMessage,
           errorType,
@@ -1095,7 +1059,6 @@ abstract class HomeLoaded implements HomeState {
       required final BedEntity? selectedBed,
       final BedEntity? item,
       final List<ItemEntity>? itemList,
-      final List<LuckyBoxEntity> luckyBoxes,
       final ItemEntity? selectedItem,
       final String errorMessage,
       final ErrorType errorType,
@@ -1115,7 +1078,6 @@ abstract class HomeLoaded implements HomeState {
   BedEntity? get selectedBed;
   BedEntity? get item;
   List<ItemEntity>? get itemList;
-  List<LuckyBoxEntity> get luckyBoxes;
   ItemEntity? get selectedItem;
   String get errorMessage;
   ErrorType get errorType;
@@ -1214,7 +1176,6 @@ class _$HomeStartError with DiagnosticableTreeMixin implements HomeStartError {
             BedEntity? selectedBed,
             BedEntity? item,
             List<ItemEntity>? itemList,
-            List<LuckyBoxEntity> luckyBoxes,
             ItemEntity? selectedItem,
             String errorMessage,
             ErrorType errorType,
@@ -1246,7 +1207,6 @@ class _$HomeStartError with DiagnosticableTreeMixin implements HomeStartError {
             BedEntity? selectedBed,
             BedEntity? item,
             List<ItemEntity>? itemList,
-            List<LuckyBoxEntity> luckyBoxes,
             ItemEntity? selectedItem,
             String errorMessage,
             ErrorType errorType,
@@ -1278,7 +1238,6 @@ class _$HomeStartError with DiagnosticableTreeMixin implements HomeStartError {
             BedEntity? selectedBed,
             BedEntity? item,
             List<ItemEntity>? itemList,
-            List<LuckyBoxEntity> luckyBoxes,
             ItemEntity? selectedItem,
             String errorMessage,
             ErrorType errorType,
@@ -1433,7 +1392,6 @@ class _$HomeError with DiagnosticableTreeMixin implements HomeError {
             BedEntity? selectedBed,
             BedEntity? item,
             List<ItemEntity>? itemList,
-            List<LuckyBoxEntity> luckyBoxes,
             ItemEntity? selectedItem,
             String errorMessage,
             ErrorType errorType,
@@ -1465,7 +1423,6 @@ class _$HomeError with DiagnosticableTreeMixin implements HomeError {
             BedEntity? selectedBed,
             BedEntity? item,
             List<ItemEntity>? itemList,
-            List<LuckyBoxEntity> luckyBoxes,
             ItemEntity? selectedItem,
             String errorMessage,
             ErrorType errorType,
@@ -1497,7 +1454,6 @@ class _$HomeError with DiagnosticableTreeMixin implements HomeError {
             BedEntity? selectedBed,
             BedEntity? item,
             List<ItemEntity>? itemList,
-            List<LuckyBoxEntity> luckyBoxes,
             ItemEntity? selectedItem,
             String errorMessage,
             ErrorType errorType,

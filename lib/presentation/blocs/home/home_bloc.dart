@@ -8,17 +8,13 @@ import 'package:slee_fi/entities/bed_entity/bed_entity.dart';
 import 'package:slee_fi/entities/item_entity/item_entity.dart';
 import 'package:slee_fi/presentation/blocs/home/home_state.dart';
 import 'package:slee_fi/schema/param_filler_item_fetch/filter_item_schema.dart';
-import 'package:slee_fi/schema/speed_up_lucky_box_schema/speed_up_lucky_box_schema.dart';
 import 'package:slee_fi/schema/start_tracking/start_tracking_schema.dart';
 import 'package:slee_fi/usecase/add_item_to_bed_usecase.dart';
 import 'package:slee_fi/usecase/estimate_tracking_usecase.dart';
 import 'package:slee_fi/usecase/fetch_bed_usecase.dart';
 import 'package:slee_fi/usecase/fetch_item_owner_usecase.dart';
-import 'package:slee_fi/usecase/fetch_lucky_box_usecase.dart';
 import 'package:slee_fi/usecase/get_user_status_tracking_usecase.dart';
-import 'package:slee_fi/usecase/open_lucky_box_usecase.dart';
 import 'package:slee_fi/usecase/remove_item_from_bed_usecase.dart';
-import 'package:slee_fi/usecase/speed_up_lucky_box_usecase.dart';
 import 'package:slee_fi/usecase/start_sleep_tracking_usecase.dart';
 import 'package:slee_fi/usecase/usecase.dart';
 
@@ -41,11 +37,8 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     on<StartTracking>(_startTracking);
     on<ChangeInsurance>(_changeInsurance);
     on<ChangeStatusAlarm>(_changeStatusAlarm);
-    on<FetchLuckyBox>(_fetchLuckyBox);
-    on<SpeedUpLuckyBox>(_speedUpLuckyBox);
     on<ChangeHour>(_changeHour);
     on<ChangeMinute>(_changeMinute);
-    on<OpenLuckyBox>(_openLuckyBox);
   }
 
   final _fetchListBedUC = getIt<FetchBedUseCase>();
@@ -54,9 +47,6 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
   final _fetchItemUC = getIt<FetchItemOwnerUseCase>();
   final _estimateTrackingUC = getIt<EstimateTrackingUseCase>();
   final _userStatusTrackingUC = getIt<GetUserStatusTrackingUseCase>();
-  final _fetchLuckyBoxUC = getIt<FetchLuckyBoxUseCase>();
-  final _speedUpLuckyBoxUC = getIt<SpeedUpLuckyBoxUseCase>();
-  final _openLuckyBoxUC = getIt<OpenLuckyBoxUseCase>();
   final _startSleepTrackingUC = getIt<StartSleepTrackingUseCase>();
 
   int currentBedId = -1;
@@ -289,7 +279,6 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
             minute: DateTime.now().minute,
             hour: DateTime.now().hour,
             time: 0));
-        add(FetchLuckyBox());
       });
     }
   }
@@ -329,32 +318,6 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     }
   }
 
-  void _fetchLuckyBox(FetchLuckyBox event, Emitter<HomeState> emit) async {
-    final currentState = state;
-    if (currentState is HomeLoaded) {
-      var result = await _fetchLuckyBoxUC.call(NoParams());
-      result.fold((l) {}, (r) {
-        emit(currentState.copyWith(
-            luckyBoxes: r.map((e) => e.toEntity()).toList()));
-        add(EstimateTracking());
-      });
-    }
-  }
-
-  FutureOr<void> _speedUpLuckyBox(
-      SpeedUpLuckyBox event, Emitter<HomeState> emit) async {
-    var result = await _speedUpLuckyBoxUC.call(SpeedUpLuckyBoxSchema(event.id));
-
-    result.fold((l) => null, (r) {
-      final currentState = state;
-      if (currentState is HomeLoaded) {
-        final luckyBoxes = currentState.luckyBoxes;
-        luckyBoxes.removeWhere((element) => element.id == event.id);
-        emit(currentState.copyWith(luckyBoxes: luckyBoxes));
-      }
-    });
-  }
-
   FutureOr<void> _changeHour(ChangeHour event, Emitter<HomeState> emit) {
     final currentState = state;
 
@@ -374,19 +337,6 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     }
   }
 
-  FutureOr<void> _openLuckyBox(
-      OpenLuckyBox event, Emitter<HomeState> emit) async {
-    var result = await _openLuckyBoxUC.call(event.id);
-    result.fold((l) => null, (r) {
-      final currentState = state;
-
-      if (currentState is HomeLoaded) {
-        var list = currentState.luckyBoxes;
-        list.removeWhere((element) => element.id == event.id);
-        emit(currentState.copyWith(luckyBoxes: list));
-      }
-    });
-  }
 
   int _getTimeWithHour(int hour, HomeState state) {
     if (state is! HomeLoaded) return 0;

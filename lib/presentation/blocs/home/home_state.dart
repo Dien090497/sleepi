@@ -3,7 +3,6 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:slee_fi/common/enum/enum.dart';
 import 'package:slee_fi/entities/bed_entity/bed_entity.dart';
 import 'package:slee_fi/entities/item_entity/item_entity.dart';
-import 'package:slee_fi/entities/lucky_box/lucky_box_entity.dart';
 import 'package:slee_fi/models/user_status_tracking_model/user_status_tracking_model.dart';
 
 part 'home_state.freezed.dart';
@@ -19,7 +18,6 @@ class HomeState with _$HomeState {
     required BedEntity? selectedBed,
     BedEntity? item,
     List<ItemEntity>? itemList,
-    @Default([]) List<LuckyBoxEntity> luckyBoxes,
     ItemEntity? selectedItem,
     @Default('') String errorMessage,
     @Default(ErrorType.none) ErrorType errorType,
