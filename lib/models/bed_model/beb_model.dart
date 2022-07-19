@@ -46,6 +46,7 @@ class BedModel {
   final dynamic special;
   final dynamic resilience;
   final dynamic durability;
+  final int? socket;
   final List<JewelModel>? jewels;
   final int tokenId;
   final Nft nft;
@@ -70,6 +71,7 @@ class BedModel {
       this.level,
       this.bedMint,
       this.efficiency,
+      this.socket,
       this.luck,
       this.bonus,
       this.special,
@@ -130,7 +132,7 @@ class BedModel {
       startTime: startTime,
       endTime: endTime,
       insurancePercent: insurancePercent,
-      socket: null,
+      socket: socket,
       jewels: jewels != null ? jewels!.map((e) => e.toEntity()).toList() : [],
       owner: owner,
       status: nft.status,
