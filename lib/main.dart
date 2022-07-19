@@ -11,6 +11,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:logger/logger.dart';
+import 'package:sentry_flutter/sentry_flutter.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:slee_fi/app.dart';
 import 'package:slee_fi/common/const/const.dart';
@@ -32,20 +33,34 @@ void main() async {
   initializeService();
 
   /// Lock in portrait mode only
-  SystemChrome.setPreferredOrientations([
+  await SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp,
     DeviceOrientation.portraitDown,
-  ]).then((_) {
-    BlocOverrides.runZoned(
-      () => runApp(EasyLocalization(
-        supportedLocales: Const.locales,
-        path: 'assets/translations',
-        fallbackLocale: Const.localeEN,
-        child: const MyApp(),
-      )),
-      blocObserver: AppBlocObserver(),
-    );
-  });
+  ]);
+
+  await SentryFlutter.init(
+    (options) {
+      options.dsn =
+          'https://9afba6dcc9e742eea36ba51bef7238ad@o1325661.ingest.sentry.io/6584991';
+      // Set tracesSampleRate to 1.0 to capture 100% of transactions for performance monitoring.
+      // We recommend adjusting this value in production.
+      options.tracesSampleRate = 1.0;
+    },
+    appRunner: () {
+      return BlocOverrides.runZoned(
+        () => runApp(DefaultAssetBundle(
+          bundle: SentryAssetBundle(),
+          child: EasyLocalization(
+            supportedLocales: Const.locales,
+            path: 'assets/translations',
+            fallbackLocale: Const.localeEN,
+            child: const MyApp(),
+          ),
+        )),
+        blocObserver: AppBlocObserver(),
+      );
+    },
+  );
 }
 
 /// Custom [BlocObserver] that observes all bloc and cubit state changes.
@@ -119,14 +134,13 @@ Future<void> onStart(ServiceInstance service) async {
   final int timeWakeUp = preferences.getInt(Const.time) ?? 0;
   final int sound = preferences.getInt(Const.sound) ?? 0;
   DateTime wakeUp = DateTime.fromMillisecondsSinceEpoch(timeWakeUp);
-  final int time = wakeUp
-      .difference(DateTime.now())
-      .inMinutes;
+  final int time = wakeUp.difference(DateTime.now()).inMinutes;
   // bring to foreground
   if (service is AndroidServiceInstance) {
     service.setForegroundNotificationInfo(
       title: "Sleep Tracking...",
-      content: "Alarm: ${DateFormat('HH:mm dd/MM/yyyy').format(wakeUp).toString()}",
+      content:
+          "Alarm: ${DateFormat('HH:mm dd/MM/yyyy').format(wakeUp).toString()}",
     );
   }
   Timer.periodic(Duration(minutes: time), (timer) async {

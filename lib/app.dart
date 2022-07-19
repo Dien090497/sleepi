@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
+import 'package:sentry_flutter/sentry_flutter.dart';
 import 'package:slee_fi/common/routes/app_routes.dart';
 import 'package:slee_fi/common/style/theme.dart';
 import 'package:slee_fi/common/widgets/phoenix.dart';
@@ -41,7 +42,10 @@ class MyApp extends StatelessWidget {
                 routes: AppRoutes.routes,
                 initialRoute: R.splash,
                 debugShowCheckedModeBanner: false,
-                navigatorObservers: [routeObserver],
+                navigatorObservers: [
+                  routeObserver,
+                  SentryNavigatorObserver(),
+                ],
               ),
             );
           },
