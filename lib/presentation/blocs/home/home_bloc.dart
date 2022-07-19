@@ -199,6 +199,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
             minute: DateTime.now().minute,
             hour: DateTime.now().hour,
             time: 0));
+        add(EstimateTracking());
       });
     }
   }
