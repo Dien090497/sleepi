@@ -43,10 +43,9 @@ class AlarmBell extends StatelessWidget {
                 fromRoute: R.bottomNavigation),
           );
         }
-        if (state is HomeStartError) {
+        if (state is HomeLoaded && state.errorMessage!='') {
           Navigator.pop(context, true);
-          showMessageDialog(context, state.message)
-              .then((_) => context.read<HomeBloc>().add(const RefreshBed()));
+          showMessageDialog(context, state.errorMessage);
         }
       },
       builder: (context, state) {

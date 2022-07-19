@@ -201,48 +201,45 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
       var result = await _userStatusTrackingUC.call(NoParams());
       result.fold((l) => null, (r) {
         emit(currentState.copyWith(
-            userStatusTracking: r,
-            startTracking: false,
-            time: 0));
+            userStatusTracking: r, startTracking: false, time: 0));
         add(EstimateTracking());
       });
     }
   }
 
   void _startTracking(StartTracking event, Emitter<HomeState> emit) async {
-    HealthFactory health = HealthFactory();
+    final currentState = state;
+    if (currentState is HomeLoaded && currentState.bedList.isNotEmpty) {
+      HealthFactory health = HealthFactory();
 
-    var types = [
-      HealthDataType.SLEEP_IN_BED,
-      HealthDataType.SLEEP_ASLEEP,
-      HealthDataType.SLEEP_AWAKE,
-      HealthDataType.SLEEP_DEEP,
-      HealthDataType.SLEEP_REM,
-      HealthDataType.SLEEP_LIGHT,
-    ];
+      var types = [
+        HealthDataType.SLEEP_IN_BED,
+        HealthDataType.SLEEP_ASLEEP,
+        HealthDataType.SLEEP_AWAKE,
+        HealthDataType.SLEEP_DEEP,
+        HealthDataType.SLEEP_REM,
+        HealthDataType.SLEEP_LIGHT,
+      ];
 
-    bool accessWasGranted = await health.requestAuthorization(types);
+      bool accessWasGranted = await health.requestAuthorization(types);
 
-    if (accessWasGranted) {
-      final currentState = state;
-      if (currentState is HomeLoaded && currentState.bedList.isNotEmpty) {
+      if (accessWasGranted) {
         DateTime wakeUp =
-        DateTime.now().add(Duration(minutes: currentState.time));
+            DateTime.now().add(Duration(minutes: currentState.time));
         var result = await _startSleepTrackingUC.call(StartTrackingSchema(
           isEnableInsurance: currentState.enableInsurance,
           bedUsed: currentState.selectedBed!.id,
-          wakeUp: '${wakeUp
-              .toUtc()
-              .millisecondsSinceEpoch ~/ 1000}',
+          wakeUp: '${wakeUp.toUtc().millisecondsSinceEpoch ~/ 1000}',
           alrm: currentState.enableAlarm,
           itemUsed: currentState.selectedItem?.id ?? 0,
         ));
-        result.fold((l) => emit(HomeState.startError('$l')), (r) {
+        result.fold((l) => emit(currentState.copyWith(errorMessage: '$l')),
+            (r) {
           emit(currentState.copyWith(startTracking: true));
         });
+      } else {
+        emit(currentState.copyWith(errorMessage: LocaleKeys.not_granted));
       }
-    }else {
-      emit(const HomeState.startError(LocaleKeys.not_granted));
     }
   }
 
