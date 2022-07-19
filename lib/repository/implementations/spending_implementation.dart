@@ -4,6 +4,7 @@ import 'package:dartz/dartz.dart';
 import 'package:injectable/injectable.dart';
 import 'package:slee_fi/common/const/const.dart';
 import 'package:slee_fi/common/extensions/num_ext.dart';
+import 'package:slee_fi/datasources/local/secure_storage.dart';
 import 'package:slee_fi/datasources/remote/auth_datasource/auth_datasource.dart';
 import 'package:slee_fi/datasources/remote/network/spending_datasource.dart';
 import 'package:slee_fi/entities/staking/staking_entity.dart';
@@ -17,8 +18,10 @@ import 'package:web3dart/web3dart.dart';
 class SpendingImplementation extends ISpendingRepository {
   final SpendingDataSource _spendingDataSource;
   final AuthDataSource _authDataSource;
+  final SecureStorage _secureStorage;
 
-  SpendingImplementation(this._spendingDataSource, this._authDataSource);
+  SpendingImplementation(
+      this._spendingDataSource, this._authDataSource, this._secureStorage);
 
   @override
   Future<Either<Failure, String>> depositToken({
@@ -31,20 +34,24 @@ class SpendingImplementation extends ISpendingRepository {
       final amountWei = BigInt.from(amount * pow(10, 18));
       if (addressContract == Const.listTokenAddressTestNet[2]) {
         final hash = await _spendingDataSource.toSpendingAvax(
-            owner: owner,
-            amount: amountWei,
-            userId: BigInt.from(userId),
-            avax: EthereumAddress.fromHex(
-                "0x0000000000000000000000000000000000000000"),
-            transaction: Transaction(value: EtherAmount.inWei(amountWei)));
+          owner: owner,
+          amount: amountWei,
+          userId: BigInt.from(userId),
+          avax: EthereumAddress.fromHex(
+              "0x0000000000000000000000000000000000000000"),
+          transaction: Transaction(value: EtherAmount.inWei(amountWei)),
+          spendingAddress: await _secureStorage.readAddressContract() ?? '',
+        );
         return Right(hash);
       }
       final token = _spendingDataSource.token(addressContract);
       final hash = await _spendingDataSource.toSpending(
-          owner: owner,
-          amount: amountWei,
-          token: token,
-          userId: BigInt.from(userId));
+        owner: owner,
+        amount: amountWei,
+        token: token,
+        userId: BigInt.from(userId),
+        spendingAddress: await _secureStorage.readAddressContract() ?? '',
+      );
       return Right(hash);
     } catch (e) {
       return Left(FailureMessage('$e'));
@@ -117,7 +124,10 @@ class SpendingImplementation extends ISpendingRepository {
     try {
       final token = _spendingDataSource.token(tokenAddress);
       final result = await _spendingDataSource.allowance(
-          EthereumAddress.fromHex(ownerAddress), token);
+        await _secureStorage.readAddressContract() ?? '',
+        EthereumAddress.fromHex(ownerAddress),
+        token,
+      );
       return Right(result > BigInt.from(amount.etherToWei));
     } on Exception catch (e) {
       return Left(FailureMessage.fromException(e));

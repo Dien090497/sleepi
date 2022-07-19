@@ -257,7 +257,9 @@ Future<_i1.GetIt> $initGetIt(_i1.GetIt get,
   gh.factory<_i48.ISleepTrackingRepository>(
       () => _i49.SleepTrackingImplementation(get<_i39.SleepTrackingApi>()));
   gh.factory<_i50.ISpendingRepository>(() => _i51.SpendingImplementation(
-      get<_i30.SpendingDataSource>(), get<_i41.AuthDataSource>()));
+      get<_i30.SpendingDataSource>(),
+      get<_i41.AuthDataSource>(),
+      get<_i28.SecureStorage>()));
   gh.factory<_i52.IUserRepository>(() => _i53.UserImplementation(
       get<_i41.AuthDataSource>(),
       get<_i28.SecureStorage>(),
