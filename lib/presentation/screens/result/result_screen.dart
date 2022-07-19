@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:slee_fi/common/enum/enum.dart';
 import 'package:slee_fi/common/extensions/num_ext.dart';
@@ -7,9 +9,11 @@ import 'package:slee_fi/common/style/text_styles.dart';
 import 'package:slee_fi/common/widgets/background_widget.dart';
 import 'package:slee_fi/common/widgets/sf_app_bar.dart';
 import 'package:slee_fi/common/widgets/sf_buttons.dart';
+import 'package:slee_fi/common/widgets/sf_icon.dart';
 import 'package:slee_fi/common/widgets/sf_label_value.dart';
 import 'package:slee_fi/l10n/locale_keys.g.dart';
 import 'package:slee_fi/presentation/screens/result/widgets/chart_statistic_share.dart';
+import 'package:slee_fi/resources/resources.dart';
 
 import 'layout/pre_result_screen.dart';
 import 'widgets/category_header.dart';
@@ -89,8 +93,14 @@ class _ResultScreenState extends State<ResultScreen> {
                         const SizedBox(
                           height: 32,
                         ),
-                          (args.dataChart.isNotEmpty && args.dataChart.first.maxX != -1) ? ChartStatisticShare(maxValue: 360, data: args.dataChart.first, typeTimeChart: TypeTimeChart.chartDay,)
-                        : const SizedBox(),
+                          Platform.isAndroid ?
+                          ((args.dataChart.isNotEmpty && args.dataChart.first.maxX != -1) ? ChartStatisticShare(maxValue: 360, data: args.dataChart.first, typeTimeChart: TypeTimeChart.chartDay,)
+                                : const SizedBox())
+                              : const Padding(
+                                padding: EdgeInsets.only(bottom: 10),
+                                child: SFIcon(Ics.commingSoon),
+                              ),
+
                         const SizedBox(
                           height: 24,
                         ),
