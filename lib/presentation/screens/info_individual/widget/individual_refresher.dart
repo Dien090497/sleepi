@@ -30,9 +30,10 @@ class _IndividualRefresherState extends State<IndividualRefresher> {
       listener: (context, state) {
         if (!state.isRefresh) {
           _controller.refreshCompleted();
-        } else {
-          _controller.requestRefresh();
         }
+        // else {
+        //   _controller.requestRefresh();
+        // }
       },
       child: SmartRefresher(
         controller: _controller,

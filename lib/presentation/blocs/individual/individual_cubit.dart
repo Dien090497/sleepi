@@ -36,6 +36,11 @@ class IndividualCubit extends Cubit<IndividualState> {
     );
   }
 
+  void changeIsBase() async {
+    emit(state.copyWith(isBase: !state.isBase, isLoading: true));
+    refresh();
+  }
+
   void loading(bool isLoading) {
     emit(state.copyWith(isLoading: isLoading));
   }
