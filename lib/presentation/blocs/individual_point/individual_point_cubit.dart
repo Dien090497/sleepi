@@ -11,8 +11,20 @@ class IndividualPointCubit extends Cubit<IndividualPointState> {
   IndividualPointCubit(BedEntity bed)
       : super(IndividualPointState.initial(
           bed: bed,
-          startAttributes: [7, 13, 12, 9, 9],
-          attributesDistributed: List<double>.generate(5, (i) => 0),
+          startAttributes: [
+            bed.efficiency,
+            bed.luck,
+            bed.bonus,
+            bed.special,
+            bed.resilience,
+          ],
+          attributesChanged: [
+            bed.efficiency,
+            bed.luck,
+            bed.bonus,
+            bed.special,
+            bed.resilience,
+          ],
           attributesNames: [
             LocaleKeys.efficiency,
             LocaleKeys.luck,
@@ -37,7 +49,7 @@ class IndividualPointCubit extends Cubit<IndividualPointState> {
           emit(currentState.copyWith(isLoading: false));
         },
         (r) {
-          emit(currentState.copyWith(point: r, isLoading: false));
+          emit(currentState.copyWith(point: r, maxPoint: r, isLoading: false));
         },
       );
     }
@@ -46,12 +58,17 @@ class IndividualPointCubit extends Cubit<IndividualPointState> {
   void increase(int i) {
     final currentState = state;
     if (currentState is IndividualPointInitial) {
+      /// nếu point null hoặc <= 0 thì không có action
       if ((currentState.point ?? -1) <= 0) return;
-      final attribute = currentState.attributesDistributed[i];
-      final newList = List<double>.from(currentState.attributesDistributed);
-      newList[i] = attribute + 1;
+
+      /// Tăng startAttribute lên 1 và giảm point đi 1
+      final currentPoint = currentState.attributesChanged[i];
+      final newChangedAttribute =
+          List<double>.from(currentState.attributesChanged);
+      newChangedAttribute[i] = currentPoint + 1;
+      if (newChangedAttribute[i] > currentState.maxAttribute) return;
       emit(currentState.copyWith(
-        attributesDistributed: newList,
+        attributesChanged: newChangedAttribute,
         point: currentState.point! - 1,
       ));
     }
@@ -60,18 +77,20 @@ class IndividualPointCubit extends Cubit<IndividualPointState> {
   void decrease(int i) {
     final currentState = state;
     if (currentState is IndividualPointInitial) {
-      if (currentState.point == null) return;
-      final startAttribute = currentState.startAttributes[i];
-      final attribute = currentState.attributesDistributed[i];
-      if (attribute == 0) return;
-      if (attribute != startAttribute) {
-        final newList = List<double>.from(currentState.attributesDistributed);
-        newList[i] = attribute - 1;
-        emit(currentState.copyWith(
-          attributesDistributed: newList,
-          point: currentState.point! + 1,
-        ));
-      }
+      if (currentState.point == null || currentState.maxPoint == null) return;
+      if (currentState.point! >= currentState.maxPoint!) return;
+
+      /// Giảm startAttribute đi 1 và tăng point lên 1
+      final startPoint = currentState.startAttributes[i];
+      final currentPoint = currentState.attributesChanged[i];
+      if (currentPoint <= startPoint) return;
+      final newChangedAttribute =
+          List<double>.from(currentState.attributesChanged);
+      newChangedAttribute[i] = currentPoint - 1;
+      emit(currentState.copyWith(
+        attributesChanged: newChangedAttribute,
+        point: currentState.point! + 1,
+      ));
     }
   }
 
@@ -80,14 +99,18 @@ class IndividualPointCubit extends Cubit<IndividualPointState> {
     if (currentState is IndividualPointInitial) {
       if (currentState.isLoading) return;
       emit(currentState.copyWith(isLoading: true));
-      final attributes = currentState.attributesDistributed;
+      final distributedAttributes = List.generate(
+        currentState.startAttributes.length,
+        (i) =>
+            currentState.attributesChanged[i] - currentState.startAttributes[i],
+      );
       final updateRes = await _updateAttributeUC.call(UpdatePointSchema(
         bedId: currentState.bed.nftId,
-        efficiency: attributes[0],
-        luck: attributes[1],
-        bonus: attributes[2],
-        special: attributes[3],
-        resilience: attributes[4],
+        efficiency: distributedAttributes[0],
+        luck: distributedAttributes[1],
+        bonus: distributedAttributes[2],
+        special: distributedAttributes[3],
+        resilience: distributedAttributes[4],
       ));
       updateRes.fold(
         (l) {

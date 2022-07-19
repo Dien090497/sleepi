@@ -100,27 +100,21 @@ class InfoIndividualScreen extends StatelessWidget {
                                           style: TextStyles.bold18LightWhite,
                                         ),
                                       ),
-                                      state.isRefresh
-                                          ? const SizedBox(
-                                              width: 48,
-                                              height: 48,
-                                              child: LoadingIcon(),
-                                            )
-                                          : SFButtonOutLined(
-                                              title: LocaleKeys.base,
-                                              textStyle: state.isBase
-                                                  ? TextStyles.white14W700
-                                                  : TextStyles.bold14Blue,
-                                              borderColor: state.isBase
-                                                  ? AppColors.transparent
-                                                  : AppColors.blue,
-                                              bgColor: state.isBase
-                                                  ? AppColors.blue
-                                                  : AppColors.transparent,
-                                              onPressed: () {
-                                                cubit.changeIsBase();
-                                              },
-                                            ),
+                                      SFButtonOutLined(
+                                        title: LocaleKeys.base,
+                                        textStyle: state.isBase
+                                            ? TextStyles.white14W700
+                                            : TextStyles.bold14Blue,
+                                        borderColor: state.isBase
+                                            ? AppColors.transparent
+                                            : AppColors.blue,
+                                        bgColor: state.isBase
+                                            ? AppColors.blue
+                                            : AppColors.transparent,
+                                        onPressed: () {
+                                          cubit.changeIsBase();
+                                        },
+                                      ),
                                       const SizedBox(width: 8),
                                       if (args.marketPlaceModel == null)
                                         SFButton(
