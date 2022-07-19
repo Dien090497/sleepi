@@ -89,10 +89,9 @@ class NFTDataSource {
   Future<double> estimateGasFee({
     required String nftAddress,
     required EthereumAddress ownerAddress,
-    required EthereumAddress toAddress,
-    required BigInt nftId,
     required EtherAmount gasPrice,
     required String functionName,
+    required List<dynamic> data,
   }) async {
     final Nft nft = _nft(nftAddress);
     final transferFromFunc = nft.self.function(functionName);
@@ -100,13 +99,7 @@ class NFTDataSource {
       sender: ownerAddress,
       to: nft.self.address,
       gasPrice: gasPrice,
-      data: transferFromFunc.encodeCall(
-        [
-          ownerAddress,
-          toAddress,
-          nftId,
-        ],
-      ),
+      data: transferFromFunc.encodeCall(data),
     );
     return gasFee * gasPrice.getInWei / BigInt.from(pow(10, 18));
   }

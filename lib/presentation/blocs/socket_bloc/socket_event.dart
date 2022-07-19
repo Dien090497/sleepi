@@ -1,4 +1,5 @@
 import 'package:equatable/equatable.dart';
+import 'package:slee_fi/entities/jewel_entity/jewel_entity.dart';
 
 abstract class SocketEvent extends Equatable {
   const SocketEvent();
@@ -7,39 +8,39 @@ abstract class SocketEvent extends Equatable {
   List<Object?> get props => [];
 }
 
-class SocketInt extends SocketEvent {
+class SocketInit extends SocketEvent {
   final int bedId;
   final int level;
 
-  const SocketInt(this.bedId, this.level);
+  const SocketInit(this.bedId, this.level);
 
   @override
   List<Object?> get props => [bedId, level];
 }
 
-class OpenSocket extends SocketEvent {
-  const OpenSocket();
+class RefreshSocket extends SocketEvent {
+  const RefreshSocket();
 
   @override
   List<Object?> get props => [];
 }
 
-class SpeedUpSocket extends SocketEvent {
-  final int index;
+class OpenSocket extends SocketEvent {
+  final int socketIndex;
 
-  const SpeedUpSocket(this.index);
+  const OpenSocket(this.socketIndex);
 
   @override
-  List<Object?> get props => [index];
+  List<Object?> get props => [socketIndex];
 }
 
 class AddJewel extends SocketEvent {
-  final int id;
+  final JewelEntity jewelEntity;
 
-  const AddJewel(this.id);
+  const AddJewel(this.jewelEntity);
 
   @override
-  List<Object?> get props => [id];
+  List<Object?> get props => [jewelEntity];
 }
 
 class RemoveJewel extends SocketEvent {
@@ -50,3 +51,53 @@ class RemoveJewel extends SocketEvent {
   @override
   List<Object?> get props => [index];
 }
+
+class FetchJewels extends SocketEvent {
+  const FetchJewels();
+
+  @override
+  List<Object?> get props => [];
+}
+
+class RefreshJewels extends SocketEvent {
+  const RefreshJewels();
+
+  @override
+  List<Object?> get props => [];
+}
+
+class SocketError extends SocketEvent {
+  final String message;
+
+  const SocketError(this.message);
+
+  @override
+  List<Object?> get props => [message];
+}
+
+class StartLoading extends SocketEvent {
+  const StartLoading();
+
+  @override
+  List<Object?> get props => [];
+}
+
+class StopLoading extends SocketEvent {
+  const StopLoading();
+
+  @override
+  List<Object?> get props => [];
+}
+class LevelUp extends SocketEvent {
+  const LevelUp();
+
+  @override
+  List<Object?> get props => [];
+}
+
+// class LoadMoreJewel extends SocketEvent {
+//   const RefreshJewels();
+//
+//   @override
+//   List<Object?> get props => [];
+// }

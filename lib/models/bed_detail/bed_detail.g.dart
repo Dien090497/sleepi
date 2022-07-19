@@ -35,14 +35,15 @@ BedDetail _$BedDetailFromJson(Map<String, dynamic> json) => BedDetail(
       json['is_lock'] as int,
       json['status'] as String,
       Category.fromJson(json['category'] as Map<String, dynamic>),
+      (json['jewels'] as List<dynamic>)
+          .map((e) => JewelEntity.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      (json['insurancePercent'] as num?)?.toDouble(),
+      (json['startTime'] as num?)?.toDouble(),
+      (json['endTime'] as num?)?.toDouble(),
     )
       ..socket = json['socket'] as int?
-      ..itemId = json['itemId'] as int?
-      ..jewelSlot1 = json['jewelSlot1'] as int?
-      ..jewelSlot2 = json['jewelSlot2'] as int?
-      ..jewelSlot3 = json['jewelSlot3'] as int?
-      ..jewelSlot4 = json['jewelSlot4'] as int?
-      ..jewelSlot5 = json['jewelSlot5'] as int?;
+      ..itemId = json['itemId'];
 
 Map<String, dynamic> _$BedDetailToJson(BedDetail instance) => <String, dynamic>{
       'id': instance.id,
@@ -73,13 +74,12 @@ Map<String, dynamic> _$BedDetailToJson(BedDetail instance) => <String, dynamic>{
       'is_lock': instance.isLock,
       'status': instance.status,
       'socket': instance.socket,
+      'jewels': instance.jewels.map((e) => e.toJson()).toList(),
       'itemId': instance.itemId,
-      'jewelSlot1': instance.jewelSlot1,
-      'jewelSlot2': instance.jewelSlot2,
-      'jewelSlot3': instance.jewelSlot3,
-      'jewelSlot4': instance.jewelSlot4,
-      'jewelSlot5': instance.jewelSlot5,
       'category': instance.category.toJson(),
+      'insurancePercent': instance.insurancePercent,
+      'startTime': instance.startTime,
+      'endTime': instance.endTime,
     };
 
 Category _$CategoryFromJson(Map<String, dynamic> json) => Category(

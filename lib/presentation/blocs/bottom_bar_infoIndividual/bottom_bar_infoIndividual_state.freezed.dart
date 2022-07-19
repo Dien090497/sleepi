@@ -22,6 +22,8 @@ mixin _$BottomBarInfoIndividualState {
     required TResult Function(String gasPrice, bool successTransfer,
             String transactionFee, GetRepairtEntity? feeRepair)
         loaded,
+    required TResult Function(dynamic levelUp) getLevel,
+    required TResult Function() upLevel,
     required TResult Function(String message) error,
     required TResult Function() loading,
   }) =>
@@ -32,6 +34,8 @@ mixin _$BottomBarInfoIndividualState {
     TResult Function(String gasPrice, bool successTransfer,
             String transactionFee, GetRepairtEntity? feeRepair)?
         loaded,
+    TResult Function(dynamic levelUp)? getLevel,
+    TResult Function()? upLevel,
     TResult Function(String message)? error,
     TResult Function()? loading,
   }) =>
@@ -42,6 +46,8 @@ mixin _$BottomBarInfoIndividualState {
     TResult Function(String gasPrice, bool successTransfer,
             String transactionFee, GetRepairtEntity? feeRepair)?
         loaded,
+    TResult Function(dynamic levelUp)? getLevel,
+    TResult Function()? upLevel,
     TResult Function(String message)? error,
     TResult Function()? loading,
     required TResult orElse(),
@@ -51,6 +57,8 @@ mixin _$BottomBarInfoIndividualState {
   TResult map<TResult extends Object?>({
     required TResult Function(BottomBarInfoIndividualInitial value) initial,
     required TResult Function(BottomBarInfoIndividualLoaded value) loaded,
+    required TResult Function(GetLevelSuccess value) getLevel,
+    required TResult Function(UpLevelSuccess value) upLevel,
     required TResult Function(BottomBarInfoIndividualError value) error,
     required TResult Function(BottomBarInfoIndividualLoading value) loading,
   }) =>
@@ -59,6 +67,8 @@ mixin _$BottomBarInfoIndividualState {
   TResult? mapOrNull<TResult extends Object?>({
     TResult Function(BottomBarInfoIndividualInitial value)? initial,
     TResult Function(BottomBarInfoIndividualLoaded value)? loaded,
+    TResult Function(GetLevelSuccess value)? getLevel,
+    TResult Function(UpLevelSuccess value)? upLevel,
     TResult Function(BottomBarInfoIndividualError value)? error,
     TResult Function(BottomBarInfoIndividualLoading value)? loading,
   }) =>
@@ -67,6 +77,8 @@ mixin _$BottomBarInfoIndividualState {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(BottomBarInfoIndividualInitial value)? initial,
     TResult Function(BottomBarInfoIndividualLoaded value)? loaded,
+    TResult Function(GetLevelSuccess value)? getLevel,
+    TResult Function(UpLevelSuccess value)? upLevel,
     TResult Function(BottomBarInfoIndividualError value)? error,
     TResult Function(BottomBarInfoIndividualLoading value)? loading,
     required TResult orElse(),
@@ -142,6 +154,8 @@ class _$BottomBarInfoIndividualInitial
     required TResult Function(String gasPrice, bool successTransfer,
             String transactionFee, GetRepairtEntity? feeRepair)
         loaded,
+    required TResult Function(dynamic levelUp) getLevel,
+    required TResult Function() upLevel,
     required TResult Function(String message) error,
     required TResult Function() loading,
   }) {
@@ -155,6 +169,8 @@ class _$BottomBarInfoIndividualInitial
     TResult Function(String gasPrice, bool successTransfer,
             String transactionFee, GetRepairtEntity? feeRepair)?
         loaded,
+    TResult Function(dynamic levelUp)? getLevel,
+    TResult Function()? upLevel,
     TResult Function(String message)? error,
     TResult Function()? loading,
   }) {
@@ -168,6 +184,8 @@ class _$BottomBarInfoIndividualInitial
     TResult Function(String gasPrice, bool successTransfer,
             String transactionFee, GetRepairtEntity? feeRepair)?
         loaded,
+    TResult Function(dynamic levelUp)? getLevel,
+    TResult Function()? upLevel,
     TResult Function(String message)? error,
     TResult Function()? loading,
     required TResult orElse(),
@@ -183,6 +201,8 @@ class _$BottomBarInfoIndividualInitial
   TResult map<TResult extends Object?>({
     required TResult Function(BottomBarInfoIndividualInitial value) initial,
     required TResult Function(BottomBarInfoIndividualLoaded value) loaded,
+    required TResult Function(GetLevelSuccess value) getLevel,
+    required TResult Function(UpLevelSuccess value) upLevel,
     required TResult Function(BottomBarInfoIndividualError value) error,
     required TResult Function(BottomBarInfoIndividualLoading value) loading,
   }) {
@@ -194,6 +214,8 @@ class _$BottomBarInfoIndividualInitial
   TResult? mapOrNull<TResult extends Object?>({
     TResult Function(BottomBarInfoIndividualInitial value)? initial,
     TResult Function(BottomBarInfoIndividualLoaded value)? loaded,
+    TResult Function(GetLevelSuccess value)? getLevel,
+    TResult Function(UpLevelSuccess value)? upLevel,
     TResult Function(BottomBarInfoIndividualError value)? error,
     TResult Function(BottomBarInfoIndividualLoading value)? loading,
   }) {
@@ -205,6 +227,8 @@ class _$BottomBarInfoIndividualInitial
   TResult maybeMap<TResult extends Object?>({
     TResult Function(BottomBarInfoIndividualInitial value)? initial,
     TResult Function(BottomBarInfoIndividualLoaded value)? loaded,
+    TResult Function(GetLevelSuccess value)? getLevel,
+    TResult Function(UpLevelSuccess value)? upLevel,
     TResult Function(BottomBarInfoIndividualError value)? error,
     TResult Function(BottomBarInfoIndividualLoading value)? loading,
     required TResult orElse(),
@@ -346,6 +370,8 @@ class _$BottomBarInfoIndividualLoaded implements BottomBarInfoIndividualLoaded {
     required TResult Function(String gasPrice, bool successTransfer,
             String transactionFee, GetRepairtEntity? feeRepair)
         loaded,
+    required TResult Function(dynamic levelUp) getLevel,
+    required TResult Function() upLevel,
     required TResult Function(String message) error,
     required TResult Function() loading,
   }) {
@@ -359,6 +385,8 @@ class _$BottomBarInfoIndividualLoaded implements BottomBarInfoIndividualLoaded {
     TResult Function(String gasPrice, bool successTransfer,
             String transactionFee, GetRepairtEntity? feeRepair)?
         loaded,
+    TResult Function(dynamic levelUp)? getLevel,
+    TResult Function()? upLevel,
     TResult Function(String message)? error,
     TResult Function()? loading,
   }) {
@@ -372,6 +400,8 @@ class _$BottomBarInfoIndividualLoaded implements BottomBarInfoIndividualLoaded {
     TResult Function(String gasPrice, bool successTransfer,
             String transactionFee, GetRepairtEntity? feeRepair)?
         loaded,
+    TResult Function(dynamic levelUp)? getLevel,
+    TResult Function()? upLevel,
     TResult Function(String message)? error,
     TResult Function()? loading,
     required TResult orElse(),
@@ -387,6 +417,8 @@ class _$BottomBarInfoIndividualLoaded implements BottomBarInfoIndividualLoaded {
   TResult map<TResult extends Object?>({
     required TResult Function(BottomBarInfoIndividualInitial value) initial,
     required TResult Function(BottomBarInfoIndividualLoaded value) loaded,
+    required TResult Function(GetLevelSuccess value) getLevel,
+    required TResult Function(UpLevelSuccess value) upLevel,
     required TResult Function(BottomBarInfoIndividualError value) error,
     required TResult Function(BottomBarInfoIndividualLoading value) loading,
   }) {
@@ -398,6 +430,8 @@ class _$BottomBarInfoIndividualLoaded implements BottomBarInfoIndividualLoaded {
   TResult? mapOrNull<TResult extends Object?>({
     TResult Function(BottomBarInfoIndividualInitial value)? initial,
     TResult Function(BottomBarInfoIndividualLoaded value)? loaded,
+    TResult Function(GetLevelSuccess value)? getLevel,
+    TResult Function(UpLevelSuccess value)? upLevel,
     TResult Function(BottomBarInfoIndividualError value)? error,
     TResult Function(BottomBarInfoIndividualLoading value)? loading,
   }) {
@@ -409,6 +443,8 @@ class _$BottomBarInfoIndividualLoaded implements BottomBarInfoIndividualLoaded {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(BottomBarInfoIndividualInitial value)? initial,
     TResult Function(BottomBarInfoIndividualLoaded value)? loaded,
+    TResult Function(GetLevelSuccess value)? getLevel,
+    TResult Function(UpLevelSuccess value)? upLevel,
     TResult Function(BottomBarInfoIndividualError value)? error,
     TResult Function(BottomBarInfoIndividualLoading value)? loading,
     required TResult orElse(),
@@ -435,6 +471,305 @@ abstract class BottomBarInfoIndividualLoaded
   @JsonKey(ignore: true)
   _$$BottomBarInfoIndividualLoadedCopyWith<_$BottomBarInfoIndividualLoaded>
       get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$GetLevelSuccessCopyWith<$Res> {
+  factory _$$GetLevelSuccessCopyWith(
+          _$GetLevelSuccess value, $Res Function(_$GetLevelSuccess) then) =
+      __$$GetLevelSuccessCopyWithImpl<$Res>;
+  $Res call({dynamic levelUp});
+}
+
+/// @nodoc
+class __$$GetLevelSuccessCopyWithImpl<$Res>
+    extends _$BottomBarInfoIndividualStateCopyWithImpl<$Res>
+    implements _$$GetLevelSuccessCopyWith<$Res> {
+  __$$GetLevelSuccessCopyWithImpl(
+      _$GetLevelSuccess _value, $Res Function(_$GetLevelSuccess) _then)
+      : super(_value, (v) => _then(v as _$GetLevelSuccess));
+
+  @override
+  _$GetLevelSuccess get _value => super._value as _$GetLevelSuccess;
+
+  @override
+  $Res call({
+    Object? levelUp = freezed,
+  }) {
+    return _then(_$GetLevelSuccess(
+      levelUp == freezed
+          ? _value.levelUp
+          : levelUp // ignore: cast_nullable_to_non_nullable
+              as dynamic,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$GetLevelSuccess implements GetLevelSuccess {
+  const _$GetLevelSuccess(this.levelUp);
+
+  @override
+  final dynamic levelUp;
+
+  @override
+  String toString() {
+    return 'BottomBarInfoIndividualState.getLevel(levelUp: $levelUp)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$GetLevelSuccess &&
+            const DeepCollectionEquality().equals(other.levelUp, levelUp));
+  }
+
+  @override
+  int get hashCode =>
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(levelUp));
+
+  @JsonKey(ignore: true)
+  @override
+  _$$GetLevelSuccessCopyWith<_$GetLevelSuccess> get copyWith =>
+      __$$GetLevelSuccessCopyWithImpl<_$GetLevelSuccess>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function(String gasPrice, bool successTransfer,
+            String transactionFee, GetRepairtEntity? feeRepair)
+        loaded,
+    required TResult Function(dynamic levelUp) getLevel,
+    required TResult Function() upLevel,
+    required TResult Function(String message) error,
+    required TResult Function() loading,
+  }) {
+    return getLevel(levelUp);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function(String gasPrice, bool successTransfer,
+            String transactionFee, GetRepairtEntity? feeRepair)?
+        loaded,
+    TResult Function(dynamic levelUp)? getLevel,
+    TResult Function()? upLevel,
+    TResult Function(String message)? error,
+    TResult Function()? loading,
+  }) {
+    return getLevel?.call(levelUp);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function(String gasPrice, bool successTransfer,
+            String transactionFee, GetRepairtEntity? feeRepair)?
+        loaded,
+    TResult Function(dynamic levelUp)? getLevel,
+    TResult Function()? upLevel,
+    TResult Function(String message)? error,
+    TResult Function()? loading,
+    required TResult orElse(),
+  }) {
+    if (getLevel != null) {
+      return getLevel(levelUp);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(BottomBarInfoIndividualInitial value) initial,
+    required TResult Function(BottomBarInfoIndividualLoaded value) loaded,
+    required TResult Function(GetLevelSuccess value) getLevel,
+    required TResult Function(UpLevelSuccess value) upLevel,
+    required TResult Function(BottomBarInfoIndividualError value) error,
+    required TResult Function(BottomBarInfoIndividualLoading value) loading,
+  }) {
+    return getLevel(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(BottomBarInfoIndividualInitial value)? initial,
+    TResult Function(BottomBarInfoIndividualLoaded value)? loaded,
+    TResult Function(GetLevelSuccess value)? getLevel,
+    TResult Function(UpLevelSuccess value)? upLevel,
+    TResult Function(BottomBarInfoIndividualError value)? error,
+    TResult Function(BottomBarInfoIndividualLoading value)? loading,
+  }) {
+    return getLevel?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(BottomBarInfoIndividualInitial value)? initial,
+    TResult Function(BottomBarInfoIndividualLoaded value)? loaded,
+    TResult Function(GetLevelSuccess value)? getLevel,
+    TResult Function(UpLevelSuccess value)? upLevel,
+    TResult Function(BottomBarInfoIndividualError value)? error,
+    TResult Function(BottomBarInfoIndividualLoading value)? loading,
+    required TResult orElse(),
+  }) {
+    if (getLevel != null) {
+      return getLevel(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class GetLevelSuccess implements BottomBarInfoIndividualState {
+  const factory GetLevelSuccess(final dynamic levelUp) = _$GetLevelSuccess;
+
+  dynamic get levelUp;
+  @JsonKey(ignore: true)
+  _$$GetLevelSuccessCopyWith<_$GetLevelSuccess> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$UpLevelSuccessCopyWith<$Res> {
+  factory _$$UpLevelSuccessCopyWith(
+          _$UpLevelSuccess value, $Res Function(_$UpLevelSuccess) then) =
+      __$$UpLevelSuccessCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$UpLevelSuccessCopyWithImpl<$Res>
+    extends _$BottomBarInfoIndividualStateCopyWithImpl<$Res>
+    implements _$$UpLevelSuccessCopyWith<$Res> {
+  __$$UpLevelSuccessCopyWithImpl(
+      _$UpLevelSuccess _value, $Res Function(_$UpLevelSuccess) _then)
+      : super(_value, (v) => _then(v as _$UpLevelSuccess));
+
+  @override
+  _$UpLevelSuccess get _value => super._value as _$UpLevelSuccess;
+}
+
+/// @nodoc
+
+class _$UpLevelSuccess implements UpLevelSuccess {
+  const _$UpLevelSuccess();
+
+  @override
+  String toString() {
+    return 'BottomBarInfoIndividualState.upLevel()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$UpLevelSuccess);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function(String gasPrice, bool successTransfer,
+            String transactionFee, GetRepairtEntity? feeRepair)
+        loaded,
+    required TResult Function(dynamic levelUp) getLevel,
+    required TResult Function() upLevel,
+    required TResult Function(String message) error,
+    required TResult Function() loading,
+  }) {
+    return upLevel();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function(String gasPrice, bool successTransfer,
+            String transactionFee, GetRepairtEntity? feeRepair)?
+        loaded,
+    TResult Function(dynamic levelUp)? getLevel,
+    TResult Function()? upLevel,
+    TResult Function(String message)? error,
+    TResult Function()? loading,
+  }) {
+    return upLevel?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function(String gasPrice, bool successTransfer,
+            String transactionFee, GetRepairtEntity? feeRepair)?
+        loaded,
+    TResult Function(dynamic levelUp)? getLevel,
+    TResult Function()? upLevel,
+    TResult Function(String message)? error,
+    TResult Function()? loading,
+    required TResult orElse(),
+  }) {
+    if (upLevel != null) {
+      return upLevel();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(BottomBarInfoIndividualInitial value) initial,
+    required TResult Function(BottomBarInfoIndividualLoaded value) loaded,
+    required TResult Function(GetLevelSuccess value) getLevel,
+    required TResult Function(UpLevelSuccess value) upLevel,
+    required TResult Function(BottomBarInfoIndividualError value) error,
+    required TResult Function(BottomBarInfoIndividualLoading value) loading,
+  }) {
+    return upLevel(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(BottomBarInfoIndividualInitial value)? initial,
+    TResult Function(BottomBarInfoIndividualLoaded value)? loaded,
+    TResult Function(GetLevelSuccess value)? getLevel,
+    TResult Function(UpLevelSuccess value)? upLevel,
+    TResult Function(BottomBarInfoIndividualError value)? error,
+    TResult Function(BottomBarInfoIndividualLoading value)? loading,
+  }) {
+    return upLevel?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(BottomBarInfoIndividualInitial value)? initial,
+    TResult Function(BottomBarInfoIndividualLoaded value)? loaded,
+    TResult Function(GetLevelSuccess value)? getLevel,
+    TResult Function(UpLevelSuccess value)? upLevel,
+    TResult Function(BottomBarInfoIndividualError value)? error,
+    TResult Function(BottomBarInfoIndividualLoading value)? loading,
+    required TResult orElse(),
+  }) {
+    if (upLevel != null) {
+      return upLevel(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class UpLevelSuccess implements BottomBarInfoIndividualState {
+  const factory UpLevelSuccess() = _$UpLevelSuccess;
 }
 
 /// @nodoc
@@ -510,6 +845,8 @@ class _$BottomBarInfoIndividualError implements BottomBarInfoIndividualError {
     required TResult Function(String gasPrice, bool successTransfer,
             String transactionFee, GetRepairtEntity? feeRepair)
         loaded,
+    required TResult Function(dynamic levelUp) getLevel,
+    required TResult Function() upLevel,
     required TResult Function(String message) error,
     required TResult Function() loading,
   }) {
@@ -523,6 +860,8 @@ class _$BottomBarInfoIndividualError implements BottomBarInfoIndividualError {
     TResult Function(String gasPrice, bool successTransfer,
             String transactionFee, GetRepairtEntity? feeRepair)?
         loaded,
+    TResult Function(dynamic levelUp)? getLevel,
+    TResult Function()? upLevel,
     TResult Function(String message)? error,
     TResult Function()? loading,
   }) {
@@ -536,6 +875,8 @@ class _$BottomBarInfoIndividualError implements BottomBarInfoIndividualError {
     TResult Function(String gasPrice, bool successTransfer,
             String transactionFee, GetRepairtEntity? feeRepair)?
         loaded,
+    TResult Function(dynamic levelUp)? getLevel,
+    TResult Function()? upLevel,
     TResult Function(String message)? error,
     TResult Function()? loading,
     required TResult orElse(),
@@ -551,6 +892,8 @@ class _$BottomBarInfoIndividualError implements BottomBarInfoIndividualError {
   TResult map<TResult extends Object?>({
     required TResult Function(BottomBarInfoIndividualInitial value) initial,
     required TResult Function(BottomBarInfoIndividualLoaded value) loaded,
+    required TResult Function(GetLevelSuccess value) getLevel,
+    required TResult Function(UpLevelSuccess value) upLevel,
     required TResult Function(BottomBarInfoIndividualError value) error,
     required TResult Function(BottomBarInfoIndividualLoading value) loading,
   }) {
@@ -562,6 +905,8 @@ class _$BottomBarInfoIndividualError implements BottomBarInfoIndividualError {
   TResult? mapOrNull<TResult extends Object?>({
     TResult Function(BottomBarInfoIndividualInitial value)? initial,
     TResult Function(BottomBarInfoIndividualLoaded value)? loaded,
+    TResult Function(GetLevelSuccess value)? getLevel,
+    TResult Function(UpLevelSuccess value)? upLevel,
     TResult Function(BottomBarInfoIndividualError value)? error,
     TResult Function(BottomBarInfoIndividualLoading value)? loading,
   }) {
@@ -573,6 +918,8 @@ class _$BottomBarInfoIndividualError implements BottomBarInfoIndividualError {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(BottomBarInfoIndividualInitial value)? initial,
     TResult Function(BottomBarInfoIndividualLoaded value)? loaded,
+    TResult Function(GetLevelSuccess value)? getLevel,
+    TResult Function(UpLevelSuccess value)? upLevel,
     TResult Function(BottomBarInfoIndividualError value)? error,
     TResult Function(BottomBarInfoIndividualLoading value)? loading,
     required TResult orElse(),
@@ -645,6 +992,8 @@ class _$BottomBarInfoIndividualLoading
     required TResult Function(String gasPrice, bool successTransfer,
             String transactionFee, GetRepairtEntity? feeRepair)
         loaded,
+    required TResult Function(dynamic levelUp) getLevel,
+    required TResult Function() upLevel,
     required TResult Function(String message) error,
     required TResult Function() loading,
   }) {
@@ -658,6 +1007,8 @@ class _$BottomBarInfoIndividualLoading
     TResult Function(String gasPrice, bool successTransfer,
             String transactionFee, GetRepairtEntity? feeRepair)?
         loaded,
+    TResult Function(dynamic levelUp)? getLevel,
+    TResult Function()? upLevel,
     TResult Function(String message)? error,
     TResult Function()? loading,
   }) {
@@ -671,6 +1022,8 @@ class _$BottomBarInfoIndividualLoading
     TResult Function(String gasPrice, bool successTransfer,
             String transactionFee, GetRepairtEntity? feeRepair)?
         loaded,
+    TResult Function(dynamic levelUp)? getLevel,
+    TResult Function()? upLevel,
     TResult Function(String message)? error,
     TResult Function()? loading,
     required TResult orElse(),
@@ -686,6 +1039,8 @@ class _$BottomBarInfoIndividualLoading
   TResult map<TResult extends Object?>({
     required TResult Function(BottomBarInfoIndividualInitial value) initial,
     required TResult Function(BottomBarInfoIndividualLoaded value) loaded,
+    required TResult Function(GetLevelSuccess value) getLevel,
+    required TResult Function(UpLevelSuccess value) upLevel,
     required TResult Function(BottomBarInfoIndividualError value) error,
     required TResult Function(BottomBarInfoIndividualLoading value) loading,
   }) {
@@ -697,6 +1052,8 @@ class _$BottomBarInfoIndividualLoading
   TResult? mapOrNull<TResult extends Object?>({
     TResult Function(BottomBarInfoIndividualInitial value)? initial,
     TResult Function(BottomBarInfoIndividualLoaded value)? loaded,
+    TResult Function(GetLevelSuccess value)? getLevel,
+    TResult Function(UpLevelSuccess value)? upLevel,
     TResult Function(BottomBarInfoIndividualError value)? error,
     TResult Function(BottomBarInfoIndividualLoading value)? loading,
   }) {
@@ -708,6 +1065,8 @@ class _$BottomBarInfoIndividualLoading
   TResult maybeMap<TResult extends Object?>({
     TResult Function(BottomBarInfoIndividualInitial value)? initial,
     TResult Function(BottomBarInfoIndividualLoaded value)? loaded,
+    TResult Function(GetLevelSuccess value)? getLevel,
+    TResult Function(UpLevelSuccess value)? upLevel,
     TResult Function(BottomBarInfoIndividualError value)? error,
     TResult Function(BottomBarInfoIndividualLoading value)? loading,
     required TResult orElse(),

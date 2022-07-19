@@ -66,7 +66,7 @@ class GridViewBedItem extends StatelessWidget {
                   top: 20,
                   left: -30,
                   child: TopLeftBanner(
-                    text: bed.nftClass.reCase(StringCase.camelCase),
+                    text: bed.nftClass ?? ''.reCase(StringCase.camelCase),
                     textColor: qualityColor,
                   ),
                 ),

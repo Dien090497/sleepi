@@ -4,8 +4,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
 import 'package:slee_fi/common/widgets/background_widget.dart';
+import 'package:slee_fi/common/widgets/loading_screen.dart';
 import 'package:slee_fi/common/widgets/sf_button_outlined.dart';
 import 'package:slee_fi/common/widgets/sf_buttons.dart';
+import 'package:slee_fi/common/widgets/sf_dialog.dart';
 import 'package:slee_fi/common/widgets/sf_icon.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
 import 'package:slee_fi/common/widgets/topbar_common.dart';
@@ -15,13 +17,15 @@ import 'package:slee_fi/models/market_place/market_place_model.dart';
 import 'package:slee_fi/presentation/blocs/individual/individual_cubit.dart';
 import 'package:slee_fi/presentation/blocs/individual/individual_state.dart';
 import 'package:slee_fi/presentation/blocs/socket_bloc/socket_bloc.dart';
+import 'package:slee_fi/presentation/blocs/socket_bloc/socket_event.dart';
 import 'package:slee_fi/presentation/screens/gacha/widgets/attributes_widget.dart';
 import 'package:slee_fi/presentation/screens/info_individual/widget/bottom_bar.dart';
 import 'package:slee_fi/presentation/screens/info_individual/widget/bottom_bar_market_place.dart';
 import 'package:slee_fi/presentation/screens/info_individual/widget/box_info_widget.dart';
 import 'package:slee_fi/presentation/screens/info_individual/widget/individual_refresher.dart';
 import 'package:slee_fi/presentation/screens/info_individual/widget/mint_from_widget.dart';
-import 'package:slee_fi/presentation/screens/info_individual/widget/socket.dart';
+import 'package:slee_fi/presentation/screens/info_individual/widget/point_dialog.dart';
+import 'package:slee_fi/presentation/screens/info_individual/widget/socket_component.dart';
 
 class InfoIndividualParams {
   final bool? buy;
@@ -38,11 +42,12 @@ class InfoIndividualScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final args =
         ModalRoute.of(context)?.settings.arguments as InfoIndividualParams;
-
     return MultiBlocProvider(
       providers: [
-        BlocProvider(create: (context) => IndividualCubit(args.bed)),
-        BlocProvider(create: (context) => SocketBloc()),
+        BlocProvider(create: (_) => IndividualCubit(args.bed)..fetchFamily()),
+        BlocProvider(
+            create: (_) =>
+                SocketBloc()..add(SocketInit(args.bed.id, args.bed.level))),
       ],
       child: Stack(
         children: [
@@ -74,7 +79,7 @@ class InfoIndividualScreen extends StatelessWidget {
                                       const EdgeInsets.symmetric(vertical: 24),
                                   child: SFIcon(state.bed.image),
                                 ),
-                                Socket(
+                                SocketComponent(
                                   bedId: state.bed.id,
                                   level: state.bed.level,
                                 ),
@@ -108,7 +113,10 @@ class InfoIndividualScreen extends StatelessWidget {
                                           textStyle: TextStyles.boldWhite14,
                                           gradient:
                                               AppColors.gradientBlueButton,
-                                          onPressed: () {},
+                                          onPressed: () {
+                                            _showPointDialog(context,
+                                                bed: state.bed);
+                                          },
                                         ),
                                     ],
                                   ),
@@ -131,12 +139,15 @@ class InfoIndividualScreen extends StatelessWidget {
                                     ),
                                   ),
                                   child: Column(
-                                    children: const [
+                                    children: [
                                       MintFromWidget(
-                                          title: LocaleKeys.minted_from,
-                                          numbers: 2),
+                                        title: LocaleKeys.minted_from,
+                                        familyData: state.nftFamily?.parent,
+                                      ),
                                       MintFromWidget(
-                                          title: LocaleKeys.mint, numbers: 7),
+                                        title: LocaleKeys.mint,
+                                        familyData: state.nftFamily?.children,
+                                      ),
                                     ],
                                   ),
                                 ),
@@ -161,9 +172,22 @@ class InfoIndividualScreen extends StatelessWidget {
                 : BottomBarWidget(
                     bedEntity: args.bed,
                   ),
+          ),
+          BlocBuilder<IndividualCubit, IndividualState>(
+            builder: (context, state) =>
+                state.isLoading ? const LoadingScreen() : const SizedBox(),
           )
         ],
       ),
+    );
+  }
+
+  Future _showPointDialog(BuildContext context, {required BedEntity bed}) {
+    return showCustomDialog(
+      context,
+      padding: const EdgeInsets.fromLTRB(24, 12, 24, 24),
+      insetPadding: const EdgeInsets.symmetric(horizontal: 12),
+      children: [PointDialog(bed: bed)],
     );
   }
 }

@@ -24,7 +24,6 @@ class TransferCubit extends Cubit<TransferState> {
     required double balance,
   }) async {
     final currentState = state;
-
     if (currentState is TransferLoaded) {
       if (amountStr.isEmpty) {
         emit(const TransferState.error(LocaleKeys.this_field_is_required,
@@ -32,7 +31,7 @@ class TransferCubit extends Cubit<TransferState> {
         emit(currentState);
         return;
       }
-      final amount = double.parse(amountStr);
+      final amount = double.parse(amountStr.replaceAll(',', '.'));
       if (amount <= 0) {
         emit(const TransferState.error(LocaleKeys.amount_input_can_not_be_zero,
             typeError: 'amount_zero'));
@@ -54,12 +53,12 @@ class TransferCubit extends Cubit<TransferState> {
                   ownerAddress: ownerAddress,
                   tokenAddress: contractAddress,
                   amount: amount));
-          await allowanceRes.fold(
-            (l) async {
+          allowanceRes.fold(
+            (l) {
               emit(const TransferState.error('Cannot Transfer'));
               emit(currentState.copyWith(isLoading: false));
             },
-            (isEnough) async {
+            (isEnough) {
               emit(currentState.copyWith(needApprove: !isEnough));
               emit(currentState.copyWith(isLoading: false, needApprove: null));
             },

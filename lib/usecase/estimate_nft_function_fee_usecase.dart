@@ -15,9 +15,8 @@ class EstimateNftFunctionFeeUseCase extends UseCase<double, EstimateGasParams> {
       gasPrice: params.gasPrice,
       nftAddress: params.nftAddress,
       functionName: params.functionName,
-      nftId: params.nftId,
       ownerAddress: params.ownerAddress,
-      toAddress: params.toAddress,
+      data: params.data,
     );
   }
 }
@@ -29,6 +28,7 @@ class EstimateGasParams {
   final BigInt nftId;
   final EtherAmount? gasPrice;
   final String functionName;
+  final List<dynamic> data;
 
   EstimateGasParams({
     required this.nftAddress,
@@ -37,5 +37,6 @@ class EstimateGasParams {
     required this.nftId,
     this.gasPrice,
     required this.functionName,
+    required this.data,
   });
 }

@@ -43,6 +43,10 @@ class Const {
   static const String normalGachaAnimation = 'assets/json/gacha.json';
   static const String specialGachaAudio = 'sounds/special_gacha.mp3';
   static const String specialGachaAnimation = 'assets/json/special_gacha.json';
+  static const String time = 'time';
+  static const String setAsForeground = 'setAsForeground';
+  static const String setAsBackground = 'setAsBackground';
+  static const String stopService = 'stopService';
 
   static const localeDE = Locale('de', 'DE');
   static const localeEN = Locale('en', 'US');
@@ -63,7 +67,7 @@ class Const {
     localeRU,
     localeZH,
   ];
-
+  static const sortCondition = ["LowPrice", "HighPrice", "Latest"];
   static const tokens = [
     {
       // "address": "0xB31f66AA3C1e785363F0875A1B74E27b85FD66c7",//mainnet
@@ -160,7 +164,6 @@ class Const {
 
   Const._();
 }
-
 
 extension LocaleX on Locale {
   String get displayName {

@@ -16,6 +16,7 @@ Future<T?> showCustomDialog<T>(
   required List<Widget> children,
   Color? backgroundColor,
   EdgeInsets? padding,
+  EdgeInsets? insetPadding,
 }) async {
   return showDialog(
       context: context,
@@ -24,16 +25,24 @@ Future<T?> showCustomDialog<T>(
         return SFDialog(
           backgroundColor: backgroundColor,
           padding: padding,
+          insetPadding: insetPadding,
           children: children,
         );
       });
 }
 
-Future<T?> showSuccessfulDialog<T>(BuildContext context, String? message,
-    {EdgeInsets? padding, TextStyle? style, VoidCallback? onBackPress}) async {
+Future<T?> showSuccessfulDialog<T>(
+  BuildContext context,
+  String? message, {
+  EdgeInsets? padding,
+  TextStyle? style,
+  VoidCallback? onBackPress,
+  bool barrierDismissible = true,
+}) async {
   return showDialog(
       context: context,
       barrierColor: AppColors.backgroundDialog,
+      barrierDismissible: barrierDismissible,
       builder: (context) {
         return SFDialog(
           padding: padding,
@@ -71,8 +80,8 @@ Future<T?> showMessageDialog<T>(BuildContext context, String message,
     children: Padding(
       padding: const EdgeInsets.symmetric(vertical: 32, horizontal: 24),
       child: SFText(
-          textAlign: TextAlign.center,
           keyText: message,
+          textAlign: TextAlign.center,
           style: style ?? TextStyles.bold18White),
     ),
   );
@@ -179,19 +188,21 @@ Future<T?> showLanguageUpdatedDialog<T>(BuildContext context, Locale locale) {
   return showDialog(
       context: context,
       barrierColor: AppColors.backgroundDialog,
+      barrierDismissible: false,
       builder: (context) {
         return SFDialog(
           padding: EdgeInsets.zero,
           children: [
-            Align(
-              alignment: Alignment.centerRight,
-              child: IconButton(
-                onPressed: () {
-                  Navigator.pop(context);
-                },
-                icon: const Icon(Icons.close, color: AppColors.white),
-              ),
-            ),
+            // Align(
+            //   alignment: Alignment.centerRight,
+            //   child: IconButton(
+            //     onPressed: () {
+            //       Navigator.pop(context);
+            //     },
+            //     icon: const Icon(Icons.close, color: AppColors.white),
+            //   ),
+            // ),
+            const SizedBox(height: 12),
             SFText(
                 keyText: LocaleKeys.successfull,
                 maxLines: 1,
@@ -212,7 +223,6 @@ Future<T?> showLanguageUpdatedDialog<T>(BuildContext context, Locale locale) {
               onPressed: () {
                 context.setLocale(locale);
                 Phoenix.rebirth(context);
-                Navigator.of(context).pop();
               },
               color: AppColors.blue,
             ),
@@ -224,18 +234,25 @@ Future<T?> showLanguageUpdatedDialog<T>(BuildContext context, Locale locale) {
 
 class SFDialog extends StatelessWidget {
   const SFDialog(
-      {required this.children, Key? key, this.backgroundColor, this.padding})
+      {required this.children,
+      Key? key,
+      this.backgroundColor,
+      this.padding,
+      this.insetPadding})
       : super(key: key);
 
   final List<Widget> children;
   final Color? backgroundColor;
   final EdgeInsets? padding;
+  final EdgeInsets? insetPadding;
 
   @override
   Widget build(BuildContext context) {
     return Dialog(
       backgroundColor: AppColors.transparent,
       elevation: 0,
+      insetPadding: insetPadding ??
+          const EdgeInsets.symmetric(horizontal: 40.0, vertical: 24.0),
       child: Container(
         width: 1000,
         decoration: BoxDecoration(

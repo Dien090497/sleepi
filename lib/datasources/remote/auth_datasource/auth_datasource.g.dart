@@ -466,9 +466,12 @@ class _AuthDataSource implements AuthDataSource {
   }
 
   @override
-  Future<BedDetail> bedDetail(bedId) async {
+  Future<BedDetail> bedDetail(bedId, isBase) async {
     const _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{r'bedId': bedId};
+    final queryParameters = <String, dynamic>{
+      r'bedId': bedId,
+      r'isBase': isBase
+    };
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
     final _result = await _dio.fetch<Map<String, dynamic>>(
@@ -482,7 +485,7 @@ class _AuthDataSource implements AuthDataSource {
   }
 
   @override
-  Future<dynamic> addItemForBed(bedId, itemId) async {
+  Future<ResponseModel> addItemForBed(bedId, itemId) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{
       r'bedId': bedId,
@@ -490,17 +493,18 @@ class _AuthDataSource implements AuthDataSource {
     };
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
-    final _result = await _dio.fetch(_setStreamType<dynamic>(
-        Options(method: 'PUT', headers: _headers, extra: _extra)
-            .compose(_dio.options, '/nft-attributes/add-item-for-bed',
-                queryParameters: queryParameters, data: _data)
-            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = _result.data;
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<ResponseModel>(
+            Options(method: 'PUT', headers: _headers, extra: _extra)
+                .compose(_dio.options, '/nft-attributes/add-item-for-bed',
+                    queryParameters: queryParameters, data: _data)
+                .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = ResponseModel.fromJson(_result.data!);
     return value;
   }
 
   @override
-  Future<dynamic> removeItemFromBed(bedId, itemId) async {
+  Future<ResponseModel> removeItemFromBed(bedId, itemId) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{
       r'bedId': bedId,
@@ -508,12 +512,13 @@ class _AuthDataSource implements AuthDataSource {
     };
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
-    final _result = await _dio.fetch(_setStreamType<dynamic>(
-        Options(method: 'PUT', headers: _headers, extra: _extra)
-            .compose(_dio.options, '/nft-attributes/remove-item-from-bed',
-                queryParameters: queryParameters, data: _data)
-            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = _result.data;
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<ResponseModel>(
+            Options(method: 'PUT', headers: _headers, extra: _extra)
+                .compose(_dio.options, '/nft-attributes/remove-item-from-bed',
+                    queryParameters: queryParameters, data: _data)
+                .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = ResponseModel.fromJson(_result.data!);
     return value;
   }
 
@@ -687,49 +692,52 @@ class _AuthDataSource implements AuthDataSource {
   }
 
   @override
-  Future<dynamic> openSocket(bedId) async {
+  Future<ResponseModel> openSocket(bedId) async {
     const _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{r'bedId ': bedId};
+    final queryParameters = <String, dynamic>{r'bedId': bedId};
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
-    final _result = await _dio.fetch(_setStreamType<dynamic>(
-        Options(method: 'PUT', headers: _headers, extra: _extra)
-            .compose(_dio.options, '/nft-attributes/open-socket',
-                queryParameters: queryParameters, data: _data)
-            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = _result.data;
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<ResponseModel>(
+            Options(method: 'PUT', headers: _headers, extra: _extra)
+                .compose(_dio.options, '/nft-attributes/open-socket',
+                    queryParameters: queryParameters, data: _data)
+                .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = ResponseModel.fromJson(_result.data!);
     return value;
   }
 
   @override
-  Future<dynamic> addJewel(addJewelSchema) async {
+  Future<ResponseModel> addJewel(addJewelSchema) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
     _data.addAll(addJewelSchema.toJson());
-    final _result = await _dio.fetch(_setStreamType<dynamic>(
-        Options(method: 'POST', headers: _headers, extra: _extra)
-            .compose(_dio.options, '/nft-attributes/add-jewels',
-                queryParameters: queryParameters, data: _data)
-            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = _result.data;
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<ResponseModel>(
+            Options(method: 'PUT', headers: _headers, extra: _extra)
+                .compose(_dio.options, '/nft-attributes/add-jewels',
+                    queryParameters: queryParameters, data: _data)
+                .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = ResponseModel.fromJson(_result.data!);
     return value;
   }
 
   @override
-  Future<dynamic> removeJewel(addJewelSchema) async {
+  Future<ResponseModel> removeJewel(addJewelSchema) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
     _data.addAll(addJewelSchema.toJson());
-    final _result = await _dio.fetch(_setStreamType<dynamic>(
-        Options(method: 'POST', headers: _headers, extra: _extra)
-            .compose(_dio.options, '/nft-attributes/remove-jewels',
-                queryParameters: queryParameters, data: _data)
-            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = _result.data;
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<ResponseModel>(
+            Options(method: 'PUT', headers: _headers, extra: _extra)
+                .compose(_dio.options, '/nft-attributes/remove-jewels',
+                    queryParameters: queryParameters, data: _data)
+                .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = ResponseModel.fromJson(_result.data!);
     return value;
   }
 
@@ -794,6 +802,39 @@ class _AuthDataSource implements AuthDataSource {
                 queryParameters: queryParameters, data: _data)
             .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
     final value = _result.data;
+    return value;
+  }
+
+  @override
+  Future<PointOfOwnerModel> pointOf(bedId) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{r'bedId': bedId};
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<PointOfOwnerModel>(
+            Options(method: 'GET', headers: _headers, extra: _extra)
+                .compose(_dio.options, '/poins/poins-of-owner',
+                    queryParameters: queryParameters, data: _data)
+                .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = PointOfOwnerModel.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<ResponseModel> updatePoints(schema) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    _data.addAll(schema.toJson());
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<ResponseModel>(
+            Options(method: 'PUT', headers: _headers, extra: _extra)
+                .compose(_dio.options, '/poins/add-poin-for-bed',
+                    queryParameters: queryParameters, data: _data)
+                .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = ResponseModel.fromJson(_result.data!);
     return value;
   }
 

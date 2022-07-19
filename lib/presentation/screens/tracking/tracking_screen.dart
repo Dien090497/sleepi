@@ -1,8 +1,11 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_background_service/flutter_background_service.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:focus_detector/focus_detector.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:slee_fi/common/const/const.dart';
 import 'package:slee_fi/common/extensions/num_ext.dart';
 import 'package:slee_fi/common/routes/app_routes.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
@@ -49,16 +52,18 @@ class _TrackingScreenState extends State<TrackingScreen> {
   late int time = 0;
   late double earn = 0.toDouble();
   late String fromRoute = R.bottomNavigation;
+  final service = FlutterBackgroundService();
 
   @override
   void initState() {
-    Future.delayed(Duration.zero, () {
+    Future.delayed(Duration.zero, () async {
       final args = ModalRoute.of(context)?.settings.arguments as TrackingParams;
       totalEarn = args.tokenEarn;
       DateTime wakeUp = DateTime.fromMillisecondsSinceEpoch(args.timeWakeUp);
       DateTime timStart = DateTime.fromMillisecondsSinceEpoch(args.timeStart);
       time = wakeUp.difference(timStart).inMinutes;
-
+      SharedPreferences preferences = await SharedPreferences.getInstance();
+      await preferences.setInt(Const.time, args.timeWakeUp);
       earn =
           (DateTime.now().difference(timStart).inMinutes) * (totalEarn / time);
       timeAlarm =
@@ -117,7 +122,10 @@ class _TrackingScreenState extends State<TrackingScreen> {
             final cubit = context.read<TrackingCubit>();
 
             return FocusDetector(
-                onFocusGained: () {},
+                onFocusGained: () {
+                  service.invoke(Const.setAsForeground);
+                  service.startService();
+                },
                 onFocusLost: () {
                   timer.cancel();
                 },
@@ -226,7 +234,7 @@ class _TrackingScreenState extends State<TrackingScreen> {
                               color: AppColors.blue,
                               textStyle: TextStyles.w600WhiteSize16,
                               onPressed: () {
-                                cubit.fetchData();
+                                cubit.fetchData().then((value) => service.invoke(Const.stopService));
                               },
                             ),
                             const SizedBox(height: 26),

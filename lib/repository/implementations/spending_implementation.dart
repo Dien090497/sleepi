@@ -74,6 +74,7 @@ class SpendingImplementation extends ISpendingRepository {
       final result = BigInt.parse(
           "9999999999999999999999999999999999999999999999999999999");
       final txHash = await _spendingDataSource.approve(owner, result, token);
+      await Future.delayed(const Duration(seconds: 1));
       return Right(txHash);
     } catch (e) {
       return Left(FailureMessage('$e'));

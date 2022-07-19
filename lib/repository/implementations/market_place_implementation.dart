@@ -24,9 +24,9 @@ class TransactionImplementation extends IMarketPlaceRepository {
       return Left(FailureMessage('$e'));
     }
   }
+
   @override
-  Future<Either<Failure, ResultBuyModel>> postBuyNFT(
-      int idNFT) async {
+  Future<Either<Failure, ResultBuyModel>> postBuyNFT(int idNFT) async {
     try {
       final result = await _authDataSource.buyNFT(BuyNFTSchema(idNFT));
       return Right(result);

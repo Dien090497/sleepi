@@ -1,23 +1,23 @@
 import 'package:flutter/material.dart';
-import 'package:slee_fi/common/enum/enum.dart';
-import 'package:slee_fi/common/extensions/enum_x.dart';
+import 'package:slee_fi/common/extensions/string_x.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
 import 'package:slee_fi/common/widgets/sf_icon.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
 import 'package:slee_fi/presentation/screens/product_detail/widgets/top_left_banner.dart';
-import 'package:slee_fi/resources/resources.dart';
 
 class ItemBed extends StatelessWidget {
   const ItemBed(
       {Key? key,
-      required this.bed,
+      required this.bedType,
+      required this.image,
       required this.selected,
       required this.id,
       required this.onTap})
       : super(key: key);
 
-  final BedType bed;
+  final String bedType;
+  final String image;
   final bool selected;
   final String id;
   final VoidCallback onTap;
@@ -42,7 +42,8 @@ class ItemBed extends StatelessWidget {
             Positioned(
               top: 20,
               left: -40,
-              child: TopLeftBanner(text: bed.name, textColor: bed.color),
+              child: TopLeftBanner(
+                  text: bedType, textColor: bedType.qualityBedColor),
             ),
             Container(
               alignment: Alignment.center,
@@ -52,9 +53,7 @@ class ItemBed extends StatelessWidget {
                 children: [
                   Expanded(
                       child: Container(
-                          alignment: Alignment.center,
-                          // TODO example data
-                          child: const SFIcon(Imgs.shortBed))),
+                          alignment: Alignment.center, child: SFIcon(image))),
                   Container(
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(50),

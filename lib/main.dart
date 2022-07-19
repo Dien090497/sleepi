@@ -1,10 +1,17 @@
+import 'dart:async';
+import 'dart:developer';
+
+import 'package:audioplayers/audioplayers.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_background_service/flutter_background_service.dart';
+import 'package:flutter_background_service_android/flutter_background_service_android.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:logger/logger.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:slee_fi/app.dart';
 import 'package:slee_fi/common/const/const.dart';
 import 'package:slee_fi/di/injector.dart';
@@ -22,6 +29,7 @@ void main() async {
   await Future.wait([
     getIt<RunAppInitUseCase>().call(NoParams()),
   ]);
+  initializeService();
 
   /// Lock in portrait mode only
   SystemChrome.setPreferredOrientations([
@@ -56,4 +64,69 @@ class AppBlocObserver extends BlocObserver {
     super.onTransition(bloc, transition);
     _logger.i(transition);
   }
+}
+
+Future<void> initializeService() async {
+  final service = FlutterBackgroundService();
+  await service.configure(
+    androidConfiguration: AndroidConfiguration(
+      // this will executed when app is in foreground or background in separated isolate
+      onStart: onStart,
+      // auto start service
+      autoStart: false,
+      isForegroundMode: true,
+    ),
+    iosConfiguration: IosConfiguration(
+      // auto start service
+      autoStart: false,
+      // this will executed when app is in foreground in separated isolate
+      onForeground: onStart,
+
+      // you have to enable background fetch capability on xcode project
+      onBackground: onIosBackground,
+    ),
+  );
+}
+
+// to ensure this executed
+// run app from xcode, then from xcode menu, select Simulate Background Fetch
+bool onIosBackground(ServiceInstance service) {
+  WidgetsFlutterBinding.ensureInitialized();
+  log('FLUTTER BACKGROUND FETCH');
+
+  return true;
+}
+
+Future<void> onStart(ServiceInstance service) async {
+  final audioPlayer = AudioPlayer();
+  if (service is AndroidServiceInstance) {
+    service.on(Const.setAsForeground).listen((event) {
+      service.setAsForegroundService();
+    });
+
+    service.on(Const.setAsBackground).listen((event) {
+      service.setAsBackgroundService();
+    });
+  }
+  service.on(Const.stopService).listen((event) {
+    audioPlayer.dispose();
+    service.stopSelf();
+  });
+
+  SharedPreferences preferences = await SharedPreferences.getInstance();
+  final int timeWakeUp = preferences.getInt(Const.time) ?? 0;
+  DateTime wakeUp = DateTime.fromMillisecondsSinceEpoch(timeWakeUp);
+  final int time = wakeUp.difference(DateTime.now()).inMinutes;
+  // bring to foreground
+  if (service is AndroidServiceInstance) {
+    service.setForegroundNotificationInfo(
+      title: "Sleep Tracking...",
+      content: "Alarm: ${DateFormat('HH:mm dd/MM/yyyy').format(wakeUp)}",
+    );
+  }
+  Timer.periodic(Duration(minutes: time), (timer) async {
+    log('FLUTTER BACKGROUND SERVICE: ${DateTime.now()}');
+    audioPlayer.setReleaseMode(ReleaseMode.loop);
+    audioPlayer.play(AssetSource(Const.normalGachaAudio));
+  });
 }

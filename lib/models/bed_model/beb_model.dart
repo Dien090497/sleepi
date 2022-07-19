@@ -2,6 +2,7 @@ import 'dart:core';
 
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:slee_fi/entities/bed_entity/bed_entity.dart';
+import 'package:slee_fi/entities/jewel_entity/jewel_entity.dart';
 
 part 'beb_model.g.dart';
 
@@ -35,7 +36,7 @@ class BedModel {
   final int isMint;
 
   @JsonKey(name: 'class')
-  final String nftClass;
+  final String? nftClass;
   final String? quality;
   final String owner;
   final int time;
@@ -113,11 +114,23 @@ class BedModel {
 
   Map<String, dynamic> toJson() => _$BedModelToJson(this);
 
+  JewelEntity toJewelEntity() {
+    return JewelEntity(
+        id: id,
+        image: image,
+        level: level,
+        nftId: nftId,
+        luck: luck.toString(),
+        efficiency: efficiency.toString(),
+        quality: quality.toString(),
+        resilience: resilience.toString());
+  }
+
   BedEntity toEntity() {
     return BedEntity(
       name: nftName,
       nftId: nftId,
-      nftClass: nftClass,
+      nftClass: nftClass ?? '',
       tokenId: tokenId,
       id: nftId,
       level: level,
@@ -138,6 +151,10 @@ class BedModel {
       startTime: startTime,
       endTime: endTime,
       insurancePercent: insurancePercent,
+      socket: null,
+      jewels: [],
+      owner: owner,
+      status: status,
     );
   }
 }

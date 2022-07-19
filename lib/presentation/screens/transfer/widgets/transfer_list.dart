@@ -46,7 +46,6 @@ class _TransferListState extends State<TransferList> {
 
   @override
   void dispose() {
-    controller.dispose();
     isLoadingNotifier.dispose();
     super.dispose();
   }
@@ -72,6 +71,7 @@ class _TransferListState extends State<TransferList> {
                       .then((_) {
                     isLoadingNotifier.value = false;
                     Navigator.pop(context);
+                    showSuccessfulDialog(context, null);
                   });
                 },
                 tokenName: widget.tokenEntity.symbol.toUpperCase(),
@@ -79,15 +79,15 @@ class _TransferListState extends State<TransferList> {
               ),
             );
           } else if (!(state.needApprove ?? true)) {
-            final amount = double.parse(controller.text);
+            final amount = double.parse(controller.text.replaceAll(',', '.'));
             final userState = context.read<UserBloc>().state;
-            isLoadingNotifier.value = true;
 
             showCustomAlertDialog(
               context,
               showClosed: false,
               children: PopUpConfirmTransfer(
                 onConfirm: () {
+                  isLoadingNotifier.value = true;
                   cubit.transfer(
                     amount: amount,
                     contractAddress: widget.tokenEntity.address,
@@ -106,10 +106,15 @@ class _TransferListState extends State<TransferList> {
           }
         }
         if (state is TransferSuccess) {
-          showSuccessfulDialog(context, null, onBackPress: () {
-            isLoadingNotifier.value = false;
-            Navigator.popUntil(context, (r) => r.settings.name == R.wallet);
-          });
+          showSuccessfulDialog(
+            context,
+            null,
+            barrierDismissible: false,
+            onBackPress: () {
+              isLoadingNotifier.value = false;
+              Navigator.popUntil(context, (r) => r.settings.name == R.wallet);
+            },
+          );
         }
         if (state is TransferError) {
           isLoadingNotifier.value = false;
@@ -174,17 +179,16 @@ class _TransferListState extends State<TransferList> {
                 width: double.infinity,
                 gradient: AppColors.gradientBlueButton,
                 onPressed: () {
-                  final cubit = context.read<TransferCubit>();
-
                   final walletState = context.read<WalletCubit>().state;
-                  cubit.checkAllowance(
-                    amountStr: controller.text,
-                    contractAddress: widget.tokenEntity.address,
-                    ownerAddress: (walletState as WalletStateLoaded)
-                        .walletInfoEntity
-                        .address,
-                    balance: widget.tokenEntity.balance,
-                  );
+                  if (walletState is WalletStateLoaded) {
+                    final cubit = context.read<TransferCubit>();
+                    cubit.checkAllowance(
+                      amountStr: controller.text,
+                      contractAddress: widget.tokenEntity.address,
+                      ownerAddress: walletState.walletInfoEntity.address,
+                      balance: widget.tokenEntity.balance,
+                    );
+                  }
                 },
               ),
             ],

@@ -6,14 +6,15 @@ import 'package:slee_fi/datasources/local/secure_storage.dart';
 import 'package:slee_fi/datasources/remote/auth_datasource/auth_datasource.dart';
 import 'package:slee_fi/datasources/remote/network/web3_datasource.dart';
 import 'package:slee_fi/entities/active_code/active_code_entity.dart';
+import 'package:slee_fi/entities/bed_entity/bed_entity.dart';
 import 'package:slee_fi/entities/item_entity/item_entity.dart';
 import 'package:slee_fi/entities/tracking_result_chart_data_entity/tracking_result_chart_data_entity.dart';
 import 'package:slee_fi/failures/failure.dart';
-import 'package:slee_fi/models/bed_detail/bed_detail.dart';
 import 'package:slee_fi/models/bed_model/beb_model.dart';
 import 'package:slee_fi/models/estimate_sleep_response/estimate_sleep_response.dart';
 import 'package:slee_fi/models/global_config_response/global_config_response.dart';
 import 'package:slee_fi/models/lucky_box/lucky_box.dart';
+import 'package:slee_fi/models/response_model/response_model.dart';
 import 'package:slee_fi/models/swap_token_to_wallet_response/swap_token_to_wallet_response.dart';
 import 'package:slee_fi/models/token_spending/token_spending.dart';
 import 'package:slee_fi/models/withdraw_history_response/withdraw_history_response.dart';
@@ -123,7 +124,6 @@ class UserImplementation extends IUserRepository {
           withdrawParam.page);
       return Right(result);
     } on Exception catch (e) {
-      // 'on load withdraw error $e'.log;
       return Left(FailureMessage.fromException(e));
     }
   }
@@ -161,7 +161,7 @@ class UserImplementation extends IUserRepository {
   }
 
   @override
-  Future<Either<FailureMessage, dynamic>> addItemToBed(
+  Future<Either<FailureMessage, ResponseModel>> addItemToBed(
       AddItemToBedParam addItemToBedParam) async {
     try {
       final result = await _authDataSource.addItemForBed(
@@ -174,12 +174,11 @@ class UserImplementation extends IUserRepository {
   }
 
   @override
-  Future<Either<FailureMessage, dynamic>> removeItemInBed(
+  Future<Either<FailureMessage, ResponseModel>> removeItemInBed(
       AddItemToBedParam addItemToBedParam) async {
     try {
       final result = await _authDataSource.removeItemFromBed(
           addItemToBedParam.bedId, addItemToBedParam.itemId);
-
       return Right(result);
     } catch (e) {
       return Left(FailureMessage.fromException(e));
@@ -257,44 +256,45 @@ class UserImplementation extends IUserRepository {
   }
 
   @override
-  Future<Either<FailureMessage, BedDetail>> bedDetail(int bedId) async {
+  Future<Either<FailureMessage, BedEntity>> bedDetail(
+      int bedId, bool isBase) async {
     try {
-      final result = await _authDataSource.bedDetail(bedId);
-      return Right(result);
+      final result = await _authDataSource.bedDetail(bedId, isBase);
+      return Right(result.toEntity());
     } catch (e) {
-      return Left(FailureMessage('$e'));
+      return Left(FailureMessage.fromException(e));
     }
   }
 
   @override
-  Future<Either<FailureMessage, dynamic>> addJewel(
+  Future<Either<FailureMessage, ResponseModel>> addJewel(
       AddJewelSchema addJewelSchema) async {
     try {
       final result = await _authDataSource.addJewel(addJewelSchema);
       return Right(result);
     } catch (e) {
-      return Left(FailureMessage('$e'));
+      return Left(FailureMessage.fromException(e));
     }
   }
 
   @override
-  Future<Either<FailureMessage, dynamic>> openSocket(int bedId) async {
+  Future<Either<FailureMessage, ResponseModel>> openSocket(int bedId) async {
     try {
       final result = await _authDataSource.openSocket(bedId);
       return Right(result);
     } catch (e) {
-      return Left(FailureMessage('$e'));
+      return Left(FailureMessage.fromException(e));
     }
   }
 
   @override
-  Future<Either<FailureMessage, dynamic>> removeJewel(
+  Future<Either<FailureMessage, ResponseModel>> removeJewel(
       AddJewelSchema addJewelSchema) async {
     try {
       final result = await _authDataSource.removeJewel(addJewelSchema);
       return Right(result);
     } catch (e) {
-      return Left(FailureMessage('$e'));
+      return Left(FailureMessage.fromException(e));
     }
   }
 }

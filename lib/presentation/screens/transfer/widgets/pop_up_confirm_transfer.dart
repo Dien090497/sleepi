@@ -141,9 +141,7 @@ class PopUpConfirmTransfer extends StatelessWidget {
               )),
             ],
           ),
-          const SizedBox(
-            height: 32.0,
-          ),
+          const SizedBox(height: 32.0),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [

@@ -8,7 +8,6 @@ import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
 import 'package:slee_fi/common/utils/date_time_utils.dart';
 import 'package:slee_fi/common/widgets/sf_card.dart';
-import 'package:slee_fi/common/widgets/sf_icon.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
 import 'package:slee_fi/di/injector.dart';
 import 'package:slee_fi/entities/withdraw/withdraw_entity.dart';
@@ -18,7 +17,6 @@ import 'package:slee_fi/presentation/blocs/pending/pending_event.dart';
 import 'package:slee_fi/presentation/blocs/pending/pending_state.dart';
 import 'package:slee_fi/presentation/blocs/user_bloc/user_bloc.dart';
 import 'package:slee_fi/presentation/blocs/user_bloc/user_state.dart';
-import 'package:slee_fi/resources/resources.dart';
 
 class TabPendingDetail extends StatefulWidget {
   const TabPendingDetail({Key? key, required this.attributeWithdraw})
@@ -50,7 +48,9 @@ class _TabPendingDetailState extends State<TabPendingDetail> {
   }
 
   void _onScroll() {
-    if (_isBottom) BlocProvider.of<PendingBloc>(context).add(const PendingFetched());
+    if (_isBottom) {
+      BlocProvider.of<PendingBloc>(context).add(const PendingFetched());
+    }
   }
 
   bool get _isBottom {
@@ -79,21 +79,21 @@ class _TabPendingDetailState extends State<TabPendingDetail> {
                       style: TextStyles.red12W700),
                 );
               }
-              if (state.list.isEmpty) {
-                return Center(
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      const SFIcon(Ics.emptyBox),
-                      const SizedBox(height: 28),
-                      SFText(
-                        keyText: LocaleKeys.there_is_no_item,
-                        style: TextStyles.lightGrey14,
-                      )
-                    ],
-                  ),
-                );
-              }
+              // if (state.list.isEmpty) {
+              //   return Center(
+              //     child: Column(
+              //       mainAxisSize: MainAxisSize.min,
+              //       children: [
+              //         const SFIcon(Ics.emptyBox),
+              //         const SizedBox(height: 28),
+              //         SFText(
+              //           keyText: LocaleKeys.there_is_no_item,
+              //           style: TextStyles.lightGrey14,
+              //         )
+              //       ],
+              //     ),
+              //   );
+              // }
               return SmartRefresher(
                 controller: refreshController,
                 enablePullDown: true,
@@ -102,22 +102,32 @@ class _TabPendingDetailState extends State<TabPendingDetail> {
                   await Future.delayed(const Duration(milliseconds: 1000));
                   refreshController.loadComplete();
                 },
-                child: ListView.builder(
-                  itemCount: state.list.length + 1,
-                  controller: _scrollController,
-                  physics: const BouncingScrollPhysics(),
-                  shrinkWrap: true,
-                  padding: const EdgeInsets.symmetric(horizontal: 24.0),
-                  itemBuilder: (BuildContext context, int index) =>
-                      index < state.list.length
-                          ? _BuildItem(withdrawEntity: state.list[index])
-                          : Container(
-                              height: 60,
-                              alignment: Alignment.center,
-                              child: state.hasReachedMax
-                                  ? const SizedBox()
-                                  : const CircularProgressIndicator()),
-                ),
+                child: state.list.isEmpty
+                    ? SingleChildScrollView(
+                        padding: const EdgeInsets.only(top: 30),
+                        child: Center(
+                          child: SFText(
+                            keyText: LocaleKeys.no_result,
+                            style: TextStyles.lightWhite16,
+                          ),
+                        ),
+                      )
+                    : ListView.builder(
+                        itemCount: state.list.length + 1,
+                        controller: _scrollController,
+                        physics: const BouncingScrollPhysics(),
+                        shrinkWrap: true,
+                        padding: const EdgeInsets.symmetric(horizontal: 24.0),
+                        itemBuilder: (BuildContext context, int index) =>
+                            index < state.list.length
+                                ? _BuildItem(withdrawEntity: state.list[index])
+                                : Container(
+                                    height: 60,
+                                    alignment: Alignment.center,
+                                    child: state.hasReachedMax
+                                        ? const SizedBox()
+                                        : const CircularProgressIndicator()),
+                      ),
               );
             },
           ),
