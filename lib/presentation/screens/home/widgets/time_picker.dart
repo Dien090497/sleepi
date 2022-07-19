@@ -99,7 +99,7 @@ class TimePicker extends StatelessWidget {
   }
 }
 
-class SFDatePicker extends StatelessWidget {
+class SFDatePicker extends StatefulWidget {
   const SFDatePicker({
     Key? key,
     required this.timeChanged,
@@ -118,27 +118,41 @@ class SFDatePicker extends StatelessWidget {
   final int size;
 
   @override
+  State<SFDatePicker> createState() => _SFDatePickerState();
+}
+
+class _SFDatePickerState extends State<SFDatePicker> {
+  late final controller =
+      FixedExtentScrollController(initialItem: widget.selectedTime);
+
+  @override
+  void dispose() {
+    controller.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return CupertinoPicker(
       looping: true,
       selectionOverlay: const SizedBox(),
-      offAxisFraction: offAxisFraction,
+      offAxisFraction: widget.offAxisFraction,
       squeeze: 1,
-      scrollController: FixedExtentScrollController(initialItem: selectedTime),
-      useMagnifier: useMagnifier,
+      scrollController: controller,
+      useMagnifier: widget.useMagnifier,
       itemExtent: 48.0,
       backgroundColor: AppColors.dark,
       onSelectedItemChanged: (int index) {
-        timeChanged(index);
+        widget.timeChanged(index);
       },
       children: List<Widget>.generate(
-        size,
+        widget.size,
         (int index) {
           return Container(
             width: double.infinity,
             height: 46,
             padding: const EdgeInsets.symmetric(horizontal: 12),
-            alignment: alignment,
+            alignment: widget.alignment,
             child: Text(
               index < 10 ? '0$index' : '$index',
               textAlign: TextAlign.right,

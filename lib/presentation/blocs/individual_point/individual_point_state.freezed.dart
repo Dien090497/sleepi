@@ -19,12 +19,14 @@ mixin _$IndividualPointState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(
+            double? maxPoint,
             double? point,
             BedEntity bed,
             List<double> startAttributes,
             List<double> attributesChanged,
             List<String> attributesNames,
-            bool isLoading)
+            bool isLoading,
+            double maxAttribute)
         initial,
     required TResult Function() done,
     required TResult Function(String msg) error,
@@ -33,12 +35,14 @@ mixin _$IndividualPointState {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function(
+            double? maxPoint,
             double? point,
             BedEntity bed,
             List<double> startAttributes,
             List<double> attributesChanged,
             List<String> attributesNames,
-            bool isLoading)?
+            bool isLoading,
+            double maxAttribute)?
         initial,
     TResult Function()? done,
     TResult Function(String msg)? error,
@@ -47,12 +51,14 @@ mixin _$IndividualPointState {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(
+            double? maxPoint,
             double? point,
             BedEntity bed,
             List<double> startAttributes,
             List<double> attributesChanged,
             List<String> attributesNames,
-            bool isLoading)?
+            bool isLoading,
+            double maxAttribute)?
         initial,
     TResult Function()? done,
     TResult Function(String msg)? error,
@@ -106,12 +112,14 @@ abstract class _$$IndividualPointInitialCopyWith<$Res> {
           $Res Function(_$IndividualPointInitial) then) =
       __$$IndividualPointInitialCopyWithImpl<$Res>;
   $Res call(
-      {double? point,
+      {double? maxPoint,
+      double? point,
       BedEntity bed,
       List<double> startAttributes,
       List<double> attributesChanged,
       List<String> attributesNames,
-      bool isLoading});
+      bool isLoading,
+      double maxAttribute});
 
   $BedEntityCopyWith<$Res> get bed;
 }
@@ -130,14 +138,20 @@ class __$$IndividualPointInitialCopyWithImpl<$Res>
 
   @override
   $Res call({
+    Object? maxPoint = freezed,
     Object? point = freezed,
     Object? bed = freezed,
     Object? startAttributes = freezed,
     Object? attributesChanged = freezed,
     Object? attributesNames = freezed,
     Object? isLoading = freezed,
+    Object? maxAttribute = freezed,
   }) {
     return _then(_$IndividualPointInitial(
+      maxPoint: maxPoint == freezed
+          ? _value.maxPoint
+          : maxPoint // ignore: cast_nullable_to_non_nullable
+              as double?,
       point: point == freezed
           ? _value.point
           : point // ignore: cast_nullable_to_non_nullable
@@ -162,6 +176,10 @@ class __$$IndividualPointInitialCopyWithImpl<$Res>
           ? _value.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
               as bool,
+      maxAttribute: maxAttribute == freezed
+          ? _value.maxAttribute
+          : maxAttribute // ignore: cast_nullable_to_non_nullable
+              as double,
     ));
   }
 
@@ -179,16 +197,20 @@ class _$IndividualPointInitial
     with DiagnosticableTreeMixin
     implements IndividualPointInitial {
   const _$IndividualPointInitial(
-      {this.point,
+      {this.maxPoint,
+      this.point,
       required this.bed,
       required final List<double> startAttributes,
       required final List<double> attributesChanged,
       required final List<String> attributesNames,
-      this.isLoading = false})
+      this.isLoading = false,
+      this.maxAttribute = 30})
       : _startAttributes = startAttributes,
         _attributesChanged = attributesChanged,
         _attributesNames = attributesNames;
 
+  @override
+  final double? maxPoint;
   @override
   final double? point;
   @override
@@ -207,7 +229,9 @@ class _$IndividualPointInitial
     return EqualUnmodifiableListView(_attributesChanged);
   }
 
+// required List<double> attributesDistributed,
   final List<String> _attributesNames;
+// required List<double> attributesDistributed,
   @override
   List<String> get attributesNames {
     // ignore: implicit_dynamic_type
@@ -217,10 +241,13 @@ class _$IndividualPointInitial
   @override
   @JsonKey()
   final bool isLoading;
+  @override
+  @JsonKey()
+  final double maxAttribute;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'IndividualPointState.initial(point: $point, bed: $bed, startAttributes: $startAttributes, attributesChanged: $attributesChanged, attributesNames: $attributesNames, isLoading: $isLoading)';
+    return 'IndividualPointState.initial(maxPoint: $maxPoint, point: $point, bed: $bed, startAttributes: $startAttributes, attributesChanged: $attributesChanged, attributesNames: $attributesNames, isLoading: $isLoading, maxAttribute: $maxAttribute)';
   }
 
   @override
@@ -228,12 +255,14 @@ class _$IndividualPointInitial
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty('type', 'IndividualPointState.initial'))
+      ..add(DiagnosticsProperty('maxPoint', maxPoint))
       ..add(DiagnosticsProperty('point', point))
       ..add(DiagnosticsProperty('bed', bed))
       ..add(DiagnosticsProperty('startAttributes', startAttributes))
       ..add(DiagnosticsProperty('attributesChanged', attributesChanged))
       ..add(DiagnosticsProperty('attributesNames', attributesNames))
-      ..add(DiagnosticsProperty('isLoading', isLoading));
+      ..add(DiagnosticsProperty('isLoading', isLoading))
+      ..add(DiagnosticsProperty('maxAttribute', maxAttribute));
   }
 
   @override
@@ -241,6 +270,7 @@ class _$IndividualPointInitial
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$IndividualPointInitial &&
+            const DeepCollectionEquality().equals(other.maxPoint, maxPoint) &&
             const DeepCollectionEquality().equals(other.point, point) &&
             const DeepCollectionEquality().equals(other.bed, bed) &&
             const DeepCollectionEquality()
@@ -249,18 +279,22 @@ class _$IndividualPointInitial
                 .equals(other._attributesChanged, _attributesChanged) &&
             const DeepCollectionEquality()
                 .equals(other._attributesNames, _attributesNames) &&
-            const DeepCollectionEquality().equals(other.isLoading, isLoading));
+            const DeepCollectionEquality().equals(other.isLoading, isLoading) &&
+            const DeepCollectionEquality()
+                .equals(other.maxAttribute, maxAttribute));
   }
 
   @override
   int get hashCode => Object.hash(
       runtimeType,
+      const DeepCollectionEquality().hash(maxPoint),
       const DeepCollectionEquality().hash(point),
       const DeepCollectionEquality().hash(bed),
       const DeepCollectionEquality().hash(_startAttributes),
       const DeepCollectionEquality().hash(_attributesChanged),
       const DeepCollectionEquality().hash(_attributesNames),
-      const DeepCollectionEquality().hash(isLoading));
+      const DeepCollectionEquality().hash(isLoading),
+      const DeepCollectionEquality().hash(maxAttribute));
 
   @JsonKey(ignore: true)
   @override
@@ -272,56 +306,62 @@ class _$IndividualPointInitial
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(
+            double? maxPoint,
             double? point,
             BedEntity bed,
             List<double> startAttributes,
             List<double> attributesChanged,
             List<String> attributesNames,
-            bool isLoading)
+            bool isLoading,
+            double maxAttribute)
         initial,
     required TResult Function() done,
     required TResult Function(String msg) error,
   }) {
-    return initial(point, bed, startAttributes, attributesChanged,
-        attributesNames, isLoading);
+    return initial(maxPoint, point, bed, startAttributes, attributesChanged,
+        attributesNames, isLoading, maxAttribute);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function(
+            double? maxPoint,
             double? point,
             BedEntity bed,
             List<double> startAttributes,
             List<double> attributesChanged,
             List<String> attributesNames,
-            bool isLoading)?
+            bool isLoading,
+            double maxAttribute)?
         initial,
     TResult Function()? done,
     TResult Function(String msg)? error,
   }) {
-    return initial?.call(point, bed, startAttributes, attributesChanged,
-        attributesNames, isLoading);
+    return initial?.call(maxPoint, point, bed, startAttributes,
+        attributesChanged, attributesNames, isLoading, maxAttribute);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(
+            double? maxPoint,
             double? point,
             BedEntity bed,
             List<double> startAttributes,
             List<double> attributesChanged,
             List<String> attributesNames,
-            bool isLoading)?
+            bool isLoading,
+            double maxAttribute)?
         initial,
     TResult Function()? done,
     TResult Function(String msg)? error,
     required TResult orElse(),
   }) {
     if (initial != null) {
-      return initial(point, bed, startAttributes, attributesChanged,
-          attributesNames, isLoading);
+      return initial(maxPoint, point, bed, startAttributes, attributesChanged,
+          attributesNames, isLoading, maxAttribute);
     }
     return orElse();
   }
@@ -363,19 +403,24 @@ class _$IndividualPointInitial
 
 abstract class IndividualPointInitial implements IndividualPointState {
   const factory IndividualPointInitial(
-      {final double? point,
+      {final double? maxPoint,
+      final double? point,
       required final BedEntity bed,
       required final List<double> startAttributes,
       required final List<double> attributesChanged,
       required final List<String> attributesNames,
-      final bool isLoading}) = _$IndividualPointInitial;
+      final bool isLoading,
+      final double maxAttribute}) = _$IndividualPointInitial;
 
+  double? get maxPoint;
   double? get point;
   BedEntity get bed;
   List<double> get startAttributes;
-  List<double> get attributesChanged;
+  List<double>
+      get attributesChanged; // required List<double> attributesDistributed,
   List<String> get attributesNames;
   bool get isLoading;
+  double get maxAttribute;
   @JsonKey(ignore: true)
   _$$IndividualPointInitialCopyWith<_$IndividualPointInitial> get copyWith =>
       throw _privateConstructorUsedError;
@@ -431,12 +476,14 @@ class _$IndividualPointDone
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(
+            double? maxPoint,
             double? point,
             BedEntity bed,
             List<double> startAttributes,
             List<double> attributesChanged,
             List<String> attributesNames,
-            bool isLoading)
+            bool isLoading,
+            double maxAttribute)
         initial,
     required TResult Function() done,
     required TResult Function(String msg) error,
@@ -448,12 +495,14 @@ class _$IndividualPointDone
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function(
+            double? maxPoint,
             double? point,
             BedEntity bed,
             List<double> startAttributes,
             List<double> attributesChanged,
             List<String> attributesNames,
-            bool isLoading)?
+            bool isLoading,
+            double maxAttribute)?
         initial,
     TResult Function()? done,
     TResult Function(String msg)? error,
@@ -465,12 +514,14 @@ class _$IndividualPointDone
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(
+            double? maxPoint,
             double? point,
             BedEntity bed,
             List<double> startAttributes,
             List<double> attributesChanged,
             List<String> attributesNames,
-            bool isLoading)?
+            bool isLoading,
+            double maxAttribute)?
         initial,
     TResult Function()? done,
     TResult Function(String msg)? error,
@@ -598,12 +649,14 @@ class _$IndividualPointError
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(
+            double? maxPoint,
             double? point,
             BedEntity bed,
             List<double> startAttributes,
             List<double> attributesChanged,
             List<String> attributesNames,
-            bool isLoading)
+            bool isLoading,
+            double maxAttribute)
         initial,
     required TResult Function() done,
     required TResult Function(String msg) error,
@@ -615,12 +668,14 @@ class _$IndividualPointError
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function(
+            double? maxPoint,
             double? point,
             BedEntity bed,
             List<double> startAttributes,
             List<double> attributesChanged,
             List<String> attributesNames,
-            bool isLoading)?
+            bool isLoading,
+            double maxAttribute)?
         initial,
     TResult Function()? done,
     TResult Function(String msg)? error,
@@ -632,12 +687,14 @@ class _$IndividualPointError
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(
+            double? maxPoint,
             double? point,
             BedEntity bed,
             List<double> startAttributes,
             List<double> attributesChanged,
             List<String> attributesNames,
-            bool isLoading)?
+            bool isLoading,
+            double maxAttribute)?
         initial,
     TResult Function()? done,
     TResult Function(String msg)? error,
