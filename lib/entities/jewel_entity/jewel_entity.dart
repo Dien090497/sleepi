@@ -61,10 +61,8 @@ class JewelEntity {
       required this.luck,
       required this.quality});
 
-  factory JewelEntity.fromJson(Map<String, dynamic> json) {
-    print('json is  $json}');
-    return _$JewelEntityFromJson(json);
-  }
+  factory JewelEntity.fromJson(Map<String, dynamic> json) =>
+      _$JewelEntityFromJson(json);
 
   Map<String, dynamic> toJson() => _$JewelEntityToJson(this);
 }

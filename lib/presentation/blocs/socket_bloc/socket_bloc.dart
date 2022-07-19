@@ -10,7 +10,8 @@ import 'package:slee_fi/presentation/blocs/socket_bloc/socket_state.dart';
 import 'package:slee_fi/schema/add_jewel_schema/add_jewel_schema.dart';
 import 'package:slee_fi/usecase/add_jewel_usecase.dart';
 import 'package:slee_fi/usecase/bed_detail_usecase.dart';
-import 'package:slee_fi/usecase/fetch_bed_usecase.dart';
+import 'package:slee_fi/usecase/fetch_home_bed_usecase.dart';
+import 'package:slee_fi/usecase/fetch_jewel_usecase.dart';
 import 'package:slee_fi/usecase/open_socket_usecase.dart';
 import 'package:slee_fi/usecase/remove_jewel_usecase.dart';
 
@@ -38,7 +39,7 @@ class SocketBloc extends Bloc<SocketEvent, SocketState> {
   final _addJewelUseCase = getIt<AddJewelUseCase>();
   final _removeUseCase = getIt<RemoveJewelUseCase>();
   final _openSocketUseCase = getIt<OpenSocketUseCase>();
-  final _fetchListBedUC = getIt<FetchBedUseCase>();
+  final _fetchListBedUC = getIt<FetchJewelUseCase>();
 
   void _fetchSocket(SocketInit event, Emitter<SocketState> emit) async {
     if (state is SocketStateLoaded) {
@@ -169,15 +170,14 @@ class SocketBloc extends Bloc<SocketEvent, SocketState> {
 
   FutureOr<void> _fetchJewels(
       FetchJewels event, Emitter<SocketState> emit) async {
-    final result = await _fetchListBedUC.call(FetchBedParam(
-        _currentPage, _limit, CategoryType.jewel, AttributeNFT.none));
+    final result =
+        await _fetchListBedUC.call(FetchHomeBedParam(_currentPage, _limit));
     result.fold((l) {
       add(SocketError(l.msg));
     }, (success) {
       final currentState = state;
       if (currentState is SocketStateLoaded) {
-        final list = currentState.jewels ??
-            <JewelEntity>[] + success.map((e) => e.toJewelEntity()).toList();
+        final list = currentState.jewels ?? <JewelEntity>[] + success;
         emit(currentState.copyWith(
             errorMessage: null,
             jewels: list,

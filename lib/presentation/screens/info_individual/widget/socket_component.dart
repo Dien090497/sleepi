@@ -111,7 +111,9 @@ class SocketComponent extends StatelessWidget {
             context.read<SocketBloc>().add(RemoveJewel(index));
             Navigator.pop(context);
           },
-          onTransferTap: () {},
+          onTransferTap: () {
+            Navigator.pop(context);
+          },
           textOnSell: LocaleKeys.remove,
           textOnTransfer: LocaleKeys.ok,
         ),

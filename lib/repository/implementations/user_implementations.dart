@@ -8,6 +8,7 @@ import 'package:slee_fi/datasources/remote/network/web3_datasource.dart';
 import 'package:slee_fi/entities/active_code/active_code_entity.dart';
 import 'package:slee_fi/entities/bed_entity/bed_entity.dart';
 import 'package:slee_fi/entities/item_entity/item_entity.dart';
+import 'package:slee_fi/entities/jewel_entity/jewel_entity.dart';
 import 'package:slee_fi/entities/tracking_result_chart_data_entity/tracking_result_chart_data_entity.dart';
 import 'package:slee_fi/entities/tracking_result_chart_days_entity/tracking_result_chart_days_entity.dart';
 import 'package:slee_fi/failures/failure.dart';
@@ -301,12 +302,11 @@ class UserImplementation extends IUserRepository {
   }
 
   @override
-  Future<Either<FailureMessage, TrackingResultChartDaysEntity>> fetchDataDaysChart(ParamsGetDataChart params) async {
+  Future<Either<FailureMessage, TrackingResultChartDaysEntity>>
+      fetchDataDaysChart(ParamsGetDataChart params) async {
     try {
       final result = await _authDataSource.fetchDataDaysChart(
-          params.fdate,
-          params.tdate,
-          params.type);
+          params.fdate, params.tdate, params.type);
       return Right(result.toEntity());
     } catch (e) {
       return Left(FailureMessage('$e'));
@@ -320,6 +320,19 @@ class UserImplementation extends IUserRepository {
       final result =
           await _authDataSource.fetchBedInHomePage(param.limit, param.page);
       var list = result.list.map((e) => e.toEntity()).toList();
+      return Right(list);
+    } catch (e) {
+      return Left(FailureMessage.fromException(e));
+    }
+  }
+
+  @override
+  Future<Either<FailureMessage, List<JewelEntity>>> fetchListJewel(
+      FetchHomeBedParam param) async {
+    try {
+      final result =
+          await _authDataSource.getListJewel(param.limit, param.page);
+      var list = result.map((e) => e.toEntity()).toList();
       return Right(list);
     } catch (e) {
       return Left(FailureMessage.fromException(e));

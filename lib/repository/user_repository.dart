@@ -2,13 +2,13 @@ import 'package:dartz/dartz.dart';
 import 'package:slee_fi/entities/active_code/active_code_entity.dart';
 import 'package:slee_fi/entities/bed_entity/bed_entity.dart';
 import 'package:slee_fi/entities/item_entity/item_entity.dart';
+import 'package:slee_fi/entities/jewel_entity/jewel_entity.dart';
 import 'package:slee_fi/entities/tracking_result_chart_data_entity/tracking_result_chart_data_entity.dart';
 import 'package:slee_fi/entities/tracking_result_chart_days_entity/tracking_result_chart_days_entity.dart';
 import 'package:slee_fi/failures/failure.dart';
 import 'package:slee_fi/models/bed_model/beb_model.dart';
 import 'package:slee_fi/models/estimate_sleep_response/estimate_sleep_response.dart';
 import 'package:slee_fi/models/global_config_response/global_config_response.dart';
-import 'package:slee_fi/models/home_bed_response/home_bed_response.dart';
 import 'package:slee_fi/models/lucky_box/lucky_box.dart';
 import 'package:slee_fi/models/response_model/response_model.dart';
 import 'package:slee_fi/models/swap_token_to_wallet_response/swap_token_to_wallet_response.dart';
@@ -72,8 +72,8 @@ abstract class IUserRepository {
   Future<Either<FailureMessage, TrackingResultChartDataEntity>> fetchDataChart(
       ParamsGetDataChart paramsGetDataChart);
 
-  Future<Either<FailureMessage, TrackingResultChartDaysEntity>> fetchDataDaysChart(
-      ParamsGetDataChart params);
+  Future<Either<FailureMessage, TrackingResultChartDaysEntity>>
+      fetchDataDaysChart(ParamsGetDataChart params);
 
   Future<Either<FailureMessage, BedEntity>> bedDetail(int bedId, bool isBase);
 
@@ -86,5 +86,8 @@ abstract class IUserRepository {
       AddJewelSchema addJewelSchema);
 
   Future<Either<FailureMessage, List<BedEntity>>> fetchHomeBed(
+      FetchHomeBedParam param);
+
+  Future<Either<FailureMessage, List<JewelEntity>>> fetchListJewel(
       FetchHomeBedParam param);
 }

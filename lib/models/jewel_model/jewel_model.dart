@@ -8,14 +8,11 @@ class JewelModel {
   final int id;
   final int nftId;
   final String nftName;
-  dynamic parent1;
-  dynamic parent2;
   final String contractAddress;
   final int tokenId;
   final String owner;
   final String type;
   final String jewelType;
-  dynamic itemType;
   dynamic classNft;
   dynamic quality;
   final String image;

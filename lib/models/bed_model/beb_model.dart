@@ -1,8 +1,10 @@
 import 'dart:core';
+import 'dart:developer';
 
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:slee_fi/entities/bed_entity/bed_entity.dart';
 import 'package:slee_fi/entities/jewel_entity/jewel_entity.dart';
+import 'package:slee_fi/models/jewel_model/jewel_model.dart';
 
 part 'beb_model.g.dart';
 
@@ -10,29 +12,22 @@ part 'beb_model.g.dart';
 class BedModel {
   final int id;
 
-  // @JsonKey(name: 'nft_id')
   final int nftId;
 
-  // @JsonKey(name: 'nft_name')
   final String nftName;
 
   final String image;
 
-  // @JsonKey(name: 'contract_address')
   final String contractAddress;
 
   final String type;
 
-  // @JsonKey(name: 'jewel_type')
   final dynamic jewelType;
 
-  // @JsonKey(name: 'item_type')
   final dynamic itemType;
 
-  // @JsonKey(name: 'effect')
   final dynamic effect;
 
-  // @JsonKey(name: "is_mint")
   final int isMint;
 
   @JsonKey(name: 'classNft')
@@ -45,18 +40,15 @@ class BedModel {
   // @JsonKey(name: 'bed_mint')
   final int bedMint;
 
-  final double efficiency;
-  final double luck;
-  final double bonus;
-  final double special;
-  final double resilience;
-
-  // @JsonKey(name: 'token_id')
+  final dynamic efficiency;
+  final dynamic luck;
+  final dynamic bonus;
+  final dynamic special;
+  final dynamic resilience;
+  final dynamic durability;
+  final int? socket;
+  final List<JewelModel>? jewels;
   final int tokenId;
-
-  final double durability;
-
-  // @JsonKey(name: 'is_lock')
   final Nft nft;
 
   final double? insurancePercent;
@@ -79,6 +71,7 @@ class BedModel {
       this.level,
       this.bedMint,
       this.efficiency,
+      this.socket,
       this.luck,
       this.bonus,
       this.special,
@@ -92,10 +85,13 @@ class BedModel {
       this.effect,
       this.insurancePercent,
       this.startTime,
-      this.endTime);
+      this.endTime,
+      this.jewels);
 
-  factory BedModel.fromJson(Map<String, dynamic> json) =>
-      _$BedModelFromJson(json);
+  factory BedModel.fromJson(Map<String, dynamic> json) {
+    log('json is   $json');
+    return _$BedModelFromJson(json);
+  }
 
   Map<String, dynamic> toJson() => _$BedModelToJson(this);
 
@@ -121,23 +117,23 @@ class BedModel {
       level: level,
       image: image,
       contractAddress: contractAddress,
-      durability: durability,
       isLock: nft.isLock,
       bedMint: bedMint,
       quality: quality,
       type: type,
-      efficiency: efficiency,
-      luck: luck,
-      bonus: bonus,
       isMint: isMint,
-      special: special,
-      resilience: resilience,
+      efficiency: efficiency is String ? double.parse(efficiency) : efficiency,
+      luck: luck is String ? double.parse(luck) : luck,
+      bonus: bonus is String ? double.parse(bonus) : bonus,
+      special: special is String ? double.parse(special) : special,
+      resilience: resilience is String ? double.parse(resilience) : resilience,
+      durability: durability is String ? double.parse(durability) : durability,
       time: time,
       startTime: startTime,
       endTime: endTime,
       insurancePercent: insurancePercent,
-      socket: null,
-      jewels: [],
+      socket: socket,
+      jewels: jewels != null ? jewels!.map((e) => e.toEntity()).toList() : [],
       owner: owner,
       status: nft.status,
     );
@@ -146,12 +142,10 @@ class BedModel {
 
 @JsonSerializable()
 class Nft {
-
   final int id;
   final int categoryId;
   final int isLock;
   final String status;
-
 
   Nft(this.id, this.categoryId, this.isLock, this.status);
 
