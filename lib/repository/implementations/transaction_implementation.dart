@@ -55,6 +55,7 @@ class TransactionImplementation extends ITransactionRepository{
           transactionHash: result,
           chainId: chainId!,
           addressTo: params.contractAddressTo,
+          tokenSymbol: params.tokenSymbol!
         );
         await _historyDataSource.putHistory(model);
       }
@@ -108,7 +109,7 @@ class TransactionImplementation extends ITransactionRepository{
   @override
   Future<Either<FailureMessage, bool>> transferTokenErc20(SendTokenExternalParams params) async {
     try {
-      _getStorageDataSource.getCurrentChainId();
+      final chainId = _getStorageDataSource.getCurrentChainId();
       final walletId = _getStorageDataSource.getCurrentWalletId();
       final wallet = await _isarDataSource.getWalletAt(walletId);
 
@@ -122,11 +123,20 @@ class TransactionImplementation extends ITransactionRepository{
       final erc20 = _web3DataSource.token(params.tokenEntity?.address ?? '');
       final recipient = EthereumAddress.fromHex(params.toAddress);
       final amount = EtherAmount.fromUnitAndValue(EtherUnit.wei, BigInt.from(params.valueInEther * pow(10, 18))).getValueInUnitBI(EtherUnit.wei);
-      erc20.transfer(
+      final result = await erc20.transfer(
         recipient,
         amount,
         credentials: credentials,
       );
+      if(result.isNotEmpty){
+        final model = HistoryIsarModel(
+            transactionHash: result,
+            chainId: chainId!,
+            addressTo: params.toAddress,
+            tokenSymbol: params.tokenEntity!.symbol
+        );
+        await _historyDataSource.putHistory(model);
+      }
       return const Right(true);
     } catch (e) {
       return Left(FailureMessage('$e'));
@@ -134,18 +144,31 @@ class TransactionImplementation extends ITransactionRepository{
   }
 
   @override
-  Future<Either<Failure, BigInt>> estimateGasFee(
-      {String? sender, String? to, double? value, double? gasPrice}) async {
+  Future<Either<Failure, double>> estimateGasFee(
+      {String? sender, String? to, double? value}) async{
+      try {
+        final gasPrice = await _web3DataSource.getGasPrice();
+        final price = await _web3DataSource.estimateGas(
+          value: value,
+          gasPrice: await _web3DataSource.getGasPrice(),
+          sender: sender != null ? EthereumAddress.fromHex(sender) : null,
+          to: to,
+        );
+        return Right(price * gasPrice.getInWei / BigInt.from(pow(10, 18)));
+      } catch (e) {
+        return Left(FailureMessage('$e'));
+      }
+  }
+
+  @override
+  Future<Either<Failure, String>> getCurrentNetworkExplorer(String hash) async{
     try {
-      final price = await _web3DataSource.estimateGas(
-        value: value,
-        gasPrice: gasPrice,
-        sender: sender != null ? EthereumAddress.fromHex(sender) : null,
-        to: to,
-      );
-      return Right(price * BigInt.from(50) + BigInt.from(15));
+      final network = await _getCurrentNetwork();
+      String urlDetail = '${network.explorers.first.url}/tx/$hash';
+    return Right(urlDetail);
     } catch (e) {
-      return Left(FailureMessage('$e'));
+    return Left(FailureMessage('$e'));
     }
   }
 }
+

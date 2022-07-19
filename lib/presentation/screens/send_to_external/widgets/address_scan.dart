@@ -14,7 +14,7 @@ class AddressScan extends StatefulWidget {
 }
 
 class _AddressScanState extends State<AddressScan> {
-  late TextEditingController _editingController;
+   late TextEditingController _editingController = TextEditingController();
 
   @override
   void initState() {
@@ -27,6 +27,7 @@ class _AddressScanState extends State<AddressScan> {
 
   @override
   void dispose() {
+    _editingController.removeListener(() {widget.onChangedAddress(_editingController.text); });
     _editingController.dispose();
     super.dispose();
   }

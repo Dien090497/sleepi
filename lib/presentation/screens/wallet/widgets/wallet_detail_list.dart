@@ -76,7 +76,9 @@ class WalletDetailList extends StatelessWidget {
                               typeHistory: index == 2
                                   ? Const.listTypeHistory.elementAt(0)
                                   : Const.listTypeHistory.elementAt(1),
-                              tokenSymbol: tokenList[index].symbol)));
+                              tokenSymbol: tokenList[index].symbol,
+                              page: 1
+                          )));
                 } else {
                   Navigator.pushNamed(context, R.nftDetail,
                       arguments: NFTDetailArguments(tokenList[index]));

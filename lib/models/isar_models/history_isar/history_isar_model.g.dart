@@ -15,9 +15,14 @@ extension GetHistoryIsarModelCollection on Isar {
 const HistoryIsarModelSchema = CollectionSchema(
   name: 'HistoryIsarModel',
   schema:
-      '{"name":"HistoryIsarModel","idName":"id","properties":[{"name":"addressTo","type":"String"},{"name":"chainId","type":"Long"},{"name":"transactionHash","type":"String"}],"indexes":[],"links":[]}',
+      '{"name":"HistoryIsarModel","idName":"id","properties":[{"name":"addressTo","type":"String"},{"name":"chainId","type":"Long"},{"name":"tokenSymbol","type":"String"},{"name":"transactionHash","type":"String"}],"indexes":[],"links":[]}',
   idName: 'id',
-  propertyIds: {'addressTo': 0, 'chainId': 1, 'transactionHash': 2},
+  propertyIds: {
+    'addressTo': 0,
+    'chainId': 1,
+    'tokenSymbol': 2,
+    'transactionHash': 3
+  },
   listProperties: {},
   indexIds: {},
   indexValueTypes: {},
@@ -65,8 +70,11 @@ void _historyIsarModelSerializeNative(
   dynamicSize += (_addressTo.length) as int;
   final value1 = object.chainId;
   final _chainId = value1;
-  final value2 = object.transactionHash;
-  final _transactionHash = IsarBinaryWriter.utf8Encoder.convert(value2);
+  final value2 = object.tokenSymbol;
+  final _tokenSymbol = IsarBinaryWriter.utf8Encoder.convert(value2);
+  dynamicSize += (_tokenSymbol.length) as int;
+  final value3 = object.transactionHash;
+  final _transactionHash = IsarBinaryWriter.utf8Encoder.convert(value3);
   dynamicSize += (_transactionHash.length) as int;
   final size = staticSize + dynamicSize;
 
@@ -76,7 +84,8 @@ void _historyIsarModelSerializeNative(
   final writer = IsarBinaryWriter(buffer, staticSize);
   writer.writeBytes(offsets[0], _addressTo);
   writer.writeLong(offsets[1], _chainId);
-  writer.writeBytes(offsets[2], _transactionHash);
+  writer.writeBytes(offsets[2], _tokenSymbol);
+  writer.writeBytes(offsets[3], _transactionHash);
 }
 
 HistoryIsarModel _historyIsarModelDeserializeNative(
@@ -87,7 +96,8 @@ HistoryIsarModel _historyIsarModelDeserializeNative(
   final object = HistoryIsarModel(
     addressTo: reader.readString(offsets[0]),
     chainId: reader.readLong(offsets[1]),
-    transactionHash: reader.readString(offsets[2]),
+    tokenSymbol: reader.readString(offsets[2]),
+    transactionHash: reader.readString(offsets[3]),
   );
   object.id = id;
   return object;
@@ -104,6 +114,8 @@ P _historyIsarModelDeserializePropNative<P>(
       return (reader.readLong(offset)) as P;
     case 2:
       return (reader.readString(offset)) as P;
+    case 3:
+      return (reader.readString(offset)) as P;
     default:
       throw 'Illegal propertyIndex';
   }
@@ -115,6 +127,7 @@ dynamic _historyIsarModelSerializeWeb(
   IsarNative.jsObjectSet(jsObj, 'addressTo', object.addressTo);
   IsarNative.jsObjectSet(jsObj, 'chainId', object.chainId);
   IsarNative.jsObjectSet(jsObj, 'id', object.id);
+  IsarNative.jsObjectSet(jsObj, 'tokenSymbol', object.tokenSymbol);
   IsarNative.jsObjectSet(jsObj, 'transactionHash', object.transactionHash);
   return jsObj;
 }
@@ -125,6 +138,7 @@ HistoryIsarModel _historyIsarModelDeserializeWeb(
     addressTo: IsarNative.jsObjectGet(jsObj, 'addressTo') ?? '',
     chainId:
         IsarNative.jsObjectGet(jsObj, 'chainId') ?? double.negativeInfinity,
+    tokenSymbol: IsarNative.jsObjectGet(jsObj, 'tokenSymbol') ?? '',
     transactionHash: IsarNative.jsObjectGet(jsObj, 'transactionHash') ?? '',
   );
   object.id = IsarNative.jsObjectGet(jsObj, 'id');
@@ -140,6 +154,8 @@ P _historyIsarModelDeserializePropWeb<P>(Object jsObj, String propertyName) {
           double.negativeInfinity) as P;
     case 'id':
       return (IsarNative.jsObjectGet(jsObj, 'id')) as P;
+    case 'tokenSymbol':
+      return (IsarNative.jsObjectGet(jsObj, 'tokenSymbol') ?? '') as P;
     case 'transactionHash':
       return (IsarNative.jsObjectGet(jsObj, 'transactionHash') ?? '') as P;
     default:
@@ -436,6 +452,113 @@ extension HistoryIsarModelQueryFilter
   }
 
   QueryBuilder<HistoryIsarModel, HistoryIsarModel, QAfterFilterCondition>
+      tokenSymbolEqualTo(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return addFilterConditionInternal(FilterCondition(
+      type: ConditionType.eq,
+      property: 'tokenSymbol',
+      value: value,
+      caseSensitive: caseSensitive,
+    ));
+  }
+
+  QueryBuilder<HistoryIsarModel, HistoryIsarModel, QAfterFilterCondition>
+      tokenSymbolGreaterThan(
+    String value, {
+    bool caseSensitive = true,
+    bool include = false,
+  }) {
+    return addFilterConditionInternal(FilterCondition(
+      type: ConditionType.gt,
+      include: include,
+      property: 'tokenSymbol',
+      value: value,
+      caseSensitive: caseSensitive,
+    ));
+  }
+
+  QueryBuilder<HistoryIsarModel, HistoryIsarModel, QAfterFilterCondition>
+      tokenSymbolLessThan(
+    String value, {
+    bool caseSensitive = true,
+    bool include = false,
+  }) {
+    return addFilterConditionInternal(FilterCondition(
+      type: ConditionType.lt,
+      include: include,
+      property: 'tokenSymbol',
+      value: value,
+      caseSensitive: caseSensitive,
+    ));
+  }
+
+  QueryBuilder<HistoryIsarModel, HistoryIsarModel, QAfterFilterCondition>
+      tokenSymbolBetween(
+    String lower,
+    String upper, {
+    bool caseSensitive = true,
+    bool includeLower = true,
+    bool includeUpper = true,
+  }) {
+    return addFilterConditionInternal(FilterCondition.between(
+      property: 'tokenSymbol',
+      lower: lower,
+      includeLower: includeLower,
+      upper: upper,
+      includeUpper: includeUpper,
+      caseSensitive: caseSensitive,
+    ));
+  }
+
+  QueryBuilder<HistoryIsarModel, HistoryIsarModel, QAfterFilterCondition>
+      tokenSymbolStartsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return addFilterConditionInternal(FilterCondition(
+      type: ConditionType.startsWith,
+      property: 'tokenSymbol',
+      value: value,
+      caseSensitive: caseSensitive,
+    ));
+  }
+
+  QueryBuilder<HistoryIsarModel, HistoryIsarModel, QAfterFilterCondition>
+      tokenSymbolEndsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return addFilterConditionInternal(FilterCondition(
+      type: ConditionType.endsWith,
+      property: 'tokenSymbol',
+      value: value,
+      caseSensitive: caseSensitive,
+    ));
+  }
+
+  QueryBuilder<HistoryIsarModel, HistoryIsarModel, QAfterFilterCondition>
+      tokenSymbolContains(String value, {bool caseSensitive = true}) {
+    return addFilterConditionInternal(FilterCondition(
+      type: ConditionType.contains,
+      property: 'tokenSymbol',
+      value: value,
+      caseSensitive: caseSensitive,
+    ));
+  }
+
+  QueryBuilder<HistoryIsarModel, HistoryIsarModel, QAfterFilterCondition>
+      tokenSymbolMatches(String pattern, {bool caseSensitive = true}) {
+    return addFilterConditionInternal(FilterCondition(
+      type: ConditionType.matches,
+      property: 'tokenSymbol',
+      value: pattern,
+      caseSensitive: caseSensitive,
+    ));
+  }
+
+  QueryBuilder<HistoryIsarModel, HistoryIsarModel, QAfterFilterCondition>
       transactionHashEqualTo(
     String value, {
     bool caseSensitive = true,
@@ -578,6 +701,16 @@ extension HistoryIsarModelQueryWhereSortBy
   }
 
   QueryBuilder<HistoryIsarModel, HistoryIsarModel, QAfterSortBy>
+      sortByTokenSymbol() {
+    return addSortByInternal('tokenSymbol', Sort.asc);
+  }
+
+  QueryBuilder<HistoryIsarModel, HistoryIsarModel, QAfterSortBy>
+      sortByTokenSymbolDesc() {
+    return addSortByInternal('tokenSymbol', Sort.desc);
+  }
+
+  QueryBuilder<HistoryIsarModel, HistoryIsarModel, QAfterSortBy>
       sortByTransactionHash() {
     return addSortByInternal('transactionHash', Sort.asc);
   }
@@ -620,6 +753,16 @@ extension HistoryIsarModelQueryWhereSortThenBy
   }
 
   QueryBuilder<HistoryIsarModel, HistoryIsarModel, QAfterSortBy>
+      thenByTokenSymbol() {
+    return addSortByInternal('tokenSymbol', Sort.asc);
+  }
+
+  QueryBuilder<HistoryIsarModel, HistoryIsarModel, QAfterSortBy>
+      thenByTokenSymbolDesc() {
+    return addSortByInternal('tokenSymbol', Sort.desc);
+  }
+
+  QueryBuilder<HistoryIsarModel, HistoryIsarModel, QAfterSortBy>
       thenByTransactionHash() {
     return addSortByInternal('transactionHash', Sort.asc);
   }
@@ -647,6 +790,11 @@ extension HistoryIsarModelQueryWhereDistinct
   }
 
   QueryBuilder<HistoryIsarModel, HistoryIsarModel, QDistinct>
+      distinctByTokenSymbol({bool caseSensitive = true}) {
+    return addDistinctByInternal('tokenSymbol', caseSensitive: caseSensitive);
+  }
+
+  QueryBuilder<HistoryIsarModel, HistoryIsarModel, QDistinct>
       distinctByTransactionHash({bool caseSensitive = true}) {
     return addDistinctByInternal('transactionHash',
         caseSensitive: caseSensitive);
@@ -665,6 +813,11 @@ extension HistoryIsarModelQueryProperty
 
   QueryBuilder<HistoryIsarModel, int?, QQueryOperations> idProperty() {
     return addPropertyNameInternal('id');
+  }
+
+  QueryBuilder<HistoryIsarModel, String, QQueryOperations>
+      tokenSymbolProperty() {
+    return addPropertyNameInternal('tokenSymbol');
   }
 
   QueryBuilder<HistoryIsarModel, String, QQueryOperations>

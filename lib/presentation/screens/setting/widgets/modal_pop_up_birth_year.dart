@@ -52,7 +52,7 @@ class _SettingBirthYearState extends State<SettingBirthYear> {
   }
 }
 
-class ModalPopUpBirthYear extends StatelessWidget {
+class ModalPopUpBirthYear extends StatefulWidget {
   const ModalPopUpBirthYear(
       {required this.onBirthYearChanged, this.selectedYear, Key? key})
       : super(key: key);
@@ -61,13 +61,28 @@ class ModalPopUpBirthYear extends StatelessWidget {
   final Function(int) onBirthYearChanged;
 
   @override
+  State<ModalPopUpBirthYear> createState() => _ModalPopUpBirthYearState();
+}
+
+class _ModalPopUpBirthYearState extends State<ModalPopUpBirthYear> {
+  late FixedExtentScrollController _controller ;
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     final currentYear = DateTime.now().year;
     List<int> years =
         List<int>.generate(currentYear - 1900 + 1, (i) => i + 1900);
     final initialIndex =
-        selectedYear != null ? years.indexOf(selectedYear!) : years.length ~/ 2;
-    int year = selectedYear ?? years[initialIndex];
+        widget.selectedYear != null ? years.indexOf(widget.selectedYear!) : years.length ~/ 2;
+    int year = widget.selectedYear ?? years[initialIndex];
+    _controller = FixedExtentScrollController(initialItem: initialIndex);
+
     return SafeArea(
       child: Column(
         mainAxisSize: MainAxisSize.min,
@@ -78,8 +93,7 @@ class ModalPopUpBirthYear extends StatelessWidget {
                 year = years[value];
               },
               itemExtent: 30,
-              scrollController:
-                  FixedExtentScrollController(initialItem: initialIndex),
+              scrollController: _controller,
               diameterRatio: 1,
               // useMagnifier: true,
               // magnification: 1.3,
@@ -100,7 +114,7 @@ class ModalPopUpBirthYear extends StatelessWidget {
               textStyle: TextStyles.w600WhiteSize16,
               height: 48,
               onPressed: () {
-                onBirthYearChanged(year);
+                widget.onBirthYearChanged(year);
                 Navigator.pop(context);
               }),
           const SizedBox(

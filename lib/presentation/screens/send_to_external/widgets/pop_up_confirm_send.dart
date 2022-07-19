@@ -1,3 +1,4 @@
+import 'package:dartz/dartz.dart' as dartz;
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:slee_fi/common/routes/app_routes.dart';
@@ -6,10 +7,15 @@ import 'package:slee_fi/common/style/text_styles.dart';
 import 'package:slee_fi/common/widgets/sf_buttons.dart';
 import 'package:slee_fi/common/widgets/sf_dialog.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
+import 'package:slee_fi/di/injector.dart';
+import 'package:slee_fi/failures/failure.dart';
 import 'package:slee_fi/l10n/locale_keys.g.dart';
 import 'package:slee_fi/presentation/blocs/send_to_external/send_to_external_cubit.dart';
 import 'package:slee_fi/presentation/blocs/send_to_external/send_to_external_state.dart';
+import 'package:slee_fi/presentation/blocs/wallet/wallet_cubit.dart';
+import 'package:slee_fi/presentation/blocs/wallet/wallet_state.dart';
 import 'package:slee_fi/presentation/screens/send_to_external/send_to_external_screen.dart';
+import 'package:slee_fi/usecase/estimate_token_function_fee_usecase.dart';
 
 class PopUpConfirmSend extends StatefulWidget {
   const PopUpConfirmSend({
@@ -30,9 +36,7 @@ class PopUpConfirmSend extends StatefulWidget {
 }
 
 class _PopUpConfirmSendState extends State<PopUpConfirmSend> {
-  double? fee;
-  bool isDisabled = true;
-
+  String ownerAddress = '';
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
@@ -46,31 +50,20 @@ class _PopUpConfirmSendState extends State<PopUpConfirmSend> {
               });
             });
           }
-          if (state is SendToExternalCalculatorFee) {
-            fee = state.fee;
-            if (state.fee == null) {
-              setState(() {
-                isDisabled = true;
-              });
-            } else {
-              setState(() {
-                isDisabled = false;
-              });
-            }
-          }
         },
         builder: (context, state) {
           final cubit = context.read<SendToExternalCubit>();
-          if (state is sendToExternalStateInitial) {
-            if (widget.transferToken) {
-              cubit.estimateGas(widget.toAddress);
-            } else {
-              cubit.estimateGas(widget.toAddress,
-                  valueInEther: widget.valueInEther);
-            }
+          final walletCubit = context.read<WalletCubit>();
+          final walletState = walletCubit.state;
+
+          if (walletState is WalletStateLoaded) {
+            ownerAddress = walletState.walletInfoEntity.address;
           }
-          return isDisabled == false
-              ? Padding(
+
+          if (state is sendToExternalStateInitial) {
+            walletCubit.getWallet();
+          }
+          return Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 24),
                   child: Column(
                     children: [
@@ -87,10 +80,24 @@ class _PopUpConfirmSendState extends State<PopUpConfirmSend> {
                             style: TextStyles.lightGrey14,
                           ),
                           Expanded(
-                              child: SFText(
-                                  keyText: "${fee ?? "---"} AVAX",
-                                  style: TextStyles.lightWhite16,
-                                  textAlign: TextAlign.end)),
+                              child: FutureBuilder<dartz.Either<Failure, double>>(
+                                future: getIt<EstimateTokenFunctionFeeUseCase>()
+                                    .call(EstimateGasTokenParams(
+                                  ownerAddress: ownerAddress,
+                                  toAddress: widget.toAddress,
+                                  value: widget.valueInEther,
+                                )),
+                                builder: (context, snapshot) {
+                                  return Text(
+                                    snapshot.hasData
+                                        ? '${snapshot.data!.getOrElse(() => 0)} ${widget.transferToken ? widget.arg?.symbol : 'AVAX'}'
+                                        : '--.--',
+                                    textAlign: TextAlign.right,
+                                    style: TextStyles.lightWhite16,
+                                  );
+                                },
+                              ),
+                          ),
                         ],
                       ),
                       const SizedBox(
@@ -154,27 +161,19 @@ class _PopUpConfirmSendState extends State<PopUpConfirmSend> {
                                 textStyle: TextStyles.bold14LightWhite,
                                 color: AppColors.blue,
                                 width: double.infinity,
-                                disabled: isDisabled,
                                 onPressed: () {
                                   if (widget.transferToken) {
                                     cubit.sendTokenExternal(widget.toAddress,
                                         widget.valueInEther, widget.arg);
                                   } else {
                                     cubit.sendToExternal(widget.toAddress,
-                                        widget.valueInEther, fee!);
+                                        widget.valueInEther, "AVAX");
                                   }
                                 }),
                           ),
                         ],
                       )
                     ],
-                  ),
-                )
-              : const Padding(
-                  padding: EdgeInsets.all(24.0),
-                  child: SizedBox(
-                    height: 100,
-                    child: Center(child: CircularProgressIndicator()),
                   ),
                 );
         },

@@ -191,7 +191,7 @@ Future<T?> showLanguageUpdatedDialog<T>(BuildContext context, Locale locale) {
       barrierDismissible: false,
       builder: (context) {
         return SFDialog(
-          padding: EdgeInsets.zero,
+          padding:  EdgeInsets.zero,
           children: [
             // Align(
             //   alignment: Alignment.centerRight,
@@ -205,12 +205,11 @@ Future<T?> showLanguageUpdatedDialog<T>(BuildContext context, Locale locale) {
             const SizedBox(height: 12),
             SFText(
                 keyText: LocaleKeys.successfull,
-                maxLines: 1,
                 style: TextStyles.bold18White),
             const SizedBox(height: 12),
             SFText(
                 keyText: LocaleKeys.the_language_setting_has_been_updated,
-                maxLines: 1,
+                textAlign: TextAlign.center,
                 style: TextStyles.lightGrey14),
             const SizedBox(height: 44),
             const SFIcon(Ics.successful),

@@ -426,13 +426,13 @@ class WalletImplementation extends IWalletRepository {
         (l) {},
         (history) {
           if (params.tokenSymbol == "AVAX") {
-            transactionHistoryList = history.result;
+            transactionHistoryList = history;
           } else if (params.tokenSymbol != null) {
-            transactionHistoryList = history.result
+            transactionHistoryList = history
                 .where((i) => i.tokenSymbol == params.tokenSymbol)
                 .toList();
           } else {
-            transactionHistoryList = history.result;
+            transactionHistoryList = history;
           }
         },
       );
@@ -442,6 +442,7 @@ class WalletImplementation extends IWalletRepository {
         // final transactionReceipt = await _web3DataSource.getTransactionReceipt(historyList.elementAt(i).transactionHash);
         // final getTimeStamp = await _web3DataSource.getDetailBlock(transactionInfo.blockNumber.toBlockParam());
         final model = TransactionIsarModel(
+          transactionHash: transactionHistoryList.elementAt(i).hash,
             valueInEther:
                 BigInt.parse(transactionHistoryList.elementAt(i).value) /
                     BigInt.from(pow(10, 18)),

@@ -8,15 +8,28 @@ import 'package:slee_fi/common/widgets/sf_dialog.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
 import 'package:slee_fi/l10n/locale_keys.g.dart';
 
-class ModalPopUpLanguage extends StatelessWidget {
+class ModalPopUpLanguage extends StatefulWidget {
   const ModalPopUpLanguage({Key? key}) : super(key: key);
+
+  @override
+  State<ModalPopUpLanguage> createState() => _ModalPopUpLanguageState();
+}
+
+class _ModalPopUpLanguageState extends State<ModalPopUpLanguage> {
+  late FixedExtentScrollController _controller ;
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
     final langCodes = Const.locales.map<String>((e) => e.languageCode).toList();
     final currentLocale = context.locale;
     int selectedIndex = langCodes.indexOf(currentLocale.languageCode);
-
+    _controller = FixedExtentScrollController(initialItem: selectedIndex);
     return SafeArea(
       child: Column(
         mainAxisSize: MainAxisSize.min,
@@ -27,8 +40,7 @@ class ModalPopUpLanguage extends StatelessWidget {
                 selectedIndex = index;
               },
               itemExtent: 30,
-              scrollController:
-                  FixedExtentScrollController(initialItem: selectedIndex),
+              scrollController: _controller,
               diameterRatio: 1,
               children: List.generate(Const.locales.length, (i) {
                 return Center(

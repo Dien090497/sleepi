@@ -8,6 +8,7 @@ import 'package:slee_fi/datasources/remote/network/web3_datasource.dart';
 import 'package:slee_fi/failures/failure.dart';
 import 'package:slee_fi/models/history/history_model.dart';
 import 'package:slee_fi/models/isar_models/network_isar/network_isar_model.dart';
+import 'package:slee_fi/models/transaction_history/transaction_history_model.dart';
 import 'package:slee_fi/secret.dart';
 import 'package:slee_fi/usecase/get_history_transaction_usecase.dart';
 
@@ -26,17 +27,13 @@ class TransactionRemoteDataSource{
     return (await _isarDataSource.getNetworkAt(chainId!))!;
   }
 
-  Future<Either<Failure, HistoryModel>> getHistoryTransaction(HistoryTransactionParams params) async {
+  Future<Either<Failure, List<TransactionHistoryModel>>> getHistoryTransaction(HistoryTransactionParams params) async {
     try {
+      List<TransactionHistoryModel> transactionsHistory = [];
       final historyTransaction = await _historyDataSource.getAllHistory();
-      // print('----------------historyTransaction-----------------');
-      // print(historyTransaction);
-      // int quantityBlock = 5;
-      String? blockNumber;
-      dynamic response ;
+      int start = 5*(params.page! - 1);
+      int end = 5*params.page! > historyTransaction.length ? historyTransaction.length : 5*params.page!;
       if(historyTransaction.isNotEmpty){
-        blockNumber = historyTransaction.elementAt(params.page!).transactionHash;
-
         final walletId = _getStorageDataSource.getCurrentWalletId();
         final wallet = await _isarDataSource.getWalletAt(walletId);
 
@@ -49,13 +46,17 @@ class TransactionRemoteDataSource{
             wallet.mnemonic, wallet.derivedIndex!, network.slip44);
         final credentials = _web3dataSource.credentialsFromPrivateKey(privateKey);
         final ethereumAddress = await credentials.extractAddress();
-        final String url = '${network.explorers.first.url}/api?module=account&action=${params.typeHistory}&address=$ethereumAddress&startblock=$blockNumber&endblock=999999999&sort=desc&apikey=$apiKey"';
-        final dataResponse = await dio.get(url);
-        response = dataResponse;
+        List transactionByToken = historyTransaction.where((i) => i.tokenSymbol.contains(params.tokenSymbol!)).toList();
+        for(int i = start ; i < end;i++){
+          var block = await _web3dataSource.getDetailTransaction(transactionByToken[i].transactionHash);
+          final String url = '${network.explorers.first.url}/api?module=account&action=${params.typeHistory}&address=$ethereumAddress&startblock=${block.blockNumber}&endblock=${block.blockNumber}&sort=desc&apikey=$apiKey"';
+          final dataResponse = await dio.get(url);
+          final historyTx = HistoryModel.fromJson(dataResponse.data as Map<String, dynamic>);
+          transactionsHistory.addAll(historyTx.result);
+        }
       }
 
-      final history = HistoryModel.fromJson(response.data as Map<String, dynamic>);
-      return Right(history);
+      return Right(transactionsHistory);
     } catch (e) {
       return Left(FailureMessage('$e'));
     }

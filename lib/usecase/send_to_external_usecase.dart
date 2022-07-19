@@ -7,11 +7,11 @@ import 'package:slee_fi/usecase/usecase.dart';
 
 class SendToExternalParams {
   final double? valueInEther;
-  final double? fee;
   final String contractAddressTo;
+  final String? tokenSymbol;
 
   const SendToExternalParams(
-      {required this.contractAddressTo, this.valueInEther, this.fee});
+      {required this.contractAddressTo, this.tokenSymbol,this.valueInEther});
 }
 
 class SendToExternalUseCase extends UseCase<bool, SendToExternalParams> {

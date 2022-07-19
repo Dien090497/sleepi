@@ -3,13 +3,29 @@ import 'package:mobile_scanner/mobile_scanner.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/widgets/sf_back_button.dart';
 
-class QRCodeScanner extends StatelessWidget {
+class QRCodeScanner extends StatefulWidget {
   const QRCodeScanner({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
-    MobileScannerController cameraController = MobileScannerController();
+  State<QRCodeScanner> createState() => _QRCodeScannerState();
+}
 
+class _QRCodeScannerState extends State<QRCodeScanner> {
+  late MobileScannerController cameraController = MobileScannerController();
+
+  @override
+  void initState() {
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    cameraController.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.transparent,
       appBar: AppBar(
