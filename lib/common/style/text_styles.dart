@@ -214,6 +214,8 @@ class TextStyles {
   static const green12 = TextStyle(fontSize: 12, color: AppColors.green);
   static final green14 = TextStyle(fontSize: 14.sp, color: AppColors.green);
   static const green16 = TextStyle(fontSize: 16, color: AppColors.green);
+  static const green16Bold = TextStyle(
+      fontSize: 16, color: AppColors.green, fontWeight: FontWeight.bold);
 
   static const red14 = TextStyle(fontSize: 14, color: AppColors.red);
   static const w400Red12 = TextStyle(

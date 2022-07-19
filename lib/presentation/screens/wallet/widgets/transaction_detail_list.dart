@@ -37,16 +37,34 @@ class _TransactionDetailListState extends State<TransactionDetailList> {
   bool loadMore = false;
   bool isLoading = false;
 
+  Future scrollListener() async {
+    if (controller.position.pixels <
+        (controller.position.maxScrollExtent * .90)) {
+      await loadMore();
+    }
+  }
+
+  Future loadMore() async {
+    currentPage += 1;
+    if (isLoadMore) return;
+    setState(() => isLoadMore = true);
+    WalletCubit().getHistoryTransaction(HistoryTransactionParams(
+        typeHistory: widget.typeHistory!.typeHistory,
+        tokenSymbol: widget.typeHistory!.tokenSymbol,
+        page: currentPage));
+    setState(() => isLoadMore = false);
+  }
 
   @override
   void initState() {
     super.initState();
+    controller.addListener(scrollListener);
   }
 
   @override
   void dispose() {
+    controller.removeListener(scrollListener);
     controller.dispose();
-    _refreshController.dispose();
     super.dispose();
   }
 

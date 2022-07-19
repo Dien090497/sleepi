@@ -64,6 +64,7 @@ class InfoIndividualScreen extends StatelessWidget {
                   Expanded(
                     child: BlocBuilder<IndividualCubit, IndividualState>(
                       builder: (context, state) {
+                        final cubit = context.read<IndividualCubit>();
                         return WillPopScope(
                           onWillPop: () {
                             Navigator.pop(context, state.bed);
@@ -101,9 +102,18 @@ class InfoIndividualScreen extends StatelessWidget {
                                       ),
                                       SFButtonOutLined(
                                         title: LocaleKeys.base,
-                                        textStyle: TextStyles.bold14Blue,
-                                        borderColor: AppColors.blue,
-                                        onPressed: () {},
+                                        textStyle: state.isBase
+                                            ? TextStyles.white14W700
+                                            : TextStyles.bold14Blue,
+                                        borderColor: state.isBase
+                                            ? AppColors.transparent
+                                            : AppColors.blue,
+                                        bgColor: state.isBase
+                                            ? AppColors.blue
+                                            : AppColors.transparent,
+                                        onPressed: () {
+                                          cubit.changeIsBase();
+                                        },
                                       ),
                                       const SizedBox(width: 8),
                                       if (args.marketPlaceModel == null)
@@ -115,7 +125,10 @@ class InfoIndividualScreen extends StatelessWidget {
                                               AppColors.gradientBlueButton,
                                           onPressed: () {
                                             _showPointDialog(context,
-                                                bed: state.bed);
+                                                    bed: state.bed)
+                                                .then((_) {
+                                              cubit.refresh();
+                                            });
                                           },
                                         ),
                                     ],
@@ -176,7 +189,7 @@ class InfoIndividualScreen extends StatelessWidget {
           BlocBuilder<IndividualCubit, IndividualState>(
             builder: (context, state) =>
                 state.isLoading ? const LoadingScreen() : const SizedBox(),
-          )
+          ),
         ],
       ),
     );

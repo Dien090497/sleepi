@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:slee_fi/presentation/blocs/home/home_bloc.dart';
+import 'package:slee_fi/presentation/blocs/lucky_box/lucky_box_cubit.dart';
 
 class HomeListWidget extends StatefulWidget {
   const HomeListWidget({Key? key, required this.child}) : super(key: key);
@@ -23,6 +24,7 @@ class _HomeListWidgetState extends State<HomeListWidget> {
 
   void _onRefresh() async {
     BlocProvider.of<HomeBloc>(context).add(RefreshBed());
+    BlocProvider.of<LuckyBoxCubit>(context).fetchLuckyBox();
     refreshController.refreshCompleted();
   }
 

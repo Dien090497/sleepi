@@ -11,37 +11,41 @@ class SpendingDataSource {
 
   SpendingDataSource(this._web3provider);
 
-  Spending get _spendingContract {
+  Spending spendingContract(String address) {
     return Spending(
-        address: ContractAddresses.spending, client: _web3provider.web3client);
+        address: EthereumAddress.fromHex(address),
+        client: _web3provider.web3client);
   }
 
   Future<String> toSpending({
+    required String spendingAddress,
     required Credentials owner,
     required BigInt amount,
     required BigInt userId,
     required ERC20 token,
   }) async {
-    return _spendingContract.depositToken(token.self.address, amount, userId,
-        credentials: owner);
+    return spendingContract(spendingAddress)
+        .depositToken(token.self.address, amount, userId, credentials: owner);
   }
 
   Future<String> toSpendingAvax({
+    required String spendingAddress,
     required Credentials owner,
     required BigInt amount,
     required BigInt userId,
     required EthereumAddress avax,
     Transaction? transaction,
   }) async {
-    return _spendingContract.depositToken(avax, amount, userId,
+    return spendingContract(spendingAddress).depositToken(avax, amount, userId,
         credentials: owner, transaction: transaction);
   }
 
   Future<String> approve(Credentials owner, BigInt value, ERC20 token) =>
       token.approve(ContractAddresses.spending, value, credentials: owner);
 
-  Future<BigInt> allowance(EthereumAddress owner, ERC20 token) =>
-      token.allowance(owner, _spendingContract.self.address);
+  Future<BigInt> allowance(
+          String spendingAddress, EthereumAddress owner, ERC20 token) =>
+      token.allowance(owner, EthereumAddress.fromHex(spendingAddress));
 
   ERC20 token(String address) => ERC20(
       address: EthereumAddress.fromHex(address),

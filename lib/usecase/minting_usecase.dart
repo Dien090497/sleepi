@@ -10,7 +10,7 @@ class MintingUseCase extends UseCase<dynamic, MintingSchema> {
   MintingUseCase(this.mintRepository);
 
   @override
-  Future<Either<Failure, dynamic>> call(MintingSchema params) {
+  Future<Either<FailureMessage, dynamic>> call(MintingSchema params) {
     return mintRepository.mint(params);
   }
 }

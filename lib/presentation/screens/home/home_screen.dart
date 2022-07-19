@@ -9,6 +9,8 @@ import 'package:slee_fi/common/widgets/topbar_common.dart';
 import 'package:slee_fi/l10n/locale_keys.g.dart';
 import 'package:slee_fi/presentation/blocs/home/home_bloc.dart';
 import 'package:slee_fi/presentation/blocs/home/home_state.dart';
+import 'package:slee_fi/presentation/blocs/item_list/item_bloc.dart';
+import 'package:slee_fi/presentation/blocs/lucky_box/lucky_box_cubit.dart';
 import 'package:slee_fi/presentation/screens/home/widgets/alarm_bell.dart';
 import 'package:slee_fi/presentation/screens/home/widgets/home_list_widget.dart';
 import 'package:slee_fi/presentation/screens/home/widgets/home_switch.dart';
@@ -24,6 +26,8 @@ class HomeScreen extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider(create: (_) => HomeBloc()..add(RefreshBed())),
+        BlocProvider(create: (_) => LuckyBoxCubit()),
+        BlocProvider(create: (_) => ItemBloc()),
       ],
       child: SafeArea(
         bottom: false,
@@ -94,7 +98,7 @@ class HomeScreen extends StatelessWidget {
                                 const SizedBox(height: 24),
                               ],
                               SFText(
-                                keyText: 'You can set your alarm here',
+                                keyText: LocaleKeys.you_can_set_your_alarm_here,
                                 style: TextStyles.lightGrey12,
                               ),
                             ],

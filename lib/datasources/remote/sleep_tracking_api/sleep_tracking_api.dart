@@ -27,7 +27,7 @@ abstract class SleepTrackingApi {
   }
 
   @POST('/tracking')
-  Future<String> startTracking(@Body() StartTrackingSchema schema);
+  Future<dynamic> startTracking(@Body() StartTrackingSchema schema);
 
   @GET('/tracking/estimate-tracking')
   Future<EstimateSleepResponse> estimateSleepEarn(

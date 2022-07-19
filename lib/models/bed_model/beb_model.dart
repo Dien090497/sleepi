@@ -68,7 +68,7 @@ class BedModel {
   @JsonKey(name: 'is_lock')
   final int isLock;
 
-  final String status;
+  final String? status;
 
   final double? insurancePercent;
 
@@ -154,7 +154,7 @@ class BedModel {
       socket: null,
       jewels: [],
       owner: owner,
-      status: status,
+      status: status ?? '',
     );
   }
 }

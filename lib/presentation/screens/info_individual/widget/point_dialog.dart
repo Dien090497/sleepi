@@ -68,9 +68,11 @@ class PointDialog extends StatelessWidget {
                 ListView.separated(
                   shrinkWrap: true,
                   physics: const NeverScrollableScrollPhysics(),
-                  itemCount: state.attributesChanged.length,
+                  itemCount: state.startAttributes.length,
                   separatorBuilder: (_, i) => SizedBox(height: 16.h),
                   itemBuilder: (context, i) {
+                    final startPoint = state.startAttributes[i];
+                    final pointChanged = state.attributesChanged[i];
                     return _IncreasePoint(
                       title: state.attributesNames[i],
                       addTap: () {
@@ -79,9 +81,10 @@ class PointDialog extends StatelessWidget {
                       minusTap: () {
                         cubit.decrease(i);
                       },
-                      point: state.attributesChanged[i],
-                      startPoint: state.startAttributes[i],
-                      key: Key('${state.attributesChanged[i]}'),
+                      point: pointChanged,
+                      startPoint: startPoint,
+                      maxAttribute: state.maxAttribute,
+                      key: Key('$pointChanged'),
                     );
                   },
                 ),
@@ -130,6 +133,7 @@ class _IncreasePoint extends StatelessWidget {
     required this.title,
     required this.point,
     required this.startPoint,
+    required this.maxAttribute,
     required this.minusTap,
     required this.addTap,
   }) : super(key: key);
@@ -137,6 +141,7 @@ class _IncreasePoint extends StatelessWidget {
   final String title;
   final double point;
   final double startPoint;
+  final double maxAttribute;
   final VoidCallback minusTap;
   final VoidCallback addTap;
 
@@ -154,8 +159,11 @@ class _IncreasePoint extends StatelessWidget {
               showLabel: false,
               enabled: false,
               initialText: point.removeTrailingZeros,
-              textStyle:
-                  startPoint != point ? TextStyles.blue16 : TextStyles.white16,
+              textStyle: point == maxAttribute
+                  ? TextStyles.green16Bold
+                  : startPoint != point
+                      ? TextStyles.blue16
+                      : TextStyles.white16,
             )),
             const SizedBox(width: 16),
             _Button(icon: Icons.remove, onTap: minusTap),

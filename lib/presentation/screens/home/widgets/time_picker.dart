@@ -122,11 +122,12 @@ class SFDatePicker extends StatefulWidget {
 }
 
 class _SFDatePickerState extends State<SFDatePicker> {
-   late FixedExtentScrollController _controller ;
+  late final controller =
+      FixedExtentScrollController(initialItem: widget.selectedTime);
 
-   @override
+  @override
   void dispose() {
-    _controller.dispose();
+    controller.dispose();
     super.dispose();
   }
 
@@ -138,7 +139,8 @@ class _SFDatePickerState extends State<SFDatePicker> {
       selectionOverlay: const SizedBox(),
       offAxisFraction: widget.offAxisFraction,
       squeeze: 1,
-      scrollController: _controller,
+	  Controller: _controller,
+      scrollController: controller,
       useMagnifier: widget.useMagnifier,
       itemExtent: 48.0,
       backgroundColor: AppColors.dark,

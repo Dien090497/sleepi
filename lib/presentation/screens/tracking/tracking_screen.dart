@@ -56,6 +56,23 @@ class _TrackingScreenState extends State<TrackingScreen> {
 
   @override
   void initState() {
+    init();
+    double x = totalEarn / time;
+    timer = Timer.periodic(
+      const Duration(minutes: 1),
+          (Timer timer) async {
+        if (earn < totalEarn && x > 0) {
+          earn += x;
+          setState(() {});
+        } else {
+          timer.cancel();
+        }
+      },
+    );
+    super.initState();
+  }
+
+  init(){
     Future.delayed(Duration.zero, () async {
       final args = ModalRoute.of(context)?.settings.arguments as TrackingParams;
       totalEarn = args.tokenEarn;
@@ -67,23 +84,10 @@ class _TrackingScreenState extends State<TrackingScreen> {
       earn =
           (DateTime.now().difference(timStart).inMinutes) * (totalEarn / time);
       timeAlarm =
-          '${wakeUp.hour < 10 ? '0${wakeUp.hour}' : wakeUp.hour}:${wakeUp.minute < 10 ? '0${wakeUp.minute}' : wakeUp.minute}';
+      '${wakeUp.hour < 10 ? '0${wakeUp.hour}' : wakeUp.hour}:${wakeUp.minute < 10 ? '0${wakeUp.minute}' : wakeUp.minute}';
       fromRoute = args.fromRoute;
-      double x = totalEarn / time;
-      timer = Timer.periodic(
-        const Duration(seconds: 60),
-        (Timer timer) async {
-          if (earn < totalEarn && x > 0) {
-            earn += x;
-            setState(() {});
-          } else {
-            timer.cancel();
-          }
-        },
-      );
       setState(() {});
     });
-    super.initState();
   }
 
   @override
@@ -96,14 +100,7 @@ class _TrackingScreenState extends State<TrackingScreen> {
   Widget build(BuildContext context) {
     return WillPopScope(
       onWillPop: () async {
-        if (fromRoute == R.splash) {
-          Navigator.pushNamedAndRemoveUntil(
-            context,
-            R.bottomNavigation,
-            (r) => false,
-          );
-        }
-        return true;
+        return false;
       },
       child: BlocProvider(
         create: (context) => TrackingCubit(),
@@ -112,7 +109,7 @@ class _TrackingScreenState extends State<TrackingScreen> {
             if (state is TrackingStatePosted) {
               Navigator.pushReplacementNamed(context, R.preResult,
                   arguments: PreResultParams(
-                      fromRoute: fromRoute, resultModel: state.resultModel));
+                      fromRoute: fromRoute, resultModel: state.resultModel, dataChart: []));
             }
             if (state is TrackingStateFail) {
               showMessageDialog(context, state.msg);
@@ -122,12 +119,15 @@ class _TrackingScreenState extends State<TrackingScreen> {
             final cubit = context.read<TrackingCubit>();
 
             return FocusDetector(
-                onFocusGained: () {
-                  service.invoke(Const.setAsForeground);
-                  service.startService();
+                onFocusGained: () async {
+                  init();
+                  if(!(await service.isRunning())) {
+                    service.invoke(Const.setAsForeground);
+                    service.startService();
+                  }
                 },
                 onFocusLost: () {
-                  timer.cancel();
+                  // timer.cancel();
                 },
                 child: Stack(
                   children: [
@@ -136,14 +136,7 @@ class _TrackingScreenState extends State<TrackingScreen> {
                         context: context,
                         title: LocaleKeys.tracking,
                         textStyle: TextStyles.bold18LightWhite,
-                        onBack: () {
-                          if (fromRoute == R.splash) {
-                            Navigator.pushNamedAndRemoveUntil(
-                                context, R.bottomNavigation, (r) => false);
-                          } else {
-                            Navigator.pop(context);
-                          }
-                        },
+                        disableLeading: true,
                       ),
                       child: Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 24.0),

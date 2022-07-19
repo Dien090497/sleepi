@@ -31,7 +31,7 @@ BedModel _$BedModelFromJson(Map<String, dynamic> json) => BedModel(
       (json['durability'] as num).toDouble(),
       json['category_id'] as int,
       json['is_lock'] as int,
-      json['status'] as String,
+      json['status'] as String?,
       json['jewel_type'],
       json['item_type'],
       json['effect'],

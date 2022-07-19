@@ -20,27 +20,30 @@ mixin _$ChartDayState {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function(DateTime selectedDate, DateTime firstAllowedDate,
-            DateTime lastAllowedDate)
+            DateTime lastAllowedDate, List<DrawChartEntity>? dataChart)
         loaded,
     required TResult Function(String msg) error,
+    required TResult Function() loading,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function(DateTime selectedDate, DateTime firstAllowedDate,
-            DateTime lastAllowedDate)?
+            DateTime lastAllowedDate, List<DrawChartEntity>? dataChart)?
         loaded,
     TResult Function(String msg)? error,
+    TResult Function()? loading,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function(DateTime selectedDate, DateTime firstAllowedDate,
-            DateTime lastAllowedDate)?
+            DateTime lastAllowedDate, List<DrawChartEntity>? dataChart)?
         loaded,
     TResult Function(String msg)? error,
+    TResult Function()? loading,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -49,6 +52,7 @@ mixin _$ChartDayState {
     required TResult Function(ChartDayInitial value) initial,
     required TResult Function(ChartDayLoaded value) loaded,
     required TResult Function(ChartDayError value) error,
+    required TResult Function(ChartDayLoading value) loading,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -56,6 +60,7 @@ mixin _$ChartDayState {
     TResult Function(ChartDayInitial value)? initial,
     TResult Function(ChartDayLoaded value)? loaded,
     TResult Function(ChartDayError value)? error,
+    TResult Function(ChartDayLoading value)? loading,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -63,6 +68,7 @@ mixin _$ChartDayState {
     TResult Function(ChartDayInitial value)? initial,
     TResult Function(ChartDayLoaded value)? loaded,
     TResult Function(ChartDayError value)? error,
+    TResult Function(ChartDayLoading value)? loading,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -136,9 +142,10 @@ class _$ChartDayInitial
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function(DateTime selectedDate, DateTime firstAllowedDate,
-            DateTime lastAllowedDate)
+            DateTime lastAllowedDate, List<DrawChartEntity>? dataChart)
         loaded,
     required TResult Function(String msg) error,
+    required TResult Function() loading,
   }) {
     return initial();
   }
@@ -148,9 +155,10 @@ class _$ChartDayInitial
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function(DateTime selectedDate, DateTime firstAllowedDate,
-            DateTime lastAllowedDate)?
+            DateTime lastAllowedDate, List<DrawChartEntity>? dataChart)?
         loaded,
     TResult Function(String msg)? error,
+    TResult Function()? loading,
   }) {
     return initial?.call();
   }
@@ -160,9 +168,10 @@ class _$ChartDayInitial
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function(DateTime selectedDate, DateTime firstAllowedDate,
-            DateTime lastAllowedDate)?
+            DateTime lastAllowedDate, List<DrawChartEntity>? dataChart)?
         loaded,
     TResult Function(String msg)? error,
+    TResult Function()? loading,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -177,6 +186,7 @@ class _$ChartDayInitial
     required TResult Function(ChartDayInitial value) initial,
     required TResult Function(ChartDayLoaded value) loaded,
     required TResult Function(ChartDayError value) error,
+    required TResult Function(ChartDayLoading value) loading,
   }) {
     return initial(this);
   }
@@ -187,6 +197,7 @@ class _$ChartDayInitial
     TResult Function(ChartDayInitial value)? initial,
     TResult Function(ChartDayLoaded value)? loaded,
     TResult Function(ChartDayError value)? error,
+    TResult Function(ChartDayLoading value)? loading,
   }) {
     return initial?.call(this);
   }
@@ -197,6 +208,7 @@ class _$ChartDayInitial
     TResult Function(ChartDayInitial value)? initial,
     TResult Function(ChartDayLoaded value)? loaded,
     TResult Function(ChartDayError value)? error,
+    TResult Function(ChartDayLoading value)? loading,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -218,7 +230,8 @@ abstract class _$$ChartDayLoadedCopyWith<$Res> {
   $Res call(
       {DateTime selectedDate,
       DateTime firstAllowedDate,
-      DateTime lastAllowedDate});
+      DateTime lastAllowedDate,
+      List<DrawChartEntity>? dataChart});
 }
 
 /// @nodoc
@@ -237,6 +250,7 @@ class __$$ChartDayLoadedCopyWithImpl<$Res>
     Object? selectedDate = freezed,
     Object? firstAllowedDate = freezed,
     Object? lastAllowedDate = freezed,
+    Object? dataChart = freezed,
   }) {
     return _then(_$ChartDayLoaded(
       selectedDate: selectedDate == freezed
@@ -251,6 +265,10 @@ class __$$ChartDayLoadedCopyWithImpl<$Res>
           ? _value.lastAllowedDate
           : lastAllowedDate // ignore: cast_nullable_to_non_nullable
               as DateTime,
+      dataChart: dataChart == freezed
+          ? _value._dataChart
+          : dataChart // ignore: cast_nullable_to_non_nullable
+              as List<DrawChartEntity>?,
     ));
   }
 }
@@ -261,7 +279,9 @@ class _$ChartDayLoaded with DiagnosticableTreeMixin implements ChartDayLoaded {
   const _$ChartDayLoaded(
       {required this.selectedDate,
       required this.firstAllowedDate,
-      required this.lastAllowedDate});
+      required this.lastAllowedDate,
+      final List<DrawChartEntity>? dataChart})
+      : _dataChart = dataChart;
 
   @override
   final DateTime selectedDate;
@@ -269,10 +289,18 @@ class _$ChartDayLoaded with DiagnosticableTreeMixin implements ChartDayLoaded {
   final DateTime firstAllowedDate;
   @override
   final DateTime lastAllowedDate;
+  final List<DrawChartEntity>? _dataChart;
+  @override
+  List<DrawChartEntity>? get dataChart {
+    final value = _dataChart;
+    if (value == null) return null;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(value);
+  }
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'ChartDayState.loaded(selectedDate: $selectedDate, firstAllowedDate: $firstAllowedDate, lastAllowedDate: $lastAllowedDate)';
+    return 'ChartDayState.loaded(selectedDate: $selectedDate, firstAllowedDate: $firstAllowedDate, lastAllowedDate: $lastAllowedDate, dataChart: $dataChart)';
   }
 
   @override
@@ -282,7 +310,8 @@ class _$ChartDayLoaded with DiagnosticableTreeMixin implements ChartDayLoaded {
       ..add(DiagnosticsProperty('type', 'ChartDayState.loaded'))
       ..add(DiagnosticsProperty('selectedDate', selectedDate))
       ..add(DiagnosticsProperty('firstAllowedDate', firstAllowedDate))
-      ..add(DiagnosticsProperty('lastAllowedDate', lastAllowedDate));
+      ..add(DiagnosticsProperty('lastAllowedDate', lastAllowedDate))
+      ..add(DiagnosticsProperty('dataChart', dataChart));
   }
 
   @override
@@ -295,7 +324,9 @@ class _$ChartDayLoaded with DiagnosticableTreeMixin implements ChartDayLoaded {
             const DeepCollectionEquality()
                 .equals(other.firstAllowedDate, firstAllowedDate) &&
             const DeepCollectionEquality()
-                .equals(other.lastAllowedDate, lastAllowedDate));
+                .equals(other.lastAllowedDate, lastAllowedDate) &&
+            const DeepCollectionEquality()
+                .equals(other._dataChart, _dataChart));
   }
 
   @override
@@ -303,7 +334,8 @@ class _$ChartDayLoaded with DiagnosticableTreeMixin implements ChartDayLoaded {
       runtimeType,
       const DeepCollectionEquality().hash(selectedDate),
       const DeepCollectionEquality().hash(firstAllowedDate),
-      const DeepCollectionEquality().hash(lastAllowedDate));
+      const DeepCollectionEquality().hash(lastAllowedDate),
+      const DeepCollectionEquality().hash(_dataChart));
 
   @JsonKey(ignore: true)
   @override
@@ -315,11 +347,12 @@ class _$ChartDayLoaded with DiagnosticableTreeMixin implements ChartDayLoaded {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function(DateTime selectedDate, DateTime firstAllowedDate,
-            DateTime lastAllowedDate)
+            DateTime lastAllowedDate, List<DrawChartEntity>? dataChart)
         loaded,
     required TResult Function(String msg) error,
+    required TResult Function() loading,
   }) {
-    return loaded(selectedDate, firstAllowedDate, lastAllowedDate);
+    return loaded(selectedDate, firstAllowedDate, lastAllowedDate, dataChart);
   }
 
   @override
@@ -327,11 +360,13 @@ class _$ChartDayLoaded with DiagnosticableTreeMixin implements ChartDayLoaded {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function(DateTime selectedDate, DateTime firstAllowedDate,
-            DateTime lastAllowedDate)?
+            DateTime lastAllowedDate, List<DrawChartEntity>? dataChart)?
         loaded,
     TResult Function(String msg)? error,
+    TResult Function()? loading,
   }) {
-    return loaded?.call(selectedDate, firstAllowedDate, lastAllowedDate);
+    return loaded?.call(
+        selectedDate, firstAllowedDate, lastAllowedDate, dataChart);
   }
 
   @override
@@ -339,13 +374,14 @@ class _$ChartDayLoaded with DiagnosticableTreeMixin implements ChartDayLoaded {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function(DateTime selectedDate, DateTime firstAllowedDate,
-            DateTime lastAllowedDate)?
+            DateTime lastAllowedDate, List<DrawChartEntity>? dataChart)?
         loaded,
     TResult Function(String msg)? error,
+    TResult Function()? loading,
     required TResult orElse(),
   }) {
     if (loaded != null) {
-      return loaded(selectedDate, firstAllowedDate, lastAllowedDate);
+      return loaded(selectedDate, firstAllowedDate, lastAllowedDate, dataChart);
     }
     return orElse();
   }
@@ -356,6 +392,7 @@ class _$ChartDayLoaded with DiagnosticableTreeMixin implements ChartDayLoaded {
     required TResult Function(ChartDayInitial value) initial,
     required TResult Function(ChartDayLoaded value) loaded,
     required TResult Function(ChartDayError value) error,
+    required TResult Function(ChartDayLoading value) loading,
   }) {
     return loaded(this);
   }
@@ -366,6 +403,7 @@ class _$ChartDayLoaded with DiagnosticableTreeMixin implements ChartDayLoaded {
     TResult Function(ChartDayInitial value)? initial,
     TResult Function(ChartDayLoaded value)? loaded,
     TResult Function(ChartDayError value)? error,
+    TResult Function(ChartDayLoading value)? loading,
   }) {
     return loaded?.call(this);
   }
@@ -376,6 +414,7 @@ class _$ChartDayLoaded with DiagnosticableTreeMixin implements ChartDayLoaded {
     TResult Function(ChartDayInitial value)? initial,
     TResult Function(ChartDayLoaded value)? loaded,
     TResult Function(ChartDayError value)? error,
+    TResult Function(ChartDayLoading value)? loading,
     required TResult orElse(),
   }) {
     if (loaded != null) {
@@ -389,11 +428,13 @@ abstract class ChartDayLoaded implements ChartDayState {
   const factory ChartDayLoaded(
       {required final DateTime selectedDate,
       required final DateTime firstAllowedDate,
-      required final DateTime lastAllowedDate}) = _$ChartDayLoaded;
+      required final DateTime lastAllowedDate,
+      final List<DrawChartEntity>? dataChart}) = _$ChartDayLoaded;
 
   DateTime get selectedDate;
   DateTime get firstAllowedDate;
   DateTime get lastAllowedDate;
+  List<DrawChartEntity>? get dataChart;
   @JsonKey(ignore: true)
   _$$ChartDayLoadedCopyWith<_$ChartDayLoaded> get copyWith =>
       throw _privateConstructorUsedError;
@@ -474,9 +515,10 @@ class _$ChartDayError with DiagnosticableTreeMixin implements ChartDayError {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function(DateTime selectedDate, DateTime firstAllowedDate,
-            DateTime lastAllowedDate)
+            DateTime lastAllowedDate, List<DrawChartEntity>? dataChart)
         loaded,
     required TResult Function(String msg) error,
+    required TResult Function() loading,
   }) {
     return error(msg);
   }
@@ -486,9 +528,10 @@ class _$ChartDayError with DiagnosticableTreeMixin implements ChartDayError {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function(DateTime selectedDate, DateTime firstAllowedDate,
-            DateTime lastAllowedDate)?
+            DateTime lastAllowedDate, List<DrawChartEntity>? dataChart)?
         loaded,
     TResult Function(String msg)? error,
+    TResult Function()? loading,
   }) {
     return error?.call(msg);
   }
@@ -498,9 +541,10 @@ class _$ChartDayError with DiagnosticableTreeMixin implements ChartDayError {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function(DateTime selectedDate, DateTime firstAllowedDate,
-            DateTime lastAllowedDate)?
+            DateTime lastAllowedDate, List<DrawChartEntity>? dataChart)?
         loaded,
     TResult Function(String msg)? error,
+    TResult Function()? loading,
     required TResult orElse(),
   }) {
     if (error != null) {
@@ -515,6 +559,7 @@ class _$ChartDayError with DiagnosticableTreeMixin implements ChartDayError {
     required TResult Function(ChartDayInitial value) initial,
     required TResult Function(ChartDayLoaded value) loaded,
     required TResult Function(ChartDayError value) error,
+    required TResult Function(ChartDayLoading value) loading,
   }) {
     return error(this);
   }
@@ -525,6 +570,7 @@ class _$ChartDayError with DiagnosticableTreeMixin implements ChartDayError {
     TResult Function(ChartDayInitial value)? initial,
     TResult Function(ChartDayLoaded value)? loaded,
     TResult Function(ChartDayError value)? error,
+    TResult Function(ChartDayLoading value)? loading,
   }) {
     return error?.call(this);
   }
@@ -535,6 +581,7 @@ class _$ChartDayError with DiagnosticableTreeMixin implements ChartDayError {
     TResult Function(ChartDayInitial value)? initial,
     TResult Function(ChartDayLoaded value)? loaded,
     TResult Function(ChartDayError value)? error,
+    TResult Function(ChartDayLoading value)? loading,
     required TResult orElse(),
   }) {
     if (error != null) {
@@ -551,4 +598,135 @@ abstract class ChartDayError implements ChartDayState {
   @JsonKey(ignore: true)
   _$$ChartDayErrorCopyWith<_$ChartDayError> get copyWith =>
       throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$ChartDayLoadingCopyWith<$Res> {
+  factory _$$ChartDayLoadingCopyWith(
+          _$ChartDayLoading value, $Res Function(_$ChartDayLoading) then) =
+      __$$ChartDayLoadingCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$ChartDayLoadingCopyWithImpl<$Res>
+    extends _$ChartDayStateCopyWithImpl<$Res>
+    implements _$$ChartDayLoadingCopyWith<$Res> {
+  __$$ChartDayLoadingCopyWithImpl(
+      _$ChartDayLoading _value, $Res Function(_$ChartDayLoading) _then)
+      : super(_value, (v) => _then(v as _$ChartDayLoading));
+
+  @override
+  _$ChartDayLoading get _value => super._value as _$ChartDayLoading;
+}
+
+/// @nodoc
+
+class _$ChartDayLoading
+    with DiagnosticableTreeMixin
+    implements ChartDayLoading {
+  const _$ChartDayLoading();
+
+  @override
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+    return 'ChartDayState.loading()';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty('type', 'ChartDayState.loading'));
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$ChartDayLoading);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function(DateTime selectedDate, DateTime firstAllowedDate,
+            DateTime lastAllowedDate, List<DrawChartEntity>? dataChart)
+        loaded,
+    required TResult Function(String msg) error,
+    required TResult Function() loading,
+  }) {
+    return loading();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function(DateTime selectedDate, DateTime firstAllowedDate,
+            DateTime lastAllowedDate, List<DrawChartEntity>? dataChart)?
+        loaded,
+    TResult Function(String msg)? error,
+    TResult Function()? loading,
+  }) {
+    return loading?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function(DateTime selectedDate, DateTime firstAllowedDate,
+            DateTime lastAllowedDate, List<DrawChartEntity>? dataChart)?
+        loaded,
+    TResult Function(String msg)? error,
+    TResult Function()? loading,
+    required TResult orElse(),
+  }) {
+    if (loading != null) {
+      return loading();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(ChartDayInitial value) initial,
+    required TResult Function(ChartDayLoaded value) loaded,
+    required TResult Function(ChartDayError value) error,
+    required TResult Function(ChartDayLoading value) loading,
+  }) {
+    return loading(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(ChartDayInitial value)? initial,
+    TResult Function(ChartDayLoaded value)? loaded,
+    TResult Function(ChartDayError value)? error,
+    TResult Function(ChartDayLoading value)? loading,
+  }) {
+    return loading?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(ChartDayInitial value)? initial,
+    TResult Function(ChartDayLoaded value)? loaded,
+    TResult Function(ChartDayError value)? error,
+    TResult Function(ChartDayLoading value)? loading,
+    required TResult orElse(),
+  }) {
+    if (loading != null) {
+      return loading(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class ChartDayLoading implements ChartDayState {
+  const factory ChartDayLoading() = _$ChartDayLoading;
 }

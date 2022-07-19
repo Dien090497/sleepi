@@ -44,6 +44,7 @@ class Const {
   static const String specialGachaAudio = 'sounds/special_gacha.mp3';
   static const String specialGachaAnimation = 'assets/json/special_gacha.json';
   static const String time = 'time';
+  static const String sound = 'sound';
   static const String setAsForeground = 'setAsForeground';
   static const String setAsBackground = 'setAsBackground';
   static const String stopService = 'stopService';
@@ -160,6 +161,14 @@ class Const {
     Imgs.icLuckyBoxGreen,
     Imgs.icLuckyBoxOrange,
     Imgs.icLuckyBoxPurple,
+  ];
+
+  static const soundAlarm = [
+    'sounds/apex.mp3',
+    'sounds/crystals.mp3',
+    'sounds/iphone_alarm.mp3',
+    'sounds/reflection.mp3',
+    'sounds/school_alarm.mp3',
   ];
 
   Const._();

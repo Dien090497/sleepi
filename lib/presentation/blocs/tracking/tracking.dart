@@ -4,6 +4,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:health/health.dart';
 import 'package:slee_fi/di/injector.dart';
+import 'package:slee_fi/l10n/locale_keys.g.dart';
 import 'package:slee_fi/presentation/blocs/tracking/tracking_state.dart';
 import 'package:slee_fi/schema/sleep_tracking/data_health.dart';
 import 'package:slee_fi/schema/sleep_tracking/data_health_schema.dart';
@@ -49,6 +50,7 @@ class TrackingCubit extends Cubit<TrackingState> {
             now.subtract(const Duration(days: 1)), now, types);
         healthData = HealthFactory.removeDuplicates(healthData);
         for (var element in healthData) {
+
           healthDataList.add(convertDataToSchema(element));
         }
         log('health data: ${DataHealthSchema(
@@ -58,10 +60,10 @@ class TrackingCubit extends Cubit<TrackingState> {
           datas: healthDataList,
         ));
       } catch (e) {
-        log("Caught exception in getHealthDataFromTypes: $e");
+        emit(TrackingState.error('$e'));
       }
     } else {
-      log("Authorization not granted");
+      emit(const TrackingState.error(LocaleKeys.not_granted));
     }
   }
 
@@ -72,9 +74,9 @@ class TrackingCubit extends Cubit<TrackingState> {
         platformType: data.platform.name,
         unit: data.unit.name,
         dateFrom:
-            '${DateFormat("yyyy-MM-dd'T'HH:mm:ss.sss").format(data.dateFrom)}Z',
+            '${DateFormat("yyyy-MM-dd'T'HH:mm:ss.sss").format(data.dateFrom.toUtc())}Z',
         dateTo:
-            '${DateFormat("yyyy-MM-dd'T'HH:mm:ss.sss").format(data.dateTo)}Z',
+            '${DateFormat("yyyy-MM-dd'T'HH:mm:ss.sss").format(data.dateTo.toUtc())}Z',
         sourceId: data.sourceId,
         sourceName: data.sourceName);
   }

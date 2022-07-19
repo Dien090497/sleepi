@@ -61,6 +61,7 @@ class MarketPlaceCubit extends Cubit<MarketPlaceState> {
     result.fold((l) {
       error = true;
       loadMore = false;
+      if (isClosed) return;
       emit(MarketPlaceState.fail('$l'));
     }, (success) {
       error = false;
@@ -71,6 +72,7 @@ class MarketPlaceCubit extends Cubit<MarketPlaceState> {
       } else {
         loadMore = false;
       }
+      if (isClosed) return;
       emit(MarketPlaceState.loaded(success));
     });
   }
@@ -97,9 +99,7 @@ class MarketPlaceCubit extends Cubit<MarketPlaceState> {
   Future<void> selectPrice(int index) async {
     page = 1;
     params = params.copyWith(
-        page: page,
-        limit: limit,
-        sortPrice: Const.sortCondition[index]);
+        page: page, limit: limit, sortPrice: Const.sortCondition[index]);
     getMarketPlace(params);
   }
 
