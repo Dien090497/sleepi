@@ -112,7 +112,7 @@ class _TrackingScreenState extends State<TrackingScreen> {
             if (state is TrackingStatePosted) {
               Navigator.pushReplacementNamed(context, R.preResult,
                   arguments: PreResultParams(
-                      fromRoute: fromRoute, resultModel: state.resultModel));
+                      fromRoute: fromRoute, resultModel: state.resultModel, dataChart: []));
             }
             if (state is TrackingStateFail) {
               showMessageDialog(context, state.msg);

@@ -121,9 +121,10 @@ enum TypeChart {
   wokeUpChart,
   sleepDurationChart,
   timeInBedChart,
-  nocturalAwakenChart
+  nocturalAwakenChart,
+  chartDay,
 }
 
-enum TypeTimeChart { chartDay, chartWeek, chartMonth }
+enum TypeTimeChart { chartDay, chartWeek, chartMonth, }
 
 enum SocketType { ready, empty, block }

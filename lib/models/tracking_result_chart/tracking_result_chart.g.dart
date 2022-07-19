@@ -6,8 +6,9 @@ part of 'tracking_result_chart.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-TrackingResultChart _$TrackingResultChartFromJson(Map<String, dynamic> json) =>
-    TrackingResultChart(
+TrackingResultDaysChart _$TrackingResultDaysChartFromJson(
+        Map<String, dynamic> json) =>
+    TrackingResultDaysChart(
       tokenEarn: json['token_earn'] as String,
       tokenEarnSymbol: json['token_earn_symbol'] as String,
       scorePercent: json['score_percent'] as String,
@@ -17,12 +18,14 @@ TrackingResultChart _$TrackingResultChartFromJson(Map<String, dynamic> json) =>
       wokeUp: json['woke_up'] as int,
       timeInBed: json['time_in_bed'] as int,
       sleepDuration: json['sleep_duration'] as int,
-      nocturalAwaken: json['noctural_awaken'] as String?,
-      chartData: json['chart_data'] as List<dynamic>,
+      nocturalAwaken: json['noctural_awaken'] as int?,
+      chartData: (json['chart_data'] as List<dynamic>)
+          .map((e) => ChartDrawDays.fromJson(e as Map<String, dynamic>))
+          .toList(),
     );
 
-Map<String, dynamic> _$TrackingResultChartToJson(
-        TrackingResultChart instance) =>
+Map<String, dynamic> _$TrackingResultDaysChartToJson(
+        TrackingResultDaysChart instance) =>
     <String, dynamic>{
       'token_earn': instance.tokenEarn,
       'token_earn_symbol': instance.tokenEarnSymbol,
@@ -34,5 +37,5 @@ Map<String, dynamic> _$TrackingResultChartToJson(
       'time_in_bed': instance.timeInBed,
       'sleep_duration': instance.sleepDuration,
       'noctural_awaken': instance.nocturalAwaken,
-      'chart_data': instance.chartData,
+      'chart_data': instance.chartData.map((e) => e.toJson()).toList(),
     };

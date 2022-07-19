@@ -67,6 +67,9 @@ class ChartStatisticShare extends StatelessWidget {
 
   Widget bottomTitleWidgets(double value, TitleMeta meta) {
     if (typeTimeChart != TypeTimeChart.chartMonth) {
+      if (typeTimeChart == TypeTimeChart.chartDay) {
+        return const SizedBox();
+      }
       if (value != 0) {
         return Padding(
           padding: const EdgeInsets.only(top: 8.0),
@@ -75,8 +78,7 @@ class ChartStatisticShare extends StatelessWidget {
       } else {
         return const SizedBox();
       }
-    }
-    else {
+    } else {
       if (value % 2 != 0) {
         return Padding(
           padding: const EdgeInsets.only(top: 8.0),

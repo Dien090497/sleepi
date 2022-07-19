@@ -67,7 +67,7 @@ class ChartMonthCubit extends Cubit<ChartMonthState> {
           maxY = data[i].v;
         }
         flSpot.add(FlSpot(i.toDouble(), data[i].v.toDouble()));
-        listXY.add(DataXYEntity(x: _dateUtils.convertTimeStamp(timeStamp: data[i].t), y: data[i].v.toDouble()));
+        listXY.add(DataXYEntity(x: _dateUtils.convertTimeStamp(timeStamp: data[i].t, type: 'dd'), y: data[i].v.toDouble()));
       }
       DrawChartEntity drawChartEntity = DrawChartEntity(
         listFlSpot: flSpot,

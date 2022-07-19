@@ -9,6 +9,7 @@ import 'package:slee_fi/entities/active_code/active_code_entity.dart';
 import 'package:slee_fi/entities/bed_entity/bed_entity.dart';
 import 'package:slee_fi/entities/item_entity/item_entity.dart';
 import 'package:slee_fi/entities/tracking_result_chart_data_entity/tracking_result_chart_data_entity.dart';
+import 'package:slee_fi/entities/tracking_result_chart_days_entity/tracking_result_chart_days_entity.dart';
 import 'package:slee_fi/failures/failure.dart';
 import 'package:slee_fi/models/bed_model/beb_model.dart';
 import 'package:slee_fi/models/estimate_sleep_response/estimate_sleep_response.dart';
@@ -295,6 +296,19 @@ class UserImplementation extends IUserRepository {
       return Right(result);
     } catch (e) {
       return Left(FailureMessage.fromException(e));
+    }
+  }
+
+  @override
+  Future<Either<FailureMessage, TrackingResultChartDaysEntity>> fetchDataDaysChart(ParamsGetDataChart params) async {
+    try {
+      final result = await _authDataSource.fetchDataDaysChart(
+          params.fdate,
+          params.tdate,
+          params.type);
+      return Right(result.toEntity());
+    } catch (e) {
+      return Left(FailureMessage('$e'));
     }
   }
 }
