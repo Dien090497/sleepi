@@ -8,11 +8,10 @@ abstract class ITransactionRepository {
 
   Future<Either<Failure, double>> getTokenBalance();
 
-  Future<Either<Failure, BigInt>> estimateGasFee({
+  Future<Either<Failure, double>> estimateGasFee({
     String? sender,
     String? to,
     double? value,
-    double? gasPrice,
   });
 
   Future<Either<Failure, int>> calculatorFee(SendToExternalParams params);

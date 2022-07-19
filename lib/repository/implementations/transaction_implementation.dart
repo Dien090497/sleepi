@@ -144,18 +144,36 @@ class TransactionImplementation extends ITransactionRepository{
   }
 
   @override
-  Future<Either<Failure, BigInt>> estimateGasFee(
-      {String? sender, String? to, double? value, double? gasPrice}) async {
-    try {
-      final price = await _web3DataSource.estimateGas(
-        value: value,
-        gasPrice: gasPrice,
-        sender: sender != null ? EthereumAddress.fromHex(sender) : null,
-        to: to,
-      );
-      return Right(price * BigInt.from(50) + BigInt.from(15));
-    } catch (e) {
-      return Left(FailureMessage('$e'));
-    }
+  Future<Either<Failure, double>> estimateGasFee(
+      {String? sender, String? to, double? value}) async{
+      try {
+        final gasPrice = await _web3DataSource.getGasPrice();
+        final price = await _web3DataSource.estimateGas(
+          value: value,
+          gasPrice: await _web3DataSource.getGasPrice(),
+          sender: sender != null ? EthereumAddress.fromHex(sender) : null,
+          to: to,
+        );
+        return Right(price * gasPrice.getInWei / BigInt.from(pow(10, 18)));
+      } catch (e) {
+        return Left(FailureMessage('$e'));
+      }
   }
+
+  // @override
+  // Future<Either<Failure, BigInt>> estimateGasFee(
+  //     {String? sender, String? to, double? value, double? gasPrice}) async {
+  //   try {
+  //     final price = await _web3DataSource.estimateGas(
+  //       value: value,
+  //       gasPrice: gasPrice,
+  //       sender: sender != null ? EthereumAddress.fromHex(sender) : null,
+  //       to: to,
+  //     );
+  //     return Right(price * BigInt.from(50) + BigInt.from(15));
+  //   } catch (e) {
+  //     return Left(FailureMessage('$e'));
+  //   }
+  // }
 }
+

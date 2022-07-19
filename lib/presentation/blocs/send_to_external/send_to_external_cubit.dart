@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:bloc/bloc.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ethereum_addresses/ethereum_addresses.dart';
@@ -14,9 +12,6 @@ import 'package:slee_fi/usecase/usecase.dart';
 class SendToExternalCubit extends Cubit<SendToExternalState> {
   SendToExternalCubit() : super(const SendToExternalState.initial());
 
-  String contractAddressTo = '';
-  double? fee;
-
   final _sendToExternalUC = getIt<SendToExternalUseCase>();
   final _sendTokenToExternalUseCase = getIt<SendTokenToExternalUseCase>();
 
@@ -25,11 +20,10 @@ class SendToExternalCubit extends Cubit<SendToExternalState> {
   }
 
   Future<void> sendToExternal(
-      String contractAddressTo, double valueInEther, double fee, String tokenSymbol) async {
+      String contractAddressTo, double valueInEther, String tokenSymbol) async {
     final result = await _sendToExternalUC.call(SendToExternalParams(
         contractAddressTo: contractAddressTo,
         valueInEther: valueInEther,
-        fee: fee,
         tokenSymbol: tokenSymbol
     ));
 
@@ -53,24 +47,8 @@ class SendToExternalCubit extends Cubit<SendToExternalState> {
     );
   }
 
-  Future<void> estimateGas(String contractAddressTo,
-      {double? valueInEther}) async {
-    final result = await _sendToExternalUC.calculatorFee(SendToExternalParams(
-        contractAddressTo: contractAddressTo, valueInEther: valueInEther));
-    result.fold(
-      (l) {
-        emit(SendToExternalState.fail('$l'));
-      },
-      (gasLimit) {
-        fee = ((double.parse(gasLimit) * 50000000000) / pow(10, 18));
-        emit(SendToExternalState.calculatorFee(fee));
-        emit(const SendToExternalState.calculatorFeeSuccess());
-      },
-    );
-  }
-
   Future<void> validator(
-      {required double balanceCurrent, required double amount}) async {
+      {required String contractAddressTo, required double balanceCurrent, required double amount}) async {
     if (contractAddressTo.isEmpty) {
       emit(SendToExternalState.errorToAddress(
           LocaleKeys.this_field_is_required.tr()));

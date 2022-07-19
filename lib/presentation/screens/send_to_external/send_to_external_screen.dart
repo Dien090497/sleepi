@@ -44,6 +44,7 @@ class _SendToExternalScreenState extends State<SendToExternalScreen> {
   late double balance = 0;
   double fee = 0;
   String contractAddressTo = '';
+  String ownerAddress = '';
   double valueInEther = 0;
 
   TextEditingController controllerAmount = TextEditingController();
@@ -51,7 +52,7 @@ class _SendToExternalScreenState extends State<SendToExternalScreen> {
   @override
   Widget build(BuildContext context) {
     final args =
-        ModalRoute.of(context)?.settings.arguments as SendToExternalArguments?;
+    ModalRoute.of(context)?.settings.arguments as SendToExternalArguments?;
 
     return BlocProvider(
       create: (context) => SendToExternalCubit()..init(),
@@ -95,10 +96,10 @@ class _SendToExternalScreenState extends State<SendToExternalScreen> {
                           children: [
                             args != null
                                 ? SFIcon(
-                                    args.icon,
-                                    width: 60,
-                                    height: 60,
-                                  )
+                              args.icon,
+                              width: 60,
+                              height: 60,
+                            )
                                 : Image.asset(Imgs.sendToExternal),
                             SizedBox(
                               height: args != null ? 32 : 0,
@@ -116,7 +117,6 @@ class _SendToExternalScreenState extends State<SendToExternalScreen> {
                                             ? state.msg
                                             : null,*/
                                     onChangedAddress: (address) {
-                                      cubit.contractAddressTo = address;
                                       contractAddressTo = address;
                                       cubit.init();
                                     },
@@ -128,25 +128,25 @@ class _SendToExternalScreenState extends State<SendToExternalScreen> {
                                     ),
                                   const SizedBox(height: 24),
                                   SFTextField(
-                                      labelText: LocaleKeys.amount,
-                                      inputFormatters: [
-                                        FilteringTextInputFormatter
-                                            .allow(RegExp(
-                                            r'^\d{1,}[.,]?\d{0,6}')),
-                                      ],
-                                      textInputType:
-                                          const TextInputType.numberWithOptions(
-                                              decimal: true),
-                                      suffixIcon: Padding(
-                                          padding: const EdgeInsets.all(8.0),
-                                          child: SFIcon(args != null
-                                              ? args.icon
-                                              : Ics.icAvax)),
-                                      controller: controllerAmount,
+                                    labelText: LocaleKeys.amount,
+                                    inputFormatters: [
+                                      FilteringTextInputFormatter
+                                          .allow(RegExp(
+                                          r'^\d{1,}[.,]?\d{0,6}')),
+                                    ],
+                                    textInputType:
+                                    const TextInputType.numberWithOptions(
+                                        decimal: true),
+                                    suffixIcon: Padding(
+                                        padding: const EdgeInsets.all(8.0),
+                                        child: SFIcon(args != null
+                                            ? args.icon
+                                            : Ics.icAvax)),
+                                    controller: controllerAmount,
                                     onChanged: (value) {
-                                        cubit.init();
+                                      cubit.init();
                                     },
-                                      ),
+                                  ),
                                   if (state is SendToExternalErrorValueInEther)
                                     SFText(
                                       keyText: state.msg,
@@ -156,7 +156,7 @@ class _SendToExternalScreenState extends State<SendToExternalScreen> {
                                       keyText: LocaleKeys.balance,
                                       style: TextStyles.w400lightGrey12,
                                       suffix:
-                                          ': ${args != null ? args.tokenEntity?.balance.formatBalanceToken : balance.formatBalanceToken} ${args != null ? args.symbol : "AVAX"}'),
+                                      ': ${args != null ? args.tokenEntity?.balance.formatBalanceToken : balance.formatBalanceToken} ${args != null ? args.symbol : "AVAX"}'),
                                 ],
                               ),
                             ),
@@ -196,7 +196,7 @@ class _SendToExternalScreenState extends State<SendToExternalScreen> {
                                           .the_network_you_have_selected_5
                                           .tr(),
                                       style: context.locale.languageCode ==
-                                              Const.localeJA.languageCode
+                                          Const.localeJA.languageCode
                                           ? null
                                           : TextStyles.w400Red12),
                                   const TextSpan(text: ' '),
@@ -205,7 +205,7 @@ class _SendToExternalScreenState extends State<SendToExternalScreen> {
                                           .the_network_you_have_selected_6
                                           .tr(),
                                       style: context.locale.languageCode ==
-                                              Const.localeJA.languageCode
+                                          Const.localeJA.languageCode
                                           ? TextStyles.w400Red12
                                           : null),
                                 ],
@@ -223,15 +223,15 @@ class _SendToExternalScreenState extends State<SendToExternalScreen> {
                         onPressed: () {
                           if (args != null) {
                             if (controllerAmount.text.isNotEmpty) {
-                              cubit.validator(balanceCurrent: args.tokenEntity?.balance ?? 0.0, amount: double.parse(controllerAmount.text.replaceAll(',','.')));
+                              cubit.validator(contractAddressTo: contractAddressTo, balanceCurrent: args.tokenEntity?.balance ?? 0.0, amount: double.parse(controllerAmount.text.replaceAll(',','.')));
                             } else {
-                              cubit.validator(balanceCurrent: args.tokenEntity?.balance ?? 0.0, amount: -1);
+                              cubit.validator(contractAddressTo: contractAddressTo, balanceCurrent: args.tokenEntity?.balance ?? 0.0, amount: -1);
                             }
                           } else {
                             if (controllerAmount.text.isNotEmpty) {
-                              cubit.validator(balanceCurrent: balance, amount: double.parse(controllerAmount.text.replaceAll(',','.')));
+                              cubit.validator(contractAddressTo: contractAddressTo, balanceCurrent: balance, amount: double.parse(controllerAmount.text.replaceAll(',','.')));
                             } else {
-                              cubit.validator(balanceCurrent: balance, amount: -1);
+                              cubit.validator(contractAddressTo: contractAddressTo, balanceCurrent: balance, amount: -1);
                             }
                           }
                         },

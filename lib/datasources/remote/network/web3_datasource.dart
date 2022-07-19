@@ -76,13 +76,13 @@ class Web3DataSource {
     EthereumAddress? sender,
     String? to,
     double? value,
-    double? gasPrice,
+    EtherAmount? gasPrice,
   }) async =>
       (await _web3provider.web3client.estimateGas(
         sender: sender,
         to: to != null ? EthereumAddress.fromHex(to) : null,
         value: value?.etherToWei.toWeiEtherAmount,
-        gasPrice: gasPrice?.toWeiEtherAmount,
+        gasPrice: gasPrice,
       ));
 
   Future<String> sendCoinTxn({
