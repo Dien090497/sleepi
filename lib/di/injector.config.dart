@@ -85,8 +85,8 @@ import '../usecase/estimate_nft_function_fee_usecase.dart' as _i138;
 import '../usecase/estimate_tracking_usecase.dart' as _i103;
 import '../usecase/fetch_balance_spending_usecase.dart' as _i104;
 import '../usecase/fetch_bed_usecase.dart' as _i105;
-import '../usecase/fetch_data_chart_day_usecase.dart' as _i107;
 import '../usecase/fetch_data_chart_usecase.dart' as _i106;
+import '../usecase/fetch_home_bed_usecase.dart' as _i107;
 import '../usecase/fetch_item_owner_usecase.dart' as _i108;
 import '../usecase/fetch_lucky_box_usecase.dart' as _i109;
 import '../usecase/gacha_spin_usecase.dart' as _i110;
@@ -257,9 +257,7 @@ Future<_i1.GetIt> $initGetIt(_i1.GetIt get,
   gh.factory<_i48.ISleepTrackingRepository>(
       () => _i49.SleepTrackingImplementation(get<_i39.SleepTrackingApi>()));
   gh.factory<_i50.ISpendingRepository>(() => _i51.SpendingImplementation(
-      get<_i30.SpendingDataSource>(),
-      get<_i41.AuthDataSource>(),
-      get<_i28.SecureStorage>()));
+      get<_i30.SpendingDataSource>(), get<_i41.AuthDataSource>()));
   gh.factory<_i52.IUserRepository>(() => _i53.UserImplementation(
       get<_i41.AuthDataSource>(),
       get<_i28.SecureStorage>(),
@@ -376,8 +374,8 @@ Future<_i1.GetIt> $initGetIt(_i1.GetIt get,
       () => _i105.FetchBedUseCase(get<_i52.IUserRepository>()));
   gh.factory<_i106.FetchDataChartUseCase>(
       () => _i106.FetchDataChartUseCase(get<_i52.IUserRepository>()));
-  gh.factory<_i107.FetchDataDaysChartUseCase>(
-      () => _i107.FetchDataDaysChartUseCase(get<_i52.IUserRepository>()));
+  gh.factory<_i107.FetchHomeBedUseCase>(
+      () => _i107.FetchHomeBedUseCase(get<_i52.IUserRepository>()));
   gh.factory<_i108.FetchItemOwnerUseCase>(
       () => _i108.FetchItemOwnerUseCase(get<_i52.IUserRepository>()));
   gh.factory<_i109.FetchLuckyBoxUseCase>(
