@@ -26,23 +26,26 @@ class TransferCubit extends Cubit<TransferState> {
     final currentState = state;
     if (currentState is TransferLoaded) {
       if (amountStr.isEmpty) {
-        emit(const TransferState.error(LocaleKeys.this_field_is_required,
+        emit(currentState.copyWith(
+            errorMsg: LocaleKeys.this_field_is_required,
             typeError: 'invalid_amount'));
-        emit(currentState);
         return;
       }
       final amount = double.parse(amountStr.replaceAll(',', '.'));
       if (amount <= 0) {
-        emit(const TransferState.error(LocaleKeys.amount_input_can_not_be_zero,
+        emit(currentState.copyWith(
+            errorMsg: LocaleKeys.amount_input_can_not_be_zero,
             typeError: 'amount_zero'));
-        emit(currentState);
+        return;
       } else {
         if (currentState.isLoading) return;
-        emit(currentState.copyWith(isLoading: true));
+        emit(currentState.copyWith(
+            isLoading: true, errorMsg: null, typeError: null));
         final isToSpending = currentState.isToSpending;
         if (isToSpending) {
           if (amount > balance) {
-            emit(const TransferState.error(LocaleKeys.insufficient_balance,
+            emit(currentState.copyWith(
+                errorMsg: LocaleKeys.insufficient_balance,
                 typeError: 'invalid_amount'));
             return;
           }
@@ -55,20 +58,35 @@ class TransferCubit extends Cubit<TransferState> {
                   amount: amount));
           allowanceRes.fold(
             (l) {
-              emit(const TransferState.error('Cannot Transfer'));
-              emit(currentState.copyWith(isLoading: false));
+              emit(currentState.copyWith(
+                  isLoading: false, errorMsg: 'Cannot Transfer'));
             },
             (isEnough) {
               emit(currentState.copyWith(needApprove: !isEnough));
-              emit(currentState.copyWith(isLoading: false, needApprove: null));
+              emit(currentState.copyWith(
+                  isLoading: false,
+                  needApprove: null,
+                  errorMsg: null,
+                  typeError: null));
             },
           );
         } else {
           /// To External
           emit(currentState.copyWith(needApprove: false));
-          emit(currentState.copyWith(isLoading: false, needApprove: null));
+          emit(currentState.copyWith(
+              isLoading: false,
+              needApprove: null,
+              errorMsg: null,
+              typeError: null));
         }
       }
+    }
+  }
+
+  void removeError() {
+    final currentState = state;
+    if (currentState is TransferLoaded && currentState.errorMsg != null) {
+      emit(currentState.copyWith(errorMsg: null, typeError: null));
     }
   }
 
@@ -83,8 +101,7 @@ class TransferCubit extends Cubit<TransferState> {
       final result = await _approveUseCase.call(addressContract);
       result.fold(
         (l) {
-          emit(TransferState.error('$l'));
-          emit(currentState.copyWith(isLoading: false));
+          emit(currentState.copyWith(isLoading: false, errorMsg: '$l'));
         },
         (result) {
           emit(currentState.copyWith(isLoading: false));
@@ -95,6 +112,7 @@ class TransferCubit extends Cubit<TransferState> {
 
   Future<void> transfer({
     required double amount,
+    required double balance,
     required String symbol,
     required String contractAddress,
     required int userId,
@@ -104,13 +122,12 @@ class TransferCubit extends Cubit<TransferState> {
       if (currentState.isLoading) return;
       emit(currentState.copyWith(isLoading: true));
       if (currentState.isToSpending) {
-        final params = ToSpendingParams(
-            amount: amount, addressContract: contractAddress, userId: userId);
-        final result = await _toSpendingUseCase.call(params);
+        final result = await _toSpendingUseCase.call(ToSpendingParams(
+            amount: amount, addressContract: contractAddress, userId: userId));
         result.fold(
           (l) {
-            emit(const TransferState.error('Cannot Transfer'));
-            emit(currentState.copyWith(isLoading: false));
+            emit(currentState.copyWith(
+                isLoading: false, errorMsg: 'Cannot Transfer'));
           },
           (result) {
             emit(const TransferState.success());
@@ -121,8 +138,7 @@ class TransferCubit extends Cubit<TransferState> {
             type: symbol, amount: '$amount', tokenAddress: contractAddress));
         result.fold(
           (l) {
-            emit(TransferState.error('$l'));
-            emit(currentState.copyWith(isLoading: false));
+            emit(currentState.copyWith(isLoading: false, errorMsg: '$l'));
           },
           (r) {
             emit(const TransferState.success());

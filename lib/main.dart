@@ -119,6 +119,9 @@ Future<void> onStart(ServiceInstance service) async {
   final int timeWakeUp = preferences.getInt(Const.time) ?? 0;
   final int sound = preferences.getInt(Const.sound) ?? 0;
   DateTime wakeUp = DateTime.fromMillisecondsSinceEpoch(timeWakeUp);
+  final int time = wakeUp
+      .difference(DateTime.now())
+      .inMinutes;
   // bring to foreground
   if (service is AndroidServiceInstance) {
     service.setForegroundNotificationInfo(
@@ -126,7 +129,7 @@ Future<void> onStart(ServiceInstance service) async {
       content: "Alarm: ${DateFormat('HH:mm dd/MM/yyyy').format(wakeUp)}",
     );
   }
-  Timer.periodic(const Duration(minutes: 1), (timer) async {
+  Timer.periodic(Duration(minutes: time), (timer) async {
     log('FLUTTER BACKGROUND SERVICE: ${DateTime.now()}');
     audioPlayer.setReleaseMode(ReleaseMode.loop);
     audioPlayer.play(AssetSource(Const.soundAlarm[sound]));
