@@ -115,7 +115,12 @@ class InfoIndividualScreen extends StatelessWidget {
                                               AppColors.gradientBlueButton,
                                           onPressed: () {
                                             _showPointDialog(context,
-                                                bed: state.bed);
+                                                    bed: state.bed)
+                                                .then((_) {
+                                              context
+                                                  .read<IndividualCubit>()
+                                                  .refresh();
+                                            });
                                           },
                                         ),
                                     ],

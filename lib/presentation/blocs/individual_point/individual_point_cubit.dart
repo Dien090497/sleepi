@@ -12,7 +12,7 @@ class IndividualPointCubit extends Cubit<IndividualPointState> {
       : super(IndividualPointState.initial(
           bed: bed,
           startAttributes: [7, 13, 12, 9, 9],
-          attributesChanged: [7, 13, 12, 9, 9],
+          attributesDistributed: List<double>.generate(5, (i) => 0),
           attributesNames: [
             LocaleKeys.efficiency,
             LocaleKeys.luck,
@@ -47,11 +47,11 @@ class IndividualPointCubit extends Cubit<IndividualPointState> {
     final currentState = state;
     if (currentState is IndividualPointInitial) {
       if ((currentState.point ?? -1) <= 0) return;
-      final attributeChanged = currentState.attributesChanged[i];
-      final newList = List<double>.from(currentState.attributesChanged);
-      newList[i] = attributeChanged + 1;
+      final attribute = currentState.attributesDistributed[i];
+      final newList = List<double>.from(currentState.attributesDistributed);
+      newList[i] = attribute + 1;
       emit(currentState.copyWith(
-        attributesChanged: newList,
+        attributesDistributed: newList,
         point: currentState.point! - 1,
       ));
     }
@@ -60,14 +60,15 @@ class IndividualPointCubit extends Cubit<IndividualPointState> {
   void decrease(int i) {
     final currentState = state;
     if (currentState is IndividualPointInitial) {
-      if ((currentState.point ?? -1) <= 0) return;
+      if (currentState.point == null) return;
       final startAttribute = currentState.startAttributes[i];
-      final attributeChanged = currentState.attributesChanged[i];
-      if (attributeChanged != startAttribute) {
-        final newList = List<double>.from(currentState.attributesChanged);
-        newList[i] = attributeChanged - 1;
+      final attribute = currentState.attributesDistributed[i];
+      if (attribute == 0) return;
+      if (attribute != startAttribute) {
+        final newList = List<double>.from(currentState.attributesDistributed);
+        newList[i] = attribute - 1;
         emit(currentState.copyWith(
-          attributesChanged: newList,
+          attributesDistributed: newList,
           point: currentState.point! + 1,
         ));
       }
@@ -79,7 +80,7 @@ class IndividualPointCubit extends Cubit<IndividualPointState> {
     if (currentState is IndividualPointInitial) {
       if (currentState.isLoading) return;
       emit(currentState.copyWith(isLoading: true));
-      final attributes = currentState.attributesChanged;
+      final attributes = currentState.attributesDistributed;
       final updateRes = await _updateAttributeUC.call(UpdatePointSchema(
         bedId: currentState.bed.nftId,
         efficiency: attributes[0],

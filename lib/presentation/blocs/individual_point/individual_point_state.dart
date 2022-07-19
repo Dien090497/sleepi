@@ -10,7 +10,7 @@ class IndividualPointState with _$IndividualPointState {
     double? point,
     required BedEntity bed,
     required List<double> startAttributes,
-    required List<double> attributesChanged,
+    required List<double> attributesDistributed,
     required List<String> attributesNames,
     @Default(false) bool isLoading,
   }) = IndividualPointInitial;

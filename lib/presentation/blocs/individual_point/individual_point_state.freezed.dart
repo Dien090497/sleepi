@@ -22,7 +22,7 @@ mixin _$IndividualPointState {
             double? point,
             BedEntity bed,
             List<double> startAttributes,
-            List<double> attributesChanged,
+            List<double> attributesDistributed,
             List<String> attributesNames,
             bool isLoading)
         initial,
@@ -36,7 +36,7 @@ mixin _$IndividualPointState {
             double? point,
             BedEntity bed,
             List<double> startAttributes,
-            List<double> attributesChanged,
+            List<double> attributesDistributed,
             List<String> attributesNames,
             bool isLoading)?
         initial,
@@ -50,7 +50,7 @@ mixin _$IndividualPointState {
             double? point,
             BedEntity bed,
             List<double> startAttributes,
-            List<double> attributesChanged,
+            List<double> attributesDistributed,
             List<String> attributesNames,
             bool isLoading)?
         initial,
@@ -109,7 +109,7 @@ abstract class _$$IndividualPointInitialCopyWith<$Res> {
       {double? point,
       BedEntity bed,
       List<double> startAttributes,
-      List<double> attributesChanged,
+      List<double> attributesDistributed,
       List<String> attributesNames,
       bool isLoading});
 
@@ -133,7 +133,7 @@ class __$$IndividualPointInitialCopyWithImpl<$Res>
     Object? point = freezed,
     Object? bed = freezed,
     Object? startAttributes = freezed,
-    Object? attributesChanged = freezed,
+    Object? attributesDistributed = freezed,
     Object? attributesNames = freezed,
     Object? isLoading = freezed,
   }) {
@@ -150,9 +150,9 @@ class __$$IndividualPointInitialCopyWithImpl<$Res>
           ? _value._startAttributes
           : startAttributes // ignore: cast_nullable_to_non_nullable
               as List<double>,
-      attributesChanged: attributesChanged == freezed
-          ? _value._attributesChanged
-          : attributesChanged // ignore: cast_nullable_to_non_nullable
+      attributesDistributed: attributesDistributed == freezed
+          ? _value._attributesDistributed
+          : attributesDistributed // ignore: cast_nullable_to_non_nullable
               as List<double>,
       attributesNames: attributesNames == freezed
           ? _value._attributesNames
@@ -182,11 +182,11 @@ class _$IndividualPointInitial
       {this.point,
       required this.bed,
       required final List<double> startAttributes,
-      required final List<double> attributesChanged,
+      required final List<double> attributesDistributed,
       required final List<String> attributesNames,
       this.isLoading = false})
       : _startAttributes = startAttributes,
-        _attributesChanged = attributesChanged,
+        _attributesDistributed = attributesDistributed,
         _attributesNames = attributesNames;
 
   @override
@@ -200,11 +200,11 @@ class _$IndividualPointInitial
     return EqualUnmodifiableListView(_startAttributes);
   }
 
-  final List<double> _attributesChanged;
+  final List<double> _attributesDistributed;
   @override
-  List<double> get attributesChanged {
+  List<double> get attributesDistributed {
     // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_attributesChanged);
+    return EqualUnmodifiableListView(_attributesDistributed);
   }
 
   final List<String> _attributesNames;
@@ -220,7 +220,7 @@ class _$IndividualPointInitial
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'IndividualPointState.initial(point: $point, bed: $bed, startAttributes: $startAttributes, attributesChanged: $attributesChanged, attributesNames: $attributesNames, isLoading: $isLoading)';
+    return 'IndividualPointState.initial(point: $point, bed: $bed, startAttributes: $startAttributes, attributesDistributed: $attributesDistributed, attributesNames: $attributesNames, isLoading: $isLoading)';
   }
 
   @override
@@ -231,7 +231,7 @@ class _$IndividualPointInitial
       ..add(DiagnosticsProperty('point', point))
       ..add(DiagnosticsProperty('bed', bed))
       ..add(DiagnosticsProperty('startAttributes', startAttributes))
-      ..add(DiagnosticsProperty('attributesChanged', attributesChanged))
+      ..add(DiagnosticsProperty('attributesDistributed', attributesDistributed))
       ..add(DiagnosticsProperty('attributesNames', attributesNames))
       ..add(DiagnosticsProperty('isLoading', isLoading));
   }
@@ -246,7 +246,7 @@ class _$IndividualPointInitial
             const DeepCollectionEquality()
                 .equals(other._startAttributes, _startAttributes) &&
             const DeepCollectionEquality()
-                .equals(other._attributesChanged, _attributesChanged) &&
+                .equals(other._attributesDistributed, _attributesDistributed) &&
             const DeepCollectionEquality()
                 .equals(other._attributesNames, _attributesNames) &&
             const DeepCollectionEquality().equals(other.isLoading, isLoading));
@@ -258,7 +258,7 @@ class _$IndividualPointInitial
       const DeepCollectionEquality().hash(point),
       const DeepCollectionEquality().hash(bed),
       const DeepCollectionEquality().hash(_startAttributes),
-      const DeepCollectionEquality().hash(_attributesChanged),
+      const DeepCollectionEquality().hash(_attributesDistributed),
       const DeepCollectionEquality().hash(_attributesNames),
       const DeepCollectionEquality().hash(isLoading));
 
@@ -275,14 +275,14 @@ class _$IndividualPointInitial
             double? point,
             BedEntity bed,
             List<double> startAttributes,
-            List<double> attributesChanged,
+            List<double> attributesDistributed,
             List<String> attributesNames,
             bool isLoading)
         initial,
     required TResult Function() done,
     required TResult Function(String msg) error,
   }) {
-    return initial(point, bed, startAttributes, attributesChanged,
+    return initial(point, bed, startAttributes, attributesDistributed,
         attributesNames, isLoading);
   }
 
@@ -293,14 +293,14 @@ class _$IndividualPointInitial
             double? point,
             BedEntity bed,
             List<double> startAttributes,
-            List<double> attributesChanged,
+            List<double> attributesDistributed,
             List<String> attributesNames,
             bool isLoading)?
         initial,
     TResult Function()? done,
     TResult Function(String msg)? error,
   }) {
-    return initial?.call(point, bed, startAttributes, attributesChanged,
+    return initial?.call(point, bed, startAttributes, attributesDistributed,
         attributesNames, isLoading);
   }
 
@@ -311,7 +311,7 @@ class _$IndividualPointInitial
             double? point,
             BedEntity bed,
             List<double> startAttributes,
-            List<double> attributesChanged,
+            List<double> attributesDistributed,
             List<String> attributesNames,
             bool isLoading)?
         initial,
@@ -320,7 +320,7 @@ class _$IndividualPointInitial
     required TResult orElse(),
   }) {
     if (initial != null) {
-      return initial(point, bed, startAttributes, attributesChanged,
+      return initial(point, bed, startAttributes, attributesDistributed,
           attributesNames, isLoading);
     }
     return orElse();
@@ -366,14 +366,14 @@ abstract class IndividualPointInitial implements IndividualPointState {
       {final double? point,
       required final BedEntity bed,
       required final List<double> startAttributes,
-      required final List<double> attributesChanged,
+      required final List<double> attributesDistributed,
       required final List<String> attributesNames,
       final bool isLoading}) = _$IndividualPointInitial;
 
   double? get point;
   BedEntity get bed;
   List<double> get startAttributes;
-  List<double> get attributesChanged;
+  List<double> get attributesDistributed;
   List<String> get attributesNames;
   bool get isLoading;
   @JsonKey(ignore: true)
@@ -434,7 +434,7 @@ class _$IndividualPointDone
             double? point,
             BedEntity bed,
             List<double> startAttributes,
-            List<double> attributesChanged,
+            List<double> attributesDistributed,
             List<String> attributesNames,
             bool isLoading)
         initial,
@@ -451,7 +451,7 @@ class _$IndividualPointDone
             double? point,
             BedEntity bed,
             List<double> startAttributes,
-            List<double> attributesChanged,
+            List<double> attributesDistributed,
             List<String> attributesNames,
             bool isLoading)?
         initial,
@@ -468,7 +468,7 @@ class _$IndividualPointDone
             double? point,
             BedEntity bed,
             List<double> startAttributes,
-            List<double> attributesChanged,
+            List<double> attributesDistributed,
             List<String> attributesNames,
             bool isLoading)?
         initial,
@@ -601,7 +601,7 @@ class _$IndividualPointError
             double? point,
             BedEntity bed,
             List<double> startAttributes,
-            List<double> attributesChanged,
+            List<double> attributesDistributed,
             List<String> attributesNames,
             bool isLoading)
         initial,
@@ -618,7 +618,7 @@ class _$IndividualPointError
             double? point,
             BedEntity bed,
             List<double> startAttributes,
-            List<double> attributesChanged,
+            List<double> attributesDistributed,
             List<String> attributesNames,
             bool isLoading)?
         initial,
@@ -635,7 +635,7 @@ class _$IndividualPointError
             double? point,
             BedEntity bed,
             List<double> startAttributes,
-            List<double> attributesChanged,
+            List<double> attributesDistributed,
             List<String> attributesNames,
             bool isLoading)?
         initial,

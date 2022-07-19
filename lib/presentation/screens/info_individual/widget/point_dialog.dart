@@ -68,9 +68,11 @@ class PointDialog extends StatelessWidget {
                 ListView.separated(
                   shrinkWrap: true,
                   physics: const NeverScrollableScrollPhysics(),
-                  itemCount: state.attributesChanged.length,
+                  itemCount: state.startAttributes.length,
                   separatorBuilder: (_, i) => SizedBox(height: 16.h),
                   itemBuilder: (context, i) {
+                    final startPoint = state.startAttributes[i];
+                    final distributePoint = state.attributesDistributed[i];
                     return _IncreasePoint(
                       title: state.attributesNames[i],
                       addTap: () {
@@ -79,9 +81,9 @@ class PointDialog extends StatelessWidget {
                       minusTap: () {
                         cubit.decrease(i);
                       },
-                      point: state.attributesChanged[i],
-                      startPoint: state.startAttributes[i],
-                      key: Key('${state.attributesChanged[i]}'),
+                      point: startPoint + distributePoint,
+                      startPoint: startPoint,
+                      key: Key('${startPoint + distributePoint}'),
                     );
                   },
                 ),
