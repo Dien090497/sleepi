@@ -13,13 +13,20 @@ import 'package:slee_fi/l10n/locale_keys.g.dart';
 import 'package:slee_fi/presentation/blocs/bottom_navigation/bottom_navigation_bloc.dart';
 import 'package:slee_fi/presentation/blocs/bottom_navigation/bottom_navigation_event.dart';
 import 'package:slee_fi/presentation/blocs/home/home_bloc.dart';
-import 'package:slee_fi/presentation/blocs/home/home_state.dart';
+import 'package:slee_fi/presentation/blocs/item_list/item_bloc.dart';
+import 'package:slee_fi/presentation/blocs/item_list/item_event.dart';
+import 'package:slee_fi/presentation/blocs/item_list/item_state.dart';
 import 'package:slee_fi/presentation/screens/home/widgets/my_item_short_widget.dart';
 import 'package:slee_fi/presentation/screens/home/widgets/pop_up_item.dart';
 import 'package:slee_fi/resources/resources.dart';
 
 class ModalItemList extends StatelessWidget {
-  const ModalItemList({Key? key, required this.homeBloc}) : super(key: key);
+  const ModalItemList({
+    Key? key,
+    required this.itemBloc,
+    required this.homeBloc,
+  }) : super(key: key);
+  final ItemBloc itemBloc;
   final HomeBloc homeBloc;
 
   @override
@@ -38,7 +45,7 @@ class ModalItemList extends StatelessWidget {
                 const Spacer(),
                 GestureDetector(
                   onTap: () async {
-                    showFilterItemBottomSheet(context, homeBloc: homeBloc);
+                    showFilterItemBottomSheet(context, itemBloc: itemBloc);
                   },
                   child: Padding(
                     padding: const EdgeInsets.only(left: 8),
@@ -59,22 +66,22 @@ class ModalItemList extends StatelessWidget {
           Expanded(
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 8),
-              child: BlocBuilder<HomeBloc, HomeState>(
-                bloc: homeBloc,
+              child: BlocBuilder<ItemBloc, ItemState>(
+                bloc: itemBloc,
                 builder: (context, state) {
-                  if ((state is HomeLoaded && state.itemList == null) ||
-                      (state is! HomeLoaded)) {
-                    homeBloc.add(FetchItem());
+                  if ((state is ItemStateLoaded && state.itemList == null) ||
+                      (state is! ItemStateLoaded)) {
+                    itemBloc.add(const FetchItemEvent());
                   }
 
-                  if (state is HomeLoaded && state.itemList != null) {
+                  if (state is ItemStateLoaded && state.itemList != null) {
                     return SFGridView(
                       isLoadMore: state.loadMoreItem,
                       isScroll: true,
                       count: state.itemList!.length,
                       childAspectRatio: 1,
                       onLoadMore: _onLoadMore(),
-                      onRefresh: () => homeBloc.add(RefreshItem()),
+                      onRefresh: () => itemBloc.add(const RefreshItemEvent()),
                       itemBuilder: (context, i) {
                         final item = state.itemList![i];
                         return GestureDetector(
@@ -108,10 +115,11 @@ class ModalItemList extends StatelessWidget {
             ),
           ),
           const SizedBox(height: 16),
-          BlocBuilder<HomeBloc, HomeState>(
-            bloc: homeBloc,
+          BlocBuilder<ItemBloc, ItemState>(
+            bloc: itemBloc,
             builder: (context, state) => SFButton(
-                text: state is HomeLoaded && state.itemList?.isNotEmpty == true
+                text: state is ItemStateLoaded &&
+                        state.itemList?.isNotEmpty == true
                     ? LocaleKeys.cancel
                     : LocaleKeys.buy,
                 width: MediaQuery.of(context).size.width * 0.9,
@@ -120,7 +128,8 @@ class ModalItemList extends StatelessWidget {
                 height: 48,
                 onPressed: () {
                   Navigator.pop(context);
-                  if (state is HomeLoaded && state.itemList?.isEmpty == true) {
+                  if (state is ItemStateLoaded &&
+                      state.itemList?.isEmpty == true) {
                     BlocProvider.of<BottomNavigationBloc>(context)
                         .add(const SelectTab(4, indexTabChild: 2));
                   }
@@ -135,7 +144,7 @@ class ModalItemList extends StatelessWidget {
   }
 
   Future<void> _onLoadMore() async {
-    homeBloc.add(LoadMoreItem());
+    itemBloc.add(const LoadMoreItemEvent());
     await Future.delayed(const Duration(milliseconds: 5000));
   }
 }
