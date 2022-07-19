@@ -203,8 +203,6 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
         emit(currentState.copyWith(
             userStatusTracking: r,
             startTracking: false,
-            minute: DateTime.now().minute,
-            hour: DateTime.now().hour,
             time: 0));
         add(EstimateTracking());
       });
