@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:slee_fi/common/enum/enum.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
 import 'package:slee_fi/common/widgets/cached_image.dart';
@@ -12,6 +11,8 @@ import 'package:slee_fi/common/widgets/sf_text.dart';
 import 'package:slee_fi/l10n/locale_keys.g.dart';
 import 'package:slee_fi/presentation/blocs/home/home_bloc.dart';
 import 'package:slee_fi/presentation/blocs/home/home_state.dart';
+import 'package:slee_fi/presentation/blocs/item_list/item_bloc.dart';
+import 'package:slee_fi/presentation/blocs/item_list/item_event.dart';
 import 'package:slee_fi/resources/resources.dart';
 
 import 'modal_item_list.dart';
@@ -23,20 +24,26 @@ class UseItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16),
-      child: BlocConsumer<HomeBloc, HomeState>(
-        listenWhen: (previous, current) {
+      child: BlocBuilder<HomeBloc, HomeState>(
+        buildWhen: (previous, current) {
           if (previous is HomeLoaded && current is HomeLoaded) {
-            if ((previous.selectedItem == null &&
-                    current.selectedItem != null) ||
-                current.errorType == ErrorType.addItemToBed) {
+            if (previous.selectedItem == null && current.selectedItem != null) {
+              showSuccessfulDialog(context, null);
+              context
+                  .read<ItemBloc>()
+                  .add(AddItemSuccessEvent(current.selectedItem!));
+              return true;
+            } else if (previous.selectedItem != null &&
+                current.selectedItem == null) {
+              context
+                  .read<ItemBloc>()
+                  .add(RemoveItemSuccessEvent(previous.selectedItem!));
               return true;
             }
           }
           return false;
         },
-        listener: (context, state) {
-          showSuccessfulDialog(context, null);
-        },
+
         builder: (context, state) {
           return (state is HomeLoaded && state.selectedItem != null)
               ? Container(
@@ -54,6 +61,7 @@ class UseItem extends StatelessWidget {
                                 context,
                                 0.8,
                                 ModalItemList(
+                                    itemBloc: context.read<ItemBloc>(),
                                     homeBloc: context.read<HomeBloc>()));
                           },
                           child: CachedImage(
@@ -116,8 +124,13 @@ class UseItem extends StatelessWidget {
               : SFButtonOutLined(
                   title: LocaleKeys.use_item,
                   onPressed: () {
-                    SFModalBottomSheet.show(context, 0.8,
-                        ModalItemList(homeBloc: context.read<HomeBloc>()));
+                    SFModalBottomSheet.show(
+                        context,
+                        0.8,
+                        ModalItemList(
+                          itemBloc: context.read<ItemBloc>(),
+                          homeBloc: context.read<HomeBloc>(),
+                        ));
                   },
                   fixedSize: const Size.fromHeight(40),
                   textStyle: TextStyles.lightGrey16500,

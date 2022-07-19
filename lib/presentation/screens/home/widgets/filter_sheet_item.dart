@@ -4,15 +4,16 @@ import 'package:slee_fi/common/style/text_styles.dart';
 import 'package:slee_fi/common/widgets/sf_buttons.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
 import 'package:slee_fi/l10n/locale_keys.g.dart';
-import 'package:slee_fi/presentation/blocs/home/home_bloc.dart';
+import 'package:slee_fi/presentation/blocs/item_list/item_bloc.dart';
+import 'package:slee_fi/presentation/blocs/item_list/item_event.dart';
 import 'package:slee_fi/presentation/screens/market_place/widget/filter_sheet.dart';
 import 'package:syncfusion_flutter_core/theme.dart';
 import 'package:syncfusion_flutter_sliders/sliders.dart';
 
 class FilterItem extends StatefulWidget {
-  const FilterItem({Key? key, required this.homeBloc}) : super(key: key);
+  const FilterItem({Key? key, required this.itemBloc}) : super(key: key);
 
-  final HomeBloc homeBloc;
+  final ItemBloc itemBloc;
 
   @override
   State<FilterItem> createState() => _FilterItemState();
@@ -21,13 +22,13 @@ class FilterItem extends StatefulWidget {
 class _FilterItemState extends State<FilterItem> {
   List<String> selectedList = [];
   late SfRangeValues sfRangeValues = SfRangeValues(
-    widget.homeBloc.filterItemParam.minLevel.toDouble(),
-    widget.homeBloc.filterItemParam.maxLevel.toDouble(),
+    widget.itemBloc.filterItemParam.minLevel.toDouble(),
+    widget.itemBloc.filterItemParam.maxLevel.toDouble(),
   );
 
   @override
   void initState() {
-    selectedList.addAll(widget.homeBloc.filterItemParam.type);
+    selectedList.addAll(widget.itemBloc.filterItemParam.type);
 
     super.initState();
   }
@@ -123,7 +124,7 @@ class _FilterItemState extends State<FilterItem> {
             width: size.width,
             gradient: AppColors.gradientBlueButton,
             onPressed: () {
-              widget.homeBloc.add(FilterItemEvent(
+              widget.itemBloc.add(FilterItemEvent(
                 selectedList,
                 sfRangeValues.start.toInt(),
                 sfRangeValues.end.toInt(),

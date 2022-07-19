@@ -39,36 +39,6 @@ class RefreshBed extends HomeEvent {
   List<Object?> get props => [];
 }
 
-class FetchItem extends HomeEvent {
-  @override
-  List<Object?> get props => [];
-}
-
-class RefreshItem extends HomeEvent {
-  @override
-  List<Object?> get props => [];
-}
-
-class FilterItemEvent extends HomeEvent {
-  final List<String> selected;
-  final int min;
-  final int max;
-
-  const FilterItemEvent(
-    this.selected,
-    this.min,
-    this.max,
-  );
-
-  @override
-  List<Object?> get props => [selected, min, max];
-}
-
-class LoadMoreItem extends HomeEvent {
-  @override
-  List<Object?> get props => [];
-}
-
 class LoadMoreBed extends HomeEvent {
   @override
   List<Object?> get props => [];
@@ -85,7 +55,6 @@ class UserStatusTracking extends HomeEvent {
 }
 
 class StartTracking extends HomeEvent {
-
   @override
   List<Object?> get props => [];
 }
@@ -108,28 +77,28 @@ class ChangeStatusAlarm extends HomeEvent {
   List<Object?> get props => [enableAlarm];
 }
 
-class FetchLuckyBox extends HomeEvent {
-  @override
-  List<Object?> get props => [];
-}
-
-class OpenLuckyBox extends HomeEvent {
-  final int id;
-
-  const OpenLuckyBox(this.id);
-
-  @override
-  List<Object?> get props => [id];
-}
-
-class SpeedUpLuckyBox extends HomeEvent {
-  final int id;
-
-  const SpeedUpLuckyBox(this.id);
-
-  @override
-  List<Object?> get props => [id];
-}
+// class FetchLuckyBox extends HomeEvent {
+//   @override
+//   List<Object?> get props => [];
+// }
+//
+// class OpenLuckyBox extends HomeEvent {
+//   final int id;
+//
+//   const OpenLuckyBox(this.id);
+//
+//   @override
+//   List<Object?> get props => [id];
+// }
+//
+// class SpeedUpLuckyBox extends HomeEvent {
+//   final int id;
+//
+//   const SpeedUpLuckyBox(this.id);
+//
+//   @override
+//   List<Object?> get props => [id];
+// }
 
 class ChangeHour extends HomeEvent {
   final int hour;
