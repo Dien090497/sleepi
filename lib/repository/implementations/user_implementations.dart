@@ -30,6 +30,7 @@ import 'package:slee_fi/usecase/estimate_gas_withdraw.dart';
 import 'package:slee_fi/usecase/estimate_tracking_usecase.dart';
 import 'package:slee_fi/usecase/fetch_bed_usecase.dart';
 import 'package:slee_fi/usecase/fetch_data_chart_usecase.dart';
+import 'package:slee_fi/usecase/fetch_home_bed_usecase.dart';
 import 'package:slee_fi/usecase/withdraw_history_usecase.dart';
 
 @Injectable(as: IUserRepository)
@@ -309,6 +310,19 @@ class UserImplementation extends IUserRepository {
       return Right(result.toEntity());
     } catch (e) {
       return Left(FailureMessage('$e'));
+    }
+  }
+
+  @override
+  Future<Either<FailureMessage, List<BedEntity>>> fetchHomeBed(
+      FetchHomeBedParam param) async {
+    try {
+      final result =
+          await _authDataSource.fetchBedInHomePage(param.limit, param.page);
+      var list = result.list.map((e) => e.toEntity()).toList();
+      return Right(list);
+    } catch (e) {
+      return Left(FailureMessage.fromException(e));
     }
   }
 }

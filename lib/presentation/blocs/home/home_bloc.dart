@@ -10,7 +10,7 @@ import 'package:slee_fi/presentation/blocs/home/home_state.dart';
 import 'package:slee_fi/schema/start_tracking/start_tracking_schema.dart';
 import 'package:slee_fi/usecase/add_item_to_bed_usecase.dart';
 import 'package:slee_fi/usecase/estimate_tracking_usecase.dart';
-import 'package:slee_fi/usecase/fetch_bed_usecase.dart';
+import 'package:slee_fi/usecase/fetch_home_bed_usecase.dart';
 import 'package:slee_fi/usecase/get_user_status_tracking_usecase.dart';
 import 'package:slee_fi/usecase/remove_item_from_bed_usecase.dart';
 import 'package:slee_fi/usecase/start_sleep_tracking_usecase.dart';
@@ -35,7 +35,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     on<ChangeMinute>(_changeMinute);
   }
 
-  final _fetchListBedUC = getIt<FetchBedUseCase>();
+  final _fetchListBedUC = getIt<FetchHomeBedUseCase>();
   final _addItemToBedUC = getIt<AddItemToBedUseCase>();
   final _removeItemFromBedUC = getIt<RemoveItemFromBedUseCase>();
   final _estimateTrackingUC = getIt<EstimateTrackingUseCase>();
@@ -47,8 +47,8 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
   final _limitItemPage = 10;
 
   void _onLoadMoreBed(LoadMoreBed event, Emitter<HomeState> emit) async {
-    final result = await _fetchListBedUC.call(FetchBedParam(
-        _currentPageBed, _limitItemPage, CategoryType.bed, AttributeNFT.none));
+    final result = await _fetchListBedUC
+        .call(FetchHomeBedParam(_currentPageBed, _limitItemPage));
     result.fold((l) {
       final currentState = state;
       if (currentState is HomeLoaded) {
@@ -69,13 +69,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
           return;
         }
 
-        final newList = currentState.bedList +
-            r //TODO remove filter
-                .where((element) =>
-                    element.type == 'bed' || element.status == 'NOT_ON_SALE')
-                .map((e) => e.toEntity())
-                .toList();
-
+        final newList = currentState.bedList + r;
         emit(
             currentState.copyWith(bedList: newList, loadMoreBed: r.isNotEmpty));
       }
@@ -97,8 +91,8 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
   }
 
   void _fetchBed(FetchBed fetchData, Emitter<HomeState> emit) async {
-    final result = await _fetchListBedUC.call(FetchBedParam(
-        _currentPageBed, _limitItemPage, CategoryType.bed, AttributeNFT.none));
+    final result = await _fetchListBedUC
+        .call(FetchHomeBedParam(_currentPageBed, _limitItemPage));
     result.fold(
       (l) {
         emit(HomeState.loaded(
@@ -120,13 +114,8 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
 
         if (currentState is HomeLoaded) {
           emit(currentState.copyWith(
-              //TODO remove filter
-              bedList: r
-                  .where((element) =>
-                      element.type == 'bed' || element.status == 'NOT_ON_SALE')
-                  .map((e) => e.toEntity())
-                  .toList(),
-              selectedBed: r.first.toEntity(),
+              bedList: r,
+              selectedBed: r.first,
               loadMoreBed: r.length >= _limitItemPage,
               selectedItem: null));
           add(UserStatusTracking());
@@ -135,14 +124,8 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
         emit(HomeState.loaded(
             errorMessage: '',
             loading: false,
-            //TODO remove filter
-
-            bedList: r
-                .where((element) =>
-                    element.type == 'bed' || element.status == 'NOT_ON_SALE')
-                .map((e) => e.toEntity())
-                .toList(),
-            selectedBed: r.isNotEmpty ? r.first.toEntity() : null,
+            bedList: r,
+            selectedBed: r.isNotEmpty ? r.first : null,
             loadMoreBed: r.length >= _limitItemPage,
             minute: DateTime.now().minute,
             hour: DateTime.now().hour,
