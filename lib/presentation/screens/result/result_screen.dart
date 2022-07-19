@@ -89,6 +89,7 @@ class _ResultScreenState extends State<ResultScreen> {
                           score: args.resultModel.sleepQuality ?? 0,
                           sleepDuration: convertTime(
                               args.resultModel.sleepDurationTime ?? '0'),
+                          imageBed: args.imageBed,
                         ),
                         const SizedBox(
                           height: 32,

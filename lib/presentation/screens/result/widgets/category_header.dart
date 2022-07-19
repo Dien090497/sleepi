@@ -12,12 +12,14 @@ class CategoryHeader extends StatelessWidget {
       {Key? key,
       required this.earning,
       required this.sleepDuration,
-      required this.score})
+      required this.score,
+        this.imageBed})
       : super(key: key);
 
   final String earning;
   final String sleepDuration;
   final int score;
+  final String? imageBed;
 
   @override
   Widget build(BuildContext context) {
@@ -49,7 +51,7 @@ class CategoryHeader extends StatelessWidget {
                         color: AppColors.white.withOpacity(0.07),
                         borderRadius: BorderRadius.circular(16),
                       ),
-                      child: const SFIcon(Imgs.shortBed, height: 160,),
+                      child: SFIcon(imageBed ?? Imgs.shortBed, height: 160,),
                     )
                   ],
                 ),
