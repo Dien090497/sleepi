@@ -1,6 +1,7 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:slee_fi/entities/bed_entity/bed_entity.dart';
 import 'package:slee_fi/entities/jewel_entity/jewel_entity.dart';
+import 'package:slee_fi/models/jewel_model/jewel_model.dart';
 
 part 'bed_detail.g.dart';
 
@@ -65,7 +66,7 @@ class BedDetail {
   final String status;
 
   int? socket;
-  final List<JewelEntity> jewels;
+  final List<JewelModel> jewels;
   dynamic itemId;
   final Category category;
   final double? insurancePercent;
@@ -101,7 +102,10 @@ class BedDetail {
     this.isLock,
     this.status,
     this.category,
-    this.jewels, this.insurancePercent, this.startTime, this.endTime,
+    this.jewels,
+    this.insurancePercent,
+    this.startTime,
+    this.endTime,
   );
 
   factory BedDetail.fromJson(Map<String, dynamic> json) =>
@@ -136,7 +140,7 @@ class BedDetail {
         insurancePercent: insurancePercent,
         startTime: startTime,
         endTime: endTime,
-        jewels: jewels,
+        jewels: jewels.map((e) => e.toEntity()).toList(),
       );
 }
 

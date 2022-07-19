@@ -36,7 +36,7 @@ BedDetail _$BedDetailFromJson(Map<String, dynamic> json) => BedDetail(
       json['status'] as String,
       Category.fromJson(json['category'] as Map<String, dynamic>),
       (json['jewels'] as List<dynamic>)
-          .map((e) => JewelEntity.fromJson(e as Map<String, dynamic>))
+          .map((e) => JewelModel.fromJson(e as Map<String, dynamic>))
           .toList(),
       (json['insurancePercent'] as num?)?.toDouble(),
       (json['startTime'] as num?)?.toDouble(),
