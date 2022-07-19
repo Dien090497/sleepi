@@ -466,6 +466,22 @@ class _AuthDataSource implements AuthDataSource {
   }
 
   @override
+  Future<HomeBedResponse> fetchBedInHomePage(limit, page) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{r'limit': limit, r'page': page};
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<HomeBedResponse>(
+            Options(method: 'GET', headers: _headers, extra: _extra)
+                .compose(_dio.options, '/nft-attributes/nft-in-home-page',
+                    queryParameters: queryParameters, data: _data)
+                .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = HomeBedResponse.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
   Future<BedDetail> bedDetail(bedId, isBase) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{
