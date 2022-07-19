@@ -18,8 +18,9 @@ class PreResultParams {
   String fromRoute;
   TrackingResultModel resultModel;
   List<DrawChartEntity> dataChart;
+  String? imageBed;
 
-  PreResultParams({required this.fromRoute, required this.resultModel, required this.dataChart});
+  PreResultParams({required this.fromRoute, required this.resultModel, required this.dataChart, this.imageBed});
 }
 
 class PreResultScreen extends StatefulWidget {
@@ -53,6 +54,7 @@ class _PreResultScreenState extends State<PreResultScreen> {
                       fromRoute: args.fromRoute,
                       resultModel: args.resultModel,
                       dataChart: state.dataChart ?? [],
+                      imageBed: args.imageBed,
                     ));
               }
             },

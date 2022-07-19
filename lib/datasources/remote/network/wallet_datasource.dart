@@ -105,9 +105,6 @@ class WalletDataSource {
       gasPrice: gasPrice,
       data: function.encodeCall(data),
     );
-    print("-----------------------------EST");
-    print('$gasFee ');
-    print('gasPrice : $gasPrice');
     return gasFee * gasPrice.getInWei / BigInt.from(pow(10, 18));
   }
 

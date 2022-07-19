@@ -77,7 +77,6 @@ class _TransactionDetailListState extends State<TransactionDetailList> {
           }
           if(state is GetUrlDetailTransactionSuccess){
             urlDetailTransaction = state.url;
-            print(urlDetailTransaction);
             final url = Uri.parse(urlDetailTransaction);
             launchUrl(url);
           }

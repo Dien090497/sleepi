@@ -30,12 +30,15 @@ class TrackingParams {
   int timeWakeUp;
   double tokenEarn;
   String fromRoute;
+  String? imageBed;
 
   TrackingParams(
       {required this.timeStart,
       required this.timeWakeUp,
       required this.tokenEarn,
-      required this.fromRoute});
+      required this.fromRoute,
+      this.imageBed
+      });
 }
 
 class TrackingScreen extends StatefulWidget {
@@ -98,6 +101,7 @@ class _TrackingScreenState extends State<TrackingScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final args = ModalRoute.of(context)?.settings.arguments as TrackingParams;
     return WillPopScope(
       onWillPop: () async {
         return false;
@@ -109,7 +113,7 @@ class _TrackingScreenState extends State<TrackingScreen> {
             if (state is TrackingStatePosted) {
               Navigator.pushReplacementNamed(context, R.preResult,
                   arguments: PreResultParams(
-                      fromRoute: fromRoute, resultModel: state.resultModel, dataChart: []));
+                      fromRoute: fromRoute, resultModel: state.resultModel, dataChart: [], imageBed: args.imageBed));
             }
             if (state is TrackingStateFail) {
               showMessageDialog(context, state.msg);

@@ -101,13 +101,14 @@ class HomeScreen extends StatelessWidget {
                                 keyText: LocaleKeys.you_can_set_your_alarm_here,
                                 style: TextStyles.lightGrey12,
                               ),
+                              const SizedBox(height: 16),
+                              if (state is HomeLoaded)
+                                AlarmBell(selectedBed: state.selectedBed,),
                             ],
                           );
                         },
                       ),
                     ),
-                    const SizedBox(height: 16),
-                    const AlarmBell(),
                   ],
                 ),
               ),
