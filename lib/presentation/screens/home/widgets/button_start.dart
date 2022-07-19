@@ -102,9 +102,9 @@ class _CountDownTextState extends State<_CountDownText> {
   int startTime = 0;
 
   void updateUserStatus() {
+    startTimer();
     setState(() {
       userStatusTracking = widget.userStatusTracking!;
-      startTimer();
     });
   }
 
@@ -114,7 +114,7 @@ class _CountDownTextState extends State<_CountDownText> {
     const oneSec = Duration(seconds: 1);
     _timer = Timer.periodic(
       oneSec,
-          (Timer timer) {
+      (Timer timer) {
         if (startTime == 0) {
           _timer.cancel();
           widget.onEnd();
@@ -134,7 +134,7 @@ class _CountDownTextState extends State<_CountDownText> {
       if (DateTime.now().isBefore(DateTime.fromMillisecondsSinceEpoch(
           widget.userStatusTracking!.availableAt * 1000))) {
         startTime = DateTime.fromMillisecondsSinceEpoch(
-            widget.userStatusTracking!.availableAt * 1000)
+                widget.userStatusTracking!.availableAt * 1000)
             .difference(DateTime.now())
             .inSeconds;
       } else {
