@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:slee_fi/common/enum/enum.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
 import 'package:slee_fi/common/widgets/cached_image.dart';
@@ -25,10 +24,11 @@ class UseItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16),
-      child: BlocConsumer<HomeBloc, HomeState>(
+      child: BlocBuilder<HomeBloc, HomeState>(
         buildWhen: (previous, current) {
           if (previous is HomeLoaded && current is HomeLoaded) {
             if (previous.selectedItem == null && current.selectedItem != null) {
+              showSuccessfulDialog(context, null);
               context
                   .read<ItemBloc>()
                   .add(AddItemSuccessEvent(current.selectedItem!));
@@ -43,19 +43,7 @@ class UseItem extends StatelessWidget {
           }
           return false;
         },
-        listenWhen: (previous, current) {
-          if (previous is HomeLoaded && current is HomeLoaded) {
-            if ((previous.selectedItem == null &&
-                    current.selectedItem != null) ||
-                current.errorType == ErrorType.addItemToBed) {
-              return true;
-            }
-          }
-          return false;
-        },
-        listener: (context, state) {
-          showSuccessfulDialog(context, null);
-        },
+
         builder: (context, state) {
           return (state is HomeLoaded && state.selectedItem != null)
               ? Container(

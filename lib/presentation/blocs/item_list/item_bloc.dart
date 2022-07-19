@@ -86,10 +86,16 @@ class ItemBloc extends Bloc<ItemEvent, ItemState> {
     }
   }
 
-  FutureOr<void> _removeItemFromBedSuccess(
+  void _removeItemFromBedSuccess(
       RemoveItemSuccessEvent event, Emitter<ItemState> emit) {
     final currentState = state;
     if (currentState is ItemStateLoaded) {
+      var index = currentState.itemList!
+          .indexWhere((element) => element.id == event.entity.id);
+      if (index != -1) {
+        return;
+      }
+
       final List<ItemEntity> list = List.from(currentState.itemList!);
       list.add(event.entity);
       emit(currentState.copyWith(itemList: list));
