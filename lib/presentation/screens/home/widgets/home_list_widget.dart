@@ -23,7 +23,7 @@ class _HomeListWidgetState extends State<HomeListWidget> {
   }
 
   void _onRefresh() async {
-    BlocProvider.of<HomeBloc>(context).add(RefreshBed());
+    BlocProvider.of<HomeBloc>(context).add(const RefreshBed());
     BlocProvider.of<LuckyBoxCubit>(context).fetchLuckyBox();
     refreshController.refreshCompleted();
   }

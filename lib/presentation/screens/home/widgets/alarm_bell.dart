@@ -46,7 +46,7 @@ class AlarmBell extends StatelessWidget {
         if (state is HomeStartError) {
           Navigator.pop(context, true);
           showMessageDialog(context, state.message)
-              .then((value) => context.read<HomeBloc>().add(RefreshBed()));
+              .then((_) => context.read<HomeBloc>().add(const RefreshBed()));
         }
       },
       builder: (context, state) {
@@ -54,15 +54,15 @@ class AlarmBell extends StatelessWidget {
         final userStatusTracking =
             state is HomeLoaded ? state.userStatusTracking : null;
         final now = DateTime.now();
-        final nowWithoutMinute =
+        final nowWithoutSecond =
             DateTime(now.year, now.month, now.day, now.hour, now.minute);
-        final minTime = nowWithoutMinute.add(Duration(
+        final minTime = nowWithoutSecond.add(Duration(
             minutes: bed == null
                 ? 0
                 : bed.startTime == null
                     ? 0
                     : (bed.startTime! * 60).toInt()));
-        final maxTime = nowWithoutMinute.add(Duration(
+        final maxTime = nowWithoutSecond.add(Duration(
             minutes: bed == null
                 ? 0
                 : bed.endTime == null

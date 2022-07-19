@@ -42,7 +42,6 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
   final _userStatusTrackingUC = getIt<GetUserStatusTrackingUseCase>();
   final _startSleepTrackingUC = getIt<StartSleepTrackingUseCase>();
 
-  int currentBedId = -1;
   int _currentPageBed = 1;
   final _limitItemPage = 10;
 
@@ -76,10 +75,30 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     });
   }
 
-  void _onRefresh(RefreshBed event, Emitter<HomeState> emit) {
+  void _onRefresh(RefreshBed event, Emitter<HomeState> emit) async {
     _currentPageBed = 1;
-    emit(const HomeState.loading());
-    add(const FetchBed());
+    final currentState = state;
+    if (currentState is HomeLoaded) {
+      if (currentState.loading) return;
+      emit(currentState.copyWith(loading: true));
+      final result = await _fetchListBedUC
+          .call(FetchHomeBedParam(_currentPageBed, _limitItemPage));
+      result.fold(
+        (l) {
+          emit(currentState.copyWith(loading: false, errorMessage: ''));
+        },
+        (r) {
+          _currentPageBed++;
+          emit(currentState.copyWith(
+            loading: false,
+            errorMessage: '',
+            bedList: r,
+            loadMoreBed: r.length >= _limitItemPage,
+          ));
+          add(UserStatusTracking());
+        },
+      );
+    }
   }
 
   void _changeBed(ChangeBed event, Emitter<HomeState> emit) {
@@ -107,20 +126,6 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
       },
       (r) {
         _currentPageBed++;
-        final currentState = state;
-        if (r.isNotEmpty) {
-          currentBedId = r.first.id;
-        }
-
-        if (currentState is HomeLoaded) {
-          emit(currentState.copyWith(
-              bedList: r,
-              selectedBed: r.first,
-              loadMoreBed: r.length >= _limitItemPage,
-              selectedItem: null));
-          add(UserStatusTracking());
-          return;
-        }
         emit(HomeState.loaded(
             errorMessage: '',
             loading: false,
@@ -139,7 +144,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     final currentState = state;
     if (currentState is HomeLoaded && currentState.bedList.isNotEmpty) {
       final result = await _addItemToBedUC
-          .call(AddItemToBedParam(currentBedId, event.item.id));
+          .call(AddItemToBedParam(currentState.selectedBed!.id, event.item.id));
       result.fold((l) {
         emit(currentState.copyWith(
           errorMessage: l.msg,
@@ -155,8 +160,8 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
   void _removeItem(RemoveItem event, Emitter<HomeState> emit) async {
     final currentState = state;
     if (currentState is HomeLoaded && currentState.selectedItem != null) {
-      final result = await _removeItemFromBedUC
-          .call(AddItemToBedParam(currentBedId, currentState.selectedItem!.id));
+      final result = await _removeItemFromBedUC.call(AddItemToBedParam(
+          currentState.selectedBed!.id, currentState.selectedItem!.id));
       result.fold((l) {
         emit(currentState.copyWith(
           errorMessage: l.msg,
