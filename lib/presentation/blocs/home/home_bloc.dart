@@ -103,7 +103,8 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
 
         final newList = currentState.bedList +
             r //TODO remove filter
-                .where((element) => element.type == 'bed')
+                .where((element) =>
+                    element.type == 'bed' || element.status == 'NOT_ON_SALE')
                 .map((e) => e.toEntity())
                 .toList();
 
@@ -153,7 +154,8 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
           emit(currentState.copyWith(
               //TODO remove filter
               bedList: r
-                  .where((element) => element.type == 'bed')
+                  .where((element) =>
+                      element.type == 'bed' || element.status == 'NOT_ON_SALE')
                   .map((e) => e.toEntity())
                   .toList(),
               selectedBed: r.first.toEntity(),
@@ -168,7 +170,8 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
             //TODO remove filter
 
             bedList: r
-                .where((element) => element.type == 'bed')
+                .where((element) =>
+                    element.type == 'bed' || element.status == 'NOT_ON_SALE')
                 .map((e) => e.toEntity())
                 .toList(),
             selectedBed: r.isNotEmpty ? r.first.toEntity() : null,
