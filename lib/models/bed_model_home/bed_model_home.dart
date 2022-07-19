@@ -87,7 +87,7 @@ class BedModelHome {
       resilience: resilience,
       time: time,
       isMint: isMint,
-      socket: 0,
+      socket: nft.isLock,
       insurancePercent: objData.insurancePercent,
       startTime: objData.startTime,
       endTime: objData.endTime,
