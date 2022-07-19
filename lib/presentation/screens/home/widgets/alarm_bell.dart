@@ -53,19 +53,21 @@ class AlarmBell extends StatelessWidget {
         final bed = state is HomeLoaded ? state.selectedBed : null;
         final userStatusTracking =
             state is HomeLoaded ? state.userStatusTracking : null;
-        final minTime = DateTime.now().add(Duration(
+        final now = DateTime.now();
+        final nowWithoutMinute =
+            DateTime(now.year, now.month, now.day, now.hour, now.minute);
+        final minTime = nowWithoutMinute.add(Duration(
             minutes: bed == null
                 ? 0
                 : bed.startTime == null
                     ? 0
                     : (bed.startTime! * 60).toInt()));
-        final maxTime = DateTime.now().add(Duration(
+        final maxTime = nowWithoutMinute.add(Duration(
             minutes: bed == null
                 ? 0
                 : bed.endTime == null
                     ? 0
                     : (bed.endTime! * 60).toInt()));
-
         return Container(
           padding: const EdgeInsets.symmetric(horizontal: 16),
           decoration: const BoxDecoration(
@@ -210,32 +212,31 @@ class AlarmBell extends StatelessWidget {
 
   bool _correctTime(DateTime minTime, DateTime maxTime, HomeState state) {
     if (state is! HomeLoaded) return false;
-    var hour = state.hour;
-    var minute = state.minute;
-    var now = DateTime.now();
-    var nextDay = DateTime.now().add(const Duration(days: 1));
-    var wakeUpTimeInNextDay =
+    final hour = state.hour;
+    final minute = state.minute;
+    final now = DateTime.now();
+    final nextDay = DateTime.now().add(const Duration(days: 1));
+    final wakeUpTimeInNextDay =
         DateTime(nextDay.year, nextDay.month, nextDay.day, hour, minute);
-    var wakeUpTimeInDay = DateTime(now.year, now.month, now.day, hour, minute);
-    var wakeUpTime = hour <= now.hour ? wakeUpTimeInNextDay : wakeUpTimeInDay;
+    final wakeUpTimeInDay =
+        DateTime(now.year, now.month, now.day, hour, minute);
+    final wakeUpTime = hour <= now.hour ? wakeUpTimeInNextDay : wakeUpTimeInDay;
 
     return wakeUpTime.isAfter(minTime) && wakeUpTime.isBefore(maxTime) ||
         maxTime.difference(wakeUpTime).inSeconds == 0 ||
         wakeUpTime.difference(minTime).inSeconds == 0;
   }
 
-
-
-  // bool _theSameList(
-  //     List<LuckyBoxEntity> currentList, List<LuckyBoxEntity> prevList) {
-  //   if (currentList.length == prevList.length) {
-  //     for (int i = 0; i < prevList.length; i++) {
-  //       var index =
-  //           currentList.indexWhere((element) => element.id == prevList[i].id);
-  //       if (index == -1) return false;
-  //     }
-  //     return true;
-  //   }
-  //   return false;
-  // }
+// bool _theSameList(
+//     List<LuckyBoxEntity> currentList, List<LuckyBoxEntity> prevList) {
+//   if (currentList.length == prevList.length) {
+//     for (int i = 0; i < prevList.length; i++) {
+//       var index =
+//           currentList.indexWhere((element) => element.id == prevList[i].id);
+//       if (index == -1) return false;
+//     }
+//     return true;
+//   }
+//   return false;
+// }
 }

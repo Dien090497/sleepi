@@ -46,7 +46,6 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
   int _currentPageBed = 1;
   final _limitItemPage = 10;
 
-
   void _onLoadMoreBed(LoadMoreBed event, Emitter<HomeState> emit) async {
     final result = await _fetchListBedUC.call(FetchBedParam(
         _currentPageBed, _limitItemPage, CategoryType.bed, AttributeNFT.none));
@@ -274,7 +273,6 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
           time: _getTimeWithMinutes(event.minute, currentState)));
     }
   }
-
 
   int _getTimeWithHour(int hour, HomeState state) {
     if (state is! HomeLoaded) return 0;
