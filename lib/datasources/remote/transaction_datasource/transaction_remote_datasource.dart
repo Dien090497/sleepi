@@ -31,8 +31,10 @@ class TransactionRemoteDataSource{
     try {
       List<TransactionHistoryModel> transactionsHistory = [];
       final historyTransaction = await _historyDataSource.getAllHistory();
-
-      // int quantityBlock = 5;
+      int start = 5*(params.page! - 1);
+      int end = 5*params.page! > historyTransaction.length ? historyTransaction.length : 5*params.page!;
+      print('-------------PAGE-DATASOURCE-----------------');
+      print(params.page);
       if(historyTransaction.isNotEmpty){
         final walletId = _getStorageDataSource.getCurrentWalletId();
         final wallet = await _isarDataSource.getWalletAt(walletId);
@@ -46,20 +48,17 @@ class TransactionRemoteDataSource{
             wallet.mnemonic, wallet.derivedIndex!, network.slip44);
         final credentials = _web3dataSource.credentialsFromPrivateKey(privateKey);
         final ethereumAddress = await credentials.extractAddress();
-        List blockNumber = historyTransaction.where((i) => i.tokenSymbol.contains(params.tokenSymbol!)).toList();
-
-        for(var history in blockNumber){
-          var block = await _web3dataSource.getDetailTransaction(history.transactionHash);
+        List transactionByToken = historyTransaction.where((i) => i.tokenSymbol.contains(params.tokenSymbol!)).toList();
+        for(int i = start ; i < end;i++){
+          var block = await _web3dataSource.getDetailTransaction(transactionByToken[i].transactionHash);
           final String url = '${network.explorers.first.url}/api?module=account&action=${params.typeHistory}&address=$ethereumAddress&startblock=${block.blockNumber}&endblock=${block.blockNumber}&sort=desc&apikey=$apiKey"';
           final dataResponse = await dio.get(url);
           final historytx = HistoryModel.fromJson(dataResponse.data as Map<String, dynamic>);
           transactionsHistory.addAll(historytx.result);
-
           print('----------------historyTransaction-----------------');
           print("RESULT :${historytx.result}");
           print(transactionsHistory.first.blockNumber);
           print(url);
-
         }
       }
 

@@ -17,6 +17,8 @@ class HistoryTransactionState with _$HistoryTransactionState {
 
   const factory HistoryTransactionState.loadingHistory() = HistoryTransactionStateLoadingHistory;
 
+  const factory HistoryTransactionState.refreshHistory() = HistoryTransactionStateRefreshHistory;
+
   const factory HistoryTransactionState.getHistorySuccess(List<TransactionIsarModel> list) =
   HistoryTransactionStateSuccess;
 }

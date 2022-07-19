@@ -15,9 +15,25 @@ class HistoryTransactionCubit extends Cubit<HistoryTransactionState> {
 
 
   refresh(HistoryTransactionParams params) {
+    emit(const HistoryTransactionState.refreshHistory());
     page = 1;
     loadMore = false;
-    getHistoryTransaction(params);
+    getHistoryTransaction(HistoryTransactionParams(
+      tokenSymbol: params.tokenSymbol,
+      typeHistory: params.typeHistory,
+      page: page
+    ));
+  }
+
+  Future<void> loadMoreHistoryTransaction(HistoryTransactionParams params) async {
+    print('-------------PAGE-----------------');
+    print(params.page);
+    print(page);
+    getHistoryTransaction(HistoryTransactionParams(
+        tokenSymbol: params.tokenSymbol,
+        typeHistory: params.typeHistory,
+        page: page
+    ));
   }
 
   Future<void> getHistoryTransaction(HistoryTransactionParams params) async {
@@ -26,18 +42,9 @@ class HistoryTransactionCubit extends Cubit<HistoryTransactionState> {
 
     result.fold(
           (l) {
-            error = true;
-            loadMore = false;
         emit(HistoryTransactionState.error('$l'));
-      },
-          (history) {
-            error = false;
-            if (history.length == limit) {
-              page++;
-              loadMore = true;
-            } else {
-              loadMore = false;
-            }
+      },(history) {
+        page++;
         emit(HistoryTransactionState.getHistorySuccess(history));
       },
     );

@@ -23,6 +23,7 @@ mixin _$HistoryTransactionState {
     required TResult Function(bool isLoading) loaded,
     required TResult Function(String message) error,
     required TResult Function() loadingHistory,
+    required TResult Function() refreshHistory,
     required TResult Function(List<TransactionIsarModel> list)
         getHistorySuccess,
   }) =>
@@ -34,6 +35,7 @@ mixin _$HistoryTransactionState {
     TResult Function(bool isLoading)? loaded,
     TResult Function(String message)? error,
     TResult Function()? loadingHistory,
+    TResult Function()? refreshHistory,
     TResult Function(List<TransactionIsarModel> list)? getHistorySuccess,
   }) =>
       throw _privateConstructorUsedError;
@@ -44,6 +46,7 @@ mixin _$HistoryTransactionState {
     TResult Function(bool isLoading)? loaded,
     TResult Function(String message)? error,
     TResult Function()? loadingHistory,
+    TResult Function()? refreshHistory,
     TResult Function(List<TransactionIsarModel> list)? getHistorySuccess,
     required TResult orElse(),
   }) =>
@@ -56,6 +59,8 @@ mixin _$HistoryTransactionState {
     required TResult Function(HistoryTransactionStateError value) error,
     required TResult Function(HistoryTransactionStateLoadingHistory value)
         loadingHistory,
+    required TResult Function(HistoryTransactionStateRefreshHistory value)
+        refreshHistory,
     required TResult Function(HistoryTransactionStateSuccess value)
         getHistorySuccess,
   }) =>
@@ -68,6 +73,8 @@ mixin _$HistoryTransactionState {
     TResult Function(HistoryTransactionStateError value)? error,
     TResult Function(HistoryTransactionStateLoadingHistory value)?
         loadingHistory,
+    TResult Function(HistoryTransactionStateRefreshHistory value)?
+        refreshHistory,
     TResult Function(HistoryTransactionStateSuccess value)? getHistorySuccess,
   }) =>
       throw _privateConstructorUsedError;
@@ -79,6 +86,8 @@ mixin _$HistoryTransactionState {
     TResult Function(HistoryTransactionStateError value)? error,
     TResult Function(HistoryTransactionStateLoadingHistory value)?
         loadingHistory,
+    TResult Function(HistoryTransactionStateRefreshHistory value)?
+        refreshHistory,
     TResult Function(HistoryTransactionStateSuccess value)? getHistorySuccess,
     required TResult orElse(),
   }) =>
@@ -153,6 +162,7 @@ class _$HistoryTransactionStateInitial
     required TResult Function(bool isLoading) loaded,
     required TResult Function(String message) error,
     required TResult Function() loadingHistory,
+    required TResult Function() refreshHistory,
     required TResult Function(List<TransactionIsarModel> list)
         getHistorySuccess,
   }) {
@@ -167,6 +177,7 @@ class _$HistoryTransactionStateInitial
     TResult Function(bool isLoading)? loaded,
     TResult Function(String message)? error,
     TResult Function()? loadingHistory,
+    TResult Function()? refreshHistory,
     TResult Function(List<TransactionIsarModel> list)? getHistorySuccess,
   }) {
     return initial?.call();
@@ -180,6 +191,7 @@ class _$HistoryTransactionStateInitial
     TResult Function(bool isLoading)? loaded,
     TResult Function(String message)? error,
     TResult Function()? loadingHistory,
+    TResult Function()? refreshHistory,
     TResult Function(List<TransactionIsarModel> list)? getHistorySuccess,
     required TResult orElse(),
   }) {
@@ -198,6 +210,8 @@ class _$HistoryTransactionStateInitial
     required TResult Function(HistoryTransactionStateError value) error,
     required TResult Function(HistoryTransactionStateLoadingHistory value)
         loadingHistory,
+    required TResult Function(HistoryTransactionStateRefreshHistory value)
+        refreshHistory,
     required TResult Function(HistoryTransactionStateSuccess value)
         getHistorySuccess,
   }) {
@@ -213,6 +227,8 @@ class _$HistoryTransactionStateInitial
     TResult Function(HistoryTransactionStateError value)? error,
     TResult Function(HistoryTransactionStateLoadingHistory value)?
         loadingHistory,
+    TResult Function(HistoryTransactionStateRefreshHistory value)?
+        refreshHistory,
     TResult Function(HistoryTransactionStateSuccess value)? getHistorySuccess,
   }) {
     return initial?.call(this);
@@ -227,6 +243,8 @@ class _$HistoryTransactionStateInitial
     TResult Function(HistoryTransactionStateError value)? error,
     TResult Function(HistoryTransactionStateLoadingHistory value)?
         loadingHistory,
+    TResult Function(HistoryTransactionStateRefreshHistory value)?
+        refreshHistory,
     TResult Function(HistoryTransactionStateSuccess value)? getHistorySuccess,
     required TResult orElse(),
   }) {
@@ -294,6 +312,7 @@ class _$HistoryTransactionStateLoading
     required TResult Function(bool isLoading) loaded,
     required TResult Function(String message) error,
     required TResult Function() loadingHistory,
+    required TResult Function() refreshHistory,
     required TResult Function(List<TransactionIsarModel> list)
         getHistorySuccess,
   }) {
@@ -308,6 +327,7 @@ class _$HistoryTransactionStateLoading
     TResult Function(bool isLoading)? loaded,
     TResult Function(String message)? error,
     TResult Function()? loadingHistory,
+    TResult Function()? refreshHistory,
     TResult Function(List<TransactionIsarModel> list)? getHistorySuccess,
   }) {
     return loading?.call();
@@ -321,6 +341,7 @@ class _$HistoryTransactionStateLoading
     TResult Function(bool isLoading)? loaded,
     TResult Function(String message)? error,
     TResult Function()? loadingHistory,
+    TResult Function()? refreshHistory,
     TResult Function(List<TransactionIsarModel> list)? getHistorySuccess,
     required TResult orElse(),
   }) {
@@ -339,6 +360,8 @@ class _$HistoryTransactionStateLoading
     required TResult Function(HistoryTransactionStateError value) error,
     required TResult Function(HistoryTransactionStateLoadingHistory value)
         loadingHistory,
+    required TResult Function(HistoryTransactionStateRefreshHistory value)
+        refreshHistory,
     required TResult Function(HistoryTransactionStateSuccess value)
         getHistorySuccess,
   }) {
@@ -354,6 +377,8 @@ class _$HistoryTransactionStateLoading
     TResult Function(HistoryTransactionStateError value)? error,
     TResult Function(HistoryTransactionStateLoadingHistory value)?
         loadingHistory,
+    TResult Function(HistoryTransactionStateRefreshHistory value)?
+        refreshHistory,
     TResult Function(HistoryTransactionStateSuccess value)? getHistorySuccess,
   }) {
     return loading?.call(this);
@@ -368,6 +393,8 @@ class _$HistoryTransactionStateLoading
     TResult Function(HistoryTransactionStateError value)? error,
     TResult Function(HistoryTransactionStateLoadingHistory value)?
         loadingHistory,
+    TResult Function(HistoryTransactionStateRefreshHistory value)?
+        refreshHistory,
     TResult Function(HistoryTransactionStateSuccess value)? getHistorySuccess,
     required TResult orElse(),
   }) {
@@ -459,6 +486,7 @@ class _$HistoryTransactionStateLoaded implements HistoryTransactionStateLoaded {
     required TResult Function(bool isLoading) loaded,
     required TResult Function(String message) error,
     required TResult Function() loadingHistory,
+    required TResult Function() refreshHistory,
     required TResult Function(List<TransactionIsarModel> list)
         getHistorySuccess,
   }) {
@@ -473,6 +501,7 @@ class _$HistoryTransactionStateLoaded implements HistoryTransactionStateLoaded {
     TResult Function(bool isLoading)? loaded,
     TResult Function(String message)? error,
     TResult Function()? loadingHistory,
+    TResult Function()? refreshHistory,
     TResult Function(List<TransactionIsarModel> list)? getHistorySuccess,
   }) {
     return loaded?.call(isLoading);
@@ -486,6 +515,7 @@ class _$HistoryTransactionStateLoaded implements HistoryTransactionStateLoaded {
     TResult Function(bool isLoading)? loaded,
     TResult Function(String message)? error,
     TResult Function()? loadingHistory,
+    TResult Function()? refreshHistory,
     TResult Function(List<TransactionIsarModel> list)? getHistorySuccess,
     required TResult orElse(),
   }) {
@@ -504,6 +534,8 @@ class _$HistoryTransactionStateLoaded implements HistoryTransactionStateLoaded {
     required TResult Function(HistoryTransactionStateError value) error,
     required TResult Function(HistoryTransactionStateLoadingHistory value)
         loadingHistory,
+    required TResult Function(HistoryTransactionStateRefreshHistory value)
+        refreshHistory,
     required TResult Function(HistoryTransactionStateSuccess value)
         getHistorySuccess,
   }) {
@@ -519,6 +551,8 @@ class _$HistoryTransactionStateLoaded implements HistoryTransactionStateLoaded {
     TResult Function(HistoryTransactionStateError value)? error,
     TResult Function(HistoryTransactionStateLoadingHistory value)?
         loadingHistory,
+    TResult Function(HistoryTransactionStateRefreshHistory value)?
+        refreshHistory,
     TResult Function(HistoryTransactionStateSuccess value)? getHistorySuccess,
   }) {
     return loaded?.call(this);
@@ -533,6 +567,8 @@ class _$HistoryTransactionStateLoaded implements HistoryTransactionStateLoaded {
     TResult Function(HistoryTransactionStateError value)? error,
     TResult Function(HistoryTransactionStateLoadingHistory value)?
         loadingHistory,
+    TResult Function(HistoryTransactionStateRefreshHistory value)?
+        refreshHistory,
     TResult Function(HistoryTransactionStateSuccess value)? getHistorySuccess,
     required TResult orElse(),
   }) {
@@ -628,6 +664,7 @@ class _$HistoryTransactionStateError implements HistoryTransactionStateError {
     required TResult Function(bool isLoading) loaded,
     required TResult Function(String message) error,
     required TResult Function() loadingHistory,
+    required TResult Function() refreshHistory,
     required TResult Function(List<TransactionIsarModel> list)
         getHistorySuccess,
   }) {
@@ -642,6 +679,7 @@ class _$HistoryTransactionStateError implements HistoryTransactionStateError {
     TResult Function(bool isLoading)? loaded,
     TResult Function(String message)? error,
     TResult Function()? loadingHistory,
+    TResult Function()? refreshHistory,
     TResult Function(List<TransactionIsarModel> list)? getHistorySuccess,
   }) {
     return error?.call(message);
@@ -655,6 +693,7 @@ class _$HistoryTransactionStateError implements HistoryTransactionStateError {
     TResult Function(bool isLoading)? loaded,
     TResult Function(String message)? error,
     TResult Function()? loadingHistory,
+    TResult Function()? refreshHistory,
     TResult Function(List<TransactionIsarModel> list)? getHistorySuccess,
     required TResult orElse(),
   }) {
@@ -673,6 +712,8 @@ class _$HistoryTransactionStateError implements HistoryTransactionStateError {
     required TResult Function(HistoryTransactionStateError value) error,
     required TResult Function(HistoryTransactionStateLoadingHistory value)
         loadingHistory,
+    required TResult Function(HistoryTransactionStateRefreshHistory value)
+        refreshHistory,
     required TResult Function(HistoryTransactionStateSuccess value)
         getHistorySuccess,
   }) {
@@ -688,6 +729,8 @@ class _$HistoryTransactionStateError implements HistoryTransactionStateError {
     TResult Function(HistoryTransactionStateError value)? error,
     TResult Function(HistoryTransactionStateLoadingHistory value)?
         loadingHistory,
+    TResult Function(HistoryTransactionStateRefreshHistory value)?
+        refreshHistory,
     TResult Function(HistoryTransactionStateSuccess value)? getHistorySuccess,
   }) {
     return error?.call(this);
@@ -702,6 +745,8 @@ class _$HistoryTransactionStateError implements HistoryTransactionStateError {
     TResult Function(HistoryTransactionStateError value)? error,
     TResult Function(HistoryTransactionStateLoadingHistory value)?
         loadingHistory,
+    TResult Function(HistoryTransactionStateRefreshHistory value)?
+        refreshHistory,
     TResult Function(HistoryTransactionStateSuccess value)? getHistorySuccess,
     required TResult orElse(),
   }) {
@@ -774,6 +819,7 @@ class _$HistoryTransactionStateLoadingHistory
     required TResult Function(bool isLoading) loaded,
     required TResult Function(String message) error,
     required TResult Function() loadingHistory,
+    required TResult Function() refreshHistory,
     required TResult Function(List<TransactionIsarModel> list)
         getHistorySuccess,
   }) {
@@ -788,6 +834,7 @@ class _$HistoryTransactionStateLoadingHistory
     TResult Function(bool isLoading)? loaded,
     TResult Function(String message)? error,
     TResult Function()? loadingHistory,
+    TResult Function()? refreshHistory,
     TResult Function(List<TransactionIsarModel> list)? getHistorySuccess,
   }) {
     return loadingHistory?.call();
@@ -801,6 +848,7 @@ class _$HistoryTransactionStateLoadingHistory
     TResult Function(bool isLoading)? loaded,
     TResult Function(String message)? error,
     TResult Function()? loadingHistory,
+    TResult Function()? refreshHistory,
     TResult Function(List<TransactionIsarModel> list)? getHistorySuccess,
     required TResult orElse(),
   }) {
@@ -819,6 +867,8 @@ class _$HistoryTransactionStateLoadingHistory
     required TResult Function(HistoryTransactionStateError value) error,
     required TResult Function(HistoryTransactionStateLoadingHistory value)
         loadingHistory,
+    required TResult Function(HistoryTransactionStateRefreshHistory value)
+        refreshHistory,
     required TResult Function(HistoryTransactionStateSuccess value)
         getHistorySuccess,
   }) {
@@ -834,6 +884,8 @@ class _$HistoryTransactionStateLoadingHistory
     TResult Function(HistoryTransactionStateError value)? error,
     TResult Function(HistoryTransactionStateLoadingHistory value)?
         loadingHistory,
+    TResult Function(HistoryTransactionStateRefreshHistory value)?
+        refreshHistory,
     TResult Function(HistoryTransactionStateSuccess value)? getHistorySuccess,
   }) {
     return loadingHistory?.call(this);
@@ -848,6 +900,8 @@ class _$HistoryTransactionStateLoadingHistory
     TResult Function(HistoryTransactionStateError value)? error,
     TResult Function(HistoryTransactionStateLoadingHistory value)?
         loadingHistory,
+    TResult Function(HistoryTransactionStateRefreshHistory value)?
+        refreshHistory,
     TResult Function(HistoryTransactionStateSuccess value)? getHistorySuccess,
     required TResult orElse(),
   }) {
@@ -862,6 +916,157 @@ abstract class HistoryTransactionStateLoadingHistory
     implements HistoryTransactionState {
   const factory HistoryTransactionStateLoadingHistory() =
       _$HistoryTransactionStateLoadingHistory;
+}
+
+/// @nodoc
+abstract class _$$HistoryTransactionStateRefreshHistoryCopyWith<$Res> {
+  factory _$$HistoryTransactionStateRefreshHistoryCopyWith(
+          _$HistoryTransactionStateRefreshHistory value,
+          $Res Function(_$HistoryTransactionStateRefreshHistory) then) =
+      __$$HistoryTransactionStateRefreshHistoryCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$HistoryTransactionStateRefreshHistoryCopyWithImpl<$Res>
+    extends _$HistoryTransactionStateCopyWithImpl<$Res>
+    implements _$$HistoryTransactionStateRefreshHistoryCopyWith<$Res> {
+  __$$HistoryTransactionStateRefreshHistoryCopyWithImpl(
+      _$HistoryTransactionStateRefreshHistory _value,
+      $Res Function(_$HistoryTransactionStateRefreshHistory) _then)
+      : super(
+            _value, (v) => _then(v as _$HistoryTransactionStateRefreshHistory));
+
+  @override
+  _$HistoryTransactionStateRefreshHistory get _value =>
+      super._value as _$HistoryTransactionStateRefreshHistory;
+}
+
+/// @nodoc
+
+class _$HistoryTransactionStateRefreshHistory
+    implements HistoryTransactionStateRefreshHistory {
+  const _$HistoryTransactionStateRefreshHistory();
+
+  @override
+  String toString() {
+    return 'HistoryTransactionState.refreshHistory()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$HistoryTransactionStateRefreshHistory);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function() loading,
+    required TResult Function(bool isLoading) loaded,
+    required TResult Function(String message) error,
+    required TResult Function() loadingHistory,
+    required TResult Function() refreshHistory,
+    required TResult Function(List<TransactionIsarModel> list)
+        getHistorySuccess,
+  }) {
+    return refreshHistory();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function()? loading,
+    TResult Function(bool isLoading)? loaded,
+    TResult Function(String message)? error,
+    TResult Function()? loadingHistory,
+    TResult Function()? refreshHistory,
+    TResult Function(List<TransactionIsarModel> list)? getHistorySuccess,
+  }) {
+    return refreshHistory?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function()? loading,
+    TResult Function(bool isLoading)? loaded,
+    TResult Function(String message)? error,
+    TResult Function()? loadingHistory,
+    TResult Function()? refreshHistory,
+    TResult Function(List<TransactionIsarModel> list)? getHistorySuccess,
+    required TResult orElse(),
+  }) {
+    if (refreshHistory != null) {
+      return refreshHistory();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(HistoryTransactionStateInitial value) initial,
+    required TResult Function(HistoryTransactionStateLoading value) loading,
+    required TResult Function(HistoryTransactionStateLoaded value) loaded,
+    required TResult Function(HistoryTransactionStateError value) error,
+    required TResult Function(HistoryTransactionStateLoadingHistory value)
+        loadingHistory,
+    required TResult Function(HistoryTransactionStateRefreshHistory value)
+        refreshHistory,
+    required TResult Function(HistoryTransactionStateSuccess value)
+        getHistorySuccess,
+  }) {
+    return refreshHistory(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(HistoryTransactionStateInitial value)? initial,
+    TResult Function(HistoryTransactionStateLoading value)? loading,
+    TResult Function(HistoryTransactionStateLoaded value)? loaded,
+    TResult Function(HistoryTransactionStateError value)? error,
+    TResult Function(HistoryTransactionStateLoadingHistory value)?
+        loadingHistory,
+    TResult Function(HistoryTransactionStateRefreshHistory value)?
+        refreshHistory,
+    TResult Function(HistoryTransactionStateSuccess value)? getHistorySuccess,
+  }) {
+    return refreshHistory?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(HistoryTransactionStateInitial value)? initial,
+    TResult Function(HistoryTransactionStateLoading value)? loading,
+    TResult Function(HistoryTransactionStateLoaded value)? loaded,
+    TResult Function(HistoryTransactionStateError value)? error,
+    TResult Function(HistoryTransactionStateLoadingHistory value)?
+        loadingHistory,
+    TResult Function(HistoryTransactionStateRefreshHistory value)?
+        refreshHistory,
+    TResult Function(HistoryTransactionStateSuccess value)? getHistorySuccess,
+    required TResult orElse(),
+  }) {
+    if (refreshHistory != null) {
+      return refreshHistory(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class HistoryTransactionStateRefreshHistory
+    implements HistoryTransactionState {
+  const factory HistoryTransactionStateRefreshHistory() =
+      _$HistoryTransactionStateRefreshHistory;
 }
 
 /// @nodoc
@@ -944,6 +1149,7 @@ class _$HistoryTransactionStateSuccess
     required TResult Function(bool isLoading) loaded,
     required TResult Function(String message) error,
     required TResult Function() loadingHistory,
+    required TResult Function() refreshHistory,
     required TResult Function(List<TransactionIsarModel> list)
         getHistorySuccess,
   }) {
@@ -958,6 +1164,7 @@ class _$HistoryTransactionStateSuccess
     TResult Function(bool isLoading)? loaded,
     TResult Function(String message)? error,
     TResult Function()? loadingHistory,
+    TResult Function()? refreshHistory,
     TResult Function(List<TransactionIsarModel> list)? getHistorySuccess,
   }) {
     return getHistorySuccess?.call(list);
@@ -971,6 +1178,7 @@ class _$HistoryTransactionStateSuccess
     TResult Function(bool isLoading)? loaded,
     TResult Function(String message)? error,
     TResult Function()? loadingHistory,
+    TResult Function()? refreshHistory,
     TResult Function(List<TransactionIsarModel> list)? getHistorySuccess,
     required TResult orElse(),
   }) {
@@ -989,6 +1197,8 @@ class _$HistoryTransactionStateSuccess
     required TResult Function(HistoryTransactionStateError value) error,
     required TResult Function(HistoryTransactionStateLoadingHistory value)
         loadingHistory,
+    required TResult Function(HistoryTransactionStateRefreshHistory value)
+        refreshHistory,
     required TResult Function(HistoryTransactionStateSuccess value)
         getHistorySuccess,
   }) {
@@ -1004,6 +1214,8 @@ class _$HistoryTransactionStateSuccess
     TResult Function(HistoryTransactionStateError value)? error,
     TResult Function(HistoryTransactionStateLoadingHistory value)?
         loadingHistory,
+    TResult Function(HistoryTransactionStateRefreshHistory value)?
+        refreshHistory,
     TResult Function(HistoryTransactionStateSuccess value)? getHistorySuccess,
   }) {
     return getHistorySuccess?.call(this);
@@ -1018,6 +1230,8 @@ class _$HistoryTransactionStateSuccess
     TResult Function(HistoryTransactionStateError value)? error,
     TResult Function(HistoryTransactionStateLoadingHistory value)?
         loadingHistory,
+    TResult Function(HistoryTransactionStateRefreshHistory value)?
+        refreshHistory,
     TResult Function(HistoryTransactionStateSuccess value)? getHistorySuccess,
     required TResult orElse(),
   }) {
