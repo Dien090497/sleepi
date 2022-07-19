@@ -129,7 +129,7 @@ class _TabItemsBuyState extends State<TabItemsBuy> {
                                   child: TabBarView(
                                     children: [
                                       SFGridView(
-                                        cubit: cubit,
+                                        marketPlaceCubit: cubit,
                                         isLoadMore: cubit.loadMore,
                                         count: listItems.length,
                                         isScroll: true,

@@ -18,7 +18,7 @@ class LevelUpImplementation extends LevelUpRepository {
       final result = await nftApi.getLevelUp(schema);
       return Right(result);
     } catch (e) {
-      return Left(FailureMessage('$e'));
+      return Left(FailureMessage.fromException(e));
     }
   }
 
@@ -28,7 +28,7 @@ class LevelUpImplementation extends LevelUpRepository {
       final result = await nftApi.levelUp(schema);
       return Right(result);
     } catch (e) {
-      return Left(FailureMessage('$e'));
+      return Left(FailureMessage.fromException(e));
     }
   }
 

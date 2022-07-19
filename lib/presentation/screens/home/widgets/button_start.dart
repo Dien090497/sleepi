@@ -52,14 +52,12 @@ class _ButtonStartState extends State<ButtonStart> {
           },
           child: HomeStartButton(
             radius: 100,
-            gradient: userStatusTrackingModel.tracking != null ||
-                    widget.enableStart && countDownEnded
+            gradient: widget.enableStart && countDownEnded
                 ? AppColors.gradientBlueButton
                 : null,
             color: AppColors.lightDark,
             height: 40,
-            disabled: !(userStatusTrackingModel.tracking != null ||
-                widget.enableStart && countDownEnded),
+            disabled: !(widget.enableStart && countDownEnded),
             width: double.infinity,
             onPressed: () async {
               var isAppInstalledResult = await LaunchApp.isAppInstalled(
@@ -112,32 +110,17 @@ class _CountDownTextState extends State<_CountDownText> {
   void updateUserStatus() {
     setState(() {
       userStatusTracking = widget.userStatusTracking!;
+      startTimer();
     });
   }
 
   @override
   void initState() {
-    if (widget.userStatusTracking != null &&
-        widget.userStatusTracking!.availableAt != 0) {
-      if(DateTime.now().isBefore(DateTime.fromMillisecondsSinceEpoch(
-          widget.userStatusTracking!.availableAt * 1000))) {
-        startTime = DateTime.fromMillisecondsSinceEpoch(
-            widget.userStatusTracking!.availableAt * 1000)
-          .difference(DateTime.now())
-          .inSeconds;
-      }else{
-        startTime = 0;
-      }
-    }
     startTimer();
-    super.initState();
-  }
-
-  void startTimer() {
     const oneSec = Duration(seconds: 1);
     _timer = Timer.periodic(
       oneSec,
-      (Timer timer) {
+          (Timer timer) {
         if (startTime == 0) {
           _timer.cancel();
           widget.onEnd();
@@ -148,6 +131,22 @@ class _CountDownTextState extends State<_CountDownText> {
         }
       },
     );
+    super.initState();
+  }
+
+  void startTimer() {
+    if (widget.userStatusTracking != null &&
+        widget.userStatusTracking!.availableAt != 0) {
+      if (DateTime.now().isBefore(DateTime.fromMillisecondsSinceEpoch(
+          widget.userStatusTracking!.availableAt * 1000))) {
+        startTime = DateTime.fromMillisecondsSinceEpoch(
+            widget.userStatusTracking!.availableAt * 1000)
+            .difference(DateTime.now())
+            .inSeconds;
+      } else {
+        startTime = 0;
+      }
+    }
   }
 
   String convertTimer() {
@@ -169,12 +168,7 @@ class _CountDownTextState extends State<_CountDownText> {
   @override
   Widget build(BuildContext context) {
     return Text(
-      startTime == 0
-          ? widget.userStatusTracking != null &&
-                  widget.userStatusTracking!.tracking != null
-              ? LocaleKeys.continue_.tr()
-              : LocaleKeys.start.tr()
-          : convertTimer(),
+      startTime == 0 ? LocaleKeys.start.tr() : convertTimer(),
       style: startTime == 0 ? TextStyles.white16 : TextStyles.lightGrey16,
     );
   }

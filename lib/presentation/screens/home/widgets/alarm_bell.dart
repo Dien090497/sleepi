@@ -44,7 +44,9 @@ class AlarmBell extends StatelessWidget {
           );
         }
         if (state is HomeStartError) {
-          showMessageDialog(context, state.message);
+          Navigator.pop(context, true);
+          showMessageDialog(context, state.message)
+              .then((value) => context.read<HomeBloc>().add(RefreshBed()));
         }
       },
       builder: (context, state) {
@@ -217,7 +219,9 @@ class AlarmBell extends StatelessWidget {
     var wakeUpTimeInDay = DateTime(now.year, now.month, now.day, hour, minute);
     var wakeUpTime = hour <= now.hour ? wakeUpTimeInNextDay : wakeUpTimeInDay;
 
-    return wakeUpTime.isAfter(minTime) && wakeUpTime.isBefore(maxTime);
+    return wakeUpTime.isAfter(minTime) && wakeUpTime.isBefore(maxTime) ||
+        maxTime.difference(wakeUpTime).inSeconds == 0 ||
+        wakeUpTime.difference(minTime).inSeconds == 0;
   }
 
 

@@ -67,6 +67,7 @@ class AppBlocObserver extends BlocObserver {
 }
 
 Future<void> initializeService() async {
+  WidgetsFlutterBinding.ensureInitialized();
   final service = FlutterBackgroundService();
   await service.configure(
     androidConfiguration: AndroidConfiguration(
@@ -109,14 +110,18 @@ Future<void> onStart(ServiceInstance service) async {
     });
   }
   service.on(Const.stopService).listen((event) {
+    audioPlayer.stop();
     audioPlayer.dispose();
     service.stopSelf();
   });
 
   SharedPreferences preferences = await SharedPreferences.getInstance();
   final int timeWakeUp = preferences.getInt(Const.time) ?? 0;
+  final int sound = preferences.getInt(Const.sound) ?? 0;
   DateTime wakeUp = DateTime.fromMillisecondsSinceEpoch(timeWakeUp);
-  final int time = wakeUp.difference(DateTime.now()).inMinutes;
+  final int time = wakeUp
+      .difference(DateTime.now())
+      .inMinutes;
   // bring to foreground
   if (service is AndroidServiceInstance) {
     service.setForegroundNotificationInfo(
@@ -124,9 +129,9 @@ Future<void> onStart(ServiceInstance service) async {
       content: "Alarm: ${DateFormat('HH:mm dd/MM/yyyy').format(wakeUp)}",
     );
   }
-  Timer.periodic(Duration(minutes: time), (timer) async {
+  Timer.periodic(Duration(minutes: 1), (timer) async {
     log('FLUTTER BACKGROUND SERVICE: ${DateTime.now()}');
     audioPlayer.setReleaseMode(ReleaseMode.loop);
-    audioPlayer.play(AssetSource(Const.normalGachaAudio));
+    audioPlayer.play(AssetSource(Const.soundAlarm[sound]));
   });
 }

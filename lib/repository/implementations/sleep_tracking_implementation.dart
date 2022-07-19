@@ -47,7 +47,7 @@ class SleepTrackingImplementation extends ISleepTrackingRepository {
   }
 
   @override
-  Future<Either<FailureMessage, String>> startTracking(
+  Future<Either<FailureMessage, dynamic>> startTracking(
       StartTrackingSchema schema) async {
     try {
       return Right(await _sleepTrackingApi.startTracking(schema));
@@ -76,12 +76,12 @@ class SleepTrackingImplementation extends ISleepTrackingRepository {
   }
 
   @override
-  Future<Either<Failure, dynamic>> postDataHealth(DataHealthSchema schema) async {
+  Future<Either<FailureMessage, dynamic>> postDataHealth(DataHealthSchema schema) async {
     try{
       final result = await _sleepTrackingApi.postHealthData(schema);
       return Right(result);
     }catch(e){
-      return Left(FailureMessage('$e'));
+      return Left(FailureMessage.fromException(e));
     }
   }
 }

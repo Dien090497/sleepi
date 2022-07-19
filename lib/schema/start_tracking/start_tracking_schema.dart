@@ -14,7 +14,6 @@ class StartTrackingSchema {
   StartTrackingSchema({
     required this.isEnableInsurance,
     required this.alrm,
-    // required this.startSleep,
     required this.wakeUp,
     required this.itemUsed,
     required this.bedUsed,

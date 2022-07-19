@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:slee_fi/common/const/const.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/widgets/sf_card.dart';
 import 'package:slee_fi/common/widgets/sf_list_tile.dart';
@@ -35,7 +37,9 @@ class _AlarmSoundEffectListState extends State<AlarmSoundEffectList> {
                       size: 20,
                     )
                   : const SizedBox(height: 20),
-              onPressed: () {
+              onPressed: () async {
+                SharedPreferences preferences = await SharedPreferences.getInstance();
+                await preferences.setInt(Const.sound, index);
                 setState(() {
                   temp = index;
                 });
