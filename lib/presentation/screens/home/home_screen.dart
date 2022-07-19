@@ -9,6 +9,7 @@ import 'package:slee_fi/common/widgets/topbar_common.dart';
 import 'package:slee_fi/l10n/locale_keys.g.dart';
 import 'package:slee_fi/presentation/blocs/home/home_bloc.dart';
 import 'package:slee_fi/presentation/blocs/home/home_state.dart';
+import 'package:slee_fi/presentation/blocs/item_list/item_bloc.dart';
 import 'package:slee_fi/presentation/blocs/lucky_box/lucky_box_cubit.dart';
 import 'package:slee_fi/presentation/screens/home/widgets/alarm_bell.dart';
 import 'package:slee_fi/presentation/screens/home/widgets/home_list_widget.dart';
@@ -26,6 +27,7 @@ class HomeScreen extends StatelessWidget {
       providers: [
         BlocProvider(create: (_) => HomeBloc()..add(RefreshBed())),
         BlocProvider(create: (_) => LuckyBoxCubit()),
+        BlocProvider(create: (_) => ItemBloc()),
       ],
       child: SafeArea(
         bottom: false,

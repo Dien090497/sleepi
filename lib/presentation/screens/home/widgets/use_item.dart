@@ -12,6 +12,8 @@ import 'package:slee_fi/common/widgets/sf_text.dart';
 import 'package:slee_fi/l10n/locale_keys.g.dart';
 import 'package:slee_fi/presentation/blocs/home/home_bloc.dart';
 import 'package:slee_fi/presentation/blocs/home/home_state.dart';
+import 'package:slee_fi/presentation/blocs/item_list/item_bloc.dart';
+import 'package:slee_fi/presentation/blocs/item_list/item_event.dart';
 import 'package:slee_fi/resources/resources.dart';
 
 import 'modal_item_list.dart';
@@ -24,6 +26,23 @@ class UseItem extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16),
       child: BlocConsumer<HomeBloc, HomeState>(
+        buildWhen: (previous, current) {
+          if (previous is HomeLoaded && current is HomeLoaded) {
+            if (previous.selectedItem == null && current.selectedItem != null) {
+              context
+                  .read<ItemBloc>()
+                  .add(AddItemSuccessEvent(current.selectedItem!));
+              return true;
+            } else if (previous.selectedItem != null &&
+                current.selectedItem == null) {
+              context
+                  .read<ItemBloc>()
+                  .add(RemoveItemSuccessEvent(previous.selectedItem!));
+              return true;
+            }
+          }
+          return false;
+        },
         listenWhen: (previous, current) {
           if (previous is HomeLoaded && current is HomeLoaded) {
             if ((previous.selectedItem == null &&
@@ -54,6 +73,7 @@ class UseItem extends StatelessWidget {
                                 context,
                                 0.8,
                                 ModalItemList(
+                                    itemBloc: context.read<ItemBloc>(),
                                     homeBloc: context.read<HomeBloc>()));
                           },
                           child: CachedImage(
@@ -116,8 +136,13 @@ class UseItem extends StatelessWidget {
               : SFButtonOutLined(
                   title: LocaleKeys.use_item,
                   onPressed: () {
-                    SFModalBottomSheet.show(context, 0.8,
-                        ModalItemList(homeBloc: context.read<HomeBloc>()));
+                    SFModalBottomSheet.show(
+                        context,
+                        0.8,
+                        ModalItemList(
+                          itemBloc: context.read<ItemBloc>(),
+                          homeBloc: context.read<HomeBloc>(),
+                        ));
                   },
                   fixedSize: const Size.fromHeight(40),
                   textStyle: TextStyles.lightGrey16500,
