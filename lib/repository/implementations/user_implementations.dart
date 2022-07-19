@@ -149,14 +149,14 @@ class UserImplementation extends IUserRepository {
   Future<Either<FailureMessage, List<BedModel>>> fetchListBed(
       FetchBedParam fetchBedParam) async {
     // try {
-      final result = await _authDataSource.getNftByOwner(
-        fetchBedParam.limit,
-        fetchBedParam.page,
-        fetchBedParam.categoryId.type,
-        fetchBedParam.attributeNFT,
-        fetchBedParam.bedType,
-      );
-      return Right(result.list);
+    final result = await _authDataSource.getNftByOwner(
+      fetchBedParam.limit,
+      fetchBedParam.page,
+      fetchBedParam.categoryId.type,
+      fetchBedParam.attributeNFT,
+      fetchBedParam.bedType,
+    );
+    return Right(result.list);
     // } catch (e) {
     //   return Left(FailureMessage.fromException(e));
     // }
@@ -301,12 +301,11 @@ class UserImplementation extends IUserRepository {
   }
 
   @override
-  Future<Either<FailureMessage, TrackingResultChartDaysEntity>> fetchDataDaysChart(ParamsGetDataChart params) async {
+  Future<Either<FailureMessage, TrackingResultChartDaysEntity>>
+      fetchDataDaysChart(ParamsGetDataChart params) async {
     try {
       final result = await _authDataSource.fetchDataDaysChart(
-          params.fdate,
-          params.tdate,
-          params.type);
+          params.fdate, params.tdate, params.type);
       return Right(result.toEntity());
     } catch (e) {
       return Left(FailureMessage('$e'));
