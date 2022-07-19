@@ -32,7 +32,8 @@ class SpendingImplementation extends ISpendingRepository {
   }) async {
     try {
       final amountWei = BigInt.from(amount * pow(10, 18));
-      if (addressContract == Const.listTokenAddressTestNet[2]) {
+      if (addressContract == Const.listTokenAddressTestNet[2] ||
+          addressContract == '0x0000000000000000000000000000000000000000') {
         final hash = await _spendingDataSource.toSpendingAvax(
           owner: owner,
           amount: amountWei,

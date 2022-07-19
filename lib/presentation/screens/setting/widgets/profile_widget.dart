@@ -1,4 +1,3 @@
-import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:slee_fi/common/routes/app_routes.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
@@ -46,20 +45,46 @@ class ProfileWidget extends StatelessWidget {
               divider,
               const GenderTile(),
               divider,
-              SFListTile(
-                text: LocaleKeys.email.tr(),
-                trailing: Row(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    SFText(
-                      keyText: userInfo.email,
-                      style: TextStyles.lightWhite14,
-                    ),
-                    icon,
-                  ],
+              GestureDetector(
+                onTap: () => Navigator.pushNamed(context, R.email),
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 12),
+                  child: Row(
+                    children: [
+                      SFText(
+                          keyText: LocaleKeys.email,
+                          style: TextStyles.lightWhite14),
+                      const SizedBox(width: 4),
+                      Expanded(
+                        child: SFText(
+                          keyText: userInfo.email,
+                          style: TextStyles.lightWhite14,
+                          textAlign: TextAlign.right,
+                        ),
+                      ),
+                      icon
+                    ],
+                  ),
                 ),
-                onPressed: () => Navigator.pushNamed(context, R.email),
               ),
+              // SFListTile(
+              //   leading: SFText(keyText: LocaleKeys.email,style: TextStyles.lightWhite14),
+              //   // text: LocaleKeys.email.tr(),
+              //   trailing: Row(
+              //     mainAxisSize: MainAxisSize.min,
+              //     children: [
+              //       Flexible(child: Text('${userInfo.email} ddddddddddd',
+              //         maxLines: 2,
+              //        softWrap: true,
+              //         overflow: TextOverflow.fade,
+              //
+              //         style: TextStyles.lightWhite14,
+              //       )),
+              //       icon,
+              //     ],
+              //   ),
+              //   onPressed: () => Navigator.pushNamed(context, R.email),
+              // ),
               divider,
               SFListTile(
                 text: LocaleKeys.password,

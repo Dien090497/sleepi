@@ -8,14 +8,16 @@ import 'package:slee_fi/datasources/remote/auth_datasource/auth_interceptor.dart
 import 'package:slee_fi/datasources/remote/auth_datasource/refresh_token_interceptor.dart';
 import 'package:slee_fi/models/activation_code_response/activation_code_response.dart';
 import 'package:slee_fi/models/active_code_response/active_code_response.dart';
-import 'package:slee_fi/models/bed_detail/bed_detail.dart';
+import 'package:slee_fi/models/bed_model/beb_model.dart';
 import 'package:slee_fi/models/create_password_reponse/create_password_response.dart';
 import 'package:slee_fi/models/estimate_sleep_response/estimate_sleep_response.dart';
 import 'package:slee_fi/models/fetch_bed_response/fetch_bed_response.dart';
 import 'package:slee_fi/models/gacha_spin_response/gacha_spin_response.dart';
 import 'package:slee_fi/models/get_repair_response/get_repair_response.dart';
 import 'package:slee_fi/models/global_config_response/global_config_response.dart';
+import 'package:slee_fi/models/home_bed_response/home_bed_response.dart';
 import 'package:slee_fi/models/item_owner_response/item_owner_response.dart';
+import 'package:slee_fi/models/jewel_model/jewel_model.dart';
 import 'package:slee_fi/models/list_market_place/list_market_place_model.dart';
 import 'package:slee_fi/models/lucky_box/lucky_box.dart';
 import 'package:slee_fi/models/market_place/result_buy_model.dart';
@@ -190,10 +192,19 @@ abstract class AuthDataSource {
   );
 
   @GET('/nft-attributes/list-jewels')
-  Future<ListMarketPlaceModel> getListJewel();
+  Future<List<JewelModel>> getListJewel(
+    @Query('limit') int limit,
+    @Query('page') int page,
+  );
+
+  @GET('/nft-attributes/nft-in-home-page')
+  Future<HomeBedResponse> fetchBedInHomePage(
+    @Query('limit') int limit,
+    @Query('page') int page,
+  );
 
   @GET('/nft-attributes/bed-detail')
-  Future<BedDetail> bedDetail(
+  Future<BedModel> bedDetail(
     @Query('bedId') int bedId,
     @Query('isBase') bool isBase,
   );

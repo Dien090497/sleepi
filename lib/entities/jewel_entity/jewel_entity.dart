@@ -11,7 +11,7 @@ class JewelEntity {
   final String resilience;
   final String efficiency;
   final String luck;
-  final String quality;
+  final String? quality;
 
   // "id": 530,
   // "nftId": 544,

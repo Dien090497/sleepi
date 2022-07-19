@@ -20,14 +20,14 @@ class SleepTrackingImplementation extends ISleepTrackingRepository {
   Future<Either<FailureMessage, EstimateSleepResponse>> estimateTracking(
       EstimateTrackingParam estimateTrackingParam) async {
     try {
-      if(estimateTrackingParam.itemId !=null) {
-        var result = await _sleepTrackingApi.estimateSleepEarn(
+      if (estimateTrackingParam.itemId != null) {
+        final result = await _sleepTrackingApi.estimateSleepEarn(
             estimateTrackingParam.bedId,
             estimateTrackingParam.itemId,
             estimateTrackingParam.isEnableInsurance);
         return Right(result);
-      }else{
-        var result = await _sleepTrackingApi.estimateSleepEarns(
+      } else {
+        final result = await _sleepTrackingApi.estimateSleepEarns(
             estimateTrackingParam.bedId,
             estimateTrackingParam.isEnableInsurance);
         return Right(result);
@@ -67,7 +67,8 @@ class SleepTrackingImplementation extends ISleepTrackingRepository {
   }
 
   @override
-  Future<Either<FailureMessage, TrackingResultModel>> wakeUp(DataHealthSchema schema) async {
+  Future<Either<FailureMessage, TrackingResultModel>> wakeUp(
+      DataHealthSchema schema) async {
     try {
       return Right(await _sleepTrackingApi.wakeUp(schema));
     } catch (e) {
@@ -76,11 +77,12 @@ class SleepTrackingImplementation extends ISleepTrackingRepository {
   }
 
   @override
-  Future<Either<FailureMessage, dynamic>> postDataHealth(DataHealthSchema schema) async {
-    try{
+  Future<Either<FailureMessage, dynamic>> postDataHealth(
+      DataHealthSchema schema) async {
+    try {
       final result = await _sleepTrackingApi.postHealthData(schema);
       return Right(result);
-    }catch(e){
+    } catch (e) {
       return Left(FailureMessage.fromException(e));
     }
   }

@@ -114,7 +114,7 @@ class _ResultScreenState extends State<ResultScreen> {
                         ),
                         SFLabelValue(
                             label: LocaleKeys.sleep_onset_time,
-                            value: convertTime(
+                            value: convertTimeSpan(
                                 args.resultModel.sleepOnsetTime ?? '0')),
                         const SizedBox(
                           height: 8,

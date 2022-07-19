@@ -6,27 +6,27 @@ part 'item_model.g.dart';
 @JsonSerializable()
 class ItemModel {
   final int id;
-  @JsonKey(name: 'nft_id')
+  // @JsonKey(name: 'nft_id')
   final int nftId;
-  @JsonKey(name: 'nft_name')
+  // @JsonKey(name: 'nft_name')
   final String nftName;
   final String image;
-  @JsonKey(name: 'contract_address')
+  // @JsonKey(name: 'contract_address')
   final String contractAddress;
   final String type;
-  @JsonKey(name: 'item_type')
+  // @JsonKey(name: 'item_type')
   final String? itemType;
-  @JsonKey(name: 'jewel_type')
+  // @JsonKey(name: 'jewel_type')
   dynamic jewelType;
-  @JsonKey(name: 'class')
+  @JsonKey(name: 'classNft')
   dynamic classBed;
-  @JsonKey(name: "is_mint")
+  // @JsonKey(name: "is_mint")
   final int isMint;
   final String? quality;
   final String owner;
   final int time;
   final int level;
-  @JsonKey(name: 'bed_mint')
+  // @JsonKey(name: 'bed_mint')
   final int bedMint;
   final double efficiency;
   final double luck;
@@ -34,11 +34,11 @@ class ItemModel {
   final double special;
   final double resilience;
   final String? effect;
-  @JsonKey(name: 'created_at')
+  // @JsonKey(name: 'created_at')
   final String createdAt;
-  @JsonKey(name: 'updated_at')
+  // @JsonKey(name: 'updated_at')
   final String updatedAt;
-  @JsonKey(name: 'token_id')
+  // @JsonKey(name: 'token_id')
   final int tokenId;
   final double durability;
 

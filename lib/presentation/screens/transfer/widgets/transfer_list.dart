@@ -53,7 +53,6 @@ class _TransferListState extends State<TransferList> {
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<TransferCubit, TransferState>(
-      buildWhen: (prev, cur) => cur is TransferLoaded,
       listener: (context, state) {
         if (state is TransferLoaded) {
           final cubit = context.read<TransferCubit>();
@@ -93,6 +92,7 @@ class _TransferListState extends State<TransferList> {
                     contractAddress: widget.tokenEntity.address,
                     userId: (userState as UserLoaded).userInfoEntity.id,
                     symbol: widget.tokenEntity.symbol,
+                    balance: widget.tokenEntity.balance,
                   );
                 },
                 spendingToWallet: widget.spendingToWallet,
@@ -103,9 +103,12 @@ class _TransferListState extends State<TransferList> {
                 isLoadingNotifier: isLoadingNotifier,
               ),
             );
+          } else {
+            isLoadingNotifier.value = false;
           }
         }
         if (state is TransferSuccess) {
+          isLoadingNotifier.value = false;
           showSuccessfulDialog(
             context,
             null,
@@ -116,11 +119,10 @@ class _TransferListState extends State<TransferList> {
             },
           );
         }
-        if (state is TransferError) {
-          isLoadingNotifier.value = false;
-        }
       },
       builder: (context, state) {
+        final cubit = context.read<TransferCubit>();
+
         return Container(
           decoration: const BoxDecoration(
             color: AppColors.dark,
@@ -153,14 +155,17 @@ class _TransferListState extends State<TransferList> {
                             RegExp(r'^\d{1,}[.,]?\d{0,6}')),
                       ],
                       controller: controller,
+                      valueChanged: (v) {
+                        cubit.removeError();
+                      },
                       onPressed: () {
                         controller.text =
                             widget.tokenEntity.balance.formatBalanceToken;
                       },
                     ),
-                    if (state is TransferError)
+                    if (state is TransferLoaded && state.errorMsg != null)
                       SFText(
-                        keyText: state.message,
+                        keyText: state.errorMsg!,
                         style: TextStyles.red14,
                       ),
                     const SizedBox(height: 8.0),
@@ -181,7 +186,6 @@ class _TransferListState extends State<TransferList> {
                 onPressed: () {
                   final walletState = context.read<WalletCubit>().state;
                   if (walletState is WalletStateLoaded) {
-                    final cubit = context.read<TransferCubit>();
                     cubit.checkAllowance(
                       amountStr: controller.text,
                       contractAddress: widget.tokenEntity.address,

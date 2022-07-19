@@ -28,7 +28,7 @@ class JewelDialogBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final qualityColor =  jewel.quality.qualityBedColor;
+    final qualityColor =  jewel.quality?.qualityBedColor?? AppColors.commonBed;
     return Stack(
       children: [
         Positioned(

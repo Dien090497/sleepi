@@ -450,23 +450,41 @@ class _AuthDataSource implements AuthDataSource {
   }
 
   @override
-  Future<ListMarketPlaceModel> getListJewel() async {
+  Future<List<JewelModel>> getListJewel(limit, page) async {
     const _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{r'limit': limit, r'page': page};
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
-    final _result = await _dio.fetch<Map<String, dynamic>>(
-        _setStreamType<ListMarketPlaceModel>(
+    final _result = await _dio.fetch<List<dynamic>>(
+        _setStreamType<List<JewelModel>>(
             Options(method: 'GET', headers: _headers, extra: _extra)
                 .compose(_dio.options, '/nft-attributes/list-jewels',
                     queryParameters: queryParameters, data: _data)
                 .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = ListMarketPlaceModel.fromJson(_result.data!);
+    var value = _result.data!
+        .map((dynamic i) => JewelModel.fromJson(i as Map<String, dynamic>))
+        .toList();
     return value;
   }
 
   @override
-  Future<BedDetail> bedDetail(bedId, isBase) async {
+  Future<HomeBedResponse> fetchBedInHomePage(limit, page) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{r'limit': limit, r'page': page};
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<HomeBedResponse>(
+            Options(method: 'GET', headers: _headers, extra: _extra)
+                .compose(_dio.options, '/nft-attributes/nft-in-home-page',
+                    queryParameters: queryParameters, data: _data)
+                .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = HomeBedResponse.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<BedModel> bedDetail(bedId, isBase) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{
       r'bedId': bedId,
@@ -475,12 +493,12 @@ class _AuthDataSource implements AuthDataSource {
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
     final _result = await _dio.fetch<Map<String, dynamic>>(
-        _setStreamType<BedDetail>(
+        _setStreamType<BedModel>(
             Options(method: 'GET', headers: _headers, extra: _extra)
                 .compose(_dio.options, '/nft-attributes/bed-detail',
                     queryParameters: queryParameters, data: _data)
                 .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = BedDetail.fromJson(_result.data!);
+    final value = BedModel.fromJson(_result.data!);
     return value;
   }
 

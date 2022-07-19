@@ -226,17 +226,4 @@ class AlarmBell extends StatelessWidget {
         maxTime.difference(wakeUpTime).inSeconds == 0 ||
         wakeUpTime.difference(minTime).inSeconds == 0;
   }
-
-// bool _theSameList(
-//     List<LuckyBoxEntity> currentList, List<LuckyBoxEntity> prevList) {
-//   if (currentList.length == prevList.length) {
-//     for (int i = 0; i < prevList.length; i++) {
-//       var index =
-//           currentList.indexWhere((element) => element.id == prevList[i].id);
-//       if (index == -1) return false;
-//     }
-//     return true;
-//   }
-//   return false;
-// }
 }
