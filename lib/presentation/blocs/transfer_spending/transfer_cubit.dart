@@ -104,9 +104,8 @@ class TransferCubit extends Cubit<TransferState> {
       if (currentState.isLoading) return;
       emit(currentState.copyWith(isLoading: true));
       if (currentState.isToSpending) {
-        final params = ToSpendingParams(
-            amount: amount, addressContract: contractAddress, userId: userId);
-        final result = await _toSpendingUseCase.call(params);
+        final result = await _toSpendingUseCase.call(ToSpendingParams(
+            amount: amount, addressContract: contractAddress, userId: userId));
         result.fold(
           (l) {
             emit(const TransferState.error('Cannot Transfer'));
