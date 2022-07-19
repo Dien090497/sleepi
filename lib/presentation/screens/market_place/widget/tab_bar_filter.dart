@@ -13,7 +13,11 @@ import 'package:slee_fi/resources/resources.dart';
 
 class TabBarFilter extends StatelessWidget {
   const TabBarFilter(
-      {Key? key, this.onFilterTap, required this.tabTexts, this.padding, required this.cubit})
+      {Key? key,
+      this.onFilterTap,
+      required this.tabTexts,
+      this.padding,
+      required this.cubit})
       : super(key: key);
 
   final VoidCallback? onFilterTap;
@@ -35,13 +39,18 @@ class TabBarFilter extends StatelessWidget {
             value: LocaleKeys.low_price.tr(),
             spinnerItems: [
               LocaleKeys.low_price.tr(),
-              LocaleKeys.high_price.tr()
+              LocaleKeys.high_price.tr(),
+              LocaleKeys.latest.tr(),
             ],
             onChange: (int value, int index) {
-                cubit.selectPrice(index);
+              cubit.selectPrice(index);
             },
           ),
-          Expanded(child: SFSubTabBar(texts: tabTexts, isScrollable: false,)),
+          Expanded(
+              child: SFSubTabBar(
+            texts: tabTexts,
+            isScrollable: false,
+          )),
           const SizedBox(width: 4),
           const SFIcon(Ics.filter, color: AppColors.blue),
           TextButton(
