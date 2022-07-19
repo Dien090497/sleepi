@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:slee_fi/common/enum/enum.dart';
 import 'package:slee_fi/common/widgets/cached_image.dart';
 import 'package:slee_fi/common/widgets/sf_bottom_sheet.dart';
+import 'package:slee_fi/common/widgets/sf_dialog.dart';
 import 'package:slee_fi/common/widgets/sf_icon.dart';
 import 'package:slee_fi/entities/bed_entity/bed_entity.dart';
 import 'package:slee_fi/presentation/blocs/mint/mint_cubit.dart';
 import 'package:slee_fi/presentation/blocs/mint/mint_state.dart';
+import 'package:slee_fi/presentation/screens/info_individual/widget/popup_no_shoes.dart';
 import 'package:slee_fi/presentation/screens/info_individual/widget/popup_select_bed.dart';
 import 'package:slee_fi/resources/resources.dart';
 
@@ -18,14 +19,9 @@ class ConnectBedWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final List<BedType> beds = List.generate(BedType.values.length * 5,
-        (i) => BedType.values[i % BedType.values.length]);
     return BlocConsumer<MintCubit, MintState>(
-      listener: (context, state) {
-
-      },
-      builder: (context, state) {
-        if (state is MintStateSelected) {
+        listener: (context, state) {},
+        builder: (context, state) {
           final cubit = context.read<MintCubit>();
           return Column(
             children: [
@@ -50,28 +46,35 @@ class ConnectBedWidget extends StatelessWidget {
                     Expanded(
                       child: Container(
                         alignment: Alignment.center,
-                        child: state.indexSelected != -1
-                            // TODO example data
-                            ? const SFIcon(Imgs.shortBed)
-                            : GestureDetector(
-                                onTap: () {
-                                  // showCustomDialog(context, children: [
-                                  //   const PopupNoShoes(),
-                                  //
-                                  // ]);
-                                  SFModalBottomSheet.show(
-                                    context,
-                                    0.8,
-                                    PopUpSelectBed(
-                                      beds: beds,
-                                      callBack: (i) {
-                                        cubit.selectBed(i);
-                                      },
-                                    ),
-                                  );
-                                },
-                                child: const SFIcon(Ics.addBed),
-                              ),
+                        child: GestureDetector(
+                          onTap: () {
+                            if (state is MintStateLoaded) {
+                              if (state.listBed.isEmpty) {
+                                showCustomDialog(context, children: [
+                                  const PopupNoShoes(),
+                                ]);
+                              } else {
+                                SFModalBottomSheet.show(
+                                  context,
+                                  0.8,
+                                  PopUpSelectBed(
+                                    cubit: cubit,
+                                  ),
+                                );
+                              }
+                            }
+                          },
+                          child: state is MintStateLoaded
+                              ? state.indexSelected == -1
+                                  ? const SFIcon(Ics.addBed)
+                                  : CachedImage(
+                                      image: state
+                                          .listBed[state.indexSelected].image,
+                                      height: 80,
+                                      width: 80,
+                                    )
+                              : const SFIcon(Ics.addBed),
+                        ),
                       ),
                     ),
                   ],
@@ -80,10 +83,6 @@ class ConnectBedWidget extends StatelessWidget {
               const SFIcon(Imgs.connectBorder),
             ],
           );
-        } else {
-          return Container();
-        }
-      },
-    );
+        });
   }
 }

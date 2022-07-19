@@ -12,7 +12,7 @@ class MintingSchema {
 
   final int bedIdParent1;
   final int bedIdParent2;
-  final int isInsurance;
+  final bool isInsurance;
 
 
   factory MintingSchema.fromJson(Map<String, dynamic> json) =>

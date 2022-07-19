@@ -1,4 +1,4 @@
-import 'dart:developer';
+import 'dart:convert';
 
 import 'package:dio/dio.dart';
 import 'package:equatable/equatable.dart';
@@ -21,17 +21,18 @@ class FailureMessage extends Failure {
         if (e.response?.statusCode == 502 || e.response?.statusCode == 500) {
           return const FailureMessage(LocaleKeys.some_thing_wrong);
         }
-        final error = e.response?.data['error']['details']['message'];
-        log("=-------------${e.response.toString()}");
+        final data = e.response?.data;
+        final error = data !is String
+            ? jsonDecode(data)['error']['message']
+            : data['error']['details']['message'];
+        print('=-=--==-=-$e');
         if (error is String) {
           return FailureMessage(error);
         } else if (error is List<String>) {
           return FailureMessage(error.first);
         }
       }
-    } catch (_) {
-      log("=-------------$_");
-    }
+    } catch (_) {}
     throw Exception(e);
   }
 

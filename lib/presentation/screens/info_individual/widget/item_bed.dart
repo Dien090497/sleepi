@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:slee_fi/common/extensions/string_x.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
-import 'package:slee_fi/common/widgets/sf_icon.dart';
+import 'package:slee_fi/common/widgets/cached_image.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
 import 'package:slee_fi/presentation/screens/product_detail/widgets/top_left_banner.dart';
 
@@ -13,10 +13,12 @@ class ItemBed extends StatelessWidget {
       required this.image,
       required this.selected,
       required this.id,
-      required this.onTap})
+      required this.onTap,
+      this.quality})
       : super(key: key);
 
   final String bedType;
+  final String? quality;
   final String image;
   final bool selected;
   final String id;
@@ -24,6 +26,8 @@ class ItemBed extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final qualityColor =
+        quality != null ? quality!.qualityBedColor : AppColors.commonBed;
     return GestureDetector(
       onTap: onTap,
       child: Container(
@@ -42,8 +46,7 @@ class ItemBed extends StatelessWidget {
             Positioned(
               top: 20,
               left: -40,
-              child: TopLeftBanner(
-                  text: bedType, textColor: bedType.qualityBedColor),
+              child: TopLeftBanner(text: bedType, textColor: qualityColor),
             ),
             Container(
               alignment: Alignment.center,
@@ -53,7 +56,12 @@ class ItemBed extends StatelessWidget {
                 children: [
                   Expanded(
                       child: Container(
-                          alignment: Alignment.center, child: SFIcon(image))),
+                          alignment: Alignment.center,
+                          child: CachedImage(
+                            image: image,
+                            height: 80,
+                            width: 80,
+                          ))),
                   Container(
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(50),

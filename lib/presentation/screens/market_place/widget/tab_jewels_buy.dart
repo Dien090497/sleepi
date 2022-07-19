@@ -131,7 +131,7 @@ class _TabJewelsBuyState extends State<TabJewelsBuy> {
                                         onRefresh: () {
                                           cubit.refresh();
                                         },
-                                        cubit: cubit,
+                                        marketPlaceCubit: cubit,
                                         isLoadMore: cubit.loadMore,
                                         itemBuilder: (context, i) {
                                           return GestureDetector(

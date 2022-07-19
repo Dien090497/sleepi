@@ -457,9 +457,10 @@ abstract class  LocaleKeys {
   static const jewel_list = 'jewel_list';
   static const select_bed = 'select_bed';
   static const wallet_already_mapping = 'wallet_already_mapping';
-  static const latest = 'latest';
   static const base_point = 'base_point';
   static const holding_bonus = 'holding_bonus';
   static const stacking_bonus = 'stacking_bonus';
+  static const latest = 'latest';
+  static const not_granted = 'not_granted';
 
 }

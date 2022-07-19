@@ -7,6 +7,7 @@ import 'package:slee_fi/common/enum/enum.dart';
 import 'package:slee_fi/datasources/remote/auth_datasource/auth_interceptor.dart';
 import 'package:slee_fi/datasources/remote/auth_datasource/refresh_token_interceptor.dart';
 import 'package:slee_fi/models/list_nft_data_model/list_nft_data_model.dart';
+import 'package:slee_fi/models/minting/info_minting_model.dart';
 import 'package:slee_fi/models/nft_family/nft_family_model.dart';
 import 'package:slee_fi/schema/level_up/get_level_up_schema.dart';
 import 'package:slee_fi/schema/level_up/level_up_schema.dart';
@@ -43,11 +44,9 @@ abstract class NftApi {
   @POST('/level-up')
   Future<dynamic> levelUp(@Body() LevelUpSchema body);
 
-  @GET('/get-minting')
-  Future<dynamic> getMinting(
-      @Query('bedIdParent1') int bedIdParent1,
-      @Query('bedIdParent2') int bedIdParent2,
-      @Query('isInsurance') double isInsurance);
+  @GET('/get-minting/{bedIdParent1}/{bedIdParent2}')
+  Future<InfoMintingModel> getMinting(@Path('bedIdParent1') int bedIdParent1,
+      @Path('bedIdParent2') int bedIdParent2);
 
   @POST('/minting')
   Future<dynamic> minting(@Body() MintingSchema body);

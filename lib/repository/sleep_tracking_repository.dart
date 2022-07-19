@@ -9,9 +9,9 @@ import 'package:slee_fi/usecase/estimate_tracking_usecase.dart';
 
 abstract class ISleepTrackingRepository {
 
-  Future<Either<Failure, dynamic>> postDataHealth(DataHealthSchema schema);
+  Future<Either<FailureMessage, dynamic>> postDataHealth(DataHealthSchema schema);
 
-  Future<Either<FailureMessage, String>> startTracking(StartTrackingSchema schema);
+  Future<Either<FailureMessage, dynamic>> startTracking(StartTrackingSchema schema);
 
   Future<Either<FailureMessage, EstimateSleepResponse>> estimateTracking(
       EstimateTrackingParam estimateTrackingParam);

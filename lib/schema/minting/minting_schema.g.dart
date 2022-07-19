@@ -10,7 +10,7 @@ MintingSchema _$MintingSchemaFromJson(Map<String, dynamic> json) =>
     MintingSchema(
       bedIdParent1: json['bedIdParent1'] as int,
       bedIdParent2: json['bedIdParent2'] as int,
-      isInsurance: json['isInsurance'] as int,
+      isInsurance: json['isInsurance'] as bool,
     );
 
 Map<String, dynamic> _$MintingSchemaToJson(MintingSchema instance) =>
