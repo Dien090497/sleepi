@@ -14,7 +14,7 @@ JewelEntity _$JewelEntityFromJson(Map<String, dynamic> json) => JewelEntity(
       resilience: json['resilience'] as String,
       efficiency: json['efficiency'] as String,
       luck: json['luck'] as String,
-      quality: json['quality'] as String,
+      quality: json['quality'] as String?,
     );
 
 Map<String, dynamic> _$JewelEntityToJson(JewelEntity instance) =>

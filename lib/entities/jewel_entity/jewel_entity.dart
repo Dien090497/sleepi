@@ -11,7 +11,7 @@ class JewelEntity {
   final String resilience;
   final String efficiency;
   final String luck;
-  final String quality;
+  final String? quality;
 
   // "id": 530,
   // "nftId": 544,
@@ -61,8 +61,10 @@ class JewelEntity {
       required this.luck,
       required this.quality});
 
-  factory JewelEntity.fromJson(Map<String, dynamic> json) =>
-      _$JewelEntityFromJson(json);
+  factory JewelEntity.fromJson(Map<String, dynamic> json) {
+    print('json is  $json}');
+    return _$JewelEntityFromJson(json);
+  }
 
   Map<String, dynamic> toJson() => _$JewelEntityToJson(this);
 }
