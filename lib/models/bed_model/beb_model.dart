@@ -10,39 +10,39 @@ part 'beb_model.g.dart';
 class BedModel {
   final int id;
 
-  @JsonKey(name: 'nft_id')
+  // @JsonKey(name: 'nft_id')
   final int nftId;
 
-  @JsonKey(name: 'nft_name')
+  // @JsonKey(name: 'nft_name')
   final String nftName;
 
   final String image;
 
-  @JsonKey(name: 'contract_address')
+  // @JsonKey(name: 'contract_address')
   final String contractAddress;
 
   final String type;
 
-  @JsonKey(name: 'jewel_type')
+  // @JsonKey(name: 'jewel_type')
   final dynamic jewelType;
 
-  @JsonKey(name: 'item_type')
+  // @JsonKey(name: 'item_type')
   final dynamic itemType;
 
-  @JsonKey(name: 'effect')
+  // @JsonKey(name: 'effect')
   final dynamic effect;
 
-  @JsonKey(name: "is_mint")
+  // @JsonKey(name: "is_mint")
   final int isMint;
 
-  @JsonKey(name: 'class')
+  @JsonKey(name: 'classNft')
   final String? nftClass;
   final String? quality;
   final String owner;
   final int time;
   final int level;
 
-  @JsonKey(name: 'bed_mint')
+  // @JsonKey(name: 'bed_mint')
   final int bedMint;
 
   final double efficiency;
@@ -51,24 +51,13 @@ class BedModel {
   final double special;
   final double resilience;
 
-  @JsonKey(name: 'created_at')
-  final String createdAt;
-
-  @JsonKey(name: 'updated_at')
-  final String updatedAt;
-
-  @JsonKey(name: 'token_id')
+  // @JsonKey(name: 'token_id')
   final int tokenId;
 
   final double durability;
 
-  @JsonKey(name: 'category_id')
-  final int categoryId;
-
-  @JsonKey(name: 'is_lock')
-  final int isLock;
-
-  final String? status;
+  // @JsonKey(name: 'is_lock')
+  final Nft nft;
 
   final double? insurancePercent;
 
@@ -95,13 +84,9 @@ class BedModel {
       this.special,
       this.resilience,
       this.nftClass,
-      this.createdAt,
-      this.updatedAt,
       this.tokenId,
       this.durability,
-      this.categoryId,
-      this.isLock,
-      this.status,
+      this.nft,
       this.jewelType,
       this.itemType,
       this.effect,
@@ -137,7 +122,7 @@ class BedModel {
       image: image,
       contractAddress: contractAddress,
       durability: durability,
-      isLock: isLock,
+      isLock: nft.isLock,
       bedMint: bedMint,
       quality: quality,
       type: type,
@@ -154,7 +139,23 @@ class BedModel {
       socket: null,
       jewels: [],
       owner: owner,
-      status: status ?? '',
+      status: nft.status,
     );
   }
+}
+
+@JsonSerializable()
+class Nft {
+
+  final int id;
+  final int categoryId;
+  final int isLock;
+  final String status;
+
+
+  Nft(this.id, this.categoryId, this.isLock, this.status);
+
+  factory Nft.fromJson(Map<String, dynamic> json) => _$NftFromJson(json);
+
+  Map<String, dynamic> toJson() => _$NftToJson(this);
 }

@@ -482,7 +482,7 @@ class _AuthDataSource implements AuthDataSource {
   }
 
   @override
-  Future<BedDetail> bedDetail(bedId, isBase) async {
+  Future<BedModel> bedDetail(bedId, isBase) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{
       r'bedId': bedId,
@@ -491,12 +491,12 @@ class _AuthDataSource implements AuthDataSource {
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
     final _result = await _dio.fetch<Map<String, dynamic>>(
-        _setStreamType<BedDetail>(
+        _setStreamType<BedModel>(
             Options(method: 'GET', headers: _headers, extra: _extra)
                 .compose(_dio.options, '/nft-attributes/bed-detail',
                     queryParameters: queryParameters, data: _data)
                 .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = BedDetail.fromJson(_result.data!);
+    final value = BedModel.fromJson(_result.data!);
     return value;
   }
 
