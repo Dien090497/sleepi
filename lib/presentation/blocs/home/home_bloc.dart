@@ -106,7 +106,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
   void _changeBed(ChangeBed event, Emitter<HomeState> emit) {
     final currentState = state;
     if (currentState is HomeLoaded) {
-      emit(currentState.copyWith(selectedBed: event.bed));
+      emit(currentState.copyWith(selectedBed: event.bed, errorMessage: ''));
     }
     add(EstimateTracking());
   }
@@ -189,7 +189,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
           isEnableInsurance: currentState.enableInsurance));
       result.fold((l) => null, (r) {
         emit(
-            currentState.copyWith(tokenEarn: double.parse(r.estimateSlftEarn)));
+            currentState.copyWith(errorMessage:'',tokenEarn: double.parse(r.estimateSlftEarn)));
       });
     }
   }
@@ -200,7 +200,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     if (currentState is HomeLoaded) {
       var result = await _userStatusTrackingUC.call(NoParams());
       result.fold((l) => null, (r) {
-        emit(currentState.copyWith(
+        emit(currentState.copyWith( errorMessage: '',
             userStatusTracking: r, startTracking: false, time: 0));
         add(EstimateTracking());
       });
@@ -265,7 +265,9 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
 
     if (currentState is HomeLoaded) {
       emit(currentState.copyWith(
-          hour: event.hour, time: _getTimeWithHour(event.hour, currentState)));
+          errorMessage: '',
+          hour: event.hour,
+          time: _getTimeWithHour(event.hour, currentState)));
     }
   }
 
@@ -274,6 +276,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
 
     if (currentState is HomeLoaded) {
       emit(currentState.copyWith(
+          errorMessage: '',
           minute: event.minute,
           time: _getTimeWithMinutes(event.minute, currentState)));
     }
