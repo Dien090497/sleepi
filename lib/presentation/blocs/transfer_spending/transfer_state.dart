@@ -7,13 +7,12 @@ part 'transfer_state.freezed.dart';
 class TransferState with _$TransferState {
   const factory TransferState.success() = TransferSuccess;
 
-  const factory TransferState.error(String message, {String? typeError}) =
-      TransferError;
-
   const factory TransferState.loaded({
     required bool isToSpending,
-    bool? needApprove,
     @Default(false) bool isLoading,
+    String? errorMsg,
+    String? typeError,
+    bool? needApprove,
     TransferSpendingEntity? transferSpendingEntity,
   }) = TransferLoaded;
 }

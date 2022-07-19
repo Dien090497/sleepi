@@ -19,17 +19,25 @@ mixin _$TransferState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() success,
-    required TResult Function(String message, String? typeError) error,
-    required TResult Function(bool isToSpending, bool? needApprove,
-            bool isLoading, TransferSpendingEntity? transferSpendingEntity)
+    required TResult Function(
+            bool isToSpending,
+            bool isLoading,
+            String? errorMsg,
+            String? typeError,
+            bool? needApprove,
+            TransferSpendingEntity? transferSpendingEntity)
         loaded,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? success,
-    TResult Function(String message, String? typeError)? error,
-    TResult Function(bool isToSpending, bool? needApprove, bool isLoading,
+    TResult Function(
+            bool isToSpending,
+            bool isLoading,
+            String? errorMsg,
+            String? typeError,
+            bool? needApprove,
             TransferSpendingEntity? transferSpendingEntity)?
         loaded,
   }) =>
@@ -37,8 +45,12 @@ mixin _$TransferState {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? success,
-    TResult Function(String message, String? typeError)? error,
-    TResult Function(bool isToSpending, bool? needApprove, bool isLoading,
+    TResult Function(
+            bool isToSpending,
+            bool isLoading,
+            String? errorMsg,
+            String? typeError,
+            bool? needApprove,
             TransferSpendingEntity? transferSpendingEntity)?
         loaded,
     required TResult orElse(),
@@ -47,21 +59,18 @@ mixin _$TransferState {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(TransferSuccess value) success,
-    required TResult Function(TransferError value) error,
     required TResult Function(TransferLoaded value) loaded,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult Function(TransferSuccess value)? success,
-    TResult Function(TransferError value)? error,
     TResult Function(TransferLoaded value)? loaded,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(TransferSuccess value)? success,
-    TResult Function(TransferError value)? error,
     TResult Function(TransferLoaded value)? loaded,
     required TResult orElse(),
   }) =>
@@ -127,9 +136,13 @@ class _$TransferSuccess implements TransferSuccess {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() success,
-    required TResult Function(String message, String? typeError) error,
-    required TResult Function(bool isToSpending, bool? needApprove,
-            bool isLoading, TransferSpendingEntity? transferSpendingEntity)
+    required TResult Function(
+            bool isToSpending,
+            bool isLoading,
+            String? errorMsg,
+            String? typeError,
+            bool? needApprove,
+            TransferSpendingEntity? transferSpendingEntity)
         loaded,
   }) {
     return success();
@@ -139,8 +152,12 @@ class _$TransferSuccess implements TransferSuccess {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? success,
-    TResult Function(String message, String? typeError)? error,
-    TResult Function(bool isToSpending, bool? needApprove, bool isLoading,
+    TResult Function(
+            bool isToSpending,
+            bool isLoading,
+            String? errorMsg,
+            String? typeError,
+            bool? needApprove,
             TransferSpendingEntity? transferSpendingEntity)?
         loaded,
   }) {
@@ -151,8 +168,12 @@ class _$TransferSuccess implements TransferSuccess {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? success,
-    TResult Function(String message, String? typeError)? error,
-    TResult Function(bool isToSpending, bool? needApprove, bool isLoading,
+    TResult Function(
+            bool isToSpending,
+            bool isLoading,
+            String? errorMsg,
+            String? typeError,
+            bool? needApprove,
             TransferSpendingEntity? transferSpendingEntity)?
         loaded,
     required TResult orElse(),
@@ -167,7 +188,6 @@ class _$TransferSuccess implements TransferSuccess {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(TransferSuccess value) success,
-    required TResult Function(TransferError value) error,
     required TResult Function(TransferLoaded value) loaded,
   }) {
     return success(this);
@@ -177,7 +197,6 @@ class _$TransferSuccess implements TransferSuccess {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult Function(TransferSuccess value)? success,
-    TResult Function(TransferError value)? error,
     TResult Function(TransferLoaded value)? loaded,
   }) {
     return success?.call(this);
@@ -187,7 +206,6 @@ class _$TransferSuccess implements TransferSuccess {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(TransferSuccess value)? success,
-    TResult Function(TransferError value)? error,
     TResult Function(TransferLoaded value)? loaded,
     required TResult orElse(),
   }) {
@@ -203,172 +221,16 @@ abstract class TransferSuccess implements TransferState {
 }
 
 /// @nodoc
-abstract class _$$TransferErrorCopyWith<$Res> {
-  factory _$$TransferErrorCopyWith(
-          _$TransferError value, $Res Function(_$TransferError) then) =
-      __$$TransferErrorCopyWithImpl<$Res>;
-  $Res call({String message, String? typeError});
-}
-
-/// @nodoc
-class __$$TransferErrorCopyWithImpl<$Res>
-    extends _$TransferStateCopyWithImpl<$Res>
-    implements _$$TransferErrorCopyWith<$Res> {
-  __$$TransferErrorCopyWithImpl(
-      _$TransferError _value, $Res Function(_$TransferError) _then)
-      : super(_value, (v) => _then(v as _$TransferError));
-
-  @override
-  _$TransferError get _value => super._value as _$TransferError;
-
-  @override
-  $Res call({
-    Object? message = freezed,
-    Object? typeError = freezed,
-  }) {
-    return _then(_$TransferError(
-      message == freezed
-          ? _value.message
-          : message // ignore: cast_nullable_to_non_nullable
-              as String,
-      typeError: typeError == freezed
-          ? _value.typeError
-          : typeError // ignore: cast_nullable_to_non_nullable
-              as String?,
-    ));
-  }
-}
-
-/// @nodoc
-
-class _$TransferError implements TransferError {
-  const _$TransferError(this.message, {this.typeError});
-
-  @override
-  final String message;
-  @override
-  final String? typeError;
-
-  @override
-  String toString() {
-    return 'TransferState.error(message: $message, typeError: $typeError)';
-  }
-
-  @override
-  bool operator ==(dynamic other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$TransferError &&
-            const DeepCollectionEquality().equals(other.message, message) &&
-            const DeepCollectionEquality().equals(other.typeError, typeError));
-  }
-
-  @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(message),
-      const DeepCollectionEquality().hash(typeError));
-
-  @JsonKey(ignore: true)
-  @override
-  _$$TransferErrorCopyWith<_$TransferError> get copyWith =>
-      __$$TransferErrorCopyWithImpl<_$TransferError>(this, _$identity);
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() success,
-    required TResult Function(String message, String? typeError) error,
-    required TResult Function(bool isToSpending, bool? needApprove,
-            bool isLoading, TransferSpendingEntity? transferSpendingEntity)
-        loaded,
-  }) {
-    return error(message, typeError);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult Function()? success,
-    TResult Function(String message, String? typeError)? error,
-    TResult Function(bool isToSpending, bool? needApprove, bool isLoading,
-            TransferSpendingEntity? transferSpendingEntity)?
-        loaded,
-  }) {
-    return error?.call(message, typeError);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? success,
-    TResult Function(String message, String? typeError)? error,
-    TResult Function(bool isToSpending, bool? needApprove, bool isLoading,
-            TransferSpendingEntity? transferSpendingEntity)?
-        loaded,
-    required TResult orElse(),
-  }) {
-    if (error != null) {
-      return error(message, typeError);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(TransferSuccess value) success,
-    required TResult Function(TransferError value) error,
-    required TResult Function(TransferLoaded value) loaded,
-  }) {
-    return error(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(TransferSuccess value)? success,
-    TResult Function(TransferError value)? error,
-    TResult Function(TransferLoaded value)? loaded,
-  }) {
-    return error?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(TransferSuccess value)? success,
-    TResult Function(TransferError value)? error,
-    TResult Function(TransferLoaded value)? loaded,
-    required TResult orElse(),
-  }) {
-    if (error != null) {
-      return error(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class TransferError implements TransferState {
-  const factory TransferError(final String message, {final String? typeError}) =
-      _$TransferError;
-
-  String get message;
-  String? get typeError;
-  @JsonKey(ignore: true)
-  _$$TransferErrorCopyWith<_$TransferError> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-/// @nodoc
 abstract class _$$TransferLoadedCopyWith<$Res> {
   factory _$$TransferLoadedCopyWith(
           _$TransferLoaded value, $Res Function(_$TransferLoaded) then) =
       __$$TransferLoadedCopyWithImpl<$Res>;
   $Res call(
       {bool isToSpending,
-      bool? needApprove,
       bool isLoading,
+      String? errorMsg,
+      String? typeError,
+      bool? needApprove,
       TransferSpendingEntity? transferSpendingEntity});
 }
 
@@ -386,8 +248,10 @@ class __$$TransferLoadedCopyWithImpl<$Res>
   @override
   $Res call({
     Object? isToSpending = freezed,
-    Object? needApprove = freezed,
     Object? isLoading = freezed,
+    Object? errorMsg = freezed,
+    Object? typeError = freezed,
+    Object? needApprove = freezed,
     Object? transferSpendingEntity = freezed,
   }) {
     return _then(_$TransferLoaded(
@@ -395,14 +259,22 @@ class __$$TransferLoadedCopyWithImpl<$Res>
           ? _value.isToSpending
           : isToSpending // ignore: cast_nullable_to_non_nullable
               as bool,
-      needApprove: needApprove == freezed
-          ? _value.needApprove
-          : needApprove // ignore: cast_nullable_to_non_nullable
-              as bool?,
       isLoading: isLoading == freezed
           ? _value.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
               as bool,
+      errorMsg: errorMsg == freezed
+          ? _value.errorMsg
+          : errorMsg // ignore: cast_nullable_to_non_nullable
+              as String?,
+      typeError: typeError == freezed
+          ? _value.typeError
+          : typeError // ignore: cast_nullable_to_non_nullable
+              as String?,
+      needApprove: needApprove == freezed
+          ? _value.needApprove
+          : needApprove // ignore: cast_nullable_to_non_nullable
+              as bool?,
       transferSpendingEntity: transferSpendingEntity == freezed
           ? _value.transferSpendingEntity
           : transferSpendingEntity // ignore: cast_nullable_to_non_nullable
@@ -416,23 +288,29 @@ class __$$TransferLoadedCopyWithImpl<$Res>
 class _$TransferLoaded implements TransferLoaded {
   const _$TransferLoaded(
       {required this.isToSpending,
-      this.needApprove,
       this.isLoading = false,
+      this.errorMsg,
+      this.typeError,
+      this.needApprove,
       this.transferSpendingEntity});
 
   @override
   final bool isToSpending;
   @override
-  final bool? needApprove;
-  @override
   @JsonKey()
   final bool isLoading;
+  @override
+  final String? errorMsg;
+  @override
+  final String? typeError;
+  @override
+  final bool? needApprove;
   @override
   final TransferSpendingEntity? transferSpendingEntity;
 
   @override
   String toString() {
-    return 'TransferState.loaded(isToSpending: $isToSpending, needApprove: $needApprove, isLoading: $isLoading, transferSpendingEntity: $transferSpendingEntity)';
+    return 'TransferState.loaded(isToSpending: $isToSpending, isLoading: $isLoading, errorMsg: $errorMsg, typeError: $typeError, needApprove: $needApprove, transferSpendingEntity: $transferSpendingEntity)';
   }
 
   @override
@@ -442,9 +320,11 @@ class _$TransferLoaded implements TransferLoaded {
             other is _$TransferLoaded &&
             const DeepCollectionEquality()
                 .equals(other.isToSpending, isToSpending) &&
+            const DeepCollectionEquality().equals(other.isLoading, isLoading) &&
+            const DeepCollectionEquality().equals(other.errorMsg, errorMsg) &&
+            const DeepCollectionEquality().equals(other.typeError, typeError) &&
             const DeepCollectionEquality()
                 .equals(other.needApprove, needApprove) &&
-            const DeepCollectionEquality().equals(other.isLoading, isLoading) &&
             const DeepCollectionEquality()
                 .equals(other.transferSpendingEntity, transferSpendingEntity));
   }
@@ -453,8 +333,10 @@ class _$TransferLoaded implements TransferLoaded {
   int get hashCode => Object.hash(
       runtimeType,
       const DeepCollectionEquality().hash(isToSpending),
-      const DeepCollectionEquality().hash(needApprove),
       const DeepCollectionEquality().hash(isLoading),
+      const DeepCollectionEquality().hash(errorMsg),
+      const DeepCollectionEquality().hash(typeError),
+      const DeepCollectionEquality().hash(needApprove),
       const DeepCollectionEquality().hash(transferSpendingEntity));
 
   @JsonKey(ignore: true)
@@ -466,40 +348,53 @@ class _$TransferLoaded implements TransferLoaded {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() success,
-    required TResult Function(String message, String? typeError) error,
-    required TResult Function(bool isToSpending, bool? needApprove,
-            bool isLoading, TransferSpendingEntity? transferSpendingEntity)
+    required TResult Function(
+            bool isToSpending,
+            bool isLoading,
+            String? errorMsg,
+            String? typeError,
+            bool? needApprove,
+            TransferSpendingEntity? transferSpendingEntity)
         loaded,
   }) {
-    return loaded(isToSpending, needApprove, isLoading, transferSpendingEntity);
+    return loaded(isToSpending, isLoading, errorMsg, typeError, needApprove,
+        transferSpendingEntity);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? success,
-    TResult Function(String message, String? typeError)? error,
-    TResult Function(bool isToSpending, bool? needApprove, bool isLoading,
+    TResult Function(
+            bool isToSpending,
+            bool isLoading,
+            String? errorMsg,
+            String? typeError,
+            bool? needApprove,
             TransferSpendingEntity? transferSpendingEntity)?
         loaded,
   }) {
-    return loaded?.call(
-        isToSpending, needApprove, isLoading, transferSpendingEntity);
+    return loaded?.call(isToSpending, isLoading, errorMsg, typeError,
+        needApprove, transferSpendingEntity);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? success,
-    TResult Function(String message, String? typeError)? error,
-    TResult Function(bool isToSpending, bool? needApprove, bool isLoading,
+    TResult Function(
+            bool isToSpending,
+            bool isLoading,
+            String? errorMsg,
+            String? typeError,
+            bool? needApprove,
             TransferSpendingEntity? transferSpendingEntity)?
         loaded,
     required TResult orElse(),
   }) {
     if (loaded != null) {
-      return loaded(
-          isToSpending, needApprove, isLoading, transferSpendingEntity);
+      return loaded(isToSpending, isLoading, errorMsg, typeError, needApprove,
+          transferSpendingEntity);
     }
     return orElse();
   }
@@ -508,7 +403,6 @@ class _$TransferLoaded implements TransferLoaded {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(TransferSuccess value) success,
-    required TResult Function(TransferError value) error,
     required TResult Function(TransferLoaded value) loaded,
   }) {
     return loaded(this);
@@ -518,7 +412,6 @@ class _$TransferLoaded implements TransferLoaded {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult Function(TransferSuccess value)? success,
-    TResult Function(TransferError value)? error,
     TResult Function(TransferLoaded value)? loaded,
   }) {
     return loaded?.call(this);
@@ -528,7 +421,6 @@ class _$TransferLoaded implements TransferLoaded {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(TransferSuccess value)? success,
-    TResult Function(TransferError value)? error,
     TResult Function(TransferLoaded value)? loaded,
     required TResult orElse(),
   }) {
@@ -542,13 +434,17 @@ class _$TransferLoaded implements TransferLoaded {
 abstract class TransferLoaded implements TransferState {
   const factory TransferLoaded(
       {required final bool isToSpending,
-      final bool? needApprove,
       final bool isLoading,
+      final String? errorMsg,
+      final String? typeError,
+      final bool? needApprove,
       final TransferSpendingEntity? transferSpendingEntity}) = _$TransferLoaded;
 
   bool get isToSpending;
-  bool? get needApprove;
   bool get isLoading;
+  String? get errorMsg;
+  String? get typeError;
+  bool? get needApprove;
   TransferSpendingEntity? get transferSpendingEntity;
   @JsonKey(ignore: true)
   _$$TransferLoadedCopyWith<_$TransferLoaded> get copyWith =>

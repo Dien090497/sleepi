@@ -43,16 +43,18 @@ class TransferScreen extends StatelessWidget {
             resizeToAvoidBottomInset: false,
             child: DismissKeyboardWidget(
               child: SafeArea(
+                bottom: false,
                 child: Column(
                   children: [
                     const TransferWidget(),
                     const SizedBox(height: 24),
                     Expanded(
-                        child: TransferList(
-                      transferType: args.transferType,
-                      tokenEntity: args.tokenEntity,
-                      spendingToWallet: args.fromSpendingToWallet,
-                    )),
+                      child: TransferList(
+                        transferType: args.transferType,
+                        tokenEntity: args.tokenEntity,
+                        spendingToWallet: args.fromSpendingToWallet,
+                      ),
+                    ),
                   ],
                 ),
               ),
