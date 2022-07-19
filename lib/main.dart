@@ -126,7 +126,7 @@ Future<void> onStart(ServiceInstance service) async {
   if (service is AndroidServiceInstance) {
     service.setForegroundNotificationInfo(
       title: "Sleep Tracking...",
-      content: "Alarm: ${DateFormat('HH:mm dd/MM/yyyy').format(wakeUp)}",
+      content: "Alarm: ${DateFormat('HH:mm dd/MM/yyyy').format(wakeUp).toString()}",
     );
   }
   Timer.periodic(Duration(minutes: time), (timer) async {

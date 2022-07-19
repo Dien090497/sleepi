@@ -2,10 +2,12 @@ import 'dart:async';
 
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:health/health.dart';
 import 'package:slee_fi/common/enum/enum.dart';
 import 'package:slee_fi/di/injector.dart';
 import 'package:slee_fi/entities/bed_entity/bed_entity.dart';
 import 'package:slee_fi/entities/item_entity/item_entity.dart';
+import 'package:slee_fi/l10n/locale_keys.g.dart';
 import 'package:slee_fi/presentation/blocs/home/home_state.dart';
 import 'package:slee_fi/schema/start_tracking/start_tracking_schema.dart';
 import 'package:slee_fi/usecase/add_item_to_bed_usecase.dart';
@@ -205,20 +207,39 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
   }
 
   void _startTracking(StartTracking event, Emitter<HomeState> emit) async {
-    final currentState = state;
-    if (currentState is HomeLoaded && currentState.bedList.isNotEmpty) {
-      DateTime wakeUp =
-          DateTime.now().add(Duration(minutes: currentState.time));
-      var result = await _startSleepTrackingUC.call(StartTrackingSchema(
-        isEnableInsurance: currentState.enableInsurance,
-        bedUsed: currentState.selectedBed!.id,
-        wakeUp: '${wakeUp.toUtc().millisecondsSinceEpoch ~/ 1000}',
-        alrm: currentState.enableAlarm,
-        itemUsed: currentState.selectedItem?.id ?? 0,
-      ));
-      result.fold((l) => emit(HomeState.startError('$l')), (r) {
-        emit(currentState.copyWith(startTracking: true));
-      });
+    HealthFactory health = HealthFactory();
+
+    var types = [
+      HealthDataType.SLEEP_IN_BED,
+      HealthDataType.SLEEP_ASLEEP,
+      HealthDataType.SLEEP_AWAKE,
+      HealthDataType.SLEEP_DEEP,
+      HealthDataType.SLEEP_REM,
+      HealthDataType.SLEEP_LIGHT,
+    ];
+
+    bool accessWasGranted = await health.requestAuthorization(types);
+
+    if (accessWasGranted) {
+      final currentState = state;
+      if (currentState is HomeLoaded && currentState.bedList.isNotEmpty) {
+        DateTime wakeUp =
+        DateTime.now().add(Duration(minutes: currentState.time));
+        var result = await _startSleepTrackingUC.call(StartTrackingSchema(
+          isEnableInsurance: currentState.enableInsurance,
+          bedUsed: currentState.selectedBed!.id,
+          wakeUp: '${wakeUp
+              .toUtc()
+              .millisecondsSinceEpoch ~/ 1000}',
+          alrm: currentState.enableAlarm,
+          itemUsed: currentState.selectedItem?.id ?? 0,
+        ));
+        result.fold((l) => emit(HomeState.startError('$l')), (r) {
+          emit(currentState.copyWith(startTracking: true));
+        });
+      }
+    }else {
+      emit(const HomeState.startError(LocaleKeys.not_granted));
     }
   }
 

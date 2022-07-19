@@ -57,18 +57,6 @@ class _TrackingScreenState extends State<TrackingScreen> {
   @override
   void initState() {
     init();
-    double x = totalEarn / time;
-    timer = Timer.periodic(
-      const Duration(minutes: 1),
-          (Timer timer) async {
-        if (earn < totalEarn && x > 0) {
-          earn += x;
-          setState(() {});
-        } else {
-          timer.cancel();
-        }
-      },
-    );
     super.initState();
   }
 
@@ -86,6 +74,18 @@ class _TrackingScreenState extends State<TrackingScreen> {
       timeAlarm =
       '${wakeUp.hour < 10 ? '0${wakeUp.hour}' : wakeUp.hour}:${wakeUp.minute < 10 ? '0${wakeUp.minute}' : wakeUp.minute}';
       fromRoute = args.fromRoute;
+      double x = totalEarn / time;
+      timer = Timer.periodic(
+        const Duration(minutes: 1),
+            (Timer timer) async {
+          if (earn < totalEarn && x > 0) {
+            earn += x;
+            setState(() {});
+          } else {
+            timer.cancel();
+          }
+        },
+      );
       setState(() {});
     });
   }
@@ -120,14 +120,12 @@ class _TrackingScreenState extends State<TrackingScreen> {
 
             return FocusDetector(
                 onFocusGained: () async {
-                  init();
                   if(!(await service.isRunning())) {
                     service.invoke(Const.setAsForeground);
                     service.startService();
                   }
                 },
                 onFocusLost: () {
-                  // timer.cancel();
                 },
                 child: Stack(
                   children: [
