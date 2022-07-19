@@ -450,20 +450,18 @@ class _AuthDataSource implements AuthDataSource {
   }
 
   @override
-  Future<List<JewelModel>> getListJewel(limit, page) async {
+  Future<ListJewelResponse> getListJewel(limit, page) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{r'limit': limit, r'page': page};
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
-    final _result = await _dio.fetch<List<dynamic>>(
-        _setStreamType<List<JewelModel>>(
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<ListJewelResponse>(
             Options(method: 'GET', headers: _headers, extra: _extra)
                 .compose(_dio.options, '/nft-attributes/list-jewels',
                     queryParameters: queryParameters, data: _data)
                 .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    var value = _result.data!
-        .map((dynamic i) => JewelModel.fromJson(i as Map<String, dynamic>))
-        .toList();
+    final value = ListJewelResponse.fromJson(_result.data!);
     return value;
   }
 
