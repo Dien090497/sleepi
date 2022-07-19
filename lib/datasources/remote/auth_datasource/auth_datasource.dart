@@ -17,7 +17,6 @@ import 'package:slee_fi/models/get_repair_response/get_repair_response.dart';
 import 'package:slee_fi/models/global_config_response/global_config_response.dart';
 import 'package:slee_fi/models/home_bed_response/home_bed_response.dart';
 import 'package:slee_fi/models/item_owner_response/item_owner_response.dart';
-import 'package:slee_fi/models/jewel_model/jewel_model.dart';
 import 'package:slee_fi/models/list_jewel_resoponse/list_jewel_response.dart';
 import 'package:slee_fi/models/list_market_place/list_market_place_model.dart';
 import 'package:slee_fi/models/lucky_box/lucky_box.dart';

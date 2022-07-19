@@ -24,8 +24,6 @@ ItemModel _$ItemModelFromJson(Map<String, dynamic> json) => ItemModel(
       (json['bonus'] as num).toDouble(),
       (json['special'] as num).toDouble(),
       (json['resilience'] as num).toDouble(),
-      json['createdAt'] as String,
-      json['updatedAt'] as String,
       json['tokenId'] as int,
       (json['durability'] as num).toDouble(),
       json['itemType'] as String?,
@@ -56,8 +54,6 @@ Map<String, dynamic> _$ItemModelToJson(ItemModel instance) => <String, dynamic>{
       'special': instance.special,
       'resilience': instance.resilience,
       'effect': instance.effect,
-      'createdAt': instance.createdAt,
-      'updatedAt': instance.updatedAt,
       'tokenId': instance.tokenId,
       'durability': instance.durability,
     };
