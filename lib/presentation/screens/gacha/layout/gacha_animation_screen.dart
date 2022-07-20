@@ -36,7 +36,23 @@ class _GachaAnimationScreenState extends State<GachaAnimationScreen> with Ticker
    Future setAudio() async{
      final args = ModalRoute.of(context)?.settings.arguments as GachaAnimationArguments?;
      audioPlayer.setReleaseMode(ReleaseMode.loop);
-     audioPlayer.play(AssetSource(args?.audio ?? Const.normalGachaAudio), );
+     audioPlayer.play(
+       AssetSource(args?.audio ?? Const.normalGachaAudio),
+        ctx: AudioContext(
+            android: AudioContextAndroid(
+              isSpeakerphoneOn: false,
+              stayAwake: false,
+              contentType: AndroidContentType.music,
+              usageType: AndroidUsageType.notificationRingtone,
+              audioFocus: AndroidAudioFocus.gainTransientMayDuck,
+            ),
+            iOS: AudioContextIOS(
+              defaultToSpeaker: true,
+              category: AVAudioSessionCategory.ambient,
+              options: [AVAudioSessionOptions.mixWithOthers] +[AVAudioSessionOptions.duckOthers],
+            ),
+        )
+     );
    }
 
   @override
