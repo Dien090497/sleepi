@@ -30,8 +30,10 @@ class MarketPlaceCubit extends Cubit<MarketPlaceState> {
       quality: []);
   final MarketPlaceUseCase _marketPlaceUseCase = getIt<MarketPlaceUseCase>();
   final BuyNFTUseCase _buyNFTUseCase = getIt<BuyNFTUseCase>();
+  CategoryType _categoryType = CategoryType.bed;
 
   init(CategoryType categoryType) async {
+    _categoryType = categoryType;
     page = 1;
     params = params.copyWith(
         page: page,
@@ -40,7 +42,7 @@ class MarketPlaceCubit extends Cubit<MarketPlaceState> {
         minLevel: categoryType == CategoryType.bed ? 0 : 1,
         categoryId: categoryType.type,
         sortPrice: Const.sortCondition[0]);
-    log("params : ${json.encode(params.toJson())}");
+    log("params init $categoryType : ${json.encode(params.toJson())}");
     emit(const MarketPlaceState.loading());
     getMarketPlace(params);
   }
@@ -54,12 +56,21 @@ class MarketPlaceCubit extends Cubit<MarketPlaceState> {
 
   clearFilter() {
     page = 1;
-    params = params.copyWith(page: page, type: [], classNft: [], quality: []);
+    params = params.copyWith(
+      page: page,
+      type: [],
+      classNft: [],
+      quality: [],
+      maxLevel: _categoryType == CategoryType.bed ? 30 : 5,
+      minLevel: _categoryType == CategoryType.bed ? 0 : 1,
+      minBedMint: 0,
+      maxBedMint: 7,
+    );
     getMarketPlace(params);
   }
 
   Future<void> getMarketPlace(MarketSchema param) async {
-
+    log("params : ${json.encode(params.toJson())}");
     final result = await _marketPlaceUseCase.call(param);
     result.fold((l) {
       error = true;

@@ -17,11 +17,11 @@ import 'package:slee_fi/presentation/screens/market_place/widget/gridview_bed_it
 import 'package:slee_fi/presentation/screens/market_place/widget/pop_up_bed_market_place.dart';
 import 'package:slee_fi/presentation/screens/market_place/widget/tab_bar_filter.dart';
 import 'package:slee_fi/resources/resources.dart';
-import 'package:slee_fi/usecase/fetch_bed_usecase.dart';
 import 'package:syncfusion_flutter_sliders/sliders.dart';
 
 class TabBedsBuy extends StatefulWidget {
-  const TabBedsBuy({Key? key}) : super(key: key);
+  const TabBedsBuy({Key? key, required this.cubit}) : super(key: key);
+  final MarketPlaceCubit cubit;
 
   @override
   State<TabBedsBuy> createState() => _TabBedsBuyState();
@@ -48,133 +48,131 @@ class _TabBedsBuyState extends State<TabBedsBuy> {
 
   @override
   Widget build(BuildContext context) {
+    print('filter bed   ${widget.cubit.params.toJson()}');
     return DefaultTabController(
       length: 2,
-      child: BlocProvider(
-        create: (context) => MarketPlaceCubit()..init(CategoryType.bed),
-        child: BlocConsumer<MarketPlaceCubit, MarketPlaceState>(
-          listener: (context, state) {
-            final cubit = context.read<MarketPlaceCubit>();
-            if (state is MarketPlaceStateLoaded) {
-              listBeds = state.list.list;
-            }
+      child: BlocConsumer<MarketPlaceCubit, MarketPlaceState>(
+        bloc: widget.cubit,
+        listener: (context, state) {
+          final cubit = context.read<MarketPlaceCubit>();
+          if (state is MarketPlaceStateLoaded) {
+            listBeds = state.list.list;
+          }
 
-            if (state is MarketPlaceStateLoadedMore) {
-              listBeds.addAll(state.list.list);
-              setState(() {});
-            }
+          if (state is MarketPlaceStateLoadedMore) {
+            listBeds.addAll(state.list.list);
+            setState(() {});
+          }
 
-            if (state is MarketPlaceStateBuySuccess) {
-              cubit.refresh();
-              showSuccessfulDialog(context, LocaleKeys.purchased_successfully);
-            }
+          if (state is MarketPlaceStateBuySuccess) {
+            cubit.refresh();
+            showSuccessfulDialog(context, LocaleKeys.purchased_successfully);
+          }
 
-            if (state is MarketPlaceStateBuyFailed) {
-              cubit.refresh();
-              showMessageDialog(context, state.msg);
-            }
-          },
-          builder: (context, state) {
-            final cubit = context.read<MarketPlaceCubit>();
-            return Column(
-              children: [
-                TabBarFilter(
-                  cubit: cubit,
-                  tabTexts: const [LocaleKeys.buy, LocaleKeys.rent],
-                  onFilterTap: () {
-                    showFilterModalBottomSheet(
-                      cubit: cubit,
-                      context,
-                      sections: {
-                        LocaleKeys.type.tr(): [
-                          LocaleKeys.bed,
-                          LocaleKeys.bedbox,
-                          LocaleKeys.genesis_beds,
-                        ],
-                        LocaleKeys.class_.tr(): [
-                          LocaleKeys.short,
-                          LocaleKeys.middle,
-                          LocaleKeys.long,
-                          LocaleKeys.flexible,
-                        ],
-                        LocaleKeys.quality.tr(): [
-                          LocaleKeys.common,
-                          LocaleKeys.uncommon,
-                          LocaleKeys.rare,
-                          LocaleKeys.epic,
-                          LocaleKeys.legendary,
-                        ],
-                      },
-                      sliders: {
-                        LocaleKeys.level.tr(): FilterSliderValues(
-                            value: SfRangeValues(
-                              cubit.params.minLevel,
-                              cubit.params.maxLevel,
-                            ),
-                            max: 30,
-                            min: 0),
-                        LocaleKeys.mint.tr(): FilterSliderValues(
-                            max: 7.0,
-                            min: 0,
-                            value: SfRangeValues(cubit.params.minBedMint,
-                                cubit.params.maxBedMint)),
-                      },
-                    );
-                  },
-                ),
-                Expanded(
-                  child: Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 12.w),
-                    child: (state is MarketPlaceStateLoading)
-                        ? const Center(
-                            child: CircularProgressIndicator(),
-                          )
-                        : Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              const SizedBox(height: 12),
-                              Expanded(
-                                child: TabBarView(
-                                  children: [
-                                    GridViewBedItem(
-                                      cubit: cubit,
-                                      isLoadMore: cubit.loadMore,
-                                      beds: listBeds,
-                                      onRefresh: () {
-                                        cubit.refresh();
-                                      },
-                                      onBuyTap: (bed) {
-                                        _showBedDialog(context, bed, cubit);
-                                      },
-                                      onBedTap: (bed) {
-                                        Navigator.pushNamed(context, R.nftInfo,
-                                            arguments: InfoIndividualParams(
-                                                bed: bed.toBedEntity(),
-                                                marketPlaceModel: bed,
-                                                buy: true));
-                                      },
-                                    ),
-                                    Padding(
-                                      padding: EdgeInsets.only(
-                                          bottom: MediaQuery.of(context)
-                                                  .size
-                                                  .height *
-                                              0.3),
-                                      child: const Center(
-                                        child: SFIcon(Ics.commingSoon),
-                                      ),
-                                    )
-                                  ],
-                                ),
-                              ),
-                            ],
+          if (state is MarketPlaceStateBuyFailed) {
+            cubit.refresh();
+            showMessageDialog(context, state.msg);
+          }
+        },
+        builder: (context, state) {
+
+          return Column(
+            children: [
+              TabBarFilter(
+                cubit: widget.cubit,
+                tabTexts: const [LocaleKeys.buy, LocaleKeys.rent],
+                onFilterTap: () {
+                  showFilterModalBottomSheet(
+                    cubit: widget.cubit,
+                    context,
+                    sections: {
+                      LocaleKeys.type.tr(): [
+                        LocaleKeys.bed,
+                        LocaleKeys.bedbox,
+                        LocaleKeys.genesis_beds,
+                      ],
+                      LocaleKeys.class_.tr(): [
+                        LocaleKeys.short,
+                        LocaleKeys.middle,
+                        LocaleKeys.long,
+                        LocaleKeys.flexible,
+                      ],
+                      LocaleKeys.quality.tr(): [
+                        LocaleKeys.common,
+                        LocaleKeys.uncommon,
+                        LocaleKeys.rare,
+                        LocaleKeys.epic,
+                        LocaleKeys.legendary,
+                      ],
+                    },
+                    sliders: {
+                      LocaleKeys.level.tr(): FilterSliderValues(
+                          value: SfRangeValues(
+                            widget.cubit.params.minLevel,
+                            widget.cubit.params.maxLevel,
                           ),
-                  ),
+                          max: 30,
+                          min: 0),
+                      LocaleKeys.mint.tr(): FilterSliderValues(
+                          max: 7.0,
+                          min: 0,
+                          value: SfRangeValues(widget.cubit.params.minBedMint,
+                              widget.cubit.params.maxBedMint)),
+                    },
+                  );
+                },
+              ),
+              Expanded(
+                child: Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 12.w),
+                  child: (state is MarketPlaceStateLoading)
+                      ? const Center(
+                          child: CircularProgressIndicator(),
+                        )
+                      : Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            const SizedBox(height: 12),
+                            Expanded(
+                              child: TabBarView(
+                                children: [
+                                  GridViewBedItem(
+                                    cubit: widget.cubit,
+                                    isLoadMore: widget.cubit.loadMore,
+                                    beds: listBeds,
+                                    onRefresh: () {
+                                      widget.cubit.refresh();
+                                    },
+                                    onBuyTap: (bed) {
+                                      _showBedDialog(context, bed, widget.cubit);
+                                    },
+                                    onBedTap: (bed) {
+                                      Navigator.pushNamed(context, R.nftInfo,
+                                          arguments: InfoIndividualParams(
+                                              bed: bed.toBedEntity(),
+                                              marketPlaceModel: bed,
+                                              buy: true));
+                                    },
+                                  ),
+                                  Padding(
+                                    padding: EdgeInsets.only(
+                                        bottom:
+                                            MediaQuery.of(context).size.height *
+                                                0.3),
+                                    child: const Center(
+                                      child: SFIcon(Ics.commingSoon),
+                                    ),
+                                  )
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
                 ),
-              ],
-            );
-          },
-        ),
+              ),
+            ],
+          );
+        },
       ),
     );
   }

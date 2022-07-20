@@ -10,12 +10,14 @@ class SFTabBar extends StatefulWidget {
     this.isScrollable = false,
     Key? key,
     required this.children,
+    this.onTabChange,
   }) : super(key: key);
 
   final List<String> texts;
   final List<Widget> children;
   final EdgeInsets? padding;
   final bool isScrollable;
+  final Function(int index)? onTabChange;
 
   @override
   State<SFTabBar> createState() => SFTabBarState();
@@ -33,6 +35,9 @@ class SFTabBarState extends State<SFTabBar>
   }
 
   void _handleTabSelection() {
+    if (widget.onTabChange != null) {
+      widget.onTabChange!(_tabController.index);
+    }
     setState(() {});
   }
 
