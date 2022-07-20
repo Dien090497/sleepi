@@ -114,12 +114,14 @@ class _PreResultScreenState extends State<PreResultScreen> {
                               const SizedBox(
                                 height: 8,
                               ),
-                              SFLabelValue(
-                                  label: LocaleKeys.insurance,
-                                  value: '${resultModel.insurance}%'),
-                              const SizedBox(
-                                height: 8,
-                              ),
+                              if (resultModel.enableInsurance)
+                                SFLabelValue(
+                                    label: LocaleKeys.insurance,
+                                    value: '${resultModel.insurance}%'),
+                              if (resultModel.enableInsurance)
+                                const SizedBox(
+                                  height: 8,
+                                ),
                               const Divider(
                                 color: AppColors.white,
                               ),

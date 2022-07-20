@@ -8,30 +8,25 @@ part of 'tracking_result_model.dart';
 
 TrackingResultModel _$TrackingResultModelFromJson(Map<String, dynamic> json) =>
     TrackingResultModel(
-      hashId: json['hashId'] as String?,
-      userId: json['userId'] as String?,
-      trackingId: json['trackingId'] as int?,
-      actualEarn: json['actualEarn'] as String?,
-      tokenEarnSymbol: json['tokenEarnSymbol'] as String?,
-      nAwk: json['nAwk'] as int?,
-      sleepOnsetTime: json['sleepOnsetTime'] as String?,
-      sleepDurationTime: json['sleepDurationTime'] as String?,
-      wokeUpTime: json['wokeUpTime'] as String?,
-      bedTime: json['bedTime'] as String?,
-      sleepQuality: json['sleepQuality'] as int?,
-      startSleepTime: json['startSleepTime'] as int?,
-      createdAt: json['createdAt'] == null
-          ? null
-          : DateTime.parse(json['createdAt'] as String),
-      updatedAt: json['updatedAt'] == null
-          ? null
-          : DateTime.parse(json['updatedAt'] as String),
-      id: json['id'] as int?,
-    )
-      ..bedNFTHoldingBonus = json['bedNFTHoldingBonus'] as String?
-      ..stakingBonus = json['stakingBonus'] as String?
-      ..basePointEff = json['basePointEff'] as String?
-      ..insurance = json['insurance'] as String?;
+      json['hashId'] as String?,
+      json['userId'] as String?,
+      json['trackingId'] as int?,
+      json['actualEarn'] as String?,
+      json['tokenEarnSymbol'] as String?,
+      json['nAwk'] as int?,
+      json['sleepOnsetTime'] as String?,
+      json['sleepDurationTime'] as String?,
+      json['wokeUpTime'] as String?,
+      json['bedTime'] as String?,
+      json['bedNFTHoldingBonus'] as String?,
+      json['stakingBonus'] as String?,
+      json['basePointEff'] as String?,
+      json['insurance'] as String?,
+      json['enableInsurance'] as bool,
+      json['sleepQuality'] as int?,
+      json['startSleepTime'] as int?,
+      json['id'] as int?,
+    );
 
 Map<String, dynamic> _$TrackingResultModelToJson(
         TrackingResultModel instance) =>
@@ -50,9 +45,8 @@ Map<String, dynamic> _$TrackingResultModelToJson(
       'stakingBonus': instance.stakingBonus,
       'basePointEff': instance.basePointEff,
       'insurance': instance.insurance,
+      'enableInsurance': instance.enableInsurance,
       'sleepQuality': instance.sleepQuality,
       'startSleepTime': instance.startSleepTime,
-      'createdAt': instance.createdAt?.toIso8601String(),
-      'updatedAt': instance.updatedAt?.toIso8601String(),
       'id': instance.id,
     };

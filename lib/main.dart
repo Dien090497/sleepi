@@ -112,7 +112,8 @@ bool onIosBackground(ServiceInstance service) {
 
 Future<void> onStart(ServiceInstance service) async {
   final audioPlayer = AudioPlayer();
-  await audioPlayer.setReleaseMode(ReleaseMode.loop);
+  audioPlayer.setReleaseMode(ReleaseMode.loop);
+
   if (service is AndroidServiceInstance) {
     service.on(Const.setAsForeground).listen((event) {
       service.setAsForegroundService();
@@ -122,19 +123,18 @@ Future<void> onStart(ServiceInstance service) async {
       service.setAsBackgroundService();
     });
   }
-  service.on(Const.stopService).listen((event) async {
-    await audioPlayer.stop();
-    await audioPlayer.dispose();
-    await service.stopSelf();
+  service.on(Const.stopService).listen((event) {
+    audioPlayer.stop();
+    audioPlayer.release();
+    audioPlayer.dispose();
+    service.stopSelf();
   });
 
   final SharedPreferences preferences = await SharedPreferences.getInstance();
   final int timeWakeUp = preferences.getInt(Const.time) ?? 0;
   final int sound = preferences.getInt(Const.sound) ?? 0;
-  DateTime wakeUp = DateTime.fromMillisecondsSinceEpoch(timeWakeUp);
+  final DateTime wakeUp = DateTime.fromMillisecondsSinceEpoch(timeWakeUp);
   final int time = wakeUp.difference(DateTime.now()).inMinutes;
-  log('=-=-=-$time');
-  // bring to foreground
   if (service is AndroidServiceInstance) {
     service.setForegroundNotificationInfo(
       title: "Sleep Tracking...",
@@ -142,26 +142,12 @@ Future<void> onStart(ServiceInstance service) async {
           "Alarm: ${DateFormat('HH:mm dd/MM/yyyy').format(wakeUp).toString()}",
     );
   }
-  Timer.periodic(Duration(minutes: time), (timer) {
+  Timer.periodic(Duration(minutes: time), (timer) async {
     log('FLUTTER BACKGROUND SERVICE: ${DateTime.now()}');
     final isPlaying = audioPlayer.state == PlayerState.playing;
     if (!isPlaying) {
-      audioPlayer.play(
+      await audioPlayer.play(
         AssetSource(Const.soundAlarm[sound]),
-        ctx: AudioContext(
-          android: AudioContextAndroid(
-            isSpeakerphoneOn: true,
-            stayAwake: true,
-            contentType: AndroidContentType.music,
-            usageType: AndroidUsageType.media,
-            audioFocus: AndroidAudioFocus.gain,
-          ),
-          iOS: AudioContextIOS(
-            defaultToSpeaker: false,
-            category: AVAudioSessionCategory.ambient,
-            options: [AVAudioSessionOptions.defaultToSpeaker],
-          ),
-        ),
       );
     }
     timer.cancel();
