@@ -193,46 +193,9 @@ class AlarmBell extends StatelessWidget {
 
   Future<void> _startPress(BuildContext context, DateTime selectedTime) async {
     final isGranted = await _requestHealthAuthorization();
-    return showCustomAlertDialog(
-      context,
-      children: PopUpConfirmStartTracking(
-        onPressed: () async {
-          final state = BlocProvider.of<HomeBloc>(context).state;
-          if (state is HomeLoaded) {
-            final startRes = await getIt<StartSleepTrackingUseCase>()
-                .call(StartTrackingSchema(
-              isEnableInsurance: state.enableInsurance,
-              bedUsed: state.selectedBed!.id,
-              wakeUp: '${selectedTime.toUtc().millisecondsSinceEpoch ~/ 1000}',
-              alrm: state.enableAlarm,
-              itemUsed: state.selectedItem?.id ?? 0,
-            ));
-            Navigator.pop(context);
-            startRes.fold(
-              (l) {
-                showMessageDialog(context, '$l');
-              },
-              (r) {
-                Navigator.pushNamed(
-                  context,
-                  R.tracking,
-                  arguments: TrackingParams(
-                    timeStart: userStatusTracking!.tracking!.startSleep! * 1000,
-                    timeWakeUp: userStatusTracking!.tracking!.wakeUp! * 1000,
-                    tokenEarn:
-                        double.parse(userStatusTracking!.tracking!.estEarn!),
-                    fromRoute: R.bottomNavigation,
-                    imageBed: bedImage,
-                  ),
-                );
-              },
-            );
-          }
-        },
-      ),
-    );
+
     if (isGranted) {
-      showCustomAlertDialog(
+      return showCustomAlertDialog(
         context,
         children: PopUpConfirmStartTracking(
           onPressed: () async {
@@ -247,6 +210,7 @@ class AlarmBell extends StatelessWidget {
                 alrm: state.enableAlarm,
                 itemUsed: state.selectedItem?.id ?? 0,
               ));
+              Navigator.pop(context);
               startRes.fold(
                 (l) {
                   showMessageDialog(context, '$l');
@@ -256,11 +220,9 @@ class AlarmBell extends StatelessWidget {
                     context,
                     R.tracking,
                     arguments: TrackingParams(
-                      timeStart:
-                          userStatusTracking!.tracking!.startSleep! * 1000,
-                      timeWakeUp: userStatusTracking!.tracking!.wakeUp! * 1000,
-                      tokenEarn:
-                          double.parse(userStatusTracking!.tracking!.estEarn!),
+                      timeStart: DateTime.now().millisecondsSinceEpoch,
+                      timeWakeUp: selectedTime.millisecondsSinceEpoch,
+                      tokenEarn: state.tokenEarn,
                       fromRoute: R.bottomNavigation,
                       imageBed: bedImage,
                     ),

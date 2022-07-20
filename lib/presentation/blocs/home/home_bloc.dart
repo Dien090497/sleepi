@@ -27,8 +27,6 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     on<LoadMoreBed>(_onLoadMoreBed);
     on<ChangeInsurance>(_changeInsurance);
     on<ChangeStatusAlarm>(_changeStatusAlarm);
-    on<SelectTime>(_changeHour);
-    on<ChangeMinute>(_changeMinute);
   }
 
   final _fetchListBedUC = getIt<FetchHomeBedUseCase>();
@@ -206,20 +204,6 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     final currentState = state;
     if (currentState is HomeLoaded && currentState.bedList.isNotEmpty) {
       emit(currentState.copyWith(enableAlarm: event.enableAlarm));
-    }
-  }
-
-  FutureOr<void> _changeHour(SelectTime event, Emitter<HomeState> emit) {
-    final currentState = state;
-    if (currentState is HomeLoaded) {
-      emit(currentState.copyWith(errorMessage: ''));
-    }
-  }
-
-  FutureOr<void> _changeMinute(ChangeMinute event, Emitter<HomeState> emit) {
-    final currentState = state;
-    if (currentState is HomeLoaded) {
-      emit(currentState.copyWith(errorMessage: ''));
     }
   }
 
