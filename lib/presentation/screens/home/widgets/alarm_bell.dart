@@ -174,7 +174,7 @@ class AlarmBell extends StatelessWidget {
                           padding: const EdgeInsets.symmetric(horizontal: 16.0),
                           child: SFText(
                             keyText:
-                                '${state is HomeLoaded ? state.tokenEarn : 0}/150 SLFT',
+                                '${state is HomeLoaded ? state.tokenEarn.toStringAsFixed(2) : 0}/150 SLFT',
                             style: TextStyles.white10,
                           ),
                         )

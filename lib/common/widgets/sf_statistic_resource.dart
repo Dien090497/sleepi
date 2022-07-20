@@ -14,8 +14,6 @@ class SFStatisticResource extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final sizeWidth = MediaQuery.of(context).size.width;
-
     return Container(
       padding: const EdgeInsets.all(4),
       decoration: BoxDecoration(
@@ -28,22 +26,16 @@ class SFStatisticResource extends StatelessWidget {
             final listTokens = userState.listTokens;
             return Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                SizedBox(width: sizeWidth * 0.02),
-                ItemResource(
-                    value: formatToken(listTokens[0].balance),
-                    url: listTokens[0].icon),
-                SizedBox(width: sizeWidth * 0.02),
-                ItemResource(
-                    value: formatToken(listTokens[1].balance),
-                    url: listTokens[1].icon),
-                SizedBox(width: sizeWidth * 0.02),
-                ItemResource(
-                    value: formatToken(listTokens[2].balance),
-                    url: listTokens[2].icon),
-                const SizedBox(width: 12),
-                const SFIcon(Ics.icSolanaCircle),
-              ],
+              children: listTokens
+                  .map<Widget>((e) => ItemResource(
+                        value: formatToken(e.balance),
+                        url: e.icon,
+                      ))
+                  .toList()
+                ..addAll([
+                  const SizedBox(width: 12),
+                  const SFIcon(Ics.icSolanaCircle)
+                ]),
             );
           }
           return const SizedBox();
@@ -65,13 +57,18 @@ class ItemResource extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      crossAxisAlignment: CrossAxisAlignment.center,
-      children: [
-        SvgPicture.asset(url, width: url.contains('avax') ? 20 : null),
-        const SizedBox(width: 4),
-        SFText(keyText: value, style: TextStyles.white14),
-      ],
+    final sizeWidth = MediaQuery.of(context).size.width;
+
+    return Padding(
+      padding: EdgeInsets.symmetric(horizontal: sizeWidth * 0.01),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          SvgPicture.asset(url, width: url.contains('avax') ? 20 : null),
+          const SizedBox(width: 4),
+          SFText(keyText: value, style: TextStyles.white14),
+        ],
+      ),
     );
   }
 }
