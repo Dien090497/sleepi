@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:slee_fi/common/routes/app_routes.dart';
 import 'package:slee_fi/common/widgets/sf_sub_tab_bar.dart';
+import 'package:slee_fi/entities/bed_entity/bed_entity.dart';
 import 'package:slee_fi/l10n/locale_keys.g.dart';
-import 'package:slee_fi/models/bed_model/beb_model.dart';
 import 'package:slee_fi/presentation/blocs/nft_list/nft_list_cubit.dart';
 import 'package:slee_fi/presentation/blocs/nft_list/nft_list_state.dart';
 import 'package:slee_fi/presentation/screens/info_individual/info_individual_screen.dart';
@@ -18,7 +18,7 @@ class TabBedsDetail extends StatefulWidget {
 }
 
 class _TabBedsDetailState extends State<TabBedsDetail> {
-  late List<BedModel> listBeds = [];
+  late List<BedEntity> listBeds = [];
   final CategoryType categoryType = CategoryType.bed;
 
   // void _showBedDialog(BuildContext context) {
@@ -58,8 +58,7 @@ class _TabBedsDetailState extends State<TabBedsDetail> {
                                       ? state.isLoadMore
                                       : false,
                                   beds: listBeds
-                                      .where(
-                                          (element) => element.type == 'bed')
+                                      .where((element) => element.type == 'bed')
                                       .toList(),
                                   onRefresh: () {
                                     cubit.refresh(categoryType);
@@ -67,7 +66,7 @@ class _TabBedsDetailState extends State<TabBedsDetail> {
                                   onBedTap: (bed) {
                                     Navigator.pushNamed(context, R.nftInfo,
                                         arguments: InfoIndividualParams(
-                                            bed: bed.toEntity(), buy: true));
+                                            bed: bed, buy: true));
                                   }),
                           (state is NftListLoading)
                               ? const Center(child: CircularProgressIndicator())
@@ -88,7 +87,7 @@ class _TabBedsDetailState extends State<TabBedsDetail> {
                                   onBedTap: (bed) {
                                     Navigator.pushNamed(context, R.nftInfo,
                                         arguments: InfoIndividualParams(
-                                            bed: bed.toEntity(), buy: true));
+                                            bed: bed, buy: true));
                                   }),
                         ],
                       ),

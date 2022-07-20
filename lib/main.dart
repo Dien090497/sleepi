@@ -112,6 +112,7 @@ bool onIosBackground(ServiceInstance service) {
 
 Future<void> onStart(ServiceInstance service) async {
   final audioPlayer = AudioPlayer();
+  await audioPlayer.setReleaseMode(ReleaseMode.loop);
   if (service is AndroidServiceInstance) {
     service.on(Const.setAsForeground).listen((event) {
       service.setAsForegroundService();
@@ -141,10 +142,28 @@ Future<void> onStart(ServiceInstance service) async {
           "Alarm: ${DateFormat('HH:mm dd/MM/yyyy').format(wakeUp).toString()}",
     );
   }
-  Timer.periodic(Duration(minutes: time), (timer) async {
+  Timer.periodic(Duration(minutes: time), (timer) {
     log('FLUTTER BACKGROUND SERVICE: ${DateTime.now()}');
-    audioPlayer.setReleaseMode(ReleaseMode.loop);
-    audioPlayer.play(AssetSource(Const.soundAlarm[sound]));
+    final isPlaying = audioPlayer.state == PlayerState.playing;
+    if (!isPlaying) {
+      audioPlayer.play(
+        AssetSource(Const.soundAlarm[sound]),
+        ctx: AudioContext(
+          android: AudioContextAndroid(
+            isSpeakerphoneOn: true,
+            stayAwake: true,
+            contentType: AndroidContentType.music,
+            usageType: AndroidUsageType.media,
+            audioFocus: AndroidAudioFocus.gain,
+          ),
+          iOS: AudioContextIOS(
+            defaultToSpeaker: false,
+            category: AVAudioSessionCategory.ambient,
+            options: [AVAudioSessionOptions.defaultToSpeaker],
+          ),
+        ),
+      );
+    }
     timer.cancel();
   });
 }

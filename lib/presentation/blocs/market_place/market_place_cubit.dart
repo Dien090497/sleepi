@@ -61,13 +61,11 @@ class MarketPlaceCubit extends Cubit<MarketPlaceState> {
   Future<void> getMarketPlace(MarketSchema param) async {
     final result = await _marketPlaceUseCase.call(param);
     result.fold((l) {
-      print('getMarketPlace  on errr    ${l}');
       error = true;
       loadMore = false;
       if (isClosed) return;
       emit(MarketPlaceState.fail('$l'));
     }, (success) {
-      print('getMarketPlace  on success    ${success.list.length}');
       error = false;
       if (success.list.length == limit) {
         page++;
