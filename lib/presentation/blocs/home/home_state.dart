@@ -2,7 +2,6 @@ import 'package:flutter/foundation.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:slee_fi/common/enum/enum.dart';
 import 'package:slee_fi/entities/bed_entity/bed_entity.dart';
-import 'package:slee_fi/entities/item_entity/item_entity.dart';
 import 'package:slee_fi/models/user_status_tracking_model/user_status_tracking_model.dart';
 
 part 'home_state.freezed.dart';
@@ -16,7 +15,7 @@ class HomeState with _$HomeState {
   const factory HomeState.loaded({
     required List<BedEntity> bedList,
     required BedEntity? selectedBed,
-    ItemEntity? selectedItem,
+    BedEntity? selectedItem,
     @Default('') String errorMessage,
     @Default(ErrorType.none) ErrorType errorType,
     @Default(true) bool loadMoreBed,

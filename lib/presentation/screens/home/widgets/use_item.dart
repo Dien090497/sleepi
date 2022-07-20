@@ -109,7 +109,8 @@ class UseItem extends StatelessWidget {
                               ),
                               const SizedBox(height: 12),
                               SFText(
-                                keyText: state.selectedItem!.effect,
+                                // TODO: change value
+                                keyText: 'state.selectedItem!.effect',
                                 style: TextStyles.lightGrey14,
                                 maxLines: 1,
                               ),

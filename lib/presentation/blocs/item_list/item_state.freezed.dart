@@ -20,7 +20,7 @@ mixin _$ItemState {
   TResult when<TResult extends Object?>({
     required TResult Function() init,
     required TResult Function() loading,
-    required TResult Function(List<ItemEntity>? itemList, bool loadMoreItem)
+    required TResult Function(List<BedEntity>? itemList, bool loadMoreItem)
         loaded,
   }) =>
       throw _privateConstructorUsedError;
@@ -28,14 +28,14 @@ mixin _$ItemState {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? init,
     TResult Function()? loading,
-    TResult Function(List<ItemEntity>? itemList, bool loadMoreItem)? loaded,
+    TResult Function(List<BedEntity>? itemList, bool loadMoreItem)? loaded,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? init,
     TResult Function()? loading,
-    TResult Function(List<ItemEntity>? itemList, bool loadMoreItem)? loaded,
+    TResult Function(List<BedEntity>? itemList, bool loadMoreItem)? loaded,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -121,7 +121,7 @@ class _$ItemStateInitital implements ItemStateInitital {
   TResult when<TResult extends Object?>({
     required TResult Function() init,
     required TResult Function() loading,
-    required TResult Function(List<ItemEntity>? itemList, bool loadMoreItem)
+    required TResult Function(List<BedEntity>? itemList, bool loadMoreItem)
         loaded,
   }) {
     return init();
@@ -132,7 +132,7 @@ class _$ItemStateInitital implements ItemStateInitital {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? init,
     TResult Function()? loading,
-    TResult Function(List<ItemEntity>? itemList, bool loadMoreItem)? loaded,
+    TResult Function(List<BedEntity>? itemList, bool loadMoreItem)? loaded,
   }) {
     return init?.call();
   }
@@ -142,7 +142,7 @@ class _$ItemStateInitital implements ItemStateInitital {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? init,
     TResult Function()? loading,
-    TResult Function(List<ItemEntity>? itemList, bool loadMoreItem)? loaded,
+    TResult Function(List<BedEntity>? itemList, bool loadMoreItem)? loaded,
     required TResult orElse(),
   }) {
     if (init != null) {
@@ -233,7 +233,7 @@ class _$ItemStateLoading implements ItemStateLoading {
   TResult when<TResult extends Object?>({
     required TResult Function() init,
     required TResult Function() loading,
-    required TResult Function(List<ItemEntity>? itemList, bool loadMoreItem)
+    required TResult Function(List<BedEntity>? itemList, bool loadMoreItem)
         loaded,
   }) {
     return loading();
@@ -244,7 +244,7 @@ class _$ItemStateLoading implements ItemStateLoading {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? init,
     TResult Function()? loading,
-    TResult Function(List<ItemEntity>? itemList, bool loadMoreItem)? loaded,
+    TResult Function(List<BedEntity>? itemList, bool loadMoreItem)? loaded,
   }) {
     return loading?.call();
   }
@@ -254,7 +254,7 @@ class _$ItemStateLoading implements ItemStateLoading {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? init,
     TResult Function()? loading,
-    TResult Function(List<ItemEntity>? itemList, bool loadMoreItem)? loaded,
+    TResult Function(List<BedEntity>? itemList, bool loadMoreItem)? loaded,
     required TResult orElse(),
   }) {
     if (loading != null) {
@@ -307,7 +307,7 @@ abstract class _$$ItemStateLoadedCopyWith<$Res> {
   factory _$$ItemStateLoadedCopyWith(
           _$ItemStateLoaded value, $Res Function(_$ItemStateLoaded) then) =
       __$$ItemStateLoadedCopyWithImpl<$Res>;
-  $Res call({List<ItemEntity>? itemList, bool loadMoreItem});
+  $Res call({List<BedEntity>? itemList, bool loadMoreItem});
 }
 
 /// @nodoc
@@ -330,7 +330,7 @@ class __$$ItemStateLoadedCopyWithImpl<$Res>
       itemList: itemList == freezed
           ? _value._itemList
           : itemList // ignore: cast_nullable_to_non_nullable
-              as List<ItemEntity>?,
+              as List<BedEntity>?,
       loadMoreItem: loadMoreItem == freezed
           ? _value.loadMoreItem
           : loadMoreItem // ignore: cast_nullable_to_non_nullable
@@ -343,12 +343,12 @@ class __$$ItemStateLoadedCopyWithImpl<$Res>
 
 class _$ItemStateLoaded implements ItemStateLoaded {
   const _$ItemStateLoaded(
-      {final List<ItemEntity>? itemList, this.loadMoreItem = true})
+      {final List<BedEntity>? itemList, this.loadMoreItem = true})
       : _itemList = itemList;
 
-  final List<ItemEntity>? _itemList;
+  final List<BedEntity>? _itemList;
   @override
-  List<ItemEntity>? get itemList {
+  List<BedEntity>? get itemList {
     final value = _itemList;
     if (value == null) return null;
     // ignore: implicit_dynamic_type
@@ -390,7 +390,7 @@ class _$ItemStateLoaded implements ItemStateLoaded {
   TResult when<TResult extends Object?>({
     required TResult Function() init,
     required TResult Function() loading,
-    required TResult Function(List<ItemEntity>? itemList, bool loadMoreItem)
+    required TResult Function(List<BedEntity>? itemList, bool loadMoreItem)
         loaded,
   }) {
     return loaded(itemList, loadMoreItem);
@@ -401,7 +401,7 @@ class _$ItemStateLoaded implements ItemStateLoaded {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? init,
     TResult Function()? loading,
-    TResult Function(List<ItemEntity>? itemList, bool loadMoreItem)? loaded,
+    TResult Function(List<BedEntity>? itemList, bool loadMoreItem)? loaded,
   }) {
     return loaded?.call(itemList, loadMoreItem);
   }
@@ -411,7 +411,7 @@ class _$ItemStateLoaded implements ItemStateLoaded {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? init,
     TResult Function()? loading,
-    TResult Function(List<ItemEntity>? itemList, bool loadMoreItem)? loaded,
+    TResult Function(List<BedEntity>? itemList, bool loadMoreItem)? loaded,
     required TResult orElse(),
   }) {
     if (loaded != null) {
@@ -457,10 +457,10 @@ class _$ItemStateLoaded implements ItemStateLoaded {
 
 abstract class ItemStateLoaded implements ItemState {
   const factory ItemStateLoaded(
-      {final List<ItemEntity>? itemList,
+      {final List<BedEntity>? itemList,
       final bool loadMoreItem}) = _$ItemStateLoaded;
 
-  List<ItemEntity>? get itemList;
+  List<BedEntity>? get itemList;
   bool get loadMoreItem;
   @JsonKey(ignore: true)
   _$$ItemStateLoadedCopyWith<_$ItemStateLoaded> get copyWith =>

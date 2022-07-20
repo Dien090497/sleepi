@@ -5,7 +5,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:slee_fi/common/enum/enum.dart';
 import 'package:slee_fi/di/injector.dart';
 import 'package:slee_fi/entities/bed_entity/bed_entity.dart';
-import 'package:slee_fi/entities/item_entity/item_entity.dart';
 import 'package:slee_fi/models/user_status_tracking_model/user_status_tracking_model.dart';
 import 'package:slee_fi/presentation/blocs/home/home_state.dart';
 import 'package:slee_fi/usecase/add_item_to_bed_usecase.dart';
@@ -199,7 +198,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
   }
 
   Future<double> _estimateTracking(
-      BedEntity bed, bool insuranceEnabled, ItemEntity? itemEntity) async {
+      BedEntity bed, bool insuranceEnabled, BedEntity? itemEntity) async {
     final result = await _estimateTrackingUC.call(EstimateTrackingParam(
         bedId: bed.id,
         itemId: itemEntity?.id,

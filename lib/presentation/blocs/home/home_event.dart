@@ -12,7 +12,7 @@ class FetchBed extends HomeEvent {
 }
 
 class AddItem extends HomeEvent {
-  final ItemEntity item;
+  final BedEntity item;
 
   const AddItem(this.item);
 
