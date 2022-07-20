@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'dart:developer';
 
 import 'package:dio/dio.dart';
 import 'package:equatable/equatable.dart';
@@ -26,14 +25,15 @@ class FailureMessage extends Failure {
         final error = data !is String
             ? jsonDecode(data)['error']['message']
             : data['error']['details']['message'];
-        log('=-=--==-=-$e');
         if (error is String) {
           return FailureMessage(error);
         } else if (error is List<String>) {
           return FailureMessage(error.first);
         }
       }
-    } catch (_) {}
+    } catch (_) {
+      throw Exception(_);
+    }
     throw Exception(e);
   }
 
