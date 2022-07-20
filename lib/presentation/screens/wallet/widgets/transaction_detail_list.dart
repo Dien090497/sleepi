@@ -75,12 +75,7 @@ class _TransactionDetailListState extends State<TransactionDetailList> {
               loadMore = false;
             });
           }
-          if(state is GetUrlDetailTransactionSuccess){
-            urlDetailTransaction = state.url;
-            print(urlDetailTransaction);
-            final url = Uri.parse(urlDetailTransaction);
-            launchUrl(url);
-          }
+
         },
         builder: (context, state) {
           final cubit = context.read<HistoryTransactionCubit>();
