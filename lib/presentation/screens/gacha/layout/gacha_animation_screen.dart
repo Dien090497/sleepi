@@ -38,20 +38,6 @@ class _GachaAnimationScreenState extends State<GachaAnimationScreen> with Ticker
      audioPlayer.setReleaseMode(ReleaseMode.loop);
      audioPlayer.play(
        AssetSource(args?.audio ?? Const.normalGachaAudio),
-        ctx: AudioContext(
-            android: AudioContextAndroid(
-              isSpeakerphoneOn: false,
-              stayAwake: false,
-              contentType: AndroidContentType.music,
-              usageType: AndroidUsageType.notificationRingtone,
-              audioFocus: AndroidAudioFocus.gainTransientMayDuck,
-            ),
-            iOS: AudioContextIOS(
-              defaultToSpeaker: true,
-              category: AVAudioSessionCategory.ambient,
-              options: [AVAudioSessionOptions.mixWithOthers] +[AVAudioSessionOptions.duckOthers],
-            ),
-        )
      );
    }
 
