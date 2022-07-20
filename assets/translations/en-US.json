@@ -459,5 +459,6 @@
   "holding_bonus": "Bed NFT Holding Bonus",
   "stacking_bonus": "Staking Bonus",
   "latest": "Latest",
-  "not_granted": "Authorization not granted"
+  "not_granted": "Authorization not granted",
+  "put_positive_correct_to": "Put positive correction to {}"
 }

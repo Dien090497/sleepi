@@ -13,4 +13,9 @@ class ItemEntity with _$ItemEntity {
       required String? quality,
       required int level,
       required String type}) = _ItemEntity;
+
+  // Red Candy: Put positive correction to Efficiency
+  // Blue Candy: Put positive correction to LUCK
+  // White Candy: Put positive correction to Special
+  // Purple Candy: Put positive correction to Resilience
 }

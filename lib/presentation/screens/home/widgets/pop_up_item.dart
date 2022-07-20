@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
@@ -14,12 +15,12 @@ class PopUpItem extends StatelessWidget {
       required this.icon,
       required this.onConfirm,
       this.onCancel,
-      required this.effect,
+      required this.type,
       required this.level})
       : super(key: key);
 
   final String icon;
-  final String effect;
+  final String type;
   final String id;
   final int level;
   final VoidCallback onConfirm;
@@ -51,7 +52,7 @@ class PopUpItem extends StatelessWidget {
                 ),
                 const SizedBox(height: 4),
                 SFText(
-                  keyText: effect,
+                  keyText: LocaleKeys.put_positive_correct_to.tr(args: [type.tr()]),
                   style: TextStyles.lightGrey14,
                 ),
               ],

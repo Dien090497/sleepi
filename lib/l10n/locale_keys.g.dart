@@ -461,5 +461,6 @@ abstract class  LocaleKeys {
   static const stacking_bonus = 'stacking_bonus';
   static const latest = 'latest';
   static const not_granted = 'not_granted';
+  static const put_positive_correct_to = 'put_positive_correct_to';
 
 }
