@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:slee_fi/common/widgets/sf_gridview.dart';
 import 'package:slee_fi/common/widgets/sf_sub_tab_bar.dart';
+import 'package:slee_fi/entities/bed_entity/bed_entity.dart';
 import 'package:slee_fi/l10n/locale_keys.g.dart';
-import 'package:slee_fi/models/bed_model/beb_model.dart';
 import 'package:slee_fi/presentation/blocs/nft_list/nft_list_cubit.dart';
 import 'package:slee_fi/presentation/blocs/nft_list/nft_list_state.dart';
 import 'package:slee_fi/presentation/screens/home/widgets/my_item_short_widget.dart';
@@ -18,7 +18,7 @@ class TabItemDetail extends StatefulWidget {
 }
 
 class _TabItemDetailState extends State<TabItemDetail> {
-  List<BedModel> listItems = [];
+  List<BedEntity> listItems = [];
   final CategoryType categoryType = CategoryType.item;
 
   // void _showItemDialog(BuildContext context, String img, String id) {

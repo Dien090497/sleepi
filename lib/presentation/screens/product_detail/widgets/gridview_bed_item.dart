@@ -8,8 +8,8 @@ import 'package:slee_fi/common/widgets/cached_image.dart';
 import 'package:slee_fi/common/widgets/sf_gridview.dart';
 import 'package:slee_fi/common/widgets/sf_percent_border.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
+import 'package:slee_fi/entities/bed_entity/bed_entity.dart';
 import 'package:slee_fi/l10n/locale_keys.g.dart';
-import 'package:slee_fi/models/bed_model/beb_model.dart';
 import 'package:slee_fi/presentation/screens/product_detail/widgets/top_left_banner.dart';
 
 class GridViewBedItem extends StatelessWidget {
@@ -24,9 +24,9 @@ class GridViewBedItem extends StatelessWidget {
       required this.isLoadMore})
       : super(key: key);
 
-  final List<BedModel> beds;
-  final ValueChanged<BedModel>? onBedTap;
-  final ValueChanged<BedModel>? onBuyTap;
+  final List<BedEntity> beds;
+  final ValueChanged<BedEntity>? onBedTap;
+  final ValueChanged<BedEntity>? onBuyTap;
   final bool isScroll;
   final Function? onRefresh;
   final Function? onLoadMore;
@@ -66,7 +66,7 @@ class GridViewBedItem extends StatelessWidget {
                   top: 20,
                   left: -30,
                   child: TopLeftBanner(
-                    text: bed.nftClass ?? ''.reCase(StringCase.camelCase),
+                    text: bed.nftClass.reCase(StringCase.camelCase),
                     textColor: qualityColor,
                   ),
                 ),

@@ -1,5 +1,4 @@
 import 'dart:core';
-import 'dart:developer';
 
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:slee_fi/entities/bed_entity/bed_entity.dart';
@@ -88,10 +87,8 @@ class BedModel {
       this.endTime,
       this.jewels);
 
-  factory BedModel.fromJson(Map<String, dynamic> json) {
-    log('json is   $json');
-    return _$BedModelFromJson(json);
-  }
+  factory BedModel.fromJson(Map<String, dynamic> json) =>
+      _$BedModelFromJson(json);
 
   Map<String, dynamic> toJson() => _$BedModelToJson(this);
 
