@@ -102,8 +102,7 @@ class HomeScreen extends StatelessWidget {
                                 style: TextStyles.lightGrey12,
                               ),
                               const SizedBox(height: 16),
-                              if (state is HomeLoaded)
-                                AlarmBell(selectedBed: state.selectedBed,),
+                              const AlarmBell(),
                             ],
                           );
                         },

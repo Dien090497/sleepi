@@ -12,7 +12,6 @@ import 'package:slee_fi/common/widgets/sf_dialog.dart';
 import 'package:slee_fi/common/widgets/sf_percent_border.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
 import 'package:slee_fi/di/injector.dart';
-import 'package:slee_fi/entities/bed_entity/bed_entity.dart';
 import 'package:slee_fi/l10n/locale_keys.g.dart';
 import 'package:slee_fi/presentation/blocs/home/home_bloc.dart';
 import 'package:slee_fi/presentation/blocs/home/home_state.dart';
@@ -25,9 +24,7 @@ import 'package:slee_fi/presentation/screens/tracking/tracking_screen.dart';
 import 'package:slee_fi/resources/resources.dart';
 
 class AlarmBell extends StatelessWidget {
-  const AlarmBell({Key? key, this.selectedBed}) : super(key: key);
-
-  final BedEntity? selectedBed;
+  const AlarmBell({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -44,11 +41,11 @@ class AlarmBell extends StatelessWidget {
               timeWakeUp: wakeUp.millisecondsSinceEpoch,
               tokenEarn: state.tokenEarn,
               fromRoute: R.bottomNavigation,
-              imageBed: selectedBed?.image,
+              imageBed: state.selectedBed?.image,
             ),
           );
         }
-        if (state is HomeLoaded && state.errorMessage!='') {
+        if (state is HomeLoaded && state.errorMessage != '') {
           Navigator.pop(context, true);
           showMessageDialog(context, state.errorMessage);
         }
@@ -141,8 +138,8 @@ class AlarmBell extends StatelessWidget {
                           context,
                           R.tracking,
                           arguments: TrackingParams(
-                            timeStart: state.userStatusTracking!.tracking!
-                                    .startSleep! *
+                            timeStart: state
+                                    .userStatusTracking!.tracking!.startSleep! *
                                 1000,
                             timeWakeUp:
                                 state.userStatusTracking!.tracking!.wakeUp! *
@@ -150,7 +147,7 @@ class AlarmBell extends StatelessWidget {
                             tokenEarn: double.parse(
                                 state.userStatusTracking!.tracking!.estEarn!),
                             fromRoute: R.bottomNavigation,
-                            imageBed: selectedBed?.image,
+                            imageBed: state.selectedBed?.image,
                           ),
                         );
                       }
