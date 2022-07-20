@@ -62,10 +62,7 @@ class SocketBloc extends Bloc<SocketEvent, SocketState> {
       },
       (r) {
         final List<SocketEntity> list = [];
-        print('socket is   ${r.socket}    $maxSocket' );
         for (int i = 0; i <= maxSocket; i++) {
-          print(
-              'add socket ready  $i    ${r.jewels.length}      ${(i < r.jewels.length)}   ${(i >= r.jewels.length && i < (r.socket ?? 0))}   ${(i > (r.socket ?? 0) && i <= maxSocket)}  ');
           if (i < r.jewels.length) {
             list.add(SocketEntity(
                 socketType: SocketType.ready, jewelEntity: r.jewels[i]));

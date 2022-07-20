@@ -5,14 +5,12 @@ import 'package:slee_fi/common/style/text_styles.dart';
 class TimePicker extends StatelessWidget {
   const TimePicker({
     Key? key,
-    required this.onHourChange,
-    required this.onMinuteChange,
-    required this.selectedTime,
+    required this.onTimeSelected,
+    required this.onScrolling,
   }) : super(key: key);
 
-  final Function(int hour) onHourChange;
-  final Function(int hour) onMinuteChange;
-  final DateTime selectedTime;
+  final Function(DateTime) onTimeSelected;
+  final Function(bool isScrolling) onScrolling;
 
   @override
   Widget build(BuildContext context) {
@@ -24,31 +22,9 @@ class TimePicker extends StatelessWidget {
       child: Stack(
         alignment: Alignment.center,
         children: [
-          Container(
-            height: 320.0,
-            margin: const EdgeInsets.symmetric(horizontal: 50),
-            child: Row(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: <Widget>[
-                Expanded(
-                    child: SFDatePicker(
-                  datas: List<int>.generate(24, (i) => i),
-                  selectedTime: selectedTime.hour,
-                  alignment: Alignment.centerRight,
-                  offAxisFraction: -.5,
-                  timeChanged: onHourChange,
-                )),
-                Expanded(
-                    child: SFDatePicker(
-                  datas: List<int>.generate(60, (i) => i),
-                  selectedTime: selectedTime.minute,
-                  alignment: Alignment.centerLeft,
-                  offAxisFraction: .5,
-                  timeChanged: onMinuteChange,
-                  useMagnifier: true,
-                )),
-              ],
-            ),
+          _DatePicker(
+            onTimeSelected: onTimeSelected,
+            onScrolling: onScrolling,
           ),
           SizedBox(
             height: 320,
@@ -104,11 +80,104 @@ class TimePicker extends StatelessWidget {
   }
 }
 
+class _DatePicker extends StatefulWidget {
+  const _DatePicker(
+      {Key? key, required this.onTimeSelected, required this.onScrolling})
+      : super(key: key);
+
+  final Function(DateTime) onTimeSelected;
+  final Function(bool isScrolling) onScrolling;
+
+  @override
+  State<_DatePicker> createState() => _DatePickerState();
+}
+
+class _DatePickerState extends State<_DatePicker> {
+  bool isSelectingH = false;
+  bool isSelectingM = false;
+  late int selectedH;
+  late int selectedM;
+
+  late DateTime selectedTime;
+
+  @override
+  void initState() {
+    final now = DateTime.now();
+    selectedH = now.hour;
+    selectedM = now.minute;
+    selectedTime = now;
+    super.initState();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      height: 320.0,
+      margin: const EdgeInsets.symmetric(horizontal: 50),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: <Widget>[
+          Expanded(
+              child: SFDatePicker(
+            datas: List<int>.generate(24, (i) => i),
+            selectedTime: selectedH,
+            alignment: Alignment.centerRight,
+            offAxisFraction: -.5,
+            timeChanged: (hour) {
+              isSelectingH = false;
+              selectedH = hour;
+              if (!isSelectingH && !isSelectingM) {
+                widget.onTimeSelected(_convertSelectedTime());
+              }
+              widget.onScrolling(isSelectingM || isSelectingH);
+            },
+            onStartScroll: () {
+              isSelectingH = true;
+              widget.onScrolling(isSelectingM || isSelectingH);
+            },
+          )),
+          Expanded(
+              child: SFDatePicker(
+            datas: List<int>.generate(60, (i) => i),
+            selectedTime: selectedM,
+            alignment: Alignment.centerLeft,
+            offAxisFraction: .5,
+            timeChanged: (minute) {
+              isSelectingM = false;
+              selectedM = minute;
+              if (!isSelectingM && !isSelectingH) {
+                widget.onTimeSelected(_convertSelectedTime());
+              }
+              widget.onScrolling(isSelectingM || isSelectingH);
+            },
+            useMagnifier: true,
+            onStartScroll: () {
+              isSelectingM = true;
+              widget.onScrolling(isSelectingM || isSelectingH);
+            },
+          )),
+        ],
+      ),
+    );
+  }
+
+  DateTime _convertSelectedTime() {
+    final newSelected = DateTime(selectedTime.year, selectedTime.month,
+        selectedTime.day, selectedH, selectedM);
+    final now = DateTime.now();
+    final wakeUpTime = newSelected.compareTo(now) <= 0
+        ? newSelected.add(const Duration(days: 1))
+        : newSelected;
+    return wakeUpTime;
+  }
+}
+
 class SFDatePicker extends StatefulWidget {
   const SFDatePicker({
     Key? key,
     required this.timeChanged,
     required this.selectedTime,
+    required this.onStartScroll,
     required this.offAxisFraction,
     required this.alignment,
     this.useMagnifier = false,
@@ -117,6 +186,7 @@ class SFDatePicker extends StatefulWidget {
 
   final int selectedTime;
   final ValueChanged<int> timeChanged;
+  final VoidCallback onStartScroll;
   final double offAxisFraction;
   final Alignment alignment;
   final bool useMagnifier;
@@ -127,6 +197,7 @@ class SFDatePicker extends StatefulWidget {
 }
 
 class _SFDatePickerState extends State<SFDatePicker> {
+  late int temp = widget.selectedTime;
   late final controller =
       FixedExtentScrollController(initialItem: widget.selectedTime);
 
@@ -138,7 +209,6 @@ class _SFDatePickerState extends State<SFDatePicker> {
 
   @override
   Widget build(BuildContext context) {
-    int temp = 0;
     return NotificationListener<ScrollNotification>(
       onNotification: (scrollNotification) {
         final metrics = scrollNotification.metrics;
@@ -147,6 +217,9 @@ class _SFDatePickerState extends State<SFDatePicker> {
           widget.timeChanged(temp);
           return true;
         } else {
+          if (scrollNotification is ScrollStartNotification) {
+            widget.onStartScroll();
+          }
           return false;
         }
       },

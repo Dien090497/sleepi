@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:permission_handler/permission_handler.dart';
 import 'package:slee_fi/common/enum/enum.dart';
 import 'package:slee_fi/common/extensions/num_ext.dart';
 import 'package:slee_fi/common/routes/app_routes.dart';
@@ -187,7 +188,11 @@ class _ResultScreenState extends State<ResultScreen> {
                       gradient: AppColors.gradientBlueButton,
                       width: double.infinity,
                       height: 48,
-                      onPressed: () {
+                      onPressed: () async {
+                        Map<Permission, PermissionStatus> statuses = await [
+                        Permission.storage,
+                        ].request();
+                        final info = statuses[Permission.storage].toString();
                         Navigator.pushNamed(context, R.share,
                             arguments: args.fromRoute);
                       },

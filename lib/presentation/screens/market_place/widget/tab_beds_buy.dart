@@ -48,7 +48,6 @@ class _TabBedsBuyState extends State<TabBedsBuy> {
 
   @override
   Widget build(BuildContext context) {
-    print('filter bed   ${widget.cubit.params.toJson()}');
     return DefaultTabController(
       length: 2,
       child: BlocConsumer<MarketPlaceCubit, MarketPlaceState>(

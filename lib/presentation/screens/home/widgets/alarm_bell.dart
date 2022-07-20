@@ -2,6 +2,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:health/health.dart';
 import 'package:slee_fi/common/routes/app_routes.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
@@ -13,6 +14,7 @@ import 'package:slee_fi/common/widgets/sf_percent_border.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
 import 'package:slee_fi/di/injector.dart';
 import 'package:slee_fi/l10n/locale_keys.g.dart';
+import 'package:slee_fi/models/user_status_tracking_model/user_status_tracking_model.dart';
 import 'package:slee_fi/presentation/blocs/home/home_bloc.dart';
 import 'package:slee_fi/presentation/blocs/home/home_state.dart';
 import 'package:slee_fi/presentation/screens/home/widgets/button_start.dart';
@@ -22,201 +24,276 @@ import 'package:slee_fi/presentation/screens/home/widgets/pop_up_start_tracking.
 import 'package:slee_fi/presentation/screens/home/widgets/time_picker.dart';
 import 'package:slee_fi/presentation/screens/tracking/tracking_screen.dart';
 import 'package:slee_fi/resources/resources.dart';
+import 'package:slee_fi/schema/start_tracking/start_tracking_schema.dart';
+import 'package:slee_fi/usecase/start_sleep_tracking_usecase.dart';
 
 class AlarmBell extends StatelessWidget {
-  const AlarmBell({Key? key}) : super(key: key);
+  const AlarmBell({
+    Key? key,
+    required this.userStatusTracking,
+    required this.bedImage,
+    this.startRange,
+    this.endRange,
+  }) : super(key: key);
+
+  final UserStatusTrackingModel? userStatusTracking;
+  final String? bedImage;
+  final DateTime? startRange;
+  final DateTime? endRange;
 
   @override
   Widget build(BuildContext context) {
     final dateTimeUtil = getIt<DateTimeUtils>();
-    return BlocConsumer<HomeBloc, HomeState>(
-      listener: (context, state) {
-        if (state is HomeLoaded && state.startTracking) {
-          DateTime wakeUp = DateTime.now().add(Duration(minutes: state.time));
-          Navigator.pushReplacementNamed(
-            context,
-            R.tracking,
-            arguments: TrackingParams(
-              timeStart: DateTime.now().millisecondsSinceEpoch,
-              timeWakeUp: wakeUp.millisecondsSinceEpoch,
-              tokenEarn: state.tokenEarn,
-              fromRoute: R.bottomNavigation,
-              imageBed: state.selectedBed?.image,
+    final availableAt = userStatusTracking?.availableAt;
+    final now = DateTime.now();
+    DateTime selectedTime =
+        DateTime(now.year, now.month, now.day, now.hour, now.minute);
+    bool isScrolling = false;
+    bool isLoading = false;
+
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 16),
+      decoration: const BoxDecoration(
+        color: AppColors.dark,
+        borderRadius: BorderRadius.only(
+          topRight: Radius.circular(40),
+          topLeft: Radius.circular(40),
+        ),
+      ),
+      child: StatefulBuilder(builder: (context, setState) {
+        return Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            TimePicker(
+              onTimeSelected: (time) {
+                selectedTime = time;
+                isScrolling = false;
+                setState(() {});
+              },
+              onScrolling: (scrolling) {
+                if (scrolling) {
+                  isScrolling = scrolling;
+                  setState(() {});
+                }
+              },
             ),
-          );
-        }
-        if (state is HomeLoaded && state.errorMessage.isNotEmpty) {
-          showMessageDialog(context, state.errorMessage);
-        }
-      },
-      builder: (context, state) {
-        final bed = state is HomeLoaded ? state.selectedBed : null;
-        final userStatusTracking =
-            state is HomeLoaded ? state.userStatusTracking : null;
-        final enableStart = state is HomeLoaded &&
-            state.startRange != null &&
-            state.endRange != null &&
-            _correctTime(
-                state.startRange!, state.endRange!, state.selectedTime);
-        return Container(
-          padding: const EdgeInsets.symmetric(horizontal: 16),
-          decoration: const BoxDecoration(
-            color: AppColors.dark,
-            borderRadius: BorderRadius.only(
-              topRight: Radius.circular(40),
-              topLeft: Radius.circular(40),
+            const SizedBox(height: 16),
+            Text(
+              '${LocaleKeys.range.tr()}: ${startRange != null && endRange != null ? '${dateTimeUtil.HHmm(startRange!)}-${dateTimeUtil.HHmm(endRange!)}' : '03:00-06:00'}',
+              style: TextStyles.white16500,
             ),
-          ),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              TimePicker(
-                onHourChange: (hour) {
-                  context.read<HomeBloc>().add(ChangeHour(hour));
-                },
-                onMinuteChange: (minute) {
-                  context.read<HomeBloc>().add(ChangeMinute(minute));
-                },
-                selectedTime:
-                    state is HomeLoaded ? state.selectedTime : DateTime.now(),
-              ),
-              const SizedBox(height: 16),
-              Text(
-                '${LocaleKeys.range.tr()}: ${state is HomeLoaded && bed != null && state.startRange != null && state.endRange != null ? '${dateTimeUtil.HHmm(state.startRange!)}-${dateTimeUtil.HHmm(state.endRange!)}' : '03:00-06:00'}',
-                style: TextStyles.white16500,
-              ),
-              const SizedBox(height: 24),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Expanded(
-                    child: SFButtonOutLined(
-                      title: LocaleKeys.alarm_bell,
-                      onPressed: () {
-                        Navigator.pushNamed(context, R.alarmSoundEffect);
-                      },
-                      fixedSize: const Size(274, 40),
-                      textStyle: TextStyles.blue16,
-                      borderColor: AppColors.blue,
-                      iconColor: AppColors.blue,
-                      withBorder: 1,
-                    ),
-                  ),
-                  const SizedBox(width: 22),
-                  HomeSwitch(
-                    onChanged: (bool value) {
-                      context.read<HomeBloc>().add(ChangeStatusAlarm(value));
+            const SizedBox(height: 24),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Expanded(
+                  child: SFButtonOutLined(
+                    title: LocaleKeys.alarm_bell,
+                    onPressed: () {
+                      Navigator.pushNamed(context, R.alarmSoundEffect);
                     },
-                    isOn: state is HomeLoaded && state.enableAlarm,
+                    fixedSize: const Size(274, 40),
+                    textStyle: TextStyles.blue16,
+                    borderColor: AppColors.blue,
+                    iconColor: AppColors.blue,
+                    withBorder: 1,
                   ),
-                ],
-              ),
-              const SizedBox(height: 16),
-              if (userStatusTracking != null)
-                ButtonStart(
-                  enableStart: enableStart,
-                  onStartTracking: () {
-                    if (state is HomeLoaded) {
-                      if (state.userStatusTracking!.tracking == null) {
-                        showCustomAlertDialog(context,
-                            children: PopUpConfirmStartTracking(
-                          onPressed: () {
-                            context.read<HomeBloc>().add(const StartTracking());
-                          },
-                        ));
-                      } else {
-                        Navigator.pushNamed(
-                          context,
-                          R.tracking,
-                          arguments: TrackingParams(
-                            timeStart: state
-                                    .userStatusTracking!.tracking!.startSleep! *
-                                1000,
-                            timeWakeUp:
-                                state.userStatusTracking!.tracking!.wakeUp! *
-                                    1000,
-                            tokenEarn: double.parse(
-                                state.userStatusTracking!.tracking!.estEarn!),
-                            fromRoute: R.bottomNavigation,
-                            imageBed: state.selectedBed?.image,
-                          ),
-                        );
-                      }
-                    }
+                ),
+                const SizedBox(width: 22),
+                BlocBuilder<HomeBloc, HomeState>(
+                  builder: (context, state) {
+                    return HomeSwitch(
+                      onChanged: (bool value) {
+                        context.read<HomeBloc>().add(ChangeStatusAlarm(value));
+                      },
+                      isOn: state is HomeLoaded && state.enableAlarm,
+                    );
                   },
                 ),
-              const SizedBox(height: 32),
-              Row(
-                children: [
-                  Expanded(
-                    child: Stack(
-                      alignment: Alignment.centerLeft,
-                      children: [
-                        SFPercentBorderGradient(
-                          valueActive:
-                              state is HomeLoaded ? state.tokenEarn : 0,
-                          totalValue: 150,
-                          linearGradient: AppColors.gradientBluePurple,
-                          lineHeight: 18,
-                          barRadius: 20,
-                          backgroundColor: Colors.white.withOpacity(0.05),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                          child: SFText(
-                            keyText:
-                                '${state is HomeLoaded ? state.tokenEarn.toStringAsFixed(2) : 0}/150 SLFT',
-                            style: TextStyles.white10,
-                          ),
-                        )
-                      ],
-                    ),
-                  ),
-                  const SizedBox(width: 12),
-                  GestureDetector(
-                    onTap: () => Navigator.pushNamed(context, R.question),
-                    child: SvgPicture.asset(
-                      Ics.icCircleQuestion,
-                      width: 20,
-                      height: 20,
-                      color: AppColors.lightGrey,
-                    ),
-                  ),
-                  const SizedBox(width: 12),
-                  GestureDetector(
-                    onTap: () => Navigator.pushNamed(context, R.feedback),
-                    child: SvgPicture.asset(
-                      Ics.starOutlined,
-                      width: 20,
-                      height: 20,
-                      color: AppColors.yellow,
-                    ),
-                  ),
-                ],
+              ],
+            ),
+            const SizedBox(height: 16),
+            if (userStatusTracking != null)
+              ButtonStart(
+                enableStart: !isLoading &&
+                    !isScrolling &&
+                    _correctTime(startRange!, endRange!, selectedTime),
+                availableAt: availableAt,
+                onStartTracking: () async {
+                  isLoading = true;
+                  setState(() {});
+                  _startPress(context, selectedTime).then((_) {
+                    isLoading = false;
+                    setState(() {});
+                  });
+                },
               ),
-              const SizedBox(height: 29),
-              const LuckyBox(),
-              const SizedBox(height: 20),
-            ],
-          ),
+            const SizedBox(height: 32),
+            Row(
+              children: [
+                Expanded(
+                  child: BlocBuilder<HomeBloc, HomeState>(
+                    builder: (context, state) {
+                      return Stack(
+                        alignment: Alignment.centerLeft,
+                        children: [
+                          SFPercentBorderGradient(
+                            valueActive:
+                                state is HomeLoaded ? state.tokenEarn : 0,
+                            totalValue: 150,
+                            linearGradient: AppColors.gradientBluePurple,
+                            lineHeight: 18,
+                            barRadius: 20,
+                            backgroundColor: Colors.white.withOpacity(0.05),
+                          ),
+                          Padding(
+                            padding:
+                                const EdgeInsets.symmetric(horizontal: 16.0),
+                            child: SFText(
+                              keyText:
+                                  '${state is HomeLoaded ? state.tokenEarn.toStringAsFixed(2) : 0}/150 SLFT',
+                              style: TextStyles.white10,
+                            ),
+                          )
+                        ],
+                      );
+                    },
+                  ),
+                ),
+                const SizedBox(width: 12),
+                GestureDetector(
+                  onTap: () => Navigator.pushNamed(context, R.question),
+                  child: SvgPicture.asset(
+                    Ics.icCircleQuestion,
+                    width: 20,
+                    height: 20,
+                    color: AppColors.lightGrey,
+                  ),
+                ),
+                const SizedBox(width: 12),
+                GestureDetector(
+                  onTap: () => Navigator.pushNamed(context, R.feedback),
+                  child: SvgPicture.asset(
+                    Ics.starOutlined,
+                    width: 20,
+                    height: 20,
+                    color: AppColors.yellow,
+                  ),
+                ),
+              ],
+            ),
+            const SizedBox(height: 29),
+            const LuckyBox(),
+            const SizedBox(height: 20),
+          ],
         );
-      },
+      }),
     );
+  }
+
+  Future<void> _startPress(BuildContext context, DateTime selectedTime) async {
+    final isGranted = await _requestHealthAuthorization();
+    return showCustomAlertDialog(
+      context,
+      children: PopUpConfirmStartTracking(
+        onPressed: () async {
+          final state = BlocProvider.of<HomeBloc>(context).state;
+          if (state is HomeLoaded) {
+            final startRes = await getIt<StartSleepTrackingUseCase>()
+                .call(StartTrackingSchema(
+              isEnableInsurance: state.enableInsurance,
+              bedUsed: state.selectedBed!.id,
+              wakeUp: '${selectedTime.toUtc().millisecondsSinceEpoch ~/ 1000}',
+              alrm: state.enableAlarm,
+              itemUsed: state.selectedItem?.id ?? 0,
+            ));
+            Navigator.pop(context);
+            startRes.fold(
+              (l) {
+                showMessageDialog(context, '$l');
+              },
+              (r) {
+                Navigator.pushNamed(
+                  context,
+                  R.tracking,
+                  arguments: TrackingParams(
+                    timeStart: userStatusTracking!.tracking!.startSleep! * 1000,
+                    timeWakeUp: userStatusTracking!.tracking!.wakeUp! * 1000,
+                    tokenEarn:
+                        double.parse(userStatusTracking!.tracking!.estEarn!),
+                    fromRoute: R.bottomNavigation,
+                    imageBed: bedImage,
+                  ),
+                );
+              },
+            );
+          }
+        },
+      ),
+    );
+    if (isGranted) {
+      showCustomAlertDialog(
+        context,
+        children: PopUpConfirmStartTracking(
+          onPressed: () async {
+            final state = BlocProvider.of<HomeBloc>(context).state;
+            if (state is HomeLoaded) {
+              final startRes = await getIt<StartSleepTrackingUseCase>()
+                  .call(StartTrackingSchema(
+                isEnableInsurance: state.enableInsurance,
+                bedUsed: state.selectedBed!.id,
+                wakeUp:
+                    '${selectedTime.toUtc().millisecondsSinceEpoch ~/ 1000}',
+                alrm: state.enableAlarm,
+                itemUsed: state.selectedItem?.id ?? 0,
+              ));
+              startRes.fold(
+                (l) {
+                  showMessageDialog(context, '$l');
+                },
+                (r) {
+                  Navigator.pushNamed(
+                    context,
+                    R.tracking,
+                    arguments: TrackingParams(
+                      timeStart:
+                          userStatusTracking!.tracking!.startSleep! * 1000,
+                      timeWakeUp: userStatusTracking!.tracking!.wakeUp! * 1000,
+                      tokenEarn:
+                          double.parse(userStatusTracking!.tracking!.estEarn!),
+                      fromRoute: R.bottomNavigation,
+                      imageBed: bedImage,
+                    ),
+                  );
+                },
+              );
+            }
+          },
+        ),
+      );
+    } else {
+      showMessageDialog(context, LocaleKeys.not_granted);
+    }
+  }
+
+  Future<bool> _requestHealthAuthorization() async {
+    final HealthFactory health = HealthFactory();
+
+    final types = [
+      HealthDataType.SLEEP_IN_BED,
+      HealthDataType.SLEEP_ASLEEP,
+      HealthDataType.SLEEP_AWAKE,
+      HealthDataType.SLEEP_DEEP,
+      HealthDataType.SLEEP_REM,
+      HealthDataType.SLEEP_LIGHT,
+    ];
+
+    return await health.requestAuthorization(types);
   }
 
   bool _correctTime(
       DateTime startRange, DateTime endRange, DateTime selectedTime) {
-    return startRange.isBefore(selectedTime) && endRange.isAfter(selectedTime);
-    // final now = DateTime.now();
-    // final nextDay = now.add(const Duration(days: 1));
-    // final wakeUpTimeInNextDay =
-    //     DateTime(nextDay.year, nextDay.month, nextDay.day, hour, minute);
-    // final wakeUpTimeInDay =
-    //     DateTime(now.year, now.month, now.day, hour, minute);
-    // final wakeUpTime = hour < now.hour ? wakeUpTimeInNextDay : wakeUpTimeInDay;
-    // return wakeUpTime.isAfter(startRange) && wakeUpTime.isBefore(endRange) ||
-    //     endRange.difference(wakeUpTime).inSeconds == 0 ||
-    //     wakeUpTime.difference(startRange).inSeconds == 0;
-    return true;
+    return startRange.compareTo(selectedTime) <= 0 &&
+        endRange.compareTo(selectedTime) >= 0;
   }
 }
