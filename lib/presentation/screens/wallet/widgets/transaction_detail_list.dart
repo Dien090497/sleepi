@@ -75,7 +75,6 @@ class _TransactionDetailListState extends State<TransactionDetailList> {
               loadMore = false;
             });
           }
-
         },
         builder: (context, state) {
           final cubit = context.read<HistoryTransactionCubit>();

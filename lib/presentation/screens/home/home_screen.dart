@@ -25,7 +25,7 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
-        BlocProvider(create: (_) => HomeBloc()..add(RefreshBed())),
+        BlocProvider(create: (_) => HomeBloc()..add(const FetchBed())),
         BlocProvider(create: (_) => LuckyBoxCubit()..fetchLuckyBox()),
         BlocProvider(create: (_) => ItemBloc()),
       ],
@@ -79,7 +79,7 @@ class HomeScreen extends StatelessWidget {
                               if (state is HomeLoaded &&
                                   state.bedList.isNotEmpty) ...[
                                 GestureDetector(
-                                  onTap: () {
+                                  onTap: () async {
                                     launchInsurance(context);
                                   },
                                   child: Row(
@@ -101,13 +101,13 @@ class HomeScreen extends StatelessWidget {
                                 keyText: LocaleKeys.you_can_set_your_alarm_here,
                                 style: TextStyles.lightGrey12,
                               ),
+                              const SizedBox(height: 16),
+                              const AlarmBell(),
                             ],
                           );
                         },
                       ),
                     ),
-                    const SizedBox(height: 16),
-                    const AlarmBell(),
                   ],
                 ),
               ),

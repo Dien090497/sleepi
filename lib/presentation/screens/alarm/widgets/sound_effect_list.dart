@@ -1,3 +1,4 @@
+import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:slee_fi/common/const/const.dart';
@@ -13,7 +14,22 @@ class AlarmSoundEffectList extends StatefulWidget {
 }
 
 class _AlarmSoundEffectListState extends State<AlarmSoundEffectList> {
+  final audioPlayer = AudioPlayer();
+  late final SharedPreferences preferences;
+
   int temp = 0;
+
+  @override
+  void initState() {
+    super.initState();
+    init();
+  }
+
+  @override
+  void dispose() {
+    audioPlayer.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -37,15 +53,26 @@ class _AlarmSoundEffectListState extends State<AlarmSoundEffectList> {
                       size: 20,
                     )
                   : const SizedBox(height: 20),
-              onPressed: () async {
-                SharedPreferences preferences = await SharedPreferences.getInstance();
-                await preferences.setInt(Const.sound, index);
+              onPressed: () {
+                preferences.setInt(Const.sound, index);
                 setState(() {
                   temp = index;
                 });
+                _playSound();
               },
             );
           }),
     );
+  }
+
+  void init() async {
+    preferences = await SharedPreferences.getInstance();
+    temp = preferences.getInt(Const.sound) ?? 0;
+  }
+
+  void _playSound() async {
+    await audioPlayer.stop();
+    await audioPlayer.release();
+    await audioPlayer.play(AssetSource(Const.soundAlarm[temp]));
   }
 }

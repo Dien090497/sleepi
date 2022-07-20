@@ -11,7 +11,7 @@ class MarketPlaceUseCase extends UseCase<ListMarketPlaceModel, MarketSchema> {
   MarketPlaceUseCase(this._iMarketPlaceRepository);
 
   @override
-  Future<Either<Failure, ListMarketPlaceModel>> call(MarketSchema params) {
+  Future<Either<FailureMessage, ListMarketPlaceModel>> call(MarketSchema params) {
     return _iMarketPlaceRepository.getListMarketPlace(params);
   }
 }

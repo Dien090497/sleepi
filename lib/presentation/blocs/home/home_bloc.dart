@@ -2,10 +2,12 @@ import 'dart:async';
 
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:health/health.dart';
 import 'package:slee_fi/common/enum/enum.dart';
 import 'package:slee_fi/di/injector.dart';
 import 'package:slee_fi/entities/bed_entity/bed_entity.dart';
 import 'package:slee_fi/entities/item_entity/item_entity.dart';
+import 'package:slee_fi/l10n/locale_keys.g.dart';
 import 'package:slee_fi/presentation/blocs/home/home_state.dart';
 import 'package:slee_fi/schema/start_tracking/start_tracking_schema.dart';
 import 'package:slee_fi/usecase/add_item_to_bed_usecase.dart';
@@ -42,7 +44,6 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
   final _userStatusTrackingUC = getIt<GetUserStatusTrackingUseCase>();
   final _startSleepTrackingUC = getIt<StartSleepTrackingUseCase>();
 
-  int currentBedId = -1;
   int _currentPageBed = 1;
   final _limitItemPage = 10;
 
@@ -76,16 +77,36 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     });
   }
 
-  void _onRefresh(RefreshBed event, Emitter<HomeState> emit) {
+  void _onRefresh(RefreshBed event, Emitter<HomeState> emit) async {
     _currentPageBed = 1;
-    emit(const HomeState.loading());
-    add(const FetchBed());
+    final currentState = state;
+    if (currentState is HomeLoaded) {
+      if (currentState.loading) return;
+      emit(currentState.copyWith(loading: true));
+      final result = await _fetchListBedUC
+          .call(FetchHomeBedParam(_currentPageBed, _limitItemPage));
+      result.fold(
+        (l) {
+          emit(currentState.copyWith(loading: false, errorMessage: ''));
+        },
+        (r) {
+          _currentPageBed++;
+          emit(currentState.copyWith(
+            loading: false,
+            errorMessage: '',
+            bedList: r,
+            loadMoreBed: r.length >= _limitItemPage,
+          ));
+          add(UserStatusTracking());
+        },
+      );
+    }
   }
 
   void _changeBed(ChangeBed event, Emitter<HomeState> emit) {
     final currentState = state;
     if (currentState is HomeLoaded) {
-      emit(currentState.copyWith(selectedBed: event.bed));
+      emit(currentState.copyWith(selectedBed: event.bed, errorMessage: ''));
     }
     add(EstimateTracking());
   }
@@ -107,20 +128,6 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
       },
       (r) {
         _currentPageBed++;
-        final currentState = state;
-        if (r.isNotEmpty) {
-          currentBedId = r.first.id;
-        }
-
-        if (currentState is HomeLoaded) {
-          emit(currentState.copyWith(
-              bedList: r,
-              selectedBed: r.first,
-              loadMoreBed: r.length >= _limitItemPage,
-              selectedItem: null));
-          add(UserStatusTracking());
-          return;
-        }
         emit(HomeState.loaded(
             errorMessage: '',
             loading: false,
@@ -139,7 +146,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     final currentState = state;
     if (currentState is HomeLoaded && currentState.bedList.isNotEmpty) {
       final result = await _addItemToBedUC
-          .call(AddItemToBedParam(currentBedId, event.item.id));
+          .call(AddItemToBedParam(currentState.selectedBed!.id, event.item.id));
       result.fold((l) {
         emit(currentState.copyWith(
           errorMessage: l.msg,
@@ -155,8 +162,8 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
   void _removeItem(RemoveItem event, Emitter<HomeState> emit) async {
     final currentState = state;
     if (currentState is HomeLoaded && currentState.selectedItem != null) {
-      final result = await _removeItemFromBedUC
-          .call(AddItemToBedParam(currentBedId, currentState.selectedItem!.id));
+      final result = await _removeItemFromBedUC.call(AddItemToBedParam(
+          currentState.selectedBed!.id, currentState.selectedItem!.id));
       result.fold((l) {
         emit(currentState.copyWith(
           errorMessage: l.msg,
@@ -182,7 +189,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
           isEnableInsurance: currentState.enableInsurance));
       result.fold((l) => null, (r) {
         emit(
-            currentState.copyWith(tokenEarn: double.parse(r.estimateSlftEarn)));
+            currentState.copyWith(errorMessage:'',tokenEarn: double.parse(r.estimateSlftEarn)));
       });
     }
   }
@@ -193,12 +200,8 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     if (currentState is HomeLoaded) {
       var result = await _userStatusTrackingUC.call(NoParams());
       result.fold((l) => null, (r) {
-        emit(currentState.copyWith(
-            userStatusTracking: r,
-            startTracking: false,
-            minute: DateTime.now().minute,
-            hour: DateTime.now().hour,
-            time: 0));
+        emit(currentState.copyWith( errorMessage: '',
+            userStatusTracking: r, startTracking: false, time: 0));
         add(EstimateTracking());
       });
     }
@@ -207,18 +210,36 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
   void _startTracking(StartTracking event, Emitter<HomeState> emit) async {
     final currentState = state;
     if (currentState is HomeLoaded && currentState.bedList.isNotEmpty) {
-      DateTime wakeUp =
-          DateTime.now().add(Duration(minutes: currentState.time));
-      var result = await _startSleepTrackingUC.call(StartTrackingSchema(
-        isEnableInsurance: currentState.enableInsurance,
-        bedUsed: currentState.selectedBed!.id,
-        wakeUp: '${wakeUp.toUtc().millisecondsSinceEpoch ~/ 1000}',
-        alrm: currentState.enableAlarm,
-        itemUsed: currentState.selectedItem?.id ?? 0,
-      ));
-      result.fold((l) => emit(HomeState.startError('$l')), (r) {
-        emit(currentState.copyWith(startTracking: true));
-      });
+      HealthFactory health = HealthFactory();
+
+      var types = [
+        HealthDataType.SLEEP_IN_BED,
+        HealthDataType.SLEEP_ASLEEP,
+        HealthDataType.SLEEP_AWAKE,
+        HealthDataType.SLEEP_DEEP,
+        HealthDataType.SLEEP_REM,
+        HealthDataType.SLEEP_LIGHT,
+      ];
+
+      bool accessWasGranted = await health.requestAuthorization(types);
+
+      if (accessWasGranted) {
+        DateTime wakeUp =
+            DateTime.now().add(Duration(minutes: currentState.time));
+        var result = await _startSleepTrackingUC.call(StartTrackingSchema(
+          isEnableInsurance: currentState.enableInsurance,
+          bedUsed: currentState.selectedBed!.id,
+          wakeUp: '${wakeUp.toUtc().millisecondsSinceEpoch ~/ 1000}',
+          alrm: currentState.enableAlarm,
+          itemUsed: currentState.selectedItem?.id ?? 0,
+        ));
+        result.fold((l) => emit(currentState.copyWith(errorMessage: '$l')),
+            (r) {
+          emit(currentState.copyWith(startTracking: true));
+        });
+      } else {
+        emit(currentState.copyWith(errorMessage: LocaleKeys.not_granted));
+      }
     }
   }
 
@@ -244,7 +265,9 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
 
     if (currentState is HomeLoaded) {
       emit(currentState.copyWith(
-          hour: event.hour, time: _getTimeWithHour(event.hour, currentState)));
+          errorMessage: '',
+          hour: event.hour,
+          time: _getTimeWithHour(event.hour, currentState)));
     }
   }
 
@@ -253,6 +276,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
 
     if (currentState is HomeLoaded) {
       emit(currentState.copyWith(
+          errorMessage: '',
           minute: event.minute,
           time: _getTimeWithMinutes(event.minute, currentState)));
     }

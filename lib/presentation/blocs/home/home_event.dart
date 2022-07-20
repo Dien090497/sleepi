@@ -35,6 +35,8 @@ class ChangeBed extends HomeEvent {
 }
 
 class RefreshBed extends HomeEvent {
+  const RefreshBed();
+
   @override
   List<Object?> get props => [];
 }

@@ -68,159 +68,180 @@ class _MintScreenState extends State<MintScreen> {
                           minHeight: size.height,
                         ),
                         child: IntrinsicHeight(
-                          child: Column(
-                            children: [
-                              Padding(
-                                padding: const EdgeInsets.symmetric(
-                                    horizontal: 24.0),
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
+                          child: state is MintStateLoaded
+                              ? Column(
                                   children: [
-                                    ConnectBedWidget(
-                                      bedParent1: args,
-                                    ),
-                                    const SizedBox(
-                                      height: 60,
-                                    ),
-                                    SFLabelValue(
-                                      label: LocaleKeys.token_consumptions,
-                                      value: state is MintStateLoaded && state.infoMinting!=null ? '${state.infoMinting!.fee} SLFT' : '',
-                                      styleValue: TextStyles.lightWhite14,
-                                      styleLabel: TextStyles.lightWhite14,
-                                    ),
-                                    const SizedBox(
-                                      height: 24,
-                                    ),
-                                    Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        Text(
-                                          '${LocaleKeys.insurance.tr()}: ${args.insurancePercent}%',
-                                          style: TextStyles.bold16LightWhite,
-                                        ),
-                                        SizedBox(
-                                          height: 24,
-                                          child: CupertinoSwitch(
-                                            activeColor: AppColors.green,
-                                            value: state is MintStateLoaded ? state.enableInsurance : true,
-                                            onChanged: (value) {
-                                              cubit
-                                                  .changeEnableInsurance(value);
-                                              setState(() {});
-                                            },
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                    const SizedBox(
-                                      height: 2,
-                                    ),
-                                    GestureDetector(
-                                      onTap: () {
-                                        launchInsurance(context);
-                                      },
-                                      child: Row(
+                                    Padding(
+                                      padding: const EdgeInsets.symmetric(
+                                          horizontal: 24.0),
+                                      child: Column(
                                         crossAxisAlignment:
-                                            CrossAxisAlignment.center,
+                                            CrossAxisAlignment.start,
                                         children: [
-                                          SFText(
-                                            keyText:
-                                                LocaleKeys.what_is_insurance,
-                                            style: TextStyles.lightGrey12,
+                                          ConnectBedWidget(
+                                            bedParent1: args,
                                           ),
                                           const SizedBox(
-                                            width: 8,
+                                            height: 60,
                                           ),
-                                          const SFIcon(Ics.icCircleQuestion),
+                                          SFLabelValue(
+                                            label:
+                                                LocaleKeys.token_consumptions,
+                                            value: state.infoMinting != null
+                                                ? '${state.infoMinting!.fee} SLFT'
+                                                : '',
+                                            styleValue: TextStyles.lightWhite14,
+                                            styleLabel: TextStyles.lightWhite14,
+                                          ),
+                                          const SizedBox(
+                                            height: 24,
+                                          ),
+                                          Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceBetween,
+                                            children: [
+                                              Text(
+                                                '${LocaleKeys.insurance.tr()}: ${args.insurancePercent}%',
+                                                style:
+                                                    TextStyles.bold16LightWhite,
+                                              ),
+                                              SizedBox(
+                                                height: 24,
+                                                child: CupertinoSwitch(
+                                                  activeColor: AppColors.green,
+                                                  value: state.enableInsurance,
+                                                  onChanged: (value) {
+                                                    cubit.changeEnableInsurance(
+                                                        value);
+                                                    setState(() {});
+                                                  },
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                          const SizedBox(
+                                            height: 2,
+                                          ),
+                                          GestureDetector(
+                                            onTap: () {
+                                              launchInsurance(context);
+                                            },
+                                            child: Row(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.center,
+                                              children: [
+                                                SFText(
+                                                  keyText: LocaleKeys
+                                                      .what_is_insurance,
+                                                  style: TextStyles.lightGrey12,
+                                                ),
+                                                const SizedBox(
+                                                  width: 8,
+                                                ),
+                                                const SFIcon(
+                                                    Ics.icCircleQuestion),
+                                              ],
+                                            ),
+                                          ),
+                                          const SizedBox(
+                                            height: 24,
+                                          ),
                                         ],
                                       ),
                                     ),
-                                    const SizedBox(
-                                      height: 24,
-                                    ),
-                                  ],
-                                ),
-                              ),
-                              Expanded(
-                                child: Container(
-                                  padding: const EdgeInsets.symmetric(
-                                    horizontal: 24,
-                                    vertical: 20,
-                                  ),
-                                  decoration: const BoxDecoration(
-                                    color: AppColors.dark,
-                                    borderRadius: BorderRadius.only(
-                                      topRight: Radius.circular(40),
-                                      topLeft: Radius.circular(40),
-                                    ),
-                                  ),
-                                  child: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      SFText(
-                                        keyText:
-                                            LocaleKeys.without_insurance_case,
-                                        style: TextStyles.lightGrey14,
-                                      ),
-                                      const SizedBox(height: 12),
-                                      Container(
-                                        decoration: BoxDecoration(
-                                          color:
-                                              AppColors.white.withOpacity(0.05),
-                                          borderRadius:
-                                              BorderRadius.circular(16),
+                                    Expanded(
+                                      child: Container(
+                                        padding: const EdgeInsets.symmetric(
+                                          horizontal: 24,
+                                          vertical: 20,
+                                        ),
+                                        decoration: const BoxDecoration(
+                                          color: AppColors.dark,
+                                          borderRadius: BorderRadius.only(
+                                            topRight: Radius.circular(40),
+                                            topLeft: Radius.circular(40),
+                                          ),
                                         ),
                                         child: Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
                                           children: [
-                                            SFLabelValue(
-                                              label: LocaleKeys.common_bed_box,
-                                              styleLabel:
-                                                  TextStyles.lightWhite14,
-                                              value: state is MintStateLoaded && state.infoMinting!=null ? '${100 - state.infoMinting!.brokenRate.brokenRate}%' : '',
-                                              colorBorder: Colors.transparent,
+                                            SFText(
+                                              keyText: LocaleKeys
+                                                  .without_insurance_case,
+                                              style: TextStyles.lightGrey14,
                                             ),
-                                            Padding(
-                                              padding:
-                                                  const EdgeInsets.symmetric(
-                                                      horizontal: 16.0),
-                                              child: Divider(
-                                                height: 1,
-                                                color: Colors.white
+                                            const SizedBox(height: 12),
+                                            Container(
+                                              decoration: BoxDecoration(
+                                                color: AppColors.white
                                                     .withOpacity(0.05),
+                                                borderRadius:
+                                                    BorderRadius.circular(16),
+                                              ),
+                                              child: Column(
+                                                children: [
+                                                  SFLabelValue(
+                                                    label: LocaleKeys
+                                                        .common_bed_box,
+                                                    styleLabel:
+                                                        TextStyles.lightWhite14,
+                                                    value: state.infoMinting !=
+                                                            null
+                                                        ? '${100 - state.infoMinting!.brokenRate.brokenRate}%'
+                                                        : '',
+                                                    colorBorder:
+                                                        Colors.transparent,
+                                                  ),
+                                                  Padding(
+                                                    padding: const EdgeInsets
+                                                            .symmetric(
+                                                        horizontal: 16.0),
+                                                    child: Divider(
+                                                      height: 1,
+                                                      color: Colors.white
+                                                          .withOpacity(0.05),
+                                                    ),
+                                                  ),
+                                                  SFLabelValue(
+                                                    label: LocaleKeys
+                                                        .one_bed_will_be_burned,
+                                                    styleLabel:
+                                                        TextStyles.lightWhite14,
+                                                    value: state.infoMinting !=
+                                                            null
+                                                        ? '${state.infoMinting!.brokenRate.brokenRate}%'
+                                                        : '',
+                                                    colorBorder:
+                                                        Colors.transparent,
+                                                  ),
+                                                ],
                                               ),
                                             ),
-                                            SFLabelValue(
-                                              label: LocaleKeys
-                                                  .one_bed_will_be_burned,
-                                              styleLabel:
-                                                  TextStyles.lightWhite14,
-                                              value: state is MintStateLoaded && state.infoMinting!=null ? '${state.infoMinting!.brokenRate.brokenRate}%' : '',
-                                              colorBorder: Colors.transparent,
+                                            const SizedBox(height: 24),
+                                            SFText(
+                                              keyText: LocaleKeys
+                                                  .with_insurance_case,
+                                              style: TextStyles.lightGrey14,
                                             ),
+                                            const SizedBox(height: 17),
+                                            SFLabelValue(
+                                                label: LocaleKeys.bed_box,
+                                                styleLabel:
+                                                    TextStyles.lightWhite14,
+                                                value: state.infoMinting != null
+                                                    ? '100%'
+                                                    : ''),
                                           ],
                                         ),
                                       ),
-                                      const SizedBox(height: 24),
-                                      SFText(
-                                        keyText: LocaleKeys.with_insurance_case,
-                                        style: TextStyles.lightGrey14,
-                                      ),
-                                      const SizedBox(height: 17),
-                                      SFLabelValue(
-                                          label: LocaleKeys.bed_box,
-                                          styleLabel: TextStyles.lightWhite14,
-                                          value: state is MintStateLoaded && state.infoMinting!=null ? '100%' : ''),
-                                    ],
-                                  ),
-                                ),
-                              ),
-                              const SizedBox(
-                                height: 24,
-                              )
-                            ],
-                          ),
+                                    ),
+                                    const SizedBox(
+                                      height: 24,
+                                    )
+                                  ],
+                                )
+                              : Container(),
                         ),
                       ),
                     ),

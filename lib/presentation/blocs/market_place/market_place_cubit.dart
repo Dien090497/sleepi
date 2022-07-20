@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:developer';
 
 import 'package:easy_localization/easy_localization.dart';
@@ -36,9 +37,10 @@ class MarketPlaceCubit extends Cubit<MarketPlaceState> {
         page: page,
         maxLevel: categoryType == CategoryType.bed ? 30 : 5,
         limit: limit,
+        minLevel: categoryType == CategoryType.bed ? 0 : 1,
         categoryId: categoryType.type,
         sortPrice: Const.sortCondition[0]);
-    log("params : ${params.toJson()}");
+    log("params : ${json.encode(params.toJson())}");
     emit(const MarketPlaceState.loading());
     getMarketPlace(params);
   }
@@ -59,11 +61,13 @@ class MarketPlaceCubit extends Cubit<MarketPlaceState> {
   Future<void> getMarketPlace(MarketSchema param) async {
     final result = await _marketPlaceUseCase.call(param);
     result.fold((l) {
+      print('getMarketPlace  on errr    ${l}');
       error = true;
       loadMore = false;
       if (isClosed) return;
       emit(MarketPlaceState.fail('$l'));
     }, (success) {
+      print('getMarketPlace  on success    ${success.list.length}');
       error = false;
       if (success.list.length == limit) {
         page++;

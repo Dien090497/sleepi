@@ -191,12 +191,12 @@ class UserImplementation extends IUserRepository {
   @override
   Future<Either<FailureMessage, List<ItemEntity>>> fetchItemOwner(
       FilterItemSchema filterItemSchema) async {
-    try {
+    // try {
       final result = await _authDataSource.fetchItemOwner(filterItemSchema);
       return Right(result.list.map((e) => e.toEntity()).toList());
-    } catch (e) {
-      return Left(FailureMessage.fromException(e));
-    }
+    // } catch (e) {
+    //   return Left(FailureMessage.fromException(e));
+    // }
   }
 
   @override
@@ -332,7 +332,7 @@ class UserImplementation extends IUserRepository {
     try {
       final result =
           await _authDataSource.getListJewel(param.limit, param.page);
-      var list = result.map((e) => e.toEntity()).toList();
+      var list = result.list.map((e) => e.toEntity()).toList();
       return Right(list);
     } catch (e) {
       return Left(FailureMessage.fromException(e));

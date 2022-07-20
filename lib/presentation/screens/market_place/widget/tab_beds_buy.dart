@@ -117,10 +117,10 @@ class _TabBedsBuyState extends State<TabBedsBuy> {
                                 cubit.params.maxLevel,
                               ),
                               max: 30,
-                              min: 1.0),
+                              min: 0),
                           LocaleKeys.mint.tr(): FilterSliderValues(
                               max: 7.0,
-                              min: 1.0,
+                              min: 0,
                               value: SfRangeValues(cubit.params.minBedMint,
                                   cubit.params.maxBedMint)),
                         },

@@ -95,8 +95,8 @@ class _ViewGif extends StatelessWidget {
     );
   }
 
-  _showPopUpInfoLuckyBox(BuildContext context, String image, String speedUpCost,
-      int waitingTime, int id) {
+  void _showPopUpInfoLuckyBox(BuildContext context, String image,
+      String speedUpCost, int waitingTime, int id) {
     showCustomAlertDialog(context,
         padding: const EdgeInsets.all(24),
         children: PopUpOpenLuckyBox(
@@ -109,7 +109,7 @@ class _ViewGif extends StatelessWidget {
             }));
   }
 
-  _showConfirmSpeedUp(BuildContext context, String amount, int id) {
+  void _showConfirmSpeedUp(BuildContext context, String amount, int id) {
     showCustomAlertDialog(context,
         padding: const EdgeInsets.all(24),
         children: PupUpConfirmSpeedUp(

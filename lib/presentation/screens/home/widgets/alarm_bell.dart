@@ -37,16 +37,17 @@ class AlarmBell extends StatelessWidget {
             context,
             R.tracking,
             arguments: TrackingParams(
-                timeStart: DateTime.now().millisecondsSinceEpoch,
-                timeWakeUp: wakeUp.millisecondsSinceEpoch,
-                tokenEarn: state.tokenEarn,
-                fromRoute: R.bottomNavigation),
+              timeStart: DateTime.now().millisecondsSinceEpoch,
+              timeWakeUp: wakeUp.millisecondsSinceEpoch,
+              tokenEarn: state.tokenEarn,
+              fromRoute: R.bottomNavigation,
+              imageBed: state.selectedBed?.image,
+            ),
           );
         }
-        if (state is HomeStartError) {
+        if (state is HomeLoaded && state.errorMessage != '') {
           Navigator.pop(context, true);
-          showMessageDialog(context, state.message)
-              .then((value) => context.read<HomeBloc>().add(RefreshBed()));
+          showMessageDialog(context, state.errorMessage);
         }
       },
       builder: (context, state) {
@@ -54,15 +55,15 @@ class AlarmBell extends StatelessWidget {
         final userStatusTracking =
             state is HomeLoaded ? state.userStatusTracking : null;
         final now = DateTime.now();
-        final nowWithoutMinute =
+        final nowWithoutSecond =
             DateTime(now.year, now.month, now.day, now.hour, now.minute);
-        final minTime = nowWithoutMinute.add(Duration(
+        final minTime = nowWithoutSecond.add(Duration(
             minutes: bed == null
                 ? 0
                 : bed.startTime == null
                     ? 0
                     : (bed.startTime! * 60).toInt()));
-        final maxTime = nowWithoutMinute.add(Duration(
+        final maxTime = nowWithoutSecond.add(Duration(
             minutes: bed == null
                 ? 0
                 : bed.endTime == null
@@ -137,15 +138,17 @@ class AlarmBell extends StatelessWidget {
                           context,
                           R.tracking,
                           arguments: TrackingParams(
-                              timeStart: state.userStatusTracking!.tracking!
-                                      .startSleep! *
-                                  1000,
-                              timeWakeUp:
-                                  state.userStatusTracking!.tracking!.wakeUp! *
-                                      1000,
-                              tokenEarn: double.parse(
-                                  state.userStatusTracking!.tracking!.estEarn!),
-                              fromRoute: R.bottomNavigation),
+                            timeStart: state
+                                    .userStatusTracking!.tracking!.startSleep! *
+                                1000,
+                            timeWakeUp:
+                                state.userStatusTracking!.tracking!.wakeUp! *
+                                    1000,
+                            tokenEarn: double.parse(
+                                state.userStatusTracking!.tracking!.estEarn!),
+                            fromRoute: R.bottomNavigation,
+                            imageBed: state.selectedBed?.image,
+                          ),
                         );
                       }
                     }

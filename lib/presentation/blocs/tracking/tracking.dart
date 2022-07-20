@@ -4,7 +4,6 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:health/health.dart';
 import 'package:slee_fi/di/injector.dart';
-import 'package:slee_fi/l10n/locale_keys.g.dart';
 import 'package:slee_fi/presentation/blocs/tracking/tracking_state.dart';
 import 'package:slee_fi/schema/sleep_tracking/data_health.dart';
 import 'package:slee_fi/schema/sleep_tracking/data_health_schema.dart';
@@ -60,10 +59,13 @@ class TrackingCubit extends Cubit<TrackingState> {
           datas: healthDataList,
         ));
       } catch (e) {
+        log('health data error: $e');
         emit(TrackingState.error('$e'));
       }
     } else {
-      emit(const TrackingState.error(LocaleKeys.not_granted));
+      wakeUp(DataHealthSchema(
+        datas: [],
+      ));
     }
   }
 
