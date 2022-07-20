@@ -1,5 +1,4 @@
 import 'dart:core';
-import 'dart:developer';
 
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:slee_fi/entities/bed_entity/bed_entity.dart';
@@ -88,10 +87,8 @@ class BedModel {
       this.endTime,
       this.jewels);
 
-  factory BedModel.fromJson(Map<String, dynamic> json) {
-    log('json is   $json');
-    return _$BedModelFromJson(json);
-  }
+  factory BedModel.fromJson(Map<String, dynamic> json) =>
+      _$BedModelFromJson(json);
 
   Map<String, dynamic> toJson() => _$BedModelToJson(this);
 
@@ -122,12 +119,12 @@ class BedModel {
       quality: quality,
       type: type,
       isMint: isMint,
-      efficiency: efficiency is String ? double.parse(efficiency) : efficiency,
-      luck: luck is String ? double.parse(luck) : luck,
-      bonus: bonus is String ? double.parse(bonus) : bonus,
-      special: special is String ? double.parse(special) : special,
-      resilience: resilience is String ? double.parse(resilience) : resilience,
-      durability: durability is String ? double.parse(durability) : durability,
+      efficiency: efficiency is! String ? efficiency.toDouble() : double.parse(efficiency),
+      luck: luck is! String ? luck.toDouble() : double.parse(luck),
+      bonus: bonus is! String ? bonus.toDouble() : double.parse(bonus),
+      special: special is! String ? special.toDouble() : double.parse(special),
+      resilience: resilience is! String ? resilience.toDouble() : double.parse(resilience),
+      durability: durability is! String ? durability.toDouble() : double.parse(durability),
       time: time,
       startTime: startTime,
       endTime: endTime,

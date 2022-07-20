@@ -29,10 +29,10 @@ class IndividualCubit extends Cubit<IndividualState> {
         .call(BedDetailParams(bedId: state.bed.nftId, isBase: state.isBase));
     res.fold(
       (l) {
-        emit(state.copyWith(isRefresh: false));
+        emit(state.copyWith(isRefresh: false, isLoading: false));
       },
       (r) {
-        emit(state.copyWith(isRefresh: false, bed: r));
+        emit(state.copyWith(isRefresh: false, bed: r, isLoading: false));
       },
     );
   }
