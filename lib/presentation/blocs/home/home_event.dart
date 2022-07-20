@@ -67,21 +67,3 @@ class ChangeStatusAlarm extends HomeEvent {
   @override
   List<Object?> get props => [enableAlarm];
 }
-
-class SelectTime extends HomeEvent {
-  final DateTime time;
-
-  const SelectTime(this.time);
-
-  @override
-  List<Object?> get props => [time];
-}
-
-class ChangeMinute extends HomeEvent {
-  final int minute;
-
-  const ChangeMinute(this.minute);
-
-  @override
-  List<Object?> get props => [minute];
-}

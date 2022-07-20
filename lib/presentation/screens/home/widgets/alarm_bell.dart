@@ -32,14 +32,14 @@ class AlarmBell extends StatelessWidget {
     Key? key,
     required this.userStatusTracking,
     required this.bedImage,
-    this.startRange,
-    this.endRange,
+    this.startTime,
+    this.endTime,
   }) : super(key: key);
 
   final UserStatusTrackingModel? userStatusTracking;
   final String? bedImage;
-  final DateTime? startRange;
-  final DateTime? endRange;
+  final double? startTime;
+  final double? endTime;
 
   @override
   Widget build(BuildContext context) {
@@ -50,6 +50,8 @@ class AlarmBell extends StatelessWidget {
         DateTime(now.year, now.month, now.day, now.hour, now.minute);
     bool isScrolling = false;
     bool isLoading = false;
+    DateTime? startRange = _getRange(startTime);
+    DateTime? endRange = _getRange(endTime);
 
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 16),
@@ -68,6 +70,8 @@ class AlarmBell extends StatelessWidget {
               onTimeSelected: (time) {
                 selectedTime = time;
                 isScrolling = false;
+                startRange = _getRange(startTime);
+                endRange = _getRange(endTime);
                 setState(() {});
               },
               onScrolling: (scrolling) {
@@ -121,11 +125,19 @@ class AlarmBell extends StatelessWidget {
                 availableAt: availableAt,
                 onStartTracking: () async {
                   isLoading = true;
+                  startRange = _getRange(startTime);
+                  endRange = _getRange(endTime);
                   setState(() {});
-                  _startPress(context, selectedTime).then((_) {
-                    isLoading = false;
-                    setState(() {});
-                  });
+                  final isValidTime =
+                      _correctTime(startRange!, endRange!, selectedTime);
+                  if (isValidTime) {
+                    _startPress(context, selectedTime).then((_) {
+                      isLoading = false;
+                      setState(() {});
+                    });
+                  } else {
+                    showMessageDialog(context, 'Invalid Time');
+                  }
                 },
               ),
             const SizedBox(height: 32),
@@ -193,46 +205,9 @@ class AlarmBell extends StatelessWidget {
 
   Future<void> _startPress(BuildContext context, DateTime selectedTime) async {
     final isGranted = await _requestHealthAuthorization();
-    return showCustomAlertDialog(
-      context,
-      children: PopUpConfirmStartTracking(
-        onPressed: () async {
-          final state = BlocProvider.of<HomeBloc>(context).state;
-          if (state is HomeLoaded) {
-            final startRes = await getIt<StartSleepTrackingUseCase>()
-                .call(StartTrackingSchema(
-              isEnableInsurance: state.enableInsurance,
-              bedUsed: state.selectedBed!.id,
-              wakeUp: '${selectedTime.toUtc().millisecondsSinceEpoch ~/ 1000}',
-              alrm: state.enableAlarm,
-              itemUsed: state.selectedItem?.id ?? 0,
-            ));
-            Navigator.pop(context);
-            startRes.fold(
-              (l) {
-                showMessageDialog(context, '$l');
-              },
-              (r) {
-                Navigator.pushNamed(
-                  context,
-                  R.tracking,
-                  arguments: TrackingParams(
-                    timeStart: userStatusTracking!.tracking!.startSleep! * 1000,
-                    timeWakeUp: userStatusTracking!.tracking!.wakeUp! * 1000,
-                    tokenEarn:
-                        double.parse(userStatusTracking!.tracking!.estEarn!),
-                    fromRoute: R.bottomNavigation,
-                    imageBed: bedImage,
-                  ),
-                );
-              },
-            );
-          }
-        },
-      ),
-    );
+
     if (isGranted) {
-      showCustomAlertDialog(
+      return showCustomAlertDialog(
         context,
         children: PopUpConfirmStartTracking(
           onPressed: () async {
@@ -247,6 +222,7 @@ class AlarmBell extends StatelessWidget {
                 alrm: state.enableAlarm,
                 itemUsed: state.selectedItem?.id ?? 0,
               ));
+              Navigator.pop(context);
               startRes.fold(
                 (l) {
                   showMessageDialog(context, '$l');
@@ -256,11 +232,9 @@ class AlarmBell extends StatelessWidget {
                     context,
                     R.tracking,
                     arguments: TrackingParams(
-                      timeStart:
-                          userStatusTracking!.tracking!.startSleep! * 1000,
-                      timeWakeUp: userStatusTracking!.tracking!.wakeUp! * 1000,
-                      tokenEarn:
-                          double.parse(userStatusTracking!.tracking!.estEarn!),
+                      timeStart: DateTime.now().millisecondsSinceEpoch,
+                      timeWakeUp: selectedTime.millisecondsSinceEpoch,
+                      tokenEarn: state.tokenEarn,
                       fromRoute: R.bottomNavigation,
                       imageBed: bedImage,
                     ),
@@ -289,6 +263,16 @@ class AlarmBell extends StatelessWidget {
     ];
 
     return await health.requestAuthorization(types);
+  }
+
+  DateTime? _getRange(double? time) {
+    if (time == null) return null;
+    final now = DateTime.now();
+    final nowWithoutSecond =
+        DateTime(now.year, now.month, now.day, now.hour, now.minute);
+    final nowWithoutSec =
+        nowWithoutSecond.add(Duration(minutes: (time * 60).toInt()));
+    return nowWithoutSec;
   }
 
   bool _correctTime(
