@@ -1,4 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.sotatek.slee_fi">
 
     <uses-permission android:name="android.permission.QUERY_ALL_PACKAGES" />
@@ -10,7 +11,9 @@
     <application
         android:name="${applicationName}"
         android:icon="@mipmap/launcher_icon"
-        android:label="SLeeFi">
+        android:usesCleartextTraffic="true"
+        android:label="SLeeFi"
+        tools:targetApi="m">
 
         <service android:name="com.pravera.flutter_foreground_task.service.ForegroundService" />
 

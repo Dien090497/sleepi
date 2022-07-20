@@ -25,11 +25,11 @@ class _AlarmSoundEffectListState extends State<AlarmSoundEffectList> {
     init();
   }
 
-
   @override
   void dispose() {
-    audioPlayer.stop();
-    audioPlayer.dispose();
+    audioPlayer
+      ..stop()
+      ..dispose();
     super.dispose();
   }
 
@@ -69,11 +69,12 @@ class _AlarmSoundEffectListState extends State<AlarmSoundEffectList> {
 
   void init() async {
     preferences = await SharedPreferences.getInstance();
-    setState(() => temp = preferences.getInt(Const.sound) ?? 0);
+    temp = preferences.getInt(Const.sound) ?? 0;
   }
 
-  _playSound() async {
+  void _playSound() async {
     await audioPlayer.stop();
+    await audioPlayer.release();
     audioPlayer.play(AssetSource(Const.soundAlarm[temp]));
   }
 }

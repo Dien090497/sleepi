@@ -48,14 +48,11 @@ void main() async {
     },
     appRunner: () {
       return BlocOverrides.runZoned(
-        () => runApp(DefaultAssetBundle(
-          bundle: SentryAssetBundle(),
-          child: EasyLocalization(
-            supportedLocales: Const.locales,
-            path: 'assets/translations',
-            fallbackLocale: Const.localeEN,
-            child: const MyApp(),
-          ),
+        () => runApp(EasyLocalization(
+          supportedLocales: Const.locales,
+          path: 'assets/translations',
+          fallbackLocale: Const.localeEN,
+          child: const MyApp(),
         )),
         blocObserver: AppBlocObserver(),
       );
@@ -82,7 +79,6 @@ class AppBlocObserver extends BlocObserver {
 }
 
 Future<void> initializeService() async {
-  WidgetsFlutterBinding.ensureInitialized();
   final service = FlutterBackgroundService();
   await service.configure(
     androidConfiguration: AndroidConfiguration(
@@ -135,7 +131,7 @@ Future<void> onStart(ServiceInstance service) async {
   final int sound = preferences.getInt(Const.sound) ?? 0;
   DateTime wakeUp = DateTime.fromMillisecondsSinceEpoch(timeWakeUp);
   final int time = wakeUp.difference(DateTime.now()).inMinutes;
-  print('=-=-=-$time');
+  log('=-=-=-$time');
   // bring to foreground
   if (service is AndroidServiceInstance) {
     service.setForegroundNotificationInfo(
@@ -148,5 +144,6 @@ Future<void> onStart(ServiceInstance service) async {
     log('FLUTTER BACKGROUND SERVICE: ${DateTime.now()}');
     audioPlayer.setReleaseMode(ReleaseMode.loop);
     audioPlayer.play(AssetSource(Const.soundAlarm[sound]));
+    timer.cancel();
   });
 }
