@@ -1,9 +1,9 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:slee_fi/common/extensions/string_x.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
+import 'package:slee_fi/common/widgets/cached_image.dart';
 import 'package:slee_fi/common/widgets/sf_buttons.dart';
 import 'package:slee_fi/common/widgets/sf_card.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
@@ -28,7 +28,7 @@ class JewelDialogBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final qualityColor =  jewel.quality?.qualityBedColor?? AppColors.commonBed;
+    final qualityColor = jewel.quality?.qualityBedColor ?? AppColors.commonBed;
     return Stack(
       children: [
         Positioned(
@@ -52,34 +52,15 @@ class JewelDialogBody extends StatelessWidget {
               ),
               alignment: Alignment.center,
               padding: const EdgeInsets.all(10),
-              child: CachedNetworkImage(
-                imageUrl: jewel.image,
-                placeholder: (context, url) => const Center(
-                  child: SizedBox(
-                    width: 40.0,
-                    height: 40.0,
-                    child: CircularProgressIndicator(),
-                  ),
-                ),
-                errorWidget: (context, url, error) => Container(
-                    decoration: const BoxDecoration(
-                      color: AppColors.transparent,
-                      borderRadius: BorderRadius.all(Radius.circular(10)),
-                    ),
-                    child: const Icon(Icons.error)),
-                imageBuilder: (context, imageProvider) => Container(
-                  decoration: BoxDecoration(
-                    image: DecorationImage(
-                        image: imageProvider, fit: BoxFit.cover),
-                  ),
-                ),
+              child: CachedImage(
+                image: jewel.image,
                 width: 60,
                 height: 60,
               ),
             ),
             const SizedBox(height: 20),
             SFText(
-              keyText: '${LocaleKeys.luck_jewel.tr()} (${jewel.level})',
+              keyText: '${jewel.jewelType.tr()} ${LocaleKeys.jewel.tr()} (${jewel.level})',
               style: TextStyles.white1w700size16,
             ),
             const SizedBox(height: 24),
@@ -101,27 +82,6 @@ class JewelDialogBody extends StatelessWidget {
               child: Row(
                 children: [
                   SFText(
-                    keyText: LocaleKeys.attributes,
-                    style: TextStyles.lightGrey16,
-                  ),
-                  const SizedBox(width: 4),
-                  Expanded(
-                    child: SFText(
-                      keyText: '+${jewel.luck} ${LocaleKeys.luck.tr()}',
-                      style: TextStyles.blue16,
-                      textAlign: TextAlign.right,
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            const SizedBox(height: 8),
-            SFCard(
-              margin: EdgeInsets.zero,
-              padding: const EdgeInsets.symmetric(vertical: 24, horizontal: 18),
-              child: Row(
-                children: [
-                  SFText(
                     keyText: LocaleKeys.effect,
                     style: TextStyles.lightGrey16,
                   ),
@@ -129,7 +89,7 @@ class JewelDialogBody extends StatelessWidget {
                   Expanded(
                     child: SFText(
                       keyText:
-                          '+${jewel.resilience}% ${LocaleKeys.base.tr()} Res.',
+                          '+${jewel.infoBuff}% ${jewel.type.tr()} Res.',
                       style: TextStyles.blue16,
                       textAlign: TextAlign.right,
                     ),

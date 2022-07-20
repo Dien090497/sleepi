@@ -21,7 +21,7 @@ class BedModel {
 
   final String type;
 
-  final dynamic jewelType;
+  final String? jewelType;
 
   final dynamic itemType;
 
@@ -94,10 +94,14 @@ class BedModel {
 
   JewelEntity toJewelEntity() {
     return JewelEntity(
+        bonus: bonus,
+        special: special,
+        jewelType: jewelType ?? '',
         id: id,
         image: image,
         level: level,
         nftId: nftId,
+        type: type,
         luck: luck.toString(),
         efficiency: efficiency.toString(),
         quality: quality.toString(),
@@ -106,6 +110,7 @@ class BedModel {
 
   BedEntity toEntity() {
     return BedEntity(
+      jewelType: jewelType,
       name: nftName,
       nftId: nftId,
       nftClass: nftClass ?? '',
@@ -119,12 +124,18 @@ class BedModel {
       quality: quality,
       type: type,
       isMint: isMint,
-      efficiency: efficiency is! String ? efficiency.toDouble() : double.parse(efficiency),
+      efficiency: efficiency is! String
+          ? efficiency.toDouble()
+          : double.parse(efficiency),
       luck: luck is! String ? luck.toDouble() : double.parse(luck),
       bonus: bonus is! String ? bonus.toDouble() : double.parse(bonus),
       special: special is! String ? special.toDouble() : double.parse(special),
-      resilience: resilience is! String ? resilience.toDouble() : double.parse(resilience),
-      durability: durability is! String ? durability.toDouble() : double.parse(durability),
+      resilience: resilience is! String
+          ? resilience.toDouble()
+          : double.parse(resilience),
+      durability: durability is! String
+          ? durability.toDouble()
+          : double.parse(durability),
       time: time,
       startTime: startTime,
       endTime: endTime,

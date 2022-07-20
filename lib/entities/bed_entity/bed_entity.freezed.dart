@@ -42,6 +42,7 @@ mixin _$BedEntity {
   double? get insurancePercent => throw _privateConstructorUsedError;
   double? get startTime => throw _privateConstructorUsedError;
   double? get endTime => throw _privateConstructorUsedError;
+  String? get jewelType => throw _privateConstructorUsedError;
   List<JewelEntity> get jewels => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -80,6 +81,7 @@ abstract class $BedEntityCopyWith<$Res> {
       double? insurancePercent,
       double? startTime,
       double? endTime,
+      String? jewelType,
       List<JewelEntity> jewels});
 }
 
@@ -119,6 +121,7 @@ class _$BedEntityCopyWithImpl<$Res> implements $BedEntityCopyWith<$Res> {
     Object? insurancePercent = freezed,
     Object? startTime = freezed,
     Object? endTime = freezed,
+    Object? jewelType = freezed,
     Object? jewels = freezed,
   }) {
     return _then(_value.copyWith(
@@ -226,6 +229,10 @@ class _$BedEntityCopyWithImpl<$Res> implements $BedEntityCopyWith<$Res> {
           ? _value.endTime
           : endTime // ignore: cast_nullable_to_non_nullable
               as double?,
+      jewelType: jewelType == freezed
+          ? _value.jewelType
+          : jewelType // ignore: cast_nullable_to_non_nullable
+              as String?,
       jewels: jewels == freezed
           ? _value.jewels
           : jewels // ignore: cast_nullable_to_non_nullable
@@ -267,6 +274,7 @@ abstract class _$$_BedEntityCopyWith<$Res> implements $BedEntityCopyWith<$Res> {
       double? insurancePercent,
       double? startTime,
       double? endTime,
+      String? jewelType,
       List<JewelEntity> jewels});
 }
 
@@ -308,6 +316,7 @@ class __$$_BedEntityCopyWithImpl<$Res> extends _$BedEntityCopyWithImpl<$Res>
     Object? insurancePercent = freezed,
     Object? startTime = freezed,
     Object? endTime = freezed,
+    Object? jewelType = freezed,
     Object? jewels = freezed,
   }) {
     return _then(_$_BedEntity(
@@ -415,6 +424,10 @@ class __$$_BedEntityCopyWithImpl<$Res> extends _$BedEntityCopyWithImpl<$Res>
           ? _value.endTime
           : endTime // ignore: cast_nullable_to_non_nullable
               as double?,
+      jewelType: jewelType == freezed
+          ? _value.jewelType
+          : jewelType // ignore: cast_nullable_to_non_nullable
+              as String?,
       jewels: jewels == freezed
           ? _value._jewels
           : jewels // ignore: cast_nullable_to_non_nullable
@@ -453,6 +466,7 @@ class _$_BedEntity implements _BedEntity {
       required this.insurancePercent,
       required this.startTime,
       required this.endTime,
+      required this.jewelType,
       required final List<JewelEntity> jewels})
       : _jewels = jewels;
 
@@ -508,6 +522,8 @@ class _$_BedEntity implements _BedEntity {
   final double? startTime;
   @override
   final double? endTime;
+  @override
+  final String? jewelType;
   final List<JewelEntity> _jewels;
   @override
   List<JewelEntity> get jewels {
@@ -517,7 +533,7 @@ class _$_BedEntity implements _BedEntity {
 
   @override
   String toString() {
-    return 'BedEntity(id: $id, nftId: $nftId, name: $name, nftClass: $nftClass, tokenId: $tokenId, level: $level, image: $image, type: $type, contractAddress: $contractAddress, quality: $quality, owner: $owner, status: $status, durability: $durability, isLock: $isLock, bedMint: $bedMint, efficiency: $efficiency, luck: $luck, bonus: $bonus, special: $special, resilience: $resilience, time: $time, isMint: $isMint, socket: $socket, insurancePercent: $insurancePercent, startTime: $startTime, endTime: $endTime, jewels: $jewels)';
+    return 'BedEntity(id: $id, nftId: $nftId, name: $name, nftClass: $nftClass, tokenId: $tokenId, level: $level, image: $image, type: $type, contractAddress: $contractAddress, quality: $quality, owner: $owner, status: $status, durability: $durability, isLock: $isLock, bedMint: $bedMint, efficiency: $efficiency, luck: $luck, bonus: $bonus, special: $special, resilience: $resilience, time: $time, isMint: $isMint, socket: $socket, insurancePercent: $insurancePercent, startTime: $startTime, endTime: $endTime, jewelType: $jewelType, jewels: $jewels)';
   }
 
   @override
@@ -556,6 +572,7 @@ class _$_BedEntity implements _BedEntity {
                 .equals(other.insurancePercent, insurancePercent) &&
             const DeepCollectionEquality().equals(other.startTime, startTime) &&
             const DeepCollectionEquality().equals(other.endTime, endTime) &&
+            const DeepCollectionEquality().equals(other.jewelType, jewelType) &&
             const DeepCollectionEquality().equals(other._jewels, _jewels));
   }
 
@@ -588,6 +605,7 @@ class _$_BedEntity implements _BedEntity {
         const DeepCollectionEquality().hash(insurancePercent),
         const DeepCollectionEquality().hash(startTime),
         const DeepCollectionEquality().hash(endTime),
+        const DeepCollectionEquality().hash(jewelType),
         const DeepCollectionEquality().hash(_jewels)
       ]);
 
@@ -625,6 +643,7 @@ abstract class _BedEntity implements BedEntity {
       required final double? insurancePercent,
       required final double? startTime,
       required final double? endTime,
+      required final String? jewelType,
       required final List<JewelEntity> jewels}) = _$_BedEntity;
 
   @override
@@ -679,6 +698,8 @@ abstract class _BedEntity implements BedEntity {
   double? get startTime;
   @override
   double? get endTime;
+  @override
+  String? get jewelType;
   @override
   List<JewelEntity> get jewels;
   @override

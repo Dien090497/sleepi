@@ -57,6 +57,10 @@ class JewelModel {
   Map<String, dynamic> toJson() => _$JewelModelToJson(this);
 
   JewelEntity toEntity() => JewelEntity(
+      special: special,
+      bonus: bonus,
+      type: type,
+      jewelType: jewelType,
       id: id,
       image: image,
       level: level,
