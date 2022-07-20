@@ -2,7 +2,6 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:focus_detector/focus_detector.dart';
 import 'package:slee_fi/common/widgets/sf_alert_dialog.dart';
 import 'package:slee_fi/common/widgets/sf_bottom_sheets.dart';
 import 'package:slee_fi/common/widgets/sf_dialog.dart';
@@ -17,11 +16,11 @@ import 'package:slee_fi/presentation/screens/market_place/widget/item_bed_buy_wi
 import 'package:slee_fi/presentation/screens/market_place/widget/pop_up_item_market_place.dart';
 import 'package:slee_fi/presentation/screens/market_place/widget/tab_bar_filter.dart';
 import 'package:slee_fi/resources/resources.dart';
-import 'package:slee_fi/usecase/fetch_bed_usecase.dart';
 import 'package:syncfusion_flutter_sliders/sliders.dart';
 
 class TabItemsBuy extends StatefulWidget {
-  const TabItemsBuy({Key? key}) : super(key: key);
+  const TabItemsBuy({Key? key, required this.cubit}) : super(key: key);
+  final MarketPlaceCubit cubit;
 
   @override
   State<TabItemsBuy> createState() => _TabItemsBuyState();
@@ -55,127 +54,118 @@ class _TabItemsBuyState extends State<TabItemsBuy> {
   Widget build(BuildContext context) {
     return DefaultTabController(
       length: 2,
-      child: BlocProvider(
-        create: (context) => MarketPlaceCubit()..init(CategoryType.item),
-        child: BlocConsumer<MarketPlaceCubit, MarketPlaceState>(
-          listener: (context, state) {
-            final cubit = context.read<MarketPlaceCubit>();
-            if (state is MarketPlaceStateLoaded) {
-              listItems = state.list.list;
-            }
+      child: BlocConsumer<MarketPlaceCubit, MarketPlaceState>(
+        bloc: widget.cubit,
+        listener: (context, state) {
+          final cubit = context.read<MarketPlaceCubit>();
+          if (state is MarketPlaceStateLoaded) {
+            listItems = state.list.list;
+          }
 
-            if (state is MarketPlaceStateLoadedMore) {
-              listItems.addAll(state.list.list);
-              setState(() {});
-            }
+          if (state is MarketPlaceStateLoadedMore) {
+            listItems.addAll(state.list.list);
+            setState(() {});
+          }
 
-            if (state is MarketPlaceStateBuySuccess) {
-              cubit.refresh();
-              showSuccessfulDialog(context, LocaleKeys.purchased_successfully);
-            }
+          if (state is MarketPlaceStateBuySuccess) {
+            cubit.refresh();
+            showSuccessfulDialog(context, LocaleKeys.purchased_successfully);
+          }
 
-            if (state is MarketPlaceStateBuyFailed) {
-              cubit.refresh();
-              showMessageDialog(context, state.msg);
-            }
-          },
-          builder: (context, state) {
-            final cubit = context.read<MarketPlaceCubit>();
-            return FocusDetector(
-              onFocusGained: () {
-                cubit.clearFilter();
-              },
-              child: Column(
-                children: [
-                  TabBarFilter(
-                    cubit: cubit,
-                    tabTexts: const [LocaleKeys.buy, LocaleKeys.rent],
-                    onFilterTap: () {
-                      showFilterModalBottomSheet(
-                        cubit: cubit,
-                        context,
-                        sections: {
-                          LocaleKeys.type.tr(): [
-                            LocaleKeys.blue,
-                            LocaleKeys.purple,
-                            LocaleKeys.red,
-                            LocaleKeys.white,
-                          ],
-                        },
-                        sliders: {
-                          LocaleKeys.level.tr(): FilterSliderValues(
-                              value: SfRangeValues(
-                                cubit.params.minLevel,
-                                cubit.params.maxLevel,
-                              ),
-                              max: 5,
-                              min: 1),
-                        },
-                      );
+          if (state is MarketPlaceStateBuyFailed) {
+            cubit.refresh();
+            showMessageDialog(context, state.msg);
+          }
+        },
+        builder: (context, state) {
+          return Column(
+            children: [
+              TabBarFilter(
+                cubit: widget.cubit,
+                tabTexts: const [LocaleKeys.buy, LocaleKeys.rent],
+                onFilterTap: () {
+                  showFilterModalBottomSheet(
+                    cubit: widget.cubit,
+                    context,
+                    sections: {
+                      LocaleKeys.type.tr(): [
+                        LocaleKeys.blue,
+                        LocaleKeys.purple,
+                        LocaleKeys.red,
+                        LocaleKeys.white,
+                      ],
                     },
-                  ),
-                  Expanded(
-                    child: Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 12.w),
-                      child: (state is MarketPlaceStateLoading)
-                          ? const Center(
-                              child: CircularProgressIndicator(),
-                            )
-                          : Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                const SizedBox(height: 12),
-                                Expanded(
-                                  child: TabBarView(
-                                    children: [
-                                      SFGridView(
-                                        marketPlaceCubit: cubit,
-                                        isLoadMore: cubit.loadMore,
-                                        count: listItems.length,
-                                        isScroll: true,
-                                        onRefresh: () {
-                                          cubit.refresh();
-                                        },
-                                        childAspectRatio: 8 / 10,
-                                        itemBuilder: (context, i) {
-                                          return GestureDetector(
-                                            onTap: () {
-                                              _showItemDialog(
-                                                  context, listItems[i], cubit);
-                                            },
-                                            child: ItemBedBuyWidget(
-                                              item: listItems[i],
-                                              onPressedButton: () {
-                                                _showItemDialog(context,
-                                                    listItems[i], cubit);
-                                              },
-                                            ),
-                                          );
-                                        },
-                                      ),
-                                      Padding(
-                                        padding: EdgeInsets.only(
-                                            bottom: MediaQuery.of(context)
-                                                    .size
-                                                    .height *
-                                                0.3),
-                                        child: const Center(
-                                          child: SFIcon(Ics.commingSoon),
-                                        ),
-                                      )
-                                      // SFGridView(
-                                    ],
-                                  ),
-                                ),
-                              ],
-                            ),
-                    ),
-                  ),
-                ],
+                    sliders: {
+                      LocaleKeys.level.tr(): FilterSliderValues(
+                          value: SfRangeValues(
+                            widget.cubit.params.minLevel,
+                            widget.cubit.params.maxLevel,
+                          ),
+                          max: 5,
+                          min: 1),
+                    },
+                  );
+                },
               ),
-            );
-          },
-        ),
+              Expanded(
+                child: Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 12.w),
+                  child: (state is MarketPlaceStateLoading)
+                      ? const Center(
+                          child: CircularProgressIndicator(),
+                        )
+                      : Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            const SizedBox(height: 12),
+                            Expanded(
+                              child: TabBarView(
+                                children: [
+                                  SFGridView(
+                                    marketPlaceCubit: widget.cubit,
+                                    isLoadMore: widget.cubit.loadMore,
+                                    count: listItems.length,
+                                    isScroll: true,
+                                    onRefresh: () {
+                                      widget.cubit.refresh();
+                                    },
+                                    childAspectRatio: 8 / 10,
+                                    itemBuilder: (context, i) {
+                                      return GestureDetector(
+                                        onTap: () {
+                                          _showItemDialog(context, listItems[i],
+                                              widget.cubit);
+                                        },
+                                        child: ItemBedBuyWidget(
+                                          item: listItems[i],
+                                          onPressedButton: () {
+                                            _showItemDialog(context,
+                                                listItems[i], widget.cubit);
+                                          },
+                                        ),
+                                      );
+                                    },
+                                  ),
+                                  Padding(
+                                    padding: EdgeInsets.only(
+                                        bottom:
+                                            MediaQuery.of(context).size.height *
+                                                0.3),
+                                    child: const Center(
+                                      child: SFIcon(Ics.commingSoon),
+                                    ),
+                                  )
+                                  // SFGridView(
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
+                ),
+              ),
+            ],
+          );
+        },
       ),
     );
   }
