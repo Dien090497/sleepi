@@ -9,13 +9,13 @@ abstract class SocketEvent extends Equatable {
 }
 
 class SocketInit extends SocketEvent {
-  final int bedId;
+  final int nftId;
   final int level;
 
-  const SocketInit(this.bedId, this.level);
+  const SocketInit(this.nftId, this.level);
 
   @override
-  List<Object?> get props => [bedId, level];
+  List<Object?> get props => [nftId, level];
 }
 
 class RefreshSocket extends SocketEvent {

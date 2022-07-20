@@ -47,7 +47,7 @@ class InfoIndividualScreen extends StatelessWidget {
         BlocProvider(create: (_) => IndividualCubit(args.bed)..fetchFamily()),
         BlocProvider(
             create: (_) =>
-                SocketBloc()..add(SocketInit(args.bed.id, args.bed.level))),
+                SocketBloc()..add(SocketInit(args.bed.nftId, args.bed.level))),
       ],
       child: Stack(
         children: [

@@ -9,58 +9,29 @@ class JewelEntity {
   final String image;
   final int level;
   final int nftId;
+  final String type;
+  final String jewelType;
   final String resilience;
   final String efficiency;
   final String luck;
+  final String bonus;
+  final String special;
   final String? quality;
 
-  // "id": 530,
-  // "nftId": 544,
-  // "nftName": "Jewel #51",
-  // "parent1": null,
-  // "parent2": null,
-  // "contractAddress": "0x263856B798C6De9fC49480b3687a7B625CAC585E",
-  // "tokenId": 52,
-  // "owner": "0xde2a6ae22ca55f376f4a6d92d3056e81c7d3d76c",
-  // "type": "luck",
-  // "jewelType": "sapphire",
-  // "itemType": null,
-  // "classNft": "short",
-  // "quality": "common",
-  // "image": "https://nft-dev.sleefi.com/v1/nft/jewels/1.svg",
-  // "time": 1,
-  // "level": 2,
-  // "bedMint": 1,
-  // "isMint": 0,
-  // "isBurn": 0,
-  // "efficiency": "1.00",
-  // "durability": "0.00",
-  // "luck": "1.00",
-  // "bonus": "1.00",
-  // "special": "1.00",
-  // "resilience": "1.00"
-
-  // const factory JewelEntity({
-  //   required int id,
-  //   required String image,
-  //   required int level,
-  //   required int nftID,
-  //   required double luck,
-  //   required String? quality,
-  //   required double resilience,
-  //   required double efficiency,
-  //
-  // }) = _JewelEntity;
-
-  JewelEntity(
-      {required this.id,
-      required this.image,
-      required this.level,
-      required this.nftId,
-      required this.resilience,
-      required this.efficiency,
-      required this.luck,
-      required this.quality});
+  JewelEntity({
+    required this.bonus,
+    required this.special,
+    required this.id,
+    required this.image,
+    required this.type,
+    required this.level,
+    required this.jewelType,
+    required this.nftId,
+    required this.resilience,
+    required this.efficiency,
+    required this.luck,
+    required this.quality,
+  });
 
   factory JewelEntity.fromJson(Map<String, dynamic> json) =>
       _$JewelEntityFromJson(json);
@@ -68,6 +39,10 @@ class JewelEntity {
   Map<String, dynamic> toJson() => _$JewelEntityToJson(this);
 
   static JewelEntity fromBedEntity(BedEntity entity) => JewelEntity(
+      type: entity.type,
+      bonus: entity.bonus.toString(),
+      special: entity.special.toString(),
+      jewelType: entity.jewelType ?? '',
       id: entity.id,
       image: entity.image,
       level: entity.level,
@@ -76,4 +51,23 @@ class JewelEntity {
       efficiency: entity.efficiency.toString(),
       luck: entity.luck.toString(),
       quality: entity.quality);
+
+  // Ruby: Positively affects Efficiency values.
+  // Sapphire: Positively affects Luck values
+  // Emerald: positively affects Bonus values
+  // Diamond: positively affects Special values
+
+  String get infoBuff {
+    switch (jewelType) {
+      case 'ruby':
+        return efficiency;
+      case 'sapphire':
+        return luck;
+      case 'emerald':
+        return bonus;
+      case 'diamond':
+        return special;
+    }
+    return '';
+  }
 }

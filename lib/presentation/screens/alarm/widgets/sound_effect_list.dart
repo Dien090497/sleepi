@@ -72,10 +72,8 @@ class _AlarmSoundEffectListState extends State<AlarmSoundEffectList> {
   }
 
   _playSound() async {
-    audioPlayer.setVolume(1);
-    audioPlayer.setPlayerMode(PlayerMode.lowLatency);
     await audioPlayer.stop();
     await audioPlayer.release();
-    await audioPlayer.play(AssetSource(Const.soundAlarm[temp]));
+    await audioPlayer.play(AssetSource(Const.soundAlarm[temp]), volume: 1, mode: PlayerMode.mediaPlayer,);
   }
 }

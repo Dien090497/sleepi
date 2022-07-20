@@ -21,7 +21,7 @@ class BedModel {
 
   final String type;
 
-  final dynamic jewelType;
+  final String? jewelType;
 
   final dynamic itemType;
 
@@ -94,10 +94,14 @@ class BedModel {
 
   JewelEntity toJewelEntity() {
     return JewelEntity(
+        bonus: bonus,
+        special: special,
+        jewelType: jewelType ?? '',
         id: id,
         image: image,
         level: level,
         nftId: nftId,
+        type: type,
         luck: luck.toString(),
         efficiency: efficiency.toString(),
         quality: quality.toString(),
@@ -106,6 +110,7 @@ class BedModel {
 
   BedEntity toEntity() {
     return BedEntity(
+      jewelType: jewelType,
       name: nftName,
       nftId: nftId,
       nftClass: nftClass ?? '',

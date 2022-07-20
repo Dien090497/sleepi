@@ -221,8 +221,7 @@ class AlarmBell extends StatelessWidget {
         DateTime(nextDay.year, nextDay.month, nextDay.day, hour, minute);
     final wakeUpTimeInDay =
         DateTime(now.year, now.month, now.day, hour, minute);
-    final wakeUpTime = hour <= now.hour ? wakeUpTimeInNextDay : wakeUpTimeInDay;
-
+    final wakeUpTime = hour < now.hour ? wakeUpTimeInNextDay : wakeUpTimeInDay;
     return wakeUpTime.isAfter(minTime) && wakeUpTime.isBefore(maxTime) ||
         maxTime.difference(wakeUpTime).inSeconds == 0 ||
         wakeUpTime.difference(minTime).inSeconds == 0;
