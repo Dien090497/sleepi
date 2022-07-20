@@ -14,7 +14,7 @@ class BedModelHome {
   final int tokenId;
   final String owner;
   final String type;
-  dynamic jewelType;
+  final String? jewelType;
   dynamic itemType;
   final String? classNft;
   final String quality;
@@ -57,6 +57,7 @@ class BedModelHome {
     this.resilience,
     this.nft,
     this.objData,
+    this.jewelType,
   );
 
   factory BedModelHome.fromJson(Map<String, dynamic> json) =>
@@ -65,6 +66,7 @@ class BedModelHome {
   Map<String, dynamic> toJson() => _$BedModelHomeToJson(this);
 
   BedEntity toEntity() => BedEntity(
+      jewelType: jewelType,
       id: id,
       nftId: nftId,
       name: nftName,

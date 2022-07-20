@@ -30,10 +30,10 @@ BedModelHome _$BedModelHomeFromJson(Map<String, dynamic> json) => BedModelHome(
       (json['resilience'] as num).toDouble(),
       Nft.fromJson(json['nft'] as Map<String, dynamic>),
       ObjData.fromJson(json['objData'] as Map<String, dynamic>),
+      json['jewelType'] as String?,
     )
       ..parent1 = json['parent1']
       ..parent2 = json['parent2']
-      ..jewelType = json['jewelType']
       ..itemType = json['itemType'];
 
 Map<String, dynamic> _$BedModelHomeToJson(BedModelHome instance) =>

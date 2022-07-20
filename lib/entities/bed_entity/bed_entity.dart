@@ -32,6 +32,7 @@ class BedEntity with _$BedEntity {
     required double? insurancePercent,
     required double? startTime,
     required double? endTime,
+    required String? jewelType,
     required List<JewelEntity> jewels,
   }) = _BedEntity;
 }

@@ -29,7 +29,7 @@ BedModel _$BedModelFromJson(Map<String, dynamic> json) => BedModel(
       json['tokenId'] as int,
       json['durability'],
       Nft.fromJson(json['nft'] as Map<String, dynamic>),
-      json['jewelType'],
+      json['jewelType'] as String?,
       json['itemType'],
       json['effect'],
       (json['insurancePercent'] as num?)?.toDouble(),
