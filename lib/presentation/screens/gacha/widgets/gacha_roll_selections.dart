@@ -12,7 +12,7 @@ import 'package:slee_fi/presentation/blocs/gacha/gacha_spin_state.dart';
 import 'package:slee_fi/presentation/screens/gacha/layout/gacha_animation_screen.dart';
 import 'package:slee_fi/schema/gacha/gacha_spin_schema.dart';
 
-class GachaRollSelections extends StatelessWidget {
+class GachaRollSelections extends StatefulWidget {
   const GachaRollSelections({
     Key? key,
     required this.singleGacha,
@@ -29,6 +29,12 @@ class GachaRollSelections extends StatelessWidget {
   final bool normalGacha;
 
   @override
+  State<GachaRollSelections> createState() => _GachaRollSelectionsState();
+}
+
+class _GachaRollSelectionsState extends State<GachaRollSelections> {
+  bool enableButton = true;
+  @override
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) => GachaSpinCubit(),
@@ -38,10 +44,11 @@ class GachaRollSelections extends StatelessWidget {
           Navigator.pushNamed(context, R.gachaAnimation,
               arguments: GachaAnimationArguments(
                   spinInfo: state.gachaSpinResponse,
-                  animation: normalGacha ? Const.normalGachaAnimation : Const.specialGachaAnimation,
-                  audio: normalGacha ? Const.normalGachaAudio : Const.specialGachaAudio,
+                  animation: widget.normalGacha ? Const.normalGachaAnimation : Const.specialGachaAnimation,
+                  audio: widget.normalGacha ? Const.normalGachaAudio : Const.specialGachaAudio,
               )
           );
+          setState(() => enableButton = true);
         }
         },
         builder: (context, state) {
@@ -51,7 +58,8 @@ class GachaRollSelections extends StatelessWidget {
               Expanded(
                 child: GestureDetector(
                   onTap: () {
-                    cubit.gachaSpin(GachaSpinSchema(probability: singleProbability));
+                    enableButton ?  cubit.gachaSpin(GachaSpinSchema(probability: widget.singleProbability)) : null;
+                    setState(() =>  enableButton = false);
                   },
                   child: Container(
                     decoration: BoxDecoration(
@@ -67,7 +75,7 @@ class GachaRollSelections extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         SFText(
-                          keyText: '$singleGacha SLFT',
+                          keyText: '${widget.singleGacha} SLFT',
                           style: TextStyles.bold18Blue,
                         ),
                         const SizedBox(
@@ -86,7 +94,8 @@ class GachaRollSelections extends StatelessWidget {
               Expanded(
                 child: GestureDetector(
                   onTap: () {
-                    cubit.gachaSpin(GachaSpinSchema(probability: timesProbability));
+                    cubit.gachaSpin(GachaSpinSchema(probability: widget.timesProbability));
+                    setState(() =>  enableButton = false);
                   },
                   child: Container(
                     decoration: BoxDecoration(
@@ -101,7 +110,7 @@ class GachaRollSelections extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         SFText(
-                            keyText: '$timesGacha SLFT',
+                            keyText: '${widget.timesGacha} SLFT',
                             style: TextStyles.bold18Blue),
                         const SizedBox(
                           height: 5,

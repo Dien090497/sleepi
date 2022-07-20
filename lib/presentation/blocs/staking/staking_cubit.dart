@@ -21,6 +21,7 @@ class StakingCubit extends Cubit<StakingState> {
   }
 
   Future<void> getStakingInfo() async {
+    emit(const StakingState.loading());
     final result = await _stakingInfoUC.call(NoParams());
     result.fold(
           (l) {

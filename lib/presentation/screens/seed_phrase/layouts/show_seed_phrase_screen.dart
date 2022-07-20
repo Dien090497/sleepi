@@ -43,30 +43,33 @@ class _ShowSeedPhraseScreenState extends State<ShowSeedPhraseScreen> {
           child: Column(
             children: [
               SFCard(
-                height: sizeHeight * 0.66,
+                // height: sizeHeight * 0.66,
                 child: FutureBuilder<dartz.Either<FailureMessage, String>>(
               future: _currentMnemonic.call(NoParams()),
               builder: (context, snapshot) {
                 if (snapshot.hasData && snapshot.data!.isRight()) {
                   snapshot.data!.foldRight(
                       String, (r, previous) => seedPhrase = r.split(' '));
-                  return ListView.separated(
-                      physics: const BouncingScrollPhysics(),
-                      padding: EdgeInsets.zero,
-                      separatorBuilder: (context, index) => Divider(
-                            color: AppColors.lightWhite.withOpacity(0.05),
-                            height: 1,
-                          ),
-                      itemCount: seedPhrase.length,
-                      itemBuilder: (BuildContext context, int index) =>
-                          SFListTile(
-                            text: "${index + 1}",
-                            trailing: SFText(
-                              keyText: hide ? "-----" : seedPhrase[index],
-                              stringCase: StringCase.lowerCaseCase,
-                              style: TextStyles.lightGrey14,
+                  return Expanded(
+                    child: ListView.separated(
+                        shrinkWrap: true,
+                        physics: const ClampingScrollPhysics(),
+                        padding: EdgeInsets.zero,
+                        separatorBuilder: (context, index) => Divider(
+                              color: AppColors.lightWhite.withOpacity(0.05),
+                              height: 1,
                             ),
-                          ));
+                        itemCount: seedPhrase.length,
+                        itemBuilder: (BuildContext context, int index) =>
+                            SFListTile(
+                              text: "${index + 1}",
+                              trailing: SFText(
+                                keyText: hide ? "-----" : seedPhrase[index],
+                                stringCase: StringCase.lowerCaseCase,
+                                style: TextStyles.lightGrey14,
+                              ),
+                            )),
+                  );
                 } else if (snapshot.hasData && snapshot.data!.isRight()) {
                   String messages = '';
                   snapshot.data!.foldLeft(

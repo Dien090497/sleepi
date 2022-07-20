@@ -14,6 +14,8 @@ import 'package:slee_fi/common/widgets/sf_label_value.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
 import 'package:slee_fi/entities/bed_entity/bed_entity.dart';
 import 'package:slee_fi/l10n/locale_keys.g.dart';
+import 'package:slee_fi/models/minting/info_minting_model.dart';
+import 'package:slee_fi/models/minting/percent_minting.dart';
 import 'package:slee_fi/presentation/blocs/mint/mint_cubit.dart';
 import 'package:slee_fi/presentation/blocs/mint/mint_state.dart';
 import 'package:slee_fi/presentation/screens/info_individual/widget/connect_bed_widget.dart';
@@ -28,7 +30,8 @@ class MintScreen extends StatefulWidget {
 
 class _MintScreenState extends State<MintScreen> {
   bool swCheck = true;
-
+  InfoMintingModel? _infoMintingModel;
+  PercentMinting? _percentMinting;
   @override
   Widget build(BuildContext context) {
     final args = ModalRoute.of(context)?.settings.arguments as BedEntity;
@@ -45,6 +48,10 @@ class _MintScreenState extends State<MintScreen> {
             showMessageDialog(context, state.msg).then((value) {
               cubit.refresh();
             });
+          }
+          if (state is MintStateGetInfo) {
+            _infoMintingModel = state.infoMintingModel;
+            _percentMinting = state.infoMintingModel.percentMinting.where((i) => i.value == state.infoMintingModel.randomQuality).toList().first;
           }
         },
         builder: (context, state) {
@@ -87,8 +94,8 @@ class _MintScreenState extends State<MintScreen> {
                                           SFLabelValue(
                                             label:
                                                 LocaleKeys.token_consumptions,
-                                            value: state.infoMinting != null
-                                                ? '${state.infoMinting!.fee} SLFT'
+                                            value: _infoMintingModel != null
+                                                ? '${_infoMintingModel!.fee} SLFT'
                                                 : '',
                                             styleValue: TextStyles.lightWhite14,
                                             styleLabel: TextStyles.lightWhite14,
@@ -186,10 +193,9 @@ class _MintScreenState extends State<MintScreen> {
                                                         .common_bed_box,
                                                     styleLabel:
                                                         TextStyles.lightWhite14,
-                                                    value: state.infoMinting !=
-                                                            null
-                                                        ? '${100 - state.infoMinting!.brokenRate.brokenRate}%'
-                                                        : '',
+                                                    value:(_infoMintingModel != null && _percentMinting != null)
+                                                        ? '${_percentMinting!.percent - _infoMintingModel!.brokenRate.brokenRate}%'
+                                                        : '0%',
                                                     colorBorder:
                                                         Colors.transparent,
                                                   ),
@@ -208,9 +214,9 @@ class _MintScreenState extends State<MintScreen> {
                                                         .one_bed_will_be_burned,
                                                     styleLabel:
                                                         TextStyles.lightWhite14,
-                                                    value: state.infoMinting !=
+                                                    value: _infoMintingModel !=
                                                             null
-                                                        ? '${state.infoMinting!.brokenRate.brokenRate}%'
+                                                        ? '${_infoMintingModel!.brokenRate.brokenRate}%'
                                                         : '',
                                                     colorBorder:
                                                         Colors.transparent,
@@ -229,9 +235,9 @@ class _MintScreenState extends State<MintScreen> {
                                                 label: LocaleKeys.bed_box,
                                                 styleLabel:
                                                     TextStyles.lightWhite14,
-                                                value: state.infoMinting != null
-                                                    ? '100%'
-                                                    : ''),
+                                                value: _percentMinting != null
+                                                    ? '${_percentMinting!.percent}%'
+                                                    : '0%'),
                                           ],
                                         ),
                                       ),

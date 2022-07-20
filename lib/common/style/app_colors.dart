@@ -112,8 +112,8 @@ class AppColors {
       begin: Alignment.topLeft,
       end: Alignment.bottomRight);
 
-  static final gradientGacha = LinearGradient(
-      colors: [blue.withOpacity(0.1), rank5.withOpacity(0.1)],
+  static const gradientGacha =  LinearGradient(
+      colors: [blue, rank5],
       begin: Alignment.topLeft,
       end: Alignment.bottomRight);
 
