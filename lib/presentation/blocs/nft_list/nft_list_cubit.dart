@@ -30,12 +30,14 @@ class NFTListCubit extends Cubit<NftListState> {
       final currentState = state;
       if (currentState is NftListLoaded) {
         emit(currentState.copyWith(
-            listBed:
-                _currentPage > 1 ? currentState.listBed + success : success,
+            listBed: _currentPage > 1
+                ? currentState.listBed +
+                    success.map((e) => e.toEntity()).toList()
+                : success.map((e) => e.toEntity()).toList(),
             isLoadMore: success.length >= _limit));
       } else {
         emit(NftListState.loaded(
-          success,
+          success.map((e) => e.toEntity()).toList(),
           success.length >= _limit,
         ));
       }

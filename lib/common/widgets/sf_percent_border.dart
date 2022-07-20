@@ -28,7 +28,7 @@ class SFPercentBorderGradient extends StatelessWidget {
   Widget build(BuildContext context) {
     return LinearPercentIndicator(
       padding: EdgeInsets.zero,
-      percent: valueActive / totalValue,
+      percent: totalValue != 0 ? valueActive / totalValue : 0,
       lineHeight: lineHeight,
       linearGradient: linearGradient ?? AppColors.gradientBluePurple,
       barRadius: Radius.circular(barRadius),

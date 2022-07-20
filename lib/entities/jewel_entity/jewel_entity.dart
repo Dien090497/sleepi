@@ -1,4 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:slee_fi/entities/bed_entity/bed_entity.dart';
 
 part 'jewel_entity.g.dart';
 
@@ -65,4 +66,14 @@ class JewelEntity {
       _$JewelEntityFromJson(json);
 
   Map<String, dynamic> toJson() => _$JewelEntityToJson(this);
+
+  static JewelEntity fromBedEntity(BedEntity entity) => JewelEntity(
+      id: entity.id,
+      image: entity.image,
+      level: entity.level,
+      nftId: entity.nftId,
+      resilience: entity.resilience.toString(),
+      efficiency: entity.efficiency.toString(),
+      luck: entity.luck.toString(),
+      quality: entity.quality);
 }

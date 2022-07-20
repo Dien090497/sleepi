@@ -68,7 +68,7 @@ class BedModelHome {
       id: id,
       nftId: nftId,
       name: nftName,
-      nftClass: '',
+      nftClass: classNft ?? '',
       tokenId: tokenId,
       level: level,
       image: image,
