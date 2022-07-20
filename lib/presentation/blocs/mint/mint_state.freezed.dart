@@ -28,6 +28,7 @@ mixin _$MintState {
             InfoMintingModel? infoMinting)
         loaded,
     required TResult Function(String msg) error,
+    required TResult Function(InfoMintingModel infoMintingModel) getInfoMint,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -42,6 +43,7 @@ mixin _$MintState {
             InfoMintingModel? infoMinting)?
         loaded,
     TResult Function(String msg)? error,
+    TResult Function(InfoMintingModel infoMintingModel)? getInfoMint,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -56,6 +58,7 @@ mixin _$MintState {
             InfoMintingModel? infoMinting)?
         loaded,
     TResult Function(String msg)? error,
+    TResult Function(InfoMintingModel infoMintingModel)? getInfoMint,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -64,6 +67,7 @@ mixin _$MintState {
     required TResult Function(MintStateInitial value) initial,
     required TResult Function(MintStateLoaded value) loaded,
     required TResult Function(MintStateError value) error,
+    required TResult Function(MintStateGetInfo value) getInfoMint,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -71,6 +75,7 @@ mixin _$MintState {
     TResult Function(MintStateInitial value)? initial,
     TResult Function(MintStateLoaded value)? loaded,
     TResult Function(MintStateError value)? error,
+    TResult Function(MintStateGetInfo value)? getInfoMint,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -78,6 +83,7 @@ mixin _$MintState {
     TResult Function(MintStateInitial value)? initial,
     TResult Function(MintStateLoaded value)? loaded,
     TResult Function(MintStateError value)? error,
+    TResult Function(MintStateGetInfo value)? getInfoMint,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -157,6 +163,7 @@ class _$MintStateInitial
             InfoMintingModel? infoMinting)
         loaded,
     required TResult Function(String msg) error,
+    required TResult Function(InfoMintingModel infoMintingModel) getInfoMint,
   }) {
     return initial();
   }
@@ -174,6 +181,7 @@ class _$MintStateInitial
             InfoMintingModel? infoMinting)?
         loaded,
     TResult Function(String msg)? error,
+    TResult Function(InfoMintingModel infoMintingModel)? getInfoMint,
   }) {
     return initial?.call();
   }
@@ -191,6 +199,7 @@ class _$MintStateInitial
             InfoMintingModel? infoMinting)?
         loaded,
     TResult Function(String msg)? error,
+    TResult Function(InfoMintingModel infoMintingModel)? getInfoMint,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -205,6 +214,7 @@ class _$MintStateInitial
     required TResult Function(MintStateInitial value) initial,
     required TResult Function(MintStateLoaded value) loaded,
     required TResult Function(MintStateError value) error,
+    required TResult Function(MintStateGetInfo value) getInfoMint,
   }) {
     return initial(this);
   }
@@ -215,6 +225,7 @@ class _$MintStateInitial
     TResult Function(MintStateInitial value)? initial,
     TResult Function(MintStateLoaded value)? loaded,
     TResult Function(MintStateError value)? error,
+    TResult Function(MintStateGetInfo value)? getInfoMint,
   }) {
     return initial?.call(this);
   }
@@ -225,6 +236,7 @@ class _$MintStateInitial
     TResult Function(MintStateInitial value)? initial,
     TResult Function(MintStateLoaded value)? loaded,
     TResult Function(MintStateError value)? error,
+    TResult Function(MintStateGetInfo value)? getInfoMint,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -401,6 +413,7 @@ class _$MintStateLoaded
             InfoMintingModel? infoMinting)
         loaded,
     required TResult Function(String msg) error,
+    required TResult Function(InfoMintingModel infoMintingModel) getInfoMint,
   }) {
     return loaded(indexSelected, listBed, isLoadMore, enableInsurance,
         statusMint, infoMinting);
@@ -419,6 +432,7 @@ class _$MintStateLoaded
             InfoMintingModel? infoMinting)?
         loaded,
     TResult Function(String msg)? error,
+    TResult Function(InfoMintingModel infoMintingModel)? getInfoMint,
   }) {
     return loaded?.call(indexSelected, listBed, isLoadMore, enableInsurance,
         statusMint, infoMinting);
@@ -437,6 +451,7 @@ class _$MintStateLoaded
             InfoMintingModel? infoMinting)?
         loaded,
     TResult Function(String msg)? error,
+    TResult Function(InfoMintingModel infoMintingModel)? getInfoMint,
     required TResult orElse(),
   }) {
     if (loaded != null) {
@@ -452,6 +467,7 @@ class _$MintStateLoaded
     required TResult Function(MintStateInitial value) initial,
     required TResult Function(MintStateLoaded value) loaded,
     required TResult Function(MintStateError value) error,
+    required TResult Function(MintStateGetInfo value) getInfoMint,
   }) {
     return loaded(this);
   }
@@ -462,6 +478,7 @@ class _$MintStateLoaded
     TResult Function(MintStateInitial value)? initial,
     TResult Function(MintStateLoaded value)? loaded,
     TResult Function(MintStateError value)? error,
+    TResult Function(MintStateGetInfo value)? getInfoMint,
   }) {
     return loaded?.call(this);
   }
@@ -472,6 +489,7 @@ class _$MintStateLoaded
     TResult Function(MintStateInitial value)? initial,
     TResult Function(MintStateLoaded value)? loaded,
     TResult Function(MintStateError value)? error,
+    TResult Function(MintStateGetInfo value)? getInfoMint,
     required TResult orElse(),
   }) {
     if (loaded != null) {
@@ -583,6 +601,7 @@ class _$MintStateError with DiagnosticableTreeMixin implements MintStateError {
             InfoMintingModel? infoMinting)
         loaded,
     required TResult Function(String msg) error,
+    required TResult Function(InfoMintingModel infoMintingModel) getInfoMint,
   }) {
     return error(msg);
   }
@@ -600,6 +619,7 @@ class _$MintStateError with DiagnosticableTreeMixin implements MintStateError {
             InfoMintingModel? infoMinting)?
         loaded,
     TResult Function(String msg)? error,
+    TResult Function(InfoMintingModel infoMintingModel)? getInfoMint,
   }) {
     return error?.call(msg);
   }
@@ -617,6 +637,7 @@ class _$MintStateError with DiagnosticableTreeMixin implements MintStateError {
             InfoMintingModel? infoMinting)?
         loaded,
     TResult Function(String msg)? error,
+    TResult Function(InfoMintingModel infoMintingModel)? getInfoMint,
     required TResult orElse(),
   }) {
     if (error != null) {
@@ -631,6 +652,7 @@ class _$MintStateError with DiagnosticableTreeMixin implements MintStateError {
     required TResult Function(MintStateInitial value) initial,
     required TResult Function(MintStateLoaded value) loaded,
     required TResult Function(MintStateError value) error,
+    required TResult Function(MintStateGetInfo value) getInfoMint,
   }) {
     return error(this);
   }
@@ -641,6 +663,7 @@ class _$MintStateError with DiagnosticableTreeMixin implements MintStateError {
     TResult Function(MintStateInitial value)? initial,
     TResult Function(MintStateLoaded value)? loaded,
     TResult Function(MintStateError value)? error,
+    TResult Function(MintStateGetInfo value)? getInfoMint,
   }) {
     return error?.call(this);
   }
@@ -651,6 +674,7 @@ class _$MintStateError with DiagnosticableTreeMixin implements MintStateError {
     TResult Function(MintStateInitial value)? initial,
     TResult Function(MintStateLoaded value)? loaded,
     TResult Function(MintStateError value)? error,
+    TResult Function(MintStateGetInfo value)? getInfoMint,
     required TResult orElse(),
   }) {
     if (error != null) {
@@ -666,5 +690,184 @@ abstract class MintStateError implements MintState {
   String get msg;
   @JsonKey(ignore: true)
   _$$MintStateErrorCopyWith<_$MintStateError> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$MintStateGetInfoCopyWith<$Res> {
+  factory _$$MintStateGetInfoCopyWith(
+          _$MintStateGetInfo value, $Res Function(_$MintStateGetInfo) then) =
+      __$$MintStateGetInfoCopyWithImpl<$Res>;
+  $Res call({InfoMintingModel infoMintingModel});
+}
+
+/// @nodoc
+class __$$MintStateGetInfoCopyWithImpl<$Res>
+    extends _$MintStateCopyWithImpl<$Res>
+    implements _$$MintStateGetInfoCopyWith<$Res> {
+  __$$MintStateGetInfoCopyWithImpl(
+      _$MintStateGetInfo _value, $Res Function(_$MintStateGetInfo) _then)
+      : super(_value, (v) => _then(v as _$MintStateGetInfo));
+
+  @override
+  _$MintStateGetInfo get _value => super._value as _$MintStateGetInfo;
+
+  @override
+  $Res call({
+    Object? infoMintingModel = freezed,
+  }) {
+    return _then(_$MintStateGetInfo(
+      infoMintingModel == freezed
+          ? _value.infoMintingModel
+          : infoMintingModel // ignore: cast_nullable_to_non_nullable
+              as InfoMintingModel,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$MintStateGetInfo
+    with DiagnosticableTreeMixin
+    implements MintStateGetInfo {
+  const _$MintStateGetInfo(this.infoMintingModel);
+
+  @override
+  final InfoMintingModel infoMintingModel;
+
+  @override
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+    return 'MintState.getInfoMint(infoMintingModel: $infoMintingModel)';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('type', 'MintState.getInfoMint'))
+      ..add(DiagnosticsProperty('infoMintingModel', infoMintingModel));
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$MintStateGetInfo &&
+            const DeepCollectionEquality()
+                .equals(other.infoMintingModel, infoMintingModel));
+  }
+
+  @override
+  int get hashCode => Object.hash(
+      runtimeType, const DeepCollectionEquality().hash(infoMintingModel));
+
+  @JsonKey(ignore: true)
+  @override
+  _$$MintStateGetInfoCopyWith<_$MintStateGetInfo> get copyWith =>
+      __$$MintStateGetInfoCopyWithImpl<_$MintStateGetInfo>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function(
+            int indexSelected,
+            List<BedModel> listBed,
+            bool isLoadMore,
+            bool enableInsurance,
+            bool statusMint,
+            InfoMintingModel? infoMinting)
+        loaded,
+    required TResult Function(String msg) error,
+    required TResult Function(InfoMintingModel infoMintingModel) getInfoMint,
+  }) {
+    return getInfoMint(infoMintingModel);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function(
+            int indexSelected,
+            List<BedModel> listBed,
+            bool isLoadMore,
+            bool enableInsurance,
+            bool statusMint,
+            InfoMintingModel? infoMinting)?
+        loaded,
+    TResult Function(String msg)? error,
+    TResult Function(InfoMintingModel infoMintingModel)? getInfoMint,
+  }) {
+    return getInfoMint?.call(infoMintingModel);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function(
+            int indexSelected,
+            List<BedModel> listBed,
+            bool isLoadMore,
+            bool enableInsurance,
+            bool statusMint,
+            InfoMintingModel? infoMinting)?
+        loaded,
+    TResult Function(String msg)? error,
+    TResult Function(InfoMintingModel infoMintingModel)? getInfoMint,
+    required TResult orElse(),
+  }) {
+    if (getInfoMint != null) {
+      return getInfoMint(infoMintingModel);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(MintStateInitial value) initial,
+    required TResult Function(MintStateLoaded value) loaded,
+    required TResult Function(MintStateError value) error,
+    required TResult Function(MintStateGetInfo value) getInfoMint,
+  }) {
+    return getInfoMint(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(MintStateInitial value)? initial,
+    TResult Function(MintStateLoaded value)? loaded,
+    TResult Function(MintStateError value)? error,
+    TResult Function(MintStateGetInfo value)? getInfoMint,
+  }) {
+    return getInfoMint?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(MintStateInitial value)? initial,
+    TResult Function(MintStateLoaded value)? loaded,
+    TResult Function(MintStateError value)? error,
+    TResult Function(MintStateGetInfo value)? getInfoMint,
+    required TResult orElse(),
+  }) {
+    if (getInfoMint != null) {
+      return getInfoMint(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class MintStateGetInfo implements MintState {
+  const factory MintStateGetInfo(final InfoMintingModel infoMintingModel) =
+      _$MintStateGetInfo;
+
+  InfoMintingModel get infoMintingModel;
+  @JsonKey(ignore: true)
+  _$$MintStateGetInfoCopyWith<_$MintStateGetInfo> get copyWith =>
       throw _privateConstructorUsedError;
 }

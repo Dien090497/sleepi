@@ -36,7 +36,9 @@ class _GachaAnimationScreenState extends State<GachaAnimationScreen> with Ticker
    Future setAudio() async{
      final args = ModalRoute.of(context)?.settings.arguments as GachaAnimationArguments?;
      audioPlayer.setReleaseMode(ReleaseMode.loop);
-     audioPlayer.play(AssetSource(args?.audio ?? Const.normalGachaAudio), );
+     audioPlayer.play(
+       AssetSource(args?.audio ?? Const.normalGachaAudio),
+     );
    }
 
   @override

@@ -16,7 +16,6 @@ import 'package:slee_fi/presentation/blocs/history_transaction/history_transacti
 import 'package:slee_fi/presentation/blocs/history_transaction/history_transaction_state.dart';
 import 'package:slee_fi/resources/resources.dart';
 import 'package:slee_fi/usecase/get_history_transaction_usecase.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 class TransactionDetailList extends StatefulWidget {
   const TransactionDetailList(
@@ -74,11 +73,6 @@ class _TransactionDetailListState extends State<TransactionDetailList> {
             setState((){
               loadMore = false;
             });
-          }
-          if(state is GetUrlDetailTransactionSuccess){
-            urlDetailTransaction = state.url;
-            final url = Uri.parse(urlDetailTransaction);
-            launchUrl(url);
           }
         },
         builder: (context, state) {

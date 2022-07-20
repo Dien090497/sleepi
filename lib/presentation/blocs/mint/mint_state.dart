@@ -20,4 +20,5 @@ class MintState with _$MintState {
 
   const factory MintState.error(String msg) = MintStateError;
 
+  const factory MintState.getInfoMint(InfoMintingModel infoMintingModel) = MintStateGetInfo;
 }

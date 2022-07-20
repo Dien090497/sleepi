@@ -10,6 +10,7 @@ import 'package:slee_fi/common/widgets/dismiss_keyboard_widget.dart';
 import 'package:slee_fi/common/widgets/loading_screen.dart';
 import 'package:slee_fi/common/widgets/sf_app_bar.dart';
 import 'package:slee_fi/common/widgets/sf_buttons.dart';
+import 'package:slee_fi/common/widgets/sf_dialog.dart';
 import 'package:slee_fi/common/widgets/sf_dropdown_rotation.dart';
 import 'package:slee_fi/common/widgets/sf_logo.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
@@ -113,6 +114,7 @@ class EnterActivationCodeScreen extends StatelessWidget {
                                     onChange: (int value, int index) {
                                       cubit.localeSelected =
                                           Const.locales[index];
+                                      showChangeLanguageDialog(context, locale: Const.locales[index]);
                                     },
                                   )),
                               const SizedBox(height: 12),

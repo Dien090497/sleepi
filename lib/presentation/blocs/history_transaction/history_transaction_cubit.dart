@@ -2,6 +2,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:slee_fi/di/injector.dart';
 import 'package:slee_fi/usecase/current_network_explorer_usecase.dart';
 import 'package:slee_fi/usecase/get_history_transaction_usecase.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import 'history_transaction_state.dart';
 
@@ -56,7 +57,11 @@ class HistoryTransactionCubit extends Cubit<HistoryTransactionState> {
           (l) {
         emit(HistoryTransactionState.error('$l'));
       },
-          (success) {
+          (success) async{
+            final url = Uri.parse(success);
+            if (await canLaunchUrl(url)) {
+            launchUrl(url);
+            }
         emit(HistoryTransactionState.getUrlDetailTransactionSuccess(success));
       },
     );

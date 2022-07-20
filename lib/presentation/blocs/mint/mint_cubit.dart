@@ -79,6 +79,7 @@ class MintCubit extends Cubit<MintState> {
         result.fold((l) {
           emit(MintState.error('$l'));
         }, (r) {
+          emit(MintState.getInfoMint(r));
           emit(currentState.copyWith());
         });
       }
