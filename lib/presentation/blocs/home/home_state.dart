@@ -16,7 +16,6 @@ class HomeState with _$HomeState {
   const factory HomeState.loaded({
     required List<BedEntity> bedList,
     required BedEntity? selectedBed,
-    BedEntity? item,
     ItemEntity? selectedItem,
     @Default('') String errorMessage,
     @Default(ErrorType.none) ErrorType errorType,

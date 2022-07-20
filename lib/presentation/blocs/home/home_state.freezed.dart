@@ -23,7 +23,6 @@ mixin _$HomeState {
     required TResult Function(
             List<BedEntity> bedList,
             BedEntity? selectedBed,
-            BedEntity? item,
             ItemEntity? selectedItem,
             String errorMessage,
             ErrorType errorType,
@@ -50,7 +49,6 @@ mixin _$HomeState {
     TResult Function(
             List<BedEntity> bedList,
             BedEntity? selectedBed,
-            BedEntity? item,
             ItemEntity? selectedItem,
             String errorMessage,
             ErrorType errorType,
@@ -77,7 +75,6 @@ mixin _$HomeState {
     TResult Function(
             List<BedEntity> bedList,
             BedEntity? selectedBed,
-            BedEntity? item,
             ItemEntity? selectedItem,
             String errorMessage,
             ErrorType errorType,
@@ -194,7 +191,6 @@ class _$HomeInitial with DiagnosticableTreeMixin implements HomeInitial {
     required TResult Function(
             List<BedEntity> bedList,
             BedEntity? selectedBed,
-            BedEntity? item,
             ItemEntity? selectedItem,
             String errorMessage,
             ErrorType errorType,
@@ -224,7 +220,6 @@ class _$HomeInitial with DiagnosticableTreeMixin implements HomeInitial {
     TResult Function(
             List<BedEntity> bedList,
             BedEntity? selectedBed,
-            BedEntity? item,
             ItemEntity? selectedItem,
             String errorMessage,
             ErrorType errorType,
@@ -254,7 +249,6 @@ class _$HomeInitial with DiagnosticableTreeMixin implements HomeInitial {
     TResult Function(
             List<BedEntity> bedList,
             BedEntity? selectedBed,
-            BedEntity? item,
             ItemEntity? selectedItem,
             String errorMessage,
             ErrorType errorType,
@@ -376,7 +370,6 @@ class _$HomeLoading with DiagnosticableTreeMixin implements HomeLoading {
     required TResult Function(
             List<BedEntity> bedList,
             BedEntity? selectedBed,
-            BedEntity? item,
             ItemEntity? selectedItem,
             String errorMessage,
             ErrorType errorType,
@@ -406,7 +399,6 @@ class _$HomeLoading with DiagnosticableTreeMixin implements HomeLoading {
     TResult Function(
             List<BedEntity> bedList,
             BedEntity? selectedBed,
-            BedEntity? item,
             ItemEntity? selectedItem,
             String errorMessage,
             ErrorType errorType,
@@ -436,7 +428,6 @@ class _$HomeLoading with DiagnosticableTreeMixin implements HomeLoading {
     TResult Function(
             List<BedEntity> bedList,
             BedEntity? selectedBed,
-            BedEntity? item,
             ItemEntity? selectedItem,
             String errorMessage,
             ErrorType errorType,
@@ -515,7 +506,6 @@ abstract class _$$HomeLoadedCopyWith<$Res> {
   $Res call(
       {List<BedEntity> bedList,
       BedEntity? selectedBed,
-      BedEntity? item,
       ItemEntity? selectedItem,
       String errorMessage,
       ErrorType errorType,
@@ -532,7 +522,6 @@ abstract class _$$HomeLoadedCopyWith<$Res> {
       int time});
 
   $BedEntityCopyWith<$Res>? get selectedBed;
-  $BedEntityCopyWith<$Res>? get item;
   $ItemEntityCopyWith<$Res>? get selectedItem;
 }
 
@@ -550,7 +539,6 @@ class __$$HomeLoadedCopyWithImpl<$Res> extends _$HomeStateCopyWithImpl<$Res>
   $Res call({
     Object? bedList = freezed,
     Object? selectedBed = freezed,
-    Object? item = freezed,
     Object? selectedItem = freezed,
     Object? errorMessage = freezed,
     Object? errorType = freezed,
@@ -574,10 +562,6 @@ class __$$HomeLoadedCopyWithImpl<$Res> extends _$HomeStateCopyWithImpl<$Res>
       selectedBed: selectedBed == freezed
           ? _value.selectedBed
           : selectedBed // ignore: cast_nullable_to_non_nullable
-              as BedEntity?,
-      item: item == freezed
-          ? _value.item
-          : item // ignore: cast_nullable_to_non_nullable
               as BedEntity?,
       selectedItem: selectedItem == freezed
           ? _value.selectedItem
@@ -650,17 +634,6 @@ class __$$HomeLoadedCopyWithImpl<$Res> extends _$HomeStateCopyWithImpl<$Res>
   }
 
   @override
-  $BedEntityCopyWith<$Res>? get item {
-    if (_value.item == null) {
-      return null;
-    }
-
-    return $BedEntityCopyWith<$Res>(_value.item!, (value) {
-      return _then(_value.copyWith(item: value));
-    });
-  }
-
-  @override
   $ItemEntityCopyWith<$Res>? get selectedItem {
     if (_value.selectedItem == null) {
       return null;
@@ -678,7 +651,6 @@ class _$HomeLoaded with DiagnosticableTreeMixin implements HomeLoaded {
   const _$HomeLoaded(
       {required final List<BedEntity> bedList,
       required this.selectedBed,
-      this.item,
       this.selectedItem,
       this.errorMessage = '',
       this.errorType = ErrorType.none,
@@ -704,8 +676,6 @@ class _$HomeLoaded with DiagnosticableTreeMixin implements HomeLoaded {
 
   @override
   final BedEntity? selectedBed;
-  @override
-  final BedEntity? item;
   @override
   final ItemEntity? selectedItem;
   @override
@@ -748,7 +718,7 @@ class _$HomeLoaded with DiagnosticableTreeMixin implements HomeLoaded {
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'HomeState.loaded(bedList: $bedList, selectedBed: $selectedBed, item: $item, selectedItem: $selectedItem, errorMessage: $errorMessage, errorType: $errorType, loadMoreBed: $loadMoreBed, loading: $loading, enableInsurance: $enableInsurance, enableAlarm: $enableAlarm, tokenEarn: $tokenEarn, startTracking: $startTracking, userStatusTracking: $userStatusTracking, startRange: $startRange, endRange: $endRange, selectedTime: $selectedTime, time: $time)';
+    return 'HomeState.loaded(bedList: $bedList, selectedBed: $selectedBed, selectedItem: $selectedItem, errorMessage: $errorMessage, errorType: $errorType, loadMoreBed: $loadMoreBed, loading: $loading, enableInsurance: $enableInsurance, enableAlarm: $enableAlarm, tokenEarn: $tokenEarn, startTracking: $startTracking, userStatusTracking: $userStatusTracking, startRange: $startRange, endRange: $endRange, selectedTime: $selectedTime, time: $time)';
   }
 
   @override
@@ -758,7 +728,6 @@ class _$HomeLoaded with DiagnosticableTreeMixin implements HomeLoaded {
       ..add(DiagnosticsProperty('type', 'HomeState.loaded'))
       ..add(DiagnosticsProperty('bedList', bedList))
       ..add(DiagnosticsProperty('selectedBed', selectedBed))
-      ..add(DiagnosticsProperty('item', item))
       ..add(DiagnosticsProperty('selectedItem', selectedItem))
       ..add(DiagnosticsProperty('errorMessage', errorMessage))
       ..add(DiagnosticsProperty('errorType', errorType))
@@ -783,7 +752,6 @@ class _$HomeLoaded with DiagnosticableTreeMixin implements HomeLoaded {
             const DeepCollectionEquality().equals(other._bedList, _bedList) &&
             const DeepCollectionEquality()
                 .equals(other.selectedBed, selectedBed) &&
-            const DeepCollectionEquality().equals(other.item, item) &&
             const DeepCollectionEquality()
                 .equals(other.selectedItem, selectedItem) &&
             const DeepCollectionEquality()
@@ -814,7 +782,6 @@ class _$HomeLoaded with DiagnosticableTreeMixin implements HomeLoaded {
       runtimeType,
       const DeepCollectionEquality().hash(_bedList),
       const DeepCollectionEquality().hash(selectedBed),
-      const DeepCollectionEquality().hash(item),
       const DeepCollectionEquality().hash(selectedItem),
       const DeepCollectionEquality().hash(errorMessage),
       const DeepCollectionEquality().hash(errorType),
@@ -843,7 +810,6 @@ class _$HomeLoaded with DiagnosticableTreeMixin implements HomeLoaded {
     required TResult Function(
             List<BedEntity> bedList,
             BedEntity? selectedBed,
-            BedEntity? item,
             ItemEntity? selectedItem,
             String errorMessage,
             ErrorType errorType,
@@ -865,7 +831,6 @@ class _$HomeLoaded with DiagnosticableTreeMixin implements HomeLoaded {
     return loaded(
         bedList,
         selectedBed,
-        item,
         selectedItem,
         errorMessage,
         errorType,
@@ -890,7 +855,6 @@ class _$HomeLoaded with DiagnosticableTreeMixin implements HomeLoaded {
     TResult Function(
             List<BedEntity> bedList,
             BedEntity? selectedBed,
-            BedEntity? item,
             ItemEntity? selectedItem,
             String errorMessage,
             ErrorType errorType,
@@ -912,7 +876,6 @@ class _$HomeLoaded with DiagnosticableTreeMixin implements HomeLoaded {
     return loaded?.call(
         bedList,
         selectedBed,
-        item,
         selectedItem,
         errorMessage,
         errorType,
@@ -937,7 +900,6 @@ class _$HomeLoaded with DiagnosticableTreeMixin implements HomeLoaded {
     TResult Function(
             List<BedEntity> bedList,
             BedEntity? selectedBed,
-            BedEntity? item,
             ItemEntity? selectedItem,
             String errorMessage,
             ErrorType errorType,
@@ -961,7 +923,6 @@ class _$HomeLoaded with DiagnosticableTreeMixin implements HomeLoaded {
       return loaded(
           bedList,
           selectedBed,
-          item,
           selectedItem,
           errorMessage,
           errorType,
@@ -1025,7 +986,6 @@ abstract class HomeLoaded implements HomeState {
   const factory HomeLoaded(
       {required final List<BedEntity> bedList,
       required final BedEntity? selectedBed,
-      final BedEntity? item,
       final ItemEntity? selectedItem,
       final String errorMessage,
       final ErrorType errorType,
@@ -1043,7 +1003,6 @@ abstract class HomeLoaded implements HomeState {
 
   List<BedEntity> get bedList;
   BedEntity? get selectedBed;
-  BedEntity? get item;
   ItemEntity? get selectedItem;
   String get errorMessage;
   ErrorType get errorType;
@@ -1141,7 +1100,6 @@ class _$HomeStartError with DiagnosticableTreeMixin implements HomeStartError {
     required TResult Function(
             List<BedEntity> bedList,
             BedEntity? selectedBed,
-            BedEntity? item,
             ItemEntity? selectedItem,
             String errorMessage,
             ErrorType errorType,
@@ -1171,7 +1129,6 @@ class _$HomeStartError with DiagnosticableTreeMixin implements HomeStartError {
     TResult Function(
             List<BedEntity> bedList,
             BedEntity? selectedBed,
-            BedEntity? item,
             ItemEntity? selectedItem,
             String errorMessage,
             ErrorType errorType,
@@ -1201,7 +1158,6 @@ class _$HomeStartError with DiagnosticableTreeMixin implements HomeStartError {
     TResult Function(
             List<BedEntity> bedList,
             BedEntity? selectedBed,
-            BedEntity? item,
             ItemEntity? selectedItem,
             String errorMessage,
             ErrorType errorType,
@@ -1354,7 +1310,6 @@ class _$HomeError with DiagnosticableTreeMixin implements HomeError {
     required TResult Function(
             List<BedEntity> bedList,
             BedEntity? selectedBed,
-            BedEntity? item,
             ItemEntity? selectedItem,
             String errorMessage,
             ErrorType errorType,
@@ -1384,7 +1339,6 @@ class _$HomeError with DiagnosticableTreeMixin implements HomeError {
     TResult Function(
             List<BedEntity> bedList,
             BedEntity? selectedBed,
-            BedEntity? item,
             ItemEntity? selectedItem,
             String errorMessage,
             ErrorType errorType,
@@ -1414,7 +1368,6 @@ class _$HomeError with DiagnosticableTreeMixin implements HomeError {
     TResult Function(
             List<BedEntity> bedList,
             BedEntity? selectedBed,
-            BedEntity? item,
             ItemEntity? selectedItem,
             String errorMessage,
             ErrorType errorType,

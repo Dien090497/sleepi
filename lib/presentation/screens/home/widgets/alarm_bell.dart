@@ -46,7 +46,6 @@ class AlarmBell extends StatelessWidget {
           );
         }
         if (state is HomeLoaded && state.errorMessage.isNotEmpty) {
-          Navigator.pop(context, true);
           showMessageDialog(context, state.errorMessage);
         }
       },

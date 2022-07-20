@@ -74,7 +74,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
           // minute: DateTime.now().minute,
           // hour: DateTime.now().hour,
           selectedTime: DateTime.now(),
-          tokenEarn: await _estimateTracking(r.first, true),
+          tokenEarn: await _estimateTracking(r.first, true, null),
           startRange:
               bed?.startTime != null ? _getRange(bed!.startTime!) : null,
           endRange: bed?.startTime != null ? _getRange(bed!.endTime!) : null,
@@ -133,8 +133,8 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
             errorMessage: '',
             bedList: r,
             loadMoreBed: r.length >= _limitItemPage,
-            tokenEarn: await _estimateTracking(
-                currentState.selectedBed!, currentState.enableInsurance),
+            tokenEarn: await _estimateTracking(currentState.selectedBed!,
+                currentState.enableInsurance, currentState.selectedItem),
             userStatusTracking: await _getStatusTracking(),
           ));
         },
@@ -150,7 +150,10 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
         selectedBed: bed,
         errorMessage: '',
         tokenEarn: await _estimateTracking(
-            currentState.selectedBed!, currentState.enableInsurance),
+          currentState.selectedBed!,
+          currentState.enableInsurance,
+          currentState.selectedItem,
+        ),
         startRange: bed.startTime != null ? _getRange(bed.startTime!) : null,
         endRange: bed.startTime != null ? _getRange(bed.endTime!) : null,
       ));
@@ -159,21 +162,28 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
 
   void _addItemToBed(AddItem event, Emitter<HomeState> emit) async {
     final currentState = state;
-    if (currentState is HomeLoaded && currentState.bedList.isNotEmpty) {
-      final result = await _addItemToBedUC
-          .call(AddItemToBedParam(currentState.selectedBed!.id, event.item.id));
-      result.fold((l) {
-        emit(currentState.copyWith(
-          errorMessage: l.msg,
-          errorType: ErrorType.addItemToBed,
-        ));
-      }, (r) async {
-        emit(currentState.copyWith(
-          selectedItem: event.item,
-          tokenEarn: await _estimateTracking(currentState.selectedBed!, true),
-        ));
-      });
+    if (currentState is! HomeLoaded || currentState.selectedBed == null) {
+      return;
     }
+    final result = await _addItemToBedUC
+        .call(AddItemToBedParam(currentState.selectedBed!.id, event.item.id));
+    final tokenEarn = await _estimateTracking(
+      currentState.selectedBed!,
+      true,
+      currentState.selectedItem,
+    );
+
+    result.fold((l) {
+      emit(currentState.copyWith(
+        errorMessage: l.msg,
+        errorType: ErrorType.addItemToBed,
+      ));
+    }, (r) async {
+      emit(currentState.copyWith(
+        selectedItem: event.item,
+        tokenEarn: tokenEarn,
+      ));
+    });
   }
 
   void _removeItem(RemoveItem event, Emitter<HomeState> emit) async {
@@ -190,15 +200,22 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
         emit(currentState.copyWith(
           selectedItem: null,
           errorType: ErrorType.none,
-          tokenEarn: await _estimateTracking(currentState.selectedBed!, true),
+          tokenEarn: await _estimateTracking(
+            currentState.selectedBed!,
+            true,
+            currentState.selectedItem,
+          ),
         ));
       });
     }
   }
 
-  Future<double> _estimateTracking(BedEntity bed, bool insuranceEnabled) async {
+  Future<double> _estimateTracking(
+      BedEntity bed, bool insuranceEnabled, ItemEntity? itemEntity) async {
     final result = await _estimateTrackingUC.call(EstimateTrackingParam(
-        bedId: bed.id, itemId: bed.id, isEnableInsurance: insuranceEnabled));
+        bedId: bed.id,
+        itemId: itemEntity?.id,
+        isEnableInsurance: insuranceEnabled));
     return double.parse(
         result.foldRight('0', (r, previous) => r.estimateSlftEarn));
   }
