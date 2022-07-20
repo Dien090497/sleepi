@@ -15,14 +15,14 @@ class TransactionImplementation extends IMarketPlaceRepository {
   TransactionImplementation(this._authDataSource);
 
   @override
-  Future<Either<Failure, ListMarketPlaceModel>> getListMarketPlace(
+  Future<Either<FailureMessage, ListMarketPlaceModel>> getListMarketPlace(
       MarketSchema params) async {
-    try {
+    // try {
       final result = await _authDataSource.getMarketPlace(params);
       return Right(result);
-    } catch (e) {
-      return Left(FailureMessage('$e'));
-    }
+    // } catch (e) {
+    //   return Left(FailureMessage('$e'));
+    // }
   }
 
   @override

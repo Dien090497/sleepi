@@ -7,54 +7,34 @@ part 'market_place_model.g.dart';
 @JsonSerializable()
 class MarketPlaceModel {
   final int id;
-
-  @JsonKey(name: 'nft_id')
   final int nftId;
-
   @JsonKey(name: 'category_id')
   final int categoryId;
-
-  @JsonKey(name: 'is_lock')
-  final int isLock;
-
+  final int? isLock;
   final int time;
   final int level;
-
-  @JsonKey(name: 'bed_mint')
   final int bedMint;
-  @JsonKey(name: 'is_mint')
   final int isMint;
-
-  final double efficiency;
-  final double luck;
-  final double bonus;
-  final double special;
-  final double resilience;
-  final double durability;
+  final String efficiency;
+  final String luck;
+  final String bonus;
+  final String special;
+  final String resilience;
+  final String durability;
   final double? startTime;
   final double? endTime;
   final String price;
   final String symbol;
   final String status;
-  @JsonKey(name: 'created_at')
   final String createdAt;
-
-  @JsonKey(name: 'updated_at')
   final String updatedAt;
-
-  @JsonKey(name: 'nft_name')
   final String nftName;
-
   final String image;
-  @JsonKey(name: 'contract_address')
   final String contractAddress;
-
   final String type;
-  @JsonKey(name: 'class')
   final String? classNft;
   final String? quality;
   final String owner;
-  @JsonKey(name: 'token_id')
   final int tokenId;
 
   MarketPlaceModel(
@@ -106,14 +86,14 @@ class MarketPlaceModel {
       type: type,
       contractAddress: contractAddress,
       quality: quality!,
-      durability: durability,
-      isLock: isLock,
+      durability: double.parse(durability),
+      isLock: isLock ?? -1,
       bedMint: bedMint,
-      efficiency: efficiency,
-      luck: luck,
-      bonus: bonus,
-      special: special,
-      resilience: resilience,
+      efficiency: double.parse(efficiency),
+      luck: double.parse(luck),
+      bonus: double.parse(bonus),
+      special: double.parse(special),
+      resilience: double.parse(resilience),
       time: time,
       startTime: startTime,
       endTime: endTime,
