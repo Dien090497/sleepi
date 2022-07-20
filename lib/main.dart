@@ -48,14 +48,11 @@ void main() async {
     },
     appRunner: () {
       return BlocOverrides.runZoned(
-        () => runApp(DefaultAssetBundle(
-          bundle: SentryAssetBundle(),
-          child: EasyLocalization(
-            supportedLocales: Const.locales,
-            path: 'assets/translations',
-            fallbackLocale: Const.localeEN,
-            child: const MyApp(),
-          ),
+        () => runApp(EasyLocalization(
+          supportedLocales: Const.locales,
+          path: 'assets/translations',
+          fallbackLocale: Const.localeEN,
+          child: const MyApp(),
         )),
         blocObserver: AppBlocObserver(),
       );
@@ -82,7 +79,6 @@ class AppBlocObserver extends BlocObserver {
 }
 
 Future<void> initializeService() async {
-  WidgetsFlutterBinding.ensureInitialized();
   final service = FlutterBackgroundService();
   await service.configure(
     androidConfiguration: AndroidConfiguration(
