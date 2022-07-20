@@ -89,7 +89,8 @@ class _ListTransferNftWidgetState extends State<ListTransferNftWidget> {
                       final nft = state.nftEntities[index];
                       final bedType =
                           BedType.values[index % BedType.values.length];
-                      final userState = context.read<UserBloc>() as UserLoaded;
+                      final userState =
+                          context.read<UserBloc>().state as UserLoaded;
                       final walletState =
                           context.read<WalletCubit>() as WalletStateLoaded;
 

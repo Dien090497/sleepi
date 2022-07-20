@@ -79,7 +79,7 @@ class HomeScreen extends StatelessWidget {
                               if (state is HomeLoaded &&
                                   state.bedList.isNotEmpty) ...[
                                 GestureDetector(
-                                  onTap: () {
+                                  onTap: () async {
                                     launchInsurance(context);
                                   },
                                   child: Row(
