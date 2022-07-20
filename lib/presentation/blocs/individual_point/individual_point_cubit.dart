@@ -45,8 +45,7 @@ class IndividualPointCubit extends Cubit<IndividualPointState> {
       final getPointRes = await _getPointOfOwnerUC.call(currentState.bed.nftId);
       getPointRes.fold(
         (l) {
-          emit(IndividualPointState.error('$l'));
-          emit(currentState.copyWith(isLoading: false));
+          emit(currentState.copyWith(isLoading: false, point: 0));
         },
         (r) {
           emit(currentState.copyWith(point: r, maxPoint: r, isLoading: false));

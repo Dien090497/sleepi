@@ -98,6 +98,7 @@ Future<void> initializeService() async {
       onBackground: onIosBackground,
     ),
   );
+  // await service.startService();
 }
 
 // to ensure this executed
@@ -120,13 +121,13 @@ Future<void> onStart(ServiceInstance service) async {
       service.setAsBackgroundService();
     });
   }
-  service.on(Const.stopService).listen((event) {
-    audioPlayer.stop();
-    audioPlayer.dispose();
-    service.stopSelf();
+  service.on(Const.stopService).listen((event) async {
+    await audioPlayer.stop();
+    await audioPlayer.dispose();
+    await service.stopSelf();
   });
 
-  SharedPreferences preferences = await SharedPreferences.getInstance();
+  final SharedPreferences preferences = await SharedPreferences.getInstance();
   final int timeWakeUp = preferences.getInt(Const.time) ?? 0;
   final int sound = preferences.getInt(Const.sound) ?? 0;
   DateTime wakeUp = DateTime.fromMillisecondsSinceEpoch(timeWakeUp);

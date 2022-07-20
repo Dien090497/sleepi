@@ -37,8 +37,7 @@ class TrackingParams {
       required this.timeWakeUp,
       required this.tokenEarn,
       required this.fromRoute,
-      this.imageBed
-      });
+      this.imageBed});
 }
 
 class TrackingScreen extends StatefulWidget {
@@ -63,7 +62,7 @@ class _TrackingScreenState extends State<TrackingScreen> {
     super.initState();
   }
 
-  init(){
+  void init() {
     Future.delayed(Duration.zero, () async {
       final args = ModalRoute.of(context)?.settings.arguments as TrackingParams;
       totalEarn = args.tokenEarn;
@@ -75,12 +74,12 @@ class _TrackingScreenState extends State<TrackingScreen> {
       earn =
           (DateTime.now().difference(timStart).inMinutes) * (totalEarn / time);
       timeAlarm =
-      '${wakeUp.hour < 10 ? '0${wakeUp.hour}' : wakeUp.hour}:${wakeUp.minute < 10 ? '0${wakeUp.minute}' : wakeUp.minute}';
+          '${wakeUp.hour < 10 ? '0${wakeUp.hour}' : wakeUp.hour}:${wakeUp.minute < 10 ? '0${wakeUp.minute}' : wakeUp.minute}';
       fromRoute = args.fromRoute;
       double x = totalEarn / time;
       timer = Timer.periodic(
         const Duration(minutes: 1),
-            (Timer timer) async {
+        (Timer timer) async {
           if (earn < totalEarn && x > 0) {
             earn += x;
             setState(() {});
@@ -113,7 +112,10 @@ class _TrackingScreenState extends State<TrackingScreen> {
             if (state is TrackingStatePosted) {
               Navigator.pushReplacementNamed(context, R.preResult,
                   arguments: PreResultParams(
-                      fromRoute: fromRoute, resultModel: state.resultModel, dataChart: [], imageBed: args.imageBed));
+                      fromRoute: fromRoute,
+                      resultModel: state.resultModel,
+                      dataChart: [],
+                      imageBed: args.imageBed));
             }
             if (state is TrackingStateFail) {
               showMessageDialog(context, state.msg);
@@ -123,123 +125,122 @@ class _TrackingScreenState extends State<TrackingScreen> {
             final cubit = context.read<TrackingCubit>();
 
             return FocusDetector(
-                onFocusGained: () async {
-                  if(!(await service.isRunning())) {
-                    service.invoke(Const.setAsForeground);
-                    service.startService();
-                  }
-                },
-                onFocusLost: () {
-                },
-                child: Stack(
-                  children: [
-                    BackgroundWidget(
-                      appBar: SFAppBar(
-                        context: context,
-                        title: LocaleKeys.tracking,
-                        textStyle: TextStyles.bold18LightWhite,
-                        disableLeading: true,
-                      ),
-                      child: Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 24.0),
-                        child: Column(
-                          children: [
-                            Stack(
-                              alignment: Alignment.center,
-                              children: [
-                                Container(
-                                  width: 318,
-                                  height: 318,
-                                  decoration: const BoxDecoration(
-                                      image: DecorationImage(
-                                    image: AssetImage(Imgs.borderClock),
-                                  )),
+              onFocusGained: () async {
+                if (!(await service.isRunning())) {
+                  service.invoke(Const.setAsForeground);
+                  service.startService();
+                }
+              },
+              onFocusLost: () {},
+              child: Stack(
+                children: [
+                  BackgroundWidget(
+                    appBar: SFAppBar(
+                      context: context,
+                      title: LocaleKeys.tracking,
+                      textStyle: TextStyles.bold18LightWhite,
+                      disableLeading: true,
+                    ),
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 24.0),
+                      child: Column(
+                        children: [
+                          Stack(
+                            alignment: Alignment.center,
+                            children: [
+                              Container(
+                                width: 318,
+                                height: 318,
+                                decoration: const BoxDecoration(
+                                    image: DecorationImage(
+                                  image: AssetImage(Imgs.borderClock),
+                                )),
+                              ),
+                              Container(
+                                width: 190,
+                                height: 190,
+                                decoration: BoxDecoration(
+                                  shape: BoxShape.circle,
+                                  color: AppColors.white.withOpacity(0.07),
                                 ),
-                                Container(
-                                  width: 190,
-                                  height: 190,
-                                  decoration: BoxDecoration(
-                                    shape: BoxShape.circle,
-                                    color: AppColors.white.withOpacity(0.07),
+                              ),
+                              const SizedBox(
+                                width: 230,
+                                height: 230,
+                                child: AnalogClock(
+                                  isLive: true,
+                                  hourHandColor: Colors.white,
+                                  minuteHandColor: Colors.white,
+                                  showSecondHand: true,
+                                  secondHandColor: AppColors.blue,
+                                  numberColor: AppColors.lightWhite,
+                                  showNumbers: true,
+                                  textScaleFactor: 1.2,
+                                  showTicks: true,
+                                  tickColor: AppColors.tick,
+                                  showDigitalClock: false,
+                                ),
+                              ),
+                            ],
+                          ),
+                          const SizedBox(
+                            height: 24,
+                          ),
+                          Column(
+                            children: [
+                              SFText(
+                                keyText: LocaleKeys.amount_earned,
+                                style: TextStyles.w400lightGrey14,
+                              ),
+                              const SizedBox(
+                                height: 12,
+                              ),
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  const SFIcon(
+                                    Ics.icSlft,
+                                    width: 40,
                                   ),
-                                ),
-                                const SizedBox(
-                                  width: 230,
-                                  height: 230,
-                                  child: AnalogClock(
-                                    isLive: true,
-                                    hourHandColor: Colors.white,
-                                    minuteHandColor: Colors.white,
-                                    showSecondHand: true,
-                                    secondHandColor: AppColors.blue,
-                                    numberColor: AppColors.lightWhite,
-                                    showNumbers: true,
-                                    textScaleFactor: 1.2,
-                                    showTicks: true,
-                                    tickColor: AppColors.tick,
-                                    showDigitalClock: false,
+                                  const SizedBox(
+                                    width: 8,
                                   ),
-                                ),
-                              ],
-                            ),
-                            const SizedBox(
-                              height: 24,
-                            ),
-                            Column(
-                              children: [
-                                SFText(
-                                  keyText: LocaleKeys.amount_earned,
-                                  style: TextStyles.w400lightGrey14,
-                                ),
-                                const SizedBox(
-                                  height: 12,
-                                ),
-                                Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    const SFIcon(
-                                      Ics.icSlft,
-                                      width: 40,
-                                    ),
-                                    const SizedBox(
-                                      width: 8,
-                                    ),
-                                    SFText(
-                                      keyText:
-                                          "${earn.formatBalance2Digits} SLFT",
-                                      style: TextStyles.bold30White,
-                                    ),
-                                  ],
-                                )
-                              ],
-                            ),
-                            const SizedBox(
-                              height: 24,
-                            ),
-                            SFLabelValue(
-                              label: LocaleKeys.alarm,
-                              value: timeAlarm,
-                              styleLabel: TextStyles.lightWhite16,
-                              styleValue: TextStyles.lightWhite16,
-                            ),
-                            const Spacer(),
-                            SFButton(
-                              text: LocaleKeys.wake_up,
-                              width: double.infinity,
-                              color: AppColors.blue,
-                              textStyle: TextStyles.w600WhiteSize16,
-                              onPressed: () {
-                                cubit.fetchData().then((value) => service.invoke(Const.stopService));
-                              },
-                            ),
-                            const SizedBox(height: 26),
-                          ],
-                        ),
+                                  SFText(
+                                    keyText:
+                                        "${earn.formatBalance2Digits} SLFT",
+                                    style: TextStyles.bold30White,
+                                  ),
+                                ],
+                              )
+                            ],
+                          ),
+                          const SizedBox(height: 24),
+                          SFLabelValue(
+                            label: LocaleKeys.alarm,
+                            value: timeAlarm,
+                            styleLabel: TextStyles.lightWhite16,
+                            styleValue: TextStyles.lightWhite16,
+                          ),
+                          const Spacer(),
+                          SFButton(
+                            text: LocaleKeys.wake_up,
+                            width: double.infinity,
+                            color: AppColors.blue,
+                            textStyle: TextStyles.w600WhiteSize16,
+                            onPressed: () {
+                              service.invoke(Const.stopService);
+                              cubit.fetchData();
+                            },
+                          ),
+                          const SizedBox(height: 26),
+                        ],
                       ),
                     ),
-                    if (state is TrackingStateLoading) const LoadingScreen(),
-                  ],
-                ));
+                  ),
+                  if (state is TrackingStateLoading) const LoadingScreen(),
+                ],
+              ),
+            );
           },
         ),
       ),

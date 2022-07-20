@@ -27,9 +27,7 @@ class _AlarmSoundEffectListState extends State<AlarmSoundEffectList> {
 
   @override
   void dispose() {
-    audioPlayer
-      ..stop()
-      ..dispose();
+    audioPlayer.dispose();
     super.dispose();
   }
 
@@ -75,6 +73,6 @@ class _AlarmSoundEffectListState extends State<AlarmSoundEffectList> {
   void _playSound() async {
     await audioPlayer.stop();
     await audioPlayer.release();
-    audioPlayer.play(AssetSource(Const.soundAlarm[temp]));
+    await audioPlayer.play(AssetSource(Const.soundAlarm[temp]));
   }
 }
