@@ -2,7 +2,6 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:focus_detector/focus_detector.dart';
 import 'package:slee_fi/common/widgets/sf_alert_dialog.dart';
 import 'package:slee_fi/common/widgets/sf_bottom_sheets.dart';
 import 'package:slee_fi/common/widgets/sf_dialog.dart';
@@ -81,98 +80,93 @@ class _TabItemsBuyState extends State<TabItemsBuy> {
           },
           builder: (context, state) {
             final cubit = context.read<MarketPlaceCubit>();
-            return FocusDetector(
-              onFocusGained: () {
-                cubit.clearFilter();
-              },
-              child: Column(
-                children: [
-                  TabBarFilter(
-                    cubit: cubit,
-                    tabTexts: const [LocaleKeys.buy, LocaleKeys.rent],
-                    onFilterTap: () {
-                      showFilterModalBottomSheet(
-                        cubit: cubit,
-                        context,
-                        sections: {
-                          LocaleKeys.type.tr(): [
-                            LocaleKeys.blue,
-                            LocaleKeys.purple,
-                            LocaleKeys.red,
-                            LocaleKeys.white,
-                          ],
-                        },
-                        sliders: {
-                          LocaleKeys.level.tr(): FilterSliderValues(
-                              value: SfRangeValues(
-                                cubit.params.minLevel,
-                                cubit.params.maxLevel,
-                              ),
-                              max: 5,
-                              min: 1),
-                        },
-                      );
-                    },
-                  ),
-                  Expanded(
-                    child: Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 12.w),
-                      child: (state is MarketPlaceStateLoading)
-                          ? const Center(
-                              child: CircularProgressIndicator(),
-                            )
-                          : Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                const SizedBox(height: 12),
-                                Expanded(
-                                  child: TabBarView(
-                                    children: [
-                                      SFGridView(
-                                        marketPlaceCubit: cubit,
-                                        isLoadMore: cubit.loadMore,
-                                        count: listItems.length,
-                                        isScroll: true,
-                                        onRefresh: () {
-                                          cubit.refresh();
-                                        },
-                                        childAspectRatio: 8 / 10,
-                                        itemBuilder: (context, i) {
-                                          return GestureDetector(
-                                            onTap: () {
-                                              _showItemDialog(
-                                                  context, listItems[i], cubit);
-                                            },
-                                            child: ItemBedBuyWidget(
-                                              item: listItems[i],
-                                              onPressedButton: () {
-                                                _showItemDialog(context,
-                                                    listItems[i], cubit);
-                                              },
-                                            ),
-                                          );
-                                        },
-                                      ),
-                                      Padding(
-                                        padding: EdgeInsets.only(
-                                            bottom: MediaQuery.of(context)
-                                                    .size
-                                                    .height *
-                                                0.3),
-                                        child: const Center(
-                                          child: SFIcon(Ics.commingSoon),
-                                        ),
-                                      )
-                                      // SFGridView(
-                                    ],
-                                  ),
-                                ),
-                              ],
+            return Column(
+              children: [
+                TabBarFilter(
+                  cubit: cubit,
+                  tabTexts: const [LocaleKeys.buy, LocaleKeys.rent],
+                  onFilterTap: () {
+                    showFilterModalBottomSheet(
+                      cubit: cubit,
+                      context,
+                      sections: {
+                        LocaleKeys.type.tr(): [
+                          LocaleKeys.blue,
+                          LocaleKeys.purple,
+                          LocaleKeys.red,
+                          LocaleKeys.white,
+                        ],
+                      },
+                      sliders: {
+                        LocaleKeys.level.tr(): FilterSliderValues(
+                            value: SfRangeValues(
+                              cubit.params.minLevel,
+                              cubit.params.maxLevel,
                             ),
+                            max: 5,
+                            min: 1),
+                      },
+                    );
+                  },
+                ),
+                Expanded(
+                  child: Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 12.w),
+                    child: (state is MarketPlaceStateLoading)
+                        ? const Center(
+                      child: CircularProgressIndicator(),
+                    )
+                        : Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        const SizedBox(height: 12),
+                        Expanded(
+                          child: TabBarView(
+                            children: [
+                              SFGridView(
+                                marketPlaceCubit: cubit,
+                                isLoadMore: cubit.loadMore,
+                                count: listItems.length,
+                                isScroll: true,
+                                onRefresh: () {
+                                  cubit.refresh();
+                                },
+                                childAspectRatio: 8 / 10,
+                                itemBuilder: (context, i) {
+                                  return GestureDetector(
+                                    onTap: () {
+                                      _showItemDialog(
+                                          context, listItems[i], cubit);
+                                    },
+                                    child: ItemBedBuyWidget(
+                                      item: listItems[i],
+                                      onPressedButton: () {
+                                        _showItemDialog(context,
+                                            listItems[i], cubit);
+                                      },
+                                    ),
+                                  );
+                                },
+                              ),
+                              Padding(
+                                padding: EdgeInsets.only(
+                                    bottom: MediaQuery.of(context)
+                                        .size
+                                        .height *
+                                        0.3),
+                                child: const Center(
+                                  child: SFIcon(Ics.commingSoon),
+                                ),
+                              )
+                              // SFGridView(
+                            ],
+                          ),
+                        ),
+                      ],
                     ),
                   ),
-                ],
-              ),
+                ),
+              ],
             );
           },
         ),

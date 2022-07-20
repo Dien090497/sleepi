@@ -42,7 +42,7 @@ class SFTabBarState extends State<SFTabBar>
     _tabController.dispose();
   }
 
-  moveToTab(int index) {
+  void moveToTab(int index) {
     if (_tabController.index == index) return;
     _tabController.animateTo(index);
   }
