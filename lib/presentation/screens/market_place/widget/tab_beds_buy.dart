@@ -92,8 +92,8 @@ class _TabBedsBuyState extends State<TabBedsBuy> {
                         context,
                         sections: {
                           LocaleKeys.type.tr(): [
-                            LocaleKeys.beds,
-                            LocaleKeys.bed_box,
+                            LocaleKeys.bed,
+                            LocaleKeys.bedbox,
                             LocaleKeys.genesis_beds,
                           ],
                           LocaleKeys.class_.tr(): [

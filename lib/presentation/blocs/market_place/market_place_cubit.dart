@@ -59,6 +59,7 @@ class MarketPlaceCubit extends Cubit<MarketPlaceState> {
   }
 
   Future<void> getMarketPlace(MarketSchema param) async {
+
     final result = await _marketPlaceUseCase.call(param);
     result.fold((l) {
       error = true;
@@ -109,19 +110,13 @@ class MarketPlaceCubit extends Cubit<MarketPlaceState> {
       Map<String, SfRangeValues> listSlider) async {
     listSelected.forEach((key, value) {
       if (key == LocaleKeys.type.tr()) {
-        params = params.copyWith(
-          type: value,
-        );
+        params = params.copyWith(type: value);
       }
       if (key == LocaleKeys.class_.tr()) {
-        params = params.copyWith(
-          classNft: value,
-        );
+        params = params.copyWith(classNft: value);
       }
       if (key == LocaleKeys.quality.tr()) {
-        params = params.copyWith(
-          quality: value,
-        );
+        params = params.copyWith(quality: value);
       }
     });
     listSlider.forEach((key, value) {

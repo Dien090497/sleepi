@@ -26,7 +26,7 @@ class MarketPlaceScreen extends StatelessWidget {
                 key: tabKey,
                 isScrollable: true,
                 texts: const [
-                  LocaleKeys.beds,
+                  LocaleKeys.bed,
                   LocaleKeys.jewels,
                   LocaleKeys.item,
                   LocaleKeys.trophy

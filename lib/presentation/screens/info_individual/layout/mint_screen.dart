@@ -226,7 +226,7 @@ class _MintScreenState extends State<MintScreen> {
                                             ),
                                             const SizedBox(height: 17),
                                             SFLabelValue(
-                                                label: LocaleKeys.bed_box,
+                                                label: LocaleKeys.bedbox,
                                                 styleLabel:
                                                     TextStyles.lightWhite14,
                                                 value: state.infoMinting != null

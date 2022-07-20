@@ -47,7 +47,7 @@ abstract class  LocaleKeys {
   static const import_a_wallet_using_seed_phrase = 'import_a_wallet_using_seed_phrase';
   static const import_wallet = 'import_wallet';
   static const enter_the_seed_phrase_word = 'enter_the_seed_phrase_word';
-  static const beds = 'beds';
+  static const bed = 'bed';
   static const jewels = 'jewels';
   static const item = 'item';
   static const trophy = 'trophy';
@@ -208,7 +208,7 @@ abstract class  LocaleKeys {
   static const range = 'range';
   static const alarm_bell = 'alarm_bell';
   static const item_list = 'item_list';
-  static const bed_box = 'bed_box';
+  static const bedbox = 'bedbox';
   static const bed_boxes = 'bed_boxes';
   static const use = 'use';
   static const type = 'type';
@@ -227,7 +227,6 @@ abstract class  LocaleKeys {
   static const free = 'free';
   static const inventory = 'inventory';
   static const wallet = 'wallet';
-  static const bed = 'bed';
   static const common_bed = 'common_bed';
   static const uncommon_bed = 'uncommon_bed';
   static const rare_bed = 'rare_bed';

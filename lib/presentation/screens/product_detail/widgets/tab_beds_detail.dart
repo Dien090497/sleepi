@@ -43,7 +43,7 @@ class _TabBedsDetailState extends State<TabBedsDetail> {
                   children: [
                     SFSubTabBar(
                         labelPadding: const EdgeInsets.symmetric(horizontal: 8),
-                        texts: const [LocaleKeys.beds, LocaleKeys.bed_box]),
+                        texts: const [LocaleKeys.bed, LocaleKeys.bedbox]),
                     const SizedBox(height: 12),
                     Expanded(
                       child: TabBarView(

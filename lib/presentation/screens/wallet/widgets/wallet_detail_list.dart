@@ -28,9 +28,9 @@ class WalletDetailList extends StatelessWidget {
     "SLGT",
     "AVAX",
     "USDC",
-    LocaleKeys.beds.tr(),
+    LocaleKeys.bed.tr(),
     LocaleKeys.jewels.tr(),
-    LocaleKeys.bed_box.tr(),
+    LocaleKeys.bedbox.tr(),
     LocaleKeys.item.tr(),
   ];
   final List icons = [
