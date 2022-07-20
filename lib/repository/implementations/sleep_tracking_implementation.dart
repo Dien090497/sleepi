@@ -69,11 +69,11 @@ class SleepTrackingImplementation extends ISleepTrackingRepository {
   @override
   Future<Either<FailureMessage, TrackingResultModel>> wakeUp(
       DataHealthSchema schema) async {
-    // try {
+    try {
       return Right(await _sleepTrackingApi.wakeUp(schema));
-    // } catch (e) {
-    //   return Left(FailureMessage.fromException(e));
-    // }
+    } catch (e) {
+      return Left(FailureMessage.fromException(e));
+    }
   }
 
   @override
