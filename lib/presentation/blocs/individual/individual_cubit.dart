@@ -1,4 +1,3 @@
-
 import 'package:bloc/bloc.dart';
 import 'package:slee_fi/di/injector.dart';
 import 'package:slee_fi/entities/bed_entity/bed_entity.dart';
@@ -29,17 +28,28 @@ class IndividualCubit extends Cubit<IndividualState> {
         .call(BedDetailParams(bedId: state.bed.nftId, isBase: state.isBase));
     res.fold(
       (l) {
-        emit(state.copyWith(isRefresh: false));
+        emit(state.copyWith(isRefresh: false, isLoading: false));
       },
       (r) {
-        emit(state.copyWith(isRefresh: false, bed: r));
+        emit(state.copyWith(isRefresh: false, isLoading: false, bed: r));
       },
     );
   }
 
   void changeIsBase() async {
-    emit(state.copyWith(isBase: !state.isBase, isLoading: true));
-    refresh();
+    if (state.isLoading) return;
+    final newState = state.copyWith(isBase: !state.isBase, isLoading: true);
+    emit(newState);
+    final res = await _detailBedUseCase
+        .call(BedDetailParams(bedId: state.bed.nftId, isBase: state.isBase));
+    res.fold(
+      (l) {
+        emit(newState.copyWith(isRefresh: false, isLoading: false));
+      },
+      (r) {
+        emit(newState.copyWith(isRefresh: false, isLoading: false, bed: r));
+      },
+    );
   }
 
   void loading(bool isLoading) {

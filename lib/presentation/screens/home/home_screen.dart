@@ -1,8 +1,9 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_background_service/flutter_background_service.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:slee_fi/common/const/const.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
-import 'package:slee_fi/common/utils/launch_url_utils.dart';
 import 'package:slee_fi/common/widgets/sf_icon.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
 import 'package:slee_fi/common/widgets/topbar_common.dart';
@@ -80,7 +81,12 @@ class HomeScreen extends StatelessWidget {
                                   state.bedList.isNotEmpty) ...[
                                 GestureDetector(
                                   onTap: () async {
-                                    launchInsurance(context);
+                                    // launchInsurance(context);
+                                    final service = FlutterBackgroundService();
+                                    if (!(await service.isRunning())) {
+                                      service.invoke(Const.setAsForeground);
+                                      service.startService();
+                                    }
                                   },
                                   child: Row(
                                     crossAxisAlignment:
