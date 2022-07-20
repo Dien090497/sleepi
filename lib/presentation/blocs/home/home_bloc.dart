@@ -8,6 +8,7 @@ import 'package:slee_fi/di/injector.dart';
 import 'package:slee_fi/entities/bed_entity/bed_entity.dart';
 import 'package:slee_fi/entities/item_entity/item_entity.dart';
 import 'package:slee_fi/l10n/locale_keys.g.dart';
+import 'package:slee_fi/models/user_status_tracking_model/user_status_tracking_model.dart';
 import 'package:slee_fi/presentation/blocs/home/home_state.dart';
 import 'package:slee_fi/schema/start_tracking/start_tracking_schema.dart';
 import 'package:slee_fi/usecase/add_item_to_bed_usecase.dart';
@@ -28,8 +29,6 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     on<ChangeBed>(_changeBed);
     on<RefreshBed>(_onRefresh);
     on<LoadMoreBed>(_onLoadMoreBed);
-    // on<EstimateTracking>(_estimateTracking);
-    on<UserStatusTracking>(_userStatusTracking);
     on<StartTracking>(_startTracking);
     on<ChangeInsurance>(_changeInsurance);
     on<ChangeStatusAlarm>(_changeStatusAlarm);
@@ -98,8 +97,8 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
             loadMoreBed: r.length >= _limitItemPage,
             tokenEarn: await _estimateTracking(
                 currentState.selectedBed!, currentState.enableInsurance),
+            userStatusTracking: await _getStatusTracking(),
           ));
-          add(UserStatusTracking());
         },
       );
     }
@@ -108,11 +107,14 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
   void _changeBed(ChangeBed event, Emitter<HomeState> emit) async {
     final currentState = state;
     if (currentState is HomeLoaded) {
+      final bed = event.bed;
       emit(currentState.copyWith(
-        selectedBed: event.bed,
+        selectedBed: bed,
         errorMessage: '',
         tokenEarn: await _estimateTracking(
             currentState.selectedBed!, currentState.enableInsurance),
+        startRange: bed.startTime != null ? _getRange(bed.startTime!) : null,
+        endRange: bed.startTime != null ? _getRange(bed.endTime!) : null,
       ));
     }
   }
@@ -129,19 +131,25 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
           startTracking: false,
           minute: DateTime.now().minute,
           hour: DateTime.now().hour,
+          userStatusTracking: await _getStatusTracking(),
         ));
       },
       (r) async {
         _currentPageBed++;
+        final bed = r.isNotEmpty ? r.first : null;
         emit(HomeState.loaded(
           errorMessage: '',
           loading: false,
           bedList: r,
-          selectedBed: r.isNotEmpty ? r.first : null,
+          selectedBed: bed,
           loadMoreBed: r.length >= _limitItemPage,
           minute: DateTime.now().minute,
           hour: DateTime.now().hour,
           tokenEarn: await _estimateTracking(r.first, true),
+          startRange:
+              bed?.startTime != null ? _getRange(bed!.startTime!) : null,
+          endRange: bed?.startTime != null ? _getRange(bed!.endTime!) : null,
+          userStatusTracking: await _getStatusTracking(),
         ));
       },
     );
@@ -193,27 +201,12 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
         result.foldRight('0', (r, previous) => r.estimateSlftEarn));
   }
 
-  void _userStatusTracking(
-      UserStatusTracking event, Emitter<HomeState> emit) async {
-    final currentState = state;
-    if (currentState is HomeLoaded) {
-      var result = await _userStatusTrackingUC.call(NoParams());
-      result.fold((l) => null, (r) {
-        emit(currentState.copyWith(
-          errorMessage: '',
-          userStatusTracking: r,
-          startTracking: false,
-        ));
-      });
-    }
-  }
-
   void _startTracking(StartTracking event, Emitter<HomeState> emit) async {
     final currentState = state;
     if (currentState is HomeLoaded && currentState.bedList.isNotEmpty) {
-      HealthFactory health = HealthFactory();
+      final HealthFactory health = HealthFactory();
 
-      var types = [
+      final types = [
         HealthDataType.SLEEP_IN_BED,
         HealthDataType.SLEEP_ASLEEP,
         HealthDataType.SLEEP_AWAKE,
@@ -222,12 +215,12 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
         HealthDataType.SLEEP_LIGHT,
       ];
 
-      bool accessWasGranted = await health.requestAuthorization(types);
+      final bool accessWasGranted = await health.requestAuthorization(types);
 
       if (accessWasGranted) {
         DateTime wakeUp =
             DateTime.now().add(Duration(minutes: currentState.time));
-        var result = await _startSleepTrackingUC.call(StartTrackingSchema(
+        final result = await _startSleepTrackingUC.call(StartTrackingSchema(
           isEnableInsurance: currentState.enableInsurance,
           bedUsed: currentState.selectedBed!.id,
           wakeUp: '${wakeUp.toUtc().millisecondsSinceEpoch ~/ 1000}',
@@ -255,7 +248,12 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
       ChangeStatusAlarm event, Emitter<HomeState> emit) async {
     final currentState = state;
     if (currentState is HomeLoaded && currentState.bedList.isNotEmpty) {
-      emit(currentState.copyWith(enableAlarm: event.enableAlarm));
+      final bed = currentState.selectedBed!;
+      emit(currentState.copyWith(
+        enableAlarm: event.enableAlarm,
+        startRange: bed.startTime != null ? _getRange(bed.startTime!) : null,
+        endRange: bed.startTime != null ? _getRange(bed.endTime!) : null,
+      ));
     }
   }
 
@@ -263,10 +261,13 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     final currentState = state;
 
     if (currentState is HomeLoaded) {
+      final bed = currentState.selectedBed!;
       emit(currentState.copyWith(
         errorMessage: '',
         hour: event.hour,
-        time: _getTimeWithHour(event.hour, currentState),
+        time: _getDifferentTimeInMinutes(event.hour, currentState.minute),
+        startRange: bed.startTime != null ? _getRange(bed.startTime!) : null,
+        endRange: bed.startTime != null ? _getRange(bed.endTime!) : null,
       ));
     }
   }
@@ -275,36 +276,54 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     final currentState = state;
 
     if (currentState is HomeLoaded) {
+      final bed = currentState.selectedBed!;
       emit(currentState.copyWith(
-          errorMessage: '',
-          minute: event.minute,
-          time: _getTimeWithMinutes(event.minute, currentState)));
+        errorMessage: '',
+        minute: event.minute,
+        time: _getDifferentTimeInMinutes(currentState.hour, event.minute),
+        startRange: bed.startTime != null ? _getRange(bed.startTime!) : null,
+        endRange: bed.startTime != null ? _getRange(bed.endTime!) : null,
+      ));
     }
   }
 
-  int _getTimeWithHour(int hour, HomeState state) {
-    if (state is! HomeLoaded) return 0;
-    var minute = state.minute;
-    var now = DateTime.now();
-    var nextDay = DateTime.now().add(const Duration(days: 1));
-    var wakeUpTimeInNextDay =
+  int _getDifferentTimeInMinutes(int hour, int minute) {
+    final now = DateTime.now();
+    final nextDay = now.add(const Duration(days: 1));
+    final wakeUpTimeInNextDay =
         DateTime(nextDay.year, nextDay.month, nextDay.day, hour, minute);
-    var wakeUpTimeInDay = DateTime(now.year, now.month, now.day, hour, minute);
-    var wakeUpTime = hour <= now.hour ? wakeUpTimeInNextDay : wakeUpTimeInDay;
+    final wakeUpTimeInDay =
+        DateTime(now.year, now.month, now.day, hour, minute);
+    final wakeUpTime = hour <= now.hour ? wakeUpTimeInNextDay : wakeUpTimeInDay;
 
     return wakeUpTime.difference(now).inMinutes;
   }
 
   int _getTimeWithMinutes(int minute, HomeState state) {
     if (state is! HomeLoaded) return 0;
-    var hour = state.hour;
-    var now = DateTime.now();
-    var nextDay = DateTime.now().add(const Duration(days: 1));
-    var wakeUpTimeInNextDay =
+    final hour = state.hour;
+    final now = DateTime.now();
+    final nextDay = now.add(const Duration(days: 1));
+    final wakeUpTimeInNextDay =
         DateTime(nextDay.year, nextDay.month, nextDay.day, hour, minute);
-    var wakeUpTimeInDay = DateTime(now.year, now.month, now.day, hour, minute);
-    var wakeUpTime = hour <= now.hour ? wakeUpTimeInNextDay : wakeUpTimeInDay;
+    final wakeUpTimeInDay =
+        DateTime(now.year, now.month, now.day, hour, minute);
+    final wakeUpTime = hour <= now.hour ? wakeUpTimeInNextDay : wakeUpTimeInDay;
 
     return wakeUpTime.difference(now).inMinutes;
+  }
+
+  Future<UserStatusTrackingModel?> _getStatusTracking() async {
+    final res = await _userStatusTrackingUC.call(NoParams());
+    return res.foldRight(null, (r, previous) => r);
+  }
+
+  DateTime _getRange(double time) {
+    final now = DateTime.now();
+    final nowWithoutSecond =
+        DateTime(now.year, now.month, now.day, now.hour, now.minute);
+    final nowWithoutSec =
+        nowWithoutSecond.add(Duration(minutes: (time * 60).toInt()));
+    return nowWithoutSec;
   }
 }

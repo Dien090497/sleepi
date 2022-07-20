@@ -36,6 +36,8 @@ mixin _$HomeState {
             UserStatusTrackingModel? userStatusTracking,
             int hour,
             int minute,
+            DateTime? startRange,
+            DateTime? endRange,
             int time)
         loaded,
     required TResult Function(String message) startError,
@@ -62,6 +64,8 @@ mixin _$HomeState {
             UserStatusTrackingModel? userStatusTracking,
             int hour,
             int minute,
+            DateTime? startRange,
+            DateTime? endRange,
             int time)?
         loaded,
     TResult Function(String message)? startError,
@@ -88,6 +92,8 @@ mixin _$HomeState {
             UserStatusTrackingModel? userStatusTracking,
             int hour,
             int minute,
+            DateTime? startRange,
+            DateTime? endRange,
             int time)?
         loaded,
     TResult Function(String message)? startError,
@@ -204,6 +210,8 @@ class _$HomeInitial with DiagnosticableTreeMixin implements HomeInitial {
             UserStatusTrackingModel? userStatusTracking,
             int hour,
             int minute,
+            DateTime? startRange,
+            DateTime? endRange,
             int time)
         loaded,
     required TResult Function(String message) startError,
@@ -233,6 +241,8 @@ class _$HomeInitial with DiagnosticableTreeMixin implements HomeInitial {
             UserStatusTrackingModel? userStatusTracking,
             int hour,
             int minute,
+            DateTime? startRange,
+            DateTime? endRange,
             int time)?
         loaded,
     TResult Function(String message)? startError,
@@ -262,6 +272,8 @@ class _$HomeInitial with DiagnosticableTreeMixin implements HomeInitial {
             UserStatusTrackingModel? userStatusTracking,
             int hour,
             int minute,
+            DateTime? startRange,
+            DateTime? endRange,
             int time)?
         loaded,
     TResult Function(String message)? startError,
@@ -383,6 +395,8 @@ class _$HomeLoading with DiagnosticableTreeMixin implements HomeLoading {
             UserStatusTrackingModel? userStatusTracking,
             int hour,
             int minute,
+            DateTime? startRange,
+            DateTime? endRange,
             int time)
         loaded,
     required TResult Function(String message) startError,
@@ -412,6 +426,8 @@ class _$HomeLoading with DiagnosticableTreeMixin implements HomeLoading {
             UserStatusTrackingModel? userStatusTracking,
             int hour,
             int minute,
+            DateTime? startRange,
+            DateTime? endRange,
             int time)?
         loaded,
     TResult Function(String message)? startError,
@@ -441,6 +457,8 @@ class _$HomeLoading with DiagnosticableTreeMixin implements HomeLoading {
             UserStatusTrackingModel? userStatusTracking,
             int hour,
             int minute,
+            DateTime? startRange,
+            DateTime? endRange,
             int time)?
         loaded,
     TResult Function(String message)? startError,
@@ -519,6 +537,8 @@ abstract class _$$HomeLoadedCopyWith<$Res> {
       UserStatusTrackingModel? userStatusTracking,
       int hour,
       int minute,
+      DateTime? startRange,
+      DateTime? endRange,
       int time});
 
   $BedEntityCopyWith<$Res>? get selectedBed;
@@ -553,6 +573,8 @@ class __$$HomeLoadedCopyWithImpl<$Res> extends _$HomeStateCopyWithImpl<$Res>
     Object? userStatusTracking = freezed,
     Object? hour = freezed,
     Object? minute = freezed,
+    Object? startRange = freezed,
+    Object? endRange = freezed,
     Object? time = freezed,
   }) {
     return _then(_$HomeLoaded(
@@ -616,6 +638,14 @@ class __$$HomeLoadedCopyWithImpl<$Res> extends _$HomeStateCopyWithImpl<$Res>
           ? _value.minute
           : minute // ignore: cast_nullable_to_non_nullable
               as int,
+      startRange: startRange == freezed
+          ? _value.startRange
+          : startRange // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+      endRange: endRange == freezed
+          ? _value.endRange
+          : endRange // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
       time: time == freezed
           ? _value.time
           : time // ignore: cast_nullable_to_non_nullable
@@ -676,6 +706,8 @@ class _$HomeLoaded with DiagnosticableTreeMixin implements HomeLoaded {
       this.userStatusTracking,
       required this.hour,
       required this.minute,
+      this.startRange,
+      this.endRange,
       this.time = 0})
       : _bedList = bedList;
 
@@ -723,12 +755,16 @@ class _$HomeLoaded with DiagnosticableTreeMixin implements HomeLoaded {
   @override
   final int minute;
   @override
+  final DateTime? startRange;
+  @override
+  final DateTime? endRange;
+  @override
   @JsonKey()
   final int time;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'HomeState.loaded(bedList: $bedList, selectedBed: $selectedBed, item: $item, selectedItem: $selectedItem, errorMessage: $errorMessage, errorType: $errorType, loadMoreBed: $loadMoreBed, loading: $loading, enableInsurance: $enableInsurance, enableAlarm: $enableAlarm, tokenEarn: $tokenEarn, startTracking: $startTracking, userStatusTracking: $userStatusTracking, hour: $hour, minute: $minute, time: $time)';
+    return 'HomeState.loaded(bedList: $bedList, selectedBed: $selectedBed, item: $item, selectedItem: $selectedItem, errorMessage: $errorMessage, errorType: $errorType, loadMoreBed: $loadMoreBed, loading: $loading, enableInsurance: $enableInsurance, enableAlarm: $enableAlarm, tokenEarn: $tokenEarn, startTracking: $startTracking, userStatusTracking: $userStatusTracking, hour: $hour, minute: $minute, startRange: $startRange, endRange: $endRange, time: $time)';
   }
 
   @override
@@ -751,6 +787,8 @@ class _$HomeLoaded with DiagnosticableTreeMixin implements HomeLoaded {
       ..add(DiagnosticsProperty('userStatusTracking', userStatusTracking))
       ..add(DiagnosticsProperty('hour', hour))
       ..add(DiagnosticsProperty('minute', minute))
+      ..add(DiagnosticsProperty('startRange', startRange))
+      ..add(DiagnosticsProperty('endRange', endRange))
       ..add(DiagnosticsProperty('time', time));
   }
 
@@ -782,6 +820,9 @@ class _$HomeLoaded with DiagnosticableTreeMixin implements HomeLoaded {
                 .equals(other.userStatusTracking, userStatusTracking) &&
             const DeepCollectionEquality().equals(other.hour, hour) &&
             const DeepCollectionEquality().equals(other.minute, minute) &&
+            const DeepCollectionEquality()
+                .equals(other.startRange, startRange) &&
+            const DeepCollectionEquality().equals(other.endRange, endRange) &&
             const DeepCollectionEquality().equals(other.time, time));
   }
 
@@ -803,6 +844,8 @@ class _$HomeLoaded with DiagnosticableTreeMixin implements HomeLoaded {
       const DeepCollectionEquality().hash(userStatusTracking),
       const DeepCollectionEquality().hash(hour),
       const DeepCollectionEquality().hash(minute),
+      const DeepCollectionEquality().hash(startRange),
+      const DeepCollectionEquality().hash(endRange),
       const DeepCollectionEquality().hash(time));
 
   @JsonKey(ignore: true)
@@ -831,6 +874,8 @@ class _$HomeLoaded with DiagnosticableTreeMixin implements HomeLoaded {
             UserStatusTrackingModel? userStatusTracking,
             int hour,
             int minute,
+            DateTime? startRange,
+            DateTime? endRange,
             int time)
         loaded,
     required TResult Function(String message) startError,
@@ -852,6 +897,8 @@ class _$HomeLoaded with DiagnosticableTreeMixin implements HomeLoaded {
         userStatusTracking,
         hour,
         minute,
+        startRange,
+        endRange,
         time);
   }
 
@@ -876,6 +923,8 @@ class _$HomeLoaded with DiagnosticableTreeMixin implements HomeLoaded {
             UserStatusTrackingModel? userStatusTracking,
             int hour,
             int minute,
+            DateTime? startRange,
+            DateTime? endRange,
             int time)?
         loaded,
     TResult Function(String message)? startError,
@@ -897,6 +946,8 @@ class _$HomeLoaded with DiagnosticableTreeMixin implements HomeLoaded {
         userStatusTracking,
         hour,
         minute,
+        startRange,
+        endRange,
         time);
   }
 
@@ -921,6 +972,8 @@ class _$HomeLoaded with DiagnosticableTreeMixin implements HomeLoaded {
             UserStatusTrackingModel? userStatusTracking,
             int hour,
             int minute,
+            DateTime? startRange,
+            DateTime? endRange,
             int time)?
         loaded,
     TResult Function(String message)? startError,
@@ -944,6 +997,8 @@ class _$HomeLoaded with DiagnosticableTreeMixin implements HomeLoaded {
           userStatusTracking,
           hour,
           minute,
+          startRange,
+          endRange,
           time);
     }
     return orElse();
@@ -1007,6 +1062,8 @@ abstract class HomeLoaded implements HomeState {
       final UserStatusTrackingModel? userStatusTracking,
       required final int hour,
       required final int minute,
+      final DateTime? startRange,
+      final DateTime? endRange,
       final int time}) = _$HomeLoaded;
 
   List<BedEntity> get bedList;
@@ -1024,6 +1081,8 @@ abstract class HomeLoaded implements HomeState {
   UserStatusTrackingModel? get userStatusTracking;
   int get hour;
   int get minute;
+  DateTime? get startRange;
+  DateTime? get endRange;
   int get time;
   @JsonKey(ignore: true)
   _$$HomeLoadedCopyWith<_$HomeLoaded> get copyWith =>
@@ -1120,6 +1179,8 @@ class _$HomeStartError with DiagnosticableTreeMixin implements HomeStartError {
             UserStatusTrackingModel? userStatusTracking,
             int hour,
             int minute,
+            DateTime? startRange,
+            DateTime? endRange,
             int time)
         loaded,
     required TResult Function(String message) startError,
@@ -1149,6 +1210,8 @@ class _$HomeStartError with DiagnosticableTreeMixin implements HomeStartError {
             UserStatusTrackingModel? userStatusTracking,
             int hour,
             int minute,
+            DateTime? startRange,
+            DateTime? endRange,
             int time)?
         loaded,
     TResult Function(String message)? startError,
@@ -1178,6 +1241,8 @@ class _$HomeStartError with DiagnosticableTreeMixin implements HomeStartError {
             UserStatusTrackingModel? userStatusTracking,
             int hour,
             int minute,
+            DateTime? startRange,
+            DateTime? endRange,
             int time)?
         loaded,
     TResult Function(String message)? startError,
@@ -1330,6 +1395,8 @@ class _$HomeError with DiagnosticableTreeMixin implements HomeError {
             UserStatusTrackingModel? userStatusTracking,
             int hour,
             int minute,
+            DateTime? startRange,
+            DateTime? endRange,
             int time)
         loaded,
     required TResult Function(String message) startError,
@@ -1359,6 +1426,8 @@ class _$HomeError with DiagnosticableTreeMixin implements HomeError {
             UserStatusTrackingModel? userStatusTracking,
             int hour,
             int minute,
+            DateTime? startRange,
+            DateTime? endRange,
             int time)?
         loaded,
     TResult Function(String message)? startError,
@@ -1388,6 +1457,8 @@ class _$HomeError with DiagnosticableTreeMixin implements HomeError {
             UserStatusTrackingModel? userStatusTracking,
             int hour,
             int minute,
+            DateTime? startRange,
+            DateTime? endRange,
             int time)?
         loaded,
     TResult Function(String message)? startError,

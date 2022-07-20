@@ -52,21 +52,11 @@ class AlarmBell extends StatelessWidget {
         final bed = state is HomeLoaded ? state.selectedBed : null;
         final userStatusTracking =
             state is HomeLoaded ? state.userStatusTracking : null;
-        final now = DateTime.now();
-        final nowWithoutSecond =
-            DateTime(now.year, now.month, now.day, now.hour, now.minute);
-        final minTime = nowWithoutSecond.add(Duration(
-            minutes: bed == null
-                ? 0
-                : bed.startTime == null
-                    ? 0
-                    : (bed.startTime! * 60).toInt()));
-        final maxTime = nowWithoutSecond.add(Duration(
-            minutes: bed == null
-                ? 0
-                : bed.endTime == null
-                    ? 0
-                    : (bed.endTime! * 60).toInt()));
+        final enableStart = state is HomeLoaded &&
+            state.startRange != null &&
+            state.endRange != null &&
+            _correctTime(
+                state.startRange!, state.endRange!, state.hour, state.minute);
         return Container(
           padding: const EdgeInsets.symmetric(horizontal: 16),
           decoration: const BoxDecoration(
@@ -81,15 +71,15 @@ class AlarmBell extends StatelessWidget {
             children: [
               TimePicker(
                 onHourChange: (hour) {
-                  // context.read<HomeBloc>().add(ChangeHour(hour));
+                  context.read<HomeBloc>().add(ChangeHour(hour));
                 },
                 onMinuteChange: (minute) {
-                  // context.read<HomeBloc>().add(ChangeMinute(minute));
+                  context.read<HomeBloc>().add(ChangeMinute(minute));
                 },
               ),
               const SizedBox(height: 16),
               Text(
-                '${LocaleKeys.range.tr()}: ${state is HomeLoaded && bed != null ? '${dateTimeUtil.HHmm(minTime)}-${dateTimeUtil.HHmm(maxTime)}' : '--:-----:--'}',
+                '${LocaleKeys.range.tr()}: ${state is HomeLoaded && bed != null && state.startRange != null && state.endRange != null ? '${dateTimeUtil.HHmm(state.startRange!)}-${dateTimeUtil.HHmm(state.endRange!)}' : '03:00-06:00'}',
                 style: TextStyles.white16500,
               ),
               const SizedBox(height: 24),
@@ -121,7 +111,7 @@ class AlarmBell extends StatelessWidget {
               const SizedBox(height: 16),
               if (userStatusTracking != null)
                 ButtonStart(
-                  enableStart: _correctTime(minTime, maxTime, state),
+                  enableStart: enableStart,
                   onStartTracking: () {
                     // if (state is HomeLoaded) {
                     //   if (state.userStatusTracking!.tracking == null) {
@@ -211,19 +201,17 @@ class AlarmBell extends StatelessWidget {
     );
   }
 
-  bool _correctTime(DateTime minTime, DateTime maxTime, HomeState state) {
-    if (state is! HomeLoaded) return false;
-    final hour = state.hour;
-    final minute = state.minute;
+  bool _correctTime(
+      DateTime startRange, DateTime endRange, int hour, int minute) {
     final now = DateTime.now();
-    final nextDay = DateTime.now().add(const Duration(days: 1));
+    final nextDay = now.add(const Duration(days: 1));
     final wakeUpTimeInNextDay =
         DateTime(nextDay.year, nextDay.month, nextDay.day, hour, minute);
     final wakeUpTimeInDay =
         DateTime(now.year, now.month, now.day, hour, minute);
     final wakeUpTime = hour < now.hour ? wakeUpTimeInNextDay : wakeUpTimeInDay;
-    return wakeUpTime.isAfter(minTime) && wakeUpTime.isBefore(maxTime) ||
-        maxTime.difference(wakeUpTime).inSeconds == 0 ||
-        wakeUpTime.difference(minTime).inSeconds == 0;
+    return wakeUpTime.isAfter(startRange) && wakeUpTime.isBefore(endRange) ||
+        endRange.difference(wakeUpTime).inSeconds == 0 ||
+        wakeUpTime.difference(startRange).inSeconds == 0;
   }
 }

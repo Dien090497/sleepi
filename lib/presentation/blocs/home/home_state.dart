@@ -29,6 +29,8 @@ class HomeState with _$HomeState {
     UserStatusTrackingModel? userStatusTracking,
     required int hour,
     required int minute,
+    DateTime? startRange,
+    DateTime? endRange,
     @Default(0) int time,
   }) = HomeLoaded;
 
