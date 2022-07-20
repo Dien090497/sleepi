@@ -33,7 +33,6 @@ class _ImportWalletScreenState extends State<ImportWalletScreen> {
   @override
   void dispose() {
     controllerMnemonic.dispose();
-    controllerOTP.dispose();
     super.dispose();
   }
 
