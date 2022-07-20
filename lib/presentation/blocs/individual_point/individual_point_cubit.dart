@@ -8,16 +8,10 @@ import 'package:slee_fi/usecase/get_point_of_owner_usecase.dart';
 import 'package:slee_fi/usecase/update_attribute_usecase.dart';
 
 class IndividualPointCubit extends Cubit<IndividualPointState> {
-  IndividualPointCubit(BedEntity bed)
+  IndividualPointCubit(BedEntity bed, List<double> currentPoints)
       : super(IndividualPointState.initial(
           bed: bed,
-          startAttributes: [
-            bed.efficiency,
-            bed.luck,
-            bed.bonus,
-            bed.special,
-            bed.resilience,
-          ],
+          startAttributes: currentPoints,
           attributesChanged: [
             bed.efficiency,
             bed.luck,

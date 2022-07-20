@@ -124,9 +124,12 @@ class InfoIndividualScreen extends StatelessWidget {
                                           gradient:
                                               AppColors.gradientBlueButton,
                                           onPressed: () {
-                                            _showPointDialog(context,
-                                                    bed: state.bed)
-                                                .then((_) {
+                                            _showPointDialog(
+                                              context,
+                                              bed: state.bed,
+                                              currentPoints:
+                                                  state.currentPoints,
+                                            ).then((_) {
                                               cubit.refresh();
                                             });
                                           },
@@ -195,12 +198,18 @@ class InfoIndividualScreen extends StatelessWidget {
     );
   }
 
-  Future _showPointDialog(BuildContext context, {required BedEntity bed}) {
+  Future<void> _showPointDialog(BuildContext context,
+      {required BedEntity bed, required List<double> currentPoints}) {
     return showCustomDialog(
       context,
       padding: const EdgeInsets.fromLTRB(24, 12, 24, 24),
       insetPadding: const EdgeInsets.symmetric(horizontal: 12),
-      children: [PointDialog(bed: bed)],
+      children: [
+        PointDialog(
+          bed: bed,
+          currentPoints: currentPoints,
+        )
+      ],
     );
   }
 }

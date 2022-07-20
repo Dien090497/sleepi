@@ -6,6 +6,7 @@ import 'package:slee_fi/common/routes/app_routes.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
 import 'package:slee_fi/common/utils/date_time_utils.dart';
+import 'package:slee_fi/common/widgets/sf_alert_dialog.dart';
 import 'package:slee_fi/common/widgets/sf_button_outlined.dart';
 import 'package:slee_fi/common/widgets/sf_dialog.dart';
 import 'package:slee_fi/common/widgets/sf_percent_border.dart';
@@ -17,6 +18,7 @@ import 'package:slee_fi/presentation/blocs/home/home_state.dart';
 import 'package:slee_fi/presentation/screens/home/widgets/button_start.dart';
 import 'package:slee_fi/presentation/screens/home/widgets/home_switch.dart';
 import 'package:slee_fi/presentation/screens/home/widgets/lucky_box.dart';
+import 'package:slee_fi/presentation/screens/home/widgets/pop_up_start_tracking.dart';
 import 'package:slee_fi/presentation/screens/home/widgets/time_picker.dart';
 import 'package:slee_fi/presentation/screens/tracking/tracking_screen.dart';
 import 'package:slee_fi/resources/resources.dart';
@@ -43,7 +45,7 @@ class AlarmBell extends StatelessWidget {
             ),
           );
         }
-        if (state is HomeLoaded && state.errorMessage != '') {
+        if (state is HomeLoaded && state.errorMessage.isNotEmpty) {
           Navigator.pop(context, true);
           showMessageDialog(context, state.errorMessage);
         }
@@ -56,7 +58,7 @@ class AlarmBell extends StatelessWidget {
             state.startRange != null &&
             state.endRange != null &&
             _correctTime(
-                state.startRange!, state.endRange!, state.hour, state.minute);
+                state.startRange!, state.endRange!, state.selectedTime);
         return Container(
           padding: const EdgeInsets.symmetric(horizontal: 16),
           decoration: const BoxDecoration(
@@ -76,6 +78,8 @@ class AlarmBell extends StatelessWidget {
                 onMinuteChange: (minute) {
                   context.read<HomeBloc>().add(ChangeMinute(minute));
                 },
+                selectedTime:
+                    state is HomeLoaded ? state.selectedTime : DateTime.now(),
               ),
               const SizedBox(height: 16),
               Text(
@@ -113,33 +117,33 @@ class AlarmBell extends StatelessWidget {
                 ButtonStart(
                   enableStart: enableStart,
                   onStartTracking: () {
-                    // if (state is HomeLoaded) {
-                    //   if (state.userStatusTracking!.tracking == null) {
-                    //     showCustomAlertDialog(context,
-                    //         children: PopUpConfirmStartTracking(
-                    //       onPressed: () async {
-                    //         context.read<HomeBloc>().add(StartTracking());
-                    //       },
-                    //     ));
-                    //   } else {
-                    //     Navigator.pushNamed(
-                    //       context,
-                    //       R.tracking,
-                    //       arguments: TrackingParams(
-                    //         timeStart: state
-                    //                 .userStatusTracking!.tracking!.startSleep! *
-                    //             1000,
-                    //         timeWakeUp:
-                    //             state.userStatusTracking!.tracking!.wakeUp! *
-                    //                 1000,
-                    //         tokenEarn: double.parse(
-                    //             state.userStatusTracking!.tracking!.estEarn!),
-                    //         fromRoute: R.bottomNavigation,
-                    //         imageBed: state.selectedBed?.image,
-                    //       ),
-                    //     );
-                    //   }
-                    // }
+                    if (state is HomeLoaded) {
+                      if (state.userStatusTracking!.tracking == null) {
+                        showCustomAlertDialog(context,
+                            children: PopUpConfirmStartTracking(
+                          onPressed: () {
+                            context.read<HomeBloc>().add(const StartTracking());
+                          },
+                        ));
+                      } else {
+                        Navigator.pushNamed(
+                          context,
+                          R.tracking,
+                          arguments: TrackingParams(
+                            timeStart: state
+                                    .userStatusTracking!.tracking!.startSleep! *
+                                1000,
+                            timeWakeUp:
+                                state.userStatusTracking!.tracking!.wakeUp! *
+                                    1000,
+                            tokenEarn: double.parse(
+                                state.userStatusTracking!.tracking!.estEarn!),
+                            fromRoute: R.bottomNavigation,
+                            imageBed: state.selectedBed?.image,
+                          ),
+                        );
+                      }
+                    }
                   },
                 ),
               const SizedBox(height: 32),
@@ -202,16 +206,18 @@ class AlarmBell extends StatelessWidget {
   }
 
   bool _correctTime(
-      DateTime startRange, DateTime endRange, int hour, int minute) {
-    final now = DateTime.now();
-    final nextDay = now.add(const Duration(days: 1));
-    final wakeUpTimeInNextDay =
-        DateTime(nextDay.year, nextDay.month, nextDay.day, hour, minute);
-    final wakeUpTimeInDay =
-        DateTime(now.year, now.month, now.day, hour, minute);
-    final wakeUpTime = hour < now.hour ? wakeUpTimeInNextDay : wakeUpTimeInDay;
-    return wakeUpTime.isAfter(startRange) && wakeUpTime.isBefore(endRange) ||
-        endRange.difference(wakeUpTime).inSeconds == 0 ||
-        wakeUpTime.difference(startRange).inSeconds == 0;
+      DateTime startRange, DateTime endRange, DateTime selectedTime) {
+    return startRange.isBefore(selectedTime) && endRange.isAfter(selectedTime);
+    // final now = DateTime.now();
+    // final nextDay = now.add(const Duration(days: 1));
+    // final wakeUpTimeInNextDay =
+    //     DateTime(nextDay.year, nextDay.month, nextDay.day, hour, minute);
+    // final wakeUpTimeInDay =
+    //     DateTime(now.year, now.month, now.day, hour, minute);
+    // final wakeUpTime = hour < now.hour ? wakeUpTimeInNextDay : wakeUpTimeInDay;
+    // return wakeUpTime.isAfter(startRange) && wakeUpTime.isBefore(endRange) ||
+    //     endRange.difference(wakeUpTime).inSeconds == 0 ||
+    //     wakeUpTime.difference(startRange).inSeconds == 0;
+    return true;
   }
 }

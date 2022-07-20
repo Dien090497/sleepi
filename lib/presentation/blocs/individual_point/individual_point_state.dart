@@ -12,7 +12,6 @@ class IndividualPointState with _$IndividualPointState {
     required BedEntity bed,
     required List<double> startAttributes,
     required List<double> attributesChanged,
-    // required List<double> attributesDistributed,
     required List<String> attributesNames,
     @Default(false) bool isLoading,
     @Default(30) double maxAttribute,

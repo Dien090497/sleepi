@@ -9,6 +9,7 @@ part 'individual_state.freezed.dart';
 class IndividualState with _$IndividualState {
   const factory IndividualState(
     BedEntity bed, {
+    required List<double> currentPoints,
     NftFamilyEntity? nftFamily,
     @Default(false) bool isRefresh,
     @Default(false) bool isLoading,

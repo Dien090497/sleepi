@@ -21,6 +21,8 @@ class AddItem extends HomeEvent {
 }
 
 class RemoveItem extends HomeEvent {
+  const RemoveItem();
+
   @override
   List<Object?> get props => [];
 }
@@ -42,11 +44,15 @@ class RefreshBed extends HomeEvent {
 }
 
 class LoadMoreBed extends HomeEvent {
+  const LoadMoreBed();
+
   @override
   List<Object?> get props => [];
 }
 
 class StartTracking extends HomeEvent {
+  const StartTracking();
+
   @override
   List<Object?> get props => [];
 }

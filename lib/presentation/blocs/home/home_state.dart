@@ -27,10 +27,11 @@ class HomeState with _$HomeState {
     @Default(0.0) double tokenEarn,
     @Default(false) bool startTracking,
     UserStatusTrackingModel? userStatusTracking,
-    required int hour,
-    required int minute,
+    // required int hour,
+    // required int minute,
     DateTime? startRange,
     DateTime? endRange,
+    required DateTime selectedTime,
     @Default(0) int time,
   }) = HomeLoaded;
 

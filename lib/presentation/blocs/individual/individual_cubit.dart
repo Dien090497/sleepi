@@ -6,7 +6,14 @@ import 'package:slee_fi/usecase/bed_detail_usecase.dart';
 import 'package:slee_fi/usecase/get_nft_family_usecase.dart';
 
 class IndividualCubit extends Cubit<IndividualState> {
-  IndividualCubit(BedEntity bed) : super(IndividualState(bed));
+  IndividualCubit(BedEntity bed)
+      : super(IndividualState(bed, currentPoints: [
+          bed.efficiency,
+          bed.luck,
+          bed.bonus,
+          bed.special,
+          bed.resilience,
+        ]));
 
   final _detailBedUseCase = getIt<BedDetailUseCase>();
   final _getNftFamilyUC = getIt<GetNftFamilyUseCase>();
@@ -16,7 +23,7 @@ class IndividualCubit extends Cubit<IndividualState> {
     familyRes.fold(
       (l) {},
       (r) {
-        if(isClosed) return;
+        if (isClosed) return;
         emit(state.copyWith(nftFamily: r));
       },
     );

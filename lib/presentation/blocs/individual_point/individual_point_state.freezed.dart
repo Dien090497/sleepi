@@ -229,9 +229,7 @@ class _$IndividualPointInitial
     return EqualUnmodifiableListView(_attributesChanged);
   }
 
-// required List<double> attributesDistributed,
   final List<String> _attributesNames;
-// required List<double> attributesDistributed,
   @override
   List<String> get attributesNames {
     // ignore: implicit_dynamic_type
@@ -416,8 +414,7 @@ abstract class IndividualPointInitial implements IndividualPointState {
   double? get point;
   BedEntity get bed;
   List<double> get startAttributes;
-  List<double>
-      get attributesChanged; // required List<double> attributesDistributed,
+  List<double> get attributesChanged;
   List<String> get attributesNames;
   bool get isLoading;
   double get maxAttribute;

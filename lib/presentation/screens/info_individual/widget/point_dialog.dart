@@ -16,14 +16,16 @@ import 'package:slee_fi/presentation/blocs/individual_point/individual_point_cub
 import 'package:slee_fi/presentation/blocs/individual_point/individual_point_state.dart';
 
 class PointDialog extends StatelessWidget {
-  const PointDialog({Key? key, required this.bed}) : super(key: key);
+  const PointDialog({Key? key, required this.bed, required this.currentPoints})
+      : super(key: key);
 
   final BedEntity bed;
+  final List<double> currentPoints;
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => IndividualPointCubit(bed)..getPoint(),
+      create: (context) => IndividualPointCubit(bed, currentPoints)..getPoint(),
       child: BlocConsumer<IndividualPointCubit, IndividualPointState>(
         listener: (context, state) {
           if (state is IndividualPointError) {

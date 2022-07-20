@@ -97,7 +97,7 @@ class UseItem extends StatelessWidget {
                                     onTap: () {
                                       context
                                           .read<HomeBloc>()
-                                          .add(RemoveItem());
+                                          .add(const RemoveItem());
                                     },
                                   )
                                 ],

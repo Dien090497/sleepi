@@ -3,12 +3,16 @@ import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
 
 class TimePicker extends StatelessWidget {
-  const TimePicker(
-      {Key? key, required this.onHourChange, required this.onMinuteChange})
-      : super(key: key);
+  const TimePicker({
+    Key? key,
+    required this.onHourChange,
+    required this.onMinuteChange,
+    required this.selectedTime,
+  }) : super(key: key);
 
   final Function(int hour) onHourChange;
   final Function(int hour) onMinuteChange;
+  final DateTime selectedTime;
 
   @override
   Widget build(BuildContext context) {
@@ -29,7 +33,7 @@ class TimePicker extends StatelessWidget {
                 Expanded(
                     child: SFDatePicker(
                   datas: List<int>.generate(24, (i) => i),
-                  selectedTime: DateTime.now().hour,
+                  selectedTime: selectedTime.hour,
                   alignment: Alignment.centerRight,
                   offAxisFraction: -.5,
                   timeChanged: onHourChange,
@@ -37,7 +41,7 @@ class TimePicker extends StatelessWidget {
                 Expanded(
                     child: SFDatePicker(
                   datas: List<int>.generate(60, (i) => i),
-                  selectedTime: DateTime.now().minute,
+                  selectedTime: selectedTime.minute,
                   alignment: Alignment.centerLeft,
                   offAxisFraction: .5,
                   timeChanged: onMinuteChange,

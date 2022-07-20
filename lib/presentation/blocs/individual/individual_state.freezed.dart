@@ -17,6 +17,7 @@ final _privateConstructorUsedError = UnsupportedError(
 /// @nodoc
 mixin _$IndividualState {
   BedEntity get bed => throw _privateConstructorUsedError;
+  List<double> get currentPoints => throw _privateConstructorUsedError;
   NftFamilyEntity? get nftFamily => throw _privateConstructorUsedError;
   bool get isRefresh => throw _privateConstructorUsedError;
   bool get isLoading => throw _privateConstructorUsedError;
@@ -34,6 +35,7 @@ abstract class $IndividualStateCopyWith<$Res> {
       _$IndividualStateCopyWithImpl<$Res>;
   $Res call(
       {BedEntity bed,
+      List<double> currentPoints,
       NftFamilyEntity? nftFamily,
       bool isRefresh,
       bool isLoading,
@@ -55,6 +57,7 @@ class _$IndividualStateCopyWithImpl<$Res>
   @override
   $Res call({
     Object? bed = freezed,
+    Object? currentPoints = freezed,
     Object? nftFamily = freezed,
     Object? isRefresh = freezed,
     Object? isLoading = freezed,
@@ -65,6 +68,10 @@ class _$IndividualStateCopyWithImpl<$Res>
           ? _value.bed
           : bed // ignore: cast_nullable_to_non_nullable
               as BedEntity,
+      currentPoints: currentPoints == freezed
+          ? _value.currentPoints
+          : currentPoints // ignore: cast_nullable_to_non_nullable
+              as List<double>,
       nftFamily: nftFamily == freezed
           ? _value.nftFamily
           : nftFamily // ignore: cast_nullable_to_non_nullable
@@ -112,6 +119,7 @@ abstract class _$$_IndividualStateCopyWith<$Res>
   @override
   $Res call(
       {BedEntity bed,
+      List<double> currentPoints,
       NftFamilyEntity? nftFamily,
       bool isRefresh,
       bool isLoading,
@@ -137,6 +145,7 @@ class __$$_IndividualStateCopyWithImpl<$Res>
   @override
   $Res call({
     Object? bed = freezed,
+    Object? currentPoints = freezed,
     Object? nftFamily = freezed,
     Object? isRefresh = freezed,
     Object? isLoading = freezed,
@@ -147,6 +156,10 @@ class __$$_IndividualStateCopyWithImpl<$Res>
           ? _value.bed
           : bed // ignore: cast_nullable_to_non_nullable
               as BedEntity,
+      currentPoints: currentPoints == freezed
+          ? _value._currentPoints
+          : currentPoints // ignore: cast_nullable_to_non_nullable
+              as List<double>,
       nftFamily: nftFamily == freezed
           ? _value.nftFamily
           : nftFamily // ignore: cast_nullable_to_non_nullable
@@ -173,13 +186,22 @@ class _$_IndividualState
     with DiagnosticableTreeMixin
     implements _IndividualState {
   const _$_IndividualState(this.bed,
-      {this.nftFamily,
+      {required final List<double> currentPoints,
+      this.nftFamily,
       this.isRefresh = false,
       this.isLoading = false,
-      this.isBase = false});
+      this.isBase = false})
+      : _currentPoints = currentPoints;
 
   @override
   final BedEntity bed;
+  final List<double> _currentPoints;
+  @override
+  List<double> get currentPoints {
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_currentPoints);
+  }
+
   @override
   final NftFamilyEntity? nftFamily;
   @override
@@ -194,7 +216,7 @@ class _$_IndividualState
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'IndividualState(bed: $bed, nftFamily: $nftFamily, isRefresh: $isRefresh, isLoading: $isLoading, isBase: $isBase)';
+    return 'IndividualState(bed: $bed, currentPoints: $currentPoints, nftFamily: $nftFamily, isRefresh: $isRefresh, isLoading: $isLoading, isBase: $isBase)';
   }
 
   @override
@@ -203,6 +225,7 @@ class _$_IndividualState
     properties
       ..add(DiagnosticsProperty('type', 'IndividualState'))
       ..add(DiagnosticsProperty('bed', bed))
+      ..add(DiagnosticsProperty('currentPoints', currentPoints))
       ..add(DiagnosticsProperty('nftFamily', nftFamily))
       ..add(DiagnosticsProperty('isRefresh', isRefresh))
       ..add(DiagnosticsProperty('isLoading', isLoading))
@@ -215,6 +238,8 @@ class _$_IndividualState
         (other.runtimeType == runtimeType &&
             other is _$_IndividualState &&
             const DeepCollectionEquality().equals(other.bed, bed) &&
+            const DeepCollectionEquality()
+                .equals(other._currentPoints, _currentPoints) &&
             const DeepCollectionEquality().equals(other.nftFamily, nftFamily) &&
             const DeepCollectionEquality().equals(other.isRefresh, isRefresh) &&
             const DeepCollectionEquality().equals(other.isLoading, isLoading) &&
@@ -225,6 +250,7 @@ class _$_IndividualState
   int get hashCode => Object.hash(
       runtimeType,
       const DeepCollectionEquality().hash(bed),
+      const DeepCollectionEquality().hash(_currentPoints),
       const DeepCollectionEquality().hash(nftFamily),
       const DeepCollectionEquality().hash(isRefresh),
       const DeepCollectionEquality().hash(isLoading),
@@ -238,13 +264,16 @@ class _$_IndividualState
 
 abstract class _IndividualState implements IndividualState {
   const factory _IndividualState(final BedEntity bed,
-      {final NftFamilyEntity? nftFamily,
+      {required final List<double> currentPoints,
+      final NftFamilyEntity? nftFamily,
       final bool isRefresh,
       final bool isLoading,
       final bool isBase}) = _$_IndividualState;
 
   @override
   BedEntity get bed;
+  @override
+  List<double> get currentPoints;
   @override
   NftFamilyEntity? get nftFamily;
   @override
