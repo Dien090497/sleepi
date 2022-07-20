@@ -46,11 +46,11 @@ class SocketBloc extends Bloc<SocketEvent, SocketState> {
       return;
     }
     final maxSocket = _maxSocketOpened(event.level);
-    bedId = event.bedId;
+    bedId = event.nftId;
     levelBed = event.level;
     _currentPage = 1;
     final result =
-        await _detailBedUseCase.call(BedDetailParams(bedId: event.bedId));
+        await _detailBedUseCase.call(BedDetailParams(bedId: event.nftId));
     result.fold(
       (l) {
         final list = List.generate(
@@ -62,7 +62,10 @@ class SocketBloc extends Bloc<SocketEvent, SocketState> {
       },
       (r) {
         final List<SocketEntity> list = [];
+        print('socket is   ${r.socket}    $maxSocket' );
         for (int i = 0; i <= maxSocket; i++) {
+          print(
+              'add socket ready  $i    ${r.jewels.length}      ${(i < r.jewels.length)}   ${(i >= r.jewels.length && i < (r.socket ?? 0))}   ${(i > (r.socket ?? 0) && i <= maxSocket)}  ');
           if (i < r.jewels.length) {
             list.add(SocketEntity(
                 socketType: SocketType.ready, jewelEntity: r.jewels[i]));
@@ -107,7 +110,7 @@ class SocketBloc extends Bloc<SocketEvent, SocketState> {
   void _addJewel(AddJewel event, Emitter<SocketState> emit) async {
     add(const StartLoading());
     final result = await _addJewelUseCase
-        .call(AddJewelSchema(bedId, event.jewelEntity.id));
+        .call(AddJewelSchema(bedId, event.jewelEntity.nftId));
     add(const StopLoading());
     result.fold((l) {
       add(SocketError(l.msg));
@@ -150,7 +153,7 @@ class SocketBloc extends Bloc<SocketEvent, SocketState> {
       final List<SocketEntity> list = List.from(currentState.socketEntity);
       add(const StartLoading());
       final result = await _removeUseCase
-          .call(AddJewelSchema(bedId, list[event.index].jewelEntity!.id));
+          .call(AddJewelSchema(bedId, list[event.index].jewelEntity!.nftId));
       add(const StopLoading());
       result.fold((l) => add(SocketError(l.msg)), (r) {
         final socketEntity = list.removeAt(event.index);
@@ -194,10 +197,10 @@ class SocketBloc extends Bloc<SocketEvent, SocketState> {
   }
 
   int _maxSocketOpened(int level) {
-    if (level > 25) return 5;
-    if (level > 15) return 3;
-    if (level > 10) return 2;
-    if (level > 5) return 1;
+    if (level >= 25) return 5;
+    if (level >= 15) return 3;
+    if (level >= 10) return 2;
+    if (level >= 5) return 1;
     return 0;
   }
 

@@ -18,7 +18,7 @@ class RunAppInitUseCase extends UseCase<bool, NoParams> {
 
   @override
   Future<Either<Failure, bool>> call(NoParams params) async {
-    _appFlyerCustom.init();
+    await _appFlyerCustom.init();
     await _isarDataSource.init();
     int? chainId = _getStorageDataSource.getCurrentChainId();
     if (chainId == null) {
