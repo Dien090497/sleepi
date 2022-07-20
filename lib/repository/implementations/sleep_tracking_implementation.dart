@@ -50,7 +50,6 @@ class SleepTrackingImplementation extends ISleepTrackingRepository {
   Future<Either<FailureMessage, dynamic>> startTracking(
       StartTrackingSchema schema) async {
     try {
-      print('startTracking123 ${schema.alrm} - ${schema.bedUsed} - ${schema.isEnableInsurance} \n ${schema.itemUsed} - ${schema.wakeUp}');
       return Right(await _sleepTrackingApi.startTracking(schema));
     } catch (e) {
       return Left(FailureMessage.fromException(e));
