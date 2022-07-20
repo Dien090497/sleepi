@@ -128,3 +128,5 @@ enum TypeChart {
 enum TypeTimeChart { chartDay, chartWeek, chartMonth, }
 
 enum SocketType { ready, empty, block }
+
+enum ShareSocial { facebook, telegram, twitter }

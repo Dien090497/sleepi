@@ -130,7 +130,8 @@ class AlarmBell extends StatelessWidget {
                         showCustomAlertDialog(context,
                             children: PopUpConfirmStartTracking(
                           onPressed: () async {
-                            context.read<HomeBloc>().add(StartTracking());
+                            Navigator.pushNamed(context, R.share, arguments: R.tracking);
+                            //context.read<HomeBloc>().add(StartTracking());
                           },
                         ));
                       } else {

@@ -229,7 +229,8 @@ class _TrackingScreenState extends State<TrackingScreen> {
                               color: AppColors.blue,
                               textStyle: TextStyles.w600WhiteSize16,
                               onPressed: () {
-                                cubit.fetchData().then((value) => service.invoke(Const.stopService));
+                                Navigator.pushNamed(context, R.share, arguments: R.tracking);
+                                //cubit.fetchData().then((value) => service.invoke(Const.stopService));
                               },
                             ),
                             const SizedBox(height: 26),

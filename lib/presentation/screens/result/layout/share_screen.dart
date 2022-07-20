@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:screenshot/screenshot.dart';
 import 'package:slee_fi/common/enum/enum.dart';
 import 'package:slee_fi/common/routes/app_routes.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
@@ -9,6 +11,8 @@ import 'package:slee_fi/common/widgets/sf_buttons.dart';
 import 'package:slee_fi/common/widgets/sf_icon.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
 import 'package:slee_fi/l10n/locale_keys.g.dart';
+import 'package:slee_fi/presentation/blocs/share_screen/share_cubit.dart';
+import 'package:slee_fi/presentation/blocs/share_screen/share_state.dart';
 import 'package:slee_fi/presentation/screens/product_detail/widgets/top_left_banner.dart';
 import 'package:slee_fi/presentation/screens/result/widgets/category_header_share.dart';
 import 'package:slee_fi/presentation/screens/result/widgets/chart_statistic_share.dart';
@@ -24,128 +28,164 @@ class ShareScreen extends StatefulWidget {
 }
 
 class _ShareScreenState extends State<ShareScreen> {
+  ScreenshotController screenshotController = ScreenshotController();
 
   @override
   Widget build(BuildContext context) {
     final fromRoute = ModalRoute.of(context)?.settings.arguments as String;
-    return BackgroundWidget(
-      child: Stack(
-        children: [
-          Scaffold(
-            backgroundColor: AppColors.transparent,
-            appBar: SFAppBar(
-              context: context,
-              title: LocaleKeys.share,
-              textStyle: TextStyles.bold18LightWhite,
+    return BlocProvider(
+      create: (_) => ShareCubit(),
+      child: BlocConsumer<ShareCubit, ShareState>(
+        listener: (context, state) {
+
+        },
+        builder: (context, state) {
+          final cubit = context.read<ShareCubit>();
+          return BackgroundWidget(
+            child: Stack(
+              children: [
+                Scaffold(
+                  backgroundColor: AppColors.transparent,
+                  appBar: SFAppBar(
+                    context: context,
+                    title: LocaleKeys.share,
+                    textStyle: TextStyles.bold18LightWhite,
+                  ),
+                  body: SingleChildScrollView(
+                    physics: const ScrollPhysics(),
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                      child: Column(
+                        children: [
+                          _bodyShare(),
+                          const SizedBox(
+                            height: 32,
+                          ),
+                          SFButton(
+                            text: LocaleKeys.return_to_home,
+                            textStyle: TextStyles.w600WhiteSize16,
+                            gradient: AppColors.gradientBlueButton,
+                            width: double.infinity,
+                            onPressed: () {
+                              if (fromRoute == R.splash) {
+                                Navigator.pushNamedAndRemoveUntil(
+                                    context, R.bottomNavigation, (r) => false);
+                              } else {
+                                Navigator.popUntil(context,
+                                        (r) => r.settings.name == R.bottomNavigation);
+                              }
+                            },
+                          ),
+                          const SizedBox(
+                            height: 150,
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+                Positioned(
+                  bottom: 0,
+                  child: CommunityShare(
+                    controller: screenshotController,
+                    widget: _bodyShare(),
+                    cubit: cubit,
+                  ),
+                ),
+              ],
             ),
-            body: SingleChildScrollView(
-              physics: const ScrollPhysics(),
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 16.0),
+          );
+        },
+      ),
+    );
+  }
+
+  Widget _bodyShare () {
+    return Column(
+        children: [
+          Stack(
+            children: [
+              Container(
+                decoration: BoxDecoration(
+                  color: AppColors.white.withOpacity(0.05),
+                  borderRadius: const BorderRadius.only(
+                    topLeft: Radius.circular(16),
+                    topRight: Radius.circular(16),
+                  ),
+                ),
                 child: Column(
                   children: [
-                    Stack(
-                      children: [
-                        Container(
-                          decoration: BoxDecoration(
-                            color: AppColors.white.withOpacity(0.05),
-                            borderRadius: const BorderRadius.only(
-                              topLeft: Radius.circular(16),
-                              topRight: Radius.circular(16),
+                    ClipPath(
+                      clipper: CurvedBottomClipper(),
+                      child: Container(
+                        padding:
+                        const EdgeInsets.only(bottom: 26),
+                        alignment: Alignment.center,
+                        decoration: BoxDecoration(
+                          color: AppColors.blue.withOpacity(0.05),
+                          borderRadius: BorderRadius.circular(16),
+                        ),
+                        child: Column(
+                          children: [
+                            const SFIcon(
+                              Imgs.shortBed,
+                              height: 160,
                             ),
-                          ),
-                          child: Column(
-                            children: [
-                              ClipPath(
-                                clipper: CurvedBottomClipper(),
-                                child: Container(
-                                  padding: const EdgeInsets.only(bottom: 26),
-                                  alignment: Alignment.center,
-                                  decoration: BoxDecoration(
-                                    color: AppColors.blue.withOpacity(0.05),
-                                    borderRadius: BorderRadius.circular(16),
-                                  ),
-                                  child: Column(
-                                    children: [
-                                      const SFIcon(
-                                        Imgs.shortBed,
-                                        height: 160,
-                                      ),
-                                      Container(
-                                        decoration: BoxDecoration(
-                                          borderRadius: BorderRadius.circular(50),
-                                          border: Border.all(
-                                              color: AppColors.white
-                                                  .withOpacity(0.1)),
-                                        ),
-                                        padding: const EdgeInsets.symmetric(
-                                            vertical: 5, horizontal: 16),
-                                        child: SFText(
-                                          keyText: 'A2347',
-                                          style: TextStyles.white1w700size12,
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
+                            Container(
+                              decoration: BoxDecoration(
+                                borderRadius:
+                                BorderRadius.circular(50),
+                                border: Border.all(
+                                    color: AppColors.white
+                                        .withOpacity(0.1)),
                               ),
-                              const SizedBox(
-                                height: 16,
+                              padding: const EdgeInsets.symmetric(
+                                  vertical: 5, horizontal: 16),
+                              child: SFText(
+                                keyText: 'A2347',
+                                style:
+                                TextStyles.white1w700size12,
                               ),
-                              const CategoryHeaderShare(),
-                              const SizedBox(
-                                height: 12,
-                              ),
-                              const Padding(
-                                padding:
-                                    EdgeInsets.symmetric(horizontal: 16.0),
-                                child: ChartStatisticShare(titleBottom: false, maxValue: 100, typeTimeChart: TypeTimeChart.chartDay,),
-                              ),
-                              const SizedBox(
-                                height: 10,
-                              ),
-                            ],
-                          ),
+                            ),
+                          ],
                         ),
-                        const Positioned(
-                          top: 14,
-                          left: -30,
-                          child: TopLeftBanner(
-                            text: 'Short',
-                            textColor: AppColors.red,
-                          ),
-                        ),
-                      ],
+                      ),
                     ),
-                    const SleepFiQrCode(value: 'SLeepFi'),
-                    const SizedBox(height: 32,),
-                    SFButton(
-                      text: LocaleKeys.return_to_home,
-                      textStyle: TextStyles.w600WhiteSize16,
-                      gradient: AppColors.gradientBlueButton,
-                      width: double.infinity,
-                      onPressed: () {
-                        if (fromRoute == R.splash) {
-                          Navigator.pushNamedAndRemoveUntil(
-                              context, R.bottomNavigation, (r) => false);
-                        } else {
-                          Navigator.popUntil(context,
-                                  (r) => r.settings.name == R.bottomNavigation);
-                        }
-                      },),
-                    const SizedBox(height: 150,),
+                    const SizedBox(
+                      height: 16,
+                    ),
+                    const CategoryHeaderShare(),
+                    const SizedBox(
+                      height: 12,
+                    ),
+                    const Padding(
+                      padding:
+                      EdgeInsets.symmetric(horizontal: 16.0),
+                      child: ChartStatisticShare(
+                        titleBottom: false,
+                        maxValue: 100,
+                        typeTimeChart: TypeTimeChart.chartDay,
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 10,
+                    ),
                   ],
                 ),
               ),
-            ),
+              const Positioned(
+                top: 14,
+                left: -30,
+                child: TopLeftBanner(
+                  text: 'Short',
+                  textColor: AppColors.red,
+                ),
+              ),
+            ],
           ),
-          const Positioned(
-            bottom: 0,
-            child: CommunityShare(),
-          ),
+          const SleepFiQrCode(value: 'SLeepFi'),
         ],
-      ),
-    );
+      );
   }
 }
 
