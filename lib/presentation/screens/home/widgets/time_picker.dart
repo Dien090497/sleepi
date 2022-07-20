@@ -133,32 +133,6 @@ class _SFDatePickerState extends State<SFDatePicker> {
 
   @override
   Widget build(BuildContext context) {
-    // return CupertinoPicker.builder(
-    //   itemExtent: 48,
-    //   childCount: widget.size,
-    //   selectionOverlay: const SizedBox(),
-    //   offAxisFraction: widget.offAxisFraction,
-    //   squeeze: 1,
-    //   scrollController: controller,
-    //   useMagnifier: widget.useMagnifier,
-    //   backgroundColor: AppColors.dark,
-    //   onSelectedItemChanged: (int index) {
-    //     widget.timeChanged(index);
-    //   },
-    //   itemBuilder: (context, index) {
-    //     return Container(
-    //       width: double.infinity,
-    //       height: 46,
-    //       padding: const EdgeInsets.symmetric(horizontal: 12),
-    //       alignment: widget.alignment,
-    //       child: Text(
-    //         index < 10 ? '0$index' : '$index',
-    //         textAlign: TextAlign.right,
-    //         style: TextStyles.white1w700size16,
-    //       ),
-    //     );
-    //   },
-    // );
     return CupertinoPicker(
       looping: true,
       selectionOverlay: const SizedBox(),
