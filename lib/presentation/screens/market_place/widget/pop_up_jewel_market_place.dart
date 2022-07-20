@@ -116,42 +116,20 @@ class PopUpJewelMarketPlace extends StatelessWidget {
           radius: 8,
           margin: EdgeInsets.zero,
           padding: const EdgeInsets.symmetric(vertical: 18, horizontal: 24),
-          child: Column(
+          child: Row(
             children: [
-              Row(
-                children: [
-                  SFText(
-                    keyText: LocaleKeys.attributes,
-                    style: TextStyles.lightGrey16,
-                  ),
-                  const SizedBox(width: 4),
-                  Expanded(
-                    child: SFText(
-                      keyText:
-                          '+${jewel.luck} ${jewel.type.reCase(StringCase.titleCase)}',
-                      style: TextStyles.blue16,
-                      textAlign: TextAlign.right,
-                    ),
-                  ),
-                ],
+              SFText(
+                keyText: LocaleKeys.effect,
+                style: TextStyles.lightGrey16,
               ),
-              const SizedBox(height: 16),
-              Row(
-                children: [
-                  SFText(
-                    keyText: LocaleKeys.effect,
-                    style: TextStyles.lightGrey16,
-                  ),
-                  const SizedBox(width: 4),
-                  Expanded(
-                    child: SFText(
-                      keyText:
-                          '+${jewel.efficiency}% ${LocaleKeys.base.tr()} ${jewel.type.reCase(StringCase.titleCase)}',
-                      style: TextStyles.blue16,
-                      textAlign: TextAlign.right,
-                    ),
-                  ),
-                ],
+              const SizedBox(width: 4),
+              Expanded(
+                child: SFText(
+                  keyText:
+                      '+${jewel.infoBuff}% ${LocaleKeys.base.tr()} ${jewel.type.reCase(StringCase.titleCase)}',
+                  style: TextStyles.blue16,
+                  textAlign: TextAlign.right,
+                ),
               ),
             ],
           ),

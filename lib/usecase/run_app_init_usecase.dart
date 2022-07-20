@@ -12,13 +12,12 @@ class RunAppInitUseCase extends UseCase<bool, NoParams> {
   final GetStorageDataSource _getStorageDataSource;
   final AppFlyerCustom _appFlyerCustom;
 
-
   RunAppInitUseCase(this._web3provider, this._isarDataSource,
       this._getStorageDataSource, this._appFlyerCustom);
 
   @override
   Future<Either<Failure, bool>> call(NoParams params) async {
-    _appFlyerCustom.init();
+    await _appFlyerCustom.init();
     await _isarDataSource.init();
     int? chainId = _getStorageDataSource.getCurrentChainId();
     if (chainId == null) {
@@ -29,6 +28,5 @@ class RunAppInitUseCase extends UseCase<bool, NoParams> {
     assert(network != null, "Network must not be null");
     await _web3provider.init(network!);
     return const Right(true);
-
   }
 }

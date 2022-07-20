@@ -10,7 +10,7 @@ import 'package:slee_fi/presentation/blocs/bottom_navigation/bottom_navigation_s
 import 'package:slee_fi/presentation/blocs/wallet/wallet_cubit.dart';
 import 'package:slee_fi/presentation/screens/chart/chart_screen.dart';
 import 'package:slee_fi/presentation/screens/gacha/gacha_screen.dart';
-import 'package:slee_fi/presentation/screens/home/home_screen.dart';
+import 'package:slee_fi/presentation/screens/home/new_home_screen.dart';
 import 'package:slee_fi/presentation/screens/market_place/market_place_screen.dart';
 import 'package:slee_fi/presentation/screens/product_detail/product_detail_screen.dart';
 
@@ -25,18 +25,12 @@ class BottomNavigationScreen extends StatelessWidget {
     final PageController pageController = PageController();
 
     var screens = [
-      const HomeScreen(),
+      const NewHomeScreen(),
       const GachaScreen(),
       const ProductDetailScreen(),
       const ChartScreen(),
       MarketPlaceScreen(tabKey: marketTabKey),
     ];
-
-    // WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
-    //   Future.delayed(const Duration(milliseconds: 600), () {
-    //     Navigator.pushNamed(context, R.tutorial);
-    //   });
-    // });
 
     return BlocConsumer<BottomNavigationBloc, BottomNavigationState>(
       listener: (context, state) {

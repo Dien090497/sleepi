@@ -16,7 +16,7 @@ class AppFlyerCustom {
 
   late final AppsflyerSdk _appsflyerSdk;
 
-  init() async {
+  Future<void> init() async {
     _appsflyerSdk = AppsflyerSdk(_appsFlyerOptions);
     await _appsflyerSdk.initSdk(
         registerConversionDataCallback: true,

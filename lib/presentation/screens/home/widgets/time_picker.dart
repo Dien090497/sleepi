@@ -6,6 +6,7 @@ class TimePicker extends StatelessWidget {
   const TimePicker(
       {Key? key, required this.onHourChange, required this.onMinuteChange})
       : super(key: key);
+
   final Function(int hour) onHourChange;
   final Function(int hour) onMinuteChange;
 
@@ -27,7 +28,7 @@ class TimePicker extends StatelessWidget {
               children: <Widget>[
                 Expanded(
                     child: SFDatePicker(
-                  size: 24,
+                  datas: List<int>.generate(24, (i) => i),
                   selectedTime: DateTime.now().hour,
                   alignment: Alignment.centerRight,
                   offAxisFraction: -.5,
@@ -35,7 +36,7 @@ class TimePicker extends StatelessWidget {
                 )),
                 Expanded(
                     child: SFDatePicker(
-                  size: 60,
+                  datas: List<int>.generate(60, (i) => i),
                   selectedTime: DateTime.now().minute,
                   alignment: Alignment.centerLeft,
                   offAxisFraction: .5,
@@ -107,7 +108,7 @@ class SFDatePicker extends StatefulWidget {
     required this.offAxisFraction,
     required this.alignment,
     this.useMagnifier = false,
-    required this.size,
+    required this.datas,
   }) : super(key: key);
 
   final int selectedTime;
@@ -115,7 +116,7 @@ class SFDatePicker extends StatefulWidget {
   final double offAxisFraction;
   final Alignment alignment;
   final bool useMagnifier;
-  final int size;
+  final List<int> datas;
 
   @override
   State<SFDatePicker> createState() => _SFDatePickerState();
@@ -133,33 +134,47 @@ class _SFDatePickerState extends State<SFDatePicker> {
 
   @override
   Widget build(BuildContext context) {
-    return CupertinoPicker(
-      looping: true,
-      selectionOverlay: const SizedBox(),
-      offAxisFraction: widget.offAxisFraction,
-      squeeze: 1,
-      scrollController: controller,
-      useMagnifier: widget.useMagnifier,
-      itemExtent: 48.0,
-      backgroundColor: AppColors.dark,
-      onSelectedItemChanged: (int index) {
-        widget.timeChanged(index);
+    int temp = 0;
+    return NotificationListener<ScrollNotification>(
+      onNotification: (scrollNotification) {
+        final metrics = scrollNotification.metrics;
+        if (scrollNotification is ScrollEndNotification &&
+            metrics is FixedExtentMetrics) {
+          widget.timeChanged(temp);
+          return true;
+        } else {
+          return false;
+        }
       },
-      children: List<Widget>.generate(
-        widget.size,
-        (int index) {
-          return Container(
-            width: double.infinity,
-            height: 46,
-            padding: const EdgeInsets.symmetric(horizontal: 12),
-            alignment: widget.alignment,
-            child: Text(
-              index < 10 ? '0$index' : '$index',
-              textAlign: TextAlign.right,
-              style: TextStyles.white1w700size16,
-            ),
-          );
+      child: CupertinoPicker(
+        looping: true,
+        selectionOverlay: const SizedBox(),
+        offAxisFraction: widget.offAxisFraction,
+        squeeze: 1,
+        scrollController: controller,
+        useMagnifier: widget.useMagnifier,
+        itemExtent: 48.0,
+        backgroundColor: AppColors.dark,
+        onSelectedItemChanged: (int index) {
+          temp = index;
         },
+        children: List<Widget>.generate(
+          widget.datas.length,
+          (int i) {
+            final value = widget.datas[i];
+            return Container(
+              width: double.infinity,
+              height: 46,
+              padding: const EdgeInsets.symmetric(horizontal: 12),
+              alignment: widget.alignment,
+              child: Text(
+                value < 10 ? '0$value' : '$value',
+                textAlign: TextAlign.right,
+                style: TextStyles.white1w700size16,
+              ),
+            );
+          },
+        ),
       ),
     );
   }

@@ -55,7 +55,7 @@ class ProbabilityScreen extends StatelessWidget {
                 child: SFTabBar(
                   isScrollable: true,
                   texts: [
-                    LocaleKeys.beds,
+                    LocaleKeys.bed,
                     LocaleKeys.jewels,
                     LocaleKeys.item,
                     LocaleKeys.trophy

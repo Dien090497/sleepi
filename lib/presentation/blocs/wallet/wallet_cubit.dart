@@ -105,9 +105,9 @@ class WalletCubit extends Cubit<WalletState> {
       "USDC",
     ];
     final List nftNames = [
-      LocaleKeys.beds.tr(),
+      LocaleKeys.bed.tr(),
       LocaleKeys.jewels.tr(),
-      LocaleKeys.bed_box.tr(),
+      LocaleKeys.bedbox.tr(),
       LocaleKeys.item.tr(),
     ];
     final List icons = [

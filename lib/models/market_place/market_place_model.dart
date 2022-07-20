@@ -21,6 +21,7 @@ class MarketPlaceModel {
   final String special;
   final String resilience;
   final String durability;
+  final String? jewelType;
   final double? startTime;
   final double? endTime;
   final String price;
@@ -66,7 +67,7 @@ class MarketPlaceModel {
     this.isMint,
     this.tokenId,
     this.startTime,
-    this.endTime,
+    this.endTime, this.jewelType,
   );
 
   factory MarketPlaceModel.fromJson(Map<String, dynamic> json) =>
@@ -76,6 +77,7 @@ class MarketPlaceModel {
 
   BedEntity toBedEntity() {
     return BedEntity(
+      jewelType: jewelType,
       name: nftName,
       nftId: nftId,
       nftClass: classNft ?? '',
@@ -104,5 +106,19 @@ class MarketPlaceModel {
       insurancePercent: 0,
       socket: null,
     );
+  }
+
+  String get infoBuff {
+    switch (jewelType) {
+      case 'ruby':
+        return efficiency;
+      case 'sapphire':
+        return luck;
+      case 'emerald':
+        return bonus;
+      case 'diamond':
+        return special;
+    }
+    return '';
   }
 }

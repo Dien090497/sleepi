@@ -25,18 +25,15 @@ class MiddleBed extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final Size size = MediaQuery.of(context).size;
+    // final Size size = MediaQuery.of(context).size;
     final homeBloc = context.read<HomeBloc>();
 
     return Column(
       children: [
-        SFText(
-          keyText: LocaleKeys.main_bed,
-          style: TextStyles.white18,
-        ),
+        SFText(keyText: LocaleKeys.main_bed, style: TextStyles.white18),
         const SizedBox(height: 16),
         Container(
-          width: size.width,
+          // width: size.width,
           padding: const EdgeInsets.symmetric(
             vertical: 24,
             horizontal: 16,
@@ -54,7 +51,7 @@ class MiddleBed extends StatelessWidget {
               return Column(
                 children: [
                   SizedBox(
-                    width: size.width,
+                    // width: size.width,
                     height: 200.h,
                     child: state is HomeLoaded
                         ? Swiper(
@@ -73,9 +70,7 @@ class MiddleBed extends StatelessWidget {
                                             BlocProvider.of<
                                                         BottomNavigationBloc>(
                                                     context)
-                                                .add(
-                                              const SelectTab(4),
-                                            );
+                                                .add(const SelectTab(4));
                                           },
                                         );
                             },

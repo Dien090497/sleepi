@@ -53,7 +53,6 @@ class UseItem extends StatelessWidget {
                     borderRadius: BorderRadius.circular(8),
                   ),
                   child: Row(
-                    // crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       GestureDetector(
                           onTap: () {

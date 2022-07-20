@@ -6,7 +6,6 @@ import 'package:slee_fi/common/routes/app_routes.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
 import 'package:slee_fi/common/utils/date_time_utils.dart';
-import 'package:slee_fi/common/widgets/sf_alert_dialog.dart';
 import 'package:slee_fi/common/widgets/sf_button_outlined.dart';
 import 'package:slee_fi/common/widgets/sf_dialog.dart';
 import 'package:slee_fi/common/widgets/sf_percent_border.dart';
@@ -18,7 +17,6 @@ import 'package:slee_fi/presentation/blocs/home/home_state.dart';
 import 'package:slee_fi/presentation/screens/home/widgets/button_start.dart';
 import 'package:slee_fi/presentation/screens/home/widgets/home_switch.dart';
 import 'package:slee_fi/presentation/screens/home/widgets/lucky_box.dart';
-import 'package:slee_fi/presentation/screens/home/widgets/pop_up_start_tracking.dart';
 import 'package:slee_fi/presentation/screens/home/widgets/time_picker.dart';
 import 'package:slee_fi/presentation/screens/tracking/tracking_screen.dart';
 import 'package:slee_fi/resources/resources.dart';
@@ -54,21 +52,11 @@ class AlarmBell extends StatelessWidget {
         final bed = state is HomeLoaded ? state.selectedBed : null;
         final userStatusTracking =
             state is HomeLoaded ? state.userStatusTracking : null;
-        final now = DateTime.now();
-        final nowWithoutSecond =
-            DateTime(now.year, now.month, now.day, now.hour, now.minute);
-        final minTime = nowWithoutSecond.add(Duration(
-            minutes: bed == null
-                ? 0
-                : bed.startTime == null
-                    ? 0
-                    : (bed.startTime! * 60).toInt()));
-        final maxTime = nowWithoutSecond.add(Duration(
-            minutes: bed == null
-                ? 0
-                : bed.endTime == null
-                    ? 0
-                    : (bed.endTime! * 60).toInt()));
+        final enableStart = state is HomeLoaded &&
+            state.startRange != null &&
+            state.endRange != null &&
+            _correctTime(
+                state.startRange!, state.endRange!, state.hour, state.minute);
         return Container(
           padding: const EdgeInsets.symmetric(horizontal: 16),
           decoration: const BoxDecoration(
@@ -91,7 +79,7 @@ class AlarmBell extends StatelessWidget {
               ),
               const SizedBox(height: 16),
               Text(
-                '${LocaleKeys.range.tr()}: ${state is HomeLoaded && bed != null ? '${dateTimeUtil.HHmm(minTime)}-${dateTimeUtil.HHmm(maxTime)}' : '03:00-06:00'}',
+                '${LocaleKeys.range.tr()}: ${state is HomeLoaded && bed != null && state.startRange != null && state.endRange != null ? '${dateTimeUtil.HHmm(state.startRange!)}-${dateTimeUtil.HHmm(state.endRange!)}' : '03:00-06:00'}',
                 style: TextStyles.white16500,
               ),
               const SizedBox(height: 24),
@@ -116,42 +104,42 @@ class AlarmBell extends StatelessWidget {
                     onChanged: (bool value) {
                       context.read<HomeBloc>().add(ChangeStatusAlarm(value));
                     },
+                    isOn: state is HomeLoaded && state.enableAlarm,
                   ),
                 ],
               ),
               const SizedBox(height: 16),
               if (userStatusTracking != null)
                 ButtonStart(
-                  enableStart: _correctTime(minTime, maxTime, state),
-                  userStatusTracking: userStatusTracking,
+                  enableStart: enableStart,
                   onStartTracking: () {
-                    if (state is HomeLoaded) {
-                      if (state.userStatusTracking!.tracking == null) {
-                        showCustomAlertDialog(context,
-                            children: PopUpConfirmStartTracking(
-                          onPressed: () async {
-                            context.read<HomeBloc>().add(StartTracking());
-                          },
-                        ));
-                      } else {
-                        Navigator.pushNamed(
-                          context,
-                          R.tracking,
-                          arguments: TrackingParams(
-                            timeStart: state
-                                    .userStatusTracking!.tracking!.startSleep! *
-                                1000,
-                            timeWakeUp:
-                                state.userStatusTracking!.tracking!.wakeUp! *
-                                    1000,
-                            tokenEarn: double.parse(
-                                state.userStatusTracking!.tracking!.estEarn!),
-                            fromRoute: R.bottomNavigation,
-                            imageBed: state.selectedBed?.image,
-                          ),
-                        );
-                      }
-                    }
+                    // if (state is HomeLoaded) {
+                    //   if (state.userStatusTracking!.tracking == null) {
+                    //     showCustomAlertDialog(context,
+                    //         children: PopUpConfirmStartTracking(
+                    //       onPressed: () async {
+                    //         context.read<HomeBloc>().add(StartTracking());
+                    //       },
+                    //     ));
+                    //   } else {
+                    //     Navigator.pushNamed(
+                    //       context,
+                    //       R.tracking,
+                    //       arguments: TrackingParams(
+                    //         timeStart: state
+                    //                 .userStatusTracking!.tracking!.startSleep! *
+                    //             1000,
+                    //         timeWakeUp:
+                    //             state.userStatusTracking!.tracking!.wakeUp! *
+                    //                 1000,
+                    //         tokenEarn: double.parse(
+                    //             state.userStatusTracking!.tracking!.estEarn!),
+                    //         fromRoute: R.bottomNavigation,
+                    //         imageBed: state.selectedBed?.image,
+                    //       ),
+                    //     );
+                    //   }
+                    // }
                   },
                 ),
               const SizedBox(height: 32),
@@ -213,20 +201,17 @@ class AlarmBell extends StatelessWidget {
     );
   }
 
-  bool _correctTime(DateTime minTime, DateTime maxTime, HomeState state) {
-    if (state is! HomeLoaded) return false;
-    final hour = state.hour;
-    final minute = state.minute;
+  bool _correctTime(
+      DateTime startRange, DateTime endRange, int hour, int minute) {
     final now = DateTime.now();
-    final nextDay = DateTime.now().add(const Duration(days: 1));
+    final nextDay = now.add(const Duration(days: 1));
     final wakeUpTimeInNextDay =
         DateTime(nextDay.year, nextDay.month, nextDay.day, hour, minute);
     final wakeUpTimeInDay =
         DateTime(now.year, now.month, now.day, hour, minute);
-    final wakeUpTime = hour <= now.hour ? wakeUpTimeInNextDay : wakeUpTimeInDay;
-
-    return wakeUpTime.isAfter(minTime) && wakeUpTime.isBefore(maxTime) ||
-        maxTime.difference(wakeUpTime).inSeconds == 0 ||
-        wakeUpTime.difference(minTime).inSeconds == 0;
+    final wakeUpTime = hour < now.hour ? wakeUpTimeInNextDay : wakeUpTimeInDay;
+    return wakeUpTime.isAfter(startRange) && wakeUpTime.isBefore(endRange) ||
+        endRange.difference(wakeUpTime).inSeconds == 0 ||
+        wakeUpTime.difference(startRange).inSeconds == 0;
   }
 }

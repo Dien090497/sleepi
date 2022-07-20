@@ -1,5 +1,5 @@
-
 import 'package:freezed_annotation/freezed_annotation.dart';
+
 part 'tracking_model.g.dart';
 
 @JsonSerializable()
@@ -36,35 +36,35 @@ class TrackingModel {
     this.updatedAt,
   });
 
-  int? id;
-  int? userId;
-  String? bedType;
-  bool? alrm;
-  int? startSleep;
-  int? wakeUp;
-  String? hashId;
-  int? bedUsed;
-  int? itemUsed;
-  dynamic timeSleep;
-  int? efficiency;
-  int? luck;
-  int? bonus;
-  int? special;
-  int? resilience;
-  dynamic itemLevel;
-  int? bedLevel;
-  bool? enableInsurance;
-  String? insurance;
-  int? year;
-  String? estEarn;
-  dynamic actualEarn;
-  dynamic timeRange;
-  int? month;
-  dynamic quality;
-  int? day;
-  String? status;
-  DateTime? createdAt;
-  DateTime? updatedAt;
+  final int? id;
+  final int? userId;
+  final String? bedType;
+  final bool? alrm;
+  final int? startSleep;
+  final int? wakeUp;
+  final String? hashId;
+  final int? bedUsed;
+  final int? itemUsed;
+  final dynamic timeSleep;
+  final int? efficiency;
+  final int? luck;
+  final int? bonus;
+  final int? special;
+  final int? resilience;
+  final dynamic itemLevel;
+  final int? bedLevel;
+  final bool? enableInsurance;
+  final String? insurance;
+  final int? year;
+  final String? estEarn;
+  final dynamic actualEarn;
+  final dynamic timeRange;
+  final int? month;
+  final dynamic quality;
+  final int? day;
+  final String? status;
+  final DateTime? createdAt;
+  final DateTime? updatedAt;
 
   factory TrackingModel.fromJson(Map<String, dynamic> json) =>
       _$TrackingModelFromJson(json);

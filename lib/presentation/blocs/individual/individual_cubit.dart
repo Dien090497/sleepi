@@ -16,6 +16,7 @@ class IndividualCubit extends Cubit<IndividualState> {
     familyRes.fold(
       (l) {},
       (r) {
+        if(isClosed) return;
         emit(state.copyWith(nftFamily: r));
       },
     );

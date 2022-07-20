@@ -11,7 +11,7 @@ class WakeUpUseCase extends UseCase<TrackingResultModel, DataHealthSchema> {
   WakeUpUseCase(this._sleepTrackingRepository);
 
   @override
-  Future<Either<Failure, TrackingResultModel>> call(DataHealthSchema params) {
+  Future<Either<FailureMessage, TrackingResultModel>> call(DataHealthSchema params) {
     return _sleepTrackingRepository.wakeUp(params);
   }
 }
