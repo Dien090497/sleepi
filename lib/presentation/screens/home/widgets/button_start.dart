@@ -83,6 +83,10 @@ class _ButtonStartState extends State<ButtonStart> {
                 countDownEnded = true;
                 setState(() {});
               },
+              onStart: (){
+                countDownEnded = false;
+                setState(() {});
+              },
             ),
           ),
         );
@@ -92,10 +96,11 @@ class _ButtonStartState extends State<ButtonStart> {
 }
 
 class _CountDownText extends StatefulWidget {
-  const _CountDownText({Key? key, required this.onEnd, this.userStatusTracking})
+  const _CountDownText({Key? key, required this.onEnd, this.userStatusTracking, required this.onStart})
       : super(key: key);
 
   final VoidCallback onEnd;
+  final VoidCallback onStart;
   final UserStatusTrackingModel? userStatusTracking;
 
   @override
@@ -143,6 +148,7 @@ class _CountDownTextState extends State<_CountDownText> {
                 widget.userStatusTracking!.availableAt * 1000)
             .difference(DateTime.now())
             .inSeconds;
+        widget.onStart();
       } else {
         startTime = 0;
       }

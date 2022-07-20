@@ -74,6 +74,24 @@ class _AlarmSoundEffectListState extends State<AlarmSoundEffectList> {
   _playSound() async {
     await audioPlayer.stop();
     await audioPlayer.release();
-    await audioPlayer.play(AssetSource(Const.soundAlarm[temp]), volume: 1, mode: PlayerMode.mediaPlayer,);
+    await audioPlayer.play(
+      AssetSource(Const.soundAlarm[temp]),
+      volume: 1,
+      mode: PlayerMode.mediaPlayer,
+      ctx: AudioContext(
+        android: AudioContextAndroid(
+          isSpeakerphoneOn: true,
+          stayAwake: true,
+          contentType: AndroidContentType.music,
+          usageType: AndroidUsageType.media,
+          audioFocus: AndroidAudioFocus.gain,
+        ),
+        iOS: AudioContextIOS(
+          defaultToSpeaker: false,
+          category: AVAudioSessionCategory.playback,
+          options: [AVAudioSessionOptions.duckOthers],
+        ),
+      ),
+    );
   }
 }

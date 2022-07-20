@@ -20,7 +20,11 @@ class PreResultParams {
   List<DrawChartEntity> dataChart;
   String? imageBed;
 
-  PreResultParams({required this.fromRoute, required this.resultModel, required this.dataChart, this.imageBed});
+  PreResultParams(
+      {required this.fromRoute,
+      required this.resultModel,
+      required this.dataChart,
+      this.imageBed});
 }
 
 class PreResultScreen extends StatefulWidget {
@@ -110,12 +114,14 @@ class _PreResultScreenState extends State<PreResultScreen> {
                               const SizedBox(
                                 height: 8,
                               ),
-                              SFLabelValue(
-                                  label: LocaleKeys.insurance,
-                                  value: '${resultModel.insurance}%'),
-                              const SizedBox(
-                                height: 8,
-                              ),
+                              if (resultModel.enableInsurance)
+                                SFLabelValue(
+                                    label: LocaleKeys.insurance,
+                                    value: '${resultModel.insurance}%'),
+                              if (resultModel.enableInsurance)
+                                const SizedBox(
+                                  height: 8,
+                                ),
                               const Divider(
                                 color: AppColors.white,
                               ),
@@ -125,7 +131,7 @@ class _PreResultScreenState extends State<PreResultScreen> {
                               SFLabelValue(
                                   label: LocaleKeys.earning,
                                   value:
-                                  '${double.parse(resultModel.actualEarn!).formatBalance2Digits} SLFT'),
+                                      '${double.parse(resultModel.actualEarn!).formatBalance2Digits} SLFT'),
                               const SizedBox(
                                 height: 32,
                               ),
@@ -155,9 +161,15 @@ class _PreResultScreenState extends State<PreResultScreen> {
                             onPressed: () {
                               final cubit = context.read<ChartDayCubit>();
                               final date = DateTime.now();
-                              final fromDate = DateTime(date.year, date.month, date.day - 1);
-                              final toDate = DateTime(date.year, date.month, date.day);
-                              cubit.fetchDataChartDays(fromDate: fromDate, toDate: toDate, type: 'day', fistLoad: true);
+                              final fromDate =
+                                  DateTime(date.year, date.month, date.day - 1);
+                              final toDate =
+                                  DateTime(date.year, date.month, date.day);
+                              cubit.fetchDataChartDays(
+                                  fromDate: fromDate,
+                                  toDate: toDate,
+                                  type: 'day',
+                                  fistLoad: true);
                             },
                           ),
                         ),

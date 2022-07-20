@@ -226,6 +226,13 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
       if (accessWasGranted) {
         DateTime wakeUp =
             DateTime.now().add(Duration(minutes: currentState.time));
+        print('-==-==-=-${StartTrackingSchema(
+          isEnableInsurance: currentState.enableInsurance,
+          bedUsed: currentState.selectedBed!.id,
+          wakeUp: '${wakeUp.toUtc().millisecondsSinceEpoch ~/ 1000}',
+          alrm: currentState.enableAlarm,
+          itemUsed: currentState.selectedItem?.id ?? 0,
+        ).toJson()}');
         var result = await _startSleepTrackingUC.call(StartTrackingSchema(
           isEnableInsurance: currentState.enableInsurance,
           bedUsed: currentState.selectedBed!.id,
