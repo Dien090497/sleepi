@@ -229,7 +229,7 @@ class _TrackingScreenState extends State<TrackingScreen> {
                             textStyle: TextStyles.w600WhiteSize16,
                             onPressed: () {
                               service.invoke(Const.stopService);
-                              cubit.fetchData();
+                              cubit.fetchData(time);
                             },
                           ),
                           const SizedBox(height: 26),

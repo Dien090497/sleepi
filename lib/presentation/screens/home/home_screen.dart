@@ -46,16 +46,17 @@ class HomeScreen extends StatelessWidget {
                     const SizedBox(height: 10),
                     const UseItem(),
                     const SizedBox(height: 24),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                      child: BlocBuilder<HomeBloc, HomeState>(
-                        builder: (context, state) {
-                          return Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              if (state is HomeLoaded &&
-                                  state.selectedBed != null)
-                                Row(
+                    BlocBuilder<HomeBloc, HomeState>(
+                      builder: (context, state) {
+                        return Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            if (state is HomeLoaded &&
+                                state.selectedBed != null)
+                              Padding(
+                                padding: const EdgeInsets.symmetric(
+                                    horizontal: 16.0),
+                                child: Row(
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceBetween,
                                   children: [
@@ -75,10 +76,14 @@ class HomeScreen extends StatelessWidget {
                                     ),
                                   ],
                                 ),
-                              const SizedBox(height: 2),
-                              if (state is HomeLoaded &&
-                                  state.bedList.isNotEmpty) ...[
-                                GestureDetector(
+                              ),
+                            const SizedBox(height: 2),
+                            if (state is HomeLoaded &&
+                                state.bedList.isNotEmpty) ...[
+                              Padding(
+                                padding: const EdgeInsets.symmetric(
+                                    horizontal: 16.0),
+                                child: GestureDetector(
                                   onTap: () async {
                                     launchInsurance(context);
                                   },
@@ -95,18 +100,22 @@ class HomeScreen extends StatelessWidget {
                                     ],
                                   ),
                                 ),
-                                const SizedBox(height: 24),
-                              ],
-                              SFText(
+                              ),
+                              const SizedBox(height: 24),
+                            ],
+                            Padding(
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 16.0),
+                              child: SFText(
                                 keyText: LocaleKeys.you_can_set_your_alarm_here,
                                 style: TextStyles.lightGrey12,
                               ),
-                              const SizedBox(height: 16),
-                              const AlarmBell(),
-                            ],
-                          );
-                        },
-                      ),
+                            ),
+                            const SizedBox(height: 16),
+                            const AlarmBell(),
+                          ],
+                        );
+                      },
                     ),
                   ],
                 ),
