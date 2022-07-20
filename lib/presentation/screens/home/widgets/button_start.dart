@@ -7,24 +7,25 @@ import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
 import 'package:slee_fi/common/widgets/sf_buttons.dart';
 import 'package:slee_fi/l10n/locale_keys.g.dart';
-import 'package:slee_fi/models/user_status_tracking_model/user_status_tracking_model.dart';
 
 class ButtonStart extends StatefulWidget {
   const ButtonStart({
     Key? key,
     required this.enableStart,
     required this.onStartTracking,
+    this.availableAt,
   }) : super(key: key);
 
   final bool enableStart;
   final VoidCallback onStartTracking;
+  final int? availableAt;
 
   @override
   State<ButtonStart> createState() => _ButtonStartState();
 }
 
 class _ButtonStartState extends State<ButtonStart> {
-  bool countDownEnded = false;
+  late bool countDownEnded = (widget.availableAt ?? -1) <= 0;
 
   @override
   Widget build(BuildContext context) {
@@ -57,18 +58,21 @@ class _ButtonStartState extends State<ButtonStart> {
       child: _CountDownText(
         onEnd: () {
           countDownEnded = true;
+          setState(() {});
         },
+        availableAt: widget.availableAt,
       ),
     );
   }
 }
 
 class _CountDownText extends StatefulWidget {
-  const _CountDownText({Key? key, required this.onEnd, this.userStatusTracking})
+  const _CountDownText(
+      {Key? key, required this.onEnd, required this.availableAt})
       : super(key: key);
 
   final VoidCallback onEnd;
-  final UserStatusTrackingModel? userStatusTracking;
+  final int? availableAt;
 
   @override
   State<_CountDownText> createState() => _CountDownTextState();
@@ -76,46 +80,37 @@ class _CountDownText extends StatefulWidget {
 
 class _CountDownTextState extends State<_CountDownText> {
   late Timer _timer;
-  late UserStatusTrackingModel userStatusTracking = widget.userStatusTracking!;
   int startTime = 0;
-
-  void updateUserStatus() {
-    startTimer();
-    setState(() {
-      userStatusTracking = widget.userStatusTracking!;
-    });
-  }
+  int? availableAt;
 
   @override
   void initState() {
+    availableAt = widget.availableAt;
     startTimer();
-    const oneSec = Duration(seconds: 1);
-    _timer = Timer.periodic(
-      oneSec,
-      (Timer timer) {
-        if (startTime == 0) {
-          _timer.cancel();
-          widget.onEnd();
-        } else {
-          if (!mounted) return;
-          setState(() {
-            startTime--;
-          });
-        }
-      },
-    );
     super.initState();
   }
 
   void startTimer() {
-    if (widget.userStatusTracking != null &&
-        widget.userStatusTracking!.availableAt != 0) {
-      if (DateTime.now().isBefore(DateTime.fromMillisecondsSinceEpoch(
-          widget.userStatusTracking!.availableAt * 1000))) {
-        startTime = DateTime.fromMillisecondsSinceEpoch(
-                widget.userStatusTracking!.availableAt * 1000)
-            .difference(DateTime.now())
-            .inSeconds;
+    if (availableAt != null && availableAt != 0) {
+      final timeAvailable =
+          DateTime.fromMillisecondsSinceEpoch(availableAt! * 1000);
+      if (DateTime.now().isBefore(timeAvailable)) {
+        startTime = timeAvailable.difference(DateTime.now()).inSeconds;
+        const oneSec = Duration(seconds: 1);
+        _timer = Timer.periodic(
+          oneSec,
+          (Timer timer) {
+            if (startTime == 0) {
+              _timer.cancel();
+              widget.onEnd();
+            } else {
+              if (!mounted) return;
+              setState(() {
+                startTime--;
+              });
+            }
+          },
+        );
       } else {
         startTime = 0;
       }

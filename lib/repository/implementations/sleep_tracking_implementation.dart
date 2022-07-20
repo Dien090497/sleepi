@@ -49,6 +49,7 @@ class SleepTrackingImplementation extends ISleepTrackingRepository {
   @override
   Future<Either<FailureMessage, dynamic>> startTracking(
       StartTrackingSchema schema) async {
+    return Right('');
     try {
       return Right(await _sleepTrackingApi.startTracking(schema));
     } catch (e) {

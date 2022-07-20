@@ -113,7 +113,22 @@ class HomeScreen extends StatelessWidget {
                               ),
                             ),
                             const SizedBox(height: 16),
-                            const AlarmBell(),
+                            AlarmBell(
+                              userStatusTracking: state is HomeLoaded
+                                  ? state.userStatusTracking
+                                  : null,
+                              bedImage: state is HomeLoaded
+                                  ? state.selectedBed?.image
+                                  : null,
+                              startRange: state is HomeLoaded &&
+                                      state.selectedBed?.startTime != null
+                                  ? _getRange(state.selectedBed!.startTime!)
+                                  : null,
+                              endRange: state is HomeLoaded &&
+                                      state.selectedBed?.endTime != null
+                                  ? _getRange(state.selectedBed!.endTime!)
+                                  : null,
+                            ),
                           ],
                         );
                       },
@@ -126,5 +141,14 @@ class HomeScreen extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  DateTime _getRange(double time) {
+    final now = DateTime.now();
+    final nowWithoutSecond =
+        DateTime(now.year, now.month, now.day, now.hour, now.minute);
+    final nowWithoutSec =
+        nowWithoutSecond.add(Duration(minutes: (time * 60).toInt()));
+    return nowWithoutSec;
   }
 }

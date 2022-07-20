@@ -79,7 +79,7 @@ class MiddleBed extends StatelessWidget {
                                 return;
                               }
                               if (index >= state.bedList.length) {
-                                homeBloc.add(LoadMoreBed());
+                                homeBloc.add(const LoadMoreBed());
                                 return;
                               }
                               final bed = state.bedList[index];

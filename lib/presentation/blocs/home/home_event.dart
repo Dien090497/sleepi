@@ -50,13 +50,6 @@ class LoadMoreBed extends HomeEvent {
   List<Object?> get props => [];
 }
 
-class StartTracking extends HomeEvent {
-  const StartTracking();
-
-  @override
-  List<Object?> get props => [];
-}
-
 class ChangeInsurance extends HomeEvent {
   final bool enableInsurance;
 
@@ -75,13 +68,13 @@ class ChangeStatusAlarm extends HomeEvent {
   List<Object?> get props => [enableAlarm];
 }
 
-class ChangeHour extends HomeEvent {
-  final int hour;
+class SelectTime extends HomeEvent {
+  final DateTime time;
 
-  const ChangeHour(this.hour);
+  const SelectTime(this.time);
 
   @override
-  List<Object?> get props => [hour];
+  List<Object?> get props => [time];
 }
 
 class ChangeMinute extends HomeEvent {

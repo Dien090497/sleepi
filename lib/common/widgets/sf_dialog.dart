@@ -76,7 +76,7 @@ Future<T?> showMessageDialog<T>(BuildContext context, String message,
     {EdgeInsets? padding, TextStyle? style}) async {
   return showCustomAlertDialog(
     context,
-    padding: const EdgeInsets.all(24),
+    padding: padding ?? const EdgeInsets.all(24),
     children: Padding(
       padding: const EdgeInsets.symmetric(vertical: 32, horizontal: 24),
       child: SFText(
@@ -191,7 +191,7 @@ Future<T?> showLanguageUpdatedDialog<T>(BuildContext context, Locale locale) {
       barrierDismissible: false,
       builder: (context) {
         return SFDialog(
-          padding:  EdgeInsets.zero,
+          padding: EdgeInsets.zero,
           children: [
             // Align(
             //   alignment: Alignment.centerRight,
@@ -204,8 +204,7 @@ Future<T?> showLanguageUpdatedDialog<T>(BuildContext context, Locale locale) {
             // ),
             const SizedBox(height: 12),
             SFText(
-                keyText: LocaleKeys.successfull,
-                style: TextStyles.bold18White),
+                keyText: LocaleKeys.successfull, style: TextStyles.bold18White),
             const SizedBox(height: 12),
             SFText(
                 keyText: LocaleKeys.the_language_setting_has_been_updated,

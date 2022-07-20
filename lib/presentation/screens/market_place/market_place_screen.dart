@@ -54,8 +54,6 @@ class _MarketPlaceScreenState extends State<MarketPlaceScreen> {
                       if (index == _currentIndex) {
                         return;
                       }
-                      print('onchange tab $index');
-
                       cubits[index].clearFilter();
                       _currentIndex = index;
                     },
