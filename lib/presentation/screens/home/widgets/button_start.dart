@@ -3,25 +3,20 @@ import 'dart:async';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:external_app_launcher/external_app_launcher.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:focus_detector/focus_detector.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
 import 'package:slee_fi/common/widgets/sf_buttons.dart';
 import 'package:slee_fi/l10n/locale_keys.g.dart';
 import 'package:slee_fi/models/user_status_tracking_model/user_status_tracking_model.dart';
-import 'package:slee_fi/presentation/blocs/home/home_bloc.dart';
-import 'package:slee_fi/presentation/blocs/home/home_state.dart';
 
 class ButtonStart extends StatefulWidget {
-  const ButtonStart(
-      {Key? key,
-      required this.userStatusTracking,
-      required this.enableStart,
-      required this.onStartTracking})
-      : super(key: key);
+  const ButtonStart({
+    Key? key,
+    required this.enableStart,
+    required this.onStartTracking,
+  }) : super(key: key);
+
   final bool enableStart;
-  final UserStatusTrackingModel userStatusTracking;
   final VoidCallback onStartTracking;
 
   @override
@@ -29,64 +24,41 @@ class ButtonStart extends StatefulWidget {
 }
 
 class _ButtonStartState extends State<ButtonStart> {
-  GlobalKey<_CountDownTextState> key = GlobalKey();
   bool countDownEnded = false;
-  late UserStatusTrackingModel userStatusTrackingModel =
-      widget.userStatusTracking;
 
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<HomeBloc, HomeState>(
-      listener: (context, state) {
-        if (state is HomeLoaded) {
-          setState(() {
-            userStatusTrackingModel = state.userStatusTracking!;
-            key.currentState!.updateUserStatus();
-          });
+    return HomeStartButton(
+      radius: 100,
+      gradient: widget.enableStart && countDownEnded
+          ? AppColors.gradientBlueButton
+          : null,
+      color: AppColors.lightDark,
+      height: 40,
+      disabled: !(widget.enableStart && countDownEnded),
+      width: double.infinity,
+      onPressed: () async {
+        final isAppInstalled = await LaunchApp.isAppInstalled(
+          androidPackageName: 'com.google.android.apps.fitness',
+          iosUrlScheme: 'x-apple-health://',
+        );
+        if (isAppInstalled) {
+          widget.onStartTracking();
+        } else {
+          await LaunchApp.openApp(
+            androidPackageName: 'com.google.android.apps.fitness',
+            iosUrlScheme: 'x-apple-health://',
+            appStoreLink:
+                'itms-apps://itunes.apple.com/us/app/apple-health/id1242545199',
+            // openStore: false
+          );
         }
       },
-      builder: (context, state) {
-        return FocusDetector(
-          onFocusGained: () {
-            context.read<HomeBloc>().add(UserStatusTracking());
-          },
-          child: HomeStartButton(
-            radius: 100,
-            gradient: widget.enableStart && countDownEnded
-                ? AppColors.gradientBlueButton
-                : null,
-            color: AppColors.lightDark,
-            height: 40,
-            disabled: !(widget.enableStart && countDownEnded),
-            width: double.infinity,
-            onPressed: () async {
-              var isAppInstalledResult = await LaunchApp.isAppInstalled(
-                androidPackageName: 'com.google.android.apps.fitness',
-                iosUrlScheme: 'x-apple-health://',
-              );
-              if (isAppInstalledResult) {
-                widget.onStartTracking();
-              } else {
-                await LaunchApp.openApp(
-                  androidPackageName: 'com.google.android.apps.fitness',
-                  iosUrlScheme: 'x-apple-health://',
-                  appStoreLink:
-                      'itms-apps://itunes.apple.com/us/app/apple-health/id1242545199',
-                  // openStore: false
-                );
-              }
-            },
-            child: _CountDownText(
-              key: key,
-              userStatusTracking: userStatusTrackingModel,
-              onEnd: () {
-                countDownEnded = true;
-                setState(() {});
-              },
-            ),
-          ),
-        );
-      },
+      child: _CountDownText(
+        onEnd: () {
+          countDownEnded = true;
+        },
+      ),
     );
   }
 }
@@ -125,6 +97,7 @@ class _CountDownTextState extends State<_CountDownText> {
           _timer.cancel();
           widget.onEnd();
         } else {
+          if (!mounted) return;
           setState(() {
             startTime--;
           });

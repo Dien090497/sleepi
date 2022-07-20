@@ -6,7 +6,6 @@ import 'package:slee_fi/common/routes/app_routes.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
 import 'package:slee_fi/common/utils/date_time_utils.dart';
-import 'package:slee_fi/common/widgets/sf_alert_dialog.dart';
 import 'package:slee_fi/common/widgets/sf_button_outlined.dart';
 import 'package:slee_fi/common/widgets/sf_dialog.dart';
 import 'package:slee_fi/common/widgets/sf_percent_border.dart';
@@ -18,7 +17,6 @@ import 'package:slee_fi/presentation/blocs/home/home_state.dart';
 import 'package:slee_fi/presentation/screens/home/widgets/button_start.dart';
 import 'package:slee_fi/presentation/screens/home/widgets/home_switch.dart';
 import 'package:slee_fi/presentation/screens/home/widgets/lucky_box.dart';
-import 'package:slee_fi/presentation/screens/home/widgets/pop_up_start_tracking.dart';
 import 'package:slee_fi/presentation/screens/home/widgets/time_picker.dart';
 import 'package:slee_fi/presentation/screens/tracking/tracking_screen.dart';
 import 'package:slee_fi/resources/resources.dart';
@@ -83,15 +81,15 @@ class AlarmBell extends StatelessWidget {
             children: [
               TimePicker(
                 onHourChange: (hour) {
-                  context.read<HomeBloc>().add(ChangeHour(hour));
+                  // context.read<HomeBloc>().add(ChangeHour(hour));
                 },
                 onMinuteChange: (minute) {
-                  context.read<HomeBloc>().add(ChangeMinute(minute));
+                  // context.read<HomeBloc>().add(ChangeMinute(minute));
                 },
               ),
               const SizedBox(height: 16),
               Text(
-                '${LocaleKeys.range.tr()}: ${state is HomeLoaded && bed != null ? '${dateTimeUtil.HHmm(minTime)}-${dateTimeUtil.HHmm(maxTime)}' : '03:00-06:00'}',
+                '${LocaleKeys.range.tr()}: ${state is HomeLoaded && bed != null ? '${dateTimeUtil.HHmm(minTime)}-${dateTimeUtil.HHmm(maxTime)}' : '--:-----:--'}',
                 style: TextStyles.white16500,
               ),
               const SizedBox(height: 24),
@@ -116,6 +114,7 @@ class AlarmBell extends StatelessWidget {
                     onChanged: (bool value) {
                       context.read<HomeBloc>().add(ChangeStatusAlarm(value));
                     },
+                    isOn: state is HomeLoaded && state.enableAlarm,
                   ),
                 ],
               ),
@@ -123,35 +122,34 @@ class AlarmBell extends StatelessWidget {
               if (userStatusTracking != null)
                 ButtonStart(
                   enableStart: _correctTime(minTime, maxTime, state),
-                  userStatusTracking: userStatusTracking,
                   onStartTracking: () {
-                    if (state is HomeLoaded) {
-                      if (state.userStatusTracking!.tracking == null) {
-                        showCustomAlertDialog(context,
-                            children: PopUpConfirmStartTracking(
-                          onPressed: () async {
-                            context.read<HomeBloc>().add(StartTracking());
-                          },
-                        ));
-                      } else {
-                        Navigator.pushNamed(
-                          context,
-                          R.tracking,
-                          arguments: TrackingParams(
-                            timeStart: state
-                                    .userStatusTracking!.tracking!.startSleep! *
-                                1000,
-                            timeWakeUp:
-                                state.userStatusTracking!.tracking!.wakeUp! *
-                                    1000,
-                            tokenEarn: double.parse(
-                                state.userStatusTracking!.tracking!.estEarn!),
-                            fromRoute: R.bottomNavigation,
-                            imageBed: state.selectedBed?.image,
-                          ),
-                        );
-                      }
-                    }
+                    // if (state is HomeLoaded) {
+                    //   if (state.userStatusTracking!.tracking == null) {
+                    //     showCustomAlertDialog(context,
+                    //         children: PopUpConfirmStartTracking(
+                    //       onPressed: () async {
+                    //         context.read<HomeBloc>().add(StartTracking());
+                    //       },
+                    //     ));
+                    //   } else {
+                    //     Navigator.pushNamed(
+                    //       context,
+                    //       R.tracking,
+                    //       arguments: TrackingParams(
+                    //         timeStart: state
+                    //                 .userStatusTracking!.tracking!.startSleep! *
+                    //             1000,
+                    //         timeWakeUp:
+                    //             state.userStatusTracking!.tracking!.wakeUp! *
+                    //                 1000,
+                    //         tokenEarn: double.parse(
+                    //             state.userStatusTracking!.tracking!.estEarn!),
+                    //         fromRoute: R.bottomNavigation,
+                    //         imageBed: state.selectedBed?.image,
+                    //       ),
+                    //     );
+                    //   }
+                    // }
                   },
                 ),
               const SizedBox(height: 32),

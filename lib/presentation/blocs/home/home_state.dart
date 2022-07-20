@@ -25,11 +25,11 @@ class HomeState with _$HomeState {
     @Default(true) bool enableInsurance,
     @Default(true) bool enableAlarm,
     @Default(0.0) double tokenEarn,
-    required int hour,
-    required int minute,
-    required int time,
     @Default(false) bool startTracking,
     UserStatusTrackingModel? userStatusTracking,
+    required int hour,
+    required int minute,
+    @Default(0) int time,
   }) = HomeLoaded;
 
   const factory HomeState.startError(String message) = HomeStartError;

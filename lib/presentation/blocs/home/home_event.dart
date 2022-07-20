@@ -46,11 +46,6 @@ class LoadMoreBed extends HomeEvent {
   List<Object?> get props => [];
 }
 
-class EstimateTracking extends HomeEvent {
-  @override
-  List<Object?> get props => [];
-}
-
 class UserStatusTracking extends HomeEvent {
   @override
   List<Object?> get props => [];

@@ -26,18 +26,19 @@ import 'package:slee_fi/presentation/screens/tracking/widgets/analog_clock.dart'
 import 'package:slee_fi/resources/resources.dart';
 
 class TrackingParams {
-  int timeStart;
-  int timeWakeUp;
-  double tokenEarn;
-  String fromRoute;
-  String? imageBed;
+  final String fromRoute;
+  final int timeStart;
+  final int timeWakeUp;
+  final double tokenEarn;
+  final String? imageBed;
 
-  TrackingParams(
-      {required this.timeStart,
-      required this.timeWakeUp,
-      required this.tokenEarn,
-      required this.fromRoute,
-      this.imageBed});
+  TrackingParams({
+    required this.fromRoute,
+    required this.timeStart,
+    required this.timeWakeUp,
+    required this.tokenEarn,
+    this.imageBed,
+  });
 }
 
 class TrackingScreen extends StatefulWidget {
@@ -53,7 +54,6 @@ class _TrackingScreenState extends State<TrackingScreen> {
   late double totalEarn = 0;
   late int time = 0;
   late double earn = 0.toDouble();
-  late String fromRoute = R.bottomNavigation;
   final service = FlutterBackgroundService();
 
   @override
@@ -75,11 +75,11 @@ class _TrackingScreenState extends State<TrackingScreen> {
           (DateTime.now().difference(timStart).inMinutes) * (totalEarn / time);
       timeAlarm =
           '${wakeUp.hour < 10 ? '0${wakeUp.hour}' : wakeUp.hour}:${wakeUp.minute < 10 ? '0${wakeUp.minute}' : wakeUp.minute}';
-      fromRoute = args.fromRoute;
       double x = totalEarn / time;
       timer = Timer.periodic(
         const Duration(minutes: 1),
         (Timer timer) async {
+          if (!mounted) return;
           if (earn < totalEarn && x > 0) {
             earn += x;
             setState(() {});
@@ -88,7 +88,6 @@ class _TrackingScreenState extends State<TrackingScreen> {
           }
         },
       );
-      setState(() {});
     });
   }
 
@@ -112,10 +111,11 @@ class _TrackingScreenState extends State<TrackingScreen> {
             if (state is TrackingStatePosted) {
               Navigator.pushReplacementNamed(context, R.preResult,
                   arguments: PreResultParams(
-                      fromRoute: fromRoute,
-                      resultModel: state.resultModel,
-                      dataChart: [],
-                      imageBed: args.imageBed));
+                    resultModel: state.resultModel,
+                    dataChart: [],
+                    imageBed: args.imageBed,
+                    fromRoute: args.fromRoute,
+                  ));
             }
             if (state is TrackingStateFail) {
               showMessageDialog(context, state.msg);

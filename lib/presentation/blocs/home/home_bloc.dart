@@ -28,7 +28,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     on<ChangeBed>(_changeBed);
     on<RefreshBed>(_onRefresh);
     on<LoadMoreBed>(_onLoadMoreBed);
-    on<EstimateTracking>(_estimateTracking);
+    // on<EstimateTracking>(_estimateTracking);
     on<UserStatusTracking>(_userStatusTracking);
     on<StartTracking>(_startTracking);
     on<ChangeInsurance>(_changeInsurance);
@@ -85,17 +85,19 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
       emit(currentState.copyWith(loading: true));
       final result = await _fetchListBedUC
           .call(FetchHomeBedParam(_currentPageBed, _limitItemPage));
-      result.fold(
-        (l) {
+      await result.fold(
+        (l) async {
           emit(currentState.copyWith(loading: false, errorMessage: ''));
         },
-        (r) {
+        (r) async {
           _currentPageBed++;
           emit(currentState.copyWith(
             loading: false,
             errorMessage: '',
             bedList: r,
             loadMoreBed: r.length >= _limitItemPage,
+            tokenEarn: await _estimateTracking(
+                currentState.selectedBed!, currentState.enableInsurance),
           ));
           add(UserStatusTracking());
         },
@@ -103,41 +105,44 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     }
   }
 
-  void _changeBed(ChangeBed event, Emitter<HomeState> emit) {
+  void _changeBed(ChangeBed event, Emitter<HomeState> emit) async {
     final currentState = state;
     if (currentState is HomeLoaded) {
-      emit(currentState.copyWith(selectedBed: event.bed, errorMessage: ''));
+      emit(currentState.copyWith(
+        selectedBed: event.bed,
+        errorMessage: '',
+        tokenEarn: await _estimateTracking(
+            currentState.selectedBed!, currentState.enableInsurance),
+      ));
     }
-    add(EstimateTracking());
   }
 
   void _fetchBed(FetchBed fetchData, Emitter<HomeState> emit) async {
     final result = await _fetchListBedUC
         .call(FetchHomeBedParam(_currentPageBed, _limitItemPage));
-    result.fold(
-      (l) {
+    await result.fold(
+      (l) async {
         emit(HomeState.loaded(
-            bedList: [],
-            selectedBed: null,
-            loadMoreBed: false,
-            errorMessage: '',
-            startTracking: false,
-            minute: DateTime.now().minute,
-            hour: DateTime.now().hour,
-            time: 0));
+          bedList: [],
+          selectedBed: null,
+          loadMoreBed: false,
+          startTracking: false,
+          minute: DateTime.now().minute,
+          hour: DateTime.now().hour,
+        ));
       },
-      (r) {
+      (r) async {
         _currentPageBed++;
         emit(HomeState.loaded(
-            errorMessage: '',
-            loading: false,
-            bedList: r,
-            selectedBed: r.isNotEmpty ? r.first : null,
-            loadMoreBed: r.length >= _limitItemPage,
-            minute: DateTime.now().minute,
-            hour: DateTime.now().hour,
-            time: 0));
-        add(UserStatusTracking());
+          errorMessage: '',
+          loading: false,
+          bedList: r,
+          selectedBed: r.isNotEmpty ? r.first : null,
+          loadMoreBed: r.length >= _limitItemPage,
+          minute: DateTime.now().minute,
+          hour: DateTime.now().hour,
+          tokenEarn: await _estimateTracking(r.first, true),
+        ));
       },
     );
   }
@@ -152,9 +157,11 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
           errorMessage: l.msg,
           errorType: ErrorType.addItemToBed,
         ));
-      }, (r) {
-        add(EstimateTracking());
-        emit(currentState.copyWith(selectedItem: event.item));
+      }, (r) async {
+        emit(currentState.copyWith(
+          selectedItem: event.item,
+          tokenEarn: await _estimateTracking(currentState.selectedBed!, true),
+        ));
       });
     }
   }
@@ -164,34 +171,26 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     if (currentState is HomeLoaded && currentState.selectedItem != null) {
       final result = await _removeItemFromBedUC.call(AddItemToBedParam(
           currentState.selectedBed!.id, currentState.selectedItem!.id));
-      result.fold((l) {
+      await result.fold((l) {
         emit(currentState.copyWith(
           errorMessage: l.msg,
           errorType: ErrorType.removeItemFromBed,
         ));
-      }, (r) {
-        add(EstimateTracking());
+      }, (r) async {
         emit(currentState.copyWith(
           selectedItem: null,
           errorType: ErrorType.none,
+          tokenEarn: await _estimateTracking(currentState.selectedBed!, true),
         ));
       });
     }
   }
 
-  void _estimateTracking(
-      EstimateTracking event, Emitter<HomeState> emit) async {
-    final currentState = state;
-    if (currentState is HomeLoaded && currentState.bedList.isNotEmpty) {
-      var result = await _estimateTrackingUC.call(EstimateTrackingParam(
-          bedId: currentState.selectedBed!.id,
-          itemId: currentState.selectedItem?.id,
-          isEnableInsurance: currentState.enableInsurance));
-      result.fold((l) => null, (r) {
-        emit(
-            currentState.copyWith(errorMessage:'',tokenEarn: double.parse(r.estimateSlftEarn)));
-      });
-    }
+  Future<double> _estimateTracking(BedEntity bed, bool insuranceEnabled) async {
+    final result = await _estimateTrackingUC.call(EstimateTrackingParam(
+        bedId: bed.id, itemId: bed.id, isEnableInsurance: insuranceEnabled));
+    return double.parse(
+        result.foldRight('0', (r, previous) => r.estimateSlftEarn));
   }
 
   void _userStatusTracking(
@@ -200,9 +199,11 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     if (currentState is HomeLoaded) {
       var result = await _userStatusTrackingUC.call(NoParams());
       result.fold((l) => null, (r) {
-        emit(currentState.copyWith( errorMessage: '',
-            userStatusTracking: r, startTracking: false, time: 0));
-        add(EstimateTracking());
+        emit(currentState.copyWith(
+          errorMessage: '',
+          userStatusTracking: r,
+          startTracking: false,
+        ));
       });
     }
   }
@@ -247,7 +248,6 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     final currentState = state;
     if (currentState is HomeLoaded && currentState.bedList.isNotEmpty) {
       emit(currentState.copyWith(enableInsurance: event.enableInsurance));
-      add(EstimateTracking());
     }
   }
 
@@ -256,7 +256,6 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     final currentState = state;
     if (currentState is HomeLoaded && currentState.bedList.isNotEmpty) {
       emit(currentState.copyWith(enableAlarm: event.enableAlarm));
-      add(EstimateTracking());
     }
   }
 
@@ -265,9 +264,10 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
 
     if (currentState is HomeLoaded) {
       emit(currentState.copyWith(
-          errorMessage: '',
-          hour: event.hour,
-          time: _getTimeWithHour(event.hour, currentState)));
+        errorMessage: '',
+        hour: event.hour,
+        time: _getTimeWithHour(event.hour, currentState),
+      ));
     }
   }
 

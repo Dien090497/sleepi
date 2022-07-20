@@ -30,7 +30,7 @@ void main() async {
   await Future.wait([
     getIt<RunAppInitUseCase>().call(NoParams()),
   ]);
-  initializeService();
+  await initializeService();
 
   /// Lock in portrait mode only
   await SystemChrome.setPreferredOrientations([
