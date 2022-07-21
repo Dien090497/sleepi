@@ -1,7 +1,6 @@
 import 'dart:async';
 import 'dart:developer';
 
-import 'package:audioplayers/audioplayers.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -10,6 +9,7 @@ import 'package:flutter_background_service_android/flutter_background_service_an
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:get_storage/get_storage.dart';
+import 'package:just_audio/just_audio.dart';
 import 'package:logger/logger.dart';
 import 'package:sentry_flutter/sentry_flutter.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -112,7 +112,7 @@ bool onIosBackground(ServiceInstance service) {
 
 Future<void> onStart(ServiceInstance service) async {
   final audioPlayer = AudioPlayer();
-  audioPlayer.setReleaseMode(ReleaseMode.loop);
+  audioPlayer.setLoopMode(LoopMode.all);
 
   if (service is AndroidServiceInstance) {
     service.on(Const.setAsForeground).listen((event) {
@@ -123,10 +123,9 @@ Future<void> onStart(ServiceInstance service) async {
       service.setAsBackgroundService();
     });
   }
-  service.on(Const.stopService).listen((event) {
-    audioPlayer.stop();
-    audioPlayer.release();
-    audioPlayer.dispose();
+  service.on(Const.stopService).listen((event) async{
+    await audioPlayer.stop();
+    await audioPlayer.dispose();
     service.stopSelf();
   });
 
@@ -144,11 +143,11 @@ Future<void> onStart(ServiceInstance service) async {
   }
   Timer.periodic(Duration(minutes: time), (timer) async {
     log('FLUTTER BACKGROUND SERVICE: ${DateTime.now()}');
-    final isPlaying = audioPlayer.state == PlayerState.playing;
-    if (!isPlaying) {
-      await audioPlayer.play(
-        AssetSource(Const.soundAlarm[sound]),
-      );
+    if (!audioPlayer.playing) {
+      await audioPlayer.setAsset(Const.soundAlarm[sound]);
+      await audioPlayer.setVolume(1);
+      await audioPlayer.setLoopMode(LoopMode.one);
+      await audioPlayer.play();
     }
     timer.cancel();
   });
