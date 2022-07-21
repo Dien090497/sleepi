@@ -13,6 +13,7 @@ class ChartDayState with _$ChartDayState {
     required DateTime firstAllowedDate,
     required DateTime lastAllowedDate,
     List<DrawChartEntity>? dataChart,
+    String? slftPrice,
 }) = ChartDayLoaded;
 
   const factory ChartDayState.error(String msg) = ChartDayError;

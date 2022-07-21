@@ -26,7 +26,10 @@ abstract class RegisterModule {
   @preResolve
   Future<SharedPreferences> get sharedPref => SharedPreferences.getInstance();
 
-  Dio get dio => Dio();
+  Dio get dio => Dio(BaseOptions(
+        connectTimeout: 30000,
+        receiveTimeout: 30000,
+      ));
 
   @preResolve
   Future<Directory> get isarDir => getApplicationSupportDirectory();

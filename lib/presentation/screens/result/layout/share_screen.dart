@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:screenshot/screenshot.dart';
@@ -14,6 +16,7 @@ import 'package:slee_fi/l10n/locale_keys.g.dart';
 import 'package:slee_fi/presentation/blocs/share_screen/share_cubit.dart';
 import 'package:slee_fi/presentation/blocs/share_screen/share_state.dart';
 import 'package:slee_fi/presentation/screens/product_detail/widgets/top_left_banner.dart';
+import 'package:slee_fi/presentation/screens/result/layout/pre_result_screen.dart';
 import 'package:slee_fi/presentation/screens/result/widgets/category_header_share.dart';
 import 'package:slee_fi/presentation/screens/result/widgets/chart_statistic_share.dart';
 import 'package:slee_fi/presentation/screens/result/widgets/community_share.dart';
@@ -32,7 +35,7 @@ class _ShareScreenState extends State<ShareScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final fromRoute = ModalRoute.of(context)?.settings.arguments as String;
+    final shareArgs = ModalRoute.of(context)?.settings.arguments as PreResultParams;
     return BlocProvider(
       create: (_) => ShareCubit(),
       child: BlocConsumer<ShareCubit, ShareState>(
@@ -57,7 +60,7 @@ class _ShareScreenState extends State<ShareScreen> {
                       padding: const EdgeInsets.symmetric(horizontal: 16.0),
                       child: Column(
                         children: [
-                          _bodyShare(),
+                          _bodyShare(imgBed: shareArgs.imageBed ?? '', args: shareArgs),
                           const SizedBox(
                             height: 32,
                           ),
@@ -67,7 +70,7 @@ class _ShareScreenState extends State<ShareScreen> {
                             gradient: AppColors.gradientBlueButton,
                             width: double.infinity,
                             onPressed: () {
-                              if (fromRoute == R.splash) {
+                              if (shareArgs.fromRoute == R.splash) {
                                 Navigator.pushNamedAndRemoveUntil(
                                     context, R.bottomNavigation, (r) => false);
                               } else {
@@ -88,7 +91,7 @@ class _ShareScreenState extends State<ShareScreen> {
                   bottom: 0,
                   child: CommunityShare(
                     controller: screenshotController,
-                    widget: _bodyShare(),
+                    widget: _bodyShare(imgBed: shareArgs.imageBed ?? '', args: shareArgs),
                     cubit: cubit,
                   ),
                 ),
@@ -100,7 +103,7 @@ class _ShareScreenState extends State<ShareScreen> {
     );
   }
 
-  Widget _bodyShare () {
+  Widget _bodyShare ({required String imgBed, required PreResultParams args}) {
     return Column(
         children: [
           Stack(
@@ -127,8 +130,8 @@ class _ShareScreenState extends State<ShareScreen> {
                         ),
                         child: Column(
                           children: [
-                            const SFIcon(
-                              Imgs.shortBed,
+                            SFIcon(
+                              imgBed,
                               height: 160,
                             ),
                             Container(
@@ -142,9 +145,8 @@ class _ShareScreenState extends State<ShareScreen> {
                               padding: const EdgeInsets.symmetric(
                                   vertical: 5, horizontal: 16),
                               child: SFText(
-                                keyText: 'A2347',
-                                style:
-                                TextStyles.white1w700size12,
+                                keyText: '${args.resultModel.id ?? ''}',
+                                style: TextStyles.white1w700size12,
                               ),
                             ),
                           ],
@@ -154,23 +156,25 @@ class _ShareScreenState extends State<ShareScreen> {
                     const SizedBox(
                       height: 16,
                     ),
-                    const CategoryHeaderShare(),
+                    CategoryHeaderShare(preResultParams: args,),
                     const SizedBox(
                       height: 12,
                     ),
-                    const Padding(
-                      padding:
-                      EdgeInsets.symmetric(horizontal: 16.0),
-                      child: ChartStatisticShare(
-                        titleBottom: false,
-                        maxValue: 100,
-                        typeTimeChart: TypeTimeChart.chartDay,
-                      ),
+                    Platform.isAndroid
+                        ? ((args.dataChart.isNotEmpty &&
+                        args.dataChart.first.maxX != -1)
+                        ? ChartStatisticShare(
+                      maxValue: 360,
+                      data: args.dataChart.first,
+                      typeTimeChart: TypeTimeChart.chartDay,
+                    )
+                        : const SizedBox())
+                        : const Padding(
+                      padding: EdgeInsets.only(bottom: 10),
+                      child: SFIcon(Ics.commingSoon),
                     ),
-                    const SizedBox(
-                      height: 10,
-                    ),
-                  ],
+                    const SizedBox(height: 10),
+                ],
                 ),
               ),
               const Positioned(

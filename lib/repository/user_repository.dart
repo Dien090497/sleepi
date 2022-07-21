@@ -93,4 +93,6 @@ abstract class IUserRepository {
 
   Future<Either<FailureMessage, List<JewelEntity>>> upgradeJewel(
       UpgradeJewelSchema param);
+
+  Future<Either<FailureMessage, String>> getSlftPrice();
 }

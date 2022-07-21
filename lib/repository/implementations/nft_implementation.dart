@@ -211,7 +211,7 @@ class NFTImplementation extends INFTRepository {
       final result = await _authDataSource.nftSell(params);
       return Right(result.toEntity());
     } catch (e) {
-      return Left(FailureMessage('$e'));
+      return Left(FailureMessage.fromException(e));
     }
   }
 

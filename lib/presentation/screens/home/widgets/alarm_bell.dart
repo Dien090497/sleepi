@@ -211,7 +211,8 @@ class AlarmBell extends StatelessWidget {
         context,
         children: PopUpConfirmStartTracking(
           onPressed: () async {
-            final state = BlocProvider.of<HomeBloc>(context).state;
+            final homeBloc = BlocProvider.of<HomeBloc>(context);
+            final state = homeBloc.state;
             if (state is HomeLoaded) {
               final startRes = await getIt<StartSleepTrackingUseCase>()
                   .call(StartTrackingSchema(

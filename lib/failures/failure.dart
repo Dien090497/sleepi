@@ -22,7 +22,8 @@ class FailureMessage extends Failure {
           return const FailureMessage(LocaleKeys.some_thing_wrong);
         }
         final data = e.response?.data;
-        final error = data !is String
+        if (data == null) return FailureMessage('$e');
+        final error = data is String
             ? jsonDecode(data)['error']['message']
             : data['error']['details']['message'];
         if (error is String) {
