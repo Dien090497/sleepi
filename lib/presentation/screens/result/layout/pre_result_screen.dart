@@ -19,12 +19,15 @@ class PreResultParams {
   final TrackingResultModel resultModel;
   final List<DrawChartEntity> dataChart;
   final String? imageBed;
+  final String? slftPrice;
 
   PreResultParams(
       {required this.fromRoute,
       required this.resultModel,
       required this.dataChart,
-      this.imageBed});
+      this.imageBed,
+      this.slftPrice,
+      });
 }
 
 class PreResultScreen extends StatefulWidget {
@@ -59,6 +62,7 @@ class _PreResultScreenState extends State<PreResultScreen> {
                       resultModel: args.resultModel,
                       dataChart: state.dataChart ?? [],
                       imageBed: args.imageBed,
+                      slftPrice: state.slftPrice
                     ));
               }
             },

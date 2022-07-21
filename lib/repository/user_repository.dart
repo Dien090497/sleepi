@@ -90,4 +90,6 @@ abstract class IUserRepository {
 
   Future<Either<FailureMessage, List<JewelEntity>>> fetchListJewel(
       FetchHomeBedParam param);
+
+  Future<Either<FailureMessage, String>> getSlftPrice();
 }

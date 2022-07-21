@@ -18,7 +18,6 @@ import 'package:slee_fi/presentation/screens/result/widgets/category_header_shar
 import 'package:slee_fi/presentation/screens/result/widgets/chart_statistic_share.dart';
 import 'package:slee_fi/presentation/screens/result/widgets/community_share.dart';
 import 'package:slee_fi/presentation/screens/result/widgets/sleepfi_qr.dart';
-import 'package:slee_fi/resources/resources.dart';
 
 class ShareScreen extends StatefulWidget {
   const ShareScreen({Key? key}) : super(key: key);
@@ -32,7 +31,7 @@ class _ShareScreenState extends State<ShareScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final fromRoute = ModalRoute.of(context)?.settings.arguments as String;
+    final shareArgs = ModalRoute.of(context)?.settings.arguments as ShareArgument;
     return BlocProvider(
       create: (_) => ShareCubit(),
       child: BlocConsumer<ShareCubit, ShareState>(
@@ -57,7 +56,7 @@ class _ShareScreenState extends State<ShareScreen> {
                       padding: const EdgeInsets.symmetric(horizontal: 16.0),
                       child: Column(
                         children: [
-                          _bodyShare(),
+                          _bodyShare(imgBed: shareArgs.imgBed),
                           const SizedBox(
                             height: 32,
                           ),
@@ -67,7 +66,7 @@ class _ShareScreenState extends State<ShareScreen> {
                             gradient: AppColors.gradientBlueButton,
                             width: double.infinity,
                             onPressed: () {
-                              if (fromRoute == R.splash) {
+                              if (shareArgs.fromRoute == R.splash) {
                                 Navigator.pushNamedAndRemoveUntil(
                                     context, R.bottomNavigation, (r) => false);
                               } else {
@@ -88,7 +87,7 @@ class _ShareScreenState extends State<ShareScreen> {
                   bottom: 0,
                   child: CommunityShare(
                     controller: screenshotController,
-                    widget: _bodyShare(),
+                    widget: _bodyShare(imgBed: shareArgs.imgBed),
                     cubit: cubit,
                   ),
                 ),
@@ -100,7 +99,7 @@ class _ShareScreenState extends State<ShareScreen> {
     );
   }
 
-  Widget _bodyShare () {
+  Widget _bodyShare ({required String imgBed}) {
     return Column(
         children: [
           Stack(
@@ -127,8 +126,8 @@ class _ShareScreenState extends State<ShareScreen> {
                         ),
                         child: Column(
                           children: [
-                            const SFIcon(
-                              Imgs.shortBed,
+                            SFIcon(
+                              imgBed,
                               height: 160,
                             ),
                             Container(
@@ -210,4 +209,11 @@ class CurvedBottomClipper extends CustomClipper<Path> {
   bool shouldReclip(CustomClipper<Path> oldClipper) {
     return true;
   }
+}
+
+class ShareArgument {
+  String fromRoute;
+  String imgBed;
+
+  ShareArgument({required this.fromRoute, required this.imgBed});
 }

@@ -13,6 +13,7 @@ import 'package:slee_fi/common/widgets/sf_buttons.dart';
 import 'package:slee_fi/common/widgets/sf_icon.dart';
 import 'package:slee_fi/common/widgets/sf_label_value.dart';
 import 'package:slee_fi/l10n/locale_keys.g.dart';
+import 'package:slee_fi/presentation/screens/result/layout/share_screen.dart';
 import 'package:slee_fi/presentation/screens/result/widgets/chart_statistic_share.dart';
 import 'package:slee_fi/resources/resources.dart';
 
@@ -84,6 +85,7 @@ class _ResultScreenState extends State<ResultScreen> {
                           height: 20,
                         ),
                         CategoryHeader(
+                          slftPrice: args.slftPrice,
                           earning:
                               double.parse(args.resultModel.actualEarn ?? '0')
                                   .formatBalance2Digits,
@@ -192,9 +194,9 @@ class _ResultScreenState extends State<ResultScreen> {
                         Map<Permission, PermissionStatus> statuses = await [
                         Permission.storage,
                         ].request();
-                        final info = statuses[Permission.storage].toString();
+                        final shareArgs = ShareArgument(fromRoute: args.fromRoute, imgBed: args.imageBed ?? '');
                         Navigator.pushNamed(context, R.share,
-                            arguments: args.fromRoute);
+                            arguments: shareArgs);
                       },
                     ),
                   ),
