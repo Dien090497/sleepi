@@ -22,7 +22,7 @@ mixin _$BottomBarInfoIndividualState {
     required TResult Function(String gasPrice, bool successTransfer,
             String transactionFee, GetRepairtEntity? feeRepair)
         loaded,
-    required TResult Function(dynamic levelUp) getLevel,
+    required TResult Function(NftLevelUp levelUp) getLevel,
     required TResult Function() upLevel,
     required TResult Function(String message) error,
     required TResult Function() loading,
@@ -34,7 +34,7 @@ mixin _$BottomBarInfoIndividualState {
     TResult Function(String gasPrice, bool successTransfer,
             String transactionFee, GetRepairtEntity? feeRepair)?
         loaded,
-    TResult Function(dynamic levelUp)? getLevel,
+    TResult Function(NftLevelUp levelUp)? getLevel,
     TResult Function()? upLevel,
     TResult Function(String message)? error,
     TResult Function()? loading,
@@ -46,7 +46,7 @@ mixin _$BottomBarInfoIndividualState {
     TResult Function(String gasPrice, bool successTransfer,
             String transactionFee, GetRepairtEntity? feeRepair)?
         loaded,
-    TResult Function(dynamic levelUp)? getLevel,
+    TResult Function(NftLevelUp levelUp)? getLevel,
     TResult Function()? upLevel,
     TResult Function(String message)? error,
     TResult Function()? loading,
@@ -154,7 +154,7 @@ class _$BottomBarInfoIndividualInitial
     required TResult Function(String gasPrice, bool successTransfer,
             String transactionFee, GetRepairtEntity? feeRepair)
         loaded,
-    required TResult Function(dynamic levelUp) getLevel,
+    required TResult Function(NftLevelUp levelUp) getLevel,
     required TResult Function() upLevel,
     required TResult Function(String message) error,
     required TResult Function() loading,
@@ -169,7 +169,7 @@ class _$BottomBarInfoIndividualInitial
     TResult Function(String gasPrice, bool successTransfer,
             String transactionFee, GetRepairtEntity? feeRepair)?
         loaded,
-    TResult Function(dynamic levelUp)? getLevel,
+    TResult Function(NftLevelUp levelUp)? getLevel,
     TResult Function()? upLevel,
     TResult Function(String message)? error,
     TResult Function()? loading,
@@ -184,7 +184,7 @@ class _$BottomBarInfoIndividualInitial
     TResult Function(String gasPrice, bool successTransfer,
             String transactionFee, GetRepairtEntity? feeRepair)?
         loaded,
-    TResult Function(dynamic levelUp)? getLevel,
+    TResult Function(NftLevelUp levelUp)? getLevel,
     TResult Function()? upLevel,
     TResult Function(String message)? error,
     TResult Function()? loading,
@@ -370,7 +370,7 @@ class _$BottomBarInfoIndividualLoaded implements BottomBarInfoIndividualLoaded {
     required TResult Function(String gasPrice, bool successTransfer,
             String transactionFee, GetRepairtEntity? feeRepair)
         loaded,
-    required TResult Function(dynamic levelUp) getLevel,
+    required TResult Function(NftLevelUp levelUp) getLevel,
     required TResult Function() upLevel,
     required TResult Function(String message) error,
     required TResult Function() loading,
@@ -385,7 +385,7 @@ class _$BottomBarInfoIndividualLoaded implements BottomBarInfoIndividualLoaded {
     TResult Function(String gasPrice, bool successTransfer,
             String transactionFee, GetRepairtEntity? feeRepair)?
         loaded,
-    TResult Function(dynamic levelUp)? getLevel,
+    TResult Function(NftLevelUp levelUp)? getLevel,
     TResult Function()? upLevel,
     TResult Function(String message)? error,
     TResult Function()? loading,
@@ -400,7 +400,7 @@ class _$BottomBarInfoIndividualLoaded implements BottomBarInfoIndividualLoaded {
     TResult Function(String gasPrice, bool successTransfer,
             String transactionFee, GetRepairtEntity? feeRepair)?
         loaded,
-    TResult Function(dynamic levelUp)? getLevel,
+    TResult Function(NftLevelUp levelUp)? getLevel,
     TResult Function()? upLevel,
     TResult Function(String message)? error,
     TResult Function()? loading,
@@ -478,7 +478,7 @@ abstract class _$$GetLevelSuccessCopyWith<$Res> {
   factory _$$GetLevelSuccessCopyWith(
           _$GetLevelSuccess value, $Res Function(_$GetLevelSuccess) then) =
       __$$GetLevelSuccessCopyWithImpl<$Res>;
-  $Res call({dynamic levelUp});
+  $Res call({NftLevelUp levelUp});
 }
 
 /// @nodoc
@@ -500,7 +500,7 @@ class __$$GetLevelSuccessCopyWithImpl<$Res>
       levelUp == freezed
           ? _value.levelUp
           : levelUp // ignore: cast_nullable_to_non_nullable
-              as dynamic,
+              as NftLevelUp,
     ));
   }
 }
@@ -511,7 +511,7 @@ class _$GetLevelSuccess implements GetLevelSuccess {
   const _$GetLevelSuccess(this.levelUp);
 
   @override
-  final dynamic levelUp;
+  final NftLevelUp levelUp;
 
   @override
   String toString() {
@@ -542,7 +542,7 @@ class _$GetLevelSuccess implements GetLevelSuccess {
     required TResult Function(String gasPrice, bool successTransfer,
             String transactionFee, GetRepairtEntity? feeRepair)
         loaded,
-    required TResult Function(dynamic levelUp) getLevel,
+    required TResult Function(NftLevelUp levelUp) getLevel,
     required TResult Function() upLevel,
     required TResult Function(String message) error,
     required TResult Function() loading,
@@ -557,7 +557,7 @@ class _$GetLevelSuccess implements GetLevelSuccess {
     TResult Function(String gasPrice, bool successTransfer,
             String transactionFee, GetRepairtEntity? feeRepair)?
         loaded,
-    TResult Function(dynamic levelUp)? getLevel,
+    TResult Function(NftLevelUp levelUp)? getLevel,
     TResult Function()? upLevel,
     TResult Function(String message)? error,
     TResult Function()? loading,
@@ -572,7 +572,7 @@ class _$GetLevelSuccess implements GetLevelSuccess {
     TResult Function(String gasPrice, bool successTransfer,
             String transactionFee, GetRepairtEntity? feeRepair)?
         loaded,
-    TResult Function(dynamic levelUp)? getLevel,
+    TResult Function(NftLevelUp levelUp)? getLevel,
     TResult Function()? upLevel,
     TResult Function(String message)? error,
     TResult Function()? loading,
@@ -629,9 +629,9 @@ class _$GetLevelSuccess implements GetLevelSuccess {
 }
 
 abstract class GetLevelSuccess implements BottomBarInfoIndividualState {
-  const factory GetLevelSuccess(final dynamic levelUp) = _$GetLevelSuccess;
+  const factory GetLevelSuccess(final NftLevelUp levelUp) = _$GetLevelSuccess;
 
-  dynamic get levelUp;
+  NftLevelUp get levelUp;
   @JsonKey(ignore: true)
   _$$GetLevelSuccessCopyWith<_$GetLevelSuccess> get copyWith =>
       throw _privateConstructorUsedError;
@@ -682,7 +682,7 @@ class _$UpLevelSuccess implements UpLevelSuccess {
     required TResult Function(String gasPrice, bool successTransfer,
             String transactionFee, GetRepairtEntity? feeRepair)
         loaded,
-    required TResult Function(dynamic levelUp) getLevel,
+    required TResult Function(NftLevelUp levelUp) getLevel,
     required TResult Function() upLevel,
     required TResult Function(String message) error,
     required TResult Function() loading,
@@ -697,7 +697,7 @@ class _$UpLevelSuccess implements UpLevelSuccess {
     TResult Function(String gasPrice, bool successTransfer,
             String transactionFee, GetRepairtEntity? feeRepair)?
         loaded,
-    TResult Function(dynamic levelUp)? getLevel,
+    TResult Function(NftLevelUp levelUp)? getLevel,
     TResult Function()? upLevel,
     TResult Function(String message)? error,
     TResult Function()? loading,
@@ -712,7 +712,7 @@ class _$UpLevelSuccess implements UpLevelSuccess {
     TResult Function(String gasPrice, bool successTransfer,
             String transactionFee, GetRepairtEntity? feeRepair)?
         loaded,
-    TResult Function(dynamic levelUp)? getLevel,
+    TResult Function(NftLevelUp levelUp)? getLevel,
     TResult Function()? upLevel,
     TResult Function(String message)? error,
     TResult Function()? loading,
@@ -845,7 +845,7 @@ class _$BottomBarInfoIndividualError implements BottomBarInfoIndividualError {
     required TResult Function(String gasPrice, bool successTransfer,
             String transactionFee, GetRepairtEntity? feeRepair)
         loaded,
-    required TResult Function(dynamic levelUp) getLevel,
+    required TResult Function(NftLevelUp levelUp) getLevel,
     required TResult Function() upLevel,
     required TResult Function(String message) error,
     required TResult Function() loading,
@@ -860,7 +860,7 @@ class _$BottomBarInfoIndividualError implements BottomBarInfoIndividualError {
     TResult Function(String gasPrice, bool successTransfer,
             String transactionFee, GetRepairtEntity? feeRepair)?
         loaded,
-    TResult Function(dynamic levelUp)? getLevel,
+    TResult Function(NftLevelUp levelUp)? getLevel,
     TResult Function()? upLevel,
     TResult Function(String message)? error,
     TResult Function()? loading,
@@ -875,7 +875,7 @@ class _$BottomBarInfoIndividualError implements BottomBarInfoIndividualError {
     TResult Function(String gasPrice, bool successTransfer,
             String transactionFee, GetRepairtEntity? feeRepair)?
         loaded,
-    TResult Function(dynamic levelUp)? getLevel,
+    TResult Function(NftLevelUp levelUp)? getLevel,
     TResult Function()? upLevel,
     TResult Function(String message)? error,
     TResult Function()? loading,
@@ -992,7 +992,7 @@ class _$BottomBarInfoIndividualLoading
     required TResult Function(String gasPrice, bool successTransfer,
             String transactionFee, GetRepairtEntity? feeRepair)
         loaded,
-    required TResult Function(dynamic levelUp) getLevel,
+    required TResult Function(NftLevelUp levelUp) getLevel,
     required TResult Function() upLevel,
     required TResult Function(String message) error,
     required TResult Function() loading,
@@ -1007,7 +1007,7 @@ class _$BottomBarInfoIndividualLoading
     TResult Function(String gasPrice, bool successTransfer,
             String transactionFee, GetRepairtEntity? feeRepair)?
         loaded,
-    TResult Function(dynamic levelUp)? getLevel,
+    TResult Function(NftLevelUp levelUp)? getLevel,
     TResult Function()? upLevel,
     TResult Function(String message)? error,
     TResult Function()? loading,
@@ -1022,7 +1022,7 @@ class _$BottomBarInfoIndividualLoading
     TResult Function(String gasPrice, bool successTransfer,
             String transactionFee, GetRepairtEntity? feeRepair)?
         loaded,
-    TResult Function(dynamic levelUp)? getLevel,
+    TResult Function(NftLevelUp levelUp)? getLevel,
     TResult Function()? upLevel,
     TResult Function(String message)? error,
     TResult Function()? loading,

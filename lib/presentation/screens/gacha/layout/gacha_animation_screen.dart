@@ -94,31 +94,32 @@ class _GachaAnimationScreenState extends State<GachaAnimationScreen>
 
   @override
   Widget build(BuildContext context) {
-    final args =
-        ModalRoute.of(context)?.settings.arguments as GachaAnimationArguments?;
-    return Stack(children: [
-      SizedBox(
-        height: double.infinity,
-        width: double.infinity,
-        child: Lottie.asset(
-          args?.animation ?? Const.normalGachaAnimation,
-          controller: animationController,
-          fit: BoxFit.cover,
-          onLoaded: (composition) {
-            // Configure the AnimationController with the duration of the
-            // Lottie file and start the animation.
-            animationController
-              ..duration = composition.duration
-              ..forward();
-          },
-        ),
+    final args = ModalRoute.of(context)?.settings.arguments as GachaAnimationArguments?;
+    return WillPopScope(
+      onWillPop: () async => false,
+      child: Stack(
+        children : [
+          SizedBox(
+            height: double.infinity,
+            width: double.infinity,
+            child: Lottie.asset(args?.animation ?? Const.normalGachaAnimation,
+              controller: animationController,
+              fit: BoxFit.cover,
+              onLoaded: (composition) {
+                // Configure the AnimationController with the duration of the
+                // Lottie file and start the animation.
+                animationController
+                  ..duration = composition.duration
+                  ..forward();
+              },
+            ),
+          ),
+          isShowResult ?  Align(
+            alignment: Alignment.center,
+            child: SFIcon(image),
+          ) : const SizedBox(),
+        ]
       ),
-      isShowResult
-          ? Align(
-              alignment: Alignment.center,
-              child: SFIcon(image),
-            )
-          : const SizedBox(),
-    ]);
+    );
   }
 }

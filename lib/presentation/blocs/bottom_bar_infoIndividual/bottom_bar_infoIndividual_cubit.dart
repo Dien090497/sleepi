@@ -3,7 +3,6 @@ import 'package:slee_fi/common/const/const.dart';
 import 'package:slee_fi/common/enum/enum.dart';
 import 'package:slee_fi/di/injector.dart';
 import 'package:slee_fi/presentation/blocs/bottom_bar_infoIndividual/bottom_bar_infoIndividual_state.dart';
-import 'package:slee_fi/schema/level_up/get_level_up_schema.dart';
 import 'package:slee_fi/schema/level_up/level_up_schema.dart';
 import 'package:slee_fi/schema/nft_sell_schema/nft_sell_schema.dart';
 import 'package:slee_fi/schema/repair_schema/repair_schema.dart';
@@ -107,8 +106,9 @@ class BottomBarInfoIndividualCubit extends Cubit<BottomBarInfoIndividualState> {
     });
   }
 
-  Future<void> getLevelUp(GetLevelUpSchema param) async {
-    final result = await _getLevelUpUC.call(param);
+  Future<void> getLevelUp(int bedId) async {
+    emit(const BottomBarInfoIndividualState.loading());
+    final result = await _getLevelUpUC.call(bedId);
     result.fold((l) => emit(BottomBarInfoIndividualState.error(message: '$l')),
         (r) {
       emit(BottomBarInfoIndividualState.getLevel(r));

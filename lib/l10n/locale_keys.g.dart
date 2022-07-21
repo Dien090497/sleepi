@@ -334,7 +334,7 @@ abstract class  LocaleKeys {
   static const display = 'display';
   static const others = 'others';
   static const close = 'close';
-  static const one_bed_will_be_burned = 'one_bed_will_be_burned';
+  static const bed_will_be_burned = 'bed_will_be_burned';
   static const verification_login = 'verification_login';
   static const export = 'export';
   static const avalanche = 'avalanche';
@@ -461,6 +461,8 @@ abstract class  LocaleKeys {
   static const stacking_bonus = 'stacking_bonus';
   static const latest = 'latest';
   static const not_granted = 'not_granted';
+  static const required_time = 'required_time';
+  static const sleep_time = 'sleep_time';
   static const put_positive_correct_to = 'put_positive_correct_to';
 
 }
