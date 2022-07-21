@@ -123,5 +123,7 @@
 	<array>
 		<string>applinks:sleefi.onelink.me</string>
 	</array>
+	<key>NSMicrophoneUsageDescription</key>
+    <string>... explain why the app uses the microphone here ...</string>
 </dict>
 </plist>
