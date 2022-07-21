@@ -1,6 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:focus_detector/focus_detector.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
 import 'package:slee_fi/common/utils/launch_url_utils.dart';
 import 'package:slee_fi/common/widgets/sf_icon.dart';
@@ -11,8 +12,6 @@ import 'package:slee_fi/presentation/blocs/home/home_bloc.dart';
 import 'package:slee_fi/presentation/blocs/home/home_state.dart';
 import 'package:slee_fi/presentation/blocs/item_list/item_bloc.dart';
 import 'package:slee_fi/presentation/blocs/lucky_box/lucky_box_cubit.dart';
-import 'package:slee_fi/presentation/blocs/refresh_cubit/refresh_cubit.dart';
-import 'package:slee_fi/presentation/blocs/refresh_cubit/refresh_state.dart';
 import 'package:slee_fi/presentation/screens/home/widgets/alarm_bell.dart';
 import 'package:slee_fi/presentation/screens/home/widgets/home_list_widget.dart';
 import 'package:slee_fi/presentation/screens/home/widgets/home_switch.dart';
@@ -50,11 +49,9 @@ class HomeScreen extends StatelessWidget {
                     const SizedBox(height: 24),
                     BlocBuilder<HomeBloc, HomeState>(
                       builder: (context, state) {
-                        return BlocListener<RefreshCubit, RefreshState>(
-                          listener: (context, state) {
-                            if (state.refreshHomePage) {
-                              context.read<HomeBloc>().add(const RefreshBed());
-                            }
+                        return FocusDetector(
+                          onFocusGained: () {
+                            context.read<HomeBloc>().add(const RefreshBed());
                           },
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,

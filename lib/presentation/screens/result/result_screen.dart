@@ -1,7 +1,6 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:slee_fi/common/enum/enum.dart';
 import 'package:slee_fi/common/extensions/num_ext.dart';
@@ -14,7 +13,6 @@ import 'package:slee_fi/common/widgets/sf_buttons.dart';
 import 'package:slee_fi/common/widgets/sf_icon.dart';
 import 'package:slee_fi/common/widgets/sf_label_value.dart';
 import 'package:slee_fi/l10n/locale_keys.g.dart';
-import 'package:slee_fi/presentation/blocs/refresh_cubit/refresh_cubit.dart';
 import 'package:slee_fi/presentation/screens/result/widgets/chart_statistic_share.dart';
 import 'package:slee_fi/resources/resources.dart';
 
@@ -164,7 +162,6 @@ class _ResultScreenState extends State<ResultScreen> {
                               Navigator.pushNamedAndRemoveUntil(
                                   context, R.bottomNavigation, (r) => false);
                             } else {
-                              context.read<RefreshCubit>().refreshHome;
                               Navigator.popUntil(context,
                                   (r) => r.settings.name == R.bottomNavigation);
                             }
