@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:slee_fi/di/injector.dart';
-import 'package:slee_fi/entities/item_entity/item_entity.dart';
+import 'package:slee_fi/entities/bed_entity/bed_entity.dart';
 import 'package:slee_fi/presentation/blocs/item_list/item_event.dart';
 import 'package:slee_fi/presentation/blocs/item_list/item_state.dart';
 import 'package:slee_fi/schema/param_filler_item_fetch/filter_item_schema.dart';
@@ -80,7 +80,7 @@ class ItemBloc extends Bloc<ItemEvent, ItemState> {
       AddItemSuccessEvent event, Emitter<ItemState> emit) {
     final currentState = state;
     if (currentState is ItemStateLoaded) {
-      final List<ItemEntity> list = List.from(currentState.itemList!);
+      final List<BedEntity> list = List.from(currentState.itemList!);
       list.remove(event.entity);
       emit(currentState.copyWith(itemList: list));
     }
@@ -96,7 +96,7 @@ class ItemBloc extends Bloc<ItemEvent, ItemState> {
         return;
       }
 
-      final List<ItemEntity> list = List.from(currentState.itemList!);
+      final List<BedEntity> list = List.from(currentState.itemList!);
       list.add(event.entity);
       emit(currentState.copyWith(itemList: list));
     }

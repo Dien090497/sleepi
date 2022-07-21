@@ -7,7 +7,6 @@ import 'package:slee_fi/datasources/remote/auth_datasource/auth_datasource.dart'
 import 'package:slee_fi/datasources/remote/network/web3_datasource.dart';
 import 'package:slee_fi/entities/active_code/active_code_entity.dart';
 import 'package:slee_fi/entities/bed_entity/bed_entity.dart';
-import 'package:slee_fi/entities/item_entity/item_entity.dart';
 import 'package:slee_fi/entities/jewel_entity/jewel_entity.dart';
 import 'package:slee_fi/entities/tracking_result_chart_data_entity/tracking_result_chart_data_entity.dart';
 import 'package:slee_fi/entities/tracking_result_chart_days_entity/tracking_result_chart_days_entity.dart';
@@ -189,7 +188,7 @@ class UserImplementation extends IUserRepository {
   }
 
   @override
-  Future<Either<FailureMessage, List<ItemEntity>>> fetchItemOwner(
+  Future<Either<FailureMessage, List<BedEntity>>> fetchItemOwner(
       FilterItemSchema filterItemSchema) async {
     // try {
       final result = await _authDataSource.fetchItemOwner(filterItemSchema);

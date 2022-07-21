@@ -5,7 +5,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:slee_fi/common/enum/enum.dart';
 import 'package:slee_fi/di/injector.dart';
 import 'package:slee_fi/entities/bed_entity/bed_entity.dart';
-import 'package:slee_fi/entities/item_entity/item_entity.dart';
 import 'package:slee_fi/models/user_status_tracking_model/user_status_tracking_model.dart';
 import 'package:slee_fi/presentation/blocs/home/home_state.dart';
 import 'package:slee_fi/usecase/add_item_to_bed_usecase.dart';
@@ -68,7 +67,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
           bedList: r,
           selectedBed: bed,
           loadMoreBed: r.length >= _limitItemPage,
-          tokenEarn: await _estimateTracking(r.first, true),
+          tokenEarn: await _estimateTracking(r.first, true, null),
           userStatusTracking: await _getStatusTracking(),
         ));
       },
@@ -124,8 +123,8 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
             errorMessage: '',
             bedList: r,
             loadMoreBed: r.length >= _limitItemPage,
-            tokenEarn: await _estimateTracking(
-                currentState.selectedBed!, currentState.enableInsurance),
+            tokenEarn: await _estimateTracking(currentState.selectedBed!,
+                currentState.enableInsurance, currentState.selectedItem),
             userStatusTracking: await _getStatusTracking(),
           ));
         },
@@ -141,28 +140,35 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
         selectedBed: bed,
         errorMessage: '',
         tokenEarn: await _estimateTracking(
-            currentState.selectedBed!, currentState.enableInsurance),
+            currentState.selectedBed!, currentState.enableInsurance,currentState.selectedItem,),
       ));
     }
   }
 
   void _addItemToBed(AddItem event, Emitter<HomeState> emit) async {
     final currentState = state;
-    if (currentState is HomeLoaded && currentState.bedList.isNotEmpty) {
-      final result = await _addItemToBedUC
-          .call(AddItemToBedParam(currentState.selectedBed!.id, event.item.id));
-      result.fold((l) {
-        emit(currentState.copyWith(
-          errorMessage: l.msg,
-          errorType: ErrorType.addItemToBed,
-        ));
-      }, (r) async {
-        emit(currentState.copyWith(
-          selectedItem: event.item,
-          tokenEarn: await _estimateTracking(currentState.selectedBed!, true),
-        ));
-      });
+    if (currentState is! HomeLoaded || currentState.selectedBed == null) {
+      return;
     }
+    final result = await _addItemToBedUC
+        .call(AddItemToBedParam(currentState.selectedBed!.id, event.item.id));
+    final tokenEarn = await _estimateTracking(
+      currentState.selectedBed!,
+      true,
+      currentState.selectedItem,
+    );
+
+    result.fold((l) {
+      emit(currentState.copyWith(
+        errorMessage: l.msg,
+        errorType: ErrorType.addItemToBed,
+      ));
+    }, (r) async {
+      emit(currentState.copyWith(
+        selectedItem: event.item,
+        tokenEarn: tokenEarn,
+      ));
+    });
   }
 
   void _removeItem(RemoveItem event, Emitter<HomeState> emit) async {
@@ -179,15 +185,22 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
         emit(currentState.copyWith(
           selectedItem: null,
           errorType: ErrorType.none,
-          tokenEarn: await _estimateTracking(currentState.selectedBed!, true),
+          tokenEarn: await _estimateTracking(
+            currentState.selectedBed!,
+            true,
+            currentState.selectedItem,
+          ),
         ));
       });
     }
   }
 
-  Future<double> _estimateTracking(BedEntity bed, bool insuranceEnabled) async {
+  Future<double> _estimateTracking(
+      BedEntity bed, bool insuranceEnabled, BedEntity? itemEntity) async {
     final result = await _estimateTrackingUC.call(EstimateTrackingParam(
-        bedId: bed.id, itemId: bed.id, isEnableInsurance: insuranceEnabled));
+        bedId: bed.id,
+        itemId: itemEntity?.id,
+        isEnableInsurance: insuranceEnabled));
     return double.parse(
         result.foldRight('0', (r, previous) => r.estimateSlftEarn));
   }
