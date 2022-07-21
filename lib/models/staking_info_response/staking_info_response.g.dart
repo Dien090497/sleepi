@@ -10,7 +10,7 @@ StakingInfoResponse _$StakingInfoResponseFromJson(Map<String, dynamic> json) =>
     StakingInfoResponse(
       tvl: json['tvl'] as String,
       apr: json['apr'] as String,
-      slftPriceUsd: (json['slftPriceUsd'] as num).toDouble(),
+      slftPriceUsd: json['slftPriceUsd'] as String,
       aprInDay: json['aprInDay'] as String,
       isCompound: json['isCompound'] as bool,
       stake: StakeInfo.fromJson(json['stake'] as Map<String, dynamic>),

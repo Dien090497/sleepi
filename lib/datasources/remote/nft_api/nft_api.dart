@@ -9,7 +9,7 @@ import 'package:slee_fi/datasources/remote/auth_datasource/refresh_token_interce
 import 'package:slee_fi/models/list_nft_data_model/list_nft_data_model.dart';
 import 'package:slee_fi/models/minting/info_minting_model.dart';
 import 'package:slee_fi/models/nft_family/nft_family_model.dart';
-import 'package:slee_fi/schema/level_up/get_level_up_schema.dart';
+import 'package:slee_fi/models/nft_level_up_response/nft_level_up_response.dart';
 import 'package:slee_fi/schema/level_up/level_up_schema.dart';
 import 'package:slee_fi/schema/minting/minting_schema.dart';
 
@@ -38,8 +38,8 @@ abstract class NftApi {
   @GET('/family-nft')
   Future<NftFamilyModel> family(@Query('id') int bedId);
 
-  @POST('/get-level-up')
-  Future<dynamic> getLevelUp(@Body() GetLevelUpSchema body);
+  @GET('/get-level-up')
+  Future<NftLevelUp> getLevelUp(@Query('bedId') int bedId);
 
   @POST('/level-up')
   Future<dynamic> levelUp(@Body() LevelUpSchema body);

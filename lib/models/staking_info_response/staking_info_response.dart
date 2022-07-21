@@ -9,7 +9,7 @@ class StakingInfoResponse {
   final String tvl;
   final String apr;
   final String aprInDay;
-  final double slftPriceUsd;
+  final String slftPriceUsd;
   final bool isCompound;
   final StakeInfo stake;
 

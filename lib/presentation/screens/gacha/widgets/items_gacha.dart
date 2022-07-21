@@ -13,8 +13,8 @@ class ItemsGacha extends StatelessWidget {
   const ItemsGacha(
       {Key? key,
         required this.title,
-        required this.singleGacha,
-        required this.timesGacha,
+        required this.singleGachaImages,
+        required this.timesGachaImages,
         required this.singleProbability,
         required this.timesProbability,
         required this.typeReward,
@@ -25,8 +25,8 @@ class ItemsGacha extends StatelessWidget {
 
   final String title;
   final String typeReward;
-  final int singleGacha;
-  final int timesGacha;
+  final String singleGachaImages;
+  final String timesGachaImages;
   final int singleProbability;
   final int timesProbability;
   final String imagePath;
@@ -65,13 +65,13 @@ class ItemsGacha extends StatelessWidget {
         ProbabilityWidget(imagePath: imagePath,),
         const SizedBox(height: 20),
         GachaRollSelections(
-            singleGacha: singleGacha,
-            timesGacha: timesGacha,
+            singleGachaImages: singleGachaImages,
+            timesGachaImages: timesGachaImages,
             singleProbability: singleProbability,
             timesProbability: timesProbability,
             normalGacha: normalGacha,
         ),
-        const SizedBox(height: 13),
+        const SizedBox(height: 16),
         SFText(
             keyText: typeReward,
             style: TextStyles.lightGrey12),

@@ -225,7 +225,6 @@
   "free": "無料",
   "inventory": "インベントリー",
   "wallet": "ウォレット",
-  "bed": "ベッド",
   "common_bed": "コモン",
   "uncommon_bed": "アンコモン",
   "rare_bed": "レア",
@@ -342,7 +341,7 @@
   "motion_data": "モーションデータ",
   "this_bed_is_not_yours": "これはあなたのデッドではありません。",
   "staked": "ステーク済み",
-  "one_bed_will_be_burned": "ベッドが1つバーンされます",
+  "bed_will_be_burned": "ベッドがつバーンされます",
   "middle": "ミドル",
   "high_price": "高い順",
   "my_balance": "My Balance",
@@ -424,5 +423,7 @@
   "jewel_list": "Jewel List",
   "select_bed" : "ベッドを選択",
   "wallet_already_mapping" : "This wallet address has already existed in the system. Please import another address.",
-  "latest": "Latest"
+  "latest": "Latest",
+  "required_time": "Required Time",
+  "sleep_time": "Sleep Time"
 }

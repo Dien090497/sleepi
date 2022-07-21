@@ -1,12 +1,8 @@
-import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:slee_fi/common/const/const.dart';
 import 'package:slee_fi/common/routes/app_routes.dart';
-import 'package:slee_fi/common/style/app_colors.dart';
-import 'package:slee_fi/common/style/text_styles.dart';
-import 'package:slee_fi/common/widgets/sf_text.dart';
-import 'package:slee_fi/l10n/locale_keys.g.dart';
+import 'package:slee_fi/common/widgets/sf_icon.dart';
 import 'package:slee_fi/presentation/blocs/gacha/gacha_spin_cubit.dart';
 import 'package:slee_fi/presentation/blocs/gacha/gacha_spin_state.dart';
 import 'package:slee_fi/presentation/screens/gacha/layout/gacha_animation_screen.dart';
@@ -15,15 +11,15 @@ import 'package:slee_fi/schema/gacha/gacha_spin_schema.dart';
 class GachaRollSelections extends StatefulWidget {
   const GachaRollSelections({
     Key? key,
-    required this.singleGacha,
-    required this.timesGacha,
+    required this.singleGachaImages,
+    required this.timesGachaImages,
     required this.singleProbability,
     required this.timesProbability,
     required this.normalGacha,
   }) : super(key: key);
 
-  final int singleGacha;
-  final int timesGacha;
+  final String singleGachaImages;
+  final String timesGachaImages;
   final int singleProbability;
   final int timesProbability;
   final bool normalGacha;
@@ -61,69 +57,17 @@ class _GachaRollSelectionsState extends State<GachaRollSelections> {
                     enableButton ?  cubit.gachaSpin(GachaSpinSchema(probability: widget.singleProbability)) : null;
                     setState(() =>  enableButton = false);
                   },
-                  child: Container(
-                    decoration: BoxDecoration(
-                      border: Border.all(
-                          color: AppColors.blue),
-                      color: AppColors.blue.withOpacity(0.05),
-                      borderRadius: BorderRadius.circular(15),
-                    ),
-                    alignment: Alignment.centerLeft,
-                    padding: const EdgeInsets.symmetric(
-                        vertical: 15, horizontal: 20),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        SFText(
-                          keyText: '${widget.singleGacha} SLFT',
-                          style: TextStyles.bold18Blue,
-                        ),
-                        const SizedBox(
-                          height: 5,
-                        ),
-                        SFText(
-                          keyText: LocaleKeys.single_gacha,
-                          style: TextStyles.blue14,
-                        ),
-                      ],
-                    ),
-                  ),
+                  child: SFIcon(widget.singleGachaImages),
                 ),
               ),
-              const SizedBox(width: 35),
+              const SizedBox(width: 12),
               Expanded(
                 child: GestureDetector(
                   onTap: () {
                     cubit.gachaSpin(GachaSpinSchema(probability: widget.timesProbability));
                     setState(() =>  enableButton = false);
                   },
-                  child: Container(
-                    decoration: BoxDecoration(
-                        border: Border.all(color: AppColors.blue),
-                        borderRadius: BorderRadius.circular(15),
-                        color: AppColors.blue.withOpacity(0.05)
-                    ),
-                    alignment: Alignment.centerLeft,
-                    padding: const EdgeInsets.symmetric(
-                        vertical: 15, horizontal: 20),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        SFText(
-                            keyText: '${widget.timesGacha} SLFT',
-                            style: TextStyles.bold18Blue),
-                        const SizedBox(
-                          height: 5,
-                        ),
-                        SFText(
-                          keyText:
-                          LocaleKeys.ten_times_gacha.tr(
-                              namedArgs: {'num': '10'}),
-                          style: TextStyles.blue14,
-                        ),
-                      ],
-                    ),
-                  ),
+                  child: SFIcon(widget.timesGachaImages),
                 ),
               ),
             ],

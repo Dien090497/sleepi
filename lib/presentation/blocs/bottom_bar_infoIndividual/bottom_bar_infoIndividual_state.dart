@@ -1,5 +1,6 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:slee_fi/entities/get_repair_entity/get_repair_entity.dart';
+import 'package:slee_fi/models/nft_level_up_response/nft_level_up_response.dart';
 
 part 'bottom_bar_infoIndividual_state.freezed.dart';
 
@@ -14,7 +15,7 @@ class BottomBarInfoIndividualState with _$BottomBarInfoIndividualState {
     GetRepairtEntity? feeRepair,
   }) = BottomBarInfoIndividualLoaded;
 
-  const factory BottomBarInfoIndividualState.getLevel(dynamic levelUp) = GetLevelSuccess;
+  const factory BottomBarInfoIndividualState.getLevel(NftLevelUp levelUp) = GetLevelSuccess;
 
   const factory BottomBarInfoIndividualState.upLevel() = UpLevelSuccess;
 

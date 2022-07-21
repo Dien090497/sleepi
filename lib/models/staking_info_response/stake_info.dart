@@ -5,19 +5,21 @@ part 'stake_info.g.dart';
 
 @JsonSerializable()
 class StakeInfo {
-  final int? id;
+  @JsonKey(name: 'user_id')
   final int? userId;
+  @JsonKey(name: 'total_stake')
   final String? totalStake;
+  @JsonKey(name: 'total_reward')
   final String? totalReward;
+  @JsonKey(name: 'minting_discount')
   final String? mintingDiscount;
+  @JsonKey(name: 'level_up_discount')
   final String? levelUpDiscount;
+  @JsonKey(name: 'earning_token')
   final String? earningToken;
   final String? symbol;
-  final String? createdAt;
-  final String? updatedAt;
 
   StakeInfo({
-    required this.id,
     required this.userId,
     required this.totalStake,
     required this.totalReward,
@@ -25,8 +27,6 @@ class StakeInfo {
     required this.levelUpDiscount,
     required this.earningToken,
     required this.symbol,
-    required this.createdAt,
-    required this.updatedAt,
   });
 
   factory StakeInfo.fromJson(Map<String, dynamic> json) =>

@@ -1,4 +1,7 @@
+import 'dart:io';
+
 import 'package:easy_localization/easy_localization.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
@@ -228,6 +231,31 @@ Future<T?> showLanguageUpdatedDialog<T>(BuildContext context, Locale locale) {
           ],
         );
       });
+}
+
+Future<T?> showLoadingDialog<T>(BuildContext context, String message) async {
+  return showCustomDialog(
+    context,
+    children: [
+      Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          Padding(
+              padding: const EdgeInsets.only(bottom: 16, right: 16),
+              child: SizedBox(
+                  width: 32,
+                  height: 32,
+                  child: Platform.isAndroid
+                      ? const CircularProgressIndicator(strokeWidth: 3)
+                      : const CupertinoActivityIndicator()
+              )
+          ),
+          SFText(keyText: message, style: TextStyles.white16, textAlign: TextAlign.center,
+          )
+        ]
+    )],
+  );
 }
 
 class SFDialog extends StatelessWidget {
