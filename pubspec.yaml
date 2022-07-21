@@ -91,6 +91,9 @@ dependencies:
 
 dependency_overrides:
   analyzer: ^4.2.0
+#  package_info_plus: ^1.4.2
+#  package_info_plus_windows: ^1.0.5
+#  ffi: ^2.0.1
 
 dev_dependencies:
   flutter_lints: ^2.0.1

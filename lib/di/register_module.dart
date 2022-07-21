@@ -27,8 +27,8 @@ abstract class RegisterModule {
   Future<SharedPreferences> get sharedPref => SharedPreferences.getInstance();
 
   Dio get dio => Dio(BaseOptions(
-        connectTimeout: 8000,
-        receiveTimeout: 8000,
+        connectTimeout: 30000,
+        receiveTimeout: 30000,
       ));
 
   @preResolve
