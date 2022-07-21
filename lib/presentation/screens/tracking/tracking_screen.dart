@@ -88,6 +88,8 @@ class _TrackingScreenState extends State<TrackingScreen> {
           }
         },
       );
+      if (!mounted) return;
+      setState(() {});
     });
   }
 
