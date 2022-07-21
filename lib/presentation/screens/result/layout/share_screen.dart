@@ -14,6 +14,7 @@ import 'package:slee_fi/l10n/locale_keys.g.dart';
 import 'package:slee_fi/presentation/blocs/share_screen/share_cubit.dart';
 import 'package:slee_fi/presentation/blocs/share_screen/share_state.dart';
 import 'package:slee_fi/presentation/screens/product_detail/widgets/top_left_banner.dart';
+import 'package:slee_fi/presentation/screens/result/layout/pre_result_screen.dart';
 import 'package:slee_fi/presentation/screens/result/widgets/category_header_share.dart';
 import 'package:slee_fi/presentation/screens/result/widgets/chart_statistic_share.dart';
 import 'package:slee_fi/presentation/screens/result/widgets/community_share.dart';
@@ -31,7 +32,7 @@ class _ShareScreenState extends State<ShareScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final shareArgs = ModalRoute.of(context)?.settings.arguments as ShareArgument;
+    final shareArgs = ModalRoute.of(context)?.settings.arguments as PreResultParams;
     return BlocProvider(
       create: (_) => ShareCubit(),
       child: BlocConsumer<ShareCubit, ShareState>(
@@ -56,7 +57,7 @@ class _ShareScreenState extends State<ShareScreen> {
                       padding: const EdgeInsets.symmetric(horizontal: 16.0),
                       child: Column(
                         children: [
-                          _bodyShare(imgBed: shareArgs.imgBed),
+                          _bodyShare(imgBed: shareArgs.imageBed ?? ''),
                           const SizedBox(
                             height: 32,
                           ),
@@ -87,7 +88,7 @@ class _ShareScreenState extends State<ShareScreen> {
                   bottom: 0,
                   child: CommunityShare(
                     controller: screenshotController,
-                    widget: _bodyShare(imgBed: shareArgs.imgBed),
+                    widget: _bodyShare(imgBed: shareArgs.imageBed ?? ''),
                     cubit: cubit,
                   ),
                 ),
@@ -209,11 +210,4 @@ class CurvedBottomClipper extends CustomClipper<Path> {
   bool shouldReclip(CustomClipper<Path> oldClipper) {
     return true;
   }
-}
-
-class ShareArgument {
-  String fromRoute;
-  String imgBed;
-
-  ShareArgument({required this.fromRoute, required this.imgBed});
 }

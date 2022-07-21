@@ -41,6 +41,7 @@ TrackingModel _$TrackingModelFromJson(Map<String, dynamic> json) =>
       updatedAt: json['updatedAt'] == null
           ? null
           : DateTime.parse(json['updatedAt'] as String),
+      bedImage: json['bedImage'] as String?,
     );
 
 Map<String, dynamic> _$TrackingModelToJson(TrackingModel instance) =>
@@ -74,4 +75,5 @@ Map<String, dynamic> _$TrackingModelToJson(TrackingModel instance) =>
       'status': instance.status,
       'createdAt': instance.createdAt?.toIso8601String(),
       'updatedAt': instance.updatedAt?.toIso8601String(),
+      'bedImage': instance.bedImage,
     };
