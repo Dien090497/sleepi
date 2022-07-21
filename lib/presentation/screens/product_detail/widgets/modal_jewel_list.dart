@@ -91,11 +91,12 @@ class ModalJewelList extends StatelessWidget {
                         final item = tempList[i];
                         return GestureDetector(
                           onTap: () {
-                            _showDialogJewelDetail(
-                              context,
-                              item.first,
-                              jewelBloc,
-                            );
+                            if (item.length > 3) {
+                              print('size is   ${item.sublist(0, 3).length} ');
+                              Navigator.pop(context);
+                              jewelBloc
+                                  .add(AddJewelToSocket(item.sublist(0, 3)));
+                            }
                           },
                           child: MyJewelsWidgetCount(
                               count: item.length,
@@ -141,26 +142,26 @@ class ModalJewelList extends StatelessWidget {
     await Future.delayed(const Duration(milliseconds: 5000));
   }
 
-  _showDialogJewelDetail(
-      BuildContext context, JewelEntity jewelEntity, JewelBloc bloc) {
-    showCustomDialog(
-      context,
-      padding: const EdgeInsets.all(24),
-      children: [
-        JewelDialogBody(
-          jewel: jewelEntity,
-          onSellTap: () {
-            Navigator.pop(context);
-          },
-          onTransferTap: () {
-            // bloc.add(AddJewel(jewelEntity));
-            // Navigator.pop(context);
-            // Navigator.pop(context);
-          },
-          textOnSell: LocaleKeys.cancel,
-          textOnTransfer: LocaleKeys.upgrade.tr(),
-        ),
-      ],
-    );
-  }
+// _showDialogJewelDetail(
+//     BuildContext context, JewelEntity jewelEntity, JewelBloc bloc) {
+//   showCustomDialog(
+//     context,
+//     padding: const EdgeInsets.all(24),
+//     children: [
+//       JewelDialogBody(
+//         jewel: jewelEntity,
+//         onSellTap: () {
+//           Navigator.pop(context);
+//         },
+//         onTransferTap: () {
+//           // bloc.add(AddJewel(jewelEntity));
+//           // Navigator.pop(context);
+//           // Navigator.pop(context);
+//         },
+//         textOnSell: LocaleKeys.cancel,
+//         textOnTransfer: LocaleKeys.upgrade.tr(),
+//       ),
+//     ],
+//   );
+// }
 }

@@ -6,14 +6,20 @@ part of 'upgrade_jewel_schema.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-UpgradeJewelSchema _$UpgradeJewelSchemaFromJson(Map<String, dynamic> json) =>
-    UpgradeJewelSchema(
+UpgradeSchema _$UpgradeSchemaFromJson(Map<String, dynamic> json) =>
+    UpgradeSchema(
       (json['nftIds'] as List<dynamic>).map((e) => e as String).toList(),
-      json['upgradeType'] as int,
+      $enumDecode(_$CategoryTypeEnumMap, json['upgradeType']),
     );
 
-Map<String, dynamic> _$UpgradeJewelSchemaToJson(UpgradeJewelSchema instance) =>
+Map<String, dynamic> _$UpgradeSchemaToJson(UpgradeSchema instance) =>
     <String, dynamic>{
       'nftIds': instance.nftIds,
-      'upgradeType': instance.upgradeType,
+      'upgradeType': _$CategoryTypeEnumMap[instance.upgradeType]!,
     };
+
+const _$CategoryTypeEnumMap = {
+  CategoryType.bed: 'bed',
+  CategoryType.jewel: 'jewel',
+  CategoryType.item: 'item',
+};

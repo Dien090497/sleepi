@@ -48,9 +48,6 @@ class MiddleBed extends StatelessWidget {
               final selectBed = state is HomeLoaded && state.selectedBed != null
                   ? state.selectedBed
                   : null;
-
-              print(
-                  'size bed is    ${state is HomeLoaded } ');
               return Column(
                 children: [
                   SizedBox(

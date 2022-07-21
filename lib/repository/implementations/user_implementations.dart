@@ -18,6 +18,7 @@ import 'package:slee_fi/models/lucky_box/lucky_box.dart';
 import 'package:slee_fi/models/response_model/response_model.dart';
 import 'package:slee_fi/models/swap_token_to_wallet_response/swap_token_to_wallet_response.dart';
 import 'package:slee_fi/models/token_spending/token_spending.dart';
+import 'package:slee_fi/models/upgrade_jewel_info_response/upgrade_info_response.dart';
 import 'package:slee_fi/models/withdraw_history_response/withdraw_history_response.dart';
 import 'package:slee_fi/repository/user_repository.dart';
 import 'package:slee_fi/schema/add_jewel_schema/add_jewel_schema.dart';
@@ -32,6 +33,7 @@ import 'package:slee_fi/usecase/estimate_tracking_usecase.dart';
 import 'package:slee_fi/usecase/fetch_bed_usecase.dart';
 import 'package:slee_fi/usecase/fetch_data_chart_usecase.dart';
 import 'package:slee_fi/usecase/fetch_home_bed_usecase.dart';
+import 'package:slee_fi/usecase/upgrade_info_usecase.dart';
 import 'package:slee_fi/usecase/withdraw_history_usecase.dart';
 
 @Injectable(as: IUserRepository)
@@ -344,15 +346,33 @@ class UserImplementation extends IUserRepository {
     try {
       final result = await _authDataSource.slftPrice();
       return Right(result);
-    }
-    catch (e) {
+    } catch (e) {
       return Left(FailureMessage.fromException(e));
     }
   }
 
   @override
-  Future<Either<FailureMessage, List<JewelEntity>>> upgradeJewel(UpgradeJewelSchema param) {
-    // TODO: implement upgradeJewel
-    throw UnimplementedError();
+  Future<Either<FailureMessage, List<JewelEntity>>> upgradeJewel(
+      UpgradeSchema param) async {
+    try {
+      final result = await _authDataSource.upgradeJewel(param);
+      return Right(result);
+    } catch (e) {
+      return Left(FailureMessage.fromException(e));
+    }
+  }
+
+  @override
+  Future<Either<FailureMessage, UpgradeInfoResponse>> upgradeInfo(
+      UpgradeInfoParam param) async {
+    try {
+      final result = await _authDataSource.upgradeInfo(
+        param.level,
+        param.categoryType.type,
+      );
+      return Right(result);
+    } catch (e) {
+      return Left(FailureMessage.fromException(e));
+    }
   }
 }

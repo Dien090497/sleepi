@@ -21,7 +21,7 @@ MarketPlaceModel _$MarketPlaceModelFromJson(Map<String, dynamic> json) =>
       json['special'] as String,
       json['resilience'] as String,
       json['price'] as String,
-      json['status'] as String,
+      json['status'] as String?,
       json['createdAt'] as String,
       json['updatedAt'] as String,
       json['nftName'] as String,

@@ -70,7 +70,6 @@ class MarketPlaceCubit extends Cubit<MarketPlaceState> {
   }
 
   Future<void> getMarketPlace(MarketSchema param) async {
-    log("params : ${json.encode(params.toJson())}");
     final result = await _marketPlaceUseCase.call(param);
     result.fold((l) {
       error = true;
