@@ -300,4 +300,7 @@ abstract class AuthDataSource {
 
   @PUT('/poins/add-poin-for-bed')
   Future<ResponseModel> updatePoints(@Body() UpdatePointSchema schema);
+
+  @GET('/stacking/slft-price')
+  Future<String> slftPrice();
 }

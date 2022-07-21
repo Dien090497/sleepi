@@ -337,4 +337,15 @@ class UserImplementation extends IUserRepository {
       return Left(FailureMessage.fromException(e));
     }
   }
+
+  @override
+  Future<Either<FailureMessage, String>> getSlftPrice() async {
+    try {
+      final result = await _authDataSource.slftPrice();
+      return Right(result);
+    }
+    catch (e) {
+      return Left(FailureMessage.fromException(e));
+    }
+  }
 }
