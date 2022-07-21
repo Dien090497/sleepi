@@ -47,7 +47,7 @@ class MintCubit extends Cubit<MintState> {
             indexSelected: -1,
             listBed: r,
             isLoadMore: r.length == limit,
-            enableInsurance: false));
+            enableInsurance: true));
       }
     });
   }

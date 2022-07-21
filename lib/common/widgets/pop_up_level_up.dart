@@ -10,18 +10,20 @@ import 'package:slee_fi/l10n/locale_keys.g.dart';
 class PopUpLevelUp extends StatelessWidget {
   const PopUpLevelUp(
       {Key? key,
-      required this.icon,
-      required this.level,
-      required this.cost,
-      required this.time,
-      required this.onConfirm,
-      this.onCancel})
+        required this.icon,
+        required this.level,
+        required this.cost,
+        required this.sleepTime,
+        required this.requiredTime,
+        required this.onConfirm,
+        this.onCancel})
       : super(key: key);
 
   final String icon;
   final int cost;
   final int level;
-  final int time;
+  final int? requiredTime;
+  final int? sleepTime;
   final VoidCallback onConfirm;
   final VoidCallback? onCancel;
 
@@ -32,7 +34,7 @@ class PopUpLevelUp extends StatelessWidget {
         Positioned(
           right: 0,
           child: GestureDetector(
-            onTap: onCancel,
+            onTap: () => Navigator.pop(context),
             child: const Icon(
               Icons.close,
               color: AppColors.lightGrey,
@@ -76,8 +78,13 @@ class PopUpLevelUp extends StatelessWidget {
             ),
             const SizedBox(height: 8),
             SFLabelValue(
-              label: LocaleKeys.time,
-              value: '$time mins',
+              label: LocaleKeys.required_time,
+              value: '${requiredTime ?? 0} mins',
+              styleValue: TextStyles.textColorSize16,
+            ), const SizedBox(height: 8),
+            SFLabelValue(
+              label: LocaleKeys.sleep_time,
+              value: '${sleepTime ?? 0} mins',
               styleValue: TextStyles.textColorSize16,
             ),
             const SizedBox(height: 24),
@@ -86,7 +93,10 @@ class PopUpLevelUp extends StatelessWidget {
                 Expanded(
                   child: SFButton(
                     text: LocaleKeys.cancel,
-                    onPressed: onCancel,
+                    onPressed: () {
+                      onCancel;
+                      Navigator.pop(context);
+                    },
                     textStyle: TextStyles.lightGrey16,
                     color: AppColors.light4,
                     width: double.infinity,

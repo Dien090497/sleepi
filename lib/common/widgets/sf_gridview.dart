@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
-import 'package:slee_fi/common/style/text_styles.dart';
-import 'package:slee_fi/common/widgets/sf_text.dart';
-import 'package:slee_fi/l10n/locale_keys.g.dart';
 import 'package:slee_fi/presentation/blocs/market_place/market_place_cubit.dart';
 import 'package:slee_fi/presentation/blocs/mint/mint_cubit.dart';
+import 'package:slee_fi/presentation/screens/wallet/widgets/no_result_widget.dart';
 
 class SFGridView extends StatefulWidget {
   const SFGridView({
@@ -40,7 +38,7 @@ class SFGridView extends StatefulWidget {
 
 class _SFGridViewState extends State<SFGridView> {
   final RefreshController _refreshController =
-  RefreshController(initialRefresh: false);
+      RefreshController(initialRefresh: false);
 
   void _onRefresh() {
     widget.onRefresh!();
@@ -52,7 +50,7 @@ class _SFGridViewState extends State<SFGridView> {
       widget.marketPlaceCubit!.loadMoreMarketPlace().then((value) {
         _refreshController.loadComplete();
       });
-    } else if (widget.mintCubit !=null) {
+    } else if (widget.mintCubit != null) {
       widget.mintCubit!.getListMyBed().then((value) {
         _refreshController.loadComplete();
       });
@@ -83,31 +81,22 @@ class _SFGridViewState extends State<SFGridView> {
         onLoading: _onLoadMore,
         child: widget.count != 0
             ? GridView.builder(
-          itemCount: widget.count,
-          shrinkWrap: true,
-          physics: widget.physics,
-          padding:
-          widget.padding ?? const EdgeInsets.symmetric(vertical: 16),
-          keyboardDismissBehavior:
-          ScrollViewKeyboardDismissBehavior.onDrag,
-          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: 2,
-            childAspectRatio: widget.childAspectRatio,
-            crossAxisSpacing: 12,
-            mainAxisSpacing: 12,
-          ),
-          itemBuilder: widget.itemBuilder,
-        )
-            : SingleChildScrollView(
-          child: Container(
-            alignment: Alignment.center,
-            padding: const EdgeInsets.symmetric(vertical: 60),
-            child: SFText(
-              keyText: LocaleKeys.no_result,
-              style: TextStyles.lightWhite16,
-            ),
-          ),
-        ),
+                itemCount: widget.count,
+                shrinkWrap: true,
+                physics: widget.physics,
+                padding:
+                    widget.padding ?? const EdgeInsets.symmetric(vertical: 16),
+                keyboardDismissBehavior:
+                    ScrollViewKeyboardDismissBehavior.onDrag,
+                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 2,
+                  childAspectRatio: widget.childAspectRatio,
+                  crossAxisSpacing: 12,
+                  mainAxisSpacing: 12,
+                ),
+                itemBuilder: widget.itemBuilder,
+              )
+            : const NoResultWidget(),
       );
     }
     return GridView.builder(

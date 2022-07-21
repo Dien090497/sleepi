@@ -23,7 +23,7 @@ class FailureMessage extends Failure {
         }
         final data = e.response?.data;
         if (data == null) return FailureMessage('$e');
-        final error = data is String
+        final error = data !is String
             ? jsonDecode(data)['error']['message']
             : data['error']['details']['message'];
         if (error is String) {

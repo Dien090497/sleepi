@@ -50,26 +50,24 @@ class _ShowSeedPhraseScreenState extends State<ShowSeedPhraseScreen> {
                 if (snapshot.hasData && snapshot.data!.isRight()) {
                   snapshot.data!.foldRight(
                       String, (r, previous) => seedPhrase = r.split(' '));
-                  return Expanded(
-                    child: ListView.separated(
-                        shrinkWrap: true,
-                        physics: const ClampingScrollPhysics(),
-                        padding: EdgeInsets.zero,
-                        separatorBuilder: (context, index) => Divider(
-                              color: AppColors.lightWhite.withOpacity(0.05),
-                              height: 1,
+                  return ListView.separated(
+                      shrinkWrap: true,
+                      physics: const ClampingScrollPhysics(),
+                      padding: EdgeInsets.zero,
+                      separatorBuilder: (context, index) => Divider(
+                            color: AppColors.lightWhite.withOpacity(0.05),
+                            height: 1,
+                          ),
+                      itemCount: seedPhrase.length,
+                      itemBuilder: (BuildContext context, int index) =>
+                          SFListTile(
+                            text: "${index + 1}",
+                            trailing: SFText(
+                              keyText: hide ? "-----" : seedPhrase[index],
+                              stringCase: StringCase.lowerCaseCase,
+                              style: TextStyles.lightGrey14,
                             ),
-                        itemCount: seedPhrase.length,
-                        itemBuilder: (BuildContext context, int index) =>
-                            SFListTile(
-                              text: "${index + 1}",
-                              trailing: SFText(
-                                keyText: hide ? "-----" : seedPhrase[index],
-                                stringCase: StringCase.lowerCaseCase,
-                                style: TextStyles.lightGrey14,
-                              ),
-                            )),
-                  );
+                          ));
                 } else if (snapshot.hasData && snapshot.data!.isRight()) {
                   String messages = '';
                   snapshot.data!.foldLeft(
@@ -83,22 +81,28 @@ class _ShowSeedPhraseScreenState extends State<ShowSeedPhraseScreen> {
               },
                 ),
               ),
-               SizedBox(height: sizeHeight * 0.03),
-              SFText(
-                keyText: LocaleKeys.displays_message_show_seed_phrase,
-                style: TextStyles.lightGrey12,
-              ),
-              const SizedBox(height: 16.0),
-              GestureDetector(
-                onTapDown: (details) {
-                  setState(() => hide = false);
-                },
-                onTapUp: (detail) {
-                  setState(() => hide = true);
-                },
-                child: SFText(
-                  keyText: LocaleKeys.press_and_hold_to_reveal,
-                  style: TextStyles.bold18White,
+              Expanded(
+                child: Column(
+                  children: [
+                    SizedBox(height: sizeHeight * 0.03),
+                    SFText(
+                      keyText: LocaleKeys.displays_message_show_seed_phrase,
+                      style: TextStyles.lightGrey12,
+                    ),
+                    const SizedBox(height: 16.0),
+                    GestureDetector(
+                      onTapDown: (details) {
+                        setState(() => hide = false);
+                      },
+                      onTapUp: (detail) {
+                        setState(() => hide = true);
+                      },
+                      child: SFText(
+                        keyText: LocaleKeys.press_and_hold_to_reveal,
+                        style: TextStyles.bold18White,
+                      ),
+                    ),
+                  ],
                 ),
               ),
             ],

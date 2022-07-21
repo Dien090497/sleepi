@@ -1,11 +1,9 @@
-import 'dart:convert';
-import 'dart:developer';
-
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:slee_fi/common/const/const.dart';
 import 'package:slee_fi/di/injector.dart';
 import 'package:slee_fi/l10n/locale_keys.g.dart';
+import 'package:slee_fi/models/market_place/market_place_model.dart';
 import 'package:slee_fi/schema/market/market_schema.dart';
 import 'package:slee_fi/usecase/buy_nft_usecase.dart';
 import 'package:slee_fi/usecase/fetch_bed_usecase.dart';
@@ -32,7 +30,7 @@ class MarketPlaceCubit extends Cubit<MarketPlaceState> {
   final BuyNFTUseCase _buyNFTUseCase = getIt<BuyNFTUseCase>();
   CategoryType _categoryType = CategoryType.bed;
 
-  init(CategoryType categoryType) async {
+  void init(CategoryType categoryType) async {
     _categoryType = categoryType;
     page = 1;
     params = params.copyWith(
@@ -42,19 +40,19 @@ class MarketPlaceCubit extends Cubit<MarketPlaceState> {
         minLevel: categoryType == CategoryType.bed ? 0 : 1,
         categoryId: categoryType.type,
         sortPrice: Const.sortCondition[0]);
-    log("params init $categoryType : ${json.encode(params.toJson())}");
     emit(const MarketPlaceState.loading());
     getMarketPlace(params);
   }
 
-  refresh() {
+  void refresh() {
     page = 1;
     loadMore = false;
     params = params.copyWith(page: page);
+    emit(const MarketPlaceState.loading());
     getMarketPlace(params);
   }
 
-  clearFilter() {
+  void clearFilter() {
     page = 1;
     params = params.copyWith(
       page: page,
@@ -74,8 +72,7 @@ class MarketPlaceCubit extends Cubit<MarketPlaceState> {
     result.fold((l) {
       error = true;
       loadMore = false;
-      if (isClosed) return;
-      emit(MarketPlaceState.fail('$l'));
+      emit(const MarketPlaceState.loaded([]));
     }, (success) {
       error = false;
       if (success.list.length == limit) {
@@ -85,8 +82,7 @@ class MarketPlaceCubit extends Cubit<MarketPlaceState> {
       } else {
         loadMore = false;
       }
-      if (isClosed) return;
-      emit(MarketPlaceState.loaded(success));
+      emit(MarketPlaceState.loaded(success.list));
     });
   }
 
@@ -95,7 +91,6 @@ class MarketPlaceCubit extends Cubit<MarketPlaceState> {
     result.fold((l) {
       error = true;
       loadMore = false;
-      emit(MarketPlaceState.fail('$l'));
     }, (success) {
       error = false;
       if (success.list.length == limit) {
@@ -105,7 +100,12 @@ class MarketPlaceCubit extends Cubit<MarketPlaceState> {
       } else {
         loadMore = false;
       }
-      emit(MarketPlaceState.loadedMore(success));
+      final currentState = state;
+      if (currentState is MarketPlaceStateLoaded) {
+        final newList = List<MarketPlaceModel>.from(currentState.list)
+          ..addAll(success.list);
+        emit(currentState.copyWith(list: newList));
+      }
     });
   }
 

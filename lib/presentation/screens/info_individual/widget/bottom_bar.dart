@@ -16,7 +16,6 @@ import 'package:slee_fi/presentation/screens/home/widgets/pop_up_repair.dart';
 import 'package:slee_fi/presentation/screens/home/widgets/pop_up_transfer.dart';
 import 'package:slee_fi/presentation/screens/info_individual/widget/pop_up_sell.dart';
 import 'package:slee_fi/resources/resources.dart';
-import 'package:slee_fi/schema/level_up/get_level_up_schema.dart';
 import 'package:slee_fi/schema/level_up/level_up_schema.dart';
 
 class BottomBarWidget extends StatefulWidget {
@@ -61,6 +60,7 @@ class _BottomBarWidgetState extends State<BottomBarWidget> {
   @override
   Widget build(BuildContext context) {
     final cubit = BottomBarInfoIndividualCubit()..init();
+
     return Material(
       color: AppColors.dark,
       child: SafeArea(
@@ -98,10 +98,12 @@ class _BottomBarWidgetState extends State<BottomBarWidget> {
                 }
 
                 if (state is UpLevelSuccess) {
+                  Navigator.pop(context, true);
                   showSuccessfulDialog(context, null);
                 }
 
                 if (state is GetLevelSuccess) {
+                  Navigator.pop(context, true);
                   index = 0;
                   showCustomDialog(
                     context,
@@ -109,18 +111,15 @@ class _BottomBarWidgetState extends State<BottomBarWidget> {
                       PopUpLevelUp(
                           icon: widget.bedEntity.image,
                           level: widget.bedEntity.level,
-                          cost: int.parse(state.levelUp['cost'].toString()),
-                          time: int.parse(
-                              state.levelUp['require_time'].toString()),
-                          onCancel: () {
-                            Navigator.pop(context,true);
-                          },
+                          cost: state.levelUp.cost!,
+                          requiredTime: state.levelUp.requireTime,
+                          sleepTime: state.levelUp.sleepTime,
                           onConfirm: () {
+                            showLoadingDialog(context, "Loading");
                             cubit.postLevelUp(
                               LevelUpSchema(
                                 bedId: widget.bedEntity.nftId,
-                                cost:
-                                    int.parse(state.levelUp['cost'].toString()),
+                                cost: state.levelUp.cost!,
                               ),
                             );
                           }),
@@ -137,14 +136,9 @@ class _BottomBarWidgetState extends State<BottomBarWidget> {
                   children: [
                     itemBottomBar(0, context, Ics.levelUp, LocaleKeys.level_up,
                         () {
-                      double sleepTime = widget.bedEntity.endTime! * 60 -
-                          widget.bedEntity.startTime! * 60;
-                      cubit.getLevelUp(
-                        GetLevelUpSchema(
-                            next_level: widget.bedEntity.level + 1,
-                            sleep_time: sleepTime.toInt()),
-                      );
-                    }),
+                          showLoadingDialog(context, "Loading");
+                          cubit.getLevelUp(widget.bedEntity.nftId);
+                        }),
                     itemBottomBar(1, context, Ics.repair, LocaleKeys.repair,
                         () {
                       setState(() {

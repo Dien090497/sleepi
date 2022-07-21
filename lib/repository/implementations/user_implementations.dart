@@ -322,9 +322,11 @@ class UserImplementation extends IUserRepository {
     try {
       final result =
           await _authDataSource.fetchBedInHomePage(param.limit, param.page);
+
       var list = result.list.map((e) => e.toEntity()).toList();
       return Right(list);
     } catch (e) {
+      print('==--=${e.toString()}');
       return Left(FailureMessage.fromException(e));
     }
   }

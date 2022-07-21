@@ -225,7 +225,6 @@
   "free": "Free",
   "inventory": "Inventory",
   "wallet": "Wallet",
-  "bed": "Beds",
   "common_bed": "Common Bed",
   "uncommon_bed": "Uncommon Bed",
   "rare_bed": "Rare Bed",
@@ -333,7 +332,7 @@
   "display": "Display",
   "others": "Others",
   "close": "Close",
-  "one_bed_will_be_burned": "One bed will be burned",
+  "bed_will_be_burned": "Bed will be burned",
   "verification_login": "Verification login",
   "export": "Export",
   "avalanche": "Avalanche",
@@ -460,5 +459,7 @@
   "stacking_bonus": "Staking Bonus",
   "latest": "Latest",
   "not_granted": "Authorization not granted",
+  "required_time": "Required Time",
+  "sleep_time": "Sleep Time",
   "put_positive_correct_to": "Put positive correction to {}"
 }
