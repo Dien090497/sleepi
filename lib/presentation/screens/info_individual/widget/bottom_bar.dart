@@ -103,7 +103,7 @@ class _BottomBarWidgetState extends State<BottomBarWidget> {
                 }
 
                 if (state is GetLevelSuccess) {
-                  // Navigator.pop(context);
+                  Navigator.pop(context, true);
                   index = 0;
                   showCustomDialog(
                     context,
@@ -136,7 +136,7 @@ class _BottomBarWidgetState extends State<BottomBarWidget> {
                   children: [
                     itemBottomBar(0, context, Ics.levelUp, LocaleKeys.level_up,
                         () {
-                          // showLoadingDialog(context, "Loading");
+                          showLoadingDialog(context, "Loading");
                           cubit.getLevelUp(widget.bedEntity.nftId);
                         }),
                     itemBottomBar(1, context, Ics.repair, LocaleKeys.repair,
