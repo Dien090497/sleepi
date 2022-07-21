@@ -11,6 +11,8 @@ import 'package:slee_fi/presentation/blocs/home/home_bloc.dart';
 import 'package:slee_fi/presentation/blocs/home/home_state.dart';
 import 'package:slee_fi/presentation/blocs/item_list/item_bloc.dart';
 import 'package:slee_fi/presentation/blocs/lucky_box/lucky_box_cubit.dart';
+import 'package:slee_fi/presentation/blocs/refresh_cubit/refresh_cubit.dart';
+import 'package:slee_fi/presentation/blocs/refresh_cubit/refresh_state.dart';
 import 'package:slee_fi/presentation/screens/home/widgets/alarm_bell.dart';
 import 'package:slee_fi/presentation/screens/home/widgets/home_list_widget.dart';
 import 'package:slee_fi/presentation/screens/home/widgets/home_switch.dart';
@@ -48,88 +50,96 @@ class HomeScreen extends StatelessWidget {
                     const SizedBox(height: 24),
                     BlocBuilder<HomeBloc, HomeState>(
                       builder: (context, state) {
-                        return Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            if (state is HomeLoaded &&
-                                state.selectedBed != null)
-                              Padding(
-                                padding: const EdgeInsets.symmetric(
-                                    horizontal: 16.0),
-                                child: Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Text(
-                                      '${LocaleKeys.insurance.tr()}: ${state.selectedBed!.insurancePercent}%',
-                                      style: TextStyles.bold16LightWhite,
-                                    ),
-                                    SizedBox(
-                                      height: 24,
-                                      child: HomeSwitch(
-                                        onChanged: (bool value) {
-                                          context
-                                              .read<HomeBloc>()
-                                              .add(ChangeInsurance(value));
-                                        },
-                                        isOn: state.enableInsurance,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            const SizedBox(height: 2),
-                            if (state is HomeLoaded &&
-                                state.bedList.isNotEmpty) ...[
-                              Padding(
-                                padding: const EdgeInsets.symmetric(
-                                    horizontal: 16.0),
-                                child: GestureDetector(
-                                  onTap: () async {
-                                    launchInsurance(context);
-                                  },
+                        return BlocListener<RefreshCubit, RefreshState>(
+                          listener: (context, state) {
+                            if (state.refreshHomePage) {
+                              context.read<HomeBloc>().add(const RefreshBed());
+                            }
+                          },
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              if (state is HomeLoaded &&
+                                  state.selectedBed != null)
+                                Padding(
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 16.0),
                                   child: Row(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.center,
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
                                     children: [
-                                      SFText(
-                                        keyText: LocaleKeys.what_is_insurance,
-                                        style: TextStyles.lightGrey12,
+                                      Text(
+                                        '${LocaleKeys.insurance.tr()}: ${state.selectedBed!.insurancePercent}%',
+                                        style: TextStyles.bold16LightWhite,
                                       ),
-                                      const SizedBox(width: 8),
-                                      const SFIcon(Ics.icCircleQuestion),
+                                      SizedBox(
+                                        height: 24,
+                                        child: HomeSwitch(
+                                          onChanged: (bool value) {
+                                            context
+                                                .read<HomeBloc>()
+                                                .add(ChangeInsurance(value));
+                                          },
+                                          isOn: state.enableInsurance,
+                                        ),
+                                      ),
                                     ],
                                   ),
                                 ),
+                              const SizedBox(height: 2),
+                              if (state is HomeLoaded &&
+                                  state.bedList.isNotEmpty) ...[
+                                Padding(
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 16.0),
+                                  child: GestureDetector(
+                                    onTap: () async {
+                                      launchInsurance(context);
+                                    },
+                                    child: Row(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.center,
+                                      children: [
+                                        SFText(
+                                          keyText: LocaleKeys.what_is_insurance,
+                                          style: TextStyles.lightGrey12,
+                                        ),
+                                        const SizedBox(width: 8),
+                                        const SFIcon(Ics.icCircleQuestion),
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                                const SizedBox(height: 24),
+                              ],
+                              Padding(
+                                padding: const EdgeInsets.symmetric(
+                                    horizontal: 16.0),
+                                child: SFText(
+                                  keyText:
+                                      LocaleKeys.you_can_set_your_alarm_here,
+                                  style: TextStyles.lightGrey12,
+                                ),
                               ),
-                              const SizedBox(height: 24),
+                              const SizedBox(height: 16),
+                              AlarmBell(
+                                userStatusTracking: state is HomeLoaded
+                                    ? state.userStatusTracking
+                                    : null,
+                                bedImage: state is HomeLoaded
+                                    ? state.selectedBed?.image
+                                    : null,
+                                startTime: state is HomeLoaded &&
+                                        state.selectedBed?.startTime != null
+                                    ? state.selectedBed!.startTime!
+                                    : null,
+                                endTime: state is HomeLoaded &&
+                                        state.selectedBed?.endTime != null
+                                    ? state.selectedBed!.endTime!
+                                    : null,
+                              ),
                             ],
-                            Padding(
-                              padding:
-                                  const EdgeInsets.symmetric(horizontal: 16.0),
-                              child: SFText(
-                                keyText: LocaleKeys.you_can_set_your_alarm_here,
-                                style: TextStyles.lightGrey12,
-                              ),
-                            ),
-                            const SizedBox(height: 16),
-                            AlarmBell(
-                              userStatusTracking: state is HomeLoaded
-                                  ? state.userStatusTracking
-                                  : null,
-                              bedImage: state is HomeLoaded
-                                  ? state.selectedBed?.image
-                                  : null,
-                              startTime: state is HomeLoaded &&
-                                      state.selectedBed?.startTime != null
-                                  ? state.selectedBed!.startTime!
-                                  : null,
-                              endTime: state is HomeLoaded &&
-                                      state.selectedBed?.endTime != null
-                                  ? state.selectedBed!.endTime!
-                                  : null,
-                            ),
-                          ],
+                          ),
                         );
                       },
                     ),

@@ -8,6 +8,7 @@ import 'package:slee_fi/common/routes/app_routes.dart';
 import 'package:slee_fi/common/style/theme.dart';
 import 'package:slee_fi/common/widgets/phoenix.dart';
 import 'package:slee_fi/presentation/blocs/bottom_navigation/bottom_navigation_bloc.dart';
+import 'package:slee_fi/presentation/blocs/refresh_cubit/refresh_cubit.dart';
 import 'package:slee_fi/presentation/blocs/user_bloc/user_bloc.dart';
 import 'package:slee_fi/presentation/blocs/wallet/wallet_cubit.dart';
 
@@ -25,6 +26,7 @@ class MyApp extends StatelessWidget {
           BlocProvider(create: (_) => BottomNavigationBloc()),
           BlocProvider(create: (_) => UserBloc()),
           BlocProvider(create: (_) => WalletCubit()),
+          BlocProvider(create: (_) => RefreshCubit()),
         ],
         child: ScreenUtilInit(
           designSize: const Size(375, 812),

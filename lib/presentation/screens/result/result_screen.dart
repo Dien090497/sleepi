@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:slee_fi/common/enum/enum.dart';
 import 'package:slee_fi/common/extensions/num_ext.dart';
@@ -13,6 +14,7 @@ import 'package:slee_fi/common/widgets/sf_buttons.dart';
 import 'package:slee_fi/common/widgets/sf_icon.dart';
 import 'package:slee_fi/common/widgets/sf_label_value.dart';
 import 'package:slee_fi/l10n/locale_keys.g.dart';
+import 'package:slee_fi/presentation/blocs/refresh_cubit/refresh_cubit.dart';
 import 'package:slee_fi/presentation/screens/result/widgets/chart_statistic_share.dart';
 import 'package:slee_fi/resources/resources.dart';
 
@@ -95,14 +97,19 @@ class _ResultScreenState extends State<ResultScreen> {
                         const SizedBox(
                           height: 32,
                         ),
-                          Platform.isAndroid ?
-                          ((args.dataChart.isNotEmpty && args.dataChart.first.maxX != -1) ? ChartStatisticShare(maxValue: 360, data: args.dataChart.first, typeTimeChart: TypeTimeChart.chartDay,)
+                        Platform.isAndroid
+                            ? ((args.dataChart.isNotEmpty &&
+                                    args.dataChart.first.maxX != -1)
+                                ? ChartStatisticShare(
+                                    maxValue: 360,
+                                    data: args.dataChart.first,
+                                    typeTimeChart: TypeTimeChart.chartDay,
+                                  )
                                 : const SizedBox())
-                              : const Padding(
+                            : const Padding(
                                 padding: EdgeInsets.only(bottom: 10),
                                 child: SFIcon(Ics.commingSoon),
                               ),
-
                         const SizedBox(
                           height: 24,
                         ),
@@ -157,6 +164,7 @@ class _ResultScreenState extends State<ResultScreen> {
                               Navigator.pushNamedAndRemoveUntil(
                                   context, R.bottomNavigation, (r) => false);
                             } else {
+                              context.read<RefreshCubit>().refreshHome;
                               Navigator.popUntil(context,
                                   (r) => r.settings.name == R.bottomNavigation);
                             }
@@ -190,7 +198,7 @@ class _ResultScreenState extends State<ResultScreen> {
                       height: 48,
                       onPressed: () async {
                         Map<Permission, PermissionStatus> statuses = await [
-                        Permission.storage,
+                          Permission.storage,
                         ].request();
                         final info = statuses[Permission.storage].toString();
                         Navigator.pushNamed(context, R.share,
