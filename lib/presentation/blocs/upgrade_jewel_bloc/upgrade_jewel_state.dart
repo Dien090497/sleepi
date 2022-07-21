@@ -14,6 +14,8 @@ class JewelState with _$JewelState {
     UpgradeInfoResponse? upgradeInfoResponse,
     @Default(true) bool isLoadMore,
     @Default(false) bool loading,
+    @Default(false) bool upgradeSuccess,
+    String? errorMessage
   }) = JewelStateLoaded;
 
   const factory JewelState.loadUpgraded() = JewelStateUgraded;

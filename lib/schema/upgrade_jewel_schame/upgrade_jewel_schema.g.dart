@@ -15,7 +15,7 @@ UpgradeSchema _$UpgradeSchemaFromJson(Map<String, dynamic> json) =>
 Map<String, dynamic> _$UpgradeSchemaToJson(UpgradeSchema instance) =>
     <String, dynamic>{
       'nftIds': instance.nftIds,
-      'upgradeType': _$CategoryTypeEnumMap[instance.upgradeType]!,
+      'upgradeType': instance.upgradeType.toJson(),
     };
 
 const _$CategoryTypeEnumMap = {

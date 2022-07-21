@@ -1,5 +1,6 @@
 import 'package:dartz/dartz.dart';
 import 'package:slee_fi/common/enum/enum.dart';
+import 'package:slee_fi/common/extensions/string_x.dart';
 import 'package:slee_fi/failures/failure.dart';
 import 'package:slee_fi/models/bed_model/beb_model.dart';
 import 'package:slee_fi/repository/user_repository.dart';
@@ -21,10 +22,14 @@ enum CategoryType {
   jewel(2),
   item(3);
 
-
-final int type;
+  final int type;
 
   const CategoryType(this.type);
+
+  @override
+  String toString() => type.toString();
+
+  int toJson() => type;
 }
 
 class FetchBedParam {

@@ -24,7 +24,9 @@ mixin _$JewelState {
             List<JewelEntity> jewelsUpgrade,
             UpgradeInfoResponse? upgradeInfoResponse,
             bool isLoadMore,
-            bool loading)
+            bool loading,
+            bool upgradeSuccess,
+            String? errorMessage)
         loaded,
     required TResult Function() loadUpgraded,
   }) =>
@@ -37,7 +39,9 @@ mixin _$JewelState {
             List<JewelEntity> jewelsUpgrade,
             UpgradeInfoResponse? upgradeInfoResponse,
             bool isLoadMore,
-            bool loading)?
+            bool loading,
+            bool upgradeSuccess,
+            String? errorMessage)?
         loaded,
     TResult Function()? loadUpgraded,
   }) =>
@@ -50,7 +54,9 @@ mixin _$JewelState {
             List<JewelEntity> jewelsUpgrade,
             UpgradeInfoResponse? upgradeInfoResponse,
             bool isLoadMore,
-            bool loading)?
+            bool loading,
+            bool upgradeSuccess,
+            String? errorMessage)?
         loaded,
     TResult Function()? loadUpgraded,
     required TResult orElse(),
@@ -143,7 +149,9 @@ class _$JewelStateInit implements JewelStateInit {
             List<JewelEntity> jewelsUpgrade,
             UpgradeInfoResponse? upgradeInfoResponse,
             bool isLoadMore,
-            bool loading)
+            bool loading,
+            bool upgradeSuccess,
+            String? errorMessage)
         loaded,
     required TResult Function() loadUpgraded,
   }) {
@@ -159,7 +167,9 @@ class _$JewelStateInit implements JewelStateInit {
             List<JewelEntity> jewelsUpgrade,
             UpgradeInfoResponse? upgradeInfoResponse,
             bool isLoadMore,
-            bool loading)?
+            bool loading,
+            bool upgradeSuccess,
+            String? errorMessage)?
         loaded,
     TResult Function()? loadUpgraded,
   }) {
@@ -175,7 +185,9 @@ class _$JewelStateInit implements JewelStateInit {
             List<JewelEntity> jewelsUpgrade,
             UpgradeInfoResponse? upgradeInfoResponse,
             bool isLoadMore,
-            bool loading)?
+            bool loading,
+            bool upgradeSuccess,
+            String? errorMessage)?
         loaded,
     TResult Function()? loadUpgraded,
     required TResult orElse(),
@@ -235,7 +247,9 @@ abstract class _$$JewelStateLoadedCopyWith<$Res> {
       List<JewelEntity> jewelsUpgrade,
       UpgradeInfoResponse? upgradeInfoResponse,
       bool isLoadMore,
-      bool loading});
+      bool loading,
+      bool upgradeSuccess,
+      String? errorMessage});
 }
 
 /// @nodoc
@@ -256,6 +270,8 @@ class __$$JewelStateLoadedCopyWithImpl<$Res>
     Object? upgradeInfoResponse = freezed,
     Object? isLoadMore = freezed,
     Object? loading = freezed,
+    Object? upgradeSuccess = freezed,
+    Object? errorMessage = freezed,
   }) {
     return _then(_$JewelStateLoaded(
       jewels: jewels == freezed
@@ -278,6 +294,14 @@ class __$$JewelStateLoadedCopyWithImpl<$Res>
           ? _value.loading
           : loading // ignore: cast_nullable_to_non_nullable
               as bool,
+      upgradeSuccess: upgradeSuccess == freezed
+          ? _value.upgradeSuccess
+          : upgradeSuccess // ignore: cast_nullable_to_non_nullable
+              as bool,
+      errorMessage: errorMessage == freezed
+          ? _value.errorMessage
+          : errorMessage // ignore: cast_nullable_to_non_nullable
+              as String?,
     ));
   }
 }
@@ -290,7 +314,9 @@ class _$JewelStateLoaded implements JewelStateLoaded {
       final List<JewelEntity> jewelsUpgrade = const [],
       this.upgradeInfoResponse,
       this.isLoadMore = true,
-      this.loading = false})
+      this.loading = false,
+      this.upgradeSuccess = false,
+      this.errorMessage})
       : _jewels = jewels,
         _jewelsUpgrade = jewelsUpgrade;
 
@@ -318,10 +344,15 @@ class _$JewelStateLoaded implements JewelStateLoaded {
   @override
   @JsonKey()
   final bool loading;
+  @override
+  @JsonKey()
+  final bool upgradeSuccess;
+  @override
+  final String? errorMessage;
 
   @override
   String toString() {
-    return 'JewelState.loaded(jewels: $jewels, jewelsUpgrade: $jewelsUpgrade, upgradeInfoResponse: $upgradeInfoResponse, isLoadMore: $isLoadMore, loading: $loading)';
+    return 'JewelState.loaded(jewels: $jewels, jewelsUpgrade: $jewelsUpgrade, upgradeInfoResponse: $upgradeInfoResponse, isLoadMore: $isLoadMore, loading: $loading, upgradeSuccess: $upgradeSuccess, errorMessage: $errorMessage)';
   }
 
   @override
@@ -336,7 +367,11 @@ class _$JewelStateLoaded implements JewelStateLoaded {
                 .equals(other.upgradeInfoResponse, upgradeInfoResponse) &&
             const DeepCollectionEquality()
                 .equals(other.isLoadMore, isLoadMore) &&
-            const DeepCollectionEquality().equals(other.loading, loading));
+            const DeepCollectionEquality().equals(other.loading, loading) &&
+            const DeepCollectionEquality()
+                .equals(other.upgradeSuccess, upgradeSuccess) &&
+            const DeepCollectionEquality()
+                .equals(other.errorMessage, errorMessage));
   }
 
   @override
@@ -346,7 +381,9 @@ class _$JewelStateLoaded implements JewelStateLoaded {
       const DeepCollectionEquality().hash(_jewelsUpgrade),
       const DeepCollectionEquality().hash(upgradeInfoResponse),
       const DeepCollectionEquality().hash(isLoadMore),
-      const DeepCollectionEquality().hash(loading));
+      const DeepCollectionEquality().hash(loading),
+      const DeepCollectionEquality().hash(upgradeSuccess),
+      const DeepCollectionEquality().hash(errorMessage));
 
   @JsonKey(ignore: true)
   @override
@@ -362,12 +399,14 @@ class _$JewelStateLoaded implements JewelStateLoaded {
             List<JewelEntity> jewelsUpgrade,
             UpgradeInfoResponse? upgradeInfoResponse,
             bool isLoadMore,
-            bool loading)
+            bool loading,
+            bool upgradeSuccess,
+            String? errorMessage)
         loaded,
     required TResult Function() loadUpgraded,
   }) {
-    return loaded(
-        jewels, jewelsUpgrade, upgradeInfoResponse, isLoadMore, loading);
+    return loaded(jewels, jewelsUpgrade, upgradeInfoResponse, isLoadMore,
+        loading, upgradeSuccess, errorMessage);
   }
 
   @override
@@ -379,12 +418,14 @@ class _$JewelStateLoaded implements JewelStateLoaded {
             List<JewelEntity> jewelsUpgrade,
             UpgradeInfoResponse? upgradeInfoResponse,
             bool isLoadMore,
-            bool loading)?
+            bool loading,
+            bool upgradeSuccess,
+            String? errorMessage)?
         loaded,
     TResult Function()? loadUpgraded,
   }) {
-    return loaded?.call(
-        jewels, jewelsUpgrade, upgradeInfoResponse, isLoadMore, loading);
+    return loaded?.call(jewels, jewelsUpgrade, upgradeInfoResponse, isLoadMore,
+        loading, upgradeSuccess, errorMessage);
   }
 
   @override
@@ -396,14 +437,16 @@ class _$JewelStateLoaded implements JewelStateLoaded {
             List<JewelEntity> jewelsUpgrade,
             UpgradeInfoResponse? upgradeInfoResponse,
             bool isLoadMore,
-            bool loading)?
+            bool loading,
+            bool upgradeSuccess,
+            String? errorMessage)?
         loaded,
     TResult Function()? loadUpgraded,
     required TResult orElse(),
   }) {
     if (loaded != null) {
-      return loaded(
-          jewels, jewelsUpgrade, upgradeInfoResponse, isLoadMore, loading);
+      return loaded(jewels, jewelsUpgrade, upgradeInfoResponse, isLoadMore,
+          loading, upgradeSuccess, errorMessage);
     }
     return orElse();
   }
@@ -449,13 +492,17 @@ abstract class JewelStateLoaded implements JewelState {
       final List<JewelEntity> jewelsUpgrade,
       final UpgradeInfoResponse? upgradeInfoResponse,
       final bool isLoadMore,
-      final bool loading}) = _$JewelStateLoaded;
+      final bool loading,
+      final bool upgradeSuccess,
+      final String? errorMessage}) = _$JewelStateLoaded;
 
   List<JewelEntity> get jewels;
   List<JewelEntity> get jewelsUpgrade;
   UpgradeInfoResponse? get upgradeInfoResponse;
   bool get isLoadMore;
   bool get loading;
+  bool get upgradeSuccess;
+  String? get errorMessage;
   @JsonKey(ignore: true)
   _$$JewelStateLoadedCopyWith<_$JewelStateLoaded> get copyWith =>
       throw _privateConstructorUsedError;
@@ -508,7 +555,9 @@ class _$JewelStateUgraded implements JewelStateUgraded {
             List<JewelEntity> jewelsUpgrade,
             UpgradeInfoResponse? upgradeInfoResponse,
             bool isLoadMore,
-            bool loading)
+            bool loading,
+            bool upgradeSuccess,
+            String? errorMessage)
         loaded,
     required TResult Function() loadUpgraded,
   }) {
@@ -524,7 +573,9 @@ class _$JewelStateUgraded implements JewelStateUgraded {
             List<JewelEntity> jewelsUpgrade,
             UpgradeInfoResponse? upgradeInfoResponse,
             bool isLoadMore,
-            bool loading)?
+            bool loading,
+            bool upgradeSuccess,
+            String? errorMessage)?
         loaded,
     TResult Function()? loadUpgraded,
   }) {
@@ -540,7 +591,9 @@ class _$JewelStateUgraded implements JewelStateUgraded {
             List<JewelEntity> jewelsUpgrade,
             UpgradeInfoResponse? upgradeInfoResponse,
             bool isLoadMore,
-            bool loading)?
+            bool loading,
+            bool upgradeSuccess,
+            String? errorMessage)?
         loaded,
     TResult Function()? loadUpgraded,
     required TResult orElse(),

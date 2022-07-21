@@ -20,6 +20,65 @@ class TabJewelsDetail extends StatefulWidget {
 }
 
 class _TabJewelsDetailState extends State<TabJewelsDetail> {
+  @override
+  Widget build(BuildContext context) {
+    return DefaultTabController(
+        length: 2,
+        child: BlocProvider(
+            create: (context) => JewelBloc()..add(const JewelFetchList()),
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 12.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  SFSubTabBar(
+                      labelPadding: const EdgeInsets.symmetric(horizontal: 8),
+                      texts: const [LocaleKeys.jewels, LocaleKeys.upgrade]),
+                  const SizedBox(height: 12),
+                  Expanded(
+                    child: TabBarView(
+                      children: [
+                        BlocBuilder<JewelBloc, JewelState>(
+                          builder: (context, state) {
+                            final cubit = context.read<JewelBloc>();
+                            return (state is JewelStateLoaded)
+                                ? SFGridView(
+                                    isLoadMore: state.isLoadMore,
+                                    onLoadMore: _onLoadMore(cubit),
+                                    count: state.jewels.length,
+                                    childAspectRatio: 1,
+                                    onRefresh: () {
+                                      cubit.add(const JewelRefreshList());
+                                    },
+                                    itemBuilder: (context, i) {
+                                      return GestureDetector(
+                                        onTap: () {
+                                          _showJewelDialog(
+                                              context, state.jewels[i]);
+                                        },
+                                        child: MyJewelsShortWidget(
+                                            jewel: state.jewels[i]),
+                                      );
+                                    },
+                                  )
+                                : const Center(
+                                    child: CircularProgressIndicator());
+                          },
+                        ),
+                        const UpGradeTab(),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+            )));
+  }
+
+  _onLoadMore(JewelBloc cubit) async {
+    cubit.add(const JewelFetchList());
+    return Future.delayed(const Duration(milliseconds: 1500));
+  }
+
   void _showJewelDialog(BuildContext context, JewelEntity jewel) {
     showCustomDialog(
       context,
@@ -32,65 +91,5 @@ class _TabJewelsDetailState extends State<TabJewelsDetail> {
         ),
       ],
     );
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return DefaultTabController(
-        length: 2,
-        child: BlocProvider(
-          create: (context) => JewelBloc()..add(const JewelFetchList()),
-          child: BlocBuilder<JewelBloc, JewelState>(
-            builder: (context, state) {
-              final cubit = context.read<JewelBloc>();
-              return Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 12.0),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    SFSubTabBar(
-                        labelPadding: const EdgeInsets.symmetric(horizontal: 8),
-                        texts: const [LocaleKeys.jewels, LocaleKeys.upgrade]),
-                    const SizedBox(height: 12),
-                    Expanded(
-                      child: TabBarView(
-                        children: [
-                          (state is JewelStateLoaded)
-                              ? SFGridView(
-                                  isLoadMore: state.isLoadMore,
-                                  onLoadMore: _onLoadMore(cubit),
-                                  count: state.jewels.length,
-                                  childAspectRatio: 1,
-                                  onRefresh: () {
-                                    cubit.add(const JewelRefreshList());
-                                  },
-                                  itemBuilder: (context, i) {
-                                    return GestureDetector(
-                                      onTap: () {
-                                        _showJewelDialog(
-                                            context, state.jewels[i]);
-                                      },
-                                      child: MyJewelsShortWidget(
-                                          jewel: state.jewels[i]),
-                                    );
-                                  },
-                                )
-                              : const Center(
-                                  child: CircularProgressIndicator()),
-                          const UpGradeTab(),
-                        ],
-                      ),
-                    ),
-                  ],
-                ),
-              );
-            },
-          ),
-        ));
-  }
-
-  _onLoadMore(JewelBloc cubit) async {
-    cubit.add(const JewelFetchList());
-    await Future.delayed(const Duration(milliseconds: 1500));
   }
 }

@@ -12,7 +12,7 @@ class UpgradeInfoUseCase
   UpgradeInfoUseCase(this._iUserRepository);
 
   @override
-  Future<Either<Failure, UpgradeInfoResponse>> call(params) {
+  Future<Either<FailureMessage, UpgradeInfoResponse>> call(params) {
     return _iUserRepository.upgradeInfo(params);
   }
 }

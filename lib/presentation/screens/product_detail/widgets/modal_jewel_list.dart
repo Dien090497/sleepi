@@ -92,7 +92,6 @@ class ModalJewelList extends StatelessWidget {
                         return GestureDetector(
                           onTap: () {
                             if (item.length > 3) {
-                              print('size is   ${item.sublist(0, 3).length} ');
                               Navigator.pop(context);
                               jewelBloc
                                   .add(AddJewelToSocket(item.sublist(0, 3)));
@@ -139,29 +138,6 @@ class ModalJewelList extends StatelessWidget {
 
   Future<void> _onLoadMore() async {
     jewelBloc.add(const JewelFetchList());
-    await Future.delayed(const Duration(milliseconds: 5000));
+    return Future.delayed(const Duration(milliseconds: 1500));
   }
-
-// _showDialogJewelDetail(
-//     BuildContext context, JewelEntity jewelEntity, JewelBloc bloc) {
-//   showCustomDialog(
-//     context,
-//     padding: const EdgeInsets.all(24),
-//     children: [
-//       JewelDialogBody(
-//         jewel: jewelEntity,
-//         onSellTap: () {
-//           Navigator.pop(context);
-//         },
-//         onTransferTap: () {
-//           // bloc.add(AddJewel(jewelEntity));
-//           // Navigator.pop(context);
-//           // Navigator.pop(context);
-//         },
-//         textOnSell: LocaleKeys.cancel,
-//         textOnTransfer: LocaleKeys.upgrade.tr(),
-//       ),
-//     ],
-//   );
-// }
 }
