@@ -17,6 +17,7 @@ import 'package:slee_fi/schema/add_jewel_schema/add_jewel_schema.dart';
 import 'package:slee_fi/schema/change_password_schema/change_password_schema.dart';
 import 'package:slee_fi/schema/param_filler_item_fetch/filter_item_schema.dart';
 import 'package:slee_fi/schema/speed_up_lucky_box_schema/speed_up_lucky_box_schema.dart';
+import 'package:slee_fi/schema/upgrade_jewel_schame/upgrade_jewel_schema.dart';
 import 'package:slee_fi/schema/white_draw_token_schema/whit_draw_token_schema.dart';
 import 'package:slee_fi/usecase/add_item_to_bed_usecase.dart';
 import 'package:slee_fi/usecase/estimate_gas_withdraw.dart';
@@ -89,6 +90,9 @@ abstract class IUserRepository {
 
   Future<Either<FailureMessage, List<JewelEntity>>> fetchListJewel(
       FetchHomeBedParam param);
+
+  Future<Either<FailureMessage, List<JewelEntity>>> upgradeJewel(
+      UpgradeJewelSchema param);
 
   Future<Either<FailureMessage, String>> getSlftPrice();
 }

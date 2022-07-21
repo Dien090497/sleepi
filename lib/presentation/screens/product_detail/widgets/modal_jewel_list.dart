@@ -12,15 +12,17 @@ import 'package:slee_fi/entities/jewel_entity/jewel_entity.dart';
 import 'package:slee_fi/l10n/locale_keys.g.dart';
 import 'package:slee_fi/presentation/blocs/bottom_navigation/bottom_navigation_bloc.dart';
 import 'package:slee_fi/presentation/blocs/bottom_navigation/bottom_navigation_event.dart';
-import 'package:slee_fi/presentation/blocs/socket_bloc/socket_bloc.dart';
-import 'package:slee_fi/presentation/blocs/socket_bloc/socket_event.dart';
-import 'package:slee_fi/presentation/blocs/socket_bloc/socket_state.dart';
+import 'package:slee_fi/presentation/blocs/upgrade_jewel_bloc/upgrade_jewel_bloc.dart';
+import 'package:slee_fi/presentation/blocs/upgrade_jewel_bloc/upgrade_jewel_event.dart';
+import 'package:slee_fi/presentation/blocs/upgrade_jewel_bloc/upgrade_jewel_state.dart';
 import 'package:slee_fi/presentation/screens/product_detail/widgets/jewel_dialog_body.dart';
-import 'package:slee_fi/presentation/screens/product_detail/widgets/my_jewel_short_widget.dart';
+import 'package:slee_fi/presentation/screens/product_detail/widgets/my_jewel_widget_count.dart';
+
+import 'my_jewel_short_widget.dart';
 
 class ModalJewelList extends StatelessWidget {
-  const ModalJewelList({Key? key, required this.socketBloc}) : super(key: key);
-  final SocketBloc socketBloc;
+  const ModalJewelList({Key? key, required this.jewelBloc}) : super(key: key);
+  final JewelBloc jewelBloc;
 
   @override
   Widget build(BuildContext context) {
@@ -35,7 +37,7 @@ class ModalJewelList extends StatelessWidget {
                   keyText: LocaleKeys.jewel_list,
                   style: TextStyles.bold18White,
                 ),
-                const Spacer(),
+                // const Spacer(),
                 // GestureDetector(
                 //   onTap: () async {
                 //     // showFilterItemBottomSheet(context, homeBloc: homeBloc);
@@ -59,34 +61,46 @@ class ModalJewelList extends StatelessWidget {
           Expanded(
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 8),
-              child: BlocBuilder<SocketBloc, SocketState>(
-                bloc: socketBloc,
+              child: BlocBuilder<JewelBloc, JewelState>(
+                bloc: jewelBloc,
                 builder: (context, state) {
-                  if ((state is SocketStateLoaded && state.jewels == null) ||
-                      (state is! SocketStateLoaded)) {
-                    socketBloc.add(const FetchJewels());
+                  if ((state is JewelStateLoaded && state.isLoadMore) ||
+                      (state is! JewelStateLoaded)) {
+                    jewelBloc.add(const JewelFetchList());
                   }
 
-                  if (state is SocketStateLoaded && state.jewels != null) {
+                  if (state is JewelStateLoaded) {
+                    final map = <String, List<JewelEntity>>{};
+                    for (var element in state.jewels) {
+                      final key = '${element.type}_${element.level}';
+                      if (map.containsKey(key)) {
+                        map[key]!.add(element);
+                      } else {
+                        map[key] = [element];
+                      }
+                    }
+                    final tempList = map.values.toList();
                     return SFGridView(
-                      isLoadMore: state.loadMoreJewel,
+                      isLoadMore: state.isLoadMore,
                       isScroll: true,
-                      count: state.jewels!.length,
+                      count: tempList.length,
                       childAspectRatio: 1,
                       onLoadMore: _onLoadMore(),
-                      onRefresh: () => socketBloc.add(const RefreshJewels()),
+                      onRefresh: () => jewelBloc.add(const JewelRefreshList()),
                       itemBuilder: (context, i) {
-                        final item = state.jewels![i];
+                        final item = tempList[i];
                         return GestureDetector(
                           onTap: () {
                             _showDialogJewelDetail(
                               context,
-                              item,
-                              socketBloc,
+                              item.first,
+                              jewelBloc,
                             );
                           },
-                          child: MyJewelsShortWidget(
-                              jewel: item, color: AppColors.light4),
+                          child: MyJewelsWidgetCount(
+                              count: item.length,
+                              jewel: item.first,
+                              color: AppColors.light4),
                         );
                       },
                     );
@@ -97,11 +111,10 @@ class ModalJewelList extends StatelessWidget {
             ),
           ),
           const SizedBox(height: 16),
-          BlocBuilder<SocketBloc, SocketState>(
-            bloc: socketBloc,
+          BlocBuilder<JewelBloc, JewelState>(
+            bloc: jewelBloc,
             builder: (context, state) => SFButton(
-                text: state is SocketStateLoaded &&
-                        state.jewels?.isNotEmpty == true
+                text: state is JewelStateLoaded && state.jewels.isNotEmpty
                     ? LocaleKeys.cancel
                     : LocaleKeys.buy,
                 width: MediaQuery.of(context).size.width * 0.9,
@@ -110,9 +123,8 @@ class ModalJewelList extends StatelessWidget {
                 height: 48,
                 onPressed: () {
                   Navigator.pop(context);
-                  if (state is SocketStateLoaded &&
-                      state.jewels?.isEmpty == true) {
-                    Navigator.pop(context);
+                  if (state is JewelStateLoaded &&
+                      state.jewels.isEmpty == true) {
                     BlocProvider.of<BottomNavigationBloc>(context)
                         .add(const SelectTab(4, indexTabChild: 1));
                   }
@@ -125,12 +137,12 @@ class ModalJewelList extends StatelessWidget {
   }
 
   Future<void> _onLoadMore() async {
-    socketBloc.add(const FetchJewels());
+    jewelBloc.add(const JewelFetchList());
     await Future.delayed(const Duration(milliseconds: 5000));
   }
 
   _showDialogJewelDetail(
-      BuildContext context, JewelEntity jewelEntity, SocketBloc bloc) {
+      BuildContext context, JewelEntity jewelEntity, JewelBloc bloc) {
     showCustomDialog(
       context,
       padding: const EdgeInsets.all(24),
@@ -141,12 +153,12 @@ class ModalJewelList extends StatelessWidget {
             Navigator.pop(context);
           },
           onTransferTap: () {
-            bloc.add(AddJewel(jewelEntity));
-            Navigator.pop(context);
-            Navigator.pop(context);
+            // bloc.add(AddJewel(jewelEntity));
+            // Navigator.pop(context);
+            // Navigator.pop(context);
           },
           textOnSell: LocaleKeys.cancel,
-          textOnTransfer: LocaleKeys.add_jewel.tr(),
+          textOnTransfer: LocaleKeys.upgrade.tr(),
         ),
       ],
     );

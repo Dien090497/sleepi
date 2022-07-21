@@ -35,7 +35,8 @@ class FailureMessage extends Failure {
     } catch (_) {
       throw Exception(_);
     }
-    throw Exception(e);
+    return FailureMessage('$e');
+    // throw Exception(e);
   }
 
   @override
