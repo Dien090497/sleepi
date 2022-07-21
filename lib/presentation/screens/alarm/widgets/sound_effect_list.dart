@@ -1,5 +1,5 @@
-import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
+import 'package:just_audio/just_audio.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:slee_fi/common/const/const.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
@@ -72,8 +72,12 @@ class _AlarmSoundEffectListState extends State<AlarmSoundEffectList> {
   }
 
   _playSound() async {
-    await audioPlayer.stop();
-    await audioPlayer.release();
-    await audioPlayer.play(AssetSource(Const.soundAlarm[temp]), volume: 1, mode: PlayerMode.mediaPlayer,);
+    if(audioPlayer.playing) {
+      await audioPlayer.stop();
+    }
+    await audioPlayer.setAsset(Const.soundAlarm[temp]);
+    await audioPlayer.setVolume(1);
+    await audioPlayer.setLoopMode(LoopMode.one);
+    await audioPlayer.play();
   }
 }
