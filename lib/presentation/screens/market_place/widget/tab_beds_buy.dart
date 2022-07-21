@@ -19,16 +19,9 @@ import 'package:slee_fi/presentation/screens/market_place/widget/tab_bar_filter.
 import 'package:slee_fi/resources/resources.dart';
 import 'package:syncfusion_flutter_sliders/sliders.dart';
 
-class TabBedsBuy extends StatefulWidget {
+class TabBedsBuy extends StatelessWidget {
   const TabBedsBuy({Key? key, required this.cubit}) : super(key: key);
   final MarketPlaceCubit cubit;
-
-  @override
-  State<TabBedsBuy> createState() => _TabBedsBuyState();
-}
-
-class _TabBedsBuyState extends State<TabBedsBuy> {
-  late List<MarketPlaceModel> listBeds = [];
 
   void _showBedDialog(
       BuildContext context, MarketPlaceModel bed, MarketPlaceCubit cubit) {
@@ -51,18 +44,9 @@ class _TabBedsBuyState extends State<TabBedsBuy> {
     return DefaultTabController(
       length: 2,
       child: BlocConsumer<MarketPlaceCubit, MarketPlaceState>(
-        bloc: widget.cubit,
+        bloc: cubit,
         listener: (context, state) {
           final cubit = context.read<MarketPlaceCubit>();
-          if (state is MarketPlaceStateLoaded) {
-            listBeds = state.list.list;
-          }
-
-          if (state is MarketPlaceStateLoadedMore) {
-            listBeds.addAll(state.list.list);
-            setState(() {});
-          }
-
           if (state is MarketPlaceStateBuySuccess) {
             cubit.refresh();
             showSuccessfulDialog(context, LocaleKeys.purchased_successfully);
@@ -74,15 +58,14 @@ class _TabBedsBuyState extends State<TabBedsBuy> {
           }
         },
         builder: (context, state) {
-
           return Column(
             children: [
               TabBarFilter(
-                cubit: widget.cubit,
+                cubit: cubit,
                 tabTexts: const [LocaleKeys.buy, LocaleKeys.rent],
                 onFilterTap: () {
                   showFilterModalBottomSheet(
-                    cubit: widget.cubit,
+                    cubit: cubit,
                     context,
                     sections: {
                       LocaleKeys.type.tr(): [
@@ -107,16 +90,16 @@ class _TabBedsBuyState extends State<TabBedsBuy> {
                     sliders: {
                       LocaleKeys.level.tr(): FilterSliderValues(
                           value: SfRangeValues(
-                            widget.cubit.params.minLevel,
-                            widget.cubit.params.maxLevel,
+                            cubit.params.minLevel,
+                            cubit.params.maxLevel,
                           ),
                           max: 30,
                           min: 0),
                       LocaleKeys.mint.tr(): FilterSliderValues(
                           max: 7.0,
                           min: 0,
-                          value: SfRangeValues(widget.cubit.params.minBedMint,
-                              widget.cubit.params.maxBedMint)),
+                          value: SfRangeValues(cubit.params.minBedMint,
+                              cubit.params.maxBedMint)),
                     },
                   );
                 },
@@ -124,11 +107,8 @@ class _TabBedsBuyState extends State<TabBedsBuy> {
               Expanded(
                 child: Padding(
                   padding: EdgeInsets.symmetric(horizontal: 12.w),
-                  child: (state is MarketPlaceStateLoading)
-                      ? const Center(
-                          child: CircularProgressIndicator(),
-                        )
-                      : Column(
+                  child: state is MarketPlaceStateLoaded
+                      ? Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             const SizedBox(height: 12),
@@ -136,14 +116,14 @@ class _TabBedsBuyState extends State<TabBedsBuy> {
                               child: TabBarView(
                                 children: [
                                   GridViewBedItem(
-                                    cubit: widget.cubit,
-                                    isLoadMore: widget.cubit.loadMore,
-                                    beds: listBeds,
+                                    cubit: cubit,
+                                    isLoadMore: cubit.loadMore,
+                                    beds: state.list,
                                     onRefresh: () {
-                                      widget.cubit.refresh();
+                                      cubit.refresh();
                                     },
                                     onBuyTap: (bed) {
-                                      _showBedDialog(context, bed, widget.cubit);
+                                      _showBedDialog(context, bed, cubit);
                                     },
                                     onBedTap: (bed) {
                                       Navigator.pushNamed(context, R.nftInfo,
@@ -166,7 +146,10 @@ class _TabBedsBuyState extends State<TabBedsBuy> {
                               ),
                             ),
                           ],
-                        ),
+                        )
+                      : state is MarketPlaceStateLoading
+                          ? const Center(child: CircularProgressIndicator())
+                          : const SizedBox(),
                 ),
               ),
             ],

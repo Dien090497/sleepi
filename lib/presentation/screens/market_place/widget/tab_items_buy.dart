@@ -18,21 +18,9 @@ import 'package:slee_fi/presentation/screens/market_place/widget/tab_bar_filter.
 import 'package:slee_fi/resources/resources.dart';
 import 'package:syncfusion_flutter_sliders/sliders.dart';
 
-class TabItemsBuy extends StatefulWidget {
+class TabItemsBuy extends StatelessWidget {
   const TabItemsBuy({Key? key, required this.cubit}) : super(key: key);
   final MarketPlaceCubit cubit;
-
-  @override
-  State<TabItemsBuy> createState() => _TabItemsBuyState();
-}
-
-class _TabItemsBuyState extends State<TabItemsBuy> {
-  List<MarketPlaceModel> listItems = [];
-
-  @override
-  void dispose() {
-    super.dispose();
-  }
 
   void _showItemDialog(
       BuildContext context, MarketPlaceModel item, MarketPlaceCubit cubit) {
@@ -55,17 +43,9 @@ class _TabItemsBuyState extends State<TabItemsBuy> {
     return DefaultTabController(
       length: 2,
       child: BlocConsumer<MarketPlaceCubit, MarketPlaceState>(
-        bloc: widget.cubit,
+        bloc: cubit,
         listener: (context, state) {
           final cubit = context.read<MarketPlaceCubit>();
-          if (state is MarketPlaceStateLoaded) {
-            listItems = state.list.list;
-          }
-
-          if (state is MarketPlaceStateLoadedMore) {
-            listItems.addAll(state.list.list);
-            setState(() {});
-          }
 
           if (state is MarketPlaceStateBuySuccess) {
             cubit.refresh();
@@ -81,11 +61,11 @@ class _TabItemsBuyState extends State<TabItemsBuy> {
           return Column(
             children: [
               TabBarFilter(
-                cubit: widget.cubit,
+                cubit: cubit,
                 tabTexts: const [LocaleKeys.buy, LocaleKeys.rent],
                 onFilterTap: () {
                   showFilterModalBottomSheet(
-                    cubit: widget.cubit,
+                    cubit: cubit,
                     context,
                     sections: {
                       LocaleKeys.type.tr(): [
@@ -98,8 +78,8 @@ class _TabItemsBuyState extends State<TabItemsBuy> {
                     sliders: {
                       LocaleKeys.level.tr(): FilterSliderValues(
                           value: SfRangeValues(
-                            widget.cubit.params.minLevel,
-                            widget.cubit.params.maxLevel,
+                            cubit.params.minLevel,
+                            cubit.params.maxLevel,
                           ),
                           max: 5,
                           min: 1),
@@ -110,11 +90,8 @@ class _TabItemsBuyState extends State<TabItemsBuy> {
               Expanded(
                 child: Padding(
                   padding: EdgeInsets.symmetric(horizontal: 12.w),
-                  child: (state is MarketPlaceStateLoading)
-                      ? const Center(
-                          child: CircularProgressIndicator(),
-                        )
-                      : Column(
+                  child: state is MarketPlaceStateLoaded
+                      ? Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             const SizedBox(height: 12),
@@ -122,25 +99,25 @@ class _TabItemsBuyState extends State<TabItemsBuy> {
                               child: TabBarView(
                                 children: [
                                   SFGridView(
-                                    marketPlaceCubit: widget.cubit,
-                                    isLoadMore: widget.cubit.loadMore,
-                                    count: listItems.length,
+                                    marketPlaceCubit: cubit,
+                                    isLoadMore: cubit.loadMore,
+                                    count: state.list.length,
                                     isScroll: true,
                                     onRefresh: () {
-                                      widget.cubit.refresh();
+                                      cubit.refresh();
                                     },
                                     childAspectRatio: 8 / 10,
                                     itemBuilder: (context, i) {
                                       return GestureDetector(
                                         onTap: () {
-                                          _showItemDialog(context, listItems[i],
-                                              widget.cubit);
+                                          _showItemDialog(
+                                              context, state.list[i], cubit);
                                         },
                                         child: ItemBedBuyWidget(
-                                          item: listItems[i],
+                                          item: state.list[i],
                                           onPressedButton: () {
-                                            _showItemDialog(context,
-                                                listItems[i], widget.cubit);
+                                            _showItemDialog(
+                                                context, state.list[i], cubit);
                                           },
                                         ),
                                       );
@@ -160,7 +137,12 @@ class _TabItemsBuyState extends State<TabItemsBuy> {
                               ),
                             ),
                           ],
-                        ),
+                        )
+                      : state is MarketPlaceStateLoading
+                          ? const Center(
+                              child: CircularProgressIndicator(),
+                            )
+                          : const SizedBox(),
                 ),
               ),
             ],

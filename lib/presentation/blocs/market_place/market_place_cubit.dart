@@ -1,11 +1,9 @@
-import 'dart:convert';
-import 'dart:developer';
-
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:slee_fi/common/const/const.dart';
 import 'package:slee_fi/di/injector.dart';
 import 'package:slee_fi/l10n/locale_keys.g.dart';
+import 'package:slee_fi/models/market_place/market_place_model.dart';
 import 'package:slee_fi/schema/market/market_schema.dart';
 import 'package:slee_fi/usecase/buy_nft_usecase.dart';
 import 'package:slee_fi/usecase/fetch_bed_usecase.dart';
@@ -32,7 +30,7 @@ class MarketPlaceCubit extends Cubit<MarketPlaceState> {
   final BuyNFTUseCase _buyNFTUseCase = getIt<BuyNFTUseCase>();
   CategoryType _categoryType = CategoryType.bed;
 
-  init(CategoryType categoryType) async {
+  void init(CategoryType categoryType) async {
     _categoryType = categoryType;
     page = 1;
     params = params.copyWith(
@@ -42,19 +40,19 @@ class MarketPlaceCubit extends Cubit<MarketPlaceState> {
         minLevel: categoryType == CategoryType.bed ? 0 : 1,
         categoryId: categoryType.type,
         sortPrice: Const.sortCondition[0]);
-    log("params init $categoryType : ${json.encode(params.toJson())}");
     emit(const MarketPlaceState.loading());
     getMarketPlace(params);
   }
 
-  refresh() {
+  void refresh() {
     page = 1;
     loadMore = false;
     params = params.copyWith(page: page);
+    emit(const MarketPlaceState.loading());
     getMarketPlace(params);
   }
 
-  clearFilter() {
+  void clearFilter() {
     page = 1;
     params = params.copyWith(
       page: page,
@@ -70,13 +68,14 @@ class MarketPlaceCubit extends Cubit<MarketPlaceState> {
   }
 
   Future<void> getMarketPlace(MarketSchema param) async {
-    log("params : ${json.encode(params.toJson())}");
+    emit(MarketPlaceState.loaded(
+        _list.map((e) => MarketPlaceModel.fromJson(e)).toList()));
+    return;
     final result = await _marketPlaceUseCase.call(param);
     result.fold((l) {
       error = true;
       loadMore = false;
-      if (isClosed) return;
-      emit(MarketPlaceState.fail('$l'));
+      emit(const MarketPlaceState.loaded([]));
     }, (success) {
       error = false;
       if (success.list.length == limit) {
@@ -86,8 +85,7 @@ class MarketPlaceCubit extends Cubit<MarketPlaceState> {
       } else {
         loadMore = false;
       }
-      if (isClosed) return;
-      emit(MarketPlaceState.loaded(success));
+      emit(MarketPlaceState.loaded(success.list));
     });
   }
 
@@ -96,7 +94,6 @@ class MarketPlaceCubit extends Cubit<MarketPlaceState> {
     result.fold((l) {
       error = true;
       loadMore = false;
-      emit(MarketPlaceState.fail('$l'));
     }, (success) {
       error = false;
       if (success.list.length == limit) {
@@ -106,7 +103,12 @@ class MarketPlaceCubit extends Cubit<MarketPlaceState> {
       } else {
         loadMore = false;
       }
-      emit(MarketPlaceState.loadedMore(success));
+      final currentState = state;
+      if (currentState is MarketPlaceStateLoaded) {
+        final newList = List<MarketPlaceModel>.from(currentState.list)
+          ..addAll(success.list);
+        emit(currentState.copyWith(list: newList));
+      }
     });
   }
 
@@ -157,3 +159,126 @@ class MarketPlaceCubit extends Cubit<MarketPlaceState> {
     });
   }
 }
+
+final _list = [
+  {
+    "id": 72,
+    "nftId": 72,
+    "nftName": "Beds genesis #00072",
+    "parent1": null,
+    "parent2": null,
+    "contractAddress": "0x75A78Ca9e9B43c8ae1dB1844238937E340f5C46a",
+    "tokenId": 72,
+    "owner": "0x1bab8030249382a887f967fcaa7fe0be7b390728",
+    "type": "bed",
+    "nftType": "bed",
+    "jewelType": null,
+    "itemType": null,
+    "classNft": "Flexible",
+    "quality": "common",
+    "image": "https://nft-dev.sleefi.com/v1/nft/bed/pod/00072.png",
+    "time": 1,
+    "level": 1,
+    "levelUpTime": null,
+    "bedMint": 0,
+    "isMint": 0,
+    "isBurn": 0,
+    "efficiency": "9.00",
+    "durability": "100.00",
+    "luck": "15.00",
+    "bonus": "1.00",
+    "special": "3.00",
+    "resilience": "6.00",
+    "createdAt": "2022-07-18T04:28:28.361Z",
+    "updatedAt": "2022-07-18T04:28:28.361Z",
+    "category_id": 1,
+    "is_lock": 1,
+    "status": "DEFAULT",
+    "price": "1",
+    "transaction_fee": "6",
+    "symbol": "AVAX",
+    "insurancePercent": 3,
+    "startTime": 3,
+    "endTime": 12
+  },
+  {
+    "id": 74,
+    "nftId": 74,
+    "nftName": "Beds genesis #00074",
+    "parent1": null,
+    "parent2": null,
+    "contractAddress": "0x75A78Ca9e9B43c8ae1dB1844238937E340f5C46a",
+    "tokenId": 74,
+    "owner": "0x1bab8030249382a887f967fcaa7fe0be7b390728",
+    "type": "bed",
+    "nftType": "bed",
+    "jewelType": null,
+    "itemType": null,
+    "classNft": "Middle",
+    "quality": "common",
+    "image": "https://nft-dev.sleefi.com/v1/nft/bed/pod/00074.png",
+    "time": 1,
+    "level": 1,
+    "levelUpTime": null,
+    "bedMint": 0,
+    "isMint": 0,
+    "isBurn": 0,
+    "efficiency": "7.00",
+    "durability": "100.00",
+    "luck": "4.00",
+    "bonus": "1.00",
+    "special": "12.00",
+    "resilience": "4.00",
+    "createdAt": "2022-07-18T04:28:28.361Z",
+    "updatedAt": "2022-07-18T04:28:28.361Z",
+    "category_id": 1,
+    "is_lock": 1,
+    "status": "DEFAULT",
+    "price": "1",
+    "transaction_fee": "6",
+    "symbol": "AVAX",
+    "insurancePercent": 3,
+    "startTime": 4.5,
+    "endTime": 7
+  },
+  {
+    "id": 76,
+    "nftId": 76,
+    "nftName": "Beds genesis #00076",
+    "parent1": null,
+    "parent2": null,
+    "contractAddress": "0x75A78Ca9e9B43c8ae1dB1844238937E340f5C46a",
+    "tokenId": 76,
+    "owner": "0x1bab8030249382a887f967fcaa7fe0be7b390728",
+    "type": "bed",
+    "nftType": "bed",
+    "jewelType": null,
+    "itemType": null,
+    "classNft": "Flexible",
+    "quality": "uncommon",
+    "image": "https://nft-dev.sleefi.com/v1/nft/bed/pod/00076.png",
+    "time": 1,
+    "level": 1,
+    "levelUpTime": null,
+    "bedMint": 0,
+    "isMint": 0,
+    "isBurn": 0,
+    "efficiency": "17.00",
+    "durability": "100.00",
+    "luck": "10.00",
+    "bonus": "11.00",
+    "special": "15.00",
+    "resilience": "13.00",
+    "createdAt": "2022-07-18T04:28:28.361Z",
+    "updatedAt": "2022-07-18T04:28:28.361Z",
+    "category_id": 1,
+    "is_lock": 1,
+    "status": "DEFAULT",
+    "price": "1",
+    "transaction_fee": "6",
+    "symbol": "AVAX",
+    "insurancePercent": 4,
+    "startTime": 3,
+    "endTime": 12
+  }
+];
