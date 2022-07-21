@@ -1,7 +1,6 @@
 import 'dart:async';
 import 'dart:developer';
 
-import 'package:audioplayers/audioplayers.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -10,6 +9,7 @@ import 'package:flutter_background_service_android/flutter_background_service_an
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:get_storage/get_storage.dart';
+import 'package:just_audio/just_audio.dart';
 import 'package:logger/logger.dart';
 import 'package:sentry_flutter/sentry_flutter.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -112,7 +112,8 @@ bool onIosBackground(ServiceInstance service) {
 
 Future<void> onStart(ServiceInstance service) async {
   final audioPlayer = AudioPlayer();
-  await audioPlayer.setReleaseMode(ReleaseMode.loop);
+  audioPlayer.setLoopMode(LoopMode.all);
+
   if (service is AndroidServiceInstance) {
     service.on(Const.setAsForeground).listen((event) {
       service.setAsForegroundService();
@@ -123,18 +124,18 @@ Future<void> onStart(ServiceInstance service) async {
     });
   }
   service.on(Const.stopService).listen((event) async {
-    await audioPlayer.stop();
+    if (audioPlayer.playing) {
+      await audioPlayer.stop();
+    }
     await audioPlayer.dispose();
-    await service.stopSelf();
+    service.stopSelf();
   });
 
   final SharedPreferences preferences = await SharedPreferences.getInstance();
   final int timeWakeUp = preferences.getInt(Const.time) ?? 0;
   final int sound = preferences.getInt(Const.sound) ?? 0;
-  DateTime wakeUp = DateTime.fromMillisecondsSinceEpoch(timeWakeUp);
+  final DateTime wakeUp = DateTime.fromMillisecondsSinceEpoch(timeWakeUp);
   final int time = wakeUp.difference(DateTime.now()).inMinutes;
-  log('=-=-=-$time');
-  // bring to foreground
   if (service is AndroidServiceInstance) {
     service.setForegroundNotificationInfo(
       title: "Sleep Tracking...",
@@ -142,27 +143,13 @@ Future<void> onStart(ServiceInstance service) async {
           "Alarm: ${DateFormat('HH:mm dd/MM/yyyy').format(wakeUp).toString()}",
     );
   }
-  Timer.periodic(Duration(minutes: time), (timer) {
+  Timer.periodic(Duration(minutes: time), (timer) async {
     log('FLUTTER BACKGROUND SERVICE: ${DateTime.now()}');
-    final isPlaying = audioPlayer.state == PlayerState.playing;
-    if (!isPlaying) {
-      audioPlayer.play(
-        AssetSource(Const.soundAlarm[sound]),
-        ctx: AudioContext(
-          android: AudioContextAndroid(
-            isSpeakerphoneOn: true,
-            stayAwake: true,
-            contentType: AndroidContentType.music,
-            usageType: AndroidUsageType.media,
-            audioFocus: AndroidAudioFocus.gain,
-          ),
-          iOS: AudioContextIOS(
-            defaultToSpeaker: false,
-            category: AVAudioSessionCategory.ambient,
-            options: [AVAudioSessionOptions.defaultToSpeaker],
-          ),
-        ),
-      );
+    if (!audioPlayer.playing) {
+      await audioPlayer.setAsset(Const.soundAlarm[sound]);
+      await audioPlayer.setVolume(1);
+      await audioPlayer.setLoopMode(LoopMode.one);
+      await audioPlayer.play();
     }
     timer.cancel();
   });

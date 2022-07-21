@@ -84,6 +84,7 @@ class _ResultScreenState extends State<ResultScreen> {
                           height: 20,
                         ),
                         CategoryHeader(
+                          slftPrice: args.slftPrice,
                           earning:
                               double.parse(args.resultModel.actualEarn ?? '0')
                                   .formatBalance2Digits,
@@ -95,14 +96,19 @@ class _ResultScreenState extends State<ResultScreen> {
                         const SizedBox(
                           height: 32,
                         ),
-                          Platform.isAndroid ?
-                          ((args.dataChart.isNotEmpty && args.dataChart.first.maxX != -1) ? ChartStatisticShare(maxValue: 360, data: args.dataChart.first, typeTimeChart: TypeTimeChart.chartDay,)
+                        Platform.isAndroid
+                            ? ((args.dataChart.isNotEmpty &&
+                                    args.dataChart.first.maxX != -1)
+                                ? ChartStatisticShare(
+                                    maxValue: 360,
+                                    data: args.dataChart.first,
+                                    typeTimeChart: TypeTimeChart.chartDay,
+                                  )
                                 : const SizedBox())
-                              : const Padding(
+                            : const Padding(
                                 padding: EdgeInsets.only(bottom: 10),
                                 child: SFIcon(Ics.commingSoon),
                               ),
-
                         const SizedBox(
                           height: 24,
                         ),
@@ -190,11 +196,9 @@ class _ResultScreenState extends State<ResultScreen> {
                       height: 48,
                       onPressed: () async {
                         Map<Permission, PermissionStatus> statuses = await [
-                        Permission.storage,
+                          Permission.storage,
                         ].request();
-                        final info = statuses[Permission.storage].toString();
-                        Navigator.pushNamed(context, R.share,
-                            arguments: args.fromRoute);
+                        Navigator.pushNamed(context, R.share, arguments: args);
                       },
                     ),
                   ),

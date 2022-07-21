@@ -68,9 +68,9 @@ class _StakingListState extends State<StakingList> {
     return stakingInfo!.stake.totalStake!;
   }
 
-  double get checkValuePriceUsd{
-    if(stakingInfo == null || stakingInfo!.slftPriceUsd == double.infinity || stakingInfo!.slftPriceUsd == double.nan){
-      return 0;
+  String get checkValuePriceUsd{
+    if(stakingInfo == null || stakingInfo!.slftPriceUsd == double.infinity.toString() || stakingInfo!.slftPriceUsd == double.nan.toString()){
+      return "0";
     }
     return stakingInfo!.slftPriceUsd;
   }
@@ -126,7 +126,7 @@ class _StakingListState extends State<StakingList> {
                             Expanded(
                               flex: 3,
                               child: SFText(
-                                keyText: "(=${(double.parse(checkValueTvl)*checkValuePriceUsd).isNaN ? 0 : (double.parse(checkValueTvl)*checkValuePriceUsd).formatBalance2Digits} USD)",
+                                keyText: "(=${(double.parse(checkValueTvl)*double.parse(checkValuePriceUsd)).isNaN ? 0 : (double.parse(checkValueTvl)*double.parse(checkValuePriceUsd)).formatBalance2Digits} USD)",
                                 style: TextStyles.w400White14,
                                 textAlign: TextAlign.end,
                               ),
@@ -218,7 +218,7 @@ class _StakingListState extends State<StakingList> {
                           showCustomAlertDialog(
                             context,
                             padding: const EdgeInsets.all(24),
-                            children: PopUpCalculator(myBalance : widget.balanceSlft, aprInDay: stakingInfo?.aprInDay, priceUsd: stakingInfo?.slftPriceUsd),
+                            children: PopUpCalculator(myBalance : widget.balanceSlft, aprInDay: stakingInfo?.aprInDay, priceUsd: double.parse(checkValuePriceUsd)),
                           );
                         },
                         child: Row(
@@ -423,10 +423,7 @@ class _StakingListState extends State<StakingList> {
                   ),
                 ],
               ),
-              BlocBuilder<StakingCubit, StakingState>(
-                builder: (context, state) =>
-                state is StakingStateLoading ? const LoadingScreen() : const SizedBox(),
-              ),
+            if( state is StakingStateLoading) const LoadingScreen(),
             ]
 
           );

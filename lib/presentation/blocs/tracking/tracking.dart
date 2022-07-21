@@ -27,7 +27,7 @@ class TrackingCubit extends Cubit<TrackingState> {
     );
   }
 
-  Future<void> fetchData(time) async {
+  Future<void> fetchData(time, timeStart) async {
     DateTime now = DateTime.now();
     HealthFactory health = HealthFactory();
 
@@ -46,7 +46,7 @@ class TrackingCubit extends Cubit<TrackingState> {
       try {
         List<DataHealth> healthDataList = [];
         List<HealthDataPoint> healthData = await health.getHealthDataFromTypes(
-            now.subtract(Duration(minutes: time+60)), now, types);
+            timeStart, now, types);
         healthData = HealthFactory.removeDuplicates(healthData);
         for (var element in healthData) {
 

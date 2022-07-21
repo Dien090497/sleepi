@@ -62,12 +62,19 @@
 	</array>
 	<key>CFBundleVersion</key>
 	<string>$(CURRENT_PROJECT_VERSION)</string>
+	<key>FacebookAppID</key>
+	<string>1329834907365798</string>
 	<key>ITSAppUsesNonExemptEncryption</key>
 	<false/>
 	<key>LSApplicationQueriesSchemes</key>
 	<array>
-		<string>https</string>
-		<string>http</string>
+		<string>instagram-stories</string>
+		<string>facebook-stories</string>
+		<string>facebook</string>
+		<string>instagram</string>
+		<string>twitter</string>
+		<string>whatsapp</string>
+		<string>tg</string>
 	</array>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
@@ -116,17 +123,11 @@
 	<array>
 		<string>applinks:sleefi.onelink.me</string>
 	</array>
-	<key>LSApplicationQueriesSchemes</key>
-        	<array>
-        	<string>instagram-stories</string>
-        	<string>facebook-stories</string>
-        	<string>facebook</string>
-        	<string>instagram</string>
-        	<string>twitter</string>
-        	<string>whatsapp</string>
-            <string>tg</string>
-        	</array>
-        <key>FacebookAppID</key>
-        	<string>1329834907365798</string>
+	<key>NSMicrophoneUsageDescription</key>
+    <string>... explain why the app uses the microphone here ...</string>
+    <key>NSBonjourServices</key>
+    <array>
+         <string>_dartobservatory._tcp</string>
+    </array>
 </dict>
 </plist>

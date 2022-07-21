@@ -55,6 +55,7 @@ class _TrackingScreenState extends State<TrackingScreen> {
   late int time = 0;
   late double earn = 0.toDouble();
   final service = FlutterBackgroundService();
+  late DateTime timeStart =DateTime.now();
 
   @override
   void initState() {
@@ -67,12 +68,12 @@ class _TrackingScreenState extends State<TrackingScreen> {
       final args = ModalRoute.of(context)?.settings.arguments as TrackingParams;
       totalEarn = args.tokenEarn;
       DateTime wakeUp = DateTime.fromMillisecondsSinceEpoch(args.timeWakeUp);
-      DateTime timStart = DateTime.fromMillisecondsSinceEpoch(args.timeStart);
-      time = wakeUp.difference(timStart).inMinutes;
+      timeStart = DateTime.fromMillisecondsSinceEpoch(args.timeStart);
+      time = wakeUp.difference(timeStart).inMinutes;
       SharedPreferences preferences = await SharedPreferences.getInstance();
       await preferences.setInt(Const.time, args.timeWakeUp);
       earn =
-          (DateTime.now().difference(timStart).inMinutes) * (totalEarn / time);
+          (DateTime.now().difference(timeStart).inMinutes) * (totalEarn / time);
       timeAlarm =
           '${wakeUp.hour < 10 ? '0${wakeUp.hour}' : wakeUp.hour}:${wakeUp.minute < 10 ? '0${wakeUp.minute}' : wakeUp.minute}';
       double x = totalEarn / time;
@@ -88,6 +89,8 @@ class _TrackingScreenState extends State<TrackingScreen> {
           }
         },
       );
+      if (!mounted) return;
+      setState(() {});
     });
   }
 
@@ -229,7 +232,7 @@ class _TrackingScreenState extends State<TrackingScreen> {
                             textStyle: TextStyles.w600WhiteSize16,
                             onPressed: () {
                               service.invoke(Const.stopService);
-                              cubit.fetchData(time);
+                              cubit.fetchData(time,timeStart);
                             },
                           ),
                           const SizedBox(height: 26),

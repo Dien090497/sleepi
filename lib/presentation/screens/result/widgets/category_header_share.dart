@@ -6,10 +6,13 @@ import 'package:slee_fi/common/style/text_styles.dart';
 import 'package:slee_fi/common/widgets/sf_icon.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
 import 'package:slee_fi/l10n/locale_keys.g.dart';
+import 'package:slee_fi/presentation/screens/result/layout/pre_result_screen.dart';
 import 'package:slee_fi/resources/resources.dart';
 
 class CategoryHeaderShare extends StatelessWidget {
-  const CategoryHeaderShare({Key? key}) : super(key: key);
+  const CategoryHeaderShare({Key? key, required this.preResultParams}) : super(key: key);
+
+  final PreResultParams preResultParams;
 
   @override
   Widget build(BuildContext context) {
@@ -41,7 +44,7 @@ class CategoryHeaderShare extends StatelessWidget {
                       width: 4,
                     ),
                     SFText(
-                      keyText: '1,000',
+                      keyText: '${preResultParams.resultModel.actualEarn}',
                       style: const TextStyle(
                           fontSize: 16,
                           color: AppColors.blue,
@@ -75,7 +78,7 @@ class CategoryHeaderShare extends StatelessWidget {
                   style: TextStyles.lightGrey11,
                 ),
                 SFText(
-                  keyText: '7h35min',
+                  keyText: '${preResultParams.resultModel.sleepDurationTime}',
                   style: const TextStyle(
                       fontSize: 16,
                       color: AppColors.blue,
@@ -100,7 +103,7 @@ class CategoryHeaderShare extends StatelessWidget {
                   style: TextStyles.lightGrey11,
                 ),
                 SFText(
-                  keyText: '99/100',
+                  keyText: '${preResultParams.resultModel.sleepQuality}',
                   style: const TextStyle(
                       fontSize: 16,
                       color: AppColors.blue,

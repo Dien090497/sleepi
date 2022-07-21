@@ -110,9 +110,9 @@ class ModalJewelList extends StatelessWidget {
                 height: 48,
                 onPressed: () {
                   Navigator.pop(context);
-                  Navigator.pop(context);
                   if (state is SocketStateLoaded &&
                       state.jewels?.isEmpty == true) {
+                    Navigator.pop(context);
                     BlocProvider.of<BottomNavigationBloc>(context)
                         .add(const SelectTab(4, indexTabChild: 1));
                   }

@@ -38,10 +38,20 @@ class Imgs {
   static const String motionData = 'assets/images/motion_data.png';
   static const String newsLetters = 'assets/images/news_letters.png';
   static const String normalGacha = 'assets/images/normal_gacha.png';
+  static const String normalGacha10En = 'assets/images/normal_gacha_10_en.png';
+  static const String normalGacha10Ja = 'assets/images/normal_gacha_10_ja.png';
+  static const String normalGacha1En = 'assets/images/normal_gacha_1_en.png';
+  static const String normalGacha1Ja = 'assets/images/normal_gacha_1_ja.png';
   static const String notification = 'assets/images/notification.png';
   static const String sendToExternal = 'assets/images/send_to_external.png';
   static const String shortBed = 'assets/images/short_bed.png';
   static const String specialGacha = 'assets/images/special_gacha.png';
+  static const String specialGacha10En =
+      'assets/images/special_gacha_10_en.png';
+  static const String specialGacha10Ja =
+      'assets/images/special_gacha_10_ja.png';
+  static const String specialGacha1En = 'assets/images/special_gacha_1_en.png';
+  static const String specialGacha1Ja = 'assets/images/special_gacha_1_ja.png';
   static const String tutorial1 = 'assets/images/tutorial_1.png';
   static const String tutorial2 = 'assets/images/tutorial_2.png';
   static const String tutorial3 = 'assets/images/tutorial_3.png';
@@ -82,10 +92,18 @@ class Imgs {
     motionData,
     newsLetters,
     normalGacha,
+    normalGacha10En,
+    normalGacha10Ja,
+    normalGacha1En,
+    normalGacha1Ja,
     notification,
     sendToExternal,
     shortBed,
     specialGacha,
+    specialGacha10En,
+    specialGacha10Ja,
+    specialGacha1En,
+    specialGacha1Ja,
     tutorial1,
     tutorial2,
     tutorial3,

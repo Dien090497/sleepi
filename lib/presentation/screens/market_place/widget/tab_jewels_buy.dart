@@ -19,17 +19,9 @@ import 'package:syncfusion_flutter_sliders/sliders.dart';
 
 import 'jewel_buy_widget.dart';
 
-class TabJewelsBuy extends StatefulWidget {
+class TabJewelsBuy extends StatelessWidget {
   const TabJewelsBuy({Key? key, required this.cubit}) : super(key: key);
   final MarketPlaceCubit cubit;
-
-
-  @override
-  State<TabJewelsBuy> createState() => _TabJewelsBuyState();
-}
-
-class _TabJewelsBuyState extends State<TabJewelsBuy> {
-  late List<MarketPlaceModel> listJewels = [];
 
   void _showJewelDialog(
       BuildContext context, MarketPlaceModel jewel, MarketPlaceCubit cubit) {
@@ -51,19 +43,10 @@ class _TabJewelsBuyState extends State<TabJewelsBuy> {
   Widget build(BuildContext context) {
     return DefaultTabController(
       length: 2,
-      child:  BlocConsumer<MarketPlaceCubit, MarketPlaceState>(
-        bloc: widget.cubit,
-
+      child: BlocConsumer<MarketPlaceCubit, MarketPlaceState>(
+        bloc: cubit,
         listener: (context, state) {
           final cubit = context.read<MarketPlaceCubit>();
-          if (state is MarketPlaceStateLoaded) {
-            listJewels = state.list.list;
-          }
-
-          if (state is MarketPlaceStateLoadedMore) {
-            listJewels.addAll(state.list.list);
-            setState(() {});
-          }
 
           if (state is MarketPlaceStateBuySuccess) {
             cubit.refresh();
@@ -76,15 +59,14 @@ class _TabJewelsBuyState extends State<TabJewelsBuy> {
           }
         },
         builder: (context, state) {
-
           return Column(
             children: [
               TabBarFilter(
-                cubit: widget.cubit,
+                cubit: cubit,
                 tabTexts: const [LocaleKeys.buy, LocaleKeys.rent],
                 onFilterTap: () {
                   showFilterModalBottomSheet(
-                    cubit: widget.cubit,
+                    cubit: cubit,
                     context,
                     sections: {
                       LocaleKeys.type.tr(): [
@@ -100,8 +82,8 @@ class _TabJewelsBuyState extends State<TabJewelsBuy> {
                           max: 5,
                           min: 1,
                           value: SfRangeValues(
-                            widget.cubit.params.minLevel,
-                            widget.cubit.params.maxLevel,
+                            cubit.params.minLevel,
+                            cubit.params.maxLevel,
                           )),
                     },
                   );
@@ -110,56 +92,55 @@ class _TabJewelsBuyState extends State<TabJewelsBuy> {
               Expanded(
                 child: Padding(
                   padding: EdgeInsets.symmetric(horizontal: 12.w),
-                  child: (state is MarketPlaceStateLoading)
-                      ? const Center(
-                    child: CircularProgressIndicator(),
-                  )
-                      : Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      const SizedBox(height: 12),
-                      Expanded(
-                        child: TabBarView(
+                  child: state is MarketPlaceStateLoaded
+                      ? Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            SFGridView(
-                              count: listJewels.length,
-                              childAspectRatio: 8 / 10,
-                              onRefresh: () {
-                                widget.cubit.refresh();
-                              },
-                              marketPlaceCubit: widget.cubit,
-                              isLoadMore: widget.cubit.loadMore,
-                              itemBuilder: (context, i) {
-                                return GestureDetector(
-                                  onTap: () {
-                                    _showJewelDialog(
-                                        context, listJewels[i], widget.cubit);
-                                  },
-                                  child: JewelsBuyWidget(
-                                    jewel: listJewels[i],
-                                    onPressedButton: () {
-                                      _showJewelDialog(context,
-                                          listJewels[i], widget.cubit);
+                            const SizedBox(height: 12),
+                            Expanded(
+                              child: TabBarView(
+                                children: [
+                                  SFGridView(
+                                    count: state.list.length,
+                                    childAspectRatio: 8 / 10,
+                                    onRefresh: () {
+                                      cubit.refresh();
+                                    },
+                                    marketPlaceCubit: cubit,
+                                    isLoadMore: cubit.loadMore,
+                                    itemBuilder: (context, i) {
+                                      return GestureDetector(
+                                        onTap: () {
+                                          _showJewelDialog(
+                                              context, state.list[i], cubit);
+                                        },
+                                        child: JewelsBuyWidget(
+                                          jewel: state.list[i],
+                                          onPressedButton: () {
+                                            _showJewelDialog(
+                                                context, state.list[i], cubit);
+                                          },
+                                        ),
+                                      );
                                     },
                                   ),
-                                );
-                              },
-                            ),
-                            Padding(
-                              padding: EdgeInsets.only(
-                                  bottom: MediaQuery.of(context)
-                                      .size
-                                      .height *
-                                      0.3),
-                              child: const Center(
-                                child: SFIcon(Ics.commingSoon),
+                                  Padding(
+                                    padding: EdgeInsets.only(
+                                        bottom:
+                                            MediaQuery.of(context).size.height *
+                                                0.3),
+                                    child: const Center(
+                                      child: SFIcon(Ics.commingSoon),
+                                    ),
+                                  )
+                                ],
                               ),
-                            )
+                            ),
                           ],
-                        ),
-                      ),
-                    ],
-                  ),
+                        )
+                      : state is MarketPlaceStateLoading
+                          ? const Center(child: CircularProgressIndicator())
+                          : const SizedBox(),
                 ),
               ),
             ],

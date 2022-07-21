@@ -43,7 +43,7 @@ class GridViewBedItem extends StatelessWidget {
       count: beds.length,
       isScroll: isScroll,
       onRefresh: onRefresh,
-      childAspectRatio: 8 / 10,
+      childAspectRatio: 7 / 10,
       itemBuilder: (context, i) {
         final bed = beds[i];
         final qualityColor = bed.quality != null
@@ -65,9 +65,7 @@ class GridViewBedItem extends StatelessWidget {
                   top: 20,
                   left: -30,
                   child: TopLeftBanner(
-                    text: bed.classNft == null
-                        ? bed.type
-                        : bed.classNft!,
+                    text: bed.classNft == null ? bed.type : bed.classNft!,
                     textColor: qualityColor,
                   ),
                 ),
@@ -77,12 +75,12 @@ class GridViewBedItem extends StatelessWidget {
                     children: [
                       Expanded(
                         child: Container(
-                          padding: const EdgeInsets.symmetric(vertical: 24.0),
+                          padding: const EdgeInsets.only(top: 24, bottom: 12),
                           alignment: Alignment.center,
                           child: CachedImage(
                             image: bed.image,
-                            width: 80,
-                            height: 80,
+                            // width: 80,
+                            // height: 80,
                           ),
                         ),
                       ),

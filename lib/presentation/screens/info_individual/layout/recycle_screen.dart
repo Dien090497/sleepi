@@ -1,11 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:slee_fi/common/routes/app_routes.dart';
-import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
 import 'package:slee_fi/common/widgets/background_widget.dart';
-import 'package:slee_fi/common/widgets/sf_buttons.dart';
 import 'package:slee_fi/common/widgets/sf_icon.dart';
-import 'package:slee_fi/common/widgets/sf_label_value.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
 import 'package:slee_fi/l10n/locale_keys.g.dart';
 import 'package:slee_fi/resources/resources.dart';
@@ -18,6 +14,53 @@ class RecycleScreen extends StatelessWidget {
     final Size size = MediaQuery.of(context).size;
 
     return BackgroundWidget(
+      child: Stack(
+        children: [
+          SafeArea(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.only(
+                    top: 20,
+                    left: 16,
+                    right: 16,
+                  ),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      InkWell(
+                        onTap: () {
+                          Navigator.pop(context);
+                        },
+                        child: const SFIcon(
+                          Ics.arrowLeft,
+                          width: 32,
+                          height: 32,
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 20),
+                        child: SFText(
+                          keyText: LocaleKeys.bed_recycle,
+                          style: TextStyles.boldWhite18,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                Padding(
+                  padding: EdgeInsets.symmetric(vertical: size.height/4),
+                  child: const Center(child: SFIcon(Ics.commingSoon)),
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+    //TODO: For release recycle
+    /*return BackgroundWidget(
       child: Stack(
         children: [
           SafeArea(
@@ -204,6 +247,6 @@ class RecycleScreen extends StatelessWidget {
           ),
         ],
       ),
-    );
+    );*/
   }
 }

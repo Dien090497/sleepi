@@ -13,13 +13,16 @@ class CategoryHeader extends StatelessWidget {
       required this.earning,
       required this.sleepDuration,
       required this.score,
-        this.imageBed})
+        this.imageBed,
+        this.slftPrice,
+      })
       : super(key: key);
 
   final String earning;
   final String sleepDuration;
   final int score;
   final String? imageBed;
+  final String? slftPrice;
 
   @override
   Widget build(BuildContext context) {
@@ -102,10 +105,10 @@ class CategoryHeader extends StatelessWidget {
                         style: TextStyles.bold24Blue,
                       ),
                     ),
-                    const Padding(
+                    Padding(
                       padding: EdgeInsets.symmetric(horizontal: 16.0),
                       child: Text(
-                        '~ 100 USD',
+                        '~ ${slftPrice ?? '0.0'} USD',
                         style: TextStyles.lightGrey12,
                       ),
                     ),

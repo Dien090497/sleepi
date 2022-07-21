@@ -29,9 +29,9 @@ class MintScreen extends StatefulWidget {
 }
 
 class _MintScreenState extends State<MintScreen> {
-  bool swCheck = true;
   InfoMintingModel? _infoMintingModel;
   PercentMinting? _percentMinting;
+  int percentBedBox = 100;
   @override
   Widget build(BuildContext context) {
     final args = ModalRoute.of(context)?.settings.arguments as BedEntity;
@@ -108,7 +108,7 @@ class _MintScreenState extends State<MintScreen> {
                                                 MainAxisAlignment.spaceBetween,
                                             children: [
                                               Text(
-                                                '${LocaleKeys.insurance.tr()}: ${args.insurancePercent}%',
+                                                '${LocaleKeys.insurance.tr()}: ${_infoMintingModel != null ? _infoMintingModel!.brokenRate.fee : 0}%',
                                                 style:
                                                     TextStyles.bold16LightWhite,
                                               ),
@@ -194,7 +194,7 @@ class _MintScreenState extends State<MintScreen> {
                                                     styleLabel:
                                                         TextStyles.lightWhite14,
                                                     value:(_infoMintingModel != null && _percentMinting != null)
-                                                        ? '${_percentMinting!.percent - _infoMintingModel!.brokenRate.brokenRate}%'
+                                                        ? '${percentBedBox - _infoMintingModel!.brokenRate.brokenRate}%'
                                                         : '0%',
                                                     colorBorder:
                                                         Colors.transparent,
@@ -211,13 +211,13 @@ class _MintScreenState extends State<MintScreen> {
                                                   ),
                                                   SFLabelValue(
                                                     label: LocaleKeys
-                                                        .one_bed_will_be_burned,
+                                                        .bed_will_be_burned,
                                                     styleLabel:
                                                         TextStyles.lightWhite14,
                                                     value: _infoMintingModel !=
                                                             null
                                                         ? '${_infoMintingModel!.brokenRate.brokenRate}%'
-                                                        : '',
+                                                        : '0%',
                                                     colorBorder:
                                                         Colors.transparent,
                                                   ),
@@ -235,9 +235,7 @@ class _MintScreenState extends State<MintScreen> {
                                                 label: LocaleKeys.bedbox,
                                                 styleLabel:
                                                     TextStyles.lightWhite14,
-                                                value: _percentMinting != null
-                                                    ? '${_percentMinting!.percent}%'
-                                                    : '0%'),
+                                                value: "$percentBedBox%"),
                                           ],
                                         ),
                                       ),
@@ -247,7 +245,7 @@ class _MintScreenState extends State<MintScreen> {
                                     )
                                   ],
                                 )
-                              : Container(),
+                              : const Center(child: CircularProgressIndicator(),),
                         ),
                       ),
                     ),

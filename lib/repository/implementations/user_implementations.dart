@@ -24,6 +24,7 @@ import 'package:slee_fi/schema/add_jewel_schema/add_jewel_schema.dart';
 import 'package:slee_fi/schema/change_password_schema/change_password_schema.dart';
 import 'package:slee_fi/schema/param_filler_item_fetch/filter_item_schema.dart';
 import 'package:slee_fi/schema/speed_up_lucky_box_schema/speed_up_lucky_box_schema.dart';
+import 'package:slee_fi/schema/upgrade_jewel_schame/upgrade_jewel_schema.dart';
 import 'package:slee_fi/schema/white_draw_token_schema/whit_draw_token_schema.dart';
 import 'package:slee_fi/usecase/add_item_to_bed_usecase.dart';
 import 'package:slee_fi/usecase/estimate_gas_withdraw.dart';
@@ -190,12 +191,12 @@ class UserImplementation extends IUserRepository {
   @override
   Future<Either<FailureMessage, List<BedEntity>>> fetchItemOwner(
       FilterItemSchema filterItemSchema) async {
-    // try {
+    try {
       final result = await _authDataSource.fetchItemOwner(filterItemSchema);
       return Right(result.list.map((e) => e.toEntity()).toList());
-    // } catch (e) {
-    //   return Left(FailureMessage.fromException(e));
-    // }
+    } catch (e) {
+      return Left(FailureMessage.fromException(e));
+    }
   }
 
   @override
@@ -318,9 +319,11 @@ class UserImplementation extends IUserRepository {
     try {
       final result =
           await _authDataSource.fetchBedInHomePage(param.limit, param.page);
+
       var list = result.list.map((e) => e.toEntity()).toList();
       return Right(list);
     } catch (e) {
+      print('==--=${e.toString()}');
       return Left(FailureMessage.fromException(e));
     }
   }
@@ -336,5 +339,22 @@ class UserImplementation extends IUserRepository {
     } catch (e) {
       return Left(FailureMessage.fromException(e));
     }
+  }
+
+  @override
+  Future<Either<FailureMessage, String>> getSlftPrice() async {
+    try {
+      final result = await _authDataSource.slftPrice();
+      return Right(result);
+    }
+    catch (e) {
+      return Left(FailureMessage.fromException(e));
+    }
+  }
+
+  @override
+  Future<Either<FailureMessage, List<JewelEntity>>> upgradeJewel(UpgradeJewelSchema param) {
+    // TODO: implement upgradeJewel
+    throw UnimplementedError();
   }
 }
