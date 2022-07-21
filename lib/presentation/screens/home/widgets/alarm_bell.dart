@@ -120,7 +120,7 @@ class AlarmBell extends StatelessWidget {
             if (userStatusTracking != null)
               ButtonStart(
                 enableStart: !isLoading &&
-                    !isScrolling &&
+                    !isScrolling && startRange !=null && endRange != null &&
                     _correctTime(startRange!, endRange!, selectedTime),
                 availableAt: availableAt,
                 onStartTracking: () async {
