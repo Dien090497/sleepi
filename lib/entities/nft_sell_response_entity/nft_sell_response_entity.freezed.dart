@@ -16,12 +16,7 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$NftSellResponseEntity {
-  int? get nftId => throw _privateConstructorUsedError;
-  int? get id => throw _privateConstructorUsedError;
-  String? get price => throw _privateConstructorUsedError;
-  String? get status => throw _privateConstructorUsedError;
-  String? get symbol => throw _privateConstructorUsedError;
-  String? get transactionsFee => throw _privateConstructorUsedError;
+  String? get message => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $NftSellResponseEntityCopyWith<NftSellResponseEntity> get copyWith =>
@@ -33,13 +28,7 @@ abstract class $NftSellResponseEntityCopyWith<$Res> {
   factory $NftSellResponseEntityCopyWith(NftSellResponseEntity value,
           $Res Function(NftSellResponseEntity) then) =
       _$NftSellResponseEntityCopyWithImpl<$Res>;
-  $Res call(
-      {int? nftId,
-      int? id,
-      String? price,
-      String? status,
-      String? symbol,
-      String? transactionsFee});
+  $Res call({String? message});
 }
 
 /// @nodoc
@@ -53,37 +42,12 @@ class _$NftSellResponseEntityCopyWithImpl<$Res>
 
   @override
   $Res call({
-    Object? nftId = freezed,
-    Object? id = freezed,
-    Object? price = freezed,
-    Object? status = freezed,
-    Object? symbol = freezed,
-    Object? transactionsFee = freezed,
+    Object? message = freezed,
   }) {
     return _then(_value.copyWith(
-      nftId: nftId == freezed
-          ? _value.nftId
-          : nftId // ignore: cast_nullable_to_non_nullable
-              as int?,
-      id: id == freezed
-          ? _value.id
-          : id // ignore: cast_nullable_to_non_nullable
-              as int?,
-      price: price == freezed
-          ? _value.price
-          : price // ignore: cast_nullable_to_non_nullable
-              as String?,
-      status: status == freezed
-          ? _value.status
-          : status // ignore: cast_nullable_to_non_nullable
-              as String?,
-      symbol: symbol == freezed
-          ? _value.symbol
-          : symbol // ignore: cast_nullable_to_non_nullable
-              as String?,
-      transactionsFee: transactionsFee == freezed
-          ? _value.transactionsFee
-          : transactionsFee // ignore: cast_nullable_to_non_nullable
+      message: message == freezed
+          ? _value.message
+          : message // ignore: cast_nullable_to_non_nullable
               as String?,
     ));
   }
@@ -96,13 +60,7 @@ abstract class _$$_NftSellResponseEntityCopyWith<$Res>
           $Res Function(_$_NftSellResponseEntity) then) =
       __$$_NftSellResponseEntityCopyWithImpl<$Res>;
   @override
-  $Res call(
-      {int? nftId,
-      int? id,
-      String? price,
-      String? status,
-      String? symbol,
-      String? transactionsFee});
+  $Res call({String? message});
 }
 
 /// @nodoc
@@ -119,37 +77,12 @@ class __$$_NftSellResponseEntityCopyWithImpl<$Res>
 
   @override
   $Res call({
-    Object? nftId = freezed,
-    Object? id = freezed,
-    Object? price = freezed,
-    Object? status = freezed,
-    Object? symbol = freezed,
-    Object? transactionsFee = freezed,
+    Object? message = freezed,
   }) {
     return _then(_$_NftSellResponseEntity(
-      nftId: nftId == freezed
-          ? _value.nftId
-          : nftId // ignore: cast_nullable_to_non_nullable
-              as int?,
-      id: id == freezed
-          ? _value.id
-          : id // ignore: cast_nullable_to_non_nullable
-              as int?,
-      price: price == freezed
-          ? _value.price
-          : price // ignore: cast_nullable_to_non_nullable
-              as String?,
-      status: status == freezed
-          ? _value.status
-          : status // ignore: cast_nullable_to_non_nullable
-              as String?,
-      symbol: symbol == freezed
-          ? _value.symbol
-          : symbol // ignore: cast_nullable_to_non_nullable
-              as String?,
-      transactionsFee: transactionsFee == freezed
-          ? _value.transactionsFee
-          : transactionsFee // ignore: cast_nullable_to_non_nullable
+      message: message == freezed
+          ? _value.message
+          : message // ignore: cast_nullable_to_non_nullable
               as String?,
     ));
   }
@@ -158,30 +91,14 @@ class __$$_NftSellResponseEntityCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_NftSellResponseEntity implements _NftSellResponseEntity {
-  const _$_NftSellResponseEntity(
-      {required this.nftId,
-      required this.id,
-      required this.price,
-      required this.status,
-      required this.symbol,
-      required this.transactionsFee});
+  const _$_NftSellResponseEntity({required this.message});
 
   @override
-  final int? nftId;
-  @override
-  final int? id;
-  @override
-  final String? price;
-  @override
-  final String? status;
-  @override
-  final String? symbol;
-  @override
-  final String? transactionsFee;
+  final String? message;
 
   @override
   String toString() {
-    return 'NftSellResponseEntity(nftId: $nftId, id: $id, price: $price, status: $status, symbol: $symbol, transactionsFee: $transactionsFee)';
+    return 'NftSellResponseEntity(message: $message)';
   }
 
   @override
@@ -189,24 +106,12 @@ class _$_NftSellResponseEntity implements _NftSellResponseEntity {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_NftSellResponseEntity &&
-            const DeepCollectionEquality().equals(other.nftId, nftId) &&
-            const DeepCollectionEquality().equals(other.id, id) &&
-            const DeepCollectionEquality().equals(other.price, price) &&
-            const DeepCollectionEquality().equals(other.status, status) &&
-            const DeepCollectionEquality().equals(other.symbol, symbol) &&
-            const DeepCollectionEquality()
-                .equals(other.transactionsFee, transactionsFee));
+            const DeepCollectionEquality().equals(other.message, message));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(nftId),
-      const DeepCollectionEquality().hash(id),
-      const DeepCollectionEquality().hash(price),
-      const DeepCollectionEquality().hash(status),
-      const DeepCollectionEquality().hash(symbol),
-      const DeepCollectionEquality().hash(transactionsFee));
+  int get hashCode =>
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(message));
 
   @JsonKey(ignore: true)
   @override
@@ -216,26 +121,11 @@ class _$_NftSellResponseEntity implements _NftSellResponseEntity {
 }
 
 abstract class _NftSellResponseEntity implements NftSellResponseEntity {
-  const factory _NftSellResponseEntity(
-      {required final int? nftId,
-      required final int? id,
-      required final String? price,
-      required final String? status,
-      required final String? symbol,
-      required final String? transactionsFee}) = _$_NftSellResponseEntity;
+  const factory _NftSellResponseEntity({required final String? message}) =
+      _$_NftSellResponseEntity;
 
   @override
-  int? get nftId;
-  @override
-  int? get id;
-  @override
-  String? get price;
-  @override
-  String? get status;
-  @override
-  String? get symbol;
-  @override
-  String? get transactionsFee;
+  String? get message;
   @override
   @JsonKey(ignore: true)
   _$$_NftSellResponseEntityCopyWith<_$_NftSellResponseEntity> get copyWith =>
