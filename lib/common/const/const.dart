@@ -39,9 +39,9 @@ class Const {
 
   static const String whitePaperInsuranceJa = '${whitePaperJa}insurance';
 
-  static const String normalGachaAudio = 'sounds/gacha.mp3';
+  static const String normalGachaAudio = 'assets/sounds/gacha.mp3';
   static const String normalGachaAnimation = 'assets/json/gacha.json';
-  static const String specialGachaAudio = 'sounds/special_gacha.mp3';
+  static const String specialGachaAudio = 'assets/sounds/special_gacha.mp3';
   static const String specialGachaAnimation = 'assets/json/special_gacha.json';
   static const String time = 'time';
   static const String sound = 'sound';
@@ -164,11 +164,11 @@ class Const {
   ];
 
   static const soundAlarm = [
-    'sounds/apex.mp3',
-    'sounds/crystals.mp3',
-    'sounds/iphone_alarm.mp3',
-    'sounds/reflection.mp3',
-    'sounds/school_alarm.mp3',
+    'assets/sounds/apex.mp3',
+    'assets/sounds/crystals.mp3',
+    'assets/sounds/iphone_alarm.mp3',
+    'assets/sounds/reflection.mp3',
+    'assets/sounds/school_alarm.mp3',
   ];
 
   Const._();

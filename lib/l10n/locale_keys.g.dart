@@ -463,5 +463,6 @@ abstract class  LocaleKeys {
   static const not_granted = 'not_granted';
   static const required_time = 'required_time';
   static const sleep_time = 'sleep_time';
+  static const put_positive_correct_to = 'put_positive_correct_to';
 
 }

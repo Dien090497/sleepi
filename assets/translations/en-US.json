@@ -460,5 +460,6 @@
   "latest": "Latest",
   "not_granted": "Authorization not granted",
   "required_time": "Required Time",
-  "sleep_time": "Sleep Time"
+  "sleep_time": "Sleep Time",
+  "put_positive_correct_to": "Put positive correction to {}"
 }

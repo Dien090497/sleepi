@@ -10,12 +10,15 @@ import 'package:slee_fi/models/chart_draw_days/chart_draw_days.dart';
 import 'package:slee_fi/presentation/blocs/chart/chart_day_state.dart';
 import 'package:slee_fi/usecase/fetch_data_chart_day_usecase.dart';
 import 'package:slee_fi/usecase/fetch_data_chart_usecase.dart';
+import 'package:slee_fi/usecase/get_slft_price_usecase.dart';
+import 'package:slee_fi/usecase/usecase.dart';
 
 class ChartDayCubit extends Cubit<ChartDayState> {
   ChartDayCubit() : super(const ChartDayState.initial());
 
   final _dateUtils = getIt<DateTimeUtils>();
   final _fetchDataDaysChartUseCase = getIt<FetchDataDaysChartUseCase>();
+  final _getSlftPriceUseCase = getIt<GetSlftPriceUseCase>();
 
   int maxY = 0;
   List<DrawChartEntity> listChart = [];
@@ -96,17 +99,23 @@ class ChartDayCubit extends Cubit<ChartDayState> {
       final result = await  _fetchDataDaysChartUseCase.call(params);
       result.fold((l) {
         emit(ChartDayState.error('$l'));
-      }, (result) {
+      }, (result) async {
         getDataChart(data: result.chartData, trackingResultChartDaysEntity: result, chart: TypeChart.chartDay);
-        if (fistLoad) {
-          final now = DateTime.now();
-          emit(ChartDayState.loaded(
-            selectedDate: now,
-            firstAllowedDate: DateTime.now().subtract(const Duration(days: 60)),
-            lastAllowedDate: DateTime.now(),
-            dataChart: listChart,
-          ));
-        }
+        final slftPrice = await _getSlftPriceUseCase.call(NoParams());
+        slftPrice.fold((l) {
+          emit(ChartDayState.error('$l'));
+        }, (price) {
+          if (fistLoad) {
+            final now = DateTime.now();
+            emit(ChartDayState.loaded(
+                selectedDate: now,
+                firstAllowedDate: DateTime.now().subtract(const Duration(days: 60)),
+                lastAllowedDate: DateTime.now(),
+                dataChart: listChart,
+                slftPrice: price,
+            ));
+          }
+        });
       });
      /* if (fistLoad) {
         final now = DateTime.now();
@@ -133,4 +142,5 @@ class ChartDayCubit extends Cubit<ChartDayState> {
       }*/
     }
   }
+
 }

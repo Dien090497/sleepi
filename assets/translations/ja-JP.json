@@ -206,7 +206,7 @@
   "range": "アラーム設定可能時間",
   "alarm_bell": "アラーム : ベル",
   "item_list": "アイテムリスト",
-  "bedbox" :"ベッドボックス",
+  "bedbox": "ベッドボックス",
   "bed_boxes": "ベッドボックス",
   "use": "使う",
   "type": "タイプ",
@@ -425,5 +425,6 @@
   "wallet_already_mapping" : "This wallet address has already existed in the system. Please import another address.",
   "latest": "Latest",
   "required_time": "Required Time",
-  "sleep_time": "Sleep Time"
+  "sleep_time": "Sleep Time",
+  "put_positive_correct_to": "Put positive correction to {}"
 }

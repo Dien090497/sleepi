@@ -1,5 +1,5 @@
 import 'package:equatable/equatable.dart';
-import 'package:slee_fi/entities/item_entity/item_entity.dart';
+import 'package:slee_fi/entities/bed_entity/bed_entity.dart';
 
 abstract class ItemEvent extends Equatable {
   const ItemEvent();
@@ -45,7 +45,7 @@ class FilterItemEvent extends ItemEvent {
 }
 
 class RemoveItemSuccessEvent extends ItemEvent {
-  final ItemEntity entity;
+  final BedEntity entity;
 
   const RemoveItemSuccessEvent(this.entity);
 
@@ -54,7 +54,7 @@ class RemoveItemSuccessEvent extends ItemEvent {
 }
 
 class AddItemSuccessEvent extends ItemEvent {
-  final ItemEntity entity;
+  final BedEntity entity;
 
   const AddItemSuccessEvent(this.entity);
 

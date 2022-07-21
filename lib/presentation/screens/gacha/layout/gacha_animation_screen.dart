@@ -1,5 +1,5 @@
-import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
+import 'package:just_audio/just_audio.dart';
 import 'package:lottie/lottie.dart';
 import 'package:slee_fi/common/const/const.dart';
 import 'package:slee_fi/common/routes/app_routes.dart';
@@ -16,7 +16,8 @@ class GachaAnimationArguments {
   final String audio;
   final String animation;
 
-  GachaAnimationArguments({required this.spinInfo, required this.animation, required this.audio});
+  GachaAnimationArguments(
+      {required this.spinInfo, required this.animation, required this.audio});
 }
 
 class GachaAnimationScreen extends StatefulWidget {
@@ -26,20 +27,22 @@ class GachaAnimationScreen extends StatefulWidget {
   State<GachaAnimationScreen> createState() => _GachaAnimationScreenState();
 }
 
-class _GachaAnimationScreenState extends State<GachaAnimationScreen> with TickerProviderStateMixin {
-   late AnimationController animationController;
-   final audioPlayer = AudioPlayer();
-   final randomUtils = getIt<RandomUtils>();
-   String image = '';
-    bool isShowResult = false;
+class _GachaAnimationScreenState extends State<GachaAnimationScreen>
+    with TickerProviderStateMixin {
+  late AnimationController animationController;
+  final audioPlayer = AudioPlayer();
+  final randomUtils = getIt<RandomUtils>();
+  String image = '';
+  bool isShowResult = false;
 
-   Future setAudio() async{
-     final args = ModalRoute.of(context)?.settings.arguments as GachaAnimationArguments?;
-     audioPlayer.setReleaseMode(ReleaseMode.loop);
-     audioPlayer.play(
-       AssetSource(args?.audio ?? Const.normalGachaAudio),
-     );
-   }
+  Future setAudio() async {
+    final args =
+        ModalRoute.of(context)?.settings.arguments as GachaAnimationArguments?;
+    audioPlayer.setAsset(args?.audio ?? Const.normalGachaAudio);
+    audioPlayer.setLoopMode(LoopMode.all);
+    audioPlayer.setVolume(1);
+    audioPlayer.play();
+  }
 
   @override
   void initState() {
@@ -48,32 +51,33 @@ class _GachaAnimationScreenState extends State<GachaAnimationScreen> with Ticker
       setAudio();
     });
 
-    animationController = AnimationController(
-        vsync: this);
-    animationController.addStatusListener((status) async{
-      final args = ModalRoute.of(context)?.settings.arguments as GachaAnimationArguments?;
-      if(status == AnimationStatus.completed){
-        if(args != null ){
-          if(args.spinInfo.gift.first.length == Const.one){
-            setState((){
+    animationController = AnimationController(vsync: this);
+    animationController.addStatusListener((status) async {
+      final args = ModalRoute.of(context)?.settings.arguments
+          as GachaAnimationArguments?;
+      if (status == AnimationStatus.completed) {
+        if (args != null) {
+          if (args.spinInfo.gift.first.length == Const.one) {
+            setState(() {
               isShowResult = true;
               image = randomUtils.gachaItem();
             });
             Future.delayed(const Duration(seconds: 3), () async {
               Navigator.pop(context);
               Navigator.pushNamed(context, R.gachaResultBed,
-                  arguments: GachaResultBedArguments(gachaSpinInfo: args.spinInfo , image: image));
+                  arguments: GachaResultBedArguments(
+                      gachaSpinInfo: args.spinInfo, image: image));
             });
-          }else {
+          } else {
             List<String> images = [];
             Navigator.pop(context);
-            for(var i = 0; i > args.spinInfo.gift.first.length; i++){
+            for (var i = 0; i > args.spinInfo.gift.first.length; i++) {
               images.add(randomUtils.gachaItem());
             }
             Navigator.pushNamed(context, R.allResult,
-                arguments: GachaAllResultBedArguments(gachaSpinInfo: args.spinInfo , images: images));
+                arguments: GachaAllResultBedArguments(
+                    gachaSpinInfo: args.spinInfo, images: images));
           }
-
         }
         animationController.reset();
       }
@@ -81,8 +85,9 @@ class _GachaAnimationScreenState extends State<GachaAnimationScreen> with Ticker
   }
 
   @override
-  void dispose(){
+  void dispose() {
     animationController.dispose();
+    audioPlayer.stop();
     audioPlayer.dispose();
     super.dispose();
   }

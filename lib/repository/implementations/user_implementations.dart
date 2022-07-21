@@ -7,7 +7,6 @@ import 'package:slee_fi/datasources/remote/auth_datasource/auth_datasource.dart'
 import 'package:slee_fi/datasources/remote/network/web3_datasource.dart';
 import 'package:slee_fi/entities/active_code/active_code_entity.dart';
 import 'package:slee_fi/entities/bed_entity/bed_entity.dart';
-import 'package:slee_fi/entities/item_entity/item_entity.dart';
 import 'package:slee_fi/entities/jewel_entity/jewel_entity.dart';
 import 'package:slee_fi/entities/tracking_result_chart_data_entity/tracking_result_chart_data_entity.dart';
 import 'package:slee_fi/entities/tracking_result_chart_days_entity/tracking_result_chart_days_entity.dart';
@@ -189,14 +188,14 @@ class UserImplementation extends IUserRepository {
   }
 
   @override
-  Future<Either<FailureMessage, List<ItemEntity>>> fetchItemOwner(
+  Future<Either<FailureMessage, List<BedEntity>>> fetchItemOwner(
       FilterItemSchema filterItemSchema) async {
-    // try {
+    try {
       final result = await _authDataSource.fetchItemOwner(filterItemSchema);
       return Right(result.list.map((e) => e.toEntity()).toList());
-    // } catch (e) {
-    //   return Left(FailureMessage.fromException(e));
-    // }
+    } catch (e) {
+      return Left(FailureMessage.fromException(e));
+    }
   }
 
   @override
@@ -335,6 +334,17 @@ class UserImplementation extends IUserRepository {
       var list = result.list.map((e) => e.toEntity()).toList();
       return Right(list);
     } catch (e) {
+      return Left(FailureMessage.fromException(e));
+    }
+  }
+
+  @override
+  Future<Either<FailureMessage, String>> getSlftPrice() async {
+    try {
+      final result = await _authDataSource.slftPrice();
+      return Right(result);
+    }
+    catch (e) {
       return Left(FailureMessage.fromException(e));
     }
   }

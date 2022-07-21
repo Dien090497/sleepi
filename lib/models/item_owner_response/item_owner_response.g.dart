@@ -9,7 +9,7 @@ part of 'item_owner_response.dart';
 ItemOwnerResponse _$ItemOwnerResponseFromJson(Map<String, dynamic> json) =>
     ItemOwnerResponse(
       (json['list'] as List<dynamic>)
-          .map((e) => ItemModel.fromJson(e as Map<String, dynamic>))
+          .map((e) => BedModel.fromJson(e as Map<String, dynamic>))
           .toList(),
       json['count'] as int,
     );

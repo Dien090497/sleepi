@@ -1,7 +1,6 @@
 import 'package:dartz/dartz.dart';
 import 'package:slee_fi/entities/active_code/active_code_entity.dart';
 import 'package:slee_fi/entities/bed_entity/bed_entity.dart';
-import 'package:slee_fi/entities/item_entity/item_entity.dart';
 import 'package:slee_fi/entities/jewel_entity/jewel_entity.dart';
 import 'package:slee_fi/entities/tracking_result_chart_data_entity/tracking_result_chart_data_entity.dart';
 import 'package:slee_fi/entities/tracking_result_chart_days_entity/tracking_result_chart_days_entity.dart';
@@ -56,7 +55,7 @@ abstract class IUserRepository {
   Future<Either<FailureMessage, ResponseModel>> removeItemInBed(
       AddItemToBedParam addItemToBedParam);
 
-  Future<Either<FailureMessage, List<ItemEntity>>> fetchItemOwner(
+  Future<Either<FailureMessage, List<BedEntity>>> fetchItemOwner(
       FilterItemSchema filterItemSchema);
 
   Future<Either<FailureMessage, List<LuckyBox>>> fetchLuckyBox();
@@ -90,4 +89,6 @@ abstract class IUserRepository {
 
   Future<Either<FailureMessage, List<JewelEntity>>> fetchListJewel(
       FetchHomeBedParam param);
+
+  Future<Either<FailureMessage, String>> getSlftPrice();
 }

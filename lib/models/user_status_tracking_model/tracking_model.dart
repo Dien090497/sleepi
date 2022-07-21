@@ -34,6 +34,7 @@ class TrackingModel {
     this.status,
     this.createdAt,
     this.updatedAt,
+    this.bedImage
   });
 
   final int? id;
@@ -65,6 +66,7 @@ class TrackingModel {
   final String? status;
   final DateTime? createdAt;
   final DateTime? updatedAt;
+  final String? bedImage;
 
   factory TrackingModel.fromJson(Map<String, dynamic> json) =>
       _$TrackingModelFromJson(json);
