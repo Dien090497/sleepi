@@ -273,4 +273,14 @@ class NFTImplementation extends INFTRepository {
       return Left(FailureMessage.fromException(e));
     }
   }
+
+  @override
+  Future<Either<Failure, NftSellResponseEntity>> cancelSell(num nftId) async {
+    try {
+      final result = await _authDataSource.nftCancelSell(nftId);
+      return Right(result.toEntity());
+    } catch (e) {
+      return Left(FailureMessage.fromException(e));
+    }
+  }
 }

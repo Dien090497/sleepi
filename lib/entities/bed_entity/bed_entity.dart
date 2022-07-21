@@ -35,5 +35,7 @@ class BedEntity with _$BedEntity {
     required double? endTime,
     required String? jewelType,
     required List<JewelEntity> jewels,
+    required String? statusNftSale,
+    required String? price,
   }) = _BedEntity;
 }
