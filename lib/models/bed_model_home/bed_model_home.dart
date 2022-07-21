@@ -78,7 +78,7 @@ class BedModelHome {
       contractAddress: contractAddress,
       quality: quality,
       owner: owner,
-      status: nft.status,
+      status: nft.status ?? '',
       durability: durability,
       isLock: -1,
       bedMint: bedMint,
@@ -101,7 +101,7 @@ class Nft {
   final int id;
   final int categoryId;
   final int isLock;
-  final String status;
+  final String? status;
 
   Nft(this.id, this.categoryId, this.isLock, this.status);
 

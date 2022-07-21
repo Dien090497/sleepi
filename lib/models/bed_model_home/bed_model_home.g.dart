@@ -71,7 +71,7 @@ Nft _$NftFromJson(Map<String, dynamic> json) => Nft(
       json['id'] as int,
       json['categoryId'] as int,
       json['isLock'] as int,
-      json['status'] as String,
+      json['status'] as String?,
     );
 
 Map<String, dynamic> _$NftToJson(Nft instance) => <String, dynamic>{

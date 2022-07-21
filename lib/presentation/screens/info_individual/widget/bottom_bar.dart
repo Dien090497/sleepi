@@ -98,7 +98,7 @@ class _BottomBarWidgetState extends State<BottomBarWidget> {
                 }
 
                 if (state is UpLevelSuccess) {
-                  Navigator.pop(context);
+                  Navigator.pop(context, true);
                   showSuccessfulDialog(context, null);
                 }
 
