@@ -52,6 +52,7 @@ class SplashScreen extends StatelessWidget {
                               : double.parse(state
                                   .userStatusTrackingModel!.tracking!.estEarn!),
                       fromRoute: R.splash,
+                      imageBed: state.userStatusTrackingModel?.tracking?.bedImage,
                     ),
                   );
                 } else {
