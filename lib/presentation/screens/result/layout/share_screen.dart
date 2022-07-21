@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:screenshot/screenshot.dart';
@@ -19,6 +21,7 @@ import 'package:slee_fi/presentation/screens/result/widgets/category_header_shar
 import 'package:slee_fi/presentation/screens/result/widgets/chart_statistic_share.dart';
 import 'package:slee_fi/presentation/screens/result/widgets/community_share.dart';
 import 'package:slee_fi/presentation/screens/result/widgets/sleepfi_qr.dart';
+import 'package:slee_fi/resources/resources.dart';
 
 class ShareScreen extends StatefulWidget {
   const ShareScreen({Key? key}) : super(key: key);
@@ -57,7 +60,7 @@ class _ShareScreenState extends State<ShareScreen> {
                       padding: const EdgeInsets.symmetric(horizontal: 16.0),
                       child: Column(
                         children: [
-                          _bodyShare(imgBed: shareArgs.imageBed ?? ''),
+                          _bodyShare(imgBed: shareArgs.imageBed ?? '', args: shareArgs),
                           const SizedBox(
                             height: 32,
                           ),
@@ -88,7 +91,7 @@ class _ShareScreenState extends State<ShareScreen> {
                   bottom: 0,
                   child: CommunityShare(
                     controller: screenshotController,
-                    widget: _bodyShare(imgBed: shareArgs.imageBed ?? ''),
+                    widget: _bodyShare(imgBed: shareArgs.imageBed ?? '', args: shareArgs),
                     cubit: cubit,
                   ),
                 ),
@@ -100,7 +103,7 @@ class _ShareScreenState extends State<ShareScreen> {
     );
   }
 
-  Widget _bodyShare ({required String imgBed}) {
+  Widget _bodyShare ({required String imgBed, required PreResultParams args}) {
     return Column(
         children: [
           Stack(
@@ -142,9 +145,8 @@ class _ShareScreenState extends State<ShareScreen> {
                               padding: const EdgeInsets.symmetric(
                                   vertical: 5, horizontal: 16),
                               child: SFText(
-                                keyText: 'A2347',
-                                style:
-                                TextStyles.white1w700size12,
+                                keyText: '${args.resultModel.id ?? ''}',
+                                style: TextStyles.white1w700size12,
                               ),
                             ),
                           ],
@@ -154,23 +156,25 @@ class _ShareScreenState extends State<ShareScreen> {
                     const SizedBox(
                       height: 16,
                     ),
-                    const CategoryHeaderShare(),
+                    CategoryHeaderShare(preResultParams: args,),
                     const SizedBox(
                       height: 12,
                     ),
-                    const Padding(
-                      padding:
-                      EdgeInsets.symmetric(horizontal: 16.0),
-                      child: ChartStatisticShare(
-                        titleBottom: false,
-                        maxValue: 100,
-                        typeTimeChart: TypeTimeChart.chartDay,
-                      ),
+                    Platform.isAndroid
+                        ? ((args.dataChart.isNotEmpty &&
+                        args.dataChart.first.maxX != -1)
+                        ? ChartStatisticShare(
+                      maxValue: 360,
+                      data: args.dataChart.first,
+                      typeTimeChart: TypeTimeChart.chartDay,
+                    )
+                        : const SizedBox())
+                        : const Padding(
+                      padding: EdgeInsets.only(bottom: 10),
+                      child: SFIcon(Ics.commingSoon),
                     ),
-                    const SizedBox(
-                      height: 10,
-                    ),
-                  ],
+                    const SizedBox(height: 10),
+                ],
                 ),
               ),
               const Positioned(
