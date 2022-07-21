@@ -1,16 +1,17 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:slee_fi/usecase/fetch_bed_usecase.dart';
 
 part 'upgrade_jewel_schema.g.dart';
 
 @JsonSerializable()
-class UpgradeJewelSchema {
+class UpgradeSchema {
   final List<String> nftIds;
-  final int upgradeType;
+  final CategoryType upgradeType;
 
-  UpgradeJewelSchema(this.nftIds, this.upgradeType);
+  UpgradeSchema(this.nftIds, this.upgradeType);
 
-  factory UpgradeJewelSchema.fromJson(Map<String, dynamic> json) =>
-      _$UpgradeJewelSchemaFromJson(json);
+  factory UpgradeSchema.fromJson(Map<String, dynamic> json) =>
+      _$UpgradeSchemaFromJson(json);
 
-  Map<String, dynamic> toJson() => _$UpgradeJewelSchemaToJson(this);
+  Map<String, dynamic> toJson() => _$UpgradeSchemaToJson(this);
 }

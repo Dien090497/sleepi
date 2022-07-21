@@ -7,6 +7,7 @@ import 'package:slee_fi/l10n/locale_keys.g.dart';
 import 'package:slee_fi/presentation/blocs/nft_list/nft_list_cubit.dart';
 import 'package:slee_fi/presentation/blocs/nft_list/nft_list_state.dart';
 import 'package:slee_fi/presentation/screens/home/widgets/my_item_short_widget.dart';
+import 'package:slee_fi/presentation/screens/product_detail/widgets/upgrade_item.dart';
 import 'package:slee_fi/presentation/screens/product_detail/widgets/upgrade_tab.dart';
 import 'package:slee_fi/usecase/fetch_bed_usecase.dart';
 
@@ -85,7 +86,7 @@ class _TabItemDetailState extends State<TabItemDetail> {
                                     );
                                   },
                                 ),
-                          const UpGradeTab(),
+                          const UpGradeItem(),
                         ],
                       ),
                     ),

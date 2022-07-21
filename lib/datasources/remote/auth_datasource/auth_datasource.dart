@@ -34,6 +34,8 @@ import 'package:slee_fi/models/swap_token_to_wallet_response/swap_token_to_walle
 import 'package:slee_fi/models/token_spending/token_spending.dart';
 import 'package:slee_fi/models/tracking_result_chart/tracking_result_chart.dart';
 import 'package:slee_fi/models/tracking_result_chart/tracking_result_chart_data.dart';
+import 'package:slee_fi/models/upgrade_jewel_info_response/upgrade_info_response.dart';
+import 'package:slee_fi/models/upgrade_jewel_response/upgrade_jewel_response.dart';
 import 'package:slee_fi/models/user_response/user_response.dart';
 import 'package:slee_fi/models/users_response/users_response.dart';
 import 'package:slee_fi/models/verify_response/verify_response.dart';
@@ -53,6 +55,7 @@ import 'package:slee_fi/schema/sign_up_schema/sign_up_schema.dart';
 import 'package:slee_fi/schema/speed_up_lucky_box_schema/speed_up_lucky_box_schema.dart';
 import 'package:slee_fi/schema/stacking_schema/stacking_schema.dart';
 import 'package:slee_fi/schema/update_point/update_point_schema.dart';
+import 'package:slee_fi/schema/upgrade_jewel_schame/upgrade_jewel_schema.dart';
 import 'package:slee_fi/schema/verify_schema/verify_schema.dart';
 import 'package:slee_fi/schema/verify_user_schema/verify_user_schema.dart';
 import 'package:slee_fi/schema/white_draw_token_schema/whit_draw_token_schema.dart';
@@ -303,4 +306,14 @@ abstract class AuthDataSource {
 
   @GET('/stacking/slft-price')
   Future<String> slftPrice();
+
+  /// upgrade jewel nft/upgrade'
+  @POST('/nft/upgrade')
+  Future<UpgradeJewelResponse> upgradeJewel(@Body() UpgradeSchema upgradeJewelSchema);
+
+  @GET('/nft/upgrade')
+  Future<UpgradeInfoResponse> upgradeInfo(
+    @Query('level') int level,
+    @Query('upgradeType') int upgradeType,
+  );
 }
