@@ -1,6 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:slee_fi/common/const/const.dart';
+import 'package:slee_fi/common/enum/enum.dart';
 import 'package:slee_fi/common/extensions/num_ext.dart';
 import 'package:slee_fi/common/routes/app_routes.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
@@ -77,11 +78,21 @@ class WalletDetailList extends StatelessWidget {
                                   ? Const.listTypeHistory.elementAt(0)
                                   : Const.listTypeHistory.elementAt(1),
                               tokenSymbol: tokenList[index].symbol,
-                              page: 1
-                          )));
+                              page: 1)));
                 } else {
-                  Navigator.pushNamed(context, R.nftDetail,
-                      arguments: NFTDetailArguments(tokenList[index]));
+                  Navigator.pushNamed(
+                    context,
+                    R.nftDetail,
+                    arguments: NFTDetailArguments(
+                      tokenList[index],
+                      [
+                        NftType.bed,
+                        NftType.jewel,
+                        NftType.bedbox,
+                        NftType.item,
+                      ][index - 4],
+                    ),
+                  );
                 }
               },
               child: ListTile(

@@ -6,19 +6,18 @@ import 'package:slee_fi/common/widgets/sf_icon.dart';
 import 'package:slee_fi/common/widgets/sf_percent_border.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
 import 'package:slee_fi/presentation/screens/product_detail/widgets/top_left_banner.dart';
-import 'package:slee_fi/resources/resources.dart';
 
 class MyBedShortWidget extends StatelessWidget {
   const MyBedShortWidget({
     Key? key,
-    // required this.bedType,
     required this.bedId,
     required this.type,
+    required this.image,
   }) : super(key: key);
 
-  // final BedType bedType;
   final BigInt? bedId;
   final String? type;
+  final String? image;
 
   @override
   Widget build(BuildContext context) {
@@ -44,7 +43,7 @@ class MyBedShortWidget extends StatelessWidget {
             child: Column(
               children: [
                 const Spacer(),
-                const SFIcon(Imgs.shortBed),
+                SFIcon(image ?? ''),
                 SizedBox(height: 24.h),
                 Container(
                   decoration: BoxDecoration(

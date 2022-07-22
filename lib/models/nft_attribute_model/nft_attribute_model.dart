@@ -13,6 +13,7 @@ class NftAttributeModel {
   final String? type;
   final String? classNft;
   final String? quality;
+  final String? image;
   final int? time;
   final int? level;
   final int? bedMint;
@@ -23,6 +24,15 @@ class NftAttributeModel {
   final double? bonus;
   final double? special;
   final double? resilience;
+  final int? id;
+  final String? nftName;
+  final String? nftType;
+  final String? jewelType;
+  final String? itemType;
+  final String? levelUpTime;
+  final int? isBurn;
+  final String? createdAt;
+  final String? updatedAt;
 
   NftAttributeModel(
     this.nftId,
@@ -42,6 +52,16 @@ class NftAttributeModel {
     this.resilience,
     this.tokenId,
     this.isMint,
+    this.image,
+    this.id,
+    this.nftName,
+    this.nftType,
+    this.jewelType,
+    this.itemType,
+    this.levelUpTime,
+    this.isBurn,
+    this.createdAt,
+    this.updatedAt,
   );
 
   factory NftAttributeModel.fromJson(Map<String, dynamic> json) =>
@@ -66,5 +86,7 @@ class NftAttributeModel {
         bonus: bonus,
         special: special,
         resilience: resilience,
+        name: nftName,
+        image: image,
       );
 }

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:slee_fi/common/enum/enum.dart';
 import 'package:slee_fi/common/extensions/num_ext.dart';
 import 'package:slee_fi/common/extensions/string_x.dart';
 import 'package:slee_fi/common/routes/app_routes.dart';
@@ -29,8 +30,9 @@ import 'package:slee_fi/resources/resources.dart';
 
 class NFTDetailArguments {
   final TokenEntity tokenEntity;
+  final NftType nftType;
 
-  NFTDetailArguments(this.tokenEntity);
+  NFTDetailArguments(this.tokenEntity, this.nftType);
 }
 
 class NFTDetailScreen extends StatelessWidget {
@@ -49,7 +51,8 @@ class NFTDetailScreen extends StatelessWidget {
         return BlocBuilder<WalletCubit, WalletState>(
           builder: (context, walletState) {
             if (walletState is WalletStateLoaded) {
-              nftDetailCubit.init(walletState.walletInfoEntity, token);
+              nftDetailCubit.init(
+                  walletState.walletInfoEntity, token, args.nftType);
             }
 
             return BlocProvider(
@@ -161,6 +164,7 @@ class NFTDetailScreen extends StatelessWidget {
                               return MyBedShortWidget(
                                 bedId: nft.attribute?.tokenId,
                                 type: nft.attribute?.type,
+                                image: nft.attribute?.image,
                               );
                             },
                             count: state.nftEntities.length,
