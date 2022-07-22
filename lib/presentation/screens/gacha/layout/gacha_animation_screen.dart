@@ -80,7 +80,6 @@ class _GachaAnimationScreenState extends State<GachaAnimationScreen>
               });
             }
 
-
             Future.delayed(const Duration(seconds: 3), () async {
               Navigator.pop(context);
               if(isNavigatorResult) {
@@ -91,7 +90,7 @@ class _GachaAnimationScreenState extends State<GachaAnimationScreen>
             });
           } else {
             List<String> images = [];
-            Navigator.pop(context);
+            Navigator.pop(context, true);
             for (var i = 0; i > args.spinInfo!.gift.length; i++) {
               images.add(randomUtils.gachaItem());
             }

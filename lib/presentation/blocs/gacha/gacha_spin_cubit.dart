@@ -23,7 +23,7 @@ class GachaSpinCubit extends Cubit<GachaSpinState> {
   final _gachaGetSpecialUC = getIt<GachaGetSpecialUseCase>();
 
 
-  init() async {
+  void init() async {
     gachaProbabilityConfig();
     final result = await _gachaHistoryUC.call(NoParams());
     result.fold((l) {

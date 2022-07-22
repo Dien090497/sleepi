@@ -326,7 +326,6 @@ class UserImplementation extends IUserRepository {
       var list = result.list.map((e) => e.toEntity()).toList();
       return Right(list);
     } catch (e) {
-      print('==--=${e.toString()}');
       return Left(FailureMessage.fromException(e));
     }
   }

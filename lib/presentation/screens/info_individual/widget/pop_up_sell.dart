@@ -44,7 +44,6 @@ class _PopUpSellState extends State<PopUpSell> {
 
   @override
   Widget build(BuildContext context) {
-    widget.cubit.getTransactionFee();
     return DismissKeyboardWidget(
       child: BlocBuilder<BottomBarInfoIndividualCubit, BottomBarInfoIndividualState>(
         bloc: widget.cubit,
@@ -154,7 +153,7 @@ class _PopUpSellState extends State<PopUpSell> {
                                 break;
                               case 2:
                                 widget.cubit.sellNFT(amount: controller.text, nftId: widget.bedEntity.nftId);
-                                Navigator.pop(context);
+                                //Navigator.pop(context);
                                 //showSuccessfulDialog(context, null);
                                 break;
                             }

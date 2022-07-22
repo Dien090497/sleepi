@@ -49,7 +49,7 @@ class TrackingScreen extends StatefulWidget {
 }
 
 class _TrackingScreenState extends State<TrackingScreen> {
-  late Timer timer;
+  late Timer _timer;
   late String timeAlarm = '';
   late double totalEarn = 0;
   late int time = 0;
@@ -77,15 +77,15 @@ class _TrackingScreenState extends State<TrackingScreen> {
       timeAlarm =
           '${wakeUp.hour < 10 ? '0${wakeUp.hour}' : wakeUp.hour}:${wakeUp.minute < 10 ? '0${wakeUp.minute}' : wakeUp.minute}';
       double x = totalEarn / time;
-      timer = Timer.periodic(
+      _timer = Timer.periodic(
         const Duration(minutes: 1),
         (Timer timer) async {
           if (!mounted) return;
-          if (earn < totalEarn && x > 0) {
+          if (earn < totalEarn) {
             earn += x;
             setState(() {});
           } else {
-            timer.cancel();
+            _timer.cancel();
           }
         },
       );
@@ -96,7 +96,7 @@ class _TrackingScreenState extends State<TrackingScreen> {
 
   @override
   void dispose() {
-    timer.cancel();
+    _timer.cancel();
     super.dispose();
   }
 
