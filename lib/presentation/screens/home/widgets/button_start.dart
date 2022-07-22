@@ -3,10 +3,13 @@ import 'dart:async';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:external_app_launcher/external_app_launcher.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:focus_detector/focus_detector.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
 import 'package:slee_fi/common/widgets/sf_buttons.dart';
 import 'package:slee_fi/l10n/locale_keys.g.dart';
+import 'package:slee_fi/presentation/blocs/home/home_bloc.dart';
 
 class ButtonStart extends StatefulWidget {
   const ButtonStart({
@@ -29,38 +32,43 @@ class _ButtonStartState extends State<ButtonStart> {
 
   @override
   Widget build(BuildContext context) {
-    return HomeStartButton(
-      radius: 100,
-      gradient: widget.enableStart && countDownEnded
-          ? AppColors.gradientBlueButton
-          : null,
-      color: AppColors.lightDark,
-      height: 40,
-      disabled: !(widget.enableStart && countDownEnded),
-      width: double.infinity,
-      onPressed: () async {
-        final isAppInstalled = await LaunchApp.isAppInstalled(
-          androidPackageName: 'com.google.android.apps.fitness',
-          iosUrlScheme: 'x-apple-health://',
-        );
-        if (isAppInstalled) {
-          widget.onStartTracking();
-        } else {
-          await LaunchApp.openApp(
+    return FocusDetector(
+      onFocusGained: () {
+        context.read<HomeBloc>().add(const RefreshBed());
+      },
+      child: HomeStartButton(
+        radius: 100,
+        gradient: widget.enableStart && countDownEnded
+            ? AppColors.gradientBlueButton
+            : null,
+        color: AppColors.lightDark,
+        height: 40,
+        disabled: !(widget.enableStart && countDownEnded),
+        width: double.infinity,
+        onPressed: () async {
+          final isAppInstalled = await LaunchApp.isAppInstalled(
             androidPackageName: 'com.google.android.apps.fitness',
             iosUrlScheme: 'x-apple-health://',
-            appStoreLink:
-                'itms-apps://itunes.apple.com/us/app/apple-health/id1242545199',
-            // openStore: false
           );
-        }
-      },
-      child: _CountDownText(
-        onEnd: () {
-          countDownEnded = true;
-          setState(() {});
+          if (isAppInstalled) {
+            widget.onStartTracking();
+          } else {
+            await LaunchApp.openApp(
+              androidPackageName: 'com.google.android.apps.fitness',
+              iosUrlScheme: 'x-apple-health://',
+              appStoreLink:
+                  'itms-apps://itunes.apple.com/us/app/apple-health/id1242545199',
+              // openStore: false
+            );
+          }
         },
-        availableAt: widget.availableAt,
+        child: _CountDownText(
+          onEnd: () {
+            countDownEnded = true;
+            setState(() {});
+          },
+          availableAt: widget.availableAt,
+        ),
       ),
     );
   }
@@ -79,7 +87,7 @@ class _CountDownText extends StatefulWidget {
 }
 
 class _CountDownTextState extends State<_CountDownText> {
-  late Timer _timer;
+  Timer? _timer;
   int startTime = 0;
   int? availableAt;
 
@@ -101,7 +109,7 @@ class _CountDownTextState extends State<_CountDownText> {
           oneSec,
           (Timer timer) {
             if (startTime == 0) {
-              _timer.cancel();
+              _timer?.cancel();
               widget.onEnd();
             } else {
               if (!mounted) return;
@@ -129,7 +137,7 @@ class _CountDownTextState extends State<_CountDownText> {
 
   @override
   void dispose() {
-    _timer.cancel();
+    _timer?.cancel();
     super.dispose();
   }
 
