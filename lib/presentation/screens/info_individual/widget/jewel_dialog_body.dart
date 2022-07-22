@@ -60,7 +60,7 @@ class JewelDialogBody extends StatelessWidget {
             ),
             const SizedBox(height: 20),
             SFText(
-              keyText: '${jewel.jewelType?.tr() ?? ' item type'} ${LocaleKeys.jewel.tr()} (${jewel.level})',
+              keyText: '${jewel.jewelType.tr() } ${LocaleKeys.jewel.tr()} (${jewel.level})',
               style: TextStyles.white1w700size16,
             ),
             const SizedBox(height: 24),
@@ -89,7 +89,7 @@ class JewelDialogBody extends StatelessWidget {
                   Expanded(
                     child: SFText(
                       keyText:
-                          '+example% ${jewel.type.tr()} Res.',
+                          '+${jewel.infoBuff}% ${jewel.type.tr()} Res.',
                       style: TextStyles.blue16,
                       textAlign: TextAlign.right,
                     ),

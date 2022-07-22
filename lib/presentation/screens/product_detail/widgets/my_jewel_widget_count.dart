@@ -16,11 +16,13 @@ class MyJewelsWidgetCount extends StatelessWidget {
     required this.jewel,
     this.color,
     this.count,
+    required this.isJewel,
   }) : super(key: key);
 
   final BedEntity jewel;
   final Color? color;
   final int? count;
+  final bool isJewel;
 
   @override
   Widget build(BuildContext context) {
@@ -60,7 +62,8 @@ class MyJewelsWidgetCount extends StatelessWidget {
                 padding: const EdgeInsets.symmetric(vertical: 5),
                 alignment: Alignment.center,
                 child: SFText(
-                  keyText: '${jewel.jewelType?.tr()} ${LocaleKeys.jewel.tr()} ($count)',
+                  keyText:
+                      '${jewel.jewelType?.tr()} ${!isJewel ? LocaleKeys.item.tr() : LocaleKeys.jewel.tr()} ($count)',
                   style:
                       TextStyles.white1w700size12.copyWith(color: qualityColor),
                 ),

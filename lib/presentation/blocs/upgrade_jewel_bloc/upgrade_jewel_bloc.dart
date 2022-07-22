@@ -23,9 +23,12 @@ class JewelBloc extends Bloc<JewelEvent, JewelState> {
     on<JewelLoading>(_loadingJewel);
   }
 
- late CategoryType categoryType;
+  CategoryType categoryType = CategoryType.jewel;
 
-  FutureOr<void> _onInitEvent(InitEvent event, Emitter<JewelState> emit) {}
+  FutureOr<void> _onInitEvent(InitEvent event, Emitter<JewelState> emit) {
+    categoryType = event.categoryType;
+    add(const JewelFetchList());
+  }
 
   final int _limit = 10;
   int _currentPage = 1;
@@ -35,19 +38,22 @@ class JewelBloc extends Bloc<JewelEvent, JewelState> {
   final _upgradeJewelUseCase = getIt<UpgradeUseCase>();
 
   void _fetchJewels(JewelFetchList event, Emitter<JewelState> emit) async {
-    final result = await _fetchListJewelUC.call(
-        FetchBedParam(_currentPage, _limit, categoryType));
+    final result = await _fetchListJewelUC
+        .call(FetchBedParam(_currentPage, _limit, categoryType));
     result.fold((l) {
+      print('on error load list   ${l.msg}');
       emit(const JewelStateLoaded(
           jewels: [], isLoadMore: false, loading: false));
     }, (success) {
+      print('load list success   ${success.length}');
       final currentState = state;
+      final length = success.length;
+      success.removeWhere((element) => element.isBurn !=0);
       if (currentState is JewelStateLoaded && _currentPage != 1) {
         final list = currentState.jewels + success;
-        emit(currentState.copyWith(jewels: list));
+        emit(currentState.copyWith(jewels: list, isLoadMore: length >= _limit));
       } else {
-        emit(JewelStateLoaded(
-            jewels: success, isLoadMore: success.length >= _limit));
+        emit(JewelStateLoaded(jewels: success, isLoadMore: length >= _limit));
       }
 
       _currentPage++;
@@ -64,7 +70,7 @@ class JewelBloc extends Bloc<JewelEvent, JewelState> {
     add(const JewelLoading(true));
 
     final result = await _getInfoUpgrade
-        .call(UpgradeInfoParam(event.jewels.first.level, CategoryType.jewel));
+        .call(UpgradeInfoParam(event.jewels.first.level, categoryType));
     result.fold((l) {
       final currentState = state;
       if (currentState is JewelStateLoaded && _currentPage != 1) {
@@ -105,7 +111,7 @@ class JewelBloc extends Bloc<JewelEvent, JewelState> {
 
     final result = await _upgradeJewelUseCase.call(UpgradeSchema(
       currentState.jewelsUpgrade.map((e) => e.nftId.toString()).toList(),
-      CategoryType.jewel,
+      categoryType,
     ));
     result.fold((l) {
       final currentState = state;
