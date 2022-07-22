@@ -128,7 +128,7 @@ class JewelBloc extends Bloc<JewelEvent, JewelState> {
       emit(currentState.copyWith(
         loading: false,
         upgradeInfoResponse: null,
-        upgradeSuccess: true,
+        upgradeSuccess: r,
         jewelsUpgrade: [],
         jewels: temp,
       ));
@@ -141,7 +141,7 @@ class JewelBloc extends Bloc<JewelEvent, JewelState> {
       emit(currentState.copyWith(
         loading: event.isLoading,
         errorMessage: null,
-        upgradeSuccess: false,
+        upgradeSuccess: null,
       ));
     }
   }
