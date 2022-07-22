@@ -11,6 +11,9 @@ class Const {
 
   static const int passcodeLength = 6;
 
+  static const double bedMintMax = 7;
+  static const double bedLevelMax = 30;
+
   /// GWei
   static const double gasPrice = 1.5;
 

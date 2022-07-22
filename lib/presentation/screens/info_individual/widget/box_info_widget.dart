@@ -1,6 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:slee_fi/common/const/const.dart';
 import 'package:slee_fi/common/extensions/num_ext.dart';
 import 'package:slee_fi/common/extensions/string_x.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
@@ -10,6 +11,7 @@ import 'package:slee_fi/common/widgets/sf_percent_border.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
 import 'package:slee_fi/entities/bed_entity/bed_entity.dart';
 import 'package:slee_fi/l10n/locale_keys.g.dart';
+import 'dart:math' as math;
 
 class BoxInfoWidget extends StatelessWidget {
   const BoxInfoWidget({
@@ -65,8 +67,8 @@ class BoxInfoWidget extends StatelessWidget {
                 ),
                 padding:
                     const EdgeInsets.symmetric(vertical: 8, horizontal: 18),
-                child: Text(
-                  bed.type.reCase(StringCase.titleCase),
+                child: SFText(
+                  keyText: bed.nftClass,
                   style: TextStyles.green14,
                 ),
               ),
@@ -93,8 +95,9 @@ class BoxInfoWidget extends StatelessWidget {
               alignment: Alignment.centerLeft,
               children: [
                 SFPercentBorderGradient(
-                  valueActive: 20,
-                  totalValue: 100,
+                  valueActive:
+                      math.min(bed.level.toDouble(), Const.bedLevelMax),
+                  totalValue: Const.bedLevelMax,
                   linearGradient: AppColors.gradientBlueButton,
                   lineHeight: 18,
                   barRadius: 20,
@@ -114,8 +117,9 @@ class BoxInfoWidget extends StatelessWidget {
               alignment: Alignment.centerLeft,
               children: [
                 SFPercentBorderGradient(
-                  valueActive: bed.isMint.toDouble(),
-                  totalValue: bed.bedMint.toDouble(),
+                  valueActive:
+                      math.min(bed.bedMint.toDouble(), Const.bedMintMax),
+                  totalValue: Const.bedMintMax,
                   linearGradient: AppColors.gradientBluePurple,
                   lineHeight: 18,
                   barRadius: 20,
@@ -124,7 +128,7 @@ class BoxInfoWidget extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 16.0),
                   child: Text(
-                    '${LocaleKeys.bed_mint.tr()} ${bed.isMint}/${bed.bedMint}',
+                    '${LocaleKeys.bed_mint.tr()} ${bed.bedMint}/${Const.bedMintMax}',
                     style: TextStyles.white10,
                   ),
                 )

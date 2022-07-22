@@ -28,7 +28,9 @@ BedModel _$BedModelFromJson(Map<String, dynamic> json) => BedModel(
       json['classNft'] as String?,
       json['tokenId'] as int,
       json['durability'],
-      Nft.fromJson(json['nft'] as Map<String, dynamic>),
+      json['nft'] == null
+          ? null
+          : Nft.fromJson(json['nft'] as Map<String, dynamic>),
       json['jewelType'] as String?,
       json['itemType'],
       json['effect'],
@@ -39,7 +41,9 @@ BedModel _$BedModelFromJson(Map<String, dynamic> json) => BedModel(
           ?.map((e) => JewelModel.fromJson(e as Map<String, dynamic>))
           .toList(),
       json['isBurn'] as int?,
-      NftSale.fromJson(json['nftSale'] as Map<String, dynamic>),
+      json['nftSale'] == null
+          ? null
+          : NftSale.fromJson(json['nftSale'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$BedModelToJson(BedModel instance) => <String, dynamic>{
@@ -69,8 +73,8 @@ Map<String, dynamic> _$BedModelToJson(BedModel instance) => <String, dynamic>{
       'socket': instance.socket,
       'jewels': instance.jewels?.map((e) => e.toJson()).toList(),
       'tokenId': instance.tokenId,
-      'nft': instance.nft.toJson(),
-      'nftSale': instance.nftSale.toJson(),
+      'nft': instance.nft?.toJson(),
+      'nftSale': instance.nftSale?.toJson(),
       'insurancePercent': instance.insurancePercent,
       'startTime': instance.startTime,
       'endTime': instance.endTime,
