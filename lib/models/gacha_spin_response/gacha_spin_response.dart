@@ -5,7 +5,7 @@ part 'gacha_spin_response.g.dart';
 @JsonSerializable()
 class GachaSpinResponse{
   final String status;
-  final List<List<GachaGift>> gift;
+  final List<dynamic> gift;
 
   GachaSpinResponse({
     required this.status,

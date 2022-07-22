@@ -22,6 +22,12 @@ mixin _$GachaSpinState {
     required TResult Function() done,
     required TResult Function() loading,
     required TResult Function(GachaSpinResponse gachaSpinResponse) success,
+    required TResult Function(
+            GachaProbabilityConfigResponse gachaProbabilityConfigResponse)
+        probabilityConfigSuccess,
+    required TResult Function(GachaHistoryResponse response)
+        gachaHistorySuccess,
+    required TResult Function(GachaSpinResponse response) gachaGetSuccess,
     required TResult Function(String msg) fail,
   }) =>
       throw _privateConstructorUsedError;
@@ -31,6 +37,11 @@ mixin _$GachaSpinState {
     TResult Function()? done,
     TResult Function()? loading,
     TResult Function(GachaSpinResponse gachaSpinResponse)? success,
+    TResult Function(
+            GachaProbabilityConfigResponse gachaProbabilityConfigResponse)?
+        probabilityConfigSuccess,
+    TResult Function(GachaHistoryResponse response)? gachaHistorySuccess,
+    TResult Function(GachaSpinResponse response)? gachaGetSuccess,
     TResult Function(String msg)? fail,
   }) =>
       throw _privateConstructorUsedError;
@@ -40,6 +51,11 @@ mixin _$GachaSpinState {
     TResult Function()? done,
     TResult Function()? loading,
     TResult Function(GachaSpinResponse gachaSpinResponse)? success,
+    TResult Function(
+            GachaProbabilityConfigResponse gachaProbabilityConfigResponse)?
+        probabilityConfigSuccess,
+    TResult Function(GachaHistoryResponse response)? gachaHistorySuccess,
+    TResult Function(GachaSpinResponse response)? gachaGetSuccess,
     TResult Function(String msg)? fail,
     required TResult orElse(),
   }) =>
@@ -50,6 +66,10 @@ mixin _$GachaSpinState {
     required TResult Function(gachaSpinDone value) done,
     required TResult Function(GachaSpinLoading value) loading,
     required TResult Function(GachaSpinSuccess value) success,
+    required TResult Function(GachaProbabilityConfigSuccess value)
+        probabilityConfigSuccess,
+    required TResult Function(GachaHistorySuccess value) gachaHistorySuccess,
+    required TResult Function(GachaGetSuccess value) gachaGetSuccess,
     required TResult Function(GachaSpinFailed value) fail,
   }) =>
       throw _privateConstructorUsedError;
@@ -59,6 +79,10 @@ mixin _$GachaSpinState {
     TResult Function(gachaSpinDone value)? done,
     TResult Function(GachaSpinLoading value)? loading,
     TResult Function(GachaSpinSuccess value)? success,
+    TResult Function(GachaProbabilityConfigSuccess value)?
+        probabilityConfigSuccess,
+    TResult Function(GachaHistorySuccess value)? gachaHistorySuccess,
+    TResult Function(GachaGetSuccess value)? gachaGetSuccess,
     TResult Function(GachaSpinFailed value)? fail,
   }) =>
       throw _privateConstructorUsedError;
@@ -68,6 +92,10 @@ mixin _$GachaSpinState {
     TResult Function(gachaSpinDone value)? done,
     TResult Function(GachaSpinLoading value)? loading,
     TResult Function(GachaSpinSuccess value)? success,
+    TResult Function(GachaProbabilityConfigSuccess value)?
+        probabilityConfigSuccess,
+    TResult Function(GachaHistorySuccess value)? gachaHistorySuccess,
+    TResult Function(GachaGetSuccess value)? gachaGetSuccess,
     TResult Function(GachaSpinFailed value)? fail,
     required TResult orElse(),
   }) =>
@@ -162,6 +190,12 @@ class _$GachaSpinStateInitial implements GachaSpinStateInitial {
     required TResult Function() done,
     required TResult Function() loading,
     required TResult Function(GachaSpinResponse gachaSpinResponse) success,
+    required TResult Function(
+            GachaProbabilityConfigResponse gachaProbabilityConfigResponse)
+        probabilityConfigSuccess,
+    required TResult Function(GachaHistoryResponse response)
+        gachaHistorySuccess,
+    required TResult Function(GachaSpinResponse response) gachaGetSuccess,
     required TResult Function(String msg) fail,
   }) {
     return initial(isLoading);
@@ -174,6 +208,11 @@ class _$GachaSpinStateInitial implements GachaSpinStateInitial {
     TResult Function()? done,
     TResult Function()? loading,
     TResult Function(GachaSpinResponse gachaSpinResponse)? success,
+    TResult Function(
+            GachaProbabilityConfigResponse gachaProbabilityConfigResponse)?
+        probabilityConfigSuccess,
+    TResult Function(GachaHistoryResponse response)? gachaHistorySuccess,
+    TResult Function(GachaSpinResponse response)? gachaGetSuccess,
     TResult Function(String msg)? fail,
   }) {
     return initial?.call(isLoading);
@@ -186,6 +225,11 @@ class _$GachaSpinStateInitial implements GachaSpinStateInitial {
     TResult Function()? done,
     TResult Function()? loading,
     TResult Function(GachaSpinResponse gachaSpinResponse)? success,
+    TResult Function(
+            GachaProbabilityConfigResponse gachaProbabilityConfigResponse)?
+        probabilityConfigSuccess,
+    TResult Function(GachaHistoryResponse response)? gachaHistorySuccess,
+    TResult Function(GachaSpinResponse response)? gachaGetSuccess,
     TResult Function(String msg)? fail,
     required TResult orElse(),
   }) {
@@ -202,6 +246,10 @@ class _$GachaSpinStateInitial implements GachaSpinStateInitial {
     required TResult Function(gachaSpinDone value) done,
     required TResult Function(GachaSpinLoading value) loading,
     required TResult Function(GachaSpinSuccess value) success,
+    required TResult Function(GachaProbabilityConfigSuccess value)
+        probabilityConfigSuccess,
+    required TResult Function(GachaHistorySuccess value) gachaHistorySuccess,
+    required TResult Function(GachaGetSuccess value) gachaGetSuccess,
     required TResult Function(GachaSpinFailed value) fail,
   }) {
     return initial(this);
@@ -214,6 +262,10 @@ class _$GachaSpinStateInitial implements GachaSpinStateInitial {
     TResult Function(gachaSpinDone value)? done,
     TResult Function(GachaSpinLoading value)? loading,
     TResult Function(GachaSpinSuccess value)? success,
+    TResult Function(GachaProbabilityConfigSuccess value)?
+        probabilityConfigSuccess,
+    TResult Function(GachaHistorySuccess value)? gachaHistorySuccess,
+    TResult Function(GachaGetSuccess value)? gachaGetSuccess,
     TResult Function(GachaSpinFailed value)? fail,
   }) {
     return initial?.call(this);
@@ -226,6 +278,10 @@ class _$GachaSpinStateInitial implements GachaSpinStateInitial {
     TResult Function(gachaSpinDone value)? done,
     TResult Function(GachaSpinLoading value)? loading,
     TResult Function(GachaSpinSuccess value)? success,
+    TResult Function(GachaProbabilityConfigSuccess value)?
+        probabilityConfigSuccess,
+    TResult Function(GachaHistorySuccess value)? gachaHistorySuccess,
+    TResult Function(GachaGetSuccess value)? gachaGetSuccess,
     TResult Function(GachaSpinFailed value)? fail,
     required TResult orElse(),
   }) {
@@ -291,6 +347,12 @@ class _$gachaSpinDone implements gachaSpinDone {
     required TResult Function() done,
     required TResult Function() loading,
     required TResult Function(GachaSpinResponse gachaSpinResponse) success,
+    required TResult Function(
+            GachaProbabilityConfigResponse gachaProbabilityConfigResponse)
+        probabilityConfigSuccess,
+    required TResult Function(GachaHistoryResponse response)
+        gachaHistorySuccess,
+    required TResult Function(GachaSpinResponse response) gachaGetSuccess,
     required TResult Function(String msg) fail,
   }) {
     return done();
@@ -303,6 +365,11 @@ class _$gachaSpinDone implements gachaSpinDone {
     TResult Function()? done,
     TResult Function()? loading,
     TResult Function(GachaSpinResponse gachaSpinResponse)? success,
+    TResult Function(
+            GachaProbabilityConfigResponse gachaProbabilityConfigResponse)?
+        probabilityConfigSuccess,
+    TResult Function(GachaHistoryResponse response)? gachaHistorySuccess,
+    TResult Function(GachaSpinResponse response)? gachaGetSuccess,
     TResult Function(String msg)? fail,
   }) {
     return done?.call();
@@ -315,6 +382,11 @@ class _$gachaSpinDone implements gachaSpinDone {
     TResult Function()? done,
     TResult Function()? loading,
     TResult Function(GachaSpinResponse gachaSpinResponse)? success,
+    TResult Function(
+            GachaProbabilityConfigResponse gachaProbabilityConfigResponse)?
+        probabilityConfigSuccess,
+    TResult Function(GachaHistoryResponse response)? gachaHistorySuccess,
+    TResult Function(GachaSpinResponse response)? gachaGetSuccess,
     TResult Function(String msg)? fail,
     required TResult orElse(),
   }) {
@@ -331,6 +403,10 @@ class _$gachaSpinDone implements gachaSpinDone {
     required TResult Function(gachaSpinDone value) done,
     required TResult Function(GachaSpinLoading value) loading,
     required TResult Function(GachaSpinSuccess value) success,
+    required TResult Function(GachaProbabilityConfigSuccess value)
+        probabilityConfigSuccess,
+    required TResult Function(GachaHistorySuccess value) gachaHistorySuccess,
+    required TResult Function(GachaGetSuccess value) gachaGetSuccess,
     required TResult Function(GachaSpinFailed value) fail,
   }) {
     return done(this);
@@ -343,6 +419,10 @@ class _$gachaSpinDone implements gachaSpinDone {
     TResult Function(gachaSpinDone value)? done,
     TResult Function(GachaSpinLoading value)? loading,
     TResult Function(GachaSpinSuccess value)? success,
+    TResult Function(GachaProbabilityConfigSuccess value)?
+        probabilityConfigSuccess,
+    TResult Function(GachaHistorySuccess value)? gachaHistorySuccess,
+    TResult Function(GachaGetSuccess value)? gachaGetSuccess,
     TResult Function(GachaSpinFailed value)? fail,
   }) {
     return done?.call(this);
@@ -355,6 +435,10 @@ class _$gachaSpinDone implements gachaSpinDone {
     TResult Function(gachaSpinDone value)? done,
     TResult Function(GachaSpinLoading value)? loading,
     TResult Function(GachaSpinSuccess value)? success,
+    TResult Function(GachaProbabilityConfigSuccess value)?
+        probabilityConfigSuccess,
+    TResult Function(GachaHistorySuccess value)? gachaHistorySuccess,
+    TResult Function(GachaGetSuccess value)? gachaGetSuccess,
     TResult Function(GachaSpinFailed value)? fail,
     required TResult orElse(),
   }) {
@@ -414,6 +498,12 @@ class _$GachaSpinLoading implements GachaSpinLoading {
     required TResult Function() done,
     required TResult Function() loading,
     required TResult Function(GachaSpinResponse gachaSpinResponse) success,
+    required TResult Function(
+            GachaProbabilityConfigResponse gachaProbabilityConfigResponse)
+        probabilityConfigSuccess,
+    required TResult Function(GachaHistoryResponse response)
+        gachaHistorySuccess,
+    required TResult Function(GachaSpinResponse response) gachaGetSuccess,
     required TResult Function(String msg) fail,
   }) {
     return loading();
@@ -426,6 +516,11 @@ class _$GachaSpinLoading implements GachaSpinLoading {
     TResult Function()? done,
     TResult Function()? loading,
     TResult Function(GachaSpinResponse gachaSpinResponse)? success,
+    TResult Function(
+            GachaProbabilityConfigResponse gachaProbabilityConfigResponse)?
+        probabilityConfigSuccess,
+    TResult Function(GachaHistoryResponse response)? gachaHistorySuccess,
+    TResult Function(GachaSpinResponse response)? gachaGetSuccess,
     TResult Function(String msg)? fail,
   }) {
     return loading?.call();
@@ -438,6 +533,11 @@ class _$GachaSpinLoading implements GachaSpinLoading {
     TResult Function()? done,
     TResult Function()? loading,
     TResult Function(GachaSpinResponse gachaSpinResponse)? success,
+    TResult Function(
+            GachaProbabilityConfigResponse gachaProbabilityConfigResponse)?
+        probabilityConfigSuccess,
+    TResult Function(GachaHistoryResponse response)? gachaHistorySuccess,
+    TResult Function(GachaSpinResponse response)? gachaGetSuccess,
     TResult Function(String msg)? fail,
     required TResult orElse(),
   }) {
@@ -454,6 +554,10 @@ class _$GachaSpinLoading implements GachaSpinLoading {
     required TResult Function(gachaSpinDone value) done,
     required TResult Function(GachaSpinLoading value) loading,
     required TResult Function(GachaSpinSuccess value) success,
+    required TResult Function(GachaProbabilityConfigSuccess value)
+        probabilityConfigSuccess,
+    required TResult Function(GachaHistorySuccess value) gachaHistorySuccess,
+    required TResult Function(GachaGetSuccess value) gachaGetSuccess,
     required TResult Function(GachaSpinFailed value) fail,
   }) {
     return loading(this);
@@ -466,6 +570,10 @@ class _$GachaSpinLoading implements GachaSpinLoading {
     TResult Function(gachaSpinDone value)? done,
     TResult Function(GachaSpinLoading value)? loading,
     TResult Function(GachaSpinSuccess value)? success,
+    TResult Function(GachaProbabilityConfigSuccess value)?
+        probabilityConfigSuccess,
+    TResult Function(GachaHistorySuccess value)? gachaHistorySuccess,
+    TResult Function(GachaGetSuccess value)? gachaGetSuccess,
     TResult Function(GachaSpinFailed value)? fail,
   }) {
     return loading?.call(this);
@@ -478,6 +586,10 @@ class _$GachaSpinLoading implements GachaSpinLoading {
     TResult Function(gachaSpinDone value)? done,
     TResult Function(GachaSpinLoading value)? loading,
     TResult Function(GachaSpinSuccess value)? success,
+    TResult Function(GachaProbabilityConfigSuccess value)?
+        probabilityConfigSuccess,
+    TResult Function(GachaHistorySuccess value)? gachaHistorySuccess,
+    TResult Function(GachaGetSuccess value)? gachaGetSuccess,
     TResult Function(GachaSpinFailed value)? fail,
     required TResult orElse(),
   }) {
@@ -562,6 +674,12 @@ class _$GachaSpinSuccess implements GachaSpinSuccess {
     required TResult Function() done,
     required TResult Function() loading,
     required TResult Function(GachaSpinResponse gachaSpinResponse) success,
+    required TResult Function(
+            GachaProbabilityConfigResponse gachaProbabilityConfigResponse)
+        probabilityConfigSuccess,
+    required TResult Function(GachaHistoryResponse response)
+        gachaHistorySuccess,
+    required TResult Function(GachaSpinResponse response) gachaGetSuccess,
     required TResult Function(String msg) fail,
   }) {
     return success(gachaSpinResponse);
@@ -574,6 +692,11 @@ class _$GachaSpinSuccess implements GachaSpinSuccess {
     TResult Function()? done,
     TResult Function()? loading,
     TResult Function(GachaSpinResponse gachaSpinResponse)? success,
+    TResult Function(
+            GachaProbabilityConfigResponse gachaProbabilityConfigResponse)?
+        probabilityConfigSuccess,
+    TResult Function(GachaHistoryResponse response)? gachaHistorySuccess,
+    TResult Function(GachaSpinResponse response)? gachaGetSuccess,
     TResult Function(String msg)? fail,
   }) {
     return success?.call(gachaSpinResponse);
@@ -586,6 +709,11 @@ class _$GachaSpinSuccess implements GachaSpinSuccess {
     TResult Function()? done,
     TResult Function()? loading,
     TResult Function(GachaSpinResponse gachaSpinResponse)? success,
+    TResult Function(
+            GachaProbabilityConfigResponse gachaProbabilityConfigResponse)?
+        probabilityConfigSuccess,
+    TResult Function(GachaHistoryResponse response)? gachaHistorySuccess,
+    TResult Function(GachaSpinResponse response)? gachaGetSuccess,
     TResult Function(String msg)? fail,
     required TResult orElse(),
   }) {
@@ -602,6 +730,10 @@ class _$GachaSpinSuccess implements GachaSpinSuccess {
     required TResult Function(gachaSpinDone value) done,
     required TResult Function(GachaSpinLoading value) loading,
     required TResult Function(GachaSpinSuccess value) success,
+    required TResult Function(GachaProbabilityConfigSuccess value)
+        probabilityConfigSuccess,
+    required TResult Function(GachaHistorySuccess value) gachaHistorySuccess,
+    required TResult Function(GachaGetSuccess value) gachaGetSuccess,
     required TResult Function(GachaSpinFailed value) fail,
   }) {
     return success(this);
@@ -614,6 +746,10 @@ class _$GachaSpinSuccess implements GachaSpinSuccess {
     TResult Function(gachaSpinDone value)? done,
     TResult Function(GachaSpinLoading value)? loading,
     TResult Function(GachaSpinSuccess value)? success,
+    TResult Function(GachaProbabilityConfigSuccess value)?
+        probabilityConfigSuccess,
+    TResult Function(GachaHistorySuccess value)? gachaHistorySuccess,
+    TResult Function(GachaGetSuccess value)? gachaGetSuccess,
     TResult Function(GachaSpinFailed value)? fail,
   }) {
     return success?.call(this);
@@ -626,6 +762,10 @@ class _$GachaSpinSuccess implements GachaSpinSuccess {
     TResult Function(gachaSpinDone value)? done,
     TResult Function(GachaSpinLoading value)? loading,
     TResult Function(GachaSpinSuccess value)? success,
+    TResult Function(GachaProbabilityConfigSuccess value)?
+        probabilityConfigSuccess,
+    TResult Function(GachaHistorySuccess value)? gachaHistorySuccess,
+    TResult Function(GachaGetSuccess value)? gachaGetSuccess,
     TResult Function(GachaSpinFailed value)? fail,
     required TResult orElse(),
   }) {
@@ -643,6 +783,557 @@ abstract class GachaSpinSuccess implements GachaSpinState {
   GachaSpinResponse get gachaSpinResponse;
   @JsonKey(ignore: true)
   _$$GachaSpinSuccessCopyWith<_$GachaSpinSuccess> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$GachaProbabilityConfigSuccessCopyWith<$Res> {
+  factory _$$GachaProbabilityConfigSuccessCopyWith(
+          _$GachaProbabilityConfigSuccess value,
+          $Res Function(_$GachaProbabilityConfigSuccess) then) =
+      __$$GachaProbabilityConfigSuccessCopyWithImpl<$Res>;
+  $Res call({GachaProbabilityConfigResponse gachaProbabilityConfigResponse});
+}
+
+/// @nodoc
+class __$$GachaProbabilityConfigSuccessCopyWithImpl<$Res>
+    extends _$GachaSpinStateCopyWithImpl<$Res>
+    implements _$$GachaProbabilityConfigSuccessCopyWith<$Res> {
+  __$$GachaProbabilityConfigSuccessCopyWithImpl(
+      _$GachaProbabilityConfigSuccess _value,
+      $Res Function(_$GachaProbabilityConfigSuccess) _then)
+      : super(_value, (v) => _then(v as _$GachaProbabilityConfigSuccess));
+
+  @override
+  _$GachaProbabilityConfigSuccess get _value =>
+      super._value as _$GachaProbabilityConfigSuccess;
+
+  @override
+  $Res call({
+    Object? gachaProbabilityConfigResponse = freezed,
+  }) {
+    return _then(_$GachaProbabilityConfigSuccess(
+      gachaProbabilityConfigResponse == freezed
+          ? _value.gachaProbabilityConfigResponse
+          : gachaProbabilityConfigResponse // ignore: cast_nullable_to_non_nullable
+              as GachaProbabilityConfigResponse,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$GachaProbabilityConfigSuccess implements GachaProbabilityConfigSuccess {
+  const _$GachaProbabilityConfigSuccess(this.gachaProbabilityConfigResponse);
+
+  @override
+  final GachaProbabilityConfigResponse gachaProbabilityConfigResponse;
+
+  @override
+  String toString() {
+    return 'GachaSpinState.probabilityConfigSuccess(gachaProbabilityConfigResponse: $gachaProbabilityConfigResponse)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$GachaProbabilityConfigSuccess &&
+            const DeepCollectionEquality().equals(
+                other.gachaProbabilityConfigResponse,
+                gachaProbabilityConfigResponse));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType,
+      const DeepCollectionEquality().hash(gachaProbabilityConfigResponse));
+
+  @JsonKey(ignore: true)
+  @override
+  _$$GachaProbabilityConfigSuccessCopyWith<_$GachaProbabilityConfigSuccess>
+      get copyWith => __$$GachaProbabilityConfigSuccessCopyWithImpl<
+          _$GachaProbabilityConfigSuccess>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(bool isLoading) initial,
+    required TResult Function() done,
+    required TResult Function() loading,
+    required TResult Function(GachaSpinResponse gachaSpinResponse) success,
+    required TResult Function(
+            GachaProbabilityConfigResponse gachaProbabilityConfigResponse)
+        probabilityConfigSuccess,
+    required TResult Function(GachaHistoryResponse response)
+        gachaHistorySuccess,
+    required TResult Function(GachaSpinResponse response) gachaGetSuccess,
+    required TResult Function(String msg) fail,
+  }) {
+    return probabilityConfigSuccess(gachaProbabilityConfigResponse);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult Function(bool isLoading)? initial,
+    TResult Function()? done,
+    TResult Function()? loading,
+    TResult Function(GachaSpinResponse gachaSpinResponse)? success,
+    TResult Function(
+            GachaProbabilityConfigResponse gachaProbabilityConfigResponse)?
+        probabilityConfigSuccess,
+    TResult Function(GachaHistoryResponse response)? gachaHistorySuccess,
+    TResult Function(GachaSpinResponse response)? gachaGetSuccess,
+    TResult Function(String msg)? fail,
+  }) {
+    return probabilityConfigSuccess?.call(gachaProbabilityConfigResponse);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(bool isLoading)? initial,
+    TResult Function()? done,
+    TResult Function()? loading,
+    TResult Function(GachaSpinResponse gachaSpinResponse)? success,
+    TResult Function(
+            GachaProbabilityConfigResponse gachaProbabilityConfigResponse)?
+        probabilityConfigSuccess,
+    TResult Function(GachaHistoryResponse response)? gachaHistorySuccess,
+    TResult Function(GachaSpinResponse response)? gachaGetSuccess,
+    TResult Function(String msg)? fail,
+    required TResult orElse(),
+  }) {
+    if (probabilityConfigSuccess != null) {
+      return probabilityConfigSuccess(gachaProbabilityConfigResponse);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(GachaSpinStateInitial value) initial,
+    required TResult Function(gachaSpinDone value) done,
+    required TResult Function(GachaSpinLoading value) loading,
+    required TResult Function(GachaSpinSuccess value) success,
+    required TResult Function(GachaProbabilityConfigSuccess value)
+        probabilityConfigSuccess,
+    required TResult Function(GachaHistorySuccess value) gachaHistorySuccess,
+    required TResult Function(GachaGetSuccess value) gachaGetSuccess,
+    required TResult Function(GachaSpinFailed value) fail,
+  }) {
+    return probabilityConfigSuccess(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(GachaSpinStateInitial value)? initial,
+    TResult Function(gachaSpinDone value)? done,
+    TResult Function(GachaSpinLoading value)? loading,
+    TResult Function(GachaSpinSuccess value)? success,
+    TResult Function(GachaProbabilityConfigSuccess value)?
+        probabilityConfigSuccess,
+    TResult Function(GachaHistorySuccess value)? gachaHistorySuccess,
+    TResult Function(GachaGetSuccess value)? gachaGetSuccess,
+    TResult Function(GachaSpinFailed value)? fail,
+  }) {
+    return probabilityConfigSuccess?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(GachaSpinStateInitial value)? initial,
+    TResult Function(gachaSpinDone value)? done,
+    TResult Function(GachaSpinLoading value)? loading,
+    TResult Function(GachaSpinSuccess value)? success,
+    TResult Function(GachaProbabilityConfigSuccess value)?
+        probabilityConfigSuccess,
+    TResult Function(GachaHistorySuccess value)? gachaHistorySuccess,
+    TResult Function(GachaGetSuccess value)? gachaGetSuccess,
+    TResult Function(GachaSpinFailed value)? fail,
+    required TResult orElse(),
+  }) {
+    if (probabilityConfigSuccess != null) {
+      return probabilityConfigSuccess(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class GachaProbabilityConfigSuccess implements GachaSpinState {
+  const factory GachaProbabilityConfigSuccess(
+          final GachaProbabilityConfigResponse gachaProbabilityConfigResponse) =
+      _$GachaProbabilityConfigSuccess;
+
+  GachaProbabilityConfigResponse get gachaProbabilityConfigResponse;
+  @JsonKey(ignore: true)
+  _$$GachaProbabilityConfigSuccessCopyWith<_$GachaProbabilityConfigSuccess>
+      get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$GachaHistorySuccessCopyWith<$Res> {
+  factory _$$GachaHistorySuccessCopyWith(_$GachaHistorySuccess value,
+          $Res Function(_$GachaHistorySuccess) then) =
+      __$$GachaHistorySuccessCopyWithImpl<$Res>;
+  $Res call({GachaHistoryResponse response});
+}
+
+/// @nodoc
+class __$$GachaHistorySuccessCopyWithImpl<$Res>
+    extends _$GachaSpinStateCopyWithImpl<$Res>
+    implements _$$GachaHistorySuccessCopyWith<$Res> {
+  __$$GachaHistorySuccessCopyWithImpl(
+      _$GachaHistorySuccess _value, $Res Function(_$GachaHistorySuccess) _then)
+      : super(_value, (v) => _then(v as _$GachaHistorySuccess));
+
+  @override
+  _$GachaHistorySuccess get _value => super._value as _$GachaHistorySuccess;
+
+  @override
+  $Res call({
+    Object? response = freezed,
+  }) {
+    return _then(_$GachaHistorySuccess(
+      response == freezed
+          ? _value.response
+          : response // ignore: cast_nullable_to_non_nullable
+              as GachaHistoryResponse,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$GachaHistorySuccess implements GachaHistorySuccess {
+  const _$GachaHistorySuccess(this.response);
+
+  @override
+  final GachaHistoryResponse response;
+
+  @override
+  String toString() {
+    return 'GachaSpinState.gachaHistorySuccess(response: $response)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$GachaHistorySuccess &&
+            const DeepCollectionEquality().equals(other.response, response));
+  }
+
+  @override
+  int get hashCode =>
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(response));
+
+  @JsonKey(ignore: true)
+  @override
+  _$$GachaHistorySuccessCopyWith<_$GachaHistorySuccess> get copyWith =>
+      __$$GachaHistorySuccessCopyWithImpl<_$GachaHistorySuccess>(
+          this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(bool isLoading) initial,
+    required TResult Function() done,
+    required TResult Function() loading,
+    required TResult Function(GachaSpinResponse gachaSpinResponse) success,
+    required TResult Function(
+            GachaProbabilityConfigResponse gachaProbabilityConfigResponse)
+        probabilityConfigSuccess,
+    required TResult Function(GachaHistoryResponse response)
+        gachaHistorySuccess,
+    required TResult Function(GachaSpinResponse response) gachaGetSuccess,
+    required TResult Function(String msg) fail,
+  }) {
+    return gachaHistorySuccess(response);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult Function(bool isLoading)? initial,
+    TResult Function()? done,
+    TResult Function()? loading,
+    TResult Function(GachaSpinResponse gachaSpinResponse)? success,
+    TResult Function(
+            GachaProbabilityConfigResponse gachaProbabilityConfigResponse)?
+        probabilityConfigSuccess,
+    TResult Function(GachaHistoryResponse response)? gachaHistorySuccess,
+    TResult Function(GachaSpinResponse response)? gachaGetSuccess,
+    TResult Function(String msg)? fail,
+  }) {
+    return gachaHistorySuccess?.call(response);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(bool isLoading)? initial,
+    TResult Function()? done,
+    TResult Function()? loading,
+    TResult Function(GachaSpinResponse gachaSpinResponse)? success,
+    TResult Function(
+            GachaProbabilityConfigResponse gachaProbabilityConfigResponse)?
+        probabilityConfigSuccess,
+    TResult Function(GachaHistoryResponse response)? gachaHistorySuccess,
+    TResult Function(GachaSpinResponse response)? gachaGetSuccess,
+    TResult Function(String msg)? fail,
+    required TResult orElse(),
+  }) {
+    if (gachaHistorySuccess != null) {
+      return gachaHistorySuccess(response);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(GachaSpinStateInitial value) initial,
+    required TResult Function(gachaSpinDone value) done,
+    required TResult Function(GachaSpinLoading value) loading,
+    required TResult Function(GachaSpinSuccess value) success,
+    required TResult Function(GachaProbabilityConfigSuccess value)
+        probabilityConfigSuccess,
+    required TResult Function(GachaHistorySuccess value) gachaHistorySuccess,
+    required TResult Function(GachaGetSuccess value) gachaGetSuccess,
+    required TResult Function(GachaSpinFailed value) fail,
+  }) {
+    return gachaHistorySuccess(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(GachaSpinStateInitial value)? initial,
+    TResult Function(gachaSpinDone value)? done,
+    TResult Function(GachaSpinLoading value)? loading,
+    TResult Function(GachaSpinSuccess value)? success,
+    TResult Function(GachaProbabilityConfigSuccess value)?
+        probabilityConfigSuccess,
+    TResult Function(GachaHistorySuccess value)? gachaHistorySuccess,
+    TResult Function(GachaGetSuccess value)? gachaGetSuccess,
+    TResult Function(GachaSpinFailed value)? fail,
+  }) {
+    return gachaHistorySuccess?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(GachaSpinStateInitial value)? initial,
+    TResult Function(gachaSpinDone value)? done,
+    TResult Function(GachaSpinLoading value)? loading,
+    TResult Function(GachaSpinSuccess value)? success,
+    TResult Function(GachaProbabilityConfigSuccess value)?
+        probabilityConfigSuccess,
+    TResult Function(GachaHistorySuccess value)? gachaHistorySuccess,
+    TResult Function(GachaGetSuccess value)? gachaGetSuccess,
+    TResult Function(GachaSpinFailed value)? fail,
+    required TResult orElse(),
+  }) {
+    if (gachaHistorySuccess != null) {
+      return gachaHistorySuccess(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class GachaHistorySuccess implements GachaSpinState {
+  const factory GachaHistorySuccess(final GachaHistoryResponse response) =
+      _$GachaHistorySuccess;
+
+  GachaHistoryResponse get response;
+  @JsonKey(ignore: true)
+  _$$GachaHistorySuccessCopyWith<_$GachaHistorySuccess> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$GachaGetSuccessCopyWith<$Res> {
+  factory _$$GachaGetSuccessCopyWith(
+          _$GachaGetSuccess value, $Res Function(_$GachaGetSuccess) then) =
+      __$$GachaGetSuccessCopyWithImpl<$Res>;
+  $Res call({GachaSpinResponse response});
+}
+
+/// @nodoc
+class __$$GachaGetSuccessCopyWithImpl<$Res>
+    extends _$GachaSpinStateCopyWithImpl<$Res>
+    implements _$$GachaGetSuccessCopyWith<$Res> {
+  __$$GachaGetSuccessCopyWithImpl(
+      _$GachaGetSuccess _value, $Res Function(_$GachaGetSuccess) _then)
+      : super(_value, (v) => _then(v as _$GachaGetSuccess));
+
+  @override
+  _$GachaGetSuccess get _value => super._value as _$GachaGetSuccess;
+
+  @override
+  $Res call({
+    Object? response = freezed,
+  }) {
+    return _then(_$GachaGetSuccess(
+      response == freezed
+          ? _value.response
+          : response // ignore: cast_nullable_to_non_nullable
+              as GachaSpinResponse,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$GachaGetSuccess implements GachaGetSuccess {
+  const _$GachaGetSuccess(this.response);
+
+  @override
+  final GachaSpinResponse response;
+
+  @override
+  String toString() {
+    return 'GachaSpinState.gachaGetSuccess(response: $response)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$GachaGetSuccess &&
+            const DeepCollectionEquality().equals(other.response, response));
+  }
+
+  @override
+  int get hashCode =>
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(response));
+
+  @JsonKey(ignore: true)
+  @override
+  _$$GachaGetSuccessCopyWith<_$GachaGetSuccess> get copyWith =>
+      __$$GachaGetSuccessCopyWithImpl<_$GachaGetSuccess>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(bool isLoading) initial,
+    required TResult Function() done,
+    required TResult Function() loading,
+    required TResult Function(GachaSpinResponse gachaSpinResponse) success,
+    required TResult Function(
+            GachaProbabilityConfigResponse gachaProbabilityConfigResponse)
+        probabilityConfigSuccess,
+    required TResult Function(GachaHistoryResponse response)
+        gachaHistorySuccess,
+    required TResult Function(GachaSpinResponse response) gachaGetSuccess,
+    required TResult Function(String msg) fail,
+  }) {
+    return gachaGetSuccess(response);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult Function(bool isLoading)? initial,
+    TResult Function()? done,
+    TResult Function()? loading,
+    TResult Function(GachaSpinResponse gachaSpinResponse)? success,
+    TResult Function(
+            GachaProbabilityConfigResponse gachaProbabilityConfigResponse)?
+        probabilityConfigSuccess,
+    TResult Function(GachaHistoryResponse response)? gachaHistorySuccess,
+    TResult Function(GachaSpinResponse response)? gachaGetSuccess,
+    TResult Function(String msg)? fail,
+  }) {
+    return gachaGetSuccess?.call(response);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(bool isLoading)? initial,
+    TResult Function()? done,
+    TResult Function()? loading,
+    TResult Function(GachaSpinResponse gachaSpinResponse)? success,
+    TResult Function(
+            GachaProbabilityConfigResponse gachaProbabilityConfigResponse)?
+        probabilityConfigSuccess,
+    TResult Function(GachaHistoryResponse response)? gachaHistorySuccess,
+    TResult Function(GachaSpinResponse response)? gachaGetSuccess,
+    TResult Function(String msg)? fail,
+    required TResult orElse(),
+  }) {
+    if (gachaGetSuccess != null) {
+      return gachaGetSuccess(response);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(GachaSpinStateInitial value) initial,
+    required TResult Function(gachaSpinDone value) done,
+    required TResult Function(GachaSpinLoading value) loading,
+    required TResult Function(GachaSpinSuccess value) success,
+    required TResult Function(GachaProbabilityConfigSuccess value)
+        probabilityConfigSuccess,
+    required TResult Function(GachaHistorySuccess value) gachaHistorySuccess,
+    required TResult Function(GachaGetSuccess value) gachaGetSuccess,
+    required TResult Function(GachaSpinFailed value) fail,
+  }) {
+    return gachaGetSuccess(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(GachaSpinStateInitial value)? initial,
+    TResult Function(gachaSpinDone value)? done,
+    TResult Function(GachaSpinLoading value)? loading,
+    TResult Function(GachaSpinSuccess value)? success,
+    TResult Function(GachaProbabilityConfigSuccess value)?
+        probabilityConfigSuccess,
+    TResult Function(GachaHistorySuccess value)? gachaHistorySuccess,
+    TResult Function(GachaGetSuccess value)? gachaGetSuccess,
+    TResult Function(GachaSpinFailed value)? fail,
+  }) {
+    return gachaGetSuccess?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(GachaSpinStateInitial value)? initial,
+    TResult Function(gachaSpinDone value)? done,
+    TResult Function(GachaSpinLoading value)? loading,
+    TResult Function(GachaSpinSuccess value)? success,
+    TResult Function(GachaProbabilityConfigSuccess value)?
+        probabilityConfigSuccess,
+    TResult Function(GachaHistorySuccess value)? gachaHistorySuccess,
+    TResult Function(GachaGetSuccess value)? gachaGetSuccess,
+    TResult Function(GachaSpinFailed value)? fail,
+    required TResult orElse(),
+  }) {
+    if (gachaGetSuccess != null) {
+      return gachaGetSuccess(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class GachaGetSuccess implements GachaSpinState {
+  const factory GachaGetSuccess(final GachaSpinResponse response) =
+      _$GachaGetSuccess;
+
+  GachaSpinResponse get response;
+  @JsonKey(ignore: true)
+  _$$GachaGetSuccessCopyWith<_$GachaGetSuccess> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -715,6 +1406,12 @@ class _$GachaSpinFailed implements GachaSpinFailed {
     required TResult Function() done,
     required TResult Function() loading,
     required TResult Function(GachaSpinResponse gachaSpinResponse) success,
+    required TResult Function(
+            GachaProbabilityConfigResponse gachaProbabilityConfigResponse)
+        probabilityConfigSuccess,
+    required TResult Function(GachaHistoryResponse response)
+        gachaHistorySuccess,
+    required TResult Function(GachaSpinResponse response) gachaGetSuccess,
     required TResult Function(String msg) fail,
   }) {
     return fail(msg);
@@ -727,6 +1424,11 @@ class _$GachaSpinFailed implements GachaSpinFailed {
     TResult Function()? done,
     TResult Function()? loading,
     TResult Function(GachaSpinResponse gachaSpinResponse)? success,
+    TResult Function(
+            GachaProbabilityConfigResponse gachaProbabilityConfigResponse)?
+        probabilityConfigSuccess,
+    TResult Function(GachaHistoryResponse response)? gachaHistorySuccess,
+    TResult Function(GachaSpinResponse response)? gachaGetSuccess,
     TResult Function(String msg)? fail,
   }) {
     return fail?.call(msg);
@@ -739,6 +1441,11 @@ class _$GachaSpinFailed implements GachaSpinFailed {
     TResult Function()? done,
     TResult Function()? loading,
     TResult Function(GachaSpinResponse gachaSpinResponse)? success,
+    TResult Function(
+            GachaProbabilityConfigResponse gachaProbabilityConfigResponse)?
+        probabilityConfigSuccess,
+    TResult Function(GachaHistoryResponse response)? gachaHistorySuccess,
+    TResult Function(GachaSpinResponse response)? gachaGetSuccess,
     TResult Function(String msg)? fail,
     required TResult orElse(),
   }) {
@@ -755,6 +1462,10 @@ class _$GachaSpinFailed implements GachaSpinFailed {
     required TResult Function(gachaSpinDone value) done,
     required TResult Function(GachaSpinLoading value) loading,
     required TResult Function(GachaSpinSuccess value) success,
+    required TResult Function(GachaProbabilityConfigSuccess value)
+        probabilityConfigSuccess,
+    required TResult Function(GachaHistorySuccess value) gachaHistorySuccess,
+    required TResult Function(GachaGetSuccess value) gachaGetSuccess,
     required TResult Function(GachaSpinFailed value) fail,
   }) {
     return fail(this);
@@ -767,6 +1478,10 @@ class _$GachaSpinFailed implements GachaSpinFailed {
     TResult Function(gachaSpinDone value)? done,
     TResult Function(GachaSpinLoading value)? loading,
     TResult Function(GachaSpinSuccess value)? success,
+    TResult Function(GachaProbabilityConfigSuccess value)?
+        probabilityConfigSuccess,
+    TResult Function(GachaHistorySuccess value)? gachaHistorySuccess,
+    TResult Function(GachaGetSuccess value)? gachaGetSuccess,
     TResult Function(GachaSpinFailed value)? fail,
   }) {
     return fail?.call(this);
@@ -779,6 +1494,10 @@ class _$GachaSpinFailed implements GachaSpinFailed {
     TResult Function(gachaSpinDone value)? done,
     TResult Function(GachaSpinLoading value)? loading,
     TResult Function(GachaSpinSuccess value)? success,
+    TResult Function(GachaProbabilityConfigSuccess value)?
+        probabilityConfigSuccess,
+    TResult Function(GachaHistorySuccess value)? gachaHistorySuccess,
+    TResult Function(GachaGetSuccess value)? gachaGetSuccess,
     TResult Function(GachaSpinFailed value)? fail,
     required TResult orElse(),
   }) {

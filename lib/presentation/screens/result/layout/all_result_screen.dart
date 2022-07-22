@@ -7,7 +7,9 @@ import 'package:slee_fi/common/widgets/sf_app_bar.dart';
 import 'package:slee_fi/common/widgets/sf_button_outlined.dart';
 import 'package:slee_fi/common/widgets/sf_card.dart';
 import 'package:slee_fi/common/widgets/sf_icon.dart';
+import 'package:slee_fi/common/widgets/sf_text.dart';
 import 'package:slee_fi/l10n/locale_keys.g.dart';
+import 'package:slee_fi/models/gacha_spin_response/gacha_attributes_item.dart';
 import 'package:slee_fi/models/gacha_spin_response/gacha_spin_response.dart';
 import 'package:slee_fi/presentation/screens/result/layout/all_result_detail_screen.dart';
 import 'package:slee_fi/resources/resources.dart';
@@ -25,9 +27,7 @@ class AllResultScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final args = ModalRoute.of(context)?.settings.arguments as GachaAllResultBedArguments?;
-    List<String> beds1 = [Imgs.flexibleBed, Imgs.candyGreen, Imgs.longBed];
-    List<String> beds2 = [Imgs.longBed, Imgs.jewelRed,Imgs.flexibleBed, Imgs.jewelGreen];
-    List<String> beds3 = [Imgs.candyPink,Imgs.jewelGreen,  Imgs.longBed];
+    GachaAttributesItem? attributesItem;
     return BackgroundWidget(
       appBar: SFAppBar(
         context: context,
@@ -45,53 +45,125 @@ class AllResultScreen extends StatelessWidget {
                   children: [
                     Expanded(
                       child:ListView.builder(
-                          itemCount: beds1.length,
+                          itemCount: 3,
                           padding: const EdgeInsets.only(top: 50),
                           itemBuilder: (BuildContext context,int index){
+                            bool isSlft = (args?.gachaSpinInfo!.gift.elementAt(index)['type'] == "SLFT");
                             return SFCard(
                               width: 100,
                               height: 100,
                               margin: const EdgeInsets.all(6),
                               radius: 8,
                               border: Border.all(color: AppColors.white.withOpacity(0.1)),
-                              child: SFIcon(beds1[index]),
-                              onTap: () => Navigator.pushNamed(context, R.allResultDetail,
-                                  arguments:  AllResultDetailArguments(image: beds1[index], gift: args?.gachaSpinInfo?.gift.first.elementAt(index))),
+                              child: isSlft
+                                  ?
+                              Column(
+                                children:  [
+                                  const SFIcon(Ics.icSlft, width: 60, height: 60,),
+                                  const SizedBox(height: 12,),
+                                  SFText(keyText: "${args?.gachaSpinInfo!.gift.elementAt(index)['amount'] ?? ''}", style: TextStyles.bold18White,)
+                                ],
+                              )
+                                  :
+                              SFIcon(args?.gachaSpinInfo!.gift.elementAt(index)['image']),
+                              onTap: () {
+                                if(isSlft){
+                                  null;
+                                }else {
+                                  attributesItem = GachaAttributesItem.fromJson(args?.gachaSpinInfo!.gift.elementAt(index) as Map<String, dynamic>);
+                                  Navigator.pushNamed(context, R.allResultDetail,
+                                      arguments:  AllResultDetailArguments(
+                                          image: attributesItem != null ? attributesItem!.image : "",
+                                          attributesItem: attributesItem
+                                      )
+                                  );
+                                }
+
+                              }
                             );
                           }
                       ),
                     ),
                     Expanded(
                       child:ListView.builder(
-                          itemCount: beds2.length,
+                          itemCount: 4,
                           itemBuilder: (BuildContext context,int index){
+                            int at = 3;
+                            bool isSlft = (args?.gachaSpinInfo!.gift.elementAt(index + at)['type'] == "SLFT");
                             return SFCard(
-                              width: 100,
-                              height: 100,
-                              margin: const EdgeInsets.all(6),
-                              radius: 8,
-                              border: Border.all(color: AppColors.white.withOpacity(0.1)),
-                              child: SFIcon(beds2[index]),
-                              onTap: () => Navigator.pushNamed(context, R.allResultDetail,
-                                  arguments:  AllResultDetailArguments(image: beds2[index] , gift: args?.gachaSpinInfo?.gift.first.elementAt(index))),
+                                width: 100,
+                                height: 100,
+                                margin: const EdgeInsets.all(6),
+                                radius: 8,
+                                border: Border.all(color: AppColors.white.withOpacity(0.1)),
+                                child: isSlft
+                                    ?
+                                Column(
+                                  children:  [
+                                    const SFIcon(Ics.icSlft, width: 60, height: 60,),
+                                    const SizedBox(height: 12,),
+                                    SFText(keyText: "${args?.gachaSpinInfo!.gift.elementAt(index + at)['amount'] ?? ''}", style: TextStyles.bold18White,)
+                                  ],
+                                )
+                                    :
+                                SFIcon(args?.gachaSpinInfo!.gift.elementAt(index + at)['image']),
+                                onTap: () {
+                                  if(isSlft){
+                                  null;
+                                  }else{
+                                    attributesItem = GachaAttributesItem.fromJson(args?.gachaSpinInfo!.gift.elementAt(index + at) as Map<String, dynamic>);
+                                    Navigator.pushNamed(context, R.allResultDetail,
+                                        arguments:  AllResultDetailArguments(
+                                            image: attributesItem != null ? attributesItem!.image : "",
+                                            attributesItem: attributesItem
+                                        )
+                                    );
+                                  }
+
+                                }
                             );
                           }
                       ),
                     ),
                     Expanded(
                         child:ListView.builder(
-                            itemCount: beds3.length,
+                            itemCount: 3,
                             padding: const EdgeInsets.only(top: 50),
                             itemBuilder: (BuildContext context,int index){
+                              int at = 7;
+                              bool isSlft = (args?.gachaSpinInfo!.gift.elementAt(index + at)['type'] == "SLFT");
+
                               return SFCard(
-                                width: 100,
-                                height: 100,
-                                margin: const EdgeInsets.all(6),
-                                radius: 8,
-                                border: Border.all(color: AppColors.white.withOpacity(0.1)),
-                                child: SFIcon(beds3[index]),
-                                onTap: () => Navigator.pushNamed(context, R.allResultDetail,
-                                    arguments:  AllResultDetailArguments(image: beds3[index], gift: args?.gachaSpinInfo?.gift.first.elementAt(index))),
+                                  width: 100,
+                                  height: 100,
+                                  margin: const EdgeInsets.all(6),
+                                  radius: 8,
+                                  border: Border.all(color: AppColors.white.withOpacity(0.1)),
+                                  child: isSlft
+                                      ?
+                                    Column(
+                                      children:  [
+                                        const SFIcon(Ics.icSlft, width: 60, height: 60,),
+                                        const SizedBox(height: 12,),
+                                        SFText(keyText: "${args?.gachaSpinInfo!.gift.elementAt(index + at)['amount'] ?? ''}", style: TextStyles.bold18White,)
+                                      ],
+                                    )
+                                  :
+                                  SFIcon(args?.gachaSpinInfo!.gift.elementAt(index + at)['image']),
+                                  onTap: () {
+                                    if(isSlft){
+                                      null;
+                                    }else {
+                                      attributesItem = GachaAttributesItem.fromJson(args?.gachaSpinInfo!.gift.elementAt(index + at) as Map<String, dynamic>);
+                                      Navigator.pushNamed(context, R.allResultDetail,
+                                          arguments:  AllResultDetailArguments(
+                                              image: attributesItem != null ? attributesItem!.image : "",
+                                              attributesItem: attributesItem
+                                          )
+                                      );
+                                    }
+
+                                  }
                               );
                             }
                         ),
