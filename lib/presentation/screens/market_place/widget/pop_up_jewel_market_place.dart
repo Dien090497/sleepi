@@ -107,7 +107,7 @@ class PopUpJewelMarketPlace extends StatelessWidget {
           ),
           padding: const EdgeInsets.all(8),
           child: SFText(
-            keyText: jewel.nftId.toString(),
+            keyText: jewel.nftName,
             style: TextStyles.blue14,
           ),
         ),

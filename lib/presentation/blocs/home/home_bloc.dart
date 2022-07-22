@@ -7,11 +7,9 @@ import 'package:slee_fi/di/injector.dart';
 import 'package:slee_fi/entities/bed_entity/bed_entity.dart';
 import 'package:slee_fi/models/user_status_tracking_model/user_status_tracking_model.dart';
 import 'package:slee_fi/presentation/blocs/home/home_state.dart';
-import 'package:slee_fi/usecase/add_item_to_bed_usecase.dart';
 import 'package:slee_fi/usecase/estimate_tracking_usecase.dart';
 import 'package:slee_fi/usecase/fetch_home_bed_usecase.dart';
 import 'package:slee_fi/usecase/get_user_status_tracking_usecase.dart';
-import 'package:slee_fi/usecase/remove_item_from_bed_usecase.dart';
 import 'package:slee_fi/usecase/usecase.dart';
 
 part 'home_event.dart';
@@ -29,8 +27,9 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
   }
 
   final _fetchListBedUC = getIt<FetchHomeBedUseCase>();
-  final _addItemToBedUC = getIt<AddItemToBedUseCase>();
-  final _removeItemFromBedUC = getIt<RemoveItemFromBedUseCase>();
+
+  // final _addItemToBedUC = getIt<AddItemToBedUseCase>();
+  // final _removeItemFromBedUC = getIt<RemoveItemFromBedUseCase>();
   final _estimateTrackingUC = getIt<EstimateTrackingUseCase>();
   final _userStatusTrackingUC = getIt<GetUserStatusTrackingUseCase>();
 
@@ -182,48 +181,29 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     if (currentState is! HomeLoaded || currentState.selectedBed == null) {
       return;
     }
-    final result = await _addItemToBedUC
-        .call(AddItemToBedParam(currentState.selectedBed!.id, event.item.id));
     final tokenEarn = await _estimateTracking(
       currentState.selectedBed!,
       true,
       currentState.selectedItem,
     );
-
-    result.fold((l) {
-      emit(currentState.copyWith(
-        errorMessage: l.msg,
-        errorType: ErrorType.addItemToBed,
-      ));
-    }, (r) async {
-      emit(currentState.copyWith(
-        selectedItem: event.item,
-        tokenEarn: tokenEarn,
-      ));
-    });
+    emit(currentState.copyWith(
+      selectedItem: event.item,
+      tokenEarn: tokenEarn,
+    ));
   }
 
   void _removeItem(RemoveItem event, Emitter<HomeState> emit) async {
     final currentState = state;
     if (currentState is HomeLoaded && currentState.selectedItem != null) {
-      final result = await _removeItemFromBedUC.call(AddItemToBedParam(
-          currentState.selectedBed!.id, currentState.selectedItem!.id));
-      await result.fold((l) {
-        emit(currentState.copyWith(
-          errorMessage: l.msg,
-          errorType: ErrorType.removeItemFromBed,
-        ));
-      }, (r) async {
-        emit(currentState.copyWith(
-          selectedItem: null,
-          errorType: ErrorType.none,
-          tokenEarn: await _estimateTracking(
-            currentState.selectedBed!,
-            true,
-            currentState.selectedItem,
-          ),
-        ));
-      });
+      emit(currentState.copyWith(
+        selectedItem: null,
+        errorType: ErrorType.none,
+        tokenEarn: await _estimateTracking(
+          currentState.selectedBed!,
+          true,
+          currentState.selectedItem,
+        ),
+      ));
     }
   }
 

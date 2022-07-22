@@ -7,6 +7,7 @@ part of 'jewel_entity.dart';
 // **************************************************************************
 
 JewelEntity _$JewelEntityFromJson(Map<String, dynamic> json) => JewelEntity(
+      nftName: json['nftName'] as String,
       bonus: json['bonus'] as String,
       special: json['special'] as String,
       id: json['id'] as int,
@@ -25,6 +26,7 @@ Map<String, dynamic> _$JewelEntityToJson(JewelEntity instance) =>
     <String, dynamic>{
       'id': instance.id,
       'image': instance.image,
+      'nftName': instance.nftName,
       'level': instance.level,
       'nftId': instance.nftId,
       'type': instance.type,

@@ -60,7 +60,8 @@ class JewelDialogBody extends StatelessWidget {
             ),
             const SizedBox(height: 20),
             SFText(
-              keyText: '${jewel.jewelType.tr() } ${LocaleKeys.jewel.tr()} (${jewel.level})',
+              keyText:
+                  '${jewel.jewelType.tr()} ${LocaleKeys.jewel.tr()} (${jewel.level})',
               style: TextStyles.white1w700size16,
             ),
             const SizedBox(height: 24),
@@ -71,7 +72,7 @@ class JewelDialogBody extends StatelessWidget {
               ),
               padding: const EdgeInsets.all(8),
               child: SFText(
-                keyText: jewel.nftId.toString(),
+                keyText: jewel.nftName,
                 style: TextStyles.blue14.copyWith(color: qualityColor),
               ),
             ),
@@ -88,8 +89,7 @@ class JewelDialogBody extends StatelessWidget {
                   const SizedBox(width: 4),
                   Expanded(
                     child: SFText(
-                      keyText:
-                          '+${jewel.infoBuff}% ${jewel.type.tr()} Res.',
+                      keyText: '+${jewel.infoBuff}% ${jewel.type.tr()} Res.',
                       style: TextStyles.blue16,
                       textAlign: TextAlign.right,
                     ),

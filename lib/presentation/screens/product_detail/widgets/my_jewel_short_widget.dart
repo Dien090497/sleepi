@@ -49,7 +49,8 @@ class MyJewelsShortWidget extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Container(
+                  Flexible(
+                      child: Container(
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(50),
                       border: Border.all(color: qualityColor.withOpacity(0.1)),
@@ -58,11 +59,12 @@ class MyJewelsShortWidget extends StatelessWidget {
                         const EdgeInsets.symmetric(vertical: 5, horizontal: 16),
                     alignment: Alignment.center,
                     child: SFText(
-                      keyText: jewel.nftId.toString(),
+                      keyText: jewel.name,
+                      textAlign: TextAlign.center,
                       style: TextStyles.white1w700size12
                           .copyWith(color: qualityColor),
                     ),
-                  ),
+                  )),
                   const SizedBox(width: 4),
                   Container(
                     decoration: BoxDecoration(

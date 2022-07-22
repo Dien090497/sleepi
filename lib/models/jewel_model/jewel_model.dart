@@ -57,6 +57,7 @@ class JewelModel {
   Map<String, dynamic> toJson() => _$JewelModelToJson(this);
 
   JewelEntity toEntity() => JewelEntity(
+      nftName: nftName,
       special: special,
       bonus: bonus,
       type: type,

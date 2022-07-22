@@ -242,6 +242,7 @@ class JewelSocket extends StatelessWidget {
       padding: const EdgeInsets.all(24),
       children: [
         JewelDialogBody(
+          isJewel: isJewel,
           jewel: jewel,
           textOnSell: LocaleKeys.remove,
           textOnTransfer: LocaleKeys.ok,

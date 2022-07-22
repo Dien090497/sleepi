@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
@@ -5,14 +6,12 @@ import 'package:slee_fi/common/style/text_styles.dart';
 import 'package:slee_fi/common/widgets/cached_image.dart';
 import 'package:slee_fi/common/widgets/sf_bottom_sheet.dart';
 import 'package:slee_fi/common/widgets/sf_button_outlined.dart';
-import 'package:slee_fi/common/widgets/sf_dialog.dart';
 import 'package:slee_fi/common/widgets/sf_icon.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
 import 'package:slee_fi/l10n/locale_keys.g.dart';
 import 'package:slee_fi/presentation/blocs/home/home_bloc.dart';
 import 'package:slee_fi/presentation/blocs/home/home_state.dart';
 import 'package:slee_fi/presentation/blocs/item_list/item_bloc.dart';
-import 'package:slee_fi/presentation/blocs/item_list/item_event.dart';
 import 'package:slee_fi/resources/resources.dart';
 
 import 'modal_item_list.dart';
@@ -28,22 +27,14 @@ class UseItem extends StatelessWidget {
         buildWhen: (previous, current) {
           if (previous is HomeLoaded && current is HomeLoaded) {
             if (previous.selectedItem == null && current.selectedItem != null) {
-              showSuccessfulDialog(context, null);
-              context
-                  .read<ItemBloc>()
-                  .add(AddItemSuccessEvent(current.selectedItem!));
               return true;
             } else if (previous.selectedItem != null &&
                 current.selectedItem == null) {
-              context
-                  .read<ItemBloc>()
-                  .add(RemoveItemSuccessEvent(previous.selectedItem!));
               return true;
             }
           }
           return false;
         },
-
         builder: (context, state) {
           return (state is HomeLoaded && state.selectedItem != null)
               ? Container(
@@ -109,8 +100,8 @@ class UseItem extends StatelessWidget {
                               ),
                               const SizedBox(height: 12),
                               SFText(
-                                // TODO: change value
-                                keyText: 'state.selectedItem!.effect',
+                                keyText: LocaleKeys.put_positive_correct_to
+                                    .tr(args: [state.selectedItem!.type.tr()]),
                                 style: TextStyles.lightGrey14,
                                 maxLines: 1,
                               ),

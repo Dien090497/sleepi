@@ -51,7 +51,8 @@ class ItemBedBuyWidget extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Container(
+                  Flexible(
+                      child: Container(
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(50),
                       border: Border.all(color: qualityColor.withOpacity(0.1)),
@@ -60,11 +61,12 @@ class ItemBedBuyWidget extends StatelessWidget {
                         const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
                     alignment: Alignment.center,
                     child: SFText(
-                      keyText: item.tokenId.toString(),
+                      textAlign: TextAlign.center,
+                      keyText: item.nftName,
                       style: TextStyles.white1w700size12
                           .copyWith(color: qualityColor),
                     ),
-                  ),
+                  )),
                   const SizedBox(width: 6),
                   Container(
                     decoration: BoxDecoration(

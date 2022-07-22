@@ -6,6 +6,7 @@ part 'jewel_entity.g.dart';
 class JewelEntity {
   final int id;
   final String image;
+  final String nftName;
   final int level;
   final int nftId;
   final String type;
@@ -18,6 +19,7 @@ class JewelEntity {
   final String? quality;
 
   JewelEntity({
+    required this.nftName,
     required this.bonus,
     required this.special,
     required this.id,
@@ -36,7 +38,6 @@ class JewelEntity {
       _$JewelEntityFromJson(json);
 
   Map<String, dynamic> toJson() => _$JewelEntityToJson(this);
-
 
   // Ruby: Positively affects Efficiency values.
   // Sapphire: Positively affects Luck values

@@ -159,7 +159,7 @@ class BedQualityWidget extends StatelessWidget {
           ),
           padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 18),
           child: Text(
-            bed != null ? '${bed!.tokenId}' : '00',
+            bed != null ? bed!.name : '00',
             style: TextStyles.blue14.copyWith(
                 color: bed != null
                     ? bed!.quality!.qualityBedColor
