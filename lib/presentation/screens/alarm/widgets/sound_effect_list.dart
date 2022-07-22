@@ -72,12 +72,13 @@ class _AlarmSoundEffectListState extends State<AlarmSoundEffectList> {
   }
 
   _playSound() async {
-    if(audioPlayer.playing) {
+    if (audioPlayer.playing) {
       await audioPlayer.stop();
     }
-    await audioPlayer.setAsset(Const.soundAlarm[temp]);
-    await audioPlayer.setVolume(1);
-    await audioPlayer.setLoopMode(LoopMode.one);
-    await audioPlayer.play();
+    await audioPlayer.setAsset(Const.soundAlarm[temp]).then((value) async {
+      await audioPlayer.setVolume(1);
+      await audioPlayer.play();
+      await audioPlayer.setLoopMode(LoopMode.one);
+    });
   }
 }

@@ -136,27 +136,26 @@ Future<void> onStart(ServiceInstance service) async {
     final int timeWakeUp = preferences.getInt(Const.time) ?? 0;
     final int sound = preferences.getInt(Const.sound) ?? 0;
     final DateTime wakeUp = DateTime.fromMillisecondsSinceEpoch(timeWakeUp);
-    final int time = wakeUp
-        .difference(DateTime.now())
-        .inMinutes;
+    final int time = wakeUp.difference(DateTime.now()).inMinutes;
     if (service is AndroidServiceInstance) {
       service.setForegroundNotificationInfo(
         title: "Sleep Tracking...",
         content:
-        "Alarm: ${DateFormat('HH:mm dd/MM/yyyy').format(wakeUp).toString()}",
+            "Alarm: ${DateFormat('HH:mm dd/MM/yyyy').format(wakeUp).toString()}",
       );
     }
 
     Timer.periodic(Duration(minutes: time), (timer) async {
       if (!audioPlayer.playing) {
-        await audioPlayer.setAsset(Const.soundAlarm[sound]);
-        await audioPlayer.setVolume(1);
-        await audioPlayer.setLoopMode(LoopMode.all);
-        await audioPlayer.play();
+        await audioPlayer.setAsset(Const.soundAlarm[sound]).then((value) async {
+          await audioPlayer.setVolume(1);
+          await audioPlayer.play();
+          await audioPlayer.setLoopMode(LoopMode.one);
+        });
       }
       timer.cancel();
     });
-  }catch(e){
+  } catch (e) {
     service.stopSelf();
   }
 }
