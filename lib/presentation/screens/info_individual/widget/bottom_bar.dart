@@ -5,6 +5,7 @@ import 'package:slee_fi/common/routes/app_routes.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
 import 'package:slee_fi/common/widgets/pop_up_level_up.dart';
+import 'package:slee_fi/common/widgets/sf_alert_dialog.dart';
 import 'package:slee_fi/common/widgets/sf_dialog.dart';
 import 'package:slee_fi/common/widgets/sf_icon.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
@@ -105,10 +106,10 @@ class _BottomBarWidgetState extends State<BottomBarWidget> {
                 if (state is GetLevelSuccess) {
                   Navigator.pop(context, true);
                   index = 0;
-                  showCustomDialog(
+                  showCustomAlertDialog(
                     context,
-                    children: [
-                      PopUpLevelUp(
+                    padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 32),
+                    children: PopUpLevelUp(
                           icon: widget.bedEntity.image,
                           level: widget.bedEntity.level,
                           cost: state.levelUp.cost!,
@@ -123,7 +124,6 @@ class _BottomBarWidgetState extends State<BottomBarWidget> {
                               ),
                             );
                           }),
-                    ],
                   ).then((value) {
                     cubit.init();
                     index = -1;
