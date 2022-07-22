@@ -59,23 +59,23 @@ class SFTabBarState extends State<SFTabBar>
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 16.0),
           child: TabBar(
+            splashBorderRadius: BorderRadius.circular(100),
+            indicatorPadding: const EdgeInsets.symmetric(horizontal: 5),
             controller: _tabController,
             isScrollable: widget.isScrollable,
             tabs: List.generate(
               widget.texts.length,
-              (i) => Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 8),
-                child: Container(
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(100),
-                      color: _tabController.index == i
-                          ? AppColors.transparent
-                          : AppColors.whiteOpacity5,
-                    ),
-                    padding: widget.padding ??
-                        const EdgeInsets.symmetric(horizontal: 20),
-                    child: Tab(text: widget.texts[i].tr())),
-              ),
+              (i) => Container(
+                  margin: const EdgeInsets.symmetric(horizontal: 5),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(100),
+                    color: _tabController.index == i
+                        ? AppColors.transparent
+                        : AppColors.whiteOpacity5,
+                  ),
+                  padding: widget.padding ??
+                      const EdgeInsets.symmetric(horizontal: 28),
+                  child: Tab(text: widget.texts[i].tr())),
             ),
             indicator: BoxDecoration(
               borderRadius: BorderRadius.circular(100),

@@ -14,7 +14,7 @@ class JewelState with _$JewelState {
     UpgradeInfoResponse? upgradeInfoResponse,
     @Default(true) bool isLoadMore,
     @Default(false) bool loading,
-    @Default(false) bool upgradeSuccess,
+    BedEntity? upgradeSuccess,
     String? errorMessage
   }) = JewelStateLoaded;
 

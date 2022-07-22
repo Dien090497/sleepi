@@ -25,7 +25,7 @@ mixin _$JewelState {
             UpgradeInfoResponse? upgradeInfoResponse,
             bool isLoadMore,
             bool loading,
-            bool upgradeSuccess,
+            BedEntity? upgradeSuccess,
             String? errorMessage)
         loaded,
     required TResult Function() loadUpgraded,
@@ -40,7 +40,7 @@ mixin _$JewelState {
             UpgradeInfoResponse? upgradeInfoResponse,
             bool isLoadMore,
             bool loading,
-            bool upgradeSuccess,
+            BedEntity? upgradeSuccess,
             String? errorMessage)?
         loaded,
     TResult Function()? loadUpgraded,
@@ -55,7 +55,7 @@ mixin _$JewelState {
             UpgradeInfoResponse? upgradeInfoResponse,
             bool isLoadMore,
             bool loading,
-            bool upgradeSuccess,
+            BedEntity? upgradeSuccess,
             String? errorMessage)?
         loaded,
     TResult Function()? loadUpgraded,
@@ -150,7 +150,7 @@ class _$JewelStateInit implements JewelStateInit {
             UpgradeInfoResponse? upgradeInfoResponse,
             bool isLoadMore,
             bool loading,
-            bool upgradeSuccess,
+            BedEntity? upgradeSuccess,
             String? errorMessage)
         loaded,
     required TResult Function() loadUpgraded,
@@ -168,7 +168,7 @@ class _$JewelStateInit implements JewelStateInit {
             UpgradeInfoResponse? upgradeInfoResponse,
             bool isLoadMore,
             bool loading,
-            bool upgradeSuccess,
+            BedEntity? upgradeSuccess,
             String? errorMessage)?
         loaded,
     TResult Function()? loadUpgraded,
@@ -186,7 +186,7 @@ class _$JewelStateInit implements JewelStateInit {
             UpgradeInfoResponse? upgradeInfoResponse,
             bool isLoadMore,
             bool loading,
-            bool upgradeSuccess,
+            BedEntity? upgradeSuccess,
             String? errorMessage)?
         loaded,
     TResult Function()? loadUpgraded,
@@ -248,8 +248,10 @@ abstract class _$$JewelStateLoadedCopyWith<$Res> {
       UpgradeInfoResponse? upgradeInfoResponse,
       bool isLoadMore,
       bool loading,
-      bool upgradeSuccess,
+      BedEntity? upgradeSuccess,
       String? errorMessage});
+
+  $BedEntityCopyWith<$Res>? get upgradeSuccess;
 }
 
 /// @nodoc
@@ -297,12 +299,23 @@ class __$$JewelStateLoadedCopyWithImpl<$Res>
       upgradeSuccess: upgradeSuccess == freezed
           ? _value.upgradeSuccess
           : upgradeSuccess // ignore: cast_nullable_to_non_nullable
-              as bool,
+              as BedEntity?,
       errorMessage: errorMessage == freezed
           ? _value.errorMessage
           : errorMessage // ignore: cast_nullable_to_non_nullable
               as String?,
     ));
+  }
+
+  @override
+  $BedEntityCopyWith<$Res>? get upgradeSuccess {
+    if (_value.upgradeSuccess == null) {
+      return null;
+    }
+
+    return $BedEntityCopyWith<$Res>(_value.upgradeSuccess!, (value) {
+      return _then(_value.copyWith(upgradeSuccess: value));
+    });
   }
 }
 
@@ -315,7 +328,7 @@ class _$JewelStateLoaded implements JewelStateLoaded {
       this.upgradeInfoResponse,
       this.isLoadMore = true,
       this.loading = false,
-      this.upgradeSuccess = false,
+      this.upgradeSuccess,
       this.errorMessage})
       : _jewels = jewels,
         _jewelsUpgrade = jewelsUpgrade;
@@ -345,8 +358,7 @@ class _$JewelStateLoaded implements JewelStateLoaded {
   @JsonKey()
   final bool loading;
   @override
-  @JsonKey()
-  final bool upgradeSuccess;
+  final BedEntity? upgradeSuccess;
   @override
   final String? errorMessage;
 
@@ -400,7 +412,7 @@ class _$JewelStateLoaded implements JewelStateLoaded {
             UpgradeInfoResponse? upgradeInfoResponse,
             bool isLoadMore,
             bool loading,
-            bool upgradeSuccess,
+            BedEntity? upgradeSuccess,
             String? errorMessage)
         loaded,
     required TResult Function() loadUpgraded,
@@ -419,7 +431,7 @@ class _$JewelStateLoaded implements JewelStateLoaded {
             UpgradeInfoResponse? upgradeInfoResponse,
             bool isLoadMore,
             bool loading,
-            bool upgradeSuccess,
+            BedEntity? upgradeSuccess,
             String? errorMessage)?
         loaded,
     TResult Function()? loadUpgraded,
@@ -438,7 +450,7 @@ class _$JewelStateLoaded implements JewelStateLoaded {
             UpgradeInfoResponse? upgradeInfoResponse,
             bool isLoadMore,
             bool loading,
-            bool upgradeSuccess,
+            BedEntity? upgradeSuccess,
             String? errorMessage)?
         loaded,
     TResult Function()? loadUpgraded,
@@ -493,7 +505,7 @@ abstract class JewelStateLoaded implements JewelState {
       final UpgradeInfoResponse? upgradeInfoResponse,
       final bool isLoadMore,
       final bool loading,
-      final bool upgradeSuccess,
+      final BedEntity? upgradeSuccess,
       final String? errorMessage}) = _$JewelStateLoaded;
 
   List<BedEntity> get jewels;
@@ -501,7 +513,7 @@ abstract class JewelStateLoaded implements JewelState {
   UpgradeInfoResponse? get upgradeInfoResponse;
   bool get isLoadMore;
   bool get loading;
-  bool get upgradeSuccess;
+  BedEntity? get upgradeSuccess;
   String? get errorMessage;
   @JsonKey(ignore: true)
   _$$JewelStateLoadedCopyWith<_$JewelStateLoaded> get copyWith =>
@@ -556,7 +568,7 @@ class _$JewelStateUgraded implements JewelStateUgraded {
             UpgradeInfoResponse? upgradeInfoResponse,
             bool isLoadMore,
             bool loading,
-            bool upgradeSuccess,
+            BedEntity? upgradeSuccess,
             String? errorMessage)
         loaded,
     required TResult Function() loadUpgraded,
@@ -574,7 +586,7 @@ class _$JewelStateUgraded implements JewelStateUgraded {
             UpgradeInfoResponse? upgradeInfoResponse,
             bool isLoadMore,
             bool loading,
-            bool upgradeSuccess,
+            BedEntity? upgradeSuccess,
             String? errorMessage)?
         loaded,
     TResult Function()? loadUpgraded,
@@ -592,7 +604,7 @@ class _$JewelStateUgraded implements JewelStateUgraded {
             UpgradeInfoResponse? upgradeInfoResponse,
             bool isLoadMore,
             bool loading,
-            bool upgradeSuccess,
+            BedEntity? upgradeSuccess,
             String? errorMessage)?
         loaded,
     TResult Function()? loadUpgraded,

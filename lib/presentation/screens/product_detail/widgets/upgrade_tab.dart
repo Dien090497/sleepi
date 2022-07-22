@@ -17,6 +17,7 @@ import 'package:slee_fi/presentation/blocs/upgrade_jewel_bloc/upgrade_jewel_bloc
 import 'package:slee_fi/presentation/blocs/upgrade_jewel_bloc/upgrade_jewel_event.dart';
 import 'package:slee_fi/presentation/blocs/upgrade_jewel_bloc/upgrade_jewel_state.dart';
 import 'package:slee_fi/presentation/screens/gacha/widgets/atribute_process.dart';
+import 'package:slee_fi/presentation/screens/product_detail/widgets/jewel_dialog_body_upgrade_success.dart';
 import 'package:slee_fi/resources/resources.dart';
 
 import 'jewel_dialog_body.dart';
@@ -34,8 +35,14 @@ class UpGradeTab extends StatelessWidget {
           if (state.errorMessage?.isNotEmpty == true) {
             showMessageDialog(context, state.errorMessage!);
           }
-          if (state.upgradeSuccess) {
-            showSuccessfulDialog(context, null);
+          if (state.upgradeSuccess != null) {
+            showCustomDialog(
+              context,
+              padding: const EdgeInsets.all(24),
+              children: [
+                JewelDialogBodyUpgradeSuccess(jewel: state.upgradeSuccess!),
+              ],
+            );
           }
         }
       },
@@ -222,7 +229,7 @@ class JewelSocket extends StatelessWidget {
                 decoration: BoxDecoration(
                     color: AppColors.backgroundDialog,
                     shape: BoxShape.circle,
-                    border: Border.all(color: AppColors.lightGrey)),
+                    border: Border.all(color: AppColors.borderDarkColor)),
                 child: CachedImage(
                     image: jewelEntity!.image, width: 35, height: 35)),
       ),
