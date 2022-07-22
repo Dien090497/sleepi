@@ -10,8 +10,10 @@ class ListJewelResponse {
 
   ListJewelResponse(this.list, this.count);
 
-  factory ListJewelResponse.fromJson(Map<String, dynamic> json) =>
-      _$ListJewelResponseFromJson(json);
+  factory ListJewelResponse.fromJson(Map<String, dynamic> json) {
+    print('json from sever   $json');
+    return _$ListJewelResponseFromJson(json);
+  }
 
   Map<String, dynamic> toJson() => _$ListJewelResponseToJson(this);
 }

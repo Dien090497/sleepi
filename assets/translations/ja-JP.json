@@ -426,5 +426,7 @@
   "latest": "Latest",
   "required_time": "Required Time",
   "sleep_time": "Sleep Time",
-  "put_positive_correct_to": "Put positive correction to {}"
+  "put_positive_correct_to": "Put positive correction to {}",
+  "speed_up_success": "Speed up success"
+
 }

@@ -26,7 +26,7 @@ class MarketPlaceModel {
   final double? endTime;
   final String price;
   final String symbol;
-  final String status;
+  final String? status;
   final String createdAt;
   final String updatedAt;
   final String nftName;
@@ -100,7 +100,7 @@ class MarketPlaceModel {
       startTime: startTime,
       endTime: endTime,
       isMint: isMint,
-      status: status,
+      status: status??'',
       owner: owner,
       jewels: [],
       insurancePercent: 0,
