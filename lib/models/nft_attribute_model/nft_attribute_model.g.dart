@@ -25,6 +25,16 @@ NftAttributeModel _$NftAttributeModelFromJson(Map<String, dynamic> json) =>
       (json['resilience'] as num?)?.toDouble(),
       json['tokenId'] as int?,
       json['isMint'] as int?,
+      json['image'] as String?,
+      json['id'] as int?,
+      json['nftName'] as String?,
+      json['nftType'] as String?,
+      json['jewelType'] as String?,
+      json['itemType'] as String?,
+      json['levelUpTime'] as String?,
+      json['isBurn'] as int?,
+      json['createdAt'] as String?,
+      json['updatedAt'] as String?,
     );
 
 Map<String, dynamic> _$NftAttributeModelToJson(NftAttributeModel instance) =>
@@ -36,6 +46,7 @@ Map<String, dynamic> _$NftAttributeModelToJson(NftAttributeModel instance) =>
       'type': instance.type,
       'classNft': instance.classNft,
       'quality': instance.quality,
+      'image': instance.image,
       'time': instance.time,
       'level': instance.level,
       'bedMint': instance.bedMint,
@@ -46,4 +57,13 @@ Map<String, dynamic> _$NftAttributeModelToJson(NftAttributeModel instance) =>
       'bonus': instance.bonus,
       'special': instance.special,
       'resilience': instance.resilience,
+      'id': instance.id,
+      'nftName': instance.nftName,
+      'nftType': instance.nftType,
+      'jewelType': instance.jewelType,
+      'itemType': instance.itemType,
+      'levelUpTime': instance.levelUpTime,
+      'isBurn': instance.isBurn,
+      'createdAt': instance.createdAt,
+      'updatedAt': instance.updatedAt,
     };

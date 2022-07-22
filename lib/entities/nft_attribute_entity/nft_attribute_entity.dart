@@ -13,6 +13,8 @@ class NftAttributeEntity with _$NftAttributeEntity {
     required String? type,
     required String? classNft,
     required String? quality,
+    required String? name,
+    required String? image,
     required int? time,
     required int? level,
     required int? bedMint,

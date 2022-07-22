@@ -67,10 +67,14 @@ class _TransferListState extends State<TransferList> {
                       .approve(
                           amount: 0,
                           addressContract: widget.tokenEntity.address)
-                      .then((_) {
+                      .then((str) {
                     isLoadingNotifier.value = false;
                     Navigator.pop(context);
-                    showSuccessfulDialog(context, null);
+                    if (str == 'done') {
+                      showSuccessfulDialog(context, str);
+                    } else if (str.isNotEmpty) {
+                      showSuccessfulDialog(context, null);
+                    }
                   });
                 },
                 tokenName: widget.tokenEntity.symbol.toUpperCase(),

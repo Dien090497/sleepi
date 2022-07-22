@@ -143,16 +143,23 @@ class MarketPlaceCubit extends Cubit<MarketPlaceState> {
     getMarketPlace(params);
   }
 
-  Future<void> buyNFT(int nftId) async {
-    final result = await _buyNFTUseCase.call(nftId);
-    result.fold((l) {
-      emit(MarketPlaceState.buyFail('$l'));
-    }, (success) {
-      if (success.status) {
-        emit(const MarketPlaceState.buySuccess());
-      } else {
-        emit(MarketPlaceState.buyFail(success.message));
-      }
-    });
+  Future<String> buyNFT(int nftId) async {
+    final currentState = state;
+    if (currentState is MarketPlaceStateLoaded) {
+      emit(currentState.copyWith(isLoading: true));
+      final result = await _buyNFTUseCase.call(nftId);
+      return result.fold((l) {
+        emit(currentState.copyWith(isLoading: false));
+        return '$l';
+      }, (success) {
+        emit(currentState.copyWith(isLoading: false));
+        if (success.status) {
+          return '';
+        } else {
+          return success.message;
+        }
+      });
+    }
+    return '';
   }
 }

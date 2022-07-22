@@ -31,16 +31,6 @@ class PopUpLevelUp extends StatelessWidget {
   Widget build(BuildContext context) {
     return Stack(
       children: [
-        Positioned(
-          right: 0,
-          child: GestureDetector(
-            onTap: () => Navigator.pop(context),
-            child: const Icon(
-              Icons.close,
-              color: AppColors.lightGrey,
-            ),
-          ),
-        ),
         Column(
           children: [
             SFText(

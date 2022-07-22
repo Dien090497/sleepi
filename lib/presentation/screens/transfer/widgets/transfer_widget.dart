@@ -63,24 +63,25 @@ class TransferWidget extends StatelessWidget {
                   )
                 ],
               ),
-              Row(
-                children: [
-                  const Spacer(),
-                  GestureDetector(
-                    onTap: () {
-                      context.read<TransferCubit>().switchWallet();
-                    },
-                    child: const CircleAvatar(
-                      backgroundColor: AppColors.blue,
-                      child: Icon(
-                        Icons.swap_vert,
-                        size: 30,
-                        color: AppColors.white,
-                      ),
-                    ),
-                  ),
-                ],
-              ),
+              const SizedBox(height: 30),
+              // Row(
+              //   children: [
+              //     const Spacer(),
+              //     GestureDetector(
+              //       onTap: () {
+              //         context.read<TransferCubit>().switchWallet();
+              //       },
+              //       child: const CircleAvatar(
+              //         backgroundColor: AppColors.blue,
+              //         child: Icon(
+              //           Icons.swap_vert,
+              //           size: 30,
+              //           color: AppColors.white,
+              //         ),
+              //       ),
+              //     ),
+              //   ],
+              // ),
               Row(
                 children: [
                   Expanded(
