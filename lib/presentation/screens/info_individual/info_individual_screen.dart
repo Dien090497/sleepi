@@ -189,11 +189,6 @@ class InfoIndividualScreen extends StatelessWidget {
             : (args.marketPlaceModel != null && (args.buy ?? false)
                 ? BottomBarMarketPlaceWidget(bed: args.marketPlaceModel!)
                 : BottomBarWidget(bedEntity: args.bed,)),
-            /*child: args.marketPlaceModel != null && (args.buy ?? false)
-                ? BottomBarMarketPlaceWidget(bed: args.marketPlaceModel!)
-                : BottomBarWidget(
-                    bedEntity: args.bed,
-                  ),*/
           ),
           BlocBuilder<IndividualCubit, IndividualState>(
             builder: (context, state) =>

@@ -1,13 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:slee_fi/common/routes/app_routes.dart';
 import 'package:slee_fi/common/widgets/sf_dialog.dart';
 import 'package:slee_fi/common/widgets/sf_gridview.dart';
 import 'package:slee_fi/common/widgets/sf_sub_tab_bar.dart';
 import 'package:slee_fi/entities/bed_entity/bed_entity.dart';
 import 'package:slee_fi/l10n/locale_keys.g.dart';
+import 'package:slee_fi/presentation/blocs/bottom_bar_infoIndividual/bottom_bar_infoIndividual_cubit.dart';
+import 'package:slee_fi/presentation/blocs/bottom_bar_infoIndividual/bottom_bar_infoIndividual_state.dart';
+import 'package:slee_fi/presentation/blocs/individual/individual_cubit.dart';
 import 'package:slee_fi/presentation/blocs/upgrade_jewel_bloc/upgrade_jewel_bloc.dart';
 import 'package:slee_fi/presentation/blocs/upgrade_jewel_bloc/upgrade_jewel_event.dart';
 import 'package:slee_fi/presentation/blocs/upgrade_jewel_bloc/upgrade_jewel_state.dart';
+import 'package:slee_fi/presentation/screens/info_individual/widget/pop_up_sell.dart';
 import 'package:slee_fi/presentation/screens/product_detail/widgets/jewel_dialog_body.dart';
 import 'package:slee_fi/presentation/screens/product_detail/widgets/my_jewel_short_widget.dart';
 import 'package:slee_fi/presentation/screens/product_detail/widgets/upgrade_tab.dart';
@@ -52,7 +57,7 @@ class _TabJewelsDetailState extends State<TabJewelsDetail> {
                                   return GestureDetector(
                                     onTap: () {
                                       _showJewelDialog(
-                                          context, state.jewels[i]);
+                                          context, state.jewels[i],);
                                     },
                                     child: MyJewelsShortWidget(
                                         jewel: state.jewels[i]),
@@ -76,14 +81,46 @@ class _TabJewelsDetailState extends State<TabJewelsDetail> {
     return Future.delayed(const Duration(milliseconds: 1500));
   }
 
-  void _showJewelDialog(BuildContext context, BedEntity jewel) {
+  void _showJewelDialog(BuildContext context, BedEntity jewel,) {
     showCustomDialog(
       context,
       padding: const EdgeInsets.all(24),
       children: [
         JewelDialogBody(
           jewel: jewel,
-          onSellTap: () {},
+          onSellTap: () {
+            Navigator.pop(context);
+            final cubit = BottomBarInfoIndividualCubit()..init();
+            showCustomDialog(context, children: [
+              BlocProvider(
+                create: (context) => cubit,
+                child: BlocConsumer<BottomBarInfoIndividualCubit, BottomBarInfoIndividualState>(
+                  listener: (context, state) {
+                    if (state is BottomBarInfoIndividualError) {
+                      showMessageDialog(context, state.message);
+                    }
+                    if (state is BottomBarInfoIndividualLoaded) {
+                      if (state.successTransfer) {
+                        showSuccessfulDialog(context, null, onBackPress: () {
+                          Navigator.pushNamedAndRemoveUntil(
+                            context,
+                            R.bottomNavigation,
+                                (r) => false,
+                          );
+                        });
+                      }
+                    }
+                  },
+                  builder: (context, state) {
+                    return PopUpSell(
+                      bedEntity: jewel,
+                      cubit: cubit,
+                    );
+                  },
+                ),
+              ),
+            ]);
+          },
           onTransferTap: () {},
         ),
       ],

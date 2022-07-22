@@ -33,7 +33,7 @@ class BottomBarInfoIndividualCubit extends Cubit<BottomBarInfoIndividualState> {
   final _nftCancelSellUseCase= getIt<NFTCancelSellUseCase>();
 
   void init () {
-    emit(const BottomBarInfoIndividualState.loaded(gasPrice: '--.--', successTransfer: false, transactionFee: '--.--'));
+    getTransactionFee();
   }
 
   void estimateGas({required String contractAddress}) async {

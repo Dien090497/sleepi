@@ -35,7 +35,7 @@ class MarketPlaceCubit extends Cubit<MarketPlaceState> {
     page = 1;
     params = params.copyWith(
         page: page,
-        maxLevel: categoryType == CategoryType.bed ? 30 : 5,
+        maxLevel: categoryType == CategoryType.bed ? Const.bedLevelMax : 5,
         limit: limit,
         minLevel: categoryType == CategoryType.bed ? 0 : 1,
         categoryId: categoryType.type,
@@ -59,7 +59,7 @@ class MarketPlaceCubit extends Cubit<MarketPlaceState> {
       type: [],
       classNft: [],
       quality: [],
-      maxLevel: _categoryType == CategoryType.bed ? 30 : 5,
+      maxLevel: _categoryType == CategoryType.bed ? Const.bedLevelMax : 5,
       minLevel: _categoryType == CategoryType.bed ? 0 : 1,
       minBedMint: 0,
       maxBedMint: 7,

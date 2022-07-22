@@ -211,7 +211,7 @@ class _Detail extends StatelessWidget {
                   style: TextStyles.lightGrey14),
               SizedBox(height: 8.h),
               SFText(
-                  keyText: '${bed.durability}/100',
+                  keyText: '${double.parse(bed.durability).toInt()}/100',
                   style: TextStyles.lightWhite16W700),
             ],
           ),
