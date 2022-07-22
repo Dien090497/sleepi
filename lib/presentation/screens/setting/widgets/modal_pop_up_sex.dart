@@ -35,7 +35,7 @@ class _ModalPopUpSexState extends State<ModalPopUpSex> {
       LocaleKeys.other_.tr(),
       LocaleKeys.secret.tr(),
     ];
-    int selectedIndex = genders.indexOf(widget.selectedGender);
+    int selectedIndex = genders.indexOf(widget.selectedGender.tr());
     _controller = FixedExtentScrollController(initialItem: selectedIndex);
     return SafeArea(
       child: Column(

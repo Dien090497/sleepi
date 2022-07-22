@@ -7,7 +7,7 @@ part of 'nft_level_up_response.dart';
 // **************************************************************************
 
 NftLevelUp _$NftLevelUpFromJson(Map<String, dynamic> json) => NftLevelUp(
-      cost: json['cost'] as int?,
+      cost: (json['cost'] as num?)?.toDouble(),
       requireTime: json['require_time'] as int?,
       sleepTime: json['sleep_time'] as int?,
     );

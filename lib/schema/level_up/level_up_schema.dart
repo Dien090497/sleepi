@@ -8,7 +8,7 @@ class LevelUpSchema {
   LevelUpSchema({required this.bedId, required this.cost});
 
   final int bedId;
-  final int cost;
+  final double cost;
 
   factory LevelUpSchema.fromJson(Map<String, dynamic> json) =>
       _$LevelUpSchemaFromJson(json);
