@@ -81,11 +81,13 @@ class JewelBloc extends Bloc<JewelEvent, JewelState> {
 
   FutureOr<void> _removeJewelFromSocket(
       ClearJewel event, Emitter<JewelState> emit) {
-    print('remove jewel ');
     final currentState = state;
     if (currentState is JewelStateLoaded) {
-      print('remove jewel 222');
-      emit(currentState.copyWith(upgradeInfoResponse: null, jewelsUpgrade: []));
+      emit(currentState.copyWith(
+        upgradeInfoResponse: null,
+        jewelsUpgrade: [],
+        errorMessage: null,
+      ));
     }
   }
 
@@ -102,13 +104,11 @@ class JewelBloc extends Bloc<JewelEvent, JewelState> {
       CategoryType.jewel,
     ));
     result.fold((l) {
-      print('upgrade Jewel errprr  ${l.msg}');
       final currentState = state;
       if (currentState is JewelStateLoaded && _currentPage != 1) {
         emit(currentState.copyWith(errorMessage: l.msg, loading: false));
       }
     }, (r) {
-      print('upgrade Jewel success  $r');
       final List<JewelEntity> temp = List.from(currentState.jewels);
       for (var element in currentState.jewelsUpgrade) {
         temp.remove(element);
