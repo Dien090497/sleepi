@@ -174,22 +174,14 @@ class _BottomBarWidgetState extends State<BottomBarWidget> {
                       setState(() {
                         index = 3;
                       });
-                      if (widget.bedEntity.isLock == 1) {
-                        showCustomDialog(context, children: [
-                          CancelSell(bedEntity: widget.bedEntity, cubit: cubit,),
-                        ]).then((value) => setState(() {
-                          index = -1;
-                        }));
-                      } else {
-                        showCustomDialog(context, children: [
-                          PopUpSell(
-                            bedEntity: widget.bedEntity,
-                            cubit: cubit,
-                          ),
-                        ]).then((value) => setState(() {
-                          index = -1;
-                        }));
-                      }
+                      showCustomDialog(context, children: [
+                        PopUpSell(
+                          bedEntity: widget.bedEntity,
+                          cubit: cubit,
+                        ),
+                      ]).then((value) => setState(() {
+                        index = -1;
+                      }));
                     }),
                     itemBottomBar(4, context, Ics.recycling, LocaleKeys.recycle,
                         () {
