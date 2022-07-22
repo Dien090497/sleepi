@@ -1,5 +1,4 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:slee_fi/common/enum/enum.dart';
 import 'package:slee_fi/di/injector.dart';
 import 'package:slee_fi/schema/minting/minting_schema.dart';
 import 'package:slee_fi/usecase/fetch_bed_usecase.dart';
@@ -32,7 +31,7 @@ class MintCubit extends Cubit<MintState> {
 
   Future<void> getListMyBed() async {
     final result = await _fetchListBedUC
-        .call(FetchBedParam(page, limit, CategoryType.bed, AttributeNFT.none));
+        .call(FetchBedParam(page, limit, CategoryType.bed));
     result.fold((l) {
       emit(MintState.error('$l'));
     }, (r) {

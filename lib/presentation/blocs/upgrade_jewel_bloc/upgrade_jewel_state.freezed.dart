@@ -20,8 +20,8 @@ mixin _$JewelState {
   TResult when<TResult extends Object?>({
     required TResult Function() init,
     required TResult Function(
-            List<JewelEntity> jewels,
-            List<JewelEntity> jewelsUpgrade,
+            List<BedEntity> jewels,
+            List<BedEntity> jewelsUpgrade,
             UpgradeInfoResponse? upgradeInfoResponse,
             bool isLoadMore,
             bool loading,
@@ -35,8 +35,8 @@ mixin _$JewelState {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? init,
     TResult Function(
-            List<JewelEntity> jewels,
-            List<JewelEntity> jewelsUpgrade,
+            List<BedEntity> jewels,
+            List<BedEntity> jewelsUpgrade,
             UpgradeInfoResponse? upgradeInfoResponse,
             bool isLoadMore,
             bool loading,
@@ -50,8 +50,8 @@ mixin _$JewelState {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? init,
     TResult Function(
-            List<JewelEntity> jewels,
-            List<JewelEntity> jewelsUpgrade,
+            List<BedEntity> jewels,
+            List<BedEntity> jewelsUpgrade,
             UpgradeInfoResponse? upgradeInfoResponse,
             bool isLoadMore,
             bool loading,
@@ -145,8 +145,8 @@ class _$JewelStateInit implements JewelStateInit {
   TResult when<TResult extends Object?>({
     required TResult Function() init,
     required TResult Function(
-            List<JewelEntity> jewels,
-            List<JewelEntity> jewelsUpgrade,
+            List<BedEntity> jewels,
+            List<BedEntity> jewelsUpgrade,
             UpgradeInfoResponse? upgradeInfoResponse,
             bool isLoadMore,
             bool loading,
@@ -163,8 +163,8 @@ class _$JewelStateInit implements JewelStateInit {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? init,
     TResult Function(
-            List<JewelEntity> jewels,
-            List<JewelEntity> jewelsUpgrade,
+            List<BedEntity> jewels,
+            List<BedEntity> jewelsUpgrade,
             UpgradeInfoResponse? upgradeInfoResponse,
             bool isLoadMore,
             bool loading,
@@ -181,8 +181,8 @@ class _$JewelStateInit implements JewelStateInit {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? init,
     TResult Function(
-            List<JewelEntity> jewels,
-            List<JewelEntity> jewelsUpgrade,
+            List<BedEntity> jewels,
+            List<BedEntity> jewelsUpgrade,
             UpgradeInfoResponse? upgradeInfoResponse,
             bool isLoadMore,
             bool loading,
@@ -243,8 +243,8 @@ abstract class _$$JewelStateLoadedCopyWith<$Res> {
           _$JewelStateLoaded value, $Res Function(_$JewelStateLoaded) then) =
       __$$JewelStateLoadedCopyWithImpl<$Res>;
   $Res call(
-      {List<JewelEntity> jewels,
-      List<JewelEntity> jewelsUpgrade,
+      {List<BedEntity> jewels,
+      List<BedEntity> jewelsUpgrade,
       UpgradeInfoResponse? upgradeInfoResponse,
       bool isLoadMore,
       bool loading,
@@ -277,11 +277,11 @@ class __$$JewelStateLoadedCopyWithImpl<$Res>
       jewels: jewels == freezed
           ? _value._jewels
           : jewels // ignore: cast_nullable_to_non_nullable
-              as List<JewelEntity>,
+              as List<BedEntity>,
       jewelsUpgrade: jewelsUpgrade == freezed
           ? _value._jewelsUpgrade
           : jewelsUpgrade // ignore: cast_nullable_to_non_nullable
-              as List<JewelEntity>,
+              as List<BedEntity>,
       upgradeInfoResponse: upgradeInfoResponse == freezed
           ? _value.upgradeInfoResponse
           : upgradeInfoResponse // ignore: cast_nullable_to_non_nullable
@@ -310,8 +310,8 @@ class __$$JewelStateLoadedCopyWithImpl<$Res>
 
 class _$JewelStateLoaded implements JewelStateLoaded {
   const _$JewelStateLoaded(
-      {final List<JewelEntity> jewels = const [],
-      final List<JewelEntity> jewelsUpgrade = const [],
+      {final List<BedEntity> jewels = const [],
+      final List<BedEntity> jewelsUpgrade = const [],
       this.upgradeInfoResponse,
       this.isLoadMore = true,
       this.loading = false,
@@ -320,18 +320,18 @@ class _$JewelStateLoaded implements JewelStateLoaded {
       : _jewels = jewels,
         _jewelsUpgrade = jewelsUpgrade;
 
-  final List<JewelEntity> _jewels;
+  final List<BedEntity> _jewels;
   @override
   @JsonKey()
-  List<JewelEntity> get jewels {
+  List<BedEntity> get jewels {
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_jewels);
   }
 
-  final List<JewelEntity> _jewelsUpgrade;
+  final List<BedEntity> _jewelsUpgrade;
   @override
   @JsonKey()
-  List<JewelEntity> get jewelsUpgrade {
+  List<BedEntity> get jewelsUpgrade {
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_jewelsUpgrade);
   }
@@ -395,8 +395,8 @@ class _$JewelStateLoaded implements JewelStateLoaded {
   TResult when<TResult extends Object?>({
     required TResult Function() init,
     required TResult Function(
-            List<JewelEntity> jewels,
-            List<JewelEntity> jewelsUpgrade,
+            List<BedEntity> jewels,
+            List<BedEntity> jewelsUpgrade,
             UpgradeInfoResponse? upgradeInfoResponse,
             bool isLoadMore,
             bool loading,
@@ -414,8 +414,8 @@ class _$JewelStateLoaded implements JewelStateLoaded {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? init,
     TResult Function(
-            List<JewelEntity> jewels,
-            List<JewelEntity> jewelsUpgrade,
+            List<BedEntity> jewels,
+            List<BedEntity> jewelsUpgrade,
             UpgradeInfoResponse? upgradeInfoResponse,
             bool isLoadMore,
             bool loading,
@@ -433,8 +433,8 @@ class _$JewelStateLoaded implements JewelStateLoaded {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? init,
     TResult Function(
-            List<JewelEntity> jewels,
-            List<JewelEntity> jewelsUpgrade,
+            List<BedEntity> jewels,
+            List<BedEntity> jewelsUpgrade,
             UpgradeInfoResponse? upgradeInfoResponse,
             bool isLoadMore,
             bool loading,
@@ -488,16 +488,16 @@ class _$JewelStateLoaded implements JewelStateLoaded {
 
 abstract class JewelStateLoaded implements JewelState {
   const factory JewelStateLoaded(
-      {final List<JewelEntity> jewels,
-      final List<JewelEntity> jewelsUpgrade,
+      {final List<BedEntity> jewels,
+      final List<BedEntity> jewelsUpgrade,
       final UpgradeInfoResponse? upgradeInfoResponse,
       final bool isLoadMore,
       final bool loading,
       final bool upgradeSuccess,
       final String? errorMessage}) = _$JewelStateLoaded;
 
-  List<JewelEntity> get jewels;
-  List<JewelEntity> get jewelsUpgrade;
+  List<BedEntity> get jewels;
+  List<BedEntity> get jewelsUpgrade;
   UpgradeInfoResponse? get upgradeInfoResponse;
   bool get isLoadMore;
   bool get loading;
@@ -551,8 +551,8 @@ class _$JewelStateUgraded implements JewelStateUgraded {
   TResult when<TResult extends Object?>({
     required TResult Function() init,
     required TResult Function(
-            List<JewelEntity> jewels,
-            List<JewelEntity> jewelsUpgrade,
+            List<BedEntity> jewels,
+            List<BedEntity> jewelsUpgrade,
             UpgradeInfoResponse? upgradeInfoResponse,
             bool isLoadMore,
             bool loading,
@@ -569,8 +569,8 @@ class _$JewelStateUgraded implements JewelStateUgraded {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? init,
     TResult Function(
-            List<JewelEntity> jewels,
-            List<JewelEntity> jewelsUpgrade,
+            List<BedEntity> jewels,
+            List<BedEntity> jewelsUpgrade,
             UpgradeInfoResponse? upgradeInfoResponse,
             bool isLoadMore,
             bool loading,
@@ -587,8 +587,8 @@ class _$JewelStateUgraded implements JewelStateUgraded {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? init,
     TResult Function(
-            List<JewelEntity> jewels,
-            List<JewelEntity> jewelsUpgrade,
+            List<BedEntity> jewels,
+            List<BedEntity> jewelsUpgrade,
             UpgradeInfoResponse? upgradeInfoResponse,
             bool isLoadMore,
             bool loading,

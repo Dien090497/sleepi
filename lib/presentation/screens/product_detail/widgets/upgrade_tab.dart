@@ -10,7 +10,7 @@ import 'package:slee_fi/common/widgets/sf_dialog.dart';
 import 'package:slee_fi/common/widgets/sf_icon.dart';
 import 'package:slee_fi/common/widgets/sf_label_value.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
-import 'package:slee_fi/entities/jewel_entity/jewel_entity.dart';
+import 'package:slee_fi/entities/bed_entity/bed_entity.dart';
 import 'package:slee_fi/l10n/locale_keys.g.dart';
 import 'package:slee_fi/models/upgrade_jewel_info_response/upgrade_info_response.dart';
 import 'package:slee_fi/presentation/blocs/upgrade_jewel_bloc/upgrade_jewel_bloc.dart';
@@ -186,7 +186,7 @@ class JewelSocket extends StatelessWidget {
   final double? left;
   final double? right;
   final double? bottom;
-  final JewelEntity? jewelEntity;
+  final BedEntity? jewelEntity;
 
   @override
   Widget build(BuildContext context) {
@@ -218,7 +218,7 @@ class JewelSocket extends StatelessWidget {
     );
   }
 
-  void _showJewelDialog(BuildContext context, JewelEntity jewel) {
+  void _showJewelDialog(BuildContext context, BedEntity jewel) {
 
     showCustomDialog(
       context,

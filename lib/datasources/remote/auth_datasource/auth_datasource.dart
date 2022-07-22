@@ -190,12 +190,17 @@ abstract class AuthDataSource {
     /***[categoryId] == 1 bed
           [categoryId] == 3 item */
     @Query('categoryId') int categoryId,
-    @Query('item') AttributeNFT itemNFT,
     @Query('type') String bedType,
   );
 
   @GET('/nft-attributes/list-jewels')
   Future<ListJewelResponse> getListJewel(
+    @Query('limit') int limit,
+    @Query('page') int page,
+  );
+
+  @GET('/nft-attributes/list-jewels')
+  Future<ListBedResponse> getListJewels(
     @Query('limit') int limit,
     @Query('page') int page,
   );
@@ -309,7 +314,8 @@ abstract class AuthDataSource {
 
   /// upgrade jewel nft/upgrade'
   @POST('/nft/upgrade')
-  Future<UpgradeJewelResponse> upgradeJewel(@Body() UpgradeSchema upgradeJewelSchema);
+  Future<UpgradeJewelResponse> upgradeJewel(
+      @Body() UpgradeSchema upgradeJewelSchema);
 
   @GET('/nft/upgrade')
   Future<UpgradeInfoResponse> upgradeInfo(

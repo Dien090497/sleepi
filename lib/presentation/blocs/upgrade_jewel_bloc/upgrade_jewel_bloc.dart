@@ -2,12 +2,11 @@ import 'dart:async';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:slee_fi/di/injector.dart';
-import 'package:slee_fi/entities/jewel_entity/jewel_entity.dart';
+import 'package:slee_fi/entities/bed_entity/bed_entity.dart';
 import 'package:slee_fi/presentation/blocs/upgrade_jewel_bloc/upgrade_jewel_state.dart';
 import 'package:slee_fi/schema/upgrade_jewel_schame/upgrade_jewel_schema.dart';
 import 'package:slee_fi/usecase/fetch_bed_usecase.dart';
-import 'package:slee_fi/usecase/fetch_home_bed_usecase.dart';
-import 'package:slee_fi/usecase/fetch_jewel_usecase.dart';
+import 'package:slee_fi/usecase/fetch_upgrade_list.dart';
 import 'package:slee_fi/usecase/upgrade_info_usecase.dart';
 import 'package:slee_fi/usecase/upgrade_jewel_usecase.dart';
 
@@ -16,6 +15,7 @@ import 'upgrade_jewel_event.dart';
 class JewelBloc extends Bloc<JewelEvent, JewelState> {
   JewelBloc() : super(const JewelState.init()) {
     on<JewelFetchList>(_fetchJewels);
+    on<InitEvent>(_onInitEvent);
     on<JewelRefreshList>(_refreshJewels);
     on<AddJewelToSocket>(_addJewelToSocket);
     on<ClearJewel>(_removeJewelFromSocket);
@@ -23,16 +23,20 @@ class JewelBloc extends Bloc<JewelEvent, JewelState> {
     on<JewelLoading>(_loadingJewel);
   }
 
+ late CategoryType categoryType;
+
+  FutureOr<void> _onInitEvent(InitEvent event, Emitter<JewelState> emit) {}
+
   final int _limit = 10;
   int _currentPage = 1;
 
-  final _fetchListJewelUC = getIt<FetchJewelUseCase>();
+  final _fetchListJewelUC = getIt<FetchUpgradeListUseCase>();
   final _getInfoUpgrade = getIt<UpgradeInfoUseCase>();
   final _upgradeJewelUseCase = getIt<UpgradeUseCase>();
 
   void _fetchJewels(JewelFetchList event, Emitter<JewelState> emit) async {
-    final result =
-        await _fetchListJewelUC.call(FetchHomeBedParam(_currentPage, _limit));
+    final result = await _fetchListJewelUC.call(
+        FetchBedParam(_currentPage, _limit, categoryType));
     result.fold((l) {
       emit(const JewelStateLoaded(
           jewels: [], isLoadMore: false, loading: false));
@@ -109,7 +113,7 @@ class JewelBloc extends Bloc<JewelEvent, JewelState> {
         emit(currentState.copyWith(errorMessage: l.msg, loading: false));
       }
     }, (r) {
-      final List<JewelEntity> temp = List.from(currentState.jewels);
+      final List<BedEntity> temp = List.from(currentState.jewels);
       for (var element in currentState.jewelsUpgrade) {
         temp.remove(element);
       }

@@ -13,7 +13,6 @@ import 'package:slee_fi/models/response_model/response_model.dart';
 import 'package:slee_fi/models/swap_token_to_wallet_response/swap_token_to_wallet_response.dart';
 import 'package:slee_fi/models/token_spending/token_spending.dart';
 import 'package:slee_fi/models/upgrade_jewel_info_response/upgrade_info_response.dart';
-import 'package:slee_fi/models/upgrade_jewel_response/upgrade_jewel_response.dart';
 import 'package:slee_fi/models/verify_response/verify_response.dart';
 import 'package:slee_fi/models/withdraw_history_response/withdraw_history_response.dart';
 import 'package:slee_fi/schema/add_jewel_schema/add_jewel_schema.dart';
@@ -95,10 +94,13 @@ abstract class IUserRepository {
   Future<Either<FailureMessage, List<JewelEntity>>> fetchListJewel(
       FetchHomeBedParam param);
 
-  Future<Either<FailureMessage, JewelEntity>> upgradeJewel(UpgradeSchema param);
+  Future<Either<FailureMessage, BedEntity>> upgradeJewel(UpgradeSchema param);
 
   Future<Either<FailureMessage, UpgradeInfoResponse>> upgradeInfo(
       UpgradeInfoParam param);
 
   Future<Either<FailureMessage, String>> getSlftPrice();
+
+  Future<Either<FailureMessage, List<BedEntity>>> fetchListUpgrade(
+      FetchBedParam fetchBedParam);
 }

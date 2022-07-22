@@ -428,13 +428,12 @@ class _AuthDataSource implements AuthDataSource {
 
   @override
   Future<OwnerNFTResponse> getNftByOwner(
-      limit, page, categoryId, itemNFT, bedType) async {
+      limit, page, categoryId, bedType) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{
       r'limit': limit,
       r'page': page,
       r'categoryId': categoryId,
-      r'item': itemNFT.toJson(),
       r'type': bedType
     };
     final _headers = <String, dynamic>{};
@@ -462,6 +461,22 @@ class _AuthDataSource implements AuthDataSource {
                     queryParameters: queryParameters, data: _data)
                 .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
     final value = ListJewelResponse.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<ListBedResponse> getListJewels(limit, page) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{r'limit': limit, r'page': page};
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<ListBedResponse>(
+            Options(method: 'GET', headers: _headers, extra: _extra)
+                .compose(_dio.options, '/nft-attributes/list-jewels',
+                    queryParameters: queryParameters, data: _data)
+                .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = ListBedResponse.fromJson(_result.data!);
     return value;
   }
 
