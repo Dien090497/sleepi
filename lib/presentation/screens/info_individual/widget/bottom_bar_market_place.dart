@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
+import 'package:slee_fi/common/widgets/loading_screen.dart';
 import 'package:slee_fi/common/widgets/sf_alert_dialog.dart';
 import 'package:slee_fi/common/widgets/sf_buttons.dart';
 import 'package:slee_fi/common/widgets/sf_dialog.dart';
@@ -25,9 +26,15 @@ class BottomBarMarketPlaceWidget extends StatelessWidget {
       children: PopUpBedMarketPlace(
         cubit: cubit,
         bed: bed,
-        onConfirmTap: () {
+        onConfirmTap: () async {
           Navigator.pop(context);
-          cubit.buyNFT(bed.nftId);
+          final msg = await cubit.buyNFT(bed.nftId);
+          cubit.refresh();
+          if (msg.isEmpty) {
+            showSuccessfulDialog(context, LocaleKeys.purchased_successfully);
+          } else {
+            showMessageDialog(context, msg);
+          }
         },
       ),
     );
@@ -37,18 +44,7 @@ class BottomBarMarketPlaceWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) => MarketPlaceCubit(),
-      child: BlocConsumer<MarketPlaceCubit, MarketPlaceState>(
-        listener: (context, state) {
-          if (state is MarketPlaceStateBuySuccess) {
-            Navigator.pop(context);
-            showSuccessfulDialog(context, LocaleKeys.purchased_successfully);
-          }
-
-          if (state is MarketPlaceStateBuyFailed) {
-            Navigator.pop(context);
-            showMessageDialog(context, state.msg);
-          }
-        },
+      child: BlocBuilder<MarketPlaceCubit, MarketPlaceState>(
         builder: (context, state) {
           final cubit = context.read<MarketPlaceCubit>();
           return Material(
@@ -82,9 +78,7 @@ class BottomBarMarketPlaceWidget extends StatelessWidget {
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            const SizedBox(
-                              width: 12,
-                            ),
+                            const SizedBox(width: 12),
                             Expanded(
                               child: SFText(
                                 keyText: '${bed.price} ${bed.symbol}',
@@ -102,7 +96,10 @@ class BottomBarMarketPlaceWidget extends StatelessWidget {
                           ],
                         ),
                       ),
-                    )
+                    ),
+                    if (state is MarketPlaceStateLoading ||
+                        (state is MarketPlaceStateLoaded && state.isLoading))
+                      const LoadingIcon(),
                   ],
                 ),
               ),
