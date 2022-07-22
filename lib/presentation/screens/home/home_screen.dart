@@ -37,23 +37,23 @@ class HomeScreen extends StatelessWidget {
             const TopBarCommon(),
             const SizedBox(height: 27),
             Expanded(
-              child: HomeListWidget(
-                child: ListView(
-                  children: [
-                    const Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 16.0),
-                      child: MiddleBed(),
-                    ),
-                    const SizedBox(height: 10),
-                    const UseItem(),
-                    const SizedBox(height: 24),
-                    BlocBuilder<HomeBloc, HomeState>(
-                      builder: (context, state) {
-                        return FocusDetector(
-                          onFocusGained: () {
-                            context.read<HomeBloc>().add(const RefreshBed());
-                          },
-                          child: Column(
+              child: FocusDetector(
+                onFocusGained: () {
+                  context.read<HomeBloc>().add(const RefreshBed());
+                },
+                child: HomeListWidget(
+                  child: ListView(
+                    children: [
+                      const Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 16.0),
+                        child: MiddleBed(),
+                      ),
+                      const SizedBox(height: 10),
+                      const UseItem(),
+                      const SizedBox(height: 24),
+                      BlocBuilder<HomeBloc, HomeState>(
+                        builder: (context, state) {
+                          return Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               if (state is HomeLoaded &&
@@ -136,11 +136,11 @@ class HomeScreen extends StatelessWidget {
                                     : null,
                               ),
                             ],
-                          ),
-                        );
-                      },
-                    ),
-                  ],
+                          );
+                        },
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ),

@@ -136,8 +136,10 @@ class _BottomBarWidgetState extends State<BottomBarWidget> {
                   children: [
                     itemBottomBar(0, context, Ics.levelUp, LocaleKeys.level_up,
                         () {
-                          showLoadingDialog(context, "Loading");
-                          cubit.getLevelUp(widget.bedEntity.nftId);
+                          if(widget.bedEntity.level<30) {
+                            showLoadingDialog(context, "Loading");
+                            cubit.getLevelUp(widget.bedEntity.nftId);
+                          }
                         }),
                     itemBottomBar(1, context, Ics.repair, LocaleKeys.repair,
                         () {

@@ -111,46 +111,55 @@ bool onIosBackground(ServiceInstance service) {
 }
 
 Future<void> onStart(ServiceInstance service) async {
-  final audioPlayer = AudioPlayer();
-  audioPlayer.setLoopMode(LoopMode.all);
+  try {
+    final audioPlayer = AudioPlayer();
+    audioPlayer.setLoopMode(LoopMode.all);
 
-  if (service is AndroidServiceInstance) {
-    service.on(Const.setAsForeground).listen((event) {
-      service.setAsForegroundService();
-    });
+    if (service is AndroidServiceInstance) {
+      service.on(Const.setAsForeground).listen((event) {
+        service.setAsForegroundService();
+      });
 
-    service.on(Const.setAsBackground).listen((event) {
-      service.setAsBackgroundService();
-    });
-  }
-  service.on(Const.stopService).listen((event) async {
-    if (audioPlayer.playing) {
-      await audioPlayer.stop();
+      service.on(Const.setAsBackground).listen((event) {
+        service.setAsBackgroundService();
+      });
     }
-    await audioPlayer.dispose();
-    service.stopSelf();
-  });
+    service.on(Const.stopService).listen((event) async {
+      if (audioPlayer.playing) {
+        await audioPlayer.stop();
+      }
+      await audioPlayer.dispose();
+      service.stopSelf();
+    });
 
-  final SharedPreferences preferences = await SharedPreferences.getInstance();
-  final int timeWakeUp = preferences.getInt(Const.time) ?? 0;
-  final int sound = preferences.getInt(Const.sound) ?? 0;
-  final DateTime wakeUp = DateTime.fromMillisecondsSinceEpoch(timeWakeUp);
-  final int time = wakeUp.difference(DateTime.now()).inMinutes;
-  if (service is AndroidServiceInstance) {
-    service.setForegroundNotificationInfo(
-      title: "Sleep Tracking...",
-      content:
-          "Alarm: ${DateFormat('HH:mm dd/MM/yyyy').format(wakeUp).toString()}",
-    );
-  }
-  Timer.periodic(Duration(minutes: time), (timer) async {
-    log('FLUTTER BACKGROUND SERVICE: ${DateTime.now()}');
-    if (!audioPlayer.playing) {
-      await audioPlayer.setAsset(Const.soundAlarm[sound]);
+    final SharedPreferences preferences = await SharedPreferences.getInstance();
+    final int timeWakeUp = preferences.getInt(Const.time) ?? 0;
+    final int sound = preferences.getInt(Const.sound) ?? 0;
+    final DateTime wakeUp = DateTime.fromMillisecondsSinceEpoch(timeWakeUp);
+    final int time = wakeUp
+        .difference(DateTime.now())
+        .inMinutes;
+    if (service is AndroidServiceInstance) {
+      service.setForegroundNotificationInfo(
+        title: "Sleep Tracking...",
+        content:
+        "Alarm: ${DateFormat('HH:mm dd/MM/yyyy').format(wakeUp).toString()}",
+      );
+    }
+    Timer.periodic(const Duration(seconds: 1), (timer) async {
+      if (!audioPlayer.playing) {
+        await audioPlayer.setAsset(Const.soundAlarm[sound]);
+        await audioPlayer.setVolume(0);
+        await audioPlayer.setLoopMode(LoopMode.all);
+        await audioPlayer.play();
+      }
+    });
+
+    Timer.periodic(Duration(minutes: time), (timer) async {
       await audioPlayer.setVolume(1);
-      await audioPlayer.setLoopMode(LoopMode.one);
-      await audioPlayer.play();
-    }
-    timer.cancel();
-  });
+      timer.cancel();
+    });
+  }catch(e){
+    service.stopSelf();
+  }
 }
