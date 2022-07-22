@@ -18,18 +18,24 @@ import 'package:slee_fi/presentation/screens/home/widgets/pop_up_repair.dart';
 import 'package:slee_fi/presentation/screens/home/widgets/pop_up_transfer.dart';
 import 'package:slee_fi/presentation/screens/info_individual/widget/pop_up_sell.dart';
 import 'package:slee_fi/resources/resources.dart';
-import 'package:slee_fi/schema/level_up/level_up_schema.dart';
 
 class BottomBarWidget extends StatefulWidget {
   const BottomBarWidget({Key? key, required this.bedEntity}) : super(key: key);
   final BedEntity bedEntity;
 
   @override
-  State<BottomBarWidget> createState() => _BottomBarWidgetState();
+  State<BottomBarWidget> createState() => BottomBarWidgetState();
 }
 
-class _BottomBarWidgetState extends State<BottomBarWidget> {
+class BottomBarWidgetState extends State<BottomBarWidget> {
   int index = -1;
+
+  late BedEntity bedEntity = widget.bedEntity;
+
+  updateBed() {
+    bedEntity = widget.bedEntity;
+    setState(() {});
+  }
 
   Widget itemBottomBar(int i, BuildContext context, String icon, String key,
       VoidCallback onTap) {
@@ -43,15 +49,22 @@ class _BottomBarWidgetState extends State<BottomBarWidget> {
           children: [
             SFIcon(
               icon,
-              color:
-                  index == i ? AppColors.blue : AppColors.greyBottomIndividual,
+              color: index == i
+                  ? AppColors.blue
+                  : i == 0 && bedEntity.level == 30
+                      ? AppColors.lightGrey
+                      : AppColors.greyBottomIndividual,
             ),
             const SizedBox(
               height: 6,
             ),
             SFText(
               keyText: key,
-              style: index == i ? TextStyles.blue12 : TextStyles.lightGrey12,
+              style: index == i
+                  ? TextStyles.blue12
+                  : i == 0 && bedEntity.level == 30
+                      ? TextStyles.w400LightWhite12
+                      : TextStyles.lightGrey12,
             ),
           ],
         ),
@@ -98,38 +111,6 @@ class _BottomBarWidgetState extends State<BottomBarWidget> {
                     });
                   }
                 }
-
-                if (state is UpLevelSuccess) {
-                  Navigator.pop(context, true);
-                  showSuccessfulDialog(context, null);
-                }
-
-                if (state is GetLevelSuccess) {
-                  Navigator.pop(context, true);
-                  index = 0;
-                  showCustomAlertDialog(
-                    context,
-                    padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 32),
-                    children: PopUpLevelUp(
-                          icon: widget.bedEntity.image,
-                          level: widget.bedEntity.level,
-                          cost: state.levelUp.cost!,
-                          requiredTime: state.levelUp.requireTime,
-                          sleepTime: state.levelUp.sleepTime,
-                          onConfirm: () {
-                            showLoadingDialog(context, "Loading");
-                            cubit.postLevelUp(
-                              LevelUpSchema(
-                                bedId: widget.bedEntity.nftId,
-                                cost: state.levelUp.cost!,
-                              ),
-                            );
-                          }),
-                  ).then((value) {
-                    cubit.init();
-                    index = -1;
-                  });
-                }
               },
               builder: (context, state) {
                 return Row(
@@ -137,67 +118,87 @@ class _BottomBarWidgetState extends State<BottomBarWidget> {
                   children: [
                     itemBottomBar(0, context, Ics.levelUp, LocaleKeys.level_up,
                         () {
-                          if(widget.bedEntity.level<30) {
-                            showLoadingDialog(context, "Loading");
-                            cubit.getLevelUp(widget.bedEntity.nftId);
-                          }
-                        }),
+                      if (bedEntity.level < 30) {
+                        index = 0;
+                        showCustomAlertDialog(
+                          context,
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 20, vertical: 32),
+                          children: PopUpLevelUp(
+                            bedEntity: bedEntity,
+                            cubit: cubit,
+                          ),
+                        ).then((value) {
+                          cubit.init();
+                          index = -1;
+                          setState(() {});
+                        });
+                      }
+                    }),
                     itemBottomBar(1, context, Ics.repair, LocaleKeys.repair,
                         () {
-                      setState(() {
-                        index = 1;
-                      });
+                      index = 1;
                       showCustomDialog(
                         context,
                         children: [
                           PopUpRepair(
-                            bedEntity: widget.bedEntity,
+                            bedEntity: bedEntity,
                             cubit: cubit,
                           ),
                         ],
-                      ).then((value) => setState(() {
-                            index = -1;
-                          }));
+                      ).then((value) {
+                        cubit.init();
+                        index = -1;
+                      });
                     }),
                     itemBottomBar(2, context, Ics.heart, LocaleKeys.mint, () {
-                      setState(() {
-                        index = 2;
+                      index = 2;
+                      Navigator.pushNamed(context, R.mint, arguments: bedEntity)
+                          .then((value) {
+                        cubit.init();
+                        index = -1;
+                        setState(() {});
                       });
-                      Navigator.pushNamed(context, R.mint,
-                              arguments: widget.bedEntity)
-                          .then((value) => setState(() {
-                                index = -1;
-                              }));
                     }),
                     itemBottomBar(3, context, Ics.shopping, LocaleKeys.sell,
                         () {
                       setState(() {
                         index = 3;
                       });
-                      showCustomDialog(context, children: [
-                        PopUpSell(
-                          bedEntity: widget.bedEntity,
-                          cubit: cubit,
-                        ),
-                      ]).then((value) => setState(() {
-                        index = -1;
-                      }));
+                      if (bedEntity.isLock == 1) {
+                        showCustomDialog(context, children: [
+                          CancelSell(
+                            bedEntity: bedEntity,
+                            cubit: cubit,
+                          ),
+                        ]).then((value) => setState(() {
+                              index = -1;
+                              setState(() {});
+                            }));
+                      } else {
+                        showCustomDialog(context, children: [
+                          PopUpSell(
+                            bedEntity: bedEntity,
+                            cubit: cubit,
+                          ),
+                        ]).then((value) => setState(() {
+                              index = -1;
+                              setState(() {});
+                            }));
+                      }
                     }),
                     itemBottomBar(4, context, Ics.recycling, LocaleKeys.recycle,
                         () {
-                      setState(() {
-                        index = 4;
+                      index = 4;
+                      Navigator.pushNamed(context, R.recycle).then((value) {
+                        cubit.init();
+                        index = -1;
+                        setState(() {});
                       });
-                      Navigator.pushNamed(context, R.recycle)
-                          .then((value) => setState(() {
-                                index = -1;
-                              }));
                     }),
                     itemBottomBar(5, context, Ics.transfer, LocaleKeys.transfer,
                         () {
-                      setState(() {
-                        index = 5;
-                      });
+                      index = 5;
                       showCustomDialog(
                         context,
                         children: [
@@ -206,13 +207,15 @@ class _BottomBarWidgetState extends State<BottomBarWidget> {
                               Navigator.pop(context);
                             },
                             valueTransfer: 1,
-                            bedEntity: widget.bedEntity,
+                            bedEntity: bedEntity,
                             cubit: cubit,
                           )
                         ],
-                      ).then((value) => setState(() {
-                            index = -1;
-                          }));
+                      ).then((value) {
+                        cubit.init();
+                        index = -1;
+                        setState(() {});
+                      });
                     }),
                   ],
                 );

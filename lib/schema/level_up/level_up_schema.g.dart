@@ -9,7 +9,7 @@ part of 'level_up_schema.dart';
 LevelUpSchema _$LevelUpSchemaFromJson(Map<String, dynamic> json) =>
     LevelUpSchema(
       bedId: json['bedId'] as int,
-      cost: json['cost'] as int,
+      cost: (json['cost'] as num).toDouble(),
     );
 
 Map<String, dynamic> _$LevelUpSchemaToJson(LevelUpSchema instance) =>

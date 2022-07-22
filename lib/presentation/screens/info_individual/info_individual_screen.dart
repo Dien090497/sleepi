@@ -41,6 +41,7 @@ class InfoIndividualScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final GlobalKey<BottomBarWidgetState> keyBottom = GlobalKey();
     final args =
         ModalRoute.of(context)?.settings.arguments as InfoIndividualParams;
     return MultiBlocProvider(
@@ -184,11 +185,21 @@ class InfoIndividualScreen extends StatelessWidget {
             bottom: 0,
             left: 0,
             right: 0,
-            child: (args.bed.isLock == 1 && args.bed.statusNftSale == 'ON_SALE') ?
-            CancelSellBottombar(beds: args.bed,)
-            : (args.marketPlaceModel != null && (args.buy ?? false)
-                ? BottomBarMarketPlaceWidget(bed: args.marketPlaceModel!)
-                : BottomBarWidget(bedEntity: args.bed,)),
+            child: (args.bed.isLock == 1 && args.bed.statusNftSale == 'ON_SALE')
+                ? CancelSellBottombar(
+                    beds: args.bed,
+                  )
+                : (args.marketPlaceModel != null && (args.buy ?? false)
+                    ? BottomBarMarketPlaceWidget(bed: args.marketPlaceModel!)
+                    : BlocBuilder<IndividualCubit, IndividualState>(
+                        builder: (context, state) {
+                          keyBottom.currentState?.updateBed();
+                          return BottomBarWidget(
+                            bedEntity: args.bed,
+                            key: keyBottom,
+                          );
+                        },
+                      )),
           ),
           BlocBuilder<IndividualCubit, IndividualState>(
             builder: (context, state) =>

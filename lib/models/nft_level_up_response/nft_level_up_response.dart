@@ -5,7 +5,7 @@ part 'nft_level_up_response.g.dart';
 
 @JsonSerializable()
 class NftLevelUp {
-  final int? cost;
+  final double? cost;
   @JsonKey(name: 'require_time')
   final int? requireTime;
   @JsonKey(name: 'sleep_time')
