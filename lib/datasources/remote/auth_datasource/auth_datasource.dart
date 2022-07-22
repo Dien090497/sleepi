@@ -287,10 +287,10 @@ abstract class AuthDataSource {
   Future<GachaProbabilityConfigResponse> gachaProbabilityConfig();
 
   @POST('/gacha/get-common-bed')
-  Future<dynamic> getCommonBed();
+  Future<GachaSpinResponse> getCommonBed();
 
   @POST('/gacha/get-special-bed')
-  Future<dynamic> getSpecialBed();
+  Future<GachaSpinResponse> getSpecialBed();
 
   // individual
   @PUT('/nft-attributes/open-socket')

@@ -81,7 +81,7 @@ class GachaResultBedScreen extends StatelessWidget {
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               SFButton(
-                                text: LocaleKeys.common,
+                                text: args?.attributesItem?.quality ?? '',
                                 textStyle: TextStyles.blue14,
                                 color: Colors.white.withOpacity(0.1),
                                 radius: 50,
@@ -91,7 +91,7 @@ class GachaResultBedScreen extends StatelessWidget {
                                 width: 15,
                               ),
                               SFButton(
-                                text: 'D1283',
+                                text: '${args?.attributesItem?.nftId ?? ''}',
                                 textStyle: TextStyles.white14WithOpacity,
                                 color: Colors.white.withOpacity(0.1),
                                 radius: 50,
@@ -145,7 +145,7 @@ class GachaResultBedScreen extends StatelessWidget {
                       textStyle: TextStyles.blue16,
                       borderColor: AppColors.blue,
                       bgColor: AppColors.lightDark,
-                      onPressed: () => Navigator.pop(context),
+                      onPressed: () => Navigator.pop(context, true),
                     ),
                   ),
                 ),
