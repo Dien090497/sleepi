@@ -10,8 +10,10 @@ class UpgradeJewelResponse {
   final BedModel nftAttribute;
 
   UpgradeJewelResponse(this.status, this.msg, this.nftAttribute);
-  factory UpgradeJewelResponse.fromJson(Map<String, dynamic> json) =>
-      _$UpgradeJewelResponseFromJson(json);
+  factory UpgradeJewelResponse.fromJson(Map<String, dynamic> json) {
+    print('json iss   $json');
+    return _$UpgradeJewelResponseFromJson(json);
+  }
 
   Map<String, dynamic> toJson() => _$UpgradeJewelResponseToJson(this);
 }

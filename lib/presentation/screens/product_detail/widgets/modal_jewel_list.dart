@@ -91,7 +91,7 @@ class ModalJewelList extends StatelessWidget {
                         final item = tempList[i];
                         return GestureDetector(
                           onTap: () {
-                            if (item.length > 3) {
+                            if (item.length >= 3) {
                               Navigator.pop(context);
                               jewelBloc
                                   .add(AddJewelToSocket(item.sublist(0, 3)));
