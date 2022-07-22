@@ -11,8 +11,12 @@ class UpgradeInfoResponse {
 
   UpgradeInfoResponse(this.level, this.slft, this.slgt, this.percent);
 
-  factory UpgradeInfoResponse.fromJson(Map<String, dynamic> json) =>
+  factory UpgradeInfoResponse.fromJson(Map<String, dynamic> json) {
+
+    print('json cast  is  $json');
+    return
       _$UpgradeInfoResponseFromJson(json);
+  }
 
   Map<String, dynamic> toJson() => _$UpgradeInfoResponseToJson(this);
 }

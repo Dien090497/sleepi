@@ -73,6 +73,9 @@ class ModalJewelList extends StatelessWidget {
                   if (state is JewelStateLoaded) {
                     final map = <String, List<BedEntity>>{};
                     for (var element in state.jewels) {
+                      if (element.level >= 5) {
+                        continue;
+                      }
                       final key = '${element.type}_${element.level}';
                       if (map.containsKey(key)) {
                         map[key]!.add(element);

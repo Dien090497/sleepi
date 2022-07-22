@@ -72,6 +72,7 @@ class JewelBloc extends Bloc<JewelEvent, JewelState> {
     final result = await _getInfoUpgrade
         .call(UpgradeInfoParam(event.jewels.first.level, categoryType));
     result.fold((l) {
+      print('errrpr is   ${l.msg}');
       final currentState = state;
       if (currentState is JewelStateLoaded && _currentPage != 1) {
         emit(currentState.copyWith(errorMessage: l.msg, loading: false));
