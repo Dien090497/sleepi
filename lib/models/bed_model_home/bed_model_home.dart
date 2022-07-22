@@ -30,8 +30,8 @@ class BedModelHome {
   final double bonus;
   final double special;
   final double resilience;
-  final Nft nft;
-  final ObjData objData;
+  final Nft? nft;
+  final ObjData? objData;
 
   BedModelHome(
     this.id,
@@ -79,7 +79,7 @@ class BedModelHome {
       contractAddress: contractAddress,
       quality: quality,
       owner: owner,
-      status: nft.status ?? '',
+      status: nft?.status ?? '',
       durability: durability,
       isLock: -1,
       bedMint: bedMint,
@@ -90,10 +90,10 @@ class BedModelHome {
       resilience: resilience,
       time: time,
       isMint: isMint,
-      socket: nft.isLock,
-      insurancePercent: objData.insurancePercent,
-      startTime: objData.startTime,
-      endTime: objData.endTime,
+      socket: nft?.isLock,
+      insurancePercent: objData?.insurancePercent,
+      startTime: objData?.startTime,
+      endTime: objData?.endTime,
         jewels: [],
         price: '',
         statusNftSale: '',

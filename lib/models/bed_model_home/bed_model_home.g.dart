@@ -28,8 +28,12 @@ BedModelHome _$BedModelHomeFromJson(Map<String, dynamic> json) => BedModelHome(
       (json['bonus'] as num).toDouble(),
       (json['special'] as num).toDouble(),
       (json['resilience'] as num).toDouble(),
-      Nft.fromJson(json['nft'] as Map<String, dynamic>),
-      ObjData.fromJson(json['objData'] as Map<String, dynamic>),
+      json['nft'] == null
+          ? null
+          : Nft.fromJson(json['nft'] as Map<String, dynamic>),
+      json['objData'] == null
+          ? null
+          : ObjData.fromJson(json['objData'] as Map<String, dynamic>),
       json['jewelType'] as String?,
     )
       ..parent1 = json['parent1']
@@ -63,8 +67,8 @@ Map<String, dynamic> _$BedModelHomeToJson(BedModelHome instance) =>
       'bonus': instance.bonus,
       'special': instance.special,
       'resilience': instance.resilience,
-      'nft': instance.nft.toJson(),
-      'objData': instance.objData.toJson(),
+      'nft': instance.nft?.toJson(),
+      'objData': instance.objData?.toJson(),
     };
 
 Nft _$NftFromJson(Map<String, dynamic> json) => Nft(
