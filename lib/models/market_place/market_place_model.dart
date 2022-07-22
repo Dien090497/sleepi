@@ -109,6 +109,8 @@ class MarketPlaceModel {
       jewels: [],
       insurancePercent: 0,
       socket: null,
+      statusNftSale: '',
+      price: '',
     );
   }
 

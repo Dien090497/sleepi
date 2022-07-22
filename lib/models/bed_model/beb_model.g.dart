@@ -28,9 +28,7 @@ BedModel _$BedModelFromJson(Map<String, dynamic> json) => BedModel(
       json['classNft'] as String?,
       json['tokenId'] as int,
       json['durability'],
-      json['nft'] == null
-          ? null
-          : Nft.fromJson(json['nft'] as Map<String, dynamic>),
+      Nft.fromJson(json['nft'] as Map<String, dynamic>),
       json['jewelType'] as String?,
       json['itemType'],
       json['effect'],
@@ -41,6 +39,7 @@ BedModel _$BedModelFromJson(Map<String, dynamic> json) => BedModel(
           ?.map((e) => JewelModel.fromJson(e as Map<String, dynamic>))
           .toList(),
       json['isBurn'] as int?,
+      NftSale.fromJson(json['nftSale'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$BedModelToJson(BedModel instance) => <String, dynamic>{
@@ -70,7 +69,8 @@ Map<String, dynamic> _$BedModelToJson(BedModel instance) => <String, dynamic>{
       'socket': instance.socket,
       'jewels': instance.jewels?.map((e) => e.toJson()).toList(),
       'tokenId': instance.tokenId,
-      'nft': instance.nft?.toJson(),
+      'nft': instance.nft.toJson(),
+      'nftSale': instance.nftSale.toJson(),
       'insurancePercent': instance.insurancePercent,
       'startTime': instance.startTime,
       'endTime': instance.endTime,
@@ -88,4 +88,22 @@ Map<String, dynamic> _$NftToJson(Nft instance) => <String, dynamic>{
       'categoryId': instance.categoryId,
       'isLock': instance.isLock,
       'status': instance.status,
+    };
+
+NftSale _$NftSaleFromJson(Map<String, dynamic> json) => NftSale(
+      id: json['id'] as int,
+      nftId: json['nftId'] as int,
+      price: json['price'] as String?,
+      transactionsFee: json['transactionsFee'] as String?,
+      status: json['status'] as String?,
+      symbol: json['symbol'] as String?,
+    );
+
+Map<String, dynamic> _$NftSaleToJson(NftSale instance) => <String, dynamic>{
+      'id': instance.id,
+      'nftId': instance.nftId,
+      'price': instance.price,
+      'transactionsFee': instance.transactionsFee,
+      'status': instance.status,
+      'symbol': instance.symbol,
     };
