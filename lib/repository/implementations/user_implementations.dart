@@ -18,12 +18,15 @@ import 'package:slee_fi/models/lucky_box/lucky_box.dart';
 import 'package:slee_fi/models/response_model/response_model.dart';
 import 'package:slee_fi/models/swap_token_to_wallet_response/swap_token_to_wallet_response.dart';
 import 'package:slee_fi/models/token_spending/token_spending.dart';
+import 'package:slee_fi/models/upgrade_jewel_info_response/upgrade_info_response.dart';
+import 'package:slee_fi/models/upgrade_jewel_response/upgrade_jewel_response.dart';
 import 'package:slee_fi/models/withdraw_history_response/withdraw_history_response.dart';
 import 'package:slee_fi/repository/user_repository.dart';
 import 'package:slee_fi/schema/add_jewel_schema/add_jewel_schema.dart';
 import 'package:slee_fi/schema/change_password_schema/change_password_schema.dart';
 import 'package:slee_fi/schema/param_filler_item_fetch/filter_item_schema.dart';
 import 'package:slee_fi/schema/speed_up_lucky_box_schema/speed_up_lucky_box_schema.dart';
+import 'package:slee_fi/schema/upgrade_jewel_schame/upgrade_jewel_schema.dart';
 import 'package:slee_fi/schema/white_draw_token_schema/whit_draw_token_schema.dart';
 import 'package:slee_fi/usecase/add_item_to_bed_usecase.dart';
 import 'package:slee_fi/usecase/estimate_gas_withdraw.dart';
@@ -31,6 +34,7 @@ import 'package:slee_fi/usecase/estimate_tracking_usecase.dart';
 import 'package:slee_fi/usecase/fetch_bed_usecase.dart';
 import 'package:slee_fi/usecase/fetch_data_chart_usecase.dart';
 import 'package:slee_fi/usecase/fetch_home_bed_usecase.dart';
+import 'package:slee_fi/usecase/upgrade_info_usecase.dart';
 import 'package:slee_fi/usecase/withdraw_history_usecase.dart';
 
 @Injectable(as: IUserRepository)
@@ -318,9 +322,11 @@ class UserImplementation extends IUserRepository {
     try {
       final result =
           await _authDataSource.fetchBedInHomePage(param.limit, param.page);
+
       var list = result.list.map((e) => e.toEntity()).toList();
       return Right(list);
     } catch (e) {
+      print('==--=${e.toString()}');
       return Left(FailureMessage.fromException(e));
     }
   }
@@ -343,8 +349,32 @@ class UserImplementation extends IUserRepository {
     try {
       final result = await _authDataSource.slftPrice();
       return Right(result);
+    } catch (e) {
+      return Left(FailureMessage.fromException(e));
     }
-    catch (e) {
+  }
+
+  @override
+  Future<Either<FailureMessage, JewelEntity>> upgradeJewel(
+      UpgradeSchema param) async {
+    try {
+      final result = await _authDataSource.upgradeJewel(param);
+      return Right(result.nftAttribute.toJewelEntity());
+    } catch (e) {
+      return Left(FailureMessage.fromException(e));
+    }
+  }
+
+  @override
+  Future<Either<FailureMessage, UpgradeInfoResponse>> upgradeInfo(
+      UpgradeInfoParam param) async {
+    try {
+      final result = await _authDataSource.upgradeInfo(
+        param.level,
+        param.categoryType.type,
+      );
+      return Right(result);
+    } catch (e) {
       return Left(FailureMessage.fromException(e));
     }
   }

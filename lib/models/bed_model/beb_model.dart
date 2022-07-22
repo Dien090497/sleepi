@@ -137,7 +137,7 @@ class BedModel {
       socket: socket,
       jewels: jewels != null ? jewels!.map((e) => e.toEntity()).toList() : [],
       owner: owner,
-      status: nft.status,
+      status: nft.status ?? '',
     );
   }
 }
@@ -147,7 +147,7 @@ class Nft {
   final int id;
   final int categoryId;
   final int isLock;
-  final String status;
+  final String? status;
 
   Nft(this.id, this.categoryId, this.isLock, this.status);
 

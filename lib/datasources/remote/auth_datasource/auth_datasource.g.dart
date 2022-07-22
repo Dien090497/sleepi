@@ -936,6 +936,42 @@ class _AuthDataSource implements AuthDataSource {
     return value;
   }
 
+  @override
+  Future<UpgradeJewelResponse> upgradeJewel(upgradeJewelSchema) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    _data.addAll(upgradeJewelSchema.toJson());
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<UpgradeJewelResponse>(
+            Options(method: 'POST', headers: _headers, extra: _extra)
+                .compose(_dio.options, '/nft/upgrade',
+                    queryParameters: queryParameters, data: _data)
+                .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = UpgradeJewelResponse.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<UpgradeInfoResponse> upgradeInfo(level, upgradeType) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{
+      r'level': level,
+      r'upgradeType': upgradeType
+    };
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<UpgradeInfoResponse>(
+            Options(method: 'GET', headers: _headers, extra: _extra)
+                .compose(_dio.options, '/nft/upgrade',
+                    queryParameters: queryParameters, data: _data)
+                .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = UpgradeInfoResponse.fromJson(_result.data!);
+    return value;
+  }
+
   RequestOptions _setStreamType<T>(RequestOptions requestOptions) {
     if (T != dynamic &&
         !(requestOptions.responseType == ResponseType.bytes ||

@@ -39,7 +39,7 @@ class SocketBloc extends Bloc<SocketEvent, SocketState> {
   final _addJewelUseCase = getIt<AddJewelUseCase>();
   final _removeUseCase = getIt<RemoveJewelUseCase>();
   final _openSocketUseCase = getIt<OpenSocketUseCase>();
-  final _fetchListBedUC = getIt<FetchJewelUseCase>();
+  final _fetchListJewelUC = getIt<FetchJewelUseCase>();
 
   void _fetchSocket(SocketInit event, Emitter<SocketState> emit) async {
     if (state is SocketStateLoaded) {
@@ -171,7 +171,7 @@ class SocketBloc extends Bloc<SocketEvent, SocketState> {
   FutureOr<void> _fetchJewels(
       FetchJewels event, Emitter<SocketState> emit) async {
     final result =
-        await _fetchListBedUC.call(FetchHomeBedParam(_currentPage, _limit));
+        await _fetchListJewelUC.call(FetchHomeBedParam(_currentPage, _limit));
     result.fold((l) {
       add(SocketError(l.msg));
     }, (success) {

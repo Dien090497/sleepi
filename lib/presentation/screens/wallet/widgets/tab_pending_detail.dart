@@ -17,6 +17,7 @@ import 'package:slee_fi/presentation/blocs/pending/pending_event.dart';
 import 'package:slee_fi/presentation/blocs/pending/pending_state.dart';
 import 'package:slee_fi/presentation/blocs/user_bloc/user_bloc.dart';
 import 'package:slee_fi/presentation/blocs/user_bloc/user_state.dart';
+import 'package:slee_fi/presentation/screens/wallet/widgets/no_result_widget.dart';
 
 class TabPendingDetail extends StatefulWidget {
   const TabPendingDetail({Key? key, required this.attributeWithdraw})
@@ -103,15 +104,7 @@ class _TabPendingDetailState extends State<TabPendingDetail> {
                   refreshController.loadComplete();
                 },
                 child: state.list.isEmpty
-                    ? SingleChildScrollView(
-                        padding: const EdgeInsets.only(top: 30),
-                        child: Center(
-                          child: SFText(
-                            keyText: LocaleKeys.no_result,
-                            style: TextStyles.lightWhite16,
-                          ),
-                        ),
-                      )
+                    ? const NoResultWidget()
                     : ListView.builder(
                         itemCount: state.list.length + 1,
                         controller: _scrollController,

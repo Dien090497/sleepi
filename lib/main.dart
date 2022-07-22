@@ -123,8 +123,10 @@ Future<void> onStart(ServiceInstance service) async {
       service.setAsBackgroundService();
     });
   }
-  service.on(Const.stopService).listen((event) async{
-    await audioPlayer.stop();
+  service.on(Const.stopService).listen((event) async {
+    if (audioPlayer.playing) {
+      await audioPlayer.stop();
+    }
     await audioPlayer.dispose();
     service.stopSelf();
   });
