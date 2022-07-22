@@ -1,20 +1,21 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
 import 'package:slee_fi/common/widgets/sf_icon.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
 import 'package:slee_fi/l10n/locale_keys.g.dart';
-import 'package:slee_fi/models/gacha_probability_config_response/config_bed.dart';
+import 'package:slee_fi/models/gacha_probability_config_response/config_slft.dart';
 
-class BedProbability extends StatelessWidget {
-  const BedProbability({Key? key, this.colorBgIcon, required this.iconPath, required this.title, required this.beds, this.width, this.height}) : super(key: key);
+class SlftProbability extends StatelessWidget {
+  const SlftProbability({Key? key, this.colorBgIcon, required this.iconPath, required this.title, required this.slft, this.width, this.height}) : super(key: key);
 
   final List<Color>? colorBgIcon;
   final String iconPath;
   final String title;
   final double? width;
   final double? height;
-  final ConfigBed? beds;
+  final ConfigSlft? slft;
 
   @override
   Widget build(BuildContext context) {
@@ -46,17 +47,11 @@ class BedProbability extends StatelessWidget {
                 child: SFIcon(iconPath, width: width ?? 20, height: height ?? 20,),
               ),
               const SizedBox(width: 12),
-              SFText(keyText: title, style: TextStyles.bold14Blue,),
+              SFText(keyText: title, style: TextStyles.bold14White,),
             ],
           ),
           const SizedBox(height: 10),
-          rowData(title: LocaleKeys.common_bed, value: beds?.common),
-          const SizedBox(height: 10),
-          rowData(title: LocaleKeys.uncommon_bed, value: beds?.uncommon),
-          const SizedBox(height: 10),
-          rowData(title: LocaleKeys.epic_bed, value: beds?.epicBed),
-          const SizedBox(height: 10),
-          rowData(title: LocaleKeys.legendary_bed, value: beds?.legendaryBed),
+          rowData(title: "SLFT", value: slft?.percent),
         ],
       ),
     );
@@ -67,7 +62,7 @@ class BedProbability extends StatelessWidget {
       children: [
         SFText(keyText: title, style: TextStyles.lightGrey14,),
         const Spacer(),
-        SFText(keyText: "${value ?? 0}%", style: TextStyles.lightGrey14,),
+        SFText(keyText: '${value ?? 0}%', style: TextStyles.lightGrey14,),
       ],
     );
   }

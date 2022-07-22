@@ -8,15 +8,15 @@ import 'package:slee_fi/common/widgets/sf_buttons.dart';
 import 'package:slee_fi/common/widgets/sf_icon.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
 import 'package:slee_fi/l10n/locale_keys.g.dart';
-import 'package:slee_fi/models/gacha_spin_response/gacha_gift.dart';
+import 'package:slee_fi/models/gacha_spin_response/gacha_attributes_item.dart';
 import 'package:slee_fi/presentation/screens/gacha/widgets/attributes_widget.dart';
 import 'package:slee_fi/resources/resources.dart';
 
 class AllResultDetailArguments {
   final String image;
-  final GachaGift? gift;
+  final GachaAttributesItem? attributesItem;
 
-  AllResultDetailArguments({required this.image, required this.gift});
+  AllResultDetailArguments({required this.image, required this.attributesItem});
 }
 
 class AllResultDetailScreen extends StatelessWidget {
@@ -76,18 +76,23 @@ class AllResultDetailScreen extends StatelessWidget {
                           Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
+                              args != null && args.attributesItem!.quality.isNotEmpty ?
+                              Row(
+                                children: [
+                                  SFButton(
+                                    text: LocaleKeys.legendary,
+                                    textStyle: TextStyles.blue14,
+                                    color: Colors.white.withOpacity(0.1),
+                                    radius: 50,
+                                    height: 36,
+                                  ),
+                                  const SizedBox(
+                                    width: 15,
+                                  ),
+                                ],
+                              ) : const SizedBox(),
                               SFButton(
-                                text: LocaleKeys.legendary,
-                                textStyle: TextStyles.blue14,
-                                color: Colors.white.withOpacity(0.1),
-                                radius: 50,
-                                height: 36,
-                              ),
-                              const SizedBox(
-                                width: 15,
-                              ),
-                              SFButton(
-                                text: 'D1283',
+                                text: '${args?.attributesItem?.nftId}',
                                 textStyle: TextStyles.lightWhite14,
                                 color: Colors.white.withOpacity(0.1),
                                 radius: 50,
@@ -120,11 +125,11 @@ class AllResultDetailScreen extends StatelessWidget {
                           Column(
                             children:  [
                               AttributesWidget(
-                                bonus: args?.gift?.attributes.bonus ?? 0,
-                                efficiency: args?.gift?.attributes.efficiency ?? 0,
-                                luck: args?.gift?.attributes.luck ?? 0,
-                                resilience: args?.gift?.attributes.resilience ?? 0,
-                                special: args?.gift?.attributes.special ?? 0,
+                                bonus: args?.attributesItem!.bonus ?? 0,
+                                efficiency: args?.attributesItem!.efficiency ?? 0,
+                                luck: args?.attributesItem!.luck ?? 0,
+                                resilience: args?.attributesItem!.resilience ?? 0,
+                                special: args?.attributesItem!.special ?? 0,
                               ),
                              const SizedBox(height: 76),
                             ],

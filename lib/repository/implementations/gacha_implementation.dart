@@ -45,7 +45,7 @@ class GachaImplementation extends IGachaRepository{
   }
 
   @override
-  Future<Either<Failure, dynamic>> gachaGetCommon() async{
+  Future<Either<Failure, GachaSpinResponse>> gachaGetCommon() async{
     try {
       final result = await _authDataSource.getCommonBed();
       return Right(result);
@@ -55,7 +55,7 @@ class GachaImplementation extends IGachaRepository{
   }
 
   @override
-  Future<Either<Failure, dynamic>> gachaGetSpecial() async{
+  Future<Either<Failure, GachaSpinResponse>> gachaGetSpecial() async{
     try {
       final result = await _authDataSource.getSpecialBed();
       return Right(result);

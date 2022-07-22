@@ -9,18 +9,19 @@ part 'probability_config.g.dart';
 
 @JsonSerializable()
 class ProbabilityConfig{
+  @JsonKey(name: 'Bed')
   final ConfigBed bed;
   final ConfigSlft slft;
+  @JsonKey(name: 'Items')
   final ConfigItems items;
+  @JsonKey(name: 'Jewels')
   final ConfigJewels jewels;
-  final int times;
 
   ProbabilityConfig({
     required this.bed,
     required this.slft,
     required this.items,
     required this.jewels,
-    required this.times,
   });
   factory ProbabilityConfig.fromJson(Map<String, dynamic> json) => _$ProbabilityConfigFromJson(json);
 

@@ -24,7 +24,7 @@ class GachaSpinState with _$GachaSpinState {
 
   const factory GachaSpinState.gachaHistorySuccess(GachaHistoryResponse response) = GachaHistorySuccess;
 
-  const factory GachaSpinState.gachaGetSuccess(dynamic response) = GachaGetSuccess;
+  const factory GachaSpinState.gachaGetSuccess(GachaSpinResponse response) = GachaGetSuccess;
 
   const factory GachaSpinState.fail(String msg) = GachaSpinFailed;
 

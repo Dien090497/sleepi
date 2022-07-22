@@ -15,9 +15,10 @@ import 'package:slee_fi/presentation/screens/gacha/layout/gacha_animation_screen
 
 class ChanceWidget extends StatelessWidget {
   const ChanceWidget(
-      {required this.numberOfSpin, required this.normalGacha, Key? key})
+      {required this.totalValue, required this.numberOfSpin, required this.normalGacha, Key? key})
       : super(key: key);
   final int numberOfSpin;
+  final int totalValue;
   final bool normalGacha;
 
   @override
@@ -29,16 +30,18 @@ class ChanceWidget extends StatelessWidget {
           if (state is GachaSpinFailed) {
             showMessageDialog(context, state.msg);
           }
-         if(state is GachaGetSuccess){
-           Navigator.pushNamed(context, R.gachaAnimation,
-               arguments: GachaAnimationArguments(
-                 route: R.gacha500TimesChance,
-                 animation: normalGacha ? Const.normalGachaAnimation : Const.specialGachaAnimation,
-                 audio: normalGacha ? Const.normalGachaAudio : Const.specialGachaAudio,
-                 spinInfo: null,
-               )
-           );
-         }
+          if(state is GachaGetSuccess){
+            final cubit = context.read<GachaSpinCubit>();
+            Navigator.pushNamed(context, R.gachaAnimation,
+                arguments: GachaAnimationArguments(
+                  route: R.gacha500TimesChance,
+                  animation: normalGacha ? Const.normalGachaAnimation : Const.specialGachaAnimation,
+                  audio: normalGacha ? Const.normalGachaAudio : Const.specialGachaAudio,
+                  spinInfo: state.response,
+                )
+            );
+            cubit.init();
+          }
         },
         builder: (context, state) {
           final cubit = context.read<GachaSpinCubit>();
@@ -49,7 +52,7 @@ class ChanceWidget extends StatelessWidget {
                 child: Stack(alignment: Alignment.centerLeft, children: [
                   SFPercentBorderGradient(
                     valueActive: numberOfSpin > 100 ? 100 : numberOfSpin.toDouble(),
-                    totalValue: 100,
+                    totalValue: totalValue.toDouble(),
                     linearGradient: AppColors.gradientBlueButton,
                     lineHeight: 18,
                     barRadius: 20,
@@ -58,7 +61,7 @@ class ChanceWidget extends StatelessWidget {
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 16.0),
                     child: SFText(
-                      keyText: '$numberOfSpin/100',
+                      keyText: '$numberOfSpin/$totalValue',
                       style: TextStyles.white10,
                     ),
                   )

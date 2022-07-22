@@ -9,15 +9,15 @@ import 'package:slee_fi/common/widgets/sf_icon.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
 import 'package:slee_fi/common/widgets/topbar_common.dart';
 import 'package:slee_fi/l10n/locale_keys.g.dart';
-import 'package:slee_fi/models/gacha_spin_response/gacha_spin_response.dart';
+import 'package:slee_fi/models/gacha_spin_response/gacha_attributes_item.dart';
 import 'package:slee_fi/presentation/screens/gacha/widgets/attributes_widget.dart';
 import 'package:slee_fi/resources/resources.dart';
 
 class GachaResultBedArguments {
-  final GachaSpinResponse? gachaSpinInfo;
+  final GachaAttributesItem? attributesItem;
   final String image;
 
-  GachaResultBedArguments({this.gachaSpinInfo, required this.image});
+  GachaResultBedArguments({this.attributesItem, required this.image});
 }
 
 class GachaResultBedScreen extends StatelessWidget {
@@ -110,11 +110,11 @@ class GachaResultBedScreen extends StatelessWidget {
                             child: Column(
                               children: [
                                 AttributesWidget(
-                                  bonus: args?.gachaSpinInfo?.gift.first.first.attributes.bonus,
-                                  efficiency: args?.gachaSpinInfo?.gift.first.first.attributes.efficiency,
-                                  luck: args?.gachaSpinInfo?.gift.first.first.attributes.luck,
-                                  resilience: args?.gachaSpinInfo?.gift.first.first.attributes.resilience,
-                                  special: args?.gachaSpinInfo?.gift.first.first.attributes.special,
+                                  bonus: args?.attributesItem?.bonus,
+                                  efficiency: args?.attributesItem?.efficiency,
+                                  luck: args?.attributesItem?.luck,
+                                  resilience: args?.attributesItem?.resilience,
+                                  special: args?.attributesItem?.special,
                                 ),
                                const SizedBox(height: 76),
                               ],

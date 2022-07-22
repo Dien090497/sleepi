@@ -6,7 +6,7 @@ part 'probability_data.g.dart';
 @JsonSerializable()
 class ProbabilityData{
   final String? key;
-  final List<dynamic> config;
+  final dynamic config;
 
   ProbabilityData({
     required this.key,

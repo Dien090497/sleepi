@@ -24,6 +24,7 @@ class GachaSpinCubit extends Cubit<GachaSpinState> {
 
 
   init() async {
+    gachaProbabilityConfig();
     final result = await _gachaHistoryUC.call(NoParams());
     result.fold((l) {
       emit(GachaSpinState.fail('$l'));

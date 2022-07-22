@@ -8,18 +8,16 @@ part of 'probability_config.dart';
 
 ProbabilityConfig _$ProbabilityConfigFromJson(Map<String, dynamic> json) =>
     ProbabilityConfig(
-      bed: ConfigBed.fromJson(json['bed'] as Map<String, dynamic>),
+      bed: ConfigBed.fromJson(json['Bed'] as Map<String, dynamic>),
       slft: ConfigSlft.fromJson(json['slft'] as Map<String, dynamic>),
-      items: ConfigItems.fromJson(json['items'] as Map<String, dynamic>),
-      jewels: ConfigJewels.fromJson(json['jewels'] as Map<String, dynamic>),
-      times: json['times'] as int,
+      items: ConfigItems.fromJson(json['Items'] as Map<String, dynamic>),
+      jewels: ConfigJewels.fromJson(json['Jewels'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$ProbabilityConfigToJson(ProbabilityConfig instance) =>
     <String, dynamic>{
-      'bed': instance.bed.toJson(),
+      'Bed': instance.bed.toJson(),
       'slft': instance.slft.toJson(),
-      'items': instance.items.toJson(),
-      'jewels': instance.jewels.toJson(),
-      'times': instance.times,
+      'Items': instance.items.toJson(),
+      'Jewels': instance.jewels.toJson(),
     };

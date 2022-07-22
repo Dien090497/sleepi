@@ -12,8 +12,8 @@ abstract class IGachaRepository {
 
   Future<Either<Failure, GachaHistoryResponse>> getGachaHistory();
 
-  Future<Either<Failure, dynamic>> gachaGetCommon();
+  Future<Either<Failure, GachaSpinResponse>> gachaGetCommon();
 
-  Future<Either<Failure, dynamic>> gachaGetSpecial();
+  Future<Either<Failure, GachaSpinResponse>> gachaGetSpecial();
 
 }

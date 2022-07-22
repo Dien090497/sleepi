@@ -27,7 +27,7 @@ mixin _$GachaSpinState {
         probabilityConfigSuccess,
     required TResult Function(GachaHistoryResponse response)
         gachaHistorySuccess,
-    required TResult Function(dynamic response) gachaGetSuccess,
+    required TResult Function(GachaSpinResponse response) gachaGetSuccess,
     required TResult Function(String msg) fail,
   }) =>
       throw _privateConstructorUsedError;
@@ -41,7 +41,7 @@ mixin _$GachaSpinState {
             GachaProbabilityConfigResponse gachaProbabilityConfigResponse)?
         probabilityConfigSuccess,
     TResult Function(GachaHistoryResponse response)? gachaHistorySuccess,
-    TResult Function(dynamic response)? gachaGetSuccess,
+    TResult Function(GachaSpinResponse response)? gachaGetSuccess,
     TResult Function(String msg)? fail,
   }) =>
       throw _privateConstructorUsedError;
@@ -55,7 +55,7 @@ mixin _$GachaSpinState {
             GachaProbabilityConfigResponse gachaProbabilityConfigResponse)?
         probabilityConfigSuccess,
     TResult Function(GachaHistoryResponse response)? gachaHistorySuccess,
-    TResult Function(dynamic response)? gachaGetSuccess,
+    TResult Function(GachaSpinResponse response)? gachaGetSuccess,
     TResult Function(String msg)? fail,
     required TResult orElse(),
   }) =>
@@ -195,7 +195,7 @@ class _$GachaSpinStateInitial implements GachaSpinStateInitial {
         probabilityConfigSuccess,
     required TResult Function(GachaHistoryResponse response)
         gachaHistorySuccess,
-    required TResult Function(dynamic response) gachaGetSuccess,
+    required TResult Function(GachaSpinResponse response) gachaGetSuccess,
     required TResult Function(String msg) fail,
   }) {
     return initial(isLoading);
@@ -212,7 +212,7 @@ class _$GachaSpinStateInitial implements GachaSpinStateInitial {
             GachaProbabilityConfigResponse gachaProbabilityConfigResponse)?
         probabilityConfigSuccess,
     TResult Function(GachaHistoryResponse response)? gachaHistorySuccess,
-    TResult Function(dynamic response)? gachaGetSuccess,
+    TResult Function(GachaSpinResponse response)? gachaGetSuccess,
     TResult Function(String msg)? fail,
   }) {
     return initial?.call(isLoading);
@@ -229,7 +229,7 @@ class _$GachaSpinStateInitial implements GachaSpinStateInitial {
             GachaProbabilityConfigResponse gachaProbabilityConfigResponse)?
         probabilityConfigSuccess,
     TResult Function(GachaHistoryResponse response)? gachaHistorySuccess,
-    TResult Function(dynamic response)? gachaGetSuccess,
+    TResult Function(GachaSpinResponse response)? gachaGetSuccess,
     TResult Function(String msg)? fail,
     required TResult orElse(),
   }) {
@@ -352,7 +352,7 @@ class _$gachaSpinDone implements gachaSpinDone {
         probabilityConfigSuccess,
     required TResult Function(GachaHistoryResponse response)
         gachaHistorySuccess,
-    required TResult Function(dynamic response) gachaGetSuccess,
+    required TResult Function(GachaSpinResponse response) gachaGetSuccess,
     required TResult Function(String msg) fail,
   }) {
     return done();
@@ -369,7 +369,7 @@ class _$gachaSpinDone implements gachaSpinDone {
             GachaProbabilityConfigResponse gachaProbabilityConfigResponse)?
         probabilityConfigSuccess,
     TResult Function(GachaHistoryResponse response)? gachaHistorySuccess,
-    TResult Function(dynamic response)? gachaGetSuccess,
+    TResult Function(GachaSpinResponse response)? gachaGetSuccess,
     TResult Function(String msg)? fail,
   }) {
     return done?.call();
@@ -386,7 +386,7 @@ class _$gachaSpinDone implements gachaSpinDone {
             GachaProbabilityConfigResponse gachaProbabilityConfigResponse)?
         probabilityConfigSuccess,
     TResult Function(GachaHistoryResponse response)? gachaHistorySuccess,
-    TResult Function(dynamic response)? gachaGetSuccess,
+    TResult Function(GachaSpinResponse response)? gachaGetSuccess,
     TResult Function(String msg)? fail,
     required TResult orElse(),
   }) {
@@ -503,7 +503,7 @@ class _$GachaSpinLoading implements GachaSpinLoading {
         probabilityConfigSuccess,
     required TResult Function(GachaHistoryResponse response)
         gachaHistorySuccess,
-    required TResult Function(dynamic response) gachaGetSuccess,
+    required TResult Function(GachaSpinResponse response) gachaGetSuccess,
     required TResult Function(String msg) fail,
   }) {
     return loading();
@@ -520,7 +520,7 @@ class _$GachaSpinLoading implements GachaSpinLoading {
             GachaProbabilityConfigResponse gachaProbabilityConfigResponse)?
         probabilityConfigSuccess,
     TResult Function(GachaHistoryResponse response)? gachaHistorySuccess,
-    TResult Function(dynamic response)? gachaGetSuccess,
+    TResult Function(GachaSpinResponse response)? gachaGetSuccess,
     TResult Function(String msg)? fail,
   }) {
     return loading?.call();
@@ -537,7 +537,7 @@ class _$GachaSpinLoading implements GachaSpinLoading {
             GachaProbabilityConfigResponse gachaProbabilityConfigResponse)?
         probabilityConfigSuccess,
     TResult Function(GachaHistoryResponse response)? gachaHistorySuccess,
-    TResult Function(dynamic response)? gachaGetSuccess,
+    TResult Function(GachaSpinResponse response)? gachaGetSuccess,
     TResult Function(String msg)? fail,
     required TResult orElse(),
   }) {
@@ -679,7 +679,7 @@ class _$GachaSpinSuccess implements GachaSpinSuccess {
         probabilityConfigSuccess,
     required TResult Function(GachaHistoryResponse response)
         gachaHistorySuccess,
-    required TResult Function(dynamic response) gachaGetSuccess,
+    required TResult Function(GachaSpinResponse response) gachaGetSuccess,
     required TResult Function(String msg) fail,
   }) {
     return success(gachaSpinResponse);
@@ -696,7 +696,7 @@ class _$GachaSpinSuccess implements GachaSpinSuccess {
             GachaProbabilityConfigResponse gachaProbabilityConfigResponse)?
         probabilityConfigSuccess,
     TResult Function(GachaHistoryResponse response)? gachaHistorySuccess,
-    TResult Function(dynamic response)? gachaGetSuccess,
+    TResult Function(GachaSpinResponse response)? gachaGetSuccess,
     TResult Function(String msg)? fail,
   }) {
     return success?.call(gachaSpinResponse);
@@ -713,7 +713,7 @@ class _$GachaSpinSuccess implements GachaSpinSuccess {
             GachaProbabilityConfigResponse gachaProbabilityConfigResponse)?
         probabilityConfigSuccess,
     TResult Function(GachaHistoryResponse response)? gachaHistorySuccess,
-    TResult Function(dynamic response)? gachaGetSuccess,
+    TResult Function(GachaSpinResponse response)? gachaGetSuccess,
     TResult Function(String msg)? fail,
     required TResult orElse(),
   }) {
@@ -866,7 +866,7 @@ class _$GachaProbabilityConfigSuccess implements GachaProbabilityConfigSuccess {
         probabilityConfigSuccess,
     required TResult Function(GachaHistoryResponse response)
         gachaHistorySuccess,
-    required TResult Function(dynamic response) gachaGetSuccess,
+    required TResult Function(GachaSpinResponse response) gachaGetSuccess,
     required TResult Function(String msg) fail,
   }) {
     return probabilityConfigSuccess(gachaProbabilityConfigResponse);
@@ -883,7 +883,7 @@ class _$GachaProbabilityConfigSuccess implements GachaProbabilityConfigSuccess {
             GachaProbabilityConfigResponse gachaProbabilityConfigResponse)?
         probabilityConfigSuccess,
     TResult Function(GachaHistoryResponse response)? gachaHistorySuccess,
-    TResult Function(dynamic response)? gachaGetSuccess,
+    TResult Function(GachaSpinResponse response)? gachaGetSuccess,
     TResult Function(String msg)? fail,
   }) {
     return probabilityConfigSuccess?.call(gachaProbabilityConfigResponse);
@@ -900,7 +900,7 @@ class _$GachaProbabilityConfigSuccess implements GachaProbabilityConfigSuccess {
             GachaProbabilityConfigResponse gachaProbabilityConfigResponse)?
         probabilityConfigSuccess,
     TResult Function(GachaHistoryResponse response)? gachaHistorySuccess,
-    TResult Function(dynamic response)? gachaGetSuccess,
+    TResult Function(GachaSpinResponse response)? gachaGetSuccess,
     TResult Function(String msg)? fail,
     required TResult orElse(),
   }) {
@@ -1049,7 +1049,7 @@ class _$GachaHistorySuccess implements GachaHistorySuccess {
         probabilityConfigSuccess,
     required TResult Function(GachaHistoryResponse response)
         gachaHistorySuccess,
-    required TResult Function(dynamic response) gachaGetSuccess,
+    required TResult Function(GachaSpinResponse response) gachaGetSuccess,
     required TResult Function(String msg) fail,
   }) {
     return gachaHistorySuccess(response);
@@ -1066,7 +1066,7 @@ class _$GachaHistorySuccess implements GachaHistorySuccess {
             GachaProbabilityConfigResponse gachaProbabilityConfigResponse)?
         probabilityConfigSuccess,
     TResult Function(GachaHistoryResponse response)? gachaHistorySuccess,
-    TResult Function(dynamic response)? gachaGetSuccess,
+    TResult Function(GachaSpinResponse response)? gachaGetSuccess,
     TResult Function(String msg)? fail,
   }) {
     return gachaHistorySuccess?.call(response);
@@ -1083,7 +1083,7 @@ class _$GachaHistorySuccess implements GachaHistorySuccess {
             GachaProbabilityConfigResponse gachaProbabilityConfigResponse)?
         probabilityConfigSuccess,
     TResult Function(GachaHistoryResponse response)? gachaHistorySuccess,
-    TResult Function(dynamic response)? gachaGetSuccess,
+    TResult Function(GachaSpinResponse response)? gachaGetSuccess,
     TResult Function(String msg)? fail,
     required TResult orElse(),
   }) {
@@ -1161,7 +1161,7 @@ abstract class _$$GachaGetSuccessCopyWith<$Res> {
   factory _$$GachaGetSuccessCopyWith(
           _$GachaGetSuccess value, $Res Function(_$GachaGetSuccess) then) =
       __$$GachaGetSuccessCopyWithImpl<$Res>;
-  $Res call({dynamic response});
+  $Res call({GachaSpinResponse response});
 }
 
 /// @nodoc
@@ -1183,7 +1183,7 @@ class __$$GachaGetSuccessCopyWithImpl<$Res>
       response == freezed
           ? _value.response
           : response // ignore: cast_nullable_to_non_nullable
-              as dynamic,
+              as GachaSpinResponse,
     ));
   }
 }
@@ -1194,7 +1194,7 @@ class _$GachaGetSuccess implements GachaGetSuccess {
   const _$GachaGetSuccess(this.response);
 
   @override
-  final dynamic response;
+  final GachaSpinResponse response;
 
   @override
   String toString() {
@@ -1230,7 +1230,7 @@ class _$GachaGetSuccess implements GachaGetSuccess {
         probabilityConfigSuccess,
     required TResult Function(GachaHistoryResponse response)
         gachaHistorySuccess,
-    required TResult Function(dynamic response) gachaGetSuccess,
+    required TResult Function(GachaSpinResponse response) gachaGetSuccess,
     required TResult Function(String msg) fail,
   }) {
     return gachaGetSuccess(response);
@@ -1247,7 +1247,7 @@ class _$GachaGetSuccess implements GachaGetSuccess {
             GachaProbabilityConfigResponse gachaProbabilityConfigResponse)?
         probabilityConfigSuccess,
     TResult Function(GachaHistoryResponse response)? gachaHistorySuccess,
-    TResult Function(dynamic response)? gachaGetSuccess,
+    TResult Function(GachaSpinResponse response)? gachaGetSuccess,
     TResult Function(String msg)? fail,
   }) {
     return gachaGetSuccess?.call(response);
@@ -1264,7 +1264,7 @@ class _$GachaGetSuccess implements GachaGetSuccess {
             GachaProbabilityConfigResponse gachaProbabilityConfigResponse)?
         probabilityConfigSuccess,
     TResult Function(GachaHistoryResponse response)? gachaHistorySuccess,
-    TResult Function(dynamic response)? gachaGetSuccess,
+    TResult Function(GachaSpinResponse response)? gachaGetSuccess,
     TResult Function(String msg)? fail,
     required TResult orElse(),
   }) {
@@ -1328,9 +1328,10 @@ class _$GachaGetSuccess implements GachaGetSuccess {
 }
 
 abstract class GachaGetSuccess implements GachaSpinState {
-  const factory GachaGetSuccess(final dynamic response) = _$GachaGetSuccess;
+  const factory GachaGetSuccess(final GachaSpinResponse response) =
+      _$GachaGetSuccess;
 
-  dynamic get response;
+  GachaSpinResponse get response;
   @JsonKey(ignore: true)
   _$$GachaGetSuccessCopyWith<_$GachaGetSuccess> get copyWith =>
       throw _privateConstructorUsedError;
@@ -1410,7 +1411,7 @@ class _$GachaSpinFailed implements GachaSpinFailed {
         probabilityConfigSuccess,
     required TResult Function(GachaHistoryResponse response)
         gachaHistorySuccess,
-    required TResult Function(dynamic response) gachaGetSuccess,
+    required TResult Function(GachaSpinResponse response) gachaGetSuccess,
     required TResult Function(String msg) fail,
   }) {
     return fail(msg);
@@ -1427,7 +1428,7 @@ class _$GachaSpinFailed implements GachaSpinFailed {
             GachaProbabilityConfigResponse gachaProbabilityConfigResponse)?
         probabilityConfigSuccess,
     TResult Function(GachaHistoryResponse response)? gachaHistorySuccess,
-    TResult Function(dynamic response)? gachaGetSuccess,
+    TResult Function(GachaSpinResponse response)? gachaGetSuccess,
     TResult Function(String msg)? fail,
   }) {
     return fail?.call(msg);
@@ -1444,7 +1445,7 @@ class _$GachaSpinFailed implements GachaSpinFailed {
             GachaProbabilityConfigResponse gachaProbabilityConfigResponse)?
         probabilityConfigSuccess,
     TResult Function(GachaHistoryResponse response)? gachaHistorySuccess,
-    TResult Function(dynamic response)? gachaGetSuccess,
+    TResult Function(GachaSpinResponse response)? gachaGetSuccess,
     TResult Function(String msg)? fail,
     required TResult orElse(),
   }) {

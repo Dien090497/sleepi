@@ -3,6 +3,7 @@ import 'package:slee_fi/common/style/text_styles.dart';
 import 'package:slee_fi/common/widgets/sf_alert_dialog.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
 import 'package:slee_fi/l10n/locale_keys.g.dart';
+import 'package:slee_fi/models/gacha_probability_config_response/probability_config.dart';
 import 'package:slee_fi/presentation/screens/gacha/widgets/chance_widget.dart';
 import 'package:slee_fi/presentation/screens/gacha/widgets/decorated_widget.dart';
 import 'package:slee_fi/presentation/screens/gacha/widgets/gacha_roll_selections.dart';
@@ -11,18 +12,21 @@ import 'package:slee_fi/presentation/screens/gacha/widgets/probability_widget.da
 
 class ItemsGacha extends StatelessWidget {
   const ItemsGacha({Key? key,
+    required this.dialogData,
     required this.title,
     required this.singleGachaImages,
     required this.timesGachaImages,
     required this.singleProbability,
     required this.timesProbability,
     required this.numberOfSpin,
+    required this.totalValue,
     required this.typeReward,
     required this.imagePath,
     this.normalGacha = true,
   })
       : super(key: key);
 
+  final ProbabilityConfig? dialogData;
   final String title;
   final String typeReward;
   final String singleGachaImages;
@@ -30,6 +34,7 @@ class ItemsGacha extends StatelessWidget {
   final int singleProbability;
   final int timesProbability;
   final int numberOfSpin;
+  final int totalValue;
   final String imagePath;
   final bool normalGacha;
 
@@ -46,7 +51,9 @@ class ItemsGacha extends StatelessWidget {
             GestureDetector(
               onTap: () {
                 showCustomAlertDialog(context,
-                    children: ProbabilityDialog(normalGacha: normalGacha,));
+                    height: MediaQuery.of(context).size.height * 0.75,
+                    width: MediaQuery.of(context).size.width * 0.9,
+                    children: ProbabilityDialog(normalGacha: normalGacha, dialogData: dialogData,));
               },
               child: Container(
                 decoration: BoxDecoration(
@@ -63,7 +70,7 @@ class ItemsGacha extends StatelessWidget {
           ],
         ),
         const SizedBox(height: 17),
-        ProbabilityWidget(imagePath: imagePath, normalGacha: normalGacha),
+        ProbabilityWidget(imagePath: imagePath, normalGacha: normalGacha, dialogData: dialogData),
         const SizedBox(height: 20),
         GachaRollSelections(
           singleGachaImages: singleGachaImages,
@@ -77,7 +84,7 @@ class ItemsGacha extends StatelessWidget {
             keyText: typeReward,
             style: TextStyles.lightGrey12),
         const SizedBox(height: 2),
-        ChanceWidget(numberOfSpin: numberOfSpin, normalGacha: normalGacha,),
+        ChanceWidget(numberOfSpin: numberOfSpin, normalGacha: normalGacha, totalValue: totalValue),
         const SizedBox(height: 28),
       ],
     );

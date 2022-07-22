@@ -37,6 +37,7 @@ class _GachaRollSelectionsState extends State<GachaRollSelections> {
       child: BlocConsumer<GachaSpinCubit, GachaSpinState>(
         listener: (context, state) {
         if(state is GachaSpinSuccess) {
+          final cubit = context.read<GachaSpinCubit>();
           Navigator.pushNamed(context, R.gachaAnimation,
               arguments: GachaAnimationArguments(
                   spinInfo: state.gachaSpinResponse,
@@ -44,6 +45,7 @@ class _GachaRollSelectionsState extends State<GachaRollSelections> {
                   audio: widget.normalGacha ? Const.normalGachaAudio : Const.specialGachaAudio,
               )
           );
+          cubit.init();
           setState(() => enableButton = true);
         }
         },
