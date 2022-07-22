@@ -22,6 +22,7 @@ import 'package:slee_fi/presentation/screens/gacha/widgets/attributes_widget.dar
 import 'package:slee_fi/presentation/screens/info_individual/widget/bottom_bar.dart';
 import 'package:slee_fi/presentation/screens/info_individual/widget/bottom_bar_market_place.dart';
 import 'package:slee_fi/presentation/screens/info_individual/widget/box_info_widget.dart';
+import 'package:slee_fi/presentation/screens/info_individual/widget/cancel_sell_bottom_bar.dart';
 import 'package:slee_fi/presentation/screens/info_individual/widget/individual_refresher.dart';
 import 'package:slee_fi/presentation/screens/info_individual/widget/mint_from_widget.dart';
 import 'package:slee_fi/presentation/screens/info_individual/widget/point_dialog.dart';
@@ -183,11 +184,16 @@ class InfoIndividualScreen extends StatelessWidget {
             bottom: 0,
             left: 0,
             right: 0,
-            child: args.marketPlaceModel != null && (args.buy ?? false)
+            child: (args.bed.isLock == 1 && args.bed.statusNftSale == 'ON_SALE') ?
+            CancelSellBottombar(beds: args.bed,)
+            : (args.marketPlaceModel != null && (args.buy ?? false)
+                ? BottomBarMarketPlaceWidget(bed: args.marketPlaceModel!)
+                : BottomBarWidget(bedEntity: args.bed,)),
+            /*child: args.marketPlaceModel != null && (args.buy ?? false)
                 ? BottomBarMarketPlaceWidget(bed: args.marketPlaceModel!)
                 : BottomBarWidget(
                     bedEntity: args.bed,
-                  ),
+                  ),*/
           ),
           BlocBuilder<IndividualCubit, IndividualState>(
             builder: (context, state) =>

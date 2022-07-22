@@ -322,4 +322,7 @@ abstract class AuthDataSource {
     @Query('level') int level,
     @Query('upgradeType') int upgradeType,
   );
+
+  @POST('/nft/cancel-sell')
+  Future<NftSell> nftCancelSell(@Query('nftId') num nftId);
 }

@@ -74,6 +74,7 @@ import '../usecase/add_jewel_usecase.dart' as _i93;
 import '../usecase/approve_usecase.dart' as _i94;
 import '../usecase/bed_detail_usecase.dart' as _i95;
 import '../usecase/buy_nft_usecase.dart' as _i96;
+import '../usecase/cancel_sell_usecase.dart' as _i139;
 import '../usecase/change_password_usecase.dart' as _i97;
 import '../usecase/check_activation_code_usecase.dart' as _i98;
 import '../usecase/check_approve_usecase.dart' as _i99;
@@ -83,7 +84,7 @@ import '../usecase/create_password_usecase.dart' as _i103;
 import '../usecase/current_network_explorer_usecase.dart' as _i43;
 import '../usecase/current_user_usecase.dart' as _i105;
 import '../usecase/estimate_gas_withdraw.dart' as _i107;
-import '../usecase/estimate_nft_function_fee_usecase.dart' as _i147;
+import '../usecase/estimate_nft_function_fee_usecase.dart' as _i148;
 import '../usecase/estimate_token_function_fee_usecase.dart' as _i44;
 import '../usecase/estimate_tracking_usecase.dart' as _i108;
 import '../usecase/fetch_balance_spending_usecase.dart' as _i109;
@@ -102,19 +103,19 @@ import '../usecase/get_balance_token_usecase.dart' as _i121;
 import '../usecase/get_current_network_usecase.dart' as _i123;
 import '../usecase/get_global_config.dart' as _i124;
 import '../usecase/get_history_transaction_usecase.dart' as _i125;
-import '../usecase/get_level_up_usecase.dart' as _i148;
-import '../usecase/get_list_nft_detail_usecase.dart' as _i149;
+import '../usecase/get_level_up_usecase.dart' as _i149;
+import '../usecase/get_list_nft_detail_usecase.dart' as _i150;
 import '../usecase/get_market_place_usecase.dart' as _i66;
-import '../usecase/get_minting_usecase.dart' as _i150;
+import '../usecase/get_minting_usecase.dart' as _i151;
 import '../usecase/get_network_connection_usecase.dart' as _i34;
-import '../usecase/get_nft_family_usecase.dart' as _i153;
-import '../usecase/get_nfts_balance_usecase.dart' as _i151;
-import '../usecase/get_nfts_ids_usecase.dart' as _i152;
-import '../usecase/get_point_of_owner_usecase.dart' as _i154;
-import '../usecase/get_repair_usecase.dart' as _i155;
+import '../usecase/get_nft_family_usecase.dart' as _i154;
+import '../usecase/get_nfts_balance_usecase.dart' as _i152;
+import '../usecase/get_nfts_ids_usecase.dart' as _i153;
+import '../usecase/get_point_of_owner_usecase.dart' as _i155;
+import '../usecase/get_repair_usecase.dart' as _i156;
 import '../usecase/get_sleep_result_usecase.dart' as _i126;
 import '../usecase/get_slft_price_usecase.dart' as _i127;
-import '../usecase/get_transaction_fee_usecase.dart' as _i156;
+import '../usecase/get_transaction_fee_usecase.dart' as _i157;
 import '../usecase/get_user_status_tracking_usecase.dart' as _i128;
 import '../usecase/get_user_usecase.dart' as _i129;
 import '../usecase/has_wallet_usecase.dart' as _i130;
@@ -127,21 +128,21 @@ import '../usecase/login_usecase.dart' as _i63;
 import '../usecase/logout_usecase.dart' as _i64;
 import '../usecase/make_first_open_app_usecase.dart' as _i65;
 import '../usecase/minting_usecase.dart' as _i138;
-import '../usecase/nft_repair_usecase.dart' as _i139;
-import '../usecase/nft_sell_usecase.dart' as _i140;
+import '../usecase/nft_repair_usecase.dart' as _i140;
+import '../usecase/nft_sell_usecase.dart' as _i141;
 import '../usecase/on_connection_changed_usecase.dart' as _i26;
 import '../usecase/open_lucky_box_usecase.dart' as _i68;
 import '../usecase/open_socket_usecase.dart' as _i69;
 import '../usecase/post_health_data_usecase.dart' as _i70;
-import '../usecase/post_level_up_usecase.dart' as _i141;
+import '../usecase/post_level_up_usecase.dart' as _i142;
 import '../usecase/remove_item_from_bed_usecase.dart' as _i71;
 import '../usecase/remove_jewel_usecase.dart' as _i72;
 import '../usecase/run_app_init_usecase.dart' as _i27;
-import '../usecase/send_nft_to_spending_usecase.dart' as _i142;
+import '../usecase/send_nft_to_spending_usecase.dart' as _i143;
 import '../usecase/send_otp_mail_usecase.dart' as _i73;
 import '../usecase/send_to_external_usecase.dart' as _i38;
 import '../usecase/send_token_to_external.dart' as _i39;
-import '../usecase/set_nft_approval_for_all_usecase.dart' as _i143;
+import '../usecase/set_nft_approval_for_all_usecase.dart' as _i144;
 import '../usecase/setting_active_code_usecase.dart' as _i74;
 import '../usecase/sign_up_usecase.dart' as _i75;
 import '../usecase/speed_up_lucky_box_usecase.dart' as _i76;
@@ -150,10 +151,10 @@ import '../usecase/staking_usecase.dart' as _i78;
 import '../usecase/start_sleep_tracking_usecase.dart' as _i79;
 import '../usecase/swap_token_usecase.dart' as _i80;
 import '../usecase/to_spending_usecase.dart' as _i81;
-import '../usecase/transfer_nft_usecase.dart' as _i144;
+import '../usecase/transfer_nft_usecase.dart' as _i145;
 import '../usecase/transfer_token_to_main_wallet_usecase.dart' as _i82;
 import '../usecase/unstaking_usecase.dart' as _i83;
-import '../usecase/update_attribute_usecase.dart' as _i145;
+import '../usecase/update_attribute_usecase.dart' as _i146;
 import '../usecase/upgrade_info_usecase.dart' as _i84;
 import '../usecase/upgrade_jewel_usecase.dart' as _i85;
 import '../usecase/validate_mnemonic.dart' as _i86;
@@ -166,8 +167,8 @@ import '../usecase/wallet/first_open_wallet_session_usecase.dart' as _i100;
 import '../usecase/wallet/get_current_mnemonic_usecasse.dart' as _i122;
 import '../usecase/wallet/import_wallet_usecase.dart' as _i59;
 import '../usecase/withdraw_history_usecase.dart' as _i90;
-import '../usecase/withdraw_nft_usecase.dart' as _i146;
-import 'register_module.dart' as _i157; // ignore_for_file: unnecessary_lambdas
+import '../usecase/withdraw_nft_usecase.dart' as _i147;
+import 'register_module.dart' as _i158; // ignore_for_file: unnecessary_lambdas
 
 // ignore_for_file: lines_longer_than_80_chars
 /// initializes the registration of provided dependencies inside of [GetIt]
@@ -447,47 +448,49 @@ Future<_i1.GetIt> $initGetIt(_i1.GetIt get,
       () => _i137.MintImplementation(get<_i67.NftApi>()));
   gh.factory<_i138.MintingUseCase>(
       () => _i138.MintingUseCase(get<_i136.MintRepository>()));
-  gh.factory<_i139.NFTRepairUseCase>(
-      () => _i139.NFTRepairUseCase(get<_i131.INFTRepository>()));
-  gh.factory<_i140.NFTSellUseCase>(
-      () => _i140.NFTSellUseCase(get<_i131.INFTRepository>()));
-  gh.factory<_i141.PostLevelUpUseCase>(
-      () => _i141.PostLevelUpUseCase(get<_i134.LevelUpRepository>()));
-  gh.factory<_i142.SendNftToSpendingUseCase>(() =>
-      _i142.SendNftToSpendingUseCase(
+  gh.factory<_i139.NFTCancelSellUseCase>(
+      () => _i139.NFTCancelSellUseCase(get<_i131.INFTRepository>()));
+  gh.factory<_i140.NFTRepairUseCase>(
+      () => _i140.NFTRepairUseCase(get<_i131.INFTRepository>()));
+  gh.factory<_i141.NFTSellUseCase>(
+      () => _i141.NFTSellUseCase(get<_i131.INFTRepository>()));
+  gh.factory<_i142.PostLevelUpUseCase>(
+      () => _i142.PostLevelUpUseCase(get<_i134.LevelUpRepository>()));
+  gh.factory<_i143.SendNftToSpendingUseCase>(() =>
+      _i143.SendNftToSpendingUseCase(
           get<_i131.INFTRepository>(), get<_i28.SecureStorage>()));
-  gh.factory<_i143.SetNftApprovalForAllUseCase>(() =>
-      _i143.SetNftApprovalForAllUseCase(
+  gh.factory<_i144.SetNftApprovalForAllUseCase>(() =>
+      _i144.SetNftApprovalForAllUseCase(
           get<_i131.INFTRepository>(), get<_i28.SecureStorage>()));
-  gh.factory<_i144.TransferNftUseCase>(
-      () => _i144.TransferNftUseCase(get<_i131.INFTRepository>()));
-  gh.factory<_i145.UpdateAttributeUseCase>(
-      () => _i145.UpdateAttributeUseCase(get<_i131.INFTRepository>()));
-  gh.factory<_i146.WithdrawNFTUseCase>(
-      () => _i146.WithdrawNFTUseCase(get<_i131.INFTRepository>()));
-  gh.factory<_i147.EstimateNftFunctionFeeUseCase>(
-      () => _i147.EstimateNftFunctionFeeUseCase(get<_i131.INFTRepository>()));
-  gh.factory<_i148.GetLevelUpUseCase>(
-      () => _i148.GetLevelUpUseCase(get<_i134.LevelUpRepository>()));
-  gh.factory<_i149.GetListNftDetailUseCase>(
-      () => _i149.GetListNftDetailUseCase(get<_i131.INFTRepository>()));
-  gh.factory<_i150.GetMintingUseCase>(
-      () => _i150.GetMintingUseCase(get<_i136.MintRepository>()));
-  gh.factory<_i151.GetNFTsBalanceUseCase>(
-      () => _i151.GetNFTsBalanceUseCase(get<_i131.INFTRepository>()));
-  gh.factory<_i152.GetNFTsIDsUseCase>(
-      () => _i152.GetNFTsIDsUseCase(get<_i131.INFTRepository>()));
-  gh.factory<_i153.GetNftFamilyUseCase>(
-      () => _i153.GetNftFamilyUseCase(get<_i131.INFTRepository>()));
-  gh.factory<_i154.GetPointOfOwnerUseCase>(
-      () => _i154.GetPointOfOwnerUseCase(get<_i131.INFTRepository>()));
-  gh.factory<_i155.GetRepairUseCase>(
-      () => _i155.GetRepairUseCase(get<_i131.INFTRepository>()));
-  gh.factory<_i156.GetTransactionFeeUseCase>(
-      () => _i156.GetTransactionFeeUseCase(get<_i131.INFTRepository>()));
+  gh.factory<_i145.TransferNftUseCase>(
+      () => _i145.TransferNftUseCase(get<_i131.INFTRepository>()));
+  gh.factory<_i146.UpdateAttributeUseCase>(
+      () => _i146.UpdateAttributeUseCase(get<_i131.INFTRepository>()));
+  gh.factory<_i147.WithdrawNFTUseCase>(
+      () => _i147.WithdrawNFTUseCase(get<_i131.INFTRepository>()));
+  gh.factory<_i148.EstimateNftFunctionFeeUseCase>(
+      () => _i148.EstimateNftFunctionFeeUseCase(get<_i131.INFTRepository>()));
+  gh.factory<_i149.GetLevelUpUseCase>(
+      () => _i149.GetLevelUpUseCase(get<_i134.LevelUpRepository>()));
+  gh.factory<_i150.GetListNftDetailUseCase>(
+      () => _i150.GetListNftDetailUseCase(get<_i131.INFTRepository>()));
+  gh.factory<_i151.GetMintingUseCase>(
+      () => _i151.GetMintingUseCase(get<_i136.MintRepository>()));
+  gh.factory<_i152.GetNFTsBalanceUseCase>(
+      () => _i152.GetNFTsBalanceUseCase(get<_i131.INFTRepository>()));
+  gh.factory<_i153.GetNFTsIDsUseCase>(
+      () => _i153.GetNFTsIDsUseCase(get<_i131.INFTRepository>()));
+  gh.factory<_i154.GetNftFamilyUseCase>(
+      () => _i154.GetNftFamilyUseCase(get<_i131.INFTRepository>()));
+  gh.factory<_i155.GetPointOfOwnerUseCase>(
+      () => _i155.GetPointOfOwnerUseCase(get<_i131.INFTRepository>()));
+  gh.factory<_i156.GetRepairUseCase>(
+      () => _i156.GetRepairUseCase(get<_i131.INFTRepository>()));
+  gh.factory<_i157.GetTransactionFeeUseCase>(
+      () => _i157.GetTransactionFeeUseCase(get<_i131.INFTRepository>()));
   return get;
 }
 
 class _$RPCModule extends _i32.RPCModule {}
 
-class _$RegisterModule extends _i157.RegisterModule {}
+class _$RegisterModule extends _i158.RegisterModule {}

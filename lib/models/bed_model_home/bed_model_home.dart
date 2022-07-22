@@ -94,7 +94,10 @@ class BedModelHome {
       insurancePercent: objData.insurancePercent,
       startTime: objData.startTime,
       endTime: objData.endTime,
-      jewels: []);
+        jewels: [],
+        price: '',
+        statusNftSale: '',
+      );
 }
 
 @JsonSerializable()

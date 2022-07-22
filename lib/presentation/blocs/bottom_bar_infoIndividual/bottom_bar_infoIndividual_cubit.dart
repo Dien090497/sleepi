@@ -7,6 +7,7 @@ import 'package:slee_fi/schema/level_up/level_up_schema.dart';
 import 'package:slee_fi/schema/nft_sell_schema/nft_sell_schema.dart';
 import 'package:slee_fi/schema/repair_schema/repair_schema.dart';
 import 'package:slee_fi/schema/with_draw_nft_schema/with_draw_nft_schema.dart';
+import 'package:slee_fi/usecase/cancel_sell_usecase.dart';
 import 'package:slee_fi/usecase/estimate_gas_withdraw.dart';
 import 'package:slee_fi/usecase/get_level_up_usecase.dart';
 import 'package:slee_fi/usecase/post_level_up_usecase.dart';
@@ -29,6 +30,7 @@ class BottomBarInfoIndividualCubit extends Cubit<BottomBarInfoIndividualState> {
   final _nftSellUseCase = getIt<NFTSellUseCase>();
   final _getRepairUseCase = getIt<GetRepairUseCase>();
   final _nftRepairUseCase= getIt<NFTRepairUseCase>();
+  final _nftCancelSellUseCase= getIt<NFTCancelSellUseCase>();
 
   void init () {
     emit(const BottomBarInfoIndividualState.loaded(gasPrice: '--.--', successTransfer: false, transactionFee: '--.--'));
@@ -119,5 +121,18 @@ class BottomBarInfoIndividualCubit extends Cubit<BottomBarInfoIndividualState> {
     final result = await _postLevelUpUC.call(param);
     result.fold((l) => emit(BottomBarInfoIndividualState.error(message: '$l')),
         (r) => emit(const BottomBarInfoIndividualState.upLevel()));
+  }
+
+  Future<void> cancelSell({required num nftId}) async {
+    final result = await _nftCancelSellUseCase.call(nftId);
+    result.fold((error) {
+      BottomBarInfoIndividualState.error(message: '$error');
+    }, (result) {
+      final currentState = state;
+      const BottomBarInfoIndividualState.loaded(gasPrice: '', successTransfer: false, transactionFee: '');
+      if (currentState is BottomBarInfoIndividualLoaded) {
+        emit(currentState.copyWith(successTransfer: true));
+      }
+    });
   }
 }
