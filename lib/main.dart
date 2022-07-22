@@ -146,17 +146,14 @@ Future<void> onStart(ServiceInstance service) async {
         "Alarm: ${DateFormat('HH:mm dd/MM/yyyy').format(wakeUp).toString()}",
       );
     }
-    Timer.periodic(const Duration(seconds: 1), (timer) async {
+
+    Timer.periodic(Duration(minutes: time), (timer) async {
       if (!audioPlayer.playing) {
         await audioPlayer.setAsset(Const.soundAlarm[sound]);
-        await audioPlayer.setVolume(0);
+        await audioPlayer.setVolume(1);
         await audioPlayer.setLoopMode(LoopMode.all);
         await audioPlayer.play();
       }
-    });
-
-    Timer.periodic(Duration(minutes: time), (timer) async {
-      await audioPlayer.setVolume(1);
       timer.cancel();
     });
   }catch(e){
