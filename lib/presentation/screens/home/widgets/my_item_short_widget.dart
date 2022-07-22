@@ -1,3 +1,5 @@
+import 'dart:math' as math;
+
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -77,7 +79,8 @@ class MyItemsShortWidget extends StatelessWidget {
                       style: TextStyles.lightGrey11W500),
                 ),
                 SizedBox(height: 4.h),
-                const SFPercentBorderGradient(valueActive: 70, totalValue: 100),
+                SFPercentBorderGradient(
+                    valueActive: math.min(level * 1.0, 5), totalValue: 5),
                 const SizedBox(height: 12)
               ],
             ),
