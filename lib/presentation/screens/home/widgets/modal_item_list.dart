@@ -90,17 +90,18 @@ class ModalItemList extends StatelessWidget {
                                 children: PopUpItem(
                                   level: item.level,
                                   type: item.type,
-                                  id: '${item.tokenId}',
+                                  id: item.name,
                                   icon: item.image,
                                   onConfirm: () {
                                     homeBloc.add(AddItem(item));
+                                    itemBloc.add(AddItemSuccessEvent(item));
                                   },
                                 ));
                           },
                           child: MyItemsShortWidget(
                             level: item.level,
                             quality: item.quality,
-                            tokenId: '${item.tokenId}',
+                            name: item.name,
                             color: AppColors.light4,
                             image: item.image,
                             type: item.type,

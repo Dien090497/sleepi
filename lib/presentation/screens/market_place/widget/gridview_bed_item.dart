@@ -93,7 +93,7 @@ class GridViewBedItem extends StatelessWidget {
                         padding: const EdgeInsets.symmetric(
                             vertical: 5, horizontal: 16),
                         child: SFText(
-                          keyText: bed.tokenId.toString(),
+                          keyText: bed.nftName,
                           style: TextStyles.white1w700size12
                               .copyWith(color: qualityColor),
                         ),
@@ -103,7 +103,7 @@ class GridViewBedItem extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           SFText(
-                              keyText: '${LocaleKeys.mint.tr()} ${bed.isMint}',
+                              keyText: '${LocaleKeys.mint.tr()} ${bed.bedMint}',
                               style: TextStyles.lightGrey11W500),
                           SFText(
                               keyText: '${LocaleKeys.level.tr()} ${bed.level}',

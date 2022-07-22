@@ -1,3 +1,5 @@
+import 'dart:math' as math;
+
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -12,7 +14,7 @@ import 'package:slee_fi/presentation/screens/product_detail/widgets/top_left_ban
 
 class MyItemsShortWidget extends StatelessWidget {
   const MyItemsShortWidget(
-      {required this.tokenId,
+      {required this.name,
       required this.image,
       this.color,
       Key? key,
@@ -25,7 +27,7 @@ class MyItemsShortWidget extends StatelessWidget {
   final String type;
   final int level;
   final Color? color;
-  final String tokenId;
+  final String name;
   final String? quality;
 
   @override
@@ -64,7 +66,7 @@ class MyItemsShortWidget extends StatelessWidget {
                   padding:
                       const EdgeInsets.symmetric(vertical: 5, horizontal: 16),
                   child: SFText(
-                    keyText: tokenId.toString(),
+                    keyText: name.toString(),
                     style: TextStyles.white1w700size12
                         .copyWith(color: qualityColor),
                   ),
@@ -77,7 +79,8 @@ class MyItemsShortWidget extends StatelessWidget {
                       style: TextStyles.lightGrey11W500),
                 ),
                 SizedBox(height: 4.h),
-                const SFPercentBorderGradient(valueActive: 70, totalValue: 100),
+                SFPercentBorderGradient(
+                    valueActive: math.min(level * 1.0, 5), totalValue: 5),
                 const SizedBox(height: 12)
               ],
             ),

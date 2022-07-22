@@ -71,20 +71,22 @@ class JewelsBuyWidget extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Container(
+                  Flexible(child: Container(
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(50),
                       border: Border.all(color: qualityColor.withOpacity(0.1)),
                     ),
                     padding:
-                        const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+                    const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
                     alignment: Alignment.center,
                     child: SFText(
-                      keyText: jewel.nftId.toString(),
+                      maxLines: 2,
+                      keyText: jewel.nftName,
+                      textAlign: TextAlign.center,
                       style: TextStyles.white1w700size12
                           .copyWith(color: qualityColor),
                     ),
-                  ),
+                  )),
                   const SizedBox(width: 6),
                   Container(
                     decoration: BoxDecoration(

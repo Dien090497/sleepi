@@ -12,20 +12,22 @@ import 'package:slee_fi/entities/bed_entity/bed_entity.dart';
 import 'package:slee_fi/l10n/locale_keys.g.dart';
 
 class JewelDialogBody extends StatelessWidget {
-  const JewelDialogBody(
-      {Key? key,
-      required this.onSellTap,
-      required this.onTransferTap,
-      required this.jewel,
-      this.textOnTransfer,
-      this.textOnSell})
-      : super(key: key);
+  const JewelDialogBody({
+    Key? key,
+    required this.onSellTap,
+    required this.onTransferTap,
+    required this.jewel,
+    this.textOnTransfer,
+    this.textOnSell,
+    this.isJewel = true,
+  }) : super(key: key);
 
   final BedEntity jewel;
   final VoidCallback onSellTap;
   final VoidCallback onTransferTap;
   final String? textOnTransfer;
   final String? textOnSell;
+  final bool isJewel;
 
   @override
   Widget build(BuildContext context) {
@@ -62,7 +64,7 @@ class JewelDialogBody extends StatelessWidget {
             const SizedBox(height: 20),
             SFText(
               keyText:
-                  '${jewel.jewelType?.tr() ?? ''} ${LocaleKeys.jewel.tr()} (Lv.${jewel.level})',
+                  '${jewel.jewelType?.tr() ?? ''} ${isJewel ? LocaleKeys.jewel.tr() : LocaleKeys.item.tr()} (Lv.${jewel.level})',
               style: TextStyles.white1w700size16,
             ),
             const SizedBox(height: 24),
@@ -73,7 +75,7 @@ class JewelDialogBody extends StatelessWidget {
               ),
               padding: const EdgeInsets.all(8),
               child: SFText(
-                keyText: jewel.nftId.toString(),
+                keyText: jewel.name,
                 style: TextStyles.blue14.copyWith(color: qualityColor),
               ),
             ),
@@ -90,7 +92,8 @@ class JewelDialogBody extends StatelessWidget {
                   const SizedBox(width: 4),
                   Expanded(
                     child: SFText(
-                      keyText: '${jewel.infoBuff}% ${LocaleKeys.base.tr()} ${jewel.type.tr()}',
+                      keyText:
+                          '${jewel.infoBuff}% ${LocaleKeys.base.tr()} ${jewel.type.tr()}',
                       style: TextStyles.blue16,
                       textAlign: TextAlign.right,
                     ),

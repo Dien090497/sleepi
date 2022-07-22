@@ -58,8 +58,7 @@ class TabItemDetail extends StatelessWidget {
                                       _showJewelDialog(context, state.jewels[i]);
                                     },
                                     child: MyItemsShortWidget(
-                                        tokenId:
-                                            state.jewels[i].tokenId.toString(),
+                                        name: state.jewels[i].name,
                                         image: state.jewels[i].image,
                                         quality: state.jewels[i].quality,
                                         level: state.jewels[i].level,

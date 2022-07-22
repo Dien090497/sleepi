@@ -98,6 +98,7 @@ class BedModel {
 
   JewelEntity toJewelEntity() {
     return JewelEntity(
+        nftName: nftName,
         bonus: bonus,
         special: special,
         jewelType: jewelType ?? '',

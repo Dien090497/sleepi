@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:slee_fi/common/const/const.dart';
 import 'package:slee_fi/common/extensions/string_x.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
@@ -92,15 +93,13 @@ class PopUpBedMarketPlace extends StatelessWidget {
           ),
           padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 12),
           child: SFText(
-            keyText: bed.tokenId.toString(),
+            keyText: bed.nftName,
             style: TextStyle(
                 fontSize: 14, color: qualityColor, fontWeight: FontWeight.w500),
           ),
         ),
         const SizedBox(height: 32),
-        _Detail(
-          bed: bed,
-        ),
+        _Detail(bed: bed),
         const SizedBox(height: 16),
         Row(
           children: [
@@ -195,9 +194,7 @@ class _Detail extends StatelessWidget {
                     Ics.icTwoEyes,
                     color: AppColors.blue,
                   ),
-                  const SizedBox(
-                    width: 12,
-                  ),
+                  const SizedBox(width: 12),
                   SFText(
                       keyText: bed.classNft == null
                           ? bed.type.reCase(StringCase.titleCase)
@@ -230,7 +227,7 @@ class _Detail extends StatelessWidget {
                   keyText: LocaleKeys.bed_mint, style: TextStyles.lightGrey14),
               SizedBox(height: 8.h),
               SFText(
-                  keyText: '${bed.isMint}/${bed.bedMint}',
+                  keyText: '${bed.bedMint}/${Const.bedMintMax.toInt()}',
                   style: TextStyles.lightWhite16W700),
             ],
           ),
