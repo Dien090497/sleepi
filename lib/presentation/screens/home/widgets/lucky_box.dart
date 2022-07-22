@@ -27,7 +27,7 @@ class LuckyBox extends StatelessWidget {
         children: List.generate(
           6,
           (index) => _ViewGif(
-            index: 0,
+            index: index,
             entity: _boxWithIndex(state, index),
             cubit: context.read<LuckyBoxCubit>(),
           ),
@@ -56,15 +56,16 @@ class _ViewGif extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () {
+      onTap: () async {
         if (entity != null) {
-          if (index % 2 == 0) {
+          if (entity!.isOpen == 0) {
             showCustomDialog(context, children: [
               PopUpStaking(
                   message: LocaleKeys.do_you_want_open_the_lucky_box
                       .tr(args: [entity!.openCost]),
-                  onPressed: () {
-                    cubit.openLuckyBox(entity!);
+                  onPressed: () async {
+                    final message = await cubit.openLuckyBox(entity!);
+                    showMessageDialog(context, message);
                   })
             ]);
           } else {
@@ -105,17 +106,18 @@ class _ViewGif extends StatelessWidget {
             id: id,
             waitingTime: waitingTime,
             onConfirm: () {
-              _showConfirmSpeedUp(context, speedUpCost, id);
+              _showConfirmSpeedUp(context, speedUpCost);
             }));
   }
 
-  void _showConfirmSpeedUp(BuildContext context, String amount, int id) {
+  void _showConfirmSpeedUp(BuildContext context, String amount) {
     showCustomAlertDialog(context,
         padding: const EdgeInsets.all(24),
         children: PupUpConfirmSpeedUp(
           amount: amount,
-          onConfirm: () {
-            context.read<LuckyBoxCubit>().speedUpLuckyBox(id);
+          onConfirm: () async {
+           final message = await context.read<LuckyBoxCubit>().speedUpLuckyBox(index);
+           showMessageDialog(context, message);
           },
         ));
   }

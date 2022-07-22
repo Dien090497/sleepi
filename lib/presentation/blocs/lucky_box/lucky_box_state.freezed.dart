@@ -17,19 +17,24 @@ final _privateConstructorUsedError = UnsupportedError(
 /// @nodoc
 mixin _$LuckyBoxState {
   List<LuckyBoxEntity> get luckyBoxes => throw _privateConstructorUsedError;
+  String? get errorMessage => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(List<LuckyBoxEntity> luckyBoxes) loaded,
+    required TResult Function(
+            List<LuckyBoxEntity> luckyBoxes, String? errorMessage)
+        loaded,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(List<LuckyBoxEntity> luckyBoxes)? loaded,
+    TResult Function(List<LuckyBoxEntity> luckyBoxes, String? errorMessage)?
+        loaded,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(List<LuckyBoxEntity> luckyBoxes)? loaded,
+    TResult Function(List<LuckyBoxEntity> luckyBoxes, String? errorMessage)?
+        loaded,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -60,7 +65,7 @@ abstract class $LuckyBoxStateCopyWith<$Res> {
   factory $LuckyBoxStateCopyWith(
           LuckyBoxState value, $Res Function(LuckyBoxState) then) =
       _$LuckyBoxStateCopyWithImpl<$Res>;
-  $Res call({List<LuckyBoxEntity> luckyBoxes});
+  $Res call({List<LuckyBoxEntity> luckyBoxes, String? errorMessage});
 }
 
 /// @nodoc
@@ -75,12 +80,17 @@ class _$LuckyBoxStateCopyWithImpl<$Res>
   @override
   $Res call({
     Object? luckyBoxes = freezed,
+    Object? errorMessage = freezed,
   }) {
     return _then(_value.copyWith(
       luckyBoxes: luckyBoxes == freezed
           ? _value.luckyBoxes
           : luckyBoxes // ignore: cast_nullable_to_non_nullable
               as List<LuckyBoxEntity>,
+      errorMessage: errorMessage == freezed
+          ? _value.errorMessage
+          : errorMessage // ignore: cast_nullable_to_non_nullable
+              as String?,
     ));
   }
 }
@@ -92,7 +102,7 @@ abstract class _$$_LuckyBoxStateCopyWith<$Res>
           _$_LuckyBoxState value, $Res Function(_$_LuckyBoxState) then) =
       __$$_LuckyBoxStateCopyWithImpl<$Res>;
   @override
-  $Res call({List<LuckyBoxEntity> luckyBoxes});
+  $Res call({List<LuckyBoxEntity> luckyBoxes, String? errorMessage});
 }
 
 /// @nodoc
@@ -109,12 +119,17 @@ class __$$_LuckyBoxStateCopyWithImpl<$Res>
   @override
   $Res call({
     Object? luckyBoxes = freezed,
+    Object? errorMessage = freezed,
   }) {
     return _then(_$_LuckyBoxState(
       luckyBoxes: luckyBoxes == freezed
           ? _value._luckyBoxes
           : luckyBoxes // ignore: cast_nullable_to_non_nullable
               as List<LuckyBoxEntity>,
+      errorMessage: errorMessage == freezed
+          ? _value.errorMessage
+          : errorMessage // ignore: cast_nullable_to_non_nullable
+              as String?,
     ));
   }
 }
@@ -122,7 +137,8 @@ class __$$_LuckyBoxStateCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_LuckyBoxState implements _LuckyBoxState {
-  const _$_LuckyBoxState({final List<LuckyBoxEntity> luckyBoxes = const []})
+  const _$_LuckyBoxState(
+      {final List<LuckyBoxEntity> luckyBoxes = const [], this.errorMessage})
       : _luckyBoxes = luckyBoxes;
 
   final List<LuckyBoxEntity> _luckyBoxes;
@@ -134,8 +150,11 @@ class _$_LuckyBoxState implements _LuckyBoxState {
   }
 
   @override
+  final String? errorMessage;
+
+  @override
   String toString() {
-    return 'LuckyBoxState.loaded(luckyBoxes: $luckyBoxes)';
+    return 'LuckyBoxState.loaded(luckyBoxes: $luckyBoxes, errorMessage: $errorMessage)';
   }
 
   @override
@@ -144,12 +163,16 @@ class _$_LuckyBoxState implements _LuckyBoxState {
         (other.runtimeType == runtimeType &&
             other is _$_LuckyBoxState &&
             const DeepCollectionEquality()
-                .equals(other._luckyBoxes, _luckyBoxes));
+                .equals(other._luckyBoxes, _luckyBoxes) &&
+            const DeepCollectionEquality()
+                .equals(other.errorMessage, errorMessage));
   }
 
   @override
   int get hashCode => Object.hash(
-      runtimeType, const DeepCollectionEquality().hash(_luckyBoxes));
+      runtimeType,
+      const DeepCollectionEquality().hash(_luckyBoxes),
+      const DeepCollectionEquality().hash(errorMessage));
 
   @JsonKey(ignore: true)
   @override
@@ -159,27 +182,31 @@ class _$_LuckyBoxState implements _LuckyBoxState {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(List<LuckyBoxEntity> luckyBoxes) loaded,
+    required TResult Function(
+            List<LuckyBoxEntity> luckyBoxes, String? errorMessage)
+        loaded,
   }) {
-    return loaded(luckyBoxes);
+    return loaded(luckyBoxes, errorMessage);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(List<LuckyBoxEntity> luckyBoxes)? loaded,
+    TResult Function(List<LuckyBoxEntity> luckyBoxes, String? errorMessage)?
+        loaded,
   }) {
-    return loaded?.call(luckyBoxes);
+    return loaded?.call(luckyBoxes, errorMessage);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(List<LuckyBoxEntity> luckyBoxes)? loaded,
+    TResult Function(List<LuckyBoxEntity> luckyBoxes, String? errorMessage)?
+        loaded,
     required TResult orElse(),
   }) {
     if (loaded != null) {
-      return loaded(luckyBoxes);
+      return loaded(luckyBoxes, errorMessage);
     }
     return orElse();
   }
@@ -214,11 +241,14 @@ class _$_LuckyBoxState implements _LuckyBoxState {
 }
 
 abstract class _LuckyBoxState implements LuckyBoxState {
-  const factory _LuckyBoxState({final List<LuckyBoxEntity> luckyBoxes}) =
-      _$_LuckyBoxState;
+  const factory _LuckyBoxState(
+      {final List<LuckyBoxEntity> luckyBoxes,
+      final String? errorMessage}) = _$_LuckyBoxState;
 
   @override
   List<LuckyBoxEntity> get luckyBoxes;
+  @override
+  String? get errorMessage;
   @override
   @JsonKey(ignore: true)
   _$$_LuckyBoxStateCopyWith<_$_LuckyBoxState> get copyWith =>

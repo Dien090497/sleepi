@@ -604,17 +604,18 @@ class _AuthDataSource implements AuthDataSource {
   }
 
   @override
-  Future<dynamic> openLuckyBox(luckyBoxId) async {
+  Future<VerifyResponse> openLuckyBox(luckyBoxId) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{r'luckyBoxId': luckyBoxId};
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
-    final _result = await _dio.fetch(_setStreamType<dynamic>(
-        Options(method: 'GET', headers: _headers, extra: _extra)
-            .compose(_dio.options, '/lucky_box/open',
-                queryParameters: queryParameters, data: _data)
-            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = _result.data;
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<VerifyResponse>(
+            Options(method: 'POST', headers: _headers, extra: _extra)
+                .compose(_dio.options, '/lucky_box/open',
+                    queryParameters: queryParameters, data: _data)
+                .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = VerifyResponse.fromJson(_result.data!);
     return value;
   }
 

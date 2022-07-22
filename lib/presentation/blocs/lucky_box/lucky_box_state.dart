@@ -7,5 +7,6 @@ part 'lucky_box_state.freezed.dart';
 class LuckyBoxState with _$LuckyBoxState {
   const factory LuckyBoxState.loaded({
     @Default([]) List<LuckyBoxEntity> luckyBoxes,
+    String? errorMessage,
   }) = _LuckyBoxState;
 }
