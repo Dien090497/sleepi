@@ -2,21 +2,52 @@ import 'package:json_annotation/json_annotation.dart';
 
 part 'gacha_attributes_item.g.dart';
 @JsonSerializable()
+
+
 class GachaAttributesItem{
+  final int nftId;
+  final double time;
   final double level;
+  final double bedMint;
   final double efficiency;
   final double luck;
   final double bonus;
   final double special;
   final double resilience;
+  final double tokenId;
+  final double id;
+  final String image;
+  final String nftName;
+  final String contractAddress;
+  final String owner;
+  final String type;
+  final String nftType;
+  final String? jewelType;
+  final String classNft;
+  final String quality;
 
   GachaAttributesItem({
+    required this.image,
+    required this.nftName,
+    required this.contractAddress,
+    required this.owner,
+    required this.type,
+    required this.nftType,
+    required this.jewelType,
+    required this.classNft,
+    required this.quality,
     required this.level,
     required this.efficiency,
     required this.luck,
     required this.bonus,
+    required this.nftId,
+    required this.id,
+    required this.bedMint,
+    required this.time,
+    required this.tokenId,
     required this.special,
     required this.resilience,
+
   });
   factory GachaAttributesItem.fromJson(Map<String, dynamic> json) => _$GachaAttributesItemFromJson(json);
 
