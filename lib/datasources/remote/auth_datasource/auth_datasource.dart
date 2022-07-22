@@ -12,6 +12,8 @@ import 'package:slee_fi/models/bed_model/beb_model.dart';
 import 'package:slee_fi/models/create_password_reponse/create_password_response.dart';
 import 'package:slee_fi/models/estimate_sleep_response/estimate_sleep_response.dart';
 import 'package:slee_fi/models/fetch_bed_response/fetch_bed_response.dart';
+import 'package:slee_fi/models/gacha_history_response/gacha_history_response.dart';
+import 'package:slee_fi/models/gacha_probability_config_response/gacha_probability_config_response.dart';
 import 'package:slee_fi/models/gacha_spin_response/gacha_spin_response.dart';
 import 'package:slee_fi/models/get_repair_response/get_repair_response.dart';
 import 'package:slee_fi/models/global_config_response/global_config_response.dart';
@@ -271,7 +273,16 @@ abstract class AuthDataSource {
       @Body() GachaSpinSchema gachaSpinSchema);
 
   @GET('/gacha/history')
-  Future<dynamic> gachaHistory();
+  Future<GachaHistoryResponse> gachaHistory();
+
+  @GET('/gacha/get-probability-config')
+  Future<GachaProbabilityConfigResponse> gachaProbabilityConfig();
+
+  @POST('/gacha/get-common-bed')
+  Future<dynamic> getCommonBed();
+
+  @POST('/gacha/get-special-bed')
+  Future<dynamic> getSpecialBed();
 
   // individual
   @PUT('/nft-attributes/open-socket')

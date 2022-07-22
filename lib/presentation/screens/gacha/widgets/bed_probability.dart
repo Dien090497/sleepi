@@ -4,16 +4,17 @@ import 'package:slee_fi/common/style/text_styles.dart';
 import 'package:slee_fi/common/widgets/sf_icon.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
 import 'package:slee_fi/l10n/locale_keys.g.dart';
+import 'package:slee_fi/models/gacha_probability_config_response/config_bed.dart';
 
-class ItemsProbability extends StatelessWidget {
-  const ItemsProbability({Key? key, this.colorBgIcon, required this.iconPath, required this.title, required this.listData, this.width, this.height}) : super(key: key);
+class BedProbability extends StatelessWidget {
+  const BedProbability({Key? key, this.colorBgIcon, required this.iconPath, required this.title, required this.beds, this.width, this.height}) : super(key: key);
 
   final List<Color>? colorBgIcon;
   final String iconPath;
   final String title;
   final double? width;
   final double? height;
-  final List<dynamic> listData;
+  final ConfigBed? beds;
 
   @override
   Widget build(BuildContext context) {
@@ -49,18 +50,13 @@ class ItemsProbability extends StatelessWidget {
             ],
           ),
           const SizedBox(height: 10),
-          ListView.builder(
-              itemCount: listData.length,
-              padding: const EdgeInsets.only(top: 50),
-              itemBuilder: (BuildContext context,int index){
-                return Column(
-                  children: [
-                    const SizedBox(height: 10),
-                    rowData(title: "${LocaleKeys.level} ${index + 1}", value: listData.elementAt(index)),
-                  ],
-                );
-              }
-          ),
+          rowData(title: LocaleKeys.common_bed, value: beds?.common),
+          const SizedBox(height: 10),
+          rowData(title: LocaleKeys.uncommon_bed, value: beds?.uncommon),
+          const SizedBox(height: 10),
+          rowData(title: LocaleKeys.epic_bed, value: beds?.epicBed),
+          const SizedBox(height: 10),
+          rowData(title: LocaleKeys.legendary_bed, value: beds?.legendaryBed),
         ],
       ),
     );

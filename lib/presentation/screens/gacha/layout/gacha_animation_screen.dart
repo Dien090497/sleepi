@@ -12,12 +12,13 @@ import 'package:slee_fi/presentation/screens/result/layout/all_result_screen.dar
 import 'gacha_result_bed_screen.dart';
 
 class GachaAnimationArguments {
-  final GachaSpinResponse spinInfo;
+  final GachaSpinResponse? spinInfo;
+  final String? route;
   final String audio;
   final String animation;
 
   GachaAnimationArguments(
-      {required this.spinInfo, required this.animation, required this.audio});
+      {required this.spinInfo, required this.animation, required this.audio, this.route});
 }
 
 class GachaAnimationScreen extends StatefulWidget {
@@ -56,8 +57,8 @@ class _GachaAnimationScreenState extends State<GachaAnimationScreen>
       final args = ModalRoute.of(context)?.settings.arguments
           as GachaAnimationArguments?;
       if (status == AnimationStatus.completed) {
-        if (args != null) {
-          if (args.spinInfo.gift.first.length == Const.one) {
+        if (args != null && args.spinInfo != null) {
+          if (args.spinInfo!.gift.first.length == Const.one) {
             setState(() {
               isShowResult = true;
               image = randomUtils.gachaItem();
@@ -71,13 +72,15 @@ class _GachaAnimationScreenState extends State<GachaAnimationScreen>
           } else {
             List<String> images = [];
             Navigator.pop(context);
-            for (var i = 0; i > args.spinInfo.gift.first.length; i++) {
+            for (var i = 0; i > args.spinInfo!.gift.first.length; i++) {
               images.add(randomUtils.gachaItem());
             }
             Navigator.pushNamed(context, R.allResult,
                 arguments: GachaAllResultBedArguments(
                     gachaSpinInfo: args.spinInfo, images: images));
           }
+        }else {
+          Navigator.pushNamed(context, args!.route!);
         }
         animationController.reset();
       }

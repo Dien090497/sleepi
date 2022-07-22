@@ -10,17 +10,17 @@ import 'package:slee_fi/presentation/screens/gacha/widgets/probability_dialog.da
 import 'package:slee_fi/presentation/screens/gacha/widgets/probability_widget.dart';
 
 class ItemsGacha extends StatelessWidget {
-  const ItemsGacha(
-      {Key? key,
-        required this.title,
-        required this.singleGachaImages,
-        required this.timesGachaImages,
-        required this.singleProbability,
-        required this.timesProbability,
-        required this.typeReward,
-        required this.imagePath,
-        this.normalGacha = true,
-      })
+  const ItemsGacha({Key? key,
+    required this.title,
+    required this.singleGachaImages,
+    required this.timesGachaImages,
+    required this.singleProbability,
+    required this.timesProbability,
+    required this.numberOfSpin,
+    required this.typeReward,
+    required this.imagePath,
+    this.normalGacha = true,
+  })
       : super(key: key);
 
   final String title;
@@ -29,12 +29,13 @@ class ItemsGacha extends StatelessWidget {
   final String timesGachaImages;
   final int singleProbability;
   final int timesProbability;
+  final int numberOfSpin;
   final String imagePath;
   final bool normalGacha;
 
   @override
   Widget build(BuildContext context) {
-    return Column(
+    return  Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Row(
@@ -44,9 +45,8 @@ class ItemsGacha extends StatelessWidget {
             const Spacer(),
             GestureDetector(
               onTap: () {
-                // Navigator.pushNamed(context, R.probability);
                 showCustomAlertDialog(context,
-                    children: const ProbabilityDialog());
+                    children: ProbabilityDialog(normalGacha: normalGacha,));
               },
               child: Container(
                 decoration: BoxDecoration(
@@ -54,29 +54,30 @@ class ItemsGacha extends StatelessWidget {
                   borderRadius: BorderRadius.circular(16),
                 ),
                 padding:
-                    const EdgeInsets.symmetric(vertical: 8, horizontal: 15),
+                const EdgeInsets.symmetric(vertical: 8, horizontal: 15),
                 child: SFText(
-                    keyText: LocaleKeys.probability, style: TextStyles.white14),
+                    keyText: LocaleKeys.probability,
+                    style: TextStyles.white14),
               ),
             )
           ],
         ),
         const SizedBox(height: 17),
-        ProbabilityWidget(imagePath: imagePath,),
+        ProbabilityWidget(imagePath: imagePath, normalGacha: normalGacha),
         const SizedBox(height: 20),
         GachaRollSelections(
-            singleGachaImages: singleGachaImages,
-            timesGachaImages: timesGachaImages,
-            singleProbability: singleProbability,
-            timesProbability: timesProbability,
-            normalGacha: normalGacha,
+          singleGachaImages: singleGachaImages,
+          timesGachaImages: timesGachaImages,
+          singleProbability: singleProbability,
+          timesProbability: timesProbability,
+          normalGacha: normalGacha,
         ),
         const SizedBox(height: 16),
         SFText(
             keyText: typeReward,
             style: TextStyles.lightGrey12),
         const SizedBox(height: 2),
-        const ChanceWidget(),
+        ChanceWidget(numberOfSpin: numberOfSpin, normalGacha: normalGacha,),
         const SizedBox(height: 28),
       ],
     );

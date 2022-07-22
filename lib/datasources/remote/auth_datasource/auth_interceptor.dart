@@ -20,6 +20,7 @@ class AuthInterceptor extends Interceptor {
         ? await _deviceInfoPlugin.iosInfo
         : await _deviceInfoPlugin.androidInfo;
     final token = await _secureStorage.getAccessToken();
+    print(token);
     if (token != null) {
       options.headers['Authorization'] = 'Bearer $token';
     }
