@@ -178,7 +178,7 @@ class AllResultScreen extends StatelessWidget {
                   fixedSize: const Size(double.infinity, 48),
                   textStyle: TextStyles.blue16,
                   borderColor: AppColors.blue,
-                  onPressed: () => Navigator.pop(context),
+                  onPressed: () => Navigator.pop(context, true),
                 ),
               ),
             ],
