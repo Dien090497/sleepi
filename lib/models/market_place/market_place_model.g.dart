@@ -38,6 +38,7 @@ MarketPlaceModel _$MarketPlaceModelFromJson(Map<String, dynamic> json) =>
       (json['startTime'] as num?)?.toDouble(),
       (json['endTime'] as num?)?.toDouble(),
       json['jewelType'] as String?,
+      json['isBurn'] as int?,
     );
 
 Map<String, dynamic> _$MarketPlaceModelToJson(MarketPlaceModel instance) =>
@@ -46,6 +47,7 @@ Map<String, dynamic> _$MarketPlaceModelToJson(MarketPlaceModel instance) =>
       'nftId': instance.nftId,
       'category_id': instance.categoryId,
       'isLock': instance.isLock,
+      'isBurn': instance.isBurn,
       'time': instance.time,
       'level': instance.level,
       'bedMint': instance.bedMint,

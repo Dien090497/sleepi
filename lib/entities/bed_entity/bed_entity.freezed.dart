@@ -34,6 +34,7 @@ mixin _$BedEntity {
   double get efficiency => throw _privateConstructorUsedError;
   double get luck => throw _privateConstructorUsedError;
   double get bonus => throw _privateConstructorUsedError;
+  int get isBurn => throw _privateConstructorUsedError;
   double get special => throw _privateConstructorUsedError;
   double get resilience => throw _privateConstructorUsedError;
   int get time => throw _privateConstructorUsedError;
@@ -73,6 +74,7 @@ abstract class $BedEntityCopyWith<$Res> {
       double efficiency,
       double luck,
       double bonus,
+      int isBurn,
       double special,
       double resilience,
       int time,
@@ -113,6 +115,7 @@ class _$BedEntityCopyWithImpl<$Res> implements $BedEntityCopyWith<$Res> {
     Object? efficiency = freezed,
     Object? luck = freezed,
     Object? bonus = freezed,
+    Object? isBurn = freezed,
     Object? special = freezed,
     Object? resilience = freezed,
     Object? time = freezed,
@@ -197,6 +200,10 @@ class _$BedEntityCopyWithImpl<$Res> implements $BedEntityCopyWith<$Res> {
           ? _value.bonus
           : bonus // ignore: cast_nullable_to_non_nullable
               as double,
+      isBurn: isBurn == freezed
+          ? _value.isBurn
+          : isBurn // ignore: cast_nullable_to_non_nullable
+              as int,
       special: special == freezed
           ? _value.special
           : special // ignore: cast_nullable_to_non_nullable
@@ -266,6 +273,7 @@ abstract class _$$_BedEntityCopyWith<$Res> implements $BedEntityCopyWith<$Res> {
       double efficiency,
       double luck,
       double bonus,
+      int isBurn,
       double special,
       double resilience,
       int time,
@@ -308,6 +316,7 @@ class __$$_BedEntityCopyWithImpl<$Res> extends _$BedEntityCopyWithImpl<$Res>
     Object? efficiency = freezed,
     Object? luck = freezed,
     Object? bonus = freezed,
+    Object? isBurn = freezed,
     Object? special = freezed,
     Object? resilience = freezed,
     Object? time = freezed,
@@ -392,6 +401,10 @@ class __$$_BedEntityCopyWithImpl<$Res> extends _$BedEntityCopyWithImpl<$Res>
           ? _value.bonus
           : bonus // ignore: cast_nullable_to_non_nullable
               as double,
+      isBurn: isBurn == freezed
+          ? _value.isBurn
+          : isBurn // ignore: cast_nullable_to_non_nullable
+              as int,
       special: special == freezed
           ? _value.special
           : special // ignore: cast_nullable_to_non_nullable
@@ -458,6 +471,7 @@ class _$_BedEntity implements _BedEntity {
       required this.efficiency,
       required this.luck,
       required this.bonus,
+      required this.isBurn,
       required this.special,
       required this.resilience,
       required this.time,
@@ -507,6 +521,8 @@ class _$_BedEntity implements _BedEntity {
   @override
   final double bonus;
   @override
+  final int isBurn;
+  @override
   final double special;
   @override
   final double resilience;
@@ -533,7 +549,7 @@ class _$_BedEntity implements _BedEntity {
 
   @override
   String toString() {
-    return 'BedEntity(id: $id, nftId: $nftId, name: $name, nftClass: $nftClass, tokenId: $tokenId, level: $level, image: $image, type: $type, contractAddress: $contractAddress, quality: $quality, owner: $owner, status: $status, durability: $durability, isLock: $isLock, bedMint: $bedMint, efficiency: $efficiency, luck: $luck, bonus: $bonus, special: $special, resilience: $resilience, time: $time, isMint: $isMint, socket: $socket, insurancePercent: $insurancePercent, startTime: $startTime, endTime: $endTime, jewelType: $jewelType, jewels: $jewels)';
+    return 'BedEntity(id: $id, nftId: $nftId, name: $name, nftClass: $nftClass, tokenId: $tokenId, level: $level, image: $image, type: $type, contractAddress: $contractAddress, quality: $quality, owner: $owner, status: $status, durability: $durability, isLock: $isLock, bedMint: $bedMint, efficiency: $efficiency, luck: $luck, bonus: $bonus, isBurn: $isBurn, special: $special, resilience: $resilience, time: $time, isMint: $isMint, socket: $socket, insurancePercent: $insurancePercent, startTime: $startTime, endTime: $endTime, jewelType: $jewelType, jewels: $jewels)';
   }
 
   @override
@@ -562,6 +578,7 @@ class _$_BedEntity implements _BedEntity {
                 .equals(other.efficiency, efficiency) &&
             const DeepCollectionEquality().equals(other.luck, luck) &&
             const DeepCollectionEquality().equals(other.bonus, bonus) &&
+            const DeepCollectionEquality().equals(other.isBurn, isBurn) &&
             const DeepCollectionEquality().equals(other.special, special) &&
             const DeepCollectionEquality()
                 .equals(other.resilience, resilience) &&
@@ -597,6 +614,7 @@ class _$_BedEntity implements _BedEntity {
         const DeepCollectionEquality().hash(efficiency),
         const DeepCollectionEquality().hash(luck),
         const DeepCollectionEquality().hash(bonus),
+        const DeepCollectionEquality().hash(isBurn),
         const DeepCollectionEquality().hash(special),
         const DeepCollectionEquality().hash(resilience),
         const DeepCollectionEquality().hash(time),
@@ -635,6 +653,7 @@ abstract class _BedEntity implements BedEntity {
       required final double efficiency,
       required final double luck,
       required final double bonus,
+      required final int isBurn,
       required final double special,
       required final double resilience,
       required final int time,
@@ -682,6 +701,8 @@ abstract class _BedEntity implements BedEntity {
   double get luck;
   @override
   double get bonus;
+  @override
+  int get isBurn;
   @override
   double get special;
   @override

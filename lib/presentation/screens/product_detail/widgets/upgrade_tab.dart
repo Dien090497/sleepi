@@ -23,7 +23,8 @@ import 'jewel_dialog_body.dart';
 import 'modal_jewel_list.dart';
 
 class UpGradeTab extends StatelessWidget {
-  const UpGradeTab({Key? key}) : super(key: key);
+  const UpGradeTab({Key? key, required this.isJewel}) : super(key: key);
+  final bool isJewel;
 
   @override
   Widget build(BuildContext context) {
@@ -72,6 +73,7 @@ class UpGradeTab extends StatelessWidget {
                               fit: BoxFit.cover,
                             ),
                             JewelSocket(
+                                isJewel: isJewel,
                                 top: 28,
                                 left: 0,
                                 right: 0,
@@ -80,6 +82,7 @@ class UpGradeTab extends StatelessWidget {
                                     ? state.jewelsUpgrade.first
                                     : null),
                             JewelSocket(
+                                isJewel: isJewel,
                                 bottom: 60,
                                 right: 40,
                                 jewelEntity: state is JewelStateLoaded &&
@@ -87,6 +90,7 @@ class UpGradeTab extends StatelessWidget {
                                     ? state.jewelsUpgrade[1]
                                     : null),
                             JewelSocket(
+                                isJewel: isJewel,
                                 bottom: 60,
                                 left: 40,
                                 jewelEntity: state is JewelStateLoaded &&
@@ -181,7 +185,9 @@ class JewelSocket extends StatelessWidget {
     this.bottom,
     this.right,
     this.jewelEntity,
+    required this.isJewel,
   }) : super(key: key);
+  final bool isJewel;
   final double? top;
   final double? left;
   final double? right;
@@ -202,8 +208,13 @@ class JewelSocket extends StatelessWidget {
 
             return;
           }
-          SFModalBottomSheet.show(context, 0.8,
-              ModalJewelList(jewelBloc: context.read<JewelBloc>()));
+          SFModalBottomSheet.show(
+              context,
+              0.8,
+              ModalJewelList(
+                isJewel: isJewel,
+                jewelBloc: context.read<JewelBloc>(),
+              ));
         },
         child: jewelEntity == null
             ? const SFIcon(Ics.icPlus)
@@ -219,7 +230,6 @@ class JewelSocket extends StatelessWidget {
   }
 
   void _showJewelDialog(BuildContext context, BedEntity jewel) {
-
     showCustomDialog(
       context,
       padding: const EdgeInsets.all(24),

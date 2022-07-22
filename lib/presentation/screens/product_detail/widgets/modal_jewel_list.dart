@@ -16,8 +16,13 @@ import 'package:slee_fi/presentation/blocs/upgrade_jewel_bloc/upgrade_jewel_stat
 import 'package:slee_fi/presentation/screens/product_detail/widgets/my_jewel_widget_count.dart';
 
 class ModalJewelList extends StatelessWidget {
-  const ModalJewelList({Key? key, required this.jewelBloc}) : super(key: key);
+  const ModalJewelList({
+    Key? key,
+    required this.jewelBloc,
+    required this.isJewel,
+  }) : super(key: key);
   final JewelBloc jewelBloc;
+  final bool isJewel;
 
   @override
   Widget build(BuildContext context) {
@@ -29,7 +34,8 @@ class ModalJewelList extends StatelessWidget {
             child: Row(
               children: [
                 SFText(
-                  keyText: LocaleKeys.jewel_list,
+                  keyText:
+                      isJewel ? LocaleKeys.jewel_list : LocaleKeys.item_list,
                   style: TextStyles.bold18White,
                 ),
                 // const Spacer(),
@@ -93,6 +99,7 @@ class ModalJewelList extends StatelessWidget {
                             }
                           },
                           child: MyJewelsWidgetCount(
+                              isJewel: isJewel,
                               count: item.length,
                               jewel: item.first,
                               color: AppColors.light4),

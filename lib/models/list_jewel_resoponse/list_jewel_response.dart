@@ -12,7 +12,6 @@ class ListJewelResponse {
   ListJewelResponse(this.list, this.count);
 
   factory ListJewelResponse.fromJson(Map<String, dynamic> json) {
-    print('json from sever   $json');
     return _$ListJewelResponseFromJson(json);
   }
 
@@ -27,6 +26,7 @@ class ListBedResponse {
   ListBedResponse(this.list, this.count);
 
   factory ListBedResponse.fromJson(Map<String, dynamic> json) {
+    print('json is    $json');
     return _$ListBedResponseFromJson(json);
   }
 

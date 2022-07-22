@@ -12,6 +12,7 @@ class BedModel {
   final int id;
 
   final int nftId;
+  final int? isBurn;
 
   final String nftName;
 
@@ -48,7 +49,7 @@ class BedModel {
   final int? socket;
   final List<JewelModel>? jewels;
   final int tokenId;
-  final Nft nft;
+  final Nft? nft;
 
   final double? insurancePercent;
 
@@ -85,7 +86,8 @@ class BedModel {
       this.insurancePercent,
       this.startTime,
       this.endTime,
-      this.jewels);
+      this.jewels,
+      this.isBurn);
 
   factory BedModel.fromJson(Map<String, dynamic> json) =>
       _$BedModelFromJson(json);
@@ -110,6 +112,7 @@ class BedModel {
 
   BedEntity toEntity() {
     return BedEntity(
+      isBurn: isBurn ?? 0,
       jewelType: jewelType,
       name: nftName,
       nftId: nftId,
@@ -119,7 +122,7 @@ class BedModel {
       level: level,
       image: image,
       contractAddress: contractAddress,
-      isLock: nft.isLock,
+      isLock: nft?.isLock ?? 0,
       bedMint: bedMint,
       quality: quality,
       type: type,
@@ -137,7 +140,7 @@ class BedModel {
       socket: socket,
       jewels: jewels != null ? jewels!.map((e) => e.toEntity()).toList() : [],
       owner: owner,
-      status: nft.status ?? '',
+      status: nft?.status ?? '',
     );
   }
 }

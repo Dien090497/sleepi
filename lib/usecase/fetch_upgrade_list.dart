@@ -11,7 +11,7 @@ class FetchUpgradeListUseCase extends UseCase<List<BedEntity>, FetchBedParam> {
   FetchUpgradeListUseCase(this._iUserRepository);
 
   @override
-  Future<Either<Failure, List<BedEntity>>> call(params) {
+  Future<Either<FailureMessage, List<BedEntity>>> call(params) {
     return _iUserRepository.fetchListUpgrade(params);
   }
 }

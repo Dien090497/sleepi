@@ -24,6 +24,7 @@ class BedEntity with _$BedEntity {
     required double efficiency,
     required double luck,
     required double bonus,
+    required int isBurn,
     required double special,
     required double resilience,
     required int time,
