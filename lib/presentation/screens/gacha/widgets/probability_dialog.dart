@@ -29,20 +29,7 @@ class _ProbabilityDialogState extends State<ProbabilityDialog> {
   ConfigBed? beds;
   @override
   Widget build(BuildContext context) {
-    final List<ListRowData> listJewels = [
-      ListRowData(title: '${LocaleKeys.level} 1', parameter: '100%'),
-      ListRowData(title: '${LocaleKeys.level} 2', parameter: '90%'),
-      ListRowData(title: '${LocaleKeys.level} 3', parameter: '80%'),
-      ListRowData(title: '${LocaleKeys.level} 4', parameter: '15%'),
-      ListRowData(title: '${LocaleKeys.level} 5', parameter: '15%'),
-    ];
-    final List<ListRowData> listItems = [
-      ListRowData(title: '${LocaleKeys.level} 1', parameter: '100%'),
-      ListRowData(title: '${LocaleKeys.level} 2', parameter: '90%'),
-      ListRowData(title: '${LocaleKeys.level} 3', parameter: '80%'),
-      ListRowData(title: '${LocaleKeys.level} 4', parameter: '15%'),
-      ListRowData(title: '${LocaleKeys.level} 5', parameter: '15%'),
-    ];
+
     final List<ListRowData> listToken = [
       ListRowData(title: 'SLFT', parameter: '100%'),
       ListRowData(title: 'SLGT', parameter: '90%'),
@@ -56,9 +43,9 @@ class _ProbabilityDialogState extends State<ProbabilityDialog> {
           if(state is GachaProbabilityConfigSuccess){
             _configResponse = state.gachaProbabilityConfigResponse;
             // beds  = state.gachaProbabilityConfigResponse.data.first.config.bed;
-            print(state.gachaProbabilityConfigResponse.data.first.config);
-
-            print(beds?.epicBed);
+            // print(state.gachaProbabilityConfigResponse.data.first.config);
+            //
+            // print(beds?.epicBed);
             setState((){});
           }
         },
