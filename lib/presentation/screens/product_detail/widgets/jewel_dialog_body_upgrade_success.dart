@@ -11,21 +11,11 @@ import 'package:slee_fi/common/widgets/sf_text.dart';
 import 'package:slee_fi/entities/bed_entity/bed_entity.dart';
 import 'package:slee_fi/l10n/locale_keys.g.dart';
 
-class JewelDialogBody extends StatelessWidget {
-  const JewelDialogBody(
-      {Key? key,
-      required this.onSellTap,
-      required this.onTransferTap,
-      required this.jewel,
-      this.textOnTransfer,
-      this.textOnSell})
+class JewelDialogBodyUpgradeSuccess extends StatelessWidget {
+  const JewelDialogBodyUpgradeSuccess({Key? key, required this.jewel})
       : super(key: key);
 
   final BedEntity jewel;
-  final VoidCallback onSellTap;
-  final VoidCallback onTransferTap;
-  final String? textOnTransfer;
-  final String? textOnSell;
 
   @override
   Widget build(BuildContext context) {
@@ -90,7 +80,8 @@ class JewelDialogBody extends StatelessWidget {
                   const SizedBox(width: 4),
                   Expanded(
                     child: SFText(
-                      keyText: '${jewel.infoBuff}% ${LocaleKeys.base.tr()} ${jewel.type.tr()}',
+                      keyText:
+                          '${jewel.infoBuff}% ${LocaleKeys.base.tr()} ${jewel.type.tr()}',
                       style: TextStyles.blue16,
                       textAlign: TextAlign.right,
                     ),
@@ -99,27 +90,15 @@ class JewelDialogBody extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 24),
-            Row(
-              children: [
-                Expanded(
-                    child: SFButton(
-                  text: textOnSell ?? LocaleKeys.sell,
-                  onPressed: onSellTap,
-                  textStyle: TextStyles.lightGrey16,
-                  color: AppColors.whiteOpacity5,
-                  width: double.infinity,
-                )),
-                const SizedBox(width: 12),
-                Expanded(
-                    child: SFButton(
-                  text: textOnTransfer ?? LocaleKeys.transfer,
-                  onPressed: onTransferTap,
+            SizedBox(
+                width: MediaQuery.of(context).size.width / 2.5,
+                child: SFButton(
+                  text: LocaleKeys.ok,
+                  onPressed: () => Navigator.pop(context),
                   textStyle: TextStyles.white16,
                   gradient: AppColors.blueGradient,
                   width: double.infinity,
                 )),
-              ],
-            ),
           ],
         ),
       ],

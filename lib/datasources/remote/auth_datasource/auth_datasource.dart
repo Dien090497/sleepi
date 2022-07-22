@@ -192,12 +192,17 @@ abstract class AuthDataSource {
     /***[categoryId] == 1 bed
           [categoryId] == 3 item */
     @Query('categoryId') int categoryId,
-    @Query('item') AttributeNFT itemNFT,
     @Query('type') String bedType,
   );
 
   @GET('/nft-attributes/list-jewels')
   Future<ListJewelResponse> getListJewel(
+    @Query('limit') int limit,
+    @Query('page') int page,
+  );
+
+  @GET('/nft-attributes/list-jewels')
+  Future<ListBedResponse> getListJewels(
     @Query('limit') int limit,
     @Query('page') int page,
   );
@@ -240,8 +245,8 @@ abstract class AuthDataSource {
   @GET('/lucky_box')
   Future<List<LuckyBox>> fetchLuckyBox();
 
-  @GET('/lucky_box/open')
-  Future<dynamic> openLuckyBox(@Query('luckyBoxId') int luckyBoxId);
+  @POST('/lucky_box/open')
+  Future<VerifyResponse> openLuckyBox(@Query('luckyBoxId') int luckyBoxId);
 
   @POST('/lucky_box')
   Future<dynamic> speedUpLuckyBox(
@@ -320,11 +325,15 @@ abstract class AuthDataSource {
 
   /// upgrade jewel nft/upgrade'
   @POST('/nft/upgrade')
-  Future<UpgradeJewelResponse> upgradeJewel(@Body() UpgradeSchema upgradeJewelSchema);
+  Future<UpgradeJewelResponse> upgradeJewel(
+      @Body() UpgradeSchema upgradeJewelSchema);
 
   @GET('/nft/upgrade')
   Future<UpgradeInfoResponse> upgradeInfo(
     @Query('level') int level,
     @Query('upgradeType') int upgradeType,
   );
+
+  @POST('/nft/cancel-sell')
+  Future<NftSell> nftCancelSell(@Query('nftId') num nftId);
 }

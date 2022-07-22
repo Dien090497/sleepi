@@ -5,6 +5,7 @@ import 'package:slee_fi/common/routes/app_routes.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
 import 'package:slee_fi/common/widgets/pop_up_level_up.dart';
+import 'package:slee_fi/common/widgets/sf_alert_dialog.dart';
 import 'package:slee_fi/common/widgets/sf_dialog.dart';
 import 'package:slee_fi/common/widgets/sf_icon.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
@@ -12,6 +13,7 @@ import 'package:slee_fi/entities/bed_entity/bed_entity.dart';
 import 'package:slee_fi/l10n/locale_keys.g.dart';
 import 'package:slee_fi/presentation/blocs/bottom_bar_infoIndividual/bottom_bar_infoIndividual_cubit.dart';
 import 'package:slee_fi/presentation/blocs/bottom_bar_infoIndividual/bottom_bar_infoIndividual_state.dart';
+import 'package:slee_fi/presentation/screens/home/widgets/pop_up_cancel_sell.dart';
 import 'package:slee_fi/presentation/screens/home/widgets/pop_up_repair.dart';
 import 'package:slee_fi/presentation/screens/home/widgets/pop_up_transfer.dart';
 import 'package:slee_fi/presentation/screens/info_individual/widget/pop_up_sell.dart';
@@ -105,10 +107,10 @@ class _BottomBarWidgetState extends State<BottomBarWidget> {
                 if (state is GetLevelSuccess) {
                   Navigator.pop(context, true);
                   index = 0;
-                  showCustomDialog(
+                  showCustomAlertDialog(
                     context,
-                    children: [
-                      PopUpLevelUp(
+                    padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 32),
+                    children: PopUpLevelUp(
                           icon: widget.bedEntity.image,
                           level: widget.bedEntity.level,
                           cost: state.levelUp.cost!,
@@ -123,7 +125,6 @@ class _BottomBarWidgetState extends State<BottomBarWidget> {
                               ),
                             );
                           }),
-                    ],
                   ).then((value) {
                     cubit.init();
                     index = -1;
@@ -136,8 +137,10 @@ class _BottomBarWidgetState extends State<BottomBarWidget> {
                   children: [
                     itemBottomBar(0, context, Ics.levelUp, LocaleKeys.level_up,
                         () {
-                          showLoadingDialog(context, "Loading");
-                          cubit.getLevelUp(widget.bedEntity.nftId);
+                          if(widget.bedEntity.level<30) {
+                            showLoadingDialog(context, "Loading");
+                            cubit.getLevelUp(widget.bedEntity.nftId);
+                          }
                         }),
                     itemBottomBar(1, context, Ics.repair, LocaleKeys.repair,
                         () {
@@ -171,14 +174,22 @@ class _BottomBarWidgetState extends State<BottomBarWidget> {
                       setState(() {
                         index = 3;
                       });
-                      showCustomDialog(context, children: [
-                        PopUpSell(
-                          bedEntity: widget.bedEntity,
-                          cubit: cubit,
-                        ),
-                      ]).then((value) => setState(() {
-                            index = -1;
-                          }));
+                      if (widget.bedEntity.isLock == 1) {
+                        showCustomDialog(context, children: [
+                          CancelSell(bedEntity: widget.bedEntity, cubit: cubit,),
+                        ]).then((value) => setState(() {
+                          index = -1;
+                        }));
+                      } else {
+                        showCustomDialog(context, children: [
+                          PopUpSell(
+                            bedEntity: widget.bedEntity,
+                            cubit: cubit,
+                          ),
+                        ]).then((value) => setState(() {
+                          index = -1;
+                        }));
+                      }
                     }),
                     itemBottomBar(4, context, Ics.recycling, LocaleKeys.recycle,
                         () {

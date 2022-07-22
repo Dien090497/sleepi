@@ -1,28 +1,28 @@
-import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
 import 'package:slee_fi/common/widgets/loading_screen.dart';
 import 'package:slee_fi/common/widgets/sf_buttons.dart';
-import 'package:slee_fi/common/widgets/sf_dialog.dart';
 import 'package:slee_fi/common/widgets/sf_gridview.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
-import 'package:slee_fi/entities/jewel_entity/jewel_entity.dart';
+import 'package:slee_fi/entities/bed_entity/bed_entity.dart';
 import 'package:slee_fi/l10n/locale_keys.g.dart';
 import 'package:slee_fi/presentation/blocs/bottom_navigation/bottom_navigation_bloc.dart';
 import 'package:slee_fi/presentation/blocs/bottom_navigation/bottom_navigation_event.dart';
 import 'package:slee_fi/presentation/blocs/upgrade_jewel_bloc/upgrade_jewel_bloc.dart';
 import 'package:slee_fi/presentation/blocs/upgrade_jewel_bloc/upgrade_jewel_event.dart';
 import 'package:slee_fi/presentation/blocs/upgrade_jewel_bloc/upgrade_jewel_state.dart';
-import 'package:slee_fi/presentation/screens/product_detail/widgets/jewel_dialog_body.dart';
 import 'package:slee_fi/presentation/screens/product_detail/widgets/my_jewel_widget_count.dart';
 
-import 'my_jewel_short_widget.dart';
-
 class ModalJewelList extends StatelessWidget {
-  const ModalJewelList({Key? key, required this.jewelBloc}) : super(key: key);
+  const ModalJewelList({
+    Key? key,
+    required this.jewelBloc,
+    required this.isJewel,
+  }) : super(key: key);
   final JewelBloc jewelBloc;
+  final bool isJewel;
 
   @override
   Widget build(BuildContext context) {
@@ -34,7 +34,8 @@ class ModalJewelList extends StatelessWidget {
             child: Row(
               children: [
                 SFText(
-                  keyText: LocaleKeys.jewel_list,
+                  keyText:
+                      isJewel ? LocaleKeys.jewel_list : LocaleKeys.item_list,
                   style: TextStyles.bold18White,
                 ),
                 // const Spacer(),
@@ -70,8 +71,11 @@ class ModalJewelList extends StatelessWidget {
                   }
 
                   if (state is JewelStateLoaded) {
-                    final map = <String, List<JewelEntity>>{};
+                    final map = <String, List<BedEntity>>{};
                     for (var element in state.jewels) {
+                      if (element.level >= 5) {
+                        continue;
+                      }
                       final key = '${element.type}_${element.level}';
                       if (map.containsKey(key)) {
                         map[key]!.add(element);
@@ -91,13 +95,14 @@ class ModalJewelList extends StatelessWidget {
                         final item = tempList[i];
                         return GestureDetector(
                           onTap: () {
-                            if (item.length > 3) {
+                            if (item.length >= 3) {
                               Navigator.pop(context);
                               jewelBloc
                                   .add(AddJewelToSocket(item.sublist(0, 3)));
                             }
                           },
                           child: MyJewelsWidgetCount(
+                              isJewel: isJewel,
                               count: item.length,
                               jewel: item.first,
                               color: AppColors.light4),

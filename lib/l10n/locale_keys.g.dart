@@ -464,5 +464,8 @@ abstract class  LocaleKeys {
   static const required_time = 'required_time';
   static const sleep_time = 'sleep_time';
   static const put_positive_correct_to = 'put_positive_correct_to';
+  static const speed_up_success = 'speed_up_success';
+  static const cancel_sell = 'cancel_sell';
+  static const do_you_really_want_to_cancel_sell = 'do_you_really_want_to_cancel_sell';
 
 }

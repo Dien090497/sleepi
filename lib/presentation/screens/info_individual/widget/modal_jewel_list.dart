@@ -15,8 +15,9 @@ import 'package:slee_fi/presentation/blocs/bottom_navigation/bottom_navigation_e
 import 'package:slee_fi/presentation/blocs/socket_bloc/socket_bloc.dart';
 import 'package:slee_fi/presentation/blocs/socket_bloc/socket_event.dart';
 import 'package:slee_fi/presentation/blocs/socket_bloc/socket_state.dart';
-import 'package:slee_fi/presentation/screens/product_detail/widgets/jewel_dialog_body.dart';
-import 'package:slee_fi/presentation/screens/product_detail/widgets/my_jewel_short_widget.dart';
+
+import 'jewel_dialog_body.dart';
+import 'my_jewel_short_widget.dart';
 
 class ModalJewelList extends StatelessWidget {
   const ModalJewelList({Key? key, required this.socketBloc}) : super(key: key);

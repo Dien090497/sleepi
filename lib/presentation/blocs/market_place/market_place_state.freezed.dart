@@ -20,27 +20,25 @@ mixin _$MarketPlaceState {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(List<MarketPlaceModel> list) loaded,
-    required TResult Function() buySuccess,
-    required TResult Function(String msg) buyFail,
+    required TResult Function(
+            List<MarketPlaceModel> list, String msg, bool isLoading)
+        loaded,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(List<MarketPlaceModel> list)? loaded,
-    TResult Function()? buySuccess,
-    TResult Function(String msg)? buyFail,
+    TResult Function(List<MarketPlaceModel> list, String msg, bool isLoading)?
+        loaded,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(List<MarketPlaceModel> list)? loaded,
-    TResult Function()? buySuccess,
-    TResult Function(String msg)? buyFail,
+    TResult Function(List<MarketPlaceModel> list, String msg, bool isLoading)?
+        loaded,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -49,8 +47,6 @@ mixin _$MarketPlaceState {
     required TResult Function(MarketPlaceStateInit value) initial,
     required TResult Function(MarketPlaceStateLoading value) loading,
     required TResult Function(MarketPlaceStateLoaded value) loaded,
-    required TResult Function(MarketPlaceStateBuySuccess value) buySuccess,
-    required TResult Function(MarketPlaceStateBuyFailed value) buyFail,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -58,8 +54,6 @@ mixin _$MarketPlaceState {
     TResult Function(MarketPlaceStateInit value)? initial,
     TResult Function(MarketPlaceStateLoading value)? loading,
     TResult Function(MarketPlaceStateLoaded value)? loaded,
-    TResult Function(MarketPlaceStateBuySuccess value)? buySuccess,
-    TResult Function(MarketPlaceStateBuyFailed value)? buyFail,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -67,8 +61,6 @@ mixin _$MarketPlaceState {
     TResult Function(MarketPlaceStateInit value)? initial,
     TResult Function(MarketPlaceStateLoading value)? loading,
     TResult Function(MarketPlaceStateLoaded value)? loaded,
-    TResult Function(MarketPlaceStateBuySuccess value)? buySuccess,
-    TResult Function(MarketPlaceStateBuyFailed value)? buyFail,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -134,9 +126,9 @@ class _$MarketPlaceStateInit implements MarketPlaceStateInit {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(List<MarketPlaceModel> list) loaded,
-    required TResult Function() buySuccess,
-    required TResult Function(String msg) buyFail,
+    required TResult Function(
+            List<MarketPlaceModel> list, String msg, bool isLoading)
+        loaded,
   }) {
     return initial();
   }
@@ -146,9 +138,8 @@ class _$MarketPlaceStateInit implements MarketPlaceStateInit {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(List<MarketPlaceModel> list)? loaded,
-    TResult Function()? buySuccess,
-    TResult Function(String msg)? buyFail,
+    TResult Function(List<MarketPlaceModel> list, String msg, bool isLoading)?
+        loaded,
   }) {
     return initial?.call();
   }
@@ -158,9 +149,8 @@ class _$MarketPlaceStateInit implements MarketPlaceStateInit {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(List<MarketPlaceModel> list)? loaded,
-    TResult Function()? buySuccess,
-    TResult Function(String msg)? buyFail,
+    TResult Function(List<MarketPlaceModel> list, String msg, bool isLoading)?
+        loaded,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -175,8 +165,6 @@ class _$MarketPlaceStateInit implements MarketPlaceStateInit {
     required TResult Function(MarketPlaceStateInit value) initial,
     required TResult Function(MarketPlaceStateLoading value) loading,
     required TResult Function(MarketPlaceStateLoaded value) loaded,
-    required TResult Function(MarketPlaceStateBuySuccess value) buySuccess,
-    required TResult Function(MarketPlaceStateBuyFailed value) buyFail,
   }) {
     return initial(this);
   }
@@ -187,8 +175,6 @@ class _$MarketPlaceStateInit implements MarketPlaceStateInit {
     TResult Function(MarketPlaceStateInit value)? initial,
     TResult Function(MarketPlaceStateLoading value)? loading,
     TResult Function(MarketPlaceStateLoaded value)? loaded,
-    TResult Function(MarketPlaceStateBuySuccess value)? buySuccess,
-    TResult Function(MarketPlaceStateBuyFailed value)? buyFail,
   }) {
     return initial?.call(this);
   }
@@ -199,8 +185,6 @@ class _$MarketPlaceStateInit implements MarketPlaceStateInit {
     TResult Function(MarketPlaceStateInit value)? initial,
     TResult Function(MarketPlaceStateLoading value)? loading,
     TResult Function(MarketPlaceStateLoaded value)? loaded,
-    TResult Function(MarketPlaceStateBuySuccess value)? buySuccess,
-    TResult Function(MarketPlaceStateBuyFailed value)? buyFail,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -259,9 +243,9 @@ class _$MarketPlaceStateLoading implements MarketPlaceStateLoading {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(List<MarketPlaceModel> list) loaded,
-    required TResult Function() buySuccess,
-    required TResult Function(String msg) buyFail,
+    required TResult Function(
+            List<MarketPlaceModel> list, String msg, bool isLoading)
+        loaded,
   }) {
     return loading();
   }
@@ -271,9 +255,8 @@ class _$MarketPlaceStateLoading implements MarketPlaceStateLoading {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(List<MarketPlaceModel> list)? loaded,
-    TResult Function()? buySuccess,
-    TResult Function(String msg)? buyFail,
+    TResult Function(List<MarketPlaceModel> list, String msg, bool isLoading)?
+        loaded,
   }) {
     return loading?.call();
   }
@@ -283,9 +266,8 @@ class _$MarketPlaceStateLoading implements MarketPlaceStateLoading {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(List<MarketPlaceModel> list)? loaded,
-    TResult Function()? buySuccess,
-    TResult Function(String msg)? buyFail,
+    TResult Function(List<MarketPlaceModel> list, String msg, bool isLoading)?
+        loaded,
     required TResult orElse(),
   }) {
     if (loading != null) {
@@ -300,8 +282,6 @@ class _$MarketPlaceStateLoading implements MarketPlaceStateLoading {
     required TResult Function(MarketPlaceStateInit value) initial,
     required TResult Function(MarketPlaceStateLoading value) loading,
     required TResult Function(MarketPlaceStateLoaded value) loaded,
-    required TResult Function(MarketPlaceStateBuySuccess value) buySuccess,
-    required TResult Function(MarketPlaceStateBuyFailed value) buyFail,
   }) {
     return loading(this);
   }
@@ -312,8 +292,6 @@ class _$MarketPlaceStateLoading implements MarketPlaceStateLoading {
     TResult Function(MarketPlaceStateInit value)? initial,
     TResult Function(MarketPlaceStateLoading value)? loading,
     TResult Function(MarketPlaceStateLoaded value)? loaded,
-    TResult Function(MarketPlaceStateBuySuccess value)? buySuccess,
-    TResult Function(MarketPlaceStateBuyFailed value)? buyFail,
   }) {
     return loading?.call(this);
   }
@@ -324,8 +302,6 @@ class _$MarketPlaceStateLoading implements MarketPlaceStateLoading {
     TResult Function(MarketPlaceStateInit value)? initial,
     TResult Function(MarketPlaceStateLoading value)? loading,
     TResult Function(MarketPlaceStateLoaded value)? loaded,
-    TResult Function(MarketPlaceStateBuySuccess value)? buySuccess,
-    TResult Function(MarketPlaceStateBuyFailed value)? buyFail,
     required TResult orElse(),
   }) {
     if (loading != null) {
@@ -344,7 +320,7 @@ abstract class _$$MarketPlaceStateLoadedCopyWith<$Res> {
   factory _$$MarketPlaceStateLoadedCopyWith(_$MarketPlaceStateLoaded value,
           $Res Function(_$MarketPlaceStateLoaded) then) =
       __$$MarketPlaceStateLoadedCopyWithImpl<$Res>;
-  $Res call({List<MarketPlaceModel> list});
+  $Res call({List<MarketPlaceModel> list, String msg, bool isLoading});
 }
 
 /// @nodoc
@@ -362,12 +338,22 @@ class __$$MarketPlaceStateLoadedCopyWithImpl<$Res>
   @override
   $Res call({
     Object? list = freezed,
+    Object? msg = freezed,
+    Object? isLoading = freezed,
   }) {
     return _then(_$MarketPlaceStateLoaded(
       list == freezed
           ? _value._list
           : list // ignore: cast_nullable_to_non_nullable
               as List<MarketPlaceModel>,
+      msg: msg == freezed
+          ? _value.msg
+          : msg // ignore: cast_nullable_to_non_nullable
+              as String,
+      isLoading: isLoading == freezed
+          ? _value.isLoading
+          : isLoading // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -375,7 +361,8 @@ class __$$MarketPlaceStateLoadedCopyWithImpl<$Res>
 /// @nodoc
 
 class _$MarketPlaceStateLoaded implements MarketPlaceStateLoaded {
-  const _$MarketPlaceStateLoaded(final List<MarketPlaceModel> list)
+  const _$MarketPlaceStateLoaded(final List<MarketPlaceModel> list,
+      {this.msg = '', this.isLoading = false})
       : _list = list;
 
   final List<MarketPlaceModel> _list;
@@ -386,8 +373,15 @@ class _$MarketPlaceStateLoaded implements MarketPlaceStateLoaded {
   }
 
   @override
+  @JsonKey()
+  final String msg;
+  @override
+  @JsonKey()
+  final bool isLoading;
+
+  @override
   String toString() {
-    return 'MarketPlaceState.loaded(list: $list)';
+    return 'MarketPlaceState.loaded(list: $list, msg: $msg, isLoading: $isLoading)';
   }
 
   @override
@@ -395,12 +389,17 @@ class _$MarketPlaceStateLoaded implements MarketPlaceStateLoaded {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$MarketPlaceStateLoaded &&
-            const DeepCollectionEquality().equals(other._list, _list));
+            const DeepCollectionEquality().equals(other._list, _list) &&
+            const DeepCollectionEquality().equals(other.msg, msg) &&
+            const DeepCollectionEquality().equals(other.isLoading, isLoading));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(_list));
+  int get hashCode => Object.hash(
+      runtimeType,
+      const DeepCollectionEquality().hash(_list),
+      const DeepCollectionEquality().hash(msg),
+      const DeepCollectionEquality().hash(isLoading));
 
   @JsonKey(ignore: true)
   @override
@@ -413,11 +412,11 @@ class _$MarketPlaceStateLoaded implements MarketPlaceStateLoaded {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(List<MarketPlaceModel> list) loaded,
-    required TResult Function() buySuccess,
-    required TResult Function(String msg) buyFail,
+    required TResult Function(
+            List<MarketPlaceModel> list, String msg, bool isLoading)
+        loaded,
   }) {
-    return loaded(list);
+    return loaded(list, msg, isLoading);
   }
 
   @override
@@ -425,11 +424,10 @@ class _$MarketPlaceStateLoaded implements MarketPlaceStateLoaded {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(List<MarketPlaceModel> list)? loaded,
-    TResult Function()? buySuccess,
-    TResult Function(String msg)? buyFail,
+    TResult Function(List<MarketPlaceModel> list, String msg, bool isLoading)?
+        loaded,
   }) {
-    return loaded?.call(list);
+    return loaded?.call(list, msg, isLoading);
   }
 
   @override
@@ -437,13 +435,12 @@ class _$MarketPlaceStateLoaded implements MarketPlaceStateLoaded {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(List<MarketPlaceModel> list)? loaded,
-    TResult Function()? buySuccess,
-    TResult Function(String msg)? buyFail,
+    TResult Function(List<MarketPlaceModel> list, String msg, bool isLoading)?
+        loaded,
     required TResult orElse(),
   }) {
     if (loaded != null) {
-      return loaded(list);
+      return loaded(list, msg, isLoading);
     }
     return orElse();
   }
@@ -454,8 +451,6 @@ class _$MarketPlaceStateLoaded implements MarketPlaceStateLoaded {
     required TResult Function(MarketPlaceStateInit value) initial,
     required TResult Function(MarketPlaceStateLoading value) loading,
     required TResult Function(MarketPlaceStateLoaded value) loaded,
-    required TResult Function(MarketPlaceStateBuySuccess value) buySuccess,
-    required TResult Function(MarketPlaceStateBuyFailed value) buyFail,
   }) {
     return loaded(this);
   }
@@ -466,8 +461,6 @@ class _$MarketPlaceStateLoaded implements MarketPlaceStateLoaded {
     TResult Function(MarketPlaceStateInit value)? initial,
     TResult Function(MarketPlaceStateLoading value)? loading,
     TResult Function(MarketPlaceStateLoaded value)? loaded,
-    TResult Function(MarketPlaceStateBuySuccess value)? buySuccess,
-    TResult Function(MarketPlaceStateBuyFailed value)? buyFail,
   }) {
     return loaded?.call(this);
   }
@@ -478,8 +471,6 @@ class _$MarketPlaceStateLoaded implements MarketPlaceStateLoaded {
     TResult Function(MarketPlaceStateInit value)? initial,
     TResult Function(MarketPlaceStateLoading value)? loading,
     TResult Function(MarketPlaceStateLoaded value)? loaded,
-    TResult Function(MarketPlaceStateBuySuccess value)? buySuccess,
-    TResult Function(MarketPlaceStateBuyFailed value)? buyFail,
     required TResult orElse(),
   }) {
     if (loaded != null) {
@@ -490,294 +481,13 @@ class _$MarketPlaceStateLoaded implements MarketPlaceStateLoaded {
 }
 
 abstract class MarketPlaceStateLoaded implements MarketPlaceState {
-  const factory MarketPlaceStateLoaded(final List<MarketPlaceModel> list) =
-      _$MarketPlaceStateLoaded;
+  const factory MarketPlaceStateLoaded(final List<MarketPlaceModel> list,
+      {final String msg, final bool isLoading}) = _$MarketPlaceStateLoaded;
 
   List<MarketPlaceModel> get list;
+  String get msg;
+  bool get isLoading;
   @JsonKey(ignore: true)
   _$$MarketPlaceStateLoadedCopyWith<_$MarketPlaceStateLoaded> get copyWith =>
       throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class _$$MarketPlaceStateBuySuccessCopyWith<$Res> {
-  factory _$$MarketPlaceStateBuySuccessCopyWith(
-          _$MarketPlaceStateBuySuccess value,
-          $Res Function(_$MarketPlaceStateBuySuccess) then) =
-      __$$MarketPlaceStateBuySuccessCopyWithImpl<$Res>;
-}
-
-/// @nodoc
-class __$$MarketPlaceStateBuySuccessCopyWithImpl<$Res>
-    extends _$MarketPlaceStateCopyWithImpl<$Res>
-    implements _$$MarketPlaceStateBuySuccessCopyWith<$Res> {
-  __$$MarketPlaceStateBuySuccessCopyWithImpl(
-      _$MarketPlaceStateBuySuccess _value,
-      $Res Function(_$MarketPlaceStateBuySuccess) _then)
-      : super(_value, (v) => _then(v as _$MarketPlaceStateBuySuccess));
-
-  @override
-  _$MarketPlaceStateBuySuccess get _value =>
-      super._value as _$MarketPlaceStateBuySuccess;
-}
-
-/// @nodoc
-
-class _$MarketPlaceStateBuySuccess implements MarketPlaceStateBuySuccess {
-  const _$MarketPlaceStateBuySuccess();
-
-  @override
-  String toString() {
-    return 'MarketPlaceState.buySuccess()';
-  }
-
-  @override
-  bool operator ==(dynamic other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$MarketPlaceStateBuySuccess);
-  }
-
-  @override
-  int get hashCode => runtimeType.hashCode;
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() initial,
-    required TResult Function() loading,
-    required TResult Function(List<MarketPlaceModel> list) loaded,
-    required TResult Function() buySuccess,
-    required TResult Function(String msg) buyFail,
-  }) {
-    return buySuccess();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult Function()? initial,
-    TResult Function()? loading,
-    TResult Function(List<MarketPlaceModel> list)? loaded,
-    TResult Function()? buySuccess,
-    TResult Function(String msg)? buyFail,
-  }) {
-    return buySuccess?.call();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initial,
-    TResult Function()? loading,
-    TResult Function(List<MarketPlaceModel> list)? loaded,
-    TResult Function()? buySuccess,
-    TResult Function(String msg)? buyFail,
-    required TResult orElse(),
-  }) {
-    if (buySuccess != null) {
-      return buySuccess();
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(MarketPlaceStateInit value) initial,
-    required TResult Function(MarketPlaceStateLoading value) loading,
-    required TResult Function(MarketPlaceStateLoaded value) loaded,
-    required TResult Function(MarketPlaceStateBuySuccess value) buySuccess,
-    required TResult Function(MarketPlaceStateBuyFailed value) buyFail,
-  }) {
-    return buySuccess(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(MarketPlaceStateInit value)? initial,
-    TResult Function(MarketPlaceStateLoading value)? loading,
-    TResult Function(MarketPlaceStateLoaded value)? loaded,
-    TResult Function(MarketPlaceStateBuySuccess value)? buySuccess,
-    TResult Function(MarketPlaceStateBuyFailed value)? buyFail,
-  }) {
-    return buySuccess?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(MarketPlaceStateInit value)? initial,
-    TResult Function(MarketPlaceStateLoading value)? loading,
-    TResult Function(MarketPlaceStateLoaded value)? loaded,
-    TResult Function(MarketPlaceStateBuySuccess value)? buySuccess,
-    TResult Function(MarketPlaceStateBuyFailed value)? buyFail,
-    required TResult orElse(),
-  }) {
-    if (buySuccess != null) {
-      return buySuccess(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class MarketPlaceStateBuySuccess implements MarketPlaceState {
-  const factory MarketPlaceStateBuySuccess() = _$MarketPlaceStateBuySuccess;
-}
-
-/// @nodoc
-abstract class _$$MarketPlaceStateBuyFailedCopyWith<$Res> {
-  factory _$$MarketPlaceStateBuyFailedCopyWith(
-          _$MarketPlaceStateBuyFailed value,
-          $Res Function(_$MarketPlaceStateBuyFailed) then) =
-      __$$MarketPlaceStateBuyFailedCopyWithImpl<$Res>;
-  $Res call({String msg});
-}
-
-/// @nodoc
-class __$$MarketPlaceStateBuyFailedCopyWithImpl<$Res>
-    extends _$MarketPlaceStateCopyWithImpl<$Res>
-    implements _$$MarketPlaceStateBuyFailedCopyWith<$Res> {
-  __$$MarketPlaceStateBuyFailedCopyWithImpl(_$MarketPlaceStateBuyFailed _value,
-      $Res Function(_$MarketPlaceStateBuyFailed) _then)
-      : super(_value, (v) => _then(v as _$MarketPlaceStateBuyFailed));
-
-  @override
-  _$MarketPlaceStateBuyFailed get _value =>
-      super._value as _$MarketPlaceStateBuyFailed;
-
-  @override
-  $Res call({
-    Object? msg = freezed,
-  }) {
-    return _then(_$MarketPlaceStateBuyFailed(
-      msg == freezed
-          ? _value.msg
-          : msg // ignore: cast_nullable_to_non_nullable
-              as String,
-    ));
-  }
-}
-
-/// @nodoc
-
-class _$MarketPlaceStateBuyFailed implements MarketPlaceStateBuyFailed {
-  const _$MarketPlaceStateBuyFailed(this.msg);
-
-  @override
-  final String msg;
-
-  @override
-  String toString() {
-    return 'MarketPlaceState.buyFail(msg: $msg)';
-  }
-
-  @override
-  bool operator ==(dynamic other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$MarketPlaceStateBuyFailed &&
-            const DeepCollectionEquality().equals(other.msg, msg));
-  }
-
-  @override
-  int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(msg));
-
-  @JsonKey(ignore: true)
-  @override
-  _$$MarketPlaceStateBuyFailedCopyWith<_$MarketPlaceStateBuyFailed>
-      get copyWith => __$$MarketPlaceStateBuyFailedCopyWithImpl<
-          _$MarketPlaceStateBuyFailed>(this, _$identity);
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() initial,
-    required TResult Function() loading,
-    required TResult Function(List<MarketPlaceModel> list) loaded,
-    required TResult Function() buySuccess,
-    required TResult Function(String msg) buyFail,
-  }) {
-    return buyFail(msg);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult Function()? initial,
-    TResult Function()? loading,
-    TResult Function(List<MarketPlaceModel> list)? loaded,
-    TResult Function()? buySuccess,
-    TResult Function(String msg)? buyFail,
-  }) {
-    return buyFail?.call(msg);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initial,
-    TResult Function()? loading,
-    TResult Function(List<MarketPlaceModel> list)? loaded,
-    TResult Function()? buySuccess,
-    TResult Function(String msg)? buyFail,
-    required TResult orElse(),
-  }) {
-    if (buyFail != null) {
-      return buyFail(msg);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(MarketPlaceStateInit value) initial,
-    required TResult Function(MarketPlaceStateLoading value) loading,
-    required TResult Function(MarketPlaceStateLoaded value) loaded,
-    required TResult Function(MarketPlaceStateBuySuccess value) buySuccess,
-    required TResult Function(MarketPlaceStateBuyFailed value) buyFail,
-  }) {
-    return buyFail(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(MarketPlaceStateInit value)? initial,
-    TResult Function(MarketPlaceStateLoading value)? loading,
-    TResult Function(MarketPlaceStateLoaded value)? loaded,
-    TResult Function(MarketPlaceStateBuySuccess value)? buySuccess,
-    TResult Function(MarketPlaceStateBuyFailed value)? buyFail,
-  }) {
-    return buyFail?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(MarketPlaceStateInit value)? initial,
-    TResult Function(MarketPlaceStateLoading value)? loading,
-    TResult Function(MarketPlaceStateLoaded value)? loaded,
-    TResult Function(MarketPlaceStateBuySuccess value)? buySuccess,
-    TResult Function(MarketPlaceStateBuyFailed value)? buyFail,
-    required TResult orElse(),
-  }) {
-    if (buyFail != null) {
-      return buyFail(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class MarketPlaceStateBuyFailed implements MarketPlaceState {
-  const factory MarketPlaceStateBuyFailed(final String msg) =
-      _$MarketPlaceStateBuyFailed;
-
-  String get msg;
-  @JsonKey(ignore: true)
-  _$$MarketPlaceStateBuyFailedCopyWith<_$MarketPlaceStateBuyFailed>
-      get copyWith => throw _privateConstructorUsedError;
 }

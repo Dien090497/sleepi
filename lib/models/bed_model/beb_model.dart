@@ -12,6 +12,7 @@ class BedModel {
   final int id;
 
   final int nftId;
+  final int? isBurn;
 
   final String nftName;
 
@@ -49,6 +50,7 @@ class BedModel {
   final List<JewelModel>? jewels;
   final int tokenId;
   final Nft nft;
+  final NftSale nftSale;
 
   final double? insurancePercent;
 
@@ -85,7 +87,10 @@ class BedModel {
       this.insurancePercent,
       this.startTime,
       this.endTime,
-      this.jewels);
+      this.jewels,
+      this.isBurn,
+      this.nftSale
+      );
 
   factory BedModel.fromJson(Map<String, dynamic> json) =>
       _$BedModelFromJson(json);
@@ -110,6 +115,7 @@ class BedModel {
 
   BedEntity toEntity() {
     return BedEntity(
+      isBurn: isBurn ?? 0,
       jewelType: jewelType,
       name: nftName,
       nftId: nftId,
@@ -138,6 +144,8 @@ class BedModel {
       jewels: jewels != null ? jewels!.map((e) => e.toEntity()).toList() : [],
       owner: owner,
       status: nft.status ?? '',
+      price: nftSale.price,
+      statusNftSale: nftSale.status,
     );
   }
 }
@@ -154,4 +162,27 @@ class Nft {
   factory Nft.fromJson(Map<String, dynamic> json) => _$NftFromJson(json);
 
   Map<String, dynamic> toJson() => _$NftToJson(this);
+}
+
+@JsonSerializable()
+class NftSale {
+  final int id;
+  final int nftId;
+  final String? price;
+  final String? transactionsFee;
+  final String? status;
+  final String? symbol;
+
+  NftSale({
+    required this.id,
+    required this.nftId,
+    this.price,
+    this.transactionsFee,
+    this.status,
+    this.symbol,
+  });
+
+  factory NftSale.fromJson(Map<String, dynamic> json) => _$NftSaleFromJson(json);
+
+  Map<String, dynamic> toJson() => _$NftSaleToJson(this);
 }

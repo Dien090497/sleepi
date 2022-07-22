@@ -206,7 +206,7 @@
   "range": "Alarm Range",
   "alarm_bell": "Alarm: Bell",
   "item_list": "Item List",
-  "bedbox" :"Bed Box",
+  "bedbox": "Bed Box",
   "bed_boxes": "Bed boxes",
   "use": "Use",
   "type": "Type",
@@ -461,5 +461,8 @@
   "not_granted": "Authorization not granted",
   "required_time": "Required Time",
   "sleep_time": "Sleep Time",
-  "put_positive_correct_to": "Put positive correction to {}"
+  "put_positive_correct_to": "Put positive correction to {}",
+  "speed_up_success": "Speed up success",
+  "cancel_sell": "Cancel Sell",
+  "do_you_really_want_to_cancel_sell": "Do you really want to cancel sell nft?"
 }

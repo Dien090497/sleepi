@@ -1,6 +1,5 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:slee_fi/common/extensions/bed_entity_x.dart';
 import 'package:slee_fi/common/extensions/string_x.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
@@ -8,7 +7,7 @@ import 'package:slee_fi/common/widgets/cached_image.dart';
 import 'package:slee_fi/common/widgets/sf_buttons.dart';
 import 'package:slee_fi/common/widgets/sf_card.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
-import 'package:slee_fi/entities/bed_entity/bed_entity.dart';
+import 'package:slee_fi/entities/jewel_entity/jewel_entity.dart';
 import 'package:slee_fi/l10n/locale_keys.g.dart';
 
 class JewelDialogBody extends StatelessWidget {
@@ -21,7 +20,7 @@ class JewelDialogBody extends StatelessWidget {
       this.textOnSell})
       : super(key: key);
 
-  final BedEntity jewel;
+  final JewelEntity jewel;
   final VoidCallback onSellTap;
   final VoidCallback onTransferTap;
   final String? textOnTransfer;
@@ -61,8 +60,7 @@ class JewelDialogBody extends StatelessWidget {
             ),
             const SizedBox(height: 20),
             SFText(
-              keyText:
-                  '${jewel.jewelType?.tr() ?? ''} ${LocaleKeys.jewel.tr()} (Lv.${jewel.level})',
+              keyText: '${jewel.jewelType.tr() } ${LocaleKeys.jewel.tr()} (${jewel.level})',
               style: TextStyles.white1w700size16,
             ),
             const SizedBox(height: 24),
@@ -90,7 +88,8 @@ class JewelDialogBody extends StatelessWidget {
                   const SizedBox(width: 4),
                   Expanded(
                     child: SFText(
-                      keyText: '${jewel.infoBuff}% ${LocaleKeys.base.tr()} ${jewel.type.tr()}',
+                      keyText:
+                          '+${jewel.infoBuff}% ${jewel.type.tr()} Res.',
                       style: TextStyles.blue16,
                       textAlign: TextAlign.right,
                     ),

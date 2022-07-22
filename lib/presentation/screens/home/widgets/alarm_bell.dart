@@ -119,8 +119,11 @@ class AlarmBell extends StatelessWidget {
             const SizedBox(height: 16),
             if (userStatusTracking != null)
               ButtonStart(
+                key: Key('$availableAt'),
                 enableStart: !isLoading &&
-                    !isScrolling && startRange !=null && endRange != null &&
+                    !isScrolling &&
+                    startRange != null &&
+                    endRange != null &&
                     _correctTime(startRange!, endRange!, selectedTime),
                 availableAt: availableAt,
                 onStartTracking: () async {

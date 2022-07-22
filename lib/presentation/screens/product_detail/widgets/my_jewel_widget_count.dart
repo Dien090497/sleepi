@@ -6,7 +6,7 @@ import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
 import 'package:slee_fi/common/widgets/cached_image.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
-import 'package:slee_fi/entities/jewel_entity/jewel_entity.dart';
+import 'package:slee_fi/entities/bed_entity/bed_entity.dart';
 import 'package:slee_fi/l10n/locale_keys.g.dart';
 import 'package:slee_fi/presentation/screens/product_detail/widgets/top_left_banner.dart';
 
@@ -16,11 +16,13 @@ class MyJewelsWidgetCount extends StatelessWidget {
     required this.jewel,
     this.color,
     this.count,
+    required this.isJewel,
   }) : super(key: key);
 
-  final JewelEntity jewel;
+  final BedEntity jewel;
   final Color? color;
   final int? count;
+  final bool isJewel;
 
   @override
   Widget build(BuildContext context) {
@@ -60,7 +62,8 @@ class MyJewelsWidgetCount extends StatelessWidget {
                 padding: const EdgeInsets.symmetric(vertical: 5),
                 alignment: Alignment.center,
                 child: SFText(
-                  keyText: '${jewel.jewelType.tr()} ${LocaleKeys.jewel.tr()} ($count)',
+                  keyText:
+                      '${jewel.jewelType?.tr()} ${!isJewel ? LocaleKeys.item.tr() : LocaleKeys.jewel.tr()} ($count)',
                   style:
                       TextStyles.white1w700size12.copyWith(color: qualityColor),
                 ),

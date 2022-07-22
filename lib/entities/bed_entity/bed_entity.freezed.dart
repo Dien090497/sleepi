@@ -34,6 +34,7 @@ mixin _$BedEntity {
   double get efficiency => throw _privateConstructorUsedError;
   double get luck => throw _privateConstructorUsedError;
   double get bonus => throw _privateConstructorUsedError;
+  int get isBurn => throw _privateConstructorUsedError;
   double get special => throw _privateConstructorUsedError;
   double get resilience => throw _privateConstructorUsedError;
   int get time => throw _privateConstructorUsedError;
@@ -44,6 +45,8 @@ mixin _$BedEntity {
   double? get endTime => throw _privateConstructorUsedError;
   String? get jewelType => throw _privateConstructorUsedError;
   List<JewelEntity> get jewels => throw _privateConstructorUsedError;
+  String? get statusNftSale => throw _privateConstructorUsedError;
+  String? get price => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $BedEntityCopyWith<BedEntity> get copyWith =>
@@ -73,6 +76,7 @@ abstract class $BedEntityCopyWith<$Res> {
       double efficiency,
       double luck,
       double bonus,
+      int isBurn,
       double special,
       double resilience,
       int time,
@@ -82,7 +86,9 @@ abstract class $BedEntityCopyWith<$Res> {
       double? startTime,
       double? endTime,
       String? jewelType,
-      List<JewelEntity> jewels});
+      List<JewelEntity> jewels,
+      String? statusNftSale,
+      String? price});
 }
 
 /// @nodoc
@@ -113,6 +119,7 @@ class _$BedEntityCopyWithImpl<$Res> implements $BedEntityCopyWith<$Res> {
     Object? efficiency = freezed,
     Object? luck = freezed,
     Object? bonus = freezed,
+    Object? isBurn = freezed,
     Object? special = freezed,
     Object? resilience = freezed,
     Object? time = freezed,
@@ -123,6 +130,8 @@ class _$BedEntityCopyWithImpl<$Res> implements $BedEntityCopyWith<$Res> {
     Object? endTime = freezed,
     Object? jewelType = freezed,
     Object? jewels = freezed,
+    Object? statusNftSale = freezed,
+    Object? price = freezed,
   }) {
     return _then(_value.copyWith(
       id: id == freezed
@@ -197,6 +206,10 @@ class _$BedEntityCopyWithImpl<$Res> implements $BedEntityCopyWith<$Res> {
           ? _value.bonus
           : bonus // ignore: cast_nullable_to_non_nullable
               as double,
+      isBurn: isBurn == freezed
+          ? _value.isBurn
+          : isBurn // ignore: cast_nullable_to_non_nullable
+              as int,
       special: special == freezed
           ? _value.special
           : special // ignore: cast_nullable_to_non_nullable
@@ -237,6 +250,14 @@ class _$BedEntityCopyWithImpl<$Res> implements $BedEntityCopyWith<$Res> {
           ? _value.jewels
           : jewels // ignore: cast_nullable_to_non_nullable
               as List<JewelEntity>,
+      statusNftSale: statusNftSale == freezed
+          ? _value.statusNftSale
+          : statusNftSale // ignore: cast_nullable_to_non_nullable
+              as String?,
+      price: price == freezed
+          ? _value.price
+          : price // ignore: cast_nullable_to_non_nullable
+              as String?,
     ));
   }
 }
@@ -266,6 +287,7 @@ abstract class _$$_BedEntityCopyWith<$Res> implements $BedEntityCopyWith<$Res> {
       double efficiency,
       double luck,
       double bonus,
+      int isBurn,
       double special,
       double resilience,
       int time,
@@ -275,7 +297,9 @@ abstract class _$$_BedEntityCopyWith<$Res> implements $BedEntityCopyWith<$Res> {
       double? startTime,
       double? endTime,
       String? jewelType,
-      List<JewelEntity> jewels});
+      List<JewelEntity> jewels,
+      String? statusNftSale,
+      String? price});
 }
 
 /// @nodoc
@@ -308,6 +332,7 @@ class __$$_BedEntityCopyWithImpl<$Res> extends _$BedEntityCopyWithImpl<$Res>
     Object? efficiency = freezed,
     Object? luck = freezed,
     Object? bonus = freezed,
+    Object? isBurn = freezed,
     Object? special = freezed,
     Object? resilience = freezed,
     Object? time = freezed,
@@ -318,6 +343,8 @@ class __$$_BedEntityCopyWithImpl<$Res> extends _$BedEntityCopyWithImpl<$Res>
     Object? endTime = freezed,
     Object? jewelType = freezed,
     Object? jewels = freezed,
+    Object? statusNftSale = freezed,
+    Object? price = freezed,
   }) {
     return _then(_$_BedEntity(
       id: id == freezed
@@ -392,6 +419,10 @@ class __$$_BedEntityCopyWithImpl<$Res> extends _$BedEntityCopyWithImpl<$Res>
           ? _value.bonus
           : bonus // ignore: cast_nullable_to_non_nullable
               as double,
+      isBurn: isBurn == freezed
+          ? _value.isBurn
+          : isBurn // ignore: cast_nullable_to_non_nullable
+              as int,
       special: special == freezed
           ? _value.special
           : special // ignore: cast_nullable_to_non_nullable
@@ -432,6 +463,14 @@ class __$$_BedEntityCopyWithImpl<$Res> extends _$BedEntityCopyWithImpl<$Res>
           ? _value._jewels
           : jewels // ignore: cast_nullable_to_non_nullable
               as List<JewelEntity>,
+      statusNftSale: statusNftSale == freezed
+          ? _value.statusNftSale
+          : statusNftSale // ignore: cast_nullable_to_non_nullable
+              as String?,
+      price: price == freezed
+          ? _value.price
+          : price // ignore: cast_nullable_to_non_nullable
+              as String?,
     ));
   }
 }
@@ -458,6 +497,7 @@ class _$_BedEntity implements _BedEntity {
       required this.efficiency,
       required this.luck,
       required this.bonus,
+      required this.isBurn,
       required this.special,
       required this.resilience,
       required this.time,
@@ -467,7 +507,9 @@ class _$_BedEntity implements _BedEntity {
       required this.startTime,
       required this.endTime,
       required this.jewelType,
-      required final List<JewelEntity> jewels})
+      required final List<JewelEntity> jewels,
+      required this.statusNftSale,
+      required this.price})
       : _jewels = jewels;
 
   @override
@@ -507,6 +549,8 @@ class _$_BedEntity implements _BedEntity {
   @override
   final double bonus;
   @override
+  final int isBurn;
+  @override
   final double special;
   @override
   final double resilience;
@@ -532,8 +576,13 @@ class _$_BedEntity implements _BedEntity {
   }
 
   @override
+  final String? statusNftSale;
+  @override
+  final String? price;
+
+  @override
   String toString() {
-    return 'BedEntity(id: $id, nftId: $nftId, name: $name, nftClass: $nftClass, tokenId: $tokenId, level: $level, image: $image, type: $type, contractAddress: $contractAddress, quality: $quality, owner: $owner, status: $status, durability: $durability, isLock: $isLock, bedMint: $bedMint, efficiency: $efficiency, luck: $luck, bonus: $bonus, special: $special, resilience: $resilience, time: $time, isMint: $isMint, socket: $socket, insurancePercent: $insurancePercent, startTime: $startTime, endTime: $endTime, jewelType: $jewelType, jewels: $jewels)';
+    return 'BedEntity(id: $id, nftId: $nftId, name: $name, nftClass: $nftClass, tokenId: $tokenId, level: $level, image: $image, type: $type, contractAddress: $contractAddress, quality: $quality, owner: $owner, status: $status, durability: $durability, isLock: $isLock, bedMint: $bedMint, efficiency: $efficiency, luck: $luck, bonus: $bonus, isBurn: $isBurn, special: $special, resilience: $resilience, time: $time, isMint: $isMint, socket: $socket, insurancePercent: $insurancePercent, startTime: $startTime, endTime: $endTime, jewelType: $jewelType, jewels: $jewels, statusNftSale: $statusNftSale, price: $price)';
   }
 
   @override
@@ -562,6 +611,7 @@ class _$_BedEntity implements _BedEntity {
                 .equals(other.efficiency, efficiency) &&
             const DeepCollectionEquality().equals(other.luck, luck) &&
             const DeepCollectionEquality().equals(other.bonus, bonus) &&
+            const DeepCollectionEquality().equals(other.isBurn, isBurn) &&
             const DeepCollectionEquality().equals(other.special, special) &&
             const DeepCollectionEquality()
                 .equals(other.resilience, resilience) &&
@@ -573,7 +623,10 @@ class _$_BedEntity implements _BedEntity {
             const DeepCollectionEquality().equals(other.startTime, startTime) &&
             const DeepCollectionEquality().equals(other.endTime, endTime) &&
             const DeepCollectionEquality().equals(other.jewelType, jewelType) &&
-            const DeepCollectionEquality().equals(other._jewels, _jewels));
+            const DeepCollectionEquality().equals(other._jewels, _jewels) &&
+            const DeepCollectionEquality()
+                .equals(other.statusNftSale, statusNftSale) &&
+            const DeepCollectionEquality().equals(other.price, price));
   }
 
   @override
@@ -597,6 +650,7 @@ class _$_BedEntity implements _BedEntity {
         const DeepCollectionEquality().hash(efficiency),
         const DeepCollectionEquality().hash(luck),
         const DeepCollectionEquality().hash(bonus),
+        const DeepCollectionEquality().hash(isBurn),
         const DeepCollectionEquality().hash(special),
         const DeepCollectionEquality().hash(resilience),
         const DeepCollectionEquality().hash(time),
@@ -606,7 +660,9 @@ class _$_BedEntity implements _BedEntity {
         const DeepCollectionEquality().hash(startTime),
         const DeepCollectionEquality().hash(endTime),
         const DeepCollectionEquality().hash(jewelType),
-        const DeepCollectionEquality().hash(_jewels)
+        const DeepCollectionEquality().hash(_jewels),
+        const DeepCollectionEquality().hash(statusNftSale),
+        const DeepCollectionEquality().hash(price)
       ]);
 
   @JsonKey(ignore: true)
@@ -635,6 +691,7 @@ abstract class _BedEntity implements BedEntity {
       required final double efficiency,
       required final double luck,
       required final double bonus,
+      required final int isBurn,
       required final double special,
       required final double resilience,
       required final int time,
@@ -644,7 +701,9 @@ abstract class _BedEntity implements BedEntity {
       required final double? startTime,
       required final double? endTime,
       required final String? jewelType,
-      required final List<JewelEntity> jewels}) = _$_BedEntity;
+      required final List<JewelEntity> jewels,
+      required final String? statusNftSale,
+      required final String? price}) = _$_BedEntity;
 
   @override
   int get id;
@@ -683,6 +742,8 @@ abstract class _BedEntity implements BedEntity {
   @override
   double get bonus;
   @override
+  int get isBurn;
+  @override
   double get special;
   @override
   double get resilience;
@@ -702,6 +763,10 @@ abstract class _BedEntity implements BedEntity {
   String? get jewelType;
   @override
   List<JewelEntity> get jewels;
+  @override
+  String? get statusNftSale;
+  @override
+  String? get price;
   @override
   @JsonKey(ignore: true)
   _$$_BedEntityCopyWith<_$_BedEntity> get copyWith =>

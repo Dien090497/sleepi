@@ -66,6 +66,7 @@ class BedModelHome {
   Map<String, dynamic> toJson() => _$BedModelHomeToJson(this);
 
   BedEntity toEntity() => BedEntity(
+      isBurn: isBurn,
       jewelType: jewelType,
       id: id,
       nftId: nftId,
@@ -93,7 +94,10 @@ class BedModelHome {
       insurancePercent: objData.insurancePercent,
       startTime: objData.startTime,
       endTime: objData.endTime,
-      jewels: []);
+        jewels: [],
+        price: '',
+        statusNftSale: '',
+      );
 }
 
 @JsonSerializable()

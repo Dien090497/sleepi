@@ -15,11 +15,11 @@ class TrackingModel {
     this.bedUsed,
     this.itemUsed,
     this.timeSleep,
-    this.efficiency,
-    this.luck,
-    this.bonus,
-    this.special,
-    this.resilience,
+    // this.efficiency,
+    // this.luck,
+    // this.bonus,
+    // this.special,
+    // this.resilience,
     this.itemLevel,
     this.bedLevel,
     this.enableInsurance,
@@ -47,11 +47,11 @@ class TrackingModel {
   final int? bedUsed;
   final int? itemUsed;
   final dynamic timeSleep;
-  final int? efficiency;
-  final int? luck;
-  final int? bonus;
-  final int? special;
-  final int? resilience;
+  // final int? efficiency;
+  // final int? luck;
+  // final int? bonus;
+  // final int? special;
+  // final int? resilience;
   final dynamic itemLevel;
   final int? bedLevel;
   final bool? enableInsurance;

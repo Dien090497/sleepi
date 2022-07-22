@@ -6,12 +6,13 @@ part 'upgrade_jewel_response.g.dart';
 @JsonSerializable()
 class UpgradeJewelResponse {
   final bool status;
-  final String msg;
   final BedModel nftAttribute;
 
-  UpgradeJewelResponse(this.status, this.msg, this.nftAttribute);
-  factory UpgradeJewelResponse.fromJson(Map<String, dynamic> json) =>
-      _$UpgradeJewelResponseFromJson(json);
+  UpgradeJewelResponse(this.status,  this.nftAttribute);
+  factory UpgradeJewelResponse.fromJson(Map<String, dynamic> json) {
+    print('json iss   $json');
+    return _$UpgradeJewelResponseFromJson(json);
+  }
 
   Map<String, dynamic> toJson() => _$UpgradeJewelResponseToJson(this);
 }

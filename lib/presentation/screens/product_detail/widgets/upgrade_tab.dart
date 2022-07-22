@@ -10,20 +10,22 @@ import 'package:slee_fi/common/widgets/sf_dialog.dart';
 import 'package:slee_fi/common/widgets/sf_icon.dart';
 import 'package:slee_fi/common/widgets/sf_label_value.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
-import 'package:slee_fi/entities/jewel_entity/jewel_entity.dart';
+import 'package:slee_fi/entities/bed_entity/bed_entity.dart';
 import 'package:slee_fi/l10n/locale_keys.g.dart';
 import 'package:slee_fi/models/upgrade_jewel_info_response/upgrade_info_response.dart';
 import 'package:slee_fi/presentation/blocs/upgrade_jewel_bloc/upgrade_jewel_bloc.dart';
 import 'package:slee_fi/presentation/blocs/upgrade_jewel_bloc/upgrade_jewel_event.dart';
 import 'package:slee_fi/presentation/blocs/upgrade_jewel_bloc/upgrade_jewel_state.dart';
 import 'package:slee_fi/presentation/screens/gacha/widgets/atribute_process.dart';
+import 'package:slee_fi/presentation/screens/product_detail/widgets/jewel_dialog_body_upgrade_success.dart';
 import 'package:slee_fi/resources/resources.dart';
 
 import 'jewel_dialog_body.dart';
 import 'modal_jewel_list.dart';
 
 class UpGradeTab extends StatelessWidget {
-  const UpGradeTab({Key? key}) : super(key: key);
+  const UpGradeTab({Key? key, required this.isJewel}) : super(key: key);
+  final bool isJewel;
 
   @override
   Widget build(BuildContext context) {
@@ -33,8 +35,14 @@ class UpGradeTab extends StatelessWidget {
           if (state.errorMessage?.isNotEmpty == true) {
             showMessageDialog(context, state.errorMessage!);
           }
-          if (state.upgradeSuccess) {
-            showSuccessfulDialog(context, null);
+          if (state.upgradeSuccess != null) {
+            showCustomDialog(
+              context,
+              padding: const EdgeInsets.all(24),
+              children: [
+                JewelDialogBodyUpgradeSuccess(jewel: state.upgradeSuccess!),
+              ],
+            );
           }
         }
       },
@@ -72,6 +80,7 @@ class UpGradeTab extends StatelessWidget {
                               fit: BoxFit.cover,
                             ),
                             JewelSocket(
+                                isJewel: isJewel,
                                 top: 28,
                                 left: 0,
                                 right: 0,
@@ -80,6 +89,7 @@ class UpGradeTab extends StatelessWidget {
                                     ? state.jewelsUpgrade.first
                                     : null),
                             JewelSocket(
+                                isJewel: isJewel,
                                 bottom: 60,
                                 right: 40,
                                 jewelEntity: state is JewelStateLoaded &&
@@ -87,6 +97,7 @@ class UpGradeTab extends StatelessWidget {
                                     ? state.jewelsUpgrade[1]
                                     : null),
                             JewelSocket(
+                                isJewel: isJewel,
                                 bottom: 60,
                                 left: 40,
                                 jewelEntity: state is JewelStateLoaded &&
@@ -181,12 +192,14 @@ class JewelSocket extends StatelessWidget {
     this.bottom,
     this.right,
     this.jewelEntity,
+    required this.isJewel,
   }) : super(key: key);
+  final bool isJewel;
   final double? top;
   final double? left;
   final double? right;
   final double? bottom;
-  final JewelEntity? jewelEntity;
+  final BedEntity? jewelEntity;
 
   @override
   Widget build(BuildContext context) {
@@ -202,8 +215,13 @@ class JewelSocket extends StatelessWidget {
 
             return;
           }
-          SFModalBottomSheet.show(context, 0.8,
-              ModalJewelList(jewelBloc: context.read<JewelBloc>()));
+          SFModalBottomSheet.show(
+              context,
+              0.8,
+              ModalJewelList(
+                isJewel: isJewel,
+                jewelBloc: context.read<JewelBloc>(),
+              ));
         },
         child: jewelEntity == null
             ? const SFIcon(Ics.icPlus)
@@ -211,15 +229,14 @@ class JewelSocket extends StatelessWidget {
                 decoration: BoxDecoration(
                     color: AppColors.backgroundDialog,
                     shape: BoxShape.circle,
-                    border: Border.all(color: AppColors.lightGrey)),
+                    border: Border.all(color: AppColors.borderDarkColor)),
                 child: CachedImage(
                     image: jewelEntity!.image, width: 35, height: 35)),
       ),
     );
   }
 
-  void _showJewelDialog(BuildContext context, JewelEntity jewel) {
-
+  void _showJewelDialog(BuildContext context, BedEntity jewel) {
     showCustomDialog(
       context,
       padding: const EdgeInsets.all(24),

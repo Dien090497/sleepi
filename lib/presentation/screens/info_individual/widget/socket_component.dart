@@ -13,9 +13,10 @@ import 'package:slee_fi/presentation/blocs/socket_bloc/socket_bloc.dart';
 import 'package:slee_fi/presentation/blocs/socket_bloc/socket_event.dart';
 import 'package:slee_fi/presentation/blocs/socket_bloc/socket_state.dart';
 import 'package:slee_fi/presentation/screens/info_individual/widget/modal_jewel_list.dart';
-import 'package:slee_fi/presentation/screens/product_detail/widgets/jewel_dialog_body.dart';
 import 'package:slee_fi/presentation/screens/staking/widgets/popup_staking.dart';
 import 'package:slee_fi/resources/resources.dart';
+
+import 'jewel_dialog_body.dart';
 
 class SocketComponent extends StatelessWidget {
   const SocketComponent({

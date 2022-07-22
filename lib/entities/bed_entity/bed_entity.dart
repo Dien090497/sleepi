@@ -24,6 +24,7 @@ class BedEntity with _$BedEntity {
     required double efficiency,
     required double luck,
     required double bonus,
+    required int isBurn,
     required double special,
     required double resilience,
     required int time,
@@ -34,5 +35,7 @@ class BedEntity with _$BedEntity {
     required double? endTime,
     required String? jewelType,
     required List<JewelEntity> jewels,
+    required String? statusNftSale,
+    required String? price,
   }) = _BedEntity;
 }

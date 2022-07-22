@@ -1,5 +1,4 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:slee_fi/entities/bed_entity/bed_entity.dart';
 
 part 'jewel_entity.g.dart';
 
@@ -38,19 +37,6 @@ class JewelEntity {
 
   Map<String, dynamic> toJson() => _$JewelEntityToJson(this);
 
-  static JewelEntity fromBedEntity(BedEntity entity) => JewelEntity(
-      type: entity.type,
-      bonus: entity.bonus.toString(),
-      special: entity.special.toString(),
-      jewelType: entity.jewelType ?? '',
-      id: entity.id,
-      image: entity.image,
-      level: entity.level,
-      nftId: entity.nftId,
-      resilience: entity.resilience.toString(),
-      efficiency: entity.efficiency.toString(),
-      luck: entity.luck.toString(),
-      quality: entity.quality);
 
   // Ruby: Positively affects Efficiency values.
   // Sapphire: Positively affects Luck values

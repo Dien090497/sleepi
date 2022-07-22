@@ -126,6 +126,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
       (r) async {
         _currentPageBed++;
         if (currentState is HomeLoaded) {
+          print('### refresh ${await _getStatusTracking()}');
           emit(currentState.copyWith(
             loading: false,
             errorMessage: '',
@@ -232,12 +233,6 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
         bedId: bed.id,
         itemId: itemEntity?.id,
         isEnableInsurance: insuranceEnabled));
-
-    result.fold((l) {
-      print('estimate  false  ${l}');
-    }, (r) {
-      print('estimate  success  ${r}');
-    });
     return double.parse(
         result.foldRight('0', (r, previous) => r.estimateSlftEarn));
   }

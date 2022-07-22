@@ -2,6 +2,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:slee_fi/common/widgets/loading_screen.dart';
 import 'package:slee_fi/common/widgets/sf_alert_dialog.dart';
 import 'package:slee_fi/common/widgets/sf_bottom_sheets.dart';
 import 'package:slee_fi/common/widgets/sf_dialog.dart';
@@ -31,9 +32,15 @@ class TabJewelsBuy extends StatelessWidget {
       children: PopUpJewelMarketPlace(
         jewel: jewel,
         cubit: cubit,
-        onConfirmTap: () {
+        onConfirmTap: () async {
           Navigator.pop(context);
-          cubit.buyNFT(jewel.nftId);
+          final msg = await cubit.buyNFT(jewel.nftId);
+          cubit.refresh();
+          if (msg.isEmpty) {
+            showSuccessfulDialog(context, LocaleKeys.purchased_successfully);
+          } else {
+            showMessageDialog(context, msg);
+          }
         },
       ),
     );
@@ -43,21 +50,8 @@ class TabJewelsBuy extends StatelessWidget {
   Widget build(BuildContext context) {
     return DefaultTabController(
       length: 2,
-      child: BlocConsumer<MarketPlaceCubit, MarketPlaceState>(
+      child: BlocBuilder<MarketPlaceCubit, MarketPlaceState>(
         bloc: cubit,
-        listener: (context, state) {
-          final cubit = context.read<MarketPlaceCubit>();
-
-          if (state is MarketPlaceStateBuySuccess) {
-            cubit.refresh();
-            showSuccessfulDialog(context, LocaleKeys.purchased_successfully);
-          }
-
-          if (state is MarketPlaceStateBuyFailed) {
-            cubit.refresh();
-            showMessageDialog(context, state.msg);
-          }
-        },
         builder: (context, state) {
           return Column(
             children: [
@@ -138,8 +132,10 @@ class TabJewelsBuy extends StatelessWidget {
                             ),
                           ],
                         )
-                      : state is MarketPlaceStateLoading
-                          ? const Center(child: CircularProgressIndicator())
+                      : state is MarketPlaceStateLoading ||
+                              (state is MarketPlaceStateLoaded &&
+                                  state.isLoading)
+                          ? const LoadingIcon()
                           : const SizedBox(),
                 ),
               ),

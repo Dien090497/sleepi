@@ -23,6 +23,8 @@ mixin _$NftAttributeEntity {
   String? get type => throw _privateConstructorUsedError;
   String? get classNft => throw _privateConstructorUsedError;
   String? get quality => throw _privateConstructorUsedError;
+  String? get name => throw _privateConstructorUsedError;
+  String? get image => throw _privateConstructorUsedError;
   int? get time => throw _privateConstructorUsedError;
   int? get level => throw _privateConstructorUsedError;
   int? get bedMint => throw _privateConstructorUsedError;
@@ -51,6 +53,8 @@ abstract class $NftAttributeEntityCopyWith<$Res> {
       String? type,
       String? classNft,
       String? quality,
+      String? name,
+      String? image,
       int? time,
       int? level,
       int? bedMint,
@@ -80,6 +84,8 @@ class _$NftAttributeEntityCopyWithImpl<$Res>
     Object? type = freezed,
     Object? classNft = freezed,
     Object? quality = freezed,
+    Object? name = freezed,
+    Object? image = freezed,
     Object? time = freezed,
     Object? level = freezed,
     Object? bedMint = freezed,
@@ -118,6 +124,14 @@ class _$NftAttributeEntityCopyWithImpl<$Res>
       quality: quality == freezed
           ? _value.quality
           : quality // ignore: cast_nullable_to_non_nullable
+              as String?,
+      name: name == freezed
+          ? _value.name
+          : name // ignore: cast_nullable_to_non_nullable
+              as String?,
+      image: image == freezed
+          ? _value.image
+          : image // ignore: cast_nullable_to_non_nullable
               as String?,
       time: time == freezed
           ? _value.time
@@ -174,6 +188,8 @@ abstract class _$$_NftAttributeEntityCopyWith<$Res>
       String? type,
       String? classNft,
       String? quality,
+      String? name,
+      String? image,
       int? time,
       int? level,
       int? bedMint,
@@ -205,6 +221,8 @@ class __$$_NftAttributeEntityCopyWithImpl<$Res>
     Object? type = freezed,
     Object? classNft = freezed,
     Object? quality = freezed,
+    Object? name = freezed,
+    Object? image = freezed,
     Object? time = freezed,
     Object? level = freezed,
     Object? bedMint = freezed,
@@ -243,6 +261,14 @@ class __$$_NftAttributeEntityCopyWithImpl<$Res>
       quality: quality == freezed
           ? _value.quality
           : quality // ignore: cast_nullable_to_non_nullable
+              as String?,
+      name: name == freezed
+          ? _value.name
+          : name // ignore: cast_nullable_to_non_nullable
+              as String?,
+      image: image == freezed
+          ? _value.image
+          : image // ignore: cast_nullable_to_non_nullable
               as String?,
       time: time == freezed
           ? _value.time
@@ -297,6 +323,8 @@ class _$_NftAttributeEntity
       required this.type,
       required this.classNft,
       required this.quality,
+      required this.name,
+      required this.image,
       required this.time,
       required this.level,
       required this.bedMint,
@@ -322,6 +350,10 @@ class _$_NftAttributeEntity
   @override
   final String? quality;
   @override
+  final String? name;
+  @override
+  final String? image;
+  @override
   final int? time;
   @override
   final int? level;
@@ -342,7 +374,7 @@ class _$_NftAttributeEntity
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'NftAttributeEntity(nftId: $nftId, tokenId: $tokenId, contractAddress: $contractAddress, owner: $owner, type: $type, classNft: $classNft, quality: $quality, time: $time, level: $level, bedMint: $bedMint, efficiency: $efficiency, durability: $durability, luck: $luck, bonus: $bonus, special: $special, resilience: $resilience)';
+    return 'NftAttributeEntity(nftId: $nftId, tokenId: $tokenId, contractAddress: $contractAddress, owner: $owner, type: $type, classNft: $classNft, quality: $quality, name: $name, image: $image, time: $time, level: $level, bedMint: $bedMint, efficiency: $efficiency, durability: $durability, luck: $luck, bonus: $bonus, special: $special, resilience: $resilience)';
   }
 
   @override
@@ -357,6 +389,8 @@ class _$_NftAttributeEntity
       ..add(DiagnosticsProperty('type', type))
       ..add(DiagnosticsProperty('classNft', classNft))
       ..add(DiagnosticsProperty('quality', quality))
+      ..add(DiagnosticsProperty('name', name))
+      ..add(DiagnosticsProperty('image', image))
       ..add(DiagnosticsProperty('time', time))
       ..add(DiagnosticsProperty('level', level))
       ..add(DiagnosticsProperty('bedMint', bedMint))
@@ -381,6 +415,8 @@ class _$_NftAttributeEntity
             const DeepCollectionEquality().equals(other.type, type) &&
             const DeepCollectionEquality().equals(other.classNft, classNft) &&
             const DeepCollectionEquality().equals(other.quality, quality) &&
+            const DeepCollectionEquality().equals(other.name, name) &&
+            const DeepCollectionEquality().equals(other.image, image) &&
             const DeepCollectionEquality().equals(other.time, time) &&
             const DeepCollectionEquality().equals(other.level, level) &&
             const DeepCollectionEquality().equals(other.bedMint, bedMint) &&
@@ -405,6 +441,8 @@ class _$_NftAttributeEntity
       const DeepCollectionEquality().hash(type),
       const DeepCollectionEquality().hash(classNft),
       const DeepCollectionEquality().hash(quality),
+      const DeepCollectionEquality().hash(name),
+      const DeepCollectionEquality().hash(image),
       const DeepCollectionEquality().hash(time),
       const DeepCollectionEquality().hash(level),
       const DeepCollectionEquality().hash(bedMint),
@@ -431,6 +469,8 @@ abstract class _NftAttributeEntity implements NftAttributeEntity {
       required final String? type,
       required final String? classNft,
       required final String? quality,
+      required final String? name,
+      required final String? image,
       required final int? time,
       required final int? level,
       required final int? bedMint,
@@ -455,6 +495,10 @@ abstract class _NftAttributeEntity implements NftAttributeEntity {
   String? get classNft;
   @override
   String? get quality;
+  @override
+  String? get name;
+  @override
+  String? get image;
   @override
   int? get time;
   @override

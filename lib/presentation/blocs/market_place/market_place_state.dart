@@ -9,11 +9,9 @@ class MarketPlaceState with _$MarketPlaceState {
 
   const factory MarketPlaceState.loading() = MarketPlaceStateLoading;
 
-  const factory MarketPlaceState.loaded(List<MarketPlaceModel> list) =
-      MarketPlaceStateLoaded;
-
-  const factory MarketPlaceState.buySuccess() = MarketPlaceStateBuySuccess;
-
-  const factory MarketPlaceState.buyFail(String msg) =
-      MarketPlaceStateBuyFailed;
+  const factory MarketPlaceState.loaded(
+    List<MarketPlaceModel> list, {
+    @Default('') String msg,
+    @Default(false) bool isLoading,
+  }) = MarketPlaceStateLoaded;
 }

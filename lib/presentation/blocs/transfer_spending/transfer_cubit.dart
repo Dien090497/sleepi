@@ -90,24 +90,27 @@ class TransferCubit extends Cubit<TransferState> {
     }
   }
 
-  Future<void> approve({
+  Future<String> approve({
     required double amount,
     required String addressContract,
   }) async {
     final currentState = state;
     if (currentState is TransferLoaded) {
-      if (currentState.isLoading) return;
+      if (currentState.isLoading) return '';
       emit(currentState.copyWith(isLoading: true));
       final result = await _approveUseCase.call(addressContract);
-      result.fold(
+      return result.fold(
         (l) {
-          emit(currentState.copyWith(isLoading: false, errorMsg: '$l'));
+          emit(currentState.copyWith(isLoading: false));
+          return '$l';
         },
         (result) {
           emit(currentState.copyWith(isLoading: false));
+          return 'done';
         },
       );
     }
+    return '';
   }
 
   Future<void> transfer({

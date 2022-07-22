@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:developer';
 
 import 'package:dio/dio.dart';
 import 'package:equatable/equatable.dart';
@@ -18,6 +19,7 @@ class FailureMessage extends Failure {
   factory FailureMessage.fromException(e) {
     try {
       if (e is DioError) {
+        log('statusCode: ${e.response?.statusCode}');
         if (e.response?.statusCode == 502 || e.response?.statusCode == 500) {
           return const FailureMessage(LocaleKeys.some_thing_wrong);
         }

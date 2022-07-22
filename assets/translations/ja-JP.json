@@ -426,5 +426,8 @@
   "latest": "Latest",
   "required_time": "Required Time",
   "sleep_time": "Sleep Time",
-  "put_positive_correct_to": "Put positive correction to {}"
+  "put_positive_correct_to": "Put positive correction to {}",
+  "speed_up_success": "Speed up success",
+  "cancel_sell": "Cancel Sell",
+  "do_you_really_want_to_cancel_sell": "Do you really want to cancel sell nft?"
 }
