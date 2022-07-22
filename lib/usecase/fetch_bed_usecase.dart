@@ -1,6 +1,4 @@
 import 'package:dartz/dartz.dart';
-import 'package:slee_fi/common/enum/enum.dart';
-import 'package:slee_fi/common/extensions/string_x.dart';
 import 'package:slee_fi/failures/failure.dart';
 import 'package:slee_fi/models/bed_model/beb_model.dart';
 import 'package:slee_fi/repository/user_repository.dart';
@@ -36,11 +34,9 @@ class FetchBedParam {
   final int page;
   final int limit;
   final CategoryType categoryId;
-  final AttributeNFT attributeNFT;
 
   /// [bedType]   default is  [bedType] = '',  bedbox  if [bedType] = bedbox**/
   final String bedType;
 
-  FetchBedParam(this.page, this.limit, this.categoryId, this.attributeNFT,
-      {this.bedType = ''});
+  FetchBedParam(this.page, this.limit, this.categoryId, {this.bedType = ''});
 }

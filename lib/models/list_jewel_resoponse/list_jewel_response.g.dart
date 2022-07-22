@@ -19,3 +19,17 @@ Map<String, dynamic> _$ListJewelResponseToJson(ListJewelResponse instance) =>
       'list': instance.list.map((e) => e.toJson()).toList(),
       'count': instance.count,
     };
+
+ListBedResponse _$ListBedResponseFromJson(Map<String, dynamic> json) =>
+    ListBedResponse(
+      (json['list'] as List<dynamic>)
+          .map((e) => BedModel.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      json['count'] as int,
+    );
+
+Map<String, dynamic> _$ListBedResponseToJson(ListBedResponse instance) =>
+    <String, dynamic>{
+      'list': instance.list.map((e) => e.toJson()).toList(),
+      'count': instance.count,
+    };

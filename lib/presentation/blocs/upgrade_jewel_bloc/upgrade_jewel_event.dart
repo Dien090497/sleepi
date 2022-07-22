@@ -1,8 +1,18 @@
 import 'package:equatable/equatable.dart';
-import 'package:slee_fi/entities/jewel_entity/jewel_entity.dart';
+import 'package:slee_fi/entities/bed_entity/bed_entity.dart';
+import 'package:slee_fi/usecase/fetch_bed_usecase.dart';
 
 abstract class JewelEvent extends Equatable {
   const JewelEvent();
+}
+
+class InitEvent extends JewelEvent {
+  final CategoryType categoryType;
+
+  const InitEvent(this.categoryType);
+
+  @override
+  List<Object?> get props => [categoryType];
 }
 
 class JewelFetchList extends JewelEvent {
@@ -27,7 +37,7 @@ class UpgradeJewel extends JewelEvent {
 }
 
 class AddJewelToSocket extends JewelEvent {
-  final List<JewelEntity> jewels;
+  final List<BedEntity> jewels;
 
   const AddJewelToSocket(this.jewels)
       : assert(jewels.length == 3, 'accept only 3 jewel at once');

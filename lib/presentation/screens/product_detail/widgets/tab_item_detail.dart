@@ -8,7 +8,6 @@ import 'package:slee_fi/presentation/blocs/nft_list/nft_list_cubit.dart';
 import 'package:slee_fi/presentation/blocs/nft_list/nft_list_state.dart';
 import 'package:slee_fi/presentation/screens/home/widgets/my_item_short_widget.dart';
 import 'package:slee_fi/presentation/screens/product_detail/widgets/upgrade_item.dart';
-import 'package:slee_fi/presentation/screens/product_detail/widgets/upgrade_tab.dart';
 import 'package:slee_fi/usecase/fetch_bed_usecase.dart';
 
 class TabItemDetail extends StatefulWidget {
