@@ -1,5 +1,4 @@
 import 'package:json_annotation/json_annotation.dart';
-import 'package:slee_fi/models/gacha_probability_config_response/probability_config.dart';
 
 part 'probability_data.g.dart';
 
