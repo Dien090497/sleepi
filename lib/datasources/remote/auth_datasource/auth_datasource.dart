@@ -309,7 +309,7 @@ abstract class AuthDataSource {
   Future<String> getTransactionFee();
 
   @GET('/nft/repair')
-  Future<GetRepairResponse> getRepair(@Query('bedId') String bedId);
+  Future<GetRepairResponse> getRepair(@Query('bedId') num bedId);
 
   @POST('/nft/repair')
   Future<dynamic> nftRepair(@Body() RepairSchema repairSchema);

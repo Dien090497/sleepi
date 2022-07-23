@@ -1,5 +1,4 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:slee_fi/common/const/const.dart';
 import 'package:slee_fi/common/enum/enum.dart';
 import 'package:slee_fi/di/injector.dart';
 import 'package:slee_fi/presentation/blocs/bottom_bar_infoIndividual/bottom_bar_infoIndividual_state.dart';
@@ -85,22 +84,25 @@ class BottomBarInfoIndividualCubit extends Cubit<BottomBarInfoIndividualState> {
   }
 
   void getRepair({required num nftId}) async {
-    emit(const BottomBarInfoIndividualState.loading());
     final result = await _getRepairUseCase.call(nftId);
     result.fold((l) {
       emit(BottomBarInfoIndividualState.error(message: '$l'));
     }, (feeRepair) {
-      emit(BottomBarInfoIndividualState.loaded(gasPrice: '', successTransfer: false, transactionFee: '', feeRepair: feeRepair));
+      final currentState = state;
+      if (currentState is BottomBarInfoIndividualLoaded) {
+        emit(currentState.copyWith(feeRepair: feeRepair));
+      }
     });
   }
 
-  void repairNFT({required String cost, required int bedId }) async {
-    final params = RepairSchema(bedId: bedId, tokenAddress: Const.tokens[1]['address'].toString(), cost: double.parse(cost));
+  void repairNFT({required int durability, required int bedId }) async {
+    emit(const BottomBarInfoIndividualState.loading());
+    final params = RepairSchema(bedId: bedId, durability: durability);
     final result = await _nftRepairUseCase.call(params);
     result.fold((l) {
-
       emit(BottomBarInfoIndividualState.error(message: '$l'));
     }, (fee) {
+      emit(const BottomBarInfoIndividualState.loaded(gasPrice: '', successTransfer: false, transactionFee: ''));
       final currentState = state;
       if (currentState is BottomBarInfoIndividualLoaded) {
         emit(currentState.copyWith(successTransfer: true));
@@ -134,5 +136,21 @@ class BottomBarInfoIndividualCubit extends Cubit<BottomBarInfoIndividualState> {
         emit(currentState.copyWith(successTransfer: true));
       }
     });
+  }
+  
+  void changeRepair ({required num valueRepair, required num durability}) {
+    final currentState = state; 
+    if (currentState is BottomBarInfoIndividualLoaded) {
+      if (currentState.feeRepair?.fee != null) {
+
+        if (valueRepair < durability) {
+          emit(currentState.copyWith(valueRepair: durability, cost: 0));
+        } else {
+          final cost = currentState.feeRepair!.fee! * (valueRepair.toInt() - durability);
+          emit(currentState.copyWith(valueRepair: valueRepair, cost: cost));
+        }
+
+      }
+    }
   }
 }

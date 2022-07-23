@@ -16,8 +16,8 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$GetRepairtEntity {
-  String? get durability => throw _privateConstructorUsedError;
-  String? get cost => throw _privateConstructorUsedError;
+  String? get level => throw _privateConstructorUsedError;
+  double? get fee => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $GetRepairtEntityCopyWith<GetRepairtEntity> get copyWith =>
@@ -29,7 +29,7 @@ abstract class $GetRepairtEntityCopyWith<$Res> {
   factory $GetRepairtEntityCopyWith(
           GetRepairtEntity value, $Res Function(GetRepairtEntity) then) =
       _$GetRepairtEntityCopyWithImpl<$Res>;
-  $Res call({String? durability, String? cost});
+  $Res call({String? level, double? fee});
 }
 
 /// @nodoc
@@ -43,18 +43,18 @@ class _$GetRepairtEntityCopyWithImpl<$Res>
 
   @override
   $Res call({
-    Object? durability = freezed,
-    Object? cost = freezed,
+    Object? level = freezed,
+    Object? fee = freezed,
   }) {
     return _then(_value.copyWith(
-      durability: durability == freezed
-          ? _value.durability
-          : durability // ignore: cast_nullable_to_non_nullable
+      level: level == freezed
+          ? _value.level
+          : level // ignore: cast_nullable_to_non_nullable
               as String?,
-      cost: cost == freezed
-          ? _value.cost
-          : cost // ignore: cast_nullable_to_non_nullable
-              as String?,
+      fee: fee == freezed
+          ? _value.fee
+          : fee // ignore: cast_nullable_to_non_nullable
+              as double?,
     ));
   }
 }
@@ -66,7 +66,7 @@ abstract class _$$_GetRepairtEntityCopyWith<$Res>
           _$_GetRepairtEntity value, $Res Function(_$_GetRepairtEntity) then) =
       __$$_GetRepairtEntityCopyWithImpl<$Res>;
   @override
-  $Res call({String? durability, String? cost});
+  $Res call({String? level, double? fee});
 }
 
 /// @nodoc
@@ -82,18 +82,18 @@ class __$$_GetRepairtEntityCopyWithImpl<$Res>
 
   @override
   $Res call({
-    Object? durability = freezed,
-    Object? cost = freezed,
+    Object? level = freezed,
+    Object? fee = freezed,
   }) {
     return _then(_$_GetRepairtEntity(
-      durability: durability == freezed
-          ? _value.durability
-          : durability // ignore: cast_nullable_to_non_nullable
+      level: level == freezed
+          ? _value.level
+          : level // ignore: cast_nullable_to_non_nullable
               as String?,
-      cost: cost == freezed
-          ? _value.cost
-          : cost // ignore: cast_nullable_to_non_nullable
-              as String?,
+      fee: fee == freezed
+          ? _value.fee
+          : fee // ignore: cast_nullable_to_non_nullable
+              as double?,
     ));
   }
 }
@@ -103,16 +103,16 @@ class __$$_GetRepairtEntityCopyWithImpl<$Res>
 class _$_GetRepairtEntity
     with DiagnosticableTreeMixin
     implements _GetRepairtEntity {
-  const _$_GetRepairtEntity({required this.durability, required this.cost});
+  const _$_GetRepairtEntity({required this.level, required this.fee});
 
   @override
-  final String? durability;
+  final String? level;
   @override
-  final String? cost;
+  final double? fee;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'GetRepairtEntity(durability: $durability, cost: $cost)';
+    return 'GetRepairtEntity(level: $level, fee: $fee)';
   }
 
   @override
@@ -120,8 +120,8 @@ class _$_GetRepairtEntity
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty('type', 'GetRepairtEntity'))
-      ..add(DiagnosticsProperty('durability', durability))
-      ..add(DiagnosticsProperty('cost', cost));
+      ..add(DiagnosticsProperty('level', level))
+      ..add(DiagnosticsProperty('fee', fee));
   }
 
   @override
@@ -129,16 +129,15 @@ class _$_GetRepairtEntity
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_GetRepairtEntity &&
-            const DeepCollectionEquality()
-                .equals(other.durability, durability) &&
-            const DeepCollectionEquality().equals(other.cost, cost));
+            const DeepCollectionEquality().equals(other.level, level) &&
+            const DeepCollectionEquality().equals(other.fee, fee));
   }
 
   @override
   int get hashCode => Object.hash(
       runtimeType,
-      const DeepCollectionEquality().hash(durability),
-      const DeepCollectionEquality().hash(cost));
+      const DeepCollectionEquality().hash(level),
+      const DeepCollectionEquality().hash(fee));
 
   @JsonKey(ignore: true)
   @override
@@ -148,13 +147,13 @@ class _$_GetRepairtEntity
 
 abstract class _GetRepairtEntity implements GetRepairtEntity {
   const factory _GetRepairtEntity(
-      {required final String? durability,
-      required final String? cost}) = _$_GetRepairtEntity;
+      {required final String? level,
+      required final double? fee}) = _$_GetRepairtEntity;
 
   @override
-  String? get durability;
+  String? get level;
   @override
-  String? get cost;
+  double? get fee;
   @override
   @JsonKey(ignore: true)
   _$$_GetRepairtEntityCopyWith<_$_GetRepairtEntity> get copyWith =>

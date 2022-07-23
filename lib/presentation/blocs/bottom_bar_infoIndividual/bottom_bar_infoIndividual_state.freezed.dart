@@ -19,8 +19,13 @@ mixin _$BottomBarInfoIndividualState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function(String gasPrice, bool successTransfer,
-            String transactionFee, GetRepairtEntity? feeRepair)
+    required TResult Function(
+            String gasPrice,
+            bool successTransfer,
+            String transactionFee,
+            GetRepairtEntity? feeRepair,
+            num? valueRepair,
+            num? cost)
         loaded,
     required TResult Function(NftLevelUp levelUp) getLevel,
     required TResult Function() upLevel,
@@ -31,8 +36,13 @@ mixin _$BottomBarInfoIndividualState {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function(String gasPrice, bool successTransfer,
-            String transactionFee, GetRepairtEntity? feeRepair)?
+    TResult Function(
+            String gasPrice,
+            bool successTransfer,
+            String transactionFee,
+            GetRepairtEntity? feeRepair,
+            num? valueRepair,
+            num? cost)?
         loaded,
     TResult Function(NftLevelUp levelUp)? getLevel,
     TResult Function()? upLevel,
@@ -43,8 +53,13 @@ mixin _$BottomBarInfoIndividualState {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function(String gasPrice, bool successTransfer,
-            String transactionFee, GetRepairtEntity? feeRepair)?
+    TResult Function(
+            String gasPrice,
+            bool successTransfer,
+            String transactionFee,
+            GetRepairtEntity? feeRepair,
+            num? valueRepair,
+            num? cost)?
         loaded,
     TResult Function(NftLevelUp levelUp)? getLevel,
     TResult Function()? upLevel,
@@ -151,8 +166,13 @@ class _$BottomBarInfoIndividualInitial
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function(String gasPrice, bool successTransfer,
-            String transactionFee, GetRepairtEntity? feeRepair)
+    required TResult Function(
+            String gasPrice,
+            bool successTransfer,
+            String transactionFee,
+            GetRepairtEntity? feeRepair,
+            num? valueRepair,
+            num? cost)
         loaded,
     required TResult Function(NftLevelUp levelUp) getLevel,
     required TResult Function() upLevel,
@@ -166,8 +186,13 @@ class _$BottomBarInfoIndividualInitial
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function(String gasPrice, bool successTransfer,
-            String transactionFee, GetRepairtEntity? feeRepair)?
+    TResult Function(
+            String gasPrice,
+            bool successTransfer,
+            String transactionFee,
+            GetRepairtEntity? feeRepair,
+            num? valueRepair,
+            num? cost)?
         loaded,
     TResult Function(NftLevelUp levelUp)? getLevel,
     TResult Function()? upLevel,
@@ -181,8 +206,13 @@ class _$BottomBarInfoIndividualInitial
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function(String gasPrice, bool successTransfer,
-            String transactionFee, GetRepairtEntity? feeRepair)?
+    TResult Function(
+            String gasPrice,
+            bool successTransfer,
+            String transactionFee,
+            GetRepairtEntity? feeRepair,
+            num? valueRepair,
+            num? cost)?
         loaded,
     TResult Function(NftLevelUp levelUp)? getLevel,
     TResult Function()? upLevel,
@@ -256,7 +286,9 @@ abstract class _$$BottomBarInfoIndividualLoadedCopyWith<$Res> {
       {String gasPrice,
       bool successTransfer,
       String transactionFee,
-      GetRepairtEntity? feeRepair});
+      GetRepairtEntity? feeRepair,
+      num? valueRepair,
+      num? cost});
 
   $GetRepairtEntityCopyWith<$Res>? get feeRepair;
 }
@@ -280,6 +312,8 @@ class __$$BottomBarInfoIndividualLoadedCopyWithImpl<$Res>
     Object? successTransfer = freezed,
     Object? transactionFee = freezed,
     Object? feeRepair = freezed,
+    Object? valueRepair = freezed,
+    Object? cost = freezed,
   }) {
     return _then(_$BottomBarInfoIndividualLoaded(
       gasPrice: gasPrice == freezed
@@ -298,6 +332,14 @@ class __$$BottomBarInfoIndividualLoadedCopyWithImpl<$Res>
           ? _value.feeRepair
           : feeRepair // ignore: cast_nullable_to_non_nullable
               as GetRepairtEntity?,
+      valueRepair: valueRepair == freezed
+          ? _value.valueRepair
+          : valueRepair // ignore: cast_nullable_to_non_nullable
+              as num?,
+      cost: cost == freezed
+          ? _value.cost
+          : cost // ignore: cast_nullable_to_non_nullable
+              as num?,
     ));
   }
 
@@ -320,7 +362,9 @@ class _$BottomBarInfoIndividualLoaded implements BottomBarInfoIndividualLoaded {
       {required this.gasPrice,
       required this.successTransfer,
       required this.transactionFee,
-      this.feeRepair});
+      this.feeRepair,
+      this.valueRepair,
+      this.cost});
 
   @override
   final String gasPrice;
@@ -330,10 +374,14 @@ class _$BottomBarInfoIndividualLoaded implements BottomBarInfoIndividualLoaded {
   final String transactionFee;
   @override
   final GetRepairtEntity? feeRepair;
+  @override
+  final num? valueRepair;
+  @override
+  final num? cost;
 
   @override
   String toString() {
-    return 'BottomBarInfoIndividualState.loaded(gasPrice: $gasPrice, successTransfer: $successTransfer, transactionFee: $transactionFee, feeRepair: $feeRepair)';
+    return 'BottomBarInfoIndividualState.loaded(gasPrice: $gasPrice, successTransfer: $successTransfer, transactionFee: $transactionFee, feeRepair: $feeRepair, valueRepair: $valueRepair, cost: $cost)';
   }
 
   @override
@@ -346,7 +394,10 @@ class _$BottomBarInfoIndividualLoaded implements BottomBarInfoIndividualLoaded {
                 .equals(other.successTransfer, successTransfer) &&
             const DeepCollectionEquality()
                 .equals(other.transactionFee, transactionFee) &&
-            const DeepCollectionEquality().equals(other.feeRepair, feeRepair));
+            const DeepCollectionEquality().equals(other.feeRepair, feeRepair) &&
+            const DeepCollectionEquality()
+                .equals(other.valueRepair, valueRepair) &&
+            const DeepCollectionEquality().equals(other.cost, cost));
   }
 
   @override
@@ -355,7 +406,9 @@ class _$BottomBarInfoIndividualLoaded implements BottomBarInfoIndividualLoaded {
       const DeepCollectionEquality().hash(gasPrice),
       const DeepCollectionEquality().hash(successTransfer),
       const DeepCollectionEquality().hash(transactionFee),
-      const DeepCollectionEquality().hash(feeRepair));
+      const DeepCollectionEquality().hash(feeRepair),
+      const DeepCollectionEquality().hash(valueRepair),
+      const DeepCollectionEquality().hash(cost));
 
   @JsonKey(ignore: true)
   @override
@@ -367,38 +420,55 @@ class _$BottomBarInfoIndividualLoaded implements BottomBarInfoIndividualLoaded {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function(String gasPrice, bool successTransfer,
-            String transactionFee, GetRepairtEntity? feeRepair)
+    required TResult Function(
+            String gasPrice,
+            bool successTransfer,
+            String transactionFee,
+            GetRepairtEntity? feeRepair,
+            num? valueRepair,
+            num? cost)
         loaded,
     required TResult Function(NftLevelUp levelUp) getLevel,
     required TResult Function() upLevel,
     required TResult Function(String message) error,
     required TResult Function() loading,
   }) {
-    return loaded(gasPrice, successTransfer, transactionFee, feeRepair);
+    return loaded(gasPrice, successTransfer, transactionFee, feeRepair,
+        valueRepair, cost);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function(String gasPrice, bool successTransfer,
-            String transactionFee, GetRepairtEntity? feeRepair)?
+    TResult Function(
+            String gasPrice,
+            bool successTransfer,
+            String transactionFee,
+            GetRepairtEntity? feeRepair,
+            num? valueRepair,
+            num? cost)?
         loaded,
     TResult Function(NftLevelUp levelUp)? getLevel,
     TResult Function()? upLevel,
     TResult Function(String message)? error,
     TResult Function()? loading,
   }) {
-    return loaded?.call(gasPrice, successTransfer, transactionFee, feeRepair);
+    return loaded?.call(gasPrice, successTransfer, transactionFee, feeRepair,
+        valueRepair, cost);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function(String gasPrice, bool successTransfer,
-            String transactionFee, GetRepairtEntity? feeRepair)?
+    TResult Function(
+            String gasPrice,
+            bool successTransfer,
+            String transactionFee,
+            GetRepairtEntity? feeRepair,
+            num? valueRepair,
+            num? cost)?
         loaded,
     TResult Function(NftLevelUp levelUp)? getLevel,
     TResult Function()? upLevel,
@@ -407,7 +477,8 @@ class _$BottomBarInfoIndividualLoaded implements BottomBarInfoIndividualLoaded {
     required TResult orElse(),
   }) {
     if (loaded != null) {
-      return loaded(gasPrice, successTransfer, transactionFee, feeRepair);
+      return loaded(gasPrice, successTransfer, transactionFee, feeRepair,
+          valueRepair, cost);
     }
     return orElse();
   }
@@ -462,12 +533,16 @@ abstract class BottomBarInfoIndividualLoaded
       {required final String gasPrice,
       required final bool successTransfer,
       required final String transactionFee,
-      final GetRepairtEntity? feeRepair}) = _$BottomBarInfoIndividualLoaded;
+      final GetRepairtEntity? feeRepair,
+      final num? valueRepair,
+      final num? cost}) = _$BottomBarInfoIndividualLoaded;
 
   String get gasPrice;
   bool get successTransfer;
   String get transactionFee;
   GetRepairtEntity? get feeRepair;
+  num? get valueRepair;
+  num? get cost;
   @JsonKey(ignore: true)
   _$$BottomBarInfoIndividualLoadedCopyWith<_$BottomBarInfoIndividualLoaded>
       get copyWith => throw _privateConstructorUsedError;
@@ -539,8 +614,13 @@ class _$GetLevelSuccess implements GetLevelSuccess {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function(String gasPrice, bool successTransfer,
-            String transactionFee, GetRepairtEntity? feeRepair)
+    required TResult Function(
+            String gasPrice,
+            bool successTransfer,
+            String transactionFee,
+            GetRepairtEntity? feeRepair,
+            num? valueRepair,
+            num? cost)
         loaded,
     required TResult Function(NftLevelUp levelUp) getLevel,
     required TResult Function() upLevel,
@@ -554,8 +634,13 @@ class _$GetLevelSuccess implements GetLevelSuccess {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function(String gasPrice, bool successTransfer,
-            String transactionFee, GetRepairtEntity? feeRepair)?
+    TResult Function(
+            String gasPrice,
+            bool successTransfer,
+            String transactionFee,
+            GetRepairtEntity? feeRepair,
+            num? valueRepair,
+            num? cost)?
         loaded,
     TResult Function(NftLevelUp levelUp)? getLevel,
     TResult Function()? upLevel,
@@ -569,8 +654,13 @@ class _$GetLevelSuccess implements GetLevelSuccess {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function(String gasPrice, bool successTransfer,
-            String transactionFee, GetRepairtEntity? feeRepair)?
+    TResult Function(
+            String gasPrice,
+            bool successTransfer,
+            String transactionFee,
+            GetRepairtEntity? feeRepair,
+            num? valueRepair,
+            num? cost)?
         loaded,
     TResult Function(NftLevelUp levelUp)? getLevel,
     TResult Function()? upLevel,
@@ -679,8 +769,13 @@ class _$UpLevelSuccess implements UpLevelSuccess {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function(String gasPrice, bool successTransfer,
-            String transactionFee, GetRepairtEntity? feeRepair)
+    required TResult Function(
+            String gasPrice,
+            bool successTransfer,
+            String transactionFee,
+            GetRepairtEntity? feeRepair,
+            num? valueRepair,
+            num? cost)
         loaded,
     required TResult Function(NftLevelUp levelUp) getLevel,
     required TResult Function() upLevel,
@@ -694,8 +789,13 @@ class _$UpLevelSuccess implements UpLevelSuccess {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function(String gasPrice, bool successTransfer,
-            String transactionFee, GetRepairtEntity? feeRepair)?
+    TResult Function(
+            String gasPrice,
+            bool successTransfer,
+            String transactionFee,
+            GetRepairtEntity? feeRepair,
+            num? valueRepair,
+            num? cost)?
         loaded,
     TResult Function(NftLevelUp levelUp)? getLevel,
     TResult Function()? upLevel,
@@ -709,8 +809,13 @@ class _$UpLevelSuccess implements UpLevelSuccess {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function(String gasPrice, bool successTransfer,
-            String transactionFee, GetRepairtEntity? feeRepair)?
+    TResult Function(
+            String gasPrice,
+            bool successTransfer,
+            String transactionFee,
+            GetRepairtEntity? feeRepair,
+            num? valueRepair,
+            num? cost)?
         loaded,
     TResult Function(NftLevelUp levelUp)? getLevel,
     TResult Function()? upLevel,
@@ -842,8 +947,13 @@ class _$BottomBarInfoIndividualError implements BottomBarInfoIndividualError {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function(String gasPrice, bool successTransfer,
-            String transactionFee, GetRepairtEntity? feeRepair)
+    required TResult Function(
+            String gasPrice,
+            bool successTransfer,
+            String transactionFee,
+            GetRepairtEntity? feeRepair,
+            num? valueRepair,
+            num? cost)
         loaded,
     required TResult Function(NftLevelUp levelUp) getLevel,
     required TResult Function() upLevel,
@@ -857,8 +967,13 @@ class _$BottomBarInfoIndividualError implements BottomBarInfoIndividualError {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function(String gasPrice, bool successTransfer,
-            String transactionFee, GetRepairtEntity? feeRepair)?
+    TResult Function(
+            String gasPrice,
+            bool successTransfer,
+            String transactionFee,
+            GetRepairtEntity? feeRepair,
+            num? valueRepair,
+            num? cost)?
         loaded,
     TResult Function(NftLevelUp levelUp)? getLevel,
     TResult Function()? upLevel,
@@ -872,8 +987,13 @@ class _$BottomBarInfoIndividualError implements BottomBarInfoIndividualError {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function(String gasPrice, bool successTransfer,
-            String transactionFee, GetRepairtEntity? feeRepair)?
+    TResult Function(
+            String gasPrice,
+            bool successTransfer,
+            String transactionFee,
+            GetRepairtEntity? feeRepair,
+            num? valueRepair,
+            num? cost)?
         loaded,
     TResult Function(NftLevelUp levelUp)? getLevel,
     TResult Function()? upLevel,
@@ -989,8 +1109,13 @@ class _$BottomBarInfoIndividualLoading
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function(String gasPrice, bool successTransfer,
-            String transactionFee, GetRepairtEntity? feeRepair)
+    required TResult Function(
+            String gasPrice,
+            bool successTransfer,
+            String transactionFee,
+            GetRepairtEntity? feeRepair,
+            num? valueRepair,
+            num? cost)
         loaded,
     required TResult Function(NftLevelUp levelUp) getLevel,
     required TResult Function() upLevel,
@@ -1004,8 +1129,13 @@ class _$BottomBarInfoIndividualLoading
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function(String gasPrice, bool successTransfer,
-            String transactionFee, GetRepairtEntity? feeRepair)?
+    TResult Function(
+            String gasPrice,
+            bool successTransfer,
+            String transactionFee,
+            GetRepairtEntity? feeRepair,
+            num? valueRepair,
+            num? cost)?
         loaded,
     TResult Function(NftLevelUp levelUp)? getLevel,
     TResult Function()? upLevel,
@@ -1019,8 +1149,13 @@ class _$BottomBarInfoIndividualLoading
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function(String gasPrice, bool successTransfer,
-            String transactionFee, GetRepairtEntity? feeRepair)?
+    TResult Function(
+            String gasPrice,
+            bool successTransfer,
+            String transactionFee,
+            GetRepairtEntity? feeRepair,
+            num? valueRepair,
+            num? cost)?
         loaded,
     TResult Function(NftLevelUp levelUp)? getLevel,
     TResult Function()? upLevel,

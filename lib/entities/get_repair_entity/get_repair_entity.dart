@@ -6,7 +6,7 @@ part 'get_repair_entity.freezed.dart';
 @freezed
 class GetRepairtEntity with _$GetRepairtEntity {
   const factory GetRepairtEntity({
-    required String? durability,
-    required String? cost,
+    required String? level,
+    required double? fee,
   }) = _GetRepairtEntity;
 }

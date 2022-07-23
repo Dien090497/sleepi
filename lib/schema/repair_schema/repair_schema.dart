@@ -5,12 +5,10 @@ part 'repair_schema.g.dart';
 @JsonSerializable()
 class RepairSchema {
   final int bedId;
-  @JsonKey(name: 'token_address')
-  final String tokenAddress;
-  final double cost;
+  final int durability;
 
 
-  RepairSchema({required this.bedId, required this.tokenAddress, required this.cost});
+  RepairSchema({required this.bedId, required this.durability});
 
   factory RepairSchema.fromJson(Map<String, dynamic> json) =>
       _$RepairSchemaFromJson(json);

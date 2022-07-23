@@ -13,6 +13,8 @@ class BottomBarInfoIndividualState with _$BottomBarInfoIndividualState {
     required bool successTransfer,
     required String transactionFee,
     GetRepairtEntity? feeRepair,
+    num? valueRepair,
+    num? cost,
   }) = BottomBarInfoIndividualLoaded;
 
   const factory BottomBarInfoIndividualState.getLevel(NftLevelUp levelUp) = GetLevelSuccess;

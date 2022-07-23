@@ -18,7 +18,6 @@ class FailureMessage extends Failure {
   factory FailureMessage.fromException(e) {
     try {
       if (e is DioError) {
-        print('${e.response?.realUri.toString()} statusCode: ${e.response?.statusCode}');
         if (e.response?.statusCode == 502 || e.response?.statusCode == 500) {
           return const FailureMessage(LocaleKeys.some_thing_wrong);
         }
