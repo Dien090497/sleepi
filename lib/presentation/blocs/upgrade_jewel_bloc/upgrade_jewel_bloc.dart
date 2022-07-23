@@ -43,11 +43,9 @@ class JewelBloc extends Bloc<JewelEvent, JewelState> {
     final result = await _fetchListJewelUC
         .call(FetchBedParam(_currentPage, _limit, categoryType));
     result.fold((l) {
-      print('on error load list   ${l.msg}');
       emit(const JewelStateLoaded(
           jewels: [], isLoadMore: false, loading: false));
     }, (success) {
-      print('load list success   ${success.length}');
       final currentState = state;
       final length = success.length;
       success.removeWhere((element) => element.isBurn !=0);
@@ -74,7 +72,6 @@ class JewelBloc extends Bloc<JewelEvent, JewelState> {
     final result = await _getInfoUpgrade
         .call(UpgradeInfoParam(event.jewels.first.level, categoryType));
     result.fold((l) {
-      print('errrpr is   ${l.msg}');
       final currentState = state;
       if (currentState is JewelStateLoaded && _currentPage != 1) {
         emit(currentState.copyWith(errorMessage: l.msg, loading: false));

@@ -13,7 +13,6 @@ import 'package:slee_fi/entities/bed_entity/bed_entity.dart';
 import 'package:slee_fi/l10n/locale_keys.g.dart';
 import 'package:slee_fi/presentation/blocs/bottom_bar_infoIndividual/bottom_bar_infoIndividual_cubit.dart';
 import 'package:slee_fi/presentation/blocs/bottom_bar_infoIndividual/bottom_bar_infoIndividual_state.dart';
-import 'package:slee_fi/presentation/screens/home/widgets/pop_up_cancel_sell.dart';
 import 'package:slee_fi/presentation/screens/home/widgets/pop_up_repair.dart';
 import 'package:slee_fi/presentation/screens/home/widgets/pop_up_transfer.dart';
 import 'package:slee_fi/presentation/screens/info_individual/widget/pop_up_sell.dart';
@@ -138,6 +137,7 @@ class BottomBarWidgetState extends State<BottomBarWidget> {
                     itemBottomBar(1, context, Ics.repair, LocaleKeys.repair,
                         () {
                       index = 1;
+                      cubit.getRepair(nftId: bedEntity.nftId);
                       showCustomDialog(
                         context,
                         children: [
@@ -147,8 +147,8 @@ class BottomBarWidgetState extends State<BottomBarWidget> {
                           ),
                         ],
                       ).then((value) {
-                        cubit.init();
                         index = -1;
+                        setState(() {});
                       });
                     }),
                     itemBottomBar(2, context, Ics.heart, LocaleKeys.mint, () {

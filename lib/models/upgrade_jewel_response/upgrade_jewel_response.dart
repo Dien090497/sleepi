@@ -10,7 +10,6 @@ class UpgradeJewelResponse {
 
   UpgradeJewelResponse(this.status,  this.nftAttribute);
   factory UpgradeJewelResponse.fromJson(Map<String, dynamic> json) {
-    print('json iss   $json');
     return _$UpgradeJewelResponseFromJson(json);
   }
 

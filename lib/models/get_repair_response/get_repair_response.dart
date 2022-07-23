@@ -6,17 +6,29 @@ part 'get_repair_response.g.dart';
 
 @JsonSerializable()
 class GetRepairResponse {
-  final String? durability;
-  final String? cost;
+  final GetRepairData data;
 
-  GetRepairResponse({this.durability, this.cost});
+  GetRepairResponse({required this.data});
 
   factory GetRepairResponse.fromJson(Map<String, dynamic> json) => _$GetRepairResponseFromJson(json);
 
   Map<String, dynamic> toJson() => _$GetRepairResponseToJson(this);
 
+}
+
+@JsonSerializable()
+class GetRepairData {
+  final int? level;
+  final double? fee;
+
+  GetRepairData({this.level, this.fee});
+
+  factory GetRepairData.fromJson(Map<String, dynamic> json) => _$GetRepairDataFromJson(json);
+
+  Map<String, dynamic> toJson() => _$GetRepairDataToJson(this);
+
   GetRepairtEntity toEntity() => GetRepairtEntity(
-        cost: cost,
-        durability: durability,
-      );
+    level: level.toString(),
+    fee: fee,
+  );
 }

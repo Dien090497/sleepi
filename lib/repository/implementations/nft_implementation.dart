@@ -229,8 +229,8 @@ class NFTImplementation extends INFTRepository {
   Future<Either<Failure, GetRepairtEntity>> getRepair(
       {required num bedId}) async {
     try {
-      final result = await _authDataSource.getRepair(bedId.toString());
-      return Right(result.toEntity());
+      final result = await _authDataSource.getRepair(bedId);
+      return Right(result.data.toEntity());
     } catch (e) {
       return Left(FailureMessage('$e'));
     }
