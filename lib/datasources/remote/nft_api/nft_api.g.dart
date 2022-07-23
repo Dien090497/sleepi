@@ -10,7 +10,7 @@ part of 'nft_api.dart';
 
 class _NftApi implements NftApi {
   _NftApi(this._dio, {this.baseUrl}) {
-    baseUrl ??= 'https://dev.sleefi.com/api/v1/nft';
+    baseUrl ??= '${Const.baseApiDev}/nft';
   }
 
   final Dio _dio;
