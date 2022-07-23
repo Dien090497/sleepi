@@ -61,3 +61,10 @@ class JewelLoading extends JewelEvent {
   @override
   List<Object?> get props => [];
 }
+
+class JewelFetchAllList extends JewelEvent {
+  const JewelFetchAllList();
+
+  @override
+  List<Object?> get props => [];
+}

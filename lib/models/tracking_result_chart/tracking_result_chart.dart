@@ -13,8 +13,8 @@ class TrackingResultDaysChart {
   @JsonKey(name: 'score_percent')
   final String scorePercent;
   final int score;
-  @JsonKey(name: 'bet_time')
-  final int betTime;
+  @JsonKey(name: 'bed_time')
+  final int bedTime;
   @JsonKey(name: 'onset_time')
   final int onsetTime;
   @JsonKey(name: 'woke_up')
@@ -33,7 +33,7 @@ class TrackingResultDaysChart {
     required this.tokenEarnSymbol,
     required this.scorePercent,
     required this.score,
-    required this.betTime,
+    required this.bedTime,
     required this.onsetTime,
     required this.wokeUp,
     required this.timeInBed,
@@ -51,7 +51,7 @@ class TrackingResultDaysChart {
         sleepDuration: sleepDuration,
         wokeUp: wokeUp,
         onsetTime: onsetTime,
-        betTime: betTime,
+        betTime: bedTime,
         timeInBed: timeInBed,
         chartData: chartData,
         tokenEarn: tokenEarn,

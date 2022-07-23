@@ -105,6 +105,7 @@ class ModalItemList extends StatelessWidget {
                             color: AppColors.light4,
                             image: item.image,
                             type: item.type,
+                            items: item,
                           ),
                         );
                       },

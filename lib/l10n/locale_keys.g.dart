@@ -467,5 +467,6 @@ abstract class  LocaleKeys {
   static const speed_up_success = 'speed_up_success';
   static const cancel_sell = 'cancel_sell';
   static const do_you_really_want_to_cancel_sell = 'do_you_really_want_to_cancel_sell';
+  static const selling = 'selling';
 
 }

@@ -12,6 +12,7 @@ import 'package:slee_fi/presentation/blocs/individual/individual_cubit.dart';
 import 'package:slee_fi/presentation/blocs/upgrade_jewel_bloc/upgrade_jewel_bloc.dart';
 import 'package:slee_fi/presentation/blocs/upgrade_jewel_bloc/upgrade_jewel_event.dart';
 import 'package:slee_fi/presentation/blocs/upgrade_jewel_bloc/upgrade_jewel_state.dart';
+import 'package:slee_fi/presentation/screens/home/widgets/pop_up_cancel_sell.dart';
 import 'package:slee_fi/presentation/screens/info_individual/widget/pop_up_sell.dart';
 import 'package:slee_fi/presentation/screens/product_detail/widgets/jewel_dialog_body.dart';
 import 'package:slee_fi/presentation/screens/product_detail/widgets/my_jewel_short_widget.dart';
@@ -57,7 +58,7 @@ class _TabJewelsDetailState extends State<TabJewelsDetail> {
                                   return GestureDetector(
                                     onTap: () {
                                       _showJewelDialog(
-                                          context, state.jewels[i],);
+                                        context, state.jewels[i],);
                                     },
                                     child: MyJewelsShortWidget(
                                         jewel: state.jewels[i]),
@@ -87,6 +88,7 @@ class _TabJewelsDetailState extends State<TabJewelsDetail> {
       padding: const EdgeInsets.all(24),
       children: [
         JewelDialogBody(
+          textOnSell: (jewel.isLock == 1 && jewel.statusNftSale == 'ON_SALE') ? LocaleKeys.cancel_sell : LocaleKeys.sell,
           jewel: jewel,
           onSellTap: () {
             Navigator.pop(context);
@@ -112,10 +114,18 @@ class _TabJewelsDetailState extends State<TabJewelsDetail> {
                     }
                   },
                   builder: (context, state) {
-                    return PopUpSell(
-                      bedEntity: jewel,
-                      cubit: cubit,
-                    );
+                    if (jewel.isLock == 1 && jewel.statusNftSale == 'ON_SALE') {
+                      return CancelSell(
+                        bedEntity: jewel,
+                        cubit: cubit,
+                      );
+                    } else {
+                      return PopUpSell(
+                        bedEntity: jewel,
+                        cubit: cubit,
+                      );
+                    }
+
                   },
                 ),
               ),

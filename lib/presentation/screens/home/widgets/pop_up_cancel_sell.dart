@@ -22,7 +22,6 @@ class CancelSell extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    cubit.getRepair(nftId: bedEntity.nftId);
     return BlocBuilder<BottomBarInfoIndividualCubit, BottomBarInfoIndividualState>(
       bloc: cubit,
       builder: (context, state) {
