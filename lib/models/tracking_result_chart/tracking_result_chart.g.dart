@@ -17,7 +17,7 @@ TrackingResultDaysChart _$TrackingResultDaysChartFromJson(
       onsetTime: json['onset_time'] as int,
       wokeUp: json['woke_up'] as int,
       timeInBed: json['time_in_bed'] as int,
-      sleepDuration: json['sleep_duration'] as int,
+      sleepDuration: (json['sleep_duration'] as num).toDouble(),
       nocturalAwaken: json['noctural_awaken'] as int?,
       chartData: (json['chart_data'] as List<dynamic>)
           .map((e) => ChartDrawDays.fromJson(e as Map<String, dynamic>))

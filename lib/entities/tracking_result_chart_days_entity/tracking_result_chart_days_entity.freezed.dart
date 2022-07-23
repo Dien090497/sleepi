@@ -24,7 +24,7 @@ mixin _$TrackingResultChartDaysEntity {
   int get onsetTime => throw _privateConstructorUsedError;
   int get wokeUp => throw _privateConstructorUsedError;
   int get timeInBed => throw _privateConstructorUsedError;
-  int get sleepDuration => throw _privateConstructorUsedError;
+  double get sleepDuration => throw _privateConstructorUsedError;
   int? get nocturalAwaken => throw _privateConstructorUsedError;
   List<ChartDrawDays> get chartData => throw _privateConstructorUsedError;
 
@@ -48,7 +48,7 @@ abstract class $TrackingResultChartDaysEntityCopyWith<$Res> {
       int onsetTime,
       int wokeUp,
       int timeInBed,
-      int sleepDuration,
+      double sleepDuration,
       int? nocturalAwaken,
       List<ChartDrawDays> chartData});
 }
@@ -112,7 +112,7 @@ class _$TrackingResultChartDaysEntityCopyWithImpl<$Res>
       sleepDuration: sleepDuration == freezed
           ? _value.sleepDuration
           : sleepDuration // ignore: cast_nullable_to_non_nullable
-              as int,
+              as double,
       nocturalAwaken: nocturalAwaken == freezed
           ? _value.nocturalAwaken
           : nocturalAwaken // ignore: cast_nullable_to_non_nullable
@@ -142,7 +142,7 @@ abstract class _$$_TrackingResultChartDaysEntityCopyWith<$Res>
       int onsetTime,
       int wokeUp,
       int timeInBed,
-      int sleepDuration,
+      double sleepDuration,
       int? nocturalAwaken,
       List<ChartDrawDays> chartData});
 }
@@ -210,7 +210,7 @@ class __$$_TrackingResultChartDaysEntityCopyWithImpl<$Res>
       sleepDuration: sleepDuration == freezed
           ? _value.sleepDuration
           : sleepDuration // ignore: cast_nullable_to_non_nullable
-              as int,
+              as double,
       nocturalAwaken: nocturalAwaken == freezed
           ? _value.nocturalAwaken
           : nocturalAwaken // ignore: cast_nullable_to_non_nullable
@@ -259,7 +259,7 @@ class _$_TrackingResultChartDaysEntity
   @override
   final int timeInBed;
   @override
-  final int sleepDuration;
+  final double sleepDuration;
   @override
   final int? nocturalAwaken;
   final List<ChartDrawDays> _chartData;
@@ -348,7 +348,7 @@ abstract class _TrackingResultChartDaysEntity
           required final int onsetTime,
           required final int wokeUp,
           required final int timeInBed,
-          required final int sleepDuration,
+          required final double sleepDuration,
           required final int? nocturalAwaken,
           required final List<ChartDrawDays> chartData}) =
       _$_TrackingResultChartDaysEntity;
@@ -370,7 +370,7 @@ abstract class _TrackingResultChartDaysEntity
   @override
   int get timeInBed;
   @override
-  int get sleepDuration;
+  double get sleepDuration;
   @override
   int? get nocturalAwaken;
   @override

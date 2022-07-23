@@ -22,7 +22,7 @@ class TrackingResultDaysChart {
   @JsonKey(name: 'time_in_bed')
   final int timeInBed;
   @JsonKey(name: 'sleep_duration')
-  final int sleepDuration;
+  final double sleepDuration;
   @JsonKey(name: 'noctural_awaken')
   final int? nocturalAwaken;
   @JsonKey(name: 'chart_data')
