@@ -165,17 +165,6 @@ class BottomBarWidgetState extends State<BottomBarWidget> {
                       setState(() {
                         index = 3;
                       });
-                      if (bedEntity.isLock == 1) {
-                        showCustomDialog(context, children: [
-                          CancelSell(
-                            bedEntity: bedEntity,
-                            cubit: cubit,
-                          ),
-                        ]).then((value) => setState(() {
-                              index = -1;
-                              setState(() {});
-                            }));
-                      } else {
                         showCustomDialog(context, children: [
                           PopUpSell(
                             bedEntity: bedEntity,
@@ -185,7 +174,6 @@ class BottomBarWidgetState extends State<BottomBarWidget> {
                               index = -1;
                               setState(() {});
                             }));
-                      }
                     }),
                     itemBottomBar(4, context, Ics.recycling, LocaleKeys.recycle,
                         () {

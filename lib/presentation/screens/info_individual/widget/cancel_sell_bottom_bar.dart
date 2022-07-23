@@ -23,7 +23,7 @@ class CancelSellBottombar extends StatelessWidget {
       : super(key: key);
   final BedEntity beds;
 
-  void _showBedDialog(BuildContext context, BedEntity beds, BottomBarInfoIndividualCubit cubit) {
+    void _showBedDialog(BuildContext context, BedEntity beds, BottomBarInfoIndividualCubit cubit) {
     showCustomAlertDialog(
       context,
       padding: const EdgeInsets.all(24),

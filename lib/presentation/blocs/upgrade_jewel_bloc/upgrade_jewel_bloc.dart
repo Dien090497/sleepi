@@ -21,13 +21,14 @@ class JewelBloc extends Bloc<JewelEvent, JewelState> {
     on<ClearJewel>(_removeJewelFromSocket);
     on<UpgradeJewel>(_upgradeJewel);
     on<JewelLoading>(_loadingJewel);
+    on<JewelFetchAllList>(_fetchAllListJewels);
   }
 
   CategoryType categoryType = CategoryType.jewel;
 
   FutureOr<void> _onInitEvent(InitEvent event, Emitter<JewelState> emit) {
     categoryType = event.categoryType;
-    add(const JewelFetchList());
+    add(const JewelFetchAllList());
   }
 
   final int _limit = 10;
@@ -36,6 +37,7 @@ class JewelBloc extends Bloc<JewelEvent, JewelState> {
   final _fetchListJewelUC = getIt<FetchUpgradeListUseCase>();
   final _getInfoUpgrade = getIt<UpgradeInfoUseCase>();
   final _upgradeJewelUseCase = getIt<UpgradeUseCase>();
+  final _fetchBedUseCase = getIt<FetchBedUseCase>();
 
   void _fetchJewels(JewelFetchList event, Emitter<JewelState> emit) async {
     final result = await _fetchListJewelUC
@@ -62,7 +64,7 @@ class JewelBloc extends Bloc<JewelEvent, JewelState> {
 
   void _refreshJewels(JewelRefreshList event, Emitter<JewelState> emit) {
     _currentPage = 1;
-    add(const JewelFetchList());
+    add(const JewelFetchAllList());
   }
 
   FutureOr<void> _addJewelToSocket(
@@ -144,5 +146,26 @@ class JewelBloc extends Bloc<JewelEvent, JewelState> {
         upgradeSuccess: null,
       ));
     }
+  }
+
+  Future<void> _fetchAllListJewels(JewelFetchAllList event, Emitter<JewelState> emit) async {
+    final result = await _fetchBedUseCase
+        .call(FetchBedParam(_currentPage, _limit, categoryType));
+    result.fold((l) {
+      emit(const JewelStateLoaded(
+          jewels: [], isLoadMore: false, loading: false));
+    }, (success) {
+      final currentState = state;
+      final length = success.length;
+      success.removeWhere((element) => element.isBurn !=0);
+      final listJewelsEntity = success.map((e) => e.toEntity()).toList();
+      if (currentState is JewelStateLoaded && _currentPage != 1) {
+        final list = currentState.jewels + listJewelsEntity;
+        emit(currentState.copyWith(jewels: list, isLoadMore: length >= _limit));
+      } else {
+        emit(JewelStateLoaded(jewels: listJewelsEntity, isLoadMore: length >= _limit));
+      }
+      _currentPage++;
+    });
   }
 }
