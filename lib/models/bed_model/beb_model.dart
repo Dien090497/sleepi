@@ -20,7 +20,7 @@ class BedModel {
 
   final String contractAddress;
 
-  final String type;
+  final String nftType;
 
   final String? jewelType;
 
@@ -64,7 +64,7 @@ class BedModel {
       this.nftName,
       this.image,
       this.contractAddress,
-      this.type,
+      this.nftType,
       this.isMint,
       this.quality,
       this.owner,
@@ -106,7 +106,7 @@ class BedModel {
         image: image,
         level: level,
         nftId: nftId,
-        type: type,
+        type: nftType,
         luck: luck.toString(),
         efficiency: efficiency.toString(),
         quality: quality.toString(),
@@ -128,7 +128,7 @@ class BedModel {
       isLock: nft?.isLock ?? 0,
       bedMint: bedMint,
       quality: quality,
-      type: type,
+      type: nftType,
       isMint: isMint,
       efficiency: double.parse('$efficiency'),
       luck: double.parse('$luck'),
