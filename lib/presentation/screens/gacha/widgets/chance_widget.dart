@@ -32,7 +32,7 @@ class ChanceWidget extends StatelessWidget {
         listener: (context, state) {
           if (state is GachaSpinFailed) {
             Navigator.pop(context, true);
-            showMessageDialog(context, state.msg);
+            showMessageDialog(context, "You don't have enough money");
           }
           if(state is GachaGetSuccess){
             Navigator.pop(context, true);
