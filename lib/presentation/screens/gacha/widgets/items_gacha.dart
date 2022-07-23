@@ -23,7 +23,7 @@ class ItemsGacha extends StatelessWidget {
     required this.typeReward,
     required this.imagePath,
     required this.onPressed,
-    this.normalGacha = true,
+    required this.normalGacha,
   })
       : super(key: key);
 
