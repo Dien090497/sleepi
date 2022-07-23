@@ -14,6 +14,7 @@ class ChartStatisticShare extends StatelessWidget {
   final TypeTimeChart typeTimeChart;
 
   Widget leftTitleWidgets(double value, TitleMeta meta) {
+
     if (value == 0) {
       return const Padding(
         padding: EdgeInsets.only(right: 10.0),
@@ -21,18 +22,33 @@ class ChartStatisticShare extends StatelessWidget {
             textAlign: TextAlign.right, style: TextStyles.lightGrey12),
       );
     }
+
     if (maxValue <= 100) {
       if (value % 20 == 0 && value != 0) {
+
         return Text( value.toString(), style: TextStyles.lightGrey12);
       } else {
         return const SizedBox();
       }
     } else {
-      if (value % 60 == 0 && value != 0) {
-        return Text( value.toString(), style: TextStyles.lightGrey12);
+      if (value < 60) {
+        if (value < 10 && value % 2 == 0) {
+          return Text( value.toString(), style: TextStyles.lightGrey12);
+        } else {
+          if (value > 10 && value % 10 == 0) {
+            return Text( value.toString(), style: TextStyles.lightGrey12);
+          } else {
+            return const SizedBox();
+          }
+        }
       } else {
-        return const SizedBox();
+        if (value % 60 == 0 && value != 0) {
+          return Text( value.toString(), style: TextStyles.lightGrey12);
+        } else {
+          return const SizedBox();
+        }
       }
+
     }
     /*Widget text;
     switch (value.toInt()) {
