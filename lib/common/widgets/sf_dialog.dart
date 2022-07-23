@@ -82,10 +82,19 @@ Future<T?> showMessageDialog<T>(BuildContext context, String message,
     padding: padding ?? const EdgeInsets.all(24),
     children: Padding(
       padding: const EdgeInsets.symmetric(vertical: 32, horizontal: 24),
-      child: SFText(
-          keyText: message,
-          textAlign: TextAlign.center,
-          style: style ?? TextStyles.bold18White),
+      child: Column(
+        children: [
+          const SFIcon(
+            Imgs.errorNoBed,
+            height: 100,
+          ),
+          const SizedBox(height: 32),
+          SFText(
+              keyText: message,
+              textAlign: TextAlign.center,
+              style: style ?? TextStyles.bold18White),
+        ],
+      ),
     ),
   );
 }
