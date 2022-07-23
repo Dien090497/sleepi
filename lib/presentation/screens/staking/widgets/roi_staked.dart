@@ -38,7 +38,7 @@ class SLFTStakedState extends State<SLFTStaked> {
   String amountPrice = '';
   int? selectedDurationIndex = 0;
 
-  List<String> days = ["1", "7", "15", "30"];
+  List<String> days = ["1", "7", "30", "60", "180", "365"];
   List<String> balance = ["100", "10000", LocaleKeys.my_balance.tr()];
 
   @override
@@ -198,12 +198,12 @@ class SLFTStakedState extends State<SLFTStaked> {
                     setState(() {
                       selectedIndex = index;
                       if(!swapText){
-                        amountPrice = checkMyBalance != null ? balance.elementAt(index) : widget.myBalance.toString();
-                        _amountEditingController.text = "${double.parse(amountPrice)/widget.priceUsd}";
+                        _amountEditingController.text  = checkMyBalance != null ? balance.elementAt(index) : widget.myBalance.toString();
+                        amountPrice= "${double.parse(_amountEditingController.text)/widget.priceUsd}";
                         widget.staked(StakedArguments(day: int.parse(dayEditingController.text), amount: double.parse(amountPrice)));
                       }else{
-                        _amountEditingController.text = checkMyBalance != null ? balance.elementAt(index) : widget.myBalance.toString();
-                        amountPrice = "${double.parse(_amountEditingController.text)/widget.priceUsd}";
+                        amountPrice = checkMyBalance != null ? balance.elementAt(index) : widget.myBalance.toString();
+                        _amountEditingController.text = "${double.parse(amountPrice)/widget.priceUsd}";
                         widget.staked(StakedArguments(day: int.parse(dayEditingController.text), amount: double.parse(_amountEditingController.text)));
                       }
                     });
