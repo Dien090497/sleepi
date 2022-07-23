@@ -22,6 +22,7 @@ class ItemsGacha extends StatelessWidget {
     required this.totalValue,
     required this.typeReward,
     required this.imagePath,
+    required this.onPressed,
     this.normalGacha = true,
   })
       : super(key: key);
@@ -37,6 +38,7 @@ class ItemsGacha extends StatelessWidget {
   final int totalValue;
   final String imagePath;
   final bool normalGacha;
+  final VoidCallback onPressed;
 
   @override
   Widget build(BuildContext context) {
@@ -78,13 +80,14 @@ class ItemsGacha extends StatelessWidget {
           singleProbability: singleProbability,
           timesProbability: timesProbability,
           normalGacha: normalGacha,
+          onPressed: onPressed,
         ),
         const SizedBox(height: 16),
         SFText(
             keyText: typeReward,
             style: TextStyles.lightGrey12),
         const SizedBox(height: 2),
-        ChanceWidget(numberOfSpin: numberOfSpin, normalGacha: normalGacha, totalValue: totalValue),
+        ChanceWidget(numberOfSpin: numberOfSpin, normalGacha: normalGacha, totalValue: totalValue, onPressed: onPressed,),
         const SizedBox(height: 28),
       ],
     );

@@ -4,6 +4,7 @@ import 'package:slee_fi/common/const/const.dart';
 import 'package:slee_fi/common/routes/app_routes.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
+import 'package:slee_fi/common/widgets/sf_alert_dialog.dart';
 import 'package:slee_fi/common/widgets/sf_buttons.dart';
 import 'package:slee_fi/common/widgets/sf_dialog.dart';
 import 'package:slee_fi/common/widgets/sf_percent_border.dart';
@@ -12,14 +13,16 @@ import 'package:slee_fi/l10n/locale_keys.g.dart';
 import 'package:slee_fi/presentation/blocs/gacha/gacha_spin_cubit.dart';
 import 'package:slee_fi/presentation/blocs/gacha/gacha_spin_state.dart';
 import 'package:slee_fi/presentation/screens/gacha/layout/gacha_animation_screen.dart';
+import 'package:slee_fi/presentation/screens/gacha/widgets/pop_up_gacha_confirm.dart';
 
 class ChanceWidget extends StatelessWidget {
   const ChanceWidget(
-      {required this.totalValue, required this.numberOfSpin, required this.normalGacha, Key? key})
+      {required this.onPressed, required this.totalValue, required this.numberOfSpin, required this.normalGacha, Key? key})
       : super(key: key);
   final int numberOfSpin;
   final int totalValue;
   final bool normalGacha;
+  final VoidCallback onPressed;
 
   @override
   Widget build(BuildContext context) {
@@ -28,10 +31,11 @@ class ChanceWidget extends StatelessWidget {
       child: BlocConsumer<GachaSpinCubit, GachaSpinState>(
         listener: (context, state) {
           if (state is GachaSpinFailed) {
+            Navigator.pop(context, true);
             showMessageDialog(context, state.msg);
           }
           if(state is GachaGetSuccess){
-            final cubit = context.read<GachaSpinCubit>();
+            Navigator.pop(context, true);
             Navigator.pushNamed(context, R.gachaAnimation,
                 arguments: GachaAnimationArguments(
                   route: R.gacha500TimesChance,
@@ -39,8 +43,7 @@ class ChanceWidget extends StatelessWidget {
                   audio: normalGacha ? Const.normalGachaAudio : Const.specialGachaAudio,
                   spinInfo: state.response,
                 )
-            );
-            cubit.init();
+            ).then((value) => onPressed());
           }
         },
         builder: (context, state) {
@@ -73,10 +76,21 @@ class ChanceWidget extends StatelessWidget {
                 text: LocaleKeys.get,
                 textStyle: TextStyles.boldWhite14,
                 gradient: AppColors.gradientGacha,
-
                 onPressed: () {
-                  normalGacha == true ? cubit.getCommon() : cubit
-                      .getSpecial();
+                  showCustomAlertDialog(context,
+                      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                      width: MediaQuery.of(context).size.width * 0.8,
+                      children:  PopupGachaConfirm(
+                        priceSpin: 0,
+                        quantity: 1,
+                        onConfirmTap: () {
+                          normalGacha == true ? cubit.getCommon() : cubit
+                              .getSpecial();
+                          Navigator.pop(context, true);
+                          showLoadingDialog(context, "Loading", barrierDismissible: true);
+                        },
+                      ));
+
                 },
               ),
             ],

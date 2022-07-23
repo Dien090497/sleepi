@@ -14,7 +14,7 @@ import 'package:slee_fi/resources/resources.dart';
 
 class PopUpCalculator extends StatefulWidget {
   final String? aprInDay;
-  final double? priceUsd;
+  final double priceUsd;
   final double myBalance;
   const PopUpCalculator({required this.myBalance, required this.priceUsd, required this.aprInDay, Key? key}) : super(key: key);
 
@@ -94,7 +94,7 @@ class _PopUpCalculatorState extends State<PopUpCalculator> {
               readonly: !isChangedRates,
               apr: widget.aprInDay,
               myBalance: widget.myBalance,
-              priceUsd: widget.priceUsd ?? 0,
+              priceUsd: widget.priceUsd,
               staked: (staked) {
                 if(staked.day == 0 && staked.amount == 0){
                   setState((){
@@ -108,7 +108,7 @@ class _PopUpCalculatorState extends State<PopUpCalculator> {
                   currentRate = double.parse(widget.aprInDay!) * staked.day * staked.amount;
                   setState((){
                     rateEditingController.text = currentRate!.formatBalanceToken;
-                    currentRatesToToken = (currentRate! / 0.2);
+                    currentRatesToToken = (currentRate! / widget.priceUsd);
                     amountStaked = staked.amount;
                     percentCurrentRatesToToken = (currentRate!/staked.amount*100);
                   });
@@ -155,7 +155,7 @@ class _PopUpCalculatorState extends State<PopUpCalculator> {
                             onChanged: (rates){
                               if(rateEditingController.text.isNotEmpty){
                                 setState((){
-                                  currentRatesToToken = double.parse(rateEditingController.text)/0.2;
+                                  currentRatesToToken = double.parse(rateEditingController.text)/widget.priceUsd;
                                   percentCurrentRatesToToken = (currentRate!/amountStaked*100);
                                 });
                               }else {

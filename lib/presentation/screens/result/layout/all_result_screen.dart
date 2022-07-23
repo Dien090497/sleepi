@@ -16,9 +16,8 @@ import 'package:slee_fi/resources/resources.dart';
 
 class GachaAllResultBedArguments {
   final GachaSpinResponse? gachaSpinInfo;
-  final List<String> images;
 
-  GachaAllResultBedArguments({this.gachaSpinInfo, required this.images});
+  GachaAllResultBedArguments({this.gachaSpinInfo});
 }
 
 class AllResultScreen extends StatelessWidget {
@@ -27,6 +26,7 @@ class AllResultScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final args = ModalRoute.of(context)?.settings.arguments as GachaAllResultBedArguments?;
+
     GachaAttributesItem? attributesItem;
     return BackgroundWidget(
       appBar: SFAppBar(

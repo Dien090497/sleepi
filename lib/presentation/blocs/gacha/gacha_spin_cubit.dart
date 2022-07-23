@@ -13,24 +13,20 @@ import 'gacha_spin_state.dart';
 class GachaSpinCubit extends Cubit<GachaSpinState> {
   GachaSpinCubit(): super(const GachaSpinState.initial());
 
-  String contractAddressTo = '';
-  double? fee;
-
   final _gachaSpinUC = getIt<GachaSpinUseCase>();
   final _gachaProbabilityUC = getIt<GachaProbabilityConfigUseCase>();
   final _gachaHistoryUC = getIt<GachaHistoryUseCase>();
   final _gachaGetCommonUC = getIt<GachaGetCommonUseCase>();
   final _gachaGetSpecialUC = getIt<GachaGetSpecialUseCase>();
 
-
   void init() async {
-    gachaProbabilityConfig();
     final result = await _gachaHistoryUC.call(NoParams());
     result.fold((l) {
       emit(GachaSpinState.fail('$l'));
     }, (success) {
       emit(GachaSpinState.gachaHistorySuccess(success));
     });
+    gachaProbabilityConfig();
   }
 
 

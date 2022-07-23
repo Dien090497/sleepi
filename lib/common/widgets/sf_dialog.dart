@@ -233,11 +233,15 @@ Future<T?> showLanguageUpdatedDialog<T>(BuildContext context, Locale locale) {
       });
 }
 
-Future<T?> showLoadingDialog<T>(BuildContext context, String message) async {
-  return showCustomDialog(
+Future<T?> showLoadingDialog<T>(BuildContext context, String message, {
+    bool barrierDismissible = false,
+}) async {
+  return showCustomAlertDialog(
     context,
-    children: [
-      Row(
+    barrierDismissible : barrierDismissible,
+    width: MediaQuery.of(context).size.width * 0.7,
+    showClosed: false,
+    children:  Row(
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
@@ -254,7 +258,7 @@ Future<T?> showLoadingDialog<T>(BuildContext context, String message) async {
           SFText(keyText: message, style: TextStyles.white16, textAlign: TextAlign.center,
           )
         ]
-    )],
+    ),
   );
 }
 
