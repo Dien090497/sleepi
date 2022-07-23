@@ -46,13 +46,12 @@ class GachaImplementation extends IGachaRepository{
 
   @override
   Future<Either<Failure, GachaSpinResponse>> gachaGetCommon() async{
-    final result = await _authDataSource.getCommonBed();
-    return Right(result);
-    /*try {
-
+    try {
+      final result = await _authDataSource.getCommonBed();
+      return Right(result);
     } catch (e) {
       return Left(FailureMessage.fromException(e));
-    }*/
+    }
   }
 
   @override

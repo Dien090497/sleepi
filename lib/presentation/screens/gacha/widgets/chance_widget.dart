@@ -76,6 +76,7 @@ class ChanceWidget extends StatelessWidget {
                 text: LocaleKeys.get,
                 textStyle: TextStyles.boldWhite14,
                 gradient: AppColors.gradientGacha,
+                disabled: numberOfSpin >= totalValue ? false : true,
                 onPressed: () {
                   showCustomAlertDialog(context,
                       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
@@ -84,13 +85,11 @@ class ChanceWidget extends StatelessWidget {
                         priceSpin: 0,
                         quantity: 1,
                         onConfirmTap: () {
-                          normalGacha == true ? cubit.getCommon() : cubit
-                              .getSpecial();
+                          normalGacha  ? cubit.getCommon() : cubit.getSpecial();
                           Navigator.pop(context, true);
-                          showLoadingDialog(context, "Loading", barrierDismissible: true);
+                          showLoadingDialog(context, "Loading");
                         },
                       ));
-
                 },
               ),
             ],
