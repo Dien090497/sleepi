@@ -4,7 +4,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:slee_fi/common/routes/app_routes.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
-import 'package:slee_fi/common/widgets/pop_up_level_up.dart';
+import 'package:slee_fi/presentation/screens/home/widgets/pop_up_cancel_sell.dart';
+import 'package:slee_fi/presentation/screens/info_individual/widget/pop_up_level_up.dart';
 import 'package:slee_fi/common/widgets/sf_alert_dialog.dart';
 import 'package:slee_fi/common/widgets/sf_dialog.dart';
 import 'package:slee_fi/common/widgets/sf_icon.dart';
@@ -19,8 +20,9 @@ import 'package:slee_fi/presentation/screens/info_individual/widget/pop_up_sell.
 import 'package:slee_fi/resources/resources.dart';
 
 class BottomBarWidget extends StatefulWidget {
-  const BottomBarWidget({Key? key, required this.bedEntity}) : super(key: key);
+  const BottomBarWidget({Key? key, required this.bedEntity, required this.onBackIndividual}) : super(key: key);
   final BedEntity bedEntity;
+  final VoidCallback onBackIndividual;
 
   @override
   State<BottomBarWidget> createState() => BottomBarWidgetState();
@@ -31,8 +33,8 @@ class BottomBarWidgetState extends State<BottomBarWidget> {
 
   late BedEntity bedEntity = widget.bedEntity;
 
-  updateBed() {
-    bedEntity = widget.bedEntity;
+  updateBed(bed) {
+    bedEntity = bed;
     setState(() {});
   }
 
@@ -62,8 +64,8 @@ class BottomBarWidgetState extends State<BottomBarWidget> {
               style: index == i
                   ? TextStyles.blue12
                   : i == 0 && bedEntity.level == 30
-                      ? TextStyles.w400LightWhite12
-                      : TextStyles.lightGrey12,
+                      ? TextStyles.lightGrey12
+                      : TextStyles.w400LightWhite12,
             ),
           ],
         ),
@@ -128,7 +130,7 @@ class BottomBarWidgetState extends State<BottomBarWidget> {
                             cubit: cubit,
                           ),
                         ).then((value) {
-                          cubit.init();
+                          widget.onBackIndividual();
                           index = -1;
                           setState(() {});
                         });
@@ -155,7 +157,6 @@ class BottomBarWidgetState extends State<BottomBarWidget> {
                       index = 2;
                       Navigator.pushNamed(context, R.mint, arguments: bedEntity)
                           .then((value) {
-                        cubit.init();
                         index = -1;
                         setState(() {});
                       });
@@ -165,21 +166,31 @@ class BottomBarWidgetState extends State<BottomBarWidget> {
                       setState(() {
                         index = 3;
                       });
+                      if (bedEntity.isLock == 1) {
                         showCustomDialog(context, children: [
-                          PopUpSell(
+                          CancelSell(
                             bedEntity: bedEntity,
                             cubit: cubit,
                           ),
                         ]).then((value) => setState(() {
                               index = -1;
-                              setState(() {});
                             }));
+                      } else {
+                        showCustomDialog(context, children: [
+                          PopUpSell(
+                            bedEntity: bedEntity,
+                            cubit: cubit,
+                          ),
+                        ]).then((value) =>
+                            setState(() {
+                              index = -1;
+                            }));
+                      }
                     }),
                     itemBottomBar(4, context, Ics.recycling, LocaleKeys.recycle,
                         () {
                       index = 4;
                       Navigator.pushNamed(context, R.recycle).then((value) {
-                        cubit.init();
                         index = -1;
                         setState(() {});
                       });
@@ -200,7 +211,6 @@ class BottomBarWidgetState extends State<BottomBarWidget> {
                           )
                         ],
                       ).then((value) {
-                        cubit.init();
                         index = -1;
                         setState(() {});
                       });

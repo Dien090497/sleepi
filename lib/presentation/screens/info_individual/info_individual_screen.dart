@@ -1,7 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:focus_detector/focus_detector.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
 import 'package:slee_fi/common/widgets/background_widget.dart';
@@ -68,115 +67,110 @@ class InfoIndividualScreen extends StatelessWidget {
                     child: BlocBuilder<IndividualCubit, IndividualState>(
                       builder: (context, state) {
                         final cubit = context.read<IndividualCubit>();
-                        return FocusDetector(
-                          onFocusGained: (){
-                            cubit.refresh();
+                        return WillPopScope(
+                          onWillPop: () {
+                            Navigator.pop(context, state.bed);
+                            return Future(() => false);
                           },
-                          child: WillPopScope(
-                            onWillPop: () {
-                              Navigator.pop(context, state.bed);
-                              return Future(() => false);
-                            },
-                            child: IndividualRefresher(
-                              child: ListView(
-                                children: [
-                                  Container(
-                                    height: 180,
-                                    width: 180,
-                                    margin:
-                                        const EdgeInsets.symmetric(vertical: 24),
-                                    child: SFIcon(state.bed.image),
-                                  ),
-                                  SocketComponent(
-                                    bedId: state.bed.id,
-                                    level: state.bed.level,
-                                  ),
-                                  const SizedBox(height: 16),
-                                  BoxInfoWidget(bed: state.bed),
-                                  const SizedBox(height: 24),
-                                  Padding(
-                                    padding: const EdgeInsets.symmetric(
-                                        horizontal: 24),
-                                    child: Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        Expanded(
-                                          child: SFText(
-                                            keyText: LocaleKeys.attributes,
-                                            style: TextStyles.bold18LightWhite,
-                                          ),
+                          child: IndividualRefresher(
+                            child: ListView(
+                              children: [
+                                Container(
+                                  height: 180,
+                                  width: 180,
+                                  margin:
+                                      const EdgeInsets.symmetric(vertical: 24),
+                                  child: SFIcon(state.bed.image),
+                                ),
+                                SocketComponent(
+                                  bedId: state.bed.id,
+                                  level: state.bed.level,
+                                ),
+                                const SizedBox(height: 16),
+                                BoxInfoWidget(bed: state.bed),
+                                const SizedBox(height: 24),
+                                Padding(
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 24),
+                                  child: Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Expanded(
+                                        child: SFText(
+                                          keyText: LocaleKeys.attributes,
+                                          style: TextStyles.bold18LightWhite,
                                         ),
-                                        SFButtonOutLined(
-                                          title: LocaleKeys.base,
-                                          textStyle: state.isBase
-                                              ? TextStyles.white14W700
-                                              : TextStyles.bold14Blue,
-                                          borderColor: state.isBase
-                                              ? AppColors.transparent
-                                              : AppColors.blue,
-                                          bgColor: state.isBase
-                                              ? AppColors.blue
-                                              : AppColors.transparent,
+                                      ),
+                                      SFButtonOutLined(
+                                        title: LocaleKeys.base,
+                                        textStyle: state.isBase
+                                            ? TextStyles.white14W700
+                                            : TextStyles.bold14Blue,
+                                        borderColor: state.isBase
+                                            ? AppColors.transparent
+                                            : AppColors.blue,
+                                        bgColor: state.isBase
+                                            ? AppColors.blue
+                                            : AppColors.transparent,
+                                        onPressed: () {
+                                          cubit.changeIsBase();
+                                        },
+                                      ),
+                                      const SizedBox(width: 8),
+                                      if (args.marketPlaceModel == null)
+                                        SFButton(
+                                          height: 38,
+                                          text: "+ ${LocaleKeys.point.tr()}",
+                                          textStyle: TextStyles.boldWhite14,
+                                          gradient:
+                                              AppColors.gradientBlueButton,
                                           onPressed: () {
-                                            cubit.changeIsBase();
+                                            _showPointDialog(
+                                              context,
+                                              bed: state.bed,
+                                              currentPoints:
+                                                  state.currentPoints,
+                                            ).then((_) {
+                                              cubit.refresh();
+                                            });
                                           },
                                         ),
-                                        const SizedBox(width: 8),
-                                        if (args.marketPlaceModel == null)
-                                          SFButton(
-                                            height: 38,
-                                            text: "+ ${LocaleKeys.point.tr()}",
-                                            textStyle: TextStyles.boldWhite14,
-                                            gradient:
-                                                AppColors.gradientBlueButton,
-                                            onPressed: () {
-                                              _showPointDialog(
-                                                context,
-                                                bed: state.bed,
-                                                currentPoints:
-                                                    state.currentPoints,
-                                              ).then((_) {
-                                                cubit.refresh();
-                                              });
-                                            },
-                                          ),
-                                      ],
+                                    ],
+                                  ),
+                                ),
+                                const SizedBox(height: 15),
+                                AttributesWidget(
+                                  bonus: state.bed.bonus,
+                                  efficiency: state.bed.efficiency,
+                                  luck: state.bed.luck,
+                                  resilience: state.bed.resilience,
+                                  special: state.bed.special,
+                                ),
+                                const SizedBox(height: 33),
+                                Container(
+                                  decoration: const BoxDecoration(
+                                    color: AppColors.dark,
+                                    borderRadius: BorderRadius.only(
+                                      topLeft: Radius.circular(40),
+                                      topRight: Radius.circular(40),
                                     ),
                                   ),
-                                  const SizedBox(height: 15),
-                                  AttributesWidget(
-                                    bonus: state.bed.bonus,
-                                    efficiency: state.bed.efficiency,
-                                    luck: state.bed.luck,
-                                    resilience: state.bed.resilience,
-                                    special: state.bed.special,
-                                  ),
-                                  const SizedBox(height: 33),
-                                  Container(
-                                    decoration: const BoxDecoration(
-                                      color: AppColors.dark,
-                                      borderRadius: BorderRadius.only(
-                                        topLeft: Radius.circular(40),
-                                        topRight: Radius.circular(40),
+                                  child: Column(
+                                    children: [
+                                      MintFromWidget(
+                                        title: LocaleKeys.minted_from,
+                                        familyData: state.nftFamily?.parent,
                                       ),
-                                    ),
-                                    child: Column(
-                                      children: [
-                                        MintFromWidget(
-                                          title: LocaleKeys.minted_from,
-                                          familyData: state.nftFamily?.parent,
-                                        ),
-                                        MintFromWidget(
-                                          title: LocaleKeys.mint,
-                                          familyData: state.nftFamily?.children,
-                                        ),
-                                      ],
-                                    ),
+                                      MintFromWidget(
+                                        title: LocaleKeys.mint,
+                                        familyData: state.nftFamily?.children,
+                                      ),
+                                    ],
                                   ),
-                                  const SizedBox(height: 80),
-                                ],
-                              ),
+                                ),
+                                const SizedBox(height: 80),
+                              ],
                             ),
                           ),
                         );
@@ -199,10 +193,14 @@ class InfoIndividualScreen extends StatelessWidget {
                     ? BottomBarMarketPlaceWidget(bed: args.marketPlaceModel!)
                     : BlocBuilder<IndividualCubit, IndividualState>(
                         builder: (context, state) {
-                          keyBottom.currentState?.updateBed();
+                          keyBottom.currentState?.updateBed(state.bed);
                           return BottomBarWidget(
-                            bedEntity: args.bed,
+                            bedEntity: state.bed,
                             key: keyBottom,
+                            onBackIndividual: (){
+                              context.read<IndividualCubit>().refresh();
+                              context.read<SocketBloc>().add(const RefreshSocket());
+                            },
                           );
                         },
                       )),

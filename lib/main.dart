@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:developer';
+import 'dart:ui';
 
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
@@ -112,6 +113,7 @@ bool onIosBackground(ServiceInstance service) {
 
 Future<void> onStart(ServiceInstance service) async {
   try {
+    DartPluginRegistrant.ensureInitialized();
     final audioPlayer = AudioPlayer();
     audioPlayer.setLoopMode(LoopMode.all);
 
@@ -124,6 +126,7 @@ Future<void> onStart(ServiceInstance service) async {
         service.setAsBackgroundService();
       });
     }
+
     service.on(Const.stopService).listen((event) async {
       if (audioPlayer.playing) {
         await audioPlayer.stop();
@@ -132,11 +135,12 @@ Future<void> onStart(ServiceInstance service) async {
       service.stopSelf();
     });
 
-    final SharedPreferences preferences = await SharedPreferences.getInstance();
+    SharedPreferences preferences = await SharedPreferences.getInstance();
     final int timeWakeUp = preferences.getInt(Const.time) ?? 0;
     final int sound = preferences.getInt(Const.sound) ?? 0;
     final DateTime wakeUp = DateTime.fromMillisecondsSinceEpoch(timeWakeUp);
-    final int time = wakeUp.difference(DateTime.now()).inMinutes;
+    final int time = wakeUp.difference(DateTime.now()).inSeconds;
+
     if (service is AndroidServiceInstance) {
       service.setForegroundNotificationInfo(
         title: "Sleep Tracking...",
@@ -145,7 +149,7 @@ Future<void> onStart(ServiceInstance service) async {
       );
     }
 
-    Timer.periodic(Duration(minutes: time), (timer) async {
+    Timer.periodic(Duration(seconds: time), (timer) async {
       if (!audioPlayer.playing) {
         await audioPlayer.setAsset(Const.soundAlarm[sound]).then((value) async {
           await audioPlayer.setVolume(1);
@@ -156,6 +160,7 @@ Future<void> onStart(ServiceInstance service) async {
       timer.cancel();
     });
   } catch (e) {
+    print('=--==-=-=$e');
     service.stopSelf();
   }
 }

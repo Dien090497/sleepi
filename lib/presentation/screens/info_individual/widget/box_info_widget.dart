@@ -128,7 +128,7 @@ class BoxInfoWidget extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 16.0),
                   child: Text(
-                    '${LocaleKeys.bed_mint.tr()} ${bed.bedMint}/${Const.bedMintMax}',
+                    '${LocaleKeys.bed_mint.tr()} ${bed.bedMint.toInt()}/${Const.bedMintMax.toInt()}',
                     style: TextStyles.white10,
                   ),
                 )

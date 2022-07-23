@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:slee_fi/common/extensions/string_x.dart';
@@ -34,7 +35,7 @@ class ItemBedBuyWidget extends StatelessWidget {
             top: 20,
             left: -30,
             child: TopLeftBanner(
-              text: item.type.reCase(StringCase.titleCase),
+              text: '${LocaleKeys.level.tr()} ${item.level}',
               textColor: qualityColor,
             ),
           ),
