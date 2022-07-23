@@ -15,7 +15,7 @@ class TrackingResultChartDaysEntity with _$TrackingResultChartDaysEntity {
     required int onsetTime,
     required int wokeUp,
     required int timeInBed,
-    required int sleepDuration,
+    required double sleepDuration,
     required int? nocturalAwaken,
     required List<ChartDrawDays> chartData,
   }) = _TrackingResultChartDaysEntity;
