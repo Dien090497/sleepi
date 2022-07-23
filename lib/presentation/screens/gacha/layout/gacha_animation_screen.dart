@@ -4,10 +4,8 @@ import 'package:lottie/lottie.dart';
 import 'package:slee_fi/common/const/const.dart';
 import 'package:slee_fi/common/routes/app_routes.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
-import 'package:slee_fi/common/style/text_styles.dart';
 import 'package:slee_fi/common/utils/random_utils.dart';
 import 'package:slee_fi/common/widgets/sf_icon.dart';
-import 'package:slee_fi/common/widgets/sf_text.dart';
 import 'package:slee_fi/di/injector.dart';
 import 'package:slee_fi/models/gacha_spin_response/gacha_attributes_item.dart';
 import 'package:slee_fi/models/gacha_spin_response/gacha_spin_response.dart';
@@ -38,10 +36,10 @@ class _GachaAnimationScreenState extends State<GachaAnimationScreen>
   late AnimationController animationController;
   final audioPlayer = AudioPlayer();
   GachaAttributesItem? attributesItem;
+  dynamic quantitySlft;
   final randomUtils = getIt<RandomUtils>();
   String image = '';
   bool isShowResult = false;
-  bool isNavigatorResult = false;
 
   Future setAudio() async {
     final args =
@@ -70,33 +68,27 @@ class _GachaAnimationScreenState extends State<GachaAnimationScreen>
               setState(() {
                 isShowResult = true;
                 image = Ics.icSlft;
+                quantitySlft = args.spinInfo!.gift.first['amount'];
               });
             }else{
               attributesItem = GachaAttributesItem.fromJson(args.spinInfo!.gift.first as Map<String, dynamic>);
               setState(() {
                 isShowResult = true;
-                isNavigatorResult = true;
                 image = attributesItem != null ? attributesItem!.image : '';
               });
             }
 
             Future.delayed(const Duration(seconds: 3), () async {
-              Navigator.pop(context);
-              if(isNavigatorResult) {
-                Navigator.pushNamed(context, R.gachaResultBed,
+              Navigator.pop(context, true);
+              Navigator.pushNamed(context, R.gachaResultBed,
                   arguments: GachaResultBedArguments(
-                      attributesItem: attributesItem, image: image));
-              }
+                      attributesItem: attributesItem, image: image , quantitySlft : quantitySlft));
             });
           } else {
-            List<String> images = [];
             Navigator.pop(context, true);
-            for (var i = 0; i > args.spinInfo!.gift.length; i++) {
-              images.add(randomUtils.gachaItem());
-            }
             Navigator.pushNamed(context, R.allResult,
                 arguments: GachaAllResultBedArguments(
-                    gachaSpinInfo: args.spinInfo, images: images));
+                    gachaSpinInfo: args.spinInfo));
           }
         }else {
           Navigator.pushNamed(context, args!.route!);
@@ -143,10 +135,7 @@ class _GachaAnimationScreenState extends State<GachaAnimationScreen>
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  SFIcon(image, width: 50, height: 50,),
-                  // isNavigatorResult ? Image.network(image) : SFIcon(image, width: 50, height: 50,),
-                  const SizedBox(height: 12,),
-                  if(isNavigatorResult == false) SFText(keyText: '${args?.spinInfo!.gift.first['amount']}', style: TextStyles.bold30White,),
+                  SFIcon(image, width: 150, height: 150,),
                 ],
               ),
             ),

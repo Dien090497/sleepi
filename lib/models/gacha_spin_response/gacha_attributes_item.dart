@@ -22,6 +22,7 @@ class GachaAttributesItem{
   final String owner;
   final String type;
   final String nftType;
+  final String? itemType;
   final String? jewelType;
   final String classNft;
   final String quality;
@@ -33,6 +34,7 @@ class GachaAttributesItem{
     required this.owner,
     required this.type,
     required this.nftType,
+    required this.itemType,
     required this.jewelType,
     required this.classNft,
     required this.quality,

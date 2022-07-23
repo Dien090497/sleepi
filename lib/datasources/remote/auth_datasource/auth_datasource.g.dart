@@ -10,7 +10,7 @@ part of 'auth_datasource.dart';
 
 class _AuthDataSource implements AuthDataSource {
   _AuthDataSource(this._dio, {this.baseUrl}) {
-    baseUrl ??= Const.baseApiDev;
+    baseUrl ??= 'https://test.sleefi.com/api/v1';
   }
 
   final Dio _dio;

@@ -1,10 +1,12 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:slee_fi/common/extensions/string_x.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
 import 'package:slee_fi/common/widgets/background_widget.dart';
 import 'package:slee_fi/common/widgets/sf_app_bar.dart';
 import 'package:slee_fi/common/widgets/sf_button_outlined.dart';
-import 'package:slee_fi/common/widgets/sf_buttons.dart';
+import 'package:slee_fi/common/widgets/sf_card.dart';
 import 'package:slee_fi/common/widgets/sf_icon.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
 import 'package:slee_fi/l10n/locale_keys.g.dart';
@@ -26,7 +28,14 @@ class AllResultDetailScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final args =
         ModalRoute.of(context)?.settings.arguments as AllResultDetailArguments?;
-
+    String? type;
+    if(args?.attributesItem?.nftType == 'item'){
+      type = args?.attributesItem?.itemType;
+    }else if (args?.attributesItem?.nftType == 'jewel'){
+      type = args?.attributesItem?.jewelType;
+    }else {
+      type = args?.attributesItem?.quality;
+    }
     return BackgroundWidget(
       appBar: SFAppBar(
         context: context,
@@ -76,27 +85,30 @@ class AllResultDetailScreen extends StatelessWidget {
                           Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              args != null && args.attributesItem!.quality.isNotEmpty ?
-                              Row(
-                                children: [
-                                  SFButton(
-                                    text: LocaleKeys.legendary,
-                                    textStyle: TextStyles.blue14,
-                                    color: Colors.white.withOpacity(0.1),
-                                    radius: 50,
-                                    height: 36,
-                                  ),
-                                  const SizedBox(
-                                    width: 15,
-                                  ),
-                                ],
-                              ) : const SizedBox(),
-                              SFButton(
-                                text: '${args?.attributesItem?.nftId}',
-                                textStyle: TextStyles.lightWhite14,
-                                color: Colors.white.withOpacity(0.1),
+                              SFCard(
                                 radius: 50,
                                 height: 36,
+                                color: AppColors.blue.withOpacity(0.15),
+                                child: Center(
+                                  child: SFText(
+                                    keyText: type ?? '',
+                                    style: TextStyles.blue14,
+                                  ),
+                                ),
+                              ),
+                              const SizedBox(
+                                width: 15,
+                              ),
+                              SFCard(
+                                radius: 50,
+                                height: 36,
+                                child: Center(
+                                  child: SFText(
+                                    keyText: '${args?.attributesItem?.nftId ?? ''}',
+                                    style: TextStyles.lightWhite14,
+                                    textAlign: TextAlign.center,
+                                  ),
+                                ),
                               ),
                             ],
                           ),
@@ -124,12 +136,34 @@ class AllResultDetailScreen extends StatelessWidget {
                           const SizedBox(height: 13),
                           Column(
                             children:  [
-                              AttributesWidget(
-                                bonus: args?.attributesItem!.bonus ?? 0,
-                                efficiency: args?.attributesItem!.efficiency ?? 0,
-                                luck: args?.attributesItem!.luck ?? 0,
-                                resilience: args?.attributesItem!.resilience ?? 0,
-                                special: args?.attributesItem!.special ?? 0,
+                              args?.attributesItem?.nftType == 'item' || args?.attributesItem?.nftType == 'jewel' ? SFCard(
+                                radius: 8,
+                                margin: EdgeInsets.zero,
+                                padding: const EdgeInsets.symmetric(vertical: 18, horizontal: 24),
+                                child: Row(
+                                  children: [
+                                    SFText(
+                                      keyText: LocaleKeys.effect,
+                                      style: TextStyles.lightGrey16,
+                                    ),
+                                    const SizedBox(width: 4),
+                                    Expanded(
+                                      child: SFText(
+                                        keyText:
+                                        '+ ${LocaleKeys.base.tr()} ${type!.reCase(StringCase.titleCase)}',
+                                        style: TextStyles.blue16,
+                                        textAlign: TextAlign.right,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              )
+                                  : AttributesWidget(
+                                bonus: args?.attributesItem?.bonus,
+                                efficiency: args?.attributesItem?.efficiency,
+                                luck: args?.attributesItem?.luck,
+                                resilience: args?.attributesItem?.resilience,
+                                special: args?.attributesItem?.special,
                               ),
                              const SizedBox(height: 76),
                             ],

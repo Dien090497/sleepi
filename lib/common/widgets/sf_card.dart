@@ -10,6 +10,7 @@ class SFCard extends StatelessWidget {
         this.child,
         this.onTap,
         this.border,
+        this.color,
         this.radius = 16,
         Key? key})
       : super(key: key);
@@ -22,6 +23,7 @@ class SFCard extends StatelessWidget {
   final VoidCallback? onTap;
   final double radius;
   final Border? border;
+  final Color? color;
 
   @override
   Widget build(BuildContext context) {
@@ -34,7 +36,7 @@ class SFCard extends StatelessWidget {
         margin: margin ?? const EdgeInsets.only(top: 12.0),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(radius),
-          color: AppColors.white.withOpacity(0.05),
+          color: color ?? AppColors.white.withOpacity(0.05),
           border: border
         ),
         child: child,

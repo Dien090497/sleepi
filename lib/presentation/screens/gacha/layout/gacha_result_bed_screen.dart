@@ -1,10 +1,11 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:slee_fi/common/extensions/string_x.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
 import 'package:slee_fi/common/widgets/background_widget.dart';
 import 'package:slee_fi/common/widgets/sf_button_outlined.dart';
-import 'package:slee_fi/common/widgets/sf_buttons.dart';
+import 'package:slee_fi/common/widgets/sf_card.dart';
 import 'package:slee_fi/common/widgets/sf_icon.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
 import 'package:slee_fi/common/widgets/topbar_common.dart';
@@ -16,16 +17,25 @@ import 'package:slee_fi/resources/resources.dart';
 class GachaResultBedArguments {
   final GachaAttributesItem? attributesItem;
   final String image;
+  final dynamic quantitySlft;
 
-  GachaResultBedArguments({this.attributesItem, required this.image});
+  GachaResultBedArguments({this.quantitySlft, this.attributesItem, required this.image});
 }
 
 class GachaResultBedScreen extends StatelessWidget {
   const GachaResultBedScreen({Key? key}) : super(key: key);
-
   @override
   Widget build(BuildContext context) {
     final args = ModalRoute.of(context)?.settings.arguments as GachaResultBedArguments?;
+
+    String? type;
+    if(args?.attributesItem?.nftType == 'item'){
+      type = args?.attributesItem?.itemType;
+    }else if (args?.attributesItem?.nftType == 'jewel'){
+      type = args?.attributesItem?.jewelType;
+    }else {
+      type = args?.attributesItem?.quality;
+    }
     return BackgroundWidget(
       child: SafeArea(
         child: Stack(
@@ -39,90 +49,130 @@ class GachaResultBedScreen extends StatelessWidget {
                     iconBack: true,
                   ),
                   const SizedBox(height: 16),
-                  Expanded(
-                    child: SingleChildScrollView(
-                      physics: const BouncingScrollPhysics(),
-                      child: Column(
-                        children: [
-                        Container(
-                            padding: const EdgeInsets.symmetric(vertical: 12),
-                            child: SFText(
-                              keyText: LocaleKeys.result,
-                              style: TextStyles.boldWhite18,
-                            ),
-                          ),
-                          Container(
-                              decoration: BoxDecoration(
-                                  image: const DecorationImage(
-                                    image: AssetImage(
-                                      Imgs.borderBed,
-                                    ),
-                                    fit: BoxFit.cover,
-                                  ),
-                                  boxShadow: [
-                                    BoxShadow(
-                                      color: AppColors.purple
-                                          .withOpacity(0.02),
-                                      spreadRadius: 3,
-                                      blurRadius: 7,
-                                      offset: const Offset(0,
-                                          3), // changes position of shadow
-                                    ),
-                                  ],
-                                  borderRadius:
-                                      BorderRadius.circular(20)),
-                              width: 180,
-                              height: 180,
-                              child:  SizedBox(
-                                child: SFIcon(args != null ? args.image : ''),
-                              )),
-                          const SizedBox(height: 12),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              SFButton(
-                                text: args?.attributesItem?.quality ?? '',
-                                textStyle: TextStyles.blue14,
-                                color: Colors.white.withOpacity(0.1),
-                                radius: 50,
-                                height: 36,
-                              ),
-                              const SizedBox(
-                                width: 15,
-                              ),
-                              SFButton(
-                                text: '${args?.attributesItem?.nftId ?? ''}',
-                                textStyle: TextStyles.white14WithOpacity,
-                                color: Colors.white.withOpacity(0.1),
-                                radius: 50,
-                                height: 36,
-                              ),
-                            ],
-                          ),
-                          const SizedBox(height: 28),
-                          SFText(
-                            keyText: LocaleKeys.attributes,
+                  SingleChildScrollView(
+                    physics: const ClampingScrollPhysics(),
+                    child: Column(
+                      children: [
+                      Container(
+                          padding: const EdgeInsets.symmetric(vertical: 12),
+                          child: SFText(
+                            keyText: LocaleKeys.result,
                             style: TextStyles.boldWhite18,
                           ),
-                          Padding(
-                            padding: const EdgeInsets.symmetric(
-                                horizontal: 24, vertical: 15),
-                            child: Column(
-                              children: [
-                                AttributesWidget(
-                                  bonus: args?.attributesItem?.bonus,
-                                  efficiency: args?.attributesItem?.efficiency,
-                                  luck: args?.attributesItem?.luck,
-                                  resilience: args?.attributesItem?.resilience,
-                                  special: args?.attributesItem?.special,
+                        ),
+                        Container(
+                            decoration: BoxDecoration(
+                                image: const DecorationImage(
+                                  image: AssetImage(
+                                    Imgs.borderBed,
+                                  ),
+                                  fit: BoxFit.cover,
                                 ),
-                               const SizedBox(height: 76),
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: AppColors.purple
+                                        .withOpacity(0.02),
+                                    spreadRadius: 3,
+                                    blurRadius: 7,
+                                    offset: const Offset(0,
+                                        3), // changes position of shadow
+                                  ),
+                                ],
+                                borderRadius:
+                                    BorderRadius.circular(20)),
+                            width: 180,
+                            height: 180,
+                            child:  SizedBox(
+                              child: SFIcon(args != null && args.attributesItem != null ? args.image : Ics.icSlft),
+                            )),
+                        const SizedBox(height: 12),
+
+                        args?.quantitySlft != null
+                            ?
+                            SFText(
+                              keyText: '${args?.quantitySlft}',
+                              style: TextStyles.bold30White,
+                            )
+                            :
+                        Column(
+                          children: [
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                SFCard(
+                                  radius: 50,
+                                  height: 36,
+                                  color: AppColors.blue.withOpacity(0.15),
+                                  child: Center(
+                                    child: SFText(
+                                      keyText: type ?? '',
+                                      style: TextStyles.blue14,
+                                    ),
+                                  ),
+                                ),
+                                const SizedBox(
+                                  width: 15,
+                                ),
+                                SFCard(
+                                  radius: 50,
+                                  height: 36,
+                                  child: Center(
+                                    child: SFText(
+                                      keyText: '${args?.attributesItem?.nftId ?? ''}',
+                                      style: TextStyles.lightWhite14,
+                                      textAlign: TextAlign.center,
+                                    ),
+                                  ),
+                                ),
                               ],
                             ),
-                          ),
+                            const SizedBox(height: 28),
+                            SFText(
+                              keyText: LocaleKeys.attributes,
+                              style: TextStyles.boldWhite18,
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.symmetric(
+                                  horizontal: 24, vertical: 15),
+                              child: Column(
+                                children: [
+                                  args?.attributesItem?.nftType == 'item' || args?.attributesItem?.nftType == 'jewel' ? SFCard(
+                                    radius: 8,
+                                    margin: EdgeInsets.zero,
+                                    padding: const EdgeInsets.symmetric(vertical: 18, horizontal: 24),
+                                    child: Row(
+                                      children: [
+                                        SFText(
+                                          keyText: LocaleKeys.effect,
+                                          style: TextStyles.lightGrey16,
+                                        ),
+                                        const SizedBox(width: 4),
+                                        Expanded(
+                                          child: SFText(
+                                            keyText:
+                                            '+ ${LocaleKeys.base.tr()} ${type!.reCase(StringCase.titleCase)}',
+                                            style: TextStyles.blue16,
+                                            textAlign: TextAlign.right,
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  )
+                                  : AttributesWidget(
+                                    bonus: args?.attributesItem?.bonus,
+                                    efficiency: args?.attributesItem?.efficiency,
+                                    luck: args?.attributesItem?.luck,
+                                    resilience: args?.attributesItem?.resilience,
+                                    special: args?.attributesItem?.special,
+                                  ),
+                                 const SizedBox(height: 76),
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
 
-                    ],
-                      ),
+                  ],
                     ),
                   ),
                 ],

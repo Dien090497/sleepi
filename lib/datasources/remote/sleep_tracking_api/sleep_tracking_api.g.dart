@@ -10,7 +10,7 @@ part of 'sleep_tracking_api.dart';
 
 class _SleepTrackingApi implements SleepTrackingApi {
   _SleepTrackingApi(this._dio, {this.baseUrl}) {
-    baseUrl ??= Const.baseApiDev;
+    baseUrl ??= 'https://test.sleefi.com/api/v1';
   }
 
   final Dio _dio;
