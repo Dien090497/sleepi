@@ -106,7 +106,7 @@ class CategoryHeader extends StatelessWidget {
                       ),
                     ),
                     Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 16.0),
+                      padding: const EdgeInsets.symmetric(horizontal: 16.0),
                       child: Text(
                         '~ ${slftPrice ?? '0.0'} USD',
                         style: TextStyles.lightGrey12,

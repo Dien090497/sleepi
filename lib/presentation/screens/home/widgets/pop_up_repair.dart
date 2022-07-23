@@ -22,10 +22,11 @@ class PopUpRepair extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    cubit.getRepair(nftId: bedEntity.nftId);
     return BlocBuilder<BottomBarInfoIndividualCubit, BottomBarInfoIndividualState>(
       bloc: cubit,
       builder: (context, state) {
+        if (state is BottomBarInfoIndividualLoaded) {
+        }
         return Stack(
           children: [
             Positioned(
@@ -47,10 +48,11 @@ class PopUpRepair extends StatelessWidget {
                   style: TextStyles.white1w700size16,
                 ),
                 SFIcon(bedEntity.image, height: 160,),
+                const SizedBox(height: 10,),
                 state is BottomBarInfoIndividualLoaded ?
                 SFText(
                   keyText: LocaleKeys.durability,
-                  suffix: ' : ${state.feeRepair?.durability ?? '--'}/100',
+                  suffix: ' : ${bedEntity.durability.toInt()}/100',
                   style: TextStyles.white16,
                 ) :
                 SFText(
@@ -62,7 +64,7 @@ class PopUpRepair extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsets.symmetric(vertical: 12),
                   child: SfSlider(
-                    value: double.parse(state.feeRepair?.durability ?? '0'),
+                    value: state.valueRepair ?? bedEntity.durability,
                     min: 0,
                     max: 100,
                     activeColor: AppColors.green,
@@ -81,7 +83,9 @@ class PopUpRepair extends StatelessWidget {
                         ),
                       ),
                     ),
-                    onChanged: (v) {},
+                    onChanged: (v) {
+                      cubit.changeRepair(valueRepair: v, durability: bedEntity.durability);
+                    },
                   ),
                 ) :
                 Padding(
@@ -113,7 +117,7 @@ class PopUpRepair extends StatelessWidget {
                 state is BottomBarInfoIndividualLoaded ?
                 SFLabelValue(
                   label: LocaleKeys.cost,
-                  value: '${state.feeRepair?.cost ?? '--'} SLFT',
+                  value: '${state.cost?.toStringAsFixed(1) ?? (((state.feeRepair?.fee ?? 0) * (100 - bedEntity.durability)).toStringAsFixed(1))  } SLFT',
                   styleValue: TextStyles.white16,
                 ) :
                 const SFLabelValue(
@@ -140,7 +144,7 @@ class PopUpRepair extends StatelessWidget {
                         text: LocaleKeys.confirm,
                         onPressed: () {
                           if (state is BottomBarInfoIndividualLoaded) {
-                            cubit.repairNFT(cost: state.feeRepair?.cost ?? '', bedId: bedEntity.nftId);
+                            cubit.repairNFT(bedId: bedEntity.nftId, durability: state.valueRepair?.toInt() ?? (100 - bedEntity.durability.toInt()));
                           }
                           Navigator.pop(context);
                         },

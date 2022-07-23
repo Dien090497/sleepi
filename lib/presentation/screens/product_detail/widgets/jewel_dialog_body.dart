@@ -102,6 +102,7 @@ class JewelDialogBody extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 24),
+            (jewel.isLock != 2 && jewel.statusNftSale != null) ?
             Row(
               children: [
                 Expanded(
@@ -122,7 +123,7 @@ class JewelDialogBody extends StatelessWidget {
                   width: double.infinity,
                 )),
               ],
-            ),
+            ) : const SizedBox(),
           ],
         ),
       ],

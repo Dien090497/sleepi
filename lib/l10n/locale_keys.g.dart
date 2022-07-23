@@ -468,5 +468,6 @@ abstract class  LocaleKeys {
   static const cancel_sell = 'cancel_sell';
   static const do_you_really_want_to_cancel_sell = 'do_you_really_want_to_cancel_sell';
   static const consume_and_turn_gacha_time = 'consume_and_turn_gacha_time';
+  static const selling = 'selling';
 
 }

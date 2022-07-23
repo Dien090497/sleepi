@@ -9,6 +9,7 @@ import 'package:slee_fi/common/style/text_styles.dart';
 import 'package:slee_fi/common/widgets/cached_image.dart';
 import 'package:slee_fi/common/widgets/sf_percent_border.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
+import 'package:slee_fi/entities/bed_entity/bed_entity.dart';
 import 'package:slee_fi/l10n/locale_keys.g.dart';
 import 'package:slee_fi/presentation/screens/product_detail/widgets/top_left_banner.dart';
 
@@ -20,7 +21,8 @@ class MyItemsShortWidget extends StatelessWidget {
       Key? key,
       required this.level,
       required this.type,
-      this.quality})
+      this.quality,
+      required this.items})
       : super(key: key);
 
   final String image;
@@ -29,6 +31,7 @@ class MyItemsShortWidget extends StatelessWidget {
   final Color? color;
   final String name;
   final String? quality;
+  final BedEntity items;
 
   @override
   Widget build(BuildContext context) {
@@ -51,6 +54,21 @@ class MyItemsShortWidget extends StatelessWidget {
               backgroundColor: qualityColor.withOpacity(0.1),
             ),
           ),
+          (items.isLock == 1 && items.statusNftSale == 'ON_SALE' ) ? Positioned(
+              top: 14,
+              right: 10,
+              child: Container(
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(10),
+                  color: AppColors.yellow,
+                ),
+                padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 5),
+                child: SFText(
+                  keyText: LocaleKeys.selling,
+                  style: TextStyles.white1w700size12,
+                ),
+              )
+          ) : const SizedBox(),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16.0),
             child: Column(

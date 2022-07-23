@@ -8,13 +8,11 @@ part of 'repair_schema.dart';
 
 RepairSchema _$RepairSchemaFromJson(Map<String, dynamic> json) => RepairSchema(
       bedId: json['bedId'] as int,
-      tokenAddress: json['token_address'] as String,
-      cost: (json['cost'] as num).toDouble(),
+      durability: json['durability'] as int,
     );
 
 Map<String, dynamic> _$RepairSchemaToJson(RepairSchema instance) =>
     <String, dynamic>{
       'bedId': instance.bedId,
-      'token_address': instance.tokenAddress,
-      'cost': instance.cost,
+      'durability': instance.durability,
     };

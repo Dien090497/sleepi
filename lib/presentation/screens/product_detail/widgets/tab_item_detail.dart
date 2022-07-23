@@ -12,6 +12,7 @@ import 'package:slee_fi/presentation/blocs/upgrade_jewel_bloc/upgrade_jewel_bloc
 import 'package:slee_fi/presentation/blocs/upgrade_jewel_bloc/upgrade_jewel_event.dart';
 import 'package:slee_fi/presentation/blocs/upgrade_jewel_bloc/upgrade_jewel_state.dart';
 import 'package:slee_fi/presentation/screens/home/widgets/my_item_short_widget.dart';
+import 'package:slee_fi/presentation/screens/home/widgets/pop_up_cancel_sell.dart';
 import 'package:slee_fi/presentation/screens/info_individual/widget/pop_up_sell.dart';
 import 'package:slee_fi/presentation/screens/product_detail/widgets/jewel_dialog_body.dart';
 import 'package:slee_fi/presentation/screens/product_detail/widgets/upgrade_tab.dart';
@@ -62,7 +63,8 @@ class TabItemDetail extends StatelessWidget {
                                         image: state.jewels[i].image,
                                         quality: state.jewels[i].quality,
                                         level: state.jewels[i].level,
-                                        type: state.jewels[i].type),
+                                        type: state.jewels[i].type,
+                                        items: state.jewels[i],),
                                   );
                                 },
                               );
@@ -88,6 +90,7 @@ class TabItemDetail extends StatelessWidget {
       padding: const EdgeInsets.all(24),
       children: [
         JewelDialogBody(
+          textOnSell: (items.isLock == 1 && items.statusNftSale == 'ON_SALE') ? LocaleKeys.cancel_sell : LocaleKeys.sell,
           jewel: items,
           onSellTap: () {
             final cubit = BottomBarInfoIndividualCubit()..init();
@@ -97,10 +100,11 @@ class TabItemDetail extends StatelessWidget {
                 child: BlocConsumer<BottomBarInfoIndividualCubit, BottomBarInfoIndividualState>(
                   listener: (context, state) {
                     if (state is BottomBarInfoIndividualError) {
+                      Navigator.pop(context);
+                      Navigator.pop(context);
                       showMessageDialog(context, state.message);
                     }
                     if (state is BottomBarInfoIndividualLoaded) {
-                      print('state123 ${state.successTransfer}');
                       if (state.successTransfer) {
                         showSuccessfulDialog(context, null, onBackPress: () {
                           Navigator.pushNamedAndRemoveUntil(
@@ -113,10 +117,17 @@ class TabItemDetail extends StatelessWidget {
                     }
                   },
                   builder: (context, state) {
-                    return PopUpSell(
-                      bedEntity: items,
-                      cubit: cubit,
-                    );
+                    if (items.isLock == 1 && items.statusNftSale == 'ON_SALE') {
+                      return CancelSell(
+                        bedEntity: items,
+                        cubit: cubit,
+                      );
+                    } else {
+                      return PopUpSell(
+                        bedEntity: items,
+                        cubit: cubit,
+                      );
+                    }
                   },
                 ),
               ),

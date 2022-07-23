@@ -125,7 +125,6 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
       (r) async {
         _currentPageBed++;
         if (currentState is HomeLoaded) {
-          print('### refresh ${await _getStatusTracking()}');
           emit(currentState.copyWith(
             loading: false,
             errorMessage: '',

@@ -26,7 +26,6 @@ class ListBedResponse {
   ListBedResponse(this.list, this.count);
 
   factory ListBedResponse.fromJson(Map<String, dynamic> json) {
-    print('json is    $json');
     return _$ListBedResponseFromJson(json);
   }
 
