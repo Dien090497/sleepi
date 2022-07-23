@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_background_service/flutter_background_service.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:focus_detector/focus_detector.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:slee_fi/common/const/const.dart';
 import 'package:slee_fi/common/extensions/num_ext.dart';
 import 'package:slee_fi/common/routes/app_routes.dart';
@@ -70,8 +69,6 @@ class _TrackingScreenState extends State<TrackingScreen> {
       DateTime wakeUp = DateTime.fromMillisecondsSinceEpoch(args.timeWakeUp);
       timeStart = DateTime.fromMillisecondsSinceEpoch(args.timeStart);
       time = wakeUp.difference(timeStart).inMinutes;
-      SharedPreferences preferences = await SharedPreferences.getInstance();
-      await preferences.setInt(Const.time, args.timeWakeUp);
       earn =
           (DateTime.now().difference(timeStart).inMinutes) * (totalEarn / time);
       timeAlarm =
@@ -129,12 +126,11 @@ class _TrackingScreenState extends State<TrackingScreen> {
 
             return FocusDetector(
               onFocusGained: () async {
-                if (!(await service.isRunning())) {
-                  service.invoke(Const.setAsForeground);
-                  service.startService();
-                }
+                init();
               },
-              onFocusLost: () {},
+              onFocusLost: () {
+                _timer.cancel();
+              },
               child: Stack(
                 children: [
                   BackgroundWidget(

@@ -35,7 +35,7 @@ class MintCubit extends Cubit<MintState> {
     result.fold((l) {
       emit(MintState.error('$l'));
     }, (r) {
-      r.removeWhere((element) => element.nftId == bedParentId1);
+      r.removeWhere((element) => element.nftId == bedParentId1 || element.nft!.isLock == 1);
       final currentState = state;
       if (currentState is MintStateLoaded) {
         emit(MintState.loaded(
