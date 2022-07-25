@@ -8,7 +8,7 @@ class LuckyBoxEntity with _$LuckyBoxEntity {
     required String openCost,
     required String speedUpCost,
     required int isOpen,
-    required int waitingTime,
+    required String waitingTime,
 
 }) = _LuckyBoxEntity;
 }
