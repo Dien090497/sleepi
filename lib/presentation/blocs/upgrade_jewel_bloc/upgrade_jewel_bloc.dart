@@ -34,6 +34,7 @@ class JewelBloc extends Bloc<JewelEvent, JewelState> {
   }
 
   final int _limit = 10;
+  final int _limitAvailable = 50;
   int _currentPage = 1;
   int _currentPageAvailable = 1;
 
@@ -49,7 +50,7 @@ class JewelBloc extends Bloc<JewelEvent, JewelState> {
     if (_isLoading) return;
     _isLoading = true;
     final result = await _fetchListJewelUC
-        .call(FetchBedParam(_currentPageAvailable, _limit, categoryType));
+        .call(FetchBedParam(_currentPageAvailable, _limitAvailable, categoryType));
     _isLoading = false;
     result.fold((l) {
       emit(const JewelStateLoaded(
@@ -66,10 +67,10 @@ class JewelBloc extends Bloc<JewelEvent, JewelState> {
         final list = currentState.jewelsAvailable + success;
 
         emit(currentState.copyWith(
-            jewelsAvailable: list, isLoadMoreAvailable: length >= _limit));
+            jewelsAvailable: list, isLoadMoreAvailable: length >= _limitAvailable));
       } else {
         emit(JewelStateLoaded(
-            jewelsAvailable: success, isLoadMoreAvailable: length >= _limit));
+            jewelsAvailable: success, isLoadMoreAvailable: length >= _limitAvailable));
       }
 
       _currentPageAvailable++;

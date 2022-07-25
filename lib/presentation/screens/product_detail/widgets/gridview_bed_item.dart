@@ -1,6 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:slee_fi/common/const/const.dart';
 import 'package:slee_fi/common/extensions/string_x.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
@@ -70,21 +71,23 @@ class GridViewBedItem extends StatelessWidget {
                     textColor: qualityColor,
                   ),
                 ),
-                (beds[i].isLock == 1 && beds[i].statusNftSale == 'ON_SALE' ) ? Positioned(
-                    top: 14,
-                    right: 10,
-                    child: Container(
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(10),
-                        color: AppColors.yellow,
-                      ),
-                      padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 5),
-                      child: SFText(
-                        keyText: LocaleKeys.selling,
-                        style: TextStyles.white1w700size12,
-                      ),
-                    )
-                ) : const SizedBox(),
+                (beds[i].isLock == 1 && beds[i].statusNftSale == 'ON_SALE')
+                    ? Positioned(
+                        top: 14,
+                        right: 10,
+                        child: Container(
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(10),
+                            color: AppColors.yellow,
+                          ),
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 5, vertical: 5),
+                          child: SFText(
+                            keyText: LocaleKeys.selling,
+                            style: TextStyles.white1w700size12,
+                          ),
+                        ))
+                    : const SizedBox(),
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 16.0),
                   child: Column(
@@ -126,8 +129,10 @@ class GridViewBedItem extends StatelessWidget {
                         ],
                       ),
                       SizedBox(height: 4.h),
-                      const SFPercentBorderGradient(
-                          valueActive: 70, totalValue: 100),
+                      SFPercentBorderGradient(
+                        valueActive: bed.bedMint.toDouble(),
+                        totalValue: Const.bedMintMax,
+                      ),
                       const SizedBox(height: 12),
                     ],
                   ),
