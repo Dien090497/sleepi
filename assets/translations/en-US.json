@@ -204,7 +204,7 @@
   "time": "Time",
   "use_item": "Use item",
   "range": "Alarm Range",
-  "alarm_bell": "Alarm: Bell",
+  "alarm_bell": "Alarm: Sound {}",
   "item_list": "Item List",
   "bedbox": "Bed Box",
   "bed_boxes": "Bed boxes",
