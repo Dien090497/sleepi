@@ -23,6 +23,7 @@ class JewelBloc extends Bloc<JewelEvent, JewelState> {
     on<JewelLoading>(_loadingJewel);
     on<JewelFetchAllList>(_fetchAllListJewels);
     on<JewelRefreshListAvailable>(_onRefreshAvailableJewels);
+    on<ClearJewelSuccess>(_clearJewelUpgraded);
   }
 
   CategoryType categoryType = CategoryType.jewel;
@@ -197,5 +198,13 @@ class JewelBloc extends Bloc<JewelEvent, JewelState> {
           .copyWith(isLoadMoreAvailable: true, jewelsAvailable: []));
     }
     add(const JewelFetchListAvailable());
+  }
+
+  FutureOr<void> _clearJewelUpgraded(
+      ClearJewelSuccess event, Emitter<JewelState> emit) {
+    final currentState = state;
+    if (currentState is JewelStateLoaded) {
+      emit(currentState.copyWith(upgradeSuccess: null));
+    }
   }
 }

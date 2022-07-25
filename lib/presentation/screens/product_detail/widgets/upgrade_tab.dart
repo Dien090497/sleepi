@@ -33,7 +33,9 @@ class UpGradeTab extends StatelessWidget {
       listener: (context, state) {
         if (state is JewelStateLoaded) {
           if (state.errorMessage?.isNotEmpty == true) {
-            showMessageDialog(context, state.errorMessage!);
+            showMessageDialog(context, state.errorMessage!).then((value) {
+              context.read<JewelBloc>().add(const ClearJewelSuccess());
+            });
           }
           if (state.upgradeSuccess != null) {
             showCustomDialog(

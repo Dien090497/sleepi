@@ -75,3 +75,9 @@ class JewelFetchAllList extends JewelEvent {
   @override
   List<Object?> get props => [];
 }
+class ClearJewelSuccess extends JewelEvent {
+  const ClearJewelSuccess();
+
+  @override
+  List<Object?> get props => [];
+}
