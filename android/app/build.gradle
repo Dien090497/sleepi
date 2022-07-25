@@ -95,8 +95,11 @@ android {
 
     buildTypes {
         release {
-            // Signing with the debug keys for now, so `flutter run --release` works.
             signingConfig signingConfigs.release
+            shrinkResources true
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            ndk { debugSymbolLevel 'FULL' }
         }
     }
 }

@@ -21,7 +21,8 @@ class Const {
   static const String linkTreeUrl = 'https://linktr.ee/sleefi';
   static const String litePaperUrl = 'https://sleefi.com/litepaper';
   static const String avascanUrl = 'https://avascan.info/';
-  static const String binanceUrl = 'https://www.binance.com/';
+  static const String binanceUrlEn = 'https://accounts.binance.com/en/register?ref=Y528ROVY';
+  static const String binanceUrlJa = 'https://accounts.binance.com/ja/register?ref=Y528ROVY';
   static const String okCoinUrl = 'https://www.okcoin.jp/';
   static const String contractRouterTestNet =
       '0xd7f655E3376cE2D7A2b08fF01Eb3B1023191A901';

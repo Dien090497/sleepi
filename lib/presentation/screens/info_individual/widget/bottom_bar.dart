@@ -56,7 +56,7 @@ class BottomBarWidgetState extends State<BottomBarWidget> {
               icon,
               color: index == i
                   ? AppColors.blue
-                  : i == 0 && bedEntity.level == 30
+                  : i == 0 && bedEntity.level == 30 || i == 2 && bedEntity.bedMint == 7
                       ? AppColors.lightGrey
                       : AppColors.greyBottomIndividual,
             ),
@@ -65,7 +65,7 @@ class BottomBarWidgetState extends State<BottomBarWidget> {
               keyText: key,
               style: index == i
                   ? TextStyles.blue12
-                  : i == 0 && bedEntity.level == 30
+                  : i == 0 && bedEntity.level == 30 || i == 2 && bedEntity.bedMint == 7
                       ? TextStyles.lightGrey12
                       : TextStyles.w400LightWhite12,
             ),

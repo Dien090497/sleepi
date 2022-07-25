@@ -1,6 +1,5 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:slee_fi/common/extensions/bed_entity_x.dart';
 import 'package:slee_fi/common/extensions/string_x.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
@@ -69,23 +68,41 @@ class JewelDialogBodyUpgradeSuccess extends StatelessWidget {
             ),
             const SizedBox(height: 32),
             SFCard(
+              radius: 8,
               margin: EdgeInsets.zero,
               padding: const EdgeInsets.symmetric(vertical: 24, horizontal: 18),
               child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  SFText(
+                    keyText: LocaleKeys.attributes,
+                    style: TextStyles.lightGrey16,
+                  ),
+                  SFText(
+                    keyText: jewel.type,
+                    style: TextStyles.blue16,
+                    textAlign: TextAlign.right,
+                  )
+                ],
+              ),
+            ),
+            const SizedBox(height: 8),
+            SFCard(
+              radius: 8,
+              margin: EdgeInsets.zero,
+              padding: const EdgeInsets.symmetric(vertical: 24, horizontal: 18),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   SFText(
                     keyText: LocaleKeys.effect,
                     style: TextStyles.lightGrey16,
                   ),
-                  const SizedBox(width: 4),
-                  Expanded(
-                    child: SFText(
-                      keyText:
-                          '${jewel.infoBuff}% ${LocaleKeys.base.tr()} ${jewel.type.tr()}',
-                      style: TextStyles.blue16,
-                      textAlign: TextAlign.right,
-                    ),
-                  ),
+                  SFText(
+                    keyText: '+${jewel.percentEffect}%',
+                    style: TextStyles.blue16,
+                    textAlign: TextAlign.right,
+                  )
                 ],
               ),
             ),

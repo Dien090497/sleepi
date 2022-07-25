@@ -31,10 +31,15 @@ class LuckyBoxCubit extends Cubit<LuckyBoxState> {
   }
 
   void fetchLuckyBox() async {
+    print('run to fetch lucky box');
     var result = await _fetchLuckyBoxUC.call(NoParams());
     result.fold((l) {
+      print('run to fetch lucky box failed ${l.msg}');
+
       emit(state.copyWith(luckyBoxes: []));
     }, (r) {
+      print('run to fetch lucky box success  ${r.length}');
+
       emit(state.copyWith(luckyBoxes: r.map((e) => e.toEntity()).toList()));
     });
   }
