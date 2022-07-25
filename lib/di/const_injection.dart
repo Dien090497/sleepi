@@ -8,7 +8,7 @@ abstract class ConstInjection {
 
   @prod
   @Named('baseUrl')
-  String get baseUrlProd => 'https://stg.sleefi.com/api/v1';
+  String get baseUrlProd => 'https://staging.sleefi.com/api/v1';
 
   @test
   @Named('baseUrl')

@@ -207,16 +207,18 @@ Future<_i1.GetIt> $initGetIt(_i1.GetIt get,
       () => registerModule.isar(get<_i10.Directory>()),
       preResolve: true);
   gh.singleton<_i16.IsarDataSource>(_i16.IsarDataSource(get<_i15.Isar>()));
+  gh.factory<List<String>>(() => constInjection.listNFTAddressTestNet,
+      instanceName: 'nftAddresses', registerFor: {_test});
   gh.factory<_i17.NetworkConnectionDataSource>(
       () => _i17.NetworkConnectionDataSource(get<_i5.Connectivity>()));
   gh.factory<_i18.RandomUtils>(() => _i18.RandomUtils());
   await gh.factoryAsync<_i19.SharedPreferences>(() => registerModule.sharedPref,
       preResolve: true);
   gh.factory<_i13.StorageKeys>(() => _i13.StorageKeys());
-  gh.factory<String>(() => constInjection.baseUrlStg,
-      instanceName: 'baseUrl', registerFor: {_test});
   gh.factory<String>(() => constInjection.baseUrlDev,
       instanceName: 'baseUrl', registerFor: {_dev});
+  gh.factory<String>(() => constInjection.baseUrlStg,
+      instanceName: 'baseUrl', registerFor: {_test});
   gh.factory<String>(() => constInjection.baseUrlProd,
       instanceName: 'baseUrl', registerFor: {_prod});
   gh.factory<_i20.ToastUtils>(() => _i20.ToastUtils());
