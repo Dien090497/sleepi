@@ -13,6 +13,8 @@ import 'package:slee_fi/presentation/screens/gacha/widgets/probability_widget.da
 class ItemsGacha extends StatelessWidget {
   const ItemsGacha({Key? key,
     required this.dialogData,
+    required this.costSingle,
+    required this.costMultiple,
     required this.title,
     required this.singleGachaImages,
     required this.timesGachaImages,
@@ -36,6 +38,8 @@ class ItemsGacha extends StatelessWidget {
   final int timesProbability;
   final int numberOfSpin;
   final int totalValue;
+  final int costSingle;
+  final int costMultiple;
   final String imagePath;
   final bool normalGacha;
   final VoidCallback onPressed;
@@ -79,6 +83,8 @@ class ItemsGacha extends StatelessWidget {
           timesGachaImages: timesGachaImages,
           singleProbability: singleProbability,
           timesProbability: timesProbability,
+          costSingle: costSingle,
+          costMultiple: costMultiple,
           normalGacha: normalGacha,
           onPressed: onPressed,
         ),

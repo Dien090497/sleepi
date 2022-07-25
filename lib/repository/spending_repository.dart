@@ -10,6 +10,7 @@ abstract class ISpendingRepository {
     required double amount,
     required Credentials owner,
     required String addressContract,
+    required String type,
   });
 
   Future<Either<Failure, String>> approve({

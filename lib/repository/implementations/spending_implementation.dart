@@ -4,11 +4,14 @@ import 'package:dartz/dartz.dart';
 import 'package:injectable/injectable.dart';
 import 'package:slee_fi/common/const/const.dart';
 import 'package:slee_fi/common/extensions/num_ext.dart';
+import 'package:slee_fi/datasources/local/get_storage_datasource.dart';
+import 'package:slee_fi/datasources/local/history_datasource.dart';
 import 'package:slee_fi/datasources/local/secure_storage.dart';
 import 'package:slee_fi/datasources/remote/auth_datasource/auth_datasource.dart';
 import 'package:slee_fi/datasources/remote/network/spending_datasource.dart';
 import 'package:slee_fi/entities/staking/staking_entity.dart';
 import 'package:slee_fi/failures/failure.dart';
+import 'package:slee_fi/models/isar_models/history_isar/history_isar_model.dart';
 import 'package:slee_fi/models/staking_info_response/staking_info_response.dart';
 import 'package:slee_fi/repository/spending_repository.dart';
 import 'package:slee_fi/schema/stacking_schema/stacking_schema.dart';
@@ -19,9 +22,11 @@ class SpendingImplementation extends ISpendingRepository {
   final SpendingDataSource _spendingDataSource;
   final AuthDataSource _authDataSource;
   final SecureStorage _secureStorage;
+  final GetStorageDataSource _getStorageDataSource;
+  final HistoryDataSource _historyDataSource;
 
   SpendingImplementation(
-      this._spendingDataSource, this._authDataSource, this._secureStorage);
+      this._spendingDataSource, this._authDataSource, this._secureStorage, this._getStorageDataSource, this._historyDataSource);
 
   @override
   Future<Either<Failure, String>> depositToken({
@@ -29,6 +34,7 @@ class SpendingImplementation extends ISpendingRepository {
     required Credentials owner,
     required String addressContract,
     required int userId,
+    required String type,
   }) async {
     try {
       final amountWei = BigInt.from(amount * pow(10, 18));
@@ -43,6 +49,16 @@ class SpendingImplementation extends ISpendingRepository {
           transaction: Transaction(value: EtherAmount.inWei(amountWei)),
           spendingAddress: await _secureStorage.readAddressContract() ?? '',
         );
+        if(hash.isNotEmpty){
+          final chainId = _getStorageDataSource.getCurrentChainId();
+          final model = HistoryIsarModel(
+              transactionHash: hash,
+              chainId: chainId!,
+              addressTo: addressContract,
+              tokenSymbol: type
+          );
+          await _historyDataSource.putHistory(model);
+        }
         return Right(hash);
       }
       final token = _spendingDataSource.token(addressContract);
@@ -53,6 +69,16 @@ class SpendingImplementation extends ISpendingRepository {
         userId: BigInt.from(userId),
         spendingAddress: await _secureStorage.readAddressContract() ?? '',
       );
+      if(hash.isNotEmpty){
+        final chainId = _getStorageDataSource.getCurrentChainId();
+        final model = HistoryIsarModel(
+            transactionHash: hash,
+            chainId: chainId!,
+            addressTo: addressContract,
+            tokenSymbol: type
+        );
+        await _historyDataSource.putHistory(model);
+      }
       return Right(hash);
     } catch (e) {
       return Left(FailureMessage('$e'));

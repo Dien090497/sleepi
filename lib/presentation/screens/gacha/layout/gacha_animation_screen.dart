@@ -9,6 +9,7 @@ import 'package:slee_fi/common/widgets/sf_icon.dart';
 import 'package:slee_fi/di/injector.dart';
 import 'package:slee_fi/models/gacha_spin_response/gacha_attributes_item.dart';
 import 'package:slee_fi/models/gacha_spin_response/gacha_spin_response.dart';
+import 'package:slee_fi/presentation/screens/gacha/layout/gacha_chane_500_screen.dart';
 import 'package:slee_fi/presentation/screens/result/layout/all_result_screen.dart';
 import 'package:slee_fi/resources/resources.dart';
 
@@ -16,12 +17,12 @@ import 'gacha_result_bed_screen.dart';
 
 class GachaAnimationArguments {
   final GachaSpinResponse? spinInfo;
-  final String? route;
+  final bool isGetSpin;
   final String audio;
   final String animation;
 
   GachaAnimationArguments(
-      {required this.spinInfo, required this.animation, required this.audio, this.route});
+      {required this.spinInfo, required this.animation, required this.audio, this.isGetSpin = false});
 }
 
 class GachaAnimationScreen extends StatefulWidget {
@@ -45,7 +46,7 @@ class _GachaAnimationScreenState extends State<GachaAnimationScreen>
     final args =
         ModalRoute.of(context)?.settings.arguments as GachaAnimationArguments?;
     audioPlayer.setAsset(args?.audio ?? Const.normalGachaAudio);
-    audioPlayer.setLoopMode(LoopMode.all);
+    // audioPlayer.setLoopMode(LoopMode.all);
     audioPlayer.setVolume(1);
     audioPlayer.play();
   }
@@ -80,8 +81,11 @@ class _GachaAnimationScreenState extends State<GachaAnimationScreen>
 
             Future.delayed(const Duration(seconds: 3), () async {
               Navigator.pop(context, true);
-              Navigator.pushNamed(context, R.gachaResultBed,
-                  arguments: GachaResultBedArguments(
+              Navigator.pushNamed(context, args.isGetSpin ? R.gacha500TimesChance : R.gachaResultBed,
+                  arguments: args.isGetSpin
+                  ? GachaChance500Arguments(
+                      attributesItem: attributesItem, image: image )
+                  : GachaResultBedArguments(
                       attributesItem: attributesItem, image: image , quantitySlft : quantitySlft));
             });
           } else {
@@ -91,7 +95,7 @@ class _GachaAnimationScreenState extends State<GachaAnimationScreen>
                     gachaSpinInfo: args.spinInfo));
           }
         }else {
-          Navigator.pushNamed(context, args!.route!);
+         return;
         }
         animationController.reset();
       }
@@ -100,8 +104,8 @@ class _GachaAnimationScreenState extends State<GachaAnimationScreen>
 
   @override
   void dispose() {
-    animationController.dispose();
     audioPlayer.stop();
+    animationController.dispose();
     audioPlayer.dispose();
     super.dispose();
   }

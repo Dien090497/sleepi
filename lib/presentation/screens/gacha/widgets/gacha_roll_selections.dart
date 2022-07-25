@@ -2,13 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:slee_fi/common/const/const.dart';
 import 'package:slee_fi/common/routes/app_routes.dart';
+import 'package:slee_fi/common/style/text_styles.dart';
 import 'package:slee_fi/common/widgets/sf_alert_dialog.dart';
 import 'package:slee_fi/common/widgets/sf_dialog.dart';
 import 'package:slee_fi/common/widgets/sf_icon.dart';
+import 'package:slee_fi/common/widgets/sf_text.dart';
 import 'package:slee_fi/presentation/blocs/gacha/gacha_spin_cubit.dart';
 import 'package:slee_fi/presentation/blocs/gacha/gacha_spin_state.dart';
 import 'package:slee_fi/presentation/screens/gacha/layout/gacha_animation_screen.dart';
 import 'package:slee_fi/presentation/screens/gacha/widgets/pop_up_gacha_confirm.dart';
+import 'package:slee_fi/resources/resources.dart';
 import 'package:slee_fi/schema/gacha/gacha_spin_schema.dart';
 
 class GachaRollSelections extends StatefulWidget {
@@ -16,6 +19,8 @@ class GachaRollSelections extends StatefulWidget {
     Key? key,
     required this.singleGachaImages,
     required this.timesGachaImages,
+    required this.costSingle,
+    required this.costMultiple,
     required this.singleProbability,
     required this.timesProbability,
     required this.normalGacha,
@@ -26,6 +31,8 @@ class GachaRollSelections extends StatefulWidget {
   final String timesGachaImages;
   final int singleProbability;
   final int timesProbability;
+  final int costSingle;
+  final int costMultiple;
   final bool normalGacha;
   final VoidCallback onPressed;
 
@@ -69,17 +76,31 @@ class _GachaRollSelectionsState extends State<GachaRollSelections> {
                         padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
                         width: MediaQuery.of(context).size.width * 0.8,
                         children:  PopupGachaConfirm(
-                          priceSpin: widget.singleProbability == Const.one ? 12 : 120,
+                          priceSpin: widget.costSingle,
                           quantity: 1,
                           onConfirmTap: () {
                             enableButton ? cubit.gachaSpin(GachaSpinSchema(probability: widget.singleProbability)) : null;
                             setState(() =>  enableButton = false);
                             Navigator.pop(context, true);
-                            showLoadingDialog(context, "Loading", barrierDismissible: true);
+                            showLoadingDialog(context, "Loading", barrierDismissible: false);
                           },
                         ));
                   },
-                  child: SFIcon(widget.singleGachaImages),
+                  child: Stack(
+                      children: [
+                        SFIcon(widget.singleGachaImages, fit: BoxFit.fill),
+                        Positioned(
+                            bottom: 10,
+                            right: 20,
+                            child: Row(
+                              children: [
+                                const SFIcon(Ics.icSlft),
+                                const SizedBox(width: 8,),
+                                SFText(keyText: "${widget.costSingle}", style: TextStyles.w600WhiteSize16,),
+                              ],
+                            ))
+                      ]
+                  ),
                 ),
               ),
               const SizedBox(width: 12),
@@ -90,18 +111,32 @@ class _GachaRollSelectionsState extends State<GachaRollSelections> {
                         padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
                         width: MediaQuery.of(context).size.width * 0.8,
                         children:  PopupGachaConfirm(
-                          priceSpin: widget.timesProbability == Const.two ? 100 : 1000,
+                          priceSpin: widget.costMultiple,
                           quantity: 10,
                           onConfirmTap: () {
                             enableButton ? cubit.gachaSpin(GachaSpinSchema(probability: widget.timesProbability)) : null;
                             setState(() =>  enableButton = false);
                             Navigator.pop(context, true);
-                            showLoadingDialog(context, "Loading", barrierDismissible: true);
+                            showLoadingDialog(context, "Loading", barrierDismissible: false);
                           }
                         )
                     );
                   },
-                  child: SFIcon(widget.timesGachaImages),
+                  child: Stack(
+                      children: [
+                        SFIcon(widget.timesGachaImages, fit: BoxFit.fill),
+                        Positioned(
+                          bottom: 10,
+                            right: 20,
+                            child: Row(
+                              children: [
+                                const SFIcon(Ics.icSlft),
+                                const SizedBox(width: 8,),
+                                SFText(keyText: "${widget.costMultiple}", style: TextStyles.w600Light4Size16,),
+                              ],
+                            ))
+                      ]
+                  ),
                 ),
               ),
             ],
