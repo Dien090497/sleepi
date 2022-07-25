@@ -104,7 +104,7 @@ class _ViewGif extends StatelessWidget {
   }
 
   String _timeLeft() {
-    if (entity == null) return '';
+    if (entity == null || entity!.isOpen == 0) return '';
     final timeOpen =
         DateTime.fromMillisecondsSinceEpoch(int.parse(entity!.waitingTime));
 
@@ -117,7 +117,10 @@ class _ViewGif extends StatelessWidget {
 
   void _onTap(BuildContext context) async {
     if (entity != null) {
-      if (entity!.isOpen == 0) {
+      final openTime =
+          DateTime.fromMillisecondsSinceEpoch(int.parse(entity!.waitingTime));
+
+      if (entity!.isOpen == 0 || openTime.isBefore(DateTime.now())) {
         showCustomDialog(context, children: [
           PopUpStaking(
               message: LocaleKeys.do_you_want_open_the_lucky_box
@@ -154,10 +157,15 @@ class _ViewGif extends StatelessWidget {
   }
 
   void _showConfirmSpeedUp(BuildContext context, String amount) {
+    final timeOpen =
+        DateTime.fromMillisecondsSinceEpoch(int.parse(entity!.waitingTime));
+    final timeLeft = timeOpen.difference(DateTime.now());
+
     showCustomAlertDialog(context,
         padding: const EdgeInsets.all(24),
         children: PupUpConfirmSpeedUp(
-          amount: amount,
+          amount:
+              '${timeLeft.inHours > 48 ? timeLeft.inMinutes * 0.0047 : timeLeft.inMinutes * 0.0044}',
           onConfirm: () async {
             final message =
                 await context.read<LuckyBoxCubit>().speedUpLuckyBox(index);

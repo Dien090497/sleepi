@@ -30,7 +30,6 @@ class JewelDialogBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print('type is  ${jewel.type}');
     final qualityColor = jewel.quality?.qualityBedColor ?? AppColors.commonBed;
     return Stack(
       children: [
