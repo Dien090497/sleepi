@@ -43,7 +43,7 @@ class SFButton extends StatelessWidget {
             gradient: gradient,
           ),
           child: ElevatedButton(
-            onPressed: onPressed,
+            onPressed: disabled ? null : onPressed,
             style: gradient == null
                 ? ButtonStyle(
                     backgroundColor: MaterialStateProperty.all<Color>(

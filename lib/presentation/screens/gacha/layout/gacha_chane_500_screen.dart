@@ -1,29 +1,33 @@
 import 'package:flutter/material.dart';
-import 'package:slee_fi/common/routes/app_routes.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
 import 'package:slee_fi/common/widgets/background_widget.dart';
 import 'package:slee_fi/common/widgets/sf_buttons.dart';
+import 'package:slee_fi/common/widgets/sf_card.dart';
 import 'package:slee_fi/common/widgets/sf_icon.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
 import 'package:slee_fi/common/widgets/topbar_common.dart';
 import 'package:slee_fi/l10n/locale_keys.g.dart';
+import 'package:slee_fi/models/gacha_spin_response/gacha_attributes_item.dart';
 import 'package:slee_fi/presentation/screens/gacha/widgets/attributes_widget.dart';
 import 'package:slee_fi/presentation/screens/gacha/widgets/option_beds.dart';
 import 'package:slee_fi/resources/resources.dart';
 
-class GachaChance500Screen extends StatefulWidget {
-  const GachaChance500Screen({Key? key}) : super(key: key);
+class GachaChance500Arguments {
+  final GachaAttributesItem? attributesItem;
+  final String image;
 
-  @override
-  State<GachaChance500Screen> createState() => _GachaChance500ScreenState();
+  GachaChance500Arguments({this.attributesItem, required this.image});
 }
 
-class _GachaChance500ScreenState extends State<GachaChance500Screen> {
-  int val = -1;
+class GachaChance500Screen extends StatelessWidget {
+  const GachaChance500Screen({Key? key}) : super(key: key);
+
 
   @override
   Widget build(BuildContext context) {
+    final args = ModalRoute.of(context)?.settings.arguments as GachaChance500Arguments?;
+
     final Size size = MediaQuery.of(context).size;
     return BackgroundWidget(
       child: SafeArea(
@@ -72,41 +76,39 @@ class _GachaChance500ScreenState extends State<GachaChance500Screen> {
                                           ),
                                         ],
                                         borderRadius:
-                                            BorderRadius.circular(20)),
+                                        BorderRadius.circular(20)),
                                     width: 180,
                                     height: 180,
-                                    child: const SizedBox(
-                                      child: SFIcon(Imgs.shortBed),
+                                    child:  SizedBox(
+                                      child: SFIcon(args != null && args.attributesItem != null ? args.image : ''),
                                     )),
                                 const SizedBox(height: 12),
                                 Row(
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
-                                    Container(
-                                      decoration: BoxDecoration(
-                                        color: AppColors.blue.withOpacity(0.1),
-                                        borderRadius: BorderRadius.circular(16),
-                                      ),
-                                      padding: const EdgeInsets.symmetric(
-                                          vertical: 8, horizontal: 15),
-                                      child: SFText(
-                                        keyText: LocaleKeys.common,
-                                        style: TextStyles.blue14,
+                                    SFCard(
+                                      radius: 50,
+                                      height: 36,
+                                      color: AppColors.blue.withOpacity(0.15),
+                                      child: Center(
+                                        child: SFText(
+                                          keyText: args?.attributesItem?.quality ?? '',
+                                          style: TextStyles.blue14,
+                                        ),
                                       ),
                                     ),
                                     const SizedBox(
-                                      width: 16,
+                                      width: 15,
                                     ),
-                                    Container(
-                                      decoration: BoxDecoration(
-                                        color: Colors.white.withOpacity(0.1),
-                                        borderRadius: BorderRadius.circular(16),
-                                      ),
-                                      padding: const EdgeInsets.symmetric(
-                                          vertical: 8, horizontal: 15),
-                                      child: SFText(
-                                        keyText: 'I5683',
-                                        style: TextStyles.lightWhite14,
+                                    SFCard(
+                                      radius: 50,
+                                      height: 36,
+                                      child: Center(
+                                        child: SFText(
+                                          keyText: '${args?.attributesItem?.nftId ?? ''}',
+                                          style: TextStyles.lightWhite14,
+                                          textAlign: TextAlign.center,
+                                        ),
                                       ),
                                     ),
                                   ],
@@ -124,11 +126,17 @@ class _GachaChance500ScreenState extends State<GachaChance500Screen> {
                           padding: const EdgeInsets.symmetric(
                               horizontal: 14, vertical: 15),
                           child: Column(
-                            children: const [
-                              AttributesWidget(),
-                              SizedBox(height: 25),
-                              OptionBeds(),
-                              SizedBox(height: 77),
+                            children:  [
+                              AttributesWidget(
+                                bonus: args?.attributesItem?.bonus,
+                                efficiency: args?.attributesItem?.efficiency,
+                                luck: args?.attributesItem?.luck,
+                                resilience: args?.attributesItem?.resilience,
+                                special: args?.attributesItem?.special,
+                              ),
+                              const SizedBox(height: 25),
+                               OptionBeds(type: args?.attributesItem?.classNft,),
+                              const SizedBox(height: 77),
                             ],
                           ),
                         )
@@ -150,7 +158,7 @@ class _GachaChance500ScreenState extends State<GachaChance500Screen> {
                 height: 45,
                 width: size.width,
                 onPressed: () {
-                  Navigator.pushNamed(context, R.gachaResultBed);
+                  Navigator.pop(context, true);
                 },
               ),
             ),

@@ -4,7 +4,6 @@ import 'package:slee_fi/common/const/const.dart';
 import 'package:slee_fi/common/routes/app_routes.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
-import 'package:slee_fi/common/widgets/sf_alert_dialog.dart';
 import 'package:slee_fi/common/widgets/sf_buttons.dart';
 import 'package:slee_fi/common/widgets/sf_dialog.dart';
 import 'package:slee_fi/common/widgets/sf_percent_border.dart';
@@ -13,7 +12,6 @@ import 'package:slee_fi/l10n/locale_keys.g.dart';
 import 'package:slee_fi/presentation/blocs/gacha/gacha_spin_cubit.dart';
 import 'package:slee_fi/presentation/blocs/gacha/gacha_spin_state.dart';
 import 'package:slee_fi/presentation/screens/gacha/layout/gacha_animation_screen.dart';
-import 'package:slee_fi/presentation/screens/gacha/widgets/pop_up_gacha_confirm.dart';
 
 class ChanceWidget extends StatelessWidget {
   const ChanceWidget(
@@ -38,7 +36,7 @@ class ChanceWidget extends StatelessWidget {
             Navigator.pop(context, true);
             Navigator.pushNamed(context, R.gachaAnimation,
                 arguments: GachaAnimationArguments(
-                  route: R.gacha500TimesChance,
+                  isGetSpin: true,
                   animation: normalGacha ? Const.normalGachaAnimation : Const.specialGachaAnimation,
                   audio: normalGacha ? Const.normalGachaAudio : Const.specialGachaAudio,
                   spinInfo: state.response,
@@ -54,7 +52,7 @@ class ChanceWidget extends StatelessWidget {
               Expanded(
                 child: Stack(alignment: Alignment.centerLeft, children: [
                   SFPercentBorderGradient(
-                    valueActive: numberOfSpin > 100 ? 100 : numberOfSpin.toDouble(),
+                    valueActive: numberOfSpin > totalValue ? totalValue.toDouble() : numberOfSpin.toDouble(),
                     totalValue: totalValue.toDouble(),
                     linearGradient: AppColors.gradientBlueButton,
                     lineHeight: 18,
@@ -78,18 +76,20 @@ class ChanceWidget extends StatelessWidget {
                 gradient: AppColors.gradientGacha,
                 disabled: numberOfSpin >= totalValue ? false : true,
                 onPressed: () {
-                  showCustomAlertDialog(context,
-                      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-                      width: MediaQuery.of(context).size.width * 0.8,
-                      children:  PopupGachaConfirm(
-                        priceSpin: 0,
-                        quantity: 1,
-                        onConfirmTap: () {
-                          normalGacha  ? cubit.getCommon() : cubit.getSpecial();
-                          Navigator.pop(context, true);
-                          showLoadingDialog(context, "Loading");
-                        },
-                      ));
+                  normalGacha  ? cubit.getCommon() : cubit.getSpecial();
+                  showLoadingDialog(context, "Loading");
+                  // showCustomAlertDialog(context,
+                  //     padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                  //     width: MediaQuery.of(context).size.width * 0.8,
+                  //     children:  PopupGachaConfirm(
+                  //       priceSpin: 0,
+                  //       quantity: 1,
+                  //       onConfirmTap: () {
+                  //         normalGacha  ? cubit.getCommon() : cubit.getSpecial();
+                  //         Navigator.pop(context, true);
+                  //         showLoadingDialog(context, "Loading");
+                  //       },
+                  //     ));
                 },
               ),
             ],

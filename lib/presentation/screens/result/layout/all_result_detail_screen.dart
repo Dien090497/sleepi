@@ -113,25 +113,9 @@ class AllResultDetailScreen extends StatelessWidget {
                             ],
                           ),
                           const SizedBox(height: 28),
-                          Padding(
-                            padding:
-                                const EdgeInsets.symmetric(horizontal: 1.0),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                SFText(
-                                  keyText: LocaleKeys.attributes,
-                                  style: TextStyles.boldWhite18,
-                                ),
-                                SFButtonOutLined(
-                                  title: LocaleKeys.base,
-                                  onPressed: () {},
-                                  borderColor: AppColors.blue,
-                                  textStyle: TextStyles.blue14,
-                                  fixedSize: const Size(72, 32),
-                                )
-                              ],
-                            ),
+                          SFText(
+                            keyText: LocaleKeys.attributes,
+                            style: TextStyles.boldWhite18,
                           ),
                           const SizedBox(height: 13),
                           Column(
