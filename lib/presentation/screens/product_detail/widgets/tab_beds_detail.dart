@@ -7,6 +7,7 @@ import 'package:slee_fi/l10n/locale_keys.g.dart';
 import 'package:slee_fi/presentation/blocs/nft_list/nft_list_cubit.dart';
 import 'package:slee_fi/presentation/blocs/nft_list/nft_list_state.dart';
 import 'package:slee_fi/presentation/screens/info_individual/info_individual_screen.dart';
+import 'package:slee_fi/presentation/screens/product_detail/widgets/auto_reset_tab_widget.dart';
 import 'package:slee_fi/presentation/screens/product_detail/widgets/gridview_bed_item.dart';
 import 'package:slee_fi/usecase/fetch_bed_usecase.dart';
 
@@ -20,14 +21,13 @@ class TabBedsDetail extends StatefulWidget {
 class _TabBedsDetailState extends State<TabBedsDetail> {
   late List<BedEntity> listBeds = [];
   final CategoryType categoryType = CategoryType.bed;
+  final cubit = NFTListCubit();
 
-  // void _showBedDialog(BuildContext context) {
   @override
   Widget build(BuildContext context) {
-    return DefaultTabController(
-        length: 2,
-        child: BlocProvider(
-          create: (context) => NFTListCubit()..init(categoryType),
+    return BlocProvider(
+      create: (context) => cubit,
+      child: AutoResetTabWidget(
           child: BlocConsumer<NFTListCubit, NftListState>(
             listener: (context, state) {
               if (state is NftListLoaded) {
@@ -97,6 +97,13 @@ class _TabBedsDetailState extends State<TabBedsDetail> {
               );
             },
           ),
-        ));
+          onRefreshTab: () {
+            if (listBeds.isEmpty) {
+              cubit.init(categoryType);
+            } else {
+              cubit.refresh(categoryType);
+            }
+          }),
+    );
   }
 }

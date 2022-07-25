@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:focus_detector/focus_detector.dart';
 import 'package:slee_fi/common/widgets/background_widget.dart';
 import 'package:slee_fi/common/widgets/sf_tab_bar.dart';
 import 'package:slee_fi/common/widgets/topbar_common.dart';
@@ -13,7 +14,9 @@ import 'package:slee_fi/presentation/screens/product_detail/widgets/tab_trophy_d
 import 'package:slee_fi/usecase/fetch_bed_usecase.dart';
 
 class ProductDetailScreen extends StatelessWidget {
-  const ProductDetailScreen({Key? key}) : super(key: key);
+  ProductDetailScreen({Key? key}) : super(key: key);
+
+  final GlobalKey<SFTabBarState> _globalKey = GlobalKey();
 
   @override
   Widget build(BuildContext context) {
@@ -25,27 +28,32 @@ class ProductDetailScreen extends StatelessWidget {
             const TopBarCommon(),
             const SizedBox(height: 20),
             Expanded(
-              child: SFTabBar(
-                isScrollable: true,
-                texts: const [
-                  LocaleKeys.bed,
-                  LocaleKeys.jewels,
-                  LocaleKeys.item,
-                  LocaleKeys.trophy
-                ],
-                children: [
-                  const TabBedsDetail(),
-                  BlocProvider(
-                      create: (context) =>
-                          JewelBloc()..add(const InitEvent(CategoryType.jewel)),
-                      child: const TabJewelsDetail()),
-                  BlocProvider(
-                      create: (context) =>
-                          JewelBloc()..add(const InitEvent(CategoryType.item)),
-                      child: const TabItemDetail()),
-                  const TabTrophyDetail()
-                ],
-              ),
+              child: FocusDetector(
+                  child: SFTabBar(
+                    key: _globalKey,
+                    isScrollable: true,
+                    texts: const [
+                      LocaleKeys.bed,
+                      LocaleKeys.jewels,
+                      LocaleKeys.item,
+                      LocaleKeys.trophy
+                    ],
+                    children: [
+                      const TabBedsDetail(),
+                      BlocProvider(
+                        create: (context) => JewelBloc(),
+                        child: const TabJewelsDetail(),
+                      ),
+                      BlocProvider(
+                        create: (context) => JewelBloc(),
+                        child: const TabItemDetail(),
+                      ),
+                      const TabTrophyDetail()
+                    ],
+                  ),
+                  onFocusGained: () {
+                    _globalKey.currentState?.moveToTab(0);
+                  }),
             ),
           ],
         ),

@@ -27,7 +27,7 @@ class BottomNavigationScreen extends StatelessWidget {
     var screens = [
       const HomeScreen(),
       const GachaScreen(),
-      const ProductDetailScreen(),
+      ProductDetailScreen(),
       const ChartScreen(),
       MarketPlaceScreen(tabKey: marketTabKey),
     ];
