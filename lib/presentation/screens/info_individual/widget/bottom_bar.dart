@@ -33,6 +33,9 @@ class BottomBarWidgetState extends State<BottomBarWidget> {
 
   late BedEntity bedEntity = widget.bedEntity;
 
+
+  final cubit = BottomBarInfoIndividualCubit()..init();
+
   updateBed(bed) {
     bedEntity = bed;
     setState(() {});
@@ -75,8 +78,6 @@ class BottomBarWidgetState extends State<BottomBarWidget> {
 
   @override
   Widget build(BuildContext context) {
-    final cubit = BottomBarInfoIndividualCubit()..init();
-
     return Material(
       color: AppColors.dark,
       child: SafeArea(
