@@ -9,9 +9,7 @@ part of 'sleep_tracking_api.dart';
 // ignore_for_file: unnecessary_brace_in_string_interps
 
 class _SleepTrackingApi implements SleepTrackingApi {
-  _SleepTrackingApi(this._dio, {this.baseUrl}) {
-    baseUrl ??= 'https://test.sleefi.com/api/v1';
-  }
+  _SleepTrackingApi(this._dio, {this.baseUrl});
 
   final Dio _dio;
 

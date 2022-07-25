@@ -181,6 +181,14 @@ Remote data such as api call, firebase,...
 # Command
 
 ```dart
+flutter run --flavor prod -t lib/main_prod.dart
+
+flutter run --flavor dev -t lib/main_dev.dart
+
+flutter run --flavor stg -t lib/main_stg.dart
+```
+
+```dart
 flutter pub run build_runner build --delete-conflicting-outputs
 ```
 

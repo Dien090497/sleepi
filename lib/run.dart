@@ -17,16 +17,17 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:slee_fi/app.dart';
 import 'package:slee_fi/common/const/const.dart';
 import 'package:slee_fi/di/injector.dart';
+import 'package:slee_fi/flavors.dart';
 import 'package:slee_fi/usecase/run_app_init_usecase.dart';
 import 'package:slee_fi/usecase/usecase.dart';
 
-Future<void> initMyApp() async {
+Future<void> run() async {
   WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
   FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
   await Future.wait([
     GetStorage.init(),
     EasyLocalization.ensureInitialized(),
-    configureDependencies(),
+    configureDependencies(F.name.toLowerCase()),
   ]);
   await Future.wait([
     getIt<RunAppInitUseCase>().call(NoParams()),

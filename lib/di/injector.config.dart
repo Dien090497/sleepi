@@ -172,8 +172,13 @@ import '../usecase/wallet/get_current_mnemonic_usecasse.dart' as _i126;
 import '../usecase/wallet/import_wallet_usecase.dart' as _i59;
 import '../usecase/withdraw_history_usecase.dart' as _i90;
 import '../usecase/withdraw_nft_usecase.dart' as _i151;
-import 'register_module.dart' as _i162; // ignore_for_file: unnecessary_lambdas
+import 'const_injection.dart' as _i163;
+import 'register_module.dart' as _i162;
 
+const String _prod = 'prod';
+const String _test = 'test';
+const String _dev = 'dev';
+// ignore_for_file: unnecessary_lambdas
 // ignore_for_file: lines_longer_than_80_chars
 /// initializes the registration of provided dependencies inside of [GetIt]
 Future<_i1.GetIt> $initGetIt(_i1.GetIt get,
@@ -181,6 +186,7 @@ Future<_i1.GetIt> $initGetIt(_i1.GetIt get,
   final gh = _i2.GetItHelper(get, environment, environmentFilter);
   final rPCModule = _$RPCModule();
   final registerModule = _$RegisterModule();
+  final constInjection = _$ConstInjection();
   gh.singleton<_i3.AppFlyerCustom>(_i3.AppFlyerCustom());
   gh.factory<_i4.Client>(() => rPCModule.httpClient);
   gh.factory<_i5.Connectivity>(() => registerModule.connectivity);
@@ -207,6 +213,12 @@ Future<_i1.GetIt> $initGetIt(_i1.GetIt get,
   await gh.factoryAsync<_i19.SharedPreferences>(() => registerModule.sharedPref,
       preResolve: true);
   gh.factory<_i13.StorageKeys>(() => _i13.StorageKeys());
+  gh.factory<String>(() => constInjection.baseUrlProd,
+      instanceName: 'baseUrl', registerFor: {_prod});
+  gh.factory<String>(() => constInjection.baseUrlStg,
+      instanceName: 'baseUrl', registerFor: {_test});
+  gh.factory<String>(() => constInjection.baseUrlDev,
+      instanceName: 'baseUrl', registerFor: {_dev});
   gh.factory<_i20.ToastUtils>(() => _i20.ToastUtils());
   gh.singleton<_i21.Web3Provider>(_i21.Web3Provider(get<_i4.Client>()));
   gh.factory<_i22.HistoryDataSource>(
@@ -250,8 +262,11 @@ Future<_i1.GetIt> $initGetIt(_i1.GetIt get,
       () => _i38.SendToExternalUseCase(get<_i35.ITransactionRepository>()));
   gh.factory<_i39.SendTokenToExternalUseCase>(() =>
       _i39.SendTokenToExternalUseCase(get<_i35.ITransactionRepository>()));
-  gh.factory<_i40.SleepTrackingApi>(() => _i40.SleepTrackingApi(get<_i9.Dio>(),
-      get<_i33.AuthInterceptor>(), get<_i37.RefreshTokenInterceptor>()));
+  gh.factory<_i40.SleepTrackingApi>(() => _i40.SleepTrackingApi(
+      get<_i9.Dio>(),
+      get<_i33.AuthInterceptor>(),
+      get<_i37.RefreshTokenInterceptor>(),
+      get<String>(instanceName: 'baseUrl')));
   gh.factory<_i41.TransactionRemoteDataSource>(() =>
       _i41.TransactionRemoteDataSource(
           get<_i22.HistoryDataSource>(),
@@ -259,8 +274,11 @@ Future<_i1.GetIt> $initGetIt(_i1.GetIt get,
           get<_i13.GetStorageDataSource>(),
           get<_i16.IsarDataSource>(),
           get<_i9.Dio>()));
-  gh.factory<_i42.AuthDataSource>(() => _i42.AuthDataSource(get<_i9.Dio>(),
-      get<_i33.AuthInterceptor>(), get<_i37.RefreshTokenInterceptor>()));
+  gh.factory<_i42.AuthDataSource>(() => _i42.AuthDataSource(
+      get<_i9.Dio>(),
+      get<_i33.AuthInterceptor>(),
+      get<_i37.RefreshTokenInterceptor>(),
+      get<String>(instanceName: 'baseUrl')));
   gh.factory<_i43.CurrentNetworkExplorerUseCase>(() =>
       _i43.CurrentNetworkExplorerUseCase(get<_i35.ITransactionRepository>()));
   gh.factory<_i44.EstimateTokenFunctionFeeUseCase>(() =>
@@ -310,8 +328,11 @@ Future<_i1.GetIt> $initGetIt(_i1.GetIt get,
       () => _i65.MakeFirstOpenAppUseCase(get<_i45.IAuthRepository>()));
   gh.factory<_i66.MarketPlaceUseCase>(
       () => _i66.MarketPlaceUseCase(get<_i49.IMarketPlaceRepository>()));
-  gh.factory<_i67.NftApi>(() => _i67.NftApi(get<_i9.Dio>(),
-      get<_i33.AuthInterceptor>(), get<_i37.RefreshTokenInterceptor>()));
+  gh.factory<_i67.NftApi>(() => _i67.NftApi(
+      get<_i9.Dio>(),
+      get<_i33.AuthInterceptor>(),
+      get<_i37.RefreshTokenInterceptor>(),
+      get<String>(instanceName: 'baseUrl')));
   gh.factory<_i68.OpenLuckyBoxUseCase>(
       () => _i68.OpenLuckyBoxUseCase(get<_i55.IUserRepository>()));
   gh.factory<_i69.OpenSocketUseCase>(
@@ -506,3 +527,5 @@ Future<_i1.GetIt> $initGetIt(_i1.GetIt get,
 class _$RPCModule extends _i32.RPCModule {}
 
 class _$RegisterModule extends _i162.RegisterModule {}
+
+class _$ConstInjection extends _i163.ConstInjection {}

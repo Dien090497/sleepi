@@ -5,4 +5,5 @@ import 'package:slee_fi/di/injector.config.dart';
 final getIt = GetIt.instance;
 
 @InjectableInit()
-Future<void> configureDependencies() async => $initGetIt(getIt);
+Future<void> configureDependencies(String env) async =>
+    $initGetIt(getIt, environment: env);

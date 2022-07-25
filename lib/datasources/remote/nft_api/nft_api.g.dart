@@ -9,9 +9,7 @@ part of 'nft_api.dart';
 // ignore_for_file: unnecessary_brace_in_string_interps
 
 class _NftApi implements NftApi {
-  _NftApi(this._dio, {this.baseUrl}) {
-    baseUrl ??= 'https://test.sleefi.com/api/v1/nft';
-  }
+  _NftApi(this._dio, {this.baseUrl});
 
   final Dio _dio;
 

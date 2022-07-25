@@ -17,9 +17,6 @@ class Const {
   /// GWei
   static const double gasPrice = 1.5;
 
-  static const String snowTraceMainNetUrl = 'https://snowtrace.io/';
-  static const String snowTraceTestNetUrl = 'https://testnet.snowtrace.io/';
-  static const String sleeFiUrl = 'https://sleefi.com';
   static const String howToPlayUrl = 'https://sleefi.com/how-to-play';
   static const String linkTreeUrl = 'https://linktr.ee/sleefi';
   static const String litePaperUrl = 'https://sleefi.com/litepaper';
@@ -30,9 +27,6 @@ class Const {
       '0xd7f655E3376cE2D7A2b08fF01Eb3B1023191A901';
   static const String contractRouterMainNet =
       '0x60aE616a2155Ee3d9A68541Ba4544862310933d4';
-  // static const baseApiDev = 'https://dev.sleefi.com/api/v1';
-  static const baseApiDev = 'https://test.sleefi.com/api/v1';
-  // static const baseApiDev = 'https://staging.sleefi.com/api/v1';
 
   static const String whitePaperEn = 'https://sleefi.gitbook.io/whitepaper/';
 
@@ -176,6 +170,10 @@ class Const {
   ];
 
   Const._();
+
+  static Const get I => _instance;
+
+  static final Const _instance = Const._();
 }
 
 extension LocaleX on Locale {
