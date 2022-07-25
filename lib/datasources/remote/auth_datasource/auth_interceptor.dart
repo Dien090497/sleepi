@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:device_info_plus/device_info_plus.dart';
 import 'package:dio/dio.dart';
+import 'package:flutter/foundation.dart';
 import 'package:injectable/injectable.dart';
 import 'package:slee_fi/datasources/local/secure_storage.dart';
 
@@ -23,7 +24,7 @@ class AuthInterceptor extends Interceptor {
     if (token != null) {
       options.headers['Authorization'] = 'Bearer $token';
     }
-    print('### ${options.baseUrl}');
+    debugPrint('### ${options.baseUrl}');
     if (deviceInfo is AndroidDeviceInfo) {
       options.headers['Device-Id'] = '${deviceInfo.id}';
     } else if (deviceInfo is IosDeviceInfo) {

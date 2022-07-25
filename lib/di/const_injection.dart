@@ -4,7 +4,7 @@ import 'package:injectable/injectable.dart';
 abstract class ConstInjection {
   @dev
   @Named('baseUrl')
-  String get baseUrlDev => 'https://dev.sleefi.com/api/v1';
+  String get baseUrlDev => 'https://test.sleefi.com/api/v1';
 
   @prod
   @Named('baseUrl')
@@ -12,5 +12,5 @@ abstract class ConstInjection {
 
   @test
   @Named('baseUrl')
-  String get baseUrlStg => 'https://prod.sleefi.com/api/v1';
+  String get baseUrlStg => 'https://test.sleefi.com/api/v1';
 }

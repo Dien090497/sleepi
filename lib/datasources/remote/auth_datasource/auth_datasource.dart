@@ -68,10 +68,11 @@ part 'auth_datasource.g.dart';
 abstract class AuthDataSource {
   @factoryMethod
   factory AuthDataSource(
-      Dio dio,
-      AuthInterceptor authInterceptor,
-      RefreshTokenInterceptor refreshInterceptor,
-      @Named('baseUrl') String baseUrl,) {
+    Dio dio,
+    AuthInterceptor authInterceptor,
+    RefreshTokenInterceptor refreshInterceptor,
+    @Named('baseUrl') String baseUrl,
+  ) {
     dio.interceptors.addAll([
       authInterceptor,
       refreshInterceptor,
