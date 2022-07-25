@@ -13,10 +13,6 @@ class WalletDataSource {
 
   WalletDataSource(this._web3provider);
 
-  Future<BigInt> balanceOf(String address, String ownerAddress) {
-    return _nft(address).balanceOf(EthereumAddress.fromHex(ownerAddress));
-  }
-
   Future<String> name(String address) => _nft(address).name();
 
   Future<String> symbol(String address) => _nft(address).symbol();
