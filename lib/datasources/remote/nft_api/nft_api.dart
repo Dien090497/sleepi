@@ -1,8 +1,6 @@
 import 'package:dio/dio.dart';
-import 'package:flutter/foundation.dart';
 import 'package:injectable/injectable.dart';
 import 'package:retrofit/retrofit.dart';
-import 'package:slee_fi/common/const/const.dart';
 import 'package:slee_fi/common/enum/enum.dart';
 import 'package:slee_fi/datasources/remote/auth_datasource/auth_interceptor.dart';
 import 'package:slee_fi/datasources/remote/auth_datasource/refresh_token_interceptor.dart';
@@ -16,17 +14,20 @@ import 'package:slee_fi/schema/minting/minting_schema.dart';
 part 'nft_api.g.dart';
 
 @Injectable()
-@RestApi(
-    baseUrl: kDebugMode ? '${Const.baseApiDev}/nft' : '${Const.baseApiDev}/nft')
+@RestApi()
 abstract class NftApi {
   @factoryMethod
-  factory NftApi(Dio dio, AuthInterceptor authInterceptor,
-      RefreshTokenInterceptor refreshInterceptor) {
+  factory NftApi(
+    Dio dio,
+    AuthInterceptor authInterceptor,
+    RefreshTokenInterceptor refreshInterceptor,
+    @Named('baseUrl') String baseUrl,
+  ) {
     dio.interceptors.addAll([
       authInterceptor,
       refreshInterceptor,
     ]);
-    return _NftApi(dio);
+    return _NftApi(dio, baseUrl: baseUrl);
   }
 
   @GET('')

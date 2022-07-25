@@ -18,7 +18,6 @@ class NftDetailCubit extends Cubit<NftDetailState> {
     final result = await _getListNftDetailUC.call(GetListNftDetailParams(
       nftAddress: token.address,
       ownerAddress: walletInfoEntity.address,
-      count: 30,
       nftType: nftType,
     ));
     result.fold(
@@ -32,6 +31,7 @@ class NftDetailCubit extends Cubit<NftDetailState> {
           tokenEntity: token,
           nftEntities: r,
           hasMore: token.balance > r.length,
+          nftType: nftType,
         ));
       },
     );
@@ -43,8 +43,7 @@ class NftDetailCubit extends Cubit<NftDetailState> {
       final result = await _getListNftDetailUC.call(GetListNftDetailParams(
         nftAddress: currentState.tokenEntity.address,
         ownerAddress: currentState.walletInfoEntity.address,
-        count: 30,
-        nftType: NftType.bed,
+        nftType: currentState.nftType,
       ));
       result.fold(
         (l) {
@@ -57,6 +56,7 @@ class NftDetailCubit extends Cubit<NftDetailState> {
             tokenEntity: currentState.tokenEntity,
             nftEntities: r,
             hasMore: currentState.tokenEntity.balance > r.length,
+            nftType: currentState.nftType,
           ));
         },
       );
@@ -69,9 +69,7 @@ class NftDetailCubit extends Cubit<NftDetailState> {
       final result = await _getListNftDetailUC.call(GetListNftDetailParams(
         nftAddress: currentState.tokenEntity.address,
         ownerAddress: currentState.walletInfoEntity.address,
-        count: 30,
-        nftType: NftType.bed,
-        start: currentState.nftEntities.length,
+        nftType: currentState.nftType,
       ));
       result.fold(
         (l) {

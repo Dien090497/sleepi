@@ -19,8 +19,12 @@ mixin _$NftDetailState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function(WalletInfoEntity walletInfoEntity,
-            TokenEntity tokenEntity, List<NFTEntity> nftEntities, bool hasMore)
+    required TResult Function(
+            WalletInfoEntity walletInfoEntity,
+            TokenEntity tokenEntity,
+            List<NFTEntity> nftEntities,
+            bool hasMore,
+            NftType nftType)
         loaded,
     required TResult Function(String msg) error,
   }) =>
@@ -29,7 +33,7 @@ mixin _$NftDetailState {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function(WalletInfoEntity walletInfoEntity, TokenEntity tokenEntity,
-            List<NFTEntity> nftEntities, bool hasMore)?
+            List<NFTEntity> nftEntities, bool hasMore, NftType nftType)?
         loaded,
     TResult Function(String msg)? error,
   }) =>
@@ -38,7 +42,7 @@ mixin _$NftDetailState {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function(WalletInfoEntity walletInfoEntity, TokenEntity tokenEntity,
-            List<NFTEntity> nftEntities, bool hasMore)?
+            List<NFTEntity> nftEntities, bool hasMore, NftType nftType)?
         loaded,
     TResult Function(String msg)? error,
     required TResult orElse(),
@@ -135,8 +139,12 @@ class _$NftDetailInitial
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function(WalletInfoEntity walletInfoEntity,
-            TokenEntity tokenEntity, List<NFTEntity> nftEntities, bool hasMore)
+    required TResult Function(
+            WalletInfoEntity walletInfoEntity,
+            TokenEntity tokenEntity,
+            List<NFTEntity> nftEntities,
+            bool hasMore,
+            NftType nftType)
         loaded,
     required TResult Function(String msg) error,
   }) {
@@ -148,7 +156,7 @@ class _$NftDetailInitial
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function(WalletInfoEntity walletInfoEntity, TokenEntity tokenEntity,
-            List<NFTEntity> nftEntities, bool hasMore)?
+            List<NFTEntity> nftEntities, bool hasMore, NftType nftType)?
         loaded,
     TResult Function(String msg)? error,
   }) {
@@ -160,7 +168,7 @@ class _$NftDetailInitial
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function(WalletInfoEntity walletInfoEntity, TokenEntity tokenEntity,
-            List<NFTEntity> nftEntities, bool hasMore)?
+            List<NFTEntity> nftEntities, bool hasMore, NftType nftType)?
         loaded,
     TResult Function(String msg)? error,
     required TResult orElse(),
@@ -219,7 +227,8 @@ abstract class _$$NftDetailLoadedCopyWith<$Res> {
       {WalletInfoEntity walletInfoEntity,
       TokenEntity tokenEntity,
       List<NFTEntity> nftEntities,
-      bool hasMore});
+      bool hasMore,
+      NftType nftType});
 
   $WalletInfoEntityCopyWith<$Res> get walletInfoEntity;
   $TokenEntityCopyWith<$Res> get tokenEntity;
@@ -242,6 +251,7 @@ class __$$NftDetailLoadedCopyWithImpl<$Res>
     Object? tokenEntity = freezed,
     Object? nftEntities = freezed,
     Object? hasMore = freezed,
+    Object? nftType = freezed,
   }) {
     return _then(_$NftDetailLoaded(
       walletInfoEntity: walletInfoEntity == freezed
@@ -260,6 +270,10 @@ class __$$NftDetailLoadedCopyWithImpl<$Res>
           ? _value.hasMore
           : hasMore // ignore: cast_nullable_to_non_nullable
               as bool,
+      nftType: nftType == freezed
+          ? _value.nftType
+          : nftType // ignore: cast_nullable_to_non_nullable
+              as NftType,
     ));
   }
 
@@ -287,7 +301,8 @@ class _$NftDetailLoaded
       {required this.walletInfoEntity,
       required this.tokenEntity,
       required final List<NFTEntity> nftEntities,
-      required this.hasMore})
+      required this.hasMore,
+      required this.nftType})
       : _nftEntities = nftEntities;
 
   @override
@@ -303,10 +318,12 @@ class _$NftDetailLoaded
 
   @override
   final bool hasMore;
+  @override
+  final NftType nftType;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'NftDetailState.loaded(walletInfoEntity: $walletInfoEntity, tokenEntity: $tokenEntity, nftEntities: $nftEntities, hasMore: $hasMore)';
+    return 'NftDetailState.loaded(walletInfoEntity: $walletInfoEntity, tokenEntity: $tokenEntity, nftEntities: $nftEntities, hasMore: $hasMore, nftType: $nftType)';
   }
 
   @override
@@ -317,7 +334,8 @@ class _$NftDetailLoaded
       ..add(DiagnosticsProperty('walletInfoEntity', walletInfoEntity))
       ..add(DiagnosticsProperty('tokenEntity', tokenEntity))
       ..add(DiagnosticsProperty('nftEntities', nftEntities))
-      ..add(DiagnosticsProperty('hasMore', hasMore));
+      ..add(DiagnosticsProperty('hasMore', hasMore))
+      ..add(DiagnosticsProperty('nftType', nftType));
   }
 
   @override
@@ -331,7 +349,8 @@ class _$NftDetailLoaded
                 .equals(other.tokenEntity, tokenEntity) &&
             const DeepCollectionEquality()
                 .equals(other._nftEntities, _nftEntities) &&
-            const DeepCollectionEquality().equals(other.hasMore, hasMore));
+            const DeepCollectionEquality().equals(other.hasMore, hasMore) &&
+            const DeepCollectionEquality().equals(other.nftType, nftType));
   }
 
   @override
@@ -340,7 +359,8 @@ class _$NftDetailLoaded
       const DeepCollectionEquality().hash(walletInfoEntity),
       const DeepCollectionEquality().hash(tokenEntity),
       const DeepCollectionEquality().hash(_nftEntities),
-      const DeepCollectionEquality().hash(hasMore));
+      const DeepCollectionEquality().hash(hasMore),
+      const DeepCollectionEquality().hash(nftType));
 
   @JsonKey(ignore: true)
   @override
@@ -351,12 +371,16 @@ class _$NftDetailLoaded
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function(WalletInfoEntity walletInfoEntity,
-            TokenEntity tokenEntity, List<NFTEntity> nftEntities, bool hasMore)
+    required TResult Function(
+            WalletInfoEntity walletInfoEntity,
+            TokenEntity tokenEntity,
+            List<NFTEntity> nftEntities,
+            bool hasMore,
+            NftType nftType)
         loaded,
     required TResult Function(String msg) error,
   }) {
-    return loaded(walletInfoEntity, tokenEntity, nftEntities, hasMore);
+    return loaded(walletInfoEntity, tokenEntity, nftEntities, hasMore, nftType);
   }
 
   @override
@@ -364,11 +388,12 @@ class _$NftDetailLoaded
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function(WalletInfoEntity walletInfoEntity, TokenEntity tokenEntity,
-            List<NFTEntity> nftEntities, bool hasMore)?
+            List<NFTEntity> nftEntities, bool hasMore, NftType nftType)?
         loaded,
     TResult Function(String msg)? error,
   }) {
-    return loaded?.call(walletInfoEntity, tokenEntity, nftEntities, hasMore);
+    return loaded?.call(
+        walletInfoEntity, tokenEntity, nftEntities, hasMore, nftType);
   }
 
   @override
@@ -376,13 +401,14 @@ class _$NftDetailLoaded
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function(WalletInfoEntity walletInfoEntity, TokenEntity tokenEntity,
-            List<NFTEntity> nftEntities, bool hasMore)?
+            List<NFTEntity> nftEntities, bool hasMore, NftType nftType)?
         loaded,
     TResult Function(String msg)? error,
     required TResult orElse(),
   }) {
     if (loaded != null) {
-      return loaded(walletInfoEntity, tokenEntity, nftEntities, hasMore);
+      return loaded(
+          walletInfoEntity, tokenEntity, nftEntities, hasMore, nftType);
     }
     return orElse();
   }
@@ -427,12 +453,14 @@ abstract class NftDetailLoaded implements NftDetailState {
       {required final WalletInfoEntity walletInfoEntity,
       required final TokenEntity tokenEntity,
       required final List<NFTEntity> nftEntities,
-      required final bool hasMore}) = _$NftDetailLoaded;
+      required final bool hasMore,
+      required final NftType nftType}) = _$NftDetailLoaded;
 
   WalletInfoEntity get walletInfoEntity;
   TokenEntity get tokenEntity;
   List<NFTEntity> get nftEntities;
   bool get hasMore;
+  NftType get nftType;
   @JsonKey(ignore: true)
   _$$NftDetailLoadedCopyWith<_$NftDetailLoaded> get copyWith =>
       throw _privateConstructorUsedError;
@@ -512,8 +540,12 @@ class _$NftDetailError with DiagnosticableTreeMixin implements NftDetailError {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function(WalletInfoEntity walletInfoEntity,
-            TokenEntity tokenEntity, List<NFTEntity> nftEntities, bool hasMore)
+    required TResult Function(
+            WalletInfoEntity walletInfoEntity,
+            TokenEntity tokenEntity,
+            List<NFTEntity> nftEntities,
+            bool hasMore,
+            NftType nftType)
         loaded,
     required TResult Function(String msg) error,
   }) {
@@ -525,7 +557,7 @@ class _$NftDetailError with DiagnosticableTreeMixin implements NftDetailError {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function(WalletInfoEntity walletInfoEntity, TokenEntity tokenEntity,
-            List<NFTEntity> nftEntities, bool hasMore)?
+            List<NFTEntity> nftEntities, bool hasMore, NftType nftType)?
         loaded,
     TResult Function(String msg)? error,
   }) {
@@ -537,7 +569,7 @@ class _$NftDetailError with DiagnosticableTreeMixin implements NftDetailError {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function(WalletInfoEntity walletInfoEntity, TokenEntity tokenEntity,
-            List<NFTEntity> nftEntities, bool hasMore)?
+            List<NFTEntity> nftEntities, bool hasMore, NftType nftType)?
         loaded,
     TResult Function(String msg)? error,
     required TResult orElse(),

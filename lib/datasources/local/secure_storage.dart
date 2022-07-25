@@ -59,11 +59,12 @@ class SecureStorage {
   Future<String?> getAccessToken() =>
       _secureStorage.read(key: StorageKeys.accessTokenKey);
 
-  Future<void> saveAccessToken(String accessToken) =>
-      _secureStorage.write(key: StorageKeys.accessTokenKey, value: accessToken);
+  Future<void> setAccessToken(String token) =>
+      _secureStorage.write(key: StorageKeys.accessTokenKey, value: token);
 
   Future<void> saveAddressContract({required String addressContract}) =>
-      _secureStorage.write(key: StorageKeys.addressContractSpending, value: addressContract);
+      _secureStorage.write(
+          key: StorageKeys.addressContractSpending, value: addressContract);
 
   Future<void> saveMessage({required String saveMessage}) =>
       _secureStorage.write(key: StorageKeys.saveMessage, value: saveMessage);
@@ -74,9 +75,6 @@ class SecureStorage {
   Future<String?> readMessage() =>
       _secureStorage.read(key: StorageKeys.saveMessage);
 
-  Future<void> setAccessToken(String token) =>
-      _secureStorage.write(key: StorageKeys.accessTokenKey, value: token);
-
   Future<String?> getRefreshToken() =>
       _secureStorage.read(key: StorageKeys.refreshToken);
 
@@ -84,7 +82,8 @@ class SecureStorage {
       _secureStorage.write(key: StorageKeys.refreshToken, value: token);
 
   Future<void> saveSignatureMessage({required String signatureMessage}) =>
-      _secureStorage.write(key: StorageKeys.signatureMessage, value: signatureMessage);
+      _secureStorage.write(
+          key: StorageKeys.signatureMessage, value: signatureMessage);
 
   Future<String?> readSignatureMessage() =>
       _secureStorage.read(key: StorageKeys.signatureMessage);
@@ -92,6 +91,5 @@ class SecureStorage {
   Future<void> saveSigner({required String signer}) =>
       _secureStorage.write(key: StorageKeys.signer, value: signer);
 
-  Future<String?> readSigner() =>
-      _secureStorage.read(key: StorageKeys.signer);
+  Future<String?> readSigner() => _secureStorage.read(key: StorageKeys.signer);
 }

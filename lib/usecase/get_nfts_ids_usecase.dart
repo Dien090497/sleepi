@@ -11,23 +11,18 @@ class GetNFTsIDsUseCase extends UseCase<List<BigInt>, GetNFTsIDsParams> {
   @override
   Future<Either<Failure, List<BigInt>>> call(GetNFTsIDsParams params) {
     return _nftRepository.tokensOf(
-        nftAddress: params.nftAddress,
-        ownerAddress: params.ownerAddress,
-        count: params.count,
-        start: params.start);
+      nftAddress: params.nftAddress,
+      ownerAddress: params.ownerAddress,
+    );
   }
 }
 
 class GetNFTsIDsParams {
   final String nftAddress;
   final String ownerAddress;
-  final int count;
-  final int start;
 
   GetNFTsIDsParams({
     required this.nftAddress,
     required this.ownerAddress,
-    required this.count,
-    this.start = 0,
   });
 }
