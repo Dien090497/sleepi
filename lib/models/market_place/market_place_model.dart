@@ -11,6 +11,7 @@ class MarketPlaceModel {
   @JsonKey(name: 'category_id')
   final int categoryId;
   final int? isLock;
+  final double? percentEffect;
   final int? isBurn;
   final int time;
   final int level;
@@ -70,7 +71,7 @@ class MarketPlaceModel {
     this.startTime,
     this.endTime,
     this.jewelType,
-    this.isBurn,
+    this.isBurn, this.percentEffect,
   );
 
   factory MarketPlaceModel.fromJson(Map<String, dynamic> json) =>
@@ -80,6 +81,8 @@ class MarketPlaceModel {
 
   BedEntity toBedEntity() {
     return BedEntity(
+      type: type,
+      percentEffect: percentEffect,
       jewelType: jewelType,
       isBurn: isBurn ?? 0,
       name: nftName,
@@ -89,7 +92,7 @@ class MarketPlaceModel {
       id: id,
       level: level,
       image: image,
-      type: type,
+      nftType: type,
       contractAddress: contractAddress,
       quality: quality!,
       durability: double.parse(durability),

@@ -7,6 +7,7 @@ part 'bed_model_home.g.dart';
 class BedModelHome {
   final int id;
   final int nftId;
+  final double? percentEffect;
   final String nftName;
   dynamic parent1;
   dynamic parent2;
@@ -58,6 +59,7 @@ class BedModelHome {
     this.nft,
     this.objData,
     this.jewelType,
+    this.percentEffect,
   );
 
   factory BedModelHome.fromJson(Map<String, dynamic> json) =>
@@ -66,34 +68,36 @@ class BedModelHome {
   Map<String, dynamic> toJson() => _$BedModelHomeToJson(this);
 
   BedEntity toEntity() => BedEntity(
-      isBurn: isBurn,
-      jewelType: jewelType,
-      id: id,
-      nftId: nftId,
-      name: nftName,
-      nftClass: classNft ?? '',
-      tokenId: tokenId,
-      level: level,
-      image: image,
-      type: type,
-      contractAddress: contractAddress,
-      quality: quality,
-      owner: owner,
-      status: nft?.status ?? '',
-      durability: durability,
-      isLock: -1,
-      bedMint: bedMint,
-      efficiency: efficiency,
-      luck: luck,
-      bonus: bonus,
-      special: special,
-      resilience: resilience,
-      time: time,
-      isMint: isMint,
-      socket: nft?.isLock,
-      insurancePercent: objData?.insurancePercent,
-      startTime: objData?.startTime,
-      endTime: objData?.endTime,
+        percentEffect: percentEffect,
+        type: type,
+        isBurn: isBurn,
+        jewelType: jewelType,
+        id: id,
+        nftId: nftId,
+        name: nftName,
+        nftClass: classNft ?? '',
+        tokenId: tokenId,
+        level: level,
+        image: image,
+        nftType: type,
+        contractAddress: contractAddress,
+        quality: quality,
+        owner: owner,
+        status: nft?.status ?? '',
+        durability: durability,
+        isLock: -1,
+        bedMint: bedMint,
+        efficiency: efficiency,
+        luck: luck,
+        bonus: bonus,
+        special: special,
+        resilience: resilience,
+        time: time,
+        isMint: isMint,
+        socket: nft?.isLock,
+        insurancePercent: objData?.insurancePercent,
+        startTime: objData?.startTime,
+        endTime: objData?.endTime,
         jewels: [],
         price: '',
         statusNftSale: '',

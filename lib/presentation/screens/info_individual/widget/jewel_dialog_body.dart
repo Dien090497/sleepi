@@ -60,7 +60,8 @@ class JewelDialogBody extends StatelessWidget {
             ),
             const SizedBox(height: 20),
             SFText(
-              keyText: '${jewel.jewelType.tr()} ${LocaleKeys.jewel.tr()} (${jewel.level})',
+              keyText:
+                  '${jewel.jewelType.tr()} ${LocaleKeys.jewel.tr()} (${jewel.level})',
               style: TextStyles.white1w700size16,
             ),
             const SizedBox(height: 24),
@@ -77,6 +78,29 @@ class JewelDialogBody extends StatelessWidget {
             ),
             const SizedBox(height: 32),
             SFCard(
+              radius: 8,
+              margin: EdgeInsets.zero,
+              padding: const EdgeInsets.symmetric(vertical: 24, horizontal: 18),
+              child: Row(
+                children: [
+                  SFText(
+                    keyText: LocaleKeys.attributes,
+                    style: TextStyles.lightGrey16,
+                  ),
+                  const SizedBox(width: 4),
+                  Expanded(
+                    child: SFText(
+                      keyText: jewel.type,
+                      style: TextStyles.blue16,
+                      textAlign: TextAlign.right,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            const SizedBox(height: 8),
+            SFCard(
+              radius: 8,
               margin: EdgeInsets.zero,
               padding: const EdgeInsets.symmetric(vertical: 24, horizontal: 18),
               child: Row(
@@ -88,7 +112,7 @@ class JewelDialogBody extends StatelessWidget {
                   const SizedBox(width: 4),
                   Expanded(
                     child: SFText(
-                      keyText: '+${jewel.infoBuff}% ${jewel.type.tr()} Res.',
+                      keyText: '+${jewel.percentEffect}%',
                       style: TextStyles.blue16,
                       textAlign: TextAlign.right,
                     ),

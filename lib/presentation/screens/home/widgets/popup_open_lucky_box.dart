@@ -22,11 +22,15 @@ class PopUpOpenLuckyBox extends StatelessWidget {
   final String image;
   final int id;
   final String cost;
-  final int waitingTime;
+  final String waitingTime;
   final Function() onConfirm;
 
   @override
   Widget build(BuildContext context) {
+    final hour = DateTime.fromMillisecondsSinceEpoch(int.parse(waitingTime))
+        .difference(DateTime.now())
+        .inHours
+        .toString();
     return Column(
       children: [
         SFText(
@@ -53,8 +57,7 @@ class PopUpOpenLuckyBox extends StatelessWidget {
           radius: 8,
           padding: const EdgeInsets.symmetric(vertical: 18, horizontal: 16),
           child: SFText(
-            keyText:
-                LocaleKeys.you_can_open_the_luck_box.tr(args: ['$waitingTime']),
+            keyText: LocaleKeys.you_can_open_the_luck_box.tr(args: [hour]),
             style: TextStyles.w400lightGrey12,
           ),
         ),

@@ -8,14 +8,14 @@ class LuckyBox {
   final int id;
   final int userId;
   final int level;
-  final int waitingTime;
+  final String waitingTime;
   final String speedUpCost;
   final String redrawRate;
   final String openingCost;
   final String typeGift;
-  final String symbol;
-  final String amount;
-  final int nftId;
+  final String? symbol;
+  final String? amount;
+  final int? nftId;
   final int isOpen;
   final String createdAt;
   final String updatedAt;

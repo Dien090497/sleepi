@@ -8,6 +8,7 @@ class JewelEntity {
   final String image;
   final String nftName;
   final int level;
+  final double percentEffect;
   final int nftId;
   final String type;
   final String jewelType;
@@ -20,6 +21,7 @@ class JewelEntity {
 
   JewelEntity({
     required this.nftName,
+    required this.percentEffect,
     required this.bonus,
     required this.special,
     required this.id,
