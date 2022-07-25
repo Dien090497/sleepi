@@ -99,7 +99,7 @@ class ItemAttribute extends StatelessWidget {
           Expanded(
             flex: 1,
             child: Text(
-              valueActive.removeTrailingZeros,
+              valueActive.formatBalanceToken,
               style: TextStyles.w700TextColorSize14,
               textAlign: TextAlign.right,
             ),

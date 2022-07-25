@@ -188,7 +188,7 @@ class _TrackingScreenState extends State<TrackingScreen> {
                           Column(
                             children: [
                               SFText(
-                                keyText: LocaleKeys.amount_earned,
+                                keyText: LocaleKeys.est_amount_earned,
                                 style: TextStyles.w400lightGrey14,
                               ),
                               const SizedBox(

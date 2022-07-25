@@ -164,7 +164,7 @@ class TransactionDetail extends StatelessWidget {
                               context,
                               R.trade,
                               arguments:
-                                  TradeArguments(args.tokenEntity.address),
+                                  TradeArguments(contractAddressFrom: args.tokenEntity.address),
                             );
                           },
                           text: LocaleKeys.trade

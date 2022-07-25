@@ -235,22 +235,28 @@ class AlarmBell extends StatelessWidget {
                   showMessageDialog(context, '$l');
                 },
                 (r) async {
-                  final service = FlutterBackgroundService();
-                  SharedPreferences preferences = await SharedPreferences.getInstance();
-                  await preferences.setInt(Const.time, selectedTime.millisecondsSinceEpoch);
-                  FlutterBackgroundService().invoke(Const.setAsForeground);
-                  service.startService();
-                  Navigator.pushNamed(
-                    context,
-                    R.tracking,
-                    arguments: TrackingParams(
-                      timeStart: DateTime.now().millisecondsSinceEpoch,
-                      timeWakeUp: selectedTime.millisecondsSinceEpoch,
-                      tokenEarn: state.tokenEarn,
-                      fromRoute: R.bottomNavigation,
-                      imageBed: bedImage,
-                    ),
-                  );
+                  showMessageDialog(context, LocaleKeys.please_turn_on_tracking,
+                          showImg: false)
+                      .then((value) async {
+                    final service = FlutterBackgroundService();
+                    SharedPreferences preferences =
+                        await SharedPreferences.getInstance();
+                    await preferences.setInt(
+                        Const.time, selectedTime.millisecondsSinceEpoch);
+                    FlutterBackgroundService().invoke(Const.setAsForeground);
+                    service.startService();
+                    Navigator.pushNamed(
+                      context,
+                      R.tracking,
+                      arguments: TrackingParams(
+                        timeStart: DateTime.now().millisecondsSinceEpoch,
+                        timeWakeUp: selectedTime.millisecondsSinceEpoch,
+                        tokenEarn: state.tokenEarn,
+                        fromRoute: R.bottomNavigation,
+                        imageBed: bedImage,
+                      ),
+                    );
+                  });
                 },
               );
             }

@@ -35,7 +35,7 @@ class BoxInfoWidget extends StatelessWidget {
             ),
             const SizedBox(height: 16),
             Text(
-              '${LocaleKeys.time.tr()}: ${bed.startTime!.removeTrailingZeros}h - ${bed.endTime!.removeTrailingZeros}h',
+              '${LocaleKeys.time.tr()}: ${bed.startTime!.formatBalanceToken}h - ${bed.endTime!.formatBalanceToken}h',
               style: TextStyles.lightGrey14,
             ),
             const SizedBox(height: 24),
@@ -81,7 +81,7 @@ class BoxInfoWidget extends StatelessWidget {
                 padding:
                     const EdgeInsets.symmetric(vertical: 8, horizontal: 18),
                 child: Text(
-                  '${bed.durability.removeTrailingZeros}/100',
+                  '${bed.durability.formatBalanceToken}/100',
                   style: TextStyles.yellow14,
                 ),
               ),

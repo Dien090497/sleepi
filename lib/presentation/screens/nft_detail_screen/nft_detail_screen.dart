@@ -95,7 +95,7 @@ class NFTDetailScreen extends StatelessWidget {
                       const SizedBox(height: 16.0),
                       SFText(
                         keyText:
-                            "${token.balance.removeTrailingZeros} ${token.displayName}",
+                            "${token.balance.formatBalanceToken} ${token.displayName}",
                         style: TextStyles.bold30White,
                         textAlign: TextAlign.center,
                       ),

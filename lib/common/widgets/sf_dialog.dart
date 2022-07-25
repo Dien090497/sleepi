@@ -76,7 +76,7 @@ Future<T?> showSuccessfulDialog<T>(
 }
 
 Future<T?> showMessageDialog<T>(BuildContext context, String message,
-    {EdgeInsets? padding, TextStyle? style}) async {
+    {EdgeInsets? padding, TextStyle? style, bool showImg = true}) async {
   return showCustomAlertDialog(
     context,
     padding: padding ?? const EdgeInsets.all(24),
@@ -84,10 +84,11 @@ Future<T?> showMessageDialog<T>(BuildContext context, String message,
       padding: const EdgeInsets.symmetric(vertical: 32, horizontal: 24),
       child: Column(
         children: [
-          const SFIcon(
-            Imgs.errorNoBed,
-            height: 100,
-          ),
+          if (showImg)
+            const SFIcon(
+              Imgs.errorNoBed,
+              height: 100,
+            ),
           const SizedBox(height: 32),
           SFText(
               keyText: message.tr(),
@@ -242,15 +243,17 @@ Future<T?> showLanguageUpdatedDialog<T>(BuildContext context, Locale locale) {
       });
 }
 
-Future<T?> showLoadingDialog<T>(BuildContext context, String message, {
-    bool barrierDismissible = false,
+Future<T?> showLoadingDialog<T>(
+  BuildContext context,
+  String message, {
+  bool barrierDismissible = false,
 }) async {
   return showCustomAlertDialog(
     context,
-    barrierDismissible : barrierDismissible,
+    barrierDismissible: barrierDismissible,
     width: MediaQuery.of(context).size.width * 0.7,
     showClosed: false,
-    children:  Row(
+    children: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
@@ -261,13 +264,13 @@ Future<T?> showLoadingDialog<T>(BuildContext context, String message, {
                   height: 32,
                   child: Platform.isAndroid
                       ? const CircularProgressIndicator(strokeWidth: 3)
-                      : const CupertinoActivityIndicator()
-              )
-          ),
-          SFText(keyText: message, style: TextStyles.white16, textAlign: TextAlign.center,
+                      : const CupertinoActivityIndicator())),
+          SFText(
+            keyText: message,
+            style: TextStyles.white16,
+            textAlign: TextAlign.center,
           )
-        ]
-    ),
+        ]),
   );
 }
 
