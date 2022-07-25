@@ -17,14 +17,9 @@ import 'package:slee_fi/presentation/screens/product_detail/widgets/jewel_dialog
 import 'package:slee_fi/presentation/screens/product_detail/widgets/my_jewel_short_widget.dart';
 import 'package:slee_fi/presentation/screens/product_detail/widgets/upgrade_tab.dart';
 
-class TabJewelsDetail extends StatefulWidget {
+class TabJewelsDetail extends StatelessWidget {
   const TabJewelsDetail({Key? key}) : super(key: key);
 
-  @override
-  State<TabJewelsDetail> createState() => _TabJewelsDetailState();
-}
-
-class _TabJewelsDetailState extends State<TabJewelsDetail> {
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
@@ -57,7 +52,9 @@ class _TabJewelsDetailState extends State<TabJewelsDetail> {
                                   return GestureDetector(
                                     onTap: () {
                                       _showJewelDialog(
-                                        context, state.jewels[i],);
+                                        context,
+                                        state.jewels[i],
+                                      );
                                     },
                                     child: MyJewelsShortWidget(
                                         jewel: state.jewels[i]),
@@ -77,17 +74,22 @@ class _TabJewelsDetailState extends State<TabJewelsDetail> {
   }
 
   _onLoadMore(JewelBloc cubit) async {
-    cubit.add(const JewelFetchList());
+    cubit.add(const JewelFetchAllList());
     return Future.delayed(const Duration(milliseconds: 1500));
   }
 
-  void _showJewelDialog(BuildContext context, BedEntity jewel,) {
+  void _showJewelDialog(
+    BuildContext context,
+    BedEntity jewel,
+  ) {
     showCustomDialog(
       context,
       padding: const EdgeInsets.all(24),
       children: [
         JewelDialogBody(
-          textOnSell: (jewel.isLock == 1 && jewel.statusNftSale == 'ON_SALE') ? LocaleKeys.cancel_sell : LocaleKeys.sell,
+          textOnSell: (jewel.isLock == 1 && jewel.statusNftSale == 'ON_SALE')
+              ? LocaleKeys.cancel_sell
+              : LocaleKeys.sell,
           jewel: jewel,
           onSellTap: () {
             Navigator.pop(context);
@@ -95,7 +97,8 @@ class _TabJewelsDetailState extends State<TabJewelsDetail> {
             showCustomDialog(context, children: [
               BlocProvider(
                 create: (context) => cubit,
-                child: BlocConsumer<BottomBarInfoIndividualCubit, BottomBarInfoIndividualState>(
+                child: BlocConsumer<BottomBarInfoIndividualCubit,
+                    BottomBarInfoIndividualState>(
                   listener: (context, state) {
                     if (state is BottomBarInfoIndividualError) {
                       showMessageDialog(context, state.message);
@@ -106,7 +109,7 @@ class _TabJewelsDetailState extends State<TabJewelsDetail> {
                           Navigator.pushNamedAndRemoveUntil(
                             context,
                             R.bottomNavigation,
-                                (r) => false,
+                            (r) => false,
                           );
                         });
                       }
@@ -124,7 +127,6 @@ class _TabJewelsDetailState extends State<TabJewelsDetail> {
                         cubit: cubit,
                       );
                     }
-
                   },
                 ),
               ),

@@ -99,7 +99,7 @@ class JewelDialogBodyUpgradeSuccess extends StatelessWidget {
                     style: TextStyles.lightGrey16,
                   ),
                   SFText(
-                    keyText: '+${jewel.percentEffect}%',
+                    keyText: '+${jewel.percentEffect??0}%',
                     style: TextStyles.blue16,
                     textAlign: TextAlign.right,
                   )
