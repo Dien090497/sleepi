@@ -356,7 +356,7 @@ abstract class  LocaleKeys {
   static const russian = 'russian';
   static const return_to_home = 'return_to_home';
   static const point = 'point';
-  static const amount_earned = 'amount_earned';
+  static const est_amount_earned = 'est_amount_earned';
   static const rare = 'rare';
   static const epic = 'epic';
   static const legendary = 'legendary';
@@ -469,5 +469,12 @@ abstract class  LocaleKeys {
   static const do_you_really_want_to_cancel_sell = 'do_you_really_want_to_cancel_sell';
   static const consume_and_turn_gacha_time = 'consume_and_turn_gacha_time';
   static const selling = 'selling';
+  static const level_is_highest = 'level_is_highest';
+  static const balance_not_enough = 'balance_not_enough';
+  static const enough_times_mint = 'enough_times_mint';
+  static const minting_not_exists = 'minting_not_exists';
+  static const mint_success = 'mint_success';
+  static const mint_fail = 'mint_fail';
+  static const please_turn_on_tracking = 'please_turn_on_tracking';
 
 }

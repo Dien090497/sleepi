@@ -27,7 +27,7 @@ abstract class NftApi {
       authInterceptor,
       refreshInterceptor,
     ]);
-    return _NftApi(dio, baseUrl: baseUrl);
+    return _NftApi(dio, baseUrl: '$baseUrl/nft');
   }
 
   @GET('')

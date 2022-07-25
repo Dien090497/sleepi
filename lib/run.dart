@@ -154,7 +154,7 @@ Future<void> onStart(ServiceInstance service) async {
         await audioPlayer.setAsset(Const.soundAlarm[sound]).then((value) async {
           await audioPlayer.setVolume(1);
           await audioPlayer.play();
-          await audioPlayer.setLoopMode(LoopMode.one);
+          await audioPlayer.setLoopMode(LoopMode.all);
         });
       }
       timer.cancel();

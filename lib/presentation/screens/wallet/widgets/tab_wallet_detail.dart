@@ -186,7 +186,7 @@ class _TabWalletDetailState extends State<TabWalletDetail> {
                                   context,
                                   R.trade,
                                   arguments: TradeArguments(
-                                    Const.tokens[0]['address'].toString(),
+                                    contractAddressFrom: Const.tokens[0]['address'].toString(),
                                   ),
                                 );
                               },
