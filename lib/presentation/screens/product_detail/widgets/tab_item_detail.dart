@@ -16,12 +16,10 @@ import 'package:slee_fi/presentation/screens/home/widgets/pop_up_cancel_sell.dar
 import 'package:slee_fi/presentation/screens/info_individual/widget/pop_up_sell.dart';
 import 'package:slee_fi/presentation/screens/product_detail/widgets/jewel_dialog_body.dart';
 import 'package:slee_fi/presentation/screens/product_detail/widgets/upgrade_tab.dart';
-import 'package:slee_fi/usecase/fetch_bed_usecase.dart';
 
 class TabItemDetail extends StatelessWidget {
   const TabItemDetail({Key? key}) : super(key: key);
 
-  final CategoryType categoryType = CategoryType.item;
 
   @override
   Widget build(BuildContext context) {
@@ -82,7 +80,7 @@ class TabItemDetail extends StatelessWidget {
   }
 
   _onLoadMore(JewelBloc cubit) async {
-    cubit.add(const JewelFetchList());
+    cubit.add(const JewelFetchAllList());
     await Future.delayed(const Duration(milliseconds: 1500));
   }
 

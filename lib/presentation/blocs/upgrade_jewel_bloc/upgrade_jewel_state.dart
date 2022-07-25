@@ -10,9 +10,11 @@ class JewelState with _$JewelState {
 
   const factory JewelState.loaded({
     @Default([]) List<BedEntity> jewels,
+    @Default([]) List<BedEntity> jewelsAvailable,
     @Default([]) List<BedEntity> jewelsUpgrade,
     UpgradeInfoResponse? upgradeInfoResponse,
     @Default(true) bool isLoadMore,
+    @Default(true) bool isLoadMoreAvailable,
     @Default(false) bool loading,
     BedEntity? upgradeSuccess,
     String? errorMessage

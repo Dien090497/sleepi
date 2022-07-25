@@ -65,14 +65,16 @@ class ModalJewelList extends StatelessWidget {
               child: BlocBuilder<JewelBloc, JewelState>(
                 bloc: jewelBloc,
                 builder: (context, state) {
-                  if ((state is JewelStateLoaded && state.isLoadMore) ||
+                  if ((state is JewelStateLoaded &&
+                          state.isLoadMoreAvailable) ||
                       (state is! JewelStateLoaded)) {
-                    jewelBloc.add(const JewelFetchList());
+                    jewelBloc.add(const JewelFetchListAvailable());
                   }
 
                   if (state is JewelStateLoaded) {
                     final map = <String, List<BedEntity>>{};
-                    for (var element in state.jewels) {
+
+                    for (var element in state.jewelsAvailable) {
                       if (element.level >= 5) {
                         continue;
                       }
@@ -83,14 +85,16 @@ class ModalJewelList extends StatelessWidget {
                         map[key] = [element];
                       }
                     }
-                    final tempList = map.values.toList();
+                    final tempList = map.values.toList()
+                      ..sort((a, b) => b.length.compareTo(a.length));
                     return SFGridView(
-                      isLoadMore: state.isLoadMore,
+                      isLoadMore: state.isLoadMoreAvailable,
                       isScroll: true,
                       count: tempList.length,
                       childAspectRatio: 1,
                       onLoadMore: _onLoadMore(),
-                      onRefresh: () => jewelBloc.add(const JewelRefreshList()),
+                      onRefresh: () =>
+                          jewelBloc.add(const JewelRefreshListAvailable()),
                       itemBuilder: (context, i) {
                         final item = tempList[i];
                         return GestureDetector(
@@ -142,7 +146,7 @@ class ModalJewelList extends StatelessWidget {
   }
 
   Future<void> _onLoadMore() async {
-    jewelBloc.add(const JewelFetchList());
+    jewelBloc.add(const JewelFetchListAvailable());
     return Future.delayed(const Duration(milliseconds: 1500));
   }
 }

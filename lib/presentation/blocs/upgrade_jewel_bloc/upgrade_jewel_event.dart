@@ -15,8 +15,8 @@ class InitEvent extends JewelEvent {
   List<Object?> get props => [categoryType];
 }
 
-class JewelFetchList extends JewelEvent {
-  const JewelFetchList();
+class JewelFetchListAvailable extends JewelEvent {
+  const JewelFetchListAvailable();
 
   @override
   List<Object?> get props => [];
@@ -24,6 +24,13 @@ class JewelFetchList extends JewelEvent {
 
 class JewelRefreshList extends JewelEvent {
   const JewelRefreshList();
+
+  @override
+  List<Object?> get props => [];
+}
+
+class JewelRefreshListAvailable extends JewelEvent {
+  const JewelRefreshListAvailable();
 
   @override
   List<Object?> get props => [];
@@ -64,6 +71,12 @@ class JewelLoading extends JewelEvent {
 
 class JewelFetchAllList extends JewelEvent {
   const JewelFetchAllList();
+
+  @override
+  List<Object?> get props => [];
+}
+class ClearJewelSuccess extends JewelEvent {
+  const ClearJewelSuccess();
 
   @override
   List<Object?> get props => [];

@@ -16,7 +16,7 @@ class BedModelHome {
   final String owner;
   final String type;
   final String? jewelType;
-  dynamic itemType;
+  final String? itemType;
   final String? classNft;
   final String quality;
   final String image;
@@ -60,6 +60,7 @@ class BedModelHome {
     this.objData,
     this.jewelType,
     this.percentEffect,
+    this.itemType,
   );
 
   factory BedModelHome.fromJson(Map<String, dynamic> json) =>
@@ -70,6 +71,7 @@ class BedModelHome {
   BedEntity toEntity() => BedEntity(
         percentEffect: percentEffect,
         type: type,
+        itemType: itemType,
         isBurn: isBurn,
         jewelType: jewelType,
         id: id,
