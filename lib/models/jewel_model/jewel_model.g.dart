@@ -27,6 +27,7 @@ JewelModel _$JewelModelFromJson(Map<String, dynamic> json) => JewelModel(
       json['bonus'] as String,
       json['special'] as String,
       json['resilience'] as String,
+      (json['percentEffect'] as num?)?.toDouble(),
     )
       ..classNft = json['classNft']
       ..quality = json['quality'];
@@ -35,6 +36,7 @@ Map<String, dynamic> _$JewelModelToJson(JewelModel instance) =>
     <String, dynamic>{
       'id': instance.id,
       'nftId': instance.nftId,
+      'percentEffect': instance.percentEffect,
       'nftName': instance.nftName,
       'contractAddress': instance.contractAddress,
       'tokenId': instance.tokenId,

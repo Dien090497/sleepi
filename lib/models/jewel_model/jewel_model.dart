@@ -7,6 +7,7 @@ part 'jewel_model.g.dart';
 class JewelModel {
   final int id;
   final int nftId;
+  final double? percentEffect;
   final String nftName;
   final String contractAddress;
   final int tokenId;
@@ -49,6 +50,7 @@ class JewelModel {
     this.bonus,
     this.special,
     this.resilience,
+    this.percentEffect,
   );
 
   factory JewelModel.fromJson(Map<String, dynamic> json) =>
@@ -57,6 +59,7 @@ class JewelModel {
   Map<String, dynamic> toJson() => _$JewelModelToJson(this);
 
   JewelEntity toEntity() => JewelEntity(
+      percentEffect: percentEffect ?? -1,
       nftName: nftName,
       special: special,
       bonus: bonus,

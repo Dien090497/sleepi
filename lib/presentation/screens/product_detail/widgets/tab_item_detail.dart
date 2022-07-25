@@ -56,15 +56,17 @@ class TabItemDetail extends StatelessWidget {
                                 itemBuilder: (context, i) {
                                   return GestureDetector(
                                     onTap: () {
-                                      _showJewelDialog(context, state.jewels[i]);
+                                      _showJewelDialog(
+                                          context, state.jewels[i]);
                                     },
                                     child: MyItemsShortWidget(
-                                        name: state.jewels[i].name,
-                                        image: state.jewels[i].image,
-                                        quality: state.jewels[i].quality,
-                                        level: state.jewels[i].level,
-                                        type: state.jewels[i].type,
-                                        items: state.jewels[i],),
+                                      name: state.jewels[i].name,
+                                      image: state.jewels[i].image,
+                                      quality: state.jewels[i].quality,
+                                      level: state.jewels[i].level,
+                                      type: state.jewels[i].type,
+                                      items: state.jewels[i],
+                                    ),
                                   );
                                 },
                               );
@@ -84,20 +86,27 @@ class TabItemDetail extends StatelessWidget {
     await Future.delayed(const Duration(milliseconds: 1500));
   }
 
-  void _showJewelDialog(BuildContext context, BedEntity items,) {
+  void _showJewelDialog(
+    BuildContext context,
+    BedEntity items,
+  ) {
     showCustomDialog(
       context,
       padding: const EdgeInsets.all(24),
       children: [
         JewelDialogBody(
-          textOnSell: (items.isLock == 1 && items.statusNftSale == 'ON_SALE') ? LocaleKeys.cancel_sell : LocaleKeys.sell,
+          textOnSell: (items.isLock == 1 && items.statusNftSale == 'ON_SALE')
+              ? LocaleKeys.cancel_sell
+              : LocaleKeys.sell,
           jewel: items,
+          isJewel: false,
           onSellTap: () {
             final cubit = BottomBarInfoIndividualCubit()..init();
             showCustomDialog(context, children: [
               BlocProvider(
                 create: (context) => cubit,
-                child: BlocConsumer<BottomBarInfoIndividualCubit, BottomBarInfoIndividualState>(
+                child: BlocConsumer<BottomBarInfoIndividualCubit,
+                    BottomBarInfoIndividualState>(
                   listener: (context, state) {
                     if (state is BottomBarInfoIndividualError) {
                       Navigator.pop(context);
@@ -110,7 +119,7 @@ class TabItemDetail extends StatelessWidget {
                           Navigator.pushNamedAndRemoveUntil(
                             context,
                             R.bottomNavigation,
-                                (r) => false,
+                            (r) => false,
                           );
                         });
                       }
