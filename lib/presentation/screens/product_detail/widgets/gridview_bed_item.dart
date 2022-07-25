@@ -70,6 +70,21 @@ class GridViewBedItem extends StatelessWidget {
                     textColor: qualityColor,
                   ),
                 ),
+                (beds[i].isLock == 1 && beds[i].statusNftSale == 'ON_SALE' ) ? Positioned(
+                    top: 14,
+                    right: 10,
+                    child: Container(
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(10),
+                        color: AppColors.yellow,
+                      ),
+                      padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 5),
+                      child: SFText(
+                        keyText: LocaleKeys.selling,
+                        style: TextStyles.white1w700size12,
+                      ),
+                    )
+                ) : const SizedBox(),
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 16.0),
                   child: Column(
