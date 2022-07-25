@@ -7,7 +7,8 @@ import 'package:slee_fi/l10n/locale_keys.g.dart';
 import 'custom_radio_button.dart';
 
 class OptionBeds extends StatefulWidget {
-  const OptionBeds({Key? key}) : super(key: key);
+  const OptionBeds({required this.type, Key? key}) : super(key: key);
+  final String? type;
 
   @override
   State<OptionBeds> createState() => _OptionBedsState();
@@ -15,9 +16,16 @@ class OptionBeds extends StatefulWidget {
 
 class _OptionBedsState extends State<OptionBeds> {
   int selectedIndex = 0;
-  List<String> optionList = [LocaleKeys.short_bed, LocaleKeys.middle_bed, LocaleKeys.long_bed];
+  int? bedIndex;
+  List<String> bedTypes = ['short', 'middle', 'long', 'flexible'];
+  List<String> optionList = [LocaleKeys.short_bed, LocaleKeys.middle_bed, LocaleKeys.long_bed, LocaleKeys.flexible_bed];
+
   @override
   Widget build(BuildContext context) {
+    if(widget.type != null ){
+      bedIndex =  bedTypes.indexWhere((type) => type == widget.type);
+    }
+
     return Row(
       children:  List.generate(optionList.length, (index) {
         return Expanded(
@@ -29,8 +37,8 @@ class _OptionBedsState extends State<OptionBeds> {
             },
               child: Option(
                   title: optionList.elementAt(index),
-                  textStyle: selectedIndex == index ? TextStyles.blue12W700 : null,
-                  value: selectedIndex,
+                  textStyle: index == bedIndex ? TextStyles.blue12W700 : null,
+                  value: bedIndex != null ? bedIndex! : index,
                   groupValue: index,
               )
           ),
@@ -41,7 +49,7 @@ class _OptionBedsState extends State<OptionBeds> {
 }
 
 class Option extends StatelessWidget {
-  const Option({required this.title, this.textStyle, this.color, required this.value, required this.groupValue, Key? key}) : super(key: key);
+  const Option({required this.title, this.textStyle, this.color,required this.groupValue,  required this.value, Key? key}) : super(key: key);
 
   final String title;
   final Color? color;
@@ -55,6 +63,8 @@ class Option extends StatelessWidget {
       padding: const EdgeInsets.symmetric(
           horizontal: 10),
       child: Container(
+        padding: const EdgeInsets.symmetric(
+            horizontal: 8),
         decoration: BoxDecoration(
             borderRadius:
             BorderRadius.circular(10),
@@ -67,14 +77,10 @@ class Option extends StatelessWidget {
             ),
             Align(
               alignment: Alignment.topRight,
-              child: Container(
-                margin: const EdgeInsets.only(
-                    top: 3, right: 8),
-                child: CustomRadio(
-                  value: value,
-                  groupValue: groupValue,
-                  onChanged: (value) {},
-                ),
+              child: CustomRadio(
+                value: value,
+                groupValue: groupValue,
+                onChanged: (value){},
               ),
             ),
             Padding(

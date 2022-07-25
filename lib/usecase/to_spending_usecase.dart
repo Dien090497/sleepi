@@ -21,6 +21,7 @@ class ToSpendingUseCase extends UseCase<String, ToSpendingParams> {
           owner: r.credentials,
           addressContract: params.addressContract,
           userId: params.userId,
+          type: params.type
         );
         return result;
       },
@@ -31,10 +32,12 @@ class ToSpendingUseCase extends UseCase<String, ToSpendingParams> {
 class ToSpendingParams {
   final double amount;
   final String addressContract;
+  final String type;
   final int userId;
 
   ToSpendingParams({
     required this.amount,
+    required this.type,
     required this.addressContract,
     required this.userId,
   });

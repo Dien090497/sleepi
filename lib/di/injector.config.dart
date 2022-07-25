@@ -297,7 +297,9 @@ Future<_i1.GetIt> $initGetIt(_i1.GetIt get,
   gh.factory<_i53.ISpendingRepository>(() => _i54.SpendingImplementation(
       get<_i30.SpendingDataSource>(),
       get<_i42.AuthDataSource>(),
-      get<_i28.SecureStorage>()));
+      get<_i28.SecureStorage>(),
+      get<_i13.GetStorageDataSource>(),
+      get<_i22.HistoryDataSource>()));
   gh.factory<_i55.IUserRepository>(() => _i56.UserImplementation(
       get<_i42.AuthDataSource>(),
       get<_i28.SecureStorage>(),
