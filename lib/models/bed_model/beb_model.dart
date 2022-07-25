@@ -12,6 +12,7 @@ class BedModel {
   final int id;
 
   final int nftId;
+  final double? percentEffect;
   final int? isBurn;
 
   final String nftName;
@@ -21,6 +22,7 @@ class BedModel {
   final String contractAddress;
 
   final String nftType;
+  final String type;
 
   final String? jewelType;
 
@@ -89,7 +91,8 @@ class BedModel {
       this.endTime,
       this.jewels,
       this.isBurn,
-      this.nftSale);
+      this.nftSale,
+      this.percentEffect, this.type);
 
   factory BedModel.fromJson(Map<String, dynamic> json) =>
       _$BedModelFromJson(json);
@@ -98,6 +101,7 @@ class BedModel {
 
   JewelEntity toJewelEntity() {
     return JewelEntity(
+        percentEffect: percentEffect ?? -1,
         nftName: nftName,
         bonus: bonus,
         special: special,
@@ -118,6 +122,7 @@ class BedModel {
       isBurn: isBurn ?? 0,
       jewelType: jewelType,
       name: nftName,
+      percentEffect: percentEffect,
       nftId: nftId,
       nftClass: nftClass ?? '',
       tokenId: tokenId,
@@ -128,7 +133,8 @@ class BedModel {
       isLock: nft?.isLock ?? 0,
       bedMint: bedMint,
       quality: quality,
-      type: nftType,
+      nftType: nftType,
+      type: type,
       isMint: isMint,
       efficiency: double.parse('$efficiency'),
       luck: double.parse('$luck'),

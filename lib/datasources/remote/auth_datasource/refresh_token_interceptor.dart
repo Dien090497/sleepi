@@ -2,7 +2,6 @@ import 'dart:developer';
 
 import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
-import 'package:slee_fi/common/const/const.dart';
 import 'package:slee_fi/datasources/local/secure_storage.dart';
 import 'package:slee_fi/di/injector.dart';
 import 'package:slee_fi/models/access_token_expire_model/access_token_expire_model.dart';
@@ -36,7 +35,7 @@ class RefreshTokenInterceptor extends QueuedInterceptor {
     if (refreshToken != null) {
       try {
         final result = await dio.post(
-          '${Const.baseApiDev}/auth/refresh-token',
+          '${getIt<String>(instanceName: 'baseUrl')}/auth/refresh-token',
           data: RefreshTokenSchema(refreshToken).toJson(),
         );
         final RefreshTokenModel res = RefreshTokenModel.fromJson(result.data!);

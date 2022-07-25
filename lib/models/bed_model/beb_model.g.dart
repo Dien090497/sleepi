@@ -44,16 +44,20 @@ BedModel _$BedModelFromJson(Map<String, dynamic> json) => BedModel(
       json['nftSale'] == null
           ? null
           : NftSale.fromJson(json['nftSale'] as Map<String, dynamic>),
+      (json['percentEffect'] as num?)?.toDouble(),
+      json['type'] as String,
     );
 
 Map<String, dynamic> _$BedModelToJson(BedModel instance) => <String, dynamic>{
       'id': instance.id,
       'nftId': instance.nftId,
+      'percentEffect': instance.percentEffect,
       'isBurn': instance.isBurn,
       'nftName': instance.nftName,
       'image': instance.image,
       'contractAddress': instance.contractAddress,
       'nftType': instance.nftType,
+      'type': instance.type,
       'jewelType': instance.jewelType,
       'itemType': instance.itemType,
       'effect': instance.effect,

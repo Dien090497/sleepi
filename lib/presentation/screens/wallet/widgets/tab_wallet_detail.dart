@@ -211,7 +211,13 @@ class _TabWalletDetailState extends State<TabWalletDetail> {
                                 const EdgeInsets.symmetric(horizontal: 12.0),
                             child: ElevatedButton(
                                 onPressed: () async {
-                                  final uri = Uri.parse(Const.binanceUrl);
+                                  final langCodes = Const.locales.map<String>((e) => e.languageCode).toList();
+                                  final currentLocale = context.locale;
+                                  int selectedIndex = langCodes.indexOf(currentLocale.languageCode);
+                                  var uri = Uri.parse(Const.binanceUrlEn);
+                                  if(selectedIndex == 4){
+                                    uri = Uri.parse(Const.binanceUrlJa);
+                                  }
                                   if (await canLaunchUrl(uri)) {
                                     launchUrl(uri);
                                   }

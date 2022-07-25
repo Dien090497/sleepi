@@ -1,8 +1,6 @@
 import 'package:dio/dio.dart';
-import 'package:flutter/foundation.dart';
 import 'package:injectable/injectable.dart';
 import 'package:retrofit/retrofit.dart';
-import 'package:slee_fi/common/const/const.dart';
 import 'package:slee_fi/common/enum/enum.dart';
 import 'package:slee_fi/datasources/remote/auth_datasource/auth_interceptor.dart';
 import 'package:slee_fi/datasources/remote/auth_datasource/refresh_token_interceptor.dart';
@@ -66,16 +64,20 @@ import 'package:slee_fi/schema/with_draw_nft_schema/with_draw_nft_schema.dart';
 part 'auth_datasource.g.dart';
 
 @Injectable()
-@RestApi(baseUrl: kDebugMode ? Const.baseApiDev : Const.baseApiDev)
+@RestApi()
 abstract class AuthDataSource {
   @factoryMethod
-  factory AuthDataSource(Dio dio, AuthInterceptor authInterceptor,
-      RefreshTokenInterceptor refreshInterceptor) {
+  factory AuthDataSource(
+    Dio dio,
+    AuthInterceptor authInterceptor,
+    RefreshTokenInterceptor refreshInterceptor,
+    @Named('baseUrl') String baseUrl,
+  ) {
     dio.interceptors.addAll([
       authInterceptor,
       refreshInterceptor,
     ]);
-    return _AuthDataSource(dio);
+    return _AuthDataSource(dio, baseUrl: baseUrl);
   }
 
   ///user

@@ -1,7 +1,7 @@
 import 'dart:math';
 
 import 'package:injectable/injectable.dart';
-import 'package:slee_fi/common/abi/nft.g.dart';
+import 'package:slee_fi/common/abi/bed.g.dart';
 import 'package:slee_fi/common/abi/spending.g.dart';
 import 'package:slee_fi/datasources/remote/network/web3_provider.dart';
 import 'package:web3dart/web3dart.dart';
@@ -13,18 +13,16 @@ class NFTDataSource {
   NFTDataSource(this._web3provider);
 
   Future<BigInt> balanceOf(String address, String ownerAddress) {
-    return _nft(address).balanceOf(EthereumAddress.fromHex(ownerAddress));
+    return _bed(address).balanceOf(EthereumAddress.fromHex(ownerAddress));
   }
 
-  Future<List<BigInt>> tokensOf(
-      String address, String owner, BigInt count, BigInt start) {
-    return _nft(address)
-        .getTokensOfOwner(EthereumAddress.fromHex(owner), count, start);
+  Future<List<BigInt>> tokensOf(String address, String owner) {
+    return _bed(address).tokensOfOwner(EthereumAddress.fromHex(owner));
   }
 
-  Future<String> name(String address) => _nft(address).name();
+  Future<String> name(String address) => _bed(address).name();
 
-  Future<String> symbol(String address) => _nft(address).symbol();
+  Future<String> symbol(String address) => _bed(address).symbol();
 
   Future<String> transferFrom({
     required String nftAddress,
@@ -33,7 +31,7 @@ class NFTDataSource {
     required BigInt tokenId,
     required Credentials credentials,
   }) =>
-      _nft(nftAddress).transferFrom(
+      _bed(nftAddress).transferFrom(
           EthereumAddress.fromHex(from), EthereumAddress.fromHex(to), tokenId,
           credentials: credentials);
 
@@ -42,7 +40,7 @@ class NFTDataSource {
     required String operator,
     required Credentials credentials,
   }) =>
-      _nft(address).setApprovalForAll(EthereumAddress.fromHex(operator), true,
+      _bed(address).setApprovalForAll(EthereumAddress.fromHex(operator), true,
           credentials: credentials);
 
   Future<bool> isApprovedForAll({
@@ -51,10 +49,10 @@ class NFTDataSource {
     required String operator,
     required Credentials credentials,
   }) =>
-      _nft(address).isApprovedForAll(
+      _bed(address).isApprovedForAll(
           EthereumAddress.fromHex(owner), EthereumAddress.fromHex(operator));
 
-  Nft _nft(String address) => Nft(
+  Bed _bed(String address) => Bed(
       address: EthereumAddress.fromHex(address),
       client: _web3provider.web3client);
 
@@ -93,7 +91,7 @@ class NFTDataSource {
     required String functionName,
     required List<dynamic> data,
   }) async {
-    final Nft nft = _nft(nftAddress);
+    final Bed nft = _bed(nftAddress);
     final transferFromFunc = nft.self.function(functionName);
     final gasFee = await _web3provider.web3client.estimateGas(
       sender: ownerAddress,

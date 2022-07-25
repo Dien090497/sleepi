@@ -20,9 +20,11 @@ mixin _$BedEntity {
   int get nftId => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
   String get nftClass => throw _privateConstructorUsedError;
+  double? get percentEffect => throw _privateConstructorUsedError;
   int get tokenId => throw _privateConstructorUsedError;
   int get level => throw _privateConstructorUsedError;
   String get image => throw _privateConstructorUsedError;
+  String get nftType => throw _privateConstructorUsedError;
   String get type => throw _privateConstructorUsedError;
   String get contractAddress => throw _privateConstructorUsedError;
   String? get quality => throw _privateConstructorUsedError;
@@ -62,9 +64,11 @@ abstract class $BedEntityCopyWith<$Res> {
       int nftId,
       String name,
       String nftClass,
+      double? percentEffect,
       int tokenId,
       int level,
       String image,
+      String nftType,
       String type,
       String contractAddress,
       String? quality,
@@ -105,9 +109,11 @@ class _$BedEntityCopyWithImpl<$Res> implements $BedEntityCopyWith<$Res> {
     Object? nftId = freezed,
     Object? name = freezed,
     Object? nftClass = freezed,
+    Object? percentEffect = freezed,
     Object? tokenId = freezed,
     Object? level = freezed,
     Object? image = freezed,
+    Object? nftType = freezed,
     Object? type = freezed,
     Object? contractAddress = freezed,
     Object? quality = freezed,
@@ -150,6 +156,10 @@ class _$BedEntityCopyWithImpl<$Res> implements $BedEntityCopyWith<$Res> {
           ? _value.nftClass
           : nftClass // ignore: cast_nullable_to_non_nullable
               as String,
+      percentEffect: percentEffect == freezed
+          ? _value.percentEffect
+          : percentEffect // ignore: cast_nullable_to_non_nullable
+              as double?,
       tokenId: tokenId == freezed
           ? _value.tokenId
           : tokenId // ignore: cast_nullable_to_non_nullable
@@ -161,6 +171,10 @@ class _$BedEntityCopyWithImpl<$Res> implements $BedEntityCopyWith<$Res> {
       image: image == freezed
           ? _value.image
           : image // ignore: cast_nullable_to_non_nullable
+              as String,
+      nftType: nftType == freezed
+          ? _value.nftType
+          : nftType // ignore: cast_nullable_to_non_nullable
               as String,
       type: type == freezed
           ? _value.type
@@ -273,9 +287,11 @@ abstract class _$$_BedEntityCopyWith<$Res> implements $BedEntityCopyWith<$Res> {
       int nftId,
       String name,
       String nftClass,
+      double? percentEffect,
       int tokenId,
       int level,
       String image,
+      String nftType,
       String type,
       String contractAddress,
       String? quality,
@@ -318,9 +334,11 @@ class __$$_BedEntityCopyWithImpl<$Res> extends _$BedEntityCopyWithImpl<$Res>
     Object? nftId = freezed,
     Object? name = freezed,
     Object? nftClass = freezed,
+    Object? percentEffect = freezed,
     Object? tokenId = freezed,
     Object? level = freezed,
     Object? image = freezed,
+    Object? nftType = freezed,
     Object? type = freezed,
     Object? contractAddress = freezed,
     Object? quality = freezed,
@@ -363,6 +381,10 @@ class __$$_BedEntityCopyWithImpl<$Res> extends _$BedEntityCopyWithImpl<$Res>
           ? _value.nftClass
           : nftClass // ignore: cast_nullable_to_non_nullable
               as String,
+      percentEffect: percentEffect == freezed
+          ? _value.percentEffect
+          : percentEffect // ignore: cast_nullable_to_non_nullable
+              as double?,
       tokenId: tokenId == freezed
           ? _value.tokenId
           : tokenId // ignore: cast_nullable_to_non_nullable
@@ -374,6 +396,10 @@ class __$$_BedEntityCopyWithImpl<$Res> extends _$BedEntityCopyWithImpl<$Res>
       image: image == freezed
           ? _value.image
           : image // ignore: cast_nullable_to_non_nullable
+              as String,
+      nftType: nftType == freezed
+          ? _value.nftType
+          : nftType // ignore: cast_nullable_to_non_nullable
               as String,
       type: type == freezed
           ? _value.type
@@ -483,9 +509,11 @@ class _$_BedEntity implements _BedEntity {
       required this.nftId,
       required this.name,
       required this.nftClass,
+      required this.percentEffect,
       required this.tokenId,
       required this.level,
       required this.image,
+      required this.nftType,
       required this.type,
       required this.contractAddress,
       required this.quality,
@@ -521,11 +549,15 @@ class _$_BedEntity implements _BedEntity {
   @override
   final String nftClass;
   @override
+  final double? percentEffect;
+  @override
   final int tokenId;
   @override
   final int level;
   @override
   final String image;
+  @override
+  final String nftType;
   @override
   final String type;
   @override
@@ -582,7 +614,7 @@ class _$_BedEntity implements _BedEntity {
 
   @override
   String toString() {
-    return 'BedEntity(id: $id, nftId: $nftId, name: $name, nftClass: $nftClass, tokenId: $tokenId, level: $level, image: $image, type: $type, contractAddress: $contractAddress, quality: $quality, owner: $owner, status: $status, durability: $durability, isLock: $isLock, bedMint: $bedMint, efficiency: $efficiency, luck: $luck, bonus: $bonus, isBurn: $isBurn, special: $special, resilience: $resilience, time: $time, isMint: $isMint, socket: $socket, insurancePercent: $insurancePercent, startTime: $startTime, endTime: $endTime, jewelType: $jewelType, jewels: $jewels, statusNftSale: $statusNftSale, price: $price)';
+    return 'BedEntity(id: $id, nftId: $nftId, name: $name, nftClass: $nftClass, percentEffect: $percentEffect, tokenId: $tokenId, level: $level, image: $image, nftType: $nftType, type: $type, contractAddress: $contractAddress, quality: $quality, owner: $owner, status: $status, durability: $durability, isLock: $isLock, bedMint: $bedMint, efficiency: $efficiency, luck: $luck, bonus: $bonus, isBurn: $isBurn, special: $special, resilience: $resilience, time: $time, isMint: $isMint, socket: $socket, insurancePercent: $insurancePercent, startTime: $startTime, endTime: $endTime, jewelType: $jewelType, jewels: $jewels, statusNftSale: $statusNftSale, price: $price)';
   }
 
   @override
@@ -594,9 +626,12 @@ class _$_BedEntity implements _BedEntity {
             const DeepCollectionEquality().equals(other.nftId, nftId) &&
             const DeepCollectionEquality().equals(other.name, name) &&
             const DeepCollectionEquality().equals(other.nftClass, nftClass) &&
+            const DeepCollectionEquality()
+                .equals(other.percentEffect, percentEffect) &&
             const DeepCollectionEquality().equals(other.tokenId, tokenId) &&
             const DeepCollectionEquality().equals(other.level, level) &&
             const DeepCollectionEquality().equals(other.image, image) &&
+            const DeepCollectionEquality().equals(other.nftType, nftType) &&
             const DeepCollectionEquality().equals(other.type, type) &&
             const DeepCollectionEquality()
                 .equals(other.contractAddress, contractAddress) &&
@@ -636,9 +671,11 @@ class _$_BedEntity implements _BedEntity {
         const DeepCollectionEquality().hash(nftId),
         const DeepCollectionEquality().hash(name),
         const DeepCollectionEquality().hash(nftClass),
+        const DeepCollectionEquality().hash(percentEffect),
         const DeepCollectionEquality().hash(tokenId),
         const DeepCollectionEquality().hash(level),
         const DeepCollectionEquality().hash(image),
+        const DeepCollectionEquality().hash(nftType),
         const DeepCollectionEquality().hash(type),
         const DeepCollectionEquality().hash(contractAddress),
         const DeepCollectionEquality().hash(quality),
@@ -677,9 +714,11 @@ abstract class _BedEntity implements BedEntity {
       required final int nftId,
       required final String name,
       required final String nftClass,
+      required final double? percentEffect,
       required final int tokenId,
       required final int level,
       required final String image,
+      required final String nftType,
       required final String type,
       required final String contractAddress,
       required final String? quality,
@@ -714,11 +753,15 @@ abstract class _BedEntity implements BedEntity {
   @override
   String get nftClass;
   @override
+  double? get percentEffect;
+  @override
   int get tokenId;
   @override
   int get level;
   @override
   String get image;
+  @override
+  String get nftType;
   @override
   String get type;
   @override

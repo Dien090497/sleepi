@@ -4,8 +4,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:slee_fi/common/routes/app_routes.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
-import 'package:slee_fi/presentation/screens/home/widgets/pop_up_cancel_sell.dart';
-import 'package:slee_fi/presentation/screens/info_individual/widget/pop_up_level_up.dart';
 import 'package:slee_fi/common/widgets/sf_alert_dialog.dart';
 import 'package:slee_fi/common/widgets/sf_dialog.dart';
 import 'package:slee_fi/common/widgets/sf_icon.dart';
@@ -14,13 +12,17 @@ import 'package:slee_fi/entities/bed_entity/bed_entity.dart';
 import 'package:slee_fi/l10n/locale_keys.g.dart';
 import 'package:slee_fi/presentation/blocs/bottom_bar_infoIndividual/bottom_bar_infoIndividual_cubit.dart';
 import 'package:slee_fi/presentation/blocs/bottom_bar_infoIndividual/bottom_bar_infoIndividual_state.dart';
+import 'package:slee_fi/presentation/screens/home/widgets/pop_up_cancel_sell.dart';
 import 'package:slee_fi/presentation/screens/home/widgets/pop_up_repair.dart';
 import 'package:slee_fi/presentation/screens/home/widgets/pop_up_transfer.dart';
+import 'package:slee_fi/presentation/screens/info_individual/widget/pop_up_level_up.dart';
 import 'package:slee_fi/presentation/screens/info_individual/widget/pop_up_sell.dart';
 import 'package:slee_fi/resources/resources.dart';
 
 class BottomBarWidget extends StatefulWidget {
-  const BottomBarWidget({Key? key, required this.bedEntity, required this.onBackIndividual}) : super(key: key);
+  const BottomBarWidget(
+      {Key? key, required this.bedEntity, required this.onBackIndividual})
+      : super(key: key);
   final BedEntity bedEntity;
   final VoidCallback onBackIndividual;
 
@@ -33,7 +35,9 @@ class BottomBarWidgetState extends State<BottomBarWidget> {
 
   late BedEntity bedEntity = widget.bedEntity;
 
-  updateBed(bed) {
+  final cubit = BottomBarInfoIndividualCubit()..init();
+
+  void updateBed(bed) {
     bedEntity = bed;
     setState(() {});
   }
@@ -52,18 +56,16 @@ class BottomBarWidgetState extends State<BottomBarWidget> {
               icon,
               color: index == i
                   ? AppColors.blue
-                  : i == 0 && bedEntity.level == 30
+                  : i == 0 && bedEntity.level == 30 || i == 2 && bedEntity.bedMint == 7
                       ? AppColors.lightGrey
                       : AppColors.greyBottomIndividual,
             ),
-            const SizedBox(
-              height: 6,
-            ),
+            const SizedBox(height: 6),
             SFText(
               keyText: key,
               style: index == i
                   ? TextStyles.blue12
-                  : i == 0 && bedEntity.level == 30
+                  : i == 0 && bedEntity.level == 30 || i == 2 && bedEntity.bedMint == 7
                       ? TextStyles.lightGrey12
                       : TextStyles.w400LightWhite12,
             ),
@@ -75,8 +77,6 @@ class BottomBarWidgetState extends State<BottomBarWidget> {
 
   @override
   Widget build(BuildContext context) {
-    final cubit = BottomBarInfoIndividualCubit()..init();
-
     return Material(
       color: AppColors.dark,
       child: SafeArea(
@@ -181,8 +181,7 @@ class BottomBarWidgetState extends State<BottomBarWidget> {
                             bedEntity: bedEntity,
                             cubit: cubit,
                           ),
-                        ]).then((value) =>
-                            setState(() {
+                        ]).then((value) => setState(() {
                               index = -1;
                             }));
                       }

@@ -20,7 +20,7 @@ mixin _$LuckyBoxEntity {
   String get openCost => throw _privateConstructorUsedError;
   String get speedUpCost => throw _privateConstructorUsedError;
   int get isOpen => throw _privateConstructorUsedError;
-  int get waitingTime => throw _privateConstructorUsedError;
+  String get waitingTime => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $LuckyBoxEntityCopyWith<LuckyBoxEntity> get copyWith =>
@@ -37,7 +37,7 @@ abstract class $LuckyBoxEntityCopyWith<$Res> {
       String openCost,
       String speedUpCost,
       int isOpen,
-      int waitingTime});
+      String waitingTime});
 }
 
 /// @nodoc
@@ -77,7 +77,7 @@ class _$LuckyBoxEntityCopyWithImpl<$Res>
       waitingTime: waitingTime == freezed
           ? _value.waitingTime
           : waitingTime // ignore: cast_nullable_to_non_nullable
-              as int,
+              as String,
     ));
   }
 }
@@ -94,7 +94,7 @@ abstract class _$$_LuckyBoxEntityCopyWith<$Res>
       String openCost,
       String speedUpCost,
       int isOpen,
-      int waitingTime});
+      String waitingTime});
 }
 
 /// @nodoc
@@ -136,7 +136,7 @@ class __$$_LuckyBoxEntityCopyWithImpl<$Res>
       waitingTime: waitingTime == freezed
           ? _value.waitingTime
           : waitingTime // ignore: cast_nullable_to_non_nullable
-              as int,
+              as String,
     ));
   }
 }
@@ -160,7 +160,7 @@ class _$_LuckyBoxEntity implements _LuckyBoxEntity {
   @override
   final int isOpen;
   @override
-  final int waitingTime;
+  final String waitingTime;
 
   @override
   String toString() {
@@ -202,7 +202,7 @@ abstract class _LuckyBoxEntity implements LuckyBoxEntity {
       required final String openCost,
       required final String speedUpCost,
       required final int isOpen,
-      required final int waitingTime}) = _$_LuckyBoxEntity;
+      required final String waitingTime}) = _$_LuckyBoxEntity;
 
   @override
   int get id;
@@ -213,7 +213,7 @@ abstract class _LuckyBoxEntity implements LuckyBoxEntity {
   @override
   int get isOpen;
   @override
-  int get waitingTime;
+  String get waitingTime;
   @override
   @JsonKey(ignore: true)
   _$$_LuckyBoxEntityCopyWith<_$_LuckyBoxEntity> get copyWith =>
