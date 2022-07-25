@@ -2,7 +2,7 @@ import 'dart:math';
 
 import 'package:erc20/erc20.dart';
 import 'package:injectable/injectable.dart';
-import 'package:slee_fi/common/abi/nft.g.dart';
+import 'package:slee_fi/common/abi/bed.g.dart';
 import 'package:slee_fi/common/abi/spending.g.dart';
 import 'package:slee_fi/datasources/remote/network/web3_provider.dart';
 import 'package:web3dart/web3dart.dart';
@@ -15,12 +15,6 @@ class WalletDataSource {
 
   Future<BigInt> balanceOf(String address, String ownerAddress) {
     return _nft(address).balanceOf(EthereumAddress.fromHex(ownerAddress));
-  }
-
-  Future<List<BigInt>> tokensOf(
-      String address, String owner, BigInt count, BigInt start) {
-    return _nft(address)
-        .getTokensOfOwner(EthereumAddress.fromHex(owner), count, start);
   }
 
   Future<String> name(String address) => _nft(address).name();
@@ -55,7 +49,7 @@ class WalletDataSource {
       _nft(address).isApprovedForAll(
           EthereumAddress.fromHex(owner), EthereumAddress.fromHex(operator));
 
-  Nft _nft(String address) => Nft(
+  Bed _nft(String address) => Bed(
       address: EthereumAddress.fromHex(address),
       client: _web3provider.web3client);
 

@@ -17,8 +17,6 @@ class GetListNftDetailUseCase
     final listIdsRes = await _nftRepository.tokensOf(
       nftAddress: params.nftAddress,
       ownerAddress: params.ownerAddress,
-      count: params.count,
-      start: params.start,
     );
     return listIdsRes.fold(
       Left.new,
@@ -37,14 +35,10 @@ class GetListNftDetailParams {
   final NftType nftType;
   final String ownerAddress;
   final String nftAddress;
-  final int count;
-  final int start;
 
   GetListNftDetailParams({
     required this.ownerAddress,
     required this.nftAddress,
     required this.nftType,
-    required this.count,
-    this.start = 0,
   });
 }

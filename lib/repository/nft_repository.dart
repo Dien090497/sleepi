@@ -16,11 +16,10 @@ abstract class INFTRepository {
   Future<Either<Failure, BigInt>> balanceOf(
       String address, String ownerAddress);
 
-  Future<Either<Failure, List<BigInt>>> tokensOf(
-      {required String nftAddress,
-      required String ownerAddress,
-      required int count,
-      required int start});
+  Future<Either<Failure, List<BigInt>>> tokensOf({
+    required String nftAddress,
+    required String ownerAddress,
+  });
 
   Future<Either<Failure, List<NFTEntity>>> getListNftData({
     String? nftAddress,

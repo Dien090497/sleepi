@@ -186,9 +186,7 @@ class InfoIndividualScreen extends StatelessWidget {
             left: 0,
             right: 0,
             child: (args.bed.isLock == 1 && args.bed.statusNftSale == 'ON_SALE')
-                ? CancelSellBottombar(
-                    beds: args.bed,
-                  )
+                ? CancelSellBottombar(beds: args.bed)
                 : (args.marketPlaceModel != null && (args.buy ?? false)
                     ? BottomBarMarketPlaceWidget(bed: args.marketPlaceModel!)
                     : BlocBuilder<IndividualCubit, IndividualState>(
@@ -197,9 +195,11 @@ class InfoIndividualScreen extends StatelessWidget {
                           return BottomBarWidget(
                             bedEntity: state.bed,
                             key: keyBottom,
-                            onBackIndividual: (){
+                            onBackIndividual: () {
                               context.read<IndividualCubit>().refresh();
-                              context.read<SocketBloc>().add(const RefreshSocket());
+                              context
+                                  .read<SocketBloc>()
+                                  .add(const RefreshSocket());
                             },
                           );
                         },
