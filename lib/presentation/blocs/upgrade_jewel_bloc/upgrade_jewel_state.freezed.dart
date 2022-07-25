@@ -21,9 +21,11 @@ mixin _$JewelState {
     required TResult Function() init,
     required TResult Function(
             List<BedEntity> jewels,
+            List<BedEntity> jewelsAvailable,
             List<BedEntity> jewelsUpgrade,
             UpgradeInfoResponse? upgradeInfoResponse,
             bool isLoadMore,
+            bool isLoadMoreAvailable,
             bool loading,
             BedEntity? upgradeSuccess,
             String? errorMessage)
@@ -36,9 +38,11 @@ mixin _$JewelState {
     TResult Function()? init,
     TResult Function(
             List<BedEntity> jewels,
+            List<BedEntity> jewelsAvailable,
             List<BedEntity> jewelsUpgrade,
             UpgradeInfoResponse? upgradeInfoResponse,
             bool isLoadMore,
+            bool isLoadMoreAvailable,
             bool loading,
             BedEntity? upgradeSuccess,
             String? errorMessage)?
@@ -51,9 +55,11 @@ mixin _$JewelState {
     TResult Function()? init,
     TResult Function(
             List<BedEntity> jewels,
+            List<BedEntity> jewelsAvailable,
             List<BedEntity> jewelsUpgrade,
             UpgradeInfoResponse? upgradeInfoResponse,
             bool isLoadMore,
+            bool isLoadMoreAvailable,
             bool loading,
             BedEntity? upgradeSuccess,
             String? errorMessage)?
@@ -146,9 +152,11 @@ class _$JewelStateInit implements JewelStateInit {
     required TResult Function() init,
     required TResult Function(
             List<BedEntity> jewels,
+            List<BedEntity> jewelsAvailable,
             List<BedEntity> jewelsUpgrade,
             UpgradeInfoResponse? upgradeInfoResponse,
             bool isLoadMore,
+            bool isLoadMoreAvailable,
             bool loading,
             BedEntity? upgradeSuccess,
             String? errorMessage)
@@ -164,9 +172,11 @@ class _$JewelStateInit implements JewelStateInit {
     TResult Function()? init,
     TResult Function(
             List<BedEntity> jewels,
+            List<BedEntity> jewelsAvailable,
             List<BedEntity> jewelsUpgrade,
             UpgradeInfoResponse? upgradeInfoResponse,
             bool isLoadMore,
+            bool isLoadMoreAvailable,
             bool loading,
             BedEntity? upgradeSuccess,
             String? errorMessage)?
@@ -182,9 +192,11 @@ class _$JewelStateInit implements JewelStateInit {
     TResult Function()? init,
     TResult Function(
             List<BedEntity> jewels,
+            List<BedEntity> jewelsAvailable,
             List<BedEntity> jewelsUpgrade,
             UpgradeInfoResponse? upgradeInfoResponse,
             bool isLoadMore,
+            bool isLoadMoreAvailable,
             bool loading,
             BedEntity? upgradeSuccess,
             String? errorMessage)?
@@ -244,9 +256,11 @@ abstract class _$$JewelStateLoadedCopyWith<$Res> {
       __$$JewelStateLoadedCopyWithImpl<$Res>;
   $Res call(
       {List<BedEntity> jewels,
+      List<BedEntity> jewelsAvailable,
       List<BedEntity> jewelsUpgrade,
       UpgradeInfoResponse? upgradeInfoResponse,
       bool isLoadMore,
+      bool isLoadMoreAvailable,
       bool loading,
       BedEntity? upgradeSuccess,
       String? errorMessage});
@@ -268,9 +282,11 @@ class __$$JewelStateLoadedCopyWithImpl<$Res>
   @override
   $Res call({
     Object? jewels = freezed,
+    Object? jewelsAvailable = freezed,
     Object? jewelsUpgrade = freezed,
     Object? upgradeInfoResponse = freezed,
     Object? isLoadMore = freezed,
+    Object? isLoadMoreAvailable = freezed,
     Object? loading = freezed,
     Object? upgradeSuccess = freezed,
     Object? errorMessage = freezed,
@@ -279,6 +295,10 @@ class __$$JewelStateLoadedCopyWithImpl<$Res>
       jewels: jewels == freezed
           ? _value._jewels
           : jewels // ignore: cast_nullable_to_non_nullable
+              as List<BedEntity>,
+      jewelsAvailable: jewelsAvailable == freezed
+          ? _value._jewelsAvailable
+          : jewelsAvailable // ignore: cast_nullable_to_non_nullable
               as List<BedEntity>,
       jewelsUpgrade: jewelsUpgrade == freezed
           ? _value._jewelsUpgrade
@@ -291,6 +311,10 @@ class __$$JewelStateLoadedCopyWithImpl<$Res>
       isLoadMore: isLoadMore == freezed
           ? _value.isLoadMore
           : isLoadMore // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isLoadMoreAvailable: isLoadMoreAvailable == freezed
+          ? _value.isLoadMoreAvailable
+          : isLoadMoreAvailable // ignore: cast_nullable_to_non_nullable
               as bool,
       loading: loading == freezed
           ? _value.loading
@@ -324,13 +348,16 @@ class __$$JewelStateLoadedCopyWithImpl<$Res>
 class _$JewelStateLoaded implements JewelStateLoaded {
   const _$JewelStateLoaded(
       {final List<BedEntity> jewels = const [],
+      final List<BedEntity> jewelsAvailable = const [],
       final List<BedEntity> jewelsUpgrade = const [],
       this.upgradeInfoResponse,
       this.isLoadMore = true,
+      this.isLoadMoreAvailable = true,
       this.loading = false,
       this.upgradeSuccess,
       this.errorMessage})
       : _jewels = jewels,
+        _jewelsAvailable = jewelsAvailable,
         _jewelsUpgrade = jewelsUpgrade;
 
   final List<BedEntity> _jewels;
@@ -339,6 +366,14 @@ class _$JewelStateLoaded implements JewelStateLoaded {
   List<BedEntity> get jewels {
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_jewels);
+  }
+
+  final List<BedEntity> _jewelsAvailable;
+  @override
+  @JsonKey()
+  List<BedEntity> get jewelsAvailable {
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_jewelsAvailable);
   }
 
   final List<BedEntity> _jewelsUpgrade;
@@ -356,6 +391,9 @@ class _$JewelStateLoaded implements JewelStateLoaded {
   final bool isLoadMore;
   @override
   @JsonKey()
+  final bool isLoadMoreAvailable;
+  @override
+  @JsonKey()
   final bool loading;
   @override
   final BedEntity? upgradeSuccess;
@@ -364,7 +402,7 @@ class _$JewelStateLoaded implements JewelStateLoaded {
 
   @override
   String toString() {
-    return 'JewelState.loaded(jewels: $jewels, jewelsUpgrade: $jewelsUpgrade, upgradeInfoResponse: $upgradeInfoResponse, isLoadMore: $isLoadMore, loading: $loading, upgradeSuccess: $upgradeSuccess, errorMessage: $errorMessage)';
+    return 'JewelState.loaded(jewels: $jewels, jewelsAvailable: $jewelsAvailable, jewelsUpgrade: $jewelsUpgrade, upgradeInfoResponse: $upgradeInfoResponse, isLoadMore: $isLoadMore, isLoadMoreAvailable: $isLoadMoreAvailable, loading: $loading, upgradeSuccess: $upgradeSuccess, errorMessage: $errorMessage)';
   }
 
   @override
@@ -374,11 +412,15 @@ class _$JewelStateLoaded implements JewelStateLoaded {
             other is _$JewelStateLoaded &&
             const DeepCollectionEquality().equals(other._jewels, _jewels) &&
             const DeepCollectionEquality()
+                .equals(other._jewelsAvailable, _jewelsAvailable) &&
+            const DeepCollectionEquality()
                 .equals(other._jewelsUpgrade, _jewelsUpgrade) &&
             const DeepCollectionEquality()
                 .equals(other.upgradeInfoResponse, upgradeInfoResponse) &&
             const DeepCollectionEquality()
                 .equals(other.isLoadMore, isLoadMore) &&
+            const DeepCollectionEquality()
+                .equals(other.isLoadMoreAvailable, isLoadMoreAvailable) &&
             const DeepCollectionEquality().equals(other.loading, loading) &&
             const DeepCollectionEquality()
                 .equals(other.upgradeSuccess, upgradeSuccess) &&
@@ -390,9 +432,11 @@ class _$JewelStateLoaded implements JewelStateLoaded {
   int get hashCode => Object.hash(
       runtimeType,
       const DeepCollectionEquality().hash(_jewels),
+      const DeepCollectionEquality().hash(_jewelsAvailable),
       const DeepCollectionEquality().hash(_jewelsUpgrade),
       const DeepCollectionEquality().hash(upgradeInfoResponse),
       const DeepCollectionEquality().hash(isLoadMore),
+      const DeepCollectionEquality().hash(isLoadMoreAvailable),
       const DeepCollectionEquality().hash(loading),
       const DeepCollectionEquality().hash(upgradeSuccess),
       const DeepCollectionEquality().hash(errorMessage));
@@ -408,17 +452,19 @@ class _$JewelStateLoaded implements JewelStateLoaded {
     required TResult Function() init,
     required TResult Function(
             List<BedEntity> jewels,
+            List<BedEntity> jewelsAvailable,
             List<BedEntity> jewelsUpgrade,
             UpgradeInfoResponse? upgradeInfoResponse,
             bool isLoadMore,
+            bool isLoadMoreAvailable,
             bool loading,
             BedEntity? upgradeSuccess,
             String? errorMessage)
         loaded,
     required TResult Function() loadUpgraded,
   }) {
-    return loaded(jewels, jewelsUpgrade, upgradeInfoResponse, isLoadMore,
-        loading, upgradeSuccess, errorMessage);
+    return loaded(jewels, jewelsAvailable, jewelsUpgrade, upgradeInfoResponse,
+        isLoadMore, isLoadMoreAvailable, loading, upgradeSuccess, errorMessage);
   }
 
   @override
@@ -427,17 +473,27 @@ class _$JewelStateLoaded implements JewelStateLoaded {
     TResult Function()? init,
     TResult Function(
             List<BedEntity> jewels,
+            List<BedEntity> jewelsAvailable,
             List<BedEntity> jewelsUpgrade,
             UpgradeInfoResponse? upgradeInfoResponse,
             bool isLoadMore,
+            bool isLoadMoreAvailable,
             bool loading,
             BedEntity? upgradeSuccess,
             String? errorMessage)?
         loaded,
     TResult Function()? loadUpgraded,
   }) {
-    return loaded?.call(jewels, jewelsUpgrade, upgradeInfoResponse, isLoadMore,
-        loading, upgradeSuccess, errorMessage);
+    return loaded?.call(
+        jewels,
+        jewelsAvailable,
+        jewelsUpgrade,
+        upgradeInfoResponse,
+        isLoadMore,
+        isLoadMoreAvailable,
+        loading,
+        upgradeSuccess,
+        errorMessage);
   }
 
   @override
@@ -446,9 +502,11 @@ class _$JewelStateLoaded implements JewelStateLoaded {
     TResult Function()? init,
     TResult Function(
             List<BedEntity> jewels,
+            List<BedEntity> jewelsAvailable,
             List<BedEntity> jewelsUpgrade,
             UpgradeInfoResponse? upgradeInfoResponse,
             bool isLoadMore,
+            bool isLoadMoreAvailable,
             bool loading,
             BedEntity? upgradeSuccess,
             String? errorMessage)?
@@ -457,8 +515,16 @@ class _$JewelStateLoaded implements JewelStateLoaded {
     required TResult orElse(),
   }) {
     if (loaded != null) {
-      return loaded(jewels, jewelsUpgrade, upgradeInfoResponse, isLoadMore,
-          loading, upgradeSuccess, errorMessage);
+      return loaded(
+          jewels,
+          jewelsAvailable,
+          jewelsUpgrade,
+          upgradeInfoResponse,
+          isLoadMore,
+          isLoadMoreAvailable,
+          loading,
+          upgradeSuccess,
+          errorMessage);
     }
     return orElse();
   }
@@ -501,17 +567,21 @@ class _$JewelStateLoaded implements JewelStateLoaded {
 abstract class JewelStateLoaded implements JewelState {
   const factory JewelStateLoaded(
       {final List<BedEntity> jewels,
+      final List<BedEntity> jewelsAvailable,
       final List<BedEntity> jewelsUpgrade,
       final UpgradeInfoResponse? upgradeInfoResponse,
       final bool isLoadMore,
+      final bool isLoadMoreAvailable,
       final bool loading,
       final BedEntity? upgradeSuccess,
       final String? errorMessage}) = _$JewelStateLoaded;
 
   List<BedEntity> get jewels;
+  List<BedEntity> get jewelsAvailable;
   List<BedEntity> get jewelsUpgrade;
   UpgradeInfoResponse? get upgradeInfoResponse;
   bool get isLoadMore;
+  bool get isLoadMoreAvailable;
   bool get loading;
   BedEntity? get upgradeSuccess;
   String? get errorMessage;
@@ -564,9 +634,11 @@ class _$JewelStateUgraded implements JewelStateUgraded {
     required TResult Function() init,
     required TResult Function(
             List<BedEntity> jewels,
+            List<BedEntity> jewelsAvailable,
             List<BedEntity> jewelsUpgrade,
             UpgradeInfoResponse? upgradeInfoResponse,
             bool isLoadMore,
+            bool isLoadMoreAvailable,
             bool loading,
             BedEntity? upgradeSuccess,
             String? errorMessage)
@@ -582,9 +654,11 @@ class _$JewelStateUgraded implements JewelStateUgraded {
     TResult Function()? init,
     TResult Function(
             List<BedEntity> jewels,
+            List<BedEntity> jewelsAvailable,
             List<BedEntity> jewelsUpgrade,
             UpgradeInfoResponse? upgradeInfoResponse,
             bool isLoadMore,
+            bool isLoadMoreAvailable,
             bool loading,
             BedEntity? upgradeSuccess,
             String? errorMessage)?
@@ -600,9 +674,11 @@ class _$JewelStateUgraded implements JewelStateUgraded {
     TResult Function()? init,
     TResult Function(
             List<BedEntity> jewels,
+            List<BedEntity> jewelsAvailable,
             List<BedEntity> jewelsUpgrade,
             UpgradeInfoResponse? upgradeInfoResponse,
             bool isLoadMore,
+            bool isLoadMoreAvailable,
             bool loading,
             BedEntity? upgradeSuccess,
             String? errorMessage)?

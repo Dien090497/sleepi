@@ -63,7 +63,7 @@ class MyJewelsWidgetCount extends StatelessWidget {
                 alignment: Alignment.center,
                 child: SFText(
                   keyText:
-                      '${jewel.jewelType?.tr()} ${!isJewel ? LocaleKeys.item.tr() : LocaleKeys.jewel.tr()} ($count)',
+                      '${jewel.jewelType?.tr() ?? jewel.itemType?.tr()} ${!isJewel ? LocaleKeys.item.tr() : LocaleKeys.jewel.tr()} ($count)',
                   style:
                       TextStyles.white1w700size12.copyWith(color: qualityColor),
                 ),

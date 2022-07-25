@@ -26,7 +26,7 @@ class BedModel {
 
   final String? jewelType;
 
-  final dynamic itemType;
+  final String? itemType;
 
   final dynamic effect;
 
@@ -119,6 +119,7 @@ class BedModel {
 
   BedEntity toEntity() {
     return BedEntity(
+      itemType: itemType,
       isBurn: isBurn ?? 0,
       jewelType: jewelType,
       name: nftName,
