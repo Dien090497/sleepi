@@ -48,11 +48,12 @@ class AllResultScreen extends StatelessWidget {
                           itemCount: 3,
                           padding: const EdgeInsets.only(top: 50),
                           itemBuilder: (BuildContext context,int index){
-                            bool isSlft = (args?.gachaSpinInfo!.gift.elementAt(index)['type'] == "SLFT");
+                            bool isSlft = (args?.gachaSpinInfo!.gift.elementAt(index)['type'] == "slft");
                             return SFCard(
                               width: 100,
                               height: 100,
                               margin: const EdgeInsets.all(6),
+                                padding: const EdgeInsets.symmetric(horizontal: 18.0),
                               radius: 8,
                               border: Border.all(color: AppColors.white.withOpacity(0.1)),
                               child: isSlft
@@ -89,11 +90,12 @@ class AllResultScreen extends StatelessWidget {
                           itemCount: 4,
                           itemBuilder: (BuildContext context,int index){
                             int at = 3;
-                            bool isSlft = (args?.gachaSpinInfo!.gift.elementAt(index + at)['type'] == "SLFT");
+                            bool isSlft = (args?.gachaSpinInfo!.gift.elementAt(index + at)['type'] == "slft");
                             return SFCard(
                                 width: 100,
                                 height: 100,
                                 margin: const EdgeInsets.all(6),
+                                padding: const EdgeInsets.symmetric(horizontal: 18.0),
                                 radius: 8,
                                 border: Border.all(color: AppColors.white.withOpacity(0.1)),
                                 child: isSlft
@@ -131,12 +133,13 @@ class AllResultScreen extends StatelessWidget {
                             padding: const EdgeInsets.only(top: 50),
                             itemBuilder: (BuildContext context,int index){
                               int at = 7;
-                              bool isSlft = (args?.gachaSpinInfo!.gift.elementAt(index + at)['type'] == "SLFT");
+                              bool isSlft = (args?.gachaSpinInfo!.gift.elementAt(index + at)['type'] == "slft");
 
                               return SFCard(
                                   width: 100,
                                   height: 100,
                                   margin: const EdgeInsets.all(6),
+                                  padding: const EdgeInsets.symmetric(horizontal: 18.0),
                                   radius: 8,
                                   border: Border.all(color: AppColors.white.withOpacity(0.1)),
                                   child: isSlft
