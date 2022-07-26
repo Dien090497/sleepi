@@ -101,7 +101,6 @@ class _FilterItemState extends State<FilterItem> {
                       showTicks: true,
                       showLabels: true,
                       stepSize: 1,
-                      interval: 1,
                       minorTicksPerInterval: 1,
                       endThumbIcon: const ThumbIcon(),
                       startThumbIcon: const ThumbIcon(),
