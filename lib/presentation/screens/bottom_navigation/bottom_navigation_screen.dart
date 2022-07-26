@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:slee_fi/common/utils/appsflyer_custom.dart';
@@ -7,6 +9,7 @@ import 'package:slee_fi/common/widgets/sf_tab_bar.dart';
 import 'package:slee_fi/di/injector.dart';
 import 'package:slee_fi/presentation/blocs/bottom_navigation/bottom_navigation_bloc.dart';
 import 'package:slee_fi/presentation/blocs/bottom_navigation/bottom_navigation_state.dart';
+import 'package:slee_fi/presentation/blocs/user_bloc/user_bloc.dart';
 import 'package:slee_fi/presentation/blocs/wallet/wallet_cubit.dart';
 import 'package:slee_fi/presentation/screens/chart/chart_screen.dart';
 import 'package:slee_fi/presentation/screens/gacha/gacha_screen.dart';
@@ -19,6 +22,12 @@ class BottomNavigationScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Timer? timer;
+    if (timer == null || !timer.isActive) {
+      timer = Timer.periodic(const Duration(seconds: 5), (timer) async {
+        BlocProvider.of<UserBloc>(context).add(RefreshBalanceToken());
+      });
+    }
     context.read<WalletCubit>().checkWallet();
     final app = getIt<AppFlyerCustom>();
     final GlobalKey<SFTabBarState> marketTabKey = GlobalKey();

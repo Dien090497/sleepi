@@ -111,9 +111,13 @@ class UserImplementation extends IUserRepository {
   Future<Either<FailureMessage, GlobalConfigResponse>> getGlobalConfig() async {
     try {
       final result = await _authDataSource.getGlobalConfig();
-      await _secureStorage.saveAddressContract(
-          addressContract: result.contract);
-      await _secureStorage.saveMessage(saveMessage: result.messageSign);
+      await Future.wait([
+        _secureStorage.saveAddressContract(addressContract: result.contract),
+        _secureStorage.saveMessage(saveMessage: result.messageSign),
+        _secureStorage.setNftAddress(result.nftAddress.toJson()),
+        _secureStorage
+            .setTokenAddress(result.tokens.map((e) => e.address).toList()),
+      ]);
       return Right(result);
     } catch (e) {
       return Left(FailureMessage('$e'));
@@ -383,7 +387,8 @@ class UserImplementation extends IUserRepository {
       FetchBedParam fetchBedParam) async {
     try {
       if (fetchBedParam.categoryId == CategoryType.jewel) {
-        var result = await _authDataSource.getListJewels(fetchBedParam.limit, fetchBedParam.page);
+        var result = await _authDataSource.getListJewels(
+            fetchBedParam.limit, fetchBedParam.page);
         return Right(result.list.map((e) => e.toEntity()).toList());
       } else if (fetchBedParam.categoryId == CategoryType.item) {
         var result = await _authDataSource.fetchItemOwner(FilterItemSchema(

@@ -86,4 +86,8 @@ abstract class INFTRepository {
   Future<Either<Failure, String>> updatePoint(UpdatePointSchema schema);
 
   Future<Either<Failure, NftSellResponseEntity>> cancelSell(num nftId);
+
+  Future<Either<Failure, List<String>>> getNftAddresses();
+
+  Future<Either<Failure, List<String>>> getTokenAddresses();
 }

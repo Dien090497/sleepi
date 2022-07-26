@@ -126,7 +126,10 @@ class TransferCubit extends Cubit<TransferState> {
       emit(currentState.copyWith(isLoading: true));
       if (currentState.isToSpending) {
         final result = await _toSpendingUseCase.call(ToSpendingParams(
-            type : symbol, amount: amount, addressContract: contractAddress, userId: userId));
+            type: symbol,
+            amount: amount,
+            addressContract: contractAddress,
+            userId: userId));
         result.fold(
           (l) {
             emit(currentState.copyWith(

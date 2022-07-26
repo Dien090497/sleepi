@@ -60,7 +60,9 @@ class BottomBarWidgetState extends State<BottomBarWidget> {
               icon,
               color: index == i
                   ? AppColors.blue
-                  : i == 0 && bedEntity.level == 30 || i == 2 && bedEntity.bedMint == 7
+                  : i == 0 && bedEntity.level == 30 ||
+                          i == 2 && bedEntity.bedMint == 7 ||
+                          i == 1 && bedEntity.durability == 100
                       ? AppColors.lightGrey
                       : AppColors.greyBottomIndividual,
             ),
@@ -69,7 +71,9 @@ class BottomBarWidgetState extends State<BottomBarWidget> {
               keyText: key,
               style: index == i
                   ? TextStyles.blue12
-                  : i == 0 && bedEntity.level == 30 || i == 2 && bedEntity.bedMint == 7
+                  : i == 0 && bedEntity.level == 30 ||
+                          i == 2 && bedEntity.bedMint == 7 ||
+                          i == 1 && bedEntity.durability == 100
                       ? TextStyles.lightGrey12
                       : TextStyles.w400LightWhite12,
             ),
@@ -109,11 +113,7 @@ class BottomBarWidgetState extends State<BottomBarWidget> {
                 if (state is BottomBarInfoIndividualLoaded) {
                   if (state.successTransfer) {
                     showSuccessfulDialog(context, null, onBackPress: () {
-                      Navigator.pushNamedAndRemoveUntil(
-                        context,
-                        R.bottomNavigation,
-                        (r) => false,
-                      );
+                      Navigator.pop(context, true);
                     });
                   }
                 }
@@ -154,6 +154,7 @@ class BottomBarWidgetState extends State<BottomBarWidget> {
                           ),
                         ],
                       ).then((value) {
+                        widget.onBackIndividual();
                         index = -1;
                         setState(() {});
                       });
@@ -204,7 +205,8 @@ class BottomBarWidgetState extends State<BottomBarWidget> {
                         () async {
                       index = 5;
                       if (stateWalletCubit is WalletNotExisted) {
-                        showCreateOrImportWallet().then((value) => _showWarningDialog(value, context));
+                        showCreateOrImportWallet().then(
+                            (value) => _showWarningDialog(value, context));
                       } else {
                         showCustomDialog(
                           context,
