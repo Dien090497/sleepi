@@ -133,6 +133,15 @@ class WalletCubit extends Cubit<WalletState> {
       );
       tokenList.add(tokenEntity);
     }
+    // TODO: remove after testing
+    tokenList.add(TokenEntity(
+      address: tokenAddresses[0],
+      displayName: keyList[0],
+      name: keyList[0],
+      symbol: keyList[0],
+      icon: icons[0],
+      balance: values[0],
+    ));
     for (int i = 0; i < nfts.length; i++) {
       final tokenEntity = TokenEntity(
         address: nftAddresses[i],
