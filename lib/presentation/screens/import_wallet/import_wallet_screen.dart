@@ -31,12 +31,6 @@ class _ImportWalletScreenState extends State<ImportWalletScreen> {
   final TextEditingController controllerOTP = TextEditingController();
 
   @override
-  void dispose() {
-    controllerMnemonic.dispose();
-    super.dispose();
-  }
-
-  @override
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) => ImportWalletCubit()..init(),

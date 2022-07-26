@@ -24,7 +24,7 @@ class BottomNavigationScreen extends StatelessWidget {
     Timer? timer;
     if (timer == null || !timer.isActive) {
       timer = Timer.periodic(const Duration(seconds: 5), (timer) async {
-        // BlocProvider.of<UserBloc>(context).add(RefreshBalanceToken());
+        BlocProvider.of<UserBloc>(context).add(RefreshBalanceToken());
       });
     }
     context.read<WalletCubit>().checkWallet();

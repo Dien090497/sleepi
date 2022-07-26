@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_background_service/flutter_background_service.dart';
@@ -14,7 +12,6 @@ import 'package:slee_fi/common/style/text_styles.dart';
 import 'package:slee_fi/common/utils/date_time_utils.dart';
 import 'package:slee_fi/common/widgets/sf_alert_dialog.dart';
 import 'package:slee_fi/common/widgets/sf_dialog.dart';
-import 'package:slee_fi/common/widgets/sf_percent_border.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
 import 'package:slee_fi/di/injector.dart';
 import 'package:slee_fi/l10n/locale_keys.g.dart';
@@ -146,24 +143,23 @@ class AlarmBell extends StatelessWidget {
                     builder: (context, state) {
                       final double value =
                           state is HomeLoaded ? state.tokenEarn : 0;
-                      final double totalValue = value + Random().nextInt(1000);
+                      // final double totalValue = value + Random().nextInt(1000);
                       return Stack(
                         alignment: Alignment.centerLeft,
                         children: [
-                          SFPercentBorderGradient(
-                            valueActive: value,
-                            totalValue: totalValue,
-                            linearGradient: AppColors.gradientBluePurple,
-                            lineHeight: 18,
-                            barRadius: 20,
-                            backgroundColor: Colors.white.withOpacity(0.05),
-                          ),
+                          // SFPercentBorderGradient(
+                          //   valueActive: value,
+                          //   totalValue: totalValue,
+                          //   linearGradient: AppColors.gradientBluePurple,
+                          //   lineHeight: 18,
+                          //   barRadius: 20,
+                          //   backgroundColor: Colors.white.withOpacity(0.05),
+                          // ),
                           Padding(
                             padding:
                                 const EdgeInsets.symmetric(horizontal: 16.0),
                             child: SFText(
-                              keyText:
-                                  '${state is HomeLoaded ? state.tokenEarn.toStringAsFixed(2) : 0}/$totalValue SLFT',
+                              keyText: '${value.toStringAsFixed(2)} SLFT',
                               style: TextStyles.white10,
                             ),
                           )

@@ -147,6 +147,9 @@ class SpendingImplementation extends ISpendingRepository {
     required double amount,
   }) async {
     try {
+      if (tokenAddress == Const.deadAddress) {
+        return const Right(true);
+      }
       final token = _spendingDataSource.token(tokenAddress);
       final result = await _spendingDataSource.allowance(
         await _secureStorage.readAddressContract() ?? '',
