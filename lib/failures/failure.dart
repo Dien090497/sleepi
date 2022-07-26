@@ -33,7 +33,7 @@ class FailureMessage extends Failure {
         }
       }
     } catch (_) {
-      throw Exception(_);
+      return FailureMessage('$_');
     }
     return FailureMessage('$e');
     // throw Exception(e);
