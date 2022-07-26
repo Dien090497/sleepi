@@ -20,6 +20,7 @@ import 'package:slee_fi/models/item_owner_response/item_owner_response.dart';
 import 'package:slee_fi/models/list_jewel_resoponse/list_jewel_response.dart';
 import 'package:slee_fi/models/list_market_place/list_market_place_model.dart';
 import 'package:slee_fi/models/lucky_box/lucky_box.dart';
+import 'package:slee_fi/models/lucky_box_response/lucky_box_response.dart';
 import 'package:slee_fi/models/market_place/result_buy_model.dart';
 import 'package:slee_fi/models/nft_sell_response/nft_sell_response.dart';
 import 'package:slee_fi/models/point_of_owner/point_of_owner_model.dart';
@@ -237,6 +238,9 @@ abstract class AuthDataSource {
   Future<ItemOwnerResponse> fetchItemOwner(
       @Body() FilterItemSchema filterItemSchema);
 
+  @POST('nft-attributes/open-bedbox')
+  Future<ItemOwnerResponse> openBedBox(@Query('bedboxId') int bedId);
+
   @POST('/stacking/unstacking')
   Future<dynamic> unStacking();
 
@@ -248,7 +252,7 @@ abstract class AuthDataSource {
   Future<List<LuckyBox>> fetchLuckyBox();
 
   @POST('/lucky_box/open')
-  Future<VerifyResponse> openLuckyBox(@Query('luckyBoxId') int luckyBoxId);
+  Future<OpenLuckyBoxResponse> openLuckyBox(@Query('luckyBoxId') int luckyBoxId);
 
   @POST('/lucky_box')
   Future<dynamic> speedUpLuckyBox(

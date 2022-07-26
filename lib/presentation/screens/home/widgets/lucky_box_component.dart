@@ -130,7 +130,7 @@ class _ViewGif extends StatelessWidget {
                   .tr(args: [entity!.openCost]),
               onPressed: () async {
                 final message = await cubit.openLuckyBox(entity!);
-                showMessageDialog(context, message);
+                showSuccessfulDialog(context, message);
               })
         ]);
       } else {
