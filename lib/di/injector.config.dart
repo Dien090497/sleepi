@@ -215,10 +215,10 @@ Future<_i1.GetIt> $initGetIt(_i1.GetIt get,
   await gh.factoryAsync<_i19.SharedPreferences>(() => registerModule.sharedPref,
       preResolve: true);
   gh.factory<_i13.StorageKeys>(() => _i13.StorageKeys());
-  gh.factory<String>(() => constInjection.baseUrlDev,
-      instanceName: 'baseUrl', registerFor: {_dev});
   gh.factory<String>(() => constInjection.baseUrlStg,
       instanceName: 'baseUrl', registerFor: {_test});
+  gh.factory<String>(() => constInjection.baseUrlDev,
+      instanceName: 'baseUrl', registerFor: {_dev});
   gh.factory<String>(() => constInjection.baseUrlProd,
       instanceName: 'baseUrl', registerFor: {_prod});
   gh.factory<_i20.ToastUtils>(() => _i20.ToastUtils());
