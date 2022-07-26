@@ -16,8 +16,8 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$NftFamilyEntity {
-  List<FamilyDataEntity> get parent => throw _privateConstructorUsedError;
-  List<FamilyDataEntity> get children => throw _privateConstructorUsedError;
+  List<BedEntity> get parent => throw _privateConstructorUsedError;
+  List<BedEntity> get children => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $NftFamilyEntityCopyWith<NftFamilyEntity> get copyWith =>
@@ -29,7 +29,7 @@ abstract class $NftFamilyEntityCopyWith<$Res> {
   factory $NftFamilyEntityCopyWith(
           NftFamilyEntity value, $Res Function(NftFamilyEntity) then) =
       _$NftFamilyEntityCopyWithImpl<$Res>;
-  $Res call({List<FamilyDataEntity> parent, List<FamilyDataEntity> children});
+  $Res call({List<BedEntity> parent, List<BedEntity> children});
 }
 
 /// @nodoc
@@ -50,11 +50,11 @@ class _$NftFamilyEntityCopyWithImpl<$Res>
       parent: parent == freezed
           ? _value.parent
           : parent // ignore: cast_nullable_to_non_nullable
-              as List<FamilyDataEntity>,
+              as List<BedEntity>,
       children: children == freezed
           ? _value.children
           : children // ignore: cast_nullable_to_non_nullable
-              as List<FamilyDataEntity>,
+              as List<BedEntity>,
     ));
   }
 }
@@ -66,7 +66,7 @@ abstract class _$$_NftFamilyEntityCopyWith<$Res>
           _$_NftFamilyEntity value, $Res Function(_$_NftFamilyEntity) then) =
       __$$_NftFamilyEntityCopyWithImpl<$Res>;
   @override
-  $Res call({List<FamilyDataEntity> parent, List<FamilyDataEntity> children});
+  $Res call({List<BedEntity> parent, List<BedEntity> children});
 }
 
 /// @nodoc
@@ -89,11 +89,11 @@ class __$$_NftFamilyEntityCopyWithImpl<$Res>
       parent: parent == freezed
           ? _value._parent
           : parent // ignore: cast_nullable_to_non_nullable
-              as List<FamilyDataEntity>,
+              as List<BedEntity>,
       children: children == freezed
           ? _value._children
           : children // ignore: cast_nullable_to_non_nullable
-              as List<FamilyDataEntity>,
+              as List<BedEntity>,
     ));
   }
 }
@@ -104,21 +104,21 @@ class _$_NftFamilyEntity
     with DiagnosticableTreeMixin
     implements _NftFamilyEntity {
   const _$_NftFamilyEntity(
-      {required final List<FamilyDataEntity> parent,
-      required final List<FamilyDataEntity> children})
+      {required final List<BedEntity> parent,
+      required final List<BedEntity> children})
       : _parent = parent,
         _children = children;
 
-  final List<FamilyDataEntity> _parent;
+  final List<BedEntity> _parent;
   @override
-  List<FamilyDataEntity> get parent {
+  List<BedEntity> get parent {
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_parent);
   }
 
-  final List<FamilyDataEntity> _children;
+  final List<BedEntity> _children;
   @override
-  List<FamilyDataEntity> get children {
+  List<BedEntity> get children {
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_children);
   }
@@ -160,13 +160,13 @@ class _$_NftFamilyEntity
 
 abstract class _NftFamilyEntity implements NftFamilyEntity {
   const factory _NftFamilyEntity(
-      {required final List<FamilyDataEntity> parent,
-      required final List<FamilyDataEntity> children}) = _$_NftFamilyEntity;
+      {required final List<BedEntity> parent,
+      required final List<BedEntity> children}) = _$_NftFamilyEntity;
 
   @override
-  List<FamilyDataEntity> get parent;
+  List<BedEntity> get parent;
   @override
-  List<FamilyDataEntity> get children;
+  List<BedEntity> get children;
   @override
   @JsonKey(ignore: true)
   _$$_NftFamilyEntityCopyWith<_$_NftFamilyEntity> get copyWith =>

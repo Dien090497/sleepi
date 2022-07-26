@@ -49,11 +49,11 @@ class SecureStorage {
     return UserInfoModel.fromJson(json.decode(value));
   }
 
-  Future<bool> isFirstOpenApp() async =>
-      await _secureStorage.read(key: StorageKeys.firstOpenKey) == null;
+  Future<bool> isFirstOpenApp(String account) async =>
+      await _secureStorage.read(key: account) == null;
 
-  Future<void> makeFirstOpen() async {
-    await _secureStorage.write(key: StorageKeys.firstOpenKey, value: 'first');
+  Future<void> makeFirstOpen(String account) async {
+    await _secureStorage.write(key: account, value: 'first');
   }
 
   Future<String?> getAccessToken() =>

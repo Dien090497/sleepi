@@ -33,14 +33,11 @@ class SigInSignUpCubit extends Cubit<SignInSignUpState> {
   String email = '';
   String _password = '';
   String otp = '';
-  bool isFistOpenApp = false;
 
   init() async {
     emit(const SignInSignUpState.initial());
-    final result = await _isFirstOpenAppUC.call(NoParams());
     _password = '';
     otp = '';
-    result.fold((l) => null, (r) => isFistOpenApp = r);
   }
 
   process(Action action) {
@@ -117,9 +114,16 @@ class SigInSignUpCubit extends Cubit<SignInSignUpState> {
         final balanceRes = await _fetchBalanceSpendingUC.call('${r.id}');
         balanceRes.fold(
           (l) => emit(SignInSignUpState.error('$l')),
-          (tokensSpending) {
-            emit(SignInSignUpState.signInSuccess(
-                isFistOpenApp, r, tokensSpending));
+          (tokensSpending) async {
+            final firstOpen = await _isFirstOpenAppUC.call(email.trim());
+            firstOpen.fold(
+                (l) => emit(
+                    SignInSignUpState.signInSuccess(true, r, tokensSpending)),
+                (isFirstOpen) {
+                  print('=-=-=-=-=-=$isFirstOpen}');
+              emit(SignInSignUpState.signInSuccess(
+                  isFirstOpen, r, tokensSpending));
+            });
           },
         );
       },

@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_background_service/flutter_background_service.dart';
@@ -205,8 +207,11 @@ class AlarmBell extends StatelessWidget {
       children: PopUpConfirmStartTracking(
         onPressed: () async {
           Navigator.pop(context);
-          showWarningDialog(context, LocaleKeys.please_turn_on_tracking,
-              () async {
+          showWarningDialog(
+              context,
+              Platform.isAndroid
+                  ? LocaleKeys.please_turn_on_tracking_android
+                  : LocaleKeys.please_turn_on_tracking_ios, () async {
             final isGranted = await _requestHealthAuthorization();
             if (isGranted) {
               final homeBloc = BlocProvider.of<HomeBloc>(context);
