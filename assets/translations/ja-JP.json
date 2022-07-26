@@ -204,7 +204,7 @@
   "time": "時間",
   "use_item": "アイテムを使う",
   "range": "アラーム設定可能時間",
-  "alarm_bell": "アラーム : ベル",
+  "alarm_bell": "アラーム : {}",
   "item_list": "アイテムリスト",
   "bedbox": "ベッドボックス",
   "bed_boxes": "ベッドボックス",
@@ -265,7 +265,7 @@
   "english": "英語",
   "japanese": "日本語",
   "chinese": "中国語",
-  "forgot_passcode": "パスワードを忘れた場合",
+  "forgot_passcode": "パスコードを忘れた場合",
   "to_address": "送金先",
   "amount": "送金量",
   "balance": "残高",
@@ -432,5 +432,7 @@
   "do_you_really_want_to_cancel_sell": "Do you really want to cancel sell nft?",
   "consume_and_turn_gacha_time": "Consume {price} SLFT and turn Gacha {quantity} time",
   "selling": "Selling",
-  "you_can_set_your_alarm_here": "あなたは資産を送受金したり、互いに交換することができます"
+  "you_can_set_your_alarm_here": "アラームの設定",
+  "taking_off_jewel_with_cost": "Taking off Jewel cost 100 SLFT. Are you sure?"
+
 }

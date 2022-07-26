@@ -54,6 +54,7 @@ class _MintScreenState extends State<MintScreen> with TickerProviderStateMixin{
     animationController.dispose();
     super.dispose();
   }
+  
   @override
   Widget build(BuildContext context) {
     final args = ModalRoute.of(context)?.settings.arguments as BedEntity;
@@ -64,7 +65,8 @@ class _MintScreenState extends State<MintScreen> with TickerProviderStateMixin{
         listener: (context, state) {
           final cubit = context.read<MintCubit>();
           if (state is MintStateLoaded && state.statusMint) {
-            showSuccessfulDialog(context, null);
+            showSuccessfulDialog(context, null)
+                .then((value) => Navigator.pop(context, true));
           }
           if (state is MintStateError) {
             showMessageDialog(context, state.msg).then((value) {
@@ -73,7 +75,10 @@ class _MintScreenState extends State<MintScreen> with TickerProviderStateMixin{
           }
           if (state is MintStateGetInfo) {
             _infoMintingModel = state.infoMintingModel;
-            _percentMinting = state.infoMintingModel.percentMinting.where((i) => i.value == state.infoMintingModel.randomQuality).toList().first;
+            _percentMinting = state.infoMintingModel.percentMinting
+                .where((i) => i.value == state.infoMintingModel.randomQuality)
+                .toList()
+                .first;
           }
         },
         builder: (context, state) {
@@ -216,7 +221,10 @@ class _MintScreenState extends State<MintScreen> with TickerProviderStateMixin{
                                                         .common_bed_box,
                                                     styleLabel:
                                                         TextStyles.lightWhite14,
-                                                    value:(_infoMintingModel != null && _percentMinting != null)
+                                                    value: (_infoMintingModel !=
+                                                                null &&
+                                                            _percentMinting !=
+                                                                null)
                                                         ? '${percentBedBox - _infoMintingModel!.brokenRate.brokenRate}%'
                                                         : '0%',
                                                     colorBorder:
@@ -268,7 +276,9 @@ class _MintScreenState extends State<MintScreen> with TickerProviderStateMixin{
                                     )
                                   ],
                                 )
-                              : const Center(child: CircularProgressIndicator(),),
+                              : const Center(
+                                  child: CircularProgressIndicator(),
+                                ),
                         ),
                       ),
                     ),

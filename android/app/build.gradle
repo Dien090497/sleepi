@@ -36,11 +36,6 @@ android {
     flavorDimensions "SleeFi"
 
     productFlavors {
-        prod {
-            dimension "SleeFi"
-            applicationId "com.sotatek.slee_fi"
-            resValue "string", "app_name", "SleeFi"
-        }
         dev {
             dimension "SleeFi"
             applicationId "com.sotatek.slee_fi"

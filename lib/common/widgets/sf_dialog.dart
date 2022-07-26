@@ -99,6 +99,46 @@ Future<T?> showMessageDialog<T>(BuildContext context, String message,
   );
 }
 
+Future<T?> showWarningDialog<T>(
+    BuildContext context, String message, VoidCallback onTap,
+    {EdgeInsets? padding, TextStyle? style}) async {
+  return showDialog(
+      context: context,
+      barrierColor: AppColors.backgroundDialog,
+      builder: (context) {
+        return SFDialog(
+          padding: EdgeInsets.zero,
+          children: [
+            Align(
+              alignment: Alignment.centerRight,
+              child: IconButton(
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+                icon: const Icon(Icons.close, color: AppColors.white),
+              ),
+            ),
+            SFText(
+                keyText: message.tr(),
+                textAlign: TextAlign.center,
+                style: style ?? TextStyles.bold18White),
+            const SizedBox(
+              height: 24,
+            ),
+            SFButton(
+              width: 180,
+              height: 48,
+              text: LocaleKeys.continue_,
+              onPressed: onTap,
+              textStyle: TextStyles.white16,
+              gradient: AppColors.gradientBlueButton,
+            ),
+            const SizedBox(height: 32),
+          ],
+        );
+      });
+}
+
 Future<T?> showSignUpSuccess<T>(BuildContext context, String? message) async {
   return showDialog(
       context: context,
@@ -242,15 +282,17 @@ Future<T?> showLanguageUpdatedDialog<T>(BuildContext context, Locale locale) {
       });
 }
 
-Future<T?> showLoadingDialog<T>(BuildContext context, String message, {
-    bool barrierDismissible = false,
+Future<T?> showLoadingDialog<T>(
+  BuildContext context,
+  String message, {
+  bool barrierDismissible = false,
 }) async {
   return showCustomAlertDialog(
     context,
-    barrierDismissible : barrierDismissible,
+    barrierDismissible: barrierDismissible,
     width: MediaQuery.of(context).size.width * 0.7,
     showClosed: false,
-    children:  Row(
+    children: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
@@ -261,13 +303,13 @@ Future<T?> showLoadingDialog<T>(BuildContext context, String message, {
                   height: 32,
                   child: Platform.isAndroid
                       ? const CircularProgressIndicator(strokeWidth: 3)
-                      : const CupertinoActivityIndicator()
-              )
-          ),
-          SFText(keyText: message, style: TextStyles.white16, textAlign: TextAlign.center,
+                      : const CupertinoActivityIndicator())),
+          SFText(
+            keyText: message,
+            style: TextStyles.white16,
+            textAlign: TextAlign.center,
           )
-        ]
-    ),
+        ]),
   );
 }
 

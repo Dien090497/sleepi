@@ -65,7 +65,7 @@ extension NumX on num {
 
   String get formatBalanceToken {
     if (this == 0) {
-      return 0.toStringAsFixed(2);
+      return 0.toStringAsFixed(2).replaceAll(RegExp(r"([.]*0+)(?!.*\d)"), '');
     } else {
       final balance = toDouble();
       if (balance % 1 == 0) {
@@ -77,13 +77,8 @@ extension NumX on num {
         } else {
           index = balance.toString().length;
         }
-        return balance.toString().substring(0, index);
+        return balance.toString().substring(0, index).replaceAll(RegExp(r"([.]*0+)(?!.*\d)"), '');
       }
     }
-  }
-
-  String get removeTrailingZeros {
-    // return truncateToDouble() == this ? toInt().toString() : toString();
-    return toString().replaceAll(RegExp(r"([.]*0+)(?!.*\d)"), '');
   }
 }

@@ -36,6 +36,7 @@ class PopUpLevelUp extends StatelessWidget {
       listener: (context, state) {
         if (state is BottomBarInfoIndividualError) {
           Navigator.pop(context, true);
+          Navigator.pop(context, true);
           showMessageDialog(context, state.message);
         }
         if (state is UpLevelSuccess) {

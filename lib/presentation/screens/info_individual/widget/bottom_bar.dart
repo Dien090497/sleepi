@@ -10,13 +10,17 @@ import 'package:slee_fi/common/widgets/sf_icon.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
 import 'package:slee_fi/entities/bed_entity/bed_entity.dart';
 import 'package:slee_fi/l10n/locale_keys.g.dart';
+import 'package:slee_fi/models/pop_with_result.dart';
 import 'package:slee_fi/presentation/blocs/bottom_bar_infoIndividual/bottom_bar_infoIndividual_cubit.dart';
 import 'package:slee_fi/presentation/blocs/bottom_bar_infoIndividual/bottom_bar_infoIndividual_state.dart';
+import 'package:slee_fi/presentation/blocs/wallet/wallet_cubit.dart';
+import 'package:slee_fi/presentation/blocs/wallet/wallet_state.dart';
 import 'package:slee_fi/presentation/screens/home/widgets/pop_up_cancel_sell.dart';
 import 'package:slee_fi/presentation/screens/home/widgets/pop_up_repair.dart';
 import 'package:slee_fi/presentation/screens/home/widgets/pop_up_transfer.dart';
 import 'package:slee_fi/presentation/screens/info_individual/widget/pop_up_level_up.dart';
 import 'package:slee_fi/presentation/screens/info_individual/widget/pop_up_sell.dart';
+import 'package:slee_fi/presentation/screens/wallet_creation_warning/widgets/pop_up_avalanche_wallet.dart';
 import 'package:slee_fi/resources/resources.dart';
 
 class BottomBarWidget extends StatefulWidget {
@@ -77,6 +81,7 @@ class BottomBarWidgetState extends State<BottomBarWidget> {
 
   @override
   Widget build(BuildContext context) {
+    final stateWalletCubit = context.read<WalletCubit>().state;
     return Material(
       color: AppColors.dark,
       child: SafeArea(
@@ -157,6 +162,7 @@ class BottomBarWidgetState extends State<BottomBarWidget> {
                       index = 2;
                       Navigator.pushNamed(context, R.mint, arguments: bedEntity)
                           .then((value) {
+                        widget.onBackIndividual();
                         index = -1;
                         setState(() {});
                       });
@@ -195,24 +201,28 @@ class BottomBarWidgetState extends State<BottomBarWidget> {
                       });
                     }),
                     itemBottomBar(5, context, Ics.transfer, LocaleKeys.transfer,
-                        () {
+                        () async {
                       index = 5;
-                      showCustomDialog(
-                        context,
-                        children: [
-                          PopUpTransfer(
-                            onCancel: () {
-                              Navigator.pop(context);
-                            },
-                            valueTransfer: 1,
-                            bedEntity: bedEntity,
-                            cubit: cubit,
-                          )
-                        ],
-                      ).then((value) {
-                        index = -1;
-                        setState(() {});
-                      });
+                      if (stateWalletCubit is WalletNotExisted) {
+                        showCreateOrImportWallet().then((value) => _showWarningDialog(value, context));
+                      } else {
+                        showCustomDialog(
+                          context,
+                          children: [
+                            PopUpTransfer(
+                              onCancel: () {
+                                Navigator.pop(context);
+                              },
+                              valueTransfer: 1,
+                              bedEntity: bedEntity,
+                              cubit: cubit,
+                            )
+                          ],
+                        ).then((value) {
+                          index = -1;
+                          setState(() {});
+                        });
+                      }
                     }),
                   ],
                 );
@@ -222,5 +232,20 @@ class BottomBarWidgetState extends State<BottomBarWidget> {
         ),
       ),
     );
+  }
+
+  showCreateOrImportWallet() async {
+    return showCustomAlertDialog(
+      context,
+      barrierDismissible: false,
+      children: const PopUpAvalancheWallet(),
+    );
+  }
+
+  void _showWarningDialog(dynamic value, BuildContext context) {
+    if (value is PopWithResults) {
+      final cubit = context.read<WalletCubit>();
+      cubit.importWallet(value.results);
+    }
   }
 }

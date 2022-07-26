@@ -39,7 +39,7 @@ class PointDialog extends StatelessWidget {
         builder: (context, state) {
           final cubit = context.read<IndividualPointCubit>();
           final point = state is IndividualPointInitial
-              ? state.point?.removeTrailingZeros ?? '-'
+              ? state.point?.formatBalanceToken ?? '-'
               : '-';
 
           return Column(
@@ -160,7 +160,7 @@ class _IncreasePoint extends StatelessWidget {
                 child: SFTextField(
               showLabel: false,
               enabled: false,
-              initialText: point.removeTrailingZeros,
+              initialText: point.formatBalanceToken,
               textStyle: point == maxAttribute
                   ? TextStyles.green16Bold
                   : startPoint != point

@@ -45,7 +45,7 @@
       </BuildableProductRunnable>
    </LaunchAction>
    <ProfileAction
-      buildConfiguration = "Release-stg"
+      buildConfiguration = "Profile-stg"
       shouldUseLaunchSchemeArgsEnv = "YES"
       savedToolIdentifier = ""
       useCustomWorkingDirectory = "NO"
@@ -62,7 +62,7 @@
       </BuildableProductRunnable>
    </ProfileAction>
    <AnalyzeAction
-      buildConfiguration = "Debug-stg">
+      buildConfiguration = "Release-stg">
    </AnalyzeAction>
    <ArchiveAction
       buildConfiguration = "Release-stg"

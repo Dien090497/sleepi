@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_background_service/flutter_background_service.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:focus_detector/focus_detector.dart';
 import 'package:health/health.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:slee_fi/common/const/const.dart';
@@ -20,6 +21,7 @@ import 'package:slee_fi/l10n/locale_keys.g.dart';
 import 'package:slee_fi/models/user_status_tracking_model/user_status_tracking_model.dart';
 import 'package:slee_fi/presentation/blocs/home/home_bloc.dart';
 import 'package:slee_fi/presentation/blocs/home/home_state.dart';
+import 'package:slee_fi/presentation/screens/home/widgets/alarm_sound_button.dart';
 import 'package:slee_fi/presentation/screens/home/widgets/button_start.dart';
 import 'package:slee_fi/presentation/screens/home/widgets/home_switch.dart';
 import 'package:slee_fi/presentation/screens/home/widgets/lucky_box.dart';
@@ -93,18 +95,8 @@ class AlarmBell extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Expanded(
-                  child: SFButtonOutLined(
-                    title: LocaleKeys.alarm_bell,
-                    onPressed: () {
-                      Navigator.pushNamed(context, R.alarmSoundEffect);
-                    },
-                    fixedSize: const Size(274, 40),
-                    textStyle: TextStyles.blue16,
-                    borderColor: AppColors.blue,
-                    iconColor: AppColors.blue,
-                    withBorder: 1,
-                  ),
+                const Expanded(
+                  child: SoundButton(),
                 ),
                 const SizedBox(width: 22),
                 BlocBuilder<HomeBloc, HomeState>(
@@ -217,43 +209,49 @@ class AlarmBell extends StatelessWidget {
         context,
         children: PopUpConfirmStartTracking(
           onPressed: () async {
-            final homeBloc = BlocProvider.of<HomeBloc>(context);
-            final state = homeBloc.state;
-            if (state is HomeLoaded) {
-              final startRes = await getIt<StartSleepTrackingUseCase>()
-                  .call(StartTrackingSchema(
-                isEnableInsurance: state.enableInsurance,
-                bedUsed: state.selectedBed!.id,
-                wakeUp:
-                    '${selectedTime.toUtc().millisecondsSinceEpoch ~/ 1000}',
-                alrm: state.enableAlarm,
-                itemUsed: state.selectedItem?.id ?? 0,
-              ));
-              Navigator.pop(context);
-              startRes.fold(
-                (l) {
-                  showMessageDialog(context, '$l');
-                },
-                (r) async {
-                  final service = FlutterBackgroundService();
-                  SharedPreferences preferences = await SharedPreferences.getInstance();
-                  await preferences.setInt(Const.time, selectedTime.millisecondsSinceEpoch);
-                  FlutterBackgroundService().invoke(Const.setAsForeground);
-                  service.startService();
-                  Navigator.pushNamed(
-                    context,
-                    R.tracking,
-                    arguments: TrackingParams(
-                      timeStart: DateTime.now().millisecondsSinceEpoch,
-                      timeWakeUp: selectedTime.millisecondsSinceEpoch,
-                      tokenEarn: state.tokenEarn,
-                      fromRoute: R.bottomNavigation,
-                      imageBed: bedImage,
-                    ),
-                  );
-                },
-              );
-            }
+            Navigator.pop(context);
+            showWarningDialog(context, LocaleKeys.please_turn_on_tracking,
+                () async {
+              final homeBloc = BlocProvider.of<HomeBloc>(context);
+              final state = homeBloc.state;
+              if (state is HomeLoaded) {
+                final startRes = await getIt<StartSleepTrackingUseCase>()
+                    .call(StartTrackingSchema(
+                  isEnableInsurance: state.enableInsurance,
+                  bedUsed: state.selectedBed!.id,
+                  wakeUp:
+                      '${selectedTime.toUtc().millisecondsSinceEpoch ~/ 1000}',
+                  alrm: state.enableAlarm,
+                  itemUsed: state.selectedItem?.id ?? 0,
+                ));
+                Navigator.pop(context);
+                startRes.fold(
+                  (l) {
+                    showMessageDialog(context, '$l');
+                  },
+                  (r) async {
+                    final service = FlutterBackgroundService();
+                    SharedPreferences preferences =
+                        await SharedPreferences.getInstance();
+                    await preferences.setInt(
+                        Const.time, selectedTime.millisecondsSinceEpoch);
+                    FlutterBackgroundService().invoke(Const.setAsForeground);
+                    service.startService();
+                    Navigator.pushNamed(
+                      context,
+                      R.tracking,
+                      arguments: TrackingParams(
+                        timeStart: DateTime.now().millisecondsSinceEpoch,
+                        timeWakeUp: selectedTime.millisecondsSinceEpoch,
+                        tokenEarn: state.tokenEarn,
+                        fromRoute: R.bottomNavigation,
+                        imageBed: bedImage,
+                      ),
+                    );
+                  },
+                );
+              }
+            });
           },
         ),
       );

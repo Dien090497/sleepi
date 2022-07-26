@@ -38,6 +38,7 @@ class PopUpJewelMarketPlace extends StatelessWidget {
       context,
       padding: const EdgeInsets.all(24),
       children: PopupConfirmBuy(
+        cubit: cubit,
         nft: jewel,
         onConfirmTap: onConfirmTap,
       ),

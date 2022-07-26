@@ -51,6 +51,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
           selectedBed: null,
           loadMoreBed: false,
           startTracking: false,
+          loading: false,
           userStatusTracking: await _getStatusTracking(),
         ));
       },
@@ -106,7 +107,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
   }
 
   void _onRefresh(RefreshBed event, Emitter<HomeState> emit) async {
-    _currentPageBed = 1;
+    // _currentPageBed = 1;
     final currentState = state;
     if (currentState is HomeLoaded) {
       if (currentState.loading) return;
@@ -124,19 +125,23 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
       },
       (r) async {
         _currentPageBed++;
+        double amount = 0;
         if (currentState is HomeLoaded) {
+          if (r.isNotEmpty) {
+            amount = await _estimateTracking(
+              r.first,
+              currentState.enableInsurance,
+              currentState.selectedItem,
+            );
+          }
+
           emit(currentState.copyWith(
             loading: false,
             errorMessage: '',
+            selectedBed: r.isNotEmpty ? r.first : null,
             bedList: r,
             loadMoreBed: r.length >= _limitItemPage,
-            tokenEarn: r.isNotEmpty
-                ? await _estimateTracking(
-                    currentState.selectedBed!,
-                    currentState.enableInsurance,
-                    currentState.selectedItem,
-                  )
-                : 0,
+            tokenEarn: r.isNotEmpty ? amount : 0,
             userStatusTracking: await _getStatusTracking(),
           ));
         } else {

@@ -204,7 +204,7 @@
   "time": "Time",
   "use_item": "Use item",
   "range": "Alarm Range",
-  "alarm_bell": "Alarm: Bell",
+  "alarm_bell": "Alarm: Sound {}",
   "item_list": "Item List",
   "bedbox": "Bed Box",
   "bed_boxes": "Bed boxes",
@@ -354,7 +354,7 @@
   "russian": "Russian",
   "return_to_home": "Return to Home",
   "point": "Point",
-  "amount_earned": "Amount Earned",
+  "est_amount_earned": "Estimated Amount",
   "rare": "Rare",
   "epic": "Epic",
   "legendary": "Legendary",
@@ -466,5 +466,13 @@
   "cancel_sell": "Cancel Sell",
   "do_you_really_want_to_cancel_sell": "Do you really want to cancel sell nft?",
   "consume_and_turn_gacha_time": "Consume {price} SLFT and turn Gacha {quantity} time",
-  "selling": "Selling"
-}
+  "selling": "Selling",
+  "level_is_highest": "Level is highest",
+  "balance_not_enough": "Your balance is not enough to level up",
+  "enough_times_mint": "Bed enough times mint",
+  "minting_not_exists": "Can't get Minting",
+  "mint_success": "Mint Success",
+  "mint_fail": "Mint Fail",
+  "please_turn_on_tracking": "Please turn on sleep tracking tool supporting Google Fit",
+  "taking_off_jewel_with_cost": "Taking off Jewel cost 100 SLFT. Are you sure?"
+ }

@@ -31,9 +31,10 @@ import 'package:slee_fi/presentation/screens/trade/widgets/pop_up_approve_trade.
 import 'package:slee_fi/presentation/screens/trade/widgets/pop_up_confirm_trade.dart';
 
 class TradeArguments {
-  final String? contractAddress;
+  final String? contractAddressFrom;
+  final String? contractAddressTo;
 
-  TradeArguments(this.contractAddress);
+  TradeArguments({this.contractAddressFrom, this.contractAddressTo});
 }
 
 class TradeScreen extends StatefulWidget {
@@ -129,11 +130,15 @@ class _TradeScreenState extends State<TradeScreen> {
     Future.delayed(Duration.zero, () {
       final args = ModalRoute.of(context)?.settings.arguments as TradeArguments;
       setState(() {
-        indexFrom = getIndexAddress(args.contractAddress!);
-        if (indexFrom != 0) {
-          indexTo = 0;
-        } else {
-          indexTo = Const.tokens.length - 1;
+        indexFrom = getIndexAddress(args.contractAddressFrom!);
+        if(args.contractAddressTo ==null) {
+          if (indexFrom != 0) {
+            indexTo = 0;
+          } else {
+            indexTo = Const.tokens.length - 1;
+          }
+        }else{
+          indexTo = getIndexAddress(args.contractAddressTo!);
         }
       });
     });

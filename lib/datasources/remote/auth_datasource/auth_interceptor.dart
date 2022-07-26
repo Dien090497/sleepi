@@ -27,6 +27,7 @@ class AuthInterceptor extends Interceptor {
       options.headers['Authorization'] = 'Bearer $token';
     }
     debugPrint('### ${options.uri}');
+    log('### token $token');
     log('### refresh $refreshToken');
     if (deviceInfo is AndroidDeviceInfo) {
       options.headers['Device-Id'] = '${deviceInfo.id}';

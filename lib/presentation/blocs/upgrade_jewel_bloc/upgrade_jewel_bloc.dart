@@ -14,14 +14,14 @@ import 'upgrade_jewel_event.dart';
 
 class JewelBloc extends Bloc<JewelEvent, JewelState> {
   JewelBloc() : super(const JewelState.init()) {
-    on<JewelFetchListAvailable>(_fetchJewels);
+    on<JewelFetchListAvailable>(_fetchAvailableJewels);
     on<InitEvent>(_onInitEvent);
     on<JewelRefreshList>(_refreshJewels);
     on<AddJewelToSocket>(_addJewelToSocket);
     on<ClearJewel>(_removeJewelFromSocket);
     on<UpgradeJewel>(_upgradeJewel);
     on<JewelLoading>(_loadingJewel);
-    on<JewelFetchAllList>(_fetchAllListJewels);
+    on<JewelFetchAllList>(_fetchAllJewels);
     on<JewelRefreshListAvailable>(_onRefreshAvailableJewels);
     on<ClearJewelSuccess>(_clearJewelUpgraded);
   }
@@ -34,6 +34,7 @@ class JewelBloc extends Bloc<JewelEvent, JewelState> {
   }
 
   final int _limit = 10;
+  final int _limitAvailable = 50;
   int _currentPage = 1;
   int _currentPageAvailable = 1;
 
@@ -44,12 +45,12 @@ class JewelBloc extends Bloc<JewelEvent, JewelState> {
   final _upgradeJewelUseCase = getIt<UpgradeUseCase>();
   final _fetchBedUseCase = getIt<FetchBedUseCase>();
 
-  void _fetchJewels(
-      JewelFetchListAvailable event, Emitter<JewelState> emit) async {
+  void _fetchAvailableJewels(JewelFetchListAvailable event,
+      Emitter<JewelState> emit) async {
     if (_isLoading) return;
     _isLoading = true;
-    final result = await _fetchListJewelUC
-        .call(FetchBedParam(_currentPageAvailable, _limit, categoryType));
+    final result = await _fetchListJewelUC.call(
+        FetchBedParam(_currentPageAvailable, _limitAvailable, categoryType));
     _isLoading = false;
     result.fold((l) {
       emit(const JewelStateLoaded(
@@ -66,10 +67,12 @@ class JewelBloc extends Bloc<JewelEvent, JewelState> {
         final list = currentState.jewelsAvailable + success;
 
         emit(currentState.copyWith(
-            jewelsAvailable: list, isLoadMoreAvailable: length >= _limit));
+            jewelsAvailable: list,
+            isLoadMoreAvailable: length >= _limitAvailable));
       } else {
         emit(JewelStateLoaded(
-            jewelsAvailable: success, isLoadMoreAvailable: length >= _limit));
+            jewelsAvailable: success,
+            isLoadMoreAvailable: length >= _limitAvailable));
       }
 
       _currentPageAvailable++;
@@ -80,20 +83,20 @@ class JewelBloc extends Bloc<JewelEvent, JewelState> {
     _currentPage = 1;
     final currentState = state;
     if (currentState is JewelStateLoaded) {
-      emit(currentState.copyWith(isLoadMore: false));
+      emit(currentState.copyWith(isLoadMore: false, loading: true, jewels: []));
     }
     add(const JewelFetchAllList());
   }
 
-  FutureOr<void> _addJewelToSocket(
-      AddJewelToSocket event, Emitter<JewelState> emit) async {
+  FutureOr<void> _addJewelToSocket(AddJewelToSocket event,
+      Emitter<JewelState> emit) async {
     add(const JewelLoading(true));
 
     final result = await _getInfoUpgrade
         .call(UpgradeInfoParam(event.jewels.first.level, categoryType));
     result.fold((l) {
       final currentState = state;
-      if (currentState is JewelStateLoaded && _currentPage != 1) {
+      if (currentState is JewelStateLoaded) {
         emit(currentState.copyWith(errorMessage: l.msg, loading: false));
       }
     }, (r) {
@@ -109,8 +112,8 @@ class JewelBloc extends Bloc<JewelEvent, JewelState> {
     });
   }
 
-  FutureOr<void> _removeJewelFromSocket(
-      ClearJewel event, Emitter<JewelState> emit) {
+  FutureOr<void> _removeJewelFromSocket(ClearJewel event,
+      Emitter<JewelState> emit) {
     final currentState = state;
     if (currentState is JewelStateLoaded) {
       emit(currentState.copyWith(
@@ -166,8 +169,8 @@ class JewelBloc extends Bloc<JewelEvent, JewelState> {
     }
   }
 
-  Future<void> _fetchAllListJewels(
-      JewelFetchAllList event, Emitter<JewelState> emit) async {
+  Future<void> _fetchAllJewels(JewelFetchAllList event,
+      Emitter<JewelState> emit) async {
     final result = await _fetchBedUseCase
         .call(FetchBedParam(_currentPage, _limit, categoryType));
     result.fold((l) {
@@ -178,9 +181,10 @@ class JewelBloc extends Bloc<JewelEvent, JewelState> {
       final length = success.length;
       success.removeWhere((element) => element.isBurn != 0);
       final listJewelsEntity = success.map((e) => e.toEntity()).toList();
-      if (currentState is JewelStateLoaded && _currentPage != 1) {
+      if (currentState is JewelStateLoaded) {
         final list = currentState.jewels + listJewelsEntity;
-        emit(currentState.copyWith(jewels: list, isLoadMore: length >= _limit));
+        emit(currentState
+            .copyWith( jewels: list, isLoadMore: length >= _limit));
       } else {
         emit(JewelStateLoaded(
             jewels: listJewelsEntity, isLoadMore: length >= _limit));
@@ -189,8 +193,8 @@ class JewelBloc extends Bloc<JewelEvent, JewelState> {
     });
   }
 
-  FutureOr<void> _onRefreshAvailableJewels(
-      JewelRefreshListAvailable event, Emitter<JewelState> emit) {
+  FutureOr<void> _onRefreshAvailableJewels(JewelRefreshListAvailable event,
+      Emitter<JewelState> emit) {
     _currentPageAvailable = 1;
     final currentState = state;
     if (currentState is JewelStateLoaded) {
@@ -200,8 +204,8 @@ class JewelBloc extends Bloc<JewelEvent, JewelState> {
     add(const JewelFetchListAvailable());
   }
 
-  FutureOr<void> _clearJewelUpgraded(
-      ClearJewelSuccess event, Emitter<JewelState> emit) {
+  FutureOr<void> _clearJewelUpgraded(ClearJewelSuccess event,
+      Emitter<JewelState> emit) {
     final currentState = state;
     if (currentState is JewelStateLoaded) {
       emit(currentState.copyWith(upgradeSuccess: null));
