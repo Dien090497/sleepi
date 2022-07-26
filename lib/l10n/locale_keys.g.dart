@@ -477,5 +477,6 @@ abstract class  LocaleKeys {
   static const mint_fail = 'mint_fail';
   static const please_turn_on_tracking = 'please_turn_on_tracking';
   static const taking_off_jewel_with_cost = 'taking_off_jewel_with_cost';
+  static const not_enough_the_same_level_and_type = 'not_enough_the_same_level_and_type';
 
 }
