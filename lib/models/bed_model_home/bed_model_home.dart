@@ -7,12 +7,10 @@ part 'bed_model_home.g.dart';
 class BedModelHome {
   final int id;
   final int nftId;
+  final int tokenId;
   final double? percentEffect;
   final String nftName;
-  dynamic parent1;
-  dynamic parent2;
   final String contractAddress;
-  final int tokenId;
   final String owner;
   final String type;
   final String? jewelType;
@@ -122,9 +120,9 @@ class Nft {
 
 @JsonSerializable()
 class ObjData {
-  final double insurancePercent;
-  final double startTime;
-  final double endTime;
+  final double? insurancePercent;
+  final double? startTime;
+  final double? endTime;
 
   ObjData(this.insurancePercent, this.startTime, this.endTime);
 
