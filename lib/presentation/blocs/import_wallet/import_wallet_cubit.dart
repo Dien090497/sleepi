@@ -69,7 +69,7 @@ class ImportWalletCubit extends Cubit<ImportWalletState> {
     );
   }
 
-  sendOtp() async {
+  void sendOtp() async {
     final result =
         await sendOtpUC.call(SendOTPParam(userEmail, OTPType.importWallet));
     result.fold((l) {
@@ -77,20 +77,18 @@ class ImportWalletCubit extends Cubit<ImportWalletState> {
     }, (r) {});
   }
 
-  importWallet({required String mnemonic}) async {
+  void importWallet({required String mnemonic}) async {
     emit(const ImportWalletState.initial(isLoading: true));
-    await Future.delayed(const Duration(milliseconds: 1000));
     final result = await importWalletUC.call(mnemonic);
     result.fold((l) {
       emit(ImportWalletState.errorMnemonic(
           LocaleKeys.invalid_mnemonic_please_try_again.tr()));
     }, (r) async {
       final userRes = await _getUserUC.call(NoParams());
-      userRes.fold((l){
+      userRes.fold((l) {
         emit(ImportWalletState.success(r, null, []));
       }, (userInfo) async {
-        final balanceRes =
-        await _fetchBalanceSpendingUC.call('${userInfo.id}');
+        final balanceRes = await _fetchBalanceSpendingUC.call('${userInfo.id}');
         balanceRes.fold((l) {
           emit(ImportWalletState.success(r, userInfo, []));
         }, (tokensSpending) {
@@ -102,8 +100,7 @@ class ImportWalletCubit extends Cubit<ImportWalletState> {
 
   Future _getUserEmail() async {
     final result = await _currentUserUC.call(NoParams());
-    result.fold((l) {
-    }, (r) {
+    result.fold((l) {}, (r) {
       userEmail = r.email;
     });
   }
