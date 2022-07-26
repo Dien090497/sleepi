@@ -149,7 +149,7 @@ class AllResultScreen extends StatelessWidget {
                                       ],
                                     )
                                   :
-                                  SFIcon(args?.gachaSpinInfo!.gift.elementAt(index + at)['image']),
+                                  SFIcon(args?.gachaSpinInfo!.gift.elementAt(index + at)['image'], width: 50, height: 50,),
                                   onTap: () {
                                     if(isSlft){
                                       null;
