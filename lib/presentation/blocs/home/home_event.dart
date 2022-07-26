@@ -20,6 +20,13 @@ class AddItem extends HomeEvent {
   List<Object?> get props => [item];
 }
 
+class FetchBedDetail extends HomeEvent {
+  const FetchBedDetail();
+
+  @override
+  List<Object?> get props => [];
+}
+
 class RemoveItem extends HomeEvent {
   const RemoveItem();
 
