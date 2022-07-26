@@ -22,7 +22,7 @@ import 'package:slee_fi/presentation/blocs/home/home_state.dart';
 import 'package:slee_fi/presentation/screens/home/widgets/alarm_sound_button.dart';
 import 'package:slee_fi/presentation/screens/home/widgets/button_start.dart';
 import 'package:slee_fi/presentation/screens/home/widgets/home_switch.dart';
-import 'package:slee_fi/presentation/screens/home/widgets/lucky_box.dart';
+import 'package:slee_fi/presentation/screens/home/widgets/lucky_box_component.dart';
 import 'package:slee_fi/presentation/screens/home/widgets/pop_up_start_tracking.dart';
 import 'package:slee_fi/presentation/screens/home/widgets/time_picker.dart';
 import 'package:slee_fi/presentation/screens/tracking/tracking_screen.dart';

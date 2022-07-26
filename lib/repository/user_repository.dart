@@ -9,6 +9,7 @@ import 'package:slee_fi/models/bed_model/beb_model.dart';
 import 'package:slee_fi/models/estimate_sleep_response/estimate_sleep_response.dart';
 import 'package:slee_fi/models/global_config_response/global_config_response.dart';
 import 'package:slee_fi/models/lucky_box/lucky_box.dart';
+import 'package:slee_fi/models/lucky_box_response/lucky_box_response.dart';
 import 'package:slee_fi/models/response_model/response_model.dart';
 import 'package:slee_fi/models/swap_token_to_wallet_response/swap_token_to_wallet_response.dart';
 import 'package:slee_fi/models/token_spending/token_spending.dart';
@@ -64,7 +65,7 @@ abstract class IUserRepository {
 
   Future<Either<FailureMessage, List<LuckyBox>>> fetchLuckyBox();
 
-  Future<Either<FailureMessage, VerifyResponse>> openLuckyBox(int luckyBoxId);
+  Future<Either<FailureMessage, OpenLuckyBoxResponse>> openLuckyBox(int luckyBoxId);
 
   Future<Either<FailureMessage, EstimateSleepResponse>> estimateTracking(
       EstimateTrackingParam estimateTrackingParam);
@@ -103,4 +104,6 @@ abstract class IUserRepository {
 
   Future<Either<FailureMessage, List<BedEntity>>> fetchListUpgrade(
       FetchBedParam fetchBedParam);
+
+  Future<Either<FailureMessage, dynamic>> openBedBox(int bedId);
 }

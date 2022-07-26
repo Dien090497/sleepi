@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:slee_fi/common/routes/app_routes.dart';
+import 'package:slee_fi/common/widgets/sf_dialog.dart';
 import 'package:slee_fi/common/widgets/sf_gridview.dart';
 import 'package:slee_fi/common/widgets/sf_sub_tab_bar.dart';
 import 'package:slee_fi/entities/bed_entity/bed_entity.dart';
@@ -11,6 +12,7 @@ import 'package:slee_fi/presentation/screens/info_individual/info_individual_scr
 import 'package:slee_fi/presentation/screens/product_detail/widgets/auto_reset_tab_widget.dart';
 import 'package:slee_fi/presentation/screens/product_detail/widgets/gridview_bed_item.dart';
 import 'package:slee_fi/presentation/screens/product_detail/widgets/my_item_bed_box.dart';
+import 'package:slee_fi/presentation/screens/product_detail/widgets/pop_up_bed_box_detail.dart';
 import 'package:slee_fi/usecase/fetch_bed_usecase.dart';
 
 class TabBedsDetail extends StatefulWidget {
@@ -76,15 +78,35 @@ class _TabBedsDetailState extends State<TabBedsDetail> {
                                   itemBuilder: (context, index) => MyItemBedBox(
                                         bed: listBeds
                                             .where((element) =>
-                                                element.type == 'bedbox')
+                                                element.type == 'bed')
                                             .toList()[index],
                                         onTap: () {
-                                          print('ontap');
+                                          showCustomDialog(context,
+                                              padding: const EdgeInsets.all(24),
+                                              children: [
+                                                PopUpBedBoxDetail(
+                                                  bedEntity: listBeds
+                                                      .where((element) =>
+                                                          element.type == 'bed')
+                                                      .toList()[index],
+                                                  onTransfer: () {},
+                                                  onOpen: () {
+                                                    context
+                                                        .read<NFTListCubit>()
+                                                        .openLuckyBox(listBeds
+                                                            .where((element) =>
+                                                                element.type ==
+                                                                'bed')
+                                                            .toList()[index]
+                                                            .id);
+                                                  },
+                                                  onSell: () {},
+                                                )
+                                              ]);
                                         },
                                       ),
                                   count: listBeds
-                                      .where(
-                                          (element) => element.type == 'bedbox')
+                                      .where((element) => element.type == 'bed')
                                       .length),
                         ],
                       ),

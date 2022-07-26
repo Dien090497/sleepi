@@ -16,6 +16,7 @@ import 'package:slee_fi/models/bed_model/beb_model.dart';
 import 'package:slee_fi/models/estimate_sleep_response/estimate_sleep_response.dart';
 import 'package:slee_fi/models/global_config_response/global_config_response.dart';
 import 'package:slee_fi/models/lucky_box/lucky_box.dart';
+import 'package:slee_fi/models/lucky_box_response/lucky_box_response.dart';
 import 'package:slee_fi/models/response_model/response_model.dart';
 import 'package:slee_fi/models/swap_token_to_wallet_response/swap_token_to_wallet_response.dart';
 import 'package:slee_fi/models/token_spending/token_spending.dart';
@@ -222,7 +223,7 @@ class UserImplementation extends IUserRepository {
   }
 
   @override
-  Future<Either<FailureMessage, VerifyResponse>> openLuckyBox(
+  Future<Either<FailureMessage, OpenLuckyBoxResponse>> openLuckyBox(
       int luckyBoxId) async {
     try {
       var result = await _authDataSource.openLuckyBox(luckyBoxId);
@@ -408,6 +409,16 @@ class UserImplementation extends IUserRepository {
         return Right(result.list.map((e) => e.toEntity()).toList());
       }
       throw Exception('please select only jewel or item');
+    } catch (e) {
+      return Left(FailureMessage.fromException(e));
+    }
+  }
+
+  @override
+  Future<Either<FailureMessage, dynamic>> openBedBox(int bedId) async {
+    try {
+      final result = await _authDataSource.openBedBox(bedId);
+      return Right(result);
     } catch (e) {
       return Left(FailureMessage.fromException(e));
     }

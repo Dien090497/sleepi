@@ -479,5 +479,6 @@ abstract class  LocaleKeys {
   static const taking_off_jewel_with_cost = 'taking_off_jewel_with_cost';
   static const not_enough_the_same_level_and_type = 'not_enough_the_same_level_and_type';
   static const genenis_common_bed = 'genenis_common_bed';
+  static const open = 'open';
 
 }

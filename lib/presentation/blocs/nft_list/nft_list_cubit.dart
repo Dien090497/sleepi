@@ -2,10 +2,13 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:slee_fi/di/injector.dart';
 import 'package:slee_fi/presentation/blocs/nft_list/nft_list_state.dart';
 import 'package:slee_fi/usecase/fetch_bed_usecase.dart';
+import 'package:slee_fi/usecase/open_bed_box_usecase.dart';
+import 'package:slee_fi/usecase/open_lucky_box_usecase.dart';
 
 class NFTListCubit extends Cubit<NftListState> {
   NFTListCubit() : super(const NftListState.loading());
   final _fetchListBedUC = getIt<FetchBedUseCase>();
+  final _openBedBoxUC = getIt<OpenBedBoxUseCase>();
 
   int _currentPage = 1;
   final _limit = 10;
@@ -49,5 +52,11 @@ class NFTListCubit extends Cubit<NftListState> {
       }
       _currentPage++;
     });
+  }
+
+  openLuckyBox(int id) async {
+    final result = await _openBedBoxUC.call(id);
+    result.fold((l) => print('open lucky box error  ${l.msg} '),
+        (r) => print('open lucky box success '));
   }
 }
