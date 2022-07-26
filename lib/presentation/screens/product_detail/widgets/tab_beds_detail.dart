@@ -1,128 +1,257 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:slee_fi/common/const/const.dart';
+import 'package:slee_fi/common/extensions/string_x.dart';
 import 'package:slee_fi/common/routes/app_routes.dart';
+import 'package:slee_fi/common/style/app_colors.dart';
+import 'package:slee_fi/common/style/text_styles.dart';
+import 'package:slee_fi/common/widgets/cached_image.dart';
+import 'package:slee_fi/common/widgets/loading_screen.dart';
 import 'package:slee_fi/common/widgets/sf_dialog.dart';
-import 'package:slee_fi/common/widgets/sf_gridview.dart';
+import 'package:slee_fi/common/widgets/sf_percent_border.dart';
 import 'package:slee_fi/common/widgets/sf_sub_tab_bar.dart';
+import 'package:slee_fi/common/widgets/sf_text.dart';
 import 'package:slee_fi/entities/bed_entity/bed_entity.dart';
 import 'package:slee_fi/l10n/locale_keys.g.dart';
 import 'package:slee_fi/presentation/blocs/nft_list/nft_list_cubit.dart';
 import 'package:slee_fi/presentation/blocs/nft_list/nft_list_state.dart';
 import 'package:slee_fi/presentation/screens/info_individual/info_individual_screen.dart';
 import 'package:slee_fi/presentation/screens/product_detail/widgets/auto_reset_tab_widget.dart';
-import 'package:slee_fi/presentation/screens/product_detail/widgets/gridview_bed_item.dart';
 import 'package:slee_fi/presentation/screens/product_detail/widgets/my_item_bed_box.dart';
 import 'package:slee_fi/presentation/screens/product_detail/widgets/pop_up_bed_box_detail.dart';
+import 'package:slee_fi/presentation/screens/product_detail/widgets/refresh_list_widget.dart';
+import 'package:slee_fi/presentation/screens/product_detail/widgets/top_left_banner.dart';
 import 'package:slee_fi/usecase/fetch_bed_usecase.dart';
 
-class TabBedsDetail extends StatefulWidget {
+class TabBedsDetail extends StatelessWidget {
   const TabBedsDetail({Key? key}) : super(key: key);
 
   @override
-  State<TabBedsDetail> createState() => _TabBedsDetailState();
-}
-
-class _TabBedsDetailState extends State<TabBedsDetail> {
-  late List<BedEntity> listBeds = [];
-  final CategoryType categoryType = CategoryType.bed;
-  final cubit = NFTListCubit();
-
-  @override
   Widget build(BuildContext context) {
+    final cubit = NFTListCubit(CategoryType.bed)..init();
     return BlocProvider(
-      create: (context) => cubit,
+      create: (_) => cubit,
       child: AutoResetTabWidget(
-          child: BlocConsumer<NFTListCubit, NftListState>(
-            listener: (context, state) {
-              if (state is NftListLoaded) {
-                listBeds = state.listBed;
-              }
-            },
-            builder: (context, state) {
-              final cubit = context.read<NFTListCubit>();
-              return Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 12.0),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
+        onRefreshTab: () {
+          cubit.refresh();
+        },
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 12.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              SFSubTabBar(
+                  labelPadding: const EdgeInsets.symmetric(horizontal: 8),
+                  texts: const [LocaleKeys.bed, LocaleKeys.bedbox]),
+              const SizedBox(height: 12),
+              Expanded(
+                child: TabBarView(
                   children: [
-                    SFSubTabBar(
-                        labelPadding: const EdgeInsets.symmetric(horizontal: 8),
-                        texts: const [LocaleKeys.bed, LocaleKeys.bedbox]),
-                    const SizedBox(height: 12),
-                    Expanded(
-                      child: TabBarView(
-                        children: [
-                          (state is NftListLoading)
-                              ? const Center(child: CircularProgressIndicator())
-                              : GridViewBedItem(
-                                  onLoadMore: () {
-                                    cubit.getNFTList(categoryType);
-                                  },
-                                  isLoadMore: state is NftListLoaded
-                                      ? state.isLoadMore
-                                      : false,
-                                  beds: listBeds
-                                      .where((element) => element.type == 'bed')
-                                      .toList(),
-                                  onRefresh: () {
-                                    cubit.refresh(categoryType);
-                                  },
-                                  onBedTap: (bed) {
-                                    Navigator.pushNamed(context, R.nftInfo,
-                                        arguments: InfoIndividualParams(
-                                            bed: bed, buy: true));
-                                  }),
-                          (state is NftListLoading)
-                              ? const Center(child: CircularProgressIndicator())
-                              : SFGridView(
-                                  itemBuilder: (context, index) => MyItemBedBox(
-                                        bed: listBeds
-                                            .where((element) =>
-                                                element.type == 'bed')
-                                            .toList()[index],
-                                        onTap: () {
-                                          showCustomDialog(context,
-                                              padding: const EdgeInsets.all(24),
-                                              children: [
-                                                PopUpBedBoxDetail(
-                                                  bedEntity: listBeds
-                                                      .where((element) =>
-                                                          element.type == 'bed')
-                                                      .toList()[index],
-                                                  onTransfer: () {},
-                                                  onOpen: () {
-                                                    context
-                                                        .read<NFTListCubit>()
-                                                        .openLuckyBox(listBeds
-                                                            .where((element) =>
-                                                                element.type ==
-                                                                'bed')
-                                                            .toList()[index]
-                                                            .id);
-                                                  },
-                                                  onSell: () {},
-                                                )
-                                              ]);
-                                        },
+                    BlocBuilder<NFTListCubit, NftListState>(
+                      builder: (context, state) {
+                        if (state is NftListLoading ||
+                            state is NftListInitial) {
+                          return const LoadingIcon();
+                        }
+                        final listBeds = state is NftListLoaded
+                            ? state.listBed
+                                .where((e) => e.type.toLowerCase() == 'bed')
+                                .toList()
+                            : <BedEntity>[];
+                        return RefreshListWidget(
+                          child: GridView.builder(
+                            itemCount: listBeds.length,
+                            shrinkWrap: true,
+                            padding: const EdgeInsets.symmetric(vertical: 16),
+                            keyboardDismissBehavior:
+                                ScrollViewKeyboardDismissBehavior.onDrag,
+                            gridDelegate:
+                                const SliverGridDelegateWithFixedCrossAxisCount(
+                              crossAxisCount: 2,
+                              crossAxisSpacing: 12,
+                              mainAxisSpacing: 12,
+                            ),
+                            itemBuilder: (context, i) {
+                              final bed = listBeds[i];
+                              final qualityColor = bed.quality != null
+                                  ? bed.quality!.qualityBedColor
+                                  : AppColors.commonBed;
+                              return GestureDetector(
+                                onTap: () {
+                                  Navigator.pushNamed(context, R.nftInfo,
+                                      arguments: InfoIndividualParams(
+                                          bed: bed, buy: true));
+                                },
+                                child: Container(
+                                  decoration: BoxDecoration(
+                                    color: AppColors.lightDark,
+                                    borderRadius: BorderRadius.circular(16),
+                                  ),
+                                  child: Stack(
+                                    clipBehavior: Clip.hardEdge,
+                                    children: [
+                                      Positioned(
+                                        top: 20,
+                                        left: -30,
+                                        child: TopLeftBanner(
+                                          text: bed.nftClass
+                                              .reCase(StringCase.camelCase),
+                                          textColor: qualityColor,
+                                        ),
                                       ),
-                                  count: listBeds
-                                      .where((element) => element.type == 'bed')
-                                      .length),
-                        ],
-                      ),
+                                      (listBeds[i].isLock == 1 &&
+                                              listBeds[i].statusNftSale ==
+                                                  'ON_SALE')
+                                          ? Positioned(
+                                              top: 14,
+                                              right: 10,
+                                              child: Container(
+                                                decoration: BoxDecoration(
+                                                  borderRadius:
+                                                      BorderRadius.circular(10),
+                                                  color: AppColors.yellow,
+                                                ),
+                                                padding:
+                                                    const EdgeInsets.symmetric(
+                                                        horizontal: 5,
+                                                        vertical: 5),
+                                                child: SFText(
+                                                  keyText: LocaleKeys.selling,
+                                                  style: TextStyles
+                                                      .white1w700size12,
+                                                ),
+                                              ))
+                                          : const SizedBox(),
+                                      Padding(
+                                        padding: const EdgeInsets.symmetric(
+                                            horizontal: 16.0),
+                                        child: Column(
+                                          children: [
+                                            Expanded(
+                                              child: Container(
+                                                alignment: Alignment.center,
+                                                child: CachedImage(
+                                                  image: bed.image,
+                                                  height: 80,
+                                                  width: 80,
+                                                ),
+                                              ),
+                                            ),
+                                            Container(
+                                              decoration: BoxDecoration(
+                                                borderRadius:
+                                                    BorderRadius.circular(50),
+                                                border: Border.all(
+                                                    color: qualityColor
+                                                        .withOpacity(0.1)),
+                                              ),
+                                              padding:
+                                                  const EdgeInsets.symmetric(
+                                                      vertical: 5,
+                                                      horizontal: 16),
+                                              child: SFText(
+                                                keyText: bed.name,
+                                                style: TextStyles
+                                                    .white1w700size12
+                                                    .copyWith(
+                                                        color: qualityColor),
+                                              ),
+                                            ),
+                                            const SizedBox(height: 8),
+                                            Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment
+                                                      .spaceBetween,
+                                              children: [
+                                                SFText(
+                                                    keyText:
+                                                        '${LocaleKeys.mint.tr()} ${bed.bedMint}',
+                                                    style: TextStyles
+                                                        .lightGrey11W500),
+                                                SFText(
+                                                    keyText:
+                                                        '${LocaleKeys.level.tr()} ${bed.level}',
+                                                    style: TextStyles
+                                                        .lightGrey11W500),
+                                              ],
+                                            ),
+                                            SizedBox(height: 4.h),
+                                            SFPercentBorderGradient(
+                                              valueActive:
+                                                  bed.bedMint.toDouble(),
+                                              totalValue: Const.bedMintMax,
+                                            ),
+                                            const SizedBox(height: 12),
+                                          ],
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              );
+                            },
+                          ),
+                        );
+                      },
+                    ),
+                    BlocBuilder<NFTListCubit, NftListState>(
+                      builder: (context, state) {
+                        if (state is NftListLoading ||
+                            state is NftListInitial) {
+                          return const LoadingIcon();
+                        }
+                        final listBeds = state is NftListLoaded
+                            ? state.listBed
+                                .where((e) => e.type.toLowerCase() == 'bedbox')
+                                .toList()
+                            : <BedEntity>[];
+                        return RefreshListWidget(
+                          child: GridView.builder(
+                            itemCount: listBeds.length,
+                            shrinkWrap: true,
+                            padding: const EdgeInsets.symmetric(vertical: 16),
+                            keyboardDismissBehavior:
+                                ScrollViewKeyboardDismissBehavior.onDrag,
+                            gridDelegate:
+                                const SliverGridDelegateWithFixedCrossAxisCount(
+                              crossAxisCount: 2,
+                              crossAxisSpacing: 12,
+                              mainAxisSpacing: 12,
+                            ),
+                            itemBuilder: (context, index) => MyItemBedBox(
+                              bed: listBeds[index],
+                              onTap: () {
+                                showCustomDialog(
+                                  context,
+                                  padding: const EdgeInsets.all(24),
+                                  children: [
+                                    PopUpBedBoxDetail(
+                                      bedEntity: listBeds[index],
+                                      onTransfer: () {},
+                                      onOpen: () {
+                                        context
+                                            .read<NFTListCubit>()
+                                            .openLuckyBox(listBeds[index].id);
+                                      },
+                                      onSell: () {},
+                                    )
+                                  ],
+                                );
+                              },
+                            ),
+                          ),
+                        );
+                      },
                     ),
                   ],
                 ),
-              );
-            },
+              ),
+            ],
           ),
-          onRefreshTab: () {
-            if (listBeds.isEmpty) {
-              cubit.init(categoryType);
-            } else {
-              cubit.refresh(categoryType);
-            }
-          }),
+        ),
+      ),
     );
   }
 }

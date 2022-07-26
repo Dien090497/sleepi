@@ -176,11 +176,10 @@ class JewelBloc extends Bloc<JewelEvent, JewelState> {
     result.fold((l) {
       emit(const JewelStateLoaded(
           jewels: [], isLoadMore: false, loading: false));
-    }, (success) {
+    }, (listJewelsEntity) {
       final currentState = state;
-      final length = success.length;
-      success.removeWhere((element) => element.isBurn != 0);
-      final listJewelsEntity = success.map((e) => e.toEntity()).toList();
+      final length = listJewelsEntity.length;
+      listJewelsEntity.removeWhere((element) => element.isBurn != 0);
       if (currentState is JewelStateLoaded) {
         final list = currentState.jewels + listJewelsEntity;
         emit(currentState.copyWith(
