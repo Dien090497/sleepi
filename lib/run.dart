@@ -12,7 +12,6 @@ import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:just_audio/just_audio.dart';
 import 'package:logger/logger.dart';
-import 'package:sentry_flutter/sentry_flutter.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:slee_fi/app.dart';
 import 'package:slee_fi/common/const/const.dart';
@@ -38,26 +37,14 @@ Future<void> run() async {
     ]),
   ]);
 
-  /// Lock in portrait mode only
-  await SentryFlutter.init(
-    (options) {
-      options.dsn =
-          'https://9afba6dcc9e742eea36ba51bef7238ad@o1325661.ingest.sentry.io/6584991';
-      // Set tracesSampleRate to 1.0 to capture 100% of transactions for performance monitoring.
-      // We recommend adjusting this value in production.
-      options.tracesSampleRate = 1.0;
-    },
-    appRunner: () {
-      return BlocOverrides.runZoned(
-        () => runApp(EasyLocalization(
-          supportedLocales: Const.locales,
-          path: 'assets/translations',
-          fallbackLocale: Const.localeEN,
-          child: const MyApp(),
-        )),
-        blocObserver: AppBlocObserver(),
-      );
-    },
+  BlocOverrides.runZoned(
+    () => runApp(EasyLocalization(
+      supportedLocales: Const.locales,
+      path: 'assets/translations',
+      fallbackLocale: Const.localeEN,
+      child: const MyApp(),
+    )),
+    blocObserver: AppBlocObserver(),
   );
 }
 
