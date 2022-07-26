@@ -64,9 +64,7 @@ class _TransferListState extends State<TransferList> {
                 onConfirm: () {
                   isLoadingNotifier.value = true;
                   cubit
-                      .approve(
-                          amount: 0,
-                          addressContract: widget.tokenEntity.address)
+                      .approve(addressContract: widget.tokenEntity.address)
                       .then((str) {
                     isLoadingNotifier.value = false;
                     Navigator.pop(context);

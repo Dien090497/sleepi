@@ -1,5 +1,6 @@
 import 'package:dartz/dartz.dart';
 import 'package:injectable/injectable.dart';
+import 'package:slee_fi/common/const/const.dart';
 import 'package:slee_fi/datasources/local/get_storage_datasource.dart';
 import 'package:slee_fi/datasources/local/isar/isar_datasource.dart';
 import 'package:slee_fi/datasources/local/secure_storage.dart';
@@ -111,12 +112,17 @@ class UserImplementation extends IUserRepository {
   Future<Either<FailureMessage, GlobalConfigResponse>> getGlobalConfig() async {
     try {
       final result = await _authDataSource.getGlobalConfig();
+      final addresses = <String>[];
+      addresses
+        ..add(result.tokens[2].address)
+        ..add(result.tokens[1].address)
+        ..add(result.tokens[0].address);
+
       await Future.wait([
         _secureStorage.saveAddressContract(addressContract: result.contract),
         _secureStorage.saveMessage(saveMessage: result.messageSign),
         _secureStorage.setNftAddress(result.nftAddress.toJson()),
-        _secureStorage
-            .setTokenAddress(result.tokens.map((e) => e.address).toList()),
+        _secureStorage.setTokenAddress(addresses),
       ]);
       return Right(result);
     } catch (e) {
@@ -144,7 +150,7 @@ class UserImplementation extends IUserRepository {
     try {
       final contractAddr = estimateParam.type.toLowerCase() != 'avax'
           ? estimateParam.contractAddress
-          : 'Const.deadAddress';
+          : Const.deadAddress;
       final result = await _authDataSource.estimateGasWithdraw(
           estimateParam.type, contractAddr);
       return Right(result);

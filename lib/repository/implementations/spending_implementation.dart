@@ -2,6 +2,7 @@ import 'dart:math';
 
 import 'package:dartz/dartz.dart';
 import 'package:injectable/injectable.dart';
+import 'package:slee_fi/common/const/const.dart';
 import 'package:slee_fi/common/extensions/num_ext.dart';
 import 'package:slee_fi/datasources/local/get_storage_datasource.dart';
 import 'package:slee_fi/datasources/local/history_datasource.dart';
@@ -37,13 +38,12 @@ class SpendingImplementation extends ISpendingRepository {
   }) async {
     try {
       final amountWei = BigInt.from(amount * pow(10, 18));
-      if (addressContract == 'Const.deadAddress') {
+      if (addressContract == Const.deadAddress) {
         final hash = await _spendingDataSource.toSpendingAvax(
           owner: owner,
           amount: amountWei,
           userId: BigInt.from(userId),
-          avax: EthereumAddress.fromHex(
-              "Const.deadAddress"),
+          avax: EthereumAddress.fromHex(Const.deadAddress),
           transaction: Transaction(value: EtherAmount.inWei(amountWei)),
           spendingAddress: await _secureStorage.readAddressContract() ?? '',
         );

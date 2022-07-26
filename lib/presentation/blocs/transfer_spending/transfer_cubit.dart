@@ -91,7 +91,6 @@ class TransferCubit extends Cubit<TransferState> {
   }
 
   Future<String> approve({
-    required double amount,
     required String addressContract,
   }) async {
     final currentState = state;

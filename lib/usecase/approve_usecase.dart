@@ -19,9 +19,7 @@ class ApproveUseCase extends UseCase<String, String> {
       return Left(FailureMessage("$l"));
     }, (r) async {
       final result = await _iSpendingRepository.approve(
-        owner: r.credentials,
-        addressContract: params,
-      );
+          owner: r.credentials, addressContract: params);
       return result.fold((l) {
         return Left(FailureMessage("$l"));
       }, (r) {
