@@ -61,12 +61,16 @@ class BottomBarInfoIndividualCubit extends Cubit<BottomBarInfoIndividualState> {
   }
 
   void getTransactionFee() async {
-    emit(const BottomBarInfoIndividualState.loading());
     final result = await _getTransactionFeeUseCase.call(NoParams());
     result.fold((l) {
       emit(BottomBarInfoIndividualState.error(message: '$l'));
     }, (fee) {
-      emit(BottomBarInfoIndividualState.loaded(gasPrice: '', successTransfer: false, transactionFee: fee));
+      final currentState = state;
+      if (currentState is BottomBarInfoIndividualLoaded) {
+        emit(currentState.copyWith(transactionFee: fee));
+      } else {
+        emit(BottomBarInfoIndividualState.loaded(gasPrice: '', successTransfer: false, transactionFee: fee));
+      }
     });
   }
 
