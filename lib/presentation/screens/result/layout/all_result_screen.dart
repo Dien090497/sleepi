@@ -66,7 +66,12 @@ class AllResultScreen extends StatelessWidget {
                                 ],
                               )
                                   :
-                              SFIcon(args?.gachaSpinInfo!.gift.elementAt(index)['image']),
+                              Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  SFIcon(args?.gachaSpinInfo!.gift.elementAt(index)['image'],  width: 75, height: 75,),
+                                ],
+                              ),
                               onTap: () {
                                 if(isSlft){
                                   null;
@@ -95,7 +100,7 @@ class AllResultScreen extends StatelessWidget {
                                 width: 100,
                                 height: 100,
                                 margin: const EdgeInsets.all(6),
-                                padding: const EdgeInsets.symmetric(horizontal: 18.0),
+                                padding: const EdgeInsets.symmetric(horizontal: 6.0),
                                 radius: 8,
                                 border: Border.all(color: AppColors.white.withOpacity(0.1)),
                                 child: isSlft
@@ -108,7 +113,12 @@ class AllResultScreen extends StatelessWidget {
                                   ],
                                 )
                                     :
-                                SFIcon(args?.gachaSpinInfo!.gift.elementAt(index + at)['image']),
+                                Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    SFIcon(args?.gachaSpinInfo!.gift.elementAt(index + at)['image'],  width: 75, height: 75,),
+                                  ],
+                                ),
                                 onTap: () {
                                   if(isSlft){
                                   null;
@@ -152,7 +162,12 @@ class AllResultScreen extends StatelessWidget {
                                       ],
                                     )
                                   :
-                                  SFIcon(args?.gachaSpinInfo!.gift.elementAt(index + at)['image']),
+                                  Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      SFIcon(args?.gachaSpinInfo!.gift.elementAt(index + at)['image'],  width: 75, height: 75,),
+                                    ],
+                                  ),
                                   onTap: () {
                                     if(isSlft){
                                       null;

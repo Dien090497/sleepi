@@ -10,25 +10,28 @@ class ItemAttribute extends StatelessWidget {
     Key? key,
     required this.title,
     required this.valueActive,
+    required this.totalValue,
     required this.linkImage,
     required this.colorIcon,
   }) : super(key: key);
 
   final String title;
   final double valueActive;
+  final double totalValue;
   final String linkImage;
   final Color colorIcon;
 
   Color checkColor(int i) {
+    double range = totalValue/5;
     if (valueActive > 0 && i == 0) {
       return colorIcon.withOpacity(0.5);
-    } else if (valueActive > 2 && i == 1) {
+    } else if (valueActive > range && i == 1) {
       return colorIcon.withOpacity(0.6);
-    } else if (valueActive > 4 && i == 2) {
+    } else if (valueActive > (range*2) && i == 2) {
       return colorIcon.withOpacity(0.7);
-    } else if (valueActive > 6 && i == 3) {
+    } else if (valueActive > (range*3) && i == 3) {
       return colorIcon.withOpacity(0.8);
-    } else if (valueActive > 8 && i == 4) {
+    } else if (valueActive > (range*4) && i == 4) {
       return colorIcon;
     }
     return AppColors.light4;

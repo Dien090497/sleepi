@@ -23,6 +23,8 @@ class AttributesWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    List values = [efficiency, luck, bonus, special, resilience];
+    double maxNumber = values.fold<double>(0, (max, e) => e > max ? e : max);
     return Container(
       decoration: BoxDecoration(
         color: AppColors.whiteOpacity5,
@@ -37,27 +39,37 @@ class AttributesWidget extends StatelessWidget {
               linkImage: Ics.efficiency,
               colorIcon: AppColors.ruby,
               title: LocaleKeys.efficiency.tr(),
-              valueActive: efficiency ?? 0),
+              valueActive: efficiency ?? 0,
+              totalValue: maxNumber,
+          ),
           ItemAttribute(
               linkImage: Ics.gift,
               colorIcon: AppColors.blue,
               title: LocaleKeys.luck.tr(),
-              valueActive: luck ?? 0),
+              valueActive: luck ?? 0,
+            totalValue: maxNumber,
+          ),
           ItemAttribute(
               linkImage: Ics.bonus,
               colorIcon: AppColors.green,
               title: LocaleKeys.bonus.tr(),
-              valueActive: bonus ?? 0),
+              valueActive: bonus ?? 0,
+            totalValue: maxNumber,
+          ),
           ItemAttribute(
               linkImage: Ics.special,
               colorIcon: AppColors.white,
               title: LocaleKeys.special.tr(),
-              valueActive: special ?? 0),
+              valueActive: special ?? 0,
+            totalValue: maxNumber,
+          ),
           ItemAttribute(
               linkImage: Ics.resilience,
               colorIcon: AppColors.purple,
               title: LocaleKeys.resilience.tr(),
-              valueActive: resilience ?? 0),
+              valueActive: resilience ?? 0,
+            totalValue: maxNumber,
+          ),
         ],
       ),
     );
