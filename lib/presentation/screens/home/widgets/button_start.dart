@@ -34,7 +34,7 @@ class _ButtonStartState extends State<ButtonStart> {
   Widget build(BuildContext context) {
     return FocusDetector(
       onFocusGained: () {
-        context.read<HomeBloc>().add(const RefreshStartButton());
+        context.read<HomeBloc>().add(const FetchBedDetail());
       },
       child: HomeStartButton(
         radius: 100,

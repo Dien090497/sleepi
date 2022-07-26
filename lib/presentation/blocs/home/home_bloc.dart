@@ -179,6 +179,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
         .call(FetchHomeBedParam(_currentPageBed, _limitItemPage));
     await result.fold(
       (l) async {
+        print('loading  bed detail errorr   ${l.msg}');
         if (currentState is HomeLoaded) {
           emit(currentState.copyWith(loading: false, errorMessage: ''));
         } else {
@@ -186,6 +187,8 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
         }
       },
       (r) async {
+        print('loading  bed detail success');
+
         _currentPageBed++;
         double amount = 0;
         if (currentState is HomeLoaded) {
