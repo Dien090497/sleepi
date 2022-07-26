@@ -4,8 +4,6 @@ import 'package:slee_fi/common/style/text_styles.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
 import 'package:slee_fi/l10n/locale_keys.g.dart';
 
-import 'custom_radio_button.dart';
-
 class OptionBeds extends StatefulWidget {
   const OptionBeds({required this.type, Key? key}) : super(key: key);
   final String? type;

@@ -79,7 +79,6 @@ class _TabBedsDetailState extends State<TabBedsDetail> {
                                                 element.type == 'bedbox')
                                             .toList()[index],
                                         onTap: () {
-                                          print('ontap');
                                         },
                                       ),
                                   count: listBeds

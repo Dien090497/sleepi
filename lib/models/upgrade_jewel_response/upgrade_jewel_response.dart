@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:slee_fi/models/bed_model/beb_model.dart';
 
@@ -13,7 +11,6 @@ class UpgradeJewelResponse {
   UpgradeJewelResponse(this.status, this.nftAttribute);
 
   factory UpgradeJewelResponse.fromJson(Map<String, dynamic> data) {
-    print('upgrade jewel respone   is   ${json.encode(data)}');
     return _$UpgradeJewelResponseFromJson(data);
   }
 
