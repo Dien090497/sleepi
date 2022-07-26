@@ -9,7 +9,6 @@ import 'package:slee_fi/failures/failure.dart';
 import 'package:slee_fi/l10n/locale_keys.g.dart';
 import 'package:slee_fi/resources/resources.dart';
 import 'package:slee_fi/usecase/get_balance_for_tokens_usecase.dart';
-import 'package:slee_fi/usecase/get_history_transaction_usecase.dart';
 import 'package:slee_fi/usecase/get_nfts_balance_usecase.dart';
 import 'package:slee_fi/usecase/has_wallet_usecase.dart';
 import 'package:slee_fi/usecase/usecase.dart';
@@ -21,7 +20,6 @@ class WalletCubit extends Cubit<WalletState> {
   WalletCubit() : super(const WalletState.initial());
 
   final _currentWalletUC = getIt<CurrentWalletUseCase>();
-  final _getHistoryTransactionUC = getIt<GetHistoryTransactionUseCase>();
   final _getBalanceForTokensUseCase = getIt<GetBalanceForTokensUseCase>();
   final _getNFTsBalanceUC = getIt<GetNFTsBalanceUseCase>();
   final _hasWalletUC = getIt<HasWalletUseCase>();
@@ -161,17 +159,4 @@ class WalletCubit extends Cubit<WalletState> {
     }
   }
 
-  Future<void> getHistoryTransaction(HistoryTransactionParams params) async {
-    emit(const WalletState.loadingHistory());
-    final result = await _getHistoryTransactionUC.call(params);
-
-    result.fold(
-      (l) {
-        emit(WalletState.error('$l'));
-      },
-      (history) {
-        emit(WalletState.getHistorySuccess(history));
-      },
-    );
-  }
 }

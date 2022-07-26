@@ -418,7 +418,6 @@ class WalletImplementation extends IWalletRepository {
   Future<Either<Failure, List<TransactionIsarModel>>> getHistoryTransaction(
       HistoryTransactionParams params) async {
     try {
-      // List<HistoryIsarModel> historyList = await _historyDataSource.getAllHistory();
       List<TransactionHistoryModel> transactionHistoryList = [];
       final result =
           await _transactionRemoteDataSource.getHistoryTransaction(params);

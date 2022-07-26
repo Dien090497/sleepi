@@ -50,10 +50,12 @@ class AttributesWidget extends StatelessWidget {
               valueActive: bonus ?? 0),
           ItemAttribute(
               linkImage: Ics.special,
+              colorIcon: AppColors.white,
               title: LocaleKeys.special.tr(),
               valueActive: special ?? 0),
           ItemAttribute(
               linkImage: Ics.resilience,
+              colorIcon: AppColors.purple,
               title: LocaleKeys.resilience.tr(),
               valueActive: resilience ?? 0),
         ],

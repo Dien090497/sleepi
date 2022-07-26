@@ -475,5 +475,6 @@
   "mint_fail": "Mint Fail",
   "please_turn_on_tracking": "Please turn on sleep tracking tool supporting Google Fit",
   "taking_off_jewel_with_cost": "Taking off Jewel cost 100 SLFT. Are you sure?",
-  "not_enough_the_same_level_and_type": "Not enough {} in same level and type. Please purchase and try again."
-}
+  "not_enough_the_same_level_and_type": "Not enough {} in same level and type. Please purchase and try again.",
+  "genenis_common_bed": "Genesis Common Bed"
+ }
