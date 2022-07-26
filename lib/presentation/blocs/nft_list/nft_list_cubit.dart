@@ -4,11 +4,13 @@ import 'package:slee_fi/presentation/blocs/nft_list/nft_list_state.dart';
 import 'package:slee_fi/usecase/fetch_bed_usecase.dart';
 
 class NFTListCubit extends Cubit<NftListState> {
-  NFTListCubit() : super(const NftListState.initial());
+  NFTListCubit() : super(const NftListState.loading());
   final _fetchListBedUC = getIt<FetchBedUseCase>();
 
   int _currentPage = 1;
   final _limit = 10;
+
+  bool isLoading = false;
 
   init(CategoryType idCategory) async {
     emit(const NftListState.loading());
@@ -21,8 +23,13 @@ class NFTListCubit extends Cubit<NftListState> {
   }
 
   Future<void> getNFTList(CategoryType idCategory) async {
-    final result = await _fetchListBedUC.call(
-        FetchBedParam(_currentPage, _limit, idCategory));
+    if (isLoading) return;
+
+    isLoading = true;
+    final result = await _fetchListBedUC
+        .call(FetchBedParam(_currentPage, _limit, idCategory));
+    isLoading = false;
+
     result.fold((l) {
       emit(NftListState.error('$l'));
     }, (success) {

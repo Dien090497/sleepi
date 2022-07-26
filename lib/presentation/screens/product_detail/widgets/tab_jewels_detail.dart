@@ -13,6 +13,7 @@ import 'package:slee_fi/presentation/blocs/upgrade_jewel_bloc/upgrade_jewel_even
 import 'package:slee_fi/presentation/blocs/upgrade_jewel_bloc/upgrade_jewel_state.dart';
 import 'package:slee_fi/presentation/screens/home/widgets/pop_up_cancel_sell.dart';
 import 'package:slee_fi/presentation/screens/info_individual/widget/pop_up_sell.dart';
+import 'package:slee_fi/presentation/screens/product_detail/widgets/auto_reset_tab_widget.dart';
 import 'package:slee_fi/presentation/screens/product_detail/widgets/jewel_dialog_body.dart';
 import 'package:slee_fi/presentation/screens/product_detail/widgets/my_jewel_short_widget.dart';
 import 'package:slee_fi/presentation/screens/product_detail/widgets/upgrade_tab.dart';
@@ -22,8 +23,10 @@ class TabJewelsDetail extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return DefaultTabController(
-        length: 2,
+    return AutoResetTabWidget(
+        onRefreshTab: () {
+          BlocProvider.of<JewelBloc>(context).add(const JewelRefreshList());
+        },
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 12.0),
           child: Column(
@@ -39,8 +42,10 @@ class TabJewelsDetail extends StatelessWidget {
                     BlocBuilder<JewelBloc, JewelState>(
                       builder: (context, state) {
                         final cubit = context.read<JewelBloc>();
-                        return (state is JewelStateLoaded)
-                            ? SFGridView(
+                        return (state is! JewelStateLoaded ||
+                                (state.loading && state.jewels.isEmpty))
+                            ? const Center(child: CircularProgressIndicator())
+                            : SFGridView(
                                 isLoadMore: state.isLoadMore,
                                 onLoadMore: _onLoadMore(cubit),
                                 count: state.jewels.length,
@@ -60,8 +65,7 @@ class TabJewelsDetail extends StatelessWidget {
                                         jewel: state.jewels[i]),
                                   );
                                 },
-                              )
-                            : const Center(child: CircularProgressIndicator());
+                              );
                       },
                     ),
                     const UpGradeTab(isJewel: true),

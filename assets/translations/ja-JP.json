@@ -204,7 +204,7 @@
   "time": "時間",
   "use_item": "アイテムを使う",
   "range": "アラーム設定可能時間",
-  "alarm_bell": "アラーム : ベル",
+  "alarm_bell": "アラーム : {}",
   "item_list": "アイテムリスト",
   "bedbox": "ベッドボックス",
   "bed_boxes": "ベッドボックス",
