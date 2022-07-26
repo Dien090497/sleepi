@@ -94,7 +94,7 @@ class GridViewBedItem extends StatelessWidget {
                         padding: const EdgeInsets.symmetric(
                             vertical: 5, horizontal: 16),
                         child: SFText(
-                          keyText: bed.nftName,
+                          keyText: bed.name,
                           style: TextStyles.white1w700size12
                               .copyWith(color: qualityColor),
                         ),

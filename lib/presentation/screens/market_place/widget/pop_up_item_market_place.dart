@@ -108,7 +108,7 @@ class PopUpItemMarketPlace extends StatelessWidget {
           ),
           padding: const EdgeInsets.all(8),
           child: SFText(
-            keyText: item.nftName,
+            keyText: item.name,
             style: TextStyles.blue14,
           ),
         ),

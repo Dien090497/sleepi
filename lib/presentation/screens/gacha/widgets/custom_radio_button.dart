@@ -4,13 +4,14 @@ import 'package:slee_fi/common/style/app_colors.dart';
 class CustomRadio extends StatefulWidget {
   final int value;
   final int groupValue;
-  final void Function(int) onChanged;
+  // final void Function(int) onChanged;
 
   const CustomRadio(
       {Key? key,
       required this.value,
       required this.groupValue,
-      required this.onChanged})
+      // required this.onChanged
+      })
       : super(key: key);
 
   @override
@@ -23,7 +24,7 @@ class _CustomRadioState extends State<CustomRadio> {
     bool selected = (widget.value == widget.groupValue);
 
     return InkWell(
-      onTap: () => widget.onChanged(widget.value),
+      // onTap: () => widget.onChanged(widget.value),
       child: Container(
         width: 16,
         height: 16,

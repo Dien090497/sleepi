@@ -9,6 +9,7 @@ part of 'gacha_attributes_item.dart';
 GachaAttributesItem _$GachaAttributesItemFromJson(Map<String, dynamic> json) =>
     GachaAttributesItem(
       image: json['image'] as String,
+      name: json['name'] as String,
       nftName: json['nftName'] as String,
       contractAddress: json['contractAddress'] as String,
       owner: json['owner'] as String,
@@ -46,6 +47,7 @@ Map<String, dynamic> _$GachaAttributesItemToJson(
       'tokenId': instance.tokenId,
       'id': instance.id,
       'image': instance.image,
+      'name': instance.name,
       'nftName': instance.nftName,
       'contractAddress': instance.contractAddress,
       'owner': instance.owner,

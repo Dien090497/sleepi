@@ -28,11 +28,33 @@ class MintScreen extends StatefulWidget {
   State<MintScreen> createState() => _MintScreenState();
 }
 
-class _MintScreenState extends State<MintScreen> {
+class _MintScreenState extends State<MintScreen> with TickerProviderStateMixin{
+  late AnimationController animationController;
   InfoMintingModel? _infoMintingModel;
   PercentMinting? _percentMinting;
   int percentBedBox = 100;
 
+  @override
+  void initState() {
+    super.initState();
+
+    animationController = AnimationController(vsync: this, duration: const Duration(milliseconds: 2));
+    animationController.addStatusListener((status) async {
+
+      if (status == AnimationStatus.completed) {
+        // final cubit = context.read<MintCubit>();
+        // cubit.mint();
+        animationController.reset();
+      }
+    });
+  }
+
+  @override
+  void dispose() {
+    animationController.dispose();
+    super.dispose();
+  }
+  
   @override
   Widget build(BuildContext context) {
     final args = ModalRoute.of(context)?.settings.arguments as BedEntity;
@@ -92,9 +114,10 @@ class _MintScreenState extends State<MintScreen> {
                                         children: [
                                           ConnectBedWidget(
                                             bedParent1: args,
+                                            controller: animationController,
                                           ),
                                           const SizedBox(
-                                            height: 60,
+                                            height: 120,
                                           ),
                                           SFLabelValue(
                                             label:
@@ -276,10 +299,11 @@ class _MintScreenState extends State<MintScreen> {
                             width: size.width,
                             gradient: AppColors.gradientBlueButton,
                             textStyle: TextStyles.white16,
-                            disabled: state is MintStateLoaded
-                                ? state.indexSelected == -1
-                                : true,
+                            // disabled: state is MintStateLoaded
+                            //     ? state.indexSelected == -1
+                            //     : true,
                             onPressed: () {
+                              // animationController.forward();
                               cubit.mint();
                             },
                           ),

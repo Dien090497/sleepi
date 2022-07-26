@@ -81,7 +81,7 @@ class JewelsBuyWidget extends StatelessWidget {
                     alignment: Alignment.center,
                     child: SFText(
                       maxLines: 2,
-                      keyText: jewel.nftName,
+                      keyText: jewel.name,
                       textAlign: TextAlign.center,
                       style: TextStyles.white1w700size12
                           .copyWith(color: qualityColor),
@@ -97,7 +97,7 @@ class JewelsBuyWidget extends StatelessWidget {
                         const EdgeInsets.symmetric(vertical: 8, horizontal: 12),
                     alignment: Alignment.center,
                     child: SFText(
-                      keyText: '+ ${jewel.efficiency}%',
+                      keyText: '+ ${jewel.jewelCorrection}%',
                       style: TextStyles.greenW700size12,
                     ),
                   ),

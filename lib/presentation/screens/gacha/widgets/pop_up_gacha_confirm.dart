@@ -47,11 +47,12 @@ class PopupGachaConfirm extends StatelessWidget {
                   text: LocaleKeys.confirm,
                   onPressed: onConfirmTap,
                   textStyle: TextStyles.white16,
-                  gradient: AppColors.blueGradient,
+                  gradient: AppColors.gradientBlueButton,
                   width: double.infinity,
                 )),
           ],
         ),
+        const SizedBox(height: 32),
       ],
     );
   }

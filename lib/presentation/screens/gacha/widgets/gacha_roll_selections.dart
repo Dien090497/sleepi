@@ -74,7 +74,7 @@ class _GachaRollSelectionsState extends State<GachaRollSelections> {
                   onTap: () {
                     showCustomAlertDialog(context,
                         padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-                        width: MediaQuery.of(context).size.width * 0.8,
+                        width: MediaQuery.of(context).size.width * 0.95,
                         children:  PopupGachaConfirm(
                           priceSpin: widget.costSingle,
                           quantity: 1,
@@ -109,7 +109,7 @@ class _GachaRollSelectionsState extends State<GachaRollSelections> {
                   onTap: () {
                     showCustomAlertDialog(context,
                         padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-                        width: MediaQuery.of(context).size.width * 0.8,
+                        width: MediaQuery.of(context).size.width * 0.95,
                         children:  PopupGachaConfirm(
                           priceSpin: widget.costMultiple,
                           quantity: 10,
