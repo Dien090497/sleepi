@@ -8,12 +8,12 @@ import 'package:slee_fi/entities/bed_entity/bed_entity.dart';
 import 'package:slee_fi/l10n/locale_keys.g.dart';
 import 'package:slee_fi/presentation/blocs/bottom_bar_infoIndividual/bottom_bar_infoIndividual_cubit.dart';
 import 'package:slee_fi/presentation/blocs/bottom_bar_infoIndividual/bottom_bar_infoIndividual_state.dart';
-import 'package:slee_fi/presentation/blocs/item_list/item_event.dart';
 import 'package:slee_fi/presentation/blocs/upgrade_jewel_bloc/upgrade_jewel_bloc.dart';
 import 'package:slee_fi/presentation/blocs/upgrade_jewel_bloc/upgrade_jewel_event.dart';
 import 'package:slee_fi/presentation/blocs/upgrade_jewel_bloc/upgrade_jewel_state.dart';
 import 'package:slee_fi/presentation/screens/home/widgets/my_item_short_widget.dart';
 import 'package:slee_fi/presentation/screens/home/widgets/pop_up_cancel_sell.dart';
+import 'package:slee_fi/presentation/screens/home/widgets/pop_up_transfer.dart';
 import 'package:slee_fi/presentation/screens/info_individual/widget/pop_up_sell.dart';
 import 'package:slee_fi/presentation/screens/product_detail/widgets/auto_reset_tab_widget.dart';
 import 'package:slee_fi/presentation/screens/product_detail/widgets/jewel_dialog_body.dart';
@@ -151,7 +151,45 @@ class TabItemDetail extends StatelessWidget {
               ),
             ]);
           },
-          onTransferTap: () {},
+          onTransferTap: () {
+            if (items.isLock != 1) {
+              Navigator.pop(context);
+              final cubit = BottomBarInfoIndividualCubit()..init();
+              cubit.estimateGas(contractAddress: items.contractAddress);
+              showCustomDialog(context, children: [
+                BlocProvider(
+                  create: (context) => cubit,
+                  child: BlocConsumer<BottomBarInfoIndividualCubit,
+                      BottomBarInfoIndividualState>(
+                    listener: (context, state) {
+                      if (state is BottomBarInfoIndividualError) {
+                        showMessageDialog(context, state.message);
+                      }
+                      if (state is BottomBarInfoIndividualLoaded) {
+                        if (state.successTransfer) {
+                          Navigator.pop(context);
+                          showSuccessfulDialog(context, null, onBackPress: () {
+                            Navigator.pushNamedAndRemoveUntil(
+                              context,
+                              R.bottomNavigation,
+                                  (r) => false,
+                            );
+                          });
+                        }
+                      }
+                    },
+                    builder: (context, state) {
+                      return PopUpTransfer(
+                        bedEntity: items,
+                        cubit: cubit,
+                        valueTransfer: 1,
+                      );
+                    },
+                  ),
+                ),
+              ]);
+            } else {}
+          },
         ),
       ],
     );
