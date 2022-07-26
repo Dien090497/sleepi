@@ -112,7 +112,7 @@ class UpGradeTab extends StatelessWidget {
                       SFLabelValue(
                         label: LocaleKeys.token_consumptions,
                         value:
-                            '${info != null ? info.slft : 0} SLFT + ${info != null ? info.slgt ?? 0 : 0} SLGT',
+                            '${info != null ? info.slft : 0} SLFT ${info != null && info.slgt != null ? ' + ${info.slft} SLGT' : ''} ',
                         styleLabel: TextStyles.lightGrey16,
                         styleValue: TextStyles.textColorSize16,
                       ),
