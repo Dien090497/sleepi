@@ -122,8 +122,9 @@ class PopUpBedBoxDetail extends StatelessWidget {
                 )),
               ],
             ),
+            const SizedBox(height: 12),
             SizedBox(
-              width: 100,
+              width: 120,
               child: SFButton(
                 text: LocaleKeys.open,
                 onPressed: () {

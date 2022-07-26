@@ -11,7 +11,7 @@ class OpenBedBoxUseCase extends UseCase<dynamic, int> {
   OpenBedBoxUseCase(this._iUserRepository);
 
   @override
-  Future<Either<Failure, dynamic>> call(params) {
+  Future<Either<FailureMessage, dynamic>> call(params) {
     return _iUserRepository.openBedBox(params);
   }
 }

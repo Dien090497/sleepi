@@ -90,7 +90,16 @@ class _TabBedsDetailState extends State<TabBedsDetail> {
                                                           element.type == 'bed')
                                                       .toList()[index],
                                                   onTransfer: () {},
-                                                  onOpen: () {},
+                                                  onOpen: () {
+                                                    context
+                                                        .read<NFTListCubit>()
+                                                        .openLuckyBox(listBeds
+                                                            .where((element) =>
+                                                                element.type ==
+                                                                'bed')
+                                                            .toList()[index]
+                                                            .id);
+                                                  },
                                                   onSell: () {},
                                                 )
                                               ]);
