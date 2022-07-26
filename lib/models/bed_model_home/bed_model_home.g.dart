@@ -37,20 +37,16 @@ BedModelHome _$BedModelHomeFromJson(Map<String, dynamic> json) => BedModelHome(
       json['jewelType'] as String?,
       (json['percentEffect'] as num?)?.toDouble(),
       json['itemType'] as String?,
-    )
-      ..parent1 = json['parent1']
-      ..parent2 = json['parent2'];
+    );
 
 Map<String, dynamic> _$BedModelHomeToJson(BedModelHome instance) =>
     <String, dynamic>{
       'id': instance.id,
       'nftId': instance.nftId,
+      'tokenId': instance.tokenId,
       'percentEffect': instance.percentEffect,
       'nftName': instance.nftName,
-      'parent1': instance.parent1,
-      'parent2': instance.parent2,
       'contractAddress': instance.contractAddress,
-      'tokenId': instance.tokenId,
       'owner': instance.owner,
       'type': instance.type,
       'jewelType': instance.jewelType,
@@ -88,9 +84,9 @@ Map<String, dynamic> _$NftToJson(Nft instance) => <String, dynamic>{
     };
 
 ObjData _$ObjDataFromJson(Map<String, dynamic> json) => ObjData(
-      (json['insurancePercent'] as num).toDouble(),
-      (json['startTime'] as num).toDouble(),
-      (json['endTime'] as num).toDouble(),
+      (json['insurancePercent'] as num?)?.toDouble(),
+      (json['startTime'] as num?)?.toDouble(),
+      (json['endTime'] as num?)?.toDouble(),
     );
 
 Map<String, dynamic> _$ObjDataToJson(ObjData instance) => <String, dynamic>{

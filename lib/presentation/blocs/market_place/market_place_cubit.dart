@@ -18,7 +18,6 @@ class MarketPlaceCubit extends Cubit<MarketPlaceState> {
   late int limit = 10;
   late bool loadMore = false;
   late bool error = false;
-  late bool isBuying = false;
   late MarketSchema params = MarketSchema(
       page: page,
       limit: limit,
@@ -145,13 +144,10 @@ class MarketPlaceCubit extends Cubit<MarketPlaceState> {
   }
 
   Future<String> buyNFT(int nftId) async {
-    isBuying = true;
     final result = await _buyNFTUseCase.call(nftId);
     return result.fold((l) {
-      isBuying = false;
       return '$l';
     }, (success) {
-      isBuying = false;
       if (success.status) {
         return '';
       } else {

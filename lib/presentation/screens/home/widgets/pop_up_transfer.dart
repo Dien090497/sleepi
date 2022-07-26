@@ -101,14 +101,14 @@ class PopUpTransfer extends StatelessWidget {
                     state is BottomBarInfoIndividualLoaded ?
                       Expanded(
                         child: SFText(
-                          keyText: '${state.gasPrice} SLFT',
+                          keyText: '${state.gasPrice} AVAX',
                           textAlign: TextAlign.right,
                           style: TextStyles.white12,
                         ),
                       )
                       : Expanded(
                         child: SFText(
-                          keyText: '--.-- SLFT',
+                          keyText: '--.-- AVAX',
                           textAlign: TextAlign.right,
                           style: TextStyles.white12,
                         ),
