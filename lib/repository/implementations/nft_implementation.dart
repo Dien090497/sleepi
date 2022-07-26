@@ -191,6 +191,7 @@ class NFTImplementation extends INFTRepository {
         signedMessage: signature,
         signer: signer,
       );
+      print('schema123xx ${schema.signer} \n ${schema.signedMessage} ${schema.tokenId} \n ${schema.type} \n ${schema.contractAddress}');
       final result = await _authDataSource.withdrawNFT(schema);
       return Right(result);
     } catch (e) {
