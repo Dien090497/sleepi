@@ -37,7 +37,7 @@ class CachedImage extends StatelessWidget {
         ),
       ),
       height: height,
-      fit: boxFit,
+      fit: boxFit ?? BoxFit.contain,
       width: width,
     );
   }
