@@ -209,27 +209,27 @@ class AlarmBell extends StatelessWidget {
         context,
         children: PopUpConfirmStartTracking(
           onPressed: () async {
-            final homeBloc = BlocProvider.of<HomeBloc>(context);
-            final state = homeBloc.state;
-            if (state is HomeLoaded) {
-              final startRes = await getIt<StartSleepTrackingUseCase>()
-                  .call(StartTrackingSchema(
-                isEnableInsurance: state.enableInsurance,
-                bedUsed: state.selectedBed!.id,
-                wakeUp:
-                    '${selectedTime.toUtc().millisecondsSinceEpoch ~/ 1000}',
-                alrm: state.enableAlarm,
-                itemUsed: state.selectedItem?.id ?? 0,
-              ));
-              Navigator.pop(context);
-              startRes.fold(
-                (l) {
-                  showMessageDialog(context, '$l');
-                },
-                (r) async {
-                  showMessageDialog(context, LocaleKeys.please_turn_on_tracking,
-                          showImg: false)
-                      .then((value) async {
+            Navigator.pop(context);
+            showWarningDialog(context, LocaleKeys.please_turn_on_tracking,
+                () async {
+              final homeBloc = BlocProvider.of<HomeBloc>(context);
+              final state = homeBloc.state;
+              if (state is HomeLoaded) {
+                final startRes = await getIt<StartSleepTrackingUseCase>()
+                    .call(StartTrackingSchema(
+                  isEnableInsurance: state.enableInsurance,
+                  bedUsed: state.selectedBed!.id,
+                  wakeUp:
+                      '${selectedTime.toUtc().millisecondsSinceEpoch ~/ 1000}',
+                  alrm: state.enableAlarm,
+                  itemUsed: state.selectedItem?.id ?? 0,
+                ));
+                Navigator.pop(context);
+                startRes.fold(
+                  (l) {
+                    showMessageDialog(context, '$l');
+                  },
+                  (r) async {
                     final service = FlutterBackgroundService();
                     SharedPreferences preferences =
                         await SharedPreferences.getInstance();
@@ -248,10 +248,10 @@ class AlarmBell extends StatelessWidget {
                         imageBed: bedImage,
                       ),
                     );
-                  });
-                },
-              );
-            }
+                  },
+                );
+              }
+            });
           },
         ),
       );

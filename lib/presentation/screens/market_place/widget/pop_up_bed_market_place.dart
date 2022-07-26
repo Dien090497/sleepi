@@ -41,6 +41,7 @@ class PopUpBedMarketPlace extends StatelessWidget {
       context,
       padding: const EdgeInsets.all(24),
       children: PopupConfirmBuy(
+        cubit: cubit,
         nft: bed,
         onConfirmTap: onConfirmTap,
       ),
