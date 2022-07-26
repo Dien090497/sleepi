@@ -23,7 +23,7 @@ class WalletCubit extends Cubit<WalletState> {
 
   final _currentWalletUC = getIt<CurrentWalletUseCase>();
   final _getHistoryTransactionUC = getIt<GetHistoryTransactionUseCase>();
-  final _getBalanceForTokensUseCase = getIt<GetBalanceForTokensUseCase>();
+  final _getBalanceForTokensUC = getIt<GetBalanceForTokensUseCase>();
   final _getNFTsBalanceUC = getIt<GetNFTsBalanceUseCase>();
   final _hasWalletUC = getIt<HasWalletUseCase>();
   final _getNftAddressesUC = getIt<GetNftAddressesUseCase>();
@@ -96,7 +96,7 @@ class WalletCubit extends Cubit<WalletState> {
     final GetNFTsParams nfTsParams =
         GetNFTsParams(wallet.address, nftAddresses);
     final results = await Future.wait([
-      _getBalanceForTokensUseCase.call(params),
+      _getBalanceForTokensUC.call(params),
       _getNFTsBalanceUC.call(nfTsParams),
     ]);
     final Either<Failure, List<double>> tokenBalanceRes = cast(results.first);

@@ -198,8 +198,7 @@ class WalletImplementation extends IWalletRepository {
           values.add(0);
           break;
         }
-        if (params.addressContract[i] ==
-            '0x0000000000000000000000000000000000000000') {
+        if (params.addressContract[i] == Const.deadAddress) {
           final balance =
               await _web3DataSource.getBalance(params.walletInfoEntity.address);
           values.add(balance / BigInt.from(pow(10, 18)));
