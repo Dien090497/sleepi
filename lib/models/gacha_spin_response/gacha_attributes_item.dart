@@ -17,6 +17,7 @@ class GachaAttributesItem{
   final double tokenId;
   final double id;
   final String image;
+  final String name;
   final String nftName;
   final String contractAddress;
   final String owner;
@@ -29,6 +30,7 @@ class GachaAttributesItem{
 
   GachaAttributesItem({
     required this.image,
+    required this.name,
     required this.nftName,
     required this.contractAddress,
     required this.owner,

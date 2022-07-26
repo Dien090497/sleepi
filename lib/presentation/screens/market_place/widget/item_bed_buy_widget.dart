@@ -63,7 +63,7 @@ class ItemBedBuyWidget extends StatelessWidget {
                     alignment: Alignment.center,
                     child: SFText(
                       textAlign: TextAlign.center,
-                      keyText: item.nftName,
+                      keyText: item.name,
                       style: TextStyles.white1w700size12
                           .copyWith(color: qualityColor),
                     ),

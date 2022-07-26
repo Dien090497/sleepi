@@ -102,6 +102,7 @@ class TabItemDetail extends StatelessWidget {
           jewel: items,
           isJewel: false,
           onSellTap: () {
+            Navigator.pop(context);
             final cubit = BottomBarInfoIndividualCubit()..init();
             showCustomDialog(context, children: [
               BlocProvider(

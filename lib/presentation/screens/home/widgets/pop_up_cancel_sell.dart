@@ -40,6 +40,7 @@ class CancelSell extends StatelessWidget {
                       child: SFButton(
                         text: LocaleKeys.cancel,
                         onPressed: () {
+                          Navigator.pop(context);
                         },
                         width: double.infinity,
                         textStyle: TextStyles.lightGrey16,

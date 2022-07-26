@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:lottie/lottie.dart';
 import 'package:slee_fi/common/widgets/cached_image.dart';
 import 'package:slee_fi/common/widgets/sf_bottom_sheet.dart';
 import 'package:slee_fi/common/widgets/sf_dialog.dart';
@@ -13,10 +12,11 @@ import 'package:slee_fi/presentation/screens/info_individual/widget/popup_select
 import 'package:slee_fi/resources/resources.dart';
 
 class ConnectBedWidget extends StatefulWidget {
-  const ConnectBedWidget({Key? key, required this.bedParent1})
+  const ConnectBedWidget({Key? key, required this.bedParent1, required this.controller})
       : super(key: key);
 
   final BedEntity bedParent1;
+  final AnimationController controller;
 
   @override
   State<ConnectBedWidget> createState() => _ConnectBedWidgetState();
@@ -29,14 +29,14 @@ class _ConnectBedWidgetState extends State<ConnectBedWidget> with TickerProvider
   void initState() {
     super.initState();
 
-    animationController = AnimationController(vsync: this);
-    animationController.addStatusListener((status) async {
-
-      if (status == AnimationStatus.completed) {
-
-        animationController.reset();
-      }
-    });
+    // widget.controller = AnimationController(vsync: this, duration: const Duration(milliseconds: 500));
+    // animationController.addStatusListener((status) async {
+    //
+    //   if (status == AnimationStatus.completed) {
+    //
+    //     animationController.reset();
+    //   }
+    // });
   }
 
   @override
@@ -109,26 +109,26 @@ class _ConnectBedWidgetState extends State<ConnectBedWidget> with TickerProvider
                 ),
               ),
               const SFIcon(Imgs.connectBorder),
-              //
               // SizedBox(
               //   height: 0,
               //   child: OverflowBox(
-              //     minHeight: 500,
-              //     maxHeight: 500,
+              //     minHeight: 200,
+              //     maxHeight: 400,
+              //     minWidth: 200,
+              //     maxWidth: 400,
               //     child: Lottie.asset('assets/json/bed_minting.json',
-              //       controller: animationController,
-              //       fit: BoxFit.contain,
+              //       controller: widget.controller,
+              //       fit: BoxFit.cover,
+              //       repeat: false,
               //       onLoaded: (composition) {
               //         // Configure the AnimationController with the duration of the
               //         // Lottie file and start the animation.
-              //         animationController
-              //           ..duration = composition.duration
-              //           ..forward();
+              //         widget.controller
+              //           .duration = composition.duration;
               //       },
               //     ),
               //   ),
               // ),
-              //
             ],
           );
         });

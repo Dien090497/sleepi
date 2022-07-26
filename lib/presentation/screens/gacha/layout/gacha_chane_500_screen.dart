@@ -105,7 +105,7 @@ class GachaChance500Screen extends StatelessWidget {
                                       height: 36,
                                       child: Center(
                                         child: SFText(
-                                          keyText: '${args?.attributesItem?.nftId ?? ''}',
+                                          keyText: args?.attributesItem?.name ?? '',
                                           style: TextStyles.lightWhite14,
                                           textAlign: TextAlign.center,
                                         ),
