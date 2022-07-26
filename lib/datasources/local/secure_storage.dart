@@ -92,4 +92,24 @@ class SecureStorage {
       _secureStorage.write(key: StorageKeys.signer, value: signer);
 
   Future<String?> readSigner() => _secureStorage.read(key: StorageKeys.signer);
+
+  Future<void> setNftAddress(Map<String, dynamic> json) {
+    final value = json.values.map((e) => e).join(',');
+    return _secureStorage.write(key: StorageKeys.nftAddresses, value: value);
+  }
+
+  Future<List<String>?> getNftAddress() async {
+    final res = await _secureStorage.read(key: StorageKeys.nftAddresses);
+    return res?.split(',');
+  }
+
+  Future<void> setTokenAddress(List<String> addresses) {
+    final value = addresses.join(',');
+    return _secureStorage.write(key: StorageKeys.tokenAddresses, value: value);
+  }
+
+  Future<List<String>?> getTokenAddress() async {
+    final value = await _secureStorage.read(key: StorageKeys.tokenAddresses);
+    return value?.split(',');
+  }
 }

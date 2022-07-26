@@ -1,7 +1,6 @@
 import 'package:erc20/erc20.dart';
 import 'package:injectable/injectable.dart';
 import 'package:slee_fi/common/abi/spending.g.dart';
-import 'package:slee_fi/common/contract_addresses/contract_addresses.dart';
 import 'package:slee_fi/datasources/remote/network/web3_provider.dart';
 import 'package:web3dart/web3dart.dart';
 
@@ -40,8 +39,11 @@ class SpendingDataSource {
         credentials: owner, transaction: transaction);
   }
 
-  Future<String> approve(Credentials owner, BigInt value, ERC20 token) =>
-      token.approve(ContractAddresses.spending, value, credentials: owner);
+  Future<String> approve(
+      String spendingAddress, Credentials owner, BigInt value, ERC20 token) {
+    return token.approve(EthereumAddress.fromHex(spendingAddress), value,
+        credentials: owner);
+  }
 
   Future<BigInt> allowance(
           String spendingAddress, EthereumAddress owner, ERC20 token) =>

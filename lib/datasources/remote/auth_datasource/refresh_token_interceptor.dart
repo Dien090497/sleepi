@@ -27,6 +27,7 @@ class RefreshTokenInterceptor extends QueuedInterceptor {
           false) {
         final context = navKey.currentContext;
         if (context != null) {
+          await getIt<LogOutUseCase>().call(NoParams());
           Phoenix.rebirth(context);
           return handler.reject(err);
         }

@@ -277,4 +277,22 @@ class NFTImplementation extends INFTRepository {
       return Left(FailureMessage.fromException(e));
     }
   }
+
+  @override
+  Future<Either<Failure, List<String>>> getNftAddresses() async {
+    try {
+      return Right(await _secureStorage.getNftAddress() ?? []);
+    } catch (e) {
+      return Left(FailureMessage.fromException(e));
+    }
+  }
+
+  @override
+  Future<Either<Failure, List<String>>> getTokenAddresses() async {
+    try {
+      return Right(await _secureStorage.getTokenAddress() ?? []);
+    } catch (e) {
+    return Left(FailureMessage.fromException(e));
+    }
+  }
 }
