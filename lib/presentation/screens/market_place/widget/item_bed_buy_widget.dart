@@ -77,7 +77,7 @@ class ItemBedBuyWidget extends StatelessWidget {
                         const EdgeInsets.symmetric(vertical: 8, horizontal: 12),
                     alignment: Alignment.center,
                     child: SFText(
-                      keyText: '+ ${item.efficiency}%',
+                      keyText: '+ ${item.percentEffect}%',
                       style: TextStyles.greenW700size12,
                     ),
                   ),
