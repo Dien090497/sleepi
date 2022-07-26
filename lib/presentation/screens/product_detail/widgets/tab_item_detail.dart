@@ -8,6 +8,7 @@ import 'package:slee_fi/entities/bed_entity/bed_entity.dart';
 import 'package:slee_fi/l10n/locale_keys.g.dart';
 import 'package:slee_fi/presentation/blocs/bottom_bar_infoIndividual/bottom_bar_infoIndividual_cubit.dart';
 import 'package:slee_fi/presentation/blocs/bottom_bar_infoIndividual/bottom_bar_infoIndividual_state.dart';
+import 'package:slee_fi/presentation/blocs/item_list/item_event.dart';
 import 'package:slee_fi/presentation/blocs/upgrade_jewel_bloc/upgrade_jewel_bloc.dart';
 import 'package:slee_fi/presentation/blocs/upgrade_jewel_bloc/upgrade_jewel_event.dart';
 import 'package:slee_fi/presentation/blocs/upgrade_jewel_bloc/upgrade_jewel_state.dart';
@@ -17,6 +18,7 @@ import 'package:slee_fi/presentation/screens/info_individual/widget/pop_up_sell.
 import 'package:slee_fi/presentation/screens/product_detail/widgets/auto_reset_tab_widget.dart';
 import 'package:slee_fi/presentation/screens/product_detail/widgets/jewel_dialog_body.dart';
 import 'package:slee_fi/presentation/screens/product_detail/widgets/upgrade_tab.dart';
+import 'package:slee_fi/usecase/fetch_bed_usecase.dart';
 
 class TabItemDetail extends StatelessWidget {
   const TabItemDetail({Key? key}) : super(key: key);
@@ -25,7 +27,12 @@ class TabItemDetail extends StatelessWidget {
   Widget build(BuildContext context) {
     return AutoResetTabWidget(
         onRefreshTab: () {
-          BlocProvider.of<JewelBloc>(context).add(const JewelRefreshList());
+          final bloc = BlocProvider.of<JewelBloc>(context);
+          if (bloc.categoryType == CategoryType.jewel) {
+            bloc.add(const InitEvent(CategoryType.item));
+          } else {
+            bloc.add(const JewelRefreshList());
+          }
         },
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 12.0),

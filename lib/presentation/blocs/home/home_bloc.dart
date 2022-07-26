@@ -7,6 +7,7 @@ import 'package:slee_fi/di/injector.dart';
 import 'package:slee_fi/entities/bed_entity/bed_entity.dart';
 import 'package:slee_fi/models/user_status_tracking_model/user_status_tracking_model.dart';
 import 'package:slee_fi/presentation/blocs/home/home_state.dart';
+import 'package:slee_fi/usecase/bed_detail_usecase.dart';
 import 'package:slee_fi/usecase/estimate_tracking_usecase.dart';
 import 'package:slee_fi/usecase/fetch_home_bed_usecase.dart';
 import 'package:slee_fi/usecase/get_user_status_tracking_usecase.dart';
@@ -21,9 +22,11 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     on<RemoveItem>(_removeItem);
     on<ChangeBed>(_changeBed);
     on<RefreshBed>(_onRefresh);
+    on<RefreshStartButton>(_onRefreshStartButton);
     on<LoadMoreBed>(_onLoadMoreBed);
     on<ChangeInsurance>(_changeInsurance);
     on<ChangeStatusAlarm>(_changeStatusAlarm);
+    on<FetchBedDetail>(_fetchBedDetail);
   }
 
   final _fetchListBedUC = getIt<FetchHomeBedUseCase>();
@@ -32,6 +35,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
   // final _removeItemFromBedUC = getIt<RemoveItemFromBedUseCase>();
   final _estimateTrackingUC = getIt<EstimateTrackingUseCase>();
   final _userStatusTrackingUC = getIt<GetUserStatusTrackingUseCase>();
+  final _bedDetailUC = getIt<BedDetailUseCase>();
 
   int _currentPageBed = 1;
   final _limitItemPage = 10;
@@ -138,7 +142,67 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
           emit(currentState.copyWith(
             loading: false,
             errorMessage: '',
+            bedList: r,
             selectedBed: r.isNotEmpty ? r.first : null,
+            loadMoreBed: r.length >= _limitItemPage,
+            tokenEarn: r.isNotEmpty ? amount : 0,
+            userStatusTracking: await _getStatusTracking(),
+          ));
+        } else {
+          final bed = r.isNotEmpty ? r.first : null;
+          final now = DateTime.now();
+          selectedH = now.hour;
+          selectedH = now.minute;
+          emit(HomeState.loaded(
+            errorMessage: '',
+            loading: false,
+            bedList: r,
+            selectedBed: bed,
+            loadMoreBed: r.length >= _limitItemPage,
+            tokenEarn:
+                bed != null ? await _estimateTracking(r.first, true, null) : 0,
+            userStatusTracking: await _getStatusTracking(),
+          ));
+        }
+      },
+    );
+  }
+
+  void _onRefreshStartButton(
+      RefreshStartButton event, Emitter<HomeState> emit) async {
+    final currentState = state;
+    if (currentState is HomeLoaded) {
+      if (currentState.loading) return;
+      emit(currentState.copyWith(loading: true));
+    }
+    final result = await _fetchListBedUC
+        .call(FetchHomeBedParam(_currentPageBed, _limitItemPage));
+    await result.fold(
+      (l) async {
+        print('loading  bed detail errorr   ${l.msg}');
+        if (currentState is HomeLoaded) {
+          emit(currentState.copyWith(loading: false, errorMessage: ''));
+        } else {
+          emit(const HomeState.loaded(bedList: [], selectedBed: null));
+        }
+      },
+      (r) async {
+        print('loading  bed detail success');
+
+        _currentPageBed++;
+        double amount = 0;
+        if (currentState is HomeLoaded) {
+          if (r.isNotEmpty) {
+            amount = await _estimateTracking(
+              r.first,
+              currentState.enableInsurance,
+              currentState.selectedItem,
+            );
+          }
+
+          emit(currentState.copyWith(
+            loading: false,
+            errorMessage: '',
             bedList: r,
             loadMoreBed: r.length >= _limitItemPage,
             tokenEarn: r.isNotEmpty ? amount : 0,
@@ -239,5 +303,36 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
   Future<UserStatusTrackingModel?> _getStatusTracking() async {
     final res = await _userStatusTrackingUC.call(NoParams());
     return res.foldRight(null, (r, previous) => r);
+  }
+
+  FutureOr<void> _fetchBedDetail(
+      FetchBedDetail event, Emitter<HomeState> emit) async {
+    final currentState = state;
+    if (currentState is HomeLoaded && currentState.selectedBed != null) {
+      final result = await _bedDetailUC
+          .call(BedDetailParams(bedId: currentState.selectedBed!.nftId));
+      await result.fold(
+        (l) async {},
+        (r) async {
+          final List<BedEntity> tempList = List.from(currentState.bedList);
+          var index = tempList.indexWhere((element) => element.id == r.id);
+          if (index == -1) {
+            return;
+          }
+
+          tempList.removeAt(index);
+          tempList.insert(index, r);
+
+          emit(currentState.copyWith(
+              selectedBed: r,
+              bedList: tempList,
+              tokenEarn: await _estimateTracking(
+                r,
+                currentState.enableInsurance,
+                currentState.selectedItem,
+              )));
+        },
+      );
+    }
   }
 }

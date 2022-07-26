@@ -1,7 +1,10 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
+import 'package:slee_fi/common/utils/toast_utils.dart';
 import 'package:slee_fi/common/widgets/loading_screen.dart';
 import 'package:slee_fi/common/widgets/sf_buttons.dart';
 import 'package:slee_fi/common/widgets/sf_gridview.dart';
@@ -100,9 +103,21 @@ class ModalJewelList extends StatelessWidget {
                         return GestureDetector(
                           onTap: () {
                             if (item.length >= 3) {
+
                               Navigator.pop(context);
                               jewelBloc
                                   .add(AddJewelToSocket(item.sublist(0, 3)));
+                            } else {
+                              ToastUtils.showToastBottom(
+                                LocaleKeys.not_enough_the_same_level_and_type
+                                    .tr(args: [
+                                  isJewel
+                                      ? LocaleKeys.jewel.tr()
+                                      : LocaleKeys.item.tr()
+                                ]),
+                                AppColors.backgroundDialog,
+                                gravity: ToastGravity.CENTER,
+                              );
                             }
                           },
                           child: MyJewelsWidgetCount(
