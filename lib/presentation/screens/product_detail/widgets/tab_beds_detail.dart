@@ -76,14 +76,15 @@ class _TabBedsDetailState extends State<TabBedsDetail> {
                                   itemBuilder: (context, index) => MyItemBedBox(
                                         bed: listBeds
                                             .where((element) =>
-                                                element.type == 'bed')
+                                                element.type == 'bedbox')
                                             .toList()[index],
                                         onTap: () {
                                           print('ontap');
                                         },
                                       ),
                                   count: listBeds
-                                      .where((element) => element.type == 'bed')
+                                      .where(
+                                          (element) => element.type == 'bedbox')
                                       .length),
                         ],
                       ),

@@ -76,29 +76,40 @@ class _TabSpendingDetailState extends State<TabSpendingDetail> {
                               .map((e) => SFCard(
                                     onTap: () => openTransfer(e),
                                     margin: const EdgeInsets.only(top: 8),
-                                    child: ListTile(
-                                      leading: Padding(
-                                          padding: e.symbol.contains('avax')
-                                              ? const EdgeInsets.only(left: 5)
-                                              : EdgeInsets.zero,
-                                          child: SFIcon(
-                                            e.icon,
-                                            width: e.symbol.contains('avax')
-                                                ? 30
-                                                : 40,
-                                            height: e.symbol.contains('avax')
-                                                ? 30
-                                                : 40,
-                                          )),
-                                      minLeadingWidth: 12,
-                                      title: Text(
-                                        e.symbol.toUpperCase(),
-                                        style: TextStyles.lightWhite16,
-                                      ),
-                                      trailing: Text(
-                                        e.balance.formatBalanceToken,
-                                        style: TextStyles.lightWhite16,
-                                      ),
+                                    padding: const EdgeInsets.all(14),
+                                    child: Row(
+                                      children: [
+                                        Padding(
+                                            padding: e.symbol.contains('avax')
+                                                ? const EdgeInsets.only(
+                                                    left: 5, top: 7, bottom: 7)
+                                                : EdgeInsets.zero,
+                                            child: SFIcon(
+                                              e.icon,
+                                              width: e.symbol.contains('avax')
+                                                  ? 30
+                                                  : 40,
+                                              height: e.symbol.contains('avax')
+                                                  ? 30
+                                                  : 40,
+                                            )),
+                                        const SizedBox(width: 12),
+                                        Text(
+                                          e.symbol.toUpperCase(),
+                                          style: TextStyles.lightWhite16,
+                                        ),
+                                        const SizedBox(width: 12),
+                                        Expanded(
+                                          child: Text(
+                                            textAlign: TextAlign.right,
+                                            e.balance % 1 == 0
+                                                ? '${e.balance.toInt()}'
+                                                : e.balance.toStringAsFixed(2),
+                                            maxLines: 2,
+                                            style: TextStyles.lightWhite16,
+                                          ),
+                                        )
+                                      ],
                                     ),
                                   ))
                               .toList(),
