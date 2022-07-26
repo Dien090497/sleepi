@@ -12,7 +12,6 @@ import 'package:slee_fi/common/style/text_styles.dart';
 import 'package:slee_fi/common/utils/date_time_utils.dart';
 import 'package:slee_fi/common/widgets/sf_alert_dialog.dart';
 import 'package:slee_fi/common/widgets/sf_dialog.dart';
-import 'package:slee_fi/common/widgets/sf_percent_border.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
 import 'package:slee_fi/di/injector.dart';
 import 'package:slee_fi/l10n/locale_keys.g.dart';
@@ -22,7 +21,7 @@ import 'package:slee_fi/presentation/blocs/home/home_state.dart';
 import 'package:slee_fi/presentation/screens/home/widgets/alarm_sound_button.dart';
 import 'package:slee_fi/presentation/screens/home/widgets/button_start.dart';
 import 'package:slee_fi/presentation/screens/home/widgets/home_switch.dart';
-import 'package:slee_fi/presentation/screens/home/widgets/lucky_box.dart';
+import 'package:slee_fi/presentation/screens/home/widgets/lucky_box_component.dart';
 import 'package:slee_fi/presentation/screens/home/widgets/pop_up_start_tracking.dart';
 import 'package:slee_fi/presentation/screens/home/widgets/time_picker.dart';
 import 'package:slee_fi/presentation/screens/tracking/tracking_screen.dart';
@@ -142,24 +141,25 @@ class AlarmBell extends StatelessWidget {
                 Expanded(
                   child: BlocBuilder<HomeBloc, HomeState>(
                     builder: (context, state) {
+                      final double value =
+                          state is HomeLoaded ? state.tokenEarn : 0;
+                      // final double totalValue = value + Random().nextInt(1000);
                       return Stack(
                         alignment: Alignment.centerLeft,
                         children: [
-                          SFPercentBorderGradient(
-                            valueActive:
-                                state is HomeLoaded ? state.tokenEarn : 0,
-                            totalValue: 150,
-                            linearGradient: AppColors.gradientBluePurple,
-                            lineHeight: 18,
-                            barRadius: 20,
-                            backgroundColor: Colors.white.withOpacity(0.05),
-                          ),
+                          // SFPercentBorderGradient(
+                          //   valueActive: value,
+                          //   totalValue: totalValue,
+                          //   linearGradient: AppColors.gradientBluePurple,
+                          //   lineHeight: 18,
+                          //   barRadius: 20,
+                          //   backgroundColor: Colors.white.withOpacity(0.05),
+                          // ),
                           Padding(
                             padding:
                                 const EdgeInsets.symmetric(horizontal: 16.0),
                             child: SFText(
-                              keyText:
-                                  '${state is HomeLoaded ? state.tokenEarn.toStringAsFixed(2) : 0}/150 SLFT',
+                              keyText: '${value.toStringAsFixed(2)} SLFT',
                               style: TextStyles.white10,
                             ),
                           )

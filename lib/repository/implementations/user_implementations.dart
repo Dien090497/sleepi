@@ -1,5 +1,6 @@
 import 'package:dartz/dartz.dart';
 import 'package:injectable/injectable.dart';
+import 'package:slee_fi/common/const/const.dart';
 import 'package:slee_fi/datasources/local/get_storage_datasource.dart';
 import 'package:slee_fi/datasources/local/isar/isar_datasource.dart';
 import 'package:slee_fi/datasources/local/secure_storage.dart';
@@ -11,15 +12,14 @@ import 'package:slee_fi/entities/jewel_entity/jewel_entity.dart';
 import 'package:slee_fi/entities/tracking_result_chart_data_entity/tracking_result_chart_data_entity.dart';
 import 'package:slee_fi/entities/tracking_result_chart_days_entity/tracking_result_chart_days_entity.dart';
 import 'package:slee_fi/failures/failure.dart';
-import 'package:slee_fi/models/bed_model/beb_model.dart';
 import 'package:slee_fi/models/estimate_sleep_response/estimate_sleep_response.dart';
 import 'package:slee_fi/models/global_config_response/global_config_response.dart';
 import 'package:slee_fi/models/lucky_box/lucky_box.dart';
+import 'package:slee_fi/models/lucky_box_response/lucky_box_response.dart';
 import 'package:slee_fi/models/response_model/response_model.dart';
 import 'package:slee_fi/models/swap_token_to_wallet_response/swap_token_to_wallet_response.dart';
 import 'package:slee_fi/models/token_spending/token_spending.dart';
 import 'package:slee_fi/models/upgrade_jewel_info_response/upgrade_info_response.dart';
-import 'package:slee_fi/models/verify_response/verify_response.dart';
 import 'package:slee_fi/models/withdraw_history_response/withdraw_history_response.dart';
 import 'package:slee_fi/repository/user_repository.dart';
 import 'package:slee_fi/schema/add_jewel_schema/add_jewel_schema.dart';
@@ -111,12 +111,17 @@ class UserImplementation extends IUserRepository {
   Future<Either<FailureMessage, GlobalConfigResponse>> getGlobalConfig() async {
     try {
       final result = await _authDataSource.getGlobalConfig();
+      final addresses = <String>[];
+      addresses
+        ..add(result.tokens[2].address)
+        ..add(result.tokens[1].address)
+        ..add(result.tokens[0].address);
+
       await Future.wait([
         _secureStorage.saveAddressContract(addressContract: result.contract),
         _secureStorage.saveMessage(saveMessage: result.messageSign),
         _secureStorage.setNftAddress(result.nftAddress.toJson()),
-        _secureStorage
-            .setTokenAddress(result.tokens.map((e) => e.address).toList()),
+        _secureStorage.setTokenAddress(addresses),
       ]);
       return Right(result);
     } catch (e) {
@@ -144,7 +149,7 @@ class UserImplementation extends IUserRepository {
     try {
       final contractAddr = estimateParam.type.toLowerCase() != 'avax'
           ? estimateParam.contractAddress
-          : 'Const.deadAddress';
+          : Const.deadAddress;
       final result = await _authDataSource.estimateGasWithdraw(
           estimateParam.type, contractAddr);
       return Right(result);
@@ -154,7 +159,7 @@ class UserImplementation extends IUserRepository {
   }
 
   @override
-  Future<Either<FailureMessage, List<BedModel>>> fetchListBed(
+  Future<Either<FailureMessage, List<BedEntity>>> fetchListBed(
       FetchBedParam fetchBedParam) async {
     try {
       final result = await _authDataSource.getNftByOwner(
@@ -163,7 +168,7 @@ class UserImplementation extends IUserRepository {
         fetchBedParam.categoryId.type,
         fetchBedParam.bedType,
       );
-      return Right(result.list);
+      return Right(result.list.map((e) => e.toEntity()).toList());
     } catch (e) {
       return Left(FailureMessage.fromException(e));
     }
@@ -216,7 +221,7 @@ class UserImplementation extends IUserRepository {
   }
 
   @override
-  Future<Either<FailureMessage, VerifyResponse>> openLuckyBox(
+  Future<Either<FailureMessage, OpenLuckyBoxResponse>> openLuckyBox(
       int luckyBoxId) async {
     try {
       var result = await _authDataSource.openLuckyBox(luckyBoxId);
@@ -327,7 +332,7 @@ class UserImplementation extends IUserRepository {
       final result =
           await _authDataSource.fetchBedInHomePage(param.limit, param.page);
 
-      var list = result.list.map((e) => e.toEntity()).toList();
+      final list = result.list.map((e) => e.toEntity()).toList();
       return Right(list);
     } catch (e) {
       return Left(FailureMessage.fromException(e));
@@ -402,6 +407,16 @@ class UserImplementation extends IUserRepository {
         return Right(result.list.map((e) => e.toEntity()).toList());
       }
       throw Exception('please select only jewel or item');
+    } catch (e) {
+      return Left(FailureMessage.fromException(e));
+    }
+  }
+
+  @override
+  Future<Either<FailureMessage, dynamic>> openBedBox(int bedId) async {
+    try {
+      final result = await _authDataSource.openBedBox(bedId);
+      return Right(result);
     } catch (e) {
       return Left(FailureMessage.fromException(e));
     }

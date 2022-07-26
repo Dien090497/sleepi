@@ -58,8 +58,7 @@ class TransferCubit extends Cubit<TransferState> {
                   amount: amount));
           allowanceRes.fold(
             (l) {
-              emit(currentState.copyWith(
-                  isLoading: false, errorMsg: 'Cannot Transfer'));
+              emit(currentState.copyWith(isLoading: false, errorMsg: '$l'));
             },
             (isEnough) {
               emit(currentState.copyWith(needApprove: !isEnough));
@@ -91,7 +90,6 @@ class TransferCubit extends Cubit<TransferState> {
   }
 
   Future<String> approve({
-    required double amount,
     required String addressContract,
   }) async {
     final currentState = state;
@@ -132,8 +130,7 @@ class TransferCubit extends Cubit<TransferState> {
             userId: userId));
         result.fold(
           (l) {
-            emit(currentState.copyWith(
-                isLoading: false, errorMsg: 'Cannot Transfer'));
+            emit(currentState.copyWith(isLoading: false, errorMsg: '$l'));
           },
           (result) {
             emit(const TransferState.success());

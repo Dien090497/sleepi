@@ -1,4 +1,3 @@
-import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:slee_fi/common/const/const.dart';
 import 'package:slee_fi/common/enum/enum.dart';
@@ -10,40 +9,18 @@ import 'package:slee_fi/common/widgets/sf_card.dart';
 import 'package:slee_fi/common/widgets/sf_icon.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
 import 'package:slee_fi/entities/token/token_entity.dart';
-import 'package:slee_fi/l10n/locale_keys.g.dart';
 import 'package:slee_fi/presentation/screens/nft_detail_screen/nft_detail_screen.dart';
 import 'package:slee_fi/presentation/screens/wallet/layouts/transaction_detail_screen.dart';
 import 'package:slee_fi/resources/resources.dart';
 import 'package:slee_fi/usecase/get_history_transaction_usecase.dart';
 
 class WalletDetailList extends StatelessWidget {
-  WalletDetailList({
+  const WalletDetailList({
     Key? key,
     required this.tokenList,
   }) : super(key: key);
 
   final List<TokenEntity> tokenList;
-
-  final List keyList = [
-    "SLFT",
-    "SLGT",
-    "AVAX",
-    "USDC",
-    LocaleKeys.bed.tr(),
-    LocaleKeys.jewels.tr(),
-    LocaleKeys.bedbox.tr(),
-    LocaleKeys.item.tr(),
-  ];
-  final List icons = [
-    Ics.icSlft,
-    Ics.icSlgt,
-    Ics.icAvax,
-    Ics.icUsdc,
-    Ics.bed,
-    Ics.jewel,
-    Ics.icBedBoxes,
-    Ics.item
-  ];
 
   @override
   Widget build(BuildContext context) {

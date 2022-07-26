@@ -18,25 +18,31 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$NftListState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() initial,
+    required TResult Function(int page, int limit) initial,
     required TResult Function() loading,
-    required TResult Function(List<BedEntity> listBed, bool isLoadMore) loaded,
+    required TResult Function(List<BedEntity> listBed, bool isLoadMore,
+            bool hasMore, int currentPage, int limit)
+        loaded,
     required TResult Function(String msg) error,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function()? initial,
+    TResult Function(int page, int limit)? initial,
     TResult Function()? loading,
-    TResult Function(List<BedEntity> listBed, bool isLoadMore)? loaded,
+    TResult Function(List<BedEntity> listBed, bool isLoadMore, bool hasMore,
+            int currentPage, int limit)?
+        loaded,
     TResult Function(String msg)? error,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initial,
+    TResult Function(int page, int limit)? initial,
     TResult Function()? loading,
-    TResult Function(List<BedEntity> listBed, bool isLoadMore)? loaded,
+    TResult Function(List<BedEntity> listBed, bool isLoadMore, bool hasMore,
+            int currentPage, int limit)?
+        loaded,
     TResult Function(String msg)? error,
     required TResult orElse(),
   }) =>
@@ -89,6 +95,7 @@ abstract class _$$NftListInitialCopyWith<$Res> {
   factory _$$NftListInitialCopyWith(
           _$NftListInitial value, $Res Function(_$NftListInitial) then) =
       __$$NftListInitialCopyWithImpl<$Res>;
+  $Res call({int page, int limit});
 }
 
 /// @nodoc
@@ -101,60 +108,101 @@ class __$$NftListInitialCopyWithImpl<$Res>
 
   @override
   _$NftListInitial get _value => super._value as _$NftListInitial;
+
+  @override
+  $Res call({
+    Object? page = freezed,
+    Object? limit = freezed,
+  }) {
+    return _then(_$NftListInitial(
+      page: page == freezed
+          ? _value.page
+          : page // ignore: cast_nullable_to_non_nullable
+              as int,
+      limit: limit == freezed
+          ? _value.limit
+          : limit // ignore: cast_nullable_to_non_nullable
+              as int,
+    ));
+  }
 }
 
 /// @nodoc
 
 class _$NftListInitial implements NftListInitial {
-  const _$NftListInitial();
+  const _$NftListInitial({this.page = 1, this.limit = 10});
+
+  @override
+  @JsonKey()
+  final int page;
+  @override
+  @JsonKey()
+  final int limit;
 
   @override
   String toString() {
-    return 'NftListState.initial()';
+    return 'NftListState.initial(page: $page, limit: $limit)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$NftListInitial);
+        (other.runtimeType == runtimeType &&
+            other is _$NftListInitial &&
+            const DeepCollectionEquality().equals(other.page, page) &&
+            const DeepCollectionEquality().equals(other.limit, limit));
   }
 
   @override
-  int get hashCode => runtimeType.hashCode;
+  int get hashCode => Object.hash(
+      runtimeType,
+      const DeepCollectionEquality().hash(page),
+      const DeepCollectionEquality().hash(limit));
+
+  @JsonKey(ignore: true)
+  @override
+  _$$NftListInitialCopyWith<_$NftListInitial> get copyWith =>
+      __$$NftListInitialCopyWithImpl<_$NftListInitial>(this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() initial,
+    required TResult Function(int page, int limit) initial,
     required TResult Function() loading,
-    required TResult Function(List<BedEntity> listBed, bool isLoadMore) loaded,
+    required TResult Function(List<BedEntity> listBed, bool isLoadMore,
+            bool hasMore, int currentPage, int limit)
+        loaded,
     required TResult Function(String msg) error,
   }) {
-    return initial();
+    return initial(page, limit);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function()? initial,
+    TResult Function(int page, int limit)? initial,
     TResult Function()? loading,
-    TResult Function(List<BedEntity> listBed, bool isLoadMore)? loaded,
+    TResult Function(List<BedEntity> listBed, bool isLoadMore, bool hasMore,
+            int currentPage, int limit)?
+        loaded,
     TResult Function(String msg)? error,
   }) {
-    return initial?.call();
+    return initial?.call(page, limit);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initial,
+    TResult Function(int page, int limit)? initial,
     TResult Function()? loading,
-    TResult Function(List<BedEntity> listBed, bool isLoadMore)? loaded,
+    TResult Function(List<BedEntity> listBed, bool isLoadMore, bool hasMore,
+            int currentPage, int limit)?
+        loaded,
     TResult Function(String msg)? error,
     required TResult orElse(),
   }) {
     if (initial != null) {
-      return initial();
+      return initial(page, limit);
     }
     return orElse();
   }
@@ -198,7 +246,14 @@ class _$NftListInitial implements NftListInitial {
 }
 
 abstract class NftListInitial implements NftListState {
-  const factory NftListInitial() = _$NftListInitial;
+  const factory NftListInitial({final int page, final int limit}) =
+      _$NftListInitial;
+
+  int get page;
+  int get limit;
+  @JsonKey(ignore: true)
+  _$$NftListInitialCopyWith<_$NftListInitial> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -242,9 +297,11 @@ class _$NftListLoading implements NftListLoading {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() initial,
+    required TResult Function(int page, int limit) initial,
     required TResult Function() loading,
-    required TResult Function(List<BedEntity> listBed, bool isLoadMore) loaded,
+    required TResult Function(List<BedEntity> listBed, bool isLoadMore,
+            bool hasMore, int currentPage, int limit)
+        loaded,
     required TResult Function(String msg) error,
   }) {
     return loading();
@@ -253,9 +310,11 @@ class _$NftListLoading implements NftListLoading {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function()? initial,
+    TResult Function(int page, int limit)? initial,
     TResult Function()? loading,
-    TResult Function(List<BedEntity> listBed, bool isLoadMore)? loaded,
+    TResult Function(List<BedEntity> listBed, bool isLoadMore, bool hasMore,
+            int currentPage, int limit)?
+        loaded,
     TResult Function(String msg)? error,
   }) {
     return loading?.call();
@@ -264,9 +323,11 @@ class _$NftListLoading implements NftListLoading {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initial,
+    TResult Function(int page, int limit)? initial,
     TResult Function()? loading,
-    TResult Function(List<BedEntity> listBed, bool isLoadMore)? loaded,
+    TResult Function(List<BedEntity> listBed, bool isLoadMore, bool hasMore,
+            int currentPage, int limit)?
+        loaded,
     TResult Function(String msg)? error,
     required TResult orElse(),
   }) {
@@ -323,7 +384,12 @@ abstract class _$$NftListLoadedCopyWith<$Res> {
   factory _$$NftListLoadedCopyWith(
           _$NftListLoaded value, $Res Function(_$NftListLoaded) then) =
       __$$NftListLoadedCopyWithImpl<$Res>;
-  $Res call({List<BedEntity> listBed, bool isLoadMore});
+  $Res call(
+      {List<BedEntity> listBed,
+      bool isLoadMore,
+      bool hasMore,
+      int currentPage,
+      int limit});
 }
 
 /// @nodoc
@@ -341,16 +407,31 @@ class __$$NftListLoadedCopyWithImpl<$Res>
   $Res call({
     Object? listBed = freezed,
     Object? isLoadMore = freezed,
+    Object? hasMore = freezed,
+    Object? currentPage = freezed,
+    Object? limit = freezed,
   }) {
     return _then(_$NftListLoaded(
       listBed == freezed
           ? _value._listBed
           : listBed // ignore: cast_nullable_to_non_nullable
               as List<BedEntity>,
-      isLoadMore == freezed
+      isLoadMore: isLoadMore == freezed
           ? _value.isLoadMore
           : isLoadMore // ignore: cast_nullable_to_non_nullable
               as bool,
+      hasMore: hasMore == freezed
+          ? _value.hasMore
+          : hasMore // ignore: cast_nullable_to_non_nullable
+              as bool,
+      currentPage: currentPage == freezed
+          ? _value.currentPage
+          : currentPage // ignore: cast_nullable_to_non_nullable
+              as int,
+      limit: limit == freezed
+          ? _value.limit
+          : limit // ignore: cast_nullable_to_non_nullable
+              as int,
     ));
   }
 }
@@ -358,7 +439,11 @@ class __$$NftListLoadedCopyWithImpl<$Res>
 /// @nodoc
 
 class _$NftListLoaded implements NftListLoaded {
-  const _$NftListLoaded(final List<BedEntity> listBed, this.isLoadMore)
+  const _$NftListLoaded(final List<BedEntity> listBed,
+      {this.isLoadMore = false,
+      this.hasMore = true,
+      this.currentPage = 1,
+      this.limit = 10})
       : _listBed = listBed;
 
   final List<BedEntity> _listBed;
@@ -369,11 +454,21 @@ class _$NftListLoaded implements NftListLoaded {
   }
 
   @override
+  @JsonKey()
   final bool isLoadMore;
+  @override
+  @JsonKey()
+  final bool hasMore;
+  @override
+  @JsonKey()
+  final int currentPage;
+  @override
+  @JsonKey()
+  final int limit;
 
   @override
   String toString() {
-    return 'NftListState.loaded(listBed: $listBed, isLoadMore: $isLoadMore)';
+    return 'NftListState.loaded(listBed: $listBed, isLoadMore: $isLoadMore, hasMore: $hasMore, currentPage: $currentPage, limit: $limit)';
   }
 
   @override
@@ -383,14 +478,21 @@ class _$NftListLoaded implements NftListLoaded {
             other is _$NftListLoaded &&
             const DeepCollectionEquality().equals(other._listBed, _listBed) &&
             const DeepCollectionEquality()
-                .equals(other.isLoadMore, isLoadMore));
+                .equals(other.isLoadMore, isLoadMore) &&
+            const DeepCollectionEquality().equals(other.hasMore, hasMore) &&
+            const DeepCollectionEquality()
+                .equals(other.currentPage, currentPage) &&
+            const DeepCollectionEquality().equals(other.limit, limit));
   }
 
   @override
   int get hashCode => Object.hash(
       runtimeType,
       const DeepCollectionEquality().hash(_listBed),
-      const DeepCollectionEquality().hash(isLoadMore));
+      const DeepCollectionEquality().hash(isLoadMore),
+      const DeepCollectionEquality().hash(hasMore),
+      const DeepCollectionEquality().hash(currentPage),
+      const DeepCollectionEquality().hash(limit));
 
   @JsonKey(ignore: true)
   @override
@@ -400,36 +502,42 @@ class _$NftListLoaded implements NftListLoaded {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() initial,
+    required TResult Function(int page, int limit) initial,
     required TResult Function() loading,
-    required TResult Function(List<BedEntity> listBed, bool isLoadMore) loaded,
+    required TResult Function(List<BedEntity> listBed, bool isLoadMore,
+            bool hasMore, int currentPage, int limit)
+        loaded,
     required TResult Function(String msg) error,
   }) {
-    return loaded(listBed, isLoadMore);
+    return loaded(listBed, isLoadMore, hasMore, currentPage, limit);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function()? initial,
+    TResult Function(int page, int limit)? initial,
     TResult Function()? loading,
-    TResult Function(List<BedEntity> listBed, bool isLoadMore)? loaded,
+    TResult Function(List<BedEntity> listBed, bool isLoadMore, bool hasMore,
+            int currentPage, int limit)?
+        loaded,
     TResult Function(String msg)? error,
   }) {
-    return loaded?.call(listBed, isLoadMore);
+    return loaded?.call(listBed, isLoadMore, hasMore, currentPage, limit);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initial,
+    TResult Function(int page, int limit)? initial,
     TResult Function()? loading,
-    TResult Function(List<BedEntity> listBed, bool isLoadMore)? loaded,
+    TResult Function(List<BedEntity> listBed, bool isLoadMore, bool hasMore,
+            int currentPage, int limit)?
+        loaded,
     TResult Function(String msg)? error,
     required TResult orElse(),
   }) {
     if (loaded != null) {
-      return loaded(listBed, isLoadMore);
+      return loaded(listBed, isLoadMore, hasMore, currentPage, limit);
     }
     return orElse();
   }
@@ -473,11 +581,17 @@ class _$NftListLoaded implements NftListLoaded {
 }
 
 abstract class NftListLoaded implements NftListState {
-  const factory NftListLoaded(
-      final List<BedEntity> listBed, final bool isLoadMore) = _$NftListLoaded;
+  const factory NftListLoaded(final List<BedEntity> listBed,
+      {final bool isLoadMore,
+      final bool hasMore,
+      final int currentPage,
+      final int limit}) = _$NftListLoaded;
 
   List<BedEntity> get listBed;
   bool get isLoadMore;
+  bool get hasMore;
+  int get currentPage;
+  int get limit;
   @JsonKey(ignore: true)
   _$$NftListLoadedCopyWith<_$NftListLoaded> get copyWith =>
       throw _privateConstructorUsedError;
@@ -548,9 +662,11 @@ class _$NftListError implements NftListError {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() initial,
+    required TResult Function(int page, int limit) initial,
     required TResult Function() loading,
-    required TResult Function(List<BedEntity> listBed, bool isLoadMore) loaded,
+    required TResult Function(List<BedEntity> listBed, bool isLoadMore,
+            bool hasMore, int currentPage, int limit)
+        loaded,
     required TResult Function(String msg) error,
   }) {
     return error(msg);
@@ -559,9 +675,11 @@ class _$NftListError implements NftListError {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function()? initial,
+    TResult Function(int page, int limit)? initial,
     TResult Function()? loading,
-    TResult Function(List<BedEntity> listBed, bool isLoadMore)? loaded,
+    TResult Function(List<BedEntity> listBed, bool isLoadMore, bool hasMore,
+            int currentPage, int limit)?
+        loaded,
     TResult Function(String msg)? error,
   }) {
     return error?.call(msg);
@@ -570,9 +688,11 @@ class _$NftListError implements NftListError {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initial,
+    TResult Function(int page, int limit)? initial,
     TResult Function()? loading,
-    TResult Function(List<BedEntity> listBed, bool isLoadMore)? loaded,
+    TResult Function(List<BedEntity> listBed, bool isLoadMore, bool hasMore,
+            int currentPage, int limit)?
+        loaded,
     TResult Function(String msg)? error,
     required TResult orElse(),
   }) {

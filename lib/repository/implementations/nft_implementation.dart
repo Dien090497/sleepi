@@ -238,7 +238,7 @@ class NFTImplementation extends INFTRepository {
       final result = await _authDataSource.nftRepair(repairSchema);
       return Right(result);
     } catch (e) {
-      return Left(FailureMessage('$e'));
+      return Left(FailureMessage.fromException(e));
     }
   }
 

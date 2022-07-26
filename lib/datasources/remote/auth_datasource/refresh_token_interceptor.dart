@@ -23,7 +23,7 @@ class RefreshTokenInterceptor extends QueuedInterceptor {
       /// Token expired
       if (model.error.message
               ?.toLowerCase()
-              .contains('JsonWebTokenError'.toLowerCase()) ??
+              .contains('jwt'.toLowerCase()) ??
           false) {
         final context = navKey.currentContext;
         if (context != null) {

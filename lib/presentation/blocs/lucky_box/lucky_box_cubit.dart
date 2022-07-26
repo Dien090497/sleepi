@@ -22,10 +22,10 @@ class LuckyBoxCubit extends Cubit<LuckyBoxState> {
     return result.fold(
       (l) => l.msg,
       (r) {
-        var list = state.luckyBoxes;
+        final List<LuckyBoxEntity> list = List.from(state.luckyBoxes);
         list.removeWhere((element) => element.id == entity.id);
         emit(state.copyWith(luckyBoxes: list));
-        return r.message;
+        return r.gift;
       },
     );
   }

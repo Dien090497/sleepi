@@ -105,11 +105,10 @@ class HomeScreen extends StatelessWidget {
                               const SizedBox(height: 24),
                             ],
                             Padding(
-                              padding: const EdgeInsets.symmetric(
-                                  horizontal: 16.0),
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 16.0),
                               child: SFText(
-                                keyText:
-                                    LocaleKeys.you_can_set_your_alarm_here,
+                                keyText: LocaleKeys.you_can_set_your_alarm_here,
                                 style: TextStyles.lightGrey12,
                               ),
                             ),

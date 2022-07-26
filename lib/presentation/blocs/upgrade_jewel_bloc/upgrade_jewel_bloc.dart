@@ -137,14 +137,11 @@ class JewelBloc extends Bloc<JewelEvent, JewelState> {
       categoryType,
     ));
     result.fold((l) {
-      print('upgrade jewel error   ${l.toString()}');
-
       final currentState = state;
       if (currentState is JewelStateLoaded && _currentPage != 1) {
         emit(currentState.copyWith(errorMessage: l.msg, loading: false));
       }
     }, (r) {
-      print('upgrade jewel success   ${r.toString()}');
       final List<BedEntity> temp = List.from(currentState.jewelsAvailable);
       for (var element in currentState.jewelsUpgrade) {
         temp.remove(element);
@@ -179,11 +176,10 @@ class JewelBloc extends Bloc<JewelEvent, JewelState> {
     result.fold((l) {
       emit(const JewelStateLoaded(
           jewels: [], isLoadMore: false, loading: false));
-    }, (success) {
+    }, (listJewelsEntity) {
       final currentState = state;
-      final length = success.length;
-      success.removeWhere((element) => element.isBurn != 0);
-      final listJewelsEntity = success.map((e) => e.toEntity()).toList();
+      final length = listJewelsEntity.length;
+      listJewelsEntity.removeWhere((element) => element.isBurn != 0);
       if (currentState is JewelStateLoaded) {
         final list = currentState.jewels + listJewelsEntity;
         emit(currentState.copyWith(

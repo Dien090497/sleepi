@@ -1,16 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:slee_fi/common/routes/app_routes.dart';
+import 'package:slee_fi/common/widgets/sf_alert_dialog.dart';
 import 'package:slee_fi/common/widgets/sf_dialog.dart';
 import 'package:slee_fi/common/widgets/sf_gridview.dart';
 import 'package:slee_fi/common/widgets/sf_sub_tab_bar.dart';
 import 'package:slee_fi/entities/bed_entity/bed_entity.dart';
 import 'package:slee_fi/l10n/locale_keys.g.dart';
+import 'package:slee_fi/models/pop_with_result.dart';
 import 'package:slee_fi/presentation/blocs/bottom_bar_infoIndividual/bottom_bar_infoIndividual_cubit.dart';
 import 'package:slee_fi/presentation/blocs/bottom_bar_infoIndividual/bottom_bar_infoIndividual_state.dart';
 import 'package:slee_fi/presentation/blocs/upgrade_jewel_bloc/upgrade_jewel_bloc.dart';
 import 'package:slee_fi/presentation/blocs/upgrade_jewel_bloc/upgrade_jewel_event.dart';
 import 'package:slee_fi/presentation/blocs/upgrade_jewel_bloc/upgrade_jewel_state.dart';
+import 'package:slee_fi/presentation/blocs/wallet/wallet_cubit.dart';
+import 'package:slee_fi/presentation/blocs/wallet/wallet_state.dart';
 import 'package:slee_fi/presentation/screens/home/widgets/my_item_short_widget.dart';
 import 'package:slee_fi/presentation/screens/home/widgets/pop_up_cancel_sell.dart';
 import 'package:slee_fi/presentation/screens/home/widgets/pop_up_transfer.dart';
@@ -18,6 +22,7 @@ import 'package:slee_fi/presentation/screens/info_individual/widget/pop_up_sell.
 import 'package:slee_fi/presentation/screens/product_detail/widgets/auto_reset_tab_widget.dart';
 import 'package:slee_fi/presentation/screens/product_detail/widgets/jewel_dialog_body.dart';
 import 'package:slee_fi/presentation/screens/product_detail/widgets/upgrade_tab.dart';
+import 'package:slee_fi/presentation/screens/wallet_creation_warning/widgets/pop_up_avalanche_wallet.dart';
 import 'package:slee_fi/usecase/fetch_bed_usecase.dart';
 
 class TabItemDetail extends StatelessWidget {
@@ -152,46 +157,67 @@ class TabItemDetail extends StatelessWidget {
             ]);
           },
           onTransferTap: () {
-            if (items.isLock != 1) {
-              Navigator.pop(context);
-              final cubit = BottomBarInfoIndividualCubit()..init();
-              cubit.estimateGas(contractAddress: items.contractAddress);
-              showCustomDialog(context, children: [
-                BlocProvider(
-                  create: (context) => cubit,
-                  child: BlocConsumer<BottomBarInfoIndividualCubit,
-                      BottomBarInfoIndividualState>(
-                    listener: (context, state) {
-                      if (state is BottomBarInfoIndividualError) {
-                        showMessageDialog(context, state.message);
-                      }
-                      if (state is BottomBarInfoIndividualLoaded) {
-                        if (state.successTransfer) {
-                          Navigator.pop(context);
-                          showSuccessfulDialog(context, null, onBackPress: () {
-                            Navigator.pushNamedAndRemoveUntil(
-                              context,
-                              R.bottomNavigation,
-                                  (r) => false,
-                            );
-                          });
+            final stateWalletCubit = context.read<WalletCubit>().state;
+            if (stateWalletCubit is WalletNotExisted) {
+              showCreateOrImportWallet(context: context).then(
+                      (value) => _showWarningDialog(value, context));
+            } else {
+              if (items.isLock != 1) {
+                Navigator.pop(context);
+                final cubit = BottomBarInfoIndividualCubit()..init();
+                cubit.estimateGas(contractAddress: items.contractAddress);
+                showCustomDialog(context, children: [
+                  BlocProvider(
+                    create: (context) => cubit,
+                    child: BlocConsumer<BottomBarInfoIndividualCubit,
+                        BottomBarInfoIndividualState>(
+                      listener: (context, state) {
+                        if (state is BottomBarInfoIndividualError) {
+                          showMessageDialog(context, state.message);
                         }
-                      }
-                    },
-                    builder: (context, state) {
-                      return PopUpTransfer(
-                        bedEntity: items,
-                        cubit: cubit,
-                        valueTransfer: 1,
-                      );
-                    },
+                        if (state is BottomBarInfoIndividualLoaded) {
+                          if (state.successTransfer) {
+                            Navigator.pop(context);
+                            showSuccessfulDialog(context, null, onBackPress: () {
+                              Navigator.pushNamedAndRemoveUntil(
+                                context,
+                                R.bottomNavigation,
+                                    (r) => false,
+                              );
+                            });
+                          }
+                        }
+                      },
+                      builder: (context, state) {
+                        return PopUpTransfer(
+                          bedEntity: items,
+                          cubit: cubit,
+                          valueTransfer: 1,
+                        );
+                      },
+                    ),
                   ),
-                ),
-              ]);
-            } else {}
+                ]);
+              } else {}
+            }
           },
         ),
       ],
     );
+  }
+
+  showCreateOrImportWallet({required BuildContext context}) async {
+    return showCustomAlertDialog(
+      context,
+      barrierDismissible: false,
+      children: const PopUpAvalancheWallet(),
+    );
+  }
+
+  void _showWarningDialog(dynamic value, BuildContext context) {
+    if (value is PopWithResults) {
+      final cubit = context.read<WalletCubit>();
+      cubit.importWallet(value.results);
+    }
   }
 }

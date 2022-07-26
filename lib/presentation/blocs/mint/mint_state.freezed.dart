@@ -21,7 +21,7 @@ mixin _$MintState {
     required TResult Function() initial,
     required TResult Function(
             int indexSelected,
-            List<BedModel> listBed,
+            List<BedEntity> listBed,
             bool isLoadMore,
             bool enableInsurance,
             bool statusMint,
@@ -36,7 +36,7 @@ mixin _$MintState {
     TResult Function()? initial,
     TResult Function(
             int indexSelected,
-            List<BedModel> listBed,
+            List<BedEntity> listBed,
             bool isLoadMore,
             bool enableInsurance,
             bool statusMint,
@@ -51,7 +51,7 @@ mixin _$MintState {
     TResult Function()? initial,
     TResult Function(
             int indexSelected,
-            List<BedModel> listBed,
+            List<BedEntity> listBed,
             bool isLoadMore,
             bool enableInsurance,
             bool statusMint,
@@ -156,7 +156,7 @@ class _$MintStateInitial
     required TResult Function() initial,
     required TResult Function(
             int indexSelected,
-            List<BedModel> listBed,
+            List<BedEntity> listBed,
             bool isLoadMore,
             bool enableInsurance,
             bool statusMint,
@@ -174,7 +174,7 @@ class _$MintStateInitial
     TResult Function()? initial,
     TResult Function(
             int indexSelected,
-            List<BedModel> listBed,
+            List<BedEntity> listBed,
             bool isLoadMore,
             bool enableInsurance,
             bool statusMint,
@@ -192,7 +192,7 @@ class _$MintStateInitial
     TResult Function()? initial,
     TResult Function(
             int indexSelected,
-            List<BedModel> listBed,
+            List<BedEntity> listBed,
             bool isLoadMore,
             bool enableInsurance,
             bool statusMint,
@@ -257,7 +257,7 @@ abstract class _$$MintStateLoadedCopyWith<$Res> {
       __$$MintStateLoadedCopyWithImpl<$Res>;
   $Res call(
       {int indexSelected,
-      List<BedModel> listBed,
+      List<BedEntity> listBed,
       bool isLoadMore,
       bool enableInsurance,
       bool statusMint,
@@ -292,7 +292,7 @@ class __$$MintStateLoadedCopyWithImpl<$Res>
       listBed: listBed == freezed
           ? _value._listBed
           : listBed // ignore: cast_nullable_to_non_nullable
-              as List<BedModel>,
+              as List<BedEntity>,
       isLoadMore: isLoadMore == freezed
           ? _value.isLoadMore
           : isLoadMore // ignore: cast_nullable_to_non_nullable
@@ -320,7 +320,7 @@ class _$MintStateLoaded
     implements MintStateLoaded {
   const _$MintStateLoaded(
       {this.indexSelected = -1,
-      required final List<BedModel> listBed,
+      required final List<BedEntity> listBed,
       this.isLoadMore = false,
       this.enableInsurance = true,
       this.statusMint = false,
@@ -330,9 +330,9 @@ class _$MintStateLoaded
   @override
   @JsonKey()
   final int indexSelected;
-  final List<BedModel> _listBed;
+  final List<BedEntity> _listBed;
   @override
-  List<BedModel> get listBed {
+  List<BedEntity> get listBed {
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_listBed);
   }
@@ -406,7 +406,7 @@ class _$MintStateLoaded
     required TResult Function() initial,
     required TResult Function(
             int indexSelected,
-            List<BedModel> listBed,
+            List<BedEntity> listBed,
             bool isLoadMore,
             bool enableInsurance,
             bool statusMint,
@@ -425,7 +425,7 @@ class _$MintStateLoaded
     TResult Function()? initial,
     TResult Function(
             int indexSelected,
-            List<BedModel> listBed,
+            List<BedEntity> listBed,
             bool isLoadMore,
             bool enableInsurance,
             bool statusMint,
@@ -444,7 +444,7 @@ class _$MintStateLoaded
     TResult Function()? initial,
     TResult Function(
             int indexSelected,
-            List<BedModel> listBed,
+            List<BedEntity> listBed,
             bool isLoadMore,
             bool enableInsurance,
             bool statusMint,
@@ -502,14 +502,14 @@ class _$MintStateLoaded
 abstract class MintStateLoaded implements MintState {
   const factory MintStateLoaded(
       {final int indexSelected,
-      required final List<BedModel> listBed,
+      required final List<BedEntity> listBed,
       final bool isLoadMore,
       final bool enableInsurance,
       final bool statusMint,
       final InfoMintingModel? infoMinting}) = _$MintStateLoaded;
 
   int get indexSelected;
-  List<BedModel> get listBed;
+  List<BedEntity> get listBed;
   bool get isLoadMore;
   bool get enableInsurance;
   bool get statusMint;
@@ -594,7 +594,7 @@ class _$MintStateError with DiagnosticableTreeMixin implements MintStateError {
     required TResult Function() initial,
     required TResult Function(
             int indexSelected,
-            List<BedModel> listBed,
+            List<BedEntity> listBed,
             bool isLoadMore,
             bool enableInsurance,
             bool statusMint,
@@ -612,7 +612,7 @@ class _$MintStateError with DiagnosticableTreeMixin implements MintStateError {
     TResult Function()? initial,
     TResult Function(
             int indexSelected,
-            List<BedModel> listBed,
+            List<BedEntity> listBed,
             bool isLoadMore,
             bool enableInsurance,
             bool statusMint,
@@ -630,7 +630,7 @@ class _$MintStateError with DiagnosticableTreeMixin implements MintStateError {
     TResult Function()? initial,
     TResult Function(
             int indexSelected,
-            List<BedModel> listBed,
+            List<BedEntity> listBed,
             bool isLoadMore,
             bool enableInsurance,
             bool statusMint,
@@ -772,7 +772,7 @@ class _$MintStateGetInfo
     required TResult Function() initial,
     required TResult Function(
             int indexSelected,
-            List<BedModel> listBed,
+            List<BedEntity> listBed,
             bool isLoadMore,
             bool enableInsurance,
             bool statusMint,
@@ -790,7 +790,7 @@ class _$MintStateGetInfo
     TResult Function()? initial,
     TResult Function(
             int indexSelected,
-            List<BedModel> listBed,
+            List<BedEntity> listBed,
             bool isLoadMore,
             bool enableInsurance,
             bool statusMint,
@@ -808,7 +808,7 @@ class _$MintStateGetInfo
     TResult Function()? initial,
     TResult Function(
             int indexSelected,
-            List<BedModel> listBed,
+            List<BedEntity> listBed,
             bool isLoadMore,
             bool enableInsurance,
             bool statusMint,

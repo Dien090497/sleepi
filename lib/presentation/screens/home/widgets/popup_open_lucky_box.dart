@@ -66,7 +66,7 @@ class PopUpOpenLuckyBox extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             SFText(keyText: LocaleKeys.cost, style: TextStyles.lightGrey14),
-            SFText(keyText: '$cost AVAX', style: TextStyles.lightWhite16W700),
+            SFText(keyText: '$cost SLFT', style: TextStyles.lightWhite16W700),
           ],
         ),
         const SizedBox(height: 33.0),
