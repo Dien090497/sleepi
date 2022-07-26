@@ -1,4 +1,3 @@
-import 'dart:convert';
 import 'dart:core';
 
 import 'package:freezed_annotation/freezed_annotation.dart';
@@ -93,12 +92,11 @@ class BedModel {
       this.jewels,
       this.isBurn,
       this.nftSale,
-      this.percentEffect, this.type);
+      this.percentEffect,
+      this.type);
 
   factory BedModel.fromJson(Map<String, dynamic> json) {
-
-    print('jsopn bed  is   ${jsonEncode(json)}');
-    return  _$BedModelFromJson(json);
+    return _$BedModelFromJson(json);
   }
 
   Map<String, dynamic> toJson() => _$BedModelToJson(this);

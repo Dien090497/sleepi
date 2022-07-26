@@ -22,19 +22,3 @@ class NftFamilyModel {
         children: queryChildren.map((e) => e.toEntity()).toList(),
       );
 }
-
-@JsonSerializable()
-class _Data {
-  final int id;
-  final String image;
-  final String type;
-
-  _Data(this.id, this.image, this.type);
-
-  factory _Data.fromJson(Map<String, dynamic> json) => _$DataFromJson(json);
-
-  Map<String, dynamic> toJson() => _$DataToJson(this);
-
-  FamilyDataEntity toEntity() =>
-      FamilyDataEntity(id: id, image: image, type: type);
-}

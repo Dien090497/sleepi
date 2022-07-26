@@ -11,12 +11,3 @@ class NftFamilyEntity with _$NftFamilyEntity {
     required List<BedEntity> children,
   }) = _NftFamilyEntity;
 }
-
-@freezed
-class FamilyDataEntity with _$FamilyDataEntity {
-  const factory FamilyDataEntity({
-    required int id,
-    required String image,
-    required String type,
-  }) = _FamilyDataEntity;
-}
