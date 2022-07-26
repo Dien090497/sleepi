@@ -37,13 +37,13 @@ class SpendingImplementation extends ISpendingRepository {
   }) async {
     try {
       final amountWei = BigInt.from(amount * pow(10, 18));
-      if (addressContract == '0x0000000000000000000000000000000000000000') {
+      if (addressContract == 'Const.deadAddress') {
         final hash = await _spendingDataSource.toSpendingAvax(
           owner: owner,
           amount: amountWei,
           userId: BigInt.from(userId),
           avax: EthereumAddress.fromHex(
-              "0x0000000000000000000000000000000000000000"),
+              "Const.deadAddress"),
           transaction: Transaction(value: EtherAmount.inWei(amountWei)),
           spendingAddress: await _secureStorage.readAddressContract() ?? '',
         );

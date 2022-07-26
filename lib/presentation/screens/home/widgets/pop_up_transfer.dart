@@ -26,7 +26,6 @@ class PopUpTransfer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    cubit.estimateGas(contractAddress: bedEntity.contractAddress);
 
     return BlocBuilder<BottomBarInfoIndividualCubit, BottomBarInfoIndividualState>(
       bloc: cubit,
@@ -150,7 +149,6 @@ class PopUpTransfer extends StatelessWidget {
                         text: LocaleKeys.confirm,
                         onPressed: () {
                           cubit.transferNFTtoMainWallet(contractAddress: bedEntity.contractAddress, tokenId: bedEntity.tokenId.toString());
-                          Navigator.pop(context);
                         },
                         width: double.infinity,
                         textStyle: TextStyles.white16,

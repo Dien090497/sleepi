@@ -1,10 +1,8 @@
-import 'package:dartz/dartz.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:slee_fi/di/injector.dart';
 import 'package:slee_fi/entities/token/token_entity.dart';
 import 'package:slee_fi/entities/wallet_info/wallet_info_entity.dart';
-import 'package:slee_fi/failures/failure.dart';
 import 'package:slee_fi/l10n/locale_keys.g.dart';
 import 'package:slee_fi/resources/resources.dart';
 import 'package:slee_fi/usecase/get_balance_for_tokens_usecase.dart';
@@ -23,7 +21,7 @@ class WalletCubit extends Cubit<WalletState> {
 
   final _currentWalletUC = getIt<CurrentWalletUseCase>();
   final _getHistoryTransactionUC = getIt<GetHistoryTransactionUseCase>();
-  final _getBalanceForTokensUseCase = getIt<GetBalanceForTokensUseCase>();
+  final _getBalanceForTokensUC = getIt<GetBalanceForTokensUseCase>();
   final _getNFTsBalanceUC = getIt<GetNFTsBalanceUseCase>();
   final _hasWalletUC = getIt<HasWalletUseCase>();
   final _getNftAddressesUC = getIt<GetNftAddressesUseCase>();
@@ -46,8 +44,12 @@ class WalletCubit extends Cubit<WalletState> {
     emit(const WalletState.loading());
     final walletCall = await _currentWalletUC.call(NoParams());
     walletCall.fold(
-      (l) => emit(WalletState.error('$l')),
-      (r) => loadCurrentWallet(r),
+      (l) {
+        emit(WalletState.error('$l'));
+      },
+      (r) {
+        loadCurrentWallet(r);
+      },
     );
   }
 
@@ -59,7 +61,9 @@ class WalletCubit extends Cubit<WalletState> {
       final walletCall = await _currentWalletUC.call(NoParams());
       walletCall.fold(
         (l) => emit(currentState.copyWith(isLoading: false)),
-        (r) => loadCurrentWallet(r),
+        (r) {
+          loadCurrentWallet(r);
+        },
       );
     } else if (currentState is! WalletStateLoading) {
       emit(const WalletState.loading());
@@ -81,7 +85,6 @@ class WalletCubit extends Cubit<WalletState> {
   }
 
   void loadCurrentWallet(WalletInfoEntity wallet) async {
-    final currentState = state;
     final nftAddresses =
         (await _getNftAddressesUC.call(NoParams())).getOrElse(() => []);
     final tokenAddresses =
@@ -90,12 +93,8 @@ class WalletCubit extends Cubit<WalletState> {
         walletInfoEntity: wallet, addressContract: tokenAddresses);
     final GetNFTsParams nfTsParams =
         GetNFTsParams(wallet.address, nftAddresses);
-    final results = await Future.wait([
-      _getBalanceForTokensUseCase.call(params),
-      _getNFTsBalanceUC.call(nfTsParams),
-    ]);
-    final Either<Failure, List<double>> tokenBalanceRes = cast(results.first);
-    final Either<Failure, List<BigInt>> nftBalanceRes = cast(results.last);
+    final tokenBalanceRes = await _getBalanceForTokensUC.call(params);
+    final nftBalanceRes = await _getNFTsBalanceUC.call(nfTsParams);
     final List keyList = [
       "SLFT",
       "SLGT",
@@ -105,7 +104,7 @@ class WalletCubit extends Cubit<WalletState> {
     final List nftNames = [
       LocaleKeys.bed.tr(),
       LocaleKeys.jewels.tr(),
-      LocaleKeys.bedbox.tr(),
+      LocaleKeys.bed_boxes.tr(),
       LocaleKeys.item.tr(),
     ];
     final List icons = [
@@ -145,6 +144,7 @@ class WalletCubit extends Cubit<WalletState> {
       );
       tokenList.add(tokenEntity);
     }
+    final currentState = state;
     if (currentState is WalletStateLoaded) {
       emit(currentState.copyWith(
         walletInfoEntity: wallet,

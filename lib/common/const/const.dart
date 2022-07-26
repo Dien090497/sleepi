@@ -103,6 +103,8 @@ class Const {
     },
   ];
 
+  static const String deadAddress = '0x0000000000000000000000000000000000000000';
+
   static const listTypeHistory = [
     'txlist',
     'tokentx',

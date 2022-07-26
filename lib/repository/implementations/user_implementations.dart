@@ -144,7 +144,7 @@ class UserImplementation extends IUserRepository {
     try {
       final contractAddr = estimateParam.type.toLowerCase() != 'avax'
           ? estimateParam.contractAddress
-          : '0x0000000000000000000000000000000000000000';
+          : 'Const.deadAddress';
       final result = await _authDataSource.estimateGasWithdraw(
           estimateParam.type, contractAddr);
       return Right(result);

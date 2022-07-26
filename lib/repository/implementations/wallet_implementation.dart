@@ -57,7 +57,7 @@ class WalletImplementation extends IWalletRepository {
       final ethereumAddress = await credentials.extractAddress();
       final message = await _secureStorage.readMessage();
       final signature = _web3DataSource.generateSignature(
-          privateKey: privateKey, message: message ?? '');
+          privateKey: privateKey, message: message ?? 'welcome to sleefi');
       VerifyUserSchema schema = VerifyUserSchema(
         signedMessage: signature,
         signer: ethereumAddress.hexEip55,
@@ -66,7 +66,8 @@ class WalletImplementation extends IWalletRepository {
         final resultResponse = await _authDataSource.verifyUser(schema);
         if (resultResponse.status) {
           /// Store Wallet
-          await _secureStorage.saveSignatureMessage(signatureMessage: signature);
+          await _secureStorage.saveSignatureMessage(
+              signatureMessage: signature);
           await _secureStorage.saveSigner(signer: ethereumAddress.hexEip55);
           final model = WalletIsarModel(
             mnemonic: mnemonic,
@@ -197,7 +198,7 @@ class WalletImplementation extends IWalletRepository {
           values.add(0);
           break;
         }
-        if (params.addressContract[i] == Const.tokens[0]['address']) {
+        if (params.addressContract[i] == Const.deadAddress) {
           final balance =
               await _web3DataSource.getBalance(params.walletInfoEntity.address);
           values.add(balance / BigInt.from(pow(10, 18)));
@@ -388,7 +389,7 @@ class WalletImplementation extends IWalletRepository {
         final message = await _secureStorage.readMessage();
         final ethereumAddress = await credentials.extractAddress();
         final signature = _web3DataSource.generateSignature(
-            privateKey: privateKey, message: message ?? '');
+            privateKey: privateKey, message: message ?? 'welcome to sleefi');
         final VerifyUserSchema schema = VerifyUserSchema(
           signedMessage: signature,
           signer: ethereumAddress.hexEip55,
@@ -396,8 +397,9 @@ class WalletImplementation extends IWalletRepository {
         try {
           final result = await _authDataSource.verifyUser(schema);
           if (result.status) {
-           await _secureStorage.saveSignatureMessage(signatureMessage: signature);
-           await _secureStorage.saveSigner(signer: ethereumAddress.hexEip55);
+            await _secureStorage.saveSignatureMessage(
+                signatureMessage: signature);
+            await _secureStorage.saveSigner(signer: ethereumAddress.hexEip55);
             return Right(result.status);
           } else {
             return const Left(FailureMessage(LocaleKeys.wallet_already));
@@ -444,7 +446,7 @@ class WalletImplementation extends IWalletRepository {
         // final transactionReceipt = await _web3DataSource.getTransactionReceipt(historyList.elementAt(i).transactionHash);
         // final getTimeStamp = await _web3DataSource.getDetailBlock(transactionInfo.blockNumber.toBlockParam());
         final model = TransactionIsarModel(
-          transactionHash: transactionHistoryList.elementAt(i).hash,
+            transactionHash: transactionHistoryList.elementAt(i).hash,
             valueInEther:
                 BigInt.parse(transactionHistoryList.elementAt(i).value) /
                     BigInt.from(pow(10, 18)),
