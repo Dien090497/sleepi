@@ -1,10 +1,8 @@
-import 'package:dartz/dartz.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:slee_fi/di/injector.dart';
 import 'package:slee_fi/entities/token/token_entity.dart';
 import 'package:slee_fi/entities/wallet_info/wallet_info_entity.dart';
-import 'package:slee_fi/failures/failure.dart';
 import 'package:slee_fi/l10n/locale_keys.g.dart';
 import 'package:slee_fi/resources/resources.dart';
 import 'package:slee_fi/usecase/get_balance_for_tokens_usecase.dart';
@@ -95,12 +93,8 @@ class WalletCubit extends Cubit<WalletState> {
         walletInfoEntity: wallet, addressContract: tokenAddresses);
     final GetNFTsParams nfTsParams =
         GetNFTsParams(wallet.address, nftAddresses);
-    final results = await Future.wait([
-      _getBalanceForTokensUC.call(params),
-      _getNFTsBalanceUC.call(nfTsParams),
-    ]);
-    final Either<Failure, List<double>> tokenBalanceRes = cast(results.first);
-    final Either<Failure, List<BigInt>> nftBalanceRes = cast(results.last);
+    final tokenBalanceRes = await _getBalanceForTokensUC.call(params);
+    final nftBalanceRes = await _getNFTsBalanceUC.call(nfTsParams);
     final List keyList = [
       "SLFT",
       "SLGT",
