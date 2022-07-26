@@ -75,38 +75,41 @@ class _TabBedsDetailState extends State<TabBedsDetail> {
                           (state is NftListLoading)
                               ? const Center(child: CircularProgressIndicator())
                               : SFGridView(
-                                  itemBuilder: (context, index) => MyItemBedBox(
-                                        bed: listBeds
-                                            .where((element) =>
-                                                element.type == 'bed')
-                                            .toList()[index],
-                                        onTap: () {
-                                          showCustomDialog(context,
-                                              padding: const EdgeInsets.all(24),
-                                              children: [
-                                                PopUpBedBoxDetail(
-                                                  bedEntity: listBeds
-                                                      .where((element) =>
-                                                          element.type == 'bed')
-                                                      .toList()[index],
-                                                  onTransfer: () {},
-                                                  onOpen: () {
-                                                    context
-                                                        .read<NFTListCubit>()
-                                                        .openLuckyBox(listBeds
-                                                            .where((element) =>
-                                                                element.type ==
-                                                                'bed')
-                                                            .toList()[index]
-                                                            .id);
-                                                  },
-                                                  onSell: () {},
-                                                )
-                                              ]);
-                                        },
-                                      ),
+                                  onRefresh: () {
+                                    cubit.refreshBedBox(categoryType);
+                                  },
+                                  isLoadMore: state is NftListLoaded
+                                      ? state.isLoadMoreBedBox
+                                      : false,
+                                  onLoadMore: _onLoadMoreBedBox(),
+                                  itemBuilder: (context, index) {
+                                    final item = listBeds
+                                        .where((element) =>
+                                            element.type == 'bedbox')
+                                        .toList()[index];
+                                    return MyItemBedBox(
+                                      bed: item,
+                                      onTap: () {
+                                        showCustomDialog(context,
+                                            padding: const EdgeInsets.all(24),
+                                            children: [
+                                              PopUpBedBoxDetail(
+                                                bedEntity: item,
+                                                onTransfer: () {},
+                                                onOpen: () {
+                                                  context
+                                                      .read<NFTListCubit>()
+                                                      .openBedBox(item.id);
+                                                },
+                                                onSell: () {},
+                                              )
+                                            ]);
+                                      },
+                                    );
+                                  },
                                   count: listBeds
-                                      .where((element) => element.type == 'bed')
+                                      .where(
+                                          (element) => element.type == 'bedbox')
                                       .length),
                         ],
                       ),
@@ -124,5 +127,9 @@ class _TabBedsDetailState extends State<TabBedsDetail> {
             }
           }),
     );
+  }
+
+  Future<void> _onLoadMoreBedBox() async {
+    return cubit.fetchBedBox(categoryType);
   }
 }

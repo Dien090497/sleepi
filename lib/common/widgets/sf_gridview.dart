@@ -5,7 +5,7 @@ import 'package:slee_fi/presentation/blocs/mint/mint_cubit.dart';
 import 'package:slee_fi/presentation/screens/wallet/widgets/no_result_widget.dart';
 
 class SFGridView extends StatefulWidget {
-  const SFGridView({
+  const   SFGridView({
     required this.itemBuilder,
     required this.count,
     this.childAspectRatio = 9 / 10,
