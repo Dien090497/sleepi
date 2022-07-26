@@ -100,6 +100,16 @@ class SocketComponent extends StatelessWidget {
     ]);
   }
 
+  void _showDialogConfirmRemoveJewel(BuildContext context, int index) {
+    showCustomDialog(context, children: [
+      PopUpStaking(
+          message: LocaleKeys.taking_off_jewel_with_cost,
+          onPressed: () {
+            context.read<SocketBloc>().add(RemoveJewel(index));
+          })
+    ]);
+  }
+
   _showDialogJewelDetail(
       BuildContext context, JewelEntity jewelEntity, int index) {
     showCustomDialog(
@@ -109,8 +119,8 @@ class SocketComponent extends StatelessWidget {
         JewelDialogBody(
           jewel: jewelEntity,
           onSellTap: () {
-            context.read<SocketBloc>().add(RemoveJewel(index));
             Navigator.pop(context);
+            _showDialogConfirmRemoveJewel(context, index);
           },
           onTransferTap: () {
             Navigator.pop(context);
