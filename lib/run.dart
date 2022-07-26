@@ -147,7 +147,6 @@ Future<void> onStart(ServiceInstance service) async {
       timer.cancel();
     });
   } catch (e) {
-    print('=--==-=-=$e');
     service.stopSelf();
   }
 }

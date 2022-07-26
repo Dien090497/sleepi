@@ -22,10 +22,11 @@ class FailureMessage extends Failure {
           return const FailureMessage(LocaleKeys.some_thing_wrong);
         }
         final data = e.response?.data;
+
         if (data == null) return FailureMessage('$e');
         final error = data !is String
             ? jsonDecode(data)['error']['message']
-            : data['error']['details']['message'];
+            : data['error']['message'].toString();
         if (error is String) {
           return FailureMessage(error);
         } else if (error is List<String>) {
