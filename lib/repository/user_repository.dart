@@ -104,5 +104,5 @@ abstract class IUserRepository {
   Future<Either<FailureMessage, List<BedEntity>>> fetchListUpgrade(
       FetchBedParam fetchBedParam);
 
-  Future<Either<FailureMessage, dynamic>> openBedBox(int bedId);
+  Future<Either<FailureMessage, BedEntity>> openBedBox(int bedId);
 }

@@ -35,7 +35,7 @@ class TabBedsDetail extends StatelessWidget {
       create: (_) => cubit,
       child: AutoResetTabWidget(
         onRefreshTab: () {
-          cubit.refresh();
+          cubit.refresh().then((value) => cubit.refreshBedBox());
         },
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 12.0),
@@ -57,10 +57,9 @@ class TabBedsDetail extends StatelessWidget {
                         }
                         final listBeds = state is NftListLoaded
                             ? state.listBed
-                                .where((e) => e.type.toLowerCase() == 'bed')
-                                .toList()
                             : <BedEntity>[];
                         return RefreshListWidget(
+                          isBed: true,
                           child: GridView.builder(
                             itemCount: listBeds.length,
                             shrinkWrap: true,
@@ -199,15 +198,17 @@ class TabBedsDetail extends StatelessWidget {
                     BlocBuilder<NFTListCubit, NftListState>(
                       builder: (context, state) {
                         if (state is NftListLoading ||
-                            state is NftListInitial) {
+                            state is NftListInitial ||
+                            (state is NftListLoaded &&
+                                state.listBedBox.isEmpty &&
+                                state.isLoadMoreBedBox)) {
                           return const LoadingIcon();
                         }
                         final listBeds = state is NftListLoaded
-                            ? state.listBed
-                                .where((e) => e.type.toLowerCase() == 'bedbox')
-                                .toList()
+                            ? state.listBedBox
                             : <BedEntity>[];
                         return RefreshListWidget(
+                          isBed: false,
                           child: GridView.builder(
                             itemCount: listBeds.length,
                             shrinkWrap: true,
@@ -233,7 +234,7 @@ class TabBedsDetail extends StatelessWidget {
                                       onOpen: () {
                                         context
                                             .read<NFTListCubit>()
-                                            .openLuckyBox(listBeds[index].id);
+                                            .openBedBox(listBeds[index]);
                                       },
                                       onSell: () {},
                                     )
@@ -254,4 +255,8 @@ class TabBedsDetail extends StatelessWidget {
       ),
     );
   }
+
+// Future<void> _onLoadMoreBedBox() async {
+//   return cubit.fetchBedBox(categoryType);
+// }
 }

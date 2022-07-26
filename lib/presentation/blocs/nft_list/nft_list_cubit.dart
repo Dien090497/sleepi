@@ -16,19 +16,24 @@ class NFTListCubit extends Cubit<NftListState> {
     final currentState = state;
     if (currentState is NftListInitial) {
       emit(const NftListState.loading());
-      final result = await _fetchListBedUC.call(
-          FetchBedParam(currentState.page, currentState.limit, _idCategory));
+      final result = await _fetchListBedUC.call(FetchBedParam(
+        currentState.page,
+        currentState.limit,
+        _idCategory,
+        bedType: 'bed',
+      ));
 
       result.fold((l) {
         emit(NftListState.error('$l'));
-        emit(const NftListState.loaded([], hasMore: false));
+        emit(const NftListState.loaded(
+            hasMore: false, listBedBox: [], listBed: []));
       }, (entities) {
-        emit(NftListState.loaded(entities));
+        emit(NftListState.loaded(listBed: entities, listBedBox: []));
       });
     }
   }
 
-  void refresh() async {
+  Future<void> refresh() async {
     final currentState = state;
     if (currentState is NftListLoaded) {
       emit(const NftListState.loading());
@@ -37,9 +42,75 @@ class NFTListCubit extends Cubit<NftListState> {
 
       result.fold((l) {
         emit(NftListState.error('$l'));
-        emit(const NftListState.loaded([], hasMore: false));
+        emit(currentState.copyWith(listBed: [], hasMore: false));
       }, (entities) {
-        emit(NftListState.loaded(entities));
+        emit(currentState.copyWith(
+          listBed: entities,
+          hasMore: entities.length >= currentState.limit,
+        ));
+      });
+    }
+  }
+
+  refreshBedBox() async {
+    final result = await _fetchListBedUC.call(FetchBedParam(
+      1,
+      10,
+      _idCategory,
+      bedType: 'bedbox',
+    ));
+    result.fold((l) {
+    }, (entities) {
+      final currentState = state;
+      if (currentState is NftListLoaded) {
+        emit(currentState.copyWith(
+          listBedBox: entities,
+          currentPageBedBox: currentState.currentPageBedBox + 1,
+          isLoadMoreBedBox: false,
+          hasMoreBedBox: entities.length >= currentState.limit,
+        ));
+      } else {
+        emit(NftListState.loaded(
+            listBed: [],
+            listBedBox: entities,
+            hasMoreBedBox: entities.length > 10,
+            isLoadMoreBedBox: entities.length > 10));
+      }
+    });
+  }
+
+  Future<void> fetchBedBox() async {
+    final currentState = state;
+    if (currentState is NftListLoaded) {
+      if (currentState.isLoadMoreBedBox) {
+        return;
+      }
+      emit(currentState.copyWith(isLoadMoreBedBox: true));
+      final result = await _fetchListBedUC.call(FetchBedParam(
+        currentState.currentPageBedBox,
+        currentState.limit,
+        _idCategory,
+        bedType: 'bedbox',
+      ));
+
+      result.fold((l) {
+        emit(NftListState.error('$l'));
+        emit(currentState.copyWith(
+          isLoadMoreBedBox: false,
+          hasMoreBedBox: false,
+        ));
+      }, (success) {
+        final currentState = state;
+        if (currentState is NftListLoaded) {
+          emit(currentState.copyWith(
+              listBedBox: currentState.listBedBox + success,
+              isLoadMoreBedBox: false,
+              currentPageBedBox: currentState.currentPageBedBox + 1,
+              hasMoreBedBox: success.length >= 10));
+        } else {
+          emit(NftListState.loaded(
+              listBed: [], listBedBox: success, currentPageBedBox: 2));
+        }
       });
     }
   }
@@ -50,8 +121,9 @@ class NFTListCubit extends Cubit<NftListState> {
       if (currentState.isLoadMore) return;
       emit(currentState.copyWith(isLoadMore: true));
       final nextPage = currentState.currentPage + 1;
-      final result = await _fetchListBedUC
-          .call(FetchBedParam(nextPage, currentState.limit, _idCategory));
+      final result = await _fetchListBedUC.call(FetchBedParam(
+          nextPage, currentState.limit, _idCategory,
+          bedType: 'bed'));
 
       result.fold((l) {
         emit(NftListState.error('$l'));
@@ -62,16 +134,42 @@ class NFTListCubit extends Cubit<NftListState> {
         emit(currentState.copyWith(
           isLoadMore: false,
           listBed: newList,
-          hasMore: entities.isNotEmpty,
+          hasMore: entities.length >= currentState.limit,
           currentPage: nextPage,
         ));
       });
     }
   }
 
-  void openLuckyBox(int id) async {
-    final result = await _openBedBoxUC.call(id);
-    result.fold((l) => print('open lucky box error  ${l.msg} '),
-        (r) => print('open lucky box success '));
+  void openBedBox(BedEntity entity) async {
+    final result = await _openBedBoxUC.call(entity.id);
+    result.fold((l) {
+      final currentState = state;
+      if (currentState is NftListLoaded) {
+        emit(NftListState.error(l.msg));
+        emit(currentState);
+      }
+    }, (r) {
+      final currentState = state;
+      if (currentState is NftListLoaded) {
+        final listBed = List<BedEntity>.from(currentState.listBed);
+        final listBedBox = List<BedEntity>.from(currentState.listBedBox);
+
+        listBedBox.remove(entity);
+        listBed.add(r);
+        emit(currentState.copyWith(
+          listBed: listBed,
+          listBedBox: listBedBox,
+          openBedBoxSuccess: r,
+        ));
+      }
+    });
+  }
+
+  clearOpenSuccess() {
+    final currentState = state;
+    if (currentState is NftListLoaded) {
+      emit(currentState.copyWith(openBedBoxSuccess: null));
+    }
   }
 }

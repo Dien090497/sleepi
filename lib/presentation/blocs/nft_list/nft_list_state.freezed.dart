@@ -20,8 +20,17 @@ mixin _$NftListState {
   TResult when<TResult extends Object?>({
     required TResult Function(int page, int limit) initial,
     required TResult Function() loading,
-    required TResult Function(List<BedEntity> listBed, bool isLoadMore,
-            bool hasMore, int currentPage, int limit)
+    required TResult Function(
+            List<BedEntity> listBed,
+            List<BedEntity> listBedBox,
+            bool isLoadMore,
+            dynamic isLoadMoreBedBox,
+            bool hasMore,
+            bool hasMoreBedBox,
+            int currentPage,
+            int currentPageBedBox,
+            int limit,
+            BedEntity? openBedBoxSuccess)
         loaded,
     required TResult Function(String msg) error,
   }) =>
@@ -30,8 +39,17 @@ mixin _$NftListState {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function(int page, int limit)? initial,
     TResult Function()? loading,
-    TResult Function(List<BedEntity> listBed, bool isLoadMore, bool hasMore,
-            int currentPage, int limit)?
+    TResult Function(
+            List<BedEntity> listBed,
+            List<BedEntity> listBedBox,
+            bool isLoadMore,
+            dynamic isLoadMoreBedBox,
+            bool hasMore,
+            bool hasMoreBedBox,
+            int currentPage,
+            int currentPageBedBox,
+            int limit,
+            BedEntity? openBedBoxSuccess)?
         loaded,
     TResult Function(String msg)? error,
   }) =>
@@ -40,8 +58,17 @@ mixin _$NftListState {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(int page, int limit)? initial,
     TResult Function()? loading,
-    TResult Function(List<BedEntity> listBed, bool isLoadMore, bool hasMore,
-            int currentPage, int limit)?
+    TResult Function(
+            List<BedEntity> listBed,
+            List<BedEntity> listBedBox,
+            bool isLoadMore,
+            dynamic isLoadMoreBedBox,
+            bool hasMore,
+            bool hasMoreBedBox,
+            int currentPage,
+            int currentPageBedBox,
+            int limit,
+            BedEntity? openBedBoxSuccess)?
         loaded,
     TResult Function(String msg)? error,
     required TResult orElse(),
@@ -169,8 +196,17 @@ class _$NftListInitial implements NftListInitial {
   TResult when<TResult extends Object?>({
     required TResult Function(int page, int limit) initial,
     required TResult Function() loading,
-    required TResult Function(List<BedEntity> listBed, bool isLoadMore,
-            bool hasMore, int currentPage, int limit)
+    required TResult Function(
+            List<BedEntity> listBed,
+            List<BedEntity> listBedBox,
+            bool isLoadMore,
+            dynamic isLoadMoreBedBox,
+            bool hasMore,
+            bool hasMoreBedBox,
+            int currentPage,
+            int currentPageBedBox,
+            int limit,
+            BedEntity? openBedBoxSuccess)
         loaded,
     required TResult Function(String msg) error,
   }) {
@@ -182,8 +218,17 @@ class _$NftListInitial implements NftListInitial {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function(int page, int limit)? initial,
     TResult Function()? loading,
-    TResult Function(List<BedEntity> listBed, bool isLoadMore, bool hasMore,
-            int currentPage, int limit)?
+    TResult Function(
+            List<BedEntity> listBed,
+            List<BedEntity> listBedBox,
+            bool isLoadMore,
+            dynamic isLoadMoreBedBox,
+            bool hasMore,
+            bool hasMoreBedBox,
+            int currentPage,
+            int currentPageBedBox,
+            int limit,
+            BedEntity? openBedBoxSuccess)?
         loaded,
     TResult Function(String msg)? error,
   }) {
@@ -195,8 +240,17 @@ class _$NftListInitial implements NftListInitial {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(int page, int limit)? initial,
     TResult Function()? loading,
-    TResult Function(List<BedEntity> listBed, bool isLoadMore, bool hasMore,
-            int currentPage, int limit)?
+    TResult Function(
+            List<BedEntity> listBed,
+            List<BedEntity> listBedBox,
+            bool isLoadMore,
+            dynamic isLoadMoreBedBox,
+            bool hasMore,
+            bool hasMoreBedBox,
+            int currentPage,
+            int currentPageBedBox,
+            int limit,
+            BedEntity? openBedBoxSuccess)?
         loaded,
     TResult Function(String msg)? error,
     required TResult orElse(),
@@ -299,8 +353,17 @@ class _$NftListLoading implements NftListLoading {
   TResult when<TResult extends Object?>({
     required TResult Function(int page, int limit) initial,
     required TResult Function() loading,
-    required TResult Function(List<BedEntity> listBed, bool isLoadMore,
-            bool hasMore, int currentPage, int limit)
+    required TResult Function(
+            List<BedEntity> listBed,
+            List<BedEntity> listBedBox,
+            bool isLoadMore,
+            dynamic isLoadMoreBedBox,
+            bool hasMore,
+            bool hasMoreBedBox,
+            int currentPage,
+            int currentPageBedBox,
+            int limit,
+            BedEntity? openBedBoxSuccess)
         loaded,
     required TResult Function(String msg) error,
   }) {
@@ -312,8 +375,17 @@ class _$NftListLoading implements NftListLoading {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function(int page, int limit)? initial,
     TResult Function()? loading,
-    TResult Function(List<BedEntity> listBed, bool isLoadMore, bool hasMore,
-            int currentPage, int limit)?
+    TResult Function(
+            List<BedEntity> listBed,
+            List<BedEntity> listBedBox,
+            bool isLoadMore,
+            dynamic isLoadMoreBedBox,
+            bool hasMore,
+            bool hasMoreBedBox,
+            int currentPage,
+            int currentPageBedBox,
+            int limit,
+            BedEntity? openBedBoxSuccess)?
         loaded,
     TResult Function(String msg)? error,
   }) {
@@ -325,8 +397,17 @@ class _$NftListLoading implements NftListLoading {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(int page, int limit)? initial,
     TResult Function()? loading,
-    TResult Function(List<BedEntity> listBed, bool isLoadMore, bool hasMore,
-            int currentPage, int limit)?
+    TResult Function(
+            List<BedEntity> listBed,
+            List<BedEntity> listBedBox,
+            bool isLoadMore,
+            dynamic isLoadMoreBedBox,
+            bool hasMore,
+            bool hasMoreBedBox,
+            int currentPage,
+            int currentPageBedBox,
+            int limit,
+            BedEntity? openBedBoxSuccess)?
         loaded,
     TResult Function(String msg)? error,
     required TResult orElse(),
@@ -386,10 +467,17 @@ abstract class _$$NftListLoadedCopyWith<$Res> {
       __$$NftListLoadedCopyWithImpl<$Res>;
   $Res call(
       {List<BedEntity> listBed,
+      List<BedEntity> listBedBox,
       bool isLoadMore,
+      dynamic isLoadMoreBedBox,
       bool hasMore,
+      bool hasMoreBedBox,
       int currentPage,
-      int limit});
+      int currentPageBedBox,
+      int limit,
+      BedEntity? openBedBoxSuccess});
+
+  $BedEntityCopyWith<$Res>? get openBedBoxSuccess;
 }
 
 /// @nodoc
@@ -406,45 +494,87 @@ class __$$NftListLoadedCopyWithImpl<$Res>
   @override
   $Res call({
     Object? listBed = freezed,
+    Object? listBedBox = freezed,
     Object? isLoadMore = freezed,
+    Object? isLoadMoreBedBox = freezed,
     Object? hasMore = freezed,
+    Object? hasMoreBedBox = freezed,
     Object? currentPage = freezed,
+    Object? currentPageBedBox = freezed,
     Object? limit = freezed,
+    Object? openBedBoxSuccess = freezed,
   }) {
     return _then(_$NftListLoaded(
-      listBed == freezed
+      listBed: listBed == freezed
           ? _value._listBed
           : listBed // ignore: cast_nullable_to_non_nullable
+              as List<BedEntity>,
+      listBedBox: listBedBox == freezed
+          ? _value._listBedBox
+          : listBedBox // ignore: cast_nullable_to_non_nullable
               as List<BedEntity>,
       isLoadMore: isLoadMore == freezed
           ? _value.isLoadMore
           : isLoadMore // ignore: cast_nullable_to_non_nullable
               as bool,
+      isLoadMoreBedBox: isLoadMoreBedBox == freezed
+          ? _value.isLoadMoreBedBox
+          : isLoadMoreBedBox,
       hasMore: hasMore == freezed
           ? _value.hasMore
           : hasMore // ignore: cast_nullable_to_non_nullable
+              as bool,
+      hasMoreBedBox: hasMoreBedBox == freezed
+          ? _value.hasMoreBedBox
+          : hasMoreBedBox // ignore: cast_nullable_to_non_nullable
               as bool,
       currentPage: currentPage == freezed
           ? _value.currentPage
           : currentPage // ignore: cast_nullable_to_non_nullable
               as int,
+      currentPageBedBox: currentPageBedBox == freezed
+          ? _value.currentPageBedBox
+          : currentPageBedBox // ignore: cast_nullable_to_non_nullable
+              as int,
       limit: limit == freezed
           ? _value.limit
           : limit // ignore: cast_nullable_to_non_nullable
               as int,
+      openBedBoxSuccess: openBedBoxSuccess == freezed
+          ? _value.openBedBoxSuccess
+          : openBedBoxSuccess // ignore: cast_nullable_to_non_nullable
+              as BedEntity?,
     ));
+  }
+
+  @override
+  $BedEntityCopyWith<$Res>? get openBedBoxSuccess {
+    if (_value.openBedBoxSuccess == null) {
+      return null;
+    }
+
+    return $BedEntityCopyWith<$Res>(_value.openBedBoxSuccess!, (value) {
+      return _then(_value.copyWith(openBedBoxSuccess: value));
+    });
   }
 }
 
 /// @nodoc
 
 class _$NftListLoaded implements NftListLoaded {
-  const _$NftListLoaded(final List<BedEntity> listBed,
-      {this.isLoadMore = false,
+  const _$NftListLoaded(
+      {required final List<BedEntity> listBed,
+      required final List<BedEntity> listBedBox,
+      this.isLoadMore = false,
+      this.isLoadMoreBedBox = false,
       this.hasMore = true,
+      this.hasMoreBedBox = true,
       this.currentPage = 1,
-      this.limit = 10})
-      : _listBed = listBed;
+      this.currentPageBedBox = 1,
+      this.limit = 10,
+      this.openBedBoxSuccess})
+      : _listBed = listBed,
+        _listBedBox = listBedBox;
 
   final List<BedEntity> _listBed;
   @override
@@ -453,22 +583,40 @@ class _$NftListLoaded implements NftListLoaded {
     return EqualUnmodifiableListView(_listBed);
   }
 
+  final List<BedEntity> _listBedBox;
+  @override
+  List<BedEntity> get listBedBox {
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_listBedBox);
+  }
+
   @override
   @JsonKey()
   final bool isLoadMore;
   @override
   @JsonKey()
+  final dynamic isLoadMoreBedBox;
+  @override
+  @JsonKey()
   final bool hasMore;
+  @override
+  @JsonKey()
+  final bool hasMoreBedBox;
   @override
   @JsonKey()
   final int currentPage;
   @override
   @JsonKey()
+  final int currentPageBedBox;
+  @override
+  @JsonKey()
   final int limit;
+  @override
+  final BedEntity? openBedBoxSuccess;
 
   @override
   String toString() {
-    return 'NftListState.loaded(listBed: $listBed, isLoadMore: $isLoadMore, hasMore: $hasMore, currentPage: $currentPage, limit: $limit)';
+    return 'NftListState.loaded(listBed: $listBed, listBedBox: $listBedBox, isLoadMore: $isLoadMore, isLoadMoreBedBox: $isLoadMoreBedBox, hasMore: $hasMore, hasMoreBedBox: $hasMoreBedBox, currentPage: $currentPage, currentPageBedBox: $currentPageBedBox, limit: $limit, openBedBoxSuccess: $openBedBoxSuccess)';
   }
 
   @override
@@ -478,21 +626,36 @@ class _$NftListLoaded implements NftListLoaded {
             other is _$NftListLoaded &&
             const DeepCollectionEquality().equals(other._listBed, _listBed) &&
             const DeepCollectionEquality()
+                .equals(other._listBedBox, _listBedBox) &&
+            const DeepCollectionEquality()
                 .equals(other.isLoadMore, isLoadMore) &&
+            const DeepCollectionEquality()
+                .equals(other.isLoadMoreBedBox, isLoadMoreBedBox) &&
             const DeepCollectionEquality().equals(other.hasMore, hasMore) &&
             const DeepCollectionEquality()
+                .equals(other.hasMoreBedBox, hasMoreBedBox) &&
+            const DeepCollectionEquality()
                 .equals(other.currentPage, currentPage) &&
-            const DeepCollectionEquality().equals(other.limit, limit));
+            const DeepCollectionEquality()
+                .equals(other.currentPageBedBox, currentPageBedBox) &&
+            const DeepCollectionEquality().equals(other.limit, limit) &&
+            const DeepCollectionEquality()
+                .equals(other.openBedBoxSuccess, openBedBoxSuccess));
   }
 
   @override
   int get hashCode => Object.hash(
       runtimeType,
       const DeepCollectionEquality().hash(_listBed),
+      const DeepCollectionEquality().hash(_listBedBox),
       const DeepCollectionEquality().hash(isLoadMore),
+      const DeepCollectionEquality().hash(isLoadMoreBedBox),
       const DeepCollectionEquality().hash(hasMore),
+      const DeepCollectionEquality().hash(hasMoreBedBox),
       const DeepCollectionEquality().hash(currentPage),
-      const DeepCollectionEquality().hash(limit));
+      const DeepCollectionEquality().hash(currentPageBedBox),
+      const DeepCollectionEquality().hash(limit),
+      const DeepCollectionEquality().hash(openBedBoxSuccess));
 
   @JsonKey(ignore: true)
   @override
@@ -504,12 +667,31 @@ class _$NftListLoaded implements NftListLoaded {
   TResult when<TResult extends Object?>({
     required TResult Function(int page, int limit) initial,
     required TResult Function() loading,
-    required TResult Function(List<BedEntity> listBed, bool isLoadMore,
-            bool hasMore, int currentPage, int limit)
+    required TResult Function(
+            List<BedEntity> listBed,
+            List<BedEntity> listBedBox,
+            bool isLoadMore,
+            dynamic isLoadMoreBedBox,
+            bool hasMore,
+            bool hasMoreBedBox,
+            int currentPage,
+            int currentPageBedBox,
+            int limit,
+            BedEntity? openBedBoxSuccess)
         loaded,
     required TResult Function(String msg) error,
   }) {
-    return loaded(listBed, isLoadMore, hasMore, currentPage, limit);
+    return loaded(
+        listBed,
+        listBedBox,
+        isLoadMore,
+        isLoadMoreBedBox,
+        hasMore,
+        hasMoreBedBox,
+        currentPage,
+        currentPageBedBox,
+        limit,
+        openBedBoxSuccess);
   }
 
   @override
@@ -517,12 +699,31 @@ class _$NftListLoaded implements NftListLoaded {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function(int page, int limit)? initial,
     TResult Function()? loading,
-    TResult Function(List<BedEntity> listBed, bool isLoadMore, bool hasMore,
-            int currentPage, int limit)?
+    TResult Function(
+            List<BedEntity> listBed,
+            List<BedEntity> listBedBox,
+            bool isLoadMore,
+            dynamic isLoadMoreBedBox,
+            bool hasMore,
+            bool hasMoreBedBox,
+            int currentPage,
+            int currentPageBedBox,
+            int limit,
+            BedEntity? openBedBoxSuccess)?
         loaded,
     TResult Function(String msg)? error,
   }) {
-    return loaded?.call(listBed, isLoadMore, hasMore, currentPage, limit);
+    return loaded?.call(
+        listBed,
+        listBedBox,
+        isLoadMore,
+        isLoadMoreBedBox,
+        hasMore,
+        hasMoreBedBox,
+        currentPage,
+        currentPageBedBox,
+        limit,
+        openBedBoxSuccess);
   }
 
   @override
@@ -530,14 +731,33 @@ class _$NftListLoaded implements NftListLoaded {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(int page, int limit)? initial,
     TResult Function()? loading,
-    TResult Function(List<BedEntity> listBed, bool isLoadMore, bool hasMore,
-            int currentPage, int limit)?
+    TResult Function(
+            List<BedEntity> listBed,
+            List<BedEntity> listBedBox,
+            bool isLoadMore,
+            dynamic isLoadMoreBedBox,
+            bool hasMore,
+            bool hasMoreBedBox,
+            int currentPage,
+            int currentPageBedBox,
+            int limit,
+            BedEntity? openBedBoxSuccess)?
         loaded,
     TResult Function(String msg)? error,
     required TResult orElse(),
   }) {
     if (loaded != null) {
-      return loaded(listBed, isLoadMore, hasMore, currentPage, limit);
+      return loaded(
+          listBed,
+          listBedBox,
+          isLoadMore,
+          isLoadMoreBedBox,
+          hasMore,
+          hasMoreBedBox,
+          currentPage,
+          currentPageBedBox,
+          limit,
+          openBedBoxSuccess);
     }
     return orElse();
   }
@@ -581,17 +801,28 @@ class _$NftListLoaded implements NftListLoaded {
 }
 
 abstract class NftListLoaded implements NftListState {
-  const factory NftListLoaded(final List<BedEntity> listBed,
-      {final bool isLoadMore,
+  const factory NftListLoaded(
+      {required final List<BedEntity> listBed,
+      required final List<BedEntity> listBedBox,
+      final bool isLoadMore,
+      final dynamic isLoadMoreBedBox,
       final bool hasMore,
+      final bool hasMoreBedBox,
       final int currentPage,
-      final int limit}) = _$NftListLoaded;
+      final int currentPageBedBox,
+      final int limit,
+      final BedEntity? openBedBoxSuccess}) = _$NftListLoaded;
 
   List<BedEntity> get listBed;
+  List<BedEntity> get listBedBox;
   bool get isLoadMore;
+  dynamic get isLoadMoreBedBox;
   bool get hasMore;
+  bool get hasMoreBedBox;
   int get currentPage;
+  int get currentPageBedBox;
   int get limit;
+  BedEntity? get openBedBoxSuccess;
   @JsonKey(ignore: true)
   _$$NftListLoadedCopyWith<_$NftListLoaded> get copyWith =>
       throw _privateConstructorUsedError;
@@ -664,8 +895,17 @@ class _$NftListError implements NftListError {
   TResult when<TResult extends Object?>({
     required TResult Function(int page, int limit) initial,
     required TResult Function() loading,
-    required TResult Function(List<BedEntity> listBed, bool isLoadMore,
-            bool hasMore, int currentPage, int limit)
+    required TResult Function(
+            List<BedEntity> listBed,
+            List<BedEntity> listBedBox,
+            bool isLoadMore,
+            dynamic isLoadMoreBedBox,
+            bool hasMore,
+            bool hasMoreBedBox,
+            int currentPage,
+            int currentPageBedBox,
+            int limit,
+            BedEntity? openBedBoxSuccess)
         loaded,
     required TResult Function(String msg) error,
   }) {
@@ -677,8 +917,17 @@ class _$NftListError implements NftListError {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function(int page, int limit)? initial,
     TResult Function()? loading,
-    TResult Function(List<BedEntity> listBed, bool isLoadMore, bool hasMore,
-            int currentPage, int limit)?
+    TResult Function(
+            List<BedEntity> listBed,
+            List<BedEntity> listBedBox,
+            bool isLoadMore,
+            dynamic isLoadMoreBedBox,
+            bool hasMore,
+            bool hasMoreBedBox,
+            int currentPage,
+            int currentPageBedBox,
+            int limit,
+            BedEntity? openBedBoxSuccess)?
         loaded,
     TResult Function(String msg)? error,
   }) {
@@ -690,8 +939,17 @@ class _$NftListError implements NftListError {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(int page, int limit)? initial,
     TResult Function()? loading,
-    TResult Function(List<BedEntity> listBed, bool isLoadMore, bool hasMore,
-            int currentPage, int limit)?
+    TResult Function(
+            List<BedEntity> listBed,
+            List<BedEntity> listBedBox,
+            bool isLoadMore,
+            dynamic isLoadMoreBedBox,
+            bool hasMore,
+            bool hasMoreBedBox,
+            int currentPage,
+            int currentPageBedBox,
+            int limit,
+            BedEntity? openBedBoxSuccess)?
         loaded,
     TResult Function(String msg)? error,
     required TResult orElse(),

@@ -413,10 +413,10 @@ class UserImplementation extends IUserRepository {
   }
 
   @override
-  Future<Either<FailureMessage, dynamic>> openBedBox(int bedId) async {
+  Future<Either<FailureMessage, BedEntity>> openBedBox(int bedId) async {
     try {
       final result = await _authDataSource.openBedBox(bedId);
-      return Right(result);
+      return Right(result.toEntity());
     } catch (e) {
       return Left(FailureMessage.fromException(e));
     }

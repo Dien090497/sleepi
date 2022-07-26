@@ -569,18 +569,18 @@ class _AuthDataSource implements AuthDataSource {
   }
 
   @override
-  Future<ItemOwnerResponse> openBedBox(bedId) async {
+  Future<BedModel> openBedBox(bedId) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{r'bedboxId': bedId};
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
     final _result = await _dio.fetch<Map<String, dynamic>>(
-        _setStreamType<ItemOwnerResponse>(
+        _setStreamType<BedModel>(
             Options(method: 'POST', headers: _headers, extra: _extra)
-                .compose(_dio.options, 'nft-attributes/open-bedbox',
+                .compose(_dio.options, '/nft-attributes/open-bedbox',
                     queryParameters: queryParameters, data: _data)
                 .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = ItemOwnerResponse.fromJson(_result.data!);
+    final value = BedModel.fromJson(_result.data!);
     return value;
   }
 
