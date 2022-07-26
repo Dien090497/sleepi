@@ -418,19 +418,21 @@ class WalletImplementation extends IWalletRepository {
   Future<Either<Failure, List<TransactionIsarModel>>> getHistoryTransaction(
       HistoryTransactionParams params) async {
     try {
-      // List<HistoryIsarModel> historyList = await _historyDataSource.getAllHistory();
       List<TransactionHistoryModel> transactionHistoryList = [];
       final result =
           await _transactionRemoteDataSource.getHistoryTransaction(params);
       result.fold(
         (l) {},
         (history) {
+          print(history);
           if (params.tokenSymbol == "AVAX") {
             transactionHistoryList = history;
           } else if (params.tokenSymbol != null) {
             transactionHistoryList = history
                 .where((i) => i.tokenSymbol == params.tokenSymbol)
                 .toList();
+            print('-------------transactionHistoryList---------------');
+            print(transactionHistoryList);
           } else {
             transactionHistoryList = history;
           }
