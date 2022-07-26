@@ -12,6 +12,7 @@ import 'package:slee_fi/presentation/blocs/upgrade_jewel_bloc/upgrade_jewel_bloc
 import 'package:slee_fi/presentation/blocs/upgrade_jewel_bloc/upgrade_jewel_event.dart';
 import 'package:slee_fi/presentation/blocs/upgrade_jewel_bloc/upgrade_jewel_state.dart';
 import 'package:slee_fi/presentation/screens/home/widgets/pop_up_cancel_sell.dart';
+import 'package:slee_fi/presentation/screens/home/widgets/pop_up_transfer.dart';
 import 'package:slee_fi/presentation/screens/info_individual/widget/pop_up_sell.dart';
 import 'package:slee_fi/presentation/screens/product_detail/widgets/auto_reset_tab_widget.dart';
 import 'package:slee_fi/presentation/screens/product_detail/widgets/jewel_dialog_body.dart';
@@ -139,8 +140,43 @@ class TabJewelsDetail extends StatelessWidget {
             ]);
           },
           onTransferTap: () {
-            Navigator.pop(context);
-            _onTransfer(context, jewel);
+            if (jewel.isLock != 1) {
+              Navigator.pop(context);
+              final cubit = BottomBarInfoIndividualCubit()..init();
+              cubit.estimateGas(contractAddress: jewel.contractAddress);
+              showCustomDialog(context, children: [
+                BlocProvider(
+                  create: (context) => cubit,
+                  child: BlocConsumer<BottomBarInfoIndividualCubit,
+                      BottomBarInfoIndividualState>(
+                    listener: (context, state) {
+                      if (state is BottomBarInfoIndividualError) {
+                        showMessageDialog(context, state.message);
+                      }
+                      if (state is BottomBarInfoIndividualLoaded) {
+                        if (state.successTransfer) {
+                          Navigator.pop(context);
+                          showSuccessfulDialog(context, null, onBackPress: () {
+                            Navigator.pushNamedAndRemoveUntil(
+                              context,
+                              R.bottomNavigation,
+                                  (r) => false,
+                            );
+                          });
+                        }
+                      }
+                    },
+                    builder: (context, state) {
+                        return PopUpTransfer(
+                          bedEntity: jewel,
+                          cubit: cubit,
+                          valueTransfer: 1,
+                        );
+                    },
+                  ),
+                ),
+              ]);
+            } else {}
           },
         ),
       ],

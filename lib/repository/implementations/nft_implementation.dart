@@ -191,6 +191,7 @@ class NFTImplementation extends INFTRepository {
         signedMessage: signature,
         signer: signer,
       );
+      print('schema123xx ${schema.signer} \n ${schema.signedMessage} ${schema.tokenId} \n ${schema.type} \n ${schema.contractAddress}');
       final result = await _authDataSource.withdrawNFT(schema);
       return Right(result);
     } catch (e) {
@@ -275,6 +276,24 @@ class NFTImplementation extends INFTRepository {
       return Right(result.toEntity());
     } catch (e) {
       return Left(FailureMessage.fromException(e));
+    }
+  }
+
+  @override
+  Future<Either<Failure, List<String>>> getNftAddresses() async {
+    try {
+      return Right(await _secureStorage.getNftAddress() ?? []);
+    } catch (e) {
+      return Left(FailureMessage.fromException(e));
+    }
+  }
+
+  @override
+  Future<Either<Failure, List<String>>> getTokenAddresses() async {
+    try {
+      return Right(await _secureStorage.getTokenAddress() ?? []);
+    } catch (e) {
+    return Left(FailureMessage.fromException(e));
     }
   }
 }

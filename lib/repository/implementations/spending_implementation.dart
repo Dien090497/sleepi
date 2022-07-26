@@ -2,7 +2,6 @@ import 'dart:math';
 
 import 'package:dartz/dartz.dart';
 import 'package:injectable/injectable.dart';
-import 'package:slee_fi/common/const/const.dart';
 import 'package:slee_fi/common/extensions/num_ext.dart';
 import 'package:slee_fi/datasources/local/get_storage_datasource.dart';
 import 'package:slee_fi/datasources/local/history_datasource.dart';
@@ -25,8 +24,8 @@ class SpendingImplementation extends ISpendingRepository {
   final GetStorageDataSource _getStorageDataSource;
   final HistoryDataSource _historyDataSource;
 
-  SpendingImplementation(
-      this._spendingDataSource, this._authDataSource, this._secureStorage, this._getStorageDataSource, this._historyDataSource);
+  SpendingImplementation(this._spendingDataSource, this._authDataSource,
+      this._secureStorage, this._getStorageDataSource, this._historyDataSource);
 
   @override
   Future<Either<Failure, String>> depositToken({
@@ -38,25 +37,23 @@ class SpendingImplementation extends ISpendingRepository {
   }) async {
     try {
       final amountWei = BigInt.from(amount * pow(10, 18));
-      if (addressContract == Const.listTokenAddressTestNet[2] ||
-          addressContract == '0x0000000000000000000000000000000000000000') {
+      if (addressContract == 'Const.deadAddress') {
         final hash = await _spendingDataSource.toSpendingAvax(
           owner: owner,
           amount: amountWei,
           userId: BigInt.from(userId),
           avax: EthereumAddress.fromHex(
-              "0x0000000000000000000000000000000000000000"),
+              "Const.deadAddress"),
           transaction: Transaction(value: EtherAmount.inWei(amountWei)),
           spendingAddress: await _secureStorage.readAddressContract() ?? '',
         );
-        if(hash.isNotEmpty){
+        if (hash.isNotEmpty) {
           final chainId = _getStorageDataSource.getCurrentChainId();
           final model = HistoryIsarModel(
               transactionHash: hash,
               chainId: chainId!,
               addressTo: addressContract,
-              tokenSymbol: type
-          );
+              tokenSymbol: type);
           await _historyDataSource.putHistory(model);
         }
         return Right(hash);
@@ -69,14 +66,13 @@ class SpendingImplementation extends ISpendingRepository {
         userId: BigInt.from(userId),
         spendingAddress: await _secureStorage.readAddressContract() ?? '',
       );
-      if(hash.isNotEmpty){
+      if (hash.isNotEmpty) {
         final chainId = _getStorageDataSource.getCurrentChainId();
         final model = HistoryIsarModel(
             transactionHash: hash,
             chainId: chainId!,
             addressTo: addressContract,
-            tokenSymbol: type
-        );
+            tokenSymbol: type);
         await _historyDataSource.putHistory(model);
       }
       return Right(hash);
@@ -92,7 +88,9 @@ class SpendingImplementation extends ISpendingRepository {
       final token = _spendingDataSource.token(addressContract);
       final result = BigInt.parse(
           "9999999999999999999999999999999999999999999999999999999");
-      final txHash = await _spendingDataSource.approve(owner, result, token);
+      final spendingAddress = await _secureStorage.readAddressContract() ?? '';
+      final txHash = await _spendingDataSource.approve(
+          spendingAddress, owner, result, token);
       await Future.delayed(const Duration(seconds: 1));
       return Right(txHash);
     } catch (e) {

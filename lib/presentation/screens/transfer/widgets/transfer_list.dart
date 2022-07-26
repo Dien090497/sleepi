@@ -71,9 +71,9 @@ class _TransferListState extends State<TransferList> {
                     isLoadingNotifier.value = false;
                     Navigator.pop(context);
                     if (str == 'done') {
-                      showSuccessfulDialog(context, str);
-                    } else if (str.isNotEmpty) {
-                      showSuccessfulDialog(context, null);
+                      showSuccessfulDialog(context, LocaleKeys.successfull);
+                    } else {
+                      showMessageDialog(context, str);
                     }
                   });
                 },

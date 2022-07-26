@@ -112,9 +112,13 @@ class UserImplementation extends IUserRepository {
   Future<Either<FailureMessage, GlobalConfigResponse>> getGlobalConfig() async {
     try {
       final result = await _authDataSource.getGlobalConfig();
-      await _secureStorage.saveAddressContract(
-          addressContract: result.contract);
-      await _secureStorage.saveMessage(saveMessage: result.messageSign);
+      await Future.wait([
+        _secureStorage.saveAddressContract(addressContract: result.contract),
+        _secureStorage.saveMessage(saveMessage: result.messageSign),
+        _secureStorage.setNftAddress(result.nftAddress.toJson()),
+        _secureStorage
+            .setTokenAddress(result.tokens.map((e) => e.address).toList()),
+      ]);
       return Right(result);
     } catch (e) {
       return Left(FailureMessage('$e'));
@@ -141,7 +145,7 @@ class UserImplementation extends IUserRepository {
     try {
       final contractAddr = estimateParam.type.toLowerCase() != 'avax'
           ? estimateParam.contractAddress
-          : '0x0000000000000000000000000000000000000000';
+          : 'Const.deadAddress';
       final result = await _authDataSource.estimateGasWithdraw(
           estimateParam.type, contractAddr);
       return Right(result);

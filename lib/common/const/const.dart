@@ -21,8 +21,10 @@ class Const {
   static const String linkTreeUrl = 'https://linktr.ee/sleefi';
   static const String litePaperUrl = 'https://sleefi.com/litepaper';
   static const String avascanUrl = 'https://avascan.info/';
-  static const String binanceUrlEn = 'https://accounts.binance.com/en/register?ref=Y528ROVY';
-  static const String binanceUrlJa = 'https://accounts.binance.com/ja/register?ref=Y528ROVY';
+  static const String binanceUrlEn =
+      'https://accounts.binance.com/en/register?ref=Y528ROVY';
+  static const String binanceUrlJa =
+      'https://accounts.binance.com/ja/register?ref=Y528ROVY';
   static const String okCoinUrl = 'https://www.okcoin.jp/';
   static const String contractRouterTestNet =
       '0xd7f655E3376cE2D7A2b08fF01Eb3B1023191A901';
@@ -101,33 +103,7 @@ class Const {
     },
   ];
 
-  static const listTokenAddressMainNet = [
-    '0xB97EF9Ef8734C71904D8002F8b6Bc66Dd9c48a6E',
-    '0xB97EF9Ef8734C71904D8002F8b6Bc66Dd9c48a6E',
-    '0xB31f66AA3C1e785363F0875A1B74E27b85FD66c7',
-    '0xB97EF9Ef8734C71904D8002F8b6Bc66Dd9c48a6E'
-  ];
-
-  static const listTokenAddressTestNet = [
-    '0x2bB8Bc1C29F34f3795661452Bf806cB5D65DF8DC',
-    '0x41Dd35f9e440ADecB9A04fA839D0be2b19722Ade',
-    '0xd00ae08403B9bbb9124bB305C09058E32C39A48c',
-    '0x950C6F4F97DD62bd3cA76f084663224FD2E6b555'
-  ];
-
-  static const listNFTAddressTestNet = [
-    '0xAd94cdceBA5cE30F04e1842d37edF950c031E405',
-    '0x19bD6f64d865A467478153A549568aa63d123Bd4',
-    '0x3C3D1C2e1a817d21C26aA99E146a6795b4748aD3',
-    '0x0CF58517D57Cc0479a7aDfdC7f5094624Bc2FcB9',
-  ];
-
-  static const listNFTAddressMainNet = [
-    '',
-    '',
-    '',
-    '',
-  ];
+  static const String deadAddress = '0x0000000000000000000000000000000000000000';
 
   static const listTypeHistory = [
     'txlist',
