@@ -6,9 +6,9 @@ part 'config_cost.g.dart';
 class ConfigCost{
   @JsonKey(name: 'NORMAL_GACHA_SINGLE')
   final int? normalGachaSingle;
-  @JsonKey(name: 'SPECIAL_GACHA_SINGLE')
-  final int? normalGachaMultiple;
   @JsonKey(name: 'NORMAL_GACHA_MULTIPLE')
+  final int? normalGachaMultiple;
+  @JsonKey(name: 'SPECIAL_GACHA_SINGLE')
   final int? specialGachaSingle;
   @JsonKey(name: 'SPECIAL_GACHA_MULTIPLE')
   final int? specialGachaMultiple;

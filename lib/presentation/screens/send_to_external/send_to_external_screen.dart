@@ -138,10 +138,24 @@ class _SendToExternalScreenState extends State<SendToExternalScreen> {
                                     const TextInputType.numberWithOptions(
                                         decimal: true),
                                     suffixIcon: Padding(
-                                        padding: const EdgeInsets.all(8.0),
-                                        child: SFIcon(args != null
-                                            ? args.icon
-                                            : Ics.icAvax)),
+                                        padding: const EdgeInsets.only(right: 8),
+                                        child: Row(
+                                          mainAxisAlignment: MainAxisAlignment.end,
+                                          mainAxisSize: MainAxisSize.min,
+                                          children: [
+                                            SFTextButton(
+                                              text: LocaleKeys.all,
+                                              textStyle: TextStyles.blue12,
+                                              onPressed: (){
+                                                controllerAmount.text = balance.formatBalanceToken;
+                                              },
+                                              // color: Colors.transparent,
+                                            ),
+                                            SFIcon(args != null
+                                                ? args.icon
+                                                : Ics.icAvax),
+                                          ],
+                                        )),
                                     controller: controllerAmount,
                                     onChanged: (value) {
                                       cubit.init();

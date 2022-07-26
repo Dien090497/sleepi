@@ -33,7 +33,7 @@ class GachaAnimationScreen extends StatefulWidget {
 }
 
 class _GachaAnimationScreenState extends State<GachaAnimationScreen>
-    with TickerProviderStateMixin {
+    with TickerProviderStateMixin, WidgetsBindingObserver {
   late AnimationController animationController;
   final audioPlayer = AudioPlayer();
   GachaAttributesItem? attributesItem;
@@ -54,6 +54,7 @@ class _GachaAnimationScreenState extends State<GachaAnimationScreen>
   @override
   void initState() {
     super.initState();
+    WidgetsBinding.instance.addObserver(this);
     Future.delayed(Duration.zero, () {
       setAudio();
     });
@@ -104,10 +105,23 @@ class _GachaAnimationScreenState extends State<GachaAnimationScreen>
 
   @override
   void dispose() {
+    WidgetsBinding.instance.removeObserver(this);
     audioPlayer.stop();
     animationController.dispose();
     audioPlayer.dispose();
     super.dispose();
+  }
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    super.didChangeAppLifecycleState(state);
+    if(state == AppLifecycleState.inactive || state == AppLifecycleState.detached) return;
+    if(state == AppLifecycleState.paused){
+      audioPlayer.setVolume(0);
+    }
+    if(state == AppLifecycleState.resumed){
+      audioPlayer.setVolume(1);
+    }
   }
 
   @override

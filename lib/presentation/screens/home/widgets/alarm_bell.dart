@@ -200,16 +200,15 @@ class AlarmBell extends StatelessWidget {
   }
 
   Future<void> _startPress(BuildContext context, DateTime selectedTime) async {
-    final isGranted = await _requestHealthAuthorization();
-
-    if (isGranted) {
-      return showCustomAlertDialog(
-        context,
-        children: PopUpConfirmStartTracking(
-          onPressed: () async {
-            Navigator.pop(context);
-            showWarningDialog(context, LocaleKeys.please_turn_on_tracking,
-                () async {
+    return showCustomAlertDialog(
+      context,
+      children: PopUpConfirmStartTracking(
+        onPressed: () async {
+          Navigator.pop(context);
+          showWarningDialog(context, LocaleKeys.please_turn_on_tracking,
+              () async {
+            final isGranted = await _requestHealthAuthorization();
+            if (isGranted) {
               final homeBloc = BlocProvider.of<HomeBloc>(context);
               final state = homeBloc.state;
               if (state is HomeLoaded) {
@@ -249,13 +248,13 @@ class AlarmBell extends StatelessWidget {
                   },
                 );
               }
-            });
-          },
-        ),
-      );
-    } else {
-      showMessageDialog(context, LocaleKeys.not_granted);
-    }
+            } else {
+              showMessageDialog(context, LocaleKeys.not_granted);
+            }
+          });
+        },
+      ),
+    );
   }
 
   Future<bool> _requestHealthAuthorization() async {

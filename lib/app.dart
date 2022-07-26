@@ -13,7 +13,7 @@ import 'package:slee_fi/presentation/blocs/user_bloc/user_bloc.dart';
 import 'package:slee_fi/presentation/blocs/wallet/wallet_cubit.dart';
 
 final RouteObserver<ModalRoute<void>> routeObserver =
-RouteObserver<ModalRoute<void>>();
+    RouteObserver<ModalRoute<void>>();
 
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
@@ -44,6 +44,7 @@ class MyApp extends StatelessWidget {
                 routes: AppRoutes.routes,
                 initialRoute: R.splash,
                 debugShowCheckedModeBanner: false,
+                navigatorKey: navKey,
                 navigatorObservers: [
                   routeObserver,
                   SentryNavigatorObserver(),
@@ -56,3 +57,5 @@ class MyApp extends StatelessWidget {
     );
   }
 }
+
+final navKey = GlobalKey<NavigatorState>();
