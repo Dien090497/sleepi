@@ -26,6 +26,7 @@ class TabJewelsBuy extends StatelessWidget {
 
   void _showJewelDialog(
       BuildContext context, MarketPlaceModel jewel, MarketPlaceCubit cubit) {
+    bool isBuying = false;
     showCustomAlertDialog(
       context,
       padding: const EdgeInsets.all(24),
@@ -33,6 +34,8 @@ class TabJewelsBuy extends StatelessWidget {
         jewel: jewel,
         cubit: cubit,
         onConfirmTap: () async {
+          if (isBuying) return;
+          isBuying = true;
           Navigator.pop(context);
           final msg = await cubit.buyNFT(jewel.nftId);
           cubit.refresh();
@@ -41,6 +44,7 @@ class TabJewelsBuy extends StatelessWidget {
           } else {
             showMessageDialog(context, msg);
           }
+          isBuying = false;
         },
       ),
     );
