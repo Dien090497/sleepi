@@ -76,7 +76,7 @@ Future<T?> showSuccessfulDialog<T>(
 }
 
 Future<T?> showMessageDialog<T>(BuildContext context, String message,
-    {EdgeInsets? padding, TextStyle? style, bool showImg = true}) async {
+    {EdgeInsets? padding, TextStyle? style}) async {
   return showCustomAlertDialog(
     context,
     padding: padding ?? const EdgeInsets.all(24),
@@ -84,11 +84,10 @@ Future<T?> showMessageDialog<T>(BuildContext context, String message,
       padding: const EdgeInsets.symmetric(vertical: 32, horizontal: 24),
       child: Column(
         children: [
-          if (showImg)
-            const SFIcon(
-              Imgs.errorNoBed,
-              height: 100,
-            ),
+          const SFIcon(
+            Imgs.errorNoBed,
+            height: 100,
+          ),
           const SizedBox(height: 32),
           SFText(
               keyText: message.tr(),
@@ -98,6 +97,46 @@ Future<T?> showMessageDialog<T>(BuildContext context, String message,
       ),
     ),
   );
+}
+
+Future<T?> showWarningDialog<T>(
+    BuildContext context, String message, VoidCallback onTap,
+    {EdgeInsets? padding, TextStyle? style}) async {
+  return showDialog(
+      context: context,
+      barrierColor: AppColors.backgroundDialog,
+      builder: (context) {
+        return SFDialog(
+          padding: EdgeInsets.zero,
+          children: [
+            Align(
+              alignment: Alignment.centerRight,
+              child: IconButton(
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+                icon: const Icon(Icons.close, color: AppColors.white),
+              ),
+            ),
+            SFText(
+                keyText: message.tr(),
+                textAlign: TextAlign.center,
+                style: style ?? TextStyles.bold18White),
+            const SizedBox(
+              height: 24,
+            ),
+            SFButton(
+              width: 180,
+              height: 48,
+              text: LocaleKeys.continue_,
+              onPressed: onTap,
+              textStyle: TextStyles.white16,
+              gradient: AppColors.gradientBlueButton,
+            ),
+            const SizedBox(height: 32),
+          ],
+        );
+      });
 }
 
 Future<T?> showSignUpSuccess<T>(BuildContext context, String? message) async {

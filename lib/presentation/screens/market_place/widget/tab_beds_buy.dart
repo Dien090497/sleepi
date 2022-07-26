@@ -26,7 +26,7 @@ class TabBedsBuy extends StatelessWidget {
   final MarketPlaceCubit cubit;
 
   void _showBedDialog(
-      BuildContext context, MarketPlaceModel bed, MarketPlaceCubit cubit) {
+      BuildContext context, MarketPlaceModel bed) {
     showCustomAlertDialog(
       context,
       padding: const EdgeInsets.all(24),
@@ -34,8 +34,8 @@ class TabBedsBuy extends StatelessWidget {
         bed: bed,
         cubit: cubit,
         onConfirmTap: () async {
-          Navigator.pop(context);
           final msg = await cubit.buyNFT(bed.nftId);
+          Navigator.pop(context,true);
           cubit.refresh();
           if (msg.isEmpty) {
             showSuccessfulDialog(context, LocaleKeys.purchased_successfully);
@@ -119,7 +119,7 @@ class TabBedsBuy extends StatelessWidget {
                                       cubit.refresh();
                                     },
                                     onBuyTap: (bed) {
-                                      _showBedDialog(context, bed, cubit);
+                                      _showBedDialog(context, bed);
                                     },
                                     onBedTap: (bed) {
                                       Navigator.pushNamed(context, R.nftInfo,

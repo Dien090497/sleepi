@@ -472,6 +472,6 @@
   "enough_times_mint": "Bed enough times mint",
   "minting_not_exists": "Can't get Minting",
   "mint_success": "Mint Success",
-  "mint_fail": "Mint Fail",
+  "mint_fail": "Mint Failed",
   "please_turn_on_tracking": "Please turn on sleep tracking tool supporting Google Fit"
 }
