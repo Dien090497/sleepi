@@ -49,7 +49,9 @@ class WalletCubit extends Cubit<WalletState> {
       (l) {
         emit(WalletState.error('$l'));
       },
-      (r) => loadCurrentWallet(r),
+      (r) {
+        loadCurrentWallet(r);
+      },
     );
   }
 
@@ -61,7 +63,9 @@ class WalletCubit extends Cubit<WalletState> {
       final walletCall = await _currentWalletUC.call(NoParams());
       walletCall.fold(
         (l) => emit(currentState.copyWith(isLoading: false)),
-        (r) => loadCurrentWallet(r),
+        (r) {
+          loadCurrentWallet(r);
+        },
       );
     } else if (currentState is! WalletStateLoading) {
       emit(const WalletState.loading());
@@ -83,7 +87,6 @@ class WalletCubit extends Cubit<WalletState> {
   }
 
   void loadCurrentWallet(WalletInfoEntity wallet) async {
-    final currentState = state;
     final nftAddresses =
         (await _getNftAddressesUC.call(NoParams())).getOrElse(() => []);
     final tokenAddresses =
@@ -107,7 +110,7 @@ class WalletCubit extends Cubit<WalletState> {
     final List nftNames = [
       LocaleKeys.bed.tr(),
       LocaleKeys.jewels.tr(),
-      LocaleKeys.bedbox.tr(),
+      LocaleKeys.bed_boxes.tr(),
       LocaleKeys.item.tr(),
     ];
     final List icons = [
@@ -147,6 +150,7 @@ class WalletCubit extends Cubit<WalletState> {
       );
       tokenList.add(tokenEntity);
     }
+    final currentState = state;
     if (currentState is WalletStateLoaded) {
       emit(currentState.copyWith(
         walletInfoEntity: wallet,
