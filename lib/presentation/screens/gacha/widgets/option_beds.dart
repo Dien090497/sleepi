@@ -27,6 +27,7 @@ class _OptionBedsState extends State<OptionBeds> {
     }
 
     return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children:  List.generate(optionList.length, (index) {
         return Expanded(
           child: GestureDetector(
@@ -61,39 +62,36 @@ class Option extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(
-          horizontal: 10),
+          horizontal: 8),
       child: Container(
-        padding: const EdgeInsets.symmetric(
-            horizontal: 8),
+        padding: const EdgeInsets.all(8),
         decoration: BoxDecoration(
             borderRadius:
             BorderRadius.circular(10),
             color:  AppColors.white
                 .withOpacity(0.1)),
-        child: Column(
-          children: [
-            const SizedBox(
-              height: 5,
-            ),
-            Align(
-              alignment: Alignment.topRight,
-              child: CustomRadio(
-                value: value,
-                groupValue: groupValue,
-                onChanged: (value){},
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.only(
-                  bottom: 10),
-              child: Center(
-                  child: SFText(
-                    keyText: title,
-                    style: textStyle ?? TextStyles.lightGrey12W700,
-                  )),
-            ),
-          ],
-        ),
+        child: Center(
+            child: SFText(
+              keyText: title,
+              style: textStyle ?? TextStyles.lightGrey12W700,
+              textAlign: TextAlign.center,
+            )),
+
+        // Column(
+        //   children: [
+            // const SizedBox(
+            //   height: 5,
+            // ),
+            // Align(
+            //   alignment: Alignment.topRight,
+            //   child: CustomRadio(
+            //     value: value,
+            //     groupValue: groupValue,
+            //   ),
+            // ),
+        //
+        //   ],
+        // ),
       ),
     );
   }

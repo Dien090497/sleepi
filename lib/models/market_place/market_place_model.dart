@@ -30,9 +30,11 @@ class MarketPlaceModel {
   final String price;
   final String symbol;
   final String? status;
+  final String? jewelCorrection;
   final String createdAt;
   final String updatedAt;
   final String nftName;
+  final String name;
   final String image;
   final String contractAddress;
   final String type;
@@ -59,6 +61,7 @@ class MarketPlaceModel {
     this.createdAt,
     this.updatedAt,
     this.nftName,
+    this.name,
     this.image,
     this.contractAddress,
     this.type,
@@ -67,6 +70,7 @@ class MarketPlaceModel {
     this.symbol,
     this.classNft,
     this.durability,
+    this.jewelCorrection,
     this.isMint,
     this.tokenId,
     this.startTime,

@@ -107,7 +107,7 @@ class PopUpJewelMarketPlace extends StatelessWidget {
           ),
           padding: const EdgeInsets.all(8),
           child: SFText(
-            keyText: jewel.nftName,
+            keyText: jewel.name,
             style: TextStyles.blue14,
           ),
         ),
@@ -126,7 +126,7 @@ class PopUpJewelMarketPlace extends StatelessWidget {
               Expanded(
                 child: SFText(
                   keyText:
-                      '+${jewel.infoBuff}% ${LocaleKeys.base.tr()} ${jewel.type.reCase(StringCase.titleCase)}',
+                      '+${jewel.jewelCorrection}% ${LocaleKeys.base.tr()} ${jewel.type.reCase(StringCase.titleCase)}',
                   style: TextStyles.blue16,
                   textAlign: TextAlign.right,
                 ),
