@@ -162,6 +162,7 @@ class BottomBarWidgetState extends State<BottomBarWidget> {
                       index = 2;
                       Navigator.pushNamed(context, R.mint, arguments: bedEntity)
                           .then((value) {
+                        widget.onBackIndividual();
                         index = -1;
                         setState(() {});
                       });
