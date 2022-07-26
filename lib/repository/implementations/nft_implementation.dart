@@ -191,7 +191,8 @@ class NFTImplementation extends INFTRepository {
         signedMessage: signature,
         signer: signer,
       );
-      print('schema123xx ${schema.signer} \n ${schema.signedMessage} ${schema.tokenId} \n ${schema.type} \n ${schema.contractAddress}');
+      print(
+          'schema123xx ${schema.signer} \n ${schema.signedMessage} ${schema.tokenId} \n ${schema.type} \n ${schema.contractAddress}');
       final result = await _authDataSource.withdrawNFT(schema);
       return Right(result);
     } catch (e) {
@@ -293,7 +294,7 @@ class NFTImplementation extends INFTRepository {
     try {
       return Right(await _secureStorage.getTokenAddress() ?? []);
     } catch (e) {
-    return Left(FailureMessage.fromException(e));
+      return Left(FailureMessage.fromException(e));
     }
   }
 }

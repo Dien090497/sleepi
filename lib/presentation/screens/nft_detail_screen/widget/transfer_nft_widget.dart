@@ -91,8 +91,8 @@ class _ListTransferNftWidgetState extends State<ListTransferNftWidget> {
                           BedType.values[index % BedType.values.length];
                       final userState =
                           context.read<UserBloc>().state as UserLoaded;
-                      final walletState =
-                          context.read<WalletCubit>() as WalletStateLoaded;
+                      final walletState = context.read<WalletCubit>().state
+                          as WalletStateLoaded;
 
                       return GestureDetector(
                         onTap: () async {
