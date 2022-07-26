@@ -1,4 +1,3 @@
-import 'dart:developer';
 import 'dart:io';
 
 import 'package:device_info_plus/device_info_plus.dart';
@@ -22,13 +21,10 @@ class AuthInterceptor extends Interceptor {
         ? await _deviceInfoPlugin.iosInfo
         : await _deviceInfoPlugin.androidInfo;
     final token = await _secureStorage.getAccessToken();
-    final refreshToken = await _secureStorage.getRefreshToken();
     if (token != null) {
       options.headers['Authorization'] = 'Bearer $token';
     }
     debugPrint('### ${options.uri}');
-    log('### token $token');
-    log('### refresh $refreshToken');
     if (deviceInfo is AndroidDeviceInfo) {
       options.headers['Device-Id'] = '${deviceInfo.id}';
     } else if (deviceInfo is IosDeviceInfo) {

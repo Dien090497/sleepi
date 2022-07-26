@@ -19,39 +19,24 @@ mixin _$TransferState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() success,
-    required TResult Function(
-            bool isToSpending,
-            bool isLoading,
-            String? errorMsg,
-            String? typeError,
-            bool? needApprove,
-            TransferSpendingEntity? transferSpendingEntity)
+    required TResult Function(bool isToSpending, bool isLoading,
+            String? errorMsg, String? typeError, bool? needApprove)
         loaded,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? success,
-    TResult Function(
-            bool isToSpending,
-            bool isLoading,
-            String? errorMsg,
-            String? typeError,
-            bool? needApprove,
-            TransferSpendingEntity? transferSpendingEntity)?
+    TResult Function(bool isToSpending, bool isLoading, String? errorMsg,
+            String? typeError, bool? needApprove)?
         loaded,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? success,
-    TResult Function(
-            bool isToSpending,
-            bool isLoading,
-            String? errorMsg,
-            String? typeError,
-            bool? needApprove,
-            TransferSpendingEntity? transferSpendingEntity)?
+    TResult Function(bool isToSpending, bool isLoading, String? errorMsg,
+            String? typeError, bool? needApprove)?
         loaded,
     required TResult orElse(),
   }) =>
@@ -115,12 +100,20 @@ class __$$TransferSuccessCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$TransferSuccess implements TransferSuccess {
+class _$TransferSuccess
+    with DiagnosticableTreeMixin
+    implements TransferSuccess {
   const _$TransferSuccess();
 
   @override
-  String toString() {
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
     return 'TransferState.success()';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty('type', 'TransferState.success'));
   }
 
   @override
@@ -136,13 +129,8 @@ class _$TransferSuccess implements TransferSuccess {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() success,
-    required TResult Function(
-            bool isToSpending,
-            bool isLoading,
-            String? errorMsg,
-            String? typeError,
-            bool? needApprove,
-            TransferSpendingEntity? transferSpendingEntity)
+    required TResult Function(bool isToSpending, bool isLoading,
+            String? errorMsg, String? typeError, bool? needApprove)
         loaded,
   }) {
     return success();
@@ -152,13 +140,8 @@ class _$TransferSuccess implements TransferSuccess {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? success,
-    TResult Function(
-            bool isToSpending,
-            bool isLoading,
-            String? errorMsg,
-            String? typeError,
-            bool? needApprove,
-            TransferSpendingEntity? transferSpendingEntity)?
+    TResult Function(bool isToSpending, bool isLoading, String? errorMsg,
+            String? typeError, bool? needApprove)?
         loaded,
   }) {
     return success?.call();
@@ -168,13 +151,8 @@ class _$TransferSuccess implements TransferSuccess {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? success,
-    TResult Function(
-            bool isToSpending,
-            bool isLoading,
-            String? errorMsg,
-            String? typeError,
-            bool? needApprove,
-            TransferSpendingEntity? transferSpendingEntity)?
+    TResult Function(bool isToSpending, bool isLoading, String? errorMsg,
+            String? typeError, bool? needApprove)?
         loaded,
     required TResult orElse(),
   }) {
@@ -230,8 +208,7 @@ abstract class _$$TransferLoadedCopyWith<$Res> {
       bool isLoading,
       String? errorMsg,
       String? typeError,
-      bool? needApprove,
-      TransferSpendingEntity? transferSpendingEntity});
+      bool? needApprove});
 }
 
 /// @nodoc
@@ -252,7 +229,6 @@ class __$$TransferLoadedCopyWithImpl<$Res>
     Object? errorMsg = freezed,
     Object? typeError = freezed,
     Object? needApprove = freezed,
-    Object? transferSpendingEntity = freezed,
   }) {
     return _then(_$TransferLoaded(
       isToSpending: isToSpending == freezed
@@ -275,24 +251,19 @@ class __$$TransferLoadedCopyWithImpl<$Res>
           ? _value.needApprove
           : needApprove // ignore: cast_nullable_to_non_nullable
               as bool?,
-      transferSpendingEntity: transferSpendingEntity == freezed
-          ? _value.transferSpendingEntity
-          : transferSpendingEntity // ignore: cast_nullable_to_non_nullable
-              as TransferSpendingEntity?,
     ));
   }
 }
 
 /// @nodoc
 
-class _$TransferLoaded implements TransferLoaded {
+class _$TransferLoaded with DiagnosticableTreeMixin implements TransferLoaded {
   const _$TransferLoaded(
       {required this.isToSpending,
       this.isLoading = false,
       this.errorMsg,
       this.typeError,
-      this.needApprove,
-      this.transferSpendingEntity});
+      this.needApprove});
 
   @override
   final bool isToSpending;
@@ -305,12 +276,22 @@ class _$TransferLoaded implements TransferLoaded {
   final String? typeError;
   @override
   final bool? needApprove;
-  @override
-  final TransferSpendingEntity? transferSpendingEntity;
 
   @override
-  String toString() {
-    return 'TransferState.loaded(isToSpending: $isToSpending, isLoading: $isLoading, errorMsg: $errorMsg, typeError: $typeError, needApprove: $needApprove, transferSpendingEntity: $transferSpendingEntity)';
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+    return 'TransferState.loaded(isToSpending: $isToSpending, isLoading: $isLoading, errorMsg: $errorMsg, typeError: $typeError, needApprove: $needApprove)';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('type', 'TransferState.loaded'))
+      ..add(DiagnosticsProperty('isToSpending', isToSpending))
+      ..add(DiagnosticsProperty('isLoading', isLoading))
+      ..add(DiagnosticsProperty('errorMsg', errorMsg))
+      ..add(DiagnosticsProperty('typeError', typeError))
+      ..add(DiagnosticsProperty('needApprove', needApprove));
   }
 
   @override
@@ -324,9 +305,7 @@ class _$TransferLoaded implements TransferLoaded {
             const DeepCollectionEquality().equals(other.errorMsg, errorMsg) &&
             const DeepCollectionEquality().equals(other.typeError, typeError) &&
             const DeepCollectionEquality()
-                .equals(other.needApprove, needApprove) &&
-            const DeepCollectionEquality()
-                .equals(other.transferSpendingEntity, transferSpendingEntity));
+                .equals(other.needApprove, needApprove));
   }
 
   @override
@@ -336,8 +315,7 @@ class _$TransferLoaded implements TransferLoaded {
       const DeepCollectionEquality().hash(isLoading),
       const DeepCollectionEquality().hash(errorMsg),
       const DeepCollectionEquality().hash(typeError),
-      const DeepCollectionEquality().hash(needApprove),
-      const DeepCollectionEquality().hash(transferSpendingEntity));
+      const DeepCollectionEquality().hash(needApprove));
 
   @JsonKey(ignore: true)
   @override
@@ -348,53 +326,36 @@ class _$TransferLoaded implements TransferLoaded {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() success,
-    required TResult Function(
-            bool isToSpending,
-            bool isLoading,
-            String? errorMsg,
-            String? typeError,
-            bool? needApprove,
-            TransferSpendingEntity? transferSpendingEntity)
+    required TResult Function(bool isToSpending, bool isLoading,
+            String? errorMsg, String? typeError, bool? needApprove)
         loaded,
   }) {
-    return loaded(isToSpending, isLoading, errorMsg, typeError, needApprove,
-        transferSpendingEntity);
+    return loaded(isToSpending, isLoading, errorMsg, typeError, needApprove);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? success,
-    TResult Function(
-            bool isToSpending,
-            bool isLoading,
-            String? errorMsg,
-            String? typeError,
-            bool? needApprove,
-            TransferSpendingEntity? transferSpendingEntity)?
+    TResult Function(bool isToSpending, bool isLoading, String? errorMsg,
+            String? typeError, bool? needApprove)?
         loaded,
   }) {
-    return loaded?.call(isToSpending, isLoading, errorMsg, typeError,
-        needApprove, transferSpendingEntity);
+    return loaded?.call(
+        isToSpending, isLoading, errorMsg, typeError, needApprove);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? success,
-    TResult Function(
-            bool isToSpending,
-            bool isLoading,
-            String? errorMsg,
-            String? typeError,
-            bool? needApprove,
-            TransferSpendingEntity? transferSpendingEntity)?
+    TResult Function(bool isToSpending, bool isLoading, String? errorMsg,
+            String? typeError, bool? needApprove)?
         loaded,
     required TResult orElse(),
   }) {
     if (loaded != null) {
-      return loaded(isToSpending, isLoading, errorMsg, typeError, needApprove,
-          transferSpendingEntity);
+      return loaded(isToSpending, isLoading, errorMsg, typeError, needApprove);
     }
     return orElse();
   }
@@ -437,15 +398,13 @@ abstract class TransferLoaded implements TransferState {
       final bool isLoading,
       final String? errorMsg,
       final String? typeError,
-      final bool? needApprove,
-      final TransferSpendingEntity? transferSpendingEntity}) = _$TransferLoaded;
+      final bool? needApprove}) = _$TransferLoaded;
 
   bool get isToSpending;
   bool get isLoading;
   String? get errorMsg;
   String? get typeError;
   bool? get needApprove;
-  TransferSpendingEntity? get transferSpendingEntity;
   @JsonKey(ignore: true)
   _$$TransferLoadedCopyWith<_$TransferLoaded> get copyWith =>
       throw _privateConstructorUsedError;
