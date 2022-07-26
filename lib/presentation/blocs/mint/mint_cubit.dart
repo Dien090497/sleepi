@@ -35,7 +35,11 @@ class MintCubit extends Cubit<MintState> {
     result.fold((l) {
       emit(MintState.error('$l'));
     }, (r) {
-      r.removeWhere((element) => element.nftId == bedParentId1 || element.nft!.isLock == 1 || element.nftType != 'bed' || element.bedMint == 7);
+      r.removeWhere((element) =>
+          element.nftId == bedParentId1 ||
+          element.isLock == 1 ||
+          element.nftType != 'bed' ||
+          element.bedMint == 7);
       final currentState = state;
       if (currentState is MintStateLoaded) {
         emit(MintState.loaded(
@@ -100,9 +104,9 @@ class MintCubit extends Cubit<MintState> {
         result.fold((l) {
           emit(MintState.error('$l'));
         }, (r) {
-          if(r['status']) {
+          if (r['status']) {
             emit(currentState.copyWith(statusMint: true));
-          }else{
+          } else {
             emit(MintState.error(r['msg'].toString()));
           }
         });

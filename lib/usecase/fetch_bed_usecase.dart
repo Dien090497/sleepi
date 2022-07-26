@@ -1,16 +1,16 @@
 import 'package:dartz/dartz.dart';
+import 'package:slee_fi/entities/bed_entity/bed_entity.dart';
 import 'package:slee_fi/failures/failure.dart';
-import 'package:slee_fi/models/bed_model/beb_model.dart';
 import 'package:slee_fi/repository/user_repository.dart';
 import 'package:slee_fi/usecase/usecase.dart';
 
-class FetchBedUseCase extends UseCase<List<BedModel>, FetchBedParam> {
+class FetchBedUseCase extends UseCase<List<BedEntity>, FetchBedParam> {
   final IUserRepository _iUserRepository;
 
   FetchBedUseCase(this._iUserRepository);
 
   @override
-  Future<Either<FailureMessage, List<BedModel>>> call(params) {
+  Future<Either<FailureMessage, List<BedEntity>>> call(params) {
     return _iUserRepository.fetchListBed(params);
   }
 }

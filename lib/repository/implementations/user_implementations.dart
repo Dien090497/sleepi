@@ -12,7 +12,6 @@ import 'package:slee_fi/entities/jewel_entity/jewel_entity.dart';
 import 'package:slee_fi/entities/tracking_result_chart_data_entity/tracking_result_chart_data_entity.dart';
 import 'package:slee_fi/entities/tracking_result_chart_days_entity/tracking_result_chart_days_entity.dart';
 import 'package:slee_fi/failures/failure.dart';
-import 'package:slee_fi/models/bed_model/beb_model.dart';
 import 'package:slee_fi/models/estimate_sleep_response/estimate_sleep_response.dart';
 import 'package:slee_fi/models/global_config_response/global_config_response.dart';
 import 'package:slee_fi/models/lucky_box/lucky_box.dart';
@@ -21,7 +20,6 @@ import 'package:slee_fi/models/response_model/response_model.dart';
 import 'package:slee_fi/models/swap_token_to_wallet_response/swap_token_to_wallet_response.dart';
 import 'package:slee_fi/models/token_spending/token_spending.dart';
 import 'package:slee_fi/models/upgrade_jewel_info_response/upgrade_info_response.dart';
-import 'package:slee_fi/models/verify_response/verify_response.dart';
 import 'package:slee_fi/models/withdraw_history_response/withdraw_history_response.dart';
 import 'package:slee_fi/repository/user_repository.dart';
 import 'package:slee_fi/schema/add_jewel_schema/add_jewel_schema.dart';
@@ -161,7 +159,7 @@ class UserImplementation extends IUserRepository {
   }
 
   @override
-  Future<Either<FailureMessage, List<BedModel>>> fetchListBed(
+  Future<Either<FailureMessage, List<BedEntity>>> fetchListBed(
       FetchBedParam fetchBedParam) async {
     try {
       final result = await _authDataSource.getNftByOwner(
@@ -170,7 +168,7 @@ class UserImplementation extends IUserRepository {
         fetchBedParam.categoryId.type,
         fetchBedParam.bedType,
       );
-      return Right(result.list);
+      return Right(result.list.map((e) => e.toEntity()).toList());
     } catch (e) {
       return Left(FailureMessage.fromException(e));
     }
@@ -415,10 +413,10 @@ class UserImplementation extends IUserRepository {
   }
 
   @override
-  Future<Either<FailureMessage, dynamic>> openBedBox(int bedId) async {
+  Future<Either<FailureMessage, BedEntity>> openBedBox(int bedId) async {
     try {
       final result = await _authDataSource.openBedBox(bedId);
-      return Right(result);
+      return Right(result.toEntity());
     } catch (e) {
       return Left(FailureMessage.fromException(e));
     }

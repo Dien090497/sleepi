@@ -239,7 +239,7 @@ abstract class AuthDataSource {
       @Body() FilterItemSchema filterItemSchema);
 
   @POST('/nft-attributes/open-bedbox')
-  Future<dynamic> openBedBox(@Query('bedboxId') int bedId);
+  Future<BedModel> openBedBox(@Query('bedboxId') int bedId);
 
   @POST('/stacking/unstacking')
   Future<dynamic> unStacking();

@@ -56,8 +56,7 @@ class _PopUpSelectBedState extends State<PopUpSelectBed> {
                               return ItemBed(
                                 id: state.listBed[i].tokenId.toString(),
                                 image: state.listBed[i].image,
-                                bedType: state.listBed[i].nftClass ??
-                                    state.listBed[i].nftType,
+                                bedType: state.listBed[i].nftClass,
                                 selected: state.indexSelected == i,
                                 quality: state.listBed[i].quality,
                                 onTap: () {
