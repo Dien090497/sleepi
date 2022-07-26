@@ -37,15 +37,15 @@ class ToastUtils {
         });
   }
 
-  static showToastBottom (String message, Color? color) {
+  static showToastBottom(String message, Color? color,
+      {ToastGravity gravity = ToastGravity.BOTTOM}) {
     return Fluttertoast.showToast(
         msg: message,
         toastLength: Toast.LENGTH_SHORT,
-        gravity: ToastGravity.BOTTOM,
+        gravity: gravity,
         timeInSecForIosWeb: 2,
         backgroundColor: color ?? AppColors.red,
         // textColor: Colors.white,
-        fontSize: 14.0
-    );
+        fontSize: 14.0);
   }
 }

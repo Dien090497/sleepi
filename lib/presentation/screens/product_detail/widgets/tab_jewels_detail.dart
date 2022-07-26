@@ -16,6 +16,7 @@ import 'package:slee_fi/presentation/screens/info_individual/widget/pop_up_sell.
 import 'package:slee_fi/presentation/screens/product_detail/widgets/auto_reset_tab_widget.dart';
 import 'package:slee_fi/presentation/screens/product_detail/widgets/jewel_dialog_body.dart';
 import 'package:slee_fi/presentation/screens/product_detail/widgets/my_jewel_short_widget.dart';
+import 'package:slee_fi/presentation/screens/product_detail/widgets/pop_up_transfer.dart';
 import 'package:slee_fi/presentation/screens/product_detail/widgets/upgrade_tab.dart';
 
 class TabJewelsDetail extends StatelessWidget {
@@ -26,6 +27,7 @@ class TabJewelsDetail extends StatelessWidget {
     return AutoResetTabWidget(
         onRefreshTab: () {
           BlocProvider.of<JewelBloc>(context).add(const JewelRefreshList());
+
         },
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 12.0),
@@ -136,9 +138,19 @@ class TabJewelsDetail extends StatelessWidget {
               ),
             ]);
           },
-          onTransferTap: () {},
+          onTransferTap: () {
+            Navigator.pop(context);
+            _onTransfer(context, jewel);
+          },
         ),
       ],
+    );
+  }
+
+  void _onTransfer(BuildContext context, BedEntity bedEntity) {
+    showCustomDialog(
+      context,
+      children: [PopUpTransferNFT(bedEntity: bedEntity)],
     );
   }
 }

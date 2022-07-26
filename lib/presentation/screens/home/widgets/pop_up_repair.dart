@@ -13,20 +13,22 @@ import 'package:slee_fi/presentation/blocs/bottom_bar_infoIndividual/bottom_bar_
 import 'package:syncfusion_flutter_sliders/sliders.dart';
 
 class PopUpRepair extends StatelessWidget {
-  const PopUpRepair(
-      {Key? key, required this.bedEntity, required this.cubit,})
-      : super(key: key);
+  const PopUpRepair({
+    Key? key,
+    required this.bedEntity,
+    required this.cubit,
+  }) : super(key: key);
 
   final BedEntity bedEntity;
   final BottomBarInfoIndividualCubit cubit;
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<BottomBarInfoIndividualCubit, BottomBarInfoIndividualState>(
+    return BlocBuilder<BottomBarInfoIndividualCubit,
+        BottomBarInfoIndividualState>(
       bloc: cubit,
       builder: (context, state) {
-        if (state is BottomBarInfoIndividualLoaded) {
-        }
+        if (state is BottomBarInfoIndividualLoaded) {}
         return Stack(
           children: [
             Positioned(
@@ -47,92 +49,99 @@ class PopUpRepair extends StatelessWidget {
                   keyText: LocaleKeys.repair,
                   style: TextStyles.white1w700size16,
                 ),
-                SFIcon(bedEntity.image, height: 160,),
-                const SizedBox(height: 10,),
-                state is BottomBarInfoIndividualLoaded ?
-                SFText(
-                  keyText: LocaleKeys.durability,
-                  suffix: ' : ${bedEntity.durability.toInt()}/100',
-                  style: TextStyles.white16,
-                ) :
-                SFText(
-                  keyText: LocaleKeys.durability,
-                  suffix: ' : --/100',
-                  style: TextStyles.white16,
+                SFIcon(
+                  bedEntity.image,
+                  height: 160,
                 ),
-                state is BottomBarInfoIndividualLoaded ?
-                Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 12),
-                  child: SfSlider(
-                    value: state.valueRepair ?? bedEntity.durability,
-                    min: 0,
-                    max: 100,
-                    activeColor: AppColors.green,
-                    thumbIcon: Container(
-                      width: 16,
-                      height: 16,
-                      decoration: const BoxDecoration(
-                        color: AppColors.white,
-                        shape: BoxShape.circle,
+                const SizedBox(
+                  height: 10,
+                ),
+                state is BottomBarInfoIndividualLoaded
+                    ? SFText(
+                        keyText: LocaleKeys.durability,
+                        suffix: ' : ${bedEntity.durability.toInt()}/100',
+                        style: TextStyles.white16,
+                      )
+                    : SFText(
+                        keyText: LocaleKeys.durability,
+                        suffix: ' : --/100',
+                        style: TextStyles.white16,
                       ),
-                      padding: const EdgeInsets.all(4),
-                      child: Container(
-                        decoration: const BoxDecoration(
-                          color: AppColors.green,
-                          shape: BoxShape.circle,
+                state is BottomBarInfoIndividualLoaded
+                    ? Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 12),
+                        child: SfSlider(
+                          value: state.valueRepair ?? bedEntity.durability,
+                          min: 0,
+                          max: 100,
+                          activeColor: AppColors.green,
+                          thumbIcon: Container(
+                            width: 16,
+                            height: 16,
+                            decoration: const BoxDecoration(
+                              color: AppColors.white,
+                              shape: BoxShape.circle,
+                            ),
+                            padding: const EdgeInsets.all(4),
+                            child: Container(
+                              decoration: const BoxDecoration(
+                                color: AppColors.green,
+                                shape: BoxShape.circle,
+                              ),
+                            ),
+                          ),
+                          onChanged: (v) {
+                            cubit.changeRepair(
+                                valueRepair: v,
+                                durability: bedEntity.durability);
+                          },
+                        ),
+                      )
+                    : Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 12),
+                        child: SfSlider(
+                          value: 0,
+                          min: 0,
+                          max: 100,
+                          activeColor: AppColors.green,
+                          thumbIcon: Container(
+                            width: 16,
+                            height: 16,
+                            decoration: const BoxDecoration(
+                              color: AppColors.white,
+                              shape: BoxShape.circle,
+                            ),
+                            padding: const EdgeInsets.all(4),
+                            child: Container(
+                              decoration: const BoxDecoration(
+                                color: AppColors.green,
+                                shape: BoxShape.circle,
+                              ),
+                            ),
+                          ),
+                          onChanged: (v) {},
                         ),
                       ),
-                    ),
-                    onChanged: (v) {
-                      cubit.changeRepair(valueRepair: v, durability: bedEntity.durability);
-                    },
-                  ),
-                ) :
-                Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 12),
-                  child: SfSlider(
-                    value: 0,
-                    min: 0,
-                    max: 100,
-                    activeColor: AppColors.green,
-                    thumbIcon: Container(
-                      width: 16,
-                      height: 16,
-                      decoration: const BoxDecoration(
-                        color: AppColors.white,
-                        shape: BoxShape.circle,
-                      ),
-                      padding: const EdgeInsets.all(4),
-                      child: Container(
-                        decoration: const BoxDecoration(
-                          color: AppColors.green,
-                          shape: BoxShape.circle,
-                        ),
-                      ),
-                    ),
-                    onChanged: (v) {},
-                  ),
-                ),
                 const SizedBox(height: 32),
-                state is BottomBarInfoIndividualLoaded ?
-                SFLabelValue(
-                  label: LocaleKeys.cost,
-                  value: '${state.cost?.toStringAsFixed(1) ?? (((state.feeRepair?.fee ?? 0) * (100 - bedEntity.durability)).toStringAsFixed(1))  } SLFT',
-                  styleValue: TextStyles.white16,
-                ) :
-                const SFLabelValue(
-                  label: LocaleKeys.cost,
-                  value: '-- SLFT',
-                  styleValue: TextStyles.white16,
-                ),
+                state is BottomBarInfoIndividualLoaded
+                    ? SFLabelValue(
+                        label: LocaleKeys.cost,
+                        value:
+                            '${state.cost?.toStringAsFixed(1) ?? (((state.feeRepair?.fee ?? 0) * (100 - bedEntity.durability)).toStringAsFixed(1))} SLFT',
+                        styleValue: TextStyles.white16,
+                      )
+                    : const SFLabelValue(
+                        label: LocaleKeys.cost,
+                        value: '-- SLFT',
+                        styleValue: TextStyles.white16,
+                      ),
                 const SizedBox(height: 24),
                 Row(
                   children: [
                     Expanded(
                       child: SFButton(
                         text: LocaleKeys.cancel,
-                        onPressed: () {
-                        },
+                        onPressed: () {},
                         width: double.infinity,
                         textStyle: TextStyles.lightGrey16,
                         color: AppColors.light4,
@@ -143,10 +152,13 @@ class PopUpRepair extends StatelessWidget {
                       child: SFButton(
                         text: LocaleKeys.confirm,
                         onPressed: () {
+                          Navigator.pop(context, true);
                           if (state is BottomBarInfoIndividualLoaded) {
-                            cubit.repairNFT(bedId: bedEntity.nftId, durability: state.valueRepair?.toInt() ?? (100 - bedEntity.durability.toInt()));
+                            cubit.repairNFT(
+                                bedId: bedEntity.nftId,
+                                durability: state.valueRepair?.toInt() ??
+                                    (100 - bedEntity.durability.toInt()));
                           }
-                          Navigator.pop(context);
                         },
                         width: double.infinity,
                         textStyle: TextStyles.white16,

@@ -211,7 +211,7 @@ class _SliderState extends State<_Slider> {
               showTicks: true,
               showLabels: true,
               stepSize: 1,
-              minorTicksPerInterval: 1,
+              minorTicksPerInterval: 2,
               endThumbIcon: const ThumbIcon(),
               startThumbIcon: const ThumbIcon(),
               enableTooltip: true,
