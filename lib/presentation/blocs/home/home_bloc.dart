@@ -107,7 +107,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
   }
 
   void _onRefresh(RefreshBed event, Emitter<HomeState> emit) async {
-    // _currentPageBed = 1;
+    _currentPageBed = 1;
     final currentState = state;
     if (currentState is HomeLoaded) {
       if (currentState.loading) return;
