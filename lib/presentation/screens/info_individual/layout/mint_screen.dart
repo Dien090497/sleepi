@@ -37,24 +37,9 @@ class _MintScreenState extends State<MintScreen> with TickerProviderStateMixin{
   @override
   void initState() {
     super.initState();
-
     animationController = AnimationController(vsync: this, duration: const Duration(milliseconds: 2));
-    animationController.addStatusListener((status) async {
-
-      if (status == AnimationStatus.completed) {
-        // final cubit = context.read<MintCubit>();
-        // cubit.mint();
-        animationController.reset();
-      }
-    });
   }
 
-  @override
-  void dispose() {
-    animationController.dispose();
-    super.dispose();
-  }
-  
   @override
   Widget build(BuildContext context) {
     final args = ModalRoute.of(context)?.settings.arguments as BedEntity;
@@ -299,12 +284,12 @@ class _MintScreenState extends State<MintScreen> with TickerProviderStateMixin{
                             width: size.width,
                             gradient: AppColors.gradientBlueButton,
                             textStyle: TextStyles.white16,
-                            // disabled: state is MintStateLoaded
-                            //     ? state.indexSelected == -1
-                            //     : true,
+                            disabled: state is MintStateLoaded
+                                ? state.indexSelected == -1
+                                : true,
                             onPressed: () {
-                              // animationController.forward();
-                              cubit.mint();
+                              animationController.forward();
+                              // cubit.mint();
                             },
                           ),
                         ),

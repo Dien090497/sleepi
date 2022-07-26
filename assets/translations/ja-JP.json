@@ -242,7 +242,7 @@
   "spending_account": "スペンディング",
   "you_need_to_have_token_in_spending": "NFTを購入するためにはスペンディングにAVAXが必要です。稼いだSLFTやSLGTもスペンディングに貯まります。",
   "users_will_need_to_have": "NFTを購入するためにはスペンディングにAVAXが必要です。稼いだSLFTやSLGTもスペンディングに貯まります。",
-  "you_can_send_receive_and_trade": "あなたは資産を送受金したり、互いに交換することができます。",
+  "you_can_send_receive_and_trade": "ここでアラームの設定ができます。",
   "receive": "受取り",
   "to_spending": "スペンディングに送る",
   "to_external": "外部のウォレットに送る",
@@ -430,10 +430,10 @@
   "speed_up_success": "Speed up success",
   "cancel_sell": "Cancel Sell",
   "do_you_really_want_to_cancel_sell": "Do you really want to cancel sell nft?",
-  "consume_and_turn_gacha_time": "Consume {price} SLFT and turn Gacha {quantity} time",
+  "consume_and_turn_gacha_time": "{price} SLFTを使用してガチャを{quantity}回回す",
   "selling": "Selling",
   "you_can_set_your_alarm_here": "アラームの設定",
   "taking_off_jewel_with_cost": "Taking off Jewel cost 100 SLFT. Are you sure?",
   "not_enough_the_same_level_and_type": "Not enough {} in same level and type. Please purchase and try again.",
-  "genenis_common_bed": "Genesis Common Bed"
+  "genenis_common_bed": "ジェネシスコモンベッド"
 }

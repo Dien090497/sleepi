@@ -66,7 +66,7 @@ class _GachaAnimationScreenState extends State<GachaAnimationScreen>
       if (status == AnimationStatus.completed) {
         if (args != null && args.spinInfo != null) {
           if (args.spinInfo!.gift.length == Const.one) {
-            if(args.spinInfo!.gift.first['type'] == 'SLFT'){
+            if(args.spinInfo!.gift.first['type'] == 'slft'){
               setState(() {
                 isShowResult = true;
                 image = Ics.icSlft;

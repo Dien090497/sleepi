@@ -36,7 +36,6 @@ class AllResultDetailScreen extends StatelessWidget {
     }else {
       type = args?.attributesItem?.quality;
     }
-    print(args?.image);
     return BackgroundWidget(
       appBar: SFAppBar(
         context: context,
