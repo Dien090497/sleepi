@@ -208,6 +208,7 @@ class BottomBarWidgetState extends State<BottomBarWidget> {
                         showCreateOrImportWallet().then(
                             (value) => _showWarningDialog(value, context));
                       } else {
+                        cubit.estimateGas(contractAddress: bedEntity.contractAddress);
                         showCustomDialog(
                           context,
                           children: [
