@@ -118,6 +118,9 @@ Future<T?> showWarningDialog<T>(
                 icon: const Icon(Icons.close, color: AppColors.white),
               ),
             ),
+            const SizedBox(
+              height: 24,
+            ),
             SFText(
                 keyText: message.tr(),
                 textAlign: TextAlign.center,

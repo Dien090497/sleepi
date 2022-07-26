@@ -109,7 +109,6 @@ Future<void> onStart(ServiceInstance service) async {
   try {
     DartPluginRegistrant.ensureInitialized();
     final audioPlayer = AudioPlayer();
-    audioPlayer.setLoopMode(LoopMode.all);
 
     if (service is AndroidServiceInstance) {
       service.on(Const.setAsForeground).listen((event) {
@@ -143,12 +142,15 @@ Future<void> onStart(ServiceInstance service) async {
       );
     }
 
+    print("=--=-==-$time");
+
     Timer.periodic(Duration(seconds: time), (timer) async {
       if (!audioPlayer.playing) {
+        print("=--=-==-playing$time");
         await audioPlayer.setAsset(Const.soundAlarm[sound]).then((value) async {
           await audioPlayer.setVolume(1);
-          await audioPlayer.play();
           await audioPlayer.setLoopMode(LoopMode.all);
+          await audioPlayer.play();
         });
       }
       timer.cancel();

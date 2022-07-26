@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:health/health.dart';
 import 'package:slee_fi/common/routes/app_routes.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
@@ -20,10 +21,7 @@ class HealthcarePermissionScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final arg = ModalRoute
-        .of(context)
-        ?.settings
-        .arguments as HealthcareArg?;
+    final arg = ModalRoute.of(context)?.settings.arguments as HealthcareArg?;
     return SafeArea(
       child: BackgroundWidget(
         child: Stack(children: [
@@ -60,15 +58,21 @@ class HealthcarePermissionScreen extends StatelessWidget {
                 color: AppColors.blue,
                 text: LocaleKeys.allow,
                 textStyle: TextStyles.w600WhiteSize16,
-                onPressed: () {
-                  if (arg?.isSignUp == true) {
+                onPressed: () async {
+                  final isGranted = await _requestHealthAuthorization();
+                  if (isGranted) {
+                    if (arg?.isSignUp == true) {
+                      Navigator.pushNamedAndRemoveUntil(
+                          context, R.notificationPermission, (_) => false,
+                          arguments: NotificationPermissionArg(true));
+                      return;
+                    }
                     Navigator.pushNamedAndRemoveUntil(
-                        context, R.notificationPermission, (_) => false,
-                    arguments: NotificationPermissionArg(true));
-                    return;
+                      context,
+                      R.motionDataPermission,
+                      (_) => false,
+                    );
                   }
-                  Navigator.pushNamedAndRemoveUntil(
-                    context, R.motionDataPermission, (_) => false,);
                 },
               ),
             ),
@@ -76,5 +80,20 @@ class HealthcarePermissionScreen extends StatelessWidget {
         ]),
       ),
     );
+  }
+
+  Future<bool> _requestHealthAuthorization() async {
+    final HealthFactory health = HealthFactory();
+
+    final types = [
+      HealthDataType.SLEEP_IN_BED,
+      HealthDataType.SLEEP_ASLEEP,
+      HealthDataType.SLEEP_AWAKE,
+      HealthDataType.SLEEP_DEEP,
+      HealthDataType.SLEEP_REM,
+      HealthDataType.SLEEP_LIGHT,
+    ];
+
+    return await health.requestAuthorization(types);
   }
 }

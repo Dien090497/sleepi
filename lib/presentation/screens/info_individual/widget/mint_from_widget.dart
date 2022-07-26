@@ -5,7 +5,7 @@ import 'package:slee_fi/common/style/text_styles.dart';
 import 'package:slee_fi/common/utils/toast_utils.dart';
 import 'package:slee_fi/common/widgets/sf_gridview.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
-import 'package:slee_fi/entities/nft_family/nft_family.dart';
+import 'package:slee_fi/entities/bed_entity/bed_entity.dart';
 import 'package:slee_fi/l10n/locale_keys.g.dart';
 import 'package:slee_fi/presentation/screens/info_individual/widget/item_bed.dart';
 
@@ -17,7 +17,7 @@ class MintFromWidget extends StatelessWidget {
   }) : super(key: key);
 
   final String title;
-  final List<FamilyDataEntity>? familyData;
+  final List<BedEntity>? familyData;
 
   @override
   Widget build(BuildContext context) {

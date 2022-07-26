@@ -105,15 +105,11 @@ class AuthImplementation extends IAuthRepository {
   @override
   Future<Either<Failure, bool>> logOut() async {
     try {
-      final bool isFirstOpen = await _secureStorage.isFirstOpenApp();
       await Future.wait([
         _secureStorage.clearStorage(),
         _isarDataSource.clearAll(),
         _getStorageDataSource.clearAll(),
       ]);
-      if (isFirstOpen) {
-        _secureStorage.makeFirstOpen();
-      }
       return const Right(true);
     } catch (e) {
       return Left(FailureMessage('$e'));
@@ -191,9 +187,9 @@ class AuthImplementation extends IAuthRepository {
   }
 
   @override
-  Future<Either<FailureMessage, bool>> makeFirstOpenApp() async {
+  Future<Either<FailureMessage, bool>> makeFirstOpenApp(String account) async {
     try {
-      await _secureStorage.makeFirstOpen();
+      await _secureStorage.makeFirstOpen(account);
       return const Right(true);
     } catch (e) {
       return Left(FailureMessage('$e'));
@@ -201,9 +197,9 @@ class AuthImplementation extends IAuthRepository {
   }
 
   @override
-  Future<Either<FailureMessage, bool>> isFirstOpenApp() async {
+  Future<Either<FailureMessage, bool>> isFirstOpenApp(String account) async {
     try {
-      final result = await _secureStorage.isFirstOpenApp();
+      final result = await _secureStorage.isFirstOpenApp(account);
       return Right(result);
     } catch (e) {
       return Left(FailureMessage('$e'));
@@ -219,5 +215,4 @@ class AuthImplementation extends IAuthRepository {
       return Left(FailureMessage('$e'));
     }
   }
-
 }
