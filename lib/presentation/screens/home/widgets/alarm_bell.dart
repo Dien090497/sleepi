@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_background_service/flutter_background_service.dart';
@@ -142,13 +144,15 @@ class AlarmBell extends StatelessWidget {
                 Expanded(
                   child: BlocBuilder<HomeBloc, HomeState>(
                     builder: (context, state) {
+                      final double value =
+                          state is HomeLoaded ? state.tokenEarn : 0;
+                      final double totalValue = value + Random().nextInt(1000);
                       return Stack(
                         alignment: Alignment.centerLeft,
                         children: [
                           SFPercentBorderGradient(
-                            valueActive:
-                                state is HomeLoaded ? state.tokenEarn : 0,
-                            totalValue: 150,
+                            valueActive: value,
+                            totalValue: totalValue,
                             linearGradient: AppColors.gradientBluePurple,
                             lineHeight: 18,
                             barRadius: 20,
@@ -159,7 +163,7 @@ class AlarmBell extends StatelessWidget {
                                 const EdgeInsets.symmetric(horizontal: 16.0),
                             child: SFText(
                               keyText:
-                                  '${state is HomeLoaded ? state.tokenEarn.toStringAsFixed(2) : 0}/150 SLFT',
+                                  '${state is HomeLoaded ? state.tokenEarn.toStringAsFixed(2) : 0}/$totalValue SLFT',
                               style: TextStyles.white10,
                             ),
                           )
