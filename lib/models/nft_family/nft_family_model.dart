@@ -7,18 +7,16 @@ part 'nft_family_model.g.dart';
 
 @JsonSerializable()
 class NftFamilyModel {
-  final List<BedModel> parent;
+
+  final List<BedModel> queryParent;
   final List<BedModel> queryChildren;
 
-  NftFamilyModel(this.parent, this.queryChildren);
+  NftFamilyModel({required this.queryParent, required this.queryChildren});
+
 
   factory NftFamilyModel.fromJson(Map<String, dynamic> json) =>
       _$NftFamilyModelFromJson(json);
 
   Map<String, dynamic> toJson() => _$NftFamilyModelToJson(this);
 
-  NftFamilyEntity toEntity() => NftFamilyEntity(
-        parent: parent.map((e) => e.toEntity()).toList(),
-        children: queryChildren.map((e) => e.toEntity()).toList(),
-      );
 }

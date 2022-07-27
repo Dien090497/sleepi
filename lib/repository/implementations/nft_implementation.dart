@@ -5,17 +5,20 @@ import 'package:slee_fi/datasources/local/secure_storage.dart';
 import 'package:slee_fi/datasources/remote/auth_datasource/auth_datasource.dart';
 import 'package:slee_fi/datasources/remote/network/nft_datasource.dart';
 import 'package:slee_fi/datasources/remote/nft_api/nft_api.dart';
+import 'package:slee_fi/entities/bed_entity/bed_entity.dart';
 import 'package:slee_fi/entities/get_repair_entity/get_repair_entity.dart';
 import 'package:slee_fi/entities/nft_entity/nft_entity.dart';
 import 'package:slee_fi/entities/nft_family/nft_family.dart';
 import 'package:slee_fi/entities/nft_sell_response_entity/nft_sell_response_entity.dart';
 import 'package:slee_fi/entities/point_of_owner/point_of_owner_entity.dart';
 import 'package:slee_fi/failures/failure.dart';
+import 'package:slee_fi/models/nft_family/nft_family_model.dart';
 import 'package:slee_fi/repository/nft_repository.dart';
 import 'package:slee_fi/schema/nft_sell_schema/nft_sell_schema.dart';
 import 'package:slee_fi/schema/repair_schema/repair_schema.dart';
 import 'package:slee_fi/schema/update_point/update_point_schema.dart';
 import 'package:slee_fi/schema/with_draw_nft_schema/with_draw_nft_schema.dart';
+import 'package:slee_fi/usecase/get_nft_family_usecase.dart';
 import 'package:web3dart/web3dart.dart';
 
 @Injectable(as: INFTRepository)
@@ -243,14 +246,14 @@ class NFTImplementation extends INFTRepository {
     }
   }
 
-  @override
-  Future<Either<Failure, NftFamilyEntity>> fetchFamily(int bedId) async {
+  /*@override
+  Future<Either<Failure, List<BedEntity>>> fetchFamily(int bedId) async {
     try {
       return Right((await _nftApi.family(bedId)).toEntity());
     } catch (e) {
       return Left(FailureMessage('$e'));
     }
-  }
+  }*/
 
   @override
   Future<Either<Failure, PointOfOwnerEntity>> pointOf(int bedId) async {
@@ -295,6 +298,16 @@ class NFTImplementation extends INFTRepository {
       return Right(await _secureStorage.getTokenAddress() ?? []);
     } catch (e) {
       return Left(FailureMessage.fromException(e));
+    }
+  }
+
+  @override
+  Future<Either<Failure, NftFamilyModel>> fetchFamily({required ParamsFamily params}) async {
+    try {
+      final result = await _nftApi.family(params.bedId);
+      return Right(result);
+    } catch (e) {
+    return Left(FailureMessage.fromException(e));
     }
   }
 }

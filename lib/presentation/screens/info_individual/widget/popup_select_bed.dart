@@ -63,6 +63,7 @@ class _PopUpSelectBedState extends State<PopUpSelectBed> {
                                   widget.cubit.selectBed(i);
                                   setState(() {});
                                 },
+                                name: state.listBed[i].name,
                               );
                             },
                           ),
