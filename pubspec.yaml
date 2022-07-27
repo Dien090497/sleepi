@@ -85,6 +85,7 @@ dependencies:
   screenshot: ^1.2.3
   social_share: ^2.2.1
   just_audio: ^0.9.28
+  flutter_typeahead: ^4.0.0
   health:
     git:
       url: https://github.com/Sotatek-ThangBui/health.git
