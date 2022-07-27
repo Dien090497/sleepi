@@ -1,6 +1,8 @@
-import 'dart:math';
+import 'dart:math' as math;
 
 import 'package:decimal/decimal.dart';
+import 'package:intl/intl.dart';
+import 'package:money_formatter/money_formatter.dart';
 import 'package:web3dart/web3dart.dart';
 
 extension NumX on num {
@@ -17,9 +19,9 @@ extension NumX on num {
 
   int get gweiToWei => (this * gweiFactor).toInt();
 
-  static int weiFactor = pow(10, 18).toInt();
+  static int weiFactor = math.pow(10, 18).toInt();
 
-  static int gweiFactor = pow(10, 9).toInt();
+  static int gweiFactor = math.pow(10, 9).toInt();
 
   double get weiToEther => this / weiFactor;
 
@@ -29,7 +31,7 @@ extension NumX on num {
     if (this == 0) {
       return 0.toStringAsFixed(2);
     } else {
-      final balance = (this / pow(10, 18));
+      final balance = (this / math.pow(10, 18));
       if (balance % 1 == 0) {
         return balance.toStringAsFixed(0);
       } else {
@@ -45,7 +47,7 @@ extension NumX on num {
   }
 
   String get formatBalance2Digits {
-    if(this==0){
+    if (this == 0) {
       return 0.toStringAsFixed(2);
     } else {
       final balance = toDouble();
@@ -68,17 +70,41 @@ extension NumX on num {
       return 0.toStringAsFixed(2).replaceAll(RegExp(r"([.]*0+)(?!.*\d)"), '');
     } else {
       final balance = toDouble();
-      if (balance % 1 == 0) {
-        return balance.toStringAsFixed(0);
+
+      int index = balance.toString().indexOf('.');
+      print('index is   $this    $index');
+      if (balance.toString().length - index > 7) {
+        index += 7;
       } else {
-        int index = balance.toString().indexOf('.');
-        if (balance.toString().length - index > 7) {
-          index += 7;
-        } else {
-          index = balance.toString().length;
-        }
-        return balance.toString().substring(0, index).replaceAll(RegExp(r"([.]*0+)(?!.*\d)"), '');
+        index = balance.toString().length;
       }
+      print(
+          'length is   ${balance.toString().length - balance.toString().indexOf('.') + 1}');
+      MoneyFormatter fmf = MoneyFormatter(
+          amount: balance,
+          settings: MoneyFormatterSettings(
+              thousandSeparator: ',',
+              decimalSeparator: '.',
+              fractionDigits: balance % 1 == 0
+                  ? 0
+                  : math.min(
+                      7,
+                      balance.toString().length -
+                          balance.toString().indexOf('.') -
+                          1),
+              compactFormatType: CompactFormatType.long));
+      return fmf.output.nonSymbol;
+      final data = balance
+          .toString()
+          .substring(0, index)
+          .replaceAll(RegExp(r"([.]*0+)(?!.*\d)"), '');
+      return balance
+          .toString()
+          .substring(0, index)
+          .replaceAll(RegExp(r"([.]*0+)(?!.*\d)"), '');
+
+      // return noSimbolInUSFormat.format(result);
+
     }
   }
 }

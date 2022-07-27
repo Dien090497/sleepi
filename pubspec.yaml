@@ -78,6 +78,7 @@ dependencies:
   sentry: 6.7.0
   sentry_flutter: 6.7.0
   device_info_plus: ^4.0.0
+  money_formatter: ^0.0.3
   intl: ^0.17.0
   external_app_launcher: ^3.0.0
   flutter_background_service: ^2.1.3

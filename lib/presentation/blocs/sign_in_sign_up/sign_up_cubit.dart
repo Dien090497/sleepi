@@ -34,7 +34,7 @@ class SigInSignUpCubit extends Cubit<SignInSignUpState> {
   final _fetchSettingActiveCode = getIt<SettingActiveCodeUseCase>();
   final _fetchBalanceSpendingUC = getIt<FetchBalanceSpendingUseCase>();
 
-  late final  SharedPreferences _preferences;
+  late final SharedPreferences _preferences;
 
   String email = '';
   String _password = '';
@@ -121,6 +121,7 @@ class SigInSignUpCubit extends Cubit<SignInSignUpState> {
     await result.fold(
       (l) async => emit(SignInSignUpState.error('$l')),
       (r) async {
+        _saveEmailSuggestion(email);
         final balanceRes = await _fetchBalanceSpendingUC.call('${r.id}');
         balanceRes.fold(
           (l) => emit(SignInSignUpState.error('$l')),
@@ -173,7 +174,6 @@ class SigInSignUpCubit extends Cubit<SignInSignUpState> {
       emit(SignInSignUpState.errorEmail(message));
       return false;
     }
-    _saveEmailSuggestion(email);
     return true;
   }
 
