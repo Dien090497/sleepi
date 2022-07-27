@@ -45,8 +45,8 @@ class ItemBedBuyWidget extends StatelessWidget {
               SizedBox(height: 20.h),
               CachedImage(
                 image: item.image,
-                width: 60,
-                height: 60,
+                width: 100,
+                height: 100,
               ),
               SizedBox(height: 22.h),
               Row(
@@ -83,7 +83,7 @@ class ItemBedBuyWidget extends StatelessWidget {
                   ),
                 ],
               ),
-              SizedBox(height: 16.h),
+              SizedBox(height: 8.h),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 16.0),
                 child: Row(
@@ -103,7 +103,7 @@ class ItemBedBuyWidget extends StatelessWidget {
                   ],
                 ),
               ),
-              const SizedBox(height: 18),
+              const SizedBox(height: 10),
             ],
           ),
         ],
