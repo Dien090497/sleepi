@@ -9,11 +9,11 @@ part of 'probability_data.dart';
 ProbabilityData _$ProbabilityDataFromJson(Map<String, dynamic> json) =>
     ProbabilityData(
       key: json['key'] as String?,
-      config: json['config'],
+      configs: json['configs'],
     );
 
 Map<String, dynamic> _$ProbabilityDataToJson(ProbabilityData instance) =>
     <String, dynamic>{
       'key': instance.key,
-      'config': instance.config,
+      'configs': instance.configs,
     };

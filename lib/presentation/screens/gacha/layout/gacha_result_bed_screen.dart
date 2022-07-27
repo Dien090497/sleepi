@@ -17,9 +17,10 @@ import 'package:slee_fi/resources/resources.dart';
 class GachaResultBedArguments {
   final GachaAttributesItem? attributesItem;
   final String image;
+  final num? percentEffect;
   final dynamic quantitySlft;
 
-  GachaResultBedArguments({this.quantitySlft, this.attributesItem, required this.image});
+  GachaResultBedArguments({this.quantitySlft, this.percentEffect, this.attributesItem, required this.image});
 }
 
 class GachaResultBedScreen extends StatelessWidget {
@@ -52,138 +53,166 @@ class GachaResultBedScreen extends StatelessWidget {
                     iconBack: true,
                   ),
                   const SizedBox(height: 16),
-                  SingleChildScrollView(
-                    physics: const ClampingScrollPhysics(),
-                    child: Column(
-                      children: [
-                      Container(
-                          padding: const EdgeInsets.symmetric(vertical: 12),
-                          child: SFText(
-                            keyText: LocaleKeys.result,
-                            style: TextStyles.boldWhite18,
-                          ),
-                        ),
+                  Expanded(
+                    child: SingleChildScrollView(
+                      physics: const ClampingScrollPhysics(),
+                      child: Column(
+                        children: [
                         Container(
-                            decoration: BoxDecoration(
-                                image: const DecorationImage(
-                                  image: AssetImage(
-                                    Imgs.borderBed,
+                            padding: const EdgeInsets.symmetric(vertical: 12),
+                            child: SFText(
+                              keyText: LocaleKeys.result,
+                              style: TextStyles.boldWhite18,
+                            ),
+                          ),
+                          Container(
+                              decoration: BoxDecoration(
+                                  image: const DecorationImage(
+                                    image: AssetImage(
+                                      Imgs.borderBed,
+                                    ),
+                                    fit: BoxFit.cover,
                                   ),
-                                  fit: BoxFit.cover,
-                                ),
-                                boxShadow: [
-                                  BoxShadow(
-                                    color: AppColors.purple
-                                        .withOpacity(0.02),
-                                    spreadRadius: 3,
-                                    blurRadius: 7,
-                                    offset: const Offset(0,
-                                        3), // changes position of shadow
-                                  ),
-                                ],
-                                borderRadius:
-                                    BorderRadius.circular(20)),
-                            width: 180,
-                            height: 180,
-                            child:  SizedBox(
-                              child: SFIcon(args != null && args.attributesItem != null ? args.image : Ics.icSlft),
-                            )),
-                        const SizedBox(height: 12),
-
-                        args?.quantitySlft != null
-                            ?
-                            SFText(
-                              keyText: '${args?.quantitySlft}',
-                              style: TextStyles.bold30White,
-                            )
-                            :
-                        Column(
-                          children: [
-                            nftName != null ?  Padding(
-                              padding: const EdgeInsets.only(bottom: 12),
-                              child: SFText(
-                                keyText:
-                                '${type?.tr()} $nftName (Lv.${args?.attributesItem?.level})',
-                                style: TextStyles.white1w700size16,
-                              ),
-                            ) : const SizedBox(),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: AppColors.purple
+                                          .withOpacity(0.02),
+                                      spreadRadius: 3,
+                                      blurRadius: 7,
+                                      offset: const Offset(0,
+                                          3), // changes position of shadow
+                                    ),
+                                  ],
+                                  borderRadius:
+                                      BorderRadius.circular(20)),
+                              width: 180,
+                              height: 180,
+                              child:  SizedBox(
+                                child: SFIcon(args != null && args.attributesItem != null ? args.image : Ics.icSlft),
+                              )),
+                          const SizedBox(height: 12),
+                          args?.quantitySlft != null
+                              ?
+                              SFText(
+                                keyText: '${args?.quantitySlft}',
+                                style: TextStyles.bold30White,
+                              )
+                              :
+                          SingleChildScrollView(
+                            child: Column(
                               children: [
-                                SFCard(
-                                  radius: 50,
-                                  height: 36,
-                                  color: AppColors.blue.withOpacity(0.15),
-                                  child: Center(
-                                    child: SFText(
-                                      keyText: type ?? '',
-                                      style: TextStyles.blue14,
-                                    ),
+                                nftName != null ?  Padding(
+                                  padding: const EdgeInsets.only(bottom: 12),
+                                  child: SFText(
+                                    keyText:
+                                    '${type?.tr()} $nftName (Lv.${args?.attributesItem?.level})',
+                                    style: TextStyles.white1w700size16,
                                   ),
-                                ),
-                                const SizedBox(
-                                  width: 15,
-                                ),
-                                SFCard(
-                                  radius: 50,
-                                  height: 36,
-                                  child: Center(
-                                    child: SFText(
-                                      keyText: args?.attributesItem?.name ?? '',
-                                      style: TextStyles.lightWhite14,
-                                      textAlign: TextAlign.center,
+                                ) : const SizedBox(),
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    args?.attributesItem?.nftType == 'item' || args?.attributesItem?.nftType == 'jewel'? const SizedBox() : SFCard(
+                                      radius: 50,
+                                      height: 36,
+                                      margin: const EdgeInsets.only(top: 15, right: 15),
+                                      color: AppColors.blue.withOpacity(0.15),
+                                      child: Center(
+                                        child: SFText(
+                                          keyText: type ?? '',
+                                          style: TextStyles.blue14,
+                                        ),
+                                      ),
                                     ),
+                                    SFCard(
+                                      radius: 50,
+                                      height: 36,
+                                      child: Center(
+                                        child: SFText(
+                                          keyText: args?.attributesItem?.name ?? '',
+                                          style: TextStyles.lightWhite14,
+                                          textAlign: TextAlign.center,
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                const SizedBox(height: 28),
+                                SFText(
+                                  keyText: LocaleKeys.attributes,
+                                  style: TextStyles.boldWhite18,
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 24, vertical: 15),
+                                  child: Column(
+                                    children: [
+                                      args?.attributesItem?.nftType == 'item' || args?.attributesItem?.nftType == 'jewel' ? Column(
+                                        children: [
+                                          SFCard(
+                                            radius: 8,
+                                            margin: EdgeInsets.zero,
+                                            padding: const EdgeInsets.symmetric(vertical: 18, horizontal: 24),
+                                            child: Row(
+                                              children: [
+                                                SFText(
+                                                  keyText: LocaleKeys.attributes,
+                                                  style: TextStyles.lightGrey16,
+                                                ),
+                                                const SizedBox(width: 4),
+                                                Expanded(
+                                                  child: SFText(
+                                                    keyText:
+                                                    '+ ${args?.attributesItem?.type.reCase(StringCase.titleCase)}',
+                                                    style: TextStyles.blue16,
+                                                    textAlign: TextAlign.right,
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                          const SizedBox(height: 12),
+                                          SFCard(
+                                            radius: 8,
+                                            margin: EdgeInsets.zero,
+                                            padding: const EdgeInsets.symmetric(vertical: 18, horizontal: 24),
+                                            child: Row(
+                                              children: [
+                                                SFText(
+                                                  keyText: LocaleKeys.effect,
+                                                  style: TextStyles.lightGrey16,
+                                                ),
+                                                const SizedBox(width: 4),
+                                                Expanded(
+                                                  child: SFText(
+                                                    keyText:
+                                                    '+ ${args?.percentEffect ?? 0}%',
+                                                    style: TextStyles.blue16,
+                                                    textAlign: TextAlign.right,
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                        ],
+                                      )
+                                      : AttributesWidget(
+                                        bonus: args?.attributesItem?.bonus,
+                                        efficiency: args?.attributesItem?.efficiency,
+                                        luck: args?.attributesItem?.luck,
+                                        resilience: args?.attributesItem?.resilience,
+                                        special: args?.attributesItem?.special,
+                                      ),
+                                     const SizedBox(height: 76),
+                                    ],
                                   ),
                                 ),
                               ],
                             ),
-                            const SizedBox(height: 28),
-                            SFText(
-                              keyText: LocaleKeys.attributes,
-                              style: TextStyles.boldWhite18,
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.symmetric(
-                                  horizontal: 24, vertical: 15),
-                              child: Column(
-                                children: [
-                                  args?.attributesItem?.nftType == 'item' || args?.attributesItem?.nftType == 'jewel' ? SFCard(
-                                    radius: 8,
-                                    margin: EdgeInsets.zero,
-                                    padding: const EdgeInsets.symmetric(vertical: 18, horizontal: 24),
-                                    child: Row(
-                                      children: [
-                                        SFText(
-                                          keyText: LocaleKeys.effect,
-                                          style: TextStyles.lightGrey16,
-                                        ),
-                                        const SizedBox(width: 4),
-                                        Expanded(
-                                          child: SFText(
-                                            keyText:
-                                            '+ ${LocaleKeys.base.tr()} ${type!.reCase(StringCase.titleCase)}',
-                                            style: TextStyles.blue16,
-                                            textAlign: TextAlign.right,
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  )
-                                  : AttributesWidget(
-                                    bonus: args?.attributesItem?.bonus,
-                                    efficiency: args?.attributesItem?.efficiency,
-                                    luck: args?.attributesItem?.luck,
-                                    resilience: args?.attributesItem?.resilience,
-                                    special: args?.attributesItem?.special,
-                                  ),
-                                 const SizedBox(height: 76),
-                                ],
-                              ),
-                            ),
-                          ],
-                        ),
+                          ),
 
-                  ],
+                    ],
+                      ),
                     ),
                   ),
                 ],

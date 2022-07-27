@@ -487,5 +487,6 @@ abstract class  LocaleKeys {
   static const crystals = 'crystals';
   static const reflection = 'reflection';
   static const school = 'school';
+  static const coming_soon = 'coming_soon';
 
 }

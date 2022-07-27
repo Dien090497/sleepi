@@ -77,10 +77,12 @@ class AllResultScreen extends StatelessWidget {
                                   null;
                                 }else {
                                   attributesItem = GachaAttributesItem.fromJson(args?.gachaSpinInfo!.gift.elementAt(index) as Map<String, dynamic>);
+                                  num? percentEffect = args?.gachaSpinInfo!.gift.elementAt(index)['${args.gachaSpinInfo!.gift.elementAt(index)['type']}'];
                                   Navigator.pushNamed(context, R.allResultDetail,
                                       arguments:  AllResultDetailArguments(
                                           image: attributesItem != null ? attributesItem!.image : "",
-                                          attributesItem: attributesItem
+                                          attributesItem: attributesItem,
+                                        percentEffect: percentEffect
                                       )
                                   );
                                 }
@@ -124,10 +126,12 @@ class AllResultScreen extends StatelessWidget {
                                   null;
                                   }else{
                                     attributesItem = GachaAttributesItem.fromJson(args?.gachaSpinInfo!.gift.elementAt(index + at) as Map<String, dynamic>);
+                                    num? percentEffect = args?.gachaSpinInfo!.gift.elementAt(index + at)['${args.gachaSpinInfo!.gift.elementAt(index + at)['type']}'];
                                     Navigator.pushNamed(context, R.allResultDetail,
                                         arguments:  AllResultDetailArguments(
                                             image: attributesItem != null ? attributesItem!.image : "",
-                                            attributesItem: attributesItem
+                                            attributesItem: attributesItem,
+                                            percentEffect: percentEffect
                                         )
                                     );
                                   }
@@ -173,10 +177,12 @@ class AllResultScreen extends StatelessWidget {
                                       null;
                                     }else {
                                       attributesItem = GachaAttributesItem.fromJson(args?.gachaSpinInfo!.gift.elementAt(index + at) as Map<String, dynamic>);
+                                      num? percentEffect = args?.gachaSpinInfo!.gift.elementAt(index + at)['${args.gachaSpinInfo!.gift.elementAt(index + at)['type']}'];
                                       Navigator.pushNamed(context, R.allResultDetail,
                                           arguments:  AllResultDetailArguments(
                                               image: attributesItem != null ? attributesItem!.image : "",
-                                              attributesItem: attributesItem
+                                              attributesItem: attributesItem,
+                                            percentEffect: percentEffect
                                           )
                                       );
                                     }

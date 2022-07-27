@@ -5,11 +5,7 @@ import 'package:slee_fi/common/widgets/sf_text.dart';
 import 'package:slee_fi/l10n/locale_keys.g.dart';
 import 'package:slee_fi/models/gacha_probability_config_response/probability_config.dart';
 import 'package:slee_fi/presentation/screens/gacha/widgets/items_probability.dart';
-import 'package:slee_fi/presentation/screens/gacha/widgets/slft_probability.dart';
 import 'package:slee_fi/resources/resources.dart';
-
-import 'bed_probability.dart';
-import 'jewel_probability.dart';
 
 class ProbabilityDialog extends StatelessWidget {
   final bool normalGacha;
@@ -38,20 +34,22 @@ class ProbabilityDialog extends StatelessWidget {
                 SFText(keyText: LocaleKeys.product_line_up,
                   style: TextStyles.bold14LightWhiteWithOpacity,),
                 const SizedBox(height: 16),
-                BedProbability(
+                ItemsProbability(
                   iconPath: Ics.icBedsProbability,
+                  configInfo: dialogData?.bed,
                   title: LocaleKeys.bed,
-                  beds: dialogData?.bed,
+                  style: TextStyles.bold14Blue,
                   colorBgIcon: [
                     AppColors.blue.withOpacity(0.1),
                     AppColors.blue.withOpacity(0.1)
                   ],
                 ),
                 const SizedBox(height: 12),
-                JewelProbability(
+                ItemsProbability(
                   iconPath: Ics.icPillows,
-                  jewels: dialogData?.jewels,
+                  configInfo: dialogData?.jewels,
                   title: LocaleKeys.jewels,
+                  style: TextStyles.bold14Green,
                   colorBgIcon: [
                     AppColors.green.withOpacity(0.1),
                     AppColors.blue.withOpacity(0.1)
@@ -60,8 +58,9 @@ class ProbabilityDialog extends StatelessWidget {
                 const SizedBox(height: 12),
                 ItemsProbability(
                   iconPath: Ics.jewel,
-                  items: dialogData?.items,
+                  configInfo: dialogData?.items,
                   title: LocaleKeys.item,
+                  isGradient: true,
                   colorBgIcon: [
                     AppColors.blue.withOpacity(0.1),
                     AppColors.purple.withOpacity(0.1)
@@ -70,12 +69,18 @@ class ProbabilityDialog extends StatelessWidget {
                   height: 45,
                 ),
                 const SizedBox(height: 12),
-                SlftProbability(
+                ItemsProbability(
                   iconPath: Imgs.doubleIcon,
-                  slft: dialogData?.slft,
+                  configInfo: dialogData?.token,
                   title: LocaleKeys.token,
-                  width: 40,
-                  height: 40,
+                  isToken: true,
+                  style: TextStyles.bold14White,
+                  colorBgIcon: [
+                    AppColors.blue.withOpacity(0.1),
+                    AppColors.purple.withOpacity(0.1)
+                  ],
+                  width: 45,
+                  height: 45,
                 ),
               ],
             ),

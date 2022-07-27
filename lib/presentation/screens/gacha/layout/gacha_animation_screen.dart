@@ -35,6 +35,7 @@ class _GachaAnimationScreenState extends State<GachaAnimationScreen>
   late AnimationController animationController;
   final audioPlayer = AudioPlayer();
   GachaAttributesItem? attributesItem;
+  num? percentEffect;
   dynamic quantitySlft;
   final randomUtils = getIt<RandomUtils>();
   String image = '';
@@ -72,21 +73,30 @@ class _GachaAnimationScreenState extends State<GachaAnimationScreen>
               });
             }else{
               attributesItem = GachaAttributesItem.fromJson(args.spinInfo!.gift.first as Map<String, dynamic>);
+              percentEffect = args.spinInfo!.gift.first['${args.spinInfo!.gift.first['type']}'];
               setState(() {
                 // isShowResult = true;
                 image = attributesItem != null ? attributesItem!.image : '';
               });
             }
 
-            Future.delayed(const Duration(seconds: 0), () async {
-              Navigator.pop(context, true);
-              Navigator.pushNamed(context, args.isGetSpin ? R.gacha500TimesChance : R.gachaResultBed,
-                  arguments: args.isGetSpin
-                  ? GachaChance500Arguments(
-                      attributesItem: attributesItem, image: image )
-                  : GachaResultBedArguments(
-                      attributesItem: attributesItem, image: image , quantitySlft : quantitySlft));
-            });
+            Navigator.pop(context, true);
+            Navigator.pushNamed(context, args.isGetSpin ? R.gacha500TimesChance : R.gachaResultBed,
+                arguments: args.isGetSpin
+                    ? GachaChance500Arguments(
+                    attributesItem: attributesItem, image: image )
+                    : GachaResultBedArguments(
+                    attributesItem: attributesItem, image: image , quantitySlft : quantitySlft , percentEffect: percentEffect));
+
+            // Future.delayed(const Duration(seconds: 0), () async {
+            //   Navigator.pop(context, true);
+            //   Navigator.pushNamed(context, args.isGetSpin ? R.gacha500TimesChance : R.gachaResultBed,
+            //       arguments: args.isGetSpin
+            //       ? GachaChance500Arguments(
+            //           attributesItem: attributesItem, image: image )
+            //       : GachaResultBedArguments(
+            //           attributesItem: attributesItem, image: image , quantitySlft : quantitySlft , percentEffect: percentEffect));
+            // });
           } else {
             Navigator.pop(context, true);
             Navigator.pushNamed(context, R.allResult,

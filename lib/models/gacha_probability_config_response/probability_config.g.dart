@@ -8,16 +8,24 @@ part of 'probability_config.dart';
 
 ProbabilityConfig _$ProbabilityConfigFromJson(Map<String, dynamic> json) =>
     ProbabilityConfig(
-      bed: ConfigBed.fromJson(json['Bed'] as Map<String, dynamic>),
-      slft: ConfigSlft.fromJson(json['slft'] as Map<String, dynamic>),
-      items: ConfigItems.fromJson(json['Items'] as Map<String, dynamic>),
-      jewels: ConfigJewels.fromJson(json['Jewels'] as Map<String, dynamic>),
+      bed: (json['Bed'] as List<dynamic>)
+          .map((e) => ConfigInfo.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      token: (json['Token'] as List<dynamic>)
+          .map((e) => ConfigInfo.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      items: (json['Items'] as List<dynamic>)
+          .map((e) => ConfigInfo.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      jewels: (json['Jewels'] as List<dynamic>)
+          .map((e) => ConfigInfo.fromJson(e as Map<String, dynamic>))
+          .toList(),
     );
 
 Map<String, dynamic> _$ProbabilityConfigToJson(ProbabilityConfig instance) =>
     <String, dynamic>{
-      'Bed': instance.bed.toJson(),
-      'slft': instance.slft.toJson(),
-      'Items': instance.items.toJson(),
-      'Jewels': instance.jewels.toJson(),
+      'Bed': instance.bed.map((e) => e.toJson()).toList(),
+      'Token': instance.token.map((e) => e.toJson()).toList(),
+      'Items': instance.items.map((e) => e.toJson()).toList(),
+      'Jewels': instance.jewels.map((e) => e.toJson()).toList(),
     };
