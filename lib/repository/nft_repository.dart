@@ -1,9 +1,7 @@
 import 'package:dartz/dartz.dart';
 import 'package:slee_fi/common/enum/enum.dart';
-import 'package:slee_fi/entities/bed_entity/bed_entity.dart';
 import 'package:slee_fi/entities/get_repair_entity/get_repair_entity.dart';
 import 'package:slee_fi/entities/nft_entity/nft_entity.dart';
-import 'package:slee_fi/entities/nft_family/nft_family.dart';
 import 'package:slee_fi/entities/nft_sell_response_entity/nft_sell_response_entity.dart';
 import 'package:slee_fi/entities/point_of_owner/point_of_owner_entity.dart';
 import 'package:slee_fi/failures/failure.dart';

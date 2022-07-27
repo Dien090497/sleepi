@@ -59,7 +59,7 @@ class PopUpRepair extends StatelessWidget {
                 state is BottomBarInfoIndividualLoaded
                     ? SFText(
                         keyText: LocaleKeys.durability,
-                        suffix: ' : ${bedEntity.durability.toInt()}/100',
+                        suffix: ' : ${state.valueRepair ?? bedEntity.durability.toInt()}/100',
                         style: TextStyles.white16,
                       )
                     : SFText(
@@ -127,7 +127,7 @@ class PopUpRepair extends StatelessWidget {
                     ? SFLabelValue(
                         label: LocaleKeys.cost,
                         value:
-                            '${state.cost?.toStringAsFixed(1) ?? (((state.feeRepair?.fee ?? 0) * (100 - bedEntity.durability)).toStringAsFixed(1))} SLFT',
+                            '${state.cost?.toStringAsFixed(1) ?? 0.0} SLFT',
                         styleValue: TextStyles.white16,
                       )
                     : const SFLabelValue(
@@ -141,7 +141,9 @@ class PopUpRepair extends StatelessWidget {
                     Expanded(
                       child: SFButton(
                         text: LocaleKeys.cancel,
-                        onPressed: () {},
+                        onPressed: () {
+                          Navigator.pop(context);
+                        },
                         width: double.infinity,
                         textStyle: TextStyles.lightGrey16,
                         color: AppColors.light4,
