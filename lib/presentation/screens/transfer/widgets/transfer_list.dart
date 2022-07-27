@@ -42,7 +42,7 @@ class TransferList extends StatefulWidget {
 
 class _TransferListState extends State<TransferList> {
   final ValueNotifier<bool> isLoadingNotifier = ValueNotifier(false);
-  String value = '';
+  final valueController = TextEditingController();
 
   @override
   void dispose() {
@@ -79,7 +79,8 @@ class _TransferListState extends State<TransferList> {
               ),
             );
           } else if (!(state.needApprove ?? true)) {
-            final amount = double.parse(value.replaceAll(',', '.'));
+            final amount =
+                double.parse(valueController.text.replaceAll(',', '.'));
             final userState = context.read<UserBloc>().state;
 
             showCustomAlertDialog(
@@ -148,6 +149,7 @@ class _TransferListState extends State<TransferList> {
                     ),
                     const SizedBox(height: 24.0),
                     SFTextFieldTextButton(
+                      controller: valueController,
                       labelText: LocaleKeys.amount,
                       textButton: LocaleKeys.all,
                       textInputType:
@@ -157,11 +159,11 @@ class _TransferListState extends State<TransferList> {
                             RegExp(r'^\d{1,}[.,]?\d{0,6}')),
                       ],
                       valueChanged: (v) {
-                        value = v;
                         cubit.removeError();
                       },
                       onPressed: () {
-                        value = widget.tokenEntity.balance.formatBalanceToken;
+                        valueController.text =
+                            widget.tokenEntity.balance.formatBalanceToken;
                       },
                     ),
                     if (state is TransferLoaded && state.errorMsg != null)
@@ -188,7 +190,7 @@ class _TransferListState extends State<TransferList> {
                   final walletState = context.read<WalletCubit>().state;
                   if (walletState is WalletStateLoaded) {
                     cubit.checkAllowance(
-                      amountStr: value,
+                      amountStr: valueController.text,
                       contractAddress: widget.tokenEntity.address,
                       ownerAddress: walletState.walletInfoEntity.address,
                       balance: widget.tokenEntity.balance,
