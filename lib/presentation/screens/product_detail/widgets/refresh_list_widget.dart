@@ -40,7 +40,6 @@ class _RefreshListWidgetState extends State<RefreshListWidget> {
           refreshController.refreshCompleted();
           if ((!state.hasMore && widget.isBed) ||
               (!state.hasMoreBedBox && !widget.isBed)) {
-            print('load no data   ${widget.isBed}');
             refreshController.loadNoData();
           }
 

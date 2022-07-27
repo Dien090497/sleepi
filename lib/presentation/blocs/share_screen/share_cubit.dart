@@ -14,7 +14,7 @@ class ShareCubit extends Cubit<ShareState> {
   void downLoadImage({required Widget widget, required ScreenshotController controller}) {
     emit(const ShareState.loading());
     controller.captureFromWidget(widget).then((value) async {
-      final result = await ImageGallerySaver.saveImage(value);
+      await ImageGallerySaver.saveImage(value);
       emit(const ShareState.loaded());
     });
   }

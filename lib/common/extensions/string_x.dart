@@ -62,7 +62,7 @@ extension StringX on String {
     }
 
     String pattern =
-        r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{6,}$';
+        r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9]).{6,}$';
     RegExp regExp = RegExp(pattern);
     final result = regExp.hasMatch(this);
     if (!result) {

@@ -36,7 +36,7 @@ class IndividualPointCubit extends Cubit<IndividualPointState> {
           emit(currentState.copyWith(isLoading: false, point: 0));
         },
         (r) {
-          emit(currentState.copyWith(point: r, maxPoint: r, isLoading: false));
+          emit(currentState.copyWith(point: r, isLoading: false));
         },
       );
     }
@@ -53,7 +53,6 @@ class IndividualPointCubit extends Cubit<IndividualPointState> {
       final newChangedAttribute =
           List<double>.from(currentState.attributesChanged);
       newChangedAttribute[i] = currentPoint + 1;
-      if (newChangedAttribute[i] > currentState.maxAttribute) return;
       emit(currentState.copyWith(
         attributesChanged: newChangedAttribute,
         point: currentState.point! - 1,
@@ -64,9 +63,7 @@ class IndividualPointCubit extends Cubit<IndividualPointState> {
   void decrease(int i) {
     final currentState = state;
     if (currentState is IndividualPointInitial) {
-      if (currentState.point == null || currentState.maxPoint == null) return;
-      if (currentState.point! >= currentState.maxPoint!) return;
-
+      if (currentState.point == null) return;
       /// Giảm startAttribute đi 1 và tăng point lên 1
       final startPoint = currentState.startAttributes[i];
       final currentPoint = currentState.attributesChanged[i];
