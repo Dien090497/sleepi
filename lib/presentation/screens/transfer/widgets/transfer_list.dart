@@ -41,8 +41,8 @@ class TransferList extends StatefulWidget {
 }
 
 class _TransferListState extends State<TransferList> {
-  final TextEditingController controller = TextEditingController();
   final ValueNotifier<bool> isLoadingNotifier = ValueNotifier(false);
+  String value = '';
 
   @override
   void dispose() {
@@ -79,7 +79,7 @@ class _TransferListState extends State<TransferList> {
               ),
             );
           } else if (!(state.needApprove ?? true)) {
-            final amount = double.parse(controller.text.replaceAll(',', '.'));
+            final amount = double.parse(value.replaceAll(',', '.'));
             final userState = context.read<UserBloc>().state;
 
             showCustomAlertDialog(
@@ -156,13 +156,12 @@ class _TransferListState extends State<TransferList> {
                         FilteringTextInputFormatter.allow(
                             RegExp(r'^\d{1,}[.,]?\d{0,6}')),
                       ],
-                      controller: controller,
                       valueChanged: (v) {
+                        value = v;
                         cubit.removeError();
                       },
                       onPressed: () {
-                        controller.text =
-                            widget.tokenEntity.balance.formatBalanceToken;
+                        value = widget.tokenEntity.balance.formatBalanceToken;
                       },
                     ),
                     if (state is TransferLoaded && state.errorMsg != null)
@@ -189,7 +188,7 @@ class _TransferListState extends State<TransferList> {
                   final walletState = context.read<WalletCubit>().state;
                   if (walletState is WalletStateLoaded) {
                     cubit.checkAllowance(
-                      amountStr: controller.text,
+                      amountStr: value,
                       contractAddress: widget.tokenEntity.address,
                       ownerAddress: walletState.walletInfoEntity.address,
                       balance: widget.tokenEntity.balance,
