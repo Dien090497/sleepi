@@ -12,6 +12,7 @@ import 'package:slee_fi/entities/nft_family/nft_family.dart';
 import 'package:slee_fi/entities/nft_sell_response_entity/nft_sell_response_entity.dart';
 import 'package:slee_fi/entities/point_of_owner/point_of_owner_entity.dart';
 import 'package:slee_fi/failures/failure.dart';
+import 'package:slee_fi/models/nft_family/nft_family_model.dart';
 import 'package:slee_fi/repository/nft_repository.dart';
 import 'package:slee_fi/schema/nft_sell_schema/nft_sell_schema.dart';
 import 'package:slee_fi/schema/repair_schema/repair_schema.dart';
@@ -301,12 +302,12 @@ class NFTImplementation extends INFTRepository {
   }
 
   @override
-  Future<Either<Failure, List<BedEntity>>> fetchFamily({required ParamsFamily params}) async {
+  Future<Either<Failure, NftFamilyModel>> fetchFamily({required ParamsFamily params}) async {
     try {
-      final result = await _nftApi.family(params.bedId, params.filterType);
-      return Right(result.queryParent.map((e) => e.toEntity()).toList());
+      final result = await _nftApi.family(params.bedId);
+      return Right(result);
     } catch (e) {
-    return Left(FailureMessage('$e'));
+    return Left(FailureMessage.fromException(e));
     }
   }
 }

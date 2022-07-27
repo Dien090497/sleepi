@@ -9,8 +9,9 @@ part 'nft_family_model.g.dart';
 class NftFamilyModel {
 
   final List<BedModel> queryParent;
+  final List<BedModel> queryChildren;
 
-  NftFamilyModel({required this.queryParent});
+  NftFamilyModel({required this.queryParent, required this.queryChildren});
 
 
   factory NftFamilyModel.fromJson(Map<String, dynamic> json) =>
