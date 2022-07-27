@@ -10,6 +10,7 @@ import 'package:slee_fi/common/widgets/phoenix.dart';
 import 'package:slee_fi/common/widgets/sf_app_bar.dart';
 import 'package:slee_fi/common/widgets/sf_buttons.dart';
 import 'package:slee_fi/common/widgets/sf_card.dart';
+import 'package:slee_fi/common/widgets/sf_text.dart';
 import 'package:slee_fi/common/widgets/sf_textfield_password.dart';
 import 'package:slee_fi/l10n/locale_keys.g.dart';
 import 'package:slee_fi/presentation/blocs/create_password/create_password_cubit.dart';
@@ -108,8 +109,8 @@ class _CreatePasswordScreenState extends State<CreatePasswordScreen> {
                                 ),
                                 const SizedBox(height: 10),
                                 state is CreatePasswordStateErrorCreate
-                                    ? Text(
-                                        state.message,
+                                    ? SFText(
+                                        keyText: state.message,
                                         style: TextStyles.w400Red12,
                                       )
                                     : const SizedBox()
