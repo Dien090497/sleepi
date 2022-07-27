@@ -37,7 +37,7 @@ class SpendingImplementation extends ISpendingRepository {
     required String type,
   }) async {
     try {
-      final amountWei = BigInt.from(amount * pow(10, 18));
+      final amountWei = BigInt.from(amount) * BigInt.from(pow(10, 18));
       if (addressContract == Const.deadAddress) {
         final hash = await _spendingDataSource.toSpendingAvax(
           owner: owner,

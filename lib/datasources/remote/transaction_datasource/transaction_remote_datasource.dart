@@ -31,9 +31,7 @@ class TransactionRemoteDataSource{
     try {
       List<TransactionHistoryModel> transactionsHistory = [];
       final historyTransaction = await _historyDataSource.getAllHistory();
-      int start = 5*(params.page! - 1);
-      int end = 5*params.page! > historyTransaction.length ? historyTransaction.length : 5*params.page!;
-      if(historyTransaction.isNotEmpty){
+    if(historyTransaction.isNotEmpty){
         final walletId = _getStorageDataSource.getCurrentWalletId();
         final wallet = await _isarDataSource.getWalletAt(walletId);
 
@@ -47,6 +45,9 @@ class TransactionRemoteDataSource{
         final credentials = _web3dataSource.credentialsFromPrivateKey(privateKey);
         final ethereumAddress = await credentials.extractAddress();
         List transactionByToken = historyTransaction.where((i) => i.tokenSymbol.contains(params.tokenSymbol!)).toList();
+        int start = 5*(params.page! - 1);
+        int end = 5*params.page! > transactionByToken.length ? transactionByToken.length : 5*params.page!;
+
         for(int i = start ; i < end;i++){
           var block = await _web3dataSource.getDetailTransaction(transactionByToken[i].transactionHash);
           final String url = '${network.explorers.first.url}/api?module=account&action=${params.typeHistory}&address=$ethereumAddress&startblock=${block.blockNumber}&endblock=${block.blockNumber}&sort=desc&apikey=$apiKey"';
@@ -55,7 +56,6 @@ class TransactionRemoteDataSource{
           transactionsHistory.addAll(historyTx.result);
         }
       }
-
       return Right(transactionsHistory);
     } catch (e) {
       return Left(FailureMessage('$e'));

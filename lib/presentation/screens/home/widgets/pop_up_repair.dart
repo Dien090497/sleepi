@@ -154,7 +154,6 @@ class PopUpRepair extends StatelessWidget {
                       child: SFButton(
                         text: LocaleKeys.confirm,
                         onPressed: () {
-                          Navigator.pop(context, true);
                           if (state is BottomBarInfoIndividualLoaded) {
                             cubit.repairNFT(
                                 bedId: bedEntity.nftId,

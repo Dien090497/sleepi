@@ -119,6 +119,14 @@ class SLFTStakedState extends State<SLFTStaked> {
                               ],
                               textAlign: TextAlign.end,
                               onChanged: (value){
+                                int balanceIndex =  balance.indexWhere((balance) => balance == value);
+                                if (swapText == true && balanceIndex != -1) {
+                                  setState(() {
+                                    selectedIndex = balanceIndex;
+                                  });
+                                }else {
+                                  setState(() =>  selectedIndex = null);
+                                }
                                 if(value.isNotEmpty){
                                   setState((){
                                     amountPrice = calculatorPrice(value);
@@ -198,12 +206,13 @@ class SLFTStakedState extends State<SLFTStaked> {
                     setState(() {
                       selectedIndex = index;
                       if(!swapText){
-                        _amountEditingController.text  = checkMyBalance != null ? balance.elementAt(index) : widget.myBalance.toString();
-                        amountPrice= "${double.parse(_amountEditingController.text)/widget.priceUsd}";
-                        widget.staked(StakedArguments(day: int.parse(dayEditingController.text), amount: double.parse(amountPrice)));
-                      }else{
                         amountPrice = checkMyBalance != null ? balance.elementAt(index) : widget.myBalance.toString();
                         _amountEditingController.text = "${double.parse(amountPrice)/widget.priceUsd}";
+                        widget.staked(StakedArguments(day: int.parse(dayEditingController.text), amount: double.parse(amountPrice)));
+                      }else{
+                        _amountEditingController.text  = checkMyBalance != null ? balance.elementAt(index) : widget.myBalance.toString();
+                        amountPrice= "${double.parse(_amountEditingController.text)/widget.priceUsd}";
+
                         widget.staked(StakedArguments(day: int.parse(dayEditingController.text), amount: double.parse(_amountEditingController.text)));
                       }
                     });
@@ -273,12 +282,18 @@ class SLFTStakedState extends State<SLFTStaked> {
             controller: dayEditingController,
             textInputType: TextInputType.number,
             valueChanged: (value) {
+              int dayIndex =  days.indexWhere((day) => day == value);
+              if (dayIndex != -1) {
+                setState(() {
+                  selectedDurationIndex = dayIndex;
+                });
+              }
               if (selectedDurationIndex != null && value != days[selectedDurationIndex!]) {
                 setState(() {
                   selectedDurationIndex = null;
                 });
               }
-              widget.staked(StakedArguments(day: int.parse(value), amount: double.parse(amountPrice)));
+              widget.staked(StakedArguments(day: value.isNotEmpty ? int.parse(value) : 0, amount: amountPrice.isNotEmpty ? double.parse(amountPrice) : 0));
             },
             textButton: LocaleKeys.day,
             textButtonStyle: TextStyles.lightGrey14,

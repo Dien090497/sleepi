@@ -29,10 +29,13 @@ class GachaResultBedScreen extends StatelessWidget {
     final args = ModalRoute.of(context)?.settings.arguments as GachaResultBedArguments?;
 
     String? type;
+    String? nftName;
     if(args?.attributesItem?.nftType == 'item'){
       type = args?.attributesItem?.itemType;
+      nftName = LocaleKeys.item.tr();
     }else if (args?.attributesItem?.nftType == 'jewel'){
       type = args?.attributesItem?.jewelType;
+      nftName = LocaleKeys.jewels.tr();
     }else {
       type = args?.attributesItem?.quality;
     }
@@ -96,6 +99,14 @@ class GachaResultBedScreen extends StatelessWidget {
                             :
                         Column(
                           children: [
+                            nftName != null ?  Padding(
+                              padding: const EdgeInsets.only(bottom: 12),
+                              child: SFText(
+                                keyText:
+                                '${type?.tr()} $nftName (Lv.${args?.attributesItem?.level})',
+                                style: TextStyles.white1w700size16,
+                              ),
+                            ) : const SizedBox(),
                             Row(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [

@@ -29,10 +29,13 @@ class AllResultDetailScreen extends StatelessWidget {
     final args =
         ModalRoute.of(context)?.settings.arguments as AllResultDetailArguments?;
     String? type;
+    String? nftName;
     if(args?.attributesItem?.nftType == 'item'){
       type = args?.attributesItem?.itemType;
+      nftName = LocaleKeys.item.tr();
     }else if (args?.attributesItem?.nftType == 'jewel'){
       type = args?.attributesItem?.jewelType;
+      nftName = LocaleKeys.jewel.tr();
     }else {
       type = args?.attributesItem?.quality;
     }
@@ -81,6 +84,14 @@ class AllResultDetailScreen extends StatelessWidget {
                                   : const SizedBox(),
                             ),
                           ),
+                         nftName != null ?  Padding(
+                            padding: const EdgeInsets.only(top: 12),
+                            child: SFText(
+                              keyText:
+                              '${type?.tr()} $nftName (Lv.${args?.attributesItem?.level})',
+                              style: TextStyles.white1w700size16,
+                            ),
+                          ) : const SizedBox(),
                           const SizedBox(height: 12),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.center,
