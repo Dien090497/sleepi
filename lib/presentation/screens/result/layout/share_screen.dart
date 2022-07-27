@@ -10,6 +10,7 @@ import 'package:slee_fi/common/style/text_styles.dart';
 import 'package:slee_fi/common/widgets/background_widget.dart';
 import 'package:slee_fi/common/widgets/sf_app_bar.dart';
 import 'package:slee_fi/common/widgets/sf_buttons.dart';
+import 'package:slee_fi/common/widgets/sf_dialog.dart';
 import 'package:slee_fi/common/widgets/sf_icon.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
 import 'package:slee_fi/l10n/locale_keys.g.dart';
@@ -40,7 +41,9 @@ class _ShareScreenState extends State<ShareScreen> {
       create: (_) => ShareCubit(),
       child: BlocConsumer<ShareCubit, ShareState>(
         listener: (context, state) {
-
+          if (state is ShareStateLoaded) {
+            showSuccessfulDialog(context, null);
+          }
         },
         builder: (context, state) {
           final cubit = context.read<ShareCubit>();
