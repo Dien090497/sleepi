@@ -237,8 +237,10 @@ class AlarmBell extends StatelessWidget {
                         await SharedPreferences.getInstance();
                     await preferences.setInt(
                         Const.time, selectedTime.millisecondsSinceEpoch);
-                    FlutterBackgroundService().invoke(Const.setAsForeground);
-                    service.startService();
+                    if(state.enableAlarm) {
+                      FlutterBackgroundService().invoke(Const.setAsForeground);
+                      service.startService();
+                    }
                     Navigator.pushNamed(
                       context,
                       R.tracking,
