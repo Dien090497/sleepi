@@ -37,12 +37,8 @@ class _ImportWalletScreenState extends State<ImportWalletScreen> {
       child: BlocConsumer<ImportWalletCubit, ImportWalletState>(
         listener: (context, state) {
           if (state is ImportWalletVerifyOtpSuccess) {
-            final cubit = context.read<ImportWalletCubit>();
-            Navigator.pushNamed(context, R.createPasscode).then((value) {
-              if (value == true) {
-                cubit.importWallet(mnemonic: controllerMnemonic.text);
-              }
-            });
+            Navigator.pushNamed(context, R.createPasscode,
+                arguments: state.mnemonic);
           }
           if (state is ImportWalletDone) {
             context.read<UserBloc>().add(UpdateUserOrListToken(

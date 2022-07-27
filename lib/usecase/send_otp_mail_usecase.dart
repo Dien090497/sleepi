@@ -10,7 +10,6 @@ class SendOTPMailUseCase extends UseCase<SendEmailResponse, SendOTPParam> {
 
   SendOTPMailUseCase(this._authImplementation);
 
-
   @override
   Future<Either<Failure, SendEmailResponse>> call(SendOTPParam params) =>
       _authImplementation.sendOTPEmail(params);

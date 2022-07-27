@@ -108,10 +108,8 @@ class ProfileWidget extends StatelessWidget {
                   (l) {
                     showMessageDialog(context, '$l');
                   },
-                  (r) {
-                    if (!r) {
-                      getIt<MakeFirstOpenAppUseCase>().call(userInfo.email);
-                    }
+                  (r) async {
+                    await getIt<MakeFirstOpenAppUseCase>().call(userInfo.email);
                     Phoenix.rebirth(context);
                   },
                 );

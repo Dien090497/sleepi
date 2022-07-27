@@ -84,7 +84,7 @@ class _WalletTabBarState extends State<WalletTabBar>
     );
   }
 
-  _showCreateOrImportWallet() async {
+  Future _showCreateOrImportWallet() async {
     return showCustomAlertDialog(
       context,
       barrierDismissible: false,

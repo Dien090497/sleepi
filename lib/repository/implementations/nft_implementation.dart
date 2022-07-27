@@ -35,7 +35,7 @@ class NFTImplementation extends INFTRepository {
     try {
       return Right(await _nftDataSource.balanceOf(address, ownerAddress));
     } catch (e) {
-      return Left(FailureMessage('$e'));
+      return Left(FailureMessage.fromException(e));
     }
   }
 
@@ -47,7 +47,7 @@ class NFTImplementation extends INFTRepository {
     try {
       return Right(await _nftDataSource.tokensOf(nftAddress, ownerAddress));
     } catch (e) {
-      return Left(FailureMessage('$e'));
+      return Left(FailureMessage.fromException(e));
     }
   }
 
@@ -72,7 +72,7 @@ class NFTImplementation extends INFTRepository {
               .toList() ??
           []);
     } catch (e) {
-      return Left(FailureMessage('$e'));
+      return Left(FailureMessage.fromException(e));
     }
   }
 
@@ -90,7 +90,7 @@ class NFTImplementation extends INFTRepository {
           operator: operatorAddress,
           credentials: credentials));
     } catch (e) {
-      return Left(FailureMessage('$e'));
+      return Left(FailureMessage.fromException(e));
     }
   }
 
@@ -106,7 +106,7 @@ class NFTImplementation extends INFTRepository {
           operator: operatorAddress,
           credentials: credentials));
     } catch (e) {
-      return Left(FailureMessage('$e'));
+      return Left(FailureMessage.fromException(e));
     }
   }
 
@@ -126,7 +126,7 @@ class NFTImplementation extends INFTRepository {
         credentials: credentials,
       ));
     } catch (e) {
-      return Left(FailureMessage('$e'));
+      return Left(FailureMessage.fromException(e));
     }
   }
 
@@ -148,7 +148,7 @@ class NFTImplementation extends INFTRepository {
         credentials: credentials,
       ));
     } catch (e) {
-      return Left(FailureMessage('$e'));
+      return Left(FailureMessage.fromException(e));
     }
   }
 
@@ -170,7 +170,7 @@ class NFTImplementation extends INFTRepository {
         data: data,
       ));
     } catch (e) {
-      return Left(FailureMessage('$e'));
+      return Left(FailureMessage.fromException(e));
     }
   }
 
@@ -247,7 +247,7 @@ class NFTImplementation extends INFTRepository {
     try {
       return Right((await _nftApi.family(bedId)).toEntity());
     } catch (e) {
-      return Left(FailureMessage('$e'));
+      return Left(FailureMessage.fromException(e));
     }
   }*/
 

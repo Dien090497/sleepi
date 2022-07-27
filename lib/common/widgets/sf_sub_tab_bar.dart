@@ -21,7 +21,7 @@ class SFSubTabBar extends TabBar {
           labelColor: AppColors.white,
           unselectedLabelColor: AppColors.lightGrey,
           labelStyle: TextStyles.white1w700size16,
-          unselectedLabelStyle: TextStyles.white1w700size16,
+          unselectedLabelStyle: TextStyles.lightGrey16,
           indicator: MaterialIndicator(
             bottomLeftRadius: 8,
             bottomRightRadius: 8,

@@ -51,11 +51,13 @@ class _MarketPlaceScreenState extends State<MarketPlaceScreen> {
                 child: Expanded(
                   child: SFTabBar(
                     onTabChange: (index) {
-                      if (index == _currentIndex) {
-                        return;
+                      if(index<3) {
+                        if (index == _currentIndex) {
+                          return;
+                        }
+                        cubits[index].clearFilter();
+                        _currentIndex = index;
                       }
-                      cubits[index].clearFilter();
-                      _currentIndex = index;
                     },
                     key: widget.tabKey,
                     isScrollable: true,

@@ -415,7 +415,7 @@
   "green": "Green",
   "purple": "Purple",
   "white": "White",
-  "password_must_be_at_least_6": "英大文字、数字で1つ以上の組み合わせ6～20字で入力してください",
+  "balance_not_enough_to_level_up": "Your balance is not enough to level up",
   "incorrect_address": "Incorrect Address",
   "wallet_created_successfully": "ウォレット作成完了",
   "wallet_imported_successfully": "ウォレットインポート完了",
@@ -453,5 +453,6 @@
   "crystals": "水晶",
   "reflection": "放射",
   "school": "学校",
-  "coming_soon": "Coming soon"
+  "coming_soon": "Coming soon",
+  "password_must_be_at_least_6": "英大文字、数字、特殊文字で1つ以上の組み合わせ6～20字で入力してください"
 }

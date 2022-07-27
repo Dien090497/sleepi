@@ -12,11 +12,15 @@ class ShareCubit extends Cubit<ShareState> {
   ShareCubit() : super(const ShareState.initial());
 
   void downLoadImage({required Widget widget, required ScreenshotController controller}) {
-    emit(const ShareState.loading());
-    controller.captureFromWidget(widget).then((value) async {
-      await ImageGallerySaver.saveImage(value);
-      emit(const ShareState.loaded());
-    });
+    try {
+      emit(const ShareState.loading());
+      controller.captureFromWidget(widget).then((value) async {
+        await ImageGallerySaver.saveImage(value);
+        emit(const ShareState.loaded());
+      });
+    } catch (e) {
+      emit(const ShareState.error(''));
+    }
   }
 
   void shareSocial({required Widget widget, required ScreenshotController controller}) async {

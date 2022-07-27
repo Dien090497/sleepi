@@ -37,7 +37,7 @@ class SpendingImplementation extends ISpendingRepository {
     required String type,
   }) async {
     try {
-      final amountWei = BigInt.from(amount * pow(10, 18));
+      final amountWei = BigInt.from(amount) * BigInt.from(pow(10, 18));
       if (addressContract == Const.deadAddress) {
         final hash = await _spendingDataSource.toSpendingAvax(
           owner: owner,
@@ -77,7 +77,7 @@ class SpendingImplementation extends ISpendingRepository {
       }
       return Right(hash);
     } catch (e) {
-      return Left(FailureMessage('$e'));
+      return Left(FailureMessage.fromRPC(e));
     }
   }
 
@@ -94,7 +94,7 @@ class SpendingImplementation extends ISpendingRepository {
       await Future.delayed(const Duration(seconds: 1));
       return Right(txHash);
     } catch (e) {
-      return Left(FailureMessage('$e'));
+      return Left(FailureMessage.fromException(e));
     }
   }
 
@@ -104,7 +104,7 @@ class SpendingImplementation extends ISpendingRepository {
       final result = await _authDataSource.compound();
       return Right(result);
     } catch (e) {
-      return Left(FailureMessage('$e'));
+      return Left(FailureMessage.fromException(e));
     }
   }
 

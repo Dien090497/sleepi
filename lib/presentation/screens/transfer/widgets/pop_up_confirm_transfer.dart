@@ -1,5 +1,6 @@
 import 'package:dartz/dartz.dart';
 import 'package:flutter/material.dart';
+import 'package:slee_fi/common/extensions/num_ext.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
 import 'package:slee_fi/common/widgets/loading_screen.dart';
@@ -135,7 +136,7 @@ class PopUpConfirmTransfer extends StatelessWidget {
               ),
               Expanded(
                   child: SFText(
-                keyText: "$amount ${symbol.toUpperCase()}",
+                keyText: "${amount.formatBalanceToken} ${symbol.toUpperCase()}",
                 style: TextStyles.lightWhite16,
                 textAlign: TextAlign.end,
               )),

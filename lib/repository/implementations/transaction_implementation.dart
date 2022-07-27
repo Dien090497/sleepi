@@ -67,7 +67,7 @@ class TransactionImplementation extends ITransactionRepository {
       }
       return const Right(true);
     } catch (e) {
-      return Left(FailureMessage('$e'));
+      return Left(FailureMessage.fromException(e));
     }
   }
 
@@ -95,7 +95,7 @@ class TransactionImplementation extends ITransactionRepository {
       );
       return Right(fee.toInt());
     } catch (e) {
-      return Left(FailureMessage('$e'));
+      return Left(FailureMessage.fromException(e));
     }
   }
 
@@ -109,7 +109,7 @@ class TransactionImplementation extends ITransactionRepository {
       balance = result / BigInt.from(pow(10, 18));
       return Right(balance);
     } catch (e) {
-      return Left(FailureMessage('$e'));
+      return Left(FailureMessage.fromException(e));
     }
   }
 
@@ -148,7 +148,7 @@ class TransactionImplementation extends ITransactionRepository {
       }
       return const Right(true);
     } catch (e) {
-      return Left(FailureMessage('$e'));
+      return Left(FailureMessage.fromException(e));
     }
   }
 
@@ -165,7 +165,7 @@ class TransactionImplementation extends ITransactionRepository {
       );
       return Right(price * gasPrice.getInWei / BigInt.from(pow(10, 18)));
     } catch (e) {
-      return Left(FailureMessage('$e'));
+      return Left(FailureMessage.fromException(e));
     }
   }
 
@@ -176,7 +176,7 @@ class TransactionImplementation extends ITransactionRepository {
       String urlDetail = '${network.explorers.first.url}/tx/$hash';
       return Right(urlDetail);
     } catch (e) {
-      return Left(FailureMessage('$e'));
+      return Left(FailureMessage.fromException(e));
     }
   }
 }

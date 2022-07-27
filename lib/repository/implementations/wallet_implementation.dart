@@ -96,7 +96,7 @@ class WalletImplementation extends IWalletRepository {
         return Left(FailureMessage.fromException(e));
       }
     } catch (e) {
-      return Left(FailureMessage('$e'));
+      return Left(FailureMessage.fromException(e));
     }
   }
 
@@ -150,7 +150,7 @@ class WalletImplementation extends IWalletRepository {
       }
       return const Left(FailureMessage('Invalid Mnemonic'));
     } catch (e) {
-      return Left(FailureMessage('$e'));
+      return Left(FailureMessage.fromException(e));
     }
   }
 
@@ -184,7 +184,7 @@ class WalletImplementation extends IWalletRepository {
             chainId: network.chainId),
       );
     } catch (e) {
-      return Left(FailureMessage('$e'));
+      return Left(FailureMessage.fromException(e));
     }
   }
 
@@ -213,7 +213,7 @@ class WalletImplementation extends IWalletRepository {
       }
       return Right(values);
     } catch (e) {
-      return Left(FailureMessage('$e'));
+      return Left(FailureMessage.fromException(e));
     }
   }
 
@@ -231,7 +231,7 @@ class WalletImplementation extends IWalletRepository {
       }
       return const Right(true);
     } catch (e) {
-      return Left(FailureMessage('$e'));
+      return Left(FailureMessage.fromException(e));
     }
   }
 
@@ -244,7 +244,7 @@ class WalletImplementation extends IWalletRepository {
           wallet!.privateKey, wallet.address, contractAddress, value);
       return Right(success);
     } catch (e) {
-      return Left(FailureMessage('$e'));
+      return Left(FailureMessage.fromException(e));
     }
   }
 
@@ -257,7 +257,7 @@ class WalletImplementation extends IWalletRepository {
           wallet!.privateKey, wallet.address, contractAddress, value);
       return Right(success);
     } catch (e) {
-      return Left(FailureMessage('$e'));
+      return Left(FailureMessage.fromException(e));
     }
   }
 
@@ -274,7 +274,7 @@ class WalletImplementation extends IWalletRepository {
           value);
       return Right(success);
     } catch (e) {
-      return Left(FailureMessage('$e'));
+      return Left(FailureMessage.fromException(e));
     }
   }
 
@@ -295,7 +295,7 @@ class WalletImplementation extends IWalletRepository {
         return Right(balance / BigInt.from(pow(10, decimals.toInt())));
       }
     } catch (e) {
-      return Left(FailureMessage('$e'));
+      return Left(FailureMessage.fromException(e));
     }
   }
 
@@ -363,7 +363,7 @@ class WalletImplementation extends IWalletRepository {
         }
       }
     } catch (e) {
-      return Left(FailureMessage('$e'));
+      return Left(FailureMessage.fromException(e));
     }
   }
 
@@ -373,7 +373,7 @@ class WalletImplementation extends IWalletRepository {
       final network = await _getCurrentNetwork();
       return Right(network);
     } catch (e) {
-      return Left(FailureMessage('$e'));
+      return Left(FailureMessage.fromException(e));
     }
   }
 
@@ -412,7 +412,7 @@ class WalletImplementation extends IWalletRepository {
             FailureMessage(LocaleKeys.invalid_mnemonic_please_try_again));
       }
     } catch (e) {
-      return Left(FailureMessage('$e'));
+      return Left(FailureMessage.fromException(e));
     }
   }
 
@@ -463,7 +463,7 @@ class WalletImplementation extends IWalletRepository {
       }
       return Right(transactionList);
     } catch (e) {
-      return Left(FailureMessage('$e'));
+      return Left(FailureMessage.fromException(e));
     }
   }
 
@@ -472,7 +472,16 @@ class WalletImplementation extends IWalletRepository {
     try {
       return Right((await _isarDataSource.countWallet()) > 0);
     } catch (e) {
-      return Left(FailureMessage('$e'));
+      return Left(FailureMessage.fromException(e));
+    }
+  }
+
+  @override
+  Either<Failure, String> createNewMnemonic() {
+    try {
+      return Right(_web3DataSource.createMnemonic());
+    } catch (e) {
+      return Left(FailureMessage.fromException(e));
     }
   }
 }

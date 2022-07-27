@@ -18,18 +18,29 @@ class UpdateUserOrListToken extends UserEvent {
 }
 
 class InitialUser extends UserEvent {
+  const InitialUser();
+
   @override
   List<Object?> get props => [];
 }
+
 class StartInterval extends UserEvent {
+  const StartInterval();
+
   @override
   List<Object?> get props => [];
 }
 
 class RefreshBalanceToken extends UserEvent {
+  const RefreshBalanceToken();
+
   @override
   List<Object?> get props => [];
 }
 
+class RefreshUser extends UserEvent {
+  @override
+  List<Object?> get props => [];
 
-
+  const RefreshUser();
+}

@@ -126,7 +126,7 @@ class UserImplementation extends IUserRepository {
       ]);
       return Right(result);
     } catch (e) {
-      return Left(FailureMessage('$e'));
+      return Left(FailureMessage.fromException(e));
     }
   }
 
@@ -267,7 +267,7 @@ class UserImplementation extends IUserRepository {
           paramsGetDataChart.type);
       return Right(result.toEntity());
     } catch (e) {
-      return Left(FailureMessage('$e'));
+      return Left(FailureMessage.fromException(e));
     }
   }
 
@@ -322,7 +322,7 @@ class UserImplementation extends IUserRepository {
           params.fdate, params.tdate, params.type);
       return Right(result.toEntity());
     } catch (e) {
-      return Left(FailureMessage('$e'));
+      return Left(FailureMessage.fromException(e));
     }
   }
 

@@ -61,7 +61,7 @@ class ImportWalletCubit extends Cubit<ImportWalletState> {
               emit(ImportWalletState.errorMnemonic(
                   LocaleKeys.invalid_mnemonic_please_try_again.tr()));
             } else {
-              emit(const ImportWalletState.verifyOtpSuccess());
+              emit(ImportWalletState.verifyOtpSuccess(mnemonic));
             }
           },
         );

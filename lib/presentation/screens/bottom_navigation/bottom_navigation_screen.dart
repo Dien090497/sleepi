@@ -23,9 +23,8 @@ class BottomNavigationScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Timer? timer;
-
     context.read<WalletCubit>().checkWallet();
+    Timer? timer;
     final app = getIt<AppFlyerCustom>();
     final GlobalKey<SFTabBarState> marketTabKey = GlobalKey();
     final PageController pageController = PageController();
