@@ -37,7 +37,7 @@ class PasscodeScreen extends StatelessWidget {
       create: (_) => PasscodeCubit(),
       child: BlocConsumer<PasscodeCubit, PasscodeState>(
         listener: (context, state) {
-          if (state is checkPassCodeValid) {
+          if (state is PasscodeValid) {
             final walletCubit = context.read<WalletCubit>();
             walletCubit.getWallet().then((_) => Navigator.pop(context, true));
           } else {
@@ -79,10 +79,9 @@ class PasscodeScreen extends StatelessWidget {
                           Container(
                             alignment: Alignment.center,
                             height: 30,
-                            child: state is checkPassCodeInValid
+                            child: state is PasscodeError
                                 ? SFText(
-                                    keyText: LocaleKeys.incorrect_passcode,
-                                    style: TextStyles.red14)
+                                    keyText: state.msg, style: TextStyles.red14)
                                 : const SizedBox(),
                           ),
                           SizedBox(height: 15.h),
@@ -106,7 +105,7 @@ class PasscodeScreen extends StatelessWidget {
                       ),
                     ),
                   ),
-                  if ((state is PasscodeStateInitial && state.isLoading) ||
+                  if (state is PasscodeLoading ||
                       walletState is WalletStateLoading)
                     const LoadingIcon(),
                 ],
