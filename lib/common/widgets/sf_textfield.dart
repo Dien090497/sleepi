@@ -102,6 +102,7 @@ class _SFTextFieldState extends State<SFTextField> {
           keyboardType: widget.textInputType,
           inputFormatters: widget.inputFormatters,
           readOnly: widget.readonly,
+          textCapitalization: TextCapitalization.none,
           textAlign: widget.textAlign ?? TextAlign.start,
           enabled: widget.enabled,
           decoration: InputDecoration(

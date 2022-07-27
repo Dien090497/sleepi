@@ -6,6 +6,7 @@ import 'package:slee_fi/common/extensions/string_x.dart';
 import 'package:slee_fi/common/routes/app_routes.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
+import 'package:slee_fi/common/utils/lowercase_textfield.dart';
 import 'package:slee_fi/common/widgets/sf_buttons.dart';
 import 'package:slee_fi/common/widgets/sf_dialog.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
@@ -117,6 +118,7 @@ class _AccountLoginState extends State<AccountLoginWidget> {
             ),
             const SizedBox(height: 25),
             SFTextField(
+                inputFormatters: [LowerCaseTextFormatter()],
                 textInputType: TextInputType.emailAddress,
                 labelText: LocaleKeys.email_address,
                 onChanged: (email) => cubit.onChangeEmail(email)),
