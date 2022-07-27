@@ -132,7 +132,7 @@ class InfoIndividualScreen extends StatelessWidget {
                                               currentPoints:
                                                   state.currentPoints,
                                             ).then((_) {
-                                              cubit.refresh();
+                                              cubit.refresh(isBase: false);
                                             });
                                           },
                                         ),

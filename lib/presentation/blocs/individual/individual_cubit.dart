@@ -32,21 +32,50 @@ class IndividualCubit extends Cubit<IndividualState> {
     );
   }
 
-  void refresh() async {
+  void refresh({bool? isBase}) async {
     if (state.isRefresh) return;
     emit(state.copyWith(isRefresh: true));
-    final res = await _detailBedUseCase
-        .call(BedDetailParams(bedId: state.bed.nftId, isBase: state.isBase));
+    final res = await _detailBedUseCase.call(BedDetailParams(
+        bedId: state.bed.nftId, isBase: isBase ?? state.isBase));
     res.fold(
       (l) {
         emit(state.copyWith(isRefresh: false, isLoading: false));
       },
       (bed) {
-        emit(state.copyWith(
-          isRefresh: false,
-          isLoading: false,
-          bed: bed,
-        ));
+        isBase ?? state.isBase
+            ? emit(
+                state.copyWith(
+                  isRefresh: false,
+                  isLoading: false,
+                  bed: bed,
+                ),
+              )
+            : isBase != null && !isBase && state.isBase
+                ? emit(
+                    state.copyWith(
+                        isRefresh: false,
+                        isLoading: false,
+                        currentPoints: [
+                          bed.efficiency,
+                          bed.luck,
+                          bed.bonus,
+                          bed.special,
+                          bed.resilience,
+                        ]),
+                  )
+                : emit(
+                    state.copyWith(
+                        isRefresh: false,
+                        isLoading: false,
+                        bed: bed,
+                        currentPoints: [
+                          bed.efficiency,
+                          bed.luck,
+                          bed.bonus,
+                          bed.special,
+                          bed.resilience,
+                        ]),
+                  );
       },
     );
   }
