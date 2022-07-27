@@ -42,7 +42,10 @@ class UpGradeTab extends StatelessWidget {
               context,
               padding: const EdgeInsets.all(24),
               children: [
-                JewelDialogBodyUpgradeSuccess(jewel: state.upgradeSuccess!),
+                JewelDialogBodyUpgradeSuccess(
+                  jewel: state.upgradeSuccess!,
+                  isJewel: isJewel,
+                ),
               ],
             ).then((_) {
               context.read<JewelBloc>().add(const ClearJewelSuccess());
