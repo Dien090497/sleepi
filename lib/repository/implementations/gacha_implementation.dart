@@ -16,6 +16,8 @@ class GachaImplementation extends IGachaRepository{
 
   @override
   Future<Either<Failure, GachaSpinResponse>> spinBonus(GachaSpinSchema params) async{
+    final result = await _authDataSource.gachaSpinBonus(params);
+    return Right(result);
     try {
       final result = await _authDataSource.gachaSpinBonus(params);
       return Right(result);

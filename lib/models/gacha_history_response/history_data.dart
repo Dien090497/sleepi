@@ -8,6 +8,8 @@ class HistoryData {
   final int? userId;
   final int? specialTimes;
   final int? commonTimes;
+  final int? totalCommonTimes;
+  final int? totalSpecialTimes;
   final String? createdAt;
 
   HistoryData({
@@ -15,6 +17,8 @@ class HistoryData {
     this.userId,
     this.specialTimes,
     this.commonTimes,
+    this.totalCommonTimes,
+    this.totalSpecialTimes,
     this.createdAt,
   });
 

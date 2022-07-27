@@ -16,9 +16,10 @@ import 'package:slee_fi/resources/resources.dart';
 
 class AllResultDetailArguments {
   final String image;
+  final num? percentEffect;
   final GachaAttributesItem? attributesItem;
 
-  AllResultDetailArguments({required this.image, required this.attributesItem});
+  AllResultDetailArguments({required this.image, required this.attributesItem, this.percentEffect});
 }
 
 class AllResultDetailScreen extends StatelessWidget {
@@ -30,6 +31,7 @@ class AllResultDetailScreen extends StatelessWidget {
         ModalRoute.of(context)?.settings.arguments as AllResultDetailArguments?;
     String? type;
     String? nftName;
+
     if(args?.attributesItem?.nftType == 'item'){
       type = args?.attributesItem?.itemType;
       nftName = LocaleKeys.item.tr();
@@ -96,9 +98,10 @@ class AllResultDetailScreen extends StatelessWidget {
                           Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              SFCard(
+                              args?.attributesItem?.nftType == 'item' || args?.attributesItem?.nftType == 'jewel'? const SizedBox() : SFCard(
                                 radius: 50,
                                 height: 36,
+                                margin: const EdgeInsets.only(top: 15, right: 15),
                                 color: AppColors.blue.withOpacity(0.15),
                                 child: Center(
                                   child: SFText(
@@ -106,9 +109,6 @@ class AllResultDetailScreen extends StatelessWidget {
                                     style: TextStyles.blue14,
                                   ),
                                 ),
-                              ),
-                              const SizedBox(
-                                width: 15,
                               ),
                               SFCard(
                                 radius: 50,
@@ -131,27 +131,54 @@ class AllResultDetailScreen extends StatelessWidget {
                           const SizedBox(height: 13),
                           Column(
                             children:  [
-                              args?.attributesItem?.nftType == 'item' || args?.attributesItem?.nftType == 'jewel' ? SFCard(
-                                radius: 8,
-                                margin: EdgeInsets.zero,
-                                padding: const EdgeInsets.symmetric(vertical: 18, horizontal: 24),
-                                child: Row(
-                                  children: [
-                                    SFText(
-                                      keyText: LocaleKeys.effect,
-                                      style: TextStyles.lightGrey16,
+                              args?.attributesItem?.nftType == 'item' || args?.attributesItem?.nftType == 'jewel' ? Column(
+                                children: [
+                                  SFCard(
+                                    radius: 8,
+                                    margin: EdgeInsets.zero,
+                                    padding: const EdgeInsets.symmetric(vertical: 18, horizontal: 24),
+                                    child: Row(
+                                      children: [
+                                        SFText(
+                                          keyText: LocaleKeys.attributes,
+                                          style: TextStyles.lightGrey16,
+                                        ),
+                                        const SizedBox(width: 4),
+                                        Expanded(
+                                          child: SFText(
+                                            keyText:
+                                            '+ ${args?.attributesItem?.type.reCase(StringCase.titleCase)}',
+                                            style: TextStyles.blue16,
+                                            textAlign: TextAlign.right,
+                                          ),
+                                        ),
+                                      ],
                                     ),
-                                    const SizedBox(width: 4),
-                                    Expanded(
-                                      child: SFText(
-                                        keyText:
-                                        '+ ${LocaleKeys.base.tr()} ${type!.reCase(StringCase.titleCase)}',
-                                        style: TextStyles.blue16,
-                                        textAlign: TextAlign.right,
-                                      ),
+                                  ),
+                                  const SizedBox(height: 12),
+                                  SFCard(
+                                    radius: 8,
+                                    margin: EdgeInsets.zero,
+                                    padding: const EdgeInsets.symmetric(vertical: 18, horizontal: 24),
+                                    child: Row(
+                                      children: [
+                                        SFText(
+                                          keyText: LocaleKeys.effect,
+                                          style: TextStyles.lightGrey16,
+                                        ),
+                                        const SizedBox(width: 4),
+                                        Expanded(
+                                          child: SFText(
+                                            keyText:
+                                            '+ ${args?.percentEffect ?? 0}%',
+                                            style: TextStyles.blue16,
+                                            textAlign: TextAlign.right,
+                                          ),
+                                        ),
+                                      ],
                                     ),
-                                  ],
-                                ),
+                                  ),
+                                ],
                               )
                                   : AttributesWidget(
                                 bonus: args?.attributesItem?.bonus,

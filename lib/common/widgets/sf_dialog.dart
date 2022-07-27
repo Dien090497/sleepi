@@ -316,6 +316,35 @@ Future<T?> showLoadingDialog<T>(
   );
 }
 
+
+Future<T?> showComingSoonDialog<T>(BuildContext context) async {
+  return showDialog(
+      context: context,
+      barrierColor: AppColors.backgroundDialog,
+      builder: (context) {
+        return SFDialog(
+          padding: EdgeInsets.zero,
+          children: [
+            Align(
+              alignment: Alignment.centerRight,
+              child: IconButton(
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+                icon: const Icon(Icons.close, color: AppColors.white),
+              ),
+            ),
+            SFText(
+                keyText: LocaleKeys.coming_soon,
+                style: TextStyles.bold18White),
+            const SizedBox(height: 44),
+            // const Center(child: SFIcon(Ics.commingSoon)),
+            // const SizedBox(height: 50),
+          ],
+        );
+      });
+}
+
 class SFDialog extends StatelessWidget {
   const SFDialog(
       {required this.children,

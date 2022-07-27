@@ -1,21 +1,32 @@
-import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
 import 'package:slee_fi/common/widgets/sf_icon.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
-import 'package:slee_fi/l10n/locale_keys.g.dart';
-import 'package:slee_fi/models/gacha_probability_config_response/config_items.dart';
+import 'package:slee_fi/models/gacha_probability_config_response/config_info.dart';
 
 class ItemsProbability extends StatelessWidget {
-  const ItemsProbability({Key? key, this.colorBgIcon, required this.iconPath, required this.title, required this.items, this.width, this.height}) : super(key: key);
+  const ItemsProbability({
+    Key? key,
+    this.colorBgIcon,
+    required this.iconPath,
+    required this.title,
+    required this.configInfo,
+    this.width,
+    this.isGradient = false,
+    this.isToken = false,
+    this.style,
+    this.height}) : super(key: key);
 
   final List<Color>? colorBgIcon;
   final String iconPath;
   final String title;
+  final TextStyle? style;
   final double? width;
   final double? height;
-  final ConfigItems? items;
+  final bool isGradient;
+  final bool isToken;
+  final List<ConfigInfo>? configInfo;
 
   @override
   Widget build(BuildContext context) {
@@ -47,7 +58,7 @@ class ItemsProbability extends StatelessWidget {
                 child: SFIcon(iconPath, width: width ?? 20, height: height ?? 20,),
               ),
               const SizedBox(width: 12),
-              GradientText(title, gradient: const LinearGradient(
+              isGradient ? GradientText(title, gradient: const LinearGradient(
                   colors: [
                 AppColors.blue,
                 AppColors.purple,
@@ -55,17 +66,23 @@ class ItemsProbability extends StatelessWidget {
                 begin: Alignment(-1.0, -1.0),
                 end: Alignment(1.0, 1.0),
               ),
-              ),
+              )
+              : SFText(keyText: title, style: style),
             ],
           ),
-          const SizedBox(height: 10),
-          rowData(title: "${LocaleKeys.level.tr()} 1", value: items?.level1),
-          const SizedBox(height: 10),
-          rowData(title: "${LocaleKeys.level.tr()} 2", value: items?.level2),
-          const SizedBox(height: 10),
-          rowData(title: "${LocaleKeys.level.tr()} 3", value: items?.level3),
-          const SizedBox(height: 10),
-          rowData(title: "${LocaleKeys.level.tr()} 4", value: items?.level4),
+          ListView.builder(
+             shrinkWrap: true,
+              physics: const NeverScrollableScrollPhysics(),
+              itemCount: configInfo?.length,
+              itemBuilder: (BuildContext context,int index){
+                return  Column(
+                  children:  [
+                    const SizedBox(height: 10),
+                    rowData(title: "${isToken ? configInfo?.elementAt(index).name?.toUpperCase() : configInfo?.elementAt(index).name} ", value: configInfo?.elementAt(index).value),
+                  ],
+                );
+              }
+          )
         ],
       ),
     );

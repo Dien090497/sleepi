@@ -60,7 +60,7 @@ class Option extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(
-          horizontal: 8),
+          horizontal: 10),
       child: Container(
         padding: const EdgeInsets.all(8),
         decoration: BoxDecoration(

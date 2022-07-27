@@ -62,10 +62,10 @@ class MyItemsShortWidget extends StatelessWidget {
                   borderRadius: BorderRadius.circular(10),
                   color: AppColors.yellow,
                 ),
-                padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 5),
+                padding: const EdgeInsets.all(2),
                 child: SFText(
                   keyText: LocaleKeys.selling,
-                  style: TextStyles.white1w700size12,
+                  style: TextStyles.white10,
                 ),
               )
           ) : const SizedBox(),
