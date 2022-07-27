@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 // import 'package:flutter_translate/flutter_translate.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
@@ -72,6 +73,9 @@ class _SFTextFieldPasswordState extends State<SFTextFieldPassword> {
           controller: widget.controller,
           onChanged: widget.valueChanged,
           obscureText: obscureText,
+          inputFormatters: [
+            FilteringTextInputFormatter.deny(RegExp(r'\s')),
+          ],
           decoration: InputDecoration(
             isDense: true,
             // hintText: widget.hintText != null ? translate(widget.hintText!) : null,
