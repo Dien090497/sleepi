@@ -181,6 +181,40 @@ class _AccountLoginState extends State<AccountLoginWidget> {
             ),
             const SizedBox(height: 16),
             if (action == Action.signUp)
+              Localizations.localeOf(context).toLanguageTag().isJapanese
+               ?
+              Text.rich(
+                textAlign: TextAlign.center,
+                TextSpan(
+                  text: LocaleKeys.registration_means_that_you_agree_to.tr(),
+                  style: TextStyles.w400lightGrey12,
+                  recognizer: TapGestureRecognizer()
+                    ..onTap = () async {
+                      // final url = Uri.parse(Const.sleeFiUrl);
+                      // if (await canLaunchUrl(url)) {
+                      //   launchUrl(url);
+                      // }
+                    },
+                  children: [
+                    const TextSpan(text: ' '),
+                    TextSpan(
+                      text: LocaleKeys.user_agreement.tr(),
+                      style: TextStyles.w400Red12,
+                    ),
+                    TextSpan(text: ' ${"と".tr()} '),
+                    TextSpan(
+                      text: LocaleKeys.user_privacy.tr(),
+                      style: TextStyles.w400Red12,
+                    ),
+                    const TextSpan(text: ' '),
+                    TextSpan(
+                      text: LocaleKeys.registration_means_that_you_agree_to_ja.tr(),
+                      style: TextStyles.w400lightGrey12,
+                    ),
+                  ],
+                ),
+              )
+              :
               Text.rich(
                 textAlign: TextAlign.center,
                 TextSpan(
