@@ -69,6 +69,7 @@ class InfoIndividualScreen extends StatelessWidget {
                         final cubit = context.read<IndividualCubit>();
                         return WillPopScope(
                           onWillPop: () {
+                            print('pop11122');
                             Navigator.pop(context, state.bed);
                             return Future(() => false);
                           },

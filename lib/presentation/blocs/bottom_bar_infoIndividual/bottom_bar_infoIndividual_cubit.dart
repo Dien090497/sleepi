@@ -61,6 +61,7 @@ class BottomBarInfoIndividualCubit extends Cubit<BottomBarInfoIndividualState> {
   }
 
   void getTransactionFee() async {
+    emit(const BottomBarInfoIndividualState.loading());
     final result = await _getTransactionFeeUseCase.call(NoParams());
     result.fold((l) {
       emit(BottomBarInfoIndividualState.error(message: '$l'));
@@ -150,16 +151,18 @@ class BottomBarInfoIndividualCubit extends Cubit<BottomBarInfoIndividualState> {
   void changeRepair ({required num valueRepair, required num durability}) {
     final currentState = state; 
     if (currentState is BottomBarInfoIndividualLoaded) {
+      emit(currentState.copyWith(successTransfer: false));
       if (currentState.feeRepair?.fee != null) {
 
         if (valueRepair < durability) {
           emit(currentState.copyWith(valueRepair: durability, cost: 0));
         } else {
           final cost = currentState.feeRepair!.fee! * (valueRepair.toInt() - durability);
-          emit(currentState.copyWith(valueRepair: valueRepair, cost: cost));
+          emit(currentState.copyWith(valueRepair: valueRepair.toInt(), cost: cost));
         }
 
       }
     }
   }
+
 }
