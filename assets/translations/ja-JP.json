@@ -437,5 +437,10 @@
   "not_enough_the_same_level_and_type": "Not enough {} in same level and type. Please purchase and try again.",
   "genenis_common_bed": "ジェネシスコモンベッド",
   "do_you_want_open_the_lucky_box": "Do you want to open the lucky box?",
-  "open": "開いた"
+  "open": "開いた",
+  "apex": "頂点",
+  "rader": "レーダー",
+  "crystals": "水晶",
+  "reflection": "放射",
+  "school": "学校"
 }

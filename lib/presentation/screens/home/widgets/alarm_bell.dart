@@ -265,14 +265,20 @@ class AlarmBell extends StatelessWidget {
   Future<bool> _requestHealthAuthorization() async {
     final HealthFactory health = HealthFactory();
 
-    final types = [
-      HealthDataType.SLEEP_IN_BED,
-      HealthDataType.SLEEP_ASLEEP,
-      HealthDataType.SLEEP_AWAKE,
-      HealthDataType.SLEEP_DEEP,
-      HealthDataType.SLEEP_REM,
-      HealthDataType.SLEEP_LIGHT,
-    ];
+    final types = Platform.isAndroid
+        ? [
+            HealthDataType.SLEEP_IN_BED,
+            HealthDataType.SLEEP_ASLEEP,
+            HealthDataType.SLEEP_AWAKE,
+            HealthDataType.SLEEP_DEEP,
+            HealthDataType.SLEEP_REM,
+            HealthDataType.SLEEP_LIGHT,
+          ]
+        : [
+            HealthDataType.SLEEP_IN_BED,
+            HealthDataType.SLEEP_ASLEEP,
+            HealthDataType.SLEEP_AWAKE,
+          ];
 
     return await health.requestAuthorization(types);
   }
