@@ -99,7 +99,7 @@ class PopUpConfirmTransfer extends StatelessWidget {
                             tokenSymbol: symbol))
                     : getIt<EstimateGasWithdrawUseCase>().call(
                         EstimateGasWithdrawParam(
-                            type: symbol, contractAddress: tokenAddress)),
+                            type: 'token', contractAddress: tokenAddress)),
                 builder: (context, snapshot) {
                   return Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
