@@ -82,7 +82,7 @@ class _DepositSlftScreenState extends State<DepositSlftScreen> {
           if(state is StakingStateStakingSuccess){
             Navigator.pop(context, true);
             showSuccessfulDialog(context, null);
-            context.read<UserBloc>().add(RefreshBalanceToken());
+            context.read<UserBloc>().add(const RefreshBalanceToken());
           }
         },
         builder: (context, state) {

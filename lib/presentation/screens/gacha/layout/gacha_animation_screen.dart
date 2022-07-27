@@ -73,8 +73,6 @@ class _GachaAnimationScreenState extends State<GachaAnimationScreen>
               });
             }else{
               attributesItem = GachaAttributesItem.fromJson(args.spinInfo!.gift.first as Map<String, dynamic>);
-              print('---------------------------------------------------');
-              print(args.spinInfo!.gift.first);
               percentEffect = args.spinInfo!.gift.first['${args.spinInfo!.gift.first['type']}'];
               setState(() {
                 // isShowResult = true;

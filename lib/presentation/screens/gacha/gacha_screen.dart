@@ -42,7 +42,7 @@ class _GachaScreenState extends State<GachaScreen> {
             child: BlocConsumer<GachaSpinCubit, GachaSpinState>(
               listener: (context, state) {
                 if(state is GachaHistorySuccess){
-                  context.read<UserBloc>().add(RefreshBalanceToken());
+                  context.read<UserBloc>().add(const RefreshBalanceToken());
                   _gachaHistoryResponse = state.response;
                 }
                 if(state is GachaProbabilityConfigSuccess){
@@ -54,10 +54,8 @@ class _GachaScreenState extends State<GachaScreen> {
                   _configCost = ConfigCost.fromJson(configCost as Map<String, dynamic>);
                   var commonTime = state.gachaProbabilityConfigResponse.data.where((i) => i.key == "COMMON_RESET_TIME").toList().first.configs;
                   commonTimes = commonTime['times'];
-                  print('commonTimes : $commonTime');
                   var specialTime = state.gachaProbabilityConfigResponse.data.where((i) => i.key == "SPECIAL_RESET_TIME").toList().first.configs;
                   specialTimes = specialTime['times'];
-                  print('specialTime : $specialTime');
                 }
               },
               builder: (context, state) {

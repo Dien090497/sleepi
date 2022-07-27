@@ -41,7 +41,7 @@ class BottomNavigationScreen extends StatelessWidget {
       onFocusGained: () {
         if (timer == null || !timer!.isActive) {
           timer = Timer.periodic(const Duration(seconds: 5), (timer) async {
-            BlocProvider.of<UserBloc>(context).add(RefreshBalanceToken());
+            BlocProvider.of<UserBloc>(context).add(const RefreshBalanceToken());
           });
         }
       },
