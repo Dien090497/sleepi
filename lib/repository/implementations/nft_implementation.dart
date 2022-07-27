@@ -5,10 +5,8 @@ import 'package:slee_fi/datasources/local/secure_storage.dart';
 import 'package:slee_fi/datasources/remote/auth_datasource/auth_datasource.dart';
 import 'package:slee_fi/datasources/remote/network/nft_datasource.dart';
 import 'package:slee_fi/datasources/remote/nft_api/nft_api.dart';
-import 'package:slee_fi/entities/bed_entity/bed_entity.dart';
 import 'package:slee_fi/entities/get_repair_entity/get_repair_entity.dart';
 import 'package:slee_fi/entities/nft_entity/nft_entity.dart';
-import 'package:slee_fi/entities/nft_family/nft_family.dart';
 import 'package:slee_fi/entities/nft_sell_response_entity/nft_sell_response_entity.dart';
 import 'package:slee_fi/entities/point_of_owner/point_of_owner_entity.dart';
 import 'package:slee_fi/failures/failure.dart';
@@ -194,8 +192,6 @@ class NFTImplementation extends INFTRepository {
         signedMessage: signature,
         signer: signer,
       );
-      print(
-          'schema123xx ${schema.signer} \n ${schema.signedMessage} ${schema.tokenId} \n ${schema.type} \n ${schema.contractAddress}');
       final result = await _authDataSource.withdrawNFT(schema);
       return Right(result);
     } catch (e) {
@@ -220,7 +216,7 @@ class NFTImplementation extends INFTRepository {
       final result = await _authDataSource.getTransactionFee();
       return Right(result);
     } catch (e) {
-      return Left(FailureMessage('$e'));
+      return Left(FailureMessage.fromException(e));
     }
   }
 
@@ -231,7 +227,7 @@ class NFTImplementation extends INFTRepository {
       final result = await _authDataSource.getRepair(bedId);
       return Right(result.data.toEntity());
     } catch (e) {
-      return Left(FailureMessage('$e'));
+      return Left(FailureMessage.fromException(e));
     }
   }
 

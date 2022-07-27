@@ -1,6 +1,4 @@
 import 'package:dartz/dartz.dart';
-import 'package:slee_fi/entities/bed_entity/bed_entity.dart';
-import 'package:slee_fi/entities/nft_family/nft_family.dart';
 import 'package:slee_fi/failures/failure.dart';
 import 'package:slee_fi/models/nft_family/nft_family_model.dart';
 import 'package:slee_fi/repository/nft_repository.dart';
