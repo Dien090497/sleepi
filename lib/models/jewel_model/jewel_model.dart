@@ -9,6 +9,7 @@ class JewelModel {
   final int nftId;
   final double? percentEffect;
   final String nftName;
+  final String? name;
   final String contractAddress;
   final int tokenId;
   final String owner;
@@ -51,6 +52,7 @@ class JewelModel {
     this.special,
     this.resilience,
     this.percentEffect,
+    this.name,
   );
 
   factory JewelModel.fromJson(Map<String, dynamic> json) =>
@@ -60,7 +62,7 @@ class JewelModel {
 
   JewelEntity toEntity() => JewelEntity(
       percentEffect: percentEffect ?? -1,
-      nftName: nftName,
+      nftName: name ?? nftName,
       special: special,
       bonus: bonus,
       type: type,

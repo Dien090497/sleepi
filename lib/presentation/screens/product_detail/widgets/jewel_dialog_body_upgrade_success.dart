@@ -64,7 +64,7 @@ class JewelDialogBodyUpgradeSuccess extends StatelessWidget {
               ),
               padding: const EdgeInsets.all(8),
               child: SFText(
-                keyText: jewel.nftId.toString(),
+                keyText: jewel.name.toString(),
                 style: TextStyles.blue14.copyWith(color: qualityColor),
               ),
             ),

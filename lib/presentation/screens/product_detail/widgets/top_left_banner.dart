@@ -17,7 +17,9 @@ class TopLeftBanner extends StatelessWidget {
       turns: const AlwaysStoppedAnimation(315 / 360),
       child: Container(
         color: backgroundColor ?? textColor!.withOpacity(0.1),
-        padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 40),
+        padding: const EdgeInsets.symmetric(vertical: 4),
+        width: 120,
+        alignment: Alignment.center,
         child: SFText(
           keyText: text,
           style: TextStyles.red12W700.copyWith(color: textColor),

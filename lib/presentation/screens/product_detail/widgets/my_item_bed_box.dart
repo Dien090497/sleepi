@@ -47,6 +47,8 @@ class MyItemBedBox extends StatelessWidget {
               padding: const EdgeInsets.symmetric(horizontal: 16.0),
               child: Column(
                 children: [
+                  const SizedBox(height: 10),
+
                   Expanded(
                     child: Container(
                       alignment: Alignment.center,
