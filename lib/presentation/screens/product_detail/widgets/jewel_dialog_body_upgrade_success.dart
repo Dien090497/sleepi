@@ -11,10 +11,12 @@ import 'package:slee_fi/entities/bed_entity/bed_entity.dart';
 import 'package:slee_fi/l10n/locale_keys.g.dart';
 
 class JewelDialogBodyUpgradeSuccess extends StatelessWidget {
-  const JewelDialogBodyUpgradeSuccess({Key? key, required this.jewel})
+  const JewelDialogBodyUpgradeSuccess(
+      {Key? key, required this.jewel, required this.isJewel})
       : super(key: key);
 
   final BedEntity jewel;
+  final bool isJewel;
 
   @override
   Widget build(BuildContext context) {
@@ -51,7 +53,7 @@ class JewelDialogBodyUpgradeSuccess extends StatelessWidget {
             const SizedBox(height: 20),
             SFText(
               keyText:
-                  '${jewel.jewelType?.tr() ?? ''} ${LocaleKeys.jewel.tr()} (Lv.${jewel.level})',
+                  '${jewel.jewelType?.tr() ?? jewel.itemType?.tr() ?? ''} ${isJewel ? LocaleKeys.jewel.tr() : LocaleKeys.item.tr()} (Lv.${jewel.level})',
               style: TextStyles.white1w700size16,
             ),
             const SizedBox(height: 24),
@@ -99,7 +101,7 @@ class JewelDialogBodyUpgradeSuccess extends StatelessWidget {
                     style: TextStyles.lightGrey16,
                   ),
                   SFText(
-                    keyText: '+${jewel.percentEffect??0}%',
+                    keyText: '+${jewel.percentEffect ?? 0}%',
                     style: TextStyles.blue16,
                     textAlign: TextAlign.right,
                   )
