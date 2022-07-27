@@ -5,12 +5,11 @@ import 'package:slee_fi/common/extensions/string_x.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
 import 'package:slee_fi/common/widgets/sf_buttons.dart';
-import 'package:slee_fi/common/widgets/sf_icon.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
 import 'package:slee_fi/entities/bed_entity/bed_entity.dart';
 import 'package:slee_fi/l10n/locale_keys.g.dart';
 
-class JewelDialogBodyUpgradeSuccess extends StatelessWidget {
+class JewelDialogBodyUpgradeSuccess extends StatefulWidget {
   const JewelDialogBodyUpgradeSuccess(
       {Key? key, required this.jewel, required this.isJewel})
       : super(key: key);
@@ -73,7 +72,7 @@ class _JewelDialogBodyUpgradeSuccessState extends State<JewelDialogBodyUpgradeSu
         const SizedBox(height: 20),
         SFText(
           keyText:
-          '${jewel.jewelType?.tr() ?? jewel.itemType?.tr() ?? ''} ${isJewel ? LocaleKeys.jewel.tr() : LocaleKeys.item.tr()} (Lv.${jewel.level})',
+          '${widget.jewel.jewelType?.tr() ?? widget.jewel.itemType?.tr() ?? ''} ${widget.isJewel ? LocaleKeys.jewel.tr() : LocaleKeys.item.tr()} (Lv.${widget.jewel.level})',
           style: TextStyles.white1w700size16,
         ),
         const SizedBox(height: 24),
@@ -101,15 +100,16 @@ class _JewelDialogBodyUpgradeSuccessState extends State<JewelDialogBodyUpgradeSu
           textAlign: TextAlign.right,
         ),
         const SizedBox(height: 24),
-        SizedBox(
-            width: MediaQuery.of(context).size.width / 2.5,
-            child: SFButton(
-              text: LocaleKeys.ok,
-              onPressed: () => Navigator.pop(context),
-              textStyle: TextStyles.white16,
-              gradient: AppColors.blueGradient,
-              width: double.infinity,
-            )),
+        // SizedBox(
+        //     width: MediaQuery.of(context).size.width / 2.5,
+        //     child: SFButton(
+        //       text: LocaleKeys.ok,
+        //       onPressed: () => Navigator.pop(context),
+        //       textStyle: TextStyles.white16,
+        //       gradient: AppColors.blueGradient,
+        //       width: double.infinity,
+        //     )
+        // ),
       ],
     );
   }

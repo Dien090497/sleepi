@@ -8,7 +8,7 @@ part 'staking_info_response.g.dart';
 class StakingInfoResponse {
   final String tvl;
   final String apr;
-  final String aprInDay;
+  final String? aprInDay;
   final String slftPriceUsd;
   final bool isCompound;
   final StakeInfo stake;

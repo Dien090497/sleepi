@@ -73,7 +73,7 @@ class _UpGradeTabState extends State<UpGradeTab> with TickerProviderStateMixin{
               children: [
                 JewelDialogBodyUpgradeSuccess(
                   jewel: state.upgradeSuccess!,
-                  isJewel: isJewel,
+                  isJewel: widget.isJewel,
                 ),
               ],
             ).then((_) {
