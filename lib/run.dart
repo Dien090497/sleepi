@@ -106,56 +106,49 @@ bool onIosBackground(ServiceInstance service) {
 }
 
 Future<void> onStart(ServiceInstance service) async {
-  try {
-    DartPluginRegistrant.ensureInitialized();
-    final audioPlayer = AudioPlayer();
+  DartPluginRegistrant.ensureInitialized();
+  final audioPlayer = AudioPlayer();
 
-    if (service is AndroidServiceInstance) {
-      service.on(Const.setAsForeground).listen((event) {
-        service.setAsForegroundService();
-      });
-
-      service.on(Const.setAsBackground).listen((event) {
-        service.setAsBackgroundService();
-      });
-    }
-
-    service.on(Const.stopService).listen((event) async {
-      if (audioPlayer.playing) {
-        await audioPlayer.stop();
-      }
-      await audioPlayer.dispose();
-      service.stopSelf();
+  if (service is AndroidServiceInstance) {
+    service.on(Const.setAsForeground).listen((event) {
+      service.setAsForegroundService();
     });
 
-    SharedPreferences preferences = await SharedPreferences.getInstance();
-    final int timeWakeUp = preferences.getInt(Const.time) ?? 0;
-    final int sound = preferences.getInt(Const.sound) ?? 0;
-    final DateTime wakeUp = DateTime.fromMillisecondsSinceEpoch(timeWakeUp);
-    final int time = wakeUp.difference(DateTime.now()).inSeconds;
-
-    if (service is AndroidServiceInstance) {
-      service.setForegroundNotificationInfo(
-        title: "Sleep Tracking...",
-        content:
-            "Alarm: ${DateFormat('HH:mm dd/MM/yyyy').format(wakeUp).toString()}",
-      );
-    }
-
-    print("=--=-==-$time");
-
-    Timer.periodic(Duration(seconds: time), (timer) async {
-      if (!audioPlayer.playing) {
-        print("=--=-==-playing$time");
-        await audioPlayer.setAsset(Const.soundAlarm[sound]).then((value) async {
-          await audioPlayer.setVolume(1);
-          await audioPlayer.setLoopMode(LoopMode.all);
-          await audioPlayer.play();
-        });
-      }
-      timer.cancel();
+    service.on(Const.setAsBackground).listen((event) {
+      service.setAsBackgroundService();
     });
-  } catch (e) {
-    service.stopSelf();
   }
+
+  service.on(Const.stopService).listen((event) async {
+    if (audioPlayer.playing) {
+      await audioPlayer.stop();
+    }
+    await audioPlayer.dispose();
+    service.stopSelf();
+  });
+
+  SharedPreferences preferences = await SharedPreferences.getInstance();
+  final int timeWakeUp = preferences.getInt(Const.time) ?? 0;
+  final int sound = preferences.getInt(Const.sound) ?? 0;
+  final DateTime wakeUp = DateTime.fromMillisecondsSinceEpoch(timeWakeUp);
+  final int time = wakeUp.difference(DateTime.now()).inSeconds;
+
+  if (service is AndroidServiceInstance) {
+    service.setForegroundNotificationInfo(
+      title: "Sleep Tracking...",
+      content:
+          "Alarm: ${DateFormat('HH:mm dd/MM/yyyy').format(wakeUp).toString()}",
+    );
+  }
+
+  Timer.periodic(Duration(seconds: time), (timer) async {
+    if (!audioPlayer.playing) {
+      await audioPlayer.setAsset(Const.soundAlarm[sound]).then((value) async {
+        await audioPlayer.setVolume(1);
+        await audioPlayer.setLoopMode(LoopMode.all);
+        await audioPlayer.play();
+      });
+    }
+    timer.cancel();
+  });
 }
