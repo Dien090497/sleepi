@@ -74,6 +74,7 @@ class GridViewBedItem extends StatelessWidget {
                   padding: const EdgeInsets.symmetric(horizontal: 16.0),
                   child: Column(
                     children: [
+                      const SizedBox(height: 10),
                       Expanded(
                         child: Container(
                           padding: const EdgeInsets.only(top: 24, bottom: 12),
@@ -112,7 +113,6 @@ class GridViewBedItem extends StatelessWidget {
                         ],
                       ),
                       SizedBox(height: 4.h),
-
                       SFPercentBorderGradient(
                           valueActive: bed.bedMint.toDouble(),
                           totalValue: Const.bedMintMax),

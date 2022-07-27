@@ -70,6 +70,7 @@ class TabBedsDetail extends StatelessWidget {
                                 const SliverGridDelegateWithFixedCrossAxisCount(
                               crossAxisCount: 2,
                               crossAxisSpacing: 12,
+                              childAspectRatio: 7 / 9,
                               mainAxisSpacing: 12,
                             ),
                             itemBuilder: (context, i) {
@@ -128,6 +129,7 @@ class TabBedsDetail extends StatelessWidget {
                                             horizontal: 16.0),
                                         child: Column(
                                           children: [
+                                            const SizedBox(height: 10),
                                             Expanded(
                                               child: Container(
                                                 alignment: Alignment.center,

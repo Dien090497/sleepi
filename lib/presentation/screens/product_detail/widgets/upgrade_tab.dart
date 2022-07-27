@@ -141,7 +141,7 @@ class UpGradeTab extends StatelessWidget {
                             AttributeProcessWidget(
                               linkImage: Ics.efficiency,
                               title:
-                                  '${LocaleKeys.level.tr()} ${info != null ? info.level + 1 : 0} ${LocaleKeys.jewel.tr()}',
+                                  '${LocaleKeys.level.tr()} ${info != null ? info.level + 1 : 0} ${isJewel ? LocaleKeys.jewel.tr() : LocaleKeys.item.tr()}',
                               totalValue: 100,
                               valueActive: (info?.percent ?? 0).toDouble(),
                               isUpGrade: true,
