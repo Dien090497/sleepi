@@ -35,7 +35,9 @@ class PopUpTransfer extends StatelessWidget {
             Positioned(
               right: 0,
               child: GestureDetector(
-                onTap: onCancel,
+                onTap: () {
+                  Navigator.pop(context);
+                },
                 child: const Icon(
                   Icons.close,
                   color: AppColors.lightGrey,
@@ -137,7 +139,9 @@ class PopUpTransfer extends StatelessWidget {
                     Expanded(
                       child: SFButton(
                         text: LocaleKeys.cancel,
-                        onPressed: onCancel,
+                        onPressed: () {
+                          Navigator.pop(context);
+                        },
                         textStyle: TextStyles.lightGrey16,
                         color: AppColors.light4,
                         width: double.infinity,
