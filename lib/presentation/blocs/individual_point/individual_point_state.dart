@@ -7,14 +7,12 @@ part 'individual_point_state.freezed.dart';
 @freezed
 class IndividualPointState with _$IndividualPointState {
   const factory IndividualPointState.initial({
-    double? maxPoint,
     double? point,
     required BedEntity bed,
     required List<double> startAttributes,
     required List<double> attributesChanged,
     required List<String> attributesNames,
     @Default(false) bool isLoading,
-    @Default(30) double maxAttribute,
   }) = IndividualPointInitial;
 
   const factory IndividualPointState.done() = IndividualPointDone;

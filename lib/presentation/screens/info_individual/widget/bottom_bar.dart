@@ -113,9 +113,9 @@ class BottomBarWidgetState extends State<BottomBarWidget> {
                 if (state is BottomBarInfoIndividualLoaded) {
                   if (state.successTransfer) {
                     Navigator.pop(context);
-                    showSuccessfulDialog(context, null, onBackPress: () {
-                      Navigator.pop(context, true);
-                    });
+                    showSuccessfulDialog(context, null);
+                    widget.onBackIndividual();
+                    cubit.init();
                   }
                 }
               },
@@ -144,21 +144,22 @@ class BottomBarWidgetState extends State<BottomBarWidget> {
                     }),
                     itemBottomBar(1, context, Ics.repair, LocaleKeys.repair,
                         () {
-                      index = 1;
-                      cubit.getRepair(nftId: bedEntity.nftId);
-                      showCustomDialog(
-                        context,
-                        children: [
-                          PopUpRepair(
-                            bedEntity: bedEntity,
-                            cubit: cubit,
-                          ),
-                        ],
-                      ).then((value) {
-                        widget.onBackIndividual();
-                        index = -1;
-                        setState(() {});
-                      });
+                      if (bedEntity.durability < 100) {
+                        index = 1;
+                        cubit.getRepair(nftId: bedEntity.nftId);
+                        showCustomDialog(
+                          context,
+                          children: [
+                            PopUpRepair(
+                              bedEntity: bedEntity,
+                              cubit: cubit,
+                            ),
+                          ],
+                        ).then((value) {
+                          index = -1;
+                          setState(() {});
+                        });
+                      }
                     }),
                     itemBottomBar(2, context, Ics.heart, LocaleKeys.mint, () {
                       index = 2;

@@ -85,7 +85,6 @@ class PointDialog extends StatelessWidget {
                       },
                       point: pointChanged,
                       startPoint: startPoint,
-                      maxAttribute: state.maxAttribute,
                       key: Key('$pointChanged'),
                     );
                   },
@@ -135,7 +134,6 @@ class _IncreasePoint extends StatelessWidget {
     required this.title,
     required this.point,
     required this.startPoint,
-    required this.maxAttribute,
     required this.minusTap,
     required this.addTap,
   }) : super(key: key);
@@ -143,7 +141,6 @@ class _IncreasePoint extends StatelessWidget {
   final String title;
   final double point;
   final double startPoint;
-  final double maxAttribute;
   final VoidCallback minusTap;
   final VoidCallback addTap;
 
@@ -161,9 +158,7 @@ class _IncreasePoint extends StatelessWidget {
               showLabel: false,
               enabled: false,
               initialText: point.formatBalanceToken,
-              textStyle: point == maxAttribute
-                  ? TextStyles.green16Bold
-                  : startPoint != point
+              textStyle: startPoint != point
                       ? TextStyles.blue16
                       : TextStyles.white16,
             )),

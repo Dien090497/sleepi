@@ -115,7 +115,8 @@ class UserImplementation extends IUserRepository {
       addresses
         ..add(result.tokens[2].address)
         ..add(result.tokens[1].address)
-        ..add(result.tokens[0].address);
+        ..add(result.tokens[0].address)
+        ..add(result.tokens[3].address);
 
       await Future.wait([
         _secureStorage.saveAddressContract(addressContract: result.contract),
