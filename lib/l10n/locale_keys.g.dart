@@ -481,5 +481,10 @@ abstract class  LocaleKeys {
   static const not_enough_the_same_level_and_type = 'not_enough_the_same_level_and_type';
   static const genenis_common_bed = 'genenis_common_bed';
   static const open = 'open';
+  static const apex = 'apex';
+  static const rader = 'rader';
+  static const crystals = 'crystals';
+  static const reflection = 'reflection';
+  static const school = 'school';
 
 }

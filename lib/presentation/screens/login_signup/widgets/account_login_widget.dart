@@ -97,7 +97,7 @@ class _AccountLoginState extends State<AccountLoginWidget> {
           } else {
             Navigator.pushNamedAndRemoveUntil(
                 context, R.healthcarePermission, (_) => false,
-                arguments: HealthcareArg(true));
+                arguments: HealthcareArg(true, state.userInfoEntity.email));
           }
         } else if (state is SignInSignUpStateVerifySuccess) {
           Navigator.pushNamed(context, R.createPassword,

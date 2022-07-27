@@ -71,7 +71,10 @@ class _UpGradeTabState extends State<UpGradeTab> with TickerProviderStateMixin{
               padding: const EdgeInsets.all(24),
               backgroundColor: AppColors.transparent,
               children: [
-                JewelDialogBodyUpgradeSuccess(jewel: state.upgradeSuccess!),
+                JewelDialogBodyUpgradeSuccess(
+                  jewel: state.upgradeSuccess!,
+                  isJewel: isJewel,
+                ),
               ],
             ).then((_) {
               context.read<JewelBloc>().add(const ClearJewelSuccess());

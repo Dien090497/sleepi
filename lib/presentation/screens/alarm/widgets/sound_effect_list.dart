@@ -1,4 +1,3 @@
-import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:just_audio/just_audio.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -6,7 +5,6 @@ import 'package:slee_fi/common/const/const.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/widgets/sf_card.dart';
 import 'package:slee_fi/common/widgets/sf_list_tile.dart';
-import 'package:slee_fi/l10n/locale_keys.g.dart';
 
 class AlarmSoundEffectList extends StatefulWidget {
   const AlarmSoundEffectList({Key? key}) : super(key: key);
@@ -49,7 +47,7 @@ class _AlarmSoundEffectListState extends State<AlarmSoundEffectList> {
                   ),
               itemBuilder: (BuildContext context, int index) {
                 return SFListTile(
-                  text: "${LocaleKeys.sound.tr()} ${index + 1}",
+                  text: Const.nameSoundAlarm[index],
                   trailing: index == temp
                       ? const Icon(
                           Icons.check,

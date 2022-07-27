@@ -181,6 +181,8 @@ Remote data such as api call, firebase,...
 # Command
 
 ```dart
+flutter build ios --release
+
 flutter run --flavor prod -t lib/main_prod.dart
 
 flutter run --flavor dev -t lib/main_dev.dart
@@ -222,4 +224,6 @@ flutter pub run dart_code_metrics:metrics check-unused-files lib
 flutter pub run dart_code_metrics:metrics check-unused-l10n lib
 
 flutter pub run dart_code_metrics:metrics check-unused-code lib
+
+rm -rf ios/Flutter/Flutter.framework
 ```

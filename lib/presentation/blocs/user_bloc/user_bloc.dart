@@ -22,7 +22,6 @@ class UserBloc extends Bloc<UserEvent, UserState> {
     );
   }
 
-  //TODO: remove default data
   final _defaultTokens = [
     const TokenEntity(
         address: '',

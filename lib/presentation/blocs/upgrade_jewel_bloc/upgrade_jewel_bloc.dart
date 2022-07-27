@@ -139,7 +139,11 @@ class JewelBloc extends Bloc<JewelEvent, JewelState> {
     result.fold((l) {
       final currentState = state;
       if (currentState is JewelStateLoaded && _currentPage != 1) {
-        emit(currentState.copyWith(errorMessage: l.msg, loading: false));
+        emit(currentState.copyWith(
+          errorMessage: l.msg,
+          loading: false,
+          jewelsUpgrade: [],
+        ));
       }
     }, (r) {
       final List<BedEntity> temp = List.from(currentState.jewelsAvailable);
@@ -212,7 +216,7 @@ class JewelBloc extends Bloc<JewelEvent, JewelState> {
       ClearJewelSuccess event, Emitter<JewelState> emit) {
     final currentState = state;
     if (currentState is JewelStateLoaded) {
-      emit(currentState.copyWith(upgradeSuccess: null));
+      emit(currentState.copyWith(upgradeSuccess: null, errorMessage: ''));
     }
   }
 }
