@@ -51,9 +51,11 @@ class PopUpAvalancheWallet extends StatelessWidget {
                             showMessageDialog(context, '$l');
                           },
                           (r) {
-                            Navigator.pushReplacementNamed(
-                                context, R.createPasscode,
-                                arguments: r);
+                            Navigator.pushNamed(context, R.createPasscode,
+                                    arguments: r)
+                                .then((value) {
+                              Navigator.pop(context, value);
+                            });
                           },
                         );
                       },
@@ -70,7 +72,9 @@ class PopUpAvalancheWallet extends StatelessWidget {
               width: double.infinity,
               color: AppColors.blue,
               onPressed: () {
-                Navigator.pushReplacementNamed(context, R.importWallet);
+                Navigator.pushNamed(context, R.importWallet).then((value) {
+                  Navigator.pop(context, value);
+                });
               },
             ),
           ],

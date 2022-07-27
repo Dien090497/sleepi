@@ -5,8 +5,6 @@ import 'package:slee_fi/di/injector.dart';
 import 'package:slee_fi/l10n/locale_keys.g.dart';
 import 'package:slee_fi/schema/verify_schema/verify_schema.dart';
 import 'package:slee_fi/usecase/current_user_usecase.dart';
-import 'package:slee_fi/usecase/fetch_balance_spending_usecase.dart';
-import 'package:slee_fi/usecase/get_user_usecase.dart';
 import 'package:slee_fi/usecase/send_otp_mail_usecase.dart';
 import 'package:slee_fi/usecase/usecase.dart';
 import 'package:slee_fi/usecase/validate_mnemonic.dart';
@@ -23,17 +21,18 @@ class ImportWalletCubit extends Cubit<ImportWalletState> {
   final verifyOtpUC = getIt<VerifyOTPUseCase>();
   final _validateMnemonicUC = getIt<ValidateMnemonicUseCase>();
   final _currentUserUC = getIt<CurrentUserUseCase>();
-  final _getUserUC = getIt<GetUserUseCase>();
-  final _fetchBalanceSpendingUC = getIt<FetchBalanceSpendingUseCase>();
 
-  late String userEmail;
+  String userEmail = '';
 
-  init() {
-    _getUserEmail();
+  void init() async {
+    final result = await _currentUserUC.call(NoParams());
+    result.fold((l) {}, (r) {
+      userEmail = r.email;
+    });
   }
 
   Future<void> process({required String otp, required String mnemonic}) async {
-    emit(const ImportWalletState.initial());
+    emit(const ImportWalletState.initial(isLoading: true));
     if (otp.isEmpty) {
       emit(ImportWalletState.errorOtp(LocaleKeys.this_field_is_required.tr()));
       return;
@@ -51,7 +50,6 @@ class ImportWalletCubit extends Cubit<ImportWalletState> {
       },
       (r) async {
         final result = await _validateMnemonicUC.call(mnemonic);
-        emit(const ImportWalletState.initial(isLoading: true));
         result.fold(
           (l) {
             emit(ImportWalletState.errorMnemonic('$l'));
@@ -75,33 +73,5 @@ class ImportWalletCubit extends Cubit<ImportWalletState> {
     result.fold((l) {
       emit(ImportWalletState.errorOtp('$l'));
     }, (r) {});
-  }
-
-  void importWallet({required String mnemonic}) async {
-    emit(const ImportWalletState.initial(isLoading: true));
-    final result = await importWalletUC.call(mnemonic);
-    result.fold((l) {
-      emit(ImportWalletState.errorMnemonic(
-          LocaleKeys.invalid_mnemonic_please_try_again.tr()));
-    }, (r) async {
-      final userRes = await _getUserUC.call(NoParams());
-      userRes.fold((l) {
-        emit(ImportWalletState.success(r, null, []));
-      }, (userInfo) async {
-        final balanceRes = await _fetchBalanceSpendingUC.call('${userInfo.id}');
-        balanceRes.fold((l) {
-          emit(ImportWalletState.success(r, userInfo, []));
-        }, (tokensSpending) {
-          emit(ImportWalletState.success(r, userInfo, tokensSpending));
-        });
-      });
-    });
-  }
-
-  Future _getUserEmail() async {
-    final result = await _currentUserUC.call(NoParams());
-    result.fold((l) {}, (r) {
-      userEmail = r.email;
-    });
   }
 }

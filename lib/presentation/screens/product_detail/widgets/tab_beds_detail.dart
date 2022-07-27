@@ -16,8 +16,6 @@ import 'package:slee_fi/common/widgets/sf_sub_tab_bar.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
 import 'package:slee_fi/entities/bed_entity/bed_entity.dart';
 import 'package:slee_fi/l10n/locale_keys.g.dart';
-import 'package:slee_fi/presentation/blocs/bottom_bar_infoIndividual/bottom_bar_infoIndividual_cubit.dart';
-import 'package:slee_fi/presentation/blocs/bottom_bar_infoIndividual/bottom_bar_infoIndividual_state.dart';
 import 'package:slee_fi/presentation/blocs/nft_list/nft_list_cubit.dart';
 import 'package:slee_fi/presentation/blocs/nft_list/nft_list_state.dart';
 import 'package:slee_fi/presentation/screens/info_individual/info_individual_screen.dart';
@@ -25,7 +23,6 @@ import 'package:slee_fi/presentation/screens/product_detail/widgets/auto_reset_t
 import 'package:slee_fi/presentation/screens/product_detail/widgets/refresh_list_widget.dart';
 import 'package:slee_fi/presentation/screens/product_detail/widgets/top_left_banner.dart';
 import 'package:slee_fi/presentation/screens/wallet_creation_warning/widgets/pop_up_avalanche_wallet.dart';
-import 'package:slee_fi/resources/resources.dart';
 import 'package:slee_fi/resources/resources.dart';
 import 'package:slee_fi/usecase/fetch_bed_usecase.dart';
 
@@ -117,7 +114,8 @@ class TabBedsDetail extends StatelessWidget {
                                                       BorderRadius.circular(10),
                                                   color: AppColors.yellow,
                                                 ),
-                                                padding: const EdgeInsets.all(2),
+                                                padding:
+                                                    const EdgeInsets.all(2),
                                                 child: SFText(
                                                   keyText: LocaleKeys.selling,
                                                   style: TextStyles.white10,
@@ -198,9 +196,11 @@ class TabBedsDetail extends StatelessWidget {
                       },
                     ),
                     Padding(
-                      padding: EdgeInsets.only(bottom: MediaQuery.of(context).size.height * 0.3),
+                      padding: EdgeInsets.only(
+                          bottom: MediaQuery.of(context).size.height * 0.3),
                       child: const Center(child: SFIcon(Ics.commingSoon)),
                     ),
+
                     /// BEDBOX INFORMATION
                     // BlocBuilder<NFTListCubit, NftListState>(
                     //   builder: (context, state) {
@@ -235,90 +235,23 @@ class TabBedsDetail extends StatelessWidget {
                     //               context,
                     //               padding: const EdgeInsets.all(24),
                     //               children: [
-                    //                 BlocBuilder<WalletCubit, WalletState>(
-                    //                   builder: (context, walletState) {
-                    //                     return PopUpBedBoxDetail(
-                    //                       bedEntity: listBeds[index],
-                    //                       onTransfer: () {
-                    //                         if (walletState
-                    //                             is WalletNotExisted) {
-                    //                           showCreateOrImportWallet(
-                    //                               context: context);
-                    //                         } else {
-                    //                           if (listBeds[index].isLock != 1) {
-                    //                             Navigator.pop(context);
-                    //                             final cubit =
-                    //                                 BottomBarInfoIndividualCubit()
-                    //                                   ..init();
-                    //                             cubit.estimateGas(
-                    //                                 contractAddress:
-                    //                                     listBeds[index]
-                    //                                         .contractAddress);
-                    //                             showCustomDialog(context,
-                    //                                 children: [
-                    //                                   BlocProvider(
-                    //                                     create: (context) =>
-                    //                                         cubit,
-                    //                                     child: BlocConsumer<
-                    //                                         BottomBarInfoIndividualCubit,
-                    //                                         BottomBarInfoIndividualState>(
-                    //                                       listener:
-                    //                                           (context, state) {
-                    //                                         if (state
-                    //                                             is BottomBarInfoIndividualError) {
-                    //                                           showMessageDialog(
-                    //                                               context,
-                    //                                               state
-                    //                                                   .message);
-                    //                                         }
-                    //                                         if (state
-                    //                                             is BottomBarInfoIndividualLoaded) {
-                    //                                           if (state
-                    //                                               .successTransfer) {
-                    //                                             Navigator.pop(
-                    //                                                 context);
-                    //                                             showSuccessfulDialog(
-                    //                                                 context,
-                    //                                                 null,
-                    //                                                 onBackPress:
-                    //                                                     () {
-                    //                                               Navigator
-                    //                                                   .pushNamedAndRemoveUntil(
-                    //                                                 context,
-                    //                                                 R.bottomNavigation,
-                    //                                                 (r) =>
-                    //                                                     false,
-                    //                                               );
-                    //                                             });
-                    //                                           }
-                    //                                         }
-                    //                                       },
-                    //                                       builder:
-                    //                                           (context, state) {
-                    //                                         return PopUpTransfer(
-                    //                                           bedEntity:
-                    //                                               listBeds[
-                    //                                                   index],
-                    //                                           cubit: cubit,
-                    //                                           valueTransfer: 1,
-                    //                                         );
-                    //                                       },
-                    //                                     ),
-                    //                                   ),
-                    //                                 ]);
-                    //                           } else {}
-                    //                         }
-                    //                       },
-                    //                       onOpen: () {
-                    //                         context
-                    //                             .read<NFTListCubit>()
-                    //                             .openBedBox(listBeds[index]);
-                    //                       },
-                    //                       onSell: () {
+                    //                 PopUpBedBoxDetail(
+                    //                   bedEntity: listBeds[index],
+                    //                   onTransfer: () {
+                    //                     final walletState =
+                    //                         context.read<WalletCubit>().state;
+                    //                     if (walletState is WalletNotExisted) {
+                    //                       showCreateOrImportWallet(
+                    //                           context: context);
+                    //                     } else {
+                    //                       if (listBeds[index].isLock != 1) {
                     //                         Navigator.pop(context);
                     //                         final cubit =
                     //                             BottomBarInfoIndividualCubit()
                     //                               ..init();
+                    //                         cubit.estimateGas(
+                    //                             contractAddress: listBeds[index]
+                    //                                 .contractAddress);
                     //                         showCustomDialog(context,
                     //                             children: [
                     //                               BlocProvider(
@@ -338,6 +271,8 @@ class TabBedsDetail extends StatelessWidget {
                     //                                         is BottomBarInfoIndividualLoaded) {
                     //                                       if (state
                     //                                           .successTransfer) {
+                    //                                         Navigator.pop(
+                    //                                             context);
                     //                                         showSuccessfulDialog(
                     //                                             context, null,
                     //                                             onBackPress:
@@ -354,30 +289,77 @@ class TabBedsDetail extends StatelessWidget {
                     //                                   },
                     //                                   builder:
                     //                                       (context, state) {
-                    //                                     if (listBeds[index]
-                    //                                                 .isLock ==
-                    //                                             1 &&
-                    //                                         listBeds[index]
-                    //                                                 .statusNftSale ==
-                    //                                             'ON_SALE') {
-                    //                                       return CancelSell(
-                    //                                         bedEntity:
-                    //                                             listBeds[index],
-                    //                                         cubit: cubit,
-                    //                                       );
-                    //                                     } else {
-                    //                                       return PopUpSell(
-                    //                                         bedEntity:
-                    //                                             listBeds[index],
-                    //                                         cubit: cubit,
-                    //                                       );
-                    //                                     }
+                    //                                     return PopUpTransfer(
+                    //                                       bedEntity:
+                    //                                           listBeds[index],
+                    //                                       cubit: cubit,
+                    //                                       valueTransfer: 1,
+                    //                                     );
                     //                                   },
                     //                                 ),
                     //                               ),
                     //                             ]);
-                    //                       },
-                    //                     );
+                    //                       } else {}
+                    //                     }
+                    //                   },
+                    //                   onOpen: () {
+                    //                     context
+                    //                         .read<NFTListCubit>()
+                    //                         .openBedBox(listBeds[index]);
+                    //                   },
+                    //                   onSell: () {
+                    //                     Navigator.pop(context);
+                    //                     final cubit =
+                    //                         BottomBarInfoIndividualCubit()
+                    //                           ..init();
+                    //                     showCustomDialog(context, children: [
+                    //                       BlocProvider(
+                    //                         create: (context) => cubit,
+                    //                         child: BlocConsumer<
+                    //                             BottomBarInfoIndividualCubit,
+                    //                             BottomBarInfoIndividualState>(
+                    //                           listener: (context, state) {
+                    //                             if (state
+                    //                                 is BottomBarInfoIndividualError) {
+                    //                               showMessageDialog(
+                    //                                   context, state.message);
+                    //                             }
+                    //                             if (state
+                    //                                 is BottomBarInfoIndividualLoaded) {
+                    //                               if (state.successTransfer) {
+                    //                                 showSuccessfulDialog(
+                    //                                     context, null,
+                    //                                     onBackPress: () {
+                    //                                   Navigator
+                    //                                       .pushNamedAndRemoveUntil(
+                    //                                     context,
+                    //                                     R.bottomNavigation,
+                    //                                     (r) => false,
+                    //                                   );
+                    //                                 });
+                    //                               }
+                    //                             }
+                    //                           },
+                    //                           builder: (context, state) {
+                    //                             if (listBeds[index].isLock ==
+                    //                                     1 &&
+                    //                                 listBeds[index]
+                    //                                         .statusNftSale ==
+                    //                                     'ON_SALE') {
+                    //                               return CancelSell(
+                    //                                 bedEntity: listBeds[index],
+                    //                                 cubit: cubit,
+                    //                               );
+                    //                             } else {
+                    //                               return PopUpSell(
+                    //                                 bedEntity: listBeds[index],
+                    //                                 cubit: cubit,
+                    //                               );
+                    //                             }
+                    //                           },
+                    //                         ),
+                    //                       ),
+                    //                     ]);
                     //                   },
                     //                 )
                     //               ],
@@ -388,6 +370,7 @@ class TabBedsDetail extends StatelessWidget {
                     //     );
                     //   },
                     // ),
+
                     ///--------------------------------------
                   ],
                 ),

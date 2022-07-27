@@ -84,7 +84,7 @@ class WalletCubit extends Cubit<WalletState> {
     }
   }
 
-  void loadCurrentWallet(WalletInfoEntity wallet) async {
+  Future<void> loadCurrentWallet(WalletInfoEntity wallet) async {
     final nftAddresses =
         (await _getNftAddressesUC.call(NoParams())).getOrElse(() => []);
     final tokenAddresses =

@@ -6,8 +6,6 @@ import 'package:slee_fi/common/widgets/sf_gridview.dart';
 import 'package:slee_fi/common/widgets/sf_icon.dart';
 import 'package:slee_fi/common/widgets/sf_sub_tab_bar.dart';
 import 'package:slee_fi/l10n/locale_keys.g.dart';
-import 'package:slee_fi/presentation/blocs/bottom_bar_infoIndividual/bottom_bar_infoIndividual_cubit.dart';
-import 'package:slee_fi/presentation/blocs/bottom_bar_infoIndividual/bottom_bar_infoIndividual_state.dart';
 import 'package:slee_fi/presentation/blocs/upgrade_jewel_bloc/upgrade_jewel_bloc.dart';
 import 'package:slee_fi/presentation/blocs/upgrade_jewel_bloc/upgrade_jewel_event.dart';
 import 'package:slee_fi/presentation/blocs/upgrade_jewel_bloc/upgrade_jewel_state.dart';
@@ -62,7 +60,6 @@ class TabJewelsDetail extends StatelessWidget {
                                       // );
                                       /// ------------------------------
                                       showComingSoonDialog(context);
-
                                     },
                                     child: MyJewelsShortWidget(
                                         jewel: state.jewels[i]),
@@ -71,12 +68,14 @@ class TabJewelsDetail extends StatelessWidget {
                               );
                       },
                     ),
+
                     /// UPGRADE TAB FUNCTION
                     // const UpGradeTab(isJewel: true),
                     /// ------------------------------
 
                     Padding(
-                      padding: EdgeInsets.only(bottom: MediaQuery.of(context).size.height * 0.3),
+                      padding: EdgeInsets.only(
+                          bottom: MediaQuery.of(context).size.height * 0.3),
                       child: const Center(child: SFIcon(Ics.commingSoon)),
                     )
                   ],

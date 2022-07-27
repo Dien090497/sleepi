@@ -96,7 +96,7 @@ class ConfirmCreatePasscodeScreen extends StatelessWidget {
                                     (r) {
                                       context
                                           .read<WalletCubit>()
-                                          .loadCurrentWallet(r);
+                                          .importWallet(r);
                                       Navigator.pop(context);
                                       Navigator.pop(context, true);
                                     },

@@ -132,33 +132,30 @@ class PopUpBedMarketPlace extends StatelessWidget {
             Expanded(
               child: BlocBuilder<UserBloc, UserState>(
                   builder: (context, userState) {
-                return BlocBuilder<WalletCubit, WalletState>(
-                  builder: (context, walletState) {
-                    return SFButton(
-                      text: LocaleKeys.confirm,
-                      onPressed: () {
-                        Navigator.pop(context);
-                        if (userState is UserLoaded) {
-                          for (final element in userState.listTokens) {
-                            if (element.symbol.toLowerCase() == 'avax') {
-                              if (element.balance < double.parse(bed.price)) {
-                                if (walletState is WalletNotExisted) {
-                                  _showCreateOrImportWallet(context);
-                                } else {
-                                  _showDonWorryDialog(context, bed);
-                                }
-                              } else {
-                                _showConfirmDialog(context, bed);
-                              }
+                return SFButton(
+                  text: LocaleKeys.confirm,
+                  onPressed: () {
+                    final walletState = context.read<WalletCubit>().state;
+                    Navigator.pop(context);
+                    if (userState is UserLoaded) {
+                      for (final element in userState.listTokens) {
+                        if (element.symbol.toLowerCase() == 'avax') {
+                          if (element.balance < double.parse(bed.price)) {
+                            if (walletState is WalletNotExisted) {
+                              _showCreateOrImportWallet(context);
+                            } else {
+                              _showDonWorryDialog(context, bed);
                             }
+                          } else {
+                            _showConfirmDialog(context, bed);
                           }
                         }
-                      },
-                      textStyle: TextStyles.white16,
-                      gradient: AppColors.blueGradient,
-                      width: double.infinity,
-                    );
+                      }
+                    }
                   },
+                  textStyle: TextStyles.white16,
+                  gradient: AppColors.blueGradient,
+                  width: double.infinity,
                 );
               }),
             ),
