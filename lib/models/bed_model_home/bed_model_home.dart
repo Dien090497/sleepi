@@ -10,6 +10,7 @@ class BedModelHome {
   final int tokenId;
   final double? percentEffect;
   final String nftName;
+  final String? name;
   final String contractAddress;
   final String owner;
   final String type;
@@ -59,6 +60,7 @@ class BedModelHome {
     this.jewelType,
     this.percentEffect,
     this.itemType,
+    this.name,
   );
 
   factory BedModelHome.fromJson(Map<String, dynamic> json) =>
@@ -74,7 +76,7 @@ class BedModelHome {
         jewelType: jewelType,
         id: id,
         nftId: nftId,
-        name: nftName,
+        name: name ?? nftName,
         nftClass: classNft ?? '',
         tokenId: tokenId,
         level: level,

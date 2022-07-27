@@ -37,21 +37,23 @@ class MyJewelsShortWidget extends StatelessWidget {
               backgroundColor: qualityColor.withOpacity(0.1),
             ),
           ),
-          (jewel.isLock == 1 && jewel.statusNftSale == 'ON_SALE' ) ? Positioned(
-            top: 14,
-            right: 10,
-            child: Container(
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(10),
-                color: AppColors.yellow,
-              ),
-              padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 5),
-              child: SFText(
-                keyText: LocaleKeys.selling,
-                style: TextStyles.white1w700size12,
-              ),
-            )
-          ) : const SizedBox(),
+          (jewel.isLock == 1 && jewel.statusNftSale == 'ON_SALE')
+              ? Positioned(
+                  top: 14,
+                  right: 10,
+                  child: Container(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(10),
+                      color: AppColors.yellow,
+                    ),
+                    padding:
+                        const EdgeInsets.symmetric(horizontal: 5, vertical: 5),
+                    child: SFText(
+                      keyText: LocaleKeys.selling,
+                      style: TextStyles.white1w700size12,
+                    ),
+                  ))
+              : const SizedBox(),
           Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
@@ -64,8 +66,7 @@ class MyJewelsShortWidget extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Flexible(
-                      child: Container(
+                  Container(
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(50),
                       border: Border.all(color: qualityColor.withOpacity(0.1)),
@@ -79,7 +80,7 @@ class MyJewelsShortWidget extends StatelessWidget {
                       style: TextStyles.white1w700size12
                           .copyWith(color: qualityColor),
                     ),
-                  )),
+                  ),
                   const SizedBox(width: 4),
                   Container(
                     decoration: BoxDecoration(
@@ -90,7 +91,7 @@ class MyJewelsShortWidget extends StatelessWidget {
                         const EdgeInsets.symmetric(vertical: 5, horizontal: 8),
                     alignment: Alignment.center,
                     child: SFText(
-                        keyText: '+ ${jewel.efficiency}%',
+                        keyText: '+ ${jewel.percentEffect}%',
                         style: TextStyles.greenW700size12),
                   ),
                 ],

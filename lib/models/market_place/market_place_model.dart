@@ -76,7 +76,9 @@ class MarketPlaceModel {
     this.startTime,
     this.endTime,
     this.jewelType,
-    this.isBurn, this.percentEffect, this.itemType,
+    this.isBurn,
+    this.percentEffect,
+    this.itemType,
   );
 
   factory MarketPlaceModel.fromJson(Map<String, dynamic> json) =>
@@ -88,10 +90,11 @@ class MarketPlaceModel {
     return BedEntity(
       itemType: itemType,
       type: type,
-      percentEffect: percentEffect,
+      percentEffect: percentEffect ??
+          (jewelCorrection != null ? double.parse(jewelCorrection!) : 0.0),
       jewelType: jewelType,
       isBurn: isBurn ?? 0,
-      name: nftName,
+      name: name ,
       nftId: nftId,
       nftClass: classNft ?? '',
       tokenId: tokenId,
