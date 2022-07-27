@@ -16,7 +16,6 @@ import 'package:slee_fi/common/widgets/sf_sub_tab_bar.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
 import 'package:slee_fi/entities/bed_entity/bed_entity.dart';
 import 'package:slee_fi/l10n/locale_keys.g.dart';
-import 'package:slee_fi/models/pop_with_result.dart';
 import 'package:slee_fi/presentation/blocs/bottom_bar_infoIndividual/bottom_bar_infoIndividual_cubit.dart';
 import 'package:slee_fi/presentation/blocs/bottom_bar_infoIndividual/bottom_bar_infoIndividual_state.dart';
 import 'package:slee_fi/presentation/blocs/nft_list/nft_list_cubit.dart';
@@ -240,99 +239,149 @@ class TabBedsDetail extends StatelessWidget {
                                   context,
                                   padding: const EdgeInsets.all(24),
                                   children: [
-                                    PopUpBedBoxDetail(
-                                      bedEntity: listBeds[index],
-                                      onTransfer: () {
-                                        final stateWalletCubit = context.read<WalletCubit>().state;
-                                        if (stateWalletCubit is WalletNotExisted) {
-                                          showCreateOrImportWallet(context: context).then(
-                                                  (value) => _showWarningDialog(value, context));
-                                        } else {
-
-                                          if (listBeds[index].isLock != 1) {
+                                    BlocBuilder<WalletCubit, WalletState>(
+                                      builder: (context, walletState) {
+                                        return PopUpBedBoxDetail(
+                                          bedEntity: listBeds[index],
+                                          onTransfer: () {
+                                            if (walletState
+                                                is WalletNotExisted) {
+                                              showCreateOrImportWallet(
+                                                  context: context);
+                                            } else {
+                                              if (listBeds[index].isLock != 1) {
+                                                Navigator.pop(context);
+                                                final cubit =
+                                                    BottomBarInfoIndividualCubit()
+                                                      ..init();
+                                                cubit.estimateGas(
+                                                    contractAddress:
+                                                        listBeds[index]
+                                                            .contractAddress);
+                                                showCustomDialog(context,
+                                                    children: [
+                                                      BlocProvider(
+                                                        create: (context) =>
+                                                            cubit,
+                                                        child: BlocConsumer<
+                                                            BottomBarInfoIndividualCubit,
+                                                            BottomBarInfoIndividualState>(
+                                                          listener:
+                                                              (context, state) {
+                                                            if (state
+                                                                is BottomBarInfoIndividualError) {
+                                                              showMessageDialog(
+                                                                  context,
+                                                                  state
+                                                                      .message);
+                                                            }
+                                                            if (state
+                                                                is BottomBarInfoIndividualLoaded) {
+                                                              if (state
+                                                                  .successTransfer) {
+                                                                Navigator.pop(
+                                                                    context);
+                                                                showSuccessfulDialog(
+                                                                    context,
+                                                                    null,
+                                                                    onBackPress:
+                                                                        () {
+                                                                  Navigator
+                                                                      .pushNamedAndRemoveUntil(
+                                                                    context,
+                                                                    R.bottomNavigation,
+                                                                    (r) =>
+                                                                        false,
+                                                                  );
+                                                                });
+                                                              }
+                                                            }
+                                                          },
+                                                          builder:
+                                                              (context, state) {
+                                                            return PopUpTransfer(
+                                                              bedEntity:
+                                                                  listBeds[
+                                                                      index],
+                                                              cubit: cubit,
+                                                              valueTransfer: 1,
+                                                            );
+                                                          },
+                                                        ),
+                                                      ),
+                                                    ]);
+                                              } else {}
+                                            }
+                                          },
+                                          onOpen: () {
+                                            context
+                                                .read<NFTListCubit>()
+                                                .openBedBox(listBeds[index]);
+                                          },
+                                          onSell: () {
                                             Navigator.pop(context);
-                                            final cubit = BottomBarInfoIndividualCubit()..init();
-                                            cubit.estimateGas(contractAddress: listBeds[index].contractAddress);
-                                            showCustomDialog(context, children: [
-                                              BlocProvider(
-                                                create: (context) => cubit,
-                                                child: BlocConsumer<BottomBarInfoIndividualCubit,
-                                                    BottomBarInfoIndividualState>(
-                                                  listener: (context, state) {
-                                                    if (state is BottomBarInfoIndividualError) {
-                                                      showMessageDialog(context, state.message);
-                                                    }
-                                                    if (state is BottomBarInfoIndividualLoaded) {
-                                                      if (state.successTransfer) {
-                                                        Navigator.pop(context);
-                                                        showSuccessfulDialog(context, null, onBackPress: () {
-                                                          Navigator.pushNamedAndRemoveUntil(
-                                                            context,
-                                                            R.bottomNavigation,
+                                            final cubit =
+                                                BottomBarInfoIndividualCubit()
+                                                  ..init();
+                                            showCustomDialog(context,
+                                                children: [
+                                                  BlocProvider(
+                                                    create: (context) => cubit,
+                                                    child: BlocConsumer<
+                                                        BottomBarInfoIndividualCubit,
+                                                        BottomBarInfoIndividualState>(
+                                                      listener:
+                                                          (context, state) {
+                                                        if (state
+                                                            is BottomBarInfoIndividualError) {
+                                                          showMessageDialog(
+                                                              context,
+                                                              state.message);
+                                                        }
+                                                        if (state
+                                                            is BottomBarInfoIndividualLoaded) {
+                                                          if (state
+                                                              .successTransfer) {
+                                                            showSuccessfulDialog(
+                                                                context, null,
+                                                                onBackPress:
+                                                                    () {
+                                                              Navigator
+                                                                  .pushNamedAndRemoveUntil(
+                                                                context,
+                                                                R.bottomNavigation,
                                                                 (r) => false,
+                                                              );
+                                                            });
+                                                          }
+                                                        }
+                                                      },
+                                                      builder:
+                                                          (context, state) {
+                                                        if (listBeds[index]
+                                                                    .isLock ==
+                                                                1 &&
+                                                            listBeds[index]
+                                                                    .statusNftSale ==
+                                                                'ON_SALE') {
+                                                          return CancelSell(
+                                                            bedEntity:
+                                                                listBeds[index],
+                                                            cubit: cubit,
                                                           );
-                                                        });
-                                                      }
-                                                    }
-                                                  },
-                                                  builder: (context, state) {
-                                                    return PopUpTransfer(
-                                                      bedEntity: listBeds[index],
-                                                      cubit: cubit,
-                                                      valueTransfer: 1,
-                                                    );
-                                                  },
-                                                ),
-                                              ),
-                                            ]);
-                                          } else {}
-                                        }
-                                      },
-                                      onOpen: () {
-                                        context
-                                            .read<NFTListCubit>()
-                                            .openBedBox(listBeds[index]);
-                                      },
-                                      onSell: () {
-                                        Navigator.pop(context);
-                                        final cubit = BottomBarInfoIndividualCubit()..init();
-                                        showCustomDialog(context, children: [
-                                          BlocProvider(
-                                            create: (context) => cubit,
-                                            child: BlocConsumer<BottomBarInfoIndividualCubit,
-                                                BottomBarInfoIndividualState>(
-                                              listener: (context, state) {
-                                                if (state is BottomBarInfoIndividualError) {
-                                                  showMessageDialog(context, state.message);
-                                                }
-                                                if (state is BottomBarInfoIndividualLoaded) {
-                                                  if (state.successTransfer) {
-                                                    showSuccessfulDialog(context, null, onBackPress: () {
-                                                      Navigator.pushNamedAndRemoveUntil(
-                                                        context,
-                                                        R.bottomNavigation,
-                                                            (r) => false,
-                                                      );
-                                                    });
-                                                  }
-                                                }
-                                              },
-                                              builder: (context, state) {
-                                                if (listBeds[index].isLock == 1 && listBeds[index].statusNftSale == 'ON_SALE') {
-                                                  return CancelSell(
-                                                    bedEntity: listBeds[index],
-                                                    cubit: cubit,
-                                                  );
-                                                } else {
-                                                  return PopUpSell(
-                                                    bedEntity: listBeds[index],
-                                                    cubit: cubit,
-                                                  );
-                                                }
-                                              },
-                                            ),
-                                          ),
-                                        ]);
+                                                        } else {
+                                                          return PopUpSell(
+                                                            bedEntity:
+                                                                listBeds[index],
+                                                            cubit: cubit,
+                                                          );
+                                                        }
+                                                      },
+                                                    ),
+                                                  ),
+                                                ]);
+                                          },
+                                        );
                                       },
                                     )
                                   ],
@@ -353,22 +402,12 @@ class TabBedsDetail extends StatelessWidget {
     );
   }
 
-  showCreateOrImportWallet({required BuildContext context}) async {
+  Future<bool?> showCreateOrImportWallet(
+      {required BuildContext context}) async {
     return showCustomAlertDialog(
       context,
       barrierDismissible: false,
       children: const PopUpAvalancheWallet(),
     );
   }
-
-  void _showWarningDialog(dynamic value, BuildContext context) {
-    if (value is PopWithResults) {
-      final cubit = context.read<WalletCubit>();
-      cubit.importWallet(value.results);
-    }
-  }
-
-// Future<void> _onLoadMoreBedBox() async {
-//   return cubit.fetchBedBox(categoryType);
-// }
 }

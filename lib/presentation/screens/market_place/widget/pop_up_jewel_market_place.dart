@@ -11,7 +11,6 @@ import 'package:slee_fi/common/widgets/sf_card.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
 import 'package:slee_fi/l10n/locale_keys.g.dart';
 import 'package:slee_fi/models/market_place/market_place_model.dart';
-import 'package:slee_fi/models/pop_with_result.dart';
 import 'package:slee_fi/presentation/blocs/market_place/market_place_cubit.dart';
 import 'package:slee_fi/presentation/blocs/user_bloc/user_bloc.dart';
 import 'package:slee_fi/presentation/blocs/user_bloc/user_state.dart';
@@ -55,7 +54,7 @@ class PopUpJewelMarketPlace extends StatelessWidget {
     );
   }
 
-  _showCreateOrImportWallet(BuildContext context) async {
+  Future<bool?> _showCreateOrImportWallet(BuildContext context) async {
     return showCustomAlertDialog(
       context,
       barrierDismissible: false,
@@ -167,35 +166,33 @@ class PopUpJewelMarketPlace extends StatelessWidget {
             Expanded(
               child: BlocBuilder<UserBloc, UserState>(
                   builder: (context, userState) {
-                return SFButton(
-                  text: LocaleKeys.confirm,
-                  onPressed: () {
-                    final walletCubit = context.read<WalletCubit>();
-                    final walletState = walletCubit.state;
-                    Navigator.pop(context);
-                    if (userState is UserLoaded) {
-                      for (final element in userState.listTokens) {
-                        if (element.symbol.toLowerCase() == 'avax') {
-                          if (element.balance < double.parse(jewel.price)) {
-                            if (walletState is WalletNotExisted) {
-                              _showCreateOrImportWallet(context).then((value) {
-                                if (value is PopWithResults) {
-                                  walletCubit.importWallet(value.results);
+                return BlocBuilder<WalletCubit, WalletState>(
+                  builder: (context, walletState) {
+                    return SFButton(
+                      text: LocaleKeys.confirm,
+                      onPressed: () {
+                        Navigator.pop(context);
+                        if (userState is UserLoaded) {
+                          for (final element in userState.listTokens) {
+                            if (element.symbol.toLowerCase() == 'avax') {
+                              if (element.balance < double.parse(jewel.price)) {
+                                if (walletState is WalletNotExisted) {
+                                  _showCreateOrImportWallet(context);
+                                } else {
+                                  _showDonWorryDialog(context, jewel);
                                 }
-                              });
-                            } else {
-                              _showDonWorryDialog(context, jewel);
+                              } else {
+                                _showConfirmDialog(context, jewel);
+                              }
                             }
-                          } else {
-                            _showConfirmDialog(context, jewel);
                           }
                         }
-                      }
-                    }
+                      },
+                      textStyle: TextStyles.white16,
+                      gradient: AppColors.blueGradient,
+                      width: double.infinity,
+                    );
                   },
-                  textStyle: TextStyles.white16,
-                  gradient: AppColors.blueGradient,
-                  width: double.infinity,
                 );
               }),
             ),

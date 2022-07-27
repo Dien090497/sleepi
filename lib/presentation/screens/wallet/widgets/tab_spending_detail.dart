@@ -13,7 +13,6 @@ import 'package:slee_fi/common/widgets/sf_card.dart';
 import 'package:slee_fi/common/widgets/sf_icon.dart';
 import 'package:slee_fi/entities/token/token_entity.dart';
 import 'package:slee_fi/l10n/locale_keys.g.dart';
-import 'package:slee_fi/models/pop_with_result.dart';
 import 'package:slee_fi/presentation/blocs/user_bloc/user_bloc.dart';
 import 'package:slee_fi/presentation/blocs/user_bloc/user_state.dart';
 import 'package:slee_fi/presentation/blocs/wallet/wallet_cubit.dart';
@@ -45,13 +44,13 @@ class _TabSpendingDetailState extends State<TabSpendingDetail> {
     return SafeArea(
       child: FocusDetector(
         onFocusGained: () async {
-          BlocProvider.of<UserBloc>(context).add(RefreshBalanceToken());
+          BlocProvider.of<UserBloc>(context).add(const RefreshBalanceToken());
         },
         child: SmartRefresher(
             controller: refreshController,
             enablePullDown: true,
             onRefresh: () async {
-              context.read<UserBloc>().add(RefreshBalanceToken());
+              context.read<UserBloc>().add(const RefreshBalanceToken());
               refreshController.refreshCompleted();
             },
             child: SingleChildScrollView(
@@ -74,7 +73,8 @@ class _TabSpendingDetailState extends State<TabSpendingDetail> {
                         return Column(
                           children: tokenList
                               .map((e) => SFCard(
-                                    onTap: () => openTransfer(e),
+                                    onTap: () => openTransfer(
+                                        e, context.read<WalletCubit>().state),
                                     margin: const EdgeInsets.only(top: 8),
                                     padding: const EdgeInsets.all(14),
                                     child: Row(
@@ -103,7 +103,6 @@ class _TabSpendingDetailState extends State<TabSpendingDetail> {
                                           child: Text(
                                             textAlign: TextAlign.right,
                                             e.balance.formatBalanceToken,
-
                                             maxLines: 2,
                                             style: TextStyles.lightWhite16,
                                           ),
@@ -139,15 +138,9 @@ class _TabSpendingDetailState extends State<TabSpendingDetail> {
     );
   }
 
-  void openTransfer(TokenEntity e) {
-    final walletCubit = context.read<WalletCubit>();
-    final walletState = walletCubit.state;
+  void openTransfer(TokenEntity e, WalletState walletState) {
     if (walletState is WalletNotExisted) {
-      _showCreateOrImportWallet(context).then((value) {
-        if (value is PopWithResults) {
-          walletCubit.importWallet(value.results);
-        }
-      });
+      _showCreateOrImportWallet(context);
     } else if (walletState is WalletNotOpen) {
       Navigator.pushNamed(context, R.passcode).then((value) {
         if (value == true) {
@@ -165,7 +158,7 @@ class _TabSpendingDetailState extends State<TabSpendingDetail> {
     }
   }
 
-  _showCreateOrImportWallet(BuildContext context) async {
+  Future<bool?> _showCreateOrImportWallet(BuildContext context) async {
     return showCustomAlertDialog(
       context,
       barrierDismissible: false,

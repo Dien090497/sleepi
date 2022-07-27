@@ -6,7 +6,6 @@ import 'package:slee_fi/common/widgets/background_widget.dart';
 import 'package:slee_fi/common/widgets/sf_alert_dialog.dart';
 import 'package:slee_fi/common/widgets/sf_back_button.dart';
 import 'package:slee_fi/common/widgets/sf_icon.dart';
-import 'package:slee_fi/models/pop_with_result.dart';
 import 'package:slee_fi/presentation/blocs/wallet/wallet_cubit.dart';
 import 'package:slee_fi/presentation/blocs/wallet/wallet_state.dart';
 import 'package:slee_fi/presentation/blocs/wallet_navigation/wallet_navigation_cubit.dart';
@@ -84,8 +83,11 @@ class _WalletScreenState extends State<WalletScreen>
   Future<void> _onSettingTap(BuildContext context) async {
     final state = BlocProvider.of<WalletCubit>(context).state;
     if (state is WalletNotExisted) {
-      _showCreateOrImportWallet()
-          .then((value) => _showWarningDialog(value, context));
+      _showCreateOrImportWallet().then((value) {
+        if (value ?? false) {
+          controller.animateTo(1);
+        }
+      });
     } else if (state is WalletNotOpen) {
       Navigator.pushNamed(context, R.passcode).then((value) {
         if (value == true) {
@@ -97,19 +99,11 @@ class _WalletScreenState extends State<WalletScreen>
     }
   }
 
-  _showCreateOrImportWallet() async {
+  Future<bool?> _showCreateOrImportWallet() async {
     return showCustomAlertDialog(
       context,
       barrierDismissible: false,
       children: const PopUpAvalancheWallet(),
     );
-  }
-
-  void _showWarningDialog(dynamic value, BuildContext context) {
-    if (value is PopWithResults) {
-      controller.animateTo(1);
-      final cubit = context.read<WalletCubit>();
-      cubit.importWallet(value.results);
-    }
   }
 }

@@ -7,7 +7,6 @@ import 'package:slee_fi/common/widgets/sf_gridview.dart';
 import 'package:slee_fi/common/widgets/sf_sub_tab_bar.dart';
 import 'package:slee_fi/entities/bed_entity/bed_entity.dart';
 import 'package:slee_fi/l10n/locale_keys.g.dart';
-import 'package:slee_fi/models/pop_with_result.dart';
 import 'package:slee_fi/presentation/blocs/bottom_bar_infoIndividual/bottom_bar_infoIndividual_cubit.dart';
 import 'package:slee_fi/presentation/blocs/bottom_bar_infoIndividual/bottom_bar_infoIndividual_state.dart';
 import 'package:slee_fi/presentation/blocs/upgrade_jewel_bloc/upgrade_jewel_bloc.dart';
@@ -107,65 +106,18 @@ class TabItemDetail extends StatelessWidget {
       context,
       padding: const EdgeInsets.all(24),
       children: [
-        JewelDialogBody(
-          textOnSell: (items.isLock == 1 && items.statusNftSale == 'ON_SALE')
-              ? LocaleKeys.cancel_sell
-              : LocaleKeys.sell,
-          jewel: items,
-          isJewel: false,
-          onSellTap: () {
-            Navigator.pop(context);
-            final cubit = BottomBarInfoIndividualCubit()..init();
-            showCustomDialog(context, children: [
-              BlocProvider(
-                create: (context) => cubit,
-                child: BlocConsumer<BottomBarInfoIndividualCubit,
-                    BottomBarInfoIndividualState>(
-                  listener: (context, state) {
-                    if (state is BottomBarInfoIndividualError) {
-                      Navigator.pop(context);
-                      Navigator.pop(context);
-                      showMessageDialog(context, state.message);
-                    }
-                    if (state is BottomBarInfoIndividualLoaded) {
-                      if (state.successTransfer) {
-                        showSuccessfulDialog(context, null, onBackPress: () {
-                          Navigator.pushNamedAndRemoveUntil(
-                            context,
-                            R.bottomNavigation,
-                            (r) => false,
-                          );
-                        });
-                      }
-                    }
-                  },
-                  builder: (context, state) {
-                    if (items.isLock == 1 && items.statusNftSale == 'ON_SALE') {
-                      return CancelSell(
-                        bedEntity: items,
-                        cubit: cubit,
-                      );
-                    } else {
-                      return PopUpSell(
-                        bedEntity: items,
-                        cubit: cubit,
-                      );
-                    }
-                  },
-                ),
-              ),
-            ]);
-          },
-          onTransferTap: () {
-            final stateWalletCubit = context.read<WalletCubit>().state;
-            if (stateWalletCubit is WalletNotExisted) {
-              showCreateOrImportWallet(context: context).then(
-                      (value) => _showWarningDialog(value, context));
-            } else {
-              if (items.isLock != 1) {
+        BlocBuilder<WalletCubit, WalletState>(
+          builder: (context, walletState) {
+            return JewelDialogBody(
+              textOnSell:
+                  (items.isLock == 1 && items.statusNftSale == 'ON_SALE')
+                      ? LocaleKeys.cancel_sell
+                      : LocaleKeys.sell,
+              jewel: items,
+              isJewel: false,
+              onSellTap: () {
                 Navigator.pop(context);
                 final cubit = BottomBarInfoIndividualCubit()..init();
-                cubit.estimateGas(contractAddress: items.contractAddress);
                 showCustomDialog(context, children: [
                   BlocProvider(
                     create: (context) => cubit,
@@ -173,51 +125,98 @@ class TabItemDetail extends StatelessWidget {
                         BottomBarInfoIndividualState>(
                       listener: (context, state) {
                         if (state is BottomBarInfoIndividualError) {
+                          Navigator.pop(context);
+                          Navigator.pop(context);
                           showMessageDialog(context, state.message);
                         }
                         if (state is BottomBarInfoIndividualLoaded) {
                           if (state.successTransfer) {
-                            Navigator.pop(context);
-                            showSuccessfulDialog(context, null, onBackPress: () {
+                            showSuccessfulDialog(context, null,
+                                onBackPress: () {
                               Navigator.pushNamedAndRemoveUntil(
                                 context,
                                 R.bottomNavigation,
-                                    (r) => false,
+                                (r) => false,
                               );
                             });
                           }
                         }
                       },
                       builder: (context, state) {
-                        return PopUpTransfer(
-                          bedEntity: items,
-                          cubit: cubit,
-                          valueTransfer: 1,
-                        );
+                        if (items.isLock == 1 &&
+                            items.statusNftSale == 'ON_SALE') {
+                          return CancelSell(
+                            bedEntity: items,
+                            cubit: cubit,
+                          );
+                        } else {
+                          return PopUpSell(
+                            bedEntity: items,
+                            cubit: cubit,
+                          );
+                        }
                       },
                     ),
                   ),
                 ]);
-              } else {}
-            }
+              },
+              onTransferTap: () {
+                if (walletState is WalletNotExisted) {
+                  showCreateOrImportWallet(context: context);
+                } else {
+                  if (items.isLock != 1) {
+                    Navigator.pop(context);
+                    final cubit = BottomBarInfoIndividualCubit()..init();
+                    cubit.estimateGas(contractAddress: items.contractAddress);
+                    showCustomDialog(context, children: [
+                      BlocProvider(
+                        create: (context) => cubit,
+                        child: BlocConsumer<BottomBarInfoIndividualCubit,
+                            BottomBarInfoIndividualState>(
+                          listener: (context, state) {
+                            if (state is BottomBarInfoIndividualError) {
+                              showMessageDialog(context, state.message);
+                            }
+                            if (state is BottomBarInfoIndividualLoaded) {
+                              if (state.successTransfer) {
+                                Navigator.pop(context);
+                                showSuccessfulDialog(context, null,
+                                    onBackPress: () {
+                                  Navigator.pushNamedAndRemoveUntil(
+                                    context,
+                                    R.bottomNavigation,
+                                    (r) => false,
+                                  );
+                                });
+                              }
+                            }
+                          },
+                          builder: (context, state) {
+                            return PopUpTransfer(
+                              bedEntity: items,
+                              cubit: cubit,
+                              valueTransfer: 1,
+                            );
+                          },
+                        ),
+                      ),
+                    ]);
+                  } else {}
+                }
+              },
+            );
           },
         ),
       ],
     );
   }
 
-  showCreateOrImportWallet({required BuildContext context}) async {
+  Future<bool?> showCreateOrImportWallet(
+      {required BuildContext context}) async {
     return showCustomAlertDialog(
       context,
       barrierDismissible: false,
       children: const PopUpAvalancheWallet(),
     );
-  }
-
-  void _showWarningDialog(dynamic value, BuildContext context) {
-    if (value is PopWithResults) {
-      final cubit = context.read<WalletCubit>();
-      cubit.importWallet(value.results);
-    }
   }
 }
