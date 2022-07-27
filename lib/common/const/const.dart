@@ -49,6 +49,7 @@ class Const {
   static const String setAsForeground = 'setAsForeground';
   static const String setAsBackground = 'setAsBackground';
   static const String stopService = 'stopService';
+  static const String suggestionEmail = 'suggestion_email';
 
   static const localeDE = Locale('de', 'DE');
   static const localeEN = Locale('en', 'US');

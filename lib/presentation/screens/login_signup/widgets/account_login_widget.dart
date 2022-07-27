@@ -7,6 +7,7 @@ import 'package:slee_fi/common/routes/app_routes.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
 import 'package:slee_fi/common/utils/lowercase_textfield.dart';
+import 'package:slee_fi/common/widgets/email_textfield.dart';
 import 'package:slee_fi/common/widgets/sf_buttons.dart';
 import 'package:slee_fi/common/widgets/sf_dialog.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
@@ -102,8 +103,8 @@ class _AccountLoginState extends State<AccountLoginWidget> {
           }
         } else if (state is SignInSignUpStateVerifySuccess) {
           Navigator.pushNamed(context, R.createPassword,
-                  arguments: CreatePasswordArg(
-                      '', state.otp, state.email, false, context.locale))
+              arguments: CreatePasswordArg(
+                  '', state.otp, state.email, false, context.locale))
               .then((value) => _checkChangePasswordSuccess(value));
         }
       },
@@ -117,11 +118,11 @@ class _AccountLoginState extends State<AccountLoginWidget> {
               stringCase: StringCase.upperCase,
             ),
             const SizedBox(height: 25),
-            SFTextField(
-                inputFormatters: [LowerCaseTextFormatter()],
-                textInputType: TextInputType.emailAddress,
-                labelText: LocaleKeys.email_address,
-                onChanged: (email) => cubit.onChangeEmail(email)),
+            EmailTextField(
+              onTextChange: (email) {
+                cubit.onChangeEmail(email);
+              },
+            ),
             const SizedBox(height: 5),
             if (state is SignInSignUpStateErrorEmail)
               Container(
@@ -130,21 +131,22 @@ class _AccountLoginState extends State<AccountLoginWidget> {
                   child: SFText(
                       keyText: state.message, style: TextStyles.w400Red12)),
             const SizedBox(height: 5),
+
             _isActiveCode
                 ? TextfieldVerificationEmail(
-                    maxLength: 6,
-                    validate: () => cubit.validateEmail(),
-                    onPressed: () => cubit.senOtp(action),
-                    errorText:
-                        state is SignInSignUpStateError ? state.message : '',
-                    valueChanged: (otp) => cubit.onChangeOTP(otp))
+                maxLength: 6,
+                validate: () => cubit.validateEmail(),
+                onPressed: () => cubit.senOtp(action),
+                errorText:
+                state is SignInSignUpStateError ? state.message : '',
+                valueChanged: (otp) => cubit.onChangeOTP(otp))
                 : SFTextFieldPassword(
-                    labelText: LocaleKeys.password,
-                    valueChanged: (password) =>
-                        cubit.onPasswordChange(password),
-                    errorText:
-                        state is SignInSignUpStateError ? state.message : '',
-                  ),
+              labelText: LocaleKeys.password,
+              valueChanged: (password) =>
+                  cubit.onPasswordChange(password),
+              errorText:
+              state is SignInSignUpStateError ? state.message : '',
+            ),
             SizedBox(height: _isActiveCode ? 12 : 0),
             if (action == Action.signUp) const CheckBoxLetterWidget(),
             SizedBox(height: _isActiveCode ? 12 : 0),
@@ -169,12 +171,15 @@ class _AccountLoginState extends State<AccountLoginWidget> {
                 cubit.process(action);
                 FocusScope.of(context).unfocus();
               },
-              width: MediaQuery.of(context).size.width,
+              width: MediaQuery
+                  .of(context)
+                  .size
+                  .width,
             ),
             const SizedBox(height: 16),
             SFTextButton(
               text:
-                  _isActiveCode ? LocaleKeys.account_login : LocaleKeys.signup,
+              _isActiveCode ? LocaleKeys.account_login : LocaleKeys.signup,
               textStyle: TextStyles.blue14,
               onPressed: () {
                 cubit.init();
