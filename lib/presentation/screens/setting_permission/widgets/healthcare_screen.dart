@@ -66,18 +66,23 @@ class HealthcarePermissionScreen extends StatelessWidget {
                 onPressed: () async {
                   final isGranted = await _requestHealthAuthorization();
                   if (isGranted) {
-                    getIt<MakeFirstOpenAppUseCase>().call(arg!.email);
-                    if (arg.isSignUp == true) {
-                      Navigator.pushNamedAndRemoveUntil(
-                          context, R.notificationPermission, (_) => false,
-                          arguments: NotificationPermissionArg(true));
-                      return;
-                    }
-                    Navigator.pushNamedAndRemoveUntil(
-                      context,
-                      R.motionDataPermission,
-                      (_) => false,
-                    );
+                    getIt<MakeFirstOpenAppUseCase>()
+                        .call(arg!.email)
+                        .then((value) {
+                      value.fold((l) => null, (r) {
+                        if (arg.isSignUp == true) {
+                          Navigator.pushNamedAndRemoveUntil(
+                              context, R.notificationPermission, (_) => false,
+                              arguments: NotificationPermissionArg(true));
+                          return;
+                        }
+                        Navigator.pushNamedAndRemoveUntil(
+                          context,
+                          R.motionDataPermission,
+                          (_) => false,
+                        );
+                      });
+                    });
                   }
                 },
               ),
