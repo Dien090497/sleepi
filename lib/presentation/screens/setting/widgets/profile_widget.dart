@@ -13,7 +13,6 @@ import 'package:slee_fi/entities/user/user_info_entity.dart';
 import 'package:slee_fi/l10n/locale_keys.g.dart';
 import 'package:slee_fi/presentation/screens/setting/widgets/gender_tile.dart';
 import 'package:slee_fi/usecase/logout_usecase.dart';
-import 'package:slee_fi/usecase/make_first_open_app_usecase.dart';
 import 'package:slee_fi/usecase/usecase.dart';
 
 import 'modal_pop_up_birth_year.dart';
@@ -109,9 +108,6 @@ class ProfileWidget extends StatelessWidget {
                     showMessageDialog(context, '$l');
                   },
                   (r) {
-                    if (!r) {
-                      getIt<MakeFirstOpenAppUseCase>().call(userInfo.email);
-                    }
                     Phoenix.rebirth(context);
                   },
                 );

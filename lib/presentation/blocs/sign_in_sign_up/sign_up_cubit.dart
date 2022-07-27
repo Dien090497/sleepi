@@ -1,5 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:slee_fi/common/const/const.dart';
 import 'package:slee_fi/common/enum/enum.dart';
 import 'package:slee_fi/common/extensions/string_x.dart';
 import 'package:slee_fi/common/utils/appsflyer_custom.dart';
@@ -20,7 +22,9 @@ import 'package:slee_fi/usecase/usecase.dart';
 import 'package:slee_fi/usecase/verify_otp_usecase.dart';
 
 class SigInSignUpCubit extends Cubit<SignInSignUpState> {
-  SigInSignUpCubit() : super(const SignInSignUpState.initial());
+  SigInSignUpCubit() : super(const SignInSignUpState.initial()) {
+    _init();
+  }
 
   final _sendOtpUC = getIt<SendOTPMailUseCase>();
   final _signUpUseCase = getIt<SignUpUseCase>();
@@ -30,9 +34,15 @@ class SigInSignUpCubit extends Cubit<SignInSignUpState> {
   final _fetchSettingActiveCode = getIt<SettingActiveCodeUseCase>();
   final _fetchBalanceSpendingUC = getIt<FetchBalanceSpendingUseCase>();
 
+  late final  SharedPreferences _preferences;
+
   String email = '';
   String _password = '';
   String otp = '';
+
+  _init() async {
+    _preferences = await SharedPreferences.getInstance();
+  }
 
   init() async {
     emit(const SignInSignUpState.initial());
@@ -163,6 +173,7 @@ class SigInSignUpCubit extends Cubit<SignInSignUpState> {
       emit(SignInSignUpState.errorEmail(message));
       return false;
     }
+    _saveEmailSuggestion(email);
     return true;
   }
 
@@ -203,5 +214,17 @@ class SigInSignUpCubit extends Cubit<SignInSignUpState> {
       emit(const SignInSignUpState.initial());
     }
     _password = value;
+  }
+
+  void _saveEmailSuggestion(String email) {
+    final data = _preferences.getStringList(Const.suggestionEmail);
+    if (data == null) {
+      _preferences.setStringList(Const.suggestionEmail, [email]);
+    } else {
+      if (!data.contains(email)) {
+        data.add(email);
+        _preferences.setStringList(Const.suggestionEmail, data);
+      }
+    }
   }
 }

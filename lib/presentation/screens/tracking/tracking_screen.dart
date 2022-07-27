@@ -226,8 +226,10 @@ class _TrackingScreenState extends State<TrackingScreen> {
                             width: double.infinity,
                             color: AppColors.blue,
                             textStyle: TextStyles.w600WhiteSize16,
-                            onPressed: () {
-                              service.invoke(Const.stopService);
+                            onPressed: () async {
+                              if((await service.isRunning())) {
+                                service.invoke(Const.stopService);
+                              }
                               cubit.fetchData(time,timeStart);
                             },
                           ),
