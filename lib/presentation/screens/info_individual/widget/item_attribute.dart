@@ -22,44 +22,46 @@ class ItemAttribute extends StatelessWidget {
   final Color colorIcon;
 
   Color checkColor(int i) {
-    double range = totalValue/5;
+    double range = (30 + 30 * (totalValue ~/ 30)) / 5;
     if (valueActive > 0 && i == 0) {
       return colorIcon.withOpacity(0.5);
     } else if (valueActive > range && i == 1) {
       return colorIcon.withOpacity(0.6);
-    } else if (valueActive > (range*2) && i == 2) {
+    } else if (valueActive > (range * 2) && i == 2) {
       return colorIcon.withOpacity(0.7);
-    } else if (valueActive > (range*3) && i == 3) {
+    } else if (valueActive > (range * 3) && i == 3) {
       return colorIcon.withOpacity(0.8);
-    } else if (valueActive > (range*4) && i == 4) {
+    } else if (valueActive > (range * 4) && i == 4) {
       return colorIcon;
     }
     return AppColors.light4;
   }
 
   Widget itemValueActive(int i) {
+    double range = (30 + 30 * (totalValue ~/ 30)) / 5;
     return Stack(
       children: [
         Container(
-          width: 16,
+          width: 20,
           height: 6,
           margin: const EdgeInsets.symmetric(horizontal: 2),
           decoration: BoxDecoration(
-            color: checkColor(i),
+            color: AppColors.light4,
             borderRadius: BorderRadius.circular(1),
           ),
         ),
-        // if ((i + 1) * 2 - valueActive < 2)
-        //   Container(
-        //     width: (valueActive - (i + 1) * 2) >= 0
-        //         ? 16
-        //         : (valueActive - i * 2) * 8,
-        //     height: 6,
-        //     decoration: BoxDecoration(
-        //       color: checkColor(i),
-        //       borderRadius: BorderRadius.circular(3),
-        //     ),
-        //   )
+        if (checkColor(i) != AppColors.light4)
+          Container(
+            width: valueActive > (range * (i + 1))
+                ? 20
+                : (valueActive / (range * (i + 1)) * 16),
+            height: 6,
+            margin: const EdgeInsets.symmetric(horizontal: 2),
+            decoration: BoxDecoration(
+              color: checkColor(i),
+              borderRadius: BorderRadius.circular(1),
+            ),
+          )
       ],
     );
   }

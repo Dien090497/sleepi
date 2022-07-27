@@ -1,6 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:json_annotation/json_annotation.dart';
-import 'package:slee_fi/entities/nft_family/nft_family.dart';
 import 'package:slee_fi/models/bed_model/beb_model.dart';
 
 part 'nft_family_model.g.dart';

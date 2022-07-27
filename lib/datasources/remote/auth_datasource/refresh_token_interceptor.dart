@@ -10,17 +10,17 @@ import 'package:slee_fi/usecase/usecase.dart';
 
 @Injectable()
 class RefreshTokenInterceptor extends QueuedInterceptor {
-  final SecureStorage _secureStorage;
+  final SecureStorage secureStorage;
   final Dio dio;
 
-  RefreshTokenInterceptor(this._secureStorage, this.dio);
+  RefreshTokenInterceptor(this.secureStorage, this.dio);
 
   @override
   void onError(DioError err, ErrorInterceptorHandler handler) async {
     if (err.response?.statusCode == 401) {
       final model = AccessTokenExpireModel.fromJson(err.response!.data);
 
-      /// Token expired
+      //Token expired
       if (model.error.message
               ?.toLowerCase()
               .contains('jwt'.toLowerCase()) ??
@@ -68,7 +68,7 @@ class RefreshTokenInterceptor extends QueuedInterceptor {
     return handler.next(err);
   }
 
-  Future<void> _retry(
+  Future<void> retry(
       DioError err, ErrorInterceptorHandler handler, String accessToken) async {
     final requestOptions = err.requestOptions;
     requestOptions.headers["Authorization"] = 'Bearer $accessToken';
@@ -92,7 +92,7 @@ class RefreshTokenInterceptor extends QueuedInterceptor {
     }
   }
 
-  Future<void> _refreshTokenExpire(
+  Future<void> refreshTokenExpire(
       DioError e, ErrorInterceptorHandler handler) async {
     await getIt<LogOutUseCase>().call(NoParams());
     // if (e.response?.data.toString().toLowerCase().contains('refresh') ??

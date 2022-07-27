@@ -120,7 +120,6 @@ class SigInSignUpCubit extends Cubit<SignInSignUpState> {
                 (l) => emit(
                     SignInSignUpState.signInSuccess(true, r, tokensSpending)),
                 (isFirstOpen) {
-                  print('=-=-=-=-=-=$isFirstOpen}');
               emit(SignInSignUpState.signInSuccess(
                   isFirstOpen, r, tokensSpending));
             });
