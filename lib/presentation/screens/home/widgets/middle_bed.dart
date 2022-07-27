@@ -34,10 +34,7 @@ class MiddleBed extends StatelessWidget {
         const SizedBox(height: 16),
         Container(
           // width: size.width,
-          padding: const EdgeInsets.symmetric(
-            vertical: 24,
-            horizontal: 16,
-          ),
+          padding: const EdgeInsets.symmetric(vertical: 24),
           alignment: Alignment.center,
           decoration: BoxDecoration(
             color: Colors.white.withOpacity(0.05),
@@ -50,51 +47,54 @@ class MiddleBed extends StatelessWidget {
                   : null;
               return Column(
                 children: [
-                  SizedBox(
-                    // width: size.width,
-                    height: 200.h,
-                    child: state is HomeLoaded
-                        ? Swiper(
-                            itemBuilder: (BuildContext context, int index) {
-                              return state.bedList.isNotEmpty &&
-                                      index < state.bedList.length
-                                  ? _BuildBedItem(
-                                      bedEntity: state.bedList[index])
-                                  : state.bedList.isNotEmpty &&
-                                          index >= state.bedList.length
-                                      ? const LoadingIcon()
-                                      : GestureDetector(
-                                          child: const SFIcon(Ics.addBed,
-                                              fit: BoxFit.none),
-                                          onTap: () {
-                                            BlocProvider.of<
-                                                        BottomNavigationBloc>(
-                                                    context)
-                                                .add(const SelectTab(4));
-                                          },
-                                        );
-                            },
-                            onIndexChanged: (index) {
-                              if (state.bedList.isEmpty) {
-                                return;
-                              }
-                              if (index >= state.bedList.length) {
-                                homeBloc.add(const LoadMoreBed());
-                                return;
-                              }
-                              final bed = state.bedList[index];
-                              homeBloc.add(ChangeBed(bed: bed));
-                            },
-                            loop: state.bedList.length > 1,
-                            itemCount: state.bedList.isEmpty
-                                ? 1
-                                : state.bedList.length +
-                                    (state.loadMoreBed ? 1 : 0),
-                            control: const SwiperControl(
-                                disableColor: AppColors.transparent))
-                        : state is HomeLoading
-                            ? const LoadingIcon()
-                            : const SizedBox(),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 16),
+                    child: SizedBox(
+                      // width: size.width,
+                      height: 200.h,
+                      child: state is HomeLoaded
+                          ? Swiper(
+                              itemBuilder: (BuildContext context, int index) {
+                                return state.bedList.isNotEmpty &&
+                                        index < state.bedList.length
+                                    ? _BuildBedItem(
+                                        bedEntity: state.bedList[index])
+                                    : state.bedList.isNotEmpty &&
+                                            index >= state.bedList.length
+                                        ? const LoadingIcon()
+                                        : GestureDetector(
+                                            child: const SFIcon(Ics.addBed,
+                                                fit: BoxFit.none),
+                                            onTap: () {
+                                              BlocProvider.of<
+                                                          BottomNavigationBloc>(
+                                                      context)
+                                                  .add(const SelectTab(4));
+                                            },
+                                          );
+                              },
+                              onIndexChanged: (index) {
+                                if (state.bedList.isEmpty) {
+                                  return;
+                                }
+                                if (index >= state.bedList.length) {
+                                  homeBloc.add(const LoadMoreBed());
+                                  return;
+                                }
+                                final bed = state.bedList[index];
+                                homeBloc.add(ChangeBed(bed: bed));
+                              },
+                              loop: state.bedList.length > 1,
+                              itemCount: state.bedList.isEmpty
+                                  ? 1
+                                  : state.bedList.length +
+                                      (state.loadMoreBed ? 1 : 0),
+                              control: const SwiperControl(
+                                  disableColor: AppColors.transparent))
+                          : state is HomeLoading
+                              ? const LoadingIcon()
+                              : const SizedBox(),
+                    ),
                   ),
                   const SizedBox(height: 20),
                   BedQualityWidget(bed: selectBed),
@@ -150,6 +150,7 @@ class BedQualityWidget extends StatelessWidget {
       children: [
         const Spacer(),
         Container(
+          constraints: const BoxConstraints(maxWidth: 120),
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(100),
             color: (bed != null
@@ -160,6 +161,7 @@ class BedQualityWidget extends StatelessWidget {
           padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 18),
           child: Text(
             bed != null ? bed!.name : '00',
+            maxLines: 2,
             style: TextStyles.blue14.copyWith(
                 color: bed != null
                     ? bed!.quality!.qualityBedColor

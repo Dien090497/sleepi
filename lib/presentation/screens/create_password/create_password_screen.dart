@@ -108,11 +108,10 @@ class _CreatePasswordScreenState extends State<CreatePasswordScreen> {
                                 ),
                                 const SizedBox(height: 10),
                                 state is CreatePasswordStateErrorCreate
-                                    ? Center(
-                                        child: Text(
+                                    ? Text(
                                         state.message,
                                         style: TextStyles.w400Red12,
-                                      ))
+                                      )
                                     : const SizedBox()
                               ],
                             ),
