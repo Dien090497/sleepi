@@ -19,14 +19,14 @@ class IndividualCubit extends Cubit<IndividualState> {
   final _getNftFamilyUC = getIt<GetNftFamilyUseCase>();
 
   void fetchFamily() async {
-    final familyRes = await _getNftFamilyUC.call(state.bed.id);
+    /*final familyRes = await _getNftFamilyUC.call(state.bed.id);
     familyRes.fold(
       (l) {},
       (r) {
         if (isClosed) return;
         emit(state.copyWith(nftFamily: r));
       },
-    );
+    );*/
   }
 
   void refresh() async {

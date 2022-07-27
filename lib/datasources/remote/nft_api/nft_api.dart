@@ -37,7 +37,10 @@ abstract class NftApi {
   });
 
   @GET('/family-nft')
-  Future<NftFamilyModel> family(@Query('id') int bedId);
+  Future<NftFamilyModel> family(
+    @Query('bedId') num bedId,
+    @Query('filter') String filterType,
+  );
 
   @GET('/get-level-up')
   Future<NftLevelUp> getLevelUp(@Query('bedId') int bedId);
