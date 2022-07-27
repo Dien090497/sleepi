@@ -38,8 +38,12 @@ class IndividualCubit extends Cubit<IndividualState> {
       (l) {
         emit(state.copyWith(isRefresh: false, isLoading: false));
       },
-      (r) {
-        emit(state.copyWith(isRefresh: false, isLoading: false, bed: r));
+      (bed) {
+        emit(state.copyWith(
+          isRefresh: false,
+          isLoading: false,
+          bed: bed,
+        ));
       },
     );
   }
