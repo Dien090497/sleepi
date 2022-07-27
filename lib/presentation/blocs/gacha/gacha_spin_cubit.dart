@@ -20,13 +20,14 @@ class GachaSpinCubit extends Cubit<GachaSpinState> {
   final _gachaGetSpecialUC = getIt<GachaGetSpecialUseCase>();
 
   void init() async {
+    emit(const GachaSpinState.loading());
+    gachaProbabilityConfig();
     final result = await _gachaHistoryUC.call(NoParams());
     result.fold((l) {
       emit(GachaSpinState.fail('$l'));
     }, (success) {
       emit(GachaSpinState.gachaHistorySuccess(success));
     });
-    gachaProbabilityConfig();
   }
 
 
@@ -41,7 +42,6 @@ class GachaSpinCubit extends Cubit<GachaSpinState> {
   }
 
   Future<void> gachaProbabilityConfig() async {
-    emit(const GachaSpinState.loading());
     final result = await _gachaProbabilityUC.call(NoParams());
     result.fold((l) {
       emit(GachaSpinState.fail('$l'));

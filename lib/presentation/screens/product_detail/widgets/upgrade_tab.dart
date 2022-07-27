@@ -1,6 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:lottie/lottie.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
 import 'package:slee_fi/common/widgets/cached_image.dart';
@@ -23,9 +24,36 @@ import 'package:slee_fi/resources/resources.dart';
 import 'jewel_dialog_body.dart';
 import 'modal_jewel_list.dart';
 
-class UpGradeTab extends StatelessWidget {
+class UpGradeTab extends StatefulWidget {
   const UpGradeTab({Key? key, required this.isJewel}) : super(key: key);
   final bool isJewel;
+
+  @override
+  State<UpGradeTab> createState() => _UpGradeTabState();
+}
+
+class _UpGradeTabState extends State<UpGradeTab> with TickerProviderStateMixin{
+  late AnimationController animationController;
+  bool loading = false;
+
+  @override
+  void initState() {
+    super.initState();
+
+    animationController = AnimationController(vsync: this);
+    animationController.addStatusListener((status) async {
+      if (status == AnimationStatus.completed) {
+        setState(() => loading = false);
+        animationController.reset();
+      }
+    });
+  }
+
+  @override
+  void dispose() {
+    animationController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -41,6 +69,7 @@ class UpGradeTab extends StatelessWidget {
             showCustomDialog(
               context,
               padding: const EdgeInsets.all(24),
+              backgroundColor: AppColors.transparent,
               children: [
                 JewelDialogBodyUpgradeSuccess(jewel: state.upgradeSuccess!),
               ],
@@ -77,14 +106,25 @@ class UpGradeTab extends StatelessWidget {
                         ], borderRadius: BorderRadius.circular(20)),
                         child: Stack(
                           children: [
-                            Image.asset(
-                              width: 238,
-                              height: 238,
-                              Imgs.upgrade,
-                              fit: BoxFit.cover,
+                            Visibility(
+                                visible: loading,
+                                child: Lottie.asset(widget.isJewel ? 'assets/json/jewel_upgrade.json' : 'assets/json/item_upgrade.json',
+                                  controller: animationController,
+                                  // fit: BoxFit.cover,
+                                  width: 238,
+                                  height: 238,
+                                  // repeat: false,
+                                  onLoaded: (composition) {
+                                    // Configure the AnimationController with the duration of the
+                                    // Lottie file and start the animation.
+                                    animationController..duration = composition.duration
+                                      ..forward();
+                                  },
+                                ),
                             ),
+                           const SFIcon( Imgs.upgrade, width: 238, height: 238),
                             JewelSocket(
-                                isJewel: isJewel,
+                                isJewel: widget.isJewel,
                                 top: 28,
                                 left: 0,
                                 right: 0,
@@ -93,7 +133,7 @@ class UpGradeTab extends StatelessWidget {
                                     ? state.jewelsUpgrade.first
                                     : null),
                             JewelSocket(
-                                isJewel: isJewel,
+                                isJewel: widget.isJewel,
                                 bottom: 60,
                                 right: 40,
                                 jewelEntity: state is JewelStateLoaded &&
@@ -101,7 +141,7 @@ class UpGradeTab extends StatelessWidget {
                                     ? state.jewelsUpgrade[1]
                                     : null),
                             JewelSocket(
-                                isJewel: isJewel,
+                                isJewel: widget.isJewel,
                                 bottom: 60,
                                 left: 40,
                                 jewelEntity: state is JewelStateLoaded &&
@@ -162,6 +202,7 @@ class UpGradeTab extends StatelessWidget {
                         color: AppColors.blue,
                         textStyle: TextStyles.w600WhiteSize16,
                         onPressed: () {
+                          setState(() => loading = true);
                           context.read<JewelBloc>().add(const UpgradeJewel());
                         },
                         width: MediaQuery.of(context).size.width,
